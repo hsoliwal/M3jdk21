@@ -1,0 +1,71 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Guava MinMax original compiler diagnostic capture
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/guava-minmax-source-custody/**'
+      - 'm3/arrays/src/main/java/**'
+      - 'm3/collections/qualification/owned-guava-minmax-priority-queue-20261018/**'
+      - '.github/workflows/m3-guava-minmax-compiler-diagnostics.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-javac-error:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+          sparse-checkout: |
+            m3/arrays
+            m3/collections
+            .github/workflows
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Original Guava Java21/JNI work with compiler stderr retained
+        shell: bash
+        run: |
+          set -uo pipefail
+          out="$RUNNER_TEMP/m3-minmax-compiler-diagnostic"
+          python3 -I -S -B \
+            m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py \
+            --root . --out "$out" --job java
+          result=$?
+          echo "Original MinMax java job exit=$result"
+          if [[ -f "$out/strict-original-arrays-module.stderr" ]]; then
+            echo '--- ORIGINAL strict-original-arrays-module.stderr (first 180 lines) ---'
+            sed -n '1,180p' "$out/strict-original-arrays-module.stderr"
+          fi
+          if [[ -f "$out/strict-original-arrays-module.stdout" ]]; then
+            echo '--- ORIGINAL strict-original-arrays-module.stdout (first 60 lines) ---'
+            sed -n '1,60p' "$out/strict-original-arrays-module.stdout"
+          fi
+          if [[ -f "$out/strict-selected-core130.stderr" ]]; then
+            echo '--- ORIGINAL strict-selected-core130.stderr (first 180 lines) ---'
+            sed -n '1,180p' "$out/strict-selected-core130.stderr"
+          else
+            echo 'Original strict-selected-core130.stderr not produced'
+          fi
+          if [[ -f "$out/strict-selected-core130.stdout" ]]; then
+            echo '--- ORIGINAL strict-selected-core130.stdout (first 60 lines) ---'
+            sed -n '1,60p' "$out/strict-selected-core130.stdout"
+          fi
+          exit "$result"
+      - name: Retain bounded original javac stderr and stdout
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-minmax-original-javac-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/m3-minmax-compiler-diagnostic/strict-original-arrays-module.stderr
+            ${{ runner.temp }}/m3-minmax-compiler-diagnostic/strict-original-arrays-module.stdout
+            ${{ runner.temp }}/m3-minmax-compiler-diagnostic/strict-selected-core130.stderr
+            ${{ runner.temp }}/m3-minmax-compiler-diagnostic/strict-selected-core130.stdout
+            ${{ runner.temp }}/m3-minmax-compiler-diagnostic/result.json
+          if-no-files-found: warn

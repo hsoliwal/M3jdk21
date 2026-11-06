@@ -1,6 +1,6 @@
 {
   "targetBase": "5cb893e1ab224236b33d41132a31f604d89a4e12",
-  "canonicalRecipe": "com.synexia.m3.ParserFilterRefinement",
+  "canonicalRecipe": "jdk.internal.m3.ParserFilterRefinement",
   "canonicalPR": "https://github.com/hsoliwal/com.synexia/pull/12511",
   "strictTreeMapCorpusAcceptance": true,
   "fullProductAcceptance": false,
@@ -90,6 +90,6 @@
   "publishedRuntimeSourceCommit": "22c3d19339c8042d6b15869e8661a1524183d807",
   "runtimeSourceFilesChangedAfterPublication": 0,
   "testSourceFilesChangedAfterPublication": [
-    "m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java"
+    "m3/collections/src/test/java/jdk/m3/collections/M3FootprintContractTest.java"
   ]
 }

@@ -8,9 +8,9 @@
 | Original product file | Before Git blob | Received Git blob |
 | --- | --- | --- |
 | `m3/collections/src/main/native/collections/m3_long_address_kernel.c` | `b4e698c6ede7297f5e3d6d2af6fdeb25bb7fb8e7` | `76f68619a78b52ab528f4f16dcf26b510288c7c9` |
-| `.github/workflows/m3-lc239-sliding-max-jni-java21.yml` | `cbe34640a4ca8d1a9f2a19bec9266cef7ddc8098` | `f0634addf43ce205871bafb212bec68006b28538` |
+| `.github/workflows/m3-lc239-sliding-max-jni-java21.yml` | `cbe34640a4ca8d1a9f2a19bec9266cef7ddc8098` | `c5ee999c19064b775a0029e043a97172d589086f` |
 
-The Java production `M3LaneAlgorithms.java` original Git blob `6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2` and `M3LaneSlidingMaximumContract.java` blob `84cfbc24efa4884584ac7cd1b71b55d6cba6c834` are unchanged. JNI export `Java_com_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0` is unchanged. No new Java runtime owner, new `m3rankbatch` kernel, public API, Java callback, or alternative JNI library was received.
+The Java production `M3LaneAlgorithms.java` original Git blob `6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2` and `M3LaneSlidingMaximumContract.java` blob `82b4734c5f07c274380108064b67eea8544509c4` are unchanged. JNI export `Java_com_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0` is unchanged. No new Java runtime owner, new `m3rankbatch` kernel, public API, Java callback, or alternative JNI library was received.
 
 ## Algorithm and JNI storage
 

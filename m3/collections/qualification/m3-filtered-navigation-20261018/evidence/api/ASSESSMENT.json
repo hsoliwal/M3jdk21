@@ -10,10 +10,10 @@
   "all_generated_jni_headers_identical": true,
   "jni_header_sha256": {
     "com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
-    "com_m3_collections_M3IndexMaskCompactor.h": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
-    "com_m3_collections_M3IndexMaskWindow.h": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
-    "com_m3_collections_M3IndexPathMasks.h": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
-    "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7",
+    "com_m3_collections_M3IndexMaskCompactor.h": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
+    "com_m3_collections_M3IndexMaskWindow.h": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
+    "com_m3_collections_M3IndexPathMasks.h": "477a947e172dfec5a858a6ac67a34a83673d8af8c4453c506f343d338475a440",
+    "com_m3_collections_M3LongAddressKernel.h": "688b0b0ff74d311c1f805e64bfc408bac33e21fd42512daae4d12355406c8279",
     "com_m3_collections_M3LongRankBatchNative.h": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641",
     "com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
     "com_m3_collections_M3SignalOrderNative.h": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96",
@@ -21,8 +21,8 @@
     "com_m3_collections_M3StateMaskHistogram.h": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4"
   },
   "module_source_sha256": {
-    "baseline": "e531b318ea4cbc6ca09bb3e52cb1a70ee4539ccf78d8b61b0f73bcf3027db557",
-    "received": "e531b318ea4cbc6ca09bb3e52cb1a70ee4539ccf78d8b61b0f73bcf3027db557"
+    "baseline": "bc1d6962ec48e236346d6ec70d5a1da284276f18bdf5b295cb210f1c2b8fcfc6",
+    "received": "bc1d6962ec48e236346d6ec70d5a1da284276f18bdf5b295cb210f1c2b8fcfc6"
   },
   "module_class_under_identical_javac_sha256": {
     "baseline": "440779e416e3a6e75114f6aa1631d00083d502855636b833a295e60226c150f6",
@@ -43,12 +43,12 @@
   "source_changes": [
     {
       "path": "com/m3/collections/M3FilteredViews.java",
-      "baseline_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "baseline_sha256": "e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199",
       "received_sha256": "4213ae2302fca4a9e5044185104ae43a8829e4f2d3dbbd6422cff1b53fe713e9"
     },
     {
       "path": "com/m3/collections/M3IndexPathMasks.java",
-      "baseline_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+      "baseline_sha256": "d0515af261429f4f2c959c87a4c0588093612746c4f95e4927570880778ca8ef",
       "received_sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577"
     }
   ],
@@ -77,9 +77,9 @@
     }
   },
   "evidence_sha256": {
-    "RESULTS.json": "d8051d2d47a6b9af878cdd4b2321816c30bbfd0331930c3408efb03c763f08d6",
-    "INPUTS.json": "7ff36a89f166352b8a6b5ce85ce7085e13c366bbb719b919bf33e54bdb0bfab1",
+    "RESULTS.json": "c7db03c21d62b32875a5a81fe325d47ff229d3dbd83132f11d7ba91863596e8a",
+    "INPUTS.json": "1dbf29e3c41fc286731339717c9753242e73a8ffe0de15fcf14784c7286ef556",
     "TYPE_API_SEALS.tsv": "442421382c3691f34c0380b3d5a01fe08abd1219ac628615f2be5dbfabe6d83a",
-    "driver.json": "5c7411c96614beef7b4263569ef967c9c3c3c35d7e685d1c739564db5230a915"
+    "driver.json": "6be42a942a596a62e4e36615db14aceaf43c32799d6b18727230ff844c3e7598"
   }
 }

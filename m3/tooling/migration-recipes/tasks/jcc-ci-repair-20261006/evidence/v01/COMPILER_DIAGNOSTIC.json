@@ -17,14 +17,14 @@
     "frozen_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/FROZEN_INPUTS.json",
       "bytes": 8695,
-      "sha256": "9f12ce757e6267edfc72a3b84c2c155ccc77c57dbd4ab11d9ca62797a61afec9",
-      "git_blob": "3014b8f15a75b5a01e40eec329d7096f6f3a2620"
+      "sha256": "1b5d73f8ee53b03c2a88f8cb3f57eb54c99e26281ca16ad53b66925a0fb588c7",
+      "git_blob": "111f1ff0ec5751c924b8465aa97887ba930f6537"
     },
     "prepared_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/02-maven-inputs.json",
       "bytes": 12307,
-      "sha256": "d8f83a834d8af3695e65c63ad713e6adba67a887e918df8a11e28dce85f20f1a",
-      "git_blob": "44454ffbc890d5ed60e940fee414c5bf0d104597"
+      "sha256": "5aedc6ec08ec1f5e39e112b669d414ca15e25fb8a4a709338bd2a1d94d2d9ae7",
+      "git_blob": "662e7f33e3252a638b19507dd93810d8a93a4353"
     }
   },
   "cache_receipt_sha256": "65ed11f8a898b4f1bda7f7ac6e4b75309cba1a27a3f610b7a3930ef01df2edcb",
@@ -39,14 +39,14 @@
     "frozen_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/FROZEN_INPUTS.json",
       "bytes": 8695,
-      "sha256": "9f12ce757e6267edfc72a3b84c2c155ccc77c57dbd4ab11d9ca62797a61afec9",
-      "git_blob": "3014b8f15a75b5a01e40eec329d7096f6f3a2620"
+      "sha256": "1b5d73f8ee53b03c2a88f8cb3f57eb54c99e26281ca16ad53b66925a0fb588c7",
+      "git_blob": "111f1ff0ec5751c924b8465aa97887ba930f6537"
     },
     "prepared_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/02-maven-inputs.json",
       "bytes": 12307,
-      "sha256": "d8f83a834d8af3695e65c63ad713e6adba67a887e918df8a11e28dce85f20f1a",
-      "git_blob": "44454ffbc890d5ed60e940fee414c5bf0d104597"
+      "sha256": "5aedc6ec08ec1f5e39e112b669d414ca15e25fb8a4a709338bd2a1d94d2d9ae7",
+      "git_blob": "662e7f33e3252a638b19507dd93810d8a93a4353"
     }
   },
   "status": "TEST_COMPILE_PASS"

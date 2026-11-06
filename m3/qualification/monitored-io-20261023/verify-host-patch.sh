@@ -10,7 +10,7 @@ for name in InputStream OutputStream Reader Writer; do
   cp "$root/src/java.base/share/classes/java/io/${name}.java" "$scratch/patch/java/io/${name}.java"
 done
 cat > "$scratch/patch/java/util/concurrent/ProgressMonitor.java" <<'JAVA'
-// Synthetic test fixture. M3JDK21 retains the real original progress API.
+// Synthetic test fixture. M3JDK 21 retains the real original progress API.
 package java.util.concurrent;
 public interface ProgressMonitor {
     default void worked(long units) { }

@@ -6,7 +6,7 @@ import hashlib
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[3]
-R = HERE / "src/main/resources/com/synexia/rewrite/hash-pinned-java/filtered-terminal-fusion"
+R = HERE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-terminal-fusion"
 
 def digest(p):
     if not p.is_file() or p.is_symlink():
@@ -37,8 +37,8 @@ def check():
             raise ValueError("not actual emitted bytes")
         rows.append(path)
     if rows != [
-        "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
-        "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalProof.java",
+        "m3/collections/src/main/java/jdk/m3/collections/M3LongFilteredView.java",
+        "m3/collections/src/test/java/jdk/m3/collections/M3FilteredTerminalProof.java",
     ]:
         raise ValueError("wrong exact two-target set")
     owners=[]

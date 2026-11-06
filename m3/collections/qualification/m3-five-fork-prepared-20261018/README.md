@@ -15,9 +15,9 @@ M3JDK21 is the canonical **product** and Java/JNI SDK owner. Synexia remains the
 ## Recipe-first custody
 Maven-bound `M3FiveForkPreparedRecipe` installs exactly THREE new Java source/test files from SHA-256-sealed templates and preflights source identity, symlinks and occupied/drift targets before any write. It reaches a fixed point and refuses changes to existing user-written Java. The initial task has no existing Java AST replacements; qualified OpenRewrite must own any later semantic modifications to existing classes.
 
-Generated source SHA-256: `8b9ba8edf03de5ccce15b1be104ba846b53a5e39fcda15bdb22a741d9575db04`.
-Generated selftest SHA-256: `9ceb788e6c6cdca0596879eff680cb6fb4591663a7379f868d4f1b0afd5bbd52`.
-Generated Jupiter test SHA-256: `2113f5a2dc439f59e653127900c01ac55ae547d05a93436ed46c7ca269220bf7`.
+Generated source SHA-256: `8e242fff63defc82a8d60eae9a17b63352c0d85e6fff691de8630b867de3813c`.
+Generated selftest SHA-256: `d160b174135c4b759adf615a1a54a09ebe5d2f838034706d7f462f507373b502`.
+Generated Jupiter test SHA-256: `6c932ffbe8474b261a5f927710c608a032c36600e66899027a522ce0ad31abe5`.
 
 ## Actual local evidence and qualifications
 - Java 21 `javac --release 21 -proc:none -Xlint:all -Werror`: PASS selected implementation, oracle, JUnit test syntax, with **temporary standalone M3/third-party signature stand-ins**, not actual live provider binaries.

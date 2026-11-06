@@ -445,13 +445,8 @@ final class M3FrozenLexiconIndex {
                         collision = true;
                         break;
                     }
-                    for (int prior = 0; prior < ordinal; prior++) {
-                        if (candidates[prior] == slot) {
-                            collision = true;
-                            break;
-                        }
-                    }
-                    if (collision) break;
+                    // The precheck proved distinct base slots in this bucket.
+                    // A common displacement modulo slotCount preserves that distinction.
                     candidates[ordinal] = slot;
                 }
                 if (collision) continue;

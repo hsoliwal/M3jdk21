@@ -350,7 +350,7 @@ jobs:
       bootjdk-platform: windows-x64
       runs-on: windows-2022
 
-  # Retained manual M3JDK21 previews are build outputs, not OpenJDK releases or release qualification.
+  # Retained manual M3JDK 21 previews are build outputs, not OpenJDK releases or release qualification.
   # Ordinary runs retain the upstream cleanup policy.
   remove-bundles:
     name: 'Remove bundle artifacts'

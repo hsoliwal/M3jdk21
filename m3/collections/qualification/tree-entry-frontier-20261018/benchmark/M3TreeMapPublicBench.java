@@ -1,6 +1,6 @@
-package com.m3.bench;
+package jdk.m3.bench;
 
-import com.m3.collections.M3TreeMap;
+import jdk.m3.collections.M3TreeMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;

@@ -147,6 +147,10 @@ class TargetCensusTest(unittest.TestCase):
 
 
 class WorkflowCoverageTest(unittest.TestCase):
+    def test_schema_suite_is_in_the_live_name_contract_directory(self):
+        self.assertTrue((AUDIT.ROOT / "m3/tooling/name-contract/test_schema.py").is_file(),
+                        "retained variants do not replace the live schema regression suite")
+
     def test_sparse_checkout_covers_concrete_canonical_target_paths(self):
         root = AUDIT.ROOT
         workflow = root / ".github/workflows/m3jdk21-name-contract.yml"
@@ -167,6 +171,7 @@ class WorkflowCoverageTest(unittest.TestCase):
         records = json.loads((root / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
         targets = {target["path"] for record in records for target in record.get("targets", [])
                    if isinstance(target, dict) and target.get("path") and target.get("symbol")}
+        targets.update(("m3/docs/name-mapping.schema.json", "m3/migration/requirements.txt"))
         for record in records:
             relation = record.get("companion_of")
             if relation is None:
@@ -184,6 +189,27 @@ class WorkflowCoverageTest(unittest.TestCase):
                            if not any(path == pattern or pattern.endswith("/**")
                                       and path.startswith(pattern[:-2]) for pattern in patterns))
         self.assertEqual(uncovered, [], "mapped source owners are absent from the checkout scope")
+
+
+class CanonicalRelatedOwnerTest(unittest.TestCase):
+    def test_related_target_class_owner_retains_method_contract(self):
+        records = json.loads((AUDIT.ROOT / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
+        record = next(row for row in records if row["id"] == "m3.lexicons.related-source-range")
+        target = record["targets"][0]
+        self.assertEqual(target["symbol"], "jdk.m3.text.SharedRelatedLexemeCatalog")
+        self.assertEqual(target["path"], "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java")
+        signature = "java.util.List<Relation> findBySource(java.lang.String)"
+        self.assertIn(signature, target["signatures"])
+        self.assertEqual(record["sources"][0]["symbol"],
+                         "jdk.m3.text.SharedRelatedLexemeCatalog.findBySource")
+        self.assertIn(signature, record["sources"][0]["signatures"])
+        self.assertTrue(any(previous["symbol"] == "jdk.m3.text.SharedRelatedLexemeCatalog.findBySource"
+                            and signature in previous["signatures"]
+                            for previous in record["lineage"]["previous_targets"]))
+        rows = [row for row in AUDIT.snapshot(AUDIT.ROOT)
+                if row["mapping_id"] == record["id"] and row["target_path"] == target["path"]]
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["result"], "PRESENT_NAME_MATCH")
 
 
 if __name__ == "__main__":

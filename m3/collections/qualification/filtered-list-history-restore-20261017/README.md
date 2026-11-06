@@ -10,11 +10,11 @@ The current M3JDK21 master omitted behavioral atoms from already-merged PRs
 [#1045](https://github.com/hsoliwal/M3jdk21/pull/1045)
 and [#1069](https://github.com/hsoliwal/M3jdk21/pull/1069).
 The restored original first-party class is exact Git blob
-`e094fdde4a153eab2d1a125785bc55c68187bbd1`
-(SHA-256 `b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d`);
+`d8a0a04dd3d9106ba641f8b657bacacc49678e3c`
+(SHA-256 `f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5`);
 the target current-master source before this correction was
-`e381d23e93702cea3ccd7d9c3f7ff5e0d56baaa6`
-(SHA-256 `7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101`).
+`6a56f9e2e55eaef2d0b207abdc952182350ce359`
+(SHA-256 `12bdc2271eee96fb0d24ec188cbcbe37d6c110bf3bb61682715f1af7d5984333`).
 The original four tests were absent on current master; all six generated
 target files are source-sealed, including a new JNI consumer oracle.
 The full preimage-to-postimage manifest is in
@@ -48,11 +48,11 @@ Focused selected-source Java 21 proof:
 ```sh
 python3 m3/collections/qualification/filtered-list-history-restore-20261017/verify.py
 javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-list \
-  m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java \
-  m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
-  m3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionProof.java \
-  m3/collections/src/test/java/com/m3/collections/M3FilteredListsReadonlyDepthProof.java \
-  m3/collections/src/test/java/com/m3/collections/M3FilteredListsMaskBridgeProof.java
+  m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsReadonlyDepthProof.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsMaskBridgeProof.java
 java -Xss256k -cp /tmp/m3-list com.m3.collections.M3FilteredListsDeepCompositionProof
 java -Xss256k -cp /tmp/m3-list com.m3.collections.M3FilteredListsReadonlyDepthProof
 java -cp /tmp/m3-list com.m3.collections.M3FilteredListsMaskBridgeProof

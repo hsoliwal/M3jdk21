@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-// Adapted from com.synexia.mindex.MIndexASTBuilder, Synexia revision
+// Adapted from jdk.internal.m3.mindex.MIndexASTBuilder, Synexia revision
 // 50f48cbbe11f17fb8dc209bac3812f8940a1e267. Receiving changes: package-private
 // JSON construction boundary, existing String owners, budgets and one-time sealing.
 package jdk.m3.jackson;

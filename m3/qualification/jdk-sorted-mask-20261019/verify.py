@@ -23,7 +23,7 @@ SORT_PASS = 'checks=273297 failures=0'
 LANES = ['sorted-view', 'bit-java', 'bit-native']
 JAVA_OWNER = 'jdk.internal.mindex.M3BitLane28Checks'
 SORT_OWNER = 'java.util.M3SortedViewChecks'
-RESOURCE = 'com/synexia/rewrite/jdk-sorted-mask-20261019'
+RESOURCE = 'jdk/internal/m3/rewrite/jdk-sorted-mask-20261019'
 COUNTEREXAMPLES = ['duplicate-add-result', 'null-iterator-remove', 'null-lookahead-cache',
     'null-range-endpoints', 'nested-tail-retains-from', 'exclusive-tail-equality',
     'reject-invalid-top-level-range', 'empty-foreach-null', 'comparator-equivalent-membership',
@@ -56,7 +56,7 @@ def main():
     here = Path(__file__).resolve().parent
     target = args.target.resolve(strict=True)
     fixtures = (args.fixtures or args.target).resolve(strict=True)
-    synexia = args.synexia.resolve(strict=True) if args.synexia else None
+    synexia = args.m3.resolve(strict=True) if args.synexia else None
     out = args.output.resolve()
     for root in [target, fixtures, here, synexia]:
         if root and (out == root or root in out.parents):
@@ -97,9 +97,9 @@ def main():
         if sha(data) not in allowed:
             raise ValueError('unqualified source drift: '+item['path'])
         if args.replay and item['before_sha256'] != item['after_sha256']:
-            lane = next(l for l in LANES if (synexia / 'synexia-openrewrite-recipes/src/main/resources'
+            lane = next(l for l in LANES if (synexia / 'm3-openrewrite-recipes/src/main/resources'
                 / RESOURCE / l / ('before-'+Path(item['path']).name+'.txt')).is_file())
-            data = source(synexia, 'synexia-openrewrite-recipes/src/main/resources/'+RESOURCE
+            data = source(synexia, 'm3-openrewrite-recipes/src/main/resources/'+RESOURCE
                 +'/'+lane+'/before-'+Path(item['path']).name+'.txt')
         expected_hash = item['before_sha256'] if args.replay else item['after_sha256']
         if sha(data) != expected_hash:
@@ -153,17 +153,17 @@ def main():
     verify('baseline',old_patch,old_native,baseline_failure=args.replay)
     final_patch,final_headers,final_native=old_patch,old_headers,old_native
     if args.replay:
-        module=synexia/'synexia-openrewrite-recipes'
-        kernel=module/'src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java'
+        module=synexia/'m3-openrewrite-recipes'
+        kernel=module/'src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java'
         b=kernel.read_bytes()
         if hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()!=seals['kernel_blob']:
             raise ValueError('canonical manifest kernel drift')
         classes=out/'kernel';classes.mkdir()
         run('kernel-javac',[tools['javac'],'--release','21','-Xlint:all','-Werror','-d',classes,
-            kernel,module/'src/test/java/com/synexia/rewrite/M3JdkSortedMaskReplay.java'])
+            kernel,module/'src/test/java/jdk/internal/m3/rewrite/M3JdkSortedMaskReplay.java'])
         for lane in LANES:
             command=[tools['java'],'-cp',str(classes)+os.pathsep+str(module/'src/main/resources'),
-                'com.synexia.rewrite.M3JdkSortedMaskReplay',lane,candidate]
+                'jdk.internal.m3.rewrite.M3JdkSortedMaskReplay',lane,candidate]
             if 'writes=1 refusals=5' not in run(lane+'-apply',command):
                 raise AssertionError('expected one-file application')
             if lane!='bit-native':

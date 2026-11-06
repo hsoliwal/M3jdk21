@@ -1,0 +1,7 @@
+module	imported_jackson_annotation_types	all_in_2.19.2
+rewrite-core	11	yes
+rewrite-java	6	yes
+rewrite-xml	1	yes
+rewrite-yaml	0	yes
+m3/tooling/vendor-recipes	2 (JsonCreator, JsonProperty)	yes
+annotation types 2.16.1 vs 2.19.2	46 vs 46	superset

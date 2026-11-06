@@ -30,8 +30,8 @@ Reproduce a bounded CPU-only check:
 ```sh
 mkdir -p /tmp/m3-cpu-tool-proof
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-cpu-tool-proof \
- m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/CpuToolReceiverAdmission.java \
- m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java
+ m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmission.java \
+ m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/CpuToolReceiverAdmissionChecks.java
 java -cp /tmp/m3-cpu-tool-proof com.m3.rewrite.jmod.CpuToolReceiverAdmissionChecks
 java -cp /tmp/m3-cpu-tool-proof com.m3.rewrite.jmod.CpuToolReceiverAdmission \
  m3/tooling/jmod-recipes/CPU_TOOL_DONOR_CATALOGUE_PIN_20261015.tsv \

@@ -4,23 +4,23 @@
   "product": "M3JDK21 (integrated JDK SDK; not optional Synexia runtime wrapper)",
   "source_repo": "hsoliwal/com.synexia",
   "source_branch": "aix/m3jdk21-maven-gradle-file-delta-20261020",
-  "canonical_recipe": "com.synexia.m3.M3Jdk21BuildDelta20261020",
+  "canonical_recipe": "jdk.internal.m3.M3Jdk21BuildDelta20261020",
   "base_master": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
   "target_branch": "aix/m3jdk21-integrated-build-delta-20261020",
   "scope": [
-    "m3/file/src/main/java/com/m3/file",
-    "m3/file/src/test/java/com/m3/file",
+    "m3/file/src/main/java/jdk/m3/file",
+    "m3/file/src/test/java/jdk/m3/file",
     "m3/file/pom.xml",
     "m3/file/BUILD_DELTA_20261020.md",
     "m3/docs/name-mapping.d/m3-file-delta-20261020.json"
   ],
-  "source_seal": "ALL_SEVEN_PRODUCT_JAVA_AND_TEXT_POSTIMAGES_GIT_BLOB_IDENTICAL_TO_SYNEXIA_TEMPLATES",
+  "source_seal": "ALL_SEVEN_PRODUCT_JAVA_AND_TEXT_POSTIMAGES_GIT_BLOB_IDENTICAL_TO_M3_TEMPLATES",
   "pinned_sha256": {
-    "M3FileDelta.java": "62df6cac9e44bd6780064134b226e03e7440f327627a369fc26d07574183d319",
-    "M3FileDeltaCli.java": "ad9c98bc01eb09d69fbfa1f318efc31e065de912f3bdda8aeae6649b7fc30576",
-    "M3FileDeltaContractSelfTest.java": "efc731f39139709b7cf14fb2c76f7d79d6e18db98fa5d6eb7b80261d2f35fe89",
-    "M3FileDeltaSelfTest.java": "b2784f5fe05d5543cd8a8ac2e97efe35c8e66b1c52ef005e2af4245043a0a5a3",
-    "M3FileDeltaTest.java": "2c59ca611135eabb9bc669071d07ae738a9a3cf750fce4810625cab8076ca38b",
+    "M3FileDelta.java": "7945eb7cdc6901c69d7bdbac6695d93d640cff660f09a3094a4003c2d7d11b93",
+    "M3FileDeltaCli.java": "bee6587dfb99881996f2d56af6bb5658496b9c185050ae446c49f8af27f284f6",
+    "M3FileDeltaContractSelfTest.java": "24adab049ab12617821f602b3ff7d15da45a3cb762f7a615fcd80dc64219c804",
+    "M3FileDeltaSelfTest.java": "2ab56a8b18a07281c5286ec60af203e44dbbd7dd75fee90f49258733db7cde92",
+    "M3FileDeltaTest.java": "68f235f1a5f588519c5b2ca7a126ab0e91ed07fbba1479587d57e319d1617f0f",
     "pom.xml.before": "0a61b7824330a8c3fc93a1be7098ba91a89e0eb239cd99d8585d00bcf05d694a",
     "pom.xml.after": "d9f37075dbd65a6d3518e9cb3d6f841a6ddc8b1a0ac0fa043ae69af4ff1bd619",
     "build_contract": "0d4cec804d38dee84497009e74a9425fcd52d547629b66b4f8b6255426530027",
@@ -28,12 +28,12 @@
   },
   "existing_unchanged_sources": [
     [
-      "m3/file/src/main/java/com/m3/file/M3File.java",
-      "c182a3b1526f9fd0ca20c631d97df3048076defd"
+      "m3/file/src/main/java/jdk/m3/file/M3File.java",
+      "fcce3a02835de29fa4ac9f83083511aad17ec049"
     ],
     [
       "m3/file/src/main/java/module-info.java",
-      "eb26b950d73e8f69f7d689be94460d8c8b908874"
+      "69d747ed456217624530aae1078b872f28b1699a"
     ]
   ],
   "executed": [

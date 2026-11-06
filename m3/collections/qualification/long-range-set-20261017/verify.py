@@ -8,7 +8,7 @@ import sys
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[3]  # repo root: m3/collections/qualification/<crate>/verify.py
 TEMPLATES = (ROOT / "m3/tooling/migration-recipes/src/main/resources"
-    / "com/synexia/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017")
+    / "jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017")
 MANIFEST = TEMPLATES / "manifest.tsv"
 
 def checked_data(p):
@@ -32,8 +32,8 @@ def verify():
             raise ValueError("bad manifest row")
         path, before, after, template = row
         if before != "ABSENT" or len(after) != 64 or not path.startswith(
-                ("m3/collections/src/main/java/com/m3/collections/",
-                 "m3/collections/src/test/java/com/m3/collections/")):
+                ("m3/collections/src/main/java/jdk/m3/collections/",
+                 "m3/collections/src/test/java/jdk/m3/collections/")):
             raise ValueError("wrong target ownership")
         if pathlib.PurePosixPath(path).name + ".txt" != template or ".." in pathlib.PurePosixPath(path).parts:
             raise ValueError("target or resource name drift")
@@ -46,12 +46,12 @@ def verify():
         raise ValueError("missing/duplicate/unordered recipe targets")
 
     owners = {
-        "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java":
-            "ef0fac5c1e71f8493baab365c8af64bb22cb6171",
-        "m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java":
-            "b1c01d1afacc76bd338179398ab42835e16992fa",
+        "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java":
+            "be8838c2ad26aac24453e05a317d63016bca100b",
+        "m3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java":
+            "8ce5558a5d660b7f8a206dde3b59d1b30c45aab4",
         "m3/collections/src/main/native/collections/m3_index_path_masks.c":
-            "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+            "69aef883c09997bae30825d7ad8757bc2358bf69",
     }
     for path, blob in owners.items():
         if git_blob(checked_data(ROOT / path)) != blob:

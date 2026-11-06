@@ -5,7 +5,7 @@
 // Modified 2026: M3JDK optional collection projection; source contracts preserved.
 package jdk.m3.collections;
 
-import com.m3.collections.M3FilteredViews;
+import jdk.m3.collections.M3FilteredViews;
 
 import java.util.ArrayList;
 import java.util.Arrays;

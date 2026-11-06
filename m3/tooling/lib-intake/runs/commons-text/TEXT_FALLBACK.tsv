@@ -1,0 +1,2 @@
+file	reason
+org/apache/commons/text/translate/EntityArrays.java	not valid UTF-8 (OpenRewrite re-encodes the bytes as U+FFFD); bytes kept, moved by the name map

@@ -2,6 +2,8 @@
  * Copyright (c) 1994, 2022, Oracle and/or its affiliates. All rights reserved.
  * Modified 2026-10-18 by Hitesh Soliwal and Contributors to the Synexia Project:
  * add the exact lazy M3Object toAdapter capability.
+ * Modified 2026-11-02 by Hitesh Soliwal and Contributors to the Synexia Project:
+ * document the overridable toAdpater alias and its virtual delegation contract.
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -30,6 +32,7 @@ package java.lang;
 
 import jdk.internal.misc.Blocker;
 import jdk.internal.vm.annotation.IntrinsicCandidate;
+import java.security.SHA256Adapter;
 
 /**
  * Class {@code Object} is the root of the class hierarchy.
@@ -71,7 +74,30 @@ public class Object {
         if (clazz.isInstance(this)) {
             return clazz.cast(this);
         }
-        return clazz == M3Object.class ? clazz.cast(M3Object.of(this)) : null;
+        if (clazz == M3Object.class) {
+            return clazz.cast(M3Object.of(this));
+        }
+        return clazz == SHA256Adapter.class
+                ? clazz.cast(SHA256Adapter.of(this)) : null;
+    }
+
+    /**
+     * Adapts this object by delegating to {@link #toAdapter(Class)}.
+     *
+     * <p>This additional entry delegates virtually to {@code toAdapter}, so
+     * subclasses that override that method keep their established semantics.
+     * The selected implementation determines the result and exceptions; this
+     * method performs no additional argument validation. This method is also
+     * overridable and adds no per-object state.
+     *
+     * @param clazz the requested adapter type
+     * @param <T> the requested result type
+     * @return the selected adapter result, which may be {@code null}
+     * @throws NullPointerException if the selected implementation rejects a null
+     *         {@code clazz}; the implementation in {@code Object} rejects null
+     */
+    public <T> T toAdpater(Class<T> clazz) {
+        return toAdapter(clazz);
     }
 
 

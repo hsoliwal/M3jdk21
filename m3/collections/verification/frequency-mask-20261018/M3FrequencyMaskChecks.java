@@ -12,9 +12,9 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.m3.collections;
+package jdk.m3.collections;
 
-import com.synexia.primitives.IntIntHashMap;
+import jdk.internal.m3.primitives.IntIntHashMap;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;

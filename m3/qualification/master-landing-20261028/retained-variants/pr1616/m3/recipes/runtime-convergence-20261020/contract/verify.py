@@ -46,7 +46,7 @@ def main():
         return result.stdout
 
     sources = {}
-    resources = crate / 'src/main/resources/com/synexia/rewrite'
+    resources = crate / 'src/main/resources/jdk/internal/m3/rewrite'
     for manifest in sorted(resources.glob('hash-pinned-*/*/manifest.tsv')):
         for line in manifest.read_text().splitlines():
             if not line or line.startswith('#'):

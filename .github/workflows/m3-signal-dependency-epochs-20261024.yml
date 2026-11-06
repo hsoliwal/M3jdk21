@@ -3,12 +3,12 @@ name: M3JDK21 original source signal dependency epochs
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SourceSignalQualityFactory.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SignalDependencyEpochs*.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SignalQualitySchema*.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SourceSignalQualityFactory*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalDependencyEpochs.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalQualitySchema.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalDependencyEpochs*.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalQualitySchema*.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SourceSignalQualityFactory*.java'
       - 'm3/collections/qualification/signal-dependency-epochs-20261024/**'
       - '.github/workflows/m3-signal-dependency-epochs-20261024.yml'
   workflow_dispatch:
@@ -35,21 +35,21 @@ jobs:
           out="$RUNNER_TEMP/m3-signal-epochs"
           mkdir -p "$out/classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java \
-            m3/collections/src/main/java/com/m3/collections/M3SourceSignalQualityFactory.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalDependencyEpochsSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalQualitySchemaSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SourceSignalQualityFactorySelfTest.java
-          java -Xss256k -cp "$out/classes" com.m3.collections.M3SignalDependencyEpochsSelfTest
-          java -Xint -cp "$out/classes" com.m3.collections.M3SignalDependencyEpochsSelfTest
-          java -cp "$out/classes" com.m3.collections.M3SignalQualitySchemaSelfTest
-          java -Xint -cp "$out/classes" com.m3.collections.M3SignalQualitySchemaSelfTest
-          java -cp "$out/classes" com.m3.collections.M3SourceSignalQualityFactorySelfTest
-          java -Xint -cp "$out/classes" com.m3.collections.M3SourceSignalQualityFactorySelfTest
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalDependencyEpochs.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalQualitySchema.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalDependencyEpochsSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalQualitySchemaSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java
+          java -Xss256k -cp "$out/classes" jdk.m3.collections.M3SignalDependencyEpochsSelfTest
+          java -Xint -cp "$out/classes" jdk.m3.collections.M3SignalDependencyEpochsSelfTest
+          java -cp "$out/classes" jdk.m3.collections.M3SignalQualitySchemaSelfTest
+          java -Xint -cp "$out/classes" jdk.m3.collections.M3SignalQualitySchemaSelfTest
+          java -cp "$out/classes" jdk.m3.collections.M3SourceSignalQualityFactorySelfTest
+          java -Xint -cp "$out/classes" jdk.m3.collections.M3SourceSignalQualityFactorySelfTest
   original-source-junit:
     runs-on: ubuntu-24.04
     timeout-minutes: 90

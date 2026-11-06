@@ -92,7 +92,7 @@ A relation documents the intended additional surface and never grants method cov
 substitutability or runtime qualification. There is no companion registry beside this map.
 
 The first source-inventoried example is `com.m3.arrays.M3Arrays` in module `com.m3.arrays`,
-at `m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java`, with module descriptor
+at `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java`, with module descriptor
 `m3/arrays/src/main/java/module-info.java`. Its static factory/composition surface can be
 related to `java.base` / `java.util.Arrays` /
 `src/java.base/share/classes/java/util/Arrays.java` with `form: STATIC_OPERATIONS`.

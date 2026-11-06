@@ -7,7 +7,7 @@
     "sha256": "c7103c48fe5f1e5914fd41e02a2be18ef7571fe71d821e42156f6b1b022c1dc9"
   },
   {
-    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java",
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java",
     "mtime_utc": "2026-10-20T14:17:41.700308+00:00",
     "mtime_ns": 1792505861700308179,
     "size": 6451,
@@ -21,7 +21,7 @@
     "sha256": "e9c7070e2387fb7e78c533b2432f4d02d397552cbd6ada669033743e03bcdf83"
   },
   {
-    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java",
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaListMultimapContract.java",
     "mtime_utc": "2026-10-20T14:17:41.701664+00:00",
     "mtime_ns": 1792505861701664318,
     "size": 9194,
@@ -35,7 +35,7 @@
     "sha256": "f76465531fc2295f3a9602a2ef76d075c1264dcb505093818481d16f41a1966c"
   },
   {
-    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java",
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringArrayContractTest.java",
     "mtime_utc": "2026-10-20T14:19:14.801178+00:00",
     "mtime_ns": 1792505954801177849,
     "size": 6929,
@@ -49,7 +49,7 @@
     "sha256": "4de262c00a81a437a93a199bf8373b653f72ac470cca83ddd8f1380f008e3d07"
   },
   {
-    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java",
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryClosureTest.java",
     "mtime_utc": "2026-10-20T14:17:41.701432+00:00",
     "mtime_ns": 1792505861701432137,
     "size": 15954,
@@ -67,7 +67,7 @@
     "mtime_utc": "2026-10-20T14:19:19.823416+00:00",
     "mtime_ns": 1792505959823415889,
     "size": 7230,
-    "sha256": "d3ca2a239f341069211cd4978ac1ccd7d062ba59e367bd7052d0616720d91dd4"
+    "sha256": "df87510a14b8b918c46a010ae5cdd0280af5fb97bc84a49c4b113016a7db1cf2"
   },
   {
     "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst",

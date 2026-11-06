@@ -10,9 +10,9 @@
  </dependencies>
  <build>
   <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
-  <resources><resource><directory>${project.basedir}/../../src/main/resources</directory><includes><include>com/synexia/rewrite/hash-pinned-java/m3-view-order-sdk-20261020/**</include><include>META-INF/rewrite/m3-view-order-sdk-20261020.yml</include></includes></resource></resources>
+  <resources><resource><directory>${project.basedir}/../../src/main/resources</directory><includes><include>jdk/internal/m3/rewrite/hash-pinned-java/m3-view-order-sdk-20261020/**</include><include>META-INF/rewrite/m3-view-order-sdk-20261020.yml</include></includes></resource></resources>
   <plugins>
-   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><release>21</release><includes><include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include><include>com/synexia/rewrite/M3ScopeInference.java</include><include>com/synexia/rewrite/M3EditScope.java</include></includes></configuration></plugin>
+   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><release>21</release><includes><include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include><include>jdk/internal/m3/rewrite/M3ScopeInference.java</include><include>jdk/internal/m3/rewrite/M3EditScope.java</include></includes></configuration></plugin>
    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests><argLine>-Xmx768m</argLine></configuration></plugin>
   </plugins>
  </build>

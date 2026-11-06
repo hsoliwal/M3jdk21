@@ -30,8 +30,8 @@
     <directory>${buildRoot}</directory>
     <resources>
       <resource><directory>src/main/resources</directory></resource>
-      <resource><directory>${payloadRoot}/java</directory><targetPath>com/synexia/rewrite/hash-pinned-java/m3-java-util-sorts-20261018</targetPath><filtering>false</filtering></resource>
-      <resource><directory>${payloadRoot}/text</directory><targetPath>com/synexia/rewrite/hash-pinned-text/m3-java-util-sorts-20261018</targetPath><filtering>false</filtering></resource>
+      <resource><directory>${payloadRoot}/java</directory><targetPath>jdk/internal/m3/rewrite/hash-pinned-java/m3-java-util-sorts-20261018</targetPath><filtering>false</filtering></resource>
+      <resource><directory>${payloadRoot}/text</directory><targetPath>jdk/internal/m3/rewrite/hash-pinned-text/m3-java-util-sorts-20261018</targetPath><filtering>false</filtering></resource>
     </resources>
     <plugins>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
@@ -52,7 +52,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.1</version>
         <configuration>
-          <mainClass>com.synexia.rewrite.sorts.M3JavaUtilSortsApply</mainClass>
+          <mainClass>jdk.internal.m3.rewrite.sorts.M3JavaUtilSortsApply</mainClass>
           <arguments><argument>${targetRoot}</argument><argument>${applyMode}</argument><argument>${receiptPath}</argument></arguments>
         </configuration>
       </plugin>

@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 filtered/sorted live-view predicate plan
 
-Product owner: `m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java`.
+Product owner: `m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java`.
 
 This change is stacked on the qualified wrapper/JNI reconciliation branch for
 M3JDK21 PR #1497. It is **part of the M3JDK21 source tree**, not a library
@@ -42,7 +42,7 @@ Sealed baseline source SHA-256:
 `687b0399d959cbeee2f9e29be3b9b2912f38dfb1b4c4e9bfb683b1adb71e3ce1`.
 
 Sealed candidate SHA-256:
-`2695ac5fe04eafd079886da5a7bb6c0adf4eb3d16d79c73ad17b4f2e26cd5617`.
+`54f270b7900841f8ef636e393eafa72ba71af0567fbb6d679ce77e26a8893158`.
 
 The full pre/post source snapshots in the canonical recipe reproduce these
 Git blobs exactly. The source change is per-file with unchanged public
@@ -51,7 +51,7 @@ signatures. Unknown/mixed revisions must be refused by the recipe.
 ## Contract evidence and open gates
 
 Added JUnit:
-`m3/collections/src/test/java/com/m3/collections/M3FilteredSortedIteratorPlanTest.java`.
+`m3/collections/src/test/java/jdk/m3/collections/M3FilteredSortedIteratorPlanTest.java`.
 
 It checks nested filter depth, live backing changes, predicate call order and
 exception identity, sorted-set comparator metadata, reverse order, navigable
@@ -103,7 +103,7 @@ its native-region harness using `cc -Werror -fsanitize=undefined`.
 
 The exact inherited JNI source blob
 `521eb6170fd89f3bc62eb810aa6202236a2708e2` and native test blob
-`f54a9d1cecffe1049815f80be664937a7f03067f` were independently
+`22f8eaf891304f2fd35b6198003c5f57ab73e444` were independently
 compiled and executed locally with UBSan. Result:
 
 ```text

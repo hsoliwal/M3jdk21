@@ -3,8 +3,8 @@ name: M3JDK21 physical-mask indexed snapshot
 on:
   pull_request:
     paths:
-      - "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java"
-      - "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshot*.java"
+      - "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java"
+      - "m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshot*.java"
       - ".github/workflows/m3-physical-state-snapshot.yml"
   workflow_dispatch:
 concurrency:
@@ -26,17 +26,17 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p build/m3-physical-mask
-          dir=m3/collections/src/main/java/com/m3/collections
+          dir=m3/collections/src/main/java/jdk/m3/collections
           javac --release 21 -Xlint:all -Werror -d build/m3-physical-mask \
             "$dir/M3IndexMaskCompactor.java" \
             "$dir/M3IndexPathMasks.java" \
             "$dir/M3IndexedListSnapshot.java" \
-            m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java
-            m3/collections/src/test/java/com/m3/collections/M3StagedPhysicalStateSnapshotProof.java
+            m3/collections/src/test/java/jdk/m3/collections/M3PhysicalStateSnapshotProof.java
+            m3/collections/src/test/java/jdk/m3/collections/M3StagedPhysicalStateSnapshotProof.java
       - name: Pure Java JDK-oracle proof
-        run: java -cp build/m3-physical-mask com.m3.collections.M3PhysicalStateSnapshotProof
+        run: java -cp build/m3-physical-mask jdk.m3.collections.M3PhysicalStateSnapshotProof
       - name: Multi-plane Java JDK-oracle proof
-        run: java -cp build/m3-physical-mask com.m3.collections.M3StagedPhysicalStateSnapshotProof
+        run: java -cp build/m3-physical-mask jdk.m3.collections.M3StagedPhysicalStateSnapshotProof
       - name: Compile existing C17 JNI index-path kernel
         shell: bash
         run: |
@@ -49,9 +49,9 @@ jobs:
         run: |
           java -Xcheck:jni -Djava.library.path=build/m3-physical-mask \
             -cp build/m3-physical-mask \
-            com.m3.collections.M3PhysicalStateSnapshotProof --native
+            jdk.m3.collections.M3PhysicalStateSnapshotProof --native
       - name: Multi-plane JNI physical-index parity
         run: |
           java -Xcheck:jni -Djava.library.path=build/m3-physical-mask \
             -cp build/m3-physical-mask \
-            com.m3.collections.M3StagedPhysicalStateSnapshotProof --native
+            jdk.m3.collections.M3StagedPhysicalStateSnapshotProof --native

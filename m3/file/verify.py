@@ -2,6 +2,7 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 # Modified 2026-10-21: Execute existing and new module contracts on host and linked images.
+# Modified 2026-11-05: Isolate mutable contract fixtures from the source/evidence tree.
 """Compile the existing file module, run its independent contract, and check a linked image."""
 
 import argparse
@@ -34,7 +35,7 @@ def main():
         'state': 'STARTED',
         'run_id': str(uuid.uuid4()),
         'started_utc': datetime.now(timezone.utc).isoformat(),
-        'scope': 'com.m3.file module and direct compiler fixture',
+        'scope': 'jdk.m3.file module and direct compiler fixture',
         'class_origin': 'CALLER_PROVIDED' if args.classes else 'COMPILED_BY_THIS_RUN',
         'source_class_correspondence': ('EXTERNAL_BUILD_RESPONSIBILITY' if args.classes
                                         else 'THIS_RUN_JAVAC_COMMAND'),
@@ -107,8 +108,14 @@ def main():
     def tool(name):
         return toolchain / 'bin' / (name + suffix)
 
+    temporary_tests = None
     write_receipt()
     try:
+        temporary_base = Path(tempfile.gettempdir()).resolve()
+        receipt['runtime_temporary_base'] = str(temporary_base)
+        if (temporary_base == root or root in temporary_base.parents
+                or temporary_base == output or output in temporary_base.parents):
+            raise RuntimeError('runtime temporary directory must be outside source and output trees')
         write_commands()
         inputs = hashes(input_paths(), root)
         receipt['inputs'] = inputs
@@ -118,7 +125,7 @@ def main():
         classes = args.classes.resolve() if args.classes else output / 'classes'
         if args.classes:
             if not (classes / 'module-info.class').is_file():
-                raise RuntimeError('missing original com.m3.file module descriptor')
+                raise RuntimeError('missing original jdk.m3.file module descriptor')
             admitted_classes = class_hashes(classes)
             receipt['class_files'] = admitted_classes
         write_receipt()
@@ -132,7 +139,7 @@ def main():
             run('compile-module', [tool('javac'), '--release', '21', '-Xlint:all,-module', '-Werror',
                                    '-d', classes, *sorted((root / 'src/main/java').rglob('*.java'))])
             if not (classes / 'module-info.class').is_file():
-                raise RuntimeError('missing original com.m3.file module descriptor')
+                raise RuntimeError('missing original jdk.m3.file module descriptor')
             admitted_classes = class_hashes(classes)
             receipt['class_files'] = admitted_classes
             write_receipt()
@@ -141,7 +148,7 @@ def main():
         admitted_jar = hashlib.sha256(module_jar.read_bytes()).hexdigest()
         receipt['jar_sha256'] = admitted_jar
         descriptor = run('module-descriptor', [tool('jar'), '--describe-module', '--file', module_jar])
-        if 'com.m3.file' not in descriptor or 'exports com.m3.file' not in descriptor:
+        if 'jdk.m3.file' not in descriptor or 'exports jdk.m3.file' not in descriptor:
             raise RuntimeError('wrong product module descriptor')
         tests = output / 'tests'
         if tests.exists():
@@ -150,13 +157,13 @@ def main():
             shutil.rmtree(tests)
         tests.mkdir()
         run('compile-contract', [tool('javac'), '--release', '21', '-Xlint:all', '-Werror',
-                                 '--module-path', module_jar, '--add-modules', 'com.m3.file',
+                                 '--module-path', module_jar, '--add-modules', 'jdk.m3.file',
                                  '-d', tests, *sources])
         admitted_tests = class_hashes(tests)
         receipt['contract_class_files'] = admitted_tests
-        main_class = 'com.m3.file.test.M3FileDeltaContract'
+        main_class = 'jdk.m3.file.test.M3FileDeltaContract'
         host = run('host-contract', [tool('java'), '--module-path', module_jar, '--add-modules',
-                                    'com.m3.file,jdk.compiler', '-cp', tests, main_class])
+                                    'jdk.m3.file,jdk.compiler', '-cp', tests, main_class])
         if 'M3FileDeltaContract: PASS;' not in host:
             raise RuntimeError('contract success marker missing')
         receipt['host_result'] = host.strip()
@@ -221,12 +228,22 @@ def main():
         }
         write_receipt()
         run('compile-module-contracts', [tool('javac'), '--release', '21', '-Xlint:all,-module', '-Werror',
-                '--module-path', module_jar, '--patch-module', 'com.m3.file=' + str(root / 'src/test/java'),
+                '--module-path', module_jar, '--patch-module', 'jdk.m3.file=' + str(root / 'src/test/java'),
                 '-d', module_tests, *module_contract_sources])
         module_test_hashes = class_hashes(module_tests)
         receipt['module_contract_class_files'] = module_test_hashes
-        temporary_tests = output / 'runtime-temporary'
-        temporary_tests.mkdir(exist_ok=True)
+        # Delta fixtures intentionally edit/delete files while child javac runs.
+        # Use isolated system temporary storage, outside source/evidence trees
+        # that external workspace tools may observe or restore independently.
+        temporary_tests = Path(tempfile.mkdtemp(prefix='m3-file-contract-',
+                                               dir=temporary_base)).resolve()
+        receipt['runtime_temporary'] = {
+            'path': str(temporary_tests),
+            'policy': 'ISOLATED_SYSTEM_TEMP',
+            'outside_source_and_output_trees': True,
+            'state': 'ACTIVE',
+        }
+        write_receipt()
 
         def module_contracts(java, lane, module_path, *, host_has_javac=False):
             outputs = {}
@@ -237,8 +254,8 @@ def main():
                 command = [java, '-Djava.io.tmpdir=' + str(temporary_tests)]
                 if module_path:
                     command += ['--module-path', module_path]
-                command += ['--add-modules', 'com.m3.file,jdk.compiler,jdk.zipfs', '--patch-module',
-                            'com.m3.file=' + str(module_tests), '-m', 'com.m3.file/com.m3.file.' + name]
+                command += ['--add-modules', 'jdk.m3.file,jdk.compiler,jdk.zipfs', '--patch-module',
+                            'jdk.m3.file=' + str(module_tests), '-m', 'jdk.m3.file/jdk.m3.file.' + name]
                 text = run(lane + '-' + name, command)
                 if marker not in text:
                     raise RuntimeError('contract success marker missing: ' + name)
@@ -254,13 +271,13 @@ def main():
                 raise RuntimeError('unsafe test image path')
             shutil.rmtree(image)
         run('link-image', [tool('jlink'), '--module-path', os.pathsep.join((str(toolchain / 'jmods'),
-                                 str(module_jar))), '--add-modules', 'com.m3.file,jdk.compiler,jdk.zipfs',
+                                 str(module_jar))), '--add-modules', 'jdk.m3.file,jdk.compiler,jdk.zipfs',
                                  '--output', image, '--no-header-files', '--no-man-pages'])
         modules = run('image-modules', [image / 'bin' / ('java' + suffix), '--list-modules'])
-        if 'com.m3.file' not in {line.partition('@')[0] for line in modules.splitlines()}:
-            raise RuntimeError('com.m3.file is absent from linked image')
+        if 'jdk.m3.file' not in {line.partition('@')[0] for line in modules.splitlines()}:
+            raise RuntimeError('jdk.m3.file is absent from linked image')
         linked = run('image-contract', [image / 'bin' / ('java' + suffix), '--add-modules',
-                                       'com.m3.file,jdk.compiler', '-cp', tests, main_class])
+                                       'jdk.m3.file,jdk.compiler', '-cp', tests, main_class])
         if 'M3FileDeltaContract: PASS;' not in linked:
             raise RuntimeError('linked-image contract success marker missing')
         receipt['image_module_contracts'] = module_contracts(image / 'bin' / ('java' + suffix), 'image', None)
@@ -274,12 +291,27 @@ def main():
             raise RuntimeError('compiled contract class bytes changed during qualification')
         if hashlib.sha256(module_jar.read_bytes()).hexdigest() != admitted_jar:
             raise RuntimeError('packaged module bytes changed during qualification')
+        shutil.rmtree(temporary_tests)
+        receipt['runtime_temporary']['state'] = 'REMOVED_AFTER_PASS'
         receipt.update(state='PASSED', linked_image_result=linked.strip(),
                        inputs_and_classes_unchanged=True,
                        finished_utc=datetime.now(timezone.utc).isoformat())
         write_receipt()
         print('M3_FILE_DELTA_MODULE_PASS')
     except BaseException as failure:
+        if temporary_tests is not None:
+            receipt['runtime_temporary']['state'] = 'RETAINED_AFTER_FAILURE'
+            retained = output / ('runtime-failure-' + receipt['run_id'])
+            try:
+                shutil.copytree(temporary_tests, retained, symlinks=True)
+                receipt['runtime_temporary']['failure_copy'] = str(retained)
+            except Exception as preservation_failure:
+                # Preserve the original gate failure and the live fixture path
+                # even when copying its diagnostic artifacts also fails.
+                receipt['runtime_temporary']['preservation_error'] = {
+                    'type': type(preservation_failure).__name__,
+                    'message': str(preservation_failure),
+                }
         receipt.update(state='FAILED', error={'type': type(failure).__name__, 'message': str(failure)},
                        finished_utc=datetime.now(timezone.utc).isoformat())
         write_receipt()

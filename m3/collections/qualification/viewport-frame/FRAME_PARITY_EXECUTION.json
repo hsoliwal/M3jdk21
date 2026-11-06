@@ -17,7 +17,7 @@
     "source": "proof-extras/M3FrameAdmissionProof.java"
   },
   "canonical_evidence_commit": "6c0b31b126c050c1c5b48e7ec51630ef8adef3df",
-  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
+  "canonical_evidence_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
   "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/6c0b31b126c050c1c5b48e7ec51630ef8adef3df/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027/assembled",
   "canonical_recipe_ref": "cce68668ecdbe699140d87196d035578cb548a99",
   "canonical_repository": "hsoliwal/com.synexia",
@@ -36,9 +36,9 @@
   "installed": {
     "command_count": 40,
     "exports": [
-      "Java_com_m3_collections_M3MaskViewportNative_project",
-      "Java_com_m3_collections_M3MaskViewportNative_projectFramePage",
-      "Java_com_m3_collections_M3MaskViewportNative_projectPage"
+      "Java_jdk_m3_collections_M3MaskViewportNative_project",
+      "Java_jdk_m3_collections_M3MaskViewportNative_projectFramePage",
+      "Java_jdk_m3_collections_M3MaskViewportNative_projectPage"
     ],
     "installed_sha256": "aabbe438b8139e902be0752e0379bf1d5ccfb740f0d7b613db8db18966c30af7",
     "observations": {
@@ -52,16 +52,16 @@
     },
     "receipt_sha256": "9f1cbd8e8738ebcbb0748f1f8a6f569e28bad42ba0741dc0a2454ece85a23263",
     "source_before": {
-      "src/main/c/m3maskviewport.c": "4def819298a7ffd296da9fcc28dd7d218e4a9385c8b8c0cf45c2b761b0f854dd",
-      "src/main/java/com/m3/collections/M3MaskViewportKernel.java": "99e8c061c60c3514ce9ec1b19e3a6afd618a32bd3f6841b36f931ca64383ac0c",
-      "src/main/java/com/m3/collections/M3MaskViewportNative.java": "bbbe3135f17eb8816d197c03c4b499ca9c4837f4defc7971d026e4ad44e46143",
-      "src/test/java/com/m3/collections/M3FrameJavaContract.java": "39dcb95ef2c4edc9f1479d728bfeac0fa7976aeb89ea5923cf4430d5cfb07821",
-      "src/test/java/com/m3/collections/M3MaskViewportKernelContract.java": "f04fa97b5a8183642888842ee7e24ee578632ba842260b891c950a4d1905ba9e",
-      "src/test/java/com/m3/collections/M3MaskViewportPageContract.java": "3a17cb6e0cebabdd77181bf102a558a489642cfc9945b97c6a85950162cc3a25",
-      "viewport-proof/CMakeLists.txt": "42c729b26b2cded8dd1ca723b724648ad8807768637feba738c18f1293db248b",
-      "viewport-proof/fixtures/M3FrameRegionContract.txt": "6a4af0492f6a9332a52eecd798357a328300ae717440118dc5e4556819e2e7d1",
-      "viewport-proof/fixtures/M3NativePageDirectContract.txt": "ccbdb6919a7f89bd95768b93c5f3d82b80edacbae45dbaf1ae24057cb24820e0",
-      "viewport-proof/verify.py": "3ce40980e8f0dc3d968e928d8c5a87e171519a35743e8f08d893985a1911448a",
+      "src/main/c/m3maskviewport.c": "7dcce63ed04a0259dd0fc210854837b6f58de13a894c4c576eb6e4136268f216",
+      "src/main/java/jdk/m3/collections/M3MaskViewportKernel.java": "99e8c061c60c3514ce9ec1b19e3a6afd618a32bd3f6841b36f931ca64383ac0c",
+      "src/main/java/jdk/m3/collections/M3MaskViewportNative.java": "3663d0cc849fa20c295042982c9632e58ad98e064e3c560d8a06f13c36d868a9",
+      "src/test/java/jdk/m3/collections/M3FrameJavaContract.java": "b80df74e977a8ea67e8809e5ef8c0fd7ffe6c99a28bbafcde57b554a96702b0f",
+      "src/test/java/jdk/m3/collections/M3MaskViewportKernelContract.java": "3c734c265f50c243bb5b942bafe4773aefb26765efa50e9c0c9b14f9405143be",
+      "src/test/java/jdk/m3/collections/M3MaskViewportPageContract.java": "81fa9fc5750b40c9580dad9a3e92632c1e59bb738006a01647b22d91ebe8cd4e",
+      "viewport-proof/CMakeLists.txt": "26b5922e84d61c357c9527711f0aa7d393407eeb728a33d9feac1f1d2c40cddb",
+      "viewport-proof/fixtures/M3FrameRegionContract.txt": "fd3b8f1e07f908457912567f4eee3094d7be9f314b14fef99dd1f9ad5be5025d",
+      "viewport-proof/fixtures/M3NativePageDirectContract.txt": "859cc15bb9a3b320fb2286b713ae06cb82499e37a0a585a87981bc24bacd3374",
+      "viewport-proof/verify.py": "33ef383c4c7275524dcd0e28105b4901ddcade7127d608efde6f6302db474864",
       "viewport-proof/verify.sh": "2f5da0701d7a7d35e1bf60518dca44bf2d136caee143dbeb1d7f75f509549930"
     }
   },
@@ -71,12 +71,12 @@
   "original_pom_unchanged": true,
   "original_receiver_integrity_controls": 9,
   "performance_measured": false,
-  "postimage_git_blob": "c6ef67def947b292c1504e68209e86469f6fb180",
-  "postimage_sha256": "3ce40980e8f0dc3d968e928d8c5a87e171519a35743e8f08d893985a1911448a",
-  "preimage_git_blob": "9614892a7257c9948716c2b49d80732183fce772",
+  "postimage_git_blob": "ab13fc3abce872117bcacaa19eb98c28217f90d9",
+  "postimage_sha256": "33ef383c4c7275524dcd0e28105b4901ddcade7127d608efde6f6302db474864",
+  "preimage_git_blob": "53ae1ca30b7ce2526babd53331a61d3e3ec5eeae",
   "product_parent": "48492f1609a4acf714676268256c2e99c3497a54",
   "product_repository": "hsoliwal/M3jdk21",
-  "recipe": "com.synexia.m3.ViewportFrameParity20261027",
+  "recipe": "jdk.internal.m3.ViewportFrameParity20261027",
   "schema": "M3_FRAME_PARITY_EXECUTION_V1",
   "source_epoch_note": "Saved SDK bindings are for immutable cce source epoch. Later parity metadata is not relabelled as executed; emitted output bytes are identical.",
   "target": "m3/collections/viewport-proof/verify.py"

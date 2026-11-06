@@ -1,0 +1,231 @@
+{
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0; preserves per-file target and upstream rights",
+  "schema": "M3JDK21_PASSIVE_RECEIVER_RECEIPT_V1",
+  "scope": "EXISTING_OWNER_COMPONENT_MAINTENANCE",
+  "review_status": "DRAFT_COMPONENT_QUALIFICATION; HOLD_REQUIRED_BROADER_GATES",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+  "target_parent_pr": 2390,
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "d39a1dc5ad50c57ef27b7ee6adc7ec6cc417cc58",
+  "source_base": "8aab017eb2067c103aec12062d0d2e3e97eacc31",
+  "component_source_baseline": "e3eede6fd881af9fb3bd86461db8d2b6f79476f0",
+  "source_pr": 16572,
+  "recipe_id": "com.synexia.m3.JdkDonorContinuation20261105",
+  "recipe_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-jdk-donor-continuation-20261105.yml",
+  "bootstrap_recipe_id": "com.synexia.m3.JdkDonorAdmission20261105",
+  "receipt_recipe_id": "com.synexia.m3.JdkDonorReceipt20261105",
+  "component_source_seals_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-continuation-20261105/target-source-seals.json",
+  "component_source_seals_sha256": "663729936e65aca59dc3a3527874ad85c98f2f460f1356fb9270f1db89703ff1",
+  "component_qualification_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-continuation-20261105/QUALIFICATION.json",
+  "component_qualification_sha256": "aca22192730eef898ef75e71bc2d328c1e741f53adbb2f2097da5410df3dea0c",
+  "evidence_note": "All component sources, inputs, recipe execution, resource observations and gate failures are pinned to source_commit. This later metadata-only emission does not assert its own hash or grant runtime promotion.",
+  "outputs": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "path": "m3/file/src/main/java/jdk/m3/file/M3ReactorImpactPlan.java",
+      "before_sha256": "5c13122fc0cfd75a29592d0fbae3be668fef8e92e5aede23986c724701660259",
+      "after_sha256": "1faab30377ea7aeaf65851dbc2b04857b372e87f3021f18dd5e0808c68010e19",
+      "before_git_blob": "e955addc632b56283c28e1536b7a1d7e3843a382",
+      "after_git_blob": "83a9403f97756035c70f8fd1386f24e02414619c",
+      "source_kind": "JAVA"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "path": "m3/file/src/test/java/jdk/m3/file/M3ReactorImpactPlanContract.java",
+      "before_sha256": "3fc87dcd2986d737ecb0ea9918723a2f6da2e340bd5b882073afd66ac06c168a",
+      "after_sha256": "88db665995bbf0c2433951fe99ef1eae0b8ede97d1a7cf8674c150b8fad577a6",
+      "before_git_blob": "dc82562fb09fa5802a43b826061724c9c99da042",
+      "after_git_blob": "2cad5278430baf5b7e3339829527e6e5ccbe5883",
+      "source_kind": "JAVA"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "path": "m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3StringCursor.java",
+      "before_sha256": "3bb8c1b0c1e7d22af75c266cf3315ef7a49b9158400659874cce6ae98560d9ab",
+      "after_sha256": "4d06816d0ce301b2300b12206c6f23c6187955cc46f2e3d4c2ce516f01185855",
+      "before_git_blob": "62a9769e313a0ee55aa8562b991b657ebd172721",
+      "after_git_blob": "7476ccc69a78b54e2db4da4a6c9dec6107c05ddb",
+      "source_kind": "JAVA"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "path": "m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3ChunkCursorTest.java",
+      "before_sha256": "8b9fbb85d6579d7f5c940cbc27142aa350ac68a84d82fe7e9907c08bb1202f2d",
+      "after_sha256": "a08849e85d96e65306f62123bf91da8dab1fa6177253b9ced07d99d851b4c273",
+      "before_git_blob": "9031cbf56cd7def481c78bb2d7d229bc277f9f57",
+      "after_git_blob": "9e528a1f621478806579c9a67c808a47bd553a6f",
+      "source_kind": "JAVA"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "path": "m3/tooling/module-packs/text-tools/build.py",
+      "before_sha256": "c7f1b1a0d21770c30c3dc33c594f3bf9f55b737c6762fdda92b30ef3f97dcf76",
+      "after_sha256": "d51d2e05787db697e1c9e893c045273e766946698e32f2f23a2a6aba5b937350",
+      "before_git_blob": "18d136bd6ec9a981f7fd88b8cd5b29898d07b566",
+      "after_git_blob": "e36fd5c32ad32f6709fb2e83729406c2bebe1e96",
+      "source_kind": "TEXT_BUILD"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "path": "m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3OptionalNativeFallbackRegression.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ec6538452e31d56ba0e0aaa1631e359896ca6b8d15471f035af0aedfc198eef2",
+      "before_git_blob": null,
+      "after_git_blob": "ac27b0efdefc8a72981aa438abcb9ac5a3d53d25",
+      "source_kind": "JAVA"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
+      "before_sha256": "42850be2dade74bbc9847a926636917de3c7d652a0b4bdb09b81b3003bbee120",
+      "after_sha256": "0847209891c062ed6e14a1286427da5ecb8e5de1142c5d07a9084a256b849307",
+      "before_git_blob": "a445dce8a386c2388f2eed09047f8ed2cc57a1b3",
+      "after_git_blob": "c16fa9345362d8ab1a5c23a54f89a3eb7ada3360",
+      "source_kind": "JAVA"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java",
+      "before_sha256": "0ed9ea45a8cf6613db2836e3bfbdec30f6f26fe26dcb2d5bd4731c56a83a8beb",
+      "after_sha256": "1375b67ada8b604b22c01e7cdb64e9c5e22ace5f3b1e6b464c0a5ff6e9d72ddc",
+      "before_git_blob": "99e5e8f6955316c8a3b163c38e5e1d43587cb21d",
+      "after_git_blob": "56aa3fc04be255582c1bdfc1d15ec98a275f9d92",
+      "source_kind": "JAVA"
+    }
+  ],
+  "component_gates": {
+    "catalogue": {
+      "status": "PASS",
+      "original_tests": 7,
+      "expanded_tests": 11,
+      "emitted_tests": 11,
+      "descriptor_count": 52,
+      "category_count": 18,
+      "ordered_query_observations": 282,
+      "observation_sha256": "5fc42ae84383aa652b9255b10270ba4fb9ea1d9ef56ed1c8055e8b11296e73ed"
+    },
+    "reactor": {
+      "status": "PASS",
+      "checks": 606960,
+      "dag_cases": 49152,
+      "chain_projects": 16384,
+      "ordered_observation_sha256": "ce417921d7289b429e670d8cf81bcf0ba56481eee4536bb777acddcef586f4cd"
+    },
+    "text_jni": {
+      "status": "PASS",
+      "actual_jni": true,
+      "literal_cases_each_mode": 8164,
+      "native_line_cases": 260,
+      "public_differential_runs": 450,
+      "permission_denial_modes": 3,
+      "jni_exports_unchanged": 8,
+      "c_source_unchanged": true,
+      "xcheck_jni": true
+    },
+    "public_api": {
+      "status": "PASS",
+      "note": "Existing public/protected Java declarations/descriptors and generated JNI headers identical."
+    }
+  },
+  "broader_gates": {
+    "regex_full_maven": {
+      "status": "FAIL_REPRODUCED_ON_BASELINE",
+      "tests": 50,
+      "passed": 49,
+      "failed": 1,
+      "failed_test": "M3TokenPatternTest.literalSequencesGatesAndBudgets:180 ENGINE_GATE expected1 observed2",
+      "coverage": "NOT_REACHED; original99percent gate retained",
+      "evidence": "qualification/text"
+    },
+    "file_full_verifier": {
+      "status": "FAIL_UNRESOLVED_INTERMITTENT",
+      "host_contracts": "PASS",
+      "linked_failure": "M3ProjectDeltaPermutationContract: delete successful generation reaches no-op",
+      "paired_followup": "Baseline linked image PASS twice; emitted linked image PASS once. Original full run remains FAILED.",
+      "diagnosis": "qualification/reactor/proof/permutation-followup/DIAGNOSIS.json"
+    },
+    "full_borrow_receiver": {
+      "status": "PASS_SOURCE_PIN_ONLY",
+      "families": 32,
+      "completion": false
+    },
+    "naming": {
+      "status": "BASELINE_REFUSED",
+      "exit_code": 2,
+      "reason": "public JDK target path requires explicit owner/module review",
+      "checker_unchanged": true
+    },
+    "canonical_provenance": {
+      "status": "BASELINE_REFUSED",
+      "reason": "ledger-set index byte-count drift;285existing members exceed unchanged256 bound; existing order noncanonical",
+      "new_artifacts": "exact-path custody added separately; scoped validation is not canonical acceptance",
+      "checker_unchanged": true,
+      "after_registration": "REFUSED:289 members versus unchanged256 maximum",
+      "scoped_classification": "PASS; not canonical acceptance"
+    },
+    "full_m3_image": {
+      "status": "NOT_RUN",
+      "reason": "Stock toolchain lacks M3 java.base ProgressMonitor/ProgressMonitors required by existing three-module builder."
+    },
+    "private_full_reactor": "NOT_RUN",
+    "hosted_ci": "PENDING",
+    "jtreg_platform_vm_gc": "NOT_RUN"
+  },
+  "active_phase": "STRING",
+  "runtime_acceptance": false,
+  "family_completion": false,
+  "repository_completion": false,
+  "naming_disposition": {
+    "canonical_map": "m3/docs/name-mapping.json",
+    "canonical_map_sha256": "0ed05297657e7077adfa1666845dd34dd3eda459bac05c1fb6546b7b21fcaf75",
+    "status": "EXCLUDED_FROM_NEW_BACKEND_ADMISSION; DEFERRED_FAMILY_PROMOTION",
+    "reason": "Maintenance of four existing production Java owners; no public renaming or new backend. No exact owner entry in existing72-record map. Canonical mapping/checker remains authoritative.",
+    "inherited_gate": "public JDK target path requires explicit owner/module review; exit2"
+  },
+  "resource_observations": {
+    "catalogue_miss_bytes_per_call_before": 44616,
+    "catalogue_miss_bytes_per_call_after": 3644,
+    "catalogue_added_retained_bytes": 12920,
+    "catalogue_cold_alloc_bytes_before": 1226560,
+    "catalogue_cold_alloc_bytes_after": 1391360,
+    "reactor_changed_plan_saved_bytes_at4096projects": 4112,
+    "reactor_noop_conservative_allocation_unchanged": true,
+    "reactor_cpu_claim": "NONE; overlapping samples",
+    "rejected_full_topology_candidate": "Sparse CPU regression retained, not emitted"
+  },
+  "lineage": {
+    "prior_private_pr": 15434,
+    "prior_private_head": "44193a5f026b47996303135499b61b176ed11799",
+    "prior_public_pr": 2321,
+    "prior_public_disposition": "CLOSED_UNMERGED; SOURCE_INTEGRATED_IN2390",
+    "current_parent_public_pr": 2390
+  },
+  "rights": {
+    "production_copy": "No Harmony/ECJ/challenge source copied. Existing original owners refined.",
+    "private_donor_inputs": "TheAlgorithms MIT source and LICENSE retained solely for rejected-input evaluation.",
+    "challenge_sites": "Taxonomy and contract references only; no statements/editorials/submissions retained."
+  },
+  "required_before_promotion": [
+    "Resolve unchanged regex engine-observation failure and execute original99percent coverage gate.",
+    "Resolve intermittent file-observation failure and pass full host/linked module verifier.",
+    "Resolve existing naming and canonical provenance holds without weakening gates.",
+    "Run complete private reactor, source-built M3JDK installed-image/jtreg and relevant platforms/VM/GC/CI."
+  ],
+  "not_implemented_in_this_patch": [
+    "Full Harmony class-library or JIT replacement",
+    "Complete ECJ/compiler dependency producer integration",
+    "OpenJ9/OMR shared-cache or VM replacement",
+    "Graal escape-analysis integration",
+    "Whole JDK/family/repository completion"
+  ]
+}

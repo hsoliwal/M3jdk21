@@ -1,6 +1,6 @@
 # M3JDK21 master-native filtered predicate-plan pass (2026-10-27)
 
-Source owner: `m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java`.
+Source owner: `m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java`.
 
 This is a *fresh current-master* refinement. The predecessor [PR #1497](https://github.com/hsoliwal/M3jdk21/pull/1497) and its child [#1876](https://github.com/hsoliwal/M3jdk21/pull/1876) use older source revisions. Copying the whole prior file would discard master's newer **array-indexed membership scans, comparator splitting, native tree range delegation and provenance headers**. This branch changes only the iterator's repeated predicate-plan construction and retains every other master atom byte-for-byte.
 
@@ -26,7 +26,7 @@ The outer `java.base` runtime, JNI-native viewport and full source-built JDK ima
 ## Broader selected atom coverage (2026-10-27)
 
 Added `M3FilteredMasterPredicatePlanLifecycleTest` (four JUnit 5 tests)
-with pinned Git blob `f6a8b6f3905ad10a5a0405ecb95f588fd83a68e2`.
+with pinned Git blob `202ebf6ca1210374c379be576b7cf1121d829005`.
 The selected Maven gate now also runs existing
 `M3ReadOnlyMapDefaultsTest`, `M3FilteredViewsTest` and
 `M3FilteredNavigableSetTest`. These are intentionally rerun against the

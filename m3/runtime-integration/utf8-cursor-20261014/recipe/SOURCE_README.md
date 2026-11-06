@@ -2,13 +2,13 @@
 # Exact UTF8 receiving SDK qualification
 
 DRAFT. This Maven qualification module reuses the existing UTF8 cursor recipe,
-unchanged five-test SDK class b735eb59bf2b7f6167674d2bf8a345679e55d49f and exact
+unchanged five-test SDK class f05babe49ef04f36fed5f60d79162ab0afedf4f8 and exact
 42399d41-to35ed9985 fixtures. It changes no Java/JNI runtime source and does not
 add a phase-chain transition. Source11448 and target898 are already merged;
 their UTF8 qualification HOLD remains intact.
 
 The provider is the existing public M3JDK vendored Java-snapshot owner
-2530c533003a8a17d0e782728d98a4dfebe13651, with exact public M3EditScope27436081
+e7a3c6d89e0fad77e510fdc6d46223211493fd5a, with exact public M3EditScope27436081
 and M3ScopeInferencef6fd8d4a support. These three files are frozen unchanged.
 The canonical current39c3a6c9 provider is different. This module qualifies
 the exact receiving2530 owner only; it cannot admit canonical39c, matched-JDK

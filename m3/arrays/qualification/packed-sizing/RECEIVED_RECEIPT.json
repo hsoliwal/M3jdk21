@@ -1,0 +1,154 @@
+{
+  "schema": "M3_ARRAYS_PACKED_SIZING_RECEIVED_V1",
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "status": "PASS_BOUNDED_COMPONENT_WITH_RECORDED_OPEN_GATES",
+  "repository": "hsoliwal/M3jdk21",
+  "target_preimage_revision": "ce005d25b29fb6246e013bffb462afd5ed070362",
+  "canonical_source": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "2a50182c6488845607a8f353d8d667f79554ce7a",
+    "recipe_crate": "packed-sizing-m3-receiver-20261102",
+    "recipe_owners": [
+      "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+      "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe"
+    ],
+    "qualification_path": "synexia-openrewrite-recipes/verification/packed-integers-20261029/refinements/packed-sizing-20261102/receiver/QUALIFICATION.json",
+    "qualification_sha256": "87f2f50fcd9faf7d9ff209818d12dddc3bb237a7db31069a76a47249075dfd16",
+    "execution_and_gate_root": "synexia-openrewrite-recipes/verification/packed-integers-20261029/refinements/packed-sizing-20261102/receiver"
+  },
+  "stable_mapping_ids": [
+    "m3.arrays.packed.vint64",
+    "m3.arrays.packed.native"
+  ],
+  "mapping_status_retained": "implemented-unverified",
+  "mapping_file_changed": false,
+  "source_changes": [
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/VInt.java",
+      "before_sha256": "e973bb78db7294b13da972702eed54653ade3bfb998b0799ec60952b5854a4ac",
+      "before_git_blob": "a61072095bbdd40de2e07a4b1d74fd737b5b178e",
+      "after_sha256": "fa5a7c5554000db43961536e09c82f6c0752c42f58f0a298092ba9fde8758f73",
+      "after_git_blob": "346c05694f6921b8211d15fd5fc1da0cd01bae83"
+    },
+    {
+      "path": "m3/arrays/src/main/native/m3_packed_codec.c",
+      "before_sha256": "a5443846d7f60ce596f69489196bd96ade82112856339986fce32f5927f323d8",
+      "before_git_blob": "107cbac39202efa3bed8b041e774007626652f6f",
+      "after_sha256": "e1cef7f45eaa49ccc1f3b7339b3b52eaa204e7512cee2cc9919456456686cfde",
+      "after_git_blob": "1813a024d4c2ce514cebe4928ab4379b7950ff94"
+    }
+  ],
+  "source_closure": {
+    "tracked_arrays_files": 948,
+    "additional_shared_native_headers": 1,
+    "total_bound_inputs": 949,
+    "changed": 2,
+    "unchanged": 947,
+    "test_and_build_sources_changed": false,
+    "java_compiled_sources": 27,
+    "java_test_compiled_sources": 19
+  },
+  "component_gates": {
+    "pom_sha256": "5f4b36566bfdb6aac752719395c235dc9e54ff36e549dea6b134f9bf66b1bb34",
+    "command": "mvn -o -Pnative-linux -Dm3.arrays.perf=true -DargLine=-Xcheck:jni package",
+    "jdk": "stock21.0.13+9-LTS",
+    "cmake": "3.31.6",
+    "per_stage": {
+      "before": {
+        "tests": 57,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "java": {
+        "tests": 57,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 57,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "distinct_junit_tests": 57,
+    "native_ctest_cases_per_stage": 4,
+    "allocation_performance_cases_enabled": 9,
+    "original_pom_and_cmake_unchanged": true,
+    "native_compile_contract": "Original C11 target with -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic"
+  },
+  "abi": {
+    "jni_export_count": 17,
+    "jni_header_sha256": "c5a1c08271c85f23503826c05b0633e98e7fa9821bd07157cfb6bbe07fcbb3f5",
+    "public_api_sha256": "45ba8479753d3a1090ba4939fa653c5eef3d742f5485d2413b2626fdc7d0c30b",
+    "generated_header_matches_native_definitions": true,
+    "module": "com.m3.arrays",
+    "exports": [
+      "com.m3.arrays",
+      "com.m3.arrays.packed"
+    ],
+    "runtime_dependencies": [
+      "java.base"
+    ],
+    "jar_class_entries": 40,
+    "changed_class_entries": [
+      "com/m3/arrays/packed/VInt.class"
+    ],
+    "legal_jar_resources_unchanged": true
+  },
+  "installed_component": {
+    "status": "PASS",
+    "image_modules": [
+      "com.m3.arrays",
+      "java.base",
+      "java.management"
+    ],
+    "module_origin": "jrt",
+    "original_target_InstalledPackedProbe": true,
+    "baseline_compiled_legacy_client_checks": 104,
+    "same_client_bytecode_before_after": true,
+    "jni_checks": "-Xcheck:jni",
+    "native_lineage": "Exact native input stored in JMOD; existing jlink --strip-debug output independently matches objcopy --strip-debug bytes",
+    "full_sdk_image": false,
+    "source_built_m3jdk21": false
+  },
+  "resource_observations": {
+    "public_operations": 10,
+    "java_jni_routines": 20,
+    "values_per_batch": 400,
+    "verified_calls_per_run": 17460,
+    "routines_checksums_equal_all_runs": true,
+    "consumed_checksum": "8fea01abcf34a1c6",
+    "measurement_scope": "existing finite first-call/warm CPU+wall and whole-process RSS probe",
+    "superiority_claim": false,
+    "retained_heap_and_native_allocation_attribution": "NOT_MEASURED_IN_THIS_RECEIVER_RUN"
+  },
+  "recipe_replay": {
+    "serial_order": [
+      "Java candidate emitted and full target component qualified",
+      "native candidate emitted and full target component qualified"
+    ],
+    "source_recipe_refusals": [
+      "drift",
+      "missing",
+      "duplicate"
+    ],
+    "fresh_final_ordered_replay_changed_files": 0
+  },
+  "naming_preflight": "FAIL: unchanged pre-existing java.util.Arrays companion source hash drift",
+  "global_receiving_stage_advanced": false,
+  "source_built_m3jdk21_and_jtreg": "NOT_RUN_IN_THIS_RECEIVER_QUALIFICATION",
+  "open_gates": [
+    "Full source-built M3JDK21 runtime, jtreg and global receiving sequence",
+    "Naming preflight remains failed on unrelated Arrays source hash drift",
+    "Full SDK asset/CDS retention profile",
+    "Cross-platform native execution",
+    "LeakSanitizer or public receiver ASan/UBSan run",
+    "Full canonical private provenance and repository closure",
+    "Throughput superiority or separate retained-heap/native allocation attribution"
+  ],
+  "public_delivery_boundary": "Two executed production source postimages and this passive receipt only. Recipes, templates, catalogues, private execution logs and convergence evidence remain in Synexia."
+}

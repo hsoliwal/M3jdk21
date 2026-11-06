@@ -1,0 +1,109 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (vendored source); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.io",
+  "target_path": "m3/vendor/third_party-m3/relocated/commons-io-2.18.0",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/commons-io-2.18.0",
+  "source_coordinate": "commons-io:commons-io:2.18.0-m3-source-1",
+  "source_version": "2.18.0-m3-source-1",
+  "source_license_origin": "",
+  "source_packages": [
+    "org.apache.commons.io"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.io"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/commons-io-2.18.0/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/commons-io-2.18.0/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/commons-io-2.18.0",
+  "mappings": [
+    {
+      "source": "org.apache.commons.io and subpackages",
+      "target": "com.m3.lib.io and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.io JMOD; type names retained"
+    },
+    {
+      "source": "org.apache.commons.io.file.attribute",
+      "target": "com.m3.lib.io.file.attribute",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.serialization",
+      "target": "com.m3.lib.io.serialization",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.input.buffer",
+      "target": "com.m3.lib.io.input.buffer",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.comparator",
+      "target": "com.m3.lib.io.comparator",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.filefilter",
+      "target": "com.m3.lib.io.filefilter",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.channels",
+      "target": "com.m3.lib.io.channels",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.file.spi",
+      "target": "com.m3.lib.io.file.spi",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.function",
+      "target": "com.m3.lib.io.function",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.charset",
+      "target": "com.m3.lib.io.charset",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.monitor",
+      "target": "com.m3.lib.io.monitor",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.output",
+      "target": "com.m3.lib.io.output",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.build",
+      "target": "com.m3.lib.io.build",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.input",
+      "target": "com.m3.lib.io.input",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io.file",
+      "target": "com.m3.lib.io.file",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.apache.commons.io",
+      "target": "com.m3.lib.io",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

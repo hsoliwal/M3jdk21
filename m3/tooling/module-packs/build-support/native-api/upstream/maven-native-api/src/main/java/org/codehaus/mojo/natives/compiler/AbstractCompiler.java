@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /*
- * M3JDK21 adaptation: caller-admitted native workset selection.
+ * M3JDK 21 adaptation: caller-admitted native workset selection.
  * Copyright 2026 Hitesh Soliwal and contributors.
  * Additions are licensed under Apache-2.0; original code retains the MIT license above.
  */

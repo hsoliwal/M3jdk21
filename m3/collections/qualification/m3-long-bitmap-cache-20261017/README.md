@@ -44,13 +44,13 @@
 
 * `javac --release 21 -proc:none -Xlint:all -Werror` selected Java baseline/interface stand-ins and new source: **PASS**.
 * Java-only standalone oracle: **PASS 31,923 checks**.
-* Existing real JNI C (`m3_index_mask_compactor.c`, Git blob `f1a9488905807e6417dd267e125bfc44dbcc9297`) built with `-std=c17 -O2 -Wall -Wextra -Werror -fsanitize=undefined -fPIC` and exercised with `java -Xcheck:jni`: **PASS 32,425 checks**. Counts are overlapping; do not add them.
+* Existing real JNI C (`m3_index_mask_compactor.c`, Git blob `22782ee02b06b4404b5c87fd15f10f4e8e9749ea`) built with `-std=c17 -O2 -Wall -Wextra -Werror -fsanitize=undefined -fPIC` and exercised with `java -Xcheck:jni`: **PASS 32,425 checks**. Counts are overlapping; do not add them.
 * Canonical deterministic Java recipe compiled, --selftest PASS (missing/drift, occupied refusal, idempotence, fixed point); --apply then --check against a bounded target proof fixture PASS. Local compiler uses a matching API signature copy of current M3LongCollection/Iterator and exact Git-blob-matched incumbent M3LongIndexProjection/M3IndexMaskCompactor (including the newer all-selected fast path on receiving base `b42ab7605b862a5157997f1787c5032db2831f46`).
 * Maven command and actual full receiving-project CI were **NOT_RUN** locally: Maven unavailable. Full installed JDK/HotSpot/jtreg and profiler/benchmark gates remain **PENDING**. No speedup claim.
 
 ## Receiver references
 
-* Existing `M3LongIndexProjection.java` Git blob: `416291e4d93e583f07fab280c577b7cdddc6d5ce`.
-* Existing `M3IndexMaskCompactor.java` Git blob: `958d1bc57f6c90f78d4e5f408cc758d1adc8fba5`.
-* Existing `M3LongCollection.java` Git blob: `d0b389681ade738e97426d950b6291c746912cf0`.
+* Existing `M3LongIndexProjection.java` Git blob: `256243692f04210278bfecd3c9c4bc6934ea20f3`.
+* Existing `M3IndexMaskCompactor.java` Git blob: `59fc8257581a11b1ec473ddb670c57922303ce69`.
+* Existing `M3LongCollection.java` Git blob: `a2cf7fb8a1635eb0360cdc3f40052e3565dce23b`.
 * Exact new template byte SHAs are embedded in the recipe `Output` manifest and can be independently verified.

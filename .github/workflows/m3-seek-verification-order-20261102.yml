@@ -1,0 +1,95 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Token Cursor Seek — Java21 JUnit and JNI qualification
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/regex-cursor/**'
+      - '.github/workflows/m3-seek-verification-order-20261102.yml'
+  workflow_dispatch: {}
+permissions:
+  contents: read
+concurrency:
+  group: m3-seek-verification-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  maven-junit:
+    name: Real Java21 Maven/JUnit and JaCoCo
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: m3/ports/regex-cursor/pom.xml
+      - name: Pin source and lint proof script
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'b880b53d0441178988bb46c4f79a359f0f8af317056b38ee0cf2830ff167e2d3  m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh' | sha256sum -c -
+          bash -n m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh
+          python3 m3/ports/regex-cursor/proofs/check-verify-order-20261102.py m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh
+      - name: Compile and execute real JUnit with JaCoCo
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/ports/regex-cursor/pom.xml -Djunit.artifact.version=5.10.2 clean verify
+      - name: Require executed seek and complete-admission JUnit tests, no skips
+        shell: bash
+        run: |
+          python3 - <<'PYTEST'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          base=Path('m3/ports/regex-cursor/target/surefire-reports')
+          expected=(('M3TokenCursorSeekLocalityTest',3), ('M3CompleteTokenProjectionTest',2))
+          for klass,minimum in expected:
+              f=base/('TEST-jdk.m3.regexcursor.'+klass+'.xml')
+              if not f.is_file(): raise SystemExit('MISSING real JUnit Surefire XML: '+str(f))
+              root=ET.parse(f).getroot()
+              fields={k:int(root.attrib.get(k,'0')) for k in ('tests','errors','failures','skipped')}
+              if fields['tests'] < minimum or any(fields[k] for k in ('errors','failures','skipped')):
+                  raise SystemExit('JUnit contract not accepted: '+klass+' '+str(fields))
+              print('M3_REAL_JUNIT_PASS',klass,fields)
+          PYTEST
+      - name: Attach Maven and JaCoCo receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-seek-junit-receipts
+          if-no-files-found: warn
+          path: |
+            m3/ports/regex-cursor/target/surefire-reports/
+            m3/ports/regex-cursor/target/site/jacoco/
+  native-java-c17:
+    name: Strict native JNI and standalone Java oracle
+    needs: maven-junit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source SHA and verification-order admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'b880b53d0441178988bb46c4f79a359f0f8af317056b38ee0cf2830ff167e2d3  m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh' | sha256sum -c -
+          python3 m3/ports/regex-cursor/proofs/check-verify-order-20261102.py m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh
+      - name: Ordered Java21/C17 compile, tests and checked native runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh
+          test -s m3/ports/regex-cursor/target/m3-token-cursor-seek-locality-20261102/logs/SHA256SUMS.txt
+      - name: Attach Java/C17/JNI log digests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-seek-java-c17-jni-receipts
+          if-no-files-found: warn
+          path: |
+            m3/ports/regex-cursor/target/m3-token-cursor-seek-locality-20261102/logs/

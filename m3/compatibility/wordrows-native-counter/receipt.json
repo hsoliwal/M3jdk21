@@ -13,7 +13,7 @@
   "postimages": [
     {
       "path": "m3/core/test/M3WordRowsContractTest.java",
-      "sha256": "ae2fe64b1a273317e1416bc8e22d86bbb2284080d3afedfea2fb78032b6ea403"
+      "sha256": "f439cefd075a377eaa5b624145e4e04412bd343ca0d324fa7068e9276ce62679"
     },
     {
       "path": "m3/lexicon/native/m3_wordrows_jni.c",

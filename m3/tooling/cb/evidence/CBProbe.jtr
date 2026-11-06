@@ -1,7 +1,7 @@
 #Test Results (version 2)
 #Sun Oct 04 11:49:01 EEST 2026
 #-----testdescription-----
-$file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java
+$file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java
 $root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk
 keywords=othervm
 library=/jdk/internal/mindex/cb
@@ -13,7 +13,7 @@ title=Class counterpart metadata, loader identity, releases and precompute conte
 #-----environment-----
 
 #-----testresult-----
-description=file\:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java
+description=file\:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java
 elapsed=6574 0\:00\:06.574
 end=Sun Oct 04 11\:49\:01 EEST 2026
 environment=regtest
@@ -61,7 +61,7 @@ result: Passed. Build successful
 
 #section:compile
 ----------messages:(8/418)----------
-command: compile /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/VmFixture.java
+command: compile /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java
 reason: .class file out of date or does not exist
 started: Sun Oct 04 11:48:54 EEST 2026
 Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED
@@ -98,7 +98,7 @@ TZ=Asia/Nicosia \\
         -J-Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
         -J-Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
         -J-Dtest.name=jdk/internal/mindex/cb/com/m3/cb/CBProbe.java \\
-        -J-Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java \\
+        -J-Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java \\
         -J-Dtest.main.class=com.m3.cb.CBProbe \\
         -J-Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
         -J-Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
@@ -123,7 +123,7 @@ result: Passed. Build successful
 
 #section:compile
 ----------messages:(8/416)----------
-command: compile /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java
+command: compile /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java
 reason: .class file out of date or does not exist
 started: Sun Oct 04 11:48:55 EEST 2026
 Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED
@@ -160,7 +160,7 @@ TZ=Asia/Nicosia \\
         -J-Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
         -J-Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
         -J-Dtest.name=jdk/internal/mindex/cb/com/m3/cb/CBProbe.java \\
-        -J-Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java \\
+        -J-Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java \\
         -J-Dtest.main.class=com.m3.cb.CBProbe \\
         -J-Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
         -J-Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
@@ -211,7 +211,7 @@ CLASSPATH=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jt
         -Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
         -Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
         -Dtest.name=jdk/internal/mindex/cb/com/m3/cb/CBProbe.java \\
-        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java \\
+        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java \\
         -Dtest.main.class=com.m3.cb.CBProbe \\
         -Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
         -Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
@@ -275,7 +275,7 @@ CLASSPATH=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jt
         -Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
         -Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
         -Dtest.name=jdk/internal/mindex/cb/com/m3/cb/CBProbe.java \\
-        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java \\
+        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java \\
         -Dtest.main.class=com.m3.cb.CBProbe \\
         -Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
         -Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\

@@ -1,0 +1,11 @@
+consumer	before	after	gate	classes_new	errors_vs_old	errors_vs_new	added_by_repoint	verdict
+m3/tooling/vendor-recipes/pom.xml	jackson-annotations-2.16.1	jackson-annotations-2.19.2	EXTRA_POM (blocks 1, provenance -; gate: API surface: every jackson-annotations type imported by the module exists in 2.19.2 (46 = 46 types); Lombok module, no plain javac gate)	-	-	-	-	PASS
+m3/vendor/third_party/rewrite-core/pom.xml	jackson-annotations-2.16.1	jackson-annotations-2.19.2	EXTRA_POM (blocks 1, provenance 1; gate: API surface: every jackson-annotations type imported by the module exists in 2.19.2 (46 = 46 types); Lombok module, no plain javac gate)	-	-	-	-	PASS
+m3/vendor/third_party/rewrite-java/pom.xml	jackson-annotations-2.16.1	jackson-annotations-2.19.2	EXTRA_POM (blocks 1, provenance 1; gate: API surface: every jackson-annotations type imported by the module exists in 2.19.2 (46 = 46 types); Lombok module, no plain javac gate)	-	-	-	-	PASS
+m3/vendor/third_party/rewrite-xml/pom.xml	jackson-annotations-2.16.1	jackson-annotations-2.19.2	EXTRA_POM (blocks 1, provenance 1; gate: API surface: every jackson-annotations type imported by the module exists in 2.19.2 (46 = 46 types); Lombok module, no plain javac gate)	-	-	-	-	PASS
+m3/vendor/third_party/rewrite-yaml/pom.xml	jackson-annotations-2.16.1	jackson-annotations-2.19.2	EXTRA_POM (blocks 1, provenance 1; gate: API surface: every jackson-annotations type imported by the module exists in 2.19.2 (46 = 46 types); Lombok module, no plain javac gate)	-	-	-	-	PASS
+jackson-databind-2.16.1	jackson-annotations-2.16.1	jackson-annotations-2.19.2	PLAIN	757	-	0	0	PASS
+jackson-datatype-jsr310-2.16.1	jackson-annotations-2.16.1	jackson-annotations-2.19.2	PLAIN	59	-	0	0	PASS
+jackson-dataformat-csv	jackson-annotations-2.16.1	jackson-annotations-2.19.2	PLAIN	36	-	0	0	PASS
+jackson-module-parameter-names	jackson-annotations-2.16.1	jackson-annotations-2.19.2	PLAIN	4	-	0	0	PASS
+DROP	jackson-annotations-2.16.1	-	files=59	-	-	-	proof_mentions=18 proof_blocking=0	PASS

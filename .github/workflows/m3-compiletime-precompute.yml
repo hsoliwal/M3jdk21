@@ -6,10 +6,10 @@ on:
     paths:
       - 'm3/ports/compiletime/**'
       - 'm3/docs/m3-compiletime-precompute.md'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-compiletime-regex-precompute.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/**'
       - '.github/workflows/m3-compiletime-precompute.yml'
   workflow_dispatch:
 
@@ -62,13 +62,9 @@ jobs:
             dependency:build-classpath -Dmdep.outputFile=target/ct-cp.txt
           cp="m3/ports/compiletime/target/classes:$(cat target/ct-cp.txt)"
           opens="--add-opens java.base/java.util.regex=ALL-UNNAMED"
-          java -Xmx1g $opens -cp "$cp" com.m3.compiletime.M3ConstantRegexHarvester \
+          java -Xmx1g $opens -cp "$cp" jdk.m3.compiletime.M3ConstantRegexHarvester \
             --out target/ci-harvest --jdk --rounds 5
-          java -Xmx1g $opens -cp "$cp" com.m3.compiletime.M3ConstantRegexDifferential \
+          java -Xmx1g $opens -cp "$cp" jdk.m3.compiletime.M3ConstantRegexDifferential \
             --harvest target/ci-harvest --rounds 3 --reps 1
           cat target/ci-harvest/HARVEST_RECEIPT.tsv target/ci-harvest/DIFFERENTIAL_RECEIPT.tsv
 
-      - name: OpenRewrite crate fixed point
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3CompileTimeRegexPrecomputeRecipeTest test

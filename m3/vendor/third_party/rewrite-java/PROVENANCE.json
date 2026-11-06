@@ -55,7 +55,7 @@
       "group": "org.apache.commons",
       "optional": false,
       "scope": "compile",
-      "version": "3.14.0-m3-source-1"
+      "version": "3.17.0-m3-source-1"
     },
     {
       "artifact": "commons-text",
@@ -79,7 +79,7 @@
       "group": "com.fasterxml.jackson.core",
       "optional": false,
       "scope": "compile",
-      "version": "2.16.1-m3-source-1"
+      "version": "2.19.2-m3-source-1"
     },
     {
       "artifact": "jackson-core",

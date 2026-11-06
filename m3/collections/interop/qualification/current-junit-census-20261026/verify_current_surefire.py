@@ -15,19 +15,19 @@ from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
 
-SRC = 'm3/collections/interop/src/test/java/com/m3/collections/interop/'
+SRC = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/'
 BASE = 'm3/collections/interop/qualification/runtime-junit-census-20261022/'
 CURRENT = 'm3/collections/interop/qualification/current-junit-census-20261026/'
 HISTORY = BASE + 'verify_surefire.py'
 RECEIPT = CURRENT + 'CURRENT_JUNIT_METHOD_SUCCESSION.tsv'
-HISTORY_VERIFIER_GIT_BLOB = '91a438127d48fac9b32104a1e98f1a3eb18bdc5d'
+HISTORY_VERIFIER_GIT_BLOB = '0f8f6c50854d53672c3a07d26473b8457d439cbf'
 HISTORY_SHARD_GIT_BLOBS = (
-    '56bca22881cd0e8ad6b90c3b5582ddbd5ae0ef7d',
-    'e1e57850ac92df6e36743561044e134375aa128f',
-    'b3c2fd2ffd2c71543950e9f788ecce7e875a03e3',
-    '5a3e8a287f14898dfc3b6ba7da5f3e5443b87ad2',
+    'c34283d303f06188d021c58a8556bdf13f884a5f',
+    'da78d98b21c3a1ad26ba6c7724e37730e8788b50',
+    '90c39dcd40c8b682c849845f5b8912ddddf11d3f',
+    'a9e1b9ba0ffbc2beff2c0152df3430d4a823d2d3',
 )
-CURRENT_RECEIPT_SHA256 = '10e9488a22dea3aa7ad2e0c3037be44b1aebbb953469df52018bc75472a9db2e'
+CURRENT_RECEIPT_SHA256 = '319af78cef83f8e4d4dd0028d8b234a6b2237d40fca1b4f24e035b079c83774e'
 NEW_SOURCE_NAMES = frozenset((
     'M3ApacheStreamsTest.java', 'M3EclipseStreamsTest.java',
     'M3GuavaStreamsTest.java', 'M3SpringStreamsTest.java',
@@ -39,6 +39,28 @@ CHANGED_SOURCE_NAMES = frozenset((
     'M3SdkFamiliesTest.java', 'M3SpringArrayContractTest.java',
     'M3SpringCaseInsensitiveSdkFactoryTest.java',
 ))
+# Sources added after the V4 receipt, admitted by exact identity: the two provider tests master received through
+# superset #2166 (2026-10-30). name -> (git blob, SHA-256, @Test methods in source order). Any other source, or other
+# bytes for these names, still fails.
+ADMITTED_ADDITIONS = {
+    'M3Flat3MapProviderTest.java': (
+        '254d85294724b1cdcaa26a2c526da0fa17d623be',
+        'c9498ec115a48a9c23c884c62f1011af6bb439b2826a12d454a38f0768b17a47',
+        'nullMappingsAndThreeToFourGrowthPreserveReturnIdentity,'
+        'collidingKeysAcrossWordBoundariesSurviveDeletionAndReuse,'
+        'seededEightMethodDifferentialMatchesProviderAndJdk,'
+        'equalValuesAndObservedHashCallbacksDoNotChangeSharedResults'),
+    'M3FrozenLongSetProviderTest.java': (
+        '4d88d4e3912ab9a5528f8c81a836d501bcf88511',
+        'd089236cb463d8b016c01b9c26216b918e7ec497442d6f01850c50216150291e',
+        'differentialAgainstGuavaImmutableSortedSet,differentialAgainstEclipseImmutableLongSet'),
+}
+V4_SOURCES = 48
+V4_METHODS = 167
+V4_SUITES = 37
+EXPECTED_SOURCES = V4_SOURCES + len(ADMITTED_ADDITIONS)
+EXPECTED_METHODS = V4_METHODS + sum(len(m.split(',')) for _b, _s, m in ADMITTED_ADDITIONS.values())
+EXPECTED_SUITES = V4_SUITES + len(ADMITTED_ADDITIONS)
 HEX40 = re.compile(r'[0-9a-f]{40}\Z')
 HEX64 = re.compile(r'[0-9a-f]{64}\Z')
 TEST = re.compile(r'@Test\b\s+(?:(?:public|protected|private|static|final|synchronized)\s+)*'
@@ -127,9 +149,12 @@ def expected_methods(product: Path) -> set[str]:
     actual_java = product / SRC
     sources = {str(p.relative_to(product)).replace('\\', '/')
                for p in actual_java.glob('*.java') if p.is_file() or p.is_symlink()}
-    if sources != set(legacy) | new_ids:
+    added_ids = {SRC + name for name in ADMITTED_ADDITIONS}
+    if added_ids & (set(legacy) | new_ids):
+        raise ValueError('admitted addition collides with a recorded source')
+    if sources != set(legacy) | new_ids | added_ids:
         raise ValueError('unrecorded/missing JUnit Java source: '
-                         + repr(sorted(sources ^ (set(legacy) | new_ids))[:8]))
+                         + repr(sorted(sources ^ (set(legacy) | new_ids | added_ids))[:8]))
     expected = set()
     for relative in sorted(sources):
         data = file_bytes(product, relative)
@@ -137,18 +162,22 @@ def expected_methods(product: Path) -> set[str]:
             blob, digest, methods = upgrades[relative]
             if git_blob(data) != blob or hashlib.sha256(data).hexdigest() != digest:
                 raise ValueError('V4 JUnit source Git/SHA256 mismatch: ' + relative)
+        elif relative in added_ids:
+            blob, digest, methods = ADMITTED_ADDITIONS[Path(relative).name]
+            if git_blob(data) != blob or hashlib.sha256(data).hexdigest() != digest:
+                raise ValueError('admitted JUnit source addition drift: ' + relative)
         else:
             blob, methods = legacy[relative]
             if git_blob(data) != blob:
                 raise ValueError('unreviewed original JUnit source change: ' + relative)
         names = declared_methods(relative, data, methods)
         for name in names:
-            ident = 'com.m3.collections.interop.' + Path(relative).stem + '#' + name
+            ident = 'jdk.m3.collections.interop.' + Path(relative).stem + '#' + name
             if ident in expected:
                 raise ValueError('duplicate JUnit source method identity: ' + ident)
             expected.add(ident)
-    if len(expected) != 167:
-        raise ValueError(f'current exact method count {len(expected)} != 167')
+    if len(expected) != EXPECTED_METHODS:
+        raise ValueError(f'current exact method count {len(expected)} != {EXPECTED_METHODS}')
     return expected
 
 
@@ -162,8 +191,8 @@ def verify_reports(product: Path, reports: Path, expected: set[str]) -> int:
     spec.loader.exec_module(module)
     # Original executable JUnit XML semantics, not a simplified replacement.
     suites = module.verify_reports(reports, expected)
-    if suites != 37:
-        raise ValueError(f'wrong exact JUnit suite count {suites} != 37')
+    if suites != EXPECTED_SUITES:
+        raise ValueError(f'wrong exact JUnit suite count {suites} != {EXPECTED_SUITES}')
     # Historical verifier rejects errors/failures/skipped; reject hidden flaky reruns too.
     for path in sorted(reports.glob('TEST-*.xml')):
         root = ET.parse(path).getroot()
@@ -181,8 +210,9 @@ def main() -> None:
     args = parser.parse_args()
     expected = expected_methods(args.product)
     suites = verify_reports(args.product, args.reports, expected)
-    print(f'M3_INTEROP_JUNIT_CENSUS_V4_PASS sources=48 methods={len(expected)} suites={suites} '
-          'original_sources=44 original_methods=158 changed_or_new=13')
+    print(f'M3_INTEROP_JUNIT_CENSUS_V4_PASS sources={EXPECTED_SOURCES} methods={len(expected)} '
+          f'suites={suites} original_sources=44 original_methods=158 changed_or_new=13 '
+          f'admitted_additions={len(ADMITTED_ADDITIONS)}')
 
 
 if __name__ == '__main__':

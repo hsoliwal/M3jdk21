@@ -13,8 +13,8 @@
   "helper_test_scope": "Synthetic boundary fixtures from the prior helper qualification; actual runtime SDK receivers and Java source checks are separate commands. Final metadata helper changes are qualified in evidence/prepared/MAVEN_VERIFY.log.",
   "execution_files": 27,
   "execution_bytes": 95781,
-  "inventory_sha256": "d915f50645ef52fd1b3658be94a9a0dcae49dc27e940cd2973da41e01342c0c3",
-  "source_gate_sha256": "1ae8053070eb82493478d472be0fcf3877544d2b00e999cf984eac696ee94f87",
+  "inventory_sha256": "67577f49a1e1a230fc0543eb1dfbe6b728157c611f90bf10ddffb549db29ba5c",
+  "source_gate_sha256": "67172088fda5233cd07886042b753a6eb378f24b80cb49bf3bfd62da757ad198",
   "literal_bytes_preserved": true,
   "nul_git_stdout": "Lossless JSON string envelope produced by the checker",
   "argfile_names": "Only filenames gain .txt; contents copied literally",
@@ -24,7 +24,7 @@
   "records": [
     {
       "path": "COMMANDS.json",
-      "sha256": "40154c2ab576f0e3199c9abec80bbe9dd7f832e192ba20ee8ace8210d131ad79",
+      "sha256": "7e911da6fd0658a0877ee85bafae12bcf1060bc4d11e1c13a2b7213f137b50a2",
       "bytes": 3817,
       "source": "/tmp/m3-program-current-compiletime/COMMANDS.json"
     },
@@ -42,7 +42,7 @@
     },
     {
       "path": "RESULT.json",
-      "sha256": "c6500000bad9228da059d488637ed9067c09825b308d26345c5054057578fba3",
+      "sha256": "846675b785af4447d959b3625c88ae5780d9db9d3e0eeeed05b8389f1047e7d7",
       "bytes": 25480,
       "source": "/tmp/m3-program-current-compiletime/RESULT.json"
     },
@@ -120,7 +120,7 @@
     },
     {
       "path": "ports.args.txt",
-      "sha256": "53df3c104a3e356d9d75c6c74c5013c960ca48212e8bf61f4c96860dc1830181",
+      "sha256": "de6e85ad303b356e5f597261ce8ed33dcadc2bc83bf0ded43ff646ccc5d09e8e",
       "bytes": 6200,
       "source": "/tmp/m3-program-current-compiletime/ports.args"
     },
@@ -156,7 +156,7 @@
     },
     {
       "path": "receiving-source-tree.stdout.json",
-      "sha256": "b7bd6b8726f7e1df4a1180164006417e0a7907d71d178057488d5a45d5108c29",
+      "sha256": "1c49ec75e0f7f39ebb41981e7c52400d9faf8b6072f70f1b1c10ac2c98f2a25e",
       "bytes": 20146,
       "source": "/tmp/m3-program-current-compiletime/receiving-source-tree.stdout.json"
     },

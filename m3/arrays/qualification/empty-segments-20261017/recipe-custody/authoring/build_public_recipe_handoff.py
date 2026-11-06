@@ -15,12 +15,12 @@ import re
 import shutil
 
 
-CANONICAL_PREFIX = "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017"
+CANONICAL_PREFIX = "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017"
 PUBLIC_HOST = "m3/arrays/qualification/empty-segments-20261017/recipe-custody"
 ORIGINAL_POM = "77768901812250c397a0ec138c83c7117a86bd14d1c77fbd75cce1324812ebb5"
 CAPPED_POM = "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d"
 CONTROLS = ("prepare.py", "receive.py", "ENGINE_SOURCES.tsv",
-            "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+            "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
             "contract/test_prepare.py", "contract/verify_receiver.py")
 ENGINES = ("M3HashPinnedJavaSnapshotRecipe.java", "M3HashPinnedTextSnapshotRecipe.java",
            "M3ScopeInference.java", "M3EditScope.java")
@@ -65,7 +65,7 @@ def stage(args):
         controls.append({"path": relative, "sha256": sha(source.read_bytes())})
     engines = []
     for name in ENGINES:
-        relative = "src/main/java/com/synexia/rewrite/" + name
+        relative = "src/main/java/jdk/internal/m3/rewrite/" + name
         source = prepare.source_path(owner, relative)
         target = prepare.source_path(destination / "sdk-owner", relative)
         if source.read_bytes() != target.read_bytes():

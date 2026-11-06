@@ -23,7 +23,7 @@ The second command retains the complete module lifecycle and existing coverage g
 
 ## Authority and provenance
 
-Existing caller: m3/tooling/a3/src/main/java/com/m3/a3/A3Apply.java (blob 9a0f66609a1450c30493b3316eb36cd0950ce414).
+Existing caller: m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java (blob b348370f5b37c8fc91109bb6ec503d6717254d38).
 Pinned dependency source: openrewrite/rewrite tag v8.17.1, rewrite-java/src/main/java/org/openrewrite/java/RemoveUnusedImports.java; implementation is referenced through the existing dependency, not copied.
 Catalogue: https://docs.openrewrite.org/recipes/java/removeunusedimports .
 Reviewed but not enabled: https://docs.openrewrite.org/recipes/java/orderimports .

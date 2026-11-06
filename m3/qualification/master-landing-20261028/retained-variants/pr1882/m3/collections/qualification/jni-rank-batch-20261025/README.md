@@ -8,11 +8,11 @@
 M3LongRankBatchNative.java     fa87b9bf25dff5cb858caeee962dfb1bd12a607a
 M3LongRankIndex.java           45f608496420cd2f555c0f69b26f572667be6690
 M3LongRankIndexSelfTest.java   b2de41ebb3ee281e18c7062c5580bc25bcbad6f0
-M3RankBatchIntoContract.java   e4e15d78dfa68cff935c3e26ccee7f954800be24
-M3RankBatchIntoTest.java       e430a06d3a056971c6aee6701326ce3cabbc8c20
+M3RankBatchIntoContract.java   284248c40cc245ff83091efc3e2ecbf69238a6ca
+M3RankBatchIntoTest.java       334ab85c78894232f5d8f86d3d36993a8c6970f8
 m3_long_rank_batch_jni.c      714d89c8fcb3e63e9f721af2acd5664f40bb8c30
 ```
-All six product Git blobs are byte-identical to the canonical Synexia Java/Text recipe postimages. The validation workflow is an exact copy of canonical source template, blob `8e662920a3fb1aa39feceb1374896247796a36bd`. No original source path is deleted and the old JNI exports `lowerBounds0`/`equalRanges0` remain unchanged.
+All six product Git blobs are byte-identical to the canonical Synexia Java/Text recipe postimages. The validation workflow is an exact copy of canonical source template, blob `391daa00e10ca0ae8cee60da6103af2dab8d3f7a`. No original source path is deleted and the old JNI exports `lowerBounds0`/`equalRanges0` remain unchanged.
 
 ## Algorithm/ABI selection
 The LeetCode **#34** range of equal values and **#35** insertion-coordinate category provide algorithm-discovery taxonomy; **#704** membership derives from nonzero count. The implementation is independent first-party code, not copied LeetCode solutions. Existing `M3LongRankBatchNative.lowerBounds` and `equalRanges` (including monotone sweep cost gate) remain intact.

@@ -23,10 +23,10 @@ NATIVE = "src/java.base/share/native/libjava/M3StateRelation.c"
 HEADER = "src/java.base/share/native/libjava/m3_state_relation.h"
 PROOF = "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java"
 PINNED = {
-    OWNER: "ea904c0962fb976f43b45575f06f46ad198e29a2",
-    ADAPTER: "780c7887aaa6b0892a76f4eee1dcb17086a60289",
-    NATIVE: "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-    HEADER: "18a02e228129827da486edc5b316790af6135310",
+    OWNER: "30359b57b7b553e78355d3672119c685051ec1da",
+    ADAPTER: "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
+    NATIVE: "89b3127f0f262de3e00ba28a01079a659013dce2",
+    HEADER: "0e0c70e60b2cee61c3df31982a26f4251955cb61",
     PROOF: "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0",
 }
 MAIN = "jdk.internal.mindex.M3RelationPortProof"
@@ -133,7 +133,7 @@ def inputs(source):
     }, "COMPLETE_PROOF_EXPECTATION_DRIFT")
     host = runpy.run_path(str(safe_file(TASK.parent, "qualify.py")), run_name="m3_sparse_owner_plan_reuse")
     sdk = TASK.parent / "sdk"
-    fixtures = sdk / "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020"
+    fixtures = sdk / "src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020"
     original, post, actual = {}, {}, {}
     for row in rows:
         name = row["path"]
@@ -351,7 +351,7 @@ def native_benchmark(root, source, env, jdk, cc, nm, generated, commands, metada
     require(not work.exists() and not work.is_symlink(), "FRESH_BENCHMARK_DIRECTORY_REQUIRED")
     work.mkdir()
     sdk = TASK.parent / "sdk"
-    original = sdk / "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
+    original = sdk / "src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
     emitted = sdk / metadata["generatedCandidate"]["path"]
     harness = safe_file(TASK, "paired_bench.c")
     checker = safe_file(TASK, "verify_benchmark.py")
@@ -497,7 +497,7 @@ def execute(root, source, ident):
     proof_marker(raw, JAVA_MARKER)
     commands.append(row)
     sdk = TASK.parent / "sdk"
-    original_c = sdk / "src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
+    original_c = sdk / "src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before" / NATIVE
     emitted_c = sdk / metadata["generatedCandidate"]["path"]
     variants = (("baseline", original_c, []), ("sparse", emitted_c, []),
                 ("portable", emitted_c, ["-DM3_STATE_RELATION_FORCE_POSITIONAL_SCAN"]))

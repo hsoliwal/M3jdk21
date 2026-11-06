@@ -47,7 +47,7 @@
       "group": "com.fasterxml.jackson.core",
       "optional": true,
       "scope": "compile",
-      "version": "2.16.1-m3-source-1"
+      "version": "2.19.2-m3-source-1"
     },
     {
       "artifact": "jackson-core",
@@ -143,7 +143,7 @@
       "group": "org.slf4j",
       "optional": true,
       "scope": "compile",
-      "version": "1.7.36-m3-source-1"
+      "version": "2.0.12-m3-source-1"
     },
     {
       "artifact": "snakeyaml",

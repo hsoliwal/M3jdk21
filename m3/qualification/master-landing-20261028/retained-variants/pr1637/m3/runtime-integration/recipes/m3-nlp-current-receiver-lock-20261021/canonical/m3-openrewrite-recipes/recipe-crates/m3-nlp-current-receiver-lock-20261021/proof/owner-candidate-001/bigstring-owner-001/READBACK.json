@@ -1,0 +1,44 @@
+[
+  {
+    "bytes": 2433,
+    "git_blob": "e51c4a1a8ffcd63207554259308ce61d1d24267a",
+    "path": ".github/workflows/m3-bigstring-rope-summary-20261018.yml",
+    "sha256": "074c3bcb55b58f7129ab36868ace7bb6de8acc66066a08f286c0466d643c6ff9"
+  },
+  {
+    "bytes": 2634,
+    "git_blob": "5022e9811ce9391671c794446c7772569cfd369f",
+    "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+    "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+  },
+  {
+    "bytes": 2115,
+    "git_blob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+    "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+    "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+  },
+  {
+    "bytes": 33365,
+    "git_blob": "46e79d724bf6fdb8228bde6cee4132c36b2094e1",
+    "path": "m3/core/src/jdk/m3/text/M3BigString.java",
+    "sha256": "ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343"
+  },
+  {
+    "bytes": 767,
+    "git_blob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+    "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+    "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+  },
+  {
+    "bytes": 494,
+    "git_blob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+    "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+    "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+  },
+  {
+    "bytes": 8955,
+    "git_blob": "8a7ce4438b2782ae2b3ce7db06a57461b00a5cd7",
+    "path": "m3/core/test/jdk/m3/text/M3BigStringSelfTest.java",
+    "sha256": "6a86ba78d034b115bd3895fc2b66916a4c00a485ad01e60ff6e30bbbf410fc61"
+  }
+]

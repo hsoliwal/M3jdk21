@@ -38,7 +38,7 @@ jobs:
           import json
           import xml.etree.ElementTree as ET
 
-          report = Path("m3/file/target/surefire-reports/TEST-com.m3.file.M3FileDeltaTest.xml")
+          report = Path("m3/file/target/surefire-reports/TEST-jdk.m3.file.M3FileDeltaTest.xml")
           if not report.is_file() or not report.stat().st_size:
               raise SystemExit("missing actual JUnit file-delta report")
           suite = ET.parse(report).getroot()

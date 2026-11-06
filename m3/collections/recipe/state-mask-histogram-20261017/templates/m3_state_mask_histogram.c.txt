@@ -17,7 +17,7 @@ static void m3_invalid(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3StateMaskHistogram_tallyNative(
+Java_jdk_m3_collections_M3StateMaskHistogram_tallyNative(
         JNIEnv *env, jclass owner, jbyteArray source, jint first,
         jint count, jint stride, jintArray result) {
     (void) owner;

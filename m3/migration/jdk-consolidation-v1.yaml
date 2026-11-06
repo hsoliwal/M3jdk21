@@ -1,4 +1,4 @@
-schema: M3_JDK_CONSOLIDATION_V1
+schema: M3JDK_CONSOLIDATION_V1
 source:
   repo: hsoliwal/com.synexia
   reviewedDevelop: 5bea7c90f54f58b468c7aca185fa33753631fe64

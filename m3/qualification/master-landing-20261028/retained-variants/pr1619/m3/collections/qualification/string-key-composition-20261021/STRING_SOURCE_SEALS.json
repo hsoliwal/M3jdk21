@@ -31,7 +31,7 @@
   },
   {
     "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
-    "sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
+    "sha256": "7bbb8ce72f2b3d04c3de5c5938e8cb87af76bbe43d317c58058cc75d7201ad6b",
     "jtreg_manifest": []
   },
   {

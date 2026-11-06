@@ -107,12 +107,12 @@ def main() -> int:
     remember(owners_path, "retained-owner pin")
     assert retained["collections_tree"] == TREE
     assert git("cat-file", "-t", TREE).strip() == b"tree"
-    source_dir = HERE / "source/com/m3/collections"
+    source_dir = HERE / "source/jdk/m3/collections"
     source_dir.mkdir(parents=True)
     sources: list[Path] = []
     owner_records = []
     for name in OWNER_NAMES:
-        relative = "src/main/java/com/m3/collections/" + name + ".java"
+        relative = "src/main/java/jdk/m3/collections/" + name + ".java"
         data = git("show", TREE + ":" + relative)
         blob = git("rev-parse", TREE + ":" + relative).decode().strip()
         assert git_blob(data) == blob
@@ -126,14 +126,14 @@ def main() -> int:
             pin = next(p for p in retained["owners"] if p["path"] == record["target_path"])
             assert record["sha256"] == pin["sha256"] and blob == pin["git_blob"]
 
-    host = C2 / ("custody/synexia-openrewrite-recipes/recipe-crates/"
+    host = C2 / ("custody/m3-openrewrite-recipes/recipe-crates/"
                  "m3-wrapper-convergence-20261018/recipe-host")
     fixture_records = []
     for pass_name, class_name in [
         ("wrapper-contract-v2", "M3WrapperConvergenceContract"),
         ("wrapper-junit-v2", "M3WrapperConvergenceTest"),
     ]:
-        root = host / ("passes/" + pass_name + "/resources/com/synexia/rewrite/"
+        root = host / ("passes/" + pass_name + "/resources/jdk/internal/m3/rewrite/"
                        "hash-pinned-java/m3-wrapper-" + pass_name)
         original = root / (class_name + ".java.txt")
         manifest = root / "manifest.tsv"
@@ -162,7 +162,7 @@ def main() -> int:
             qualification_kind="historical fixture, executed freshly in this run",
         ))
 
-    old_guard = host / ("passes/readonly-iterator/resources/com/synexia/rewrite/"
+    old_guard = host / ("passes/readonly-iterator/resources/jdk/internal/m3/rewrite/"
                        "hash-pinned-java/m3-wrapper-readonly-iterator/M3FilteredLists.java.txt")
     assert old_guard.read_bytes() == (source_dir / "M3FilteredLists.java").read_bytes()
     remember(old_guard, "historical accepted read-only guard postimage")
@@ -213,12 +213,12 @@ def main() -> int:
     must_pass(compile_record)
     api_record = run("public-api", [
         str(JDK / "bin/javap"), "-public", "-s", "-classpath", str(classes),
-        *["com.m3.collections." + name for name in OWNER_NAMES[:3]],
+        *["jdk.m3.collections." + name for name in OWNER_NAMES[:3]],
     ])
     must_pass(api_record)
     junit = run("junit-readonly-policy", [
         str(JDK / "bin/java"), "-ea", "-cp", str(classes) + os.pathsep + jar_path,
-        "FacadeTestLauncher", "com.m3.collections.M3WrapperConvergenceTest",
+        "FacadeTestLauncher", "jdk.m3.collections.M3WrapperConvergenceTest",
     ])
     must_pass(junit)
     junit_text = (HERE / junit["log"]).read_text()
@@ -243,7 +243,7 @@ def main() -> int:
     for mode in modes:
         # Exercise the original no-argument default for the final readonly mode.
         arguments = [str(JDK / "bin/java"), "-ea", "-cp", str(classes),
-                     "com.m3.collections.M3WrapperConvergenceContract"]
+                     "jdk.m3.collections.M3WrapperConvergenceContract"]
         if mode != "readonly":
             arguments.append(mode)
         record = run("oracle-" + mode, arguments)

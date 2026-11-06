@@ -1,0 +1,15 @@
+kind	aspects	measure
+TABLE	R;G;D;P	table rows: item count, item height, top index, header origin; item rect = row band (no item object is created)
+TREE	R;G;D;P	tree rows: top-level count, item height, top item; item rect = row band
+LIST	R;G;D;P	list rows: item count, item height, top index (Swing: cell bounds)
+TEXT	R;G;D;P	text lines: line count, line height, top line; item rect = line band
+STYLED	R;G;D;P	StyledText lines: line count, line height, top index
+SCROLL	R;G;D;P	scroll bar units: maximum, thumb, selection; unit extent = viewport / thumb
+COMBO	R;G;D;P	drop-down rows: item count, row height, visible item count; item rect = row band in the drop-down
+RANGE	R;G;D;P	value positions: maximum - minimum + 1 positions, selection; item rect = the control surface
+TABS	R;G;D;P	tab headers: item bounds along x
+TOOLS	R;G;D;P	tool items: item bounds along x
+CHILDREN	R;G;D;P	child controls: child bounds; first and visible = children intersecting the client area
+AUTO	R;G;D;P	resolved per instance: SCROLL with a vertical bar, else CHILDREN with children, else SURFACE
+SURFACE	D;P	one surface: the client area
+PLANE	D;P	one plane over a host control (menus, tool tips, dialogs, trays, providers, animators)

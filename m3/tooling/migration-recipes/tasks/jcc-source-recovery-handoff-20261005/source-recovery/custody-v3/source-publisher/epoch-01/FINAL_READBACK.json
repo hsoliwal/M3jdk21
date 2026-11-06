@@ -181,7 +181,7 @@
   },
   "before_branch_custody_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/BEFORE_BRANCH_CUSTODY.json",
-    "sha256": "266c17d435d47c58129349e721eec1eee849ceaa28dd5c302eb6030cc02e978e"
+    "sha256": "e347ce74d2e2c9a3252260215f9a4cd3c3a2aa791219095675ae67df8f135f23"
   },
   "blobs": [
     {
@@ -851,7 +851,7 @@
     }
   },
   "custody_protocol": "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES",
-  "preflight_sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f",
+  "preflight_sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
   "pull_request": {
     "_links": {
       "comments": {
@@ -1217,7 +1217,7 @@
   },
   "raw_fixture_custody_input": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
-    "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df"
+    "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5"
   },
   "raw_fixture_final_reads": [
     {
@@ -3235,10 +3235,10 @@
         {
           "mode": "100644",
           "path": "pom.xml",
-          "sha": "98889a040aad5cc3c82f782bb4b173d118207988",
+          "sha": "a65f71452613662769dda64100c6d64dd90ae5da",
           "size": 119981,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/98889a040aad5cc3c82f782bb4b173d118207988"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a65f71452613662769dda64100c6d64dd90ae5da"
         },
         {
           "mode": "040000",
@@ -18820,10 +18820,10 @@
         {
           "mode": "100644",
           "path": "M3AtomHashDatabaseRecipe.java",
-          "sha": "05d74cb1e3417642cb11a0128b74225cb876d326",
+          "sha": "944443cc330db23f54a6a0a66495fe72e93704d5",
           "size": 11314,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/05d74cb1e3417642cb11a0128b74225cb876d326"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/944443cc330db23f54a6a0a66495fe72e93704d5"
         },
         {
           "mode": "100644",
@@ -19060,10 +19060,10 @@
         {
           "mode": "100644",
           "path": "M3CanonicalMultiPassPlan.java",
-          "sha": "897a218c5489c851c1906fd91a2cd64174d19d70",
+          "sha": "513f953f27d5aca5c3c2d4a9141c30f95d1d3392",
           "size": 6043,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/897a218c5489c851c1906fd91a2cd64174d19d70"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/513f953f27d5aca5c3c2d4a9141c30f95d1d3392"
         },
         {
           "mode": "100644",
@@ -20204,18 +20204,18 @@
         {
           "mode": "100644",
           "path": "M3GpuToolJoinManifest.java",
-          "sha": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+          "sha": "78d5fb68f13872164973a8918cc7886c5f548bca",
           "size": 10964,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/78d5fb68f13872164973a8918cc7886c5f548bca"
         },
         {
           "mode": "100644",
           "path": "M3GpuToolJoinRecipe.java",
-          "sha": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+          "sha": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
           "size": 5187,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1c1b1b568d369f688f6953161636bf36b484bf5a"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2ec479b8609459a28fdfd8a7a7d63cc44e919f00"
         },
         {
           "mode": "100644",
@@ -22484,10 +22484,10 @@
         {
           "mode": "100644",
           "path": "M3MIndexJoinedCharsViewRecipe.java",
-          "sha": "3ba6857dec13ca5af871b73238495124b0d1602f",
+          "sha": "12e2cb84d03cdc120513d85aea9d76a0aa427b79",
           "size": 6439,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3ba6857dec13ca5af871b73238495124b0d1602f"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/12e2cb84d03cdc120513d85aea9d76a0aa427b79"
         },
         {
           "mode": "100644",
@@ -26204,10 +26204,10 @@
         {
           "mode": "100644",
           "path": "M3ScopeInference.java",
-          "sha": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+          "sha": "a27177a9538c96633424b73dff48fe7f0341a51b",
           "size": 6596,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a27177a9538c96633424b73dff48fe7f0341a51b"
         },
         {
           "mode": "100644",
@@ -28356,10 +28356,10 @@
         {
           "mode": "100644",
           "path": "M3VerbatimJavaBaselineInventoryRecipe.java",
-          "sha": "e76b712191be02aa7998c20a799879fbb8f0c33f",
+          "sha": "461301d1cdfd83b78e11fb51a278d8b07caaeb18",
           "size": 16659,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e76b712191be02aa7998c20a799879fbb8f0c33f"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/461301d1cdfd83b78e11fb51a278d8b07caaeb18"
         },
         {
           "mode": "100644",
@@ -38263,10 +38263,10 @@
         {
           "mode": "100644",
           "path": "CURRENT_PROJECTION.json",
-          "sha": "d20138ab763408bbbd793c1ff27778d866b29009",
+          "sha": "3c187aada912a867711f1f3adcf32fe99e99f26e",
           "size": 596276,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d20138ab763408bbbd793c1ff27778d866b29009"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3c187aada912a867711f1f3adcf32fe99e99f26e"
         },
         {
           "mode": "100644",
@@ -38279,18 +38279,18 @@
         {
           "mode": "100644",
           "path": "DESIGNATED_SOURCE_OUTPUTS.json",
-          "sha": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+          "sha": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
           "size": 15261,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/59e4ba6f35c37c1a00da2678ed88b9f034d885e1"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185"
         },
         {
           "mode": "100644",
           "path": "E4_EXECUTION_INPUT.json",
-          "sha": "428422fc77c5335a43b9c978515445f056d0d2c6",
+          "sha": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
           "size": 12601,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/428422fc77c5335a43b9c978515445f056d0d2c6"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/89dab4bdb446bb26d06c4de26ca8d32ea5c32674"
         },
         {
           "mode": "100644",
@@ -38351,10 +38351,10 @@
         {
           "mode": "100644",
           "path": "RECOVERY_RESULT.json",
-          "sha": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+          "sha": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
           "size": 456423,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/9c14f0c7eef7ed15b9148947ee729836dc2aefe1"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b930bffab5a0e9c9e9ad2b5f65804c236b199e51"
         },
         {
           "mode": "100644",
@@ -44402,10 +44402,10 @@
         {
           "mode": "100644",
           "path": "CURRENT_PROJECTION.json",
-          "sha": "d20138ab763408bbbd793c1ff27778d866b29009",
+          "sha": "3c187aada912a867711f1f3adcf32fe99e99f26e",
           "size": 596276,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d20138ab763408bbbd793c1ff27778d866b29009"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3c187aada912a867711f1f3adcf32fe99e99f26e"
         },
         {
           "mode": "100644",
@@ -44720,10 +44720,10 @@
         {
           "mode": "100644",
           "path": "source-includes.txt",
-          "sha": "d64110d838a6a2632f8483c88ba0b2b94901e70d",
+          "sha": "e91d85faf0dce29a4bc7e13b4bffb9dd250387ac",
           "size": 39132,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d64110d838a6a2632f8483c88ba0b2b94901e70d"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e91d85faf0dce29a4bc7e13b4bffb9dd250387ac"
         },
         {
           "mode": "040000",
@@ -53366,18 +53366,18 @@
         {
           "mode": "100644",
           "path": "AMENDMENT.json",
-          "sha": "5009d7d338eaaca207129c277acc8513351939cc",
+          "sha": "fa4cdc735f58059920dc217be6b00819a859eeba",
           "size": 1177,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/5009d7d338eaaca207129c277acc8513351939cc"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/fa4cdc735f58059920dc217be6b00819a859eeba"
         },
         {
           "mode": "100644",
           "path": "BUILD_ROLE_MAP.json",
-          "sha": "eed55a4d5b77d6bfe61746576409ae68d46f8a84",
+          "sha": "2bb90dc2511c26ea6181e949b68c1d7013c9b157",
           "size": 63816,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/eed55a4d5b77d6bfe61746576409ae68d46f8a84"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2bb90dc2511c26ea6181e949b68c1d7013c9b157"
         },
         {
           "mode": "100644",
@@ -53414,26 +53414,26 @@
         {
           "mode": "100644",
           "path": "FILE_SEALS.json",
-          "sha": "3c068f6e10cc156cee9769a94997f5b7fbb3c4d9",
+          "sha": "d3abd93bdb9fd469679539885ee9b672c713695d",
           "size": 183376,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3c068f6e10cc156cee9769a94997f5b7fbb3c4d9"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d3abd93bdb9fd469679539885ee9b672c713695d"
         },
         {
           "mode": "100644",
           "path": "INVENTORY_REVIEW.json",
-          "sha": "e3e43e60d7ed5247cadab7e58c5515e6e7e07136",
+          "sha": "b8c254769db1c67a930d4946c491619a56ea8052",
           "size": 14727,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e3e43e60d7ed5247cadab7e58c5515e6e7e07136"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b8c254769db1c67a930d4946c491619a56ea8052"
         },
         {
           "mode": "100644",
           "path": "PARENT_BUILD_CONTEXT.json",
-          "sha": "665dac597b1b33414e152c9224c840e7e01127d5",
+          "sha": "8d43fa29a81040d3572525b3c864841a7a35643b",
           "size": 112397,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/665dac597b1b33414e152c9224c840e7e01127d5"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8d43fa29a81040d3572525b3c864841a7a35643b"
         },
         {
           "mode": "100644",

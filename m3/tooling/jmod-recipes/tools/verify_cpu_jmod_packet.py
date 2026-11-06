@@ -60,10 +60,10 @@ def check(
 
     for name in sorted(by_source):
         src, mapped, evidence = by_source[name], by_target[name], by_result[name]
-        if not name.startswith("com.synexia.m3.") or mapped["intake_mode"] != "INDEPENDENT_APACHE_MODULE":
+        if not name.startswith("jdk.internal.m3.") or mapped["intake_mode"] != "INDEPENDENT_APACHE_MODULE":
             raise Refusal(f"unknown CPU tool authority {name}")
-        suffix = name.removeprefix("com.synexia.m3.")
-        if mapped["candidate_target_module"] != "com.m3.tools." + suffix:
+        suffix = name.removeprefix("jdk.internal.m3.")
+        if mapped["candidate_target_module"] != "jdk.m3.tools." + suffix:
             raise Refusal(f"target naming/role drift {name}")
         if mapped["status"] != "QUALIFICATION_PENDING" or mapped["phase"] != "OPTIONAL_TOOLING":
             raise Refusal(f"unreviewed automatic product promotion {name}")

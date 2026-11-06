@@ -12,7 +12,7 @@
     {
       "path": "CHANGE_CONTEXT.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/CHANGE_CONTEXT.json",
-      "sha256": "d52cd63494d7ae9d0ff5c5e20320ff3f0a3984f071d100680cd3240cc662d943",
+      "sha256": "11c69645fae18c8677102d77a9c524a6942eb1ba12d7717ca942223e5e5fcab2",
       "bytes": 1930,
       "kind": "byte-preserved-evidence"
     },
@@ -33,14 +33,14 @@
     {
       "path": "EVENTS.jsonl",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/EVENTS.jsonl",
-      "sha256": "ab42f2eb18fb106801cbb667b42236a03817c8fc69959ced1e8458fcf678e20b",
+      "sha256": "52b08182c3cc09bd7a45aedf2c3e4549c2e1bd7ffc4f49f7b7d02833ae83d068",
       "bytes": 38095,
       "kind": "byte-preserved-evidence"
     },
     {
       "path": "FINAL_PREPARATION.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/FINAL_PREPARATION.json",
-      "sha256": "db945ebc8a5be6139aa5d3f0eea85b145f47bb86377a575349d4f6ce7766bd4c",
+      "sha256": "6b4e92dbbaffada6a3c4149c3843b5f3708556cc3140cb1e65ef82cbb6384067",
       "bytes": 2261,
       "kind": "byte-preserved-evidence"
     },
@@ -68,7 +68,7 @@
     {
       "path": "QUALIFICATION_RECEIPT.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/QUALIFICATION_RECEIPT.json",
-      "sha256": "75a655ad9b8461dfe9f525761e78899c7d9a2747b943ab8362cf6adbc655fe64",
+      "sha256": "3660a856ddd12cb2f2efccd17e06ec68991771adc08258ebfe46ff42fe357367",
       "bytes": 13659,
       "kind": "byte-preserved-evidence"
     },
@@ -80,7 +80,7 @@
     },
     {
       "path": "ROOT_HANDOFF.json",
-      "sha256": "d0043e207b7c7c3728d15c94e12b112f1a3ab6a43a4420e4b75563ccbe49aadb",
+      "sha256": "16a74e7498ce677d2110e3994b53600150cef1fe37958b407e4878a85594e856",
       "bytes": 5437,
       "kind": "authored-handoff-document"
     },
@@ -94,27 +94,27 @@
     {
       "path": "SOURCE_INVENTORY.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/SOURCE_INVENTORY.json",
-      "sha256": "b9040c7aff815f552406c12d169a31d631f49fed4c065748bed59e8ab3178072",
+      "sha256": "20ed052124863081933f1e3f24badfbdfdb7f89d550260d2c10947f16f04aefc",
       "bytes": 6354,
       "kind": "byte-preserved-evidence"
     },
     {
       "path": "SOURCE_LOCK.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/SOURCE_LOCK.json",
-      "sha256": "cbeed0552c0c43534fcf83b0d748ae1642c9a6abe3d5c0a51e89e3a7e565c564",
+      "sha256": "6004b332fe0ea3882613289da36cb46cdf4cf25fca65590e52026157e4fab486",
       "bytes": 7949,
       "kind": "byte-preserved-evidence"
     },
     {
       "path": "STAGE_OUTCOMES.json",
-      "sha256": "0caa6063a9a381190883d6e0324aa6911f23c9f903532531165fcc49a4f5cea2",
+      "sha256": "ad268ede80fb07ae629cbad787220cd0ae1d5d1145a321eac462d936b61c3536",
       "bytes": 15654,
       "kind": "authored-handoff-document"
     },
     {
       "path": "logs/01-seal-inputs.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/01-seal-inputs.json",
-      "sha256": "54e2a6139571b2a1ec23460d39ddf8bd801f2c76df81c98b330bddbc3f50f499",
+      "sha256": "bd0aa39d847aa5892d9faf1cd98945fbd1d6ef7699a028ea0bf89580871d5bb8",
       "bytes": 1050,
       "kind": "byte-preserved-evidence"
     },
@@ -156,7 +156,7 @@
     {
       "path": "logs/03-authoring-compile.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/03-authoring-compile.json",
-      "sha256": "c7cac7ea35889cce476c62767122ca2e9827aa05e2b22415225ac956e826c1ce",
+      "sha256": "7d42d2f2ab87fbf528b6d9cb1c7fc5c41fdfa7059ca60b806e0121d09c8886ba",
       "bytes": 830,
       "kind": "byte-preserved-evidence"
     },
@@ -170,7 +170,7 @@
     {
       "path": "logs/03b-authoring-compile.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/03b-authoring-compile.json",
-      "sha256": "764e32519e529940d47ed8a3a795e76353d644cb97820e3cec9811810213e9b9",
+      "sha256": "1bd025a370e5d1f921c1eabadfa3f5754b21a8d3409903e51dcb91621d84ca52",
       "bytes": 832,
       "kind": "byte-preserved-evidence"
     },
@@ -184,7 +184,7 @@
     {
       "path": "logs/04-authoring-tests.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/04-authoring-tests.json",
-      "sha256": "4cf9380b7eae37f5100b703f7a63de7324d96e61edc2311315f28d738f770371",
+      "sha256": "63de28a902679ebe26a5d02295ab1e6eceb0c7abb493b373b626f4ad1bb61758",
       "bytes": 832,
       "kind": "byte-preserved-evidence"
     },
@@ -198,7 +198,7 @@
     {
       "path": "logs/04b-authoring-tests.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/04b-authoring-tests.json",
-      "sha256": "7bdcdb8a7c41f5714f72752550aa85689a154a288696f0e6c2c34de2890845c9",
+      "sha256": "6c6ba3310cc962f50a989428353327d29869668c9ce52fbe381fbecf813becf1",
       "bytes": 834,
       "kind": "byte-preserved-evidence"
     },
@@ -212,7 +212,7 @@
     {
       "path": "logs/05-authoring-contracts.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/05-authoring-contracts.json",
-      "sha256": "8cab94a56f8540654631d985be58d338edbb5a38310a40f96de8ced8fd9d2cc9",
+      "sha256": "a0898015cd31924331645ce8f8a3530ca78324639e850cfd86bd55f0e8346676",
       "bytes": 1000,
       "kind": "byte-preserved-evidence"
     },
@@ -226,7 +226,7 @@
     {
       "path": "logs/05b-sealing-contracts.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/05b-sealing-contracts.json",
-      "sha256": "bbe69a17b1bb1889260804ad8544ffb952c7b1c3f87aa6178ad74ce592d877ac",
+      "sha256": "f8c9e89cc774a4c131ba3d661648829c89e848b075035ab1aa0087dec4d2f6bc",
       "bytes": 582,
       "kind": "byte-preserved-evidence"
     },
@@ -240,7 +240,7 @@
     {
       "path": "logs/05c-receiver-contracts.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/05c-receiver-contracts.json",
-      "sha256": "7be7367181448fc9df9b3f870c7c82ccde2dd546d21760b37abc5941ee78fab8",
+      "sha256": "ca1f952781ebc41d605bbeaea64c0b185ad21becd393240b2ce1b7a0fa566461",
       "bytes": 1188,
       "kind": "byte-preserved-evidence"
     },
@@ -254,7 +254,7 @@
     {
       "path": "logs/06a-receiver-check.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/06a-receiver-check.json",
-      "sha256": "3fe331f2b31556864de53fb7bcc61672c04476861e05a6482871a63d6c623173",
+      "sha256": "69d1956d85665b9642eaed5ee118939633fa5eb41b8d1b27e5eb777ccf44ee6f",
       "bytes": 884,
       "kind": "byte-preserved-evidence"
     },
@@ -268,7 +268,7 @@
     {
       "path": "logs/06b-receiver-apply.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/06b-receiver-apply.json",
-      "sha256": "32d37b056fe0b3403b37712039ca569d27f34a7cde43aa4ca88bb7b0460020bb",
+      "sha256": "340ebbc2a73551ed9b233d11c69ed2ac6b8fc1573d2545711d8d797c9c95adc3",
       "bytes": 865,
       "kind": "byte-preserved-evidence"
     },
@@ -282,7 +282,7 @@
     {
       "path": "logs/06c-receiver-fixedpoint.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/06c-receiver-fixedpoint.json",
-      "sha256": "82bb3be767cb62a91c9d4c29883341d6c263cae5dac71c1c2aaf49126a25a98e",
+      "sha256": "709a0eebbd184106f0bfcb46e116f096510556d24d3c75e0da4c1de760d9412f",
       "bytes": 870,
       "kind": "byte-preserved-evidence"
     },
@@ -352,7 +352,7 @@
     {
       "path": "logs/11-seal-refinement.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/11-seal-refinement.json",
-      "sha256": "46807ae2b1a66db4578c9e4852e69293bd660b71c2209d18bc0df793a3e169d6",
+      "sha256": "a7daca8740e1e21f9dfd644db803984f4b89b9b9c685245954d339c6f4152bed",
       "bytes": 1054,
       "kind": "byte-preserved-evidence"
     },
@@ -408,7 +408,7 @@
     {
       "path": "logs/13-authoring-compile.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/13-authoring-compile.json",
-      "sha256": "907add059c0be29f9c7e7f1d90e7059edbdc15f8fbaf6b1fcb0ab3c5c38ca735",
+      "sha256": "7c2553b5fbe019f64bbec5ec01753877d2a0fbf125f0ff85f94d2eee9a08a8c9",
       "bytes": 830,
       "kind": "byte-preserved-evidence"
     },
@@ -422,7 +422,7 @@
     {
       "path": "logs/14-authoring-tests.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/14-authoring-tests.json",
-      "sha256": "2038cdfe0af9898c778402e729bad5af813e044139f07c8eecfa961c15a176c6",
+      "sha256": "e494c533e4cd85a4080b678b6eae69767c6fafa0055b87e2657b6c9950199174",
       "bytes": 832,
       "kind": "byte-preserved-evidence"
     },
@@ -436,7 +436,7 @@
     {
       "path": "logs/21-seal-effective-selection.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/21-seal-effective-selection.json",
-      "sha256": "d3395aef5a9e8cf17b46ad16ce4f5805351dfd1145681460490d5fe4dc1df4c7",
+      "sha256": "bb34e599a08c8f76f68ab03c4e58cb833a0a125ab3effc80ecc2ac00d2841f9c",
       "bytes": 1063,
       "kind": "byte-preserved-evidence"
     },
@@ -478,7 +478,7 @@
     {
       "path": "logs/23-authoring-compile.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/23-authoring-compile.json",
-      "sha256": "7e6b28bac7f8d4a5989c448bd76d8de82a41ae8c18e2cef2db2dcf2b3b1bb86d",
+      "sha256": "cf42fd5a0ccf7b509dd85d24fc8c0379f938c7892d4985a1495a04d0633f5723",
       "bytes": 830,
       "kind": "byte-preserved-evidence"
     },
@@ -492,7 +492,7 @@
     {
       "path": "logs/24-authoring-tests.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/24-authoring-tests.json",
-      "sha256": "beabdb287c21b5fc8d5e00137daeac896518be4184b2010d7074fab696999d46",
+      "sha256": "25750d3f80966d7168bc64d9250b982bfccce02ce91a4c5bf4a5d524d657108c",
       "bytes": 832,
       "kind": "byte-preserved-evidence"
     },
@@ -506,7 +506,7 @@
     {
       "path": "logs/25-receiver-contracts.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/25-receiver-contracts.json",
-      "sha256": "03826103f05625fe7a78a9a3a1f9ca1b90c7fd5019fb3b1d16255a34e44c7e77",
+      "sha256": "0f4b3df3b56dc2ff5ce7f2e9d9df0802fcb87eb2902671203fd5df4fb4ae3c79",
       "bytes": 1204,
       "kind": "byte-preserved-evidence"
     },
@@ -520,7 +520,7 @@
     {
       "path": "logs/26a-receiver-check.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/26a-receiver-check.json",
-      "sha256": "5f918b4f35e4387b6ea704507d3670e1eb6a20d0b8efeec84654bff6044c6929",
+      "sha256": "1a5fefcae0c33a27532589c2669a969cf4be1909927751a3c246f36ddb4d132a",
       "bytes": 889,
       "kind": "byte-preserved-evidence"
     },
@@ -534,7 +534,7 @@
     {
       "path": "logs/26b-receiver-apply.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/26b-receiver-apply.json",
-      "sha256": "bc863258889fd00bbc53f4f6ee4b4e8f8785c87c74cb3b8480567ec40d128f7f",
+      "sha256": "f82af38d0e7989391f0db122a791d0af67e7c3743de54f1e9bb83c65abacd201",
       "bytes": 871,
       "kind": "byte-preserved-evidence"
     },
@@ -548,7 +548,7 @@
     {
       "path": "logs/26c-receiver-fixedpoint.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/logs/26c-receiver-fixedpoint.json",
-      "sha256": "c0fffa3b80ca7838b382bdd26a68c40a0a0a901b17b852d28617d111ce1d31eb",
+      "sha256": "70820c7ba80076e146ff61452abf49378f713b555b9930eab917a770a14a7b7d",
       "bytes": 876,
       "kind": "byte-preserved-evidence"
     },
@@ -639,7 +639,7 @@
     {
       "path": "preparation/normalize_service_template.py",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/normalize_service_template.py",
-      "sha256": "85422aaf31a0a2f1a6af4c4fb52f56a26f9c6aa0a39bdbdbd2fe56c6c911e8c6",
+      "sha256": "b6d9b24f29439c6f17fe6242c2d7ce17d8a343e46102cd3b3f4f52abde511277",
       "bytes": 1765,
       "kind": "byte-preserved-evidence"
     },
@@ -737,14 +737,14 @@
     {
       "path": "sdk/RECEIVER_CONTRACT_RECEIPT.json",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/gradle-provider-20261018/receiver-proof-effective-selection/evidence/RECEIVER_RECEIPT.json",
-      "sha256": "bfe35b0316c53b23da8b425bbadac75d304addcdb373a59e797c1107af24f8b1",
+      "sha256": "aa288abc2fa59486da2f9be072fc3414dbf41c476bc47a30912d5722cb4ad093",
       "bytes": 1746,
       "kind": "byte-preserved-evidence"
     },
     {
       "path": "sdk/SDK_INPUTS.tsv",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/gradle-provider-20261018/candidate/SDK_INPUTS.tsv",
-      "sha256": "813f9c8ee6f3283cd54b2e23876a5d28e3a6564bd7c616619b8bc1ff3999f885",
+      "sha256": "eba212d3db66dc41b97ac00dcc7f2b99076582e42411bb9c8836dbba90be3e8d",
       "bytes": 4580,
       "kind": "byte-preserved-evidence"
     },
@@ -772,7 +772,7 @@
     {
       "path": "sdk/test-reports/com.synexia.rewrite.M3TaskRecipeTest.txt",
       "source_path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/gradle-provider-20261018/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt",
-      "sha256": "5a873cef5b804753517e9b3b4aefc21810c2773f76c00efe5d29acb6ac838ec6",
+      "sha256": "21df10484e08d0c2a79cc7942145af91469c57d2f17ce7f485f6417bb657c29e",
       "bytes": 322,
       "kind": "byte-preserved-evidence"
     },

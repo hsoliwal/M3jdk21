@@ -114,7 +114,7 @@ jobs:
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
           bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
           mini_source=source/"m3/tooling/text-metadata-current-owner/source"
-          native_task=mini_source/"synexia-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019"
+          native_task=mini_source/"m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019"
           sdk=native_task/"guard-sdk"
           start=time.monotonic()
           active_command=None

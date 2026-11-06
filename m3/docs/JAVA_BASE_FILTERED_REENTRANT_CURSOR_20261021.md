@@ -11,7 +11,7 @@ private `SelectionSpliterator.tryAdvance` behavioral atom.
 ## Donor inventory and category decision
 
 - Existing M3JDK21 convergence donor:
-  `m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java`
+  `m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java`
   already preserves enclosing consumer and delivered state.
 - Existing integrated receiver:
   `src/java.base/share/classes/java/util/CollectionViews.java`

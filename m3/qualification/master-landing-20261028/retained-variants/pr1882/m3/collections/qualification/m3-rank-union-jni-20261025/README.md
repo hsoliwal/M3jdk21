@@ -12,10 +12,10 @@ The algorithm uses LeetCode #88 sorted two-cursor merge and #26 adjacent distinc
 - Original Java batch kernel before: `19dbdde0a25da8484b225cd88b9cec586e0431e2`, after: `201c51afbf5706a146fa0cef9317e08fc4e9a58a`
 - Original Java rank index before: `7003a9bf043b118f25f2d21428ddb8ec86267e32`, after: `00aa416af3cf08ebae2db8ef19cac66fe5f8c29a`
 - Original JNI C before: `04d9410518bfae1894be2fd7324d5c952699d1ce`, after: `7ea1afda505894b9cc1294bfc1c0a74a58ea0587`
-- Standalone differential contract: `2aa7692d5480f557a976374509e4bc47915ffb0a`
-- JUnit5 entrypoint: `308e29580d9f22c7648b9af0bf01d0755f4ae836`
-- Legacy ABI compatibility contract: `75b2ae741d4991de4d44055c753264ac442b474d`
-- Original exact-head Java/C JNI workflow: `70c58641533145a77294a68430067049a75b835b`
+- Standalone differential contract: `c08a55c0ae65356f59e27a3162abd382c0cf6e0a`
+- JUnit5 entrypoint: `71fa656ccc1e8566bc7c64728a07a99115b57584`
+- Legacy ABI compatibility contract: `1c7491f76f0e6977229fbf9f8d77716fcdddf069`
+- Original exact-head Java/C JNI workflow: `df87e43b6c3369560adaca53ecce8d1211777d10`
 
 ## Observed evidence and hold gates
 **PASS local standalone prototype:** JDK21 `javac --release 21 -Xlint:all -Werror`, C17 `gcc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined`, 7,200 Java assertions, 10,797 JNI assertions each in normal and interpreter `-Xint` with `-Xcheck:jni`; old export-free JNI stub fallbacks and required-native refusal passed. These are **prototype tests**, not claims that full original repository C sources or all JDK modules compiled.

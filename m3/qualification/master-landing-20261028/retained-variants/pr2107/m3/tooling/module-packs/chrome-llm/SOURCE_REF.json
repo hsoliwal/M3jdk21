@@ -3,8 +3,8 @@
   "source_repository": "hsoliwal/com.synexia",
   "source_revision": "2ab439480ecb0643615e85b42def954dbf3b5627",
   "historical_browser_revision": "c26433b5856192807616c9fb09741de0b1bdd93c",
-  "recipe_id": "com.synexia.m3jdk.ChromeSummary20261029",
-  "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029",
+  "recipe_id": "jdk.internal.m3.m3jdk.ChromeSummary20261029",
+  "recipe_crate": "m3-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029",
   "dataset": "current",
   "manifest_crate_name": "m3-chrome-summary-20261029-current",
   "target_repository": "hsoliwal/M3jdk21",
@@ -12,10 +12,10 @@
   "recipe_revision": "b30eb72a8165f81a17c9d22e3711370d00d0f9aa",
   "recipe_revision_status": "PUBLISHED_IN_SOURCE_DRAFT",
   "recipe_execution_receipt": {
-    "path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/SDK_RESULTS.tsv",
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/SDK_RESULTS.tsv",
     "sha256": "421d2564576fcff4841c35b7f0b96fc85f9e225b0021c1bda77a871303b63a9c",
     "files": 63,
-    "inputs_path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/SDK_INPUTS.tsv",
+    "inputs_path": "m3-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/SDK_INPUTS.tsv",
     "inputs_sha256": "703ae259a33094f14583760e39e1b6688faa7a10a63e2082920d14637fa33f0b"
   },
   "target_qualification_receipt": "RECEIVER_RECEIPT.json",

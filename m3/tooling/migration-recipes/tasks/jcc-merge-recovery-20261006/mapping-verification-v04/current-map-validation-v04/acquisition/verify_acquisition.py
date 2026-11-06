@@ -181,8 +181,8 @@ def main():
     requests = [
         ("new-matcher.json", "src/java.base/share/classes/java/util/regex/Matcher.java",
          next(row for row in matcher_tree["tree"] if row["path"] == "Matcher.java")),
-        ("new-mr-manifest.json", "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
-         next(row for row in m3["tree"] if row["path"] == "tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv")),
+        ("new-mr-manifest.json", "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+         next(row for row in m3["tree"] if row["path"] == "tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv")),
     ]
     for filename, p, entry in requests:
         capture = HERE / "captures" / filename

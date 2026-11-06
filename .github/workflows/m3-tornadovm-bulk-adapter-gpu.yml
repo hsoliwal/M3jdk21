@@ -38,7 +38,7 @@ jobs:
           --backend opencl --out "$RUNNER_TEMP/m3-tornado-gpu-proof"
           --allow-bootstrap-jdk --require-gpu --resolve-build-tools --phase all
       # This hosted/bootstrap toolchain lane is a device qualification result.
-      # Matched M3JDK21 release admission additionally requires --m3-jdk-receipt.
+      # Matched M3JDK 21 release admission additionally requires --m3jdk-receipt.
       - name: Preserve device identity, parity and installed-image evidence
         if: always()
         uses: actions/upload-artifact@v4

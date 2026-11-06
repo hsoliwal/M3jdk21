@@ -19,13 +19,13 @@ SCHEMA = "M3JDK21_NATIVE_TREE_PLAN_COMMIT_RECEIVER_V1"
 SHA1 = re.compile(r"^[0-9a-f]{40}$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 EXPECTED = {
-    "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
-    "m3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java",
 }
 CANONICAL_CATALOGUE = {
     "repository": "hsoliwal/com.synexia",
     "ref": "edea893880b030935da5fd3f1ab35f7ab7cec8d4",
-    "path": "synexia-openrewrite-recipes/crates/m3-tree-plan-commit-identity-20261027/CANDIDATE_CATALOGUE.tsv",
+    "path": "m3-openrewrite-recipes/crates/m3-tree-plan-commit-identity-20261027/CANDIDATE_CATALOGUE.tsv",
     "git_blob_sha1": "6f088b752df3c085cc2563ef05ecff803c67515d",
     "sha256": "6f2cb23cf9a499cf34e32cfbae9fb5ccf183d70adaf694231fa28ac018044323",
     "problem_categories": 8

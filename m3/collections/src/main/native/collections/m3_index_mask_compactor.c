@@ -36,6 +36,28 @@ static jint m3_count_window(JNIEnv *env, jbyteArray states,
     return kept;
 }
 
+/* Additive count-only JNI ABI borrowed as a concept from the Synexia
+ * M3IndexMaskCompactor donor. Reuse the target's existing bounded count kernel.
+ * Preserve all existing exports and never allocate output row/index arrays.
+ */
+JNIEXPORT jint JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectedCountNative(
+        JNIEnv *env, jclass owner, jbyteArray states, jint required_mask) {
+    (void)owner;
+    if (states == NULL || required_mask < 0 || required_mask > 255) {
+        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+        if (type != NULL) {
+            (*env)->ThrowNew(env, type, "invalid primitive count inputs");
+            (*env)->DeleteLocalRef(env, type);
+        }
+        return 0;
+    }
+    jsize length = (*env)->GetArrayLength(env, states);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    jint result = m3_count_window(env, states, 0, length, required_mask);
+    return result < 0 ? 0 : result;
+}
+
 /* First retained ordinal in one bounded marks page. Zero-mask never reads marks. */
 static jsize m3_first_selected(const jbyte *marks, jsize size, jint mask) {
     if (mask == 0) return 0;
@@ -103,7 +125,7 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask) {
     (void)owner;
     if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
@@ -130,13 +152,13 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
 
 /* Capability discovery keeps older binaries usable through their original native ABI. */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner) {
+Java_jdk_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states,
         jint first, jint length, jint required_mask) {
     (void)owner;
@@ -198,13 +220,13 @@ static int m3_window_valid(JNIEnv *env, jarray rows, jbyteArray states,
 
 /* ABI probe for direct logical-position selection from the state lane. */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner) {
+Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint mask) {
     (void)owner;
     if (states == NULL || mask < 0 || mask > 255) {
@@ -263,14 +285,14 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
  * Existing required-only symbols remain unchanged for binary compatibility.
  */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(
         JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint required, jint excluded) {
     (void)owner;
     if (states == NULL || required < 0 || required > 255
@@ -348,7 +370,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         JNIEnv *env, jclass owner, jintArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length, jint mask) {
     (void)owner;
@@ -359,7 +381,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         JNIEnv *env, jclass owner, jlongArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length, jint mask) {
     (void)owner;
@@ -459,7 +481,7 @@ static jint m3_count_window_two_masks(JNIEnv *env, jbyteArray states,
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(
         JNIEnv *env, jclass owner) {
     (void) env;
     (void) owner;
@@ -467,7 +489,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
         JNIEnv *env, jclass owner, jintArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length,
         jint required, jint excluded) {
@@ -533,7 +555,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
         JNIEnv *env, jclass owner, jlongArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length,
         jint required, jint excluded) {
@@ -596,4 +618,86 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
         return NULL;
     }
     return result;
+}
+
+/* Additive, entryless logical-position paging ABI for reusable Java-owned int lanes.
+ * All offsets are checked with subtraction before any JNI region access. No heap
+ * pointers or global references escape; required native calls never fall back.
+ */
+static void m3_positions_page_invalid(JNIEnv *env) {
+    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+    if (type != NULL) {
+        (*env)->ThrowNew(env, type, "invalid position page bounds or masks");
+        (*env)->DeleteLocalRef(env, type);
+    }
+}
+
+JNIEXPORT jint JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_positionsPageAbiNative(
+        JNIEnv *env, jclass owner) {
+    (void)env; (void)owner;
+    return 1;
+}
+
+JNIEXPORT jlong JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsPageNative(
+        JNIEnv *env, jclass owner, jbyteArray states, jint first, jint length,
+        jint required, jint excluded, jintArray output, jint output_offset,
+        jint capacity) {
+    (void)owner;
+    if (states == NULL || output == NULL || first < 0 || length < 0
+            || output_offset < 0 || capacity < 0 || required < 0 || required > 255
+            || excluded < 0 || excluded > 255 || (length != 0 && capacity == 0)) {
+        m3_positions_page_invalid(env);
+        return 0;
+    }
+    jsize state_length = (*env)->GetArrayLength(env, states);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    jsize output_length = (*env)->GetArrayLength(env, output);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    if (first > state_length || length > state_length - first
+            || output_offset > output_length || capacity > output_length - output_offset) {
+        m3_positions_page_invalid(env);
+        return 0;
+    }
+    jint end = first + length;
+    if ((required & excluded) != 0) return ((jlong)end) << 32;
+    const unsigned int mask = (unsigned int)(required | excluded);
+    jbyte marks[M3_CHUNK];
+    jint indices[M3_CHUNK];
+    jint written = 0;
+    for (jint examined = 0; examined < length;) {
+        jint remaining = length - examined;
+        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+        if (mask != 0U) {
+            (*env)->GetByteArrayRegion(env, states, first + examined, chunk, marks);
+            if ((*env)->ExceptionCheck(env)) return 0;
+        }
+        jsize buffered = 0;
+        for (jsize i = 0; i < chunk; i++) {
+            unsigned int flags = mask == 0U ? 0U : (unsigned int)(unsigned char)marks[i];
+            if ((flags & mask) == (unsigned int)required) {
+                indices[buffered++] = first + examined + i;
+                if (buffered == M3_CHUNK || written + buffered == capacity) {
+                    (*env)->SetIntArrayRegion(env, output, output_offset + written,
+                            buffered, indices);
+                    if ((*env)->ExceptionCheck(env)) return 0;
+                    written += buffered;
+                    buffered = 0;
+                    if (written == capacity) {
+                        jint next = first + examined + i + 1;
+                        return (((jlong)next) << 32) | (jlong)(unsigned int)written;
+                    }
+                }
+            }
+        }
+        if (buffered != 0) {
+            (*env)->SetIntArrayRegion(env, output, output_offset + written,
+                    buffered, indices);
+            if ((*env)->ExceptionCheck(env)) return 0;
+            written += buffered;
+        }
+        examined += chunk;
+    }
+    return (((jlong)end) << 32) | (jlong)(unsigned int)written;
 }

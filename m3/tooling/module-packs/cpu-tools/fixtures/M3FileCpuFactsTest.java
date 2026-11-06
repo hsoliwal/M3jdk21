@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-import com.m3.tools.cpu.M3FileCpuFacts;
+import jdk.m3.tools.cpu.M3FileCpuFacts;
 import com.sun.source.tree.Tree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.M3AST;

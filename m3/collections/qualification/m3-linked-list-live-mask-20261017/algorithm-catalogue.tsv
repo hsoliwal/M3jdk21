@@ -1,5 +1,5 @@
 problem_category	candidate	decision	complexity	contract_proof	provenance
-PHYSICAL_SLOT_LIFECYCLE	Existing M3LinkedList integer free links	REFINE	O(1) update	First-party source; preserve List/Deque API and modCount	hsoliwal/M3jdk21 master Git da39d792baf7311691d2d6e8398adf62f3aa88a8
+PHYSICAL_SLOT_LIFECYCLE	Existing M3LinkedList integer free links	REFINE	O(1) update	First-party source; preserve List/Deque API and modCount	hsoliwal/M3jdk21 master Git a3721fc90071d6915ab6682ad4cb9d9147ea0b1d
 BIT_MASK_MEMBERSHIP	Packed long[] one bit per physical slot	SELECT	O(1) lookup; O(capacity/64) bits	No Node/Entry storage; reuse original array owner	Synexia first-party Apache-2.0
 INVARIANT_VERIFICATION	Temporary boolean[used] allocation	REPLACE	O(used) time, O(1) extra memory	Live/free mask plus walk bound detects corruption	M3LinkedList existing verifier
 ARRAY_GROWTH	M3SlotArrays.grow and Arrays.copyOf	REUSE	Amortized O(1) insert	All four backing lanes staged before publish	M3SlotArrays existing owner

@@ -20,7 +20,7 @@
 /*
  * @test
  * @bug 8298390
- * @summary M3JDK21 ML-KEM provider registration and opt-in NamedParameterSpec smoke
+ * @summary M3JDK 21 ML-KEM provider registration and opt-in NamedParameterSpec smoke
  * @run main/othervm MLKEMProviderSmoke
  */
 

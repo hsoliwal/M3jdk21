@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.HashPinnedTargetPathsCompat
+name: jdk.internal.m3.HashPinnedTargetPathsCompat
 displayName: Restore the canonical targetPaths accessor
 description: One exact provider replacement and six unchanged owning test/resource inputs; preserve all receiving parser and PlainText behavior.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedTargetPathsCompatRecipe
+  - jdk.internal.m3.rewrite.M3HashPinnedTargetPathsCompatRecipe

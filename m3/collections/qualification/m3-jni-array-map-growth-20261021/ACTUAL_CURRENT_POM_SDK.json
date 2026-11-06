@@ -43,7 +43,7 @@
   "preserves_current_variant": true,
   "report": {
     "bytes": 16065,
-    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-pom-composition-v1\\sdk-output-v1\\surefire-reports\\TEST-com.synexia.rewrite.M3CollectionsArrayDependencyPomRecipeTest.xml",
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-pom-composition-v1\\sdk-output-v1\\surefire-reports\\TEST-jdk.internal.m3.rewrite.M3CollectionsArrayDependencyPomRecipeTest.xml",
     "sha256": "a690f1933c8fa5089ee0e5ca0303904e2511ff2bb55a20960fe4a9d04e290e0e"
   },
   "schema": "M3_CURRENT_ARRAY_COMPOSITION_ACTUAL_SDK_V1",

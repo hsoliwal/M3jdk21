@@ -1,0 +1,589 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< m3.intake:snakeyaml-2.6 >-----------------------
+[INFO] Building snakeyaml-2.6 2.6-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ snakeyaml-2.6 ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [snakeyaml-2.6] Resolving Poms...
+[INFO] Project [snakeyaml-2.6] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\comments\CommentEventsCollector.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\comments\CommentEventsCollector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\comments\CommentLine.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\comments\CommentLine.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\comments\CommentType.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\comments\CommentType.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\composer\Composer.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\composer\Composer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.composer, newPackageName=com.m3.lib.snakeyaml.composer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.resolver, newPackageName=com.m3.lib.snakeyaml.resolver, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\composer\ComposerException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\composer\ComposerException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.composer, newPackageName=com.m3.lib.snakeyaml.composer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\constructor\AbstractConstruct.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\AbstractConstruct.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\constructor\BaseConstructor.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\BaseConstructor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.composer, newPackageName=com.m3.lib.snakeyaml.composer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\constructor\Construct.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\Construct.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\constructor\Constructor.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\Constructor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\constructor\ConstructorException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\ConstructorException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\constructor\CustomClassLoaderConstructor.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\CustomClassLoaderConstructor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\constructor\DuplicateKeyException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\DuplicateKeyException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\constructor\SafeConstructor.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.internal, newPackageName=com.m3.lib.snakeyaml.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\DumperOptions.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\DumperOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.serializer, newPackageName=com.m3.lib.snakeyaml.serializer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\emitter\Emitable.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\emitter\Emitable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\emitter\Emitter.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\emitter\Emitter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.reader, newPackageName=com.m3.lib.snakeyaml.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\emitter\EmitterException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\emitter\EmitterException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\emitter\EmitterState.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\emitter\EmitterState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\emitter\ScalarAnalysis.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\emitter\ScalarAnalysis.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\env\EnvScalarConstructor.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\env\EnvScalarConstructor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.env, newPackageName=com.m3.lib.snakeyaml.env, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\error\Mark.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\error\Mark.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\error\MarkedYAMLException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\error\MarkedYAMLException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\error\MissingEnvironmentVariableException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\error\MissingEnvironmentVariableException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\error\YAMLException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\error\YAMLException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\AliasEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\AliasEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\CollectionEndEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\CollectionEndEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\CollectionStartEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\CollectionStartEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\CommentEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\CommentEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\DocumentEndEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\DocumentEndEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\DocumentStartEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\DocumentStartEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\Event.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\Event.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\ImplicitTuple.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\ImplicitTuple.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\MappingEndEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\MappingEndEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\MappingStartEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\MappingStartEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\NodeEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\NodeEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\ScalarEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\ScalarEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\SequenceEndEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\SequenceEndEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\SequenceStartEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\SequenceStartEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\StreamEndEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\StreamEndEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\events\StreamStartEvent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\events\StreamStartEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\extensions\compactnotation\CompactConstructor.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\extensions\compactnotation\CompactConstructor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.extensions.compactnotation, newPackageName=com.m3.lib.snakeyaml.extensions.compactnotation, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\extensions\compactnotation\CompactData.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\extensions\compactnotation\CompactData.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.extensions.compactnotation, newPackageName=com.m3.lib.snakeyaml.extensions.compactnotation, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\extensions\compactnotation\PackageCompactConstructor.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\extensions\compactnotation\PackageCompactConstructor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.extensions.compactnotation, newPackageName=com.m3.lib.snakeyaml.extensions.compactnotation, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\external\com\google\gdata\util\common\base\Escaper.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\external\com\google\gdata\util\common\base\Escaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.external.com.google.gdata.util.common.base, newPackageName=com.m3.lib.snakeyaml.external.com.google.gdata.util.common.base, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\external\com\google\gdata\util\common\base\PercentEscaper.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\external\com\google\gdata\util\common\base\PercentEscaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.external.com.google.gdata.util.common.base, newPackageName=com.m3.lib.snakeyaml.external.com.google.gdata.util.common.base, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\external\com\google\gdata\util\common\base\UnicodeEscaper.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\external\com\google\gdata\util\common\base\UnicodeEscaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.external.com.google.gdata.util.common.base, newPackageName=com.m3.lib.snakeyaml.external.com.google.gdata.util.common.base, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\inspector\TagInspector.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\inspector\TagInspector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.inspector, newPackageName=com.m3.lib.snakeyaml.inspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\inspector\UnTrustedTagInspector.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\inspector\UnTrustedTagInspector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.inspector, newPackageName=com.m3.lib.snakeyaml.inspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\internal\Logger.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\internal\Logger.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.internal, newPackageName=com.m3.lib.snakeyaml.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\introspector\BeanAccess.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\BeanAccess.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\introspector\FieldProperty.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\FieldProperty.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\introspector\GenericProperty.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\GenericProperty.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\introspector\MethodProperty.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\MethodProperty.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\introspector\MissingProperty.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\MissingProperty.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\introspector\Property.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\Property.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\introspector\PropertySubstitute.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\PropertySubstitute.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.internal, newPackageName=com.m3.lib.snakeyaml.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\introspector\PropertyUtils.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\PropertyUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\LoaderOptions.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\LoaderOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.inspector, newPackageName=com.m3.lib.snakeyaml.inspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\AnchorNode.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\AnchorNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\CollectionNode.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\CollectionNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\MappingNode.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\MappingNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\Node.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\Node.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.composer, newPackageName=com.m3.lib.snakeyaml.composer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\NodeId.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\NodeId.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\NodeTuple.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\NodeTuple.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\ScalarNode.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\ScalarNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\SequenceNode.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\SequenceNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\nodes\Tag.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\Tag.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\parser\Parser.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\parser\Parser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\parser\ParserException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\parser\ParserException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\parser\ParserImpl.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\parser\ParserImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.reader, newPackageName=com.m3.lib.snakeyaml.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\parser\Production.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\parser\Production.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\parser\VersionTagsTuple.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\parser\VersionTagsTuple.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\reader\ReaderException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\reader\ReaderException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.reader, newPackageName=com.m3.lib.snakeyaml.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\reader\StreamReader.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\reader\StreamReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.reader, newPackageName=com.m3.lib.snakeyaml.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\reader\UnicodeReader.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\reader\UnicodeReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.reader, newPackageName=com.m3.lib.snakeyaml.reader, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\representer\BaseRepresenter.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\BaseRepresenter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.representer, newPackageName=com.m3.lib.snakeyaml.representer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\representer\JsonRepresenter.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\JsonRepresenter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.representer, newPackageName=com.m3.lib.snakeyaml.representer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\representer\Represent.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\Represent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.representer, newPackageName=com.m3.lib.snakeyaml.representer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\representer\Representer.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\Representer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.representer, newPackageName=com.m3.lib.snakeyaml.representer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\representer\SafeRepresenter.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\SafeRepresenter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.representer, newPackageName=com.m3.lib.snakeyaml.representer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.reader, newPackageName=com.m3.lib.snakeyaml.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\resolver\Resolver.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\resolver\Resolver.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.resolver, newPackageName=com.m3.lib.snakeyaml.resolver, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\resolver\ResolverTuple.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\resolver\ResolverTuple.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.resolver, newPackageName=com.m3.lib.snakeyaml.resolver, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\scanner\Constant.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\scanner\Constant.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\scanner\Scanner.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\scanner\Scanner.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\scanner\ScannerException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\scanner\ScannerException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\scanner\ScannerImpl.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\scanner\ScannerImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.reader, newPackageName=com.m3.lib.snakeyaml.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\scanner\SimpleKey.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\scanner\SimpleKey.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.scanner, newPackageName=com.m3.lib.snakeyaml.scanner, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\serializer\AnchorGenerator.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\serializer\AnchorGenerator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.serializer, newPackageName=com.m3.lib.snakeyaml.serializer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\serializer\NumberAnchorGenerator.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\serializer\NumberAnchorGenerator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.serializer, newPackageName=com.m3.lib.snakeyaml.serializer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\serializer\Serializer.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\serializer\Serializer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.serializer, newPackageName=com.m3.lib.snakeyaml.serializer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.resolver, newPackageName=com.m3.lib.snakeyaml.resolver, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\serializer\SerializerException.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\serializer\SerializerException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.serializer, newPackageName=com.m3.lib.snakeyaml.serializer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\AliasToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\AliasToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\AnchorToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\AnchorToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\BlockEndToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\BlockEndToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\BlockEntryToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\BlockEntryToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\BlockMappingStartToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\BlockMappingStartToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\BlockSequenceStartToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\BlockSequenceStartToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\CommentToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\CommentToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.comments, newPackageName=com.m3.lib.snakeyaml.comments, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\DirectiveToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\DirectiveToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\DocumentEndToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\DocumentEndToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\DocumentStartToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\DocumentStartToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\FlowEntryToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\FlowEntryToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\FlowMappingEndToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\FlowMappingEndToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\FlowMappingStartToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\FlowMappingStartToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\FlowSequenceEndToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\FlowSequenceEndToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\FlowSequenceStartToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\FlowSequenceStartToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\KeyToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\KeyToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\ScalarToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\ScalarToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\StreamEndToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\StreamEndToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\StreamStartToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\StreamStartToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\TagToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\TagToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\TagTuple.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\TagTuple.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\Token.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\Token.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\tokens\ValueToken.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\tokens\ValueToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.tokens, newPackageName=com.m3.lib.snakeyaml.tokens, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\TypeDescription.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\TypeDescription.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.internal, newPackageName=com.m3.lib.snakeyaml.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\util\ArrayStack.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\ArrayStack.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\util\ArrayUtils.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\ArrayUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\util\EnumUtils.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\EnumUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\util\MergeUtils.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\MergeUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\util\PlatformFeatureDetector.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\PlatformFeatureDetector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\util\Tuple.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\Tuple.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\util\UriEncoder.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\UriEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.external.com.google.gdata.util.common.base, newPackageName=com.m3.lib.snakeyaml.external.com.google.gdata.util.common.base, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.util, newPackageName=com.m3.lib.snakeyaml.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\org\yaml\snakeyaml\Yaml.java to m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\Yaml.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.introspector, newPackageName=com.m3.lib.snakeyaml.introspector, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.constructor, newPackageName=com.m3.lib.snakeyaml.constructor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.representer, newPackageName=com.m3.lib.snakeyaml.representer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.serializer, newPackageName=com.m3.lib.snakeyaml.serializer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.composer, newPackageName=com.m3.lib.snakeyaml.composer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.resolver, newPackageName=com.m3.lib.snakeyaml.resolver, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.emitter, newPackageName=com.m3.lib.snakeyaml.emitter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.events, newPackageName=com.m3.lib.snakeyaml.events, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.parser, newPackageName=com.m3.lib.snakeyaml.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.reader, newPackageName=com.m3.lib.snakeyaml.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.error, newPackageName=com.m3.lib.snakeyaml.error, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml.nodes, newPackageName=com.m3.lib.snakeyaml.nodes, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.yaml.snakeyaml, newPackageName=com.m3.lib.snakeyaml, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.894 s
+[INFO] Finished at: 2026-10-31T06:31:11+05:30
+[INFO] ------------------------------------------------------------------------

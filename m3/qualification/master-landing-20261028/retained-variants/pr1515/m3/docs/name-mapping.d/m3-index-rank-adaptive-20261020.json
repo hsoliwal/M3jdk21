@@ -3,11 +3,11 @@
   "source": "hsoliwal/com.synexia",
   "recipe_commit": "b5d2bbb3c75ff928f3dbb0f92ed4471488ea8c05",
   "recipe_pr": 12563,
-  "recipe": "com.synexia.m3.M3IndexPathRankAdaptive20261020",
+  "recipe": "jdk.internal.m3.M3IndexPathRankAdaptive20261020",
   "target_baseline": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
   "targets": [
-    "com.m3.collections.M3IndexPathRank",
-    "com.m3.collections.M3IndexPathRank$Window"
+    "jdk.m3.collections.M3IndexPathRank",
+    "jdk.m3.collections.M3IndexPathRank$Window"
   ],
   "public_names": "unchanged; no new public runtime class or native method",
   "implementation": "Existing bitmap word traversal plus existing sparse prefix-rank select, with bounded word-range masks and occurrence order preserved",

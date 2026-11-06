@@ -1,5 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.fs;
+package jdk.m3.fs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -580,9 +580,9 @@ class MFilesBehaviorTest {
 
     private static Class<?> facade() {
         try {
-            return Class.forName("com.m3.fs.MFiles");
+            return Class.forName("jdk.m3.fs.MFiles");
         } catch (ClassNotFoundException exception) {
-            return fail("M3FS does not yet expose the required com.m3.fs.MFiles stream facade", exception);
+            return fail("M3FS does not yet expose the required jdk.m3.fs.MFiles stream facade", exception);
         }
     }
 

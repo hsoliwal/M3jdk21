@@ -3,8 +3,8 @@ name: M3JDK21 exact unsigned-128 integer signal distance Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalExactIntegerDistance.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SignalExactIntegerDistance*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalExactIntegerDistance.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalExactIntegerDistance*.java'
       - 'm3/collections/qualification/signal-exact-integer-distance-20261025/**'
       - '.github/workflows/m3-signal-exact-integer-distance-20261025.yml'
   workflow_dispatch:
@@ -31,19 +31,19 @@ jobs:
           out="$RUNNER_TEMP/m3-integer-distance"
           mkdir -p "$out/classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
-            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java \
-            m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java \
-            m3/collections/src/main/java/com/m3/collections/M3ProgressState.java \
-            m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java \
-            m3/collections/src/main/java/com/m3/collections/M3ShadowStreams.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalExactIntegerDistance.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalExactIntegerDistanceSelfTest.java
-          java -cp "$out/classes" com.m3.collections.M3SignalExactIntegerDistanceSelfTest
-          java -Xint -cp "$out/classes" com.m3.collections.M3SignalExactIntegerDistanceSelfTest
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalDependencyEpochs.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalQualitySchema.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ProgressMonitor.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ProgressState.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ShadowStreams.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalExactIntegerDistance.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalExactIntegerDistanceSelfTest.java
+          java -cp "$out/classes" jdk.m3.collections.M3SignalExactIntegerDistanceSelfTest
+          java -Xint -cp "$out/classes" jdk.m3.collections.M3SignalExactIntegerDistanceSelfTest
   original-module-junit:
     runs-on: ubuntu-24.04
     timeout-minutes: 95
@@ -68,4 +68,4 @@ jobs:
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
           mvn -B -ntp -f m3/collections/pom.xml \
             -Dtest=M3SignalExactIntegerDistanceTest test
-          test -s m3/collections/target/surefire-reports/TEST-com.m3.collections.M3SignalExactIntegerDistanceTest.xml
+          test -s m3/collections/target/surefire-reports/TEST-jdk.m3.collections.M3SignalExactIntegerDistanceTest.xml

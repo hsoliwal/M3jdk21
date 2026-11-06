@@ -1,0 +1,66 @@
+{
+  "schema": "M3_JOINED_CURRENT_MODULE_COMPOSITION_V1",
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceBase": "318736236e27d935ae266d2f5e1bbd6449324497",
+  "targetRepository": "hsoliwal/M3JDK21",
+  "targetBase": "326cf94b1fc914ee4ea089b55415dd4db89f1332",
+  "targetPath": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+  "before": {
+    "bytes": 2634,
+    "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7",
+    "gitBlob": "5022e9811ce9391671c794446c7772569cfd369f"
+  },
+  "after": {
+    "bytes": 3377,
+    "sha256": "c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2",
+    "gitBlob": "765d43267bb22a3650b622c01cb29b550e1deb01"
+  },
+  "orderedIsolatedSdkStages": [
+    {
+      "sdkPath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk",
+      "sdkTree": "2086a6175e8b573fa340a3458eaa382f11b3378d",
+      "before": "5022e9811ce9391671c794446c7772569cfd369f",
+      "after": "367ea06512321bb511fd9bbb772842ce313e69dc"
+    },
+    {
+      "sdkPath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk",
+      "sdkTree": "0079fba204e2a2820e66c4a83268ca6bb51cd329",
+      "before": "367ea06512321bb511fd9bbb772842ce313e69dc",
+      "after": "765d43267bb22a3650b622c01cb29b550e1deb01"
+    }
+  ],
+  "bridgeBytesEqual": true,
+  "providerIsolationRequired": true,
+  "custodySha256": {
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+  },
+  "compositionCpuControls": {
+    "accepted": 1,
+    "refused": 3
+  },
+  "sourceQualificationTask": "m3-openrewrite-recipes/recipe-crates/m3-joined-current-qualification-20261102/full-module",
+  "runtimeResult": {
+    "path": "proof/RESULT.json",
+    "bytes": 18424,
+    "sha256": "0b0fb51f1bb8a1df06c99c4075b237829b0484ded07968ca85c6368c12ca2762",
+    "gitBlob": "9ebeeb7d8e9425d4cfa387089ea3c78aa4488667"
+  },
+  "freshModule": {
+    "sources": 27,
+    "classes": 83,
+    "unchangedClasses": 82,
+    "nonprivateApiUnchanged": true,
+    "programRuns": 89
+  },
+  "remaining": [
+    "native/Linux tests",
+    "java.base patch tests",
+    "retained heap/lifetime",
+    "cross-platform and whole-JDK qualification",
+    "legacy source-binding repair and CI admission"
+  ],
+  "authority": false
+}

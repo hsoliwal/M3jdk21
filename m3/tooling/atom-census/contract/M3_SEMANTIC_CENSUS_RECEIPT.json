@@ -1,0 +1,53 @@
+{
+  "schema": "M3_SYNEXIA_SEMANTIC_CENSUS_RECEIVER/1",
+  "canonical_donor_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_pr": 15123,
+  "canonical_recipe_commit": "a89731c137d4a9bd59e1d644a80d6e4658ed89e6",
+  "receiver_repository": "hsoliwal/M3jdk21",
+  "receiver_parent": "86e18b6fb709b9d63c4d929dcf3327cfcaf5f56d",
+  "base_recipe_pr": 15082,
+  "base_receiver_pr": 2259,
+  "external_api_contract": "UNCHANGED",
+  "jni_abi_contract": "UNCHANGED",
+  "jdk_runtime_sources_changed": 0,
+  "sources": [
+    {
+      "path": "m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java",
+      "before_blob": "bb570032f0d358d96959e0d160c6e180856fc940",
+      "before_sha256": "5460d9cffdb15ba06a668d7c61e8845800cf8fdc3bfa02b653ab02c482f0a1d1",
+      "after_blob": "9681090cd86d50ca0d10517915d54d09e5b0e1ad",
+      "after_sha256": "a48b60b0bda2a72ccda3856b83c1f1849028322291466be5f89fe910e25b6242"
+    },
+    {
+      "path": "m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticSelfTest.java",
+      "before": "ABSENT",
+      "after_blob": "d61402509fe19992b8613aecc1c1f2ef11e6b39c",
+      "after_sha256": "3d84bcbce23166d5809d28a2104045483dffa2793c6076cb3a79a0368e8f20ea"
+    },
+    {
+      "path": "m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticTest.java",
+      "before": "ABSENT",
+      "after_blob": "3b1d086c38854556c8960efeaeaf1df0e6e4009b",
+      "after_sha256": "bdb57731ac5382d38c6f1607980e18f4b7cd344dd08e1872873e1bcdab89e5d0"
+    },
+    {
+      "path": "m3/tooling/atom-census/contract/SEMANTIC_SOURCE_CENSUS_V1.md",
+      "before": "ABSENT",
+      "after_sha256": "aa28e2e9a05ae515f7abd860067271bb85228e330cef1b34de3c88d652132b9a"
+    }
+  ],
+  "evidence": {
+    "local_java21_lint_compile": "PASS",
+    "local_dependency_free_tests": "PASS_151",
+    "legacy_byte_equivalence": "PASS",
+    "malformed_source_refusal": "PASS",
+    "source_digests": "PASS",
+    "maven_openrewrite_sdk": "NOT_RUN",
+    "hosted_junit": "NOT_RUN",
+    "source_built_m3jdk_image": "NOT_RUN",
+    "jtreg_native_jni_hotspot": "NOT_RUN",
+    "cross_platform": "NOT_RUN"
+  },
+  "review_state": "DRAFT_HOLD",
+  "product_admission": false
+}

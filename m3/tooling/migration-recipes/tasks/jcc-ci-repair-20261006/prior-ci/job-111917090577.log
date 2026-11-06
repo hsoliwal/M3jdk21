@@ -129,7 +129,7 @@
 2026-10-05T18:25:28.0003145Z [INFO] -------------------------------------------------------------
 2026-10-05T18:25:28.0004481Z [ERROR] COMPILATION ERROR : 
 2026-10-05T18:25:28.0005436Z [INFO] -------------------------------------------------------------
-2026-10-05T18:25:28.0006686Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal
+2026-10-05T18:25:28.0006686Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal
 2026-10-05T18:25:28.0007816Z [INFO] 1 error
 2026-10-05T18:25:28.0008355Z [INFO] -------------------------------------------------------------
 2026-10-05T18:25:28.0009096Z [INFO] ------------------------------------------------------------------------
@@ -139,7 +139,7 @@
 2026-10-05T18:25:28.0032288Z [INFO] Finished at: 2026-10-05T18:25:28Z
 2026-10-05T18:25:28.0032781Z [INFO] ------------------------------------------------------------------------
 2026-10-05T18:25:28.0034231Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project migration-recipes: Compilation failure
-2026-10-05T18:25:28.0035436Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal
+2026-10-05T18:25:28.0035436Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal
 2026-10-05T18:25:28.0036234Z [ERROR] -> [Help 1]
 2026-10-05T18:25:28.0036642Z [ERROR] 
 2026-10-05T18:25:28.0037068Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.

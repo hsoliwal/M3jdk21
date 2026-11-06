@@ -25,11 +25,11 @@ def main():
         raise RuntimeError('Optimized Python disables required publication verification assertions')
     helpers = Path(__file__).resolve().parent
     assert hashlib.sha256((helpers / 'audit_base.py').read_bytes()).hexdigest() == '839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b'
-    assert hashlib.sha256((helpers / 'prepare_publication.py').read_bytes()).hexdigest() == '3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd'
+    assert hashlib.sha256((helpers / 'prepare_publication.py').read_bytes()).hexdigest() == '9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2'
     from audit_base import BASE_COMMIT, BASE_TREE, OUT, TASK, digest, exact_write, git_blob, git_tree, json_bytes, resolve
     from prepare_publication import BRANCH, PRODUCTION_UPDATES, expected_tree
-    assert digest((helpers / 'verify_publication.py').read_bytes()) == '8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639'
-    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == 'a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b'
+    assert digest((helpers / 'verify_publication.py').read_bytes()) == 'fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226'
+    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == '80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412'
     from raw_custody_v3 import IDENTITY_ONLY, PROTOCOL, audit, bound
 
     preflight_path = Path(sys.argv[1]).resolve(strict=True)
@@ -41,9 +41,9 @@ def main():
     if before_branch:
         assert sys.argv[4] == '--before-branch'
     publisher = OUT / 'prepare_publication.py'
-    assert digest(publisher.read_bytes()) == '3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd'
+    assert digest(publisher.read_bytes()) == '9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2'
     model_raw = (OUT / 'BASE_TREE_MODEL.json').read_bytes()
-    assert digest(model_raw) == '877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80'
+    assert digest(model_raw) == '5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82'
     model = json.loads(model_raw)
     assert model['commit'] == BASE_COMMIT and model['root'] == BASE_TREE
     base_trees = model['trees']

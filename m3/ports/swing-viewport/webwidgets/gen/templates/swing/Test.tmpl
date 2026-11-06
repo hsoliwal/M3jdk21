@@ -1,0 +1,27 @@
+package @WPKG@;
+
+import @PKG@.M3@FAMILY@Checks;
+import @PKG@.M3WebChecks;
+import @PKG@.M3@C@Api;
+import @PKG@.M3@C@Model;
+import org.junit.jupiter.api.Test;
+
+/** Headless contract of M3 @CONCEPT@ (family @FAM@, pattern @PATTERN@): model, family and component. */
+class M3@C@Test {
+	@Test
+	void sampleContract() {
+		M3WebChecks.core(M3@C@Model.sample(), M3@C@Api.SAMPLE, "@ROLE@");
+	}
+
+	@Test
+	void familyContract() {
+		M3@FAMILY@Checks.run(M3@C@Model.sample());
+	}
+
+	@Test
+	void componentContract() {
+		M3@C@ c = new M3@C@();
+		c.api().load(M3@C@Api.SAMPLE);
+		M3WebComponentChecks.run(c);
+	}
+}

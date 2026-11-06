@@ -74,3 +74,90 @@ if(BUILD_TESTING)
   endforeach()
   add_test(NAME m3_array_allocation_fault_test COMMAND m3_array_allocation_fault_test)
 endif()
+
+# M3 LeetCodify signed-int search uses the existing array JNI library.
+# Its Java-facing kernel uses GetIntArrayRegion, never a retained native borrow.
+target_sources(m3_arrays PRIVATE
+  m3_int_lane_search.c
+  m3_int_lane_search_jni.c)
+
+if(BUILD_TESTING)
+  add_executable(m3_int_lane_search_checks
+    tests/m3_int_lane_search_checks.c
+    m3_int_lane_search.c)
+  target_include_directories(m3_int_lane_search_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_int_lane_search_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_int_lane_search_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_int_lane_search_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_int_lane_search_checks COMMAND m3_int_lane_search_checks)
+endif()
+
+# Sparse long-index integer primitive lane: required JNI occupancy audit.
+# No GetPrimitiveArrayCritical or retained Java array pointers are used.
+target_sources(m3_arrays PRIVATE
+  m3_sparse_nonzero.c
+  m3_sparse_nonzero_jni.c)
+
+if(BUILD_TESTING)
+  add_executable(m3_sparse_nonzero_checks
+    tests/m3_sparse_nonzero_checks.c
+    m3_sparse_nonzero.c)
+  target_include_directories(m3_sparse_nonzero_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_sparse_nonzero_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_sparse_nonzero_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_sparse_nonzero_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_sparse_nonzero_checks COMMAND m3_sparse_nonzero_checks)
+endif()
+
+# Long-coordinate binary search: reuse the existing bounded M3 arrays JNI owner.
+# No permanent JNI array borrows; signed-long native oracle is independent.
+target_sources(m3_arrays PRIVATE
+  m3_long_coordinate_search.c
+  m3_long_coordinate_search_jni.c)
+
+if(BUILD_TESTING)
+  add_executable(m3_long_coordinate_search_checks
+    tests/m3_long_coordinate_search_checks.c
+    m3_long_coordinate_search.c)
+  target_include_directories(m3_long_coordinate_search_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_long_coordinate_search_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_long_coordinate_search_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_long_coordinate_search_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_long_coordinate_search_checks COMMAND m3_long_coordinate_search_checks)
+endif()
+
+# Sorted primitive multiset algebra: one checked JNI owner, no borrowed Java pointers.
+target_sources(m3_arrays PRIVATE
+  m3_multiset_step.c
+  m3_multiset_jni.c)
+
+if(BUILD_TESTING)
+  add_executable(m3_multiset_step_checks
+    tests/m3_multiset_step_checks.c
+    m3_multiset_step.c)
+  target_include_directories(m3_multiset_step_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_multiset_step_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_multiset_step_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_multiset_step_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_multiset_step_checks COMMAND m3_multiset_step_checks)
+endif()

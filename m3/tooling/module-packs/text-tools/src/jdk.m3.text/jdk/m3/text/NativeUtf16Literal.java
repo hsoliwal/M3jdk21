@@ -52,6 +52,15 @@ final class NativeUtf16Literal {
             Objects.requireNonNull(text, "text");
             if (needle.length == 0) return true;
             if (needle.length > text.length()) return false;
+            // String is immutable; custom CharSequences retain their existing page-read order.
+            if (!NATIVE && text instanceof String string) {
+                int state = 0;
+                for (int i = 0; i < string.length(); i++) {
+                    state = feedUnit(string.charAt(i), needle, failure, state);
+                    if (state == -1) return true;
+                }
+                return false;
+            }
             char[] page = new char[Math.min(PAGE_UNITS, text.length())];
             int state = 0;
             for (int offset = 0; offset < text.length();) {
@@ -70,15 +79,20 @@ final class NativeUtf16Literal {
 
     private static int feedJava(char[] page, int count, char[] needle, int[] failure, int state) {
         for (int i = 0; i < count; i++) {
-            while (state > 0 && page[i] != needle[state]) state = failure[state - 1];
-            if (page[i] == needle[state] && ++state == needle.length) return -1;
+            state = feedUnit(page[i], needle, failure, state);
+            if (state == -1) return -1;
         }
         return state;
     }
 
+    private static int feedUnit(char unit, char[] needle, int[] failure, int state) {
+        while (state > 0 && unit != needle[state]) state = failure[state - 1];
+        return unit == needle[state] && ++state == needle.length ? -1 : state;
+    }
+
     private static boolean loadNative() {
-        if (Boolean.getBoolean("m3.text.native.disable")) return false;
         try {
+            if (Boolean.getBoolean("m3.text.native.disable")) return false;
             Path bundled = Path.of(System.getProperty("java.home"), "lib",
                     System.mapLibraryName("m3textio"));
             if (Files.isRegularFile(bundled)) System.load(bundled.toAbsolutePath().toString());

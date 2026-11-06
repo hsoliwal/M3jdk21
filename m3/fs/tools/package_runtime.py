@@ -143,7 +143,7 @@ def main(argv=None):
     native = input_file(args.native_library)
     sqlite = input_file(args.sqlite_library)
     with zipfile.ZipFile(jar) as archive:
-        contains_vfs = "com/m3/fs/vfs/M3VFS.class" in archive.namelist()
+        contains_vfs = "jdk/m3/fs/vfs/M3VFS.class" in archive.namelist()
         if "module-info.class" not in archive.namelist():
             raise ValueError("packaged modular M3FS jar required; run Maven install first")
     repository = args.repository_root.resolve(strict=True)

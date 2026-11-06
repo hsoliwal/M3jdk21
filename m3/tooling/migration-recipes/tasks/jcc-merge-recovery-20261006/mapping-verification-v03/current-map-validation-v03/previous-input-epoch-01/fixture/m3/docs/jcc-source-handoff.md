@@ -20,7 +20,7 @@ The co-retained `m3/migration/lineage.py` expects a different `migration.schema`
 
 ## Complete root accounting, explicitly bounded file coverage
 
-The [root coverage obligations](../migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv) derive from the complete, rehashed current source root tree `3a270e543f9a547582ebda8ac8b69bfd134c41be` and its exact unchanged root POM blob `98889a040aad5cc3c82f782bb4b173d118207988`. Every root entry has an explicit row, including files, directories and the separately pinned gitlink.
+The [root coverage obligations](../migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv) derive from the complete, rehashed current source root tree `3a270e543f9a547582ebda8ac8b69bfd134c41be` and its exact unchanged root POM blob `a65f71452613662769dda64100c6d64dd90ae5da`. Every root entry has an explicit row, including files, directories and the separately pinned gitlink.
 
 | Observed denominator | Count | Meaning |
 | --- | ---: | --- |

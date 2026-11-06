@@ -34,7 +34,7 @@ CAPABILITY = TARGET / "m3/ports/capability-runtime/src/main/java"
 DATE = "2026-10-18T00:00:00Z"
 SCHEMA = "m3-nlp-search-current-forks-v1"
 LUCENE_HEAD = "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e"
-RECIPE_MAIN = "com.synexia.rewrite.M3CurrentForkMaterializer"
+RECIPE_MAIN = "jdk.internal.m3.rewrite.M3CurrentForkMaterializer"
 PROTECTED = ("aggregate", "external-aggregate", "base-pack", "bridge-pack", "compiler-pack", "modular",
              "jmods", "probe-classes", "spi-classes", "compiler-probe-classes",
              "packer-fixtures", "layer", "generated", "capability-classes",
@@ -359,9 +359,9 @@ def compile_pack(out: Path, lock_path: Path, lock: dict) -> None:
     capability_classes = out / "capability-classes"
     run(out, "compile-capability", jdk / "bin/javac", "--release", "21", "-Xlint:all,-module",
         "-Werror", "-d", capability_classes, *sorted(CAPABILITY.rglob("*.java")))
-    capability_jar = jar(out, jdk, "com.m3.runtime.capability", capability_classes)
+    capability_jar = jar(out, jdk, "jdk.m3.runtime.capability", capability_classes)
     named_rows = [(name, str(path), "MODULAR_JAR") for name, (path, named) in sorted(identities.items()) if named]
-    named_rows.append(("com.m3.runtime.capability", str(capability_jar), "MODULAR_JAR"))
+    named_rows.append(("jdk.m3.runtime.capability", str(capability_jar), "MODULAR_JAR"))
     base = pack(out, lock, "base-pack", named_rows, manifest, layer)
     for name, (path, named) in sorted(identities.items()):
         classes = base / ("flat" if named else "classes") / name
@@ -372,11 +372,11 @@ def compile_pack(out: Path, lock_path: Path, lock: dict) -> None:
     run(out, "compile-bridge", jdk / "bin/javac", "--release", "25", "-Xlint:all,-module",
         "-Werror", "--module-path", module_path, "-d", out / "bridge-classes",
         *sorted((BRIDGE / "src/main/java").rglob("*.java")))
-    bridge = jar(out, jdk, "com.m3.nlpsearch", out / "bridge-classes")
-    pack(out, lock, "bridge-pack", [("com.m3.nlpsearch", str(bridge), "MODULAR_JAR")], empty, layer)
+    bridge = jar(out, jdk, "jdk.m3.nlpsearch", out / "bridge-classes")
+    pack(out, lock, "bridge-pack", [("jdk.m3.nlpsearch", str(bridge), "MODULAR_JAR")], empty, layer)
     run(out, "compile-probes", jdk / "bin/javac", "--release", "25", "-Xlint:all,-module",
         "-Werror", "--module-path", module_path, "--patch-module",
-        "com.m3.nlpsearch=" + str(BRIDGE / "src/test/java"), "-d", out / "probe-classes",
+        "jdk.m3.nlpsearch=" + str(BRIDGE / "src/test/java"), "-d", out / "probe-classes",
         *sorted((BRIDGE / "src/test/java").rglob("*.java")))
     run(out, "compile-custom-spi", jdk / "bin/javac", "--release", "25", "-Xlint:all",
         "-Werror", "--module-path", module_path, "--module-source-path",
@@ -397,11 +397,11 @@ def compile_pack(out: Path, lock_path: Path, lock: dict) -> None:
         run(out, "compile-compiler-bridge", jdk / "bin/javac", "-source", "25", "-target", "25",
             "-Xlint:all,-module", "-Werror", "--module-path", module_path, "-d", out / "compiler-classes",
             *sorted((BRIDGE / "src/compiler/java").rglob("*.java")))
-        compiler_jar = jar(out, jdk, "com.m3.nlpsearch.compiler", out / "compiler-classes")
-        pack(out, lock, "compiler-pack", [("com.m3.nlpsearch.compiler", str(compiler_jar), "MODULAR_JAR")], empty, layer)
+        compiler_jar = jar(out, jdk, "jdk.m3.nlpsearch.compiler", out / "compiler-classes")
+        pack(out, lock, "compiler-pack", [("jdk.m3.nlpsearch.compiler", str(compiler_jar), "MODULAR_JAR")], empty, layer)
         run(out, "compile-m3-compiler-probe", jdk / "bin/javac", "-source", "25", "-target", "25",
             "-Xlint:all,-module", "-Werror", "--module-path", module_path, "--patch-module",
-            "com.m3.nlpsearch.compiler=" + str(BRIDGE / "src/compiler-test/java"),
+            "jdk.m3.nlpsearch.compiler=" + str(BRIDGE / "src/compiler-test/java"),
             "-d", out / "compiler-probe-classes", *sorted((BRIDGE / "src/compiler-test/java").rglob("*.java")))
         compiler = "COMPILED_PENDING_CALLBACK_TEST"
     run(out, "compile-packer-fixtures", sys.executable, HERE / "test_jmod_pack.py", "--phase", "prepare",
@@ -431,23 +431,23 @@ def probes(out: Path, java: Path, phase: str, *, image: bool, compiler: bool,
     for main in ("M3SourceInputStreamChecks", "M3NlpSearchChecks"):
         arguments = [out / (phase + "-index")] if main == "M3NlpSearchChecks" else []
         run(out, phase + "-" + main, java, "--module-path", module_path,
-            "--patch-module", "com.m3.nlpsearch=" + str(out / "probe-classes"),
-            "-m", "com.m3.nlpsearch/com.m3.nlpsearch." + main, *arguments)
+            "--patch-module", "jdk.m3.nlpsearch=" + str(out / "probe-classes"),
+            "-m", "jdk.m3.nlpsearch/jdk.m3.nlpsearch." + main, *arguments)
     run(out, phase + "-custom-spi", java, "--module-path", module_path, "-m",
         "opennlp.fixture.probe/fixture.probe.CustomSpiProbe")
     run(out, phase + "-dependency-probes", java, "--module-path", module_path, "-m",
-        "com.m3.nlpsearch.packchecks/com.m3.nlpsearch.packchecks.PackDependencyChecks", lucene_root)
+        "jdk.m3.nlpsearch.packchecks/jdk.m3.nlpsearch.packchecks.PackDependencyChecks", lucene_root)
     for fixture, owner, main in (("spatial-core", "core", "Spatial4jCoreChecks"),
                                  ("spatial-features", "features", "Spatial4jFeatureChecks")):
         classes = out / (fixture + "-classes")
         if classes.is_dir():
-            module = "com.m3.nlpsearch.spatialchecks." + owner
+            module = "jdk.m3.nlpsearch.spatialchecks." + owner
             run(out, phase + "-" + fixture, java, "--module-path",
                 str(classes) + os.pathsep + module_path, "-m", module + "/" + module + "." + main)
     if compiler:
         run(out, phase + "-m3-compiler", java, "--module-path", module_path, "--patch-module",
-            "com.m3.nlpsearch.compiler=" + str(out / "compiler-probe-classes"), "-m",
-            "com.m3.nlpsearch.compiler/com.m3.nlpsearch.compiler.M3AstNlpSearchChecks")
+            "jdk.m3.nlpsearch.compiler=" + str(out / "compiler-probe-classes"), "-m",
+            "jdk.m3.nlpsearch.compiler/jdk.m3.nlpsearch.compiler.M3AstNlpSearchChecks")
 
 
 def test_pack(out: Path, lock_path: Path, lock: dict) -> None:
@@ -469,7 +469,7 @@ def test_pack(out: Path, lock_path: Path, lock: dict) -> None:
         "--jdk21-home", lock["jdk21_home"], "--jdk25-home", lock["jdk_home"],
         "--out", out / "packer-fixtures")
     probes(out, Path(lock["jdk_home"]) / "bin/java", "test", image=False,
-           compiler="com.m3.nlpsearch.compiler" in receipt["modules"],
+           compiler="jdk.m3.nlpsearch.compiler" in receipt["modules"],
            lucene_root=Path(lock["lucene"]["root"]))
     # The fixture test owner may write its own test result files, not its compiled inputs.
     after = protected(out)
@@ -506,13 +506,13 @@ def runtime_pack(out: Path, lock_path: Path, lock: dict) -> None:
     modules = {line.split()[0].split("@")[0] for line in listed.splitlines()}
     if not set(compiled["modules"]) <= modules:
         raise ValueError("linked module closure missing admitted inputs")
-    probes(out, java, "runtime", image=True, compiler="com.m3.nlpsearch.compiler" in modules,
+    probes(out, java, "runtime", image=True, compiler="jdk.m3.nlpsearch.compiler" in modules,
            lucene_root=Path(lock["lucene"]["root"]))
     if compiled["inputs"] != input_seal(lock_path, lock) or tested["outputs"] != protected(out):
         raise ValueError("input or compiled artifact drift during runtime")
     (out / "RUNTIME.json").write_bytes(encoded({"schema": SCHEMA, "stage": "RUNTIME", "status": "PASS",
         "test_sha256": digest(out / "TEST.json"), "modules": sorted(modules),
-        "m3_compiler": "CALLBACK_PROBE_PASS" if "com.m3.nlpsearch.compiler" in modules else compiled["m3_compiler"],
+        "m3_compiler": "CALLBACK_PROBE_PASS" if "jdk.m3.nlpsearch.compiler" in modules else compiled["m3_compiler"],
         "full_m3_family_parity": "NOT_CLAIMED", "m3string_activation": "SEPARATE_MATCHED_RUNTIME_GATE"}))
 
 

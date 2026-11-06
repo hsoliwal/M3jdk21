@@ -146,14 +146,14 @@ static int prove_window(jsize length, jint row_offset, jint state_offset) {
     ProbeArray original_rows = rows, original_longs = longs, original_states = states;
     unsigned int chunks = (unsigned int)(length + M3_CHUNK - 1) / M3_CHUNK;
     reset_calls();
-    jintArray selected = Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+    jintArray selected = Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
             env, NULL, (jintArray)&rows, row_offset, (jbyteArray)&states, state_offset, length, 0);
     REQUIRE(selected != NULL && selected != (jintArray)&rows && !pending_exception);
     REQUIRE(((ProbeArray *)selected)->length == length);
     REQUIRE(state_reads == 0 && row_reads == chunks);
     REQUIRE(memcmp(output.data.ints, rows.data.ints + row_offset, (size_t)length * sizeof(jint)) == 0);
     reset_calls();
-    jlongArray selected_long = Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+    jlongArray selected_long = Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             env, NULL, (jlongArray)&longs, row_offset, (jbyteArray)&states, state_offset, length, 0);
     REQUIRE(selected_long != NULL && selected_long != (jlongArray)&longs && !pending_exception);
     REQUIRE(((ProbeArray *)selected_long)->length == length);
@@ -166,16 +166,16 @@ static int prove_window(jsize length, jint row_offset, jint state_offset) {
     REQUIRE(states.length == original_states.length
             && memcmp(states.data.bytes, original_states.data.bytes, sizeof(states.data.bytes)) == 0);
     reset_calls();
-    selected = Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+    selected = Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
             env, NULL, (jintArray)&rows, row_offset, (jbyteArray)&states, state_offset, length, 255);
     REQUIRE(selected != NULL && !pending_exception && ((ProbeArray *)selected)->length == 0);
     REQUIRE(state_reads == 2 * chunks);
     reset_calls();
-    selected_long = Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+    selected_long = Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             env, NULL, (jlongArray)&longs, -1, (jbyteArray)&states, state_offset, length, 0);
     REQUIRE(selected_long == NULL && pending_exception && state_reads == 0 && row_reads == 0);
     reset_calls();
-    selected = Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+    selected = Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
             env, NULL, (jintArray)&rows, row_offset, NULL, state_offset, length, 0);
     REQUIRE(selected == NULL && pending_exception && state_reads == 0 && row_reads == 0);
     return 0;

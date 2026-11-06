@@ -95,7 +95,7 @@ generates no production code; the separate integration recipe owns runtime chang
 
 **Capabilities:** C01-C04
 
-**Files:** Extend `m3/fs/src/main/java/com/m3/fs/MFile.java` and `MFiles.java` and the existing M3FS tests through the canonical recipe. Do not recreate them under `m3/file`.
+**Files:** Extend `m3/fs/src/main/java/jdk/m3/fs/MFile.java` and `MFiles.java` and the existing M3FS tests through the canonical recipe. Do not recreate them under `m3/file`.
 
 **Interfaces:** Builds on the current Path/provider-address facade. The richer entry shape and options overload in design sections 2/3 remain proposed; current callers use Plan configuration.
 

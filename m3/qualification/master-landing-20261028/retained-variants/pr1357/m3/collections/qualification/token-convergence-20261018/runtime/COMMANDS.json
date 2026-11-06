@@ -30,7 +30,7 @@
       "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
       "/workspace/scratch/8cbeab1c181e/M3jdk21-token/test/jdk/jdk/internal/mindex/M3RX7TokenIndexContract.java",
       "/workspace/scratch/8cbeab1c181e/M3jdk21-token/test/jdk/jdk/internal/mindex/M3RX7BoundaryContract.java",
-      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/java/M3RX7ResourceProbe.java"
+      "/workspace/scratch/8cbeab1c181e/Synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/java/M3RX7ResourceProbe.java"
     ],
     "exit_code": 0,
     "max_rss_kib": 111256,
@@ -53,7 +53,7 @@
       "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux",
       "-fsyntax-only",
       "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/native/libjava/M3RX7.c",
-      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/native/libM3RX7Boundary.c"
+      "/workspace/scratch/8cbeab1c181e/Synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/native/libM3RX7Boundary.c"
     ],
     "exit_code": 0,
     "max_rss_kib": 11392,
@@ -80,7 +80,7 @@
       "-fsanitize=undefined",
       "-fno-sanitize-recover=undefined",
       "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/native/libjava/M3RX7.c",
-      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/native/libM3RX7Boundary.c",
+      "/workspace/scratch/8cbeab1c181e/Synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/native/libM3RX7Boundary.c",
       "-o",
       "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/libM3RX7Boundary.so"
     ],

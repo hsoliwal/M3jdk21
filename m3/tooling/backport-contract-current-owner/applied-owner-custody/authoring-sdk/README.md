@@ -4,8 +4,8 @@
 
 This narrow Maven/OpenRewrite input module was admitted before authorship in
 679bece51397656563133a4f7e00063b086c0ee7. It reuses the unchanged shared recipe
-adapter 1c1b1b568d369f688f6953161636bf36b484bf5a, manifest kernel
-38df5f97bbeec8a8a8cfc77091d56bda925c07f2 and POM
+adapter 2ec479b8609459a28fdfd8a7a7d63cc44e919f00, manifest kernel
+78d5fb68f13872164973a8918cc7886c5f548bca and POM
 d79867bcc09ad6329e12418e15907e54b8ab025f. The original product SDK and all its
 45 non-self pins are unchanged; its pins.json and verify.py are explicit KEEP inputs.
 

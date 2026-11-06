@@ -1,0 +1,141 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< m3.intake:fastdoubleparser-1.0.90 >------------------
+[INFO] Building fastdoubleparser-1.0.90 1.0.90-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ fastdoubleparser-1.0.90 ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [fastdoubleparser-1.0.90] Resolving Poms...
+[INFO] Project [fastdoubleparser-1.0.90] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractBigDecimalParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractBigDecimalParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractBigIntegerParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractBigIntegerParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractFloatValueParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractFloatValueParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractJavaFloatingPointBitsFromByteArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractJavaFloatingPointBitsFromByteArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractJavaFloatingPointBitsFromCharArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractJavaFloatingPointBitsFromCharArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractJavaFloatingPointBitsFromCharSequence.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractJavaFloatingPointBitsFromCharSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractJsonFloatingPointBitsFromByteArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractJsonFloatingPointBitsFromByteArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractJsonFloatingPointBitsFromCharArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractJsonFloatingPointBitsFromCharArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractJsonFloatingPointBitsFromCharSequence.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractJsonFloatingPointBitsFromCharSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\AbstractNumberParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\AbstractNumberParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\BigSignificand.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\BigSignificand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\FastDoubleMath.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\FastDoubleMath.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\FastDoubleSwar.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\FastDoubleSwar.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\FastFloatMath.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\FastFloatMath.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\FastIntegerMath.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\FastIntegerMath.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\FftMultiplier.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\FftMultiplier.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaBigDecimalFromByteArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaBigDecimalFromByteArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaBigDecimalFromCharArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaBigDecimalFromCharArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaBigDecimalFromCharSequence.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaBigDecimalFromCharSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaBigDecimalParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaBigDecimalParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaBigIntegerFromByteArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaBigIntegerFromByteArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaBigIntegerFromCharArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaBigIntegerFromCharArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaBigIntegerFromCharSequence.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaBigIntegerFromCharSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaBigIntegerParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaBigIntegerParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaDoubleBitsFromByteArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaDoubleBitsFromByteArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaDoubleBitsFromCharArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaDoubleBitsFromCharArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaDoubleBitsFromCharSequence.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaDoubleBitsFromCharSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaDoubleParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaDoubleParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaFloatBitsFromByteArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaFloatBitsFromByteArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaFloatBitsFromCharArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaFloatBitsFromCharArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaFloatBitsFromCharSequence.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaFloatBitsFromCharSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JavaFloatParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JavaFloatParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JsonDoubleBitsFromByteArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JsonDoubleBitsFromByteArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JsonDoubleBitsFromCharArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JsonDoubleBitsFromCharArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JsonDoubleBitsFromCharSequence.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JsonDoubleBitsFromCharSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\JsonDoubleParser.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\JsonDoubleParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\package-info.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\ParseDigitsTaskByteArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\ParseDigitsTaskByteArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\ParseDigitsTaskCharArray.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\ParseDigitsTaskCharArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\ch\randelshofer\fastdoubleparser\ParseDigitsTaskCharSequence.java to m3-scratch\lib-intake\batch\fastdoubleparser-1.0.90\proj\src\main\java\com\m3\lib\fastdoubleparser\ParseDigitsTaskCharSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=ch.randelshofer.fastdoubleparser, newPackageName=com.m3.lib.fastdoubleparser, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.242 s
+[INFO] Finished at: 2026-10-31T07:28:46+05:30
+[INFO] ------------------------------------------------------------------------

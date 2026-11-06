@@ -13,11 +13,11 @@ The active Synexia -> M3JDK21 M3String receiving stage remains unchanged.
 - Recipe: `com.synexia.rewrite.M3EclipseDeltaIdentity20261018`, using the existing
   `M3HashPinnedJavaSnapshotRecipe`, not a copied rewrite engine.
 - Target source baseline: `hsoliwal/M3JDK21@f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`.
-- Target modified owner: `m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java`.
-- Owner original Git blob: `ef4769a17ba2447902ac99dd8b289783f4d31227`.
-- Owner before SHA-256: `3e499ab33152d8a79c3171ce96a20ae35968c8e573e1ac48b999ede35a7581ec`.
-- Owner after SHA-256: `94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c`.
-- New test SHA-256: `2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781`.
+- Target modified owner: `m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java`.
+- Owner original Git blob: `1523a11f6b3e08437275c4897f5ad7ca1e7555bd`.
+- Owner before SHA-256: `1ce2e7fac96924f307ab150a21e93303d2d0f1ecd422c68d6ab20b35039b276c`.
+- Owner after SHA-256: `21a893d7f976e5bf2d42998335d99556edfffb266016cce15d5784ebc1c19274`.
+- New test SHA-256: `44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da`.
 - Copyright: 2026 Hitesh Soliwal and contributors; authored source Apache-2.0.
   Eclipse-provided API dependencies retain their upstream licenses.
 

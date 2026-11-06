@@ -1,8 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0 */
-import com.m3.collections.M3ConcurrentIntLane28;
-import com.m3.collections.M3ConcurrentLongLane28;
-import com.m3.collections.M3LongLane28;
+import jdk.m3.collections.M3ConcurrentIntLane28;
+import jdk.m3.collections.M3ConcurrentLongLane28;
+import jdk.m3.collections.M3LongLane28;
 import java.lang.management.ManagementFactory;
 
 /** Measures only warmed, prepared scalar CAS and page-copy loops on the current JVM. */

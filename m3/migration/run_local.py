@@ -81,17 +81,17 @@ def main() -> int:
                 raise RuntimeError('unmapped/missing compatibility Java source')
             tests=sorted((PORT/'src/test/java').glob('*.java'))
             run('compile-candidate',[javac,'--release','21','-Xlint:all','-Werror','-d',after,*main_sources,*tests,HERE/'SurfaceInventory.java',PORT/'native-test/NativeBoundaryTest.java'])
-            baseline_result=run('existing-baseline',[java,'-cp',before,'com.synexia.indexstring.ExistingSurfaceTest'])
-            candidate_result=run('existing-candidate',[java,'-cp',after,'com.synexia.indexstring.ExistingSurfaceTest'])
+            baseline_result=run('existing-baseline',[java,'-cp',before,'jdk.internal.m3.indexstring.ExistingSurfaceTest'])
+            candidate_result=run('existing-candidate',[java,'-cp',after,'jdk.internal.m3.indexstring.ExistingSurfaceTest'])
             if baseline_result!=candidate_result: raise RuntimeError('existing-surface differential mismatch')
-            run('retained-view',[java,'-Xmx512m','-cp',after,'com.synexia.indexstring.RetainedViewTest'])
+            run('retained-view',[java,'-Xmx512m','-cp',after,'jdk.internal.m3.indexstring.RetainedViewTest'])
             include=Path(javac).resolve().parents[1]/'include'
             library=temp/'libm3-boundary.so'
             run('compile-jni',[gcc,'-std=c11','-Wall','-Wextra','-Werror','-fPIC','-shared','-fsanitize=undefined','-fno-sanitize-recover=all','-I'+str(include),'-I'+str(include/'linux'),PORT/'native-test/boundary.c','-o',library])
             run('jni-boundary',[java,'-Xcheck:jni','-cp',after,'NativeBoundaryTest',library])
             receipt['native_library_sha256']=digest(library.read_bytes())
             run('string-surface',[java,'-cp',after,'SurfaceInventory','java.lang.String'])
-            run('port-surface',[java,'-cp',after,'SurfaceInventory','com.synexia.indexstring.FrozenBytes','com.synexia.indexstring.FrozenChars','com.synexia.indexstring.MIndexJoinedBytes','com.synexia.indexstring.MIndexJoinedChars','com.m3.text.compat.M3Text'])
+            run('port-surface',[java,'-cp',after,'SurfaceInventory','jdk.internal.m3.indexstring.FrozenBytes','jdk.internal.m3.indexstring.FrozenChars','jdk.internal.m3.indexstring.MIndexJoinedBytes','jdk.internal.m3.indexstring.MIndexJoinedChars','jdk.m3.text.compat.M3Text'])
             if args.bench:
                 for fork in range(1,4): run('benchmark-'+str(fork),[java,'-Xms256m','-Xmx256m','-XX:+UseSerialGC','-cp',after,'PortMicrobench'])
         scope = input_snapshot()

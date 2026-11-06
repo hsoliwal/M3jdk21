@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
       - 'm3/qualification/mask-run-budget-20261020/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mask-run-budget-20261020/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-mask-run-budget-20261020/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-mask-run-budget-20261020.yml'
       - '.github/workflows/m3-mask-run-budget-20261020.yml'
 concurrency:

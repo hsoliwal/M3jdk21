@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-package com.m3.compiletime.ast;
+package jdk.m3.compiletime.ast;
 
-import com.m3.arrays.M3ArrayNative;
+import jdk.m3.arrays.M3ArrayNative;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.net.URI;

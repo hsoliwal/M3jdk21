@@ -19,7 +19,7 @@ MODULE = HERE
 RECIPE = HERE / 'recipe'
 RESOURCES = REPO / 'm3/tooling/migration-recipes/src/main/resources'
 CRATE = 'm3-collection-lanes'
-PACKAGE = 'com.m3.collections'
+PACKAGE = 'jdk.m3.collections'
 MODULAR = True
 PROBES = HERE / 'verification'
 
@@ -53,7 +53,7 @@ def main():
     if not junit.is_file():
         raise SystemExit('JUNIT_CONSOLE_JAR must name the real JUnit platform console standalone JAR')
     java, javac = java_home / 'bin/java', java_home / 'bin/javac'
-    crate = RESOURCES / 'com/synexia/rewrite/hash-pinned-java' / CRATE
+    crate = RESOURCES / 'jdk/internal/m3/rewrite/hash-pinned-java' / CRATE
     rows = [line.split('\t') for line in (crate / 'manifest.tsv').read_text().splitlines()
             if line and not line.startswith('#')]
     if len({r[0] for r in rows}) != len(rows):
@@ -71,7 +71,7 @@ def main():
             raise SystemExit('source drift: ' + path)
         original[path] = current
     native_path = 'src/main/native/collections/segmented_bit_lane.c'
-    native_template = RESOURCES / 'com/synexia/rewrite/segmented-lane-native/segmented_bit_lane.c.txt'
+    native_template = RESOURCES / 'jdk/internal/m3/rewrite/segmented-lane-native/segmented_bit_lane.c.txt'
     original[native_path] = sha(MODULE / native_path)
     if original[native_path] not in ('ABSENT', sha(native_template)):
         raise SystemExit('native source drift')
@@ -100,7 +100,7 @@ def main():
     mains = [candidate / r[0] for r in rows if r[0].startswith('src/main/')]
     tests = [candidate / r[0] for r in rows if r[0].startswith('src/test/')]
     if not MODULAR:
-        tests.append(MODULE / 'src/test/java/com/synexia/common/collections/SegmentedPrimitiveStorageTest.java')
+        tests.append(MODULE / 'src/test/java/jdk/internal/m3/common/collections/SegmentedPrimitiveStorageTest.java')
     probes = [PROBES / (n + '.java') for n in ('SegmentedLaneNativeProbe', 'PreparedLaneAllocationProbe')]
     common_args = [javac, '--release', '21', '-Werror', '-Xlint:all,-module' if MODULAR else '-Xlint:all']
     runtime_classpath = str(classes)
@@ -116,7 +116,7 @@ def main():
         for name in ('LICENSE', 'NOTICE', 'provenance.json'):
             shutil.copyfile(HERE / name, meta / name)
         run('07-module-package', [java_home / 'bin/jar', '--create', '--file', target / 'm3-collections.jar',
-                                 '-C', classes, 'module-info.class', '-C', classes, 'com/m3/collections',
+                                 '-C', classes, 'module-info.class', '-C', classes, 'jdk/m3/collections',
                                  '-C', meta.parent, 'META-INF'])
         run('08-module-descriptor', [java_home / 'bin/jar', '--describe-module', '--file', target / 'm3-collections.jar'])
     else:

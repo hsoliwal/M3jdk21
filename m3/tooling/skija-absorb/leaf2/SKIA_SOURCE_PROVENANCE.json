@@ -1,0 +1,142 @@
+{
+  "schema": "m3.skija-native-source-provenance.v1",
+  "skija": {
+    "repository": "HumbleUI/Skija",
+    "commit": "44c99d7a92fe68a29b3233f8ca55b0d29d8f6f68",
+    "build_script_git_blob": "a7a933128b2e91c311447ae56543f9888d98fc96",
+    "default_skia_release": "m143-da51f0d60e-5",
+    "caller_override_possible": true
+  },
+  "skia": {
+    "repository": "google/skia",
+    "commit": "da51f0d60ea2b14e845a823dc11b405dbeef42d8",
+    "DEPS_git_blob": "288a633fa21ad790804bfd8f772172c2527dd346",
+    "DEPS_sha256": "3ff842146b0a0383990a21c31687569611cccfb8ea0b7e953f0eb35dc4ddcaf7",
+    "DEPS_utf8_bytes": 10021,
+    "selected_source_dependencies": [
+      {
+        "name": "expat",
+        "path": "third_party/externals/expat",
+        "origin": "https://chromium.googlesource.com/external/github.com/libexpat/libexpat.git",
+        "revision": "8e49998f003d693213b538ef765814c7d21abada",
+        "line": 47,
+        "status": "SOURCE_PIN_ONLY"
+      },
+      {
+        "name": "freetype",
+        "path": "third_party/externals/freetype",
+        "origin": "https://chromium.googlesource.com/chromium/src/third_party/freetype2.git",
+        "revision": "1518bc83d26b434031bd12c706ac3c7dab3902fd",
+        "line": 48,
+        "status": "SOURCE_PIN_ONLY"
+      },
+      {
+        "name": "harfbuzz",
+        "path": "third_party/externals/harfbuzz",
+        "origin": "https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git",
+        "revision": "08b52ae2e44931eef163dbad71697f911fadc323",
+        "line": 49,
+        "status": "SOURCE_PIN_ONLY"
+      },
+      {
+        "name": "libpng",
+        "path": "third_party/externals/libpng",
+        "origin": "https://skia.googlesource.com/third_party/libpng.git",
+        "revision": "ed217e3e601d8e462f7fd1e04bed43ac42212429",
+        "line": 59,
+        "status": "SOURCE_PIN_ONLY"
+      }
+    ]
+  },
+  "build_recipe": {
+    "repository": "HumbleUI/SkiaBuild",
+    "tag": "m143-da51f0d60e-5",
+    "commit": "ccf681dca9f98c3e9a0132b1da3af76e02f00041",
+    "tree": "41158b2a82a05e03efb77f74222f849db72e913a",
+    "files": [
+      {
+        "path": "script/checkout.py",
+        "git_blob": "726caae69cb9aa02b33b037857966004f34437b0",
+        "scope": "checkout.py parses branch/revision, checks out pinned Skia, applies seven patches then git-sync-deps"
+      },
+      {
+        "path": "script/build.py",
+        "git_blob": "7afc4b98535762772802485784c3244b0c26eaff",
+        "scope": "system Expat/libpng/HarfBuzz disabled; Windows system FreeType disabled"
+      },
+      {
+        "path": ".github/workflows/build.yml",
+        "git_blob": "ba97f7e617014779828807b1524d479c4e4d29a6",
+        "scope": "Windows checkout/build/archive/release steps"
+      },
+      {
+        "path": "script/archive.py",
+        "git_blob": "b5a5c980ebddbca6d2d48370fd5f70fd02e0dfb8",
+        "scope": "copies native libraries, ICU data, defines, selected headers and notices"
+      },
+      {
+        "path": "script/release.py",
+        "git_blob": "2916390a398194870c020844644e677b0c0ad9ce",
+        "scope": "tag/name release creation and asset upload; not a source attestation"
+      }
+    ],
+    "patch_targets": [
+      {
+        "git_blob": "729604cdbb5adf6ce4f401adc3702a8dddb538a6",
+        "target": "third_party/icu/SkLoadICU.cpp"
+      },
+      {
+        "git_blob": "879bb5fe8f2e026048e21b4aa32d75bcb649d093",
+        "target": "src/utils/SkParse.cpp"
+      },
+      {
+        "git_blob": "8d131a6779d5d48d8658fcc795ff01cdef306e13",
+        "target": "src/core/SkString.cpp"
+      },
+      {
+        "git_blob": "584436abab43fef4b7d3dcf4cbb614096ca924a5",
+        "target": "src/ports/SkTypeface_win_dw.cpp"
+      },
+      {
+        "git_blob": "d31c80b532f24e7279acb3af2ff03a39ed1d15f0",
+        "target": "bin/fetch-gn"
+      },
+      {
+        "git_blob": "8654a64362d5f979636c8c35d030f9fc9335ed7a",
+        "target": "include/codec/SkEncodedOrigin.h"
+      },
+      {
+        "git_blob": "f7c27491decb09d7aa8f8cf328720d8d73eccebb",
+        "target": "include/core/SkMatrix.h"
+      }
+    ],
+    "bounded_override_observation": "No selected-dependency override or DEPS change found in these source files and seven patches; this describes the inspected source recipe only.",
+    "upstream_run": {
+      "id": 37236277863,
+      "head": "ccf681dca9f98c3e9a0132b1da3af76e02f00041",
+      "conclusion": "success",
+      "qualification_scope": "Upstream build-run metadata only; not local native qualification."
+    }
+  },
+  "archive": {
+    "release_id": 403219620,
+    "asset_id": 610748728,
+    "name": "Skia-m143-da51f0d60e-5-windows-Release-x64.zip",
+    "advertised_bytes": 51009973,
+    "advertised_sha256": "0c08565758ef682434ad08fd733a4ea0675f0f980cc91bec5538ee5fc148f9dc",
+    "downloaded": false,
+    "bytes_verified": false,
+    "contents_verified": false,
+    "embedded_versions_verified": false,
+    "expanded_size": "UNKNOWN"
+  },
+  "packaging_notice_observations": {
+    "freetype": "archive.py explicitly copies FTL.TXT/GPLv2.TXT/LICENSE.TXT",
+    "libpng": "archive.py explicitly copies LICENSE",
+    "harfbuzz": "archive.py explicitly copies COPYING",
+    "expat": "No explicit notice copy found in the inspected archive.py",
+    "skia": "No explicit top-level LICENSE copy found in the inspected archive.py",
+    "limits": "Source recipe observations only. Actual ZIP contents, notices, library digests, binary dependency versions and license completeness remain unverified; no absence claim about the archive."
+  },
+  "release_admission": "HOLD: acquire/hash/inspect actual native archive and reconcile complete native notices before packaging. These source pins do not qualify the asset, JNI or runtime."
+}

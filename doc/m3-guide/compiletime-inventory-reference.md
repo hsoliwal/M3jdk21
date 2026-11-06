@@ -164,29 +164,29 @@ All source links below are immutable links at the source pin above. The eight pr
 
 | Owner | Git blob SHA-1 | SHA-256 |
 | --- | --- | --- |
-| [M3CallSiteCatalog](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3CallSiteCatalog.java) | `b8adfe9ff668b4fbf01f9380cec74c255c530ae0` | `9a7a70368f5bdd8c5a9d4a89f828da117a2d5b09d5b3ad940bcf092bf21b71c3` |
-| [M3ClassScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ClassScan.java) | `eca944fa53ed8c084b978ad1a8b0e1b290773bd0` | `69b449a216ccbd1adaf16ced4c2e179505b7b3c4d44b17ca5b7f52a2a35f89db` |
-| [M3CompileTimeStringInventory](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3CompileTimeStringInventory.java) | `e6f85a51ba51e0b64a6079866f875bd109c9f3c6` | `6890b8e6f277eee20db07370db6ec16da63431bdb69687f99df5801a34d4369b` |
-| [M3FormatPlan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3FormatPlan.java) | `1e042908ba6775a1c82e3f842211817b7e451df1` | `1bbdb9e7d0161d1e3dcb0abc800509cab08080ea3cd2892b94bd6ac1c00db5e6` |
-| [M3InventoryReport](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryReport.java) | `006ae5a8877788ce4152cca1a1a937e903880a8f` | `22d791343d4001427f6122f0f7c37d538aebad6039a772302487a06a718ade36` |
-| [M3InventoryState](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryState.java) | `578f5daf77970ad79a89c80f36f9093eb259b619` | `2e22774e67cb4460f72784d164ecb6ba382f8ceba38cb9e757dac3f0325d5228` |
-| [M3SiteRecorder](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3SiteRecorder.java) | `8cca345da7f6c856d44189ba45d009157f42667f` | `bf927b3073f19544408497cae8cb4f5ddd19fa0cd3fb54ebccbc249da55e8c89` |
-| [M3Tsv](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3Tsv.java) | `db1279c9f70861c6e14a2fe5b3d0573414a3572e` | `ddaa8225b21ebf1a89ea17db591d9eacd98d2cc754fde51bd0fbc55145ba1547` |
+| [M3CallSiteCatalog](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CallSiteCatalog.java) | `7bca56b75f1508f28496bb3b49e9d0c75b6a8e38` | `737d95d87e1e2c8293cbb5fabb1333286450719da992bd672476970aff564cc2` |
+| [M3ClassScan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ClassScan.java) | `515e64b8d05fa6e2e95b2eadd9444d2ed0e11986` | `2548946ee051d263900d743da8f215507e2d53a7ae13dc75357bebbdf7d4dcfd` |
+| [M3CompileTimeStringInventory](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CompileTimeStringInventory.java) | `e8a3bf23421a20a32fafb2a0512cd5821bec1c55` | `20097226aebe120d383a4b8c54b73a95edca0f91fe330b39c45e50ec471061ed` |
+| [M3FormatPlan](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3FormatPlan.java) | `7f9ce9fc7de1553537243d1e1dd60af9828b45b3` | `1b9328ef8236dc048f14c543fb1025ca63ddd32c798b43433de486ad6309ee73` |
+| [M3InventoryReport](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3InventoryReport.java) | `52ae4a1e23943c39862b7f00fdca3750121ec52b` | `950e4e6510e348e03a3d60afd3af919f44ed4d1c6bb6cf82d856fa78fc612789` |
+| [M3InventoryState](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3InventoryState.java) | `4ff81277a954327fd39079ba3d27698140c978c7` | `1e82b989dde71fd8618a00a7cd855efdf5ed19cbefa5ac122362276ea87a908f` |
+| [M3SiteRecorder](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3SiteRecorder.java) | `c094bbba5f7775fe84fea258d35e778201776362` | `270e28d2b863deb2d98a2265bc78788febbdb17ea979dcd5b16b359163a7a6b4` |
+| [M3Tsv](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3Tsv.java) | `0a12120890dd67d565dcff370ebb3b3b080115f2` | `86ae152c2e2defb554686c4ac64b2b096b5173ee1e0d4623d4faee2cfc9a4e73` |
 
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/pom.xml
 [readme]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/README.md
 [reactor]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/pom.xml
 [design]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/docs/m3-compiletime-precompute.md
 [precompute-pom]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/precompute/pom.xml
-[catalog]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3CallSiteCatalog.java
-[class-scan]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ClassScan.java
-[inventory]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3CompileTimeStringInventory.java
-[format-plan]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3FormatPlan.java
-[report]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryReport.java
-[state]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryState.java
-[recorder]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3SiteRecorder.java
-[tsv]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3Tsv.java
-[harvester]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexHarvester.java
-[differential]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexDifferential.java
-[format-test]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/com/m3/compiletime/M3FormatPlanTest.java
-[regex-test]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/com/m3/compiletime/M3RegexRequirementTest.java
+[catalog]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CallSiteCatalog.java
+[class-scan]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ClassScan.java
+[inventory]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CompileTimeStringInventory.java
+[format-plan]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3FormatPlan.java
+[report]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3InventoryReport.java
+[state]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3InventoryState.java
+[recorder]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3SiteRecorder.java
+[tsv]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3Tsv.java
+[harvester]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexHarvester.java
+[differential]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexDifferential.java
+[format-test]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3FormatPlanTest.java
+[regex-test]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3RegexRequirementTest.java

@@ -11,7 +11,7 @@
       "/workspace/scratch/6b6041146177/native-validation/headers-baseline",
       "-d",
       "/workspace/scratch/6b6041146177/native-validation/header-classes-baseline",
-      "/workspace/scratch/6b6041146177/M3JDK21/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java"
+      "/workspace/scratch/6b6041146177/M3JDK21/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java"
     ],
     "exit_code": 0,
     "stdout": "",
@@ -29,7 +29,7 @@
       "/workspace/scratch/6b6041146177/native-validation/headers-candidate",
       "-d",
       "/workspace/scratch/6b6041146177/native-validation/header-classes-candidate",
-      "/workspace/scratch/6b6041146177/native-validation/candidate-src/com/m3/collections/M3IndexPathMasks.java"
+      "/workspace/scratch/6b6041146177/native-validation/candidate-src/jdk/m3/collections/M3IndexPathMasks.java"
     ],
     "exit_code": 0,
     "stdout": "",
@@ -37,6 +37,6 @@
   },
   {
     "identical_jni_headers": true,
-    "sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50"
+    "sha256": "477a947e172dfec5a858a6ac67a34a83673d8af8c4453c506f343d338475a440"
   }
 ]

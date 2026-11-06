@@ -17,7 +17,7 @@ this script neither substitutes dependencies nor changes their coordinates.
 --probe-plan names a reviewed JSON file for the current source epoch, with
 schema M3_COLLECTION_REFINEMENT_PROBES_V1 and nonempty java, missing and native
 arrays. Each case has a class name, an args array, and optional stdout_lines
-containing exact frozen observations. Simple class names use com.m3.collections.
+containing exact frozen observations. Simple class names use jdk.m3.collections.
 Old probe assumptions and callback transcripts must be reconciled before reuse.
 """
 
@@ -38,7 +38,7 @@ import zipfile
 
 
 JUNIT_SHA256 = '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a'
-PACKAGE = 'com.m3.collections.'
+PACKAGE = 'jdk.m3.collections.'
 NATIVE_LIBRARIES = (
     ('libm3_collections_mask.so', (
         ('m3_index_mask_compactor.c', 'M3IndexMaskCompactor'),
@@ -370,7 +370,7 @@ def main():
             sources, declarations = [], []
             for filename, owner in owners:
                 source = snapshot / 'src/main/native/collections' / filename
-                header = headers / ('com_m3_collections_' + owner + '.h')
+                header = headers / ('jdk_m3_collections_' + owner + '.h')
                 verification.run('native-syntax-' + owner,
                                  flags + ['-include', header, '-fsyntax-only', source], snapshot)
                 sources.append(source)

@@ -3,21 +3,21 @@
   "scope": "One existing stable-order restoration; exact SDK-emitted receiver projection and verification sources",
   "baseline_receipt": {
     "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/RESULTS.json",
-    "sha256": "dc761bfabdf8785e4fbb099ae6970a0acbf81f8cda0b67ebdc95ba0e97cbdbe1"
+    "sha256": "927b3f6deccf25cc64a5910ed34eee1589098dcb436ce21f9b8d637ae31ada4a"
   },
   "generated_receipt": {
     "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/generated/RESULTS.json",
-    "sha256": "48ea94ba750af3acb228c2c854458149a08b0f5d7ea1bae99191eaa3d18014b4"
+    "sha256": "8447b5d391ae2e8e21875d6952509ec174049a727b5140f59fd4dc23b12c0293"
   },
   "sdk_receipt": {
     "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/RESULTS.json",
-    "sha256": "5e4d2fa1eab5702d65a1b6d44ca1a1d099d34e8e5620c85a4439a11c4d6823a1"
+    "sha256": "162a5d8ebcb52c9bf05c284f315ffc2146773f446861bd8fc12db851c1488eaf"
   },
   "diagnostic_comparison_retained_separately": {
     "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/DIAGNOSTIC_COMPARISON.json",
-    "sha256": "e60a1bcd07db5087c99e8300c92aef3223196b06e4f3dd95c594c3a9448c4b06"
+    "sha256": "7cbdf1d720166a89edc830338027c4879f4eb0171db90c40f16810f249ca6ff9"
   },
-  "exact_candidate_sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+  "exact_candidate_sha256": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
   "public_protected_api_identical": true,
   "deterministic_observations_sha256": "e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b",
   "workload": {

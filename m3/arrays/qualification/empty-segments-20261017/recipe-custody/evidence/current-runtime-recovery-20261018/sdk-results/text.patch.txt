@@ -5,7 +5,7 @@ index fb595d3..68f0b37 100644
 @@ -7,3 +7,8 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
  ALG-LEV	FUZZY_SEARCH	LEVENSHTEIN_AUTOMATON	hold-contract	MODULE	NONE	https://leetcode.com/problems/edit-distance/	https://www.hackerrank.com/challenges/basic-spell-checker/problem	https://www.geeksforgeeks.org/dsa/edit-distance-dp-5/	https://github.com/apache/lucene	Apache-2.0	REFERENCE_ONLY	inventory a real JDK owner and fuzzy/string contract before any adaptation
  ALG-FIB	SEARCH	FIBONACCI_SEARCH	hold-evidence	FILE	NONE	NONE	NONE	https://www.geeksforgeeks.org/dsa/fibonacci-search-in-python/	NONE	NONE	REFERENCE_ONLY	complete LeetCode and HackerRank category evidence before implementation
- ALG-NUMERIC-COPY-RUNS	ARRAYS	IMMUTABLE_NUMERIC_RANGE_COPY	candidate-adapted	FILE	m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	https://leetcode.com/problems/range-sum-query-immutable/	https://www.hackerrank.com/challenges/array-left-rotation/problem	https://www.geeksforgeeks.org/dsa/understanding-prefix-sums/	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java	Apache-2.0	ADAPT_FIRST_PARTY_AND_JDK_API	require matching Maven SDK, range/callback, API, allocation and original Java/JNI receipts; see m3/arrays/qualification/numeric-copy-20261018/CATALOGUE.json
+ ALG-NUMERIC-COPY-RUNS	ARRAYS	IMMUTABLE_NUMERIC_RANGE_COPY	candidate-adapted	FILE	m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java	https://leetcode.com/problems/range-sum-query-immutable/	https://www.hackerrank.com/challenges/array-left-rotation/problem	https://www.geeksforgeeks.org/dsa/understanding-prefix-sums/	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java	Apache-2.0	ADAPT_FIRST_PARTY_AND_JDK_API	require matching Maven SDK, range/callback, API, allocation and original Java/JNI receipts; see m3/arrays/qualification/numeric-copy-20261018/CATALOGUE.json
 +M3-RUNTIME-VTABLE-COUNT	RUNTIME_BOOTSTRAP	update matched constant to 6	BOUNDED_REPAIR	FILE	ClassLoader::compute_Object_vtable	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/src/hotspot/share/classfile/classLoader.cpp	GPL-2.0-only	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
 +M3-PROGRESS-JAVADOC	PUBLIC_API_DOCUMENTATION	Javadoc-only exact snapshots	DOCUMENTATION_ONLY	FILE	8 Runnable/concurrent plus 3 functional progress owners	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/make/modules/java.base/Java.gmk	GPL-2.0-only WITH Classpath-exception-2.0	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
 +M3-PROGRESS-SCOPE-LINT	BORROWED_SCOPE_LIFETIME	five method-local SuppressWarnings(try) annotations	SOURCE_ONLY_ANNOTATIONS	FILE	ProgressMonitors.run/call; Consumer.accept; Function.apply; Supplier.get	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/src/java.base/share/classes/java/io/FileDescriptor.java	GPL-2.0-only WITH Classpath-exception-2.0	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
@@ -802,17 +802,17 @@ index 0000000..641e397
 +  "targets": [
 +    {
 +      "path": "m3/backports/ALGORITHM_CATALOGUE.tsv",
-+      "current_sha256": "50e6381eed8e06fe9c073298b8a4cf20ad853df096887c6c8510a40bedce6569",
-+      "current_git_blob": "fb595d386d48a38d511d29778d15608d864ada56",
-+      "original_preimage_sha256": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
++      "current_sha256": "e225689ee0fc93496070e819f7b637aea299c3b677d3c72c833408343b4de72c",
++      "current_git_blob": "20fea633392da6bd108c23ce13292487359905a6",
++      "original_preimage_sha256": "3ab761465800d4fcb67c4a1024174292ee983b617db8708e1c8d451185730cdc",
 +      "delivered_sha256": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c",
 +      "delivered_git_blob": "f0b9cf0c109bcdd8fe075732b75f97f781a80353",
-+      "candidate_sha256": "bea7b397c823b5849159fcc0dd89e599b83f694f4caf84d6a05dfbe0ad8892f6",
++      "candidate_sha256": "7cb1e78450bd0fd8369482bb64f83035a2485c7a167c0ad2eecef8c125b6f001",
 +      "disposition": "PRESERVE_CURRENT_PREFIX_APPEND_FIVE_EXACT_REPAIR_ROWS",
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
-+          "before": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
++          "before": "3ab761465800d4fcb67c4a1024174292ee983b617db8708e1c8d451185730cdc",
 +          "after": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0001-ALGORITHM_CATALOGUE.tsv.txt"
@@ -935,9 +935,9 @@ index 0000000..641e397
 +    },
 +    {
 +      "path": "m3/docs/name-mapping.json",
-+      "current_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
-+      "current_git_blob": "4f5911d625090913d85f9cf41b1ead1694dffade",
-+      "original_preimage_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
++      "current_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
++      "current_git_blob": "986147e2df24ef25076d451c49782d8e7e354a11",
++      "original_preimage_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
 +      "delivered_sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
 +      "delivered_git_blob": "beb622bdb79ad2b6192ff5bcb3f2de59050effdd",
 +      "candidate_sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
@@ -945,7 +945,7 @@ index 0000000..641e397
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-runtime-control",
-+          "before": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
++          "before": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
 +          "after": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
 +          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
 +          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0005-name-mapping.json.txt"
@@ -1087,9 +1087,9 @@ index 0000000..641e397
 +    },
 +    {
 +      "path": "src/java.base/share/classes/java/util/Strings.java",
-+      "current_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
-+      "current_git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
-+      "original_preimage_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
++      "current_sha256": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
++      "current_git_blob": "b7071f97d7b5b48d30335d344e60a1e2d35f8809",
++      "original_preimage_sha256": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
 +      "delivered_sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
 +      "delivered_git_blob": "82ab932c10d8452f951c09cc1beaf79df77a53c4",
 +      "candidate_sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
@@ -1097,7 +1097,7 @@ index 0000000..641e397
 +      "recipe_chain": [
 +        {
 +          "dataset": "m3jdk21-strings-doclint",
-+          "before": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
++          "before": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
 +          "after": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
 +          "manifest": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/manifest.tsv",
 +          "template": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/0001-Strings.java.txt"

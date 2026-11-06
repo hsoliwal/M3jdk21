@@ -10,14 +10,14 @@ import subprocess
 import sys
 
 RULES = [
-    ("org.eclipse.swt.internal.residency", "com.m3.swing.viewport.engine.residency"),
-    ("org.eclipse.swt.internal.swap", "com.m3.swing.viewport.engine.swap"),
-    ("org.eclipse.swt.internal.PackedHeapGrowth", "com.m3.swing.viewport.engine.PackedHeapGrowth"),
-    ("import org.eclipse.swt.internal.*;", "import com.m3.swing.viewport.engine.*;"),
-    ("package org.eclipse.swt.internal;", "package com.m3.swing.viewport.engine;"),
+    ("org.eclipse.swt.internal.residency", "jdk.m3.swing.viewport.engine.residency"),
+    ("org.eclipse.swt.internal.swap", "jdk.m3.swing.viewport.engine.swap"),
+    ("org.eclipse.swt.internal.PackedHeapGrowth", "jdk.m3.swing.viewport.engine.PackedHeapGrowth"),
+    ("import org.eclipse.swt.internal.*;", "import jdk.m3.swing.viewport.engine.*;"),
+    ("package org.eclipse.swt.internal;", "package jdk.m3.swing.viewport.engine;"),
 ]
 SRC = "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/internal/"
-DST = "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/engine/"
+DST = "m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/engine/"
 APACHE_PORTS = {"SwapStore", "TieredSwapCache", "SwapBudgetPlane", "SwapPressureController", "SwapPageBinaryOps",
                 "JavaSwapPageBinaryOps", "ParityCheckedSwapPageBinaryOps"}
 
@@ -42,7 +42,7 @@ for p in sorted(paths):
     blob = git("cat-file", "-p", commit + ":" + p)
     post = transform(blob.decode("utf-8")).encode("utf-8")
     rel = p[len(SRC):]
-    package = "com.m3.swing.viewport.engine" + ("." + rel.rsplit("/", 1)[0] if "/" in rel else "")
+    package = "jdk.m3.swing.viewport.engine" + ("." + rel.rsplit("/", 1)[0] if "/" in rel else "")
     name = rel.rsplit("/", 1)[-1][:-5]
     licence = "Apache-2.0 (ported Synexia)" if name in APACHE_PORTS else "EPL-2.0 OR Apache-2.0"
     residual = transform(blob.decode("utf-8")).count("org.eclipse.swt")

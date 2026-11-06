@@ -21,9 +21,9 @@
         "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include/linux",
         "-D_GNU_SOURCE",
         "-c",
-        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-defined/M3PrimitiveFixedArena.c",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/m3/m3-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-defined/M3PrimitiveFixedArena.c",
         "-o",
-        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-defined/M3PrimitiveFixedArena.o"
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/m3/m3-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-defined/M3PrimitiveFixedArena.o"
       ],
       "exit": 1,
       "expectedCompilerPass": false
@@ -42,9 +42,9 @@
         "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include",
         "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include/linux",
         "-c",
-        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-undefined/M3PrimitiveFixedArena.c",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/m3/m3-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-undefined/M3PrimitiveFixedArena.c",
         "-o",
-        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-undefined/M3PrimitiveFixedArena.o"
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/m3/m3-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-undefined/M3PrimitiveFixedArena.o"
       ],
       "exit": 0,
       "expectedCompilerPass": true
@@ -64,9 +64,9 @@
         "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include/linux",
         "-D_GNU_SOURCE",
         "-c",
-        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-defined/M3PrimitiveFixedArena.c",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/m3/m3-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-defined/M3PrimitiveFixedArena.c",
         "-o",
-        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-defined/M3PrimitiveFixedArena.o"
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/m3/m3-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-defined/M3PrimitiveFixedArena.o"
       ],
       "exit": 0,
       "expectedCompilerPass": true
@@ -85,9 +85,9 @@
         "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include",
         "-I/tmp/m3-toolchain/verified/jdk-21.0.12.1+1/include/linux",
         "-c",
-        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-undefined/M3PrimitiveFixedArena.c",
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/m3/m3-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-undefined/M3PrimitiveFixedArena.c",
         "-o",
-        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-undefined/M3PrimitiveFixedArena.o"
+        "/workspace/scratch/87fb3604f641/m3-implementation/string-lane/m3/m3-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/after-undefined/M3PrimitiveFixedArena.o"
       ],
       "exit": 0,
       "expectedCompilerPass": true

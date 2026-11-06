@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.synexia.m3</groupId>
+  <groupId>jdk.internal.m3</groupId>
   <artifactId>m3-source-inventory-recipe</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -30,7 +30,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>org.synexia.m3.recipe.M3InventoryRecipeTest</mainClass>
+              <mainClass>jdk.internal.m3.recipe.M3InventoryRecipeTest</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
@@ -42,7 +42,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>org.synexia.m3.recipe.M3ProblemCatalogueTest</mainClass>
+              <mainClass>jdk.internal.m3.recipe.M3ProblemCatalogueTest</mainClass>
               <classpathScope>test</classpathScope>
               <arguments>
                 <argument>${project.basedir}/../../../docs/m3/problem-areas.tsv</argument>
@@ -87,7 +87,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

@@ -1,0 +1,63 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 source-bound JNI declaration/export join
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/atom-census/**'
+      - '.github/workflows/m3jdk21-jni-export-join-20261101.yml'
+  push:
+    paths:
+      - 'm3/tooling/atom-census/**'
+      - '.github/workflows/m3jdk21-jni-export-join-20261101.yml'
+permissions:
+  contents: read
+jobs:
+  source-bound-join:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact SHA256 and receiver documentation custody
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+          root=Path('m3/tooling/atom-census')
+          receipt=json.loads((root/'contract/M3_JNI_EXPORT_JOIN_RECEIPT.json').read_text())
+          assert receipt['schema']=='M3_JNI_EXPORT_JOIN_RECEIVER/1'
+          required={
+            'src/main/java/jdk/m3/tooling/atoms/M3JniExportJoin.java': 'b6aa82f5fb88cc93eddd5c3ba8e28667f68c903d92099ae6ace17719ee0bf7fc',
+            'src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinSelfTest.java': '3cb59a8a3c26d58cd12333affe5a3c586e204836305d693342bfcaf7be193720',
+            'src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinTest.java': '6c0a20e08a88e625428f3769652049882c33d132b4a67157bba239d96dd25275',
+            'test-fixtures/jni-export-join/JniJoinRuntime.java': '6feda8e0868db0beccf0728c8606d1dbd46ee8618ede52f35444ceba2a61f4e6',
+            'test-fixtures/jni-export-join/demo/pkg/Outer.java': '6b92a80fc03677194d100ea4f4038540abe5deed1fc3fde615c39a31de8906f4',
+            'test-fixtures/jni-export-join/m3jni_export_join.c': '8ae1fa0283ddd70856b049450418d487e3d2cfe661bd6942243502bb11d970f5',
+            'verify-jni-export-join.sh': '7b39603b8309bf41d8d411f23b0f7577bdd28e57b7ffb445efba5f22821f83e9',
+            'contract/JNI_EXPORT_JOIN_V1.md': '2ddbcbbdbcac089699ce258c057e0c8cdc925823dc9fd56f844ef8dabb65bfb9',
+          }
+          for name,expected in required.items():
+              path=root/name
+              if not path.is_file() or path.is_symlink():
+                  raise SystemExit('SOURCE_REQUIRED_MISSING_OR_LINKED '+name)
+              actual=hashlib.sha256(path.read_bytes()).hexdigest()
+              if actual!=expected:raise SystemExit('SOURCE_DRIFT '+name)
+          print('M3_JNI_SOURCE_SHA256_PASS files='+str(len(required)))
+          PY
+      - name: Java21 strict compile, 28 JNI source/header checks, GCC and Clang Xcheck:jni
+        shell: bash
+        run: bash m3/tooling/atom-census/verify-jni-export-join.sh
+      - name: Real JUnit / Surefire in the existing atom census Maven owner
+        shell: bash
+        run: mvn -B -ntp -f m3/tooling/atom-census/pom.xml -Dtest=M3JniExportJoinTest test
+      - name: Preserve product qualification hold
+        run: echo 'TESTED_JAVA21_TOOL_NOT_SOURCE_BUILT_M3JDK21_ABI_JTREG_JCK'

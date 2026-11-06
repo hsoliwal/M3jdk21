@@ -3,10 +3,11 @@ name: M3 long-range arrays with real JNI masks
 on:
   pull_request:
     paths:
-      - "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java"
-      - "m3/collections/src/test/java/com/m3/collections/M3LongRangeSet*.java"
+      - "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java"
+      - "m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSet*.java"
+      - "m3/collections/qualification/range-atom/successor/**"
       - "m3/collections/qualification/long-range-set-20261017/**"
-      - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017/**"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017/**"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-long-range-array-flags-20261017.yml"
       - ".github/workflows/m3-long-range-arrays-jni-20261017.yml"
   push:
@@ -33,48 +34,65 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          python3 -S m3/collections/qualification/long-range-set-20261017/verify.py
+          python3 -S m3/collections/qualification/range-atom/successor/verify.py
       - name: Actual Maven OpenRewrite AST source generation and refusals
         shell: bash
         run: |
           set -euxo pipefail
           mvn -B -ntp -f m3/collections/qualification/long-range-set-20261017/recipe/pom.xml test
+      - name: Build actual Java21 m3-arrays dependency before strict module compilation
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -Dmaven.test.skip=true install
+          test -s m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar
+          jar --describe-module --file m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar | grep '^jdk.m3.arrays'
       - name: Strict current M3 Java and module owner JUnit
         shell: bash
         run: |
           set -euxo pipefail
           mkdir -p proof/classes proof/native
           find m3/collections/src/main/java -name '*.java' -print0 | sort -z | \
-            xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/classes
-          javac --release 21 -proc:none -Xlint:all -Werror -cp proof/classes -d proof/classes \
-            m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java
-          java -Xmx128m -cp proof/classes com.m3.collections.M3LongRangeSetSelfTest | tee proof/long-range-java.log
+            xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror \
+              --module-path m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar -d proof/classes
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            --module-path m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar \
+            -cp proof/classes -d proof/classes \
+            m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSetSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java
+          java -Xmx128m -cp proof/classes jdk.m3.collections.M3LongRangeSetSelfTest | tee proof/long-range-java.log
           grep -q 'PASS M3LongRangeSetSelfTest oracleChecks=' proof/long-range-java.log
-          java -Xint -Xmx128m -cp proof/classes com.m3.collections.M3LongRangeSetSelfTest
-          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest test
+          java -Xint -Xmx128m -cp proof/classes jdk.m3.collections.M3LongRangeSetSelfTest
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest,M3LongRangeSetAtomTest test
       - name: Unchanged C17 JNI binary, checked native oracle and range selection
         shell: bash
         run: |
           set -euxo pipefail
-          javac --release 21 -proc:none -h proof/native -cp proof/classes \
-            -d proof/classes m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+          javac --release 21 -proc:none -h proof/native \
+            --module-path m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar \
+            -cp proof/classes \
+            -d proof/classes m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
           gcc -std=c17 -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic \
             -fPIC -shared -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             m3/collections/src/main/native/collections/m3_index_path_masks.c \
             -o proof/native/libm3_collections_pathmask.so
           nm -D proof/native/libm3_collections_pathmask.so | \
-            grep Java_com_m3_collections_M3IndexPathMasks_selectNative
+            grep Java_jdk_m3_collections_M3IndexPathMasks_selectNative
           UBSAN_OPTIONS=halt_on_error=1 java -Xmx128m -Xcheck:jni \
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
-            com.m3.collections.M3IndexPathMasksSelfTest --native | tee proof/pathmask-native.log
+            jdk.m3.collections.M3IndexPathMasksSelfTest --native | tee proof/pathmask-native.log
           grep -q 'JNI=true' proof/pathmask-native.log
           UBSAN_OPTIONS=halt_on_error=1 java -Xmx128m -Xcheck:jni \
             -Djava.library.path="$PWD/proof/native" -cp proof/classes \
-            com.m3.collections.M3LongRangeSetSelfTest | tee proof/long-range-native.log
+            jdk.m3.collections.M3LongRangeSetSelfTest | tee proof/long-range-native.log
           grep -q 'PASS M3LongRangeSetSelfTest oracleChecks=' proof/long-range-native.log
-          python3 -S m3/collections/qualification/long-range-set-20261017/verify.py
+          # The second JVM runs the new atom JUnit under actual native JNI,
+          # not the Java-only selector stub used during isolated development.
+          mvn -B -ntp -f m3/collections/pom.xml \
+            '-Dtest=M3LongRangeSetAtomTest' \
+            "-DargLine=-Xcheck:jni -Djava.library.path=$PWD/proof/native" test
+          python3 -S m3/collections/qualification/range-atom/successor/verify.py
           git diff --exit-code
       - name: Retain build evidence and actual errors
         if: always()

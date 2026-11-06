@@ -323,7 +323,7 @@
             <excludes>
               <!-- https://github.com/google/guava/issues/2840 -->
               <exclude>%regex[.*PackageSanityTests.*.class]</exclude>
-              <!-- FeatureUtilTest.*ExampleDerivedInterfaceTester, com.m3.collections.guava.io.*Tester, incidentally FeatureSpecificTestSuiteBuilderTest.MyAbstractTester (but we don't care either way because it's not meant to run on its own but works OK if it does)... but not NullPointerTesterTest, etc. -->
+              <!-- FeatureUtilTest.*ExampleDerivedInterfaceTester, jdk.m3.collections.guava.io.*Tester, incidentally FeatureSpecificTestSuiteBuilderTest.MyAbstractTester (but we don't care either way because it's not meant to run on its own but works OK if it does)... but not NullPointerTesterTest, etc. -->
               <exclude>%regex[.*Tester.class]</exclude>
               <!-- Anonymous TestCase subclasses in GeneratedMonitorTest -->
               <exclude>%regex[.*[$]\d+.class]</exclude>
@@ -366,18 +366,18 @@
           </dependencies>
           <configuration>
             <annotations>
-              <annotation>com.m3.collections.guava.base.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.cache.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.collect.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.collect.testing.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.collect.testing.testers.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.hash.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.io.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.math.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.primitives.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.reflect.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.testing.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.util.concurrent.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.base.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.cache.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.collect.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.collect.testing.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.collect.testing.testers.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.hash.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.io.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.math.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.primitives.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.reflect.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.testing.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.util.concurrent.IgnoreJRERequirement</annotation>
             </annotations>
             <checkTestClasses>true</checkTestClasses>
             <signature>
@@ -605,54 +605,6 @@
                     <argument>${javaHome}</argument>
                   </arguments>
                   <outputFile>${project.build.directory}/java_11_home</outputFile>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>m3-recipe-boot</id>
-      <activation>
-        <file>
-          <exists>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</exists>
-        </file>
-      </activation>
-      <properties>
-        <m3.recipe.boot.skip>false</m3.recipe.boot.skip>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>3.5.0</version>
-            <inherited>true</inherited>
-            <dependencies>
-              <dependency>
-                <groupId>com.synexia.m3</groupId>
-                <artifactId>m3-pr-stack-preservation</artifactId>
-                <version>1.0.0-m3boot20261021</version>
-              </dependency>
-            </dependencies>
-            <executions>
-              <execution>
-                <id>m3-recipe-boot</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>java</goal>
-                </goals>
-                <configuration>
-                  <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
-                  <includeProjectDependencies>false</includeProjectDependencies>
-                  <includePluginDependencies>true</includePluginDependencies>
-                  <arguments>
-                    <argument>${maven.multiModuleProjectDirectory}/.m3/recipe-boot.properties</argument>
-                    <argument>${project.basedir}</argument>
-                    <argument>${session.projects[0].basedir.absolutePath}</argument>
-                  </arguments>
                 </configuration>
               </execution>
             </executions>

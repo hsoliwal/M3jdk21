@@ -99,24 +99,24 @@ establish a universal graph or application speedup.
 
 | Target | Final SDK postimage SHA-256 |
 | --- | --- |
-| `m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java` | `180488506ddfd0709530a7f164217d684389b4d5e77ce56b204bb0df4ad153de` |
-| `m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java` | `31dd73ae6b8621eb326af013560fb1fca09650248fa67dba7daf526f7c385dd6` |
-| `m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java` | `eadaa78df40c19062ac56119fb123e31faf2dcc8e9b302e29a415bc7798e35f0` |
-| `m3/ports/compiletime/src/test/java/com/m3/compiletime/M3EscapePreparedTest.java` | `ea8bed1a238df1964d11b49e3a5742f44f27ff262c0fe1741bbaa0bcf5a23dcb` |
+| `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java` | `f8e14d9ab9e4499457ab58ad0776a8e8124331f28ab48de23bb69bc2f83adaff` |
+| `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java` | `cbe859bcfd97ee2e7bec6122c96de66d25159d00770cc84c5f0227c64f96f814` |
+| `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java` | `4c504f5272d2d66b3e1de78e8db4dd4690aa4795b98eba91a828b15bbe409994` |
+| `m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java` | `f1a3e4fa22d4ac116e936cac4d51d459d3def5ae855bd484157ca9fe3006de46` |
 | `m3/docs/name-mapping.d/m3-program-escape-precompute.json` | `d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f` |
 
-The Java manifest hash is `13e556fb54e01c3aac8ae328b6e75363ff626ae797652209f5e50ddc4c077c4a`;
+The Java manifest hash is `6f89d7258175b03200250d0ba233dd3a49ff090cfd9bfb9008bf888b4562ef96`;
 the text manifest hash is `029f8135054b08b5b05b7e7b8ca62a4ed84614ac2a4ad04620e3a23848f8d293`.
-The parent inventory hash is `f131fbdae5e460c89a93521873f540e93921b16729ceebb0b23eb10542eceee6`.
+The parent inventory hash is `39d8554e1f2812e457b2189d71e6c060006d515dd2748fbb85945176e38d23f0`.
 
 | Retained binding | SHA-256 |
 | --- | --- |
-| `evidence/qualified/SDK_INPUTS.tsv` | `e3c442a0973fe61a69c1768682023d1f1970b27bf24c2f945a4a5ba8aba0c4e9` |
-| `evidence/qualified/SDK_RESULTS.tsv` | `69b360a1288ec8ecf5fdb9d67867e1b6f941e9e12f47cd538a1cf37343ab3c9d` |
+| `evidence/qualified/SDK_INPUTS.tsv` | `f42529caa44677e118295e233ba89022c5b32f8d4dbbdf312f6ad33bf2825055` |
+| `evidence/qualified/SDK_RESULTS.tsv` | `c70b1ad337f5bd4d38305f7529c1ceef7ec70e63bf6a7231e37568b58fb9ba68` |
 | `evidence/qualified/SDK-five-tests.xml` | `065c2b1dcf7ad3400dcb5b07f9969b20d202efb7e446a1f9f0dd6b63baa2c6d9` |
 | `evidence/qualified/receipt.json` | `4daa23b7a980ad7d0d500bd053f8a8a0ba52f6498aeac5a83c9afc29a2e32ec6` |
-| `contract/input-seals.json` | `1deb105709e42e049ebb9245ab411c98aed97b7282e21816770e98e878e2c96c` |
-| `payload-manifest.json` | `60a169a42c311294ddeb569cc649d16544752df19f5eacb20693811871050db2` |
+| `contract/input-seals.json` | `334cb4bf785991d6f54135c8861f68129e109cb74d7fac2c94bdbd995e7760da` |
+| `payload-manifest.json` | `fe8c5e73e59d955728738c36c1583beb735140ecea280ae1bccd5139e4881089` |
 
 ## Retained failures and open gates
 

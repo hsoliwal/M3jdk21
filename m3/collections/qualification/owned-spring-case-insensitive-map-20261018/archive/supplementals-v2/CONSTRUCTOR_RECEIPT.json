@@ -1,7 +1,7 @@
 {
   "schema": "spring-owned-empty-constructor-profile-v2",
   "status": "PASS_EXACT_PROVIDER_32_EMPTY_CONSTRUCTORS",
-  "ownerSHA256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+  "ownerSHA256": "d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c",
   "constructorFixtureSHA256": "719bd75e7d33b4c2345abb51162fffc9f7c6cc77b09ec952730bb9c902f46554",
   "providerReceiptSHA256": "a3622a2eb6bca7c120f8cbdcbc27b225f16892d58682170da65c7b9f081ec922",
   "summary": {

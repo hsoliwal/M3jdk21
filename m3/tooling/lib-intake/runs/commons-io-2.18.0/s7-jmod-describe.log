@@ -1,0 +1,18 @@
+jdk.m3.io@2.18.0-m3-source-1
+exports com.m3.lib.io
+exports com.m3.lib.io.build
+exports com.m3.lib.io.channels
+exports com.m3.lib.io.charset
+exports com.m3.lib.io.comparator
+exports com.m3.lib.io.file
+exports com.m3.lib.io.file.attribute
+exports com.m3.lib.io.file.spi
+exports com.m3.lib.io.filefilter
+exports com.m3.lib.io.function
+exports com.m3.lib.io.input
+exports com.m3.lib.io.input.buffer
+exports com.m3.lib.io.monitor
+exports com.m3.lib.io.output
+exports com.m3.lib.io.serialization
+requires java.base mandated
+

@@ -91,7 +91,7 @@
   "retainedOriginalPaths": 642,
   "retainedPublishedTaskPaths": 435,
   "retainedTotalPaths": 1077,
-  "schema": "synexia.source-final-git-check/1",
+  "schema": "m3.source-final-git-check/1",
   "semanticOrReactorQualification": false,
   "status": "PASS_COMPLETE_CHANGED_PATH_CHECK"
 }

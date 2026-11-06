@@ -92,18 +92,18 @@ def main():
     arrays_sources = sorted((ARRAYS / 'src/main/java').rglob('*.java'))
     arrays_descriptor = ARRAYS / 'src/main/java/module-info.java'
     if not arrays_sources or arrays_descriptor not in arrays_sources:
-        raise RuntimeError('Missing original com.m3.arrays module source')
+        raise RuntimeError('Missing original jdk.m3.arrays module source')
     maven(ARRAYS / 'pom.xml', '-DskipTests', 'install')
     arrays_jar = ARRAYS / 'target/m3-arrays-0.1.0-SNAPSHOT.jar'
     if not arrays_jar.is_file():
-        raise RuntimeError('Built original com.m3.arrays module artifact missing')
+        raise RuntimeError('Built original jdk.m3.arrays module artifact missing')
     with zipfile.ZipFile(arrays_jar) as arrays_package:
         if 'module-info.class' not in arrays_package.namelist():
             raise RuntimeError('M3 arrays built artifact lost its module descriptor')
     array_module = subprocess.check_output(
         [JAVA / 'bin/jar', '--describe-module', '--file', arrays_jar],
         text=True).splitlines()[0].split()[0].split('@')[0]
-    if array_module != 'com.m3.arrays':
+    if array_module != 'jdk.m3.arrays':
         raise RuntimeError('Unexpected product arrays module identity: ' + array_module)
 
     sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
@@ -124,7 +124,7 @@ def main():
         objects = []
         for name, owner in rows:
             obj = OUT / 'native' / (name + '.o')
-            run(cc + ['-fPIC', '-include', OUT / 'headers' / ('com_m3_collections_' + owner + '.h'),
+            run(cc + ['-fPIC', '-include', OUT / 'headers' / ('jdk_m3_collections_' + owner + '.h'),
                       '-c', native / name, '-o', obj])
             objects.append(obj)
         run(cc + ['-shared', *objects, '-o', OUT / 'native' / ('lib' + library + '.so')])
@@ -132,8 +132,8 @@ def main():
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror',
          '-cp', os.pathsep.join((str(OUT / 'classes'), str(arrays_jar))),
          '-h', OUT / 'headers', '-d', OUT / 'fixture-classes',
-         MODULE / 'src/test/java/com/m3/collections/M3BitLaneJumpProof.java'])
-    run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/com_m3_collections_M3BitLaneJumpProof.h',
+         MODULE / 'src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'])
+    run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/jdk_m3_collections_M3BitLaneJumpProof.h',
               MODULE / 'src/test/native/m3_bitlane_jump_jni.c', '-o',
               OUT / 'native/libm3_bitlane_jump_test.so'])
     for fixture in ('spans', 'regions'):
@@ -162,13 +162,13 @@ def main():
         expected_classes = {str(p.relative_to(OUT / 'classes')) for p in (OUT / 'classes').rglob('*.class')}
         actual_classes = {name for name in archive.namelist() if name.endswith('.class')}
         if expected_classes != actual_classes: raise RuntimeError('Packaged class inventory differs from fresh compilation')
-        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'name-mapping.json', 'SYNEXIA-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
+        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'name-mapping.json', 'M3-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
             if archive.read('META-INF/' + name) != (MODULE / name).read_bytes():
                 raise RuntimeError('Packaged module legal/provenance bytes differ: ' + name)
     runtime_modules = subprocess.check_output(
         [JAVA / 'bin/jdeps', '--module-path', arrays_jar,
          '--print-module-deps', jar], text=True).strip()
-    if set(runtime_modules.split(',')) != {'java.base', 'com.m3.arrays'}:
+    if set(runtime_modules.split(',')) != {'java.base', 'jdk.m3.arrays'}:
         raise RuntimeError('Unexpected runtime dependencies: ' + runtime_modules)
     cp = os.pathsep.join((str(MODULE / 'target/classes'),
                           str(MODULE / 'target/test-classes'), str(arrays_jar)))
@@ -192,11 +192,11 @@ def main():
                  ('M3SignalDimensionsNativeContract', []),
                  ('M3ResidencyStateMaskProof', ['native']),
                  ('M3BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')])]
-    for name, args in contracts: run(java + ['com.m3.collections.' + name, *args])
+    for name, args in contracts: run(java + ['jdk.m3.collections.' + name, *args])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'com.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
+         'jdk.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'com.m3.collections.M3LongIndexPathMasksJNISelfTest'])
+         'jdk.m3.collections.M3LongIndexPathMasksJNISelfTest'])
     native_fixtures = [MODULE / 'src/test/native' / name for name in
                        ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c')]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
@@ -205,7 +205,7 @@ def main():
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,
              'source_dependencies': dependency_proof,
-             'first_party_module_dependencies': {'com.m3.arrays': {
+             'first_party_module_dependencies': {'jdk.m3.arrays': {
                  'module_descriptor_sha256': sha(arrays_descriptor),
                  'artifact_sha256': sha(arrays_jar),
                  'source_sha256': {str(p.relative_to(ROOT)): sha(p) for p in arrays_sources}}},

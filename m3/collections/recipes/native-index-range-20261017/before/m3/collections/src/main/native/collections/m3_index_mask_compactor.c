@@ -17,7 +17,7 @@ static void m3_throw_state_drift(JNIEnv *env) {
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask) {
     (void)owner;
     if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {

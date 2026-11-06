@@ -214,7 +214,7 @@
     {
       "source": "Existing com.sun.source.util.M3AST compiler frontend",
       "source_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
-      "target": "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java",
+      "target": "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java",
       "status": "Actual callback projection over compiler-owned trees; syntax-only parse helper",
       "recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
       "target_rule": "No independent parser, tree owner or live compiler-object cache; detached primitive facts and public record projections",

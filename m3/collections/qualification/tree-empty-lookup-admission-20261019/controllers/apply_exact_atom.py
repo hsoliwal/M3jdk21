@@ -38,8 +38,8 @@ original = [json.loads(line) for line in original_raw.splitlines()]
 baseline = [json.loads(line) for line in baseline_raw.splitlines()]
 assert len(original) == len(baseline) == 642
 assert original[-1] == baseline[-1] == {'kind':'complete','caseCount':640}
-assert baseline[0]['provider'] == 'com.m3.collections.M3TreeMap'
-baseline_class = ROOT/'m3-tree-put-validation-20261019/qualification-compile-v1/classes/com/m3/collections/M3TreeMap.class'
+assert baseline[0]['provider'] == 'jdk.m3.collections.M3TreeMap'
+baseline_class = ROOT/'m3-tree-put-validation-20261019/qualification-compile-v1/classes/jdk/m3/collections/M3TreeMap.class'
 assert sha(baseline_class.read_bytes()) == baseline[0]['classSha256']
 witness_id = 'NATURAL/FRESH/ROOT/ALWAYS_THROW/get'
 a = next(row for row in original[1:-1] if row['id'] == witness_id)
@@ -56,7 +56,7 @@ after = before.replace(old, new)
 assert after.replace(new, old) == before
 recipe = {'schema':'m3-exact-file-behavior-atom-recipe/v1',
     'sourceRepository':'hsoliwal/M3jdk21','sourceCommit':admission['baseCommit'],
-    'file':'m3/collections/src/main/java/com/m3/collections/M3TreeMap.java',
+    'file':'m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java',
     'preimageSha256':sha(before),'postimageSha256':sha(after),
     'preimageGitBlob':hashlib.sha1(b'blob '+str(len(before)).encode()+b'\0'+before).hexdigest(),
     'postimageGitBlob':hashlib.sha1(b'blob '+str(len(after)).encode()+b'\0'+after).hexdigest(),
@@ -67,7 +67,7 @@ recipe = {'schema':'m3-exact-file-behavior-atom-recipe/v1',
     'baselineWitness':b,'originalWitness':a,'publicInterfacesUnchanged':True,
     'allOtherSourceBytesUnchanged':True,'noOpenJdkSourceImported':True}
 write(UNIT/'TRANSFORMATION_RECIPE.json',(json.dumps(recipe,indent=2)+'\n').encode())
-write(UNIT/'src/main/java/com/m3/collections/M3TreeMap.java',after)
+write(UNIT/'src/main/java/jdk/m3/collections/M3TreeMap.java',after)
 write(UNIT/'M3TreeMap.empty-lookup.diff',''.join(difflib.unified_diff(before.decode().splitlines(keepends=True),
       after.decode().splitlines(keepends=True),fromfile='published/M3TreeMap.java',tofile='candidate/M3TreeMap.java')).encode())
 def apply(raw):

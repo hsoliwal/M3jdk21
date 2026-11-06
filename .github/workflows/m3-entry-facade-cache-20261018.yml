@@ -3,25 +3,25 @@ name: M3 array-backed entry facade cache
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LFUCache.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SlotMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3TreeMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3EntryFacadeCacheTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LFUCache.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3WeakHashMap.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3EntryFacadeCacheTest.java'
       - 'm3/collections/qualification/m3-entry-facade-cache-20261018/**'
   push:
     branches:
       - m3/lfu-entry-facades-20261018
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LFUCache.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SlotMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3TreeMap.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3EntryFacadeCacheTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LFUCache.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3WeakHashMap.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3EntryFacadeCacheTest.java'
       - 'm3/collections/qualification/m3-entry-facade-cache-20261018/**'
 
 permissions:
@@ -43,7 +43,9 @@ jobs:
           cache: maven
       - name: Verify source-sealed transformation recipe
         run: mvn -B -ntp -f m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml verify
+      - name: Build m3/arrays and its JNI library, which the collection module requires
+        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
       - name: Test owning M3 collection module
-        run: mvn -B -ntp -f m3/collections/pom.xml test
+        run: mvn -B -ntp -f m3/collections/pom.xml "-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" test
       - name: Verify generated source postimages
-        run: java -cp m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/target/classes com.synexia.m3.M3EntryFacadeCacheRecipe --check .
+        run: java -cp m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/target/classes jdk.internal.m3.M3EntryFacadeCacheRecipe --check .

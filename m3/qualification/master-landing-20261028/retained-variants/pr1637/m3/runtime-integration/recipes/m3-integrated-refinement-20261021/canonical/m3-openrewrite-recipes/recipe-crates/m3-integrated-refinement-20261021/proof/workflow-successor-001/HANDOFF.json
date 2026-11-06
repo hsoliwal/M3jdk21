@@ -1,0 +1,9 @@
+[
+  {
+    "target_path": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
+    "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/final-review/workflow-successor/postimages/.github/workflows/m3-eclipse-framework-forward-20261017.yml",
+    "before_sha256": "73727306149bdfb0836857638d0e0f3527cf967bf9c0982f67a27a5d22ef1918",
+    "after_sha256": "c64fe14c50aaa5f931c39749152455b9f789e3df17944063ef0293e54cf92d09",
+    "kind": "TEXT"
+  }
+]

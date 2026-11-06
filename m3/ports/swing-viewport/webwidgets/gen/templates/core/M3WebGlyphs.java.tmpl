@@ -1,0 +1,43 @@
+package @PKG@;
+
+/**
+ * Built-in glyphs painted as display-list paths (pattern M3P-CORE-1): every family draws its icons,
+ * chevrons and close marks here. TODO M3P-CORE-1: the 360 lucide paths of the corpus icon table.
+ */
+public final class M3WebGlyphs {
+	public static final int I_DOT = 0, I_SEARCH = 1, I_PLUS = 2, I_CLOSE = 3, I_CHECK = 4, I_CHEVRON = 5, I_STAR = 6, I_MENU = 7,
+			I_NEXT = 8, I_PREV = 9, I_UP = 10, I_DOWN = 11;
+	private static final String[] ICONS = { "dot", "search", "plus", "close", "check", "chevron", "star", "menu", "next", "prev", "up", "down" };
+
+	private M3WebGlyphs() {
+	}
+
+	/** Icon id of a glyph name, {@link #I_DOT} when unknown. */
+	public static int iconId(String name) {
+		for (int i = 0; i < ICONS.length; i++) {
+			if (ICONS[i].equals(name)) {
+				return i;
+			}
+		}
+		return I_DOT;
+	}
+
+	/** Paints a built-in glyph in an {@code s}-square at (x, y). */
+	public static void glyph(M3WebPaint p, int id, int x, int y, int s, int rgb) {
+		int m = s / 4, c = s / 2;
+		switch (id) {
+		case I_SEARCH: p.ovalLine(x + m, y + m, c, c, rgb); p.line(x + c + m / 2, y + c + m / 2, x + s - m, y + s - m, rgb); break;
+		case I_PLUS: p.line(x + c, y + m, x + c, y + s - m, rgb); p.line(x + m, y + c, x + s - m, y + c, rgb); break;
+		case I_CLOSE: p.line(x + m, y + m, x + s - m, y + s - m, rgb); p.line(x + s - m, y + m, x + m, y + s - m, rgb); break;
+		case I_CHECK: p.poly(new int[] { x + m, y + c, x + c - m / 2, y + s - m, x + s - m, y + m }, 0, 3, rgb); break;
+		case I_CHEVRON: p.poly(new int[] { x + m, y + m + m / 2, x + c, y + s - m - m / 2, x + s - m, y + m + m / 2 }, 0, 3, rgb); break;
+		case I_STAR: p.poly(new int[] { x + c, y + m / 2, x + s - m, y + s - m, x + m / 2, y + c - m / 2, x + s - m / 2, y + c - m / 2, x + m, y + s - m, x + c, y + m / 2 }, 0, 6, rgb); break;
+		case I_MENU: p.line(x + m, y + m, x + s - m, y + m, rgb); p.line(x + m, y + c, x + s - m, y + c, rgb); p.line(x + m, y + s - m, x + s - m, y + s - m, rgb); break;
+		case I_NEXT: p.poly(new int[] { x + m + m / 2, y + m, x + s - m - m / 2, y + c, x + m + m / 2, y + s - m }, 0, 3, rgb); break;
+		case I_PREV: p.poly(new int[] { x + s - m - m / 2, y + m, x + m + m / 2, y + c, x + s - m - m / 2, y + s - m }, 0, 3, rgb); break;
+		case I_UP: p.poly(new int[] { x + m, y + s - m - m / 2, x + c, y + m + m / 2, x + s - m, y + s - m - m / 2 }, 0, 3, rgb); break;
+		case I_DOWN: p.poly(new int[] { x + m, y + m + m / 2, x + c, y + s - m - m / 2, x + s - m, y + m + m / 2 }, 0, 3, rgb); break;
+		default: p.oval(x + c - m / 2, y + c - m / 2, m, m, rgb);
+		}
+	}
+}

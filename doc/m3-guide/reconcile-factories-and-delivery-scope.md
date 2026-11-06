@@ -217,7 +217,7 @@ At the source pin above, complete bounded directory/tree reads established:
 | Current physical `src` Java | 77 package Java files (including package-info), plus module-info = **78 main Java**; **30 test Java**; **108 total** | Source-tree presence; no runtime pass inferred |
 | Current [installed manifest][installed] | **98 path rows** = 68 main Java + 25 test Java + 2 standalone Java probes + 3 non-Java inputs | Rows counted after excluding blank/comment lines, not “98 production owners” |
 | Current manifest SHA-256 | `90e6e4adcc6a9224b6ca7f85b5d01b950ed8c368fcc660b04ce56fda59eae689` | Matches `installed_source_manifest_sha256` in [donation metadata][donation] |
-| Linked dated [qualification receipt][receipt] | Records **95 installed rows**, 66 main Java, 24 tests, 90 module Java, 2 probes, 3 other inputs; product inventory digest `6627c851e6a879e28c0434b41f988669c118649e04a4d89bcf30102aa9e767ed` | Historical declared qualification scope, not the current manifest or current directory count |
+| Linked dated [qualification receipt][receipt] | Records **95 installed rows**, 66 main Java, 24 tests, 90 module Java, 2 probes, 3 other inputs; product inventory digest `d2f00a69062eda3b383a356224dcd2e63d1f5161d81e8a386982142739caa936` | Historical declared qualification scope, not the current manifest or current directory count |
 | Module README historical receiver paragraph | Describes an earlier **88-Java** manifest and 113 tests | Earlier bounded receipt narrative, not a current-source census |
 
 The current installed manifest and its donation checksum agree. The count/digest
@@ -293,24 +293,24 @@ comparator delegation, shared-map locking, deque capacities and transfer mode.
 Those bounded checks do not close the complete delegate classes. Linked-hash,
 primitive map and sequence references retain their own already-reviewed scope.
 
-Factory blob: `3d2f5aa53bda55293b3254bed3d526b896cbd044`.
-Package-descriptor blob: `3998c9f78a8617aa3b593c353f7d7ac48e93a52b`.
+Factory blob: `9b49f723dfa91628978e26db2564e0282a3e78a9`.
+Package-descriptor blob: `cb31702d369e5a371879468f84918e066bc88dce`.
 The public package, all delegates, the current successor source set, Java SE
 compatibility, full reactor and installed-runtime gates remain independently open.
 
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3Collections.java
-[package]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/package-info.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
+[package]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/package-info.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/pom.xml
 [module-readme]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/README.md
 [installed]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/qualification/installed-source-enum-set-20261014.tsv
-[donation]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/synexia-donation.json
+[donation]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/m3-donation.json
 [receipt]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/qualification/receiving-enum-set-20261008.json
 [source-set-guard]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/verify_donation.py#L63-L84
 [family-map]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/JDK_FAMILY_MAP.tsv
 [provenance]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/provenance.json
 [product-scope]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/M3_COLLECTION_PRODUCT_SCOPE.md
 [invariant]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/docs/m3jdk21-porting-invariant.md
-[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java
-[recovery-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/com/m3/collections/M3ReceivingRecoveryTest.java
-[storage-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/com/m3/collections/SegmentedPrimitiveStorageTest.java
+[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/jdk/m3/collections/M3FactoryContractTest.java
+[recovery-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/jdk/m3/collections/M3ReceivingRecoveryTest.java
+[storage-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/jdk/m3/collections/SegmentedPrimitiveStorageTest.java

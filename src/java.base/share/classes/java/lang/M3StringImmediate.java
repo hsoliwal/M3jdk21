@@ -24,7 +24,7 @@ import java.util.Objects;
  *           digit = 1 + index in "0-9 A-Z a-z _ $"; value 0 is the empty string
  * </pre>
  *
- * <p>Coverage measured on the M3jdk21 java.lang and java.util sources (master 677437be):
+ * <p>Coverage measured on the M3JDK 21 java.lang and java.util sources (master 677437be):
  * LATIN1 x7 holds 42.1% of string-literal occurrences and 85.7% of identifier-word occurrences;
  * adding IDENT x10 raises identifier words to 97.7%. The packing technique (allocation-free
  * short text in primitive words behind explicit domain gates) follows tools4j shortstring

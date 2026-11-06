@@ -9,8 +9,8 @@
   "host_sources": [
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/pom.xml",
-      "git_blob": "69aae091198ef3df9d9077c490b390e9db37dcd5",
-      "sha256": "34ad1632fb9f2ac5e77102b9478fb121d21646af6613584211e583cb6534c1ed"
+      "git_blob": "c51fa5cbda712ad1ecf6c704d89836ef49dae53e",
+      "sha256": "07cc4b3d40dcced7d416fe2791e02b7e45bb68d83023c45ecb948c9465763c1d"
     },
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/receive.py",
@@ -24,8 +24,8 @@
     },
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/src/main/resources/META-INF/rewrite/m3-runtime-convergence-20261020.yml",
-      "git_blob": "192062b78bf98b51709d3b13a5486236b2a0b895",
-      "sha256": "d5a4cbda1bd9a9530cc365d9930cdd728d0a4043a03b073893bb8ebb36080da6"
+      "git_blob": "a995af667bec620226484a7d95a828994a653381",
+      "sha256": "cba0283486783f287eff4c68879ae34331e4bb7a45e9cc5ca7c8b7746f358952"
     }
   ],
   "receiver_and_test_source_ancestry": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",

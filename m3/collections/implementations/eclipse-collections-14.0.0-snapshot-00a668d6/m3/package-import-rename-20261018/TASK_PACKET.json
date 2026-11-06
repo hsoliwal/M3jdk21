@@ -19,7 +19,7 @@
   },
   "mapping": {
     "old": "org.eclipse.collections",
-    "new": "com.m3.collections.eclipse",
+    "new": "jdk.m3.collections.eclipse",
     "recursive": true
   },
   "invariant_locks": {

@@ -30,7 +30,7 @@ import java.util.Random;
  */
 public final class SpringCaseFoldLocaleOracle {
     private static final String PROVIDER = "org.springframework.util.LinkedCaseInsensitiveMap";
-    private static final String OWNED = "com.m3.collections.spring.M3LinkedCaseInsensitiveMap";
+    private static final String OWNED = "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap";
     private static final String[] KEYS = {
         "Content-Type", "content-type", "CONTENT-TYPE", "Accept", "accept", "X-Id", "x-id", "",
         "I", "i", "İ", "ı", "Ii", "TITLE", "title", "K", "k", "K", "Kelvin", "Kelvin",

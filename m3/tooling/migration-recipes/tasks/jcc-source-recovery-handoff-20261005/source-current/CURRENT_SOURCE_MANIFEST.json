@@ -21688,28 +21688,28 @@
         "entry": {
           "mode": "100644",
           "path": "DictionaryProvenance.java",
-          "sha": "9c2538718c4a6e3710d4a7f2be413139c331584d",
+          "sha": "c7dce4ec029be9e91f23da0e1b21e12539b42807",
           "size": 1359,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/9c2538718c4a6e3710d4a7f2be413139c331584d"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c7dce4ec029be9e91f23da0e1b21e12539b42807"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1359,
-        "git_blob": "9c2538718c4a6e3710d4a7f2be413139c331584d",
+        "git_blob": "c7dce4ec029be9e91f23da0e1b21e12539b42807",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/DictionaryProvenance.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "d58f223bce198727ca2d998ff76975c4fc4a718030482a32856d3122507c45c9"
+        "sha256": "bdbf8b7779d25fe7875623093ced5ae08935326da9f9cc935339d1fd2df3555c"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1359,
-        "git_blob": "9c2538718c4a6e3710d4a7f2be413139c331584d",
+        "git_blob": "c7dce4ec029be9e91f23da0e1b21e12539b42807",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/DictionaryProvenance.java",
-        "sha256": "d58f223bce198727ca2d998ff76975c4fc4a718030482a32856d3122507c45c9"
+        "sha256": "bdbf8b7779d25fe7875623093ced5ae08935326da9f9cc935339d1fd2df3555c"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/DictionaryProvenance.java",
@@ -21771,9 +21771,9 @@
       ],
       "published": {
         "bytes": 1359,
-        "git_blob": "9c2538718c4a6e3710d4a7f2be413139c331584d",
+        "git_blob": "c7dce4ec029be9e91f23da0e1b21e12539b42807",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/DictionaryProvenance.java",
-        "sha256": "d58f223bce198727ca2d998ff76975c4fc4a718030482a32856d3122507c45c9"
+        "sha256": "bdbf8b7779d25fe7875623093ced5ae08935326da9f9cc935339d1fd2df3555c"
       },
       "role": "original503"
     },
@@ -21788,28 +21788,28 @@
         "entry": {
           "mode": "100644",
           "path": "LexicalRange.java",
-          "sha": "27c4d24bee5b766eaaf7af4171feffc64eaa5561",
+          "sha": "b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6",
           "size": 668,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/27c4d24bee5b766eaaf7af4171feffc64eaa5561"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 668,
-        "git_blob": "27c4d24bee5b766eaaf7af4171feffc64eaa5561",
+        "git_blob": "b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRange.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "d34fc220b940b3f96e057221978d8812760f2616e5c69988eb74eb997c0735b0"
+        "sha256": "205166f4a7c1166cd55dac02dd4be2045dec52a11a260b522295981af6fb92cf"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 668,
-        "git_blob": "27c4d24bee5b766eaaf7af4171feffc64eaa5561",
+        "git_blob": "b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRange.java",
-        "sha256": "d34fc220b940b3f96e057221978d8812760f2616e5c69988eb74eb997c0735b0"
+        "sha256": "205166f4a7c1166cd55dac02dd4be2045dec52a11a260b522295981af6fb92cf"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRange.java",
@@ -21871,9 +21871,9 @@
       ],
       "published": {
         "bytes": 668,
-        "git_blob": "27c4d24bee5b766eaaf7af4171feffc64eaa5561",
+        "git_blob": "b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRange.java",
-        "sha256": "d34fc220b940b3f96e057221978d8812760f2616e5c69988eb74eb997c0735b0"
+        "sha256": "205166f4a7c1166cd55dac02dd4be2045dec52a11a260b522295981af6fb92cf"
       },
       "role": "original503"
     },
@@ -21888,28 +21888,28 @@
         "entry": {
           "mode": "100644",
           "path": "LexicalRef.java",
-          "sha": "17c783817d1f30a509967e83f4a3270a5ee3830a",
+          "sha": "927c5c589b11a557e3395cfce8c8c8e125d4f7a0",
           "size": 3020,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/17c783817d1f30a509967e83f4a3270a5ee3830a"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/927c5c589b11a557e3395cfce8c8c8e125d4f7a0"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 3020,
-        "git_blob": "17c783817d1f30a509967e83f4a3270a5ee3830a",
+        "git_blob": "927c5c589b11a557e3395cfce8c8c8e125d4f7a0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRef.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "ed16dea8dbbb5cde018d105a6e48332974bb96e52806fe785e2cab061f18eb8c"
+        "sha256": "d33a2c40fa51f5351f3230b5421023e9e527e3ac189c58d0ce115f645d0136ef"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 3020,
-        "git_blob": "17c783817d1f30a509967e83f4a3270a5ee3830a",
+        "git_blob": "927c5c589b11a557e3395cfce8c8c8e125d4f7a0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRef.java",
-        "sha256": "ed16dea8dbbb5cde018d105a6e48332974bb96e52806fe785e2cab061f18eb8c"
+        "sha256": "d33a2c40fa51f5351f3230b5421023e9e527e3ac189c58d0ce115f645d0136ef"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRef.java",
@@ -21971,9 +21971,9 @@
       ],
       "published": {
         "bytes": 3020,
-        "git_blob": "17c783817d1f30a509967e83f4a3270a5ee3830a",
+        "git_blob": "927c5c589b11a557e3395cfce8c8c8e125d4f7a0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/LexicalRef.java",
-        "sha256": "ed16dea8dbbb5cde018d105a6e48332974bb96e52806fe785e2cab061f18eb8c"
+        "sha256": "d33a2c40fa51f5351f3230b5421023e9e527e3ac189c58d0ce115f645d0136ef"
       },
       "role": "original503"
     },
@@ -21988,28 +21988,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexAddress.java",
-          "sha": "da628fe2fd11d8cf6a73e47ccf122cc15e144024",
+          "sha": "8a00d6e53d2a59b78dd9e302b200b1064dcea936",
           "size": 1952,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/da628fe2fd11d8cf6a73e47ccf122cc15e144024"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8a00d6e53d2a59b78dd9e302b200b1064dcea936"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1952,
-        "git_blob": "da628fe2fd11d8cf6a73e47ccf122cc15e144024",
+        "git_blob": "8a00d6e53d2a59b78dd9e302b200b1064dcea936",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAddress.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "089bf57fd8dfba766381296fe3727d7411865c8f73e4865b97162633715b3f31"
+        "sha256": "0dbfaaa987261fee854cc7be12fd207a08a419fb078098056bf38637d7dc13d0"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1952,
-        "git_blob": "da628fe2fd11d8cf6a73e47ccf122cc15e144024",
+        "git_blob": "8a00d6e53d2a59b78dd9e302b200b1064dcea936",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAddress.java",
-        "sha256": "089bf57fd8dfba766381296fe3727d7411865c8f73e4865b97162633715b3f31"
+        "sha256": "0dbfaaa987261fee854cc7be12fd207a08a419fb078098056bf38637d7dc13d0"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAddress.java",
@@ -22071,9 +22071,9 @@
       ],
       "published": {
         "bytes": 1952,
-        "git_blob": "da628fe2fd11d8cf6a73e47ccf122cc15e144024",
+        "git_blob": "8a00d6e53d2a59b78dd9e302b200b1064dcea936",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAddress.java",
-        "sha256": "089bf57fd8dfba766381296fe3727d7411865c8f73e4865b97162633715b3f31"
+        "sha256": "0dbfaaa987261fee854cc7be12fd207a08a419fb078098056bf38637d7dc13d0"
       },
       "role": "original503"
     },
@@ -22088,28 +22088,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexAnnotatedString.java",
-          "sha": "3ffebcdc0bb09fb5414bf46abdd98c4014f9243f",
+          "sha": "5b306515afff3d83214d95b6a9c683270664864c",
           "size": 3135,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3ffebcdc0bb09fb5414bf46abdd98c4014f9243f"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/5b306515afff3d83214d95b6a9c683270664864c"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 3135,
-        "git_blob": "3ffebcdc0bb09fb5414bf46abdd98c4014f9243f",
+        "git_blob": "5b306515afff3d83214d95b6a9c683270664864c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAnnotatedString.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "7fe91ad87bb3f63b981ce04a560652db266d416ce582ee75a8ed886298c355bf"
+        "sha256": "e91a8dd5b74dbf7eb41a5dd13b9d3db6b80113a85929dfb59f351a36f4a8aaac"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 3135,
-        "git_blob": "3ffebcdc0bb09fb5414bf46abdd98c4014f9243f",
+        "git_blob": "5b306515afff3d83214d95b6a9c683270664864c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAnnotatedString.java",
-        "sha256": "7fe91ad87bb3f63b981ce04a560652db266d416ce582ee75a8ed886298c355bf"
+        "sha256": "e91a8dd5b74dbf7eb41a5dd13b9d3db6b80113a85929dfb59f351a36f4a8aaac"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAnnotatedString.java",
@@ -22171,9 +22171,9 @@
       ],
       "published": {
         "bytes": 3135,
-        "git_blob": "3ffebcdc0bb09fb5414bf46abdd98c4014f9243f",
+        "git_blob": "5b306515afff3d83214d95b6a9c683270664864c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAnnotatedString.java",
-        "sha256": "7fe91ad87bb3f63b981ce04a560652db266d416ce582ee75a8ed886298c355bf"
+        "sha256": "e91a8dd5b74dbf7eb41a5dd13b9d3db6b80113a85929dfb59f351a36f4a8aaac"
       },
       "role": "original503"
     },
@@ -22188,28 +22188,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexAtomRef.java",
-          "sha": "257ae39b16636083ddaeed4993be5fd6bcd84ac6",
+          "sha": "874307e6392e53103b02edb48bc79f8f98708057",
           "size": 2589,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/257ae39b16636083ddaeed4993be5fd6bcd84ac6"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/874307e6392e53103b02edb48bc79f8f98708057"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 2589,
-        "git_blob": "257ae39b16636083ddaeed4993be5fd6bcd84ac6",
+        "git_blob": "874307e6392e53103b02edb48bc79f8f98708057",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAtomRef.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "97d87e442435007884352f1692184abffec73145e86a8a7f3dafc2b4e0746376"
+        "sha256": "10923b071bad1f7439b001a6b90ff924bbe4bf1fd6069334b0ba9f74bdbc7759"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 2589,
-        "git_blob": "257ae39b16636083ddaeed4993be5fd6bcd84ac6",
+        "git_blob": "874307e6392e53103b02edb48bc79f8f98708057",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAtomRef.java",
-        "sha256": "97d87e442435007884352f1692184abffec73145e86a8a7f3dafc2b4e0746376"
+        "sha256": "10923b071bad1f7439b001a6b90ff924bbe4bf1fd6069334b0ba9f74bdbc7759"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAtomRef.java",
@@ -22271,9 +22271,9 @@
       ],
       "published": {
         "bytes": 2589,
-        "git_blob": "257ae39b16636083ddaeed4993be5fd6bcd84ac6",
+        "git_blob": "874307e6392e53103b02edb48bc79f8f98708057",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexAtomRef.java",
-        "sha256": "97d87e442435007884352f1692184abffec73145e86a8a7f3dafc2b4e0746376"
+        "sha256": "10923b071bad1f7439b001a6b90ff924bbe4bf1fd6069334b0ba9f74bdbc7759"
       },
       "role": "original503"
     },
@@ -22288,28 +22288,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexByteSequence.java",
-          "sha": "7db70b7d754fc1fb410dd42e17b757459b8d2c24",
+          "sha": "73da4f13cb797fd528dd858084d6626b7741fddb",
           "size": 15815,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7db70b7d754fc1fb410dd42e17b757459b8d2c24"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/73da4f13cb797fd528dd858084d6626b7741fddb"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 15815,
-        "git_blob": "7db70b7d754fc1fb410dd42e17b757459b8d2c24",
+        "git_blob": "73da4f13cb797fd528dd858084d6626b7741fddb",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexByteSequence.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "8d7a175fad15457b84d0deaa770f7de40baead3a466b63cd8709b4c5f388715e"
+        "sha256": "387fee0fad04c8e7f4f0da138847b09af9b7ac2dafe2eaac8cfc7d9fae7c285a"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 15815,
-        "git_blob": "7db70b7d754fc1fb410dd42e17b757459b8d2c24",
+        "git_blob": "73da4f13cb797fd528dd858084d6626b7741fddb",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexByteSequence.java",
-        "sha256": "8d7a175fad15457b84d0deaa770f7de40baead3a466b63cd8709b4c5f388715e"
+        "sha256": "387fee0fad04c8e7f4f0da138847b09af9b7ac2dafe2eaac8cfc7d9fae7c285a"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexByteSequence.java",
@@ -22371,9 +22371,9 @@
       ],
       "published": {
         "bytes": 15815,
-        "git_blob": "7db70b7d754fc1fb410dd42e17b757459b8d2c24",
+        "git_blob": "73da4f13cb797fd528dd858084d6626b7741fddb",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexByteSequence.java",
-        "sha256": "8d7a175fad15457b84d0deaa770f7de40baead3a466b63cd8709b4c5f388715e"
+        "sha256": "387fee0fad04c8e7f4f0da138847b09af9b7ac2dafe2eaac8cfc7d9fae7c285a"
       },
       "role": "original503"
     },
@@ -22388,28 +22388,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexCharSequence.java",
-          "sha": "6c0821756c4ac4241ab22c97ca336f07b92cfd2e",
+          "sha": "67cabb73156bf4cf4ff1d38172c6badf80e2eb60",
           "size": 8683,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/6c0821756c4ac4241ab22c97ca336f07b92cfd2e"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/67cabb73156bf4cf4ff1d38172c6badf80e2eb60"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 8683,
-        "git_blob": "6c0821756c4ac4241ab22c97ca336f07b92cfd2e",
+        "git_blob": "67cabb73156bf4cf4ff1d38172c6badf80e2eb60",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCharSequence.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "4d435e90316b69b5d4a67bdc5a46db1bf2e8d4db17e25efeb42fa899b1b37313"
+        "sha256": "70915da319ed46101c53dd20e4f8715c4e2e0b5f385e6b6e5c78aa84a33eba6c"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 8683,
-        "git_blob": "6c0821756c4ac4241ab22c97ca336f07b92cfd2e",
+        "git_blob": "67cabb73156bf4cf4ff1d38172c6badf80e2eb60",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCharSequence.java",
-        "sha256": "4d435e90316b69b5d4a67bdc5a46db1bf2e8d4db17e25efeb42fa899b1b37313"
+        "sha256": "70915da319ed46101c53dd20e4f8715c4e2e0b5f385e6b6e5c78aa84a33eba6c"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCharSequence.java",
@@ -22471,9 +22471,9 @@
       ],
       "published": {
         "bytes": 8683,
-        "git_blob": "6c0821756c4ac4241ab22c97ca336f07b92cfd2e",
+        "git_blob": "67cabb73156bf4cf4ff1d38172c6badf80e2eb60",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCharSequence.java",
-        "sha256": "4d435e90316b69b5d4a67bdc5a46db1bf2e8d4db17e25efeb42fa899b1b37313"
+        "sha256": "70915da319ed46101c53dd20e4f8715c4e2e0b5f385e6b6e5c78aa84a33eba6c"
       },
       "role": "original503"
     },
@@ -22688,28 +22688,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexCompositeString.java",
-          "sha": "923b81d7a41956be3b587d11e764963cbbb55649",
+          "sha": "f11e2f30a5edc918aff4cb1c94f95710dbe534c5",
           "size": 21141,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/923b81d7a41956be3b587d11e764963cbbb55649"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f11e2f30a5edc918aff4cb1c94f95710dbe534c5"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 21141,
-        "git_blob": "923b81d7a41956be3b587d11e764963cbbb55649",
+        "git_blob": "f11e2f30a5edc918aff4cb1c94f95710dbe534c5",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCompositeString.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "8d1dbdcbc65f8c1e40accf9020d13a65081a80c8312d5b3dd870f30de67ec3e6"
+        "sha256": "60de8cb3a9cb6c95d5c0ceecd782bd26d9749d70bdbe0cb8d62b0970da5c859f"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 21141,
-        "git_blob": "923b81d7a41956be3b587d11e764963cbbb55649",
+        "git_blob": "f11e2f30a5edc918aff4cb1c94f95710dbe534c5",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCompositeString.java",
-        "sha256": "8d1dbdcbc65f8c1e40accf9020d13a65081a80c8312d5b3dd870f30de67ec3e6"
+        "sha256": "60de8cb3a9cb6c95d5c0ceecd782bd26d9749d70bdbe0cb8d62b0970da5c859f"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCompositeString.java",
@@ -22771,9 +22771,9 @@
       ],
       "published": {
         "bytes": 21141,
-        "git_blob": "923b81d7a41956be3b587d11e764963cbbb55649",
+        "git_blob": "f11e2f30a5edc918aff4cb1c94f95710dbe534c5",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexCompositeString.java",
-        "sha256": "8d1dbdcbc65f8c1e40accf9020d13a65081a80c8312d5b3dd870f30de67ec3e6"
+        "sha256": "60de8cb3a9cb6c95d5c0ceecd782bd26d9749d70bdbe0cb8d62b0970da5c859f"
       },
       "role": "original503"
     },
@@ -22788,28 +22788,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexDictionary.java",
-          "sha": "db36dc36b2b3ef0a395db53e04b2441834246b13",
+          "sha": "9cbda46d1b60ab5758a442e8d305a94aa0fedee6",
           "size": 34100,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/db36dc36b2b3ef0a395db53e04b2441834246b13"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/9cbda46d1b60ab5758a442e8d305a94aa0fedee6"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 34100,
-        "git_blob": "db36dc36b2b3ef0a395db53e04b2441834246b13",
+        "git_blob": "9cbda46d1b60ab5758a442e8d305a94aa0fedee6",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDictionary.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "9a5c39eb1621d52c4aa53f51c06dd7c0c7ee93169edd4110831172a854586ab6"
+        "sha256": "37ee7073cfddab79cb4994c9d1e01d0cd0019f986ca2c843f9ce59fc2319469e"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 34100,
-        "git_blob": "db36dc36b2b3ef0a395db53e04b2441834246b13",
+        "git_blob": "9cbda46d1b60ab5758a442e8d305a94aa0fedee6",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDictionary.java",
-        "sha256": "9a5c39eb1621d52c4aa53f51c06dd7c0c7ee93169edd4110831172a854586ab6"
+        "sha256": "37ee7073cfddab79cb4994c9d1e01d0cd0019f986ca2c843f9ce59fc2319469e"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDictionary.java",
@@ -22871,9 +22871,9 @@
       ],
       "published": {
         "bytes": 34100,
-        "git_blob": "db36dc36b2b3ef0a395db53e04b2441834246b13",
+        "git_blob": "9cbda46d1b60ab5758a442e8d305a94aa0fedee6",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDictionary.java",
-        "sha256": "9a5c39eb1621d52c4aa53f51c06dd7c0c7ee93169edd4110831172a854586ab6"
+        "sha256": "37ee7073cfddab79cb4994c9d1e01d0cd0019f986ca2c843f9ce59fc2319469e"
       },
       "role": "original503"
     },
@@ -22888,28 +22888,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexDirectInlineKey32.java",
-          "sha": "44dfc9257d60c1107f0e285820090eab527e1bb3",
+          "sha": "180138a2d2ff57294bbc859792462135216c226d",
           "size": 16953,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/44dfc9257d60c1107f0e285820090eab527e1bb3"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/180138a2d2ff57294bbc859792462135216c226d"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 16953,
-        "git_blob": "44dfc9257d60c1107f0e285820090eab527e1bb3",
+        "git_blob": "180138a2d2ff57294bbc859792462135216c226d",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDirectInlineKey32.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "58f8484f8332f6968ba9102968ce68ac66ce95d9a4f9c29a6e5bd2c8a4c2af22"
+        "sha256": "349b5caefc739a87b9e22bf603d67c02b0151de970f1798baa7982066078744b"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 16953,
-        "git_blob": "44dfc9257d60c1107f0e285820090eab527e1bb3",
+        "git_blob": "180138a2d2ff57294bbc859792462135216c226d",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDirectInlineKey32.java",
-        "sha256": "58f8484f8332f6968ba9102968ce68ac66ce95d9a4f9c29a6e5bd2c8a4c2af22"
+        "sha256": "349b5caefc739a87b9e22bf603d67c02b0151de970f1798baa7982066078744b"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDirectInlineKey32.java",
@@ -22971,9 +22971,9 @@
       ],
       "published": {
         "bytes": 16953,
-        "git_blob": "44dfc9257d60c1107f0e285820090eab527e1bb3",
+        "git_blob": "180138a2d2ff57294bbc859792462135216c226d",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDirectInlineKey32.java",
-        "sha256": "58f8484f8332f6968ba9102968ce68ac66ce95d9a4f9c29a6e5bd2c8a4c2af22"
+        "sha256": "349b5caefc739a87b9e22bf603d67c02b0151de970f1798baa7982066078744b"
       },
       "role": "original503"
     },
@@ -22988,28 +22988,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexDynamicLiteralPool.java",
-          "sha": "6d59fe5b1ffaef95fd032d764c5096beeb7755d3",
+          "sha": "89ccd977e2f8b8e813749350a78ada619a987ec0",
           "size": 5484,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/6d59fe5b1ffaef95fd032d764c5096beeb7755d3"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/89ccd977e2f8b8e813749350a78ada619a987ec0"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 5484,
-        "git_blob": "6d59fe5b1ffaef95fd032d764c5096beeb7755d3",
+        "git_blob": "89ccd977e2f8b8e813749350a78ada619a987ec0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDynamicLiteralPool.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "9737c652fe4c608a86cc4de4a8239e206197cdc53a05098af8049544d5e61203"
+        "sha256": "29d56c99539da15b5b0e436b3f43c9e17f4500768c6f19ec1cc99479fbcce4fb"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 5484,
-        "git_blob": "6d59fe5b1ffaef95fd032d764c5096beeb7755d3",
+        "git_blob": "89ccd977e2f8b8e813749350a78ada619a987ec0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDynamicLiteralPool.java",
-        "sha256": "9737c652fe4c608a86cc4de4a8239e206197cdc53a05098af8049544d5e61203"
+        "sha256": "29d56c99539da15b5b0e436b3f43c9e17f4500768c6f19ec1cc99479fbcce4fb"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDynamicLiteralPool.java",
@@ -23071,9 +23071,9 @@
       ],
       "published": {
         "bytes": 5484,
-        "git_blob": "6d59fe5b1ffaef95fd032d764c5096beeb7755d3",
+        "git_blob": "89ccd977e2f8b8e813749350a78ada619a987ec0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDynamicLiteralPool.java",
-        "sha256": "9737c652fe4c608a86cc4de4a8239e206197cdc53a05098af8049544d5e61203"
+        "sha256": "29d56c99539da15b5b0e436b3f43c9e17f4500768c6f19ec1cc99479fbcce4fb"
       },
       "role": "original503"
     },
@@ -23088,28 +23088,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexExactLookup.java",
-          "sha": "8de88ec4bbfb61994aaa50e57a73c00074643767",
+          "sha": "08908a03ec0bf522e68e6445a551ef686d8714e1",
           "size": 11272,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8de88ec4bbfb61994aaa50e57a73c00074643767"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/08908a03ec0bf522e68e6445a551ef686d8714e1"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 11272,
-        "git_blob": "8de88ec4bbfb61994aaa50e57a73c00074643767",
+        "git_blob": "08908a03ec0bf522e68e6445a551ef686d8714e1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexExactLookup.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "991b72e2750df5b44b0e8e8113946c0f76909b817792d9fc956a2a02045475b7"
+        "sha256": "9878b342fc6c26f0199137408ebbd9fccb626dbfd8a1c31719ea3a9834624a97"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 11272,
-        "git_blob": "8de88ec4bbfb61994aaa50e57a73c00074643767",
+        "git_blob": "08908a03ec0bf522e68e6445a551ef686d8714e1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexExactLookup.java",
-        "sha256": "991b72e2750df5b44b0e8e8113946c0f76909b817792d9fc956a2a02045475b7"
+        "sha256": "9878b342fc6c26f0199137408ebbd9fccb626dbfd8a1c31719ea3a9834624a97"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexExactLookup.java",
@@ -23171,9 +23171,9 @@
       ],
       "published": {
         "bytes": 11272,
-        "git_blob": "8de88ec4bbfb61994aaa50e57a73c00074643767",
+        "git_blob": "08908a03ec0bf522e68e6445a551ef686d8714e1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexExactLookup.java",
-        "sha256": "991b72e2750df5b44b0e8e8113946c0f76909b817792d9fc956a2a02045475b7"
+        "sha256": "9878b342fc6c26f0199137408ebbd9fccb626dbfd8a1c31719ea3a9834624a97"
       },
       "role": "original503"
     },
@@ -23188,28 +23188,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexHybridCodec.java",
-          "sha": "408249367e56820a410d99b077bab77cfff440bf",
+          "sha": "87895f37b0498583187ccdae5406d33b84289a6e",
           "size": 4882,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/408249367e56820a410d99b077bab77cfff440bf"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/87895f37b0498583187ccdae5406d33b84289a6e"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 4882,
-        "git_blob": "408249367e56820a410d99b077bab77cfff440bf",
+        "git_blob": "87895f37b0498583187ccdae5406d33b84289a6e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexHybridCodec.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "c7e36a23613dfb25c4aff4a103d8834997b0e307e2604ad382c93cf0d3a18bc7"
+        "sha256": "6c34dc4fd84f0d6767b463c1c56cb49e1b7ee645747c73b528bc1e027698fefc"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 4882,
-        "git_blob": "408249367e56820a410d99b077bab77cfff440bf",
+        "git_blob": "87895f37b0498583187ccdae5406d33b84289a6e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexHybridCodec.java",
-        "sha256": "c7e36a23613dfb25c4aff4a103d8834997b0e307e2604ad382c93cf0d3a18bc7"
+        "sha256": "6c34dc4fd84f0d6767b463c1c56cb49e1b7ee645747c73b528bc1e027698fefc"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexHybridCodec.java",
@@ -23271,9 +23271,9 @@
       ],
       "published": {
         "bytes": 4882,
-        "git_blob": "408249367e56820a410d99b077bab77cfff440bf",
+        "git_blob": "87895f37b0498583187ccdae5406d33b84289a6e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexHybridCodec.java",
-        "sha256": "c7e36a23613dfb25c4aff4a103d8834997b0e307e2604ad382c93cf0d3a18bc7"
+        "sha256": "6c34dc4fd84f0d6767b463c1c56cb49e1b7ee645747c73b528bc1e027698fefc"
       },
       "role": "original503"
     },
@@ -23288,28 +23288,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexInt8MatmulPlan.java",
-          "sha": "f4a049c2bd822d60715556ca0c713b2ca58c522f",
+          "sha": "bc0a0b19af92a542b23a2891ab8d1e098c43512e",
           "size": 7403,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f4a049c2bd822d60715556ca0c713b2ca58c522f"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/bc0a0b19af92a542b23a2891ab8d1e098c43512e"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 7403,
-        "git_blob": "f4a049c2bd822d60715556ca0c713b2ca58c522f",
+        "git_blob": "bc0a0b19af92a542b23a2891ab8d1e098c43512e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexInt8MatmulPlan.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "469e247f69bdc4c304095bbe7ce9909283ea70c5879d1a589d5621e5430669a6"
+        "sha256": "a3a0bd6ed10efa595fc581aa5fba49a433b333d711748c08c94d2f9d978c9789"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 7403,
-        "git_blob": "f4a049c2bd822d60715556ca0c713b2ca58c522f",
+        "git_blob": "bc0a0b19af92a542b23a2891ab8d1e098c43512e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexInt8MatmulPlan.java",
-        "sha256": "469e247f69bdc4c304095bbe7ce9909283ea70c5879d1a589d5621e5430669a6"
+        "sha256": "a3a0bd6ed10efa595fc581aa5fba49a433b333d711748c08c94d2f9d978c9789"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexInt8MatmulPlan.java",
@@ -23371,9 +23371,9 @@
       ],
       "published": {
         "bytes": 7403,
-        "git_blob": "f4a049c2bd822d60715556ca0c713b2ca58c522f",
+        "git_blob": "bc0a0b19af92a542b23a2891ab8d1e098c43512e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexInt8MatmulPlan.java",
-        "sha256": "469e247f69bdc4c304095bbe7ce9909283ea70c5879d1a589d5621e5430669a6"
+        "sha256": "a3a0bd6ed10efa595fc581aa5fba49a433b333d711748c08c94d2f9d978c9789"
       },
       "role": "original503"
     },
@@ -23388,28 +23388,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexemeCodec.java",
-          "sha": "81d30a2b02bc520673404e4307ed8a10e4dd3030",
+          "sha": "b4e4eaadf71c8ad1b1af00a72ef596bcf36abada",
           "size": 10180,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/81d30a2b02bc520673404e4307ed8a10e4dd3030"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b4e4eaadf71c8ad1b1af00a72ef596bcf36abada"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 10180,
-        "git_blob": "81d30a2b02bc520673404e4307ed8a10e4dd3030",
+        "git_blob": "b4e4eaadf71c8ad1b1af00a72ef596bcf36abada",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeCodec.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "edd4a0658423bf86c7bcae538ddf10008ba6b059c01e2e350ceb086404a5eb30"
+        "sha256": "46049b9e731d2b96b05f2740fcd63197c531e6a07027cf5a484bd08588230528"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 10180,
-        "git_blob": "81d30a2b02bc520673404e4307ed8a10e4dd3030",
+        "git_blob": "b4e4eaadf71c8ad1b1af00a72ef596bcf36abada",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeCodec.java",
-        "sha256": "edd4a0658423bf86c7bcae538ddf10008ba6b059c01e2e350ceb086404a5eb30"
+        "sha256": "46049b9e731d2b96b05f2740fcd63197c531e6a07027cf5a484bd08588230528"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeCodec.java",
@@ -23471,9 +23471,9 @@
       ],
       "published": {
         "bytes": 10180,
-        "git_blob": "81d30a2b02bc520673404e4307ed8a10e4dd3030",
+        "git_blob": "b4e4eaadf71c8ad1b1af00a72ef596bcf36abada",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeCodec.java",
-        "sha256": "edd4a0658423bf86c7bcae538ddf10008ba6b059c01e2e350ceb086404a5eb30"
+        "sha256": "46049b9e731d2b96b05f2740fcd63197c531e6a07027cf5a484bd08588230528"
       },
       "role": "original503"
     },
@@ -23488,28 +23488,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexemeKey128.java",
-          "sha": "dda1268b717cffdfdf9c3262a1e7556c2f1711b1",
+          "sha": "c10b0ccf781fd2079c94df22fb06dff11179bb9b",
           "size": 3561,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/dda1268b717cffdfdf9c3262a1e7556c2f1711b1"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c10b0ccf781fd2079c94df22fb06dff11179bb9b"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 3561,
-        "git_blob": "dda1268b717cffdfdf9c3262a1e7556c2f1711b1",
+        "git_blob": "c10b0ccf781fd2079c94df22fb06dff11179bb9b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeKey128.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "8731b80b3cfba656cab84f257a7336037dce6a84b1b48abb851044969fc3d22d"
+        "sha256": "1d36c4806e202f305921bd73eae8845568c2ae93064d31df19b600f973da368a"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 3561,
-        "git_blob": "dda1268b717cffdfdf9c3262a1e7556c2f1711b1",
+        "git_blob": "c10b0ccf781fd2079c94df22fb06dff11179bb9b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeKey128.java",
-        "sha256": "8731b80b3cfba656cab84f257a7336037dce6a84b1b48abb851044969fc3d22d"
+        "sha256": "1d36c4806e202f305921bd73eae8845568c2ae93064d31df19b600f973da368a"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeKey128.java",
@@ -23571,9 +23571,9 @@
       ],
       "published": {
         "bytes": 3561,
-        "git_blob": "dda1268b717cffdfdf9c3262a1e7556c2f1711b1",
+        "git_blob": "c10b0ccf781fd2079c94df22fb06dff11179bb9b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeKey128.java",
-        "sha256": "8731b80b3cfba656cab84f257a7336037dce6a84b1b48abb851044969fc3d22d"
+        "sha256": "1d36c4806e202f305921bd73eae8845568c2ae93064d31df19b600f973da368a"
       },
       "role": "original503"
     },
@@ -23588,28 +23588,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexemeMatrixIndex.java",
-          "sha": "645000f43675ffb3d76cea9c2310895b95fc5eaa",
+          "sha": "5d4ac93540d5f146fddc48225e6bfcdcf36c9df3",
           "size": 12164,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/645000f43675ffb3d76cea9c2310895b95fc5eaa"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/5d4ac93540d5f146fddc48225e6bfcdcf36c9df3"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 12164,
-        "git_blob": "645000f43675ffb3d76cea9c2310895b95fc5eaa",
+        "git_blob": "5d4ac93540d5f146fddc48225e6bfcdcf36c9df3",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeMatrixIndex.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "4e2ab463f4e10d596deff4c7f23cf1a6d5c7c33d8408afdb96df35a90422d6b3"
+        "sha256": "3691ff40325fd4f9704b2ba94ba497a22bc8f7735a9100bc28317806791d4ec1"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 12164,
-        "git_blob": "645000f43675ffb3d76cea9c2310895b95fc5eaa",
+        "git_blob": "5d4ac93540d5f146fddc48225e6bfcdcf36c9df3",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeMatrixIndex.java",
-        "sha256": "4e2ab463f4e10d596deff4c7f23cf1a6d5c7c33d8408afdb96df35a90422d6b3"
+        "sha256": "3691ff40325fd4f9704b2ba94ba497a22bc8f7735a9100bc28317806791d4ec1"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeMatrixIndex.java",
@@ -23671,9 +23671,9 @@
       ],
       "published": {
         "bytes": 12164,
-        "git_blob": "645000f43675ffb3d76cea9c2310895b95fc5eaa",
+        "git_blob": "5d4ac93540d5f146fddc48225e6bfcdcf36c9df3",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemeMatrixIndex.java",
-        "sha256": "4e2ab463f4e10d596deff4c7f23cf1a6d5c7c33d8408afdb96df35a90422d6b3"
+        "sha256": "3691ff40325fd4f9704b2ba94ba497a22bc8f7735a9100bc28317806791d4ec1"
       },
       "role": "original503"
     },
@@ -23688,28 +23688,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexemePattern128.java",
-          "sha": "e4fa1af203e7867e30a58e676d73a637cb3b4469",
+          "sha": "79a2fa8d2a1ae733017a9d1e978194fd6994f775",
           "size": 10574,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e4fa1af203e7867e30a58e676d73a637cb3b4469"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/79a2fa8d2a1ae733017a9d1e978194fd6994f775"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 10574,
-        "git_blob": "e4fa1af203e7867e30a58e676d73a637cb3b4469",
+        "git_blob": "79a2fa8d2a1ae733017a9d1e978194fd6994f775",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemePattern128.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "a3b35fcd47b55ea22252db29b395d824cb19b3c4a0418e86d8c5371b91a7c63e"
+        "sha256": "2ad7d1a43026f751388956f22c2f98089d9e61f3d8017ea6184a844c0a6c72db"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 10574,
-        "git_blob": "e4fa1af203e7867e30a58e676d73a637cb3b4469",
+        "git_blob": "79a2fa8d2a1ae733017a9d1e978194fd6994f775",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemePattern128.java",
-        "sha256": "a3b35fcd47b55ea22252db29b395d824cb19b3c4a0418e86d8c5371b91a7c63e"
+        "sha256": "2ad7d1a43026f751388956f22c2f98089d9e61f3d8017ea6184a844c0a6c72db"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemePattern128.java",
@@ -23771,9 +23771,9 @@
       ],
       "published": {
         "bytes": 10574,
-        "git_blob": "e4fa1af203e7867e30a58e676d73a637cb3b4469",
+        "git_blob": "79a2fa8d2a1ae733017a9d1e978194fd6994f775",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexemePattern128.java",
-        "sha256": "a3b35fcd47b55ea22252db29b395d824cb19b3c4a0418e86d8c5371b91a7c63e"
+        "sha256": "2ad7d1a43026f751388956f22c2f98089d9e61f3d8017ea6184a844c0a6c72db"
       },
       "role": "original503"
     },
@@ -23788,28 +23788,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexicalClass.java",
-          "sha": "1245336a19bbfb049b9dd1f6fa0a3e93812039e1",
+          "sha": "10f6f2c4c9ee22cab16054d4574e9e51d500e084",
           "size": 1232,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1245336a19bbfb049b9dd1f6fa0a3e93812039e1"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/10f6f2c4c9ee22cab16054d4574e9e51d500e084"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1232,
-        "git_blob": "1245336a19bbfb049b9dd1f6fa0a3e93812039e1",
+        "git_blob": "10f6f2c4c9ee22cab16054d4574e9e51d500e084",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalClass.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "89ff14d7659a2d608b5c298f2f8aa1c09aeddf0a8c77eb0648b012010864428e"
+        "sha256": "641c3544c1787732f02917319ee8b9973400f56ec9715036062eabf6505d44ff"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1232,
-        "git_blob": "1245336a19bbfb049b9dd1f6fa0a3e93812039e1",
+        "git_blob": "10f6f2c4c9ee22cab16054d4574e9e51d500e084",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalClass.java",
-        "sha256": "89ff14d7659a2d608b5c298f2f8aa1c09aeddf0a8c77eb0648b012010864428e"
+        "sha256": "641c3544c1787732f02917319ee8b9973400f56ec9715036062eabf6505d44ff"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalClass.java",
@@ -23871,9 +23871,9 @@
       ],
       "published": {
         "bytes": 1232,
-        "git_blob": "1245336a19bbfb049b9dd1f6fa0a3e93812039e1",
+        "git_blob": "10f6f2c4c9ee22cab16054d4574e9e51d500e084",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalClass.java",
-        "sha256": "89ff14d7659a2d608b5c298f2f8aa1c09aeddf0a8c77eb0648b012010864428e"
+        "sha256": "641c3544c1787732f02917319ee8b9973400f56ec9715036062eabf6505d44ff"
       },
       "role": "original503"
     },
@@ -23888,28 +23888,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexicalView.java",
-          "sha": "0c2e21b51f61242152a1348a0863279623abfbc1",
+          "sha": "0d9090f0f10506d836203deb83a701520865b21e",
           "size": 2321,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0c2e21b51f61242152a1348a0863279623abfbc1"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0d9090f0f10506d836203deb83a701520865b21e"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 2321,
-        "git_blob": "0c2e21b51f61242152a1348a0863279623abfbc1",
+        "git_blob": "0d9090f0f10506d836203deb83a701520865b21e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalView.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "a8f635b3793d6431b4693a51432956a36bc2d45898a96cabcc96320bd5cae5a2"
+        "sha256": "1e286d6c1fbb16fff3f2147d55a4c975b19f1167776fe1a865b3f312665a4f26"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 2321,
-        "git_blob": "0c2e21b51f61242152a1348a0863279623abfbc1",
+        "git_blob": "0d9090f0f10506d836203deb83a701520865b21e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalView.java",
-        "sha256": "a8f635b3793d6431b4693a51432956a36bc2d45898a96cabcc96320bd5cae5a2"
+        "sha256": "1e286d6c1fbb16fff3f2147d55a4c975b19f1167776fe1a865b3f312665a4f26"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalView.java",
@@ -23971,9 +23971,9 @@
       ],
       "published": {
         "bytes": 2321,
-        "git_blob": "0c2e21b51f61242152a1348a0863279623abfbc1",
+        "git_blob": "0d9090f0f10506d836203deb83a701520865b21e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicalView.java",
-        "sha256": "a8f635b3793d6431b4693a51432956a36bc2d45898a96cabcc96320bd5cae5a2"
+        "sha256": "1e286d6c1fbb16fff3f2147d55a4c975b19f1167776fe1a865b3f312665a4f26"
       },
       "role": "original503"
     },
@@ -23988,28 +23988,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexicon.java",
-          "sha": "0dfb60fcb9897a41aea47830d742cd40a34469a9",
+          "sha": "0b586ab55ddc604ed90c3435c90e898c5ec5e680",
           "size": 7055,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0dfb60fcb9897a41aea47830d742cd40a34469a9"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0b586ab55ddc604ed90c3435c90e898c5ec5e680"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 7055,
-        "git_blob": "0dfb60fcb9897a41aea47830d742cd40a34469a9",
+        "git_blob": "0b586ab55ddc604ed90c3435c90e898c5ec5e680",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicon.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "427bc86341fb45759b9c7b9f76e32f03d1c9fad2c769ba5fe4164058923b2b46"
+        "sha256": "456083ba1a447b23cdc2666adedc0be8c70caeeedeb82fd03bee25d727fb0df5"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 7055,
-        "git_blob": "0dfb60fcb9897a41aea47830d742cd40a34469a9",
+        "git_blob": "0b586ab55ddc604ed90c3435c90e898c5ec5e680",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicon.java",
-        "sha256": "427bc86341fb45759b9c7b9f76e32f03d1c9fad2c769ba5fe4164058923b2b46"
+        "sha256": "456083ba1a447b23cdc2666adedc0be8c70caeeedeb82fd03bee25d727fb0df5"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicon.java",
@@ -24071,9 +24071,9 @@
       ],
       "published": {
         "bytes": 7055,
-        "git_blob": "0dfb60fcb9897a41aea47830d742cd40a34469a9",
+        "git_blob": "0b586ab55ddc604ed90c3435c90e898c5ec5e680",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexicon.java",
-        "sha256": "427bc86341fb45759b9c7b9f76e32f03d1c9fad2c769ba5fe4164058923b2b46"
+        "sha256": "456083ba1a447b23cdc2666adedc0be8c70caeeedeb82fd03bee25d727fb0df5"
       },
       "role": "original503"
     },
@@ -24088,28 +24088,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexiconKind.java",
-          "sha": "bcb568151d69dcd8af30b850e7463bef6f8a6b2f",
+          "sha": "daa2796ec70e1c18895250dd9620cec86fdd5ddb",
           "size": 663,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/bcb568151d69dcd8af30b850e7463bef6f8a6b2f"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/daa2796ec70e1c18895250dd9620cec86fdd5ddb"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 663,
-        "git_blob": "bcb568151d69dcd8af30b850e7463bef6f8a6b2f",
+        "git_blob": "daa2796ec70e1c18895250dd9620cec86fdd5ddb",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconKind.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "de77c40f9d20c42964ae8f723f11a1a9f4f156cd971624a22427a67d6b192272"
+        "sha256": "33fb2892cf46811ea70e281cd961051b1665f1d6f3cafd7ee883f185050329ff"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 663,
-        "git_blob": "bcb568151d69dcd8af30b850e7463bef6f8a6b2f",
+        "git_blob": "daa2796ec70e1c18895250dd9620cec86fdd5ddb",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconKind.java",
-        "sha256": "de77c40f9d20c42964ae8f723f11a1a9f4f156cd971624a22427a67d6b192272"
+        "sha256": "33fb2892cf46811ea70e281cd961051b1665f1d6f3cafd7ee883f185050329ff"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconKind.java",
@@ -24171,9 +24171,9 @@
       ],
       "published": {
         "bytes": 663,
-        "git_blob": "bcb568151d69dcd8af30b850e7463bef6f8a6b2f",
+        "git_blob": "daa2796ec70e1c18895250dd9620cec86fdd5ddb",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconKind.java",
-        "sha256": "de77c40f9d20c42964ae8f723f11a1a9f4f156cd971624a22427a67d6b192272"
+        "sha256": "33fb2892cf46811ea70e281cd961051b1665f1d6f3cafd7ee883f185050329ff"
       },
       "role": "original503"
     },
@@ -24188,28 +24188,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexLexiconSpace.java",
-          "sha": "bd35e4dcf8743b05bf4114d2385ec48af904f3fd",
+          "sha": "85496af04fea2302f0258373a3acab616d549516",
           "size": 9095,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/bd35e4dcf8743b05bf4114d2385ec48af904f3fd"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/85496af04fea2302f0258373a3acab616d549516"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 9095,
-        "git_blob": "bd35e4dcf8743b05bf4114d2385ec48af904f3fd",
+        "git_blob": "85496af04fea2302f0258373a3acab616d549516",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconSpace.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "b1866997ade85b3eef7bf0440f150f4188a5e1f17090e2dce29dba41e3ed2efc"
+        "sha256": "b7ae16fa14b7d59a8473698ddf57f386c226cfaf305d356d2383b342f936f050"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 9095,
-        "git_blob": "bd35e4dcf8743b05bf4114d2385ec48af904f3fd",
+        "git_blob": "85496af04fea2302f0258373a3acab616d549516",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconSpace.java",
-        "sha256": "b1866997ade85b3eef7bf0440f150f4188a5e1f17090e2dce29dba41e3ed2efc"
+        "sha256": "b7ae16fa14b7d59a8473698ddf57f386c226cfaf305d356d2383b342f936f050"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconSpace.java",
@@ -24271,9 +24271,9 @@
       ],
       "published": {
         "bytes": 9095,
-        "git_blob": "bd35e4dcf8743b05bf4114d2385ec48af904f3fd",
+        "git_blob": "85496af04fea2302f0258373a3acab616d549516",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexLexiconSpace.java",
-        "sha256": "b1866997ade85b3eef7bf0440f150f4188a5e1f17090e2dce29dba41e3ed2efc"
+        "sha256": "b7ae16fa14b7d59a8473698ddf57f386c226cfaf305d356d2383b342f936f050"
       },
       "role": "original503"
     },
@@ -24488,28 +24488,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexNamespace.java",
-          "sha": "0899a80420d070c19bada6a52b1781212c426456",
+          "sha": "7b9d544c6c5060a0471599c4527ecec4a8f28d49",
           "size": 1020,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0899a80420d070c19bada6a52b1781212c426456"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7b9d544c6c5060a0471599c4527ecec4a8f28d49"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1020,
-        "git_blob": "0899a80420d070c19bada6a52b1781212c426456",
+        "git_blob": "7b9d544c6c5060a0471599c4527ecec4a8f28d49",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespace.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "badf873e6a4dc9a1bf80ad7db1311e0e35239515522cd2c1c0f6eff09a5cd8af"
+        "sha256": "029797597fbd685407de6f9bafc1fe6d92e3d1ffab8985f69f721af4ae3faa48"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1020,
-        "git_blob": "0899a80420d070c19bada6a52b1781212c426456",
+        "git_blob": "7b9d544c6c5060a0471599c4527ecec4a8f28d49",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespace.java",
-        "sha256": "badf873e6a4dc9a1bf80ad7db1311e0e35239515522cd2c1c0f6eff09a5cd8af"
+        "sha256": "029797597fbd685407de6f9bafc1fe6d92e3d1ffab8985f69f721af4ae3faa48"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespace.java",
@@ -24571,9 +24571,9 @@
       ],
       "published": {
         "bytes": 1020,
-        "git_blob": "0899a80420d070c19bada6a52b1781212c426456",
+        "git_blob": "7b9d544c6c5060a0471599c4527ecec4a8f28d49",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespace.java",
-        "sha256": "badf873e6a4dc9a1bf80ad7db1311e0e35239515522cd2c1c0f6eff09a5cd8af"
+        "sha256": "029797597fbd685407de6f9bafc1fe6d92e3d1ffab8985f69f721af4ae3faa48"
       },
       "role": "original503"
     },
@@ -24588,28 +24588,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexNamespaceRegistry.java",
-          "sha": "4b056e8522ca9fa6203e352d9e31f2820922c868",
+          "sha": "c26773ec9c2761e6661def206e3fd5d3a35f786a",
           "size": 7030,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/4b056e8522ca9fa6203e352d9e31f2820922c868"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c26773ec9c2761e6661def206e3fd5d3a35f786a"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 7030,
-        "git_blob": "4b056e8522ca9fa6203e352d9e31f2820922c868",
+        "git_blob": "c26773ec9c2761e6661def206e3fd5d3a35f786a",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespaceRegistry.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "cc4f76a4f8fd477aa7c4d64448de7cb7ec23bed526c4f0a529bb7fb8a15f7f5e"
+        "sha256": "f1110d2c9b29df80d6626975c189b8cd8d245bbdb407ae8dc645abe6051ad0c7"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 7030,
-        "git_blob": "4b056e8522ca9fa6203e352d9e31f2820922c868",
+        "git_blob": "c26773ec9c2761e6661def206e3fd5d3a35f786a",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespaceRegistry.java",
-        "sha256": "cc4f76a4f8fd477aa7c4d64448de7cb7ec23bed526c4f0a529bb7fb8a15f7f5e"
+        "sha256": "f1110d2c9b29df80d6626975c189b8cd8d245bbdb407ae8dc645abe6051ad0c7"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespaceRegistry.java",
@@ -24671,9 +24671,9 @@
       ],
       "published": {
         "bytes": 7030,
-        "git_blob": "4b056e8522ca9fa6203e352d9e31f2820922c868",
+        "git_blob": "c26773ec9c2761e6661def206e3fd5d3a35f786a",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNamespaceRegistry.java",
-        "sha256": "cc4f76a4f8fd477aa7c4d64448de7cb7ec23bed526c4f0a529bb7fb8a15f7f5e"
+        "sha256": "f1110d2c9b29df80d6626975c189b8cd8d245bbdb407ae8dc645abe6051ad0c7"
       },
       "role": "original503"
     },
@@ -24688,28 +24688,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexNativeOps.java",
-          "sha": "1dbe5138d5e24786a9652c19ce874c54fb44eaec",
+          "sha": "d3cc4b42d0eeb59eef9801bf9ce2291968237cc8",
           "size": 22301,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1dbe5138d5e24786a9652c19ce874c54fb44eaec"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d3cc4b42d0eeb59eef9801bf9ce2291968237cc8"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 22301,
-        "git_blob": "1dbe5138d5e24786a9652c19ce874c54fb44eaec",
+        "git_blob": "d3cc4b42d0eeb59eef9801bf9ce2291968237cc8",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNativeOps.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "a85817f89b0f2e1395674f534895ad735597cfb0b35e9c82a34061741bd93523"
+        "sha256": "103e5b8e959d8d1c237345025bed9f3e73bb3bd22ef3593482ec12a54128cce2"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 22301,
-        "git_blob": "1dbe5138d5e24786a9652c19ce874c54fb44eaec",
+        "git_blob": "d3cc4b42d0eeb59eef9801bf9ce2291968237cc8",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNativeOps.java",
-        "sha256": "a85817f89b0f2e1395674f534895ad735597cfb0b35e9c82a34061741bd93523"
+        "sha256": "103e5b8e959d8d1c237345025bed9f3e73bb3bd22ef3593482ec12a54128cce2"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNativeOps.java",
@@ -24771,9 +24771,9 @@
       ],
       "published": {
         "bytes": 22301,
-        "git_blob": "1dbe5138d5e24786a9652c19ce874c54fb44eaec",
+        "git_blob": "d3cc4b42d0eeb59eef9801bf9ce2291968237cc8",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexNativeOps.java",
-        "sha256": "a85817f89b0f2e1395674f534895ad735597cfb0b35e9c82a34061741bd93523"
+        "sha256": "103e5b8e959d8d1c237345025bed9f3e73bb3bd22ef3593482ec12a54128cce2"
       },
       "role": "original503"
     },
@@ -24788,28 +24788,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexPackedLexemeImageFormat.java",
-          "sha": "b9ebe69d6e45866996c8dbf17bc5e7295e6db757",
+          "sha": "ada4c6551d908aca3ab27b19473534bc4950415f",
           "size": 3343,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b9ebe69d6e45866996c8dbf17bc5e7295e6db757"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ada4c6551d908aca3ab27b19473534bc4950415f"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 3343,
-        "git_blob": "b9ebe69d6e45866996c8dbf17bc5e7295e6db757",
+        "git_blob": "ada4c6551d908aca3ab27b19473534bc4950415f",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeImageFormat.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "ebd3933e1207ccdb4ecde62f62b1bd4ea344cd2287f74a6c20f1b5b3920ca1d1"
+        "sha256": "3e4f60a58f96cab91a2f05fc33eecf0d43f75610866dfbd4d7ab6da50a9f416f"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 3343,
-        "git_blob": "b9ebe69d6e45866996c8dbf17bc5e7295e6db757",
+        "git_blob": "ada4c6551d908aca3ab27b19473534bc4950415f",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeImageFormat.java",
-        "sha256": "ebd3933e1207ccdb4ecde62f62b1bd4ea344cd2287f74a6c20f1b5b3920ca1d1"
+        "sha256": "3e4f60a58f96cab91a2f05fc33eecf0d43f75610866dfbd4d7ab6da50a9f416f"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeImageFormat.java",
@@ -24871,9 +24871,9 @@
       ],
       "published": {
         "bytes": 3343,
-        "git_blob": "b9ebe69d6e45866996c8dbf17bc5e7295e6db757",
+        "git_blob": "ada4c6551d908aca3ab27b19473534bc4950415f",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeImageFormat.java",
-        "sha256": "ebd3933e1207ccdb4ecde62f62b1bd4ea344cd2287f74a6c20f1b5b3920ca1d1"
+        "sha256": "3e4f60a58f96cab91a2f05fc33eecf0d43f75610866dfbd4d7ab6da50a9f416f"
       },
       "role": "original503"
     },
@@ -24888,28 +24888,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexPackedLexemeIndex.java",
-          "sha": "387bea4d0f54abe331ca9df0b522277bae1eda4b",
+          "sha": "81ecf508e61db86c54b35d9ce73848ddf54613aa",
           "size": 14780,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/387bea4d0f54abe331ca9df0b522277bae1eda4b"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/81ecf508e61db86c54b35d9ce73848ddf54613aa"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 14780,
-        "git_blob": "387bea4d0f54abe331ca9df0b522277bae1eda4b",
+        "git_blob": "81ecf508e61db86c54b35d9ce73848ddf54613aa",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeIndex.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "4b6c8f27756282a4718d08904c15b12a2ad450a9b4b4bf4ae0ab3e44bc24f1bc"
+        "sha256": "d8268d369806726e1319a2e3654c049d3abd3a83eb34e8212f982b6c8a24e7ec"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 14780,
-        "git_blob": "387bea4d0f54abe331ca9df0b522277bae1eda4b",
+        "git_blob": "81ecf508e61db86c54b35d9ce73848ddf54613aa",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeIndex.java",
-        "sha256": "4b6c8f27756282a4718d08904c15b12a2ad450a9b4b4bf4ae0ab3e44bc24f1bc"
+        "sha256": "d8268d369806726e1319a2e3654c049d3abd3a83eb34e8212f982b6c8a24e7ec"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeIndex.java",
@@ -24971,9 +24971,9 @@
       ],
       "published": {
         "bytes": 14780,
-        "git_blob": "387bea4d0f54abe331ca9df0b522277bae1eda4b",
+        "git_blob": "81ecf508e61db86c54b35d9ce73848ddf54613aa",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeIndex.java",
-        "sha256": "4b6c8f27756282a4718d08904c15b12a2ad450a9b4b4bf4ae0ab3e44bc24f1bc"
+        "sha256": "d8268d369806726e1319a2e3654c049d3abd3a83eb34e8212f982b6c8a24e7ec"
       },
       "role": "original503"
     },
@@ -24988,28 +24988,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexPackedLexemeKeySource.java",
-          "sha": "39f3aea75ebcde445258c8d469395133fbbc8772",
+          "sha": "33a2e766e3eb5e66cd158a7d66b339bf1644cd6b",
           "size": 539,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/39f3aea75ebcde445258c8d469395133fbbc8772"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/33a2e766e3eb5e66cd158a7d66b339bf1644cd6b"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 539,
-        "git_blob": "39f3aea75ebcde445258c8d469395133fbbc8772",
+        "git_blob": "33a2e766e3eb5e66cd158a7d66b339bf1644cd6b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeKeySource.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "6c9966d9647efb118e8d6f9a1d870507565f76cc8030f7f1ef6322b12aacd94d"
+        "sha256": "5078363cdadf455cb87d825c37eb4ddf559e1017547490678ce818a895a5175f"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 539,
-        "git_blob": "39f3aea75ebcde445258c8d469395133fbbc8772",
+        "git_blob": "33a2e766e3eb5e66cd158a7d66b339bf1644cd6b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeKeySource.java",
-        "sha256": "6c9966d9647efb118e8d6f9a1d870507565f76cc8030f7f1ef6322b12aacd94d"
+        "sha256": "5078363cdadf455cb87d825c37eb4ddf559e1017547490678ce818a895a5175f"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeKeySource.java",
@@ -25071,9 +25071,9 @@
       ],
       "published": {
         "bytes": 539,
-        "git_blob": "39f3aea75ebcde445258c8d469395133fbbc8772",
+        "git_blob": "33a2e766e3eb5e66cd158a7d66b339bf1644cd6b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexPackedLexemeKeySource.java",
-        "sha256": "6c9966d9647efb118e8d6f9a1d870507565f76cc8030f7f1ef6322b12aacd94d"
+        "sha256": "5078363cdadf455cb87d825c37eb4ddf559e1017547490678ce818a895a5175f"
       },
       "role": "original503"
     },
@@ -25088,28 +25088,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexProgressMonitor.java",
-          "sha": "763ea75ea1553e679d6fcda271760328defef8cd",
+          "sha": "2a387a4d8c7cabfb2ce75b6bae9210281f01c867",
           "size": 865,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/763ea75ea1553e679d6fcda271760328defef8cd"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2a387a4d8c7cabfb2ce75b6bae9210281f01c867"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 865,
-        "git_blob": "763ea75ea1553e679d6fcda271760328defef8cd",
+        "git_blob": "2a387a4d8c7cabfb2ce75b6bae9210281f01c867",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexProgressMonitor.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "b907a5acfdd98e139abb5fe41ea86c35bf4f3f15481086a5831b0e60ee8ac728"
+        "sha256": "cfa9de0db35c2a404aebb376cd5fe8929d57a58d3d605839d3e9cf9bb169c243"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 865,
-        "git_blob": "763ea75ea1553e679d6fcda271760328defef8cd",
+        "git_blob": "2a387a4d8c7cabfb2ce75b6bae9210281f01c867",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexProgressMonitor.java",
-        "sha256": "b907a5acfdd98e139abb5fe41ea86c35bf4f3f15481086a5831b0e60ee8ac728"
+        "sha256": "cfa9de0db35c2a404aebb376cd5fe8929d57a58d3d605839d3e9cf9bb169c243"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexProgressMonitor.java",
@@ -25171,9 +25171,9 @@
       ],
       "published": {
         "bytes": 865,
-        "git_blob": "763ea75ea1553e679d6fcda271760328defef8cd",
+        "git_blob": "2a387a4d8c7cabfb2ce75b6bae9210281f01c867",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexProgressMonitor.java",
-        "sha256": "b907a5acfdd98e139abb5fe41ea86c35bf4f3f15481086a5831b0e60ee8ac728"
+        "sha256": "cfa9de0db35c2a404aebb376cd5fe8929d57a58d3d605839d3e9cf9bb169c243"
       },
       "role": "original503"
     },
@@ -25188,28 +25188,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexRef.java",
-          "sha": "609c2eb1eca6de701275f3766c377029b81b121d",
+          "sha": "2c8c1ed4ad34007bad6f444ad6cca37476406566",
           "size": 1345,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/609c2eb1eca6de701275f3766c377029b81b121d"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2c8c1ed4ad34007bad6f444ad6cca37476406566"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1345,
-        "git_blob": "609c2eb1eca6de701275f3766c377029b81b121d",
+        "git_blob": "2c8c1ed4ad34007bad6f444ad6cca37476406566",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRef.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "467c945c87277716c9dfaab70096d52b850e26c93bd6ece74dce14dd71c574d6"
+        "sha256": "f4ad7e7a03dca7cf0d524844734670decfe3ccee3a22732835026cd155686988"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1345,
-        "git_blob": "609c2eb1eca6de701275f3766c377029b81b121d",
+        "git_blob": "2c8c1ed4ad34007bad6f444ad6cca37476406566",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRef.java",
-        "sha256": "467c945c87277716c9dfaab70096d52b850e26c93bd6ece74dce14dd71c574d6"
+        "sha256": "f4ad7e7a03dca7cf0d524844734670decfe3ccee3a22732835026cd155686988"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRef.java",
@@ -25271,9 +25271,9 @@
       ],
       "published": {
         "bytes": 1345,
-        "git_blob": "609c2eb1eca6de701275f3766c377029b81b121d",
+        "git_blob": "2c8c1ed4ad34007bad6f444ad6cca37476406566",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRef.java",
-        "sha256": "467c945c87277716c9dfaab70096d52b850e26c93bd6ece74dce14dd71c574d6"
+        "sha256": "f4ad7e7a03dca7cf0d524844734670decfe3ccee3a22732835026cd155686988"
       },
       "role": "original503"
     },
@@ -25288,28 +25288,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexReferenceDomain.java",
-          "sha": "763bfa12efbb05aea87bba055bc3db6ee610ba21",
+          "sha": "315356df82e0c93c319341b33b649110e27b153c",
           "size": 491,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/763bfa12efbb05aea87bba055bc3db6ee610ba21"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/315356df82e0c93c319341b33b649110e27b153c"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 491,
-        "git_blob": "763bfa12efbb05aea87bba055bc3db6ee610ba21",
+        "git_blob": "315356df82e0c93c319341b33b649110e27b153c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexReferenceDomain.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "d866181d5073a995bbab3a0e4020056de8fcf84f4d2d1ec55dd32f7b7e8e0853"
+        "sha256": "25336619badd8e3bfd2f4d255780da427325ab928709b1f1827ed46cb20f52a2"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 491,
-        "git_blob": "763bfa12efbb05aea87bba055bc3db6ee610ba21",
+        "git_blob": "315356df82e0c93c319341b33b649110e27b153c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexReferenceDomain.java",
-        "sha256": "d866181d5073a995bbab3a0e4020056de8fcf84f4d2d1ec55dd32f7b7e8e0853"
+        "sha256": "25336619badd8e3bfd2f4d255780da427325ab928709b1f1827ed46cb20f52a2"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexReferenceDomain.java",
@@ -25371,9 +25371,9 @@
       ],
       "published": {
         "bytes": 491,
-        "git_blob": "763bfa12efbb05aea87bba055bc3db6ee610ba21",
+        "git_blob": "315356df82e0c93c319341b33b649110e27b153c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexReferenceDomain.java",
-        "sha256": "d866181d5073a995bbab3a0e4020056de8fcf84f4d2d1ec55dd32f7b7e8e0853"
+        "sha256": "25336619badd8e3bfd2f4d255780da427325ab928709b1f1827ed46cb20f52a2"
       },
       "role": "original503"
     },
@@ -25488,28 +25488,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexRegionIds.java",
-          "sha": "735be02401aa541f02fc6e9652f15d804ee74e24",
+          "sha": "b12de0c48e7fd738875bd60cf46f4e76ff6c849e",
           "size": 529,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/735be02401aa541f02fc6e9652f15d804ee74e24"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b12de0c48e7fd738875bd60cf46f4e76ff6c849e"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 529,
-        "git_blob": "735be02401aa541f02fc6e9652f15d804ee74e24",
+        "git_blob": "b12de0c48e7fd738875bd60cf46f4e76ff6c849e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegionIds.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "22b41820e00f326901b8a01e5f747ba7e7b7bf7159e3ca00403d0d7a6b21e7d2"
+        "sha256": "f93ee555513f05a458a9d977f5a5019a6fb6428bddd66e386e7f77b3523de94a"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 529,
-        "git_blob": "735be02401aa541f02fc6e9652f15d804ee74e24",
+        "git_blob": "b12de0c48e7fd738875bd60cf46f4e76ff6c849e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegionIds.java",
-        "sha256": "22b41820e00f326901b8a01e5f747ba7e7b7bf7159e3ca00403d0d7a6b21e7d2"
+        "sha256": "f93ee555513f05a458a9d977f5a5019a6fb6428bddd66e386e7f77b3523de94a"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegionIds.java",
@@ -25571,9 +25571,9 @@
       ],
       "published": {
         "bytes": 529,
-        "git_blob": "735be02401aa541f02fc6e9652f15d804ee74e24",
+        "git_blob": "b12de0c48e7fd738875bd60cf46f4e76ff6c849e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegionIds.java",
-        "sha256": "22b41820e00f326901b8a01e5f747ba7e7b7bf7159e3ca00403d0d7a6b21e7d2"
+        "sha256": "f93ee555513f05a458a9d977f5a5019a6fb6428bddd66e386e7f77b3523de94a"
       },
       "role": "original503"
     },
@@ -25588,28 +25588,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexString.java",
-          "sha": "1840f12a3ea64750d829f6dd2bda7916fc25d9f5",
+          "sha": "0c2a25df9a937908f46f6d336831bf7b94834d98",
           "size": 16156,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1840f12a3ea64750d829f6dd2bda7916fc25d9f5"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0c2a25df9a937908f46f6d336831bf7b94834d98"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 16156,
-        "git_blob": "1840f12a3ea64750d829f6dd2bda7916fc25d9f5",
+        "git_blob": "0c2a25df9a937908f46f6d336831bf7b94834d98",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexString.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "d6856891b706dc9f38e8941438323629f5831d6f7117ba78699ce9c6f2612b91"
+        "sha256": "9a345b499ab492cb46f484767fcbae37b499d5083319f5e49bb362538d4c66dd"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 16156,
-        "git_blob": "1840f12a3ea64750d829f6dd2bda7916fc25d9f5",
+        "git_blob": "0c2a25df9a937908f46f6d336831bf7b94834d98",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexString.java",
-        "sha256": "d6856891b706dc9f38e8941438323629f5831d6f7117ba78699ce9c6f2612b91"
+        "sha256": "9a345b499ab492cb46f484767fcbae37b499d5083319f5e49bb362538d4c66dd"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexString.java",
@@ -25671,9 +25671,9 @@
       ],
       "published": {
         "bytes": 16156,
-        "git_blob": "1840f12a3ea64750d829f6dd2bda7916fc25d9f5",
+        "git_blob": "0c2a25df9a937908f46f6d336831bf7b94834d98",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexString.java",
-        "sha256": "d6856891b706dc9f38e8941438323629f5831d6f7117ba78699ce9c6f2612b91"
+        "sha256": "9a345b499ab492cb46f484767fcbae37b499d5083319f5e49bb362538d4c66dd"
       },
       "role": "original503"
     },
@@ -25688,28 +25688,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexStringMetadata.java",
-          "sha": "b2428c746f44d33ebed0289ff445ee57a454876e",
+          "sha": "1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2",
           "size": 13222,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b2428c746f44d33ebed0289ff445ee57a454876e"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 13222,
-        "git_blob": "b2428c746f44d33ebed0289ff445ee57a454876e",
+        "git_blob": "1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringMetadata.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "8040fd1512cf94d1df7dd490996483161c32fc4954d34286153d228642d3863a"
+        "sha256": "3b9d1dbf5c7342fd921c4aae7319dd3cab39a52ee65f25a2bf0decf9cc3dbd99"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 13222,
-        "git_blob": "b2428c746f44d33ebed0289ff445ee57a454876e",
+        "git_blob": "1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringMetadata.java",
-        "sha256": "8040fd1512cf94d1df7dd490996483161c32fc4954d34286153d228642d3863a"
+        "sha256": "3b9d1dbf5c7342fd921c4aae7319dd3cab39a52ee65f25a2bf0decf9cc3dbd99"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringMetadata.java",
@@ -25771,9 +25771,9 @@
       ],
       "published": {
         "bytes": 13222,
-        "git_blob": "b2428c746f44d33ebed0289ff445ee57a454876e",
+        "git_blob": "1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringMetadata.java",
-        "sha256": "8040fd1512cf94d1df7dd490996483161c32fc4954d34286153d228642d3863a"
+        "sha256": "3b9d1dbf5c7342fd921c4aae7319dd3cab39a52ee65f25a2bf0decf9cc3dbd99"
       },
       "role": "original503"
     },
@@ -26088,28 +26088,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexStringPrecomputeImage.java",
-          "sha": "0bb97710e1f19c56cb4b93db6d2fd40a0b83f2a4",
+          "sha": "7897b60ea11548bcefc56e9f346f0b49de778c62",
           "size": 34742,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0bb97710e1f19c56cb4b93db6d2fd40a0b83f2a4"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7897b60ea11548bcefc56e9f346f0b49de778c62"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 34742,
-        "git_blob": "0bb97710e1f19c56cb4b93db6d2fd40a0b83f2a4",
+        "git_blob": "7897b60ea11548bcefc56e9f346f0b49de778c62",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeImage.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "1d952e3cca08d9cb3eef2753e1884dda95ba3185c7fca2c65ce1b2ba10282553"
+        "sha256": "b7acbc9285b062c68ea950fb67d4723dba14cf697cbd1249c1769537fefaa469"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 34742,
-        "git_blob": "0bb97710e1f19c56cb4b93db6d2fd40a0b83f2a4",
+        "git_blob": "7897b60ea11548bcefc56e9f346f0b49de778c62",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeImage.java",
-        "sha256": "1d952e3cca08d9cb3eef2753e1884dda95ba3185c7fca2c65ce1b2ba10282553"
+        "sha256": "b7acbc9285b062c68ea950fb67d4723dba14cf697cbd1249c1769537fefaa469"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeImage.java",
@@ -26171,9 +26171,9 @@
       ],
       "published": {
         "bytes": 34742,
-        "git_blob": "0bb97710e1f19c56cb4b93db6d2fd40a0b83f2a4",
+        "git_blob": "7897b60ea11548bcefc56e9f346f0b49de778c62",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeImage.java",
-        "sha256": "1d952e3cca08d9cb3eef2753e1884dda95ba3185c7fca2c65ce1b2ba10282553"
+        "sha256": "b7acbc9285b062c68ea950fb67d4723dba14cf697cbd1249c1769537fefaa469"
       },
       "role": "original503"
     },
@@ -26188,28 +26188,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexStringPrecomputeProfile.java",
-          "sha": "3bf61751db3acbfd50f687e030bc9d6d98e49f84",
+          "sha": "52c4fcb571e385ac679a88021d6eaf26c5103ff8",
           "size": 2335,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3bf61751db3acbfd50f687e030bc9d6d98e49f84"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/52c4fcb571e385ac679a88021d6eaf26c5103ff8"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 2335,
-        "git_blob": "3bf61751db3acbfd50f687e030bc9d6d98e49f84",
+        "git_blob": "52c4fcb571e385ac679a88021d6eaf26c5103ff8",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeProfile.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "45527b9177122a21303ecfc9c3d398c1fc6e6a2e7d8dea048ceba3696f619e11"
+        "sha256": "bbaa79dba22a454e8ded4c602229aa53eb5f8602a2ec50c4846f55656c97a707"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 2335,
-        "git_blob": "3bf61751db3acbfd50f687e030bc9d6d98e49f84",
+        "git_blob": "52c4fcb571e385ac679a88021d6eaf26c5103ff8",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeProfile.java",
-        "sha256": "45527b9177122a21303ecfc9c3d398c1fc6e6a2e7d8dea048ceba3696f619e11"
+        "sha256": "bbaa79dba22a454e8ded4c602229aa53eb5f8602a2ec50c4846f55656c97a707"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeProfile.java",
@@ -26271,9 +26271,9 @@
       ],
       "published": {
         "bytes": 2335,
-        "git_blob": "3bf61751db3acbfd50f687e030bc9d6d98e49f84",
+        "git_blob": "52c4fcb571e385ac679a88021d6eaf26c5103ff8",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexStringPrecomputeProfile.java",
-        "sha256": "45527b9177122a21303ecfc9c3d398c1fc6e6a2e7d8dea048ceba3696f619e11"
+        "sha256": "bbaa79dba22a454e8ded4c602229aa53eb5f8602a2ec50c4846f55656c97a707"
       },
       "role": "original503"
     },
@@ -26588,28 +26588,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexSymbolLexicon.java",
-          "sha": "ec6dc9326a289c0421470d4def092e8b77a01e2d",
+          "sha": "c1524d57b7791b4afef40fd6d68e463316920807",
           "size": 984,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ec6dc9326a289c0421470d4def092e8b77a01e2d"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c1524d57b7791b4afef40fd6d68e463316920807"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 984,
-        "git_blob": "ec6dc9326a289c0421470d4def092e8b77a01e2d",
+        "git_blob": "c1524d57b7791b4afef40fd6d68e463316920807",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolLexicon.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "7ddcbe639c2f5a063dff8cc1011ccb9223ae181f03e228549a505c62d0be7006"
+        "sha256": "1bdaaa86de600c5962f4ae36a8e9c8b5a3dcfd23a815e07a0e04153cf6b6fb06"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 984,
-        "git_blob": "ec6dc9326a289c0421470d4def092e8b77a01e2d",
+        "git_blob": "c1524d57b7791b4afef40fd6d68e463316920807",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolLexicon.java",
-        "sha256": "7ddcbe639c2f5a063dff8cc1011ccb9223ae181f03e228549a505c62d0be7006"
+        "sha256": "1bdaaa86de600c5962f4ae36a8e9c8b5a3dcfd23a815e07a0e04153cf6b6fb06"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolLexicon.java",
@@ -26671,9 +26671,9 @@
       ],
       "published": {
         "bytes": 984,
-        "git_blob": "ec6dc9326a289c0421470d4def092e8b77a01e2d",
+        "git_blob": "c1524d57b7791b4afef40fd6d68e463316920807",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolLexicon.java",
-        "sha256": "7ddcbe639c2f5a063dff8cc1011ccb9223ae181f03e228549a505c62d0be7006"
+        "sha256": "1bdaaa86de600c5962f4ae36a8e9c8b5a3dcfd23a815e07a0e04153cf6b6fb06"
       },
       "role": "original503"
     },
@@ -26688,28 +26688,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexSymbolRef.java",
-          "sha": "e914c73b45a6256684bf03d82557cc0774de7fa5",
+          "sha": "954f834eb2d19899057e59c247b19a026503f52b",
           "size": 1728,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e914c73b45a6256684bf03d82557cc0774de7fa5"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/954f834eb2d19899057e59c247b19a026503f52b"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1728,
-        "git_blob": "e914c73b45a6256684bf03d82557cc0774de7fa5",
+        "git_blob": "954f834eb2d19899057e59c247b19a026503f52b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolRef.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "d1de86d86f60f46fa5eea0f7876934f4a1a86d05ff7dd29dc57e2831f547e2c8"
+        "sha256": "fb051feeb21f1b277d6a46e479af07366a72de965fc98015bb82b7353783b5d4"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1728,
-        "git_blob": "e914c73b45a6256684bf03d82557cc0774de7fa5",
+        "git_blob": "954f834eb2d19899057e59c247b19a026503f52b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolRef.java",
-        "sha256": "d1de86d86f60f46fa5eea0f7876934f4a1a86d05ff7dd29dc57e2831f547e2c8"
+        "sha256": "fb051feeb21f1b277d6a46e479af07366a72de965fc98015bb82b7353783b5d4"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolRef.java",
@@ -26771,9 +26771,9 @@
       ],
       "published": {
         "bytes": 1728,
-        "git_blob": "e914c73b45a6256684bf03d82557cc0774de7fa5",
+        "git_blob": "954f834eb2d19899057e59c247b19a026503f52b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolRef.java",
-        "sha256": "d1de86d86f60f46fa5eea0f7876934f4a1a86d05ff7dd29dc57e2831f547e2c8"
+        "sha256": "fb051feeb21f1b277d6a46e479af07366a72de965fc98015bb82b7353783b5d4"
       },
       "role": "original503"
     },
@@ -26788,28 +26788,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexSymbolReference.java",
-          "sha": "67e54a1f765c6c616ad038c6296850ac83d21cce",
+          "sha": "50279f12922b84a23ea9e1ebef23f139f4828698",
           "size": 422,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/67e54a1f765c6c616ad038c6296850ac83d21cce"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/50279f12922b84a23ea9e1ebef23f139f4828698"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 422,
-        "git_blob": "67e54a1f765c6c616ad038c6296850ac83d21cce",
+        "git_blob": "50279f12922b84a23ea9e1ebef23f139f4828698",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolReference.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "df2b6427ad40e0048c02331358cf5718253259d11ff6f967a157d2b521adb3f5"
+        "sha256": "4e95950670aa5e02a5c9343d2d2b91499b15e659011a8195da5abbc608856816"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 422,
-        "git_blob": "67e54a1f765c6c616ad038c6296850ac83d21cce",
+        "git_blob": "50279f12922b84a23ea9e1ebef23f139f4828698",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolReference.java",
-        "sha256": "df2b6427ad40e0048c02331358cf5718253259d11ff6f967a157d2b521adb3f5"
+        "sha256": "4e95950670aa5e02a5c9343d2d2b91499b15e659011a8195da5abbc608856816"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolReference.java",
@@ -26871,9 +26871,9 @@
       ],
       "published": {
         "bytes": 422,
-        "git_blob": "67e54a1f765c6c616ad038c6296850ac83d21cce",
+        "git_blob": "50279f12922b84a23ea9e1ebef23f139f4828698",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolReference.java",
-        "sha256": "df2b6427ad40e0048c02331358cf5718253259d11ff6f967a157d2b521adb3f5"
+        "sha256": "4e95950670aa5e02a5c9343d2d2b91499b15e659011a8195da5abbc608856816"
       },
       "role": "original503"
     },
@@ -26888,28 +26888,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexSymbolTable.java",
-          "sha": "13aafab2665434455e390c1e895d4a7a9b18c47d",
+          "sha": "c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c",
           "size": 4913,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/13aafab2665434455e390c1e895d4a7a9b18c47d"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 4913,
-        "git_blob": "13aafab2665434455e390c1e895d4a7a9b18c47d",
+        "git_blob": "c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolTable.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "bee438df9cddd934fed60ba515878e86f1215040bef83d16daadf4be7ad6be38"
+        "sha256": "3b1cbb91bf17b5a625249832bc406f973b3a66c7c42471fe49ba35a4224c20b7"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 4913,
-        "git_blob": "13aafab2665434455e390c1e895d4a7a9b18c47d",
+        "git_blob": "c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolTable.java",
-        "sha256": "bee438df9cddd934fed60ba515878e86f1215040bef83d16daadf4be7ad6be38"
+        "sha256": "3b1cbb91bf17b5a625249832bc406f973b3a66c7c42471fe49ba35a4224c20b7"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolTable.java",
@@ -26971,9 +26971,9 @@
       ],
       "published": {
         "bytes": 4913,
-        "git_blob": "13aafab2665434455e390c1e895d4a7a9b18c47d",
+        "git_blob": "c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexSymbolTable.java",
-        "sha256": "bee438df9cddd934fed60ba515878e86f1215040bef83d16daadf4be7ad6be38"
+        "sha256": "3b1cbb91bf17b5a625249832bc406f973b3a66c7c42471fe49ba35a4224c20b7"
       },
       "role": "original503"
     },
@@ -26988,28 +26988,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexTensorBackend.java",
-          "sha": "a589f2f98b05534101afb3dd370b38476f794760",
+          "sha": "1fa1ff055d98e0a10e13121f478ce8f1753fabe1",
           "size": 869,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a589f2f98b05534101afb3dd370b38476f794760"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1fa1ff055d98e0a10e13121f478ce8f1753fabe1"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 869,
-        "git_blob": "a589f2f98b05534101afb3dd370b38476f794760",
+        "git_blob": "1fa1ff055d98e0a10e13121f478ce8f1753fabe1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorBackend.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "c5e38f3af3b550aeaad62a6a97e1292d4ab04663b81770dbf7a740d6eab6d122"
+        "sha256": "b39bc36b97fee4129de6bf0d53156fa3e79602524965b8b2497ca561edaa9294"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 869,
-        "git_blob": "a589f2f98b05534101afb3dd370b38476f794760",
+        "git_blob": "1fa1ff055d98e0a10e13121f478ce8f1753fabe1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorBackend.java",
-        "sha256": "c5e38f3af3b550aeaad62a6a97e1292d4ab04663b81770dbf7a740d6eab6d122"
+        "sha256": "b39bc36b97fee4129de6bf0d53156fa3e79602524965b8b2497ca561edaa9294"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorBackend.java",
@@ -27071,9 +27071,9 @@
       ],
       "published": {
         "bytes": 869,
-        "git_blob": "a589f2f98b05534101afb3dd370b38476f794760",
+        "git_blob": "1fa1ff055d98e0a10e13121f478ce8f1753fabe1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorBackend.java",
-        "sha256": "c5e38f3af3b550aeaad62a6a97e1292d4ab04663b81770dbf7a740d6eab6d122"
+        "sha256": "b39bc36b97fee4129de6bf0d53156fa3e79602524965b8b2497ca561edaa9294"
       },
       "role": "original503"
     },
@@ -27088,28 +27088,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexTensorRuntime.java",
-          "sha": "8f80ee676adb19ec864401a89f78c0be07cc22b9",
+          "sha": "d9ce000528cffca45990816e9af01590b1912703",
           "size": 5125,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8f80ee676adb19ec864401a89f78c0be07cc22b9"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d9ce000528cffca45990816e9af01590b1912703"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 5125,
-        "git_blob": "8f80ee676adb19ec864401a89f78c0be07cc22b9",
+        "git_blob": "d9ce000528cffca45990816e9af01590b1912703",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorRuntime.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "9b7da793a7c824450c4be67379e0ac9452943d8e074c3ed6f4291abfd19e19b9"
+        "sha256": "3fbbed424418a1eff2215a26eb4aa93fbcebbe2f285dadacfbe1953589461ca6"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 5125,
-        "git_blob": "8f80ee676adb19ec864401a89f78c0be07cc22b9",
+        "git_blob": "d9ce000528cffca45990816e9af01590b1912703",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorRuntime.java",
-        "sha256": "9b7da793a7c824450c4be67379e0ac9452943d8e074c3ed6f4291abfd19e19b9"
+        "sha256": "3fbbed424418a1eff2215a26eb4aa93fbcebbe2f285dadacfbe1953589461ca6"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorRuntime.java",
@@ -27171,9 +27171,9 @@
       ],
       "published": {
         "bytes": 5125,
-        "git_blob": "8f80ee676adb19ec864401a89f78c0be07cc22b9",
+        "git_blob": "d9ce000528cffca45990816e9af01590b1912703",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTensorRuntime.java",
-        "sha256": "9b7da793a7c824450c4be67379e0ac9452943d8e074c3ed6f4291abfd19e19b9"
+        "sha256": "3fbbed424418a1eff2215a26eb4aa93fbcebbe2f285dadacfbe1953589461ca6"
       },
       "role": "original503"
     },
@@ -27188,28 +27188,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexText.java",
-          "sha": "c3e3f6b7b0b03622613cc741661ec8f13411ae45",
+          "sha": "71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1",
           "size": 1192,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c3e3f6b7b0b03622613cc741661ec8f13411ae45"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1192,
-        "git_blob": "c3e3f6b7b0b03622613cc741661ec8f13411ae45",
+        "git_blob": "71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexText.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "d208020eba0af22422a4d007f3fdf05d83d2c3b90faac460b1d7152877671a4a"
+        "sha256": "f4f28513e4362b1a5e5f65f5dd464ebb1c46c221a523047afaea4b500d812db1"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1192,
-        "git_blob": "c3e3f6b7b0b03622613cc741661ec8f13411ae45",
+        "git_blob": "71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexText.java",
-        "sha256": "d208020eba0af22422a4d007f3fdf05d83d2c3b90faac460b1d7152877671a4a"
+        "sha256": "f4f28513e4362b1a5e5f65f5dd464ebb1c46c221a523047afaea4b500d812db1"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexText.java",
@@ -27271,9 +27271,9 @@
       ],
       "published": {
         "bytes": 1192,
-        "git_blob": "c3e3f6b7b0b03622613cc741661ec8f13411ae45",
+        "git_blob": "71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexText.java",
-        "sha256": "d208020eba0af22422a4d007f3fdf05d83d2c3b90faac460b1d7152877671a4a"
+        "sha256": "f4f28513e4362b1a5e5f65f5dd464ebb1c46c221a523047afaea4b500d812db1"
       },
       "role": "original503"
     },
@@ -27288,28 +27288,28 @@
         "entry": {
           "mode": "100644",
           "path": "MIndexTextSearch.java",
-          "sha": "375f931e7ce0d0947a6b7d6a96816f2fdf8c0f30",
+          "sha": "7811b9834b358c21f4b0cbc45a169af1f1ad5974",
           "size": 7612,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/375f931e7ce0d0947a6b7d6a96816f2fdf8c0f30"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7811b9834b358c21f4b0cbc45a169af1f1ad5974"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 7612,
-        "git_blob": "375f931e7ce0d0947a6b7d6a96816f2fdf8c0f30",
+        "git_blob": "7811b9834b358c21f4b0cbc45a169af1f1ad5974",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTextSearch.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "55c53897ba686029cddcf2156092f0dbc186cdc27d112ed442b1b7d3292978b9"
+        "sha256": "c381cf9b289601ffcbafd85d1cf6c995a556d83695b19978793edf3749768bc2"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 7612,
-        "git_blob": "375f931e7ce0d0947a6b7d6a96816f2fdf8c0f30",
+        "git_blob": "7811b9834b358c21f4b0cbc45a169af1f1ad5974",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTextSearch.java",
-        "sha256": "55c53897ba686029cddcf2156092f0dbc186cdc27d112ed442b1b7d3292978b9"
+        "sha256": "c381cf9b289601ffcbafd85d1cf6c995a556d83695b19978793edf3749768bc2"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTextSearch.java",
@@ -27371,9 +27371,9 @@
       ],
       "published": {
         "bytes": 7612,
-        "git_blob": "375f931e7ce0d0947a6b7d6a96816f2fdf8c0f30",
+        "git_blob": "7811b9834b358c21f4b0cbc45a169af1f1ad5974",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTextSearch.java",
-        "sha256": "55c53897ba686029cddcf2156092f0dbc186cdc27d112ed442b1b7d3292978b9"
+        "sha256": "c381cf9b289601ffcbafd85d1cf6c995a556d83695b19978793edf3749768bc2"
       },
       "role": "original503"
     },
@@ -27388,28 +27388,28 @@
         "entry": {
           "mode": "100644",
           "path": "MappedMIndexPackedLexemeIndex.java",
-          "sha": "a6801cee39fcc8a83828536e7c1022f8de5598b6",
+          "sha": "82220bdecd32d93991666d4dfa7775c5f8c560e1",
           "size": 14886,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a6801cee39fcc8a83828536e7c1022f8de5598b6"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/82220bdecd32d93991666d4dfa7775c5f8c560e1"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 14886,
-        "git_blob": "a6801cee39fcc8a83828536e7c1022f8de5598b6",
+        "git_blob": "82220bdecd32d93991666d4dfa7775c5f8c560e1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MappedMIndexPackedLexemeIndex.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "a48151de622e189424d2fe8014c9de5d285f75e3c31e7bcc12dce2a8dcab8558"
+        "sha256": "c5fc25a45b2b6d4485a399e3456d06c39b0b880b084da1a1c0022304f6955d50"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 14886,
-        "git_blob": "a6801cee39fcc8a83828536e7c1022f8de5598b6",
+        "git_blob": "82220bdecd32d93991666d4dfa7775c5f8c560e1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MappedMIndexPackedLexemeIndex.java",
-        "sha256": "a48151de622e189424d2fe8014c9de5d285f75e3c31e7bcc12dce2a8dcab8558"
+        "sha256": "c5fc25a45b2b6d4485a399e3456d06c39b0b880b084da1a1c0022304f6955d50"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MappedMIndexPackedLexemeIndex.java",
@@ -27471,9 +27471,9 @@
       ],
       "published": {
         "bytes": 14886,
-        "git_blob": "a6801cee39fcc8a83828536e7c1022f8de5598b6",
+        "git_blob": "82220bdecd32d93991666d4dfa7775c5f8c560e1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MappedMIndexPackedLexemeIndex.java",
-        "sha256": "a48151de622e189424d2fe8014c9de5d285f75e3c31e7bcc12dce2a8dcab8558"
+        "sha256": "c5fc25a45b2b6d4485a399e3456d06c39b0b880b084da1a1c0022304f6955d50"
       },
       "role": "original503"
     },
@@ -27488,28 +27488,28 @@
         "entry": {
           "mode": "100644",
           "path": "SemanticRef.java",
-          "sha": "ec46885a24d8889e28a10ab2c3b6626e5a465552",
+          "sha": "e5981f437ed0ff8d3d09f43e714cf3fc435f5338",
           "size": 1999,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ec46885a24d8889e28a10ab2c3b6626e5a465552"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e5981f437ed0ff8d3d09f43e714cf3fc435f5338"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1999,
-        "git_blob": "ec46885a24d8889e28a10ab2c3b6626e5a465552",
+        "git_blob": "e5981f437ed0ff8d3d09f43e714cf3fc435f5338",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SemanticRef.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "6e381b3ae3eeb0bd0c240ee289a7de29a4ee9dd6f741bd9bf19f9dabe0ad9a1e"
+        "sha256": "1f9fd748becef312615ff45ac3f91e5d007d135ccb633859e3464ba055ae7990"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1999,
-        "git_blob": "ec46885a24d8889e28a10ab2c3b6626e5a465552",
+        "git_blob": "e5981f437ed0ff8d3d09f43e714cf3fc435f5338",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SemanticRef.java",
-        "sha256": "6e381b3ae3eeb0bd0c240ee289a7de29a4ee9dd6f741bd9bf19f9dabe0ad9a1e"
+        "sha256": "1f9fd748becef312615ff45ac3f91e5d007d135ccb633859e3464ba055ae7990"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SemanticRef.java",
@@ -27571,9 +27571,9 @@
       ],
       "published": {
         "bytes": 1999,
-        "git_blob": "ec46885a24d8889e28a10ab2c3b6626e5a465552",
+        "git_blob": "e5981f437ed0ff8d3d09f43e714cf3fc435f5338",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SemanticRef.java",
-        "sha256": "6e381b3ae3eeb0bd0c240ee289a7de29a4ee9dd6f741bd9bf19f9dabe0ad9a1e"
+        "sha256": "1f9fd748becef312615ff45ac3f91e5d007d135ccb633859e3464ba055ae7990"
       },
       "role": "original503"
     },
@@ -27588,28 +27588,28 @@
         "entry": {
           "mode": "100644",
           "path": "SubMIndexCompositeString.java",
-          "sha": "c2ed3c2e8708730e225dadcb8b95df5983c6843a",
+          "sha": "e496de56671d3bfcf56cb18bf060b9ed8a14131a",
           "size": 2084,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c2ed3c2e8708730e225dadcb8b95df5983c6843a"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e496de56671d3bfcf56cb18bf060b9ed8a14131a"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 2084,
-        "git_blob": "c2ed3c2e8708730e225dadcb8b95df5983c6843a",
+        "git_blob": "e496de56671d3bfcf56cb18bf060b9ed8a14131a",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexCompositeString.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "d5726cf3f86afa5de2ddcd4d5bb64a4d68a5d0b5db5c1a0ecf8d2d439a03de74"
+        "sha256": "3a7e8223ce8a2f7862ec7e039add6c970b183d9c9fe8bc80afd4592f1f070387"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 2084,
-        "git_blob": "c2ed3c2e8708730e225dadcb8b95df5983c6843a",
+        "git_blob": "e496de56671d3bfcf56cb18bf060b9ed8a14131a",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexCompositeString.java",
-        "sha256": "d5726cf3f86afa5de2ddcd4d5bb64a4d68a5d0b5db5c1a0ecf8d2d439a03de74"
+        "sha256": "3a7e8223ce8a2f7862ec7e039add6c970b183d9c9fe8bc80afd4592f1f070387"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexCompositeString.java",
@@ -27671,9 +27671,9 @@
       ],
       "published": {
         "bytes": 2084,
-        "git_blob": "c2ed3c2e8708730e225dadcb8b95df5983c6843a",
+        "git_blob": "e496de56671d3bfcf56cb18bf060b9ed8a14131a",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexCompositeString.java",
-        "sha256": "d5726cf3f86afa5de2ddcd4d5bb64a4d68a5d0b5db5c1a0ecf8d2d439a03de74"
+        "sha256": "3a7e8223ce8a2f7862ec7e039add6c970b183d9c9fe8bc80afd4592f1f070387"
       },
       "role": "original503"
     },
@@ -27688,28 +27688,28 @@
         "entry": {
           "mode": "100644",
           "path": "SubMIndexString.java",
-          "sha": "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d",
+          "sha": "cb7df37438bb3e50f0a42b42d59ed1644b8fc96e",
           "size": 5219,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/92fa09754c4f5f85f29509a7e6077a9f0ad08f8d"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/cb7df37438bb3e50f0a42b42d59ed1644b8fc96e"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 5219,
-        "git_blob": "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d",
+        "git_blob": "cb7df37438bb3e50f0a42b42d59ed1644b8fc96e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexString.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "80625746ec369c7071d97685e7742359e80b73f7c8b246de76e59655fa1289b7"
+        "sha256": "e1467db80e4a1071a60961b7b5cdcb8e29de315e062a37dd36002e1c807b5028"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 5219,
-        "git_blob": "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d",
+        "git_blob": "cb7df37438bb3e50f0a42b42d59ed1644b8fc96e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexString.java",
-        "sha256": "80625746ec369c7071d97685e7742359e80b73f7c8b246de76e59655fa1289b7"
+        "sha256": "e1467db80e4a1071a60961b7b5cdcb8e29de315e062a37dd36002e1c807b5028"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexString.java",
@@ -27771,9 +27771,9 @@
       ],
       "published": {
         "bytes": 5219,
-        "git_blob": "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d",
+        "git_blob": "cb7df37438bb3e50f0a42b42d59ed1644b8fc96e",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexString.java",
-        "sha256": "80625746ec369c7071d97685e7742359e80b73f7c8b246de76e59655fa1289b7"
+        "sha256": "e1467db80e4a1071a60961b7b5cdcb8e29de315e062a37dd36002e1c807b5028"
       },
       "role": "original503"
     },
@@ -27788,28 +27788,28 @@
         "entry": {
           "mode": "100644",
           "path": "TextMetadata.java",
-          "sha": "ee29792603e0f41d8992e658c32c111e479855ba",
+          "sha": "d4453e0ded40503a0ed6f1fa54eb0785adb0c47b",
           "size": 765,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ee29792603e0f41d8992e658c32c111e479855ba"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d4453e0ded40503a0ed6f1fa54eb0785adb0c47b"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 765,
-        "git_blob": "ee29792603e0f41d8992e658c32c111e479855ba",
+        "git_blob": "d4453e0ded40503a0ed6f1fa54eb0785adb0c47b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/TextMetadata.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "7d343b701fc8f10b5ceb52e8d6e440dfb8d885a22202e7e5aa15f0d864f47791"
+        "sha256": "cea493500bc4a26ae084644211fddc951f3b8147e0758bf28e709e8744d1cdec"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 765,
-        "git_blob": "ee29792603e0f41d8992e658c32c111e479855ba",
+        "git_blob": "d4453e0ded40503a0ed6f1fa54eb0785adb0c47b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/TextMetadata.java",
-        "sha256": "7d343b701fc8f10b5ceb52e8d6e440dfb8d885a22202e7e5aa15f0d864f47791"
+        "sha256": "cea493500bc4a26ae084644211fddc951f3b8147e0758bf28e709e8744d1cdec"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/TextMetadata.java",
@@ -27871,9 +27871,9 @@
       ],
       "published": {
         "bytes": 765,
-        "git_blob": "ee29792603e0f41d8992e658c32c111e479855ba",
+        "git_blob": "d4453e0ded40503a0ed6f1fa54eb0785adb0c47b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-mindex/runtime/src/main/java/com/synexia/mindex/TextMetadata.java",
-        "sha256": "7d343b701fc8f10b5ceb52e8d6e440dfb8d885a22202e7e5aa15f0d864f47791"
+        "sha256": "cea493500bc4a26ae084644211fddc951f3b8147e0758bf28e709e8744d1cdec"
       },
       "role": "original503"
     },
@@ -27983,27 +27983,27 @@
         "entry": {
           "mode": "100644",
           "path": "JniLibraryLoader.java",
-          "sha": "da5d6391af12d53a71c5f1e0f3736fa125659b64",
+          "sha": "aaa7649fa9c99c214fd8864ee3cd34c95ebfd7d9",
           "size": 1013,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/da5d6391af12d53a71c5f1e0f3736fa125659b64"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/aaa7649fa9c99c214fd8864ee3cd34c95ebfd7d9"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1013,
-        "git_blob": "da5d6391af12d53a71c5f1e0f3736fa125659b64",
+        "git_blob": "aaa7649fa9c99c214fd8864ee3cd34c95ebfd7d9",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699"
+        "sha256": "bccce46eb05a7b040dcb7412ee3a425b4b270214bdd654c0787dbab8dfd02048"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "original": {
         "bytes": 1013,
-        "git_blob": "da5d6391af12d53a71c5f1e0f3736fa125659b64",
+        "git_blob": "aaa7649fa9c99c214fd8864ee3cd34c95ebfd7d9",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java",
-        "sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699"
+        "sha256": "bccce46eb05a7b040dcb7412ee3a425b4b270214bdd654c0787dbab8dfd02048"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java",
@@ -28059,9 +28059,9 @@
       ],
       "published": {
         "bytes": 1013,
-        "git_blob": "da5d6391af12d53a71c5f1e0f3736fa125659b64",
+        "git_blob": "aaa7649fa9c99c214fd8864ee3cd34c95ebfd7d9",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java",
-        "sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699"
+        "sha256": "bccce46eb05a7b040dcb7412ee3a425b4b270214bdd654c0787dbab8dfd02048"
       },
       "role": "original503"
     },
@@ -28074,10 +28074,10 @@
         "entry": {
           "mode": "100644",
           "path": "NativeLibrarySpec.java",
-          "sha": "39b9f04e46411de9bf7b8063608241efb2819aca",
+          "sha": "475d90d7df3932fb622fc387d0518df1b6f3c2a1",
           "size": 4151,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/39b9f04e46411de9bf7b8063608241efb2819aca"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/475d90d7df3932fb622fc387d0518df1b6f3c2a1"
         },
         "status": "PRESENT"
       },
@@ -28085,14 +28085,14 @@
         "acquisition_receipt": {
           "bytes": 9855,
           "git_blob": "ab32020d259327edf16d9a3857c73e77b5f71c4b",
-          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/39b9f04e46411de9bf7b8063608241efb2819aca.json",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/475d90d7df3932fb622fc387d0518df1b6f3c2a1.json",
           "sha256": "7415693fafcdb3f215aa898d368ddb70d308c12caa887dff2f5d1beac9aa296c"
         },
         "bytes": 4151,
-        "git_blob": "39b9f04e46411de9bf7b8063608241efb2819aca",
+        "git_blob": "475d90d7df3932fb622fc387d0518df1b6f3c2a1",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-native-interop/src/main/java/com/synexia/nativeinterop/NativeLibrarySpec.java",
         "origin": "fresh_current_contents_acquisition",
-        "sha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5"
+        "sha256": "9680242313d4e2f2a0f14d31879d7c6da0af2ef4a11b7a8f256e6b0eb4d44cda"
       },
       "current_bytes_equal_original": false,
       "current_bytes_equal_published": false,
@@ -29968,27 +29968,27 @@
         "entry": {
           "mode": "100644",
           "path": "M3CanonicalMultiPassPlan.java",
-          "sha": "897a218c5489c851c1906fd91a2cd64174d19d70",
+          "sha": "513f953f27d5aca5c3c2d4a9141c30f95d1d3392",
           "size": 6043,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/897a218c5489c851c1906fd91a2cd64174d19d70"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/513f953f27d5aca5c3c2d4a9141c30f95d1d3392"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 6043,
-        "git_blob": "897a218c5489c851c1906fd91a2cd64174d19d70",
+        "git_blob": "513f953f27d5aca5c3c2d4a9141c30f95d1d3392",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CanonicalMultiPassPlan.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "78784545fb374cabb08dc7115f03e18db95827dd7204251cebe0e447f96ded80"
+        "sha256": "8bd4efa9fa0c098c45d74055c3e466f5f1d5649c96f7c5697d6e60c8f11b5887"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "original": {
         "bytes": 6043,
-        "git_blob": "897a218c5489c851c1906fd91a2cd64174d19d70",
+        "git_blob": "513f953f27d5aca5c3c2d4a9141c30f95d1d3392",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CanonicalMultiPassPlan.java",
-        "sha256": "78784545fb374cabb08dc7115f03e18db95827dd7204251cebe0e447f96ded80"
+        "sha256": "8bd4efa9fa0c098c45d74055c3e466f5f1d5649c96f7c5697d6e60c8f11b5887"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CanonicalMultiPassPlan.java",
@@ -30044,9 +30044,9 @@
       ],
       "published": {
         "bytes": 6043,
-        "git_blob": "897a218c5489c851c1906fd91a2cd64174d19d70",
+        "git_blob": "513f953f27d5aca5c3c2d4a9141c30f95d1d3392",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CanonicalMultiPassPlan.java",
-        "sha256": "78784545fb374cabb08dc7115f03e18db95827dd7204251cebe0e447f96ded80"
+        "sha256": "8bd4efa9fa0c098c45d74055c3e466f5f1d5649c96f7c5697d6e60c8f11b5887"
       },
       "role": "original503"
     },
@@ -41450,27 +41450,27 @@
         "entry": {
           "mode": "100644",
           "path": "M3ScopeInference.java",
-          "sha": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+          "sha": "a27177a9538c96633424b73dff48fe7f0341a51b",
           "size": 6596,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a27177a9538c96633424b73dff48fe7f0341a51b"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 6596,
-        "git_blob": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+        "git_blob": "a27177a9538c96633424b73dff48fe7f0341a51b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "17228a698f917bfabb46f8c4a20b50822820516fbc6e9ad71d52587a1918e730"
+        "sha256": "af67395b755c045b62a0d5c2ab0f538fe9118461330eb8901c4bcbd60910fae8"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "original": {
         "bytes": 6596,
-        "git_blob": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+        "git_blob": "a27177a9538c96633424b73dff48fe7f0341a51b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-        "sha256": "17228a698f917bfabb46f8c4a20b50822820516fbc6e9ad71d52587a1918e730"
+        "sha256": "af67395b755c045b62a0d5c2ab0f538fe9118461330eb8901c4bcbd60910fae8"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
@@ -41526,9 +41526,9 @@
       ],
       "published": {
         "bytes": 6596,
-        "git_blob": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+        "git_blob": "a27177a9538c96633424b73dff48fe7f0341a51b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-        "sha256": "17228a698f917bfabb46f8c4a20b50822820516fbc6e9ad71d52587a1918e730"
+        "sha256": "af67395b755c045b62a0d5c2ab0f538fe9118461330eb8901c4bcbd60910fae8"
       },
       "role": "original503"
     },
@@ -44049,9 +44049,9 @@
       "current_bytes_equal_published": false,
       "original": {
         "bytes": 1389,
-        "git_blob": "33b941ffe94226e86256fa5e9e58e1c41c4332db",
+        "git_blob": "56ad3013cebb1f02df3b03a90d47cc5d7bb59470",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/CodeIdentity.java",
-        "sha256": "0f46c618636ff40d4f0b415de7bb78abc72140686ef92f2eddd77b6ab7304648"
+        "sha256": "16556b794058f34964411482b25a16b5df9972b062c2dff39926c903c7fd34e6"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/CodeIdentity.java",
@@ -44113,9 +44113,9 @@
       ],
       "published": {
         "bytes": 1389,
-        "git_blob": "33b941ffe94226e86256fa5e9e58e1c41c4332db",
+        "git_blob": "56ad3013cebb1f02df3b03a90d47cc5d7bb59470",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/CodeIdentity.java",
-        "sha256": "0f46c618636ff40d4f0b415de7bb78abc72140686ef92f2eddd77b6ab7304648"
+        "sha256": "16556b794058f34964411482b25a16b5df9972b062c2dff39926c903c7fd34e6"
       },
       "published_to_current_full_diff": {
         "bytes": 464,
@@ -44231,27 +44231,27 @@
         "entry": {
           "mode": "100644",
           "path": "JavaContractSurface.java",
-          "sha": "ce1e81ef87d21f5c788a2465f5233ce4ba518efd",
+          "sha": "7b523101598c40cadb3af54e52f07d88f41a15ac",
           "size": 2849,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ce1e81ef87d21f5c788a2465f5233ce4ba518efd"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7b523101598c40cadb3af54e52f07d88f41a15ac"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 2849,
-        "git_blob": "ce1e81ef87d21f5c788a2465f5233ce4ba518efd",
+        "git_blob": "7b523101598c40cadb3af54e52f07d88f41a15ac",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/JavaContractSurface.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "f784f002de7381dabaf9d1d913f366809c772a0364e6c2255518c9469e1bf5fa"
+        "sha256": "77c8b4516b9a2e6f7c9d017dcf10d06332808ad0024190156553a6085b9d58d3"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "original": {
         "bytes": 2849,
-        "git_blob": "ce1e81ef87d21f5c788a2465f5233ce4ba518efd",
+        "git_blob": "7b523101598c40cadb3af54e52f07d88f41a15ac",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/JavaContractSurface.java",
-        "sha256": "f784f002de7381dabaf9d1d913f366809c772a0364e6c2255518c9469e1bf5fa"
+        "sha256": "77c8b4516b9a2e6f7c9d017dcf10d06332808ad0024190156553a6085b9d58d3"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/JavaContractSurface.java",
@@ -44313,9 +44313,9 @@
       ],
       "published": {
         "bytes": 2849,
-        "git_blob": "ce1e81ef87d21f5c788a2465f5233ce4ba518efd",
+        "git_blob": "7b523101598c40cadb3af54e52f07d88f41a15ac",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/JavaContractSurface.java",
-        "sha256": "f784f002de7381dabaf9d1d913f366809c772a0364e6c2255518c9469e1bf5fa"
+        "sha256": "77c8b4516b9a2e6f7c9d017dcf10d06332808ad0024190156553a6085b9d58d3"
       },
       "role": "original503"
     },
@@ -44328,27 +44328,27 @@
         "entry": {
           "mode": "100644",
           "path": "JavaSourceUnit.java",
-          "sha": "5113df0e88b9d431147ad4dc3c50f1569cbe20b0",
+          "sha": "e8757e2051c77e215260a6e64c9541ac96cf3954",
           "size": 3107,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/5113df0e88b9d431147ad4dc3c50f1569cbe20b0"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e8757e2051c77e215260a6e64c9541ac96cf3954"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 3107,
-        "git_blob": "5113df0e88b9d431147ad4dc3c50f1569cbe20b0",
+        "git_blob": "e8757e2051c77e215260a6e64c9541ac96cf3954",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/JavaSourceUnit.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "5d6c86bdcda6f6adecdfa0fddc4b956b52b456bd1d4f4a61792fdf807c8fb9a6"
+        "sha256": "130106939bb23c3b608f6fc6087f01f0e796e4ea74813c9f8bf228d2c195d748"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "original": {
         "bytes": 3107,
-        "git_blob": "5113df0e88b9d431147ad4dc3c50f1569cbe20b0",
+        "git_blob": "e8757e2051c77e215260a6e64c9541ac96cf3954",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/JavaSourceUnit.java",
-        "sha256": "5d6c86bdcda6f6adecdfa0fddc4b956b52b456bd1d4f4a61792fdf807c8fb9a6"
+        "sha256": "130106939bb23c3b608f6fc6087f01f0e796e4ea74813c9f8bf228d2c195d748"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/JavaSourceUnit.java",
@@ -44410,9 +44410,9 @@
       ],
       "published": {
         "bytes": 3107,
-        "git_blob": "5113df0e88b9d431147ad4dc3c50f1569cbe20b0",
+        "git_blob": "e8757e2051c77e215260a6e64c9541ac96cf3954",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/JavaSourceUnit.java",
-        "sha256": "5d6c86bdcda6f6adecdfa0fddc4b956b52b456bd1d4f4a61792fdf807c8fb9a6"
+        "sha256": "130106939bb23c3b608f6fc6087f01f0e796e4ea74813c9f8bf228d2c195d748"
       },
       "role": "original503"
     },
@@ -44427,28 +44427,28 @@
         "entry": {
           "mode": "100644",
           "path": "SealHash.java",
-          "sha": "8184e14c51f8dc288ae44879a7e0a69c0ff26c05",
+          "sha": "6537fba62de8d37e7aad39259b5bbba06c3aa36b",
           "size": 1859,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8184e14c51f8dc288ae44879a7e0a69c0ff26c05"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/6537fba62de8d37e7aad39259b5bbba06c3aa36b"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1859,
-        "git_blob": "8184e14c51f8dc288ae44879a7e0a69c0ff26c05",
+        "git_blob": "6537fba62de8d37e7aad39259b5bbba06c3aa36b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealHash.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a"
+        "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "current_parent_pom_declared_context": true,
       "original": {
         "bytes": 1859,
-        "git_blob": "8184e14c51f8dc288ae44879a7e0a69c0ff26c05",
+        "git_blob": "6537fba62de8d37e7aad39259b5bbba06c3aa36b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealHash.java",
-        "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a"
+        "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealHash.java",
@@ -44510,9 +44510,9 @@
       ],
       "published": {
         "bytes": 1859,
-        "git_blob": "8184e14c51f8dc288ae44879a7e0a69c0ff26c05",
+        "git_blob": "6537fba62de8d37e7aad39259b5bbba06c3aa36b",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealHash.java",
-        "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a"
+        "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c"
       },
       "role": "original503"
     },
@@ -44525,27 +44525,27 @@
         "entry": {
           "mode": "100644",
           "path": "SealedContract.java",
-          "sha": "86e499444af33708e29789a9faa997e3d50c65e0",
+          "sha": "a463254579369025fe56604e04801d5d78452346",
           "size": 2089,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/86e499444af33708e29789a9faa997e3d50c65e0"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a463254579369025fe56604e04801d5d78452346"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 2089,
-        "git_blob": "86e499444af33708e29789a9faa997e3d50c65e0",
+        "git_blob": "a463254579369025fe56604e04801d5d78452346",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedContract.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "8aa4e44f74f599ebf9110df885fff5b63615576038ab6f7195d889789b44ca4f"
+        "sha256": "560450a26fb686e5e3bc7c9e867a60cbb6bfd6a84ca887c23608047aa62de729"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "original": {
         "bytes": 2089,
-        "git_blob": "86e499444af33708e29789a9faa997e3d50c65e0",
+        "git_blob": "a463254579369025fe56604e04801d5d78452346",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedContract.java",
-        "sha256": "8aa4e44f74f599ebf9110df885fff5b63615576038ab6f7195d889789b44ca4f"
+        "sha256": "560450a26fb686e5e3bc7c9e867a60cbb6bfd6a84ca887c23608047aa62de729"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedContract.java",
@@ -44607,9 +44607,9 @@
       ],
       "published": {
         "bytes": 2089,
-        "git_blob": "86e499444af33708e29789a9faa997e3d50c65e0",
+        "git_blob": "a463254579369025fe56604e04801d5d78452346",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedContract.java",
-        "sha256": "8aa4e44f74f599ebf9110df885fff5b63615576038ab6f7195d889789b44ca4f"
+        "sha256": "560450a26fb686e5e3bc7c9e867a60cbb6bfd6a84ca887c23608047aa62de729"
       },
       "role": "original503"
     },
@@ -44622,27 +44622,27 @@
         "entry": {
           "mode": "100644",
           "path": "SealedRecipe.java",
-          "sha": "638d90e988ff24c75ddf711a0a7bd1c015aa46e3",
+          "sha": "6f41de36f649b8d01f6fcfaad0cd6d662edb19d7",
           "size": 1678,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/638d90e988ff24c75ddf711a0a7bd1c015aa46e3"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/6f41de36f649b8d01f6fcfaad0cd6d662edb19d7"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 1678,
-        "git_blob": "638d90e988ff24c75ddf711a0a7bd1c015aa46e3",
+        "git_blob": "6f41de36f649b8d01f6fcfaad0cd6d662edb19d7",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedRecipe.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "72789272f512ee90e6dee1e9021363eb99ff45d7b2fb538527eab39d421b2272"
+        "sha256": "c3e21b098f596fa06fe24321cef583d14d1f4d014198e10c2c0cebafe118fb33"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "original": {
         "bytes": 1678,
-        "git_blob": "638d90e988ff24c75ddf711a0a7bd1c015aa46e3",
+        "git_blob": "6f41de36f649b8d01f6fcfaad0cd6d662edb19d7",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedRecipe.java",
-        "sha256": "72789272f512ee90e6dee1e9021363eb99ff45d7b2fb538527eab39d421b2272"
+        "sha256": "c3e21b098f596fa06fe24321cef583d14d1f4d014198e10c2c0cebafe118fb33"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedRecipe.java",
@@ -44704,9 +44704,9 @@
       ],
       "published": {
         "bytes": 1678,
-        "git_blob": "638d90e988ff24c75ddf711a0a7bd1c015aa46e3",
+        "git_blob": "6f41de36f649b8d01f6fcfaad0cd6d662edb19d7",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedRecipe.java",
-        "sha256": "72789272f512ee90e6dee1e9021363eb99ff45d7b2fb538527eab39d421b2272"
+        "sha256": "c3e21b098f596fa06fe24321cef583d14d1f4d014198e10c2c0cebafe118fb33"
       },
       "role": "original503"
     },
@@ -44719,27 +44719,27 @@
         "entry": {
           "mode": "100644",
           "path": "SealedSources.java",
-          "sha": "ec494ce355b799daf2d4a53e559cc823e9b525cd",
+          "sha": "9c8c07bf7292f821ff2ad4b6aaa31b14136ae5c0",
           "size": 3370,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ec494ce355b799daf2d4a53e559cc823e9b525cd"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/9c8c07bf7292f821ff2ad4b6aaa31b14136ae5c0"
         },
         "status": "PRESENT"
       },
       "current_body": {
         "bytes": 3370,
-        "git_blob": "ec494ce355b799daf2d4a53e559cc823e9b525cd",
+        "git_blob": "9c8c07bf7292f821ff2ad4b6aaa31b14136ae5c0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedSources.java",
         "origin": "reused_existing_body_matching_current_git_blob",
-        "sha256": "3e88322e32c7f500a9d42f39e47b3853256fdd3c6a7d8954074884f5e1e80751"
+        "sha256": "e5d03ec1f1dc7a246ae17b0aa8425e0681180e3c3d320ee13c51771c6da15f1f"
       },
       "current_bytes_equal_original": true,
       "current_bytes_equal_published": true,
       "original": {
         "bytes": 3370,
-        "git_blob": "ec494ce355b799daf2d4a53e559cc823e9b525cd",
+        "git_blob": "9c8c07bf7292f821ff2ad4b6aaa31b14136ae5c0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedSources.java",
-        "sha256": "3e88322e32c7f500a9d42f39e47b3853256fdd3c6a7d8954074884f5e1e80751"
+        "sha256": "e5d03ec1f1dc7a246ae17b0aa8425e0681180e3c3d320ee13c51771c6da15f1f"
       },
       "original_bytes_equal_published": true,
       "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedSources.java",
@@ -44801,9 +44801,9 @@
       ],
       "published": {
         "bytes": 3370,
-        "git_blob": "ec494ce355b799daf2d4a53e559cc823e9b525cd",
+        "git_blob": "9c8c07bf7292f821ff2ad4b6aaa31b14136ae5c0",
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/sealed/SealedSources.java",
-        "sha256": "3e88322e32c7f500a9d42f39e47b3853256fdd3c6a7d8954074884f5e1e80751"
+        "sha256": "e5d03ec1f1dc7a246ae17b0aa8425e0681180e3c3d320ee13c51771c6da15f1f"
       },
       "role": "original503"
     },

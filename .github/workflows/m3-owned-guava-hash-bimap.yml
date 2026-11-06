@@ -47,10 +47,10 @@ jobs:
           ANNOTATIONS="$JSPECIFY:$ERROR_PRONE:$J2OBJC"
           CP="proof/classes:$JRE:$ANNOTATIONS"
           find m3/collections/implementations/guava/src/main/java m3/collections/implementations/guava/src/test/java m3/collections/qualification/owned-guava-hash-bimap-20261017 -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -cp "$CP" -d proof/classes
-          java -Xmx512m -cp "$CP" com.m3.collections.guava.M3HashBiMapCommonSelfTest guava-33.4.8-jre.jar
-          java -Xmx512m -cp "$CP" com.m3.collections.guava.InverseForcePutDenseOrderDiscriminator guava-33.4.8-jre.jar > proof/dense-jre.log
+          java -Xmx512m -cp "$CP" jdk.m3.collections.guava.M3HashBiMapCommonSelfTest guava-33.4.8-jre.jar
+          java -Xmx512m -cp "$CP" jdk.m3.collections.guava.InverseForcePutDenseOrderDiscriminator guava-33.4.8-jre.jar > proof/dense-jre.log
           ACP="proof/classes:$ANDROID:$ANNOTATIONS"
-          java -Xmx512m -cp "$ACP" com.m3.collections.guava.M3HashBiMapSectionRunner android-valid guava-33.4.8-android.jar
+          java -Xmx512m -cp "$ACP" jdk.m3.collections.guava.M3HashBiMapSectionRunner android-valid guava-33.4.8-android.jar
           java -Xmx512m -cp "$ACP" M3HashBiMapProtocolDiscriminator > proof/protocol-android.log
           python3 -I -S -B m3/collections/qualification/owned-guava-hash-bimap-20261017/verify_protocol_log.py android proof/protocol-android.log
           set +e

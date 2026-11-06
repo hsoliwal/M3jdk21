@@ -168,7 +168,7 @@ def identity(raw):
     return {"bytes": len(raw), "sha256": sha(raw), "gitBlob": git_blob(raw)}
 
 
-FROZEN = SDK / "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019/forward/before"
+FROZEN = SDK / "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/before"
 RECEIVER_STATE = "APPLIED"
 FROZEN_BASELINE_SOURCE = "SDK_FORWARD_BEFORE_REPLACE_PLUS_CURRENT_KEEP"
 ORIGINAL_BYTES, CURRENT_BYTES = 59781, 61836

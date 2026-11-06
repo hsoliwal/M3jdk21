@@ -86,17 +86,36 @@ def main():
         run(['python3', owner / 'verify_source.py', jar])
         dependency_proof[module] = {'provenance_sha256': sha(owner / 'PROVENANCE.json'),
                                     'jar_sha256': sha(jar)}
-    # Reuse the existing source-owned com.m3.arrays module (Eclipse/Synexia
-    # collection donor), rather than compiling com.m3.collections as an
+    # Reuse the existing source-owned jdk.m3.arrays module (Eclipse/Synexia
+    # collection donor), rather than compiling jdk.m3.collections as an
     # unresolved JPMS module or placing arrays classes on the class path.
     maven(ROOT / 'm3/arrays/pom.xml', '-Dmaven.test.skip=true', 'install')
     array_jar = ROOT / 'm3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar'
     if not array_jar.is_file():
-        raise RuntimeError('Source-built com.m3.arrays module jar is absent')
+        raise RuntimeError('Source-built jdk.m3.arrays module jar is absent')
     with zipfile.ZipFile(array_jar) as archive:
         if 'module-info.class' not in archive.namelist():
-            raise RuntimeError('com.m3.arrays module descriptor is missing')
-    dependency_proof['com.m3.arrays'] = {'jar_sha256': sha(array_jar)}
+            raise RuntimeError('jdk.m3.arrays module descriptor is missing')
+    # Allocation atoms require the existing arrays JNI owner in both collection
+    # algorithm modes. Keep it outside the collection-library search directory
+    # so the missing-collection-JNI controls continue to exercise their contract.
+    array_native_build = OUT / 'array-native'
+    run(['cmake', '-S', ROOT / 'm3/arrays/src/main/native', '-B', array_native_build,
+         '-DCMAKE_BUILD_TYPE=Release', '-DBUILD_TESTING=ON', '-DJAVA_HOME=' + str(JAVA)])
+    run(['cmake', '--build', array_native_build, '--config', 'Release', '--parallel', '2'])
+    run(['ctest', '--test-dir', array_native_build, '--output-on-failure', '-C', 'Release'])
+    array_native = array_native_build / 'libm3_arrays.so'
+    if not array_native.is_file():
+        raise RuntimeError('Source-built arrays JNI allocation library is absent')
+    array_native_option = '-Dm3.arrays.native.path=' + str(array_native)
+    # This existing suite includes fresh-VM missing-library and silent-null
+    # controls; providing the library must not weaken allocation failure rules.
+    maven(ROOT / 'm3/arrays/pom.xml', '-Dm3.arrays.native.required=true',
+          '-DargLine=-Xcheck:jni ' + array_native_option,
+          '-Dtest=M3ArrayAllocationAtomsTest', '-DfailIfNoTests=true', 'test')
+    dependency_proof['jdk.m3.arrays'] = {
+        'jar_sha256': sha(array_jar), 'native_sha256': sha(array_native),
+        'allocation_contract': 'M3ArrayAllocationAtomsTest'}
     sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
     tests = sorted((MODULE / 'src/test/java').rglob('*.java'))
     (OUT / 'main.args').write_text('\n'.join(map(str, sources)) + '\n')
@@ -119,15 +138,15 @@ def main():
         objects = []
         for name, owner in rows:
             obj = OUT / 'native' / (name + '.o')
-            run(cc + ['-fPIC', '-include', OUT / 'headers' / ('com_m3_collections_' + owner + '.h'),
+            run(cc + ['-fPIC', '-include', OUT / 'headers' / ('jdk_m3_collections_' + owner + '.h'),
                       '-c', native / name, '-o', obj])
             objects.append(obj)
         run(cc + ['-shared', *objects, '-o', OUT / 'native' / ('lib' + library + '.so')])
     # Existing navigation fixture has its own test-only JNI ABI; keep it out of the product library.
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror',
          '-cp', OUT / 'classes', '-h', OUT / 'headers', '-d', OUT / 'fixture-classes',
-         MODULE / 'src/test/java/com/m3/collections/M3BitLaneJumpProof.java'])
-    run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/com_m3_collections_M3BitLaneJumpProof.h',
+         MODULE / 'src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'])
+    run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/jdk_m3_collections_M3BitLaneJumpProof.h',
               MODULE / 'src/test/native/m3_bitlane_jump_jni.c', '-o',
               OUT / 'native/libm3_bitlane_jump_test.so'])
     for fixture in ('spans', 'regions'):
@@ -139,7 +158,7 @@ def main():
     run(cc + [native / 'm3_long_address_kernel.c', MODULE / 'src/test/native/m3_gather_spans.c',
               '-o', gather_fixture])
     run([gather_fixture])
-    common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni',
+    common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni', array_native_option,
               '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
     results = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
@@ -156,15 +175,16 @@ def main():
         expected_classes = {str(p.relative_to(OUT / 'classes')) for p in (OUT / 'classes').rglob('*.class')}
         actual_classes = {name for name in archive.namelist() if name.endswith('.class')}
         if expected_classes != actual_classes: raise RuntimeError('Packaged class inventory differs from fresh compilation')
-        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'name-mapping.json', 'SYNEXIA-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
+        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'name-mapping.json', 'M3-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
             if archive.read('META-INF/' + name) != (MODULE / name).read_bytes():
                 raise RuntimeError('Packaged module legal/provenance bytes differ: ' + name)
     runtime_modules = subprocess.check_output(
         [JAVA / 'bin/jdeps', '--module-path', array_jar, '--print-module-deps', jar],
         text=True).strip()
-    if runtime_modules != 'com.m3.arrays,java.base':
+    if runtime_modules != 'jdk.m3.arrays,java.base':
         raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
-    cp = str(MODULE / 'target/classes') + os.pathsep + str(MODULE / 'target/test-classes')
+    cp = os.pathsep.join(map(str, (MODULE / 'target/classes',
+                                   MODULE / 'target/test-classes', array_jar)))
     java = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
     contracts = [('M3MaskWindowSparseContract', ['native']),
                  ('M3BudgetedMaskWindowContract', ['--native']),
@@ -186,14 +206,14 @@ def main():
                  ('M3ResidencyStateMaskProof', ['native']),
                  ('M3BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')]),
                  ('M3DisjointIndexSelfTest', ['--native'])]
-    for name, args in contracts: run(java + ['com.m3.collections.' + name, *args])
-    # Exercise the same existing selftest's explicit pure-Java fallback without loading JNI.
+    for name, args in contracts: run(java + ['jdk.m3.collections.' + name, *args])
+    # Exercise collection-kernel fallback while retaining required arrays allocation JNI.
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'com.m3.collections.M3DisjointIndexSelfTest'])
+         'jdk.m3.collections.M3DisjointIndexSelfTest'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'com.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
+         'jdk.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'com.m3.collections.M3LongIndexPathMasksJNISelfTest'])
+         'jdk.m3.collections.M3LongIndexPathMasksJNISelfTest'])
     native_fixtures = [MODULE / 'src/test/native' / name for name in
                        ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c', 'm3_gather_spans.c')]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,

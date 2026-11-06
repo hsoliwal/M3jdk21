@@ -2,9 +2,9 @@
   "stage": "RECEIVE",
   "pass": "readonly-iterator",
   "actual_sdk_results": true,
-  "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
-  "before": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
-  "after": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+  "target": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+  "before": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
+  "after": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
   "changed_files": [],
   "sdk_results_sha256": "e441cc723675f6957f8ea72f8ea8ef43e8bb0a9041b2daa097f8cb96f9515c37",
   "sdk_inputs_sha256": "926b7767979be43b92ea486359014d1445fd02acd28034b54126c944a553d4ea",
@@ -12,7 +12,7 @@
   "sdk_patch_sha256": "c0a8a574c240e1e9a956d0d9b6ed342a9814e741e530dc88bebe3b3f4e502fe3",
   "verified_bound_inputs": 316,
   "helper_source": "m3/arrays/qualification/empty-segments-20261017/recipe-custody/receive.py",
-  "helper_sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712",
+  "helper_sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474",
   "commands": [],
   "utc": "2026-10-18T05:34:24.128188+00:00"
 }

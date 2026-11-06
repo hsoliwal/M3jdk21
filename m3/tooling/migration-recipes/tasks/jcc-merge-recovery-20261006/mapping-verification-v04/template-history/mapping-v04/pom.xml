@@ -11,7 +11,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36-m3-source-1</version></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>2.0.12-m3-source-1</version></dependency>
     <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0-m3-source-1</version><scope>provided</scope></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1-m3-source-1</version></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2-m3-source-1</version><scope>test</scope></dependency>
@@ -24,9 +24,9 @@
       <resource>
         <directory>${project.basedir}/../../../src/main/resources</directory>
         <includes>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/**</include>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt</include>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt</include>
           <include>META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml</include>
         </includes>
       </resource>
@@ -34,7 +34,7 @@
     <testResources>
       <testResource>
         <directory>${project.basedir}/../../../src/test/resources</directory>
-        <includes><include>com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json</include></includes>
+        <includes><include>jdk/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json</include></includes>
       </testResource>
     </testResources>
     <plugins>
@@ -43,8 +43,8 @@
         <configuration>
           <showWarnings>true</showWarnings><failOnWarning>true</failOnWarning>
           <compilerArgs><arg>-Xlint:all</arg></compilerArgs>
-          <includes><include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include></includes>
-          <testIncludes><testInclude>com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java</testInclude></testIncludes>
+          <includes><include>jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include></includes>
+          <testIncludes><testInclude>jdk/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java</testInclude></testIncludes>
         </configuration>
       </plugin>
       <plugin>

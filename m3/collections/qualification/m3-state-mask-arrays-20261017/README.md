@@ -39,9 +39,9 @@ java -cp m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/targe
 
 mkdir -p /tmp/m3-state-mask-classes /tmp/m3-state-mask-lib
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-state-mask-classes \
- m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
- m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java \
- m3/collections/src/test/java/com/m3/collections/M3StateMaskArraysSelfTest.java
+ m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+ m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java \
+ m3/collections/src/test/java/jdk/m3/collections/M3StateMaskArraysSelfTest.java
 java -cp /tmp/m3-state-mask-classes com.m3.collections.M3StateMaskArraysSelfTest
 cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
  -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \

@@ -3,7 +3,7 @@
  * GPLv2 with the Classpath exception.
  *
  * @test
- * @summary M3 implementation structures stay internal to canonical M3JDK21 APIs
+ * @summary M3 implementation structures stay internal to canonical M3JDK 21 APIs
  * @run main/othervm M3CanonicalApiBoundaryTest
  */
 

@@ -1,6 +1,6 @@
 {
   "schema": "M3_ORDER_WINDOW_ALLOCATION_BINDINGS_V1",
-  "before_code_sha256": "da28c2b276c7c69a7e26d9a42043feabadfdcad4514c3922a7391b4d442c8aa9",
+  "before_code_sha256": "73a1cea3426f4ec053cee44ca55b9f994ccfcd4e682988d946e9cf1647c295a4",
   "invocation_script_sha256": "63c63dda6543a1106f07669a28f573a71d5db19aa17da677483046622cad2877",
   "protocol_sha256": "0b0e89f92b6ee808eb31c3558b4de1323de1951079e6f0f694e6ff606437a636",
   "baseline_git_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
@@ -12,13 +12,13 @@
     "m3jdk21-wrappers-r2-20261018",
     "m3jdk21-long-bridge-20261018"
   ],
-  "receiver_final_long_bridge_sha256": "77a99d047931c70c7a45a067c081748bae499b7f3002bfc08f7b2f47a01adf84",
-  "proof_source_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
-  "baseline_projection_source_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
-  "receiver_projection_source_sha256": "17137b236421ad3ad4f079acc0ba98a10ad4d419b717abd1f9192f42b18260a8",
+  "receiver_final_long_bridge_sha256": "1e170fb2bea5b058218a64bcc2a8041e93c6b0ebb51858593e65ae87b018d7f8",
+  "proof_source_sha256": "c8776759a8ce22f6ec9039d630997d12262ee53f285beb0097ffb48b1f2a30cb",
+  "baseline_projection_source_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
+  "receiver_projection_source_sha256": "91f898f92123c431afb72887cdb8de8a1a64d2c9ce8bb247eed960a200dfe72e",
   "results_sha256": "af6d762f4d6235cb6db2dbed75c61e9cc4cffd175596081d0d4bd5c922b28a61",
   "raw_samples_sha256": "f7795a61612ab282aae36b419ed8e87d3bedc3068ede8a50d5af36a2e1f05149",
-  "command_receipt_sha256": "89a18126630cd5b1a961a5580babcde8b1be5984cc39e96a5b797c7049ea455c",
-  "proof_custody_sha256": "2326b81e31719f97ee355c4bbe40682cd42dd35e512c87e1caf901a4701c422a",
+  "command_receipt_sha256": "7ab9c78df73bf396af3f3f76e91981949b15264038b4aad6858c31a999f7b6f1",
+  "proof_custody_sha256": "7a4fbe57b6c59bd1c786b565485e7c5dd2579a80dca180d13927eeee153600a5",
   "claims": "JVM-reported thread allocations for existing fixed workload only; no timing, CPU, JNI, retained-heap, GC, or broad collection performance claim"
 }

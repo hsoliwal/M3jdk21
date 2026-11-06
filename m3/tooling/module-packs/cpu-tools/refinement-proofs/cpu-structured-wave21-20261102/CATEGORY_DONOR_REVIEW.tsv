@@ -1,0 +1,6 @@
+category	platform	problem	compatibility	source_decision
+interval_normalization	Synexia #15287	M3IntIntervalSet exact signed half-open source	Original canonical Java/C recipe	EXACT_FIRST_PARTY_SOURCE
+interval_merge	LeetCode	56 Merge Intervals	Closed endpoints differ from half-open signed ranges	REFERENCE_ONLY
+interval_coverage	HackerRank	Gridland Metro	1-based inclusive tracks require explicit right-end conversion	REFERENCE_ONLY
+interval_merge	GeeksforGeeks	Merge Overlapping Intervals	Sort/merge shape but different semantics/license	REFERENCE_ONLY
+bitmap_range	GitHub RoaringBitmap	Compressed bitmap membership	Representation and duplicates/interval semantics differ	REFERENCE_ONLY

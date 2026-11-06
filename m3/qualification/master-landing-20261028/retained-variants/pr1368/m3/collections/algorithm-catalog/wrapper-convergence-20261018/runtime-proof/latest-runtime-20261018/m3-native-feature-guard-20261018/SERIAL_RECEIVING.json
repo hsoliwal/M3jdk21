@@ -1,7 +1,7 @@
 {
   "dataset": "m3-native-feature-guard-20261018",
   "input_head": "5c9229c23b1ac9abdfebff3bc4b8e6449f59deae",
-  "qualified_crate": "/dev/shm/m3-native-feature-guard-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "qualified_crate": "/dev/shm/m3-native-feature-guard-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "check": {
     "dataset": "m3-native-feature-guard-20261018",
     "targets": 1,

@@ -5,7 +5,7 @@
   "local_worktree_dirty_during_run": true,
   "proof_source_bytes_verified": true,
   "recipe": {
-    "name": "com.synexia.m3.FullJavaJni20261018",
+    "name": "jdk.internal.m3.FullJavaJni20261018",
     "junit_tests": 3,
     "failures": 0,
     "fixed_point": "PASS",

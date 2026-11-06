@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+m3/tooling/a3/src/main/java/jdk/m3/a3/A3RecipeHome.java	5459db684a3573c359dd3731a9ecae499855a45e714f2946490733e0b455dff1	e75a00ee63b45c5a80a81569e22c4a4bdad84da8629de33c414923769c4ebc4e	00-A3RecipeHome.java.txt
+m3/tooling/a3/src/test/java/jdk/m3/a3/A3RecipeHomeTest.java	100d2b5a98f18d21f452414ece872d165af0e189c72a43d4518a2b88a4208ba1	3f84e272b6ffe5afbdfc350274fed058dd0b51675d5cba63fd641c402bae1445	01-A3RecipeHomeTest.java.txt

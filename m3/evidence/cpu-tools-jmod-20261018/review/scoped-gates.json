@@ -53,7 +53,7 @@
     ],
     "cwd": "/workspace/scratch/f4826e049195/M3jdk21/m3/tooling/jmod-recipes/tools",
     "log": "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/qualification/review/existing-sdk-receiver.log",
-    "log_sha256": "b0a6cc83b12122c4fefd6e149cd8c72e384243549cf9d63530b6df266f545e0a",
-    "summary": "049195/M3jdk21/m3/tooling/jmod-recipes/tools/test_verify_sdk_receiver.py\", line 82, in test_exact_qualified_successors_and_drift_refusal\n    self.assertEqual(successor, git_blob_sha1(payload))\nAssertionError: '83b1483c6c5e6a39c519f82af603382914eed3e5' != '86b62fddc148b372145e807438dd7cd018acca0f'\n- 83b1483c6c5e6a39c519f82af603382914eed3e5\n+ 86b62fddc148b372145e807438dd7cd018acca0f\n\n\n----------------------------------------------------------------------\nRan 7 tests in 0.024s\n\nFAILED (failures=1)\n"
+    "log_sha256": "ad3b18c8cfc63a594a1a2779074746f68e8fd4db7ef01c3da37288fc6e894335",
+    "summary": "049195/M3jdk21/m3/tooling/jmod-recipes/tools/test_verify_sdk_receiver.py\", line 82, in test_exact_qualified_successors_and_drift_refusal\n    self.assertEqual(successor, git_blob_sha1(payload))\nAssertionError: '83b1483c6c5e6a39c519f82af603382914eed3e5' != '1b20225a72caf20a7c02f9ef1ca2cb068294bff6'\n- 83b1483c6c5e6a39c519f82af603382914eed3e5\n+ 1b20225a72caf20a7c02f9ef1ca2cb068294bff6\n\n\n----------------------------------------------------------------------\nRan 7 tests in 0.024s\n\nFAILED (failures=1)\n"
   }
 ]

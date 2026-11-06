@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-package com.synexia.rewrite;
+package jdk.internal.m3.rewrite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,11 +20,11 @@ import org.openrewrite.test.RewriteTest;
 /** Exact source preimage admission, generated output, refusal and fixed-point test. */
 final class M3Jdk21LongRangeArrays20261017RecipeTest implements RewriteTest {
     private static final String CRATE = "m3jdk21-long-range-array-flags-20261017";
-    private static final String MAIN = "m3/collections/src/main/java/com/m3/collections/";
-    private static final String TEST = "m3/collections/src/test/java/com/m3/collections/";
+    private static final String MAIN = "m3/collections/src/main/java/jdk/m3/collections/";
+    private static final String TEST = "m3/collections/src/test/java/jdk/m3/collections/";
 
     private static String source(String name) throws IOException {
-        String path = "/com/synexia/rewrite/hash-pinned-java/" + CRATE + "/" + name + ".txt";
+        String path = "/jdk/internal/m3/rewrite/hash-pinned-java/" + CRATE + "/" + name + ".txt";
         try (InputStream in = M3Jdk21LongRangeArrays20261017RecipeTest.class.getResourceAsStream(path)) {
             if (in == null) throw new IOException(path);
             return new String(in.readAllBytes(), StandardCharsets.UTF_8);
@@ -52,7 +52,7 @@ final class M3Jdk21LongRangeArrays20261017RecipeTest implements RewriteTest {
         var context = new InMemoryExecutionContext(error -> { throw new AssertionError(error); });
         var before = JavaParser.fromJavaVersion().build().parseInputs(
                 List.of(Parser.Input.fromString(Path.of(path),
-                    "package com.m3.collections; public final class M3LongRangeSet {}")),
+                    "package jdk.m3.collections; public final class M3LongRangeSet {}")),
                 null, context).toList();
         assertThrows(IllegalStateException.class,
                 () -> recipe.run(new InMemoryLargeSourceSet(before), context, 1));

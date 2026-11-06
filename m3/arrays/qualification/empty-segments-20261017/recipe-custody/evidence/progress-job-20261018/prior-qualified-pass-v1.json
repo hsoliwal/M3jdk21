@@ -183,7 +183,7 @@
     },
     {
       "path": "proof/receiving-v1/qualified-dataset/DATASET.json",
-      "sha256": "168788442bd4dc682757589125c40c19b8ce199e47da89a524a4b32b4442c755",
+      "sha256": "6eccf9334359c58f4ec7acff34b6d6d3e6a1dfd360db9f426ff58b0fb64ad062",
       "bytes": 490,
       "source_license": "Apache-2.0",
       "utf8": "{\n  \"schema\": \"M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1\",\n  \"dataset\": \"m3jdk21-progress-job\",\n  \"repository\": \"hsoliwal/M3jdk21\",\n  \"baseline_ref\": \"86528a90079b89a50b51ef13da08e7e70d468cb4\",\n  \"crate_name\": \"m3-collections-contract-refinement-20261017-m3jdk21-progress-job\",\n  \"recipe_name\": \"com.synexia.m3jdk.CollectionsContractRefinement20261017\",\n  \"targets\": 10,\n  \"java_targets\": 4,\n  \"text_targets\": 6,\n  \"product_sources_written\": false,\n  \"engine_changes_from_origin\": []\n}\n"
@@ -204,7 +204,7 @@
     },
     {
       "path": "proof/receiving-v1/qualified-dataset/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-job.yml",
-      "sha256": "c90e5e35d058f3909500b607840d63ffa021a88d59948e94a4049a8857819e70",
+      "sha256": "a55607deb893e9274bab8a268386e5c6978b2169fc54d1216931ef7440eec9a4",
       "bytes": 534,
       "source_license": "Apache-2.0",
       "utf8": "type: specs.openrewrite.org/v1beta/recipe\nname: com.synexia.m3jdk.CollectionsContractRefinement20261017\ndisplayName: M3 array and collection contract refinement\ndescription: Replays the sealed task through the existing canonical snapshot owners.\nrecipeList:\n  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:\n      crateName: m3-collections-contract-refinement-20261017-m3jdk21-progress-job\n  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:\n      crateName: m3-collections-contract-refinement-20261017-m3jdk21-progress-job\n"

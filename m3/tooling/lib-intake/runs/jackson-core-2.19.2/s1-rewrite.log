@@ -1,0 +1,601 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< m3.intake:jackson-core-2.19.2 >--------------------
+[INFO] Building jackson-core-2.19.2 2.19.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ jackson-core-2.19.2 ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [jackson-core-2.19.2] Resolving Poms...
+[INFO] Project [jackson-core-2.19.2] Parsing source files
+[WARNING] There were problems parsing some source files, run with --errors to see full stack traces
+[WARNING] There were problems parsing m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\schubfach\DoubleToDecimal.java
+[WARNING] There were problems parsing m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\schubfach\FloatToDecimal.java
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\async\ByteArrayFeeder.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\async\ByteArrayFeeder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\async\ByteBufferFeeder.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\async\ByteBufferFeeder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\async\NonBlockingInputFeeder.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\async\NonBlockingInputFeeder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\async\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\async\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\base\GeneratorBase.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\base\GeneratorBase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.base, newPackageName=com.m3.lib.core.base, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\base\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\base\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.base, newPackageName=com.m3.lib.core.base, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\base\ParserBase.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\base\ParserBase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.base, newPackageName=com.m3.lib.core.base, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\base\ParserMinimalBase.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\base\ParserMinimalBase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.base, newPackageName=com.m3.lib.core.base, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\Base64Variant.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\Base64Variant.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\Base64Variants.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\Base64Variants.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\ErrorReportConfiguration.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\ErrorReportConfiguration.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\exc\InputCoercionException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\exc\InputCoercionException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\exc\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\exc\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\exc\StreamConstraintsException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\exc\StreamConstraintsException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\exc\StreamReadException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\exc\StreamReadException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\exc\StreamWriteException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\exc\StreamWriteException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\filter\FilteringGeneratorDelegate.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\filter\FilteringGeneratorDelegate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.filter, newPackageName=com.m3.lib.core.filter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\filter\FilteringParserDelegate.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\filter\FilteringParserDelegate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.filter, newPackageName=com.m3.lib.core.filter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.base, newPackageName=com.m3.lib.core.base, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\filter\JsonPointerBasedFilter.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\filter\JsonPointerBasedFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.filter, newPackageName=com.m3.lib.core.filter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\filter\TokenFilter.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\filter\TokenFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.filter, newPackageName=com.m3.lib.core.filter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\filter\TokenFilterContext.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\filter\TokenFilterContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.filter, newPackageName=com.m3.lib.core.filter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\format\DataFormatDetector.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\format\DataFormatDetector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.format, newPackageName=com.m3.lib.core.format, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\format\DataFormatMatcher.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\format\DataFormatMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.format, newPackageName=com.m3.lib.core.format, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\format\InputAccessor.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\format\InputAccessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.format, newPackageName=com.m3.lib.core.format, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\format\MatchStrength.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\format\MatchStrength.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.format, newPackageName=com.m3.lib.core.format, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\format\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\format\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.format, newPackageName=com.m3.lib.core.format, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\FormatFeature.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\FormatFeature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\FormatSchema.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\FormatSchema.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\BigDecimalParser.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\BigDecimalParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\BigIntegerParser.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\BigIntegerParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\CharacterEscapes.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\CharacterEscapes.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\CharTypes.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\CharTypes.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\ContentReference.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\ContentReference.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\DataOutputAsStream.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\DataOutputAsStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\InputDecorator.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\InputDecorator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\IOContext.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\IOContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\JsonEOFException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\JsonEOFException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\JsonStringEncoder.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\JsonStringEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\MergedStream.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\MergedStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\NumberInput.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\NumberOutput.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberOutput.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io.schubfach, newPackageName=com.m3.lib.core.io.schubfach, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\OutputDecorator.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\OutputDecorator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\schubfach\MathUtils.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\schubfach\MathUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io.schubfach, newPackageName=com.m3.lib.core.io.schubfach, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\SegmentedStringWriter.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\SegmentedStringWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\SerializedString.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\SerializedString.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\UTF32Reader.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\UTF32Reader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\io\UTF8Writer.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\UTF8Writer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JacksonException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JacksonException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\async\NonBlockingByteBufferJsonParser.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingByteBufferJsonParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json.async, newPackageName=com.m3.lib.core.json.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\async\NonBlockingJsonParser.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingJsonParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json.async, newPackageName=com.m3.lib.core.json.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\async\NonBlockingJsonParserBase.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingJsonParserBase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json.async, newPackageName=com.m3.lib.core.json.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\async\NonBlockingUtf8JsonParserBase.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingUtf8JsonParserBase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json.async, newPackageName=com.m3.lib.core.json.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\async\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json.async, newPackageName=com.m3.lib.core.json.async, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\ByteSourceJsonBootstrapper.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\ByteSourceJsonBootstrapper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.format, newPackageName=com.m3.lib.core.format, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\DupDetector.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\DupDetector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\JsonGeneratorImpl.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\JsonGeneratorImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.base, newPackageName=com.m3.lib.core.base, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\JsonParserBase.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\JsonParserBase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.base, newPackageName=com.m3.lib.core.base, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\JsonReadContext.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\JsonReadContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\JsonReadFeature.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\JsonReadFeature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\JsonWriteContext.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\JsonWriteContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\JsonWriteFeature.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\JsonWriteFeature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\PackageVersion.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\PackageVersion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\ReaderBasedJsonParser.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\ReaderBasedJsonParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\UTF8DataInputJsonParser.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8DataInputJsonParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\UTF8JsonGenerator.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8JsonGenerator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\UTF8StreamJsonParser.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8StreamJsonParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\json\WriterBasedJsonGenerator.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\WriterBasedJsonGenerator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonEncoding.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonEncoding.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonFactory.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json.async, newPackageName=com.m3.lib.core.json.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.format, newPackageName=com.m3.lib.core.format, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonFactoryBuilder.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactoryBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonGenerationException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonGenerationException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonGenerator.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonGenerator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.type, newPackageName=com.m3.lib.core.type, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonLocation.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonLocation.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonParseException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonParseException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonParser.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.type, newPackageName=com.m3.lib.core.type, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonpCharacterEscapes.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonpCharacterEscapes.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonPointer.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonPointer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonProcessingException.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonProcessingException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonStreamContext.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonStreamContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonToken.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonToken.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\JsonTokenId.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonTokenId.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\ObjectCodec.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\ObjectCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.type, newPackageName=com.m3.lib.core.type, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\PrettyPrinter.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\PrettyPrinter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\SerializableString.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\SerializableString.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\StreamReadCapability.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\StreamReadCapability.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\StreamReadConstraints.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\StreamReadConstraints.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\StreamReadFeature.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\StreamReadFeature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\StreamWriteCapability.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\StreamWriteCapability.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\StreamWriteConstraints.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\StreamWriteConstraints.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\StreamWriteFeature.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\StreamWriteFeature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\sym\ByteQuadsCanonicalizer.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\ByteQuadsCanonicalizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\sym\CharsToNameCanonicalizer.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\CharsToNameCanonicalizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\sym\Name.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\Name.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\sym\Name1.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\Name1.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\sym\Name2.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\Name2.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\sym\Name3.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\Name3.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\sym\NameN.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\NameN.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\sym\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.sym, newPackageName=com.m3.lib.core.sym, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\TokenStreamFactory.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\TokenStreamFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\TreeCodec.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\TreeCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\TreeNode.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\TreeNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\TSFBuilder.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\TSFBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.json, newPackageName=com.m3.lib.core.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\type\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\type\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.type, newPackageName=com.m3.lib.core.type, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\type\ResolvedType.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\type\ResolvedType.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.type, newPackageName=com.m3.lib.core.type, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\type\TypeReference.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\type\TypeReference.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.type, newPackageName=com.m3.lib.core.type, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\type\WritableTypeId.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\type\WritableTypeId.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.type, newPackageName=com.m3.lib.core.type, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\BufferRecycler.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\BufferRecycler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\BufferRecyclers.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\BufferRecyclers.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\ByteArrayBuilder.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\ByteArrayBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\DefaultIndenter.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\DefaultIndenter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\DefaultPrettyPrinter.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\DefaultPrettyPrinter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\Instantiatable.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\Instantiatable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\InternalJacksonUtil.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\InternalJacksonUtil.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\InternCache.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\InternCache.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\JacksonFeature.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\JacksonFeature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\JacksonFeatureSet.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\JacksonFeatureSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\JsonGeneratorDecorator.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\JsonGeneratorDecorator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\JsonGeneratorDelegate.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\JsonGeneratorDelegate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\JsonParserDelegate.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\JsonParserDelegate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.async, newPackageName=com.m3.lib.core.async, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\JsonParserSequence.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\JsonParserSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.base, newPackageName=com.m3.lib.core.base, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\JsonRecyclerPools.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\JsonRecyclerPools.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\MinimalPrettyPrinter.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\MinimalPrettyPrinter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\package-info.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\ReadConstrainedTextBuffer.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\ReadConstrainedTextBuffer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.exc, newPackageName=com.m3.lib.core.exc, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\RecyclerPool.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\RecyclerPool.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\RequestPayload.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\RequestPayload.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\Separators.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\Separators.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\TextBuffer.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\TextBuffer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.io, newPackageName=com.m3.lib.core.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\ThreadLocalBufferManager.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\ThreadLocalBufferManager.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\util\VersionUtil.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\VersionUtil.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core.util, newPackageName=com.m3.lib.core.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\Version.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\Version.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\fasterxml\jackson\core\Versioned.java to m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\Versioned.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.fasterxml.jackson.core, newPackageName=com.m3.lib.core, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  24.324 s
+[INFO] Finished at: 2026-10-31T07:30:39+05:30
+[INFO] ------------------------------------------------------------------------

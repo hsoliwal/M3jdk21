@@ -20,10 +20,10 @@ def main() -> None:
         raise RuntimeError("existing GVAS proof owner is unavailable")
     proof = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(proof)
-    jdk = Path(os.environ.get("M3_JDK", os.environ.get(
+    jdk = Path(os.environ.get("M3JDK", os.environ.get(
         "JAVA_HOME", "/usr/lib/jvm/java-21-openjdk-amd64")))
-    test = ROOT / "core/test/com/m3/text/M3GvasLookupIndexContractTest.java"
-    test_class = "com.m3.text.M3GvasLookupIndexContractTest"
+    test = ROOT / "core/test/jdk/m3/text/M3GvasLookupIndexContractTest.java"
+    test_class = "jdk.m3.text.M3GvasLookupIndexContractTest"
     fixtures = ("small", "normal", "collision64", "collision65", "collision")
     with tempfile.TemporaryDirectory(prefix="m3-gvas-index-") as temporary:
         work = Path(temporary)

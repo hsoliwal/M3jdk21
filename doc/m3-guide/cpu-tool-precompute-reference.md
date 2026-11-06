@@ -431,20 +431,20 @@ measurements. This is a test-gap inventory, not a claim these paths are defectiv
 No repository execution, new native ABI, runtime promotion or whole-package
 acceptance is supplied by this documentation increment.
 
-[plan]: ../../m3/ports/precompute/src/main/java/com/m3/precompute/M3CpuToolPlan.java
-[image]: ../../m3/ports/precompute/src/main/java/com/m3/precompute/M3CpuToolImage.java
-[compiler]: ../../m3/ports/precompute/src/main/java/com/m3/precompute/M3CpuToolImageCompiler.java
-[runtime]: ../../m3/ports/precompute/src/main/java/com/m3/precompute/M3CpuToolRuntime.java
-[native-adapter]: ../../m3/ports/precompute/src/main/java/com/m3/precompute/M3CpuToolNativeSignals.java
-[lexical-api]: ../../m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatch.java
-[lexical-java]: ../../m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatchJava.java
-[lexical-native]: ../../m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatchNative.java
+[plan]: ../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolPlan.java
+[image]: ../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolImage.java
+[compiler]: ../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolImageCompiler.java
+[runtime]: ../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolRuntime.java
+[native-adapter]: ../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolNativeSignals.java
+[lexical-api]: ../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatch.java
+[lexical-java]: ../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchJava.java
+[lexical-native]: ../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchNative.java
 [jni]: ../../m3/ports/precompute/src/main/native/src/m3_precompute_signals_jni.c
 [c-kernel]: ../../m3/ports/precompute/src/main/native/src/m3_precompute_signals.c
 [c-header]: ../../m3/ports/precompute/src/main/native/include/m3_precompute_signals.h
-[selftest]: ../../m3/ports/precompute/src/test/java/com/m3/precompute/M3CpuToolPrecomputeSelfTest.java
-[junit]: ../../m3/ports/precompute/src/test/java/com/m3/precompute/M3CpuToolPrecomputeTest.java
-[native-test]: ../../m3/ports/precompute/src/test/java/com/m3/precompute/M3NativeParityTest.java
+[selftest]: ../../m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CpuToolPrecomputeSelfTest.java
+[junit]: ../../m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CpuToolPrecomputeTest.java
+[native-test]: ../../m3/ports/precompute/src/test/java/jdk/m3/precompute/M3NativeParityTest.java
 [c-test]: ../../m3/ports/precompute/src/main/native/tests/m3_precompute_signals_checks.c
 [pom]: ../../m3/ports/precompute/pom.xml
 [cmake]: ../../m3/ports/precompute/src/main/native/CMakeLists.txt

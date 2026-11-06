@@ -1,28 +1,28 @@
 {
   "schema": "independent-v3-custody-source-and-actual-input-admission/v1",
   "status": "ADMITTED_T02_FOR_PROBE_AND_SUBSEQUENT_CONDITIONAL_PUBLICATION",
-  "helper_sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
-  "verifier_sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
-  "custody_input_sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df",
+  "helper_sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
+  "verifier_sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
+  "custody_input_sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5",
   "protocol_sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5",
   "manifest_sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328",
   "source_snapshots": [
     {
       "source": "raw_custody_v3.py",
       "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
-      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+      "sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
       "bytes": 12912
     },
     {
       "source": "verify_publication_v3.py",
       "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
-      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+      "sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
       "bytes": 13831
     },
     {
       "source": "verify_publication.py",
       "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/verify_publication.py",
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226",
       "bytes": 9623
     },
     {
@@ -34,7 +34,7 @@
     {
       "source": "prepare_publication.py",
       "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/prepare_publication.py",
-      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+      "sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2",
       "bytes": 15683
     },
     {
@@ -46,13 +46,13 @@
     {
       "source": "raw-custody-v3/draft-T01/raw_custody_v3.py",
       "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
-      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
+      "sha256": "80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412",
       "bytes": 12671
     },
     {
       "source": "raw-custody-v3/draft-T01/verify_publication_v3.py",
       "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
-      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
+      "sha256": "4cc60517ad06d1c3590059e43f353c59ad751cb74601bc65735a7df9259edcbf",
       "bytes": 13831
     }
   ],
@@ -191,7 +191,7 @@
       "complete": true,
       "independent_tree_hash_equal": true,
       "actual_entries_equal_planned": true,
-      "response_file_sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3"
+      "response_file_sha256": "7ddfde58c17d7c791af60b93f97606bc0e6437db69fb70a82cb33a8397126d6f"
     },
     {
       "git_tree": "cac95ee10acb1ef18280347dcee30e626ff0e2b2",

@@ -1,0 +1,152 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Wave20 original CPU run-length Java21/C17/JNI receiver
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/cpu-tools/**'
+      - '.github/workflows/m3-cpu-runlength-wave20-receiver-20261102.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-custody:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Verify 11 exact original SHA-256 and Git blobs, source API baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, re, subprocess
+          home = Path('m3/tooling/module-packs/cpu-tools')
+          manifest = home / 'refinement-proofs/cpu-structured-wave20-20261102/SOURCE_RECEIPT.tsv'
+          rows = manifest.read_text(encoding='utf-8').splitlines()
+          expected_header = 'wave\tpath\tpreimage\tsha256_after\tgit_blob_sha1_after\tdonor_role\tadmission'
+          if len(rows) != 12 or rows[0] != expected_header:
+              raise RuntimeError('original receipt cardinality or columns drift')
+          expected_primary = {
+              'M3RunLengthPostingIndex.java': 'b93681bcc1f8ce987843171ecce414290351e67a479834b710031ee96d179be2',
+              'M3RunLengthPostingIndexNative.java': '67b4cee7ca5a1d35fc5dc9c759e620b1e4bd90ba8dbdaffdffcbbdea42605c9f',
+              'm3_runlength_postings.c': '1c8596f478e2d4e6992b6a9b0068223e4f84ebabad33177d64baf27f17c353a2',
+          }
+          seen = set()
+          for record in rows[1:]:
+              cells = record.split('\t')
+              if len(cells) != 7: raise RuntimeError('invalid receipt row')
+              wave, name, before, after, blob, role, admission = cells
+              parts = name.split('/')
+              if (wave not in ('19','20') or not name.startswith('m3/tooling/module-packs/cpu-tools/')
+                  or any(p in ('','.','..') for p in parts) or '\\' in name or name in seen):
+                  raise RuntimeError('invalid/duplicate canonical path')
+              seen.add(name)
+              if before != 'ABSENT' or admission != 'RECEIVER_HOLD':
+                  raise RuntimeError('unexpected preimage or release authority')
+              if not re.fullmatch('[0-9a-f]{64}',after) or not re.fullmatch('[0-9a-f]{40}',blob):
+                  raise RuntimeError('malformed hash identity')
+              p = Path(name)
+              if not p.is_file() or p.is_symlink(): raise RuntimeError('source missing or symlink')
+              raw = p.read_bytes()
+              raw.decode('utf-8', 'strict')
+              if hashlib.sha256(raw).hexdigest() != after:
+                  raise RuntimeError('full-byte source SHA-256 drift '+name)
+              actual = subprocess.check_output(['git','hash-object','--',name], text=True).strip()
+              staged = subprocess.check_output(['git','ls-files','--stage','--',name], text=True).split()
+              if actual != blob or len(staged)!=4 or staged[0]!='100644' or staged[1]!=blob:
+                  raise RuntimeError('Git blob or mode drift '+name)
+              if p.name in expected_primary and expected_primary[p.name]!=after:
+                  raise RuntimeError('frozen product-source hash changed '+name)
+          if len(seen)!=11: raise RuntimeError('partial original owner set')
+          if any(len((home/('WAVE'+wave+'_COVERAGE.tsv')).read_text(encoding='utf-8').splitlines()) != 92
+                 for wave in ('19','20')):
+              raise RuntimeError('91 category rows lost')
+          fixed = {
+              'm3/tooling/module-packs/cpu-tools/build.py': '0415ed2fd2e49b6b26bcafc76e13023e2ba14411',
+              'm3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java': '7edba36737dff219cf58c7f9707a03cc6d3a44d7',
+          }
+          for path, blob in fixed.items():
+              if subprocess.check_output(['git','hash-object','--',path], text=True).strip() != blob:
+                  raise RuntimeError('existing JMOD builder/module descriptor changed '+path)
+          print('M3JDK_CPU_WAVE20_EXACT_SOURCE_PASS|original_blobs=11|category_rows=91|existing_api=unchanged')
+          PY
+  isolated-java-c-jni:
+    needs: source-custody
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict Java21 compiler, generated JNI header and existing API readback
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=m3/tooling/module-packs/cpu-tools
+          OUT="$RUNNER_TEMP/m3-wave20-receiver"
+          mkdir -p "$OUT/classes" "$OUT/headers" "$OUT/logs"
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$OUT/headers" -d "$OUT/classes" \
+            "$R/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3RunLengthPostingIndex.java" \
+            "$R/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3RunLengthPostingIndexNative.java" \
+            "$R/fixtures/M3RunLengthPostingIndexOracle.java" \
+            "$R/fixtures/M3RunLengthPostingIndexNativeOracle.java" \
+            "$R/fixtures/M3RunLengthBoundaryOracle.java" \
+            "$R/fixtures/M3RunLengthBatchAdaptiveOracle.java" \
+            2>&1 | tee "$OUT/logs/javac.log"
+          javap -classpath "$OUT/classes" -public -s jdk.m3.tools.cpu.M3RunLengthPostingIndex jdk.m3.tools.cpu.M3RunLengthPostingIndexNative | tee "$OUT/logs/java-api.log"
+          grep -F 'Java_jdk_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0' "$OUT/headers/"*.h
+      - name: Strict C17 shared JNI and both original native independent kernels
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=m3/tooling/module-packs/cpu-tools
+          OUT="$RUNNER_TEMP/m3-wave20-receiver"
+          GCC=(gcc -std=c17 -pedantic -Wall -Wextra -Werror -O2 -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux")
+          "${GCC[@]}" -fPIC -shared "$R/native/m3_runlength_postings.c" -o "$OUT/libm3runlength.so" 2>&1 | tee "$OUT/logs/native-compile.log"
+          "${GCC[@]}" "$R/native/tests/m3_runlength_kernel_oracle.c" -o "$OUT/runlength-kernel-oracle" 2>&1 | tee "$OUT/logs/kernel-compile.log"
+          "${GCC[@]}" "$R/native/tests/m3_runlength_batch_oracle.c" -o "$OUT/runlength-batch-oracle" 2>&1 | tee "$OUT/logs/batch-compile.log"
+          nm -D --defined-only "$OUT/libm3runlength.so" | tee "$OUT/logs/jni-exports.log"
+          grep -F 'Java_jdk_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0' "$OUT/logs/jni-exports.log"
+      - name: Execute independent C17 kernel oracles before JNI
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3-wave20-receiver"
+          "$OUT/runlength-kernel-oracle" 2>&1 | tee "$OUT/logs/kernel-runtime.log"
+          "$OUT/runlength-batch-oracle" 2>&1 | tee "$OUT/logs/batch-runtime.log"
+      - name: Execute Java and optional JNI, both JIT and interpreter, checking native pointers
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3-wave20-receiver"
+          for MODE in jit interpreted; do
+            OPTS=()
+            if [[ "$MODE" == interpreted ]]; then OPTS=(-Xint); fi
+            for ORACLE in M3RunLengthPostingIndexOracle M3RunLengthBoundaryOracle; do
+              java "${OPTS[@]}" -cp "$OUT/classes" "$ORACLE" 2>&1 | tee "$OUT/logs/$ORACLE-$MODE.log"
+            done
+            for ORACLE in M3RunLengthPostingIndexNativeOracle M3RunLengthBatchAdaptiveOracle; do
+              java "${OPTS[@]}" -Xcheck:jni -Dm3.cpu.runlength.native.path="$OUT/libm3runlength.so" \
+                -cp "$OUT/classes" "$ORACLE" 2>&1 | tee "$OUT/logs/$ORACLE-$MODE.log"
+            done
+          done
+          for ORACLE in M3RunLengthPostingIndexNativeOracle M3RunLengthBatchAdaptiveOracle; do
+            java -cp "$OUT/classes" "$ORACLE" 2>&1 | tee "$OUT/logs/$ORACLE-disabled.log"
+          done
+          test -z "$(git status --porcelain)"
+          echo 'M3JDK21_CPU_RUNLENGTH_WAVE20_ISOLATED_RUNTIME_PASS'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3jdk21-cpu-wave20-source-compiler-jni-logs
+          path: ${{ runner.temp }}/m3-wave20-receiver/logs/
+          if-no-files-found: warn

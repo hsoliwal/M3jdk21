@@ -9,7 +9,7 @@
     "-Dm3.dataset=gradle-provider-20261018",
     "surefire:test"
   ],
-  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
   "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
   "previous": "03b-authoring-compile",
   "started_utc": "2026-10-18T12:53:41.732422+00:00",

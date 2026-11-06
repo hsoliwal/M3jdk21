@@ -20,8 +20,8 @@ the fresh Java gate operates on a selected-source subset, not a full checkout.
 | Receiving path under `m3/collections/` | Before SHA-256 | After SHA-256 |
 | --- | --- | --- |
 | `src/main/java/com/m3/collections/M3FilteredViews.java` | `fb1f4da6cbfcaf27385bad58eb810f22b1f8f5577b73bd04fc8c06c871c5035c` | `4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea` |
-| `src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java` | `ABSENT` | `cea097e4b1cf67a3cd2d8fdd4df5f29751db7d767daf785732c350003acede29` |
-| `src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java` | `ABSENT` | `c16fa40bc6768618df372d8d43936f5761d3375c35dfeeb9da15b84dc4fcb44d` |
+| `src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java` | `ABSENT` | `2e1e184d757695e3f65b0f8d1e1e0ab74327626f3b0ad33d21c309c6b4f95bfe` |
+| `src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java` | `ABSENT` | `f2c51985b6966d0eda1531ea21742477f8c0ee504f188938f3dca381e44d9367` |
 
 The production diff replaces only two private `firstVisible` helpers and adds
 a source modification notice. The other two paths are the focused standalone
@@ -31,14 +31,14 @@ backing collection owners and dependencies remain unchanged.
 The existing native changes from #1642 must remain exact: the compactor retains
 SHA-256 `58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2`
 and `M3MaskPositionAtomsTest.java` retains
-`53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548`.
+`719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf`.
 This Java-only recipe has no native receiving target or new JNI export.
 
 ## Direct reuse and preserved selection behavior
 
 The adopted donor is the existing Apache-2.0
-[`M3MutableFilteredViews.firstMatch`](https://github.com/hsoliwal/M3JDK21/blob/7c0d2493edbf93ac5cb726667ce83046d3519e3e/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java),
-Git blob `37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49`. The donor owner is
+[`M3MutableFilteredViews.firstMatch`](https://github.com/hsoliwal/M3JDK21/blob/7c0d2493edbf93ac5cb726667ce83046d3519e3e/m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java),
+Git blob `076778a34b49ca1ef7eac47cd9b6cf33b0fbe55f`. The donor owner is
 unchanged. Its direct first-match loop supplies the set helper and the map
 helper without introducing a new collection abstraction.
 

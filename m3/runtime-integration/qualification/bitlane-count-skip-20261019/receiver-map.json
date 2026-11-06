@@ -3,7 +3,7 @@
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "c4a25a6f3d93c9cd25883cd075f8c0f5c115f48c",
   "canonical_pr": 12454,
-  "recipe": "com.synexia.m3jdk.M3BitLaneRuntimeCountSkip20261019",
+  "recipe": "jdk.internal.m3.m3jdk.M3BitLaneRuntimeCountSkip20261019",
   "canonical_engine_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
   "target": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
   "target_base": "55e19380cc26ebd74de37c0e5bd95a5cbbe07d12",

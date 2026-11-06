@@ -959,7 +959,7 @@
       "source_relative": "provenance.json",
       "target_relative": "target/classes/META-INF/provenance.json",
       "bytes": 15745,
-      "sha256": "f9cca1ebfcd08a85e1099d536b59bf917ff5b95080daecf441eb9f14a5f38936"
+      "sha256": "3085461a4019ca6a0924fc227ad0f8067f7e5e52a63c95709bd177a2b47e4c82"
     },
     {
       "source_relative": "synexia-donation.json",
@@ -977,7 +977,7 @@
       "source_relative": "SYNEXIA-DONATION-NOTICE.txt",
       "target_relative": "target/classes/META-INF/SYNEXIA-DONATION-NOTICE.txt",
       "bytes": 1831,
-      "sha256": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556"
+      "sha256": "24bd01bcc6496fa7c2c05998838e2c706472a9aab49ddd6e719420bacd47ae48"
     },
     {
       "source_relative": "NETBEANS-NOTICE.txt",

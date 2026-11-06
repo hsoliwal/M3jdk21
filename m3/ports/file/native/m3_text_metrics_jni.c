@@ -25,7 +25,7 @@ static uint16_t metrics_unit(const unsigned char *bytes, size_t index, jboolean 
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_file_M3TextMetrics_00024Native_directMetrics0(
+Java_jdk_m3_file_M3TextMetrics_00024Native_directMetrics0(
         JNIEnv *env, jclass owner, jobject buffer, jint position, jint length,
         jboolean little, jint replacement) {
     (void) owner;

@@ -1,0 +1,95 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+name: M3JDK21 semantic atom census Java21 and Maven admission
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/atom-census/**'
+      - '.github/workflows/m3-semantic-census-20261101.yml'
+  push:
+    paths:
+      - 'm3/tooling/atom-census/**'
+      - '.github/workflows/m3-semantic-census-20261101.yml'
+permissions:
+  contents: read
+jobs:
+  semantic-census:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Admit exact source SHA256 postimages and unchanged ABI contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          receipt=json.loads(Path('m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_RECEIPT.json').read_text())
+          if receipt['external_api_changed'] or receipt['jni_abi_changed']:
+              raise SystemExit('REFUSED: ABI unlock')
+          for key in ('source_change','test_change'):
+              row=receipt[key]
+              path=Path(row['path'])
+              if path.is_symlink() or not path.is_file():
+                  raise SystemExit('REFUSED: missing or linked postimage '+str(path))
+              sha=hashlib.sha256(path.read_bytes()).hexdigest()
+              if sha!=row['post_sha256']:
+                  raise SystemExit('REFUSED: postimage drift '+str(path))
+          print('M3_SEMANTIC_CENSUS_V2_SOURCE_SEALS_PASS')
+          PY
+      - name: Strict Java21 source compile and 154 executed assertions
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=m3/tooling/atom-census
+          mkdir -p "$RUNNER_TEMP/m3-semantic"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-semantic" \
+            "$root/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomKind.java" \
+            "$root/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java" \
+            "$root/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticSelfTest.java"
+          java -cp "$RUNNER_TEMP/m3-semantic" jdk.m3.tooling.atoms.M3AtomCensusSemanticSelfTest \
+            | tee "$RUNNER_TEMP/m3-semantic.log"
+          grep -q $'M3_SEMANTIC_CENSUS_PROOF\tchecks=154\tstatus=PASS' "$RUNNER_TEMP/m3-semantic.log"
+      - name: Verify canonical atom contract and fail-closed admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/tooling/atom-census/verify-contract.sh
+      - name: Execute actual JUnit tests in M3JDK21 atom census module
+        shell: bash
+        run: mvn -B -ntp -f m3/tooling/atom-census/pom.xml clean test
+      - name: Require Surefire cases without failure or skip
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          reports=Path('m3/tooling/atom-census/target/surefire-reports')
+          files=sorted(reports.glob('TEST-*.xml'))
+          if not files: raise SystemExit('HOLD: no JUnit XML')
+          count=0
+          for path in files:
+              if path.is_symlink() or path.stat().st_size>2*1024*1024:
+                  raise SystemExit('HOLD: unsafe XML')
+              raw=path.read_bytes()
+              if b'<!DOCTYPE' in raw.upper() or b'<!ENTITY' in raw.upper():
+                  raise SystemExit('HOLD: XML entity')
+              suite=ET.fromstring(raw)
+              if suite.tag!='testsuite': raise SystemExit('HOLD: suite')
+              for attr in ('errors','failures','skipped'):
+                  if int(suite.get(attr,'-1'))!=0: raise SystemExit('HOLD: '+attr)
+              cases=suite.findall('testcase')
+              if len(cases)!=int(suite.get('tests','-1')):
+                  raise SystemExit('HOLD: nested/hidden testcase')
+              count+=len(cases)
+          if count<4: raise SystemExit('HOLD: mandatory atom tests absent')
+          print('M3_SEMANTIC_CENSUS_JUNIT_PASS',count)
+          PY
+      - name: Explicit product hold
+        run: echo 'TOOLING_CI_DOES_NOT_PROVE_FULL_JDK21_JTREG_C1_C2_JNI_ABI_CROSS_PLATFORM'

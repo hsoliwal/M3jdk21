@@ -41,12 +41,12 @@ for row in rows:
 for row in rows:
     assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after'], row['path']
 
-before_path = CRATE / 'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before'
+before_path = CRATE / 'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before'
 before = json.loads(before_path.read_text())
 after = json.loads(next(row['after'] for row in rows if row['path'] == 'm3/docs/name-mapping.json'))
 retained = copy.deepcopy(after)
 added = retained['migration']['records'][-5:]
-assert all(row['id'].startswith('synexia.collections.') for row in added)
+assert all(row['id'].startswith('m3.collections.') for row in added)
 del retained['migration']['records'][-5:]
 assert retained == before, 'Existing mapping authority must be retained in full'
 

@@ -23,8 +23,8 @@ import sys
 import time
 
 NATIVE = 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-OWNER = 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
-TEST_ROOT = 'm3/collections/src/test/java/com/m3/collections/'
+OWNER = 'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
+TEST_ROOT = 'm3/collections/src/test/java/jdk/m3/collections/'
 TESTS = ['M3MaskPositionAtomsTest', 'M3IndexMaskRangeNativeTest',
          'M3RequiredExcludedMaskSelectorNativeContract']
 RECIPE_PROOF = '8b96ff9f844e6c238d2105c55af7b4c37f4628737e8232ca8115a5942dd14bd0'
@@ -144,7 +144,7 @@ def main():
     # The unchanged copier writes application receipts under its own target/.
     # Reconstruct just its qualified inputs there, leaving the frozen C untouched.
     source_module = crate.parent.parent
-    runner_module = build / 'qualified-copier/synexia-openrewrite-recipes'
+    runner_module = build / 'qualified-copier/m3-openrewrite-recipes'
     runner_crate = runner_module / 'recipe-crates' / crate.name
 
     def copy_qualified(path):
@@ -156,10 +156,10 @@ def main():
     for name in ['apply_receiver.py', 'phases.tsv', 'atom-chains.tsv', 'pom.xml']:
         copy_qualified(crate / name)
     require(sha(observed[crate / 'apply_receiver.py']) == COPIER, 'qualified copier changed')
-    copy_qualified(crate / 'src/test/java/com/synexia/rewrite/M3MaskNativeRuntimeRecipeTest.java')
+    copy_qualified(crate / 'src/test/java/jdk/internal/m3/rewrite/M3MaskNativeRuntimeRecipeTest.java')
     for name in ['M3EditScope.java', 'M3ScopeInference.java', 'M3HashPinnedJavaSnapshotRecipe.java',
                  'M3HashPinnedTextSnapshotRecipe.java']:
-        owner = source_module / 'src/main/java/com/synexia/rewrite' / name
+        owner = source_module / 'src/main/java/jdk/internal/m3/rewrite' / name
         retain(owner, proof[name])
         copy_qualified(owner)
     for name in ['recipe-proof.tsv', 'proof-status.tsv', 'named-recipe.yml']:
@@ -168,7 +168,7 @@ def main():
         for path in sorted((crate / directory).rglob('*')):
             if path.is_file():
                 copy_qualified(path)
-    resources = source_module / 'src/main/resources/com/synexia/rewrite'
+    resources = source_module / 'src/main/resources/jdk/internal/m3/rewrite'
     phases = list(csv.DictReader(observed[crate / 'phases.tsv'].decode().splitlines(), delimiter='\t'))
     atoms = list(csv.DictReader(observed[crate / 'atom-chains.tsv'].decode().splitlines(), delimiter='\t'))
     for kind, phase_id in [(row['kind'], row['id']) for row in phases] + [
@@ -268,7 +268,7 @@ def main():
     library = build / 'libm3_collections_mask.so'
     compiled = command('compile-native', [cc, '-std=c17', '-O3', '-Wall', '-Wextra', '-Werror',
         '-pedantic', '-I' + str(jdk / 'include'), '-I' + str(jdk / 'include/linux'),
-        '-fPIC', '-shared', '-include', headers / 'com_m3_collections_M3IndexMaskCompactor.h',
+        '-fPIC', '-shared', '-include', headers / 'jdk_m3_collections_M3IndexMaskCompactor.h',
         repo / NATIVE, '-o', library])
     require(not compiled.stderr, 'strict native compilation emitted diagnostics')
     exports = command('exports', [nm, '-D', '--defined-only', library])
@@ -276,7 +276,7 @@ def main():
     require(len(symbols) == 9 and symbols == contract['jni_exports'], 'nine-export JNI ABI changed')
     for test in TESTS:
         run = command('target-' + test, [jdk / 'bin/java', '-XX:-UsePerfData', '-Xms32m', '-Xmx256m',
-            '-Xcheck:jni', '-Djava.library.path=' + str(build), '-cp', classes, 'com.m3.collections.' + test])
+            '-Xcheck:jni', '-Djava.library.path=' + str(build), '-cp', classes, 'jdk.m3.collections.' + test])
         require(not run.stderr, 'actual target JVM emitted JNI/other diagnostics: ' + test)
         require(run.stdout == expected_stdout[test], 'target result differs from sealed prior oracle: ' + test)
     for path, raw in observed.items():

@@ -1,0 +1,5 @@
+m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3BiMap.java	ABSENT	1ea13980e1c6959fb4d6a611e3233a7ab1f937ecf60760db7b5be5e02c388491	M3BiMap.java.txt
+m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3BiMaps.java	ABSENT	9147d4b3d5889922a7973f35ac002e121e57da49c453ba4ca8ffe24f664b0c9c	M3BiMaps.java.txt
+m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3BiMapTest.java	ABSENT	cfdfe294fa8a4c7d08a6c032a535c9ab913583d0b21faf0be1a691f038840aa0	M3BiMapTest.java.txt
+m3/collections/qualification/bimap-mainline-20261017/native-test/src/test/java/jdk/m3/collections/interop/M3BiMapNativeTest.java	ABSENT	dae6b3fbba593ed37633920a5de27dd01cecb113b7aa47e92ed206e265b8afec	M3BiMapNativeTest.java.txt
+m3/collections/src/test/native/collections/m3_bimap_consumer.c	ABSENT	27d4dd8d77e37176920ae1af0aeeffea3966122790db340ef3ff10113f1b9e00	m3_bimap_consumer.c.txt

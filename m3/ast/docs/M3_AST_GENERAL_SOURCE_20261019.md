@@ -1,7 +1,7 @@
 # M3JDK21 — parser-neutral source facts inside the original AST owner
 SPDX-License-Identifier: Apache-2.0
 
-Direct source: `m3/ast/src/main/java/com/m3/ast/M3ASTHierarchy.java`.
+Direct source: `m3/ast/src/main/java/jdk/m3/ast/M3ASTHierarchy.java`.
 Base: `677437be295b23f7ccf7409be287008944d0e8b0`. M3JDK21 is the sole product; Synexia is donor/recipe custody, not a runtime layer.
 
 An unnamed Java module/package is the exact empty coordinate. A file with no collection semantics has a zero family mask. This extends the accepted domain of original L0–L5 AST file facts without changing existing hashes, signatures, arrays, mask layouts, atom ordering, or stored object count. The existing `int[]` atom-handle lane and `byte[]` state-mask lane remain authoritative. This is NOT a completed Eclipse JDT binding/working-copy integration or universal parser implementation.
@@ -23,9 +23,9 @@ The existing five test methods cover actual Java LST/recipe replay, fixed point,
 ```sh
 mkdir -p /tmp/m3-ast-general/classes
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-ast-general/classes \
-  m3/ast/src/main/java/com/m3/ast/M3ASTHierarchy.java \
-  m3/ast/src/test/java/com/m3/ast/M3ASTHierarchyContract.java \
-  m3/ast/src/test/java/com/m3/ast/M3ASTHierarchyEncodingTest.java
+  m3/ast/src/main/java/jdk/m3/ast/M3ASTHierarchy.java \
+  m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyContract.java \
+  m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyEncodingTest.java
 java -cp /tmp/m3-ast-general/classes com.m3.ast.M3ASTHierarchyContract 2000
 java -cp /tmp/m3-ast-general/classes com.m3.ast.M3ASTHierarchyEncodingTest
 ```

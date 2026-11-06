@@ -7,7 +7,7 @@ Canonical recipe revision: `f3afaa3ff8f9bff6e2251097d6403884a21d6664` (PR #10551
 Canonical crate: `synexia-openrewrite-recipes/crates/m3-string-replacement-guard`.
 Canonical Java owner: `synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringGuardRepair.java`.
 Existing manifest kernel: `M3GpuToolJoinManifest.java`, Git blob
-`38df5f97bbeec8a8a8cfc77091d56bda925c07f2`, unchanged from Synexia revision
+`78d5fb68f13872164973a8918cc7886c5f548bca`, unchanged from Synexia revision
 `96bc2d38982814585c785eaa287a52dfc3dbf228`.
 
 The six files mirrored below `m3/vendor/synexia/` preserve their exact Synexia

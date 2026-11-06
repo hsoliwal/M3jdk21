@@ -116,7 +116,7 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
 
 /* Original exported ABI: identical signature and full-remainder behavior. */
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3IndexMaskWindow_scanNative(
+Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
         jint required, jint excluded, jintArray output, jint output_offset, jint limit) {
     (void) owner;
@@ -126,7 +126,7 @@ Java_com_m3_collections_M3IndexMaskWindow_scanNative(
 
 /* Additive JNI symbol with an exact caller-admitted exclusive end ordinal. */
 JNIEXPORT jlong JNICALL
-Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(
+Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
         jint end, jint required, jint excluded, jintArray output,
         jint output_offset, jint limit) {

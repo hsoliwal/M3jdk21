@@ -1,5 +1,5 @@
 {
-  "id": "synexia.collections.SegmentedBitLane28",
+  "id": "m3.collections.SegmentedBitLane28",
   "kind": "adapter",
   "status": "implemented-unverified",
   "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
@@ -7,28 +7,28 @@
     {
       "repo": "hsoliwal/com.synexia",
       "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-      "module": "synexia-common",
-      "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedBitLane28.java",
-      "symbol": "com.synexia.common.collections.SegmentedBitLane28",
+      "module": "m3-common",
+      "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedBitLane28.java",
+      "symbol": "jdk.internal.m3.common.collections.SegmentedBitLane28",
       "signatures": [
-        "com.synexia.common.collections.SegmentedBitLane28"
+        "jdk.internal.m3.common.collections.SegmentedBitLane28"
       ],
-      "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
-      "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
+      "sha256": "147021a606f135a4b6b0f347ce90354ee15aef12c229ec5c02a30935216a1e70",
+      "git_blob_sha1": "9bb7173afa861c05b62a557db63e3a6692ddfe4c",
       "fingerprint": null,
       "revision_role": "pinned"
     },
     {
       "repo": "hsoliwal/com.synexia",
       "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-      "module": "synexia-common",
-      "path": "synexia-common/src/main/native/collections/segmented_bit_lane.c",
-      "symbol": "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0",
+      "module": "m3-common",
+      "path": "m3-common/src/main/native/collections/segmented_bit_lane.c",
+      "symbol": "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0",
       "signatures": [
-        "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0"
+        "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0"
       ],
-      "sha256": "da2266d8ec93478f4fbeb6a5403e14ce8dcd6a6795c43a5d4230b2a97ef8eb0e",
-      "git_blob_sha1": "1ee8509cdd05a7edcfc732b3c5947dd78b30ce3a",
+      "sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
+      "git_blob_sha1": "20549bee772f30ffabdc406bb6ab52c7435d2b01",
       "fingerprint": null,
       "revision_role": "pinned"
     }
@@ -101,9 +101,9 @@
     "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
   },
   "recipe": {
-    "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
+    "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
     "version": "2-restoration-szf",
-    "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+    "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
     "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
     "preconditions": [
       "Explicit absent Java targets and exact source/template/dependency hashes.",
@@ -177,5 +177,5 @@
     "supersedes": []
   },
   "source_state": "implemented",
-  "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+  "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
 }

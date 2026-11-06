@@ -1,6 +1,6 @@
 {
   "schema": "M3_PRODUCT_RECEIPT_PATH_MAP_V1",
-  "original_receipt_sha256": "69a73330a169fbda61326144209583104bb9f8666d8e00ba4155ab9ce02284bb",
+  "original_receipt_sha256": "6874b7f4a42ca1a3deef60b4354f7564a1c0a74d7d8eae9264bda28cb5e3a25a",
   "note": "Raw log bytes are unchanged; .log suffixes become .txt for existing canonical text admission.",
   "files": [
     {

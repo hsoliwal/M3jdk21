@@ -134,7 +134,7 @@ public final class TreeMapLookupEntryProof {
   }
   @SuppressWarnings("unchecked")
   static void linked(boolean isOracle)throws Exception{
-    String name=isOracle?"java.util.LinkedHashMap":"com.m3.collections.M3LinkedHashMap";
+    String name=isOracle?"java.util.LinkedHashMap":"jdk.m3.collections.M3LinkedHashMap";
     Class<?> c;
     try{c=Class.forName(name);}
     catch(ClassNotFoundException e){

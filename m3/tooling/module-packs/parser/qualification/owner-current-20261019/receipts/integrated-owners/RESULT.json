@@ -1047,8 +1047,8 @@
       "source_kind": "JAVA_LST"
     },
     {
-      "after_sha256": "9345c88482b943b26d67490f9358cfd3d7a0e18bd744657b2bf6d223d2391c0b",
-      "before_sha256": "a7a4e6eb4bde9cd9e111d9cb22e91912f044612db085f76724a691fd441fce16",
+      "after_sha256": "55fc6777a19521d160104799c609dc3c218619081f1510ffc9ddafa83cfbb950",
+      "before_sha256": "474db0521b39a236883b8c6bc8abb397200eca59b2b714cbd530bae0ca26c6b2",
       "path": ".github/workflows/m3-parser-jmod-20261018.yml",
       "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
       "source_kind": "TEXT_EXACT"
@@ -1061,8 +1061,8 @@
       "source_kind": "TEXT_EXACT"
     },
     {
-      "after_sha256": "5e8c84e37e5facc6df5a47624ded1e0a2d96910f17ee4dbeddf83406723bf8a9",
-      "before_sha256": "05952a2bfce357b72b25fdd5dba5f570ff5ae3ee29425773e9882b8427e0ab10",
+      "after_sha256": "43842ca8104e48ae0bb18b2d0e819c8078ec8e6ed79d646610f6b2bea7c25f9f",
+      "before_sha256": "a9b61bf5d96072144f0e229a48011e573dd7125572edb6e6599ebf4a71003faa",
       "path": "m3/tooling/shared-frontend/algorithm-catalogue.tsv",
       "recipe": "com.synexia.m3.ParserOwnerRefinements20261019",
       "source_kind": "TEXT_EXACT"

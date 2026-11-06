@@ -30,12 +30,12 @@ Original source Git blob:
 `6155a2df20860b031ae742b56f024994be3d9f3e`,
 SHA256 `7ec4e720caf64549d89a93447e435492a7c5c77d75750f7313118cbe2e375711`.
 Reviewed candidate Git blob:
-`be4975dd9e493af627a9a8b28991b4b30d8bea11`,
-SHA256 `f6a64f760de80b7cf3866eb9449d8b4815c111e9212bca0eb5946e85c442f3f1`.
+`36b589be5904afb0d9fe6c8a3ed01b81dcb6cde5`,
+SHA256 `5901276ed3ee3a295cf80f359549f8f426eb26d390874bc961143ba4e5b5c396`.
 Executable original-owner test blob:
-`33a99aacca6a9c1d74b7472d0f958b9f59208e3a`,
+`8786dff3021572e7e11e576fd04b1b0d58b9e949`,
 JUnit wrapper blob:
-`31c2e1d19f03585169b6c66e2dda333c4ff979e2`.
+`d62ebd87f9366ec660518dffcedc8e0623424144`.
 
 ## Executed (actual complete owner source, Java 21)
 
@@ -73,7 +73,7 @@ No direct change to master or Synexia develop, no force push/rebase.
 ```sh
 mkdir -p /tmp/m3-patch-classes
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-patch-classes \
-  m3/collections/src/main/java/com/m3/collections/M3Patch.java \
-  m3/collections/src/test/java/com/m3/collections/M3PatchApplyRunsContract.java
+  m3/collections/src/main/java/jdk/m3/collections/M3Patch.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3PatchApplyRunsContract.java
 java -cp /tmp/m3-patch-classes com.m3.collections.M3PatchApplyRunsContract
 ```

@@ -15,7 +15,7 @@ def digest(path):
 def main():
     crate = Path(__file__).resolve().parent
     repo = crate.parents[2]
-    resources = crate / 'src/main/resources/com/m3/rewrite/backport'
+    resources = crate / 'src/main/resources/jdk/m3/rewrite/backport'
     checked = {}
     for kind, name in [('jdk21-hash-pinned', 'jdk22-m3-mr'),
                        ('jdk21-hash-pinned-text', 'm3-mr')]:
@@ -43,9 +43,9 @@ def main():
     assert authority['migration']['records'][:len(original['migration']['records'])] == original['migration']['records'], 'lost or changed lineage'
     assert not authority['migration']['coverage']['source_tree_complete']
     assert not authority['migration']['coverage']['dependency_closure_complete']
-    for rid in ('synexia.regex.rxm', 'synexia.regex.rxa'):
+    for rid in ('m3.regex.rxm', 'm3.regex.rxa'):
         assert records[rid]['status'] == 'pending' and records[rid]['targets'] == []
-    tq = records['synexia.regex.mr']
+    tq = records['m3.regex.mr']
     for target in tq['targets']:
         assert digest(repo / target['path']) == target['sha256'], ('target identity', target['path'])
     assert digest(repo / tq['recipe']['path']) == tq['recipe']['sha256']

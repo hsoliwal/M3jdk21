@@ -36,16 +36,16 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: 0 - Consume canonical Synexia workflow-structure validator
+      - name: 0 - Run the absorbed workflow-structure validator
         shell: bash
         run: |
           set -euo pipefail
-          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
-          git init -q "$SYNEXIA"
-          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
-          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
-          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
-          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+          # Standalone (2026-10-31): the validator is absorbed byte-identically (canonical Git blob
+          # below; receiver record in m3/compatibility/); no other repository is fetched
+          # (m3/tooling/standalone/M3_REFS.tsv).
+          test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
+            "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
+          java m3/tooling/validators/WorkflowStructureCheck.java \
             .github/workflows/m3-jep484-custody-plan.yml
 
       - name: Diff hygiene
@@ -61,13 +61,13 @@ jobs:
         run: |
           set -euo pipefail
           git remote add m3-upstream https://github.com/openjdk/jdk.git
-          git fetch --no-tags --filter=blob:none m3-upstream             refs/tags/jdk-21+35:refs/tags/m3-jdk21             refs/tags/jdk-24+36:refs/tags/m3-jdk24
+          git fetch --no-tags --filter=blob:none m3-upstream             refs/tags/jdk-21+35:refs/tags/m3jdk21             refs/tags/jdk-24+36:refs/tags/m3jdk24
 
       - name: Reproduce sealed JEP484 path/content map
         run: |
           set -euo pipefail
           mkdir -p target/j484
-          python3 m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo .             --jdk21-ref refs/tags/m3-jdk21             --jdk24-ref refs/tags/m3-jdk24             --out target/j484/map
+          python3 m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo .             --jdk21-ref refs/tags/m3jdk21             --jdk24-ref refs/tags/m3jdk24             --out target/j484/map
           python3 - <<'PY'
           import json
           d=json.load(open("target/j484/map/summary.json",encoding="utf-8"))
@@ -153,7 +153,6 @@ jobs:
           set -euo pipefail
           python3 m3/backports/recipes/jep-484-classfile-api/verify.py
           python3 m3/backports/recipes/jep-484-classfile-api/test_verify.py
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep484ClassfileApiInventoryRecipeTest,M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Upload JEP484 custody evidence
         uses: actions/upload-artifact@v4

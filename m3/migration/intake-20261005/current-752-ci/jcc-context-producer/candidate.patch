@@ -11,13 +11,13 @@ index eea396e..9d443c7 100644
 +    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
 +    "jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
 +)
-+HISTORICAL_POM_SHA256 = "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
-+CURRENT_POM_SHA256 = "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
++HISTORICAL_POM_SHA256 = "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"
++CURRENT_POM_SHA256 = "bc5ee8573f4a4d70319b345173c6dfee37a5cd8f4c2a929a86857328ac8107f2"
 +CURRENT_PROFILE = {
 +    "state": "current",
-+    "code_sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
++    "code_sha256": "dcbbabd8b7c99bcf1fe50b338bb1904f2f0c24b3a457c1ef75d849a0dd88fbb4",
 +    "plan": "plan-intake-752-ci.json",
-+    "plan_sha256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf",
++    "plan_sha256": "16dda826a4e03255bf0caa0965cc7315cd1264e5b5942bebeec1549879dace8a",
 +    "recipe_id": "jcc-handoff-20261005/2-intake-752-ci",
 +    "seal": "6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594",
 +}
@@ -257,24 +257,24 @@ index d1784b9..b634cda 100644
          contexts = {
 -            "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e": (
 +            ("fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
-+             "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"): (
++             "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"): (
                  "plan.json",
-                 "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
+                 "7c98e1c8d7d749e2eedd381d126cf68f641b86004edc6278cd32f613324e8326",
                  "jcc-handoff-20261005/2",
                  "70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87",
              ),
--            "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787": (
-+            ("4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
-+             "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"): (
+-            "dcbbabd8b7c99bcf1fe50b338bb1904f2f0c24b3a457c1ef75d849a0dd88fbb4": (
++            ("dcbbabd8b7c99bcf1fe50b338bb1904f2f0c24b3a457c1ef75d849a0dd88fbb4",
++             "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"): (
                  "plan-intake-8131.json",
-                 "8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f",
+                 "eb5e8b0d78819a5a8a63dc7988d17d60480df92bec2537f6a2bd8d3aa6db7385",
                  "jcc-handoff-20261005/2-intake-8131",
                  "0704f21408ef263d4d0adc9eb5d48e62c7c30949cb1a197fb9b7f8a21aff4152",
              ),
-+            ("4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
-+             "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"): (
++            ("dcbbabd8b7c99bcf1fe50b338bb1904f2f0c24b3a457c1ef75d849a0dd88fbb4",
++             "bc5ee8573f4a4d70319b345173c6dfee37a5cd8f4c2a929a86857328ac8107f2"): (
 +                "plan-intake-752-ci.json",
-+                "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf",
++                "16dda826a4e03255bf0caa0965cc7315cd1264e5b5942bebeec1549879dace8a",
 +                "jcc-handoff-20261005/2-intake-752-ci",
 +                "6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594",
 +            ),
@@ -305,27 +305,27 @@ index 0000000..cfa9f89
 +    },
 +    {
 +      "path": "m3/migration/migration.py",
-+      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
++      "sha256": "dcbbabd8b7c99bcf1fe50b338bb1904f2f0c24b3a457c1ef75d849a0dd88fbb4"
 +    },
 +    {
 +      "path": "m3/migration/recipe.py",
 +      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
 +    },
 +    {
-+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
++      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
++      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
 +    },
 +    {
 +      "path": "m3/tooling/migration-recipes/pom.xml",
-+      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
++      "sha256": "bc5ee8573f4a4d70319b345173c6dfee37a5cd8f4c2a929a86857328ac8107f2"
 +    },
 +    {
 +      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
 +      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
 +    },
 +    {
-+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
++      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
++      "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6"
 +    }
 +  ],
 +  "outputs": [

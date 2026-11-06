@@ -1,8 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.M3NumberSpace;
-import com.m3.text.LocalM3StringPiece;
+import jdk.m3.text.M3NumberSpace;
+import jdk.m3.text.LocalM3StringPiece;
 
 public final class M3NumberSpaceTest {
     private static int checks;

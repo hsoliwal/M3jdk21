@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Original independent verification oracle, not a production native provider.
-#include "com_synexia_indexstring_M3TrigramNativeProof.h"
+#include "jdk_internal_m3_indexstring_M3TrigramNativeProof.h"
 #include <cstdint>
 #include <exception>
 #include <new>
@@ -71,7 +71,7 @@ jlongArray range_keys(JNIEnv* env, jcharArray text, jint from, jint to, jint bud
 }  // namespace
 
 extern "C" JNIEXPORT jlongArray JNICALL
-Java_com_synexia_indexstring_M3TrigramNativeProof_nativeKeys(
+Java_jdk_internal_m3_indexstring_M3TrigramNativeProof_nativeKeys(
     JNIEnv* env, jclass, jcharArray text) {
   if (text == nullptr) {
     fail(env, "java/lang/NullPointerException", "text");
@@ -82,7 +82,7 @@ Java_com_synexia_indexstring_M3TrigramNativeProof_nativeKeys(
 }
 
 extern "C" JNIEXPORT jlongArray JNICALL
-Java_com_synexia_indexstring_M3TrigramNativeProof_nativeRangeKeys(
+Java_jdk_internal_m3_indexstring_M3TrigramNativeProof_nativeRangeKeys(
     JNIEnv* env, jclass, jcharArray text, jint from, jint to, jint budget) {
   return range_keys(env, text, from, to, budget);
 }

@@ -2,7 +2,13 @@
  * @(#)JavaDoubleParser.java
  * Copyright © 2024 Werner Randelshofer, Switzerland. MIT License.
  */
+// M3JDK overlay FDP_DELEGATES_TO_JDK v1 (m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py):
+// the parse methods delegate to java.base, whose M3JDK Double.parseDouble runs this library's algorithm
+// (absorbed as jdk.internal.math.M3*). The unchanged upstream file is retained under upstream-excluded/.
+//FLLDCIM: M3 - one number parser for Jackson and the JDK
 package ch.randelshofer.fastdoubleparser;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * Parses a {@code double} value; the supported syntax is compatible with
@@ -152,12 +158,6 @@ package ch.randelshofer.fastdoubleparser;
  */
 public class JavaDoubleParser {
 
-    private static final JavaDoubleBitsFromByteArray BYTE_ARRAY_PARSER = new JavaDoubleBitsFromByteArray();
-
-    private static final JavaDoubleBitsFromCharArray CHAR_ARRAY_PARSER = new JavaDoubleBitsFromCharArray();
-
-    private static final JavaDoubleBitsFromCharSequence CHAR_SEQUENCE_PARSER = new JavaDoubleBitsFromCharSequence();
-
     /**
      * Don't let anyone instantiate this class.
      */
@@ -190,8 +190,8 @@ public class JavaDoubleParser {
      * @throws NumberFormatException    if the string can not be parsed successfully
      */
     public static double parseDouble(CharSequence str, int offset, int length) throws NumberFormatException {
-        long bitPattern = CHAR_SEQUENCE_PARSER.parseFloatingPointLiteral(str, offset, length);
-        return Double.longBitsToDouble(bitPattern);
+        AbstractNumberParser.checkBounds(str.length(), offset, length);
+        return Double.parseDouble(str.subSequence(offset, offset + length).toString());
     }
 
     /**
@@ -222,8 +222,8 @@ public class JavaDoubleParser {
      * @throws NumberFormatException    if the string can not be parsed successfully
      */
     public static double parseDouble(byte[] str, int offset, int length) throws NumberFormatException {
-        long bitPattern = BYTE_ARRAY_PARSER.parseFloatingPointLiteral(str, offset, length);
-        return Double.longBitsToDouble(bitPattern);
+        AbstractNumberParser.checkBounds(str.length, offset, length);
+        return Double.parseDouble(new String(str, offset, length, StandardCharsets.ISO_8859_1));
     }
 
     /**
@@ -254,7 +254,7 @@ public class JavaDoubleParser {
      * @throws NumberFormatException    if the string can not be parsed successfully
      */
     public static double parseDouble(char[] str, int offset, int length) throws NumberFormatException {
-        long bitPattern = CHAR_ARRAY_PARSER.parseFloatingPointLiteral(str, offset, length);
-        return Double.longBitsToDouble(bitPattern);
+        AbstractNumberParser.checkBounds(str.length, offset, length);
+        return Double.parseDouble(new String(str, offset, length));
     }
 }

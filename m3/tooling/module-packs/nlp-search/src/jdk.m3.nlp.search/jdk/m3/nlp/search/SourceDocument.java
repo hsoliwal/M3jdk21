@@ -3,10 +3,10 @@
  */
 package jdk.m3.nlp.search;
 
-import com.m3.compiletime.ast.M3AST;
-import com.m3.compiletime.ast.M3File;
-import com.m3.compiletime.ast.M3FileSourceFacts;
-import com.m3.text.M3StringPiece;
+import jdk.m3.compiletime.ast.M3AST;
+import jdk.m3.compiletime.ast.M3File;
+import jdk.m3.compiletime.ast.M3FileSourceFacts;
+import jdk.m3.text.M3StringPiece;
 import java.util.Arrays;
 import java.util.Objects;
 import opennlp.tools.document.Document;

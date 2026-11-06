@@ -15,7 +15,7 @@ static jint refuse(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3BitLaneJumpProof_verifyNative(
+Java_jdk_m3_collections_M3BitLaneJumpProof_verifyNative(
         JNIEnv *env, jclass unused, jobject lane,
         jintArray probes, jintArray expectedNext, jintArray expectedPrevious) {
     (void) unused;

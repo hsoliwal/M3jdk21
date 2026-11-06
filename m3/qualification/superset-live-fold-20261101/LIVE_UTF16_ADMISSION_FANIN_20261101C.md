@@ -23,9 +23,9 @@ target preimage Git blob SHA matches *exactly* before substitution:
 
 | Target | Original & receiving preimage SHA |
 | --- | --- |
-| `m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java` | `a4b03536ff3cc60a4f6a2ddb91c62994fd9a4327` |
+| `m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java` | `a4b03536ff3cc60a4f6a2ddb91c62994fd9a4327` |
 | `m3/arrays/src/main/native/m3_arrays_jni.c` | `4d5304b16fc7b9d9258b45fa07f5ae7f577292cb` |
-| `m3/arrays/src/test/java/com/m3/arrays/M3ArrayNativeTest.java` | `9d415e30b7bbf849f99f7b4cc7b5c3a37def0772` |
+| `m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNativeTest.java` | `0c1ac8a755e60fb97eb82bf17e44ce206ab8d047` |
 | `m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageLedger.java` | `8771fada3220adc50267074c4475e8f438330378` |
 | `m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageVerifierSelfTest.java` | `b9b412c3dc78fb1322453019cdb7c6b6c710db97` |
 

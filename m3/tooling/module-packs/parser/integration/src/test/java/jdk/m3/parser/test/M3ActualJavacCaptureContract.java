@@ -124,7 +124,7 @@ public final class M3ActualJavacCaptureContract {
         byte[] expected = code.getBytes(StandardCharsets.UTF_8);
         Files.write(path, expected);
         // Exactly one source-provider byte capture before javac is invoked.
-        byte[] bytes = com.m3.file.M3File.of(path).readAllBytes(expected.length);
+        byte[] bytes = jdk.m3.file.M3File.of(path).readAllBytes(expected.length);
         check(Arrays.equals(bytes, expected), "provider returns exact captured input bytes");
         M3File source = M3File.fromCapturedBytes(path.toUri(), bytes,
                 StandardCharsets.UTF_8, expected.length);
@@ -172,7 +172,7 @@ public final class M3ActualJavacCaptureContract {
         check(source.byteSha256().isPresent()
                 && source.text().contains(type) && !source.text().contains("tampered"),
                 "physical mutation cannot change the original parser source generation");
-        byte[] later = com.m3.file.M3File.of(path).readAllBytes(4096);
+        byte[] later = jdk.m3.file.M3File.of(path).readAllBytes(4096);
         check(!Arrays.equals(bytes, later), "explicit new provider read sees a new generation");
         refuses(IllegalArgumentException.class,
                 () -> M3Utf8SourceMap.verified(source, later, later.length),

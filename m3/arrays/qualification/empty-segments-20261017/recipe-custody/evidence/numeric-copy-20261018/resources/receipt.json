@@ -4,10 +4,10 @@
   "baseline_revision": "4b24824c3aa09d802121447f8970d442a855f064",
   "source_stage": "ACTUAL_SDK_OUTPUT",
   "sources": {
-    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayCopySizeAgent.java": "d73537b80f827d774fbd0aa1918919a2e1747b9cc0b26d0b9c2c257b314e5585",
-    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayNumericCopyCostProbe.java": "cca6bab0a6b6ecccd952591a67c2c7a3f4599b56e8d44857bdc0b39028b5dc62"
+    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayCopySizeAgent.java": "f1d6631ddd126bbd9f8eed49fd4a3b1d02600675dabecec0ee2ddc849df525b3",
+    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayNumericCopyCostProbe.java": "dde0c402e530b33be5c161e89e607da24557164b0270fa325722eff52ed83f3c"
   },
-  "sdk_results_sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043",
+  "sdk_results_sha256": "20cf95f2b567aee02b97b1c54847b836d958dd54d7e985a60f4979e4907356db",
   "workload_notes": [
     "descriptor_count names the prepared 256-segment input pool; owned graph fields give retained shape-specific topology",
     "15 warm samples per primitive and shape across three fresh JVMs per variant",
@@ -25,8 +25,8 @@
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
         "-d",
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/classes",
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayCopySizeAgent.java",
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/com/m3/arrays/M3ArrayNumericCopyCostProbe.java"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayCopySizeAgent.java",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/qualification/numeric-copy-20261018/src/test/java/jdk/m3/arrays/M3ArrayNumericCopyCostProbe.java"
       ],
       "exit_code": 0
     },

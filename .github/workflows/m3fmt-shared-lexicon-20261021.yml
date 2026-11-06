@@ -3,7 +3,7 @@ name: M3JDK21 shared immutable lexicon M3FMT Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/ports/file/src/main/java/com/m3/file/M3Fmt*.java'
+      - 'm3/ports/file/src/main/java/jdk/m3/file/M3Fmt*.java'
       - 'm3/ports/file/native/m3fmt_varints_jni.c'
       - 'm3/ports/file/qualification/m3fmt-shared-lexicon-20261021/**'
       - '.github/workflows/m3fmt-shared-lexicon-20261021.yml'

@@ -6,8 +6,8 @@ M3JDK21 is the integrated SDK, not an M3 overlay. Runtime owner: m3/collections/
 
 | Seal | Exact value |
 | --- | --- |
-| Target preimage Git blob | feb93280cbc1481c40c52156ffc50e2be5e35b54 |
-| Target preimage SHA-256 | bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5 |
+| Target preimage Git blob | e6ddbdfc21f48995d00f3a940a78d34fe30a743a |
+| Target preimage SHA-256 | 3ac7756882304ab5daa793bab936d28617203adb1d107e06c9f0fe88dbf1286c |
 | Recipe postimage Git blob | 10054cd805a34d084e38925fb3d50b2fa1ab360c |
 | Recipe postimage SHA-256 | 2ce7fb5dfb48729c29e5ca3d724aa754e025f4438d9f012d0d2368c09a83b0f6 |
 | Donor reference | tools4j/mmap at 3cdb6a5d43522b93f13b0e881b1c61fdf3e015ba, IdPool64.java (MIT, tools4j.org / Marco Terzer / Anton Anufriev) |

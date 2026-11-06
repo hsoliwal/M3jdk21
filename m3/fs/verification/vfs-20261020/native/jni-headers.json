@@ -14,8 +14,8 @@
     "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/jni-headers",
     "-d",
     "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/jni-header-classes",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/M3FsNative.java",
-    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/M3NativeContent.java"
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3FsNative.java",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/jdk/m3/fs/M3NativeContent.java"
   ],
   "exit_code": 0,
   "log": "jni-headers.log"

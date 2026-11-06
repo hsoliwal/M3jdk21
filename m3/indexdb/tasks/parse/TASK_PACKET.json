@@ -16,7 +16,7 @@
     "m3/pom.xml",
     "m3/tooling/migration-recipes/src/main/resources/**/db-*/**",
     "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/db.yml",
-    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/DbRecipeTest.java",
+    "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/DbRecipeTest.java",
     ".github/workflows/m3-db-parse.yml"
   ],
   "allowed_delta": [

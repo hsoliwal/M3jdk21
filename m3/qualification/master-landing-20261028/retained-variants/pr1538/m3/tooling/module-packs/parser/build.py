@@ -26,8 +26,8 @@ MODULE = "jdk.m3.parser"
 PACK = Path("m3/tooling/module-packs/parser")
 PHASES = ("lint", "compile", "test", "runtime")
 COMPILER_ROOT = Path("src/jdk.compiler/share/classes")
-RECEIVER_CHECKER = Path("m3/compatibility/check_synexia_full_borrow_receiver.py")
-RECEIVER_INPUTS = ("pin.tsv", "synexia-estate.tsv", "synexia-dag.tsv",
+RECEIVER_CHECKER = Path("m3/compatibility/check_m3_full_borrow_receiver.py")
+RECEIVER_INPUTS = ("pin.tsv", "m3-estate.tsv", "m3-dag.tsv",
                    "receiver-status.tsv", "historical-evidence.tsv", "promotion-phases.tsv")
 COMPILER_SOURCES = (
     "com/sun/source/util/M3AST.java",
@@ -82,7 +82,7 @@ def input_rows(repository, jdk):
                 ("build.py", "pom.xml", "DESIGN.md", "FOSS_REUSE_DECISIONS.tsv")]
     required += [repository / COMPILER_ROOT / name for name in COMPILER_SOURCES]
     required.append(repository / RECEIVER_CHECKER)
-    required += [repository / "m3/synexia-import/current-full-borrow" / name
+    required += [repository / "m3/m3-import/current-full-borrow" / name
                  for name in RECEIVER_INPUTS]
     required += [repository / "m3/tooling/jmod-recipes/tools" / name
                  for name in ("jmod_pack.py", "jmod_image.py")]
@@ -256,7 +256,7 @@ class Qualification:
         if not re.search(r"\bmodule\s+jdk\.m3\.parser\s*\{", descriptor):
             raise ValueError("unexpected parser module identity")
         self.run("full-borrow-receiver", [sys.executable, self.repository / RECEIVER_CHECKER],
-                 "SYNEXIA_FULL_BORROW_RECEIVER_PASS")
+                 "M3_FULL_BORROW_RECEIVER_PASS")
         log = self.output / "lint-structure.log"
         log.write_text("PASS Python AST, XML, naming JSON, Java UTF-8/LF/license/package structure\n"
                        + "java_sources=" + str(source_count) + "\n"

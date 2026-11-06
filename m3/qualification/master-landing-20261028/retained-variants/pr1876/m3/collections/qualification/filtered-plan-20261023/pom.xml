@@ -32,11 +32,11 @@
         <configuration>
           <release>21</release>
           <includes>
-            <include>com/m3/collections/M3FilteredViews.java</include>
-            <include>com/m3/collections/M3SlotSpliterators.java</include>
+            <include>jdk/m3/collections/M3FilteredViews.java</include>
+            <include>jdk/m3/collections/M3SlotSpliterators.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/collections/M3FilteredSortedIteratorPlanTest.java</testInclude>
+            <testInclude>jdk/m3/collections/M3FilteredSortedIteratorPlanTest.java</testInclude>
           </testIncludes>
           <compilerArgs>
             <!-- Align solely the module-name style suppression with the owning collections POM. -->

@@ -34,15 +34,42 @@ jobs:
           import json
           from pathlib import Path
           import sys
-          receipt = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+          def unique_object(pairs):
+              value = {}
+              for name, item in pairs:
+                  if name in value:
+                      raise SystemExit("M3_FILE_SHADOW_DUPLICATE_JSON_KEY: " + name)
+                  value[name] = item
+              return value
+          receipt = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"),
+                               object_pairs_hook=unique_object)
           if receipt.get("state") != "PASSED":
               raise SystemExit("M3_FILE_SHADOW_MODULE_NOT_QUALIFIED")
           host = receipt.get("host_module_contracts", {})
           image = receipt.get("image_module_contracts", {})
           if not isinstance(host, dict) or not isinstance(image, dict):
               raise SystemExit("M3_FILE_SHADOW_MISSING_CONTRACT_MAPS")
-          if len(host) != 16 or set(host) != set(image):
-              raise SystemExit("M3_FILE_SHADOW_EXACT_16_HOST_IMAGE_CENSUS_MISMATCH")
+          shared = {
+              "M3BuildImpactPlanContract", "M3FileBuildImpactContract",
+              "M3FileDeltaContractSelfTest", "M3FileDeltaLedgerContract",
+              "M3FileEditBatchContract", "M3FileEditFramesContract",
+              "M3FileMoveCandidatesContract", "M3FileObservationContract",
+              "M3FileRangeContract", "M3FileSourceContract", "M3FileStreamsContract",
+              "M3FileWatcherContract", "M3ProjectDeltaPermutationContract",
+              "M3ReactorImpactPlanContract", "M3ResourceLocksContract",
+              "M3ResourceLocksTimedContract", "M3ShadowStreamsContract",
+          }
+          host_only = {"M3FileDeltaSelfTest"}
+          if set(image) != shared or set(host) != shared | host_only:
+              raise SystemExit("M3_FILE_SHADOW_EXACT_HOST_IMAGE_CENSUS_MISMATCH")
+          expected_inventory = {
+              "source_count": 19,
+              "host_and_image": sorted(shared),
+              "host_javac_only": sorted(host_only),
+              "maven_junit_separate_gate": ["M3FileDeltaTest"],
+          }
+          if receipt.get("contract_inventory") != expected_inventory:
+              raise SystemExit("M3_FILE_SHADOW_CONTRACT_ROLE_INVENTORY_MISMATCH")
           expected = {
               "M3FileStreamsContract": "M3_FILE_SHADOW_STREAM_PASS",
               "M3ShadowStreamsContract": "M3_SHADOW_STREAM_PASS",
@@ -52,7 +79,7 @@ jobs:
                   raise SystemExit("M3_FILE_SHADOW_CONTRACT_NOT_EXECUTED: " + name)
           if receipt.get("full_m3jdk21_bootstrap") != "NOT_RUN":
               raise SystemExit("M3_FILE_SHADOW_SCOPE_MARKER_CHANGED")
-          print("M3_FILE_SHADOW_HOST_LINKED_IMAGE_PASS contracts=16")
+          print("M3_FILE_SHADOW_HOST_LINKED_IMAGE_PASS host_contracts=18 image_contracts=17 sources=19")
           PY
       - name: Strict Java21 original M3File plus bounded shadow contracts
         shell: bash
@@ -61,10 +88,10 @@ jobs:
           out="$RUNNER_TEMP/m3-shadow-file"
           mkdir -p "$out"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out" \
-            m3/file/src/main/java/com/m3/file/M3File.java \
-            m3/file/src/main/java/com/m3/file/M3FileStreams.java \
-            m3/file/src/main/java/com/m3/file/M3StreamProgress.java \
-            m3/file/src/main/java/com/m3/file/M3ShadowStreams.java \
-            m3/file/src/test/java/com/m3/file/M3FileStreamsContract.java
-          java -cp "$out" com.m3.file.M3FileStreamsContract
-          java -Xint -cp "$out" com.m3.file.M3FileStreamsContract
+            m3/file/src/main/java/jdk/m3/file/M3File.java \
+            m3/file/src/main/java/jdk/m3/file/M3FileStreams.java \
+            m3/file/src/main/java/jdk/m3/file/M3StreamProgress.java \
+            m3/file/src/main/java/jdk/m3/file/M3ShadowStreams.java \
+            m3/file/src/test/java/jdk/m3/file/M3FileStreamsContract.java
+          java -cp "$out" jdk.m3.file.M3FileStreamsContract
+          java -Xint -cp "$out" jdk.m3.file.M3FileStreamsContract

@@ -40,9 +40,9 @@ _SPEC.loader.exec_module(release)
 
 RECEIPT_SUFFIX = ".receipt.json"
 DEFAULT_OUT = "m3/release/queue/current"
-SYNEXIA_RECEIPTS = "m3/release/queue/synexia"
+M3_RECEIPTS = "m3/release/queue/synexia"
 DEFAULT_REPO = "hsoliwal/M3jdk21"
-SYNEXIA_REPO = "hsoliwal/com.synexia"
+M3_REPO = "hsoliwal/com.synexia"
 ADMISSION_WORKFLOW = "m3-first-release-admission.yml"
 SANITY_WORKFLOW = "main.yml"
 RECEIPT_ARTIFACT_PREFIX = "m3-gate-receipt-"
@@ -73,7 +73,7 @@ GATES = {
         ADMISSION_WORKFLOW + "#precompute",
         ["mvn", "-B", "-ntp", "-f", "m3/ports/precompute/pom.xml", "-Pnative", "test"], []),
     "M3_MAVEN_CONTROL_REACTOR": (
-        SYNEXIA_REPO + " (imported receipt; never executed here)", [], []),
+        M3_REPO + " (imported receipt; never executed here)", [], []),
     "STRING_UTF16_CONTRACT": (
         "UNBOUND: no workflow job or command is named for this gate", [], []),
     "RELEASE_CLAIMS_VALIDATION": (
@@ -301,7 +301,7 @@ def cmd_assemble(args) -> int:
     out = Path(args.out) if Path(args.out).is_absolute() else root / args.out
     dirs = [Path(d) if Path(d).is_absolute() else root / d for d in args.receipts]
     if not args.receipts:
-        dirs = [out / "receipts", root / SYNEXIA_RECEIPTS]
+        dirs = [out / "receipts", root / M3_RECEIPTS]
     return assemble(root, out, dirs, args.repo, args.gh)
 
 

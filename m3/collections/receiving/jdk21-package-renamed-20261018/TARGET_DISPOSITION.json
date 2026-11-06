@@ -1,5 +1,5 @@
 {
-  "schema": "m3-jdk-namespace-source-disposition-v1",
+  "schema": "m3jdk-namespace-source-disposition-v1",
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
   "metadataLicense": "Apache-2.0",
   "authority": {
@@ -10,7 +10,7 @@
   },
   "namespaceMapping": {
     "source": "java.util and selected subpackages",
-    "target": "com.m3.collections.jdk.util and corresponding subpackages",
+    "target": "jdk.m3.collections.jdk.util and corresponding subpackages",
     "selection": "59 selected implementations;28 retained platform contracts keep original names"
   },
   "sourceTree": "6955bd77e020f253bee3cfcb753e9df395d9da1d",

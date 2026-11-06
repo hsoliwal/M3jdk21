@@ -37,7 +37,21 @@ final class M3ObjectRuntime {
     // A weak value is essential: a strong facade would retain its own weak key.
     private static WeakReference<M3Object>[] owners;
     private static int[] ownerHashes;
+    // Primitive bucket chains; a zero link means absent, otherwise index+1.
+    // Reachable M3Object facades are NEVER evicted: the index holds weak values.
+    private static int[] ownerNext;
+    private static int[] ownerBuckets;
+    private static int ownerUsed;
+    private static int ownerFreeHead;
     private static WeakReference<AccessPlan>[] plans;
+    // Bounded weak metadata only. Observed owners, subscriptions and JNI events
+    // do not participate in this cache and must never be evicted by it.
+    private static final int PLAN_INITIAL_CAPACITY = 16;
+    private static final int PLAN_PRESSURED_CAPACITY = 64;
+    private static final int PLAN_NORMAL_CAPACITY = 256;
+    private static int[] planFrequency;
+    private static long[] planLastTouch;
+    private static long planClock;
     private static long nextOwnerId;
     private static long publicationStamp;
 
@@ -65,55 +79,131 @@ final class M3ObjectRuntime {
         }
     }
 
+    /**
+     * Lookup by source identity. Buckets hold only primitive slot indices;
+     * the sole facade references are weak. Unlink cleared entries as they
+     * are encountered without retaining any object or class loader.
+     * LOCK must be held by the caller.
+     */
     private static M3Object findLocked(Object source) {
-        if (owners == null) {
-            return null;
-        }
+        if (owners == null) return null;
         int hash = System.identityHashCode(source);
-        for (int i = 0; i < owners.length; i++) {
-            WeakReference<M3Object> reference = owners[i];
-            if (reference != null && ownerHashes[i] == hash) {
-                M3Object owner = reference.get();
-                if (owner != null && owner.source == source) {
-                    return owner;
-                }
+        int bucket = ownerBucket(hash, ownerBuckets.length - 1);
+        int previous = 0;
+        int link = ownerBuckets[bucket];
+        while (link != 0) {
+            int index = link - 1;
+            int following = ownerNext[index];
+            WeakReference<M3Object> weak = owners[index];
+            M3Object facade = weak == null ? null : weak.get();
+            if (facade == null) {
+                if (previous == 0) ownerBuckets[bucket] = following;
+                else ownerNext[previous - 1] = following;
+                owners[index] = null;
+                ownerHashes[index] = 0;
+                ownerNext[index] = ownerFreeHead;
+                ownerFreeHead = link;
+                link = following;
+                continue;
             }
+            if (ownerHashes[index] == hash && facade.source == source) {
+                return facade;
+            }
+            previous = link;
+            link = following;
         }
         return null;
     }
 
+    private static int ownerBucket(int hash, int mask) {
+        return (hash ^ (hash >>> 16)) & mask;
+    }
+
     @SuppressWarnings("unchecked")
     private static M3Object ofLocked(Object source) {
-        M3Object found = findLocked(source);
-        if (found != null) {
-            return found;
-        }
+        M3Object existing = findLocked(source);
+        if (existing != null) return existing;
         if (owners == null) {
+            // Prepare all lanes before publishing the initialized registry.
+            // An allocation failure must leave the null sentinel intact.
             WeakReference<M3Object>[] initialOwners =
                     (WeakReference<M3Object>[]) new WeakReference<?>[16];
             int[] initialHashes = new int[16];
+            int[] initialNext = new int[16];
+            int[] initialBuckets = new int[32];
             owners = initialOwners;
             ownerHashes = initialHashes;
+            ownerNext = initialNext;
+            ownerBuckets = initialBuckets;
         }
-        int free = -1;
-        for (int i = 0; i < owners.length; i++) {
-            if (owners[i] == null || owners[i].get() == null) {
-                free = i;
-                break;
-            }
+        if (ownerUsed == owners.length && ownerFreeHead == 0) {
+            compactOrGrowOwnersLocked();
         }
-        if (free < 0) {
-            free = owners.length;
-            int size = Math.multiplyExact(free, 2);
-            WeakReference<M3Object>[] grownOwners = Arrays.copyOf(owners, size);
-            int[] grownHashes = Arrays.copyOf(ownerHashes, size);
-            owners = grownOwners;
-            ownerHashes = grownHashes;
+        // Prepare both allocations before taking a free-list or new slot.
+        // An OutOfMemoryError cannot consume ownerFreeHead or ownerUsed.
+        int hash = System.identityHashCode(source);
+        int bucket = ownerBucket(hash, ownerBuckets.length - 1);
+        M3Object result = new M3Object(source);
+        WeakReference<M3Object> prepared = new WeakReference<>(result);
+        int slot;
+        if (ownerFreeHead != 0) {
+            slot = ownerFreeHead - 1;
+            ownerFreeHead = ownerNext[slot];
+        } else {
+            slot = ownerUsed++;
         }
-        M3Object owner = new M3Object(source);
-        owners[free] = new WeakReference<>(owner);
-        ownerHashes[free] = System.identityHashCode(source);
-        return owner;
+        owners[slot] = prepared;
+        ownerHashes[slot] = hash;
+        ownerNext[slot] = ownerBuckets[bucket];
+        ownerBuckets[bucket] = slot + 1;
+        return result;
+    }
+
+    /**
+     * Rare full-index sweep. A surviving facade keeps its exact identity;
+     * only cleared weak references are dropped. Prepare every lane before
+     * committing them under LOCK, so allocation failures cannot partially
+     * mutate the existing registry.
+     */
+    @SuppressWarnings("unchecked")
+    private static void compactOrGrowOwnersLocked() {
+        int live = 0;
+        for (int i = 0; i < ownerUsed; i++) {
+            if (owners[i] != null && owners[i].get() != null) live++;
+        }
+        int capacity;
+        if (live > owners.length - owners.length / 4) {
+            capacity = Math.multiplyExact(owners.length, 2);
+        } else if (owners.length > 16 && live <= owners.length / 4) {
+            // Only already-cleared weak slots and unnecessary index lanes shrink.
+            int desired = Math.max(16, Math.multiplyExact(live + 1, 2));
+            capacity = 16;
+            while (capacity < desired) capacity = Math.multiplyExact(capacity, 2);
+        } else {
+            capacity = owners.length;
+        }
+        WeakReference<M3Object>[] grownOwners =
+                (WeakReference<M3Object>[]) new WeakReference<?>[capacity];
+        int[] grownHashes = new int[capacity];
+        int[] grownNext = new int[capacity];
+        int[] grownBuckets = new int[Math.multiplyExact(capacity, 2)];
+        int position = 0;
+        for (int i = 0; i < ownerUsed; i++) {
+            WeakReference<M3Object> reference = owners[i];
+            if (reference == null || reference.get() == null) continue;
+            int nextIndex = position++;
+            grownOwners[nextIndex] = reference;
+            grownHashes[nextIndex] = ownerHashes[i];
+            int bucket = ownerBucket(grownHashes[nextIndex], grownBuckets.length - 1);
+            grownNext[nextIndex] = grownBuckets[bucket];
+            grownBuckets[bucket] = nextIndex + 1;
+        }
+        owners = grownOwners;
+        ownerHashes = grownHashes;
+        ownerNext = grownNext;
+        ownerBuckets = grownBuckets;
+        ownerUsed = position;
+        ownerFreeHead = 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -121,28 +211,148 @@ final class M3ObjectRuntime {
                            String name, Class<?> type) {
         synchronized (LOCK) {
             if (plans == null) {
-                plans = (WeakReference<AccessPlan>[]) new WeakReference<?>[16];
+                // Do not publish a partially allocated weak-plan cache.
+                WeakReference<AccessPlan>[] initialPlans =
+                        (WeakReference<AccessPlan>[]) new WeakReference<?>[PLAN_INITIAL_CAPACITY];
+                int[] initialFrequency = new int[PLAN_INITIAL_CAPACITY];
+                long[] initialLastTouch = new long[PLAN_INITIAL_CAPACITY];
+                plans = initialPlans;
+                planFrequency = initialFrequency;
+                planLastTouch = initialLastTouch;
             }
-            int free = -1;
+            // Sharing retains the exact Lookup identity/access authority.
             for (int i = 0; i < plans.length; i++) {
-                AccessPlan plan = plans[i] == null ? null : plans[i].get();
-                if (plan == null) {
-                    if (free < 0) {
-                        free = i;
+                AccessPlan current = plans[i] == null ? null : plans[i].get();
+                if (current != null && current.lookup == lookup
+                        && current.matches(declaringType, name, type)) {
+                    touchPlanLocked(i);
+                    // Heap pressure is sampled only once per 1,024 accesses.
+                    if ((planClock & 1023L) == 0L) {
+                        int budget = planBudget();
+                        if (plans.length > budget) resizePlansLocked(budget);
                     }
-                } else if (plan.lookup == lookup && plan.matches(declaringType,
-                        name, type)) {
-                    return plan;
+                    return current;
                 }
             }
-            if (free < 0) {
-                free = plans.length;
-                plans = Arrays.copyOf(plans, Math.multiplyExact(free, 2));
+            // Admission and true misses sample pressure without a monitor API,
+            // management module dependency, explicit GC, or JNI allocation.
+            int budget = planBudget();
+            if (plans.length > budget) resizePlansLocked(budget);
+            int free = -1;
+            int live = 0;
+            for (int i = 0; i < plans.length; i++) {
+                AccessPlan current = plans[i] == null ? null : plans[i].get();
+                if (current == null) {
+                    if (free < 0) free = i;
+                } else {
+                    live++;
+                }
             }
-            AccessPlan plan = new AccessPlan(lookup, declaringType, name, type);
-            plans[free] = new WeakReference<>(plan);
-            return plan;
+            if (live < budget) {
+                if (free < 0) {
+                    int oldSize = plans.length;
+                    resizePlansLocked(Math.min(budget, Math.multiplyExact(oldSize, 2)));
+                    free = oldSize;
+                }
+            } else {
+                // Frequency wins; least-recently used breaks equal-frequency ties.
+                free = planVictimLocked();
+            }
+            AccessPlan created = new AccessPlan(lookup, declaringType, name, type);
+            plans[free] = new WeakReference<>(created);
+            planFrequency[free] = 1;
+            planLastTouch[free] = nextPlanClockLocked();
+            return created;
         }
+    }
+
+    /** Testable pressure policy; only the already-cacheable weak metadata shrinks. */
+    static int planCapacityFor(long used, long maximum) {
+        if (maximum <= 0 || maximum == Long.MAX_VALUE || used < 0) {
+            return PLAN_NORMAL_CAPACITY;
+        }
+        if (used >= maximum - maximum / 8) return PLAN_INITIAL_CAPACITY;
+        if (used >= maximum - maximum / 4) return PLAN_PRESSURED_CAPACITY;
+        return PLAN_NORMAL_CAPACITY;
+    }
+
+    private static int planBudget() {
+        Runtime runtime = Runtime.getRuntime();
+        long used = runtime.totalMemory() - runtime.freeMemory();
+        return planCapacityFor(used, runtime.maxMemory());
+    }
+
+    private static long nextPlanClockLocked() {
+        if (planClock == Long.MAX_VALUE) {
+            planClock >>>= 1;
+            for (int i = 0; i < planLastTouch.length; i++) {
+                planLastTouch[i] >>>= 1;
+            }
+        }
+        long tick = ++planClock;
+        // Age on every access, including unique misses: historical hot plans
+        // must not retain frequency forever when there are no later hits.
+        if ((tick & 4095L) == 0L) {
+            for (int i = 0; i < plans.length; i++) {
+                if (plans[i] == null || plans[i].get() == null) {
+                    planFrequency[i] = 0;
+                    planLastTouch[i] = 0;
+                } else {
+                    planFrequency[i] = Math.max(1, planFrequency[i] >>> 1);
+                }
+            }
+        }
+        return tick;
+    }
+
+    private static void touchPlanLocked(int slot) {
+        if (planFrequency[slot] < Integer.MAX_VALUE) planFrequency[slot]++;
+        planLastTouch[slot] = nextPlanClockLocked();
+    }
+
+    private static int planVictimLocked() {
+        int victim = -1;
+        for (int i = 0; i < plans.length; i++) {
+            if (plans[i] == null || plans[i].get() == null) return i;
+            if (victim < 0 || planFrequency[i] < planFrequency[victim]
+                    || (planFrequency[i] == planFrequency[victim]
+                    && planLastTouch[i] < planLastTouch[victim])) {
+                victim = i;
+            }
+        }
+        if (victim < 0) throw new AssertionError("no plan cache victim");
+        return victim;
+    }
+
+    /** Rare structural resize; prepare complete array lanes before publication. */
+    @SuppressWarnings("unchecked")
+    private static void resizePlansLocked(int capacity) {
+        WeakReference<AccessPlan>[] nextPlans =
+                (WeakReference<AccessPlan>[]) new WeakReference<?>[capacity];
+        int[] nextFrequency = new int[capacity];
+        long[] nextLastTouch = new long[capacity];
+        boolean[] selected = new boolean[plans.length];
+        // Retain the highest frequency and most recent reachable descriptors.
+        // All plan references remain weak; there is no entry/node allocation.
+        for (int slot = 0; slot < capacity; slot++) {
+            int best = -1;
+            for (int i = 0; i < plans.length; i++) {
+                if (selected[i] || plans[i] == null || plans[i].get() == null) continue;
+                if (best < 0 || planFrequency[i] > planFrequency[best]
+                        || (planFrequency[i] == planFrequency[best]
+                        && planLastTouch[i] > planLastTouch[best])) {
+                    best = i;
+                }
+            }
+            if (best < 0) break;
+            selected[best] = true;
+            nextPlans[slot] = plans[best];
+            nextFrequency[slot] = planFrequency[best];
+            nextLastTouch[slot] = planLastTouch[best];
+        }
+        plans = nextPlans;
+        planFrequency = nextFrequency;
+        planLastTouch = nextLastTouch;
     }
 
     /** A shared descriptor retains authority but resolves no payload eagerly. */

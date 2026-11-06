@@ -4,9 +4,9 @@
 This is a **standalone, Maven-invocable, offline DATA transformation recipe**. It
 extends, rather than replaces, the Synexia source owner
 `synexia-dictlang/shared/bridge-hf/.../DatasetLexiconImport.java` and the
-M3JDK21 `dictlang.huggingface` family in `m3/lexicon/synexia-source-manifest.tsv`.
+M3JDK21 `dictlang.huggingface` family in `m3/lexicon/m3-source-manifest.tsv`.
 It emits 11-column records consumed by the existing
-`m3/runtime-integration/export-synexia-lexicon.py` and its `M3LEX001` image,
+`m3/runtime-integration/export-m3-lexicon.py` and its `M3LEX001` image,
 `SharedLexiconCatalog`, M3 String facts and existing `M3WordRowsNative` JNI
 receiver. It neither downloads a corpus nor creates another String interner,
 lexicon coordinate allocation authority, bitmap backend, or JNI ABI.

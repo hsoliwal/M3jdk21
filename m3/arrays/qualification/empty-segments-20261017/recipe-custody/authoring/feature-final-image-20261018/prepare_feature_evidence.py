@@ -24,7 +24,7 @@ import json
 from pathlib import Path
 
 
-PREFIX = "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/"
+PREFIX = "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/"
 EVIDENCE = "evidence/feature-final-image-20261018/"
 BUILT = "86528a90079b89a50b51ef13da08e7e70d468cb4"
 RECEIVED = "07ba6e383343d32c83cfdaf641387bbe72bf325d"

@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+  "engines": [
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "15dd2a5afe21ea373c151619bc8652e838f38b88f2fde335638b42a3983fd83e",
+      "bytes": 31126,
+      "status": "UNCHANGED_CANONICAL_OWNER"
+    },
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "5d21dbe596c2b41cb6a11404d8023ba90d2ce463523e73a4953851a4332a9922",
+      "bytes": 16997,
+      "status": "UNCHANGED_CANONICAL_OWNER"
+    },
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052,
+      "status": "UNCHANGED_CANONICAL_OWNER"
+    },
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "bytes": 7655,
+      "status": "UNCHANGED_CANONICAL_OWNER"
+    }
+  ]
+}

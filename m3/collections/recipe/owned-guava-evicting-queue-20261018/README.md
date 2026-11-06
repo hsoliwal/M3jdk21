@@ -3,12 +3,12 @@
 This host receives one production source:
 m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java.
 The manifest permits ABSENT -> the exact 16979-byte postimage
-8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840, or that exact postimage at fixed point.
+12e10948c33dedf38961027f23c01a3a912889d2585dfe8181f35ecb43426dfb, or that exact postimage at fixed point.
 Runtime fixtures, qualification records, docs and SDK sources are outside the target set.
 
 The canonical M3HashPinnedJavaSnapshotRecipe is copied byte-identically into engine-src:
-Git blob d58ca50dfaeb60f581b64f43545e688aca5c6530,
-SHA256 3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599, 13805 bytes.
+Git blob 907f176d32b55d78f13e3756a407f6877f25ca7d,
+SHA256 9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37, 13805 bytes.
 Named YAML activation uses com.synexia.m3.OwnedGuavaEvictingQueue20261018,
 crate owned-guava-evicting-queue, lst:false. PlainText execution supplies source custody.
 It does not supply Java type checking, provider type assignability or runtime behavior proof.

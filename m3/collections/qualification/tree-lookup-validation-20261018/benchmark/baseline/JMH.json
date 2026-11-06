@@ -1,7 +1,7 @@
 [
     {
         "jmhVersion" : "1.37",
-        "benchmark" : "com.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
+        "benchmark" : "jdk.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
         "mode" : "avgt",
         "threads" : 1,
         "forks" : 2,
@@ -181,7 +181,7 @@
     },
     {
         "jmhVersion" : "1.37",
-        "benchmark" : "com.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
+        "benchmark" : "jdk.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
         "mode" : "avgt",
         "threads" : 1,
         "forks" : 2,
@@ -361,7 +361,7 @@
     },
     {
         "jmhVersion" : "1.37",
-        "benchmark" : "com.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
+        "benchmark" : "jdk.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
         "mode" : "avgt",
         "threads" : 1,
         "forks" : 2,
@@ -541,7 +541,7 @@
     },
     {
         "jmhVersion" : "1.37",
-        "benchmark" : "com.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
+        "benchmark" : "jdk.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
         "mode" : "avgt",
         "threads" : 1,
         "forks" : 2,
@@ -721,7 +721,7 @@
     },
     {
         "jmhVersion" : "1.37",
-        "benchmark" : "com.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
+        "benchmark" : "jdk.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
         "mode" : "avgt",
         "threads" : 1,
         "forks" : 2,
@@ -901,7 +901,7 @@
     },
     {
         "jmhVersion" : "1.37",
-        "benchmark" : "com.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
+        "benchmark" : "jdk.m3.bench.M3TreeMapPublicBench.removeReinsertChurn",
         "mode" : "avgt",
         "threads" : 1,
         "forks" : 2,

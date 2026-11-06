@@ -50,7 +50,7 @@ static int m3_contains(
 
 
 JNIEXPORT jcharArray JNICALL
-Java_com_m3_fs_M3NativeContent_nativeMaterializeUtf16Segments(
+Java_jdk_m3_fs_M3NativeContent_nativeMaterializeUtf16Segments(
     JNIEnv *env,
     jclass type,
     jobjectArray parents,
@@ -145,7 +145,7 @@ Java_com_m3_fs_M3NativeContent_nativeMaterializeUtf16Segments(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3NativeContent_nativeEqualDirect(
+Java_jdk_m3_fs_M3NativeContent_nativeEqualDirect(
     JNIEnv *env,
     jclass type,
     jobject left,
@@ -201,7 +201,7 @@ Java_com_m3_fs_M3NativeContent_nativeEqualDirect(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3NativeContent_nativeGrepSegments(
+Java_jdk_m3_fs_M3NativeContent_nativeGrepSegments(
     JNIEnv *env,
     jclass type,
     jobject corpus,

@@ -23,8 +23,8 @@ import sys
 import tarfile
 
 
-SCHEMA = "synexia.evidence.bundle/1"
-PLAN_SCHEMA = "synexia.evidence.package-plan/1"
+SCHEMA = "m3.evidence.bundle/1"
+PLAN_SCHEMA = "m3.evidence.package-plan/1"
 CHUNK_BYTES = 512 * 1024
 MANIFEST_BYTES = 240 * 1024
 PART_BYTES = 1024 * 1024
@@ -424,7 +424,7 @@ def estimate(inventory: Inventory, plan_path: Path) -> dict:
     compressed = sum(len(gzip.compress(data, compresslevel=9, mtime=0))
                      for data in inventory.objects.values())
     metadata = sum(len(gzip.compress(data, compresslevel=9, mtime=0)) for _, data in members)
-    return {"schema": "synexia.evidence.package-estimate/1", "mode": "READ_ONLY_ESTIMATE",
+    return {"schema": "m3.evidence.package-estimate/1", "mode": "READ_ONLY_ESTIMATE",
             "proofGatesExecuted": False, "archivesCreated": False,
             "planSHA256": sha(plan_path.read_bytes()), "plan": inventory.plan,
             "summary": inventory.summary(), "lanes": inventory.lanes,
@@ -498,7 +498,7 @@ def pack(inventory: Inventory, plan_path: Path) -> dict:
     if len(index_data) > PART_BYTES:
         raise ValueError("Top-level bundle index exceeds the fixed byte limit")
     write_new(out / "BUNDLE.json", index_data)
-    return {"schema": "synexia.evidence.package-result/1", "status": "PACKAGED_REVIEW_EVIDENCE",
+    return {"schema": "m3.evidence.package-result/1", "status": "PACKAGED_REVIEW_EVIDENCE",
             "bundle": str(out), "indexSHA256": sha(index_data), "indexBytes": len(index_data),
             "archiveParts": len(parts), "archiveBytes": sum(len(data) for data, _ in parts),
             "summary": inventory.summary(), "proofGatesExecuted": False, "boundary": BOUNDARY}
@@ -593,7 +593,7 @@ def verify_bundle(bundle: Path, destination: Path | None) -> dict:
             path = destination / row["path"]
             write_new(path, data)
             path.chmod(row.get("mode", 0o644) & 0o777)
-    return {"schema": "synexia.evidence.bundle-integrity/1", "status": "ARCHIVE_INTEGRITY_VERIFIED",
+    return {"schema": "m3.evidence.bundle-integrity/1", "status": "ARCHIVE_INTEGRITY_VERIFIED",
             "bundleIndexSHA256": sha(index_data), "retainedPaths": len(records),
             "uniqueChunks": len(objects), "reconstructed": destination is not None,
             "proofGatesExecuted": False, "boundary": BOUNDARY}

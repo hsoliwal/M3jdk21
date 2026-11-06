@@ -8,7 +8,7 @@ on:
       - 'm3/eclipse/framework/**'
       - 'm3/collections/src/main/**'
       - 'm3/runtime-integration/recipes/m3-integrated-refinement-20261021/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-framework-forward-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -53,7 +53,7 @@ jobs:
           import hashlib
           import json
           import subprocess
-          historical = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
+          historical = Path('m3/eclipse/framework/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
           rows = [r.split('\t') for r in (historical/'manifest.tsv').read_text().splitlines() if r and not r.startswith('#')]
           assert len(rows) == 8
           assert [r[0] for r in rows] == sorted(r[0] for r in rows)
@@ -62,7 +62,7 @@ jobs:
               template = historical / source
               assert template.is_file() and not template.is_symlink(), template
               assert hashlib.sha256(template.read_bytes()).hexdigest() == wanted, template
-          crate = Path('m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021')
+          crate = Path('m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021')
           pins = json.loads((crate/'SOURCE_SEALS.json').read_text())
           sealed = {r['target_path'] for r in pins['files'] if r['target_path'].startswith('m3/eclipse/framework/src/')}
           tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/eclipse/framework/src'], text=True).splitlines())
@@ -85,7 +85,7 @@ jobs:
       - name: Execute current canonical SDK refusal and fixed-point gates
         run: |
           set -euxo pipefail
-          crate=m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021
+          crate=m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021
           parser_cp="$GITHUB_WORKSPACE/proof/resource-owner/classes:$GITHUB_WORKSPACE/m3/eclipse/framework/target/classes:$GITHUB_WORKSPACE/m3/eclipse/core-runtime/target/classes:$(cat proof/resource-owner/classpath.txt)"
           mvn -B -ntp -f "$crate/pom.xml" "-Dparser.classpath=$parser_cp" test 2>&1 | tee proof/current-recipe.txt
       - name: Check OSGi packaging and unchanged receiving sources
@@ -94,9 +94,9 @@ jobs:
           jar --create --file proof/m3-collections-osgi.jar --manifest m3/eclipse/framework/osgi/m3-collections.MF -C proof/resource-owner/classes .
           jar --describe-module --file proof/m3-collections-osgi.jar > proof/core-module-describe.txt
           unzip -p m3/eclipse/framework/target/m3-eclipse-framework-forward-0.1.0-SNAPSHOT.jar META-INF/MANIFEST.MF > proof/eclipse-bundle-manifest.txt
-          grep -q 'Bundle-Activator: com.m3.eclipse.framework.M3EclipseRuntimeActivator' proof/eclipse-bundle-manifest.txt
+          grep -q 'Bundle-Activator: jdk.m3.eclipse.framework.M3EclipseRuntimeActivator' proof/eclipse-bundle-manifest.txt
           unzip -p proof/m3-collections-osgi.jar META-INF/MANIFEST.MF > proof/collections-bundle-manifest.txt
-          grep -q 'Export-Package: com.m3.collections' proof/collections-bundle-manifest.txt
+          grep -q 'Export-Package: jdk.m3.collections' proof/collections-bundle-manifest.txt
           git diff --exit-code -- m3/eclipse/framework/src m3/collections/src/main
       - name: Retain exact-head evidence including failures
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -109,4 +109,4 @@ jobs:
             m3/eclipse/framework/recipe/target/surefire-reports/
             m3/eclipse/framework/target/surefire-reports/
             m3/eclipse/core-runtime/target/surefire-reports/
-            m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/surefire-reports/
+            m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/surefire-reports/

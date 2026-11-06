@@ -1,0 +1,659 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< m3.intake:commons-net >------------------------
+[INFO] Building commons-net 3.11.1-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ commons-net ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [commons-net] Resolving Poms...
+[INFO] Project [commons-net] Parsing source files
+[WARNING] There were problems parsing some source files, run with --errors to see full stack traces
+[WARNING] There were problems parsing m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPClientConfig.java
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\bsd\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\bsd\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.bsd, newPackageName=com.m3.lib.net.bsd, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\bsd\RCommandClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\bsd\RCommandClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.bsd, newPackageName=com.m3.lib.net.bsd, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\bsd\RExecClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\bsd\RExecClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.bsd, newPackageName=com.m3.lib.net.bsd, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\bsd\RLoginClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\bsd\RLoginClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.bsd, newPackageName=com.m3.lib.net.bsd, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\chargen\CharGenTCPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\chargen\CharGenTCPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.chargen, newPackageName=com.m3.lib.net.chargen, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\chargen\CharGenUDPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\chargen\CharGenUDPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.chargen, newPackageName=com.m3.lib.net.chargen, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\chargen\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\chargen\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.chargen, newPackageName=com.m3.lib.net.chargen, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\DatagramSocketClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\DatagramSocketClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\DatagramSocketFactory.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\DatagramSocketFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\daytime\DaytimeTCPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\daytime\DaytimeTCPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.daytime, newPackageName=com.m3.lib.net.daytime, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\daytime\DaytimeUDPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\daytime\DaytimeUDPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.daytime, newPackageName=com.m3.lib.net.daytime, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\daytime\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\daytime\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.daytime, newPackageName=com.m3.lib.net.daytime, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\DefaultDatagramSocketFactory.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\DefaultDatagramSocketFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\DefaultSocketFactory.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\DefaultSocketFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\discard\DiscardTCPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\discard\DiscardTCPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.discard, newPackageName=com.m3.lib.net.discard, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\discard\DiscardUDPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\discard\DiscardUDPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.discard, newPackageName=com.m3.lib.net.discard, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\discard\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\discard\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.discard, newPackageName=com.m3.lib.net.discard, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\echo\EchoTCPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\echo\EchoTCPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.discard, newPackageName=com.m3.lib.net.discard, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.echo, newPackageName=com.m3.lib.net.echo, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\echo\EchoUDPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\echo\EchoUDPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.discard, newPackageName=com.m3.lib.net.discard, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.echo, newPackageName=com.m3.lib.net.echo, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\echo\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\echo\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.echo, newPackageName=com.m3.lib.net.echo, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\finger\FingerClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\finger\FingerClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.finger, newPackageName=com.m3.lib.net.finger, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\finger\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\finger\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.finger, newPackageName=com.m3.lib.net.finger, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\Configurable.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\Configurable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\DeflateSocket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\DeflateSocket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\DelegateSocket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\DelegateSocket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\DurationUtils.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\DurationUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTP.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTP.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPCmd.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPCmd.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPCommand.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPConnectionClosedException.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPConnectionClosedException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPFile.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPFile.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPFileEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPFileEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPFileEntryParserImpl.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPFileEntryParserImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPFileFilter.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPFileFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPFileFilters.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPFileFilters.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPHTTPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPHTTPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPListParseEngine.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPListParseEngine.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPReply.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPReply.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPSClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPSClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPSCommand.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPSCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPSServerSocketFactory.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPSServerSocketFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPSSocketFactory.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPSSocketFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\FTPSTrustManager.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPSTrustManager.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\CompositeFileEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\CompositeFileEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\ConfigurableFTPFileEntryParserImpl.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\ConfigurableFTPFileEntryParserImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\DefaultFTPFileEntryParserFactory.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\DefaultFTPFileEntryParserFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\EnterpriseUnixFTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\EnterpriseUnixFTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\FTPFileEntryParserFactory.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\FTPFileEntryParserFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\FTPTimestampParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\FTPTimestampParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\FTPTimestampParserImpl.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\FTPTimestampParserImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\MacOsPeterFTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\MacOsPeterFTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\MLSxEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\MLSxEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\MVSFTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\MVSFTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\NetwareFTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\NetwareFTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\NTFTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\NTFTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\OS2FTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\OS2FTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\OS400FTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\OS400FTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\ParserInitializationException.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\ParserInitializationException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\RegexFTPFileEntryParserImpl.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\RegexFTPFileEntryParserImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\UnixFTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\UnixFTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\VMSFTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\VMSFTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ftp\parser\VMSVersioningFTPEntryParser.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\VMSVersioningFTPEntryParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp.parser, newPackageName=com.m3.lib.net.ftp.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\imap\AuthenticatingIMAPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\AuthenticatingIMAPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.imap, newPackageName=com.m3.lib.net.imap, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\imap\IMAP.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\IMAP.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.imap, newPackageName=com.m3.lib.net.imap, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\imap\IMAPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\IMAPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.imap, newPackageName=com.m3.lib.net.imap, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\imap\IMAPCommand.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\IMAPCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.imap, newPackageName=com.m3.lib.net.imap, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\imap\IMAPReply.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\IMAPReply.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.imap, newPackageName=com.m3.lib.net.imap, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\imap\IMAPSClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\IMAPSClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.imap, newPackageName=com.m3.lib.net.imap, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\imap\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.imap, newPackageName=com.m3.lib.net.imap, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\CopyStreamAdapter.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\CopyStreamAdapter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\CopyStreamEvent.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\CopyStreamEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\CopyStreamException.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\CopyStreamException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\CopyStreamListener.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\CopyStreamListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\CRLFLineReader.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\CRLFLineReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\DotTerminatedMessageReader.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\DotTerminatedMessageReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\DotTerminatedMessageWriter.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\DotTerminatedMessageWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\FromNetASCIIInputStream.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\FromNetASCIIInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\FromNetASCIIOutputStream.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\FromNetASCIIOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\SocketInputStream.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\SocketInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\SocketOutputStream.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\SocketOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\ToNetASCIIInputStream.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\ToNetASCIIInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\ToNetASCIIOutputStream.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\ToNetASCIIOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\io\Util.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\Util.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\MalformedServerReplyException.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\MalformedServerReplyException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\Article.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\Article.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\ArticleInfo.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\ArticleInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\ArticleIterator.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\ArticleIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\ArticlePointer.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\ArticlePointer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NewGroupsOrNewsQuery.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NewGroupsOrNewsQuery.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NewsgroupInfo.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NewsgroupInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NewsgroupIterator.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NewsgroupIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NNTP.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NNTP.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NNTPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NNTPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NNTPCommand.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NNTPCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NNTPConnectionClosedException.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NNTPConnectionClosedException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NNTPReply.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NNTPReply.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\NntpThreadContainer.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NntpThreadContainer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\ReplyIterator.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\ReplyIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\SimpleNNTPHeader.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\SimpleNNTPHeader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\Threadable.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\Threadable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\nntp\Threader.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\Threader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.nntp, newPackageName=com.m3.lib.net.nntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ntp\NTPUDPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\NTPUDPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ntp, newPackageName=com.m3.lib.net.ntp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ntp\NtpUtils.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\NtpUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ntp, newPackageName=com.m3.lib.net.ntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ntp\NtpV3Impl.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\NtpV3Impl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ntp, newPackageName=com.m3.lib.net.ntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ntp\NtpV3Packet.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\NtpV3Packet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ntp, newPackageName=com.m3.lib.net.ntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ntp\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ntp, newPackageName=com.m3.lib.net.ntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ntp\TimeInfo.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\TimeInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ntp, newPackageName=com.m3.lib.net.ntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ntp\TimeStamp.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\TimeStamp.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ntp, newPackageName=com.m3.lib.net.ntp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\pop3\ExtendedPOP3Client.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\ExtendedPOP3Client.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.pop3, newPackageName=com.m3.lib.net.pop3, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\pop3\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.pop3, newPackageName=com.m3.lib.net.pop3, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\pop3\POP3.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.pop3, newPackageName=com.m3.lib.net.pop3, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\pop3\POP3Client.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3Client.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.pop3, newPackageName=com.m3.lib.net.pop3, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\pop3\POP3Command.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3Command.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.pop3, newPackageName=com.m3.lib.net.pop3, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\pop3\POP3MessageInfo.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3MessageInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.pop3, newPackageName=com.m3.lib.net.pop3, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\pop3\POP3Reply.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3Reply.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.pop3, newPackageName=com.m3.lib.net.pop3, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\pop3\POP3SClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3SClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.pop3, newPackageName=com.m3.lib.net.pop3, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\PrintCommandListener.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\PrintCommandListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ProtocolCommandEvent.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ProtocolCommandEvent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ProtocolCommandListener.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ProtocolCommandListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.ftp, newPackageName=com.m3.lib.net.ftp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\ProtocolCommandSupport.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ProtocolCommandSupport.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\AuthenticatingSMTPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\AuthenticatingSMTPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\RelayPath.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\RelayPath.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\SimpleSMTPHeader.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\SimpleSMTPHeader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\SMTP.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\SMTP.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\SMTPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\SMTPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\SMTPCommand.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\SMTPCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\SMTPConnectionClosedException.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\SMTPConnectionClosedException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\SMTPReply.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\SMTPReply.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\smtp\SMTPSClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\SMTPSClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.smtp, newPackageName=com.m3.lib.net.smtp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\SocketClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\SocketClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\EchoOptionHandler.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\EchoOptionHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\InvalidTelnetOptionException.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\InvalidTelnetOptionException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\SimpleOptionHandler.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\SimpleOptionHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\SuppressGAOptionHandler.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\SuppressGAOptionHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\Telnet.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\Telnet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TelnetClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TelnetCommand.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TelnetInputListener.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetInputListener.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TelnetInputStream.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TelnetNotificationHandler.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetNotificationHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TelnetOption.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetOption.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TelnetOptionHandler.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetOptionHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TelnetOutputStream.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\TerminalTypeOptionHandler.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TerminalTypeOptionHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\telnet\WindowSizeOptionHandler.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\WindowSizeOptionHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.telnet, newPackageName=com.m3.lib.net.telnet, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTP.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTP.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPAckPacket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPAckPacket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPDataPacket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPDataPacket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPErrorPacket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPErrorPacket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPPacket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPPacket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPPacketException.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPPacketException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPReadRequestPacket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPReadRequestPacket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPRequestPacket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPRequestPacket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\tftp\TFTPWriteRequestPacket.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTPWriteRequestPacket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.tftp, newPackageName=com.m3.lib.net.tftp, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\time\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\time\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.time, newPackageName=com.m3.lib.net.time, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\time\TimeTCPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\time\TimeTCPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.time, newPackageName=com.m3.lib.net.time, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\time\TimeUDPClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\time\TimeUDPClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.time, newPackageName=com.m3.lib.net.time, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net, newPackageName=com.m3.lib.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\Base64.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\Base64.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\Charsets.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\Charsets.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\KeyManagerUtils.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\KeyManagerUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.io, newPackageName=com.m3.lib.net.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\ListenerList.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\ListenerList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\NetConstants.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\NetConstants.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\SSLContextUtils.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\SSLContextUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\SSLSocketUtils.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\SSLSocketUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\SubnetUtils.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\SubnetUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\util\TrustManagerUtils.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\util\TrustManagerUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.util, newPackageName=com.m3.lib.net.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\whois\package-info.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\whois\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.whois, newPackageName=com.m3.lib.net.whois, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\org\apache\commons\net\whois\WhoisClient.java to m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\whois\WhoisClient.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.finger, newPackageName=com.m3.lib.net.finger, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.net.whois, newPackageName=com.m3.lib.net.whois, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  19.940 s
+[INFO] Finished at: 2026-10-31T07:01:27+05:30
+[INFO] ------------------------------------------------------------------------

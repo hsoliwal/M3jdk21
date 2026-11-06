@@ -3,11 +3,11 @@
 
 Canonical recipe: [hsoliwal/com.synexia PR #14136](https://github.com/hsoliwal/com.synexia/pull/14136) (merged into `develop`).
 Dataset: `synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/list-diff-probe-20261029`.
-Source target: `m3/collections/src/main/java/com/m3/collections/M3ListDiff.java`.
+Source target: `m3/collections/src/main/java/jdk/m3/collections/M3ListDiff.java`.
 Exact preimage Git blob: `a5b22ab394e609c40a28243e368f65d0cc269271`.
 Source SHA-256 (before): `e285357c40f9310af676a85a60bce98e752a5c037f2d0e4228109688a242c10e`.
-Source SHA-256 (candidate): `fc3b925f70d1611bf80ad0f95786cc95c8908cf535a733eb54f9b3d663e23c56`.
-Added test SHA-256: `3af07ee00f8161c8159c6a5fbb92304f6682db36a5384a6751528892426b4ae6`.
+Source SHA-256 (candidate): `22aac16e36541365d96ca4f564b434245666464a5674693aa6bb016f9940b778`.
+Added test SHA-256: `3770a997f860ca279cadff740a02cfb115847ecebd60657f3e94f472baaa24e7`.
 Base M3JDK21 master commit: `5860598b515885ebc2275f6552d9a5a1348fdb15`.
 
 This receiving draft places the byte-for-byte canonical **authored postimage template** and JUnit test into an isolated PR; it is **not yet an SDK-emitted receipt**. Actual Maven/OpenRewrite run, fixed point and exact target JUnit must execute before any merge. It must be reconciled if the source, canonical recipe, or base branch changes.

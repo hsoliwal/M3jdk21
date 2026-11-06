@@ -25,9 +25,9 @@
   "plan": {
     "path": "m3/tooling/name-contract/name-plan.json",
     "beforeBlob": "062f50d0e0fa13282640c82880723ba7f50a362c",
-    "afterBlob": "bf084df4e1941bc8e48e001524b0e790bcf2dfba",
+    "afterBlob": "ed9b8bbbf31d81483c42022b4fdc947abc7df5f7",
     "beforeSha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",
-    "afterSha256": "630d9591eecb08be780ed8ccdb2b165e2ca70303c75fde6283b9d4f2f8a93793"
+    "afterSha256": "88438261938bea14f49f3c993b9cce7161c5844649960df335cdf963dba7475a"
   },
   "invariants": {
     "unchangedOtherRecords": 70,

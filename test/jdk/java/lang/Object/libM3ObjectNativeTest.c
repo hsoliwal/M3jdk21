@@ -23,10 +23,11 @@
  */
 
 #include <jni.h>
+#include "jni_util.h"
+#include "m3_object.h"
 
-/* Exercise the actual product bridge, including with a patched stock JDK.
- * This does not qualify the installed exports of a rebuilt libjava. */
-#include "../../../../../src/java.base/share/native/libjava/M3Object.c"
+/* Link against the target JDK's libjava. The notification calls below must
+ * resolve to its installed bridge; no bridge implementation is compiled here. */
 
 /* These fixed-field fixture writes are called by one serialized producer.
  * Separate Get/Set JNI calls are not advertised as atomic old/new capture. */
@@ -42,7 +43,8 @@ Java_M3ObjectNativeTest_writeReference(JNIEnv *env, jclass test_class,
 
     (void)test_class;
     if (source == NULL) {
-        return m3_object_throw(env, "java/lang/NullPointerException", "source");
+        JNU_ThrowNullPointerException(env, "source");
+        return JNI_FALSE;
     }
     field = (*env)->GetFieldID(env, declaring_type, "reference",
                               "Ljava/lang/Object;");
@@ -74,7 +76,8 @@ Java_M3ObjectNativeTest_writeValue(JNIEnv *env, jclass test_class,
 
     (void)test_class;
     if (source == NULL) {
-        return m3_object_throw(env, "java/lang/NullPointerException", "source");
+        JNU_ThrowNullPointerException(env, "source");
+        return JNI_FALSE;
     }
     field = (*env)->GetFieldID(env, declaring_type, "value", "I");
     if (field == NULL) {
@@ -102,7 +105,7 @@ Java_M3ObjectNativeTest_storeReferenceOnly(JNIEnv *env, jclass test_class,
 
     (void)test_class;
     if (source == NULL) {
-        m3_object_throw(env, "java/lang/NullPointerException", "source");
+        JNU_ThrowNullPointerException(env, "source");
         return;
     }
     declaring_type = (*env)->GetObjectClass(env, source);
@@ -126,7 +129,8 @@ Java_M3ObjectNativeTest_writeByte(JNIEnv *env, jclass test_class,
 
     (void)test_class;
     if (source == NULL) {
-        return m3_object_throw(env, "java/lang/NullPointerException", "source");
+        JNU_ThrowNullPointerException(env, "source");
+        return JNI_FALSE;
     }
     (*env)->GetByteArrayRegion(env, source, index, 1, &previous);
     if ((*env)->ExceptionCheck(env)) {
@@ -194,7 +198,7 @@ Java_M3ObjectNativeTest_mutateMany(JNIEnv *env, jclass test_class,
 
     (void)test_class;
     if (source == NULL) {
-        m3_object_throw(env, "java/lang/NullPointerException", "source");
+        JNU_ThrowNullPointerException(env, "source");
         return 0;
     }
     (*env)->GetByteArrayRegion(env, source, 0, 1, &value);

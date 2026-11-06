@@ -36,7 +36,7 @@ def copy(source, target):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    for name in ("baseline-root", "candidate", "stock-jdk", "m3-jdk", "eclipse-dir", "output"):
+    for name in ("baseline-root", "candidate", "stock-jdk", "m3jdk", "eclipse-dir", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
     args = parser.parse_args()
     args.output = args.output.resolve()
@@ -183,7 +183,7 @@ def main():
         receipt["frozen_stock_client_classes"] = frozen_classes
         receipt["new_client_classes"] = class_tree(clients)
         receipt["checks"] = counts
-        receipt["synexia_result_runtime"] = "NOT_RUN: exact IJobResult/AbstractJob/IAdaptable source review only; no stubbed substitute or whole context closure claim"
+        receipt["m3_result_runtime"] = "NOT_RUN: exact IJobResult/AbstractJob/IAdaptable source review only; no stubbed substitute or whole context closure claim"
         receipt["result"] = "PASS"
     except Exception as error:
         receipt["result"] = "FAIL"

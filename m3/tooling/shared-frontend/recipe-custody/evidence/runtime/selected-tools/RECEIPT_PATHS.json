@@ -2,7 +2,7 @@
   {
     "original_path": "/tmp/m3-selected-tools-final-v3-20261017/RECEIPT.json",
     "retained_path": "RECEIPT.json",
-    "sha256": "a215edc13ebd547a0a8905f0e9b97b050b59a898da17d21e6f7875a4dff28132",
+    "sha256": "45dc1574882bbb51e7c4b770298883b50b126f8d95a4613c1bd3242824c7f397",
     "bytes": 9896
   },
   {
@@ -26,7 +26,7 @@
   {
     "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/IMAGE_SHA256.tsv",
     "retained_path": "IMAGE_SHA256.tsv",
-    "sha256": "5f0f697854250a32b96195f6952b9e836a9709ef5cfd9f31cff07f31eb335701",
+    "sha256": "14e49e048101a817ea45b3ce7206ac4413c79110e7f05200784d471d70d25e1e",
     "bytes": 63809
   },
   {

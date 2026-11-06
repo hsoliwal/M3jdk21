@@ -8,4 +8,4 @@ description: >-
   m3-jni-sa-m3-field Java and text snapshot crates. Startup correctness only; no String semantics,
   HotSpot flag or public API change, and no runtime promotion.
 recipeList:
-  - com.m3.rewrite.backport.M3JniSaM3FieldRecipe
+  - jdk.m3.rewrite.backport.M3JniSaM3FieldRecipe

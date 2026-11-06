@@ -23,7 +23,7 @@
       "group": "org.slf4j",
       "optional": false,
       "scope": "compile",
-      "version": "1.7.36-m3-source-1"
+      "version": "2.0.12-m3-source-1"
     }
   ],
   "donor": "org.eclipse.jgit-5.13.3.202401111512-r",

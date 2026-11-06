@@ -125,7 +125,7 @@ public final class M3StringProjectionTest {
         }
     }
 
-    /** Test the internal M3String root itself on a source-built M3JDK21 image. */
+    /** Test the internal M3String root itself on a source-built M3JDK 21 image. */
     private static void directCanonicalM3Root() throws Exception {
         try {
             Field field = String.class.getDeclaredField("m3");
@@ -141,7 +141,7 @@ public final class M3StringProjectionTest {
             check(ROOT.get(projection) == internal, "original internal M3 owner retained");
         } catch (NoSuchFieldException stockJdkProofOnly) {
             // The independent Java 21 source proof runs without a patched HotSpot/AbstractString.
-            // The actual jtreg run on M3JDK21 must enter the direct M3 branch above.
+            // The actual jtreg run on M3JDK 21 must enter the direct M3 branch above.
         }
     }
 

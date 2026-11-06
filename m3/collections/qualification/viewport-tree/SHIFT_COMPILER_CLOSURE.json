@@ -3,7 +3,7 @@
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_pr": 12855,
   "canonical_commit": "f737d0ae82ad9ed4bf1b1e32bfd51c3cf1b5df99",
-  "source_recipe": "com.synexia.m3.ViewportTreeShiftClosure20261026",
+  "source_recipe": "jdk.internal.m3.ViewportTreeShiftClosure20261026",
   "source_dataset": "vpt-tree-shift-close-20261026",
   "product_pr": 1950,
   "workflow_path": ".github/workflows/m3-tree-shift-20261021.yml",

@@ -15,32 +15,32 @@
     {
       "bytes": 168321,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/00.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/d891ca1144a3cecc4ba6b7f9d7b69a28e0ae9ce9145ee92c15fd2bd7f292ea14.json",
-      "sha256": "d891ca1144a3cecc4ba6b7f9d7b69a28e0ae9ce9145ee92c15fd2bd7f292ea14"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/1b7addda2c8a5ab2664dbf8ee2e5a84bdf48748982f51cd19947a8f37a8379ad.json",
+      "sha256": "1b7addda2c8a5ab2664dbf8ee2e5a84bdf48748982f51cd19947a8f37a8379ad"
     },
     {
       "bytes": 45648,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/SOURCE_QUALIFIED_PR_READBACK.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/2cf0828a6f8f328914bd42c141e786ccbed3f9686e2b24594360fdd8f4c97f46.json",
-      "sha256": "2cf0828a6f8f328914bd42c141e786ccbed3f9686e2b24594360fdd8f4c97f46"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/802eea094082a17687c6bdebae60a334006754cec2caabeae0180b9f1e138bff.json",
+      "sha256": "802eea094082a17687c6bdebae60a334006754cec2caabeae0180b9f1e138bff"
     },
     {
       "bytes": 67426,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_FINAL_SOURCE_MEMBERSHIP.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/fcb41a8f07f58ca040cf4bcbd5a0c5f681e98f0b16c93b92722b4c878a1cfe5f.json",
-      "sha256": "fcb41a8f07f58ca040cf4bcbd5a0c5f681e98f0b16c93b92722b4c878a1cfe5f"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/e0dc8f4a76e3d3c9fe832ea0ed030a4fb741ba6f27566bcd8d5342ac211a45cc.json",
+      "sha256": "e0dc8f4a76e3d3c9fe832ea0ed030a4fb741ba6f27566bcd8d5342ac211a45cc"
     },
     {
       "bytes": 2802,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_FINAL_MERKLE_VERIFICATION.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/5f580f21b410deac5306d87fbbded0243a2ff737c7fe0ba663033992ac49ca95.json",
-      "sha256": "5f580f21b410deac5306d87fbbded0243a2ff737c7fe0ba663033992ac49ca95"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/b5e784421a45d9efdb0fddb8c231a5ea2502e6222538b271e32069fe05648558.json",
+      "sha256": "b5e784421a45d9efdb0fddb8c231a5ea2502e6222538b271e32069fe05648558"
     },
     {
       "bytes": 7764,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_V04_CHANGED_BODY_VERIFICATION.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/b07687c1a9573d5b05f9d3ebab9cc5dffa118c94033301f7617ef41da3334904.json",
-      "sha256": "b07687c1a9573d5b05f9d3ebab9cc5dffa118c94033301f7617ef41da3334904"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/b1276e9d8f1c1caa3b46f721db9dfae9739bc56033d61313640b7436aecc4262.json",
+      "sha256": "b1276e9d8f1c1caa3b46f721db9dfae9739bc56033d61313640b7436aecc4262"
     },
     {
       "bytes": 61777,
@@ -57,14 +57,14 @@
     {
       "bytes": 709661,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf.json",
-      "sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428.json",
+      "sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428"
     },
     {
       "bytes": 763300,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_REMAINING_OWNER_BODY_READBACKS.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679.json",
-      "sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922.json",
+      "sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "bytes": 2943,
@@ -81,23 +81,23 @@
     {
       "bytes": 38889,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/01.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/8a78c34d930c043b0d60dd862fc39516c04cc1341c9df309320a3e1509fafbc1.json",
-      "sha256": "8a78c34d930c043b0d60dd862fc39516c04cc1341c9df309320a3e1509fafbc1"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/9c98031f83bdcbf10e2eebf3c96b68dd12a12538367eff78371bfd3c8ee267c8.json",
+      "sha256": "9c98031f83bdcbf10e2eebf3c96b68dd12a12538367eff78371bfd3c8ee267c8"
     },
     {
       "bytes": 588056,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/02.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/7ad0a1d3297b15bd90b54faebc7d0fe1bc5c31f7b981afdf35162f3179b0515d.json",
-      "sha256": "7ad0a1d3297b15bd90b54faebc7d0fe1bc5c31f7b981afdf35162f3179b0515d"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/81b75b37e89c42834ab3d12cad3ccd50c48558e3a02a0db2a873a92358bfe444.json",
+      "sha256": "81b75b37e89c42834ab3d12cad3ccd50c48558e3a02a0db2a873a92358bfe444"
     },
     {
       "bytes": 4173,
       "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/03.json",
-      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/e65efc7c623c8b0a51572abcb0444523a6be92ebb3dddaed8df6419e50d1679f.json",
-      "sha256": "e65efc7c623c8b0a51572abcb0444523a6be92ebb3dddaed8df6419e50d1679f"
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/source-publication-custody/objects/50077b1d14d5440e8d7ec68624c06dc2ddadc4a3e6eee467805ef81c11b93f7a.json",
+      "sha256": "50077b1d14d5440e8d7ec68624c06dc2ddadc4a3e6eee467805ef81c11b93f7a"
     }
   ],
-  "publication_receipt_sha256": "a6250754c30fc2b3d901eb668217b0dad4c09847bbdc559f66ab715c135c5884",
+  "publication_receipt_sha256": "fedfc31343d38c8e94230c208b8f4bd246c50e4b72d2f1c191c456e608ca1d9f",
   "schema": "m3-jcc-source-custody-path-index/1",
   "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2"
 }

@@ -1,0 +1,106 @@
+{
+  "schema": "M3_MAVEN4_CANONICAL_QUALIFICATION_SUMMARY/1",
+  "status": "ACTUAL_RECIPE_AND_RECEIVER_PASS",
+  "active_phases": 7,
+  "active_target_paths": 7,
+  "retained_phase_resources": 8,
+  "inactive_phase": "m3-maven4-effective-20261021-002",
+  "recipe_tests": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "copier": {
+    "isolated_first_writes": 7,
+    "isolated_replay_writes": 0,
+    "strict_refusals": 4,
+    "actual_target_first_writes": 7,
+    "actual_target_replay_writes": 0
+  },
+  "actual_receiver": {
+    "pinned_fork": "2993571eedbe96e06a737eaa8ae47cf112b255de",
+    "source_reactor_modules": 19,
+    "original_model_builder_tests": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "frozen_baseline_checks": 13,
+    "emitted_owner_checks": 102,
+    "incumbent_maven3_jdt_shapes_equal": true,
+    "source_built_maven4_jars": 16,
+    "all_provider_jars": 90,
+    "only_public_addition": "maven4Effective",
+    "source_and_artifact_readbacks_unchanged": true
+  },
+  "historical_catalogue": {
+    "path": "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+    "sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+    "changed": false
+  },
+  "receipts": {
+    "failed_sdk": {
+      "path": "proof/sdk-001-offline/RESULT.json",
+      "sha256": "0626f2a962d01b73e4e11b44ee1e41a7e44beb933648904d70f509d74fba2a31"
+    },
+    "qualified_sdk": {
+      "path": "proof/sdk-002-offline/RESULT.json",
+      "sha256": "b5f4998aa91aa97b9b2e87a2feff682130f6d093dc8c39073d774bb14da1b8ee"
+    },
+    "recipe_proof": {
+      "path": "proof/sdk-002-offline/recipe-proof.tsv",
+      "sha256": "0aeeb32e19bc106a67d526fc260cc9fb34e641e336b31cd5517d686701b43a39"
+    },
+    "source_seals": {
+      "path": "SOURCE_SEALS.json",
+      "sha256": "ea99837eeb463fbc09858de4249c77130b4ef8ddd0df3468386badab53c6fcc4"
+    },
+    "successor_selection": {
+      "path": "provenance/successor-002/SELECTION.json",
+      "sha256": "fa9d1683c0c050dc3076fd5887b1d16013dda4fd6950d48616da7be098c8ebae"
+    },
+    "isolated_copier": {
+      "path": "proof/receiver-qualification-002/RESULT.json",
+      "sha256": "4f4200def8d06404642b2bf3ab2c2d5f954abc1d39955f2dc8049180ae1554c6"
+    },
+    "receiving_application": {
+      "path": "proof/receiving-application-001/RESULT.json",
+      "sha256": "38fd29cb70fa240e134f0c76c1b747df84c247e42eac6ae9b812fde9987be91b"
+    },
+    "actual_receiver_runtime": {
+      "path": "proof/receiver-runtime-001/PROOF.json",
+      "sha256": "5d6ef5cfb4b94a0dde33489b3048252a5cfbd9e328ce468a8aef711aa7c9fc16"
+    },
+    "authoring_evidence_intake": {
+      "path": "provenance/EVIDENCE_INTAKE.json",
+      "sha256": "e3028c88d3b7e04aa2eb7cadf37e224a66e59cd3bec89ccc87f42275ffc00d83"
+    },
+    "receiver_evidence_intake": {
+      "path": "provenance/RECEIVER_EVIDENCE_INTAKE.json",
+      "sha256": "16b55dafdf625fbd4e0ac43ddb310b6602cb56627bc6c4b45a38b81538f565e4"
+    },
+    "source_and_rights": {
+      "path": "provenance/SOURCE_AND_RIGHTS.json",
+      "sha256": "2330694cb081c7189f0c8bf6b9e8376adb0c2aeb508805a262d28a0aa2b13700"
+    }
+  },
+  "memory": {
+    "path": "memory/FINAL_RESULT-002.json",
+    "sha256": "1b75ee53ddfafabe04ba9cb08c3705a04a1060f1cb0cf4e74fa8900a5f24dd08",
+    "status": "PASS",
+    "admission": "PENDING",
+    "events": 2,
+    "conformance_checks": 129,
+    "control_cases": 32,
+    "actual_event_integrity_checks": 2,
+    "unique_event_artifacts_verified": 27,
+    "scope": "Two fresh Maven4 task events; historical unknowns explicit; malformed authoring draft retained as refused; no inherited integrated events or runtime admission."
+  },
+  "limits": [
+    "Java21 host model-provider proof; full parser/JMOD, custom JDK/HotSpot, and cross-platform gates remain separate.",
+    "No complete Maven distribution, plugin-realm or all-fork test promotion.",
+    "Maven3.9.11/JDT3.40.0 incumbent artifacts and74 external dependencies are cached, not claimed source-built.",
+    "No current custom JDT, Resolver, m2e, Tycho, mvnd, or live Eclipse workspace qualification.",
+    "No throughput/allocation improvement or GitHub CI pass claimed."
+  ]
+}

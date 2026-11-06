@@ -46,7 +46,8 @@ section requires a third-party notice.
 
 | Path | Covers | License | Status |
 | --- | --- | --- | --- |
-| `m3/vendor/synexia/third-party/mapbox-jni-ownership/LICENSE.txt` | the external `jni/ownership.hpp` wrapper referenced by the mirrored `shared_arrays.cpp` | ISC (Copyright 2016, Mapbox) | License text kept; the header itself is **referenced, not copied** (see `m3/vendor/synexia/README.md`, "Third-party JNI ownership license") |
+| `m3/vendor/m3/third-party/mapbox-jni-ownership/LICENSE.txt` | the external `jni/ownership.hpp` wrapper referenced by the mirrored `shared_arrays.cpp` | ISC (Copyright 2016, Mapbox) | License text kept; the header itself is **referenced, not copied** (see `m3/vendor/m3/README.md`, "Third-party JNI ownership license") |
+| `m3/vendor/third_party/jspecify-0.3.0/LICENSE` (directory removed) | jspecify 0.3.0 source module, formerly the `provided` dependency of `m3/vendor/third_party/jsoup-1.17.2` | Apache-2.0 | DROPPED 2026-10-30 (sanitize leaf 3, first repoint chain): jsoup 1.17.2 repointed to `jspecify-1.0.1` (`1.0.1-m3-source-1`), whose directory and LICENSE stay; javac `--release 21 -Xlint:all` gate of jspecify 1.0.1 then jsoup src/main against it: 0 errors; 17 files / 66,488 bytes removed; no pom, workflow or manifest names `jspecify-0.3.0` or `0.3.0-m3-source-1` any more (13 ledger rows remain in `.m3/task-crates/dependency-source-inline-20261010` and `JMOD_IMAGE.tsv`); chain record `m3/qualification/sanitize-20261030/REPOINT_RESULT.tsv` |
 
 ## 4. Donor dependencies deliberately never pulled
 

@@ -22,13 +22,13 @@ This is a correction to the existing `m3/collections` owner in M3JDK21. It adds 
 - Canonical recipe and qualification: `hsoliwal/com.synexia@ae862e424195f3a3fe6b66d27c1e74640a3aa139`.
 - Canonical crate: `synexia-openrewrite-recipes/recipe-crates/m3-collection-view-invalidation-20261020`.
 - Named Java recipe: `com.synexia.m3.CollectionViewInvalidation20261020`.
-- Transformation owner: unchanged `com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe`, Git blob `135a28d0cec9ea988607cdef6caa1f0fe5115d75`.
+- Transformation owner: unchanged `com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe`, Git blob `8d2dcf8311fd56406246998dc4218ae876a03d45`.
 - The existing unpublished Synexia convergence candidate was reused with exact hashes and attributed in the canonical source packet; its seven-target composite recipe was not applied to this two-file receiver.
 
 | Product source | Before Git blob | After Git blob |
 | --- | --- | --- |
-| `src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java` | `f82ffe51ababbdd9b663ceb2b113d7efc9e121e0` | `385d800b0dff1eb7f437e9d7958602f81339aee3` |
-| `src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java` | `a714930c92090556127fa2559c2d91f58fdae434` | `5556240c3f9c51878dcc565e1e29307d8575d220` |
+| `src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java` | `e03522cb007d2c851c29c3c16e5a866c04a6d98e` | `53780ab4a64394b8113c6b5e69d99d0ada8e6571` |
+| `src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java` | `bffb615c61bd8077e4037d40993f4f35f9088e8e` | `7ef9af07cecf65bae9ff0589a2e68bd51e54aca9` |
 
 Both paths are relative to `m3/collections/`. The public/protected API and native source/ABI remain unchanged. Java source materialization used actual attributed OpenRewrite Java trees and exact source seals, not a raw-text Java rewrite.
 

@@ -133,6 +133,6 @@ public class M3JdkRemoveIfMaskContracts {
             vector(random,trial);
         }
         failures();
-        System.out.println("M3_JDK_REMOVEIF_COLLECTION_CONTRACT_PASS checks="+checks);
+        System.out.println("M3JDK_REMOVEIF_COLLECTION_CONTRACT_PASS checks="+checks);
     }
 }

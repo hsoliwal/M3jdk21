@@ -20,37 +20,37 @@
   ],
   "postimages": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
-      "before_sha256": "4f38bc4801a488c9b3cf1c2ec848a3293ec6b89c91bf01e6f6a9334197bbc0fa",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+      "before_sha256": "f4aefc61e249ba55f44f47bd4ed793a4135b4b8c45717a0e18d74e65069ecd7e",
       "postimage_sha256": "9833b3d8d36287fe38025d9b7c38fb09e495f94f27c611af85433130f1e72ac2"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3HashMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3HashMap.java",
       "before_sha256": "ABSENT",
       "postimage_sha256": "2a368feb9c5a277bf3e307e14da6ee549595a4f4d3af7259f48ca084c930d591"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3HashSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3HashSet.java",
       "before_sha256": "ABSENT",
-      "postimage_sha256": "84c6d02ffeb50d826d2a9ec0a24d7b7e3c7bded13d6fb5f60c0e7c4a03489928"
+      "postimage_sha256": "dd8fd564fed0e52cd186b514f4e31de44cd05a750f0f1a08a4b06633b4699fb4"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java",
       "before_sha256": "fa3ee5d9d10a7ce5bdcb5c8c85d2e2cba90ecc0915ec891ea6e1627bf5e2aec8",
       "postimage_sha256": "82dd12c877780c61c3e8edf901262dbe27319c80e61593bf97d631ab6e21efb3"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
-      "before_sha256": "3e1145fdb6968bf40b369d56c932daf110d6b26c15b0cb6cf29309eff43dfaf9",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java",
+      "before_sha256": "9b7e8e9ed3eea9109c841bf0df457105fe44ea21c80023bea0db4e60b09b9262",
       "postimage_sha256": "cfd5ec8ad333416a47004825d41339e2b91ebf1a577bec2c3e383a2240417ff1"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3HashMapSetTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3HashMapSetTest.java",
       "before_sha256": "ABSENT",
       "postimage_sha256": "93ecdd9619b390a95e1531e9dd9eb6c0e2e64e4ed861f2e34fd7c86c32c1b7dc"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedHashBackshiftTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LinkedHashBackshiftTest.java",
       "before_sha256": "ABSENT",
       "postimage_sha256": "26038e1ad1bb21a811ab7e6d4df7bc2ad27e31795aad71413b12d962111620ed"
     }

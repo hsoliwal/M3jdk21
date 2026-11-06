@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 # Reuses the source-qualified Maven recipe and existing monitored hosted lane.
-name: M3 joined range directory recipe and original core contracts
+name: M3 historical Joined reference replay and original core contracts
 on:
   pull_request:
     paths:
@@ -10,10 +10,10 @@ on:
       - 'm3/core/**'
       - 'm3/build.sh'
       - 'm3/lexicon/english-demo.txt'
-      - 'm3/lexicon/synexia-number-target-map.tsv'
-      - 'm3/lexicon/synexia-precompute-field-map.tsv'
-      - 'm3/lexicon/synexia-source-manifest.tsv'
-      - 'm3/lexicon/synexia-word-source-revisions.tsv'
+      - 'm3/lexicon/m3-number-target-map.tsv'
+      - 'm3/lexicon/m3-precompute-field-map.tsv'
+      - 'm3/lexicon/m3-source-manifest.tsv'
+      - 'm3/lexicon/m3-word-source-revisions.tsv'
 permissions:
   contents: read
 concurrency:
@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   joined-range-directory:
-    name: Reversible range atom and matched complete core build
+    name: Historical Joined reference, reversible atoms and original core contracts
     if: github.repository == 'hsoliwal/M3jdk21' && github.event.pull_request.head.repo.full_name == 'hsoliwal/M3jdk21'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -72,7 +72,7 @@ jobs:
               f.write("java="+str(java)+"\npython="+str(python)+"\npython-bin="+str(python.parent)+"\ncc="+str(gcc)+"\n")
 
           PY
-      - name: Narrow exact-head checkout
+      - name: Narrow pinned historical reference checkout
         env:
           M3_PROOF_ROOT: ${{ runner.temp }}/m3-joined-range-directory-${{ github.run_id }}-${{ github.run_attempt }}
           M3_SOURCE_ROOT: ${{ github.workspace }}/m3-joined-range-directory-source
@@ -85,7 +85,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           path: m3-joined-range-directory-source
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: '1a79e669ec536ac45bf7a1566596aa05977bf18b'
           fetch-depth: 1
           fetch-tags: false
           lfs: false
@@ -99,11 +99,11 @@ jobs:
             /m3/core/
             /m3/build.sh
             /m3/lexicon/english-demo.txt
-            /m3/lexicon/synexia-number-target-map.tsv
-            /m3/lexicon/synexia-precompute-field-map.tsv
-            /m3/lexicon/synexia-source-manifest.tsv
-            /m3/lexicon/synexia-word-source-revisions.tsv
-      - name: Qualify exact recipe outputs and unchanged original core contracts
+            /m3/lexicon/m3-number-target-map.tsv
+            /m3/lexicon/m3-precompute-field-map.tsv
+            /m3/lexicon/m3-source-manifest.tsv
+            /m3/lexicon/m3-word-source-revisions.tsv
+      - name: Qualify pinned historical recipe and original core contracts
         shell: bash
         env:
           M3_PROOF_ROOT: ${{ runner.temp }}/m3-joined-range-directory-${{ github.run_id }}-${{ github.run_attempt }}
@@ -119,7 +119,7 @@ jobs:
           M3_PYTHON: ${{ steps.preflight.outputs.python }}
           M3_PYTHON_BIN: ${{ steps.preflight.outputs.python-bin }}
           M3_QUALIFICATION_ID: m3-joined-range-directory-${{ github.run_id }}-${{ github.run_attempt }}
-          EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          EXPECTED_SOURCE_SHA: '1a79e669ec536ac45bf7a1566596aa05977bf18b'
           GIT_OPTIONAL_LOCKS: '0'
           GIT_NO_LAZY_FETCH: '1'
           GIT_TERMINAL_PROMPT: '0'
@@ -424,10 +424,10 @@ jobs:
                   external+=sorted((sdk/"target/surefire-reports").glob("TEST-*.xml"))
                   external+=sorted((sdk/"target/surefire-reports").glob("*.txt"))
                   external+=[sdk/"target/authoring-sdk-receipt.json",sdk/"target/authoring-recipe-test-counters.json",qualifier.parent/"source-binding.json"]
-                  external+=[sdk/"target/emitted/forward/m3/core/src/com/m3/text/JoinedM3StringPiece.java",sdk/"target/emitted/inverse/m3/core/src/com/m3/text/JoinedM3StringPiece.java"]
+                  external+=[sdk/"target/emitted/forward/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",sdk/"target/emitted/inverse/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java"]
                   runtime=root/"joined-range-runtime"
                   external+=sorted(runtime.glob("*.log"))+sorted(runtime.glob("*.json"))+sorted(runtime.glob("*.jsonl"))
-                  aliases={sdk/"target/emitted/forward/m3/core/src/com/m3/text/JoinedM3StringPiece.java":"emitted-forward-JoinedM3StringPiece.java",sdk/"target/emitted/inverse/m3/core/src/com/m3/text/JoinedM3StringPiece.java":"emitted-inverse-JoinedM3StringPiece.java"}
+                  aliases={sdk/"target/emitted/forward/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java":"emitted-forward-JoinedM3StringPiece.java",sdk/"target/emitted/inverse/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java":"emitted-inverse-JoinedM3StringPiece.java"}
                   selected=present+[p for p in external if p.is_file()]
                   if any(not p.is_file() or any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
                   by_name={}

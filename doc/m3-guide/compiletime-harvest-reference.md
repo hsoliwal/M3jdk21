@@ -46,7 +46,7 @@ inputs, not hostile CLI or image/TSV streams.
 
 ## Harvester inputs and exact versus sampled work
 
-[`M3ConstantRegexHarvester`](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexHarvester.java)
+[`M3ConstantRegexHarvester`](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexHarvester.java)
 accepts:
 
 | Option | Default | Meaning |
@@ -167,7 +167,7 @@ not successful parsing, authenticity or runtime installation.
 
 ## Differential inputs and comparison domains
 
-[`M3ConstantRegexDifferential`](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexDifferential.java)
+[`M3ConstantRegexDifferential`](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexDifferential.java)
 accepts `--harvest DIR` (default `target/constant-regex`), `--rounds N` (5)
 and `--reps N` (8). Reps is mutable static state assigned by main. This CLI
 is intended as one serial run, not concurrent invocations inside one JVM.
@@ -298,19 +298,19 @@ can leave a partial crate. The manifest's additive ABSENT rows describe recipe
 metadata, not the seal script's filesystem effects. It does not analyze regex
 correctness. Both scripts were inspected as source only and remain **NOT_RUN**.
 
-The pinned [crate manifest](../../m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv)
+The pinned [crate manifest](../../m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv)
 contains 29 Java targets: 19 compiletime production owners, three residency
 annotations and seven test/fixture files. Those copies are not extra source
-owners in the 19-row package denominator. The [recipe wrapper](../../m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java)
+owners in the 19-row package denominator. The [recipe wrapper](../../m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java)
 delegates to the hash-pinned snapshot recipe and explicitly returns false for
 both bootstrapPromotionAuthority and semanticAuthority.
 
-Its [two test methods](../../m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java)
+Its [two test methods](../../m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java)
 assert materialization/fixed point and the wrapper's no-authority flags; they
 were read, **NOT_RUN**, and do not execute harvest/gate semantics. The complete
 compiletime project test tree contains four JUnit classes and three fixtures;
 there is no dedicated Harvester/Differential test class there. The four
-[image tests](../../m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ConstantRegexImageTest.java)
+[image tests](../../m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ConstantRegexImageTest.java)
 are bounded dependency tests, not end-to-end CLI or receipt-integrity proof.
 
 Public Apache port sources, image data, custody resources and a future GPL+CPE
@@ -321,5 +321,5 @@ license/provenance input, build profile, recipe authority or runtime admission.
 
 | Source owner | Git blob |
 | --- | --- |
-| [M3ConstantRegexHarvester](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexHarvester.java) | `d2d957060725e06a330fe7097b3b0a477c4e159f` |
-| [M3ConstantRegexDifferential](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexDifferential.java) | `60c2a55cf818c809bb5f1dd4a61df2f4e3ffb215` |
+| [M3ConstantRegexHarvester](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexHarvester.java) | `82bf34b941573dab31b7850acf9058f97ef8c0e7` |
+| [M3ConstantRegexDifferential](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexDifferential.java) | `cf569162caf181495486bacbb1f2a473ccae81d7` |

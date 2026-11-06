@@ -16,10 +16,10 @@ PHASES = ('INVENTORY', 'ATOMIZE', 'PATTERNIZE', 'ARRAYIFY', 'ALGORITHM_COMPARE',
 REQUIRED = ('JDK_M3SDK', 'GUAVA', 'ECLIPSE_COLLECTIONS', 'APACHE_COMMONS_COLLECTIONS',
             'SPRING', 'SWIFT_COLLECTIONS', 'PCOLLECTIONS', 'OTHER_COLLECTION_FORKS')
 RECIPE_OWNERS = {
-    'INVENTORY': 'com.synexia.rewrite.M3EveryModuleAtomPatternInventoryRecipe',
-    'ATOMIZE': 'com.synexia.rewrite.M3AtomizeRecipe',
-    'PATTERNIZE': 'com.synexia.rewrite.M3PatternizeRecipe',
-    'ALGORITHM_COMPARE': 'com.synexia.rewrite.M3AlgorithmRecipeFirstFullReviewRecipe',
+    'INVENTORY': 'jdk.internal.m3.rewrite.M3EveryModuleAtomPatternInventoryRecipe',
+    'ATOMIZE': 'jdk.internal.m3.rewrite.M3AtomizeRecipe',
+    'PATTERNIZE': 'jdk.internal.m3.rewrite.M3PatternizeRecipe',
+    'ALGORITHM_COMPARE': 'jdk.internal.m3.rewrite.M3AlgorithmRecipeFirstFullReviewRecipe',
 }
 
 

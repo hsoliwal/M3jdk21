@@ -7,7 +7,7 @@ M3JDK21 is the integrated product. The existing `M3LongIndexProjection` keeps it
 
 ## Planned composition and initial state
 
-PR #1451's original branch predates newer filtered endpoint and common-JNI work. The narrow algorithm remains applicable to stack #1554 at `987f743658055252bdaf056610a3a903eba0bfee` (on #1553), with identical projection preimage `317136e66200db1d8fc72d47ff9f8cf52b4566b5`. The separate interior-null correction already exists there. Do not replace its filtered-view class with the older #1451 postimage.
+PR #1451's original branch predates newer filtered endpoint and common-JNI work. The narrow algorithm remains applicable to stack #1554 at `987f743658055252bdaf056610a3a903eba0bfee` (on #1553), with identical projection preimage `09c10e2b4874f70ece8c1e4392a574db652945f7`. The separate interior-null correction already exists there. Do not replace its filtered-view class with the older #1451 postimage.
 
 This initial proof-only commit changes no production Java or C. The workflow executes the exact canonical Maven/OpenRewrite recipe, consumes actual Result output, and compiles against the pinned current stack with its real JNI helpers. A final comparison requires the receiving branch to retain the newer filtered/native owners plus the generated projection. It is expected to remain red until the subsequent forward-only source reconciliation; earlier successful steps must be reported separately from the overall conclusion.
 

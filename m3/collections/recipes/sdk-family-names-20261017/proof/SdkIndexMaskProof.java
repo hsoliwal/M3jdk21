@@ -12,8 +12,8 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-import com.m3.collections.M3IndexMaskCompactor;
-import com.m3.collections.M3LongIndexProjection;
+import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.M3LongIndexProjection;
 import java.util.*;
 
 /** Reuses actual unchanged M3 Java/JNI owners; no predicates or object payloads enter C. */

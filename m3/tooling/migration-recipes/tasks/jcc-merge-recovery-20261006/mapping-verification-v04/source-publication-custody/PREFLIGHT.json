@@ -4,17 +4,17 @@
   "source_input": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/final-source-packet-v01/source-publication-input.json",
     "bytes": 1156752,
-    "sha256": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613"
+    "sha256": "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d"
   },
   "publication_receipt": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/final-source-packet-v01/SOURCE_PUBLICATION_RECEIPT.json",
     "bytes": 12850,
-    "sha256": "a6250754c30fc2b3d901eb668217b0dad4c09847bbdc559f66ab715c135c5884"
+    "sha256": "fedfc31343d38c8e94230c208b8f4bd246c50e4b72d2f1c191c456e608ca1d9f"
   },
   "binder": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/bind_mapping.py",
     "bytes": 31555,
-    "sha256": "a0d3c129789ae96f014513d6671da7cb9b3e0c1f8b3e011d8a951b4591ebc432"
+    "sha256": "7004dfc94aea795a56ea8b1c377bdb83f33fb67b6b5d259391ff5bc985d845ec"
   },
   "validated_owner_count": 20,
   "validated_build_component_count": 1,
@@ -22,20 +22,20 @@
     {
       "path": "m3/docs/name-mapping.json",
       "bytes": 328312,
-      "sha256": "cd154a05fc8f5d40234e35cd30fc0dd7ced0e483bc7e416479758125b159e077",
-      "git_blob_sha1": "3dfd81017130ba33df9b8a73f630d148932b7a39"
+      "sha256": "d4f1a513c663906dd4ec498c46864568dbee9866b48b3a1e41f7240a58c04e1c",
+      "git_blob_sha1": "7b97f9376dbb885108a112dffb623b22a9821193"
     },
     {
       "path": "m3/docs/jcc-source-handoff.md",
       "bytes": 18828,
-      "sha256": "261be30cb15a192623c861087985b84c50942c4f8dc61dcc4e1154f995866150",
-      "git_blob_sha1": "f700b1f33588b59dc5479e2454ea350bc6b61498"
+      "sha256": "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858",
+      "git_blob_sha1": "5765f894e00e150139bf9569190048a028110744"
     },
     {
       "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "bytes": 255461,
-      "sha256": "e2535210d308ffc06b9c54243f31b5bcc55ba8797cf59584eb9cc929b012c7d7",
-      "git_blob_sha1": "5977a3a9d3dfa25d50c286f26589a076a8ba1967"
+      "sha256": "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09",
+      "git_blob_sha1": "73d2b00c9c46145f3081c33b4a5c31236928a803"
     },
     {
       "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",

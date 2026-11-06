@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary M3JDK21 packed change journal: bounded history, stale cursor, stable replay
+ * @summary M3JDK 21 packed change journal: bounded history, stale cursor, stable replay
  * @run main ChangeJournalTest
  */
 import java.util.ArrayList;

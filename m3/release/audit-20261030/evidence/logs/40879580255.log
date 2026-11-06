@@ -250,7 +250,7 @@ dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.1886835Z Cache restored successfully
 dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.1894171Z Cache restored from key: setup-java-Linux-x64-maven-881e7156f934d94fb3bac9165eb1944e6e6d6d5912b67b10e3d9c11ca9f85406
 dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.2332275Z ##[group]Run set -euo pipefail
 dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.2332672Z [36;1mset -euo pipefail[0m
-dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.2333089Z [36;1mbash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"[0m
+dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.2333089Z [36;1mbash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"[0m
 dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.2421309Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.2421684Z env:
 dag-proof	UNKNOWN STEP	2026-10-29T22:45:37.2422034Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64

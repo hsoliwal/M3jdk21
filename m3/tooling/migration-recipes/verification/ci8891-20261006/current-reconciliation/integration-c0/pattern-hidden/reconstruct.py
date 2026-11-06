@@ -6,7 +6,7 @@ p=argparse.ArgumentParser();p.add_argument('--portable',type=Path,required=True)
 def check(path,pin):
  b=path.read_bytes();assert len(b)==pin['bytes'] and hashlib.sha256(b).hexdigest()==pin['sha256'],path
 manifest=json.loads((root/'PORTABLE-MANIFEST.json').read_bytes());ready_row=next(r for r in manifest['files'] if r['portablePath']=='PROJECT-READY.json');check(root/'PROJECT-READY.json',ready_row)
-ready=json.loads((root/'PROJECT-READY.json').read_bytes());assert ready['schema']=='synexia.ph0.project-ready/1'
+ready=json.loads((root/'PROJECT-READY.json').read_bytes());assert ready['schema']=='m3.ph0.project-ready/1'
 check(root/'package_evidence.py',ready['archive']['packageOwner']);check(root/'bundle/BUNDLE.json',ready['archive']['bundle'])
 for argv in ([sys.executable,str(root/'package_evidence.py'),'verify','--bundle',str(root/'bundle')],[sys.executable,str(root/'package_evidence.py'),'extract','--bundle',str(root/'bundle'),'--output',str(out)]):subprocess.run(argv,check=True)
 project=out/ready['qualifiedProject']['logicalPrefix'];rows=ready['qualifiedProject']['files'];assert len(rows)==20

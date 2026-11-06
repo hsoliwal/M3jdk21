@@ -65,7 +65,7 @@ def run(name, command, expected=0):
 
 run('environment',[jdk/'bin/java','-version'])
 main=sorted((repo/'m3/collections/src/main/java').rglob('*.java'))
-base='m3/collections/src/test/java/com/m3/collections/'
+base='m3/collections/src/test/java/jdk/m3/collections/'
 contracts=[
     'M3FilteredListsContract','M3FilteredListsEdges','M3FilteredListsDeepCompositionProof',
     'M3FilteredListsReadonlyDepthProof','M3FilteredListsMaskBridgeProof',
@@ -78,8 +78,8 @@ contracts=[
     'M3IndexMaskCompactorSelfTest','M3NativeIndexRangeSelfTest',
     'M3RequiredExcludedMaskSelectorContract','M3RequiredExcludedMaskSelectorNativeContract']
 new_contracts=['M3FilteredListMutationProof','M3IndexOrderWindowContract']
-resource=candidate/'proof-src/com/m3/collections/M3IndexOrderWindowResourceProbe.java'
-resource_java=out/'probe-src/com/m3/collections/M3IndexOrderWindowResourceProbe.java'
+resource=candidate/'proof-src/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java'
+resource_java=out/'probe-src/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java'
 resource_java.parent.mkdir(parents=True,exist_ok=True)
 shutil.copyfile(resource,resource_java)
 
@@ -93,11 +93,11 @@ run('original-baseline-strict-compile',[jdk/'bin/javac','-Xlint:all','-Werror',
     repo/(base+'M3StrictFilteredSequencedContract.java')])
 run('original-baseline-strict-negative',[jdk/'bin/java','-Xmx256m','-cp',
     os.pathsep.join([str(raw/'tests'),str(raw/'classes')]),
-    'com.m3.collections.M3StrictFilteredSequencedContract'],1)
+    'jdk.m3.collections.M3StrictFilteredSequencedContract'],1)
 assert 'hidden sorted removeFirst must refuse even when empty wrong exception: java.util.NoSuchElementException' in (out/'original-baseline-strict-negative.log').read_text()
 
 reconciled='sequenced-reconciled-control'
-sequenced_owner=Path('m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java')
+sequenced_owner=Path('m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java')
 for label in [reconciled,'candidate']:
     image=out/label
     classes=image/'main-classes'; tests=image/'test-classes'; headers=image/'headers'
@@ -120,7 +120,7 @@ for label in [reconciled,'candidate']:
         test_sources.append(alternative if alternative.exists() else repo/relative)
     test_sources.extend(files/(base+name+'.java') for name in new_contracts)
     test_sources.append(resource_java)
-    test_sources.append(candidate/'proof-src/com/m3/collections/M3FilteredListMutationWitness.java')
+    test_sources.append(candidate/'proof-src/jdk/m3/collections/M3FilteredListMutationWitness.java')
     test_args=image/'tests.args'
     test_args.write_text('\n'.join(str(p) for p in test_sources)+'\n')
     (image/'TEST_SOURCES.json').write_text(json.dumps([
@@ -130,7 +130,7 @@ for label in [reconciled,'candidate']:
         '-d',tests,'@'+str(test_args)])
     for owner in ['M3FilteredLists','M3FilteredViews','M3LongIndexProjection','M3SlotMap',
                   'M3LinkedHashMap','M3TreeMap','M3WeakHashMap']:
-        run(label+'-api-'+owner,[jdk/'bin/javap','-classpath',classes,'-protected','-s','com.m3.collections.'+owner])
+        run(label+'-api-'+owner,[jdk/'bin/javap','-classpath',classes,'-protected','-s','jdk.m3.collections.'+owner])
 
 native=out/'native'; native.mkdir()
 run('native-compiler-version',['gcc','--version'])
@@ -139,13 +139,13 @@ croot=repo/'m3/collections/src/main/native/collections'
 headers=out/'candidate/headers'
 run('native-mask-build',['gcc','-std=c17','-O2','-Wall','-Wextra','-Werror','-pedantic','-fPIC','-shared',
     '-fsanitize=undefined','-fno-sanitize-recover=all',*include,
-    '-include',headers/'com_m3_collections_M3IndexMaskCompactor.h',
-    '-include',headers/'com_m3_collections_M3IndexMaskWindow.h',
+    '-include',headers/'jdk_m3_collections_M3IndexMaskCompactor.h',
+    '-include',headers/'jdk_m3_collections_M3IndexMaskWindow.h',
     croot/'m3_index_mask_compactor.c',croot/'m3_index_mask_window.c',
     '-o',native/'libm3_collections_mask.so'])
 run('native-address-build',['gcc','-std=c17','-O2','-Wall','-Wextra','-Werror','-pedantic','-fPIC','-shared',
     '-fsanitize=undefined','-fno-sanitize-recover=all',*include,
-    '-include',headers/'com_m3_collections_M3LongAddressKernel.h',
+    '-include',headers/'jdk_m3_collections_M3LongAddressKernel.h',
     croot/'m3_long_address_kernel.c','-o',native/'libm3_collections_address.so'])
 run('native-exports',['nm','-D','--defined-only',native/'libm3_collections_mask.so'])
 
@@ -155,13 +155,13 @@ def java(label, native_mode=False, interpreted=False):
             '-Djava.library.path='+str(path),'-cp',
             os.pathsep.join(str(out/label/p) for p in ['test-classes','main-classes'])]
 
-negative=run('baseline-mutation-negative',java(reconciled)+['com.m3.collections.M3FilteredListMutationProof'],1)
+negative=run('baseline-mutation-negative',java(reconciled)+['jdk.m3.collections.M3FilteredListMutationProof'],1)
 negative_log=(out/'baseline-mutation-negative.log').read_text()
 assert 'missing ConcurrentModificationException before mutation' in negative_log
 run('baseline-three-mutation-witness',java(reconciled)+[
-    'com.m3.collections.M3FilteredListMutationWitness','--expect-broken'])
+    'jdk.m3.collections.M3FilteredListMutationWitness','--expect-broken'])
 run('candidate-three-mutation-witness',java('candidate')+[
-    'com.m3.collections.M3FilteredListMutationWitness','--expect-fixed'])
+    'jdk.m3.collections.M3FilteredListMutationWitness','--expect-fixed'])
 
 # The current upstream mask oracle is already repaired and remains unchanged.
 # Its complete contract executes below on both owners; retain an independent
@@ -176,14 +176,14 @@ assert [row['index'] for row in truth if row['selected']]==[0,2,4]
 for name in contracts:
     if name=='M3RequiredExcludedMaskSelectorNativeContract':
         continue
-    before=run('baseline-'+name,java(reconciled)+['com.m3.collections.'+name])
-    after=run('candidate-'+name,java('candidate')+['com.m3.collections.'+name])
+    before=run('baseline-'+name,java(reconciled)+['jdk.m3.collections.'+name])
+    after=run('candidate-'+name,java('candidate')+['jdk.m3.collections.'+name])
     assert before==after, name+' original observation changed'
 
 for label in [reconciled,'candidate']:
-    run(label+'-order-java',java(label)+['com.m3.collections.M3IndexOrderWindowContract','--java'])
-    run(label+'-order-native',java(label,True)+['com.m3.collections.M3IndexOrderWindowContract','--native'])
-    run(label+'-order-missing',java(label)+['com.m3.collections.M3IndexOrderWindowContract','--missing'])
+    run(label+'-order-java',java(label)+['jdk.m3.collections.M3IndexOrderWindowContract','--java'])
+    run(label+'-order-native',java(label,True)+['jdk.m3.collections.M3IndexOrderWindowContract','--native'])
+    run(label+'-order-missing',java(label)+['jdk.m3.collections.M3IndexOrderWindowContract','--missing'])
 
 for name, mode in [
     ('M3FilteredListsMaskBridgeProof',['--native']),
@@ -192,10 +192,10 @@ for name, mode in [
     ('M3NativeIndexRangeSelfTest',['native']),
     ('M3RequiredExcludedMaskSelectorNativeContract',[]),
     ('M3IndexedMultiValueOccurrenceSelfTest',[])]:
-    run('candidate-native-'+name,java('candidate',True)+['com.m3.collections.'+name,*mode])
-run('candidate-native-compactor',java('candidate',True)+['com.m3.collections.M3IndexMaskCompactorSelfTest','--native'])
-run('candidate-mutation',java('candidate')+['com.m3.collections.M3FilteredListMutationProof'])
-run('candidate-mutation-interpreted',java('candidate',False,True)+['com.m3.collections.M3FilteredListMutationProof'])
+    run('candidate-native-'+name,java('candidate',True)+['jdk.m3.collections.'+name,*mode])
+run('candidate-native-compactor',java('candidate',True)+['jdk.m3.collections.M3IndexMaskCompactorSelfTest','--native'])
+run('candidate-mutation',java('candidate')+['jdk.m3.collections.M3FilteredListMutationProof'])
+run('candidate-mutation-interpreted',java('candidate',False,True)+['jdk.m3.collections.M3FilteredListMutationProof'])
 
 for owner in ['M3FilteredLists','M3FilteredViews','M3LongIndexProjection','M3SlotMap',
               'M3LinkedHashMap','M3TreeMap','M3WeakHashMap']:
@@ -204,7 +204,7 @@ bh=out/reconciled/'headers'; ch=out/'candidate/headers'
 assert sorted(p.name for p in bh.iterdir())==sorted(p.name for p in ch.iterdir())
 assert all(p.read_bytes()==(ch/p.name).read_bytes() for p in bh.iterdir())
 for label in [reconciled,'candidate']:
-    run(label+'-resources',java(label)+['com.m3.collections.M3IndexOrderWindowResourceProbe','sort','32768','100'])
+    run(label+'-resources',java(label)+['jdk.m3.collections.M3IndexOrderWindowResourceProbe','sort','32768','100'])
 
 (out/'RESULT.json').write_text(json.dumps({'status':'PASS','production_sources':len(main),
     'original_baseline_main_compilation':'PASS',

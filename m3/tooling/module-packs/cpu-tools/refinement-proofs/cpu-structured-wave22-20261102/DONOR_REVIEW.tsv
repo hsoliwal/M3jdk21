@@ -1,0 +1,7 @@
+category	platform	reference	semantic_comparison	license_source	decision
+interval_merge	LeetCode	#56 Merge Intervals	Closed inclusive boundaries not equivalent to M3 half-open membership	Problem reference	REFERENCE_ONLY_NO_COPY
+interval_insert	LeetCode	#57 Insert Interval	Input insertion differs from JNI batch predicate	Problem reference	REFERENCE_ONLY_NO_COPY
+interval_coverage	HackerRank	Gridland Metro	1-indexed inclusive cells require explicit conversion	Problem reference	REFERENCE_ONLY_NO_COPY
+interval_sweep	GeeksforGeeks	Merging overlapping intervals	General sweep shape; not same JNI lifetime/order	Problem reference	REFERENCE_ONLY_NO_COPY
+bitmap_index	GitHub	RoaringBitmap	Compressed distinct bitmaps not interval-pair query semantics	Apache-2.0	REFERENCE_ONLY_NO_COPY
+native_search	Synexia	Wave21 private m3_interval_single/m3_interval_batch	Exact same Java/JNI owner and binary fallback	Apache-2.0	REUSE_CANONICAL_SOURCE

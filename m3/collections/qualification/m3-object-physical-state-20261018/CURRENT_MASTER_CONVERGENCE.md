@@ -8,15 +8,15 @@ This is a source-preserving follow-up to [PR #1305](https://github.com/hsoliwal/
 
 - Frozen pre-convergence `master`: `d6d76b563050fc13c4fa79bc494edf29f1614b37`.
 - Original PR head: `4b9db5e063e900a2012b7f161cb3b7a492877c47`.
-- Current `M3ObjectIndexSnapshot.java` Git blob: `e2cff159750d9b7f45cd438a8d517aff8d5bff43`.
+- Current `M3ObjectIndexSnapshot.java` Git blob: `c32bb82f8348dcfe960794984b93a5ddc6823833`.
 - Original PR's source Git blob: `f2c20cd4ac57561f0a36d3a2a2c5fcc83f3ff8f8`.
 - Original recipe's SHA-256 pre/post pins remain in `RECEIVER.md`. They describe the historical qualified transformation, not the current-master bytes.
 
 The current owner already implements `filteredByPhysicalStatePlane(int[],int,int,Backend)` and its Java-only overload with the same physical-slot range check, `M3IndexPathMasks.select` delegation, stable-order `withRows` result and required/excluded full-width int masks. The current source has additional independently evolved code; it must **not** be replaced by the older PR source.
 
 The two original focused test files are already on `master` at exact identical Git blob IDs:
-- `M3ObjectPhysicalMaskSelfTest.java`: `01945ebc69137affa7ab3ef708fcbb0cd95a5c24`.
-- `M3ObjectPhysicalMaskTest.java`: `10931f3f8316b3cecd0f27cbf25e468175022b19`.
+- `M3ObjectPhysicalMaskSelfTest.java`: `53b115468935270c0b03702b89b3fe84ee712068`.
+- `M3ObjectPhysicalMaskTest.java`: `81a781a90a22fba34a6723b5fe2cf0cf83ec8208`.
 
 ## Recovered additive omissions
 

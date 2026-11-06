@@ -1,0 +1,8 @@
+date	stage	owner	before	result	evidence
+2026-11-02	DOC	Wave21 receiver	69dd6b5543950987920cf8fb4efe2de5096854bb	f7ba545e1f39e6b6f549510489847f667e62d889	README/source/donor/verification before production code
+2026-11-02	JAVA	M3IntIntervalSet + M3IntIntervalSetNative	ABSENT	0d9a773ce08a80dc95d155905ed36a96db94f08c	2 original canonical Java Git blobs exact
+2026-11-02	C17	m3_interval_set.c	ABSENT	af4cfa34f39672ebbcc55ea42eadd3c81ca6ebe8	1 original C17 Git blob exact
+2026-11-02	FIXTURE	Java/C oracles + 91-category catalogue	ABSENT	8c73cba3be019f5ec83b848f00942cc7221dd921	4 original Git blobs exact
+2026-11-02	STATIC	7 original target blobs	ABSENT	7/7 PASS	GitHub original source and manifest SHA-256 verified separately
+2026-11-02	RUNTIME	Java21/C17/JNI	NOT_RUN	CI_AUTHORED_PENDING	Never claim green before actual hosted steps
+2026-11-02	RELEASE	Maven/JMOD/jtreg/full reactor	NOT_RUN	HOLD	Native sidecar is not a packaged JMOD member

@@ -25,8 +25,8 @@ def run():
     args=cli.parse_args()
     root=args.root.resolve(strict=True)
     here=Path(__file__).resolve().parent
-    source='m3/collections/src/main/java/com/m3/collections/'
-    test='m3/collections/src/test/java/com/m3/collections/M3ZeroSlotCapacityContract.java'
+    source='m3/collections/src/main/java/jdk/m3/collections/'
+    test='m3/collections/src/test/java/jdk/m3/collections/M3ZeroSlotCapacityContract.java'
     manifest=(here/'SOURCE_MANIFEST.tsv').read_text().splitlines()
     rows=[line.split('\t') for line in manifest if line and not line.startswith('#')]
     if len(rows)!=3:raise AssertionError('expected three exact target sources')
@@ -52,12 +52,12 @@ def run():
         if r.returncode:raise AssertionError('Java21 compiler failed: '+r.stderr+r.stdout)
         for name in NAMES:
             actual=subprocess.run(['javap','-public','-s','-classpath',str(classes),
-                                    'com.m3.collections.'+name],text=True,capture_output=True,timeout=15)
+                                    'jdk.m3.collections.'+name],text=True,capture_output=True,timeout=15)
             if actual.returncode:raise AssertionError(actual.stderr)
             baseline=(here/(name+'-public.javap')).read_text()
             if actual.stdout!=baseline:raise AssertionError('public method ABI changed: '+name)
         test_run=subprocess.run(['java','-ea','-Xmx128m','-cp',str(classes),
-                    'com.m3.collections.M3ZeroSlotCapacityContract'],
+                    'jdk.m3.collections.M3ZeroSlotCapacityContract'],
                     text=True,capture_output=True,timeout=75)
         if test_run.returncode or 'PASS M3ZeroSlotCapacityContract' not in test_run.stdout:
             raise AssertionError('contract failed '+test_run.stdout+test_run.stderr)

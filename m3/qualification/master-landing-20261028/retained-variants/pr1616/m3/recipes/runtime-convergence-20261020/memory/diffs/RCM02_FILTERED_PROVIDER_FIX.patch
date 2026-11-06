@@ -1,5 +1,5 @@
---- before/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
-+++ after/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+--- before/m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java
++++ after/m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java
 @@ -7,6 +7,7 @@
  import java.util.Collection;
  import java.util.Collections;

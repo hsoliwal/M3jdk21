@@ -1,0 +1,46 @@
+package @PKG@;
+
+import static @PKG@.M3WebChecks.check;
+import static @PKG@.M3WebStates.*;
+
+/** Family contract of the animated values (pattern M3P-ANIMVALUE-1). */
+public final class M3AnimvalueChecks {
+	private M3AnimvalueChecks() {
+	}
+
+	public static void run(M3AnimvalueModel m) {
+		m.layout(360, 200);
+		M3WebPaint p = new M3WebPaint();
+		m.load("title;avatar;line;line");
+		check(m.mode == M3AnimvalueModel.TRANSITION || m.isAnimating(), "loops start on load");
+		for (int i = 0; i < 70; i++) {
+			m.tick(16);
+			m.paint(p);
+		}
+		m.setMax(0);
+		check(m.max() == 1, "max is at least 1");
+		m.setMax(100);
+		m.setProgress(140);
+		check(m.value(0) == 100, "progress clamps");
+		m.paint(p);
+		m.setProgress(0);
+		transition(m, p);
+		m.clear();
+		m.setProgress(5);
+	}
+
+	private static void transition(M3AnimvalueModel m, M3WebPaint p) {
+		check(m.eased() >= 0 && m.eased() <= 1000, "eased range");
+		m.setFocus(0);
+		m.key(KEY_ENTER, 0, 0);
+		for (int i = 0; i < 100 && m.tick(16); i++) {
+			m.paint(p);
+		}
+		check(m.mode != M3AnimvalueModel.TRANSITION || m.eased() == 1000, "transition reaches the end");
+		m.play();
+		for (int i = 0; i < 100 && m.tick(16); i++) {
+			m.paint(p);
+		}
+		check(m.mode != M3AnimvalueModel.TRANSITION || m.eased() == 0, "transition runs back");
+	}
+}

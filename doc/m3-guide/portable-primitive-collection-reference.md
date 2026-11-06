@@ -520,16 +520,16 @@ actual target tests, compiler/recipe/refusal execution, resource measurements an
 JDK/native/runtime qualification remain open. No generated custody inventory,
 sealed recipe payload, build/workflow configuration or receiving status is changed.
 
-[kind]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveKind.java
-[hash]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/com/m3/util/M3DenseHash.java
-[list]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveArrayList.java
-[deque]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveArrayDeque.java
-[intdeque]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/com/m3/util/M3IntArrayDeque.java
-[queue]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveMinMaxQueue.java
+[kind]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveKind.java
+[hash]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/jdk/m3/util/M3DenseHash.java
+[list]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveArrayList.java
+[deque]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveArrayDeque.java
+[intdeque]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/jdk/m3/util/M3IntArrayDeque.java
+[queue]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveMinMaxQueue.java
 [receiver]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/README.md
 [provenance]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/PROVENANCE.tsv
 [recipe]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/recipe.json
-[tests]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/test/java/com/m3/util/M3PrimitiveCollectionFacadesTest.java
+[tests]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/src/test/java/jdk/m3/util/M3PrimitiveCollectionFacadesTest.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/pom.xml
 [workflow]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/.github/workflows/m3-collection-port-wave1.yml
 [donorreview]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/collections/DONOR_REVIEW.tsv

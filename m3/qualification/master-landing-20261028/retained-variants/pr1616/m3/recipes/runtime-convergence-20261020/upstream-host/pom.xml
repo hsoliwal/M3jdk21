@@ -14,7 +14,7 @@ SPDX-License-Identifier: Apache-2.0
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <recipe.owner.root>${project.basedir}/../..</recipe.owner.root>
     <m3.crate.name>m3-deep-filter-list-20261017</m3.crate.name>
-    <m3.recipe.name>com.synexia.m3jdk.DeepFilteredListComposition20261017</m3.recipe.name>
+    <m3.recipe.name>jdk.internal.m3.m3jdk.DeepFilteredListComposition20261017</m3.recipe.name>
     <rewrite.version>8.17.1</rewrite.version>
   </properties>
   <dependencies>
@@ -29,10 +29,10 @@ SPDX-License-Identifier: Apache-2.0
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
         <configuration><includes>
-          <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3ScopeInference.java</include>
-          <include>com/synexia/rewrite/M3EditScope.java</include>
+          <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+          <include>jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
+          <include>jdk/internal/m3/rewrite/M3ScopeInference.java</include>
+          <include>jdk/internal/m3/rewrite/M3EditScope.java</include>
         </includes><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>

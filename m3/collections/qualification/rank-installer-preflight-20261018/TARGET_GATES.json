@@ -28,11 +28,11 @@
       "/workspace/scratch/004de33d31d2/jdk-work/rank-target-evidence/classes",
       "-h",
       "/workspace/scratch/004de33d31d2/jdk-work/rank-target-evidence/headers",
-      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java",
-      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
-      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
-      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
-      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/test/java/com/m3/collections/M3LongRankIndexSelfTest.java"
+      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java",
+      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java",
+      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
+      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
+      "/workspace/scratch/004de33d31d2/jdk-work/rank-target-candidate/m3/collections/src/test/java/jdk/m3/collections/M3LongRankIndexSelfTest.java"
     ],
     "exit_code": 0,
     "status": "PASSED",
@@ -45,7 +45,7 @@
       "-ea",
       "-cp",
       "/workspace/scratch/004de33d31d2/jdk-work/rank-target-evidence/classes",
-      "com.m3.collections.M3LongRankIndexSelfTest"
+      "jdk.m3.collections.M3LongRankIndexSelfTest"
     ],
     "exit_code": 0,
     "status": "PASSED",
@@ -84,7 +84,7 @@
       "-Djava.library.path=/workspace/scratch/004de33d31d2/jdk-work/rank-target-evidence/native",
       "-cp",
       "/workspace/scratch/004de33d31d2/jdk-work/rank-target-evidence/classes",
-      "com.m3.collections.M3LongRankIndexSelfTest"
+      "jdk.m3.collections.M3LongRankIndexSelfTest"
     ],
     "exit_code": 0,
     "status": "PASSED",

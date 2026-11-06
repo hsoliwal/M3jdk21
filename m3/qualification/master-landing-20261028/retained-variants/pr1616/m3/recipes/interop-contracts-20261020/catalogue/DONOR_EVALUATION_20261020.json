@@ -1,6 +1,6 @@
 {
   "schema": "m3-interop-donor-evaluation/1",
-  "recipe": "com.synexia.m3jdk.InteropContracts20261020",
+  "recipe": "jdk.internal.m3.m3jdk.InteropContracts20261020",
   "selection_scope": "Contract-preserving test/metadata correction only; no donor production source copied, no new production algorithm or runtime integration layer.",
   "commons_collections": {
     "coordinate": "org.apache.commons:commons-collections4:4.5.0",
@@ -25,7 +25,7 @@
     "correctness_evidence": [
       "apache-review/APACHE_PROBE_RECEIPT.json",
       "apache-review/apache-contract-probe.log",
-      "reports-13/java/TEST-com.m3.collections.interop.M3ApacheBagContractTest.xml"
+      "reports-13/java/TEST-jdk.m3.collections.interop.M3ApacheBagContractTest.xml"
     ],
     "complexity": "Independent fixture occurrence budget may take O(n*m) time and O(m+n) space for small bounded test states. It deliberately does not clone the production counted algorithm; no runtime speed claim."
   },
@@ -45,7 +45,7 @@
     "correctness_evidence": [
       "independent/SPRING_RECEIPT.json",
       "independent/spring-1.log",
-      "reports-13/native/TEST-com.m3.collections.interop.M3SpringArrayContractTest.xml"
+      "reports-13/native/TEST-jdk.m3.collections.interop.M3SpringArrayContractTest.xml"
     ],
     "complexity": "Only test observation changes; one execution of each donor/owner operation. No production complexity change or measured performance claim.",
     "derived_evidence": {
@@ -56,7 +56,7 @@
       "license_text": "licenses/Spring-6.2.0-LICENSE.txt"
     }
   },
-  "synexia_reuse": {
+  "m3_reuse": {
     "production": "Existing M3LibraryCollections factories, M3LibraryBindings resource loader, M3ArrayifiedIndexOps stable merge, M3IndexPathMasks/M3IndexMaskCompactor and M3 Apache/Spring owners remain unchanged by these13 targets.",
     "transformation": "Existing canonical four engines, M3TaskRecipeTest and receive.py are reused byte-for-byte; new named recipe identity and exact13 target resources only.",
     "owner_source_revision_note": "Seven of eight copied owner-source witnesses equal baseline2779; the received main recipe M3IndexMaskCompactor witness is pinned at d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97. The finite evidence source-origin map records exact revisions."

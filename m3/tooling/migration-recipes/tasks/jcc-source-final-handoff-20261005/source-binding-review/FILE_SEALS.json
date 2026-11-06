@@ -1,7 +1,7 @@
 {
   "INPUT_SEALS.json": {
     "bytes": 24961,
-    "sha256": "3e566919f1c576b36312744c2030db087f94befad10871dfd1e600fb8e120c7e"
+    "sha256": "81856ad0236be8f3cc94f696ceae92843cc68817dfe69baf20c81b5ce35cb8c6"
   },
   "REVIEW.md": {
     "bytes": 12537,
@@ -9,6 +9,6 @@
   },
   "SOURCE_FIELDS_AND_PROOFS.json": {
     "bytes": 64185,
-    "sha256": "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a"
+    "sha256": "d4fa5704926ea9becfd7fea3b73928183724b5e63ed1814ac9aa0d4521e7136f"
   }
 }

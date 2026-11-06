@@ -1,0 +1,16 @@
+old	new	status
+org.apache.commons.io.file.attribute	com.m3.lib.io.file.attribute	MOVE
+org.apache.commons.io.serialization	com.m3.lib.io.serialization	MOVE
+org.apache.commons.io.input.buffer	com.m3.lib.io.input.buffer	MOVE
+org.apache.commons.io.comparator	com.m3.lib.io.comparator	MOVE
+org.apache.commons.io.filefilter	com.m3.lib.io.filefilter	MOVE
+org.apache.commons.io.channels	com.m3.lib.io.channels	MOVE
+org.apache.commons.io.file.spi	com.m3.lib.io.file.spi	MOVE
+org.apache.commons.io.function	com.m3.lib.io.function	MOVE
+org.apache.commons.io.charset	com.m3.lib.io.charset	MOVE
+org.apache.commons.io.monitor	com.m3.lib.io.monitor	MOVE
+org.apache.commons.io.output	com.m3.lib.io.output	MOVE
+org.apache.commons.io.build	com.m3.lib.io.build	MOVE
+org.apache.commons.io.input	com.m3.lib.io.input	MOVE
+org.apache.commons.io.file	com.m3.lib.io.file	MOVE
+org.apache.commons.io	com.m3.lib.io	MOVE

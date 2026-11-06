@@ -1,0 +1,23 @@
+family	vendored_libraries	jdk_today	action	m3_owner	state
+number-parse	fastdoubleparser-0.9.0, fastdoubleparser-1.0.0, fastdoubleparser-1.0.90	jdk.internal.math.FloatingDecimal	INLINE_JAVA_BASE	jdk.internal.math.M3* (Double/Float parse)	DONE #2215 (600k differential identical, ~1.5x); next: jackson-core onto the JDK, drop the 3 copies; BigDecimal/BigInteger leaf
+hashing	zero-allocation-hashing (xxHash, CityHash, Murmur3, wyhash, FarmHash, MetroHash)	String/Arrays.hashCode only; no fast non-crypto hash API	JDK_SUPERSET_API + INLINE_JAVA_BASE	jdk.m3.hash API over jdk.internal.m3 kernels	NEXT
+compression	lz4-java, snappy-java, xz, commons-compress-1.26.0, commons-compress-1.27.1, dec (Brotli decoder)	java.util.zip (Deflate, GZIP, CRC32C)	JDK_SUPERSET_API (pure-Java codecs; JNI parts native-leaf)	java.util.zip superset / jdk.m3.compress	QUEUED
+binary-codec	commons-codec-1.17.1, commons-codec-1.22.1	java.util.Base64, java.util.HexFormat, java.security.MessageDigest	CONSUMERS_TO_JDK (recipe) + VERSION_DEDUP	JDK API (Base64, HexFormat); jdk.m3 for the rest (Soundex etc.)	QUEUED
+regex	re2j	java.util.regex (backtracking)	JDK_SUPERSET_API (linear-time engine selectable)	java.util.regex superset (M3 regex lane: regex-cursor, token regex)	QUEUED
+bytecode	asm-9.6, asm-9.10.1, asm-analysis, asm-tree, asm-util, byte-buddy, cglib, gizmo, jandex, classgraph	java.lang.classfile (JEP 457/466/484, final in 24)	JDK_SUPERSET_API (ClassFile API backport) then CONSUMERS_TO_JDK	java.lang.classfile in M3jdk21	IN_PROGRESS (jep484 workflows)
+native-access	jna-5.14.0, jna-5.18.1, jna-platform	java.lang.foreign (JEP 442/454, final in 22)	JDK_SUPERSET_API (FFM backport) then CONSUMERS_TO_JDK	java.lang.foreign in M3jdk21	QUEUED
+collections	eclipse-collections, eclipse-collections-api, guava, failureaccess, pcollections, agrona, caffeine, JavaEWAH, fastfilter	java.util collections	CONVERGE (one M3 collection model; peer session owns arrayify/fills)	jdk.m3 collections (m3/collections)	IN_PROGRESS (other lane)
+metrics	HdrHistogram, LatencyUtils, micrometer-core	none (JFR events)	JDK_SUPERSET_API	jdk.m3.metrics	QUEUED
+json	jackson-annotations x3, jackson-core x3, jackson-databind x3, jackson-datatype-jsr310 x2, jackson-module-parameter-names, jackson-dataformat-smile	none	KEEP_UPSTREAM + M3_FACADE (user decision) + VERSION_DEDUP	jdk.m3.json facade	QUEUED (FastDoubleParser 1.0.90 gap fixed by #2215 route)
+yaml-toml	snakeyaml-2.1, snakeyaml-2.2, snakeyaml-2.6, snakeyaml-engine, tomlj-1.1.1, tomlj-1.3.0, jackson-dataformat-yaml	none	KEEP_UPSTREAM + M3_FACADE + VERSION_DEDUP	jdk.m3.config facade	QUEUED
+csv	univocity-parsers, commons-csv, jackson-dataformat-csv	none	JDK_SUPERSET_API (superset of the three)	jdk.m3 CSV API	ATOMIZED (CSV_API_SUPERSET v1; synonym table next)
+search-nlp	lucene-core, lucene-analysis-common, lucene-queries, lucene-queryparser, lucene-sandbox, lucene-analysis-opennlp, opennlp-tools	none	KEEP_UPSTREAM + M3_FACADE	jdk.m3.search / jdk.m3.nlp facades	QUEUED (module pack nlp-search exists)
+graphics	(Skija absorbed)	none	FULL_ABSORB (user decision)	jdk.m3.graphics	DONE #2207/#2208; natives leaf 2 pending
+text-util	commons-lang3-3.14.0, commons-lang3-3.17.0, commons-text, commonmark, jsoup-1.17.2, jsoup-1.23.2	String, StringBuilder, java.text	CONSUMERS_TO_JDK where the JDK has it; M3 facade otherwise; VERSION_DEDUP	jdk.m3.text	QUEUED (lang3 dedup #2200)
+io-util	commons-io-2.15.1, commons-io-2.18.0, commons-net, commons-pool2	java.nio.file, java.net	CONSUMERS_TO_JDK + VERSION_DEDUP	JDK API	PARTIAL (#2189)
+logging	slf4j-api x3, slf4j-simple, commons-logging	System.Logger (JEP 264)	CONSUMERS_TO_JDK (System.Logger bridge) + VERSION_DEDUP	System.Logger	PARTIAL (#2202/#2203)
+annotations	annotations, jsr305, jspecify-0.3.0, jspecify-1.0.1, checker-qual-3.37.0, checker-qual-3.55.1, error_prone_annotations, j2objc-annotations, apiguardian-api	none (documentation only)	RETIRE_OR_STRIP (no runtime effect) + VERSION_DEDUP	-	QUEUED
+parsing	antlr4-runtime-4.11.1, antlr4-runtime-4.13.2, picocli	none	VERSION_DEDUP; KEEP_UPSTREAM	-	QUEUED
+database	sqlite-jdbc-3.45.1.0, sqlite-jdbc-3.51.1.1	java.sql (API only)	VERSION_DEDUP; native-leaf	-	QUEUED
+test	junit-* x2 families, assertj-core, opentest4j, java-object-diff	none	VERSION_DEDUP (done #2193/#2199/#2205)	-	DONE
+tooling	rewrite-core, rewrite-java, rewrite-java-21, rewrite-test, rewrite-xml, rewrite-yaml, org.eclipse.jgit, m3-tooling-shaded, org.osgi.core	javac (M3AST), java.lang.classfile	KEEP_UPSTREAM (build tooling); one AST law: javac plugins first	-	ONGOING

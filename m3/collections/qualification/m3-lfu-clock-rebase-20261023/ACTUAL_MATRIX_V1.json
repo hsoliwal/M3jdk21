@@ -6,13 +6,13 @@
   "canonical_matrix": "https://github.com/hsoliwal/com.synexia/blob/ca1dd139762fe15bb792a4b58eff0d3170ddad06/synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/lfu-clock-rebase-v1/ACTUAL_MATRIX_V3.json",
   "canonical_frontier": "https://github.com/hsoliwal/com.synexia/blob/ca1dd139762fe15bb792a4b58eff0d3170ddad06/synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/lfu-clock-rebase-v1/EXECUTION_FRONTIER_V3.json",
   "receiving_parent": "3a3b1a5592851df72ed2b45c3587839826f40f7d",
-  "sole_production_owner": "m3/collections/src/main/java/com/m3/collections/M3LFUCache.java",
+  "sole_production_owner": "m3/collections/src/main/java/jdk/m3/collections/M3LFUCache.java",
   "policy": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
   "candidate": {
     "bytes": 6455,
     "sha256": "8e404bcd1e6a0efc94e8f1828feaf4d2d3da1375f07b8a64d238390e09d36f27",
     "git_blob": "f2d1a17877561a1143965e195d1710068f23c57e",
-    "origin": "recipe-v1/actual-sdk-v1/m3/collections/src/main/java/com/m3/collections/M3LFUCache.java"
+    "origin": "recipe-v1/actual-sdk-v1/m3/collections/src/main/java/jdk/m3/collections/M3LFUCache.java"
   },
   "preimage": {
     "bytes": 5074,

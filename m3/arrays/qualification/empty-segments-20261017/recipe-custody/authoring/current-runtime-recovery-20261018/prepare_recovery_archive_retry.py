@@ -12,7 +12,7 @@ import sys
 
 
 TASK = "m3-collections-contract-refinement-20261017"
-PREFIX = "synexia-openrewrite-recipes/recipe-crates/" + TASK
+PREFIX = "m3-openrewrite-recipes/recipe-crates/" + TASK
 LABEL = "current-runtime-recovery-20261018"
 
 

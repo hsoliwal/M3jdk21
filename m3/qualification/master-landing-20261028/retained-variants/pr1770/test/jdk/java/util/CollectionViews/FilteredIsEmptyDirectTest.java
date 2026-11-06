@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary M3JDK21 filtered isEmpty uses live stored encounters and identical predicate order
+ * @summary M3JDK 21 filtered isEmpty uses live stored encounters and identical predicate order
  * @run main/othervm FilteredIsEmptyDirectTest
  */
 import java.util.AbstractCollection;

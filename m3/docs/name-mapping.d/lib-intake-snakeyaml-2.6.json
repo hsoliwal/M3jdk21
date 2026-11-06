@@ -1,0 +1,144 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (https://bitbucket.org/snakeyaml/snakeyaml/raw/snakeyaml-2.6/LICENSE.txt); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.snakeyaml",
+  "target_path": "m3/vendor/third_party-m3/relocated/snakeyaml-2.6",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/snakeyaml-2.6",
+  "source_coordinate": "org.yaml:snakeyaml:2.6-m3-source-1",
+  "source_version": "2.6-m3-source-1",
+  "source_license_origin": "https://bitbucket.org/snakeyaml/snakeyaml/raw/snakeyaml-2.6/LICENSE.txt",
+  "source_packages": [
+    "org.yaml.snakeyaml"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.snakeyaml"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/snakeyaml-2.6/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/snakeyaml-2.6/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/snakeyaml-2.6",
+  "mappings": [
+    {
+      "source": "org.yaml.snakeyaml and subpackages",
+      "target": "com.m3.lib.snakeyaml and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.snakeyaml JMOD; type names retained"
+    },
+    {
+      "source": "org.yaml.snakeyaml.external.com.google.gdata.util.common.base",
+      "target": "com.m3.lib.snakeyaml.external.com.google.gdata.util.common.base",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.extensions.compactnotation",
+      "target": "com.m3.lib.snakeyaml.extensions.compactnotation",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.introspector",
+      "target": "com.m3.lib.snakeyaml.introspector",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.constructor",
+      "target": "com.m3.lib.snakeyaml.constructor",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.representer",
+      "target": "com.m3.lib.snakeyaml.representer",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.serializer",
+      "target": "com.m3.lib.snakeyaml.serializer",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.inspector",
+      "target": "com.m3.lib.snakeyaml.inspector",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.comments",
+      "target": "com.m3.lib.snakeyaml.comments",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.composer",
+      "target": "com.m3.lib.snakeyaml.composer",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.internal",
+      "target": "com.m3.lib.snakeyaml.internal",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.resolver",
+      "target": "com.m3.lib.snakeyaml.resolver",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.emitter",
+      "target": "com.m3.lib.snakeyaml.emitter",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.scanner",
+      "target": "com.m3.lib.snakeyaml.scanner",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.events",
+      "target": "com.m3.lib.snakeyaml.events",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.parser",
+      "target": "com.m3.lib.snakeyaml.parser",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.reader",
+      "target": "com.m3.lib.snakeyaml.reader",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.tokens",
+      "target": "com.m3.lib.snakeyaml.tokens",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.error",
+      "target": "com.m3.lib.snakeyaml.error",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.nodes",
+      "target": "com.m3.lib.snakeyaml.nodes",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.util",
+      "target": "com.m3.lib.snakeyaml.util",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml.env",
+      "target": "com.m3.lib.snakeyaml.env",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.yaml.snakeyaml",
+      "target": "com.m3.lib.snakeyaml",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

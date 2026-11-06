@@ -1,0 +1,16 @@
+package @PKG@;
+
+/** API of the ordered segments (pattern M3P-SEGMENTS-1). */
+public interface M3SegmentsApi extends M3WebApi {
+	/** Replaces the segments: {@code ;}-separated {@code label~detail}; a pagination sample is the page count. */
+	void load(String sample);
+
+	/** Current (selected) segment, {@code -1} for none. */
+	int current();
+
+	/** Selects a segment; steppers mark the earlier steps done; the segment scrolls into view. */
+	void select(int item);
+
+	/** Label painted for a segment (1-based number when it has no text). */
+	String labelOf(int item);
+}

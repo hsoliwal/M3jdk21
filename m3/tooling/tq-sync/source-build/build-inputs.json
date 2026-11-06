@@ -176,7 +176,7 @@
       "module": "apiguardian-api",
       "gav": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1",
       "gitTree": "35061da8688d02e5bf61598175c883e85ab7ee22",
-      "pomBlob": "cbeafd81a00611494595a47726b6a807d65f1f11",
+      "pomBlob": "4568888fc2c6464a88d4564f74d7067eba60e468",
       "metadata": [
         {
           "path": ".gitattributes",
@@ -196,7 +196,7 @@
         },
         {
           "path": "pom.xml",
-          "gitBlob": "cbeafd81a00611494595a47726b6a807d65f1f11"
+          "gitBlob": "4568888fc2c6464a88d4564f74d7067eba60e468"
         },
         {
           "path": "verify_source.py",
@@ -2088,8 +2088,8 @@
     "/m3/vendor/third_party/univocity-parsers/",
     "/m3/vendor/third_party/xz/",
     "/m3/tooling/tq-sync/",
-    "/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-    "/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+    "/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+    "/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
   ],
   "existingSha256Helper": {
     "path": ".m3/task-crates/dependency-source-inline-20261010/verify_crate.py",
@@ -2098,16 +2098,16 @@
   "tqInputs": {
     "srcGitTree": "321f54167edaeec37daece1fdb1ed1ff387a11b6",
     "pomBlob": "ee408306125c6d8bf5b5aecf7d74eb75cdac3377",
-    "manifestBlob": "af4935f91d039791ff8c5861e02a784637d109fc",
-    "testBlob": "d873aaf44c96f37a87fc84d13ac4eec595c1473b",
+    "manifestBlob": "cf3d2768e2ccda9b8caa64e5b445285d3565d628",
+    "testBlob": "6fa4ec1ff9755c2a668ba1548450f064b352ab6b",
     "engines": [
       {
-        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-        "gitBlob": "7c11497c0183d04e66baa41ee5391de682175360"
+        "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+        "gitBlob": "40f543e413c245c900d6502a27645d05735a6ebd"
       },
       {
-        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-        "gitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b"
+        "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "gitBlob": "73779dee8c80a0913b88fff17637ed3f44b33ea3"
       }
     ]
   }

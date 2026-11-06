@@ -5,8 +5,8 @@ on:
     branches: ['m3/linked-list-live-mask-20261017']
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LinkedList.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LinkedListLiveMaskContract.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LinkedListLiveMaskContract.java'
       - 'm3/collections/qualification/m3-linked-list-live-mask-20261017/**'
       - '.github/workflows/m3-linked-list-live-mask-20261017.yml'
   workflow_dispatch:
@@ -33,19 +33,19 @@ jobs:
         run: |
           mvn -B -ntp -f m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml verify
           java -cp m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/target/classes \
-            com.synexia.m3.M3LinkedListLiveMaskRecipe --check "$PWD"
+            jdk.internal.m3.M3LinkedListLiveMaskRecipe --check "$PWD"
       - name: Strict source Java21 and 25k seeded JDK LinkedList oracle
         shell: bash
         run: |
           set -euo pipefail
-          pkg=m3/collections/src/main/java/com/m3/collections
-          test=m3/collections/src/test/java/com/m3/collections
+          pkg=m3/collections/src/main/java/jdk/m3/collections
+          test=m3/collections/src/test/java/jdk/m3/collections
           classes="$RUNNER_TEMP/m3-linked-list-classes"
           mkdir -p "$classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" \
             "$pkg/M3SlotArrays.java" "$pkg/M3SlotSpliterators.java" \
             "$pkg/M3LinkedList.java" "$test/M3LinkedListLiveMaskContract.java"
-          java -ea -cp "$classes" com.m3.collections.M3LinkedListLiveMaskContract
+          java -ea -cp "$classes" jdk.m3.collections.M3LinkedListLiveMaskContract
       - name: Existing JNI C17 syntax preservation (native implementation unchanged)
         shell: bash
         run: |

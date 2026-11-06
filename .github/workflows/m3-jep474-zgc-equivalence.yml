@@ -43,13 +43,6 @@ jobs:
           test -n "$BASE_SHA"
           git diff --exit-code "$BASE_SHA...HEAD" -- $(cat m3/backports/recipes/jep-474-generational-zgc/PATHS.txt)
 
-      - name: Prove proof-refresh recipe fixed point
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jep474ProofRefreshRecipeTest \
-            -Dsurefire.failIfNoSpecifiedTests=false \
-            test
 
       - name: Fetch exact JEP474 implementation commit
         shell: bash

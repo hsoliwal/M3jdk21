@@ -3,8 +3,8 @@ name: M3 object state array masks Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectStateSlots28.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectStateSlots28SelfTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java'
       - 'm3/collections/qualification/object-state-slots-28/**'
       - '.github/workflows/m3-object-state-slots-28.yml'
 permissions:
@@ -32,8 +32,8 @@ jobs:
           set -euxo pipefail
           python3 m3/collections/qualification/object-state-slots-28/verify.py
           mkdir -p target/m3-object-state/classes target/m3-object-state/headers
-          S=m3/collections/src/main/java/com/m3/collections
-          T=m3/collections/src/test/java/com/m3/collections
+          S=m3/collections/src/main/java/jdk/m3/collections
+          T=m3/collections/src/test/java/jdk/m3/collections
           javac --release 21 -proc:none -Xlint:all -Werror \
             -h target/m3-object-state/headers -d target/m3-object-state/classes \
             "$S/M3Address28.java" "$S/M3IntLane28.java" \
@@ -42,9 +42,9 @@ jobs:
             "$S/M3StateMaskArrays.java" "$T/M3StateMaskArraysSelfTest.java" \
             "$S/M3IndexMaskCompactor.java"
           java -Xmx256m -cp target/m3-object-state/classes \
-            com.m3.collections.M3ObjectStateSlots28SelfTest | tee target/m3-object-state/object-state.log
+            jdk.m3.collections.M3ObjectStateSlots28SelfTest | tee target/m3-object-state/object-state.log
           java -Xmx256m -cp target/m3-object-state/classes \
-            com.m3.collections.M3StateMaskArraysSelfTest | tee target/m3-object-state/state-mask-java.log
+            jdk.m3.collections.M3StateMaskArraysSelfTest | tee target/m3-object-state/state-mask-java.log
       - name: Reuse exact incumbent JNI mask backend
         shell: bash
         run: |
@@ -58,7 +58,7 @@ jobs:
           UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
           java -Xmx256m -Xcheck:jni \
             -Djava.library.path="$PWD/target/m3-object-state" \
-            -cp target/m3-object-state/classes com.m3.collections.M3StateMaskArraysSelfTest \
+            -cp target/m3-object-state/classes jdk.m3.collections.M3StateMaskArraysSelfTest \
             > target/m3-object-state/state-mask-jni.log \
             2> target/m3-object-state/state-mask-jni.err
           test ! -s target/m3-object-state/state-mask-jni.err

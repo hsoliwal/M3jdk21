@@ -40,7 +40,7 @@ Maven/OpenRewrite hash-pinned recipe:
 - Source manifest postimage:
   `8603f9aaded1ea8d8fdf886e3e549ae7196efc378f27eb4a452ca0f1907963fe`
 - Target path: `src/java.base/share/classes/jdk/internal/mindex/M3CI.java`
-- Target jtreg: `test/jdk/jdk/internal/mindex/cb/com/m3/cb/M3ClassRowLookupTest.java`
+- Target jtreg: `test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/M3ClassRowLookupTest.java`
 
 ## Exact migration family
 

@@ -16,8 +16,8 @@ ROOT = HERE.parents[3]
 RECEIPT = HERE / "RECEIVER_RECEIPT.json"
 SCHEMA = "M3JDK21_SOURCE_PINNED_ARRAY_MASK_RECEIPT_V1"
 EXPECTED = {
-    "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
-    "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java",
     "m3/arrays/pom.xml",
 }
 REQUIRED_OPEN_GATES = (
@@ -87,12 +87,12 @@ def verify_receipt(root: Path, receipt: dict) -> dict:
                 fail("current dual-license header lost: " + path)
     if seen != EXPECTED:
         fail("incomplete source migration scope")
-    current = source_path(root, "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java").read_text()
+    current = source_path(root, "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java").read_text()
     if (current.count("final boolean inlineMask = oldSize <= 2 * Long.SIZE;") != 1
             or "long removalLow = 0L;" not in current or "long removalHigh = 0L;" not in current
             or "BitSet removed = inlineMask ? null : new BitSet();" not in current):
         fail("approved two-word selection atom absent")
-    oracle = source_path(root, "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java").read_text()
+    oracle = source_path(root, "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java").read_text()
     if "for (int n = 0; n <= 129; n++)" not in oracle or "seeded.nextInt(1025)" not in oracle:
         fail("expanded boundary oracle missing")
     java_modules = source_path(root, "m3/arrays/pom.xml").read_text()
