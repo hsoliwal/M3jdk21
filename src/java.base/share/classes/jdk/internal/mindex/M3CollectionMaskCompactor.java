@@ -42,9 +42,10 @@ public final class M3CollectionMaskCompactor {
         if (length == 0) return from;
         int words = ((length - 1) >>> 6) + 1;
         if (deleted.length < words) throw new IllegalArgumentException("mask too short");
-        // Preserve the old hot scalar and long-run paths.  Word-based copying
-        // is admitted only for sparse (or nearly all) deletion states, after the
-        // callback phase has already prepared a complete immutable mask.
+        // Preserve the old hot scalar (below 512) and long-run paths.  Word-based
+        // copying serves the other deletion states (rejection words when sparse
+        // or nearly all, survivor words when fragmented), after the callback
+        // phase has already prepared a complete immutable mask.
         if (length < 512) return compactScalar(values, from, length, deleted);
         long statistics = maskStatistics(deleted, length);
         int runs = (int) (statistics >>> 32);
@@ -52,13 +53,16 @@ public final class M3CollectionMaskCompactor {
         // A complete run inventory also identifies no-op masks without writing
         // the same references back or introducing unnecessary GC card marks.
         if (removed == 0) return to;
-        if (runs <= Math.max(4, length >>> 7)) {
+        // Up to one deletion run per 16 entries stays on the run copier (the
+        // path sparse masks took); more runs use word-local copies.
+        if (runs <= Math.max(4, length >>> 4)) {
             return compactRuns(values, from, length, deleted);
         }
         if (removed <= length / 8 || removed >= length - length / 64) {
             return compactWords(values, from, length, deleted);
         }
-        return compactScalar(values, from, length, deleted);
+        // Fragmented masks: word-local survivor copies (retained pr1908).
+        return compactSurvivors(values, from, length, deleted);
     }
 
     private static int compactScalar(Object[] values, int from, int length, long[] deleted) {
@@ -131,11 +135,37 @@ public final class M3CollectionMaskCompactor {
         return write;
     }
 
-    /** Count deletion runs, including ones crossing the 64-bit boundary. */
+    /** Word-local survivor indexes; no element directory or rejected-bit loop. */
+    private static int compactSurvivors(Object[] values, int from, int length, long[] deleted) {
+        int write = from;
+        for (int base = 0; base < length;) {
+            int chunk = Math.min(64, length - base);
+            long valid = -1L >>> (64 - chunk);
+            long survivors = ~deleted[base >>> 6] & valid;
+            int start = from + base;
+            if (survivors == valid) {
+                if (write != start) System.arraycopy(values, start, values, write, chunk);
+                write += chunk;
+            } else {
+                while (survivors != 0L) {
+                    int bit = Long.numberOfTrailingZeros(survivors);
+                    values[write++] = values[start + bit];
+                    survivors &= survivors - 1;
+                }
+            }
+            base += chunk;
+        }
+        return write;
+    }
+
+    /**
+     * Returns {@code runs << 32 | removed} over the whole mask; deletion runs
+     * include ones crossing the 64-bit boundary.  compact() needs both fields
+     * to choose compactRuns, compactWords or compactSurvivors.
+     */
     private static long maskStatistics(long[] deleted, int length) {
         int words = ((length - 1) >>> 6) + 1;
         int count = 0;
-        int threshold = Math.max(4, length >>> 7);
         int removed = 0;
         long preceding = 0L;
         for (int word = 0; word < words; word++) {
@@ -143,8 +173,7 @@ public final class M3CollectionMaskCompactor {
             int tail = length & 63;
             if (word == words - 1 && tail != 0) bits &= (1L << tail) - 1L;
             count += Long.bitCount(bits & ~((bits << 1) | preceding));
-            // This count is used only for the threshold decision in compact().
-            if (count > threshold) return count;
+            //FLLDCIM: HPCPOP - no early exit: a bare count read as runs=0 and sent every 512+ mask to compactRuns
             removed += Long.bitCount(bits);
             preceding = bits >>> 63;
         }
