@@ -33,6 +33,15 @@ else()
   target_compile_options(m3_jni_existing_owners PRIVATE -Wall -Wextra -Werror -Wpedantic)
 endif()
 
+# Optional jdk.m3.jni scoped-lease JNI library: Java owners under src/main/java/jdk/m3/jni, C17 source
+# src/main/native/m3_scoped_leases.c, project src/main/native/scoped-leases/CMakeLists.txt (relocated by
+# recipe/scoped-leases-20261106). It needs a JDK 21 javac for its generated headers, so it is off by default and
+# never part of the Android/iOS cross-compiles; every Java path of jdk.m3.jni is exact without the library.
+option(M3_SCOPED_LEASES_JNI "Build the jdk.m3.jni scoped-lease JNI library (needs a JDK 21 javac)" OFF)
+if(M3_SCOPED_LEASES_JNI)
+  add_subdirectory(src/main/native/scoped-leases)
+endif()
+
 include(CTest)
 if(BUILD_TESTING)
   add_executable(m3_jni_core_contract tests/m3_jni_core_contract.c)
