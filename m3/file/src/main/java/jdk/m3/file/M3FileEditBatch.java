@@ -128,35 +128,45 @@ public final class M3FileEditBatch {
             if (source.length() != newLength || !source.sha256().equals(newHash))
                 throw new IllegalStateException("stale destination generation for change map");
         }
+        /**
+         * First edit boundary not less than position. Destination boundaries may repeat
+         * after adjacent deletions, so choosing the FIRST equality preserves affinity.
+         */
+        //FLLDCIM: RECIPE — m3-file-changemap-lower-bound-20261106 replays donor crate m3-file-changemap-lower-bound-20261029 (hsoliwal/com.synexia 4a2e6452a7a): first-equality lower bound; repeated destination boundaries after adjacent deletions keep the earliest edit
+        private static int lowerBound(int[] starts, int position) {
+            int low = 0, high = starts.length;
+            while (low < high) {
+                int mid = low + ((high - low) >>> 1);
+                if (starts[mid] < position) low = mid + 1;
+                else high = mid;
+            }
+            return low;
+        }
         /** Returns -1 for interior deleted bytes; endpoints honor caller affinity. */
+        //FLLDCIM: RECIPE — m3-file-changemap-lower-bound-20261106: O(E) ordered scan -> O(log E) lower bound; oracle M3FileChangeMapBinarySearchProof (50,001 maps / 9,341,740 checks)
         public int oldToNew(int position, Affinity affinity) {
             Objects.checkIndex(position, oldLength + 1);
             Objects.requireNonNull(affinity, "affinity");
-            int correction = 0;
-            for (int i = 0; i < changes(); i++) {
-                if (position < oldStart[i]) break;
-                if (position == oldStart[i]) {
-                    return affinity == Affinity.LEFT ? newStart[i] : newEnd[i];
-                }
-                if (position < oldEnd[i]) return -1;
-                correction = newEnd[i] - oldEnd[i];
-            }
-            return Math.addExact(position, correction);
+            int index = lowerBound(oldStart, position);
+            if (index < changes() && oldStart[index] == position)
+                return affinity == Affinity.LEFT ? newStart[index] : newEnd[index];
+            if (index == 0) return position;
+            int previous = index - 1;
+            if (position < oldEnd[previous]) return -1;
+            return Math.addExact(position, newEnd[previous] - oldEnd[previous]);
         }
         /** Returns -1 for the interior of inserted bytes. */
+        //FLLDCIM: RECIPE — m3-file-changemap-lower-bound-20261106: O(E) ordered scan -> O(log E) lower bound; same affinity and exception contract as the scan it replaces
         public int newToOld(int position, Affinity affinity) {
             Objects.checkIndex(position, newLength + 1);
             Objects.requireNonNull(affinity, "affinity");
-            int correction = 0;
-            for (int i = 0; i < changes(); i++) {
-                if (position < newStart[i]) break;
-                if (position == newStart[i]) {
-                    return affinity == Affinity.LEFT ? oldStart[i] : oldEnd[i];
-                }
-                if (position < newEnd[i]) return -1;
-                correction = oldEnd[i] - newEnd[i];
-            }
-            return Math.addExact(position, correction);
+            int index = lowerBound(newStart, position);
+            if (index < changes() && newStart[index] == position)
+                return affinity == Affinity.LEFT ? oldStart[index] : oldEnd[index];
+            if (index == 0) return position;
+            int previous = index - 1;
+            if (position < newEnd[previous]) return -1;
+            return Math.addExact(position, oldEnd[previous] - newEnd[previous]);
         }
         /** Conservatively includes insertion exactly on a span boundary. */
         public boolean touchesOldSpan(int from, int to) {
