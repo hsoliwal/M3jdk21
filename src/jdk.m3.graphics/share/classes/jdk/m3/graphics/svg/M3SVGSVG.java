@@ -2,7 +2,6 @@ package jdk.m3.graphics.svg;
 
 import jdk.m3.graphics.*;
 import jdk.m3.graphics.impl.*;
-import jdk.m3.graphics.*;
 
 public class M3SVGSVG extends M3SVGContainer {
     static { M3Library.staticLoad(); }

@@ -2,7 +2,6 @@ package jdk.m3.graphics.paragraph;
 
 import jdk.m3.graphics.*;
 import jdk.m3.graphics.impl.*;
-import jdk.m3.graphics.*;
 
 public class M3Paragraph extends M3Managed {
     static { M3Library.staticLoad(); }

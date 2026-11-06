@@ -1,7 +1,6 @@
 package jdk.m3.graphics.svg;
 
 import jdk.m3.graphics.*;
-import jdk.m3.graphics.*;
 
 public class M3SVGLengthContext {
     public final float _width;

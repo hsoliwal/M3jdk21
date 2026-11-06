@@ -2,7 +2,6 @@ package jdk.m3.graphics.shaper;
 
 import jdk.m3.graphics.*;
 import jdk.m3.graphics.impl.*;
-import jdk.m3.graphics.*;
 
 public class M3RunInfo {
     public long _fontPtr;
