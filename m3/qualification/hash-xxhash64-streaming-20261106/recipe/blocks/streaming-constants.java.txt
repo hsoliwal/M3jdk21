@@ -1,0 +1,6 @@
+    /** Seed of the donor's hash(byte[]) and hashFile(Path): the one-shot is M3LongHashFunction.xx(DEFAULT_SEED). */
+    public static final long DEFAULT_SEED = 0x9E3779B97F4A7C15L;
+    /** Bytes of one file read: the direct buffer hashFile streams through. */
+    private static final int CHUNK_SIZE = 256 * 1024;
+    /** Little-endian reads of the scratch stripe: the owner's byte[] access. */
+    private static final M3Access<byte[]> STRIPE = M3ByteArrayAccess.INSTANCE;

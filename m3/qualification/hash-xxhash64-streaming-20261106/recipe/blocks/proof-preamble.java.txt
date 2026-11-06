@@ -1,0 +1,11 @@
+/*
+ * @test
+ * @summary Dependency-free parity proof of M3XxHash64Streaming (recipe m3/qualification/hash-xxhash64-streaming-20261106):
+ *          17 lengths x 4 seeds, 7-byte and 4,097-byte updates, files, the known empty-input vector, every value equal
+ *          to the one-shot of the owner, M3LongHashFunction.xx(seed).hashBytes(byte[]).
+ * @modules java.base/jdk.internal.m3.hash:open
+ * @run main M3XxHash64StreamingProof
+ */
+
+import jdk.internal.m3.hash.M3LongHashFunction;
+import jdk.internal.m3.hash.M3XxHash64Streaming;
