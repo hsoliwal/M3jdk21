@@ -1,0 +1,11 @@
+op	path	target_or_counts
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3DocumentDeduplicator.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3EvidenceSynthesizer.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3FeatureHashVectorizer.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3IndexedHit.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3KnowledgeDocument.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3LuhnSummarizer.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3SimHash64.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3SourceKind.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3Utf8Fnv1a64.java	KEBAB=1,PKG_PATH=1
+REWRITE	m3/search/src/test/java/jdk/m3/search/DocumentDeduplicatorConcurrencyTest.java	KEBAB=1,PKG_PATH=1
