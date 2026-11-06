@@ -15,7 +15,9 @@
     prefix-sharing lexical path trie M3InternPathTrie and the bounded SHA-256 archive container M3InternArchiveGuard.
     Pure Java 21, java.base only. Relocated by recipe (recipe/intern-space-20261106/relocate.py with RELOCATION_MAP.tsv
     and PROVENANCE.tsv) from the first-party donor at develop fd9a233680b4 (2026-11-06); the seven donor proofs run in
-    the test phase.</description>
+    the test phase. The typed, bit-exact canonical literal pool M3CanonicalLiteralPool (nine named kinds as CONSTANT
+    tuples of one space; a pool only, never a JVM constant-pool or ldc replacement) is relocated the same way by
+    recipe/canonical-literals-20261106 from develop b259ec9f5606; its ten donor JUnit tests run in the test phase.</description>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

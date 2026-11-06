@@ -96,7 +96,9 @@ while IFS= read -r class_file; do
         echo "javap $simple DIFFERENT"; status=FAIL
     fi
     classes=$((classes + 1))
-done < <(find "$MODULE/target/classes/${target_package//.//}" -name '*.class' | sort)
+done < <(for type in "${main_types[@]}"; do
+    find "$MODULE/target/classes/${target_package//.//}" \( -name "$type.class" -o -name "$type\$*.class" \)
+done | sort)   # the family's main FILE types only: later leaves add classes to the package (RECIPE_MEMORY.tsv)
 [ "$classes" = "$donor_main" ] || { echo "javap class count relocated=$classes donor=$donor_main DIFFERENT"; status=FAIL; }
 echo "javap classes=$classes lines=$(cat "$SCRATCH"/javap/relocated-*.txt | wc -l) $([ "$status" = PASS ] && echo IDENTICAL || echo CHECK)"
 echo "DIFFERENTIAL $status"
