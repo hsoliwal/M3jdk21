@@ -19,6 +19,10 @@ fast-import, so a sparse or partial checkout renames the whole tree. Bytes are k
 read text mode and dropped CRLF in 4 files). A second plan after apply finds nothing (fixed point).
 A scoped tree apply (--only) merges RENAME_MAP.tsv: it replaces the rows of the files it selects and keeps every
 other row byte for byte where it is (it once wrote its scoped plan alone: SCOPED_APPLY_PRESERVES_MAP).
+plan also reports (SHADOW rows, shadows=N; never a refusal) every Java declaration in a file it rewrites whose name is
+the first segment of a package the rules produce (jdk): such a field, parameter or local obscures the package in every
+expression of its scope (JLS 6.4.2); pass 1 left M3FS.DefaultRegexFallback with a field named jdk and javac failed on
+jdk.m3.fs.internal.re2j.Pattern.compile(..) (FIELD_SHADOWS_RENAMED_PACKAGE).
 CLI: python -I jdk_naming.py plan|apply [--root DIR] [--tree REV --ref REF [--message TEXT]] [--tsv OUT] [--only P]...
 """
 from __future__ import annotations
@@ -69,6 +73,13 @@ TEXT_SUFFIXES = {".java", ".yml", ".yaml", ".xml", ".sh", ".py", ".mjs", ".js", 
                  ".cfg", ".ini", ".c", ".h", ".cpp", ".json", ".txt"}
 # extension-less text: a ServiceLoader descriptor is in scope by its directory (is_service_descriptor)
 SERVICE_DESCRIPTOR_DIR = "/META-INF/services/"
+# the first segment of every package a rule produces (jdk); a variable of that name obscures the renamed package
+PACKAGE_SEGMENTS = tuple(sorted({new.split(".", 1)[0] for _n, _p, new in TEXT_RULES if re.match(r"[a-z]+\.", new)}))
+# a declaration: type (qualified, generic, array) then the name, then = ; , ) or : (a field, parameter, local or
+# enhanced-for variable; a method name is followed by "(" and does not obscure a package)
+DECLARATION = re.compile(r"(?<![\w$.])([A-Za-z_$][\w$.]*(?:<[^;=(){}]*>)?(?:\[\])*)\s+(%s)\s*(?=[=;,):])"
+                         % "|".join(map(re.escape, PACKAGE_SEGMENTS)))
+NOT_A_TYPE = {"return", "throw", "case", "yield", "assert", "else", "new", "package", "import"}
 DOC_SUFFIXES = {".md", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch"}
 DOC_NAMES = {"NOTICE", "LICENSE", "COPYRIGHT", "AUTHORS", "THIRD_PARTY_NOTICES"}
 LINEAGE_HINTS = ("provenance", "evidence", "receipt", "manifest", "SOURCE_SHA256", "FINAL_", "readback")
@@ -123,6 +134,15 @@ def rewrite_text(text: str) -> tuple[str, dict]:
         return text, counts
     lines = text.split("\n")
     return "\n".join(rewrite_line(line, counts) if QUICK.search(line) else line for line in lines), counts
+
+
+def shadows(path: str, text: str) -> list[tuple[str, int, str]]:
+    """(path, line, name) of every declaration in a Java file named like the first segment of a renamed package
+    (FIELD_SHADOWS_RENAMED_PACKAGE); comment lines are prose, not declarations."""
+    if not path.endswith(".java"):
+        return []
+    return [(path, number, match.group(2)) for number, line in enumerate(text.split("\n"), 1)
+            if not COMMENT_LINE.match(line) for match in DECLARATION.finditer(line) if match.group(1) not in NOT_A_TYPE]
 
 
 def is_service_descriptor(path: str) -> bool:
@@ -186,7 +206,7 @@ def plan_moves(paths: list[str], only: tuple[str, ...]) -> dict:
                 continue
         targets.add(new)
         moves.append((path, new))
-    return {"moves": moves, "rewrites": [], "refusals": refusals, "absent": []}
+    return {"moves": moves, "rewrites": [], "refusals": refusals, "absent": [], "shadows": []}
 
 
 def decoded(data: bytes) -> str:
@@ -212,6 +232,7 @@ def plan(root: Path, only: tuple[str, ...] = ()) -> dict:
         new_text, counts = rewrite_text(text)
         if new_text != text:
             result["rewrites"].append((path, counts))
+            result["shadows"] += shadows(path, new_text)
     return result
 
 
@@ -265,7 +286,9 @@ def tree_rewrites(root: Path, entries: list, only: tuple[str, ...]):
 def plan_tree(root: Path, rev: str, only: tuple[str, ...] = ()) -> dict:
     entries = tree_entries(Path(root), rev)
     result = plan_moves([path for path, _mode, _sha in entries], only)
-    result["rewrites"] = [(path, counts) for path, counts, _data in tree_rewrites(Path(root), entries, only)]
+    for path, counts, data in tree_rewrites(Path(root), entries, only):
+        result["rewrites"].append((path, counts))
+        result["shadows"] += shadows(path, decoded(data))
     return result
 
 
@@ -357,6 +380,7 @@ def write_tsv(result: dict, out: Path) -> None:
     rows += ["REWRITE\t%s\t%s" % (p, ",".join(f"{k}={v}" for k, v in sorted(c.items()))) for p, c in result["rewrites"]]
     rows += [f"REFUSED_{k}\t{a}\t{b}" for k, a, b in result["refusals"]]
     rows += [f"ABSENT\t{p}\tnot checked out" for p in result["absent"]]
+    rows += [f"SHADOW\t{p}\t{line}:{name}" for p, line, name in result.get("shadows", [])]
     out.write_text("\n".join(rows) + "\n", encoding="utf-8", newline="\n")
 
 
@@ -367,8 +391,9 @@ def report(result: dict, tsv) -> None:
     for _, counts in result["rewrites"]:
         for k, v in counts.items():
             totals[k] = totals.get(k, 0) + v
-    print("JDK_NAMING moves=%d rewrites=%d refusals=%d absent=%d %s" % (
+    print("JDK_NAMING moves=%d rewrites=%d refusals=%d absent=%d shadows=%d %s" % (
         len(result["moves"]), len(result["rewrites"]), len(result["refusals"]), len(result["absent"]),
+        len(result.get("shadows", [])),
         " ".join(f"{k}={v}" for k, v in sorted(totals.items()))))
 
 
