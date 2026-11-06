@@ -486,4 +486,58 @@ public final class M3Arrays {
         if (remaining != 0) throw new IllegalStateException("UTF-16 segments do not cover slice");
         return result;
     }
+
+    //FLLDCIM: MRL - census2 P2-001, crate m3-cpu-owner-extensions-20261105 (owner-view-20261105): chain 3221d674 -> 67c2c232, jdk_naming 5d99e07e; String-owner UTF-16 view
+    /**
+     * Share an immutable String owner through the existing M3 UTF-16 view contract.
+     * Unlike chars(CharSequence), this explicit factory does not snapshot spelling.
+     * Slices retain the original owner and bounded coordinates; existing joins and
+     * exact UTF-16 facts compose them. copy/copyTo/toString remain explicit export
+     * boundaries. A small slice intentionally retains its complete String owner.
+     */
+    public static M3Utf16ArrayView stringView(String source) {
+        String owner = Objects.requireNonNull(source, "source");
+        return new StringView(owner, 0, owner.length());
+    }
+
+    /** One descriptor and existing facts; no retained byte/char payload mirror. */
+    private static final class StringView extends SliceBase implements M3Utf16ArrayView {
+        private final String owner;
+        private final M3Utf16Facts facts;
+
+        StringView(String owner, int start, int end) {
+            super(owner.length(), start, end);
+            this.owner = owner;
+            facts = M3Utf16Facts.of(this);
+        }
+
+        public int length() { return length; }
+        public char charAt(int index) {
+            return owner.charAt(start + Objects.checkIndex(index, length));
+        }
+        public int segmentCount() { return length == 0 ? 0 : 1; }
+        public M3Utf16Facts facts() { return facts; }
+        public M3Utf16ArrayView subSequence(int from, int to) {
+            Objects.checkFromToIndex(from, to, length);
+            return from == 0 && to == length ? this
+                    : new StringView(owner, start + from, start + to);
+        }
+        public CharBuffer[] asReadOnlyCharBuffers() {
+            if (length == 0) return new CharBuffer[0];
+            // Rebase capacity too: clear() must not reveal surrounding characters.
+            CharBuffer bounded = CharBuffer.wrap(owner, start, start + length).slice();
+            return new CharBuffer[] {bounded.asReadOnlyBuffer()};
+        }
+        @Override
+        public void copyTo(int sourceStart, char[] target, int targetStart, int count) {
+            Objects.requireNonNull(target, "target");
+            Objects.checkFromIndexSize(sourceStart, count, length);
+            Objects.checkFromIndexSize(targetStart, count, target.length);
+            owner.getChars(start + sourceStart, start + sourceStart + count, target, targetStart);
+        }
+        @Override
+        public String toString() {
+            return owner.substring(start, start + length);
+        }
+    }
 }
