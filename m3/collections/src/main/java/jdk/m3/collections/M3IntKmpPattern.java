@@ -22,9 +22,9 @@ import java.util.Objects;
  * <p>The pattern and failure function are retained in two int[] lanes. Matching
  * allocates no per-character state and accepts token ids directly.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntKmpPattern.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntKmpPattern.java}
  * blob {@code e9b8518ea17545225c05b5ac054eda43dfa843ca} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3IntKmpPattern {
 

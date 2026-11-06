@@ -1,0 +1,11 @@
+op	path	target_or_counts
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3DeltaEncodedLongList.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3FixedDecimal64.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3IntDisjointSet.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3IntKmpPattern.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3LongLiChaoTree.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3LongLongRangeMap.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3LongTimingWheel.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3Unsigned128.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3UnsignedMath.java	CONST=1,KEBAB=1,PKG_PATH=1
+REWRITE	m3/collections/src/main/java/jdk/m3/collections/M3WideIntegerArray.java	CONST=1,KEBAB=1,PKG_PATH=1

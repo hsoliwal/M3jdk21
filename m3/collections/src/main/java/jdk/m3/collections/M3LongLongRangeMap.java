@@ -25,9 +25,9 @@ import java.util.Objects;
  * and adjacent equal-valued ranges are coalesced. No Range or Entry object is
  * retained per interval.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/LongLongRangeMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/LongLongRangeMap.java}
  * blob {@code 44c6fd1f06060e193347dbb3d6ced9d5219065a2} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3LongLongRangeMap {
     @FunctionalInterface

@@ -23,9 +23,9 @@ import java.util.NoSuchElementException;
  * <p>Each allocated logical node is an integer index into parallel slope/intercept/child arrays.
  * No Java node object is retained. Arithmetic overflow throws.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/LongLiChaoTree.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/LongLiChaoTree.java}
  * blob {@code bf3eb06aa7af44a07762f2bc21915048112aa8c5} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3LongLiChaoTree {
     public enum Mode { MIN, MAX }
