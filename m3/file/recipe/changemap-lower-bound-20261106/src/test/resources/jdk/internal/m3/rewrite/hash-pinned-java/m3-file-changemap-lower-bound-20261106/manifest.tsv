@@ -1,0 +1,2 @@
+# re-sealed 2026-11-06 from donor crate m3-file-changemap-lower-bound-20261029 (hsoliwal/com.synexia 4a2e6452a7a): preimage = live jdk.m3.file owner, postimage = donor postimage + JDK package + FLLDCIM anchors (reseal.py)
+m3/file/src/main/java/jdk/m3/file/M3FileEditBatch.java	97a80e6709b5c31dae837c7c4845ffb391c9a2914032df76d5720b88f161b634	998abe8ae7f5377c9de623f0b11068994df6935b6488b3dd7a8e89e213f2b119	M3FileEditBatch.java.txt

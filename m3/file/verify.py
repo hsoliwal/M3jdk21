@@ -181,6 +181,7 @@ def main():
             'M3FileObservationContract': 'M3_FILE_OBSERVATION_PASS',
             'M3FileSourceContract': 'M3_FILE_SOURCE_PASS',
             'M3FileEditBatchContract': 'M3_FILE_EDIT_BATCH_PASS',
+            'M3FileChangeMapBinarySearchProof': 'M3_FILE_CHANGEMAP_LOWER_BOUND_V1',
             'M3FileEditFramesContract': 'M3_FILE_EDIT_FRAMES_PASS',
             'M3FileMoveCandidatesContract': 'M3_FILE_MOVES_PASS',
             'M3ReactorImpactPlanContract': 'M3_REACTOR_IMPACT_PASS',
