@@ -10,13 +10,15 @@
   <version>0.1.0-SNAPSHOT</version>
   <name>M3JDK :: Compression</name>
   <description>jdk.m3.compression (module org.m3jdk.compression): opt-in raw-format encoders M3Lz4RawBlockEncoder
-    (LZ4 block format, no frame) and M3SnappyRawEncoder (Snappy raw format, no framing), their reusable bounded
-    M3CompressionByteSink, the four-byte match-candidate index M3LzMatchCandidateIndex, the format-neutral
+    (LZ4 block format, no frame) and M3SnappyRawEncoder (Snappy raw format, no framing), their bounded decoders
+    M3Lz4RawBlockDecoder and M3SnappyRawDecoder, their reusable bounded M3CompressionByteSink, the four-byte
+    match-candidate index M3LzMatchCandidateIndex (and its package-private four-way variant), the format-neutral
     M3LzByteKernels and the format-neutral cache of deterministic compressed chunks M3CompressedChunkCache. Pure
     Java 21, java.base only; no third-party library. Relocated by recipe
     (recipe/compression-20261106/relocate.py with RELOCATION_MAP.tsv and PROVENANCE.tsv) from the first-party donor
     hsoliwal/com.synexia develop 6fdee5330b8a (2026-11-06); the donor oracles, the format oracle (spec-following
-    reference decoders, 100,000 seeded inputs) and the chunk-cache reference-model oracle run in the test phase.</description>
+    reference decoders, 100,000 seeded inputs), the decoder agreement oracle (valid, malformed and fuzz streams), the
+    four-way encoding probe and the chunk-cache reference-model oracle run in the test phase.</description>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
