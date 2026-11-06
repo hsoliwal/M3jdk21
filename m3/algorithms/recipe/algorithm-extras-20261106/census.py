@@ -24,9 +24,19 @@ import sys
 from pathlib import Path
 
 RECIPE_DIR = Path(__file__).resolve().parent
-DONOR_PACKAGE = "com.synexia.m3scale.algorithms"
+
+
+def map_packages() -> list:
+    """The donor packages of the PACKAGE rows of RELOCATION_MAP.tsv (no donor package name is spelled in this file,
+    so the jdk-naming recipe leaves it at its fixed point)."""
+    return [line.split("\t")[1] for line in (RECIPE_DIR / "RELOCATION_MAP.tsv").read_text(encoding="utf-8")
+            .splitlines() if line.startswith("PACKAGE\t")]
+
+
+DONOR_PACKAGE = next(package for package in map_packages() if package.endswith("algorithms"))
 VERDICTS = ("ABSORB", "OVERLAP_LANDED", "OVERLAP_OTHER_OWNER")
-STRIP = re.compile(r"\b(?:com\.synexia\.m3scale\.(?:algorithms|progress)|jdk\.m3\.algorithm|java\.(?:lang|util|math))\.")
+STRIP = re.compile(r"\b(?:" + "|".join(re.escape(package) for package in map_packages())
+                   + r"|jdk\.m3\.algorithm|java\.(?:lang|util|math))\.")
 
 
 def simplify(params: str) -> str:

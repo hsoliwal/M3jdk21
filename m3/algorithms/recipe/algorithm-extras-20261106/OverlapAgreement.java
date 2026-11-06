@@ -1,21 +1,21 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import com.synexia.m3scale.algorithms.AdvancedGraphAlgorithms;
-import com.synexia.m3scale.algorithms.AdvancedStringAlgorithms;
-import com.synexia.m3scale.algorithms.AlgorithmCatalog;
-import com.synexia.m3scale.algorithms.AlgorithmShape;
-import com.synexia.m3scale.algorithms.BacktrackingAlgorithms;
-import com.synexia.m3scale.algorithms.BitAlgorithms;
-import com.synexia.m3scale.algorithms.DynamicProgrammingAlgorithms;
-import com.synexia.m3scale.algorithms.GraphAlgorithms;
-import com.synexia.m3scale.algorithms.IntAlgorithms;
-import com.synexia.m3scale.algorithms.LinkedListAlgorithms;
-import com.synexia.m3scale.algorithms.MatrixAlgorithms;
-import com.synexia.m3scale.algorithms.PrimitiveTrie;
-import com.synexia.m3scale.algorithms.RangeQueryStructures;
-import com.synexia.m3scale.algorithms.StringAlgorithms;
-import com.synexia.m3scale.algorithms.TreeAlgorithms;
+import DONOR_PACKAGE.AdvancedGraphAlgorithms;
+import DONOR_PACKAGE.AdvancedStringAlgorithms;
+import DONOR_PACKAGE.AlgorithmCatalog;
+import DONOR_PACKAGE.AlgorithmShape;
+import DONOR_PACKAGE.BacktrackingAlgorithms;
+import DONOR_PACKAGE.BitAlgorithms;
+import DONOR_PACKAGE.DynamicProgrammingAlgorithms;
+import DONOR_PACKAGE.GraphAlgorithms;
+import DONOR_PACKAGE.IntAlgorithms;
+import DONOR_PACKAGE.LinkedListAlgorithms;
+import DONOR_PACKAGE.MatrixAlgorithms;
+import DONOR_PACKAGE.PrimitiveTrie;
+import DONOR_PACKAGE.RangeQueryStructures;
+import DONOR_PACKAGE.StringAlgorithms;
+import DONOR_PACKAGE.TreeAlgorithms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -50,10 +50,10 @@ import jdk.m3.tools.cpu.M3BipartiteMatching;
 import jdk.m3.tools.cpu.M3KnapsackSelection;
 import jdk.m3.tools.cpu.M3SuffixArray;
 
-//FLLDCIM: NEC - overlap agreement of recipe/algorithm-extras-20261106 (overlap.sh); evidence for the DROP rows, never a port
+//FLLDCIM: NEC - overlap agreement of recipe/algorithm-extras-20261106 (overlap.sh); evidence for the DROP rows, never a port; a template: overlap.sh replaces DONOR_PACKAGE in the imports by the donor package of RELOCATION_MAP.tsv, so no donor package name is spelled here (jdk-naming fixed point)
 /**
  * Overlap agreement driver (gate 4): every donor member the census marks OVERLAP_LANDED or OVERLAP_OTHER_OWNER runs
- * next to its owner on the same seeded fixtures in one JVM (donor package com.synexia.m3scale.algorithms, owners
+ * next to its owner on the same seeded fixtures in one JVM (the donor package of the PACKAGE row, owners
  * jdk.m3.algorithm, jdk.m3.collections, jdk.m3.tools.cpu and java.base jdk.internal.m3). Results are mapped to one
  * representation (int[] vs List, CSR vs Map, array tree vs Node) and compared: AGREE when equal (or both throw the same
  * exception class), EQUIVALENT when they differ but both are valid answers of the problem (ties in top-k, palindromes,

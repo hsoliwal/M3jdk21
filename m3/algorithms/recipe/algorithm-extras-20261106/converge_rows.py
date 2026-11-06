@@ -3,12 +3,14 @@
 # SPDX-License-Identifier: Apache-2.0
 """Ledger rows of recipe/algorithm-extras-20261106 in m3/qualification/converge-collections-20261030/CONVERGE_COLLECTIONS.tsv.
 
-One row per donor file of src/main/java/com/synexia/m3scale/algorithms (21): the FILE rows of RELOCATION_MAP.tsv as
+One row per donor file of the donor catalogue directory (21): the FILE rows of RELOCATION_MAP.tsv as
 PRESENT_IN_M3JDK at their relocated target, the four catalog files (SKIP + NEC rows) as PRESENT_IN_M3JDK at their
 owner M3AlgorithmShapeCatalog. A row whose source is already in the ledger is updated in place; a new row is inserted
 after the anchor (the progress-contract row of families-20261106), in donor path order. Idempotent: a second run
 changes nothing; --check writes nothing and exits 1 when a run would change the ledger. Re-run after every rebase (the
-ledger is shared with parallel leaves). usage: python -I converge_rows.py [--check]
+ledger is shared with parallel leaves). The donor repository name, directory and anchor path are read from the REPO,
+FILE and OWNED rows of RELOCATION_MAP.tsv, so no donor name is spelled here (jdk-naming fixed point).
+usage: python -I converge_rows.py [--check]
 """
 from __future__ import annotations
 
@@ -17,9 +19,10 @@ from pathlib import Path
 
 RECIPE_DIR = Path(__file__).resolve().parent
 LEDGER = RECIPE_DIR.parents[2] / "qualification" / "converge-collections-20261030" / "CONVERGE_COLLECTIONS.tsv"
-REPO = "synexia-m3scale-apache2:"
-ANCHOR = REPO + "src/main/java/com/synexia/m3scale/progress/M3ProgressMonitor.java\t"
-DONOR_DIR = "src/main/java/com/synexia/m3scale/algorithms/"
+MAP_ROWS = [line.split("\t") for line in (RECIPE_DIR / "RELOCATION_MAP.tsv").read_text(encoding="utf-8").splitlines()]
+REPO = next(row[1] for row in MAP_ROWS if row[0] == "REPO").rpartition("/")[2] + ":"
+ANCHOR = REPO + next(row[1] for row in MAP_ROWS if row[0] == "OWNED") + "\t"
+DONOR_DIR = next(row[1] for row in MAP_ROWS if row[0] == "FILE").rpartition("/")[0] + "/"
 CATALOG = ("AlgorithmCatalog", "AlgorithmDescriptor", "AlgorithmShape", "AlgorithmTemplate")
 CATALOG_OWNER = "m3/algorithms/src/main/java/jdk/m3/algorithm/M3AlgorithmShapeCatalog.java"
 

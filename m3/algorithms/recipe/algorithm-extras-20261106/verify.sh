@@ -39,10 +39,15 @@ after=$(sha256sum "$RECIPE_DIR/OVERLAP.tsv" | cut -d' ' -f1)
 [ "$before" = "$after" ] || { echo "OVERLAP table changed: $before -> $after"; exit 1; }
 "$PY" -I "$RECIPE_DIR/census.py" --donor-classes "$3/overlap/donor" --landed-classes "$MODULE/target/classes" \
     --owner-cp "$3/overlap/cpu$SEP$3/overlap/javabase$SEP$DEP_CP" --javap "$JAVA_HOME/bin/javap" | tail -n 1
+# the donor's plain-main self-test (its path is the second SKIP row of the map, its package the PACKAGE row: no donor
+# package name is spelled here)
 mkdir -p "$3/selftest"
-git -C "$1" show "$2:src/test/java/com/synexia/m3scale/algorithms/AlgorithmsSelfTest.java" > "$3/selftest/AlgorithmsSelfTest.java"
-"$JAVA_HOME/bin/javac" --release 21 -cp "$3/overlap/donor" -d "$3/selftest" "$3/selftest/AlgorithmsSelfTest.java"
-timeout 120 "$JAVA_HOME/bin/java" -cp "$3/overlap/donor$SEP$3/selftest" com.synexia.m3scale.algorithms.AlgorithmsSelfTest
+MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
+selftest=$(awk -F'\t' '$1=="SKIP" && $2 ~ /SelfTest\.java$/ {print $2; exit}' "$MAP")
+donor_pkg=$(awk -F'\t' '$1=="PACKAGE" && $2 ~ /algorithms$/ {print $2; exit}' "$MAP")
+git -C "$1" show "$2:$selftest" > "$3/selftest/$(basename "$selftest")"
+"$JAVA_HOME/bin/javac" --release 21 -cp "$3/overlap/donor" -d "$3/selftest" "$3/selftest/$(basename "$selftest")"
+timeout 120 "$JAVA_HOME/bin/java" -cp "$3/overlap/donor$SEP$3/selftest" "$donor_pkg.$(basename "$selftest" .java)"
 bash "$MODULE/recipe/families-20261106/differential.sh" "$1" "$2" "$3/families" 100000 | tee "$3/families.log" | tail -n 1
 grep -q "relocated_sha256=$FAMILIES_SHA" "$3/families.log" || { echo "families digest changed"; exit 1; }
 bash "$MODULE/recipe/graph-trie-20261106/differential.sh" "$1" "$2" "$3/graphtrie" 100000 100000 | tee "$3/graphtrie.log" | tail -n 1

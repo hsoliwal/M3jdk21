@@ -43,8 +43,9 @@ donor_classes=$(find "$SCRATCH/classes" -name '*.class' | wc -l | tr -d ' ')
 reverse="$SCRATCH/reverse.sed"
 awk -F'\t' '$1=="TYPE" && $2!=$3 {print "s/\\b" $3 "\\b/" $2 "/g"}' "$MAP" > "$reverse"
 donor_pkg=$(awk -F'\t' '$1=="PACKAGE" && $3=="jdk.m3.algorithm" && $2 ~ /algorithms$/ {print $2; exit}' "$MAP")
+progress_pkg=$(awk -F'\t' '$1=="PACKAGE" && $3=="jdk.m3.algorithm" && $2 ~ /progress$/ {print $2; exit}' "$MAP")
 sed -f "$reverse" "$DRIVER_SRC" \
-    | sed "s/^package jdk\.m3\.algorithm;/package $donor_pkg;\nimport com.synexia.m3scale.progress.M3ProgressMonitor;/" \
+    | sed "s/^package jdk\.m3\.algorithm;/package $donor_pkg;\nimport $progress_pkg.M3ProgressMonitor;/" \
     > "$SCRATCH/driver-src/M3AlgorithmExtrasDump.java"
 "$JAVA_BIN/javac" --release 21 -Xlint:all -Werror -cp "$SCRATCH/classes" -d "$SCRATCH/driver-classes" \
     "$SCRATCH/driver-src/M3AlgorithmExtrasDump.java"

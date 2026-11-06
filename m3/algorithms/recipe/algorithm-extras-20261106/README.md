@@ -6,7 +6,7 @@ Third algorithms leaf of the m3scale convergence plan (`C:/m3-superset/conv/plan
 ABSORB) into the module `org.m3jdk.algorithms` (package `jdk.m3.algorithm`). The donor is the older, broader catalogue
 `src/main/java/com/synexia/m3scale/algorithms` of `hsoliwal/synexia-m3scale-apache2` develop
 `3385d79a2968c770aedf1d3398b2a62f05ebc092` (21 files, 4,894 LOC, last substantive change 9af4ac4e 2026-09-25,
-restored 99f80871 2026-10-27; built upstream only through the root monolith pom). Only the members that the landed
+restored 99f80871 2026-10-27; built upstream only through the root monolith pom); gates run on master a33b19ba618 and again on c7f779bc370 after the rebase over #2551 (min-cost flow). Only the members that the landed
 families (`recipe/families-20261106`, #2509) and graph-trie (`recipe/graph-trie-20261106`, #2535) leaves and the other
 M3JDK owners do not already answer are relocated; per-method NEC, the landed body wins on overlap.
 
@@ -64,7 +64,7 @@ not a test) `M3AlgorithmExtrasDump`.
 | map | `RELOCATION_MAP.tsv`: 1 REPO, 17 FILE, 1 OWNED, 2 PACKAGE, 18 TYPE, 1 EXTERNAL, 81 DROP_METHOD, 7 DROP_TYPE, 9 DROP_LINE (imports only dropped members used), 2 INSERT_AFTER (explicit constructors of IntMinStack and MedianTracker, missing-explicit-ctor), 2 SKIP, 5 NEC |
 | provenance | `PROVENANCE.tsv`: body_match=TRUE 17/17 (every kept line a donor line or its renamed form) |
 | ledger | `converge_rows.py`: 21 rows in `m3/qualification/converge-collections-20261030/CONVERGE_COLLECTIONS.tsv` (PRESENT_IN_M3JDK 75 -> 96); re-run after a rebase |
-| naming | `jdk_naming.py apply --only m3/algorithms/`: 0 moves, 0 rewrites, 0 refusals; fixed point 0/0 |
+| naming | `jdk_naming.py apply --only m3/algorithms/`: 0 moves, 0 rewrites, 0 refusals; fixed point 0/0 on the committed tree (the recipe scripts read donor package and repository names from `RELOCATION_MAP.tsv`; `OverlapAgreement.java` is a `DONOR_PACKAGE` template) |
 
 ## NEC observations (`OVERLAP.tsv`, landed or owner body wins)
 

@@ -24,11 +24,15 @@ CPU="$MODULE/../tooling/module-packs/cpu-tools/src"
 rm -rf "$SCRATCH/overlap"
 mkdir -p "$SCRATCH/overlap/donor-src" "$SCRATCH/overlap/donor" "$SCRATCH/overlap/cpu" "$SCRATCH/overlap/javabase-src/jdk/internal/m3" "$SCRATCH/overlap/javabase" "$SCRATCH/overlap/driver"
 
-# 1. the whole donor catalogue and its progress contract
-git -C "$DONOR_GIT" ls-tree --name-only "$REV" src/main/java/com/synexia/m3scale/algorithms/ \
+# 1. the whole donor catalogue (the directory of the FILE rows) and its progress contract (the OWNED row); donor paths
+#    and packages come from RELOCATION_MAP.tsv only, so no donor package name is spelled in this script
+MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
+donor_dir=$(awk -F'\t' '$1=="FILE" {sub(/[^\/]*$/, "", $2); print $2; exit}' "$MAP")
+progress_path=$(awk -F'\t' '$1=="OWNED" {print $2; exit}' "$MAP")
+donor_pkg=$(awk -F'\t' '$1=="PACKAGE" && $2 ~ /algorithms$/ {print $2; exit}' "$MAP")
+git -C "$DONOR_GIT" ls-tree --name-only "$REV" "$donor_dir" \
     | while read -r path; do git -C "$DONOR_GIT" show "$REV:$path" > "$SCRATCH/overlap/donor-src/$(basename "$path")"; done
-git -C "$DONOR_GIT" show "$REV:src/main/java/com/synexia/m3scale/progress/M3ProgressMonitor.java" \
-    > "$SCRATCH/overlap/donor-src/M3ProgressMonitor.java"
+git -C "$DONOR_GIT" show "$REV:$progress_path" > "$SCRATCH/overlap/donor-src/$(basename "$progress_path")"
 "$JAVA_BIN/javac" --release 21 -Xlint:all -Werror -d "$SCRATCH/overlap/donor" "$SCRATCH"/overlap/donor-src/*.java
 
 # 2. the cpu-tools owners and the java.base owner
@@ -42,7 +46,10 @@ git -C "$MODULE" show HEAD:src/java.base/share/classes/jdk/internal/m3/M3IntAlgo
 
 # 3. the driver, then the table
 CP="$SCRATCH/overlap/donor$SEP$MODULE/target/classes$SEP$SCRATCH/overlap/cpu${DEP_CP:+$SEP$DEP_CP}"
-"$JAVA_BIN/javac" --release 21 -Xlint:all,-processing -Werror -cp "$CP" -d "$SCRATCH/overlap/driver" "$RECIPE_DIR/OverlapAgreement.java"
+mkdir -p "$SCRATCH/overlap/driver-src"
+sed "s/^import DONOR_PACKAGE\./import $donor_pkg./" "$RECIPE_DIR/OverlapAgreement.java" > "$SCRATCH/overlap/driver-src/OverlapAgreement.java"
+"$JAVA_BIN/javac" --release 21 -Xlint:all,-processing -Werror -cp "$CP" -d "$SCRATCH/overlap/driver" \
+    "$SCRATCH/overlap/driver-src/OverlapAgreement.java"
 timeout "$RUN_SECONDS" "$JAVA_BIN/java" --patch-module "java.base=$SCRATCH/overlap/javabase" \
     --add-exports java.base/jdk.internal.m3=ALL-UNNAMED -XX:-OmitStackTraceInFastThrow \
     -cp "$SCRATCH/overlap/driver$SEP$CP" OverlapAgreement > "$SCRATCH/overlap/OVERLAP.tsv"
