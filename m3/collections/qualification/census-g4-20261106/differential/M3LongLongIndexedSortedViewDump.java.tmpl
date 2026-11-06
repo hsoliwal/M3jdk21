@@ -1,0 +1,155 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+// Differential + reference-model driver of qualification/census-g4-20261106 (template: @PKG@ is the donor or the
+// relocated package of M3LongLongIndexedSortedView). Seeded snapshots (sizes 0..96, duplicate-key and length-mismatch
+// refusals, Long.MIN/MAX keys); every query, slice, sub/head/tail map and mask filter (JAVA backend) is printed one per
+// line (the dump) and compared with a java.util.TreeMap model (filters: a TreeMap rebuilt from the aligned states).
+import @PKG@.M3LongLongIndexedSortedView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Random;
+import java.util.TreeMap;
+import java.util.function.Supplier;
+
+public final class M3LongLongIndexedSortedViewDump {
+    private static final StringBuilder OUT = new StringBuilder();
+    private static long modelled;
+    private static long mismatches;
+
+    private M3LongLongIndexedSortedViewDump() { }
+
+    private static String run(Supplier<Object> op) {
+        try {
+            Object value = op.get();
+            return value instanceof long[] longs ? Arrays.toString(longs) : String.valueOf(value);
+        } catch (RuntimeException e) {
+            return "EX:" + e.getClass().getSimpleName();
+        }
+    }
+
+    private static void line(String tag, String got, String model) {
+        OUT.append(tag).append(" -> ").append(got).append('\n');
+        if (model != null) {
+            modelled++;
+            if (!got.equals(model) && ++mismatches <= 5) System.err.println("MISMATCH " + tag + " got=" + got + " model=" + model);
+        }
+    }
+
+    private static String entries(M3LongLongIndexedSortedView view) {
+        return Arrays.toString(view.keys()) + "=" + Arrays.toString(view.values());
+    }
+
+    private static String entries(NavigableMap<Long, Long> map) {
+        long[] k = new long[map.size()];
+        long[] v = new long[map.size()];
+        int i = 0;
+        for (Map.Entry<Long, Long> e : map.entrySet()) { k[i] = e.getKey(); v[i++] = e.getValue(); }
+        return Arrays.toString(k) + "=" + Arrays.toString(v);
+    }
+
+    private static String key(Long key, long fallback) {
+        return String.valueOf(key == null ? fallback : key);
+    }
+
+    private static void query(String tag, M3LongLongIndexedSortedView view, NavigableMap<Long, Long> model, Random random) {
+        line(tag + " entries", run(() -> entries(view)), entries(model));
+        line(tag + " size", run(() -> view.size() + ":" + view.isEmpty()), model.size() + ":" + model.isEmpty());
+        line(tag + " first", run(view::firstKey), model.isEmpty() ? "EX:NoSuchElementException" : String.valueOf(model.firstKey()));
+        line(tag + " last", run(view::lastKey), model.isEmpty() ? "EX:NoSuchElementException" : String.valueOf(model.lastKey()));
+        List<Long> modelKeys = new ArrayList<>(model.keySet());
+        for (int q = 0; q < 6; q++) {
+            long pivot = probe(random, modelKeys);
+            String t = tag + " q" + q + " " + pivot;
+            line(t + " contains", run(() -> view.containsKey(pivot)), String.valueOf(model.containsKey(pivot)));
+            line(t + " get", run(() -> view.getOrDefault(pivot, -7L)), String.valueOf(model.getOrDefault(pivot, -7L)));
+            long below = modelKeys.stream().filter(k -> k < pivot).count();
+            line(t + " rank", run(() -> view.rank(pivot)), String.valueOf(below));
+            line(t + " index", run(() -> view.indexOfKey(pivot)), String.valueOf(model.containsKey(pivot) ? below : -1));
+            line(t + " floor", run(() -> view.floorKey(pivot, -9L)), key(model.floorKey(pivot), -9L));
+            line(t + " ceiling", run(() -> view.ceilingKey(pivot, -9L)), key(model.ceilingKey(pivot), -9L));
+            line(t + " lower", run(() -> view.lowerKey(pivot, -9L)), key(model.lowerKey(pivot), -9L));
+            line(t + " higher", run(() -> view.higherKey(pivot, -9L)), key(model.higherKey(pivot), -9L));
+            int ordinal = random.nextInt(model.size() + 2) - 1;
+            line(t + " keyAt " + ordinal, run(() -> view.keyAt(ordinal) + "=" + view.valueAt(ordinal)),
+                    ordinal < 0 || ordinal >= model.size() ? null : modelKeys.get(ordinal) + "=" + model.get(modelKeys.get(ordinal)));
+        }
+    }
+
+    private static long probe(Random random, List<Long> keys) {
+        int pick = random.nextInt(8);
+        if (pick < 4 && !keys.isEmpty()) return keys.get(random.nextInt(keys.size())) + (pick == 3 ? 1 : 0);
+        if (pick == 4) return random.nextBoolean() ? Long.MIN_VALUE : Long.MAX_VALUE;
+        return random.nextInt(400) - 200;
+    }
+
+    private static TreeMap<Long, Long> slice(NavigableMap<Long, Long> model, int offset, int length) {
+        TreeMap<Long, Long> out = new TreeMap<>();
+        int i = 0;
+        for (Map.Entry<Long, Long> e : model.entrySet()) {
+            if (i >= offset && i < offset + length) out.put(e.getKey(), e.getValue());
+            i++;
+        }
+        return out;
+    }
+
+    public static void main(String[] args) {
+        long snapshots = Long.parseLong(args[0]);
+        Random random = new Random(Long.parseLong(args[1]));
+        for (long s = 0; s < snapshots; s++) {
+            int n = random.nextInt(97);
+            long[] keys = new long[n];
+            long[] values = new long[n];
+            TreeMap<Long, Long> model = new TreeMap<>();
+            boolean duplicate = false;
+            for (int i = 0; i < n; i++) {
+                int pick = random.nextInt(40);
+                keys[i] = pick == 0 ? Long.MIN_VALUE : pick == 1 ? Long.MAX_VALUE : random.nextInt(300) - 150;
+                values[i] = random.nextLong();
+                duplicate |= model.put(keys[i], values[i]) != null;
+            }
+            String tag = "s" + s + " n" + n;
+            if (random.nextInt(50) == 0) {
+                long[] shorter = Arrays.copyOf(values, Math.max(0, n - 1));
+                line(tag + " mismatch", run(() -> M3LongLongIndexedSortedView.snapshot(keys, shorter).size()),
+                        n == 0 ? "0" : "EX:IllegalArgumentException");
+            }
+            String made = run(() -> M3LongLongIndexedSortedView.snapshot(keys, values).size());
+            line(tag + " snapshot", made, duplicate ? "EX:IllegalArgumentException" : String.valueOf(model.size()));
+            if (duplicate) continue;
+            M3LongLongIndexedSortedView view = M3LongLongIndexedSortedView.snapshot(keys, values);
+            if (n > 0) keys[0] ^= 1; // the snapshot is detached: later writes to the caller's array are invisible
+            query(tag, view, model, random);
+            int offset = random.nextInt(n + 1);
+            int length = random.nextInt(n - offset + 1);
+            line(tag + " slice " + offset + " " + length, run(() -> entries(view.slice(offset, length))), entries(slice(model, offset, length)));
+            line(tag + " slice bad", run(() -> view.slice(offset, n - offset + 1).size()), "EX:IndexOutOfBoundsException");
+            List<Long> modelKeys = new ArrayList<>(model.keySet());
+            long low = probe(random, modelKeys);
+            long high = low + random.nextInt(120);
+            if (low <= high) {
+                M3LongLongIndexedSortedView sub = view.subMap(low, high);
+                query(tag + " sub[" + low + "," + high + ")", sub, model.subMap(low, true, high, false), random);
+            }
+            line(tag + " head " + high, run(() -> entries(view.headMap(high))), entries(model.headMap(high, false)));
+            line(tag + " tail " + low, run(() -> entries(view.tailMap(low))), entries(model.tailMap(low, true)));
+            byte[] states = new byte[n];
+            for (int i = 0; i < n; i++) states[i] = (byte) random.nextInt(8);
+            int required = 1 << random.nextInt(3);
+            TreeMap<Long, Long> kept = new TreeMap<>();
+            long[] originalKeys = view.keys();
+            long[] originalValues = view.values();
+            for (int i = 0; i < n; i++) if ((states[i] & required) == required) kept.put(originalKeys[i], originalValues[i]);
+            String filtered = run(() -> entries(view.filtered(states, required)));
+            line(tag + " filter " + required, filtered, entries(kept));
+            if (!filtered.startsWith("EX:")) query(tag + " filtered", view.filtered(states, required), kept, random);
+            line(tag + " filter short", run(() -> view.filtered(Arrays.copyOf(states, Math.max(0, n - 1)), required).size()),
+                    n == 0 ? null : "EX:IllegalArgumentException");
+        }
+        System.out.print(OUT);
+        System.err.println("snapshots=" + snapshots + " modelled=" + modelled + " mismatches=" + mismatches);
+    }
+}

@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+date	recipe	version	lesson	evidence
+2026-11-06	differential	-	a donor class that calls a package-private atom of an existing owner (M3IndexMaskCompactor.validate/matches) is compiled on the donor side against that owner's own source re-packaged into the donor package (sed of the package line): the dependency body is byte-identical on both sides, so the dump compares only the relocated class	census-g4-20261106: dumps IDENTICAL, 779,583 lines
+2026-11-06	differential	-	a TreeMap sub-map model throws on out-of-range headMap probes; rank/index models over sub-ranges count the model's key list instead	M3LongLongIndexedSortedViewDump first draft: IllegalArgumentException toKey out of range in the model, not the owner
