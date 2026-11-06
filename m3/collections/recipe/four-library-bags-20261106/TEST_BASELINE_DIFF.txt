@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Module test sets of recipe four-library-bags-20261106: mvn -B -ntp -f m3/collections/pom.xml test (maven-surefire-plugin 3.2.5, JDK 21.0.9) on base dbce93c3abf and on this head, same sparse worktree, same local repository, both runs with the local-only master-red baseline patch (GATES.tsv row 1_package_lint_werror: one explicit constructor in M3PrimitiveRoaringIntSet, applied to base and head alike, never committed).
+# base: Tests run: 1898, Failures: 0, Errors: 0, Skipped: 132 (01:42 min)
+# head: Tests run: 1902, Failures: 0, Errors: 0, Skipped: 132 (01:31 min); +4 = M3FourLibraryBagsTest (bagAlgebraProof, referenceModel, rehashFailurePreservesLanes, removalSurvivesFailedCompaction): Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.970 s -- in jdk.m3.collections.M3FourLibraryBagsTest
+# test classes reported: base 292, head 293
+## base failing set
+## head failing set
+## diff
+(empty: both failing sets are empty)
