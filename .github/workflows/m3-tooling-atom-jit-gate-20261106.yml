@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: Apache-2.0
+# Registration of m3/tooling/atom-jit-gate (written by m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py,
+# the way m3/tooling/atom-census is registered: a standalone pom.xml with its own workflow).
+name: M3JDK21 per-atom JIT retest gate (tooling)
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/atom-jit-gate/**'
+      - 'm3/tooling/atom-census/**'
+      - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
+  push:
+    paths:
+      - 'm3/tooling/atom-jit-gate/**'
+      - 'm3/tooling/atom-census/**'
+      - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
+permissions:
+  contents: read
+jobs:
+  atom-jit-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install the atom census the gate atomizes with
+        run: mvn -B -ntp -q -f m3/tooling/atom-census/pom.xml -DskipTests install
+      - name: Package the gate (-Xlint:all -Werror) and run its JUnit tests
+        run: mvn -B -ntp -f m3/tooling/atom-jit-gate/pom.xml package
+      - name: Fixture gate (javac -h, C17/C++20 JNI, nm exports, four JVM modes, negative control)
+        shell: bash
+        run: |
+          set -euo pipefail
+          gate=m3/tooling/atom-jit-gate/fixture-gate
+          python3 -I "$gate/verify.py" --evidence "$RUNNER_TEMP/atom-jit-fixture" --timeout-seconds 120
+          python3 -I "$gate/verify.py" --evidence "$RUNNER_TEMP/atom-jit-negative" --timeout-seconds 120 --negative-test
+          (cd "$gate" && python3 -m unittest -q test_verify)
+      - name: Explicit product hold
+        run: echo 'TOOLING_CI_DOES_NOT_PROVE_FULL_JDK21_JTREG_IMAGE_C1_C2_JNI_ABI_CROSS_PLATFORM'

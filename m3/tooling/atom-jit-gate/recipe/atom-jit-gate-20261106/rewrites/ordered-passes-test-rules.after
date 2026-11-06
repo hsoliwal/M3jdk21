@@ -1,0 +1,3 @@
+    private static final String PATH = "src/java.base/share/classes/java/lang/M3Synthetic.java";
+    private static final Path RULES = Path.of(System.getProperty("m3.atomjit.patternRules",
+            "../atom-census/PATTERN_RULES.tsv"));
