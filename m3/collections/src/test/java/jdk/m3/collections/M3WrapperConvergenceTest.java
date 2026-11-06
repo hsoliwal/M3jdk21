@@ -10,4 +10,10 @@ class M3WrapperConvergenceTest {
     void strictReadOnlyListIterationAndRetainedFailureContracts() {
         M3WrapperConvergenceContract.run("readonly-policy");
     }
+
+    //FLLDCIM: MRL - stale-contracts-20261106 W1: comparator-failure mode wired; check follows 79a8df95080/ef0beec8bfb
+    @Test
+    void comparatorOwnedFailurePropagatesThroughBoundedNavigation() {
+        M3WrapperConvergenceContract.run("comparator-failure");
+    }
 }
