@@ -32,6 +32,7 @@ package java.lang;
 
 import jdk.internal.misc.Blocker;
 import jdk.internal.vm.annotation.IntrinsicCandidate;
+import java.security.SHA256Adapter;
 
 /**
  * Class {@code Object} is the root of the class hierarchy.
@@ -73,7 +74,11 @@ public class Object {
         if (clazz.isInstance(this)) {
             return clazz.cast(this);
         }
-        return clazz == M3Object.class ? clazz.cast(M3Object.of(this)) : null;
+        if (clazz == M3Object.class) {
+            return clazz.cast(M3Object.of(this));
+        }
+        return clazz == SHA256Adapter.class
+                ? clazz.cast(SHA256Adapter.of(this)) : null;
     }
 
     /**
