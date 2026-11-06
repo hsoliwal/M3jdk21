@@ -1,0 +1,168 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+// Differential + reference-model driver of qualification/census-g1-20261106 (template: @PKG@ is the donor or the
+// relocated package of M3FilteredMaps). Seeded ops over Map (HashMap), SortedMap (checked, non-navigable TreeMap) and
+// NavigableMap (TreeMap) owners
+// wrapped twice (filtered(filtered(owner, P1), P2): the orderedAnd composition path). Every op result (value or
+// exception simple name) is digested; modelled ops are also compared with a brute-force java.util model of the
+// documented contract (visible = P1 && P2 over the stored entry; rejected put = IllegalArgumentException with the
+// owner unchanged; put/remove/clear touch visible mappings only; navigation over the visible keys), and the owner
+// is compared with the model owner after every op.
+import @PKG@.M3FilteredMaps;
+
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Objects;
+import java.util.Random;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.function.BiPredicate;
+
+public final class M3FilteredMapsDump {
+    private static final BiPredicate<Integer, Integer> P1 = (k, v) -> v == null || (k + v) % 3 != 0;
+    private static final BiPredicate<Integer, Integer> P2 = (k, v) -> k % 5 != 1;
+    private static final String NA = "\u0000";
+
+    private M3FilteredMapsDump() { }
+
+    private static boolean vis(Map<Integer, Integer> owner, Integer k) {
+        return owner.containsKey(k) && P1.test(k, owner.get(k)) && P2.test(k, owner.get(k));
+    }
+
+    private static List<Integer> visibleKeys(Map<Integer, Integer> owner) {
+        List<Integer> keys = new ArrayList<>();
+        owner.forEach((k, v) -> { if (P1.test(k, v) && P2.test(k, v)) keys.add(k); });
+        return keys;
+    }
+
+    private static String ex(RuntimeException e) {
+        return "EX:" + e.getClass().getSimpleName();
+    }
+
+    private static String actual(Map<Integer, Integer> view, int op, Integer k, Integer v) {
+        try {
+            switch (op) {
+                case 0: return String.valueOf(view.get(k));
+                case 1: return String.valueOf(view.containsKey(k));
+                case 2: return String.valueOf(view.put(k, v));
+                case 3: return String.valueOf(view.remove(k));
+                case 4: return String.valueOf(view.size());
+                case 5: return String.valueOf(new ArrayList<>(view.keySet()));
+                case 6: { List<String> out = new ArrayList<>(); view.forEach((a, b) -> out.add(a + "=" + b)); return out.toString(); }
+                case 7: view.clear(); return "cleared";
+                case 8: return String.valueOf(view.containsValue(v));
+                case 9: return String.valueOf(view.putIfAbsent(k, v));
+                case 10: return String.valueOf(view.merge(k, v == null ? 1 : v, (a, b) -> (a + b) % 64));
+                case 11: return String.valueOf(view.equals(new HashMap<>(view)) + ":" + view.hashCode());
+                default: break;
+            }
+            if (op == 12) return String.valueOf(((SortedMap<Integer, Integer>) view).firstKey());
+            if (op == 13) return String.valueOf(((SortedMap<Integer, Integer>) view).lastKey());
+            NavigableMap<Integer, Integer> nav = (NavigableMap<Integer, Integer>) view;
+            switch (op) {
+                case 14: return String.valueOf(nav.ceilingKey(k));
+                case 15: return String.valueOf(nav.headMap(k).size());
+                case 16: { Map.Entry<Integer, Integer> e = nav.pollFirstEntry(); return e == null ? "null" : e.getKey() + "=" + e.getValue(); }
+                case 17: return String.valueOf(new ArrayList<>(nav.descendingMap().keySet()));
+                case 18: return String.valueOf(new ArrayList<>(nav.subMap(k, true, k + 9, false).values()));
+                default: return String.valueOf(new ArrayList<>(nav.tailMap(k).keySet()));
+            }
+        } catch (RuntimeException e) {
+            return ex(e);
+        }
+    }
+
+    /** Brute-force model of the documented contract; NA for ops the model does not cover (digest-only). */
+    private static String model(Map<Integer, Integer> owner, int op, Integer k, Integer v) {
+        List<Integer> keys = visibleKeys(owner);
+        switch (op) {
+            case 0: return String.valueOf(vis(owner, k) ? owner.get(k) : null);
+            case 1: return String.valueOf(vis(owner, k));
+            case 2: {
+                if (!(P1.test(k, v) && P2.test(k, v))) return "EX:IllegalArgumentException";
+                Integer old = vis(owner, k) ? owner.get(k) : null;
+                owner.put(k, v);
+                return String.valueOf(old);
+            }
+            case 3: return String.valueOf(vis(owner, k) ? owner.remove(k) : null);
+            case 4: return String.valueOf(keys.size());
+            case 5: return String.valueOf(keys);
+            case 6: { List<String> out = new ArrayList<>(); for (Integer key : keys) out.add(key + "=" + owner.get(key)); return out.toString(); }
+            case 7: keys.forEach(owner::remove); return "cleared";
+            case 8: { for (Integer key : keys) if (Objects.equals(owner.get(key), v)) return "true"; return "false"; }
+            case 12: return keys.isEmpty() ? "EX:NoSuchElementException" : String.valueOf(keys.get(0));
+            case 13: return keys.isEmpty() ? "EX:NoSuchElementException" : String.valueOf(keys.get(keys.size() - 1));
+            case 14: { for (Integer key : keys) if (key >= k) return String.valueOf(key); return "null"; }
+            case 15: { int n = 0; for (Integer key : keys) if (key < k) n++; return String.valueOf(n); }
+            case 16: {
+                if (keys.isEmpty()) return "null";
+                Integer first = keys.get(0);
+                return first + "=" + owner.remove(first);
+            }
+            default: return NA;
+        }
+    }
+
+    /** HashMap iteration order is not part of any contract: the model compares the Map owner's listings as sets. */
+    private static boolean same(int kind, int op, String expected, String got) {
+        if (kind != 0 || (op != 5 && op != 6) || !got.startsWith("[")) return expected.equals(got);
+        List<String> a = new ArrayList<>(List.of(expected.substring(1, expected.length() - 1).split(", ")));
+        List<String> b = new ArrayList<>(List.of(got.substring(1, got.length() - 1).split(", ")));
+        Collections.sort(a);
+        Collections.sort(b);
+        return a.equals(b);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void main(String[] args) throws Exception {
+        long ops = Long.parseLong(args[0]);
+        long seed = Long.parseLong(args[1]);
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        long modelled = 0;
+        long mismatches = 0;
+        long exceptions = 0;
+        for (int kind = 0; kind < 3; kind++) {
+            Random random = new Random(seed + kind);
+            Map<Integer, Integer> owner = kind == 0 ? new HashMap<>()
+                    : kind == 1 ? Collections.checkedSortedMap(new TreeMap<>(), Integer.class, Integer.class) : new TreeMap<>();
+            Map<Integer, Integer> mirror = kind == 0 ? new HashMap<>() : new TreeMap<>();
+            Map<Integer, Integer> view = kind == 0 ? M3FilteredMaps.filtered(M3FilteredMaps.filtered(owner, P1), P2)
+                    : kind == 1 ? M3FilteredMaps.filtered(M3FilteredMaps.filtered((SortedMap<Integer, Integer>) owner, P1), P2)
+                    : M3FilteredMaps.filtered(M3FilteredMaps.filtered((NavigableMap<Integer, Integer>) owner, P1), P2);
+            int opCount = kind == 2 ? 20 : kind == 1 ? 14 : 12;
+            for (long i = 0; i < ops; i++) {
+                int op = random.nextInt(opCount);
+                if (op == 7 && random.nextInt(16) != 0) op = 0;
+                if (kind == 1 && op >= 12) op = 12 + (op - 12) % 2;
+                Integer k = random.nextInt(32);
+                Integer v = random.nextInt(8) == 0 ? null : random.nextInt(64);
+                String got = actual(view, op, k, v);
+                String expected = model(mirror, op, k, v);
+                if (expected.equals(NA)) {
+                    mirror.clear();
+                    mirror.putAll(owner);
+                } else {
+                    modelled++;
+                    if (!same(kind, op, expected, got) || !mirror.equals(owner)) {
+                        mismatches++;
+                        if (mismatches <= 5) System.out.println("MISMATCH kind=" + kind + " i=" + i + " op=" + op
+                                + " k=" + k + " v=" + v + " got=" + got + " model=" + expected);
+                        mirror.clear();
+                        mirror.putAll(owner);
+                    }
+                }
+                if (got.startsWith("EX:")) exceptions++;
+                digest.update((kind + " " + i + " " + op + " " + k + " " + v + " -> " + got + "\n").getBytes("UTF-8"));
+            }
+            digest.update(("owner " + kind + " " + owner + "\n").getBytes("UTF-8"));
+        }
+        System.out.println("ops=" + ops * 3 + " modelled=" + modelled + " mismatches=" + mismatches + " exceptions="
+                + exceptions + " digest=" + HexFormat.of().formatHex(digest.digest()));
+    }
+}
