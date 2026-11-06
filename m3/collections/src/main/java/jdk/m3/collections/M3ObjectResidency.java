@@ -388,6 +388,7 @@ public final class M3ObjectResidency<T> {
         enforceBudget(-1, 0L);
     }
 
+    //FLLDCIM: MRL - census L066, crate m3-doop-reuse-20261030 (m3-doop-publication-budget-20261030, donor blob 8966285b99e2): re-check the admitted budget after the callbacks; delete the spill copy after it
     private void ensureResident(int slot, long estimatedBytes) {
         State before = stateAt(slot);
         if (before == State.RESIDENT) {
@@ -400,7 +401,7 @@ public final class M3ObjectResidency<T> {
         if ((flags & LAZY_CREATE) == 0 && before == State.ABSENT) {
             throw new IllegalStateException("lazy creation is disabled for absent slot " + slot);
         }
-        admit(estimatedBytes, slot);
+        long target = admit(estimatedBytes, slot);
         try {
             T value;
             if (before == State.SWAPPED) {
@@ -408,12 +409,16 @@ public final class M3ObjectResidency<T> {
                 byte[] bytes = spill.read(slot);
                 value = codec.decode(slot, bytes);
                 Objects.requireNonNull(value, "decoded projection");
-                spill.delete(slot);
             } else {
                 if (factory == null) throw new IllegalStateException("no factory for absent slot");
                 setState(slot, State.CREATING);
                 value = Objects.requireNonNull(factory.create(slot), "created projection");
             }
+            // Factory/read/decode callbacks may consume the originally admitted capacity.
+            if ((flags & OBSERVE_ONLY) == 0 && wouldExceed(estimatedBytes, target)) {
+                throw new BudgetExceededException(estimatedBytes, residentBytes, target);
+            }
+            if (before == State.SWAPPED) spill.delete(slot);
             resident[slot] = value;
             weights[slot] = estimatedBytes;
             if (residentBytes > Long.MAX_VALUE - estimatedBytes) lruScanRequired = true;
@@ -433,7 +438,8 @@ public final class M3ObjectResidency<T> {
         }
     }
 
-    private void admit(long incomingBytes, int requestedSlot) {
+    //FLLDCIM: MRL - census L066, crate m3-doop-reuse-20261030 (m3-doop-publication-budget-20261030): admission returns the target it admitted against
+    private long admit(long incomingBytes, int requestedSlot) {
         long target = targetBudget(HeapSnapshot.current());
         while (wouldExceed(incomingBytes, target)) {
             if ((flags & OBSERVE_ONLY) != 0) break;
@@ -446,6 +452,7 @@ public final class M3ObjectResidency<T> {
         if (wouldExceed(incomingBytes, target) && (flags & OBSERVE_ONLY) == 0) {
             throw new BudgetExceededException(incomingBytes, residentBytes, target);
         }
+        return target;
     }
 
     private void enforceBudget(int requestedSlot, long incomingBytes) {

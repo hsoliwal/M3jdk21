@@ -27,6 +27,13 @@ import java.util.Spliterator;
 public final class M3TreeSet<E> extends AbstractSet<E> implements NavigableSet<E> {
     private final M3TreeMap<E, ?> map;
     private final boolean insertable;
+    //FLLDCIM: MRL - census L077, crate m3jdk21-indexed-tree-hooks-20261021 (donor blob d144421cf952): owner hook for sibling views
+    /**
+     * Original array-backed AVL owner, for sibling M3 filtered/sorted view
+     * algorithms only. This does not expose or duplicate any entry storage.
+     * View bounds and descending order are already encoded in this map.
+     */
+    M3TreeMap<E, ?> indexedOwner() { return map; }
     /** Natural ordering. */
     public M3TreeSet() { this(null); }
     /** Comparator ordering. */
