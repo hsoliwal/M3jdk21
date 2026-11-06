@@ -43,9 +43,10 @@ m3/release/audit-20261030/COMPILE_BLOCKERS.tsv	2	HISTORICAL: evidence, receipts,
 m3/release/audit-20261030/compile_master.log	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
 m3/release/audit-20261030/compile_superset.log	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
 m3/release/audit-20261030/evidence/compile_audit.py	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/search/qualification/relocation-20261106-bmh-cancellation/search_gate.sh	3	HISTORICAL: a past run's gate script or result (#2550, #2562) that put both source roots on -sourcepath
 m3/search/qualification/relocation-20261106-native/gate2.sh	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
-m3/search/qualification/relocation-20261106-reduce/RESULT.md	1	HISTORICAL: a past run's gate script or result (#2550, master e1595e300940) that put both source roots on -sourcepath
-m3/search/qualification/relocation-20261106-reduce/leaf5_gate.sh	3	HISTORICAL: a past run's gate script or result (#2550, master e1595e300940) that put both source roots on -sourcepath
+m3/search/qualification/relocation-20261106-reduce/RESULT.md	1	HISTORICAL: a past run's gate script or result (#2550, #2562) that put both source roots on -sourcepath
+m3/search/qualification/relocation-20261106-reduce/leaf5_gate.sh	3	HISTORICAL: a past run's gate script or result (#2550, #2562) that put both source roots on -sourcepath
 m3/tooling/jdk-naming/RECIPE_MEMORY.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
 m3/tooling/migration-recipes/tasks/m3file-byte-event-fact-20261021/fixed-point-repair-20261021/original-sdk-tests.log	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
 m3/tooling/migration-recipes/tasks/m3string-leaf-cursor-20261021/fixed-point-repair-20261021/original-sdk-tests.log	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
