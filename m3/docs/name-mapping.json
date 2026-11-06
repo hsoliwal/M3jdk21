@@ -10233,6 +10233,10 @@
           {
             "id": "companion-relation-receiver",
             "receipt": "m3/qualification/api-companions-20261029/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "arrays-source-8309665-successor",
+            "receipt": "m3/tooling/name-contract/receipts/arrays-source-successor/RECEIPT.json"
           }
         ],
         "provenance": {
@@ -10255,7 +10259,22 @@
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+              "module": "java.base",
+              "path": "src/java.base/share/classes/java/util/Arrays.java",
+              "symbol": "java.util.Arrays",
+              "signatures": [
+                "java.util.Arrays"
+              ],
+              "sha256": "e81e711d52fee23756fd0bf8e48c27ff0fe971419f4bb1c25ec1aa5ebc203a88",
+              "git_blob_sha1": "2347e48700de1d26f630b348554ea9db3b4db25b",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "previous_targets": [],
           "supersedes": []
         },
