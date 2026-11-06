@@ -5,7 +5,7 @@
 
 The split package jdk.m3.file was owned by two modules: m3/file (descriptor jdk.m3.file, artifact com.m3:m3-file, 18
 main source types at dec547222b30, java.base only) and m3/ports/file (descriptor org.m3jdk.file, artifact
-com.m3:m3-ports-file, 89 main source types, four JNI sources, one qualification lane). This recipe moves every tracked file of m3/ports/file into m3/file (git mv, bytes
+com.m3:m3-ports-file, 82 main source types, four JNI sources, one qualification lane). This recipe moves every tracked file of m3/ports/file into m3/file (git mv, bytes
 unchanged; native/ becomes src/main/native/), writes the union of the two module descriptors and of the two poms from
 templates/ (descriptor org.m3jdk.file, artifact m3-file, requires transitive jdk.m3.collections, every plugin and
 execution of both poms), adapts verify.py (module name, dependency module path) and rewrites the path strings that
