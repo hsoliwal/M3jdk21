@@ -10,6 +10,7 @@
  */
 
 import java.lang.management.ManagementFactory;
+import java.lang.ref.Reference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public final class M3CommonRegexProductTest {
             Class<?> dp = Class.forName("java.lang.M3StringRegexDp");
             STRING_M3 = field(String.class, "m3");
             COMPACT_STRINGS = field(String.class, "COMPACT_STRINGS");
-            TABLES = field(dp, "tables");
+            TABLES = field(dp, "caches");
             FACT_LENGTH = field(facts, "utf16Length");
             FACT_CODE_POINTS = field(facts, "codePointCount");
             OWNER = method(storage, "owner");
@@ -98,10 +99,23 @@ public final class M3CommonRegexProductTest {
         Text text = atom("fresh-digits", digits(97, 43));
         cold(text);
         // A one-character cold expression must not create optional DP tables.
-        Object tablesBefore = TABLES.get(null);
-        equal(decision(text, "."), -1, "cold single dot delegates");
-        publicOracle(text, ".");
-        same(TABLES.get(null), tablesBefore, "cold single dot retains table identity");
+        {
+            Reference<?> tablesRootBefore = tableReference();
+            Object tablesBefore = tableReferent(tablesRootBefore);
+            try {
+                equal(decision(text, "."), -1, "cold single dot delegates");
+                publicOracle(text, ".");
+                Reference<?> tablesRootAfter = tableReference();
+                Object tablesAfter = tableReferent(tablesRootAfter);
+                same(tablesAfter, tablesBefore, "cold single dot retains table identity");
+                // A cleared new generation must not hide cold table preparation.
+                if (tablesRootAfter != tablesRootBefore) {
+                    throw new AssertionError("cold single dot retains metadata root identity");
+                }
+            } finally {
+                Reference.reachabilityFence(tablesBefore);
+            }
+        }
         cold(text);
         equal(decision(text, "\\d+"), -1, "cold digit class delegates");
         publicOracle(text, "\\d+");
@@ -554,6 +568,16 @@ public final class M3CommonRegexProductTest {
             offset += part.length;
         }
         return result;
+    }
+
+    /** Observe the current reclaimable root without preparing optional DP metadata. */
+    private static Reference<?> tableReference() throws ReflectiveOperationException {
+        return (Reference<?>) TABLES.get(null);
+    }
+
+    /** Nullable referent observation; SoftReference.get may refresh its timestamp. */
+    private static Object tableReferent(Reference<?> root) {
+        return root == null ? null : root.get();
     }
 
     private static Field field(Class<?> type, String name) throws ReflectiveOperationException {
