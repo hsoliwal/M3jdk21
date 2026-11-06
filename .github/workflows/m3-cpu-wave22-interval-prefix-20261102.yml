@@ -1,0 +1,229 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Wave22 fused monotone-prefix Java21 C17 JNI original oracles
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/cpu-tools/**'
+      - '.github/workflows/m3-cpu-wave22-interval-prefix-20261102.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-source-custody:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Enforce original Git SHA-1, SHA-256, exact paths and prior owner bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check 69dd6b5543950987920cf8fb4efe2de5096854bb HEAD
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, re, subprocess
+          def git(*args):
+              return subprocess.run(['git', *args], capture_output=True, text=True, check=True).stdout.strip()
+          root=Path('m3/tooling/module-packs/cpu-tools')
+          receipt=root/'refinement-proofs/cpu-structured-wave21-20261102/SOURCE_RECEIPT.tsv'
+          lines=receipt.read_text(encoding='utf-8').splitlines()
+          header='wave\tpath\tpreimage\tsha256_after\tgit_blob_sha1_after\tatom_role\tadmission'
+          if len(lines)!=8 or lines[0]!=header: raise RuntimeError('exact Wave21 seven-target receipt missing')
+          originals=set()
+          for record in lines[1:]:
+              row=record.split('\t')
+              if len(row)!=7: raise RuntimeError('invalid original receipt columns')
+              wave,path,before,digest,blob,role,admission=row
+              if wave!='21' or before!='ABSENT' or admission!='HOLD_UNTIL_ORIGINAL_JAVA_C_JNI_PASS':
+                  raise RuntimeError('unreviewed source preimage/admission')
+              pieces=path.split('/')
+              if (path in originals or not path.startswith('m3/tooling/module-packs/cpu-tools/')
+                  or any(p in ('','.','..') for p in pieces) or '\\' in path):
+                  raise RuntimeError('noncanonical/duplicate target')
+              originals.add(path)
+              if not re.fullmatch('[a-f0-9]{64}',digest) or not re.fullmatch('[a-f0-9]{40}',blob):
+                  raise RuntimeError('malformed SHA identity')
+              source=Path(path)
+              if source.is_symlink() or not source.is_file(): raise RuntimeError('missing/nonregular original source')
+              data=source.read_bytes()
+              data.decode('utf-8',errors='strict')
+              current_digest,current_blob=digest,blob
+              if path == 'm3/tooling/module-packs/cpu-tools/native/m3_interval_set.c':
+                  history='853d3f26ac640b5d32d65ee0819f3330585eb256:'+path
+                  past=subprocess.run(['git','show',history],check=True,capture_output=True).stdout
+                  if hashlib.sha256(past).hexdigest()!=digest or git('rev-parse',history)!=blob:
+                      raise RuntimeError('historical Wave21 native preimage drift')
+                  current_digest='8e256da0d370c3ea3a29af132ed5bb8e0b399e88b7d77aa6260d214f0542228f'
+                  current_blob='8e8a36d707bff57ec5a08e2b239e7af49cc3a7e0'
+              if hashlib.sha256(data).hexdigest()!=current_digest:
+                  raise RuntimeError('source SHA256 drift: '+path)
+              if git('hash-object','--',path)!=current_blob:
+                  raise RuntimeError('donor or reviewed successor Git blob drift: '+path)
+              state=git('ls-files','--stage','--',path).split()
+              if len(state)!=4 or state[0]!='100644' or state[1]!=current_blob or state[2]!='0':
+                  raise RuntimeError('source mode/index drift: '+path)
+          if len(originals)!=7: raise RuntimeError('partial Wave21 source inventory')
+          protected={
+              'm3/tooling/module-packs/cpu-tools/build.py':'0415ed2fd2e49b6b26bcafc76e13023e2ba14411',
+              'm3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java':'70641b2178a62b26ed24b33bcd02f2f45d1494bf',
+              'm3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3RunLengthPostingIndex.java':'dc74c67ae6b61822d7f91b2dcccbcee67d61f3f7',
+              'm3/tooling/module-packs/cpu-tools/native/m3_runlength_postings.c':'cc7783f516c4103b8b41c38ca82361273c4ca9c5',
+          }
+          for path,blob in protected.items():
+              if git('hash-object','--',path)!=blob:
+                  raise RuntimeError('Wave20 original owner lost '+path)
+          old=(root/'WAVE20_COVERAGE.tsv').read_text(encoding='utf-8').splitlines()
+          new=(root/'WAVE21_COVERAGE.tsv').read_text(encoding='utf-8').splitlines()
+          if len(old)!=92 or len(new)!=92 or any(a.split('\t')!=b.split('\t')[:8] for a,b in zip(old,new)):
+              raise RuntimeError('91-category inherited columns changed')
+          wave22=(root/'WAVE22_COVERAGE.tsv').read_text(encoding='utf-8').splitlines()
+          if len(wave22)!=92 or any(a.split('\t')!=b.split('\t')[:11] for a,b in zip(new,wave22)):
+              raise RuntimeError('Wave22 historical 91-category columns drift')
+          print('M3JDK21_WAVE21_EXACT_SOURCE_PASS|blobs=7|categories=91|protected_owners=4|successor=source-pinned')
+          seal=root/'refinement-proofs/cpu-structured-wave22-20261102/SOURCE_RECEIPT.tsv'
+          rows=seal.read_text(encoding='utf-8').splitlines()
+          header='wave\tpath\toriginal_sha256\toriginal_blob\tpost_sha256\tpost_blob\tatom\trelease'
+          if len(rows)!=5 or rows[0]!=header:
+              raise RuntimeError('Wave22 four-target manifest missing')
+          seen22=set()
+          for record in rows[1:]:
+              fields=record.split('\t')
+              if len(fields)!=8: raise RuntimeError('Wave22 manifest arity')
+              wave,path,before,preblob,after,blob,atom,release=fields
+              if wave!='22' or release!='HOLD' or path in seen22 or not path.startswith('m3/tooling/module-packs/cpu-tools/'):
+                  raise RuntimeError('Wave22 source admission refusal')
+              seen22.add(path)
+              if not re.fullmatch('[a-f0-9]{64}',after) or not re.fullmatch('[a-f0-9]{40}',blob):
+                  raise RuntimeError('Wave22 source checksum invalid')
+              source=Path(path)
+              if source.is_symlink() or not source.is_file() or hashlib.sha256(source.read_bytes()).hexdigest()!=after:
+                  raise RuntimeError('Wave22 source bytes drift: '+path)
+              if git('hash-object','--',path)!=blob:
+                  raise RuntimeError('Wave22 source Git blob drift: '+path)
+          if len(seen22)!=4: raise RuntimeError('partial Wave22 source inventory')
+          print('M3JDK21_WAVE22_EXACT_SOURCE_PASS|blobs=4|history=7|categories=91')
+          PY
+  original-java-c-jni:
+    needs: original-source-custody
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original Wave20 and Wave21 Java classes and JNI headers together
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=m3/tooling/module-packs/cpu-tools
+          OUT="$RUNNER_TEMP/m3cpu-wave22"
+          mkdir -p "$OUT/classes" "$OUT/headers" "$OUT/logs"
+          javac --release 21 -proc:none -Xlint:all -Werror -h "$OUT/headers" -d "$OUT/classes" \
+            "$R/src/com.m3.tools.cpu/com/m3/tools/cpu/M3RunLengthPostingIndex.java" \
+            "$R/src/com.m3.tools.cpu/com/m3/tools/cpu/M3RunLengthPostingIndexNative.java" \
+            "$R/src/com.m3.tools.cpu/com/m3/tools/cpu/M3IntIntervalSet.java" \
+            "$R/src/com.m3.tools.cpu/com/m3/tools/cpu/M3IntIntervalSetNative.java" \
+            "$R/fixtures/M3RunLengthPostingIndexOracle.java" \
+            "$R/fixtures/M3RunLengthPostingIndexNativeOracle.java" \
+            "$R/fixtures/M3RunLengthBoundaryOracle.java" \
+            "$R/fixtures/M3RunLengthBatchAdaptiveOracle.java" \
+            "$R/fixtures/M3IntIntervalSetOracle.java" \
+            "$R/fixtures/M3IntIntervalSetJniOracle.java" \
+            "$R/fixtures/M3IntIntervalStreamingOracle.java" \
+            2>&1 | tee "$OUT/logs/java21-javac.log"
+          javap -classpath "$OUT/classes" -public -s \
+            com.m3.tools.cpu.M3RunLengthPostingIndex \
+            com.m3.tools.cpu.M3RunLengthPostingIndexNative \
+            com.m3.tools.cpu.M3IntIntervalSet \
+            com.m3.tools.cpu.M3IntIntervalSetNative | tee "$OUT/logs/public-api.log"
+          grep -F 'Java_com_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0' "$OUT/headers/"*.h
+          grep -F 'Java_com_m3_tools_cpu_M3IntIntervalSetNative_contains0' "$OUT/headers/"*.h
+          echo 'M3JDK21_WAVE21_JAVA21_HEADER_COMPILE_PASS'
+      - name: Compile original Wave20 and Wave21 C17 JNI libraries and original C oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=m3/tooling/module-packs/cpu-tools
+          OUT="$RUNNER_TEMP/m3cpu-wave22"
+          GCC=(gcc -std=c17 -pedantic -Wall -Wextra -Werror -O2 -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux")
+          "${GCC[@]}" -fPIC -shared "$R/native/m3_runlength_postings.c" -o "$OUT/libm3runlength.so" 2>&1 | tee "$OUT/logs/wave20-c17.log"
+          "${GCC[@]}" -fPIC -shared "$R/native/m3_interval_set.c" -o "$OUT/libm3interval.so" 2>&1 | tee "$OUT/logs/wave21-c17.log"
+          for TEST in m3_runlength_kernel_oracle m3_runlength_batch_oracle m3_interval_kernel_oracle m3_interval_streaming_oracle; do
+            "${GCC[@]}" "$R/native/tests/$TEST.c" -o "$OUT/$TEST" 2>&1 | tee "$OUT/logs/$TEST-compile.log"
+          done
+          nm -D --defined-only "$OUT/libm3runlength.so" | tee "$OUT/logs/runlength-exports.log"
+          nm -D --defined-only "$OUT/libm3interval.so" | tee "$OUT/logs/interval-exports.log"
+          grep -F 'Java_com_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0' "$OUT/logs/runlength-exports.log"
+          grep -F 'Java_com_m3_tools_cpu_M3IntIntervalSetNative_contains0' "$OUT/logs/interval-exports.log"
+      - name: Execute original independent C17 kernels and Wave21 UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=m3/tooling/module-packs/cpu-tools
+          OUT="$RUNNER_TEMP/m3cpu-wave22"
+          for TEST in m3_runlength_kernel_oracle m3_runlength_batch_oracle m3_interval_kernel_oracle m3_interval_streaming_oracle; do
+            "$OUT/$TEST" 2>&1 | tee "$OUT/logs/$TEST-runtime.log"
+          done
+          grep -F 'M3_RUNLENGTH_KERNEL_PASS checks=' "$OUT/logs/m3_runlength_kernel_oracle-runtime.log"
+          grep -F 'M3_RUNLENGTH_BATCH_KERNEL_PASS checks=' "$OUT/logs/m3_runlength_batch_oracle-runtime.log"
+          grep -F 'M3_INTERVAL_C_KERNEL_PASS checks=' "$OUT/logs/m3_interval_kernel_oracle-runtime.log"
+          grep -F 'M3_INTERVAL_STREAM_KERNEL_PASS checks=' "$OUT/logs/m3_interval_streaming_oracle-runtime.log"
+          gcc -std=c17 -pedantic -Wall -Wextra -Werror -O1 \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+            "$R/native/tests/m3_interval_kernel_oracle.c" -o "$OUT/interval-ubsan"
+          "$OUT/interval-ubsan" 2>&1 | tee "$OUT/logs/interval-ubsan.log"
+          grep -F 'M3_INTERVAL_C_KERNEL_PASS checks=' "$OUT/logs/interval-ubsan.log"
+          gcc -std=c17 -pedantic -Wall -Wextra -Werror -O1 \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+            "$R/native/tests/m3_interval_streaming_oracle.c" -o "$OUT/stream-ubsan"
+          "$OUT/stream-ubsan" 2>&1 | tee "$OUT/logs/stream-ubsan.log"
+          grep -F 'M3_INTERVAL_STREAM_KERNEL_PASS checks=' "$OUT/logs/stream-ubsan.log"
+          echo 'M3JDK21_WAVE21_C17_KERNEL_PASS'
+      - name: Run original Java21 and Java/JNI differential cases with JIT, interpreter and disabled backends
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/m3cpu-wave22"
+          for MODE in jit interpreted; do
+            OPTS=()
+            if [[ "$MODE" == interpreted ]]; then OPTS=(-Xint); fi
+            for ORACLE in M3RunLengthPostingIndexOracle M3RunLengthBoundaryOracle M3IntIntervalSetOracle; do
+              java "${OPTS[@]}" -cp "$OUT/classes" "$ORACLE" 2>&1 | tee "$OUT/logs/$ORACLE-$MODE.log"
+            done
+            java "${OPTS[@]}" -Xcheck:jni -Dm3.cpu.runlength.native.path="$OUT/libm3runlength.so" \
+              -cp "$OUT/classes" M3RunLengthPostingIndexNativeOracle 2>&1 | tee "$OUT/logs/RunLengthNative-$MODE.log"
+            java "${OPTS[@]}" -Xcheck:jni -Dm3.cpu.runlength.native.path="$OUT/libm3runlength.so" \
+              -cp "$OUT/classes" M3RunLengthBatchAdaptiveOracle 2>&1 | tee "$OUT/logs/RunLengthAdaptive-$MODE.log"
+            java "${OPTS[@]}" -Xcheck:jni -Dm3.cpu.interval.native.path="$OUT/libm3interval.so" \
+              -cp "$OUT/classes" M3IntIntervalSetJniOracle 2>&1 | tee "$OUT/logs/IntervalNative-$MODE.log"
+            grep -F 'M3_INTERVAL_JAVA_PASS checks=' "$OUT/logs/M3IntIntervalSetOracle-$MODE.log"
+            grep -F 'M3_INTERVAL_JNI_PASS checks=' "$OUT/logs/IntervalNative-$MODE.log"
+            java "${OPTS[@]}" -Xcheck:jni -Dm3.cpu.interval.native.path="$OUT/libm3interval.so" \
+              -cp "$OUT/classes" M3IntIntervalStreamingOracle 2>&1 | tee "$OUT/logs/IntervalStream-$MODE.log"
+            grep -F 'M3_INTERVAL_STREAM_JNI_PASS checks=' "$OUT/logs/IntervalStream-$MODE.log"
+            grep -F 'M3_RUNLENGTH_POSTINGS_JAVA_PASS checks=' "$OUT/logs/M3RunLengthPostingIndexOracle-$MODE.log"
+          done
+          java -cp "$OUT/classes" M3IntIntervalSetJniOracle --disabled 2>&1 | tee "$OUT/logs/IntervalNative-disabled.log"
+          grep -F 'M3_INTERVAL_NATIVE_DISABLED_PASS checks=1' "$OUT/logs/IntervalNative-disabled.log"
+          for ORACLE in M3RunLengthPostingIndexNativeOracle M3RunLengthBatchAdaptiveOracle; do
+            java -cp "$OUT/classes" "$ORACLE" 2>&1 | tee "$OUT/logs/$ORACLE-disabled.log"
+          done
+          test -z "$(git status --porcelain)"
+          echo 'M3JDK21_WAVE22_COMBINED_JAVA_C_JNI_PASS'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3jdk21-wave22-java-c-jni-source-logs
+          path: ${{ runner.temp }}/m3cpu-wave21/logs/
+          if-no-files-found: warn
