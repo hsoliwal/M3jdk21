@@ -7,11 +7,13 @@ package com.m3.collections;
 
 import java.util.AbstractMap;
 import java.util.AbstractSet;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 /**
  * Native M3 map-of-lists, distinct from pair-counted M3IndexedMultiValueMap.
@@ -32,6 +34,22 @@ public final class M3ListMultiValueMap<K, V> extends AbstractMap<K, List<V>> {
     @Override public List<V> remove(Object key) { return data.remove(key); }
     @Override public void clear() { data.clear(); }
     @Override public Set<Entry<K, List<V>>> entrySet() { return data.entrySet(); }
+
+    /** Preserve list aliases while traversing without public entry projections. */
+    @Override public void forEach(BiConsumer<? super K, ? super List<V>> action) {
+        Objects.requireNonNull(action);
+        Iterator<K> keys = data.keySet().iterator();
+        while (keys.hasNext()) {
+            K key = keys.next();
+            List<V> values;
+            try {
+                values = data.get(key);
+            } catch (IllegalStateException problem) {
+                throw new ConcurrentModificationException(problem);
+            }
+            action.accept(key, values);
+        }
+    }
 
     /** Lazily create an M3 dynamic-array list; existing caller lists stay aliased. */
     public void add(K key, V value) {
@@ -80,6 +98,18 @@ public final class M3ListMultiValueMap<K, V> extends AbstractMap<K, List<V>> {
             @Override public int size() { return data.size(); }
             @Override public boolean containsKey(Object key) { return data.containsKey(key); }
             @Override public V get(Object key) { return getFirst(key); }
+
+            @Override public void forEach(BiConsumer<? super K, ? super V> action) {
+                Objects.requireNonNull(action);
+                Iterator<K> keys = data.keySet().iterator();
+                while (keys.hasNext()) {
+                    K key = keys.next();
+                    // The former immutable snapshot read happened in iterator.next(),
+                    // outside Map.forEach's invalid-entry exception conversion.
+                    V value = getFirst(key);
+                    action.accept(key, value);
+                }
+            }
             @Override public V put(K key, V value) {
                 V old = getFirst(key);
                 set(key, value);
