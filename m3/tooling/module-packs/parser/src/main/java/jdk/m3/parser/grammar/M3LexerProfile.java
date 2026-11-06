@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.parser.grammar;
 
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
@@ -30,6 +31,8 @@ public final class M3LexerProfile {
   private final boolean hexNumbers;
   private final boolean specialNumberLiterals;
   private final String[] operators;
+  // Derived, bounded and weak: lexical policy remains immutable and owns no source lifetime.
+  private volatile LexicalReuse lexicalReuse;
 
   private M3LexerProfile(Builder builder) {
     identity = builder.identity;
@@ -78,6 +81,36 @@ public final class M3LexerProfile {
   public boolean hexNumbers() { return hexNumbers; }
   public boolean specialNumberLiterals() { return specialNumberLiterals; }
   String[] operatorsForReadOnlyKernel() { return operators; }
+
+  /** Exact source identity and full limits are authority; fingerprints are not reuse keys. */
+  M3TokenStream reuseTokens(String source, M3GrammarLimits limits, M3GrammarBudget budget) {
+    if (!limits.equals(budget.limits())) return null;
+    LexicalReuse reuse = lexicalReuse;
+    if (reuse == null || !limits.equals(reuse.limits)) return null;
+    M3TokenStream original = reuse.tokens.get();
+    if (original == null || original.source() != source) return null;
+    budget.tokens(original.size());
+    budget.work(reuse.work);
+    M3TokenStream result = original.copyView();
+    lexicalReuse = new LexicalReuse(limits, reuse.work, result);
+    return result;
+  }
+
+  void rememberTokens(M3TokenStream tokens, M3GrammarLimits limits, long work) {
+    lexicalReuse = new LexicalReuse(limits, work, tokens);
+  }
+
+  private static final class LexicalReuse {
+    private final M3GrammarLimits limits;
+    private final long work;
+    private final WeakReference<M3TokenStream> tokens;
+
+    private LexicalReuse(M3GrammarLimits limits, long work, M3TokenStream tokens) {
+      this.limits = limits;
+      this.work = work;
+      this.tokens = new WeakReference<>(tokens);
+    }
+  }
 
   /** Stable semantic fingerprint of the immutable lexer policy. */
   public long fingerprint() {
