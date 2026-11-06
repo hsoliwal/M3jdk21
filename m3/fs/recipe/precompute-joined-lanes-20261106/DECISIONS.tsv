@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# Per-hunk verdicts of recipe PRECOMPUTE_JOINED_LANES v1 (apply.py). Synexia owner: indexstring fs/M3FsPrecomputeBundle.java
+# at develop b65df53330e3 (stack 099634440b44 -> 32c9b0d01484 -> a34b8031a324 -> 162fd0b0b5b1 -> cbda6a670661); M3JDK
+# receiver: m3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java blob 73453af87a79 at master cf0429ac1d4 (1,129 lines,
+# diverged: no JoinedContentSegments/JoinedBytePresence/M3KeyValueSlots, laneX accessor helpers, packed LaneTable).
+# Verdicts: APPLIED (post lines already present), APPLICABLE->applied (pre lines present), DIVERGED->mapped (intent
+# maps onto the M3JDK region; the mapped hunk is in stages/), NEC (no M3JDK equivalent, skipped), HANDOFF_45 (search
+# family, owned by session com-synexia-45), DEFERRED (other receiver, next leaf).
+recipe	donor_ref	target	hunk	verdict	mapped_to	evidence
+01-joined-directory-history	42466557a7f	M3FsPrecomputeBundle.java	@@ -90,6 +90,10 @@ Role CONTENT_ID_SHA256, SEGMENT_SOURCE_OFFSETS_I32, SEGMENT_LOGICAL_OFFSETS_I64, SEGMENT_LENGTHS_I32	DIVERGED->mapped	appended after TUPLE_VALUES_I64 (ordinals 59-62), not inserted before it	M3FsPrecomputeCatalog REQUIRED_ROLES/OPTIONAL_ROLES are long literals keyed by Role ordinal (tuple-lane-v1 requires 0x400000000000000L = bit 58 = TUPLE_VALUES_I64); inserting before it would move TUPLE_VALUES_I64 to 62 and silently retarget the mask; 63 roles still fit roleMask(); lane roles are serialized by name (encode/Role.valueOf), so order is not an on-disk contract
+01-joined-directory-history	42466557a7f	M3FsPrecomputeBundle.java	@@ -213,6 +217,18 @@ MappedView.joinedContentSegments	DIVERGED->mapped	requireLane(n).bytes()/ints()/longs() -> laneBytes(n)/laneInts(n)/laneLongs(n)	the M3JDK MappedView has no MappedLane-returning lookups in its accessors; laneInts/laneLongs check the role width (IllegalStateException) like MappedLane.ints()/longs(), laneBytes maps the whole object like MappedLane.bytes()
+01-joined-directory-history	42466557a7f	M3FsPrecomputeBundle.java	@@ -251,6 +267,15 @@ MappedView.joinedBytePresence	DIVERGED->mapped	same laneLongs/laneInts mapping	as above

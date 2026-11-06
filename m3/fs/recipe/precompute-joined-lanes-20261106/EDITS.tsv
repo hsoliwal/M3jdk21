@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# Hash pins of recipe PRECOMPUTE_JOINED_LANES v1 (apply.py), one row per stage and file, in Synexia stacking order
+# (history -> memchr-bitmap -> key-value -> hash-lane: each Synexia preimage is the previous recipe's postimage).
+# before/after = sha256 of the M3JDK file (LF, as in git); base = master cf0429ac1d4 blobs in apply.py BASE_BLOBS.
+file	before_sha256	after_sha256	recipe	donor_hunk	rule
+m3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java	a2c8aab22f4d200b2a8ecbc1d4c86e77ae2d0008d974e0268adb3a63007491a1	a2ae7a01b4679625575c509c7ed55bceb9b35944fe2b2fddc5905a4cc5659d3c	01-joined-directory-history	42466557a7f M3FsPrecomputeBundle.java 4 hunks (blob 099634440b44 -> 32c9b0d01484)	DIVERGED->mapped: Role constants appended after TUPLE_VALUES_I64; MappedView accessors via laneBytes/laneInts/laneLongs; records verbatim minus grepJoinedSegments x2 (HANDOFF_45)
