@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+stage	status	evidence
+INVENTORY	PASS	M3JDK21 master b0fbe13b7feb437b39cdd1069ff49415f4d50bc0; source Git 134508fdd9857110ca21d0042353805586db3ea0
+CATALOGUE	PASS_METADATA	Synexia LeetCodify LC0705/0706 HR Hash Tables GFG Hash Search; no donor code copied
+CONTRACT	FROZEN	No public method/signature/ABI change; no table layout change; empty values cannot exist
+RECIPE	SOURCE_SEALED	Canonical existing Maven/OpenRewrite engine and one named child manifest
+PATCH	ONE_METHOD_CANDIDATE	Full post source Git 6cd936c4d0d0971b9834049785f1852107eb6523, SHA256 844924463c460f6b379424cbc4864d738d69229b84d149db3d5066c57375fc7c
+LINT	ISOLATED_PASS	Java21 javac --release 21 -Xlint:all -Werror
+COMPILE	ISOLATED_PASS	Exact method scan and guard in JDK-only fixture
+TEST	ISOLATED_PASS	8000 checks Xint plus 8000 checks JIT vs occupancy reference
+RUNTIME	ISOLATED_PASS	Zero/negative and large empty maps; no full-owner execution
+MAVEN_SDK	NOT_RUN	Receiver workflow must compile and run actual OpenRewrite and JUnit
+PUBLIC_ABI	NOT_RUN	Receiver workflow must compare original and candidate javap public descriptors
+JNI_PARITY	NOT_TOUCHED	No JNI symbol modified; full collections native CI independent
+PROMOTION	HOLD	No product merge until all source and CI gates pass
