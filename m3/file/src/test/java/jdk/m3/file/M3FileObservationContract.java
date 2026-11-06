@@ -27,7 +27,7 @@ public final class M3FileObservationContract {
         throw new AssertionError("missing: "+why);
     }
     @FunctionalInterface interface RunnableCheck { void run() throws Exception; }
-    private static byte[] digest(M3File.Fingerprint f) {
+    private static byte[] digest(M3NioFile.Fingerprint f) {
         return ByteBuffer.allocate(32).putLong(f.digest0()).putLong(f.digest1())
                 .putLong(f.digest2()).putLong(f.digest3()).array();
     }
@@ -41,11 +41,11 @@ public final class M3FileObservationContract {
                     case 4 -> 65536; default -> random.nextInt(32000); };
                 byte[] content = new byte[len]; random.nextBytes(content);
                 Files.write(path, content);
-                M3File file = M3File.of(path);
+                M3NioFile file = M3NioFile.of(path);
                 AtomicLong progress = new AtomicLong();
                 AtomicInteger chunks = new AtomicInteger();
                 ByteArrayOutputStream shadow = new ByteArrayOutputStream();
-                M3File.Observation observed = file.observe(content.length, progress::addAndGet,
+                M3NioFile.Observation observed = file.observe(content.length, progress::addAndGet,
                     (bytes, from, count) -> {check(count > 0 && count <= 8192, "valid chunk");
                         chunks.incrementAndGet(); shadow.write(bytes,from,count);});
                 check(observed.fingerprint().size()==content.length, "file length");
@@ -59,15 +59,15 @@ public final class M3FileObservationContract {
                         (b,o,n)->{}), "bounded input read");
                 }
             }
-            check(M3File.contentDelta(null,null)==0, "known absence");
+            check(M3NioFile.contentDelta(null,null)==0, "known absence");
             if (Files.size(path) == 0) Files.write(path,new byte[]{77});
-            M3File f=M3File.of(path);
-            M3File.Fingerprint before=f.fingerprint(100000);
+            M3NioFile f=M3NioFile.of(path);
+            M3NioFile.Fingerprint before=f.fingerprint(100000);
             FileTime stamp=Files.getLastModifiedTime(path);
             byte[] now=Files.readAllBytes(path); now[0]^=1;
             Files.write(path,now); Files.setLastModifiedTime(path,stamp);
-            M3File.Fingerprint after=f.fingerprint(100000);
-            check(M3File.contentDelta(before,after)==M3File.CONTENT_CHANGED,"same mtime length changed");
+            M3NioFile.Fingerprint after=f.fingerprint(100000);
+            check(M3NioFile.contentDelta(before,after)==M3NioFile.CONTENT_CHANGED,"same mtime length changed");
             expect(IOException.class, ()-> f.observe(100000,M3StreamProgress.none(),
                     (bytes, from, n)->{throw new IOException("observer aborted");}),"observer abort");
             M3StreamProgress cancelled = new M3StreamProgress() {
@@ -79,7 +79,7 @@ public final class M3FileObservationContract {
             Path symlink=directory.resolve("symlink");
             try {
                 Files.createSymbolicLink(symlink,path.getFileName());
-                expect(IOException.class,()->M3File.of(symlink).fingerprint(100000),"symlink rejected");
+                expect(IOException.class,()->M3NioFile.of(symlink).fingerprint(100000),"symlink rejected");
             } catch (UnsupportedOperationException | SecurityException | IOException unavailable) {
                 // Not every host platform allows test-process symlink creation.
             }

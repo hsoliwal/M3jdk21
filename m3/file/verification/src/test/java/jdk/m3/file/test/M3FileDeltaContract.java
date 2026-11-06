@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.file.test;
 
-import jdk.m3.file.M3File;
+import jdk.m3.file.M3NioFile;
 
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
@@ -52,7 +52,7 @@ import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
 
 /**
- * Independent public-contract checks for bounded M3File content fingerprints.
+ * Independent public-contract checks for bounded M3NioFile content fingerprints.
  *
  * <p>This is a standalone Java 21 program, with no test-framework dependency.
  * SHA-256 expectations come from MessageDigest over fixture bytes. The compiler
@@ -81,13 +81,13 @@ public final class M3FileDeltaContract {
     }
 
     private static void recordAndDeltaContract() throws Exception {
-        equal(1, M3File.ADDED, "ADDED flag");
-        equal(2, M3File.REMOVED, "REMOVED flag");
-        equal(4, M3File.CONTENT_CHANGED, "CONTENT_CHANGED flag");
+        equal(1, M3NioFile.ADDED, "ADDED flag");
+        equal(2, M3NioFile.REMOVED, "REMOVED flag");
+        equal(4, M3NioFile.CONTENT_CHANGED, "CONTENT_CHANGED flag");
         expect(IllegalArgumentException.class,
-                () -> new M3File.Fingerprint(-1, 0, 0, 0, 0), "negative record size");
-        M3File.Fingerprint before = new M3File.Fingerprint(17, 1, 2, 3, 4);
-        M3File.Fingerprint same = new M3File.Fingerprint(17, 1, 2, 3, 4);
+                () -> new M3NioFile.Fingerprint(-1, 0, 0, 0, 0), "negative record size");
+        M3NioFile.Fingerprint before = new M3NioFile.Fingerprint(17, 1, 2, 3, 4);
+        M3NioFile.Fingerprint same = new M3NioFile.Fingerprint(17, 1, 2, 3, 4);
         equal(before, same, "record value equality");
         equal(before.hashCode(), same.hashCode(), "record equal hash codes");
         equal(17L, before.size(), "record byte size");
@@ -95,26 +95,26 @@ public final class M3FileDeltaContract {
         equal(2L, before.digest1(), "digest limb one");
         equal(3L, before.digest2(), "digest limb two");
         equal(4L, before.digest3(), "digest limb three");
-        M3File.Fingerprint fullRange = new M3File.Fingerprint(
+        M3NioFile.Fingerprint fullRange = new M3NioFile.Fingerprint(
                 Long.MAX_VALUE, Long.MIN_VALUE, -1, 0, Long.MAX_VALUE);
         equal(Long.MAX_VALUE, fullRange.size(), "record supports long size");
         equal(Long.MIN_VALUE, fullRange.digest0(), "digest retains high sign bit");
         equal(-1L, fullRange.digest1(), "digest retains all one bits");
-        equal(0, M3File.contentDelta(null, null), "two known absences");
-        equal(M3File.ADDED, M3File.contentDelta(null, before), "known absence to present");
-        equal(M3File.REMOVED, M3File.contentDelta(before, null), "present to known absence");
-        equal(0, M3File.contentDelta(before, before), "same record instance");
-        equal(0, M3File.contentDelta(before, same), "same fingerprint tuple");
-        List<M3File.Fingerprint> different = List.of(
-                new M3File.Fingerprint(18, 1, 2, 3, 4),
-                new M3File.Fingerprint(17, 9, 2, 3, 4),
-                new M3File.Fingerprint(17, 1, 9, 3, 4),
-                new M3File.Fingerprint(17, 1, 2, 9, 4),
-                new M3File.Fingerprint(17, 1, 2, 3, 9));
-        for (M3File.Fingerprint changed : different) {
-            equal(M3File.CONTENT_CHANGED, M3File.contentDelta(before, changed),
+        equal(0, M3NioFile.contentDelta(null, null), "two known absences");
+        equal(M3NioFile.ADDED, M3NioFile.contentDelta(null, before), "known absence to present");
+        equal(M3NioFile.REMOVED, M3NioFile.contentDelta(before, null), "present to known absence");
+        equal(0, M3NioFile.contentDelta(before, before), "same record instance");
+        equal(0, M3NioFile.contentDelta(before, same), "same fingerprint tuple");
+        List<M3NioFile.Fingerprint> different = List.of(
+                new M3NioFile.Fingerprint(18, 1, 2, 3, 4),
+                new M3NioFile.Fingerprint(17, 9, 2, 3, 4),
+                new M3NioFile.Fingerprint(17, 1, 9, 3, 4),
+                new M3NioFile.Fingerprint(17, 1, 2, 9, 4),
+                new M3NioFile.Fingerprint(17, 1, 2, 3, 9));
+        for (M3NioFile.Fingerprint changed : different) {
+            equal(M3NioFile.CONTENT_CHANGED, M3NioFile.contentDelta(before, changed),
                     "changed size or digest limb");
-            equal(M3File.CONTENT_CHANGED, M3File.contentDelta(changed, before),
+            equal(M3NioFile.CONTENT_CHANGED, M3NioFile.contentDelta(changed, before),
                     "content change is symmetric");
         }
     }
@@ -136,10 +136,10 @@ public final class M3FileDeltaContract {
             byte[] bytes = vectors.get(i);
             Path path = directory.resolve("vector-" + i + ".bin");
             Files.write(path, bytes);
-            M3File.Fingerprint expected = oracle(bytes);
-            equal(expected, M3File.of(path).fingerprint(bytes.length),
+            M3NioFile.Fingerprint expected = oracle(bytes);
+            equal(expected, M3NioFile.of(path).fingerprint(bytes.length),
                     "independent SHA-256 oracle for vector " + i);
-            equal(expected, M3File.of(path).fingerprint(Long.MAX_VALUE),
+            equal(expected, M3NioFile.of(path).fingerprint(Long.MAX_VALUE),
                     "unrestricted long limit for vector " + i);
             equal((long) bytes.length, expected.size(), "fingerprint counts raw bytes");
         }
@@ -149,8 +149,8 @@ public final class M3FileDeltaContract {
         Files.createDirectories(directory);
         Path empty = Files.write(directory.resolve("empty.bin"), new byte[0]);
         Path small = Files.write(directory.resolve("small.bin"), new byte[] {3, 7, 11});
-        M3File emptyFile = M3File.of(empty);
-        M3File smallFile = M3File.of(small);
+        M3NioFile emptyFile = M3NioFile.of(empty);
+        M3NioFile smallFile = M3NioFile.of(small);
         expect(IllegalArgumentException.class, () -> emptyFile.fingerprint(-1),
                 "negative limit on empty file");
         expect(IllegalArgumentException.class, () -> smallFile.fingerprint(Long.MIN_VALUE),
@@ -164,7 +164,7 @@ public final class M3FileDeltaContract {
                 "Long.MAX_VALUE does not overflow the bounded read");
         Files.delete(small);
         expect(NoSuchFileException.class, () -> smallFile.fingerprint(3),
-                "same M3File observes deletion instead of retaining prior content");
+                "same M3NioFile observes deletion instead of retaining prior content");
     }
 
     private static void pathsTimestampsAndChanges(Path directory) throws Exception {
@@ -172,28 +172,28 @@ public final class M3FileDeltaContract {
         byte[] original = "class Example { int value = 1; }\n".getBytes(StandardCharsets.UTF_8);
         Path first = Files.write(directory.resolve("first.java"), original);
         Path second = Files.write(directory.resolve("second.java"), original);
-        M3File file = M3File.of(first);
-        M3File.Fingerprint before = file.fingerprint(Long.MAX_VALUE);
-        equal(before, M3File.of(second).fingerprint(Long.MAX_VALUE),
+        M3NioFile file = M3NioFile.of(first);
+        M3NioFile.Fingerprint before = file.fingerprint(Long.MAX_VALUE);
+        equal(before, M3NioFile.of(second).fingerprint(Long.MAX_VALUE),
                 "path is absent from the content fingerprint");
         FileTime oldTime = FileTime.fromMillis(1_600_000_000_000L);
         FileTime newTime = FileTime.fromMillis(1_650_000_000_000L);
         Files.setLastModifiedTime(first, oldTime);
-        equal(0, M3File.contentDelta(before, file.fingerprint(Long.MAX_VALUE)),
+        equal(0, M3NioFile.contentDelta(before, file.fingerprint(Long.MAX_VALUE)),
                 "timestamp alone does not change fingerprint");
         Files.setLastModifiedTime(first, newTime);
-        equal(0, M3File.contentDelta(before, file.fingerprint(Long.MAX_VALUE)),
+        equal(0, M3NioFile.contentDelta(before, file.fingerprint(Long.MAX_VALUE)),
                 "another timestamp alone remains unchanged");
         byte[] changed = "class Example { int value = 2; }\n".getBytes(StandardCharsets.UTF_8);
         equal(original.length, changed.length, "changed fixture preserves byte length");
         Files.write(first, changed);
         Files.setLastModifiedTime(first, oldTime);
-        M3File.Fingerprint after = file.fingerprint(Long.MAX_VALUE);
+        M3NioFile.Fingerprint after = file.fingerprint(Long.MAX_VALUE);
         equal(oracle(changed), after, "changed bytes observed through existing handle");
-        equal(M3File.CONTENT_CHANGED, M3File.contentDelta(before, after),
+        equal(M3NioFile.CONTENT_CHANGED, M3NioFile.contentDelta(before, after),
                 "same length and restored timestamp cannot conceal changed content");
         Files.write(first, original);
-        equal(0, M3File.contentDelta(before, file.fingerprint(Long.MAX_VALUE)),
+        equal(0, M3NioFile.contentDelta(before, file.fingerprint(Long.MAX_VALUE)),
                 "restored content restores original fingerprint");
     }
 
@@ -254,27 +254,27 @@ public final class M3FileDeltaContract {
     private static void refusalAndAbsence(Path directory) throws Exception {
         Files.createDirectories(directory);
         Path missing = directory.resolve("missing.bin");
-        expect(NoSuchFileException.class, () -> M3File.of(missing).fingerprint(1024),
+        expect(NoSuchFileException.class, () -> M3NioFile.of(missing).fingerprint(1024),
                 "missing read propagates I/O failure");
-        expect(IOException.class, () -> M3File.of(directory).fingerprint(Long.MAX_VALUE),
+        expect(IOException.class, () -> M3NioFile.of(directory).fingerprint(Long.MAX_VALUE),
                 "directory cannot be fingerprinted as a regular file");
         Path target = Files.write(directory.resolve("target.bin"), new byte[] {42});
         Path link = directory.resolve("link.bin");
         Files.createSymbolicLink(link, target.getFileName());
-        expect(IOException.class, () -> M3File.of(link).fingerprint(Long.MAX_VALUE),
+        expect(IOException.class, () -> M3NioFile.of(link).fingerprint(Long.MAX_VALUE),
                 "symbolic link to regular file is not followed");
-        equal(oracle(new byte[] {42}), M3File.of(target).fingerprint(1),
+        equal(oracle(new byte[] {42}), M3NioFile.of(target).fingerprint(1),
                 "link refusal leaves target unchanged");
         Path dangling = directory.resolve("dangling.bin");
         Files.createSymbolicLink(dangling, missing.getFileName());
-        expect(IOException.class, () -> M3File.of(dangling).fingerprint(Long.MAX_VALUE),
+        expect(IOException.class, () -> M3NioFile.of(dangling).fingerprint(Long.MAX_VALUE),
                 "dangling symbolic link is refused");
-        M3File.Fingerprint present = M3File.of(target).fingerprint(1);
+        M3NioFile.Fingerprint present = M3NioFile.of(target).fingerprint(1);
         Files.delete(target);
         check(Files.notExists(target), "caller independently observes absence");
-        equal(M3File.REMOVED, M3File.contentDelta(present, null),
+        equal(M3NioFile.REMOVED, M3NioFile.contentDelta(present, null),
                 "caller supplies known-absent observation explicitly");
-        expect(NoSuchFileException.class, () -> M3File.of(target).fingerprint(1),
+        expect(NoSuchFileException.class, () -> M3NioFile.of(target).fingerprint(1),
                 "read failure is not converted into a null fingerprint");
     }
 
@@ -286,20 +286,20 @@ public final class M3FileDeltaContract {
         compile(initialB, binaries, List.of(), emptySources);
         check(initialB.reads > 0, "initial B source is read by javac");
         Path binaryB = binaries.resolve("fixture/B.class");
-        M3File.Fingerprint beforeB = M3File.of(binaryB).fingerprint(Long.MAX_VALUE);
+        M3NioFile.Fingerprint beforeB = M3NioFile.of(binaryB).fingerprint(Long.MAX_VALUE);
         int beforeReads = initialB.reads;
         Source sourceA = new Source("fixture.A", "package fixture; public class A { "
                 + "public static int evaluate() { return new B().value() + B.CODE; } }");
         List<URI> parses = compile(sourceA, consumers, List.of(binaries), emptySources);
         equal(beforeReads, initialB.reads, "compiling A performs no additional B source read");
         equal(List.of(sourceA.toUri()), parses, "A task parses only its supplied source");
-        equal(beforeB, M3File.of(binaryB).fingerprint(Long.MAX_VALUE),
+        equal(beforeB, M3NioFile.of(binaryB).fingerprint(Long.MAX_VALUE),
                 "compiling A preserves B.class bytes");
-        equal(0, M3File.contentDelta(beforeB,
-                M3File.of(binaryB).fingerprint(Long.MAX_VALUE)), "binary dependency delta is zero");
+        equal(0, M3NioFile.contentDelta(beforeB,
+                M3NioFile.of(binaryB).fingerprint(Long.MAX_VALUE)), "binary dependency delta is zero");
         equal(8, evaluate(consumers, binaries), "initial compiled behavior");
         Path binaryA = consumers.resolve("fixture/A.class");
-        M3File.Fingerprint beforeA = M3File.of(binaryA).fingerprint(Long.MAX_VALUE);
+        M3NioFile.Fingerprint beforeA = M3NioFile.of(binaryA).fingerprint(Long.MAX_VALUE);
 
         Path editedConsumers = Files.createDirectories(directory.resolve("edited-consumers"));
         Source editedA = new Source("fixture.A", "package fixture; public class A { "
@@ -309,33 +309,33 @@ public final class M3FileDeltaContract {
                 "edited A generation parses only its supplied source");
         equal(beforeReads, initialB.reads,
                 "edited A generation performs no additional B source read");
-        equal(beforeB, M3File.of(binaryB).fingerprint(Long.MAX_VALUE),
+        equal(beforeB, M3NioFile.of(binaryB).fingerprint(Long.MAX_VALUE),
                 "edited A generation preserves unchanged B.class fingerprint");
         equal(108, evaluate(editedConsumers, binaries),
                 "edited A generation executes changed behavior against unchanged B.class");
-        equal(beforeA, M3File.of(binaryA).fingerprint(Long.MAX_VALUE),
+        equal(beforeA, M3NioFile.of(binaryA).fingerprint(Long.MAX_VALUE),
                 "separate edited output preserves original A for dependency-change witnesses");
 
         compile(new Source("fixture.B", bSource(2, 7)), binaries, List.of(), emptySources);
-        M3File.Fingerprint bodyB = M3File.of(binaryB).fingerprint(Long.MAX_VALUE);
-        equal(M3File.CONTENT_CHANGED, M3File.contentDelta(beforeB, bodyB),
+        M3NioFile.Fingerprint bodyB = M3NioFile.of(binaryB).fingerprint(Long.MAX_VALUE);
+        equal(M3NioFile.CONTENT_CHANGED, M3NioFile.contentDelta(beforeB, bodyB),
                 "body change changes class content without claiming an ABI classification");
-        equal(beforeA, M3File.of(binaryA).fingerprint(Long.MAX_VALUE),
+        equal(beforeA, M3NioFile.of(binaryA).fingerprint(Long.MAX_VALUE),
                 "consumer artifact remains available after producer body change");
         equal(9, evaluate(consumers, binaries),
                 "unchanged consumer executes new dependency body");
 
         compile(new Source("fixture.B", bSource(2, 11)), binaries, List.of(), emptySources);
-        M3File.Fingerprint constantB = M3File.of(binaryB).fingerprint(Long.MAX_VALUE);
-        equal(M3File.CONTENT_CHANGED, M3File.contentDelta(bodyB, constantB),
+        M3NioFile.Fingerprint constantB = M3NioFile.of(binaryB).fingerprint(Long.MAX_VALUE);
+        equal(M3NioFile.CONTENT_CHANGED, M3NioFile.contentDelta(bodyB, constantB),
                 "constant change also reports raw content change");
         equal(9, evaluate(consumers, binaries),
                 "unrecompiled consumer still contains the old inlined constant");
         compile(sourceA, consumers, List.of(binaries), emptySources);
         equal(13, evaluate(consumers, binaries),
                 "consumer recompilation observes changed constant");
-        equal(M3File.CONTENT_CHANGED,
-                M3File.contentDelta(beforeA, M3File.of(binaryA).fingerprint(Long.MAX_VALUE)),
+        equal(M3NioFile.CONTENT_CHANGED,
+                M3NioFile.contentDelta(beforeA, M3NioFile.of(binaryA).fingerprint(Long.MAX_VALUE)),
                 "constant use demonstrates why content equality is not a rebuild planner");
     }
 
@@ -383,10 +383,10 @@ public final class M3FileDeltaContract {
         }
     }
 
-    private static M3File.Fingerprint oracle(byte[] bytes) throws Exception {
+    private static M3NioFile.Fingerprint oracle(byte[] bytes) throws Exception {
         byte[] digest = MessageDigest.getInstance("SHA-256").digest(bytes);
         ByteBuffer words = ByteBuffer.wrap(digest).order(ByteOrder.BIG_ENDIAN);
-        return new M3File.Fingerprint(bytes.length,
+        return new M3NioFile.Fingerprint(bytes.length,
                 words.getLong(), words.getLong(), words.getLong(), words.getLong());
     }
 
@@ -443,7 +443,7 @@ public final class M3FileDeltaContract {
             this.reportedSize = reportedSize;
         }
 
-        M3File file() { return M3File.of(fileSystem.getPath("/observation.bin")); }
+        M3NioFile file() { return M3NioFile.of(fileSystem.getPath("/observation.bin")); }
         @Override public String getScheme() { return "m3file-test"; }
         @Override public FileSystem newFileSystem(URI uri, Map<String, ?> environment) {
             throw unsupported();

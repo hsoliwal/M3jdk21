@@ -120,12 +120,12 @@ public final class M3FileByteEventFactRecipe
   private static List<Target> targets() {
     return List.of(
         new Target(
-            "m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamEvents.java",
+            "m3/file/src/main/java/jdk/m3/file/M3FileStreamEvents.java",
             "d5720f17625a3e12c3d0d1c7085bd1c3f346f9e8",
             "9ee9bcfcc5d67a1f0fd87262b42f81b175dddd12",
             "M3FileStreamEvents.after.java.txt"),
         new Target(
-            "m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
+            "m3/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
             "b4373658f372413d4bbb38b254b3d5c0f952117c",
             "2794c73394272fbe148605e862d7a68e1267994e",
             "M3FileStreamTasks.after.java.txt"));

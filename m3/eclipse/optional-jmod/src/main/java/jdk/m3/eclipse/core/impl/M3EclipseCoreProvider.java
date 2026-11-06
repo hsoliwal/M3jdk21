@@ -7,7 +7,7 @@ import jdk.m3.arrays.M3Utf16ArrayView;
 import jdk.m3.ast.M3ASTHierarchy;
 import jdk.m3.collections.M3LongIndexProjection;
 import jdk.m3.eclipse.core.M3EclipseCore;
-import jdk.m3.file.M3File;
+import jdk.m3.file.M3NioFile;
 import jdk.m3.text.LocalM3Arena;
 import jdk.m3.text.M3StringPiece;
 import java.nio.file.Path;
@@ -44,7 +44,7 @@ public final class M3EclipseCoreProvider implements M3EclipseCore {
         return M3ASTHierarchy.build(repository, facts);
     }
 
-    @Override public M3File file(Path path) {
-        return M3File.of(path);
+    @Override public M3NioFile file(Path path) {
+        return M3NioFile.of(path);
     }
 }

@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * M3JDK21-owned projection of file deltas and compiler-supplied dependency facts.
  *
- * <p>M3File owns file identities and raw byte changes. The original javac/M3AST
+ * <p>M3NioFile owns file identities and raw byte changes. The original javac/M3AST
  * task owns semantic dependency edges and ABI evidence. This pure planner does
  * not parse files, replace javac, retain source payloads or authorize skipping
  * arbitrary Maven/Gradle plugin executions. A consumer must provide an exact,
@@ -74,7 +74,7 @@ public final class M3FileBuildImpact {
     /**
      * Compute a conservative fixed point in O(nodes + edges), even with cycles.
      *
-     * @param snapshot freshly scanned M3File generation, not a loaded-only base image
+     * @param snapshot freshly scanned M3NioFile generation, not a loaded-only base image
      * @param compilerFacts one compiler-authored fact mask per physical file slot
      * @param dependencies original dependency physical slots (edge sources)
      * @param dependents original dependent physical slots (edge destinations)

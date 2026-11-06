@@ -1,7 +1,7 @@
 // Copyright 2026 Hitesh Soliwal and contributors.
 // SPDX-License-Identifier: Apache-2.0
 
-import jdk.m3.file.M3File;
+import jdk.m3.file.M3NioFile;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -60,8 +60,8 @@ public final class NativeApiContract {
         check(Linker.class.getMethod("link", LinkerConfiguration.class, List.class)
                 .getReturnType() == File.class, "original Linker API signature");
         check(new CompilerConfiguration().isCheckStaleCompilation(), "default stale analysis is compatible");
-        check(M3File.class.getModule().isNamed()
-                && M3File.class.getModule().getName().equals("jdk.m3.file"), "original M3File is a selected module");
+        check(M3NioFile.class.getModule().isNamed()
+                && M3NioFile.class.getModule().getName().equals("org.m3jdk.file"), "original M3NioFile is a selected module");
         check(Path.of(CCompiler.class.getProtectionDomain().getCodeSource().getLocation().toURI()).toRealPath()
                 .startsWith(Path.of(arguments[5]).toRealPath().resolve("lib/m3-tools/native-api")),
                 "original native provider loads from installed selected assets");
@@ -116,7 +116,7 @@ public final class NativeApiContract {
         List<File> jniObjects = cApi.compile(cConfig, new File[] {jniSource.toFile()});
         check(jniObjects.size() == 1 && Files.size(jniObjects.get(0).toPath()) > 0, "C API produces object");
         check(c.parsers == 1 && c.commands == 1, "default compiler retains original parser path");
-        M3File.Fingerprint originalDefaultObject = fingerprint(jniObjects.get(0).toPath());
+        M3NioFile.Fingerprint originalDefaultObject = fingerprint(jniObjects.get(0).toPath());
         FileTime originalDefaultTime = Files.getLastModifiedTime(jniObjects.get(0).toPath());
         check(cApi.compile(cConfig, new File[] {jniSource.toFile()}).equals(jniObjects),
                 "default unchanged compilation returns its original object");
@@ -135,20 +135,20 @@ public final class NativeApiContract {
         check(cpp.parsers == 0 && cpp.commands == 1, "admitted C++ workset bypasses parsing");
         Path jniObject = jniObjects.get(0).toPath();
         Path helperObject = helperObjects.get(0).toPath();
-        M3File.Fingerprint originalJniObject = fingerprint(jniObject);
+        M3NioFile.Fingerprint originalJniObject = fingerprint(jniObject);
         FileTime originalJniTime = Files.getLastModifiedTime(jniObject);
-        M3File.Fingerprint previousSource = fingerprint(helperSource);
-        M3File.Fingerprint previousHeader = fingerprint(configHeader);
+        M3NioFile.Fingerprint previousSource = fingerprint(helperSource);
+        M3NioFile.Fingerprint previousHeader = fingerprint(configHeader);
         File firstLibrary = archiveAndLink(work, nativeOutput, "baseline", ar, gpp, helperObjects, jniObjects);
         check(callNative(javaClasses, firstLibrary, 17, 25) == 42, "real JNI result after C/C++ archive/link");
 
         // Exactly one known dependency edge: native_helper.cpp includes native_config.h.
-        M3File.Fingerprint currentSource = fingerprint(helperSource);
-        M3File.Fingerprint currentHeader = fingerprint(configHeader);
+        M3NioFile.Fingerprint currentSource = fingerprint(helperSource);
+        M3NioFile.Fingerprint currentHeader = fingerprint(configHeader);
         File[] unchanged = selected(previousSource, currentSource, previousHeader, currentHeader, helperSource);
-        check(unchanged.length == 0, "M3File identical content selects no native translation unit");
+        check(unchanged.length == 0, "M3NioFile identical content selects no native translation unit");
         int commandsBeforeEmpty = cpp.commands;
-        M3File.Fingerprint helperBeforeEmpty = fingerprint(helperObject);
+        M3NioFile.Fingerprint helperBeforeEmpty = fingerprint(helperObject);
         cppConfig.setExecutable(work.resolve("must-not-execute-missing-compiler").toString());
         check(cppApi.compile(cppConfig, unchanged).isEmpty(), "empty admitted workset returns no objects");
         check(cpp.commands == commandsBeforeEmpty && cpp.parsers == 0, "empty workset neither commands nor parses");
@@ -162,8 +162,8 @@ public final class NativeApiContract {
         check(Files.getLastModifiedTime(helperSource).equals(sourceTime), "source timestamp restored");
         currentSource = fingerprint(helperSource);
         currentHeader = fingerprint(configHeader);
-        check(M3File.contentDelta(previousSource, currentSource) == M3File.CONTENT_CHANGED,
-                "M3File sees same-timestamp source-byte change");
+        check(M3NioFile.contentDelta(previousSource, currentSource) == M3NioFile.CONTENT_CHANGED,
+                "M3NioFile sees same-timestamp source-byte change");
         File[] sourceWorkset = selected(previousSource, currentSource, previousHeader, currentHeader, helperSource);
         check(sourceWorkset.length == 1, "source delta selects one known translation unit");
         helperObjects = cppApi.compile(cppConfig, sourceWorkset);
@@ -181,9 +181,9 @@ public final class NativeApiContract {
         check(Files.getLastModifiedTime(configHeader).equals(headerTime), "header timestamp restored");
         currentSource = fingerprint(helperSource);
         currentHeader = fingerprint(configHeader);
-        check(M3File.contentDelta(previousSource, currentSource) == 0, "source content stays fixed during header edit");
-        check(M3File.contentDelta(previousHeader, currentHeader) == M3File.CONTENT_CHANGED,
-                "M3File sees same-timestamp header-byte change");
+        check(M3NioFile.contentDelta(previousSource, currentSource) == 0, "source content stays fixed during header edit");
+        check(M3NioFile.contentDelta(previousHeader, currentHeader) == M3NioFile.CONTENT_CHANGED,
+                "M3NioFile sees same-timestamp header-byte change");
         File[] headerWorkset = selected(previousSource, currentSource, previousHeader, currentHeader, helperSource);
         check(headerWorkset.length == 1, "known header edge selects one dependent translation unit");
         helperObjects = cppApi.compile(cppConfig, headerWorkset);
@@ -231,7 +231,7 @@ public final class NativeApiContract {
     private static void checkConcurrentFailureExit(Path work, String gcc, String mode) throws Exception {
         Path childLog = work.resolve("concurrent-" + mode + ".log");
         Process child = new ProcessBuilder(Path.of(System.getProperty("java.home"), "bin", "java").toString(),
-                "--add-modules", "jdk.m3.file", "-cp", System.getProperty("java.class.path"),
+                "--add-modules", "org.m3jdk.file", "-cp", System.getProperty("java.class.path"),
                 NativeApiContract.class.getName(), "--concurrent-failure", mode,
                 work.resolve("concurrent-" + mode).toString(), gcc)
                 .redirectErrorStream(true).redirectOutput(childLog.toFile()).start();
@@ -337,10 +337,10 @@ public final class NativeApiContract {
         return shared;
     }
 
-    private static File[] selected(M3File.Fingerprint previousSource, M3File.Fingerprint currentSource,
-            M3File.Fingerprint previousHeader, M3File.Fingerprint currentHeader, Path dependentSource) {
-        boolean changed = M3File.contentDelta(previousSource, currentSource) != 0
-                || M3File.contentDelta(previousHeader, currentHeader) != 0;
+    private static File[] selected(M3NioFile.Fingerprint previousSource, M3NioFile.Fingerprint currentSource,
+            M3NioFile.Fingerprint previousHeader, M3NioFile.Fingerprint currentHeader, Path dependentSource) {
+        boolean changed = M3NioFile.contentDelta(previousSource, currentSource) != 0
+                || M3NioFile.contentDelta(previousHeader, currentHeader) != 0;
         return changed ? new File[] {dependentSource.toFile()} : new File[0];
     }
 
@@ -353,8 +353,8 @@ public final class NativeApiContract {
         }
     }
 
-    private static M3File.Fingerprint fingerprint(Path file) throws IOException {
-        return M3File.of(file).fingerprint(INPUT_LIMIT);
+    private static M3NioFile.Fingerprint fingerprint(Path file) throws IOException {
+        return M3NioFile.of(file).fingerprint(INPUT_LIMIT);
     }
 
     private static Logger logger(String name) {

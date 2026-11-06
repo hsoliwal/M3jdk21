@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.fs;
 
-import jdk.m3.file.M3File;
+import jdk.m3.file.M3NioFile;
 import jdk.m3.file.M3StreamProgress;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -23,11 +23,11 @@ import java.util.stream.Stream;
 
 /**
  * Completed host-project input generation from ONE caller-owned stream of original
- * M3File edges. It does not walk directories, retain another file system, parse
+ * M3NioFile edges. It does not walk directories, retain another file system, parse
  * Java, or implement SQLite. The caller owns the completeness of its supplied
  * enumeration and the stable identity of its selection predicate.
  *
- * <p>All selected regular files are read once through M3File.observe; the same
+ * <p>All selected regular files are read once through M3NioFile.observe; the same
  * exact consumed bytes feed SHA-256, progress and a borrowed parser/shadow
  * callback. A completed M3BuildState V2 inventory is emitted only after the
  * stream finishes without error. No source hash proves ABI, a successful build,
@@ -50,13 +50,13 @@ public final class M3HostFileInventory {
         }
     }
 
-    /** The buffer belongs to M3File and is read-only until this callback returns. */
+    /** The buffer belongs to M3NioFile and is read-only until this callback returns. */
     @FunctionalInterface
     public interface ByteLayer {
-        void onBytes(M3File source, byte[] bytes, int offset, int count) throws IOException;
+        void onBytes(M3NioFile source, byte[] bytes, int offset, int count) throws IOException;
 
         /** Completion occurs only after the entire file and checked metadata agree. */
-        default void completed(M3File source, M3File.Observation observation) throws IOException { }
+        default void completed(M3NioFile source, M3NioFile.Observation observation) throws IOException { }
     }
 
     public record Result(M3BuildState inventory,
@@ -81,14 +81,14 @@ public final class M3HostFileInventory {
     }
 
     /**
-     * Consume the supplied complete original M3File entry stream exactly once.
+     * Consume the supplied complete original M3NioFile entry stream exactly once.
      * The caller may create that stream through its existing file traversal,
      * Maven source roots or the original provider; this method never rescans.
      *
      * @param previous previous completed V2 generation for exactly this scope
      * @param selectionId stable identity of include/exclude rules, not source code
      */
-    public static Result capture(Path project, Stream<M3File> entries,
+    public static Result capture(Path project, Stream<M3NioFile> entries,
             String selectionId, Predicate<String> include,
             byte[] toolContextSha256, M3BuildState previous,
             Limits limits, M3StreamProgress progress, ByteLayer layer) throws IOException {
@@ -126,11 +126,11 @@ public final class M3HostFileInventory {
         byte[] context = combined.digest();
         Rows rows = new Rows(limits);
         long total = 0;
-        try (Stream<M3File> walk = entries.sequential()) {
-            Iterator<M3File> cursor = walk.iterator();
+        try (Stream<M3NioFile> walk = entries.sequential()) {
+            Iterator<M3NioFile> cursor = walk.iterator();
             while (cursor.hasNext()) {
                 progress.checkCancelled();
-                M3File entry = Objects.requireNonNull(cursor.next(), "M3File");
+                M3NioFile entry = Objects.requireNonNull(cursor.next(), "M3NioFile");
                 Path path = entry.path().toAbsolutePath().normalize();
                 if (!path.startsWith(root)) throw new IOException("input outside project: " + path);
                 Path relative = root.relativize(path);
@@ -143,7 +143,7 @@ public final class M3HostFileInventory {
                 key = key.replace('\\', '/');
                 if (excluded(key) || !include.test(key)) continue;
                 rejectLinks(root, relative);
-                M3File.Metadata metadata = entry.metadata();
+                M3NioFile.Metadata metadata = entry.metadata();
                 if (metadata.directory()) continue;
                 if (metadata.symbolicLink() || !metadata.regularFile()) {
                     throw new IOException("not a regular host input: " + key);
@@ -153,7 +153,7 @@ public final class M3HostFileInventory {
                     throw new IOException("host project input budget exceeded: " + key);
                 }
                 M3StreamProgress child = progress.subProgress(metadata.size());
-                M3File.Observation observed = entry.observe(
+                M3NioFile.Observation observed = entry.observe(
                         Math.min(limits.maxFileBytes(), limits.maxTotalBytes() - total),
                         child, (bytes, from, length) -> layer.onBytes(entry, bytes, from, length));
                 layer.completed(entry, observed);
@@ -272,7 +272,7 @@ public final class M3HostFileInventory {
             hashes = new byte[initial * M3BuildState.HASH_BYTES];
         }
 
-        void add(String name, byte role, M3File.Fingerprint bytes, long nanoTime)
+        void add(String name, byte role, M3NioFile.Fingerprint bytes, long nanoTime)
                 throws IOException {
             if (count >= limits.maxRows()) throw new IOException("file row budget exceeded");
             long newNames = Math.addExact(nameBytes, name.getBytes(StandardCharsets.UTF_8).length);

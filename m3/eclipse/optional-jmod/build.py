@@ -27,7 +27,7 @@ MODULES = (
     ("jdk.m3.arrays", ROOT / "m3/arrays/src/main/java", None),
     ("jdk.m3.ast", ROOT / "m3/ast/src/main/java", HERE / "module-overlays/jdk.m3.ast/src/main/java/module-info.java"),
     ("jdk.m3.collections", ROOT / "m3/collections/src/main/java", None),
-    ("jdk.m3.file", ROOT / "m3/file/src/main/java", None),
+    ("org.m3jdk.file", ROOT / "m3/file/src/main/java", None),
     ("jdk.m3.eclipse.core", HERE / "src/main/java", None),
 )
 

@@ -37,7 +37,7 @@ jobs:
           javac --release 21 -Xlint:all -Werror -d "$classes" \
             "$file/M3StreamProgress.java" \
             "$file/M3ShadowStreams.java" \
-            "$file/M3File.java" \
+            "$file/M3NioFile.java" \
             "$parser/M3File.java" \
             "$parser/M3Utf8SourceMap.java" \
             "$test/M3ProviderCaptureContract.java"
