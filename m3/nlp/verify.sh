@@ -16,3 +16,9 @@ grep -ho 'M3_TOPK_ORACLE_PASS[^<]*' "$MODULE"/target/surefire-reports/TEST-*M3Sc
 "${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin/jar" --describe-module \
     --file "$MODULE/target/m3-nlp-0.1.0-SNAPSHOT.jar" | head -n 1
 bash "$MODULE/recipe/differential.sh" "$1" "$2" "$3"
+# Relocation leaves after the first (recipe/<leaf>-YYYYMMDD/verify.sh, each pinned to its own donor commit by the
+# REPO row of its RELOCATION_MAP.tsv): run on the package built above, one scratch directory per leaf.
+for leaf in "$MODULE"/recipe/*/verify.sh; do
+    [ -e "$leaf" ] || continue
+    M3_NLP_PACKAGED=1 bash "$leaf" "$1" "$3/$(basename "$(dirname "$leaf")")"
+done
