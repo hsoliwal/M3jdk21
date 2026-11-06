@@ -1,8 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-// Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
+// Materialized from hsoliwal/com.synexia@fd9a233680b43197eb8c5745a729c342ca56c4e2
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/IntArrayDeque.java
-// Source-Git-blob: e5a3dcf87e19d38a2fcf07148320919c958d483a
+// Source-Git-blob: 653d76e199ea69f9aec45f2f533b8b50d92ce844
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package jdk.m3.collections;
 
 import java.util.NoSuchElementException;

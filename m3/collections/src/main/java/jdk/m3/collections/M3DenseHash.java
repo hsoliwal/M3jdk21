@@ -1,8 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-// Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
+// Materialized from hsoliwal/com.synexia@fd9a233680b43197eb8c5745a729c342ca56c4e2
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/DenseHash.java
-// Source-Git-blob: 0474a80b032eb1e1fae085c886e7b7fe71200bf8
+// Source-Git-blob: 7e0111b3df43a626de36ffb12f1c81903c41b9b8
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package jdk.m3.collections;
 
 final class M3DenseHash {

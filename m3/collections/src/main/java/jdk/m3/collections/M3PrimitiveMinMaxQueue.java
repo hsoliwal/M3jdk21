@@ -1,8 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-// Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
+// Materialized from hsoliwal/com.synexia@fd9a233680b43197eb8c5745a729c342ca56c4e2
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveDoubleEndedPriorityQueue.java
-// Source-Git-blob: d1507aac2d65b16f84559caa6d3a02c908bbf1ef
+// Source-Git-blob: d278d98daaf048ffa78b51322016887b9b1ab609
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package jdk.m3.collections;
 
 import java.util.Objects;

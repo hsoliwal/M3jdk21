@@ -21,22 +21,22 @@ LINEAGE_KEY = "synexia"
 
 EXPECTED = {
     "m3/collections/src/main/java/jdk/m3/collections/M3DenseHash.java":
-        "0474a80b032eb1e1fae085c886e7b7fe71200bf8",
+        "7e0111b3df43a626de36ffb12f1c81903c41b9b8",
     "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveKind.java":
-        "4bc7c258073072e0310d1a50c3885ed55c50816b",
+        "bbfa6200d5e8583cf414e51f48b546fe5496fb7f",
     "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveArrayList.java":
-        "2b2f7d73fbcdc1d8ea6b65c0520ca526d7306f4d",
+        "026de38364777dbbd0718f6317743a6b7a7ca13e",
     "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveArrayDeque.java":
         "7b2bfc81d5fe8fe69b6c5258d66f521d89ae1dec",
     "m3/collections/src/main/java/jdk/m3/collections/M3IntArrayDeque.java":
-        "e5a3dcf87e19d38a2fcf07148320919c958d483a",
+        "653d76e199ea69f9aec45f2f533b8b50d92ce844",
     "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveMinMaxQueue.java":
-        "d1507aac2d65b16f84559caa6d3a02c908bbf1ef",
+        "d278d98daaf048ffa78b51322016887b9b1ab609",
     "m3/collections/src/main/java/jdk/m3/collections/M3LongFenwickTree.java":
         "b6c820c05dca67fc53a92a4be84f0b0a2c28b411",
 }
 
-SOURCE_COMMIT = "8513abf8eb0d911873c9127a138007a42dd4ab60"
+SOURCE_COMMIT = "8513abf8eb0d911873c9127a138007a42dd4ab60"; REFRESH_COMMITS = frozenset({"fd9a233680b43197eb8c5745a729c342ca56c4e2"})  # CONVERGE_HUB_REFRESH v1, 2026-11-06
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
 
@@ -70,7 +70,7 @@ def provenance_rows() -> dict[str, dict[str, str]]:
             fail(f"duplicate provenance target: {path}")
         if row["sourceRepository"] != repository:
             fail(f"unexpected source repository: {path}")
-        if row["sourceCommit"] != SOURCE_COMMIT:
+        if row["sourceCommit"] != SOURCE_COMMIT and row["sourceCommit"] not in REFRESH_COMMITS:
             fail(f"source commit drift: {path}")
         if row["license"] != "Apache-2.0":
             fail(f"license drift: {path}")
@@ -128,7 +128,7 @@ def main(argv: list[str]) -> int:
     verify_recipe()
     print(
         "M3_COLLECTION_PORT_WAVE1_PASS "
-        f"source={SOURCE_COMMIT} owners={len(EXPECTED)} "
+        f"source={SOURCE_COMMIT} refresh={','.join(sorted(REFRESH_COMMITS))} owners={len(EXPECTED)} "
         "runtime_m3_dependency=false java_base_promotion=false"
     )
     return 0

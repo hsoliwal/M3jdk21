@@ -1,8 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-// Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
+// Materialized from hsoliwal/com.synexia@fd9a233680b43197eb8c5745a729c342ca56c4e2
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveArrayList.java
-// Source-Git-blob: 2b2f7d73fbcdc1d8ea6b65c0520ca526d7306f4d
+// Source-Git-blob: 026de38364777dbbd0718f6317743a6b7a7ca13e
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * Modified 2026 Hitesh Soliwal and contributors: fuse growing insertion without changing storage contracts.
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package jdk.m3.collections;
 
 import java.util.Objects;
@@ -96,10 +102,11 @@ public final class M3PrimitiveArrayList {
      */
     public void addBits(int index, long bits) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException(index);
-        ensure(M3PrimitiveKind.checkedSize(size, 1));
-        System.arraycopy(elements, index, elements, index + 1, size - index);
-        kind.writeBits(elements, index, bits);
-        size++;
+        int required = M3PrimitiveKind.checkedSize(size, 1);
+        Object target = insertionStorage(index, 1, required);
+        kind.writeBits(target, index, bits);
+        elements = target;
+        size = required;
     }
 
     /**
@@ -160,10 +167,7 @@ public final class M3PrimitiveArrayList {
      * @return first matching index or -1
      */
     public int indexOfBits(long bits) {
-        for (int i = 0; i < size; i++) {
-            if (kind.equalBits(kind.readBits(elements, i), bits)) return i;
-        }
-        return -1;
+        return kind.indexOfBits(elements, 0, size, bits);
     }
 
     /**
@@ -269,9 +273,9 @@ public final class M3PrimitiveArrayList {
             source = snapshot;
             from = 0;
         }
-        ensure(required);
-        System.arraycopy(elements, index, elements, index + length, size - index);
-        kind.copyStorage(source, from, elements, index, length);
+        Object target = insertionStorage(index, length, required);
+        kind.copyStorage(source, from, target, index, length);
+        elements = target;
         size = required;
         return length;
     }
@@ -338,6 +342,20 @@ public final class M3PrimitiveArrayList {
     private int check(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException(index);
         return index;
+    }
+
+    private Object insertionStorage(int index, int added, int required) {
+        int capacity = capacity();
+        if (required <= capacity) {
+            System.arraycopy(elements, index, elements, index + added, size - index);
+            return elements;
+        }
+        Object grown = kind.newArray(M3PrimitiveKind.grownCapacity(capacity, required));
+        // Every old spare lane is covered by the new logical range after insertion.
+        // Keep ensureCapacity's full-tail copy for the package-visible backing array.
+        System.arraycopy(elements, 0, grown, 0, index);
+        System.arraycopy(elements, index, grown, index + added, size - index);
+        return grown;
     }
 
     private void ensure(int required) {
