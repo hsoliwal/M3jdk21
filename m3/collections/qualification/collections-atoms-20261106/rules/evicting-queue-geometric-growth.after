@@ -1,0 +1,2 @@
+        //FLLDCIM: MRL - geometric growth, jump = oldLength for oldLength >= 64 (com.synexia crate m3jdk21-evicting-queue-geometric-growth-20261024); recipe qualification/collections-atoms-20261106/apply.py v1
+        long jump = oldLength < 64 ? (long) oldLength + 2 : (long) oldLength;

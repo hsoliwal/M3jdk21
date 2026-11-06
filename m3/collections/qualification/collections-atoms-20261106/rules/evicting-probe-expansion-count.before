@@ -1,0 +1,1 @@
+        require(expansions > 700_000L, "growth oracle did not exercise enough expansions");

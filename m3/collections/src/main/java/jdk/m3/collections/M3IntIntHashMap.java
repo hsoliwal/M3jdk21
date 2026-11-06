@@ -165,7 +165,12 @@ public final class M3IntIntHashMap {
 
     /** Removes only when the key maps to {@code expectedValue}. */
     public boolean remove(int key, int expectedValue) {
-        if (!containsKey(key) || getOrDefault(key, 0) != expectedValue) {
+        //FLLDCIM: MRL - one-probe conditional delete (com.synexia crate m3-intint-conditional-remove-20261030, postimage blob 3d17af324de9); recipe qualification/collections-atoms-20261106/apply.py v1
+        if (key == 0) {
+            return hasZero && zeroValue == expectedValue && remove(0);
+        }
+        int pos = find(key);
+        if (pos < 0 || values[pos] != expectedValue) {
             return false;
         }
         return remove(key);
