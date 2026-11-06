@@ -1,0 +1,20 @@
+target	verdict	chain	note
+cpu-tools jdk.m3.tools.cpu/M3BloomIndex.java	APPLY	src	master == jdk_naming(rename-parent bytes)
+cpu-tools jdk.m3.tools.cpu/M3CompactCodec.java	APPLY	src	
+cpu-tools jdk.m3.tools.cpu/M3DataQuality.java	APPLY	src>owner-view-20261105	
+cpu-tools jdk.m3.tools.cpu/M3StreamJoin.java	APPLY	src>owner-view-20261105	
+cpu-tools jdk.m3.tools.cpu/M3StreamMath.java	APPLY	src	
+cpu-tools jdk.m3.tools.cpu/M3TemporalIndex.java	APPLY	src	
+cpu-tools jdk.m3.tools.cpu/M3ArrayGraph.java	APPLY	src = java-jni-continuation	FORK of two byte-identical postimages
+cpu-tools jdk.m3.tools.constraint.interval/Intervals.java	APPLY	src = java-jni-continuation	FORK of two byte-identical postimages
+cpu-tools jdk.m3.tools.text.search/ExactSearch.java	APPLY	java-jni-continuation>batch-search>prefix-profile	FORK resolved to the continuation chain: the top-level variant differs only by 12 Javadoc lines
+cpu-tools jdk.m3.tools.text.similarity/EditDistance.java	APPLY	banded-distance-20261105	
+text-tools native/m3_edit_distance.h	NEW	banded-distance-20261105	
+text-tools native/m3_exact_summary.h	NEW	java-jni-continuation>batch-search	
+text-tools native/m3_prefix_profile.h	NEW	prefix-profile-20261105	
+text-tools native/m3textio.c	MERGED	java-jni-continuation>prefix-profile>banded-distance	master drifted after the rename: 3-way with one ADD_ADD hunk at end of file, union (master's UTF-8 line kernel, then the 3 #includes)
+text-tools jdk.m3.text/Canonical.java	APPLY	source-lines-20261105	
+text-tools jdk.m3.text/CsvTools.java	APPLY	indexed-csv-20261105	
+text-tools jdk.m3.text/TextFrame.java	APPLY	source-lines-20261105	
+text-tools jdk.m3.text/Utf8Segments.java	APPLY	source-lines-20261105	
+m3/arrays M3Arrays.java	HANDOFF	owner-view-20261105	census2 P2-001, taken by com-synexia-0e

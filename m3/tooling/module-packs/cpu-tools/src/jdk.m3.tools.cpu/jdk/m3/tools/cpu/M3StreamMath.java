@@ -112,4 +112,46 @@ public final class M3StreamMath {
         }
         return sum;
     }
+
+    /** Exact long minima of complete sliding windows; O(n) work and O(window) index space. */
+    public static long[] movingMinimum(long[] samples, int window) {
+        return movingExtreme(samples, window, true);
+    }
+
+    /** Exact long maxima of complete sliding windows; no overflow-prone value subtraction. */
+    public static long[] movingMaximum(long[] samples, int window) {
+        return movingExtreme(samples, window, false);
+    }
+
+    private static long[] movingExtreme(long[] samples, int window, boolean minimum) {
+        Objects.requireNonNull(samples, "samples");
+        if (samples.length > 1_000_000 || window < 1 || window > samples.length)
+            throw new IllegalArgumentException("window budget");
+        long[] result = new long[samples.length - window + 1];
+        int[] deque = new int[window];
+        int head = 0, size = 0;
+        for (int i = 0; i < samples.length; i++) {
+            if (size > 0 && deque[head] <= i - window) {
+                head = (head + 1) % window; size--;
+            }
+            while (size > 0) {
+                int tail = (head + size - 1) % window;
+                long last = samples[deque[tail]];
+                if (minimum ? last < samples[i] : last > samples[i]) break;
+                size--;
+            }
+            deque[(head + size) % window] = i; size++;
+            if (i + 1 >= window) result[i + 1 - window] = samples[deque[head]];
+        }
+        return result;
+    }
+
+    /** Leading zero plus checked signed-long prefix sums; any overflowing prefix throws. */
+    public static long[] prefixSums(long[] samples) {
+        Objects.requireNonNull(samples, "samples");
+        if (samples.length > 1_000_000) throw new IllegalArgumentException("prefix budget");
+        long[] result = new long[samples.length + 1];
+        for (int i = 0; i < samples.length; i++) result[i + 1] = Math.addExact(result[i], samples[i]);
+        return result;
+    }
 }

@@ -359,3 +359,12 @@ JNIEXPORT jlong JNICALL Java_jdk_m3_text_NativeUtf8Lines_scanPrepared0
     (void)ignored;
     return m3_scan_prepared(env, buffer, from, end, needle, failure, triples);
 }
+
+/* Additive exact-summary entry point; prior exports remain byte-identical. */
+#include "m3_exact_summary.h"
+
+/* Prefix-profile leaf; prior native exports remain unchanged. */
+#include "m3_prefix_profile.h"
+
+/* Compact-band UTF-16 distance; previous native leaves remain intact. */
+#include "m3_edit_distance.h"

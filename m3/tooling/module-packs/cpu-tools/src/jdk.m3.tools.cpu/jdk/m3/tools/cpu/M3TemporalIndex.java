@@ -90,4 +90,64 @@ public final class M3TemporalIndex {
         }
         return low;
     }
+
+    /**
+     * Prepare repeated event-time queries over a detached nondecreasing long lane.
+     * Duplicates retain their original ordinal positions. At most one million events.
+     * Construction is O(n); subsequent scalar rank/count queries are O(log n).
+     */
+    public static EventIndex prepareEvents(long[] timestamp) {
+        Objects.requireNonNull(timestamp, "timestamp");
+        if (timestamp.length > 1_000_000) throw new IllegalArgumentException("event budget");
+        long[] snapshot = timestamp.clone();
+        for (int i = 1; i < snapshot.length; i++) if (snapshot[i] < snapshot[i - 1])
+            throw new IllegalArgumentException("timestamps not ordered");
+        return new EventIndex(snapshot);
+    }
+
+    /** Half-open original event-coordinate range, not retained per-event objects. */
+    public record EventRange(int from, int to) {
+        public EventRange {
+            if (from < 0 || to < from) throw new IllegalArgumentException("event range");
+        }
+        public int size() { return to - from; }
+    }
+
+    /** Immutable primitive event owner. Array exports are independent mutable snapshots. */
+    public static final class EventIndex {
+        private final long[] timestamp;
+        private EventIndex(long[] timestamp) { this.timestamp = timestamp; }
+        public int size() { return timestamp.length; }
+        public long timestampAt(int row) {
+            return timestamp[Objects.checkIndex(row, timestamp.length)];
+        }
+        public long[] timestamps() { return timestamp.clone(); }
+        public int lowerBound(long time) { return M3TemporalIndex.lowerBound(timestamp, time); }
+        public int upperBound(long time) { return M3TemporalIndex.upperBound(timestamp, time); }
+        public int previousOrEqual(long time) { return upperBound(time) - 1; }
+        public int nextOrEqual(long time) {
+            int row = lowerBound(time);
+            return row == timestamp.length ? -1 : row;
+        }
+        /** Exact [from,to) count; no endpoint increment or decrement is used. */
+        public int count(long from, long to) {
+            if (to < from) throw new IllegalArgumentException("time range");
+            return lowerBound(to) - lowerBound(from);
+        }
+        public EventRange range(long from, long to) {
+            if (to < from) throw new IllegalArgumentException("time range");
+            return new EventRange(lowerBound(from), lowerBound(to));
+        }
+        /** Validate every query before computing a detached count lane. */
+        public long[] counts(long[] from, long[] to) {
+            Objects.requireNonNull(from, "from"); Objects.requireNonNull(to, "to");
+            if (from.length != to.length || from.length > 1_000_000)
+                throw new IllegalArgumentException("query geometry");
+            for (int i = 0; i < from.length; i++) if (to[i] < from[i])
+                throw new IllegalArgumentException("time range");
+            long[] result = new long[from.length];
+            for (int i = 0; i < from.length; i++) result[i] = count(from[i], to[i]);
+            return result;
+        }
+    }
 }

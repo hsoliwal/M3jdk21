@@ -164,6 +164,202 @@ public final class M3ArrayGraph {
         return flow;
     }
 
+    /**
+     * Reverse a validated CSR graph without per-edge objects. Each reversed row
+     * is ordered by original source vertex; duplicate edges and self-edges remain.
+     * Output owns only primitive structural metadata, not copies of String labels.
+     */
+    public static Csr transpose(int[] offsets, int[] targets) {
+        int n = vertices(offsets, targets);
+        int[] reversedOffsets = new int[n + 1];
+        for (int target : targets) reversedOffsets[target + 1]++;
+        for (int i = 1; i <= n; i++)
+            reversedOffsets[i] = Math.addExact(reversedOffsets[i], reversedOffsets[i - 1]);
+        int[] positions = reversedOffsets.clone();
+        int[] reversedTargets = new int[targets.length];
+        for (int source = 0; source < n; source++)
+            for (int edge = offsets[source]; edge < offsets[source + 1]; edge++)
+                reversedTargets[positions[targets[edge]]++] = source;
+        return new Csr(reversedOffsets, reversedTargets);
+    }
+
+    /** Exact unweighted edge distances, -1 for unreachable vertices, 0 at source. */
+    public static int[] shortestDistances(int[] offsets, int[] targets, int source) {
+        int n = vertices(offsets, targets);
+        if (source < 0 || source >= n) throw new IndexOutOfBoundsException("source");
+        int[] distances = new int[n], queue = new int[n];
+        Arrays.fill(distances, -1);
+        int first = 0, last = 0;
+        distances[source] = 0;
+        queue[last++] = source;
+        while (first < last) {
+            int node = queue[first++];
+            for (int edge = offsets[node]; edge < offsets[node + 1]; edge++) {
+                int next = targets[edge];
+                if (distances[next] == -1) {
+                    distances[next] = distances[node] + 1;
+                    queue[last++] = next;
+                }
+            }
+        }
+        return distances;
+    }
+
+    /**
+     * Undirected/weak components of directed CSR edges. Primitive union-by-rank
+     * and path compression; IDs ordered by each component's smallest vertex.
+     * The existing directed SCC operation remains distinct and unchanged.
+     */
+    public static int[] weaklyConnectedComponents(int[] offsets, int[] targets) {
+        int n = vertices(offsets, targets);
+        int[] parents = new int[n];
+        byte[] ranks = new byte[n];
+        for (int i = 0; i < n; i++) parents[i] = i;
+        for (int source = 0; source < n; source++) {
+            for (int edge = offsets[source]; edge < offsets[source + 1]; edge++) {
+                int a = root(parents, source), b = root(parents, targets[edge]);
+                if (a == b) continue;
+                if (ranks[a] < ranks[b]) parents[a] = b;
+                else {
+                    parents[b] = a;
+                    if (ranks[a] == ranks[b]) ranks[a]++;
+                }
+            }
+        }
+        int[] ids = new int[n], output = new int[n];
+        Arrays.fill(ids, -1);
+        int nextId = 0;
+        for (int i = 0; i < n; i++) {
+            int parent = root(parents, i);
+            if (ids[parent] == -1) ids[parent] = nextId++;
+            output[i] = ids[parent];
+        }
+        return output;
+    }
+
+    private static int root(int[] parents, int vertex) {
+        int root = vertex;
+        while (parents[root] != root) root = parents[root];
+        while (vertex != root) {
+            int next = parents[vertex];
+            parents[vertex] = root;
+            vertex = next;
+        }
+        return root;
+    }
+
+    /**
+     * Reflexive reachability, row-major packed masks. Each row has ceil(V/64)
+     * long words. Refuses before allocation if V*ceil(V/64) exceeds maxWords or
+     * a Java array length. Padding bits stay zero. A single primitive queue is
+     * reused for every source. The word budget bounds output, not execution time;
+     * the worst-case scan cost is O(V*(V+E)), and no all-pairs cache is retained.
+     */
+    public static long[] transitiveClosure(int[] offsets, int[] targets, long maxWords) {
+        int n = vertices(offsets, targets);
+        if (maxWords < 0) throw new IllegalArgumentException("negative word budget");
+        int words = (int) (((long) n + 63) >>> 6);
+        long total = (long) n * words;
+        if (total > maxWords || total > Integer.MAX_VALUE - 8L)
+            throw new IllegalArgumentException("reachability output exceeds word budget");
+        long[] output = new long[(int) total];
+        int[] queue = new int[n];
+        for (int source = 0; source < n; source++) {
+            int base = source * words;
+            int first = 0, last = 0;
+            output[base + (source >>> 6)] |= 1L << (source & 63);
+            queue[last++] = source;
+            while (first < last) {
+                int node = queue[first++];
+                for (int edge = offsets[node]; edge < offsets[node + 1]; edge++) {
+                    int next = targets[edge], slot = base + (next >>> 6);
+                    long bit = 1L << (next & 63);
+                    if ((output[slot] & bit) == 0) {
+                        output[slot] |= bit;
+                        queue[last++] = next;
+                    }
+                }
+            }
+        }
+        return output;
+    }
+
+    /** Immutable CSR result; requested array exports are independent mutable copies. */
+    public static final class Csr {
+        private final int[] offsets;
+        private final int[] targets;
+        private Csr(int[] offsets, int[] targets) {
+            this.offsets = offsets;
+            this.targets = targets;
+        }
+        public int vertexCount() { return offsets.length - 1; }
+        public int edgeCount() { return targets.length; }
+        public int start(int vertex) { return offsets[Objects.checkIndex(vertex, vertexCount())]; }
+        public int end(int vertex) { return offsets[Objects.checkIndex(vertex, vertexCount()) + 1]; }
+        public int target(int edge) { return targets[Objects.checkIndex(edge, targets.length)]; }
+        public int[] offsets() { return offsets.clone(); }
+        public int[] targets() { return targets.clone(); }
+    }
+
+    /**
+     * Contract strongly connected components into a simple directed acyclic CSR
+     * graph. Reuses the existing canonical SCC labels (increasing minimum vertex).
+     * Internal edges disappear; duplicate cross-component edges coalesce and rows
+     * are sorted. maxEdges bounds admitted INPUT edges before derived allocation;
+     * it is not a time budget. Scratch is O(V+E), sorting costs O(E log E).
+     */
+    public static Condensation condensation(int[] offsets, int[] targets, int maxEdges) {
+        int n = vertices(offsets, targets);
+        if (maxEdges < 0 || targets.length > maxEdges)
+            throw new IllegalArgumentException("condensation input edge budget");
+        int[] components = stronglyConnectedComponents(offsets, targets);
+        int groups = 0;
+        for (int component : components) groups = Math.max(groups, component + 1);
+        long[] edges = new long[targets.length];
+        int used = 0;
+        for (int source = 0; source < n; source++) {
+            int from = components[source];
+            for (int edge = offsets[source]; edge < offsets[source + 1]; edge++) {
+                int to = components[targets[edge]];
+                if (from != to) edges[used++] = ((long) from << 32) | (to & 0xffffffffL);
+            }
+        }
+        Arrays.sort(edges, 0, used);
+        int unique = 0;
+        long previous = -1;
+        for (int i = 0; i < used; i++) {
+            long edge = edges[i];
+            if (edge != previous) edges[unique++] = edge;
+            previous = edge;
+        }
+        int[] contractedOffsets = new int[groups + 1];
+        int[] contractedTargets = new int[unique];
+        for (int i = 0; i < unique; i++) {
+            contractedOffsets[(int) (edges[i] >>> 32) + 1]++;
+            contractedTargets[i] = (int) edges[i];
+        }
+        for (int i = 1; i <= groups; i++)
+            contractedOffsets[i] = Math.addExact(contractedOffsets[i], contractedOffsets[i - 1]);
+        return new Condensation(components, new Csr(contractedOffsets, contractedTargets));
+    }
+
+    /** Immutable primitive component map plus the existing CSR result owner. */
+    public static final class Condensation {
+        private final int[] components;
+        private final Csr graph;
+        private Condensation(int[] components, Csr graph) {
+            this.components = components;
+            this.graph = graph;
+        }
+        public int vertexCount() { return components.length; }
+        public int componentCount() { return graph.vertexCount(); }
+        public int component(int vertex) {
+            return components[Objects.checkIndex(vertex, components.length)];
+        }
+        public int[] components() { return components.clone(); }
+        public Csr graph() { return graph; }
+    }
+
     private static boolean levels(int[] head, int[] to, int[] next, long[] residual,
                                   int source, int sink, int[] level, int[] queue) {
         Arrays.fill(level, -1);
