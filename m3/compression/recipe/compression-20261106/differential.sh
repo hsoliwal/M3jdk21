@@ -4,15 +4,19 @@
 # Differential gate of recipe compression-20261106 (after mvn package of m3/compression; JAVA_HOME = JDK 21).
 # (a) The donor closure (every Java FILE row of RELOCATION_MAP.tsv except the JUnit wrappers) is compiled from the donor
 #     git tree with javac --release 21 -Xlint:all -Werror; each donor oracle main and its relocated twin must print
-#     byte-identical output, and the M3WR wire corpus the workspace oracle writes must be byte-identical.
+#     byte-identical output (workspace, candidate-index and chunk-cache oracles), and the M3WR wire corpus the
+#     workspace oracle writes must be byte-identical.
 # (b) The format oracle (test scope, M3CompressionFormatOracle) drives the donor encoders and the relocated encoders by
 #     class name over the same seeded inputs: its report (round-trip counts through the strict spec decoders and the
 #     SHA-256 of all LZ4 and all Snappy wire bytes) must be byte-identical.
-# (c) Mutant lane: one-line spec mutants of the relocated encoders (LZ4 LAST_LITERALS 5 -> 4, Snappy
-#     MAX_COPY_LENGTH 64 -> 65), compiled into the scratch and shadowing the relocated class, must be refused by the
-#     format oracle (it is live, not a tautology).
+# (c) Mutant lane: one-line mutants of the relocated owners (LZ4 LAST_LITERALS 5 -> 4, Snappy MAX_COPY_LENGTH
+#     64 -> 65, chunk cache evicting the most recent slot instead of the least recent), compiled into the scratch and
+#     shadowing the relocated class, must be refused by the format oracle / the cache model oracle (they are live).
 # (d) Allocation probe: donor and relocated M3CompressionAllocationProbe; the bytes/op figures must be equal (ns/op is
 #     printed, never compared).
+# (e) The chunk-cache model oracle (test scope, M3CompressedChunkCacheModel) drives the donor cache and the relocated
+#     cache by class name through the same seeded workloads; both must agree with the LinkedHashMap LRU model at every
+#     operation and their reports (counters and the SHA-256 of the per-operation trace) must be byte-identical.
 # The donor package comes from RELOCATION_MAP.tsv next to this script, so no file in the naming scope names it.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir> [inputs]
 set -euo pipefail
@@ -58,6 +62,9 @@ verdict M3WR_wire_corpus "$SCRATCH/out/donor-wire.bin" "$SCRATCH/out/relocated-w
 "${JAVA[@]}" -cp "$SCRATCH/classes" "$donor_package.M3LzMatchCandidateSelfTest" > "$SCRATCH/out/donor-lzindex.txt"
 "${JAVA[@]}" -cp "$RELOCATED_CP" "$target_package.M3LzMatchCandidateSelfTest" > "$SCRATCH/out/relocated-lzindex.txt"
 verdict M3LzMatchCandidateSelfTest "$SCRATCH/out/donor-lzindex.txt" "$SCRATCH/out/relocated-lzindex.txt"
+"${JAVA[@]}" -cp "$SCRATCH/classes" "$donor_package.M3CompressedChunkCacheSelfTest" > "$SCRATCH/out/donor-chunkcache.txt"
+"${JAVA[@]}" -cp "$RELOCATED_CP" "$target_package.M3CompressedChunkCacheSelfTest" > "$SCRATCH/out/relocated-chunkcache.txt"
+verdict M3CompressedChunkCacheSelfTest "$SCRATCH/out/donor-chunkcache.txt" "$SCRATCH/out/relocated-chunkcache.txt"
 # (b) format oracle over donor and relocated encoders
 "${JAVA[@]}" -cp "$RELOCATED_CP$SEP$SCRATCH/classes" "$target_package.M3CompressionFormatOracle" \
     "$donor_package.M3Lz4RawBlockEncoder" "$donor_package.M3SnappyRawEncoder" "$INPUTS" > "$SCRATCH/out/donor-format.txt"
@@ -66,23 +73,28 @@ verdict M3LzMatchCandidateSelfTest "$SCRATCH/out/donor-lzindex.txt" "$SCRATCH/ou
 verdict M3CompressionFormatOracle "$SCRATCH/out/donor-format.txt" "$SCRATCH/out/relocated-format.txt"
 grep -E "_(INPUTS|ROUNDTRIP|SHA256|RESULT)=" "$SCRATCH/out/relocated-format.txt" | tr '\n' ' '; echo
 # (c) mutant lane
-mutant() { # label file sed-expression expected-message
-    local dir="$SCRATCH/mutant-$1"
+mutant() { # label file sed-expression expected-message oracle-simple-name [oracle args]
+    local label=$1 dir="$SCRATCH/mutant-$1" file=$2 expression=$3 expected=$4 oracle=$5
+    shift 5
     rm -rf "$dir"; mkdir -p "$dir/classes"
-    sed "$3" "$MODULE/src/main/java/${target_package//.//}/$2" > "$dir/$2"
-    if cmp -s "$dir/$2" "$MODULE/src/main/java/${target_package//.//}/$2"; then echo "mutant $1 NOT_APPLIED"; status=FAIL; return; fi
-    "$JAVA_BIN/javac" --release 21 -d "$dir/classes" -cp "$MODULE/target/classes" "$dir/$2"
-    if "${JAVA[@]}" -cp "$dir/classes$SEP$RELOCATED_CP" "$target_package.M3CompressionFormatOracle" \
-        "$target_package.M3Lz4RawBlockEncoder" "$target_package.M3SnappyRawEncoder" "$INPUTS" > "$dir/out.txt" 2> "$dir/err.txt"; then
-        echo "mutant $1 ACCEPTED"; status=FAIL
-    elif grep -q "$4" "$dir/err.txt"; then
-        echo "mutant $1 REFUSED: $(grep -m1 -oE "(AssertionError|IllegalArgumentException).*" "$dir/err.txt" | tr -d '\r' | cut -c1-140)"
+    sed "$expression" "$MODULE/src/main/java/${target_package//.//}/$file" > "$dir/$file"
+    if cmp -s "$dir/$file" "$MODULE/src/main/java/${target_package//.//}/$file"; then echo "mutant $label NOT_APPLIED"; status=FAIL; return; fi
+    "$JAVA_BIN/javac" --release 21 -d "$dir/classes" -cp "$MODULE/target/classes" "$dir/$file"
+    if "${JAVA[@]}" -cp "$dir/classes$SEP$RELOCATED_CP" "$target_package.$oracle" "$@" > "$dir/out.txt" 2> "$dir/err.txt"; then
+        echo "mutant $label ACCEPTED"; status=FAIL
+    elif grep -q "$expected" "$dir/err.txt"; then
+        echo "mutant $label REFUSED: $(grep -m1 -oE "(AssertionError|IllegalArgumentException).*" "$dir/err.txt" | tr -d '\r' | cut -c1-140)"
     else
-        echo "mutant $1 FAILED_OTHERWISE: $(head -c 300 "$dir/err.txt")"; status=FAIL
+        echo "mutant $label FAILED_OTHERWISE: $(head -c 300 "$dir/err.txt")"; status=FAIL
     fi
 }
-mutant lz4_last_literals M3Lz4RawBlockEncoder.java 's/LAST_LITERALS = 5;/LAST_LITERALS = 4;/' "LZ4 match reaches the last 5 bytes"
-mutant snappy_copy_length M3SnappyRawEncoder.java 's/MAX_COPY_LENGTH = 64;/MAX_COPY_LENGTH = 65;/' "Snappy"
+encoders=("$target_package.M3Lz4RawBlockEncoder" "$target_package.M3SnappyRawEncoder" "$INPUTS")
+mutant lz4_last_literals M3Lz4RawBlockEncoder.java 's/LAST_LITERALS = 5;/LAST_LITERALS = 4;/' \
+    "LZ4 match reaches the last 5 bytes" M3CompressionFormatOracle "${encoders[@]}"
+mutant snappy_copy_length M3SnappyRawEncoder.java 's/MAX_COPY_LENGTH = 64;/MAX_COPY_LENGTH = 65;/' \
+    "Snappy" M3CompressionFormatOracle "${encoders[@]}"
+mutant cache_evicts_most_recent M3CompressedChunkCache.java 's/access\[i\] < access\[oldest\]/access[i] > access[oldest]/' \
+    "model" M3CompressedChunkCacheModel
 # (d) allocation probe (bytes/op compared, ns/op printed only)
 "${JAVA[@]}" -cp "$SCRATCH/classes" "$donor_package.M3CompressionAllocationProbe" > "$SCRATCH/out/donor-probe.txt"
 "${JAVA[@]}" -cp "$RELOCATED_CP" "$target_package.M3CompressionAllocationProbe" > "$SCRATCH/out/relocated-probe.txt"
@@ -91,5 +103,13 @@ sed 's/ ns\/op=.*//' "$SCRATCH/out/relocated-probe.txt" > "$SCRATCH/out/relocate
 verdict M3CompressionAllocationProbe_bytes_per_op "$SCRATCH/out/donor-probe-bytes.txt" "$SCRATCH/out/relocated-probe-bytes.txt"
 echo "probe donor: $(tr -d '\r' < "$SCRATCH/out/donor-probe.txt" | tr '\n' ';')"
 echo "probe relocated: $(tr -d '\r' < "$SCRATCH/out/relocated-probe.txt" | tr '\n' ';')"
+# (e) chunk-cache model oracle over donor and relocated caches
+"${JAVA[@]}" -cp "$RELOCATED_CP$SEP$SCRATCH/classes" "$target_package.M3CompressedChunkCacheModel" \
+    "$donor_package.M3CompressedChunkCache" > "$SCRATCH/out/donor-cachemodel.txt"
+"${JAVA[@]}" -cp "$RELOCATED_CP" "$target_package.M3CompressedChunkCacheModel" \
+    "$target_package.M3CompressedChunkCache" > "$SCRATCH/out/relocated-cachemodel.txt"
+verdict M3CompressedChunkCacheModel "$SCRATCH/out/donor-cachemodel.txt" "$SCRATCH/out/relocated-cachemodel.txt"
+grep -E "^M3_CHUNK_CACHE_(OPS|HITS|MISSES|EVICTIONS|TRIMS|MODEL_FIELD_CHECKS|MODEL_MISMATCHES|TRACE_SHA256|RESULT)=" \
+    "$SCRATCH/out/relocated-cachemodel.txt" | tr -d '\r' | tr '\n' ' '; echo
 echo "DIFFERENTIAL $status"
 [ "$status" = PASS ]
