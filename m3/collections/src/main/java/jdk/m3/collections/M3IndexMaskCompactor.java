@@ -14,6 +14,7 @@
  *******************************************************************************/
 package jdk.m3.collections;
 
+import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
@@ -681,4 +682,328 @@ public final class M3IndexMaskCompactor {
 
     private static native int[] selectNative(int[] orderedRows, byte[] rowStates,
                                               int requiredMask);
+
+    //FLLDCIM: RELOCATE-MERGE begin - donor blob c4f8c5865932 at ac5feec00a6d; recipe m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
+    public static final int LIVE = 1;
+
+    public static boolean laneKernelNativeAvailable() { return NativeLaneKernel.AVAILABLE; }
+
+    /**
+     * Select occupied slots with key/value in inclusive signed ranges.
+     * No keys or values are moved, no pairs or facade objects are created.
+     * Input arrays are only borrowed, never retained, and may be longer than
+     * the requested window. Concurrency requires external synchronization.
+     *
+     * @throws NullPointerException if any lane is null
+     * @throws IndexOutOfBoundsException for an invalid window or mismatched lanes
+     * @throws IllegalArgumentException for inverted key/value ranges
+     */
+    public static int[] select(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        if (count == 0) return new int[0];
+        return NativeLaneKernel.AVAILABLE
+                ? nativeSelect(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax)
+                : selectJavaValidated(keys, values, state, start, count,
+                        keyMin, keyMax, valueMin, valueMax);
+    }
+
+    /**
+     * Write matching physical slots to a reusable output lane and return the number written.
+     * Insufficient capacity fails before any output write for stable inputs. The caller
+     * must keep all input lanes stable throughout both selection passes. This method
+     * never retains arrays and creates no Entry, Node or Cell per mapping.
+     */
+    public static int selectInto(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        validateOutput(output, outputStart);
+        return NativeLaneKernel.AVAILABLE
+                ? nativeSelectInto(keys, values, state, start, count,
+                        keyMin, keyMax, valueMin, valueMax, output, outputStart)
+                : selectJavaIntoValidated(keys, values, state, start, count,
+                        keyMin, keyMax, valueMin, valueMax, output, outputStart);
+    }
+
+    /** Java-only, allocation-free oracle for caller-owned reusable output arrays. */
+    public static int selectIntoJava(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        validateOutput(output, outputStart);
+        return selectJavaIntoValidated(keys, values, state, start, count,
+                keyMin, keyMax, valueMin, valueMax, output, outputStart);
+    }
+
+    /** JNI-only variant for native-runtime qualification; never silently falls back. */
+    public static int selectIntoNativeRequired(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        validateOutput(output, outputStart);
+        if (!NativeLaneKernel.AVAILABLE) throw new UnsatisfiedLinkError("DOOPS native lane candidate is not loaded");
+        return nativeSelectInto(keys, values, state, start, count,
+                keyMin, keyMax, valueMin, valueMax, output, outputStart);
+    }
+
+    /**
+     * Scan a bounded page of matching physical slots, without Entry objects or result allocations.
+     * The high 32 bits of the result are the number written; the low 32 bits contain
+     * the absolute next scan position (equal to {@code start + count} when exhausted).
+     * Resume by passing that position and the remaining count in the same original window.
+     * A nonempty input window requires at least one available output position. Traversal
+     * is stable and never relocates or mutates input lanes. The caller must externally
+     * synchronize all lanes across page calls and must not recycle slot identities.
+     *
+     * <p>Unlike two-pass {@link #selectInto}, this performs one bounded input scan and
+     * immediately stops on filling the destination. The caller retains its output array.
+     */
+    public static long scanPageInto(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        validatePageOutput(output, outputStart, count);
+        return NativeLaneKernel.AVAILABLE
+                ? nativeScanPageInto(keys, values, state, start, count,
+                        keyMin, keyMax, valueMin, valueMax, output, outputStart)
+                : scanPageJavaValidated(keys, values, state, start, count,
+                        keyMin, keyMax, valueMin, valueMax, output, outputStart);
+    }
+
+    /** Java-only single-pass paged selection oracle, even when JNI is loaded. */
+    public static long scanPageIntoJava(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        validatePageOutput(output, outputStart, count);
+        return scanPageJavaValidated(keys, values, state, start, count,
+                keyMin, keyMax, valueMin, valueMax, output, outputStart);
+    }
+
+    /** JNI-only paged selection; requires a successfully loaded native library. */
+    public static long scanPageIntoNativeRequired(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        validatePageOutput(output, outputStart, count);
+        if (!NativeLaneKernel.AVAILABLE) throw new UnsatisfiedLinkError("DOOPS native lane candidate is not loaded");
+        return nativeScanPageInto(keys, values, state, start, count,
+                keyMin, keyMax, valueMin, valueMax, output, outputStart);
+    }
+
+    /** Number of physical slot indices written by a paged scan. */
+    public static int pageWritten(long result) { return (int) (result >>> 32); }
+
+    /** Absolute next input position; equals window end on exhaustion. */
+    public static int pageNext(long result) { return (int) result; }
+
+    /** Force Java-only selection as the differential oracle, even with JNI loaded. */
+    public static int[] selectJava(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        return selectJavaValidated(keys, values, state, start, count,
+                keyMin, keyMax, valueMin, valueMax);
+    }
+
+    /** Count matching occupied slots without allocating a result index array. */
+    public static int countMatching(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        return NativeLaneKernel.AVAILABLE
+                ? nativeCount(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax)
+                : countJavaValidated(keys, values, state, start, count,
+                        keyMin, keyMax, valueMin, valueMax);
+    }
+
+    /** Return the first matching physical slot, or -1; no Map.Entry or result array. */
+    public static int firstMatching(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        return NativeLaneKernel.AVAILABLE
+                ? nativeFirst(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax)
+                : firstJavaValidated(keys, values, state, start, count,
+                        keyMin, keyMax, valueMin, valueMax);
+    }
+
+    /** Deterministic allocation-free Java count oracle even when native is loaded. */
+    public static int countMatchingJava(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        return countJavaValidated(keys, values, state, start, count,
+                keyMin, keyMax, valueMin, valueMax);
+    }
+
+    /** Deterministic early-exit Java search oracle even when native is loaded. */
+    public static int firstMatchingJava(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        return firstJavaValidated(keys, values, state, start, count,
+                keyMin, keyMax, valueMin, valueMax);
+    }
+
+    /** Count via real JNI or refuse when no native library is loaded. */
+    public static int countMatchingNativeRequired(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        if (!NativeLaneKernel.AVAILABLE) throw new UnsatisfiedLinkError("DOOPS native lane candidate is not loaded");
+        return nativeCount(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+    }
+
+    /** Early-exit slot search via real JNI or fail closed when not loaded. */
+    public static int firstMatchingNativeRequired(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        if (!NativeLaneKernel.AVAILABLE) throw new UnsatisfiedLinkError("DOOPS native lane candidate is not loaded");
+        return nativeFirst(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+    }
+
+    /** Fail closed rather than quietly falling back when native evidence is required. */
+    public static int[] selectNativeRequired(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        validate(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+        if (!NativeLaneKernel.AVAILABLE) throw new UnsatisfiedLinkError("DOOPS native lane candidate is not loaded");
+        return nativeSelect(keys, values, state, start, count, keyMin, keyMax, valueMin, valueMax);
+    }
+
+    private static void validate(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        Objects.requireNonNull(keys, "keys");
+        Objects.requireNonNull(values, "values");
+        Objects.requireNonNull(state, "state");
+        if (keyMin > keyMax || valueMin > valueMax) {
+            throw new IllegalArgumentException("inverted lane filter bounds");
+        }
+        // Subtract before comparing to avoid start + count integer overflow.
+        if (start < 0 || count < 0 || start > keys.length || count > keys.length - start
+                || start > values.length || count > values.length - start
+                || start > state.length || count > state.length - start) {
+            throw new IndexOutOfBoundsException("lane window exceeds backing arrays");
+        }
+    }
+
+    private static void validateOutput(int[] output, int outputStart) {
+        Objects.requireNonNull(output, "output");
+        if (outputStart < 0 || outputStart > output.length) {
+            throw new IndexOutOfBoundsException("invalid output start");
+        }
+    }
+
+    private static void validatePageOutput(int[] output, int outputStart, int count) {
+        validateOutput(output, outputStart);
+        if (count != 0 && outputStart == output.length) {
+            throw new IndexOutOfBoundsException("nonempty page requires output capacity");
+        }
+    }
+
+    private static long pageResult(int next, int written) {
+        return ((long) written << 32) | (next & 0xffffffffL);
+    }
+
+    private static long scanPageJavaValidated(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart) {
+        final int capacity = output.length - outputStart;
+        final int end = start + count;
+        int written = 0;
+        for (int pos = start; pos < end; pos++) {
+            if ((state[pos] & LIVE) == 0 || keys[pos] < keyMin || keys[pos] > keyMax
+                    || values[pos] < valueMin || values[pos] > valueMax) continue;
+            output[outputStart + written++] = pos;
+            if (written == capacity) return pageResult(pos + 1, written);
+        }
+        return pageResult(end, written);
+    }
+
+    private static int selectJavaIntoValidated(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart) {
+        int required = countJavaValidated(keys, values, state, start, count,
+                keyMin, keyMax, valueMin, valueMax);
+        if (required > output.length - outputStart) {
+            throw new IndexOutOfBoundsException("insufficient output capacity");
+        }
+        int write = outputStart;
+        for (int i = start, end = start + count; i < end; i++) {
+            if ((state[i] & LIVE) != 0 && keys[i] >= keyMin && keys[i] <= keyMax
+                    && values[i] >= valueMin && values[i] <= valueMax) output[write++] = i;
+        }
+        if (write - outputStart != required) {
+            throw new java.util.ConcurrentModificationException("lane selection changed during scan");
+        }
+        return required;
+    }
+
+    private static int[] selectJavaValidated(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        int[] matching = null;
+        int length = 0;
+        final int end = start + count; // validated without overflow above
+        for (int i = start; i < end; i++) {
+            if ((state[i] & LIVE) == 0 || keys[i] < keyMin || keys[i] > keyMax
+                    || values[i] < valueMin || values[i] > valueMax) continue;
+            if (matching == null) {
+                matching = new int[Math.min(count, 32)];
+            } else if (length == matching.length) {
+                matching = Arrays.copyOf(matching, Math.min(count,
+                        matching.length <= (count >>> 1) ? Math.max(1, matching.length << 1) : count));
+            }
+            matching[length++] = i;
+        }
+        if (matching == null) return new int[0];
+        return length == matching.length ? matching : Arrays.copyOf(matching, length);
+    }
+
+    private static int countJavaValidated(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        int total = 0;
+        for (int i = start, end = start + count; i < end; i++) {
+            if ((state[i] & LIVE) != 0 && keys[i] >= keyMin && keys[i] <= keyMax
+                    && values[i] >= valueMin && values[i] <= valueMax) total++;
+        }
+        return total;
+    }
+
+    private static int firstJavaValidated(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax) {
+        for (int i = start, end = start + count; i < end; i++) {
+            if ((state[i] & LIVE) != 0 && keys[i] >= keyMin && keys[i] <= keyMax
+                    && values[i] >= valueMin && values[i] <= valueMax) return i;
+        }
+        return -1;
+    }
+
+
+    private static native long nativeScanPageInto(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart);
+
+    private static native int nativeCount(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax);
+
+    private static native int nativeFirst(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax);
+
+    private static native int nativeSelectInto(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax,
+            int[] output, int outputStart);
+
+    private static native int[] nativeSelect(long[] keys, long[] values, byte[] state,
+            int start, int count, long keyMin, long keyMax, long valueMin, long valueMax);
+
+    /** Lazy probe for the additive key/value signed-range lane kernel ABI; a legacy binary keeps its older exports. */
+    private static final class NativeLaneKernel {
+        private static final boolean AVAILABLE = available();
+        private static boolean available() {
+            if (!NativeLibrary.AVAILABLE) return false;
+            try {
+                return laneKernelAbiNative() == 1;
+            } catch (UnsatisfiedLinkError legacyBinary) {
+                return false;
+            }
+        }
+    }
+
+    private static native int laneKernelAbiNative();
+    //FLLDCIM: RELOCATE-MERGE end - donor blob c4f8c5865932
 }

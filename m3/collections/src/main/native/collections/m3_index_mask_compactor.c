@@ -701,3 +701,292 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsPageNative(
     }
     return (((jlong)end) << 32) | (jlong)(unsigned int)written;
 }
+
+//FLLDCIM: RELOCATE-MERGE begin - donor blob b20d77f0f2d8 at ac5feec00a6d; recipe m3/collections/recipe/entryless-lane-kernel-20261106/relocate.py v3
+/* Candidate-only batched primitive lane oracle. Does not allocate or pin Java object arrays. */
+#include <jni.h>
+#include <stdint.h>
+#include <limits.h>
+
+#define M3_BATCH 256
+#define M3_LIVE 1
+
+static int m3_throw(JNIEnv *env, const char *exception, const char *message) {
+    jclass type = (*env)->FindClass(env, exception);
+    if (type != NULL) {
+        (*env)->ThrowNew(env, type, message);
+        (*env)->DeleteLocalRef(env, type);
+    }
+    return 0;
+}
+
+/* JNI regions are bounded; no GetPrimitiveArrayCritical and no pointer survives the call. */
+static int m3_scan(JNIEnv *env, jlongArray keys, jlongArray values, jbyteArray state,
+        jint start, jint count, jlong key_min, jlong key_max, jlong value_min,
+        jlong value_max, jintArray result, jint result_start, jint *matches, jint *first) {
+    if (first != NULL) *first = -1;
+    jlong key_batch[M3_BATCH], value_batch[M3_BATCH];
+    jbyte state_batch[M3_BATCH];
+    jint matched_slots[M3_BATCH];
+    /* A full inclusive signed span cannot reject a key or value. JNI preflight still
+     * validates all three array references and their windows before this helper. */
+    const int filter_keys = key_min != INT64_MIN || key_max != INT64_MAX;
+    const int filter_values = value_min != INT64_MIN || value_max != INT64_MAX;
+    jint total = 0;
+    for (jint offset = 0; offset < count; ) {
+        const jint len = count - offset > M3_BATCH ? M3_BATCH : count - offset;
+        const jsize base = start + offset;
+        if (filter_keys) {
+            (*env)->GetLongArrayRegion(env, keys, base, len, key_batch);
+            if ((*env)->ExceptionCheck(env)) return 0;
+        }
+        if (filter_values) {
+            (*env)->GetLongArrayRegion(env, values, base, len, value_batch);
+            if ((*env)->ExceptionCheck(env)) return 0;
+        }
+        (*env)->GetByteArrayRegion(env, state, base, len, state_batch);
+        if ((*env)->ExceptionCheck(env)) return 0;
+        jint batch_matches = 0;
+        /* Preserve the prior fully restricted loop byte-for-byte. Other shapes
+         * avoid accessing any uninitialized, deliberately unborrowed payload. */
+        if (filter_keys && filter_values) {
+            for (jint i = 0; i < len; i++) {
+                if ((state_batch[i] & M3_LIVE) == 0
+                        || key_batch[i] < key_min || key_batch[i] > key_max
+                        || value_batch[i] < value_min || value_batch[i] > value_max) continue;
+                if (first != NULL) {
+                    *first = base + i;
+                    return 1;
+                }
+                matched_slots[batch_matches++] = base + i;
+            }
+        } else {
+            for (jint i = 0; i < len; i++) {
+                if ((state_batch[i] & M3_LIVE) == 0
+                        || (filter_keys && (key_batch[i] < key_min || key_batch[i] > key_max))
+                        || (filter_values && (value_batch[i] < value_min || value_batch[i] > value_max))) continue;
+                if (first != NULL) {
+                    *first = base + i;
+                    return 1;
+                }
+                matched_slots[batch_matches++] = base + i;
+            }
+        }
+        if (result != NULL && batch_matches != 0) {
+            (*env)->SetIntArrayRegion(env, result, result_start + total, batch_matches, matched_slots);
+            if ((*env)->ExceptionCheck(env)) return 0;
+        }
+        total += batch_matches;
+        offset += len;
+    }
+    if (matches != NULL) *matches = total;
+    return 1;
+}
+
+/* The native entrypoints defend their own JNI boundary, independently of Java validation. */
+static int m3_validate(JNIEnv *env, jlongArray keys, jlongArray values, jbyteArray state,
+        jint start, jint count, jlong key_min, jlong key_max, jlong value_min, jlong value_max) {
+    if (keys == NULL || values == NULL || state == NULL) {
+        m3_throw(env, "java/lang/NullPointerException", "null lane");
+        return 0;
+    }
+    if (key_min > key_max || value_min > value_max) {
+        m3_throw(env, "java/lang/IllegalArgumentException", "inverted lane filter bounds");
+        return 0;
+    }
+    const jsize klen = (*env)->GetArrayLength(env, keys);
+    const jsize vlen = (*env)->GetArrayLength(env, values);
+    const jsize slen = (*env)->GetArrayLength(env, state);
+    if (start < 0 || count < 0 || start > klen || count > klen - start
+            || start > vlen || count > vlen - start
+            || start > slen || count > slen - start) {
+        m3_throw(env, "java/lang/IndexOutOfBoundsException", "lane window exceeds backing arrays");
+        return 0;
+    }
+    return 1;
+}
+
+JNIEXPORT jintArray JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_nativeSelect(JNIEnv *env, jclass clazz,
+        jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
+        jlong key_min, jlong key_max, jlong value_min, jlong value_max) {
+    (void) clazz;
+    if (!m3_validate(env, keys, values, state, start, count, key_min, key_max, value_min, value_max))
+        return NULL;
+    jint total = 0;
+    if (!m3_scan(env, keys, values, state, start, count,
+            key_min, key_max, value_min, value_max, NULL, 0, &total, NULL)) return NULL;
+    jintArray output = (*env)->NewIntArray(env, total);
+    if (output == NULL) return NULL;
+    jint verified = 0;
+    if (!m3_scan(env, keys, values, state, start, count,
+            key_min, key_max, value_min, value_max, output, 0, &verified, NULL)) return NULL;
+    if (verified != total) {
+        m3_throw(env, "java/util/ConcurrentModificationException",
+                "lanes changed during native two-pass selection");
+        return NULL;
+    }
+    return output;
+}
+
+/* Destination-array selection: bounded region writes into caller-owned primitive storage.
+ * With stable input lanes, capacity and offset rejection occurs before first write.
+ * No JVM array pointer or native reference survives this call. */
+JNIEXPORT jint JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_nativeSelectInto(JNIEnv *env, jclass clazz,
+        jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
+        jlong key_min, jlong key_max, jlong value_min, jlong value_max,
+        jintArray output, jint output_start) {
+    (void) clazz;
+    if (!m3_validate(env, keys, values, state, start, count, key_min, key_max, value_min, value_max))
+        return -1;
+    if (output == NULL) {
+        m3_throw(env, "java/lang/NullPointerException", "output");
+        return -1;
+    }
+    const jsize capacity = (*env)->GetArrayLength(env, output);
+    if (output_start < 0 || output_start > capacity) {
+        m3_throw(env, "java/lang/IndexOutOfBoundsException", "invalid output start");
+        return -1;
+    }
+    jint required = 0;
+    if (!m3_scan(env, keys, values, state, start, count,
+            key_min, key_max, value_min, value_max, NULL, 0, &required, NULL)) return -1;
+    if (required > capacity - output_start) {
+        m3_throw(env, "java/lang/IndexOutOfBoundsException", "insufficient output capacity");
+        return -1;
+    }
+    if (required == 0) return 0;
+    jint written = 0;
+    if (!m3_scan(env, keys, values, state, start, count,
+            key_min, key_max, value_min, value_max, output, output_start, &written, NULL)) return -1;
+    if (written != required) {
+        m3_throw(env, "java/util/ConcurrentModificationException",
+                "lane selection changed during scan");
+        return -1;
+    }
+    return written;
+}
+
+/* One-pass no-allocation queries. No Java object comparisons or retained JNI pointers. */
+JNIEXPORT jint JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_nativeCount(JNIEnv *env, jclass clazz,
+        jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
+        jlong key_min, jlong key_max, jlong value_min, jlong value_max) {
+    (void) clazz;
+    if (!m3_validate(env, keys, values, state, start, count, key_min, key_max, value_min, value_max))
+        return -1;
+    jint total = 0;
+    if (!m3_scan(env, keys, values, state, start, count,
+            key_min, key_max, value_min, value_max, NULL, 0, &total, NULL)) return -1;
+    return total;
+}
+
+JNIEXPORT jint JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_nativeFirst(JNIEnv *env, jclass clazz,
+        jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
+        jlong key_min, jlong key_max, jlong value_min, jlong value_max) {
+    (void) clazz;
+    if (!m3_validate(env, keys, values, state, start, count, key_min, key_max, value_min, value_max))
+        return -1;
+    jint first = -1;
+    if (!m3_scan(env, keys, values, state, start, count,
+            key_min, key_max, value_min, value_max, NULL, 0, NULL, &first)) return -1;
+    return first;
+}
+
+/* One-pass bounded page, preserving physical slot order, using only primitive JNI regions.
+ * No Java array address is retained. Next is absolute; count is packed in high 32 bits. */
+JNIEXPORT jlong JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_nativeScanPageInto(JNIEnv *env, jclass clazz,
+        jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
+        jlong key_min, jlong key_max, jlong value_min, jlong value_max,
+        jintArray output, jint output_start) {
+    (void) clazz;
+    if (!m3_validate(env, keys, values, state, start, count, key_min, key_max, value_min, value_max))
+        return (jlong) -1;
+    if (output == NULL) {
+        m3_throw(env, "java/lang/NullPointerException", "output");
+        return (jlong) -1;
+    }
+    const jsize capacity = (*env)->GetArrayLength(env, output);
+    if (output_start < 0 || output_start > capacity) {
+        m3_throw(env, "java/lang/IndexOutOfBoundsException", "invalid output start");
+        return (jlong) -1;
+    }
+    if (count != 0 && output_start == capacity) {
+        m3_throw(env, "java/lang/IndexOutOfBoundsException", "nonempty page requires output capacity");
+        return (jlong) -1;
+    }
+    jlong key_batch[M3_BATCH], value_batch[M3_BATCH];
+    jbyte state_batch[M3_BATCH];
+    jint slot_batch[M3_BATCH];
+    /* A full inclusive signed range cannot reject any key/value payload.
+     * Do not copy payload lanes that have no observable influence on selection. */
+    const int filter_keys = key_min != INT64_MIN || key_max != INT64_MAX;
+    const int filter_values = value_min != INT64_MIN || value_max != INT64_MAX;
+    const jint limit = capacity - output_start;
+    jint written = 0;
+    for (jint offset = 0; offset < count; ) {
+        const jint batch_len = count - offset > M3_BATCH ? M3_BATCH : count - offset;
+        const jint base = start + offset;
+        if (filter_keys) {
+            (*env)->GetLongArrayRegion(env, keys, base, batch_len, key_batch);
+            if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        }
+        if (filter_values) {
+            (*env)->GetLongArrayRegion(env, values, base, batch_len, value_batch);
+            if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        }
+        (*env)->GetByteArrayRegion(env, state, base, batch_len, state_batch);
+        if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        jint batch_matches = 0;
+        /* Preserve the original fully-filtered loop as the hot restricted case. */
+        if (filter_keys && filter_values) {
+            for (jint i = 0; i < batch_len; i++) {
+                if ((state_batch[i] & M3_LIVE) == 0
+                        || key_batch[i] < key_min || key_batch[i] > key_max
+                        || value_batch[i] < value_min || value_batch[i] > value_max) continue;
+                slot_batch[batch_matches++] = base + i;
+                written++;
+                if (written == limit) {
+                    (*env)->SetIntArrayRegion(env, output, output_start + written - batch_matches,
+                            batch_matches, slot_batch);
+                    if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+                    return ((jlong) written << 32) | (uint32_t) (base + i + 1);
+                }
+            }
+        } else {
+            for (jint i = 0; i < batch_len; i++) {
+                if ((state_batch[i] & M3_LIVE) == 0
+                        || (filter_keys && (key_batch[i] < key_min || key_batch[i] > key_max))
+                        || (filter_values && (value_batch[i] < value_min || value_batch[i] > value_max))) continue;
+                slot_batch[batch_matches++] = base + i;
+                written++;
+                if (written == limit) {
+                    (*env)->SetIntArrayRegion(env, output, output_start + written - batch_matches,
+                            batch_matches, slot_batch);
+                    if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+                    return ((jlong) written << 32) | (uint32_t) (base + i + 1);
+                }
+            }
+        }
+        if (batch_matches != 0) {
+            (*env)->SetIntArrayRegion(env, output, output_start + written - batch_matches,
+                    batch_matches, slot_batch);
+            if ((*env)->ExceptionCheck(env)) return (jlong) -1;
+        }
+        offset += batch_len;
+    }
+    return ((jlong) written << 32) | (uint32_t) (start + count);
+}
+
+/* ABI probe for the additive key/value signed-range lane kernel (recipe entryless-lane-kernel-20261106);
+ * older m3_collections_mask binaries keep their existing exports and the Java lane paths stay exact.
+ */
+JNIEXPORT jint JNICALL
+Java_jdk_m3_collections_M3IndexMaskCompactor_laneKernelAbiNative(JNIEnv *env, jclass owner) {
+    (void)env; (void)owner;
+    return 1;
+}
+//FLLDCIM: RELOCATE-MERGE end - donor blob b20d77f0f2d8
