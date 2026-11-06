@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.fs;
 
-import jdk.m3.file.M3File;
+import jdk.m3.file.M3NioFile;
 import jdk.m3.file.M3StreamProgress;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Original host M3File stream -> completed V2 M3BuildState -> native SQLite observation. */
+/** Original host M3NioFile stream -> completed V2 M3BuildState -> native SQLite observation. */
 class M3HostFileInventoryTest {
     @TempDir Path temporary;
     private static final M3HostFileInventory.Limits LIMITS =
@@ -36,9 +36,9 @@ class M3HostFileInventoryTest {
     private static M3HostFileInventory.Result capture(Path root, String selection,
             Predicate<String> filter, byte[] context, M3BuildState prior,
             M3HostFileInventory.ByteLayer layer, M3StreamProgress progress) throws IOException {
-        // Caller owns enumeration; the SDK consumes the original M3File stream.
+        // Caller owns enumeration; the SDK consumes the original M3NioFile stream.
         try (Stream<Path> paths = Files.walk(root)) {
-            return M3HostFileInventory.capture(root, paths.map(M3File::of), selection,
+            return M3HostFileInventory.capture(root, paths.map(M3NioFile::of), selection,
                     filter, context, prior, LIMITS, progress, layer);
         }
     }
@@ -124,23 +124,23 @@ class M3HostFileInventoryTest {
         byte[] context = hash("flags");
         M3HostFileInventory.ByteLayer none = (file, bytes, offset, count) -> { };
         assertThrows(IOException.class, () -> M3HostFileInventory.capture(
-                root, Stream.of(M3File.of(source), M3File.of(source)),
+                root, Stream.of(M3NioFile.of(source), M3NioFile.of(source)),
                 "duplicates", name -> true, context, null, LIMITS,
                 M3StreamProgress.none(), none));
         assertThrows(IOException.class, () -> M3HostFileInventory.capture(
-                root, Stream.of(M3File.of(temporary.resolve("outside.java"))),
+                root, Stream.of(M3NioFile.of(temporary.resolve("outside.java"))),
                 "escape", name -> true, context, null, LIMITS,
                 M3StreamProgress.none(), none));
         assertThrows(IOException.class, () -> M3HostFileInventory.capture(
-                root, Stream.of(M3File.of(source)), "shadow-failure",
+                root, Stream.of(M3NioFile.of(source)), "shadow-failure",
                 name -> true, context, null, LIMITS, M3StreamProgress.none(),
                 (file, bytes, offset, count) -> { throw new IOException("failed parser"); }));
         assertThrows(IOException.class, () -> M3HostFileInventory.capture(
-                root, Stream.of(M3File.of(source)), "budget", name -> true,
+                root, Stream.of(M3NioFile.of(source)), "budget", name -> true,
                 context, null, new M3HostFileInventory.Limits(1, 1_000_000, 2, 2),
                 M3StreamProgress.none(), none));
         assertThrows(IllegalArgumentException.class, () -> M3HostFileInventory.capture(
-                root, Stream.of(M3File.of(source)), "bad-profile", name -> true,
+                root, Stream.of(M3NioFile.of(source)), "bad-profile", name -> true,
                 new byte[31], null, LIMITS, M3StreamProgress.none(), none));
     }
 

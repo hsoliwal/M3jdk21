@@ -36,7 +36,7 @@ Not run: the Maven reactor build on CI, and the native kernels (leaf 2).
 
 Received by M3_SEARCH_RELOCATE v2 (`qualification/relocation-20261106-native/`). v2 adds JNI symbol and class-name
 rewriting for C, plus the native-loader mapping onto `jdk.m3.file.M3JniLibraryLoader` / `M3NativeLibrarySpec`
-(m3/ports/file, #2492). The library's logical name `synexia_m3` becomes `m3search`.
+(m3/file since m3/qualification/file-unify-20261106, #2492). The library's logical name `synexia_m3` becomes `m3search`.
 
 | M3 owner | Donor |
 |---|---|

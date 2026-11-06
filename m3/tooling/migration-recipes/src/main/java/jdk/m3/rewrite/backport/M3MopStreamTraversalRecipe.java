@@ -147,13 +147,13 @@ public final class M3MopStreamTraversalRecipe
   private static List<Target> targets() {
     return List.of(
         new Target(
-            "m3/ports/file/src/main/java/jdk/m3/file/M3FileDelta.java",
+            "m3/file/src/main/java/jdk/m3/file/M3FileDelta.java",
             "M3FileDelta.java.txt"),
         new Target(
-            "m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
+            "m3/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
             "M3FileStreamTasks.java.txt"),
         new Target(
-            "m3/ports/file/src/main/java/jdk/m3/file/M3FileUniverseTraversal.java",
+            "m3/file/src/main/java/jdk/m3/file/M3FileUniverseTraversal.java",
             "M3FileUniverseTraversal.java.txt"));
   }
 

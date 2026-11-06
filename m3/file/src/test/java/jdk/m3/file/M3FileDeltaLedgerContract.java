@@ -35,13 +35,13 @@ public final class M3FileDeltaLedgerContract {
             Files.writeString(config, "<project/>");
             Files.setLastModifiedTime(source, FileTime.from(Instant.ofEpochSecond(1_700_000_000L, 123_456_789)));
             FileTime initialTime = Files.getLastModifiedTime(source);
-            M3File.Observation observation = M3File.of(source).observe(Long.MAX_VALUE);
-            ok(observation.lastModified().equals(initialTime), "M3File observation retains checked timestamp");
-            ok(observation.fingerprint().equals(M3File.of(source).fingerprint(Long.MAX_VALUE)),
-                    "M3File observation preserves original fingerprint contract");
+            M3NioFile.Observation observation = M3NioFile.of(source).observe(Long.MAX_VALUE);
+            ok(observation.lastModified().equals(initialTime), "M3NioFile observation retains checked timestamp");
+            ok(observation.fingerprint().equals(M3NioFile.of(source).fingerprint(Long.MAX_VALUE)),
+                    "M3NioFile observation preserves original fingerprint contract");
             ok(observation.fingerprint().size() == Files.size(source), "observation retains exact byte size");
             try {
-                M3File.of(source).observe(Files.size(source) - 1);
+                M3NioFile.of(source).observe(Files.size(source) - 1);
                 throw new AssertionError("observation exceeded byte budget");
             } catch (IOException expected) { checks++; }
             List<Path> tracked = List.of(Path.of("src/A.java"), Path.of("out/A.class"), Path.of("pom.xml"));
@@ -58,7 +58,7 @@ public final class M3FileDeltaLedgerContract {
                     "ledger retains observed timestamp precision");
             ok(java.util.Arrays.equals(first.digestAt(sourceSlot),
                     MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(source))),
-                    "M3File digest words retain standard SHA-256 byte order in ledger");
+                    "M3NioFile digest words retain standard SHA-256 byte order in ledger");
 
             M3FileDeltaLedger.save(snapshot, first);
             ok(ByteBuffer.wrap(Files.readAllBytes(snapshot)).getInt(4) == 2, "writer emits version 2");
@@ -141,7 +141,7 @@ public final class M3FileDeltaLedgerContract {
                     "explicit timestamp policy selects a touch without changing content identity");
             var stableWithTimePolicy = M3FileDeltaLedger.scan(root, touchedWithTimePolicy, tracked, true);
             ok(!stableWithTimePolicy.changedAt(sourceSlot), "timestamp policy does not repeat an unchanged touch");
-            ok(M3File.contentDelta(observation.fingerprint(), M3File.of(source).observe(Long.MAX_VALUE).fingerprint()) == 0,
+            ok(M3NioFile.contentDelta(observation.fingerprint(), M3NioFile.of(source).observe(Long.MAX_VALUE).fingerprint()) == 0,
                     "observation timestamp is excluded from original content delta");
             same = touched;
             FileTime timestamp = Files.getLastModifiedTime(source);

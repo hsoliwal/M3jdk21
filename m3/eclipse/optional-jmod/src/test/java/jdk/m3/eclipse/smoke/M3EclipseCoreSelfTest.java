@@ -7,7 +7,7 @@ import jdk.m3.collections.M3LongIndexProjection;
 import jdk.m3.collections.M3IndexMaskCompactor;
 import java.util.Arrays;
 import jdk.m3.eclipse.core.M3EclipseCore;
-import jdk.m3.file.M3File;
+import jdk.m3.file.M3NioFile;
 import jdk.m3.text.M3StringPiece;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -76,7 +76,7 @@ public final class M3EclipseCoreSelfTest {
         Path filePath = directory.resolve("payload.txt");
         try {
             Files.writeString(filePath, "abc", StandardCharsets.UTF_8);
-            M3File resource = m3.file(filePath);
+            M3NioFile resource = m3.file(filePath);
             require(resource.path() == filePath, "preserve original Path/provider ownership");
             require(resource.metadata().regularFile(), "NIO regular file metadata");
             require(new String(resource.readAllBytes(3), StandardCharsets.UTF_8).equals("abc"),

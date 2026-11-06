@@ -7,7 +7,7 @@ on:
       - 'm3/tooling/jmod-recipes/**'
       - 'm3/vendor/third_party-m3/**'
       - 'm3/tooling/module-packs/nlp-search/**'
-      - 'm3/ports/file/**'
+      - 'm3/file/**'
       - 'm3/tooling/shared-frontend/**'
       - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'

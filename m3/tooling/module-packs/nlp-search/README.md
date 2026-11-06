@@ -36,7 +36,7 @@ owner and regenerate the receiver.
 | `org.m3jdk.tools.search` | M3AST consumer and CLI in `org.m3jdk.tools.search.M3SourceIndex` |
 
 The file module exports `com.m3.file` and `com.m3.file.json`. Its source is under
-[`m3/ports/file`](../../../ports/file). It retains the full mapped file family:
+[`m3/file`](../../../file). It retains the full mapped file family:
 token stores, lexicons, kinds, frequencies, patterns, event streams, byte facts,
 source facts, snapshots, mapped images, rolling indexes, token-range digests and
 universe images. The supporting closure includes JSON structure, pageable trees,
@@ -165,7 +165,7 @@ m3_image="$PWD/build/m3-nlp-search-proof/pack/image"
 "$m3_image/bin/java" \
   -m org.m3jdk.tools.search/org.m3jdk.tools.search.M3SourceIndex \
   index build/m3-source-index \
-  m3/ports/file/src/main/java/jdk/m3/file/M3File.java
+  m3/file/src/main/java/jdk/m3/file/M3File.java
 
 "$m3_image/bin/java" \
   -m org.m3jdk.tools.search/org.m3jdk.tools.search.M3SourceIndex \

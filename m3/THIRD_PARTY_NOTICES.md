@@ -29,6 +29,8 @@ apex run ledger (`docs/M3-SCALE/runs/20261007-m3jdk21-apex/` in com.synexia: `TH
 `m3/compatibility/synexia-*-receipt.json` and `m3/docs/name-mapping.d/*.json`. Nothing in this
 section requires a third-party notice.
 
+Attribution (2026-11-06, `m3/file`): `jdk.m3.file.M3ChunkDeltaGenerator.editDistance` (`m3/file/recipe/delta-generator-20261106`) adapts the rolling-row recurrence of Apache Commons Text `LevenshteinDistance` (`src/main/java/org/apache/commons/text/similarity/LevenshteinDistance.java` at `fcf5f4838bd59a303043c1b5e3b0b48b36452664`), Apache License 2.0 (upstream NOTICE: Apache Commons Text, Copyright 2014-2026 The Apache Software Foundation; this product includes software developed at The Apache Software Foundation, https://www.apache.org/); no Commons Text code is redistributed and no runtime dependency on Commons Text exists; the upstream LICENSE and NOTICE are kept verbatim under `m3/file/recipe/delta-generator-20261106/donor/` and `m3/file/NOTICE` carries the module notice.
+
 ## 2. Third-party build and test tooling (not shipped in the JDK image)
 
 | Artifact | Version | License (SPDX) | Upstream | Role | Where | Obligation |

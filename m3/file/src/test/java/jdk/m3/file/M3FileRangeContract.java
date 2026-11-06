@@ -36,12 +36,12 @@ public final class M3FileRangeContract {
         }
         throw new AssertionError("expected " + kind.getName());
     }
-    private static M3File.Fingerprint reference(byte[] bytes, int first, int length)
+    private static M3NioFile.Fingerprint reference(byte[] bytes, int first, int length)
             throws Exception {
         byte[] hash = MessageDigest.getInstance("SHA-256").digest(
                 Arrays.copyOfRange(bytes, first, first + length));
         ByteBuffer words = ByteBuffer.wrap(hash);
-        return new M3File.Fingerprint(length, words.getLong(), words.getLong(),
+        return new M3NioFile.Fingerprint(length, words.getLong(), words.getLong(),
                 words.getLong(), words.getLong());
     }
 
@@ -69,7 +69,7 @@ public final class M3FileRangeContract {
                 }
                 long[] original = offsets.clone();
                 AtomicLong work = new AtomicLong();
-                M3File.RangeFingerprints observed = M3File.of(target).fingerprintRanges(
+                M3NioFile.RangeFingerprints observed = M3NioFile.of(target).fingerprintRanges(
                         offsets, lengths, n, work::addAndGet);
                 check(observed.size() == count);
                 long sum = 0;
@@ -89,11 +89,11 @@ public final class M3FileRangeContract {
                 }
             }
             Files.write(target, new byte[]{4, 5, 6, 7});
-            M3File file = M3File.of(target);
+            M3NioFile file = M3NioFile.of(target);
             long[] mutableOffsets = {0, 2};
             long[] mutableLengths = {1, 2};
             AtomicBoolean reshaped = new AtomicBoolean();
-            M3File.RangeFingerprints pinned = file.fingerprintRanges(
+            M3NioFile.RangeFingerprints pinned = file.fingerprintRanges(
                     mutableOffsets, mutableLengths, 4, bytes -> {
                         if (reshaped.compareAndSet(false, true)) {
                             mutableOffsets[1] = Long.MAX_VALUE;
@@ -147,7 +147,7 @@ public final class M3FileRangeContract {
                 // Windows/embedded providers may not grant symbolic-link creation.
             }
             if (linkCreated) {
-                expect(IOException.class, () -> M3File.of(link)
+                expect(IOException.class, () -> M3NioFile.of(link)
                         .fingerprintRanges(new long[]{0}, new long[]{0}, 0));
             }
             System.out.println("M3_FILE_RANGES_PASS checks=" + checks + " trials=360");

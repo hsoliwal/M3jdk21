@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.fs;
-import jdk.m3.file.M3File;
+import jdk.m3.file.M3NioFile;
 import jdk.m3.file.M3StreamProgress;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,7 +25,7 @@ public final class M3HostFileInventoryProof {
         M3HostFileInventory.Limits limits, M3StreamProgress progress,
         M3HostFileInventory.ByteLayer layer) throws Exception {
         try(Stream<Path> stream=Files.walk(root)){
-            return M3HostFileInventory.capture(root,stream.map(M3File::of),policy,p->true,context,old,limits,progress,layer);
+            return M3HostFileInventory.capture(root,stream.map(M3NioFile::of),policy,p->true,context,old,limits,progress,layer);
         }
     }
     public static void main(String[] args) throws Exception {
@@ -67,19 +67,19 @@ public final class M3HostFileInventoryProof {
             var different=scan(project,"new-policy",profile,renamed.inventory(),LARGE,M3StreamProgress.none(),(f,b,o,l)->{});
             check(!different.delta().comparable(),"scope change incomparable");
             check(different.removedPaths().length==0,"scope change no fabricated delete");
-            expect(IOException.class,()->M3HostFileInventory.capture(project,Stream.of(M3File.of(project.resolve("pom.xml")),M3File.of(project.resolve("pom.xml"))),
+            expect(IOException.class,()->M3HostFileInventory.capture(project,Stream.of(M3NioFile.of(project.resolve("pom.xml")),M3NioFile.of(project.resolve("pom.xml"))),
                 "duplicate",p->true,profile,null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{}),"duplicate path");
-            expect(IOException.class,()->M3HostFileInventory.capture(project,Stream.of(M3File.of(project.resolve("../outsider"))),
+            expect(IOException.class,()->M3HostFileInventory.capture(project,Stream.of(M3NioFile.of(project.resolve("../outsider"))),
                 "escape",p->true,profile,null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{}),"out of root");
-            expect(IOException.class,()->M3HostFileInventory.capture(project,Stream.of(M3File.of(project.resolve("pom.xml"))),
+            expect(IOException.class,()->M3HostFileInventory.capture(project,Stream.of(M3NioFile.of(project.resolve("pom.xml"))),
                 "parser",p->true,profile,null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{throw new IOException("simulated parser failure");}),"parser failure");
-            expect(IOException.class,()->M3HostFileInventory.capture(project,Stream.of(M3File.of(project.resolve("pom.xml"))),
+            expect(IOException.class,()->M3HostFileInventory.capture(project,Stream.of(M3NioFile.of(project.resolve("pom.xml"))),
                 "budget",p->true,profile,null,new M3HostFileInventory.Limits(1,116,1,1),M3StreamProgress.none(),(f,b,o,l)->{}),"file byte limit");
-            expect(IllegalArgumentException.class,()->M3HostFileInventory.capture(project,Stream.of(M3File.of(project.resolve("pom.xml"))),
+            expect(IllegalArgumentException.class,()->M3HostFileInventory.capture(project,Stream.of(M3NioFile.of(project.resolve("pom.xml"))),
                 "bad-context",p->true,new byte[31],null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{}),"bad SHA");
             // Distinct policy identifiers must not collapse under replacement UTF-8.
             expect(IllegalArgumentException.class,()->M3HostFileInventory.capture(project,
-                Stream.of(M3File.of(project.resolve("pom.xml"))),"policy-\uD800",p->true,
+                Stream.of(M3NioFile.of(project.resolve("pom.xml"))),"policy-\uD800",p->true,
                 profile,null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{}),"malformed UTF16 selection");
             // A symlink hidden in a project-root ancestor must not escape source identity.
             Path alias=project.resolve("alias-directory");
@@ -87,7 +87,7 @@ public final class M3HostFileInventoryProof {
                 Files.createSymbolicLink(alias,project.resolve("module"));
                 Path maskedRoot=alias.resolve("src");
                 expect(IOException.class,()->M3HostFileInventory.capture(maskedRoot,
-                    Stream.of(M3File.of(maskedRoot.resolve("New.java"))),"aliased-root",p->true,
+                    Stream.of(M3NioFile.of(maskedRoot.resolve("New.java"))),"aliased-root",p->true,
                     profile,null,LARGE,M3StreamProgress.none(),(f,b,o,l)->{}),"root ancestor symlink");
             } catch (UnsupportedOperationException | SecurityException | IOException unsupported) {
                 // A filesystem without symlink creation cannot run this check.

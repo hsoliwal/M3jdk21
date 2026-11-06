@@ -12,8 +12,8 @@ import java.util.HexFormat;
 import java.util.Objects;
 
 /**
- * Versioned, immutable source-byte image for M3File and parser clients. The
- * original M3File provider remains the sole filesystem observation owner;
+ * Versioned, immutable source-byte image for M3NioFile and parser clients. The
+ * original M3NioFile provider remains the sole filesystem observation owner;
  * this class retains neither a file descriptor nor another filesystem tree.
  * Offsets are physical bytes. UTF-16 mapping is validated, sparse and lazy.
  */
@@ -60,20 +60,20 @@ public final class M3FileSource {
     }
 
     /**
-     * One bounded M3File observation: content is copied out of the ephemeral
+     * One bounded M3NioFile observation: content is copied out of the ephemeral
      * callback before its scratch page is reused. The original observer checks
      * post-read size, mtime and file key and supplies the already-computed hash.
      * This does not promise an atomic snapshot against undetectable concurrent I/O.
      */
-    public static Capture capture(M3File file, int maxBytes) throws IOException {
+    public static Capture capture(M3NioFile file, int maxBytes) throws IOException {
         Objects.requireNonNull(file, "file");
         if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
         ByteArrayOutputStream buffer = new ByteArrayOutputStream(Math.min(maxBytes, 8192));
-        M3File.Observation observation = file.observe(maxBytes, M3StreamProgress.none(),
+        M3NioFile.Observation observation = file.observe(maxBytes, M3StreamProgress.none(),
                 (data, offset, length) -> buffer.write(data, offset, length));
         M3FileSource source = new M3FileSource(buffer.toByteArray());
         ByteBuffer hash = ByteBuffer.wrap(HexFormat.of().parseHex(source.sha256));
-        M3File.Fingerprint fingerprint = observation.fingerprint();
+        M3NioFile.Fingerprint fingerprint = observation.fingerprint();
         if (fingerprint.size() != source.length()
                 || fingerprint.digest0() != hash.getLong()
                 || fingerprint.digest1() != hash.getLong()
@@ -83,7 +83,7 @@ public final class M3FileSource {
         }
         return new Capture(source, observation);
     }
-    public record Capture(M3FileSource source, M3File.Observation observation) {
+    public record Capture(M3FileSource source, M3NioFile.Observation observation) {
         public Capture {
             Objects.requireNonNull(source, "source");
             Objects.requireNonNull(observation, "observation");

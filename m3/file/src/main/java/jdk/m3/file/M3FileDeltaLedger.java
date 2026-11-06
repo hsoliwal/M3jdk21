@@ -90,7 +90,7 @@ public final class M3FileDeltaLedger {
         public FileTime lastModifiedAt(int slot) {
             int at = checked(slot);
             if (modifiedNanos[at] == UNKNOWN_NANOS) {
-                throw new IllegalStateException("M3File timestamp was not recorded in the loaded generation");
+                throw new IllegalStateException("M3NioFile timestamp was not recorded in the loaded generation");
             }
             return FileTime.from(Instant.ofEpochSecond(modifiedSeconds[at], modifiedNanos[at]));
         }
@@ -141,7 +141,7 @@ public final class M3FileDeltaLedger {
         Path root = checkedRoot(directory);
         Objects.requireNonNull(tracked, "tracked");
         if (old != null && !old.root.equals(root)) {
-            throw new IllegalArgumentException("M3File delta root mismatch");
+            throw new IllegalArgumentException("M3NioFile delta root mismatch");
         }
         TreeSet<String> supplied = new TreeSet<>();
         for (Path path : tracked) supplied.add(relativeKey(root, Objects.requireNonNull(path, "path")));
@@ -167,15 +167,15 @@ public final class M3FileDeltaLedger {
             int bucket = bucket(key, paths, lookup);
             int slot = lookup[bucket] - 1;
             Path target = root.resolve(key);
-            M3File.Observation observed = observe(root, target, scratch);
+            M3NioFile.Observation observed = observe(root, target, scratch);
             if (observed == null) continue;
-            M3File.Fingerprint actual = observed.fingerprint();
+            M3NioFile.Fingerprint actual = observed.fingerprint();
             Instant modified = observed.lastModified().toInstant();
             if (!FileTime.from(modified).equals(observed.lastModified())) {
-                throw new IOException("M3File timestamp exceeds the persistent Instant range");
+                throw new IOException("M3NioFile timestamp exceeds the persistent Instant range");
             }
             if (slot < 0 && used == capacity) {
-                throw new IOException("M3File delta slot limit exceeded");
+                throw new IOException("M3NioFile delta slot limit exceeded");
             }
             int at = slot < 0 ? used++ : slot;
             if (slot < 0) {
@@ -250,7 +250,7 @@ public final class M3FileDeltaLedger {
                 Files.move(temporary, output, StandardCopyOption.ATOMIC_MOVE,
                         StandardCopyOption.REPLACE_EXISTING);
             } catch (AtomicMoveNotSupportedException unsupported) {
-                throw new IOException("atomic M3File state publication required", unsupported);
+                throw new IOException("atomic M3NioFile state publication required", unsupported);
             }
             published = true;
         } finally {
@@ -266,16 +266,16 @@ public final class M3FileDeltaLedger {
              DigestInputStream signed = new DigestInputStream(source, digest);
              DataInputStream in = new DataInputStream(signed)) {
             if (in.readInt() != MAGIC) {
-                throw new IOException("unknown M3File delta image format");
+                throw new IOException("unknown M3NioFile delta image format");
             }
             int version = in.readInt();
             if (version != 1 && version != VERSION) {
-                throw new IOException("unknown M3File delta image format");
+                throw new IOException("unknown M3NioFile delta image format");
             }
             Path root = Path.of(in.readUTF()).toAbsolutePath().normalize();
-            if (!expectedRoot.equals(root)) throw new IOException("M3File delta image root mismatch");
+            if (!expectedRoot.equals(root)) throw new IOException("M3NioFile delta image root mismatch");
             int count = in.readInt();
-            if (count < 0 || count > MAX_SLOTS) throw new IOException("invalid M3File slot count");
+            if (count < 0 || count > MAX_SLOTS) throw new IOException("invalid M3NioFile slot count");
             String[] paths = new String[count];
             byte[] kinds = new byte[count];
             long[] sizes = new long[count];
@@ -288,16 +288,16 @@ public final class M3FileDeltaLedger {
             for (int i = 0; i < count; i++) {
                 String key = in.readUTF();
                 if (!key.equals(relativeKey(root, root.resolve(key)))) {
-                    throw new IOException("invalid M3File delta path");
+                    throw new IOException("invalid M3NioFile delta path");
                 }
                 int at = bucket(key, paths, lookup);
-                if (lookup[at] != 0) throw new IOException("duplicate M3File delta path");
+                if (lookup[at] != 0) throw new IOException("duplicate M3NioFile delta path");
                 paths[i] = key;
                 lookup[at] = i + 1;
                 byte kind = in.readByte();
                 if (Byte.toUnsignedInt(kind) >= KINDS.length
                         || kind != (byte) kindOf(key).ordinal()) {
-                    throw new IOException("invalid M3File delta kind");
+                    throw new IOException("invalid M3NioFile delta kind");
                 }
                 kinds[i] = kind;
                 sizes[i] = in.readLong();
@@ -305,12 +305,12 @@ public final class M3FileDeltaLedger {
                     modifiedSeconds[i] = in.readLong();
                     modifiedNanos[i] = in.readInt();
                     if (!validTimestamp(modifiedSeconds[i], modifiedNanos[i])) {
-                        throw new IOException("invalid M3File delta timestamp");
+                        throw new IOException("invalid M3NioFile delta timestamp");
                     }
                 }
                 states[i] = in.readLong();
                 if (sizes[i] < 0 || (states[i] & ~LIVE) != 0) {
-                    throw new IOException("invalid M3File delta row");
+                    throw new IOException("invalid M3NioFile delta row");
                 }
                 in.readFully(hashes, i * HASH_BYTES, HASH_BYTES);
             }
@@ -318,20 +318,20 @@ public final class M3FileDeltaLedger {
             byte[] seal = new byte[HASH_BYTES];
             in.readFully(seal);
             if (in.read() != -1 || !MessageDigest.isEqual(seal, digest.digest())) {
-                throw new IOException("M3File delta image checksum mismatch");
+                throw new IOException("M3NioFile delta image checksum mismatch");
             }
             return new Snapshot(root, paths, kinds, sizes, modifiedSeconds, modifiedNanos, states, hashes, lookup);
         }
     }
 
     /** Compare the fixed 32-byte digest in its parent array without a temporary row copy. */
-    private static boolean hashEquals(byte[] lane, int offset, M3File.Fingerprint candidate) {
+    private static boolean hashEquals(byte[] lane, int offset, M3NioFile.Fingerprint candidate) {
         ByteBuffer view = ByteBuffer.wrap(lane, offset, HASH_BYTES);
         return view.getLong() == candidate.digest0() && view.getLong() == candidate.digest1()
                 && view.getLong() == candidate.digest2() && view.getLong() == candidate.digest3();
     }
 
-    private static void putHash(byte[] lane, int offset, M3File.Fingerprint content) {
+    private static void putHash(byte[] lane, int offset, M3NioFile.Fingerprint content) {
         ByteBuffer.wrap(lane, offset, HASH_BYTES).putLong(content.digest0()).putLong(content.digest1())
                 .putLong(content.digest2()).putLong(content.digest3());
     }
@@ -358,30 +358,30 @@ public final class M3FileDeltaLedger {
         return at;
     }
 
-    private static M3File.Observation observe(Path root, Path file, byte[] scratch) throws IOException {
+    private static M3NioFile.Observation observe(Path root, Path file, byte[] scratch) throws IOException {
         Path cursor = root;
         for (Path element : root.relativize(file)) {
             cursor = cursor.resolve(element);
-            if (Files.isSymbolicLink(cursor)) throw new IOException("symlink in tracked M3File path");
+            if (Files.isSymbolicLink(cursor)) throw new IOException("symlink in tracked M3NioFile path");
         }
-        return M3File.of(file).observeIfExists(scratch);
+        return M3NioFile.of(file).observeIfExists(scratch);
     }
 
     private static Path checkedRoot(Path directory) throws IOException {
         Path root = Objects.requireNonNull(directory, "directory").toAbsolutePath().normalize();
         if (!Files.isDirectory(root, LinkOption.NOFOLLOW_LINKS)
-                || Files.isSymbolicLink(root)) throw new IOException("invalid M3File root directory");
+                || Files.isSymbolicLink(root)) throw new IOException("invalid M3NioFile root directory");
         return root;
     }
 
     private static String relativeKey(Path root, Path requested) {
         Path path = requested.isAbsolute() ? requested.normalize() : root.resolve(requested).normalize();
         if (!path.startsWith(root) || path.equals(root)) {
-            throw new IllegalArgumentException("tracked M3File escapes its root");
+            throw new IllegalArgumentException("tracked M3NioFile escapes its root");
         }
         String relative = root.relativize(path).toString().replace('\\', '/');
         if (relative.isEmpty() || relative.indexOf('\0') >= 0 || relative.indexOf('\n') >= 0) {
-            throw new IllegalArgumentException("invalid M3File tracked path");
+            throw new IllegalArgumentException("invalid M3NioFile tracked path");
         }
         return relative;
     }

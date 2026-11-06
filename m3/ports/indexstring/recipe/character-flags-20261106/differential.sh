@@ -12,7 +12,7 @@
 #     labels over the 1,024 valid values, 1,000,000 seeded random pairs and 100,000 seeded random texts through both
 #     classes; the dumps must be byte-identical.
 # (c) of-only dumps (of/labels sections) of donor, relocated and, when present in the checkout, the pre-combine sibling
-#     jdk.m3.file.M3CharacterFlags (m3/ports/file) must be byte-identical: the sibling is the same lineage minus combine.
+#     jdk.m3.file.M3CharacterFlags (m3/file) must be byte-identical: the sibling is the same lineage minus combine.
 # Prints DIFFERENTIAL PASS|FAIL with the sha256 digests of every side. The donor package and type names come from
 # RELOCATION_MAP.tsv next to this script, so no file in the naming scope names a donor package literally.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir>   (JAVA_HOME = JDK 21, PYTHON optional; run after mvn package)
@@ -27,7 +27,7 @@ mkdir -p "$3/src" "$3/classes" "$3/sibling-classes"
 SCRATCH=$(winpath "$3")
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
-SIBLING="$ROOT/m3/ports/file/src/main/java/jdk/m3/file/M3CharacterFlags.java"
+SIBLING="$ROOT/m3/file/src/main/java/jdk/m3/file/M3CharacterFlags.java"
 SIBLING_CLASS=jdk.m3.file.M3CharacterFlags
 DUMP=M3IndexCharacterFlagsDump
 donor_package=$(awk -F'\t' '$1=="PACKAGE" {print $2; exit}' "$MAP")
