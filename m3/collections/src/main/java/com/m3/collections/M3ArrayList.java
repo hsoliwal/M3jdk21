@@ -228,7 +228,8 @@ public final class M3ArrayList<E> extends AbstractList<E>
         // Two primitive mask words avoid BitSet allocation for at most 128 slots.
         // Larger sources retain the incumbent BitSet representation.
         final boolean inlineMask = oldSize <= 2 * Long.SIZE;
-        BitSet removed = inlineMask ? null : new BitSet();
+        BitSet removed = null;
+        int firstRemoved = oldSize;
         long removalLow = 0L;
         long removalHigh = 0L;
         for (int read = 0; read < oldSize; read++) {
@@ -241,22 +242,35 @@ public final class M3ArrayList<E> extends AbstractList<E>
                     if (read < Long.SIZE) removalLow |= 1L << read;
                     else removalHigh |= 1L << (read - Long.SIZE);
                 } else {
+                    if (removed == null) {
+                        removed = new BitSet();
+                        firstRemoved = read;
+                    }
                     removed.set(read);
                 }
             }
         }
-        int rejected = inlineMask
-                ? Long.bitCount(removalLow) + Long.bitCount(removalHigh)
-                : removed.cardinality();
-        if (rejected == 0) return false;
+        if (inlineMask ? (removalLow | removalHigh) == 0L : removed == null) return false;
         int write = 0;
-        for (int read = 0; read < oldSize; read++) {
-            boolean reject = inlineMask
-                    ? (read < Long.SIZE
+        if (inlineMask) {
+            for (int read = 0; read < oldSize; read++) {
+                boolean reject = read < Long.SIZE
                         ? (removalLow & (1L << read)) != 0
-                        : (removalHigh & (1L << (read - Long.SIZE))) != 0)
-                    : removed.get(read);
-            if (!reject) elements[write++] = elements[read];
+                        : (removalHigh & (1L << (read - Long.SIZE))) != 0;
+                if (!reject) elements[write++] = elements[read];
+            }
+        } else {
+            // The retained prefix is already in place. Copy each later survivor
+            // run once, using bitmap word scans rather than probing every slot.
+            write = firstRemoved;
+            for (int read = removed.nextClearBit(firstRemoved); read < oldSize;) {
+                int end = removed.nextSetBit(read);
+                if (end < 0) end = oldSize;
+                int length = end - read;
+                System.arraycopy(elements, read, elements, write, length);
+                write += length;
+                read = removed.nextClearBit(end);
+            }
         }
         Arrays.fill(elements, write, oldSize, null);
         size = write;

@@ -25,7 +25,9 @@ import java.util.Objects;
  * index order and duplicate IDs. Neither input is mutated or retained. An explicit
  * JNI backend is optional and never receives predicates, comparators or object refs.
  *
- * <p>Selection is O(n) time, O(k) returned slots (two Java passes, one exact array).
+ * <p>Selection is O(n) time and O(k) returned slots: at most one counting pass
+ * and one emission pass, with one exact result array. Inputs must remain stable
+ * during a call; concurrent-change checks are best effort, not a snapshot guarantee.
  * Existing M3JDK collection owners retain domain lifetime, modification epochs,
  * order, and index composition; a detached mask is not a live collection view.
  */
@@ -272,6 +274,7 @@ public final class M3IndexMaskCompactor {
         int count = countSelected(rowStates, requiredMask, excludedMask);
         if (count == orderedRows.length) return orderedRows.clone();
         long[] selected = new long[count];
+        if (selected.length == 0) return selected; // Stable input: no emission pass is needed.
         int written = 0;
         for (int index = 0; index < orderedRows.length; index++) {
             if (matches(rowStates[index], requiredMask, excludedMask)) {
@@ -341,6 +344,7 @@ public final class M3IndexMaskCompactor {
         int selectedCount = countSelected(rowStates, requiredMask, excludedMask);
         if (selectedCount == rowStates.length) return identityPositions(rowStates.length);
         int[] selected = new int[selectedCount];
+        if (selected.length == 0) return selected; // Stable input: no emission pass is needed.
         int written = 0;
         for (int i = 0; i < rowStates.length; i++) {
             if (matches(rowStates[i], requiredMask, excludedMask)) {
@@ -415,6 +419,7 @@ public final class M3IndexMaskCompactor {
             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
         }
         int[] selected = new int[kept];
+        if (selected.length == 0) return selected; // Stable input: no emission pass is needed.
         int written = 0;
         for (int i = 0; i < length; i++) {
             if (matches(states[stateOffset + i], requiredMask)) {
@@ -438,6 +443,7 @@ public final class M3IndexMaskCompactor {
             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
         }
         long[] selected = new long[kept];
+        if (selected.length == 0) return selected; // Stable input: no emission pass is needed.
         int written = 0;
         for (int i = 0; i < length; i++) {
             if (matches(states[stateOffset + i], requiredMask)) {
@@ -490,6 +496,7 @@ public final class M3IndexMaskCompactor {
             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
         }
         int[] selected = new int[kept];
+        if (selected.length == 0) return selected; // Stable input: no emission pass is needed.
         int written = 0;
         for (int i = 0; i < length; i++) {
             if (matches(states[stateOffset + i], requiredMask, excludedMask)) {
@@ -532,6 +539,7 @@ public final class M3IndexMaskCompactor {
             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
         }
         long[] selected = new long[kept];
+        if (selected.length == 0) return selected; // Stable input: no emission pass is needed.
         int written = 0;
         for (int i = 0; i < length; i++) {
             if (matches(states[stateOffset + i], requiredMask, excludedMask)) {

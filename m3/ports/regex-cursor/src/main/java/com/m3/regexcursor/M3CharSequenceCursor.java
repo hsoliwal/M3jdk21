@@ -84,7 +84,7 @@ public final class M3CharSequenceCursor implements M3ChunkCursor {
 
     @Override
     public void seek(int position) {
-        Objects.checkIndex(position, text.length() + 1);
+        Objects.checkIndex((long) position, (long) text.length() + 1L);
         if (ends.length == 0) return;
         int found = Arrays.binarySearch(ends, position);
         int index = found >= 0 ? found + 1 : -found - 1;

@@ -16,13 +16,14 @@ static void m3_throw(JNIEnv *env, const char *name, const char *message) {
 
 /* Java String.compareTo order: unsigned UTF-16 code units, not locale or UTF-8 order.
  * Only bounded regions are copied; JNI never acquires a flattened full String. */
-static int m3_compare(JNIEnv *env, jstring left, jstring right, int *out) {
+static int m3_compare_from(JNIEnv *env, jstring left, jstring right,
+                           jsize from, int *out) {
     jsize a = (*env)->GetStringLength(env, left);
     jsize b = (*env)->GetStringLength(env, right);
     if ((*env)->ExceptionCheck(env)) return 0;
     jchar la[REGION_UNITS], rb[REGION_UNITS];
     jsize minimum = a < b ? a : b;
-    for (jsize at = 0; at < minimum;) {
+    for (jsize at = from; at < minimum;) {
         jsize take = minimum - at < REGION_UNITS ? minimum - at : REGION_UNITS;
         (*env)->GetStringRegion(env, left, at, take, la);
         if ((*env)->ExceptionCheck(env)) return 0;
@@ -41,7 +42,7 @@ static int m3_compare(JNIEnv *env, jstring left, jstring right, int *out) {
 }
 
 static int m3_compare_slots(JNIEnv *env, jobjectArray strings,
-                            jint left, jint right, int *out) {
+                            jint left, jint right, jsize from, int *out) {
     jstring a = (jstring)(*env)->GetObjectArrayElement(env, strings, left);
     if ((*env)->ExceptionCheck(env)) return 0;
     jstring b = (jstring)(*env)->GetObjectArrayElement(env, strings, right);
@@ -55,7 +56,7 @@ static int m3_compare_slots(JNIEnv *env, jobjectArray strings,
         (*env)->DeleteLocalRef(env, b);
         return 0;
     }
-    int ok = m3_compare(env, a, b, out);
+    int ok = m3_compare_from(env, a, b, from, out);
     (*env)->DeleteLocalRef(env, a);
     (*env)->DeleteLocalRef(env, b);
     return ok;
@@ -109,7 +110,9 @@ static int m3_key_compare(JNIEnv *env, jobjectArray strings,
                keys[a].length > keys[b].length ? 1 : 0;
         return 1;
     }
-    return m3_compare_slots(env, strings, a, b, out);
+    /* Both immutable Strings have the same eight-unit prefix. The descriptor
+     * array is privately created by NativeLineOps, so that proof remains valid. */
+    return m3_compare_slots(env, strings, a, b, 8, out);
 }
 
 /* Stable bottom-up mergesort of offsets. No Java payloads are copied or interned. */
@@ -207,7 +210,7 @@ JNIEXPORT void JNICALL Java_jdk_m3_text_NativeLineOps_uniq0
             (*env)->DeleteLocalRef(env, previous); free(bits); return;
         }
         int cmp;
-        int ok = m3_compare(env, previous, current, &cmp);
+        int ok = m3_compare_from(env, previous, current, 0, &cmp);
         (*env)->DeleteLocalRef(env, previous);
         if (!ok) { (*env)->DeleteLocalRef(env, current); free(bits); return; }
         if (cmp != 0) {
