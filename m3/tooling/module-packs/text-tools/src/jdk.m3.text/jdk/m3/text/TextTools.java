@@ -81,6 +81,18 @@ public final class TextTools {
         return NativeUtf16Literal.contains(text, literal);
     }
 
+    /**
+     * Literal case-sensitive grep on an externally owned direct UTF-8 input window.
+     * This operation does not implement Unix4j regex/options, nor acquire M3 String
+     * payload ownership from the supplied buffer. Only selected lines are decoded
+     * into the running JDK's canonical String representation.
+     */
+    public static TextFrame grepLiteral(java.nio.ByteBuffer source, String literal, Limits limits) {
+        Objects.requireNonNull(limits, "limits");
+        int maxBytes = (int) Math.min(Integer.MAX_VALUE, limits.maxBytes());
+        return collect(NativeUtf8Lines.grepLiteral(source, literal, limits.maxLines(), maxBytes), limits);
+    }
+
     public record Comparison(TextFrame leftOnly, TextFrame common, TextFrame rightOnly) { }
 
     /** Sorted multiset merge: duplicate occurrences are paired one-for-one. */
