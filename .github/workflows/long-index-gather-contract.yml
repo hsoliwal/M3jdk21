@@ -43,7 +43,7 @@ jobs:
           echo 'ea217c25b937ee112b1256c0e810ba812871747c6577addd47829c5ab9527f0c' " $owner" | sha256sum -c
           echo '27a7ea61a2914f4625468c2500ff4005ce200ca335a2ca59e485c3bed0711562' " $test" | sha256sum -c
           echo '9312d3ae9658a8d9713a6a74cb2f558bcbfec76777bf3607b06229089f794199' ' m3/collections/src/test/java/jdk/m3/collections/M3LongAddressKernelTest.java' | sha256sum -c
-          test "$(git hash-object "$csrc")" = '11657a88959a963c309d44b730eef6a473f87619'
+          test "$(git hash-object "$csrc")" = 'f677cef608fb21c2058ecc2d5680fc493b7139a5'
           git show '3569c790d5cc3f9bc871ab0ecd025dab0fd5cafc':"$owner" > "$out/old-src/jdk/m3/collections/M3LongAddressKernel.java"
           test "$(git hash-object "$out/old-src/jdk/m3/collections/M3LongAddressKernel.java")" = 'fe30e94f5e66e2f4d43365bddb58dfdbb4f25207'
           javac --release 21 -Xlint:all -Werror -d "$out/old-classes" "$mask" "$out/old-src/jdk/m3/collections/M3LongAddressKernel.java" "$test"
