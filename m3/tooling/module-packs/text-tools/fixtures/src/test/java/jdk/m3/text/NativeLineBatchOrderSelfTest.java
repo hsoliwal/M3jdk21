@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from synexia-unix4j-m3 NativeLineBatchOrderSelfTest blob c923e4871ddb9badbf1d2c19bae8f51b73fbe3ea by PROGRESS_MONITOR_TEST_MAP v1.
+// Relocated from m3-unix4j-m3 NativeLineBatchOrderSelfTest blob c923e4871ddb9badbf1d2c19bae8f51b73fbe3ea by PROGRESS_MONITOR_TEST_MAP v1.
 package jdk.m3.text;
 
 import java.util.concurrent.ProgressMonitor;
