@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+variant	impl	class	method	bytes	tier_reached	c2_compiles	inlined_at_call_sites	not_inlined_at_call_sites	logs
+after	absorbed	M3XXH3	XXH3_hashLong	1717	4	24	-	hot method too big=189	3
+after	vendored	XXH3	XXH3_64bits_internal	2705	4	18	-	already compiled into a medium method=9;hot method too big=133;too big=9	3
+after	absorbed	M3WyHash	wyHash64	1411	4	3	-	hot method too big=15	3
+after	vendored	WyHash	wyHash64	1411	4	3	-	hot method too big=15	3
+after	absorbed	M3XXH3	<clinit>	1227	cold (never compiled)	0	-	-	3
+after	vendored	XXH3	<clinit>	-	cold (never compiled)	0	-	-	3
+after	absorbed	M3CityAndFarmHash_1_1	uoHash64WithSeeds	973	4	3	-	hot method too big=15	3
+after	vendored	CityAndFarmHash_1_1	uoHash64WithSeeds	973	4	3	-	hot method too big=15	3
+after	absorbed	M3CityAndFarmHash_1_1	naHash64	966	4	3	-	already compiled into a medium method=15;hot method too big=15	3
+after	vendored	CityAndFarmHash_1_1	naHash64	961	4	3	-	already compiled into a medium method=15;hot method too big=15	3
+after	absorbed	M3CityAndFarmHash_1_1	cityHash64	875	4	3	-	hot method too big=15	3
+after	vendored	CityAndFarmHash_1_1	cityHash64	875	4	3	-	hot method too big=15	3
+after	absorbed	M3MetroHash	metroHash64	653	4	3	-	hot method too big=15	3
+after	vendored	MetroHash	metroHash64	653	4	3	-	hot method too big=15	3
+after	absorbed	M3XxHash	xxHash64	637	4	9	-	hot method too big=27	3
+after	vendored	XxHash	xxHash64	637	4	10	-	hot method too big=27	3
+after	absorbed	M3MurmurHash_3	hash	555	4	13	-	already compiled into a medium method=23;too big=13	3
+after	vendored	MurmurHash_3	hash	555	4	12	-	already compiled into a medium method=20;too big=14	3
+after	absorbed	M3XXH3	XXH3_len_17to128_128b	503	4	6	-	already compiled into a medium method=48;too big=27	3
+after	vendored	XXH3	XXH3_128bits_internal	3850	4	8	-	hot method too big=68	3
+after	absorbed	M3XXH3	XXH3_len_129to240_128b	492	4	6	-	already compiled into a medium method=54;too big=21	3
