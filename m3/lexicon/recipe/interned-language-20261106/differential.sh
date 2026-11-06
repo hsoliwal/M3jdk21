@@ -21,7 +21,12 @@ mkdir -p "$3/src" "$3/classes"
 SCRATCH=$(winpath "$3")
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
-DRIVER=jdk.m3.lexicon.M3InternedLanguageDump
+# the donor and target packages come from the PACKAGE row of the map (a TSV ledger, outside the naming scope), so this
+# script spells no donor package: jdk_naming.py rewrites every spelled one, and #2556 turned the spelled donor package
+# of step 5 into a JDK package that no donor class lives in (javap: class not found; gate 3b refused)
+donor_package=$(awk -F'\t' '$1=="PACKAGE" {print $2; exit}' "$MAP")
+target_package=$(awk -F'\t' '$1=="PACKAGE" {print $3; exit}' "$MAP")
+DRIVER="$target_package.M3InternedLanguageDump"
 # the JIT replaces a hot implicit exception (here the out-of-bounds token(index) and entry(id) probes) by a
 # preallocated one without message or trace, at a point that depends on the run: keep the messages deterministic
 JVM_FLAGS="-XX:-OmitStackTraceInFastThrow"
@@ -67,13 +72,13 @@ renamed_lines=$(grep -cE "\b($types)\b" "$SCRATCH/donor.raw.txt" || true)
 javap_same=0
 javap_total=0
 javap_diff=""
-for class in "$SCRATCH"/classes/jdk/internal/m3/m3scale/intern/*.class; do
+for class in "$SCRATCH/classes/$(printf '%s' "$donor_package" | tr . /)"/*.class; do
     name=$(basename "$class" .class)
     outer=${name%%\$*}
     rest=${name#"$outer"}
     target=$(awk -F'\t' -v d="$outer" '$1=="TYPE" && $2==d {print $3; exit}' "$MAP")
-    "$JAVA_BIN/javap" -p -cp "$SCRATCH/classes" "jdk.internal.m3.m3scale.intern.$name" | sed -f "$normalize" | grep -v '^Compiled from' > "$SCRATCH/javap/$target$rest.donor.txt"
-    "$JAVA_BIN/javap" -p -cp "$RECEIVER/target/classes" "jdk.m3.lexicon.$target$rest" | grep -v '^Compiled from' > "$SCRATCH/javap/$target$rest.relocated.txt"
+    "$JAVA_BIN/javap" -p -cp "$SCRATCH/classes" "$donor_package.$name" | sed -f "$normalize" | grep -v '^Compiled from' > "$SCRATCH/javap/$target$rest.donor.txt"
+    "$JAVA_BIN/javap" -p -cp "$RECEIVER/target/classes" "$target_package.$target$rest" | grep -v '^Compiled from' > "$SCRATCH/javap/$target$rest.relocated.txt"
     javap_total=$((javap_total + 1))
     if cmp -s "$SCRATCH/javap/$target$rest.donor.txt" "$SCRATCH/javap/$target$rest.relocated.txt"; then
         javap_same=$((javap_same + 1))
@@ -88,7 +93,9 @@ relocated_sha=$(sha256sum "$SCRATCH/relocated.txt" | cut -d' ' -f1)
 echo "DONOR $donor_commit sources=$(ls "$SCRATCH/src" | wc -l | tr -d ' ') classes=$donor_classes labels=${#donor_args[@]}"
 echo "JAVAP identical=$javap_same/$javap_total${javap_diff:+ differing:$javap_diff}"
 tail -n 1 "$SCRATCH/relocated.txt"
-if cmp -s "$SCRATCH/donor.txt" "$SCRATCH/relocated.txt" && [ "$javap_same" = "$javap_total" ]; then
+# every donor class file is compared (a package that misses the donor classes compares none and must not pass)
+if cmp -s "$SCRATCH/donor.txt" "$SCRATCH/relocated.txt" && [ "$javap_same" = "$javap_total" ] \
+        && [ "$javap_total" = "$donor_classes" ]; then
     echo "DIFFERENTIAL PASS donor_raw_sha256=$donor_raw_sha donor_normalized_sha256=$donor_sha relocated_sha256=$relocated_sha lines=$(wc -l < "$SCRATCH/relocated.txt" | tr -d ' ') bytes=$(wc -c < "$SCRATCH/relocated.txt" | tr -d ' ') normalized_lines=${renamed_lines:-0}"
     rm -f "$SCRATCH/donor.raw.txt"
 else
