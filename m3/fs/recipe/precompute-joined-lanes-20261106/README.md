@@ -18,10 +18,11 @@ the anchored edits (the Synexia hunk, or the mapped hunk), `DECISIONS.tsv` the v
 | 01-joined-directory-history | m3fs-joined-directory-history-20261102 (42466557a7f) | Bundle: Role +4 (appended), MappedView accessors, JoinedContentSegments, MappedJoinedContentSegments, JoinedBytePresence | DIVERGED->mapped; grepJoinedSegments x2 HANDOFF_45; Writer/Catalog targets DEFERRED |
 | 02-memchr-bitmap | m3fs-memchr-bitmap-20261102 (27b0600d0a8 + m3_fs_jni.c text recipe) | Bundle: JoinedBytePresence.candidateRows zero-mask break; native m3_contains first-byte memchr skip | APPLICABLE->applied (both) |
 | 03-key-value-lanes | m3fs-key-value-lanes-20261102 (489d837bb8d) | Bundle: openRawSegments LinkedHashMap -> private M3KeyValueSlots open-addressing lanes | APPLICABLE->applied |
+| 04-hash-lane-cache | m3fs-hash-lane-cache-20261102 (2cd4be46804) | Bundle: M3KeyValueSlots int[] hashes lane (spread hash cached, reused on growth, hash mismatch skips equals) | APPLICABLE->applied |
 
 `python -I apply.py [--check] [--through RECIPE] [--replay [--emit DIR]]` applies or checks the chain (refuses a
 drifted preimage, second run changed=0). `qualification/differential.sh` compiles every stage image on its own and
 compares the digests of `JoinedLanesDifferential` (performance stages must not change them);
 `qualification/native-gate.sh` runs the relocated C oracle on the real old and new `m3_contains` under UBSan; the key/value
-template of the Synexia crate runs on the `M3KeyValueSlots` class extracted from the stage image. `verify.sh` runs the
+and hash-lane templates of the Synexia crates run on the `M3KeyValueSlots` classes extracted from the stage images. `verify.sh` runs the
 gates of `GATES.tsv`. Every edited declaration carries a `//FLLDCIM: MRL - <crate>` anchor.

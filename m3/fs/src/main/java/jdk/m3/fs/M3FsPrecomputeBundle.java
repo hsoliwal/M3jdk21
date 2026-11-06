@@ -669,27 +669,31 @@ public final class M3FsPrecomputeBundle {
    */
   //FLLDCIM: MRL - m3fs-key-value-lanes-20261102 (Synexia 489d837bb8d, owner blob a34b8031 -> 162fd0b0)
   private static final class M3KeyValueSlots<K, V> {
+    //FLLDCIM: MRL - m3fs-hash-lane-cache-20261102 (Synexia 2cd4be46804, owner blob 162fd0b0 -> cbda6a67); int[] hashes lane
     private Object[] keys = new Object[16];
     private Object[] values = new Object[16];
+    private int[] hashes = new int[16];
     private int used;
     private int count;
     private boolean hasNull;
     private V nullValue;
 
-    private int slot(K key) {
-      int hash = key.hashCode();
-      hash ^= (hash >>> 16);
+    private int slot(K key, int hash) {
       int index = hash & (keys.length - 1);
-      while (keys[index] != null && keys[index] != key && !key.equals(keys[index])) {
+      while (keys[index] != null
+          && (hashes[index] != hash
+              || (keys[index] != key && !key.equals(keys[index])))) {
         index = (index + 1) & (keys.length - 1);
       }
       return index;
     }
 
+    private static int spread(int hash) { return hash ^ (hash >>> 16); }
+
     @SuppressWarnings("unchecked")
     V get(K key) {
       if (key == null) return hasNull ? nullValue : null;
-      return (V) values[slot(key)];
+      return (V) values[slot(key, spread(key.hashCode()))];
     }
 
     @SuppressWarnings("unchecked")
@@ -700,7 +704,8 @@ public final class M3FsPrecomputeBundle {
         nullValue = value;
         return prior;
       }
-      int index = slot(key);
+      int hash = spread(key.hashCode());
+      int index = slot(key, hash);
       if (keys[index] != null) {
         V prior = (V) values[index];
         values[index] = value;
@@ -709,10 +714,11 @@ public final class M3FsPrecomputeBundle {
       // Increase capacity before insertion; no transient Entry/Node objects.
       if ((used + 1L) * 4L > (long) keys.length * 3L) {
         grow();
-        index = slot(key);
+        index = slot(key, hash);
       }
       keys[index] = key;
       values[index] = value;
+      hashes[index] = hash;
       used++;
       count++;
       return null;
@@ -724,21 +730,24 @@ public final class M3FsPrecomputeBundle {
       }
       Object[] oldKeys = keys;
       Object[] oldValues = values;
+      int[] oldHashes = hashes;
       Object[] expandedKeys = new Object[oldKeys.length << 1];
       Object[] expandedValues = new Object[oldValues.length << 1];
+      int[] expandedHashes = new int[oldHashes.length << 1];
       int mask = expandedKeys.length - 1;
       for (int i = 0; i < oldKeys.length; i++) {
         Object key = oldKeys[i];
         if (key == null) continue;
-        int hash = key.hashCode();
-        hash ^= (hash >>> 16);
+        int hash = oldHashes[i];
         int index = hash & mask;
         while (expandedKeys[index] != null) index = (index + 1) & mask;
         expandedKeys[index] = key;
         expandedValues[index] = oldValues[i];
+        expandedHashes[index] = hash;
       }
       keys = expandedKeys;
       values = expandedValues;
+      hashes = expandedHashes;
     }
 
     int size() { return count; }
