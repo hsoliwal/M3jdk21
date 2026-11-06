@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-ports-file</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: File Port</name>
+  <description>The jdk.m3.file family (module org.m3jdk.file): M3File, M3ByteFile, MappedM3File, the file
+    universe (events, snapshots, token index, traversal), M3FmtVarints / lexicon frames / frozen dictionary,
+    M3JniLibraryLoader with M3NativeLibrarySpec, M3Progress*, M3JsonStructuralIndex. Pure Java 21, no
+    dependency outside java.base; the natives under native/ are built by their CMakeLists.txt and loaded at
+    run time through M3JniLibraryLoader. This pom gives the lane a build and makes it a dependency owner for
+    the other m3 modules (first consumer: the native search engine, which needs the library loader).</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <!-- same gate as qualification/m3fmt-shared-lexicon-20261021/verify.sh: every lint except the
+                 module-name digit lint (org.m3jdk.file), and warnings are errors -->
+            <arg>-Xlint:all,-module</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
