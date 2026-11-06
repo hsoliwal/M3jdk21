@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 """Read-only, deterministic census of *existing canonical* M3JDK21 map targets.
 
@@ -23,14 +23,31 @@ JAVA_DECL = re.compile(r"\b(?:class|interface|enum|record|@interface)\s+([\w$]+)
 FIELDS = ("mapping_id", "record_state", "module", "target_path", "declared_symbol", "path_refs", "result")
 
 
+def unique_keys(pairs: list[tuple[str, object]]) -> dict:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate JSON object key: " + key)
+        result[key] = value
+    return result
+
+
 def safe_path(root: Path, path: str) -> Path:
-    if not isinstance(path, str) or not path or "\\" in path:
+    if (not isinstance(path, str) or not path or "\\" in path
+            or "\x00" in path or re.match(r"^[A-Za-z]:", path)):
         raise ValueError("invalid target path")
     value = Path(path)
-    if value.is_absolute() or any(p in (".", "..") for p in value.parts):
+    parts = path.split("/")
+    if value.is_absolute() or any(p in ("", ".", "..") for p in parts):
         raise ValueError("unsafe target path: " + path)
-    resolved = (root / value).resolve()
-    if not resolved.is_relative_to(root.resolve()):
+    base = root.resolve()
+    candidate = base
+    for part in parts:
+        candidate = candidate / part
+        if candidate.is_symlink():
+            raise ValueError("symlink target path forbidden: " + path)
+    resolved = candidate.resolve()
+    if not resolved.is_relative_to(base):
         raise ValueError("unsafe target path: " + path)
     return resolved
 
@@ -39,13 +56,15 @@ def snapshot(root: Path) -> list[dict[str, str]]:
     from hashlib import sha1
 
     map_bytes = safe_path(root, MAP).read_bytes()
-    pinned = json.loads(safe_path(root, PLAN).read_text(encoding="utf-8"))
+    pinned = json.loads(safe_path(root, PLAN).read_text(encoding="utf-8"),
+                        object_pairs_hook=unique_keys)
     if pinned.get("authority") != MAP:
         raise ValueError("not the canonical target mapping authority")
     blob = sha1(b"blob " + str(len(map_bytes)).encode("ascii") + b"\0" + map_bytes).hexdigest()
     if pinned.get("authority_blob") != blob:
         raise ValueError("canonical name mapping has drifted")
-    records = json.loads(map_bytes.decode("utf-8")).get("migration", {}).get("records")
+    records = json.loads(map_bytes.decode("utf-8"),
+                         object_pairs_hook=unique_keys).get("migration", {}).get("records")
     if not isinstance(records, list):
         raise ValueError("missing canonical migration records")
     flattened = []
