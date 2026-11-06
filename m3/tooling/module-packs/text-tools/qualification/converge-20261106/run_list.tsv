@@ -29,3 +29,4 @@ jdk.m3.structured.StructuredTextSelfTest	-	native
 jdk.m3.text.Utf8SegmentsProbe	-	native
 jdk.m3.structured.DelimitedIndexContract	java	native
 jdk.m3.text.NativeUtf16LiteralSelfTest	native	native
+jdk.m3.text.NativeLineBatchOrderSelfTest	-	native

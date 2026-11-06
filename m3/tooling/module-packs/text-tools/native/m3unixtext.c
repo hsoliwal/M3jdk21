@@ -279,7 +279,7 @@ Java_jdk_m3_text_NativeLineBatch_order0(
     if (monitor != NULL) {
         jclass monitorClass = (*env)->GetObjectClass(env, monitor);
         if (monitorClass == NULL) return NULL;
-        control.checkCanceled = (*env)->GetMethodID(env, monitorClass, "checkCanceled", "()V");
+        control.checkCanceled = (*env)->GetMethodID(env, monitorClass, "checkCancelled", "()V");
         (*env)->DeleteLocalRef(env, monitorClass);
         if (control.checkCanceled == NULL || !m3_order_poll(&control)) return NULL;
     }
