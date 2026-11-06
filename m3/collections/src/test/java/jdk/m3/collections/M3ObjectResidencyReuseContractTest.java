@@ -294,6 +294,119 @@ final class M3ObjectResidencyReuseContractTest {
     // SPDX-License-Identifier: Apache-2.0
     // Admission callbacks must not select a transitioning victim or publish the pending request.
     @Test
+    void linkedVictimsExcludeAnInProgressSwap() throws Exception {
+        assertNestedSwapAdmissionRefused(false);
+    }
+
+    @Test
+    void rolloverScanVictimsExcludeAnInProgressSwap() throws Exception {
+        assertNestedSwapAdmissionRefused(true);
+    }
+
+    @Test
+    void admissionClaimsRequestedSlotBeforeCodecOrStoreCanPublishItAgain() throws Exception {
+        for (boolean duringWrite : new boolean[] {false, true}) {
+            SwapFixture fixture = new SwapFixture(3, 16, 0, false);
+            fixture.use(0);
+            fixture.use(1);
+            AtomicInteger refused = new AtomicInteger();
+            fixture.hook(duringWrite, slot -> {
+                assertEquals(0, slot);
+                assertEquals(M3ObjectResidency.State.CREATING, fixture.arena.state(2));
+                assertThrows(IllegalStateException.class, () -> fixture.use(2));
+                refused.incrementAndGet();
+            });
+            assertTimeoutPreemptively(java.time.Duration.ofSeconds(2), () -> fixture.use(2));
+            assertEquals(1, refused.get());
+            assertEquals(1, fixture.creates[2]);
+            assertEquals(16L, fixture.arena.residentBytes());
+            assertEquals(M3ObjectResidency.State.SWAPPED, fixture.arena.state(0));
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(1));
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(2));
+            fixture.assertBits();
+        }
+    }
+
+    @Test
+    void admissionClaimsInstallTargetAgainstInstallAndBorrowReentry() throws Exception {
+        SwapFixture fixture = new SwapFixture(3, 16, 0, false);
+        fixture.use(0);
+        fixture.use(1);
+        String installed = new String("c-external");
+        AtomicInteger refused = new AtomicInteger();
+        fixture.onEncode = slot -> {
+            assertEquals(M3ObjectResidency.State.CREATING, fixture.arena.state(2));
+            assertThrows(IllegalStateException.class,
+                    () -> fixture.arena.install(2, "c-unreviewed", 8));
+            assertThrows(IllegalStateException.class,
+                    () -> fixture.arena.retainProjection(2, 8));
+            assertThrows(IllegalStateException.class, () -> fixture.use(2));
+            refused.incrementAndGet();
+        };
+        assertTimeoutPreemptively(java.time.Duration.ofSeconds(2),
+                () -> fixture.arena.install(2, installed, 8));
+        assertEquals(1, refused.get());
+        assertSame(installed, fixture.arena.use(2, 8, value -> value));
+        assertEquals(0, fixture.creates[2]);
+        assertEquals(0, fixture.arena.projectionBorrowCount(2));
+        assertEquals(16L, fixture.arena.residentBytes());
+        fixture.assertBits();
+    }
+
+    @Test
+    void restoreAdmissionClaimsSwappedRequestAndPreservesStoreCallbackOrder() throws Exception {
+        SwapFixture fixture = new SwapFixture(3, 8, 0, false);
+        fixture.use(0);
+        fixture.use(1);
+        fixture.events.clear();
+        fixture.onEncode = slot -> {
+            assertEquals(1, slot);
+            assertEquals(M3ObjectResidency.State.RESTORING, fixture.arena.state(0));
+            assertThrows(IllegalStateException.class, () -> fixture.use(0));
+            assertThrows(M3ObjectResidency.BudgetExceededException.class, () -> fixture.use(2));
+            assertEquals(M3ObjectResidency.State.ABSENT, fixture.arena.state(2));
+        };
+        assertTimeoutPreemptively(java.time.Duration.ofSeconds(2), () -> fixture.use(0));
+        assertEquals(java.util.List.of("encode 1", "write 1", "read 0", "decode 0", "delete 0"),
+                fixture.events);
+        assertEquals(1, fixture.creates[0]);
+        assertEquals(8L, fixture.arena.residentBytes());
+        assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(0));
+        assertEquals(M3ObjectResidency.State.SWAPPED, fixture.arena.state(1));
+        assertEquals(M3ObjectResidency.State.ABSENT, fixture.arena.state(2));
+        assertFalse(fixture.secondary.containsKey(0));
+        assertTrue(fixture.secondary.containsKey(1));
+        fixture.assertBits();
+    }
+
+    @Test
+    void unrelatedNestedRequestCanUseTheNextEligibleVictimAndKeepsLruOrder() throws Exception {
+        for (boolean rollover : new boolean[] {false, true}) {
+            SwapFixture fixture = new SwapFixture(4, 16, 0, rollover);
+            fixture.use(0);
+            fixture.use(1);
+            fixture.events.clear();
+            fixture.onEncode = slot -> {
+                fixture.onEncode = null;
+                assertEquals(0, slot);
+                fixture.use(3);
+            };
+            assertTimeoutPreemptively(java.time.Duration.ofSeconds(2), () -> fixture.use(2));
+            assertEquals(java.util.List.of("encode 0", "encode 1", "write 1", "create 3",
+                    "write 0", "create 2"), fixture.events);
+            assertEquals(16L, fixture.arena.residentBytes());
+            assertEquals(M3ObjectResidency.State.SWAPPED, fixture.arena.state(0));
+            assertEquals(M3ObjectResidency.State.SWAPPED, fixture.arena.state(1));
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(2));
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(3));
+            fixture.use(0);
+            assertEquals(M3ObjectResidency.State.SWAPPED, fixture.arena.state(3));
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(2));
+            fixture.assertBits();
+        }
+    }
+
+    @Test
     void admissionRestoresAbsentRequestAfterIoOrRuntimeFailureAndAllowsRetry() throws Exception {
         for (boolean duringWrite : new boolean[] {false, true}) {
             for (boolean checked : new boolean[] {false, true}) {
@@ -351,6 +464,42 @@ final class M3ObjectResidencyReuseContractTest {
                 // Failed victim cleanup is a separate lifecycle contract. This test
                 // constrains only rollback of the admission claim owned by this atom.
             }
+        }
+    }
+
+    @Test
+    void swappingVictimExclusionPreservesBorrowActiveAndPermanentPinGuards() throws Exception {
+        for (int protection = 0; protection < 3; protection++) {
+            SwapFixture fixture = new SwapFixture(4, 16,
+                    protection == 2 ? M3ObjectResidency.PIN_EXPOSED : 0, false);
+            fixture.use(0);
+            fixture.use(1);
+            long token = protection == 0 ? fixture.arena.retainProjection(1, 8) : 0L;
+            if (protection == 2) fixture.arena.use(1, 8, value -> value);
+            AtomicInteger refusals = new AtomicInteger();
+            fixture.onEncode = slot -> {
+                assertEquals(0, slot);
+                assertThrows(M3ObjectResidency.BudgetExceededException.class, () -> fixture.use(3));
+                assertEquals(M3ObjectResidency.State.ABSENT, fixture.arena.state(3));
+                refusals.incrementAndGet();
+            };
+            int selectedProtection = protection;
+            assertTimeoutPreemptively(java.time.Duration.ofSeconds(2), () -> {
+                if (selectedProtection == 1)
+                    fixture.arena.use(1, 8, value -> { fixture.use(2); return value.length(); });
+                else fixture.use(2);
+            });
+            assertEquals(1, refusals.get());
+            assertEquals(16L, fixture.arena.residentBytes());
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(1));
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(2));
+            assertEquals(0, fixture.creates[3]);
+            if (protection == 0) {
+                assertEquals(1, fixture.arena.projectionBorrowCount(1));
+                assertEquals(3, fixture.arena.useProjection(token, String::length).intValue());
+                fixture.arena.releaseProjection(token);
+            }
+            fixture.assertBits();
         }
     }
 
