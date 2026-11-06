@@ -58,6 +58,28 @@ final class M3ObjectResidencyReuseContractTest {
     }
 
     @Test
+    void refusalDoesNotMutateAndFailedResetDiscardsShell() {
+        AtomicInteger creates = new AtomicInteger();
+        var arena = new M3ObjectResidency<StringBuilder>(2, MODE, 8, 0,
+                slot -> { creates.incrementAndGet(); return new StringBuilder("before"); },
+                null, null);
+        assertEquals("before", arena.use(0, 8, StringBuilder::toString));
+        assertFalse(arena.reuseUnborrowedProjection(0, 1, 9, (v, s) -> v.setLength(0)));
+        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals(8L, arena.residentBytes());
+        assertThrows(IllegalArgumentException.class,
+                () -> arena.reuseUnborrowedProjection(0, 1, 8, (v, s) -> {
+                    v.setLength(0);
+                    throw new IllegalArgumentException("reset failed");
+                }));
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(1));
+        assertEquals(0L, arena.residentBytes());
+        assertEquals("before", arena.use(0, 8, StringBuilder::toString));
+        assertEquals(2, creates.get());
+    }
+
+    @Test
     void zeroBorrowCountDoesNotProveNoEscape() {
         var arena = new M3ObjectResidency<StringBuilder>(2,
                 M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU
@@ -69,8 +91,44 @@ final class M3ObjectResidencyReuseContractTest {
     }
 
     @Test
+    void resetReentryCannotSpendTheDestinationBudgetTwice() {
+        AtomicInteger creates = new AtomicInteger();
+        var arena = projections(3, MODE, 16, 0, creates);
+        seedBits(arena);
+        int original = arena.use(0, 4, value -> value.instance);
+        AtomicInteger resets = new AtomicInteger();
+        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+                () -> arena.reuseUnborrowedProjection(0, 1, 12, (value, slot) -> {
+                    resets.incrementAndGet();
+                    assertEquals(original, value.instance);
+                    value.text = "tainted";
+                    assertEquals(4L, arena.residentBytes());
+                    assertEquals(M3ObjectResidency.State.CREATING, arena.state(0));
+                    assertEquals(M3ObjectResidency.State.CREATING, arena.state(1));
+                    arena.use(2, 8, other -> other.instance);
+                }));
+        assertEquals(1, resets.get());
+        assertEquals(8L, arena.residentBytes());
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(1));
+        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(2));
+        assertEquals(2, arena.use(2, 8, value -> value.instance).intValue());
+        assertEquals(2, creates.get());
+        assertSeedBits(arena);
+        int recreated = arena.use(0, 4, value -> value.instance);
+        assertNotEquals(original, recreated);
+        assertEquals("fresh", arena.use(0, 4, value -> value.text));
+        assertEquals(3, creates.get());
+    }
+
+    @Test
     void checkedResetFailureWrapsOriginalAndDiscardsTaintedShell() {
         assertResetFailure(new java.io.IOException("checked reset failure"));
+    }
+
+    @Test
+    void runtimeResetFailurePreservesExceptionIdentityAndDiscardsTaintedShell() {
+        assertResetFailure(new IllegalArgumentException("runtime reset failure"));
     }
 
     @Test
@@ -128,6 +186,73 @@ final class M3ObjectResidencyReuseContractTest {
     }
 
     @Test
+    void sourceAndDestinationPinAndCountLanesFailClosed() throws Exception {
+        // Exercise defensive guards on the real owner. In particular, nonzero
+        // destination lanes with ABSENT state are corruption controls, not a
+        // claim that normal public calls can construct those combinations.
+        for (int guardedSlot = 0; guardedSlot < 2; guardedSlot++) {
+            for (String lane : new String[]{"active", "borrowers", "states"}) {
+                var arena = projections(2, MODE, 32, 0, new AtomicInteger());
+                seedBits(arena);
+                arena.use(0, 8, value -> value.instance);
+                var field = M3ObjectResidency.class.getDeclaredField(lane);
+                field.setAccessible(true);
+                AtomicInteger resets = new AtomicInteger();
+                if (lane.equals("states")) {
+                    byte[] states = (byte[]) field.get(arena);
+                    byte old = states[guardedSlot];
+                    try {
+                        states[guardedSlot] = (byte) (old | (1 << 6));
+                        assertRefused(arena, 0, 1, 8, resets);
+                    } finally {
+                        states[guardedSlot] = old;
+                    }
+                } else {
+                    int[] counts = (int[]) field.get(arena);
+                    int old = counts[guardedSlot];
+                    try {
+                        counts[guardedSlot] = 1;
+                        assertRefused(arena, 0, 1, 8, resets);
+                    } finally {
+                        counts[guardedSlot] = old;
+                    }
+                }
+                assertEquals(0, resets.get(), lane + " slot " + guardedSlot);
+                assertEquals(8L, arena.residentBytes());
+                assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+                assertEquals(M3ObjectResidency.State.ABSENT, arena.state(1));
+                assertSeedBits(arena);
+            }
+        }
+    }
+
+    @Test
+    void callerInstalledProjectionsAndUnprovedModesNeverInvokeReset() {
+        int[] modes = {MODE & ~M3ObjectResidency.STRICT_NO_ESCAPE,
+                MODE & ~M3ObjectResidency.RECREATE, MODE | M3ObjectResidency.OBSERVE_ONLY};
+        for (int mode : modes) {
+            var arena = projections(2, mode, 32, 0, new AtomicInteger());
+            arena.use(0, 8, value -> value.instance);
+            AtomicInteger resets = new AtomicInteger();
+            assertRefused(arena, 0, 1, 8, resets);
+            assertEquals(0, resets.get());
+        }
+        for (int installedSlot = 0; installedSlot < 2; installedSlot++) {
+            var arena = projections(2, MODE | M3ObjectResidency.PIN_EXPOSED,
+                    32, 0, new AtomicInteger());
+            if (installedSlot != 0) arena.use(0, 8, value -> value.instance);
+            arena.install(installedSlot, new Projection(99), 8);
+            AtomicInteger resets = new AtomicInteger();
+            assertRefused(arena, 0, 1, 8, resets);
+            assertEquals(0, resets.get());
+        }
+        var noLazy = projections(2, MODE & ~M3ObjectResidency.LAZY_CREATE,
+                32, 0, new AtomicInteger());
+        noLazy.install(0, new Projection(99), 8);
+        assertRefused(noLazy, 0, 1, 8, new AtomicInteger());
+    }
+
+    @Test
     void absentSameOccupiedAndInvalidRequestsDoNotInvokeReset() {
         var arena = projections(3, MODE, 16, 0, new AtomicInteger());
         seedBits(arena);
@@ -157,6 +282,30 @@ final class M3ObjectResidencyReuseContractTest {
     }
 
     @Test
+    void resetGuardsBothParticipatingSlotsButAllowsUnrelatedCalls() {
+        var arena = projections(3, MODE, 32, 0, new AtomicInteger());
+        seedBits(arena);
+        int identity = arena.use(0, 8, System::identityHashCode);
+        assertTrue(arena.reuseUnborrowedProjection(0, 1, 8, (value, slot) -> {
+            assertEquals(identity, System.identityHashCode(value));
+            assertEquals(M3ObjectResidency.State.CREATING, arena.state(0));
+            assertEquals(M3ObjectResidency.State.CREATING, arena.state(1));
+            assertEquals(8L, arena.residentBytes());
+            for (int guarded : new int[]{0, 1}) {
+                assertThrows(IllegalStateException.class, () -> arena.use(guarded, 8, v -> v.instance));
+                assertThrows(IllegalStateException.class, () -> arena.retainProjection(guarded, 8));
+                assertThrows(IllegalStateException.class, () -> arena.install(guarded, new Projection(99), 8));
+            }
+            arena.use(2, 8, v -> v.instance);
+            value.text = "target=" + arena.readParentBits(slot);
+        }));
+        assertEquals(identity, arena.use(1, 8, System::identityHashCode).intValue());
+        assertEquals("target=101", arena.use(1, 8, value -> value.text));
+        assertEquals(16L, arena.residentBytes());
+        assertSeedBits(arena);
+    }
+
+    @Test
     void successfulRebindPreservesLogicalBitsAndMakesTargetMostRecentlyUsed() {
         var arena = projections(4, MODE, 16, 0, new AtomicInteger());
         seedBits(arena);
@@ -171,6 +320,26 @@ final class M3ObjectResidencyReuseContractTest {
         assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(3));
         assertEquals("rebound", arena.use(2, 8, value -> value.text));
         assertEquals(16L, arena.residentBytes());
+        assertSeedBits(arena);
+    }
+
+    @Test
+    void failedRebindPreservesUnrelatedLruVictimOrdering() {
+        var arena = projections(5, MODE, 24, 0, new AtomicInteger());
+        seedBits(arena);
+        arena.use(0, 8, value -> value.instance);
+        arena.use(1, 8, value -> value.instance);
+        arena.use(2, 8, value -> value.instance);
+        IllegalArgumentException marker = new IllegalArgumentException("reset");
+        assertSame(marker, assertThrows(IllegalArgumentException.class,
+                () -> arena.reuseUnborrowedProjection(0, 4, 8, (value, slot) -> { throw marker; })));
+        arena.use(3, 16, value -> value.instance);
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(1));
+        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(2));
+        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(3));
+        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(4));
+        assertEquals(24L, arena.residentBytes());
         assertSeedBits(arena);
     }
 
