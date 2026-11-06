@@ -633,8 +633,9 @@ public final class M3FsPrecomputeBundle {
       if (maxObjectBytes < 0 || maxMappedPayloadBytes < 0L) {
         throw new IllegalArgumentException("negative joined segment mapping budget");
       }
-      java.util.LinkedHashMap<M3ContentId, M3MappedObject> unique =
-          new java.util.LinkedHashMap<>();
+      //FLLDCIM: MRL - m3fs-key-value-lanes-20261102 (Synexia 489d837bb8d, owner blob a34b8031 -> 162fd0b0)
+      M3KeyValueSlots<M3ContentId, M3MappedObject> unique =
+          new M3KeyValueSlots<>();
       M3MappedObject[] mapped = new M3MappedObject[segmentCount()];
       long mappedBytes = 0L;
       for (int index = 0; index < segmentCount(); index++) {
@@ -659,6 +660,88 @@ public final class M3FsPrecomputeBundle {
       return new MappedJoinedContentSegments(
           this, mapped, unique.size(), mappedBytes);
     }
+  }
+
+  /**
+   * Private, ephemeral DOOPS key/value lanes for immutable mapped-payload keys.
+   * Never retains Map.Entry, Node, Bucket, Cell or iterator facade objects.
+   * No removal is needed: one openRawSegments traversal owns the whole table.
+   */
+  //FLLDCIM: MRL - m3fs-key-value-lanes-20261102 (Synexia 489d837bb8d, owner blob a34b8031 -> 162fd0b0)
+  private static final class M3KeyValueSlots<K, V> {
+    private Object[] keys = new Object[16];
+    private Object[] values = new Object[16];
+    private int used;
+    private int count;
+    private boolean hasNull;
+    private V nullValue;
+
+    private int slot(K key) {
+      int hash = key.hashCode();
+      hash ^= (hash >>> 16);
+      int index = hash & (keys.length - 1);
+      while (keys[index] != null && keys[index] != key && !key.equals(keys[index])) {
+        index = (index + 1) & (keys.length - 1);
+      }
+      return index;
+    }
+
+    @SuppressWarnings("unchecked")
+    V get(K key) {
+      if (key == null) return hasNull ? nullValue : null;
+      return (V) values[slot(key)];
+    }
+
+    @SuppressWarnings("unchecked")
+    V put(K key, V value) {
+      if (key == null) {
+        V prior = hasNull ? nullValue : null;
+        if (!hasNull) { hasNull = true; count++; }
+        nullValue = value;
+        return prior;
+      }
+      int index = slot(key);
+      if (keys[index] != null) {
+        V prior = (V) values[index];
+        values[index] = value;
+        return prior;
+      }
+      // Increase capacity before insertion; no transient Entry/Node objects.
+      if ((used + 1L) * 4L > (long) keys.length * 3L) {
+        grow();
+        index = slot(key);
+      }
+      keys[index] = key;
+      values[index] = value;
+      used++;
+      count++;
+      return null;
+    }
+
+    private void grow() {
+      if (keys.length >= (1 << 29)) {
+        throw new OutOfMemoryError("M3 joined mapped key/value slots capacity");
+      }
+      Object[] oldKeys = keys;
+      Object[] oldValues = values;
+      Object[] expandedKeys = new Object[oldKeys.length << 1];
+      Object[] expandedValues = new Object[oldValues.length << 1];
+      int mask = expandedKeys.length - 1;
+      for (int i = 0; i < oldKeys.length; i++) {
+        Object key = oldKeys[i];
+        if (key == null) continue;
+        int hash = key.hashCode();
+        hash ^= (hash >>> 16);
+        int index = hash & mask;
+        while (expandedKeys[index] != null) index = (index + 1) & mask;
+        expandedKeys[index] = key;
+        expandedValues[index] = oldValues[i];
+      }
+      keys = expandedKeys;
+      values = expandedValues;
+    }
+
+    int size() { return count; }
   }
 
   //FLLDCIM: MRL - m3fs-joined-directory-history-20261102 (Synexia 42466557a7f, owner blob 09963444 -> 32c9b0d0)
