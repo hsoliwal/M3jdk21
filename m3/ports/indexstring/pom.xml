@@ -49,6 +49,17 @@
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
+          <execution>
+            <id>character-flags-combine</id>
+            <phase>test</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>jdk.internal.m3.indexstring.M3IndexCharacterFlagsCombineSmokeMain</mainClass>
+              <classpathScope>test</classpathScope>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>
