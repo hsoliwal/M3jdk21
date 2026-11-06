@@ -1,0 +1,54 @@
+class	count
+AFTER_TOTAL_episodes=20000_ops=600000	1
+BEFORE_OVER_LINES	187
+BEFORE_TOTAL_episodes=20000_ops=600000	1
+CASCADE	75625
+EPISODES_DIVERGED	7045
+EPISODES_IDENTICAL	12955
+ERROR_RESTORE	2514
+IDENTICAL	464879
+IDENTICAL_AFTER_DIVERGENCE	52451
+REUSE_BUDGET_RECHECK	16
+REUSE_GUARD	1245
+REUSE_SOURCE_HELD	3270
+# first divergence per episode (episode, op, class, before line, after line); first 40
+#	4	10	REUSE_GUARD	4:10 op9 4/10 threw ResidencyException:projection reset failed for target slot 2 cause=IllegalArgumentException:reset runtime 2 rb=8 st=RRARAA ev=reset 2#2 rb=8 st=RRCRWA;	4:10 reuse 4->2/10#2=false rb=13 st=RRARRA ev=
+#	6	5	ERROR_RESTORE	6:5 op6 5/6 threw AssertionError:factory error rb=17 st=ARAARC ev=new 5;fault factory#0;	6:5 op6 5/6 threw AssertionError:factory error rb=17 st=ARAARA ev=new 5;fault factory#0;
+#	8	10	REUSE_SOURCE_HELD	8:10 op8 4/4 threw ResidencyException:projection reset failed for target slot 0 cause=IllegalArgumentException:reset runtime 0 rb=20 st=ARRRAA ev=reset 0#2 rb=20 st=CRRRWA;	8:10 op8 4/4 threw IllegalArgumentException:reset runtime 0 rb=20 st=ARRRAA ev=reset 0#2 rb=23 st=CRRRCA;
+#	10	13	REUSE_GUARD	10:13 reuse 5->4/1#1=true rb=3 st=RAAARA ev=reset 4#1 rb=2 st=RAAACW;nest threw IllegalStateException:reentrant residency transition for slot 5;	10:13 reuse 5->4/1#1=false rb=4 st=RAAAAR ev=
+#	11	0	ERROR_RESTORE	11:0 op6 0/8 threw AssertionError:factory error rb=0 st=CAAAAA ev=new 0;fault factory#0;	11:0 op6 0/8 threw AssertionError:factory error rb=0 st=AAAAAA ev=new 0;fault factory#0;
+#	13	9	REUSE_SOURCE_HELD	13:9 op7 5/5 threw ResidencyException:projection reset failed for target slot 1 cause=IOException:reset checked 1 rb=6 st=AARRAA ev=reset 1#3 rb=6 st=ACRRAW;	13:9 op7 5/5 threw ResidencyException:projection reset failed for target slot 1 cause=IOException:reset checked 1 rb=6 st=AARRAA ev=reset 1#3 rb=15 st=ACRRAC;
+#	18	3	ERROR_RESTORE	18:3 op2 1/3 threw AssertionError:factory error rb=9 st=ACRAAA ev=new 1;fault factory#0;	18:3 op2 1/3 threw AssertionError:factory error rb=9 st=AARAAA ev=new 1;fault factory#0;
+#	19	6	REUSE_SOURCE_HELD	19:6 reuse 2->4/9#0=true rb=17 st=ARAARR ev=reset 4#0 rb=8 st=ARWACR;	19:6 reuse 2->4/9#0=true rb=17 st=ARAARR ev=reset 4#0 rb=9 st=ARCACR;
+#	22	2	ERROR_RESTORE	22:2 op2 3/5 threw AssertionError:factory error rb=0 st=AAACAA ev=new 3;fault factory#0;	22:2 op2 3/5 threw AssertionError:factory error rb=0 st=AAAAAA ev=new 3;fault factory#0;
+#	23	9	ERROR_RESTORE	23:9 op5 5/4 threw AssertionError:encode error rb=24 st=AAWRRA ev=enc v2-1;fault encode#0;	23:9 op5 5/4 threw AssertionError:encode error rb=24 st=AARRRA ev=enc v2-1;fault encode#0;
+#	25	20	REUSE_SOURCE_HELD	25:20 op9 2/2 threw AssertionError:reset error 1 rb=18 st=RAARRR ev=reset 1#4 rb=18 st=RCWRRR;	25:20 op9 2/2 threw AssertionError:reset error 1 rb=18 st=RAARRR ev=reset 1#4 rb=24 st=RCCRRR;
+#	28	10	REUSE_GUARD	28:10 op9 3/7 threw ResidencyException:projection reset failed for target slot 0 cause=IllegalArgumentException:reset runtime 0 rb=17 st=ARAAAR ev=reset 0#2 rb=17 st=CRAWAR;	28:10 reuse 3->0/7#2=false rb=21 st=ARARAR ev=
+#	31	3	REUSE_SOURCE_HELD	31:3 op8 2/1 threw ResidencyException:projection reset failed for target slot 4 cause=IOException:reset checked 4 rb=10 st=ARAAAA ev=reset 4#3 rb=10 st=ARWACA;	31:3 op8 2/1 threw ResidencyException:projection reset failed for target slot 4 cause=IOException:reset checked 4 rb=10 st=ARAAAA ev=reset 4#3 rb=15 st=ARCACA;
+#	38	9	REUSE_SOURCE_HELD	38:9 reuse 2->5/4#0=true rb=14 st=RRAAAR ev=reset 5#0 rb=10 st=RRWAAC;	38:9 reuse 2->5/4#0=true rb=14 st=RRAAAR ev=reset 5#0 rb=20 st=RRCAAC;
+#	43	26	REUSE_SOURCE_HELD	43:26 reuse 1->5/7#5=true rb=22 st=RARARR ev=reset 5#5 rb=15 st=RWRARC;nest threw IllegalStateException:reentrant residency transition for slot 1;	43:26 reuse 1->5/7#5=true rb=22 st=RARARR ev=reset 5#5 rb=24 st=RCRARC;nest threw IllegalStateException:reentrant residency transition for slot 1;
+#	44	0	ERROR_RESTORE	44:0 op0 3/6 threw AssertionError:factory error rb=0 st=AAACAA ev=new 3;fault factory#0;	44:0 op0 3/6 threw AssertionError:factory error rb=0 st=AAAAAA ev=new 3;fault factory#0;
+#	46	18	REUSE_GUARD	46:18 op9 4/5 threw ResidencyException:projection reset failed for target slot 3 cause=IllegalArgumentException:reset runtime 3 rb=15 st=RRRAAA ev=reset 3#2 rb=15 st=RRRCWA;	46:18 reuse 4->3/5#2=false rb=25 st=RRRARA ev=
+#	52	10	REUSE_GUARD	52:10 op9 3/1 threw AssertionError:reset error 1 rb=15 st=RARAAA ev=reset 1#4 rb=15 st=RCRWAA;	52:10 reuse 3->1/1#4=false rb=17 st=RARRAA ev=
+#	55	7	REUSE_SOURCE_HELD	55:7 reuse 1->2/7#0=true rb=16 st=AARRAA ev=reset 2#0 rb=9 st=AWCRAA;	55:7 reuse 1->2/7#0=true rb=16 st=AARRAA ev=reset 2#0 rb=14 st=ACCRAA;
+#	56	7	REUSE_SOURCE_HELD	56:7 op7 5/1 threw AssertionError:reset error 2 rb=8 st=RAAARA ev=reset 2#4 rb=8 st=RACARW;	56:7 op7 5/1 threw AssertionError:reset error 2 rb=8 st=RAAARA ev=reset 2#4 rb=11 st=RACARC;
+#	58	11	ERROR_RESTORE	58:11 op0 5/10 threw AssertionError:factory error rb=9 st=RAARAC ev=new 5;fault factory#0;	58:11 op0 5/10 threw AssertionError:factory error rb=9 st=RAARAA ev=new 5;fault factory#0;
+#	59	3	ERROR_RESTORE	59:3 op2 3/4 threw AssertionError:factory error rb=11 st=AARCRA ev=new 3;fault factory#0;	59:3 op2 3/4 threw AssertionError:factory error rb=11 st=AARARA ev=new 3;fault factory#0;
+#	61	18	REUSE_SOURCE_HELD	61:18 op7 2/10 threw AssertionError:reset error 0 rb=11 st=AAARRA ev=reset 0#4 rb=11 st=CAWRRA;	61:18 op7 2/10 threw AssertionError:reset error 0 rb=11 st=AAARRA ev=reset 0#4 rb=20 st=CACRRA;
+#	64	7	REUSE_GUARD	64:7 op8 0/7 threw AssertionError:reset error 4 rb=15 st=ARAAAR ev=reset 4#4 rb=15 st=WRAACR;	64:7 reuse 0->4/7#4=false rb=21 st=RRAAAR ev=
+#	67	14	REUSE_SOURCE_HELD	67:14 reuse 1->4/1#1=true rb=16 st=RAARRR ev=reset 4#1 rb=15 st=RWARCR;nest 3/7=4;	67:14 reuse 1->4/1#1=true rb=16 st=RAARRR ev=reset 4#1 rb=18 st=RCARCR;nest 3/7=4;
+#	68	7	REUSE_SOURCE_HELD	68:7 reuse 4->1/5#0=true rb=9 st=ARARAR ev=reset 1#0 rb=4 st=ACARWR;	68:7 reuse 4->1/5#0=true rb=9 st=ARARAR ev=reset 1#0 rb=12 st=ACARCR;
+#	70	4	ERROR_RESTORE	70:4 op0 1/5 threw AssertionError:factory error rb=4 st=ACARAA ev=new 1;fault factory#0;	70:4 op0 1/5 threw AssertionError:factory error rb=4 st=AAARAA ev=new 1;fault factory#0;
+#	76	15	REUSE_GUARD	76:15 reuse 5->4/2#5=true rb=21 st=RRARRA ev=reset 4#5 rb=19 st=RRARCW;nest threw IllegalStateException:reentrant residency transition for slot 4;	76:15 reuse 5->4/2#5=false rb=21 st=RRARAR ev=
+#	79	5	ERROR_RESTORE	79:5 op1 4/9 threw AssertionError:factory error rb=14 st=RARRCR ev=new 4;fault factory#0;	79:5 op1 4/9 threw AssertionError:factory error rb=14 st=RARRAR ev=new 4;fault factory#0;
+#	80	21	REUSE_SOURCE_HELD	80:21 op7 2/10 threw AssertionError:reset error 3 rb=13 st=ARAARR ev=reset 3#4 rb=13 st=ARWCRR;	80:21 op7 2/10 threw AssertionError:reset error 3 rb=13 st=ARAARR ev=reset 3#4 rb=20 st=ARCCRR;
+#	85	1	REUSE_SOURCE_HELD	85:1 op7 5/5 threw ResidencyException:projection reset failed for target slot 1 cause=IllegalArgumentException:reset runtime 1 rb=0 st=AAAAAA ev=reset 1#2 rb=0 st=ACAAAW;	85:1 op7 5/5 threw IllegalArgumentException:reset runtime 1 rb=0 st=AAAAAA ev=reset 1#2 rb=5 st=ACAAAC;
+#	86	23	REUSE_SOURCE_HELD	86:23 op9 0/3 threw AssertionError:reset error 5 rb=12 st=AARRRA ev=reset 5#4 rb=12 st=WARRRC;	86:23 op9 0/3 threw AssertionError:reset error 5 rb=12 st=AARRRA ev=reset 5#4 rb=18 st=CARRRC;
+#	88	21	REUSE_GUARD	88:21 reuse 1->0/3#1=true rb=24 st=RARRRR ev=reset 0#1 rb=21 st=CWRRRR;nest 3/1=4;	88:21 reuse 1->0/3#1=false rb=29 st=ARRRRR ev=
+#	90	5	ERROR_RESTORE	90:5 op4 0/6 threw AssertionError:factory error rb=2 st=CRAAAA ev=new 0;fault factory#0;	90:5 op4 0/6 threw AssertionError:factory error rb=2 st=ARAAAA ev=new 0;fault factory#0;
+#	91	2	REUSE_SOURCE_HELD	91:2 op9 1/2 threw ResidencyException:projection reset failed for target slot 2 cause=IOException:reset checked 2 rb=7 st=AAAAAR ev=reset 2#3 rb=7 st=AWCAAR;	91:2 op9 1/2 threw ResidencyException:projection reset failed for target slot 2 cause=IOException:reset checked 2 rb=7 st=AAAAAR ev=reset 2#3 rb=8 st=ACCAAR;
+#	94	9	REUSE_GUARD	94:9 op8 4/3 threw AssertionError:reset error 5 rb=4 st=RAAAAA ev=reset 5#4 rb=4 st=RAAAWC;	94:9 reuse 4->5/3#4=false rb=9 st=RAAARA ev=
+#	95	22	ERROR_RESTORE	95:22 op6 1/8 threw AssertionError:delete error rb=14 st=AOSRRR ev=enc v2-1;w 2;r 1;dec 1;del 1;fault delete#0;	95:22 op6 1/8 threw AssertionError:delete error rb=14 st=ASSRRR ev=enc v2-1;w 2;r 1;dec 1;del 1;fault delete#0;
+#	97	11	REUSE_SOURCE_HELD	97:11 reuse 1->3/8#0=true rb=20 st=AAARRR ev=reset 3#0 rb=12 st=AWACRR;	97:11 reuse 1->3/8#0=true rb=20 st=AAARRR ev=reset 3#0 rb=20 st=ACACRR;
+#	100	7	REUSE_GUARD	100:7 op7 5/2 threw ResidencyException:projection reset failed for target slot 3 cause=IOException:reset checked 3 rb=8 st=ARAAAA ev=reset 3#3 rb=8 st=ARACAW;	100:7 reuse 5->3/2#3=false rb=10 st=ARAAAR ev=
+#	102	23	ERROR_RESTORE	102:23 op3 3/10 threw AssertionError:factory error rb=14 st=RSRCSR ev=enc v1-4;w 1;new 3;fault factory#0;	102:23 op3 3/10 threw AssertionError:factory error rb=14 st=RSRASR ev=enc v1-4;w 1;new 3;fault factory#0;

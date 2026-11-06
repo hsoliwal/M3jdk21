@@ -308,11 +308,20 @@ public final class M3ObjectResidency<T> {
      * while a caller can still observe it. The resetter must fully reconstruct the new
      * projection from the target slot's canonical parent state.
      *
+     * <p>Requires LAZY_CREATE (the source becomes ABSENT and must be recreatable from its parent
+     * state); refused, without side effects, under OBSERVE_ONLY and for a pinned, active or
+     * borrowed destination. While the resetter runs, both slots are CREATING and the source stays
+     * resident, counted and pinned; the budget is checked again after the resetter, so a
+     * reentrant resetter cannot spend the destination budget twice.
+     *
      * <p>On reset failure, both slots become absent. The possibly mutated instance is
-     * dropped for ordinary GC rather than returned to the original owner.
+     * dropped for ordinary GC rather than returned to the original owner. Runtime exceptions
+     * and errors of the resetter propagate unchanged; checked exceptions are wrapped in
+     * ResidencyException.
      *
      * @return true if a resident instance was moved without a new allocation
      */
+    //FLLDCIM: MRL - residency donor semantics P2 groups C+D, crate m3-doop-reuse-20261030 (rebindUnborrowedProjection of m3-doop-publication-budget-20261030, donor blob 8966285b99e2): the donor rebind semantics under the owner name
     public synchronized boolean reuseUnborrowedProjection(int source, int target,
             long estimatedBytes, Reinitializer<? super T> reset) {
         checkSlot(source);
@@ -322,47 +331,67 @@ public final class M3ObjectResidency<T> {
             throw new IllegalArgumentException("estimatedBytes must be non-negative");
         }
         if (source == target
-                || (flags & (RECREATE | STRICT_NO_ESCAPE)) != (RECREATE | STRICT_NO_ESCAPE)
-                || (flags & SWAP_SECONDARY) != 0
+                || (flags & (LAZY_CREATE | RECREATE | STRICT_NO_ESCAPE))
+                        != (LAZY_CREATE | RECREATE | STRICT_NO_ESCAPE)
+                || (flags & (SWAP_SECONDARY | OBSERVE_ONLY)) != 0
+                || stateAt(source) != State.RESIDENT || stateAt(target) != State.ABSENT
                 || callerInstalled[source] || callerInstalled[target]
+                || (states[source] & SLOT_PINNED) != 0 || (states[target] & SLOT_PINNED) != 0
                 || active[source] != 0 || borrowers[source] != 0
-                || (states[source] & SLOT_PINNED) != 0
-                || stateAt(source) != State.RESIDENT || stateAt(target) != State.ABSENT) {
+                || active[target] != 0 || borrowers[target] != 0) {
             return false;
         }
-        long targetBudget = targetBudget(HeapSnapshot.current());
-        long bytesWithoutSource = residentBytes - weights[source];
-        if (estimatedBytes > targetBudget
-                || bytesWithoutSource > targetBudget - estimatedBytes) {
-            return false;
-        }
+        long oldBytes = weights[source];
+        long others = residentBytes - oldBytes;
+        long budget = targetBudget(HeapSnapshot.current());
+        if (estimatedBytes > budget || others > budget - estimatedBytes) return false;
+
         @SuppressWarnings("unchecked") T projection = (T) resident[source];
-        if (projection == null) return false;
-        resident[source] = null;
-        unlinkLru(source);
-        residentBytes = bytesWithoutSource;
-        weights[source] = 0L;
-        setState(source, State.SWAPPING);
+        active[source] = 1;
+        setState(source, State.CREATING);
         setState(target, State.CREATING);
         try {
             reset.reinitialize(projection, target);
-            resident[target] = projection;
-            weights[target] = estimatedBytes;
-            residentBytes = Math.addExact(residentBytes, estimatedBytes);
-            setState(target, State.RESIDENT);
-            touch(target);
-            decision(target, State.ABSENT, State.RESIDENT, "reused unborrowed projection");
-            return true;
-        } catch (Exception failure) {
-            throw new ResidencyException("projection reset failed for target slot " + target, failure);
-        } finally {
-            setState(source, State.ABSENT);
-            if (stateAt(target) != State.RESIDENT) {
-                resident[target] = null;
-                weights[target] = 0L;
-                setState(target, State.ABSENT);
+            // The callback may reenter unrelated slots or change memory pressure.
+            others = residentBytes - oldBytes;
+            budget = targetBudget(HeapSnapshot.current());
+            if (estimatedBytes > budget || others > budget - estimatedBytes) {
+                throw new BudgetExceededException(estimatedBytes, others, budget);
             }
+        } catch (Exception failure) {
+            discardFailedRebind(source, target);
+            if (failure instanceof RuntimeException runtime) throw runtime;
+            throw new ResidencyException("projection reset failed for target slot " + target, failure);
+        } catch (Error failure) {
+            discardFailedRebind(source, target);
+            throw failure;
         }
+
+        active[source] = 0;
+        resident[source] = null;
+        unlinkLru(source);
+        residentBytes -= oldBytes;
+        weights[source] = 0L;
+        setState(source, State.ABSENT);
+        resident[target] = projection;
+        weights[target] = estimatedBytes;
+        residentBytes += estimatedBytes;
+        setState(target, State.RESIDENT);
+        touch(target);
+        decision(target, State.ABSENT, State.RESIDENT, "reused unborrowed projection");
+        return true;
+    }
+
+    /** Reset may have partially mutated its input: discard rather than expose it. */
+    private void discardFailedRebind(int source, int target) {
+        active[source] = 0;
+        resident[source] = null;
+        unlinkLru(source);
+        residentBytes -= weights[source];
+        weights[source] = 0L;
+        setState(source, State.ABSENT);
+        setState(target, State.ABSENT);
+        decision(source, State.RESIDENT, State.ABSENT, "failed reset, discard tainted shell");
     }
 
     /** Pin a pre-existing value supplied by the parent; no lazy factory is invoked. */
@@ -389,6 +418,7 @@ public final class M3ObjectResidency<T> {
     }
 
     //FLLDCIM: MRL - census L066, crate m3-doop-reuse-20261030 (m3-doop-publication-budget-20261030, donor blob 8966285b99e2): re-check the admitted budget after the callbacks; delete the spill copy after it
+    //FLLDCIM: MRL - residency donor semantics P2 group A, crate m3-doop-reuse-20261030 (m3-doop-callback-error-20261030, donor blob 45caaf707b47): an Error from a callback restores the prior state
     private void ensureResident(int slot, long estimatedBytes) {
         State before = stateAt(slot);
         if (before == State.RESIDENT) {
@@ -404,21 +434,27 @@ public final class M3ObjectResidency<T> {
         long target = admit(estimatedBytes, slot);
         try {
             T value;
-            if (before == State.SWAPPED) {
-                setState(slot, State.RESTORING);
-                byte[] bytes = spill.read(slot);
-                value = codec.decode(slot, bytes);
-                Objects.requireNonNull(value, "decoded projection");
-            } else {
-                if (factory == null) throw new IllegalStateException("no factory for absent slot");
-                setState(slot, State.CREATING);
-                value = Objects.requireNonNull(factory.create(slot), "created projection");
+            try {
+                if (before == State.SWAPPED) {
+                    setState(slot, State.RESTORING);
+                    byte[] bytes = spill.read(slot);
+                    value = codec.decode(slot, bytes);
+                    Objects.requireNonNull(value, "decoded projection");
+                } else {
+                    if (factory == null) throw new IllegalStateException("no factory for absent slot");
+                    setState(slot, State.CREATING);
+                    value = Objects.requireNonNull(factory.create(slot), "created projection");
+                }
+                // Factory/read/decode callbacks may consume the originally admitted capacity.
+                if ((flags & OBSERVE_ONLY) == 0 && wouldExceed(estimatedBytes, target)) {
+                    throw new BudgetExceededException(estimatedBytes, residentBytes, target);
+                }
+                if (before == State.SWAPPED) spill.delete(slot);
+            } catch (Error failure) {
+                // Callbacks have not published a resident value or changed its accounting.
+                setState(slot, before);
+                throw failure;
             }
-            // Factory/read/decode callbacks may consume the originally admitted capacity.
-            if ((flags & OBSERVE_ONLY) == 0 && wouldExceed(estimatedBytes, target)) {
-                throw new BudgetExceededException(estimatedBytes, residentBytes, target);
-            }
-            if (before == State.SWAPPED) spill.delete(slot);
             resident[slot] = value;
             weights[slot] = estimatedBytes;
             if (residentBytes > Long.MAX_VALUE - estimatedBytes) lruScanRequired = true;
@@ -554,6 +590,7 @@ public final class M3ObjectResidency<T> {
         return victim;
     }
 
+    //FLLDCIM: MRL - residency donor semantics P2 group A, crate m3-doop-reuse-20261030 (m3-doop-callback-error-20261030, donor blob 45caaf707b47): an Error from encode/write retains the resident
     private void evict(int slot) {
         State before = stateAt(slot);
         if (before != State.RESIDENT || active[slot] != 0 || borrowers[slot] != 0) return;
@@ -562,8 +599,14 @@ public final class M3ObjectResidency<T> {
             setState(slot, State.SWAPPING);
             try {
                 @SuppressWarnings("unchecked") T typed = (T) value;
-                byte[] snapshot = Objects.requireNonNull(codec.encode(typed), "encoded snapshot");
-                spill.write(slot, snapshot);
+                try {
+                    byte[] snapshot = Objects.requireNonNull(codec.encode(typed), "encoded snapshot");
+                    spill.write(slot, snapshot);
+                } catch (Error failure) {
+                    // Encode/write failed before detachment: retain the original resident.
+                    setState(slot, before);
+                    throw failure;
+                }
                 resident[slot] = null;
                 unlinkLru(slot);
                 residentBytes -= weights[slot];
