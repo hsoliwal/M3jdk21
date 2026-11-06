@@ -36,6 +36,38 @@ final class M3ColdFileImage {
     }
   }
 
+  /** Full qualification is checked before the legacy generation/structure admission. */
+  static long[] validateQualified(M3MappedObject image, IntToLongFunction languages,
+      java.util.Map<Integer, String> senderSeals,
+      java.util.function.IntFunction<String> receiverSeal) throws IOException {
+    java.util.Objects.requireNonNull(languages, "languages");
+    java.util.Objects.requireNonNull(receiverSeal, "receiverSeal");
+    java.util.Map<Integer, String> pins = java.util.Map.copyOf(senderSeals);
+    try {
+      ByteBuffer data = image.bytes(0, image.size()).order(ByteOrder.BIG_ENDIAN);
+      if (data.remaining() < HEADER_BYTES || data.getLong(0) != MAGIC || data.getInt(8) != FORMAT)
+        throw new IOException("invalid qualified SMFILE01 header");
+      int count = data.getInt(28);
+      if (count < 0 || count > 65536 || count != pins.size()
+          || (long) HEADER_BYTES + count * 12L > data.remaining())
+        throw new IOException("UnicodeX qualification language coverage mismatch");
+      int previous = -1;
+      for (int i = 0; i < count; i++) {
+        int language = data.getInt(HEADER_BYTES + i * 12);
+        String sender = pins.get(language);
+        if (language < 0 || language > 65535 || language <= previous
+            || sender == null || !sender.matches("[0-9a-f]{64}")
+            || !sender.equals(receiverSeal.apply(language)))
+          throw new IOException("UnicodeX qualification mismatch for language " + language);
+        previous = language;
+      }
+    } catch (RuntimeException malformed) {
+      throw new IOException("malformed qualified SMFILE01 image", malformed);
+    }
+    return validate(image, languages);
+  }
+
+
   private static long mix(long left, long right) {
     long z = left ^ Long.rotateLeft(right, 29) ^ 0x9e3779b97f4a7c15L;
     z = (z ^ (z >>> 30)) * 0xbf58476d1ce4e5b9L;

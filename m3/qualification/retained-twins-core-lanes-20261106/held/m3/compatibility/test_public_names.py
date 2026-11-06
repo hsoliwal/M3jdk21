@@ -1,0 +1,317 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+"""Source-shape and real-git regression tests; no JDK API transformation."""
+import importlib.util
+from pathlib import Path
+import subprocess
+import tempfile
+import unittest
+from unittest import mock
+
+SCRIPT = Path(__file__).with_name("check_public_names.py")
+SPEC = importlib.util.spec_from_file_location("public_names", SCRIPT)
+GATE = importlib.util.module_from_spec(SPEC)
+import sys
+sys.modules[SPEC.name] = GATE
+SPEC.loader.exec_module(GATE)
+
+
+class PublicNamesTest(unittest.TestCase):
+    def issue(self, path, source=None, status="A"):
+        return GATE.problems(GATE.Change(status, path), source)
+
+    def test_original_jdk_type_is_allowed(self):
+        self.assertFalse(self.issue("src/java.base/share/classes/java/util/CollectionViews.java",
+                                   "package java.util; public final class CollectionViews {}"))
+
+    def test_new_m3_public_type_refused(self):
+        self.assertTrue(self.issue("src/java.base/share/classes/java/util/M3HashMap.java",
+                                   "package java.util; public class M3HashMap {}"))
+
+    def test_internal_m3_owner_allowed(self):
+        self.assertFalse(self.issue("src/java.base/share/classes/jdk/internal/mindex/M3BitLane.java",
+                                   "package jdk.internal.mindex; final class M3BitLane {}"))
+
+    def test_new_date_stamped_workflow_refused(self):
+        self.assertTrue(self.issue(".github/workflows/m3-collection-20261022.yml"))
+
+    def test_versioned_passive_evidence_is_not_public_api(self):
+        self.assertFalse(self.issue(
+            "m3/qualification/collection-convergence-20261024/REGEX_COMPACT_METADATA_RECEIPT.json"))
+        self.assertFalse(self.issue(
+            "m3/qualification/indexed-sort-image-20261026/SOURCE_RECEIPT.tsv"))
+        self.assertFalse(self.issue(
+            "m3/m3-import/current-full-borrow/string-target-successor-v4.tsv"))
+
+    def test_recipe_and_code_in_evidence_directory_still_refused(self):
+        self.assertTrue(self.issue(
+            "m3/qualification/collection-convergence-20261024/DangerousRecipe.java"))
+        self.assertTrue(self.issue(
+            "m3/qualification/collection-convergence-20261024/release.sh"))
+        self.assertTrue(self.issue(
+            ".github/workflows/m3-collection-20261024.yml"))
+        self.assertTrue(self.issue(
+            "m3/docs/name-mapping.d/new-20261024.json"))
+
+    def test_new_experiment_version_refused(self):
+        self.assertTrue(self.issue("m3/runtime-integration/collection-views-v7/README-v2.md"))
+
+    def test_nested_date_stamped_experiment_directory_refused(self):
+        self.assertTrue(self.issue("m3/collections/qualification/sort-20261022/README.md"))
+
+    def test_other_jdk_public_module_m3_type_refused(self):
+        self.assertTrue(self.issue("src/java.desktop/share/classes/java/awt/M3Window.java",
+                                   "package java.awt; public class M3Window {}"))
+
+    def test_stable_workflow_allowed(self):
+        self.assertFalse(self.issue(".github/workflows/public-api-naming.yml"))
+
+    def test_new_mapping_fragment_refused(self):
+        self.assertTrue(self.issue("m3/docs/name-mapping.d/experimental-collections.json"))
+
+    def test_grandfathered_existing_path_may_be_modified(self):
+        self.assertFalse(self.issue("m3/docs/name-mapping.d/experimental-20261022.json", status="M"))
+
+    def test_java_package_disagreement_refused(self):
+        self.assertTrue(self.issue("src/java.base/share/classes/java/util/CollectionViews.java",
+                                   "package wrong; public class CollectionViews {}"))
+
+    def test_jtreg_type_mismatch_refused(self):
+        self.assertTrue(self.issue("test/jdk/java/util/CollectionViews/CollectionViewsTest.java",
+                                   "public class OldTest {}"))
+
+    def test_stable_jtreg_test_allowed(self):
+        self.assertFalse(self.issue("test/jdk/java/util/CollectionViews/CollectionViewsTest.java",
+                                    "public class CollectionViewsTest {}"))
+
+    def test_public_nested_m3_jdk_type_refused(self):
+        self.assertTrue(self.issue("src/java.base/share/classes/java/util/CollectionViews.java",
+                                   "package java.util; public class CollectionViews {public class M3Foo {}}"))
+
+    def test_existing_public_jdk_types_not_renamed(self):
+        self.assertFalse(self.issue("src/java.base/share/classes/java/util/M3Existing.java", status="M"))
+
+    def test_new_m3_recipe_crate_refused(self):
+        self.assertTrue(self.issue("m3-openrewrite-recipes/crates/catalogue/pom.xml"))
+
+    def test_historical_product_recipe_source_mutation_refused(self):
+        self.assertTrue(self.issue(
+            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/OldRecipe.java", status="M"))
+
+    def test_new_openrewrite_java_recipe_refused(self):
+        self.assertTrue(self.issue(
+            "m3/collections/src/main/java/jdk/m3/rewrite/OptimizeRecipe.java",
+            "class OptimizeRecipe {}"))
+
+    def test_new_openrewrite_yaml_descriptor_refused(self):
+        self.assertTrue(self.issue(
+            "m3/collections/src/main/resources/META-INF/rewrite/optimize.yml"))
+
+    def test_native_and_jdk_implementation_results_allowed(self):
+        self.assertFalse(self.issue(
+            "src/java.base/share/classes/jdk/internal/mindex/M3IndexLane.java",
+            "package jdk.internal.mindex; class M3IndexLane {}"))
+        self.assertFalse(self.issue("src/java.base/share/native/libjava/M3IndexLane.c"))
+
+    def test_product_test_and_qualification_results_allowed(self):
+        self.assertFalse(self.issue(
+            "test/jdk/java/util/CollectionViews/FilteredOwnerMembershipTest.java",
+            "class FilteredOwnerMembershipTest {}"))
+        self.assertFalse(self.issue("m3/compatibility/collection-views/README.md"))
+
+    def test_reviewed_immutable_qualification_receipts_are_data_not_public_names(self):
+        self.assertEqual(len(GATE.QUALIFICATION_RECEIPTS), 17)
+        for receipt in sorted(GATE.QUALIFICATION_RECEIPTS):
+            path = GATE.QUALIFICATION_RECEIPT_ROOT + receipt
+            with self.subTest(path=path):
+                self.assertTrue(GATE.is_reviewed_historical_data_path(path))
+                self.assertFalse(self.issue(path))
+        self.assertFalse(self.issue(GATE.REVIEWED_FULL_BORROW_OBSERVATION))
+
+    def test_unreviewed_evidence_dates_and_versions_remain_refused(self):
+        attempted = (
+            "m3/qualification/collection-convergence-20261024/NEW_RECEIPT.json",
+            "m3/qualification/collection-convergence-20261024/RECEIPT-v2.json",
+            "m3/qualification/collection-convergence-20261025/RECEIPT.json",
+            "m3/qualification/experiment-20261024/RECEIPT.json",
+            "m3/m3-import/current-full-borrow/string-source-observation-v4.tsv",
+            ".github/workflows/public-api-naming-20261026.yml",
+            "m3/collections/qualification/sort-20261026/README.md",
+        )
+        for path in attempted:
+            with self.subTest(path=path):
+                self.assertFalse(GATE.is_reviewed_historical_data_path(path))
+                self.assertIn("unstable date/version identifier", self.issue(path))
+
+    def test_receipt_exception_does_not_admit_transformations_or_public_types(self):
+        self.assertTrue(self.issue(
+            "m3-openrewrite-recipes/recipes/dated-20261026/RECEIPT.json"))
+        self.assertTrue(self.issue(
+            "src/java.base/share/classes/java/util/M3Refactor20261026.java",
+            "package java.util; public class M3Refactor20261026 {}"))
+        self.assertTrue(self.issue(
+            "m3/qualification/collection-convergence-20261024/Receipt.java"))
+        self.assertFalse(self.issue(
+            GATE.QUALIFICATION_RECEIPT_ROOT + "RECEIPT.json", status="M"))
+
+
+    def test_real_git_diff_detects_additions_and_renames(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+            git("init", "-q")
+            git("config", "user.name", "M3 Tests")
+            git("config", "user.email", "tests@example.invalid")
+            (root / "README.md").write_text("baseline\n", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "baseline")
+            base = git("rev-parse", "HEAD")
+            (root / "README.md").write_text("update\n", encoding="utf-8")
+            path = root / "test/jdk/java/util/CollectionViews"
+            path.mkdir(parents=True)
+            (path / "CollectionViewsTest.java").write_text(
+                "class CollectionViewsTest {}\n", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "add stable test")
+            head = git("rev-parse", "HEAD")
+            delta, failures = GATE.check(root, base, head)
+            self.assertEqual(len(delta), 2)
+            self.assertFalse(failures)
+            self.assertEqual(GATE.main(["--base", base, "--head", head, "--repo", str(root)]), 0)
+            self.assertEqual(GATE.main(["--base", "HEAD", "--head", head, "--repo", str(root)]), 2)
+
+
+    def test_new_donor_imports_in_jdk_owner_refused(self):
+        path = "src/java.base/share/classes/java/util/CollectionViews.java"
+        self.assertTrue(self.issue(
+            path, "package java.util;\nimport jdk.internal.m3.indexstring.MIndexString;\n"
+                  "class CollectionViews {}"))
+        self.assertTrue(self.issue(
+            path, "package java.util;\nimport org.eclipse.collections.api.list.MutableList;\n"
+                  "class CollectionViews {}"))
+
+    def test_fully_qualified_donor_reference_refused(self):
+        path = "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java"
+        self.assertTrue(self.issue(
+            path, "package jdk.internal.mindex; class M3Bits {"
+                  " Object o = com.google.common.collect.ImmutableList.of(); }"))
+        self.assertTrue(self.issue(
+            path, "import org.apache.commons.collections4.Bag; class M3Bits {}"))
+
+    def test_lexical_guard_ignores_comments_and_text_blocks(self):
+        path = "src/java.base/share/classes/java/util/CollectionViews.java"
+        program = ('package java.util;\n// import jdk.internal.m3.X;\n'
+                   '/* org.eclipse.collections.Y */\n'
+                   'class CollectionViews { String s = """\n'
+                   'com.google.common.collect.ImmutableList\n"""; }\n')
+        self.assertFalse(self.issue(path, program))
+
+    def test_old_only_reference_grandfathered_and_new_reference_rejected(self):
+        path = "src/java.base/share/classes/java/util/CollectionViews.java"
+        old = "package java.util;\nimport jdk.m3.text.M3String;\nclass CollectionViews {}\n"
+        self.assertFalse(GATE.problems(GATE.Change("M", path), old, old))
+        self.assertTrue(GATE.problems(
+            GATE.Change("M", path), old + "\nimport org.springframework.context.X;", old))
+
+    def test_ordinary_jdk_names_and_m3_proving_ground_unaffected(self):
+        self.assertFalse(self.issue(
+            "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/X.java",
+            "package com.sun.org.apache.xalan.internal; class X {}"))
+        self.assertFalse(self.issue(
+            "m3/core/src/jdk/m3/text/M3String.java",
+            "package jdk.m3.text; class M3String {}"))
+
+    def test_real_git_modified_jdk_source_rejects_donor_name(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+            git("init", "-q")
+            git("config", "user.name", "M3 Tests")
+            git("config", "user.email", "tests@example.invalid")
+            path = root / "src/java.base/share/classes/java/util/Foo.java"
+            path.parent.mkdir(parents=True)
+            path.write_text("package java.util; class Foo {}\n", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "baseline")
+            base = git("rev-parse", "HEAD")
+            path.write_text(
+                "package java.util;\nimport org.apache.commons.collections4.Bag;\n"
+                "class Foo {}\n", encoding="utf-8")
+            git("add", ".")
+            git("commit", "-qm", "import external donor")
+            head = git("rev-parse", "HEAD")
+            changed, failures = GATE.check(root, base, head)
+            self.assertEqual(len(changed), 1)
+            self.assertEqual(len(failures), 1)
+            self.assertIn("org.apache.commons.collections4.Bag", failures[0][1])
+
+
+    def test_historical_classver_paths_remain_refused_without_verified_evidence(self):
+        sealed = "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log"
+        self.assertIn("unstable date/version identifier", self.issue(sealed))
+        self.assertIn("unstable date/version identifier", self.issue(sealed, status="R"))
+        self.assertIn("unstable date/version identifier",
+                      self.issue("m3/migration/intake-20261005/unlisted.log"))
+
+    def test_verified_closed_classver_skips_only_listed_added_history(self):
+        known = "m3/migration/intake-20261005/current-752-ci/a3-producer/chain/02-compile.stdout.log"
+        unknown = "m3/migration/intake-20261005/forged.log"
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+            git("init", "-q")
+            git("config", "user.email", "classver@example.invalid")
+            git("config", "user.name", "M3 Evidence Gate Test")
+            (root / "README.md").write_text("base\n")
+            git("add", ".")
+            git("commit", "-qm", "base")
+            base = git("rev-parse", "HEAD")
+            for relative in (known, unknown):
+                candidate = root / relative
+                candidate.parent.mkdir(parents=True, exist_ok=True)
+                candidate.write_text("historic fixture\n")
+            git("add", ".")
+            git("commit", "-qm", "candidate")
+            head = git("rev-parse", "HEAD")
+            with mock.patch.object(GATE, "_sealed_classver_paths",
+                                   return_value=frozenset({known})) as proof:
+                changed, failures = GATE.check(root, base, head)
+            self.assertEqual(2, len(changed))
+            self.assertEqual([(unknown, "unstable date/version identifier")], failures)
+            proof.assert_called_once_with(root, head)
+
+    def test_missing_classver_proof_refuses_all_dated_evidence(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=root).decode().strip()
+            git("init", "-q")
+            git("config", "user.email", "classver@example.invalid")
+            git("config", "user.name", "M3 Evidence Gate Test")
+            (root / "README.md").write_text("base\n")
+            git("add", ".")
+            git("commit", "-qm", "base")
+            base = git("rev-parse", "HEAD")
+            name = "m3/migration/intake-20261005/forged.log"
+            candidate = root / name
+            candidate.parent.mkdir(parents=True, exist_ok=True)
+            candidate.write_text("forged\n")
+            git("add", ".")
+            git("commit", "-qm", "candidate")
+            head = git("rev-parse", "HEAD")
+            with mock.patch.object(GATE, "_sealed_classver_paths",
+                                   side_effect=ValueError("closed ClassVer evidence refused")):
+                with self.assertRaisesRegex(ValueError, "closed ClassVer evidence refused"):
+                    GATE.check(root, base, head)
+
+    def test_unlisted_dated_source_still_refuses_even_with_classver_evidence(self):
+        self.assertIn("unstable date/version identifier",
+                      self.issue(".github/workflows/m3-new-20261029.yml"))
+        self.assertTrue(self.issue("m3/qualification/fake-20261029/UnknownRecipe.java"))
+        self.assertTrue(self.issue("m3/docs/name-mapping.d/unlisted-20261029.json"))
+
+if __name__ == "__main__":
+    unittest.main()

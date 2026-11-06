@@ -195,6 +195,32 @@ public final class MFileStreams {
     public static long transferRanges(MFileContent source, OutputStream destination,
             long[] offsets, long[] lengths, long maxEnd, M3FsProgress progress)
             throws IOException {
+        return transferRangesChecked(source, destination, offsets, lengths,
+                maxEnd, null, progress);
+    }
+
+    /**
+     * Reuse a caller-owned, exclusive 1..1 MiB scratch array over many serial
+     * provider range transfers. Never retained, freed or separately read.
+     * Callers must prevent concurrent reuse and buffer mutation by observers.
+     * Provider/shadow progress, destination borrowing, and failure contracts
+     * remain exactly those of the original transferRanges method.
+     */
+    public static long transferRanges(MFileContent source, OutputStream destination,
+            long[] offsets, long[] lengths, long maxEnd, byte[] scratch,
+            M3FsProgress progress) throws IOException {
+        Objects.requireNonNull(scratch, "scratch");
+        if (scratch.length < 1 || scratch.length > (1 << 20)) {
+            throw new IllegalArgumentException("scratch length must be 1..1048576");
+        }
+        return transferRangesChecked(source, destination, offsets, lengths,
+                maxEnd, scratch, progress);
+    }
+
+    /** One original range-transfer behavioral atom for both public entrypoints. */
+    private static long transferRangesChecked(MFileContent source, OutputStream destination,
+            long[] offsets, long[] lengths, long maxEnd, byte[] borrowedScratch,
+            M3FsProgress progress) throws IOException {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(destination, "destination");
         Objects.requireNonNull(offsets, "offsets");
@@ -216,7 +242,7 @@ public final class MFileStreams {
         }
         if (selected.length == 0) return 0;
         progress.checkCanceled();
-        byte[] scratch = new byte[8192];
+        byte[] scratch = borrowedScratch == null ? new byte[8192] : borrowedScratch;
         long sourcePosition = 0;
         long written = 0;
         try (Input input = source.openInputStream(progress)) {

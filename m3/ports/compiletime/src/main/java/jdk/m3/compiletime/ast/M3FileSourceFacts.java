@@ -24,6 +24,19 @@ public record M3FileSourceFacts(
         String providerId,
         int schemaVersion,
         String phase) {
+    /** The source URI differs from the previous snapshot. */
+    public static final int SOURCE_URI_CHANGED = 1;
+    /** The source SHA-256 or UTF-16 length differs from the previous snapshot. */
+    public static final int SOURCE_CONTENT_CHANGED = 1 << 1;
+    /** The caller-supplied ordered compilation-context identity differs. */
+    public static final int COMPILATION_CONTEXT_CHANGED = 1 << 2;
+    /** The compiler/consumer projection provider differs. */
+    public static final int PROVIDER_CHANGED = 1 << 3;
+    /** The projection schema version differs. */
+    public static final int SCHEMA_CHANGED = 1 << 4;
+    /** The compiler phase differs. */
+    public static final int PHASE_CHANGED = 1 << 5;
+
     private static final byte[] SOURCE_DOMAIN =
             "M3_FILE_SOURCE_UTF16_V1".getBytes(StandardCharsets.US_ASCII);
     private static final byte[] CONTEXT_DOMAIN =
@@ -37,6 +50,32 @@ public record M3FileSourceFacts(
         providerId = requireText(providerId, "providerId", 1_024);
         if (schemaVersion < 1) throw new IllegalArgumentException("schemaVersion must be positive");
         phase = requireText(phase, "phase", 64);
+    }
+
+    /**
+     * Report every stored identity dimension that differs from a previous snapshot.
+     *
+     * <p>Zero means equality of all record components, not ABI or semantic equivalence.
+     * Source changes are not classified as constant, signature, body or comment changes.
+     * A matching context digest cannot establish that its caller captured every input.
+     * This method reads only the immutable facts; it does not inspect files or build outputs.</p>
+     *
+     * @param previous the previous complete facts value
+     * @return the bitwise OR of all applicable {@code *_CHANGED} constants, or zero
+     * @throws NullPointerException if {@code previous} is null
+     */
+    public int changesFrom(M3FileSourceFacts previous) {
+        Objects.requireNonNull(previous, "previous");
+        int changes = 0;
+        if (!sourceUri.equals(previous.sourceUri)) changes |= SOURCE_URI_CHANGED;
+        if (!sourceSha256.equals(previous.sourceSha256) || utf16Length != previous.utf16Length) {
+            changes |= SOURCE_CONTENT_CHANGED;
+        }
+        if (!contextSha256.equals(previous.contextSha256)) changes |= COMPILATION_CONTEXT_CHANGED;
+        if (!providerId.equals(previous.providerId)) changes |= PROVIDER_CHANGED;
+        if (schemaVersion != previous.schemaVersion) changes |= SCHEMA_CHANGED;
+        if (!phase.equals(previous.phase)) changes |= PHASE_CHANGED;
+        return changes;
     }
 
     /** Capture metadata from a stable source snapshot already supplied to the compiler. */

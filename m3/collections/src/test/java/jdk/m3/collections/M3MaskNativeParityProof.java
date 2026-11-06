@@ -3,6 +3,8 @@ import java.util.Arrays;
 import java.util.Random;
 /** Actual checked JNI parity using the current native symbol and unchanged C source. */
 public final class M3MaskNativeParityProof {
+    /** Preserve the existing implicit public constructor in named-module compilation. */
+    public M3MaskNativeParityProof() { }
     public static void main(String[] args) {
         if (!M3IndexMaskCompactor.nativeAvailable()) throw new AssertionError("native library unavailable");
         Random random=new Random(0x734d43544cL);

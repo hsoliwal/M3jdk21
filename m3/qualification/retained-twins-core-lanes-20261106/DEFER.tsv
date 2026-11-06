@@ -1,0 +1,2 @@
+path_regex	verdict	reason
+^m3/ports/collections/|/jdk/m3/(util|ds)/	DEFERRED_TO_63	CONSOLIDATE_PORT_OWNERS v1 in flight (session com-synexia-63 moves the jdk.m3.util / jdk.m3.ds owners of m3/ports/collections into m3/collections); not restored, 3-wayed or edited here
