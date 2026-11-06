@@ -97,3 +97,14 @@ test tree and its own `GATES.tsv` rows.
 | `src/test/java/jdk/m3/nlp/M3ScopedNgramsDifferentialDump.java` | reflective dump driver of the differential gate (not a test) |
 | `recipe/relocate.py`, `RELOCATION_MAP.tsv`, `PROVENANCE.tsv` | the relocation recipe, its mapping table and its pins |
 | `recipe/differential.sh`, `verify.sh`, `GATES.tsv`, `RECIPE_MEMORY.tsv` | gates and their record |
+
+## Relocation leaves after the first
+
+Each further atom of the plan lands as its own leaf directory `recipe/<leaf>-YYYYMMDD/`, as the leaves of `m3/arrays`
+do: `relocate.py` (recipe v2, pinned to its donor commit by the `REPO` row of the leaf's `RELOCATION_MAP.tsv`; the
+first leaf's `recipe/relocate.py` v1, `RELOCATION_MAP.tsv` and `PROVENANCE.tsv` stay as they are), `RELOCATION_MAP.tsv`
+(`REPO`, `FILE`, `PACKAGE`, `TYPE`, `EXTERNAL`, `LITERAL`, `SKIP` and `NEC` rows), `PROVENANCE.tsv` (with
+`body_match_renamed`), `differential.sh`, `verify.sh`, `GATES.tsv`, `RECIPE_MEMORY.tsv` and a `README.md` naming the
+owner, the donor, the gates and the open items. The module's `verify.sh` runs every leaf's `verify.sh` after its own
+gates, on the same package. A leaf touches the module's own files only through this section and that loop, which are
+the same bytes in every leaf, so leaves branched from the same master merge in any order.
