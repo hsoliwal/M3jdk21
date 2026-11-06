@@ -31,6 +31,7 @@ public final class M3Flat3Map<K, V> {
     private static final int INLINE_CAPACITY = 3;
     private static final int INITIAL_HASH_CAPACITY = 8;
     private static final long[] EMPTY_STATES = new long[0];
+    private static final String NOT_LIVE = "M3Flat3Map: slot is not live";
 
     /** Storage lane {@code keyLane}: no per-entry objects are retained. */
     private Object[] keyLane = new Object[0];
@@ -88,23 +89,28 @@ public final class M3Flat3Map<K, V> {
         int slot = findSlot(key);
         if (slot < 0) return null;
         V prior = valueAt(slot);
-        if (hashed) {
-            keyLane[slot] = null;
-            valueLane[slot] = null;
-            setState(stateMaskWords, slot, PACKED_DELETED);
-            size--;
-            if (size == 0) reset();
-        } else {
-            int moved = size - slot - 1;
-            if (moved > 0) {
-                System.arraycopy(keyLane, slot + 1, keyLane, slot, moved);
-                System.arraycopy(valueLane, slot + 1, valueLane, slot, moved);
-            }
-            --size;
-            keyLane[size] = null;
-            valueLane[size] = null;
-        }
+        if (hashed) removeHashed(slot); else removeInline(slot);
         return prior;
+    }
+
+    //FLLDCIM: MRL - L075 method split: remove(Object) and removeSlot(int) share the two removal bodies
+    private void removeHashed(int slot) {
+        keyLane[slot] = null;
+        valueLane[slot] = null;
+        setState(stateMaskWords, slot, PACKED_DELETED);
+        size--;
+        if (size == 0) reset();
+    }
+
+    private void removeInline(int slot) {
+        int moved = size - slot - 1;
+        if (moved > 0) {
+            System.arraycopy(keyLane, slot + 1, keyLane, slot, moved);
+            System.arraycopy(valueLane, slot + 1, valueLane, slot, moved);
+        }
+        --size;
+        keyLane[size] = null;
+        valueLane[size] = null;
     }
 
     public boolean containsKey(Object key) { return findSlot(key) >= 0; }
@@ -127,6 +133,68 @@ public final class M3Flat3Map<K, V> {
     public boolean isEmpty() { return size == 0; }
 
     public void clear() { reset(); }
+
+    //FLLDCIM: MRL - L075 single owner: slot cursor for the Commons facade jdk.m3.collections.apache.M3Flat3Map
+    /**
+     * Returns the first live slot at or after {@code from}, or -1 when there is none. Ascending slot
+     * order is this map's iteration order: insertion order while inline (a removal shifts the later
+     * slots down), table order once hashed. A cursor stays valid across {@link #setSlotValue} and
+     * {@link #removeSlot}; any other structural change ends it.
+     */
+    public int nextSlot(int from) {
+        int end = hashed ? keyLane.length : size;
+        for (int slot = Math.max(from, 0); slot < end; slot++) {
+            if (!hashed || state(stateMaskWords, slot) == PACKED_USED) return slot;
+        }
+        return -1;
+    }
+
+    /** Returns the key of live slot {@code slot}; IllegalStateException when the slot is not live. */
+    @SuppressWarnings("unchecked")
+    public K slotKey(int slot) { return (K) keyLane[liveSlot(slot)]; }
+
+    /** Returns the value of live slot {@code slot}; IllegalStateException when the slot is not live. */
+    public V slotValue(int slot) { return valueAt(liveSlot(slot)); }
+
+    /** Replaces the value of live slot {@code slot} without a structural change; returns the old value. */
+    public V setSlotValue(int slot, V value) {
+        V previous = valueAt(liveSlot(slot));
+        valueLane[slot] = value;
+        return previous;
+    }
+
+    /**
+     * Removes the mapping of live slot {@code slot} without a key lookup and returns the slot a cursor
+     * resumes from: the same slot while inline (the later slots shift down), the next one once hashed.
+     */
+    public int removeSlot(int slot) {
+        if (!hashed) {
+            removeInline(liveSlot(slot));
+            return slot;
+        }
+        removeHashed(liveSlot(slot));
+        return slot + 1;
+    }
+
+    /** Returns an independent map with the same mappings, regime and slot (iteration) order. */
+    public M3Flat3Map<K, V> copy() {
+        M3Flat3Map<K, V> copy = new M3Flat3Map<>();
+        copy.keyLane = keyLane.clone();
+        copy.valueLane = valueLane.clone();
+        copy.stateMaskWords = stateMaskWords.clone();
+        copy.size = size;
+        copy.occupied = occupied;
+        copy.hashed = hashed;
+        return copy;
+    }
+
+    private int liveSlot(int slot) {
+        if (slot < 0 || slot >= (hashed ? keyLane.length : size)
+                || hashed && state(stateMaskWords, slot) != PACKED_USED) {
+            throw new IllegalStateException(NOT_LIVE);
+        }
+        return slot;
+    }
 
     private void reset() {
         keyLane = M3SlotArrays.EMPTY_OBJECTS;
