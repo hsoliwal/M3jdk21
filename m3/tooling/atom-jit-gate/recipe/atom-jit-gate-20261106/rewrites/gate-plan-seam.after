@@ -1,0 +1,26 @@
+    private static final String NONE = "-";
+
+    /** Source lane of one planned atom: Java only, or crossing the JNI boundary. */
+    public enum SourceLane { JAVA, JNI_NATIVE }
+
+    /** One planned atom: logical source path, atom identity, sealed before-envelope root and source lane. */
+    public record Target(String logicalPath, String atomId, String beforeEnvelopeRoot, SourceLane lane) {
+        public Target {
+            logicalPath = checkedText(logicalPath, "logicalPath");
+            atomId = checkedText(atomId, "atomId");
+            beforeEnvelopeRoot = sha(beforeEnvelopeRoot, "beforeEnvelopeRoot");
+            lane = Objects.requireNonNull(lane, "lane");
+        }
+    }
+
+    /** One canonical serial work order: its sealed root and its targets in execution order. */
+    public record Plan(String root, List<Target> targets) {
+        public Plan {
+            root = sha(root, "plan root");
+            targets = List.copyOf(Objects.requireNonNull(targets, "targets"));
+            if (targets.isEmpty()
+                    || targets.stream().map(Target::atomId).distinct().count() != targets.size()) {
+                throw new IllegalArgumentException("empty or duplicate serial atom plan");
+            }
+        }
+    }

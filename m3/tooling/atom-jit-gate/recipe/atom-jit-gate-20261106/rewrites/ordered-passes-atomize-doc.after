@@ -1,0 +1,2 @@
+    /** First phase: the M3 atom census over the exact bytes (javac parse only), with no byte rewriting. */
+    public static Atomized atomize(String logicalPath, byte[] source, Path patternRules) {
