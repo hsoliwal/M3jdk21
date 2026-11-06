@@ -178,7 +178,7 @@ final class M3ObjectResidencyTest {
                 "M3ObjectResidencyTest$AnnotatedProjection.class")) {
             assertNotNull(stream);
             String bytecode = new String(stream.readAllBytes(), StandardCharsets.ISO_8859_1);
-            assertTrue(bytecode.contains("Lcom/m3/collections/M3Residency;"),
+            assertTrue(bytecode.contains("Ljdk/m3/collections/M3Residency;"),
                     "class file retains compile-time metadata");
         }
     }
