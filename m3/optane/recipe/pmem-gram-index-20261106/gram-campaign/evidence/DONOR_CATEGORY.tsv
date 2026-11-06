@@ -1,0 +1,9 @@
+category	donor	review	decision	contract_gate	code_copy
+first-hit binary search	LeetCode 28 exact first occurrence	https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/	REUSE_EXISTING_PMEM_KMP	First file-local byte offset, not Java String UTF-16 index	NO
+set intersection	LeetCode 349 Intersection of Two Arrays	https://leetcode.com/problems/intersection-of-two-arrays/	REFERENCE_ONLY	Exact original-file membership and sorted index identity, not set output	NO
+count overlaps	HackerRank Find a String	https://www.hackerrank.com/challenges/find-a-string/problem	REJECT_AS_DROP_IN	Overlapping occurrence count differs from first-hit source-bound contract	NO
+hash/count lookup	HackerRank Sparse Arrays	https://www.hackerrank.com/challenges/sparse-arrays/problem	REFERENCE_ONLY	Exact string count cannot authorize source replacement or another model call	NO
+KMP pattern-search	GeeksforGeeks KMP	https://www.geeksforgeeks.org/dsa/kmp-algorithm-for-pattern-searching/	REUSE_EXISTING_PMEM_KMP	No new JNI symbol/foreign KMP implementation; original C17/JNI and FILE KMP remain owned	NO
+reviewed work-order	Synexia PmemCatalogueWorkOrders	https://github.com/hsoliwal/com.synexia/pull/15318	PINNED_FIRST_PARTY_OWNER	Every selected source reviewed with quality, donor decision, contract and recipe before search	NO
+source-index filter	Synexia PmemCorpusGramIndex	https://github.com/hsoliwal/com.synexia/pull/16531	PINNED_FIRST_PARTY_OWNER	Only complete exact search evidence admits file tasks; candidate set is a necessary signal	NO
+GitHub upstream reference	TheAlgorithms/Java	https://github.com/TheAlgorithms/Java	REVIEW_ONLY	MIT code cannot be borrowed without exact source pin and independent rights/contract review	NO
