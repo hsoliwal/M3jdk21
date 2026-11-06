@@ -67,6 +67,10 @@ immutable-pools-recipe files and this directory; no `java.base` file.
 `bash m3/qualification/progress-monitor-unify-20261106/verify.sh <donor m3scale clone> <donor rev> <scratch>`
 runs the recipe check, both module builds, the families `verify.sh` (with `DEP_CP`) and the search build in order
 (`JAVA_HOME` = JDK 21, `MAVEN_REPO_LOCAL` optional).
+Since the module move of #2580 (`m3/ports/file` -> `m3/file`, `com.m3:m3-file`) the file module is one variable
+(`FILE_MODULE`, jar name read from its `pom.xml`), its tests run as a separate baseline-compared step, and the recipe
+check runs at the commit that applied it (`APPLIED`, its targets materialized under the scratch directory): later
+landings edit those targets on purpose (GATES.tsv gates 16-18, RECIPE_MEMORY.tsv).
 
 ## Recorded, not done
 

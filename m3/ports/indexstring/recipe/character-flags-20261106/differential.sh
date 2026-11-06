@@ -12,7 +12,8 @@
 #     labels over the 1,024 valid values, 1,000,000 seeded random pairs and 100,000 seeded random texts through both
 #     classes; the dumps must be byte-identical.
 # (c) of-only dumps (of/labels sections) of donor, relocated and, when present in the checkout, the pre-combine sibling
-#     jdk.m3.file.M3CharacterFlags (m3/file) must be byte-identical: the sibling is the same lineage minus combine.
+#     jdk.m3.file.M3CharacterFlags must be byte-identical: the sibling is the same lineage minus combine. Its source is
+#     found from SIBLING_CLASS through git ls-files, so a module move (m3/ports/file -> m3/file, #2580) needs no edit.
 # Prints DIFFERENTIAL PASS|FAIL with the sha256 digests of every side. The donor package and type names come from
 # RELOCATION_MAP.tsv next to this script, so no file in the naming scope names a donor package literally.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir>   (JAVA_HOME = JDK 21, PYTHON optional; run after mvn package)
@@ -27,8 +28,10 @@ mkdir -p "$3/src" "$3/classes" "$3/sibling-classes"
 SCRATCH=$(winpath "$3")
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
-SIBLING="$ROOT/m3/file/src/main/java/jdk/m3/file/M3CharacterFlags.java"
 SIBLING_CLASS=jdk.m3.file.M3CharacterFlags
+SIBLING_PATH=$(git -C "$ROOT" ls-files -- "*/src/main/java/${SIBLING_CLASS//.//}.java")
+SIBLING="$ROOT/${SIBLING_PATH:-src/main/java/${SIBLING_CLASS//.//}.java (not tracked)}"
+case "$SIBLING_PATH" in *$'\n'*) echo "DIFFERENTIAL FAIL: $SIBLING_CLASS is tracked more than once: $SIBLING_PATH"; exit 2 ;; esac
 DUMP=M3IndexCharacterFlagsDump
 donor_package=$(awk -F'\t' '$1=="PACKAGE" {print $2; exit}' "$MAP")
 target_package=$(awk -F'\t' '$1=="PACKAGE" {print $3; exit}' "$MAP")
