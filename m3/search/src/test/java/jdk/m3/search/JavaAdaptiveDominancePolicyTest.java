@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/JavaAdaptiveDominancePolicyTest.java (blob 87652873534a) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/JavaAdaptiveDominancePolicyTest.java (blob 87652873534a) by M3_SEARCH_RELOCATE v1.
 package jdk.m3.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

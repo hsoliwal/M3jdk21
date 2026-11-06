@@ -1,6 +1,6 @@
 """closure.py : LEAF_CLOSURE for the m3-fast-search -> M3jdk21 m3/search leaf.
 Seeds = the pure-Java kernels; a main class joins only if every module class it names is in the set and its only
-non-JDK import is com.synexia.job.IProgressMonitor (mapped to jdk.m3.collections.M3ProgressMonitor). A test joins
+non-JDK import is jdk.internal.m3.job.IProgressMonitor (mapped to jdk.m3.collections.M3ProgressMonitor). A test joins
 when the same holds for it (JUnit 5 allowed). Prints the main set, the test set and why each excluded file is out."""
 import re
 from pathlib import Path
@@ -14,7 +14,7 @@ ALLOWED = re.compile(r"^(java\.|javax\.xml|org\.w3c|org\.xml|org\.junit\.jupiter
 
 def deps(src):
     imports = [m.group(2) for m in re.finditer(r"^import (static )?([\w.]+?)(\.\*)?;", src, re.M)]
-    bad = [i for i in imports if not ALLOWED.match(i) and not i.startswith("com.synexia.m3.search")]
+    bad = [i for i in imports if not ALLOWED.match(i) and not i.startswith("jdk.internal.m3.search")]
     body = re.sub(r"//[^\n]*|/\*.*?\*/|\"(?:\\.|[^\"\\])*\"", "", src, flags=re.S)
     refs = {n for n in names if re.search(rf"\b{n}\b", body)}
     return bad, refs

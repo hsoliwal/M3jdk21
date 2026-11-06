@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-// Relocated from com.synexia m3-fast-search/src/main/java/com/synexia/m3/search/KmpSearch.java (blob acbec15bb187) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/KmpSearch.java (blob acbec15bb187) by M3_SEARCH_RELOCATE v1.
 // Modified 2026: share monitored prefix preparation and bound overlap fallback polling.
 package jdk.m3.search;
 

@@ -3,8 +3,8 @@ M3jdk21 m3/search module.
 
 usage: python -I relocate_search.py <leaf_main.txt> <leaf_test.txt> <src-root> <out-root> <rules.tsv>
 Rules (rules.tsv, applied in order, word-bounded unless kind=literal):
-  package  com.synexia.m3.search -> jdk.m3.search (package lines and qualified names)
-  import   com.synexia.job.IProgressMonitor -> jdk.m3.collections.M3ProgressMonitor
+  package  jdk.internal.m3.search -> jdk.m3.search (package lines and qualified names)
+  import   jdk.internal.m3.job.IProgressMonitor -> jdk.m3.collections.M3ProgressMonitor
   call     IProgressMonitor.noop() -> new M3DefaultProgressMonitor() (+ import jdk.m3.collections.M3DefaultProgressMonitor)
   type     <Kernel> -> M3<Kernel> for every relocated main class (file renamed too)
 Comments, strings and SPDX headers move with the code; a provenance line naming the donor blob is added under the
@@ -39,7 +39,7 @@ def main() -> int:
         if "new M3DefaultProgressMonitor()" in s and "import jdk.m3.collections.M3DefaultProgressMonitor;" not in s:
             s = s.replace("import jdk.m3.collections.M3ProgressMonitor;",
                           "import jdk.m3.collections.M3DefaultProgressMonitor;\nimport jdk.m3.collections.M3ProgressMonitor;", 1)
-        head = f"// Relocated from com.synexia m3-fast-search/{('src/main/java' if kind == 'main' else 'src/test/java')}/com/synexia/m3/search/{Path(p).name} (blob {blob_id(raw)[:12]}) by M3_SEARCH_RELOCATE v1.\n"
+        head = f"// Relocated from com.synexia m3-fast-search/{('src/main/java' if kind == 'main' else 'src/test/java')}/jdk/internal/m3/search/{Path(p).name} (blob {blob_id(raw)[:12]}) by M3_SEARCH_RELOCATE v1.\n"
         lines = s.split("\n")
         at = next((i + 1 for i in range(len(lines) - 1, -1, -1) if lines[i].startswith("// SPDX-")), 0)
         lines.insert(at, head.rstrip("\n"))

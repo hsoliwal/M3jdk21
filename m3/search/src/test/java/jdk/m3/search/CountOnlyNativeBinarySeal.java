@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/CountOnlyNativeBinarySeal.java (blob d83c73795307) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/CountOnlyNativeBinarySeal.java (blob d83c73795307) by M3_SEARCH_RELOCATE v1.
 package jdk.m3.search;
 
 import java.io.IOException;

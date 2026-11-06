@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/main/java/com/synexia/m3/search/MinimumCoverWindow.java (blob 2cc2026d2b47) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/MinimumCoverWindow.java (blob 2cc2026d2b47) by M3_SEARCH_RELOCATE v1.
 package jdk.m3.search;
 
 import java.util.Objects;

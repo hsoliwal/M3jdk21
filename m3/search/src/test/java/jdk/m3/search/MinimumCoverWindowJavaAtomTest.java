@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/MinimumCoverWindowJavaAtomTest.java (blob ab3bd3588a4e) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/MinimumCoverWindowJavaAtomTest.java (blob ab3bd3588a4e) by M3_SEARCH_RELOCATE v1.
 package jdk.m3.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

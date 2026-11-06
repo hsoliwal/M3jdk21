@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/main/java/com/synexia/m3/search/JavaAdaptiveSearchEngine.java (blob 63426d37c920) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/JavaAdaptiveSearchEngine.java (blob 63426d37c920) by M3_SEARCH_RELOCATE v1.
 package jdk.m3.search;
 
 import java.util.Arrays;

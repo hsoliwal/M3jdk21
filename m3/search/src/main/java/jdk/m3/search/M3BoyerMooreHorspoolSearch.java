@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-// Relocated from com.synexia m3-fast-search/src/main/java/com/synexia/m3/search/BoyerMooreHorspoolSearch.java (blob 41b8b0627378) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BoyerMooreHorspoolSearch.java (blob 41b8b0627378) by M3_SEARCH_RELOCATE v1.
 // Modified 2026: lazily reuse the KMP overlap owner with safe publication.
 package jdk.m3.search;
 

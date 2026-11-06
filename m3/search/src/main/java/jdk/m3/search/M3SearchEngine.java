@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/main/java/com/synexia/m3/search/SearchEngine.java (blob 430253d54dc0) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/SearchEngine.java (blob 430253d54dc0) by M3_SEARCH_RELOCATE v1.
 package jdk.m3.search;
 
 import jdk.m3.collections.M3DefaultProgressMonitor;
