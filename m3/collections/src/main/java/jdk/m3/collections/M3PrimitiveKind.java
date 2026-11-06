@@ -1,8 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-// Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
+// Materialized from hsoliwal/com.synexia@fd9a233680b43197eb8c5745a729c342ca56c4e2
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveKind.java
-// Source-Git-blob: 4bc7c258073072e0310d1a50c3885ed55c50816b
+// Source-Git-blob: bbfa6200d5e8583cf414e51f48b546fe5496fb7f
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package jdk.m3.collections;
 
 import java.util.Arrays;
@@ -130,6 +135,66 @@ public enum M3PrimitiveKind {
             case FLOAT -> ((float[]) array)[index] = Float.intBitsToFloat((int) bits);
             case DOUBLE -> ((double[]) array)[index] = Double.longBitsToDouble(bits);
         }
+    }
+
+    /** Typed segment fill; preserves the existing raw floating storage contract. */
+    void fillBits(Object array, int from, int to, long bits) {
+        checkArray(array);
+        java.util.Objects.checkFromToIndex(from, to, java.lang.reflect.Array.getLength(array));
+        switch (this) {
+            case BOOLEAN -> Arrays.fill((byte[]) array, from, to, (byte) (bits == 0L ? 0 : 1));
+            case BYTE -> Arrays.fill((byte[]) array, from, to, (byte) bits);
+            case SHORT -> Arrays.fill((short[]) array, from, to, (short) bits);
+            case CHAR -> Arrays.fill((char[]) array, from, to, (char) bits);
+            case INT -> Arrays.fill((int[]) array, from, to, (int) bits);
+            case LONG -> Arrays.fill((long[]) array, from, to, bits);
+            case FLOAT -> Arrays.fill((float[]) array, from, to, Float.intBitsToFloat((int) bits));
+            case DOUBLE -> Arrays.fill((double[]) array, from, to, Double.longBitsToDouble(bits));
+        }
+    }
+
+    /** First equal position in a bounded physical page; canonical NaNs, distinct signed zeros. */
+    int indexOfBits(Object array, int from, int to, long bits) {
+        checkArray(array);
+        java.util.Objects.checkFromToIndex(from, to, java.lang.reflect.Array.getLength(array));
+        switch (this) {
+            case BOOLEAN -> {
+                byte[] values = (byte[]) array;
+                boolean wanted = bits != 0;
+                for (int i = from; i < to; i++) if ((values[i] != 0) == wanted) return i;
+            }
+            case BYTE -> {
+                byte[] values = (byte[]) array; byte wanted = (byte) bits;
+                for (int i = from; i < to; i++) if (values[i] == wanted) return i;
+            }
+            case SHORT -> {
+                short[] values = (short[]) array; short wanted = (short) bits;
+                for (int i = from; i < to; i++) if (values[i] == wanted) return i;
+            }
+            case CHAR -> {
+                char[] values = (char[]) array; char wanted = (char) bits;
+                for (int i = from; i < to; i++) if (values[i] == wanted) return i;
+            }
+            case INT -> {
+                int[] values = (int[]) array; int wanted = (int) bits;
+                for (int i = from; i < to; i++) if (values[i] == wanted) return i;
+            }
+            case LONG -> {
+                long[] values = (long[]) array;
+                for (int i = from; i < to; i++) if (values[i] == bits) return i;
+            }
+            case FLOAT -> {
+                float[] values = (float[]) array;
+                int wanted = Float.floatToIntBits(Float.intBitsToFloat((int) bits));
+                for (int i = from; i < to; i++) if (Float.floatToIntBits(values[i]) == wanted) return i;
+            }
+            case DOUBLE -> {
+                double[] values = (double[]) array;
+                long wanted = Double.doubleToLongBits(Double.longBitsToDouble(bits));
+                for (int i = from; i < to; i++) if (Double.doubleToLongBits(values[i]) == wanted) return i;
+            }
+        }
+        return -1;
     }
 
     long normalizeBits(long bits) {
