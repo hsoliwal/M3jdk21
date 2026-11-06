@@ -1,4 +1,4 @@
-M3 file family (module jdk.m3.file)
+M3 file family (module org.m3jdk.file)
 Copyright 2026 Hitesh Soliwal and contributors
 
 Adapted from hsoliwal/com.synexia Apache-2.0 file, resource, build-delta and

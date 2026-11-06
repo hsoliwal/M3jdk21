@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 # Modified 2026-10-21: Execute existing and new module contracts on host and linked images.
 # Modified 2026-11-05: Isolate mutable contract fixtures from the source/evidence tree.
+# Modified 2026-11-06 by m3/qualification/file-unify-20261106 (FILE_UNIFY v1): the module is org.m3jdk.file
+# and requires jdk.m3.collections: the module name is a constant, --module-path carries the dependency modules.
 """Compile the existing file module, run its independent contract, and check a linked image."""
 
 import argparse
@@ -16,18 +18,28 @@ import subprocess
 import tempfile
 import uuid
 
+#FLLDCIM: FILE_UNIFY - module org.m3jdk.file (union of jdk.m3.file and org.m3jdk.file), dependency modules on --module-path
+MODULE = 'org.m3jdk.file'
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java-home', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--classes', type=Path, help='Reuse the classes already compiled by Maven')
+    parser.add_argument('--module-path', default='',
+                        help='Dependency modules the module requires (jdk.m3.collections, jdk.m3.arrays: jars or '
+                             'exploded directories joined with the platform path separator)')
     args = parser.parse_args()
     root = Path(__file__).resolve().parent
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     toolchain = args.java_home.resolve()
     suffix = '.exe' if os.name == 'nt' else ''
+    dependency_modules = [entry for entry in args.module_path.split(os.pathsep) if entry]
+
+    def module_path(*entries):
+        return os.pathsep.join([str(entry) for entry in entries] + dependency_modules)
     commands = []
     receipt_path = output / 'receipt.json'
     receipt = {
@@ -35,7 +47,9 @@ def main():
         'state': 'STARTED',
         'run_id': str(uuid.uuid4()),
         'started_utc': datetime.now(timezone.utc).isoformat(),
-        'scope': 'jdk.m3.file module and direct compiler fixture',
+        'scope': MODULE + ' module (packages jdk.m3.file, jdk.m3.file.json) and direct compiler fixture',
+        'module': MODULE,
+        'dependency_module_path': dependency_modules,
         'class_origin': 'CALLER_PROVIDED' if args.classes else 'COMPILED_BY_THIS_RUN',
         'source_class_correspondence': ('EXTERNAL_BUILD_RESPONSIBILITY' if args.classes
                                         else 'THIS_RUN_JAVAC_COMMAND'),
@@ -125,7 +139,7 @@ def main():
         classes = args.classes.resolve() if args.classes else output / 'classes'
         if args.classes:
             if not (classes / 'module-info.class').is_file():
-                raise RuntimeError('missing original jdk.m3.file module descriptor')
+                raise RuntimeError('missing original ' + MODULE + ' module descriptor')
             admitted_classes = class_hashes(classes)
             receipt['class_files'] = admitted_classes
         write_receipt()
@@ -137,9 +151,10 @@ def main():
                 shutil.rmtree(classes)
             classes.mkdir()
             run('compile-module', [tool('javac'), '--release', '21', '-Xlint:all,-module', '-Werror',
+                                   *(['--module-path', module_path()] if dependency_modules else []),
                                    '-d', classes, *sorted((root / 'src/main/java').rglob('*.java'))])
             if not (classes / 'module-info.class').is_file():
-                raise RuntimeError('missing original jdk.m3.file module descriptor')
+                raise RuntimeError('missing original ' + MODULE + ' module descriptor')
             admitted_classes = class_hashes(classes)
             receipt['class_files'] = admitted_classes
             write_receipt()
@@ -148,7 +163,7 @@ def main():
         admitted_jar = hashlib.sha256(module_jar.read_bytes()).hexdigest()
         receipt['jar_sha256'] = admitted_jar
         descriptor = run('module-descriptor', [tool('jar'), '--describe-module', '--file', module_jar])
-        if 'jdk.m3.file' not in descriptor or 'exports jdk.m3.file' not in descriptor:
+        if MODULE not in descriptor or 'exports jdk.m3.file' not in descriptor:
             raise RuntimeError('wrong product module descriptor')
         tests = output / 'tests'
         if tests.exists():
@@ -157,13 +172,13 @@ def main():
             shutil.rmtree(tests)
         tests.mkdir()
         run('compile-contract', [tool('javac'), '--release', '21', '-Xlint:all', '-Werror',
-                                 '--module-path', module_jar, '--add-modules', 'jdk.m3.file',
+                                 '--module-path', module_path(module_jar), '--add-modules', MODULE,
                                  '-d', tests, *sources])
         admitted_tests = class_hashes(tests)
         receipt['contract_class_files'] = admitted_tests
         main_class = 'jdk.m3.file.test.M3FileDeltaContract'
-        host = run('host-contract', [tool('java'), '--module-path', module_jar, '--add-modules',
-                                    'jdk.m3.file,jdk.compiler', '-cp', tests, main_class])
+        host = run('host-contract', [tool('java'), '--module-path', module_path(module_jar), '--add-modules',
+                                    MODULE + ',jdk.compiler', '-cp', tests, main_class])
         if 'M3FileDeltaContract: PASS;' not in host:
             raise RuntimeError('contract success marker missing')
         receipt['host_result'] = host.strip()
@@ -246,7 +261,7 @@ def main():
         }
         write_receipt()
         run('compile-module-contracts', [tool('javac'), '--release', '21', '-Xlint:all,-module', '-Werror',
-                '--module-path', module_jar, '--patch-module', 'jdk.m3.file=' + str(root / 'src/test/java'),
+                '--module-path', module_path(module_jar), '--patch-module', MODULE + '=' + str(root / 'src/test/java'),
                 '-d', module_tests, *module_contract_sources])
         module_test_hashes = class_hashes(module_tests)
         receipt['module_contract_class_files'] = module_test_hashes
@@ -272,8 +287,8 @@ def main():
                 command = [java, '-Djava.io.tmpdir=' + str(temporary_tests)]
                 if module_path:
                     command += ['--module-path', module_path]
-                command += ['--add-modules', 'jdk.m3.file,jdk.compiler,jdk.zipfs', '--patch-module',
-                            'jdk.m3.file=' + str(module_tests), '-m', 'jdk.m3.file/jdk.m3.file.' + name]
+                command += ['--add-modules', MODULE + ',jdk.compiler,jdk.zipfs', '--patch-module',
+                            MODULE + '=' + str(module_tests), '-m', MODULE + '/jdk.m3.file.' + name]
                 text = run(lane + '-' + name, command)
                 if marker not in text:
                     raise RuntimeError('contract success marker missing: ' + name)
@@ -283,9 +298,9 @@ def main():
                     command = [java, '-Xmx48m', '-Djava.io.tmpdir=' + str(temporary_tests)]
                     if module_path:
                         command += ['--module-path', module_path]
-                    command += ['--add-modules', 'jdk.m3.file', '--patch-module',
-                                'jdk.m3.file=' + str(module_tests), '-m',
-                                'jdk.m3.file/jdk.m3.file.' + name, argument]
+                    command += ['--add-modules', MODULE, '--patch-module',
+                                MODULE + '=' + str(module_tests), '-m',
+                                MODULE + '/jdk.m3.file.' + name, argument]
                     text = run(lane + '-' + name + '-' + argument, command)
                     if marker not in text:
                         raise RuntimeError('bounded probe marker missing: ' + name + ' ' + argument)
@@ -293,21 +308,21 @@ def main():
             return outputs
 
         receipt['host_module_contracts'] = module_contracts(
-            tool('java'), 'host', module_jar, host_has_javac=True)
+            tool('java'), 'host', module_path(module_jar), host_has_javac=True)
         write_receipt()
         image = output / 'image'
         if image.exists():
             if image.is_symlink() or image.parent != output:
                 raise RuntimeError('unsafe test image path')
             shutil.rmtree(image)
-        run('link-image', [tool('jlink'), '--module-path', os.pathsep.join((str(toolchain / 'jmods'),
-                                 str(module_jar))), '--add-modules', 'jdk.m3.file,jdk.compiler,jdk.zipfs',
+        run('link-image', [tool('jlink'), '--module-path', module_path(toolchain / 'jmods', module_jar),
+                                 '--add-modules', MODULE + ',jdk.compiler,jdk.zipfs',
                                  '--output', image, '--no-header-files', '--no-man-pages'])
         modules = run('image-modules', [image / 'bin' / ('java' + suffix), '--list-modules'])
-        if 'jdk.m3.file' not in {line.partition('@')[0] for line in modules.splitlines()}:
-            raise RuntimeError('jdk.m3.file is absent from linked image')
+        if MODULE not in {line.partition('@')[0] for line in modules.splitlines()}:
+            raise RuntimeError(MODULE + ' is absent from linked image')
         linked = run('image-contract', [image / 'bin' / ('java' + suffix), '--add-modules',
-                                       'jdk.m3.file,jdk.compiler', '-cp', tests, main_class])
+                                       MODULE + ',jdk.compiler', '-cp', tests, main_class])
         if 'M3FileDeltaContract: PASS;' not in linked:
             raise RuntimeError('linked-image contract success marker missing')
         receipt['image_module_contracts'] = module_contracts(image / 'bin' / ('java' + suffix), 'image', None)

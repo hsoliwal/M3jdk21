@@ -137,7 +137,7 @@ jobs:
           "$JAVA_HOME/bin/jmod" describe proof/optional-jmod/jmods/jdk.m3.eclipse.core.jmod \
             > proof/eclipse-core-module-descriptor.txt
           grep -q 'provides jdk.m3.eclipse.core.M3EclipseCore' proof/eclipse-core-module-descriptor.txt
-          grep -q 'jdk.m3.file' proof/eclipse-core-module-descriptor.txt
+          grep -q 'org.m3jdk.file' proof/eclipse-core-module-descriptor.txt
           git diff --exit-code -- m3/core/src m3/arrays/src m3/ast/src \
             m3/collections/src m3/file/src m3/eclipse/optional-jmod/src
       - name: Upload exact-head binary and source-qualification evidence

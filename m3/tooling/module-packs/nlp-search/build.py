@@ -131,16 +131,16 @@ def main():
         "--date=2026-10-18T00:00:00Z", "-C", descriptor_classes, "module-info.class"])
     jars[2] = modular_nlp
 
-    compile_module("m3-file", "org.m3jdk.file", root / "m3/ports/file/src/main/java")
+    compile_module("m3-file", "org.m3jdk.file", root / "m3/file/src/main/java")
     compile_module("m3-source-search", "org.m3jdk.tools.search", owner / "frontend/src/main/java")
-    native_sources = sorted((root / "m3/ports/file/native").glob("*.c"))
+    native_sources = sorted((root / "m3/file/src/main/native").glob("*.c"))
     native_args = []
     if native_sources:
         native = out / "native"
         native.mkdir()
         run("m3-file-native", [os.environ.get("CC", "cc"), "-std=c11", "-O2", "-fPIC", "-shared",
             "-Wall", "-Wextra", "-Werror", "-I" + str(home / "include"),
-            "-I" + str(home / "include/linux"), "-I" + str(root / "m3/ports/file/native"),
+            "-I" + str(home / "include/linux"), "-I" + str(root / "m3/file/src/main/native"),
             *native_sources, "-o", native / "libm3file.so"])
         native_args = ["--native-library", "org.m3jdk.file=" + str(native)]
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
