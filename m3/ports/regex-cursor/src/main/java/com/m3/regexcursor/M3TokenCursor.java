@@ -97,7 +97,31 @@ public final class M3TokenCursor implements M3ChunkCursor, M3CursorFacts {
     public void seek(int position) {
         Objects.checkIndex(position, total + 1);
         if (lanes.length == 0) return;
-        int found = Arrays.binarySearch(starts, 0, lanes.length, position);
+        // The current lane is a locality hint, never a source of correctness.
+        // After proving the search direction, the remaining binary search can
+        // exclude the known current/neighbor prefixes or suffixes.
+        int current = lane;
+        int from = 0;
+        int to = lanes.length;
+        if (position >= starts[current]) {
+            if (position < starts[current + 1]
+                    || current == lanes.length - 1 && position == total) return;
+            int next = current + 1;
+            if (next < lanes.length && (position < starts[next + 1]
+                    || next == lanes.length - 1 && position == total)) {
+                lane = next;
+                return;
+            }
+            from = next + 1;
+        } else {
+            int previous = current - 1;
+            if (previous >= 0 && position >= starts[previous]) {
+                lane = previous;
+                return;
+            }
+            to = previous;
+        }
+        int found = Arrays.binarySearch(starts, from, to, position);
         lane = found >= 0 ? found : -found - 2;
     }
 
