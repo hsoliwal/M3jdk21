@@ -1,0 +1,7 @@
+role	path	sha_or_hash	license
+m3_source_master	master	e913ab89056657eca4009678cfe9a657c020e79b	Apache-2.0
+m3_original_factory	m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java	8ca3906e4ca1e502fa65e8a4410f2a225c0a04e0	Apache-2.0
+m3_original_bindings	m3/collections/interop/sdk-family-bindings.tsv	603b0a40b859fd0340e0a88bd20d4955168fc4b2	Apache-2.0
+synexia_develop	develop	0a5d36185342e6f59d5cd8e4321ea0ab0d9aeecd	Apache-2.0
+openrewrite_engine	M3GpuToolJoinRecipe.java	1c1b1b568d369f688f6953161636bf36b484bf5a	Apache-2.0
+openrewrite_manifest	M3GpuToolJoinManifest.java	38df5f97bbeec8a8a8cfc77091d56bda925c07f2	Apache-2.0
