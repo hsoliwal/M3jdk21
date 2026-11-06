@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+date	recipe	version	lesson	evidence
+2026-11-06	census	-	a crate that repairs a merge loss ships the historical donor snapshot (history-pr<N>/) next to the composed postimage; the snapshot is an input, so its PARTIAL census row is not a leaf; the composed postimage's status decides, and the crate's physical-state trace digest, re-run on the owner, proves ALREADY without an edit	census-g6-20261106: trace sha256 c13579351e14... equal on the owner
+2026-11-06	census	-	a NEW class that shells out to git to check a receipt (delivery witness) is donor custody tooling, not a product or test owner; decline it and verify its atoms directly	M3LongMapDeliveryWitness declined
