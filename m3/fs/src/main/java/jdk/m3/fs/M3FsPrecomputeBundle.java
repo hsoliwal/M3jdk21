@@ -89,7 +89,13 @@ public final class M3FsPrecomputeBundle {
     PATTERN_BYTES_U8(1),
     PATTERN_OFFSETS_I32(Integer.BYTES),
     AUTOMATON_OUTPUT_MASKS_I64(Long.BYTES),
-    TUPLE_VALUES_I64(Long.BYTES);
+    TUPLE_VALUES_I64(Long.BYTES),
+    //FLLDCIM: MRL - m3fs-joined-directory-history-20261102 (Synexia 42466557a7f, owner blob 09963444 -> 32c9b0d0); appended after TUPLE_VALUES_I64 (ordinals 59-62) because
+    //FLLDCIM: MRL - M3FsPrecomputeCatalog keys REQUIRED_ROLES/OPTIONAL_ROLES literals by ordinal
+    CONTENT_ID_SHA256(M3ContentId.BYTES),
+    SEGMENT_SOURCE_OFFSETS_I32(Integer.BYTES),
+    SEGMENT_LOGICAL_OFFSETS_I64(Long.BYTES),
+    SEGMENT_LENGTHS_I32(Integer.BYTES);
 
     private final int elementBytes;
 
@@ -208,6 +214,19 @@ public final class M3FsPrecomputeBundle {
           laneInts("segment-lengths"));
     }
 
+    //FLLDCIM: MRL - m3fs-joined-directory-history-20261102 (Synexia 42466557a7f, owner blob 09963444 -> 32c9b0d0); requireLane(..).bytes/ints/longs mapped to laneBytes/laneInts/laneLongs
+    /** Reference-only logical join over existing content-addressed payloads. */
+    public JoinedContentSegments joinedContentSegments() {
+      if (!profile().equals("joined-content-segments-v1")) {
+        throw new IllegalStateException("not a joined content-segment bundle");
+      }
+      return new JoinedContentSegments(
+          laneBytes("segment-content-ids"),
+          laneInts("segment-source-offsets"),
+          laneLongs("segment-logical-offsets"),
+          laneInts("segment-lengths"));
+    }
+
     /** Compact ASCII DFA over existing verified mapped lanes. */
     public CompactAsciiDfa compactAsciiDfa() {
       if (!profile().equals("compact-ascii-dfa-v1")) {
@@ -244,6 +263,16 @@ public final class M3FsPrecomputeBundle {
           laneInts("automaton-transitions"),
           laneLongs("automaton-output-masks"),
           laneInts("automaton-metadata"));
+    }
+
+    //FLLDCIM: MRL - m3fs-joined-directory-history-20261102 (Synexia 42466557a7f, owner blob 09963444 -> 32c9b0d0); requireLane(..).longs/ints mapped to laneLongs/laneInts
+    public JoinedBytePresence joinedBytePresence() {
+      if (!profile().equals("joined-byte-presence-v1")) {
+        throw new IllegalStateException("not a joined byte-presence bundle");
+      }
+      return new JoinedBytePresence(
+          laneLongs("byte-presence"),
+          laneInts("search-metadata"));
     }
 
     public MappedLane requireLane(String name) {
@@ -519,6 +548,382 @@ public final class M3FsPrecomputeBundle {
         else high = middle;
       }
       return low;
+    }
+  }
+
+  //FLLDCIM: MRL - m3fs-joined-directory-history-20261102 (Synexia 42466557a7f, owner blob 09963444 -> 32c9b0d0)
+  /**
+   * Immutable logical segment directory. Payloads stay in their original M3 objects.
+   */
+  public record JoinedContentSegments(
+      ByteBuffer contentIds,
+      IntBuffer sourceOffsets,
+      LongBuffer logicalOffsets,
+      IntBuffer lengths) {
+    public JoinedContentSegments {
+      contentIds = Objects.requireNonNull(contentIds, "contentIds").asReadOnlyBuffer();
+      sourceOffsets =
+          Objects.requireNonNull(sourceOffsets, "sourceOffsets").asReadOnlyBuffer();
+      logicalOffsets =
+          Objects.requireNonNull(logicalOffsets, "logicalOffsets").asReadOnlyBuffer();
+      lengths = Objects.requireNonNull(lengths, "lengths").asReadOnlyBuffer();
+      int segments = lengths.remaining();
+      if (contentIds.remaining() != Math.multiplyExact(segments, M3ContentId.BYTES)
+          || sourceOffsets.remaining() != segments
+          || logicalOffsets.remaining() != segments + 1
+          || logicalOffsets.get(logicalOffsets.position()) != 0L) {
+        throw new IllegalArgumentException("joined segment geometry");
+      }
+      for (int index = 0; index < segments; index++) {
+        int source = sourceOffsets.get(sourceOffsets.position() + index);
+        int length = lengths.get(lengths.position() + index);
+        long logical = logicalOffsets.get(logicalOffsets.position() + index);
+        long next = logicalOffsets.get(logicalOffsets.position() + index + 1);
+        if (source < 0
+            || length < 0
+            || next != Math.addExact(logical, length)) {
+          throw new IllegalArgumentException("joined segment range");
+        }
+      }
+    }
+
+    public int segmentCount() {
+      return lengths.remaining();
+    }
+
+    public long logicalLength() {
+      return logicalOffsets.get(logicalOffsets.position() + segmentCount());
+    }
+
+    public M3ContentId contentId(int segment) {
+      int checked = Objects.checkIndex(segment, segmentCount());
+      byte[] bytes = new byte[M3ContentId.BYTES];
+      ByteBuffer cursor = contentIds.duplicate();
+      cursor.position(contentIds.position() + checked * M3ContentId.BYTES);
+      cursor.get(bytes);
+      return M3ContentId.of(bytes);
+    }
+
+    public int sourceOffset(int segment) {
+      return sourceOffsets.get(
+          sourceOffsets.position() + Objects.checkIndex(segment, segmentCount()));
+    }
+
+    public int length(int segment) {
+      return lengths.get(lengths.position() + Objects.checkIndex(segment, segmentCount()));
+    }
+
+    public long logicalStart(int segment) {
+      return logicalOffsets.get(
+          logicalOffsets.position() + Objects.checkIndex(segment, segmentCount()));
+    }
+
+    public long logicalEnd(int segment) {
+      int checked = Objects.checkIndex(segment, segmentCount());
+      return logicalOffsets.get(logicalOffsets.position() + checked + 1);
+    }
+
+    public MappedJoinedContentSegments openRawSegments(
+        M3DirectoryContentStore store,
+        int maxObjectBytes,
+        long maxMappedPayloadBytes)
+        throws IOException {
+      M3DirectoryContentStore checkedStore =
+          Objects.requireNonNull(store, "store");
+      if (maxObjectBytes < 0 || maxMappedPayloadBytes < 0L) {
+        throw new IllegalArgumentException("negative joined segment mapping budget");
+      }
+      //FLLDCIM: MRL - m3fs-key-value-lanes-20261102 (Synexia 489d837bb8d, owner blob a34b8031 -> 162fd0b0)
+      M3KeyValueSlots<M3ContentId, M3MappedObject> unique =
+          new M3KeyValueSlots<>();
+      M3MappedObject[] mapped = new M3MappedObject[segmentCount()];
+      long mappedBytes = 0L;
+      for (int index = 0; index < segmentCount(); index++) {
+        M3ContentId id = contentId(index);
+        M3MappedObject object = unique.get(id);
+        if (object == null) {
+          M3ObjectRef reference = checkedStore.ref(id, M3ObjectKind.RAW_BYTES);
+          long nextTotal = Math.addExact(mappedBytes, reference.size());
+          if (nextTotal > maxMappedPayloadBytes) {
+            throw new IOException("joined segment payload mapping budget exceeded");
+          }
+          object = checkedStore.openMapped(reference, maxObjectBytes);
+          unique.put(id, object);
+          mappedBytes = nextTotal;
+        }
+        long end = Math.addExact((long) sourceOffset(index), length(index));
+        if (end > object.size()) {
+          throw new IOException("joined segment range exceeds payload");
+        }
+        mapped[index] = object;
+      }
+      return new MappedJoinedContentSegments(
+          this, mapped, unique.size(), mappedBytes);
+    }
+  }
+
+  /**
+   * Private, ephemeral DOOPS key/value lanes for immutable mapped-payload keys.
+   * Never retains Map.Entry, Node, Bucket, Cell or iterator facade objects.
+   * No removal is needed: one openRawSegments traversal owns the whole table.
+   */
+  //FLLDCIM: MRL - m3fs-key-value-lanes-20261102 (Synexia 489d837bb8d, owner blob a34b8031 -> 162fd0b0)
+  private static final class M3KeyValueSlots<K, V> {
+    //FLLDCIM: MRL - m3fs-hash-lane-cache-20261102 (Synexia 2cd4be46804, owner blob 162fd0b0 -> cbda6a67); int[] hashes lane
+    private Object[] keys = new Object[16];
+    private Object[] values = new Object[16];
+    private int[] hashes = new int[16];
+    private int used;
+    private int count;
+    private boolean hasNull;
+    private V nullValue;
+
+    private int slot(K key, int hash) {
+      int index = hash & (keys.length - 1);
+      while (keys[index] != null
+          && (hashes[index] != hash
+              || (keys[index] != key && !key.equals(keys[index])))) {
+        index = (index + 1) & (keys.length - 1);
+      }
+      return index;
+    }
+
+    private static int spread(int hash) { return hash ^ (hash >>> 16); }
+
+    @SuppressWarnings("unchecked")
+    V get(K key) {
+      if (key == null) return hasNull ? nullValue : null;
+      return (V) values[slot(key, spread(key.hashCode()))];
+    }
+
+    @SuppressWarnings("unchecked")
+    V put(K key, V value) {
+      if (key == null) {
+        V prior = hasNull ? nullValue : null;
+        if (!hasNull) { hasNull = true; count++; }
+        nullValue = value;
+        return prior;
+      }
+      int hash = spread(key.hashCode());
+      int index = slot(key, hash);
+      if (keys[index] != null) {
+        V prior = (V) values[index];
+        values[index] = value;
+        return prior;
+      }
+      // Increase capacity before insertion; no transient Entry/Node objects.
+      if ((used + 1L) * 4L > (long) keys.length * 3L) {
+        grow();
+        index = slot(key, hash);
+      }
+      keys[index] = key;
+      values[index] = value;
+      hashes[index] = hash;
+      used++;
+      count++;
+      return null;
+    }
+
+    private void grow() {
+      if (keys.length >= (1 << 29)) {
+        throw new OutOfMemoryError("M3 joined mapped key/value slots capacity");
+      }
+      Object[] oldKeys = keys;
+      Object[] oldValues = values;
+      int[] oldHashes = hashes;
+      Object[] expandedKeys = new Object[oldKeys.length << 1];
+      Object[] expandedValues = new Object[oldValues.length << 1];
+      int[] expandedHashes = new int[oldHashes.length << 1];
+      int mask = expandedKeys.length - 1;
+      for (int i = 0; i < oldKeys.length; i++) {
+        Object key = oldKeys[i];
+        if (key == null) continue;
+        int hash = oldHashes[i];
+        int index = hash & mask;
+        while (expandedKeys[index] != null) index = (index + 1) & mask;
+        expandedKeys[index] = key;
+        expandedValues[index] = oldValues[i];
+        expandedHashes[index] = hash;
+      }
+      keys = expandedKeys;
+      values = expandedValues;
+      hashes = expandedHashes;
+    }
+
+    int size() { return count; }
+  }
+
+  //FLLDCIM: MRL - m3fs-joined-directory-history-20261102 (Synexia 42466557a7f, owner blob 09963444 -> 32c9b0d0)
+  /** Mapped payload owner that reuses one mapping for repeated content IDs. */
+  public static final class MappedJoinedContentSegments {
+    private final JoinedContentSegments directory;
+    private final M3MappedObject[] payloads;
+    private final int uniquePayloads;
+    private final long mappedPayloadBytes;
+    private final ByteBuffer[] directSegments;
+
+    private MappedJoinedContentSegments(
+        JoinedContentSegments directory,
+        M3MappedObject[] payloads,
+        int uniquePayloads,
+        long mappedPayloadBytes) {
+      this.directory = Objects.requireNonNull(directory, "directory");
+      this.payloads = Objects.requireNonNull(payloads, "payloads").clone();
+      this.uniquePayloads = uniquePayloads;
+      this.mappedPayloadBytes = mappedPayloadBytes;
+      this.directSegments = new ByteBuffer[payloads.length];
+      for (int index = 0; index < payloads.length; index++) {
+        directSegments[index] =
+            payloads[index]
+                .bytes(directory.sourceOffset(index), directory.length(index))
+                .asReadOnlyBuffer();
+      }
+    }
+
+    public int segmentCount() {
+      return directory.segmentCount();
+    }
+
+    public int uniquePayloadCount() {
+      return uniquePayloads;
+    }
+
+    public long mappedPayloadBytes() {
+      return mappedPayloadBytes;
+    }
+
+    public long logicalLength() {
+      return directory.logicalLength();
+    }
+
+    public ByteBuffer segment(int index) {
+      int checked = Objects.checkIndex(index, segmentCount());
+      return directSegments[checked].duplicate().asReadOnlyBuffer();
+    }
+
+    public ByteBuffer[] asReadOnlyBuffers() {
+      ByteBuffer[] result = new ByteBuffer[directSegments.length];
+      for (int index = 0; index < result.length; index++) {
+        result[index] = directSegments[index].duplicate().asReadOnlyBuffer();
+      }
+      return result;
+    }
+
+    //FLLDCIM: MRL - HANDOFF_45 - grepJoinedSegments(byte[], int[]) and grepJoinedSegments(JoinedBytePresence, byte[],
+    //FLLDCIM: MRL - int[], int[]) call the joined-grep JNI exports (Synexia #15319, search family); not ported here
+
+    public byte byteAt(long logicalIndex) {
+      Objects.checkIndex(logicalIndex, logicalLength());
+      int segment = segmentAt(logicalIndex);
+      int offset =
+          Math.toIntExact(logicalIndex - directory.logicalStart(segment));
+      return payloads[segment].byteAt(directory.sourceOffset(segment) + offset);
+    }
+
+    public void copyTo(
+        long sourceStart,
+        byte[] target,
+        int targetStart,
+        int count) {
+      Objects.requireNonNull(target, "target");
+      Objects.checkFromIndexSize(sourceStart, (long) count, logicalLength());
+      Objects.checkFromIndexSize(targetStart, count, target.length);
+      if (count == 0) return;
+      long position = sourceStart;
+      int written = 0;
+      int segment = segmentAt(position);
+      while (written < count) {
+        long segmentEnd = directory.logicalEnd(segment);
+        int take =
+            Math.min(count - written, Math.toIntExact(segmentEnd - position));
+        ByteBuffer cursor = segment(segment);
+        int within =
+            Math.toIntExact(position - directory.logicalStart(segment));
+        cursor.position(within);
+        cursor.get(target, targetStart + written, take);
+        position += take;
+        written += take;
+        if (written < count) {
+          segment++;
+          while (segment < segmentCount()
+              && directory.logicalEnd(segment) <= position) {
+            segment++;
+          }
+        }
+      }
+    }
+
+    private int segmentAt(long logicalIndex) {
+      int low = 0;
+      int high = segmentCount();
+      while (low < high) {
+        int middle = low + ((high - low) >>> 1);
+        if (directory.logicalEnd(middle) <= logicalIndex) {
+          low = middle + 1;
+        } else {
+          high = middle;
+        }
+      }
+      return low;
+    }
+  }
+
+  //FLLDCIM: MRL - m3fs-joined-directory-history-20261102 (Synexia 42466557a7f, owner blob 09963444 -> 32c9b0d0)
+  /** Exact transposed byte-presence bitmap over joined segment row IDs. */
+  public record JoinedBytePresence(LongBuffer bytePresence, IntBuffer metadata) {
+    public JoinedBytePresence {
+      bytePresence =
+          Objects.requireNonNull(bytePresence, "bytePresence").asReadOnlyBuffer();
+      metadata = Objects.requireNonNull(metadata, "metadata").asReadOnlyBuffer();
+      if (metadata.remaining() != 2) {
+        throw new IllegalArgumentException("joined byte-presence metadata");
+      }
+      int segments = metadata.get(metadata.position());
+      int words = metadata.get(metadata.position() + 1);
+      if (segments < 0
+          || words != ((segments + Long.SIZE - 1) >>> 6)
+          || bytePresence.remaining() != Math.multiplyExact(256, words)) {
+        throw new IllegalArgumentException("joined byte-presence geometry");
+      }
+    }
+
+    public int segmentCount() {
+      return metadata.get(metadata.position());
+    }
+
+    public int bitmapWords() {
+      return metadata.get(metadata.position() + 1);
+    }
+
+    /**
+     * Emits ascending candidate segment IDs satisfying the necessary byte-presence condition.
+     */
+    public int candidateRows(byte[] needle, int[] outputRows) {
+      byte[] pattern = Objects.requireNonNull(needle, "needle");
+      int[] output = Objects.requireNonNull(outputRows, "outputRows");
+      if (pattern.length == 0 || output.length < segmentCount()) {
+        throw new IllegalArgumentException("joined byte-presence candidate geometry");
+      }
+      int matches = 0;
+      int words = bitmapWords();
+      for (int word = 0; word < words; word++) {
+        long candidates = -1L;
+        for (byte value : pattern) {
+          int row = Byte.toUnsignedInt(value) * words + word;
+          candidates &= bytePresence.get(bytePresence.position() + row);
+          //FLLDCIM: MRL - m3fs-memchr-bitmap-20261102 (Synexia 27b0600d0a8, owner blob 32c9b0d0 -> a34b8031)
+          if (candidates == 0L) break; // Bitwise AND can never regain candidate rows.
+        }
+        if (word == words - 1 && (segmentCount() & 63) != 0) {
+          candidates &= (1L << (segmentCount() & 63)) - 1L;
+        }
+        while (candidates != 0L) {
+          int bit = Long.numberOfTrailingZeros(candidates);
+          output[matches++] = (word << 6) + bit;
+          candidates &= candidates - 1L;
+        }
+      }
+      return matches;
     }
   }
 
