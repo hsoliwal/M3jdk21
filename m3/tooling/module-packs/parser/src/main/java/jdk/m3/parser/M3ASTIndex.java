@@ -343,6 +343,8 @@ public final class M3ASTIndex {
         private final String parserId;
         private String[] roleNames = new String[16];
         private int roleCount;
+        private final OrdinalDictionary roleLookup = new OrdinalDictionary("role vocabulary exceeded");
+        private final OrdinalDictionary kindLookup = new OrdinalDictionary("AST kind dictionary exceeded");
         private int[] roleIds, portableFlags;
         private String[] names = new String[16];
         private int nameCount;
@@ -439,14 +441,11 @@ public final class M3ASTIndex {
                 if (role.isBlank() || role.length() > 256) {
                     throw new IllegalArgumentException("invalid bounded child role");
                 }
-                for (int i = 0; i < roleCount; i++) {
-                    if (roleNames[i].equals(role)) { id = i; break; }
-                }
-                if (id == -1) {
-                    if (roleCount == 4096) throw new IllegalArgumentException("role vocabulary exceeded");
-                    if (roleCount == roleNames.length) roleNames = Arrays.copyOf(roleNames, roleNames.length * 2);
-                    roleNames[roleCount] = role;
-                    id = roleCount++;
+                id = roleLookup.ordinal(role, roleNames, roleCount);
+                if (id == roleCount) {
+                    if (roleCount == roleNames.length)
+                        roleNames = Arrays.copyOf(roleNames, roleNames.length * 2);
+                    roleNames[roleCount++] = role;
                 }
             }
             roleIds[node] = id;
@@ -563,13 +562,48 @@ public final class M3ASTIndex {
             if (value.isEmpty() || value.length() > 1024) {
                 throw new IllegalArgumentException("invalid bounded AST kind");
             }
-            for (int i = 0; i < nameCount; i++) {
-                if (names[i].equals(value)) return i;
+            int id = kindLookup.ordinal(value, names, nameCount);
+            if (id == nameCount) {
+                if (nameCount == names.length) names = Arrays.copyOf(names, names.length * 2);
+                names[nameCount++] = value;
             }
-            if (nameCount == 4096) throw new IllegalArgumentException("AST kind dictionary exceeded");
-            if (nameCount == names.length) names = Arrays.copyOf(names, names.length * 2);
-            names[nameCount] = value;
-            return nameCount++;
+            return id;
+        }
+
+        /**
+         * Builder-local primitive hash slots; no Map.Entry or retained AST node
+         * objects. The original ordered String[] vocabulary and ordinals are
+         * the authority; this transient index is discarded when the index seals.
+         */
+        private static final class OrdinalDictionary {
+            private int[] slots = new int[32];
+            private final String budgetMessage;
+            private OrdinalDictionary(String message) { budgetMessage = message; }
+
+            private int ordinal(String value, String[] vocabulary, int used) {
+                int at = slot(value, vocabulary, slots);
+                if (slots[at] != 0) return slots[at] - 1;
+                if (used == 4096) throw new IllegalArgumentException(budgetMessage);
+                if (((long) used + 1L) * 2L > slots.length) {
+                    int[] expanded = new int[slots.length << 1];
+                    for (int id = 0; id < used; id++) {
+                        expanded[slot(vocabulary[id], vocabulary, expanded)] = id + 1;
+                    }
+                    slots = expanded;
+                    at = slot(value, vocabulary, slots);
+                }
+                slots[at] = used + 1;
+                return used;
+            }
+
+            private static int slot(String value, String[] vocabulary, int[] table) {
+                int hash = value.hashCode();
+                int at = (hash ^ (hash >>> 16)) & (table.length - 1);
+                while (table[at] != 0 && !value.equals(vocabulary[table[at] - 1])) {
+                    at = (at + 1) & (table.length - 1);
+                }
+                return at;
+            }
         }
 
         private void grow() {
