@@ -1,0 +1,36 @@
+{
+  "schema": "M3_SYNEXIA_JNI_EXPORT_JOIN_RECEIVER/1",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "pr": 15172,
+    "commit": "dd4aba294633e69c70e746d49a0eb57e56699b59",
+    "recipe": "com.synexia.m3.M3Jdk21JniExportJoin"
+  },
+  "receiver": {
+    "repository": "hsoliwal/M3jdk21",
+    "parent": "c0dcc0d4a3691da0f5db86cdb364c159b1c217c6",
+    "branch": "m3/jni-export-join-20261101",
+    "master_changed": false
+  },
+  "targets": {
+    "java-main": "b6aa82f5fb88cc93eddd5c3ba8e28667f68c903d92099ae6ace17719ee0bf7fc",
+    "java-selftest": "3cb59a8a3c26d58cd12333affe5a3c586e204836305d693342bfcaf7be193720",
+    "java-junit": "6c0a20e08a88e625428f3769652049882c33d132b4a67157bba239d96dd25275",
+    "java-fixture": "6b92a80fc03677194d100ea4f4038540abe5deed1fc3fde615c39a31de8906f4",
+    "runtime-fixture": "6feda8e0868db0beccf0728c8606d1dbd46ee8618ede52f35444ceba2a61f4e6",
+    "native-fixture": "8ae1fa0283ddd70856b049450418d487e3d2cfe661bd6942243502bb11d970f5",
+    "shell": "7b39603b8309bf41d8d411f23b0f7577bdd28e57b7ffb445efba5f22821f83e9"
+  },
+  "external_api": "UNCHANGED",
+  "jni_native_product_sources": 0,
+  "jdk_runtime_product_sources": 0,
+  "verification": {
+    "local_strict_java21": "PASS",
+    "join_checks_28": "PASS",
+    "gcc_clang_six_modes": "PASS",
+    "recipe_junit": "NOT_RUN",
+    "m3jdk21_product": "NOT_RUN",
+    "jit_jni_abi": "NOT_RUN"
+  },
+  "disposition": "DRAFT_HOLD"
+}
