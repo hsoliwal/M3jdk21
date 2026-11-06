@@ -352,6 +352,8 @@ public final class SharedLexiconCatalog {
             if (mapping == null) return Optional.empty();
             SourceIdentity identity = new SourceIdentity(sourceId, recordId);
             imageAt(mapping.coordinate().shardId());
+            SynexiaPrecomputePayload cached = payloads.get(identity);
+            if (cached != null) return Optional.of(cached);
             return Optional.of(payloads.computeIfAbsent(identity,
                     ignored -> SynexiaPrecomputePayload.parse(mapping.precomputePayload())));
         } finally { lifecycle.readLock().unlock(); }
