@@ -1,0 +1,27 @@
+# event_id	stage	status	evidence
+01	INVENTORY	PASS	Original source heads 315cd18... and f89362c..., donor c30ba3f...
+02	DOCUMENTATION_FIRST	PASS	README commit 38f4c00818c4606250b2d59c22fb7b106bff6454 before code tree
+03	SOURCE_PREIMAGE	PASS	All five receiver Git blobs equal common ancestor; modes 100644
+04	SOURCE_MERGE	PASS	Two-parent source merge 869c049caed170903c837a2a238478ea101c79c3, first parent docs, second original donor
+05	GIT_TREE_COMPARE	PASS	From docs parent: 5 modified, 0 added, 0 deleted; from receiving source: 5 modified, 1 README added
+06	GIT_BLOB_READBACK	PASS	All five merged files exactly match original donor Git blobs
+07	GIT_ANCESTRY	PASS	Receiving and donor commits are ancestors; no default branch write
+08	LINT	NOT_RUN	No combined-tree Python/YAML lint execution yet
+09	COMPILE	NOT_RUN	No combined-tree native/Maven/OpenRewrite build yet
+10	TEST	NOT_RUN	No combined-tree backport Python tests yet
+11	RUNTIME	NOT_RUN	No JDK21 JNI/HotSpot runtime executed for merged tree
+12	CI	NOT_RUN	Await new PR exact-head GitHub workflow outcomes
+13	PRODUCT_ADMISSION	HOLD	No master/protected staging update or downstream product promotion
+14	INFLATER_DONOR_INVENTORY	PASS	Original PR2264 head 095bd738c377fa597fe95fe94a5029651e94d4bf source tree 3 donor paths mode 100644
+15	INFLATER_DOCUMENTATION_FIRST	PASS	Contract commit 464feb6232a81a17ff1aa23ca60ea20579754f2e precedes source merge
+16	INFLATER_PREIMAGE_AND_ABSENCE	PASS	Java owner 7b08d5b45385caaecec8d14ceee6c3eb3ec3a4f9 equals ancestor; two new paths absent
+17	INFLATER_SOURCE_MERGE	PASS	Two-parent  af66c21f980177753b24d2065a252a6d3964b740 parents docs and exact original #2264
+18	INFLATER_FIRST_PARENT_COMPARE	PASS	2 additions 1 modification 0 deletions or renames
+19	INFLATER_DONOR_BLOB_READBACK	PASS	3/3 exact donor postimages; existing five prior-source merge files 5/5 unchanged
+20	INFLATER_ANCESTRY	PASS	Original receiving and original #2264 donor commits preserved; no protected or master write
+21	INFLATER_MERGE_LINT	NOT_RUN	No combined-tree full source lint receipt
+22	INFLATER_MERGE_COMPILE	NOT_RUN	No combined-tree source-built JDK21 compilation
+23	INFLATER_MERGE_TEST	NOT_RUN	No combined-tree jtreg or OpenRewrite JUnit receipt
+24	INFLATER_MERGE_RUNTIME	NOT_RUN	No combined-tree JDK/JNI/HotSpot runtime receipt
+25	INFLATER_CI	NOT_RUN	New exact-head PR workflows require post-commit verification
+26	INFLATER_PRODUCT_ADMISSION	HOLD	No master merge, OpenJDK GA substitution, or all-fleet completion claim

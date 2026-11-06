@@ -78,10 +78,16 @@ jobs:
           import json
           from collections import Counter
           from pathlib import Path
+          from m3.backports.compatibility_queue import MAX_INVENTORY_FIELD_SIZE
 
           path = Path("inventory-output/COMPATIBILITY_QUEUE.tsv")
-          with path.open("r", encoding="utf-8", newline="") as handle:
-              rows = list(csv.DictReader(handle, delimiter="\t"))
+          previous_field_limit = csv.field_size_limit()
+          try:
+              csv.field_size_limit(MAX_INVENTORY_FIELD_SIZE)
+              with path.open("r", encoding="utf-8", newline="") as handle:
+                  rows = list(csv.DictReader(handle, delimiter="\t"))
+          finally:
+              csv.field_size_limit(previous_field_limit)
 
           if not rows:
               raise SystemExit("compatibility queue is empty")
@@ -112,11 +118,17 @@ jobs:
           import json
           from collections import Counter
           from pathlib import Path
+          from m3.backports.compatibility_queue import MAX_INVENTORY_FIELD_SIZE
 
           path = Path("inventory-output/UPSTREAM_CHANGES.tsv")
           data = path.read_bytes()
-          with path.open("r", encoding="utf-8", newline="") as handle:
-              rows = list(csv.DictReader(handle, delimiter="\t"))
+          previous_field_limit = csv.field_size_limit()
+          try:
+              csv.field_size_limit(MAX_INVENTORY_FIELD_SIZE)
+              with path.open("r", encoding="utf-8", newline="") as handle:
+                  rows = list(csv.DictReader(handle, delimiter="\t"))
+          finally:
+              csv.field_size_limit(previous_field_limit)
 
           by_release = Counter(int(row["release"]) for row in rows)
           by_disposition = Counter(row["disposition"] for row in rows)
