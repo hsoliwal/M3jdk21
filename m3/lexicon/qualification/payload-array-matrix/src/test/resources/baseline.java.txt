@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.text;
+package jdk.m3.text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +24,7 @@ import java.util.TreeMap;
  * remain readable with their JSON value kind, which keeps the receiver
  * forward-compatible without silently changing a known field's type.</p>
  */
-public final class SynexiaPrecomputePayload {
+public final class M3PrecomputePayload {
     public enum Kind { BOOLEAN, INTEGER, DECIMAL, STRING, INTEGER_ARRAY }
 
     /** One immutable scalar or integer-array payload field. */
@@ -79,18 +79,18 @@ public final class SynexiaPrecomputePayload {
     private static final Map<String, Expected> FIELD_TYPES = fieldTypes();
     private final Map<String, Field> fields;
 
-    private SynexiaPrecomputePayload(Map<String, Field> fields) {
+    private M3PrecomputePayload(Map<String, Field> fields) {
         this.fields = Collections.unmodifiableMap(new TreeMap<>(fields));
     }
 
     /** Parse the canonical JSON object retained by Synexia's records sidecar. */
-    public static SynexiaPrecomputePayload parse(String json) {
+    public static M3PrecomputePayload parse(String json) {
         Objects.requireNonNull(json, "json");
         Parser parser = new Parser(json);
         Map<String, Field> fields = parser.object();
         parser.skipWhitespace();
         if (!parser.atEnd()) throw parser.error("trailing JSON");
-        return new SynexiaPrecomputePayload(fields);
+        return new M3PrecomputePayload(fields);
     }
 
     public Set<String> fieldNames() { return fields.keySet(); }
