@@ -24,6 +24,7 @@
     <module>tooling/module-packs</module>
     <module>arrays</module>
     <module>collections</module>
+    <module>intern</module>
     <module>ports/file</module>
     <module>compiler/lifetime-slots</module>
     <module>compiler/nullness-facts</module>
