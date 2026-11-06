@@ -50,3 +50,68 @@ the naming recipe rewrites `.py` files). `EDITS.tsv`: file, kind, before blob, b
 sha256, rule; a second run is a fixed point (changed=0).
 
 Commit 1: 5 `VERIFY` rules, changed=0; no product source changes.
+Commit 2: 14 rules (4 `VERIFY`, 5 `EDIT`, 2 `TEMPLATE`, 3 `ADD`), changed=10 on the first run, 0 on the second;
+`TEMPLATE` and `ADD` rules pin their postimage sha256 as well.
+
+## Facade design (commit 2)
+
+**Delegate, not extend.** The core is `public final class M3Flat3Map<K, V>` (it cannot be extended without
+changing the owner) and has no `java.util.Map` supertype; the facade's `javap -public` reads
+`public final class ... implements Cloneable, Serializable, Map, Get, IterableGet, IterableMap, Put` over
+`java.lang.Object`, and a superclass would change that line and the inherited public surface. Delegation keeps
+`javap -public` (and `javap -public -s`) byte-identical (34 lines). The facade holds one
+`private transient jdk.m3.collections.M3Flat3Map<K, V> core` and nothing else. It is not `final`: `readObject` and
+`clone` must assign it, and the serialized form below has no field for it.
+
+| Facade member | Delegation |
+|---|---|
+| constructors, `get`, `put`, `remove(Object)`, `containsKey`, `containsValue`, `size`, `isEmpty`, `clear`, `putAll` | core map operations (`putAll` puts each entry, as Commons) |
+| `entrySet`, `keySet`, `values`, `mapIterator` | new view per call (as Commons flat mode) over the core's slot cursor; iterators write through; `remove()` uses `removeSlot` and keeps the cursor; a removed entry flyweight refuses access (`IllegalStateException`) |
+| `equals`, `hashCode`, `toString` | `java.util.Map` contracts over the cursor (`equals` returns false on `ClassCastException`/`NullPointerException` like `AbstractMap`; `toString` is `{k=v, k=v}` with `(this Map)`) |
+| `clone` | `super.clone()` plus `core.copy()` |
+| `getOrDefault`, `putIfAbsent`, `replace` x2, `remove(Object, Object)`, `compute`, `computeIfAbsent`, `computeIfPresent`, `merge`, `forEach`, `replaceAll` | `IterableMap.super.*`, the JDK `Map` defaults, which Commons `Flat3Map` 4.5.0 does not override either |
+
+**Core additions** (the single owner gains what the facade needs; existing public members unchanged, `javap
+-public` of the core gains exactly these 6 lines): `nextSlot(int)`, `slotKey(int)`, `slotValue(int)`,
+`setSlotValue(int, V)`, `removeSlot(int)` (no key lookup; returns the resume slot: same slot inline, next slot
+hashed) and `copy()` (same lanes, regime and order). `remove(Object)` is split into `removeHashed`/`removeInline`
+(MRL method split) so `removeSlot` shares the bodies. Field names and lane layout are unchanged (the crate oracle
+inspects them reflectively).
+
+**Serialization.** Master form: class `jdk.m3.collections.apache.M3Flat3Map`, `serialVersionUID` 0, no serializable
+fields (all fields transient), no data, and no instance could exist because every constructor threw. Kept: name,
+`serialVersionUID` 0, zero serializable fields. Added: `writeObject`/`readObject` with the Commons `Flat3Map` data
+layout (`defaultWriteObject`, `int` count, then key and value per entry), because a working map must carry its
+entries; the only descriptor change is the `SC_WRITE_METHOD` flag. Probed (`serialcompat.log` in GATES.tsv): the
+master class reads a new-form stream (skipping the data); a state-free master-form stream (built without a
+constructor through `ReflectionFactory`) is refused by the facade with `EOFException` instead of yielding an object
+whose every method throws; a truncated new-form stream is refused (`EOFException`). Commons quirks below were
+confirmed against 4.5.0 (`commons-quirks.log` in GATES.tsv). Not `writeReplace`/`readResolve`:
+a proxy would put a different class into the stream, a larger change than the flag.
+
+**Iteration order.** The core's slot order: insertion order inline (removal shifts), table order hashed. Commons
+4.5.0 differs and is itself mode-dependent (flat mode moves the last entry into a removed slot and prints
+`toString` as `{k3=v3,k2=v2,k1=v1}`; delegate mode follows `HashedMap` buckets and stays in delegate mode until
+`clear`). Neither `Map` nor `Flat3Map` specifies an order, so the differential compares sorted entry sets and
+counts raw order differences (`orderDiffs`) without failing on them.
+
+**Not compared** (Commons quirks outside the `Map` contract, recorded): `entrySet().remove(entry)` in Commons flat
+mode removes by key even when the value differs (the facade follows `java.util`: key and value must match);
+views held across a Commons `clear()` in delegate mode go stale (the facade's views always follow the core);
+callback counts (`hashCode`/`equals` calls) differ (`removeSlot` does no lookup); fail-fast
+`ConcurrentModificationException` exists only in Commons delegate mode (the facade, like Commons flat mode, is not
+fail-fast; a cursor is defined across its own `remove` and `setValue`).
+
+## Commons differential
+
+`M3Flat3MapDifferential` (test source of `apache-flat3-map`, JUnit wrapper `M3Flat3MapCommonsDifferentialTest`):
+seed `SEED = 0x4C303735_20261106L`, `OPS = 1,000,000`, lockstep with one draw per op applied to both sides, each side
+hashed separately (SHA-256 of its records). Keys: 12 ids plus `null`; ids 6..11 share three hash codes with id 0.
+Values 0..9 plus `null`. 23 op kinds: put/get/remove/containsKey/containsValue/size/clear/putAll, entry/key/value
+iteration, iterator `remove` and entry `setValue` by key/value predicate, `mapIterator` walk with
+`getKey`/`getValue`/`setValue`/`remove`, clone (independence checked), equals (copy, perturbed copy, the other
+side, `null`, a string, an empty map), hashCode, serialization round trip (the copy replaces the map), toString
+(parts sorted), the 11 `Map` defaults, iterator misuse (exception class), view queries. Every record ends with a
+state stamp (size and `Map.hashCode`). Put/remove bias alternates every 512 ops, so the size crosses the
+3-entry flat/hash boundary both ways. Commons Collections **4.5.0** (`commons-collections4-4.5.0.jar`, the
+module's existing compile dependency, Maven Central) is the oracle; nothing of it is vendored.

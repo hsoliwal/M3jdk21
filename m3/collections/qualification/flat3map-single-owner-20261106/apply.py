@@ -38,6 +38,7 @@ RECIPE_DIR = Path(__file__).resolve().parent
 RECIPE_DIR_REL = "m3/collections/qualification/flat3map-single-owner-20261106"
 BASE_COMMIT = "e65f0f664fa334b4ad60b1ebcb2f1436380aace1"
 OWNER = "jdk.m3.collections.M3Flat3Map"
+FACADE = "jdk.m3.collections.apache.M3Flat3Map"
 EDITS_NAME = "EDITS.tsv"
 EDITS_COLUMNS = ("file", "kind", "before_blob", "before_sha256", "after_sha256", "crate_sha256", "rule")
 ABSENT = "ABSENT"
@@ -46,20 +47,219 @@ MODULE_PACKAGE = "jdk.m3.collections"
 CRATE_PACKAGE = ".".join(("com", "m3", "collections"))
 CORE = "m3/collections/src/main/java/jdk/m3/collections/"
 CORE_TEST = "m3/collections/src/test/java/jdk/m3/collections/"
+APACHE = "m3/collections/implementations/apache-flat3-map/"
+APACHE_TEST = APACHE + "src/test/java/jdk/m3/collections/apache/"
+INVENTORY = "m3/collections/qualification/five-provider-inventory-20261018/INVENTORY.tsv"
+BRANCH = "m3/collections-flat3map-single-owner-20261106a"
 
 
 class Refused(Exception):
     pass
 
 
+CORE_EDITS = [
+    ("sub",
+     "    private static final long[] EMPTY_STATES = new long[0];\n",
+     "    private static final long[] EMPTY_STATES = new long[0];\n"
+     "    private static final String NOT_LIVE = \"M3Flat3Map: slot is not live\";\n"),
+    ("sub",
+     "        V prior = valueAt(slot);\n"
+     "        if (hashed) {\n"
+     "            keyLane[slot] = null;\n"
+     "            valueLane[slot] = null;\n"
+     "            setState(stateMaskWords, slot, PACKED_DELETED);\n"
+     "            size--;\n"
+     "            if (size == 0) reset();\n"
+     "        } else {\n"
+     "            int moved = size - slot - 1;\n"
+     "            if (moved > 0) {\n"
+     "                System.arraycopy(keyLane, slot + 1, keyLane, slot, moved);\n"
+     "                System.arraycopy(valueLane, slot + 1, valueLane, slot, moved);\n"
+     "            }\n"
+     "            --size;\n"
+     "            keyLane[size] = null;\n"
+     "            valueLane[size] = null;\n"
+     "        }\n"
+     "        return prior;\n"
+     "    }\n",
+     "        V prior = valueAt(slot);\n"
+     "        if (hashed) removeHashed(slot); else removeInline(slot);\n"
+     "        return prior;\n"
+     "    }\n"
+     "\n"
+     "    //FLLDCIM: MRL - L075 method split: remove(Object) and removeSlot(int) share the two removal bodies\n"
+     "    private void removeHashed(int slot) {\n"
+     "        keyLane[slot] = null;\n"
+     "        valueLane[slot] = null;\n"
+     "        setState(stateMaskWords, slot, PACKED_DELETED);\n"
+     "        size--;\n"
+     "        if (size == 0) reset();\n"
+     "    }\n"
+     "\n"
+     "    private void removeInline(int slot) {\n"
+     "        int moved = size - slot - 1;\n"
+     "        if (moved > 0) {\n"
+     "            System.arraycopy(keyLane, slot + 1, keyLane, slot, moved);\n"
+     "            System.arraycopy(valueLane, slot + 1, valueLane, slot, moved);\n"
+     "        }\n"
+     "        --size;\n"
+     "        keyLane[size] = null;\n"
+     "        valueLane[size] = null;\n"
+     "    }\n"),
+    ("sub",
+     "    public void clear() { reset(); }\n",
+     "    public void clear() { reset(); }\n"
+     "\n"
+     "    //FLLDCIM: MRL - L075 single owner: slot cursor for the Commons facade jdk.m3.collections.apache.M3Flat3Map\n"
+     "    /**\n"
+     "     * Returns the first live slot at or after {@code from}, or -1 when there is none. Ascending slot\n"
+     "     * order is this map's iteration order: insertion order while inline (a removal shifts the later\n"
+     "     * slots down), table order once hashed. A cursor stays valid across {@link #setSlotValue} and\n"
+     "     * {@link #removeSlot}; any other structural change ends it.\n"
+     "     */\n"
+     "    public int nextSlot(int from) {\n"
+     "        int end = hashed ? keyLane.length : size;\n"
+     "        for (int slot = Math.max(from, 0); slot < end; slot++) {\n"
+     "            if (!hashed || state(stateMaskWords, slot) == PACKED_USED) return slot;\n"
+     "        }\n"
+     "        return -1;\n"
+     "    }\n"
+     "\n"
+     "    /** Returns the key of live slot {@code slot}; IllegalStateException when the slot is not live. */\n"
+     "    @SuppressWarnings(\"unchecked\")\n"
+     "    public K slotKey(int slot) { return (K) keyLane[liveSlot(slot)]; }\n"
+     "\n"
+     "    /** Returns the value of live slot {@code slot}; IllegalStateException when the slot is not live. */\n"
+     "    public V slotValue(int slot) { return valueAt(liveSlot(slot)); }\n"
+     "\n"
+     "    /** Replaces the value of live slot {@code slot} without a structural change; returns the old value. */\n"
+     "    public V setSlotValue(int slot, V value) {\n"
+     "        V previous = valueAt(liveSlot(slot));\n"
+     "        valueLane[slot] = value;\n"
+     "        return previous;\n"
+     "    }\n"
+     "\n"
+     "    /**\n"
+     "     * Removes the mapping of live slot {@code slot} without a key lookup and returns the slot a cursor\n"
+     "     * resumes from: the same slot while inline (the later slots shift down), the next one once hashed.\n"
+     "     */\n"
+     "    public int removeSlot(int slot) {\n"
+     "        if (!hashed) {\n"
+     "            removeInline(liveSlot(slot));\n"
+     "            return slot;\n"
+     "        }\n"
+     "        removeHashed(liveSlot(slot));\n"
+     "        return slot + 1;\n"
+     "    }\n"
+     "\n"
+     "    /** Returns an independent map with the same mappings, regime and slot (iteration) order. */\n"
+     "    public M3Flat3Map<K, V> copy() {\n"
+     "        M3Flat3Map<K, V> copy = new M3Flat3Map<>();\n"
+     "        copy.keyLane = keyLane.clone();\n"
+     "        copy.valueLane = valueLane.clone();\n"
+     "        copy.stateMaskWords = stateMaskWords.clone();\n"
+     "        copy.size = size;\n"
+     "        copy.occupied = occupied;\n"
+     "        copy.hashed = hashed;\n"
+     "        return copy;\n"
+     "    }\n"
+     "\n"
+     "    private int liveSlot(int slot) {\n"
+     "        if (slot < 0 || slot >= (hashed ? keyLane.length : size)\n"
+     "                || hashed && state(stateMaskWords, slot) != PACKED_USED) {\n"
+     "            throw new IllegalStateException(NOT_LIVE);\n"
+     "        }\n"
+     "        return slot;\n"
+     "    }\n"),
+]
+
+APACHE_POM_EDITS = [
+    ("sub",
+     "<!-- GENERATED by qualification/five-provider-inventory-20261018/M3FiveProviderScaffold.java from "
+     "scaffold-template/module-pom.xml; regenerate, do not hand-edit. -->\n",
+     "<!-- Owned since census leaf L075 (" + RECIPE_DIR_REL + "/apply.py): no longer generated by the five-provider "
+     "scaffold; edit through that recipe. -->\n"),
+    ("sub",
+     "  <name>M3 scaffold: org.apache.commons.collections4.map.Flat3Map</name>\n"
+     "  <description>SCAFFOLD, not owned: M3Flat3Map mirrors the public surface of "
+     "org.apache.commons.collections4.map.Flat3Map; every body throws UnsupportedOperationException.</description>\n",
+     "  <name>M3 Commons facade: org.apache.commons.collections4.map.Flat3Map</name>\n"
+     "  <description>Commons-compatible facade: M3Flat3Map keeps the public surface of "
+     "org.apache.commons.collections4.map.Flat3Map and delegates every operation to the single implementation "
+     + OWNER + " (com.m3:m3-collections).</description>\n"),
+    ("sub",
+     "  <dependencies>\n"
+     "    <dependency>\n"
+     "      <groupId>org.apache.commons</groupId>\n"
+     "      <artifactId>commons-collections4</artifactId>\n"
+     "      <version>4.5.0</version>\n"
+     "    </dependency>\n"
+     "  </dependencies>\n",
+     "  <dependencies>\n"
+     "    <dependency>\n"
+     "      <groupId>com.m3</groupId>\n"
+     "      <artifactId>m3-collections</artifactId>\n"
+     "      <version>0.1.0-SNAPSHOT</version>\n"
+     "    </dependency>\n"
+     "    <dependency>\n"
+     "      <groupId>org.apache.commons</groupId>\n"
+     "      <artifactId>commons-collections4</artifactId>\n"
+     "      <version>4.5.0</version>\n"
+     "    </dependency>\n"
+     "    <dependency>\n"
+     "      <groupId>org.junit.jupiter</groupId>\n"
+     "      <artifactId>junit-jupiter</artifactId>\n"
+     "      <version>5.10.2</version>\n"
+     "      <scope>test</scope>\n"
+     "    </dependency>\n"
+     "  </dependencies>\n"),
+    ("sub",
+     "            <arg>-Werror</arg>\n"
+     "          </compilerArgs>\n"
+     "        </configuration>\n"
+     "      </plugin>\n"
+     "    </plugins>\n"
+     "  </build>\n",
+     "            <arg>-Werror</arg>\n"
+     "          </compilerArgs>\n"
+     "        </configuration>\n"
+     "      </plugin>\n"
+     "      <plugin>\n"
+     "        <groupId>org.apache.maven.plugins</groupId>\n"
+     "        <artifactId>maven-surefire-plugin</artifactId>\n"
+     "        <version>3.2.5</version>\n"
+     "      </plugin>\n"
+     "    </plugins>\n"
+     "  </build>\n"),
+]
+
+APACHE_NOTICE_EDITS = [
+    ("sub", "M3 collections scaffold: M3Flat3Map\n",
+     "M3 collections Commons facade: M3Flat3Map (delegates to " + OWNER + ")\n"),
+]
+
+INVENTORY_EDITS = [
+    ("re",
+     r"^(org\.apache\.commons\.collections4\.map\.Flat3Map\tapache\t4\.5\.0\tclass\t07\t)SCAFFOLD\t([^\t\n]*)\t"
+     r"scaffold module m3/collections/implementations/apache-flat3-map\t([^\t\n]*)(\t[^\n]*?)(\r?)$",
+     r"\1DONE " + BRANCH + r"\t\2\tfacade m3/collections/implementations/apache-flat3-map over the single owner "
+     + OWNER + " (census L075, " + RECIPE_DIR_REL + r")\tsingle owner " + OWNER + r"; \3\4\5"),
+]
+
+AGGREGATOR_EDITS = [
+    ("sub", "  <description>123 SCAFFOLD modules generated", "  <description>122 SCAFFOLD modules generated"),
+    ("sub", "\n    <module>apache-flat3-map</module>", ""),
+]
+
 # kind, path, preimage blob (ABSENT for a new file), crate sha256 or "-", note, payload, postimage sha256 or "-"
 RULES = (
     # --- commit 1: the core and its crate tests already carry the crate postimage (receive abc8b3aea44, renamed by
     # fe35ea98841); the 11 hunks of the historical prepacked candidate are superseded (HUNKS.tsv, NEC.tsv) ----------
-    ("VERIFY", CORE + "M3Flat3Map.java", "f2de0a79c1cf4c2413b8b61b2f3538812068eddf",
+    ("EDIT", CORE + "M3Flat3Map.java", "f2de0a79c1cf4c2413b8b61b2f3538812068eddf",
      "28fb1d0ac39c3e1836750694c729349d01dd4477d4d3d711c82242055263710e",
-     "crate postimage (packed two-bit states), received by abc8b3aea44 and renamed by fe35ea98841; unchanged",
-     None, "-"),
+     "crate postimage (packed two-bit states) verified on the preimage; slot cursor nextSlot/slotKey/slotValue/"
+     "setSlotValue/removeSlot/copy for the facade, remove(Object) split into removeHashed/removeInline",
+     CORE_EDITS, "-"),
     ("VERIFY", CORE + "M3SlotArrays.java", "ab4663c2c76108dad0de96252ec294006e7f629c",
      "59da94e994bbbf3decc17fb1c217e42b126496361f28e8a4dcbedf1baedf54d5",
      "crate's unchanged hash/capacity kernel", None, "-"),
@@ -73,6 +273,36 @@ RULES = (
      "254d85294724b1cdcaa26a2c526da0fa17d623be",
      "508f91d8852c460c27cd4b81004496c58af08f5bab14432228fff2ebe33970ba",
      "crate provider test (Commons and account providers)", None, "-"),
+    # --- commit 2: the apache class becomes a facade over the owner ---------------------------------------------------
+    ("ADD", CORE_TEST + "M3Flat3MapSlotCursorTest.java", ABSENT, "-",
+     "JUnit: slot cursor and copy against a HashMap model", "M3Flat3MapSlotCursorTest.java",
+     "7b95f4e2806f5438fdb3774e6a434f605844008f6732322fa25893bf6573c8ef"),
+    ("TEMPLATE", APACHE + "src/main/java/jdk/m3/collections/apache/M3Flat3Map.java",
+     "e8125b543daf9bbaee312b07e9fe5c21b578db3d", "-",
+     "scaffold (every body threw UnsupportedOperationException) -> facade delegating to " + OWNER
+     + "; javap -public identical", FACADE + ".java",
+     "5d52a632f4003cf55ec039a26568226d10ef356203d175e5fe6b092a1ef08009"),
+    ("ADD", APACHE_TEST + "M3Flat3MapDifferential.java", ABSENT, "-",
+     "seeded lockstep differential driver: Commons Flat3Map 4.5.0 vs facade (full) and vs core (subset)",
+     "M3Flat3MapDifferential.java", "e779e6bb6533fdac0a06151f48625be6be27ecf9fba0d5312cd1fd6ecb0d3bd4"),
+    ("ADD", APACHE_TEST + "M3Flat3MapCommonsDifferentialTest.java", ABSENT, "-",
+     "JUnit wrapper of the differential (1,000,000 ops per mode)", "M3Flat3MapCommonsDifferentialTest.java",
+     "688c37897736d855419e25d5376fa9452382a39ba6f34121d4a89d9df2d16b3d"),
+    ("EDIT", APACHE + "pom.xml", "961b2cdd07fef1ec810a335c91a94465b1fdbdc7", "-",
+     "owned header, name/description, dependency com.m3:m3-collections, junit-jupiter test, surefire 3.2.5",
+     APACHE_POM_EDITS, "-"),
+    ("TEMPLATE", APACHE + "README.md", "d07e24d82fcc402cd867580acad8224aa859680d", "-",
+     "scaffold README -> facade README", "apache-flat3-map.README.md",
+     "cd845729575f40e202808f53cb58674937e606ef3fad22f479401e0e0f425cdb"),
+    ("EDIT", APACHE + "NOTICE.txt", "efd7875003abfe8bb042c3ff6270e51949aae5a1", "-", "first line names the facade",
+     APACHE_NOTICE_EDITS, "-"),
+    ("EDIT", INVENTORY, "44af4e1ecd9a50588cb7fdf4b70f4c15f78ca85c", "-",
+     "row Flat3Map: SCAFFOLD -> DONE " + BRANCH + ", evidence and reuse owner name the facade and the owner",
+     INVENTORY_EDITS, "-"),
+    ("EDIT", "m3/collections/implementations/pom-five-provider-scaffold.xml",
+     "45e28a103cfe1ed997dd73bc57727350adf7dca4",
+     "-", "apache-flat3-map leaves the scaffold aggregator (its row is no longer SCAFFOLD; it needs m3-collections)",
+     AGGREGATOR_EDITS, "-"),
 )
 
 
