@@ -31,8 +31,8 @@ bash "$RECIPE_DIR/differential.sh" "$1" "$2" "$SCRATCH" "${4:-100000}" "${5:-202
 (cd "$ROOT" && "$PY" -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only m3/collections/ | tail -n 1)
 if [ "${FULL_TESTS:-0}" = 1 ]; then
     mvn -B -ntp $REPO -f "$MODULE/pom.xml" test > "$SCRATCH/module-test.log" 2>&1 || true
-    grep -E "Tests run: [0-9]+, Failures.*Skipped: [0-9]+$" "$SCRATCH/module-test.log" | tail -n 1
-    grep -E "^\[ERROR\]   [A-Z]" "$SCRATCH/module-test.log" | sed 's/^\[ERROR\]   //' | tr -d '' | sort -u > "$SCRATCH/failset-head.txt"
+    grep -E "Tests run: [0-9]+, Failures.*Skipped: [0-9]+" "$SCRATCH/module-test.log" | tail -n 1 | tr -d '\r'
+    grep -E "^\[ERROR\]   [A-Z]" "$SCRATCH/module-test.log" | sed 's/^\[ERROR\]   //' | tr -d '\r' | sort -u > "$SCRATCH/failset-head.txt"
     sed -n '/^## base failing set/,/^## head failing set/p' "$RECIPE_DIR/TEST_BASELINE_DIFF.txt" | grep -v '^#' | sort -u > "$SCRATCH/failset-base.txt"
     diff "$SCRATCH/failset-base.txt" "$SCRATCH/failset-head.txt" && echo "FAILSET IDENTICAL ($(wc -l < "$SCRATCH/failset-head.txt") pre-existing failures)"
 fi
