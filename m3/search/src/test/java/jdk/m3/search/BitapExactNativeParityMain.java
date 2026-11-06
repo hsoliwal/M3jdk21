@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/BitapExactNativeParityMain.java (blob 6bb647e70ff8) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/BitapExactNativeParityMain.java (blob 6bb647e70ff8) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
 import java.nio.ByteBuffer;
