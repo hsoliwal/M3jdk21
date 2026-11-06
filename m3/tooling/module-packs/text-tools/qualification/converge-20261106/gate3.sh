@@ -1,6 +1,6 @@
 #!/bin/bash
 # gate3.sh <text-tools-root> <label> : M3_TEXT_TOOLS_CONVERGE gates.
-# G1 javac --release-free module build of jdk.m3.text/io/structured with java.base patched by M3jdk21's own
+# G1 javac --release-free module build of jdk.m3.text/io/structured with java.base patched by M3JDK 21's own
 #    java.util.concurrent.Progress{Job,Monitor,Monitors} sources (the M3 java.base API M3File needs), -Xlint:all,-module -Werror.
 # G2 gcc -Werror for every native/*.c (shared, JDK 21 headers).
 cd "$(dirname "$0")"

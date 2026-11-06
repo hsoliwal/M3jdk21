@@ -17,7 +17,7 @@ import java.util.Objects;
 
 /**
  * Direct UTF-8 literal grep kernel. The source is borrowed, never retained by native code.
- * Selected String projections are made by the executing JDK (M3 String on M3JDK21).
+ * Selected String projections are made by the executing JDK (M3 String on M3JDK 21).
  *
  * <p>The caller must not mutate, unmap, or close the direct memory during this method.
  * This is literal case-sensitive matching, not Unix4j's general regex/option surface.</p>

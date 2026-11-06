@@ -58,7 +58,7 @@ def main():
     command(output / "native-text.log", os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra", "-Werror",
             "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
             "-o", text_native / "libm3textops.so", native_source.with_name("m3textops.c").resolve(strict=True))
-    # Received from com.synexia synexia-unix4j-m3 by M3_TEXT_TOOLS_CONVERGE v1 (2026-11-06).
+    # Received from com.synexia m3-unix4j-m3 by M3_TEXT_TOOLS_CONVERGE v1 (2026-11-06).
     for lib, target_dir in (("m3unixtext", text_native), ("m3unixaho", text_native), ("m3structured", structured_native)):
         command(output / ("native-" + lib + ".log"), os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra",
                 "-Werror", "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),

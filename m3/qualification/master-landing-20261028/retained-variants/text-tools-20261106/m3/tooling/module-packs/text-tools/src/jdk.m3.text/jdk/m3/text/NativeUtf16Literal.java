@@ -8,7 +8,7 @@ import java.util.Objects;
  * Prepared UTF-16 literal search over the running JDK String facade.
  *
  * <p>The compiled plan owns only the literal and primitive failure offsets. It never
- * owns or copies a source text payload. On M3JDK21 the String facade remains backed
+ * owns or copies a source text payload. On M3JDK 21 the String facade remains backed
  * by the canonical M3 String owner; search coordinates are ordinary UTF-16 indexes,
  * exactly matching {@link String#contains(CharSequence)} semantics for valid Unicode.</p>
  */

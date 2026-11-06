@@ -1,5 +1,5 @@
 #!/bin/bash
-# fixtures_run.sh <label> : run M3jdk21's own text-tools proofs exactly as build.py does (modes, flags, pass markers)
+# fixtures_run.sh <label> : run M3JDK 21's own text-tools proofs exactly as build.py does (modes, flags, pass markers)
 # against g3-<label> (modules + natives from gate3.sh). Prints PASS/FAIL per proof.
 cd "$(dirname "$0")"
 L=$1; W=g3-$L; J="C:/Program Files/Java/jdk-21/bin"
