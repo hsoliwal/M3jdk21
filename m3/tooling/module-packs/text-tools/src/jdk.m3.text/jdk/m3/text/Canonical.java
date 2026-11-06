@@ -38,4 +38,16 @@ public final class Canonical {
       }
     }
   }
+
+  /**
+   * Length-framed UTF-8 from an immutable M3/CharSequence view. Malformed input is
+   * validated before digest mutation. The view must remain immutable during the
+   * call; no input spelling or view reference is retained after return.
+   */
+  public Canonical textView(CharSequence value) {
+    long utf8Bytes = Utf8Segments.length(value);
+    number(utf8Bytes);
+    Utf8Segments.update(digest, value);
+    return this;
+  }
 }

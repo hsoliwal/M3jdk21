@@ -70,4 +70,82 @@ public final class M3StreamJoin {
         }
         return lo;
     }
+
+    /**
+     * Exact String equijoin through the existing M3 grouping owner. Keys are borrowed
+     * references, not flattened/copied text. All duplicate pairs are emitted in
+     * left-major then original-right-row order. The combined input limit and pair
+     * limit are one million. Null keys reject; a zero cap allows only an empty join.
+     * Cardinality is checked before allocating result lanes. Inputs must stay stable.
+     */
+    public static Pairs equijoin(String[] left, String[] right, int maxPairs) {
+        Objects.requireNonNull(left, "left"); Objects.requireNonNull(right, "right");
+        long rows = (long) left.length + right.length;
+        if (rows > 1_000_000 || maxPairs < 0 || maxPairs > 1_000_000)
+            throw new IllegalArgumentException("text join budget");
+        String[] borrowed = new String[(int) rows];
+        System.arraycopy(left, 0, borrowed, 0, left.length);
+        System.arraycopy(right, 0, borrowed, left.length, right.length);
+        M3DataQuality.StringGroups groups = M3DataQuality.groupStrings(borrowed);
+        int[] offsets = new int[groups.groups() + 1];
+        for (int j = 0; j < right.length; j++) offsets[groups.groupOf(left.length + j) + 1]++;
+        for (int g = 1; g < offsets.length; g++) offsets[g] += offsets[g - 1];
+        long pairs = 0;
+        for (int i = 0; i < left.length; i++) {
+            int group = groups.groupOf(i);
+            pairs += offsets[group + 1] - offsets[group];
+            if (pairs > maxPairs) throw new IllegalArgumentException("joined pair budget exceeded");
+        }
+        int[] cursor = offsets.clone(), rightRows = new int[right.length];
+        for (int j = 0; j < right.length; j++)
+            rightRows[cursor[groups.groupOf(left.length + j)]++] = j;
+        int[] outLeft = new int[(int) pairs], outRight = new int[(int) pairs];
+        int at = 0;
+        for (int i = 0; i < left.length; i++) {
+            int group = groups.groupOf(i);
+            for (int p = offsets[group]; p < offsets[group + 1]; p++) {
+                outLeft[at] = i; outRight[at++] = rightRows[p];
+            }
+        }
+        return new Pairs(outLeft, outRight);
+    }
+
+    /**
+     * Exact content equijoin of immutable M3/CharSequence views without flattening.
+     * Reuses groupViews and the existing primitive Pairs result. Duplicate pairs
+     * follow left-major/original-right-row order. Combined input and output limits
+     * are one million; all nulls reject even when an input has no possible match.
+     * Inputs must stay stable. A zero cap permits only an actually empty join.
+     */
+    public static Pairs equijoinViews(CharSequence[] left, CharSequence[] right, int maxPairs) {
+        Objects.requireNonNull(left, "left"); Objects.requireNonNull(right, "right");
+        long rows = (long) left.length + right.length;
+        if (rows > 1_000_000 || maxPairs < 0 || maxPairs > 1_000_000)
+            throw new IllegalArgumentException("view join budget");
+        CharSequence[] borrowed = new CharSequence[(int) rows];
+        System.arraycopy(left, 0, borrowed, 0, left.length);
+        System.arraycopy(right, 0, borrowed, left.length, right.length);
+        M3DataQuality.StringGroups groups = M3DataQuality.groupViews(borrowed);
+        int[] offsets = new int[groups.groups() + 1];
+        for (int j = 0; j < right.length; j++) offsets[groups.groupOf(left.length + j) + 1]++;
+        for (int g = 1; g < offsets.length; g++) offsets[g] += offsets[g - 1];
+        long pairs = 0;
+        for (int i = 0; i < left.length; i++) {
+            int group = groups.groupOf(i);
+            pairs += offsets[group + 1] - offsets[group];
+            if (pairs > maxPairs) throw new IllegalArgumentException("joined pair budget exceeded");
+        }
+        int[] cursor = offsets.clone(), rightRows = new int[right.length];
+        for (int j = 0; j < right.length; j++)
+            rightRows[cursor[groups.groupOf(left.length + j)]++] = j;
+        int[] outLeft = new int[(int) pairs], outRight = new int[(int) pairs];
+        int at = 0;
+        for (int i = 0; i < left.length; i++) {
+            int group = groups.groupOf(i);
+            for (int p = offsets[group]; p < offsets[group + 1]; p++) {
+                outLeft[at] = i; outRight[at++] = rightRows[p];
+            }
+        }
+        return new Pairs(outLeft, outRight);
+    }
 }
