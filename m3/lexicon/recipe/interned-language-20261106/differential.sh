@@ -67,12 +67,12 @@ renamed_lines=$(grep -cE "\b($types)\b" "$SCRATCH/donor.raw.txt" || true)
 javap_same=0
 javap_total=0
 javap_diff=""
-for class in "$SCRATCH"/classes/com/synexia/m3scale/intern/*.class; do
+for class in "$SCRATCH"/classes/jdk/internal/m3/m3scale/intern/*.class; do
     name=$(basename "$class" .class)
     outer=${name%%\$*}
     rest=${name#"$outer"}
     target=$(awk -F'\t' -v d="$outer" '$1=="TYPE" && $2==d {print $3; exit}' "$MAP")
-    "$JAVA_BIN/javap" -p -cp "$SCRATCH/classes" "com.synexia.m3scale.intern.$name" | sed -f "$normalize" | grep -v '^Compiled from' > "$SCRATCH/javap/$target$rest.donor.txt"
+    "$JAVA_BIN/javap" -p -cp "$SCRATCH/classes" "jdk.internal.m3.m3scale.intern.$name" | sed -f "$normalize" | grep -v '^Compiled from' > "$SCRATCH/javap/$target$rest.donor.txt"
     "$JAVA_BIN/javap" -p -cp "$RECEIVER/target/classes" "jdk.m3.lexicon.$target$rest" | grep -v '^Compiled from' > "$SCRATCH/javap/$target$rest.relocated.txt"
     javap_total=$((javap_total + 1))
     if cmp -s "$SCRATCH/javap/$target$rest.donor.txt" "$SCRATCH/javap/$target$rest.relocated.txt"; then
