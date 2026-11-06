@@ -174,3 +174,12 @@ acceptance. A recipe identity or template alone is not execution evidence.
 
 No full JDK array replacement, zero-copy-at-all-boundaries, universal O(1)
 operation, or performance win is claimed by this first slice.
+
+## CSR index (2026-11-06)
+
+`M3CsrIndex` (immutable compressed-sparse-row relation row -> contiguous references, two `int[]` lanes, direct
+`fromOwners` plus the staged `Builder`) was relocated from the Synexia MAT value module by recipe, never by hand:
+[recipe/csr-index-20261106](recipe/csr-index-20261106/README.md) holds the recipe, the relocation map, the
+provenance pins, the gates (`mvn package` with the module flags, the 7,329,532-assertion oracle in the test phase,
+the byte-for-byte differential against the donor class) and the lessons. The `m3/collections` frozen CSR scaffolds
+(`M3FrozenLongMultimap`, `M3FrozenLongTable`) are not wired to it in that leaf.
