@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: GPL-2.0-only
+// Compiled separately with stock OpenJDK 21, in which Object.toAdpater is absent.
+public class LegacyPreAliasSubclass {
+    public <T> T toAdpater(Class<T> clazz) {
+        if (clazz == String.class) {
+            return clazz.cast("LEGACY_ALIAS_CHILD");
+        }
+        return null;
+    }
+}
