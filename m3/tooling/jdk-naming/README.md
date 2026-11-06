@@ -21,7 +21,8 @@ User decisions (2026-10-31): M3JDK21 is standalone and self-sufficient, every M3
 ## Stages
 
 ```text
-plan --tree HEAD                       counts moves and rewrites per rule; refuses a name collision
+plan --tree HEAD                       counts moves and rewrites per rule; refuses a name collision; reports
+                                       SHADOW declarations named like a renamed package's first segment (jdk)
 apply --tree HEAD --ref refs/heads/X   one commit: moved paths, rewritten blobs (bytes kept, CRLF kept), RENAME_MAP.tsv
 reseal.py --base B --tree X --ref X    one commit: pins carried round after round to a fixed point, RENAME_RESEAL.tsv
 plan --tree X                          must print moves=0 rewrites=0 refusals=0

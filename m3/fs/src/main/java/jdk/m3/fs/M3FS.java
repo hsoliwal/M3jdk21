@@ -643,15 +643,16 @@ public final class M3FS implements AutoCloseable {
   /** Call-local lazy compilation preserves image/native admission and exception ordering. */
   private static final class DefaultRegexFallback implements BiPredicate<CharSequence, RegexMode> {
     private final M3FsRegexImage program;
-    private java.util.regex.Pattern jdk;
+    //FLLDCIM: MRL - fs-field-package-shadow-20261106: was jdk, which obscured package jdk.m3.fs.internal.re2j (JLS 6.4.2)
+    private java.util.regex.Pattern jdkPattern;
     private jdk.m3.fs.internal.re2j.Pattern re2;
 
     private DefaultRegexFallback(M3FsRegexImage program) { this.program = program; }
 
     @Override public boolean test(CharSequence value, RegexMode operation) {
       if (program.semantics() == M3FsRegexImage.Semantics.JDK) {
-        if (jdk == null) jdk = java.util.regex.Pattern.compile(program.expression());
-        java.util.regex.Matcher matcher = jdk.matcher(value);
+        if (jdkPattern == null) jdkPattern = java.util.regex.Pattern.compile(program.expression());
+        java.util.regex.Matcher matcher = jdkPattern.matcher(value);
         return switch (operation) {
           case MATCHES -> matcher.matches();
           case FIND -> matcher.find();

@@ -346,6 +346,30 @@ class JdkNamingTest(unittest.TestCase):
         again = jn.plan(self.root)
         self.assertEqual((again["moves"], again["rewrites"]), ([], []))
 
+    def test_a_declaration_named_like_a_renamed_package_segment_is_reported(self):
+        """fe35ea98841 renamed com.m3.fs.internal.re2j to jdk.m3.fs.internal.re2j in M3FS.java, where
+        DefaultRegexFallback kept a field named jdk: in an expression the field obscures the package (JLS 6.4.2) and
+        javac failed (M3FS.java:[661,33] cannot find symbol: variable m3). plan reports every such declaration in a
+        Java file it rewrites (SHADOW rows, shadows=N, no refusal), on the checkout and on a tree; a method named jdk,
+        a returned value, a comment line and a file the plan does not rewrite are not reported."""
+        self.assertEqual(jn.PACKAGE_SEGMENTS, ("jdk",))
+        self.put("m3/fs/Fallback.java", "class Fallback {\n    private java.util.regex.Pattern jdk;\n"
+                 "    private com.m3.fs.re2j.Pattern re2;\n    Object jdk() { return jdk; }\n"
+                 "    void f(String jdk, int n) { re2 = com.m3.fs.re2j.Pattern.compile(jdk); }\n"
+                 "    // keep the jdk; prose\n    void g(java.util.List<String> xs) { for (var jdk : xs) {} }\n}\n")
+        self.put("m3/fs/Clean.java", "class Clean { private com.m3.fs.re2j.Pattern re2; }\n")
+        self.put("m3/fs/Untouched.java", "class Untouched { Object jdk; }\n")
+        expected = [("m3/fs/Fallback.java", line, "jdk") for line in (2, 5, 7)]
+        result = jn.plan(self.root)
+        self.assertFalse(result["refusals"])
+        self.assertEqual(result["shadows"], expected)
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            jn.report(result, str(self.root / "plan.tsv"))
+        self.assertIn(" shadows=3 ", out.getvalue())
+        self.assertIn("SHADOW\tm3/fs/Fallback.java\t2:jdk\n", (self.root / "plan.tsv").read_text(encoding="utf-8"))
+        self.assertEqual(jn.plan_tree(self.root, self.commit())["shadows"], expected)
+
 
 if __name__ == "__main__":
     unittest.main()
