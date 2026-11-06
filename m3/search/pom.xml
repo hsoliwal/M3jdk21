@@ -29,6 +29,7 @@
   </properties>
   <dependencies>
     <dependency><groupId>com.m3</groupId><artifactId>m3-collections</artifactId><version>0.1.0-SNAPSHOT</version></dependency>
+    <dependency><groupId>com.m3</groupId><artifactId>m3-ports-file</artifactId><version>0.1.0-SNAPSHOT</version></dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -58,8 +59,44 @@
         <version>3.2.5</version>
         <configuration>
           <useModulePath>false</useModulePath>
+          <excludes>
+            <exclude>**/*Native*Test.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <!-- Native tests: build src/main/native with CMake first, then -Pm3-search-native -Dm3.search.native.dir=<dir>. -->
+      <id>m3-search-native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
+            <configuration>
+              <useModulePath>false</useModulePath>
+              <excludes combine.self="override"/>
+              <systemPropertyVariables>
+                <m3.native.enabled>true</m3.native.enabled>
+                <m3.native.library.path>${m3.search.native.dir}/${m3.search.native.prefix}m3search${m3.search.native.suffix}</m3.native.library.path>
+                <m3.minimum.cover.native.junit>true</m3.minimum.cover.native.junit>
+                <m3.minimum.cover.library>${m3.search.native.dir}/${m3.search.native.prefix}m3coverwindow${m3.search.native.suffix}</m3.minimum.cover.library>
+                <m3.window.native.library>${m3.search.native.dir}/${m3.search.native.prefix}m3coverwindow${m3.search.native.suffix}</m3.window.native.library>
+                <m3.batch.subsequence.library>${m3.search.native.dir}/${m3.search.native.prefix}m3batchsubseq${m3.search.native.suffix}</m3.batch.subsequence.library>
+                <m3.concat.native>${m3.search.native.dir}/${m3.search.native.prefix}m3wordconcat${m3.search.native.suffix}</m3.concat.native>
+                <m3.subsequence.native>${m3.search.native.dir}/${m3.search.native.prefix}m3subseqwindow${m3.search.native.suffix}</m3.subsequence.native>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <m3.search.native.prefix>lib</m3.search.native.prefix>
+        <m3.search.native.suffix>.so</m3.search.native.suffix>
+      </properties>
+    </profile>
+  </profiles>
 </project>

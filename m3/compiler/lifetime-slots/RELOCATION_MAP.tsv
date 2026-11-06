@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/relocate.py (recipe RELOCATE_LIFETIME_SLOT_PLANNER v1). Donor: hsoliwal/com.synexia develop 64652588f0d4c23b1f6e0411090b2a796325ae0e.
+# FILE rows: donor path (donor repository root) -> target path (this module root). PACKAGE rows: donor package -> target package. TYPE rows: donor type -> target type (identity when the donor name already follows M3 naming). EXTERNAL rows: third-party packages the donor imports, kept as they are (declared closure; the pom carries the dependency).
+kind	donor	target	note
+FILE	synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3DoopLifetimeSlotPlanner.java	src/main/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlanner.java	planner: interval partitioning over half-open lifetime intervals, java.util.Arrays/Objects only
+FILE	synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DoopLifetimeSlotPlannerSelfTest.java	src/test/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlannerSelfTest.java	independent overlap oracle: 6,000 seeded cases, every interval pair, permutation invariance, refusals
+FILE	synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DoopLifetimeSlotPlannerTest.java	src/test/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlannerTest.java	JUnit 5 wrapper of the planner self-test
+FILE	synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DoopCompatibleLifetimeSlotsSelfTest.java	src/test/java/jdk/m3/compiler/lifetime/M3DoopCompatibleLifetimeSlotsSelfTest.java	per-compatibility-group oracle: 5,000 seeded workloads, cross-group isolation, permutation invariance, refusals
+FILE	synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DoopCompatibleLifetimeSlotsTest.java	src/test/java/jdk/m3/compiler/lifetime/M3DoopCompatibleLifetimeSlotsTest.java	JUnit 5 wrapper of the compatible-slots self-test
+PACKAGE	com.synexia.rewrite	jdk.m3.compiler.lifetime	the donor lived in the OpenRewrite recipe module without being a recipe; the receiver is the compiler lifetime lane
+TYPE	M3DoopLifetimeSlotPlanner	M3DoopLifetimeSlotPlanner	identity: already M3*
+TYPE	M3DoopLifetimeSlotPlannerSelfTest	M3DoopLifetimeSlotPlannerSelfTest	identity
+TYPE	M3DoopLifetimeSlotPlannerTest	M3DoopLifetimeSlotPlannerTest	identity
+TYPE	M3DoopCompatibleLifetimeSlotsSelfTest	M3DoopCompatibleLifetimeSlotsSelfTest	identity
+TYPE	M3DoopCompatibleLifetimeSlotsTest	M3DoopCompatibleLifetimeSlotsTest	identity
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (the two wrapper tests); pom dependency org.junit.jupiter:junit-jupiter:5.11.4 test scope, as m3/compiler/jdk-standard

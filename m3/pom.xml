@@ -23,6 +23,7 @@
     <module>backports</module>
     <module>tooling/module-packs</module>
     <module>ports/file</module>
+    <module>compiler/lifetime-slots</module>
     <module>nlp</module>
   </modules>
 
