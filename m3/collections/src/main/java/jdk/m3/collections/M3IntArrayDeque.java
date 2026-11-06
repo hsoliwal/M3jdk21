@@ -3,7 +3,7 @@
 // Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/IntArrayDeque.java
 // Source-Git-blob: e5a3dcf87e19d38a2fcf07148320919c958d483a
-package jdk.m3.util;
+package jdk.m3.collections;
 
 import java.util.NoSuchElementException;
 import java.util.function.IntConsumer;

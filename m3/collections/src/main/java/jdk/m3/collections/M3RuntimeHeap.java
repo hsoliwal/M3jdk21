@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 // Modified 2026: M3JDK optional collection projection; source contracts preserved.
-package jdk.m3.util;
+package jdk.m3.collections;
 
 /**
  * JVM heap pressure observations for M3-owned optional storage and growth.

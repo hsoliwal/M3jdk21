@@ -12,11 +12,9 @@ import subprocess
 import sys
 from pathlib import Path
 
-PORT_CLASSES = ("M3PrimitiveIndexView", "M3PrimitiveSoaStore", "M3PrimitiveKind",
-                "M3DenseHash", "M3SortableTopK", "M3RuntimeHeap")
 CONTRACTS = ("jdk.m3.collections.M3FilteredViewsContract",
              "jdk.m3.collections.M3MutableFilteredViewsContract",
-             "jdk.m3.util.M3PrimitiveIndexViewFilterContract")
+             "jdk.m3.collections.M3PrimitiveIndexViewFilterContract")
 NATIVE_SYMBOL = "Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative"
 NATIVE_SYMBOLS = frozenset((
     NATIVE_SYMBOL,
@@ -56,8 +54,7 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
     patch.mkdir()
     tests = [pack / "src/test/java" / (name.replace(".", "/") + ".java")
              for name in CONTRACTS]
-    common = ["--add-modules", "jdk.m3.collections,jdk.m3.collections"]
-    common += ["--add-reads", "jdk.m3.collections=jdk.m3.collections"]
+    common = ["--add-modules", "jdk.m3.collections"]
     if not linked:
         common += ["--module-path", str(modules)]
     # Linked javac uses the image's actual modules; --release would hide nonstandard APIs.
@@ -109,15 +106,13 @@ def main():
     if output.exists():
         raise FileExistsError("fresh output directory required: " + str(output))
     collection_sources = sorted((repo / "m3/collections/src/main/java").rglob("*.java"))
-    view_sources = sorted((pack / "src/main/java").rglob("*.java"))
-    port = repo / "m3/ports/collections/src/main/java/jdk/m3/util"
-    view_sources.extend(port / (name + ".java") for name in PORT_CLASSES)
+    view_sources = []  # one module since 2026-11-06: the former optional owners are collection sources
     native_sources = [repo / "m3/collections/src/main/native/collections" / name
                       for name in ("m3_index_mask_compactor.c", "m3_index_mask_window.c")]
     packager = repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
     for source in [*collection_sources, *view_sources, *native_sources, packager]:
         source.resolve(strict=True)
-    if not collection_sources or not (pack / "src/main/java/module-info.java").is_file():
+    if not collection_sources:
         raise ValueError("complete collection source modules required")
     output.mkdir(parents=True)
     modules, jars, native, headers = (output / name for name in ("modules", "jars", "native", "headers"))
@@ -127,7 +122,7 @@ def main():
     source_receipt.extend(str(path.relative_to(repo)) + "\t" + digest(path)
                           for path in sorted([*collection_sources, *view_sources, *native_sources, packager]))
     (output / "COMPILED_INPUTS.tsv").write_text("\n".join(source_receipt) + "\n", encoding="utf-8")
-    for name, sources in (("jdk.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
+    for name, sources in (("jdk.m3.collections", collection_sources),):
         command(output / (name + "-javac.log"), home / "bin/javac", "--release", "21",
                 "-Xlint:all,-module", "-Werror", "-proc:none", "-h", headers,
                 "-d", modules / name, *sources)

@@ -3,7 +3,7 @@
 // Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/DenseHash.java
 // Source-Git-blob: 0474a80b032eb1e1fae085c886e7b7fe71200bf8
-package jdk.m3.util;
+package jdk.m3.collections;
 
 final class M3DenseHash {
     static final float DEFAULT_LOAD_FACTOR = 0.65f;

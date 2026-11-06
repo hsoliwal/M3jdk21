@@ -3,6 +3,10 @@
 
 # M3 optional collection modules
 
+Since 2026-11-06 (CONSOLIDATE_PORT_OWNERS v1) there is one `jdk.m3.collections` module: the primitive
+view owners this pack used to compile as a second module of the same name live in `m3/collections`. This
+pack keeps its contracts as tests over that module, and `build.py` compiles the one module.
+
 The existing `com.m3.collections` module owns generic read-only and mutable filtered/sorted views. This pack refines two private constructions in its current M3FilteredViews owner and reuses M3MutableFilteredViews unchanged. The optional `jdk.m3.collections` module exports only `com.m3.util` versioned primitive views and their existing-compatible support owners.
 
 The Maven `m3-collections` profile composes the existing `m3/collections` project and this optional project; their product source paths and module identities remain authoritative. Both modules require only java.base at runtime. Generic oracle tests add an explicit test-only read edge from the optional module to the original module.

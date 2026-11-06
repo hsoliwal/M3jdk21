@@ -4,7 +4,7 @@ package jdk.m3.jni;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.util.M3RuntimeHeap;
+import jdk.m3.collections.M3RuntimeHeap;
 
 /**
  * Explicit leases for monotonically assigned M3 logical handles, NOT Java object reference counts.

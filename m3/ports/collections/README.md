@@ -9,6 +9,12 @@ integration evidence.
 
 ## Included M3 owners
 
+Since 2026-11-06 (CONSOLIDATE_PORT_OWNERS v1, one home) these owners and their tests live in
+`m3/collections`, package `jdk.m3.collections`; `PROVENANCE.tsv` and the verifier here still pin their
+Synexia materialization. The remaining files of this directory are scaffolds and four owners that collide
+with different `jdk.m3.collections` implementations, pending reconciliation.
+
+
 - `com.m3.util.M3PrimitiveKind`
 - package-private `com.m3.util.M3DenseHash` implementation atom
 - `com.m3.util.M3PrimitiveArrayList`

@@ -3,7 +3,7 @@
 // Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveArrayDeque.java
 // Source-Git-blob: 7b2bfc81d5fe8fe69b6c5258d66f521d89ae1dec
-package jdk.m3.util;
+package jdk.m3.collections;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
