@@ -72,19 +72,26 @@ public final class M3ListDiff {
 		return map;
 	}
 
+	//FLLDCIM: MRL - census2 P2-064, crate m3-listdiff-exact-runs-20261030: pre fc3b925f -> post 648c59dc (jdk_naming 262308f8); exact-size run lanes
 	/** Runs of {@code false} entries as (start, length) lanes; descending start order when {@code descending}. */
 	static int [][] runs (boolean [] kept, boolean descending) {
-		int [] starts = new int [kept.length], lengths = new int [kept.length];
-		int count = 0;
-		for (int i = 0; i < kept.length; i++) {
-			if (kept [i]) continue;
-			int start = i;
-			while (i + 1 < kept.length && !kept [i + 1]) i++;
-			starts [count] = start;
-			lengths [count++] = i - start + 1;
+		int runCount = 0;
+		boolean previousKept = true;
+		for (boolean currentKept : kept) {
+			if (!currentKept && previousKept) runCount++;
+			previousKept = currentKept;
 		}
-		starts = Arrays.copyOf (starts, count);
-		lengths = Arrays.copyOf (lengths, count);
+		int [] starts = new int [runCount], lengths = new int [runCount];
+		for (int i = 0, run = 0; i < kept.length;) {
+			if (kept [i]) {
+				i++;
+				continue;
+			}
+			int first = i;
+			do i++; while (i < kept.length && !kept [i]);
+			starts [run] = first;
+			lengths [run++] = i - first;
+		}
 		if (descending) {
 			reverse (starts);
 			reverse (lengths);

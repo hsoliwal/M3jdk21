@@ -150,7 +150,8 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
             if (relations.get(middle).sourceId().compareTo(sourceId) <= 0) low = middle + 1;
             else high = middle;
         }
-        return List.copyOf(relations.subList(first, low));
+        //FLLDCIM: MRL - census2 P2-025, crate m3-current-java-engine-qualification-20261101 (m3-related-empty-source-range-20261031, pre 38102366 -> post df379886): an empty range returns List.of()
+        return first == low ? List.of() : List.copyOf(relations.subList(first, low));
     }
 
     @Override
