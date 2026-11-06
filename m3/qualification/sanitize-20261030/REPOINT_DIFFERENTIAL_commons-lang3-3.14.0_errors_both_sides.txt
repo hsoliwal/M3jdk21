@@ -1,0 +1,14 @@
+# commons-compress-1.26.0 compiled against commons-lang3-3.14.0 (old) and 3.17.0 (new), same vendored closure;
+# both runs attribute all files and exit 1 on the same 12 errors (zstd-jni, not carried); 0 added; 0 name a lang3 symbol.
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:27: error: package com.github.luben.zstd does not exist
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:28: error: package com.github.luben.zstd does not exist
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:39: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:42: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:53: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:54: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:25: error: package com.github.luben.zstd does not exist
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:35: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:45: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:57: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:70: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.26.0/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:86: error: cannot find symbol

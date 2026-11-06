@@ -1,0 +1,9 @@
+# Forward-only master source preservation; NOT product admission
+old_staging_head=a5775196bf420ba067a2809e4b0f30f9cc35fb61
+new_master_parent=172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246
+HOLD: exact-head suite includes failures; no recipe/JNI/JVM product acceptance claimed
+path	mode	status	blob
+m3/collections/qualification/master-source-successor-20261031.tsv	100644	added	6304ded9ede290a14f943dc97ab03922c923a97a
+m3/collections/synexia-donation.json	100644	modified	151075615572b3ceb314f3439e181564c2b1f66e
+m3/collections/test_verify_donation.py	100644	modified	c3be5bc7f344de42bd3d224ffb6c972214fac77c
+m3/collections/verify_donation.py	100644	modified	e6a593f9370e1305d1ed896dd2aeee349a6e8f5e
