@@ -17,10 +17,8 @@
  */
 package jdk.m3.file;
 
-import jdk.m3.file.M3Progress;
-import jdk.m3.file.M3ProgressState;
+import jdk.m3.collections.M3ProgressState;
 import java.time.Instant;
-import java.util.concurrent.CancellationException;
 
 /**
  * Progress contract for every task or long-running process.
@@ -29,68 +27,14 @@ import java.util.concurrent.CancellationException;
  * retaining Synexia's machine-readable snapshot model. Implementations must be thread-safe when
  * used by concurrent workers.
  *
+ * <p>An adapter over the owner {@link jdk.m3.collections.M3ProgressMonitor}: the abstract methods,
+ * {@code UNKNOWN}, {@code checkCanceled()} and the shadow streams are the owner's; this interface
+ * adds the snapshot model, the covariant weighted {@link #split(long)} and {@link #noop()}.
+ *
  * @since ContextOS 1.0
  */
-public interface M3ProgressMonitor extends M3Progress {
-
-    /** Unknown amount of work. */
-    long UNKNOWN = M3Progress.UNKNOWN;
-
-    /**
-     * Begins a task.
-     *
-     * @param taskName task name
-     * @param totalWork total work units, or {@link #UNKNOWN}
-     */
-    void beginTask(String taskName, long totalWork);
-
-    /**
-     * Marks the task complete.
-     */
-    void done();
-
-    /**
-     * Adds completed work units.
-     *
-     * @param work completed units to add
-     */
-    void worked(long work);
-
-    /**
-     * Atomically publishes absolute progress without restarting elapsed-time accounting.
-     *
-     * @param worked completed work units
-     * @param totalWork total work units, or {@link #UNKNOWN}
-     */
-    void setProgress(long worked, long totalWork);
-
-    /**
-     * Changes the primary task name.
-     *
-     * @param taskName task name
-     */
-    void setTaskName(String taskName);
-
-    /**
-     * Changes the current sub-task name.
-     *
-     * @param subTaskName sub-task name
-     */
-    void subTask(String subTaskName);
-
-    /**
-     * Returns whether cancellation was requested.
-     *
-     * @return {@code true} when canceled
-     */
-    boolean isCanceled();
-
-    /**
-     * Sets cancellation state.
-     *
-     * @param canceled cancellation state
-     */
-    void setCanceled(boolean canceled);
+//FLLDCIM: UNIFY - adapter over jdk.m3.collections.M3ProgressMonitor (long units on both sides; jdk.m3.file.M3Progress, M3ProgressChild and M3ProgressState retired); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
+public interface M3ProgressMonitor extends jdk.m3.collections.M3ProgressMonitor {
 
     /**
      * Returns the latest immutable progress state.
@@ -115,15 +59,6 @@ public interface M3ProgressMonitor extends M3Progress {
     }
 
     /**
-     * Throws when cancellation has been requested.
-     */
-    default void checkCanceled() {
-        if (isCanceled()) {
-            throw new CancellationException("Task canceled: " + snapshot().taskName());
-        }
-    }
-
-    /**
      * Creates a weighted child monitor whose completed work contributes at most
      * {@code parentWork} units to this monitor.
      *
@@ -135,6 +70,7 @@ public interface M3ProgressMonitor extends M3Progress {
      * @return weighted child monitor
      * @throws IllegalArgumentException when {@code parentWork} is negative
      */
+    @Override
     default M3ProgressMonitor split(final long parentWork) {
         return new M3ChildProgressMonitor(this, parentWork);
     }

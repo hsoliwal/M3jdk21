@@ -18,7 +18,7 @@ decision ABSORB into `m3/collections`): the canonicalizer and 128-bit id leaf of
 | `M3Uuid128Vector` | object-free dense UUID column: two `long[]` lanes, 16 bytes per occurrence, `Builder` |
 | `M3Uuid128HashIndex` | immutable open-addressing index UUID bits -> first vector position (long/long/int/byte lanes), built under an `M3PoolProgressMonitor` |
 | `M3UuidStorageFootprint` | binary (16) vs canonical ASCII (36) payload accounting |
-| `M3PoolProgressMonitor` | the donor's progress/cancellation contract (`begin`, `worked`, `cancelled`, `done`, `checkCancelled`, all default, `none()`); carried under its own name, see NEC |
+| `M3PoolProgressMonitor` | the donor's progress/cancellation contract (`begin`, `worked`, `cancelled`, `done`, `checkCancelled`, all default, `none()`); carried under its own name, see NEC. Since 2026-11-06 an adapter over `jdk.m3.collections.M3ProgressMonitor` (`m3/qualification/progress-monitor-unify-20261106`: `begin` -> `beginTask`, `cancelled` -> `isCanceled`); its map row is `SUPERSEDED` |
 
 `java.base` only (`java.lang.invoke`, `java.util`, `java.util.concurrent`, `java.lang.ref`, `java.nio`). The classes
 join the existing module `jdk.m3.collections` (package already exported), so `pom.xml` and `module-info.java` are
@@ -31,7 +31,7 @@ unchanged. Main 720 lines, test 813 lines (3 relocated oracles, 3 JUnit wrappers
 | donor | `hsoliwal/synexia-m3scale-apache2` develop `3385d79a2968c770aedf1d3398b2a62f05ebc092` (2026-11-06); leaf commits 98477ed0 (2026-09-23, StrongValuePool/WeakValueCanonicalizer/ImmutableId), fc4e7850 + 79c83cd4 + 6c09697c (2026-09-23, Uuid128 + vector + hash index), 72271745 (2026-09-23, uuid variant), 99f80871 (2026-10-27, exact tree restore) |
 | donor files | 10 main files of `m3-immutable-pool/src/main/java/com/synexia/m3scale/immutablepool/` (blobs in `PROVENANCE.tsv`; `StrongValuePool` f216222edf15, `Uuid128` bb77b6d5b7a8) and the oracles `ImmutablePoolSelfTest`, `Uuid128SelfTest`, `uuid/UuidBinarySelfTest` |
 | recipe | `relocate.py` v2: `python -I m3/collections/recipe/immutable-pools-20261106/relocate.py --donor-git <clone> --donor-rev 3385d79a [--module m3/collections] [--check] [--donor-subset DIR]` |
-| map | `RELOCATION_MAP.tsv`: 1 `REPO`, 13 `FILE`, 2 `PACKAGE`, 1 `SUBSET_PACKAGE`, 13 `TYPE`, 14 `DROP_METHOD`, 7 `DROP_LINE`, 6 `REWRITE`, 1 `INSERT_AFTER`, 9 `SKIP`, 3 `NEC` rows; no `EXTERNAL` row |
+| map | `RELOCATION_MAP.tsv`: 1 `REPO`, 12 `FILE`, 1 `SUPERSEDED` (the pool monitor, since 2026-11-06), 2 `PACKAGE`, 1 `SUBSET_PACKAGE`, 13 `TYPE`, 14 `DROP_METHOD`, 7 `DROP_LINE`, 6 `REWRITE`, 1 `INSERT_AFTER`, 9 `SKIP`, 3 `NEC` rows; no `EXTERNAL` row |
 | provenance | `PROVENANCE.tsv`: donor commit, blob, sha256, URL, target sha256, counts of renamed/mapped/rewritten/dropped/inserted lines, `body_match` (13/13 TRUE) |
 | naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/collections/`: 0 moves, 0 rewrites, 0 refusals, fixed point |
 
@@ -84,7 +84,7 @@ byte-comparable; hosting the image behind `M3FmtFrozenDictionaryContract` is a l
 | 4 differential | `bash m3/collections/recipe/immutable-pools-20261106/differential.sh <donor clone> 3385d79a <scratch> 100000 20261106` after step 1 | oracle outputs identical (sha256 `f5c5a1768a86fd6b...`); `M3ImmutablePoolsDump` dumps identical over 100,000 seeded operations, 103,202 lines, 13,836,186 bytes (sha256 `e5124ff1f52d6bcc...` on both sides) |
 | 5 naming | `jdk_naming.py plan` before, `apply` after | 0 moves, 0 rewrites, 0 refusals, fixed point |
 | 6 scope | `git status --short` | only `m3/collections/**` and the `CONVERGE_COLLECTIONS.tsv` rows |
-| recipe | `relocate.py --check` after apply and after `jdk_naming.py` | `files=13 changed=0 provenance=UNCHANGED body_match=13/13` |
+| recipe | `relocate.py --check` after apply and after `jdk_naming.py` | `files=12 changed=0 provenance=UNCHANGED body_match=12/12` (13/13 before the monitor row became `SUPERSEDED`, 2026-11-06) |
 | javap | `javap -public` donor vs relocated, names mapped | 138 lines each, identical |
 
 `verify.sh <donor clone> <rev> <scratch> [ops] [seed]` runs the gates in order (`FULL_TESTS=1` adds step 3). Lessons of
