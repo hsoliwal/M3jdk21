@@ -12,6 +12,8 @@ ledgers, provenance and evidence JSON, NOTICE/LICENSE, m3/docs, release audits).
 plan: every tracked path gets its renamed path (refused on collision); every in-scope text file gets its rewrite
 count per rule. apply: moves plus rewrites, only when the plan has no refusal and every in-scope file is checked out
 (a file outside a sparse checkout has unknown content; pass 1 missed such content-only files: RENAME_COMPLETENESS).
+In-scope text: the TEXT_SUFFIXES, pom.xml, and every ServiceLoader descriptor under META-INF/services/ (no suffix;
+pass 1 renamed such files but not the provider names inside them: SERVICE_DESCRIPTOR_SCOPE).
 --tree REV reads the files as blobs of REV instead of the checkout, and apply writes one commit to --ref through git
 fast-import, so a sparse or partial checkout renames the whole tree. Bytes are kept as they are (CRLF too; pass 1
 read text mode and dropped CRLF in 4 files). A second plan after apply finds nothing (fixed point).
@@ -62,6 +64,8 @@ COMMENT_LINE = re.compile(r"^\s*(?://|/\*|\*|#|<!--)")
 QUICK = re.compile(r"(?i)synexia|com[./_]{1,2}m3[./_]|m3([-_./])m3\1|m3[ _-]?jdk")
 TEXT_SUFFIXES = {".java", ".yml", ".yaml", ".xml", ".sh", ".py", ".mjs", ".js", ".properties", ".gradle", ".toml",
                  ".cfg", ".ini", ".c", ".h", ".cpp", ".json", ".txt"}
+# extension-less text: a ServiceLoader descriptor is in scope by its directory (is_service_descriptor)
+SERVICE_DESCRIPTOR_DIR = "/META-INF/services/"
 DOC_SUFFIXES = {".md", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch"}
 DOC_NAMES = {"NOTICE", "LICENSE", "COPYRIGHT", "AUTHORS", "THIRD_PARTY_NOTICES"}
 LINEAGE_HINTS = ("provenance", "evidence", "receipt", "manifest", "SOURCE_SHA256", "FINAL_", "readback")
@@ -118,12 +122,21 @@ def rewrite_text(text: str) -> tuple[str, dict]:
     return "\n".join(rewrite_line(line, counts) if QUICK.search(line) else line for line in lines), counts
 
 
+def is_service_descriptor(path: str) -> bool:
+    """A java.util.ServiceLoader descriptor, META-INF/services/<service FQN>: one provider FQN per line, no suffix.
+    Pass 1 renamed the file (the service name follows the path rule) and skipped its content as non-text, so two
+    javac plugins (com.sun.source.util.Plugin) and three other descriptors named providers that no longer existed
+    (SERVICE_DESCRIPTOR_SCOPE)."""
+    return SERVICE_DESCRIPTOR_DIR in path
+
+
 def in_scope(path: str, only: tuple[str, ...]) -> bool:
     if is_self(path) or is_lineage(path):
         return False
     if only and not path.startswith(only):
         return False
-    return Path(path).suffix.lower() in TEXT_SUFFIXES or Path(path).name == "pom.xml"
+    return (Path(path).suffix.lower() in TEXT_SUFFIXES or Path(path).name == "pom.xml"
+            or is_service_descriptor(path))
 
 
 def keeps_name(path: str) -> str:

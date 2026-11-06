@@ -7,6 +7,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Function;
@@ -149,18 +150,27 @@ public final class M3JdkStandardPluginSelfTest {
             }
             """;
 
+    /**
+     * The donor word, assembled at run time: as a literal, the JDK naming recipe
+     * (m3/tooling/jdk-naming) renames it like any other name, and the 2026-11-06 rename turned
+     * this fixture into M3 names (scheme=m3 then found none).
+     */
+    private static final String DONOR = "Syn" + "exia";
+    private static final String LEGACY_TYPE = DONOR + "Thing";
+
     private static final String LEGACY = """
-            package jdk.internal.m3.legacy;
+            package com.%s.legacy;
 
-            /** A fixture that keeps Synexia names. */
-            public final class M3Thing {
+            /** A fixture that keeps %s names. */
+            public final class %s {
                 /** A legacy constant. */
-                public static final int M3_LIMIT = 1;
+                public static final int %s_LIMIT = 1;
 
-                private M3Thing() {
+                private %s() {
                 }
             }
-            """;
+            """.formatted(DONOR.toLowerCase(Locale.ROOT), DONOR, LEGACY_TYPE,
+            DONOR.toUpperCase(Locale.ROOT), LEGACY_TYPE);
 
     private static final String SCHEMED = """
             package jdk.internal.m3.example;
@@ -250,12 +260,12 @@ public final class M3JdkStandardPluginSelfTest {
     /** scheme=m3: the Synexia fixture breaks it three times, the M3 fixture never; opt-in. */
     private static void schemeChecks(Path work) {
         Map<String, Integer> legacy =
-                rules(compile(work, "M3Thing", LEGACY, "mode=warning", "scheme=m3"));
+                rules(compile(work, LEGACY_TYPE, LEGACY, "mode=warning", "scheme=m3"));
         check(legacy.equals(Map.of("NAME_SCHEME", 3)), "scheme=m3 over Synexia names " + legacy);
         Map<String, Integer> schemed =
                 rules(compile(work, "M3Thing", SCHEMED, "mode=warning", "scheme=m3"));
         check(schemed.isEmpty(), "scheme=m3 flagged M3 names " + schemed);
-        Map<String, Integer> off = rules(compile(work, "M3Thing", LEGACY, "mode=warning"));
+        Map<String, Integer> off = rules(compile(work, LEGACY_TYPE, LEGACY, "mode=warning"));
         check(off.isEmpty(), "the scheme must be opt-in " + off);
     }
 

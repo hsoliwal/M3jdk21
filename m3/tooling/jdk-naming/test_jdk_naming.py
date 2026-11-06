@@ -290,6 +290,26 @@ class JdkNamingTest(unittest.TestCase):
         result = jn.plan(self.root, ("m3/a/",))
         self.assertEqual([m[0] for m in result["moves"]], ["m3/a/SynexiaA.java"])
 
+    def test_a_service_descriptor_is_text_and_its_provider_names_follow_the_package(self):
+        """META-INF/services/<service> has no suffix: pass 1 renamed the file (the service name) and skipped the
+        provider names inside it as non-text, so javac could not load M3JdkStandardPlugin or M3SourceSignalPlugin
+        (ServiceConfigurationError: Provider com.m3.compiler.standard.M3JdkStandardPlugin not found); the content
+        of a descriptor is in scope, and the name of the file and the names inside it move together."""
+        descriptor = "m3/x/src/main/resources/META-INF/services/com.m3.x.Service"
+        self.put(descriptor, "# comment\ncom.m3.x.Impl\ncom.synexia.x.Other$Inner\n")
+        self.put("m3/x/src/main/resources/META-INF/MANIFEST.MF", "Main-Class: com.m3.x.Impl\n")
+        self.assertTrue(jn.in_scope(descriptor, ()))
+        self.assertFalse(jn.in_scope("m3/x/src/main/resources/META-INF/MANIFEST.MF", ()))
+        result = jn.plan(self.root)
+        self.assertFalse(result["refusals"])
+        self.assertEqual([m[0] for m in result["moves"]], [descriptor])
+        self.assertEqual([r[0] for r in result["rewrites"]], [descriptor])
+        jn.apply(self.root, result)
+        moved = self.root / "m3/x/src/main/resources/META-INF/services/jdk.m3.x.Service"
+        self.assertEqual(moved.read_text(encoding="utf-8"), "# comment\njdk.m3.x.Impl\njdk.internal.m3.x.Other$Inner\n")
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
 
 if __name__ == "__main__":
     unittest.main()

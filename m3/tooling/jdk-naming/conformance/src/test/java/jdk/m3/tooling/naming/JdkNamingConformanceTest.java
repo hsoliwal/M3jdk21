@@ -124,6 +124,8 @@ class JdkNamingConformanceTest {
         assertTrue(NamingScan.inScope("m3/x/Foo.java"));
         assertTrue(NamingScan.inScope(".github/workflows/w.yml"));
         assertTrue(NamingScan.inScope("m3/x/pom.xml"));
+        assertTrue(NamingScan.inScope("m3/x/META-INF/services/com.sun.source.util.Plugin"));
+        assertFalse(NamingScan.inScope("m3/x/src/main/resources/META-INF/MANIFEST.MF"));
         assertFalse(NamingScan.inScope("m3/x/provenance.json"));
         assertFalse(NamingScan.inScope("m3/x/evidence/run.json"));
         assertFalse(NamingScan.inScope("m3/docs/notes.yml"));
