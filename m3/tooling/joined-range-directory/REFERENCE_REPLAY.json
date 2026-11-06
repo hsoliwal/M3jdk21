@@ -1,0 +1,29 @@
+{
+  "schema": "M3_HISTORICAL_JOINED_REFERENCE_REPLAY_V1",
+  "historicalCommit": "1a79e669ec536ac45bf7a1566596aa05977bf18b",
+  "historicalReplayIsCurrentAdmission": false,
+  "currentHeadBoundInHistoricalReceipts": false,
+  "currentValidationWorkflow": ".github/workflows/m3-current-nlp-search-jmods-20261018.yml",
+  "triggerPaths": [
+    ".github/workflows/m3-joined-range-directory.yml",
+    "m3/tooling/joined-range-directory/REFERENCE_REPLAY.json"
+  ],
+  "historicalClosure": {
+    "toolingFiles": 39,
+    "originalBuildFiles": 58,
+    "freshBindingRows": 41,
+    "originalSourceFiles": 27,
+    "originalTestFiles": 25
+  },
+  "legacyBindingGit": "4992e91a630eb4ca6af7755c3bf17c3b6997c925",
+  "freshBindingGit": "1b1d9ef5943f046247c890bc7d05d5a80804f744",
+  "unchangedV8DeclarationSha256": "5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d",
+  "unchangedNlpLockedJavaSources": 145,
+  "qualifiedReceiverHead": "142ee65092cc61cb02cdd58d1fa5d47b800663bb",
+  "currentCheckoutSemantics": "Existing GitHub pull-request merge checkout; current evidence must record actual SHA/tree and verify scoped current inputs.",
+  "historicalReceipts": "Checkout/qualification receipts name only the pinned reference commit.",
+  "sourceMatchEvidence": "HISTORICAL_REFERENCE.json in Synexia recipe crate; source identity only until hosted execution passes.",
+  "releaseNativeAndFullJdkAdmission": "Separate and unchanged",
+  "phaseAdvanced": false,
+  "authority": false
+}
