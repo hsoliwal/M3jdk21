@@ -10,8 +10,8 @@ The master `M3LongCompositeViews.java` Git blob before admission is
 `30a9d1b1b3ae781c4cefa543a1b24fd9c6c62f58`, exactly the admitted preimage in the
 source-sealed Java recipe. Its generated postimage Git blob is
 `e3e6594c62a233aedfa4d4a9bd2f36557cb4a453`; the two JUnit/standalone
-test blobs are `e7e9c6e3970adb0c5d7d482b78d22b3e49ab1621` and
-`8b648ac7da24d144ab82e335c2ce8589ef6c956e`.
+test blobs are `fb1c89a9247c514d3316aa5a5f254b0b9e7e0a49` and
+`b875a17aa85afab1bda288790be6f83ab189472d`.
 Exact SHA-256 custody of the three generated Java files is enforced by
 `verify_sorted_set_algebra.py` and `sorted-set-algebra-postimages-20261017.tsv`.
 

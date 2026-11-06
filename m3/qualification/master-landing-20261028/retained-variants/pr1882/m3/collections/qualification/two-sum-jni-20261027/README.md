@@ -11,9 +11,9 @@ Original product commit before this pass: `f2aa93d393ce4fd323716625b047319ad2368
 | `src/main/java/com/m3/collections/M3LongRankBatchNative.java` | `86a901ee34deae468db9c453f6f8cb636b49238d` | `8ba40d4b547f53bcf47ec0fb52eda6085a27efc9` |
 | `src/main/java/com/m3/collections/M3LongRankIndex.java` | `0f3256ad47e5f14e841adeda7fd9898e353964a2` | `77c6f8b98e39d9e22513a9c1cf5108cf82a0e866` |
 | `src/main/native/collections/m3_long_rank_batch_jni.c` | `107d5f86c901042c7fe23c926495aadb568798ca` | `2afe176456419c5d6f4a29d2bfa2ce8f24eed1c4` |
-| `src/test/java/com/m3/collections/M3SortedTwoSumBatchContract.java` | ABSENT | `7e6cd5cdef950fda1067451181279510d02ba219` |
-| `src/test/java/com/m3/collections/M3SortedTwoSumBatchTest.java` | ABSENT | `e0a03fadb838eb6bc82f1175134fee445150eabe` |
-| `.github/workflows/m3-two-sum-rank-jni-java21.yml` | ABSENT | `521a2e1fcb0dfd4d015e325dea2200f28fc380e6` |
+| `src/test/java/com/m3/collections/M3SortedTwoSumBatchContract.java` | ABSENT | `81fa89b55d12d3d9d391424602dad690f53ac200` |
+| `src/test/java/com/m3/collections/M3SortedTwoSumBatchTest.java` | ABSENT | `c20f602faacc12a4eeffb1c79d5e18423c16372c` |
+| `.github/workflows/m3-two-sum-rank-jni-java21.yml` | ABSENT | `f69af2174c7ea5e75726c7dc17d5e9e98f58958e` |
 
 Product Java files are under `m3/collections/`; all source Git blobs above were independently compared to the current Synexia manifest/templates **before** this receiving commit.
 

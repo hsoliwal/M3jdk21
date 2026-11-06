@@ -1,5 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public final class M3CollectionSdkCatalogSelfTest {
             previous = family.upstreamName();
             check(M3CollectionSdkCatalog.require(family.upstreamName()).equals(family), "lookup equality");
             if (family.hasExistingM3Owner()) {
-                check(family.existingM3Owner().startsWith("com.m3.collections."), "owner identity");
+                check(family.existingM3Owner().startsWith("jdk.m3.collections."), "owner identity");
                 check(family.disposition() != M3CollectionSdkCatalog.Disposition.PENDING,
                         "pending cannot claim installed owner");
             }
@@ -57,7 +57,7 @@ public final class M3CollectionSdkCatalogSelfTest {
         check(!guava.upstreamName().equals(eclipse.upstreamName()), "Guava != Eclipse FQCN");
         check(spring.disposition() == M3CollectionSdkCatalog.Disposition.PENDING, "no Spring module dependency");
         check(M3CollectionSdkCatalog.require("org.eclipse.collections.api.list.primitive.MutableLongList")
-                .existingM3Owner().equals("com.m3.collections.M3LongArrayList"), "Eclipse long shape only");
+                .existingM3Owner().equals("jdk.m3.collections.M3LongArrayList"), "Eclipse long shape only");
         for (String jdk : List.of("java.util.ArrayList", "java.util.SequencedSet",
                 "java.util.SequencedCollection", "java.util.SequencedMap",
                 "java.util.concurrent.ConcurrentHashMap")) {

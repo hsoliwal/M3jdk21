@@ -15,9 +15,9 @@ This is **M3JDK21 product-source refinement**, not an `M3 + JDK` adapter or new 
 | `M3LongRankBatchNative.java` | `99872c10902c15cbbf143dd158a6bcf6736465e1` | `19dbdde0a25da8484b225cd88b9cec586e0431e2` |
 | `M3LongRankIndex.java` | `f9de7b74124cd1e2f6f32c4e9a34af4178c1d787` | `7003a9bf043b118f25f2d21428ddb8ec86267e32` |
 | `m3_long_rank_batch_jni.c` | `e7ed7e9a3a9eb71e1970d8b4f023147afb8e7543` | `04d9410518bfae1894be2fd7324d5c952699d1ce` |
-| standalone Java differential contract | ABSENT | `45b9281a36e224499e7a643af020ed515628f36b` |
-| JUnit integration | ABSENT | `5620d728f668c477837e2d3605589fbba15b486d` |
-| native exact-head Actions gate | ABSENT | `c99ddd81ca8a2a73ab2a519317ea3b68d820a146` |
+| standalone Java differential contract | ABSENT | `709b590640cc3ad76b13ba760c3891879c483af6` |
+| JUnit integration | ABSENT | `0dc9a908e7e6b1a081f9226c4645cad834f6395b` |
+| native exact-head Actions gate | ABSENT | `ef6353aebcee93fedae476735f13bc7651c9df88` |
 
 ## LeetCode problem-category and native contract
 - **#349**: unique sorted intersection, one copy per shared signed-long value

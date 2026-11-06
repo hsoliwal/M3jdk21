@@ -6,8 +6,8 @@ export LC_ALL=C
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../../.." && pwd)"
 historic="$root/m3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/SOURCE_MANIFEST.tsv"
 successor="$root/m3/collections/signal-codegen/qualification/compiler-machine-hints/SOURCE_MANIFEST.tsv"
-processor='m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/SortableProcessor.java'
-processor_test='m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/SortableProcessorSelfTest.java'
+processor='m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/SortableProcessor.java'
+processor_test='m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/SortableProcessorSelfTest.java'
 baseline='ce005d25b29fb6246e013bffb462afd5ed070362'
 
 fail() { echo "M3_HINT_SEAL_REFUSED: $*" >&2; exit 1; }
@@ -38,8 +38,8 @@ while IFS=$'\t' read -r kind path before after blob || [[ -n "${kind:-}" ]]; do
     [[ "$path" > "$prev" && "$path" != /* && "$path" != *'..'* ]] || fail "successor path ordering"
     [[ "$after" =~ ^[0-9a-f]{64}$ && "$blob" =~ ^[0-9a-f]{40}$ ]] || fail "successor blob geometry"
     case "$kind:$path" in
-        JAVA_MAIN:m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/M3MachineHintRules.java|\
-        JAVA_TEST:m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/M3MachineHintRulesContract.java)
+        JAVA_MAIN:m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/M3MachineHintRules.java|\
+        JAVA_TEST:m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/M3MachineHintRulesContract.java)
             [[ "$before" == ABSENT ]] || fail "new file preimage"
             if git -C "$root" cat-file -e "$baseline:$path" 2>/dev/null; then
                 fail "new file existed at baseline $path"
@@ -85,8 +85,8 @@ while IFS=$'\t' read -r kind path before after blob || [[ -n "${kind:-}" ]]; do
                 fail "record processor receipt changed" ;;
         PROCESSOR_TEST:"$processor_test")
             [[ "$before" == dfec3ce0db75774065345ccd65c1abf9a24a89e97c9a1894639599c19370f743 &&
-               "$after" == 535d1e26df2d06796be02fb56acb0e640f5eaeb949acb6dbf0b4858a89d58097 &&
-               "$blob" == ff4af3b79edc4626cb68de5c2b0b7e3aec2e6b12 ]] ||
+               "$after" == 14bbb53196cc4ab6ed376f4a022841c29589b3aaf376cf486b0c037d2104d1a2 &&
+               "$blob" == c0b8f053bedd5b65b96a7e5a804bb5a152892f73 ]] ||
                 fail "record test receipt changed" ;;
         *) fail "unexpected record successor $kind:$path" ;;
     esac

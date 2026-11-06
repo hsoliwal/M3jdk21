@@ -36,7 +36,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.synexia.m3.M3LongIndexProjectionRecipe</mainClass>
+              <mainClass>jdk.internal.m3.M3LongIndexProjectionRecipe</mainClass>
               <arguments>
                 <argument>--selftest</argument>
               </arguments>

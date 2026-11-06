@@ -9,7 +9,7 @@ captured flags and a compact work-state byte.
 
 The implementation borrows the full-flag capture idea from target PR1588, pinned at
 `520518332206a6ac5a000402ba4b11738e2369a7`; its source blob is
-`d88dddd67563d3fcd621e3663892fa1d18ccd152`. Direct copying was rejected because that
+`5e5de8a08972f3dffde1736d338e5aa1c961cc8e`. Direct copying was rejected because that
 candidate introduces `getFlags` callbacks into legacy capture and stores Java int
 flags in an eight-byte long lane. This adaptation leaves the old operation intact
 and adds exact-size `int[]` and `byte[]` metadata after successful traversal. The

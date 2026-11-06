@@ -1,6 +1,6 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.tools.text.search.AffixIndex;
+import jdk.m3.tools.text.search.AffixIndex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

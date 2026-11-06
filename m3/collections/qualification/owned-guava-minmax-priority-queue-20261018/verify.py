@@ -10,16 +10,16 @@ SUCCESSOR_PACKET = BASE.parent / "guava-minmax-source-custody" / "source-binding
 WORKFLOW = ".github/workflows/m3-owned-guava-minmax-priority-queue.yml"
 OWN_VERIFIER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py"
 ORIGINAL_RUNNER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py"
-RUNNER_POST_SHA256 = "fce6ce2c24cb3242ebade331ed689627381a7030bb9d097fa4928acec703a3e1"
+RUNNER_POST_SHA256 = "6faae312cf259d842d2257ac735efddd6d342ee111c514456e429223488edf85"
 
 # Exact first-party compile closure found in original javac 21 diagnostics.
 # These four helper files were absent from the frozen 130-source set. Preserve
 # that set and require exact byte identities rather than a wildcard sourcepath.
 CORE_HELPERS = (
-    ("m3/collections/src/main/java/com/m3/collections/M3IndexSort.java", 4586, "0942fe34d6f5685099c03888729efcfa476195f8c11776ca9e83b2af09bcce9a"),
-    ("m3/collections/src/main/java/com/m3/collections/M3LaneSearch.java", 2997, "3aa83290ab10ded0b26d10051958a7895f4621033d6dc4bc23b1346c85f30158"),
-    ("m3/collections/src/main/java/com/m3/collections/M3PriorityQueueGrowth.java", 1315, "fe49db641cb17f8df89636fc63beadcddcf3fa27676749b0e9b683e5d143a22b"),
-    ("m3/collections/src/main/java/com/m3/collections/M3ShadowStreams.java", 9377, "1ea37802b37d5b07ff989b9c15188ff228cdbf7f00076db004907b27e82a0506"),
+    ("m3/collections/src/main/java/jdk/m3/collections/M3IndexSort.java", 4586, "7c5ef5729b064f1528858d839b996479d16fe3687799fe765a72aad2a8f27b3a"),
+    ("m3/collections/src/main/java/jdk/m3/collections/M3LaneSearch.java", 2997, "d8629cba30a905d6bae1485f082b5d794aa819a800cd391f5ba1689736c4306c"),
+    ("m3/collections/src/main/java/jdk/m3/collections/M3PriorityQueueGrowth.java", 1315, "5b610826f505cd02d330621749d4c397d91f9d93a71718e5c178b6aca07d9150"),
+    ("m3/collections/src/main/java/jdk/m3/collections/M3ShadowStreams.java", 9377, "53ae1d0542371d155a0ed54a7ecf02a8bb55c749b8165ffa021882e4a020b9eb"),
 )
 
 def required_core_helpers(root, selected):
@@ -143,7 +143,7 @@ def verify_module(jar,pom):
     ns={'m':'http://maven.apache.org/POM/4.0.0'};tree=ET.parse(pom)
     deps={(node.findtext('m:groupId',namespaces=ns),node.findtext('m:artifactId',namespaces=ns)):node.findtext('m:version',namespaces=ns) for node in tree.findall('m:dependencies/m:dependency',ns)}
     assert deps[('com.m3','m3-collections')]=='0.1.0-SNAPSHOT' and deps[('com.google.guava','guava')]=='33.4.8-jre'
-    stem='com/m3/collections/guava/M3MinMaxPriorityQueue';expected={stem+suffix+'.class' for suffix in ['', '$Builder','$Heap','$QueueIterator','$ComparatorOrdering','$ReverseOrdering','$NaturalOrdering','$ReverseNaturalOrdering']}
+    stem='jdk/m3/collections/guava/M3MinMaxPriorityQueue';expected={stem+suffix+'.class' for suffix in ['', '$Builder','$Heap','$QueueIterator','$ComparatorOrdering','$ReverseOrdering','$NaturalOrdering','$ReverseNaturalOrdering']}
     with zipfile.ZipFile(jar) as archive:
         actual={name for name in archive.namelist() if name.endswith('.class')};assert actual==expected,(actual,expected)
         for name in actual:

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.EqualityGates
+name: jdk.internal.m3.EqualityGates
 displayName: M3JDK21 mixed-side equality gates from known hashes and an ASCII-lower fold
 description: >-
   String.equals with one M3 side gates on the flat side's cached hashCode against the M3 owner's
@@ -11,7 +11,7 @@ description: >-
   jtreg proof; text step: String.java (Javadoc cannot be parsed by the pinned Java parser). Stacks
   on crate m3-facts-scan-fused (its postimages are these preimages).
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-equality-gates
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
       crateName: m3-equality-gates

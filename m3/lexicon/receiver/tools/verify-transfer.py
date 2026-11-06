@@ -25,7 +25,7 @@ def main():
     output.mkdir(parents=True)
     classes = output / "classes"
     classes.mkdir()
-    package = Path("com/m3/lexicon")
+    package = Path("jdk/m3/lexicon")
     sources = [module / "src/main/java" / package / (n + ".java") for n in
                ("M3RegexWordTransferRows", "M3BitLanes", "M3LexiconFormat", "M3LexiconFormatException")]
     sources += [module / "src/test/java" / package / (n + ".java") for n in
@@ -51,15 +51,15 @@ def main():
         run("compile", ["javac", "--release", "21", "-encoding", "UTF-8", "-Xlint:all", "-Werror",
                         "-proc:none", "-d", classes, *sources])
         prefix = ["java", "-cp", classes]
-        run("boundary", prefix + ["com.m3.lexicon.M3RegexWordTransferBoundaryProof"])
-        log = run("legacy", prefix + ["com.m3.lexicon.M3RegexWordTransferBoundaryProof", "legacy"])
+        run("boundary", prefix + ["jdk.m3.lexicon.M3RegexWordTransferBoundaryProof"])
+        log = run("legacy", prefix + ["jdk.m3.lexicon.M3RegexWordTransferBoundaryProof", "legacy"])
         if hashlib.sha256(log.encode("utf-8")).hexdigest() != "656f431a704d46d0df05b8dd081de0e1f9f349d8e44e612fc34359acdb53ed6a":
             raise RuntimeError("legacy observation differs from pinned baseline")
-        run("composition", prefix + ["com.m3.lexicon.M3RegexWordTransferCompositionProof"])
-        run("scale", prefix + ["com.m3.lexicon.M3RegexWordTransferCompositionProof", "scale"])
+        run("composition", prefix + ["jdk.m3.lexicon.M3RegexWordTransferCompositionProof"])
+        run("scale", prefix + ["jdk.m3.lexicon.M3RegexWordTransferCompositionProof", "scale"])
         if args.interpreter:
             run("composition-interpreter", ["java", "-Xint", "-cp", classes,
-                                             "com.m3.lexicon.M3RegexWordTransferCompositionProof"])
+                                             "jdk.m3.lexicon.M3RegexWordTransferCompositionProof"])
         status = "PASS_FOCUSED_JAVA_ONLY"
     except (RuntimeError, subprocess.TimeoutExpired, OSError) as failure:
         status = "FAIL"

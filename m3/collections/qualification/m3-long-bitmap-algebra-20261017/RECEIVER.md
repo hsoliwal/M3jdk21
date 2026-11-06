@@ -11,6 +11,6 @@ Two serial receiver commits: (1) the source-sealed recipe and proof workflow, (2
 
 Selected-source Java 21 strict compile: PASS. Differential tests: **637172 checks**, Java only and checked real-JNI run with unchanged mask selector. Local direct generator fixed-point/missing/drift assertions: PASS. Local Maven: NOT_RUN (unavailable). Hosted Maven/OpenRewrite/JUnit selected module, JNI platform, jtreg/JCK/JVM-image and heap/performance: PENDING. Preserve String -> arrays -> collections acceptance ordering and keep this PR DRAFT until owning verification.
 
-Generated source SHA-256: `bd7969cfc42e26171b9904c65eb12f3321b2fbffe77a34f6d76f4db15c11c1d3`.
-Generated test SHA-256: `fa87bbf51b5a58b6b1562b909c3c16d0b670168165db57e6bb4430158de11fd7`.
+Generated source SHA-256: `e41090883e41627ebb4aed29e9b7624fa959ee3e8d01f5c56a68b6d441aaa2c7`.
+Generated test SHA-256: `e05401c3635429c949c7216390880d3ab06da2503de7509c38522682ea2a962d`.
 The `source` projection identity is the algebra domain. Only cached immutable snapshots are composable; arbitrary live predicates remain unsupported without a trusted revision.

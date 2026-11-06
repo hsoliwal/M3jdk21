@@ -12,7 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.m3.collections.eclipse.impl.map.sorted.mutable;
+package jdk.m3.collections.eclipse.impl.map.sorted.mutable;
 
 import java.lang.ref.WeakReference;
 import java.util.AbstractMap;

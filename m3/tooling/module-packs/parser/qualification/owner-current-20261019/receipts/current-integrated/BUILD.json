@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "classification": "Current parser module relinked with exactly the previously qualified source-built M3JDK21 native/base/compiler modules; not a fresh full JDK source build",
-  "baseline_proof_sha256": "6755b629e5a77e4218978820e5a2d0e9e2c266ea68c4a46ae543c3fc8f0fe605",
+  "baseline_proof_sha256": "d66e536cf262cca7787116a7015d1ece8e735c5e0874d329e907442f4bb87c5c",
   "ordered_parser_state_sha256": "f18a84dae553a289010c76b1b61fa2d5f1e4e5758a2c71dad8ed9a30d75bbb52",
   "inputs": {
     "java.base.jmod": {

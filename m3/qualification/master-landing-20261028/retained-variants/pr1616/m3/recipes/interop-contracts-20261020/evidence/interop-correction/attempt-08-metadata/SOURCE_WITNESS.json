@@ -2,12 +2,12 @@
   "status": "SOURCE_WITNESS_VERIFIED_RUNTIME_REQUALIFICATION_PENDING",
   "source_head": "2779aba3f98f31c324be43f731be7914e1a05935",
   "factory": {
-    "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+    "path": "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java",
     "sha256": "bdd58a73f64875bc7f523901f72be318d1c9a63bab1a98f01d07d38597733b02",
     "exact_source_line": "        return Multimaps.newListMultimap(new M3LinkedHashMap<>(), M3ArrayList::new);"
   },
   "metadata_loader": {
-    "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBindings.java",
+    "path": "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryBindings.java",
     "sha256": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd",
     "resource": "/META-INF/m3/sdk-family-bindings.tsv"
   },

@@ -28,13 +28,13 @@ SPDX-License-Identifier: Apache-2.0
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
         <configuration><includes>
-          <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3ScopeInference.java</include>
-          <include>com/synexia/rewrite/M3EditScope.java</include>
-          <include>com/synexia/rewrite/M3ProgressScopeLintRecipe.java</include>
+          <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+          <include>jdk/internal/m3/rewrite/M3ScopeInference.java</include>
+          <include>jdk/internal/m3/rewrite/M3EditScope.java</include>
+          <include>jdk/internal/m3/rewrite/M3ProgressScopeLintRecipe.java</include>
         </includes><testIncludes>
-          <testInclude>com/synexia/rewrite/M3SourceOnlyRecipeProofSupport.java</testInclude>
-          <testInclude>com/synexia/rewrite/M3ProgressScopeLintRecipeTest.java</testInclude>
+          <testInclude>jdk/internal/m3/rewrite/M3SourceOnlyRecipeProofSupport.java</testInclude>
+          <testInclude>jdk/internal/m3/rewrite/M3ProgressScopeLintRecipeTest.java</testInclude>
         </testIncludes><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>

@@ -2,13 +2,13 @@
   "schema": "M3_FILTERED_NAVIGATION_RECONCILIATION_EVALUATION_20261018",
   "dataset": "filtered-navigation-20261018",
   "baseline": "hsoliwal/M3JDK21@2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "canonical_task": "hsoliwal/com.synexia@synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_task": "hsoliwal/com.synexia@m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_source_revision": "140c263a90f9803b9c46103c63355a286e0515f0",
   "method": "Consult existing problem-category and donor decisions, compare named atoms serially, seal exact per-file preimages/postimages, qualify actual OpenRewrite SDK Results, then admit all target inputs before serial receiving.",
   "invariant": "Maintain reusable validated transformation recipes; use contract-preserving per-file transformations; record category-driven donor comparison and selection rationale. A source fingerprint is candidate evidence, never semantic-equivalence or mutation authority.",
   "selected": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "operations": [
         {
           "category": "NULLABLE_BOUNDED_NAVIGATION",
@@ -80,7 +80,7 @@
       ]
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java",
       "operations": [
         {
           "category": "JNI_ARRAY_ALIAS_PREFLIGHT",

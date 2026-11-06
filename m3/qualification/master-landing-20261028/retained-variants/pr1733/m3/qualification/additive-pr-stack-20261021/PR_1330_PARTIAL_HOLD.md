@@ -9,8 +9,8 @@ This candidate materializes **eight previously absent first-party source/test/re
 
 **Two original Java owner files are intentionally HELD rather than replaced**:
 
-- `M3ArrayDeque.java`: incoming `f30b0694bd3a9d2bdb40fa889e85b601194ff7d8`, receiving `9df441b51b1912fcaece88197b0e69e6fe89986a`.
-- `M3PriorityQueue.java`: incoming `7f6a6d4836ed1ae6329502373475467a2a0780b4`, receiving `bd462291a8a33862d943e0afc5dd839693548e8b`.
+- `M3ArrayDeque.java`: incoming `ce144dd8a77c9634874203f0aac61e299733de92`, receiving `25d61c5e3e0bdf28a75e66de03da7256761e8fbb`.
+- `M3PriorityQueue.java`: incoming `94f6556b8486d299cd3dcbb5216d8745defcf05e`, receiving `795e6036e0e6ef4cf4e3f04f6fbe61b544583a2a`.
 
 Both need the original Synexia Maven/OpenRewrite per-file atom/hunk resolver and exact public contract/Java/JNI differential tests. Do not select ours or theirs. The missing and held paths are recorded in `PR_1330_FILE_RECEIPTS.tsv`.
 

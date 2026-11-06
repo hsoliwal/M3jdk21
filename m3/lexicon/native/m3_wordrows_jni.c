@@ -13,7 +13,7 @@ static void fail(JNIEnv *env, const char *class_name, const char *message) {
 
 /* Keep native coordinates and array windows scoped to this call. */
 JNIEXPORT void JNICALL
-Java_com_m3_text_M3WordRowsNative_bulkFlags0(JNIEnv *env, jclass klass,
+Java_jdk_m3_text_M3WordRowsNative_bulkFlags0(JNIEnv *env, jclass klass,
         jobject buffer, jint rows_base, jint count, jintArray ids, jintArray output) {
     (void) klass;
     if (buffer == NULL || ids == NULL || output == NULL) {

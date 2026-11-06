@@ -32,13 +32,13 @@ jobs:
           echo '1cf974b8e73c72e0885872a0746e34e187bc020a7e19a4e5074e73ac05d4e973  m3/collections/implementations/guava-unified/src/main/java/com/google/common/collect/Multiset.java' | sha256sum -c -
           echo '833c4cac886b45f434b15f4772b483323f9335eda063f9e760f4074665899f5b  m3/collections/implementations/guava-unified/src/main/java/com/google/common/collect/Multimap.java' | sha256sum -c -
           echo '69d8583bf68cc06c0df761686956f7cca5fd9eb51e8cd5a85e52b84d92462014  m3/collections/implementations/guava-unified/src/main/java/com/google/common/collect/ListMultimap.java' | sha256sum -c -
-          echo '933756a99a937b7b8c1472f1426c6675d00ceba18826c3d4fb89ffec2a39d79c  m3/collections/implementations/guava-unified/src/main/java/com/m3/collections/guava/M3HashMultiset.java' | sha256sum -c -
-          echo '66ef182956a214103b2931f5d00526f1e8a0e727924e6fa73919faf1bc691fda  m3/collections/implementations/guava-unified/src/main/java/com/m3/collections/guava/M3ArrayListMultimap.java' | sha256sum -c -
-          echo '27c8bb1ce9e4c94f7da30493f7f08e0071be98057c090aa3af187e46c374a594  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3HashMultisetContractTest.java' | sha256sum -c -
-          echo '28d242fccbbb1d63327ee4829e590fb2ad35a3c18f0ecadd403489b9153d32e5  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3HashMultisetDifferentialTest.java' | sha256sum -c -
-          echo '213714de304b54d519b7c1fe502d959d6fca361f7af424199caf5cd2a502e4ac  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3ArrayListMultimapContractTest.java' | sha256sum -c -
-          echo 'bf400d158fdc9f37fe166e3ad9e13d5de9ef50836374c2bc969286924bf73190  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3ArrayListMultimapDifferentialTest.java' | sha256sum -c -
-          echo 'd47a670dcef6cd4066c43a0f42875cbc8a661b3405b5718e6d60dfb44ec9260e  m3/collections/implementations/guava-unified/src/test/java/com/m3/collections/guava/M3GuavaUnifiedNoRuntimeTest.java' | sha256sum -c -
+          echo 'b062fbf97b22d162b8b7d54fe16bc56b311bc13a3cbbb6c1ca4d8cea93e5abc9  m3/collections/implementations/guava-unified/src/main/java/jdk/m3/collections/guava/M3HashMultiset.java' | sha256sum -c -
+          echo 'be7210e85cc96642a0415985a8f2b7d631a4716c7c5d9c740045d3962e31f027  m3/collections/implementations/guava-unified/src/main/java/jdk/m3/collections/guava/M3ArrayListMultimap.java' | sha256sum -c -
+          echo 'b9744e9206a173e5d48b0022af30a269b10213bb1b09ef04a3b8c308cc344876  m3/collections/implementations/guava-unified/src/test/java/jdk/m3/collections/guava/M3HashMultisetContractTest.java' | sha256sum -c -
+          echo 'e513cf9142399e82c3489272133865471a3ef8989450a1ff055c3fc1126b67fa  m3/collections/implementations/guava-unified/src/test/java/jdk/m3/collections/guava/M3HashMultisetDifferentialTest.java' | sha256sum -c -
+          echo '1f8e3a8079fc071ada334e749c0d624378973bc5c64bd584bb38aebd31b89da5  m3/collections/implementations/guava-unified/src/test/java/jdk/m3/collections/guava/M3ArrayListMultimapContractTest.java' | sha256sum -c -
+          echo '924789f61a6ef8a0628ecadf1d81fbfa529fde135be6c9091c7540c61a83de39  m3/collections/implementations/guava-unified/src/test/java/jdk/m3/collections/guava/M3ArrayListMultimapDifferentialTest.java' | sha256sum -c -
+          echo '4fc79377f0f2cb07b23ca83c274a40cd9d07b025e052aca324698b4cf1a855b4  m3/collections/implementations/guava-unified/src/test/java/jdk/m3/collections/guava/M3GuavaUnifiedNoRuntimeTest.java' | sha256sum -c -
       - name: Compile original M3 engines and one Guava API with NO third-party jars
         shell: bash
         run: |
@@ -52,8 +52,8 @@ jobs:
           test "$(cat "$RUNNER_TEMP/jdeps.txt")" = java.base
           test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^com/google/common/collect/Multiset[.]class$')" -eq 1
           test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^com/google/common/collect/ListMultimap[.]class$')" -eq 1
-          test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^com/m3/collections/guava/M3HashMultiset[.]class$')" -eq 1
-          test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^com/m3/collections/guava/M3ArrayListMultimap[.]class$')" -eq 1
+          test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^jdk/m3/collections/guava/M3HashMultiset[.]class$')" -eq 1
+          test "$(jar tf "$RUNNER_TEMP/unified-guava-m3.jar" | grep -Ec '^jdk/m3/collections/guava/M3ArrayListMultimap[.]class$')" -eq 1
       - name: Execute four authentic Guava provider differential suites and owned code coverage
         shell: bash
         run: |

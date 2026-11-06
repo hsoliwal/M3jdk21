@@ -2,8 +2,8 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 package jdk.m3.build.test;
 
-import com.m3.compiletime.ast.M3FileSourceFacts;
-import com.m3.file.M3File.Fingerprint;
+import jdk.m3.compiletime.ast.M3FileSourceFacts;
+import jdk.m3.file.M3File.Fingerprint;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
@@ -157,7 +157,7 @@ public final class M3BuildDeltaContract {
     }
 
     private static Fingerprint fingerprint(Path path) throws IOException {
-        return com.m3.file.M3File.of(path).fingerprint(1_048_576);
+        return jdk.m3.file.M3File.of(path).fingerprint(1_048_576);
     }
 
     private static int clientValue(Path output) throws Exception {

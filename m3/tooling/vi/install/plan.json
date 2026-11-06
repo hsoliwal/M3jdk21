@@ -20,7 +20,7 @@
       "path": "m3/docs/name-mapping.json",
       "before": {
         "resource": "name-mapping.before.json",
-        "sha256": "4520738b949198601dc7c2ecf2bef7612bf11b024473bda06ffd75dbfa6253a7"
+        "sha256": "f64c2fb755da01097665c6c2cc9b82c8c651e9f208eb7570de7ec6e47fbbeb4f"
       },
       "after": {
         "resource": "name-mapping.after.json",
@@ -54,7 +54,7 @@
   ],
   "guards": [
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc"
     }
   ],

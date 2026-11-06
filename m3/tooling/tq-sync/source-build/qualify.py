@@ -156,8 +156,8 @@ def sources(require_fresh=False):
         owner_paths.append(row["path"])
     tq_pins = {
         "m3/tooling/tq-sync/pom.xml": INPUTS["tqInputs"]["pomBlob"],
-        "m3/tooling/tq-sync/src/test/java/com/m3/tq/TQSyncTest.java": INPUTS["tqInputs"]["testBlob"],
-        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv":
+        "m3/tooling/tq-sync/src/test/java/jdk/m3/tq/TQSyncTest.java": INPUTS["tqInputs"]["testBlob"],
+        "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv":
             INPUTS["tqInputs"]["manifestBlob"],
     }
     for relative, expected in tq_pins.items():
@@ -706,9 +706,9 @@ def report():
     tq = RECEIVER / "m3/tooling/tq-sync"
     reports = sorted((tq / "target/surefire-reports").glob("TEST-*.xml"))
     expected_suites = {
-        "com.m3.tq.TQSyncTest": {
+        "jdk.m3.tq.TQSyncTest": {
             "exactBytesAndFixedPoint", "refusesDriftMissingAndDuplicate", "retainsUnrelatedFiles"},
-        "com.m3.tq.TQFixtureManifestConsistencyTest": {
+        "jdk.m3.tq.TQFixtureManifestConsistencyTest": {
             "namedForwardAndInverseReplay", "rejectsUnknownMissingAndDuplicate",
             "keepsUnrelatedAndMatchesCurrentManifest"},
     }
@@ -736,7 +736,7 @@ def report():
                                "xmlSha256": sha256(path), "xmlBytes": path.stat().st_size})
     if seen != set(expected_suites):
         raise RuntimeError("required TQ fixture JUnit suite missing")
-    res = tq / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync"
+    res = tq / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync"
     generated = tq / "target/generated"
     postimages = []
     for line in regular(res / "manifest.tsv").read_text(encoding="utf-8").splitlines():
@@ -754,7 +754,7 @@ def report():
     actual = {str(p.relative_to(generated).as_posix()) for p in generated.rglob("*") if p.is_file()}
     if len(postimages) != 24 or len(actual) != 24 or actual != {r["path"] for r in postimages}:
         raise RuntimeError("exact 24 generated fixture postimages required")
-    live_path = ("m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/"
+    live_path = ("m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/"
                  "jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv")
     manifest_root = tq / "target/generated-recipe"
     manifest_output = regular(manifest_root / live_path)
@@ -766,7 +766,7 @@ def report():
     if manifest_files != {live_path}:
         raise RuntimeError("named fixture recipe generated an unexpected output set")
     consumer_jar = regular(tq / "target/tq-sync-1.0-SNAPSHOT.jar")
-    old_suite = next(row for row in suite_receipts if row["class"] == "com.m3.tq.TQSyncTest")
+    old_suite = next(row for row in suite_receipts if row["class"] == "jdk.m3.tq.TQSyncTest")
     receipt = {"schema": "M3_TQ_SOURCE_BUILD_QUALIFICATION_V2",
                "checkoutCommit": os.environ["EXPECTED_SOURCE_SHA"], "sourceCustody": custody,
                "modelReceiptSha256": sha256(regular(ROOT / "model-receipt.json")),

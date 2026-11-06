@@ -7,7 +7,7 @@ Exact original second parent: a12cfe5aab802e23abf0c17506db17c7cd1a1684 (M3JDK21 
 
 ## Source and contract
 
-- Verified receiver original `M3LFUCache.java` Git blob f2d1a17877561a1143965e195d1710068f23c57e matches the donor's reviewed original master preimage. The exact donor postimage is 420866d9c335d844a44c78be9fe0e7e99dbc9286 and is installed at the same active original source path without reformatting.
+- Verified receiver original `M3LFUCache.java` Git blob f2d1a17877561a1143965e195d1710068f23c57e matches the donor's reviewed original master preimage. The exact donor postimage is baa982dd4ea6706b89d85741f29602f4acf3df1a and is installed at the same active original source path without reformatting.
 - Donor #2468 changes only this package-private Java LFU cache implementation, adding one private identity-slot field and invalidations. No public/protected Java method or class descriptors, JNI C exports, JDK `Object`, lexicon image source, native library binaries or unrelated file changes.
 - #2474 owns the independent lexicon `SharedLexiconImage` direct-view atom and its source-sealed recipe/test evidence. #2468 owns LFU Java/native parity; the private canonical Maven/OpenRewrite crate, donor review and 16 JUnit proof methods are in Synexia #16460, not copied into the public JDK fork.
 - The Git commit has both exact original source histories as parents. This receiving tree modifies only the original LFU Java file and adds two qualification records. All other first-parent source modes and Git blobs are unchanged.

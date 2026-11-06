@@ -13,12 +13,12 @@ import importlib.util
 import json
 import shutil
 
-PREFIX = Path("synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018")
+PREFIX = Path("m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018")
 CONTROLS = ("prepare.py", "receive.py", "ENGINE_SOURCES.tsv",
-    "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+    "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
     "contract/test_prepare.py", "contract/verify_receiver.py")
 POM_SHA = "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d"
-COORDINATE_PATH = "com/synexia/sourcebuilt/openrewrite/rewrite-java-21/8.17.1-m3-javadoc-1/rewrite-java-21-8.17.1-m3-javadoc-1.jar"
+COORDINATE_PATH = "jdk/internal/m3/sourcebuilt/openrewrite/rewrite-java-21/8.17.1-m3-javadoc-1/rewrite-java-21-8.17.1-m3-javadoc-1.jar"
 
 
 def sha(path):
@@ -156,7 +156,7 @@ if __name__ == "__main__":
 ''')
     lineage = {"schema": "M3_RUNTIME_PARSER_HOST_SUCCESSOR_V1",
         "original_canonical_revision": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
-        "original_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+        "original_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
         "original_capped_pom_sha256": POM_SHA, "successor_pom_sha256": sha(destination / "pom.xml"),
         "unchanged_controls": {relative: sha(origin / relative) for relative in CONTROLS},
         "four_recipe_engines": "unchanged; supplied by the exact original canonical or existing public sdk-owner",

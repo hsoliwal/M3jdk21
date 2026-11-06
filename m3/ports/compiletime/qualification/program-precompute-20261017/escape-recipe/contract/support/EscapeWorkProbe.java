@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.compiletime;
+package jdk.m3.compiletime;
 
 import com.sun.management.ThreadMXBean;
 import java.lang.management.ManagementFactory;

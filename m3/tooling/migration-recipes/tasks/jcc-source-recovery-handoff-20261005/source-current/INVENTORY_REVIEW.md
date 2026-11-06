@@ -44,7 +44,7 @@ is not promoted to semantic equivalence or test qualification.
 
 `PARENT_BUILD_CONTEXT.json` maps **109 distinct paths**: 88 main sources + 19 vendor sources +
 both test classes. Of those, 98 are in original503 and 11 are additional. Its SHA-256 is
-`4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc`. The earlier helper list `PARENT_DECLARED_CONTEXT.json`
+`c2ba69331b7d22a467e72369ebf06cebe16e9b09f5b9c3f2900247d540773bfc`. The earlier helper list `PARENT_DECLARED_CONTEXT.json`
 contains 107 compiler paths plus the new RXMTest; the full map also includes the already-selected
 Mastery test and should be used when assembling the parent context.
 

@@ -31,7 +31,7 @@ No third-party algorithm implementation was copied. This first-party Java expres
 
 ## Qualification
 
-- Production: `m3/file/src/main/java/com/m3/file/M3FileMoveCandidates.java`
+- Production: `m3/file/src/main/java/jdk/m3/file/M3FileMoveCandidates.java`
 - Host + linked-image adversarial test: `M3FileMoveCandidatesContract`, added to the existing `verify.py` contract inventory
 - Existing OpenRewrite sealed Java recipe: `M3HashPinnedJavaSnapshotRecipe`, crate `m3-file-move-candidates-20261021`, ABSENT-before two Java targets with exact SHA-256 postimages
 - Recipe Maven check: `mvn -B -ntp -f m3/file/recipe/move-candidates-20261021/pom.xml test`

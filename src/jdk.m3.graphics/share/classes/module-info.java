@@ -4,7 +4,7 @@
  */
 
 /**
- * The M3 graphics owner: the 2D drawing API M3jdk carries itself (absorbed from HumbleUI Skija 0.143.18 and HumbleUI
+ * The M3 graphics owner: the 2D drawing API M3JDK carries itself (absorbed from HumbleUI Skija 0.143.18 and HumbleUI
  * Types 0.2.0, Apache-2.0; see legal/skija.md). Native implementation: Skia, through the module's JNI library.
  *
  * @moduleGraph

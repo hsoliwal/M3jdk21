@@ -12,8 +12,8 @@ request to revert current master or to replay its historical branch as a wholesa
 - Historical receiving PR: https://github.com/hsoliwal/M3jdk21/pull/2127
 - Historical source authority: https://github.com/hsoliwal/com.synexia/pull/14040
 - Current target baseline: `ce005d25b29fb6246e013bffb462afd5ed070362`.
-- Current map preimage blob: `134508fdd9857110ca21d0042353805586db3ea0`.
-- Historical qualified test blob: `e97ed53b5dc1318a5fe865fe032ee8608690d621`.
+- Current map preimage blob: `9a84487f7a66257ce5e42e2e31698068496f49d9`.
+- Historical qualified test blob: `01dafa3df740a0b028f8b60a49d0aefd5c955b02`.
 - Exact private SDK-generated composed map postimage blob: `37e5575193fb010b03e786ad1f717fecce111fec`.
 - Canonical source-sealed recipe:
   `synexia-openrewrite-recipes/recipe-crates/m3-collections-long-receiver-20261029`,

@@ -32,57 +32,57 @@
       "target_count": 16,
       "changes": [
         {
-          "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/com/m3/collections/apache/bloomfilter/CellExtractor.java",
+          "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/bloomfilter/CellExtractor.java",
           "role": "production_source",
-          "before_sha256": "601b7b595893eb337647b177b1e43317ecac2d8319c51e644f718df1302eebcb",
-          "after_sha256": "0ffc99b8154253671bee758d920b6edb7a45cc24a4dad1e531dc3da185129e96",
+          "before_sha256": "887815407018ee1a3ba4fc3f69ccf7057a3844e2120e15ee5722085b047cc823",
+          "after_sha256": "9a4987fba0acc053213f3f3a4df85481954ea9555495a338c4a8994b855c9b31",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0001-CellExtractor.java.txt",
-            "sha256": "0ffc99b8154253671bee758d920b6edb7a45cc24a4dad1e531dc3da185129e96",
+            "sha256": "9a4987fba0acc053213f3f3a4df85481954ea9555495a338c4a8994b855c9b31",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0001-CellExtractor.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/com/m3/collections/apache/iterators/CollatingIterator.java",
+          "path": "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/iterators/CollatingIterator.java",
           "role": "production_source",
-          "before_sha256": "18e4f3afc60081d478f7f73e5e78edd865ee6794f12c76f1fad09eb9c495456e",
-          "after_sha256": "fe76d69ecd82027ffdd1eecac532259c07310ebbd83c5d0b9d1814274d5054d2",
+          "before_sha256": "c7f68a61ad08e6660b1b0cf70b17522993a3621e90d6cae397952843b4902064",
+          "after_sha256": "0cb720b714c7941b42c25872b88d491db8694f31223d2595678b41522ecb7510",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0002-CollatingIterator.java.txt",
-            "sha256": "fe76d69ecd82027ffdd1eecac532259c07310ebbd83c5d0b9d1814274d5054d2",
+            "sha256": "0cb720b714c7941b42c25872b88d491db8694f31223d2595678b41522ecb7510",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0002-CollatingIterator.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/com/m3/collections/apache/M3ArrayStorageOracle.java",
+          "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/jdk/m3/collections/apache/M3ArrayStorageOracle.java",
           "role": "test_source",
-          "before_sha256": "49f18e35b0335faa5ac1c0968d602a2bd2f01074c96296b0526265b633e78cd0",
-          "after_sha256": "e41c36876feb28e9488507dd2f88ee567c856ed727daecaa253058cc6a030df7",
+          "before_sha256": "9501f25d4a8418b9cf697c8e10592d60bcf17a9dcec48801c623bb283471016a",
+          "after_sha256": "e5d4e74b31891a5ee90e68a5808a864168f1755c25d28f8f4e01eef08c83fe80",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0003-M3ArrayStorageOracle.java.txt",
-            "sha256": "e41c36876feb28e9488507dd2f88ee567c856ed727daecaa253058cc6a030df7",
+            "sha256": "e5d4e74b31891a5ee90e68a5808a864168f1755c25d28f8f4e01eef08c83fe80",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0003-M3ArrayStorageOracle.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/com/m3/collections/apache/bloomfilter/M3CellExtractorArrayStorageTest.java",
+          "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/jdk/m3/collections/apache/bloomfilter/M3CellExtractorArrayStorageTest.java",
           "role": "test_source",
           "before_sha256": "ABSENT",
-          "after_sha256": "b7635008984c89addf05e8d2aac8d7f19a0427f5b70f84d1ec5c9a30c6538c2a",
+          "after_sha256": "25b14d19d23c2ccf7984db39141bb67d7ed9fc6a28e6930904504d95bcf7e908",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0004-M3CellExtractorArrayStorageTest.java.txt",
-            "sha256": "b7635008984c89addf05e8d2aac8d7f19a0427f5b70f84d1ec5c9a30c6538c2a",
+            "sha256": "25b14d19d23c2ccf7984db39141bb67d7ed9fc6a28e6930904504d95bcf7e908",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0004-M3CellExtractorArrayStorageTest.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/com/m3/collections/apache/iterators/M3CollatingIteratorArrayStorageTest.java",
+          "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/java/jdk/m3/collections/apache/iterators/M3CollatingIteratorArrayStorageTest.java",
           "role": "test_source",
           "before_sha256": "ABSENT",
-          "after_sha256": "6181f55e69aa0bdc41c76d6fecea9a7f2b8f3ed79a3278948692843730aa83f2",
+          "after_sha256": "71ff462f58ab8adae45bba6edf2f18aa08047bcbe6d7b931cd0fdd0ae73d14b6",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0005-M3CollatingIteratorArrayStorageTest.java.txt",
-            "sha256": "6181f55e69aa0bdc41c76d6fecea9a7f2b8f3ed79a3278948692843730aa83f2",
+            "sha256": "71ff462f58ab8adae45bba6edf2f18aa08047bcbe6d7b931cd0fdd0ae73d14b6",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0005-M3CollatingIteratorArrayStorageTest.java.txt"
           }
         },
@@ -90,10 +90,10 @@
           "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/resources/m3/array-storage-20261019/original/CellExtractor.java.txt",
           "role": "test_resource_or_preserved_preimage",
           "before_sha256": "ABSENT",
-          "after_sha256": "601b7b595893eb337647b177b1e43317ecac2d8319c51e644f718df1302eebcb",
+          "after_sha256": "887815407018ee1a3ba4fc3f69ccf7057a3844e2120e15ee5722085b047cc823",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0006-CellExtractor.java.txt.txt",
-            "sha256": "601b7b595893eb337647b177b1e43317ecac2d8319c51e644f718df1302eebcb",
+            "sha256": "887815407018ee1a3ba4fc3f69ccf7057a3844e2120e15ee5722085b047cc823",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0006-CellExtractor.java.txt.txt"
           }
         },
@@ -101,109 +101,109 @@
           "path": "m3/collections/implementations/commons-collections-4.5.0/src/test/resources/m3/array-storage-20261019/original/CollatingIterator.java.txt",
           "role": "test_resource_or_preserved_preimage",
           "before_sha256": "ABSENT",
-          "after_sha256": "18e4f3afc60081d478f7f73e5e78edd865ee6794f12c76f1fad09eb9c495456e",
+          "after_sha256": "c7f68a61ad08e6660b1b0cf70b17522993a3621e90d6cae397952843b4902064",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0007-CollatingIterator.java.txt.txt",
-            "sha256": "18e4f3afc60081d478f7f73e5e78edd865ee6794f12c76f1fad09eb9c495456e",
+            "sha256": "c7f68a61ad08e6660b1b0cf70b17522993a3621e90d6cae397952843b4902064",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0007-CollatingIterator.java.txt.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java",
+          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java",
           "role": "production_source",
           "before_sha256": "9a2e2e6adfe493c65263a1134b3850b57e757e8b6b7162e22d4367fa16dc7b74",
-          "after_sha256": "369bebdce72855afefaf687b6b59622af7fda95df6954519eda3541b0664c5ae",
+          "after_sha256": "a9aa33ab54daef8ba13c2165c691d9644433766f710d70c04a37e8afd7a9a53d",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0008-IndexedRedBlackMap.java.txt",
-            "sha256": "369bebdce72855afefaf687b6b59622af7fda95df6954519eda3541b0664c5ae",
+            "sha256": "a9aa33ab54daef8ba13c2165c691d9644433766f710d70c04a37e8afd7a9a53d",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0008-IndexedRedBlackMap.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java",
+          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java",
           "role": "production_source",
           "before_sha256": "46f2d2b1ee6bd0e9fd2f55a070527d414c6c9a3b881e9373666bd4f6f365d8fb",
-          "after_sha256": "6bb7bb42597de3e5d4a61e8168c006f0cf911848ef714a0e3f7d5525f09a3dae",
+          "after_sha256": "0fbc3f571cdfcab9f94899f7bd8b30b77eaa8b3e6da3d11b0644799541f96207",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0009-IndexedSortedMap.java.txt",
-            "sha256": "6bb7bb42597de3e5d4a61e8168c006f0cf911848ef714a0e3f7d5525f09a3dae",
+            "sha256": "0fbc3f571cdfcab9f94899f7bd8b30b77eaa8b3e6da3d11b0644799541f96207",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0009-IndexedSortedMap.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
+          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
           "role": "production_source",
           "before_sha256": "aabb5b7059d4667a3bd7e8496b99fd191ac3846e7ca78b079a67acee067c797a",
-          "after_sha256": "f8a7af2df54e1d67685b6e2d68431548d388de3b2b1affa08d208b6253b295fe",
+          "after_sha256": "8b042196038c51b5154c4d02834c005374494ad8305b5eb85f152fa4c19186ba",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0010-TreeSortedMap.java.txt",
-            "sha256": "f8a7af2df54e1d67685b6e2d68431548d388de3b2b1affa08d208b6253b295fe",
+            "sha256": "8b042196038c51b5154c4d02834c005374494ad8305b5eb85f152fa4c19186ba",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0010-TreeSortedMap.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/unit-tests/src/test/java/com/m3/collections/eclipse/impl/map/sorted/mutable/M3IndexedEntryFreeTest.java",
+          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/unit-tests/src/test/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/M3IndexedEntryFreeTest.java",
           "role": "test_source",
           "before_sha256": "ABSENT",
-          "after_sha256": "f9c77c89c98688e08e73fdf03cb2e06491dea996af0a83e7b5b37c2ffea213f3",
+          "after_sha256": "c002dafbb13728a4b22ae016530eed71550235d4f5a710191391ef39ed3d27e2",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0011-M3IndexedEntryFreeTest.java.txt",
-            "sha256": "f9c77c89c98688e08e73fdf03cb2e06491dea996af0a83e7b5b37c2ffea213f3",
+            "sha256": "c002dafbb13728a4b22ae016530eed71550235d4f5a710191391ef39ed3d27e2",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0011-M3IndexedEntryFreeTest.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/unit-tests/src/test/java/com/m3/collections/eclipse/impl/map/sorted/mutable/M3TreeSortedMapEntryFreeTest.java",
+          "path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/unit-tests/src/test/java/jdk/m3/collections/eclipse/impl/map/sorted/mutable/M3TreeSortedMapEntryFreeTest.java",
           "role": "test_source",
           "before_sha256": "ABSENT",
-          "after_sha256": "d3a1bc699381d1a6304be8d04b0d665b0451bd7c7fdffc2227d1791743bef6f6",
+          "after_sha256": "a855478bc5c35d4e068202b031430047e746d67e077f409ab4b769f7ec85cb00",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0012-M3TreeSortedMapEntryFreeTest.java.txt",
-            "sha256": "d3a1bc699381d1a6304be8d04b0d665b0451bd7c7fdffc2227d1791743bef6f6",
+            "sha256": "a855478bc5c35d4e068202b031430047e746d67e077f409ab4b769f7ec85cb00",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0012-M3TreeSortedMapEntryFreeTest.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/com/m3/collections/spring/CompositeIterator.java",
+          "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/CompositeIterator.java",
           "role": "production_source",
           "before_sha256": "42e5ae430802c7536d994d530d3212919e134b66238c6e91773c9f31e2c506c4",
-          "after_sha256": "7b358a8a3fa6d693e68664b8deb7bf44717b3f40122dccc415e4bce212f47c78",
+          "after_sha256": "0147286b40c1711c8028c25af1a299eee2a2fcfc97a0ef894c3bbb5d1d5d3731",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0013-CompositeIterator.java.txt",
-            "sha256": "7b358a8a3fa6d693e68664b8deb7bf44717b3f40122dccc415e4bce212f47c78",
+            "sha256": "0147286b40c1711c8028c25af1a299eee2a2fcfc97a0ef894c3bbb5d1d5d3731",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0013-CompositeIterator.java.txt"
           }
         },
         {
-          "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/test/java/com/m3/collections/spring/CompositeIteratorLazyStorageTests.java",
+          "path": "m3/collections/implementations/spring-core-6.2.0-collections/src/test/java/jdk/m3/collections/spring/CompositeIteratorLazyStorageTests.java",
           "role": "test_source",
           "before_sha256": "ABSENT",
-          "after_sha256": "45a79cce1e2e5be48766c7e17732e09148461288d9ead5912b36870254120a4d",
+          "after_sha256": "2979869f5ac04542222f148e11f76690706744d962871a103ad8f371d084af4a",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0014-CompositeIteratorLazyStorageTests.java.txt",
-            "sha256": "45a79cce1e2e5be48766c7e17732e09148461288d9ead5912b36870254120a4d",
+            "sha256": "2979869f5ac04542222f148e11f76690706744d962871a103ad8f371d084af4a",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0014-CompositeIteratorLazyStorageTests.java.txt"
           }
         },
         {
-          "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+          "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
           "role": "production_source",
           "before_sha256": "bead2ada2b127060f272c3eb53f3ad92cc9c6244c36cc8fd3d0dd1d145c16abf",
-          "after_sha256": "2095d1b641338c64cb460e14b805887bcdca556bdd09f23226af2d165358b2a9",
+          "after_sha256": "3d8670404e8c9a27b7af825ba11fbadb759cabd698beb81dfa8686601bc12964",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0015-M3ArrayList.java.txt",
-            "sha256": "2095d1b641338c64cb460e14b805887bcdca556bdd09f23226af2d165358b2a9",
+            "sha256": "3d8670404e8c9a27b7af825ba11fbadb759cabd698beb81dfa8686601bc12964",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0015-M3ArrayList.java.txt"
           }
         },
         {
-          "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListFilterRunsTest.java",
+          "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListFilterRunsTest.java",
           "role": "test_source",
           "before_sha256": "ABSENT",
-          "after_sha256": "3fe58175a75847d0ddd3b3dcafe591d7d792122b54739710d3628940be6f8c73",
+          "after_sha256": "3eda035240ae771892112fbb712ec77a9477010875f85ec7859eefb6ab77158a",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0016-M3ArrayListFilterRunsTest.java.txt",
-            "sha256": "3fe58175a75847d0ddd3b3dcafe591d7d792122b54739710d3628940be6f8c73",
+            "sha256": "3eda035240ae771892112fbb712ec77a9477010875f85ec7859eefb6ab77158a",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-lanes-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-lanes-20261102/0016-M3ArrayListFilterRunsTest.java.txt"
           }
         }
@@ -262,13 +262,13 @@
       "target_count": 1,
       "changes": [
         {
-          "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+          "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionContract.java",
           "role": "test_source",
           "before_sha256": "0db4144a8d7f1076717db164ea8b57da20ea7238b3b782a7910171d6c26e1b78",
-          "after_sha256": "d89bfe1d24b81dcc8cfcc7b7f27268299b870d1d63755200427a460ae7830ac9",
+          "after_sha256": "00ab94e742c492041e777a4c02fa80645cf90ddb46719413f6304adf246efec8",
           "canonical_template": {
             "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-cursor-fixture-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-cursor-fixture-20261102/0001-M3FilteredCursorExceptionContract.java.txt",
-            "sha256": "d89bfe1d24b81dcc8cfcc7b7f27268299b870d1d63755200427a460ae7830ac9",
+            "sha256": "00ab94e742c492041e777a4c02fa80645cf90ddb46719413f6304adf246efec8",
             "url": "https://github.com/hsoliwal/com.synexia/blob/7af83c5ee4ad166d8cd45c6c33822debabd705ca/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/jdk-cursor-fixture-20261102/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-jdk-cursor-fixture-20261102/0001-M3FilteredCursorExceptionContract.java.txt"
           }
         }
@@ -384,8 +384,8 @@
         "command_main": "com.m3.collections.M3FilteredCursorExceptionContract trace"
       },
       "production_owner": {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
-        "sha256": "49dafe190c5803551a74b140afa64f84b5ede9936783761a8e7fea145a5d1641"
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+        "sha256": "7940b7ca8d0e3eb716e67934350b27fe1f608ab2424fa1dbdc8b1160fab8e88a"
       }
     },
     {

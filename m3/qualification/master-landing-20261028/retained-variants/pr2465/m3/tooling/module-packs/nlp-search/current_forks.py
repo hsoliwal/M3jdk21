@@ -40,30 +40,30 @@ def write_json(path, value):
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-_RECEIVER_LOCK_SHA256 = "68ac22eb0dd7e609297517b75c6670242afe51e723c456eb251eb1e7017053cf"
+_RECEIVER_LOCK_SHA256 = "2b420cf9c9eba406c05e0c10040869dfe07b2c682ca811af67e3b845815c0261"
 _RECEIVER_TRANSITION_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V5.json"
-_RECEIVER_TRANSITION_SHA256 = "4e00d68a96907e23b10670c32ca76bdae5b9bc7f1b6d27cdf323f17b6a1fd178"
+_RECEIVER_TRANSITION_SHA256 = "34369e1ad23948e495a426d76969e208794d4007c2ec24690eda4b61717e6a30"
 _RECEIVER_TRANSITION_V6_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V6.json"
-_RECEIVER_TRANSITION_V6_SHA256 = "25c475dc211870634a0a156ddd02ce3db78a492997019ecdf01c599db9b296b4"
+_RECEIVER_TRANSITION_V6_SHA256 = "166ccfe6d6c585e5fc2ae70de91a911c0e5dd3634b9c2f740e28611317670ba9"
 _RECEIVER_TRANSITION_V7_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V7.json"
-_RECEIVER_TRANSITION_V7_SHA256 = "e3f7f6c569d701f2c663c1ca34dcf2d8d5330ecbe8e2e8ddf61764975f636b5e"
+_RECEIVER_TRANSITION_V7_SHA256 = "4f6aa0fa97dc0e7ba6e9eb89afd95a3f4bc50180fba4c937d3c53efeb4f93936"
 _RECEIVER_TRANSITION_V8_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V8.json"
-_RECEIVER_TRANSITION_V8_SHA256 = "5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d"
+_RECEIVER_TRANSITION_V8_SHA256 = "6f90d22fb6db68af59668138e3757f3c29826af552592b14322c927b372c3873"
 _RECEIVER_TRANSITION_V9_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V9.json"
-_RECEIVER_TRANSITION_V9_SHA256 = "8b9033adaea873f6253558db142e6823762913da1899b714f019eaf6816e99d3"
+_RECEIVER_TRANSITION_V9_SHA256 = "8405960a98d2632bcfa45e9c93c90930fd8f8955ee0720c126421a856efc1c47"
 _RECEIVER_TRANSITION_V10_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V10.json"
-_RECEIVER_TRANSITION_V10_SHA256 = "178b7c3a0e120b0d5ea00eaf5b1724227e5261f73fe3677e4686b1d2d2b2ac6a"
+_RECEIVER_TRANSITION_V10_SHA256 = "48a2cdabd2093b8e18635b898d7294c3bb1accf14f8db0787ef636ca46935c4c"
 _RECEIVER_TRANSITION_V11_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V11.json"
 _RECEIVER_TRANSITION_V11_SHA256 = "d937901cb78b253a969f25d74f98cb715cc4064241115e0bbf1704aeb1e88f20"
 _RECEIVER_TRANSITION_V12_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V12.json"
-_RECEIVER_TRANSITION_V12_SHA256 = "2a596a61ecac808df5f5e1ca935ca7dd58e5a5c1cef9836537998ef21b094f6f"
+_RECEIVER_TRANSITION_V12_SHA256 = "43b90c339d44832fdd11cc96ccf63d55156a7307f648774519621812236a4b69"
 _RECEIVER_TRANSITION_V13_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V13.json"
-_RECEIVER_TRANSITION_V13_SHA256 = "c21507209fbb8cd65aab16ec1e1a2276d50abd36238ecb0f51bb6a4cf2dd1696"
+_RECEIVER_TRANSITION_V13_SHA256 = "c632562a244c52e8fbb9da834d16995165f98a7a3af1f361295b11cf96efc738"
 _RECEIVER_SUCCESSORS = frozenset(
-    "m3/core/src/com/m3/text/" + name for name in (
+    "m3/core/src/jdk/m3/text/" + name for name in (
         "JoinedM3StringPiece.java", "SharedLexiconCatalog.java",
         "SharedLexiconPrecomputeCatalog.java", "SharedRelatedLexemeCatalog.java"))
-_RECEIVER_V8_SUCCESSORS = _RECEIVER_SUCCESSORS | {"m3/core/src/com/m3/text/SynexiaPrecomputePayload.java"}
+_RECEIVER_V8_SUCCESSORS = _RECEIVER_SUCCESSORS | {"m3/core/src/jdk/m3/text/M3PrecomputePayload.java"}
 
 
 def _receiver_identity(raw):
@@ -135,12 +135,12 @@ def _receiver_admission(root, transition=None):
         expected_rows = 9 if selected_path in (_RECEIVER_TRANSITION_V8_PATH, _RECEIVER_TRANSITION_V9_PATH, _RECEIVER_TRANSITION_V10_PATH, _RECEIVER_TRANSITION_V11_PATH, _RECEIVER_TRANSITION_V12_PATH, _RECEIVER_TRANSITION_V13_PATH) else 8
         if set(rows) != successors or len(document["files"]) != expected_rows:
             raise ValueError("complete receiver source transition cohort required")
-        source = lock["modules"]["com.m3.text"]["files"]
+        source = lock["modules"]["jdk.m3.text"]["files"]
         for relative in sorted(rows):
             row = rows[relative]
             if row["before"]["sha256"] != source[relative] or row["before"] == row["after"]:
                 raise ValueError("receiver transition basis differs: " + relative)
-            effective["modules"]["com.m3.text"]["files"][relative] = row["after"]["sha256"]
+            effective["modules"]["jdk.m3.text"]["files"][relative] = row["after"]["sha256"]
             selected.append(row)
         for relative, digest in document["custodySha256"].items():
             if source.get(relative) != digest:
@@ -305,7 +305,7 @@ def verify_image(jdk, out):
     tests.mkdir()
     services = tests / "META-INF/services"
     services.mkdir(parents=True)
-    (services / "com.synexia.mindex.MIndexTensorBackend").write_text(
+    (services / "jdk.internal.m3.mindex.MIndexTensorBackend").write_text(
         "jdk.m3.nlp.search.test.SourceIntegrationProbe$ExternalBackend\n", encoding="utf-8")
     run([image / "bin/javac", "-source", "21", "-target", "21", "--enable-preview",
          "-Xlint:all,-preview", "-Werror", "--add-modules", MODULE,
@@ -378,7 +378,7 @@ def build(args):
             command += ["--maven-settings", args.maven_settings.resolve()]
     run(command, out / "lucene-build.log", env=environment)
     donor_receipts["lucene"] = collect_jmods(out / "lucene", out / "jars", out / "legal", owners)
-    for module in ("com.m3.text", "jdk.m3.compiletime", MODULE):
+    for module in ("jdk.m3.text", "jdk.m3.compiletime", MODULE):
         check_inputs("before:" + module)
         compile_owner(jdk, compile_root, out, module, admission["effective"]["modules"][module])
         check_inputs("after:" + module)
@@ -398,7 +398,7 @@ def build(args):
     report = {"schema": "M3_CURRENT_FORK_NLP_SEARCH_1", "receiver": lock["receiver"],
               "source_lock_sha256": sha256(HERE / "current-source-lock.json"),
               "java_release": 21, "preview_required": True,
-              "runtime_dependency_on_com_synexia_repository": False,
+              "runtime_dependency_on_com_m3_repository": False,
               "donor_jmods": donor_receipts,
               "module_jars": {p.stem: sha256(p) for p in sorted((out / "jars").glob("*.jar"))},
               "tests": tests,

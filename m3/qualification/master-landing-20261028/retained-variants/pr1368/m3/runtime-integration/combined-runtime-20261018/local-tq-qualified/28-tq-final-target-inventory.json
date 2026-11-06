@@ -30,27 +30,27 @@
     "sha256": "14b77cdc0501b9b2ca4b036a96a5c5131891ff02d0fe19a9da18bc6ceb0880ef"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe$1.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe$1.class",
     "bytes": 4300,
     "sha256": "1985219905e5e9eedc3d5069cb96c8f265096bdef714b7974db5732151162b26"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe$Atom.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe$Atom.class",
     "bytes": 1220,
     "sha256": "e60593e06c5e3d2e96dd27fb88a5e4a673d11bcc2172dda9b0e29d2f6f34985a"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe$Atoms.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe$Atoms.class",
     "bytes": 720,
     "sha256": "cc6e6a09df35b2f96acf1edee2c9209d00acf541bed5a56039504261d6838bcd"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.class",
     "bytes": 1660,
     "sha256": "4d6a87726bf78c751123870f00f81fcda6dea34a588916adfc4cb55e9b94f682"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.class",
     "bytes": 3107,
     "sha256": "1404825d6614535c244aeef6b05cb5885b9129c7188bff5898d6fa31648d4204"
   },
@@ -75,119 +75,119 @@
     "sha256": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$1.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$1.class",
     "bytes": 3716,
     "sha256": "e2e60e69d916190375d08ecea60c82257c5fc6ebf3369cf362680897e9f41fea"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$2.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$2.class",
     "bytes": 4907,
     "sha256": "ca2c6e6eca552c991713e0deb8eac4387a77ea0514af442e6960a2ed24fabb90"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$Inventory.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$Inventory.class",
     "bytes": 1297,
     "sha256": "cc42b9f1257848d3a45e935027c9c730710e6a1babf26d458a46116c3a748977"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$Target.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$Target.class",
     "bytes": 2100,
     "sha256": "91b28129ee0c405a90aba24ae295f28f3af115a861467f4a527f58eb966d4d4b"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.class",
     "bytes": 15074,
     "sha256": "1d63d99cc76a74dd95b970dd165ad6b909a4c7b76f3a1eabc2626a10a4216427"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$1.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$1.class",
     "bytes": 3690,
     "sha256": "74b44a8d4dd9c5573194a956f6268cbc3713819d89564b7f5b828eaebeafe935"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$2.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$2.class",
     "bytes": 4810,
     "sha256": "e8085d301ff5b40d71a204f1c0f6a4912be2b57e608cc5438b7a2f4f8585f5fe"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Inventory.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Inventory.class",
     "bytes": 1230,
     "sha256": "f54fea5844ba1b19ee22e5ccfae495d4a9b2b03e9edfb5bc09ac620321ef628f"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Target.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Target.class",
     "bytes": 2128,
     "sha256": "7eb62aee1d3e3f89575b4973ffba8e1defae3270853de61c96d1efbd21fe128e"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.class",
+    "path": "classes/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.class",
     "bytes": 12899,
     "sha256": "732bde7f1026cd3ee719379d8f47cb307a2f781e3450751fbc37003fb4ac4266"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt",
     "bytes": 16998,
     "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQTest.java.txt",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQTest.java.txt",
     "bytes": 17321,
     "sha256": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
     "bytes": 303,
     "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt",
     "bytes": 10727,
     "sha256": "8a32b9ba61492c9b232439b9d917db12f3d8d5b25236bb4acb0439c32e16ac8d"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt.before",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt.before",
     "bytes": 8827,
     "sha256": "8a9df82b06f61ec680d47bbf512201f8120e661831b4d92b067aa58e7c84451c"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/libM3TQTest.cpp.txt",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/libM3TQTest.cpp.txt",
     "bytes": 3043,
     "sha256": "5f022fd49c82ff0f1014e7059ee689c89cafde50d8578276438823c067f06395"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
     "bytes": 948,
-    "sha256": "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608"
+    "sha256": "89a73148d90ab52445ec8bf680ffc8413210e7f3d5e2a5684cfe73041bdd70b6"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt",
     "bytes": 242226,
     "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before",
     "bytes": 234123,
     "sha256": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt",
     "bytes": 13407,
     "sha256": "f2c1255f1a27c75e7c6835e01f61e3fb861407571410365e9b64267c7f27f516"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt.before",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt.before",
     "bytes": 13066,
     "sha256": "1d615647231198fcfe563d63655165b4265fb9220626c24b88877fb3c76bf264"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/verify-image.sh.txt",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/verify-image.sh.txt",
     "bytes": 3102,
     "sha256": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d"
   },
   {
-    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
+    "path": "classes/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
     "bytes": 5378,
-    "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
+    "sha256": "b82b840f8677d52b77bdd5be16e7eb59794612d74918e139d643e5ac29ab8c93"
   },
   {
     "path": "compile-bootstrap.log",
@@ -487,7 +487,7 @@
   {
     "path": "generated/.github/workflows/m3-tq.yml",
     "bytes": 5378,
-    "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
+    "sha256": "b82b840f8677d52b77bdd5be16e7eb59794612d74918e139d643e5ac29ab8c93"
   },
   {
     "path": "generated/m3/docs/counterpart-naming.md",
@@ -780,32 +780,32 @@
     "sha256": "289986e5963a660ed1f13895c78e6a2e63d976a8fa9550bcf983741fbb985bf9"
   },
   {
-    "path": "surefire-reports/TEST-com.m3.tq.TQTest.xml",
+    "path": "surefire-reports/TEST-jdk.m3.tq.TQTest.xml",
     "bytes": 17232,
     "sha256": "4ad8eba56c978626b17cc500fa69850b57fb703103b190feb8a21178bd3c2f88"
   },
   {
-    "path": "surefire-reports/com.m3.tq.TQTest.txt",
+    "path": "surefire-reports/jdk.m3.tq.TQTest.txt",
     "bytes": 283,
     "sha256": "ee999e97b92c695626ce0475e5ad9ad19abe9c50da981a424d2eb500c305eff5"
   },
   {
-    "path": "test-classes/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq-bad/M3TQ.java.txt",
+    "path": "test-classes/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq-bad/M3TQ.java.txt",
     "bytes": 17007,
     "sha256": "11f7d31ecc94088a536075e43223f9f9431a19ce97ef2e447627e04f9f49149a"
   },
   {
-    "path": "test-classes/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq-bad/M3TQTest.java.txt",
+    "path": "test-classes/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq-bad/M3TQTest.java.txt",
     "bytes": 17330,
     "sha256": "829437b6d7dfc85e0dc221a05e3534ed15a0bf01c0adde9112babda1ec5a8d25"
   },
   {
-    "path": "test-classes/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq-bad/manifest.tsv",
+    "path": "test-classes/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq-bad/manifest.tsv",
     "bytes": 303,
     "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338"
   },
   {
-    "path": "test-classes/com/m3/tq/TQTest.class",
+    "path": "test-classes/jdk/m3/tq/TQTest.class",
     "bytes": 29967,
     "sha256": "5d7b7c4951e438dd15f412b95a1046410f6882ade042c300d1ae83a31d1d2f76"
   },

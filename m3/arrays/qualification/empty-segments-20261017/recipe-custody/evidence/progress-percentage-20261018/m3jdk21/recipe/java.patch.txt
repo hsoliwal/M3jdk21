@@ -1,7 +1,7 @@
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java b/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java b/m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java
 index 87d3fa1..331e3e7 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java
 @@ -3,6 +3,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  // SPDX-License-Identifier: Apache-2.0
  package com.m3.collections;
@@ -30,11 +30,11 @@ index 87d3fa1..331e3e7 100644
          }
          @Override public Snapshot snapshot() {
              M3ProgressState state = delegate.state();
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageSelfTest.java b/m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageSelfTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageSelfTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageSelfTest.java
 new file mode 100644
 index 0000000..ee6513e
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageSelfTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageSelfTest.java
 @@ -0,0 +1,193 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 +// SPDX-License-Identifier: Apache-2.0
@@ -229,11 +229,11 @@ index 0000000..ee6513e
 +        private static void unexpected() { throw new AssertionError("percentage must not mutate its monitor"); }
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageTest.java b/m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageTest.java
 new file mode 100644
 index 0000000..88d7386
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageTest.java
 @@ -0,0 +1,12 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 +// SPDX-License-Identifier: Apache-2.0

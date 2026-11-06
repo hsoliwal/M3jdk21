@@ -4,10 +4,10 @@ on:
   pull_request:
     paths:
       - AGENTS.md
-      - m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java
-      - m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
-      - m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceTest.java
-      - m3/collections/src/test/java/com/m3/collections/M3IndexedOccurrenceArrayNativeTest.java
+      - m3/collections/src/main/java/jdk/m3/collections/M3IndexedMultiValueMap.java
+      - m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
+      - m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceTest.java
+      - m3/collections/src/test/java/jdk/m3/collections/M3IndexedOccurrenceArrayNativeTest.java
       - m3/collections/qualification/m3-five-library-occurrences-20261018/**
       - .github/workflows/m3-five-library-occurrences-20261018.yml
   workflow_dispatch:
@@ -40,7 +40,7 @@ jobs:
           ARRAY_NATIVE="$PWD/m3/arrays/target/native/libm3_arrays.so"
           test -s "$ARRAYS"
           test -s "$ARRAY_NATIVE"
-          jar --describe-module --file "$ARRAYS" | grep -F 'com.m3.arrays'
+          jar --describe-module --file "$ARRAYS" | grep -F 'jdk.m3.arrays'
           # This existing occurrence test allocates required-native Object[].
           # Supply the exact native provider to its forked Surefire JVM.
           mvn -B -ntp -f m3/collections/pom.xml test \
@@ -54,15 +54,15 @@ jobs:
           import xml.etree.ElementTree as ET
           root = Path("m3/collections/target/surefire-reports")
           expected = {
-              "com.m3.collections.M3IndexedMultiValueOccurrenceTest#differential",
-              "com.m3.collections.M3IndexedOccurrenceArrayNativeTest#objectAllocationIsNativeAndDetached",
-              "com.m3.collections.M3IndexedOccurrenceArrayNativeTest#byteAllocationIsNativeAndZeroInitialized",
-              "com.m3.collections.M3IndexedOccurrenceArrayNativeTest#intAllocationIsNativeAndZeroInitialized",
-              "com.m3.collections.M3IndexedOccurrenceArrayNativeTest#longAllocationIsNativeAndZeroInitialized",
+              "jdk.m3.collections.M3IndexedMultiValueOccurrenceTest#differential",
+              "jdk.m3.collections.M3IndexedOccurrenceArrayNativeTest#objectAllocationIsNativeAndDetached",
+              "jdk.m3.collections.M3IndexedOccurrenceArrayNativeTest#byteAllocationIsNativeAndZeroInitialized",
+              "jdk.m3.collections.M3IndexedOccurrenceArrayNativeTest#intAllocationIsNativeAndZeroInitialized",
+              "jdk.m3.collections.M3IndexedOccurrenceArrayNativeTest#longAllocationIsNativeAndZeroInitialized",
           }
           observed = set()
           for cls in ("M3IndexedMultiValueOccurrenceTest", "M3IndexedOccurrenceArrayNativeTest"):
-              name = "com.m3.collections." + cls
+              name = "jdk.m3.collections." + cls
               report = root / ("TEST-" + name + ".xml")
               if report.is_symlink() or not report.is_file():
                   raise ValueError("missing or aliased executed Surefire report: " + name)
@@ -101,12 +101,12 @@ jobs:
           # Compile the original oracle in the owning module, never drop JPMS.
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             --module-path "$CLS:$ARRAYS" \
-            --patch-module com.m3.collections=m3/collections/src/test/java \
+            --patch-module jdk.m3.collections=m3/collections/src/test/java \
             -d "$CLS" \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
           java -Xcheck:jni "-Dm3.arrays.native.path=$ARRAY_NATIVE" \
             --module-path "$CLS:$ARRAYS" \
-            --module com.m3.collections/com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest
+            --module jdk.m3.collections/jdk.m3.collections.M3IndexedMultiValueOccurrenceSelfTest
           cc -std=c17 -fPIC -shared -O1 -g -Wall -Wextra -Werror \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
@@ -116,4 +116,4 @@ jobs:
             "-Dm3.arrays.native.path=$ARRAY_NATIVE" \
             -Djava.library.path="$NATIVE" \
             --module-path "$CLS:$ARRAYS" \
-            --module com.m3.collections/com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest
+            --module jdk.m3.collections/jdk.m3.collections.M3IndexedMultiValueOccurrenceSelfTest

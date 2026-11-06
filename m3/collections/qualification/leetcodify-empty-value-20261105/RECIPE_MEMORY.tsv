@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 stage	status	evidence
-INVENTORY	PASS	M3JDK21 master b0fbe13b7feb437b39cdd1069ff49415f4d50bc0; source Git 134508fdd9857110ca21d0042353805586db3ea0
+INVENTORY	PASS	M3JDK21 master b0fbe13b7feb437b39cdd1069ff49415f4d50bc0; source Git 9a84487f7a66257ce5e42e2e31698068496f49d9
 CATALOGUE	PASS_METADATA	Synexia LeetCodify LC0705/0706 HR Hash Tables GFG Hash Search; no donor code copied
 CONTRACT	FROZEN	No public method/signature/ABI change; no table layout change; empty values cannot exist
 RECIPE	SOURCE_SEALED	Canonical existing Maven/OpenRewrite engine and one named child manifest
-PATCH	ONE_METHOD_CANDIDATE	Full post source Git 6cd936c4d0d0971b9834049785f1852107eb6523, SHA256 844924463c460f6b379424cbc4864d738d69229b84d149db3d5066c57375fc7c
+PATCH	ONE_METHOD_CANDIDATE	Full post source Git 4ebceb9bf2f66a15c1ebc931169af8a5913fc6f5, SHA256 11b444a76a3e024e6a4f4bddbd3be30b440b5e46d29be8b680252f93ef0e041c
 LINT	ISOLATED_PASS	Java21 javac --release 21 -Xlint:all -Werror
 COMPILE	ISOLATED_PASS	Exact method scan and guard in JDK-only fixture
 TEST	ISOLATED_PASS	8000 checks Xint plus 8000 checks JIT vs occupancy reference

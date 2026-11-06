@@ -8,7 +8,7 @@ import argparse
 import hashlib
 from pathlib import Path
 
-EXPECTED_SHA256 = "5a021a4a8e527bbf4f8b0d106719080d85df95fc8490e05f3123f91af3c68757"
+EXPECTED_SHA256 = "b880b53d0441178988bb46c4f79a359f0f8af317056b38ee0cf2830ff167e2d3"
 
 
 def require_sequence(source: str) -> None:

@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "repository": "hsoliwal/M3jdk21",
+  "baseCommit": "a918e588dd11d5ff7e0a6d4efaa89bb1679a9798",
+  "onlyActualSdkPostimages": true,
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "sha256": "0954d5b2e0e19a9fd850b332cd1e73ffeafbc1170fb4c840f4d5ed5323836359",
+      "bytes": 18370,
+      "recipeCrate": "m3jdk-collection-current-owners-java-00-20261017"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
+      "sha256": "1299a5ab2b3c1dc6895b71ac70d6cb91a9d6c224cdcdd3a6e2a8ee5d2df8f393",
+      "bytes": 9421,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "4980cd7b908270044912775d85f079351b0e020b0b044d91aff2339584e924f1",
+      "bytes": 400947,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveIndexView.java",
+      "sha256": "874378d38cee18d74072d8f5a7d44552a072cd290560dcb36d91e298a453495e",
+      "bytes": 9704,
+      "recipeCrate": "m3jdk-collection-current-owners-java-01-20261017"
+    },
+    {
+      "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveSoaStore.java",
+      "sha256": "7bce76bc55cc3c552e463baf387287ee89100dea8b14e86659e27ae0ef661c0f",
+      "bytes": 17848,
+      "recipeCrate": "m3jdk-collection-current-owners-java-02-20261017"
+    },
+    {
+      "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3RuntimeHeap.java",
+      "sha256": "e8dd77e65aeb67120cf0c4f0b955e750e45be756d942b281cf142cf44690d49f",
+      "bytes": 5425,
+      "recipeCrate": "m3jdk-collection-current-owners-java-03-20261017"
+    },
+    {
+      "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3SortableTopK.java",
+      "sha256": "88dc3a4d84e46ff31d8214cb23d0944901ace649b16cf0c26ed6d1b96cd95f5a",
+      "bytes": 5844,
+      "recipeCrate": "m3jdk-collection-current-owners-java-04-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/PROJECTION_SOURCE_IDENTITY.json",
+      "sha256": "acc27413b2292ff2599c7e0b5317449d03878167f6a2b105312a62ef12203d5f",
+      "bytes": 8544,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/README.md",
+      "sha256": "7ce27323ed01f5ffec7eb2f50db4f451b89bde991f51b4bdc24075c2af0e9c7c",
+      "bytes": 1797,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/build.py",
+      "sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
+      "bytes": 10293,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/M3_COLLECTIONS_NOTICE.txt",
+      "sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "bytes": 423,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/NOTICE.txt",
+      "sha256": "06ccebb09017bce1e11a9be0dc0ed5e9dbf471b482ccb6f15cf72940488095b9",
+      "bytes": 683,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/pom.xml",
+      "sha256": "d7c9f2d737f776009dd8ed10a72b5c7d0a253600a84337937ec3c4e2952d051a",
+      "bytes": 4621,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/src/main/java/module-info.java",
+      "sha256": "e485a3f5715c1d556e0c956d9154d95875b96e9fabd6a22dd0add22522e37c3d",
+      "bytes": 291,
+      "recipeCrate": "m3jdk-collection-current-owners-java-05-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/util/M3PrimitiveIndexViewFilterContract.java",
+      "sha256": "5271edd73a643d4d2a1dafa036e3d3eda71552744bce6948387adf5fdd08b411",
+      "bytes": 13068,
+      "recipeCrate": "m3jdk-collection-current-owners-java-06-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3CollectionsPackTest.java",
+      "sha256": "b626807d8229e5e35b4c8e1bef7ad3113731653c6619945cbe8284e7b227fbf9",
+      "bytes": 701,
+      "recipeCrate": "m3jdk-collection-current-owners-java-07-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java",
+      "sha256": "c2d94e528efb2267fa33723966e7cdd4d6b29fb67719733756bf8749523146be",
+      "bytes": 12399,
+      "recipeCrate": "m3jdk-collection-current-owners-java-08-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsContract.java",
+      "sha256": "45e9fee461ea752722424900ebedea97faa9e8ee18e5bfaa68a427a7ec3c6839",
+      "bytes": 19644,
+      "recipeCrate": "m3jdk-collection-current-owners-java-09-20261017"
+    },
+    {
+      "path": "m3/tooling/module-packs/pom.xml",
+      "sha256": "d246473f6eeb784f53dac6c1dff4add147fed42020382c8c9e27818a69784489",
+      "bytes": 12689,
+      "recipeCrate": "m3jdk-collection-current-owners-assets-20261017"
+    }
+  ]
+}

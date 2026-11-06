@@ -9,12 +9,12 @@ fi
 root="$(cd "$1" && pwd -P)"
 array_src="$root/m3/arrays/src/main/java"
 collection_src="$root/m3/collections/src/main/java"
-collection_tests="$root/m3/collections/src/test/java/com/m3/collections"
+collection_tests="$root/m3/collections/src/test/java/jdk/m3/collections"
 for dir in "$array_src" "$collection_src" "$collection_tests"; do
   [[ -d "$dir" ]] || { echo "missing original source directory: $dir" >&2; exit 1; }
 done
-[[ -f "$array_src/module-info.java" ]] || { echo 'missing com.m3.arrays module-info' >&2; exit 1; }
-[[ -f "$collection_src/module-info.java" ]] || { echo 'missing com.m3.collections module-info' >&2; exit 1; }
+[[ -f "$array_src/module-info.java" ]] || { echo 'missing jdk.m3.arrays module-info' >&2; exit 1; }
+[[ -f "$collection_src/module-info.java" ]] || { echo 'missing jdk.m3.collections module-info' >&2; exit 1; }
 javac="${JAVA_HOME:+$JAVA_HOME/bin/}javac"
 java="${JAVA_HOME:+$JAVA_HOME/bin/}java"
 version="$($javac -version 2>&1)"
@@ -32,14 +32,14 @@ find "$collection_src" -type f -name '*.java' | LC_ALL=C sort > "$scratch/collec
   --module-path "$scratch/arrays" \
   -d "$scratch/collections" @"$scratch/collections.sources"
 "$java" --module-path "$scratch/arrays:$scratch/collections" \
-  --describe-module com.m3.collections > "$scratch/descriptor.txt"
-grep -Fxq 'requires com.m3.arrays' "$scratch/descriptor.txt" || {
+  --describe-module jdk.m3.collections > "$scratch/descriptor.txt"
+grep -Fxq 'requires jdk.m3.arrays' "$scratch/descriptor.txt" || {
   echo 'original collections module no longer declares arrays dependency' >&2; exit 1;
 }
 # Compile standalone contract oracles as patched module tests, including package-private owner.
 "$javac" --release 21 -Xlint:all,-module -Werror \
   --module-path "$scratch/arrays:$scratch/collections" \
-  --patch-module "com.m3.collections=$root/m3/collections/src/test/java" \
+  --patch-module "jdk.m3.collections=$root/m3/collections/src/test/java" \
   -d "$scratch/tests" \
   "$collection_tests/M3IndexSortAdaptiveContract.java" \
   "$collection_tests/M3IndexSortStrictContract.java"
@@ -49,8 +49,8 @@ for mode in normal interpreted; do
   for entry in 'M3IndexSortAdaptiveContract:6576:ADAPTIVE' 'M3IndexSortStrictContract:9:STRICT'; do
     IFS=: read -r clazz expected label <<< "$entry"
     "$java" "${opts[@]}" --module-path "$scratch/arrays:$scratch/collections" \
-      --patch-module "com.m3.collections=$scratch/tests" \
-      -m "com.m3.collections/com.m3.collections.$clazz" \
+      --patch-module "jdk.m3.collections=$scratch/tests" \
+      -m "jdk.m3.collections/jdk.m3.collections.$clazz" \
       | tee "$scratch/$clazz.$mode.txt"
     grep -Fxq "PASS M3_INDEX_SORT_${label} checks=$expected" "$scratch/$clazz.$mode.txt"
   done

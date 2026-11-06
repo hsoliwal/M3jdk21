@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	template
+# parse-context-sha256	6a264560c6276a744d1bf83801d65970eaa6ab657b601497bc474b5c57789c59
+m3/tooling/module-packs/collections/src/main/java/module-info.java	ABSENT	f7e2cebd4d8c631b9f5352e2bd67f480557c98a71b215403b4eceeed67188489	template-00.txt

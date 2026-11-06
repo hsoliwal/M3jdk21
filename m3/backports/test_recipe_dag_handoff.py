@@ -28,7 +28,7 @@ class RecipeDagHandoffTest(unittest.TestCase):
         self.mod = load_module()
 
     def current_rows(self):
-        path = Path(__file__).with_name("SYNEXIA_NEBULA_RECIPE_DAG_HANDOFF.tsv")
+        path = Path(__file__).with_name("M3_NEBULA_RECIPE_DAG_HANDOFF.tsv")
         return self.mod.read_rows(path)
 
     def test_current_receipt_is_valid_and_content_addressed(self) -> None:
@@ -37,7 +37,7 @@ class RecipeDagHandoffTest(unittest.TestCase):
         second = self.mod.summary(self.mod.validate(self.current_rows()))
 
         self.assertEqual(first, second)
-        self.assertEqual("M3_SYNEXIA_NEBULA_RECIPE_DAG_HANDOFF_V1", first["schema"])
+        self.assertEqual("M3_NEBULA_RECIPE_DAG_HANDOFF_V1", first["schema"])
         self.assertEqual("hsoliwal/M3jdk21", first["target"])
         self.assertEqual("PROVEN_RECIPE_DAG_ONLY", first["applicationPolicy"])
         self.assertFalse(first["mutationAuthority"])
@@ -50,7 +50,7 @@ class RecipeDagHandoffTest(unittest.TestCase):
 
         self.assertEqual("M3_NEBULA_MASTERED_DAG_RECEIVER_V2", row["schema"])
         self.assertEqual("ADMITTED", row["recipe_dag_transfer"])
-        self.assertEqual("CANONICAL_SYNEXIA_APACHE_HANDOFF", row["recipe_custody"])
+        self.assertEqual("CANONICAL_M3_APACHE_HANDOFF", row["recipe_custody"])
         self.assertEqual(
             "GREEN_ZERO_DRIFT_FROM_QUALIFIED_RUNTIME",
             row["runtime_source_equivalence"],
@@ -69,12 +69,12 @@ class RecipeDagHandoffTest(unittest.TestCase):
         for asset_id, (path, digest) in self.mod.REQUIRED_ASSETS.items():
             row = by_id[asset_id]
             self.assertEqual("hsoliwal/com.synexia", row["repository"])
-            self.assertEqual(self.mod.SYNEXIA_ASSET_COMMIT, row["commit"])
+            self.assertEqual(self.mod.M3_ASSET_COMMIT, row["commit"])
             self.assertEqual(path, row["path"])
             self.assertEqual("SHA-256", row["contentHashAlgorithm"])
             self.assertEqual(digest, row["contentHash"])
             self.assertEqual("Apache-2.0", row["license"])
-            self.assertEqual("SYNEXIA_ORIGINAL", row["authorship"])
+            self.assertEqual("M3_ORIGINAL", row["authorship"])
             self.assertEqual("COPY_ADAPT", row["delivery"])
             self.assertEqual("false", row["mutationAuthority"])
             self.assertEqual("false", row["promotionAuthority"])
@@ -134,7 +134,7 @@ class RecipeDagHandoffTest(unittest.TestCase):
     def test_wrong_target_policy_or_nebula_role_fails_closed(self) -> None:
         rows = [dict(row) for row in self.current_rows()]
         for row in rows:
-            if row["id"] == "synexia-target-policy":
+            if row["id"] == "m3-target-policy":
                 row["applicationPolicy"] = "DIRECT_EDIT"
         with self.assertRaises(ValueError):
             self.mod.validate(rows)

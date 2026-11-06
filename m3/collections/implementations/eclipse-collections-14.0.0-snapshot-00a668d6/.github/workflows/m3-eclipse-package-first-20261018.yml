@@ -40,7 +40,7 @@ jobs:
           git cat-file -e "$M3_DONOR_PIN^{commit}"
           git show "$M3_DONOR_PIN:eclipse-collections/src/main/java/org/eclipse/collections/impl/EmptyIterator.java" > "$ORIGINAL/EmptyIterator.java"
           git show "$M3_DONOR_PIN:eclipse-collections/src/main/java/org/eclipse/collections/impl/list/IntervalUtils.java" > "$ORIGINAL/IntervalUtils.java"
-          git show "$M3_DONOR_PIN:eclipse-collections/src/test/java/com/m3/collections/eclipse/impl/M3EclipsePackageRelocationProof.java" > "$ORIGINAL/M3EclipsePackageRelocationProof.java"
+          git show "$M3_DONOR_PIN:eclipse-collections/src/test/java/jdk/m3/collections/eclipse/impl/M3EclipsePackageRelocationProof.java" > "$ORIGINAL/M3EclipsePackageRelocationProof.java"
           python3 - <<'PYCODE'
           import hashlib, os
           from pathlib import Path
@@ -58,9 +58,9 @@ jobs:
                   continue
               relative, before, after, note = line.split('\t')
               assert hashlib.sha256((original / Path(relative).name).read_bytes()).hexdigest() == before
-              live = Path('eclipse-collections/src/main/java/com/m3/collections/eclipse') / relative
+              live = Path('eclipse-collections/src/main/java/jdk/m3/collections/eclipse') / relative
               assert live.read_bytes() == (original / Path(relative).name).read_bytes().replace(
-                  b'package org.eclipse.collections.', b'package com.m3.collections.eclipse.')
+                  b'package org.eclipse.collections.', b'package jdk.m3.collections.eclipse.')
           print('PASS pinned original sources, immutable proof and actual relocated source hashes')
           PYCODE
       - name: Lint then compile and test actual relocated modules and consumers
@@ -80,7 +80,7 @@ jobs:
           for module in ('eclipse-collections-api', 'eclipse-collections',
                          'eclipse-collections-code-generator', 'eclipse-collections-code-generator-maven-plugin'):
               classes = Path(module) / 'target/classes'
-              assert list((classes / 'com/m3/collections/eclipse').rglob('*.class')), module
+              assert list((classes / 'jdk/m3/collections/eclipse').rglob('*.class')), module
               assert not list((classes / 'org/eclipse/collections').rglob('*.class')), module
           print('PASS producer and generator bytecode uses the relocated namespace')
           PYCODE
@@ -94,14 +94,14 @@ jobs:
         run: |
           set -eu
           ORIGINAL="$RUNNER_TEMP/m3-eclipse-original"
-          SRC=eclipse-collections/src/main/java/com/m3/collections/eclipse
+          SRC=eclipse-collections/src/main/java/jdk/m3/collections/eclipse
           OUT="$RUNNER_TEMP/m3-eclipse-differential/classes"
           mkdir -p "$OUT"
           javac -J-Xmx128m --release 21 -proc:none -Xlint:all,-unchecked -Werror -d "$OUT" \
             "$ORIGINAL/EmptyIterator.java" "$ORIGINAL/IntervalUtils.java" \
             "$SRC/impl/EmptyIterator.java" "$SRC/impl/list/IntervalUtils.java" \
             "$ORIGINAL/M3EclipsePackageRelocationProof.java"
-          java -Xmx128m -ea -cp "$OUT" com.m3.collections.eclipse.impl.M3EclipsePackageRelocationProof
+          java -Xmx128m -ea -cp "$OUT" jdk.m3.collections.eclipse.impl.M3EclipsePackageRelocationProof
       - name: Retain actual target test evidence
         if: always()
         uses: actions/upload-artifact@v4

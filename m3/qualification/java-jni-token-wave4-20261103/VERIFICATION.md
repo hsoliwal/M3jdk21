@@ -17,10 +17,10 @@ Receiving head [#2344](https://github.com/hsoliwal/M3jdk21/pull/2344): `86a94639
 |---|---|
 | `M3TokenCursor.java` borrowed-token safety owner | `2e4df89ac667973e979e3568f497adbb6fe5a069` |
 | `M3CursorMatcher.java` | `eced91ed00c48b50ce59d3325698e8b75194b0ea` |
-| `M3GrammarTokenProjection.java` | `1945dad38b2285af75c3b394357097748e5b5032` |
-| Newly restored `M3CompleteTokenProjectionProof.java` | `7995260401c07a8d6e5ba5fd26b8782fef9fbaeb` |
-| New `M3CompleteTokenProjectionTest.java` Jupiter bridge | `a4bcdfd7bd89ab5a9e0552d24d70c9fb131cb398` |
-| Existing `verify-token-cursor-seek-locality-20261102.sh` ordered runner | `9c2f90eb5fb327136538a76601779ba5e6a7d5b0` |
+| `M3GrammarTokenProjection.java` | `5d6c07b15bfde2849ae234fc9b9211104f11daee` |
+| Newly restored `M3CompleteTokenProjectionProof.java` | `2d380e1a4c76d3b4e5946c00392b17b091e07808` |
+| New `M3CompleteTokenProjectionTest.java` Jupiter bridge | `3dbc366a6cccc1f3b6fb0e4c6fe490946a131a33` |
+| Existing `verify-token-cursor-seek-locality-20261102.sh` ordered runner | `95432ca6346872ab3507409737b6697b9e71221e` |
 | Existing packed JNI/native C codec, inherited unmodified | `1813a024d4c2ce514cebe4928ab4379b7950ff94` |
 
 All seven were independently fetched from their pinned original donor/receiver and merged tree, with exact Git blob SHA **and entire source text** equal. Before admission, original #2341 cursor and #2345 corrected cursor had the same ten ordered public/protected declaration lines. **This is a source API skeleton check only**, not JVM/JMOD binary/observable runtime proof.

@@ -6,7 +6,7 @@
 #include <string.h>
 
 #define KINDS(X) X(Objects) X(Booleans) X(Bytes) X(Chars) X(Shorts) X(Ints) X(Longs) X(Floats) X(Doubles)
-#define DECLARE(kind) extern jobject Java_com_m3_arrays_M3ArrayNative_nativeAllocate##kind(JNIEnv *, jclass, jint);
+#define DECLARE(kind) extern jobject Java_jdk_m3_arrays_M3ArrayNative_nativeAllocate##kind(JNIEnv *, jclass, jint);
 KINDS(DECLARE)
 
 static int pending, allocations, finds, throws, deletes, mode;
@@ -49,7 +49,7 @@ static const struct JNINativeInterface_ functions = {
     .NewIntArray = new_int, .NewLongArray = new_long, .NewFloatArray = new_float, .NewDoubleArray = new_double
 };
 typedef jobject (*entry)(JNIEnv *, jclass, jint);
-#define ENTRY(kind) Java_com_m3_arrays_M3ArrayNative_nativeAllocate##kind,
+#define ENTRY(kind) Java_jdk_m3_arrays_M3ArrayNative_nativeAllocate##kind,
 static entry const entries[] = { KINDS(ENTRY) };
 
 static void reset(int selected_mode) {

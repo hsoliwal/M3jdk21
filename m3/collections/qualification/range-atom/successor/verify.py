@@ -19,55 +19,55 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4]
 LEGACY = "m3/collections/qualification/long-range-set-20261017/"
 TEMPLATES = ("m3/tooling/migration-recipes/src/main/resources/"
-             "com/synexia/rewrite/hash-pinned-java/"
+             "jdk/internal/m3/rewrite/hash-pinned-java/"
              "m3jdk21-long-range-array-flags-20261017/")
-PRODUCTION = "m3/collections/src/main/java/com/m3/collections/"
-TEST = "m3/collections/src/test/java/com/m3/collections/"
+PRODUCTION = "m3/collections/src/main/java/jdk/m3/collections/"
+TEST = "m3/collections/src/test/java/jdk/m3/collections/"
 NATIVE = "m3/collections/src/main/native/collections/"
 
 ORIGINAL_TARGETS = {
     PRODUCTION + "M3LongRangeSet.java": (
-        "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8",
+        "11a1001d54bbd39d25102dab36b9ee7a9125713f8a1496598655f41f9c47652e",
         "M3LongRangeSet.java.txt"),
     TEST + "M3LongRangeSetSelfTest.java": (
-        "3b4ba4e2542ebbc607710f183f231d7c1bbe3e94ef4aa4fe6de49f0f9242ac29",
+        "420496cf602f3f08f8aef10a9ff73d1e104d7582a19be18d697f1898025595cb",
         "M3LongRangeSetSelfTest.java.txt"),
     TEST + "M3LongRangeSetTest.java": (
-        "1768a8be759b46ae24678ce089cdf328ef6c83f335bd3f5582cda813819261a5",
+        "b57500ea01b78f1db7c5deb809758116ec27c99f23d108b04431c3fbdadf6b4d",
         "M3LongRangeSetTest.java.txt"),
 }
 OLD_PEERS = {
     PRODUCTION + "M3IndexPathMasks.java":
-        ("ef0fac5c1e71f8493baab365c8af64bb22cb6171", "M3IndexPathMasks.java.txt"),
+        ("be8838c2ad26aac24453e05a317d63016bca100b", "M3IndexPathMasks.java.txt"),
     PRODUCTION + "M3LongLongConsumer.java":
-        ("b1c01d1afacc76bd338179398ab42835e16992fa", "M3LongLongConsumer.java.txt"),
+        ("8ce5558a5d660b7f8a206dde3b59d1b30c45aab4", "M3LongLongConsumer.java.txt"),
     NATIVE + "m3_index_path_masks.c":
-        ("086b49293257fd17cc7fbd1ebbb98460aa677e35", "m3_index_path_masks.c.txt"),
+        ("69aef883c09997bae30825d7ad8757bc2358bf69", "m3_index_path_masks.c.txt"),
 }
 GUARDED_OLD = {
-    LEGACY + "verify.py": "13085fff756852fbe5cb6c1d26f373079f60d6a7",
+    LEGACY + "verify.py": "37cafaecdf9ca96aed3087eef44d4250bac7ae76",
     LEGACY + "CATEGORY_REVIEW.tsv": "f1ed7acefae57e3baf76dd0d1b42dcda83db04c0",
     LEGACY + "RECEIPT.tsv": "18b18a9149c27a6d92b9548cc4315ca7f920b791",
-    TEMPLATES + "manifest.tsv": "9e749b13cc80f5885f697948fd61c112f65b4f10",
+    TEMPLATES + "manifest.tsv": "78ad6150a339f579d9361e67a60ca9d70ad88f6b",
 }
 CURRENT = {
     PRODUCTION + "M3LongRangeSet.java": (
-        "72c80e7748286181422405cbcc21420d5eb584637be49af7b1841e0bc8b97b98",
-        "37f4f35415728a3d4bc54838b97153b05a973184"),
+        "72d57ce6b78845712336d7a8c44642ee13b327d85d95ca9a89e632fec23dd285",
+        "ad7826be14ba09539e55125f52a6bea7a58ee362"),
     TEST + "M3LongRangeSetAtomTest.java": (
-        "cf436d406706f6ad252d360b86c595d0974b4b44ee8792a7f8684949d88511f0",
-        "1df89940ecfab1baa6e94db62deb765cb02ae1d8"),
+        "b2c6890df96006ef2038f44a4b1e27574dd00a25cebc497bbe5e2edb45037385",
+        "29529c500602c6a03bdf4d5fc6562bbcab692b36"),
 }
 CURRENT_PEER_BLOBS = {
-    PRODUCTION + "M3IndexPathMasks.java": "57c45d38af1529ff5ae7882e08606bb61b384f8c",
-    PRODUCTION + "M3LaneSearch.java": "cf0395b89a6eb875a866982f8de390957c239406",
-    PRODUCTION + "M3LongLongConsumer.java": "b1c01d1afacc76bd338179398ab42835e16992fa",
-    NATIVE + "m3_index_path_masks.c": "a3466fbf6d9065a9b21cd061782e0f44867ae086",
-    TEST + "M3LongRangeSetSelfTest.java": "f18a4d01b263a7e8471ecba2720e027b2a119abe",
-    TEST + "M3LongRangeSetTest.java": "592004d8776f5122914a214566e33a84ad5cdfdf",
+    PRODUCTION + "M3IndexPathMasks.java": "1adc99a3825acb8c60c31769199b3bd01ef0c25a",
+    PRODUCTION + "M3LaneSearch.java": "f84bf3bd1cdd2105b6ba56b6dd887f9006eaaec1",
+    PRODUCTION + "M3LongLongConsumer.java": "8ce5558a5d660b7f8a206dde3b59d1b30c45aab4",
+    NATIVE + "m3_index_path_masks.c": "1bf825b0b55d898578092b0250196d95dbb93a90",
+    TEST + "M3LongRangeSetSelfTest.java": "e9d18b07711ab54f8411697827921910b7c64b86",
+    TEST + "M3LongRangeSetTest.java": "7864c4d62e9cb113a22aad31cef643e28461d96c",
 }
-BEFORE = ("c1c07e23086cd4c49dca39a511d433209e8df0dd7449f8375a8aaaa7799d4596",
-          "ca18bcda04ebf192acf8ae5388d433d2dbf83798")
+BEFORE = ("9656b3a699f638dfe0a175a35546cc4d747f2e2e8caccfa8576f06d3929665cb",
+          "0db5f522879f739c4c754608911f05620e713ba9")
 
 
 def digest(data: bytes) -> str:

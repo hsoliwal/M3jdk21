@@ -67,13 +67,13 @@ static void JNICALL put_longs(JNIEnv *env, jlongArray array, jsize start, jsize 
     require(start >= 0 && n >= 0 && start <= a->size - n, "long write");
     memcpy((jlong *)a->data + start, in, (size_t)n * sizeof(jlong));
 }
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
         JNIEnv *, jclass, jintArray, jbyteArray, jint);
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
         JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint);
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         JNIEnv *, jclass, jintArray, jint, jbyteArray, jint, jint, jint);
-extern jlongArray Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+extern jlongArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         JNIEnv *, jclass, jlongArray, jint, jbyteArray, jint, jint, jint);
 
 int main(void) {
@@ -94,13 +94,13 @@ int main(void) {
             fixture_array flags = {family < 2 ? n : 1031, states};
             row_reads = state_reads = pending = 0; drift = changed; chunks = (n + 255) / 256;
             jobject output;
-            if (family == 0) output = Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+            if (family == 0) output = Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
                     &env, NULL, (jintArray)&rows, (jbyteArray)&flags, 1);
-            else if (family == 1) output = Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+            else if (family == 1) output = Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
                     &env, NULL, (jintArray)&rows, (jbyteArray)&flags, 2, n, 1);
-            else if (family == 2) output = Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+            else if (family == 2) output = Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
                     &env, NULL, (jintArray)&rows, 2, (jbyteArray)&flags, 3, n, 1);
-            else output = Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+            else output = Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
                     &env, NULL, (jlongArray)&long_rows, 2, (jbyteArray)&flags, 3, n, 1);
             require(row_reads == 0, "zero survivors never read row payload");
             require(changed ? output == NULL && pending : output != NULL && !pending && result.size == 0,

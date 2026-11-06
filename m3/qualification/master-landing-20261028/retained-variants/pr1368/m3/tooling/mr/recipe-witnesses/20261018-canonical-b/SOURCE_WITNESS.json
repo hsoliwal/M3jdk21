@@ -1,17 +1,17 @@
 {
   "schema": "M3_MR_CANONICAL_QUALIFIED_SOURCE_WITNESS_V1",
   "canonical_recipe_owner": "hsoliwal/com.synexia",
-  "canonical_crate_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_dataset": "m3-regex-facts-v2-20261018",
-  "canonical_manifest_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-facts-v2-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
-  "target_local_exact_mirror_path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
+  "canonical_manifest_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-facts-v2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
+  "target_local_exact_mirror_path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
   "manifest_sha256": "3d805f0601e3460d9773e15736f759ef2d5519ecac47cf9da548079db27743a1",
   "canonical_engine_changes": false,
   "actual_sdk_tests": 5,
   "input_sealing_cases": 8,
   "receiver_cases": 9,
-  "actual_sdk_report_sha256": "44b0132eaca37d18b37c4f39d0b91f4f155aeae04f3093ebf8221b261d1a3b41",
-  "SDK_INPUTS_sha256": "5b374bb56dba5b5b8fbe0f563782229b8666268f4ef1185c0ed3e2d6e60b7c5f",
+  "actual_sdk_report_sha256": "bf6ada850dae673f5128ced11d612916eb105438887caa0114f5791bce8e50df",
+  "SDK_INPUTS_sha256": "d7bc765f5c6ced1fcbab1cf1d38de7a3af3095638f25688e1ae3d35aadd48501",
   "SDK_RESULTS_sha256": "5a8a37afa7757b2a345914ed673135b28debc7bd0bfd1e35ad754ec7831aa147",
   "current_outputs": [
     {

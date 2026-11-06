@@ -11,13 +11,13 @@
     "shard_index": 0
   },
   "targets": [
-    "m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDb*BoundaryTest.java",
+    "m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDb*BoundaryTest.java",
     "m3/indexdb/tasks/boundary-contracts/**",
     "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-indexdb-boundary-tests.yml",
-    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3IndexDbBoundaryRecipeTest.java",
+    "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3IndexDbBoundaryRecipeTest.java",
     ".github/workflows/m3-indexdb-boundary-proof.yml",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/indexdb-boundary-contracts/**",
-    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/indexdb-boundary-proof/**"
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/indexdb-boundary-contracts/**",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/indexdb-boundary-proof/**"
   ],
   "invariant_locks": {
     "PRODUCTION_SOURCE": "LOCKED",

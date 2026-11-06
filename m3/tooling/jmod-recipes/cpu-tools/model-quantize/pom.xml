@@ -38,7 +38,7 @@
        <goal>java</goal>
       </goals>
       <configuration>
-       <mainClass>com.m3.tools.model.quantize.BlockInt8Quantizer</mainClass>
+       <mainClass>jdk.m3.tools.model.quantize.BlockInt8Quantizer</mainClass>
        <arguments>
         <argument>--self-test</argument>
        </arguments>

@@ -13,7 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 import com.google.common.collect.ClassToInstanceMap;
-import com.m3.collections.M3CollectionSdkCatalog;
+import jdk.m3.collections.M3CollectionSdkCatalog;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,13 +37,13 @@ public final class M3ClassInstanceCatalogueLookupCheck {
       require(M3CollectionSdkCatalog.find(c[0]).orElseThrow().equals(f),"exact lookup at "+i);
     }
     var registered=M3CollectionSdkCatalog.find("com.google.common.collect.ClassToInstanceMap").orElseThrow();
-    require(registered.existingM3Owner().equals("com.m3.collections.interop.M3GuavaClassToInstanceMaps"),"existing factory");
+    require(registered.existingM3Owner().equals("jdk.m3.collections.interop.M3GuavaClassToInstanceMaps"),"existing factory");
     require(registered.disposition()==M3CollectionSdkCatalog.Disposition.OPTIONAL_ADAPTER,"optional adapter");
     Class<?> factory=Class.forName(registered.existingM3Owner());
     Object created=factory.getMethod("create").invoke(null);
     require(created instanceof ClassToInstanceMap<?>,"factory creates original interface");
     var bimap=M3CollectionSdkCatalog.find("com.google.common.collect.BiMap").orElseThrow();
-    require(bimap.existingM3Owner().equals("com.m3.collections.interop.M3BiMap")
+    require(bimap.existingM3Owner().equals("jdk.m3.collections.interop.M3BiMap")
       && bimap.disposition()==M3CollectionSdkCatalog.Disposition.OPTIONAL_ADAPTER,"previous BiMap preserved");
     require(M3CollectionSdkCatalog.find("com.google.common.collect.ArrayListMultimap").orElseThrow()
       .disposition()==M3CollectionSdkCatalog.Disposition.PENDING,"native-fork qualifier stays separate");

@@ -1,7 +1,7 @@
 {
   "dataset": "m3-progress-scope-lint-20261018",
   "input_head": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
-  "qualified_crate": "/dev/shm/m3-progress-scope-lint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "qualified_crate": "/dev/shm/m3-progress-scope-lint-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "check": {
     "dataset": "m3-progress-scope-lint-20261018",
     "targets": 4,

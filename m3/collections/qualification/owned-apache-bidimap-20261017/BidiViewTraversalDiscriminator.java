@@ -12,7 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-import com.m3.collections.apache.M3BidiMap;
+import jdk.m3.collections.apache.M3BidiMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

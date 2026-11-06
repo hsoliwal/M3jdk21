@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '5a021a4a8e527bbf4f8b0d106719080d85df95fc8490e05f3123f91af3c68757  m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh' | sha256sum -c -
+          echo 'b880b53d0441178988bb46c4f79a359f0f8af317056b38ee0cf2830ff167e2d3  m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh' | sha256sum -c -
           bash -n m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh
           python3 m3/ports/regex-cursor/proofs/check-verify-order-20261102.py m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh
       - name: Compile and execute real JUnit with JaCoCo
@@ -45,7 +45,7 @@ jobs:
           base=Path('m3/ports/regex-cursor/target/surefire-reports')
           expected=(('M3TokenCursorSeekLocalityTest',3), ('M3CompleteTokenProjectionTest',2))
           for klass,minimum in expected:
-              f=base/('TEST-com.m3.regexcursor.'+klass+'.xml')
+              f=base/('TEST-jdk.m3.regexcursor.'+klass+'.xml')
               if not f.is_file(): raise SystemExit('MISSING real JUnit Surefire XML: '+str(f))
               root=ET.parse(f).getroot()
               fields={k:int(root.attrib.get(k,'0')) for k in ('tests','errors','failures','skipped')}
@@ -77,7 +77,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '5a021a4a8e527bbf4f8b0d106719080d85df95fc8490e05f3123f91af3c68757  m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh' | sha256sum -c -
+          echo 'b880b53d0441178988bb46c4f79a359f0f8af317056b38ee0cf2830ff167e2d3  m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh' | sha256sum -c -
           python3 m3/ports/regex-cursor/proofs/check-verify-order-20261102.py m3/ports/regex-cursor/proofs/verify-token-cursor-seek-locality-20261102.sh
       - name: Ordered Java21/C17 compile, tests and checked native runtime
         shell: bash

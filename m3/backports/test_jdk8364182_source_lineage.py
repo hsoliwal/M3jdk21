@@ -54,7 +54,7 @@ class Jdk8364182LineageTest(unittest.TestCase):
     def setUp(self) -> None:
         self.verify = verifier()
         self.temporary = tempfile.TemporaryDirectory(
-            prefix="m3-jdk8364182-lineage-"
+            prefix="m3jdk8364182-lineage-"
         )
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)

@@ -63,11 +63,11 @@
             <arg>-Werror</arg>
           </compilerArgs>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/synexia/rewrite/M3EclipseCoreOptionalJmodRecipeTest.java</testInclude>
-            <testInclude>com/synexia/rewrite/M3SharedLexiconBuilderExplicitCtorRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3EclipseCoreOptionalJmodRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3SharedLexiconBuilderExplicitCtorRecipeTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

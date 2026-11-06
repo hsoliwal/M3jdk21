@@ -25,7 +25,7 @@ Atom state is tied to immutable physical slots, **not logical row position**. Pa
 
 - **Executed locally with JDK 21**: `javac --release 21 -proc:none -Xlint:all -Werror`; Synexia and M3JDK generated oracles passed **86,095 assertions each**; canonical recipe `--selftest` proved double-apply fixed point and drift/missing refusal; generated output compiled and ran.
 - **NOT RUN**: Maven/OpenRewrite integration (no Maven installed locally), full target dependency reactor/JDK image/jtreg/HotSpot, Android/Windows JNI, CPU+memory benchmark and CI exact-head verification.
-- Reviewer quick command: `javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/ast-classes m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java && java -cp /tmp/ast-classes com.m3.compiletime.M3ASTLeafIndexSelfTest`.
+- Reviewer quick command: `javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/ast-classes m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java && java -cp /tmp/ast-classes com.m3.compiletime.M3ASTLeafIndexSelfTest`.
 
 Native-filter expansion is deliberately **not implemented** here: existing `M3IndexPathMasks` JNI remains canonical for its own selected index/offset stage. Reusing it later requires an explicit compiletime-to-collections adapter, ABI proof, overhead measurements and evidence of safe array ownership. No duplicate C engine is introduced.
 

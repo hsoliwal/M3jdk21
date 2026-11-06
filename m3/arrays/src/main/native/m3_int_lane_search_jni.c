@@ -19,7 +19,7 @@ static void invalid(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_arrays_M3IntLaneAlgorithms_nativeBound(
+Java_jdk_m3_arrays_M3IntLaneAlgorithms_nativeBound(
     JNIEnv *env, jclass owner, jintArray lane, jint from, jint to, jint key, jboolean upper) {
   (void)owner;
   if (lane == NULL) {

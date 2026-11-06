@@ -25,7 +25,7 @@
     "proof": "com.m3.lexicon.M3LexiconWireProof",
     "checks": 356804,
     "source": "m3/lexicon/native/m3_lexicon_wire_jni.c",
-    "sourceGitBlob": "4e1ae84caa172d3489b0e5e2ac19c6fa551bd8ac",
+    "sourceGitBlob": "4780a0d82d414808bdc7fcc2a0cbf2e2bc864507",
     "compiler": "MinGW GCC15.2.0 x86_64-posix-seh;-std=c11 -Wall -Wextra -Werror -shared -O2",
     "jvm": "Oracle JDK21.0.9+7-LTS-338 Windowsx64;-Xcheck:jni",
     "librarySha256": "bc0a821f4d3a63c2000688f60e3983fa7cff9ffbd343adca5d5d9715c68f5420",

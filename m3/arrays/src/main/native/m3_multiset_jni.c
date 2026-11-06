@@ -98,7 +98,7 @@ static jlong m3_merge_pass(JNIEnv *env, jintArray left, jintArray right,
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_arrays_M3SortedIntMultisets_nativeMerge(
+Java_jdk_m3_arrays_M3SortedIntMultisets_nativeMerge(
     JNIEnv *env, jclass owner, jintArray left, jintArray right, jint mode) {
   (void)owner;
   if (left == NULL || right == NULL) {

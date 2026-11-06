@@ -9,7 +9,7 @@ This reference reviews all declared bodies in seven `java.base` owners in `jdk.i
 
 The three lane bodies are mutable heap storage. The class bridge is a mutable synchronized session. The version index retains a caller-supplied comparison scheme. Their different ownership rules must not be collapsed into a blanket immutable-image contract. None of these seven owners implements a persistent format, Java serialization, file mapping or native-address export. The bit lane has one explicit native read operation, described below.
 
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [naming map](../../m3/docs/name-mapping.json), [borrowing policy](../../SYNEXIA_APACHE_BORROWING_POLICY.md), [full-family pin](../../m3/compatibility/synexia-full-family-pin.tsv) and [receiver plan](../../m3/synexia-import/current-full-borrow/README.md) remain authoritative. This documentation neither changes sealed source nor advances String → arrays → collections → AST/compiler → remaining-family promotion. Per-file OpenJDK, third-party and first-party rights remain unchanged. Only public target source is used here.
+The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [naming map](../../m3/docs/name-mapping.json), [borrowing policy](../../M3_APACHE_BORROWING_POLICY.md), [full-family pin](../../m3/compatibility/m3-full-family-pin.tsv) and [receiver plan](../../m3/m3-import/current-full-borrow/README.md) remain authoritative. This documentation neither changes sealed source nor advances String → arrays → collections → AST/compiler → remaining-family promotion. Per-file OpenJDK, third-party and first-party rights remain unchanged. Only public target source is used here.
 
 ## Coordinates, widths and ownership
 
@@ -238,9 +238,9 @@ The [lane tooling][lane-tooling] and [VI tooling][vi-tooling] pages provide thei
 [native]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/src/java.base/share/native/libjava/M3BitLane28.c
 [lane-test]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/test/jdk/jdk/internal/mindex/M3Lane28Test.java
 [sparse-test]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/test/jdk/jdk/internal/mindex/M3SparseFillTest.java
-[cb-test]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java
-[descriptor-test]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/test/jdk/jdk/internal/mindex/descriptor/com/m3/descriptor/DescriptorTest.java
-[vi-probe]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/VIProbe.java.txt
-[vi-test]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/m3/tooling/vi/src/test/java/com/m3/vi/VITest.java
+[cb-test]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java
+[descriptor-test]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/test/jdk/jdk/internal/mindex/descriptor/jdk/m3/descriptor/DescriptorTest.java
+[vi-probe]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/VIProbe.java.txt
+[vi-test]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/m3/tooling/vi/src/test/java/jdk/m3/vi/VITest.java
 [lane-tooling]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/m3/tooling/lane28/README.md
 [vi-tooling]: https://github.com/hsoliwal/M3jdk21/blob/e7d21edf0f998c3c53ab0d0909972a4a97dfc471/m3/tooling/vi/README.md

@@ -25,7 +25,7 @@ public final class M3BitLane28Checks {
     private M3BitLane28Checks() { }
 
     public static void main(String[] args) throws Exception {
-        // A source-built M3JDK21 resolves this peer from its own libjava.
+        // A source-built M3JDK 21 resolves this peer from its own libjava.
         // The optional absolute path is for the standalone exact-source JNI proof.
         if (args.length > 0)
             System.load(Path.of(args[0]).toAbsolutePath().toString());

@@ -85,10 +85,10 @@ jobs:
           javac --release 21 -proc:none -cp "$RUNNER_TEMP/m3-classes" \
             --module-path m3/arrays/target/classes \
             -d "$RUNNER_TEMP/m3-classes" \
-            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
           java -Xcheck:jni "-Djava.library.path=$RUNNER_TEMP/m3-native" \
             -cp "$RUNNER_TEMP/m3-classes" \
-            com.m3.collections.M3IndexMaskCompactorSelfTest --native
+            jdk.m3.collections.M3IndexMaskCompactorSelfTest --native
       - name: Store real Maven test reports even on failure
         if: always()
         uses: actions/upload-artifact@v4

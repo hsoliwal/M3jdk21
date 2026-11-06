@@ -3,7 +3,7 @@
   "categories": [
     {
       "problem": "qualified-namespace-ownership",
-      "selected": "Fork-side recursive relocation org.eclipse.collections -> com.m3.collections.eclipse by the canonical owner M3CollectionsPackageRenameRecipe, sealed in m3/package-import-rename-20261018 of the fork",
+      "selected": "Fork-side recursive relocation org.eclipse.collections -> jdk.m3.collections.eclipse by the canonical owner M3CollectionsPackageRenameRecipe, sealed in m3/package-import-rename-20261018 of the fork",
       "rejected": "Re-running a relocation or text substitution in M3jdk21",
       "evidence": "All 3,360 upstream paths pair with a received path under the relocation fold key: 2,805 relocated, 391 edited in place, 164 unchanged",
       "remaining": "Serialized and reflection identities change; compatibility with the original namespace is not claimed"

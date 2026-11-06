@@ -1,7 +1,7 @@
 # M3JDK21 filtered object Deque receiver
 
 Exact first-party Synexia source: `synexia-primitives/src/main/java/com/synexia/primitives/M3FilteredDeques.java`.
-Product receiver: `m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java`.
+Product receiver: `m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java`.
 Source seals: `4861ecd5be1718dea49cb97daf1f0bfe6d057e762546e4143a598ba1b08b64ed` to `6342d1acb4f406dc5b3c086d2db18966d7a5fc7f2b2a14c680ca520133165f0a`.
 The class implements JDK Deque<E>, Queue<E> and stack-role push/pop
 while reusing physical backing owners and preserving hidden rows.

@@ -44,7 +44,7 @@ No width, density, length or mask threshold is fitted to favorable observations.
 
 Change only the active native manifest row from MODIFY to KEEP at the exact
 incumbent SHA256
-`c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052`.
+`069790b6fefb1c9f70662befa3d0e8399eea2c309292040d8acfa938b10cc249`.
 The active native template is removed only after its byte-identical frozen v2
 copy is verified. Remove any inactive rejected bitmap template after verifying
 its frozen v1/v2 identity. This cleanup cannot change emitted source: the bitmap

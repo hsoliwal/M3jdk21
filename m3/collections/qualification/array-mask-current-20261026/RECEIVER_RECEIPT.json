@@ -24,21 +24,21 @@
   },
   "files": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
       "role": "single owner dynamic Object[] removeIf mask",
-      "preimage_blob": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e",
+      "preimage_blob": "dda9d3739f4f7f779bd29e92c80bbc4d45ae1063",
       "postimage_blob": "3c6e1b12a40d5516d8b1ca0c8ed9fc86c99003f1",
-      "preimage_sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
+      "preimage_sha256": "9e4f22aa82af226fc96b4f1e77ce7d68f37d10813f1aba594457d43f1eff27a8",
       "postimage_sha256": "bead2ada2b127060f272c3eb53f3ad92cc9c6244c36cc8fd3d0dd1d145c16abf",
       "license": "Apache-2.0 OR EPL-2.0"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java",
       "role": "boundary/identity/callback JDK differential oracle",
       "preimage_blob": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
-      "postimage_blob": "6c596001a0cb6d56c43c817cc3f20cca1566fb34",
+      "postimage_blob": "596fdaf5650287c7c05259f0abd51d50e9d33a30",
       "preimage_sha256": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
-      "postimage_sha256": "481975229bd76ba07f9dc28cb637f4fa7f6a4d3f5b1ab0dda3e83c60c581188c",
+      "postimage_sha256": "b04b725f87df080333a071a16373d62159ed9317b3d1322922c6473b8d4f0194",
       "license": "Apache-2.0 OR EPL-2.0"
     },
     {
@@ -53,7 +53,7 @@
   ],
   "catalogue": {
     "path": "m3/collections/algorithm-catalog/current-array-mask-20261026.tsv",
-    "git_blob": "0faf37066cdf3b402fc287a5670a913d11d95832",
+    "git_blob": "3d80041c67be0387679ff25084986310a8a01b15",
     "categories": 11,
     "problem_category": "STABLE_BULK_REMOVE_MASK",
     "donor_imported_code": false
@@ -61,11 +61,11 @@
   "unchanged_native": [
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "git_blob": "bedd442346de5b7dd9d5f1965c510950e0c45ea1"
+      "git_blob": "970a7074223bfdff2eea70ad18fc2062c78b8b5b"
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+      "git_blob": "baa23467163a0e9344fe3c1d78dcc87cb707fd56"
     }
   ],
   "invariants": [

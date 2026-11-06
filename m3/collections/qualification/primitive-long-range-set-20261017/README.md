@@ -11,14 +11,14 @@ are **exactly** the reviewed canonical template blobs; no other
 Java, `java.util`, HotSpot, JNI or native source changed.
 
 - `M3LongRangeSet.java`: SHA256
-  `f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8`,
-  Git blob `5dbc2ec9317c79d801bb4c312f2c0b7ffad6ffbd`.
+  `11a1001d54bbd39d25102dab36b9ee7a9125713f8a1496598655f41f9c47652e`,
+  Git blob `8f3ed8efe75e7eb4744b35537192cf1a8b169423`.
 - `M3LongRangeSetSelfTest.java`: SHA256
-  `3b4ba4e2542ebbc607710f183f231d7c1bbe3e94ef4aa4fe6de49f0f9242ac29`,
-  Git blob `f18a4d01b263a7e8471ecba2720e027b2a119abe`.
+  `420496cf602f3f08f8aef10a9ff73d1e104d7582a19be18d697f1898025595cb`,
+  Git blob `e9d18b07711ab54f8411697827921910b7c64b86`.
 - `M3LongRangeSetTest.java`: SHA256
-  `1768a8be759b46ae24678ce089cdf328ef6c83f335bd3f5582cda813819261a5`,
-  Git blob `592004d8776f5122914a214566e33a84ad5cdfdf`.
+  `b57500ea01b78f1db7c5deb809758116ec27c99f23d108b04431c3fbdadf6b4d`,
+  Git blob `7864c4d62e9cb113a22aad31cef643e28461d96c`.
 - Canonical donor/category ledger copied exactly into product
   `algorithm-catalog/long-range-set-20261017/`.
 

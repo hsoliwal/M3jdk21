@@ -12,45 +12,45 @@
   "previous_receipt": "m3/qualification/jdk-donor-continuation-20261105/RECEIVER_RECEIPT.json",
   "product_files": [
     {
-      "path": "m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java",
+      "path": "m3/file/src/test/java/jdk/m3/file/M3FileDeltaLedgerContract.java",
       "before_sha256": "edf8a7cd1de5318ffb7a9519a3f3a76c18446ee9cea7d66c24f2bfae07d3c59e",
-      "sha256": "649097a1275fff1e9f13732890202fd876599357beaf13c7062c1e1998f21171",
-      "git_blob": "d31d4d86f1f6eff002c465a1d4ed9ff7af6099c9",
+      "sha256": "cd08505f8405a00545adae2f569223076670518a761c0337ca7d36cceb7bbe71",
+      "git_blob": "fd5309ef7d6569edb3374e8019f298fb62437f97",
       "mode": "100644"
     },
     {
       "path": "m3/file/verify.py",
       "before_sha256": "1a659953d00e359cce941311e12ce4fc2854413c7b32db024083ffb7f125c23a",
-      "sha256": "f8c54610db58fed193ec0860369ee48b0124a8dda651e0b53d3c1bba116872b3",
-      "git_blob": "7fce8e4757392ee2f351944b9558e10e4c86dcba",
+      "sha256": "bacdb01e2b317ba241de5eb4f0bb0c662e527d59de67cc13e577ebfbd6ab54ea",
+      "git_blob": "b42554626f5c5352154e91743f75a38504a7f7e8",
       "mode": "100644"
     },
     {
-      "path": "m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3CursorMatcher.java",
+      "path": "m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorMatcher.java",
       "before_sha256": "2b213048889946aa2b04c1a49d27e2a7a66dbaa08f5ea2e8502b054c06dab2cd",
-      "sha256": "fde9682dfb10ad6fa1e99bd65a60a8a23ba69868ad5e902d581e8337ba778deb",
-      "git_blob": "5091e90b717c4eb6a020db80424307b8474be6fe",
+      "sha256": "93cda1371150465b8e1e330c4586ec57123dc0e8ecf4a6ffe1372bfd826bb07b",
+      "git_blob": "d137d31c0c4eaa3487a42885bd25c40f32c56af0",
       "mode": "100644"
     },
     {
-      "path": "m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3TokenCursor.java",
+      "path": "m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenCursor.java",
       "before_sha256": "a909a96252c19b5965b96b7fe15d7b9c570d3183fc5e0e6539f6cfb3a56749a8",
-      "sha256": "97c266afff7e8a1ede6bf73e1a03e544bc3fc38774c352a101504c3bfd4de7ee",
-      "git_blob": "062b8f491112263c4d45a156dffd9ddfdadd1d98",
+      "sha256": "bfa0ddc74eff403511cd1e3f587ff7216ae6bf5f35a4c1c0cfabf2ee04925290",
+      "git_blob": "2b39f18bb0a79eb0d8a5ed505b37e7e8a62610e9",
       "mode": "100644"
     },
     {
-      "path": "m3/ports/regex-cursor/src/test/java/com/m3/regexcursor/M3CursorBoundaryTest.java",
+      "path": "m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorBoundaryTest.java",
       "before_sha256": "ABSENT",
-      "sha256": "f6fee1edc4142d48d1e75d5f77cc3c3b468debe538d60b915463806b20070f40",
-      "git_blob": "1facf64cd5217fc749ba08ddf5ab2642f1f22d11",
+      "sha256": "4bfe9da04ad07185452a5884c11bb2fab4f6f1477eb9c61dc10b6547cc02610d",
+      "git_blob": "deb0f6dcd8c5de5794a0100372e08cdefecedbff",
       "mode": "100644"
     },
     {
-      "path": "m3/ports/regex-cursor/src/test/java/com/m3/regexcursor/M3TokenPatternTest.java",
+      "path": "m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenPatternTest.java",
       "before_sha256": "ca2849ed27b6e7e899183ba88d84789093916faf59df1be4f65f2cb719f2b8e4",
-      "sha256": "2c8aad7aec158f6b7fdc6d236e81771211542f7f6d9f8f8b4aa616eba1a65db1",
-      "git_blob": "c928a40264248b3f82b3cab65387269b6535eb9e",
+      "sha256": "5e5bb310bcaee154e9a9110332252d2a7e05638740df12a7b335ab517c322aab",
+      "git_blob": "2d6d04d6ed37f5278c15aba5abb55b529dbeb0e6",
       "mode": "100644"
     },
     {

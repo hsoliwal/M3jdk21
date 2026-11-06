@@ -2,7 +2,7 @@
   "status": "DIAGNOSTIC_PASS_GENERATED_RECEIVER_PENDING",
   "baseline_receipt": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/RESULTS.json",
   "diagnostic_receipt": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/diagnostic/RESULTS.json",
-  "exact_candidate_sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+  "exact_candidate_sha256": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
   "public_protected_api_identical": true,
   "deterministic_observations_sha256": "e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b",
   "workload": {

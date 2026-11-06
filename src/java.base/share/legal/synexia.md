@@ -7,7 +7,7 @@ source is not made Apache-2.0 by passing through Synexia and requires its own ar
 license/NOTICE disposition before product inclusion.
 
 The machine-readable receiving policy is
-`m3/compatibility/synexia-public-target-policy.tsv`. Source-license admission is independent of
+`m3/compatibility/m3-public-target-policy.tsv`. Source-license admission is independent of
 build, API/ABI, runtime, native, jtreg and platform acceptance.
 
 ## Synexia Lane28 collection kernels

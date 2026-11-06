@@ -23,11 +23,11 @@
 |---|---|
 | Existing packed native C (`m3_packed_codec.c`) | `1813a024d4c2ce514cebe4928ab4379b7950ff94` |
 | Existing borrowed token-cursor Java | `2e4df89ac667973e979e3568f497adbb6fe5a069` |
-| Donor `M3FilteredViews.java` | `5c3e47ac756e6f7cfbc7542a305237a7c31bde92` |
-| Donor `M3TreeMap.java` | `c50a8b6518d0447a05761f633c5a4f73ef62d719` |
+| Donor `M3FilteredViews.java` | `92f50be37cd05b0d4c908c4c5092f274a625ffc8` |
+| Donor `M3TreeMap.java` | `c2f53c5a46c10ec67e596e51d1a4a84d3dd13cdd` |
 | Donor `m3_index_mask_compactor.c` | `e2326af56fc3d56fe6279cafefd5e0a59062bcaa` |
-| Donor `M3IndexMaskPositionPageTest.java` | `d22e718a9a84387433981fdc3140683720b22c75` |
-| Donor qualification receipt `doops-entryless-receiver.tsv` | `5cf7a0af4eadfcddd6424b68e757dfc232f69897` |
+| Donor `M3IndexMaskPositionPageTest.java` | `4a35031d3cb333b7dda394a26823feeb6e256ce6` |
+| Donor qualification receipt `doops-entryless-receiver.tsv` | `8d91332829a9bb608772d3f25656b5e468bafdd7` |
 
 All seven witness files were fetched from their exact original pinned Git commits and independently from the merged branch; Git blob and complete source content matched exactly. These are custody receipts, not measured runtime/JDK compatibility.
 

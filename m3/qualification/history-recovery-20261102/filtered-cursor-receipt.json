@@ -10,10 +10,10 @@
   "classification": "CURRENT_INTEGRATION_FIXTURE_GAP_NOT_LOST_SOURCE",
   "original_failure": "cursor failure swallowed: [owner.lower[3]]",
   "output": {
-    "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+    "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionContract.java",
     "before": "a23f5bdc5bf8d4200e01903cf068921375f6e23a",
-    "sha": "3ae26dca7dea14eefe5139672a065754f9b9d24f",
-    "sha256": "785e77a1a589b846164a88fdd0fac29b13b65bf23f1192404563877ba29905ca",
+    "sha": "4d854e6e42abaccebf6a5927d801a3fcd9772ee8",
+    "sha256": "1a52b62194875f915eda23cc96c0615afacf51358c445deddaadeafc678c1ccb",
     "bytes": 16239
   },
   "correction": "Make both set fault fixtures reject the first candidate so they reach the armed range cursors; retain exception identity/no fallback and all successful-navigation checks, with new reached-cursor assertions.",
@@ -53,7 +53,7 @@
   "preservation": {
     "original_inputs": 924,
     "unchanged_inputs": 923,
-    "only_changed_input": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+    "only_changed_input": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionContract.java",
     "production_source_changes": 0
   },
   "qualification_limits": [

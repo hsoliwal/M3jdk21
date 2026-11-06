@@ -20,7 +20,7 @@ jobs:
       - name: Recipe self-test and fixed point
         run: |
           mvn -B -ntp -f m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml verify
-          java -cp m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/target/classes com.synexia.m3.M3LongDirectAddressKernelRecipe --check .
+          java -cp m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/target/classes jdk.internal.m3.M3LongDirectAddressKernelRecipe --check .
       - name: Java owner tests
         run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongAddressKernelTest,M3LongAddressBoundedTest test
       - name: Build optional JNI batch gather

@@ -79,7 +79,7 @@
     {
       "path": "m3/docs/abseil-convergence-20261021/FILE_PASSES.tsv",
       "preimage_sha256": null,
-      "postimage_sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+      "postimage_sha256": "525fe96ff4a1b750a16a594db0d5886c62731f02279dadf7ebb8d09a6c4d9cbe",
       "mode": 420,
       "stages": [
         "combine-string21"
@@ -106,7 +106,7 @@
     {
       "path": "m3/docs/abseil-convergence-20261021/SOURCE_RECEIPT.json",
       "preimage_sha256": null,
-      "postimage_sha256": "ce3b0dcdb4b452f744a5dc7b37eacb98c5b47b31e3fa9716f73d1c4689b36fac",
+      "postimage_sha256": "d90ccd3d997f0eb2fac92f4acd308ab80afd5dc3162d0a9914da3f2453f6e91d",
       "mode": 420,
       "stages": [
         "combine-string21"
@@ -115,7 +115,7 @@
     {
       "path": "m3/docs/name-mapping.json",
       "preimage_sha256": "a0799f75fa395e2f1b015882e7d6673a6be1af9f4590c5803d0905a9f03d59e7",
-      "postimage_sha256": "6e017ad8c780434a8681a6fb506d72975d064859b205164973f60ec9c20d8ad6",
+      "postimage_sha256": "f4a6a010dc4e7f7104a8088394ad495b319dd206a52a1bf50b25b89051acf492",
       "mode": 420,
       "stages": [
         "combine-string21"
@@ -141,8 +141,8 @@
     },
     {
       "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
-      "preimage_sha256": "327ac7a55b80631378a822c2133729bd027f1f26bc53224020c3e1fad01109e3",
-      "postimage_sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
+      "preimage_sha256": "0e8123e45fd7677ce6b36d17ee2dbee1e8eee2daced2ef821566b8bbb061886c",
+      "postimage_sha256": "7bbb8ce72f2b3d04c3de5c5938e8cb87af76bbe43d317c58058cc75d7201ad6b",
       "mode": 420,
       "stages": [
         "combine-string21"
@@ -203,16 +203,16 @@
       ]
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java",
       "preimage_sha256": "6342d1acb4f406dc5b3c086d2db18966d7a5fc7f2b2a14c680ca520133165f0a",
-      "postimage_sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121",
+      "postimage_sha256": "66f4165c7099fd6452bb6faa8bf67a1af8d6edeedd6963bb5ba8773c507e6fe5",
       "mode": 420,
       "stages": [
         "combine-collections21"
       ]
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "preimage_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
       "postimage_sha256": "d2c8962a596c81103f543b3b4b5cd2b55233d44d00238527711b0f38c363acc5",
       "mode": 420,
@@ -221,18 +221,18 @@
       ]
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
-      "preimage_sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
-      "postimage_sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+      "preimage_sha256": "19cbdee1b2e604ad5e491f9089d2ff869852cedee8ffd086e78bc887043678eb",
+      "postimage_sha256": "55c549f99936d131c255f7118d51b3d40e2b5da2c26e2cf6e174120959e4f48e",
       "mode": 420,
       "stages": [
         "combine-collections21"
       ]
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
-      "preimage_sha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
-      "postimage_sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java",
+      "preimage_sha256": "855447909cacc331ba7c11a413c1405ab4dc2cf7e4376985d5e4ba80481a9bdd",
+      "postimage_sha256": "3ac89d3259b1e00faa326236cfe20acf21c7616ccaf2931f43ba09bddf2cfff3",
       "mode": 420,
       "stages": [
         "combine-collections21"
@@ -241,61 +241,61 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
       "preimage_sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
-      "postimage_sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+      "postimage_sha256": "58b0e89220c54ed87687b9d7140413f84654fb15ec39451e41355f6c68d50f42",
       "mode": 420,
       "stages": [
         "combine-collections21"
       ]
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionContract.java",
       "preimage_sha256": null,
-      "postimage_sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
+      "postimage_sha256": "9c6ed2cb34bff05d1af95616d1c23b2512ad599f1c20219fa523b356e4915eb2",
       "mode": 420,
       "stages": [
         "combine-collections21"
       ]
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionTest.java",
       "preimage_sha256": null,
-      "postimage_sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
+      "postimage_sha256": "d98fb07eb403ca3e553bf57f8295d021aa3a79a396858fe1d2dc8b2a2ff97997",
       "mode": 420,
       "stages": [
         "combine-collections21"
       ]
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java",
-      "preimage_sha256": "0aa372f430f3ab3614adf33bf4e33729e6f874404a6834fd13996bdee71c73fb",
-      "postimage_sha256": "83115c8518a132029ea7b4f6818df74c9f628909a6dd8328c9aaf7a85cd2c7ea",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredDequeContract.java",
+      "preimage_sha256": "2fa63ed2810dc2106763813978f6c60b6a3501cf4215bc200435597b1675825b",
+      "postimage_sha256": "0c41cf34405424203d35c448d0409531cd6ce6a6d8d69a79bb3804c855d312e3",
       "mode": 420,
       "stages": [
         "combine-collections21"
       ]
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformBench.java",
       "preimage_sha256": null,
-      "postimage_sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
+      "postimage_sha256": "ddf5a717b6004d11d9c957b073fada18d363e2f00df7ced6508e3866f050e2d2",
       "mode": 420,
       "stages": [
         "combine-collections21"
       ]
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformContract.java",
       "preimage_sha256": null,
-      "postimage_sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
+      "postimage_sha256": "a7b5578a33f4edf3e48ef6a01fb156a4721b5c13a26aa0153fd689075cfbe958",
       "mode": 420,
       "stages": [
         "combine-collections21"
       ]
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformTest.java",
       "preimage_sha256": null,
-      "postimage_sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
+      "postimage_sha256": "68bea0a443750976ea4921ee9620b279a9204a6e8096e643b0c7f0b128858ca0",
       "mode": 420,
       "stages": [
         "combine-collections21"
@@ -304,7 +304,7 @@
     {
       "path": "m3/docs/name-mapping.d/eclipse-collections-20261021.json",
       "preimage_sha256": null,
-      "postimage_sha256": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224",
+      "postimage_sha256": "5e84ed34b1203ec662d527e5979b204041ee455aaea868fc3493d1941ac9d220",
       "mode": 420,
       "stages": [
         "combine-collections21"
@@ -359,27 +359,27 @@
       ]
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
-      "preimage_sha256": "48d8636ea51c1bf05a1c4747e416916695b6bcbe665467f940e71b07ce2d327a",
-      "postimage_sha256": "c8e9361f50f503ee0fb45c322cbd2e1f1701b84dd57f3948c210178b29bebfb4",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
+      "preimage_sha256": "e8439b49c9fd771bbbdb788c85a5922a4b45191f0309a8b901a34dd4036ca973",
+      "postimage_sha256": "6dbd0ba6fdf580a38e1ac3f9c3237ec13a4065f1fe18dc3fa7734307c8356e9f",
       "mode": 420,
       "stages": [
         "combine-views-final21"
       ]
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
-      "preimage_sha256": "4b20bfb5ff5974218cfea24af265f6eae5e67606df2bcbfe99b51eb9b1f1ff34",
-      "postimage_sha256": "86e277ee069f3f077e44f5cd93b7f75cf07d357c613250d96a8e1e494969572c",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+      "preimage_sha256": "df976ffa7659df6b5b6ea938826f5dca51d3a6ddfcf66c8968d2c3fafe97d620",
+      "postimage_sha256": "f76afab9c50eb24a8a0adf1121bde6ea95f8732f78fae5c9807eea9775de8a2b",
       "mode": 420,
       "stages": [
         "combine-views-final21"
       ]
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
-      "preimage_sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
-      "postimage_sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "preimage_sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
+      "postimage_sha256": "7a168e391255c94fc4711e01cc388cf1f5063ce0738df43721664001207d02b9",
       "mode": 420,
       "stages": [
         "combine-views-final21"
@@ -387,8 +387,8 @@
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "preimage_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
-      "postimage_sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
+      "preimage_sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "postimage_sha256": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
       "mode": 420,
       "stages": [
         "combine-views-final21"
@@ -397,7 +397,7 @@
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java",
       "preimage_sha256": null,
-      "postimage_sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+      "postimage_sha256": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
       "mode": 420,
       "stages": [
         "combine-views-final21"
@@ -406,7 +406,7 @@
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementTest.java",
       "preimage_sha256": null,
-      "postimage_sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
+      "postimage_sha256": "ac9ac5c9133d85a5e7802577984b08905b73945fcfbcf3f801aa4daaf1b97336",
       "mode": 420,
       "stages": [
         "combine-views-final21"
@@ -415,7 +415,7 @@
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java",
       "preimage_sha256": null,
-      "postimage_sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+      "postimage_sha256": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
       "mode": 420,
       "stages": [
         "combine-views-final21"
@@ -424,7 +424,7 @@
     {
       "path": "m3/collections/src/test/native/m3_mask_compactor_empty_regions.c",
       "preimage_sha256": null,
-      "postimage_sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+      "postimage_sha256": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
       "mode": 420,
       "stages": [
         "combine-views-final21"

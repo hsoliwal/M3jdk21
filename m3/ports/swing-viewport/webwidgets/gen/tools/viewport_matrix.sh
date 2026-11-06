@@ -30,7 +30,7 @@ awk -F'\t' -v OFS='\t' -v res="$results" -v fam="$gen/spec/FAMILIES.tsv" -v kind
       $(i + 2) = p ? (q ? "Y" : "n/a") : "-"; if (p && !q) na = na A[i] " "
     }
     Fp = pascal(tolower(F)); C = pascal(c); neb = $2 == "nebula"
-    $7 = (neb ? "org.eclipse.nebula.widgets.m3web" : "com.m3.swing.web") ".adapter.M3" Fp "Viewports#adapt" C
+    $7 = (neb ? "org.eclipse.nebula.widgets.m3web" : "jdk.m3.swing.web") ".adapter.M3" Fp "Viewports#adapt" C
     $8 = "M3" C (neb ? "Viewport_Test" : "ViewportTest")
     s = status[$8]
     note = na == "" ? "" : "; n/a " na "(kind " K ": one surface or plane, no rows)"

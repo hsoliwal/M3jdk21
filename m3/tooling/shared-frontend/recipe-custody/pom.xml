@@ -16,7 +16,7 @@ SPDX-License-Identifier: Apache-2.0
     <m3.dataset>fixture</m3.dataset>
     <m3.crate.name>m3-ast-build-reverse-20261017-${m3.dataset}</m3.crate.name>
     <m3.resources>${project.basedir}/datasets/${m3.dataset}/resources</m3.resources>
-    <m3.recipe.name>com.synexia.m3jdk.AstBuildReverse20261017</m3.recipe.name>
+    <m3.recipe.name>jdk.internal.m3.m3jdk.AstBuildReverse20261017</m3.recipe.name>
     <rewrite.version>8.17.1</rewrite.version>
   </properties>
   <dependencies>
@@ -35,17 +35,17 @@ SPDX-License-Identifier: Apache-2.0
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
         <configuration><includes>
-          <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3ScopeInference.java</include>
-          <include>com/synexia/rewrite/M3EditScope.java</include>
-        </includes><testIncludes><testInclude>com/synexia/rewrite/M3TaskRecipeTest.java</testInclude></testIncludes>
+          <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+          <include>jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
+          <include>jdk/internal/m3/rewrite/M3ScopeInference.java</include>
+          <include>jdk/internal/m3/rewrite/M3EditScope.java</include>
+        </includes><testIncludes><testInclude>jdk/internal/m3/rewrite/M3TaskRecipeTest.java</testInclude></testIncludes>
           <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
         <configuration>
           <failIfNoTests>true</failIfNoTests>
-          <includes><include>com/synexia/rewrite/M3TaskRecipeTest.java</include></includes>
+          <includes><include>jdk/internal/m3/rewrite/M3TaskRecipeTest.java</include></includes>
           <argLine>-Xmx1536m</argLine>
           <systemPropertyVariables>
             <m3.dataset>${m3.dataset}</m3.dataset>

@@ -3,17 +3,17 @@
 # Source-only Java21 plus existing test-only C17 JNI differential gate.
 set -euo pipefail
 MODULE="$(cd "$(dirname "$0")/.." && pwd)"
-MAIN="$MODULE/src/main/java/com/m3/regexcursor"
-TEST="$MODULE/src/test/java/com/m3/regexcursor"
+MAIN="$MODULE/src/main/java/jdk/m3/regexcursor"
+TEST="$MODULE/src/test/java/jdk/m3/regexcursor"
 NATIVE="$MODULE/src/test/native/M3StaticGrammarLexiconJni.c"
 OUTPUT="${1:-$(mktemp -d -t m3-grammar-token-proof-XXXXXXXX)}"
 mkdir -p "$OUTPUT/classes" "$OUTPUT/logs"
 # All prior owners are *exact* parent source identities; fail closed before compile.
 for spec in \
   "$MAIN/M3StaticGrammarLexicon.java:651090ed378332e7041d880c64a2c1092b23ec16" \
-  "$TEST/M3StaticGrammarLexiconNativeProof.java:f057d0111a4d1fe1eff182654b7f5c701a853449" \
-  "$TEST/M3StaticGrammarLexiconProof.java:4c7a7d8d361504cfb4682f3966cfa98174cae63a" \
-  "$NATIVE:ace33d49abd1974f1e7a35c13070bc0e704d7562"; do
+  "$TEST/M3StaticGrammarLexiconNativeProof.java:cf2fcd17843ce43fe6bcae98f200cf0880a250a4" \
+  "$TEST/M3StaticGrammarLexiconProof.java:7477997c39deeedd3c188cd2d1a87c2cadd0f59c" \
+  "$NATIVE:52c0f1ba57bfba5df678a8db32363a0fa929bdf4"; do
   path="${spec%:*}"; expected="${spec##*:}"
   current="$(git hash-object "$path")"
   if [[ "$current" != "$expected" ]]; then
@@ -24,9 +24,9 @@ done
 JAVA_HOME="${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}"
 cat > "$OUTPUT/logs/00-context.log" <<CONTEXT
 parent_static_git_blob=651090ed378332e7041d880c64a2c1092b23ec16
-parent_native_proof_git_blob=f057d0111a4d1fe1eff182654b7f5c701a853449
-parent_java_proof_git_blob=4c7a7d8d361504cfb4682f3966cfa98174cae63a
-parent_c17_oracle_git_blob=ace33d49abd1974f1e7a35c13070bc0e704d7562
+parent_native_proof_git_blob=cf2fcd17843ce43fe6bcae98f200cf0880a250a4
+parent_java_proof_git_blob=7477997c39deeedd3c188cd2d1a87c2cadd0f59c
+parent_c17_oracle_git_blob=52c0f1ba57bfba5df678a8db32363a0fa929bdf4
 CONTEXT
 # Compilation includes the source-locked parent's Java proof helper, not a shadow class.
 javac --release 21 -encoding UTF-8 -Xlint:all -Werror -d "$OUTPUT/classes" \
@@ -34,7 +34,7 @@ javac --release 21 -encoding UTF-8 -Xlint:all -Werror -d "$OUTPUT/classes" \
   "$TEST/M3StaticGrammarLexiconProof.java" "$TEST/M3StaticGrammarLexiconNativeProof.java" \
   "$TEST/M3GrammarTokenProjectionProof.java" "$TEST/M3GrammarTokenProjectionNativeProof.java" \
   > "$OUTPUT/logs/01-java-compile.log" 2>&1
-java -ea -cp "$OUTPUT/classes" com.m3.regexcursor.M3GrammarTokenProjectionProof \
+java -ea -cp "$OUTPUT/classes" jdk.m3.regexcursor.M3GrammarTokenProjectionProof \
   | tee "$OUTPUT/logs/02-java-oracle.log"
 case "$(uname -s)" in
   Linux) osinc=linux; extension=so ;;
@@ -45,10 +45,10 @@ gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Wpedantic -Werror \
   -o "$OUTPUT/libm3_static_grammar_proof.$extension" \
   > "$OUTPUT/logs/03-native-compile.log" 2>&1
 java -ea -Xcheck:jni -cp "$OUTPUT/classes" \
-  com.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUTPUT/libm3_static_grammar_proof.$extension" \
+  jdk.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUTPUT/libm3_static_grammar_proof.$extension" \
   | tee "$OUTPUT/logs/04-jni-checked.log"
 java -ea -Xint -Xcheck:jni -cp "$OUTPUT/classes" \
-  com.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUTPUT/libm3_static_grammar_proof.$extension" \
+  jdk.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUTPUT/libm3_static_grammar_proof.$extension" \
   | tee "$OUTPUT/logs/05-jni-interpreted.log"
 sha256sum "$MAIN/M3GrammarTokenProjection.java" "$TEST/M3GrammarTokenProjection"* \
   "$MODULE/M3_GRAMMAR_TOKEN_PROJECTION.md" > "$OUTPUT/logs/06-source-hashes.txt"

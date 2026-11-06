@@ -3,8 +3,8 @@ name: M3 Tree native-parent handle closure
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ParentHandleClosureProof.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ParentHandleClosureProof.java'
       - 'm3/collections/qualification/viewport-tree-parent/**'
       - '.github/workflows/m3-viewport-tree-parent.yml'
   workflow_dispatch:
@@ -31,29 +31,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          SRC=m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java
-          PROOF=m3/collections/src/test/java/com/m3/collections/M3ParentHandleClosureProof.java
+          SRC=m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java
+          PROOF=m3/collections/src/test/java/jdk/m3/collections/M3ParentHandleClosureProof.java
           echo 'ce27f58fa068a61feb6e74d6067a5751241f41688b63e87085ecae34a1eeba6d  '"$SRC" | sha256sum -c -
-          echo '2d891a6bd14007f003dc34b53dd548bcae55341839c26db400fca5e7c3da29b0  '"$PROOF" | sha256sum -c -
-          mkdir -p "$RUNNER_TEMP/m3-tree-parent/src/com/m3/collections"
-          git show '9dd1df62f3d5406760427cb5e840a36c9e7a59ea:'"$SRC" > "$RUNNER_TEMP/m3-tree-parent/src/com/m3/collections/M3TreeWindowPlan.java"
-          echo 'be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082  '"$RUNNER_TEMP/m3-tree-parent/src/com/m3/collections/M3TreeWindowPlan.java" | sha256sum -c -
+          echo '08609e56a488a76f8f4ec35ff70d73941ed3cdb3445d39b631fdecb625ed71bf  '"$PROOF" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/m3-tree-parent/src/jdk/m3/collections"
+          git show '9dd1df62f3d5406760427cb5e840a36c9e7a59ea:'"$SRC" > "$RUNNER_TEMP/m3-tree-parent/src/jdk/m3/collections/M3TreeWindowPlan.java"
+          echo 'be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082  '"$RUNNER_TEMP/m3-tree-parent/src/jdk/m3/collections/M3TreeWindowPlan.java" | sha256sum -c -
       - name: Compile exact current Java21 dependencies and new proof
         shell: bash
         run: |
           set -euo pipefail
           B="$RUNNER_TEMP/m3-tree-parent"
-          SOURCE=m3/collections/src/main/java/com/m3/collections
-          TEST=m3/collections/src/test/java/com/m3/collections/M3ParentHandleClosureProof.java
+          SOURCE=m3/collections/src/main/java/jdk/m3/collections
+          TEST=m3/collections/src/test/java/jdk/m3/collections/M3ParentHandleClosureProof.java
           mkdir -p "$B/baseline-classes" "$B/candidate-classes"
           DEPS=(M3LongLongHashMap M3LongLongConsumer M3LongIterator M3TreeProjection M3TreeTopology M3OrderStatisticForest M3ItemState)
           ARG=(); for cls in "${DEPS[@]}"; do ARG+=("$SOURCE/$cls.java"); done
           javac --release 21 -Xlint:all -Werror -d "$B/baseline-classes" \
-            "$B/src/com/m3/collections/M3TreeWindowPlan.java" "${ARG[@]}" "$TEST"
+            "$B/src/jdk/m3/collections/M3TreeWindowPlan.java" "${ARG[@]}" "$TEST"
           javac --release 21 -Xlint:all -Werror -d "$B/candidate-classes" \
             "$SOURCE/M3TreeWindowPlan.java" "${ARG[@]}" "$TEST"
-          javap -public -s -classpath "$B/baseline-classes" com.m3.collections.M3TreeWindowPlan > "$B/baseline.javap"
-          javap -public -s -classpath "$B/candidate-classes" com.m3.collections.M3TreeWindowPlan > "$B/candidate.javap"
+          javap -public -s -classpath "$B/baseline-classes" jdk.m3.collections.M3TreeWindowPlan > "$B/baseline.javap"
+          javap -public -s -classpath "$B/candidate-classes" jdk.m3.collections.M3TreeWindowPlan > "$B/candidate.javap"
           cmp "$B/baseline.javap" "$B/candidate.javap"
       - name: Prove expected baseline failure and candidate mixed/interpreted parity
         shell: bash
@@ -61,14 +61,14 @@ jobs:
           set -euo pipefail
           B="$RUNNER_TEMP/m3-tree-parent"
           if java -ea -Xmx64m -XX:+UseSerialGC -cp "$B/baseline-classes" \
-             com.m3.collections.M3ParentHandleClosureProof > "$B/baseline.out" 2> "$B/baseline.err"; then
+             jdk.m3.collections.M3ParentHandleClosureProof > "$B/baseline.out" 2> "$B/baseline.err"; then
              echo 'unfixed original unexpectedly passed' >&2; exit 1
           fi
           grep -F 'child of retired root cannot keep destroyed native handle check=2' "$B/baseline.err"
           for mode in mixed interpreted; do
              opts=(); if [[ "$mode" == interpreted ]]; then opts=(-Xint); fi
              java "${opts[@]}" -ea -Xmx64m -XX:+UseSerialGC -cp "$B/candidate-classes" \
-                com.m3.collections.M3ParentHandleClosureProof | tee "$B/candidate-$mode.log"
+                jdk.m3.collections.M3ParentHandleClosureProof | tee "$B/candidate-$mode.log"
              grep -qx 'M3_TREE_PARENT_CLOSURE_PASS checks=206547 digest=e4635cc5d317d586' "$B/candidate-$mode.log"
           done
           cmp "$B/candidate-mixed.log" "$B/candidate-interpreted.log"

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
 //
-// Lineage (TARGET_OWNED_PORT, leaf R6-AUTOMATON, run 20261017-synexia-to-public):
+// Lineage (TARGET_OWNED_PORT, leaf R6-AUTOMATON, run 20261017-m3-to-public):
 //   Structure from Apache Lucene 9.10.0 org.apache.lucene.util.automaton.RegExp (git blob
 //   5ba8b957c326b62ef0fdd798bedf4f2d14ccf660; recursive descent union -> concatenation -> repetition -> simple
 //   expression, leaf-to-automaton reduction with minimization after every composite node, repetition work guard) and
 //   the code-point -> code-unit range splitting idea of UTF32ToUTF8 (git blob fac6b7e636fe05118968d046886cb993360ad2e8,
-//   pattern only: UTF-16 target instead of UTF-8), both vendored unchanged in M3jdk21 at m3/vendor/third_party/lucene-core
+//   pattern only: UTF-16 target instead of UTF-8), both vendored unchanged in M3JDK 21 at m3/vendor/third_party/lucene-core
 //   (BLOB_EQUAL to upstream tag 695c0ac84508438302cd346a812cfa2fdc5a10df), Apache License, Version 2.0.
 //   Modifications: the Lucene syntax (~ & # @ <..> "...") is replaced by the regular subset of java.util.regex.Pattern
 //   syntax (the semantic authority); no RegExp node tree is retained; anchors are admitted only where they are

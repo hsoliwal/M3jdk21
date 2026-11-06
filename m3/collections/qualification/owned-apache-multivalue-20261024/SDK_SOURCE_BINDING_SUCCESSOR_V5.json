@@ -4,23 +4,23 @@
   "predecessor": {
     "path": "m3/collections/qualification/owned-apache-multivalue-20261024/SDK_SOURCE_BINDING_SUCCESSOR_V4.json",
     "bytes": 8204,
-    "sha256": "3360d65da5075cee73e8c74a7aa863ce6dffa5faf0e7e8f5741526a301825646",
-    "gitBlob": "8c5db55ab4eb2ea04d6ef46ef29e3eaa3cb9950f"
+    "sha256": "505f340763e19d7ddb2e05cc8f14f1b3e4b2a8bf56cd88033ded08b91da82038",
+    "gitBlob": "f9527b590a06c0a3e045c87f09761ecaf0412f41"
   },
   "predecessorVerifier": {
     "path": "m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v4.py",
     "bytes": 6749,
-    "sha256": "d85aa1c3eb43cde618dbe197219dd18544a91b9edfebeac6f7c43b4651d7b87f",
-    "gitBlob": "f51ca531cd1ead74955ad0fa1e4ee7ac769e9ae8"
+    "sha256": "d6ac7c9368401fd3926f1c4a60e889b200d2edf59ce61d4213c298242e3c825c",
+    "gitBlob": "49ff3794a24dd25fd5ab9e690cb5e8d53f0e851c"
   },
   "reviewScope": "ONLY_THREE_V4_SUCCESSOR_CHANGES_NO_SOURCE_MUTATION",
   "successors": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
       "before": {
         "bytes": 12423,
-        "sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
-        "gitBlob": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e"
+        "sha256": "9e4f22aa82af226fc96b4f1e77ce7d68f37d10813f1aba594457d43f1eff27a8",
+        "gitBlob": "dda9d3739f4f7f779bd29e92c80bbc4d45ae1063"
       },
       "after": {
         "bytes": 12892,
@@ -32,11 +32,11 @@
       "decision": "RETAIN_CURRENT_TWO_WORD_SOURCE_AND_VERIFY"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",
       "before": {
         "bytes": 9470,
-        "sha256": "8aa30b4b23c638b53f5fe9e6f895bb3205a51af1df0bf2afdefb38d4c21ab090",
-        "gitBlob": "327a56f12e09ae82ea0d0f10bdcf3a0628f1636f"
+        "sha256": "ab0a4d3ec72abf37154be0c644caa440def182f38e252f7eaf75808acd1b20f7",
+        "gitBlob": "a19f3a01b8c553a8c9f356662edfc9fadc8194c8"
       },
       "after": {
         "bytes": 9600,
@@ -51,8 +51,8 @@
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
       "before": {
         "bytes": 21506,
-        "sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052",
-        "gitBlob": "bedd442346de5b7dd9d5f1965c510950e0c45ea1"
+        "sha256": "069790b6fefb1c9f70662befa3d0e8399eea2c309292040d8acfa938b10cc249",
+        "gitBlob": "970a7074223bfdff2eea70ad18fc2062c78b8b5b"
       },
       "after": {
         "bytes": 23701,

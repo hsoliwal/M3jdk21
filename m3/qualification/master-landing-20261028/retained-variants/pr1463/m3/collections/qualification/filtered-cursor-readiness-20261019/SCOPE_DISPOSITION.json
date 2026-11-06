@@ -2,10 +2,10 @@
   "schema": 1,
   "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
   "license": "Apache-2.0",
-  "canonical_recipe": "com.synexia.rewrite.M3FilteredCursorReadinessRecipe",
+  "canonical_recipe": "jdk.internal.m3.rewrite.M3FilteredCursorReadinessRecipe",
   "target_parent": "b0dcf90ae18be891220aad27059e31dfdf423354",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_crate": "synexia-openrewrite-recipes/crates/m3jdk21-20261019/collections",
+  "canonical_crate": "m3-openrewrite-recipes/crates/m3jdk21-20261019/collections",
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
   "receiving_sequence_advanced": false,
   "runtime_api_change": false,
@@ -15,39 +15,39 @@
   "mappings": [
     {
       "atom": "readonly",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "before_sha256": "7e1f1088630892b8b5c6cca2edc4c64465d1b9dc7d37b56464edb8ab87ee97f6",
-      "after_sha256": "4adb02e497a1fd4a8c4551c6207743d0e6b61fa91667f8b8463adf020be4ac87",
+      "after_sha256": "5cbcc016ce4d6624e64a08ae091b233bfa93319627494292f29ae499fab07777",
       "class_mapping": "IDENTITY",
-      "package_mapping": "com.m3.collections -> com.m3.collections",
-      "canonical_template": "synexia-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-readonly-20261019/M3FilteredViews.java.txt"
+      "package_mapping": "jdk.m3.collections -> jdk.m3.collections",
+      "canonical_template": "m3-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-readonly-20261019/M3FilteredViews.java.txt"
     },
     {
       "atom": "mutable",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
-      "before_sha256": "19d1a58c8fec4a96862419857ade15d681ecea8726df77dbe89036f4609934b4",
-      "after_sha256": "224cb085c8cb0e7de9da10be7d13866dcdcc3708c3588047427b63b36b619a9b",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+      "before_sha256": "9d606cbe4b685ff68cadac691f2018c425b948f48bbc8cae51bd55793ae32a96",
+      "after_sha256": "e28446bee7db17e95c38449c2ac1fb5d8bac5a481229ebb21d24bc2e8f410fb3",
       "class_mapping": "IDENTITY",
-      "package_mapping": "com.m3.collections -> com.m3.collections",
-      "canonical_template": "synexia-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-mutable-20261019/M3MutableFilteredViews.java.txt"
+      "package_mapping": "jdk.m3.collections -> jdk.m3.collections",
+      "canonical_template": "m3-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-mutable-20261019/M3MutableFilteredViews.java.txt"
     },
     {
       "atom": "oracle",
-      "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorReadinessSelfTest.java",
+      "target": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorReadinessSelfTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "72d5ee69747bd5d0a45a28854c56e9e97871a1a7b996f6d08f5ec9fdc59948c0",
+      "after_sha256": "4ba803fdf4432c5728ff4968941ca19cb0efa24338ff544bdaef6baa2583ed2c",
       "class_mapping": "IDENTITY",
-      "package_mapping": "com.m3.collections -> com.m3.collections",
-      "canonical_template": "synexia-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-oracle-20261019/M3FilteredCursorReadinessSelfTest.java.txt"
+      "package_mapping": "jdk.m3.collections -> jdk.m3.collections",
+      "canonical_template": "m3-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-oracle-20261019/M3FilteredCursorReadinessSelfTest.java.txt"
     },
     {
       "atom": "junit",
-      "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorReadinessTest.java",
+      "target": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorReadinessTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "61079fafd9987b5445ab8bbb003a728be56947fd430491f4af9c0ea3cb6ccc31",
+      "after_sha256": "502306def7e28721426d0b00c45d571f570eaa73b45855905067aa8fb73f967c",
       "class_mapping": "IDENTITY",
-      "package_mapping": "com.m3.collections -> com.m3.collections",
-      "canonical_template": "synexia-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-junit-20261019/M3FilteredCursorReadinessTest.java.txt"
+      "package_mapping": "jdk.m3.collections -> jdk.m3.collections",
+      "canonical_template": "m3-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-junit-20261019/M3FilteredCursorReadinessTest.java.txt"
     }
   ],
   "held": [

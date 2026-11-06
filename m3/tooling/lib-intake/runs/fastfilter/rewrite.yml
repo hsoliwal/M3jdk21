@@ -1,41 +1,41 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.intake.Relocate
+name: jdk.internal.m3.intake.Relocate
 displayName: LIB_INTAKE relocation of fastfilter
 description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
 recipeList:
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter.bloom.count
-      newPackageName: com.m3.lib.fastfilter.bloom.count
+      newPackageName: jdk.m3.lib.fastfilter.bloom.count
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter.xorplus
-      newPackageName: com.m3.lib.fastfilter.xorplus
+      newPackageName: jdk.m3.lib.fastfilter.xorplus
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter.cuckoo
-      newPackageName: com.m3.lib.fastfilter.cuckoo
+      newPackageName: jdk.m3.lib.fastfilter.cuckoo
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter.bloom
-      newPackageName: com.m3.lib.fastfilter.bloom
+      newPackageName: jdk.m3.lib.fastfilter.bloom
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter.tools
-      newPackageName: com.m3.lib.fastfilter.tools
+      newPackageName: jdk.m3.lib.fastfilter.tools
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter.utils
-      newPackageName: com.m3.lib.fastfilter.utils
+      newPackageName: jdk.m3.lib.fastfilter.utils
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter.gcs
-      newPackageName: com.m3.lib.fastfilter.gcs
+      newPackageName: jdk.m3.lib.fastfilter.gcs
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter.xor
-      newPackageName: com.m3.lib.fastfilter.xor
+      newPackageName: jdk.m3.lib.fastfilter.xor
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.fastfilter
-      newPackageName: com.m3.lib.fastfilter
+      newPackageName: jdk.m3.lib.fastfilter
       recursive: false

@@ -47,7 +47,7 @@ static void m3_interval_batch(const jint *pairs, jsize intervals,
     }
 }
 
-JNIEXPORT jbyteArray JNICALL Java_com_m3_tools_cpu_M3IntIntervalSetNative_contains0(
+JNIEXPORT jbyteArray JNICALL Java_jdk_m3_tools_cpu_M3IntIntervalSetNative_contains0(
         JNIEnv *env, jclass owner, jintArray intervals, jintArray queries) {
     (void)owner;
     if (intervals == NULL || queries == NULL) return NULL;

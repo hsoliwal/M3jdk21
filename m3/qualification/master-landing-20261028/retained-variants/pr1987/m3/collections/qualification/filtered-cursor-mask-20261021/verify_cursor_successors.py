@@ -24,7 +24,7 @@ BLOB = re.compile(r"[0-9a-f]{40}\Z")
 # Explicitly no blanket permission to rewrite old manifests or accept new hashes.
 EXPECTED_SUCCESSORS = (
     (
-        "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+        "m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java",
         "4b3e3b9009d69223358e90b1fd57e705644b2efbf1ed3e3fcefca52b4dcc4c8f",
         "5f119d62cead081d6e60c847b49c588447b131980a88b5b8a396453beb3a7382",
         "44d8c21fa93edfcdd5f8d98a05bf62f48ec263fa",
@@ -34,7 +34,7 @@ EXPECTED_SUCCESSORS = (
         "Apache-2.0 OR EPL-2.0",
     ),
     (
-        "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+        "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
         "02c8a766ad9acae90b2a3964a24b00e874a598687d90dfda3242a52b78a3a454",
         "e1a61906a898c5d1ee5ee4e38b365db8cb28f38026aba766160bd517a6b49fca",
         "445ea988d4df4d348db6566e18f0599bbd792d04",

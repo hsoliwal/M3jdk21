@@ -1,9 +1,0 @@
-evidenceKind	SDK_EXECUTION
-recipe	com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
-crate	m3jdk-collection-current-owners-java-03-20261017
-result	m3/ports/collections/src/main/java/com/m3/util/M3RuntimeHeap.java	ABSENT	28b34077e96b496c60006186914489aa64fa51263d9c2aaa390704ba42ddc6be
-fixedPoint	PASSED
-driftRefusal	PASSED
-duplicateRefusal	PASSED
-missingRefusal	NOT_APPLICABLE_ALL_TARGETS_ABSENT
-scope	sealed-recipe-SDK-only; runtime-contracts-and-source-mirror-gates-separate

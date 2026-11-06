@@ -323,7 +323,7 @@
             <excludes>
               <!-- https://github.com/google/guava/issues/2840 -->
               <exclude>%regex[.*PackageSanityTests.*.class]</exclude>
-              <!-- FeatureUtilTest.*ExampleDerivedInterfaceTester, com.m3.collections.guava.io.*Tester, incidentally FeatureSpecificTestSuiteBuilderTest.MyAbstractTester (but we don't care either way because it's not meant to run on its own but works OK if it does)... but not NullPointerTesterTest, etc. -->
+              <!-- FeatureUtilTest.*ExampleDerivedInterfaceTester, jdk.m3.collections.guava.io.*Tester, incidentally FeatureSpecificTestSuiteBuilderTest.MyAbstractTester (but we don't care either way because it's not meant to run on its own but works OK if it does)... but not NullPointerTesterTest, etc. -->
               <exclude>%regex[.*Tester.class]</exclude>
               <!-- Anonymous TestCase subclasses in GeneratedMonitorTest -->
               <exclude>%regex[.*[$]\d+.class]</exclude>
@@ -366,18 +366,18 @@
           </dependencies>
           <configuration>
             <annotations>
-              <annotation>com.m3.collections.guava.base.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.cache.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.collect.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.collect.testing.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.collect.testing.testers.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.hash.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.io.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.math.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.primitives.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.reflect.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.testing.IgnoreJRERequirement</annotation>
-              <annotation>com.m3.collections.guava.util.concurrent.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.base.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.cache.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.collect.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.collect.testing.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.collect.testing.testers.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.hash.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.io.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.math.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.primitives.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.reflect.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.testing.IgnoreJRERequirement</annotation>
+              <annotation>jdk.m3.collections.guava.util.concurrent.IgnoreJRERequirement</annotation>
             </annotations>
             <checkTestClasses>true</checkTestClasses>
             <signature>

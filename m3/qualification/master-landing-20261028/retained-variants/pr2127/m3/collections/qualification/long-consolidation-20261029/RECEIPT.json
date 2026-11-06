@@ -9,32 +9,32 @@
     {
       "leaf": "map",
       "recipe": "m3-long-receiver-map-20261029",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
       "before_sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3",
-      "after_sha256": "12908066ef748db4eb5191a511964234c8c1e3f33f8ea2c0d945a1300660cd56"
+      "after_sha256": "595d8a964b392c96510a5c39e19377fc070328bca7db1fa34d8ef46d04b9d07b"
     },
     {
       "leaf": "map-test",
       "recipe": "m3-long-receiver-map-test-20261029",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongHashMapAddToTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongLongHashMapAddToTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "f927ec56e18f7679c9b5c77960884fcec3d5e49ba50b7b7b15b3b2b5e2bc493f"
+      "after_sha256": "5c5b96da5650503ebec19c483aace43edce004fcd13e558098e20eb5d02789af"
     }
   ],
   "recipes": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
       "recipe": "m3-long-receiver-map-20261029",
       "manifest_sha256": "2f8d7076176277c2b372f8b238f3058b4ba86b8736feedf72baf5e33a243595d",
       "before_sha256": "7688d153817347490e2df39c71a283b142286fed14cb60ed731bc60d558a1ac3",
-      "after_sha256": "12908066ef748db4eb5191a511964234c8c1e3f33f8ea2c0d945a1300660cd56"
+      "after_sha256": "595d8a964b392c96510a5c39e19377fc070328bca7db1fa34d8ef46d04b9d07b"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongHashMapAddToTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongLongHashMapAddToTest.java",
       "recipe": "m3-long-receiver-map-test-20261029",
       "manifest_sha256": "7425bc0f1d76d6faac0754158671b2f5b6b4aa8daa19d865c1a203f209e8f1a4",
       "before_sha256": "ABSENT",
-      "after_sha256": "f927ec56e18f7679c9b5c77960884fcec3d5e49ba50b7b7b15b3b2b5e2bc493f"
+      "after_sha256": "5c5b96da5650503ebec19c483aace43edce004fcd13e558098e20eb5d02789af"
     }
   ],
   "recipe_execution": {
@@ -48,12 +48,12 @@
     "jdk": "Temurin OpenJDK 21.0.8+9, stock host runtime",
     "applied_sdk_outputs": [
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
-        "sha256": "12908066ef748db4eb5191a511964234c8c1e3f33f8ea2c0d945a1300660cd56"
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
+        "sha256": "595d8a964b392c96510a5c39e19377fc070328bca7db1fa34d8ef46d04b9d07b"
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongHashMapAddToTest.java",
-        "sha256": "f927ec56e18f7679c9b5c77960884fcec3d5e49ba50b7b7b15b3b2b5e2bc493f"
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongLongHashMapAddToTest.java",
+        "sha256": "5c5b96da5650503ebec19c483aace43edce004fcd13e558098e20eb5d02789af"
       }
     ],
     "compilation": {

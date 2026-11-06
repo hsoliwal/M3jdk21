@@ -11,9 +11,9 @@ Baseline product head: `35662be63cafc35153f18c0b3d7bbe2f689960de`.
 | `M3LongRankBatchNative.java` | `3617962b12e314cc60670171c923b4bbca78da48` | `cd0a9b800a05e3cdd6478b408b31c71784a9ebb9` |
 | `M3LongRankIndex.java` | `6a8cf91eb78b6e77fb53b73d55cea0a214a33dd7` | `1965edd9843d29070b01cc9d3107c8226a176e37` |
 | `m3_long_rank_batch_jni.c` | `fab1b17dc529b81a401dd1d3d77fcb8035dc33c7` | `d578908b39e626485638b1ca9915484912b4d1c9` |
-| `M3LongTopKFrequencyContract.java` | ABSENT | `d717fd8134fc6f35f8da95caf6eef38a24cf748f` |
-| `M3LongTopKFrequencyTest.java` | ABSENT | `2e2262f5fec76a8cb26ab0a5c0d488c04d8ed51e` |
-| `.github/workflows/m3-topk-frequency-jni-java21.yml` | ABSENT | `bb74adee1e631f851e83e70458195d4440dbc166` |
+| `M3LongTopKFrequencyContract.java` | ABSENT | `ef5822c5ff9f283dd7f4ce419a46f38390d5b65c` |
+| `M3LongTopKFrequencyTest.java` | ABSENT | `d35c068e3e5323d1b93d80a192cb1aec6340da92` |
+| `.github/workflows/m3-topk-frequency-jni-java21.yml` | ABSENT | `7bbbbbeb527326d748751bbcdafb393113a2081d` |
 
 All six exact canonical Synexia source outputs match the received Git blobs, including the existing JNI translation unit. No old native entrypoint was removed, no new native library was introduced, and no original `module-info.java`, `java.util` public API or unrelated source file changed.
 

@@ -5,14 +5,14 @@
     {
       "path": "packet/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
-      "git_blob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e",
+      "git_blob": "78d5fb68f13872164973a8918cc7886c5f548bca"
     },
     {
       "path": "packet/src/main/java/com/synexia/rewrite/SealReplay.java",
       "bytes": 3702,
-      "sha256": "777a9181fad3276eca0577ffc97c4cb12fb6f44b6b5fe55f9504d45690839623",
-      "git_blob": "358fc809fc6f780f4ef86f3c0afacc721c2113a6"
+      "sha256": "22aa64851ad8ed42c88cfdd134d2ab1af128fff8d7ed7cf7797d2d814321cb67",
+      "git_blob": "4b0ecdb91f890392626d44bbc931a73837508347"
     },
     {
       "path": "packet/src/main/resources/current-mask-window/m3_index_mask_compactor.c.txt",
@@ -35,20 +35,20 @@
     {
       "path": "packet/src/main/resources/current-mask-window/manifest.tsv",
       "bytes": 1065,
-      "sha256": "7c72374d0df2c16a546633b4d8d3de22a6c0245ac29d48fc3691ee988c0bc95f",
-      "git_blob": "736a9820de39c10bdf910077b88b0f327b7cf5d9"
+      "sha256": "c223abaf566df9d7260c0e9a1c9ea4e1add011e376caab6252e29103c3219e63",
+      "git_blob": "746c0db4a65b65e2e79faac9fc6967d37b8bdac7"
     },
     {
-      "path": "baseline-source/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "baseline-source/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "bytes": 18371,
-      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
-      "git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1"
+      "sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
+      "git_blob": "945375ce32080537da2b6544d59f537ee8271644"
     },
     {
       "path": "baseline-source/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
       "bytes": 16830,
-      "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
-      "git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1"
+      "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "git_blob": "f6471f52b0c001def6319542f01729620b0600ee"
     }
   ],
   "upstream_current_sources": [
@@ -58,7 +58,7 @@
       "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
       "git_blob": "daea60beeb202d9e996f9a018fe5974738a43523",
       "local_path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\index-mask-jni-v1\\src\\com\\m3\\collections\\M3IndexMaskCompactor.java",
-      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java"
+      "repository_path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java"
     },
     {
       "path": "src/com/m3/collections/M3LongIndexProjection.java",
@@ -66,15 +66,15 @@
       "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
       "git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
       "local_path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\index-mask-jni-v1\\src\\com\\m3\\collections\\M3LongIndexProjection.java",
-      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java"
+      "repository_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java"
     },
     {
       "path": "src/com/m3/collections/M3LongAddressKernel.java",
       "bytes": 5865,
-      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "git_blob": "fe30e94f5e66e2f4d43365bddb58dfdbb4f25207",
       "local_path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\index-mask-jni-v1\\src\\com\\m3\\collections\\M3LongAddressKernel.java",
-      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java"
+      "repository_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java"
     },
     {
       "path": "src/com/m3/collections/M3MaskWindowCurrentProof.java",
@@ -94,29 +94,29 @@
     }
   ],
   "upstream_inventory": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\index-mask-jni-v1\\SOURCE_INVENTORY.json",
-  "upstream_inventory_sha256": "c3db42a093aecc31e4bbbc12e87d6e4d7eb9edefd08ff26bb145bd6de2654b57",
+  "upstream_inventory_sha256": "0dad2da068477fc0332ad4f8a9dc46bc5e7ff164ccda946e57025811af4307fb",
   "manifest_targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "before": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "before": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
       "after": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
       "resource": "M3IndexMaskCompactor.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
-      "before": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "after": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+      "before": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "after": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
       "resource": "KEEP"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "before": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
       "after": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
       "resource": "KEEP"
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "before": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+      "before": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
       "after": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026",
       "resource": "m3_index_mask_compactor.c.txt"
     },

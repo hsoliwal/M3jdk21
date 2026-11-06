@@ -11,7 +11,7 @@
 enum { M3_GATHER_CHUNK = 256 };
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongAddressKernel_gatherNative(
+Java_jdk_m3_collections_M3LongAddressKernel_gatherNative(
         JNIEnv *env, jclass ignored, jlongArray payload, jintArray addresses,
         jint address_from, jint length, jlongArray output, jint output_from) {
     (void) ignored;

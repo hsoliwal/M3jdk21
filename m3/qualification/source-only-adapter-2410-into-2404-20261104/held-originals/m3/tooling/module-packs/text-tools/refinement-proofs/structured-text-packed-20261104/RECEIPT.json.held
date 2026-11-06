@@ -10,7 +10,7 @@
     },
     {
       "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredTextTools.java",
-      "before_sha256": "f613c0dae0c0fb98c8c4db4167d6258a91305994e319b6adaa16693674b24df6",
+      "before_sha256": "c9516aa90e76c89b5db3d8aa15d4570088e0824eb54c75d4786db5976a38741e",
       "after_sha256": "ee93e99b682afff657f959da0510ef918f66e422f5436774d1e2e452c17723b1"
     },
     {
@@ -86,7 +86,7 @@
     {
       "path": "m3/docs/name-mapping.json",
       "before_sha256": "406cefb62b79fc677972e9d76a77342c3999b41ef6594f9faf5bd06795235dc3",
-      "after_sha256": "c1dc98c6413d33cd9eaa692af4e1c37c5d648ce5f0b23932ae22f25cd31fe792"
+      "after_sha256": "299239b072f8d4e9cba4b1fb502153026ec7a6aad4bbda2c9c5ed101b52d73f0"
     },
     {
       "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
@@ -96,7 +96,7 @@
     {
       "path": "m3/tooling/name-contract/name-plan.json",
       "before_sha256": "3f51a4975e9f423196a4ee5c715d4edc2c2e937c34d9d5a1e3d2276dcd47752e",
-      "after_sha256": "1baff1bd27a8aad4004fd6091d5e1c583484b9b13039f5774182d7591cadec9d"
+      "after_sha256": "ce449a413258ce2ebd163afac3023c3348e8c5797984108734687f93a1e17759"
     }
   ],
   "output_count": 19,

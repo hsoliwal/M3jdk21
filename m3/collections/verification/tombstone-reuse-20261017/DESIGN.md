@@ -1,7 +1,7 @@
 # M3JDK21 tombstone-reuse receiver — design / frozen behavior
 
 Target: hsoliwal/M3jdk21 master@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55.
-Source owners: m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java (Git blob 1fe9ac1bfa11cf6a626a749c37d64ccec0ed09df), M3LongLongHashMap.java (blob b1d85622c2e19db069d0b2a64fb8011b5c01be34).
+Source owners: m3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java (Git blob e2e4d1fe15fab3d407a28f4291be7fe51a98dfeb), M3LongLongHashMap.java (blob 4c9ffd7033def03f2ddd58c1c550e5fa3176524e).
 Canonical algorithm/recipe owner: hsoliwal/com.synexia (probe-before-growth precedent #11988, generic M3HashPinnedJavaSnapshotRecipe). JDK-target adaptation only; no runtime dependency.
 
 **Intent:** Avoid doubling primitive table payload when the pending key's legal probe sequence already contains a reusable DELETED slot before its first EMPTY slot. Execute additional probing *only* when the existing occupied-threshold would demand growth. No per-row Entry/Node allocation. Hold topology and public descriptors fixed.

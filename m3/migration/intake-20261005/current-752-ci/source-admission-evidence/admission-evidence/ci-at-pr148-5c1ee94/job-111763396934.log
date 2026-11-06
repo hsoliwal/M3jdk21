@@ -487,10 +487,10 @@
 2026-10-05T12:34:05.0110563Z [INFO] -------------------------------------------------------------
 2026-10-05T12:34:05.0111458Z [ERROR] COMPILATION ERROR : 
 2026-10-05T12:34:05.0112220Z [INFO] -------------------------------------------------------------
-2026-10-05T12:34:05.0113974Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
-2026-10-05T12:34:05.0116356Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
-2026-10-05T12:34:05.0121217Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
-2026-10-05T12:34:05.0125050Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
+2026-10-05T12:34:05.0113974Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
+2026-10-05T12:34:05.0116356Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
+2026-10-05T12:34:05.0121217Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
+2026-10-05T12:34:05.0125050Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
 2026-10-05T12:34:05.0126635Z [INFO] 4 errors 
 2026-10-05T12:34:05.0127267Z [INFO] -------------------------------------------------------------
 2026-10-05T12:34:05.0127999Z [INFO] 
@@ -759,10 +759,10 @@
 2026-10-05T12:34:14.7203434Z [INFO] Finished at: 2026-10-05T12:34:14Z
 2026-10-05T12:34:14.7204237Z [INFO] ------------------------------------------------------------------------
 2026-10-05T12:34:14.7206501Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project migration-recipes: Compilation failure: Compilation failure: 
-2026-10-05T12:34:14.7216079Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
-2026-10-05T12:34:14.7218342Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
-2026-10-05T12:34:14.7220574Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
-2026-10-05T12:34:14.7222766Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
+2026-10-05T12:34:14.7216079Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
+2026-10-05T12:34:14.7218342Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
+2026-10-05T12:34:14.7220574Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
+2026-10-05T12:34:14.7222766Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
 2026-10-05T12:34:14.7232328Z [ERROR] -> [Help 1]
 2026-10-05T12:34:14.7234001Z [ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.6.4:exec (test-backport-inventory) on project jdk21-backport-admission: Command execution failed. Process exited with an error: 1 (Exit value: 1) -> [Help 2]
 2026-10-05T12:34:14.7236071Z [ERROR] 

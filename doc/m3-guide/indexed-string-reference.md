@@ -413,39 +413,39 @@ the precompute pin above. They are source identity evidence, not runtime receipt
 
 | Source | Git blob |
 | --- | --- |
-| [M3Text.java][text] | `46aecc2fb0b1e5f516c1db8b5e93476eb70444f2` |
-| [FrozenBytes.java][frozen-bytes] | `b624dc8dbb23eac6b3147ea888ac69df60f971e1` |
-| [FrozenChars.java][frozen-chars] | `a8f016a1764aea6e970bc60e38f345804e82a84e` |
-| [MIndexJoinedBytes.java][joined-bytes] | `9db0c6363480ccb0f38bba7b2218e151dd75ee68` |
-| [MIndexJoinedChars.java][joined-chars] | `6d7d06cc24c7c42c0aa2e6d21b82a53c9b4e1566` |
-| [MIndexJoinedStorageIntern.java][intern] | `95a576da9e60fb830a443034d6403e84740233e8` |
-| [MIndexJoinedStreams.java][streams] | `6f350a84b954b2f80929252254a007652fc1d0d0` |
-| [ExistingSurfaceTest.java][existing-test] | `d660ec518b35c944280b6165adf6138e7fff6b36` |
+| [M3Text.java][text] | `e177a3a5e08608dc06ecad85486338305ceb6efd` |
+| [FrozenBytes.java][frozen-bytes] | `f393350db66e0f75540a532b127df629641ad7ac` |
+| [FrozenChars.java][frozen-chars] | `e7cecf3e32eca949dcf6616455caab6c62fd909d` |
+| [MIndexJoinedBytes.java][joined-bytes] | `e0d1dc60bfbd4e74d1cc7379e300baec4a702182` |
+| [MIndexJoinedChars.java][joined-chars] | `fddca01f82675745bffd0a0e1ac713d1ebd249ae` |
+| [MIndexJoinedStorageIntern.java][intern] | `ae92ba1d0284acee526714e679bd3f7c5922e2ad` |
+| [MIndexJoinedStreams.java][streams] | `b156bfe08da189b9c06fcbd3da809454f4705a8a` |
+| [ExistingSurfaceTest.java][existing-test] | `8e40a53403886bff356562033942d4ded676b40f` |
 | [RetainedViewTest.java][retained-test] | `22ad8979e7124c34e5095235b958c03ad1636e4d` |
-| [M3TextMetrics.java][metrics] | `e67ad2157aacb8b31b293e522294d4c7f657adff` |
-| [M3TextSignals.java][signals] | `631145b68358970e6a7d9a792580e7a100eebb20` |
-| [M3Histogram.java][histogram] | `e8abc6db52f3032f415f5316167a169dec043438` |
-| [M3EditDistancePlan.java][distance] | `84bc435ddfa6a84d5c41dc5ae3ddc2711d609938` |
-| [M3TextSignalsTest.java][signals-test] | `2defb5e9a66749dec38384dccd6999107c94fb32` |
-| [M3EditDistancePlanTest.java][distance-test] | `47c363ad6ae3cb1d2d24ce7c5549c1cfe0609117` |
+| [M3TextMetrics.java][metrics] | `c64044be24be39dcb2f98b73c78f47d0e1bc37b0` |
+| [M3TextSignals.java][signals] | `9dae8c89566faf46fe93eb93abce2dbf75af21f9` |
+| [M3Histogram.java][histogram] | `ad0c7d46aa933e553a96c4576e9ff6d85a112f93` |
+| [M3EditDistancePlan.java][distance] | `0ce6b26740c698480fbfbe81323c1babc0517e6e` |
+| [M3TextSignalsTest.java][signals-test] | `2be7a13ff3802c570f0a7952101b7bb571fa3a91` |
+| [M3EditDistancePlanTest.java][distance-test] | `fa80b7eb4ef3f0d58bf92321856c252e76da6d43` |
 
 [policy]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/docs/m3jdk21-porting-invariant.md
 [mapping]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/docs/name-mapping.json
 [port-readme]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/README.md
 [port-pom]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/pom.xml
 [precompute-pom]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/pom.xml
-[text]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java
-[frozen-bytes]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java
-[frozen-chars]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java
-[joined-bytes]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java
-[joined-chars]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java
-[intern]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java
-[streams]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java
+[text]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/jdk/m3/text/compat/M3Text.java
+[frozen-bytes]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenBytes.java
+[frozen-chars]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java
+[joined-bytes]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedBytes.java
+[joined-chars]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedChars.java
+[intern]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedStorageIntern.java
+[streams]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedStreams.java
 [existing-test]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/test/java/ExistingSurfaceTest.java
 [retained-test]: https://github.com/hsoliwal/M3jdk21/blob/220eb11788d4039da904491e7d135b2304045659/m3/ports/indexstring/src/test/java/RetainedViewTest.java
-[metrics]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/main/java/com/m3/precompute/M3TextMetrics.java
-[signals]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/main/java/com/m3/precompute/M3TextSignals.java
-[histogram]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/main/java/com/m3/precompute/M3Histogram.java
-[distance]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/main/java/com/m3/precompute/M3EditDistancePlan.java
-[signals-test]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/test/java/com/m3/precompute/M3TextSignalsTest.java
-[distance-test]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/test/java/com/m3/precompute/M3EditDistancePlanTest.java
+[metrics]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextMetrics.java
+[signals]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextSignals.java
+[histogram]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Histogram.java
+[distance]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3EditDistancePlan.java
+[signals-test]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/test/java/jdk/m3/precompute/M3TextSignalsTest.java
+[distance-test]: https://github.com/hsoliwal/M3jdk21/blob/278b221e8365ebeb6095a3a5643b38a0564258b5/m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanTest.java

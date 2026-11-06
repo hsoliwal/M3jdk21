@@ -5,12 +5,12 @@
 
 /**
  * Defines the {@code JavaEWAH} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.ewah {
-    exports com.m3.collections.ewah;
-    exports com.m3.collections.ewah.datastructure;
-    exports com.m3.collections.ewah.symmetric;
-    exports com.m3.collections.ewah32;
-    exports com.m3.collections.ewah32.symmetric;
+    exports jdk.m3.collections.ewah;
+    exports jdk.m3.collections.ewah.datastructure;
+    exports jdk.m3.collections.ewah.symmetric;
+    exports jdk.m3.collections.ewah32;
+    exports jdk.m3.collections.ewah32.symmetric;
 }

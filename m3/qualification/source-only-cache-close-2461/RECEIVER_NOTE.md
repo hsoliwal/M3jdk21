@@ -5,8 +5,8 @@
 First original parent: 9fc254894dfe386e9e7202ae2655beae89be653b (PR #2404).
 Second original parent: 2e5af99316bc3472ae573d78d9b2518d86d20d61 (PR #2461).
 
-Current active `m3/core/src/com/m3/text/SharedLexiconCatalog.java` Git blob remains f84123fbf75daee0789cbbcc6608f639363562d2.
-Qualified donor `SharedLexiconCatalog.java` Git blob 0f1ecbb42fb7fcfb95c742ec6f8a2009ad87fcad is retained as an **inert `.java.txt`** under this qualification folder, with exactly one cache-release statement after `closed=true` under the same lifecycle write lock.
+Current active `m3/core/src/jdk/m3/text/SharedLexiconCatalog.java` Git blob remains 14fb1241d2ad1aad1a861a65f5b356d23fb8804a.
+Qualified donor `SharedLexiconCatalog.java` Git blob 2a6daa583453e83842b75be310a8e204f0004201 is retained as an **inert `.java.txt`** under this qualification folder, with exactly one cache-release statement after `closed=true` under the same lifecycle write lock.
 The original canonical private Synexia Maven/OpenRewrite and 14-JUnit source authority is #16377; its recipe source is not copied to this public product.
 
 The donor is 4 commits ahead and zero behind this receiver, but has additional workflow/tool changes, precompute payload and V11 migration metadata. Those are reachable through the genuine Git second parent, but are **not installed** into this receiving tree. See ORIGINAL_HEAD_DELTA.tsv.

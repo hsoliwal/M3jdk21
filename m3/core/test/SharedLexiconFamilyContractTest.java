@@ -14,32 +14,32 @@ public final class SharedLexiconFamilyContractTest {
 
     public static void main(String[] args) throws Exception {
         List<String> lines = Files.readAllLines(
-                Path.of("lexicon/synexia-precompute-field-map.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon/m3-precompute-field-map.tsv"), StandardCharsets.UTF_8);
         check(!lines.isEmpty(), "field map is non-empty");
         check(lines.get(0).equals(
                 "donor_type\tdonor_field\tdonor_java_type\tcanonical_payload_field"
                         + "\tm3jdk_storage\tstatus\tpreservation_rule"),
                 "field map header");
         Set<String> expected = Set.of(
-                "M3LexiconPrecompute.PrefixCounts|prefixCounts|long[]|prefix_counts|m3lex-family-v2:synexia.prefix-counts.tsv",
-                "M3LexiconPrecompute.SpellIndex|deleteToTokenIds|Map<String,int[]>|deleteToTokenIds|m3lex-family-v2:synexia.spell.tsv",
-                "M3LexiconPrecompute.SpellIndex|frequencies|Map<Integer,Long>|frequencies|m3lex-family-v2:synexia.spell.tsv",
-                "M3LexiconPrecompute.SpellIndex|sourceFingerprint|String|sourceFingerprint|m3lex-family-v2:synexia.spell.tsv",
-                "M3LexiconPrecompute.TokenHashPrecompute|tokenSha256|byte[][]|tokenSha256|m3lex-family-v2:synexia.token-hash.tsv",
-                "M3LexiconPrecompute.TokenHashPrecompute|rangeFingerprint|RangeFingerprint|rangeFingerprint|m3lex-family-v2:synexia.token-hash.tsv",
-                "M3LexiconPrecompute.TokenHashPrecompute|rangeSha256|byte[]|rangeSha256|m3lex-family-v2:synexia.token-hash.tsv",
-                "M3LexiconPrecompute.TokenFrequency|frequencies|Map<Integer,Integer>|frequencies|m3lex-family-v2:synexia.token-frequency.tsv",
-                "M3LexiconPrecompute.TranslationProjection|translatedTokenIds|int[]|translated_token_ids|m3lex-family-v2:synexia.translation.tsv",
-                "M3LexiconPrecompute.TranslationProjection|mappedTokenCount|int|mapped_token_count|m3lex-family-v2:synexia.translation.tsv",
-                "M3LexiconPrecompute.TranslationProjection|sourceFingerprint|String|source_fingerprint|m3lex-family-v2:synexia.translation.tsv",
-                "M3LexiconPrecompute.TranslationProjection|sourceLanguage|String|source_language|m3lex-family-v2:synexia.translation.tsv",
-                "M3LexiconPrecompute.TranslationProjection|targetLanguage|String|target_language|m3lex-family-v2:synexia.translation.tsv",
-                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceId|String|source_id|m3lex-family-v2:synexia.translation.tsv",
-                "SharedLexiconPrecomputeCatalog.TranslationIdentity|recordId|String|record_id|m3lex-family-v2:synexia.translation.tsv",
-                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceLanguage|String|source_language|m3lex-family-v2:synexia.translation.tsv",
-                "SharedLexiconPrecomputeCatalog.TranslationIdentity|targetLanguage|String|target_language|m3lex-family-v2:synexia.translation.tsv",
-                "SharedLexiconPrecomputeCatalog.TranslationIdentity|lexiconFingerprint|String|lexicon_fingerprint|m3lex-family-v2:synexia.translation.tsv",
-                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceFingerprint|String|source_fingerprint|m3lex-family-v2:synexia.translation.tsv");
+                "M3LexiconPrecompute.PrefixCounts|prefixCounts|long[]|prefix_counts|m3lex-family-v2:m3.prefix-counts.tsv",
+                "M3LexiconPrecompute.SpellIndex|deleteToTokenIds|Map<String,int[]>|deleteToTokenIds|m3lex-family-v2:m3.spell.tsv",
+                "M3LexiconPrecompute.SpellIndex|frequencies|Map<Integer,Long>|frequencies|m3lex-family-v2:m3.spell.tsv",
+                "M3LexiconPrecompute.SpellIndex|sourceFingerprint|String|sourceFingerprint|m3lex-family-v2:m3.spell.tsv",
+                "M3LexiconPrecompute.TokenHashPrecompute|tokenSha256|byte[][]|tokenSha256|m3lex-family-v2:m3.token-hash.tsv",
+                "M3LexiconPrecompute.TokenHashPrecompute|rangeFingerprint|RangeFingerprint|rangeFingerprint|m3lex-family-v2:m3.token-hash.tsv",
+                "M3LexiconPrecompute.TokenHashPrecompute|rangeSha256|byte[]|rangeSha256|m3lex-family-v2:m3.token-hash.tsv",
+                "M3LexiconPrecompute.TokenFrequency|frequencies|Map<Integer,Integer>|frequencies|m3lex-family-v2:m3.token-frequency.tsv",
+                "M3LexiconPrecompute.TranslationProjection|translatedTokenIds|int[]|translated_token_ids|m3lex-family-v2:m3.translation.tsv",
+                "M3LexiconPrecompute.TranslationProjection|mappedTokenCount|int|mapped_token_count|m3lex-family-v2:m3.translation.tsv",
+                "M3LexiconPrecompute.TranslationProjection|sourceFingerprint|String|source_fingerprint|m3lex-family-v2:m3.translation.tsv",
+                "M3LexiconPrecompute.TranslationProjection|sourceLanguage|String|source_language|m3lex-family-v2:m3.translation.tsv",
+                "M3LexiconPrecompute.TranslationProjection|targetLanguage|String|target_language|m3lex-family-v2:m3.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceId|String|source_id|m3lex-family-v2:m3.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|recordId|String|record_id|m3lex-family-v2:m3.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceLanguage|String|source_language|m3lex-family-v2:m3.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|targetLanguage|String|target_language|m3lex-family-v2:m3.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|lexiconFingerprint|String|lexicon_fingerprint|m3lex-family-v2:m3.translation.tsv",
+                "SharedLexiconPrecomputeCatalog.TranslationIdentity|sourceFingerprint|String|source_fingerprint|m3lex-family-v2:m3.translation.tsv");
         Set<String> found = new HashSet<>();
         for (String line : lines.subList(1, lines.size())) {
             String[] fields = line.split("\\t", -1);

@@ -1,6 +1,6 @@
 # M3-TOKEN-CURSOR-MULTILANE — source contract (2026-11-02)
 
-Scope: one original Java 21 owner: `m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3TokenCursor.java`. A source-sealed follow-up to `hsoliwal/M3jdk21` PR #2328 and Synexia #15518. Proposal-diff is the default; only a separate additive draft branch may receive reviewed postimages. Never modify main/master/develop, and never merge automatically.
+Scope: one original Java 21 owner: `m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenCursor.java`. A source-sealed follow-up to `hsoliwal/M3jdk21` PR #2328 and Synexia #15518. Proposal-diff is the default; only a separate additive draft branch may receive reviewed postimages. Never modify main/master/develop, and never merge automatically.
 
 Invariant: `M3TokenCursor.lanes(int[][])` accepts an array of non-null primitive token-ID lanes, retains each **nonempty inner lane by identity**, preserves relative order, drops empty lanes and owns its separate outer-lane index. It must reject null outer/inner arrays and negative IDs as before, with the same exception categories; no silent copying or freezing is allowed. Exact returned `totalLength`, chunk coordinate, offset, seek, backtrack, advance, and `unitPresenceMask` results must match the original. Retained source mutation after admission is not a newly supported behavior, and the precomputed presence mask remains a snapshot. `of(int[])`, JNI symbols, public API signatures, and token regex behavior are locked.
 

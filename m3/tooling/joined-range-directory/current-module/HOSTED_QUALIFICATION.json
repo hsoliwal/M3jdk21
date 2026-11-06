@@ -2,12 +2,12 @@
   "schema": "M3_APPLIED_HEAD_HOSTED_EVIDENCE_V1",
   "repository": "hsoliwal/M3JDK21",
   "head": "c8814c2fe4a9eec377e513653d22c5065768817d",
-  "joinedSourceBlob": "4f88f794266375ad8174fa56e952c30d32689877",
+  "joinedSourceBlob": "765d43267bb22a3650b622c01cb29b550e1deb01",
   "testSourceBlob": "667a372f0ca52e8daf5e5350913cb0478e51da2a",
-  "workflowBlob": "a96a0196d2f47e1d38fa905d684eaa577e5c84bd",
+  "workflowBlob": "d98e68dfa453e5430fbe7598ea1961363df037ab",
   "nativeSource": {
     "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
-    "gitBlob": "a3cbcd5c17e99761fe5a9acc4200e920f73e1c79"
+    "gitBlob": "9632af72ba95b0e3e72803b51fc23f3688d4b31f"
   },
   "verifiedScopes": {
     "linuxSharedReadOnlyMapping": {
@@ -109,7 +109,7 @@
       "url": "https://github.com/hsoliwal/M3JDK21/actions/runs/41354668980/job/124992074275",
       "decodedLogCharacters": 22726,
       "executedOutputMarkers": [
-        "2026-11-01T21:59:13.7734628Z {\"status\": \"PASS_PINNED_HOSTED_INPUT_PREPARATION\", \"currentFiles\": 59, \"historicalOverlays\": 7, \"notices\": 2, \"canonicalSdkOwners\": 0, \"currentCommit\": \"1b5e64844fdb755ac8a7aee563e68c15e0126ced\", \"historicalCommit\": \"73f59218dc4ef1a3ef79aad990e77273db2a2d60\", \"authority\": false, \"receiverTransitions\": [{\"path\": \"m3/core/src/com/m3/text/JoinedM3StringPiece.java\", \"observed\": {\"bytes\": 3377, \"sha256\": \"d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e\", \"gitBlob\": \"4f88f794266375ad8174fa56e952c30d32689877\"}, \"frozen\": {\"bytes\": 2634, \"sha256\": \"694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb\", \"gitBlob\": \"cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597\"}, \"recovery\": \"verified-git-blob\"}, {\"path\": \"m3/core/test/java/lang/M3CodeTextSignalBatchTest.java\", \"observed\": {\"bytes\": 1981, \"sha256\": \"dc5fc99592b0896b3c1df2fa9812b3f215b503e5aa28c7c9ee6e2fbfe6d2505c\", \"gitBlob\": \"667a372f0ca52e8daf5e5350913cb0478e51da2a\"}, \"frozen\": {\"bytes\": 1981, \"sha256\": \"057d559fc6c3010defc51279dc90598c8bdc01bebfa59cabf7e66972a8ff2c43\", \"gitBlob\": \"5e14e058a744092654cf96bdd99af2e270c381a8\"}, \"recovery\": \"verified-git-blob\"}], \"receiverSourceWrites\": 0, \"receiverRole\": \"DECLARED_SOURCE_OBSERVED_FROZEN_BASELINE_RECOVERED\"}",
+        "2026-11-01T21:59:13.7734628Z {\"status\": \"PASS_PINNED_HOSTED_INPUT_PREPARATION\", \"currentFiles\": 59, \"historicalOverlays\": 7, \"notices\": 2, \"canonicalSdkOwners\": 0, \"currentCommit\": \"1b5e64844fdb755ac8a7aee563e68c15e0126ced\", \"historicalCommit\": \"73f59218dc4ef1a3ef79aad990e77273db2a2d60\", \"authority\": false, \"receiverTransitions\": [{\"path\": \"m3/core/src/jdk/m3/text/JoinedM3StringPiece.java\", \"observed\": {\"bytes\": 3377, \"sha256\": \"c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2\", \"gitBlob\": \"765d43267bb22a3650b622c01cb29b550e1deb01\"}, \"frozen\": {\"bytes\": 2634, \"sha256\": \"1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7\", \"gitBlob\": \"5022e9811ce9391671c794446c7772569cfd369f\"}, \"recovery\": \"verified-git-blob\"}, {\"path\": \"m3/core/test/java/lang/M3CodeTextSignalBatchTest.java\", \"observed\": {\"bytes\": 1981, \"sha256\": \"dc5fc99592b0896b3c1df2fa9812b3f215b503e5aa28c7c9ee6e2fbfe6d2505c\", \"gitBlob\": \"667a372f0ca52e8daf5e5350913cb0478e51da2a\"}, \"frozen\": {\"bytes\": 1981, \"sha256\": \"057d559fc6c3010defc51279dc90598c8bdc01bebfa59cabf7e66972a8ff2c43\", \"gitBlob\": \"5e14e058a744092654cf96bdd99af2e270c381a8\"}, \"recovery\": \"verified-git-blob\"}], \"receiverSourceWrites\": 0, \"receiverRole\": \"DECLARED_SOURCE_OBSERVED_FROZEN_BASELINE_RECOVERED\"}",
         "2026-11-01T21:59:13.9569983Z {\"status\": \"PASS_EXACT_SOURCE_COHORT_CONTROLS\", \"phase\": \"controls\", \"authority\": false}",
         "2026-11-01T21:59:55.0584752Z {\"status\": \"PASS_ORIGINAL_MODULAR_BUILD_HISTORICAL_AND_CURRENT\", \"phase\": \"runtime\", \"authority\": false}"
       ]

@@ -12,9 +12,9 @@ Exact original source preimages at M3JDK21 commit `73c1e821af71e7c6444e30f786e3f
 - `M3LongRankBatchNative.java`: `cd0a9b800a05e3cdd6478b408b31c71784a9ebb9` -> `3915c02d735d128b74f5857edc81864fa05048bc`
 - `M3LongRankIndex.java`: `1965edd9843d29070b01cc9d3107c8226a176e37` -> `b1992bbe965c2f42500b02b5bb687dbb7153638b`
 - `m3_long_rank_batch_jni.c`: `d578908b39e626485638b1ca9915484912b4d1c9` -> `32753502cfa1e9f7e5e4a4833b22e495fe679f79`
-- `M3LongRankKDiffContract.java`: ABSENT -> `d8e0ea51792e73ce6d83294cb67e66c3715a48a2`
-- `M3LongRankKDiffTest.java`: ABSENT -> `7fbf910912740e6ecfe7e4e403a9db4b118475f7`
-- `.github/workflows/m3-long-rank-kdiff-jni-java21.yml`: ABSENT -> `c4e26753a1c7d81bcf07583dd94981ba169305cc`
+- `M3LongRankKDiffContract.java`: ABSENT -> `4c69a5b61d7813e5f0901503f1a0e7fed999a04d`
+- `M3LongRankKDiffTest.java`: ABSENT -> `bfe8c22b4204dc2060db337d8b7c1cd5645e07e3`
+- `.github/workflows/m3-long-rank-kdiff-jni-java21.yml`: ABSENT -> `8bccf25f766091071d581f0bc570290a0dcf551f`
 
 ## Mechanism and LeetCode problem catalogue
 LeetCode #532 K-diff unique value-pair category. Distinct K-difference pairs over a *prepared, immutable, signed-sorted long[]* snapshot: at K=0 values count once only after a duplicate is observed; K>0 uses two primitive monotonically advancing cursors and unsigned gap comparison, avoiding overflow for `Long.MIN_VALUE` and `Long.MAX_VALUE`. No per-value Entry or boxing, no owner mutation, no Java comparator crossing JNI. Exact native storage is two local 256-long pages accessed via `GetLongArrayRegion`; no retained Java pointers, no heap pin or native full-array clone. The existing optional `m3rankbatch` provider owns the additive export; Java fallback remains authoritative for small batches and absent optional ABI. Explicit native-required calls throw if unavailable.

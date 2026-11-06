@@ -41,11 +41,11 @@
     "historical_parent": "99f4d878925dc887e07cb142e75bb767fa4c5c33",
     "published_commit": "80b3629d883572012575234b9663abd29a37c82c",
     "pull_request": "https://github.com/hsoliwal/com.synexia/pull/15542",
-    "crate": "synexia-openrewrite-recipes/recipe-crates/m3-object-adapter-contract-20261102",
+    "crate": "m3-openrewrite-recipes/recipe-crates/m3-object-adapter-contract-20261102",
     "recipes": [
-      "com.synexia.m3.ObjectAdpaterVirtualAdmission20261102",
-      "com.synexia.m3.ObjectAdpaterVirtualContract20261102",
-      "com.synexia.m3.ObjectAdpaterVirtualMetadata20261102"
+      "jdk.internal.m3.ObjectAdpaterVirtualAdmission20261102",
+      "jdk.internal.m3.ObjectAdpaterVirtualContract20261102",
+      "jdk.internal.m3.ObjectAdpaterVirtualMetadata20261102"
     ],
     "reusable_recipe_code_received_into_product": false
   },

@@ -85,7 +85,7 @@ jobs:
             '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' \
             "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
           tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
-          echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          echo "M3JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           echo "JAVA_HOME=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
       - name: Build and test P0 immutable text foundation
@@ -109,7 +109,7 @@ jobs:
           python3 m3/runtime-integration/recipe/test_recipe.py
       - name: Verify Synexia compatibility and shared mapping
         run: |
-          python3 m3/compatibility/check-synexia.py
+          python3 m3/compatibility/check-m3.py
           python3 m3/verify-shared-mapping.py
 
       - name: Retain visible custody queue and failures
@@ -152,7 +152,7 @@ jobs:
           root = pathlib.Path("m3/runtime-integration/utf8-cursor-20261014/recipe")
           metadata = json.loads((root / "canonical-source.json").read_text(encoding="utf-8"))
           assert metadata["repository"] == "hsoliwal/com.synexia"
-          assert metadata["receivingProviderGitBlob"] == "2530c533003a8a17d0e782728d98a4dfebe13651"
+          assert metadata["receivingProviderGitBlob"] == "e7a3c6d89e0fad77e510fdc6d46223211493fd5a"
           assert metadata["phase_advance"] is False and metadata["runtimeApplied"] is False
           assert metadata["receiverCorePath"] == str(root / "canonical")
           actual = subprocess.check_output(
@@ -217,9 +217,9 @@ jobs:
         run: mvn -B -ntp -fae -f m3/pom.xml clean verify
       - name: Full-family and receiving-policy verification
         run: |
-          if test -f m3/compatibility/check_synexia_full_family.py; then
-            python3 m3/compatibility/check_synexia_full_family.py
-            python3 -m unittest -v m3/compatibility/test_synexia_full_family.py
+          if test -f m3/compatibility/check_m3_full_family.py; then
+            python3 m3/compatibility/check_m3_full_family.py
+            python3 -m unittest -v m3/compatibility/test_m3_full_family.py
           fi
 
       - name: Retain visible custody queue and failures

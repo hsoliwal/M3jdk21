@@ -2,7 +2,7 @@
   "canonical_baseline_packet": {
     "path": "current-map-validation-v03/PACKET.json",
     "result": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE",
-    "sha256": "f145e87ddf885a5ceb81b1e0cf81f6040e07cebc399b2e069f65c102bcb54fd8"
+    "sha256": "26fa8fc702f37748a4532415b253ac2b7b13296b5f61ca23c82c768819a275ad"
   },
   "compile_only_status": "PASS",
   "crate": "jcc-merge-recovery-20261006-mapping-v03",
@@ -17,7 +17,7 @@
     {
       "bytes": 52471,
       "path": "JccMergeMappingRecoveryV03Test.java.in",
-      "sha256": "22808cffcad7aa2477fdb91c53592cce3430aab02da14a5a2b62e6c9dcfbcf27"
+      "sha256": "178637d9f4ff0f5093bf6528b944910304c675c93fb12c48639e1c5ce81f44b6"
     },
     {
       "bytes": 3441,
@@ -27,22 +27,22 @@
     {
       "bytes": 626,
       "path": "m3-jcc-merge-mapping-recovery-v03.yml",
-      "sha256": "7ef86264b8742dfa06ce5bc83ea2bed6be19b24059f479c4e7f0ed61d58b84bc"
+      "sha256": "6ba1b51479a71577289d10793697967de29161a81adc7283ae7fd98a3aef6ad0"
     },
     {
       "bytes": 14710,
       "path": "render_template.py",
-      "sha256": "de6d8a59b0f49a5ca9378c1422cc3d52cb41d3e7f638f6c618ba638fa407b2dd"
+      "sha256": "5910bcb28f18602d3d849d1092a3f561e80870616eab4f1863e570cc750a404a"
     },
     {
       "bytes": 8841,
       "path": "README.md",
-      "sha256": "e28aa2f0ebb4b324dc70297de60aceab20749c9dabc0d902fdb29d7986adabf4"
+      "sha256": "798c58e422b0415b2550972f1542f5a524cb0cc742a863730f9d1081a70cc3cf"
     },
     {
       "bytes": 6239,
       "path": "compile-check-v01/receipt.json",
-      "sha256": "c8182b75ec10d7ee66da00f5a9e92306b0b78fcdecf2114bbd1e84c6c0cadc40"
+      "sha256": "1b598d6f5917fb562998bc41cd0e785499fa7786cd8aeaf4930d945abb4d4923"
     },
     {
       "bytes": 0,
@@ -80,17 +80,17 @@
   "junit_methods_authored": 13,
   "junit_methods_executed": 0,
   "materialized_result_property": "m3.mapping.materialized",
-  "named_recipe": "com.m3.rewrite.backport.JccMergeMappingRecoveryV03",
+  "named_recipe": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV03",
   "previous_packets_unchanged": [
     {
       "files_verified_unchanged": 15,
       "path": "candidate/mapping/java-template/TEMPLATE_PACKET.json",
-      "sha256": "5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142"
+      "sha256": "a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b"
     },
     {
       "files_verified_unchanged": 11,
       "path": "candidate/mapping-v02/java-template/TEMPLATE_PACKET.json",
-      "sha256": "24b0adba2b80ee105ba9904e4d00b96d441cddf4b548b5400d72ca09f1d26136"
+      "sha256": "bba43023ead328438b81a397dcb6c646d5c79bfe33555d5a220ef1f985aabcd6"
     },
     {
       "files_verified_unchanged": 113,
@@ -107,6 +107,6 @@
   "source_laboratory_owners": 14,
   "source_root_tree": "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",
   "status": "FROZEN_PREPARED_ACTUAL_SOURCE_PUBLICATION_REQUIRED",
-  "test_class": "com.m3.rewrite.backport.JccMergeMappingRecoveryV03Test",
+  "test_class": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV03Test",
   "version": 3
 }

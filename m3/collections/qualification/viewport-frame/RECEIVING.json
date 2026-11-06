@@ -2,7 +2,7 @@
   "schema": "M3JDK21_VIEWPORT_FRAME_MERGED_RECEIVING_V1",
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_commit": "7b31c106c0854cf8916b855849d2f7adb4e7f282",
-  "recipe": "com.synexia.m3.ViewportFrameMerged20261023",
+  "recipe": "jdk.internal.m3.ViewportFrameMerged20261023",
   "source": "m3/collections/src/main/c/m3maskviewport.c",
   "pre_git_blob": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",
   "post_git_blob": "96c4c094667bcfbedf280bac2d223752bc3a1187",

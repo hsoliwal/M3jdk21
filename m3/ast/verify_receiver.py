@@ -14,27 +14,27 @@ import tempfile
 sys.dont_write_bytecode = True
 THIS = Path(__file__).resolve().parent
 ROOT = THIS.parents[1]
-SOURCE = THIS / 'src/main/java/com/m3/ast/M3ASTHierarchy.java'
-TEST = THIS / 'src/test/java/com/m3/ast/M3ASTHierarchyContract.java'
-ENCODING = THIS / 'src/test/java/com/m3/ast/M3ASTHierarchyEncodingTest.java'
+SOURCE = THIS / 'src/main/java/jdk/m3/ast/M3ASTHierarchy.java'
+TEST = THIS / 'src/test/java/jdk/m3/ast/M3ASTHierarchyContract.java'
+ENCODING = THIS / 'src/test/java/jdk/m3/ast/M3ASTHierarchyEncodingTest.java'
 BORROW = THIS / 'SOURCE_BORROW.tsv'
 SUCCESSOR = THIS / 'SOURCE_SUCCESSOR.json'
 CUSTODY = THIS / 'recipe-custody/hierarchy-encoding-20261018'
-HISTORICAL_BORROW_SHA256 = '8f39c3ea44bdbdbf7b88b6b495a0c897724ec2bc79d33fcf28737b91d77d78d7'
+HISTORICAL_BORROW_SHA256 = 'ebb181b5820bc9667dc8ca13c32e3464f760f9c552da90e1f65390b1f7431a3f'
 EXPECTED_SUCCESSOR = {'schema': 'M3_AST_HIERARCHY_SOURCE_SUCCESSOR_V1',
  'canonical_repository': 'hsoliwal/com.synexia',
  'canonical_baseline_commit': '98368e107f4a205d852ef958cd48c1ee633219b1',
  'canonical_source_commit': '9f500fff0bcdf96807899e96090e245fb530c48b',
- 'recipe_owner': 'synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017',
- 'recipe_name': 'com.synexia.m3jdk.CollectionsContractRefinement20261017',
+ 'recipe_owner': 'm3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017',
+ 'recipe_name': 'jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017',
  'canonical_dataset': 'ast-hierarchy-20261018',
  'target_dataset': 'ast-hierarchy-target-20261018',
- 'previous_source_sha256': 'f9d353aa68b31d4d723d584940cb87a39163958d2e7c0962e2a648c96fcf1434',
- 'source_sha256': '984d8498e19fc267d338aef1d0136966918855087f78ca8fdb2fce50b9724721',
- 'previous_target_sha256': 'f3fe6810edce185dab20ca73ffb03edaf5a778eb60c41b432e0f902d574a8441',
- 'target_sha256': '068cb795d6617d77ca5297adf96419fadd97f1f40e6b0a63b36f43b222c6c36a',
- 'legacy_contract_sha256': '5086649c5e87cfa418247a175f232c273db121d56ea1afff646de0f615d932c1',
- 'custody_manifest_sha256': '9edd442da2af230f61581130bc94be1999c11e53251cc54f84fdb288dff8df9a',
+ 'previous_source_sha256': '5c8143c5a5d35efb9753414b7a575799a8821aba525e7849e8e4f6289f1b9ec8',
+ 'source_sha256': 'f777c2777b78e5fe5ecb734576fc6833500f5041435d5ac92a4041f2eaa14295',
+ 'previous_target_sha256': '79155aabbb045e4a4c6ea38359a642912d940df2b6dc68c5070f205c94e6dd43',
+ 'target_sha256': '0db46e317758d03f8d295e5fd6b1afc8099ab06321e1376abb15e24d06e8ec52',
+ 'legacy_contract_sha256': '3bfbcaec686210a6d6a11bc292aa86a57a20456a9c78881fe336ae1aecb6c9b8',
+ 'custody_manifest_sha256': '08eadf6ab7605f35814fb426f758fe6a0c1b9b7d4979cafbd4e7603bedf6d286',
  'compatibility': 'well-formed UTF-16 retains exact v1 roots; malformed identifiers use a disjoint '
                   'framed extension',
  'scope': 'INDEPENDENT_TARGET_MODULE; CANDIDATE_ONLY'}
@@ -131,7 +131,7 @@ def qualify_successor(fields):
 if digest(BORROW) != HISTORICAL_BORROW_SHA256:
     raise SystemExit('FAIL: historical SOURCE_BORROW.tsv drift')
 fields = dict(line.split('\t', 1) for line in BORROW.read_text().splitlines()[1:])
-if fields['source_recipe'] != 'com.synexia.rewrite.M3ASTL0L5Target20261017':
+if fields['source_recipe'] != 'jdk.internal.m3.rewrite.M3ASTL0L5Target20261017':
     raise SystemExit('FAIL: missing historical canonical recipe identity')
 if not TEST.is_file() or not SOURCE.is_file():
     raise SystemExit('FAIL: incomplete Java sources')
@@ -149,11 +149,11 @@ for iteration in range(2):
         if successor:
             sources.append(str(ENCODING))
         run(['javac', '--release', '21', '-proc:none', '-Xlint:all', '-Werror', '-d', str(output), *sources])
-        observed = run(['java', '-Xmx256m', '-cp', str(output), 'com.m3.ast.M3ASTHierarchyContract', '2000'])
+        observed = run(['java', '-Xmx256m', '-cp', str(output), 'jdk.m3.ast.M3ASTHierarchyContract', '2000'])
         if 'checks=39550' not in observed or 'atoms=17967' not in observed:
             raise AssertionError('unexpected target corpus result: ' + observed)
         if successor:
-            encoding = run(['java', '-Xmx256m', '-cp', str(output), 'com.m3.ast.M3ASTHierarchyEncodingTest'])
+            encoding = run(['java', '-Xmx256m', '-cp', str(output), 'jdk.m3.ast.M3ASTHierarchyEncodingTest'])
             if encoding != 'PASS HierarchyEncoding checks=10311':
                 raise AssertionError('unexpected identifier-encoding result: ' + encoding)
             print('PASS encoding run', iteration, encoding)
@@ -162,7 +162,7 @@ for iteration in range(2):
 if classes[0] != classes[1]:
     raise AssertionError('classfile repeat drift')
 print('PASS receiver source pinned; repeat classfiles', len(classes[0]))
-if (ROOT / 'm3/collections/src/main/java/com/m3/collections').is_dir():
+if (ROOT / 'm3/collections/src/main/java/jdk/m3/collections').is_dir():
     census = run(['python3', str(THIS / 'collection_source_census.py')])
     print('SOURCE_CENSUS_ONLY', len([s for s in census.splitlines() if '\t' in s]) - 1)
 else:

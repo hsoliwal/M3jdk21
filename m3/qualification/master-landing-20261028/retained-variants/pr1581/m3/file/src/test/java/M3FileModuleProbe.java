@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.file.M3File;
-import com.m3.file.M3FileSnapshot;
+import jdk.m3.file.M3File;
+import jdk.m3.file.M3FileSnapshot;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 
-/** Executable smoke check against the installed com.m3.file module. */
+/** Executable smoke check against the installed jdk.m3.file module. */
 public final class M3FileModuleProbe {
     private M3FileModuleProbe() { }
 
@@ -32,10 +32,10 @@ public final class M3FileModuleProbe {
         require(touched.changeFrom(changed), M3FileSnapshot.Change.METADATA_CHANGED);
         Files.delete(path);
         require(file.snapshot(8).changeFrom(touched), M3FileSnapshot.Change.DELETED);
-        if (!"com.m3.file".equals(M3File.class.getModule().getName())) {
+        if (!"jdk.m3.file".equals(M3File.class.getModule().getName())) {
             throw new AssertionError("M3File must load from its named product module");
         }
-        System.out.println("PASS com.m3.file installed module: five source/class byte-delta states");
+        System.out.println("PASS jdk.m3.file installed module: five source/class byte-delta states");
     }
 
     private static void require(M3FileSnapshot.Change actual, M3FileSnapshot.Change expected) {

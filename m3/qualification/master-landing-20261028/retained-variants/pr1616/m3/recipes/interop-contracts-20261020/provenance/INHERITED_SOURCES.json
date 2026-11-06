@@ -15,8 +15,8 @@
       "source_repository": "hsoliwal/com.synexia",
       "source_revision": "2fc0a939882de871a2d64120df1183da330f6846",
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/provenance/PUBLIC_ENGINE_PREEXISTENCE.json",
-      "sha256": "112a5be772cf92c9b5b219e6a6f5aa211ee57dcf217590bdcaaf1adb674f8cf1",
-      "git_blob": "0a99b0b8861c41844d8fd5bd1dfdcd13c917dbf4",
+      "sha256": "dfac5a34a9d55cc6915ec521d57510008468175955d0a5188c7044299681cc31",
+      "git_blob": "34c7281543e30d07be653fe4bdb1f413affd977a",
       "disposition": "Byte-exact inheritance; original scope and historical statuses retained"
     },
     {
@@ -24,8 +24,8 @@
       "source_repository": "hsoliwal/com.synexia",
       "source_revision": "2fc0a939882de871a2d64120df1183da330f6846",
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/catalogue/PROBLEMS_20261020.tsv",
-      "sha256": "08fd0118e0a3f1225846e52ac07d1c0ef1bce99704806af791f8dc165d020ea9",
-      "git_blob": "13aa28535e6a03f2415c9b0ab70c7b6231480b8e",
+      "sha256": "6b69a71d8ac21a4764ccbb594574ecee0cc2c8c63aa67242b92c9cf56e14b3cf",
+      "git_blob": "af88e541ed7fb7a3209d6cd673351e209bfdcd4e",
       "disposition": "Byte-exact inheritance; original scope and historical statuses retained"
     },
     {
@@ -33,8 +33,8 @@
       "source_repository": "hsoliwal/com.synexia",
       "source_revision": "2fc0a939882de871a2d64120df1183da330f6846",
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-convergence-20261020/catalogue/INHERITED_LOOKUP_PROVENANCE.tsv",
-      "sha256": "e50ed945f9d64519744945895af73b0df57039d3079d603d59f4929c963997cf",
-      "git_blob": "517250be217a44040c9f7a7638a1b17657088f09",
+      "sha256": "15783211d8ccd539aa70d5559cf29cccfa8ad24e4260e02e2a80819bdc7637ec",
+      "git_blob": "be94cacdd7c14674c90c1f51f3c520282042ee98",
       "disposition": "Byte-exact inheritance; original scope and historical statuses retained"
     }
   ]

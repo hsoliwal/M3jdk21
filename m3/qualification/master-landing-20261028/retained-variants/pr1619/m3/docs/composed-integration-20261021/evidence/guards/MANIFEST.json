@@ -8,7 +8,7 @@
       "path": "candidate.json",
       "raw_source": "guards/candidate.json",
       "raw_sha256": "0ebd717c3e91081777a9f176ea82256948194fa8916fbc11383ea2d239fd289d",
-      "published_sha256": "e55067f05b5c7b092e92ce25ecc7f26277e39e2a38295d54040fdce189d740aa"
+      "published_sha256": "8807db2d7d59def57c7acb525ff0912e5736b6155fba3a593db7e5e9497c0ba7"
     },
     {
       "path": "baseline-string-phase.json",

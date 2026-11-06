@@ -8,8 +8,8 @@ owners are preserved byte-for-byte:
 
 | Owner | Exact current-master Git blob |
 |---|---|
-| `src/main/c/m3maskviewport.c` | `f29d081e28ba8ccc4516bd28c09e738b7a408a76` |
-| `M3MaskViewportNative.java` | `9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad` |
+| `src/main/c/m3maskviewport.c` | `b0d387f2612a315c6b53a50a814432c916ca61c8` |
+| `M3MaskViewportNative.java` | `4f73ddb9aae36dadb8003257d3a6988536a18066` |
 | `M3MaskViewportKernel.java` | `5966bffacc730b3ef7102d615a2331a42ae4a22b` |
 
 No public Java API, in-JDK `java.base` class, JNI symbol, C implementation,

@@ -8,9 +8,9 @@ Synexia is the convergence/recipe owner: [com.synexia #13224](https://github.com
 |---|---|---|
 | `src/main/java/com/m3/collections/M3LongRankBatchNative.java` | `fe4bd1751126d1a5c21c359bf9f028013d380a4f` | `99872c10902c15cbbf143dd158a6bcf6736465e1` |
 | `src/main/native/collections/m3_long_rank_batch_jni.c` | `496e04bc57c00ba66895379229f3dc4e4dc0aa2c` | `e7ed7e9a3a9eb71e1970d8b4f023147afb8e7543` |
-| `src/test/java/com/m3/collections/M3LongRankWindowIntersectionContract.java` | ABSENT | `d5e611897131123061c5e40886be1cb672c58f0a` |
-| `src/test/java/com/m3/collections/M3LongRankWindowIntersectionTest.java` | ABSENT | `c147f3f3c2376407bd95fe138c5eb7f2d07b1458` |
-| `.github/workflows/m3-leetcode349-350-jni-window-java21.yml` | ABSENT | `d2a988be9e802e5f9fd729dd21968076752955c1` |
+| `src/test/java/com/m3/collections/M3LongRankWindowIntersectionContract.java` | ABSENT | `22754302e4dccd581a6a55b5718482d92dbe3362` |
+| `src/test/java/com/m3/collections/M3LongRankWindowIntersectionTest.java` | ABSENT | `a3ceef59e5bbd72ca791dcba128381095c2d9286` |
+| `.github/workflows/m3-leetcode349-350-jni-window-java21.yml` | ABSENT | `5d08c47d30b9599a9f99c298ff681f297c958481` |
 
 The source files above are under `m3/collections/` unless their relative path starts with `.github/`. The canonical Synexia crates use both the existing `M3HashPinnedJavaSnapshotRecipe` and `M3HashPinnedTextSnapshotRecipe`. They preserve the original source digests and fail on missing/drifted Java/C owners. Original C source is preserved byte-for-byte as a prefix, with only one additive JNI function.
 

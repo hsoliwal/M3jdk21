@@ -14,7 +14,7 @@ import stat
 import tempfile
 
 TASK = "m3-ast-build-reverse-20261017"
-RECIPE = "com.synexia.m3jdk.AstBuildReverse20261017"
+RECIPE = "jdk.internal.m3.m3jdk.AstBuildReverse20261017"
 
 
 def sha(data):
@@ -101,7 +101,7 @@ def seal(crate, dataset, repository, baseline, roots, baseline_ref=None, recipe_
         crate_name = TASK + "-" + dataset
         for ordinal, (relative, (before, after, mode)) in enumerate(targets.items(), 1):
             kind = "java" if relative.endswith(".java") else "text"
-            lane = resources / ("com/synexia/rewrite/hash-pinned-" + kind) / crate_name
+            lane = resources / ("jdk/internal/m3/rewrite/hash-pinned-" + kind) / crate_name
             lane.mkdir(parents=True, exist_ok=True)
             template = f"{ordinal:04d}-{Path(relative).name}.txt"
             (lane / template).write_bytes(after)
@@ -114,9 +114,9 @@ def seal(crate, dataset, repository, baseline, roots, baseline_ref=None, recipe_
         for kind, records in rows.items():
             if not records:
                 continue
-            lane = resources / ("com/synexia/rewrite/hash-pinned-" + kind) / crate_name
+            lane = resources / ("jdk/internal/m3/rewrite/hash-pinned-" + kind) / crate_name
             (lane / "manifest.tsv").write_text("\n".join(records) + "\n", encoding="utf-8")
-            active.append("  - com.synexia.rewrite.M3HashPinned" + kind.title() + "SnapshotRecipe:\n      crateName: " + crate_name)
+            active.append("  - jdk.internal.m3.rewrite.M3HashPinned" + kind.title() + "SnapshotRecipe:\n      crateName: " + crate_name)
         descriptor = resources / "META-INF/rewrite" / (crate_name + ".yml")
         descriptor.parent.mkdir(parents=True, exist_ok=True)
         descriptor.write_text("type: specs.openrewrite.org/v1beta/recipe\nname: " + RECIPE
@@ -137,7 +137,7 @@ def seal(crate, dataset, repository, baseline, roots, baseline_ref=None, recipe_
                 if not line or line.startswith("#"):
                     continue
                 source, blob, source_hash, license_name, url = line.split("\t")
-                relative = source.removeprefix("synexia-openrewrite-recipes/")
+                relative = source.removeprefix("m3-openrewrite-recipes/")
                 if recipe_owner is not None:
                     owner_bytes = text_bytes(source_path(recipe_owner, relative))
                     current_hash = sha(owner_bytes)

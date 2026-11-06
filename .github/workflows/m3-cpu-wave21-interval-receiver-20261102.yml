@@ -57,8 +57,8 @@ jobs:
                   past=subprocess.run(['git','show',history],check=True,capture_output=True).stdout
                   if hashlib.sha256(past).hexdigest()!=digest or git('rev-parse',history)!=blob:
                       raise RuntimeError('historical Wave21 native preimage drift')
-                  current_digest='8e256da0d370c3ea3a29af132ed5bb8e0b399e88b7d77aa6260d214f0542228f'
-                  current_blob='8e8a36d707bff57ec5a08e2b239e7af49cc3a7e0'
+                  current_digest='d4ca25aa22ec0606705d62c86a6c794ac44936d894a0759a510a7fb104e2f17b'
+                  current_blob='fce8ad708c408b4e7a9c35253a2ad84522d2b509'
               if hashlib.sha256(data).hexdigest()!=current_digest:
                   raise RuntimeError('source SHA256 drift: '+path)
               if git('hash-object','--',path)!=current_blob:
@@ -69,9 +69,9 @@ jobs:
           if len(originals)!=7: raise RuntimeError('partial Wave21 source inventory')
           protected={
               'm3/tooling/module-packs/cpu-tools/build.py':'0415ed2fd2e49b6b26bcafc76e13023e2ba14411',
-              'm3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java':'70641b2178a62b26ed24b33bcd02f2f45d1494bf',
-              'm3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3RunLengthPostingIndex.java':'dc74c67ae6b61822d7f91b2dcccbcee67d61f3f7',
-              'm3/tooling/module-packs/cpu-tools/native/m3_runlength_postings.c':'cc7783f516c4103b8b41c38ca82361273c4ca9c5',
+              'm3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java':'7edba36737dff219cf58c7f9707a03cc6d3a44d7',
+              'm3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3RunLengthPostingIndex.java':'6ba50f06bad97ec0ed8cf548d59f4c20cffd77bd',
+              'm3/tooling/module-packs/cpu-tools/native/m3_runlength_postings.c':'566320e423acb835f38f8f6cbc0ce106657857a2',
           }
           for path,blob in protected.items():
               if git('hash-object','--',path)!=blob:
@@ -106,10 +106,10 @@ jobs:
           OUT="$RUNNER_TEMP/m3cpu-wave21"
           mkdir -p "$OUT/classes" "$OUT/headers" "$OUT/logs"
           javac --release 21 -proc:none -Xlint:all -Werror -h "$OUT/headers" -d "$OUT/classes" \
-            "$R/src/com.m3.tools.cpu/com/m3/tools/cpu/M3RunLengthPostingIndex.java" \
-            "$R/src/com.m3.tools.cpu/com/m3/tools/cpu/M3RunLengthPostingIndexNative.java" \
-            "$R/src/com.m3.tools.cpu/com/m3/tools/cpu/M3IntIntervalSet.java" \
-            "$R/src/com.m3.tools.cpu/com/m3/tools/cpu/M3IntIntervalSetNative.java" \
+            "$R/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3RunLengthPostingIndex.java" \
+            "$R/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3RunLengthPostingIndexNative.java" \
+            "$R/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3IntIntervalSet.java" \
+            "$R/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3IntIntervalSetNative.java" \
             "$R/fixtures/M3RunLengthPostingIndexOracle.java" \
             "$R/fixtures/M3RunLengthPostingIndexNativeOracle.java" \
             "$R/fixtures/M3RunLengthBoundaryOracle.java" \
@@ -118,12 +118,12 @@ jobs:
             "$R/fixtures/M3IntIntervalSetJniOracle.java" \
             2>&1 | tee "$OUT/logs/java21-javac.log"
           javap -classpath "$OUT/classes" -public -s \
-            com.m3.tools.cpu.M3RunLengthPostingIndex \
-            com.m3.tools.cpu.M3RunLengthPostingIndexNative \
-            com.m3.tools.cpu.M3IntIntervalSet \
-            com.m3.tools.cpu.M3IntIntervalSetNative | tee "$OUT/logs/public-api.log"
-          grep -F 'Java_com_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0' "$OUT/headers/"*.h
-          grep -F 'Java_com_m3_tools_cpu_M3IntIntervalSetNative_contains0' "$OUT/headers/"*.h
+            jdk.m3.tools.cpu.M3RunLengthPostingIndex \
+            jdk.m3.tools.cpu.M3RunLengthPostingIndexNative \
+            jdk.m3.tools.cpu.M3IntIntervalSet \
+            jdk.m3.tools.cpu.M3IntIntervalSetNative | tee "$OUT/logs/public-api.log"
+          grep -F 'Java_jdk_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0' "$OUT/headers/"*.h
+          grep -F 'Java_jdk_m3_tools_cpu_M3IntIntervalSetNative_contains0' "$OUT/headers/"*.h
           echo 'M3JDK21_WAVE21_JAVA21_HEADER_COMPILE_PASS'
       - name: Compile original Wave20 and Wave21 C17 JNI libraries and original C oracles
         shell: bash
@@ -139,8 +139,8 @@ jobs:
           done
           nm -D --defined-only "$OUT/libm3runlength.so" | tee "$OUT/logs/runlength-exports.log"
           nm -D --defined-only "$OUT/libm3interval.so" | tee "$OUT/logs/interval-exports.log"
-          grep -F 'Java_com_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0' "$OUT/logs/runlength-exports.log"
-          grep -F 'Java_com_m3_tools_cpu_M3IntIntervalSetNative_contains0' "$OUT/logs/interval-exports.log"
+          grep -F 'Java_jdk_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0' "$OUT/logs/runlength-exports.log"
+          grep -F 'Java_jdk_m3_tools_cpu_M3IntIntervalSetNative_contains0' "$OUT/logs/interval-exports.log"
       - name: Execute original independent C17 kernels and Wave21 UBSan
         shell: bash
         run: |

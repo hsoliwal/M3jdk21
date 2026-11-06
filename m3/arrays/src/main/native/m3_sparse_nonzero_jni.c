@@ -8,7 +8,7 @@
 #define M3_NONZERO_REGION 1024
 
 JNIEXPORT jint JNICALL
-Java_com_m3_arrays_M3SparseLongIntArray_nativeCountNonZero(
+Java_jdk_m3_arrays_M3SparseLongIntArray_nativeCountNonZero(
     JNIEnv *env, jclass owner, jintArray input) {
   (void)owner;
   if (input == NULL) {

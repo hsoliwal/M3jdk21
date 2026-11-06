@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.text;
+package jdk.m3.text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,7 +57,7 @@ public final class SharedLexiconCatalog {
     private final List<SourceMapping>[] mappingRows;
     private final int[] rowOffsets;
     private final SourceMapping[] mappingsByIdentity;
-    private final Map<SourceIdentity, SynexiaPrecomputePayload> payloads = new ConcurrentHashMap<>();
+    private final Map<SourceIdentity, M3PrecomputePayload> payloads = new ConcurrentHashMap<>();
     private final PrecomputeFacts[] precomputeRows;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute;
@@ -343,7 +343,7 @@ public final class SharedLexiconCatalog {
      * The source identity is never replaced with the physical image row.
      * Parsing is cached only after the immutable mapping has passed admission.
      */
-    public Optional<SynexiaPrecomputePayload> findPrecomputePayload(String sourceId, String recordId) {
+    public Optional<M3PrecomputePayload> findPrecomputePayload(String sourceId, String recordId) {
         lifecycle.readLock().lock();
         try {
             ensureOpen();
@@ -354,7 +354,7 @@ public final class SharedLexiconCatalog {
             SourceIdentity identity = new SourceIdentity(sourceId, recordId);
             imageAt(mapping.coordinate().shardId());
             return Optional.of(payloads.computeIfAbsent(identity,
-                    ignored -> SynexiaPrecomputePayload.parse(mapping.precomputePayload())));
+                    ignored -> M3PrecomputePayload.parse(mapping.precomputePayload())));
         } finally { lifecycle.readLock().unlock(); }
     }
 
@@ -394,9 +394,9 @@ public final class SharedLexiconCatalog {
             SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null || !"dictlang.si-units".equals(mapping.sourceId())) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
-            SynexiaPrecomputePayload payload = payloads.computeIfAbsent(
+            M3PrecomputePayload payload = payloads.computeIfAbsent(
                     new SourceIdentity(sourceId, recordId),
-                    ignored -> SynexiaPrecomputePayload.parse(mapping.precomputePayload()));
+                    ignored -> M3PrecomputePayload.parse(mapping.precomputePayload()));
             return Optional.of(new M3LexiconPrecompute.SiUnitPrecompute(
                     payload.requireInt("si_decimal_exponent"),
                     payload.requireLong("si_dimension_packed"),
@@ -407,7 +407,7 @@ public final class SharedLexiconCatalog {
 
     private static List<ShardSlot> readManifest(Path directory) throws IOException {
         if (!Files.isDirectory(directory)) throw new IOException("not a catalog directory");
-        Path manifest = directory.resolve("synexia.shards.tsv");
+        Path manifest = directory.resolve("m3.shards.tsv");
         List<String> lines = Files.readAllLines(manifest, StandardCharsets.UTF_8);
         if (lines.isEmpty() || !lines.get(0).equals(String.join("\t", HEADER)))
             throw new IOException("invalid shard manifest header");
@@ -495,7 +495,7 @@ public final class SharedLexiconCatalog {
 
     private static Map<Coordinate, List<SourceMapping>> readMappings(
             Path directory, List<ShardSlot> shards, boolean verifyImageText) throws IOException {
-        List<String> lines = readSidecar(directory.resolve("synexia.records.tsv"), MAPPING_HEADER);
+        List<String> lines = readSidecar(directory.resolve("m3.records.tsv"), MAPPING_HEADER);
         Map<Coordinate, List<SourceMapping>> result = new HashMap<>();
         java.util.Set<List<String>> identities = new java.util.HashSet<>();
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
@@ -506,7 +506,7 @@ public final class SharedLexiconCatalog {
             Coordinate coordinate = coordinate(fields[6], fields[7], shards, lineNumber);
             String lexeme = decodeSidecarText(fields[5], lineNumber);
             try {
-                SynexiaPrecomputePayload payload = SynexiaPrecomputePayload.parse(fields[12]);
+                M3PrecomputePayload payload = M3PrecomputePayload.parse(fields[12]);
                 if (!payload.canonicalJson().equals(fields[12]))
                     throw malformed(lineNumber, "precompute_payload is not canonical JSON");
             } catch (IllegalArgumentException failure) {
@@ -518,13 +518,13 @@ public final class SharedLexiconCatalog {
                     fields[4], lexeme, coordinate, fields[8], fields[9], fields[10], fields[11], fields[12]);
             result.computeIfAbsent(coordinate, ignored -> new ArrayList<>()).add(mapping);
         }
-        if (lines.size() == 1) throw new IOException("empty synexia.records.tsv");
+        if (lines.size() == 1) throw new IOException("empty m3.records.tsv");
         return result;
     }
 
     private static Map<Coordinate, PrecomputeFacts> readPrecompute(
             Path directory, List<ShardSlot> shards, boolean verifyImageText) throws IOException {
-        List<String> lines = readSidecar(directory.resolve("synexia.precompute.tsv"), PRECOMPUTE_HEADER);
+        List<String> lines = readSidecar(directory.resolve("m3.precompute.tsv"), PRECOMPUTE_HEADER);
         Map<Coordinate, PrecomputeFacts> result = new HashMap<>();
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
             String[] fields = splitSidecar(lines.get(lineNumber), PRECOMPUTE_HEADER.length, lineNumber);
@@ -546,7 +546,7 @@ public final class SharedLexiconCatalog {
                     parseBoolean(fields[8], lineNumber), parseBoolean(fields[9], lineNumber), fields[10]);
             result.put(coordinate, facts);
         }
-        if (lines.size() == 1) throw new IOException("empty synexia.precompute.tsv");
+        if (lines.size() == 1) throw new IOException("empty m3.precompute.tsv");
         return result;
     }
 
@@ -580,7 +580,7 @@ public final class SharedLexiconCatalog {
 
     private static List<PrecomputeProfile> readPrecomputeProfiles(
             Path directory, Map<Coordinate, List<SourceMapping>> mappings) throws IOException {
-        List<String> lines = readSidecar(directory.resolve("synexia.precompute-index.tsv"), PROFILE_HEADER);
+        List<String> lines = readSidecar(directory.resolve("m3.precompute-index.tsv"), PROFILE_HEADER);
         Map<String, Integer> sourceCounts = new HashMap<>();
         Map<String, java.util.Set<Coordinate>> imageCoordinates = new HashMap<>();
         for (List<SourceMapping> values : mappings.values()) {
@@ -784,7 +784,7 @@ public final class SharedLexiconCatalog {
     }
 
     private static IOException malformed(int lineNumber, String detail) {
-        return new IOException("invalid synexia.shards.tsv line " + (lineNumber + 1) + ": " + detail);
+        return new IOException("invalid m3.shards.tsv line " + (lineNumber + 1) + ": " + detail);
     }
     /** Precomputes offsets within the fully admitted finite coordinate domain. */
     private static int[] rowOffsets(List<ShardSlot> shards) {

@@ -2,7 +2,7 @@
  * Copyright (c) 2026.
  * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
  *
- * Experimental M3JDK21 object sizing: direct JVMTI, no graph traversal.
+ * Experimental M3JDK 21 object sizing: direct JVMTI, no graph traversal.
  */
 #include <jni.h>
 #include <jvmti.h>

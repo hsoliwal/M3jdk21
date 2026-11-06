@@ -12,7 +12,7 @@ crate stacked on #15428, #15415 and #15400.
 * Original full `M3StaticGrammarLexicon.java` SHA-256
   `2618970818dcff0fcacf9fc96134e9a718b05d6e64b6d5ca699f9a5ef282d287`.
 * Root-optimized full source SHA-256
-  `9dd313fac5b35f4357646195607d3e35f584d9728a70848d3440d95a73847ffe`.
+  `23c9aedeed6fc3383007cdde6fd15bb1d2a3016800021f67f361cefffee19160`.
 * Existing public signatures, grammar digest, lexeme IDs, source UTF-16 offsets,
   source ownership, and native JNI C17 body remain unchanged.
 * Reuse `M3StaticGrammarLexicon`, `M3GrammarTokenProjection`,

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.M3AstTools;
+import jdk.m3.tools.cpu.M3AstTools;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.M3AST;
 import java.io.IOException;

@@ -25,17 +25,17 @@
     {
       "repository": "hsoliwal/M3jdk21",
       "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
-      "path": "m3/file/src/main/java/com/m3/file/M3ReactorImpactPlan.java",
+      "path": "m3/file/src/main/java/jdk/m3/file/M3ReactorImpactPlan.java",
       "before_sha256": "5c13122fc0cfd75a29592d0fbae3be668fef8e92e5aede23986c724701660259",
-      "after_sha256": "1e5c748238e0364bbd849e7a94c06107b63e146a67883228abf1e9565be8761f",
+      "after_sha256": "1faab30377ea7aeaf65851dbc2b04857b372e87f3021f18dd5e0808c68010e19",
       "before_git_blob": "e955addc632b56283c28e1536b7a1d7e3843a382",
-      "after_git_blob": "33fabea82abf4e69bbd6ba0fa3381685da9d27f5",
+      "after_git_blob": "83a9403f97756035c70f8fd1386f24e02414619c",
       "source_kind": "JAVA"
     },
     {
       "repository": "hsoliwal/M3jdk21",
       "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
-      "path": "m3/file/src/test/java/com/m3/file/M3ReactorImpactPlanContract.java",
+      "path": "m3/file/src/test/java/jdk/m3/file/M3ReactorImpactPlanContract.java",
       "before_sha256": "3fc87dcd2986d737ecb0ea9918723a2f6da2e340bd5b882073afd66ac06c168a",
       "after_sha256": "88db665995bbf0c2433951fe99ef1eae0b8ede97d1a7cf8674c150b8fad577a6",
       "before_git_blob": "dc82562fb09fa5802a43b826061724c9c99da042",
@@ -45,21 +45,21 @@
     {
       "repository": "hsoliwal/M3jdk21",
       "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
-      "path": "m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3StringCursor.java",
+      "path": "m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3StringCursor.java",
       "before_sha256": "3bb8c1b0c1e7d22af75c266cf3315ef7a49b9158400659874cce6ae98560d9ab",
-      "after_sha256": "b82292aee399f4aabfb36ec8060c0f33eb7e5b1124753389aea936087b3dad14",
+      "after_sha256": "4d06816d0ce301b2300b12206c6f23c6187955cc46f2e3d4c2ce516f01185855",
       "before_git_blob": "62a9769e313a0ee55aa8562b991b657ebd172721",
-      "after_git_blob": "832f1afb99f32ee0606a040811edc7b3c7dd9e43",
+      "after_git_blob": "7476ccc69a78b54e2db4da4a6c9dec6107c05ddb",
       "source_kind": "JAVA"
     },
     {
       "repository": "hsoliwal/M3jdk21",
       "baseline_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
-      "path": "m3/ports/regex-cursor/src/test/java/com/m3/regexcursor/M3ChunkCursorTest.java",
+      "path": "m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3ChunkCursorTest.java",
       "before_sha256": "8b9fbb85d6579d7f5c940cbc27142aa350ac68a84d82fe7e9907c08bb1202f2d",
-      "after_sha256": "8152cfa64b152dd0e44ba49f450cbcf2b2c837ead8a85d34d196716d732c0b03",
+      "after_sha256": "a08849e85d96e65306f62123bf91da8dab1fa6177253b9ced07d99d851b4c273",
       "before_git_blob": "9031cbf56cd7def481c78bb2d7d229bc277f9f57",
-      "after_git_blob": "10f8bd4dc928588e5e00d81244c6bd7212cd8404",
+      "after_git_blob": "9e528a1f621478806579c9a67c808a47bd553a6f",
       "source_kind": "JAVA"
     },
     {
@@ -187,7 +187,7 @@
   "repository_completion": false,
   "naming_disposition": {
     "canonical_map": "m3/docs/name-mapping.json",
-    "canonical_map_sha256": "c937e56be44666554c2c2ccfac2eba8922cdf2a1c459ab4553d553c73304bca8",
+    "canonical_map_sha256": "0ed05297657e7077adfa1666845dd34dd3eda459bac05c1fb6546b7b21fcaf75",
     "status": "EXCLUDED_FROM_NEW_BACKEND_ADMISSION; DEFERRED_FAMILY_PROMOTION",
     "reason": "Maintenance of four existing production Java owners; no public renaming or new backend. No exact owner entry in existing72-record map. Canonical mapping/checker remains authoritative.",
     "inherited_gate": "public JDK target path requires explicit owner/module review; exit2"

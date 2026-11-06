@@ -17,16 +17,16 @@ MAP = Path('m3/docs/name-mapping.json')
 PLAN = Path('m3/tooling/name-contract/name-plan.json')
 LEGACY = {
     'm3jdk21.legacy-export.M3ArrayList': (
-        'com.m3.collections.M3ArrayList',
-        'm3/collections/src/main/java/com/m3/collections/M3ArrayList.java',
+        'jdk.m3.collections.M3ArrayList',
+        'm3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java',
         'm3/collections/src/main/java/module-info.java',
-        'com.m3.collections',
+        'jdk.m3.collections',
     ),
     'm3jdk21.legacy-export.M3File': (
-        'com.m3.file.M3File',
-        'm3/file/src/main/java/com/m3/file/M3File.java',
+        'jdk.m3.file.M3File',
+        'm3/file/src/main/java/jdk/m3/file/M3File.java',
         'm3/file/src/main/java/module-info.java',
-        'com.m3.file',
+        'jdk.m3.file',
     ),
 }
 

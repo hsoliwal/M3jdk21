@@ -3,9 +3,9 @@ name: M3JDK21 exact typed progressive signal evidence Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalColumns.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalEvidenceBridge.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SignalEvidenceBridge*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalEvidenceBridge.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalEvidenceBridge*.java'
       - 'm3/collections/qualification/typed-signal-evidence-bridge-20261022/**'
       - '.github/workflows/m3-typed-signal-evidence-bridge-20261022.yml'
   workflow_dispatch:
@@ -41,16 +41,16 @@ jobs:
           out="$RUNNER_TEMP/m3-evidence-bridge"
           mkdir -p "$out/classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/com/m3/collections/M3ProgressiveSignalEvidence.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
-            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalEvidenceBridge.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalEvidenceBridgeSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3ProgressiveSignalEvidenceContract.java
-          java -cp "$out/classes" com.m3.collections.M3SignalEvidenceBridgeSelfTest
-          java -cp "$out/classes" com.m3.collections.M3ProgressiveSignalEvidenceContract
-          java -Xint -cp "$out/classes" com.m3.collections.M3SignalEvidenceBridgeSelfTest
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ProgressiveSignalEvidence.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalEvidenceBridge.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalEvidenceBridgeSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3ProgressiveSignalEvidenceContract.java
+          java -cp "$out/classes" jdk.m3.collections.M3SignalEvidenceBridgeSelfTest
+          java -cp "$out/classes" jdk.m3.collections.M3ProgressiveSignalEvidenceContract
+          java -Xint -cp "$out/classes" jdk.m3.collections.M3SignalEvidenceBridgeSelfTest
 
   original-custom-junit-reactor:
     runs-on: ubuntu-24.04

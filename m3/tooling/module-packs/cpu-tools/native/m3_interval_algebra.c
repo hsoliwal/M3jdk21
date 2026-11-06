@@ -25,7 +25,7 @@ static jsize m3_intersect_half_open(const jint *a, jsize na, const jint *b, jsiz
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_tools_cpu_M3IntIntervalAlgebraNative_intersect0(
+Java_jdk_m3_tools_cpu_M3IntIntervalAlgebraNative_intersect0(
         JNIEnv *env, jclass owner, jintArray left, jintArray right) {
     (void)owner;
     if (left == NULL || right == NULL) return NULL;

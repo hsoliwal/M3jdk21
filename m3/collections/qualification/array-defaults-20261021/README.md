@@ -34,7 +34,7 @@ engine. The runtime admission order in the root policies is unchanged.
 
 | Path relative to `m3/collections` | Observed strategy | SHA-256 before |
 | --- | --- | --- |
-| `src/main/java/com/m3/collections/M3LongLongTreeMap.java` | sorted parallel primitive arrays; forward sorted-batch merge with four temporary/replacement arrays | `2673330335f4ea415b49a295d9cde4988c27280b990ab33984a195ca032d5791` |
+| `src/main/java/com/m3/collections/M3LongLongTreeMap.java` | sorted parallel primitive arrays; forward sorted-batch merge with four temporary/replacement arrays | `3110636cbfb2a687016cb384a2b9529bee3bf85a330f9efeaa8d536068063063` |
 | `JDK_FAMILY_MAP.tsv` | family/contract dispositions; TreeSet row still describes an unselected tree despite the existing paged-array owner | `88ed35987b8956046ac8644ee8200d2aadea7ad9dd7a3175989f1e2043b9b83b` |
 
 Other inventoried owners: `M3TreeMap` uses indexed AVL metadata; `M3LongTreeSet`

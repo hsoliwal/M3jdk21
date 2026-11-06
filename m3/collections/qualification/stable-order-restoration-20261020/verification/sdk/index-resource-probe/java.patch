@@ -1,8 +1,8 @@
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java b/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java b/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java
 new file mode 100644
 index 0000000..dd9a0e9
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java
 @@ -0,0 +1,158 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project

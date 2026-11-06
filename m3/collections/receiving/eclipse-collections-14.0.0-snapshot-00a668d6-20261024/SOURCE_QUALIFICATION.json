@@ -30,7 +30,7 @@
   "bindings": {
     "file": "FULL_SOURCE_BINDINGS.tsv",
     "rows": 3480,
-    "pairing": "Relocation fold key: path segments org/eclipse/collections and com/m3/collections/eclipse are equal",
+    "pairing": "Relocation fold key: path segments org/eclipse/collections and jdk/m3/collections/eclipse are equal",
     "relocated": 2805,
     "editedInPlace": 391,
     "unchanged": 164,
@@ -80,17 +80,17 @@
     "runner": "JUnit Platform console standalone 1.11.4 from ~/.m2, offline, JDK 21, -Xmx2g; classes compiled from the received directory with --release 21",
     "named": {
       "classes": [
-        "com.m3.collections.eclipse.impl.map.sorted.mutable.ComparatorPutAllCallbackOrderTest",
-        "com.m3.collections.eclipse.impl.map.sorted.mutable.IndexedSortedMapLifecycleTest",
-        "com.m3.collections.eclipse.impl.map.sorted.mutable.IndexedSortedMapViewProtocolTest",
-        "com.m3.collections.eclipse.impl.list.mutable.M3FastListArraySpanTest"
+        "jdk.m3.collections.eclipse.impl.map.sorted.mutable.ComparatorPutAllCallbackOrderTest",
+        "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedSortedMapLifecycleTest",
+        "jdk.m3.collections.eclipse.impl.map.sorted.mutable.IndexedSortedMapViewProtocolTest",
+        "jdk.m3.collections.eclipse.impl.list.mutable.M3FastListArraySpanTest"
       ],
       "harness": "M3FastListArraySpanProof runs inside M3FastListArraySpanTest (71,676 original-source contract observations asserted)",
       "result": "PASS: 10 run, 10 passed, 0 failed, 0 skipped",
       "reportSHA256": "a7593496af1c5cdd68dfd29726f3c436cee6b8104c2af56a8e76a7475f6b104f"
     },
     "unifiedMapSuite": {
-      "class": "com.m3.collections.eclipse.impl.map.mutable.UnifiedMapTest",
+      "class": "jdk.m3.collections.eclipse.impl.map.mutable.UnifiedMapTest",
       "filtered": false,
       "result": "PASS: 287 run, 287 passed, 0 failed, 0 skipped",
       "pr1302Baseline": "286 run, 285 passed, 1 failed (unifiedMapProperSuperSetOfHashMap, newHashMap(int):HashMap) on the 11.1 tree",
@@ -98,8 +98,8 @@
       "reportSHA256": "a070d59ac0b261f02b02eb36b95c9ceddd2515e1b54f1454143c14dc8b4b6f6a"
     },
     "factorySmoke": {
-      "scope": "Lists, Sets, Maps, Bags and Stacks, mutable and immutable, through com.m3.collections.eclipse.api.factory",
-      "result": "PASS: 10 of 10 factories resolve to com.m3.collections.eclipse.impl classes (no throwing proxy) and build collections of the expected size and content",
+      "scope": "Lists, Sets, Maps, Bags and Stacks, mutable and immutable, through jdk.m3.collections.eclipse.api.factory",
+      "result": "PASS: 10 of 10 factories resolve to jdk.m3.collections.eclipse.impl classes (no throwing proxy) and build collections of the expected size and content",
       "resolution": "No META-INF/services files in the tree; ServiceLoaderUtils reflection fallback",
       "receiptSHA256": "16291ff11bafc19fd357686ccca5bd78b3960471c5f4027693f50b0f20ed7797"
     },

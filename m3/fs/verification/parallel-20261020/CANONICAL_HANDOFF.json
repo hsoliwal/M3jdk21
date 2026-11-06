@@ -6,7 +6,7 @@
   "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12667",
   "canonical_parent": "1537fbdd028b30b65c8fd654ba8143cad5503902",
   "canonical_preparation_parent": "7b849eaae565d5afccc98e0c8d46d0f02ebd9ca4",
-  "canonical_recipe": "synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020",
+  "canonical_recipe": "m3-openrewrite-recipes/recipe-crates/m3-one-pass-20261020",
   "target_parent": "2779aba3f98f31c324be43f731be7914e1a05935",
   "target_preparation_parent": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
   "historical_handoff_sha256": "065bd918c1e251810d122222bfe893b653fa17e4e0c7ec1f2f2337c0636118b6",

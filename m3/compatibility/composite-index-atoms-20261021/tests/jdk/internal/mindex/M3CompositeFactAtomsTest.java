@@ -7,7 +7,7 @@ package jdk.internal.mindex;
 import java.util.Arrays;
 import java.util.Random;
 
-/** Finite owner-level oracle; does not substitute for a source-built M3JDK21 image. */
+/** Finite owner-level oracle; does not substitute for a source-built M3JDK 21 image. */
 public final class M3CompositeFactAtomsTest {
     private static long checks;
     private M3CompositeFactAtomsTest() { }

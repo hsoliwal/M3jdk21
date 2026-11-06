@@ -92,7 +92,7 @@ def main():
   if 'size' in e:assert a['bytes']==e['size'],(path,'size')
   return {'path':path,'commit':source,'local_path':str(local),**a,'mode':e['mode'],'final_tree_path_chain':trail}
  context_path=B/'current-context/CONTEXT_REFERENCES.json'
- assert identity(context_path)['sha256']=='fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed'
+ assert identity(context_path)['sha256']=='ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5'
  context=data(context_path);assert context['source_input_commit']==INPUT and context['source_input_root']==INPUT_ROOT
  output_root=Path(spec['source_output_root']);assert output_root.is_dir()
  sources=[];changes=[]

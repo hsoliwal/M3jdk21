@@ -38,13 +38,13 @@ static jlong scan(JNIEnv *env, jintArray rows, jbyteArray states, jint first, ji
     (*env)->ReleaseIntArrayElements(env, rows, rowData, JNI_ABORT);
     return ((jlong) next << 32) | ((jlong) (uint32_t)copied);
 }
-JNIEXPORT jlong JNICALL Java_com_m3_collections_M3IndexMaskWindow_scanNative(JNIEnv *env, jclass cls,
+JNIEXPORT jlong JNICALL Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(JNIEnv *env, jclass cls,
         jintArray rows, jbyteArray states, jint first, jint required, jint excluded,
         jintArray output, jint offset, jint limit) {
     (void) cls;
     return scan(env, rows, states, first, (*env)->GetArrayLength(env, rows), required, excluded, output, offset, limit);
 }
-JNIEXPORT jlong JNICALL Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(JNIEnv *env, jclass cls,
+JNIEXPORT jlong JNICALL Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(JNIEnv *env, jclass cls,
         jintArray rows, jbyteArray states, jint first, jint end, jint required, jint excluded,
         jintArray output, jint offset, jint limit) {
     (void) cls;

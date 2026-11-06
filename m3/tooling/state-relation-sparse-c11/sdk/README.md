@@ -8,7 +8,7 @@ Canonical recipe owner: hsoliwal/com.synexia. Pre-code admission
 rejection linked from ../adaptive/RECIPE_MEMORY.json before revising this recipe.
 This SDK is authored source awaiting new Maven/native/timing qualification.
 
-The original default-CTZ proposal abb751e6056e34f25d0f09660d575f362610359e passed its three
+The original default-CTZ proposal 03a2273ec4a8521c78bfb746aed71a873d65182e passed its three
 JUnit methods,16 successful/32 refused applications and all three original C/JNI
 proof variants at run39382619623/job118494964789. Its96-case/1440-sample native
 benchmark included dense/zero/small regressions; default promotion was rejected.
@@ -24,7 +24,7 @@ CHANGE and four KEEP owners. The inverse restores the complete original baseline
 
 Candidate C is generated from original610ca8bab47065a49b9b58814d6392a287f4fd8b,
 5899 bytes; successor106b95061f1adaca160e8fece2ad083f07f0b51b, 6697 bytes, SHA256
-4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9. All rows validate before the optimized-only
+9cf05ae88cdde947d5c62001e2025a64a094531bbd727f51deb2e62b57636c60. All rows validate before the optimized-only
 ceiling==0 shortcut writes the known zero output. Otherwise the optimized lane
 uses guarded nonzero CTZ only for states>2 and active!=mask; small/full frontiers
 use the literal original positional loop. Forced-positional and unsupported

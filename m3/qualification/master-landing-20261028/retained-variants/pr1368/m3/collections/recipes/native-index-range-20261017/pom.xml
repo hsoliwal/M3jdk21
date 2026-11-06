@@ -22,8 +22,8 @@
     <!-- Select actual product bytes without exposing the product module descriptor to this recipe compiler. -->
     <outputDirectory>${project.build.directory}/generated-sources/m3-index-product</outputDirectory><overwrite>true</overwrite>
     <resources><resource><directory>${m3.repo.root}/m3/collections/src/main/java</directory><filtering>false</filtering><includes>
-     <include>com/m3/collections/M3IndexMaskCompactor.java</include><include>com/m3/collections/M3LongIndexProjection.java</include>
-     <include>com/m3/collections/M3LongAddressKernel.java</include><include>com/m3/collections/M3IndexPathMasks.java</include>
+     <include>jdk/m3/collections/M3IndexMaskCompactor.java</include><include>jdk/m3/collections/M3LongIndexProjection.java</include>
+     <include>jdk/m3/collections/M3LongAddressKernel.java</include><include>jdk/m3/collections/M3IndexPathMasks.java</include>
     </includes></resource></resources>
    </configuration></execution>
   </executions></plugin>
@@ -33,7 +33,7 @@
   </executions></plugin>
   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration>
    <release>21</release><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
-   <includes><include>com/synexia/rewrite/*.java</include><include>com/m3/collections/M3IndexMaskCompactor.java</include><include>com/m3/collections/M3LongIndexProjection.java</include></includes>
+   <includes><include>jdk/internal/m3/rewrite/*.java</include><include>jdk/m3/collections/M3IndexMaskCompactor.java</include><include>jdk/m3/collections/M3LongIndexProjection.java</include></includes>
    <testIncludes><testInclude>**/NativeIndexRangeSdkTest.java</testInclude><testInclude>**/M3NativeIndexRangeSelfTest.java</testInclude><testInclude>**/M3NativeIndexRangeTest.java</testInclude></testIncludes>
   </configuration></plugin>
   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration>

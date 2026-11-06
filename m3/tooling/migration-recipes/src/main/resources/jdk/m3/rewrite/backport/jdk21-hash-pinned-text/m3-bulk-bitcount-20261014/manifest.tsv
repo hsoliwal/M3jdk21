@@ -1,0 +1,5 @@
+.github/workflows/m3-parallel-bitcount.yml	ABSENT	37a355f124d688304a9e46f6b3787f6a3548d289d4afb111cdb709807355736b	workflow.yml.txt
+m3/ports/parallel-bulk/verification/BITCOUNT.md	ABSENT	eeffc90da93010c3ca3d8dc146e1067225a2b6082676772f45e772d4f999d55e	README.md.txt
+m3/ports/parallel-bulk/verification/bitcount-source-lock.json	ABSENT	6f3803a56c9fd419f3568da26243e26a6b3eec5960ffcd0957d7b64dea6f7063	source-lock.json.txt
+m3/ports/parallel-bulk/verification/verify-bitcount.sh	ABSENT	0c023cd8bd80a753f378454559ed95786c4063569af2c255f7a1c2249bf86937	verify-bitcount.sh.txt
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-parallel-bitcount.yml	ABSENT	f65ab848e282b79b4e1f55a1719a1aaa141db0a74c48ab165d44ef4809d791c8	receiver.yml.txt

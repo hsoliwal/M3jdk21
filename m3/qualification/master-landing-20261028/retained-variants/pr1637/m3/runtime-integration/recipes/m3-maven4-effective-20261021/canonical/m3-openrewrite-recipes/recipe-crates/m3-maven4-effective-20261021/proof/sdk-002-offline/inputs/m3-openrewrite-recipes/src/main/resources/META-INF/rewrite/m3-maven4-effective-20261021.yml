@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.Maven4Effective20261021
+displayName: M3 Maven4 effective model projection 20261021
+description: Apply independently qualified hash-pinned file phases.
+recipeList:
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-maven4-effective-20261021-001
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-maven4-effective-20261021-003
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-maven4-effective-20261021-004
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-maven4-effective-20261021-005
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-maven4-effective-20261021-006
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-maven4-effective-20261021-007
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-maven4-effective-20261021-008

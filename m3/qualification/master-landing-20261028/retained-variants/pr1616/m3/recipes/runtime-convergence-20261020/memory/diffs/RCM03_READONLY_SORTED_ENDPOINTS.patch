@@ -1,5 +1,5 @@
---- before/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
-+++ after/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+--- before/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
++++ after/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
 @@ -1,3 +1,4 @@
 +// Modified 2026 by Hitesh Soliwal and contributors: restore strict sequenced refusal and original backed reversal.
  // Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
@@ -28,8 +28,8 @@
          @Override public NavigableSet<E> descendingSet() {
              return new NavigableSetView<>(nav.descendingSet(), predicate);
          }
---- before/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
-+++ after/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
+--- before/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java
++++ after/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java
 @@ -1,3 +1,4 @@
 +// Modified 2026 by Hitesh Soliwal and contributors: restore strict sequenced refusal and original backed reversal.
  // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.

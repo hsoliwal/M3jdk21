@@ -17,8 +17,8 @@
     {
       "path": "STATIC_CHECKS.json",
       "bytes": 3888,
-      "sha256": "679c58b0f1861971864f8a0cc77ea363a62af7b74d8ecb8f7147711822128610",
-      "git_blob_sha1": "65309855b10d4cea551ca7048266a1c54f353736"
+      "sha256": "e99022dfb057f497a638ef8adc1e1e9df329b5c3b28c4db8618349b460447769",
+      "git_blob_sha1": "bc81ce4f7fec0f6ee6675fa072065ed0f6597c2d"
     },
     {
       "path": "author_e04.py.diff",

@@ -24,7 +24,7 @@
   "packaging_correction": "epoch-zero archive resource discovery failed; fixed positive mtimes, zero source byte changes; complete replay passed",
   "base_drift": {
     "observed_master": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
-    "projection_blob": "ea7a32700cb16f7a20a5ca47a96d9eb484561eb3",
+    "projection_blob": "949753e6627a9f17e7a1242aa2e622704a101ab8",
     "disposition": "RECONCILIATION_REQUIRED; newer owner not overwritten or qualified"
   },
   "metadata_scope": "this derived receipt and allocation-only projection do not alter the sealed recipe/runtime inputs",

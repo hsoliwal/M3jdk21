@@ -8,10 +8,10 @@
   "private_revision": "81c4f19a5ce5a68da316ff6f2802f2041a684f31",
   "public_comparison_revision": "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e",
   "private_module_trees": {
-    "synexia-mindex": "ceb86a754da06751fd839889436a83aa50ec650c",
-    "synexia-indexstring": "d187d2dee2b3effac319b26120c717dd34e3121b",
-    "synexia-index-precompute": "266ea82fdd4610cb29c7e402c35fca570f77e2cf",
-    "synexia-indexstring-compiler": "f16e32f3605850186005d99d7c05b5b1c1062d1b"
+    "m3-mindex": "ceb86a754da06751fd839889436a83aa50ec650c",
+    "m3-indexstring": "d187d2dee2b3effac319b26120c717dd34e3121b",
+    "m3-index-precompute": "266ea82fdd4610cb29c7e402c35fca570f77e2cf",
+    "m3-indexstring-compiler": "f16e32f3605850186005d99d7c05b5b1c1062d1b"
   },
   "selected_documents": [
     "PROGRAM_PRECOMPUTE_EVALUATION.md",

@@ -16,8 +16,8 @@
     "new_blob": "6bbdbdec9f1930b8282ac3d2d7693b99e036f465"
   },
   "companion": {
-    "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
-    "blob": "ffece349f5ef3f1c48191fb54a8b037f8e635d63"
+    "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
+    "blob": "4145c7d2ec231f27cf05eea351521550800a8e0d"
   },
   "jdk_patch_blob": "90b87926492054fc4ac5107e6f52cb6b93cc9e38",
   "qualification": "Original and current source hash provenance only; installed JDK/jtreg/JCK/GC/CDS not admitted."

@@ -26,8 +26,8 @@ PUBLIC = re.compile(r"\bpublic\s+(?:(?:abstract|final|sealed|non-sealed)\s+)*"
                     r"(?:class|interface|enum|record)\s+([A-Za-z_$][\w$]*)\b")
 JDK_SOURCE = re.compile(r"^src/[^/]+/(?:share|unix|linux|windows|macosx|bsd)/classes/(java|javax)/")
 RECIPE_ROOTS = (
-    "synexia-openrewrite-recipes/",
-    "synexia-m3-recipe/",
+    "m3-openrewrite-recipes/",
+    "m3-recipe/",
     "m3/tooling/migration-recipes/",
 )
 RECIPE_DESCRIPTOR = re.compile(r"(?:^|/)META-INF/rewrite/[^/]+\.ya?ml$")
@@ -41,7 +41,7 @@ PROVENANCE_JSON = re.compile(
 PROVENANCE_TSV = re.compile(
     r"^m3/qualification/[a-z][a-z0-9-]*/SOURCE_RECEIPT\.tsv$")
 BORROW_TSV = re.compile(
-    r"^m3/synexia-import/current-full-borrow/string-(source-observation|target-successor)-v([1-9][0-9]*)\.tsv$")
+    r"^m3/m3-import/current-full-borrow/string-(source-observation|target-successor)-v([1-9][0-9]*)\.tsv$")
 
 
 def passive_receipt_path(path: str) -> bool:

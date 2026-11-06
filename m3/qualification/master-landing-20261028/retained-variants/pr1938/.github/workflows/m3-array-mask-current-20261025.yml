@@ -4,8 +4,8 @@ name: M3JDK21 current-head array mask contract gate
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ArrayList.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java'
       - 'm3/arrays/pom.xml'
       - 'm3/collections/qualification/array-mask-current-20261025/**'
       - '.github/workflows/m3-array-mask-current-20261025.yml'
@@ -35,8 +35,8 @@ jobs:
       - name: Differential against JDK ArrayList including 128-129 boundary
         run: |
           java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
-            com.m3.collections.M3ArrayListShortWordMaskContract
+            jdk.m3.collections.M3ArrayListShortWordMaskContract
       - name: Existing exception, serialization and iterator oracle
         run: |
           java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
-            com.m3.collections.M3ArrayListRemoveIfProof
+            jdk.m3.collections.M3ArrayListRemoveIfProof

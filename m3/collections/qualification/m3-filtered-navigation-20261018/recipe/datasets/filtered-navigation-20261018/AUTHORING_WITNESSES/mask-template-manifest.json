@@ -1,7 +1,7 @@
 {
   "baseline_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "baseline_git_blob": "ef0fac5c1e71f8493baab365c8af64bb22cb6171",
-  "baseline_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+  "baseline_git_blob": "be8838c2ad26aac24453e05a317d63016bca100b",
+  "baseline_sha256": "d0515af261429f4f2c959c87a4c0588093612746c4f95e4927570880778ca8ef",
   "files": {
     "M3IndexPathMasks.java.txt": {
       "sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",

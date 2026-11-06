@@ -24,7 +24,7 @@
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
-[ERROR] /workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java:[56,9] 'var' is not allowed in a compound declaration
+[ERROR] /workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java:[56,9] 'var' is not allowed in a compound declaration
 [INFO] 1 error
 [INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
@@ -34,7 +34,7 @@
 [INFO] Finished at: 2026-10-20T15:08:02+01:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project m3-collections-interop: Compilation failure
-[ERROR] /workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java:[56,9] 'var' is not allowed in a compound declaration
+[ERROR] /workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java:[56,9] 'var' is not allowed in a compound declaration
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.

@@ -3,10 +3,10 @@ name: M3JDK21 DOOP java.base collections JNI convergence
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/**'
+      - 'm3/collections/src/main/java/jdk/m3/collections/**'
       - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongPredicates.java'
-      - 'm3/collections/src/test/java/com/m3/collections/**'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongPredicates.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/**'
       - 'm3/collections/qualification/filtered-sorted-set-slots-20261019/**'
       - 'src/java.base/share/classes/java/util/EnumMap.java'
       - 'src/java.base/share/classes/java/util/IdentityHashMap.java'
@@ -47,17 +47,17 @@ jobs:
           javac --release 21 -Xlint:all,-serial,-module -Werror \
             -d target/doop-convergence/classes \
             -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
-            m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredSortedSetSlotSelfTest.java
+            m3/collections/src/test/java/jdk/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3MutableFilteredSlotSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3LongDeepFilterSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredSortedSetSlotSelfTest.java
       - name: Direct-slot / offset / mask contract oracles (Java)
         shell: bash
         run: |
           set -euo pipefail
           for klass in M3ReadonlyFilteredSlotSelfTest M3MutableFilteredSlotSelfTest M3IndexedFilterSortFusionSelfTest M3LongDeepFilterSelfTest M3FilteredSortedSetSlotSelfTest; do
-            java -ea -cp target/doop-convergence/classes com.m3.collections.$klass
+            java -ea -cp target/doop-convergence/classes jdk.m3.collections.$klass
           done
       - name: Build existing M3JNI primitive-mask implementation with strict C17
         shell: bash
@@ -75,7 +75,7 @@ jobs:
           java -ea -Xcheck:jni \
             -Djava.library.path="$PWD/target/doop-convergence/native" \
             -cp target/doop-convergence/classes \
-            com.m3.collections.M3IndexedFilterSortFusionSelfTest --native
+            jdk.m3.collections.M3IndexedFilterSortFusionSelfTest --native
   actual-javabase:
     runs-on: ubuntu-latest
     timeout-minutes: 30

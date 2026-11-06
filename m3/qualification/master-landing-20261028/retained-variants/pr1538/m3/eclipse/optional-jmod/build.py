@@ -23,12 +23,12 @@ ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 DATE = "2026-10-18T00:00:00Z"
 MODULES = (
-    ("com.m3.text", ROOT / "m3/core/src", None),
-    ("com.m3.arrays", ROOT / "m3/arrays/src/main/java", None),
-    ("com.m3.ast", ROOT / "m3/ast/src/main/java", HERE / "module-overlays/com.m3.ast/src/main/java/module-info.java"),
-    ("com.m3.collections", ROOT / "m3/collections/src/main/java", None),
-    ("com.m3.file", ROOT / "m3/file/src/main/java", None),
-    ("com.m3.eclipse.core", HERE / "src/main/java", None),
+    ("jdk.m3.text", ROOT / "m3/core/src", None),
+    ("jdk.m3.arrays", ROOT / "m3/arrays/src/main/java", None),
+    ("jdk.m3.ast", ROOT / "m3/ast/src/main/java", HERE / "module-overlays/jdk.m3.ast/src/main/java/module-info.java"),
+    ("jdk.m3.collections", ROOT / "m3/collections/src/main/java", None),
+    ("jdk.m3.file", ROOT / "m3/file/src/main/java", None),
+    ("jdk.m3.eclipse.core", HERE / "src/main/java", None),
 )
 
 
@@ -81,7 +81,7 @@ def native_collections(jdk: Path, out: Path) -> Path:
     for stem, owner in (("m3_index_mask_compactor", "M3IndexMaskCompactor"),
                         ("m3_index_mask_window", "M3IndexMaskWindow")):
         obj = destination / (stem + ".o")
-        run(*common, "-include", out / "headers" / ("com_m3_collections_" + owner + ".h"),
+        run(*common, "-include", out / "headers" / ("jdk_m3_collections_" + owner + ".h"),
             "-c", source / (stem + ".c"), "-o", obj)
         objects.append(obj)
     library = destination / "libm3_collections_mask.so"
@@ -121,13 +121,13 @@ def main() -> None:
         legal = out / "legal" / name
         legal.mkdir(parents=True)
         license_file = ROOT / "m3/LICENSE"
-        notice_file = ROOT / ("m3/collections/NOTICE" if name == "com.m3.collections" else "m3/NOTICE")
+        notice_file = ROOT / ("m3/collections/NOTICE" if name == "jdk.m3.collections" else "m3/NOTICE")
         for source_file in (license_file, notice_file):
             if not source_file.is_file():
                 raise RuntimeError(f"missing canonical legal notice: {source_file}")
             shutil.copyfile(source_file, legal / source_file.name)
         options = []
-        if name == "com.m3.collections" and args.native_collections:
+        if name == "jdk.m3.collections" and args.native_collections:
             options = ["--libs", native_collections(jdk, out)]
         run(jmod, "create", "--date", DATE, "--class-path", folder,
             "--legal-notices", legal, *options, out_jmod)
@@ -150,25 +150,25 @@ def main() -> None:
                                    sha(out_jmod), str(out_jmod.stat().st_size), "JMOD_REPLAY_IDENTICAL")))
 
     if args.command == "verify":
-        test_sources = [HERE / "src/test/java/com/m3/eclipse/smoke" / name for name in
+        test_sources = [HERE / "src/test/java/jdk/m3/eclipse/smoke" / name for name in
                         ("M3EclipseCoreSelfTest.java", "M3ModuleImageSelfTest.java")]
         tests = out / "test-classes"
         tests.mkdir()
         run(javac, "--release", "21", "-encoding", "UTF-8", "-Xlint:all,-module", "-Werror",
-            "--module-path", out / "classes", "--add-modules", "com.m3.eclipse.core",
+            "--module-path", out / "classes", "--add-modules", "jdk.m3.eclipse.core",
             "-d", tests, *test_sources)
-        run(java, "--module-path", out / "classes", "--add-modules", "com.m3.eclipse.core",
-            "--class-path", tests, "com.m3.eclipse.smoke.M3EclipseCoreSelfTest")
+        run(java, "--module-path", out / "classes", "--add-modules", "jdk.m3.eclipse.core",
+            "--class-path", tests, "jdk.m3.eclipse.smoke.M3EclipseCoreSelfTest")
         image = out / "image"
         run(jlink, "--module-path", os.pathsep.join((str(jdk / "jmods"), str(out / "jmods"))),
-            "--add-modules", "com.m3.eclipse.core", "--output", image,
+            "--add-modules", "jdk.m3.eclipse.core", "--output", image,
             "--no-header-files", "--no-man-pages")
         run(image / "bin" / "java", "--list-modules")
-        run(image / "bin" / "java", "--add-modules", "com.m3.eclipse.core",
-            "--class-path", tests, "com.m3.eclipse.smoke.M3EclipseCoreSelfTest")
+        run(image / "bin" / "java", "--add-modules", "jdk.m3.eclipse.core",
+            "--class-path", tests, "jdk.m3.eclipse.smoke.M3EclipseCoreSelfTest")
         run(image / "bin" / "java", "-Xcheck:jni", "-Djava.library.path=" + str(image / "lib"),
-            "--add-modules", "com.m3.eclipse.core", "--class-path", tests,
-            "com.m3.eclipse.smoke.M3ModuleImageSelfTest",
+            "--add-modules", "jdk.m3.eclipse.core", "--class-path", tests,
+            "jdk.m3.eclipse.smoke.M3ModuleImageSelfTest",
             "native" if args.native_collections else "java")
         if args.native_collections:
             linked = image / "lib/libm3_collections_mask.so"

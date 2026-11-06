@@ -4,12 +4,12 @@ name: M3 primitive map empty-value source-sealed recipe
 on:
   pull_request:
     paths:
-      - "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java"
-      - "m3/collections/src/test/java/com/m3/collections/M3LongLongHashMapEmptyValue*"
+      - "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java"
+      - "m3/collections/src/test/java/jdk/m3/collections/M3LongLongHashMapEmptyValue*"
       - "m3/collections/qualification/leetcodify-empty-value-20261105/**"
       - "m3/collections/recipe/pom.xml"
-      - "m3/collections/recipe/src/test/java/com/synexia/rewrite/M3LongLongHashMapEmptyValueRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-empty-value-scan-20261105/**"
+      - "m3/collections/recipe/src/test/java/jdk/internal/m3/rewrite/M3LongLongHashMapEmptyValueRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-empty-value-scan-20261105/**"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-empty-value-scan-20261105.yml"
       - ".github/workflows/m3-collections-empty-value-recipe-20261105.yml"
   workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
         run: bash m3/collections/qualification/leetcodify-empty-value-20261105/verify_java21.sh
       - name: Install existing pinned Synexia/OpenRewrite closure
         shell: bash
-        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
+        run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
       - name: Real original Maven/OpenRewrite hash-sealed replay, fixed point and refusal
         run: mvn -B -ntp -f m3/collections/recipe/pom.xml -Dtest=M3LongLongHashMapEmptyValueRecipeTest test
       - name: Original module Maven JUnit integration

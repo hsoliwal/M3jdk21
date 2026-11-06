@@ -414,24 +414,24 @@ routing only; class-loader edge cases, mutable callbacks, malformed producer
 rows, cancellation, concurrency, budgets and persistence integration still need
 appropriately admitted behavioral evidence before product reliance.
 
-[artifact]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputeArtifact.java#L7-L20
-[context]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputeContext.java#L8-L76
-[key]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputeKey.java#L12-L74
-[limits]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputeLimits.java#L6-L54
-[pass]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputePass.java#L6-L28
-[passes]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputePasses.java#L14-L98
-[plan]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputePlan.java#L19-L272
-[plan-fingerprint]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputePlan.java#L244-L271
+[artifact]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputeArtifact.java#L7-L20
+[context]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputeContext.java#L8-L76
+[key]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputeKey.java#L12-L74
+[limits]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputeLimits.java#L6-L54
+[pass]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputePass.java#L6-L28
+[passes]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputePasses.java#L14-L98
+[plan]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputePlan.java#L19-L272
+[plan-fingerprint]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputePlan.java#L244-L271
 [reactor]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/pom.xml#L12-L37
 [core-build]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/build.sh#L4-L20
-[vendor]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/README.md#L34-L79
-[borrowing]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/synexia-apache2-borrowing-contract.md#L61-L110
-[v7-export]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/synexia-import/intakes/regex-precompute-v7-20261007/export.tsv#L18-L25
-[v7-readme]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/synexia-import/intakes/regex-precompute-v7-20261007/README.md#L4-L12
-[v7-proof]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/synexia-import/intakes/regex-precompute-v7-20261007/evidence/QUALIFICATION.json#L1-L56
-[program-successor]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/CURRENT_ACTUAL_AUTHORITY.md#L4-L20
-[codec-recovery]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/synexia-import/qualification/regex-copy-recovery-20261011.json
-[codec-slice]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/synexia-import/qualification/regex-nested-slice-20261011.json
-[regex-key]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexPrecomputeKey.java#L11-L39
-[regex-precompute]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexPrecompute.java#L18-L110
-[scope]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/precompute/MIndexPrecomputeScope.java#L9-L73
+[vendor]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/README.md#L34-L79
+[borrowing]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/docs/m3-apache2-borrowing-contract.md#L61-L110
+[v7-export]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/intakes/regex-precompute-v7-20261007/export.tsv#L18-L25
+[v7-readme]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/intakes/regex-precompute-v7-20261007/README.md#L4-L12
+[v7-proof]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/intakes/regex-precompute-v7-20261007/evidence/QUALIFICATION.json#L1-L56
+[program-successor]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/CURRENT_ACTUAL_AUTHORITY.md#L4-L20
+[codec-recovery]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/qualification/regex-copy-recovery-20261011.json
+[codec-slice]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/m3-import/qualification/regex-nested-slice-20261011.json
+[regex-key]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexPrecomputeKey.java#L11-L39
+[regex-precompute]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexPrecompute.java#L18-L110
+[scope]: https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputeScope.java#L9-L73

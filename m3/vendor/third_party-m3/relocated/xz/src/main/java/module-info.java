@@ -5,16 +5,16 @@
 
 /**
  * Defines the {@code xz} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.xz {
-    exports com.m3.lib.xz;
-    exports com.m3.lib.xz.check;
-    exports com.m3.lib.xz.common;
-    exports com.m3.lib.xz.delta;
-    exports com.m3.lib.xz.index;
-    exports com.m3.lib.xz.lz;
-    exports com.m3.lib.xz.lzma;
-    exports com.m3.lib.xz.rangecoder;
-    exports com.m3.lib.xz.simple;
+    exports jdk.m3.lib.xz;
+    exports jdk.m3.lib.xz.check;
+    exports jdk.m3.lib.xz.common;
+    exports jdk.m3.lib.xz.delta;
+    exports jdk.m3.lib.xz.index;
+    exports jdk.m3.lib.xz.lz;
+    exports jdk.m3.lib.xz.lzma;
+    exports jdk.m3.lib.xz.rangecoder;
+    exports jdk.m3.lib.xz.simple;
 }

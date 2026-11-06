@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 JNIEXPORT jint JNICALL
-Java_com_m3_file_M3JsonStructuralNative_nativeJsonSignalAbiVersion(
+Java_jdk_m3_file_M3JsonStructuralNative_nativeJsonSignalAbiVersion(
     JNIEnv *env, jclass type) {
   (void)env;
   (void)type;
@@ -12,7 +12,7 @@ Java_com_m3_file_M3JsonStructuralNative_nativeJsonSignalAbiVersion(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_file_M3JsonStructuralNative_nativeClassifyJsonBytes(
+Java_jdk_m3_file_M3JsonStructuralNative_nativeClassifyJsonBytes(
     JNIEnv *env,
     jclass type,
     jobject source,

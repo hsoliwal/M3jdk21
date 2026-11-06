@@ -29,7 +29,7 @@ jobs:
           python3 - <<'PY'
           import hashlib,json
           from pathlib import Path
-          receipt=json.loads(Path('m3/tooling/atom-census/contract/SYNEXIA_SEMANTIC_CENSUS_V2_RECEIPT.json').read_text())
+          receipt=json.loads(Path('m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_RECEIPT.json').read_text())
           if receipt['external_api_changed'] or receipt['jni_abi_changed']:
               raise SystemExit('REFUSED: ABI unlock')
           for key in ('source_change','test_change'):

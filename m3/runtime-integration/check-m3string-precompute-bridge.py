@@ -33,7 +33,7 @@ def main() -> None:
 
     require("final class M3StringPrecomputeBridge" in bridge, "bridge-class")
     require("package java.lang;" in bridge, "bridge-package")
-    require("com.synexia." not in bridge, "runtime-synexia-dependency")
+    require("com.synexia." not in bridge, "runtime-m3-dependency")
     require("static final " not in bridge, "bridge-retained-static-field")
     require("private M3StringPrecomputeBridge() {}" in bridge, "bridge-constructor")
 

@@ -8,9 +8,9 @@ Canonical recipe workspace: `hsoliwal/com.synexia`, branch `aix/collections-arra
 
 ## Locked contracts
 
-M3ArrayList removal retains encounter order, duplicate/null/reference identity, callback count/order, exception identity, structural-modification rejection, live nonstructural set effects, tail-reference release, capacity, serialization and public/protected signatures. Its exact preimage Git blob is `250905f67429fbedfb4d6f652ea6e90a516cb59c`.
+M3ArrayList removal retains encounter order, duplicate/null/reference identity, callback count/order, exception identity, structural-modification rejection, live nonstructural set effects, tail-reference release, capacity, serialization and public/protected signatures. Its exact preimage Git blob is `23977d3c314a52e82acadee97daa7d3d659c2601`.
 
-M3IndexedListSnapshot masked sorting retains physical occurrence identity, immutable source views, stable comparator behavior and exact callback tape. Reuse the fresh selected int[] and the existing private sortPositions atom, following the already existing filteredSorted ownership pattern. Its exact preimage Git blob is `217700023c2a6456a505b07b311290f8da8c02e2`.
+M3IndexedListSnapshot masked sorting retains physical occurrence identity, immutable source views, stable comparator behavior and exact callback tape. Reuse the fresh selected int[] and the existing private sortPositions atom, following the already existing filteredSorted ownership pattern. Its exact preimage Git blob is `cd26677723b21ad6ea425f2cb72d992101466476`.
 
 Existing M3IndexMaskCompactor and M3IndexPathMasks remain current-source dependencies. The original path-mask C17/JNI selector is reused unchanged. No new native symbol or production API is admitted. Existing production owner names are unchanged; this is private refinement, not a new naming-map migration.
 

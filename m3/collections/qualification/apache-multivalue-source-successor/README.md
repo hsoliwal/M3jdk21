@@ -13,9 +13,9 @@ still match byte-for-byte; exactly three changed on the integrated receiving tre
 
 | Owner | v4 source blob | Current receiving blob | Semantic change |
 | --- | --- | --- | --- |
-| `M3ArrayList.java` | `c43ca5578521b8f0a2ab1305f5d4becdeabc772e` | `3c6e1b12a40d5516d8b1ca0c8ed9fc86c99003f1` | Stable, two-pass `removeIf` uses two long mask words for 65–128 slots instead of allocating BitSet |
-| `M3LongRangeSet.java` | `327a56f12e09ae82ea0d0f10bdcf3a0628f1636f` | `37f4f35415728a3d4bc54838b97153b05a973184` | Sorted interval binary bound, cardinality accumulation and allocation-lower Java mask selector |
-| `m3_index_mask_compactor.c` | `bedd442346de5b7dd9d5f1965c510950e0c45ea1` | `5afeb41575e758b06882b3e3d8104b0c275f50ca` | Native mask/array compactor changes must retain original strict C17/JNI contract |
+| `M3ArrayList.java` | `dda9d3739f4f7f779bd29e92c80bbc4d45ae1063` | `3c6e1b12a40d5516d8b1ca0c8ed9fc86c99003f1` | Stable, two-pass `removeIf` uses two long mask words for 65–128 slots instead of allocating BitSet |
+| `M3LongRangeSet.java` | `a19f3a01b8c553a8c9f356662edfc9fadc8194c8` | `ad7826be14ba09539e55125f52a6bea7a58ee362` | Sorted interval binary bound, cardinality accumulation and allocation-lower Java mask selector |
+| `m3_index_mask_compactor.c` | `970a7074223bfdff2eea70ad18fc2062c78b8b5b` | `5afeb41575e758b06882b3e3d8104b0c275f50ca` | Native mask/array compactor changes must retain original strict C17/JNI contract |
 
 ## Explicit immutable-source replay
 

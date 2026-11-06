@@ -33,7 +33,7 @@ jobs:
           classes="$RUNNER_TEMP/m3-cpu-text-donor-classes"
           mkdir -p "$classes"
           find m3/tooling/module-packs/cpu-tools/src -type f -name '*.java' \
-            ! -name module-info.java ! -path '*/com.m3.tools.cpu/*' -print0 \
+            ! -name module-info.java ! -path '*/jdk.m3.tools.cpu/*' -print0 \
             | LC_ALL=C sort -z \
             | xargs -0 -r javac --release 21 -Xlint:all,-module -Werror -d "$classes" \
                 m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java

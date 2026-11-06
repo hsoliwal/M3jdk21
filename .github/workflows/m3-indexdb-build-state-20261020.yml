@@ -26,11 +26,11 @@ jobs:
           set -euo pipefail
           mkdir -p build/m3-build-state
           javac --release 21 -Xlint:all -Werror -d build/m3-build-state \
-            m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbArtifact.java \
-            m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDB.java \
-            m3/indexdb/src/main/java/com/m3/indexdb/M3BuildState.java \
-            m3/indexdb/src/test/java/com/m3/indexdb/M3BuildStateContract.java
-          java -cp build/m3-build-state com.m3.indexdb.M3BuildStateContract
+            m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbArtifact.java \
+            m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDB.java \
+            m3/indexdb/src/main/java/jdk/m3/indexdb/M3BuildState.java \
+            m3/indexdb/src/test/java/jdk/m3/indexdb/M3BuildStateContract.java
+          java -cp build/m3-build-state jdk.m3.indexdb.M3BuildStateContract
   full-indexdb-coverage:
     runs-on: ubuntu-latest
     steps:

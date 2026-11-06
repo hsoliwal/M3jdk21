@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-import com.m3.vcpu.internal.NativeVcpu;
-import com.synexia.m3.cpugpu.CpuRv32iEngine;
-import com.synexia.m3.cpugpu.Rv32iAssembler;
-import com.synexia.m3.cpugpu.Rv32iBatch;
+import jdk.m3.vcpu.internal.NativeVcpu;
+import jdk.internal.m3.cpugpu.CpuRv32iEngine;
+import jdk.internal.m3.cpugpu.Rv32iAssembler;
+import jdk.internal.m3.cpugpu.Rv32iBatch;
 
 import java.util.SplittableRandom;
 

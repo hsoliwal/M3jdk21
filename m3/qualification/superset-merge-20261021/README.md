@@ -6,7 +6,7 @@ This is a source-integrated candidate inside the original M3JDK21 Java21/HotSpot
 
 - **28 distinct changed files, 43 exact source hunks:** each was applied against the frozen master file, and the resulting UTF-8 text was independently compared to the donor PR head's exact file text. Original Git blob IDs are recorded in `RECEIVING.tsv`.
 - **Full two-parent Git source merges**, exact first- and second-parent readback, for PRs #1618 (3 hunks), #1620 (5), #1629 (19), #1633 (4). Their effective tree changed at every merge, and none of these file sets overlaps another admitted PR in this wave. Git blob postimages are original donor blobs; no hand changes to generated target Java/JNI source.
-- **Partial #1621:** 12 added files (12 hunks) reproduced exactly and were added by an ordinary one-parent candidate commit. This is **NOT a merge of original PR #1621**; its changed pre-existing `m3/docs/synexia-recipe-ownership-classification.tsv` carries a no-final-LF-to-LF transition and remains explicitly held in `HELD_HUNKS.tsv`. No second parent for #1621 was used and the original PR remains open.
+- **Partial #1621:** 12 added files (12 hunks) reproduced exactly and were added by an ordinary one-parent candidate commit. This is **NOT a merge of original PR #1621**; its changed pre-existing `m3/docs/m3-recipe-ownership-classification.tsv` carries a no-final-LF-to-LF transition and remains explicitly held in `HELD_HUNKS.tsv`. No second parent for #1621 was used and the original PR remains open.
 
 ## Existing recipe and superset authority
 

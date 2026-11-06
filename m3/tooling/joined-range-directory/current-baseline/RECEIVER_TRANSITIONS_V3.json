@@ -1,24 +1,24 @@
 {
   "schema": "M3_FROZEN_RECEIVER_TRANSITIONS_V2",
-  "frozenProfileSha256": "bf2b5a10a14aeb2f6166d002dd603a519d8916db0e3413032304e16ff3cce4c5",
+  "frozenProfileSha256": "e9d946b29c5873d024701cc790f4f2967c22e9a46a5e56b61730c30313927f7e",
   "custodySha256": {
-    "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
-    "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
-    "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
-    "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
   },
   "files": [
     {
-      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
       "before": {
         "bytes": 2634,
-        "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
-        "gitBlob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597"
+        "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7",
+        "gitBlob": "5022e9811ce9391671c794446c7772569cfd369f"
       },
       "after": {
         "bytes": 3377,
-        "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e",
-        "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877"
+        "sha256": "c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2",
+        "gitBlob": "765d43267bb22a3650b622c01cb29b550e1deb01"
       }
     },
     {
@@ -35,33 +35,33 @@
       }
     },
     {
-      "path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
       "before": {
         "bytes": 11009,
-        "gitBlob": "b952a245b2724140904bb666669c2880ce32cd64",
-        "sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d"
+        "gitBlob": "ce34ac405c41b3980e558efc688a5ebc1f37b47b",
+        "sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256"
       },
       "after": {
         "bytes": 12759,
-        "gitBlob": "78a83dbecc555f019f78db45030743d39b14800b",
-        "sha256": "4bf0677336e019d2ab1688fc2b8addb21947c8c868e1aaf0abb3b656af75f79e"
+        "gitBlob": "e1ddad0d8a00b582ceab4fa57ed60c96bfa73e1d",
+        "sha256": "6139d0e2a070b10829130a78e7553aebac8bcd05b02f3f7d4e224aa2e9374687"
       }
     },
     {
       "path": "m3/core/test/M3LexiconPrecomputeTest.java",
       "before": {
         "bytes": 12189,
-        "gitBlob": "5b44feced8c7d38d2dc25c3b5dbd27d2d2a0ca6d",
-        "sha256": "fdc8f742adc96d93a6ab3e332c293d7dfdea97b458d9e8442694c8e11e511e7a"
+        "gitBlob": "16f40baeb952907372ef961527560057eed8efb1",
+        "sha256": "86816e02860c013aed830a387d368fe2498210446565f246518532f7d9ce2cf2"
       },
       "after": {
         "bytes": 18847,
-        "gitBlob": "a43e64e8286455e3b82927afd222fa04869188c1",
-        "sha256": "6a39d7316b37247d9b7436999502c85905a0d86d9250f9b1d449d087a8ac4956"
+        "gitBlob": "65c769073e58941fb15b069c68fa166ec9563a45",
+        "sha256": "b892164d0e03887180b6f2b7803740d050b511b43b8b870766f35109c3ee2739"
       }
     }
   ],
   "meaning": "Observe only these exact applied receiver bodies; recover original frozen bytes for historical baseline qualification; never write receiver source.",
   "authority": false,
-  "predecessorDeclarationSha256": "a7a41800bfd69e40eb59cc89cb74bb795a59971c5f5f4157edd78e326e7adb1d"
+  "predecessorDeclarationSha256": "0f7c12d9f170c0290db4a114dc3f32d2e08af9090b9be14d86b2e46576899afd"
 }

@@ -7,7 +7,7 @@
 package java.util;
 
 /**
- * M3JDK21's additive String utility family, alongside {@link Objects}, {@link Arrays}
+ * M3JDK 21's additive String utility family, alongside {@link Objects}, {@link Arrays}
  * and {@link Collections}. No duplicate String payload, regex parser, cache or JNI ABI.
  *
  * <p>The underlying JDK {@link String} operations retain semantic authority, including

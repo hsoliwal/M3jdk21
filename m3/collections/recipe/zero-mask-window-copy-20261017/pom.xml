@@ -57,11 +57,11 @@
           <proc>none</proc>
           <fork>false</fork>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
-            <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/synexia/rewrite/M3ZeroMaskWindowCopyRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3ZeroMaskWindowCopyRecipeTest.java</testInclude>
           </testIncludes>
           <compilerArgs>
             <arg>-Xlint:all</arg>

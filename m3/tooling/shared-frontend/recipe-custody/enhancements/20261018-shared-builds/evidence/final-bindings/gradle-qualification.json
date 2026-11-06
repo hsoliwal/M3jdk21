@@ -3,7 +3,7 @@
   "status": "LOCAL_QUALIFICATION_PASS",
   "recorded_utc": "2026-10-18T13:29:08.971591+00:00",
   "source_lock": "SOURCE_LOCK.json",
-  "source_lock_sha256": "cbeed0552c0c43534fcf83b0d748ae1642c9a6abe3d5c0a51e89e3a7e565c564",
+  "source_lock_sha256": "6004b332fe0ea3882613289da36cb46cdf4cf25fca65590e52026157e4fab486",
   "receiver_prefix": "m3/tooling/module-packs/build-support/gradle-provider/",
   "receiving_files": 9,
   "implementation_sha256": "92a7700275af7759c6a8c80e636fc19e9ac1affa84c0cfa15b8063ae70244557",
@@ -34,49 +34,49 @@
     {
       "label": "23-authoring-compile",
       "command_record": "logs/23-authoring-compile.json",
-      "command_record_sha256": "7e6b28bac7f8d4a5989c448bd76d8de82a41ae8c18e2cef2db2dcf2b3b1bb86d",
+      "command_record_sha256": "cf42fd5a0ccf7b509dd85d24fc8c0379f938c7892d4985a1495a04d0633f5723",
       "log_sha256": "cfb4b261cbf177ac9cc8ee5c1275354a8d5a15f57d8596e099fa4b0f741455b6",
       "exit_code": 0
     },
     {
       "label": "24-authoring-tests",
       "command_record": "logs/24-authoring-tests.json",
-      "command_record_sha256": "beabdb287c21b5fc8d5e00137daeac896518be4184b2010d7074fab696999d46",
+      "command_record_sha256": "25750d3f80966d7168bc64d9250b982bfccce02ce91a4c5bf4a5d524d657108c",
       "log_sha256": "c856f61da9e9addf864a9c793e7fb45033ba5010cf8ad0a170c8f6d280505e69",
       "exit_code": 0
     },
     {
       "label": "05b-sealing-contracts",
       "command_record": "logs/05b-sealing-contracts.json",
-      "command_record_sha256": "bbe69a17b1bb1889260804ad8544ffb952c7b1c3f87aa6178ad74ce592d877ac",
+      "command_record_sha256": "f8c9e89cc774a4c131ba3d661648829c89e848b075035ab1aa0087dec4d2f6bc",
       "log_sha256": "316558a93ba028238bcd514bbec8a07c6b5122f2fa8e4ce8499b5d85bc6111f8",
       "exit_code": 0
     },
     {
       "label": "25-receiver-contracts",
       "command_record": "logs/25-receiver-contracts.json",
-      "command_record_sha256": "03826103f05625fe7a78a9a3a1f9ca1b90c7fd5019fb3b1d16255a34e44c7e77",
+      "command_record_sha256": "0f4b3df3b56dc2ff5ce7f2e9d9df0802fcb87eb2902671203fd5df4fb4ae3c79",
       "log_sha256": "a1b9da09018fc875b42949371dcfa3ea65eb1771964bb235a4e363329b1547e7",
       "exit_code": 0
     },
     {
       "label": "26a-receiver-check",
       "command_record": "logs/26a-receiver-check.json",
-      "command_record_sha256": "5f918b4f35e4387b6ea704507d3670e1eb6a20d0b8efeec84654bff6044c6929",
+      "command_record_sha256": "1a5fefcae0c33a27532589c2669a969cf4be1909927751a3c246f36ddb4d132a",
       "log_sha256": "2a64ff9cb65287ac2f1f9389012ea37dad5b7893440dc076ae76754b2e8ed97f",
       "exit_code": 0
     },
     {
       "label": "26b-receiver-apply",
       "command_record": "logs/26b-receiver-apply.json",
-      "command_record_sha256": "bc863258889fd00bbc53f4f6ee4b4e8f8785c87c74cb3b8480567ec40d128f7f",
+      "command_record_sha256": "f82af38d0e7989391f0db122a791d0af67e7c3743de54f1e9bb83c65abacd201",
       "log_sha256": "b24ccd2f1d1d2be95e954a3dc921ac4ed8055b93d70a032fc2c02242ad46c3ca",
       "exit_code": 0
     },
     {
       "label": "26c-receiver-fixedpoint",
       "command_record": "logs/26c-receiver-fixedpoint.json",
-      "command_record_sha256": "c0fffa3b80ca7838b382bdd26a68c40a0a0a901b17b852d28617d111ce1d31eb",
+      "command_record_sha256": "70820c7ba80076e146ff61452abf49378f713b555b9930eab917a770a14a7b7d",
       "log_sha256": "cce5171cc7519c81262e25eb3ce8ffb4fce1ba61ffcd89d8720b8e86ef62221c",
       "exit_code": 0
     },

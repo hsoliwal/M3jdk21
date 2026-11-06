@@ -4,5 +4,5 @@
  */
 /** Optional versioned primitive row projections; generic views retain their existing module owner. */
 module jdk.m3.collections {
-    exports com.m3.util;
+    exports jdk.m3.util;
 }

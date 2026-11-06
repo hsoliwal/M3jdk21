@@ -1,0 +1,63 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "m3/verify-gvas-literal-precompute.py"
+      ],
+      "elapsed_seconds": 2.374,
+      "exit": 0,
+      "log": "source-lock-correction/gvas-owner-002/command-01.log",
+      "log_bytes": 192,
+      "log_sha256": "45959d475cc154c667221d3ba8503a0045fcd2c1ca12fdc33149f72423627f2b"
+    }
+  ],
+  "driver_sha256": "0ee1fc9a15885c39c217d8cdc64e95c99dc6d36671f14e15f7d27e761a5bf1a6",
+  "elapsed_seconds": 2.5,
+  "gate_inputs": [
+    {
+      "bytes": 6571,
+      "git_blob": "8a0e8184feae600477a992512388c559ec10ee11",
+      "path": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
+      "sha256": "03fe4ef99c923172301d287db953b59d1aa23c5f8480ddd79c64e4485a14b863"
+    },
+    {
+      "bytes": 11215,
+      "git_blob": "10f0f669d5658e088e8835702df0676535c1f01d",
+      "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+      "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f"
+    },
+    {
+      "bytes": 7802,
+      "git_blob": "7597a2831be9b98b8a16ca6e3effcb8fa431f578",
+      "path": "m3/core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java",
+      "sha256": "5bc63e3944756409727cd61ac9e1c00a89b432b4f311c8e1109b7223cecb6f82"
+    },
+    {
+      "bytes": 7629,
+      "git_blob": "9632af72ba95b0e3e72803b51fc23f3688d4b31f",
+      "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
+      "sha256": "f1ee71af4d62ccf9e3662efc6818f57096b47f445179650710a28dcd7dc183bd"
+    },
+    {
+      "bytes": 6526,
+      "git_blob": "78361dfb6437eec8e3610c5866b3a003f4ce4a72",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralImageWriter.java",
+      "sha256": "4fbbd7f803b287ffc0f0db3fb6049bd9cfa52ecc8e03e84feb75573991994ad2"
+    },
+    {
+      "bytes": 6503,
+      "git_blob": "643444c738496600ea6184ceaf01c00cd36bb390",
+      "path": "m3/verify-gvas-literal-precompute.py",
+      "sha256": "43ac8c6462f35d10624f1a78c96082550d4413866951f74b5fee6efd407f08c3"
+    }
+  ],
+  "inputs_unchanged": true,
+  "owner": "gvas",
+  "receiver_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "schema": "M3_NLP_RECEIVER_TEXT_OWNER_FOLLOWUP_1",
+  "scope": "Identical original gate after sandbox child /proc visibility refusal; runs with required process visibility.",
+  "shared_driver_sha256": "ee680061df4e9494c3d3a9817ea4d39e4f138a0b2e29a3355b4ab6014980a277",
+  "state": "PASS",
+  "stdout": "M3_GVAS_LITERAL_STRICT_PASS processes=3 base=0x600000000000 literal=0x600000014f82 inode=1096645 checks_per_child=17530 sha256=5459e62dc9bda0ba4c3aba35ad2c55dd06501b8c661e0b2d05fd1710bd9179dc\n"
+}

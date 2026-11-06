@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors.
 // Donor: hsoliwal/com.synexia at 50f48cbbe11f17fb8dc209bac3812f8940a1e267
-// Path: synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFile.java
+// Path: m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFile.java
 // Git blob: 0c30aaa8b9f88a829c87e46ef82a0ea96c0d68a3
 // Adaptation: decoded indexed I/O port of occurrence handles and UTF-16 prefix offsets.
 // Existing String references replace resolver-specific text descriptors at the public JDK boundary.

@@ -9,19 +9,19 @@ BUILDER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(BUILDER)
 
 COMPACTOR = {
-    'Java_com_m3_collections_M3IndexMaskCompactor_selectNative',
-    'Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative',
-    'Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative',
-    'Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative',
-    'Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative',
-    'Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative',
-    'Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative',
-    'Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative',
-    'Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_rangeAbiNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative',
+    'Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative',
 }
-WINDOW = {'Java_com_m3_collections_M3IndexMaskWindow_scanNative',
-          'Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative'}
-PATHMASK = {'Java_com_m3_collections_M3IndexPathMasks_selectNative'}
+WINDOW = {'Java_jdk_m3_collections_M3IndexMaskWindow_scanNative',
+          'Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative'}
+PATHMASK = {'Java_jdk_m3_collections_M3IndexPathMasks_selectNative'}
 
 
 class NativeAbiRefusalTest(unittest.TestCase):
@@ -42,11 +42,11 @@ class NativeAbiRefusalTest(unittest.TestCase):
     def test_legacy_one_symbol_expectation_refuses_current_compactor(self):
         with self.assertRaisesRegex(ValueError, 'unexpected='):
             BUILDER.require_symbols(COMPACTOR,
-                    {'Java_com_m3_collections_M3IndexMaskCompactor_selectNative'}, 'legacy')
+                    {'Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative'}, 'legacy')
 
     def test_same_count_unknown_export_cannot_replace_required_symbol(self):
-        tampered = (COMPACTOR | WINDOW) - {'Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative'}
-        tampered.add('Java_com_m3_collections_M3IndexMaskWindow_unknownNative')
+        tampered = (COMPACTOR | WINDOW) - {'Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative'}
+        tampered.add('Java_jdk_m3_collections_M3IndexMaskWindow_unknownNative')
         self.assertEqual(11, len(tampered))
         with self.assertRaisesRegex(ValueError, 'ABI differs'):
             BUILDER.require_symbols(tampered, COMPACTOR | WINDOW, 'mask')

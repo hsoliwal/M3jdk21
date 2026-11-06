@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.mindex.classindex;
+package jdk.internal.m3.mindex.classindex;
 
 /** Frozen member-kind code stored in the primitive MIndexClass member table. */
 public enum MIndexMemberKind {

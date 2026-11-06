@@ -15,52 +15,52 @@
   "public_pr": "https://github.com/hsoliwal/M3jdk21/pull/2320",
   "authoring_ownership": "Existing canonical Maven/OpenRewrite Java and text engines; existing shared harnesses. Exact final owner bytes are pinned below. The private result-only handoff binds the eventual immutable recipe commit.",
   "recipe_order": [
-    "com.synexia.m3.ObjectCacheConverged20261102",
-    "com.synexia.m3.ObjectCacheInstalled20261102"
+    "jdk.internal.m3.ObjectCacheConverged20261102",
+    "jdk.internal.m3.ObjectCacheInstalled20261102"
   ],
   "recipe_owners": [
     {
-      "path": "synexia-openrewrite-recipes/pom-m3-object-cache-converged-20261102.xml",
+      "path": "m3-openrewrite-recipes/pom-m3-object-cache-converged-20261102.xml",
       "sha256": "fb6a4c7f90aad7efc1c0659ed22ae8a9bf7629110d711bb3aa5ea4a6b1784c01",
       "git_blob": "1bedbfe23156edf4a6104aba9875ca11e09ce078"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
       "sha256": "0dc762ef802b32ad0a40ff23e21cfbb67ad4bbd8a251b46b8a5954b647927824",
       "git_blob": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "2e38337367374bea21c83066dee90cf17be00333d7901fbaadd6fa02edfd21eb",
       "git_blob": "4740382651f2161142da53f82a4c9140af18016e"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "sha256": "3126c4622b2d7d048f00f9140b937370b4bd16814e5bf210971696c1ac0e523a",
       "git_blob": "629ae08c77ccaca3f5dab62eb439ab93226da892"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ResourceEnvelope.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ResourceEnvelope.java",
       "sha256": "2f5f0a1dd1fabe07c97bf7acf4ead51e1853d302a2b21f6fe011d019cc496c57",
       "git_blob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sha256": "fdf4000eb8287b4bf60d521007ea62fb9941553b29f98d842b5899e7860c886f",
       "git_blob": "f3440560bcf99eee4066aeb02f04984c6aef2f3c"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-object-cache-converged-20261102.yml",
+      "path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-object-cache-converged-20261102.yml",
       "sha256": "d793bc9c364a9be345b5fa828bf6f6b315290d3aeff466684918ce946b2864ab",
       "git_blob": "3084f582d7362f284d38019edbf30ac43ae46193"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-object-cache-installed-20261102.yml",
+      "path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-object-cache-installed-20261102.yml",
       "sha256": "70adf23cfa37f7c0f019189a426c273a4fc467885bce3f45721bb2cb61143eba",
       "git_blob": "fffc7c038864edf802b8015dc89011b91b79ca86"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3ObjectConvergedRecipeTest.java",
+      "path": "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectConvergedRecipeTest.java",
       "sha256": "b2627f97f906ace2566905e970b110e4a584c01501d31940b16cc7df1ad4c418",
       "git_blob": "08f3a1806b11cd07e305643c861c251a028d99ea"
     }
@@ -71,15 +71,15 @@
       "before_sha256": "3ebdace2153c15d468404ec490a0b608c30fc3fcdeba6310e8b08745e6f21787",
       "after_sha256": "eb35eb4a90004c8c440d53d82b06edd244c1187b772e6316b3aa497c448075ab",
       "git_blob": "46c5da18c5b24a52d787a4bc150ff57576744177",
-      "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
       "stages": [
         {
           "path": "make/test/JtregNativeJdk.gmk",
           "before_sha256": "3ebdace2153c15d468404ec490a0b608c30fc3fcdeba6310e8b08745e6f21787",
           "after_sha256": "eb35eb4a90004c8c440d53d82b06edd244c1187b772e6316b3aa497c448075ab",
           "git_blob": "46c5da18c5b24a52d787a4bc150ff57576744177",
-          "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-object-cache-installed-20261102/JtregNativeJdk.gmk.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-object-cache-installed-20261102/JtregNativeJdk.gmk.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/installed/make/test/JtregNativeJdk.gmk"
         }
       ]
@@ -89,15 +89,15 @@
       "before_sha256": "80e087cb893296edea8efedfa176caf0c850549d499f31932c009bc6f6fef7cc",
       "after_sha256": "7bad327f5831c5962c83dda1e8268ddad9f6643e2da0a86789b522b5006af2b7",
       "git_blob": "b058a9a47fb88583d19bfa5a7587775ddde589f1",
-      "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
       "stages": [
         {
           "path": "src/java.base/share/classes/java/lang/M3ObjectRuntime.java",
           "before_sha256": "80e087cb893296edea8efedfa176caf0c850549d499f31932c009bc6f6fef7cc",
           "after_sha256": "f22f2fe1a042864475b7412cfe8e87ea31c6bec0945354ff2626a1b626c30439",
           "git_blob": "8445055a9472195d3ff505e8b0a7821157cdb509",
-          "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectRuntime.java.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectRuntime.java.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/converged/src/java.base/share/classes/java/lang/M3ObjectRuntime.java"
         },
         {
@@ -105,8 +105,8 @@
           "before_sha256": "f22f2fe1a042864475b7412cfe8e87ea31c6bec0945354ff2626a1b626c30439",
           "after_sha256": "7bad327f5831c5962c83dda1e8268ddad9f6643e2da0a86789b522b5006af2b7",
           "git_blob": "b058a9a47fb88583d19bfa5a7587775ddde589f1",
-          "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-cache-installed-20261102/M3ObjectRuntime.java.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-cache-installed-20261102/M3ObjectRuntime.java.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/installed/src/java.base/share/classes/java/lang/M3ObjectRuntime.java"
         }
       ]
@@ -116,15 +116,15 @@
       "before_sha256": "ABSENT",
       "after_sha256": "a591a5ccc4e59e51cbbe55d631e39e8904fbe3d04f9a98553a469be4a1aaab3a",
       "git_blob": "b5abfe51a28ad7c0cd7ea959659a64a09cf2158a",
-      "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
       "stages": [
         {
           "path": "test/jdk/java/lang/Object/M3ObjectCacheNativeStressTest.java",
           "before_sha256": "ABSENT",
           "after_sha256": "a591a5ccc4e59e51cbbe55d631e39e8904fbe3d04f9a98553a469be4a1aaab3a",
           "git_blob": "b5abfe51a28ad7c0cd7ea959659a64a09cf2158a",
-          "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectCacheNativeStressTest.java.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectCacheNativeStressTest.java.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/converged/test/jdk/java/lang/Object/M3ObjectCacheNativeStressTest.java"
         }
       ]
@@ -134,15 +134,15 @@
       "before_sha256": "ABSENT",
       "after_sha256": "f8b1701bc8cb15b213363521a19204eba870717172fa031d63cfcf249c9c323b",
       "git_blob": "54c9b60cf6193d9e0fa3e82b9ee52e5ab90dadf8",
-      "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
       "stages": [
         {
           "path": "test/jdk/java/lang/Object/M3ObjectLoaderLifetimeTest.java",
           "before_sha256": "ABSENT",
           "after_sha256": "f8b1701bc8cb15b213363521a19204eba870717172fa031d63cfcf249c9c323b",
           "git_blob": "54c9b60cf6193d9e0fa3e82b9ee52e5ab90dadf8",
-          "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-cache-installed-20261102/M3ObjectLoaderLifetimeTest.java.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-cache-installed-20261102/M3ObjectLoaderLifetimeTest.java.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/installed/test/jdk/java/lang/Object/M3ObjectLoaderLifetimeTest.java"
         }
       ]
@@ -152,15 +152,15 @@
       "before_sha256": "ABSENT",
       "after_sha256": "75802ce75d1fcd5e5d7956d590bf949d6f4ade44dfbbbd2273c272a6d88bba9c",
       "git_blob": "cbc250c072a637d1ed9a6fa3199e7bb1618c057f",
-      "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
       "stages": [
         {
           "path": "test/jdk/java/lang/Object/M3ObjectOwnerIndexChurnTest.java",
           "before_sha256": "ABSENT",
           "after_sha256": "75802ce75d1fcd5e5d7956d590bf949d6f4ade44dfbbbd2273c272a6d88bba9c",
           "git_blob": "cbc250c072a637d1ed9a6fa3199e7bb1618c057f",
-          "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-cache-installed-20261102/M3ObjectOwnerIndexChurnTest.java.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-cache-installed-20261102/M3ObjectOwnerIndexChurnTest.java.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/installed/test/jdk/java/lang/Object/M3ObjectOwnerIndexChurnTest.java"
         }
       ]
@@ -170,15 +170,15 @@
       "before_sha256": "ABSENT",
       "after_sha256": "50d042501eb8199f49818daa35cff4e9a620050a32469f562937ed9b1597e622",
       "git_blob": "fe2ac2813b3fa317d2854be635e2e55c66573124",
-      "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
       "stages": [
         {
           "path": "test/jdk/java/lang/Object/M3ObjectOwnerIndexTest.java",
           "before_sha256": "ABSENT",
           "after_sha256": "50d042501eb8199f49818daa35cff4e9a620050a32469f562937ed9b1597e622",
           "git_blob": "fe2ac2813b3fa317d2854be635e2e55c66573124",
-          "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectOwnerIndexTest.java.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectOwnerIndexTest.java.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/converged/test/jdk/java/lang/Object/M3ObjectOwnerIndexTest.java"
         }
       ]
@@ -188,15 +188,15 @@
       "before_sha256": "ABSENT",
       "after_sha256": "e7babfc83666c417a1f10ab32f636dfd4c00865e11cdb8886fa7d2163fe21758",
       "git_blob": "47de6867e41f3283d449349e3351fe571ed219d2",
-      "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
       "stages": [
         {
           "path": "test/jdk/java/lang/Object/M3ObjectPressureCacheTest.java",
           "before_sha256": "ABSENT",
           "after_sha256": "e7babfc83666c417a1f10ab32f636dfd4c00865e11cdb8886fa7d2163fe21758",
           "git_blob": "47de6867e41f3283d449349e3351fe571ed219d2",
-          "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectPressureCacheTest.java.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectPressureCacheTest.java.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/converged/test/jdk/java/lang/Object/M3ObjectPressureCacheTest.java"
         }
       ]
@@ -206,15 +206,15 @@
       "before_sha256": "ABSENT",
       "after_sha256": "73de8c8fd21f149ac08bd8e002a27e87903ffd12c5c5809e031c68ab8297b36f",
       "git_blob": "abf2c9d17481c028a7868e1df4dc3e31f70803d9",
-      "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
       "stages": [
         {
           "path": "test/jdk/java/lang/Object/M3ObjectWeakLifetimeTest.java",
           "before_sha256": "ABSENT",
           "after_sha256": "73de8c8fd21f149ac08bd8e002a27e87903ffd12c5c5809e031c68ab8297b36f",
           "git_blob": "abf2c9d17481c028a7868e1df4dc3e31f70803d9",
-          "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectWeakLifetimeTest.java.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-cache-converged-20261102/M3ObjectWeakLifetimeTest.java.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/converged/test/jdk/java/lang/Object/M3ObjectWeakLifetimeTest.java"
         }
       ]
@@ -224,15 +224,15 @@
       "before_sha256": "ABSENT",
       "after_sha256": "46a8ece5cde35a3d5ebc7a43940e07bb1fec578c558545be33535893ca0af327",
       "git_blob": "7b5c1e0b9eeb206355e542ada8fc4c20d8e6875b",
-      "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
       "stages": [
         {
           "path": "test/jdk/java/lang/Object/libM3ObjectCacheNativeStressTest.c",
           "before_sha256": "ABSENT",
           "after_sha256": "b34a8c467a1de1b970a96aba6c5e560726bf05a0fc6e0fae5a2864639a4df571",
           "git_blob": "98531098b797ba600b289813d866a0f31afdb2fe",
-          "recipe": "com.synexia.m3.ObjectCacheConverged20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-object-cache-converged-20261102/libM3ObjectCacheNativeStressTest.c.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheConverged20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-object-cache-converged-20261102/libM3ObjectCacheNativeStressTest.c.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/converged/test/jdk/java/lang/Object/libM3ObjectCacheNativeStressTest.c"
         },
         {
@@ -240,8 +240,8 @@
           "before_sha256": "b34a8c467a1de1b970a96aba6c5e560726bf05a0fc6e0fae5a2864639a4df571",
           "after_sha256": "46a8ece5cde35a3d5ebc7a43940e07bb1fec578c558545be33535893ca0af327",
           "git_blob": "7b5c1e0b9eeb206355e542ada8fc4c20d8e6875b",
-          "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-object-cache-installed-20261102/libM3ObjectCacheNativeStressTest.c.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-object-cache-installed-20261102/libM3ObjectCacheNativeStressTest.c.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/installed/test/jdk/java/lang/Object/libM3ObjectCacheNativeStressTest.c"
         }
       ]
@@ -251,15 +251,15 @@
       "before_sha256": "d9d114128096ebefcaa905b0a08a89606c74a7450bb97c7c7a67adbd689643df",
       "after_sha256": "f0cea05fc4f310449ee49a88b714e48d85a99add8618d1171ce71d7fe436f6e8",
       "git_blob": "6d346e175881104e590739116beff48ef2ca4017",
-      "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
+      "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
       "stages": [
         {
           "path": "test/jdk/java/lang/Object/libM3ObjectNativeTest.c",
           "before_sha256": "d9d114128096ebefcaa905b0a08a89606c74a7450bb97c7c7a67adbd689643df",
           "after_sha256": "f0cea05fc4f310449ee49a88b714e48d85a99add8618d1171ce71d7fe436f6e8",
           "git_blob": "6d346e175881104e590739116beff48ef2ca4017",
-          "recipe": "com.synexia.m3.ObjectCacheInstalled20261102",
-          "template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-object-cache-installed-20261102/libM3ObjectNativeTest.c.txt",
+          "recipe": "jdk.internal.m3.ObjectCacheInstalled20261102",
+          "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-object-cache-installed-20261102/libM3ObjectNativeTest.c.txt",
           "actual_sdk_output": "/tmp/m3-cache-installed-sdk-20261102-q9prj9gu/frozen-generated/installed/test/jdk/java/lang/Object/libM3ObjectNativeTest.c"
         }
       ]
@@ -756,127 +756,127 @@
   },
   "evidence": [
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SOURCE_CHAIN.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SOURCE_CHAIN.json",
       "sha256": "27f8375c6d3d4a97f181f2c86a211ba065a07805c456d83679190401847ef7a7",
       "bytes": 23739,
       "git_blob": "928faaf035ad23c7c04faa8b1f50689dcd6f4450"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SDK_ORIGINAL_FAILURE.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SDK_ORIGINAL_FAILURE.json",
       "sha256": "b146523c0dd8f8dfa4a6c860ff87192b705c1d02244ccc87621030e45f0e79f0",
       "bytes": 614,
       "git_blob": "c4146f15ee97f0adcba27ff4919a3bd25400d690"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SDK_SORTED.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SDK_SORTED.json",
       "sha256": "199157f777a4b7b66416cf9d10efa744e6634ebaee662ad8ddfa4847ed360aac",
       "bytes": 2554,
       "git_blob": "765ebdd156ff9adfbe2f05d87628d0e387fb78ea"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SDK_INSTALLED.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SDK_INSTALLED.json",
       "sha256": "71e41102c23b44ae76f1d593eb0d0ae5a96e05bb3e9c23c7e99b25f9136104ab",
       "bytes": 3720,
       "git_blob": "e73411ae39371cd5afa9962b7f105e98ea42a4cf"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SDK_INSTALLED_RUN.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SDK_INSTALLED_RUN.json",
       "sha256": "38b6cd7559b997cd54616c9cbcbf4a7abc3c7489876c2cbe270ecd6ee813b885",
       "bytes": 611,
       "git_blob": "c6c1d9612733ca8503f1e561524e384a7df2bcc2"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/CHURN_COUNTEREXAMPLE.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/CHURN_COUNTEREXAMPLE.json",
       "sha256": "5ab3a02e82865994b51e20434c28389748d640f5b0dfa2efc4f2294204880a78",
       "bytes": 11231,
       "git_blob": "b88185ae14ce1b1fe15fee973a2f689bcc211112"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/CHURN_STRUCTURAL.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/CHURN_STRUCTURAL.json",
       "sha256": "9aca9e48f68b227ec2e99128400038eb696ee7fbf0495d658f1d1a72ff9eabb2",
       "bytes": 15465,
       "git_blob": "f309e76b703fea2c68b68195420074ca994bd83b"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/IMAGE.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/IMAGE.json",
       "sha256": "72f77447e9e8e8500474b2885ac9e23a55ec6a0f23e3efa66546293c624a28c1",
       "bytes": 19200,
       "git_blob": "37603462e59d9817179736dcf0372f0a8cd6d6ab"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SOURCE_BUILD.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SOURCE_BUILD.json",
       "sha256": "d3e7c39741f4df7619d1bcefc8fcb6f8b40a8d2916b785bd3a1f022f209feb60",
       "bytes": 13659,
       "git_blob": "111caee4e257730cbff526f5c8abff13703b84a7"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SOURCE_ARCHIVE_COMPARISON.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/SOURCE_ARCHIVE_COMPARISON.json",
       "sha256": "b71753168e28d68112c2c6c4d31b87152aa5d9ed25ad65792e200f80eb138d5e",
       "bytes": 997,
       "git_blob": "2aa9bc66fa1bc9ebaf58fb8a985d3693b86b28a2"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/NATIVE_MAKE.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/NATIVE_MAKE.json",
       "sha256": "24c521595811ee92ee0c910fc06a9608d19654f0b745445a53cb20582dcd5c4a",
       "bytes": 12117,
       "git_blob": "9433eaffd5943d98ad3f2c7e44921e32e5a8e4d3"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/COMPILE.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/COMPILE.json",
       "sha256": "059789b0bf97e30ea3f97ed5e21f6f9caed0f93b7fc49da508971f963a59b1fc",
       "bytes": 17699,
       "git_blob": "c63e0f536378e9b3a91788b4ffb69933491a05a8"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/BINDING.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/BINDING.json",
       "sha256": "4915db8947b421aa0f6feaf29e3374dfb2abf61a99cebc3a6676edc7658ad7fd",
       "bytes": 6224,
       "git_blob": "277b4503499ace666fc6819520abb8bfae4c1077"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/JTREG.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/JTREG.json",
       "sha256": "b0f3ca8cfbbefdfb1b92bd5a1461b9df91de40f3484581b4d668ee089964e919",
       "bytes": 51240,
       "git_blob": "d09aed077c851b97bfb4fd533c18530e25f6a9e0"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/ALIAS_RUNTIME.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/ALIAS_RUNTIME.json",
       "sha256": "5ded7771068d3d13754dab22dc460270532cfd805761d00345f71c3d6ede098a",
       "bytes": 16589,
       "git_blob": "e1b22e87b6e2f97f7671cc40dcd9656c14075f91"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/ALIAS_COMPILE.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/ALIAS_COMPILE.json",
       "sha256": "e9bf6e009f3abcefc321fde11a5f79dc32f616a2beed902a4cd20b706d009519",
       "bytes": 45568,
       "git_blob": "075508916fad4186877dc968c5b478c5429cfce2"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/ALIAS_API.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/ALIAS_API.json",
       "sha256": "8d7826fe3fb530c3868901e7ae92d7bef51b004c64c55af28b8678197dbd3653",
       "bytes": 9898,
       "git_blob": "756d6f51da30c8f0dd257e7b624e34cb749c2632"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/MEASUREMENT.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/MEASUREMENT.json",
       "sha256": "03978c71945612e55592a0c10baf60506c2e275fba27ce5f908d52b96c83879f",
       "bytes": 43152,
       "git_blob": "6c81fb09829ea07a41def9d0355960b1c0fb4f49"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/CATEGORY_SEARCH.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/CATEGORY_SEARCH.json",
       "sha256": "c842af690d2640310e816650b06d83a38eed747411db95bdf421886872be3ef6",
       "bytes": 15942,
       "git_blob": "cbc31c206bc00f4bdcd3ace7e68e783b1352a844"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/F22_IMAGE.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/F22_IMAGE.json",
       "sha256": "eb8b1c570e95907fc3196d9cb32e8d5f97e5d8c1d7efb5ed3bb6036314d2a332",
       "bytes": 16265,
       "git_blob": "ee08c8982c85773aa3c5639ce7dde24846ccadd1"
     },
     {
-      "path": "synexia-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/F22_JTREG.json",
+      "path": "m3-openrewrite-recipes/evidence/m3-object-cache-installed-20261102/F22_JTREG.json",
       "sha256": "7b79fd3acdf4fd052c3434638c689cb7b18e5dba209bc8dc8f32b4bbd92a9e6f",
       "bytes": 28973,
       "git_blob": "a8330280800c60655bac884fe56e672d2cdc6a18"

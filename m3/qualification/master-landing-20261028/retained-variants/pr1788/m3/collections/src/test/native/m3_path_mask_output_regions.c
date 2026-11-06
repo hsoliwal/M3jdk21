@@ -170,7 +170,7 @@ static void JNICALL put_ints(JNIEnv *env, jintArray array, jsize start,
     written_elements += count;
 }
 
-extern jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNative(
+extern jintArray JNICALL Java_jdk_m3_collections_M3IndexPathMasks_selectNative(
         JNIEnv *, jclass, jintArray, jintArray, jobjectArray,
         jintArray, jintArray, jint, jint, jint);
 
@@ -223,7 +223,7 @@ static void setup(jint count, jint stage_count, jint stride, int mode) {
 }
 
 static jintArray run(JNIEnv *env) {
-    return Java_com_m3_collections_M3IndexPathMasks_selectNative(env, NULL,
+    return Java_jdk_m3_collections_M3IndexPathMasks_selectNative(env, NULL,
             (jintArray)&rows, (jintArray)&offsets, (jobjectArray)&planes,
             (jintArray)&needs, (jintArray)&denies,
             active_first, active_count, active_stride);

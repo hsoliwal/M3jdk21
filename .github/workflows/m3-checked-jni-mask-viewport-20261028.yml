@@ -3,7 +3,7 @@ name: M3JDK21 current-master viewport JNI checked Java21 and UBSan
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportCheckedJniContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3MaskViewportCheckedJniContract.java'
       - 'm3/collections/qualification/checked-jni-mask-viewport-20261028/**'
       - '.github/workflows/m3-checked-jni-mask-viewport-20261028.yml'
   workflow_dispatch:

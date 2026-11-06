@@ -35,7 +35,7 @@ Canonical recipe dependency:
 The BiMap metadata recipe successor is a separate companion canonical draft.
 
 `BIMAP_QUALIFICATION_REPORT.json` SHA-256:
-`32aa3815f7a366a221f8733259556ca45c055bfe4912416036df1df40b19be75`.
+`5c8323986a8fa1501c5264b24f8cb2b69ae8be52e9029d9e03ccb506751b9964`.
 `SOURCE_PROVENANCE.tsv` binds the two emitted files to exact source preimages,
 recipe manifests and the already-committed owner/test identities. FOSS ledgers
 separately record owner, upstream test-library, and metadata-generator reuse.
@@ -49,7 +49,7 @@ Maven test source. Use the exact JAR hashes in the dependency snapshots.
 Keep the qualified native artifact on the classpath in place of the original
 Guava runtime JAR, and use the unchanged guava-testlib 33.4.8 JAR. The original
 22-test source stays at
-`m3/collections/interop/src/test/java/com/m3/collections/interop/M3BiMapTest.java`.
+`m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3BiMapTest.java`.
 
 1. Compile the two committed interop owner sources, that committed test,
    `proofs/CollectionTestLauncher.java`, and

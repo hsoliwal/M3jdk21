@@ -56,7 +56,7 @@ static void m3_batch_counts(const jint *values, const jint *ends, jsize runs,
 
 /* No Java array pointer escapes this invocation, and no input is mutated. */
 JNIEXPORT jintArray JNICALL
-Java_com_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0(
+Java_jdk_m3_tools_cpu_M3RunLengthPostingIndexNative_batchCounts0(
         JNIEnv *env, jclass unused, jintArray uniqueValues,
         jintArray runEnds, jintArray queries) {
     (void) unused;

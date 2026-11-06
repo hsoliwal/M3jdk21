@@ -6,10 +6,10 @@
 **Status:** DRAFT/HOLD, not product-merge-qualified.
 **Receiving repository:** `hsoliwal/M3jdk21` (this branch only).
 **Canonical Synexia recipe and test owner:** [#15537](https://github.com/hsoliwal/com.synexia/pull/15537). **Related existing receiver:** [M3JDK21 #2170](https://github.com/hsoliwal/M3jdk21/pull/2170).
-**Single production source:** `m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3SingleValueMapView.java`.
-**Verified preimage Git blob:** `e397cb4ab04246e34449a278f0149aa718106622`.
+**Single production source:** `m3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/M3SingleValueMapView.java`.
+**Verified preimage Git blob:** `ab4ffb7245687d4f837d969bd719c7a5a142fc39`.
 **Exact reviewed postimage Git blob:** `bf28adb8154e25ef64bce8ad8f5b55bce46d70bb`.
-**Preimage SHA-256:** `f79e36374fac2033d9292e4806254272faabdc54fff9d4fc6ebd8bbcba0f681b`.
+**Preimage SHA-256:** `81b405b382a65ab16edeca1742463f8a74b2d96dbd0c6320da802f02af0b2a71`.
 **Postimage SHA-256:** `c79ba4f515aca777b1ba9049c3c9ec079832c22238b008a4dfddbfa3e5badb18`.
 
 No original publicly observable APIs may be removed. Earlier code exposed the public constructor JVM descriptor `(Lcom/m3/collections/spring/M3MultiValueMap;)V`; a later source change widened the declaration to `(Ljava/util/Map;)V`. Although Java source calls may compile, existing client bytecode still refers to the old descriptor and throws `NoSuchMethodError`. The one approved leaf *adds back* the old constructor and delegates to the retained widened Map constructor, preserving its null rejection. No other Java method, object identity behavior, serialization UID, Java Map.Entry facade, key/value array storage, native C body, JNI symbol, allocator or JDK java.base code is altered.

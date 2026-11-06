@@ -12,40 +12,40 @@
   "product_preimage_tree": "0a240f57241e72448ddfe81915a2324d26298bb6",
   "executed_outputs": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
       "before_blob": "37e5575193fb010b03e786ad1f717fecce111fec",
       "after_blob": "23d8c3f6e294beb5cb9b5b015470e31b69a17125",
       "after_sha256": "da9e7f0d706ccdbd31c6efed4267ba00b36843f238a7a747f2c043177a1aa43d"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3AtomicDeleteFailureOracle.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3AtomicDeleteFailureOracle.java",
       "before_blob": null,
-      "after_blob": "0c3284a2250a134f5262d428ed4c558f05bfd55c",
-      "after_sha256": "e651ca75e7d4ca9bdf26cc2ca31249ca582dc0758be7803ef447856be4a5d9f3"
+      "after_blob": "14e7c6c240842bd8252a5444880fae6c3e41be0d",
+      "after_sha256": "1978ca2fa19f5a2f043a5e3cf94d95e903d5b1aa7c094240cfaab912d439d9b0"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongAtomicCompactionTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongLongAtomicCompactionTest.java",
       "before_blob": null,
-      "after_blob": "2fd8b71e228f141bbbea51ed2d0cb65d9ad23bcc",
-      "after_sha256": "c1721306e7251bb94c652c9e84880f2071b9977750ebbbce302c03e24c331e9d"
+      "after_blob": "989ad4485cdc7fa8a54f5176447f3ee1350292a7",
+      "after_sha256": "72797e512cf7b26b10323d93d60de3f7c459a8f2ea7ae9c8efd1c6233d058050"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongSharedTrace.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongLongSharedTrace.java",
       "before_blob": null,
-      "after_blob": "ca2f942bf527373aab9a6da27e063c9cf9e84dfa",
-      "after_sha256": "2bd90280b26085e1341b77027b45e8b0d66681faeb583b8304f6ada3a82fa41b"
+      "after_blob": "0e7b60696a860a330e266901fb2d92f2361fd199",
+      "after_sha256": "db2d8337705933d381ef81e0bb1b9167d3c9e4a10740b9e6446ce9664b0df968"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongMapCompactionSuccessOracle.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongMapCompactionSuccessOracle.java",
       "before_blob": null,
-      "after_blob": "19a2f6ede74c4e5d428de54a69df2c67697b9925",
-      "after_sha256": "3d9773120b7530f574297abf32c1b21c8231a03c2031fc1e2a900170061f9383"
+      "after_blob": "f6db92a1cda75f60580b768d13ea1609f5b8ad03",
+      "after_sha256": "07bfb36649bc7cf74a94e1eeec4f490c42a144b5acd905d135435ef94c676250"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongMapRealOomeTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongMapRealOomeTest.java",
       "before_blob": null,
-      "after_blob": "f56da277227abe883cd0171cf51ee6de0ea332ee",
-      "after_sha256": "254fefa111991a5c0999942397e5f98c8f84062c4830c8e0ed559b865f1d50fc"
+      "after_blob": "a3b343a81b15118f83ded80e75b58aece4be9c5e",
+      "after_sha256": "037a9542a198c8a9dc7f109112257932d3144e385008e0d767e3b2f777d328f1"
     }
   ],
   "verified_scope": {
@@ -103,7 +103,7 @@
     "existing_mapping_id": "synexia.collections.long-long-add-to",
     "mapping_and_plan_blobs": [
       "1c80a11095bec62eb83c336e31b51754de4b9e4a",
-      "0128d78bda45b60001b3430cc753a44a22fd4c89"
+      "53f5f3a58b4f9ed58460bda13cfd1c8ba6a63774"
     ],
     "existing_candidate_pins_and_queued_operations_preserved": true,
     "unchanged_before_after_refusal": "Arrays.java companion source SHA drift"

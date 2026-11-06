@@ -31,10 +31,10 @@ Each original source file was fetched independently at its frozen owner parent *
 |---|---|
 | Current `src/java.base/share/classes/java/lang/Object.java`, original master | `a9899e1c2970f6d5e9172ffb12f5b7399d052b68` |
 | `test/jdk/java/lang/Object/ObjectAdapterNativeTest.java`, #2317 | `19cf899b9aad2d43566d1d0b1f52dec67464a0eb` |
-| `m3/collections/src/main/java/com/m3/collections/M3ArrayList.java`, #2319 | `6a8aecf10296a28fce40cda0fa86b289921ddbd8` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java`, #2319 | `60be524df82197ae9aa4214320f10ded4e3e9d4c` |
 | Native `m3textops.c`, #2321 | `416200afbf97e95dfa38f3cf35e03b1739fa5066` |
 | `NativeUtf16Literal.java`, #2321 | `99e5e8f6955316c8a3b163c38e5e1d43587cb21d` |
-| `VInt.java`, #2325 | `159069a2bb959868253df3fdfee2bf024878a992` |
+| `VInt.java`, #2325 | `346c05694f6921b8211d15fd5fc1da0cd01bae83` |
 | Native `m3_packed_codec.c`, #2325 | `1813a024d4c2ce514cebe4928ab4379b7950ff94` |
 
 Current `java.lang.Object` contains the exact correct public generic method `public <T> T toAdapter(Class<T> clazz)`. The merged branch's Object.java Git blob is **byte-identical** to master. The older draft #2320 proposes a misspelled `toAdpater` public alias and HotSpot edits; this is **NOT** an admitted source change. No Java ABI or JNI compatibility inference is made solely from the seven witnesses.

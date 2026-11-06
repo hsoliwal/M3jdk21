@@ -5,7 +5,7 @@ target	hsoliwal/M3jdk21:m3/inline-commons-bag-contract-receiver-20261027
 original_api_source	apache/commons-collections:rel/commons-collections-4.5.0/src/main/java/org/apache/commons/collections4/Bag.java
 original_api_license	Apache-2.0/ASF-notices-preserved
 api_source_sha256	041c252eb54d502e2a1edd94242fbbf74e948ae6fbdc537b188ac0f64ea22003
-test_source_sha256	73d12e03851fefe19f3a04ade5838e3bf79cf78406ca3c36cad4a90a10cf0b73
+test_source_sha256	cdeafb83e6c2a2f34292d3c610fef63024aaebf1d2269354d273f53b7c74368f
 pom_scoped_maven_recipe	org.openrewrite.maven.ChangeDependencyScope(org.apache.commons:commons-collections4 -> test)
 pom_preimage_blob	2fd06f942e77478aace3f8219bbe0e26f3a925df
 module_java21_compile	PENDING_CI

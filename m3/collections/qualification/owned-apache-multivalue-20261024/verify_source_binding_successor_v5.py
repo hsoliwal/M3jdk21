@@ -21,13 +21,13 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 PREDECESSOR = HERE / "verify_source_binding_successor_v4.py"
-V4_SHA256 = "d85aa1c3eb43cde618dbe197219dd18544a91b9edfebeac6f7c43b4651d7b87f"
+V4_SHA256 = "d6ac7c9368401fd3926f1c4a60e889b200d2edf59ce61d4213c298242e3c825c"
 RECEIPT_NAME = "SDK_SOURCE_BINDING_SUCCESSOR_V5.json"
 RECEIPT_BYTES = 3397
-RECEIPT_SHA256 = "181f8244467dd2a8596cfacad475b971d5a4137970d9188a2f71c276b931762d"
+RECEIPT_SHA256 = "5498404216725b2a8742599a83f820867a615edf000b4b39d34f845ca4301249"
 SUCCESSOR_PATHS = (
-    "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
-    "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",
     "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
 )
 

@@ -54,7 +54,7 @@
       <resource>
         <directory>${m3.engine.resources}</directory>
         <includes>
-          <include>com/synexia/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018/**</include>
+          <include>jdk/internal/m3/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018/**</include>
           <include>META-INF/rewrite/m3-spring-case-indexed-20261018.yml</include>
         </includes>
       </resource>
@@ -68,10 +68,10 @@
           <release>21</release>
           <proc>none</proc>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/synexia/rewrite/M3SpringCaseIndexed20261018RecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3SpringCaseIndexed20261018RecipeTest.java</testInclude>
           </testIncludes>
           <compilerArgs>
             <arg>-Xlint:all</arg>

@@ -4,8 +4,8 @@ name: M3JDK21 primitive viewport commit atomicity
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3TreeCommitAtomicityTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3TreeCommitAtomicityTest.java'
       - 'm3/collections/qualification/arraylist-dual-word-20261023/RECEIVER_RECEIPT.json'
       - 'm3/collections/qualification/tree-commit-atomic-20261025/**'
       - 'm3/collections/algorithm-catalog/tree-commit-atomic-20261025.tsv'

@@ -28,7 +28,7 @@ static jint m3_mkfifo(JNIEnv *env, jbyteArray input, jint mode) {
     return result;
 }
 
-JNIEXPORT jint JNICALL Java_com_synexia_unix4jm3_io_FileTools_mkfifo0
+JNIEXPORT jint JNICALL Java_jdk_internal_m3_unix4jm3_io_FileTools_mkfifo0
   (JNIEnv *env, jclass owner, jbyteArray path, jint mode) {
     (void)owner;
     return m3_mkfifo(env, path, mode);
@@ -98,11 +98,11 @@ done:
     return result;
 }
 
-JNIEXPORT jint JNICALL Java_com_synexia_unix4jm3_NativeUtf16Literal_abiVersion0
+JNIEXPORT jint JNICALL Java_jdk_internal_m3_unix4jm3_NativeUtf16Literal_abiVersion0
   (JNIEnv *env, jclass owner) { (void)env; (void)owner; return 1; }
 JNIEXPORT jint JNICALL Java_jdk_m3_text_NativeUtf16Literal_abiVersion0
   (JNIEnv *env, jclass owner) { (void)env; (void)owner; return 1; }
-JNIEXPORT jint JNICALL Java_com_synexia_unix4jm3_NativeUtf16Literal_feed0
+JNIEXPORT jint JNICALL Java_jdk_internal_m3_unix4jm3_NativeUtf16Literal_feed0
   (JNIEnv *env, jclass owner, jcharArray page, jint count, jcharArray needle,
    jintArray prefix, jint state) {
     (void)owner;

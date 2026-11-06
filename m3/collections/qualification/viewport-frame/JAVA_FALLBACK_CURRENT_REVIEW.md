@@ -30,11 +30,11 @@ draft pending independent product CI and current-source review.
 - Baseline product owner blob `5966bffacc730b3ef7102d615a2331a42ae4a22b`.
 - SDK-produced Java fallback owner blob `aefcdb933cbc2caa122a527180e20fda8e2a284d`.
 - Source-identical original Java frame oracle blob
-  `db58a90031370a5cf8dd9039dbce6306817dde46`.
+  `37520b6fbcb02f45e038e7f0192b73d2acc2e1ac`.
 - Existing unchanged product native Java owner
-  `9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad`.
+  `4f73ddb9aae36dadb8003257d3a6988536a18066`.
 - Existing unchanged product native C owner
-  `f29d081e28ba8ccc4516bd28c09e738b7a408a76`.
+  `b0d387f2612a315c6b53a50a814432c916ca61c8`.
 
 The new hosted gate compiles **actual M3JDK21 Java classes**, executes
 the 35,080-check deterministic frame reference in normal and interpreted

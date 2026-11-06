@@ -12,7 +12,7 @@ B = Path(__file__).resolve().parent
 R = B / 'overlay'
 BASE = B.parent
 TASK = 'm3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005'
-CRATE = 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
+CRATE = 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
 PARENT = '0994ecd65e86600f417f4d8702838d8c2663af61'
 TREE = '7e8f39ac999174f8d5b6028d638a68d8c317b070'
 SOURCE = '0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8'
@@ -73,7 +73,7 @@ def main():
         paths.update(str(path.relative_to(R)) for path in (R / prefix).rglob('*') if path.is_file())
     paths.update([
         'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-recovery-handoff.yml',
-        'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java',
+        'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java',
         'm3/migration/test/test_jcc_source_recovery_handoff_packet.py',
         'm3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml',
     ])
@@ -118,7 +118,7 @@ def main():
         'source_pull_request': 'https://github.com/hsoliwal/com.synexia/pull/9362',
         'source_execution_input_commit': 'be92c62ece9023b5c33676716a1076d00e26120a',
         'source_publication_status': 'PUBLISHED_CUSTODY_VERIFIED',
-        'source_publication_receipt_sha256': '95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8',
+        'source_publication_receipt_sha256': '91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35',
         'retained_destination_owner_commit': 'da958d00d24154c0db87beca0ec80a7df2b43b73',
         'receiving_pr': 'https://github.com/hsoliwal/M3jdk21/pull/147',
         'publication_route': 'Update PR147 only if the expected branch head remains open/unmerged; root rechecks live state.',

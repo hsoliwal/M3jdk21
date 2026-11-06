@@ -17,8 +17,8 @@ Git blob `37a7371cfac52f2f57072c8f00632bfcd1e19007`,
 SHA-256 `ef71160197b39b8a0e58aa3453c9c6ba2c1db945c94a67db15c00ce0c2fe63b9`.
 That is **identical** to the original Maven/OpenRewrite preimage.
 The original Wave22 complete C source after-image is SHA-256
-`8e256da0d370c3ea3a29af132ed5bb8e0b399e88b7d77aa6260d214f0542228f`,
-Git blob `8e8a36d707bff57ec5a08e2b239e7af49cc3a7e0`.
+`d4ca25aa22ec0606705d62c86a6c794ac44936d894a0759a510a7fb104e2f17b`,
+Git blob `fce8ad708c408b4e7a9c35253a2ad84522d2b509`.
 One existing private C17 function body is refined mechanically;
 its public Java classes, method signatures and the exported symbol
 `Java_com_m3_tools_cpu_M3IntIntervalSetNative_contains0` remain fixed.

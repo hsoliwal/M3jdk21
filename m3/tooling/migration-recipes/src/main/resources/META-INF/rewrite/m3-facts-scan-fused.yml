@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.FactsScanFused
+name: jdk.internal.m3.FactsScanFused
 displayName: M3JDK21 fused single-pass facts scan over bulk-read windows
 description: >-
   java.lang.M3StringFacts.scan folds every fact (unit hashes, ASCII case hashes, prefix4/suffix4,
@@ -12,5 +12,5 @@ description: >-
   flat-needle fold and the code-unit gate. Outputs are byte-identical (differential dump of 14,842
   fact rows). Stacks on crate m3-facts-mixed-consumers (the preimage is its postimage).
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-facts-scan-fused

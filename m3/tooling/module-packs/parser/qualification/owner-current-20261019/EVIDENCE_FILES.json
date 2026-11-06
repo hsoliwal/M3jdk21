@@ -4,21 +4,21 @@
     {
       "source": "/workspace/scratch/7ea994fb52d9/candidates/parser/receiving/QUALIFICATION.md",
       "target": "QUALIFICATION.md",
-      "sha256": "2f1d475cd7dc941d000b715c25c9a468171bb919eb80c9898bd692c6ace24c87",
+      "sha256": "f3987aba18bc2aaac3f64026ae67cb5e340812e6001f434c769d45c7d8c70fc3",
       "bytes": 8216,
       "copy": "EXACT_BYTES"
     },
     {
       "source": "/workspace/scratch/7ea994fb52d9/candidates/parser/receiving/REVIEW.json",
       "target": "REVIEW.json",
-      "sha256": "62c7af95bca6514a368ef966e27387cec1c04442412bd67a8939babb1fb74fa4",
+      "sha256": "70674e4d4c9dcaa669d0e6fea9ef6857ea733888d3e9ecd7839d3c64dd65914e",
       "bytes": 7915,
       "copy": "EXACT_BYTES"
     },
     {
       "source": "/workspace/scratch/7ea994fb52d9/candidates/parser/SOURCE_SEALS.json",
       "target": "SOURCE_SEALS.json",
-      "sha256": "979f7b8c21a623493f40fc04a7f62ec13744a996313023a05cb386f59a08bab0",
+      "sha256": "f7f5f573a71df6950cbf72438545ff71a0040b5d161997027a1fe55b60679b1f",
       "bytes": 2875,
       "copy": "EXACT_BYTES"
     },
@@ -39,14 +39,14 @@
     {
       "source": "/workspace/scratch/7ea994fb52d9/proofs/sdk-parser-current-01/sdk-output/SDK_EXECUTION.tsv",
       "target": "receipts/sdk-current/SDK_EXECUTION.tsv",
-      "sha256": "a2a31a291000f02bd5ba08f71848900ca2a585001ac438509706101bd3498095",
+      "sha256": "722cde9692bbbfc1353b5286d4623868f8182b48e4401458b6726236d2d3576d",
       "bytes": 2698,
       "copy": "EXACT_BYTES"
     },
     {
       "source": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/RESULT.json",
       "target": "receipts/integrated-owners/RESULT.json",
-      "sha256": "6755b629e5a77e4218978820e5a2d0e9e2c266ea68c4a46ae543c3fc8f0fe605",
+      "sha256": "d66e536cf262cca7787116a7015d1ece8e735c5e0874d329e907442f4bb87c5c",
       "bytes": 68588,
       "copy": "EXACT_BYTES"
     },
@@ -74,7 +74,7 @@
     {
       "source": "/tmp/m3-parser-refinement-20261019/current-integrated/BUILD.json",
       "target": "receipts/current-integrated/BUILD.json",
-      "sha256": "fdf761cea178f7c4d42db1df2c1443e0f36fb3666e7d8b30e4126f93a791ab93",
+      "sha256": "66a44e67e95172c622545273ec9d02ba09bd8e1a8b1ad8188e26734a45226622",
       "bytes": 17516,
       "copy": "EXACT_BYTES"
     },

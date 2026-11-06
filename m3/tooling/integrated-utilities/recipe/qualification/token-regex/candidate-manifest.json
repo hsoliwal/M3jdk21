@@ -17,7 +17,7 @@
       "path": "m3/runtime-integration/token-regex/contract-catalogue.json",
       "candidate": "/workspace/scratch/0125adabf4e6/m3jdk21-work/token-candidates/postimages/m3/runtime-integration/token-regex/contract-catalogue.json",
       "pre_sha256": null,
-      "post_sha256": "3e1bfbf638ecf134ab2f0d81619ce2cb05472c7e12f1497b41ef54a01fbb16df"
+      "post_sha256": "b4b5279f88bed412a78cd533563b417b86b25fc19e9a0283f64d20ab8e686491"
     },
     {
       "path": "m3/runtime-integration/token-regex/verify.py",

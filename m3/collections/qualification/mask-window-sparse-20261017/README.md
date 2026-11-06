@@ -11,7 +11,7 @@ Reproduce the actual Maven/OpenRewrite, Java21 and checked JNI/UBSan proof using
 
 ```sh
 export JAVA_HOME=/path/to/jdk21
-python3 m3/collections/qualification/mask-window-sparse-20261017/tooling/synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/proof/verify.py --output /new/proof-directory --maven /path/to/mvn --m2 /path/to/offline-m2
+python3 m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/proof/verify.py --output /new/proof-directory --maven /path/to/mvn --m2 /path/to/offline-m2
 ```
 
 Keep draft: full owning reactor/JUnit, built M3JDK image/jtreg/JCK, GC/JIT matrix, other native platforms, statistical performance and retained/native live-memory attribution remain pending. This does not advance the ordered STRING receiving phase. All existing OpenJDK/third-party licenses remain authoritative; first-party Apache-2.0 LICENSE/NOTICE are retained in the mirror.

@@ -3,7 +3,7 @@ name: M3 original provider to parser single-capture integration
 on:
   pull_request:
     paths:
-      - 'm3/file/src/main/java/com/m3/file/**'
+      - 'm3/file/src/main/java/jdk/m3/file/**'
       - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java'
       - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3Utf8SourceMap.java'
       - 'm3/tooling/module-packs/parser/integration/**'
@@ -31,7 +31,7 @@ jobs:
           set -euo pipefail
           classes="$RUNNER_TEMP/m3-provider-capture"
           mkdir -p "$classes"
-          file=m3/file/src/main/java/com/m3/file
+          file=m3/file/src/main/java/jdk/m3/file
           parser=m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser
           test=m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test
           javac --release 21 -Xlint:all -Werror -d "$classes" \

@@ -69,7 +69,7 @@
         "M3SlotMap.ENTRY_FACADE_CACHE_CAPACITY",
         "M3SlotMap.entryFacades"
       ],
-      "generic_lfu_owner_unchanged_sha256": "afd60b853a623137245ae7ef4e4c56170c6de94d1edc58ef62a5b9ca3f174166",
+      "generic_lfu_owner_unchanged_sha256": "4b0e0ac9e2f97fd47f4604bf49ca15c39e451c97605d383dfb1ee3c3360f1fdb",
       "public_behavior_repair": "Fresh caller-owned Entry identity restored; contradictory cache reuse is refused by the canonical invariant.",
       "performance_tradeoff": "Each explicit live Entry API projection allocates one caller-owned LiveEntry as required by the existing identity contract; no owner-held Entry cache remains. No throughput improvement is claimed."
     }
@@ -81,30 +81,30 @@
       "reference_header_sha256": {
         "com_m3_collections_M3LongIndexPathMasksJNI.h": "68dd32b3203baa60ac10eed61030f7c770664eec42ac3689666b042c11f48758",
         "com_m3_collections_M3LongRankBatchNative.h": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641",
-        "com_m3_collections_M3IndexMaskCompactor.h": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
-        "com_m3_collections_M3IndexMaskWindow.h": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
-        "com_m3_collections_M3IndexPathMasks.h": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+        "com_m3_collections_M3IndexMaskCompactor.h": "38535383a4ca0c950046a168f5fc6e7160f9fd12434dfac8317d5d2f54c54df2",
+        "com_m3_collections_M3IndexMaskWindow.h": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
+        "com_m3_collections_M3IndexPathMasks.h": "477a947e172dfec5a858a6ac67a34a83673d8af8c4453c506f343d338475a440",
         "com_m3_collections_M3SignalOrderNative.h": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96",
         "com_m3_collections_M3SpanIndex.h": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf",
         "com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
         "com_m3_collections_M3StateMaskHistogram.h": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4",
         "com_m3_collections_M3MaskViewportNative.h": "790520041126b8e8ecd678c6dbb5fe6ca1c389cf7e0b89480b375402d25ce91e",
         "com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
-        "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+        "com_m3_collections_M3LongAddressKernel.h": "688b0b0ff74d311c1f805e64bfc408bac33e21fd42512daae4d12355406c8279"
       },
       "candidate_header_sha256": {
         "com_m3_collections_M3LongIndexPathMasksJNI.h": "68dd32b3203baa60ac10eed61030f7c770664eec42ac3689666b042c11f48758",
         "com_m3_collections_M3LongRankBatchNative.h": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641",
-        "com_m3_collections_M3IndexMaskCompactor.h": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
-        "com_m3_collections_M3IndexMaskWindow.h": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
-        "com_m3_collections_M3IndexPathMasks.h": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+        "com_m3_collections_M3IndexMaskCompactor.h": "38535383a4ca0c950046a168f5fc6e7160f9fd12434dfac8317d5d2f54c54df2",
+        "com_m3_collections_M3IndexMaskWindow.h": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
+        "com_m3_collections_M3IndexPathMasks.h": "477a947e172dfec5a858a6ac67a34a83673d8af8c4453c506f343d338475a440",
         "com_m3_collections_M3SignalOrderNative.h": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96",
         "com_m3_collections_M3SpanIndex.h": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf",
         "com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
         "com_m3_collections_M3StateMaskHistogram.h": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4",
         "com_m3_collections_M3MaskViewportNative.h": "790520041126b8e8ecd678c6dbb5fe6ca1c389cf7e0b89480b375402d25ce91e",
         "com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
-        "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+        "com_m3_collections_M3LongAddressKernel.h": "688b0b0ff74d311c1f805e64bfc408bac33e21fd42512daae4d12355406c8279"
       },
       "equal": true
     }

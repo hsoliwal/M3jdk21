@@ -12,9 +12,9 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.m3.collections;
+package jdk.m3.collections;
 import java.lang.management.ManagementFactory;
-import static com.m3.collections.M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
+import static jdk.m3.collections.M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
 /** Narrow single-thread allocated-byte observation, not a throughput/JMH claim. */
 public final class RangeAllocationProbe {
     private static volatile Object sink;

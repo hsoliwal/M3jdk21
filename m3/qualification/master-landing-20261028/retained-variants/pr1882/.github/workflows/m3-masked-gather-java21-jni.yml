@@ -4,10 +4,10 @@ name: M3 masked physical gather Java21 JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java'
       - 'm3/collections/src/main/native/collections/m3_long_address_kernel.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3MaskedGatherContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3MaskedGatherTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherTest.java'
       - '.github/workflows/m3-masked-gather-java21-jni.yml'
       - 'm3/collections/qualification/masked-gather-20261026/**'
 
@@ -34,10 +34,10 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java)" = 'a106baf182c47088dfb6dbfc6c249592f2a0c71b'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java)" = '9dea1df7254fc8f99449be544d410dbf973a137b'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = '123e40c56995574979e999e6233a218b3dc2e4cb'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3MaskedGatherContract.java)" = 'd4271622eabfab82f7329d8817b0b35d0307391f'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3MaskedGatherTest.java)" = '88ce86d76bfd740dfdab47761e9f38e9d0af1e5e'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherContract.java)" = '7c62c52d5fc97d933f76db143fb0ac54000ccfff'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherTest.java)" = '80714c8cd974dcdf6886bc80ca7d7b26c78def9f'
       - name: Build original Java named modules and generated JNI headers
         shell: bash
         run: |
@@ -53,9 +53,9 @@ jobs:
             -h "$out/headers" -d "$out/collections" @"$out/collections.args"
           javac --release 21 -Xlint:all,-module -Werror \
             --module-path "$out/arrays:$out/collections" \
-            --patch-module com.m3.collections=m3/collections/src/test/java \
-            -d "$out/tests" m3/collections/src/test/java/com/m3/collections/M3MaskedGatherContract.java
-          test -f "$out/headers/com_m3_collections_M3LongAddressKernel.h"
+            --patch-module jdk.m3.collections=m3/collections/src/test/java \
+            -d "$out/tests" m3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherContract.java
+          test -f "$out/headers/jdk_m3_collections_M3LongAddressKernel.h"
       - name: Compile checked original C17 JNI owner and preserve existing exports
         shell: bash
         run: |
@@ -64,11 +64,11 @@ jobs:
           gcc -std=c17 -Wall -Wextra -Werror -O2 -shared -fPIC \
             -fsanitize=undefined -fno-sanitize-recover=undefined \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            -include "$out/headers/com_m3_collections_M3LongAddressKernel.h" \
+            -include "$out/headers/jdk_m3_collections_M3LongAddressKernel.h" \
             m3/collections/src/main/native/collections/m3_long_address_kernel.c \
             -o "$out/native/libm3_collections_address.so"
-          nm -D "$out/native/libm3_collections_address.so" | grep -Fq Java_com_m3_collections_M3LongAddressKernel_gatherNative
-          nm -D "$out/native/libm3_collections_address.so" | grep -Fq Java_com_m3_collections_M3LongAddressKernel_gatherSelectedNative
+          nm -D "$out/native/libm3_collections_address.so" | grep -Fq Java_jdk_m3_collections_M3LongAddressKernel_gatherNative
+          nm -D "$out/native/libm3_collections_address.so" | grep -Fq Java_jdk_m3_collections_M3LongAddressKernel_gatherSelectedNative
       - name: Prove original JVM and native bitmask gather parity, including -Xint
         shell: bash
         run: |
@@ -79,14 +79,14 @@ jobs:
             if [ "$mode" = interpreter ]; then flags=(-Xint); fi
             java ${flags[@]} -Xmx512m -Djava.library.path="$out/missing" \
               --module-path "$out/arrays:$out/collections" \
-              --patch-module "com.m3.collections=$out/tests" \
-              -m com.m3.collections/com.m3.collections.M3MaskedGatherContract \
+              --patch-module "jdk.m3.collections=$out/tests" \
+              -m jdk.m3.collections/jdk.m3.collections.M3MaskedGatherContract \
               | tee "$out/java-$mode.txt"
             java ${flags[@]} -Xmx512m -Xcheck:jni -Dm3.test.native.required=true \
               -Djava.library.path="$out/native" \
               --module-path "$out/arrays:$out/collections" \
-              --patch-module "com.m3.collections=$out/tests" \
-              -m com.m3.collections/com.m3.collections.M3MaskedGatherContract \
+              --patch-module "jdk.m3.collections=$out/tests" \
+              -m jdk.m3.collections/jdk.m3.collections.M3MaskedGatherContract \
               | tee "$out/native-$mode.txt"
           done
           grep -Fxq 'PASS M3_MASKED_GATHER checks=976328 native=false' "$out/java-normal.txt"

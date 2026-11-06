@@ -69,7 +69,7 @@ def main():
     env = dict(os.environ)
     for key in ("BASH_ENV", "JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS", "CLASSPATH"):
         env.pop(key, None)
-    env.update(M3_JDK=str(jdk), M3_BOUNDED_COHORT=str(source), JAVA_HOME=str(jdk),
+    env.update(M3JDK=str(jdk), M3_BOUNDED_COHORT=str(source), JAVA_HOME=str(jdk),
                TMPDIR=str(work/"tmp"), TEMP=str(work/"tmp"), TMP=str(work/"tmp"),
                HOME=str(work/"home"),
                JAVA_TOOL_OPTIONS="-Xmx128m -XX:-UsePerfData -Djava.io.tmpdir="+str(work/"tmp")+" -Duser.home="+str(work/"home")+" -XX:ErrorFile="+str(work/"hs_err_pid%p.log"))
@@ -131,7 +131,7 @@ source "$M3_BOUNDED_COHORT/m3/build.sh"
             assert raw[:4] == bytes.fromhex("cafebabe") and int.from_bytes(raw[6:8], "big") == 65
         result.update(status="PASS_CURRENT_ORIGINAL_CORE_BUILD", originalExecutions=64,
                       originalPassMarkers=counts, compiledClasses=classes,
-                      coreJar=identity(regular(source/"m3/build/com.m3.text.jar")))
+                      coreJar=identity(regular(source/"m3/build/jdk.m3.text.jar")))
     except Exception:
         error = traceback.format_exc()
     finally:

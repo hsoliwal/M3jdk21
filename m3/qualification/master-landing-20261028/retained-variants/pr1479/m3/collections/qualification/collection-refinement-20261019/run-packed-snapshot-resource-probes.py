@@ -100,7 +100,7 @@ def prepare(args):
         if seal(inputs[variant + "_source"])["sha256"] != expected:
             raise SystemExit("snapshot source pin differs: " + variant)
     output.mkdir(parents=True)
-    record = {"schema": "synexia.m3.packed-snapshot-resources.v1", "stage": "preparing",
+    record = {"schema": "m3.packed-snapshot-resources.v1", "stage": "preparing",
               "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
               "python": sys.version, "platform": platform.platform(), "argv": sys.argv,
               "driver": seal(driver), "probe_template": seal(source), "vm_flags": VM_FLAGS,
@@ -122,7 +122,7 @@ def prepare(args):
         classes = inputs[variant + "_classes"]
         copied = output / (variant + "-classes")
         original = sorted(classes.rglob("*.class"))
-        if not (classes / "com/m3/collections/M3IndexedListSnapshot.class").is_file():
+        if not (classes / "jdk/m3/collections/M3IndexedListSnapshot.class").is_file():
             raise SystemExit("actual compiled snapshot owner missing: " + variant)
         record["input_classes"][variant] = []
         for path in original:
@@ -237,7 +237,7 @@ def run_prepared(args):
         for variant in order:
             raw = command(output, record, variant + "-fork" + str(fork), [frozen["java"], *frozen["vm_flags"],
                 "-Djava.library.path=" + frozen["empty_native"], "-cp", os.pathsep.join((frozen["probe_classes"],
-                frozen["variants"][variant]["classes"])), "com.m3.collections." + PROBE, "suite"])
+                frozen["variants"][variant]["classes"])), "jdk.m3.collections." + PROBE, "suite"])
             current = list(csv.DictReader(io.StringIO("\n".join(line for line in raw.splitlines()
                                                                   if not line.startswith("#"))), delimiter="\t"))
             parsed = [{key: value if key in ("operation", "selection") else int(value)

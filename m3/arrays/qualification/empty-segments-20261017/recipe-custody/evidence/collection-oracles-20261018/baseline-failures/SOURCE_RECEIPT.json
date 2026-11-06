@@ -46,13 +46,13 @@
       "size": 1282
     },
     {
-      "original_workspace_path": "M3jdk21-progress/m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java",
+      "original_workspace_path": "M3jdk21-progress/m3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetTest.java",
       "path": "original-tests/M3LongTreeSetTest.java.txt",
       "sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
       "size": 15877
     },
     {
-      "original_workspace_path": "M3jdk21-progress/m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java",
+      "original_workspace_path": "M3jdk21-progress/m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java",
       "path": "original-tests/M3StoredRepresentativeContract.java.txt",
       "sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
       "size": 13048

@@ -147,7 +147,7 @@ record. Preserve the stable capability ID, exact source/target lineage, status a
 An optional relation is not a new registry or a declaration of full API/runtime parity.
 
 The first source-inventoried example is `com.m3.arrays.M3Arrays`, module `com.m3.arrays`, in
-`m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java` with
+`m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java` with
 `m3/arrays/src/main/java/module-info.java`. Its static factory/composition operations may be
 related to `java.base` / `java.util.Arrays` /
 `src/java.base/share/classes/java/util/Arrays.java` as `STATIC_OPERATIONS`. Preserve explicit

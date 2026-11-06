@@ -3,17 +3,17 @@
  */
 package jdk.m3.nlp.search.test;
 
-import com.m3.compiletime.ast.M3AST;
-import com.m3.compiletime.ast.M3File;
-import com.m3.compiletime.ast.M3FileSourceFacts;
-import com.m3.text.LocalM3Arena;
-import com.m3.text.M3StringPiece;
-import com.synexia.mindex.MIndexInt8MatmulPlan;
-import com.synexia.mindex.MIndexTensorBackend;
-import com.synexia.mindex.MIndexTensorRuntime;
-import com.synexia.mindex.ast.MIndexASTLimits;
-import com.synexia.mindex.ast.MIndexASTPool;
-import com.synexia.mindex.compiler.ast.MIndexJavaAST;
+import jdk.m3.compiletime.ast.M3AST;
+import jdk.m3.compiletime.ast.M3File;
+import jdk.m3.compiletime.ast.M3FileSourceFacts;
+import jdk.m3.text.LocalM3Arena;
+import jdk.m3.text.M3StringPiece;
+import jdk.internal.m3.mindex.MIndexInt8MatmulPlan;
+import jdk.internal.m3.mindex.MIndexTensorBackend;
+import jdk.internal.m3.mindex.MIndexTensorRuntime;
+import jdk.internal.m3.mindex.ast.MIndexASTLimits;
+import jdk.internal.m3.mindex.ast.MIndexASTPool;
+import jdk.internal.m3.mindex.compiler.ast.MIndexJavaAST;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

@@ -9,7 +9,7 @@ The exact existing workflow `.github/workflows/m3-owned-apache-multivalue.yml` p
 
 The stable undated directory `m3/collections/qualification/apache-multivalue-source-custody/` is the receiving output for three previously absent verifier/receipt leaves. This avoids the correctly enforced public JDK naming policy's rejection of date-stamped *new* paths; no policy bypass is authorized.
 
-The original 3397-byte V5 JSON receipt is **byte-identical** to historical #2265 source, Git blob `feb47089a8f728edc36da7791ef0c8c427f99b9c`, SHA256 `181f8244467dd2a8596cfacad475b971d5a4137970d9188a2f71c276b931762d`. The original Python V5 verifier and negative probe are reused, only module/import paths migrated from the historical V4 dated directory to the stable successor directory. Original V4 receipt and verifier, V3/V2 history, first-party source ownership, original source checks and negative tamper/bom/crlf/revert tests remain intact.
+The original 3397-byte V5 JSON receipt is **byte-identical** to historical #2265 source, Git blob `ac361caf86326a25185d917c26822656fce53819`, SHA256 `5498404216725b2a8742599a83f820867a615edf000b4b39d34f845ca4301249`. The original Python V5 verifier and negative probe are reused, only module/import paths migrated from the historical V4 dated directory to the stable successor directory. Original V4 receipt and verifier, V3/V2 history, first-party source ownership, original source checks and negative tamper/bom/crlf/revert tests remain intact.
 
 ## Actual historical source identity, not inferred runtime equivalence
 

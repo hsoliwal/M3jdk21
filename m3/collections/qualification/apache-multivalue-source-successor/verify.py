@@ -22,11 +22,11 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 V4 = "m3/collections/qualification/owned-apache-multivalue-20261024/"
 D1 = ("m3/collections/recipe/owned-apache-multivalue-20261024/src/main/"
-      "resources/com/synexia/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/")
-RECEIPT_BLOB = "88460dfd7fc4e3bced30bf0869dd8441a034b1f4"
-EXPECTED_V4_BLOB = "8c5db55ab4eb2ea04d6ef46ef29e3eaa3cb9950f"
-EXPECTED_V4_VERIFIER = "f51ca531cd1ead74955ad0fa1e4ee7ac769e9ae8"
-EXPECTED_V4_PROBE = "820797f4e45097bbfc5021f6fe487960b18fb5ec"
+      "resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/")
+RECEIPT_BLOB = "46b471a59c346b72633621d67c274b91bf453d93"
+EXPECTED_V4_BLOB = "f9527b590a06c0a3e045c87f09761ecaf0412f41"
+EXPECTED_V4_VERIFIER = "49ff3794a24dd25fd5ab9e690cb5e8d53f0e851c"
+EXPECTED_V4_PROBE = "dbad467d3dd1cf6af42d65b60cff2d2123291aca"
 
 
 def blob(raw: bytes) -> str:

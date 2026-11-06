@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.M3IndexMaskCompactor;
 import java.lang.management.ManagementFactory;
 import java.util.Arrays;
 /** Bounded prepared-workload observation, not JMH or an end-to-end claim. */

@@ -3,8 +3,8 @@
 # M3 primitive multi-lane receipt. Output only to one target under current crate.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-MAIN="$ROOT/src/main/java/com/m3/regexcursor"
-TEST="$ROOT/src/test/java/com/m3/regexcursor"
+MAIN="$ROOT/src/main/java/jdk/m3/regexcursor"
+TEST="$ROOT/src/test/java/jdk/m3/regexcursor"
 OUT="$ROOT/target/m3-token-cursor-seek-locality-20261102"
 if [ -e "$OUT" ]; then echo 'REFUSE occupied output' >&2; exit 3; fi
 read -r sha _ < <(sha256sum "$MAIN/M3TokenCursor.java")
@@ -31,18 +31,18 @@ gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Wpedantic -Werror \
   -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
   "$ROOT/src/test/native/M3StaticGrammarLexiconJni.c" \
   -o "$OUT/libm3grammar.so" > "$OUT/logs/08-gcc-c17.log" 2>&1
-java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3TokenCursorSeekLocalityProof > "$OUT/logs/02-seek-oracle.log" 2>&1
-java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3TokenCursorSeekLocalityBench > "$OUT/logs/02-seek-bench.log" 2>&1
-java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3TokenCursorMultiLaneProof > "$OUT/logs/02-multilane-proof.log" 2>&1
-java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3TokenCursorSingleLaneProof > "$OUT/logs/03-single-lane-proof.log" 2>&1
-java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3GrammarCompleteCursorProof > "$OUT/logs/04-complete-cursor.log" 2>&1
-java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3GrammarTokenProjectionProof > "$OUT/logs/05-projection.log" 2>&1
-java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3CompleteTokenProjectionProof > "$OUT/logs/06-complete-admission.log" 2>&1
-java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3StaticGrammarLexiconProof > "$OUT/logs/07-lexicon.log" 2>&1
+java -ea -Xmx768m -cp "$OUT/classes" jdk.m3.regexcursor.M3TokenCursorSeekLocalityProof > "$OUT/logs/02-seek-oracle.log" 2>&1
+java -ea -Xmx768m -cp "$OUT/classes" jdk.m3.regexcursor.M3TokenCursorSeekLocalityBench > "$OUT/logs/02-seek-bench.log" 2>&1
+java -ea -Xmx768m -cp "$OUT/classes" jdk.m3.regexcursor.M3TokenCursorMultiLaneProof > "$OUT/logs/02-multilane-proof.log" 2>&1
+java -ea -Xmx768m -cp "$OUT/classes" jdk.m3.regexcursor.M3TokenCursorSingleLaneProof > "$OUT/logs/03-single-lane-proof.log" 2>&1
+java -ea -Xmx768m -cp "$OUT/classes" jdk.m3.regexcursor.M3GrammarCompleteCursorProof > "$OUT/logs/04-complete-cursor.log" 2>&1
+java -ea -Xmx768m -cp "$OUT/classes" jdk.m3.regexcursor.M3GrammarTokenProjectionProof > "$OUT/logs/05-projection.log" 2>&1
+java -ea -Xmx768m -cp "$OUT/classes" jdk.m3.regexcursor.M3CompleteTokenProjectionProof > "$OUT/logs/06-complete-admission.log" 2>&1
+java -ea -Xmx768m -cp "$OUT/classes" jdk.m3.regexcursor.M3StaticGrammarLexiconProof > "$OUT/logs/07-lexicon.log" 2>&1
 java -ea -Xcheck:jni -Xmx768m -cp "$OUT/classes" \
-  com.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUT/libm3grammar.so" > "$OUT/logs/09-jni-checked.log" 2>&1
+  jdk.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUT/libm3grammar.so" > "$OUT/logs/09-jni-checked.log" 2>&1
 java -ea -Xint -Xcheck:jni -Xmx768m -cp "$OUT/classes" \
-  com.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUT/libm3grammar.so" > "$OUT/logs/10-jni-interpreted.log" 2>&1
+  jdk.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUT/libm3grammar.so" > "$OUT/logs/10-jni-interpreted.log" 2>&1
 sha256sum "$OUT"/logs/*.log > "$OUT/logs/SHA256SUMS.txt"
 for f in "$OUT"/logs/{02-seek-oracle,02-seek-bench,02-multilane-proof,03-single-lane-proof,04-complete-cursor,05-projection,06-complete-admission,07-lexicon,09-jni-checked,10-jni-interpreted}.log; do tail -1 "$f"; done
 echo 'M3_SEEK_LOCALITY_FULL_ISOLATED_PASS'

@@ -289,7 +289,7 @@ jobs:
               if any((sdk/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("SDK compilation and test outputs must start absent")
               run("sdk-maven",maven+["-f",str(sdk/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
               run("sdk-reports",py+[str(sdk/"verify.py"),"--reports"],deadline=90)
-              fixture=sdk/"src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward"
+              fixture=sdk/"src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward"
               emitted=sdk/"target/emitted/regex-ascii-lexical-receiver-20261019/forward"
               compiler_path="src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java"
               test_path="test/jdk/java/util/regex/M3AutomatonDifferentialTest.java"

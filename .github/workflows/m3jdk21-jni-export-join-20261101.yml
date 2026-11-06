@@ -33,8 +33,8 @@ jobs:
           import hashlib
           import json
           root=Path('m3/tooling/atom-census')
-          receipt=json.loads((root/'contract/SYNEXIA_JNI_EXPORT_JOIN_RECEIPT.json').read_text())
-          assert receipt['schema']=='M3_SYNEXIA_JNI_EXPORT_JOIN_RECEIVER/1'
+          receipt=json.loads((root/'contract/M3_JNI_EXPORT_JOIN_RECEIPT.json').read_text())
+          assert receipt['schema']=='M3_JNI_EXPORT_JOIN_RECEIVER/1'
           required={
             'src/main/java/jdk/m3/tooling/atoms/M3JniExportJoin.java': 'b6aa82f5fb88cc93eddd5c3ba8e28667f68c903d92099ae6ace17719ee0bf7fc',
             'src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinSelfTest.java': '3cb59a8a3c26d58cd12333affe5a3c586e204836305d693342bfcaf7be193720',

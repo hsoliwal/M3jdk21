@@ -3,9 +3,9 @@ name: M3JDK21 filtered-sorted short-circuit Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionViews.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredIsEmptyContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredIsEmptyTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyTest.java'
       - 'm3/collections/qualification/filtered-isempty-20261021/**'
       - 'm3/collections/algorithm-catalog/filtered-isempty-20261021/**'
       - '.github/workflows/m3-filtered-isempty-direct-20261021.yml'

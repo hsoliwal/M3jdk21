@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.m3.collections.apache.iterators;
+package jdk.m3.collections.apache.iterators;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import com.m3.collections.apache.list.UnmodifiableList;
+import jdk.m3.collections.apache.list.UnmodifiableList;
 
 /**
  * Provides an ordered iteration over the elements contained in a collection of
@@ -345,7 +345,7 @@ public class CollatingIterator<E> implements Iterator<E> {
      * would like to use the natural sort order (or, in other words,
      * if the elements in the iterators are implementing the
      * {@link Comparable} interface), then use the
-     * {@link com.m3.collections.apache.comparators.ComparableComparator}.
+     * {@link jdk.m3.collections.apache.comparators.ComparableComparator}.
      *
      * @param comp the {@link Comparator} to set
      * @throws IllegalStateException if iteration has started

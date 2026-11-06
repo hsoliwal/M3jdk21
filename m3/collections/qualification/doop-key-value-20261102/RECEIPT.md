@@ -12,10 +12,10 @@ All four Java files below were emitted by actual `Recipe.run` after exact-hash c
 
 | Path | Emitted Git blob | SHA-256 |
 |---|---|---|
-| `m3/collections/src/main/java/com/m3/collections/M3IndexedBiMap.java` | `ed22e8bcff8a3a3de14acab469d1b4afa5f2a972` | `f5a6b8d6bb4ba635c7983e452c523142c51abbb8515c3683a01c37d917fce34c` |
-| `m3/collections/src/main/java/com/m3/collections/M3ListMultiValueMap.java` | `1bf76cdc0556bfcfbd287f0c62acb244ecaad49d` | `71bdbb9f7ef60aa7dc00b10e116f6fef61395688bd1d2b9124312f0efce94c3c` |
-| `m3/collections/src/test/java/com/m3/collections/M3RelationForEachSelfTest.java` | `a596d0efd918c419820994d0dea5d8dfa5eb89c0` | `f69c70cd86b1903c8ee6c13de0e116665d197c03a4355f48382e92e523eb50c6` |
-| `m3/collections/src/test/java/com/m3/collections/M3RelationForEachTest.java` | `fda02aea7a2d2cbf9ee7ac838a0aff986df2ec4f` | `6b0a9a7ac35629e5d293ed4d3acc0821e5e5fc89350ccb16e575500352bda72a` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3IndexedBiMap.java` | `3e173663a7196e700bfcf1da8815c62f3f60807d` | `8a430604b16f18be57adf3725829d85256a19e4efbfb79c4b48113dd4e5e9188` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3ListMultiValueMap.java` | `a7459cb080eab9b37a3936b0548d4816f5999217` | `3e0ed3a9bf13f6a9de62c493eff3c7400bae5804e26476397e6ae982768f3f03` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3RelationForEachSelfTest.java` | `feaef0f8881d647d3cf74e02f6beee95968f55c6` | `1430aadfd3b2e6a943cd95eac92086cd5c788b188130d48737a6c4d9a347dd7e` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3RelationForEachTest.java` | `6a678dc7d1fd0255d66ffe30d6ffe044e393369f` | `e77f7b82d2bc8570a872429e4db126349b081cfb73525be178f0b84fd0de7c76` |
 
 ## Executed evidence
 

@@ -8,7 +8,7 @@ on:
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/history/**'
-      - 'm3/docs/synexia-m3jdk21-source-successions.tsv'
+      - 'm3/docs/m3-m3jdk21-source-successions.tsv'
       - '.github/workflows/**'
   push:
     branches:
@@ -19,7 +19,7 @@ on:
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/history/**'
-      - 'm3/docs/synexia-m3jdk21-source-successions.tsv'
+      - 'm3/docs/m3-m3jdk21-source-successions.tsv'
       - '.github/workflows/**'
   workflow_dispatch:
 
@@ -46,8 +46,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m unittest discover -s m3/history -p 'test_synexia_handoff.py' -v
-          python3 m3/history/verify_synexia_handoff.py --root .
+          python3 -m unittest discover -s m3/history -p 'test_m3_handoff.py' -v
+          python3 m3/history/verify_m3_handoff.py --root .
       - name: Reject new transformation recipe sources in the downstream product
         if: github.event_name == 'pull_request'
         shell: bash
@@ -58,6 +58,6 @@ jobs:
           git fetch --no-tags --depth=1 origin "$M3_BASE_SHA"
           git diff --diff-filter=A --name-only "$M3_BASE_SHA" HEAD > "$RUNNER_TEMP/m3-new-paths.txt"
           if grep -E '(^m3/recipes/|^m3/tooling/migration-recipes/|/recipe(s)?/)' "$RUNNER_TEMP/m3-new-paths.txt"; then
-            echo 'ERROR: recipe roots (m3/recipes, migration-recipes, */recipe(s)/) take no new sources; add tools under m3/tooling/<lane>/tools/ (standalone, m3/tooling/standalone/SYNEXIA_REFS.tsv)'
+            echo 'ERROR: recipe roots (m3/recipes, migration-recipes, */recipe(s)/) take no new sources; add tools under m3/tooling/<lane>/tools/ (standalone, m3/tooling/standalone/M3_REFS.tsv)'
             exit 1
           fi

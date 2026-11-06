@@ -16,14 +16,14 @@ verify_blob() {
   fi
 }
 
-verify_blob f29d081e28ba8ccc4516bd28c09e738b7a408a76 \
+verify_blob b0d387f2612a315c6b53a50a814432c916ca61c8 \
   m3/collections/src/main/c/m3maskviewport.c
-verify_blob 9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad \
-  m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java
+verify_blob 4f73ddb9aae36dadb8003257d3a6988536a18066 \
+  m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java
 verify_blob 5966bffacc730b3ef7102d615a2331a42ae4a22b \
-  m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
-verify_blob 951674c037506067b194cc3088a73c6835e0ab5b \
-  m3/collections/src/test/java/com/m3/collections/M3MaskViewportCheckedJniContract.java
+  m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java
+verify_blob 27d1b0f38164369f49919f83bfc1a960061fa043 \
+  m3/collections/src/test/java/jdk/m3/collections/M3MaskViewportCheckedJniContract.java
 
 build=$(mktemp -d)
 trap 'rm -rf -- "$build"' EXIT
@@ -39,7 +39,7 @@ mvn -B -ntp -f m3/collections/pom.xml -DskipTests test-compile
 classpath="m3/collections/target/classes:m3/collections/target/test-classes:m3/arrays/target/classes"
 for collector in G1GC SerialGC; do
   "$JAVA_HOME/bin/java" -Xcheck:jni "-XX:+Use$collector" \
-    -cp "$classpath" com.m3.collections.M3MaskViewportCheckedJniContract \
+    -cp "$classpath" jdk.m3.collections.M3MaskViewportCheckedJniContract \
     "$build/libm3maskviewport.so"
 done
 echo "PASS current-master 3-export checked JNI parity on G1/Serial with UBSan C"

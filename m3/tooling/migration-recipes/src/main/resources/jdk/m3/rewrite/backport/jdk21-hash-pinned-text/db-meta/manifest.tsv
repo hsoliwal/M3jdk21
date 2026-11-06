@@ -1,0 +1,5 @@
+.github/workflows/m3-db-parse.yml	ABSENT	c3975aa00fc1196d9d9e1c2e08e02a3accf2175302f1bdd352419e8e0b9a3ce1	00-m3-db-parse.yml.txt
+m3/indexdb/pom.xml	ABSENT	bdda9c5bac33e3bbaca8a888571e4489d72fa238195f26e0b0debef960da3d76	01-pom.xml.txt
+m3/indexdb/tasks/boundary-contracts/DESIGN.md	ABSENT	4482cb3bce9d13de6384773964ef63b4712106c3199a843b09b8b07f12cdcca3	02-DESIGN.md.txt
+m3/indexdb/tasks/boundary-contracts/TASK_PACKET.json	ABSENT	e21516f2378c94acf79376f83e42b3aadb6f8c294eb98eb923e955d5e1daf6b1	03-TASK_PACKET.json.txt
+m3/pom.xml	ecad880e103962bcd9a5f136ab18fd8c6e11a43b82dd91b1e4ce1454c21dc029	d58a931e2b61ab8ef0e78aa29f91179d85f35dc41e16bc8f69cffa98389832be	04-pom.xml.txt

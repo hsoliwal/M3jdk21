@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.m3.rewrite.synexia.PureIntConvergence
-displayName: Receive canonical Synexia pure-int convergence recipe
-description: >-
-  Thin M3JDK21 activation adapter for the provenance-pinned Apache-2.0 Synexia recipe owner.
-  Reusable implementation remains canonical in hsoliwal/com.synexia.
-recipeList:
-  - com.synexia.rewrite.M3PureIntConvergenceRecipe

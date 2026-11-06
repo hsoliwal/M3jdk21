@@ -11,7 +11,7 @@ logs immutable. A current product must have a new sealed source receiver and
 independent tests. Never broaden hash allowlists to accept unknown code.
 
 Current-master source owner:
-`m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java`,
+`m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java`,
 Git blob `45ad6df3a51e83c67dc70de7c7acd82bec2305d3`.
 Its canonical Synexia recipe is under review in
 [hsoliwal/com.synexia#13672](https://github.com/hsoliwal/com.synexia/pull/13672).

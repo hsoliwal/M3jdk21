@@ -15,9 +15,9 @@
     "originalSourceFiles": 27,
     "originalTestFiles": 25
   },
-  "legacyBindingGit": "4992e91a630eb4ca6af7755c3bf17c3b6997c925",
-  "freshBindingGit": "1b1d9ef5943f046247c890bc7d05d5a80804f744",
-  "unchangedV8DeclarationSha256": "5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d",
+  "legacyBindingGit": "566cb6abe154054cf7b08cf1a1db8d5042830e1d",
+  "freshBindingGit": "2dec31f75e5d3237beb52243a90e988feadc9203",
+  "unchangedV8DeclarationSha256": "6f90d22fb6db68af59668138e3757f3c29826af552592b14322c927b372c3873",
   "unchangedNlpLockedJavaSources": 145,
   "qualifiedReceiverHead": "142ee65092cc61cb02cdd58d1fa5d47b800663bb",
   "currentCheckoutSemantics": "Existing GitHub pull-request merge checkout; current evidence must record actual SHA/tree and verify scoped current inputs.",

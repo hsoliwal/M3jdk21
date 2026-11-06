@@ -294,17 +294,17 @@ broad tests were checked rather than assumed to cover these owners by name.
 
 | Complete file read | Git blob | Relevant coverage in its source |
 | --- | --- | --- |
-| [`M3LongLongHashMap.java`][mutable] | `b1d85622c2e19db069d0b2a64fb8011b5c01be34` | Full mutable owner, probes, resizing, tombstones, traversal and failures |
-| [`M3ConcurrentLongMap.java`][concurrent] | `bbe25dfd008fe143806c8c3aefac6d33e413aec2` | Full snapshot owner, publication, copy boundaries and pair-index streams |
-| [`M3LongIterator.java`][iterator] | `44778a63d99c5b1f99adee536b954a4ebb8c64f3` | Primitive cursor and default callback loop |
-| [`M3LongLongConsumer.java`][consumer] | `b1c01d1afacc76bd338179398ab42835e16992fa` | Two-long functional callback |
-| [`M3Collections.java`][factory] | `3d2f5aa53bda55293b3254bed3d526b896cbd044` | Mutable factory delegation; no concurrent-long-map factory |
-| [`M3JdkShapedPrimitiveCollectionsTest.java`][shaped-test] | `9a6710e2985676613778895dd42c8bb9d08e8534` | Direct mutable-map differential and iterator tests described below |
-| [`M3ConcurrentLaneContractTest.java`][snapshot-test] | `86f5ae48e363b14a00e62ed6fd6d74fe572cc2c3` | Direct map-stream capture/order assertions described below |
-| [`M3PrimitiveCollectionDifferentialTest.java`][primitive-test] | `7c641d69f04cebbdca2e7fdb6226396a2e98a736` | List/deque assertions; no direct use of either map |
-| [`M3ConcurrentContractTest.java`][concurrent-test] | `a9e57f112d5ca4e224d3776fc49e4afdf3a62df1` | Locked maps and queue/deque assertions; no direct use of either map |
-| [`M3FactoryContractTest.java`][factory-test] | `e7e156e6d73d178b1bf6f2ee32deb1db5bc046c6` | Other factory/wrapper assertions; does not call `longLongHashMap` or construct the concurrent long map |
-| [`M3ReceivingRecoveryTest.java`][recovery-test] | `1c5f24f32807b408de25e73080640cdb5fef5206` | List/deque receiving assertions; no direct use of either map |
+| [`M3LongLongHashMap.java`][mutable] | `4c9ffd7033def03f2ddd58c1c550e5fa3176524e` | Full mutable owner, probes, resizing, tombstones, traversal and failures |
+| [`M3ConcurrentLongMap.java`][concurrent] | `380a8ef113170833ae3151cd67f73f46fe49eae8` | Full snapshot owner, publication, copy boundaries and pair-index streams |
+| [`M3LongIterator.java`][iterator] | `3027524899d7280b43d24ac41ba9bdd237c4ff0d` | Primitive cursor and default callback loop |
+| [`M3LongLongConsumer.java`][consumer] | `8ce5558a5d660b7f8a206dde3b59d1b30c45aab4` | Two-long functional callback |
+| [`M3Collections.java`][factory] | `9b49f723dfa91628978e26db2564e0282a3e78a9` | Mutable factory delegation; no concurrent-long-map factory |
+| [`M3JdkShapedPrimitiveCollectionsTest.java`][shaped-test] | `b731a03eb005d374a973295266d838159eaa1fc6` | Direct mutable-map differential and iterator tests described below |
+| [`M3ConcurrentLaneContractTest.java`][snapshot-test] | `9eaa65e25f4384e540129f2d7483ac491482aa24` | Direct map-stream capture/order assertions described below |
+| [`M3PrimitiveCollectionDifferentialTest.java`][primitive-test] | `f0736b3ce63b8704291bae940d53e6d87481fecc` | List/deque assertions; no direct use of either map |
+| [`M3ConcurrentContractTest.java`][concurrent-test] | `c4831e0d79dc221070e703f121f1f9ea2febf268` | Locked maps and queue/deque assertions; no direct use of either map |
+| [`M3FactoryContractTest.java`][factory-test] | `d11d43dd29b15a919871e49ed57804af834cb66c` | Other factory/wrapper assertions; does not call `longLongHashMap` or construct the concurrent long map |
+| [`M3ReceivingRecoveryTest.java`][recovery-test] | `0e693ef923b61ef14a929bcd26c6d30fed548e07` | List/deque receiving assertions; no direct use of either map |
 
 The relevant direct assertions are narrower than full acceptance:
 
@@ -334,14 +334,14 @@ sparse lanes, trees, residency and native integration are outside this reference
 
 [module]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/module-info.java
 [policy]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/docs/m3jdk21-porting-invariant.md
-[mutable]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java
-[concurrent]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java
-[iterator]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java
-[consumer]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3Collections.java
-[shaped-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java
-[snapshot-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3ConcurrentLaneContractTest.java
-[primitive-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3PrimitiveCollectionDifferentialTest.java
-[concurrent-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3ConcurrentContractTest.java
-[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java
-[recovery-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3ReceivingRecoveryTest.java
+[mutable]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java
+[concurrent]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLongMap.java
+[iterator]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java
+[consumer]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
+[shaped-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java
+[snapshot-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3ConcurrentLaneContractTest.java
+[primitive-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3PrimitiveCollectionDifferentialTest.java
+[concurrent-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3ConcurrentContractTest.java
+[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3FactoryContractTest.java
+[recovery-test]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3ReceivingRecoveryTest.java

@@ -42,7 +42,7 @@ submission/editorial or unreviewed external GitHub code was copied.
 
 - Before original java.base Git blob: 51ea3a72bb191afc250a58be964363bd5680467c.
 - Direct product postimage Git blob: f85e7359010bd25e0a909a145e283007cff25d7c.
-- New independent test Git blob: d720912f0f57bcde9fc07a05f31869a19f3452eb.
+- New independent test Git blob: 6f3113ad8624004dbe617aa52c96b7a04dfc5ce4.
 - Both exact postimages are first held as canonical Synexia recipe templates;
   the product branch readback returned the exact same Git blobs.
 - The product Java file retains its GPLv2+Classpath original header.
@@ -123,9 +123,9 @@ canonical recipe first; no equivalence or speedup is inferred from queued CI.
 
 The receiver's proof script now also reuses the unchanged original
 `test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java`
-(Git blob `c505b5604e978f215e4aeb93eadfd9f933ffc743`) and
+(Git blob `7e2e2b28e86e0c96caba9db7570cde15778eb194`) and
 `M3JdkRemoveIfMaskContracts.java`
-(Git blob `2dc2fb6494f008fb7166dabfb97000d282a5f9af`).
+(Git blob `69acba92678b0c1fce6c232b20df22bb7e959190`).
 Those cover the established 25,000-case sparse/dense/full-deletion
 mask differential, nested `ArrayList.subList`, `Vector`, fail-fast,
 exception and callback behavior. Actual patched `ArrayList.class` and

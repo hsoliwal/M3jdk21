@@ -43,7 +43,7 @@ of the JDK String logical-size-limit `OutOfMemoryError`.
 | `M3StringPool.java` | `f8bac45d1623d25470e1b79beffa276f271db10e297ef5b434d5335c9d4c908b` |
 | `M3StringConcatLengthOverflowTest.java` | `587f7f63fb419970ffdc889bca05335eb3f49ebcc97d3810906b3587ff9e7ab4` |
 | `mindex-string-backing.yml` | `927ba49c51709896a4610d89daf4d669217e27713153cd46f863aafb0dd63989` |
-| `check-m3string-concat-overflow-current.py` | `e16460bd56377ca59c395e3336dad5914cab1d46c8423b22ee7a0c4366e38cf8` |
+| `check-m3string-concat-overflow-current.py` | `01e7ca8e87fbf3afeafd044364150277bfcbed0bf29277bbb6f92294d73374ac` |
 | `test_m3string_concat_overflow_current.py` | `5a28b85c7f6e5af794acf6663d32ac5a5c82d31e67fc6f22e1a1dc688925eab4` |
 
 ## Verification authority

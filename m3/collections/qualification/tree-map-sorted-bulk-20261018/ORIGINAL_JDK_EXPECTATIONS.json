@@ -1,7 +1,7 @@
 {
   "id": "m3-tree-map-putAll-sorted-source-v1",
   "phase": "FROZEN_BEFORE_PROOF_SOURCE_AND_CANDIDATE",
-  "target": "com.m3.collections.M3TreeMap",
+  "target": "jdk.m3.collections.M3TreeMap",
   "baseline": "Oracle JDK 21.0.9 java.util.TreeMap public API",
   "source_blind": "Public javap signatures only; no candidate/baseline implementation, tests or other-agent output notes read.",
   "sizes": [

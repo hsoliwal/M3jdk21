@@ -6,7 +6,7 @@
 
 ## Canonical owners and contract
 
-The merged first-party `M3LongIndexPathMasks` Java implementation (M3JDK21 PR #1250; Git blob `dd918fb13360408d71fc3577ee5c7bd255205340`) remains **unchanged**. This increment adds only a separate optional JNI backend `M3LongIndexPathMasksJNI`, a C17 Region implementation, and a differential test. The new native library is explicitly named `m3_collections_long_path_masks`; unavailable native requests throw `UnsatisfiedLinkError` with no Java fallback. Neither the existing int-path native ABI nor the Java source contract is modified.
+The merged first-party `M3LongIndexPathMasks` Java implementation (M3JDK21 PR #1250; Git blob `278f63e3bdc6c2e5163376e010e20c05539802ff`) remains **unchanged**. This increment adds only a separate optional JNI backend `M3LongIndexPathMasksJNI`, a C17 Region implementation, and a differential test. The new native library is explicitly named `m3_collections_long_path_masks`; unavailable native requests throw `UnsatisfiedLinkError` with no Java fallback. Neither the existing int-path native ABI nor the Java source contract is modified.
 
 Inputs are caller-borrowed `long[]` row payloads, `int[]` logical-to-physical offsets, multiple `int[][]` state planes, ordered required/forbidden `int[]` masks and a path `(first, count, stride)`. Signed strides, duplicates, negative and extreme `long` values, and caller-defined encounter order are preserved. Each mask stage requires `(state & required) == required && (state & forbidden) == 0`. The full selector returns a detached exact-length `long[]`; the bounded selector returns a packed next-ordinal/written-count token and writes into caller-owned output without a Java-side intermediate buffer. No comparator, predicate, class, object reference, raw heap address, or pinned Java pointer crosses or persists in JNI.
 
@@ -41,4 +41,4 @@ The reviewed GitHub Actions workflow performs the recipe Maven build and these s
 
 ## Algorithm decisions and provenance
 
-The existing M3 int-row native Region selector (M3JDK21 blob `086b49293257fd17cc7fbd1ebbb98460aa677e35`, Apache-2.0) supplies the native-call pattern. The existing Java `M3LongIndexPathMasks` is the sole contract oracle. No LeetCode, HackerRank, GeeksforGeeks submission, proprietary code, or third-party collection implementation is copied. The new first-party Java/C sources and recipe are Apache-2.0; OpenJDK files and all other collection names remain untouched.
+The existing M3 int-row native Region selector (M3JDK21 blob `69aef883c09997bae30825d7ad8757bc2358bf69`, Apache-2.0) supplies the native-call pattern. The existing Java `M3LongIndexPathMasks` is the sole contract oracle. No LeetCode, HackerRank, GeeksforGeeks submission, proprietary code, or third-party collection implementation is copied. The new first-party Java/C sources and recipe are Apache-2.0; OpenJDK files and all other collection names remain untouched.

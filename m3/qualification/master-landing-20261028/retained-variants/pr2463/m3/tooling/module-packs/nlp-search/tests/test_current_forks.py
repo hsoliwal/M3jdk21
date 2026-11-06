@@ -90,8 +90,8 @@ class ModuleCollectionTest(unittest.TestCase):
 class ReceiverAdmissionTest(unittest.TestCase):
     """Real locked bytes and owned fixtures; image orchestration is separately mocked."""
     version = 5
-    catalog_name = "m3/core/src/com/m3/text/SharedLexiconCatalog.java"
-    payload_name = "m3/core/src/com/m3/text/SynexiaPrecomputePayload.java"
+    catalog_name = "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java"
+    payload_name = "m3/core/src/jdk/m3/text/M3PrecomputePayload.java"
 
     @staticmethod
     def _identity(raw):
@@ -143,12 +143,12 @@ class ReceiverAdmissionTest(unittest.TestCase):
         cls.changes = selected["changes"]
         cls.cohort = ("declared-v%d-five-lexicon-successors" % cls.version if cls.version >= 8
                       else "declared-v%d-four-lexicon-successors" % cls.version)
-        cls.payload_before = (fixtures / "receiver-original" / "SynexiaPrecomputePayload.java.txt").read_bytes()
+        cls.payload_before = (fixtures / "receiver-original" / "M3PrecomputePayload.java.txt").read_bytes()
         cls.payloads = {}
         for version in (8, 9, 11):
             payload_row = cls.transitions[version]["changes"][cls.payload_name]
             payload = (fixtures / "receiver-history" / payload_row["after"]["gitBlob"]
-                       / "SynexiaPrecomputePayload.java.txt").read_bytes()
+                       / "M3PrecomputePayload.java.txt").read_bytes()
             if (cls._identity(cls.payload_before) != payload_row["before"]
                     or cls._identity(payload) != payload_row["after"]):
                 raise ValueError("unsealed payload fixture: V%d" % version)
@@ -423,7 +423,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
             # This tests orchestration/provenance only: no donor builds, compiler or image is launched.
             with contextlib.redirect_stdout(io.StringIO()),                  patch.object(DRIVER, "run"),                  patch.object(DRIVER, "collect_jmods", return_value={}),                  patch.object(DRIVER, "compile_owner", side_effect=compile_probe),                  patch.object(DRIVER, "verify_image", return_value={"scope": "MOCKED_IMAGE_NOT_QUALIFIED"}),                  patch.object(DRIVER, "_receiver_revision", return_value="a" * 40):
                 DRIVER.build(args)
-            self.assertEqual(["com.m3.text", "jdk.m3.compiletime", "jdk.m3.nlp.search"], compiled)
+            self.assertEqual(["jdk.m3.text", "jdk.m3.compiletime", "jdk.m3.nlp.search"], compiled)
             report = json.loads((args.out / "BUILD_REPORT.json").read_bytes())
             observed = report["receiver_input_admission"]
             self.assertEqual(self.lock["receiver"], report["receiver"])

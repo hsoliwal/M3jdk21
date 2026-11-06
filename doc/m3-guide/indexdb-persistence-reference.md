@@ -171,23 +171,23 @@ All fourteen test-source bodies were read: twelve JUnit classes with 69 declared
 
 Unexecuted and incompletely qualified surfaces remain explicit: cross-handle/process races, crash/power-loss durability, symlink/security policy, ref CR/LF round trips, unpaired-surrogate encoder behavior, hostile but structurally plausible large frames, deep DAGs, exact resource costs, caller/analyzer correctness, migration and complete runtime/platform acceptance. No source/config/workflow changes are made to address them in this documentation increment.
 
-[store]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDB.java
-[artifact]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbArtifact.java
-[codec]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java
+[store]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDB.java
+[artifact]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbArtifact.java
+[codec]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticCodec.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/pom.xml
 [reactor]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/pom.xml
 [policy]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/docs/m3jdk21-porting-invariant.md
 [names]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/docs/name-mapping.json
-[convergence]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/docs/SYNEXIA_CONVERGENCE_MODEL.md
-[receiver]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/synexia-import/m3index-family-receiver.tsv
+[convergence]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/docs/M3_CONVERGENCE_MODEL.md
+[receiver]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/m3-import/m3index-family-receiver.tsv
 [parse-report]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/tasks/parse/FINAL_REPORT.md
 [atom-report]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/tasks/atoms/FINAL_REPORT.md
-[test-store]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDBTest.java
-[test-artifact]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbArtifactTest.java
-[test-integrity]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDBIntegrityTest.java
-[test-store-boundary]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbStoreBoundaryTest.java
-[test-codec]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbCodecBoundaryTest.java
-[test-parse]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/DbParseTest.java
-[test-probe]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/DbProbe.java
-[test-atom]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/DbAtomTest.java
-[test-digest]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/DbDigest.java
+[test-store]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDBTest.java
+[test-artifact]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbArtifactTest.java
+[test-integrity]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDBIntegrityTest.java
+[test-store-boundary]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbStoreBoundaryTest.java
+[test-codec]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbCodecBoundaryTest.java
+[test-parse]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/DbParseTest.java
+[test-probe]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/DbProbe.java
+[test-atom]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/DbAtomTest.java
+[test-digest]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/DbDigest.java

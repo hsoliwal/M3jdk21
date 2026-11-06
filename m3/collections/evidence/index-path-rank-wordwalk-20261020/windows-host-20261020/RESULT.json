@@ -1,7 +1,7 @@
 {
   "schema": "synexia.m3jdk21.exact-rank-proof-result.v1",
   "status": "PASS_EXACT_BASELINE_CANDIDATE_JAVA_AND_API",
-  "approved_plan_sha256": "611ae5374fc50448ba41d4c5495145b1111af2529a234299a71b61cdf2c51e86",
+  "approved_plan_sha256": "bf424baa9332b6cc52e3e8ea530fd8d426fa6db146dc3356f67e26e2b6425ed2",
   "storage_protection": "ACTIVE",
   "source_transformation_by_this_run": false,
   "Maven_recipe_execution": false,

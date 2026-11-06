@@ -2,12 +2,12 @@ name: M3-GVAS compile-time literal image (strict-address)
 on:
   pull_request:
     paths:
-      - 'm3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteral*.java'
-      - 'm3/core/src/com/m3/text/M3GvasLiteralImage.java'
-      - 'm3/core/test/com/m3/text/M3GvasLiteralImageContractTest.java'
+      - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteral*.java'
+      - 'm3/core/src/jdk/m3/text/M3GvasLiteralImage.java'
+      - 'm3/core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java'
       - 'm3/verify-gvas-literal-precompute.py'
       - 'm3/verify-gvas-lookup-index.py'
-      - 'm3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java'
+      - 'm3/core/test/jdk/m3/text/M3GvasLookupIndexContractTest.java'
       - 'm3/tests/test_gvas_literal_process_identity.py'
       - '.github/workflows/m3-gvas-literal-precompute.yml'
   workflow_dispatch:
@@ -25,6 +25,6 @@ jobs:
       - name: Verify exact parent-owned procfs process identity
         run: python3 -B m3/tests/test_gvas_literal_process_identity.py
       - name: Verify compiled literal image and exact pointer across JVMs
-        run: M3_JDK="$JAVA_HOME" python3 m3/verify-gvas-literal-precompute.py
+        run: M3JDK="$JAVA_HOME" python3 m3/verify-gvas-literal-precompute.py
       - name: Verify prepared exact lookup and collision fallbacks
-        run: M3_JDK="$JAVA_HOME" python3 -B m3/verify-gvas-lookup-index.py
+        run: M3JDK="$JAVA_HOME" python3 -B m3/verify-gvas-lookup-index.py

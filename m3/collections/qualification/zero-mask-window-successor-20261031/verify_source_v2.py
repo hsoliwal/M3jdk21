@@ -10,19 +10,19 @@ import sys
 
 HISTORICAL_SHA = "31cdce1db97fd1567b360ee843916f9b6cfa3ff3"
 ORIGINAL_VERIFIER = "m3/collections/qualification/zero-mask-window-copy-20261017/verify.py"
-ORIGINAL_VERIFIER_BLOB = "8899190884b82f0085b10242177e672905f46e69"
+ORIGINAL_VERIFIER_BLOB = "d40cbee01ed1351bb118e654bc4123ad17c2d29f"
 MANIFEST = ("m3/collections/qualification/zero-mask-window-successor-20261031/"
             "SOURCE_SUCCESSOR_V2.tsv")
 C = "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
-JAVA = "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+JAVA = "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java"
 EXPECTED = (
-    (C, "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531",
+    (C, "a549b92b38eaa337c0e95f32c46607cace9ae46d8240d37bd58a3a48e296990d",
      "382e93d8cc033b07da14537d2bf6c0d70405a8ce6a5eb318afc3005368bbf062",
-     "a073e64cb12c59eb81247421cf3efe0628004142",
+     "8c2ff6e02369a2632bfdd3534d01259e9c86e21c",
      "5afeb41575e758b06882b3e3d8104b0c275f50ca", "JNI_SOURCE"),
-    (JAVA, "6b6fe32c60db7fb0e31e17e6cce0df727c856f17adff9eba32d5efd141498872",
+    (JAVA, "c81601d08eb3d7442d4fe952a9ba580da17bd3dbe74fb581daa04ebf2f575996",
      "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f",
-     "39cc383dafebd74cfafcd1b66b2956a6c0ae655e",
+     "edc6698d7dc7fac990a39c3cc301951e062f2621",
      "7b04a77cc113a81b4a09d6004666cada79c8c088", "JAVA_ORACLE"),
 )
 JNI_SYMBOL = re.compile(rb"JNIEXPORT\s+\w+\s+JNICALL\s+(Java_[A-Za-z0-9_]+)\s*\(")

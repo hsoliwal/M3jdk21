@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.tools.cpu.M3IntIntervalSet;
+import jdk.m3.tools.cpu.M3IntIntervalSet;
 import java.util.Arrays;
 import java.util.Random;
 

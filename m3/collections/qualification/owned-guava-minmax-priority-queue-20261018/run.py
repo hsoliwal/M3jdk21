@@ -185,13 +185,13 @@ def main():
         javac=java/('javac.exe' if os.name=='nt' else 'javac');jvm=java/('java.exe' if os.name=='nt' else 'java')
         common=['-J-Xmx256m','-J-XX:ActiveProcessorCount=2','-J-XX:-UsePerfData','-J-Duser.home='+str(home),'-J-Djava.io.tmpdir='+str(temp),'--release','21','-g','-proc:none','-Xlint:all,-module','-Werror']
         # The original selected core130 includes module-info.java with
-        # 'requires com.m3.arrays'. Compile the real first-party JPMS owner
+        # 'requires jdk.m3.arrays'. Compile the real first-party JPMS owner
         # in bounded scratch before touching the original 130-file javac stage.
         arrays_src=root/'m3/arrays/src/main/java'
         arrays_info=arrays_src/'module-info.java'
         arrays_files=sorted(arrays_src.rglob('*.java'))
         if not arrays_info.is_file() or not arrays_files or arrays_info not in arrays_files:
-            raise ValueError('original com.m3.arrays module source missing')
+            raise ValueError('original jdk.m3.arrays module source missing')
         arrays_module=out/'arrays-module-classes';arrays_module.mkdir()
         run('strict-original-arrays-module',[javac,*common,'-d',arrays_module,*arrays_files])
         # Add only the four exact SHA-pinned original helpers required by the
@@ -202,7 +202,7 @@ def main():
              '-cp',cp,'-d',core,*[root/path for path in bindings['coreJavaPaths']],*helpers])
         fixtureNames=['GuavaMinMaxProtocolProof','GuavaMinMaxOrderingHookProof','GuavaMinMaxPublicSurfaceProof','GuavaMinMaxResourceProfileProof']
         sources=[root/bindings['ownerPath']]+[qual/(name+'.java') for name in fixtureNames]+[qual/'GuavaMinMaxGenericCompileProof.java',qual/'GuavaMinMaxMaskProjectionProof.java']
-        mirror=out/'generic-mirror';mirror.mkdir();original=(qual/'GuavaMinMaxGenericCompileProof.java').read_text(encoding='utf-8');nominal=original.replace('MinMaxPriorityQueue','M3MinMaxPriorityQueue').replace('com.google.common.collect.M3MinMaxPriorityQueue','com.m3.collections.guava.M3MinMaxPriorityQueue');(mirror/'GuavaMinMaxGenericCompileProof.java').write_text(nominal,encoding='utf-8',newline='\n')
+        mirror=out/'generic-mirror';mirror.mkdir();original=(qual/'GuavaMinMaxGenericCompileProof.java').read_text(encoding='utf-8');nominal=original.replace('MinMaxPriorityQueue','M3MinMaxPriorityQueue').replace('com.google.common.collect.M3MinMaxPriorityQueue','jdk.m3.collections.guava.M3MinMaxPriorityQueue');(mirror/'GuavaMinMaxGenericCompileProof.java').write_text(nominal,encoding='utf-8',newline='\n')
         run('strict-owner-and-frozen-fixtures',[javac,*common,'-cp',str(core)+os.pathsep+str(arrays_module)+os.pathsep+cp,'-d',proof,*sources])
         run('strict-owned-generic-mirror',[javac,*common,'-cp',str(proof)+os.pathsep+str(core)+os.pathsep+str(arrays_module)+os.pathsep+cp,'-d',out,mirror/'GuavaMinMaxGenericCompileProof.java'])
         runtime=os.pathsep.join(map(str,[proof,core,arrays_module,jars[0]]));results={}
@@ -213,7 +213,7 @@ def main():
             output=run(label,[jvm,*options,'-cp',runtime,name,owner,*([backend] if backend else [])]);lines=output.read_text(encoding='utf-8').splitlines();return json.loads(lines[-1])
         if args.job=='java':
             for name in fixtureNames:
-                provider=execute('provider-'+name,name,'com.google.common.collect.MinMaxPriorityQueue');owned=execute('owned-'+name,name,'com.m3.collections.guava.M3MinMaxPriorityQueue')
+                provider=execute('provider-'+name,name,'com.google.common.collect.MinMaxPriorityQueue');owned=execute('owned-'+name,name,'jdk.m3.collections.guava.M3MinMaxPriorityQueue')
                 if name=='GuavaMinMaxProtocolProof':
                     expected={row['name']:row for row in provider['partitions']};actual={row['name']:row for row in owned['partitions']}
                     for key in ['MANDATORY_LAW','REQUIRED_CONCRETE']:assert expected[key]==actual[key]
@@ -234,7 +234,7 @@ def main():
             native=out/'native';native.mkdir();gcc=shutil.which('gcc');assert gcc
             library=native/('m3_collections_mask.dll' if os.name=='nt' else 'libm3_collections_mask.so');platform='win32' if os.name=='nt' else 'linux'
             run('build-current-selected-mask-kernel',[gcc,'-std=c17','-O2','-Wall','-Wextra','-Werror','-shared',*([] if os.name=='nt' else ['-fPIC']),'-I'+str(Path(os.environ['JAVA_HOME'])/'include'),'-I'+str(Path(os.environ['JAVA_HOME'])/'include'/platform),root/bindings['nativePath'],'-o',library])
-            name='GuavaMinMaxMaskProjectionProof';provider=execute('projection-provider-java',name,'com.google.common.collect.MinMaxPriorityQueue','java');owned=execute('projection-owned-java',name,'com.m3.collections.guava.M3MinMaxPriorityQueue','java');jni=execute('projection-owned-native-required',name,'com.m3.collections.guava.M3MinMaxPriorityQueue','native',native);assert provider==owned==jni
+            name='GuavaMinMaxMaskProjectionProof';provider=execute('projection-provider-java',name,'com.google.common.collect.MinMaxPriorityQueue','java');owned=execute('projection-owned-java',name,'jdk.m3.collections.guava.M3MinMaxPriorityQueue','java');jni=execute('projection-owned-native-required',name,'jdk.m3.collections.guava.M3MinMaxPriorityQueue','native',native);assert provider==owned==jni
             result={'status':'PASS','job':'jni','provider':provider,'ownedJava':owned,'ownedNativeRequired':jni,'nativeQueueCRUDClaim':False}
     result['commands']=records;encoded=(json.dumps(result,indent=2)+'\n').encode('utf-8')
     if len(encoded)>gate():raise RuntimeError('result exceeds remaining output budget')

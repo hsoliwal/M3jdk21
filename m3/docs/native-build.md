@@ -46,7 +46,7 @@ The [String workflow](../../.github/workflows/mindex-string-backing.yml) is the 
 selection reference. Representative commands it runs are:
 
 ```sh
-python3 m3/synexia-import/current-full-borrow/check_string_phase.py
+python3 m3/m3-import/current-full-borrow/check_string_phase.py
 python3 m3/runtime-integration/test_string_completeness.py
 python3 m3/runtime-integration/test_string_layout.py
 python3 m3/runtime-integration/check-m3string-invariants.py
@@ -131,7 +131,7 @@ export M3_NATIVE_DEPS=/path/to/extracted-deps/usr
 ./m3/build-openjdk.sh
 export M3_JDK="$PWD/build/linux-x86_64-server-fastdebug/images/jdk"
 ./m3/build.sh
-python3 m3/compatibility/check-synexia.py
+python3 m3/compatibility/check-m3.py
 python3 m3/verify-shared-mapping.py
 ```
 

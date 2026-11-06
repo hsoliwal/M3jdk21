@@ -43,7 +43,7 @@ def checked_path(root, relative):
 
 
 def read_historical(root):
-    packet_path = checked_path(root, 'm3/collections/synexia-donation.json')
+    packet_path = checked_path(root, 'm3/collections/m3-donation.json')
     packet = json.loads(packet_path.read_text('utf-8'), object_pairs_hook=pairs_unique)
     manifest_rel = 'm3/collections/' + packet['installed_source_manifest']
     manifest = checked_path(root, manifest_rel)
@@ -83,7 +83,7 @@ def exact_git_java_sources(root, manifest_rel, current_paths):
         fail('current Java source set differs from the checked-out Git index')
     dirty = subprocess.check_output([
         'git', '-C', str(root), 'status', '--porcelain', '--untracked-files=no', '--',
-        'm3/collections/src', 'm3/collections/synexia-donation.json', manifest_rel])
+        'm3/collections/src', 'm3/collections/m3-donation.json', manifest_rel])
     if dirty:
         fail('tracked collection source or provenance modified after checkout')
     return len(tracked_java)

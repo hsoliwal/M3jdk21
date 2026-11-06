@@ -1,6 +1,6 @@
 Executed 2026-10-18. Canonical full transcript:
 hsoliwal/com.synexia@377a1c6627d815227639c327d852173b852649db
-synexia-openrewrite-recipes/recipes/int-frequency-mask-20261018/EVIDENCE.txt
+m3-openrewrite-recipes/recipes/int-frequency-mask-20261018/EVIDENCE.txt
 Canonical transcript Git blob: 1cc5eeb9800fa928c2b6ae24bce545659c887df3
 
 Actual baseline Java:

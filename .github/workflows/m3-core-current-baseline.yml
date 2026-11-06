@@ -34,10 +34,10 @@ jobs:
             /m3/core/
             /m3/build.sh
             /m3/lexicon/english-demo.txt
-            /m3/lexicon/synexia-number-target-map.tsv
-            /m3/lexicon/synexia-precompute-field-map.tsv
-            /m3/lexicon/synexia-source-manifest.tsv
-            /m3/lexicon/synexia-word-source-revisions.tsv
+            /m3/lexicon/m3-number-target-map.tsv
+            /m3/lexicon/m3-precompute-field-map.tsv
+            /m3/lexicon/m3-source-manifest.tsv
+            /m3/lexicon/m3-word-source-revisions.tsv
             /m3/tooling/joined-range-directory/current-baseline/
             /m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3

@@ -6,12 +6,12 @@
   "candidate_qualification_status": "PASSED_25_SOURCE_BOUND_RECORDS",
   "source_id": "FINAL28_R2",
   "source_review": "FINAL_FILE_REVIEW.tsv",
-  "source_review_sha256": "9745087d4ac73028910466c254bd9c5fae04c4b450a218739918b65e91bb6864",
+  "source_review_sha256": "e50ff6d246f9cc4fe4516662f8dc15982a0f27a7a8e991b8540cf7258c88da54",
   "candidate_execution_source_id": "CANDIDATE25_07BA",
   "candidate_gates": "candidate-proof/GATES.json",
-  "candidate_gates_sha256": "30baab47ad3269c6655bbc3d553cb839a6f095635389b02157559f1d02c54c19",
+  "candidate_gates_sha256": "e325ed8dd3f51c87d17e539080316560e7339d6474e84252080050de80027d07",
   "candidate_inputs": "candidate-proof/SOURCE_INPUTS.json",
-  "candidate_inputs_sha256": "bac74f9e7b829ab41fb6e1d5ccc8b1e35643a38fa182e78aa999b5d6b1a10c0b",
+  "candidate_inputs_sha256": "396c4e10e7b0d840791f35c073aa85670c3168d695e925970e30d6b5e9560089",
   "candidate_gate_count": 25,
   "candidate_compile_inputs": 141,
   "scope": {
@@ -33,8 +33,8 @@
   "canonical_immutable_pin": null,
   "interpretation": "Source completion and candidate gates are established here. Actual SDK/receiver receipts and immutable publication pin are distinct root-owned bindings. Historical pending markers describe their original epochs, not the current candidate implementation.",
   "retained_receiver_oracles": [
-    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
-    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationTest.java"
+    "m3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationContract.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3BoundedFilteredNavigationTest.java"
   ],
   "gate_logs": [
     {

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 /*
  * @test
- * @summary M3JDK21 CollectionViews validates, copies and forwards input once
+ * @summary M3JDK 21 CollectionViews validates, copies and forwards input once
  * @run main FilteredBulkOnceOracle
  */
 import java.util.AbstractCollection;

@@ -156,7 +156,7 @@ class SdkReceiverTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "SDK_RECEIVER_CURRENT_LINEAGE_DRIFT"):
                 verify(self.root, self.ledger, 1)
 
-    def test_two_stage_successor_preserves_original_synexia_history(self):
+    def test_two_stage_successor_preserves_original_m3_history(self):
         name = self.names[0]
         old = git_blob_sha1(b"old source")
         middle = git_blob_sha1(b"prior qualified source")
@@ -339,9 +339,9 @@ class SdkReceiverTests(unittest.TestCase):
         self.assertFalse(result["jdk_runtime_verified"])
 
     def test_original_ledger_pin_has_both_independent_digests(self):
-        self.assertEqual("00c19297059a851e185bfaefe2368ec8b793b94d",
+        self.assertEqual("e1f463b9fa54f9c92d0bbeacc79e7902be00bd2c",
                          ORIGINAL_LEDGER_GIT_BLOB)
-        self.assertEqual("ddb6c8b6709ddd844e8235ac679511429e0af1925c205e323a500230036d9f4f",
+        self.assertEqual("db9c42ea9b0ec9af0986009a8022064eb419ed7e57104fa229b97dd625970046",
                          ORIGINAL_LEDGER_SHA256)
 
 

@@ -1,4 +1,4 @@
-import com.m3.arrays.M3Arrays;
+import jdk.m3.arrays.M3Arrays;
 
 /** Regression witness: four immutable joins accept empty components but cannot read index zero. */
 public final class M3EmptySegmentWitness {

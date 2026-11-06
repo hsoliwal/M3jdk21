@@ -10,34 +10,34 @@
       "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8"
     },
     "MIndexRegexTrigramQuery.java.txt": {
-      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-      "git_blob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+      "git_blob": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118"
     },
     "NOTICE": {
       "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
       "git_blob": "cf6694a1316785ba2aa45394314bbae2e856c7fe"
     },
     "trigram-oracle.cpp.txt": {
-      "sha256": "5cc3a6d227b44b234b0883dc7c3790ee522b153013f3f302233ef42ae01f3d89",
-      "git_blob": "c55de5857bb14269dcc66e4bd107d4f5346645a3"
+      "sha256": "0661355065effb42f56e1b1b384cade00171aeb15f7af9f7bb49eec4cd095d59",
+      "git_blob": "7b4339ca2b31da62b4fcd2530178af34afff088f"
     }
   },
   "dependencies": {
-    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": {
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
-      "git_blob": "33783749e46474f2bdc68103e189fe2907a61fa9"
+    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": {
+      "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862",
+      "git_blob": "c143dfd295453861105682bc8409c3c72c582a04"
     },
-    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": {
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
-      "git_blob": "a2e8c916208b563517e51b738744a05357e633aa"
+    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": {
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
+      "git_blob": "3fdc75a71290e2fd1659bfbc7fa532828363275b"
     },
-    ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java": {
-      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
-      "git_blob": "cfb9fb8befe2c5ccde5035e96ae7c99b89b5f490"
+    ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java": {
+      "sha256": "d5b73971cf4107ffe5d9d2678d5a536491cd1552a2739818013e5ba4da1c3424",
+      "git_blob": "79f0d9e3c157279e035bf33d740eab51a207c478"
     },
-    ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java": {
-      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
-      "git_blob": "8f1018a1bcfa203420253d59a8473ef5a18e19b6"
+    ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java": {
+      "sha256": "19450c4b44091c4f37689be1fa45bb30b822cd2f962a323d0991529fc65f6a71",
+      "git_blob": "6ab4b66ef1ff56fa1e0943ec0527c2513478de88"
     },
     "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": {
       "sha256": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
@@ -48,8 +48,8 @@
       "git_blob": "c2dc2371c730aa758ccc45e06ba4ab95661e5593"
     },
     "test/jdk/java/lang/String/M3MappedStringBackingTest.java": {
-      "sha256": "9f42d1bdd6e174f5eac44e72afae2154ac140c9773c540b3073a06a8c2da827d",
-      "git_blob": "b1f69174a1c8c521f94759a9e046a0b63028e022"
+      "sha256": "2579d87f06b529f8917cdb68594b0877cddcad653148bf49ec38230dfe75bd1b",
+      "git_blob": "7207be00a5ea447d01415c94f63768d77cc2f68e"
     },
     "test/jdk/java/lang/String/MapFactsTest.java": {
       "sha256": "07f1de47de88624740a0b4e0e7fb30a05627f37054cbd11dad0e3c3298401059",
@@ -67,6 +67,6 @@
     ],
     "disposition": "SURVIVES: original TQ, M3 backing names and exact set containment; stale custody is reconciled",
     "runtime_owner": "M3JDK21",
-    "synexia_role": "convergence workspace and donor only"
+    "m3_role": "convergence workspace and donor only"
   }
 }

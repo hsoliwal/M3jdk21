@@ -29,9 +29,9 @@ Canonical Synexia OpenRewrite owner:
 
 Reuse `M3HashPinnedJavaSnapshotRecipe`, manifest exact `ABSENT` preimages, SHA-256 postimages and two Java templates. The named recipe is `com.synexia.rewrite.M3FSAlignedDeltas20261021`. A canonical test checks Java LST emission, fixed point, refusal of occupied targets and template hashes. Source and tests are byte-identical at target. No unreviewed source gets overwritten.
 
-Source SHA-256: `6f9cb6a16b29422ed272f901bf5e76343af5960b1b0ce899393189fb00053d9f`.
+Source SHA-256: `3d40ccc118b4c633f10a156a58f551e59aa767a32b7febd041772f06659ff371`.
 
-Test SHA-256: `cef27216d6706b7e14a32af451c8424760d35a86bf9a3795ad8704f262a1be0d`.
+Test SHA-256: `f76f3c34b8b4875e7c543bc646c0e535233837fefc606340a810bab4411b97da`.
 
 ## Gates and status
 

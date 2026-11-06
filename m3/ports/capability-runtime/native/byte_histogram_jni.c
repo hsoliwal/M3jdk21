@@ -7,7 +7,7 @@
 /* Optional symbol within the existing SHA-256-pinned LfCount JNI library.
  * No JVM heap pin or pointer survives the call, no shadow string store is created. */
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_runtime_capability_ByteHistogram256_histogram0(
+Java_jdk_m3_runtime_capability_ByteHistogram256_histogram0(
         JNIEnv *env, jclass owner, jobject buffer, jint start, jint length) {
     (void) owner;
     if (buffer == NULL || start < 0 || length < 0 || length > 16777216) {

@@ -55,7 +55,7 @@ After all checks succeed, source and manifest hashes are rechecked, classes/libr
 
 ## Historical proof and selected gap
 
-Canonical recipe m3-regex-receiver-20261014 already executed a numeric C17/UBSan proof with the same Java/proof files and an older C template 5b30f71d8ed878b3199225b9512b75a090ff896c. Its qualification blob 90c166890a6f265473bf5471776ca0be596f2876 and Java/JNI logs 31290aaaad02936d581da02f4625353337eab0e5 / e009eb8e32ecf615fd67eaa24728b6bca25c7613 establish historical results only.
+Canonical recipe m3-regex-receiver-20261014 already executed a numeric C17/UBSan proof with the same Java/proof files and an older C template e6a10286f64052cb948de1dbcc43aaaa1d33db1e. Its qualification blob 90c166890a6f265473bf5471776ca0be596f2876 and Java/JNI logs 31290aaaad02936d581da02f4625353337eab0e5 / e009eb8e32ecf615fd67eaa24728b6bca25c7613 establish historical results only.
 
 Current C610ca8 changes the compose JNI transfer/staging body to reuse one transfer lane and use lhs as kernel output. The kernel stages validated rows before writing output. The selected new proof directly executes this current alias/staging path and repeat, preserving the original full corpus. Historical numeric module-patch execution does not qualify this current C, C11 or plain classpath route.
 

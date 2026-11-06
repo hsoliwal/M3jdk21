@@ -9,11 +9,11 @@ if [ -e "$OUT" ]; then
   exit 3
 fi
 mkdir -p "$OUT/classes" "$OUT/logs"
-FILE="$MODULE/src/main/java/com/m3/regexcursor/M3StaticGrammarLexicon.java"
-SOURCE_DIR="$MODULE/src/test/java/com/m3/regexcursor"
+FILE="$MODULE/src/main/java/jdk/m3/regexcursor/M3StaticGrammarLexicon.java"
+SOURCE_DIR="$MODULE/src/test/java/jdk/m3/regexcursor"
 if [ ! -f "$FILE" ]; then echo "missing lexicon source" >&2; exit 2; fi
 # Reject unexpected source owner before compiling this exact source-sealed candidate.
-expected='9dd313fac5b35f4357646195607d3e35f584d9728a70848d3440d95a73847ffe'
+expected='23c9aedeed6fc3383007cdde6fd15bb1d2a3016800021f67f361cefffee19160'
 actual="$(sha256sum "$FILE" | awk '{print $1}')"
 if [ "$actual" != "$expected" ]; then
   echo "source drift: $FILE SHA256=$actual" >&2
@@ -26,14 +26,14 @@ javac --release 21 -Xlint:all -Werror -d "$OUT/classes" \
   > "$OUT/logs/02-java21-lint-compile.log" 2>&1
 printf 'STRICT_JAVA21_COMPILE_PASS\n' > "$OUT/logs/03-compile-pass.log"
 java -ea -Xms256m -Xmx256m -XX:+UseSerialGC -cp "$OUT/classes" \
-  com.m3.regexcursor.M3AsciiRootAllocationProof \
+  jdk.m3.regexcursor.M3AsciiRootAllocationProof \
   > "$OUT/logs/04-allocation-and-concurrency.log"
 # Representative deterministic cases; full before/after data remains in Synexia evidence.
 for roots in 7 8 26; do
   for mode in hit miss; do
     for search in exact longest; do
       java -ea -Xms256m -Xmx256m -XX:+UseSerialGC -cp "$OUT/classes" \
-        com.m3.regexcursor.M3AsciiRootMicrobench "$roots" "$mode" "$search" \
+        jdk.m3.regexcursor.M3AsciiRootMicrobench "$roots" "$mode" "$search" \
         >> "$OUT/logs/05-runtime-samples.log"
     done
   done

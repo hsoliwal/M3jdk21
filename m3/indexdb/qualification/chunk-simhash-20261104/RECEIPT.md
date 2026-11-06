@@ -12,8 +12,8 @@ Two additive, ABSENT-before reviewed postimages:
 
 | Target file | SHA-256 exact bytes | Git blob |
 | --- | --- | --- |
-| `m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbChunkSimHash.java` | `2bbe2e12bb76f8fc4805d6600b964842396a1d47bee3fb7c59417193c9fe9653` | `2719c9d67be999ade54e163d79fef48fa9ab7be9` |
-| `m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbChunkSimHashTest.java` | `1ea2dd235aa79af9c7196bc6d85c049e38fb008ae04062021c5f62d2331a06ae` | `0b4dcfcbb5989c7e9a606678f9bac3213bc6d98a` |
+| `m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbChunkSimHash.java` | `b67c52fb5d88ef53197068315665e913a28a686b27aba3a1c419b9a0f4ecdead` | `2c376ce57f593b68109218164a3ed85bba12c532` |
+| `m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbChunkSimHashTest.java` | `1a21b6d5a73a148706ff36e32ee5483234e95b41de97c258b80a0c48e1236ae1` | `b22dcabac0f2bbcdfaf654e8979020b5e02c5295` |
 
 Reuse original `M3IndexDbSemanticFingerprint` ownership: exact SHA-256, ordered
 structural/logic identities and existing API do not change. Chunk signed vote
@@ -34,8 +34,8 @@ adapter verified staged generation, zero-write replay and drift refusal.
 Independent target build command (not the canonical recipe):
 ```sh
 javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-simhash-test \
-  m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbChunkSimHash.java \
-  m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbChunkSimHashTest.java
+  m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbChunkSimHash.java \
+  m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbChunkSimHashTest.java
 java -cp /tmp/m3-simhash-test com.m3.indexdb.M3IndexDbChunkSimHashTest
 ```
 

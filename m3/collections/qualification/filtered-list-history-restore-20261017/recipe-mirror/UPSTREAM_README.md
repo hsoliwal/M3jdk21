@@ -7,11 +7,11 @@
 GitHub identifies merged M3JDK21 PRs [#1045](https://github.com/hsoliwal/M3jdk21/pull/1045) and
 [#1069](https://github.com/hsoliwal/M3jdk21/pull/1069). Their final owner
 `M3FilteredLists.java` is Git blob
-`e094fdde4a153eab2d1a125785bc55c68187bbd1` and SHA-256
-`b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d`.
+`d8a0a04dd3d9106ba641f8b657bacacc49678e3c` and SHA-256
+`f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5`.
 The currently selected M3JDK21 `master` instead has Git blob
-`e381d23e93702cea3ccd7d9c3f7ff5e0d56baaa6` and SHA-256
-`7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101`,
+`6a56f9e2e55eaef2d0b207abdc952182350ce359` and SHA-256
+`12bdc2271eee96fb0d24ec188cbcbe37d6c110bf3bb61682715f1af7d5984333`,
 still with the recursive predicate lambda and eager spliterator iterator binding.
 The two merged historical PRs' **four self-test classes are also absent**.
 This is missing production behavior, not an invitation to overwrite unrelated code.
@@ -83,4 +83,4 @@ nulls, duplicate values, duplicate row IDs, high-bit state flags and 512
 seeded examples. The `--native` mode requires the real JNI library and
 refuses silent fallback; no Java object/predicate enters C. This extra
 candidate is absent-before and hash-sealed in the same recipe.
-The source hash is `02d4463f758ed57c9d5ca27c8892f5fe5776e034a0f03bae8767fde8d61a6363`.
+The source hash is `762c21a3345d888ac8167fcf058483383f9ee8dba19e9dcdea5c66d35944beac`.

@@ -1,5 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.fs;
+package jdk.m3.fs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -30,22 +30,22 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.m3.fs.vfs.CacheStrategy;
-import com.m3.fs.vfs.FileName;
-import com.m3.fs.vfs.FileObject;
-import com.m3.fs.vfs.FileSystem;
-import com.m3.fs.vfs.FileSystemException;
-import com.m3.fs.vfs.FileSystemOptions;
-import com.m3.fs.vfs.FileType;
-import com.m3.fs.vfs.cache.NullFilesCache;
-import com.m3.fs.vfs.impl.DefaultFileReplicator;
-import com.m3.fs.vfs.impl.DefaultFileSystemManager;
-import com.m3.fs.vfs.impl.StandardFileSystemManager;
-import com.m3.fs.vfs.provider.AbstractFileName;
-import com.m3.fs.vfs.provider.local.DefaultLocalFileProvider;
-import com.m3.fs.vfs.provider.local.LocalFile;
-import com.m3.fs.vfs.provider.local.LocalFileName;
-import com.m3.fs.vfs.provider.local.LocalFileSystem;
+import jdk.m3.fs.vfs.CacheStrategy;
+import jdk.m3.fs.vfs.FileName;
+import jdk.m3.fs.vfs.FileObject;
+import jdk.m3.fs.vfs.FileSystem;
+import jdk.m3.fs.vfs.FileSystemException;
+import jdk.m3.fs.vfs.FileSystemOptions;
+import jdk.m3.fs.vfs.FileType;
+import jdk.m3.fs.vfs.cache.NullFilesCache;
+import jdk.m3.fs.vfs.impl.DefaultFileReplicator;
+import jdk.m3.fs.vfs.impl.DefaultFileSystemManager;
+import jdk.m3.fs.vfs.impl.StandardFileSystemManager;
+import jdk.m3.fs.vfs.provider.AbstractFileName;
+import jdk.m3.fs.vfs.provider.local.DefaultLocalFileProvider;
+import jdk.m3.fs.vfs.provider.local.LocalFile;
+import jdk.m3.fs.vfs.provider.local.LocalFileName;
+import jdk.m3.fs.vfs.provider.local.LocalFileSystem;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -273,7 +273,7 @@ class MFilesProviderTest {
         Path replicaDirectory = Files.createDirectory(temp.resolve("replicas"));
         Path configuration = Files.writeString(temp.resolve("broken-providers.xml"), """
                 <providers>
-                    <provider class-name="com.m3.fs.missing.ControlledMissingProvider">
+                    <provider class-name="jdk.m3.fs.missing.ControlledMissingProvider">
                         <scheme name="missing"/>
                     </provider>
                 </providers>

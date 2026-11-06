@@ -2,28 +2,28 @@
   "status": "SCOPED_RUNTIME_AND_REAL_RECIPE_QUALIFIED",
   "source_receipts": [
     {
-      "target": "m3/collections/implementations/guava/src/main/java/com/m3/collections/guava/M3HashBiMap.java",
+      "target": "m3/collections/implementations/guava/src/main/java/jdk/m3/collections/guava/M3HashBiMap.java",
       "before": "ABSENT",
-      "sha256": "e5aca4438e0687af0aa6737a96acc60c50955722e50971a272bee9a98e443987",
+      "sha256": "f1cbb5dd4384c192f5f4066df1d15547a7edc3bc145a446ee3140faa129949b0",
       "bytes": 52125,
       "template": "M3HashBiMap.java.txt",
-      "git_blob": "35ecf219a77ea5db7cf057d8feeefdc3be3d953f"
+      "git_blob": "575764a9f0cd6a1640139d607326f4608767e1fd"
     },
     {
-      "target": "m3/collections/implementations/guava/src/test/java/com/m3/collections/guava/InverseForcePutDenseOrderDiscriminator.java",
+      "target": "m3/collections/implementations/guava/src/test/java/jdk/m3/collections/guava/InverseForcePutDenseOrderDiscriminator.java",
       "before": "ABSENT",
-      "sha256": "66b8bdc1cb45b9994c615abc2c0a32dfd6a774f4b5eb78d20df4b82abbb35461",
+      "sha256": "1b39dff7fb36a899b1862a5eb2246e7e53b5ba92666362c3a1b4b1500cdd8123",
       "bytes": 12285,
       "template": "InverseForcePutDenseOrderDiscriminator.java.txt",
-      "git_blob": "6a28ca0676667c75d39009ca5d6487cddec4be68"
+      "git_blob": "53af22e774cbc6e18cf6c29f0147a3cdb2d5de3a"
     },
     {
-      "target": "m3/collections/implementations/guava/src/test/java/com/m3/collections/guava/M3HashBiMapCommonSelfTest.java",
+      "target": "m3/collections/implementations/guava/src/test/java/jdk/m3/collections/guava/M3HashBiMapCommonSelfTest.java",
       "before": "ABSENT",
-      "sha256": "bf5c83eb152ce2c2f3f8dc6bcda071d7b93a011189efe152c349786dbdaa443e",
+      "sha256": "44c19fbdb7485c0251a76eaae6070fb3292eb5f9aff6cadefae113fd11ff0285",
       "bytes": 54933,
       "template": "M3HashBiMapCommonSelfTest.java.txt",
-      "git_blob": "205e6f6838997fc3c4370d67ec1defbb5d070264"
+      "git_blob": "381367cedaf599115c833b9523152cdcd6270953"
     }
   ],
   "donor_commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
@@ -96,9 +96,9 @@
   "recipe_tests": 2,
   "recipe_installation_states": 16,
   "recipe_refusals": 6,
-  "engine_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+  "engine_blob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
   "source_review": {
-    "body_blob": "35ecf219a77ea5db7cf057d8feeefdc3be3d953f",
+    "body_blob": "575764a9f0cd6a1640139d607326f4608767e1fd",
     "commands": "DISABLED",
     "production_source_findings": "NO_ADDITIONAL_ACTIONABLE_FINDINGS",
     "reviewer_fixture_authorship": "DISCLOSED",

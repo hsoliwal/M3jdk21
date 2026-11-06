@@ -36,5 +36,5 @@ same rules.
 
 ## Gates
 
-`.github/workflows/m3-jdk-naming.yml` runs the recipe tests, the tree fixed point and the JUnit conformance on every
+`.github/workflows/m3jdk-naming.yml` runs the recipe tests, the tree fixed point and the JUnit conformance on every
 pull request. The standalone check (`m3/release/check_standalone.py`) must not grow a D-kind; its N-kinds drop.

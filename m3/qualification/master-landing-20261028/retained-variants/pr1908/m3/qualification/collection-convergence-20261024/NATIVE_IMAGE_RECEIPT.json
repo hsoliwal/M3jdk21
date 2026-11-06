@@ -13,7 +13,7 @@
     {
       "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
       "preimage_sha256": "b6cd87d65584b65d7191b50d84c1dacb1f2e352f1c9a9ce5dd721abff8af3609",
-      "postimage_sha256": "7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203",
+      "postimage_sha256": "2d9c2589aee071b66eb069bf421664b8d0a6794673f0f3050cbab19cf99f9ae5",
       "license": "GPL-2.0-only WITH Classpath-exception-2.0"
     }
   ],

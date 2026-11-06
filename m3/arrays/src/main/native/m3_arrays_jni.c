@@ -17,7 +17,7 @@ static int checked_range(jint start, jint count, jsize length) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
+Java_jdk_m3_arrays_M3ArrayNative_nativeCompareUtf16(
     JNIEnv *env,
     jclass type,
     jcharArray left_array,
@@ -70,7 +70,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
 }
 
 JNIEXPORT jcharArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
+Java_jdk_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
     JNIEnv *env,
     jclass type,
     jobjectArray segments) {
@@ -160,7 +160,7 @@ static void m3_backing_failed(JNIEnv *env) {
 }
 
 JNIEXPORT jobjectArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateObjects(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateObjects(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -176,7 +176,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateObjects(
 }
 
 JNIEXPORT jbyteArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateBytes(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateBytes(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -186,7 +186,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateBytes(
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateInts(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateInts(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -196,7 +196,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateInts(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateLongs(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateLongs(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -207,7 +207,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateLongs(
 
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 JNIEXPORT jbooleanArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateBooleans(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateBooleans(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -218,7 +218,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateBooleans(
 
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 JNIEXPORT jcharArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateChars(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateChars(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -229,7 +229,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateChars(
 
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 JNIEXPORT jshortArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateShorts(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateShorts(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -240,7 +240,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateShorts(
 
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 JNIEXPORT jfloatArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateFloats(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateFloats(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;
@@ -251,7 +251,7 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateFloats(
 
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 JNIEXPORT jdoubleArray JNICALL
-Java_com_m3_arrays_M3ArrayNative_nativeAllocateDoubles(
+Java_jdk_m3_arrays_M3ArrayNative_nativeAllocateDoubles(
     JNIEnv *env, jclass owner, jint length) {
   (void)owner;
   if (!m3_backing_length(env, length)) return NULL;

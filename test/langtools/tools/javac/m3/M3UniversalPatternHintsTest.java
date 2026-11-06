@@ -20,7 +20,7 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-/** Source-built M3JDK21 integration test. No @Sortable, annotation processor or runtime flags. */
+/** Source-built M3JDK 21 integration test. No @Sortable, annotation processor or runtime flags. */
 public class M3UniversalPatternHintsTest {
     private static final String SOURCE = """
             public class OrdinaryTask implements Runnable {

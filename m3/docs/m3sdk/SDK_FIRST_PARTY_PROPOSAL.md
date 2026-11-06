@@ -29,7 +29,7 @@ Companion files in this directory:
    - Two records are therefore false positives: the row `m3/tooling/a3/pom.xml … NOT_VENDORED` in `DOWNSTREAM_DEPENDENCY_LEDGER.tsv`, and line 65 of `CORRECTIONS.md`.
 2. **`com.synexia.m3:cpu-gpu-rv32im` is not in hsoliwal/com.synexia.**
    - It lives in **hsoliwal/synexia-tornadovm** (a public Apache-2.0 fork of beehive-lab/TornadoVM) at `m3/cpu-gpu/`.
-   - M3jdk21 CI checks that fork out at `3bf82671` and runs `mvn install` (`.github/workflows/m3-tornadovm-bulk-adapter{,-gpu}.yml`; `m3/compatibility/synexia-tornadovm-bulk-adapter-20261009.tsv`, Tornado PR 7).
+   - M3jdk21 CI checks that fork out at `3bf82671` and runs `mvn install` (`.github/workflows/m3-tornadovm-bulk-adapter{,-gpu}.yml`; `m3/compatibility/m3-tornadovm-bulk-adapter-20261009.tsv`, Tornado PR 7).
    - com.synexia only pins the fork as the submodule `donors/tornadovm` @ `4be6c461`. That commit predates `m3/cpu-gpu` by 145 commits.
    - `synexia-tornadovm-m3` is a different module (`com.synexia.tornadom3`).
 3. **cpu-gpu-rv32im has no first-party dependencies and one third-party dependency that is not vendored:** `io.github.beehive-lab:tornado-api:6.1.0-jdk21`.
@@ -90,7 +90,7 @@ Other poms only *declare* a `com.synexia.*` groupId for themselves, so they are 
   - Test: `rewrite-test 8.17.1`, `junit-jupiter 5.10.2`. All of these are already vendored (`THIRD_PARTY_MODULES.tsv`).
   - Imports are limited to `org.openrewrite.*` and `java.*`.
   - First-party closure: **none**.
-- **Licence:** `SPDX-License-Identifier: Apache-2.0` on all 8 files. `m3/vendor/synexia/LICENSE` and `NOTICE` are preserved.
+- **Licence:** `SPDX-License-Identifier: Apache-2.0` on all 8 files. `m3/vendor/m3/LICENSE` and `NOTICE` are preserved.
 
 ### 3.2 `com.synexia.m3:cpu-gpu-rv32im:1.0.0-SNAPSHOT`
 
@@ -160,8 +160,8 @@ Other poms only *declare* a `com.synexia.*` groupId for themselves, so they are 
 
   | Snapshot | Revision | Manifest / provenance |
   |---|---|---|
-  | Seed | `62aea466…` | `m3/synexia-import/synexia-seed-export.tsv` (16 rows of sha256 + licence + mode), manifest root `ca570e87…` |
-  | A3 export | `a062661e…`, PR 9599 | `m3/synexia-import/intakes/jdk-a3-public-export-20261007/SOURCE_PROVENANCE.tsv` (key/value: repo, revision, PR, export pom and manifest git blobs, licence, target artifact, target source root) |
+  | Seed | `62aea466…` | `m3/m3-import/m3-seed-export.tsv` (16 rows of sha256 + licence + mode), manifest root `ca570e87…` |
+  | A3 export | `a062661e…`, PR 9599 | `m3/m3-import/intakes/jdk-a3-public-export-20261007/SOURCE_PROVENANCE.tsv` (key/value: repo, revision, PR, export pom and manifest git blobs, licence, target artifact, target source root) |
   | JNI shared-array custody | `857c4cc0…` | `intakes/jni-array-address-receiver-20261007/{SOURCE_PROVENANCE,TARGET_MAP}.tsv`; custody only, not buildable |
 
   Additional intakes (`ast-navigation`, `regex-precompute-v7`, `string-*` receipts) use `PROVENANCE.json`, `SOURCE_CUSTODY.json` and `FOSS_REUSE_DECISION.tsv`.
@@ -175,7 +175,7 @@ Other poms only *declare* a `com.synexia.*` groupId for themselves, so they are 
 
 ---
 
-## 5. Licensing rule per target path (`m3/docs/synexia-intake-policy.tsv`)
+## 5. Licensing rule per target path (`m3/docs/m3-intake-policy.tsv`)
 
 | Material | Target path | Policy mode | Disposition |
 |---|---|---|---|
@@ -213,7 +213,7 @@ FOSS-reuse classification for every leaf:
   - A `PublicCpuGpuMirrorTest` recomputes git-blob SHA-1 for every manifest row and fails on any extra file.
 - **Reactor:** in the `m3-tornado` profile of `m3/pom.xml`, add `ports/cpu-gpu-rv32im` before `ports/tornadovm-bulk`. `ports/tornadovm-bulk/pom.xml` needs no change.
 - **CI:** in `.github/workflows/m3-tornadovm-bulk-adapter.yml` and `-gpu.yml`, delete the external `actions/checkout` of `hsoliwal/synexia-tornadovm` and the `mvn install` of its `m3/cpu-gpu`. Build with `-Pm3-tornado` instead, and add the new paths to the `paths:` filter.
-- **Notices:** append a "TornadoVM RV32IM provider snapshot" section to `m3/vendor/synexia/README.md`. Covering the material with the existing `LICENSE` and `NOTICE` is sufficient, because it is Synexia-authored Apache-2.0.
+- **Notices:** append a "TornadoVM RV32IM provider snapshot" section to `m3/vendor/m3/README.md`. Covering the material with the existing `LICENSE` and `NOTICE` is sufficient, because it is Synexia-authored Apache-2.0.
 - **Ownership:** canonical ownership stays with hsoliwal/synexia-tornadovm, the same "fix upstream first, re-pin" rule as A3.
   - Optionally, advance com.synexia's `donors/tornadovm` submodule (`4be6c461`) so that Synexia also sees `m3/cpu-gpu`. That is a separate Synexia-side leaf.
 

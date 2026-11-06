@@ -1,0 +1,40 @@
+{
+  "schema": "M3_CURRENT_FORK_OWNERS_EVIDENCE_INTAKE/1",
+  "status": "PASS",
+  "group": "receiver-refusal",
+  "handoff_source": "/workspace/scratch/206049dfb270/nlp-work/EVIDENCE_HANDOFF-RECEIVER-REFUSAL.json",
+  "handoff_sha256": "0f9cc7fc14a0658ed06727b1cb24866ae0fb7260715dfd8c1fb09e2acd940569",
+  "files": [
+    {
+      "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "destination": "nlp/combined-receiver-source/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
+      "bytes": 25292,
+      "reused_exact_existing_copy": false
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+      "destination": "nlp/combined-receiver-source/m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+      "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f",
+      "bytes": 11215,
+      "reused_exact_existing_copy": false
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/core/src/jdk/m3/text/M3BigString.java",
+      "destination": "nlp/combined-receiver-source/m3/core/src/jdk/m3/text/M3BigString.java",
+      "sha256": "ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343",
+      "bytes": 33365,
+      "reused_exact_existing_copy": false
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+      "destination": "nlp/combined-receiver-source/m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+      "sha256": "d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a",
+      "bytes": 9740,
+      "reused_exact_existing_copy": false
+    }
+  ],
+  "no_source_mutation": true,
+  "binary_payloads_copied": 0,
+  "scope": "Exact evidence custody only; copying a result does not extend its runtime, recipe or platform authority."
+}

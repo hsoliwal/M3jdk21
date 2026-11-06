@@ -15,7 +15,7 @@
  * Test donor: google/guava f06690fa3e874f65515e8fd338a74d636e2c792f,
  * HashBiMapTest blob f4bee7bf9830b47d6519453c093a999c77ebd7f9.
  */
-package com.m3.collections.guava;
+package jdk.m3.collections.guava;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;

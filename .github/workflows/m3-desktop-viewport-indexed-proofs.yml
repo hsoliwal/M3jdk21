@@ -3,9 +3,9 @@ name: M3 desktop viewport indexed Java21 proofs
 on:
   pull_request:
     paths:
-      - 'm3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportIndexWindow.java'
-      - 'm3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3DesktopViewportAdapters.java'
-      - 'm3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportProof.java'
+      - 'm3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportIndexWindow.java'
+      - 'm3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3DesktopViewportAdapters.java'
+      - 'm3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3DesktopViewportProof.java'
       - 'm3/ports/swing-viewport/src/**'
       - 'm3/ports/swing-viewport/pom.xml'
       - 'm3/vendor/third_party/junit-*/**'
@@ -49,11 +49,11 @@ jobs:
           OUT="$RUNNER_TEMP/m3-desktop-classes"
           mkdir -p "$OUT"
           javac --release 21 -Xlint:all -Werror -d "$OUT" \
-            "$SRC/main/java/com/m3/swing/viewport/M3ViewportIndexWindow.java" \
-            "$SRC/main/java/com/m3/swing/viewport/M3DesktopViewportAdapters.java" \
-            "$SRC/test/java/com/m3/swing/viewport/M3DesktopViewportProof.java"
+            "$SRC/main/java/jdk/m3/swing/viewport/M3ViewportIndexWindow.java" \
+            "$SRC/main/java/jdk/m3/swing/viewport/M3DesktopViewportAdapters.java" \
+            "$SRC/test/java/jdk/m3/swing/viewport/M3DesktopViewportProof.java"
           java -ea -Djava.awt.headless=true -cp "$OUT" \
-            com.m3.swing.viewport.M3DesktopViewportProof | tee "$RUNNER_TEMP/m3-desktop.log"
+            jdk.m3.swing.viewport.M3DesktopViewportProof | tee "$RUNNER_TEMP/m3-desktop.log"
           grep -Eq '^M3_DESKTOP_VIEWPORT_PROOF_PASS=[2-9][0-9]+' "$RUNNER_TEMP/m3-desktop.log"
       - name: Build and verify existing source-built JUnit 5.10.2 closure
         shell: bash
@@ -90,14 +90,14 @@ jobs:
           javac --release 21 -cp "$OUT:$JAR" -d "$OUT" \
             m3/ports/swing-viewport/optional-swingx/M3SwingXLinkageProof.java
           java -Djava.awt.headless=true -cp "$OUT:$JAR" \
-            com.m3.swing.viewport.M3SwingXLinkageProof | tee "$RUNNER_TEMP/m3-swingx.log"
+            jdk.m3.swing.viewport.M3SwingXLinkageProof | tee "$RUNNER_TEMP/m3-swingx.log"
           grep -F 'M3_SWINGX_SUBTYPE_PROOF_PASS=4' "$RUNNER_TEMP/m3-swingx.log"
           javac --release 21 -Xlint:all -Werror -cp "$OUT:$JAR" -d "$OUT" \
-            m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3SwingXHeaderProof.java
+            m3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3SwingXHeaderProof.java
           command -v xvfb-run
           xvfb-run -a -s '-screen 0 1280x1024x24' \
             java -Djava.awt.headless=false -cp "$OUT:$JAR" \
-            com.m3.swing.viewport.M3SwingXHeaderProof | tee "$RUNNER_TEMP/m3-swingx-header.log"
+            jdk.m3.swing.viewport.M3SwingXHeaderProof | tee "$RUNNER_TEMP/m3-swingx-header.log"
           grep -Fx 'M3_SWINGX_HEADER_RUNTIME_PASS checks=206' "$RUNNER_TEMP/m3-swingx-header.log"
       - name: Publish exact-head logs without overstating native UI qualification
         if: always()

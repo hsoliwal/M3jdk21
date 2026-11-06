@@ -17,27 +17,27 @@
   "release_ready": false,
   "outputs": [
     {
-      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3Flat3MapProviderTest.java",
+      "path": "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3Flat3MapProviderTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "508f91d8852c460c27cd4b81004496c58af08f5bab14432228fff2ebe33970ba",
+      "after_sha256": "c9498ec115a48a9c23c884c62f1011af6bb439b2826a12d454a38f0768b17a47",
       "kind": "GENERATED_TEST"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3Flat3Map.java",
-      "before_sha256": "27fb9ad7a874ada69c199d5f4f13044f9798091412a5bf2f414bdc5b8689d6ba",
-      "after_sha256": "28fb1d0ac39c3e1836750694c729349d01dd4477d4d3d711c82242055263710e",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3Flat3Map.java",
+      "before_sha256": "453417c15ffd469468fa42453b4e3a0cb1fe580d452704aff67a2ad270c7a2cd",
+      "after_sha256": "f2c4789a711ca87ac6a065099ccf3a5993427c81642bda8d000ce6f3dc798a25",
       "kind": "GENERATED_SOURCE"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3Flat3MapContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3Flat3MapContract.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "7378bc357e20e8e3b5fb53167248ddc9748c9c004d2eaa50c376ac36bb15e2a4",
+      "after_sha256": "42dffefbe6fdc9ba084abafbd03314ca517f999a1a03edafc41a2fd6eac6e12d",
       "kind": "GENERATED_TEST"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3Flat3MapTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3Flat3MapTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "04f7b82e6a18c9870d87ab3370e5f2bd77d7191d36ff882d2b2ce9c79e12394a",
+      "after_sha256": "49b2c30cb677f09e79699f15712613b57891d3a96080153126a824c2d1f8fa9b",
       "kind": "GENERATED_TEST"
     }
   ],

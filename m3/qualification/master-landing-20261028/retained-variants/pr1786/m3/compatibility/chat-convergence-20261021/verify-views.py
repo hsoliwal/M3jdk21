@@ -7,7 +7,7 @@ p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a
 r=Path(__file__).resolve().parents[3];out=a.output.resolve()
 if out.exists() or out==r or r in out.parents:p.error('fresh output outside checkout required')
 out.mkdir(parents=True)
-commands=[('compile',['javac','--release','21','-Xlint:all','-Werror','-d',out/'classes',r/'m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java',Path(__file__).with_name('M3LiveViewContinuationTest.java')]),('normal',['java','-cp',out/'classes','com.m3.collections.M3LiveViewContinuationTest']),('interpreter',['java','-Xint','-cp',out/'classes','com.m3.collections.M3LiveViewContinuationTest'])]
+commands=[('compile',['javac','--release','21','-Xlint:all','-Werror','-d',out/'classes',r/'m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java',Path(__file__).with_name('M3LiveViewContinuationTest.java')]),('normal',['java','-cp',out/'classes','jdk.m3.collections.M3LiveViewContinuationTest']),('interpreter',['java','-Xint','-cp',out/'classes','jdk.m3.collections.M3LiveViewContinuationTest'])]
 for name,command in commands:
  result=subprocess.run([str(x) for x in command],capture_output=True,text=True,timeout=180)
  (out/(name+'.log')).write_text(result.stdout+result.stderr)

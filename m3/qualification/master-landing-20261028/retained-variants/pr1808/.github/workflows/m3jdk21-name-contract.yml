@@ -33,9 +33,9 @@ jobs:
             src/java.base/share/native/libjava/M3StateRelation.c
             src/java.base/share/native/libjava/m3_state_relation.h
             src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**
-            m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+            m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java
             m3/tooling/migration-recipes/src/**
-            m3/fs/src/main/java/com/m3/fs/**
+            m3/fs/src/main/java/jdk/m3/fs/**
             test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java
             .github/workflows/m3jdk21-name-contract.yml
       - name: Canonical name and package mapping gate

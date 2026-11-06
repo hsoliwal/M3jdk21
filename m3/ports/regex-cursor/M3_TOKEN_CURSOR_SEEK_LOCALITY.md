@@ -1,7 +1,7 @@
 # M3TokenCursor seek-locality contract — candidate/HOLD
 
 ## Source owner and invariant
-Existing original owner: `m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3TokenCursor.java`, receiver hsoliwal/M3jdk21, parent PR #2332. No other runtime owner, public method, source storage lane, JNI entry point or TokenPattern implementation may change. The only candidate change is inside existing `seek(int)`.
+Existing original owner: `m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenCursor.java`, receiver hsoliwal/M3jdk21, parent PR #2332. No other runtime owner, public method, source storage lane, JNI entry point or TokenPattern implementation may change. The only candidate change is inside existing `seek(int)`.
 
 Before and after must preserve: `Objects.checkIndex(position, total + 1)` range and diagnostic; empty-cursor behavior; cursor offset and unit semantics for every `0 <= position <= total`; exactly the same handling of `position == total` (last nonempty chunk); public Java bytecode descriptors; retained inner-lane identity; `M3CursorFacts` presence mask; `M3ChunkCursor` interface; original Java21/JNI output and error behavior. This leaf does NOT fix the pre-existing `total+1` integer overflow corner at total=Integer.MAX_VALUE; changing that exception semantic is outside scope and requires a separate contract review.
 

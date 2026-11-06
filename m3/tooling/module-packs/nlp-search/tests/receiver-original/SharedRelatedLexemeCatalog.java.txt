@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.text;
+package jdk.m3.text;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -23,8 +23,8 @@ import java.util.Set;
  * physical coordinate already admitted by {@link SharedLexiconCatalog}.</p>
  */
 public final class SharedRelatedLexemeCatalog implements AutoCloseable {
-    public static final String FILE = "synexia.related.tsv";
-    private static final String SOURCE_FILE = "synexia.related-sources.tsv";
+    public static final String FILE = "m3.related.tsv";
+    private static final String SOURCE_FILE = "m3.related-sources.tsv";
     private static final String HEADER =
             "source_id\trecord_id\tlexeme\trelated_lexeme\tshard_id\timage_row";
     private static final String MAPPING_HEADER =
@@ -67,7 +67,7 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
         Path directory = Objects.requireNonNull(exportDirectory).toAbsolutePath().normalize();
         if (!Files.isDirectory(directory)) throw new IOException("not a catalog directory");
         Map<SharedLexiconCatalog.SourceIdentity, Mapping> mappings =
-                readMappings(directory.resolve("synexia.records.tsv"));
+                readMappings(directory.resolve("m3.records.tsv"));
         Set<String> relationSources = readRelationSources(directory.resolve(SOURCE_FILE));
         Path file = directory.resolve(FILE);
         if (!Files.isRegularFile(file)) throw new IOException("related sidecar missing");
@@ -267,7 +267,7 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
     }
 
     private static IOException malformed(int lineNumber, String message) {
-        return new IOException("synexia.related.tsv:" + (lineNumber + 1) + ": " + message);
+        return new IOException("m3.related.tsv:" + (lineNumber + 1) + ": " + message);
     }
 
     private static String decodeSidecarText(String value, int lineNumber) throws IOException {

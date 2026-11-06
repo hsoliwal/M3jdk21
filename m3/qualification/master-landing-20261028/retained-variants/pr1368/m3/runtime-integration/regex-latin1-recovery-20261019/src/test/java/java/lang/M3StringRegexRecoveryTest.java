@@ -17,7 +17,7 @@ import jdk.internal.misc.Unsafe;
 
 /**
  * Fresh actual-owner probe. The graph oracle follows the published Apache-2.0
- * RegexGraph fixture at M3JDK21 46f8ad628ce66fbc8b41895f0146edbe00e3aca5.
+ * RegexGraph fixture at M3JDK 21 46f8ad628ce66fbc8b41895f0146edbe00e3aca5.
  * Test storage is temporary native memory behind the actual canonical atom API.
  * This fixture does not replace String.class or establish full M3VM acceptance.
  */

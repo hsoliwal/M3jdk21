@@ -102,7 +102,7 @@
       "sealing_tests": 8,
       "receiver_cases": 9,
       "status": "PASS",
-      "pom_sha256": "824ced27a427e35901d413eb8c8beac0ee657d991a03079a5d1cc59e29f76092"
+      "pom_sha256": "2658882451ec25f1ff3ebaea743a8934aa1221db023777537636439dafa6b1e1"
     },
     "fresh_successor_fixture": {
       "sdk_tests": 5,
@@ -145,7 +145,7 @@
     },
     {
       "path": "openrewrite-parser-module-v4/receipt.json",
-      "sha256": "eb3621051147d14c64f7dce96ea03c00812d88ec5cbfadffd9bd68989ac48ef9"
+      "sha256": "c997dabe801d41b4fb6f76c03fb54350ddf9714cc146ee8a4ee5b0a469333a9e"
     },
     {
       "path": "recipe-runtime-parser-host-v1/receipt.json",
@@ -153,15 +153,15 @@
     },
     {
       "path": "recipe-runtime-successor-fixture-v1/receipt.json",
-      "sha256": "2651268722e1fee4f23a7691325c32e6a5dc20c33a82323a1571323476956245"
+      "sha256": "48ca567dd32b8fa445833779fce04e61c83d9a7370c138a8e63d68832b0da9f6"
     },
     {
       "path": "recipe-runtime-facade-successor-v1/receipt.json",
-      "sha256": "bd008b56fac68082d7a0c208b7990da6d3a08579f637e3d2c7b8b4a0fc7d723a"
+      "sha256": "fc361c4ac9ea108af4ab57e7718e87b088e6da9285fa19f0f81329db0c81dfb4"
     },
     {
       "path": "runtime-facade-patch-v1/receipt.json",
-      "sha256": "d2f5bc44b93f05ac5d106e3a6b29c00b1c0c86da0bf3a569ecfd6d2eedc350d0"
+      "sha256": "041f93b7f58067ae14ca3fd2d39a68a871413c69e70de603eb583e8d4ede7fd8"
     }
   ]
 }

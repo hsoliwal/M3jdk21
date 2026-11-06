@@ -23,8 +23,8 @@ The exact canonical Maven/OpenRewrite Java21 recipe is in `hsoliwal/com.synexia`
 
 | Path | Before Git blob | After Git blob | Before SHA-256 | After SHA-256 |
 | --- | --- | --- | --- | --- |
-| `M3FileShadowInputStream.java` | `e3370f88b3389848d6960efde43794b246bb027d` | `801258fe9b570231af7ebf40cfddb564cf07fd44` | `955829f688ed5fb6eb32923c4b16c62a34e2aaa53d4e3a81f8a0697c7122cdca` | `c6992e5690c2cb37b28c9247092a14734dc593c4ca385cd821c1df10e77b67e1` |
-| `M3FileShadowTest.java` | `120bdbc2768383624e422b69fc7ed21e4d131654` | `5bab8437d1aded79ecaeb1f8c3afbca1c318db2f` | `5cdf00810f97762d91143ba6459f4271c4847163254d27e872493d525c2df713` | `e89e9c8c716c5653206c7e7b20344390a36390e8e7b7c5c03755dcb84b2efc31` |
+| `M3FileShadowInputStream.java` | `e3370f88b3389848d6960efde43794b246bb027d` | `494b16318855cbf74642724a960754eb7270e248` | `955829f688ed5fb6eb32923c4b16c62a34e2aaa53d4e3a81f8a0697c7122cdca` | `b737b97c1c9c60a869f841f847cdc1a6363f1981259eb18454f261013a9aa885` |
+| `M3FileShadowTest.java` | `9e14a1b7ae79030ccf50cf7b85ede8ac0ad590ad` | `f4d61fce6508b3cd6fe617e2a65ca225e716b602` | `03e1b61265d85ba6741f9d0016013a42b7d63399f50d539df2417862d3d89411` | `e2474aaa73dfbf2699045bbe7899eca2a7016e08a9d10e621cf08b71ad75c464` |
 
 ## Qualification boundary
 

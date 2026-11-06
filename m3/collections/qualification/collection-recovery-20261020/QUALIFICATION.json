@@ -2,7 +2,7 @@
   "schema": 2,
   "status": "SCOPED_RECIPE_AND_RUNTIME_PASS",
   "target_revision": "df532e779056dbec203dde20030657c3d144f5b5",
-  "recipe": "com.synexia.m3.CollectionRecovery20261020",
+  "recipe": "jdk.internal.m3.CollectionRecovery20261020",
   "generated_sources": 6,
   "master_wrappers_preserved": true,
   "sdk": {

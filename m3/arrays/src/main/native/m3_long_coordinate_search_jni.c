@@ -51,7 +51,7 @@ static jint m3_bound_region(JNIEnv *env, jlongArray input, jsize length,
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_arrays_M3LongCoordinateIndex_nativeBound(
+Java_jdk_m3_arrays_M3LongCoordinateIndex_nativeBound(
     JNIEnv *env, jclass owner, jlongArray input, jlong key, jboolean upper) {
   (void)owner;
   if (input == NULL) {
@@ -141,7 +141,7 @@ static jint m3_long_gallop(m3_long_reader *reader, jint from,
  * duplicates, and detached output identity remain unchanged.
  */
 JNIEXPORT jintArray JNICALL
-Java_com_m3_arrays_M3LongCoordinateIndex_nativeBounds(
+Java_jdk_m3_arrays_M3LongCoordinateIndex_nativeBounds(
     JNIEnv *env, jclass owner, jlongArray input, jlongArray queries, jboolean upper) {
   (void)owner;
   if (input == NULL || queries == NULL) {

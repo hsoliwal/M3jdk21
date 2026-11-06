@@ -14,11 +14,11 @@ on:
       - 'm3/tooling/jmod-recipes/tools/test_jmod_resolution.py'
       - 'm3/docs/m3jdk21-porting-invariant.md'
       - 'm3/docs/name-mapping.json'
-      - 'm3/docs/synexia-array-port-map.tsv'
+      - 'm3/docs/m3-array-port-map.tsv'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-substrate-v1/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-array-substrate-v1/**'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-array-substrate-v1/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-array-substrate-v1/**'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java'
       - '.github/workflows/m3-array-substrate.yml'
   workflow_dispatch:
 
@@ -39,7 +39,7 @@ jobs:
         run: |
           python3 m3/tooling/name-contract/check.py
           python3 m3/tooling/name-contract/audit.py --strict
-          python3 m3/runtime-integration/verify-synexia-intake.py
+          python3 m3/runtime-integration/verify-m3-intake.py
       # Canonical Maven/OpenRewrite execution is qualified in com.synexia.
       # This public receiver runs only target-authoritative product gates.
 

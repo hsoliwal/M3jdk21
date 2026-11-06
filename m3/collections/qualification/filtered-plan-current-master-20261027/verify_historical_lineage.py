@@ -16,7 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[4]
 MANIFEST = ROOT / "m3/collections/qualification/filtered-cursor-mask-20261021/SOURCE_MANIFEST.tsv"
 
 
-SEALED_MANIFEST_BLOB = "4ca33e23eabc23764f7e43f30cba9b753cbd0b1f"
+SEALED_MANIFEST_BLOB = "5907fcead4a2468a9d31b08b07731876c9d7d954"
 
 
 def verify_manifest_identity() -> None:

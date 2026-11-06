@@ -6,22 +6,22 @@ on:
       - 'm3/docs/m3-runtime-invariants.tsv'
       - 'm3/docs/m3string-history-recovery.tsv'
       - 'm3/docs/name-mapping.json'
-      - 'm3/docs/synexia-string-recipe-authority.tsv'
+      - 'm3/docs/m3-string-recipe-authority.tsv'
       - 'm3/docs/m3jdk21-porting-invariant.md'
-      - 'm3/docs/m3string-synexia-lineage.md'
-      - 'm3/synexia-import/current-full-borrow/STRING_PHASE.md'
-      - 'm3/synexia-import/current-full-borrow/string-source-target-map.tsv'
-      - 'm3/synexia-import/current-full-borrow/string-phase-gates.tsv'
-      - 'm3/synexia-import/current-full-borrow/string-phase-work-orders.tsv'
-      - 'm3/synexia-import/current-full-borrow/check_string_phase.py'
-      - 'm3/synexia-import/current-full-borrow/test_string_phase_successors.py'
-      - 'm3/synexia-import/current-full-borrow/string-current-source-observations-20261019.tsv'
-      - 'm3/synexia-import/current-full-borrow/receiver-status.tsv'
-      - 'm3/docs/synexia-string-precompute-port-map.tsv'
+      - 'm3/docs/m3string-m3-lineage.md'
+      - 'm3/m3-import/current-full-borrow/STRING_PHASE.md'
+      - 'm3/m3-import/current-full-borrow/string-source-target-map.tsv'
+      - 'm3/m3-import/current-full-borrow/string-phase-gates.tsv'
+      - 'm3/m3-import/current-full-borrow/string-phase-work-orders.tsv'
+      - 'm3/m3-import/current-full-borrow/check_string_phase.py'
+      - 'm3/m3-import/current-full-borrow/test_string_phase_successors.py'
+      - 'm3/m3-import/current-full-borrow/string-current-source-observations-20261019.tsv'
+      - 'm3/m3-import/current-full-borrow/receiver-status.tsv'
+      - 'm3/docs/m3-string-precompute-port-map.tsv'
       - 'm3/docs/string-precompute-completeness.tsv'
       - 'm3/runtime-integration/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3Java21ConvergenceRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21ConvergenceRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-atom-pattern.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-file-inventory.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml'
@@ -87,11 +87,11 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Verify String Phase-1 checkout root and integrity
-        run: python3 m3/synexia-import/current-full-borrow/test_string_phase_root.py -v
+        run: python3 m3/m3-import/current-full-borrow/test_string_phase_root.py -v
       - name: Verify STRING target successor refusal controls
-        run: python3 m3/synexia-import/current-full-borrow/test_string_phase_successors.py -v
+        run: python3 m3/m3-import/current-full-borrow/test_string_phase_successors.py -v
       - name: Verify full-borrow MIndexString to M3String custody
-        run: python3 m3/synexia-import/current-full-borrow/check_string_phase.py
+        run: python3 m3/m3-import/current-full-borrow/check_string_phase.py
       - name: Verify String completeness admission and refusal controls
         run: python3 m3/runtime-integration/test_string_completeness.py
       - name: Verify compiler-parsed M3 String layout

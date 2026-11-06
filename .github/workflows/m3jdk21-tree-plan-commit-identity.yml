@@ -4,8 +4,8 @@ name: M3JDK21 primitive Tree plan commit identity and JNI custody
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java'
       - 'm3/collections/qualification/tree-plan-commit-identity/**'
       - '.github/workflows/m3jdk21-tree-plan-commit-identity.yml'
   workflow_dispatch:
@@ -26,8 +26,8 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java
-            m3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java
+            m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java
+            m3/collections/src/test/java/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java
             m3/collections/qualification/tree-plan-commit-identity/**
             .github/workflows/m3jdk21-tree-plan-commit-identity.yml
       - name: Verify exact Java identities and the immutable canonical catalogue reference

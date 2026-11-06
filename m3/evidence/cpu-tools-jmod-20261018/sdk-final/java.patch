@@ -1049,11 +1049,11 @@ index 0000000..21c3bc1
 +        @Override public void done() { finished++; }
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/com/m3/tools/codec/varint/VarInts.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/com/m3/tools/codec/varint/VarInts.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java
 new file mode 100644
 index 0000000..54f23c9
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/com/m3/tools/codec/varint/VarInts.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java
 @@ -0,0 +1,43 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -1098,11 +1098,11 @@ index 0000000..54f23c9
 +        else throw new IllegalArgumentException("value required");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java
 new file mode 100644
 index 0000000..a6b14ca
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -1110,11 +1110,11 @@ index 0000000..a6b14ca
 +module com.m3.tools.codec.varint {
 +    exports com.m3.tools.codec.varint;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/com/m3/tools/constraint/interval/Intervals.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/com/m3/tools/constraint/interval/Intervals.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java
 new file mode 100644
 index 0000000..8dfef0b
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/com/m3/tools/constraint/interval/Intervals.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java
 @@ -0,0 +1,33 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -1149,11 +1149,11 @@ index 0000000..8dfef0b
 +        }else throw new IllegalArgumentException("--self-test");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java
 new file mode 100644
 index 0000000..edb8505
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -1161,11 +1161,11 @@ index 0000000..edb8505
 +module com.m3.tools.constraint.interval {
 +    exports com.m3.tools.constraint.interval;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuTools.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuTools.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuTools.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuTools.java
 new file mode 100644
 index 0000000..36f29eb
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuTools.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuTools.java
 @@ -0,0 +1,447 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-License-Identifier: Apache-2.0
 +// Copyright 2026 Hitesh Soliwal and contributors
@@ -1614,11 +1614,11 @@ index 0000000..36f29eb
 +        }
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuToolsCli.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuToolsCli.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuToolsCli.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuToolsCli.java
 new file mode 100644
 index 0000000..7f10d67
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuToolsCli.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuToolsCli.java
 @@ -0,0 +1,151 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-License-Identifier: Apache-2.0
 +// Copyright 2026 Hitesh Soliwal and contributors
@@ -1771,11 +1771,11 @@ index 0000000..7f10d67
 +        return code;
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java
 new file mode 100644
 index 0000000..d719939
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java
 @@ -0,0 +1,538 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-License-Identifier: Apache-2.0
 +// Copyright 2026 Hitesh Soliwal and contributors
@@ -2315,11 +2315,11 @@ index 0000000..d719939
 +        }
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java
 new file mode 100644
 index 0000000..70641b2
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java
 @@ -0,0 +1,27 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// SPDX-License-Identifier: Apache-2.0
 +// Copyright 2026 Hitesh Soliwal and contributors
@@ -2348,11 +2348,11 @@ index 0000000..70641b2
 +    requires transitive com.m3.tools.plan.priority;
 +    exports com.m3.tools.cpu;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/com/m3/tools/graph/paths/ShortestPaths.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/com/m3/tools/graph/paths/ShortestPaths.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java
 new file mode 100644
 index 0000000..05ea4eb
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/com/m3/tools/graph/paths/ShortestPaths.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java
 @@ -0,0 +1,95 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// SPDX-License-Identifier: Apache-2.0
@@ -2449,11 +2449,11 @@ index 0000000..05ea4eb
 +        System.out.println("M3_JMOD_TEST_PASS graph.paths");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java
 new file mode 100644
 index 0000000..7250ce6
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2461,11 +2461,11 @@ index 0000000..7250ce6
 +module com.m3.tools.graph.paths {
 +    exports com.m3.tools.graph.paths;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/com/m3/tools/graph/topology/TopologicalOrder.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/com/m3/tools/graph/topology/TopologicalOrder.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java
 new file mode 100644
 index 0000000..8e41a88
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/com/m3/tools/graph/topology/TopologicalOrder.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java
 @@ -0,0 +1,78 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// SPDX-License-Identifier: Apache-2.0
@@ -2545,11 +2545,11 @@ index 0000000..8e41a88
 +        System.out.println("M3_JMOD_TEST_PASS graph.topology");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java
 new file mode 100644
 index 0000000..865eb89
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2557,11 +2557,11 @@ index 0000000..865eb89
 +module com.m3.tools.graph.topology {
 +    exports com.m3.tools.graph.topology;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/com/m3/tools/plan/priority/StablePriorityQueue.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/com/m3/tools/plan/priority/StablePriorityQueue.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java
 new file mode 100644
 index 0000000..8fc692a
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/com/m3/tools/plan/priority/StablePriorityQueue.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java
 @@ -0,0 +1,91 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// SPDX-License-Identifier: Apache-2.0
@@ -2654,11 +2654,11 @@ index 0000000..8fc692a
 +        System.out.println("M3_JMOD_TEST_PASS plan.priority");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java
 new file mode 100644
 index 0000000..572db2a
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2666,11 +2666,11 @@ index 0000000..572db2a
 +module com.m3.tools.plan.priority {
 +    exports com.m3.tools.plan.priority;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/com/m3/tools/stats/streaming/RunningStatistics.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/com/m3/tools/stats/streaming/RunningStatistics.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java
 new file mode 100644
 index 0000000..65fc047
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/com/m3/tools/stats/streaming/RunningStatistics.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java
 @@ -0,0 +1,32 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2704,11 +2704,11 @@ index 0000000..65fc047
 +        }else{var s=new RunningStatistics();for(String a:args)s.accept(Double.parseDouble(a));System.out.println(s.mean());}
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java
 new file mode 100644
 index 0000000..54f43f2
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2716,11 +2716,11 @@ index 0000000..54f43f2
 +module com.m3.tools.stats.streaming {
 +    exports com.m3.tools.stats.streaming;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/com/m3/tools/text/diff/TextDelta.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/com/m3/tools/text/diff/TextDelta.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java
 new file mode 100644
 index 0000000..a7f92ab
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/com/m3/tools/text/diff/TextDelta.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java
 @@ -0,0 +1,26 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2748,11 +2748,11 @@ index 0000000..a7f92ab
 +        else throw new IllegalArgumentException("before and after required");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java
 new file mode 100644
 index 0000000..d4d7ad7
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2760,11 +2760,11 @@ index 0000000..d4d7ad7
 +module com.m3.tools.text.diff {
 +    exports com.m3.tools.text.diff;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/com/m3/tools/text/frequency/TermFrequency.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/com/m3/tools/text/frequency/TermFrequency.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java
 new file mode 100644
 index 0000000..76ffa0b
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/com/m3/tools/text/frequency/TermFrequency.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java
 @@ -0,0 +1,25 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2791,11 +2791,11 @@ index 0000000..76ffa0b
 +        } else System.out.println(count(List.of(args)));
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java
 new file mode 100644
 index 0000000..73d8888
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2803,11 +2803,11 @@ index 0000000..73d8888
 +module com.m3.tools.text.frequency {
 +    exports com.m3.tools.text.frequency;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/com/m3/tools/text/index/InvertedIndex.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/com/m3/tools/text/index/InvertedIndex.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java
 new file mode 100644
 index 0000000..d420844
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/com/m3/tools/text/index/InvertedIndex.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java
 @@ -0,0 +1,97 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// SPDX-License-Identifier: Apache-2.0
@@ -2906,11 +2906,11 @@ index 0000000..d420844
 +        System.out.println("M3_JMOD_TEST_PASS text.index");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java
 new file mode 100644
 index 0000000..b2f41a6
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2918,11 +2918,11 @@ index 0000000..b2f41a6
 +module com.m3.tools.text.index {
 +    exports com.m3.tools.text.index;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/com/m3/tools/text/ngram/NGrams.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/com/m3/tools/text/ngram/NGrams.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java
 new file mode 100644
 index 0000000..8318922
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/com/m3/tools/text/ngram/NGrams.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java
 @@ -0,0 +1,26 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2950,11 +2950,11 @@ index 0000000..8318922
 +        else throw new IllegalArgumentException("text and gram length required");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java
 new file mode 100644
 index 0000000..a9c2709
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2962,11 +2962,11 @@ index 0000000..a9c2709
 +module com.m3.tools.text.ngram {
 +    exports com.m3.tools.text.ngram;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/com/m3/tools/text/normalize/UnicodeNormalizer.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/com/m3/tools/text/normalize/UnicodeNormalizer.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java
 new file mode 100644
 index 0000000..eb6db25
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/com/m3/tools/text/normalize/UnicodeNormalizer.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java
 @@ -0,0 +1,21 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -2989,11 +2989,11 @@ index 0000000..eb6db25
 +        } else { System.out.println(nfkc(String.join(" ", args))); }
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java
 new file mode 100644
 index 0000000..f9cc605
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3001,11 +3001,11 @@ index 0000000..f9cc605
 +module com.m3.tools.text.normalize {
 +    exports com.m3.tools.text.normalize;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/com/m3/tools/text/regex/RegexMatcher.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/com/m3/tools/text/regex/RegexMatcher.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java
 new file mode 100644
 index 0000000..6b556bb
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/com/m3/tools/text/regex/RegexMatcher.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java
 @@ -0,0 +1,32 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3039,11 +3039,11 @@ index 0000000..6b556bb
 +        } else { throw new IllegalArgumentException("regex and text arguments required"); }
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java
 new file mode 100644
 index 0000000..e86140b
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3051,11 +3051,11 @@ index 0000000..e86140b
 +module com.m3.tools.text.regex {
 +    exports com.m3.tools.text.regex;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/com/m3/tools/text/search/ExactSearch.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/com/m3/tools/text/search/ExactSearch.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java
 new file mode 100644
 index 0000000..cae4058
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/com/m3/tools/text/search/ExactSearch.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java
 @@ -0,0 +1,37 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3094,11 +3094,11 @@ index 0000000..cae4058
 +        } else { throw new IllegalArgumentException("text and needle required"); }
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java
 new file mode 100644
 index 0000000..97a9fe4
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3106,11 +3106,11 @@ index 0000000..97a9fe4
 +module com.m3.tools.text.search {
 +    exports com.m3.tools.text.search;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/com/m3/tools/text/similarity/EditDistance.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/com/m3/tools/text/similarity/EditDistance.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java
 new file mode 100644
 index 0000000..9707934
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/com/m3/tools/text/similarity/EditDistance.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java
 @@ -0,0 +1,39 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3151,11 +3151,11 @@ index 0000000..9707934
 +        else throw new IllegalArgumentException("left right bound");
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java
 new file mode 100644
 index 0000000..2eed457
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3163,11 +3163,11 @@ index 0000000..2eed457
 +module com.m3.tools.text.similarity {
 +    exports com.m3.tools.text.similarity;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/com/m3/tools/text/tokenize/WordTokenizer.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/com/m3/tools/text/tokenize/WordTokenizer.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java
 new file mode 100644
 index 0000000..04cf09a
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/com/m3/tools/text/tokenize/WordTokenizer.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java
 @@ -0,0 +1,32 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3201,11 +3201,11 @@ index 0000000..04cf09a
 +        } else { words(String.join(" ", args)).forEach(System.out::println); }
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java
 new file mode 100644
 index 0000000..481c02d
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3213,11 +3213,11 @@ index 0000000..481c02d
 +module com.m3.tools.text.tokenize {
 +    exports com.m3.tools.text.tokenize;
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/com/m3/tools/verify/sha256/Sha256.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/com/m3/tools/verify/sha256/Sha256.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java
 new file mode 100644
 index 0000000..68c1689
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/com/m3/tools/verify/sha256/Sha256.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java
 @@ -0,0 +1,26 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.
@@ -3245,11 +3245,11 @@ index 0000000..68c1689
 +        }else System.out.println(utf8(String.join(" ",args)));
 +    }
 +}
-diff --git a/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/module-info.java b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/module-info.java
+diff --git a/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java
 new file mode 100644
 index 0000000..9aadb46
 --- /dev/null
-+++ b/m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/module-info.java
++++ b/m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java
 @@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Copyright 2026 Hitesh Soliwal and contributors
 +// Modified 2026-10-18: map the pinned Synexia CPU tool into its existing M3JDK21 module name.

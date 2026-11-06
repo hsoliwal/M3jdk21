@@ -16,8 +16,8 @@ PORT_CLASSES = ("M3PrimitiveIndexView", "M3PrimitiveSoaStore", "M3PrimitiveKind"
                 "M3DenseHash", "M3SortableTopK", "M3RuntimeHeap")
 CONTRACTS = ("jdk.m3.collections.M3FilteredViewsContract",
              "jdk.m3.collections.M3MutableFilteredViewsContract",
-             "com.m3.util.M3PrimitiveIndexViewFilterContract",
-             "com.m3.util.M3PrimitiveSelectionWordContract")
+             "jdk.m3.util.M3PrimitiveIndexViewFilterContract",
+             "jdk.m3.util.M3PrimitiveSelectionWordContract")
 OWNER_CONTRACTS = (
     "M3StrictFilteredSequencedContract", "M3FilteredNavigationReconciliationContract",
     "M3FilteredViewsContract", "M3MutableFilteredViewsContract",
@@ -28,7 +28,7 @@ NATIVE_CONTRACTS = (
     ("M3IndexMaskWindowRecoverySelfTest", ("--native",)),
     ("M3RequiredExcludedMaskSelectorNativeContract", ()),
     ("M3MaskNativeParityProof", ()))
-NATIVE_SYMBOL = "Java_com_m3_collections_M3IndexMaskCompactor_selectNative"
+NATIVE_SYMBOL = "Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative"
 
 
 def command(log, *args, expected=None):
@@ -54,8 +54,8 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
     patch.mkdir()
     tests = [pack / "src/test/java" / (name.replace(".", "/") + ".java")
              for name in CONTRACTS]
-    common = ["--add-modules", "jdk.m3.collections,com.m3.collections"]
-    common += ["--add-reads", "jdk.m3.collections=com.m3.collections"]
+    common = ["--add-modules", "jdk.m3.collections,jdk.m3.collections"]
+    common += ["--add-reads", "jdk.m3.collections=jdk.m3.collections"]
     if not linked:
         common += ["--module-path", str(modules)]
     # Linked javac uses the image's actual modules; --release would hide nonstandard APIs.
@@ -70,13 +70,13 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
                     *mode, "-Xcheck:jni", *common,
                     "--patch-module", "jdk.m3.collections=" + str(patch),
                     "-m", "jdk.m3.collections/" + name, expected="PASS")
-    owner_tests = repo / "m3/collections/src/test/java/com/m3/collections"
+    owner_tests = repo / "m3/collections/src/test/java/jdk/m3/collections"
     owner_patch = output / (label + "-owner-contracts")
     owner_patch.mkdir()
     names = [*OWNER_CONTRACTS, *(name for name, _ in NATIVE_CONTRACTS)]
     command(output / (label + "-owner-oracles-javac.log"), javac,
             "-source", "21", "-target", "21", "-Xlint:all,-module", "-Werror", "-proc:none",
-            *common, "--patch-module", "com.m3.collections=" + str(owner_tests),
+            *common, "--patch-module", "jdk.m3.collections=" + str(owner_tests),
             "-d", owner_patch, *(owner_tests / (name + ".java") for name in names))
     library_path = [] if linked else ["-Djava.library.path=" + str(native)]
     for mode in ((), ("-Xint",)):
@@ -84,13 +84,13 @@ def qualify(java, javac, modules, pack, repo, output, native, linked):
         for name in OWNER_CONTRACTS:
             command(output / (label + "-owner-" + name + suffix + ".log"), java,
                     *mode, "-Xcheck:jni", *common,
-                    "--patch-module", "com.m3.collections=" + str(owner_patch),
-                    "-m", "com.m3.collections/com.m3.collections." + name)
+                    "--patch-module", "jdk.m3.collections=" + str(owner_patch),
+                    "-m", "jdk.m3.collections/jdk.m3.collections." + name)
         for name, arguments in NATIVE_CONTRACTS:
             command(output / (label + "-native-" + name + suffix + ".log"), java,
                     *mode, "-Xcheck:jni", *library_path, *common,
-                    "--patch-module", "com.m3.collections=" + str(owner_patch),
-                    "-m", "com.m3.collections/com.m3.collections." + name,
+                    "--patch-module", "jdk.m3.collections=" + str(owner_patch),
+                    "-m", "jdk.m3.collections/jdk.m3.collections." + name,
                     *arguments, expected="PASS")
 
 
@@ -128,7 +128,7 @@ def main():
         raise FileExistsError("fresh output directory required: " + str(output))
     collection_sources = sorted((repo / "m3/collections/src/main/java").rglob("*.java"))
     view_sources = sorted((pack / "src/main/java").rglob("*.java"))
-    port = repo / "m3/ports/collections/src/main/java/com/m3/util"
+    port = repo / "m3/ports/collections/src/main/java/jdk/m3/util"
     view_sources.extend(port / (name + ".java") for name in PORT_CLASSES)
     native_source = repo / "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
     packager = repo / "m3/tooling/jmod-recipes/tools/jmod_pack.py"
@@ -142,7 +142,7 @@ def main():
         directory.mkdir()
     contract_sources = [pack / "src/test/java" / (name.replace(".", "/") + ".java")
                         for name in CONTRACTS]
-    contract_sources.extend(repo / "m3/collections/src/test/java/com/m3/collections" / (name + ".java")
+    contract_sources.extend(repo / "m3/collections/src/test/java/jdk/m3/collections" / (name + ".java")
                             for name in [*OWNER_CONTRACTS, *(n for n, _ in NATIVE_CONTRACTS)])
     inputs = sorted([*collection_sources, *view_sources, *contract_sources,
                      native_source, packager, Path(__file__).resolve()])
@@ -151,11 +151,11 @@ def main():
     source_receipt.extend(str(path.relative_to(repo)) + "\t" + digest(path)
                           for path in inputs)
     (output / "COMPILED_INPUTS.tsv").write_text("\n".join(source_receipt) + "\n", encoding="utf-8")
-    for name, sources in (("com.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
+    for name, sources in (("jdk.m3.collections", collection_sources), ("jdk.m3.collections", view_sources)):
         command(output / (name + "-javac.log"), home / "bin/javac", "--release", "21",
                 "-Xlint:all,-module", "-Werror", "-proc:none", "-h", headers,
                 "-d", modules / name, *sources)
-    header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
+    header = headers / "jdk_m3_collections_M3IndexMaskCompactor.h"
     if NATIVE_SYMBOL not in header.read_text():
         raise ValueError("existing JNI header contract is missing")
     library = native / "libm3_collections_mask.so"
@@ -170,7 +170,7 @@ def main():
             "-I" + str(home / "include"), "-I" + str(home / "include/linux"), header)
     qualify(home / "bin/java", home / "bin/javac", modules, pack, repo, output, native, False)
     rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
-    for module in ("com.m3.collections", "jdk.m3.collections"):
+    for module in ("jdk.m3.collections", "jdk.m3.collections"):
         jar = jars / (module + ".jar")
         command(output / (module + "-jar.log"), home / "bin/jar", "--create", "--file", jar,
                 "--date", "2026-01-01T00:00:00Z", "-C", modules / module, ".")
@@ -183,7 +183,7 @@ def main():
     command(output / "jmod-pack.log", sys.executable, packager, "--jdk-home", home,
             "--image-tsv", image_tsv, "--manifest", manifest, "--layer-root", repo,
             "--out", output / "pack", "--legal-notices", pack / "legal",
-            "--native-library", "com.m3.collections=" + str(native),
+            "--native-library", "jdk.m3.collections=" + str(native),
             "--add-modules", "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps")
     image = output / "pack/image"
     for tool in ("java", "javac", "jar", "jmod", "jlink", "jdeps"):
@@ -200,7 +200,7 @@ def main():
     qualify(image / "bin/java", image / "bin/javac", modules, pack, repo, output, native, True)
     if input_hashes != {str(path.relative_to(repo)): digest(path) for path in inputs}:
         raise ValueError("source or contract changed during qualification")
-    receipt = {"status": "PASS", "modules": ["com.m3.collections", "jdk.m3.collections"],
+    receipt = {"status": "PASS", "modules": ["jdk.m3.collections", "jdk.m3.collections"],
                "existing_collection_source_files": len(collection_sources),
                "optional_projection_source_files": len(view_sources),
                "native_symbol": NATIVE_SYMBOL, "native_symbols": native_symbols,

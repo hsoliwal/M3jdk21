@@ -84,15 +84,15 @@
       "sha256": "4ad9ef7f2546f8802d3dbe8fe7bc7a1a2dc2ed3d81843113dc7e5b28f639deb0"
     }
   ],
-  "target_path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
-  "before_sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
+  "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+  "before_sha256": "78340d2c41e0ade88474171636a02da07ecae0860c6988acaefac5c1fdf0fa03",
   "status": "REUSE_INCUMBENT_DONOR_CANDIDATES_REFUSED",
   "target_checkout_revision": "677437be295b23f7ccf7409be287008944d0e8b0",
   "target_preimage_exact": true,
   "dependency_fixtures": [
     {
       "path": "before/dependencies/M3IndexMaskCompactor.java",
-      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+      "sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
     },
     {
       "path": "before/dependencies/M3IndexedListSnapshot.java",
@@ -107,7 +107,7 @@
       "description": "Unconditional survivor-run arraycopy",
       "source_fixture": "rejected/unconditional-span-copy/M3ArrayList.java.txt",
       "public_fixture": "fixtures/unconditional-span-copy-M3ArrayList.java.txt",
-      "sha256": "1dfc267aae07ddcb03334e8d9ccfb1b8d6be79f8a6388f5eb9759189b3dc656a",
+      "sha256": "1e724187a6344700727bb4b4864b0c18c79edaabe4633d2a2f8bdae25c449396",
       "decision": "REFUSED_MEASURED_COST",
       "contract_result": "PASS finite baseline/JDK proof",
       "production_adopted": false
@@ -117,7 +117,7 @@
       "description": "Inline short-run scalar fallback",
       "source_fixture": "rejected/inline-hybrid/M3ArrayList.java.txt",
       "public_fixture": "fixtures/inline-hybrid-M3ArrayList.java.txt",
-      "sha256": "0605bbe2b500f2d09afe4f8a2f016af3df7d6ff17bd373b71e8d49b37a6bb3e2",
+      "sha256": "5080c451047f1a29bc727f66fd5cc03c716981b092fbe3b6ff6c6031d019fdd7",
       "decision": "REFUSED_MEASURED_COST",
       "contract_result": "PASS finite baseline/JDK proof",
       "production_adopted": false
@@ -127,7 +127,7 @@
       "description": "Private helper short-run fallback",
       "source_fixture": "candidate/M3ArrayList.java.txt",
       "public_fixture": "fixtures/private-helper-hybrid-M3ArrayList.java.txt",
-      "sha256": "4201eba712cb76c29dc0b73a6f3fea25767eedf736a40953e1e1275eec388872",
+      "sha256": "bb25bd5e95b5585fb43dde6e63402dda611d410137b962c715da9bb83b7a6916",
       "decision": "REFUSED_MEASURED_COST",
       "contract_result": "PASS finite baseline/JDK proof",
       "production_adopted": false
@@ -137,7 +137,7 @@
       "description": "Inline single rejected interval with exact scalar fallback",
       "source_fixture": "candidate/contiguous-run/M3ArrayList.java.txt",
       "public_fixture": "fixtures/single-interval-M3ArrayList.java.txt",
-      "sha256": "ed6801202148166726242042b84fba3d988919c363d93571624a943958f25dfc",
+      "sha256": "351e3ae49f19ad6c9b61105cc0be08909287c03978e61a80ad4ee6b4c0203906",
       "decision": "REFUSED_MEASURED_COST",
       "contract_result": "PASS finite baseline/JDK proof",
       "production_adopted": false
@@ -147,7 +147,7 @@
       "description": "Single rejected interval delegates to existing removeRange",
       "source_fixture": "candidate/existing-remove-range/M3ArrayList.java.txt",
       "public_fixture": "fixtures/existing-remove-range-M3ArrayList.java.txt",
-      "sha256": "2faf80a555f6c03ffacc2ef2d2ba09580fb249036d23e4e9a8e2582c82662872",
+      "sha256": "52fe89f49c0e47357ebd6e8e91ca995b98ec4c977e15aec09b3499d559b2b506",
       "decision": "REFUSED_MEASURED_COST",
       "contract_result": "PASS finite baseline/JDK proof",
       "production_adopted": false

@@ -36,4 +36,4 @@ The source publication is still pending. No source-bound afterimage or final acc
 
 The current epoch SHA-256 is `027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee`. It corrects only an inherited provenance assertion: all 47 original IDs remain ordered, but 46 complete original records are unchanged because the TQ record changed. All 51 other records are unchanged from d1. The 11 frozen operational/guard bodies, and therefore all 50 validator fixture bytes, are identical.
 
-`previous-input-epoch-01/` preserves the complete first V03 sealed packet (`f145e87ddf885a5ceb81b1e0cf81f6040e07cebc399b2e069f65c102bcb54fd8`) and every file it sealed. The fresh `execution/baseline-v02/` run passes under the corrected preparation pin; the earlier receipt and its environment have not been relabelled.
+`previous-input-epoch-01/` preserves the complete first V03 sealed packet (`26fa8fc702f37748a4532415b253ac2b7b13296b5f61ca23c82c768819a275ad`) and every file it sealed. The fresh `execution/baseline-v02/` run passes under the corrected preparation pin; the earlier receipt and its environment have not been relabelled.

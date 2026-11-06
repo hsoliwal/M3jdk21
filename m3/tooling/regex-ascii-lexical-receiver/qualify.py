@@ -17,15 +17,15 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/regex-ascii-lexical-receiver/"
 WORKFLOW = ".github/workflows/m3-regex-ascii-lexical-receiver.yml"
-SUITE = "com.synexia.rewrite.M3RegexAsciiLexicalReceiverRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3RegexAsciiLexicalReceiverRecipeTest"
 METHODS = ["all8PartialStatesBothOrdersReachExactFixedPoint",
            "all8InverseStatesBothOrdersRecoverExactBefore",
            "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 COMPILER = "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java"
 TEST = "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java"
 ENGINES = {
-    "M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
 }
 FORBIDDEN = ("originalPrivateModelQualified", "jniRuntimeQualified", "fullMatchedJdkQualified",
              "performanceRetentionQualified", "productTargetApplied", "phaseAdvanced")
@@ -146,10 +146,10 @@ def report():
         raise RuntimeError("actual recipe counter inventory differs")
     providers = []
     for name, expected in ENGINES.items():
-        source = regular(SDK / ("pinned-engine/com/synexia/rewrite/" + name + ".java"))
+        source = regular(SDK / ("pinned-engine/jdk/internal/m3/rewrite/" + name + ".java"))
         if blob(source.read_bytes()) != expected:
             raise RuntimeError("original provider source replaced")
-        compiled = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        compiled = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         data = compiled.read_bytes()
         if len(data) < 8 or data[:4] != b"\xca\xfe\xba\xbe" or int.from_bytes(data[6:8], "big") != 65:
             raise RuntimeError("actual provider Java21 class required")

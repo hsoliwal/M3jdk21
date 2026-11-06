@@ -9,7 +9,7 @@
 - Donor [#2341](https://github.com/hsoliwal/M3jdk21/pull/2341) exact head `1f07831c0146facf16dfc051d38c23023f8f14b2`, containing its original one-lane and multi-lane token cursor source histories. Its master source delta is **38 paths (37 added, 1 modified, zero removed)**; changed-path intersection with receiver's 64 paths is **empty**.
 - Documentation-first receiving branch commit `906a16a24679be4d04ce91eec14eab2c8da72dc7`, preserving the exact original #2337 tree plus the [source merge contract](README.md).
 - GitHub-native integration transport [PR #2343](https://github.com/hsoliwal/M3jdk21/pull/2343) was merged with exact donor-head SHA guard and method `merge` (not squash/rebase). Verified actual two-parent commit `8ad8fb63bf879d55983c580189b3d9132fe79009` with parents `[906a16a24679be4d04ce91eec14eab2c8da72dc7, 1f07831c0146facf16dfc051d38c23023f8f14b2]`, tree `cfa987bb2307d4b47cd2374cbd9bd940c506552d`. The new integration branch ref was independently read back.
-- Complete exact `compare(previous receiving commit → merge)` filename/status set matched `compare(frozen master → donor head)` **38/38**, **0 missing, 0 extra, 0 renamed, 0 deleted**, with only `m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3TokenCursor.java` modified. No receiver source paths overwritten by an unrelated donor.
+- Complete exact `compare(previous receiving commit → merge)` filename/status set matched `compare(frozen master → donor head)` **38/38**, **0 missing, 0 extra, 0 renamed, 0 deleted**, with only `m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenCursor.java` modified. No receiver source paths overwritten by an unrelated donor.
 - The Java owner `M3TokenCursor.java` had **10 public/protected declaration lines** on both frozen master and the merged result; their ordered signature text was identical. This structural signature witness does not certify bytecode/serialization/JNI event behavior.
 
 ## Exact source Git-blob witnesses (all PASS)
@@ -17,10 +17,10 @@
 | Witness | Expected Git blob on original donor and merged tree |
 |---|---|
 | `M3TokenCursor.java`, from #2341 | `5d03f64b310c2cc9ed232cfb91ce8eea0e0e509a` |
-| `M3StaticGrammarLexiconJni.c`, donor test native source | `ace33d49abd1974f1e7a35c13070bc0e704d7562` |
-| `VInt.java`, existing packed Java codec from #2337 | `159069a2bb959868253df3fdfee2bf024878a992` |
+| `M3StaticGrammarLexiconJni.c`, donor test native source | `52c0f1ba57bfba5df678a8db32363a0fa929bdf4` |
+| `VInt.java`, existing packed Java codec from #2337 | `346c05694f6921b8211d15fd5fc1da0cd01bae83` |
 | `m3_packed_codec.c`, existing packed C/JNI codec from #2337 | `1813a024d4c2ce514cebe4928ab4379b7950ff94` |
-| Packed sizing receipt, existing #2337 | `055a4b29e7003bdd8afc3185960fcc0f402508af` |
+| Packed sizing receipt, existing #2337 | `35acdae9b6c7982e7c65a27df936c4d2605904ae` |
 
 All five were fetched from their respective original parent and actual merged tree. Both Git blob identities and complete source bytes matched.
 

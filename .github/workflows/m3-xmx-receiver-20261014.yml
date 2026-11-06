@@ -3,12 +3,12 @@ name: M3 Actual Xmx Source Receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java'
-      - 'm3/compatibility/synexia-xmx-memory-receiver-20261014.tsv'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3XmxReceiverRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3XmxReceiverRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-xmx-receiver/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-xmx-receiver/**'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyRuntimePressureTest.java'
+      - 'm3/compatibility/m3-xmx-memory-receiver-20261014.tsv'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3XmxReceiverRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3XmxReceiverRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-xmx-receiver/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-xmx-receiver/**'
       - 'm3/tooling/migration-recipes/tasks/xmx-receiver-20261014/**'
       - '.github/workflows/m3-xmx-receiver-20261014.yml'
   workflow_dispatch:
@@ -33,12 +33,12 @@ jobs:
           from pathlib import Path
           r=Path('.')
           pairs=[
-              ('m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java',
-               'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-xmx-receiver/M3ObjectResidencyRuntimePressureTest.java.txt',
-               'bf05ea2b323a83f5c1569bc88d0d5417093df8d1e7f88c00f6831e27e276a4b5'),
-              ('m3/compatibility/synexia-xmx-memory-receiver-20261014.tsv',
-               'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-xmx-receiver/receiver.tsv.txt',
-               'ab5ee0eb73ffb562402b9f6eabd73551a677330c64a24f4d23d89e52081c325f')
+              ('m3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyRuntimePressureTest.java',
+               'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-xmx-receiver/M3ObjectResidencyRuntimePressureTest.java.txt',
+               'a1853edb4d5cc50bb06febea0b6d3ad80552e331820dd89cd577cea1caae13bf'),
+              ('m3/compatibility/m3-xmx-memory-receiver-20261014.tsv',
+               'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-xmx-receiver/receiver.tsv.txt',
+               '29db93e78a99586cf08921f0a87643ccf854aef4f91d6bfac55ec704207ad902')
           ]
           for a,b,sha in pairs:
               data=(r/a).read_bytes()

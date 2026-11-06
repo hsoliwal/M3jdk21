@@ -5,8 +5,8 @@
 
 /**
  * Defines the {@code dec} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.dec {
-    exports com.m3.lib.dec;
+    exports jdk.m3.lib.dec;
 }

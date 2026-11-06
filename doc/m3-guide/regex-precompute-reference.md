@@ -44,7 +44,7 @@ for metrics, text histograms/sketches, edit-distance plans and progress.
 
 ## Literal shapes and dialect limits
 
-[`M3RegexShape`](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexShape.java)
+[`M3RegexShape`](../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexShape.java)
 accepts a nonnull `CharSequence` in `analyze(regex)` and calls `toString()` once.
 A mutable/custom input must produce a stable, faithful spelling during that
 conversion. The result retains that `String` and a decoded literal, not a
@@ -91,7 +91,7 @@ is not claimed.
 
 ## Regex/String fact packets
 
-[`M3RegexStringSignals`](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringSignals.java)
+[`M3RegexStringSignals`](../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringSignals.java)
 uses immutable `String` arguments. Its `plainLiteral` classification is **not**
 `M3RegexShape.specialized()`: it admits any spelling containing none of
 `\ . ^ $ | ? * + ( ) [ ] { }`, including the empty string. It does not perform the
@@ -175,7 +175,7 @@ Unicode-normalization or JDK-version identity.
 
 ## Eager trial image compilation
 
-[`M3RegexStringTrialImage`](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringTrialImage.java)
+[`M3RegexStringTrialImage`](../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringTrialImage.java)
 compiles all requested regex × input pairs eagerly. Its private constructor and
 private arrays retain only primitive facts and a root string. Original source
 texts, `Pattern`s, matchers and signal snapshots are preparation inputs/scratch,
@@ -331,7 +331,7 @@ streaming top-k, and expose no monitor.
 
 ### Corpus generation and roots
 
-[`M3RegexOracleCorpus`](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleCorpus.java)
+[`M3RegexOracleCorpus`](../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleCorpus.java)
 declares `REGEX_COUNT=10_000`, `STRING_COUNT=64`, `SHARD_COUNT=10`,
 `REGEX_PER_SHARD=1_000`, plus `REGEX_ROOT`, `STRING_ROOT`, `MATRIX_ROOT`.
 `expressions()` regenerates the ordered 10 bases × 10 repeats × 10 wrappers ×
@@ -366,7 +366,7 @@ material, returning lowercase hex.
 
 ### Harness compilation and access
 
-[`M3RegexOracleHarness.compile(monitor)`](../../m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleHarness.java)
+[`M3RegexOracleHarness.compile(monitor)`](../../m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleHarness.java)
 regenerates those lists and constructs ten 1,000 × 64 trial images with default
 limits, Java signals and zero-flag `RegexSpec`s. This is 640,000 pairs and three
 mode observations per pair, not 640,000 independent regex programs. The same
@@ -495,12 +495,12 @@ mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative \
 
 | Source test, NOT_RUN | Assertions actually present | Important limits |
 | --- | --- | --- |
-| [M3RegexShapeTest](../../m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexShapeTest.java) | Four shape kinds, escaped punctuation, quoting, supplementary pair; empty/syntax/control-escape/broken-surrogate refusal | Finite examples; no flags-aware API or exhaustive Pattern equivalence |
-| [M3RegexStringSignalsTest](../../m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexStringSignalsTest.java) | One literal's index/parity and false authority flags; selected general features; deterministic ordered snapshot and basic progress totals | No malformed-surrogate literal parity, constructor-corruption matrix, 100,000 boundary or throwing/canceling monitor assertions |
-| [M3RegexStringTrialImageTest](../../m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexStringTrialImageTest.java) | 16 × 16 finite cases against Pattern; invalid-row refusal; score ranges; global/regex ordering; repeated/reordered roots; one pair-budget refusal | Case-insensitive, multiline and dotall examples, not all accepted flags; no direct mask/count/per-regex-top validation, all budget edges, mutable inputs, cancellation, ranking memory or hostile Pattern cost |
+| [M3RegexShapeTest](../../m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexShapeTest.java) | Four shape kinds, escaped punctuation, quoting, supplementary pair; empty/syntax/control-escape/broken-surrogate refusal | Finite examples; no flags-aware API or exhaustive Pattern equivalence |
+| [M3RegexStringSignalsTest](../../m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexStringSignalsTest.java) | One literal's index/parity and false authority flags; selected general features; deterministic ordered snapshot and basic progress totals | No malformed-surrogate literal parity, constructor-corruption matrix, 100,000 boundary or throwing/canceling monitor assertions |
+| [M3RegexStringTrialImageTest](../../m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexStringTrialImageTest.java) | 16 × 16 finite cases against Pattern; invalid-row refusal; score ranges; global/regex ordering; repeated/reordered roots; one pair-budget refusal | Case-insensitive, multiline and dotall examples, not all accepted flags; no direct mask/count/per-regex-top validation, all budget edges, mutable inputs, cancellation, ranking memory or hostile Pattern cost |
 | Same trial test's native method | Java/native roots and top-pair arrays compared when a native path/path-file is set | Method returns immediately when neither property is set; ordinary test completion is not evidence that JNI executed |
-| [M3RegexOracleHarnessTest](../../m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexOracleHarnessTest.java) | Corpus roots/counts/shard rejection; validity of all generated regexes; all-input Pattern spot checks every 67th expression; repeat-root assertion; never-prune/literal-shape/always-prune reports; bounded ordered ledger and wrong-root/negative-cap refusal | Corpus-derived, not universal soundness; expected oracle root is labeled in source as pinned from JDK 21.0.9, not an execution result from this pass |
-| [M3PatternQueryDifferential](../../m3/ports/precompute/src/test/java/com/m3/precompute/M3PatternQueryDifferential.java) | Standalone `main`: String versus custom CharSequence first-find result/spans/`hitEnd`/`requireEnd`, digest and optional reflective M3TQ counters | Not a JUnit `@Test`; must compare actual stock and patched-JDK executions; unavailable reflection yields `gate=ABSENT`, not proof of a gate |
+| [M3RegexOracleHarnessTest](../../m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexOracleHarnessTest.java) | Corpus roots/counts/shard rejection; validity of all generated regexes; all-input Pattern spot checks every 67th expression; repeat-root assertion; never-prune/literal-shape/always-prune reports; bounded ordered ledger and wrong-root/negative-cap refusal | Corpus-derived, not universal soundness; expected oracle root is labeled in source as pinned from JDK 21.0.9, not an execution result from this pass |
+| [M3PatternQueryDifferential](../../m3/ports/precompute/src/test/java/jdk/m3/precompute/M3PatternQueryDifferential.java) | Standalone `main`: String versus custom CharSequence first-find result/spans/`hitEnd`/`requireEnd`, digest and optional reflective M3TQ counters | Not a JUnit `@Test`; must compare actual stock and patched-JDK executions; unavailable reflection yields `gate=ABSENT`, not proof of a gate |
 
 Further qualification must separate source checks from executed Java/native
 parity, source/recipe fixed point, target JDK/jtreg behavior and cold/warm CPU,
@@ -522,18 +522,18 @@ turning it into a runtime dependency or an admission claim.
 
 | Production file in `m3/ports/precompute/src/main/java/com/m3/precompute/` | Git blob |
 | --- | --- |
-| `M3RegexShape.java` | `ff989cfa42d1fe29853a4850d474a8c007974718` |
-| `M3RegexStringSignals.java` | `e2b62034d7ba9de17fefb8c156b185a9c2011f13` |
-| `M3RegexStringTrialImage.java` | `ffce8a213e92ed460b0d50074c02dd8eb941aeb9` |
-| `M3RegexOracleCorpus.java` | `cbafa1bca87f81f125386cadd97d7cf2c61f53f8` |
-| `M3RegexOracleHarness.java` | `64dd809ace88e97f91067b64ddcb1b1f422a23b8` |
+| `M3RegexShape.java` | `1b3562aa33f7fe9ae2d6520053007dd0d5748e2d` |
+| `M3RegexStringSignals.java` | `06712696f9a9446f66fc1a764a24e5e723ea4bd8` |
+| `M3RegexStringTrialImage.java` | `a886d666a11556948d85727571515e058ad0ef17` |
+| `M3RegexOracleCorpus.java` | `8078d12cb34aed3b33d45e92deec262010bb6283` |
+| `M3RegexOracleHarness.java` | `7385c57458a7b3f01857bc94dcee2d19c0638e39` |
 
 Policy and lineage: [AGENTS](../../AGENTS.md),
 [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md),
 [naming map](../../m3/docs/name-mapping.json),
-[full-family pin](../../m3/compatibility/synexia-full-family-pin.tsv),
-[catalogue](../../m3/docs/synexia-full-family-catalogue.json),
-[current receiver snapshot](../../m3/synexia-import/current-full-borrow/README.md),
+[full-family pin](../../m3/compatibility/m3-full-family-pin.tsv),
+[catalogue](../../m3/docs/m3-full-family-catalogue.json),
+[current receiver snapshot](../../m3/m3-import/current-full-borrow/README.md),
 [regex/String provenance](../../m3/ports/precompute/REGEX_STRING_V2_PROVENANCE.tsv),
 [oracle provenance](../../m3/ports/precompute/REGEX_ORACLE_HARNESS_PROVENANCE.tsv).
 Preserve first-party Apache-2.0 attribution and existing OpenJDK/third-party

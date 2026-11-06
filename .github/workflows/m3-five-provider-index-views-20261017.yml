@@ -67,7 +67,7 @@ jobs:
           python3 - <<'PYTEST'
           import xml.etree.ElementTree as ET
           from pathlib import Path
-          p=Path('m3/collections/interop/target/surefire-reports/TEST-com.m3.collections.interop.M3FiveLibraryIndexViewsTest.xml')
+          p=Path('m3/collections/interop/target/surefire-reports/TEST-jdk.m3.collections.interop.M3FiveLibraryIndexViewsTest.xml')
           assert p.is_file(), 'new real-provider test not run'
           el=ET.parse(p).getroot()
           assert int(el.get('tests','0')) == 4, 'missing four contracts'

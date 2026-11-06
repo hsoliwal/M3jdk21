@@ -12,9 +12,9 @@ Canonical convergence workspace: [Synexia PR #13224](https://github.com/hsoliwal
 | Original M3JDK21 product file | Original Git blob / predecessor | Exact received Git blob |
 |---|---|---|
 | `m3_long_rank_batch_jni.c` | `5248b615f66f72b1e390d1aaa7b4797d66691c5b` | `3290b819f9f0cfbc9b61832c4fbc9789450c3afa` |
-| `.github/workflows/m3-jni-rank-equal-ranges-java21.yml` | `088625718ddc6cb8354f31ac8bd57cf086fb280c` | `664ca5072763e85cef2f63d77eaa216a38ce1389` |
-| `M3LongRankMonotoneSweepContract.java` | ABSENT | `80b2153a19f1e6f34a2c01f2ffd18f33e2c31bb5` |
-| `M3LongRankMonotoneSweepTest.java` | ABSENT | `63b8064ef2da0104ba57312732d802283e3a6912` |
+| `.github/workflows/m3-jni-rank-equal-ranges-java21.yml` | `088625718ddc6cb8354f31ac8bd57cf086fb280c` | `ac471a6d6c5a23a467fdb3c90dfd93a73b551267` |
+| `M3LongRankMonotoneSweepContract.java` | ABSENT | `e4862e2d1b11f6d00863e44017b70a72771cf750` |
+| `M3LongRankMonotoneSweepTest.java` | ABSENT | `ff633dafb5ce002098df9db29095374d637c4131` |
 
 All Java and native file postimages are byte-identical to the canonical Synexia recipe, which catalogs candidate algorithms and reviews donor licenses. The old [LeetCode #34](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) independent binary lower/upper bound strategy stays as fallback. [#35](https://leetcode.com/problems/search-insert-position/) grounds insertion-coordinate semantics, and [#88](https://leetcode.com/problems/merge-sorted-array/) supplies the sorted two-pointer category; **no challenge implementation was copied**.
 

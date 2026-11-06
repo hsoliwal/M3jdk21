@@ -7,7 +7,7 @@ The hosted signal viewport run [40099828430](https://github.com/hsoliwal/M3jdk21
 Do not skip tests, exclude the unrelated test source, relax compiler flags or introduce a second repair recipe. Reuse the **already-authored canonical Synexia source-sealed** `M3Jdk21LongTreeSeedSyntax20261023` from [Synexia PR #13198](https://github.com/hsoliwal/com.synexia/pull/13198), also received in [M3JDK21 #1869](https://github.com/hsoliwal/M3jdk21/pull/1869) and [#1881](https://github.com/hsoliwal/M3jdk21/pull/1881).
 
 * Exact original product blob: `74369df9ef10241fb748b710ab50ec1075edbee6`; SHA-256 `7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25`.
-* Exact approved product successor blob: `8a33b08f52ef2da14354499d577090b099e2c515`; SHA-256 `e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe`.
+* Exact approved product successor blob: `ab34396cebfd71688b9ebebf04eb4e6f40cdadce`; SHA-256 `9882e3b0d19da2b0bbbf09990a8a06a16fa129ad4d511d174bebc2eeb49cee03`.
 * The **only textual change** is appending `L` to the existing hexadecimal test seed: `0x4D33534F52544C;` → `0x4D33534F52544CL;`. Numeric value, tests and production source are unchanged.
 * The target source was fetched back from this signal feature branch after transfer and matches the Synexia approved Git blob byte-for-byte.
 * Independent Java 21 `--release 21 -proc:none -Xlint:all -Werror` grammar RED/GREEN probe (2026-10-25): old literal refused, corrected literal compiled and printed `4d33534f52544c`. This probe is **not** full collection JUnit acceptance.

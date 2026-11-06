@@ -63,12 +63,12 @@
             <arg>-Werror</arg>
           </compilerArgs>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/synexia/rewrite/M3EclipseProgressForwardRecipeTest.java</testInclude>
-            <testInclude>com/synexia/rewrite/M3EclipseJobsRecipeTest.java</testInclude>
-            <testInclude>com/synexia/rewrite/M3EclipseScheduledTasksRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3EclipseProgressForwardRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3EclipseJobsRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3EclipseScheduledTasksRecipeTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

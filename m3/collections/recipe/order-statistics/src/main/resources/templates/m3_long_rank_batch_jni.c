@@ -8,7 +8,7 @@
  * Input arrays are released JNI_ABORT; only the preallocated output array is written.
  */
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
+Java_jdk_m3_collections_M3LongRankBatchNative_lowerBounds0(
         JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
         jintArray results) {
     (void) ignored;

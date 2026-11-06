@@ -8,7 +8,7 @@
   "target_base": "4bd7f5b2b1414d1f607ceab28a498e3889020701",
   "module": "com.m3.llm",
   "recipe": "m3jdk-llm-summary-20261029",
-  "source_provenance_sha256": "70584250ef46f13768559f287f70afd797cbf862ab16586e0f398d7e3d2173b7",
+  "source_provenance_sha256": "22073ddcf1012df6414b7b68bf32f078e133fa6e1a5be7798cb792d240f85fed",
   "production_java_owners": 43,
   "browser_runtime_modules": 4,
   "runtime_dependencies": [

@@ -8,8 +8,8 @@ import sys
 
 CRATE = Path(__file__).resolve().parent
 ROOT = CRATE.parents[3]
-RESOURCES = CRATE / "src/main/resources/com/synexia/rewrite/hash-pinned-java/object-state-batch-28"
-CORE = ROOT / "m3/collections/src/main/java/com/m3/collections"
+RESOURCES = CRATE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/object-state-batch-28"
+CORE = ROOT / "m3/collections/src/main/java/jdk/m3/collections"
 
 def sha(path: Path) -> str:
     if path.is_symlink() or not path.is_file():
@@ -32,7 +32,7 @@ def check() -> None:
     for name, expected, template in rows:
         original = ROOT / name
         image = RESOURCES / template
-        mirror = ROOT / ("m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/object-state-batch-28/" + template)
+        mirror = ROOT / ("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/object-state-batch-28/" + template)
         if sha(original) != expected or sha(image) != expected or sha(mirror) != expected:
             raise ValueError("SDK recipe/receiver/source drift: " + name)
         if original.read_bytes() != image.read_bytes():

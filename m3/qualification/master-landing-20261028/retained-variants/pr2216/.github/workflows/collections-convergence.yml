@@ -46,7 +46,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check origin/master...HEAD
-          test "$(git hash-object src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java)" = 50cdaedb8a4d5b09191e40ff3c5c05e130a87afc
+          test "$(git hash-object src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java)" = f3ba337134a4f639438c7e9e4336a34453e2dc59
           test "$(git hash-object src/java.base/share/classes/java/util/CollectionViews.java)" = 8840da98c37e2af8da36c63f2cacd6bdaf1cb0a8
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java)" = 45ad6df3a51e83c67dc70de7c7acd82bec2305d3
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java)" = 3c0d4b1629545d54c7519216618ce1a32990f327

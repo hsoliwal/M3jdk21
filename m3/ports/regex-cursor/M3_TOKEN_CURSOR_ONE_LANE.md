@@ -2,7 +2,7 @@
 
 ## Original source and invariant
 
-* Owner: `hsoliwal/M3jdk21`, `m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3TokenCursor.java`.
+* Owner: `hsoliwal/M3jdk21`, `m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenCursor.java`.
 * Source Git blob before: `7823ae41c829e7b5bde50a850cfe90c42c3cabd8` (verified against GitHub and the supplied archive). The canonical `M3TokenCursor` is reused; there must be no alternate cursor or lexer.
 * Existing `of(int[])` behavior: reject null, construct one borrowed input lane, discard that lane if empty; validate all token IDs are nonnegative; calculate presence-mask exactly once; live input alias remains borrowed for all non-empty lanes. Empty cursor must have 0 logical chunks and 0 total units. `lanes(int[][])` retains its unchanged multi-lane normalization and validation.
 * Original `M3GrammarTokenProjection.projectCompleteCursor` passes a new positive-only primitive ID lane to `of`; this must remain the only complete-projection admission and must preserve its source-generation ownership boundary.

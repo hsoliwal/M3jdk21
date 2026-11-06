@@ -15,19 +15,19 @@ def main():
     owner = task.parent.parent
     ET.parse(task / 'pom.xml')
     ET.parse(task / 'checkstyle.xml')
-    crate = owner / 'src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody'
+    crate = owner / 'src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-comment-custody'
     target, before, after, filename = (crate / 'manifest.tsv').read_text().strip().split('\t')
-    if target != 'src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java':
+    if target != 'src/main/java/jdk/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java':
         raise SystemExit('RECIPE_TARGET_SCOPE')
     if hashlib.sha256((crate / 'before.java.txt').read_bytes()).hexdigest() != before:
         raise SystemExit('RECIPE_PREIMAGE_DRIFT')
     if hashlib.sha256((crate / filename).read_bytes()).hexdigest() != after:
         raise SystemExit('RECIPE_POSTIMAGE_DRIFT')
-    final_crate = owner / 'src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum'
+    final_crate = owner / 'src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/atom-pattern-spectrum'
     for line in (final_crate / 'manifest.tsv').read_text().splitlines():
         target, before, after, filename = line.split('\t')
-        if target not in ('src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java',
-                          'src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java'):
+        if target not in ('src/main/java/jdk/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java',
+                          'src/main/java/jdk/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java'):
             raise SystemExit('FINAL_RECIPE_SCOPE')
         if hashlib.sha256((final_crate / filename.replace('after-', 'before-')).read_bytes()).hexdigest() != before:
             raise SystemExit('FINAL_RECIPE_PREIMAGE_DRIFT')
@@ -39,7 +39,7 @@ def main():
         actual = hashlib.sha256((repo / name).read_bytes()).hexdigest()
         if actual != expected:
             raise SystemExit('SOURCE_PIN_DRIFT:' + name)
-    manifest = owner / 'src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv'
+    manifest = owner / 'src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv'
     rows = [line.split('\t') for line in manifest.read_text().splitlines() if not line.startswith(('#', 'path\t'))]
     if len(rows) != 100 or len({row[0] for row in rows}) != 100:
         raise SystemExit('CORPUS_DENOMINATOR')
@@ -51,13 +51,13 @@ def main():
         if hashlib.sha1(b'blob ' + str(len(data)).encode('ascii') + b'\0' + data).hexdigest() != blob:
             raise SystemExit('CORPUS_GIT_BLOB_DRIFT:' + name)
         total += len(data)
-    paths = sorted(p for root in (owner / 'src/main/java/com/m3/rewrite/atom',
-                                 owner / 'src/test/java/com/m3/rewrite/atom') for p in root.glob('*.java'))
+    paths = sorted(p for root in (owner / 'src/main/java/jdk/m3/rewrite/atom',
+                                 owner / 'src/test/java/jdk/m3/rewrite/atom') for p in root.glob('*.java'))
     for path in paths:
         data = path.read_bytes()
         if not data.endswith(b'\n') or b'\r' in data or b'\t' in data:
             raise SystemExit('SOURCE_WHITESPACE:' + str(path))
-        if b'package com.m3.rewrite.atom;' not in data:
+        if b'package jdk.m3.rewrite.atom;' not in data:
             raise SystemExit('SOURCE_NAMESPACE:' + str(path))
     args.out.mkdir(parents=True, exist_ok=True)
     receipt = ['path\tsha256\n']

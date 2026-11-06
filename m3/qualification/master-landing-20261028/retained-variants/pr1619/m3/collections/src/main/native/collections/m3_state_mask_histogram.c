@@ -17,7 +17,7 @@ static void m3_invalid(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3StateMaskHistogram_tallyNative(
+Java_jdk_m3_collections_M3StateMaskHistogram_tallyNative(
         JNIEnv *env, jclass owner, jbyteArray source, jint first,
         jint count, jint stride, jintArray result) {
     (void) owner;
@@ -95,7 +95,7 @@ Java_com_m3_collections_M3StateMaskHistogram_tallyNative(
 #define M3_INDEX_HIST_CHUNK 256
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3StateMaskHistogram_indexedAbiNative(
+Java_jdk_m3_collections_M3StateMaskHistogram_indexedAbiNative(
         JNIEnv *env, jclass owner) {
     (void) env;
     (void) owner;
@@ -103,7 +103,7 @@ Java_com_m3_collections_M3StateMaskHistogram_indexedAbiNative(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_collections_M3StateMaskHistogram_tallyIndexedNative(
+Java_jdk_m3_collections_M3StateMaskHistogram_tallyIndexedNative(
         JNIEnv *env, jclass owner, jintArray offsets, jbyteArray states,
         jint first, jint count, jint stride, jintArray result) {
     (void) owner;

@@ -125,7 +125,7 @@ slf4j-api	slf4j-api-2.0.9	m3/qualification/sanitize-20261030/REPOINT_WORKLIST.ts
 slf4j-api	slf4j-api-2.0.9	m3/qualification/sanitize-20261030/REPOINT_WORKLIST.tsv:71	manifest	slf4j-api-2.0.9	slf4j-api-1.7.36	regenerate manifest
 slf4j-api	slf4j-api-2.0.9	m3/qualification/sanitize-20261030/REPOINT_WORKLIST.tsv:72	manifest	slf4j-api-2.0.9	slf4j-api-1.7.36	regenerate manifest
 slf4j-api	slf4j-api-2.0.9	m3/qualification/sanitize-20261030/VERSION_DUPLICATES.tsv:22	manifest	slf4j-api-2.0.9	slf4j-api-1.7.36	regenerate manifest
-slf4j-api	slf4j-api-2.0.9	m3/synexia-import/pure-int-recipe-custody/install.sh:30	script/other	slf4j-api-2.0.9	slf4j-api-1.7.36	review
+slf4j-api	slf4j-api-2.0.9	m3/m3-import/pure-int-recipe-custody/install.sh:30	script/other	slf4j-api-2.0.9	slf4j-api-1.7.36	review
 slf4j-api	slf4j-api-2.0.9	m3/vendor/third_party/pom.xml:116	aggregator module	slf4j-api-2.0.9	(remove line)	review
 slf4j-api	slf4j-api-2.0.12	m3/tooling/integrated-utilities/recipe/pom.xml	pom dependency	2.0.12	1.7.36	module build + tests of the referencing owner
 slf4j-api	slf4j-api-2.0.12	m3/vendor/third_party/commons-logging/pom.xml	pom dependency	2.0.12-m3-source-1	1.7.36-m3-source-1	Maven gate of the vendored module (standalone build + API surface)

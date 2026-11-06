@@ -13,7 +13,7 @@ E3 = BASE / 'work/m3jdk21-current/successor-e03'
 ROOT = E3 / 'overlay'
 PROOF = E3 / 'verification'
 OUT = BASE / 'work/publication-current/m3-final-gate-review'
-CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005'
+CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005'
 BUILD = ROOT / 'm3/tooling/migration-recipes/verification/jcc-source-final-handoff/target'
 INPUTS = {}
 
@@ -120,7 +120,7 @@ for name in ('09-whole-map-validate', '10-completion-remains-blocked'):
 require(read(PROOF / '10-completion-remains-blocked.stderr.log'), 'Completion blockers absent')
 
 xml_copy = read(PROOF / 'JccSourceFinalHandoffTest.xml')
-require(xml_copy == read(BUILD / 'surefire-reports/TEST-com.m3.rewrite.backport.JccSourceFinalHandoffTest.xml'),
+require(xml_copy == read(BUILD / 'surefire-reports/TEST-jdk.m3.rewrite.backport.JccSourceFinalHandoffTest.xml'),
         'JUnit copied report differs from actual build report')
 x = ET.fromstring(xml_copy)
 counts = {key: int(x.get(key)) for key in ('tests', 'failures', 'errors', 'skipped')}
@@ -128,10 +128,10 @@ require(counts == {'tests': 11, 'failures': 0, 'errors': 0, 'skipped': 0}, 'JUni
 cases = x.findall('testcase')
 require(len(cases) == 11 and all(not any(t.find(k) is not None for k in ('failure', 'error', 'skipped')) for t in cases),
         'JUnit testcase details differ')
-java_source = ROOT / 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceFinalHandoffTest.java'
+java_source = ROOT / 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java'
 java_methods = re.findall(r'@Test\s+void\s+(\w+)\(', read(java_source).decode())
 require(set(java_methods) == {c.get('name') for c in cases} and len(java_methods) == 11, 'Executed Java test scope differs')
-for category, expected in [('compile', ROOT / 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'),
+for category, expected in [('compile', ROOT / 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'),
                             ('testCompile', java_source)]:
     filename = 'default-compile' if category == 'compile' else 'default-testCompile'
     input_list = BUILD / ('maven-status/maven-compiler-plugin/' + category + '/' + filename + '/inputFiles.lst')
@@ -167,7 +167,7 @@ require(receipt['python_tests'] == 6 and receipt['python_refusal_checks'] == 132
 
 mapping = load(ROOT / 'm3/docs/name-mapping.json')
 records = mapping['migration']['records']
-jcc_records = [r for r in records if r['id'] in ('synexia.jcc-recipe-laboratory', 'synexia.jcc-java-jni-regression')]
+jcc_records = [r for r in records if r['id'] in ('m3.jcc-recipe-laboratory', 'm3.jcc-java-jni-regression')]
 require(len(records) == 46 and len(jcc_records) == 2 and all(r['status'] == 'blocked' and r['tests'] == [] for r in jcc_records),
         'Blocked capability status was changed')
 binding = load(ROOT / 'm3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json')

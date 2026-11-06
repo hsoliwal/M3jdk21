@@ -52,8 +52,8 @@
     "prewrite_refusal": true,
     "unchanged": true,
     "sha256": {
-      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
     }
   }
 ]

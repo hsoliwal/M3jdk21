@@ -25,7 +25,7 @@
       "target_path": "test/jdk/java/util/Collections/M3CollectionMasksTest.java",
       "candidate_path": "/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections/M3CollectionMasksTest.java",
       "target_preimage": "ABSENT",
-      "postimage_sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
+      "postimage_sha256": "73433d7592b44c9e7d8268a860532cfc72a13f342698efb3fafea4262ede33f3",
       "bytes": 12490,
       "license": "GPL-2.0-only",
       "intake_mode": "TARGET_OWNED_PORT"

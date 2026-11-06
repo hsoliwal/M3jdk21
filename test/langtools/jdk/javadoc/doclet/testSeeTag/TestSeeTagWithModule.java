@@ -70,7 +70,7 @@ public class TestSeeTagWithModule extends JavadocTester {
                 "m2/com.m2.lib");
 
         checkExit(Exit.OK);
-        checkOutput("m3/com/m3/app/App.html", true,
+        checkOutput("m3/jdk/m3/app/App.html", true,
                 """
                     <dt>See Also:</dt>
                     <dd>
@@ -105,7 +105,7 @@ public class TestSeeTagWithModule extends JavadocTester {
                 "-link", "../" + out1.getFileName());
 
         checkExit(Exit.OK);
-        checkOutput("m3/com/m3/app/App.html", true,
+        checkOutput("m3/jdk/m3/app/App.html", true,
                 """
                     <dt>See Also:</dt>
                     <dd>
@@ -215,10 +215,10 @@ public class TestSeeTagWithModule extends JavadocTester {
                     }""")
                 .write(src);
         new ModuleBuilder(tb, "m3")
-                .exports("com.m3.app")
+                .exports("jdk.m3.app")
                 .requires("m1")
                 .classes("""
-                    package com.m3.app;\s
+                    package jdk.m3.app;\s
                     public class App{
                     /**
                      * @see m1

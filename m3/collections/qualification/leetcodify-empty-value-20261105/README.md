@@ -4,7 +4,7 @@
 
 ## Inventory and contract freeze
 
-Canonical receiver: `m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java` on frozen `master@b0fbe13b7feb437b39cdd1069ff49415f4d50bc0`. Source Git blob `134508fdd9857110ca21d0042353805586db3ea0` and SHA-256 `2f228e876a5b57700ecb513bc19775735774858017b6c15fcad7b5ea44469e27`. Reviewed one-atom postimage Git blob `6cd936c4d0d0971b9834049785f1852107eb6523`, SHA-256 `844924463c460f6b379424cbc4864d738d69229b84d149db3d5066c57375fc7c`. Comparison is precisely two added source lines, zero removed, all other source bytes unchanged.
+Canonical receiver: `m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java` on frozen `master@b0fbe13b7feb437b39cdd1069ff49415f4d50bc0`. Source Git blob `9a84487f7a66257ce5e42e2e31698068496f49d9` and SHA-256 `1758a7688eb0d5b47e4b7ab06074a77042519d42a2d4ba976d3d330f108e969b`. Reviewed one-atom postimage Git blob `4ebceb9bf2f66a15c1ebc931169af8a5913fc6f5`, SHA-256 `11b444a76a3e024e6a4f4bddbd3be30b440b5e46d29be8b680252f93ef0e041c`. Comparison is precisely two added source lines, zero removed, all other source bytes unchanged.
 
 Problem shape: primitive open-addressing hash table, *linear value search* over a parallel occupancy lane. The existing `containsValue(long)` scans every capacity slot even when `size == 0` and no value is representable. The reviewed candidate inserts **one size guard** before that scan: in an empty map `containsValue(v) == false` for every `long v`. It leaves the non-empty search loop identical. This changes the empty case from **O(capacity) to O(1)**, not the non-empty case; it introduces no array, cache, JNI symbol, branch-specific hash function, or other mutable state.
 

@@ -11,8 +11,8 @@ import subprocess
 
 SHARDS = tuple(f'added-{i:02d}.tsv' for i in range(4))
 PREFIX = 'm3/collections/interop/src/'
-MAIN = PREFIX + 'main/java/com/m3/collections/interop/'
-TEST = PREFIX + 'test/java/com/m3/collections/interop/'
+MAIN = PREFIX + 'main/java/jdk/m3/collections/interop/'
+TEST = PREFIX + 'test/java/jdk/m3/collections/interop/'
 FAMILIES = frozenset(('eclipse-collections', 'five-provider-index', 'guava', 'spring', 'jdk'))
 HEX64 = re.compile(r'[0-9a-f]{64}\Z')
 HEX40 = re.compile(r'[0-9a-f]{40}\Z')
@@ -24,14 +24,14 @@ def git_blob(data: bytes) -> str:
 
 # The 36- and 40-source receipts stay immutable. First one Java 21 syntax
 # repair, then nine compiler/runtime transitions advance only pinned identities.
-COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
-COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
+COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+COMPOUND_TRANSITION_SHA256 = '27423e52d65e49331dc08b249170f197c27195636db5f92a68bc6fa59bda6c1d'
 COMPOUND_TRANSITION = (
     COMPOUND_TEST_PATH,
     '43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d',
     '42d78b4fae7525467f0a5d4f34baf45b511e3b55',
-    '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565',
-    'e220622405432368d2c46b32f9f1c197913e7c0a',
+    '61ae67aeedc4a4a42f81f1beefc23ed43aa0c2288b6301fd7bfc1eea023fdf87',
+    '6d04f30ff77297201797c079125ebc0107906e63',
     'PINNED_TEST_SYNTAX_ONLY'
 )
 
@@ -54,7 +54,7 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
 # changed-07 historical revision ledger, or changed-01 syntax transition.
 # Each of the nine before identities is checked AGAINST its immediate prior
 # admitted generation before its postimage may be read from the product.
-GATE_RECEIPT_SHA256 = '59715b1686750b1121ee065cc06c1ccf25499c9cf839090261db0707bef4baaa'
+GATE_RECEIPT_SHA256 = 'fc1de92e7b37832a14fa6af0e570390c7f574bf091f1ff286b7d91106fec643e'
 GATE_PATHS = (
     MAIN + 'M3ApacheBag.java',
     TEST + 'M3ApacheCollectionsTest.java',
@@ -72,14 +72,14 @@ GATE_RUNTIME_CRATE = 'm3-interop-runtime-gates-20261022'
 
 # The tenth revision is a separate, append-only test-mode successor.
 # Never mutate the nine-owner receipt or the original 36/40 source ledgers.
-NATIVE_MODE_RECEIPT_SHA256 = 'ae0fc91c8493d97fc0ccad0c49e3886e5545ffcd943d608377da4dda51be1e31'
+NATIVE_MODE_RECEIPT_SHA256 = 'b54c4cc659930a5fecbeb5583dce4d6765e23e5396a32dc03187ff0580cc2eed'
 NATIVE_MODE_PATH = TEST + 'M3GuavaListMultimapContract.java'
 NATIVE_MODE_ATOM = (
     NATIVE_MODE_PATH,
     '32dfc1e0441589ccc809364d7832287b2748c5925a2625fbb51e9c6f273c6748',
     '93c899b1445b5cde063ff66e715ef1d245b8297f',
-    'ac2ff0dc5d6d395cf235e9e45218b4c0493915734d02d9f4fb7e4a5bded9cc34',
-    'b027c0bf647afe8bf6703f2789cad80cbcbd025b',
+    '340ac3a8731fa26bd442c08ae86b815753dcc0448958588fc393579407941ef8',
+    '054188bfe60d35a457d6cff56dc2564e5678925e',
     'm3jdk21-interop-native-mode-20261022',
     'Apache-2.0',
     'CANDIDATE_JAVA21_NATIVE_DUAL_158_PASS_JTREG_HOLD',
@@ -228,8 +228,8 @@ def verify_additions(product: Path, receipts: Path,
 # Source-history commit at which the immutable 36-owner census was authored.
 # Checking these bytes at a separate pinned checkout is not a semantic DAG walk.
 HISTORICAL_COMMIT = "a720780b1a5ab41ea27182b9b7ad873efdf533b4"
-HISTORICAL_CENSUS_BLOB = "9dbfe94767eb36c9371fd931e7513cb11e168768"
-HISTORICAL_VERIFIER_BLOB = "efe6d0f959cdc3172d6f6659f06bb486ef825291"
+HISTORICAL_CENSUS_BLOB = "9f3043103b3d63d3fdf37a17190dc85a0f918a1b"
+HISTORICAL_VERIFIER_BLOB = "cf8ccc95c7121c51551de608e47958466d42cbc9"
 
 
 def verify_historical_revisions(product: Path, receipts: Path,

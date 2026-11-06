@@ -20,14 +20,14 @@
     {
       "old": "m3-machine-compiler-hints-20261102/SOURCE_MANIFEST.tsv",
       "destination": "compiler-machine-hints/SOURCE_MANIFEST.tsv",
-      "old_git_blob": "597829b6e4ed5619597c2d1ddb350645642acb83",
-      "new_git_blob": "597829b6e4ed5619597c2d1ddb350645642acb83"
+      "old_git_blob": "cf98ecd113cea724abb59352d0506b1f0a120292",
+      "new_git_blob": "cf98ecd113cea724abb59352d0506b1f0a120292"
     },
     {
       "old": "m3-machine-compiler-hints-20261102/verify.sh",
       "destination": "compiler-machine-hints/verify.sh",
       "old_git_blob": "68653cb0f5ad2c07779c604b0d28571190c0e9d7",
-      "new_git_blob": "c66f3b816140bed84791b55863c4142356b2d0c6",
+      "new_git_blob": "08666effa26cd2dc2d0d4ac80b85e4bcd0bf2e87",
       "only_changes": [
         "m3-machine-compiler-hints-20261102 => compiler-machine-hints",
         "m3-record-component-accessor-20261102 => record-component-accessor"
@@ -42,8 +42,8 @@
     {
       "old": "m3-record-component-accessor-20261102/SOURCE_MANIFEST.tsv",
       "destination": "record-component-accessor/SOURCE_MANIFEST.tsv",
-      "old_git_blob": "61748abde5285a7bd30b35143003709108cc3fc0",
-      "new_git_blob": "61748abde5285a7bd30b35143003709108cc3fc0"
+      "old_git_blob": "b02ad6e2a17d5274654ec9af4dd99a99a0559a27",
+      "new_git_blob": "b02ad6e2a17d5274654ec9af4dd99a99a0559a27"
     }
   ],
   "qualifier_root": "m3/collections/signal-codegen/qualification/",
@@ -53,7 +53,7 @@
   "workflow": {
     "path": ".github/workflows/m3-compiler-signal-facts-20261022.yml",
     "old_git_blob": "bc1aa7d6a6dc93f2fdbd65af4fbe41642091795c",
-    "new_git_blob": "5fdbf34f190c6ce23b8192af2c7b8e39c59e57f8",
+    "new_git_blob": "9c8db1e1c1f84f1dd34fc0ffe7fcda7f13b0cd92",
     "only_changes": "two successor qualifier path references"
   },
   "path_predicate": {

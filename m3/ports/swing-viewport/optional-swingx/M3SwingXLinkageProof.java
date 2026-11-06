@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-package com.m3.swing.viewport;
+package jdk.m3.swing.viewport;
 
 import javax.swing.JList;
 import javax.swing.JTable;

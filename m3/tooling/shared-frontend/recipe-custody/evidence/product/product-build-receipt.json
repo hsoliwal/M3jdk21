@@ -83,8 +83,8 @@
     {
       "dataset": "m3jdk21-compiler",
       "path": "m3/tooling/shared-frontend/algorithm-catalogue.tsv",
-      "sha256": "05952a2bfce357b72b25fdd5dba5f570ff5ae3ee29425773e9882b8427e0ab10",
-      "git_blob_sha1": "40b57288b34fb484afe792277f72f607dee70880"
+      "sha256": "a9b61bf5d96072144f0e229a48011e573dd7125572edb6e6599ebf4a71003faa",
+      "git_blob_sha1": "d6887790c11ab3cad3cfa4506f096a9a5a7275b6"
     },
     {
       "dataset": "m3jdk21-compiler",
@@ -149,8 +149,8 @@
     {
       "dataset": "m3jdk21-build",
       "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
-      "sha256": "a2c1f69f6aaea0de7d5047c14f6f7530fe3231dca97fffdc4defee506daeb454",
-      "git_blob_sha1": "86b62fddc148b372145e807438dd7cd018acca0f"
+      "sha256": "250d98a2789ed8d5018a5b911a14c0a6729e435a9da1513d37a2dac7429ec3d6",
+      "git_blob_sha1": "1b20225a72caf20a7c02f9ef1ca2cb068294bff6"
     },
     {
       "dataset": "m3jdk21-build",
@@ -221,8 +221,8 @@
     {
       "dataset": "m3jdk21-build",
       "path": "m3/tooling/module-packs/build_pack.py",
-      "sha256": "46ae225a30f007c480338618969eb87928aeb812f6974c9b6bf7b9d5124a6614",
-      "git_blob_sha1": "ca116faebb6f8103eb466eb2c115b82152e13c8e"
+      "sha256": "0e620dac3cbc986ac448739e721d399d84d76a284ac72b3793880c740538fc43",
+      "git_blob_sha1": "324a03a96ec85157c2f429e01d87d611ff096ace"
     },
     {
       "dataset": "m3jdk21-build",

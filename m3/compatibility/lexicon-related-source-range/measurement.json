@@ -2,15 +2,15 @@
   "schema": "M3_RELATED_SOURCE_OBSERVATION_V1",
   "status": "COMPONENT_OBSERVATION_NOT_RUNTIME_ADMISSION",
   "date": "2026-10-31",
-  "mappingId": "synexia.lexicons.related-source-range",
+  "mappingId": "m3.lexicons.related-source-range",
   "selectedImplementation": {
     "targetRevision": "29feb5f14b5926649b8f1e972670c2a8390fb8e7",
-    "path": "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java",
-    "sha256": "38102366fa86ca63f3d00c78cd34effae7bc34ce0071544164ca74df97025b9e"
+    "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
+    "sha256": "a84cf445add13641546fba917ec32077cbe7988b70e5d8d5e72e1c793288b321"
   },
   "referenceImplementation": {
     "targetRevision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
-    "sha256": "76fbadbc182633ac22c449924335b7636c530cd2a8dc13fb0dc2d56a29afb42c"
+    "sha256": "bcf6d9216b549a4bf1c4c7a6bdb414c54f659be2567fcb99cdbadaafc964f049"
   },
   "observer": {
     "forks": 3,
@@ -94,7 +94,7 @@
   ],
   "evidence": {
     "canonicalRepository": "hsoliwal/com.synexia",
-    "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018/qualification/current-related-20261031/measurements/bounds",
+    "canonicalPath": "m3-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018/qualification/current-related-20261031/measurements/bounds",
     "forks": [
       {
         "fork": 1,

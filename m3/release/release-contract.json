@@ -124,7 +124,7 @@
     "gate_owners": {
       "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/M3jdk21"
     },
-    "maven_gate_scope": "Preserve this existing gate ID. Standalone rule (user, 2026-10-31): M3JDK builds, tests and releases without any other repository, so its Maven/OpenRewrite control-reactor execution is owned and executed by hsoliwal/M3jdk21 from the recipes and sources it carries; the evidence names this repository, the exact commit and the recipe identity. Donor lineage stays in ledgers (m3/tooling/standalone/SYNEXIA_REFS.tsv). Legacy recipe roots remain a visible HOLD (legacy_recipe_custody).",
+    "maven_gate_scope": "Preserve this existing gate ID. Standalone rule (user, 2026-10-31): M3JDK builds, tests and releases without any other repository, so its Maven/OpenRewrite control-reactor execution is owned and executed by hsoliwal/M3jdk21 from the recipes and sources it carries; the evidence names this repository, the exact commit and the recipe identity. Donor lineage stays in ledgers (m3/tooling/standalone/M3_REFS.tsv). Legacy recipe roots remain a visible HOLD (legacy_recipe_custody).",
     "required_manifest_fields": [
       "schema",
       "source_commit",

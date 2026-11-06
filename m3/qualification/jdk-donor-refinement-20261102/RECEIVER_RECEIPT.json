@@ -20,7 +20,7 @@
   "outputs": [
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "before_sha256": "0b6398e423e1a436aba20169f8bc62d4aa1a9be85ff9f9e09faa0c434743fa6b",
       "after_sha256": "4558fd475acecc7d76e4631d49ed41a88dc97f91d5b1a09fcbc3e2b48796bec2",
       "source_kind": "JAVA",
@@ -29,16 +29,16 @@
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java",
       "before_sha256": "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f",
-      "after_sha256": "46ae96d12c9d8f5909827e3721db06e14eff33198b043819918cd1d6498ad2e4",
+      "after_sha256": "e787cfa3ebba31935bb94271ef81fe0ec398e14b68455186c3fce7c9a2ac790b",
       "source_kind": "JAVA",
       "before_git_blob": "7b04a77cc113a81b4a09d6004666cada79c8c088",
-      "after_git_blob": "4b706dace0a8beee381b1bc45a8d2f2806bdfa41"
+      "after_git_blob": "567c7d71fb2ce688c4dd0ae7955cc9da4af0b752"
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/file/src/main/java/com/m3/file/M3BuildImpactPlan.java",
+      "path": "m3/file/src/main/java/jdk/m3/file/M3BuildImpactPlan.java",
       "before_sha256": "8aa8842dfb64c4fd86a22fb53dcaf445e680c2f1f3bfca440359e8d0f3336bfd",
       "after_sha256": "31a21b61515c434f5404dd01b0a2e38c892ebedfc0886dae4e81a706addf9e04",
       "source_kind": "JAVA",
@@ -47,34 +47,34 @@
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/file/src/main/java/com/m3/file/M3ReactorImpactPlan.java",
-      "before_sha256": "ebb3c7f8d56d578f311a176b06df4aec5af1572f2235b9903e817a32d0e7a328",
+      "path": "m3/file/src/main/java/jdk/m3/file/M3ReactorImpactPlan.java",
+      "before_sha256": "038d6a123ae6fb15244589c26cf5f1ff544f0ef4ec128752872fd94aab3fe01b",
       "after_sha256": "5c13122fc0cfd75a29592d0fbae3be668fef8e92e5aede23986c724701660259",
       "source_kind": "JAVA",
-      "before_git_blob": "424dd4455fb4c2aa29e9461837215159b79960c4",
+      "before_git_blob": "c274d673542432a12a8ae03d8bf05fc64fb4a98e",
       "after_git_blob": "e955addc632b56283c28e1536b7a1d7e3843a382"
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/file/src/test/java/com/m3/file/M3ReactorImpactPlanContract.java",
-      "before_sha256": "7a16c118fc4bca14d7bd1994b166fd99f83e333d3176bfed89e0b72661075a51",
+      "path": "m3/file/src/test/java/jdk/m3/file/M3ReactorImpactPlanContract.java",
+      "before_sha256": "9d6cf692e63e08fd5c269bf9d4aec9f6a204a306dc5561182bdc1a73432f0897",
       "after_sha256": "3fc87dcd2986d737ecb0ea9918723a2f6da2e340bd5b882073afd66ac06c168a",
       "source_kind": "JAVA",
-      "before_git_blob": "3b9099884bd5a8f65ef928435a81e76866ee03bd",
+      "before_git_blob": "0df246f09cac547f6e22094278e10f7f5cf37f2d",
       "after_git_blob": "dc82562fb09fa5802a43b826061724c9c99da042"
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3CharSequenceCursor.java",
+      "path": "m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CharSequenceCursor.java",
       "before_sha256": "40bb8356e8822505e1bc879021d25ab6fe371fac305d43a85bc7516ac5a0dc76",
-      "after_sha256": "8f0f674349b1ac0a353f758054deee5185f7086020bf3121535d65dc0705c36c",
+      "after_sha256": "007253d3d093f535dc1c6200c8a3dcf7bb96a15799d97ce5a1378611ac17ce29",
       "source_kind": "JAVA",
       "before_git_blob": "f5eca15cb6628d28e8f4538b0e09a7fd0b3e7197",
-      "after_git_blob": "ec61ae4011d018d93fa5370bb83806cb87e2c7c7"
+      "after_git_blob": "acf213a6e3c9c3a6f86532a31353b4b88dd07427"
     },
     {
       "repository": "hsoliwal/M3jdk21",
-      "path": "m3/ports/regex-cursor/src/test/java/com/m3/regexcursor/M3ChunkCursorTest.java",
+      "path": "m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3ChunkCursorTest.java",
       "before_sha256": "2a7d36ce95e5385706d6b45682e60fc3ef94cc2aab8065cd09161db64ce565db",
       "after_sha256": "8b9fbb85d6579d7f5c940cbc27142aa350ac68a84d82fe7e9907c08bb1202f2d",
       "source_kind": "JAVA",
@@ -206,7 +206,7 @@
       "exit_code": 0,
       "command": [
         "python3",
-        "m3/compatibility/check_synexia_full_borrow_receiver.py"
+        "m3/compatibility/check_m3_full_borrow_receiver.py"
       ],
       "stdout_sha256": "69354cd1ab04227bdf9f5a5a912361e57b90b1d8315146d447827e2636a259e5",
       "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/full-borrow-preflight.log",
@@ -495,18 +495,18 @@
         "/workspace/scratch/54317e573586/evidence/mask-generated/headers",
         "-d",
         "/workspace/scratch/54317e573586/evidence/mask-generated/classes",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongList.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongSequence.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongList.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongDeque.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongQueue.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongSequence.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongStack.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3LongListSpliterator.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java"
       ],
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/bitmask/generated/compile.log",

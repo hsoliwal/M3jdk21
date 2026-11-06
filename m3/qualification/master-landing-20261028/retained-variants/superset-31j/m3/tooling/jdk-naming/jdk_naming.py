@@ -26,8 +26,8 @@ from pathlib import Path
 TEXT_RULES = (
     ("PKG_M3", re.compile(r"\bcom\.synexia\.m3\b"), "jdk.internal.m3"),
     ("PKG", re.compile(r"\bcom\.synexia\.(?=[a-z])"), "jdk.internal.m3."),
-    ("PKG_PATH_M3", re.compile(r"\bcom/synexia/m3/"), "jdk/internal/m3/"),
-    ("PKG_PATH", re.compile(r"\bcom/synexia/(?=[a-z])"), "jdk/internal/m3/"),
+    ("PKG_PATH_M3", re.compile(r"\bcom/m3/"), "jdk/internal/m3/"),
+    ("PKG_PATH", re.compile(r"\bcom/m3/(?=[a-z])"), "jdk/internal/m3/"),
     ("TYPE_M3", re.compile(r"\bM3Synexia(?=[A-Z0-9_])"), "M3"),
     ("TYPE", re.compile(r"\bSynexia(?=[A-Z0-9_])"), "M3"),
     ("CONST", re.compile(r"\bSYNEXIA_(?=[A-Z0-9])"), "M3_"),
@@ -35,8 +35,8 @@ TEXT_RULES = (
     ("SNAKE", re.compile(r"\bsynexia_(?=[a-z0-9])"), "m3_"),
 )
 PATH_RULES = (
-    (re.compile(r"(^|/)com/synexia/m3/"), r"\1jdk/internal/m3/"),
-    (re.compile(r"(^|/)com/synexia/"), r"\1jdk/internal/m3/"),
+    (re.compile(r"(^|/)jdk/internal/m3/"), r"\1jdk/internal/m3/"),
+    (re.compile(r"(^|/)com/m3/"), r"\1jdk/internal/m3/"),
     (re.compile(r"M3Synexia(?=[A-Z0-9_])"), "M3"),
     (re.compile(r"Synexia(?=[A-Z0-9_])"), "M3"),
     (re.compile(r"(^|[/_.-])synexia-"), r"\1m3-"),
@@ -45,7 +45,7 @@ PATH_RULES = (
 # copyright and SPDX lines are kept whole; dependencies are kept as spans and the rest of their line is renamed
 # (renaming a dependency would hide it from the standalone check): links to the Synexia repository, SYNEXIA_* secrets,
 # and Maven groupIds (mapped in a later phase, not as Java packages). A whole kept line left a one-line
-# <dependency><groupId>com.synexia</groupId><artifactId>synexia-x</artifactId> pointing at a renamed module.
+# <dependency><groupId>com.synexia</groupId><artifactId>m3-x</artifactId> pointing at a renamed module.
 KEEP_LINE = re.compile(r"Copyright|SPDX-")
 KEEP_SPAN = re.compile(r"<groupId>\s*com\.synexia[\w.]*\s*</groupId>|secrets\.SYNEXIA_\w+"
                        r"|(?:https?://)?(?:www\.)?(?:github\.com|raw\.githubusercontent\.com|api\.github\.com/repos)"

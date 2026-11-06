@@ -37,21 +37,21 @@ Copying hash-sealed templates is NOT execution of the canonical recipe and
 does NOT certify production behavior. No merge without those receipts.
 
 Source baseline Git blobs:
-- 102fa70995471fefdd18edb6a58c6a85cf80fdb8 m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
-- dacd36880a3c5a116f191eca8191fdf595cf3252 m3/collections/src/main/java/com/m3/collections/M3TreeMap.java
-- 9060424b921bac10dc382ba277a3aa840ea59529 m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+- 102fa70995471fefdd18edb6a58c6a85cf80fdb8 m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
+- dacd36880a3c5a116f191eca8191fdf595cf3252 m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java
+- 9060424b921bac10dc382ba277a3aa840ea59529 m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
 - 5afeb41575e758b06882b3e3d8104b0c275f50ca m3/collections/src/main/native/collections/m3_index_mask_compactor.c
 
 Product postimages (SHA-256 from exact canonical recipe manifest):
-- 4aa120f4cd52b7857649e7b801294394dc0c61096ee2910f05a323beb07a5795 m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
-- d19caa06054877073f330c92c2b0a4f7a73db265df67878d6cbb99f3b98a5496 m3/collections/src/test/java/com/m3/collections/M3FilteredTreeSlotScanProof.java
-- ed586c3bbe20b4d8656b7b0bc7a785b7c85ac333af56c7c063dfe012ff9c99dc m3/collections/src/test/java/com/m3/collections/M3FilteredTreeSlotScanTest.java
-- 6261c26ea7f3a36be0497aad828b40f6c6d63954c7cd55b68dcc54bd1a7a1b1a m3/collections/src/main/java/com/m3/collections/M3TreeMap.java
-- 266d35352a3762934f46d85fffbf2035f8586e887722c2a873084a03206546fa m3/collections/src/test/java/com/m3/collections/M3EntrylessSortedBulkProof.java
-- 1db2a99125ea8e872fa9b7b9c87e31fd1556402ab50f8bb81e7ca7dde87baef3 m3/collections/src/test/java/com/m3/collections/M3EntrylessSortedBulkTest.java
-- 01e147accf577784c97f2f6e3d3ed5415caf3619c4484f6d69450fd10a6e1570 m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
-- c99c7d00bb8343582d1144e607db180f0d64318ebd5b2d17419409237b597fbf m3/collections/src/test/java/com/m3/collections/M3IndexMaskPositionPageProof.java
-- f890ad50c823d0129050dbafb15b8e3eced69c8ba1448178bd343a78f284b907 m3/collections/src/test/java/com/m3/collections/M3IndexMaskPositionPageTest.java
+- 93d39c6f5544ed56a8c18fb965073da738fb9e5c203503f34bd06fb9a5460ad0 m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
+- d7fc17832b15924ca291ca2b5e797c7c450d2fbb11a6a7234e7e673e73b3d732 m3/collections/src/test/java/jdk/m3/collections/M3FilteredTreeSlotScanProof.java
+- d2a2be337899fdbe0cd0a8f65c53744aa8014efdbaac91e92ba1cc311fea402d m3/collections/src/test/java/jdk/m3/collections/M3FilteredTreeSlotScanTest.java
+- d73f1e3cb0adc1ecd1857e8196dc3efd4c8e0a8a1a0bbb8f38fa59cbac6d9e34 m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java
+- f65466dbaa66bbf45f52c639889ef86b6135faf01fb021f6705d116d1fd38fab m3/collections/src/test/java/jdk/m3/collections/M3EntrylessSortedBulkProof.java
+- ece540cfcff50926665a79cd91d18a011299e48086eda37c1e7570c3fc180f7c m3/collections/src/test/java/jdk/m3/collections/M3EntrylessSortedBulkTest.java
+- 01e147accf577784c97f2f6e3d3ed5415caf3619c4484f6d69450fd10a6e1570 m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
+- 0df42d8b04243d236990d6b73a289ae380192c6d3dc6d34d8a73a291a47473e6 m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskPositionPageProof.java
+- 55864df5ad0f73561c6c00a1be630a5637c0fd9c9bf61d936a040f6898cb7d68 m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskPositionPageTest.java
 - 3c09398535aaa678714275a2ab7fd4f5a2e611cd150bdc5842da24b803f3374a m3/collections/src/main/native/collections/m3_index_mask_compactor.c
 
 Algorithm donors: LeetCode/HackerRank/GeeksforGeeks by problem category only;

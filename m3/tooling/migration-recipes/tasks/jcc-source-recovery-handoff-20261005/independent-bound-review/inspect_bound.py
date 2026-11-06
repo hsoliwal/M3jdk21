@@ -18,7 +18,7 @@ def snapshot(p,name=None):
  inputs.append({'source':str(p),'snapshot':str(q.relative_to(O)),**identity(p)})
  return load(p) if p.suffix=='.json' else raw
 spec=snapshot(B/'DERIVATION_INPUTS_V3.json');inv=snapshot(B/'source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json');acct=snapshot(B/'source-binding-v3/ROOT_ACCOUNTING.json');pub=snapshot(bound(spec['publication_receipt']));model=load(bound(spec['base_tree_model']));remote_path=bound({'local_path':pub['readback_path'],'sha256':pub['readback_sha256']});remote=load(remote_path)
-assert identity(bound(spec['publication_receipt']))['sha256']=='95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8'
+assert identity(bound(spec['publication_receipt']))['sha256']=='91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35'
 assert (pub['status'],pub['commit'],pub['tree'],pub['parent'])==('PUBLISHED_CUSTODY_VERIFIED',SOURCE,ROOT,BE92)
 assert pub['pull_request']['url']=='https://github.com/hsoliwal/com.synexia/pull/9362' and pub['ref_update_forced'] is False
 assert remote['commit']['sha']==SOURCE and remote['commit']['tree']['sha']==ROOT and [x['sha'] for x in remote['commit']['parents']]==[BE92]
@@ -51,7 +51,7 @@ for group,count in [('sources',19),('proof_references',55)]:
    before=current[r['path']];assert r['repo']=='hsoliwal/com.synexia' and r['record']==before['record'] and r['symbol']==before['symbol'] and r['module']==before['module'];assert r['revision_role']=='pinned' and r['tracking_ref']=='refs/heads/'+pub['branch']
    if r['sha256']!=before['sha256']:changes.append(r['path'])
 assert set(changes)=={r['path'] for r in inv['current_designated_changes']} and len(changes)==4
-assert {k:v for k,v in collections.Counter(r['record'] for r in inv['sources']).items()}=={'synexia.jcc-recipe-laboratory':13,'synexia.jcc-java-jni-regression':6}
+assert {k:v for k,v in collections.Counter(r['record'] for r in inv['sources']).items()}=={'m3.jcc-recipe-laboratory':13,'m3.jcc-java-jni-regression':6}
 assert acct['root_entries']==[{k:e[k] for k in ('path','mode','type','sha')} for e in trees[ROOT]];assert acct['root_entry_count']==len(acct['root_entries'])==343;assert dict(collections.Counter(e['type'] for e in trees[ROOT]))==acct['root_entry_types']=={'tree':255,'blob':87,'commit':1}
 pom=Path(acct['root_pom']['body_path']);pom_state='PENDING_MISSING_BODY'
 if pom.exists():

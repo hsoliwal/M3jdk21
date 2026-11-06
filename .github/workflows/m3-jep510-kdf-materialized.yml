@@ -15,12 +15,12 @@ on:
       - 'test/jdk/com/sun/crypto/provider/KDF/**'
       - 'test/jdk/javax/crypto/KDF/**'
       - 'm3/backports/recipes/j510/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep510Kdf*.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep510Kdf*.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf-tests/**'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510Kdf*.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep510Kdf*.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf-tests/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep510-kdf.yml'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
       - '.github/workflows/m3-jep510-kdf-materialized.yml'
   workflow_dispatch:
 

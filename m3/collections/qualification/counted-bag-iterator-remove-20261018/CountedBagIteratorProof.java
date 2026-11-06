@@ -2,8 +2,8 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.collections.M3CountedBag;
-import com.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.M3CountedBag;
+import jdk.m3.collections.M3IndexMaskCompactor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;

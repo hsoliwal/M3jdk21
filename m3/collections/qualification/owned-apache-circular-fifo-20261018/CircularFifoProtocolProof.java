@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
  * Independent collection reference and frozen Apache/M3 differential protocol.
  */
-import com.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.M3IndexMaskCompactor;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;

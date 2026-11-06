@@ -8,7 +8,7 @@ import java.util.HexFormat;
 import java.util.List;
 
 /**
- * Hash-pinned package rename of the SWT residency engine into M3jdk21 {@code m3/ports/swing-viewport}.
+ * Hash-pinned package rename of the SWT residency engine into M3JDK 21 {@code m3/ports/swing-viewport}.
  *
  * <pre>java ResidencyRename.java RENAME_MANIFEST.tsv SWT_WORKTREE M3JDK21_ROOT</pre>
  *
@@ -22,11 +22,11 @@ import java.util.List;
  */
 public final class ResidencyRename {
     static final String[][] RULES = {
-        {"org.eclipse.swt.internal.residency", "com.m3.swing.viewport.engine.residency"},
-        {"org.eclipse.swt.internal.swap", "com.m3.swing.viewport.engine.swap"},
-        {"org.eclipse.swt.internal.PackedHeapGrowth", "com.m3.swing.viewport.engine.PackedHeapGrowth"},
-        {"import org.eclipse.swt.internal.*;", "import com.m3.swing.viewport.engine.*;"},
-        {"package org.eclipse.swt.internal;", "package com.m3.swing.viewport.engine;"},
+        {"org.eclipse.swt.internal.residency", "jdk.m3.swing.viewport.engine.residency"},
+        {"org.eclipse.swt.internal.swap", "jdk.m3.swing.viewport.engine.swap"},
+        {"org.eclipse.swt.internal.PackedHeapGrowth", "jdk.m3.swing.viewport.engine.PackedHeapGrowth"},
+        {"import org.eclipse.swt.internal.*;", "import jdk.m3.swing.viewport.engine.*;"},
+        {"package org.eclipse.swt.internal;", "package jdk.m3.swing.viewport.engine;"},
     };
 
     public static void main(String[] args) throws Exception {

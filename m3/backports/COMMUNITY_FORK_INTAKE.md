@@ -140,7 +140,7 @@ No heuristic stage may skip the compatibility proof.
 
 ## CI
 
-`.github/workflows/m3-jdk21-community-forks.yml`:
+`.github/workflows/m3jdk21-community-forks.yml`:
 
 1. runs the synthetic Git-history unit tests;
 2. fetches only the pinned branch histories, blobless;

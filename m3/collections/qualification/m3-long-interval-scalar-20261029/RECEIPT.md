@@ -13,12 +13,12 @@ constructor, methods, and `scaffoldDescriptor()`.
 
 ## Source identity
 - Public base revision when branched: `6821ed995423bba34b66fbcc881f1b224c675427`.
-- Original scaffold Git blob: `873934660b55f4a3d8db8cc2d9c3fc43ede424f9`.
-- Original scaffold SHA-256: `5bdebe363cb23020f8a0d7582c379da5b53b7b27e8b7e337b63d9643c88cd504`.
-- Candidate Java Git blob: `5a03274f23858ee99d75afa416ba098a6664e8b3`.
-- Candidate Java SHA-256: `557d73235566f583016c5f9139beb893c9830436661c5f8a6e25e7927c4046b1`.
-- Candidate JUnit Git blob: `14ff51ab3fd1dd9622844f57b5dc917fd3d55423`.
-- Candidate JUnit SHA-256: `97d3198cb7e4426257205c32170e0640e3100d7dd7290ff9feaf056ba6ebe2fd`.
+- Original scaffold Git blob: `e605d7e12a12bd07d6db207dcbb8fb989c2630bc`.
+- Original scaffold SHA-256: `8d669c2caeece09de656bb4968de90b941aeb78260364d92b9ab492fca8f6acd`.
+- Candidate Java Git blob: `34a490c518ffbc8a5b85f74e177c89803b09aaac`.
+- Candidate Java SHA-256: `9f82d3725c3409c51500b02b7c1642d45f1b9a4c16d0ddac3b8ff8f83191ddb3`.
+- Candidate JUnit Git blob: `eb2f409782ae12790e7227380986362042a1478e`.
+- Candidate JUnit SHA-256: `ff5b4e267e03e16c592fff476eaa731cb78b8f575face8e62ddd098b4e2b2f04`.
 - All candidate blobs were read back byte-identical to the Synexia template.
 - Canonical private recipe: `hsoliwal/com.synexia`,
   named `com.synexia.m3.M3LongIntervalScalar20261029`, using the

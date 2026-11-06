@@ -8,10 +8,10 @@ The earlier redundant override repair packet based on Git blob `34fca25ba4546756
 
 | Receipt | Value |
 | --- | --- |
-| SDK file owner | `m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java` |
+| SDK file owner | `m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java` |
 | Canonical recipe | `com.synexia.m3.M3FilteredSortedReadOnlyForward20261019` in `hsoliwal/com.synexia@6139f93bf62ef249856dfeca98045e145b808776` |
-| Input Git blob | `1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f` |
-| Input SHA-256 | `8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4` |
+| Input Git blob | `549dc05101caed368eeb04d223ad1c08943054ee` |
+| Input SHA-256 | `5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709` |
 | Generated output Git blob | `32dac5d7a73826ed79d59b27d83a6bab055f17c2` |
 | Generated output SHA-256 | `af1752c4b02eb7a7753424727e58b7c9cd38c3e4c28191ce7499c12d54be7c68` |
 | Local Java21 witness | PASS: JDK21 empty method defaults differ from strict read-only contract; repaired model passes with -Xlint:all -Werror |

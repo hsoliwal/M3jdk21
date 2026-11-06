@@ -15,7 +15,7 @@ The older production blob is **not** used to overwrite the newer 32-KiB runtime 
 ## Test source custody
 
 - Existing product test preimage blob: `5dfe9035322a30a99a185d2431f2363065fa7824`
-- Older donor test blob from PR #1345: `dacd7a5a52c79878a3f53ab4e404100bdab221f3`
+- Older donor test blob from PR #1345: `0050b32116d6ad4f1dc40e774808f1a44a69d545`
 - Additive product test result blob: `cdf8844d6eb9baa4368b57984b346606e032f6c4`
 
 Mechanical insertion includes the preexisting donor's comparator alias, predicate callback, read-only refusal and live mutation oracles plus two required imports and explicit `main` dispatch calls. Every original line of the 272-line product test is retained in order; there are no deleted files, runtime edits, JNI edits, new dependencies, or changes to exported collection interfaces.

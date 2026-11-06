@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.tools.cpu.M3RunLengthPostingIndex;
-import com.m3.tools.cpu.M3RunLengthPostingIndexNative;
+import jdk.m3.tools.cpu.M3RunLengthPostingIndex;
+import jdk.m3.tools.cpu.M3RunLengthPostingIndexNative;
 import java.util.Arrays;
 import java.util.Random;
 

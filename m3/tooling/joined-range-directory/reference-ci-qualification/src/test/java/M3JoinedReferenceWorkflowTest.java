@@ -35,8 +35,8 @@ final class M3JoinedReferenceWorkflowTest {
     @BeforeAll static void inputs() throws Exception {
         legacyBefore = resource("legacy-before.yml");
         nlpBefore = resource("nlp-before.yml");
-        assertEquals("81e9f9ca6de6c06e547767ba8c87d42b7746825d", blob(legacyBefore));
-        assertEquals("3c0fc67646b776b884a413ab6b62695ecac22aeb", blob(nlpBefore));
+        assertEquals("9429b74592a09441deb1ca5c4308a6a417274e57", blob(legacyBefore));
+        assertEquals("31b721c7f6bca592b118668a5704f753a212fbc4", blob(nlpBefore));
         Path root = Path.of(System.getProperty("m3.receiver.root")).toRealPath();
         legacyAfter = Files.readString(root.resolve(LEGACY));
         nlpAfter = Files.readString(root.resolve(NLP));
@@ -137,7 +137,7 @@ final class M3JoinedReferenceWorkflowTest {
         assertEquals("false",scalar(get(ref,"historicalReplayIsCurrentAdmission")));
         assertEquals("false",scalar(get(ref,"currentHeadBoundInHistoricalReceipts")));
         assertEquals(NLP,scalar(get(ref,"currentValidationWorkflow")));
-        assertEquals("5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d",
+        assertEquals("6f90d22fb6db68af59668138e3757f3c29826af552592b14322c927b372c3873",
                 scalar(get(ref,"unchangedV8DeclarationSha256")));
         assertEquals("145",scalar(get(ref,"unchangedNlpLockedJavaSources")));
     }

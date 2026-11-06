@@ -108,7 +108,7 @@
     "src/test/java/RegexDpNativeHarness.java": "c58788b2077adeb9bdc6acd105dc50c63e0cf460c7d34de110d171d7888eaedb",
     "src/test/java/RegexGraph.java": "823e6cb840b86b06b678cbef8e225afde1e0fc4dc71ee0dec7a1f0a16a306e4d",
     "src/test/java/RegexJavaBenchmark.java": "420b57d975c3e59e1247810ebee52761a36c7305426e77cd0f15a394ddab376d",
-    "src/test/java/java/lang/M3StringRegexRecoveryTest.java": "89eb9d481cebab329608315b83e8365b43ae44ac442a803c6cab7ca4af133589",
+    "src/test/java/java/lang/M3StringRegexRecoveryTest.java": "ee996045762545b81db804ebaa41372db0ba23652f66c091304c888f28821a84",
     "src/test/native/RegexDpNativeAdapter.c": "cc18e558b9db19d298a5bb215569956cd5c69a29719085c446ef9e70ddc97b2d"
   },
   "full_image": false,

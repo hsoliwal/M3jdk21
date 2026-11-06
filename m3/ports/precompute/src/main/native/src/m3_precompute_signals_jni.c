@@ -15,7 +15,7 @@ static void throw_bad(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_precompute_M3CodeTextSignalBatchNative_nativeAnalyzeRange(
+Java_jdk_m3_precompute_M3CodeTextSignalBatchNative_nativeAnalyzeRange(
         JNIEnv *env,
         jclass type,
         jcharArray units_array,
@@ -110,7 +110,7 @@ failure:
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_precompute_M3SimilarityBatchNative_nativeScores(
+Java_jdk_m3_precompute_M3SimilarityBatchNative_nativeScores(
         JNIEnv *env,
         jclass type,
         jint query_length,

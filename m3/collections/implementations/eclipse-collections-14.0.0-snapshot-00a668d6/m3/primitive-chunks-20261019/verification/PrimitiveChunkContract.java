@@ -36,7 +36,7 @@ public final class PrimitiveChunkContract {
     System.out.println("checks=" + checks + " transcript=" + transcript);
   }
   private static void serializedBooleanBoundary() throws Exception {
-    String name = "com.m3.collections.eclipse.impl.list.immutable.primitive.ImmutableBooleanArrayList$ImmutableBooleanListSerializationProxy";
+    String name = "jdk.m3.collections.eclipse.impl.list.immutable.primitive.ImmutableBooleanArrayList$ImmutableBooleanListSerializationProxy";
     Class<?> type = Class.forName(name);
     var constructor = type.getDeclaredConstructor(); constructor.setAccessible(true);
     var resolve = type.getDeclaredMethod("readResolve"); resolve.setAccessible(true);
@@ -48,7 +48,7 @@ public final class PrimitiveChunkContract {
       }
       var proxy = (Externalizable) constructor.newInstance();
       try (var input = new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray()))) { proxy.readExternal(input); }
-      var list = (com.m3.collections.eclipse.api.list.primitive.ImmutableBooleanList) resolve.invoke(proxy);
+      var list = (jdk.m3.collections.eclipse.api.list.primitive.ImmutableBooleanList) resolve.invoke(proxy);
       for (int width : new int[]{1,2,64,Integer.MAX_VALUE}) {
         var chunks = list.chunk(width);
         // The serialized array owner reports notEmpty() even at size zero.
@@ -68,7 +68,7 @@ public final class PrimitiveChunkContract {
       int n = run < 12 ? new int[]{0,1,2,3,7,8,63,64,65,127,128,4097}[run] : random.nextInt(513);
       byte[] values = new byte[n];
       for (int i = 0; i < n; i++) values[i] = (byte) random.nextInt();
-      var list = com.m3.collections.eclipse.impl.factory.primitive.ByteLists.immutable.with(values);
+      var list = jdk.m3.collections.eclipse.impl.factory.primitive.ByteLists.immutable.with(values);
       for (int width : new int[]{-1,0,1,2,3,7,8,63,64,65,127,128,129,257,4097,Integer.MAX_VALUE}) {
         if (width <= 0 && n == 0) { check(list.chunk(width).isEmpty()); continue; }
         if (width <= 0) {
@@ -83,7 +83,7 @@ public final class PrimitiveChunkContract {
         for (var chunk : chunks) {
           byte[] actual = chunk.toArray(); int length = Math.min(width, n - offset);
           check(actual.length == length);
-          var expected = com.m3.collections.eclipse.impl.factory.primitive.ByteLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
+          var expected = jdk.m3.collections.eclipse.impl.factory.primitive.ByteLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
           check(chunk.equals(expected)); check(chunk.getClass() == expected.getClass());
           record(chunk.hashCode()); record(chunk.getClass().getName().hashCode());
           for (int j = 0; j < length; j++) { byte a = actual[j], b = values[offset + j]; check(a == b); }
@@ -101,7 +101,7 @@ public final class PrimitiveChunkContract {
       int n = run < 12 ? new int[]{0,1,2,3,7,8,63,64,65,127,128,4097}[run] : random.nextInt(513);
       short[] values = new short[n];
       for (int i = 0; i < n; i++) values[i] = (short) random.nextInt();
-      var list = com.m3.collections.eclipse.impl.factory.primitive.ShortLists.immutable.with(values);
+      var list = jdk.m3.collections.eclipse.impl.factory.primitive.ShortLists.immutable.with(values);
       for (int width : new int[]{-1,0,1,2,3,7,8,63,64,65,127,128,129,257,4097,Integer.MAX_VALUE}) {
         if (width <= 0 && n == 0) { check(list.chunk(width).isEmpty()); continue; }
         if (width <= 0) {
@@ -116,7 +116,7 @@ public final class PrimitiveChunkContract {
         for (var chunk : chunks) {
           short[] actual = chunk.toArray(); int length = Math.min(width, n - offset);
           check(actual.length == length);
-          var expected = com.m3.collections.eclipse.impl.factory.primitive.ShortLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
+          var expected = jdk.m3.collections.eclipse.impl.factory.primitive.ShortLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
           check(chunk.equals(expected)); check(chunk.getClass() == expected.getClass());
           record(chunk.hashCode()); record(chunk.getClass().getName().hashCode());
           for (int j = 0; j < length; j++) { short a = actual[j], b = values[offset + j]; check(a == b); }
@@ -134,7 +134,7 @@ public final class PrimitiveChunkContract {
       int n = run < 12 ? new int[]{0,1,2,3,7,8,63,64,65,127,128,4097}[run] : random.nextInt(513);
       char[] values = new char[n];
       for (int i = 0; i < n; i++) values[i] = (char) random.nextInt();
-      var list = com.m3.collections.eclipse.impl.factory.primitive.CharLists.immutable.with(values);
+      var list = jdk.m3.collections.eclipse.impl.factory.primitive.CharLists.immutable.with(values);
       for (int width : new int[]{-1,0,1,2,3,7,8,63,64,65,127,128,129,257,4097,Integer.MAX_VALUE}) {
         if (width <= 0 && n == 0) { check(list.chunk(width).isEmpty()); continue; }
         if (width <= 0) {
@@ -149,7 +149,7 @@ public final class PrimitiveChunkContract {
         for (var chunk : chunks) {
           char[] actual = chunk.toArray(); int length = Math.min(width, n - offset);
           check(actual.length == length);
-          var expected = com.m3.collections.eclipse.impl.factory.primitive.CharLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
+          var expected = jdk.m3.collections.eclipse.impl.factory.primitive.CharLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
           check(chunk.equals(expected)); check(chunk.getClass() == expected.getClass());
           record(chunk.hashCode()); record(chunk.getClass().getName().hashCode());
           for (int j = 0; j < length; j++) { char a = actual[j], b = values[offset + j]; check(a == b); }
@@ -167,7 +167,7 @@ public final class PrimitiveChunkContract {
       int n = run < 12 ? new int[]{0,1,2,3,7,8,63,64,65,127,128,4097}[run] : random.nextInt(513);
       int[] values = new int[n];
       for (int i = 0; i < n; i++) values[i] = random.nextInt();
-      var list = com.m3.collections.eclipse.impl.factory.primitive.IntLists.immutable.with(values);
+      var list = jdk.m3.collections.eclipse.impl.factory.primitive.IntLists.immutable.with(values);
       for (int width : new int[]{-1,0,1,2,3,7,8,63,64,65,127,128,129,257,4097,Integer.MAX_VALUE}) {
         if (width <= 0 && n == 0) { check(list.chunk(width).isEmpty()); continue; }
         if (width <= 0) {
@@ -182,7 +182,7 @@ public final class PrimitiveChunkContract {
         for (var chunk : chunks) {
           int[] actual = chunk.toArray(); int length = Math.min(width, n - offset);
           check(actual.length == length);
-          var expected = com.m3.collections.eclipse.impl.factory.primitive.IntLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
+          var expected = jdk.m3.collections.eclipse.impl.factory.primitive.IntLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
           check(chunk.equals(expected)); check(chunk.getClass() == expected.getClass());
           record(chunk.hashCode()); record(chunk.getClass().getName().hashCode());
           for (int j = 0; j < length; j++) { int a = actual[j], b = values[offset + j]; check(a == b); }
@@ -200,7 +200,7 @@ public final class PrimitiveChunkContract {
       int n = run < 12 ? new int[]{0,1,2,3,7,8,63,64,65,127,128,4097}[run] : random.nextInt(513);
       long[] values = new long[n];
       for (int i = 0; i < n; i++) values[i] = random.nextLong();
-      var list = com.m3.collections.eclipse.impl.factory.primitive.LongLists.immutable.with(values);
+      var list = jdk.m3.collections.eclipse.impl.factory.primitive.LongLists.immutable.with(values);
       for (int width : new int[]{-1,0,1,2,3,7,8,63,64,65,127,128,129,257,4097,Integer.MAX_VALUE}) {
         if (width <= 0 && n == 0) { check(list.chunk(width).isEmpty()); continue; }
         if (width <= 0) {
@@ -215,7 +215,7 @@ public final class PrimitiveChunkContract {
         for (var chunk : chunks) {
           long[] actual = chunk.toArray(); int length = Math.min(width, n - offset);
           check(actual.length == length);
-          var expected = com.m3.collections.eclipse.impl.factory.primitive.LongLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
+          var expected = jdk.m3.collections.eclipse.impl.factory.primitive.LongLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
           check(chunk.equals(expected)); check(chunk.getClass() == expected.getClass());
           record(chunk.hashCode()); record(chunk.getClass().getName().hashCode());
           for (int j = 0; j < length; j++) { long a = actual[j], b = values[offset + j]; check(a == b); }
@@ -233,7 +233,7 @@ public final class PrimitiveChunkContract {
       int n = run < 12 ? new int[]{0,1,2,3,7,8,63,64,65,127,128,4097}[run] : random.nextInt(513);
       float[] values = new float[n];
       for (int i = 0; i < n; i++) values[i] = Float.intBitsToFloat(random.nextInt());
-      var list = com.m3.collections.eclipse.impl.factory.primitive.FloatLists.immutable.with(values);
+      var list = jdk.m3.collections.eclipse.impl.factory.primitive.FloatLists.immutable.with(values);
       for (int width : new int[]{-1,0,1,2,3,7,8,63,64,65,127,128,129,257,4097,Integer.MAX_VALUE}) {
         if (width <= 0 && n == 0) { check(list.chunk(width).isEmpty()); continue; }
         if (width <= 0) {
@@ -248,7 +248,7 @@ public final class PrimitiveChunkContract {
         for (var chunk : chunks) {
           float[] actual = chunk.toArray(); int length = Math.min(width, n - offset);
           check(actual.length == length);
-          var expected = com.m3.collections.eclipse.impl.factory.primitive.FloatLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
+          var expected = jdk.m3.collections.eclipse.impl.factory.primitive.FloatLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
           check(chunk.equals(expected)); check(chunk.getClass() == expected.getClass());
           record(chunk.hashCode()); record(chunk.getClass().getName().hashCode());
           for (int j = 0; j < length; j++) { float a = actual[j], b = values[offset + j]; check(Float.floatToRawIntBits(a) == Float.floatToRawIntBits(b)); }
@@ -266,7 +266,7 @@ public final class PrimitiveChunkContract {
       int n = run < 12 ? new int[]{0,1,2,3,7,8,63,64,65,127,128,4097}[run] : random.nextInt(513);
       double[] values = new double[n];
       for (int i = 0; i < n; i++) values[i] = Double.longBitsToDouble(random.nextLong());
-      var list = com.m3.collections.eclipse.impl.factory.primitive.DoubleLists.immutable.with(values);
+      var list = jdk.m3.collections.eclipse.impl.factory.primitive.DoubleLists.immutable.with(values);
       for (int width : new int[]{-1,0,1,2,3,7,8,63,64,65,127,128,129,257,4097,Integer.MAX_VALUE}) {
         if (width <= 0 && n == 0) { check(list.chunk(width).isEmpty()); continue; }
         if (width <= 0) {
@@ -281,7 +281,7 @@ public final class PrimitiveChunkContract {
         for (var chunk : chunks) {
           double[] actual = chunk.toArray(); int length = Math.min(width, n - offset);
           check(actual.length == length);
-          var expected = com.m3.collections.eclipse.impl.factory.primitive.DoubleLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
+          var expected = jdk.m3.collections.eclipse.impl.factory.primitive.DoubleLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
           check(chunk.equals(expected)); check(chunk.getClass() == expected.getClass());
           record(chunk.hashCode()); record(chunk.getClass().getName().hashCode());
           for (int j = 0; j < length; j++) { double a = actual[j], b = values[offset + j]; check(Double.doubleToRawLongBits(a) == Double.doubleToRawLongBits(b)); }
@@ -299,7 +299,7 @@ public final class PrimitiveChunkContract {
       int n = run < 12 ? new int[]{0,1,2,3,7,8,63,64,65,127,128,4097}[run] : random.nextInt(513);
       boolean[] values = new boolean[n];
       for (int i = 0; i < n; i++) values[i] = random.nextBoolean();
-      var list = com.m3.collections.eclipse.api.factory.primitive.BooleanLists.immutable.with(values);
+      var list = jdk.m3.collections.eclipse.api.factory.primitive.BooleanLists.immutable.with(values);
       for (int width : new int[]{-1,0,1,2,3,7,8,63,64,65,127,128,129,257,4097,Integer.MAX_VALUE}) {
         if (width <= 0 && n == 0) { check(list.chunk(width).isEmpty()); continue; }
         if (width <= 0) {
@@ -314,7 +314,7 @@ public final class PrimitiveChunkContract {
         for (var chunk : chunks) {
           boolean[] actual = chunk.toArray(); int length = Math.min(width, n - offset);
           check(actual.length == length);
-          var expected = com.m3.collections.eclipse.api.factory.primitive.BooleanLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
+          var expected = jdk.m3.collections.eclipse.api.factory.primitive.BooleanLists.immutable.with(Arrays.copyOfRange(values, offset, offset + length));
           check(chunk.equals(expected)); check(chunk.getClass() == expected.getClass());
           record(chunk.hashCode()); record(chunk.getClass().getName().hashCode());
           for (int j = 0; j < length; j++) { boolean a = actual[j], b = values[offset + j]; check(a == b); }

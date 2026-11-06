@@ -40,7 +40,7 @@ def main():
     exp=json.loads(regular(a.crate/'EXPECTED.json'))['targets'][0];raw=regular(a.emitted/TARGET)
     assert ident(raw)['sha256']==exp['afterSha256'] and ident(raw)['gitBlob']==exp['afterGit']
     current=json.loads(raw);oldraw=regular(a.crate/'contract/ORIGINAL_BUILD_INPUTS.json');old=json.loads(oldraw)
-    assert ident(oldraw)['gitBlob']==current['historicalBaseline']['manifestGit']=='921d708e2a0f1f1c43e95989ea9e37e02e22790a'
+    assert ident(oldraw)['gitBlob']==current['historicalBaseline']['manifestGit']=='a68332b1d66d744d557b094ab20e252135219952'
     assert ident(oldraw)['sha256']==current['historicalBaseline']['manifestSha256']
     assert current['schema']=='M3_CURRENT_CORE_BASELINE_INPUTS_V1' and current['commit']=='1b5e64844fdb755ac8a7aee563e68c15e0126ced'
     assert old['commit']==current['historicalBaseline']['commit']=='73f59218dc4ef1a3ef79aad990e77273db2a2d60'
@@ -54,7 +54,7 @@ def main():
         before[name]=body if body is not None and ident(body)['gitBlob']==row['gitBlob'] else regular(a.inputs/'historical-overlays'/relative(name))
     admit(current['files'],now);admit(old['files'],before)
     changed=sorted(name for name in before if before[name]!=now[name]);assert changed==current['historicalBaseline']['overlays'] and len(changed)==7
-    assert set(now)-set(before)=={'m3/core/test/com/m3/text/M3NumberSpaceConstructorProof.java'}
+    assert set(now)-set(before)=={'m3/core/test/jdk/m3/text/M3NumberSpaceConstructorProof.java'}
     a.out.mkdir(parents=True,exist_ok=True)
     if a.phase=='controls':
         cases=['current-accepted','historical-accepted']
@@ -136,10 +136,10 @@ source "$M3_BOUNDED_COHORT/m3/build.sh"
             if previous.exists():
                 old_logs=[dict(path=p.relative_to(previous).as_posix(),**ident(regular(p)),content=regular(p).decode('utf-8')) for p in sorted((previous/'logs').rglob('*')) if p.is_file()]
                 (a.out/(label+'-prior-build-logs.json')).write_bytes((json.dumps(old_logs,indent=2)+'\n').encode())
-                jar=previous/'com.m3.text.jar'
+                jar=previous/'jdk.m3.text.jar'
                 if jar.exists():(a.out/(label+'-prior-build.jar')).write_bytes(regular(jar))
             temp=a.out/(label+'-temp');home=a.out/(label+'-home');temp.mkdir();home.mkdir()
-            child_env=dict(env,M3_JDK=a.jdk.as_posix(),M3_BOUNDED_COHORT=directory.as_posix())
+            child_env=dict(env,M3JDK=a.jdk.as_posix(),M3_BOUNDED_COHORT=directory.as_posix())
             child_env['JAVA_TOOL_OPTIONS']='-Xmx128m -XX:-UsePerfData -Djava.io.tmpdir='+str(temp)+' -Duser.home='+str(home)
             fence=wrapper.rsplit(b'\nsource ',1)[0]+b'''\nm3_checked_paths build/owned/source build/owned/destination
 if m3_checked_paths ../outside; then exit 74; fi
@@ -158,7 +158,7 @@ if m3_checked_paths build/../../outside; then exit 74; fi
             assert sum(row['bytes'] for row in bundle)<256*1024
             (a.out/(label+'-complete-build-logs.json')).write_bytes((json.dumps(bundle,indent=2)+'\n').encode())
             for row in rows:assert ident(regular(directory/relative(row['path'])))=={k:row[k] for k in ['bytes','sha256','gitBlob']}
-            cohorts[label]=dict(status='PASS',sourceFiles=len(rows),compiledClasses=compiled,originalPrograms=16,jvmModes=4,contracts=counts,completeLogs=len(logs),jar=ident(regular(directory/'m3/build/com.m3.text.jar')),sourceInputsUnchanged=True)
+            cohorts[label]=dict(status='PASS',sourceFiles=len(rows),compiledClasses=compiled,originalPrograms=16,jvmModes=4,contracts=counts,completeLogs=len(logs),jar=ident(regular(directory/'m3/build/jdk.m3.text.jar')),sourceInputsUnchanged=True)
         assert set(cohorts['historical']['compiledClasses'])==set(cohorts['current']['compiledClasses'])
         result=dict(status='PASS_ORIGINAL_MODULAR_BUILD_HISTORICAL_AND_CURRENT',cohorts=cohorts,commands=records,scope='16 original main programs x4 modes x2 explicit source cohorts; omitted standalone/patch/native tests not claimed')
     result.update(authority=False,productChanges=0,currentCommit=current['commit'],historicalCommit=old['commit'])

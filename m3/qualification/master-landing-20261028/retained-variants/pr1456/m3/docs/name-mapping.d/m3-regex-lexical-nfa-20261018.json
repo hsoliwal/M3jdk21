@@ -5,7 +5,7 @@
   "date": "2026-10-18",
   "source": "Existing RX7 primitive automaton ownership; independently authored lexical predicates",
   "canonical_recipe_repository": "hsoliwal/com.synexia",
-  "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018",
+  "canonical_recipe_path": "m3-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018",
   "target_repository": "hsoliwal/M3jdk21",
   "target_base": "3e1a0b7b7d2498a62550861a6a5a9bd88a2314d7",
   "target_owner": "jdk.internal.mindex.M3RX7",
