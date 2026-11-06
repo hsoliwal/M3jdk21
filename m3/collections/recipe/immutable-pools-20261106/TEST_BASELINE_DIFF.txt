@@ -1,0 +1,118 @@
+# mvn -B -ntp -Dmaven.repo.local=S:/m3-scratch/eb-conv/m2 -f m3/collections/pom.xml test (JDK 21.0.9, Maven 3.9.14, no m3-arrays JNI library built on Windows); log lines kept as surefire wrote them (CR stripped; the 0xBB separator byte of the summary lines is cp1252 as the Windows console emits it)
+# base: 39b0d9e2c6e (origin/master 2026-11-06, merge of #2504) in the detached sparse worktree S:/m3-scratch/eb-conv/wt-pools-base holding m3/collections + m3/arrays + m3/pom.xml; m3-arrays 0.1.0-SNAPSHOT installed from the same tree first; log S:/m3-scratch/eb-conv/pools-base-test.log
+# head: branch m3/collections-immutable-pools-20261106a in S:/m3-scratch/eb-conv/wt-pools (same layout + m3/tooling/jdk-naming + m3/qualification/converge-collections-20261030); log S:/m3-scratch/eb-conv/pools-head-test.log
+base: Tests run: 1624, Failures: 5, Errors: 49, Skipped: 2
+head: Tests run: 1627, Failures: 5, Errors: 49, Skipped: 2 (1627 = 1624 + the three wrappers M3ImmutablePoolTest, M3Uuid128Test, M3UuidBinaryTest, each Tests run: 1, Failures: 0; printed PASS: 71 immutable-pool checks, PASS: 26 uuid128 checks, PASS: 7 UUID binary checks)
+failing set sizes: base 54, head 54; diff failset-base failset-head: empty (identical sets)
+
+## base failing set (54 tests; 53 UnsatisfiedLink 'M3 array JNI library is not loaded' / 'real m3-arrays JNI library path required', 1 M3ObjectResidencyTest class-file metadata; identical to the head set of m3/collections/recipe/naming-fixed-point-20261106/TEST_BASELINE_DIFF.txt, the module's last landing)
+M3BagRankIndexTest.rankSelectRangesStableTiesAndNativeMasks:7 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ConcurrentContractTest.atomicHashAndTreeCompute:53 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ConcurrentContractTest.concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates:42 » UnsatisfiedLink M3 array JNI library is not loaded
+M3CountedBagTest.sourceSealedDifferentialContract:8 » UnsatisfiedLink M3 array JNI library is not loaded
+M3EntryFacadeCacheTest.compatibilityHookKeepsCallbackDemandAndExceptionIdentity:157 » UnsatisfiedLink M3 array JNI library is not loaded
+M3EntryFacadeCacheTest.identityKeyingAllowsNullAndEqualButDistinctKeys:57 » UnsatisfiedLink M3 array JNI library is not loaded
+M3EntryFacadeCacheTest.lfuPrefersHotEntriesAndBreaksTiesByRecency:31 » UnsatisfiedLink M3 array JNI library is not loaded
+M3EntryFacadeCacheTest.strongMapEntryFacadesAreFreshLiveCallerProjections:79 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FactoryContractTest.allFactoryFamiliesAreUsable:28 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FactoryContractTest.immutableAndJdkUtilityWrappers:58 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FootprintContractTest.emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers:33 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FootprintContractTest.listAndSetViewsWorkAcrossFirstInsertionClearAndReuse:112 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FootprintContractTest.mapViewsCreatedWhileEmptyRemainBackedAndFailFast:84 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FootprintContractTest.separateEmptyOwnersNeverShareWritableSlots:123 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedMultiValueOccurrenceTest.differential:9 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedOccurrenceArrayNativeTest.byteAllocationIsNativeAndZeroInitialized:39->requireConfiguredNativeProvider:21 real m3-arrays JNI library path required ==> expected: not <null>
+M3IndexedOccurrenceArrayNativeTest.intAllocationIsNativeAndZeroInitialized:48->requireConfiguredNativeProvider:21 real m3-arrays JNI library path required ==> expected: not <null>
+M3IndexedOccurrenceArrayNativeTest.longAllocationIsNativeAndZeroInitialized:57->requireConfiguredNativeProvider:21 real m3-arrays JNI library path required ==> expected: not <null>
+M3IndexedOccurrenceArrayNativeTest.objectAllocationIsNativeAndDetached:28->requireConfiguredNativeProvider:21 real m3-arrays JNI library path required ==> expected: not <null>
+M3IndexedTableReentrantSortTest.comparatorCannotPublishStalePhysicalIndexes:10 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableReverseOffsetTest.boundedRandomReversalsAndSlicesAgreeWithDetachedOracle:112 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableReverseOffsetTest.reverseDescriptorStillRejectsStaleOwnerGeneration:99 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableReverseOffsetTest.reverseFilteringAndSortingKeepLogicalEncounterOrder:67 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableReverseOffsetTest.reversedAndSlicedViewsRetainOnePhysicalIndexArray:45 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableTest.arraySlotRowColumnMasksAndState:12 » UnsatisfiedLink M3 array JNI library is not loaded
+M3JdkCollectionDifferentialTest.lateBindingTraversalsFollowListSetAndMapViews:59 » UnsatisfiedLink M3 array JNI library is not loaded
+M3JdkCollectionDifferentialTest.lockedMapAtomicCallbacksLoseNoUpdates:300 » UnsatisfiedLink M3 array JNI library is not loaded
+M3JdkCollectionDifferentialTest.sequencedNullAndAccessOrderOperationsMatchLinkedHashMap:106 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashBackshiftTest.deletionCompactsOnlyHashCoordinatesAcrossWraparound:43 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashMapCapacityTest.collisionsDeletionFreeSlotsAndSequencedViewsKeepExistingLaws:129 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashMapCapacityTest.freshKeysThroughHintDoNotResizeAnyPayloadOrIndexLane:107 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashMapCapacityTest.negativeHintsRejectAndEveryNonnegativeExtremeRemainsLazy:75 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashMapCapacityTest.privateReservationBoundsNeverOverflowOrAllocate:90 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.backedViewsAndCallbacks:134 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.backedViewsAndCallbacks:134->lambda$maps$0:41 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.collisionChainsRecyclingAndNull:151 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.differential:45 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.differential:45->lambda$maps$0:41 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.entryAndKeyViewsRemoveNullValuedMappings:233 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.sequencedAndReversedHashViews:163 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.sequencedEndpointsUseLiveAndDetachedEntriesCorrectly:206 » UnsatisfiedLink M3 array JNI library is not loaded
+M3NativeFiveLibrarySdkNoVendorTest.nativeFamiliesPreserveDistinctCardinality:31 » UnsatisfiedLink M3 array JNI library is not loaded
+M3NoRetainedStructuralEntryTest.liveEntriesAreFreshOutsideCanonicalStorageAndSnapshotsRemainFresh:65 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.callbacksAndCancellationRetainExceptionIdentityAndRefuseReentrancy:150 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.countOverflowAndInvalidInputLeaveCountsFlagsAndOrderUnchanged:53 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.differentialCountsNullCollisionsAndSlotReuse:24 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.distinctIteratorRemovalClearsFlagsAndRecycledSlots:72 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.flagWindowsAgreeWithScalarOracleForAllBitsOffsetsAndBothDirections:109->checkFlags:118 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.primitiveColumnsShareKeySlotsWithoutCountBoxesOrRetainedEntries:90 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectResidencyTest.residencyAnnotationIsClassRetainedAndExplicit:181 class file retains compile-time metadata ==> expected: <true> but was: <false>
+M3RelationForEachTest.preservesRelationTraversalContracts:12 » UnsatisfiedLink M3 array JNI library is not loaded
+M3SdkOwnerFactoryTest.ownerFactoriesAndSortedViewContracts:7 » UnsatisfiedLink M3 array JNI library is not loaded
+M3SequenceContractTest.orderedSetSequenceOperations:79 » UnsatisfiedLink M3 array JNI library is not loaded
+M3SequenceContractTest.streamsRetainEncounterOrderAndSortedComparator:95 » UnsatisfiedLink M3 array JNI library is not loaded
+
+## head failing set (identical to the base set)
+M3BagRankIndexTest.rankSelectRangesStableTiesAndNativeMasks:7 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ConcurrentContractTest.atomicHashAndTreeCompute:53 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ConcurrentContractTest.concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates:42 » UnsatisfiedLink M3 array JNI library is not loaded
+M3CountedBagTest.sourceSealedDifferentialContract:8 » UnsatisfiedLink M3 array JNI library is not loaded
+M3EntryFacadeCacheTest.compatibilityHookKeepsCallbackDemandAndExceptionIdentity:157 » UnsatisfiedLink M3 array JNI library is not loaded
+M3EntryFacadeCacheTest.identityKeyingAllowsNullAndEqualButDistinctKeys:57 » UnsatisfiedLink M3 array JNI library is not loaded
+M3EntryFacadeCacheTest.lfuPrefersHotEntriesAndBreaksTiesByRecency:31 » UnsatisfiedLink M3 array JNI library is not loaded
+M3EntryFacadeCacheTest.strongMapEntryFacadesAreFreshLiveCallerProjections:79 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FactoryContractTest.allFactoryFamiliesAreUsable:28 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FactoryContractTest.immutableAndJdkUtilityWrappers:58 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FootprintContractTest.emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers:33 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FootprintContractTest.listAndSetViewsWorkAcrossFirstInsertionClearAndReuse:112 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FootprintContractTest.mapViewsCreatedWhileEmptyRemainBackedAndFailFast:84 » UnsatisfiedLink M3 array JNI library is not loaded
+M3FootprintContractTest.separateEmptyOwnersNeverShareWritableSlots:123 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedMultiValueOccurrenceTest.differential:9 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedOccurrenceArrayNativeTest.byteAllocationIsNativeAndZeroInitialized:39->requireConfiguredNativeProvider:21 real m3-arrays JNI library path required ==> expected: not <null>
+M3IndexedOccurrenceArrayNativeTest.intAllocationIsNativeAndZeroInitialized:48->requireConfiguredNativeProvider:21 real m3-arrays JNI library path required ==> expected: not <null>
+M3IndexedOccurrenceArrayNativeTest.longAllocationIsNativeAndZeroInitialized:57->requireConfiguredNativeProvider:21 real m3-arrays JNI library path required ==> expected: not <null>
+M3IndexedOccurrenceArrayNativeTest.objectAllocationIsNativeAndDetached:28->requireConfiguredNativeProvider:21 real m3-arrays JNI library path required ==> expected: not <null>
+M3IndexedTableReentrantSortTest.comparatorCannotPublishStalePhysicalIndexes:10 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableReverseOffsetTest.boundedRandomReversalsAndSlicesAgreeWithDetachedOracle:112 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableReverseOffsetTest.reverseDescriptorStillRejectsStaleOwnerGeneration:99 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableReverseOffsetTest.reverseFilteringAndSortingKeepLogicalEncounterOrder:67 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableReverseOffsetTest.reversedAndSlicedViewsRetainOnePhysicalIndexArray:45 » UnsatisfiedLink M3 array JNI library is not loaded
+M3IndexedTableTest.arraySlotRowColumnMasksAndState:12 » UnsatisfiedLink M3 array JNI library is not loaded
+M3JdkCollectionDifferentialTest.lateBindingTraversalsFollowListSetAndMapViews:59 » UnsatisfiedLink M3 array JNI library is not loaded
+M3JdkCollectionDifferentialTest.lockedMapAtomicCallbacksLoseNoUpdates:300 » UnsatisfiedLink M3 array JNI library is not loaded
+M3JdkCollectionDifferentialTest.sequencedNullAndAccessOrderOperationsMatchLinkedHashMap:106 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashBackshiftTest.deletionCompactsOnlyHashCoordinatesAcrossWraparound:43 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashMapCapacityTest.collisionsDeletionFreeSlotsAndSequencedViewsKeepExistingLaws:129 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashMapCapacityTest.freshKeysThroughHintDoNotResizeAnyPayloadOrIndexLane:107 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashMapCapacityTest.negativeHintsRejectAndEveryNonnegativeExtremeRemainsLazy:75 » UnsatisfiedLink M3 array JNI library is not loaded
+M3LinkedHashMapCapacityTest.privateReservationBoundsNeverOverflowOrAllocate:90 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.backedViewsAndCallbacks:134 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.backedViewsAndCallbacks:134->lambda$maps$0:41 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.collisionChainsRecyclingAndNull:151 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.differential:45 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.differential:45->lambda$maps$0:41 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.entryAndKeyViewsRemoveNullValuedMappings:233 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.sequencedAndReversedHashViews:163 » UnsatisfiedLink M3 array JNI library is not loaded
+M3MapContractTest.sequencedEndpointsUseLiveAndDetachedEntriesCorrectly:206 » UnsatisfiedLink M3 array JNI library is not loaded
+M3NativeFiveLibrarySdkNoVendorTest.nativeFamiliesPreserveDistinctCardinality:31 » UnsatisfiedLink M3 array JNI library is not loaded
+M3NoRetainedStructuralEntryTest.liveEntriesAreFreshOutsideCanonicalStorageAndSnapshotsRemainFresh:65 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.callbacksAndCancellationRetainExceptionIdentityAndRefuseReentrancy:150 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.countOverflowAndInvalidInputLeaveCountsFlagsAndOrderUnchanged:53 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.differentialCountsNullCollisionsAndSlotReuse:24 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.distinctIteratorRemovalClearsFlagsAndRecycledSlots:72 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.flagWindowsAgreeWithScalarOracleForAllBitsOffsetsAndBothDirections:109->checkFlags:118 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectCountsTest.primitiveColumnsShareKeySlotsWithoutCountBoxesOrRetainedEntries:90 » UnsatisfiedLink M3 array JNI library is not loaded
+M3ObjectResidencyTest.residencyAnnotationIsClassRetainedAndExplicit:181 class file retains compile-time metadata ==> expected: <true> but was: <false>
+M3RelationForEachTest.preservesRelationTraversalContracts:12 » UnsatisfiedLink M3 array JNI library is not loaded
+M3SdkOwnerFactoryTest.ownerFactoriesAndSortedViewContracts:7 » UnsatisfiedLink M3 array JNI library is not loaded
+M3SequenceContractTest.orderedSetSequenceOperations:79 » UnsatisfiedLink M3 array JNI library is not loaded
+M3SequenceContractTest.streamsRetainEncounterOrderAndSortedComparator:95 » UnsatisfiedLink M3 array JNI library is not loaded
