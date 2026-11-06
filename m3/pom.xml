@@ -32,6 +32,7 @@
     <module>nlp</module>
     <module>algorithms</module>
     <module>lexicon/receiver</module>
+    <module>optane</module>
   </modules>
 
   <profiles>
