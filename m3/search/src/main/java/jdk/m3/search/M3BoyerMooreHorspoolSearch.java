@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BoyerMooreHorspoolSearch.java (blob 41b8b0627378) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BoyerMooreHorspoolSearch.java (blob b50f40da62bc) by M3_SEARCH_RELOCATE v1.
 // Modified 2026: lazily reuse the KMP overlap owner with safe publication.
 package jdk.m3.search;
 
@@ -107,8 +107,14 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
 
     @Override
     public int indexOf(ByteBuffer haystack, int fromIndex) {
+        // Existing unmonitored public search retains its exact algorithm and API.
+        return indexOfBuffer(haystack, fromIndex, null);
+    }
+
+    /** Share one BMH scan, with cancellation checks only for monitored callers. */
+    private int indexOfBuffer(ByteBuffer haystack, int fromIndex, M3ProgressMonitor monitor) {
         if (haystack == null) throw new NullPointerException("haystack");
-        /* Absolute indexed reads preserve the caller's position, limit and mark. */
+        /* Absolute indexed reads preserve position, limit and mark. */
         int base = haystack.position();
         int length = haystack.remaining();
         int start = Math.max(0, fromIndex);
@@ -116,10 +122,13 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
         long budget = 4L * (length - start);
         long compared = 0L;
         int cursor = start + needle.length - 1;
+        int work = 0;
         while (cursor < length) {
+            if (monitor != null && (++work & 4095) == 0) monitor.checkCanceled();
             int pattern = needle.length - 1;
             int candidate = cursor;
             while (pattern >= 0 && haystack.get(base + candidate) == needle[pattern]) {
+                if (monitor != null && (++work & 4095) == 0) monitor.checkCanceled();
                 candidate--;
                 pattern--;
             }
@@ -137,8 +146,28 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
 
     @Override
     public int lastIndexOf(ByteBuffer haystack, int fromIndex) {
+        // The existing unmonitored reverse API retains its exact BMH behavior.
+        return lastIndexOfBuffer(haystack, fromIndex, null);
+    }
+
+    @Override
+    public int lastIndexOf(ByteBuffer haystack, int fromIndex, M3ProgressMonitor monitor) {
+        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+        checked.checkCanceled();
+        int result = lastIndexOfBuffer(haystack, fromIndex, checked);
+        checked.checkCanceled();
+        return result;
+    }
+
+    /**
+     * Original reverse BMH shifts and comparisons, with an optional bounded
+     * work budget for monitored callers only. Polls within near-full matches
+     * as well as the candidate loop; absolute indexed reads never move the
+     * caller's position, limit or mark.
+     */
+    private int lastIndexOfBuffer(ByteBuffer haystack, int fromIndex,
+            M3ProgressMonitor monitor) {
         if (haystack == null) throw new NullPointerException("haystack");
-        /* Absolute indexed reads preserve the caller's position, limit and mark. */
         int base = haystack.position();
         int length = haystack.remaining();
         int maximum = length - needle.length;
@@ -146,11 +175,14 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
         int candidate = Math.min(fromIndex, maximum);
         long budget = 4L * ((long) candidate + needle.length);
         long compared = 0L;
+        int work = 0;
         while (candidate >= 0) {
+            if (monitor != null && (++work & 4095) == 0) monitor.checkCanceled();
             int pattern = 0;
             int text = candidate;
             while (pattern < needle.length
                     && haystack.get(base + text) == needle[pattern]) {
+                if (monitor != null && (++work & 4095) == 0) monitor.checkCanceled();
                 text++;
                 pattern++;
             }
@@ -225,7 +257,7 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
         int lastStart = haystack.remaining() - needle.length;
         long matchedWork = 0L;
         while (next <= lastStart && count < maxMatches) {
-            int found = indexOf(haystack, next, monitor);
+            int found = indexOfBuffer(haystack, next, monitor);
             if (found < 0) break;
             receiver.accept(found);
             count++;
