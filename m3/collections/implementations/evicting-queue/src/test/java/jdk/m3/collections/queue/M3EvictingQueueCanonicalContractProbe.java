@@ -149,7 +149,8 @@ public final class M3EvictingQueueCanonicalContractProbe {
         for (int capacity : extremes) {
             expansions += verifyGrowthSequence(growth, storage, capacity);
         }
-        require(expansions > 700_000L, "growth oracle did not exercise enough expansions");
+        //FLLDCIM: MRL - expansion count of the geometric-growth rule (donor README: 453,002; was > 700,000 for 1.5x growth); recipe qualification/collections-atoms-20261106/apply.py v1
+        require(expansions == 453_002L, "growth oracle expansion count drifted from the geometric-growth rule");
         System.out.println("M3_EVICTING_GROWTH_ARITHMETIC_PASS configurations=20496 expansions="
                 + expansions);
     }
