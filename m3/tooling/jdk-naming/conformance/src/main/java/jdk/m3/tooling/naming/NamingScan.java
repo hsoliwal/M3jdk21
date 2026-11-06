@@ -75,12 +75,14 @@ public final class NamingScan {
         }
         String name = path.substring(path.lastIndexOf('/') + 1);
         String suffix = name.lastIndexOf('.') < 0 ? "" : name.substring(name.lastIndexOf('.')).toLowerCase(Locale.ROOT);
-        return TEXT_SUFFIXES.contains(suffix) || name.equals("pom.xml") || isServiceDescriptor(path);
+        return TEXT_SUFFIXES.contains(suffix) || name.equals("pom.xml")
+                || isServiceDescriptor(path);
     }
 
     /**
-     * A {@code java.util.ServiceLoader} descriptor ({@code META-INF/services/<service>}): text without a suffix, one
-     * provider name per line; in scope by its directory, as in {@code jdk_naming.py} (is_service_descriptor).
+     * A {@code java.util.ServiceLoader} descriptor ({@code META-INF/services/<service>}): text
+     * without a suffix, one provider name per line; in scope by its directory, as in
+     * {@code jdk_naming.py} (is_service_descriptor).
      */
     static boolean isServiceDescriptor(String path) {
         return path.contains(SERVICE_DESCRIPTOR_DIR);
