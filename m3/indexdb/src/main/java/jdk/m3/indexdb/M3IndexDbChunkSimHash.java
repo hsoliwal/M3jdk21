@@ -104,6 +104,15 @@ public final class M3IndexDbChunkSimHash {
         return Long.bitCount(simHash64() ^ other.simHash64());
     }
 
+    /**
+     * Hamming distance of two final 64-bit signatures: the candidate-discovery metric of {@link M3HammingTopK}.
+     * The vote summaries above remain the composable fingerprint owner; a distance alone is never an identity.
+     */
+    //FLLDCIM: RELOCATE - receives SimHash64.distance(long,long) of the donor through the MEMBER row of m3/indexdb/recipe/hamming-topk-20261106/RELOCATION_MAP.tsv
+    public static int hammingDistance(long left, long right) {
+        return Long.bitCount(left ^ right);
+    }
+
     /** Defensive copy for indexing, persistence or an independent implementation oracle. */
     public long[] voteCopy() { return votes.clone(); }
     public String featureDomain() { return featureDomain; }
