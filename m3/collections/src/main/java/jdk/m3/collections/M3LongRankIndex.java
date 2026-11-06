@@ -203,6 +203,17 @@ public final class M3LongRankIndex {
         return 1 + values.length - upperBound(value);
     }
 
+    //FLLDCIM: MRL - census P2-074, crate m3jdk21-lc315-count-smaller-20261026 (donor blob ce7f53f1a4c6): LC 315 facade
+    /**
+     * LeetCode #315 primitive count-smaller-after-self on original encounter order.
+     * Unlike this type's sorted snapshots, input here may be completely unordered.
+     * The first-party batch kernel uses primitive physical indexes and has no
+     * per-element entries or caller-visible payload mutation.
+     */
+    public static int[] countSmallerAfterSelf(long[] encounterOrder) {
+        return M3LongRankBatchNative.countSmallerRight(encounterOrder);
+    }
+
     /** Java or explicitly enabled JNI batched lower bounds, without per-query boxing. */
     public int[] lowerBounds(long[] queries) {
         return M3LongRankBatchNative.lowerBounds(values, queries);
@@ -242,6 +253,54 @@ public final class M3LongRankIndex {
 
     public long[] toArray() {
         return values.clone();
+    }
+
+    //FLLDCIM: MRL - census P2-074, crate m3jdk21-lc719-pair-distance-java-20261026 (donor blob 0f9763abfa67): LC 719 pair-distance facade
+    /**
+     * LeetCode #719 distance-predicate count over all unordered pairs of
+     * occurrence indexes i &lt; j in the immutable sorted owner. Each duplicate
+     * occurrence participates; output is long to avoid int overflow.
+     * Nonnegative thresholds are signed-long distances. Differences greater
+     * than Long.MAX_VALUE are excluded, without subtract/abs overflow.
+     */
+    public long pairCountWithinDistance(long maxDistance) {
+        return M3LongRankBatchNative.pairDistanceCountJava(values, maxDistance);
+    }
+
+    /**
+     * Batched distance-predicate counts. The original m3rankbatch JNI kernel
+     * is optionally used for large batches; each threshold produces one long.
+     * No per-pair objects or Java callbacks cross the JNI boundary.
+     */
+    public long[] pairCountsWithinDistances(long[] maxDistances) {
+        return M3LongRankBatchNative.pairDistanceCounts(values, maxDistances);
+    }
+
+    //FLLDCIM: MRL - census P2-074, crate m3jdk21-lc719-kth-pair-distance-20261026 (donor blob 6ba52962e3fd): LC 719 k-th pair-distance facade
+    /**
+     * LeetCode #719: one-based k-th smallest absolute difference among all
+     * unordered occurrence pairs in the original immutable signed-long
+     * snapshot. Duplicate physical occurrences remain independent pairs.
+     *
+     * <p>Distances above Long.MAX_VALUE have no signed-long representation
+     * and fail with ArithmeticException instead of wrapping. Invalid ranks
+     * fail with IndexOutOfBoundsException. Uses the original m3rankbatch
+     * Java/native primitive kernel; no Java callback crosses JNI.</p>
+     */
+    public long kthPairDistance(long oneBasedRank) {
+        return M3LongRankBatchNative.kthPairDistance(values, oneBasedRank);
+    }
+
+    /** Selects multiple one-based pair-distance ranks without per-pair objects. */
+    public long[] kthPairDistances(long[] oneBasedRanks) {
+        return M3LongRankBatchNative.kthPairDistances(values, oneBasedRanks);
+    }
+
+    /** Writes selected pair distances into caller-owned output offsets. */
+    public void kthPairDistancesInto(long[] ranks, int rankFrom, int length,
+            long[] output, int outputFrom) {
+        M3LongRankBatchNative.kthPairDistancesInto(
+                values, ranks, rankFrom, length, output, outputFrom, false);
     }
 
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */
