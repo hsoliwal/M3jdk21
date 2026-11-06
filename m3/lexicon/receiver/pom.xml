@@ -8,10 +8,11 @@
   <groupId>com.m3</groupId>
   <artifactId>m3-lexicon-receiver</artifactId>
   <version>0.1.0-SNAPSHOT</version>
-  <name>M3Lexicons receiver: image verifiers, word ids, separator lexicons, word-id regex rows</name>
+  <name>M3Lexicons receiver: image verifiers, word ids, separator lexicons, word-id regex rows, interned token substrate</name>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
   </properties>
   <dependencies>
     <!-- Differential oracles only (test scope); sources are vendored under m3/vendor/third_party. -->
@@ -25,6 +26,13 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-csv</artifactId>
       <version>1.12.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- recipe/interned-language-20261106: the substrate test runs in the test phase (surefire), the proofs stay exec:java -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -42,6 +50,29 @@
             <arg>-Werror</arg>
             <arg>-proc:none</arg>
           </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <!-- M3InternedLanguageSubstrateTest (JUnit 5, test phase); the *Proof mains below are not matched by the default includes -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <!-- the module name the lane uses on the module path until a module-info.java is admitted (one package, jdk.m3.lexicon) -->
+              <Automatic-Module-Name>org.m3jdk.lexicon</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
         </configuration>
       </plugin>
       <plugin>
