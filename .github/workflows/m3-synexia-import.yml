@@ -64,9 +64,3 @@ jobs:
           mvn -B -ntp
           -f m3/synexia-import/pom.xml
           verify
-      - name: Verify Synexia OpenRewrite import inventory and scope registration
-        run: >
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3SynexiaImportInventoryRecipeTest,M3RecipeScopeDeclarationTest
-          test

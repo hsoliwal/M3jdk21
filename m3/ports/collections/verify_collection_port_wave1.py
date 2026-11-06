@@ -14,6 +14,10 @@ ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[2]
 PROVENANCE = ROOT / "PROVENANCE.tsv"
 RECIPE = ROOT / "recipe.json"
+# Standalone (2026-10-31): the donor repository is lineage, kept once in the standalone ledger and never
+# fetched; this verifier compares provenance against that ledger row (m3/tooling/standalone/SYNEXIA_REFS.tsv).
+LINEAGE = REPO / "m3" / "tooling" / "standalone" / "LINEAGE_SOURCES.tsv"
+LINEAGE_KEY = "synexia"
 
 EXPECTED = {
     "m3/ports/collections/src/main/java/com/m3/util/M3DenseHash.java":
@@ -40,6 +44,15 @@ def fail(message: str) -> None:
     raise ValueError(message)
 
 
+def lineage_repository() -> str:
+    """The donor repository of this port, read from the standalone lineage ledger."""
+    with LINEAGE.open("r", encoding="utf-8", newline="") as stream:
+        rows = {row["key"]: row for row in csv.DictReader(stream, delimiter="\t")}
+    if LINEAGE_KEY not in rows or not rows[LINEAGE_KEY].get("repository"):
+        fail(f"missing lineage source: {LINEAGE_KEY}")
+    return rows[LINEAGE_KEY]["repository"]
+
+
 def provenance_rows() -> dict[str, dict[str, str]]:
     with PROVENANCE.open("r", encoding="utf-8", newline="") as stream:
         rows = list(csv.DictReader(stream, delimiter="\t"))
@@ -50,11 +63,12 @@ def provenance_rows() -> dict[str, dict[str, str]]:
     if not rows or set(rows[0]) != required:
         fail("invalid provenance header")
     result: dict[str, dict[str, str]] = {}
+    repository = lineage_repository()
     for row in rows:
         path = row["targetPath"]
         if path in result:
             fail(f"duplicate provenance target: {path}")
-        if row["sourceRepository"] != "hsoliwal/com.synexia":
+        if row["sourceRepository"] != repository:
             fail(f"unexpected source repository: {path}")
         if row["sourceCommit"] != SOURCE_COMMIT:
             fail(f"source commit drift: {path}")
@@ -86,7 +100,7 @@ def verify_recipe() -> None:
     data = json.loads(RECIPE.read_text(encoding="utf-8"))
     expected = {
         "schema": "M3JDK_COLLECTION_PORT_WAVE1_V1",
-        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_repository": lineage_repository(),
         "canonical_source_commit": SOURCE_COMMIT,
         "canonical_source_pr": 9778,
         "source_selection_recipe": "com.synexia.rewrite.M3CollectionFacadeWave1",

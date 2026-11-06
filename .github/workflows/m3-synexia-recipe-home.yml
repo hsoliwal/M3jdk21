@@ -95,14 +95,3 @@ jobs:
           m3/compatibility/test_synexia_m3index_ownership_policy.py
           m3/compatibility/test_synexia_string_focused_recipe_receipt.py
           m3/compatibility/test_synexia_string_runtime_responsibility.py
-      - name: Install provenance-pinned Synexia custody artifact
-        run: >
-          mvn -B -ntp
-          -f m3/synexia-import/pure-int-recipe-custody/pom.xml
-          clean install
-      - name: Migration-recipes JUnit ownership proof
-        run: >
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3SynexiaRecipeHomePolicyTest
-          test

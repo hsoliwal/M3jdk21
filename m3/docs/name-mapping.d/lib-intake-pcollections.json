@@ -1,0 +1,39 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (vendored source); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.pcollections",
+  "target_path": "m3/vendor/third_party-m3/relocated/pcollections",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/pcollections",
+  "source_coordinate": "",
+  "source_version": "5.0.0-m3-source-1",
+  "source_license_origin": "",
+  "source_packages": [
+    "org.pcollections"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.pcollections"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/pcollections/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/pcollections/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/pcollections",
+  "mappings": [
+    {
+      "source": "org.pcollections and subpackages",
+      "target": "com.m3.lib.pcollections and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.pcollections JMOD; type names retained"
+    },
+    {
+      "source": "org.pcollections",
+      "target": "com.m3.lib.pcollections",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

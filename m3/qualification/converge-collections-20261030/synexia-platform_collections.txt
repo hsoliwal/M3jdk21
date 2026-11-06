@@ -1,0 +1,15 @@
+synexia-audit/src/main/java/com/synexia/audit/util/AuditEventMapper.java
+synexia-billing/src/main/java/com/synexia/billing/mapper/BillingAccountMapper.java
+synexia-billing/src/main/java/com/synexia/billing/mapper/InvoiceMapper.java
+synexia-billing/src/main/java/com/synexia/billing/mapper/PaymentMapper.java
+synexia-billing/src/main/java/com/synexia/billing/mapper/UsageMeterMapper.java
+synexia-migration/src/main/java/com/synexia/migration/dto/MigrationMapper.java
+synexia-queue/src/main/java/com/synexia/queue/domain/TaskQueue.java
+synexia-queue/src/main/java/com/synexia/queue/repo/TaskQueueRepo.java
+synexia-search/src/main/java/com/synexia/search/controller/SearchIndexController.java
+synexia-search/src/main/java/com/synexia/search/dto/SearchIndexRequest.java
+synexia-search/src/main/java/com/synexia/search/dto/SearchIndexResponse.java
+synexia-search/src/main/java/com/synexia/search/entity/SearchIndex.java
+synexia-search/src/main/java/com/synexia/search/repository/SearchIndexRepository.java
+synexia-search/src/main/java/com/synexia/search/util/InvertedIndex.java
+synexia-search/src/main/java/com/synexia/search/util/PrefixTrie.java

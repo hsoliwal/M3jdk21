@@ -1,0 +1,244 @@
+package @WPKG@.adapter;
+
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.swt.widgets.Scale;
+import org.eclipse.swt.widgets.ScrollBar;
+import org.eclipse.swt.widgets.Scrollable;
+import org.eclipse.swt.widgets.Slider;
+import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.Tree;
+
+/**
+ * The closed set of SWT measure kinds (pattern M3P-ADAPTER-1, spec/ADAPTER_KINDS.tsv). Row kinds read counts,
+ * row heights and top indices; bounded kinds (children, tabs, tool items) read item bounds; SURFACE and PLANE are
+ * one item covering the host's client area. No kind creates item objects of virtual widgets.
+ */
+//FLLDCIM: DOOP — int answers from the widget's own lanes; no per-item objects
+public enum M3ViewportKind implements M3ViewportMeasure {
+	/** SWT Table rows below the header. */
+	TABLE(false) {
+		@Override public int count(Object w, Control h) { return ((Table) w).getItemCount(); }
+		@Override public int extent(Object w, Control h) { return Math.max(1, ((Table) w).getItemHeight()); }
+		@Override public int first(Object w, Control h) { return ((Table) w).getTopIndex(); }
+		@Override int origin(Object w, Control h) { return ((Table) w).getHeaderVisible() ? ((Table) w).getHeaderHeight() : 0; }
+	},
+	/** SWT Tree top-level rows below the header. */
+	TREE(false) {
+		@Override public int count(Object w, Control h) { return ((Tree) w).getItemCount(); }
+		@Override public int extent(Object w, Control h) { return Math.max(1, ((Tree) w).getItemHeight()); }
+		@Override public int first(Object w, Control h) { return ((Tree) w).getTopItem() == null ? 0 : Math.max(0, ((Tree) w).indexOf(((Tree) w).getTopItem())); }
+		@Override int origin(Object w, Control h) { return ((Tree) w).getHeaderVisible() ? ((Tree) w).getHeaderHeight() : 0; }
+	},
+	/** SWT List rows. */
+	LIST(false) {
+		@Override public int count(Object w, Control h) { return ((List) w).getItemCount(); }
+		@Override public int extent(Object w, Control h) { return Math.max(1, ((List) w).getItemHeight()); }
+		@Override public int first(Object w, Control h) { return ((List) w).getTopIndex(); }
+	},
+	/** SWT Text lines. */
+	TEXT(false) {
+		@Override public int count(Object w, Control h) { return ((Text) w).getLineCount(); }
+		@Override public int extent(Object w, Control h) { return Math.max(1, ((Text) w).getLineHeight()); }
+		@Override public int first(Object w, Control h) { return ((Text) w).getTopIndex(); }
+	},
+	/** StyledText lines. */
+	STYLED(false) {
+		@Override public int count(Object w, Control h) { return ((StyledText) w).getLineCount(); }
+		@Override public int extent(Object w, Control h) { return Math.max(1, ((StyledText) w).getLineHeight()); }
+		@Override public int first(Object w, Control h) { return ((StyledText) w).getTopIndex(); }
+	},
+	/** Vertical scroll bar units: the unit extent is the viewport over the thumb. */
+	SCROLL(false) {
+		@Override public int count(Object w, Control h) { ScrollBar b = bar(h); return b == null ? 0 : b.getMaximum() - b.getMinimum(); }
+		@Override public int extent(Object w, Control h) { ScrollBar b = bar(h); return Math.max(1, area(h).height / Math.max(1, b == null ? 1 : b.getThumb())); }
+		@Override public int first(Object w, Control h) { ScrollBar b = bar(h); return b == null ? 0 : b.getSelection() - b.getMinimum(); }
+	},
+	/** Combo drop-down rows; an item redraw damages the field. */
+	COMBO(false) {
+		@Override public int count(Object w, Control h) { return ((Combo) w).getItemCount(); }
+		@Override public int extent(Object w, Control h) { return Math.max(1, ((Combo) w).getItemHeight()); }
+		@Override public int first(Object w, Control h) { return 0; }
+		@Override public int viewport(Object w, Control h) { return ((Combo) w).getVisibleItemCount() * extent(w, h); }
+		@Override public void rect(Object w, Control h, int item, int[] out) { SURFACE.rect(w, h, item >= 0 && item < count(w, h) ? 0 : 1, out); }
+	},
+	/** Value positions of Scale, Slider, Spinner and ProgressBar; an item redraw damages the surface. */
+	RANGE(false) {
+		@Override public int count(Object w, Control h) { int[] r = range(w); return r[1] - r[0] + 1; }
+		@Override public int extent(Object w, Control h) { return Math.max(1, area(h).width / Math.max(1, count(w, h))); }
+		@Override public int first(Object w, Control h) { int[] r = range(w); return r[2] - r[0]; }
+		@Override public int visible(Object w, Control h) { return Math.min(1, count(w, h)); }
+		@Override public int viewport(Object w, Control h) { return area(h).width; }
+		@Override public void rect(Object w, Control h, int item, int[] out) { SURFACE.rect(w, h, item >= 0 && item < count(w, h) ? 0 : 1, out); }
+	},
+	/** Tab headers of a CTabFolder. */
+	TABS(true) {
+		@Override public int count(Object w, Control h) { return ((CTabFolder) w).getItemCount(); }
+		@Override Rectangle bounds(Object w, Control h, int i) { return ((CTabFolder) w).getItem(i).getBounds(); }
+	},
+	/** Tool items of a ToolBar. */
+	TOOLS(true) {
+		@Override public int count(Object w, Control h) { return ((ToolBar) w).getItemCount(); }
+		@Override Rectangle bounds(Object w, Control h, int i) { return ((ToolBar) w).getItem(i).getBounds(); }
+	},
+	/** Child controls of a composite (panels, splitters, accordions, focus cycles, layouts). */
+	CHILDREN(true) {
+		@Override public int count(Object w, Control h) { return ((Composite) h).getChildren().length; }
+		@Override Rectangle bounds(Object w, Control h, int i) { return ((Composite) h).getChildren()[i].getBounds(); }
+	},
+	/** Resolved per instance: SCROLL with a vertical bar, CHILDREN with children, else SURFACE. */
+	AUTO(false) {
+		@Override public int count(Object w, Control h) { return of(h).count(w, h); }
+		@Override public int extent(Object w, Control h) { return of(h).extent(w, h); }
+		@Override public int first(Object w, Control h) { return of(h).first(w, h); }
+		@Override public int visible(Object w, Control h) { return of(h).visible(w, h); }
+		@Override public int viewport(Object w, Control h) { return of(h).viewport(w, h); }
+		@Override public void rect(Object w, Control h, int item, int[] out) { of(h).rect(w, h, item, out); }
+	},
+	/** One surface: the host's client area. */
+	SURFACE(false),
+	/** One plane over the host (menu, tool tip, dialog, tray, display, animator). */
+	PLANE(false);
+
+	private final boolean bounded;
+
+	M3ViewportKind(boolean bounded) {
+		this.bounded = bounded;
+	}
+
+	/** Item count of the one-item kinds. */
+	@Override
+	public int count(Object w, Control h) {
+		return 1;
+	}
+
+	/** Row kinds override; bounded kinds average their item extents; one-item kinds span the viewport. */
+	@Override
+	public int extent(Object w, Control h) {
+		int n = count(w, h);
+		if (!bounded || n == 0) {
+			return Math.max(1, viewport(w, h));
+		}
+		long sum = 0;
+		for (int i = 0; i < n; i++) {
+			sum += axis(bounds(w, h, i));
+		}
+		return (int) Math.max(1, sum / n);
+	}
+
+	@Override
+	public int first(Object w, Control h) {
+		for (int i = 0, n = bounded ? count(w, h) : 0; i < n; i++) {
+			if (shown(h, bounds(w, h, i))) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public int visible(Object w, Control h) {
+		if (bounded) {
+			int v = 0;
+			for (int i = first(w, h), n = count(w, h); i < n && shown(h, bounds(w, h, i)); i++) {
+				v++;
+			}
+			return v;
+		}
+		int e = extent(w, h), n = count(w, h) - first(w, h);
+		return Math.max(0, Math.min(n, (viewport(w, h) + e - 1) / e));
+	}
+
+	@Override
+	public int viewport(Object w, Control h) {
+		Rectangle ca = bounded ? frame(h) : area(h);
+		return Math.max(0, (bounded && horizontal() ? ca.width : ca.height) - origin(w, h));
+	}
+
+	@Override
+	public void rect(Object w, Control h, int item, int[] out) {
+		Rectangle ca = area(h);
+		if (bounded || count(w, h) == 1) {
+			Rectangle b = item < 0 || item >= count(w, h) ? new Rectangle(0, 0, 0, 0) : bounded ? bounds(w, h, item) : ca;
+			box(out, b.x, b.y, b.width, b.height);
+			return;
+		}
+		int f = first(w, h), e = extent(w, h);
+		boolean shown = item >= f && item < f + visible(w, h);
+		box(out, 0, shown ? origin(w, h) + (item - f) * e : 0, shown ? ca.width : 0, shown ? e : 0);
+	}
+
+	/** Pixels before the first row (a header). */
+	int origin(Object w, Control h) {
+		return 0;
+	}
+
+	/** Item bounds of the bounded kinds. */
+	Rectangle bounds(Object w, Control h, int i) {
+		throw new UnsupportedOperationException(name());
+	}
+
+	/** Bounded kinds lay their items along x except child lists, which follow the host's longer side. */
+	boolean horizontal() {
+		return this == TABS || this == TOOLS;
+	}
+
+	private int axis(Rectangle b) {
+		return horizontal() ? b.width : b.height;
+	}
+
+	private static boolean shown(Control h, Rectangle b) {
+		return b.width > 0 && b.height > 0 && b.intersects(frame(h));
+	}
+
+	private static void box(int[] out, int x, int y, int w, int h) {
+		out[0] = x;
+		out[1] = y;
+		out[2] = w;
+		out[3] = h;
+	}
+
+	/** The host's own area at the origin (item bounds of tabs, tool items and children live in it). */
+	static Rectangle frame(Control h) {
+		return new Rectangle(0, 0, h.getSize().x, h.getSize().y);
+	}
+
+	/** Client area of a scrollable host, else the host's size at the origin. */
+	static Rectangle area(Control h) {
+		return h instanceof Scrollable s ? s.getClientArea() : new Rectangle(0, 0, h.getSize().x, h.getSize().y);
+	}
+
+	static ScrollBar bar(Control h) {
+		return h instanceof Scrollable s ? s.getVerticalBar() : null;
+	}
+
+	/** The AUTO resolution for one host. */
+	static M3ViewportKind of(Control h) {
+		if (bar(h) != null && bar(h).getMaximum() > bar(h).getThumb()) {
+			return SCROLL;
+		}
+		return h instanceof Composite c && c.getChildren().length > 0 ? CHILDREN : SURFACE;
+	}
+
+	/** {minimum, maximum, selection} of the value widgets. */
+	static int[] range(Object w) {
+		if (w instanceof Scale s) {
+			return new int[] { s.getMinimum(), s.getMaximum(), s.getSelection() };
+		} else if (w instanceof Slider s) {
+			return new int[] { s.getMinimum(), s.getMaximum(), s.getSelection() };
+		} else if (w instanceof Spinner s) {
+			return new int[] { s.getMinimum(), s.getMaximum(), s.getSelection() };
+		}
+		ProgressBar p = (ProgressBar) w;
+		return new int[] { p.getMinimum(), p.getMaximum(), p.getSelection() };
+	}
+}

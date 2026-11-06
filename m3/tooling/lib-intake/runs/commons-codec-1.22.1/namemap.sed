@@ -1,0 +1,1 @@
+s/org\.apache\.commons\.codec([^A-Za-z0-9_$]|$)/com.m3.lib.codec\1/g;s#org/apache/commons/codec([^A-Za-z0-9_$]|$)#com/m3/lib/codec\1#g;

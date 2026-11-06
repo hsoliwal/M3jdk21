@@ -1,0 +1,1 @@
+s/org\.pcollections([^A-Za-z0-9_$]|$)/com.m3.lib.pcollections\1/g;s#org/pcollections([^A-Za-z0-9_$]|$)#com/m3/lib/pcollections\1#g;

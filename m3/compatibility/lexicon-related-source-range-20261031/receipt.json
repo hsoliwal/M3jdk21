@@ -1,0 +1,87 @@
+{
+  "schema": "M3_RELATED_SOURCE_RANGE_RECEIVING_CANDIDATE_V1",
+  "status": "BOUNDED_JAVA_CANDIDATE_NOT_RUNTIME_ADMISSION",
+  "date": "2026-10-31",
+  "mappingId": "synexia.lexicons.related-source-range",
+  "sourceRevision": "6e9b55d50693a64ef16ca29f7ad7d9953931b182",
+  "targetBaseRevision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
+  "sourceRecipe": {
+    "repository": "hsoliwal/com.synexia",
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018",
+    "recipe": "com.synexia.m3jdk.RelatedSourceRange20261018",
+    "qualificationIdentity": "m3-related-source-range-current-metadata-20261031-v1",
+    "sourceSeal": "f254d33a2b39391b75611c4dab7dceb7406837e3d46c821b3a07b035122bbcf0",
+    "evidencePath": "synexia-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018/qualification/current-related-20261031",
+    "receiptSha256": "077b03e52a2c48d8080f7f76eef66456aefe515d5627200f1945d885005fdc09"
+  },
+  "result": {
+    "path": "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java",
+    "preimageSha256": "76fbadbc182633ac22c449924335b7636c530cd2a8dc13fb0dc2d56a29afb42c",
+    "postimageSha256": "38102366fa86ca63f3d00c78cd34effae7bc34ce0071544164ca74df97025b9e",
+    "postimageGitBlobSha1": "8ca7c18c9ce8bf43a1e72e04b67204d29b1114e9",
+    "origin": "Actual OpenRewrite SDK Results; never manually patched"
+  },
+  "executed": {
+    "sdkGroups": 5,
+    "sdkFailures": 0,
+    "sdkErrors": 0,
+    "sdkSkipped": 0,
+    "changedFiles": 1,
+    "fixedPointChanges": 0,
+    "baselineOracleChecks": 3645,
+    "candidateOracleChecks": 3645,
+    "oracleRows": 1136,
+    "oracleSourceGroups": 268,
+    "publicProtectedApiEquality": true,
+    "currentCoreSourcesCompiled": 26,
+    "strictCompiler": "Java 21 -Xlint:all -Werror -implicit:none; empty successful compiler logs",
+    "existingTargetTests": [
+      {
+        "id": "SharedLexiconFamilySidecarCatalogTest",
+        "baselineChecks": 12,
+        "candidateChecks": 12
+      },
+      {
+        "id": "SharedLexiconCatalogFamilyAdmissionTest",
+        "baselineChecks": 17,
+        "candidateChecks": 17
+      }
+    ],
+    "candidateCurrent26OracleChecks": 3645
+  },
+  "priorFailuresRetained": [
+    "Incomplete input closure refused; all 49 real inputs subsequently recovered.",
+    "Historical input seals refused current postimages; new metadata-only identity preserves all original paths and old refusal.",
+    "Initial direct current-core compile refused an absent empty-classpath directory; corrected launch only, no compiler/test weakening."
+  ],
+  "rights": "Apache-2.0; retain original first-party copyright. No external code or language data copied.",
+  "storageOrNativeChanges": false,
+  "generation": {
+    "newProductGenerationCalls": 0,
+    "mode": "Replay existing qualified recipe",
+    "chromeLocalAvailability": "unavailable",
+    "newGeneration": "HOLD"
+  },
+  "notRun": [
+    "Installed source-built M3JDK21 image and complete runtime acceptance",
+    "Authoritative naming preflight/receiving approval",
+    "Whole repository, JNI/HotSpot/JIT/GC/CDS/JCK and other platforms",
+    "Performance or allocation benchmark",
+    "Complete lexicon/dependency/resource migration"
+  ],
+  "phaseAdvanced": false,
+  "recipeMachineryIncluded": false,
+  "donorDeletion": false,
+  "mappingSchema": {
+    "newRecord": "PASS",
+    "wholeMap": "BASELINE_FAILURE_UNCHANGED",
+    "baselineErrors": 15,
+    "candidateErrors": 15,
+    "unchangedAffectedExistingRecordIndexes": [
+      64,
+      65,
+      66
+    ],
+    "schemaChanged": false
+  }
+}

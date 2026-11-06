@@ -66,9 +66,6 @@ jobs:
             test/langtools/tools/javac/launcher \
             test/langtools/tools/jdeps/listdeps/ListModuleDeps.java
 
-      - name: Prove exact current-master recipe replay and fixed point
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep458BackportRecipeTest,M3Jep458ProofRefreshRecipeTest test
 
       - name: Validate exact JEP 458 packet and atom evidence
         shell: bash

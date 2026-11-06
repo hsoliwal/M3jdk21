@@ -1,0 +1,97 @@
+package @PKG@;
+
+/**
+ * Light and dark palettes over the corpus {@code --vs-*} slots (pattern M3P-CORE-1).
+ * <p>
+ * Slots BG..SURFACE, radius and padding are the values of {@code src/index.css} of the web-UI corpus
+ * ({@code :root} and {@code html.dark}); DANGER..INFO are Tailwind 600/400 shades (shapes only, MIT).
+ * Colours are packed {@code 0xRRGGBB} ints; variant and state resolution is pure integer arithmetic.
+ * </p>
+ */
+//FLLDCIM: DOOP — a theme is an int[] palette, not objects
+public final class M3WebTheme {
+	public static final int BG = 0, FG = 1, MUTED = 2, BORDER = 3, ACCENT = 4, ACCENT2 = 5, SURFACE = 6, DANGER = 7, SUCCESS = 8,
+			WARNING = 9, INFO = 10, SHADOW = 11, SLOTS = 12;
+	public static final int RADIUS = 14, PAD = 20;
+	private static final int[] LIGHT = { 0xf7f8fb, 0x0f172a, 0x64748b, 0xe2e8f0, 0x6366f1, 0xa855f7, 0xffffff, 0xdc2626, 0x16a34a,
+			0xd97706, 0x0284c7, 0x0f172a };
+	private static final int[] DARK = { 0x0b1020, 0xe2e8f0, 0x94a3b8, 0x1f2937, 0x818cf8, 0xc084fc, 0x111827, 0xf87171, 0x4ade80,
+			0xfbbf24, 0x38bdf8, 0x000000 };
+	private static final int[] VARIANT_SLOT = { SURFACE, ACCENT, ACCENT2, SURFACE, BG, DANGER, SUCCESS, WARNING, INFO, ACCENT };
+	private final int[] slots = LIGHT.clone();
+	private boolean dark;
+
+	/** Selects the dark ({@code true}) or light palette; custom slot values are replaced. */
+	public void setDark(boolean on) {
+		dark = on;
+		System.arraycopy(on ? DARK : LIGHT, 0, slots, 0, SLOTS);
+	}
+
+	public boolean isDark() {
+		return dark;
+	}
+
+	/** Returns the colour of a slot. */
+	public int slot(int slot) {
+		return slots[slot];
+	}
+
+	/** Overrides one slot (a theme provider writes here). */
+	public void setSlot(int slot, int rgb) {
+		slots[slot] = rgb & 0xffffff;
+	}
+
+	/** Background of a variant in a state. */
+	public int fill(int variant, int state) {
+		int base = variant == M3WebStates.V_SUBTLE ? mix(slots[ACCENT], slots[SURFACE], 12) : slots[VARIANT_SLOT[clamp(variant)]];
+		if ((state & M3WebStates.SELECTED) != 0 && variant == M3WebStates.V_DEFAULT) {
+			base = mix(slots[ACCENT], slots[SURFACE], 18);
+		}
+		return modify(base, state);
+	}
+
+	/** Text colour on a variant in a state. */
+	public int ink(int variant, int state) {
+		int v = clamp(variant);
+		int base = v == M3WebStates.V_DEFAULT || v == M3WebStates.V_GHOST ? slots[FG]
+				: v == M3WebStates.V_OUTLINE || v == M3WebStates.V_SUBTLE ? slots[ACCENT] : 0xffffff;
+		return (state & M3WebStates.DISABLED) != 0 ? mix(base, slots[BG], 45) : base;
+	}
+
+	/** Border colour of a variant in a state. */
+	public int line(int variant, int state) {
+		if ((state & M3WebStates.ERROR) != 0) {
+			return slots[DANGER];
+		}
+		int v = clamp(variant);
+		int base = v == M3WebStates.V_DEFAULT || v == M3WebStates.V_GHOST ? slots[BORDER] : slots[VARIANT_SLOT[v]];
+		return (state & M3WebStates.FOCUS) != 0 ? slots[ACCENT] : modify(base, state);
+	}
+
+	/** Shadow colour under elevated surfaces. */
+	public int shadow() {
+		return mix(slots[SHADOW], slots[BG], dark ? 60 : 12);
+	}
+
+	private int modify(int rgb, int state) {
+		if ((state & M3WebStates.DISABLED) != 0) {
+			return mix(rgb, slots[BG], 50);
+		}
+		if ((state & M3WebStates.PRESSED) != 0) {
+			return mix(slots[FG], rgb, 18);
+		}
+		return (state & M3WebStates.HOVER) != 0 ? mix(slots[FG], rgb, 8) : rgb;
+	}
+
+	private static int clamp(int variant) {
+		return variant < 0 || variant >= M3WebStates.VARIANTS ? 0 : variant;
+	}
+
+	/** Mixes {@code pct} percent of {@code a} into {@code b}, per channel. */
+	public static int mix(int a, int b, int pct) {
+		int r = ((a >> 16 & 255) * pct + (b >> 16 & 255) * (100 - pct)) / 100;
+		int g = ((a >> 8 & 255) * pct + (b >> 8 & 255) * (100 - pct)) / 100;
+		int bl = ((a & 255) * pct + (b & 255) * (100 - pct)) / 100;
+		return r << 16 | g << 8 | bl;
+	}
+}

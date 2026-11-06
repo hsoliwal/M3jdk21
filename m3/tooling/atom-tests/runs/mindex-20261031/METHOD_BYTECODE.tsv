@@ -1,0 +1,967 @@
+class	method	status
+AutomatonOracle.class	private AutomatonOracle();	IDENTICAL
+AutomatonOracle.class	private static java.util.regex.Pattern lambda$javaMatches$0(java.lang.String);	IDENTICAL
+AutomatonOracle.class	static boolean accepts(jdk.internal.mindex.M3Automaton, java.lang.CharSequence);	IDENTICAL
+AutomatonOracle.class	static boolean computedDeterministic(jdk.internal.mindex.M3Automaton);	IDENTICAL
+AutomatonOracle.class	static boolean javaMatches(java.lang.String, java.lang.CharSequence);	IDENTICAL
+AutomatonOracle.class	static int[][] transitions(jdk.internal.mindex.M3Automaton, int);	IDENTICAL
+AutomatonOracle.class	static java.util.List<java.lang.String> texts(java.util.List<java.lang.String>, int);	IDENTICAL
+AutomatonOracle.class	static jdk.internal.mindex.M3Automaton word(java.lang.String);	IDENTICAL
+AutomatonOracle.class	static void assertLanguage(jdk.internal.mindex.M3Automaton, java.lang.String, java.util.List<java.lang.String>, int);	IDENTICAL
+AutomatonOracle.class	static void assertSameLanguage(jdk.internal.mindex.M3Automaton, jdk.internal.mindex.M3Automaton, java.util.List<java.lang.String>, int);	IDENTICAL
+AutomatonOracle.class	static void assertWellFormed(jdk.internal.mindex.M3Automaton);	IDENTICAL
+AutomatonOracle.class	static {};	IDENTICAL
+DotStarOracle$Program.class	DotStarOracle$Program(java.lang.String, char[], boolean[]);	IDENTICAL
+DotStarOracle$Program.class	int tokens();	IDENTICAL
+DotStarOracle$Program.class	public boolean[] starred();	IDENTICAL
+DotStarOracle$Program.class	public char[] atoms();	IDENTICAL
+DotStarOracle$Program.class	public final boolean equals(java.lang.Object);	IDENTICAL
+DotStarOracle$Program.class	public final int hashCode();	IDENTICAL
+DotStarOracle$Program.class	public final java.lang.String toString();	IDENTICAL
+DotStarOracle$Program.class	public java.lang.String source();	IDENTICAL
+DotStarOracle.class	private DotStarOracle();	IDENTICAL
+DotStarOracle.class	static DotStarOracle$Program parse(java.lang.String);	IDENTICAL
+DotStarOracle.class	static boolean accepts(DotStarOracle$Program, java.util.BitSet);	IDENTICAL
+DotStarOracle.class	static boolean admitted(java.lang.String);	IDENTICAL
+DotStarOracle.class	static boolean atomMatches(char, int);	IDENTICAL
+DotStarOracle.class	static boolean javaMatches(java.lang.String, java.lang.CharSequence);	IDENTICAL
+DotStarOracle.class	static boolean lineTerminator(int);	IDENTICAL
+DotStarOracle.class	static java.lang.String randomPattern(java.util.SplittableRandom, int, java.lang.String);	IDENTICAL
+DotStarOracle.class	static java.util.BitSet closure(DotStarOracle$Program, java.util.BitSet);	IDENTICAL
+DotStarOracle.class	static java.util.BitSet initial(DotStarOracle$Program);	IDENTICAL
+DotStarOracle.class	static java.util.BitSet run(DotStarOracle$Program, java.util.BitSet, java.lang.CharSequence);	IDENTICAL
+DotStarOracle.class	static java.util.BitSet set(long);	IDENTICAL
+DotStarOracle.class	static java.util.BitSet step(DotStarOracle$Program, java.util.BitSet, int);	IDENTICAL
+DotStarOracle.class	static java.util.List<java.lang.String> texts(java.util.List<java.lang.String>, int);	IDENTICAL
+DotStarOracle.class	static long bits(java.util.BitSet);	IDENTICAL
+DotStarOracle.class	static {};	IDENTICAL
+M3AtomKit$Body.class	public abstract void run() throws java.lang.Throwable;	IDENTICAL
+M3AtomKit.class	private M3AtomKit();	IDENTICAL
+M3AtomKit.class	private static boolean lambda$assertNativeLane$1(java.lang.String, java.lang.reflect.Method);	IDENTICAL
+M3AtomKit.class	private static boolean lambda$assertUtilityConstructor$0(java.lang.reflect.Field);	IDENTICAL
+M3AtomKit.class	private static java.lang.AssertionError lambda$assertNativeLane$2(java.lang.String);	IDENTICAL
+M3AtomKit.class	static <T extends java.lang.Throwable> T expect(java.lang.Class<T>, M3AtomKit$Body);	IDENTICAL
+M3AtomKit.class	static boolean assertNativeLane(java.lang.Class<?>, java.lang.String, M3AtomKit$Body) throws java.lang.Throwable;	IDENTICAL
+M3AtomKit.class	static int[] intDomain(java.lang.String, int, int);	IDENTICAL
+M3AtomKit.class	static java.lang.Class<?> type(java.lang.String);	IDENTICAL
+M3AtomKit.class	static java.lang.invoke.MethodHandle findConstructor(java.lang.Class<?>, java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3AtomKit.class	static java.lang.invoke.MethodHandle findConstructor(java.lang.Class<?>, java.lang.invoke.MethodType);	IDENTICAL
+M3AtomKit.class	static java.lang.invoke.MethodHandle findGetter(java.lang.Class<?>, java.lang.String, java.lang.Class<?>);	IDENTICAL
+M3AtomKit.class	static java.lang.invoke.MethodHandle findStatic(java.lang.Class<?>, java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3AtomKit.class	static java.lang.invoke.MethodHandle findStaticGetter(java.lang.Class<?>, java.lang.String, java.lang.Class<?>);	IDENTICAL
+M3AtomKit.class	static java.lang.invoke.MethodHandle findVirtual(java.lang.Class<?>, java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3AtomKit.class	static java.lang.invoke.MethodHandles$Lookup lookup(java.lang.Class<?>);	IDENTICAL
+M3AtomKit.class	static java.util.SplittableRandom random(java.lang.String);	IDENTICAL
+M3AtomKit.class	static void assertCopy(long[], long[]);	IDENTICAL
+M3AtomKit.class	static void assertUtilityConstructor(java.lang.Class<?>) throws java.lang.Throwable;	IDENTICAL
+M3AtomKit.class	static void expectMessage(java.lang.Class<? extends java.lang.Throwable>, java.lang.String, M3AtomKit$Body);	IDENTICAL
+M3AtomPerf$Batch.class	M3AtomPerf$Batch(int, long, java.util.function.LongSupplier);	IDENTICAL
+M3AtomPerf$Batch.class	public final boolean equals(java.lang.Object);	IDENTICAL
+M3AtomPerf$Batch.class	public final int hashCode();	IDENTICAL
+M3AtomPerf$Batch.class	public final java.lang.String toString();	IDENTICAL
+M3AtomPerf$Batch.class	public int ops();	IDENTICAL
+M3AtomPerf$Batch.class	public java.util.function.LongSupplier body();	IDENTICAL
+M3AtomPerf$Batch.class	public long expected();	IDENTICAL
+M3AtomPerf$Case.class	M3AtomPerf$Case(java.lang.String, M3AtomPerf$Factory);	IDENTICAL
+M3AtomPerf$Case.class	public M3AtomPerf$Factory factory();	IDENTICAL
+M3AtomPerf$Case.class	public final boolean equals(java.lang.Object);	IDENTICAL
+M3AtomPerf$Case.class	public final int hashCode();	IDENTICAL
+M3AtomPerf$Case.class	public final java.lang.String toString();	IDENTICAL
+M3AtomPerf$Case.class	public java.lang.String atom();	IDENTICAL
+M3AtomPerf$Factory.class	public abstract M3AtomPerf$Batch make() throws java.lang.Throwable;	IDENTICAL
+M3AtomPerf.class	private M3AtomPerf();	IDENTICAL
+M3AtomPerf.class	private static boolean lambda$selected$0(java.lang.String[], M3AtomPerf$Case);	ONLY_POST
+M3AtomPerf.class	private static com.sun.management.ThreadMXBean threads();	ONLY_POST
+M3AtomPerf.class	private static double processLoad();	CHANGED
+M3AtomPerf.class	private static double systemLoad();	CHANGED
+M3AtomPerf.class	private static long allocated();	ONLY_POST
+M3AtomPerf.class	private static void check(M3AtomPerf$Batch, java.lang.String);	CHANGED
+M3AtomPerf.class	static M3AtomPerf$Batch checkedBatch(int, long, java.util.function.LongSupplier);	IDENTICAL
+M3AtomPerf.class	static M3AtomPerf$Case named(java.lang.String, M3AtomPerf$Factory);	IDENTICAL
+M3AtomPerf.class	static java.util.List<M3AtomPerf$Case> selected(java.util.List<M3AtomPerf$Case>, java.lang.String[]);	ONLY_POST
+M3AtomPerf.class	static void run(java.util.List<M3AtomPerf$Case>, java.lang.String[]) throws java.lang.Throwable;	CHANGED
+M3AtomPerf.class	static {};	ONLY_POST
+M3AutomatonAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3AutomatonAtomTest.class	private static int lambda$sortTuples$5(int[], int[], int[]);	IDENTICAL
+M3AutomatonAtomTest.class	private static java.util.List<java.lang.String> lettersAlphabet();	IDENTICAL
+M3AutomatonAtomTest.class	private static jdk.internal.mindex.M3Automaton random(java.util.SplittableRandom, int);	IDENTICAL
+M3AutomatonAtomTest.class	private static jdk.internal.mindex.M3Automaton viaBuilder(jdk.internal.mindex.M3Automaton, java.util.SplittableRandom);	IDENTICAL
+M3AutomatonAtomTest.class	private static void lambda$Builder_setAccept$6(jdk.internal.mindex.M3Automaton$Builder) throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	private static void lambda$addTransition_2$2(jdk.internal.mindex.M3Automaton) throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	private static void lambda$addTransition_2$3(jdk.internal.mindex.M3Automaton) throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	private static void lambda$addTransition_2$4(jdk.internal.mindex.M3Automaton) throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	private static void lambda$setAccept$0(jdk.internal.mindex.M3Automaton) throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	private static void lambda$setAccept$1(jdk.internal.mindex.M3Automaton) throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	public M3AutomatonAtomTest();	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_Builder() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_Builder_2() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_addEpsilon() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_addTransition() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_addTransition_2() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_copy() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_copyStates() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_createState() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_finish() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_getNumStates() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_isAccept() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Builder_setAccept() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void M3Automaton() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void M3Automaton_2() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void Transition_Transition() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void acceptStates() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void addEpsilon() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void addTransition() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void addTransition_2() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void compareTuples() throws java.lang.Throwable;	CHANGED
+M3AutomatonAtomTest.class	static void copy() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void createState() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void finishCurrentState() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void finishState() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void getNextTransition() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void getNumStates() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void getNumTransitions() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void getNumTransitions_2() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void getStartPoints() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void getTransition() throws java.lang.Throwable;	CHANGED
+M3AutomatonAtomTest.class	static void growStates() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void growTransitions() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void initTransition() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void isAccept() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void isDeterministic() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void next() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void next_2() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void put() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void setAccept() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static void sortTuples() throws java.lang.Throwable;	CHANGED
+M3AutomatonAtomTest.class	static void step() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonAtomTest.class	static {};	CHANGED
+M3AutomatonOpsAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3AutomatonOpsAtomTest.class	private static int[] sorted(java.util.Map<java.lang.Integer, java.lang.Integer>);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static java.lang.Integer lambda$CountingSet_decr$4(java.lang.Integer, java.lang.Integer);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static java.lang.Object counting(int) throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static java.lang.invoke.MethodHandle v(java.lang.Class<?>, java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static java.util.BitSet coReachable(jdk.internal.mindex.M3Automaton);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static java.util.BitSet reachable(jdk.internal.mindex.M3Automaton);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static jdk.internal.mindex.M3Automaton chr(char);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static jdk.internal.mindex.M3Automaton exponential(int);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static jdk.internal.mindex.M3Automaton lambda$determinize$1(int);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static jdk.internal.mindex.M3Automaton w(java.lang.String);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static jdk.internal.mindex.M3Automaton withDeadStates();	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static jdk.internal.mindex.M3Automaton$Transition transition(int, int, int);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static jdk.internal.mindex.M3Automaton[] lambda$determinize$2(int);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static long fmix(int);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static void assertLanguage(jdk.internal.mindex.M3Automaton, java.lang.String);	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static void lambda$TooComplex_TooComplex$0(jdk.internal.mindex.M3Automaton) throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	private static void lambda$determinize$3() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	public M3AutomatonOpsAtomTest();	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void CountingSet_CountingSet() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void CountingSet_array() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void CountingSet_changed() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void CountingSet_decr() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void CountingSet_freeze() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void CountingSet_incr() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void CountingSet_longHash() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void CountingSet_size() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void FrozenSet_FrozenSet() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void FrozenSet_array() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void FrozenSet_longHash() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void FrozenSet_size() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void M3AutomatonOps() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void PointTransitionSet_add() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void PointTransitionSet_find() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void PointTransitionSet_next() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void PointTransitionSet_reset() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void PointTransitionSet_sort() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void PointTransitions_compareTo() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void PointTransitions_equals() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void PointTransitions_hashCode() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void PointTransitions_reset() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void StateKey_array() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void StateKey_equals() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void StateKey_hashCode() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void StateKey_longHash() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void StateKey_size() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void StateListNode_StateListNode() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void StateListNode_remove() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void StateList_add() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void TooComplex_TooComplex() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void TransitionList_add() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void acceptList() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void complement() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void concatenate() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void determinize() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void isEmpty() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void isTotal() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void liveFromInitial() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void liveToAccept() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void makeAnyString() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void makeEmpty() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void makeEmptyString() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void makeUnitRange() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void makeUnits() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void minimize() throws java.lang.Throwable;	CHANGED
+M3AutomatonOpsAtomTest.class	static void mix() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void optional() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void removeDeadStates() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void repeat() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void repeat_2() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void repeat_3() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void reverse() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void totalize() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static void union() throws java.lang.Throwable;	IDENTICAL
+M3AutomatonOpsAtomTest.class	static {};	CHANGED
+M3BitsAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3BitsAtomTest.class	private static java.util.BitSet bitSetWith(int);	IDENTICAL
+M3BitsAtomTest.class	public M3BitsAtomTest();	IDENTICAL
+M3BitsAtomTest.class	static void M3Bits() throws java.lang.Throwable;	IDENTICAL
+M3BitsAtomTest.class	static void bitCapacity() throws java.lang.Throwable;	IDENTICAL
+M3BitsAtomTest.class	static void bitMask() throws java.lang.Throwable;	IDENTICAL
+M3BitsAtomTest.class	static void wordIndex() throws java.lang.Throwable;	IDENTICAL
+M3BitsAtomTest.class	static void wordsForBits() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest$1.class	M3BoundaryAtomTest$1(java.lang.ClassLoader);	IDENTICAL
+M3BoundaryAtomTest$2.class	M3BoundaryAtomTest$2(java.lang.ClassLoader);	IDENTICAL
+M3BoundaryAtomTest$3.class	M3BoundaryAtomTest$3(java.lang.ClassLoader);	IDENTICAL
+M3BoundaryAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3BoundaryAtomTest.class	private static java.lang.Class<?> hiddenClass(java.lang.String) throws java.lang.Exception;	CHANGED
+M3BoundaryAtomTest.class	private static jdk.internal.mindex.M3Boundary boundaryOf(java.lang.Class<?>[], java.lang.ClassLoader[], boolean) throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static jdk.internal.mindex.M3Boundary compactBoundary() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static jdk.internal.mindex.M3Boundary retainedBoundary() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static void collect(java.lang.ref.WeakReference<?>) throws java.lang.InterruptedException;	IDENTICAL
+M3BoundaryAtomTest.class	private static void lambda$classAt$3(jdk.internal.mindex.M3Boundary) throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static void lambda$classAt$4(jdk.internal.mindex.M3Boundary) throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static void lambda$classAt$5(jdk.internal.mindex.M3Boundary) throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static void lambda$loaderAt$6(jdk.internal.mindex.M3Boundary) throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static void lambda$loaderAt$7(jdk.internal.mindex.M3Boundary) throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static void lambda$of$0() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static void lambda$of$1() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	private static void lambda$of$2() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	public M3BoundaryAtomTest();	IDENTICAL
+M3BoundaryAtomTest.class	static void M3Boundary() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void classAt() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void classCount() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void liveClassCount() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void liveLoaderCount() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void loaderAt() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void loaderSpaceCount() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void loaderSpaceOf() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void of() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void retained() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static void retainedReferenceCount() throws java.lang.Throwable;	IDENTICAL
+M3BoundaryAtomTest.class	static {};	IDENTICAL
+M3CIAtomTest$MemberCheck.class	public abstract void accept(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3CIAtomTest.class	private static boolean lambda$classHash$22(java.lang.reflect.Method);	IDENTICAL
+M3CIAtomTest.class	private static boolean lambda$memberRows_2$4(jdk.internal.mindex.M3MemberKind, ReflectOracle$Declared);	IDENTICAL
+M3CIAtomTest.class	private static boolean lambda$reverseHierarchy$20(int, int);	IDENTICAL
+M3CIAtomTest.class	private static int lambda$permittedSubclassRows$2(java.lang.Class);	IDENTICAL
+M3CIAtomTest.class	private static int row(java.lang.Class<?>);	IDENTICAL
+M3CIAtomTest.class	private static int[] lambda$totalLength$24(int);	ONLY_POST
+M3CIAtomTest.class	private static int[] lane(java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static int[] randomRows(java.util.SplittableRandom, int);	IDENTICAL
+M3CIAtomTest.class	private static int[][] lambda$totalLength$25(int);	ONLY_POST
+M3CIAtomTest.class	private static java.lang.Object discoverRoots() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static java.lang.Object freezeWith(java.lang.Object, boolean) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static java.lang.Object symbols() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static java.lang.invoke.MethodHandle st(java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3CIAtomTest.class	private static java.lang.invoke.MethodHandle vi(java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3CIAtomTest.class	private static java.util.List lambda$buildNameIndex$21(java.lang.Integer);	IDENTICAL
+M3CIAtomTest.class	private static java.util.List<java.lang.String> symbolValues(java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static java.util.Set lambda$memberRows$3(java.lang.String);	IDENTICAL
+M3CIAtomTest.class	private static jdk.internal.mindex.M3CI fromFrozen(java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static long fnv(long, int);	IDENTICAL
+M3CIAtomTest.class	private static void forEachMember(M3CIAtomTest$MemberCheck) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$binaryNameKey$14(java.lang.invoke.MethodHandle, int) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$checkClassRow$15(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$checkClassRow$16(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$checkMemberRow$17(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$discover$18(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$enqueue$19(java.lang.invoke.MethodHandle, java.util.IdentityHashMap, java.util.ArrayDeque) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$interfaceRow$1(int, java.lang.Class[]) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$lowerBound$24(java.lang.invoke.MethodHandle, int[]) throws java.lang.Throwable;	ONLY_PRE
+M3CIAtomTest.class	private static void lambda$lowerBound$26(java.lang.invoke.MethodHandle, int[]) throws java.lang.Throwable;	ONLY_POST
+M3CIAtomTest.class	private static void lambda$memberAnnotationCount$10(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$memberAnnotationTypeName$11(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$memberExceptionCount$12(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$memberExceptionTypeDescriptor$13(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$memberFlags$8(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$memberModifiers$7(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$memberRow$6(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$memberRows_2$5() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$memberStructuralHash64$9(jdk.internal.mindex.M3CI, int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$requiredRow$23(java.lang.invoke.MethodHandle, java.util.IdentityHashMap) throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$simpleName$0() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	private static void lambda$upperBound$25(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	ONLY_PRE
+M3CIAtomTest.class	private static void lambda$upperBound$27(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	ONLY_POST
+M3CIAtomTest.class	public M3CIAtomTest();	IDENTICAL
+M3CIAtomTest.class	static void Frozen_withFingerprint() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static void M3CI() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void Symbols_order() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void admitMembers() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void annotationNameIds() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void binaryNameKey() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void binaryNameKeyCount() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void buildNameIndex() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void checkClassRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void checkMemberRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void classAnnotationCount() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void classAnnotationTypeName() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void classHash() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static void compareText() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void componentTypeRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void declaredClassRows() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void declaringClassRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void directSubtypeCount() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void directSubtypeRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void discover() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void enclosingClassRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void enqueue() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void exceptionDescriptorIds() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void filled() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void findConstructor() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void findField() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void findMethod() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void findRecordComponent() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void findText() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void fingerprint() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void fingerprintSha256Hex() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void flags() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void flatten() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static void freeze() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void hash() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void interfaceCount() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void interfaceRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void lowerBound() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static void memberAnnotationCount() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberAnnotationTypeName() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberExceptionCount() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberExceptionTypeDescriptor() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberFlags() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberHash() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberModifiers() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberRows() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberRows_2() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void memberStructuralHash64() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void moduleName() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void nestHostRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void nestMemberRows() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void offsets() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static void optionalText() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void packageName() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void permittedNameIds() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void permittedSubclassCount() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void permittedSubclassName() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void permittedSubclassRows() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void prefixSum() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static void primitivePayloadBytes() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static void requiredRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void reverseHierarchy() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void rowOf() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void rowsForBinaryNameKey() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void simpleName() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void sortedUnique() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void structuralHash64() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void superclassRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void supertypeCount() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void supertypeRow() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void totalLength() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static void transitiveSupertypes() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void typeName() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void uniqueMemberNameIds() throws java.lang.Throwable;	IDENTICAL
+M3CIAtomTest.class	static void upperBound() throws java.lang.Throwable;	CHANGED
+M3CIAtomTest.class	static {};	CHANGED
+M3ClassAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3ClassAtomTest.class	private static java.lang.Class<?> classOf(jdk.internal.mindex.M3Class);	IDENTICAL
+M3ClassAtomTest.class	private static jdk.internal.mindex.M3Class view(int);	IDENTICAL
+M3ClassAtomTest.class	private static jdk.internal.mindex.M3Class view(java.lang.Class<?>);	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$M3Class$0(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$M3Class$1(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$constructorView$8(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$fieldView$6(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$getConstructor$5() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$getDeclaredConstructor$3() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$getMethod$4() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$methodView$7(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	private static void lambda$permittedSubclassNameAt$2(java.lang.Class[]) throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	public M3ClassAtomTest();	IDENTICAL
+M3ClassAtomTest.class	static void M3Class() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void annotationCount() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void annotationTypeNameAt() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void constructorView() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void desiredAssertionStatus() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void directSubtypeAt() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void directSubtypeCount() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void fieldView() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void flags() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getAnnotation() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getAnnotations() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getAnnotationsByType() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getConstructor() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getConstructors() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getDeclaredAnnotation() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getDeclaredAnnotations() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getDeclaredAnnotationsByType() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getDeclaredConstructor() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getFields() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getMethod() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getMethods() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getNestMembers() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getPackage() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getProtectionDomain() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getResource() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void getSigners() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void hasFlag() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void interfaceAt() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void interfaceCount() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void isMemberClass() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void isSynthetic() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void memberRows() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void methodView() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void moduleName() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void packageName() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void permittedSubclassCount() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void permittedSubclassNameAt() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void simpleName() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void structuralHash64() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void supertypeAt() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void supertypeCount() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static void typeName() throws java.lang.Throwable;	IDENTICAL
+M3ClassAtomTest.class	static {};	IDENTICAL
+M3ClassFlagsAtomTest$1.class	M3ClassFlagsAtomTest$1();	IDENTICAL
+M3ClassFlagsAtomTest$1Local.class	M3ClassFlagsAtomTest$1Local();	IDENTICAL
+M3ClassFlagsAtomTest$Circle.class	M3ClassFlagsAtomTest$Circle();	IDENTICAL
+M3ClassFlagsAtomTest$Point.class	M3ClassFlagsAtomTest$Point(int, int);	IDENTICAL
+M3ClassFlagsAtomTest$Point.class	public final boolean equals(java.lang.Object);	IDENTICAL
+M3ClassFlagsAtomTest$Point.class	public final int hashCode();	IDENTICAL
+M3ClassFlagsAtomTest$Point.class	public final java.lang.String toString();	IDENTICAL
+M3ClassFlagsAtomTest$Point.class	public int x();	IDENTICAL
+M3ClassFlagsAtomTest$Point.class	public int y();	IDENTICAL
+M3ClassFlagsAtomTest$Square.class	M3ClassFlagsAtomTest$Square();	IDENTICAL
+M3ClassFlagsAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3ClassFlagsAtomTest.class	private static int expected(java.lang.Class<?>);	IDENTICAL
+M3ClassFlagsAtomTest.class	private static java.lang.Class<?> hiddenClass() throws java.lang.Exception;	IDENTICAL
+M3ClassFlagsAtomTest.class	private static void lambda$of$0();	IDENTICAL
+M3ClassFlagsAtomTest.class	private static void lambda$of$1() throws java.lang.Throwable;	IDENTICAL
+M3ClassFlagsAtomTest.class	public M3ClassFlagsAtomTest();	IDENTICAL
+M3ClassFlagsAtomTest.class	static void M3ClassFlags() throws java.lang.Throwable;	IDENTICAL
+M3ClassFlagsAtomTest.class	static void of() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3ConstructorAtomTest.class	private static java.lang.reflect.Constructor<?> reflective(ReflectOracle$Declared);	IDENTICAL
+M3ConstructorAtomTest.class	private static jdk.internal.mindex.M3Constructor view(int) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void each(ReflectOracle$MemberCheck) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$M3Constructor$0(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$M3Constructor$1(int) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$M3Constructor$2() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$annotationCount$8(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$annotationTypeNameAt$9(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$atom_toString$13(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$descriptor$4(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$exceptionCount$10(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$exceptionTypeDescriptorAt$11(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$getModifiers$5(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$isSynthetic$6(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$isVarArgs$7(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$name$3(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	private static void lambda$structuralHash64$12(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	public M3ConstructorAtomTest();	IDENTICAL
+M3ConstructorAtomTest.class	static void M3Constructor() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void annotationCount() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void annotationTypeNameAt() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void atom_toString() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void descriptor() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void exceptionCount() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void exceptionTypeDescriptorAt() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void getModifiers() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void isSynthetic() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void isVarArgs() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void name() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static void structuralHash64() throws java.lang.Throwable;	IDENTICAL
+M3ConstructorAtomTest.class	static {};	IDENTICAL
+M3DescriptorAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3DescriptorAtomTest.class	public M3DescriptorAtomTest();	IDENTICAL
+M3DescriptorAtomTest.class	static void M3Descriptor() throws java.lang.Throwable;	IDENTICAL
+M3DescriptorAtomTest.class	static void executable() throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3FieldAtomTest.class	private static java.lang.reflect.Field reflective(ReflectOracle$Declared);	IDENTICAL
+M3FieldAtomTest.class	private static jdk.internal.mindex.M3Field view(int) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void each(ReflectOracle$MemberCheck) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void lambda$M3Field$0(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void lambda$M3Field$1(int) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void lambda$annotationCount$5(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void lambda$annotationTypeNameAt$6(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void lambda$getModifiers$2(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void lambda$isEnumConstant$4(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void lambda$isSynthetic$3(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	private static void lambda$structuralHash64$7(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	public M3FieldAtomTest();	IDENTICAL
+M3FieldAtomTest.class	static void M3Field() throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	static void annotationCount() throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	static void annotationTypeNameAt() throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	static void getModifiers() throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	static void isEnumConstant() throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	static void isSynthetic() throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	static void structuralHash64() throws java.lang.Throwable;	IDENTICAL
+M3FieldAtomTest.class	static {};	IDENTICAL
+M3MemberAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3MemberAtomTest.class	private static int all(ReflectOracle$MemberCheck) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$M3Member$0(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$M3Member$1(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$annotationCount$7(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$annotationTypeNameAt$8(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$declaringClass$3(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$exceptionCount$9(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$exceptionTypeDescriptorAt$10(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$flags$5(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$hasFlag$6(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$modifiers$4(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$owner$2(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$toReflectiveElement$12(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$toReflectiveElement$13(jdk.internal.mindex.M3CI) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	private static void lambda$tryReflectiveElement$11(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	public M3MemberAtomTest();	IDENTICAL
+M3MemberAtomTest.class	static void M3Member() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void annotationCount() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void annotationTypeNameAt() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void atom_hashCode() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void declaringClass() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void exceptionCount() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void exceptionTypeDescriptorAt() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void flags() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void hasFlag() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void modifiers() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void owner() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void row() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void structuralHash64() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void toReflectiveElement() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static void tryReflectiveElement() throws java.lang.Throwable;	IDENTICAL
+M3MemberAtomTest.class	static {};	IDENTICAL
+M3MemberFlagsAtomTest$Pair.class	M3MemberFlagsAtomTest$Pair(java.lang.String, int);	IDENTICAL
+M3MemberFlagsAtomTest$Pair.class	public final boolean equals(java.lang.Object);	IDENTICAL
+M3MemberFlagsAtomTest$Pair.class	public final int hashCode();	IDENTICAL
+M3MemberFlagsAtomTest$Pair.class	public final java.lang.String toString();	IDENTICAL
+M3MemberFlagsAtomTest$Pair.class	public int right();	IDENTICAL
+M3MemberFlagsAtomTest$Pair.class	public java.lang.String left();	IDENTICAL
+M3MemberFlagsAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3MemberFlagsAtomTest.class	private static boolean lambda$of_2$2(java.lang.reflect.Method);	IDENTICAL
+M3MemberFlagsAtomTest.class	private static void assertNamedFlags();	IDENTICAL
+M3MemberFlagsAtomTest.class	private static void lambda$of$0() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	private static void lambda$of_2$1();	IDENTICAL
+M3MemberFlagsAtomTest.class	private static void lambda$of_2$3() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	private static void lambda$of_3$4() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	private static void lambda$of_4$5() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	public M3MemberFlagsAtomTest();	IDENTICAL
+M3MemberFlagsAtomTest.class	static void M3MemberFlags() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	static void of() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	static void of_2() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	static void of_3() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	static void of_4() throws java.lang.Throwable;	IDENTICAL
+M3MemberFlagsAtomTest.class	static {};	IDENTICAL
+M3MemberKindAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3MemberKindAtomTest.class	private static void lambda$fromCode$0(int) throws java.lang.Throwable;	IDENTICAL
+M3MemberKindAtomTest.class	public M3MemberKindAtomTest();	IDENTICAL
+M3MemberKindAtomTest.class	static void M3MemberKind() throws java.lang.Throwable;	IDENTICAL
+M3MemberKindAtomTest.class	static void code() throws java.lang.Throwable;	IDENTICAL
+M3MemberKindAtomTest.class	static void fromCode() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3MethodAtomTest.class	private static java.lang.reflect.Method reflective(ReflectOracle$Declared);	IDENTICAL
+M3MethodAtomTest.class	private static jdk.internal.mindex.M3Method view(int) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void each(ReflectOracle$MemberCheck) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$M3Method$0(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$M3Method$1(int) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$annotationCount$5(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$annotationTypeNameAt$6(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$exceptionCount$7(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$exceptionTypeDescriptorAt$8(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$isDefault$4(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$isSynthetic$2(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$isVarArgs$3(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	private static void lambda$structuralHash64$9(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	public M3MethodAtomTest();	IDENTICAL
+M3MethodAtomTest.class	static void M3Method() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static void annotationCount() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static void annotationTypeNameAt() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static void exceptionCount() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static void exceptionTypeDescriptorAt() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static void isDefault() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static void isSynthetic() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static void isVarArgs() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static void structuralHash64() throws java.lang.Throwable;	IDENTICAL
+M3MethodAtomTest.class	static {};	IDENTICAL
+M3MindexAtomPerf.class	private static int[] ints(java.lang.String, int);	IDENTICAL
+M3MindexAtomPerf.class	private static jdk.internal.mindex.M3Automaton dfa();	IDENTICAL
+M3MindexAtomPerf.class	private static long composeRow(long[], long[], long[], int) throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	private static long fmix(int);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$Effect_apply$6(jdk.internal.mindex.M3RegexDpPlan$Effect, long[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$M3RX7Transitions_compose$9(short[], short[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$M3StateRelation_compose$7(long[], long[], long[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$advance$5(jdk.internal.mindex.M3RegexDpPlan, long[], char[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$alternative$12(java.lang.Object);	ONLY_POST
+M3MindexAtomPerf.class	private static long lambda$alternative_2$13(java.lang.Object);	ONLY_POST
+M3MindexAtomPerf.class	private static long lambda$applyRows$8(long[], long[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$bitMask$1(int[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$find$11(java.lang.Object);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$findText$12(java.lang.String[]);	ONLY_PRE
+M3MindexAtomPerf.class	private static long lambda$findText$14(java.lang.String[]);	ONLY_POST
+M3MindexAtomPerf.class	private static long lambda$lowerBound$13(int[], int[]);	ONLY_PRE
+M3MindexAtomPerf.class	private static long lambda$lowerBound$15(int[], int[]);	ONLY_POST
+M3MindexAtomPerf.class	private static long lambda$memberRow$14(int[], jdk.internal.mindex.M3MemberKind[], java.lang.String[], java.lang.String[]);	ONLY_PRE
+M3MindexAtomPerf.class	private static long lambda$memberRow$16(int[], jdk.internal.mindex.M3MemberKind[], java.lang.String[], java.lang.String[]);	ONLY_POST
+M3MindexAtomPerf.class	private static long lambda$mix$4(int[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$step$3(jdk.internal.mindex.M3Automaton, int[], int[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$tokens$10(short[], int[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$wordIndex$0(int[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long lambda$wordsForBits$2(int[]);	IDENTICAL
+M3MindexAtomPerf.class	private static long scan(java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	public M3MindexAtomPerf();	IDENTICAL
+M3MindexAtomPerf.class	public static void main(java.lang.String[]) throws java.lang.Throwable;	CHANGED
+M3MindexAtomPerf.class	static M3AtomPerf$Batch Effect_apply() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch M3RX7Transitions_compose() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch M3StateRelation_compose() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch advance() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch alternative() throws java.lang.Throwable;	ONLY_POST
+M3MindexAtomPerf.class	static M3AtomPerf$Batch alternative_2() throws java.lang.Throwable;	ONLY_POST
+M3MindexAtomPerf.class	static M3AtomPerf$Batch applyRows() throws java.lang.Throwable;	CHANGED
+M3MindexAtomPerf.class	static M3AtomPerf$Batch bitMask() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch find() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch findText() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch lowerBound() throws java.lang.Throwable;	CHANGED
+M3MindexAtomPerf.class	static M3AtomPerf$Batch memberRow() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch mix() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch step() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch tokens() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch wordIndex() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static M3AtomPerf$Batch wordsForBits() throws java.lang.Throwable;	IDENTICAL
+M3MindexAtomPerf.class	static {};	CHANGED
+M3NotYetReceivedAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3NotYetReceivedAtomTest.class	private static void lambda$M3NotYetReceived$0(java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3NotYetReceivedAtomTest.class	public M3NotYetReceivedAtomTest();	IDENTICAL
+M3NotYetReceivedAtomTest.class	static void M3NotYetReceived() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static byte[] flags(java.util.SplittableRandom, int, double);	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkFlags$16(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkFlags$17(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkFlags$18(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkState$19(java.lang.invoke.MethodHandle, int) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkTable$13(java.lang.invoke.MethodHandle, int[]) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkTable$14(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkTable$15(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkTransfer$10(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkTransfer$11(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkTransfer$12(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkTransfer$8(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$checkTransfer$9(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$compose$6(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$compose0$20(java.lang.invoke.MethodHandle, short[], short[], short[]) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$masks$2(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$repeat$7(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$repeat0$21(java.lang.invoke.MethodHandle, short[], long, short[]) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$tokens$3(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$tokens$4(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$tokens$5(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$useful$0(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	private static void lambda$useful$1(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	public M3RX7TransitionsAtomTest();	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void M3RX7Transitions() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void checkFlags() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void checkState() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void checkTable() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void checkTransfer() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void compose() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void compose0() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void composeJava() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void identity() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void masks() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void repeat() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void repeat0() throws java.lang.Throwable;	CHANGED
+M3RX7TransitionsAtomTest.class	static void tokens() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static void useful() throws java.lang.Throwable;	IDENTICAL
+M3RX7TransitionsAtomTest.class	static {};	CHANGED
+M3RecordComponentAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3RecordComponentAtomTest.class	private static jdk.internal.mindex.M3RecordComponent view(int) throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	private static void each(ReflectOracle$MemberCheck) throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	private static void lambda$M3RecordComponent$0(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	private static void lambda$M3RecordComponent$1(int) throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	private static void lambda$annotationCount$2(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	private static void lambda$annotationTypeNameAt$3(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	private static void lambda$structuralHash64$4(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	public M3RecordComponentAtomTest();	IDENTICAL
+M3RecordComponentAtomTest.class	static void M3RecordComponent() throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	static void annotationCount() throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	static void annotationTypeNameAt() throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	static void structuralHash64() throws java.lang.Throwable;	IDENTICAL
+M3RecordComponentAtomTest.class	static {};	IDENTICAL
+M3RegexDpPlanAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	CHANGED
+M3RegexDpPlanAtomTest.class	private static boolean runAdvance(jdk.internal.mindex.M3RegexDpPlan, java.lang.String);	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static java.lang.invoke.MethodHandle effectVirtual(java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static java.lang.invoke.MethodHandle virtual(java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static java.util.List<java.lang.String> corpus();	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static jdk.internal.mindex.M3RegexDpPlan plan(java.lang.String);	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static long universe(jdk.internal.mindex.M3RegexDpPlan);	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static long[] rows(jdk.internal.mindex.M3RegexDpPlan, jdk.internal.mindex.M3RegexDpPlan$Effect);	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void assertSameEffect(jdk.internal.mindex.M3RegexDpPlan, jdk.internal.mindex.M3RegexDpPlan$Effect, jdk.internal.mindex.M3RegexDpPlan$Effect, java.lang.String);	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$Effect_apply$5(jdk.internal.mindex.M3RegexDpPlan, long) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$Effect_length$4(jdk.internal.mindex.M3RegexDpPlan$Effect) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$Effect_repeated$8(jdk.internal.mindex.M3RegexDpPlan) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$Effect_then$6(jdk.internal.mindex.M3RegexDpPlan) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$Effect_then$7(jdk.internal.mindex.M3RegexDpPlan) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$accepts$1(jdk.internal.mindex.M3RegexDpPlan, long) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$advance$2(jdk.internal.mindex.M3RegexDpPlan) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$checkBits$9(java.lang.invoke.MethodHandle, jdk.internal.mindex.M3RegexDpPlan, long) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$compose0$10(long[], long[], java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$composeStructured0$11(long[], long[], java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$prepare$0() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$repeat0$12(long[], long, java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	private static void lambda$summarize$3() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	public M3RegexDpPlanAtomTest();	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void Effect_Effect() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void Effect_Effect_2() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void Effect_appendOpen() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void Effect_apply() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void Effect_length() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void Effect_repeated() throws java.lang.Throwable;	CHANGED
+M3RegexDpPlanAtomTest.class	static void Effect_repeatedUtf16() throws java.lang.Throwable;	CHANGED
+M3RegexDpPlanAtomTest.class	static void Effect_then() throws java.lang.Throwable;	CHANGED
+M3RegexDpPlanAtomTest.class	static void M3RegexDpPlan() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void accepts() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void advance() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void advanceMatched() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void advanceRows() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void advanceRowsToFixedPoint() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void advanceUtf16Rows() throws java.lang.Throwable;	CHANGED
+M3RegexDpPlanAtomTest.class	static void applyRows() throws java.lang.Throwable;	CHANGED
+M3RegexDpPlanAtomTest.class	static void check() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void checkBits() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void close() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void compose() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void compose0() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void composeJava() throws java.lang.Throwable;	CHANGED
+M3RegexDpPlanAtomTest.class	static void composeStructured0() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void identity() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void identityRows() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void initialState() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void lineTerminator() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void literalIndex() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void matchingMask() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void needsRowUnion() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void nullableLevels() throws java.lang.Throwable;	CHANGED
+M3RegexDpPlanAtomTest.class	static void prepare() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void repeat0() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void stateCount() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void summarize() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void summarizeUtf16() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static void supports() throws java.lang.Throwable;	IDENTICAL
+M3RegexDpPlanAtomTest.class	static {};	CHANGED
+M3RelationImageAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3RelationImageAtomTest.class	private static byte[] image(long[], java.lang.String) throws java.lang.Exception;	IDENTICAL
+M3RelationImageAtomTest.class	private static java.lang.String scope(java.lang.String) throws java.lang.Exception;	IDENTICAL
+M3RelationImageAtomTest.class	private static java.lang.String sha256Hex(byte[]) throws java.lang.Exception;	IDENTICAL
+M3RelationImageAtomTest.class	private static long[] relation(java.util.SplittableRandom, int);	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$check$20(java.lang.UnsupportedOperationException);	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$check$21(java.lang.invoke.MethodHandle, java.lang.UnsupportedOperationException) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$decode$10(byte[], java.lang.String, java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$decode$11(byte[], java.lang.String, java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$decode$12(byte[], java.lang.String, java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$decode$13(byte[], java.lang.String, java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$decode$14(java.lang.String, java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$decode$8(java.util.concurrent.atomic.AtomicInteger, byte[]);	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$decode$9(byte[], java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$digestBytes$17(java.lang.invoke.MethodHandle, java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$digestBytes$18(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$digestBytes$19(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$encode$0(long[], java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$encode$1(java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$encode$2(java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$encode$3() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$encode$4(java.lang.String) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$encode$5() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$encode$6(java.lang.IllegalStateException);	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$encode$7(java.lang.String, java.lang.IllegalStateException) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$requireStates$15(java.lang.invoke.MethodHandle, int) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	private static void lambda$validate$16(java.lang.invoke.MethodHandle, long, int) throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	public M3RelationImageAtomTest();	IDENTICAL
+M3RelationImageAtomTest.class	static void M3RelationImage() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	static void check() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	static void decode() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	static void digestBytes() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	static void encode() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	static void requireStates() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	static void sha256() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	static void validate() throws java.lang.Throwable;	IDENTICAL
+M3RelationImageAtomTest.class	static {};	IDENTICAL
+M3StateRelationAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3StateRelationAtomTest.class	private static long union(long[], long);	IDENTICAL
+M3StateRelationAtomTest.class	private static long[] padded(long[]);	IDENTICAL
+M3StateRelationAtomTest.class	private static void checkCompose(java.lang.invoke.MethodHandle, java.lang.String, boolean) throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	private static void lambda$composeNative$0(long[], long[], java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	private static void lambda$repeatNative$1(long[], long, java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	public M3StateRelationAtomTest();	IDENTICAL
+M3StateRelationAtomTest.class	static void M3StateRelation() throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	static void applyRows() throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	static void applyRowsUntil() throws java.lang.Throwable;	CHANGED
+M3StateRelationAtomTest.class	static void compose() throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	static void composeDense() throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	static void composeNative() throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	static void repeatNative() throws java.lang.Throwable;	IDENTICAL
+M3StateRelationAtomTest.class	static {};	CHANGED
+M3TokenEngineAtomTest.class	java.util.stream.Stream<org.junit.jupiter.api.DynamicTest> atoms();	IDENTICAL
+M3TokenEngineAtomTest.class	private static int stride(java.lang.String);	IDENTICAL
+M3TokenEngineAtomTest.class	private static int[] fill(int);	IDENTICAL
+M3TokenEngineAtomTest.class	private static int[] javaRegisters(java.util.regex.Matcher);	IDENTICAL
+M3TokenEngineAtomTest.class	private static int[] positions(java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static int[] regs(java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static int[] stateRegisters(java.lang.Object, int, int) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static java.lang.Object engine(java.lang.String, TokenRegexOracle$Tape, boolean) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static java.lang.Object findMode(java.lang.Object, int) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static java.lang.Object stateSet(int, int) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static java.lang.invoke.MethodHandle ev(java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3TokenEngineAtomTest.class	private static java.lang.invoke.MethodHandle sv(java.lang.String, java.lang.invoke.MethodType);	IDENTICAL
+M3TokenEngineAtomTest.class	private static java.util.List<java.lang.String> patterns(boolean);	IDENTICAL
+M3TokenEngineAtomTest.class	private static java.util.List<java.lang.String> tapes();	IDENTICAL
+M3TokenEngineAtomTest.class	private static java.util.TreeSet<java.lang.Integer> javaEnds(java.lang.String, java.lang.String, int);	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$M3TokenEngine$0() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$Result_registers$10(java.lang.invoke.MethodHandle) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$StateSet_add$6(java.lang.invoke.MethodHandle, java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$StateSet_addModified$7(java.lang.invoke.MethodHandle, java.lang.Object, int[]) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$StateSet_copyRegisters$8(java.lang.invoke.MethodHandle, java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$StateSet_copyRegisters$9(java.lang.invoke.MethodHandle, java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$charge$4(long, java.lang.invoke.MethodHandle, java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$charge$5(java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$rawBoundary$3(java.lang.invoke.MethodHandle, java.lang.Object, TokenRegexOracle$Tape) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$rawToken$2(java.lang.invoke.MethodHandle, java.lang.Object, TokenRegexOracle$Tape) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	private static void lambda$result$1(java.lang.invoke.MethodHandle, java.lang.Object, java.lang.Object) throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	public M3TokenEngineAtomTest();	IDENTICAL
+M3TokenEngineAtomTest.class	static void M3TokenEngine() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void Result_registers() throws java.lang.Throwable;	CHANGED
+M3TokenEngineAtomTest.class	static void StateSet_StateSet() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void StateSet_add() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void StateSet_addAll() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void StateSet_addModified() throws java.lang.Throwable;	CHANGED
+M3TokenEngineAtomTest.class	static void StateSet_copyRegisters() throws java.lang.Throwable;	CHANGED
+M3TokenEngineAtomTest.class	static void StateSet_ensure() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void alternative() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void any() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void assertion() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void charge() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void eval() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void evaluateRoot() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void find() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void findAllSpans() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void findNext() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void group() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void map() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void matches() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void rawBoundary() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void rawToken() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void repeat() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void reset() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void result() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void searchFrom() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void sequence() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void states() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static void token() throws java.lang.Throwable;	IDENTICAL
+M3TokenEngineAtomTest.class	static {};	CHANGED
+ReflectOracle$1.class	ReflectOracle$1();	IDENTICAL
+ReflectOracle$1Local.class	ReflectOracle$1Local();	IDENTICAL
+ReflectOracle$Base.class	private void lambda$work$0();	IDENTICAL
+ReflectOracle$Base.class	protected ReflectOracle$Base(int, java.lang.String...) throws java.io.IOException, java.lang.InterruptedException;	IDENTICAL
+ReflectOracle$Base.class	public ReflectOracle$Base();	IDENTICAL
+ReflectOracle$Base.class	public int compareTo(ReflectOracle$Base<T>);	IDENTICAL
+ReflectOracle$Base.class	public int compareTo(java.lang.Object);	IDENTICAL
+ReflectOracle$Base.class	public static int sum(int...);	IDENTICAL
+ReflectOracle$Base.class	public void work() throws java.lang.Exception;	IDENTICAL
+ReflectOracle$Circle.class	ReflectOracle$Circle(double, java.lang.String);	IDENTICAL
+ReflectOracle$Circle.class	public double area();	IDENTICAL
+ReflectOracle$Circle.class	public double radius();	IDENTICAL
+ReflectOracle$Circle.class	public final boolean equals(java.lang.Object);	IDENTICAL
+ReflectOracle$Circle.class	public final int hashCode();	IDENTICAL
+ReflectOracle$Circle.class	public final java.lang.String toString();	IDENTICAL
+ReflectOracle$Circle.class	public java.lang.String name();	IDENTICAL
+ReflectOracle$Color$1.class	private ReflectOracle$Color$1(java.lang.String, int);	IDENTICAL
+ReflectOracle$Color.class	private ReflectOracle$Color();	IDENTICAL
+ReflectOracle$Color.class	private static ReflectOracle$Color[] $values();	IDENTICAL
+ReflectOracle$Color.class	public static ReflectOracle$Color valueOf(java.lang.String);	IDENTICAL
+ReflectOracle$Color.class	public static ReflectOracle$Color[] values();	IDENTICAL
+ReflectOracle$Color.class	static {};	IDENTICAL
+ReflectOracle$Declared.class	ReflectOracle$Declared(jdk.internal.mindex.M3MemberKind, java.lang.String, java.lang.String, java.lang.reflect.AnnotatedElement);	IDENTICAL
+ReflectOracle$Declared.class	public final boolean equals(java.lang.Object);	IDENTICAL
+ReflectOracle$Declared.class	public final int hashCode();	IDENTICAL
+ReflectOracle$Declared.class	public final java.lang.String toString();	IDENTICAL
+ReflectOracle$Declared.class	public java.lang.String descriptor();	IDENTICAL
+ReflectOracle$Declared.class	public java.lang.String name();	IDENTICAL
+ReflectOracle$Declared.class	public java.lang.reflect.AnnotatedElement element();	IDENTICAL
+ReflectOracle$Declared.class	public jdk.internal.mindex.M3MemberKind kind();	IDENTICAL
+ReflectOracle$Derived$Inner.class	ReflectOracle$Derived$Inner(ReflectOracle$Derived);	IDENTICAL
+ReflectOracle$Derived.class	ReflectOracle$Derived();	IDENTICAL
+ReflectOracle$Derived.class	public void run();	IDENTICAL
+ReflectOracle$MemberCheck.class	public abstract void accept(int, ReflectOracle$Declared) throws java.lang.Throwable;	IDENTICAL
+ReflectOracle$Shape.class	public abstract double area();	IDENTICAL
+ReflectOracle$Shape.class	public default java.lang.String label();	IDENTICAL
+ReflectOracle$Square.class	ReflectOracle$Square();	IDENTICAL
+ReflectOracle$Square.class	public double area();	IDENTICAL
+ReflectOracle$Tag.class	public abstract java.lang.String value();	IDENTICAL
+ReflectOracle.class	private ReflectOracle();	IDENTICAL
+ReflectOracle.class	private static java.lang.String lambda$annotationNames$0(java.lang.annotation.Annotation);	IDENTICAL
+ReflectOracle.class	static int classFlags(java.lang.Class<?>);	IDENTICAL
+ReflectOracle.class	static int firstMember(jdk.internal.mindex.M3CI, jdk.internal.mindex.M3MemberKind);	IDENTICAL
+ReflectOracle.class	static int forEachMember(jdk.internal.mindex.M3CI, jdk.internal.mindex.M3MemberKind, ReflectOracle$MemberCheck) throws java.lang.Throwable;	IDENTICAL
+ReflectOracle.class	static int memberFlags(java.lang.reflect.AnnotatedElement);	IDENTICAL
+ReflectOracle.class	static int memberRow(jdk.internal.mindex.M3CI, int, ReflectOracle$Declared);	IDENTICAL
+ReflectOracle.class	static int modifiers(java.lang.reflect.AnnotatedElement);	IDENTICAL
+ReflectOracle.class	static int rowOf(java.util.Map<java.lang.Class<?>, java.lang.Integer>, java.lang.Class<?>);	IDENTICAL
+ReflectOracle.class	static java.lang.Class<?> local();	IDENTICAL
+ReflectOracle.class	static java.lang.Class<?>[] classes(jdk.internal.mindex.M3CI);	IDENTICAL
+ReflectOracle.class	static java.lang.Object anonymous();	IDENTICAL
+ReflectOracle.class	static java.lang.String descriptor(java.lang.Class<?>[], java.lang.Class<?>);	IDENTICAL
+ReflectOracle.class	static java.lang.annotation.Annotation[] none();	IDENTICAL
+ReflectOracle.class	static java.util.List<ReflectOracle$Declared> declared(java.lang.Class<?>);	IDENTICAL
+ReflectOracle.class	static java.util.List<java.lang.String> annotationList(jdk.internal.mindex.M3CI, int);	IDENTICAL
+ReflectOracle.class	static java.util.List<java.lang.String> exceptionDescriptors(java.lang.reflect.AnnotatedElement);	IDENTICAL
+ReflectOracle.class	static java.util.Map<java.lang.Class<?>, java.lang.Integer> rows(jdk.internal.mindex.M3CI);	IDENTICAL
+ReflectOracle.class	static java.util.Set<java.lang.String> annotationNames(java.lang.reflect.AnnotatedElement);	IDENTICAL
+ReflectOracle.class	static java.util.TreeSet<java.lang.Integer> supertypes(java.util.Map<java.lang.Class<?>, java.lang.Integer>, java.lang.Class<?>);	IDENTICAL
+ReflectOracle.class	static jdk.internal.mindex.M3CI snapshot();	IDENTICAL
+ReflectOracle.class	static {};	IDENTICAL
+RelationOracle.class	private RelationOracle();	IDENTICAL
+RelationOracle.class	private static short walk(short[], int, long);	IDENTICAL
+RelationOracle.class	static byte[] useful(short[], int, int, byte[]);	IDENTICAL
+RelationOracle.class	static java.lang.String describe(long[]);	IDENTICAL
+RelationOracle.class	static java.util.BitSet reverseReachable(short[], int, java.util.BitSet);	IDENTICAL
+RelationOracle.class	static long[] compose(long[], long[]);	IDENTICAL
+RelationOracle.class	static long[] identity(int);	IDENTICAL
+RelationOracle.class	static long[] masks(short[], int, int, byte[]);	IDENTICAL
+RelationOracle.class	static long[] power(long[], long);	IDENTICAL
+RelationOracle.class	static long[] randomRelation(java.util.SplittableRandom, int, double);	IDENTICAL
+RelationOracle.class	static short[] composeTransfer(short[], short[]);	IDENTICAL
+RelationOracle.class	static short[] powerTransfer(short[], long);	IDENTICAL
+RelationOracle.class	static short[] randomTable(java.util.SplittableRandom, int, int, double);	IDENTICAL
+RelationOracle.class	static short[] randomTransfer(java.util.SplittableRandom, int, double);	IDENTICAL
+RelationOracle.class	static short[] tokens(short[], int, int, int[], int, int);	IDENTICAL
+TokenRegexOracle$Tape.class	TokenRegexOracle$Tape(jdk.internal.mindex.M3TokenIndex, java.lang.String, java.lang.String, int[], TokenRegexOracle$Vocab);	IDENTICAL
+TokenRegexOracle$Tape.class	public TokenRegexOracle$Vocab vocab();	IDENTICAL
+TokenRegexOracle$Tape.class	public final boolean equals(java.lang.Object);	IDENTICAL
+TokenRegexOracle$Tape.class	public final int hashCode();	IDENTICAL
+TokenRegexOracle$Tape.class	public final java.lang.String toString();	IDENTICAL
+TokenRegexOracle$Tape.class	public int[] significant();	IDENTICAL
+TokenRegexOracle$Tape.class	public java.lang.String letters();	IDENTICAL
+TokenRegexOracle$Tape.class	public java.lang.String source();	IDENTICAL
+TokenRegexOracle$Tape.class	public jdk.internal.mindex.M3TokenIndex index();	IDENTICAL
+TokenRegexOracle$Vocab.class	TokenRegexOracle$Vocab(java.lang.String[]);	IDENTICAL
+TokenRegexOracle$Vocab.class	public final boolean equals(java.lang.Object);	IDENTICAL
+TokenRegexOracle$Vocab.class	public final int hashCode();	IDENTICAL
+TokenRegexOracle$Vocab.class	public final java.lang.String toString();	IDENTICAL
+TokenRegexOracle$Vocab.class	public int lexemeOf(java.lang.CharSequence);	IDENTICAL
+TokenRegexOracle$Vocab.class	public int symbolOf(java.lang.String, java.lang.String);	IDENTICAL
+TokenRegexOracle$Vocab.class	public java.lang.String[] words();	IDENTICAL
+TokenRegexOracle.class	private TokenRegexOracle();	IDENTICAL
+TokenRegexOracle.class	private static java.lang.String atom(java.util.SplittableRandom);	IDENTICAL
+TokenRegexOracle.class	private static java.lang.String item(java.util.SplittableRandom, int, boolean, boolean, int[]);	IDENTICAL
+TokenRegexOracle.class	private static java.lang.String sequence(java.util.SplittableRandom, int, boolean, boolean, int[]);	IDENTICAL
+TokenRegexOracle.class	private static java.lang.String sequence(java.util.SplittableRandom, int, boolean, boolean, int[], boolean);	IDENTICAL
+TokenRegexOracle.class	private static java.lang.String[] lambda$tape$0(int);	IDENTICAL
+TokenRegexOracle.class	static TokenRegexOracle$Tape tape(java.lang.String, boolean);	IDENTICAL
+TokenRegexOracle.class	static java.lang.String javaRegex(java.lang.String);	IDENTICAL
+TokenRegexOracle.class	static java.lang.String letters(java.util.SplittableRandom, int);	IDENTICAL
+TokenRegexOracle.class	static java.lang.String pattern(java.util.SplittableRandom, boolean);	IDENTICAL
+TokenRegexOracle.class	static java.util.TreeSet<java.lang.Integer> javaSpans(java.lang.String, java.lang.String);	IDENTICAL
+TokenRegexOracle.class	static java.util.regex.Matcher javaMatcher(java.lang.String, java.lang.String);	IDENTICAL
+TokenRegexOracle.class	static jdk.internal.mindex.M3TokenPredicateCache bind(java.lang.String, TokenRegexOracle$Tape);	IDENTICAL

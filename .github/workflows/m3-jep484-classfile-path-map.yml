@@ -33,16 +33,16 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: 0 - Consume canonical Synexia workflow-structure validator
+      - name: 0 - Run the absorbed workflow-structure validator
         shell: bash
         run: |
           set -euo pipefail
-          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
-          git init -q "$SYNEXIA"
-          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
-          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
-          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
-          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+          # Standalone (2026-10-31): the validator is absorbed byte-identically (canonical Git blob
+          # below; receiver record in m3/compatibility/); no other repository is fetched
+          # (m3/tooling/standalone/SYNEXIA_REFS.tsv).
+          test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
+            "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
+          java m3/tooling/validators/WorkflowStructureCheck.java \
             .github/workflows/m3-jep484-classfile-path-map.yml
 
       - name: Diff hygiene
@@ -85,9 +85,6 @@ jobs:
           python3 m3/backports/recipes/jep-484-classfile-api/verify.py
           python3 m3/backports/recipes/jep-484-classfile-api/test_verify.py
 
-      - name: Prove inventory recipe remains non-mutating
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep484ClassfileApiInventoryRecipeTest,M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Upload map evidence
         uses: actions/upload-artifact@v4

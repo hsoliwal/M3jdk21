@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+# Standalone rule (2026-10-31): no live workflow fetches the donor repository or reads a donor secret;
+# donor lineage lives in m3/tooling/standalone/ (LINEAGE_SOURCES.tsv, ledger and rules).
+name: M3 standalone references
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/standalone/**'
+      - 'm3/ports/collections/verify_collection_port_wave1.py'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  references:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Ledger tool, lineage-ledger consumers and live-workflow fetch guard
+        run: python3 -m unittest -v m3/tooling/standalone/tools/test_refs_ledger.py

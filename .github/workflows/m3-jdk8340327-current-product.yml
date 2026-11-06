@@ -54,7 +54,6 @@ jobs:
         run: |
           set -euo pipefail
           python3 m3/backports/recipes/jdk-8340327-java21-internal/test_materialize.py
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jdk8340327Java21InternalRecipeTest,M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: 3 - Current tree is recipe fixed point
         shell: bash

@@ -1,0 +1,40 @@
+type	role	grammar	target	carrier	leaves	jdk_need
+AbstractBigDecimalParser	BIG_TEMPLATE	-	BIG_DECIMAL	-	3	LATER (BigDecimal/BigInteger leaf)
+AbstractBigIntegerParser	BIG_TEMPLATE	-	BIG_INTEGER	-	4	LATER (BigDecimal/BigInteger leaf)
+AbstractFloatValueParser	BASE	-	-	-	1	YES
+AbstractJavaFloatingPointBitsFromByteArray	GRAMMAR_TEMPLATE	JAVA	FLOATING_POINT	BYTE_ARRAY	11	YES
+AbstractJavaFloatingPointBitsFromCharArray	GRAMMAR_TEMPLATE	JAVA	FLOATING_POINT	CHAR_ARRAY	12	NO (no char[] entry in java.base parse APIs)
+AbstractJavaFloatingPointBitsFromCharSequence	GRAMMAR_TEMPLATE	JAVA	FLOATING_POINT	CHAR_SEQUENCE	11	YES
+AbstractJsonFloatingPointBitsFromByteArray	GRAMMAR_TEMPLATE	JSON	FLOATING_POINT	BYTE_ARRAY	3	NO (JSON grammar: the lexer validates; jackson routes to Double.parseDouble)
+AbstractJsonFloatingPointBitsFromCharArray	GRAMMAR_TEMPLATE	JSON	FLOATING_POINT	CHAR_ARRAY	4	NO (JSON grammar: the lexer validates; jackson routes to Double.parseDouble)
+AbstractJsonFloatingPointBitsFromCharSequence	GRAMMAR_TEMPLATE	JSON	FLOATING_POINT	CHAR_SEQUENCE	3	NO (JSON grammar: the lexer validates; jackson routes to Double.parseDouble)
+AbstractNumberParser	BASE	-	-	-	8	YES
+BigSignificand	KERNEL	-	-	-	7	LATER (BigDecimal/BigInteger leaf)
+FastDoubleMath	KERNEL	-	-	-	6	YES
+FastDoubleSwar	KERNEL	-	-	-	38	YES
+FastFloatMath	KERNEL	-	-	-	6	YES
+FastIntegerMath	KERNEL	-	-	-	10	YES
+FftMultiplier	KERNEL	-	-	-	64	LATER (BigDecimal/BigInteger leaf)
+JavaBigDecimalFromByteArray	INSTANCE	JAVA	BIG_DECIMAL	BYTE_ARRAY	5	LATER (BigDecimal/BigInteger leaf)
+JavaBigDecimalFromCharArray	INSTANCE	JAVA	BIG_DECIMAL	CHAR_ARRAY	5	LATER (BigDecimal/BigInteger leaf)
+JavaBigDecimalFromCharSequence	INSTANCE	JAVA	BIG_DECIMAL	CHAR_SEQUENCE	5	LATER (BigDecimal/BigInteger leaf)
+JavaBigDecimalParser	FACADE	JAVA	BIG_DECIMAL	-	8	LATER (BigDecimal/BigInteger leaf)
+JavaBigIntegerFromByteArray	INSTANCE	JAVA	BIG_INTEGER	BYTE_ARRAY	6	LATER (BigDecimal/BigInteger leaf)
+JavaBigIntegerFromCharArray	INSTANCE	JAVA	BIG_INTEGER	CHAR_ARRAY	6	LATER (BigDecimal/BigInteger leaf)
+JavaBigIntegerFromCharSequence	INSTANCE	JAVA	BIG_INTEGER	CHAR_SEQUENCE	6	LATER (BigDecimal/BigInteger leaf)
+JavaBigIntegerParser	FACADE	JAVA	BIG_INTEGER	-	14	LATER (BigDecimal/BigInteger leaf)
+JavaDoubleBitsFromByteArray	INSTANCE	JAVA	DOUBLE	BYTE_ARRAY	7	YES
+JavaDoubleBitsFromCharArray	INSTANCE	JAVA	DOUBLE	CHAR_ARRAY	7	NO (no char[] entry in java.base parse APIs)
+JavaDoubleBitsFromCharSequence	INSTANCE	JAVA	DOUBLE	CHAR_SEQUENCE	7	YES
+JavaDoubleParser	FACADE	JAVA	DOUBLE	-	8	-
+JavaFloatBitsFromByteArray	INSTANCE	JAVA	FLOAT	BYTE_ARRAY	7	YES
+JavaFloatBitsFromCharArray	INSTANCE	JAVA	FLOAT	CHAR_ARRAY	7	NO (no char[] entry in java.base parse APIs)
+JavaFloatBitsFromCharSequence	INSTANCE	JAVA	FLOAT	CHAR_SEQUENCE	7	YES
+JavaFloatParser	FACADE	JAVA	FLOAT	-	8	-
+JsonDoubleBitsFromByteArray	INSTANCE	JSON	DOUBLE	BYTE_ARRAY	3	NO (JSON grammar: the lexer validates; jackson routes to Double.parseDouble)
+JsonDoubleBitsFromCharArray	INSTANCE	JSON	DOUBLE	CHAR_ARRAY	3	NO (JSON grammar: the lexer validates; jackson routes to Double.parseDouble)
+JsonDoubleBitsFromCharSequence	INSTANCE	JSON	DOUBLE	CHAR_SEQUENCE	3	NO (JSON grammar: the lexer validates; jackson routes to Double.parseDouble)
+JsonDoubleParser	FACADE	JSON	DOUBLE	-	8	NO (JSON grammar: the lexer validates; jackson routes to Double.parseDouble)
+ParseDigitsTaskByteArray	INSTANCE	-	-	BYTE_ARRAY	4	LATER (BigDecimal/BigInteger leaf)
+ParseDigitsTaskCharArray	INSTANCE	-	-	CHAR_ARRAY	4	LATER (BigDecimal/BigInteger leaf)
+ParseDigitsTaskCharSequence	INSTANCE	-	-	CHAR_SEQUENCE	4	LATER (BigDecimal/BigInteger leaf)

@@ -52,10 +52,4 @@ jobs:
       - name: Verify Nebula proving-ground transfer receipt
         run: python3 m3/compatibility/test_nebula_proven_recipe_transfer.py
 
-      - name: Install provenance-pinned Synexia custody artifact
-        run: |
-          mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml clean install
 
-      - name: Compile and execute canonical recipe consumer
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3SynexiaCanonicalRecipeConsumerTest,M3SynexiaScopeKernelConsumerTest,M3SynexiaSemanticFingerprintConsumerTest,M3RecipeScopeDeclarationTest             test

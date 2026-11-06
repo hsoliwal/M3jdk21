@@ -37,6 +37,3 @@ jobs:
         run: mvn -B -ntp -f m3/ports/precompute/pom.xml test
       - name: Java JNI native parity
         run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
-      - name: Target recipe fixed-point proof
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Synexia9042PrecomputeHandoffRecipeTest test

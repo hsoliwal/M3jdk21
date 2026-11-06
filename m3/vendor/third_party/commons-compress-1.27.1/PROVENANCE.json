@@ -15,7 +15,7 @@
       "group": "org.ow2.asm",
       "optional": true,
       "scope": "compile",
-      "version": "9.10.1-m3-source-1"
+      "version": "9.6-m3-source-1"
     },
     {
       "artifact": "commons-codec",

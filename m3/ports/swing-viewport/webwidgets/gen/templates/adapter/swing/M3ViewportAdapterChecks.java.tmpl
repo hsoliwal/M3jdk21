@@ -1,0 +1,214 @@
+package @WPKG@.adapter;
+
+import static @PKG@.M3WebChecks.check;
+
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Rectangle;
+import java.awt.event.ComponentEvent;
+import java.util.Arrays;
+import java.util.EventListener;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
+
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.LayoutFocusTraversalPolicy;
+import javax.swing.SwingUtilities;
+
+import com.m3.swing.viewport.M3VirtualListModel;
+
+/**
+ * Contract of every viewport adapter (pattern M3P-ADAPTER-1), headless on the Swing event thread: off == stock (an
+ * unattached and a detached adapter leave the host's listeners and state exactly as a fresh stock instance), opt-in
+ * attach, R resident window bounded by the viewport also for a million logical items, G logical extent beyond the
+ * int range and the thumb projection, D damage-only repaint of one shown item, P plane moves that damage only the
+ * old and new plane bounds, resize and scroll bar routing.
+ */
+public final class M3ViewportAdapterChecks {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static final Class<? extends EventListener>[] LISTENERS = new Class[] { java.awt.event.ComponentListener.class,
+			java.awt.event.HierarchyListener.class, java.beans.PropertyChangeListener.class, java.awt.event.MouseListener.class,
+			java.awt.event.MouseMotionListener.class, java.awt.event.MouseWheelListener.class, java.awt.event.KeyListener.class,
+			java.awt.event.FocusListener.class, java.awt.event.ContainerListener.class, javax.swing.event.AncestorListener.class };
+
+	private M3ViewportAdapterChecks() {
+	}
+
+	/** Runs a contract on the event thread and rethrows its failure. */
+	public static void onEdt(Runnable r) throws Exception {
+		Throwable[] failure = new Throwable[1];
+		SwingUtilities.invokeAndWait(() -> {
+			try {
+				r.run();
+			} catch (Throwable t) {
+				failure[0] = t;
+			}
+		});
+		if (failure[0] instanceof Error e) {
+			throw e;
+		} else if (failure[0] != null) {
+			throw new AssertionError(failure[0]);
+		}
+	}
+
+	/** Bounds 360 x 240 and a laid-out tree. */
+	public static <C extends JComponent> C sized(C c) {
+		c.setBounds(0, 0, 360, 240);
+		layout(c);
+		return c;
+	}
+
+	static void layout(Container c) {
+		c.doLayout();
+		for (Component k : c.getComponents()) {
+			if (k instanceof Container k2) {
+				layout(k2);
+			}
+		}
+	}
+
+	/** Runs the contract on an adapter made twice: one stays stock (never attached), one is adapted. */
+	public static void run(Supplier<M3ViewportAdapter> make, int aspects) {
+		M3ViewportAdapter stock = make.get(), a = make.get();
+		int[] before = fingerprint(a.host());
+		check(Arrays.equals(before, fingerprint(stock.host())), "off == stock: an unattached adapter installs nothing");
+		check(!a.isAttached() && !a.itemChanged(0) && !a.movePlane(1, 1, 5, 5) && a.scrolled() == 0 && a.redraws() == 0, "off: no repaint");
+		check(a.aspects() == aspects && a.widget() != null, "declared aspects");
+		check(a.attach() && !a.attach() && a.isAttached(), "opt-in attach, once");
+		resident(a);
+		geometry(a);
+		damage(a);
+		planes(a);
+		routing(a);
+		a.detach();
+		a.detach();
+		check(Arrays.equals(before, fingerprint(a.host())) && !a.itemChanged(0), "detached == stock");
+	}
+
+	/** Listener counts per listener type of the host and of a scroll pane's vertical bar, plus bounds and flags. */
+	static int[] fingerprint(JComponent c) {
+		int[] f = new int[LISTENERS.length + 8];
+		for (int i = 0; i < LISTENERS.length; i++) {
+			f[i] = c.getListeners(LISTENERS[i]).length;
+		}
+		JScrollBar bar = M3ViewportKind.bar(c);
+		int k = LISTENERS.length;
+		f[k] = bar == null ? -1 : bar.getAdjustmentListeners().length;
+		f[k + 1] = c.getX();
+		f[k + 2] = c.getY();
+		f[k + 3] = c.getWidth();
+		f[k + 4] = c.getHeight();
+		f[k + 5] = c.isVisible() ? 1 : 0;
+		f[k + 6] = c.isEnabled() ? 1 : 0;
+		f[k + 7] = c.isOpaque() ? 1 : 0;
+		return f;
+	}
+
+	/** R: the resident window is the visible window plus overscan, also for a million logical items. */
+	static void resident(M3ViewportAdapter a) {
+		if ((a.aspects() & M3ViewportAdapter.R) == 0) {
+			return;
+		}
+		int[] w = new int[4];
+		a.resident(w);
+		int visible = w[1] - w[0], bound = visible + 2 * M3ViewportAdapter.OVERSCAN;
+		check(w[0] >= 0 && w[1] <= a.count() && w[2] <= w[0] && w[3] >= w[1] && a.residentCount() <= bound, "resident window " + Arrays.toString(w));
+		a.setLogical(1_000_000, 24);
+		check(a.residentCount() <= bound && a.count() == 1_000_000, "a million logical items keep the resident window");
+		a.setLogical(-1, 0);
+	}
+
+	/** G: logical extent beyond int for large virtual hosts; the thumb stays inside the track. */
+	static void geometry(M3ViewportAdapter a) {
+		if ((a.aspects() & M3ViewportAdapter.G) == 0) {
+			return;
+		}
+		a.setLogical(1_000_000, 4096);
+		int[] t = new int[2];
+		a.thumb(200, t);
+		check(a.extent() == 4_096_000_000L && t[0] >= 0 && t[1] >= 1 && t[0] + t[1] <= 200, "logical extent and thumb " + Arrays.toString(t));
+		a.setLogical(-1, 0);
+		check(a.extent() == a.count() * a.itemExtent(), "measured extent");
+	}
+
+	/** D: a shown item repaints only its bounds inside the host (rows: less than the whole host). */
+	static void damage(M3ViewportAdapter a) {
+		if ((a.aspects() & M3ViewportAdapter.D) == 0) {
+			return;
+		}
+		int[] w = new int[4];
+		a.resident(w);
+		boolean drew = a.itemChanged(w[0]);
+		int[] r = a.lastRedraw();
+		Rectangle all = new Rectangle(0, 0, a.host().getWidth(), a.host().getHeight());
+		check(drew || a.count() == 0 || all.isEmpty() || w[1] == w[0], "a shown item repaints");
+		check(!drew || (r[2] > 0 && r[3] > 0 && all.union(new Rectangle(r[0], r[1], r[2], r[3])).equals(all)), "damage inside the host " + Arrays.toString(r));
+		check(!drew || !items(a) || w[1] - w[0] < 2 || (long) r[2] * r[3] < (long) all.width * all.height, "damage is the item, not the host " + Arrays.toString(r));
+		check(!a.itemChanged(-1), "an item that is not shown repaints nothing");
+	}
+
+	private static boolean items(M3ViewportAdapter a) {
+		M3ViewportMeasure m = a.measure();
+		return m != M3ViewportKind.SURFACE && m != M3ViewportKind.PLANE && m != M3ViewportKind.COMBO && m != M3ViewportKind.RANGE;
+	}
+
+	/** P: a plane move damages its old and new bounds only. */
+	static void planes(M3ViewportAdapter a) {
+		if ((a.aspects() & M3ViewportAdapter.P) == 0) {
+			return;
+		}
+		check(a.movePlane(10, 10, 40, 20) && Arrays.equals(a.lastRedraw(), new int[] { 10, 10, 40, 20 }), "a new plane damages its bounds");
+		check(a.movePlane(17, 15, 40, 20) && Arrays.equals(a.lastRedraw(), new int[] { 10, 10, 47, 25 }), "a move damages old and new bounds only");
+		check(Arrays.equals(a.plane(), new int[] { 17, 15, 40, 20 }), "plane bounds");
+	}
+
+	/** Resize and scroll bar adjustments reach the adapter only while attached. */
+	static void routing(M3ViewportAdapter a) {
+		a.host().dispatchEvent(new ComponentEvent(a.host(), ComponentEvent.COMPONENT_RESIZED));
+		JScrollBar bar = M3ViewportKind.bar(a.host());
+		if (bar != null) {
+			bar.setValue(bar.getValue() + 1);
+			check(a.takeScrollMask() != 0 && a.takeScrollMask() == 0, "a scroll dirties planes once");
+			bar.setValue(bar.getValue() - 1);
+			a.takeScrollMask();
+		}
+		check(a.scrolled() == 0, "no move, no dirty plane");
+		check(a.measure().visible(a.widget(), a.host()) >= 0 && a.measure().viewport(a.widget(), a.host()) >= 0, "measure");
+	}
+
+	/** A JList over a 100 000-row M3VirtualListModel, handed to the virtual-list factory. */
+	public static M3ViewportAdapter virtualList(BiFunction<M3VirtualListModel, JComponent, M3ViewportAdapter> factory) {
+		M3VirtualListModel model = new M3VirtualListModel(100_000, (row, column) -> "row " + row);
+		JList<String> list = new JList<>(model);
+		list.setFixedCellHeight(20);
+		return factory.apply(model, sized(list));
+	}
+
+	/** A focus-cycle-root panel whose traversal policy is the widget, handed to the focus-trap factory. */
+	public static M3ViewportAdapter focusCycle(BiFunction<java.awt.FocusTraversalPolicy, JComponent, M3ViewportAdapter> factory) {
+		JPanel panel = M3ViewportFills.fill(new JPanel(), "children");
+		LayoutFocusTraversalPolicy policy = new LayoutFocusTraversalPolicy();
+		panel.setFocusCycleRoot(true);
+		panel.setFocusTraversalPolicy(policy);
+		return factory.apply(policy, sized(panel));
+	}
+
+	/** A panel laid out by a GridBagLayout with children, handed to the layout factory. */
+	public static M3ViewportAdapter gridBag(BiFunction<GridBagLayout, JComponent, M3ViewportAdapter> factory) {
+		GridBagLayout layout = new GridBagLayout();
+		JPanel panel = new JPanel(layout);
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		for (int i = 0; i < 24; i++) {
+			c.gridy = i;
+			panel.add(new JLabel("cell " + i), c);
+		}
+		return factory.apply(layout, sized(panel));
+	}
+}

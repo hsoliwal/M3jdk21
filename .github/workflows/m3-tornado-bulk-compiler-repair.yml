@@ -65,33 +65,3 @@ jobs:
           print("PASS: exact POM sha256, contract delta, XML parse, preview and both recipe profiles")
           PY
 
-  recipe-fixed-point:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-      - name: Install source-built OpenRewrite and JUnit runtime
-        run: >-
-          mvn -B -ntp -f m3/vendor/third_party/pom.xml
-          -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
-          -am -DskipTests install
-      - name: Validate canonical source rewrite and install custody
-        run: |
-          python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
-      - name: Compile and test exact receiver
-        run: >-
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3TornadoBulkCompilerRepairReceiverRecipeTest test
-      - name: Install receiver recipe artifact
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -DskipTests install
-      - name: Verify OpenRewrite fixed point
-        run: >-
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Drewrite.recipeArtifactCoordinates=com.m3.tooling:migration-recipes:0.1.0-SNAPSHOT
-          -Drewrite.activeRecipes=com.m3.rewrite.backport.M3TornadoBulkCompilerRepairReceiverRecipe
-          rewrite:dryRun

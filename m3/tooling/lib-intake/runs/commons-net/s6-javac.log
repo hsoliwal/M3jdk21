@@ -1,0 +1,175 @@
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.net {
+          ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\DefaultDatagramSocketFactory.java:33: warning: [missing-explicit-ctor] class DefaultDatagramSocketFactory in exported package com.m3.lib.net declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public class DefaultDatagramSocketFactory implements DatagramSocketFactory {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ProtocolCommandSupport.java:39: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Object source;
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\bsd\RCommandClient.java:83: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\bsd\RExecClient.java:76: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\bsd\RLoginClient.java:56: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\daytime\DaytimeUDPClient.java:35: warning: [missing-explicit-ctor] class DaytimeUDPClient in exported package com.m3.lib.net.daytime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public final class DaytimeUDPClient extends DatagramSocketClient {
+             ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\discard\DiscardTCPClient.java:41: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\echo\EchoUDPClient.java:36: warning: [missing-explicit-ctor] class EchoUDPClient in exported package com.m3.lib.net.echo declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public final class EchoUDPClient extends DiscardUDPClient {
+             ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\finger\FingerClient.java:64: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:206: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("es", new Locale("es", "", "")); // spanish
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:207: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("pt", new Locale("pt", "", "")); // portuguese
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:208: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("da", new Locale("da", "", "")); // danish
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:209: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("sv", new Locale("sv", "", "")); // swedish
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:210: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("no", new Locale("no", "", "")); // norwegian
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:211: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("nl", new Locale("nl", "", "")); // dutch
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:212: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("ro", new Locale("ro", "", "")); // romanian
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:213: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("sq", new Locale("sq", "", "")); // albanian
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:214: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("sh", new Locale("sh", "", "")); // serbo-croatian
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:215: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("sk", new Locale("sk", "", "")); // slovak
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPClientConfig.java:216: warning: [deprecation] Locale(String,String,String) in Locale has been deprecated
+        LANGUAGE_CODE_MAP.put("sl", new Locale("sl", "", "")); // slovenian
+                                    ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTP.java:226: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPFileFilters.java:27: warning: [missing-explicit-ctor] class FTPFileFilters in exported package com.m3.lib.net.ftp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public class FTPFileFilters {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPSClient.java:223: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setDefaultPort(DEFAULT_FTPS_PORT);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPSCommand.java:27: warning: [missing-explicit-ctor] class FTPSCommand in exported package com.m3.lib.net.ftp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public final class FTPSCommand {
+             ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\FTPSTrustManager.java:35: warning: [missing-explicit-ctor] class FTPSTrustManager in exported package com.m3.lib.net.ftp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public class FTPSTrustManager implements X509TrustManager {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\DefaultFTPFileEntryParserFactory.java:33: warning: [missing-explicit-ctor] class DefaultFTPFileEntryParserFactory in exported package com.m3.lib.net.ftp.parser declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public class DefaultFTPFileEntryParserFactory implements FTPFileEntryParserFactory {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\MVSFTPEntryParser.java:225: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        super.configure(null); // configure parser with default configurations
+                       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\UnixFTPEntryParser.java:146: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        configure(config);
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\MacOsPeterFTPEntryParser.java:81: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        configure(config);
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\NTFTPEntryParser.java:68: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        configure(config);
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\NetwareFTPEntryParser.java:76: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        configure(config);
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\OS2FTPEntryParser.java:63: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        configure(config);
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\OS400FTPEntryParser.java:263: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        configure(config);
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\VMSFTPEntryParser.java:77: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        configure(config);
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ftp\parser\VMSVersioningFTPEntryParser.java:74: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        configure(config);
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\IMAPClient.java:25: warning: [missing-explicit-ctor] class IMAPClient in exported package com.m3.lib.net.imap declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public class IMAPClient extends IMAP {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\IMAPSClient.java:157: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_IMAPS_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\imap\IMAP.java:132: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\CopyStreamException.java:42: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        initCause(exception); // merge this into super() call once we need 1.6+
+                 ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\DotTerminatedMessageWriter.java:144: warning: [fallthrough] possible fall-through into case
+            default:
+            ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\ToNetASCIIInputStream.java:94: warning: [fallthrough] possible fall-through into case
+        default:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\io\ToNetASCIIOutputStream.java:88: warning: [fallthrough] possible fall-through into case
+        default:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\ArticlePointer.java:29: warning: [missing-explicit-ctor] class ArticlePointer in exported package com.m3.lib.net.nntp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public final class ArticlePointer {
+             ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NNTP.java:96: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NNTPClient.java:63: warning: [missing-explicit-ctor] class NNTPClient in exported package com.m3.lib.net.nntp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public class NNTPClient extends NNTP {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\NewsgroupInfo.java:28: warning: [missing-explicit-ctor] class NewsgroupInfo in exported package com.m3.lib.net.nntp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public final class NewsgroupInfo {
+             ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\nntp\Threader.java:32: warning: [missing-explicit-ctor] class Threader in exported package com.m3.lib.net.nntp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public class Threader {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\NTPUDPClient.java:33: warning: [missing-explicit-ctor] class NTPUDPClient in exported package com.m3.lib.net.ntp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public final class NTPUDPClient extends DatagramSocketClient {
+             ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\TimeInfo.java:99: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            computeDetails();
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\ntp\NtpUtils.java:23: warning: [missing-explicit-ctor] class NtpUtils in exported package com.m3.lib.net.ntp declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public final class NtpUtils {
+             ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3Client.java:45: warning: [missing-explicit-ctor] class POP3Client in exported package com.m3.lib.net.pop3 declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public class POP3Client extends POP3 {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3SClient.java:153: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setDefaultPort(DEFAULT_POP3S_PORT);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\pop3\POP3.java:92: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\smtp\SMTP.java:107: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultPort(DEFAULT_PORT);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\telnet\TelnetInputStream.java:310: warning: [fallthrough] possible fall-through into case
+            case STATE_DATA:
+            ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\tftp\TFTP.java:125: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultTimeout(DEFAULT_TIMEOUT_DURATION);
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-net\proj\src\main\java\com\m3\lib\net\time\TimeUDPClient.java:38: warning: [missing-explicit-ctor] class TimeUDPClient in exported package com.m3.lib.net.time declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.net
+public final class TimeUDPClient extends DatagramSocketClient {
+             ^
+58 warnings

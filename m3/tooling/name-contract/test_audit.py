@@ -147,6 +147,10 @@ class TargetCensusTest(unittest.TestCase):
 
 
 class WorkflowCoverageTest(unittest.TestCase):
+    def test_schema_suite_is_in_the_live_name_contract_directory(self):
+        self.assertTrue((AUDIT.ROOT / "m3/tooling/name-contract/test_schema.py").is_file(),
+                        "retained variants do not replace the live schema regression suite")
+
     def test_sparse_checkout_covers_concrete_canonical_target_paths(self):
         root = AUDIT.ROOT
         workflow = root / ".github/workflows/m3jdk21-name-contract.yml"
@@ -167,6 +171,7 @@ class WorkflowCoverageTest(unittest.TestCase):
         records = json.loads((root / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
         targets = {target["path"] for record in records for target in record.get("targets", [])
                    if isinstance(target, dict) and target.get("path") and target.get("symbol")}
+        targets.update(("m3/docs/name-mapping.schema.json", "m3/migration/requirements.txt"))
         for record in records:
             relation = record.get("companion_of")
             if relation is None:

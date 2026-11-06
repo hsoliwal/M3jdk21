@@ -1,0 +1,8 @@
+consumer_pom	java_files	files_importing_org.slf4j	pin_before	pin_after
+m3/tooling/cb/pom.xml	3	0	2.0.9-m3-source-1	2.0.12-m3-source-1
+m3/tooling/mr/pom.xml	1	0	2.0.9-m3-source-1	2.0.12-m3-source-1
+m3/tooling/vi/pom.xml	1	0	2.0.9-m3-source-1	2.0.12-m3-source-1
+m3/tooling/tq/pom.xml	1	0	2.0.9	2.0.12
+m3/tooling/tq-sync/pom.xml	2	0	2.0.9	2.0.12
+m3/tooling/lane28/pom.xml	2	0	2.0.9	2.0.12
+m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml	1	0	2.0.9-m3-source-1	2.0.12-m3-source-1

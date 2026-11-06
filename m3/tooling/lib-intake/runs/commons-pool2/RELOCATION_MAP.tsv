@@ -1,0 +1,4 @@
+old	new	status
+org.apache.commons.pool2.proxy	com.m3.lib.pool2.proxy	MOVE
+org.apache.commons.pool2.impl	com.m3.lib.pool2.impl	MOVE
+org.apache.commons.pool2	com.m3.lib.pool2	MOVE

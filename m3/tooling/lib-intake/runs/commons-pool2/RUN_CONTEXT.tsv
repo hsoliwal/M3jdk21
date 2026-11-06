@@ -1,0 +1,8 @@
+key	value
+lib	commons-pool2
+source	m3/vendor/third_party/commons-pool2
+mappings	org.apache.commons.pool2=com.m3.lib.pool2
+module	jdk.m3.pool2
+version	2.12.0-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/commons-pool2
+intake_deps	-

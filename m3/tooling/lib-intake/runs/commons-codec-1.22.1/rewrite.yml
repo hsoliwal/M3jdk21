@@ -1,0 +1,33 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of commons-codec-1.22.1
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.codec.language.bm
+      newPackageName: com.m3.lib.codec.language.bm
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.codec.language
+      newPackageName: com.m3.lib.codec.language
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.codec.binary
+      newPackageName: com.m3.lib.codec.binary
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.codec.digest
+      newPackageName: com.m3.lib.codec.digest
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.codec.cli
+      newPackageName: com.m3.lib.codec.cli
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.codec.net
+      newPackageName: com.m3.lib.codec.net
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.apache.commons.codec
+      newPackageName: com.m3.lib.codec
+      recursive: false

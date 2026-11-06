@@ -1,0 +1,41 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of xz
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz.rangecoder
+      newPackageName: com.m3.lib.xz.rangecoder
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz.common
+      newPackageName: com.m3.lib.xz.common
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz.simple
+      newPackageName: com.m3.lib.xz.simple
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz.check
+      newPackageName: com.m3.lib.xz.check
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz.delta
+      newPackageName: com.m3.lib.xz.delta
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz.index
+      newPackageName: com.m3.lib.xz.index
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz.lzma
+      newPackageName: com.m3.lib.xz.lzma
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz.lz
+      newPackageName: com.m3.lib.xz.lz
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.tukaani.xz
+      newPackageName: com.m3.lib.xz
+      recursive: false

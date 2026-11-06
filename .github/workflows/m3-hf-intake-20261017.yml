@@ -61,8 +61,8 @@ jobs:
             --source-manifest "$tmp/manifest.tsv" \
             --records "$tmp/synexia-source.records.tsv" \
             --output "$tmp/export" \
-            --source-repository https://github.com/hsoliwal/com.synexia \
-            --source-commit 892e3f6c51d78bc0948e8a8cf736055b4c70eafa
+            --source-repository "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
+            --source-commit "$GITHUB_SHA"
           python3 m3/runtime-integration/verify-synexia-lexicon.py "$tmp/export"
       - name: Reuse the existing C11 JNI word-row receiver, four runtime modes
         shell: bash

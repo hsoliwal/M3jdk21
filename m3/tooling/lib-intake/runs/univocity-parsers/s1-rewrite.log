@@ -1,0 +1,989 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< m3.intake:univocity-parsers >---------------------
+[INFO] Building univocity-parsers 2.9.1-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ univocity-parsers ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [univocity-parsers] Resolving Poms...
+[INFO] Project [univocity-parsers] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\BooleanString.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\BooleanString.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Convert.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Convert.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Copy.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Copy.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\EnumOptions.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\EnumOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\FixedWidth.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\FixedWidth.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Format.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Format.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Headers.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Headers.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\HeaderTransformer.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\HeaderTransformer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\helpers\AnnotationHelper.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\helpers\AnnotationHelper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.beans, newPackageName=com.m3.lib.parsers.common.beans, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\helpers\AnnotationRegistry.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\helpers\AnnotationRegistry.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\helpers\FieldMapping.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\helpers\FieldMapping.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.beans, newPackageName=com.m3.lib.parsers.common.beans, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\helpers\MethodDescriptor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\helpers\MethodDescriptor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\helpers\MethodFilter.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\helpers\MethodFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\helpers\TransformedHeader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\helpers\TransformedHeader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\LowerCase.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\LowerCase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Nested.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Nested.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\NullString.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\NullString.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Parsed.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Parsed.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Replace.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Replace.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Trim.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Trim.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\UpperCase.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\UpperCase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\annotations\Validate.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\annotations\Validate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\AbstractException.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\AbstractParser.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.iterators, newPackageName=com.m3.lib.parsers.common.iterators, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\AbstractWriter.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.tsv, newPackageName=com.m3.lib.parsers.tsv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ArgumentUtils.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ArgumentUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\beans\BeanHelper.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\beans\BeanHelper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.beans, newPackageName=com.m3.lib.parsers.common.beans, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\beans\PropertyWrapper.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\beans\PropertyWrapper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.beans, newPackageName=com.m3.lib.parsers.common.beans, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ColumnMap.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ColumnMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\CommonParserSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\CommonParserSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input.concurrent, newPackageName=com.m3.lib.parsers.common.input.concurrent, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\CommonSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\CommonSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\CommonWriterSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\CommonWriterSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\Context.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\Context.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ContextSnapshot.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ContextSnapshot.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ContextWrapper.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ContextWrapper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ConversionProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ConversionProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\DataProcessingException.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\DataProcessingException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\DataValidationException.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\DataValidationException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\DefaultContext.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\DefaultContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\DefaultConversionProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\DefaultConversionProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\DefaultParsingContext.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\DefaultParsingContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\DummyFormat.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\DummyFormat.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\AbstractColumnMapping.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\AbstractColumnMapping.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\AllIndexesSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\AllIndexesSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\ColumnMapper.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\ColumnMapper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\ColumnMapping.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\ColumnMapping.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\ExcludeFieldEnumSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\ExcludeFieldEnumSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\ExcludeFieldIndexSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\ExcludeFieldIndexSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\ExcludeFieldNameSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\ExcludeFieldNameSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\FieldConversionMapping.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\FieldConversionMapping.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\FieldEnumSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\FieldEnumSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\FieldIndexSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\FieldIndexSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\FieldNameSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\FieldNameSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\FieldSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\FieldSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\fields\FieldSet.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\fields\FieldSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\Format.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\Format.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\AbstractCharInputReader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\AbstractCharInputReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input.concurrent, newPackageName=com.m3.lib.parsers.common.input.concurrent, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\BomInput.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\BomInput.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\CharAppender.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\CharAppender.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\CharInput.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\CharInput.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\CharInputReader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\CharInputReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\concurrent\CharBucket.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\concurrent\CharBucket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input.concurrent, newPackageName=com.m3.lib.parsers.common.input.concurrent, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\concurrent\ConcurrentCharInputReader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\concurrent\ConcurrentCharInputReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input.concurrent, newPackageName=com.m3.lib.parsers.common.input.concurrent, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\concurrent\ConcurrentCharLoader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\concurrent\ConcurrentCharLoader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input.concurrent, newPackageName=com.m3.lib.parsers.common.input.concurrent, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\concurrent\Entry.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\concurrent\Entry.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input.concurrent, newPackageName=com.m3.lib.parsers.common.input.concurrent, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\concurrent\FixedInstancePool.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\concurrent\FixedInstancePool.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input.concurrent, newPackageName=com.m3.lib.parsers.common.input.concurrent, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\DefaultCharAppender.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\DefaultCharAppender.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\DefaultCharInputReader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\DefaultCharInputReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\ElasticCharAppender.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\ElasticCharAppender.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\EOFException.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\EOFException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\ExpandingCharAppender.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\ExpandingCharAppender.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\InputAnalysisProcess.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\InputAnalysisProcess.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\LineSeparatorDetector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\LineSeparatorDetector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\LookaheadCharInputReader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\LookaheadCharInputReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\NoopCharAppender.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\NoopCharAppender.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\input\WriterCharAppender.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\input\WriterCharAppender.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\Internal.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\Internal.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\IterableResult.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\IterableResult.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\iterators\ParserIterator.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\iterators\ParserIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.iterators, newPackageName=com.m3.lib.parsers.common.iterators, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\iterators\RecordIterator.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\iterators\RecordIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.iterators, newPackageName=com.m3.lib.parsers.common.iterators, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\iterators\RowIterator.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\iterators\RowIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.iterators, newPackageName=com.m3.lib.parsers.common.iterators, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\LineReader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\LineReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\NoopParsingContext.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\NoopParsingContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\NoopProcessorErrorHandler.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\NoopProcessorErrorHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\NoopRowProcessorErrorHandler.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\NoopRowProcessorErrorHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\NormalizedString.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\NormalizedString.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ParserOutput.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ParserOutput.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ParsingContext.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ParsingContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ParsingContextSnapshot.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ParsingContextSnapshot.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ParsingContextWrapper.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ParsingContextWrapper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\AbstractRowProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\AbstractRowProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\BatchedColumnProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\BatchedColumnProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\BatchedObjectColumnProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\BatchedObjectColumnProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\BeanListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\BeanListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\BeanProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\BeanProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\BeanWriterProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\BeanWriterProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\ColumnProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\ColumnProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\CompositeRowProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\CompositeRowProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\ConcurrentRowProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\ConcurrentRowProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractBatchedColumnProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractBatchedColumnProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractBatchedObjectColumnProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractBatchedObjectColumnProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractBeanListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractBeanListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractBeanProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractBeanProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractColumnProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractColumnProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractConcurrentProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractConcurrentProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractInputValueSwitch.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractInputValueSwitch.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractMasterDetailListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractMasterDetailListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractMasterDetailProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractMasterDetailProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractMultiBeanListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractMultiBeanListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractMultiBeanProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractMultiBeanProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractMultiBeanRowProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractMultiBeanRowProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractObjectColumnProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractObjectColumnProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractObjectListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractObjectListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractObjectProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractObjectProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\AbstractProcessorSwitch.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\AbstractProcessorSwitch.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\BatchedColumnReader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\BatchedColumnReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\BeanConversionProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\BeanConversionProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.beans, newPackageName=com.m3.lib.parsers.common.beans, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\ColumnOrderDependent.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\ColumnOrderDependent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\ColumnReader.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\ColumnReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\ColumnSplitter.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\ColumnSplitter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\CompositeProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\CompositeProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\NoopProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\NoopProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\core\Processor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\core\Processor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\CustomMatcher.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\CustomMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\InputValueSwitch.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\InputValueSwitch.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\MasterDetailListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\MasterDetailListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\MasterDetailProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\MasterDetailProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\MasterDetailRecord.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\MasterDetailRecord.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\MultiBeanListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\MultiBeanListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\MultiBeanProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\MultiBeanProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\MultiBeanRowProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\MultiBeanRowProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\NoopRowProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\NoopRowProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\ObjectColumnProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\ObjectColumnProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\ObjectRowListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\ObjectRowListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\ObjectRowProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\ObjectRowProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\ObjectRowWriterProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\ObjectRowWriterProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\OutputValueSwitch.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\OutputValueSwitch.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\RowListProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\RowListProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\RowPlacement.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\RowPlacement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\RowProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\RowProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\RowProcessorSwitch.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\RowProcessorSwitch.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\RowWriterProcessor.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\RowWriterProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\processor\RowWriterProcessorSwitch.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\processor\RowWriterProcessorSwitch.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ProcessorErrorHandler.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ProcessorErrorHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor.core, newPackageName=com.m3.lib.parsers.common.processor.core, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\record\AbstractRecordFactory.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\record\AbstractRecordFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\record\MetaData.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\record\MetaData.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\record\Record.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\record\Record.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\record\RecordFactory.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\record\RecordFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\record\RecordImpl.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\record\RecordImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\record\RecordMetaData.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\record\RecordMetaData.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\record\RecordMetaDataImpl.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\record\RecordMetaDataImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\ResultIterator.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ResultIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\RetryableErrorHandler.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\RetryableErrorHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\routine\AbstractRoutines.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\routine\AbstractRoutines.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.routine, newPackageName=com.m3.lib.parsers.common.routine, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\routine\InputDimension.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\routine\InputDimension.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.routine, newPackageName=com.m3.lib.parsers.common.routine, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\RowProcessorErrorHandler.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\RowProcessorErrorHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\StringCache.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\StringCache.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\TextParsingException.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\TextParsingException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\common\TextWritingException.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\TextWritingException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\BigDecimalConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\BigDecimalConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\BigIntegerConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\BigIntegerConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\BooleanConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\BooleanConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\ByteConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\ByteConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\CalendarConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\CalendarConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\CharacterConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\CharacterConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\Conversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\Conversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.processor, newPackageName=com.m3.lib.parsers.common.processor, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\Conversions.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\Conversions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\DateConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\DateConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\DoubleConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\DoubleConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\EnumConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\EnumConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\EnumSelector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\EnumSelector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\FloatConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\FloatConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\FormattedBigDecimalConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\FormattedBigDecimalConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\FormattedConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\FormattedConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\FormattedDateConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\FormattedDateConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\IntegerConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\IntegerConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\LongConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\LongConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\LowerCaseConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\LowerCaseConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\NullConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\NullConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\NullStringConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\NullStringConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\NumericConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\NumericConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\ObjectConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\ObjectConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\RegexConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\RegexConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\ShortConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\ShortConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\ToStringConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\ToStringConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\TrimConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\TrimConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\UpperCaseConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\UpperCaseConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\ValidatedConversion.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\ValidatedConversion.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\conversions\Validator.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\conversions\Validator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.conversions, newPackageName=com.m3.lib.parsers.conversions, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\Csv.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\Csv.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\CsvFormat.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\CsvFormat.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\CsvFormatDetector.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\CsvFormatDetector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\CsvParser.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\CsvParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\CsvParserSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\CsvParserSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\CsvRoutines.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\CsvRoutines.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.routine, newPackageName=com.m3.lib.parsers.common.routine, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\CsvWriter.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\CsvWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\CsvWriterSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\CsvWriterSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.fields, newPackageName=com.m3.lib.parsers.common.fields, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\csv\UnescapedQuoteHandling.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\csv\UnescapedQuoteHandling.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.csv, newPackageName=com.m3.lib.parsers.csv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FieldAlignment.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FieldAlignment.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FixedWidthFieldLengths.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthFieldLengths.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FixedWidthFields.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthFields.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FixedWidthFormat.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthFormat.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FixedWidthParser.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FixedWidthParserSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthParserSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FixedWidthRoutines.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthRoutines.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.routine, newPackageName=com.m3.lib.parsers.common.routine, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FixedWidthWriter.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\FixedWidthWriterSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthWriterSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations.helpers, newPackageName=com.m3.lib.parsers.annotations.helpers, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.annotations, newPackageName=com.m3.lib.parsers.annotations, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\fixed\Lookup.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\Lookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.record, newPackageName=com.m3.lib.parsers.common.record, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.fixed, newPackageName=com.m3.lib.parsers.fixed, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\tsv\TsvFormat.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\tsv\TsvFormat.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.tsv, newPackageName=com.m3.lib.parsers.tsv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\tsv\TsvParser.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\tsv\TsvParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.tsv, newPackageName=com.m3.lib.parsers.tsv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\tsv\TsvParserSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\tsv\TsvParserSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.tsv, newPackageName=com.m3.lib.parsers.tsv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\tsv\TsvRoutines.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\tsv\TsvRoutines.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.routine, newPackageName=com.m3.lib.parsers.common.routine, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.tsv, newPackageName=com.m3.lib.parsers.tsv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\tsv\TsvWriter.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\tsv\TsvWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common.input, newPackageName=com.m3.lib.parsers.common.input, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.tsv, newPackageName=com.m3.lib.parsers.tsv, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\univocity\parsers\tsv\TsvWriterSettings.java to m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\tsv\TsvWriterSettings.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.common, newPackageName=com.m3.lib.parsers.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.univocity.parsers.tsv, newPackageName=com.m3.lib.parsers.tsv, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  19.074 s
+[INFO] Finished at: 2026-10-31T06:43:49+05:30
+[INFO] ------------------------------------------------------------------------

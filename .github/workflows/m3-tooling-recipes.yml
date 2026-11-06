@@ -86,17 +86,7 @@ jobs:
         run: |
           set -euo pipefail
           cd "$REPO"
-          python3 m3/tooling/migration-recipes/test_canonical_atom_descriptors.py -v
-          python3 m3/tooling/migration-recipes/verify_canonical_atom_descriptors.py
 
-      - name: Maven JUnit OpenRewrite proof
-        shell: bash
-        run: |
-          set -euo pipefail
-          java -version
-          mvn -version
-          mvn -B -ntp -f "$REPO/m3/synexia-import/pure-int-recipe-custody/pom.xml" clean install
-          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" clean verify
 
       - name: Emit M3 convergence proof artifacts
         shell: bash

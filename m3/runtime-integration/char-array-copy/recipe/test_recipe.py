@@ -101,13 +101,17 @@ class CharArrayCopyRecipeTest(unittest.TestCase):
     def test_git_blob_uses_the_repository_nul_framing(self):
         source = RECIPE.ROOT / "src/java.base/share/classes/java/lang/M3String.java"
         self.assertEqual(
-            "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
+            "8ddd767e9198f5716ebde4aada80b91591125d9d",
             RECIPE.git_blob(source.read_bytes()),
         )
         lineage = MANIFEST["files"][RECIPE.ENGINE]["supersession_history"]
         self.assertEqual(
-            ["bcbe4d4da2903dc27ad65155aa5d632c0c57c759", "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e"],
+            ["bcbe4d4da2903dc27ad65155aa5d632c0c57c759", "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e", "8ddd767e9198f5716ebde4aada80b91591125d9d"],
             [record["git_blob"] for record in lineage],
+        )
+        self.assertEqual(
+            ["4402dca8d07dc7a98eb70bc6d003a78a1f08803f", "5eeb841168ed420085223806fefcfca8d1b6b3ca", "9237d21cccc0d700555ccc4eab3b87edb2833af3"],
+            [record["source_commit"] for record in lineage],
         )
 
     def test_manifest_superseded_hashes_are_current_exact_sources(self):

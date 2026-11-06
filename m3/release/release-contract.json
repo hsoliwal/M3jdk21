@@ -122,9 +122,9 @@
     "artifact_paths_relative_to": "manifest_directory",
     "legacy_recipe_sources_block_release": true,
     "gate_owners": {
-      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/com.synexia"
+      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/M3jdk21"
     },
-    "maven_gate_scope": "Preserve this existing gate ID. Its equivalent canonical Maven/OpenRewrite recipe execution is owned and executed only by hsoliwal/com.synexia. The historical target m3/pom.xml reactor and target-local recipes remain migration holds; running them in M3JDK21 does not satisfy this gate.",
+    "maven_gate_scope": "Preserve this existing gate ID. Standalone rule (user, 2026-10-31): M3JDK builds, tests and releases without any other repository, so its Maven/OpenRewrite control-reactor execution is owned and executed by hsoliwal/M3jdk21 from the recipes and sources it carries; the evidence names this repository, the exact commit and the recipe identity. Donor lineage stays in ledgers (m3/tooling/standalone/SYNEXIA_REFS.tsv). Legacy recipe roots remain a visible HOLD (legacy_recipe_custody).",
     "required_manifest_fields": [
       "schema",
       "source_commit",
@@ -159,5 +159,10 @@
     "visible_queue_source": "m3/tooling/name-contract/name-plan.json",
     "visible_queue_authority": "m3/docs/name-mapping.json",
     "queue_output_command": "python3 m3/release/verify_release_admission.py --queue-out m3/release/queue/current/README.md --json-out m3/release/queue/current/admission.json"
+  },
+  "standalone": {
+    "required_for_release": true,
+    "baseline": "m3/release/STANDALONE_BASELINE.tsv",
+    "rule": "M3JDK21 builds, tests, gates and releases without any other repository (user 2026-10-31); check_standalone.py: development mode is a ratchet, release mode needs zero cross-repository dependencies"
   }
 }

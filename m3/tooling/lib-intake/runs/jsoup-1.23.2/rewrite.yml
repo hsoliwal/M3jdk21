@@ -1,0 +1,33 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of jsoup-1.23.2
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.jsoup.internal
+      newPackageName: com.m3.lib.jsoup.internal
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.jsoup.helper
+      newPackageName: com.m3.lib.jsoup.helper
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.jsoup.parser
+      newPackageName: com.m3.lib.jsoup.parser
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.jsoup.safety
+      newPackageName: com.m3.lib.jsoup.safety
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.jsoup.select
+      newPackageName: com.m3.lib.jsoup.select
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.jsoup.nodes
+      newPackageName: com.m3.lib.jsoup.nodes
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: org.jsoup
+      newPackageName: com.m3.lib.jsoup
+      recursive: false

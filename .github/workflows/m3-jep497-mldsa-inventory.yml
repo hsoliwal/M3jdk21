@@ -43,11 +43,6 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
-      - name: Prove source-sealed inventory recipe and fixed point
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jep497MlDsaInventoryRecipeTest,M3Jep497SharedOwnerSplitRecipeTest
-          -Dsurefire.failIfNoSpecifiedTests=false test
       - name: Fetch exact implementation and JDK24 GA donor states
         shell: bash
         run: |

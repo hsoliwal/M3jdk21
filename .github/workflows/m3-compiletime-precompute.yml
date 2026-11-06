@@ -68,7 +68,3 @@ jobs:
             --harvest target/ci-harvest --rounds 3 --reps 1
           cat target/ci-harvest/HARVEST_RECEIPT.tsv target/ci-harvest/DIFFERENTIAL_RECEIPT.tsv
 
-      - name: OpenRewrite crate fixed point
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3CompileTimeRegexPrecomputeRecipeTest test

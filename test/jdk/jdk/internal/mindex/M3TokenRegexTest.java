@@ -168,8 +168,11 @@ public final class M3TokenRegexTest {
         M3TokenPredicateCache regex = bind("[{text:/c.*t/}]", 0, java, JAVA, vocab);
         check(regex.test(regex.pattern().nodeX(regex.pattern().rootNode()), 2),
                 "regex spelling row");
+        //FLLDCIM: TOP - decision D1 (m3/tooling/atom-tests/runs/mindex-20261031/CONTRACT_DECISIONS.tsv): test was wrong
+        // A kind regex matches the symbolic kind spelling of each token (Vocabulary.symbolText, full match), so
+        // /ID.*/ selects every IDENT token of the fixture: count (2), String (9), s (11) and count (20).
         check(positions("[{kind:/ID.*/}]", 0, java, JAVA, vocab)
-                .equals(List.of(2, 20)), "symbolic kind regex row");
+                .equals(List.of(2, 9, 11, 20)), "symbolic kind regex row");
         check(bind("[{text:count}]", 0, java, JAVA, vocab).cacheKey().endsWith("/0/2f"), "cache key");
         M3TokenIndex attrs = attributeIndex();
         String text = "aa bb cc";

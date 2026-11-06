@@ -1,0 +1,10 @@
+old	new	status
+org.fastfilter.bloom.count	com.m3.lib.fastfilter.bloom.count	MOVE
+org.fastfilter.xorplus	com.m3.lib.fastfilter.xorplus	MOVE
+org.fastfilter.cuckoo	com.m3.lib.fastfilter.cuckoo	MOVE
+org.fastfilter.bloom	com.m3.lib.fastfilter.bloom	MOVE
+org.fastfilter.tools	com.m3.lib.fastfilter.tools	MOVE
+org.fastfilter.utils	com.m3.lib.fastfilter.utils	MOVE
+org.fastfilter.gcs	com.m3.lib.fastfilter.gcs	MOVE
+org.fastfilter.xor	com.m3.lib.fastfilter.xor	MOVE
+org.fastfilter	com.m3.lib.fastfilter	MOVE

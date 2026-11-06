@@ -1,0 +1,12 @@
+jdk.m3.fastfilter@1.0.2-m3-source-1
+exports com.m3.lib.fastfilter
+exports com.m3.lib.fastfilter.bloom
+exports com.m3.lib.fastfilter.bloom.count
+exports com.m3.lib.fastfilter.cuckoo
+exports com.m3.lib.fastfilter.gcs
+exports com.m3.lib.fastfilter.tools
+exports com.m3.lib.fastfilter.utils
+exports com.m3.lib.fastfilter.xor
+exports com.m3.lib.fastfilter.xorplus
+requires java.base mandated
+

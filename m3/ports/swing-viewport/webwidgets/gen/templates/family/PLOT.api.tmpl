@@ -1,0 +1,13 @@
+package @PKG@;
+
+/** API of the painted value arrays (pattern M3P-PLOT-1). */
+public interface M3PlotApi extends M3WebApi {
+	/** Replaces the data: {@code ;}-separated values (gantt {@code start~length}; QR: the text to encode). */
+	void load(String sample);
+
+	/** Largest value (gantt: largest end), at least 1. */
+	int maxValue();
+
+	/** Module of the QR-style matrix at (row, col). */
+	boolean module(int row, int col);
+}

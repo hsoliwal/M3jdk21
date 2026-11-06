@@ -1,0 +1,1 @@
+s/org\.fastfilter([^A-Za-z0-9_$]|$)/com.m3.lib.fastfilter\1/g;s#org/fastfilter([^A-Za-z0-9_$]|$)#com/m3/lib/fastfilter\1#g;

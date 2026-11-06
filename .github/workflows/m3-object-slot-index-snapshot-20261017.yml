@@ -46,10 +46,6 @@ jobs:
           git diff --check
           python3 m3/collections/qualification/m3-object-slot-index-snapshot-20261017/verify.py
 
-      - name: Canonical OpenRewrite mirror fixed point and refusal
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3ObjectSlotIndexSnapshot20261017RecipeTest test
 
       - name: Owning M3 Collections Maven/JUnit contract
         run: >

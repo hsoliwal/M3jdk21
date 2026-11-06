@@ -29,6 +29,13 @@ The eight manifest-listed Java sources are mirrored byte-identically below the c
 `m3/tooling/synexia-jdk-a3-recipes` compiles only those manifest-listed files into the already
 declared `com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT` coordinate.
 
+The export's seven unit tests, sealed with those sources in the same export closure, are
+mirrored byte-identically below `src/test/java/` (absorbed 2026-10-31 under the standalone rule;
+provenance: `m3/synexia-import/intakes/jdk-a3-public-export-tests-20261031/SOURCE_PROVENANCE.tsv`;
+sha256 seal: `.github/workflows/m3-a3.yml`). The module compiles and runs them in its test phase.
+One method is a recorded HOLD: at this revision it expects a `synexia` tag that the sealed
+`M3PureIntConvergenceRecipe` never carried (`m3/tooling/synexia-jdk-a3-recipes/surefire-hold-excludes.txt`).
+
 The module is build glue, not a second recipe home.
 
 ## Ownership and use

@@ -11,7 +11,11 @@ The runtime inputs are the existing in-repository source inclusions of Jackson
 annotations/core/databind 2.19.2 and FastDoubleParser 1.0.90. `SOURCE_LOCK.json`
 pins their complete source/build/legal trees. Their exact Maven POMs perform the
 source builds, FastDoubleParser shading and multi-release compilation in fresh
-staging directories. No upstream source or POM is patched by this build.
+staging directories. No upstream source or POM is patched by this build. The
+FastDoubleParser 1.0.90 tree carries two recorded M3 overlays: its
+`JavaDoubleParser` and `JavaFloatParser` facades delegate to java.base
+(`m3/tooling/fdp-delegate`), so Jackson's `USE_FAST_DOUBLE_PARSER` path and the
+JDK use one parser; its BigDecimal/BigInteger parsers are unchanged.
 
 The existing `m3/tooling/jmod-recipes/tools/jmod_pack.py` owns JMOD assembly and
 release-21 flattening. Its existing module graph checks the selected closure and

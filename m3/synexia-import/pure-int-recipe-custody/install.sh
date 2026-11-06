@@ -27,7 +27,7 @@ PROJECTS="rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launc
 if [[ "$MODE" == "--dependencies-only" ]]; then
   # TQ explicitly consumes the source-built SLF4J 2 API in addition to the
   # OpenRewrite closure's retained SLF4J 1.7 dependency.
-  PROJECTS+=",slf4j-api-2.0.9"
+  PROJECTS+=",slf4j-api-2.0.12"
 fi
 mvn -B -ntp -f "$VENDOR" -pl "$PROJECTS" -am -DskipTests install
 

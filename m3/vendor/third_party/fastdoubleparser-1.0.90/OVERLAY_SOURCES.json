@@ -94,6 +94,34 @@
       "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java8/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java"
     }
   ],
+  "m3_overlays": [
+    {
+      "base_repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/upstream-excluded/ch/randelshofer/fastdoubleparser/JavaDoubleParser.java",
+      "base_sha256": "4eaaf436e7b76b4ac800e1261f98b240caf25b811f0a114ba73093f4767f8b9f",
+      "class": "ch/randelshofer/fastdoubleparser/JavaDoubleParser",
+      "delegates_to": "java.lang.Double.parseDouble",
+      "overlay": "FDP_DELEGATES_TO_JDK v1",
+      "recipe": "m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py",
+      "recipe_sha256": "3140cf434cdea1abd83b9626f86066bc72c40a23cfc9144bfe64d5345809faf5",
+      "release": "base",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/java/ch/randelshofer/fastdoubleparser/JavaDoubleParser.java",
+      "sha256": "4a543d61076c6f6d2a589168b1bd80218de9948cf75d0523a3a20271f928334c",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleParser.java"
+    },
+    {
+      "base_repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/upstream-excluded/ch/randelshofer/fastdoubleparser/JavaFloatParser.java",
+      "base_sha256": "ab82daaac3aca15fb55c06bbd54658fb16d6a55b9fbfa951ca03dc2995fd7f8c",
+      "class": "ch/randelshofer/fastdoubleparser/JavaFloatParser",
+      "delegates_to": "java.lang.Float.parseFloat",
+      "overlay": "FDP_DELEGATES_TO_JDK v1",
+      "recipe": "m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py",
+      "recipe_sha256": "3140cf434cdea1abd83b9626f86066bc72c40a23cfc9144bfe64d5345809faf5",
+      "release": "base",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/java/ch/randelshofer/fastdoubleparser/JavaFloatParser.java",
+      "sha256": "6d2fbfc7a553b73f51992559093c284ef240f956346233de7ad209a91e8d085d",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatParser.java"
+    }
+  ],
   "not_reproduced": [
     {
       "class": "ch/randelshofer/fastdoubleparser/FastDoubleSwar",

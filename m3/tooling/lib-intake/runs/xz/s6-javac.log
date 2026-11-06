@@ -1,0 +1,37 @@
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.xz {
+          ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\FinishableOutputStream.java:14: warning: [missing-explicit-ctor] class FinishableOutputStream in exported package com.m3.lib.xz declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public abstract class FinishableOutputStream extends OutputStream {
+                ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\BasicArrayCache.java:35: warning: [missing-explicit-ctor] class BasicArrayCache in exported package com.m3.lib.xz declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public class BasicArrayCache extends ArrayCache {
+       ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\check\Check.java:10: warning: [missing-explicit-ctor] class Check in exported package com.m3.lib.xz.check declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public abstract class Check {
+                ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeCoder.java:10: warning: [missing-explicit-ctor] class RangeCoder in exported package com.m3.lib.xz.rangecoder declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public abstract class RangeCoder {
+                ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeDecoder.java:10: warning: [missing-explicit-ctor] class RangeDecoder in exported package com.m3.lib.xz.rangecoder declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public abstract class RangeDecoder extends RangeCoder {
+                ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeEncoder.java:10: warning: [missing-explicit-ctor] class RangeEncoder in exported package com.m3.lib.xz.rangecoder declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public abstract class RangeEncoder extends RangeCoder {
+                ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\SeekableInputStream.java:13: warning: [missing-explicit-ctor] class SeekableInputStream in exported package com.m3.lib.xz declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public abstract class SeekableInputStream extends InputStream {
+                ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\StreamFlags.java:7: warning: [missing-explicit-ctor] class StreamFlags in exported package com.m3.lib.xz.common declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public class StreamFlags {
+       ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\Util.java:7: warning: [missing-explicit-ctor] class Util in exported package com.m3.lib.xz.common declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public class Util {
+       ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\DecoderUtil.java:16: warning: [missing-explicit-ctor] class DecoderUtil in exported package com.m3.lib.xz.common declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public class DecoderUtil extends Util {
+       ^
+H:\m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\EncoderUtil.java:11: warning: [missing-explicit-ctor] class EncoderUtil in exported package com.m3.lib.xz.common declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.xz
+public class EncoderUtil extends Util {
+       ^
+12 warnings

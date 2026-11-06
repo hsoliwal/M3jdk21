@@ -1,0 +1,57 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.intake.Relocate
+displayName: LIB_INTAKE relocation of jackson-core-2.19.2
+description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.io.schubfach
+      newPackageName: com.m3.lib.core.io.schubfach
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.json.async
+      newPackageName: com.m3.lib.core.json.async
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.filter
+      newPackageName: com.m3.lib.core.filter
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.format
+      newPackageName: com.m3.lib.core.format
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.async
+      newPackageName: com.m3.lib.core.async
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.base
+      newPackageName: com.m3.lib.core.base
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.json
+      newPackageName: com.m3.lib.core.json
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.type
+      newPackageName: com.m3.lib.core.type
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.util
+      newPackageName: com.m3.lib.core.util
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.exc
+      newPackageName: com.m3.lib.core.exc
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.sym
+      newPackageName: com.m3.lib.core.sym
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core.io
+      newPackageName: com.m3.lib.core.io
+      recursive: false
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.fasterxml.jackson.core
+      newPackageName: com.m3.lib.core
+      recursive: false

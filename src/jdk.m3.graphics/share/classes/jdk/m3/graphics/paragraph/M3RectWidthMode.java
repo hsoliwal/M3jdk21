@@ -1,0 +1,14 @@
+package jdk.m3.graphics.paragraph;
+
+
+// DartTypes.h - RectWidthStyle
+public enum M3RectWidthMode {
+
+    /** Provide tight bounding boxes that fit widths to the runs of each line independently. */
+    TIGHT,
+
+    /** Extends the width of the last rect of each line to match the position of the widest rect over all the lines. */
+    MAX;
+
+    public static final M3RectWidthMode[] _values = values();
+}

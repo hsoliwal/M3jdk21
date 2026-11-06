@@ -1,0 +1,4 @@
+file	reason
+org/apache/commons/lang3/CharUtils.java	OpenRewrite 8.17.1 parse failure (s1-rewrite.log); moved by the name map
+org/apache/commons/lang3/StringUtils.java	OpenRewrite 8.17.1 parse failure (s1-rewrite.log); moved by the name map
+org/apache/commons/lang3/concurrent/UncheckedFuture.java	OpenRewrite 8.17.1 parse failure (s1-rewrite.log); moved by the name map

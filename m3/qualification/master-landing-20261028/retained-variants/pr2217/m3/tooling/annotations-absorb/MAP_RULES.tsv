@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# MAP_RULES.tsv - the semantic map of the annotations convergence (user decision 2026-10-31: converge into
+# jdk.m3.annotations, JSpecify semantics canonical). One row per donor annotation that has a jdk.m3 owner.
+# decision: CANONICAL (the owner is absorbed from this donor) | MAP (consumers move to the owner).
+# relation: SAME (the donor is the owner) | EQUIVALENT (same meaning and placement) | APPROX (same intent, different
+# placement or strength; the consumer recipe gates each site by compilation). Every donor annotation without a row is
+# ABSORB_NEXT in ANNOTATIONS.tsv.
+donor_fqn	decision	relation	m3_owner	note
+org.jspecify.annotations.NullMarked	CANONICAL	SAME	jdk.m3.annotations.NullMarked	JSpecify 1.0.1
+org.jspecify.annotations.NullUnmarked	CANONICAL	SAME	jdk.m3.annotations.NullUnmarked	JSpecify 1.0.1
+org.jspecify.annotations.Nullable	CANONICAL	SAME	jdk.m3.annotations.Nullable	JSpecify 1.0.1
+org.jspecify.annotations.NonNull	CANONICAL	SAME	jdk.m3.annotations.NonNull	JSpecify 1.0.1
+org.checkerframework.checker.nullness.qual.Nullable	MAP	EQUIVALENT	jdk.m3.annotations.Nullable	both TYPE_USE (checker also TYPE_PARAMETER)
+org.checkerframework.checker.nullness.qual.NonNull	MAP	EQUIVALENT	jdk.m3.annotations.NonNull	both TYPE_USE (checker also TYPE_PARAMETER)
+org.jetbrains.annotations.Nullable	MAP	APPROX	jdk.m3.annotations.Nullable	JetBrains also allows declaration targets; a qualified or array type needs type-use placement
+org.jetbrains.annotations.NotNull	MAP	APPROX	jdk.m3.annotations.NonNull	JetBrains also allows declaration targets; a qualified or array type needs type-use placement
+javax.annotation.Nullable	MAP	APPROX	jdk.m3.annotations.Nullable	JSR-305 nickname of Nonnull(when=UNKNOWN); declaration contexts only, so placement changes to type use
+javax.annotation.CheckForNull	MAP	APPROX	jdk.m3.annotations.Nullable	JSR-305 nickname of Nonnull(when=MAYBE); declaration contexts only
+javax.annotation.Nonnull	MAP	APPROX	jdk.m3.annotations.NonNull	only the default when=ALWAYS maps; another when value stays a residue site
+javax.annotation.ParametersAreNonnullByDefault	MAP	APPROX	jdk.m3.annotations.NullMarked	NullMarked also covers return and field types: a site maps only when those are annotated or non-null already

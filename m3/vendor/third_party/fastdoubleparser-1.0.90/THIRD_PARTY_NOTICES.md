@@ -10,5 +10,7 @@ License as declared by the published pom: MIT License
 
 The complete upstream license text is retained in `LICENSE` (from the sources jar) and packaged with the source-built JAR under META-INF/third-party/fastdoubleparser-1.0.90,
 alongside this notice and `PROVENANCE.json`. Every file listed in `SOURCES_MANIFEST.tsv` retains its exact
-upstream bytes and header. The Maven build descriptor and integration metadata are M3jdk21 composition, licensed Apache-2.0; that license does not relicense the donor implementation.
+upstream bytes and header. Two of them, `JavaDoubleParser.java` and `JavaFloatParser.java`, are compiled from
+recorded M3 overlays (modified in 2026 for M3JDK; the upstream copyright header is kept); their exact upstream
+bytes stay under `upstream-excluded/`. The Maven build descriptor and integration metadata are M3jdk21 composition, licensed Apache-2.0; that license does not relicense the donor implementation.
 Consumers use `ch.randelshofer:fastdoubleparser:1.0.90-m3-source-1`, compiled from these files.

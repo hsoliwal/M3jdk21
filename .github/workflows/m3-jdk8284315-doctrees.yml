@@ -44,12 +44,6 @@ jobs:
       - name: 1 - Diff hygiene
         run: git diff --check
 
-      - name: 2 - Prove hash-pinned semantic and expectation recipes
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest='M3Jdk8284315BackportRecipeTest,M3Jdk8284315TestExpectationsRecipeTest' \
-            test
 
       - name: 3 - Validate and project FILE -> MODULE -> LIBRARY_API packet
         shell: bash

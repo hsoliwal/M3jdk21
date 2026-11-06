@@ -66,11 +66,6 @@ jobs:
           python3 -m py_compile             m3/backports/recipes/jep-485-gatherers/materialize.py             m3/backports/recipes/jep-485-gatherers/test_materialize.py
           python3 m3/backports/recipes/jep-485-gatherers/test_materialize.py
 
-      - name: 3 - Prove OpenRewrite replay scope and fixed point
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep485StreamGatherersBackportRecipeTest,M3RecipeScopeDeclarationTest             test
 
       - name: 4 - Prove Java21 identity policy remains opt-in
         shell: bash

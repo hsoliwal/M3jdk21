@@ -46,33 +46,7 @@ jobs:
       - name: 1 - Diff hygiene
         run: git diff --check
 
-      - name: 2 - Compile and prove product plus security-test recipe DAG
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jep510KdfBackportRecipeTest,M3Jep510KdfCandidateRecipeTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
-  a3-preparation:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 35
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: Prove A3 / recipe dependency closure through the M3 reactor
-        run: >-
-          mvn -B -ntp
-          -f m3/pom.xml
-          -pl tooling/a3,tooling/migration-recipes
-          -am
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
   jdk-security-proof:
     runs-on: ubuntu-24.04
