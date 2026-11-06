@@ -1,0 +1,57 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/scoped-leases-20261106/relocate.py (recipe RELOCATE_SCOPED_LEASES v1). Donor: hsoliwal/com.synexia develop 64652588f0d4c23b1f6e0411090b2a796325ae0e (lease family owner commit 4a2e6452a7a 2026-10-31 "Merge primitive JNI allocation with complete atom correctness/performance proof"; parity probe fixture commit f5e453ac791 2026-10-31).
+# FILE rows: donor path (donor repository root) -> target path (module root m3/native). PACKAGE rows: donor package -> target package (the package line, mapped imports, and the dotted package name inside string literals and text blocks). TYPE rows: donor type -> target type (M3 naming; identity when the donor name already follows it). DEPENDENCY rows: a simple type of the donor package that is owned by another M3JDK package -> its target FQN; an import is added to every relocated Java file whose code (not comments) names it. EXTERNAL rows: third-party packages the donor imports, kept as they are (declared closure; the pom carries the dependency). JNI rows: JNI symbol and javac -h header prefixes -> target prefixes. TEXT rows: literal donor text -> target text, applied to every line of every file (property names, product names, paths in files without a package line).
+kind	donor	target	note
+FILE	synexia-primitives/src/main/java/com/synexia/primitives/M3ScopedLeaseTable.java	src/main/java/jdk/m3/jni/M3ScopedLeaseTable.java	the lease table: primitive lanes (ids, leases, pins, jniArrayBorrows, jniArrayKinds, poolOwners, states), pool pin lane, per-ID JNI borrow lane, optional native scan; M3RuntimeHeap.chooseAmortizedCapacity at growth boundaries
+FILE	synexia-primitives/src/main/java/com/synexia/primitives/M3NativeLeaseScan.java	src/main/java/jdk/m3/jni/M3NativeLeaseScan.java	Java/JNI parity kernel: collect (full scan) and collectWindow (bounded cursor); System.loadLibrary of the optional library m3_scoped_leases; fail-closed validation of every JNI result
+FILE	synexia-primitives/src/main/java/com/synexia/primitives/M3LeaseScopes.java	src/main/java/jdk/m3/jni/M3LeaseScopes.java	allocation-free lexical lease and pin scopes (withLease, withPin)
+FILE	synexia-primitives/src/main/java/com/synexia/primitives/M3LeaseWindowScan.java	src/main/java/jdk/m3/jni/M3LeaseWindowScan.java	bounded resumable eligible-ID scan over a table (packed cursor)
+FILE	synexia-primitives/src/main/java/com/synexia/primitives/M3JniArrayReferences.java	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	JNI array ownership bridges: withArray, withConcat, withCritical, withArrayBatch, retainSources, releaseSources, pinGlobal, unpinGlobal; failure-preserving cleanup
+FILE	synexia-primitives/src/main/java/com/synexia/primitives/M3JniByteConcat.java	src/main/java/jdk/m3/jni/M3JniByteConcat.java	materialized byte[] concatenation through the managed JNI owner; optional native path with the exact Java fallback
+FILE	synexia-primitives/src/main/native/m3_scoped_leases.c	src/main/native/m3_scoped_leases.c	the three JNI exports (collectNative, collectNativeWindow, concatNative); C17, bounded Get/SetArrayRegion chunks, no retained pointers
+FILE	synexia-primitives/src/main/native/m3-scoped-leases/CMakeLists.txt	src/main/native/scoped-leases/CMakeLists.txt	standalone CMake project of the shared library (javac -h headers, C17, -Wall -Wextra -Werror -Wconversion -Wshadow); joined to m3/native/CMakeLists.txt behind option M3_SCOPED_LEASES_JNI
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3ScopedLeaseTableSelfTest.java	src/test/java/jdk/m3/jni/M3ScopedLeaseTableSelfTest.java	table contract oracle (9 sections, 10,000 checkout cycles, concurrent lanes); prints M3ScopedLeaseTableSelfTest PASS native=<bool>
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3ScopedLeaseTableTest.java	src/test/java/jdk/m3/jni/M3ScopedLeaseTableTest.java	JUnit 5 wrapper of the table self-test
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3ScopedLeaseWindowSelfTest.java	src/test/java/jdk/m3/jni/M3ScopedLeaseWindowSelfTest.java	window scan oracle: 65,536 seeded slots, caps 1..1024, Java/JNI parity, refusals; prints M3ScopedLeaseWindowSelfTest PASS native=<bool>
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3ScopedLeaseWindowTest.java	src/test/java/jdk/m3/jni/M3ScopedLeaseWindowTest.java	JUnit 5 wrapper of the window self-test
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3LeaseScopesSelfTest.java	src/test/java/jdk/m3/jni/M3LeaseScopesSelfTest.java	lexical scope oracle (nested, exceptional, concurrent); prints M3LeaseScopesSelfTest PASS
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3LeaseScopesTest.java	src/test/java/jdk/m3/jni/M3LeaseScopesTest.java	JUnit 5 wrapper of the scopes self-test
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3NativeLeaseFullscanContractTest.java	src/test/java/jdk/m3/jni/M3NativeLeaseFullscanContractTest.java	JUnit 5: native preflight and code-carrier oracles when the library is linked (assumption otherwise; -Djdk.m3.jni.requireNative=true forbids the silent skip)
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3JniArrayReferencesTest.java	src/test/java/jdk/m3/jni/M3JniArrayReferencesTest.java	JUnit 5: 12 lifetime-registration contracts (primary-failure preservation, reverse release, checked throwables)
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3JniArrayBatchSelfTest.java	src/test/java/jdk/m3/jni/M3JniArrayBatchSelfTest.java	batch oracle: 5,000 randomized differentials, concurrent borrowers, atomic publication; prints M3_JNI_ARRAY_BATCH_PASS checks=<n> nativeAvailable=<bool>
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3JniArrayBatchTest.java	src/test/java/jdk/m3/jni/M3JniArrayBatchTest.java	JUnit 5 wrapper of the batch self-test
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/M3JniByteConcatTest.java	src/test/java/jdk/m3/jni/M3JniByteConcatTest.java	JUnit 5: concat contract (fresh arrays, aliasing, 128 + 18 seeded lengths, chunk seams; native-only cases by assumption)
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/NativeLeaseCodeCarrierOracle.java	src/test/java/jdk/m3/jni/M3NativeLeaseCodeCarrierOracle.java	native-required oracle: in-memory javac of code-looking text, 6 permutations, class-bytes digest
+FILE	synexia-primitives/src/test/java/com/synexia/primitives/NativeLeasePreflightOracle.java	src/test/java/jdk/m3/jni/M3NativeLeasePreflightOracle.java	native-required oracle: 650 seeded rounds of Java/JNI parity, direct-symbol refusals; prints M3_LEASE_JNI_PREFLIGHT_PASS
+FILE	synexia-openrewrite-recipes/crates/m3-doop-pool-native-c17-20261031/fixtures/M3NativeConcatParityProbe.java	src/test/java/jdk/m3/jni/M3NativeConcatParityProbe.java	native-required probe of the donor qualifier verify-original-jni-c17.sh: 1,025 Java/native byte equalities; prints M3_NATIVE_CONCAT_PARITY_PASS cases=1025 native=true
+PACKAGE	com.synexia.primitives	jdk.m3.jni	the donor lived in synexia-primitives; the receiver is m3/native (area native; the Java package cannot be jdk.m3.native because native is a keyword, recorded exception: jdk.m3.jni)
+TYPE	M3ScopedLeaseTable	M3ScopedLeaseTable	identity: already M3*
+TYPE	M3NativeLeaseScan	M3NativeLeaseScan	identity
+TYPE	M3LeaseScopes	M3LeaseScopes	identity
+TYPE	M3LeaseWindowScan	M3LeaseWindowScan	identity
+TYPE	M3JniArrayReferences	M3JniArrayReferences	identity
+TYPE	M3JniByteConcat	M3JniByteConcat	identity
+TYPE	M3ScopedLeaseTableSelfTest	M3ScopedLeaseTableSelfTest	identity
+TYPE	M3ScopedLeaseTableTest	M3ScopedLeaseTableTest	identity
+TYPE	M3ScopedLeaseWindowSelfTest	M3ScopedLeaseWindowSelfTest	identity
+TYPE	M3ScopedLeaseWindowTest	M3ScopedLeaseWindowTest	identity
+TYPE	M3LeaseScopesSelfTest	M3LeaseScopesSelfTest	identity
+TYPE	M3LeaseScopesTest	M3LeaseScopesTest	identity
+TYPE	M3NativeLeaseFullscanContractTest	M3NativeLeaseFullscanContractTest	identity
+TYPE	M3JniArrayReferencesTest	M3JniArrayReferencesTest	identity
+TYPE	M3JniArrayBatchSelfTest	M3JniArrayBatchSelfTest	identity
+TYPE	M3JniArrayBatchTest	M3JniArrayBatchTest	identity
+TYPE	M3JniByteConcatTest	M3JniByteConcatTest	identity
+TYPE	M3NativeConcatParityProbe	M3NativeConcatParityProbe	identity
+TYPE	NativeLeaseCodeCarrierOracle	M3NativeLeaseCodeCarrierOracle	type names M3*
+TYPE	NativeLeasePreflightOracle	M3NativeLeasePreflightOracle	type names M3*
+DEPENDENCY	M3RuntimeHeap	jdk.m3.util.M3RuntimeHeap	owner m3/ports/collections (com.m3.compat:m3-collection-port-wave1, automatic module m3.collection.port.wave1); chooseAmortizedCapacity(long,long,int) present on M3jdk21 master; the donor module's own M3RuntimeHeap (219 lines, a superset with segmented capacities) is not relocated
+DEPENDENCY	M3CompositeBytes	jdk.internal.m3.M3CompositeBytes	src/java.base/share/classes/jdk/internal/m3; named only in the Javadoc of M3JniByteConcat, so no import, no --add-exports and no --patch-module is needed
+DEPENDENCY	M3ByteSlices	jdk.internal.m3.M3ByteSlices	src/java.base/share/classes/jdk/internal/m3; Javadoc mention only (see M3CompositeBytes)
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (the JUnit tests; static imports of org.junit.jupiter.api.Assertions resolve through this package row); pom dependency org.junit.jupiter:junit-jupiter:5.11.4 test scope, as m3/compiler/lifetime-slots
+JNI	Java_com_synexia_primitives_	Java_jdk_m3_jni_	exported JNI symbols: Java_jdk_m3_jni_M3NativeLeaseScan_collectNative, Java_jdk_m3_jni_M3NativeLeaseScan_collectNativeWindow, Java_jdk_m3_jni_M3JniByteConcat_concatNative
+JNI	com_synexia_primitives_	jdk_m3_jni_	javac -h header names: jdk_m3_jni_M3NativeLeaseScan.h, jdk_m3_jni_M3JniByteConcat.h
+TEXT	synexia.test.requireNative	jdk.m3.jni.requireNative	the native-required system property takes the module package as its prefix (JDK property style); read by M3JniByteConcat, M3JniByteConcatTest, M3NativeLeaseFullscanContractTest
+TEXT	M3JDK21 for true zero-copy	M3JDK 21 for true zero-copy	product name in the Javadoc of M3JniByteConcat (NAMING_RULES PROSE_PRODUCT_VERSION form)
+TEXT	/../../java/com/synexia/primitives	/../../java/jdk/m3/jni	CMake owner source directory: the same relative depth from src/main/native/scoped-leases as in the donor
+TEXT	"${owner}/M3RuntimeHeap.java"	"${CMAKE_CURRENT_SOURCE_DIR}/../../../../../ports/collections/src/main/java/jdk/m3/util/M3RuntimeHeap.java"	CMake: M3RuntimeHeap compiles from its M3JDK owner (both the COMMAND and the DEPENDS occurrence)
