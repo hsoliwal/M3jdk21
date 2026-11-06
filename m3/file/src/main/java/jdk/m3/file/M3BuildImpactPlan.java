@@ -128,16 +128,6 @@ public final class M3BuildImpactPlan {
         this.fullRebuild = fullRebuild;
     }
 
-    /**
-     * Require the exact M3File snapshot instance that produced these impact facts.
-     * Equal changed-slot masks do not establish identical source generations.
-     */
-    void requireSnapshot(M3FileDeltaLedger.Snapshot snapshot) {
-        if (snapshot != sourceSnapshot) {
-            throw new IllegalArgumentException("file impact belongs to a different M3File generation");
-        }
-    }
-
     /** Original physical file slot indexes in ascending order, never logical ordinals. */
     public int[] impactedSlots() { return impactedSlots.clone(); }
     public int size() { return impactedSlots.length; }
@@ -148,6 +138,7 @@ public final class M3BuildImpactPlan {
     }
 
     /** Require the original immutable observation before projecting this plan. */
+    //FLLDCIM: RECIPE — build-impact-duplicate-20261106: the identity-only requireSnapshot of 2f708ccfd817 was removed; this superset check (ce7051f77ca0: null, slot dimensions, identity) is the one owner
     void requireSnapshot(M3FileDeltaLedger.Snapshot snapshot) {
         Objects.requireNonNull(snapshot, "snapshot");
         if (snapshot.slots() != reasons.length) {
