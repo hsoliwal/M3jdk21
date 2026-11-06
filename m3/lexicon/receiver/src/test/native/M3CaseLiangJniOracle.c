@@ -15,7 +15,7 @@ static void reject(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_m3_lexicon_M3CaseLiangJniParityProof_nativeBoundary(JNIEnv *env, jclass clazz,
+Java_jdk_m3_lexicon_M3CaseLiangJniParityProof_nativeBoundary(JNIEnv *env, jclass clazz,
         jint kind, jint before, jint at, jint after) {
     (void) env;
     (void) clazz;
@@ -37,7 +37,7 @@ static jchar augmented(const jchar *word, jsize n, jsize offset) {
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_lexicon_M3CaseLiangJniParityProof_nativeCuts(JNIEnv *env, jclass clazz,
+Java_jdk_m3_lexicon_M3CaseLiangJniParityProof_nativeCuts(JNIEnv *env, jclass clazz,
         jstring word, jobjectArray patterns, jint left, jint right) {
     (void) clazz;
     if (word == NULL || patterns == NULL || left < 1 || right < 1) {
