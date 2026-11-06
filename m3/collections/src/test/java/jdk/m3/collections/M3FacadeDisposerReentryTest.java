@@ -15,8 +15,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
-/** A Disposer may close or shrink its owner reentrantly; every facade is still disposed exactly once. */
+/** A Disposer may close or shrink its owner reentrantly (remove, close, trim); every facade is disposed exactly once. */
 //FLLDCIM: MRL - reentrant Disposer during remove/close disposed a facade twice, then AIOOBE(-1) in removeSlot
+//FLLDCIM: MRL - reentrant Disposer during releaseOptionalResidency disposed the in-flight victim twice, then (0, null)
 class M3FacadeDisposerReentryTest {
     private static final class Facade {
         final long id;
@@ -133,5 +134,107 @@ class M3FacadeDisposerReentryTest {
         failing[0] = false;
         owner.close();
         assertDisposedOnce(disposed, 1, 2, 3);
+    }
+
+    /** Pinned facade 0 (lowest slot, never a victim) and unpinned retained facades 1, 2, 3: a full trim's victims. */
+    private static M3TransientFacadeStore<Facade> retainingOwner(List<Facade> disposed, long trigger,
+            Consumer<M3TransientFacadeStore<Facade>> reentry) {
+        AtomicReference<M3TransientFacadeStore<Facade>> ref = new AtomicReference<>();
+        boolean[] fired = {false};
+        int mode = M3TransientFacadeStore.RETAIN_UNEXPOSED | M3TransientFacadeStore.PIN_EXPOSED
+                | M3TransientFacadeStore.PRESSURE_TRIMMABLE;
+        M3TransientFacadeStore<Facade> owner = new M3TransientFacadeStore<>(Facade::new, (id, facade) -> {
+            disposed.add(facade);
+            if (id == trigger && !fired[0]) {
+                fired[0] = true;
+                reentry.accept(ref.get());
+            }
+        }, mode);
+        ref.set(owner);
+        owner.expose(0);
+        for (long id = 1; id <= 3; id++) owner.withInternal(id, facade -> { });
+        return owner;
+    }
+
+    @Test
+    void disposerClosingOwnerDuringTrimDisposesEachFacadeOnce() {
+        List<Facade> disposed = new ArrayList<>();
+        M3TransientFacadeStore<Facade> owner = retainingOwner(disposed, 1, M3TransientFacadeStore::close);
+        assertEquals(3, assertDoesNotThrow(() -> owner.releaseOptionalResidency(0)));
+        assertDisposedOnce(disposed, 0, 1, 2, 3);
+        assertThrows(IllegalStateException.class, owner::residentCount);
+    }
+
+    @Test
+    void disposerRemovingLowerSlotDuringTrimKeepsVictimsAligned() {
+        List<Facade> disposed = new ArrayList<>();
+        M3TransientFacadeStore<Facade> owner = retainingOwner(disposed, 1, store -> assertTrue(store.remove(0)));
+        assertEquals(3, assertDoesNotThrow(() -> owner.releaseOptionalResidency(0)));
+        assertDisposedOnce(disposed, 0, 1, 2, 3);
+        assertEquals(0, owner.residentCount());
+        owner.close();
+        assertEquals(4, disposed.size());
+    }
+
+    @Test
+    void disposerRemovingPendingVictimDuringTrimDisposesItOnce() {
+        List<Facade> disposed = new ArrayList<>();
+        M3TransientFacadeStore<Facade> owner = retainingOwner(disposed, 1, store -> assertFalse(store.remove(3)));
+        Facade pinned = owner.peekResident(0);
+        assertEquals(3, assertDoesNotThrow(() -> owner.releaseOptionalResidency(0)));
+        assertDisposedOnce(disposed, 1, 2, 3);
+        assertEquals(1, owner.residentCount());
+        assertSame(pinned, owner.peekResident(0));
+        owner.close();
+        assertDisposedOnce(disposed, 0, 1, 2, 3);
+    }
+
+    @Test
+    void disposerExposingPendingVictimDuringTrimGetsLivePinnedFacade() {
+        List<Facade> disposed = new ArrayList<>();
+        Facade[] exposed = new Facade[1];
+        M3TransientFacadeStore<Facade> owner = retainingOwner(disposed, 1, store -> exposed[0] = store.expose(3));
+        assertEquals(3, assertDoesNotThrow(() -> owner.releaseOptionalResidency(0)));
+        assertDisposedOnce(disposed, 1, 2, 3);
+        assertTrue(disposed.stream().noneMatch(f -> f == exposed[0]), "exposed facade was disposed");
+        assertSame(exposed[0], owner.peekResident(3));
+        assertTrue(owner.isPinned(3));
+        owner.close();
+        assertEquals(5, disposed.size());
+        assertEquals(1, disposed.stream().filter(f -> f == exposed[0]).count());
+    }
+
+    /** Non-reentrant contract kept: a throwing Disposer stops the trim; unreleased victims stay resident, unchanged. */
+    @Test
+    void failedDisposalDuringTrimKeepsUnreleasedVictimsResident() {
+        List<Facade> disposed = new ArrayList<>();
+        IllegalStateException fault = new IllegalStateException("dispose fault");
+        boolean[] failing = {true};
+        int mode = M3TransientFacadeStore.RETAIN_UNEXPOSED | M3TransientFacadeStore.PIN_EXPOSED
+                | M3TransientFacadeStore.PRESSURE_TRIMMABLE;
+        M3TransientFacadeStore<Facade> owner = new M3TransientFacadeStore<>(Facade::new, (id, facade) -> {
+            if (id == 2 && failing[0]) throw fault;
+            disposed.add(facade);
+        }, mode);
+        owner.expose(0);
+        for (long id = 1; id <= 3; id++) owner.withInternal(id, facade -> { });
+        Facade second = owner.peekResident(2);
+        Facade third = owner.peekResident(3);
+        short secondFlags = owner.residencyFlags(2);
+        short thirdFlags = owner.residencyFlags(3);
+        assertSame(fault, assertThrows(IllegalStateException.class, () -> owner.releaseOptionalResidency(0)));
+        assertDisposedOnce(disposed, 1);
+        assertEquals(3, owner.residentCount());
+        assertSame(second, owner.peekResident(2));
+        assertSame(third, owner.peekResident(3));
+        assertEquals(secondFlags, owner.residencyFlags(2));
+        assertEquals(thirdFlags, owner.residencyFlags(3));
+        assertEquals(1L, owner.stats().trims());
+        failing[0] = false;
+        assertEquals(2, owner.releaseOptionalResidency(1));
+        assertSame(second, disposed.get(1));
+        assertSame(third, disposed.get(2));
+        owner.close();
+        assertDisposedOnce(disposed, 0, 1, 2, 3);
     }
 }
