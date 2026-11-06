@@ -37,13 +37,13 @@ else
 fi
 
 JAVA="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin/java"
-case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';' ;; *) SEP=':' ;; esac
-CP="$MODULE/target/classes$SEP$MODULE/target/test-classes"
+case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; JAVA_MODULE=$(cd "$MODULE" && pwd -W) ;; *) SEP=':'; JAVA_MODULE=$MODULE ;; esac
+CP="$JAVA_MODULE/target/classes$SEP$JAVA_MODULE/target/test-classes"   # a Windows JVM needs drive paths, not /s/...
 figures=""; proofs_ok=PASS
 while IFS=$'\t' read -r proof expected; do
     for flags in "" "-Xint -Xmx128m"; do
         line=$("$JAVA" $flags -cp "$CP" "jdk.m3.intern.$proof" 2>&1 | tail -1 | tr -d '\r')
-        [ "$line" = "$proof PASS checks=$expected" ] || proofs_ok=FAIL
+        [ "$line" = "$proof PASS checks=$expected" ] || { proofs_ok=FAIL; echo "MISMATCH $proof flags=[$flags]: $line"; }
     done
     figures="$figures $proof=$expected"
 done <<'EOF'
