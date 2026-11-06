@@ -28,9 +28,9 @@ import java.util.Objects;
  * uses JDK BigInteger before checking the final signed-long result.
  * This class does not implement IEEE decimal floating point or arbitrary scale.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/FixedDecimal64.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/FixedDecimal64.java}
  * blob {@code cafd9d17fba6824ab86374f303baca057c687231} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3FixedDecimal64 {
     private static final long[] POWERS = {

@@ -21,9 +21,9 @@ package jdk.m3.collections;
  * Every bit pattern is a valid value; {@code -1L} encodes {@code 2^64 - 1}.
  * Existing Java signed arithmetic and its exceptions are unaffected.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/UnsignedMath.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/UnsignedMath.java}
  * blob {@code 0d89f556e18cf707764d9cbb28519624984b3229} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3UnsignedMath {
     private M3UnsignedMath() { }

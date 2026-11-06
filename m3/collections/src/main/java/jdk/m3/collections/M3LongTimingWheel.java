@@ -24,9 +24,9 @@ import java.util.function.LongConsumer;
  * <p>Future rotations remain in the same modulo bucket and are reconsidered only
  * when that bucket comes around again. No scheduled-entry object is retained.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/LongTimingWheel.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/LongTimingWheel.java}
  * blob {@code 17ddb833f940a3439c185137d6105480e0def60a} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3LongTimingWheel {
     private final int[] bucketHead;

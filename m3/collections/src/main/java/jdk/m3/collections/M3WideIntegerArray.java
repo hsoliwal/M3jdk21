@@ -31,9 +31,9 @@ import java.util.Objects;
  * <p>This class is mutable and not thread-safe. Exact-operation failure is
  * atomic with respect to payload changes, not concurrent access.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/WideIntegerArray.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/WideIntegerArray.java}
  * blob {@code cf6e48d1a8c60018c4cb8f49f94c7c4ac03cf836} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3WideIntegerArray {
     private static final long MASK32 = 0xffff_ffffL;
