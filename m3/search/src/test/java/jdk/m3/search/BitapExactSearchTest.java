@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/BitapExactSearchTest.java (blob 6ec1155b979e) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/BitapExactSearchTest.java (blob 911152acee78) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,6 +44,33 @@ final class BitapExactSearchTest {
         M3BitapExactSearch overlaps = new M3BitapExactSearch(new byte[] {7, 7, 7});
         assertEquals(1, overlaps.indexOf(new byte[] {7, 7, 7, 7, 7}, 1));
         assertEquals(2, overlaps.lastIndexOf(new byte[] {7, 7, 7, 7, 7}, 10));
+    }
+
+    @Test
+    void overlappingCountReusesOwnedMasksAndPreservesBufferCoordinates() {
+        byte[] needle = {7, 7};
+        M3BitapExactSearch compiled = new M3BitapExactSearch(needle);
+        needle[0] = 99; // Previously captured pattern remains unchanged.
+        byte[] input = {7, 7, 7, 7, 1, 7, 7};
+        assertEquals(4, compiled.countOverlapping(input, Integer.MIN_VALUE));
+        assertEquals(3, compiled.countOverlapping(input, 1));
+        assertEquals(1, compiled.countOverlapping(input, 4));
+        assertEquals(0, compiled.countOverlapping(input, Integer.MAX_VALUE));
+        byte[] padded = {99, 7, 7, 7, 7, 1, 7, 7, 99};
+        ByteBuffer heap = ByteBuffer.wrap(padded);
+        ByteBuffer direct = ByteBuffer.allocateDirect(padded.length);
+        direct.put(padded).flip();
+        for (ByteBuffer buffer : new ByteBuffer[] {heap, direct, heap.asReadOnlyBuffer(),
+                direct.asReadOnlyBuffer()}) {
+            buffer.position(1);
+            buffer.limit(8);
+            assertEquals(4, compiled.countOverlapping(buffer, -1));
+            assertEquals(3, compiled.countOverlapping(buffer, 1));
+            assertEquals(1, buffer.position());
+            assertEquals(8, buffer.limit());
+        }
+        assertEquals(2, new M3BitapExactSearch(new byte[] {-1, -1})
+                .countOverlapping(new byte[] {-1, -1, -1}, 0));
     }
 
     @Test
