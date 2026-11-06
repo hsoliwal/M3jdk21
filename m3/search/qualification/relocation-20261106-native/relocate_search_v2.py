@@ -3,8 +3,8 @@
 usage: python -I relocate_search_v2.py <main.txt> <test.txt> <native.txt> <known-types.txt> <src-root> <out-root> <rules.tsv>
 - Java: same rules as v1; the type map now covers every donor class of the search family (known-types.txt, one
   donor simple name per line). A donor name already starting with M3 keeps its name.
-- C (native.txt): JNI symbols Java_com_synexia_m3_search_<Donor>_ become Java_jdk_m3_search_<M3 name>_, and
-  "com/synexia/m3/search/<Donor>" class-name strings become "jdk/m3/search/<M3 name>". Files land in
+- C (native.txt): JNI symbols Java_jdk_internal_m3_search_<Donor>_ become Java_jdk_m3_search_<M3 name>_, and
+  "jdk/internal/m3/search/<Donor>" class-name strings become "jdk/m3/search/<M3 name>". Files land in
   m3/search/src/main/native/.
 Prints one ledger row per file: kind, donor path, donor git blob, output path, output sha256 prefix."""
 import hashlib
@@ -34,8 +34,8 @@ def main() -> int:
         stem = Path(p).stem
         if kind == "native":
             for a, b in types.items():
-                s = s.replace(f"Java_com_synexia_m3_search_{a}_", f"Java_jdk_m3_search_{b}_")
-                s = s.replace(f"com/synexia/m3/search/{a}", f"jdk/m3/search/{b}")
+                s = s.replace(f"Java_jdk_internal_m3_search_{a}_", f"Java_jdk_m3_search_{b}_")
+                s = s.replace(f"jdk/internal/m3/search/{a}", f"jdk/m3/search/{b}")
             dst = Path(out) / f"m3/search/src/main/native/{Path(p).name}"
             origin = f"m3-fast-search/src/main/native/{Path(p).name}"
             lead = "//"
@@ -50,7 +50,7 @@ def main() -> int:
                               "import jdk.m3.collections.M3DefaultProgressMonitor;\nimport jdk.m3.collections.M3ProgressMonitor;", 1)
             name = types.get(stem, stem) + ".java"
             dst = Path(out) / f"m3/search/src/{'main' if kind == 'main' else 'test'}/java/jdk/m3/search/{name}"
-            origin = f"m3-fast-search/src/{'main' if kind == 'main' else 'test'}/java/com/synexia/m3/search/{Path(p).name}"
+            origin = f"m3-fast-search/src/{'main' if kind == 'main' else 'test'}/java/jdk/internal/m3/search/{Path(p).name}"
             lead = "//"
         lines = s.split("\n")
         at = next((i + 1 for i in range(len(lines) - 1, -1, -1) if lines[i].lstrip("/* ").startswith("SPDX-")), 0)

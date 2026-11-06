@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/JavaOverlapDiagnostic.java (blob 6fe7841c485f) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/JavaOverlapDiagnostic.java (blob 6fe7841c485f) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
 import java.lang.management.ManagementFactory;

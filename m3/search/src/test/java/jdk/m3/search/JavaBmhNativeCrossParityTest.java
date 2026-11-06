@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/JavaBmhNativeCrossParityTest.java (blob 40f3ce0e6409) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/JavaBmhNativeCrossParityTest.java (blob 40f3ce0e6409) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/M3BatchOffsetDirectTest.java (blob a8edc03f8ea1) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/M3BatchOffsetDirectTest.java (blob a8edc03f8ea1) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

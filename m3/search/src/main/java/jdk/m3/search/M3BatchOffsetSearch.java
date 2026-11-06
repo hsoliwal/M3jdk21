@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/main/java/com/synexia/m3/search/M3BatchOffsetSearch.java (blob 4badcc3a401d) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/M3BatchOffsetSearch.java (blob 4badcc3a401d) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
 import java.nio.ByteBuffer;

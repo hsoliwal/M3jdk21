@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/com/synexia/m3/search/NativeSingleSearchDegeneracyTest.java (blob 7cca8e949868) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/NativeSingleSearchDegeneracyTest.java (blob 7cca8e949868) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

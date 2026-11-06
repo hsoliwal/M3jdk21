@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-// Relocated from com.synexia m3-fast-search/src/main/java/com/synexia/m3/search/ByteOccurrences.java (blob edf06de025e6) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/ByteOccurrences.java (blob edf06de025e6) by M3_SEARCH_RELOCATE v2.
 // Modified 2026: continue periodic Horspool overlaps through the existing KMP owner.
 package jdk.m3.search;
 

@@ -17,7 +17,7 @@ names = set(main)
 
 def deps(src):
     imps = [m.group(2) for m in re.finditer(r"^import (static )?([\w.]+?)(\.\*)?;", src, re.M)]
-    bad = [i for i in imps if not OK.match(i) and not i.startswith("com.synexia.m3.search")]
+    bad = [i for i in imps if not OK.match(i) and not i.startswith("jdk.internal.m3.search")]
     body = re.sub(r"//[^\n]*|/\*.*?\*/|\"(?:\\.|[^\"\\])*\"", "", src, flags=re.S)
     return bad, {n for n in names if re.search(rf"\b{n}\b", body)}
 
