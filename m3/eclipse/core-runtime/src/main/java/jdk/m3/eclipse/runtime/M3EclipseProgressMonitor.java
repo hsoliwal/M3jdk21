@@ -18,14 +18,23 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * <p>{@code internalWorked(double)} preserves fractional credit across calls. Invalid,
  * negative and non-finite progress is ignored, like other Eclipse monitor adapters. Work
  * is forwarded in integral chunks because the existing M3 monitor SPI is long-based.
- * Calls are serialized per facade; the M3 backing owner determines observer semantics.</p>
+ * Calls are serialized per facade; the M3 backing owner determines observer semantics.
+ * Synchronous owner callbacks may reenter this facade. An active begin cannot begin
+ * again, and an active completion suppresses recursive completion and further work.
+ * Lifecycle callback failures propagate unchanged and leave that operation retryable.
+ * Fractional accounting is published before delivering work to the owner. On a
+ * delivery failure, the previous fraction is restored only if no reentrant fractional
+ * update occurred; nested updates and external owner effects cannot be rolled back.</p>
  */
 public final class M3EclipseProgressMonitor implements IProgressMonitor {
     private final M3ProgressMonitor owner;
     private final boolean ownsLifecycle;
     private boolean begun;
     private boolean finished;
+    private boolean beginning;
+    private boolean finishing;
     private double fractionalWork;
+    private long fractionalRevision;
 
     private M3EclipseProgressMonitor(M3ProgressMonitor owner, boolean ownsLifecycle) {
         this.owner = Objects.requireNonNull(owner, "owner");
@@ -49,40 +58,64 @@ public final class M3EclipseProgressMonitor implements IProgressMonitor {
             owner.subTask(name);
             return;
         }
-        if (begun || finished) {
+        if (begun || finished || beginning || finishing) {
             throw new IllegalStateException("Eclipse monitor lifecycle already started or completed");
         }
         if (totalWork < UNKNOWN) {
             throw new IllegalArgumentException("invalid Eclipse totalWork");
         }
-        owner.beginTask(name, totalWork);
-        begun = true;
+        beginning = true;
+        try {
+            owner.beginTask(name, totalWork);
+            begun = true;
+        } finally {
+            beginning = false;
+        }
     }
 
     @Override
     public synchronized void done() {
-        if (!ownsLifecycle || finished) return;
-        owner.done();
-        finished = true;
+        if (!ownsLifecycle || finished || finishing) return;
+        finishing = true;
+        try {
+            owner.done();
+            finished = true;
+        } finally {
+            finishing = false;
+        }
     }
 
     @Override
     public synchronized void internalWorked(double work) {
-        if (finished || !(work > 0.0d) || !Double.isFinite(work)) return;
+        if (finished || finishing || !(work > 0.0d) || !Double.isFinite(work)) return;
         double pending = fractionalWork + work;
         if (!Double.isFinite(pending) || pending >= Long.MAX_VALUE) {
-            owner.worked(Long.MAX_VALUE);
-            fractionalWork = 0.0d;
+            forwardWork(Long.MAX_VALUE, 0.0d);
             return;
         }
         long integral = (long) pending;
-        if (integral != 0L) owner.worked(integral);
-        fractionalWork = pending - integral;
+        forwardWork(integral, pending - integral);
+    }
+
+    private void forwardWork(long integral, double remainder) {
+        double previous = fractionalWork;
+        long previousRevision = fractionalRevision;
+        long revision = ++fractionalRevision;
+        fractionalWork = remainder;
+        try {
+            if (integral != 0L) owner.worked(integral);
+        } catch (RuntimeException | Error failure) {
+            if (fractionalRevision == revision) {
+                fractionalWork = previous;
+                fractionalRevision = previousRevision;
+            }
+            throw failure;
+        }
     }
 
     @Override
     public synchronized void worked(int work) {
-        if (!finished && work > 0) owner.worked(work);
+        if (!finished && !finishing && work > 0) owner.worked(work);
     }
 
     @Override

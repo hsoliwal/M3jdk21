@@ -18,6 +18,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -252,6 +253,51 @@ public final class M3File {
                 M3StreamProgress.require(progress), Objects.requireNonNull(observer, "observer"));
     }
 
+    /**
+     * Materialize exact, verified source bytes and their original observation
+     * in a single provider read. This is for a compiler/IDE that needs payload,
+     * unlike fingerprint-only build consumers. The limit bounds payload size;
+     * no second source stream or duplicate SHA-256 pass is created.
+     *
+     * <p>Returned bytes are private to this immutable capture. Use a read-only
+     * ByteBuffer for low-copy access or request a deliberate byte[] copy.
+     * The observation still reflects metadata bracketing, not an atomic
+     * external filesystem snapshot.</p>
+     */
+    public CapturedBytes captureBytes(int maxBytes, M3StreamProgress progress) throws IOException {
+        if (maxBytes < 0) throw new IllegalArgumentException("negative maxBytes");
+        M3StreamProgress.require(progress);
+        ByteAccumulator output = new ByteAccumulator(maxBytes);
+        Observation observed = observe(maxBytes, progress, output::append);
+        return new CapturedBytes(output.freeze(), observed);
+    }
+
+    /** Materialize once without a caller progress monitor. */
+    public CapturedBytes captureBytes(int maxBytes) throws IOException {
+        return captureBytes(maxBytes, M3StreamProgress.none());
+    }
+
+    /**
+     * Original M3File read with caller-owned reusable bounded scratch. The
+     * buffer is borrowed for the entire call, not retained. Its caller must
+     * prevent concurrent reuse and mutation by byte observers. It may be reused
+     * serially across every input in one Maven/IDE project inventory.
+     *
+     * <p>No new source handle is opened beyond the existing checked channel;
+     * the original hash, file-key/mtime/size, cancellation and EOF contracts
+     * are identical to {@link #observe(long, M3StreamProgress, ByteObserver)}.
+     * The scratch length is deliberately bounded at 1 MiB.</p>
+     */
+    public Observation observe(long maxBytes, byte[] scratch, M3StreamProgress progress,
+            ByteObserver observer) throws IOException {
+        Objects.requireNonNull(scratch, "scratch");
+        if (scratch.length < 1 || scratch.length > (1 << 20)) {
+            throw new IllegalArgumentException("scratch length must be 1..1048576");
+        }
+        return observe(maxBytes, scratch, false,
+                M3StreamProgress.require(progress), Objects.requireNonNull(observer, "observer"));
+    }
+
     /** Ledger-only admission: only absence at the first metadata read returns null. */
     Observation observeIfExists(byte[] scratch) throws IOException {
         return observe(Long.MAX_VALUE, scratch, true, M3StreamProgress.none(), null);
@@ -375,6 +421,65 @@ public final class M3File {
     public record Fingerprint(long size, long digest0, long digest1, long digest2, long digest3) {
         public Fingerprint {
             if (size < 0) throw new IllegalArgumentException("negative fingerprint size");
+        }
+    }
+
+    /**
+     * Owned immutable source content plus exactly the observation made while
+     * consuming those bytes. No exposed mutable array reference and no retained
+     * file channel, native pointer or filesystem owner.
+     */
+    public static final class CapturedBytes {
+        private final byte[] content;
+        private final Observation observation;
+
+        private CapturedBytes(byte[] content, Observation observation) {
+            this.content = Objects.requireNonNull(content, "content");
+            this.observation = Objects.requireNonNull(observation, "observation");
+            if (observation.fingerprint().size() != content.length) {
+                throw new IllegalArgumentException("observed source length mismatch");
+            }
+        }
+
+        public int length() { return content.length; }
+        public Observation observation() { return observation; }
+
+        /** Fresh cursor backed by private content, never a mutable ByteBuffer. */
+        public ByteBuffer readOnlyBuffer() {
+            return ByteBuffer.wrap(content).asReadOnlyBuffer();
+        }
+
+        /** A separate caller-owned array when a legacy parser explicitly needs byte[]. */
+        public byte[] copyBytes() { return content.clone(); }
+    }
+
+    /** One growing primitive byte[] buffer without per-chunk objects. */
+    private static final class ByteAccumulator {
+        private final int limit;
+        private byte[] bytes;
+        private int size;
+
+        ByteAccumulator(int maxBytes) {
+            limit = maxBytes;
+            bytes = new byte[Math.min(maxBytes, 8192)];
+        }
+
+        void append(byte[] source, int offset, int length) throws IOException {
+            Objects.checkFromIndexSize(offset, length, source.length);
+            if (length > limit - size) throw new IOException("observed content exceeds byte budget");
+            int required = size + length;
+            if (required > bytes.length) {
+                long wanted = Math.max((long) required,
+                        (long) bytes.length + (bytes.length >>> 1) + 1L);
+                int capacity = (int) Math.min((long) limit, wanted);
+                bytes = Arrays.copyOf(bytes, capacity);
+            }
+            System.arraycopy(source, offset, bytes, size, length);
+            size = required;
+        }
+
+        byte[] freeze() {
+            return size == bytes.length ? bytes : Arrays.copyOf(bytes, size);
         }
     }
 

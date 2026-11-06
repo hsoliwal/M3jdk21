@@ -122,6 +122,27 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
 
     public int[] physicalIndices() { return Arrays.copyOfRange(positions, from, to); }
 
+    /**
+     * Copy a bounded physical-index page of this immutable, sorted/filtered
+     * and possibly sliced snapshot. Only positions[] and its offset are read:
+     * Object[] references, predicates, ordering, and occurrences stay owned
+     * by the existing snapshot. No full index copy, new Entry or cache.
+     * Excess demand is bounded to the remaining window; invalid inputs
+     * refuse before any output write.
+     */
+    public int copyPhysicalWindow(int firstOrdinal, int maxCount,
+            int[] destination, int destinationOffset) {
+        Objects.requireNonNull(destination, "destination");
+        Objects.checkFromIndexSize(firstOrdinal, 0, size());
+        if (maxCount < 0) throw new IndexOutOfBoundsException("negative page size");
+        int count = Math.min(maxCount, size() - firstOrdinal);
+        Objects.checkFromIndexSize(destinationOffset, count, destination.length);
+        System.arraycopy(positions, from + firstOrdinal,
+                destination, destinationOffset, count);
+        return count;
+    }
+
+
     /** Detached copy; mutable callers cannot modify the canonical reference lane. */
     @Override public Object[] toArray() {
         Object[] output = new Object[size()];

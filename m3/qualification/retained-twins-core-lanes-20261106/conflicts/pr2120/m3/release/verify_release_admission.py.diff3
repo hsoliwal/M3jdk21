@@ -1,0 +1,1003 @@
+#!/usr/bin/env python3
+<<<<<<< live
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+||||||| base
+=======
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+>>>>>>> retained
+# SPDX-License-Identifier: Apache-2.0
+"""Validate product release policy and source-bound execution receipts.
+
+The development command is a policy/reporting check, not release acceptance.
+Only a complete, current evidence manifest can make release_ready true. This
+consumer verifies receipt structure and bytes; reviewers remain responsible for
+whether each recorded command actually covers its declared product contract.
+It never executes commands contained in a receipt or runs a transformation.
+"""
+from __future__ import annotations
+
+import argparse
+import contextlib
+import hashlib
+import importlib.util
+import json
+<<<<<<< live
+import re
+||||||| base
+=======
+import os
+import re
+import stat
+>>>>>>> retained
+import subprocess
+from pathlib import Path
+
+EXPECTED_PRIORITY = [
+    "M3_STRING", "REGEX_PRECOMPUTE", "GENERAL_PRECOMPUTE", "ARRAYS",
+    "COLLECTIONS", "SWT_ECLIPSE_IDE",
+]
+EXPECTED_RECEIVING_ORDER = [
+    "STRING", "ARRAYS", "COLLECTIONS", "AST_COMPILER", "REMAINING_FAMILIES",
+]
+UNQUALIFIED_CLAIMS = {
+    "java_lang_string_backed_by_m3_string", "full_regex_precompute",
+    "full_jtreg_compatibility", "performance_superiority_over_openjdk21",
+    "arrays_qualified", "collections_qualified", "swt_eclipse_ide_qualified",
+}
+REQUIRED_FILES = [
+    "M3-SYNEXIA-NOTICE.md", "M3-SYNEXIA-RIGHTS.md", "M3-SYNEXIA-AUTHORS.md",
+    "LICENSE-M3-APACHE-2.0.txt", "m3/README.md",
+    "m3/release/release-contract.json", "m3/release/README.md",
+    "m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
+    "m3/docs/name-mapping.json", "m3/tooling/name-contract/name-plan.json",
+]
+REQUIRED_GATES = frozenset({
+    "RIGHTS_AND_LICENSE_BOUNDARY", "SOURCE_TREE_AND_UPSTREAM_BASELINE",
+    "OPENJDK_SANITY_MATRIX", "M3_FOUNDATION_TESTS",
+    "PRECOMPUTE_JAVA_DIFFERENTIAL", "PRECOMPUTE_JNI_NATIVE_PARITY",
+    "M3_MAVEN_CONTROL_REACTOR", "STRING_UTF16_CONTRACT",
+    "RELEASE_CLAIMS_VALIDATION", "PROOF_PACK_SHA256",
+})
+RECIPE_ROOTS = (
+    ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
+    "m3/tooling/migration-recipes", "m3/tooling/m3jdk-a3-recipes",
+    "m3/m3-import/pure-int-recipe-custody",
+    "m3/runtime-integration/recipe",
+    "m3/runtime-integration/char-array-copy/recipe",
+    "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
+)
+NAME_MAP = "m3/docs/name-mapping.json"
+NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
+EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
+DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
+# Standalone rule (user, 2026-10-31): every release gate, the Maven/OpenRewrite control reactor included,
+# is owned and executed by this repository; donor lineage stays in ledgers (m3/tooling/standalone/).
+PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
+MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
+SHA1 = re.compile(r"[0-9a-f]{40}\Z")
+SHA256 = re.compile(r"[0-9a-f]{64}\Z")
+GATE_ID = re.compile(r"[A-Z][A-Z0-9_]*\Z")
+SOURCE_SUFFIXES = frozenset({
+    ".java", ".c", ".cc", ".cpp", ".cxx", ".h", ".hpp", ".py",
+    ".sh", ".xml", ".yaml", ".yml", ".properties", ".json", ".tsv",
+})
+
+# An edited contract cannot silently remove a mandatory release gate.
+EXPECTED_RELEASE_GATES = [
+    "RIGHTS_AND_LICENSE_BOUNDARY",
+    "SOURCE_TREE_AND_UPSTREAM_BASELINE",
+    "OPENJDK_SANITY_MATRIX",
+    "M3_FOUNDATION_TESTS",
+    "PRECOMPUTE_JAVA_DIFFERENTIAL",
+    "PRECOMPUTE_JNI_NATIVE_PARITY",
+    "M3_MAVEN_CONTROL_REACTOR",
+    "STRING_UTF16_CONTRACT",
+    "RELEASE_CLAIMS_VALIDATION",
+    "PROOF_PACK_SHA256",
+]
+TEST_GATES = frozenset(EXPECTED_RELEASE_GATES[2:8])
+MAX_EVIDENCE_BYTES = 1024 * 1024
+MAX_PROOF_BYTES = 64 * 1024 * 1024
+MAX_IMAGE_BYTES = 16 * 1024 * 1024 * 1024
+
+
+def check_evidence_file(directory: Path, record, maximum: int) -> None:
+    """Check a bounded regular file under the proof directory, without executing it."""
+    if not isinstance(record, dict) or set(record) != {"path", "sha256"}:
+        raise ValueError("file receipt must contain exactly path and sha256")
+    relative, expected = record["path"], record["sha256"]
+    if (not isinstance(relative, str) or len(relative) > 1024
+            or not re.fullmatch(r"[A-Za-z0-9._/-]+", relative)
+            or any(part in {"", ".", ".."} for part in relative.split("/"))):
+        raise ValueError("noncanonical proof path")
+    if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-f]{64}", expected):
+        raise ValueError("invalid proof SHA-256")
+    directory = directory.resolve()
+    path = directory
+    for part in relative.split("/"):
+        path = path / part
+        if path.is_symlink():
+            raise ValueError("symlink proof path")
+    if not path.resolve().is_relative_to(directory):
+        raise ValueError("proof path escapes its directory")
+    before = path.stat()
+    if not stat.S_ISREG(before.st_mode) or not 0 < before.st_size <= maximum:
+        raise ValueError("proof file must be a nonempty, bounded regular file")
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        opened = os.fstat(stream.fileno())
+        if (opened.st_dev, opened.st_ino) != (before.st_dev, before.st_ino):
+            raise ValueError("proof file changed before reading")
+        total = 0
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            total += len(chunk)
+            if total > maximum:
+                raise ValueError("proof file exceeds its byte budget")
+            digest.update(chunk)
+        after = os.fstat(stream.fileno())
+    snapshot = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns)
+    if snapshot(before) != snapshot(after) or total != before.st_size:
+        raise ValueError("proof file changed while reading")
+    if digest.hexdigest() != expected:
+        raise ValueError("proof file SHA-256 mismatch")
+
+
+def validate_evidence(path: Path, head: str, tree: str, platform: str, passed, block) -> None:
+    """Validate local CI-produced evidence integrity; this is not remote attestation."""
+    try:
+        if not isinstance(platform, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+){1,4}", platform):
+            raise ValueError("an explicit canonical platform is required")
+        if path.is_symlink() or not path.is_file() or path.stat().st_size > MAX_EVIDENCE_BYTES:
+            raise ValueError("evidence manifest must be a bounded regular file")
+        with path.open("rb") as stream:
+            raw = stream.read(MAX_EVIDENCE_BYTES + 1)
+        if len(raw) > MAX_EVIDENCE_BYTES:
+            raise ValueError("evidence manifest exceeds its byte budget")
+        evidence = json.loads(raw.decode("utf-8"), object_pairs_hook=unique_object)
+        if not isinstance(evidence, dict) or set(evidence) != {
+            "schema", "source_commit", "source_tree", "platform", "artifacts", "gates"
+        }:
+            raise ValueError("unexpected evidence manifest fields")
+        if evidence["schema"] != "M3_RELEASE_EVIDENCE_V1":
+            raise ValueError("unexpected evidence schema")
+        if not head or not tree or (evidence["source_commit"], evidence["source_tree"], evidence["platform"]) != (head, tree, platform):
+            raise ValueError("evidence does not match the inspected commit, tree and requested platform")
+        artifacts = evidence["artifacts"]
+        if not isinstance(artifacts, list) or not 1 <= len(artifacts) <= 16:
+            raise ValueError("one to sixteen product artifacts are required")
+        for artifact in artifacts:
+            check_evidence_file(path.parent, artifact, MAX_IMAGE_BYTES)
+        if len({artifact["path"] for artifact in artifacts}) != len(artifacts):
+            raise ValueError("duplicate product artifact")
+        receipts = evidence["gates"]
+        if not isinstance(receipts, list) or len(receipts) != len(EXPECTED_RELEASE_GATES):
+            raise ValueError("exactly one receipt for every mandatory gate is required")
+        names = [receipt.get("name") if isinstance(receipt, dict) else None for receipt in receipts]
+        if any(not isinstance(name, str) for name in names) or sorted(names) != sorted(EXPECTED_RELEASE_GATES):
+            raise ValueError("missing, unknown or duplicate mandatory gate")
+        passed("evidence.identity_and_artifacts", f"{platform}: {head} {tree}")
+        for receipt in receipts:
+            name = receipt["name"]
+            try:
+                if set(receipt) != {"name", "status", "exit_code", "tests_run", "command", "environment", "proofs"}:
+                    raise ValueError("unexpected gate receipt fields")
+                if receipt["status"] != "PASS" or type(receipt["exit_code"]) is not int or receipt["exit_code"] != 0:
+                    raise ValueError("gate did not execute successfully")
+                tests = receipt["tests_run"]
+                if type(tests) is not int or tests < (1 if name in TEST_GATES else 0):
+                    raise ValueError("test gate needs a positive executed-test count")
+                command = receipt["command"]
+                if not isinstance(command, list) or not command or not all(isinstance(arg, str) and arg.strip() for arg in command):
+                    raise ValueError("executed command is missing")
+                environment = receipt["environment"]
+                if not isinstance(environment, dict) or not environment or not all(
+                    isinstance(k, str) and k.strip() and isinstance(v, str) and v.strip()
+                    for k, v in environment.items()
+                ):
+                    raise ValueError("execution environment is missing")
+                proofs = receipt["proofs"]
+                if not isinstance(proofs, list) or not 1 <= len(proofs) <= 16:
+                    raise ValueError("gate needs bounded raw proof-file receipts")
+                for proof in proofs:
+                    check_evidence_file(path.parent, proof, MAX_PROOF_BYTES)
+                if len({proof["path"] for proof in proofs}) != len(proofs):
+                    raise ValueError("duplicate gate proof file")
+                passed(f"evidence.gate:{name}")
+            except (OSError, UnicodeError, ValueError, TypeError) as exc:
+                block(f"evidence.gate:{name}", str(exc))
+    except (OSError, UnicodeError, ValueError, TypeError) as exc:
+        block("evidence.manifest", str(exc))
+
+
+def unique_object(pairs):
+    out = {}
+    for key, value in pairs:
+        if key in out:
+            raise ValueError(f"duplicate JSON key: {key}")
+        out[key] = value
+    return out
+
+
+def reject_constant(value):
+    raise ValueError("non-finite JSON constant: " + value)
+
+
+def load_json(path: Path):
+    return json.loads(path.read_text(encoding="utf-8"),
+                      object_pairs_hook=unique_object,
+                      parse_constant=reject_constant)
+
+
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def git(root: Path, *args: str) -> str:
+<<<<<<< live
+    return subprocess.check_output(
+        ["git", "-C", str(root), *args], text=True,
+        stderr=subprocess.PIPE).strip()
+
+
+def git_paths(root: Path, *args: str) -> list[str]:
+    data = subprocess.check_output(
+        ["git", "-C", str(root), *args], text=True, stderr=subprocess.PIPE)
+    return [path for path in data.split("\0") if path]
+
+
+def untracked_source(root: Path) -> list[str]:
+    paths = git_paths(root, "ls-files", "--others", "--exclude-standard", "-z",
+                      "--", "src", "m3", ".github")
+    return [path for path in paths if Path(path).suffix in SOURCE_SUFFIXES]
+
+
+def safe_artifact(base: Path, relative: str) -> Path:
+    """Reject aliases, traversal and every symlink component of an artifact."""
+    if (not isinstance(relative, str) or not relative or "\\" in relative
+            or any(ord(c) < 32 for c in relative)):
+        raise ValueError("invalid evidence artifact path")
+    parts = relative.split("/")
+    if Path(relative).is_absolute() or any(p in ("", ".", "..") for p in parts):
+        raise ValueError("evidence artifact must be a safe relative path")
+    current = base.resolve()
+    for part in parts:
+        current = current / part
+        if current.is_symlink():
+            raise ValueError("evidence artifact contains a symlink: " + relative)
+    if not current.resolve().is_relative_to(base.resolve()):
+        raise ValueError("evidence artifact escapes manifest directory")
+    if not current.is_file():
+        raise ValueError("evidence artifact missing: " + relative)
+    return current
+
+
+def recipe_candidate(path: str) -> bool:
+    name = Path(path).name
+    return (Path(path).suffix in {".java", ".py", ".sh", ".yaml", ".yml"}
+            or name == "pom.xml" or name.startswith("pom-") and name.endswith(".xml"))
+
+
+def validate(root: Path, release_mode: bool = False,
+             evidence_path: Path | None = None) -> dict:
+    root = Path(root).resolve()
+    checks, blockers, queue = [], [], []
+    policy_failures = []
+    source = {"commit": None, "tree": None}
+||||||| base
+    return subprocess.check_output(["git", "-C", str(root), *args], text=True).strip()
+
+
+def validate(root: Path, release_mode: bool = False) -> dict:
+    checks = []
+    blockers = []
+=======
+    return subprocess.check_output(["git", "-C", str(root), *args], text=True).strip()
+
+
+def validate_release_source(root: Path, passed, block) -> None:
+    """Require an isolated source checkout and exact regular boundary-input blobs."""
+    for relative in REQUIRED_FILES + ["m3/docs/name-mapping.json", "m3/release/verify_release_admission.py"]:
+        try:
+            path = root
+            for part in relative.split("/"):
+                path = path / part
+                if path.is_symlink():
+                    raise ValueError("release source-boundary inputs cannot use symlinks")
+            entry = git(root, "ls-tree", "HEAD", "--", relative)
+            metadata, separator, recorded_path = entry.partition("\t")
+            cells = metadata.split()
+            if (not separator or recorded_path != relative or len(cells) != 3
+                    or cells[0] not in {"100644", "100755"} or cells[1] != "blob"):
+                raise ValueError("boundary input must be a tracked regular file in HEAD")
+            before = path.stat()
+            if not stat.S_ISREG(before.st_mode):
+                raise ValueError("boundary input must be a regular file")
+            digest = hashlib.sha1(b"blob " + str(before.st_size).encode("ascii") + b"\0")
+            with path.open("rb") as stream:
+                for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                    digest.update(chunk)
+            after = path.stat()
+            if (before.st_size, before.st_mtime_ns, before.st_ctime_ns) != (
+                    after.st_size, after.st_mtime_ns, after.st_ctime_ns) or digest.hexdigest() != cells[2]:
+                raise ValueError("boundary input bytes differ from the inspected Git blob")
+            passed(f"git.input:{relative}", cells[2])
+        except (OSError, ValueError, subprocess.CalledProcessError) as exc:
+            block(f"git.input:{relative}", str(exc))
+    try:
+        if git(root, "ls-files", "--others", "-z"):
+            block("git.untracked_source", "release requires an isolated checkout without untracked or ignored files; keep builds and proof packs outside it")
+        else:
+            passed("git.untracked_source")
+        if sha256(root / "m3/release/verify_release_admission.py") != sha256(Path(__file__)):
+            block("git.verifier_identity", "executed verifier differs from the source-boundary verifier")
+        else:
+            passed("git.verifier_identity")
+    except (OSError, subprocess.CalledProcessError) as exc:
+        block("git.source_inspection", str(exc))
+
+
+def output_errors(root: Path, release_mode: bool, outputs: list[Path]) -> list[dict]:
+    errors = []
+    seen = set()
+    for path in outputs:
+        resolved = path.resolve()
+        if path.exists() or path.is_symlink():
+            errors.append({"name": "output.existing", "detail": f"refusing to overwrite existing output or input: {path}"})
+        if resolved in seen:
+            errors.append({"name": "output.duplicate", "detail": "JSON and checksum outputs must be distinct"})
+        seen.add(resolved)
+        if release_mode and resolved.is_relative_to(root):
+            errors.append({"name": "output.source_checkout", "detail": "release outputs must be outside the isolated source checkout"})
+    return errors
+
+
+def validate(root: Path, release_mode: bool = False, evidence: Path | None = None,
+             platform: str | None = None) -> dict:
+    checks = []
+    blockers = []
+>>>>>>> retained
+
+    def passed(name: str, detail: str = ""):
+        checks.append({"name": name, "status": "PASS", "detail": detail})
+
+    def block(name: str, detail: str, *, policy: bool = True,
+              status: str = "BLOCK"):
+        checks.append({"name": name, "status": status, "detail": detail})
+        blockers.append({"name": name, "detail": detail})
+        queue.append({"id": name, "state": status, "blocking": True,
+                      "detail": detail})
+        if policy:
+            policy_failures.append(name)
+
+    def read_text(rel: str) -> str:
+        try:
+            return (root / rel).read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as exc:
+            block("read:" + rel, str(exc))
+            return ""
+
+    def read_object(path: Path, name: str) -> dict:
+        try:
+            obj = load_json(path)
+            if not isinstance(obj, dict):
+                raise ValueError("expected a JSON object")
+            return obj
+        except (ValueError, OSError, UnicodeError) as exc:
+            block(name, str(exc))
+            return {}
+
+    for rel in REQUIRED_FILES:
+        if (root / rel).is_file():
+            passed("file:" + rel)
+        else:
+            block("file:" + rel, "required release-boundary file is missing")
+
+<<<<<<< live
+    contract = read_object(root / "m3/release/release-contract.json", "contract.read")
+    if contract.get("schema") == "M3_RELEASE_CONTRACT_V1":
+||||||| base
+    contract_path = root / "m3/release/release-contract.json"
+    contract = load_json(contract_path)
+    if contract.get("schema") != "M3_RELEASE_CONTRACT_V1":
+        block("contract.schema", "unexpected release contract schema")
+    else:
+=======
+    contract_path = root / "m3/release/release-contract.json"
+    try:
+        contract = load_json(contract_path)
+        if not isinstance(contract, dict):
+            raise ValueError("release contract must be a JSON object")
+    except (OSError, UnicodeError, ValueError) as exc:
+        block("contract.read", str(exc))
+        contract = {}
+    if contract.get("schema") != "M3_RELEASE_CONTRACT_V1":
+        block("contract.schema", "unexpected release contract schema")
+    else:
+>>>>>>> retained
+        passed("contract.schema")
+<<<<<<< live
+    else:
+        block("contract.schema", "unexpected release contract schema")
+||||||| base
+
+=======
+
+    if contract.get("mandatory_release_gates") == EXPECTED_RELEASE_GATES:
+        passed("contract.mandatory_release_gates")
+    else:
+        block("contract.mandatory_release_gates", "mandatory gate inventory drifted")
+
+>>>>>>> retained
+    if contract.get("priority_order") == EXPECTED_PRIORITY:
+        passed("contract.priority_order")
+    else:
+        block("contract.priority_order", "P0 order drifted")
+<<<<<<< live
+    claim_policy = contract.get("claim_policy")
+    if (isinstance(claim_policy, dict) and all(claim_policy.get(key) is True for key in (
+            "evidence_before_claim", "marketing_must_reference_proof",
+            "self_reported_completion_forbidden",
+            "catalogue_or_recipe_execution_is_not_runtime_acceptance"))):
+||||||| base
+
+    policy = contract.get("claim_policy", {})
+    if (
+        policy.get("evidence_before_claim") is True
+        and policy.get("marketing_must_reference_proof") is True
+        and policy.get("self_reported_completion_forbidden") is True
+    ):
+=======
+
+    policy = contract.get("claim_policy")
+    policy = policy if isinstance(policy, dict) else {}
+    if (
+        policy.get("evidence_before_claim") is True
+        and policy.get("marketing_must_reference_proof") is True
+        and policy.get("self_reported_completion_forbidden") is True
+    ):
+>>>>>>> retained
+        passed("contract.claim_policy")
+    else:
+        block("contract.claim_policy", "release claim discipline weakened")
+<<<<<<< live
+    claims = contract.get("current_claims")
+    if not isinstance(claims, dict):
+        claims = {}
+    bad = {key: claims.get(key) for key in sorted(UNQUALIFIED_CLAIMS)
+           if claims.get(key) != "NOT_CLAIMED"}
+||||||| base
+
+    claims = contract.get("current_claims", {})
+    bad = {key: claims.get(key) for key in UNQUALIFIED_CLAIMS if claims.get(key) != "NOT_CLAIMED"}
+=======
+
+    claims = contract.get("current_claims")
+    claims = claims if isinstance(claims, dict) else {}
+    bad = {key: claims.get(key) for key in UNQUALIFIED_CLAIMS if claims.get(key) != "NOT_CLAIMED"}
+>>>>>>> retained
+    if bad:
+        block("contract.unqualified_claims", f"unqualified claims promoted: {bad}")
+    else:
+        passed("contract.unqualified_claims")
+
+<<<<<<< live
+    gates = contract.get("mandatory_release_gates")
+    if (not isinstance(gates, list) or not gates
+            or any(not isinstance(g, str) or not GATE_ID.fullmatch(g) for g in gates)
+            or len(gates) != len(set(gates))
+            or not REQUIRED_GATES.issubset(gates)):
+        block("contract.mandatory_gates", "missing, duplicate or invalid required gate IDs")
+        gates = sorted(REQUIRED_GATES)
+    else:
+        passed("contract.mandatory_gates")
+
+    evidence_policy = contract.get("execution_evidence")
+    if (not isinstance(evidence_policy, dict)
+            or evidence_policy.get("schema") != EVIDENCE_SCHEMA
+            or evidence_policy.get("require_exact_commit_and_tree") is not True
+            or evidence_policy.get("require_clean_source") is not True
+            or evidence_policy.get("artifact_paths_relative_to") != "manifest_directory"
+            or evidence_policy.get("legacy_recipe_sources_block_release") is not True):
+        block("contract.execution_evidence", "source-bound execution evidence policy missing or weakened")
+        evidence_policy = {}
+    else:
+        passed("contract.execution_evidence")
+    gate_owners = evidence_policy.get("gate_owners", {})
+    foreign_owners = sorted(str(gate) for gate, owner in gate_owners.items()
+                            if owner != PRODUCT_REPOSITORY) if isinstance(gate_owners, dict) else []
+    if (not isinstance(gate_owners, dict)
+            or gate_owners.get(MAVEN_GATE) != PRODUCT_REPOSITORY or foreign_owners):
+        block("contract.recipe_owner", "every release gate, " + MAVEN_GATE + " included, must be owned by "
+              + PRODUCT_REPOSITORY + "; owned elsewhere: " + (", ".join(foreign_owners) or "-"))
+
+    notice = read_text("M3-SYNEXIA-NOTICE.md")
+    rights = read_text("M3-SYNEXIA-RIGHTS.md")
+||||||| base
+    notice = (root / "M3-SYNEXIA-NOTICE.md").read_text(encoding="utf-8")
+    rights = (root / "M3-SYNEXIA-RIGHTS.md").read_text(encoding="utf-8")
+=======
+    def read_text(relative):
+        try:
+            return (root / relative).read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as exc:
+            block(f"read:{relative}", str(exc))
+            return ""
+
+    notice = read_text("M3-SYNEXIA-NOTICE.md")
+    rights = read_text("M3-SYNEXIA-RIGHTS.md")
+>>>>>>> retained
+    if "This notice does not relicense\nOpenJDK or JDK-derived source code as Apache-2.0." in notice:
+        passed("rights.openjdk_boundary")
+    else:
+        block("rights.openjdk_boundary", "OpenJDK license boundary text missing")
+    if "All ownership and all rights not expressly granted by the applicable license" in rights:
+        passed("rights.reservation")
+    else:
+        block("rights.reservation", "first-party rights reservation missing")
+<<<<<<< live
+    m3_readme = read_text("m3/README.md")
+||||||| base
+
+    m3_readme = (root / "m3/README.md").read_text(encoding="utf-8")
+=======
+
+    m3_readme = read_text("m3/README.md")
+>>>>>>> retained
+    if "does **not** modify `java.lang.String`" in m3_readme:
+        passed("claims.current_string_boundary")
+    else:
+        block("claims.current_string_boundary", "current P0 String boundary changed; update proof contract")
+    if "No speedup, complete compatibility, or full jtreg pass is claimed." in m3_readme:
+        passed("claims.no_unproved_performance")
+    else:
+        block("claims.no_unproved_performance", "existing no-overclaim sentence missing")
+
+<<<<<<< live
+    mapping = read_object(root / NAME_MAP, "mapping.read")
+    invariant = mapping.get("porting_invariant", {})
+    sequence = invariant.get("receiving_sequence") if isinstance(invariant, dict) else None
+    if (isinstance(sequence, dict) and sequence.get("order") == EXPECTED_RECEIVING_ORDER
+            and sequence.get("active_phase") == "STRING"):
+        passed("receiving_sequence")
+||||||| base
+    mapping_path = root / "m3/docs/name-mapping.json"
+    if mapping_path.is_file():
+        mapping = load_json(mapping_path)
+        seq = mapping.get("porting_invariant", {}).get("receiving_sequence")
+        if seq is None:
+            detail = "receiving_sequence not yet merged; release requires String -> arrays -> collections -> AST/compiler -> remaining"
+            if release_mode:
+                block("receiving_sequence", detail)
+            else:
+                checks.append({"name": "receiving_sequence", "status": "PENDING", "detail": detail})
+        elif seq.get("order") == EXPECTED_RECEIVING_ORDER and seq.get("active_phase") == "STRING":
+            passed("receiving_sequence")
+        else:
+            block("receiving_sequence", "receiving order or active phase drifted")
+=======
+    mapping_path = root / "m3/docs/name-mapping.json"
+    if mapping_path.is_file():
+        try:
+            mapping = load_json(mapping_path)
+            seq = mapping.get("porting_invariant", {}).get("receiving_sequence")
+        except (OSError, UnicodeError, ValueError, AttributeError) as exc:
+            block("receiving_sequence.read", str(exc))
+            seq = None
+        if seq is None:
+            detail = "receiving_sequence not yet merged; release requires String -> arrays -> collections -> AST/compiler -> remaining"
+            if release_mode:
+                block("receiving_sequence", detail)
+            else:
+                checks.append({"name": "receiving_sequence", "status": "PENDING", "detail": detail})
+        elif isinstance(seq, dict) and seq.get("order") == EXPECTED_RECEIVING_ORDER and seq.get("active_phase") == "STRING":
+            passed("receiving_sequence")
+        else:
+            block("receiving_sequence", "receiving order or active phase drifted")
+>>>>>>> retained
+    else:
+<<<<<<< live
+        block("receiving_sequence", "receiving order or active phase missing or drifted")
+
+    plan = read_object(root / NAME_PLAN, "name_queue.read")
+    try:
+        raw_mapping = (root / NAME_MAP).read_bytes()
+        map_blob = hashlib.sha1(b"blob " + str(len(raw_mapping)).encode("ascii")
+                                + b"\0" + raw_mapping).hexdigest()
+        if (plan.get("schema") != "M3JDK21_NAME_CONTRACT_PLAN_V1"
+                or plan.get("authority") != NAME_MAP
+                or plan.get("authority_blob") != map_blob):
+            raise ValueError("naming queue must pin the existing canonical map")
+        migration = mapping.get("migration", {})
+        records = migration.get("records") if isinstance(migration, dict) else None
+        if not isinstance(records, list) or any(not isinstance(r, dict) for r in records):
+            raise ValueError("canonical mapping records missing")
+        ids = [r.get("id") for r in records]
+        if any(not isinstance(i, str) or not i for i in ids) or len(ids) != len(set(ids)):
+            raise ValueError("invalid or duplicate canonical mapping IDs")
+        operations = plan.get("operations")
+        if not isinstance(operations, list):
+            raise ValueError("naming operations missing")
+        for index, operation in enumerate(operations):
+            if (not isinstance(operation, dict) or operation.get("mapping_id") not in ids
+                    or operation.get("state") != "QUEUED"
+                    or not isinstance(operation.get("reason"), str)
+                    or not operation["reason"].strip()):
+                raise ValueError("invalid or self-promoted naming operation")
+            queue.append({"id": "naming:" + str(index) + ":" + operation["mapping_id"],
+                          "state": "QUEUED", "blocking": False,
+                          "mapping_id": operation["mapping_id"],
+                          "kind": operation.get("kind"),
+                          "before_type": operation.get("before_type"),
+                          "after_type": operation.get("after_type"),
+                          "authority": NAME_PLAN, "detail": operation["reason"]})
+        passed("name_queue", f"{len(operations)} queued candidates; no naming promotion")
+    except (ValueError, OSError, UnicodeError) as exc:
+        block("name_queue", str(exc))
+
+    release = contract.get("release", {})
+    if not isinstance(release, dict):
+        release = {}
+    upstream = release.get("upstream_baseline")
+    if not isinstance(upstream, str) or not SHA1.fullmatch(upstream):
+||||||| base
+        block("receiving_sequence", "name-mapping.json missing")
+
+    upstream = contract.get("release", {}).get("upstream_baseline")
+    if not isinstance(upstream, str) or len(upstream) != 40 or any(c not in "0123456789abcdef" for c in upstream):
+=======
+        block("receiving_sequence", "name-mapping.json missing")
+
+    release_contract = contract.get("release")
+    release_contract = release_contract if isinstance(release_contract, dict) else {}
+    upstream = release_contract.get("upstream_baseline")
+    if (release_contract.get("append_only_history_required") is True
+            and release_contract.get("single_fork_commit_required") is False):
+        passed("contract.append_only_history")
+    else:
+        block("contract.append_only_history", "release must preserve upstream ancestry without requiring a squash")
+    head = tree = ""
+    if not isinstance(upstream, str) or len(upstream) != 40 or any(c not in "0123456789abcdef" for c in upstream):
+>>>>>>> retained
+        block("git.upstream_baseline", "invalid exact upstream SHA")
+    else:
+        passed("git.upstream_baseline", upstream)
+    if (release.get("single_fork_commit_required") is not True
+            or release.get("released_history_immutable_after_tag") is not True):
+        block("contract.release_history", "existing release-history requirements must remain explicit")
+    try:
+        source["commit"] = git(root, "rev-parse", "HEAD")
+        source["tree"] = git(root, "rev-parse", "HEAD^{tree}")
+        passed("git.head", source["commit"])
+        passed("git.tree", source["tree"])
+        dirty = git(root, "status", "--porcelain=v1", "--untracked-files=no")
+        extra_sources = untracked_source(root)
+        if dirty or extra_sources:
+            block("git.clean_source", "tracked modifications or untracked source: "
+                  + (dirty + "\n" + "\n".join(extra_sources)).strip())
+        else:
+            passed("git.clean_source", "tracked tree and untracked source inputs are clean")
+        if isinstance(upstream, str) and SHA1.fullmatch(upstream):
+            merge_base = git(root, "merge-base", "HEAD", upstream)
+            if merge_base == upstream:
+                passed("git.merge_base", upstream)
+            else:
+                block("git.merge_base", f"expected {upstream}, got {merge_base}")
+<<<<<<< live
+            ahead = int(git(root, "rev-list", "--count", f"{upstream}..HEAD"))
+            parent = git(root, "rev-parse", "HEAD^")
+            if ahead == 1 and parent == upstream:
+                passed("git.single_release_commit", source["commit"])
+            else:
+                block("git.single_release_commit", f"ahead={ahead} parent={parent}; no history rewrite performed",
+                      policy=release_mode, status="HOLD")
+        tracked = git_paths(root, "ls-tree", "-r", "--name-only", "-z", "HEAD", "--", *RECIPE_ROOTS)
+        residue = [p for p in tracked if recipe_candidate(p)]
+        if residue:
+            block("legacy_recipe_custody", f"{len(residue)} executable candidates remain under legacy recipe roots; "
+                  "seal Synexia custody and callers before a reviewed migration",
+                  policy=False, status="HOLD")
+            queue[-1]["paths"] = residue
+        else:
+            passed("legacy_recipe_custody", "no executable candidates in the enumerated legacy roots; not a full-tree ownership proof")
+    except (subprocess.CalledProcessError, FileNotFoundError, ValueError, OSError) as exc:
+        block("git.inspect", str(exc))
+
+    # Standalone rule (2026-10-31): M3JDK 21 needs no other repository to build, test, gate or release
+    # (check_standalone.py). Development mode is a ratchet against STANDALONE_BASELINE.tsv; release mode refuses any
+    # cross-repository dependency when the contract's standalone.required_for_release is true. A tree without the
+    # baseline, outside an enforced release, is reported without blocking.
+    section = contract.get("standalone")
+    required = isinstance(section, dict) and section.get("required_for_release") is True
+    enforced = release_mode and required
+    try:
+        spec = importlib.util.spec_from_file_location("check_standalone", Path(__file__).with_name("check_standalone.py"))
+        standalone = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(standalone)
+        scanned = standalone.scan(root)
+        baseline = standalone.read_baseline(root)
+        status, detail = standalone.verdict(scanned, baseline, enforced)
+        if status == "PASS":
+            passed("standalone.no_external_repo_dependency", detail)
+        elif baseline is None and not enforced:
+            checks.append({"name": "standalone.no_external_repo_dependency", "status": "INFO", "detail": detail})
+        else:
+            block("standalone.no_external_repo_dependency", detail, policy=status == "BLOCK", status=status)
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError, ValueError, ImportError) as exc:
+        block("standalone.no_external_repo_dependency", str(exc))
+
+    manifest_path = Path(evidence_path) if evidence_path is not None else root / DEFAULT_EVIDENCE
+    if not manifest_path.is_absolute():
+        manifest_path = root / manifest_path
+    manifest, entries = {}, {}
+    if not manifest_path.is_file():
+        block("evidence.manifest", "execution evidence manifest missing: " + str(manifest_path),
+              policy=False, status="PENDING")
+    else:
+        try:
+            if manifest_path.is_symlink():
+                raise ValueError("evidence manifest must not be a symlink")
+            manifest = load_json(manifest_path)
+            if not isinstance(manifest, dict) or manifest.get("schema") != EVIDENCE_SCHEMA:
+                raise ValueError("unexpected execution evidence schema")
+            if (manifest.get("source_commit") != source["commit"]
+                    or manifest.get("source_tree") != source["tree"]
+                    or source["commit"] is None or source["tree"] is None):
+                raise ValueError("stale execution evidence: commit/tree does not match inspected source")
+            passed("evidence.source", source["commit"] + " " + source["tree"])
+            data = manifest.get("gates")
+            if not isinstance(data, list):
+                raise ValueError("evidence gates must be a list")
+            for entry in data:
+                if not isinstance(entry, dict):
+                    raise ValueError("invalid execution gate record")
+                ident = entry.get("id")
+                if not isinstance(ident, str) or ident not in gates or ident in entries:
+                    raise ValueError("unknown or duplicate execution gate: " + str(ident))
+                entries[ident] = entry
+        except (ValueError, OSError, UnicodeError) as exc:
+            entries = {}
+            block("evidence.manifest", str(exc), policy=False)
+
+    for ident in gates:
+        entry = entries.get(ident)
+        if entry is None:
+            block("gate:" + ident, "no current execution receipt", policy=False, status="PENDING")
+            continue
+        try:
+            if entry.get("status") != "PASS" or type(entry.get("exit_code")) is not int or entry["exit_code"] != 0:
+                raise ValueError("gate did not record PASS with integer exit_code=0")
+            if entry.get("owner_repository") != PRODUCT_REPOSITORY:
+                raise ValueError("wrong gate owner; expected " + PRODUCT_REPOSITORY)
+            command = entry.get("command")
+            if (not isinstance(command, list) or not command
+                    or any(not isinstance(x, str) or not x.strip() for x in command)):
+                raise ValueError("exact command argv missing")
+            environment = entry.get("environment")
+            if (not isinstance(environment, dict) or any(
+                    not isinstance(environment.get(key), str) or not environment[key].strip()
+                    for key in ("os", "architecture", "toolchain"))):
+                raise ValueError("OS, architecture and toolchain identity missing")
+            if ident == MAVEN_GATE:
+                canonical = entry.get("canonical_recipe")
+                if (not isinstance(canonical, dict)
+                        or canonical.get("repository") != PRODUCT_REPOSITORY
+                        or not isinstance(canonical.get("commit"), str)
+                        or not SHA1.fullmatch(canonical["commit"])
+                        or not isinstance(canonical.get("recipe_id"), str)
+                        or not canonical["recipe_id"].strip()):
+                    raise ValueError("exact recipe repository, revision and identity missing")
+            artifacts = entry.get("artifacts")
+            if not isinstance(artifacts, list) or not artifacts:
+                raise ValueError("raw execution artifacts missing")
+            seen = set()
+            for artifact in artifacts:
+                if not isinstance(artifact, dict):
+                    raise ValueError("invalid execution artifact")
+                path, digest = artifact.get("path"), artifact.get("sha256")
+                if not isinstance(path, str) or path in seen:
+                    raise ValueError("invalid or duplicate artifact path")
+                seen.add(path)
+                if not isinstance(digest, str) or not SHA256.fullmatch(digest):
+                    raise ValueError("invalid artifact SHA-256")
+                file = safe_artifact(manifest_path.parent, path)
+                if file.resolve() == manifest_path.resolve():
+                    raise ValueError("manifest cannot serve as its own execution artifact")
+                if sha256(file) != digest:
+                    raise ValueError("execution artifact SHA-256 mismatch: " + path)
+            passed("gate:" + ident, f"{len(artifacts)} hash-verified artifacts; command provenance requires review")
+        except (ValueError, OSError, UnicodeError) as exc:
+            block("gate:" + ident, str(exc), policy=False)
+
+    # A source-changing concurrent process invalidates the snapshot inspected above.
+    try:
+        if (git(root, "rev-parse", "HEAD") != source["commit"]
+                or git(root, "rev-parse", "HEAD^{tree}") != source["tree"]
+                or git(root, "status", "--porcelain=v1", "--untracked-files=no")
+                or untracked_source(root)):
+            block("git.stable_snapshot", "source changed during release validation")
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError) as exc:
+        block("git.stable_snapshot", str(exc))
+||||||| base
+            if release_mode:
+                ahead = int(git(root, "rev-list", "--count", f"{upstream}..HEAD"))
+                parent = git(root, "rev-parse", "HEAD^")
+                if ahead == 1 and parent == upstream:
+                    passed("git.single_release_commit", head)
+                else:
+                    block("git.single_release_commit", f"ahead={ahead} parent={parent}")
+        except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+            block("git.inspect", str(exc))
+=======
+            if git(root, "status", "--porcelain=v1", "--untracked-files=no"):
+                block("git.worktree", "tracked source differs from the inspected commit")
+            else:
+                passed("git.worktree")
+        except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+            block("git.inspect", str(exc))
+>>>>>>> retained
+
+    if release_mode:
+        validate_release_source(root, passed, block)
+
+    source_admissible = not blockers and all(check["status"] == "PASS" for check in checks)
+    if evidence is not None:
+        validate_evidence(evidence, head, tree, platform, passed, block)
+    elif release_mode:
+        block("evidence.required", "release requires --evidence and --platform with every mandatory gate receipt")
+    else:
+        checks.append({"name": "evidence.required", "status": "PENDING",
+                       "detail": "source inspection is not release admission"})
+
+    return {
+        "schema": "M3_RELEASE_ADMISSION_RESULT_V1",
+        "mode": "release" if release_mode else "development",
+<<<<<<< live
+        "policy_valid": not policy_failures,
+        "release_ready": bool(entries) and not blockers,
+        "source_commit": source["commit"], "source_tree": source["tree"],
+        "evidence_manifest": str(manifest_path),
+        "blockers": blockers, "checks": checks, "queue": queue,
+        "scope": "Receipt integrity and explicit release policy only; no unrecorded runtime, performance or full-source claims.",
+||||||| base
+        "release_ready": not blockers,
+        "blockers": blockers,
+        "checks": checks,
+=======
+        "source_admissible": source_admissible,
+        "release_ready": release_mode and evidence is not None and source_admissible and not blockers,
+        "platform": platform,
+        "admission_scope": "LOCAL_PROOF_PACK_INTEGRITY_NOT_REMOTE_ATTESTATION",
+        "blockers": blockers,
+        "checks": checks,
+>>>>>>> retained
+    }
+
+
+def render_queue(result: dict) -> str:
+    def cell(value):
+        return str(value).replace("|", "\\|").replace("\r", " ").replace("\n", " ")
+    lines = ["# M3JDK21 release queue", "",
+             "Source commit: `" + str(result["source_commit"]) + "`  ",
+             "Source tree: `" + str(result["source_tree"]) + "`", "",
+             "Release ready: **" + str(result["release_ready"]).lower() + "**. "
+             "Queued names remain candidates in the existing naming authority.", "",
+             "| Item | State | Blocks release | Required work |",
+             "| --- | --- | --- | --- |"]
+    for row in result["queue"]:
+        detail = row["detail"]
+        if row.get("before_type") and row.get("after_type"):
+            detail = str(row["before_type"]) + " -> " + str(row["after_type"]) + ": " + detail
+        lines.append("| " + " | ".join(cell(v) for v in (
+            row["id"], row["state"], "yes" if row["blocking"] else "no", detail)) + " |")
+    if not result["queue"]:
+        lines.append("| No pending items | VERIFIED_RECEIPTS | no | Review the exact proof pack before publication. |")
+    lines.extend(["", "This is a generated view of gate evidence and `m3/tooling/name-contract/name-plan.json`. "
+                  "It creates no second naming registry, recipe authority, or release claim.", ""])
+    return "\n".join(lines)
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=Path("."))
+    parser.add_argument("--release", action="store_true")
+<<<<<<< live
+    parser.add_argument("--evidence", type=Path,
+                        help="source-bound JSON manifest; artifact paths are relative to its directory")
+||||||| base
+=======
+    parser.add_argument("--evidence", type=Path, help="CI-produced local proof-pack manifest")
+    parser.add_argument("--platform", help="exact platform, for example linux-x64 or android-arm64")
+>>>>>>> retained
+    parser.add_argument("--json-out", type=Path)
+    parser.add_argument("--sha256-out", type=Path)
+    parser.add_argument("--queue-out", type=Path, help="write the visible pending-work Markdown queue")
+    args = parser.parse_args(argv)
+    root = args.root.resolve()
+<<<<<<< live
+    result = validate(root, release_mode=args.release, evidence_path=args.evidence)
+||||||| base
+    result = validate(root, release_mode=args.release)
+=======
+    result = validate(root, release_mode=args.release, evidence=args.evidence, platform=args.platform)
+>>>>>>> retained
+
+<<<<<<< live
+    if args.json_out:
+        args.json_out.parent.mkdir(parents=True, exist_ok=True)
+        args.json_out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    if args.sha256_out:
+        lines = []
+        for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+            path = root / rel
+            if path.is_file():
+                lines.append(f"{sha256(path)}  {rel}")
+        args.sha256_out.parent.mkdir(parents=True, exist_ok=True)
+        args.sha256_out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    if args.queue_out:
+        args.queue_out.parent.mkdir(parents=True, exist_ok=True)
+        args.queue_out.write_text(render_queue(result), encoding="utf-8")
+||||||| base
+    if args.json_out:
+        args.json_out.parent.mkdir(parents=True, exist_ok=True)
+        args.json_out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+    if args.sha256_out:
+        lines = []
+        for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+            path = root / rel
+            if path.is_file():
+                lines.append(f"{sha256(path)}  {rel}")
+        args.sha256_out.parent.mkdir(parents=True, exist_ok=True)
+        args.sha256_out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+=======
+    outputs = [path for path in (args.json_out, args.sha256_out) if path is not None]
+    problems = output_errors(root, args.release, outputs)
+    if not problems:
+        created = []
+        try:
+            with contextlib.ExitStack() as stack:
+                handles = {}
+                # Reserve every new destination before writing either result. Exclusive
+                # creation also refuses aliases or files introduced after the preflight.
+                for path in outputs:
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    handles[path] = stack.enter_context(path.open("x", encoding="utf-8"))
+                    created.append(path)
+                if args.sha256_out:
+                    lines = []
+                    for rel in REQUIRED_FILES + ["m3/release/verify_release_admission.py"]:
+                        path = root / rel
+                        if path.is_file():
+                            lines.append(f"{sha256(path)}  {rel}")
+                    handles[args.sha256_out].write("\n".join(lines) + "\n")
+                if args.json_out:
+                    handles[args.json_out].write(json.dumps(result, indent=2, sort_keys=True) + "\n")
+        except OSError as exc:
+            for path in created:
+                path.unlink(missing_ok=True)
+            problems.append({"name": "output.write", "detail": str(exc)})
+    if problems:
+        result["release_ready"] = False
+        result["blockers"].extend(problems)
+        result["checks"].extend({**problem, "status": "BLOCK"} for problem in problems)
+
+>>>>>>> retained
+    print(json.dumps(result, sort_keys=True))
+<<<<<<< live
+    if not result["policy_valid"] or args.release and not result["release_ready"]:
+||||||| base
+    if args.release and not result["release_ready"]:
+=======
+    if result["blockers"] or (args.release and not result["release_ready"]):
+>>>>>>> retained
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

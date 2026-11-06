@@ -391,4 +391,189 @@ public final class M3LaneAlgorithms {
             throw new IndexOutOfBoundsException("range [" + from + ", " + to + ") outside 0.." + length);
         }
     }
+
+    /**
+     * LeetCode #239: physical index of the maximum in each sliding window.
+     * Equal maxima retain their earliest physical index (strict tail eviction).
+     * The payload is never moved; no per-entry object is retained.
+     */
+    public static int[] slidingMaximumIndices(long[] values, int window) {
+        java.util.Objects.requireNonNull(values, "values");
+        if (window <= 0 || window > values.length) {
+            throw new IllegalArgumentException("window must lie in [1, values.length]");
+        }
+        int[] indices = new int[values.length - window + 1];
+        slidingMaximumIndicesInto(values, 0, values.length, window,
+                indices, 0, false);
+        return indices;
+    }
+
+    /**
+     * Writes absolute physical indexes of maximum elements into a caller-owned
+     * output lane. The complete range/shape is checked before the first write.
+     * JNI is optional; a required-native call never silently falls back.
+     */
+    public static void slidingMaximumIndicesInto(long[] values, int from, int to,
+            int window, int[] output, int outputFrom, boolean nativeRequired) {
+        java.util.Objects.requireNonNull(values, "values");
+        java.util.Objects.requireNonNull(output, "output");
+        java.util.Objects.checkFromToIndex(from, to, values.length);
+        int span = to - from;
+        if (window <= 0 || window > span) {
+            throw new IllegalArgumentException("window must lie in [1, to-from]");
+        }
+        int count = span - window + 1;
+        java.util.Objects.checkFromIndexSize(outputFrom, count, output.length);
+        if (nativeRequired) {
+            if (!SlidingMaximumNative.AVAILABLE) {
+                throw new UnsatisfiedLinkError("M3 sliding-maximum JNI unavailable");
+            }
+            slidingMaximumIndices0(values, from, to, window, output, outputFrom);
+            return;
+        }
+        // JNI amortizes across larger ranges. Small windows avoid the call.
+        if (SlidingMaximumNative.AVAILABLE && !SlidingMaximumNative.ABI_MISSING
+                && span >= 256 && window > 1) {
+            try {
+                slidingMaximumIndices0(values, from, to, window, output, outputFrom);
+                return;
+            } catch (UnsatisfiedLinkError oldNativeImage) {
+                // Native extension absent from an earlier installed image.
+                // Explicit native-required calls above never downgrade.
+                SlidingMaximumNative.ABI_MISSING = true;
+            }
+        }
+        slidingMaximumIndicesJava(values, from, to, window, output, outputFrom);
+    }
+
+    private static void slidingMaximumIndicesJava(long[] values, int from, int to,
+            int window, int[] output, int outputFrom) {
+        // Ring deque stores only physical indexes; at most window entries.
+        int[] deque = new int[window];
+        int head = 0;
+        int size = 0;
+        for (int index = from; index < to; index++) {
+            if (size != 0 && deque[head] <= index - window) {
+                head = (head + 1 == window) ? 0 : head + 1;
+                size--;
+            }
+            // Strict less-than keeps the oldest maximum on ties.
+            while (size != 0 && values[deque[ringSlot(head, size - 1, window)]] < values[index]) {
+                size--;
+            }
+            deque[ringSlot(head, size, window)] = index;
+            size++;
+            if (index - from >= window - 1) {
+                output[outputFrom++] = deque[head];
+            }
+        }
+    }
+
+    /** Overflow-safe ring offset, even for an almost-full maximum-sized lane. */
+    private static int ringSlot(int head, int offset, int capacity) {
+        int remaining = capacity - head;
+        return offset < remaining ? head + offset : offset - remaining;
+    }
+
+    public static boolean slidingMaximumNativeAvailable() {
+        return SlidingMaximumNative.AVAILABLE && !SlidingMaximumNative.ABI_MISSING;
+    }
+
+    private static final class SlidingMaximumNative {
+        static volatile boolean ABI_MISSING;
+        static final boolean AVAILABLE = load();
+
+        private static boolean load() {
+            if (!Boolean.getBoolean("m3.collections.lane.native")) return false;
+            try {
+                System.loadLibrary("m3_collections_address");
+                return true;
+            } catch (UnsatisfiedLinkError | SecurityException unavailable) {
+                return false;
+            }
+        }
+    }
+
+    private static native void slidingMaximumIndices0(long[] values, int from,
+            int to, int window, int[] output, int outputFrom);
+
+    private static final int NATIVE_PARTITION_MIN_LENGTH = 256;
+    private static volatile boolean PARTITION3_LONG_ABI_MISSING;
+    private static volatile boolean PARTITION3_INT_ABI_MISSING;
+
+    /**
+     * LeetCode #75 three-way Dutch National Flag partition, using only lane
+     * offsets and a pivot. The existing partition3(int[]/long[]) remains the
+     * reference contract; this explicit prepared route may use the original
+     * m3_collections_address JNI library for sufficiently large primitive lanes.
+     * Native-required mode never falls back when the library or ABI is absent.
+     */
+    public static long partition3Prepared(long[] lane, int from, int to,
+                                          long pivot, boolean nativeRequired) {
+        java.util.Objects.requireNonNull(lane, "lane");
+        checkRange(lane.length, from, to);
+        if (nativeRequired) {
+            if (!PartitionNative.AVAILABLE) {
+                throw new UnsatisfiedLinkError("M3 long partition3 JNI unavailable");
+            }
+            return partition3Long0(lane, from, to, pivot);
+        }
+        if (PartitionNative.AVAILABLE && !PARTITION3_LONG_ABI_MISSING
+                && to - from >= NATIVE_PARTITION_MIN_LENGTH) {
+            try {
+                return partition3Long0(lane, from, to, pivot);
+            } catch (UnsatisfiedLinkError oldNativeImage) {
+                PARTITION3_LONG_ABI_MISSING = true;
+            }
+        }
+        return partition3(lane, from, to, pivot);
+    }
+
+    /** int[] form of the exact LeetCode #75 primitive JNI partition. */
+    public static long partition3Prepared(int[] lane, int from, int to,
+                                          int pivot, boolean nativeRequired) {
+        java.util.Objects.requireNonNull(lane, "lane");
+        checkRange(lane.length, from, to);
+        if (nativeRequired) {
+            if (!PartitionNative.AVAILABLE) {
+                throw new UnsatisfiedLinkError("M3 int partition3 JNI unavailable");
+            }
+            return partition3Int0(lane, from, to, pivot);
+        }
+        if (PartitionNative.AVAILABLE && !PARTITION3_INT_ABI_MISSING
+                && to - from >= NATIVE_PARTITION_MIN_LENGTH) {
+            try {
+                return partition3Int0(lane, from, to, pivot);
+            } catch (UnsatisfiedLinkError oldNativeImage) {
+                PARTITION3_INT_ABI_MISSING = true;
+            }
+        }
+        return partition3(lane, from, to, pivot);
+    }
+
+    /** Native ABI status after any optional older-library probing. */
+    public static boolean partition3NativeAvailable() {
+        return PartitionNative.AVAILABLE
+                && !PARTITION3_LONG_ABI_MISSING && !PARTITION3_INT_ABI_MISSING;
+    }
+
+    private static final class PartitionNative {
+        static final boolean AVAILABLE = load();
+        private static boolean load() {
+            if (!Boolean.getBoolean("m3.collections.lane.native")) return false;
+            try {
+                System.loadLibrary("m3_collections_address");
+                // A previously installed address library may load but lack these
+                // additive ABI exports. Probe both without changing user data.
+                partition3Long0(new long[0], 0, 0, 0L);
+                partition3Int0(new int[0], 0, 0, 0);
+                return true;
+            } catch (UnsatisfiedLinkError | SecurityException unavailable) {
+                return false;
+            }
+        }
+    }
+
+    private static native long partition3Long0(long[] lane, int from, int to, long pivot);
+    private static native long partition3Int0(int[] lane, int from, int to, int pivot);
 }

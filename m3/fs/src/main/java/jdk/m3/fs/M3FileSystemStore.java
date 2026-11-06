@@ -322,6 +322,72 @@ public final class M3FileSystemStore {
         Map.of());
   }
 
+  private static final String QUALIFICATION_RELATION_PREFIX = "mindex.unicodex.";
+
+  /**
+   * Binds full trusted UnicodeX qualification-descriptor SHA-256 seals to the existing
+   * content-addressed manifest. The caller obtains these from admitted sender catalogs.
+   * This records compatibility pins, not provenance authenticity. No SMFILE01 change occurs.
+   * Existing pins may be repeated identically; conflicting replacements are refused.
+   */
+  public M3ObjectRef withMIndexLexiconQualifications(
+      M3ObjectRef manifestRef, Map<Integer, String> qualificationSeals) throws IOException {
+    Map<Integer, String> pins = Map.copyOf(Objects.requireNonNull(qualificationSeals, "qualificationSeals"));
+    for (var entry : pins.entrySet()) {
+      if (entry.getKey() < 0 || entry.getKey() > 65535
+          || !entry.getValue().matches("[0-9a-f]{64}"))
+        throw new IllegalArgumentException("invalid UnicodeX qualification language/seal");
+    }
+    M3FileManifest manifest = readManifest(manifestRef);
+    requireStructure(manifest, MINDEX_SEMANTIC_STRUCTURE, M3ObjectKind.MINDEX_FILE_IMAGE);
+    Map<Integer, String> existing = readLexiconQualifications(manifest);
+    for (var entry : existing.entrySet()) {
+      if (!entry.getValue().equals(pins.get(entry.getKey())))
+        throw new IOException("conflicting or removed UnicodeX qualification");
+    }
+    for (var entry : pins.entrySet()) {
+      M3ObjectRef seal = putRaw(java.util.HexFormat.of().parseHex(entry.getValue()));
+      manifest = manifest.withRelation(QUALIFICATION_RELATION_PREFIX + entry.getKey(), seal);
+    }
+    return publishManifest(manifest);
+  }
+
+  /**
+   * Qualified SMFILE01 admission. Every declared language must have exactly one manifest pin
+   * equal to the admitted receiver descriptor's full SHA-256, followed by the existing
+   * mandatory generation and structural checks. Receiver callbacks must use trusted catalogs;
+   * the 64-bit generation callback alone is never a substitute for qualification.
+   */
+  public List<M3FileTokenRangeSha256> sha256MIndexFileTokenRangesQualified(
+      M3ObjectRef manifestRef, IntToLongFunction languageFingerprint,
+      java.util.function.IntFunction<String> receiverQualificationSeal,
+      int[] startTokens, int[] endTokens) throws IOException {
+    Objects.requireNonNull(languageFingerprint, "languageFingerprint");
+    Objects.requireNonNull(receiverQualificationSeal, "receiverQualificationSeal");
+    Map<Integer, String> pins = readLexiconQualifications(readManifest(manifestRef));
+    return sha256MIndexFileTokenRanges(manifestRef, languageFingerprint, startTokens,
+        endTokens, pins, receiverQualificationSeal);
+  }
+
+  private Map<Integer, String> readLexiconQualifications(M3FileManifest manifest) throws IOException {
+    Map<Integer, String> result = new java.util.HashMap<>();
+    for (var entry : manifest.relations().entrySet()) {
+      if (!entry.getKey().startsWith(QUALIFICATION_RELATION_PREFIX)) continue;
+      String suffix = entry.getKey().substring(QUALIFICATION_RELATION_PREFIX.length());
+      if (!suffix.matches("0|[1-9][0-9]{0,4}"))
+        throw new IOException("invalid UnicodeX qualification relation");
+      int language = Integer.parseInt(suffix);
+      M3ObjectRef ref = entry.getValue();
+      if (language > 65535 || ref.kind() != M3ObjectKind.RAW_BYTES || ref.size() != 32)
+        throw new IOException("invalid UnicodeX qualification object");
+      byte[] seal = objects.readSmall(ref, 32);
+      if (seal.length != 32) throw new IOException("invalid qualification seal length");
+      result.put(language, java.util.HexFormat.of().formatHex(seal));
+    }
+    return Map.copyOf(result);
+  }
+
+
   /** Exact SHA-256 of the original raw UTF-8 bytes between two token boundaries. */
   public M3FileTokenRangeSha256 sha256MIndexFileTokenRange(
       M3ObjectRef manifestRef, int startToken, int endToken) throws IOException {
@@ -366,6 +432,14 @@ public final class M3FileSystemStore {
   public List<M3FileTokenRangeSha256> sha256MIndexFileTokenRanges(
       M3ObjectRef manifestRef, IntToLongFunction languageFingerprint, int[] startTokens, int[] endTokens)
       throws IOException {
+    return sha256MIndexFileTokenRanges(manifestRef, languageFingerprint, startTokens,
+        endTokens, null, null);
+  }
+
+  private List<M3FileTokenRangeSha256> sha256MIndexFileTokenRanges(
+      M3ObjectRef manifestRef, IntToLongFunction languageFingerprint, int[] startTokens, int[] endTokens,
+      Map<Integer, String> qualificationSeals,
+      java.util.function.IntFunction<String> receiverQualificationSeal) throws IOException {
     int[] starts = Objects.requireNonNull(startTokens, "startTokens").clone();
     int[] ends = Objects.requireNonNull(endTokens, "endTokens").clone();
     if (starts.length != ends.length || starts.length > MAX_TOKEN_RANGE_BATCH) {
@@ -381,7 +455,10 @@ public final class M3FileSystemStore {
     manifest.copyStructureIdTo(source, ids, 64);
     M3MappedObject mapped = objects.openMappedId(ids, 32, manifest.structureSize(semantic),
         M3ObjectKind.MINDEX_FILE_IMAGE, MAX_GENERATION_BYTES);
-    long[] shape = M3ColdFileImage.validate(mapped, languageFingerprint);
+    long[] shape = qualificationSeals == null
+        ? M3ColdFileImage.validate(mapped, languageFingerprint)
+        : M3ColdFileImage.validateQualified(mapped, languageFingerprint,
+            qualificationSeals, receiverQualificationSeal);
     M3MappedObject facts = objects.openMappedId(ids, 64, manifest.structureSize(source),
         M3ObjectKind.MINDEX_SOURCE_FACTS_IMAGE, M3FileSourceFactsImage.MAX_IMAGE_BYTES);
     long[] offsets = M3FileSourceFactsImage.read(facts, shape, ids, 0, rawSize);

@@ -278,6 +278,105 @@ public final class M3DirectoryTable {
     return (allowedKinds & (1 << (state[row * 4] - 1))) != 0;
   }
 
+  /**
+   * Prepare one detached primitive physical-row order for repeated name and
+   * prefix lookups. The parent char[]/offset/state lanes remain the sole
+   * directory payload owner; no String or DirEntry is materialized to sort.
+   *
+   * <p>Ordering matches String.compareTo (UTF-16 code units), with stable
+   * original physical-row order for equal names. Use this one index for many
+   * prefix queries to amortize the O(n log n) preparation cost.
+   */
+  public NameIndex nameIndex(int allowedKinds) {
+    int[] selected = selectedRows(allowedKinds);
+    int count = selected.length;
+    if (count < 2) return new NameIndex(selected);
+    int[] scratch = new int[count];
+    int[] input = selected, output = scratch;
+    for (long width = 1; width < count; width <<= 1) {
+      for (long start = 0; start < count; start += width * 2) {
+        int left = (int) start, middle = (int) Math.min(count, start + width);
+        int right = middle, end = (int) Math.min(count, start + width * 2);
+        int written = left;
+        while (left < middle && right < end) {
+          output[written++] = compareNames(input[left], input[right]) <= 0
+              ? input[left++] : input[right++];
+        }
+        while (left < middle) output[written++] = input[left++];
+        while (right < end) output[written++] = input[right++];
+      }
+      int[] swap = input; input = output; output = swap;
+    }
+    if (input != selected) System.arraycopy(input, 0, selected, 0, count);
+    return new NameIndex(selected);
+  }
+
+  /** Compare existing name slices directly, without allocating two Strings. */
+  private int compareNames(int leftRow, int rightRow) {
+    int left = offsets[leftRow], leftEnd = offsets[leftRow + 1];
+    int right = offsets[rightRow], rightEnd = offsets[rightRow + 1];
+    while (left < leftEnd && right < rightEnd) {
+      int compare = Character.compare(names[left++], names[right++]);
+      if (compare != 0) return compare;
+    }
+    return Integer.compare(leftEnd - left, rightEnd - right);
+  }
+
+  /**
+   * Compare name to a prefix with a zero result for every matching name.
+   * The resulting negative/zero/positive partitions are monotonic in the
+   * name-sorted index, enabling two exact binary bounds per prefix query.
+   */
+  private int compareNamePrefix(int row, String prefix) {
+    int start = offsets[row], end = offsets[row + 1];
+    int matched = 0;
+    while (matched < prefix.length() && start + matched < end) {
+      int compare = Character.compare(names[start + matched], prefix.charAt(matched));
+      if (compare != 0) return compare;
+      matched++;
+    }
+    return matched == prefix.length() ? 0 : -1;
+  }
+
+  /**
+   * One reusable view of the directory's immutable physical-row name order.
+   * The only retained per-row state is int[] indexes, never entry objects.
+   * Returned mutable int[] arrays are detached and cannot alter this index.
+   */
+  public final class NameIndex {
+    private final int[] sortedRows;
+
+    private NameIndex(int[] ownedRows) { this.sortedRows = ownedRows; }
+    public int size() { return sortedRows.length; }
+    public int row(int rank) { return sortedRows[Objects.checkIndex(rank, size())]; }
+    public int[] rows() { return sortedRows.clone(); }
+    /** On-demand read-only entries, sorted by original UTF-16 names. */
+    public List<M3FS.DirEntry> entries() { return ownedRowsView(sortedRows); }
+
+    /** O(log n * prefix.length + matches) over this already prepared index. */
+    public int[] rowsWithPrefix(String prefix) {
+      Objects.requireNonNull(prefix, "prefix");
+      return Arrays.copyOfRange(sortedRows, prefixBound(prefix, false),
+          prefixBound(prefix, true));
+    }
+
+    /** On-demand immutable projection of the matching physical row indexes. */
+    public List<M3FS.DirEntry> entriesWithPrefix(String prefix) {
+      return ownedRowsView(rowsWithPrefix(prefix));
+    }
+
+    private int prefixBound(String prefix, boolean aboveMatches) {
+      int low = 0, high = sortedRows.length;
+      while (low < high) {
+        int middle = (low + high) >>> 1;
+        int compare = compareNamePrefix(sortedRows[middle], prefix);
+        if (compare < 0 || (aboveMatches && compare == 0)) low = middle + 1;
+        else high = middle;
+      }
+      return low;
+    }
+  }
+
   @Override public boolean equals(Object other) {
     return this == other || other instanceof M3DirectoryTable table
         && Arrays.equals(names, table.names) && Arrays.equals(offsets, table.offsets)

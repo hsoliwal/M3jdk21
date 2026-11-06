@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -122,36 +123,65 @@ public final class M3SyntaxTree {
         return new Builder(grammar, source);
     }
 
-    /** DFS projection: no provider object survives into the final primitive lanes. */
+    /** DFS projection: foreign provider objects do not survive into the primitive lanes. */
     public static <N> M3SyntaxTree project(String grammar, byte[] source,
                                            N root, ForeignNode<N> adapter) {
-        Objects.requireNonNull(root, "root");
-        Objects.requireNonNull(adapter, "adapter");
-        return project0(grammar, source, root, adapter, false);
+        return project0(grammar, source, root, adapter, false,
+                Integer.MAX_VALUE, Integer.MAX_VALUE);
     }
 
     /** A parser fragment gets an explicit full-file synthetic source root. */
     public static <N> M3SyntaxTree projectFragment(String grammar, byte[] source,
                                                    N fragment, ForeignNode<N> adapter) {
-        return project0(grammar, source, fragment, adapter, true);
+        return project0(grammar, source, fragment, adapter, true,
+                Integer.MAX_VALUE, Integer.MAX_VALUE);
+    }
+
+    /**
+     * Bounded, cycle-refusing foreign AST intake. Some provider node APIs expose
+     * parent references or DAGs rather than trees; identical objects are allowed
+     * in separate completed branches but a reference repeated on the ACTIVE path
+     * is refused. Node and depth limits also bound hostile/infinite iterators.
+     */
+    public static <N> M3SyntaxTree projectBounded(String grammar, byte[] source,
+            N root, ForeignNode<N> adapter, int maxNodes, int maxDepth) {
+        return project0(grammar, source, root, adapter, false, maxNodes, maxDepth);
+    }
+
+    /** Bounded source-fragment import; limits count provider nodes, not the wrapper. */
+    public static <N> M3SyntaxTree projectFragmentBounded(String grammar, byte[] source,
+            N fragment, ForeignNode<N> adapter, int maxNodes, int maxDepth) {
+        return project0(grammar, source, fragment, adapter, true, maxNodes, maxDepth);
     }
 
     private static <N> M3SyntaxTree project0(String grammar, byte[] source,
                                             N root, ForeignNode<N> adapter,
-                                            boolean fragment) {
+                                            boolean fragment, int maxNodes, int maxDepth) {
         Objects.requireNonNull(root, "root");
         Objects.requireNonNull(adapter, "adapter");
+        if (maxNodes < 1 || maxDepth < 1) {
+            throw new IllegalArgumentException("positive parser node and depth budgets required");
+        }
         Builder b = builder(grammar, source);
         if (fragment) b.open("m3.source_image", "", 0, SYNTHETIC);
         ArrayDeque<Frame<N>> stack = new ArrayDeque<>();
-        add(root, adapter, b, stack);
+        IdentityHashMap<N, Boolean> active = new IdentityHashMap<>();
+        int admitted = 0;
+        add(root, adapter, b, stack, active);
+        admitted++;
         while (!stack.isEmpty()) {
             Frame<N> frame = stack.peek();
             if (frame.children.hasNext()) {
-                add(Objects.requireNonNull(frame.children.next(), "child"), adapter, b, stack);
+                if (admitted == maxNodes || stack.size() == maxDepth) {
+                    throw new IllegalStateException("foreign parser node/depth budget exceeded");
+                }
+                add(Objects.requireNonNull(frame.children.next(), "child"), adapter,
+                        b, stack, active);
+                admitted++;
             } else {
                 b.close(adapter.endByte(frame.node));
                 stack.pop();
+                active.remove(frame.node);
             }
         }
         if (fragment) b.close(b.source.length);
@@ -159,11 +189,19 @@ public final class M3SyntaxTree {
     }
 
     private static <N> void add(N node, ForeignNode<N> adapter, Builder b,
-                                ArrayDeque<Frame<N>> stack) {
-        b.open(adapter.kind(node), adapter.field(node),
-               adapter.startByte(node), adapter.flags(node));
-        stack.push(new Frame<>(node,
-                Objects.requireNonNull(adapter.children(node), "children").iterator()));
+            ArrayDeque<Frame<N>> stack, IdentityHashMap<N, Boolean> active) {
+        if (active.putIfAbsent(node, Boolean.TRUE) != null) {
+            throw new IllegalArgumentException("foreign parser node cycle");
+        }
+        try {
+            b.open(adapter.kind(node), adapter.field(node),
+                    adapter.startByte(node), adapter.flags(node));
+            stack.push(new Frame<>(node,
+                    Objects.requireNonNull(adapter.children(node), "children").iterator()));
+        } catch (RuntimeException failure) {
+            active.remove(node);
+            throw failure;
+        }
     }
     private record Frame<N>(N node, Iterator<N> children) { }
 
