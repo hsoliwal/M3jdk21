@@ -38,14 +38,26 @@ static int m3_contains(
     const uint8_t *needle,
     size_t needle_length) {
   if (needle_length == 0U || needle_length > length) return 0;
-  size_t limit = length - needle_length;
-  for (size_t start = 0U; start <= limit; start++) {
-    if (source[start] == needle[0]
-        && memcmp(source + start, needle, needle_length) == 0) {
-      return 1;
-    }
+  /* FLLDCIM: MRL - m3fs-memchr-bitmap-20261102 (Synexia 27b0600d0a8, m3_fs_jni.c sha256 2c8bb0cc.. ->
+   * e9d6e03e..): first-byte memchr skip, memcmp stays the only positive authority. */
+  if (needle_length == 1U) {
+    return memchr(source, needle[0], length) != NULL;
   }
-  return 0;
+  /* libc skips byte spans between viable first-byte candidates. Exact
+   * memcmp remains authoritative; no new JNI export, heap allocation or
+   * pattern table is introduced for each mapped segment. */
+  const uint8_t *cursor = source;
+  size_t remaining = length;
+  for (;;) {
+    const uint8_t *hit = (const uint8_t *)memchr(
+        cursor, needle[0], remaining - needle_length + 1U);
+    if (hit == NULL) return 0;
+    if (memcmp(hit, needle, needle_length) == 0) return 1;
+    size_t consumed = (size_t)(hit - cursor) + 1U;
+    cursor += consumed;
+    remaining -= consumed;
+    if (remaining < needle_length) return 0;
+  }
 }
 
 

@@ -819,6 +819,8 @@ public final class M3FsPrecomputeBundle {
         for (byte value : pattern) {
           int row = Byte.toUnsignedInt(value) * words + word;
           candidates &= bytePresence.get(bytePresence.position() + row);
+          //FLLDCIM: MRL - m3fs-memchr-bitmap-20261102 (Synexia 27b0600d0a8, owner blob 32c9b0d0 -> a34b8031)
+          if (candidates == 0L) break; // Bitwise AND can never regain candidate rows.
         }
         if (word == words - 1 && (segmentCount() & 63) != 0) {
           candidates &= (1L << (segmentCount() & 63)) - 1L;
