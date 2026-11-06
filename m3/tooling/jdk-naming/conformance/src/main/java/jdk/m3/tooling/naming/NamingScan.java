@@ -33,6 +33,7 @@ public final class NamingScan {
 
     static final Set<String> TEXT_SUFFIXES = Set.of(".java", ".yml", ".yaml", ".xml", ".sh", ".py", ".mjs", ".js",
             ".properties", ".gradle", ".toml", ".cfg", ".ini", ".c", ".h", ".cpp", ".json", ".txt");
+    static final String SERVICE_DESCRIPTOR_DIR = "/META-INF/services/";
     static final Set<String> DOC_SUFFIXES = Set.of(".md", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch");
     static final Set<String> DOC_NAMES = Set.of("NOTICE", "LICENSE", "COPYRIGHT", "AUTHORS", "THIRD_PARTY_NOTICES");
     static final List<String> LINEAGE_HINTS = List.of("provenance", "evidence", "receipt", "manifest",
@@ -74,7 +75,15 @@ public final class NamingScan {
         }
         String name = path.substring(path.lastIndexOf('/') + 1);
         String suffix = name.lastIndexOf('.') < 0 ? "" : name.substring(name.lastIndexOf('.')).toLowerCase(Locale.ROOT);
-        return TEXT_SUFFIXES.contains(suffix) || name.equals("pom.xml");
+        return TEXT_SUFFIXES.contains(suffix) || name.equals("pom.xml") || isServiceDescriptor(path);
+    }
+
+    /**
+     * A {@code java.util.ServiceLoader} descriptor ({@code META-INF/services/<service>}): text without a suffix, one
+     * provider name per line; in scope by its directory, as in {@code jdk_naming.py} (is_service_descriptor).
+     */
+    static boolean isServiceDescriptor(String path) {
+        return path.contains(SERVICE_DESCRIPTOR_DIR);
     }
 
     /** The tracked paths of the working tree ({@code rev == null}) or of a revision. */

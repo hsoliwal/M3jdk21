@@ -12,7 +12,9 @@ either executor would still rewrite is a violation.
 
 Every file M3JDK21 carries outside the OpenJDK sources it inherited: `m3/**`, `.m3/**`, `.github/**`, `make/**` and
 the M3 classes under `src/**` and `test/**`. Text is in scope by suffix (`.java .yml .yaml .xml .sh .py .mjs .js
-.properties .gradle .toml .cfg .ini .c .h .cpp .json .txt` and `pom.xml`). Lineage is out of scope (section 4).
+.properties .gradle .toml .cfg .ini .c .h .cpp .json .txt` and `pom.xml`), and every `java.util.ServiceLoader`
+descriptor `META-INF/services/<service>` (no suffix; one provider name per line) by its directory. Lineage is out
+of scope (section 4).
 
 ## 2. Names
 
