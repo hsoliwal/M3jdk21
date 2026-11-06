@@ -31,6 +31,8 @@ section requires a third-party notice.
 
 Attribution (2026-11-06, `m3/file`): `jdk.m3.file.M3ChunkDeltaGenerator.editDistance` (`m3/file/recipe/delta-generator-20261106`) adapts the rolling-row recurrence of Apache Commons Text `LevenshteinDistance` (`src/main/java/org/apache/commons/text/similarity/LevenshteinDistance.java` at `fcf5f4838bd59a303043c1b5e3b0b48b36452664`), Apache License 2.0 (upstream NOTICE: Apache Commons Text, Copyright 2014-2026 The Apache Software Foundation; this product includes software developed at The Apache Software Foundation, https://www.apache.org/); no Commons Text code is redistributed and no runtime dependency on Commons Text exists; the upstream LICENSE and NOTICE are kept verbatim under `m3/file/recipe/delta-generator-20261106/donor/` and `m3/file/NOTICE` carries the module notice.
 
+No attribution needed (2026-11-06, `m3/compression`): `jdk.m3.compression` (raw LZ4 block and Snappy raw encoders, their byte sink, the LZ match-candidate index and byte kernels, the compressed-chunk cache; recipe `m3/compression/recipe/compression-20261106`) is first-party Synexia source written against the published LZ4 block format and Snappy format descriptions; a token 4-gram check against the vendored lz4-java 1.8.0, snappy-java 1.1.10.5 and Commons Compress 1.27.1 sources found no derivation (`FOSS_REUSE_DECISION.tsv` there); lz4-java, snappy-java, aircompressor and Commons Compress jars were used only as reference decoders in a scratch differential outside the module, never as a dependency.
+
 ## 2. Third-party build and test tooling (not shipped in the JDK image)
 
 | Artifact | Version | License (SPDX) | Upstream | Role | Where | Obligation |
