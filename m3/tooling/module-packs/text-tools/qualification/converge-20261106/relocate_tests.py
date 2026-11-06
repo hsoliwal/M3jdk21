@@ -1,4 +1,4 @@
-"""relocate_tests.py <donor-test-root> <out> [<text-tools-root>] : relocate synexia-unix4j-m3 src/test with the
+"""relocate_tests.py <donor-test-root> <out> [<text-tools-root>] : relocate m3-unix4j-m3 src/test with the
 main-source map (merge_unix4j.relocate). A harness joins the package whose classes it exercises: structured tools ->
 jdk.m3.structured, io/os -> jdk.m3.io, else jdk.m3.text. Explicit imports are added for every main class it names
 from another package. Test-scope adaptations (each printed as ADAPT):
