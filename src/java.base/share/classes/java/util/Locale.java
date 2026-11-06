@@ -3211,8 +3211,8 @@ public final class Locale implements Cloneable, Serializable {
             // Do syntax check.
             boolean isIllFormed = false;
             String[] subtags = range.split("-");
-            if (isSubtagIllFormed(subtags[0], true)
-                || range.endsWith("-")) {
+            if (range.endsWith("-")
+                || isSubtagIllFormed(subtags[0], true)) {
                 isIllFormed = true;
             } else {
                 for (int i = 1; i < subtags.length; i++) {

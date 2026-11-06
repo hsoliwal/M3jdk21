@@ -737,6 +737,9 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
     @Override
     @IntrinsicCandidate
     public synchronized String toString() {
+        if (length() == 0) {
+            return "";
+        }
         if (toStringCache == null) {
             //FLLDCIM: R5-BUILDER \u2014 the cache holds the composed M3 String; new String(cache) shares it
             String composed = m3ComposedString();
