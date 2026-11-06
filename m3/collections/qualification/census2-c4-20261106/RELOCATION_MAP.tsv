@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of qualification/census2-c4-20261106/relocate.py (recipe RELOCATE_CENSUS2 v1): the NEW contract and JUnit files of census pass-2 leaf P2-073 (crates m3jdk21-lc315-count-smaller-20261026, m3jdk21-lc719-kth-pair-distance-20261026, m3jdk21-lc719-pair-distance-java-20261026; manifest targets ABSENT before; the same six files are kept byte for byte in m3/qualification/master-landing-20261028/retained-variants/pr1882).
+# Donor: hsoliwal/com.synexia develop d5ad5090d87ef8477a56317e60ac0d29c65029f7 (census pass-2 pin). Row kinds as in m3/collections/recipe/entryless-lane-kernel-20261106/RELOCATION_MAP.tsv.
+kind	donor	target	note
+REPO	hsoliwal/com.synexia	https://github.com/hsoliwal/com.synexia	donor repository; blob URL = <url>/blob/<commit>/<donor path>
+PACKAGE	com.m3.collections	jdk.m3.collections	JDK naming (fe35ea98841)
+EXTERNAL	org.junit.jupiter.api	-	JUnit 5 (module test scope)
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lc315-count-smaller-20261026/M3LongCountSmallerRightContract.java.txt	src/test/java/jdk/m3/collections/M3LongCountSmallerRightContract.java	crate m3jdk21-lc315-count-smaller-20261026
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lc315-count-smaller-20261026/M3LongCountSmallerRightTest.java.txt	src/test/java/jdk/m3/collections/M3LongCountSmallerRightTest.java	crate m3jdk21-lc315-count-smaller-20261026
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lc719-kth-pair-distance-20261026/M3KthPairDistanceContract.java.txt	src/test/java/jdk/m3/collections/M3KthPairDistanceContract.java	crate m3jdk21-lc719-kth-pair-distance-20261026
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lc719-kth-pair-distance-20261026/M3KthPairDistanceTest.java.txt	src/test/java/jdk/m3/collections/M3KthPairDistanceTest.java	crate m3jdk21-lc719-kth-pair-distance-20261026
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lc719-pair-distance-java-20261026/M3LongPairDistanceContract.java.txt	src/test/java/jdk/m3/collections/M3LongPairDistanceContract.java	crate m3jdk21-lc719-pair-distance-java-20261026
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lc719-pair-distance-java-20261026/M3LongPairDistanceTest.java.txt	src/test/java/jdk/m3/collections/M3LongPairDistanceTest.java	crate m3jdk21-lc719-pair-distance-java-20261026
