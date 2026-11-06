@@ -1,0 +1,1 @@
+PASS: Java top-k 25000 randomized cases plus edge cases; 10000 legacy-budget comparisons; 3000 weighted-fusion oracles; LRU, failure, close and concurrency checks

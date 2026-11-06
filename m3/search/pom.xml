@@ -87,6 +87,7 @@
                 <m3.window.native.library>${m3.search.native.dir}/${m3.search.native.prefix}m3coverwindow${m3.search.native.suffix}</m3.window.native.library>
                 <m3.batch.subsequence.library>${m3.search.native.dir}/${m3.search.native.prefix}m3batchsubseq${m3.search.native.suffix}</m3.batch.subsequence.library>
                 <m3.concat.native>${m3.search.native.dir}/${m3.search.native.prefix}m3wordconcat${m3.search.native.suffix}</m3.concat.native>
+                <m3.pair.jni.library>${m3.search.native.dir}/${m3.search.native.prefix}m3pairsum${m3.search.native.suffix}</m3.pair.jni.library>
                 <m3.subsequence.native>${m3.search.native.dir}/${m3.search.native.prefix}m3subseqwindow${m3.search.native.suffix}</m3.subsequence.native>
               </systemPropertyVariables>
             </configuration>
