@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/qualification/guava-minmax-source-custody/**'
+      - 'm3/arrays/src/main/java/**'
       - 'm3/collections/qualification/owned-guava-minmax-priority-queue-20261018/**'
       - '.github/workflows/m3-guava-minmax-compiler-diagnostics.yml'
   workflow_dispatch:
@@ -20,6 +21,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           sparse-checkout: |
+            m3/arrays
             m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
@@ -36,6 +38,14 @@ jobs:
             --root . --out "$out" --job java
           result=$?
           echo "Original MinMax java job exit=$result"
+          if [[ -f "$out/strict-original-arrays-module.stderr" ]]; then
+            echo '--- ORIGINAL strict-original-arrays-module.stderr (first 180 lines) ---'
+            sed -n '1,180p' "$out/strict-original-arrays-module.stderr"
+          fi
+          if [[ -f "$out/strict-original-arrays-module.stdout" ]]; then
+            echo '--- ORIGINAL strict-original-arrays-module.stdout (first 60 lines) ---'
+            sed -n '1,60p' "$out/strict-original-arrays-module.stdout"
+          fi
           if [[ -f "$out/strict-selected-core130.stderr" ]]; then
             echo '--- ORIGINAL strict-selected-core130.stderr (first 180 lines) ---'
             sed -n '1,180p' "$out/strict-selected-core130.stderr"
@@ -53,6 +63,8 @@ jobs:
         with:
           name: m3-minmax-original-javac-${{ github.sha }}
           path: |
+            ${{ runner.temp }}/m3-minmax-compiler-diagnostic/strict-original-arrays-module.stderr
+            ${{ runner.temp }}/m3-minmax-compiler-diagnostic/strict-original-arrays-module.stdout
             ${{ runner.temp }}/m3-minmax-compiler-diagnostic/strict-selected-core130.stderr
             ${{ runner.temp }}/m3-minmax-compiler-diagnostic/strict-selected-core130.stdout
             ${{ runner.temp }}/m3-minmax-compiler-diagnostic/result.json

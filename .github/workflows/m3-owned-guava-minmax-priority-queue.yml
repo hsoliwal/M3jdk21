@@ -1,7 +1,7 @@
 name: Complete owned Guava MinMaxPriorityQueue
 on:
   pull_request:
-    paths: ['m3/collections/**', '.github/workflows/m3-owned-guava-minmax-priority-queue.yml']
+    paths: ['m3/collections/**', 'm3/arrays/src/main/java/**', '.github/workflows/m3-owned-guava-minmax-priority-queue.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,6 +19,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           sparse-checkout: |
+            m3/arrays
             m3/collections
             .github/workflows
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
@@ -33,6 +34,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           sparse-checkout: |
+            m3/arrays
             m3/collections
             .github/workflows
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
