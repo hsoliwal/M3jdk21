@@ -66,6 +66,31 @@ replay test proves the canonical recipe emits the same postimage, and
 host and the linked image) is the ported donor oracle: 50,001 maps, 9,341,740 checks, with a
 digest that `differential.py` compares across the receiver, the donor postimage and the preimage.
 
+## Chunk-sequence delta (recipe relocation 2026-11-06)
+
+`M3ChunkDeltaGenerator.generate(oldRoot, oldChunks, newRoot, newChunks)` aligns two ordered
+sequences of content-chunk hashes (lowercase hex `String`s, the representation of
+`M3FileDelta.Entry.sha256`) into an `M3ChunkDelta` of KEEP / INSERT / DELETE operations: a
+longest-common-subsequence edit script with the donor's insertion-on-tie backtracking, one
+direction bit per cell plus one `int[m+1]` row (5,000 x 5,000 chunks fit a 48 MiB heap).
+`editDistance` is the substitution-aware Levenshtein distance on a rolling row of `min(n,m)+1`
+ints, adapted from Apache Commons Text (Apache-2.0; attribution in the file, in [NOTICE](NOTICE)
+and under `recipe/delta-generator-20261106/donor/`). `generateWithSizes` sizes the INSERTs from a
+`Map<String, byte[]>` of chunk bytes; `M3ChunkDelta.apply(old)` rebuilds the new sequence.
+This is the sequence-alignment delta the module lacked: `M3FileDelta` merges a sorted per-path
+inventory, `M3FileDeltaLedger` keeps per-slot state bits, `M3File.contentDelta` compares two
+fingerprints; none aligns sequences (NEC rows in the recipe's GATES.tsv).
+
+Relocated by recipe from hsoliwal/com.synexia `synexia-fileindex` (the reviewed postimage of the
+donor crate `m3-fileindex-cache-delta-20261031`) in
+[recipe/delta-generator-20261106](recipe/delta-generator-20261106/README.md): `relocate.py`
+(RELOCATE_CHUNK_DELTA v3) over `RELOCATION_MAP.tsv`, pins in `PROVENANCE.tsv`. The donor's proof
+`M3ChunkDeltaGeneratorContractTest` (JUnit 5: 16,129 exhaustive binary pairs + 300 seeded pairs
+against the frozen quadratic oracle, two `-Xmx48m` subprocess probes) runs in the surefire test
+phase; `verify.py` runs the bounded probe `M3ChunkDeltaWorkspaceProbe` on the host and the linked
+image; `differential.sh` proves donor postimage, develop preimage and relocated owner byte-identical
+over 118,432 pairs (2,983,157 operations).
+
 Canonical recipe: `com.synexia.m3jdk.CollectionsContractRefinement20261017`,
 dataset `file-content-delta-20261020`, in Synexia's existing
 `synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017`.

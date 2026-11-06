@@ -203,9 +203,17 @@ def main():
         host_compiler_contracts = {
             'M3FileDeltaSelfTest': 'M3FILE_DELTA_SELFTEST_PASS',
         }
-        maven_junit_sources = {'M3FileDeltaTest'}
+        # Bounded-heap probes take one argument and run under -Xmx48m on the host and
+        # the linked image (recipe delta-generator-20261106; the JUnit proof also
+        # launches them as subprocesses).
+        bounded_probe_contracts = {
+            'M3ChunkDeltaWorkspaceProbe': (('script', 'PASS script 5000x5000'),
+                                           ('distance', 'PASS distance 5000x5000')),
+        }
+        maven_junit_sources = {'M3FileDeltaTest', 'M3ChunkDeltaGeneratorContractTest'}
         all_entrypoints = (set(contracts) | set(image_delta_contracts)
-                           | set(host_compiler_contracts) | maven_junit_sources)
+                           | set(host_compiler_contracts) | set(bounded_probe_contracts)
+                           | maven_junit_sources)
         if ({path.stem for path in test_sources} != all_entrypoints
                 or len(test_sources) != len(all_entrypoints)):
             raise RuntimeError('module contract inventory changed; review each executable contract')
@@ -214,17 +222,26 @@ def main():
                              **host_compiler_contracts}.items():
             if marker not in test_by_stem[name].read_text(encoding='utf-8'):
                 raise RuntimeError('missing executable module contract marker: ' + name)
+        for name in bounded_probe_contracts:
+            if '5000x5000' not in test_by_stem[name].read_text(encoding='utf-8'):
+                raise RuntimeError('missing bounded probe marker: ' + name)
         junit_source = test_by_stem['M3FileDeltaTest'].read_text(encoding='utf-8')
         if not all(token in junit_source for token in
                    ('org.junit.jupiter.api.Test', 'M3FileDeltaSelfTest.main(',
                     'M3FileDeltaContractSelfTest.main(')):
             raise RuntimeError('Maven/JUnit delta wrapper changed; review its execution gate')
+        proof_source = test_by_stem['M3ChunkDeltaGeneratorContractTest'].read_text(encoding='utf-8')
+        if not all(token in proof_source for token in
+                   ('org.junit.jupiter.api.Test', 'M3ChunkDeltaWorkspaceProbe.class.getName()',
+                    '"-Xmx48m"')):
+            raise RuntimeError('Maven/JUnit chunk-delta proof changed; review its execution gate')
         module_contract_sources = [path for path in test_sources
                                    if path.stem not in maven_junit_sources]
         receipt['contract_inventory'] = {
             'source_count': len(test_sources),
             'host_and_image': sorted(set(contracts) | set(image_delta_contracts)),
             'host_javac_only': sorted(host_compiler_contracts),
+            'bounded_probe_host_and_image': sorted(bounded_probe_contracts),
             'maven_junit_separate_gate': sorted(maven_junit_sources),
         }
         write_receipt()
@@ -261,6 +278,18 @@ def main():
                 if marker not in text:
                     raise RuntimeError('contract success marker missing: ' + name)
                 outputs[name] = text.strip()
+            for name, probes in bounded_probe_contracts.items():
+                for argument, marker in probes:
+                    command = [java, '-Xmx48m', '-Djava.io.tmpdir=' + str(temporary_tests)]
+                    if module_path:
+                        command += ['--module-path', module_path]
+                    command += ['--add-modules', 'jdk.m3.file', '--patch-module',
+                                'jdk.m3.file=' + str(module_tests), '-m',
+                                'jdk.m3.file/jdk.m3.file.' + name, argument]
+                    text = run(lane + '-' + name + '-' + argument, command)
+                    if marker not in text:
+                        raise RuntimeError('bounded probe marker missing: ' + name + ' ' + argument)
+                    outputs[name + ':' + argument] = text.strip()
             return outputs
 
         receipt['host_module_contracts'] = module_contracts(
