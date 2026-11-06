@@ -35,6 +35,7 @@ RECEIVER_INPUTS = ("pin.tsv", "m3-estate.tsv", "m3-dag.tsv",
 COMPILER_SOURCES = (
     "com/sun/source/util/M3AST.java",
     "com/sun/tools/javac/m3/M3ASTPC.java",
+    "com/sun/tools/javac/m3/M3CompilerPatternHints.java",
     "com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java",
     "com/sun/tools/javac/main/JavaCompiler.java",
 )
