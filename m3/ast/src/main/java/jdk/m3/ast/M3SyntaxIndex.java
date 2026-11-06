@@ -7,7 +7,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -167,22 +166,26 @@ public final class M3SyntaxIndex {
             facts.add(new Fact(node, key, val, facts.size()));
             return this;
         }
+        //FLLDCIM: MRL - m3ast-facts-stable-scatter-20261030: stable count-prefix scatter replaces the (node, insertion) comparator sort; same sidecar columns (hsoliwal/com.synexia ca1aafc4d94f, postimage blob a640939625b1); recipe m3/ast/recipe/syntax-index-facts-20261106/apply.py v1
         public Facts freeze() {
             if (frozen) throw new IllegalStateException("metadata already frozen");
             frozen = true;
-            facts.sort(Comparator.comparingInt(Fact::node).thenComparingInt(Fact::insertion));
             int[] nodes = new int[facts.size()], names = new int[facts.size()], valuesAt = new int[facts.size()];
             int[] begins = new int[tree.size()], counts = new int[tree.size()];
-            for (int i = 0; i < facts.size(); i++) {
-                Fact fact = facts.get(i);
-                nodes[i] = fact.node; names[i] = fact.key; valuesAt[i] = fact.value;
-                counts[fact.node]++;
-            }
+            for (Fact fact : facts) counts[fact.node]++;
             int next = 0;
             for (int i = 0; i < begins.length; i++) {
                 begins[i] = next;
                 next = Math.addExact(next, counts[i]);
             }
+            // Append order already equals Fact.insertion order. Scatter each node's
+            // original sequence into its compact sidecar without sorting Fact objects.
+            // Use begins[] as a transient cursor, then restore immutable row starts.
+            for (Fact fact : facts) {
+                int at = begins[fact.node]++;
+                nodes[at] = fact.node; names[at] = fact.key; valuesAt[at] = fact.value;
+            }
+            for (int i = 0; i < begins.length; i++) begins[i] -= counts[i];
             return new Facts(tree.projectionSha256(), nodes, names, valuesAt,
                     keys.keySet().toArray(String[]::new), values.keySet().toArray(String[]::new),
                     begins, counts);
