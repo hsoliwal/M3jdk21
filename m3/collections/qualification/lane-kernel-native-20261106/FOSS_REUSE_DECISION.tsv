@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# FOSS_REUSE_DECISION.tsv - donor decision of qualification/lane-kernel-native-20261106 (no new architecture: restoration of retained in-repo code).
+need	donor	where	license	classification	fit_proof	notice
+JNI exports gatherSelectedNative, slidingMaximumIndices0, partition3Long0, partition3Int0 of m3_collections_address	retained variant pr1882 of this repository (PR #1882, retained by d92ed3c9121, renamed by fe35ea98841)	m3/qualification/master-landing-20261028/retained-variants/pr1882/m3/collections/src/main/native/collections/m3_long_address_kernel.c blob 055eee1f1194	Apache-2.0 (SPDX line of the donor file; same copyright holder)	DIRECT_IMPORT as declared ADD rows (ADD_ROWS.tsv), byte-for-byte slices	javac -h prototypes EQUAL 4/4; contracts native-required PASS with the crate-recorded native counts; native = Java digests IDENTICAL (GATES.tsv)	none needed (in-repo, same license and holder); CNPCDA anchors name the donor blob
