@@ -7,7 +7,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,6 +29,7 @@ public final class M3SyntaxIndex {
     private static final int HASH_BYTES = 32;
     private final M3SyntaxTree tree;
     private final byte[] digests;
+    private volatile KindPostings kindPostings;
 
     public M3SyntaxIndex(M3SyntaxTree tree) {
         this.tree = Objects.requireNonNull(tree, "tree");
@@ -91,17 +91,68 @@ public final class M3SyntaxIndex {
         return -1;
     }
     /** Source-order occurrence handles, not per-node heap instances. */
+    //FLLDCIM: MRL - m3ast-kind-postings-20261030: lazy CSR kind postings answer every query after the first by binary search; same source-ordered result (hsoliwal/com.synexia ca1aafc4d94f, postimage blob 160807341996); recipe m3/ast/recipe/syntax-index-facts-20261106/apply.py v1
     public int[] nodesOfKind(String grammarKind) {
         Objects.requireNonNull(grammarKind, "grammarKind");
-        int[] result = new int[Math.min(16, tree.size())];
-        int count = 0;
-        for (int i = 0; i < tree.size(); i++) {
-            if (grammarKind.equals(tree.kind(i))) {
-                if (count == result.length) result = Arrays.copyOf(result, count + (count >>> 1) + 1);
-                result[count++] = i;
+        KindPostings local = kindPostings;
+        if (local == null) {
+            synchronized (this) {
+                local = kindPostings;
+                if (local == null) {
+                    local = KindPostings.build(tree);
+                    kindPostings = local;
+                }
             }
         }
-        return Arrays.copyOf(result, count);
+        return local.nodesOfKind(grammarKind);
+    }
+
+    /**
+     * Lazy, immutable CSR occurrence lanes in parser source order. The transient
+     * kind dictionary is discarded after construction; readers see only compact
+     * primitive offsets and one string key per grammar kind, never node objects.
+     */
+    //FLLDCIM: MRL - m3ast-kind-postings-20261030: immutable kind lanes (sorted keys, begins, counts, source-ordered nodes) built once per index (hsoliwal/com.synexia ca1aafc4d94f, postimage blob 160807341996); recipe m3/ast/recipe/syntax-index-facts-20261106/apply.py v1
+    private static final class KindPostings {
+        private final String[] keys;
+        private final int[] begins;
+        private final int[] counts;
+        private final int[] nodes;
+        private KindPostings(String[] keys, int[] begins, int[] counts, int[] nodes) {
+            this.keys = keys;
+            this.begins = begins;
+            this.counts = counts;
+            this.nodes = nodes;
+        }
+        private static KindPostings build(M3SyntaxTree tree) {
+            Map<String, Integer> names = new LinkedHashMap<>();
+            for (int node = 0; node < tree.size(); node++) {
+                String kind = tree.kind(node);
+                if (!names.containsKey(kind)) names.put(kind, names.size());
+            }
+            String[] keys = names.keySet().toArray(String[]::new);
+            Arrays.sort(keys);
+            for (int i = 0; i < keys.length; i++) names.put(keys[i], i);
+            int[] counts = new int[keys.length];
+            for (int node = 0; node < tree.size(); node++) counts[names.get(tree.kind(node))]++;
+            int[] begins = new int[keys.length];
+            int next = 0;
+            for (int i = 0; i < begins.length; i++) {
+                begins[i] = next;
+                next = Math.addExact(next, counts[i]);
+            }
+            int[] cursor = begins.clone();
+            int[] nodes = new int[tree.size()];
+            for (int node = 0; node < tree.size(); node++) {
+                nodes[cursor[names.get(tree.kind(node))]++] = node;
+            }
+            return new KindPostings(keys, begins, counts, nodes);
+        }
+        private int[] nodesOfKind(String grammarKind) {
+            int id = Arrays.binarySearch(keys, grammarKind);
+            if (id < 0) return new int[0];
+            return Arrays.copyOfRange(nodes, begins[id], begins[id] + counts[id]);
+        }
     }
 
     /**
@@ -167,22 +218,26 @@ public final class M3SyntaxIndex {
             facts.add(new Fact(node, key, val, facts.size()));
             return this;
         }
+        //FLLDCIM: MRL - m3ast-facts-stable-scatter-20261030: stable count-prefix scatter replaces the (node, insertion) comparator sort; same sidecar columns (hsoliwal/com.synexia ca1aafc4d94f, postimage blob a640939625b1); recipe m3/ast/recipe/syntax-index-facts-20261106/apply.py v1
         public Facts freeze() {
             if (frozen) throw new IllegalStateException("metadata already frozen");
             frozen = true;
-            facts.sort(Comparator.comparingInt(Fact::node).thenComparingInt(Fact::insertion));
             int[] nodes = new int[facts.size()], names = new int[facts.size()], valuesAt = new int[facts.size()];
             int[] begins = new int[tree.size()], counts = new int[tree.size()];
-            for (int i = 0; i < facts.size(); i++) {
-                Fact fact = facts.get(i);
-                nodes[i] = fact.node; names[i] = fact.key; valuesAt[i] = fact.value;
-                counts[fact.node]++;
-            }
+            for (Fact fact : facts) counts[fact.node]++;
             int next = 0;
             for (int i = 0; i < begins.length; i++) {
                 begins[i] = next;
                 next = Math.addExact(next, counts[i]);
             }
+            // Append order already equals Fact.insertion order. Scatter each node's
+            // original sequence into its compact sidecar without sorting Fact objects.
+            // Use begins[] as a transient cursor, then restore immutable row starts.
+            for (Fact fact : facts) {
+                int at = begins[fact.node]++;
+                nodes[at] = fact.node; names[at] = fact.key; valuesAt[at] = fact.value;
+            }
+            for (int i = 0; i < begins.length; i++) begins[i] -= counts[i];
             return new Facts(tree.projectionSha256(), nodes, names, valuesAt,
                     keys.keySet().toArray(String[]::new), values.keySet().toArray(String[]::new),
                     begins, counts);
