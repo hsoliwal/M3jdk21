@@ -107,6 +107,104 @@ public final class M3RuntimeHeap {
         return chooseAmortizedCapacity(current(), required, preferred, bytesPerElement);
     }
 
+
+    /**
+     * Select the capacity of an already-owned segmented primitive array from
+     * its incremental allocation cost. Whole existing pages are reused;
+     * only the replacement tail, new pages and directory consume new heap.
+     *
+     * <p>Returns at least required, at most preferred, and retains a bounded
+     * 4KiB..1MiB burst under moderate or high advisory heap pressure. This
+     * changes no allocator, JNI ABI, public collection contract or GC behavior.
+     * It is called only at a true growth boundary, never per inserted element.
+     */
+    static long chooseSegmentedAmortizedCapacity(Snapshot heap, long current,
+            long required, long preferred, int bytesPerElement, int segmentShift) {
+        if (heap == null) throw new NullPointerException("heap");
+        checkSegmented(current, required, bytesPerElement, segmentShift);
+        if (preferred < required) throw new IllegalArgumentException("preferred < required");
+        long maximumLength = (long) Integer.MAX_VALUE << segmentShift;
+        if (required > maximumLength) throw new IllegalArgumentException("array too large");
+        preferred = Math.min(preferred, maximumLength);
+        if (preferred == required) return required;
+        if (heap.maximumBytes() == Long.MAX_VALUE) return preferred;
+
+        long budget = Math.max(0L, heap.freeToMaximum() - heap.safetyReserve());
+        long desiredBytes = additionalSegmentedBytes(current, preferred,
+                bytesPerElement, segmentShift);
+        if (desiredBytes <= budget && heap.pressure(desiredBytes) == Pressure.NORMAL) {
+            return preferred;
+        }
+        // Never reject necessary growth because of an advisory heap estimate.
+        if (additionalSegmentedBytes(current, required,
+                bytesPerElement, segmentShift) > budget) return required;
+
+        long existingBytes = saturatingMultiply(current, bytesPerElement);
+        long burstBytes = Math.max(4096L, Math.min(1L << 20, existingBytes >>> 4));
+        long burstElements = Math.max(1L, burstBytes / bytesPerElement);
+        long upper = required + Math.min(preferred - required, burstElements);
+        if (additionalSegmentedBytes(current, upper, bytesPerElement, segmentShift) <= budget) {
+            return upper;
+        }
+        // Logarithmic cold-path budget selection; all hot array reads remain unchanged.
+        long lower = required;
+        while (lower < upper) {
+            long middle = lower + ((upper - lower + 1L) >>> 1);
+            if (additionalSegmentedBytes(current, middle, bytesPerElement, segmentShift)
+                    <= budget) {
+                lower = middle;
+            } else {
+                upper = middle - 1L;
+            }
+        }
+        return lower;
+    }
+
+    /**
+     * Conservative additional heap bytes while old pages remain live:
+     * replacement tail + newly allocated pages + fresh directory.
+     * A reference is budgeted at 8 bytes, plus approximate object headers;
+     * neither estimate is a JVM object-layout or allocation guarantee.
+     */
+    static long additionalSegmentedBytes(long current, long candidate,
+            int bytesPerElement, int segmentShift) {
+        checkSegmented(current, candidate, bytesPerElement, segmentShift);
+        long maximumLength = (long) Integer.MAX_VALUE << segmentShift;
+        if (candidate > maximumLength) throw new IllegalArgumentException("array too large");
+        if (candidate == current) return 0L;
+        long oldPages = pageCount(current, segmentShift);
+        long newPages = pageCount(candidate, segmentShift);
+        long pageSize = 1L << segmentShift;
+        long additionalElements;
+        long newPayloadArrays;
+        if (oldPages == newPages) {
+            additionalElements = candidate - ((oldPages - 1L) << segmentShift);
+            newPayloadArrays = 1L;
+        } else {
+            long oldRemainder = current & (pageSize - 1L);
+            long replacement = oldPages != 0L && oldRemainder != 0L ? pageSize : 0L;
+            additionalElements = saturatingPlus(replacement,
+                    candidate - (oldPages << segmentShift));
+            newPayloadArrays = newPages - oldPages + (replacement != 0L ? 1L : 0L);
+        }
+        long payload = saturatingMultiply(additionalElements, bytesPerElement);
+        long directory = saturatingPlus(32L, saturatingMultiply(newPages, 8L));
+        long headers = saturatingMultiply(newPayloadArrays, 24L);
+        return saturatingPlus(payload, saturatingPlus(directory, headers));
+    }
+
+    private static void checkSegmented(long current, long desired,
+            int bytesPerElement, int segmentShift) {
+        if (current < 0L || desired < current || bytesPerElement < 1
+                || segmentShift < 10 || segmentShift > 26) {
+            throw new IllegalArgumentException("invalid segmented growth request");
+        }
+    }
+
+    private static long pageCount(long elements, int shift) {
+        return elements == 0L ? 0L : ((elements - 1L) >>> shift) + 1L;
+    }
+
     private static long percent(long value, int p) {
         return (value / 100L) * p + ((value % 100L) * p) / 100L;
     }
