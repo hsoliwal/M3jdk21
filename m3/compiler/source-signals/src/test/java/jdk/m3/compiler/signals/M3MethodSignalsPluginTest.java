@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -67,14 +68,15 @@ final class M3MethodSignalsPluginTest {
         }
     }
 
-    private static void compile(Path source, Path type, Path method) throws IOException {
+    private static void compile(Path source, Path type, Path method)
+            throws IOException, URISyntaxException {
         Files.createDirectories(type.getParent());
         Path classes = type.getParent().resolve("classes");
         Files.createDirectories(classes);
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         var diagnostics = new DiagnosticCollector<JavaFileObject>();
         Path plugin = Path.of(M3SourceSignalPlugin.class.getProtectionDomain()
-                .getCodeSource().getLocation().getPath());
+                .getCodeSource().getLocation().toURI());
         try (var fm = compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8)) {
             String option = "-Xplugin:M3SourceSignals out=" + type
                     + (method == null ? "" : " methodOut=" + method) + " include=all";

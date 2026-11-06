@@ -3,6 +3,7 @@
 package jdk.m3.compiler.signals;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -163,14 +164,15 @@ public final class M3SourceSignalPluginSelfTest {
         return path;
     }
 
-    private static void compile(Path dir,Path outfile,List<Path> sources,String mode) throws IOException {
+    private static void compile(Path dir,Path outfile,List<Path> sources,String mode)
+            throws IOException, URISyntaxException {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         if(compiler==null) throw new IllegalStateException("JDK compiler unavailable");
         DiagnosticCollector<JavaFileObject> diagnostics=new DiagnosticCollector<>();
         Files.createDirectories(dir.resolve("classes"));
         // Maven uses target/classes, while standalone javac tests use the same ServiceLoader resource.
         Path plugin=Path.of(M3SourceSignalPlugin.class.getProtectionDomain()
-                .getCodeSource().getLocation().getPath());
+                .getCodeSource().getLocation().toURI());
         try(StandardJavaFileManager manager=compiler.getStandardFileManager(
                 diagnostics,null,StandardCharsets.UTF_8)) {
             var units=manager.getJavaFileObjectsFromPaths(sources);
