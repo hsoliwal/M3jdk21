@@ -27,53 +27,7 @@ public final class StructuredTextTools {
      * Accepts CRLF, LF and CR record terminators; rejects stray quotes and unterminated fields.
      */
     public static List<List<String>> delimited(TextFrame input, char separator, Limits limits) {
-        Objects.requireNonNull(limits, "limits").check(Objects.requireNonNull(input, "input"));
-        checkSeparator(separator);
-        String text = input.text();
-        if (text.isEmpty()) return List.of();
-        List<List<String>> records = new ArrayList<>();
-        List<String> fields = new ArrayList<>();
-        StringBuilder field = new StringBuilder();
-        boolean quoted = false, afterQuote = false, started = false;
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (quoted) {
-                if (c == '"') {
-                    if (i + 1 < text.length() && text.charAt(i + 1) == '"') {
-                        field.append('"'); i++;
-                    } else {
-                        quoted = false; afterQuote = true;
-                    }
-                } else {
-                    field.append(c);
-                }
-                continue;
-            }
-            if (c == separator) {
-                addField(fields, field, limits);
-                afterQuote = false; started = false;
-            } else if (c == '\r' || c == '\n') {
-                addField(fields, field, limits);
-                addRecord(records, fields, limits);
-                fields = new ArrayList<>();
-                afterQuote = false; started = false;
-                if (c == '\r' && i + 1 < text.length() && text.charAt(i + 1) == '\n') i++;
-            } else if (c == '"' && !started && !afterQuote) {
-                quoted = true; started = true;
-            } else if (c == '"' || afterQuote) {
-                throw new IllegalArgumentException("unexpected text after CSV quote at offset " + i);
-            } else {
-                field.append(c); started = true;
-            }
-        }
-        if (quoted) throw new IllegalArgumentException("unterminated quoted field");
-        // The last record is already committed if its terminator was consumed.
-        char last = text.charAt(text.length() - 1);
-        if (last != '\n' && last != '\r') {
-            addField(fields, field, limits);
-            addRecord(records, fields, limits);
-        }
-        return List.copyOf(records);
+        return prepareDelimited(input, separator, limits, Long.MAX_VALUE).materialize();
     }
 
     /** Zero-based CSV/TSV column projection; outputs canonical LF rows, retaining exact field values. */
@@ -206,5 +160,279 @@ public final class StructuredTextTools {
         }
         if (quote) out.append('"');
     }
+
+    /** Explicit opt-in native verification; JAVA never loads a library. */
+    public enum DelimitedBackend { JAVA, NATIVE_REQUIRED }
+
+    private static volatile boolean delimitedNativeLoaded;
+
+    /** Load the matching CSV predicate kernel, without modifying other native owners. */
+    public static synchronized void loadDelimitedNative(java.nio.file.Path library) {
+        Objects.requireNonNull(library, "library");
+        if (!delimitedNativeLoaded) {
+            System.load(library.toAbsolutePath().normalize().toString());
+            if (nativeDelimitedAbi() != 20261104) {
+                throw new UnsatisfiedLinkError("M3_DELIMITED_JNI_ABI_MISMATCH");
+            }
+            delimitedNativeLoaded = true;
+        }
+    }
+
+    /**
+     * Parse once into immutable UTF-16 field ranges. The index retains the one String
+     * produced by TextFrame.text(), not the frame, individual values or row objects.
+     * maxIndexBytes bounds retained primitive lanes, including the row sentinel;
+     * temporary growth/copy space, source text and VM/JNI overhead are not included.
+     * Existing delimited() uses this same scanner without a new index-budget refusal.
+     */
+    public static DelimitedIndex prepareDelimited(TextFrame input, char separator,
+                                                  Limits limits, long maxIndexBytes) {
+        Objects.requireNonNull(limits, "limits").check(Objects.requireNonNull(input, "input"));
+        checkSeparator(separator);
+        if (maxIndexBytes < 0) throw new IllegalArgumentException("negative index budget");
+        String text = input.text();
+        DelimitedRanges ranges = new DelimitedRanges(limits, maxIndexBytes);
+        boolean quoted = false, afterQuote = false, started = false;
+        int start = 0, closed = 0, decoded = 0;
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (quoted) {
+                if (c == '"') {
+                    if (i + 1 < text.length() && text.charAt(i + 1) == '"') {
+                        decoded++; i++;
+                    } else {
+                        quoted = false; afterQuote = true; closed = i;
+                    }
+                } else {
+                    decoded++;
+                }
+                continue;
+            }
+            if (c == separator) {
+                ranges.field(start, afterQuote ? closed : i, decoded);
+                afterQuote = false; started = false; start = i + 1; decoded = 0;
+            } else if (c == '\r' || c == '\n') {
+                ranges.field(start, afterQuote ? closed : i, decoded);
+                ranges.record();
+                afterQuote = false; started = false; decoded = 0;
+                if (c == '\r' && i + 1 < text.length() && text.charAt(i + 1) == '\n') i++;
+                start = i + 1;
+            } else if (c == '"' && !started && !afterQuote) {
+                quoted = true; started = true; start = i + 1;
+            } else if (c == '"' || afterQuote) {
+                throw new IllegalArgumentException("unexpected text after CSV quote at offset " + i);
+            } else {
+                decoded++; started = true;
+            }
+        }
+        if (quoted) throw new IllegalArgumentException("unterminated quoted field");
+        if (!text.isEmpty()) {
+            char last = text.charAt(text.length() - 1);
+            if (last != '\n' && last != '\r') {
+                ranges.field(start, afterQuote ? closed : text.length(), decoded);
+                ranges.record();
+            }
+        }
+        return new DelimitedIndex(text, separator, ranges.finishFields(), ranges.finishRows());
+    }
+
+    /** Primitive source coordinates: [start,end,decodedLength] per field and row offsets. */
+    public static final class DelimitedIndex {
+        private final String source;
+        private final char separator;
+        private final int[] fields;
+        private final int[] rows;
+
+        private DelimitedIndex(String source, char separator, int[] fields, int[] rows) {
+            this.source = source;
+            this.separator = separator;
+            this.fields = fields;
+            this.rows = rows;
+        }
+        public int records() { return rows.length - 1; }
+        public int fieldCount() { return fields.length / 3; }
+        public int columns(int row) {
+            Objects.checkIndex(row, records());
+            return rows[row + 1] - rows[row];
+        }
+        public long primitivePayloadBytes() { return 4L * ((long) fields.length + rows.length); }
+        public String value(int row, int column) {
+            Objects.checkIndex(column, columns(row));
+            return fieldValue(rows[row] + column);
+        }
+        private String fieldValue(int field) {
+            int base = field * 3, start = fields[base], end = fields[base + 1];
+            if (end - start == fields[base + 2]) return source.substring(start, end);
+            StringBuilder out = new StringBuilder(fields[base + 2]);
+            for (int at = start; at < end; at++) {
+                char c = source.charAt(at);
+                out.append(c);
+                if (c == '"') at++;
+            }
+            return out.toString();
+        }
+        /** Fresh immutable lists/values on demand; no materialized results are cached. */
+        public List<List<String>> materialize() {
+            List<List<String>> result = new ArrayList<>(records());
+            for (int row = 0; row < records(); row++) {
+                List<String> values = new ArrayList<>(columns(row));
+                for (int at = rows[row]; at < rows[row + 1]; at++) values.add(fieldValue(at));
+                result.add(List.copyOf(values));
+            }
+            return List.copyOf(result);
+        }
+        /** Exact case-sensitive decoded-field comparison with no per-field String creation. */
+        public int countEquals(int column, String expected) {
+            return countEqualsUpTo(column, expected, Integer.MAX_VALUE, DelimitedBackend.JAVA);
+        }
+        /**
+         * Return min(limit, exact count). All rows must contain column, even at limit 0.
+         * Required JNI executes the same predicate once per table and checks Java parity.
+         * Input parsing is not repeated; JNI still validates its raw coordinate lanes.
+         */
+        public int countEqualsUpTo(int column, String expected, int limit, DelimitedBackend backend) {
+            Objects.requireNonNull(expected, "expected");
+            Objects.requireNonNull(backend, "backend");
+            if (column < 0) throw new IllegalArgumentException("negative column index");
+            if (limit < 0) throw new IllegalArgumentException("negative count limit");
+            for (int row = 0; row < records(); row++) {
+                if (column >= rows[row + 1] - rows[row]) {
+                    throw new IllegalArgumentException("missing column " + column);
+                }
+            }
+            if (backend == DelimitedBackend.NATIVE_REQUIRED && !delimitedNativeLoaded) {
+                throw new UnsatisfiedLinkError("M3_DELIMITED_JNI_NOT_LOADED");
+            }
+            int count = 0;
+            for (int row = 0; row < records() && count < limit; row++) {
+                if (fieldEquals(rows[row] + column, expected)) count++;
+            }
+            if (backend == DelimitedBackend.NATIVE_REQUIRED) {
+                int actual = nativeCountDelimitedEquals(source, fields, rows, column, expected, limit);
+                if (actual != count) throw new IllegalStateException("M3_DELIMITED_JNI_JAVA_MISMATCH");
+            }
+            return count;
+        }
+        private boolean fieldEquals(int field, String value) {
+            int base = field * 3;
+            if (fields[base + 2] != value.length()) return false;
+            int unit = 0;
+            for (int at = fields[base]; at < fields[base + 1]; at++) {
+                char c = source.charAt(at);
+                if (value.charAt(unit++) != c) return false;
+                if (c == '"') at++;
+            }
+            return true;
+        }
+        /** Project admitted fields without materializing intermediate value/row lists. */
+        public TextFrame project(int[] columns, Limits limits) {
+            return projectSelected(-1, null, columns, limits);
+        }
+        /** Filter by exact decoded field equality, then project; no per-row value objects. */
+        public TextFrame projectWhereEquals(int column, String expected, int[] columns, Limits limits) {
+            Objects.requireNonNull(expected, "expected");
+            if (column < 0) throw new IllegalArgumentException("negative column index");
+            for (int row = 0; row < records(); row++) {
+                if (column >= rows[row + 1] - rows[row]) {
+                    throw new IllegalArgumentException("missing column " + column);
+                }
+            }
+            return projectSelected(column, expected, columns, limits);
+        }
+        private TextFrame projectSelected(int filterColumn, String expected, int[] columns, Limits limits) {
+            Objects.requireNonNull(columns, "columns");
+            Objects.requireNonNull(limits, "limits");
+            if (columns.length == 0 || columns.length > limits.maxNodes()) {
+                throw new IllegalArgumentException("invalid projection width");
+            }
+            int[] requested = columns.clone();
+            for (int c : requested) if (c < 0) throw new IllegalArgumentException("negative column index");
+            StringBuilder out = new StringBuilder();
+            for (int row = 0; row < records(); row++) {
+                if (filterColumn >= 0 && !fieldEquals(rows[row] + filterColumn, expected)) continue;
+                for (int i = 0; i < requested.length; i++) {
+                    int column = requested[i];
+                    if (column >= rows[row + 1] - rows[row]) {
+                        throw new IllegalArgumentException("missing column " + column);
+                    }
+                    if (i > 0) out.append(separator);
+                    int base = (rows[row] + column) * 3;
+                    int start = fields[base], end = fields[base + 1];
+                    boolean quote = end - start != fields[base + 2];
+                    for (int at = start; !quote && at < end; at++) {
+                        char c = source.charAt(at);
+                        quote = c == separator || c == '\r' || c == '\n' || c == '"';
+                    }
+                    if (quote) out.append('"');
+                    out.append(source, start, end);
+                    if (quote) out.append('"');
+                    if (out.length() > limits.maxBytes()) throw new IllegalArgumentException("output budget");
+                }
+                out.append('\n');
+                if (out.length() > limits.maxBytes()) throw new IllegalArgumentException("output budget");
+            }
+            TextFrame result = TextFrame.fromString(out.toString());
+            limits.check(result);
+            return result;
+        }
+    }
+
+    /** Private growable primitive lanes. No object is retained per field or record. */
+    private static final class DelimitedRanges {
+        private final Limits limits;
+        private final long budget;
+        private int[] fields = new int[0];
+        private int[] rows = new int[1];
+        private int fieldCount;
+        private int rowCount;
+        DelimitedRanges(Limits limits, long budget) {
+            this.limits = limits;
+            this.budget = budget;
+            require(0, 1);
+        }
+        void field(int start, int end, int decoded) {
+            if (fieldCount - rows[rowCount] >= limits.maxNodes()) {
+                throw new IllegalArgumentException("column budget");
+            }
+            if (fieldCount >= (Integer.MAX_VALUE - 8) / 3) {
+                throw new IllegalArgumentException("index array capacity");
+            }
+            int needed = (fieldCount + 1) * 3;
+            if (needed > fields.length) {
+                int capacity = capacity(fields.length, needed);
+                if (4L * ((long) capacity + rows.length) > budget) capacity = needed;
+                require(capacity, rows.length);
+                fields = java.util.Arrays.copyOf(fields, capacity);
+            }
+            int base = fieldCount++ * 3;
+            fields[base] = start; fields[base + 1] = end; fields[base + 2] = decoded;
+        }
+        void record() {
+            if (rowCount >= limits.maxLines()) throw new IllegalArgumentException("record budget");
+            if (rowCount >= Integer.MAX_VALUE - 9) throw new IllegalArgumentException("index array capacity");
+            int needed = rowCount + 2;
+            if (needed > rows.length) {
+                int capacity = capacity(rows.length, needed);
+                if (4L * ((long) fields.length + capacity) > budget) capacity = needed;
+                require(fields.length, capacity);
+                rows = java.util.Arrays.copyOf(rows, capacity);
+            }
+            rows[++rowCount] = fieldCount;
+        }
+        private static int capacity(int old, int needed) {
+            return (int) Math.min(Integer.MAX_VALUE - 8L, Math.max(needed, old + old / 2L + 3L));
+        }
+        private void require(int fieldCells, int rowCells) {
+            if (4L * ((long) fieldCells + rowCells) > budget) {
+                throw new IllegalArgumentException("delimited index budget");
+            }
+        }
+        int[] finishFields() { return java.util.Arrays.copyOf(fields, fieldCount * 3); }
+        int[] finishRows() { return java.util.Arrays.copyOf(rows, rowCount + 1); }
+    }
+
+    private static native int nativeDelimitedAbi();
+    private static native int nativeCountDelimitedEquals(String source, int[] fields,
+            int[] rows, int column, String expected, int limit);
 }
 

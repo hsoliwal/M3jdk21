@@ -42,21 +42,29 @@ def main():
     classes, native, jars = (output / name for name in ("modules", "native", "jars"))
     for path in (classes, native, jars):
         path.mkdir()
-    io_native, text_native = native / "io", native / "text"
+    io_native, text_native, structured_native = native / "io", native / "text", native / "structured"
     io_native.mkdir()
     text_native.mkdir()
+    structured_native.mkdir()
+    headers = output / "headers"  # javac -h: m3structured.c includes jdk_m3_structured_StructuredTextTools.h
     command(output / "m3-progress-api.log", home / "bin/javap", "-public",
             "java.util.concurrent.ProgressMonitor", "java.util.concurrent.ProgressMonitors")
     # M3File uses the M3 java.base progress APIs; standard ct.sym omits them.
     command(output / "modules-javac.log", home / "bin/javac", "-source", "21", "-target", "21", "-Xlint:all,-module",
-            "-Werror", "--module-source-path", sources, "-d", classes, *sorted(sources.rglob("*.java")))
+            "-Werror", "--module-source-path", sources, "-d", classes, "-h", headers, *sorted(sources.rglob("*.java")))
     command(output / "native.log", os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra", "-Werror",
             "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
             "-o", io_native / "libm3textio.so", native_source)
     command(output / "native-text.log", os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra", "-Werror",
             "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
             "-o", text_native / "libm3textops.so", native_source.with_name("m3textops.c").resolve(strict=True))
-    rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
+    # Received from com.synexia m3-unix4j-m3 by M3_TEXT_TOOLS_CONVERGE v1 (2026-11-06).
+    for lib, target_dir in (("m3unixtext", text_native), ("m3unixaho", text_native), ("m3structured", structured_native)):
+        command(output / ("native-" + lib + ".log"), os.environ.get("CC", "cc"), "-std=c11", "-Wall", "-Wextra",
+                "-Werror", "-shared", "-fPIC", "-I" + str(home / "include"), "-I" + str(home / "include/linux"),
+                *("-I" + str(d) for d in sorted({p.parent for p in headers.rglob("*.h")} | {headers})),
+                "-o", target_dir / ("lib" + lib + ".so"), native_source.with_name(lib + ".c").resolve(strict=True))
+    rows =["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
     for module in ("jdk.m3.text", "jdk.m3.io", "jdk.m3.structured"):
         jar = jars / (module + ".jar")
         command(output / (module + "-jar.log"), home / "bin/jar", "--create", "--file", jar,
@@ -70,6 +78,7 @@ def main():
             "--image-tsv", image_tsv, "--manifest", manifest, "--layer-root", sources,
             "--out", output / "pack", "--legal-notices", args.legal_notices.resolve(strict=True), "--native-library", "jdk.m3.io=" + str(io_native),
             "--native-library", "jdk.m3.text=" + str(text_native),
+            "--native-library", "jdk.m3.structured=" + str(structured_native),
             "--add-modules", "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps,jdk.jpackage")
     image = output / "pack/image"
     for tool in ("java", "javac", "jar", "jmod", "jlink", "jdeps", "jpackage"):
