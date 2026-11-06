@@ -167,3 +167,10 @@ endif()
 # validated immutable query batch, use GetIntArrayElements with JNI_ABORT release only, and retain no pointer.
 target_sources(m3_arrays PRIVATE
   m3_posting_merge.c)
+
+# Synexia dense bit-matrix transpose kernel (six-stage 64x64 broadword tile swaps, exact scalar fallback) joins the
+# existing arrays JNI owner (recipe m3/arrays/recipe/bitmatrix-20261106): Java_jdk_m3_arrays_M3BitMatrix_{nativeAbi0,
+# transposeNative0} take one detached immutable word snapshot, release every GetLongArrayElements borrow before
+# returning (JNI_ABORT on the input), publish nothing partial and retain no pointer.
+target_sources(m3_arrays PRIVATE
+  m3_bit_matrix.c)
