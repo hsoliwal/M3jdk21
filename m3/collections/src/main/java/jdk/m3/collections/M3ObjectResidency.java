@@ -439,20 +439,29 @@ public final class M3ObjectResidency<T> {
     }
 
     //FLLDCIM: MRL - census L066, crate m3-doop-reuse-20261030 (m3-doop-publication-budget-20261030): admission returns the target it admitted against
+    //FLLDCIM: MRL - residency victim progress P1, crate m3-doop-reuse-20261030 (m3-doop-reentrant-eviction-20261030, donor blob 0f7bf56e5aa8): claim the requested slot before the eviction callbacks
     private long admit(long incomingBytes, int requestedSlot) {
-        long target = targetBudget(HeapSnapshot.current());
-        while (wouldExceed(incomingBytes, target)) {
-            if ((flags & OBSERVE_ONLY) != 0) break;
-            int victim = leastRecentlyUsed(requestedSlot);
-            if (victim < 0) {
+        // Eviction invokes caller codecs/stores. Claim this request before their callbacks.
+        State before = stateAt(requestedSlot);
+        setState(requestedSlot, before == State.SWAPPED ? State.RESTORING : State.CREATING);
+        try {
+            long target = targetBudget(HeapSnapshot.current());
+            while (wouldExceed(incomingBytes, target)) {
+                if ((flags & OBSERVE_ONLY) != 0) break;
+                int victim = leastRecentlyUsed(requestedSlot);
+                if (victim < 0) {
+                    throw new BudgetExceededException(incomingBytes, residentBytes, target);
+                }
+                evict(victim);
+            }
+            if (wouldExceed(incomingBytes, target) && (flags & OBSERVE_ONLY) == 0) {
                 throw new BudgetExceededException(incomingBytes, residentBytes, target);
             }
-            evict(victim);
+            return target;
+        } finally {
+            // Publication remains with the caller; admission restores even on Error.
+            setState(requestedSlot, before);
         }
-        if (wouldExceed(incomingBytes, target) && (flags & OBSERVE_ONLY) == 0) {
-            throw new BudgetExceededException(incomingBytes, residentBytes, target);
-        }
-        return target;
     }
 
     private void enforceBudget(int requestedSlot, long incomingBytes) {
@@ -518,23 +527,27 @@ public final class M3ObjectResidency<T> {
         lruNextEncoded[slot] = 0;
     }
 
+    //FLLDCIM: MRL - residency victim progress P1, crate m3-doop-reuse-20261030 (m3-doop-reentrant-eviction-20261030, donor blob 0f7bf56e5aa8): a victim must be RESIDENT (a SWAPPING victim made admit() spin)
     private int leastRecentlyUsed(int excluded) {
         if (lruNextEncoded == null || lruScanRequired) return scanLeastRecentlyUsed(excluded);
         for (int encoded = lruFirstEncoded; encoded != 0; encoded = lruNextEncoded[encoded - 1]) {
             int slot = encoded - 1;
             if (slot != excluded && resident[slot] != null && active[slot] == 0 && borrowers[slot] == 0
-                    && (Byte.toUnsignedInt(states[slot]) & SLOT_PINNED) == 0) return slot;
+                    && (Byte.toUnsignedInt(states[slot]) & SLOT_PINNED) == 0
+                    && stateAt(slot) == State.RESIDENT) return slot;
         }
         return -1;
     }
 
+    //FLLDCIM: MRL - residency victim progress P1, crate m3-doop-reuse-20261030 (m3-doop-reentrant-eviction-20261030, donor blob 0f7bf56e5aa8): the rollover scan skips non-RESIDENT victims too
     private int scanLeastRecentlyUsed(int excluded) {
         if ((flags & LRU) == 0) return -1;
         int victim = -1;
         long oldest = Long.MAX_VALUE;
         for (int i = 0; i < resident.length; i++) {
             if (i == excluded || resident[i] == null || active[i] != 0 || borrowers[i] != 0
-                    || (Byte.toUnsignedInt(states[i]) & SLOT_PINNED) != 0) continue;
+                    || (Byte.toUnsignedInt(states[i]) & SLOT_PINNED) != 0
+                    || stateAt(i) != State.RESIDENT) continue;
             if ((flags & (SWAP_SECONDARY | RECREATE)) == 0) continue;
             if (touched[i] < oldest) { oldest = touched[i]; victim = i; }
         }

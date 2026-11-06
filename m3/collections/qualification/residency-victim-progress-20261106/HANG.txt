@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: Apache-2.0
+# Phase 1 verdict: HANG (livelock), reachable through the public API only (use() + a Codec.encode callback that calls use() on another slot).
+# Probe: oracle/VictimHangProbe.java (public API drives the scenario; reflection only READS the private lanes for the samples, without the monitor).
+# Owner: M3JDK master 107d96051f5 jdk.m3.collections.M3ObjectResidency (blob d4dc9e683993), JDK 21.0.9, Windows. Arena: 4 slots, LAZY_CREATE|LRU|SWAP_SECONDARY, budget 16, use(0,8), use(1,8); then use(2,8) on a worker thread; admit(8,2) selects LRU victim 0, evict(0) sets SWAPPING and calls Codec.encode, which calls use(3,8) (scenario unrelated), use(3,8) with slot 1 borrowed (borrowed) or use(2,8) (same).
+# Inner admit(8,3) selects victim 0 again (still linked first, resident[0] != null, active 0, borrowers 0, not pinned); evict(0) returns at its first line (state SWAPPING != RESIDENT) without changing any lane; wouldExceed stays true: the while loop of admit() (lines 444-451) never exits and holds the arena monitor.
+
+## scenario=unrelated (master)
+RESULT=TIMEOUT_2000MS scenario=unrelated pid=19452 events=[encode 0]
+SAMPLE 0 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 1 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 2 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 3 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 cpuMillis=4484
+SAMPLE 4 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 cpuMillis=5468
+
+## scenario=borrowed (master)
+RESULT=TIMEOUT_2000MS scenario=borrowed pid=30124 events=[encode 0]
+SAMPLE 0 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 1, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 1 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 1, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 2 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 1, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 3 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 1, 0, 0] tick=4 events=1 cpuMillis=4484
+SAMPLE 4 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 1, 0, 0] tick=4 events=1 cpuMillis=5468
+
+## scenario=same (master)
+RESULT=TIMEOUT_2000MS scenario=same pid=48432 events=[encode 0]
+SAMPLE 0 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 1 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 2 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 threadState=RUNNABLE
+SAMPLE 3 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 cpuMillis=4546
+SAMPLE 4 residentBytes=16 states=[3, 2, 0, 0] resident=[a-1, b-1, null, null] lruFirst=1 lruNext=[2, 0, 0, 0] active=[0, 0, 0, 0] borrowers=[0, 0, 0, 0] tick=4 events=1 cpuMillis=5562
+
+## jstack of the worker, scenario=unrelated, two dumps 500 ms apart (identical frames; cpu grows with wall time)
+"residency-worker" #32 [24692] daemon prio=5 os_prio=0 cpu=3750.00ms elapsed=3.78s runnable
+   java.lang.Thread.State: RUNNABLE
+	at jdk.m3.collections.M3ObjectResidency.admit(M3ObjectResidency.java:451)
+	at jdk.m3.collections.M3ObjectResidency.ensureResident(M3ObjectResidency.java:404)
+	at jdk.m3.collections.M3ObjectResidency.use(M3ObjectResidency.java:168)
+	- locked <arena> (a jdk.m3.collections.M3ObjectResidency)
+	at VictimHangProbe$1.encode(VictimHangProbe.java:24)
+	at VictimHangProbe$1.encode(VictimHangProbe.java:16)
+	at jdk.m3.collections.M3ObjectResidency.evict(M3ObjectResidency.java:552)
+	at jdk.m3.collections.M3ObjectResidency.admit(M3ObjectResidency.java:450)
+	at jdk.m3.collections.M3ObjectResidency.ensureResident(M3ObjectResidency.java:404)
+	at jdk.m3.collections.M3ObjectResidency.use(M3ObjectResidency.java:168)
+	- locked <arena> (a jdk.m3.collections.M3ObjectResidency)
+	at VictimHangProbe.lambda$main$1(VictimHangProbe.java:46)
+	at VictimHangProbe$$Lambda/0x0000011ad7003858.run(Unknown Source)
+	at java.lang.Thread.runWith(java.base@21.0.9/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.9/Thread.java:1583)
+
+"residency-worker" #32 [24692] daemon prio=5 os_prio=0 cpu=4453.12ms elapsed=4.51s runnable
+   java.lang.Thread.State: RUNNABLE
+	at jdk.m3.collections.M3ObjectResidency.admit(M3ObjectResidency.java:451)
+	at jdk.m3.collections.M3ObjectResidency.ensureResident(M3ObjectResidency.java:404)
+	at jdk.m3.collections.M3ObjectResidency.use(M3ObjectResidency.java:168)
+	- locked <arena> (a jdk.m3.collections.M3ObjectResidency)
+	at VictimHangProbe$1.encode(VictimHangProbe.java:24)
+	at VictimHangProbe$1.encode(VictimHangProbe.java:16)
+	at jdk.m3.collections.M3ObjectResidency.evict(M3ObjectResidency.java:552)
+	at jdk.m3.collections.M3ObjectResidency.admit(M3ObjectResidency.java:450)
+	at jdk.m3.collections.M3ObjectResidency.ensureResident(M3ObjectResidency.java:404)
+	at jdk.m3.collections.M3ObjectResidency.use(M3ObjectResidency.java:168)
+	- locked <arena> (a jdk.m3.collections.M3ObjectResidency)
+	at VictimHangProbe.lambda$main$1(VictimHangProbe.java:46)
+	at VictimHangProbe$$Lambda/0x0000011ad7003858.run(Unknown Source)
+	at java.lang.Thread.runWith(java.base@21.0.9/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.9/Thread.java:1583)
+
+## source lines (master): 445 if ((flags & OBSERVE_ONLY) != 0) break; 446 int victim = leastRecentlyUsed(requestedSlot); 450 evict(victim); 451 } (loop back-edge, safepoint poll); 546 if (before != State.RESIDENT || active[slot] != 0 || borrowers[slot] != 0) return;
+
+## same probe on this leaf's head (P1)
+RESULT=COMPLETED scenario=unrelated events=[encode 0, encode 1, write 1, create 3, nested ok, write 0, create 2, outer ok] creates=[1, 1, 1, 1] residentBytes=16 states=SWAPPED SWAPPED RESIDENT RESIDENT
+RESULT=COMPLETED scenario=borrowed events=[encode 0, nested BudgetExceededException, write 0, create 2, outer ok] creates=[1, 1, 1, 0] residentBytes=16 states=SWAPPED RESIDENT RESIDENT ABSENT
+RESULT=COMPLETED scenario=same events=[encode 0, nested IllegalStateException, write 0, create 2, outer ok] creates=[1, 1, 1, 0] residentBytes=16 states=SWAPPED RESIDENT RESIDENT ABSENT
