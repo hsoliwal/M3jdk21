@@ -1,0 +1,3 @@
+leaf	crate	post	pre	owner
+P2-020	m3-atom-pattern-multipass	synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-stable-run-reversal-20261021/M3IndexedListSnapshot.java	-	m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
+P2-075	m3jdk21-lane-rotation-compact-20261029	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lane-rotation-compact-20261029/M3LaneAlgorithms.java.txt	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lane-rotation-compact-20261029/before-M3LaneAlgorithms.java.txt	m3/collections/src/main/java/jdk/m3/collections/M3LaneAlgorithms.java
