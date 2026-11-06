@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of qualification/census-g2-20261106/relocate.py (RELOCATE_CENSUS v4, derived from recipe/entryless-lane-kernel-20261106/relocate.py v3): the new test oracles of census group G2 (L082 + L088). The owner edits are apply.py DONOR rules (EDIT_RULES.tsv, EDITS.tsv).
+# Donor: hsoliwal/com.synexia develop ca1aafc4d94f9dd1ee288226dcca070cc60991c9, crates synexia-openrewrite-recipes/crates/m3jdk21-cow-set-20261029 and m3jdk21-cow-long-list-20261029 (hash-pinned-java postimages; manifest after_sha256 = PROVENANCE donor_sha256).
+kind	donor	target	note
+REPO	hsoliwal/com.synexia	https://github.com/hsoliwal/com.synexia	donor repository; blob URL = <url>/blob/<commit>/<donor path>
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-cow-set-20261029/M3CowSetContractTest.java.txt	src/test/java/jdk/m3/collections/M3CowSetContractTest.java	L082 JUnit 5 contract test vs JDK CopyOnWriteArraySet (public contract, snapshot iterators, concurrent writers)
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-cow-long-list-20261029/M3CowLongListContractTest.java.txt	src/test/java/jdk/m3/collections/M3CowLongListContractTest.java	L088 JUnit 5 contract test vs JDK CopyOnWriteArrayList<Long> (index/bounds, snapshots, concurrent writers)
+FILE	synexia-openrewrite-recipes/crates/m3jdk21-cow-set-20261029/verification/M3CowSetDifferential.java	src/test/java/jdk/m3/collections/M3CowSetDifferential.java	L082 crate verification main: seeded differential vs CopyOnWriteArraySet (null/extreme values, snapshot iterators, concurrent writers)
+WRAP	M3CowSetDifferential	src/test/java/jdk/m3/collections/M3CowSetDifferentialTest.java	-
+PACKAGE	com.m3.collections	jdk.m3.collections	the host package
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	junit-jupiter test scope (m3/collections/pom.xml)
+SKIP	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-cow-set-20261029/M3CowSet.java.txt	src/main/java/jdk/m3/collections/M3CowSet.java	edited in place by apply.py DONOR rule (EDITS.tsv), not relocated as a new file
+SKIP	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-cow-long-list-20261029/M3CowLongList.java.txt	src/main/java/jdk/m3/collections/M3CowLongList.java	edited in place by apply.py DONOR rule (EDITS.tsv), not relocated as a new file
