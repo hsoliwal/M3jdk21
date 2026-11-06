@@ -161,3 +161,9 @@ if(BUILD_TESTING)
   endif()
   add_test(NAME m3_multiset_step_checks COMMAND m3_multiset_step_checks)
 endif()
+
+# Synexia CSR posting-list union/intersection/count kernels join the existing arrays JNI owner
+# (recipe m3/arrays/recipe/posting-index-20261106): Java_jdk_m3_arrays_M3IntPostingIndex_* take one
+# validated immutable query batch, use GetIntArrayElements with JNI_ABORT release only, and retain no pointer.
+target_sources(m3_arrays PRIVATE
+  m3_posting_merge.c)
