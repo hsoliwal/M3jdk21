@@ -299,13 +299,13 @@ public final class M3TreeTopology {
 		pruneCoordinatesPast (parentId, count);
 		if (childCounts [parentId] != count) generation++;
 		childCounts [parentId] = count;
-		long state = stateMasks [parentId] | M3ItemState.CHILDREN_KNOWN
-				| M3ItemState.CHILDREN_COMPLETE;
-		state &= ~(M3ItemState.CHILDREN_LOADING | M3ItemState.CHILDREN_PARTIAL);
+		long state = stateMasks [parentId] | ItemState.CHILDREN_KNOWN
+				| ItemState.CHILDREN_COMPLETE;
+		state &= ~(ItemState.CHILDREN_LOADING | ItemState.CHILDREN_PARTIAL);
         if (count == 0) {
-            state &= ~M3ItemState.HAS_CHILDREN;
+            state &= ~ItemState.HAS_CHILDREN;
         } else {
-            state |= M3ItemState.HAS_CHILDREN;
+            state |= ItemState.HAS_CHILDREN;
         }
 		stateMasks [parentId] = state;
 		refreshVisibleExtra (parentId);
@@ -349,7 +349,7 @@ public final class M3TreeTopology {
 		requirePresent (id);
 		long before = stateMasks [id];
 		if (before == state) return;
-		boolean expansionChanged = ((before ^ state) & M3ItemState.EXPANDED) != 0;
+		boolean expansionChanged = ((before ^ state) & ItemState.EXPANDED) != 0;
 		long nextPresentation = Math.incrementExact (presentationGeneration);
 		stateMasks [id] = state;
 		presentationGeneration = nextPresentation;
@@ -377,7 +377,7 @@ public final class M3TreeTopology {
             stateMasks [id] &= ~flag;
         }
         presentationGeneration = nextPresentation;
-        if ((flag & M3ItemState.EXPANDED) != 0) {
+        if ((flag & ItemState.EXPANDED) != 0) {
             generation++;
             refreshVisibleExtra(id);
         }
@@ -504,9 +504,9 @@ public final class M3TreeTopology {
 			childCounts [parentId] = Math.max (0, childCounts [parentId] + delta);
 			generation++;
             if (childCounts [parentId] == 0) {
-                stateMasks [parentId] &= ~M3ItemState.HAS_CHILDREN;
+                stateMasks [parentId] &= ~ItemState.HAS_CHILDREN;
             } else {
-                stateMasks [parentId] |= M3ItemState.HAS_CHILDREN;
+                stateMasks [parentId] |= ItemState.HAS_CHILDREN;
             }
 			refreshVisibleExtra (parentId);
 		}
@@ -515,7 +515,7 @@ public final class M3TreeTopology {
 	private void refreshVisibleExtra (int id) {
 		requirePresent (id);
 		long next = 0;
-		if ((stateMasks [id] & M3ItemState.EXPANDED) != 0
+		if ((stateMasks [id] & ItemState.EXPANDED) != 0
 				&& childCounts [id] != UNKNOWN_CHILD_COUNT) {
 			next = Math.addExact ((long)childCounts [id], childVisibleExtraSums [id]);
 		}
@@ -535,7 +535,7 @@ public final class M3TreeTopology {
 		while (parentId != ROOT) {
 			requirePresent (parentId);
 			childVisibleExtraSums [parentId] = Math.addExact (childVisibleExtraSums [parentId], delta);
-            if ((stateMasks [parentId] & M3ItemState.EXPANDED) == 0
+            if ((stateMasks [parentId] & ItemState.EXPANDED) == 0
                     || childCounts [parentId] == UNKNOWN_CHILD_COUNT) {
                 return;
             }

@@ -59,7 +59,7 @@ public final class M3LongDeepFilterSelfTest {
         SortedFixture backing = new SortedFixture(-1, 2, 4, 6);
         AtomicInteger calls = new AtomicInteger();
         LongPredicate onlyPositive = value -> { calls.incrementAndGet(); return value > 0; };
-        M3LongCollection view = new M3LongFilteredView(backing, onlyPositive);
+        LongCollection view = new M3LongFilteredView(backing, onlyPositive);
         final int depth = 100_000;
         for (int n = 1; n < depth; n++) view = new M3LongFilteredView(view, onlyPositive);
         equal(0, calls.get(), "construction does not evaluate any predicate");
@@ -69,7 +69,7 @@ public final class M3LongDeepFilterSelfTest {
         equal(depth + 1L, calls.get(), "negative stops at first predicate");
         array(new long[]{2, 4, 6}, view.longStream().toArray(), "deep generic stream");
         equal(3, view.size(), "deep size");
-        M3LongCollection previous = view;
+        LongCollection previous = view;
         view = new M3LongFilteredView(previous, value -> value != 4);
         array(new long[]{2, 6}, view.toArray(), "appended selector");
         array(new long[]{2, 4, 6}, previous.toArray(), "previous immutable view preserved");
@@ -81,7 +81,7 @@ public final class M3LongDeepFilterSelfTest {
     private static void deepSorted() {
         SortedFixture backing = new SortedFixture(-5, -1, 2, 3, 4, 8);
         LongPredicate positive = value -> value >= 0;
-        M3LongSortedSet view = M3LongSortedViews.filter(backing, positive);
+        LongSortedSet view = M3LongSortedViews.filter(backing, positive);
         final int depth = 100_000;
         for (int n = 1; n < depth; n++) view = M3LongSortedViews.filter(view, positive);
         array(new long[]{2, 3, 4, 8}, view.longStream().toArray(), "deep sorted stream");
@@ -101,7 +101,7 @@ public final class M3LongDeepFilterSelfTest {
         view.clear();
         array(new long[]{-5, -1}, backing.toArray(), "deep clear affects only visible rows");
     }
-    private static M3LongSortedSet viewForRefusal(SortedFixture backing) {
+    private static LongSortedSet viewForRefusal(SortedFixture backing) {
         return M3LongSortedViews.filter(backing, value -> value >= 0);
     }
 
@@ -122,15 +122,15 @@ public final class M3LongDeepFilterSelfTest {
         LongPredicate b = v -> { evaluations.append('B'); return v == 3; };
         LongPredicate c = v -> { evaluations.append('C'); return v == 4; };
         SortedFixture backing = new SortedFixture(2, 3, 4);
-        M3LongCollection first = new M3LongFilteredView(backing, a);
-        M3LongCollection second = new M3LongFilteredView(first, b);
-        M3LongCollection third = new M3LongFilteredView(second, c);
+        LongCollection first = new M3LongFilteredView(backing, a);
+        LongCollection second = new M3LongFilteredView(first, b);
+        LongCollection third = new M3LongFilteredView(second, c);
         equal(2, merges.get(), "custom and() virtual dispatch called twice");
         array(new long[]{2, 3, 4}, third.toArray(), "custom OR semantics preserved");
         equal(0, merges.get() - 2, "no extra and during traversal");
         check(evaluations.toString().contains("ABC"), "custom evaluation trace");
         SortedFixture other = new SortedFixture(2, 3, 4);
-        M3LongSortedSet s = M3LongSortedViews.filter(other,
+        LongSortedSet s = M3LongSortedViews.filter(other,
                 new Disjunctive(v -> v == 2));
         s = M3LongSortedViews.filter(s, v -> v == 3);
         s = M3LongSortedViews.filter(s, v -> v == 4);
@@ -140,18 +140,18 @@ public final class M3LongDeepFilterSelfTest {
             public boolean test(long value) { return true; }
             @Override public LongPredicate and(LongPredicate other) { throw new IllegalStateException("and called"); }
         };
-        M3LongCollection original = new M3LongFilteredView(backing, throwing);
+        LongCollection original = new M3LongFilteredView(backing, throwing);
         throwsType(IllegalStateException.class,
                 () -> new M3LongFilteredView(original, v -> true));
-        M3LongSortedSet sorted = M3LongSortedViews.filter(other, throwing);
+        LongSortedSet sorted = M3LongSortedViews.filter(other, throwing);
         throwsType(IllegalStateException.class,
                 () -> M3LongSortedViews.filter(sorted, v -> true));
         LongPredicate nullResult = new LongPredicate() {
             public boolean test(long value) { return true; }
             @Override public LongPredicate and(LongPredicate other) { return null; }
         };
-        M3LongCollection nullable = new M3LongFilteredView(backing, nullResult);
-        M3LongCollection nulled = new M3LongFilteredView(nullable, v -> true);
+        LongCollection nullable = new M3LongFilteredView(backing, nullResult);
+        LongCollection nulled = new M3LongFilteredView(nullable, v -> true);
         throwsType(NullPointerException.class, () -> nulled.contains(2));
     }
 
@@ -160,7 +160,7 @@ public final class M3LongDeepFilterSelfTest {
         for (int iteration = 0; iteration < 256; iteration++) {
             SortedFixture backing = new SortedFixture();
             for (int n = 0; n < 48; n++) backing.add(random.nextInt(120) - 60);
-            M3LongSortedSet current = backing;
+            LongSortedSet current = backing;
             LongPredicate reference = value -> true;
             for (int n = 0; n < 50; n++) {
                 long cutoff = random.nextInt(120) - 60;
@@ -175,7 +175,7 @@ public final class M3LongDeepFilterSelfTest {
             for (int j = -65; j < 65; j += 13) {
                 check(current.contains(j) == (backing.contains(j) && oracle.test(j)), "seeded contains");
             }
-            M3LongCollection generic = backing;
+            LongCollection generic = backing;
             for (int n = 0; n < 50; n++) generic = new M3LongFilteredView(generic, value -> value != 1000);
             array(backing.toArray(), generic.toArray(), "seeded generic filter parity");
         }
@@ -220,7 +220,7 @@ public final class M3LongDeepFilterSelfTest {
         System.out.println("M3_DEEP_FILTER_PASS assertions=" + assertions + " depth=100000");
     }
 
-    private static final class SortedFixture implements M3LongSortedSet {
+    private static final class SortedFixture implements LongSortedSet {
         private final NavigableSet<Long> keys = new TreeSet<>();
         SortedFixture(long... values) { for (long value : values) keys.add(value); }
         @Override public boolean add(long value) { return keys.add(value); }
@@ -230,9 +230,9 @@ public final class M3LongDeepFilterSelfTest {
         @Override public boolean isEmpty() { return keys.isEmpty(); }
         @Override public boolean contains(long value) { return keys.contains(value); }
         @Override public long[] toArray() { return keys.stream().mapToLong(Long::longValue).toArray(); }
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             Iterator<Long> delegate = keys.iterator();
-            return new M3LongIterator() {
+            return new LongIterator() {
                 @Override public boolean hasNext() { return delegate.hasNext(); }
                 @Override public long nextLong() { return delegate.next(); }
             };

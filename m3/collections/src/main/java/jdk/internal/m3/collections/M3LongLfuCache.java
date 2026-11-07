@@ -7,7 +7,7 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
-import jdk.m3.collections.M3LongIterator;
+import jdk.m3.collections.LongIterator;
 
 /**
  * Bounded primitive long-to-long LFU cache with O(1) get, put and eviction on parallel lanes and
@@ -223,9 +223,9 @@ public final class M3LongLfuCache {
     }
 
     /** Eviction-order key iterator; does not count uses; fail-fast against any modification including {@code get}. */
-    public M3LongIterator keyIterator() {
+    public LongIterator keyIterator() {
         int expectedModCount = modCount;
-        return new M3LongIterator() {
+        return new LongIterator() {
             private int bucket = firstBucket;
             private int slot = firstBucket == NONE ? NONE : bucketHead[firstBucket];
 

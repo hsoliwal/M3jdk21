@@ -16,8 +16,8 @@ package jdk.internal.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3IntCsrGraph;
-import jdk.m3.collections.M3WeightedIntCsrGraph;
+import jdk.m3.collections.graph.IntCsrGraph;
+import jdk.m3.collections.graph.WeightedIntCsrGraph;
 
 /**
  * Iterative bridge/articulation/bridge-component precompute; parallel edges retain their IDs.
@@ -32,10 +32,10 @@ public final class M3IntUndirectedLowLink {
     private final int[] component;
     private final int components;
 
-    public M3IntUndirectedLowLink(M3WeightedIntCsrGraph graph) {
+    public M3IntUndirectedLowLink(WeightedIntCsrGraph graph) {
         Objects.requireNonNull(graph, "graph");
         if (!graph.isUndirected()) { throw new IllegalArgumentException("requires undirected paired arcs"); }
-        M3IntCsrGraph topology = graph.topology();
+        IntCsrGraph topology = graph.topology();
         int n = graph.vertices();
         bridges = new boolean[graph.inputEdges()]; articulation = new boolean[n]; component = new int[n];
         int[] entered = new int[n], low = new int[n], parent = new int[n], parentEdge = new int[n];

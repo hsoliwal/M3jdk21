@@ -162,7 +162,7 @@ public final class M3LongIndexProjection {
      */
     public M3LongIndexProjection filteredPathMasks(
             int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
-            int first, int count, int stride, M3IndexPathMasks.Backend backend) {
+            int first, int count, int stride, IndexPathMasks.Backend backend) {
         Objects.requireNonNull(backend, "backend");
         int length = size();
         if (first < 0 || first > length || count < 0 || stride == 0) {
@@ -174,7 +174,7 @@ public final class M3LongIndexProjection {
                 throw new IndexOutOfBoundsException("path leaves projection window");
             }
         }
-        int[] selected = M3IndexPathMasks.select(
+        int[] selected = IndexPathMasks.select(
                 indices, indices, statePlanes, requiredMasks, forbiddenMasks,
                 from + first, count, stride, backend);
         Order resultOrder = order;

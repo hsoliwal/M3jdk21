@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 final class M3ObjectResidencyRuntimePressureTest {
     @Test
     void targetUsesTheActualRunningJvmHeap() {
-        M3ObjectResidency.HeapSnapshot actual = M3ObjectResidency.HeapSnapshot.current();
+        ObjectResidency.HeapSnapshot actual = ObjectResidency.HeapSnapshot.current();
         long maximum = Runtime.getRuntime().maxMemory();
         assertEquals(maximum, actual.maxBytes());
         assertTrue(actual.usedBytes() >= 0);

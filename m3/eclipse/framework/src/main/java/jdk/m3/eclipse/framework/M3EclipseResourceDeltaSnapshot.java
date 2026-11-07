@@ -4,8 +4,8 @@ package jdk.m3.eclipse.framework;
 
 import jdk.m3.collections.M3Collections;
 import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3LongArrayList;
-import jdk.m3.collections.M3ObjectIdentitySet;
+import jdk.m3.collections.LongArrayList;
+import jdk.m3.collections.ObjectIdentitySet;
 import java.util.List;
 import java.util.Objects;
 import org.eclipse.core.resources.IResource;
@@ -44,9 +44,9 @@ public final class M3EclipseResourceDeltaSnapshot {
 
     private final M3EclipseIndexedSnapshot<IResourceDelta> rows =
             new M3EclipseIndexedSnapshot<>();
-    private final M3LongArrayList parents = M3Collections.longArrayList();
+    private final LongArrayList parents = M3Collections.longArrayList();
     /** Full 32-bit Eclipse IResourceDelta flag words in physical BFS order. */
-    private final M3LongArrayList flags = M3Collections.longArrayList();
+    private final LongArrayList flags = M3Collections.longArrayList();
     /** Unsigned work-state byte per row; null unless {@link #captureChanges} built it. */
     private byte[] workStates;
 
@@ -56,7 +56,7 @@ public final class M3EclipseResourceDeltaSnapshot {
         Objects.requireNonNull(root, "root");
         if (maxNodes < 1) throw new IllegalArgumentException("maxNodes must be positive");
         M3EclipseResourceDeltaSnapshot snapshot = new M3EclipseResourceDeltaSnapshot();
-        M3ObjectIdentitySet<IResourceDelta> seen = new M3ObjectIdentitySet<>();
+        ObjectIdentitySet<IResourceDelta> seen = new ObjectIdentitySet<>();
         snapshot.rows.add(root, kindMask(root));
         snapshot.parents.add(-1L);
         snapshot.flags.add(Integer.toUnsignedLong(root.getFlags()));

@@ -13,7 +13,7 @@ import java.util.Objects;
 
 /**
  * Double-ended priority queue retaining one exact-width, logically sorted primitive ring.
- * Duplicates are permitted; ordering and carrier conversion are defined by {@link M3PrimitiveKind}.
+ * Duplicates are permitted; ordering and carrier conversion are defined by {@link PrimitiveKind}.
  *
  * <p>Both extrema can be examined and removed in constant time. Search/count uses binary
  * search in O(log n); single insertion/removal moves the shorter side in bulk. Sorted export
@@ -30,7 +30,7 @@ import java.util.Objects;
  * make the throwing contract explicit. Returned arrays are independent sorted copies.
  */
 public final class M3PrimitiveMinMaxQueue {
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private Object values;
     private int size;
     private int head;
@@ -40,7 +40,7 @@ public final class M3PrimitiveMinMaxQueue {
      * @param kind retained primitive kind
      * @throws NullPointerException if kind is null
      */
-    public M3PrimitiveMinMaxQueue(M3PrimitiveKind kind) { this(kind, 8); }
+    public M3PrimitiveMinMaxQueue(PrimitiveKind kind) { this(kind, 8); }
 
     /**
      * Creates an empty queue with at least the requested capacity.
@@ -50,7 +50,7 @@ public final class M3PrimitiveMinMaxQueue {
      * @throws IllegalArgumentException if initialCapacity is negative
      * @throws OutOfMemoryError if the requested array cannot be allocated
      */
-    public M3PrimitiveMinMaxQueue(M3PrimitiveKind kind, int initialCapacity) {
+    public M3PrimitiveMinMaxQueue(PrimitiveKind kind, int initialCapacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (initialCapacity < 0) throw new IllegalArgumentException("initialCapacity < 0");
         values = kind.newArray(Math.max(1, initialCapacity));
@@ -60,7 +60,7 @@ public final class M3PrimitiveMinMaxQueue {
      * Returns the retained primitive kind.
      * @return the retained primitive kind
      */
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     /**
      * Returns the number of retained values.
      * @return the number of retained values
@@ -89,13 +89,13 @@ public final class M3PrimitiveMinMaxQueue {
      */
     public void offerBits(long bits) {
         int insertion = upperBound(bits);
-        ensure(M3PrimitiveKind.checkedSize(size, 1));
+        ensure(PrimitiveKind.checkedSize(size, 1));
         int capacity = capacity();
         if (insertion < size - insertion) {
             head = head == 0 ? capacity - 1 : head - 1;
-            M3PrimitiveKind.moveRing(values, head, capacity, 1, 0, insertion);
+            PrimitiveKind.moveRing(values, head, capacity, 1, 0, insertion);
         } else {
-            M3PrimitiveKind.moveRing(values, head, capacity, insertion, insertion + 1, size - insertion);
+            PrimitiveKind.moveRing(values, head, capacity, insertion, insertion + 1, size - insertion);
         }
         kind.writeBits(values, physical(insertion), bits);
         size++;
@@ -119,7 +119,7 @@ public final class M3PrimitiveMinMaxQueue {
         checkLegacyRange(source, from, length);
         if (length == 0) return 0;
         kind.checkArray(source);
-        int required = M3PrimitiveKind.checkedSize(size, length);
+        int required = PrimitiveKind.checkedSize(size, length);
         if (length == 1) {
             offerBits(kind.readBits(source, from));
             return 1;
@@ -153,7 +153,7 @@ public final class M3PrimitiveMinMaxQueue {
      */
     public int offerAllSortedBits(Object source, int from, int length) {
         kind.checkRange(source, from, length);
-        int required = M3PrimitiveKind.checkedSize(size, length);
+        int required = PrimitiveKind.checkedSize(size, length);
         if (length == 0) return 0;
         if (!sortedRange(source, from, length)) throw new IllegalArgumentException("source range is not sorted");
         if (size == 0) {
@@ -249,11 +249,11 @@ public final class M3PrimitiveMinMaxQueue {
         int capacity = capacity();
         int suffix = size - index - 1;
         if (index < suffix) {
-            M3PrimitiveKind.moveRing(values, head, capacity, 0, 1, index);
+            PrimitiveKind.moveRing(values, head, capacity, 0, 1, index);
             kind.clear(values, head, head + 1);
             head = head == capacity - 1 ? 0 : head + 1;
         } else {
-            M3PrimitiveKind.moveRing(values, head, capacity, index + 1, index, suffix);
+            PrimitiveKind.moveRing(values, head, capacity, index + 1, index, suffix);
             int tail = physical(size - 1);
             kind.clear(values, tail, tail + 1);
         }
@@ -277,11 +277,11 @@ public final class M3PrimitiveMinMaxQueue {
      */
     public Object toPrimitiveArray() {
         Object result = kind.newArray(size);
-        M3PrimitiveKind.copyRing(values, head, size, capacity(), result, 0);
+        PrimitiveKind.copyRing(values, head, size, capacity(), result, 0);
         return result;
     }
 
-    private int physical(int logical) { return M3PrimitiveKind.ringIndex(head, logical, capacity()); }
+    private int physical(int logical) { return PrimitiveKind.ringIndex(head, logical, capacity()); }
     private int lowerBound(long bits) { return bound(bits, false); }
     private int upperBound(long bits) { return bound(bits, true); }
     private int bound(long bits, boolean upper) {
@@ -324,8 +324,8 @@ public final class M3PrimitiveMinMaxQueue {
     private void ensure(int required) {
         int oldCapacity = capacity();
         if (required <= oldCapacity) return;
-        Object next = kind.newArray(M3PrimitiveKind.grownCapacity(oldCapacity, required));
-        M3PrimitiveKind.copyRing(values, head, size, oldCapacity, next, 0);
+        Object next = kind.newArray(PrimitiveKind.grownCapacity(oldCapacity, required));
+        PrimitiveKind.copyRing(values, head, size, oldCapacity, next, 0);
         values = next;
         head = 0;
     }

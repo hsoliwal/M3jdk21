@@ -54,7 +54,7 @@ public final class M3PrimitiveMpmcRingBuffer {
         }
     }
 
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final Object elements;
     private final long[] sequences;
     private final int capacity;
@@ -62,7 +62,7 @@ public final class M3PrimitiveMpmcRingBuffer {
     private volatile long producerIndex;
     private volatile long consumerIndex;
 
-    public M3PrimitiveMpmcRingBuffer(M3PrimitiveKind kind, int requestedCapacity) {
+    public M3PrimitiveMpmcRingBuffer(PrimitiveKind kind, int requestedCapacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (requestedCapacity < 2) {
             throw new IllegalArgumentException("capacity must be >= 2");
@@ -83,7 +83,7 @@ public final class M3PrimitiveMpmcRingBuffer {
         }
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int capacity() { return capacity; }
 
     /**

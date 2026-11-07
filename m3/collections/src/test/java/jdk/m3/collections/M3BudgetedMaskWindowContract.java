@@ -36,15 +36,15 @@ public final class M3BudgetedMaskWindowContract {
         Arrays.fill(output, SENTINEL); Arrays.fill(oracle, SENTINEL);
         int[] original = rows.clone(); byte[] flags = states.clone();
         long want = expected(rows, states, first, budget, required, excluded, oracle, offset, limit);
-        long got = M3IndexMaskWindow.scanBounded(rows, states, first, budget, required,
+        long got = IndexMaskWindow.scanBounded(rows, states, first, budget, required,
                 excluded, output, offset, limit, backend);
         check(want == got, "exact progress/count " + first + "/" + budget + "/" + limit);
         check(Arrays.equals(oracle, output), "output and untouched guards");
         check(Arrays.equals(rows, original) && Arrays.equals(states, flags), "no input mutation");
-        check((long) M3IndexMaskWindow.nextIndex(got) - first <= budget, "input work bound");
+        check((long) IndexMaskWindow.nextIndex(got) - first <= budget, "input work bound");
         if (budget == Integer.MAX_VALUE) {
             int[] legacy = new int[output.length]; Arrays.fill(legacy, SENTINEL);
-            long old = M3IndexMaskWindow.scan(rows, states, first, required, excluded,
+            long old = IndexMaskWindow.scan(rows, states, first, required, excluded,
                     legacy, offset, limit, backend);
             check(old == got && Arrays.equals(legacy, output), "legacy full-scan parity");
         }
@@ -72,19 +72,19 @@ public final class M3BudgetedMaskWindowContract {
         int n = 1_000_000; int[] rows = new int[n]; byte[] states = new byte[n];
         rows[n - 1] = 42; states[n - 1] = (byte) 128;
         int[] out = new int[2];
-        long step = M3IndexMaskWindow.scanBounded(rows, states, 0, 512, 128, 0, out, 0, 2, backend);
-        check(M3IndexMaskWindow.nextIndex(step) == 512 && M3IndexMaskWindow.written(step) == 0,
+        long step = IndexMaskWindow.scanBounded(rows, states, 0, 512, 128, 0, out, 0, 2, backend);
+        check(IndexMaskWindow.nextIndex(step) == 512 && IndexMaskWindow.written(step) == 0,
                 "sparse million-row source yields after exactly 512 ordinals");
-        long legacy = M3IndexMaskWindow.scan(rows, states, 0, 128, 0, out, 0, 2, backend);
-        check(M3IndexMaskWindow.nextIndex(legacy) == n && M3IndexMaskWindow.written(legacy) == 1,
+        long legacy = IndexMaskWindow.scan(rows, states, 0, 128, 0, out, 0, 2, backend);
+        check(IndexMaskWindow.nextIndex(legacy) == n && IndexMaskWindow.written(legacy) == 1,
                 "legacy scan deliberately keeps its whole-remainder contract");
         List<Integer> selected = new ArrayList<>(); int cursor = 0, calls = 0;
         while (cursor < n) {
-            step = M3IndexMaskWindow.scanBounded(rows, states, cursor, 512, 128, 0, out, 0, 2, backend);
-            int next = M3IndexMaskWindow.nextIndex(step);
+            step = IndexMaskWindow.scanBounded(rows, states, cursor, 512, 128, 0, out, 0, 2, backend);
+            int next = IndexMaskWindow.nextIndex(step);
             check(next > cursor && next - cursor <= 512, "resume always progresses with positive budgets");
             cursor = next; calls++;
-            for (int i = 0; i < M3IndexMaskWindow.written(step); i++) selected.add(out[i]);
+            for (int i = 0; i < IndexMaskWindow.written(step); i++) selected.add(out[i]);
         }
         check(selected.equals(List.of(42)) && calls == 1954, "all sparse windows reconcile once");
 
@@ -97,9 +97,9 @@ public final class M3BudgetedMaskWindowContract {
         for (var entry : owner.entrySet()) { ordered[pos] = entry.getKey(); state[pos++] = (byte) ((entry.getValue() & 1) == 0 ? 1 : 0); }
         List<Integer> actual = new ArrayList<>(); cursor = 0;
         while (cursor < ordered.length) {
-            step = M3IndexMaskWindow.scanBounded(ordered, state, cursor, 7, 1, 0, out, 0, 2, backend);
-            cursor = M3IndexMaskWindow.nextIndex(step);
-            for (int i = 0; i < M3IndexMaskWindow.written(step); i++) actual.add(out[i]);
+            step = IndexMaskWindow.scanBounded(ordered, state, cursor, 7, 1, 0, out, 0, 2, backend);
+            cursor = IndexMaskWindow.nextIndex(step);
+            for (int i = 0; i < IndexMaskWindow.written(step); i++) actual.add(out[i]);
         }
         check(actual.equals(new ArrayList<>(view.navigableKeySet())), "live comparator order equals primitive projection");
         check(Arrays.equals(M3IndexMaskCompactor.select(ordered, state, 1, backend),
@@ -117,19 +117,19 @@ public final class M3BudgetedMaskWindowContract {
     }
     private static void invalid(M3IndexMaskCompactor.Backend backend) {
         int[] rows = {1, 2, 3}, output = {9, 9, 9}; byte[] states = {1, 1, 1};
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, -1, 1, 0, output, 0, 1, backend), output);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 1, 256, 0, output, 0, 1, backend), output);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, -1, output, 0, 1, backend), output);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, new byte[1], 0, 1, 1, 0, output, 0, 1, backend), output);
-        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 4, 1, 1, 0, output, 0, 1, backend), output);
-        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, 0, output, Integer.MAX_VALUE, 1, backend), output);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, 0, output, 0, 4097, backend), output);
-        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(null, states, 0, 1, 1, 0, output, 0, 1, backend), output);
-        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, 0, output, 0, 1, null), output);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, 0, rows, 0, 1, backend), rows);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, -1, 1, 0, output, 0, 1, backend), output);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 1, 256, 0, output, 0, 1, backend), output);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, -1, output, 0, 1, backend), output);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, new byte[1], 0, 1, 1, 0, output, 0, 1, backend), output);
+        refusal(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scanBounded(rows, states, 4, 1, 1, 0, output, 0, 1, backend), output);
+        refusal(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, 0, output, Integer.MAX_VALUE, 1, backend), output);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, 0, output, 0, 4097, backend), output);
+        refusal(NullPointerException.class, () -> IndexMaskWindow.scanBounded(null, states, 0, 1, 1, 0, output, 0, 1, backend), output);
+        refusal(NullPointerException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, 0, output, 0, 1, null), output);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 1, 1, 0, rows, 0, 1, backend), rows);
     }
     private static void nativeRefusals() throws Exception {
-        Method method = M3IndexMaskWindow.class.getDeclaredMethod("scanBoundedNative", int[].class, byte[].class,
+        Method method = IndexMaskWindow.class.getDeclaredMethod("scanBoundedNative", int[].class, byte[].class,
                 int.class, int.class, int.class, int.class, int[].class, int.class, int.class);
         method.setAccessible(true);
         int[] rows = {1, 2, 3}, output = {77, 77, 77}; byte[] flags = {1, 1, 1};
@@ -152,12 +152,12 @@ public final class M3BudgetedMaskWindowContract {
         boolean nativeMode = args.length != 0 && args[0].equals("--native");
         if (args.length != 0 && (args[0].equals("--missing") || args[0].equals("--old-binary"))) {
             int[] out = {99};
-            refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scanBounded(new int[] {1},
+            refusal(UnsatisfiedLinkError.class, () -> IndexMaskWindow.scanBounded(new int[] {1},
                     new byte[] {1}, 0, 1, 1, 0, out, 0, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED), out);
             if (args[0].equals("--old-binary")) {
-                long old = M3IndexMaskWindow.scan(new int[] {1}, new byte[] {1}, 0, 1, 0,
+                long old = IndexMaskWindow.scan(new int[] {1}, new byte[] {1}, 0, 1, 0,
                         out, 0, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
-                check(M3IndexMaskWindow.written(old) == 1 && out[0] == 1, "old ABI still callable");
+                check(IndexMaskWindow.written(old) == 1 && out[0] == 1, "old ABI still callable");
             }
             System.out.println("EXPLICIT_NATIVE_REFUSAL_PASS " + args[0] + " assertions=" + assertions); return;
         }

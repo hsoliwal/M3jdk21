@@ -19,7 +19,7 @@ import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
 
 /**
- * Finite differential comparison of {@link M3LongLongTreeMap} against {@code TreeMap<Long, Long>}
+ * Finite differential comparison of {@link LongLongTreeMap} against {@code TreeMap<Long, Long>}
  * as a {@link NavigableMap}; this is not JDK replacement proof. Zero, the extrema and a dense small
  * key range are over-represented so navigation ties, lane shifts, batch merges, growth and
  * compaction are exercised with the ascending key and value snapshots checked along the way.
@@ -54,14 +54,14 @@ final class M3LongLongTreeMapTest {
         }
     }
 
-    private static void assertSnapshot(NavigableMap<Long, Long> expected, M3LongLongTreeMap actual) {
+    private static void assertSnapshot(NavigableMap<Long, Long> expected, LongLongTreeMap actual) {
         assertEquals(expected.size(), actual.size());
         assertArrayEquals(keys(expected), actual.keysToArray());
         assertArrayEquals(values(expected), actual.valuesToArray());
     }
 
     private static void putSortedBatch(Random random, int step,
-            NavigableMap<Long, Long> expected, M3LongLongTreeMap actual) {
+            NavigableMap<Long, Long> expected, LongLongTreeMap actual) {
         int length = random.nextInt(24);
         long[] batchKeys = new long[length];
         long[] batchValues = new long[length];
@@ -78,11 +78,11 @@ final class M3LongLongTreeMapTest {
     }
 
     private static void assertWalksMatch(Random random,
-            NavigableMap<Long, Long> expected, M3LongLongTreeMap actual) {
+            NavigableMap<Long, Long> expected, LongLongTreeMap actual) {
         List<Map.Entry<Long, Long>> walked = new ArrayList<>();
         actual.forEach((k, v) -> walked.add(Map.entry(k, v)));
         assertEquals(new ArrayList<>(expected.entrySet()), walked);
-        M3LongIterator iterator = actual.keyIterator();
+        LongIterator iterator = actual.keyIterator();
         for (Long key : expected.keySet()) {
             assertTrue(iterator.hasNext());
             assertEquals(key, iterator.nextLong());
@@ -103,7 +103,7 @@ final class M3LongLongTreeMapTest {
     @Test
     void matchesJdkNavigableMapAcrossChurnIncludingBatchesAndPolls() {
         Random random = new Random(0x4d334c4c544dL);
-        M3LongLongTreeMap actual = new M3LongLongTreeMap();
+        LongLongTreeMap actual = new LongLongTreeMap();
         NavigableMap<Long, Long> expected = new TreeMap<>();
         for (int step = 0; step < 50_000; step++) {
             long k = value(random, step);
@@ -154,9 +154,9 @@ final class M3LongLongTreeMapTest {
 
     @Test
     void edgeContractsFailFastGrowthAndCompaction() {
-        M3LongLongTreeMap map = new M3LongLongTreeMap(0);
+        LongLongTreeMap map = new LongLongTreeMap(0);
         assertEquals(8, map.capacity());
-        assertThrows(IllegalArgumentException.class, () -> new M3LongLongTreeMap(-1));
+        assertThrows(IllegalArgumentException.class, () -> new LongLongTreeMap(-1));
         assertThrows(NoSuchElementException.class, map::firstKey);
         assertThrows(NoSuchElementException.class, map::lastKey);
         assertThrows(NoSuchElementException.class, map::pollFirstKey);
@@ -178,7 +178,7 @@ final class M3LongLongTreeMapTest {
         assertEquals(0L, map.ceilingKey(0L, 9L));
         assertEquals(Long.MAX_VALUE, map.higherKey(0L, 9L));
         assertEquals(Long.MIN_VALUE, map.lowerKey(0L, 9L));
-        M3LongIterator iterator = map.keyIterator();
+        LongIterator iterator = map.keyIterator();
         assertEquals(Long.MIN_VALUE, iterator.nextLong());
         assertTrue(map.remove(0L));
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
@@ -186,7 +186,7 @@ final class M3LongLongTreeMapTest {
         assertEquals(Long.MAX_VALUE, map.pollLastKey());
         assertTrue(map.isEmpty());
         map.clear();
-        M3LongIterator empty = map.keyIterator();
+        LongIterator empty = map.keyIterator();
         assertFalse(empty.hasNext());
         assertThrows(NoSuchElementException.class, empty::nextLong);
         // Grow across 1.5x lane copies, delete two thirds, compact; order and pairing must survive.
@@ -238,7 +238,7 @@ final class M3LongLongTreeMapTest {
 
     @Test
     void retainsOnlyPrimitiveLanes() {
-        var fields = Arrays.stream(M3LongLongTreeMap.class.getDeclaredFields())
+        var fields = Arrays.stream(LongLongTreeMap.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()

@@ -43,7 +43,7 @@ public final class M3LongSortedMaskedWindowContract {
     private static void exactContracts(M3IndexMaskCompactor.Backend backend) {
         long[] parent = {Long.MAX_VALUE, Long.MIN_VALUE, -3, 1, 7, Long.MIN_VALUE};
         byte[] flags = {99, 1, 3, (byte) 0x81, 3, 0, 42};
-        M3LongSortedSnapshot result = M3LongSortedSnapshot.fromAlignedMasksWindow(
+        LongSortedSnapshot result = LongSortedSnapshot.fromAlignedMasksWindow(
                 parent, 1, flags, 1, 4, 1, 0x80, backend);
         yes(Arrays.equals(new long[]{Long.MIN_VALUE, -3, 7}, result.toArray()),
                 "signed ordered values, excluded states and independent offsets");
@@ -59,9 +59,9 @@ public final class M3LongSortedMaskedWindowContract {
         flags[1] = 0;
         yes(result.first() == Long.MIN_VALUE, "detached parent row and flags");
         yes(result.select(0) == Long.MIN_VALUE, "output copy isolation");
-        yes(M3LongSortedSnapshot.fromAlignedMasksWindow(parent, 1,
+        yes(LongSortedSnapshot.fromAlignedMasksWindow(parent, 1,
                 flags, 1, 0, 1, 0x80, backend).size() == 0, "empty window");
-        yes(M3LongSortedSnapshot.fromAlignedMasksWindow(new long[]{3, 1, 2}, 1,
+        yes(LongSortedSnapshot.fromAlignedMasksWindow(new long[]{3, 1, 2}, 1,
                 new byte[]{9, 1, 1}, 1, 2, 1, 0, backend).size() == 2,
                 "rows outside bounded sorted window are irrelevant");
     }
@@ -70,25 +70,25 @@ public final class M3LongSortedMaskedWindowContract {
         var backend = M3IndexMaskCompactor.Backend.JAVA;
         long[] row = {1, 2, 3};
         byte[] flags = {1, 2, 3};
-        refused(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 new long[]{2, 1}, 0, flags, 0, 2, 1, 0, backend));
-        refused(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 new long[]{1, 1}, 0, flags, 0, 2, 1, 0, backend));
-        refused(IndexOutOfBoundsException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(IndexOutOfBoundsException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 row, -1, flags, 0, 1, 1, 0, backend));
-        refused(IndexOutOfBoundsException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(IndexOutOfBoundsException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 row, 0, flags, 3, 1, 1, 0, backend));
-        refused(NullPointerException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(NullPointerException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 null, 0, flags, 0, 1, 1, 0, backend));
-        refused(NullPointerException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(NullPointerException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 row, 0, null, 0, 1, 1, 0, backend));
-        refused(NullPointerException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(NullPointerException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 row, 0, flags, 0, 1, 1, 0, null));
-        refused(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 row, 0, flags, 0, 1, 256, 0, backend));
-        refused(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasksWindow(
+        refused(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasksWindow(
                 row, 0, flags, 0, 1, 1, -1, backend));
-        yes(M3LongSortedSnapshot.fromAlignedMasksWindow(row, 0, flags, 0, 3, 1, 1,
+        yes(LongSortedSnapshot.fromAlignedMasksWindow(row, 0, flags, 0, 3, 1, 1,
                 backend).isEmpty(), "contradictory exact masks admit nothing");
     }
 
@@ -116,7 +116,7 @@ public final class M3LongSortedMaskedWindowContract {
             byte[] beforeFlags = flags.clone();
             long[] expected = oracle(rows, first, flags, stateFirst,
                     length, required, excluded);
-            M3LongSortedSnapshot actual = M3LongSortedSnapshot.fromAlignedMasksWindow(
+            LongSortedSnapshot actual = LongSortedSnapshot.fromAlignedMasksWindow(
                     rows, first, flags, stateFirst, length, required, excluded, backend);
             yes(Arrays.equals(expected, actual.toArray()), "sorted mask oracle round " + round);
             yes(expected.length == actual.size(), "sorted size round " + round);

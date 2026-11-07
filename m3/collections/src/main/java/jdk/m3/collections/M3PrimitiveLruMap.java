@@ -34,8 +34,8 @@ public final class M3PrimitiveLruMap {
         void accept(long keyBits, long valueBits);
     }
 
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private final int maxEntries;
     private final M3PrimitivePrimitiveHashMap index;
     private final Object keys;
@@ -49,13 +49,13 @@ public final class M3PrimitiveLruMap {
     private int freeHead;
 
     public M3PrimitiveLruMap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind, int maxEntries) {
+            PrimitiveKind keyKind, PrimitiveKind valueKind, int maxEntries) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         if (maxEntries <= 0) throw new IllegalArgumentException("maxEntries <= 0");
         this.maxEntries = maxEntries;
         index = new M3PrimitivePrimitiveHashMap(
-                keyKind, M3PrimitiveKind.INT, maxEntries, 0.65f);
+                keyKind, PrimitiveKind.INT, maxEntries, 0.65f);
         keys = keyKind.newArray(maxEntries);
         values = valueKind.newArray(maxEntries);
         previous = new int[maxEntries];
@@ -68,8 +68,8 @@ public final class M3PrimitiveLruMap {
         freeHead = 0;
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int maxEntries() { return maxEntries; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }

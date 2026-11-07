@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
 import jdk.internal.m3.collections.M3IntSubstringOrderIndex;
+import jdk.m3.collections.text.IntSuffixArray;
 
 class M3IntSubstringOrderIndexTest {
     @Test void allSmallBinaryTextsMatchEnumeratedDistinctSubstrings() {
@@ -33,7 +34,7 @@ class M3IntSubstringOrderIndexTest {
     }
 
     @Test void canonicalSnapshotIsReusedAndOutputFailuresAreAtomic() {
-        int[] input = {3, 1, 3, 1}; M3IntSuffixArray suffixes = new M3IntSuffixArray(input);
+        int[] input = {3, 1, 3, 1}; IntSuffixArray suffixes = new IntSuffixArray(input);
         M3IntSubstringOrderIndex index = new M3IntSubstringOrderIndex(suffixes);
         assertSame(suffixes, index.suffixArray()); input[0] = 8;
         assertEquals(2, index.occurrenceCount(new int[]{3, 1}));

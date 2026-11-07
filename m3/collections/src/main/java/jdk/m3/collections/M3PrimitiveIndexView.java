@@ -118,7 +118,7 @@ public final class M3PrimitiveIndexView {
      */
     public M3PrimitiveIndexView sortedByLane(int lane, boolean ascending) {
         checkLive();
-        M3PrimitiveKind kind = store.laneKind(lane);
+        PrimitiveKind kind = store.laneKind(lane);
         int[] sorted = Arrays.copyOf(rows, rows.length);
         if (sorted.length > 1) quickSort(sorted, 0, sorted.length - 1, lane, kind, ascending);
         checkLive();
@@ -128,7 +128,7 @@ public final class M3PrimitiveIndexView {
     /**
      * Exact first-signal Top-K over this view's existing primitive source row IDs.
      *
-     * <p>The signal is the certified M3PrimitiveKind lane, not an approximate
+     * <p>The signal is the certified PrimitiveKind lane, not an approximate
      * {@code @Sortable} heuristic. Source order and payloads are never mutated; only K
      * indexes and optionally K cached lane signals are retained. K==N retains
      * the existing full-sort path. O(n log K + K log K), O(K) extra words.
@@ -170,14 +170,14 @@ public final class M3PrimitiveIndexView {
     }
 
     private void quickSort(
-            int[] data, int low, int high, int lane, M3PrimitiveKind kind, boolean ascending) {
+            int[] data, int low, int high, int lane, PrimitiveKind kind, boolean ascending) {
         int depth = 2 * (31 - Integer.numberOfLeadingZeros(high - low + 1));
         sortRows(data, low, high, lane, kind, ascending, depth);
     }
 
     // Recurse only into the smaller partition; the depth budget also bounds hostile work.
     private void sortRows(int[] data, int low, int high, int lane,
-            M3PrimitiveKind kind, boolean ascending, int depth) {
+            PrimitiveKind kind, boolean ascending, int depth) {
         while (low < high) {
             if (depth-- == 0) {
                 heapSortRows(data, low, high, lane, kind, ascending);
@@ -205,7 +205,7 @@ public final class M3PrimitiveIndexView {
 
     // Reuses Synexia's primitive in-place heap mechanics over row IDs, never payload lanes.
     private void heapSortRows(int[] data, int low, int high, int lane,
-            M3PrimitiveKind kind, boolean ascending) {
+            PrimitiveKind kind, boolean ascending) {
         int count = high - low + 1;
         for (int parent = (count >>> 1) - 1; parent >= 0; parent--) {
             siftRows(data, low, count, parent, lane, kind, ascending);
@@ -217,7 +217,7 @@ public final class M3PrimitiveIndexView {
     }
 
     private void siftRows(int[] data, int base, int count, int parent, int lane,
-            M3PrimitiveKind kind, boolean ascending) {
+            PrimitiveKind kind, boolean ascending) {
         while (parent < (count >>> 1)) {
             int child = (parent << 1) + 1;
             if (child + 1 < count && compareRows(data[base + child], data[base + child + 1],
@@ -235,7 +235,7 @@ public final class M3PrimitiveIndexView {
     }
 
     private int compareRows(
-            int leftRow, int rightRow, int lane, M3PrimitiveKind kind, boolean ascending) {
+            int leftRow, int rightRow, int lane, PrimitiveKind kind, boolean ascending) {
         int comparison = kind.compareBits(
                 store.getBits(lane, leftRow),
                 store.getBits(lane, rightRow));

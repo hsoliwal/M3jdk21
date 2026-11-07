@@ -15,6 +15,7 @@
 package jdk.m3.collections;
 
 import java.util.Objects;
+import jdk.m3.collections.bits.LongBitSet;
 
 /**
  * Dense fixed-universe int-row/int-column primitive table.
@@ -33,15 +34,15 @@ public final class M3PrimitiveDirectIntTable {
         void accept(int row, int column, long valueBits);
     }
 
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind valueKind;
     private final int rowCount;
     private final int columnCount;
     private final Object values;
-    private final M3LongBitSet present;
+    private final LongBitSet present;
     private int size;
 
     public M3PrimitiveDirectIntTable(
-            M3PrimitiveKind valueKind, int rowCount, int columnCount) {
+            PrimitiveKind valueKind, int rowCount, int columnCount) {
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         if (rowCount < 0 || columnCount < 0) {
             throw new IllegalArgumentException("negative dimensions");
@@ -54,10 +55,10 @@ public final class M3PrimitiveDirectIntTable {
         this.columnCount = columnCount;
         int capacity = (int) cells;
         values = valueKind.newArray(capacity);
-        present = new M3LongBitSet(capacity);
+        present = new LongBitSet(capacity);
     }
 
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int rowCount() { return rowCount; }
     public int columnCount() { return columnCount; }
     public int size() { return size; }

@@ -1,12 +1,12 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
- * Derives the slot/bit-mask primitive mechanisms from existing M3ObjectStateSlots28.
+ * Derives the slot/bit-mask primitive mechanisms from existing ObjectStateSlots28.
  */
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3ObjectStateSlots28;
+import jdk.m3.collections.ObjectStateSlots28;
 
 /**
  * Batch bit-mask operations on existing generation-safe object-state handles.
@@ -14,7 +14,7 @@ import jdk.m3.collections.M3ObjectStateSlots28;
  * <p>This class owns no new payloads, entry nodes, indexes, mask buffers or
  * JNI symbols. The caller owns the {@code long[]} encounter order, which may
  * contain duplicate handles and arbitrary half-open subranges. The existing
- * {@link M3ObjectStateSlots28} remains the sole state/generation authority.
+ * {@link ObjectStateSlots28} remains the sole state/generation authority.
  * A slot's state describes application metadata, not a HotSpot object header,
  * pinned Java reference, GC root or native address.</p>
  *
@@ -34,7 +34,7 @@ public final class M3ObjectStateBatch28 {
      * The result counts actual state transitions, not distinct handles.
      * @return the number of occurrences that changed a state byte
      */
-    public static int update(M3ObjectStateSlots28 owner, long[] handles,
+    public static int update(ObjectStateSlots28 owner, long[] handles,
             int from, int length, int setMask, int clearMask) {
         requireMasks(setMask, clearMask, true);
         check(Objects.requireNonNull(owner, "owner"), handles, from, length);
@@ -56,7 +56,7 @@ public final class M3ObjectStateBatch28 {
      * An overlapping required/excluded mask matches nothing.
      * @return number of occurrences whose state actually changed
      */
-    public static int updateMatching(M3ObjectStateSlots28 owner, long[] handles,
+    public static int updateMatching(ObjectStateSlots28 owner, long[] handles,
             int from, int length, int requiredMask, int excludedMask,
             int setMask, int clearMask) {
         requireMasks(requiredMask, excludedMask, false);
@@ -78,7 +78,7 @@ public final class M3ObjectStateBatch28 {
     }
 
     /** Counts matching *occurrences*, including duplicates, without allocating. */
-    public static int countMatching(M3ObjectStateSlots28 owner, long[] handles,
+    public static int countMatching(ObjectStateSlots28 owner, long[] handles,
             int from, int length, int requiredMask, int excludedMask) {
         requireMasks(requiredMask, excludedMask, false);
         check(Objects.requireNonNull(owner, "owner"), handles, from, length);
@@ -95,7 +95,7 @@ public final class M3ObjectStateBatch28 {
      * An invalid later handle is not visited after an early match: this read
      * search retains short-circuit semantics, unlike preflighted writes.
      */
-    public static int firstMatchingIndex(M3ObjectStateSlots28 owner, long[] handles,
+    public static int firstMatchingIndex(ObjectStateSlots28 owner, long[] handles,
             int from, int length, int requiredMask, int excludedMask) {
         requireMasks(requiredMask, excludedMask, false);
         check(Objects.requireNonNull(owner, "owner"), handles, from, length);
@@ -106,14 +106,14 @@ public final class M3ObjectStateBatch28 {
         return -1;
     }
 
-    private static void check(M3ObjectStateSlots28 owner, long[] handles,
+    private static void check(ObjectStateSlots28 owner, long[] handles,
             int from, int length) {
         Objects.requireNonNull(owner, "owner");
         Objects.requireNonNull(handles, "handles");
         Objects.checkFromIndexSize(from, length, handles.length);
     }
 
-    private static void preflight(M3ObjectStateSlots28 owner, long[] handles,
+    private static void preflight(ObjectStateSlots28 owner, long[] handles,
             int from, int length) {
         for (int i = from, end = from + length; i < end; i++) {
             owner.state(handles[i]);

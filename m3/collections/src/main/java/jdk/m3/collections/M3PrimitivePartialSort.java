@@ -34,12 +34,12 @@ public final class M3PrimitivePartialSort {
     private M3PrimitivePartialSort() {}
 
     public static void sortSmallestKBits(
-            M3PrimitiveKind kind, Object array, int from, int toExclusive, int k) {
+            PrimitiveKind kind, Object array, int from, int toExclusive, int k) {
         sortSmallestKBits(kind, array, from, toExclusive, k, DEFAULT_FULL_SORT_RATIO);
     }
 
     public static void sortSmallestKBits(
-            M3PrimitiveKind kind, Object array, int from, int toExclusive, int k,
+            PrimitiveKind kind, Object array, int from, int toExclusive, int k,
             float fullSortRatio) {
         validate(kind, array, from, toExclusive, k, fullSortRatio);
         int count = toExclusive - from;
@@ -52,12 +52,12 @@ public final class M3PrimitivePartialSort {
     }
 
     public static void sortLargestKBits(
-            M3PrimitiveKind kind, Object array, int from, int toExclusive, int k) {
+            PrimitiveKind kind, Object array, int from, int toExclusive, int k) {
         sortLargestKBits(kind, array, from, toExclusive, k, DEFAULT_FULL_SORT_RATIO);
     }
 
     public static void sortLargestKBits(
-            M3PrimitiveKind kind, Object array, int from, int toExclusive, int k,
+            PrimitiveKind kind, Object array, int from, int toExclusive, int k,
             float fullSortRatio) {
         validate(kind, array, from, toExclusive, k, fullSortRatio);
         int count = toExclusive - from;
@@ -71,7 +71,7 @@ public final class M3PrimitivePartialSort {
     }
 
     private static void partial(
-            M3PrimitiveKind kind, Object array, int from, int toExclusive,
+            PrimitiveKind kind, Object array, int from, int toExclusive,
             int k, boolean smallest) {
         heapify(kind, array, from, k, smallest);
         for (int index = from + k; index < toExclusive; index++) {
@@ -98,7 +98,7 @@ public final class M3PrimitivePartialSort {
     }
 
     private static void heapify(
-            M3PrimitiveKind kind, Object array, int from, int size, boolean maxHeap) {
+            PrimitiveKind kind, Object array, int from, int size, boolean maxHeap) {
         for (int parent = (size >>> 1) - 1; parent >= 0; parent--) {
             long value = kind.readBits(array, from + parent);
             siftDown(kind, array, from, size, parent, value, maxHeap);
@@ -106,7 +106,7 @@ public final class M3PrimitivePartialSort {
     }
 
     private static void siftDown(
-            M3PrimitiveKind kind, Object array, int from, int size, int position,
+            PrimitiveKind kind, Object array, int from, int size, int position,
             long value, boolean maxHeap) {
         int half = size >>> 1;
         while (position < half) {
@@ -131,7 +131,7 @@ public final class M3PrimitivePartialSort {
     }
 
     private static void reverse(
-            M3PrimitiveKind kind, Object array, int from, int toExclusive) {
+            PrimitiveKind kind, Object array, int from, int toExclusive) {
         int left = from;
         int right = toExclusive - 1;
         while (left < right) {
@@ -147,7 +147,7 @@ public final class M3PrimitivePartialSort {
     }
 
     private static void validate(
-            M3PrimitiveKind kind, Object array, int from, int toExclusive, int k,
+            PrimitiveKind kind, Object array, int from, int toExclusive, int k,
             float fullSortRatio) {
         Objects.requireNonNull(kind, "kind");
         Objects.requireNonNull(array, "array");

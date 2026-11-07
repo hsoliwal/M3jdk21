@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Random;
 import jdk.internal.m3.collections.M3ResidencyStateMaskIndex;
 
-/** Standalone seeded contract oracle; also runs with the original M3ObjectResidency owner. */
+/** Standalone seeded contract oracle; also runs with the original ObjectResidency owner. */
 public final class M3ResidencyStateMaskProof {
     private static long checks;
     private M3ResidencyStateMaskProof() { }
@@ -39,7 +39,7 @@ public final class M3ResidencyStateMaskProof {
         throw new AssertionError("expected " + expected.getSimpleName() + ": " + label);
     }
 
-    private static int[] reference(M3ObjectResidency<?> arena, int[] rows,
+    private static int[] reference(ObjectResidency<?> arena, int[] rows,
             int offset, int count, int stride, long required, long forbidden, int allowed) {
         ArrayList<Integer> matches = new ArrayList<>(); // Oracle only; product path never boxes rows.
         for (int i = 0; i < count; i++) {
@@ -57,10 +57,10 @@ public final class M3ResidencyStateMaskProof {
                 + " actual=" + Arrays.toString(actual));
     }
 
-    private static M3ObjectResidency<Object> newOwner(int slots) {
-        return new M3ObjectResidency<>(slots,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.RECREATE
-                        | M3ObjectResidency.STRICT_NO_ESCAPE | M3ObjectResidency.LRU,
+    private static ObjectResidency<Object> newOwner(int slots) {
+        return new ObjectResidency<>(slots,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.RECREATE
+                        | ObjectResidency.STRICT_NO_ESCAPE | ObjectResidency.LRU,
                 1_000_000L, 0L, slot -> new Object(), null, null);
     }
 
@@ -68,8 +68,8 @@ public final class M3ResidencyStateMaskProof {
         boolean requireNative = args.length != 0 && "native".equals(args[0]);
         boolean actualNative = M3ResidencyStateMaskIndex.nativeAvailable();
         check(!requireNative || actualNative, "native binary installed for required proof");
-        var absent = M3ObjectResidency.State.ABSENT;
-        var live = M3ObjectResidency.State.RESIDENT;
+        var absent = ObjectResidency.State.ABSENT;
+        var live = ObjectResidency.State.RESIDENT;
         int absentMask = M3ResidencyStateMaskIndex.states(absent);
         int liveMask = M3ResidencyStateMaskIndex.states(live);
         var arena = newOwner(71);
@@ -160,7 +160,7 @@ public final class M3ResidencyStateMaskProof {
         throwsType(NullPointerException.class, () -> M3ResidencyStateMaskIndex.count(
                 arena, null, 0, 0, 1, 0, 0, liveMask), "null ordered coords");
         throwsType(NullPointerException.class, () -> M3ResidencyStateMaskIndex.states(
-                (M3ObjectResidency.State[]) null), "null state mask varargs");
+                (ObjectResidency.State[]) null), "null state mask varargs");
         if (!actualNative) {
             throwsType(UnsatisfiedLinkError.class, () -> M3ResidencyStateMaskIndex.select(arena,
                     rows, 0, 2, 1, 0L, 0L, liveMask,

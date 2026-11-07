@@ -15,10 +15,10 @@
 package jdk.internal.m3.collections;
 
 import java.util.Arrays;
-import jdk.m3.collections.M3IntLongAdjacencyGraph;
+import jdk.m3.collections.graph.IntLongAdjacencyGraph;
 
 /**
- * Allocation-bounded graph kernels over {@link M3IntLongAdjacencyGraph}.
+ * Allocation-bounded graph kernels over {@link IntLongAdjacencyGraph}.
  *
  * <p>All traversal state is primitive arrays. No queue/list/node object is retained per vertex or edge.
  *
@@ -51,7 +51,7 @@ public final class M3IntGraphAlgorithms {
     private M3IntGraphAlgorithms() {}
 
     /** Unweighted BFS distance in edges; unreachable vertices are -1. */
-    public static int[] bfsDistances(M3IntLongAdjacencyGraph graph, int source) {
+    public static int[] bfsDistances(IntLongAdjacencyGraph graph, int source) {
         int n = graph.vertexCount();
         if (source < 0 || source >= n) throw new IndexOutOfBoundsException(source);
         int[] distance = new int[n];
@@ -79,7 +79,7 @@ public final class M3IntGraphAlgorithms {
      *
      * @throws IllegalStateException if the graph contains a directed cycle
      */
-    public static int[] topologicalOrder(M3IntLongAdjacencyGraph graph) {
+    public static int[] topologicalOrder(IntLongAdjacencyGraph graph) {
         int n = graph.vertexCount();
         int[] indegree = new int[n];
         for (int vertex = 0; vertex < n; vertex++) {
@@ -112,7 +112,7 @@ public final class M3IntGraphAlgorithms {
     /**
      * Iterative Kosaraju SCC. The reverse graph is built as aligned primitive edge arrays.
      */
-    public static SccResult stronglyConnectedComponents(M3IntLongAdjacencyGraph graph) {
+    public static SccResult stronglyConnectedComponents(IntLongAdjacencyGraph graph) {
         int n = graph.vertexCount();
         int m = graph.edgeCount();
 

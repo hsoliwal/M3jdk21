@@ -31,8 +31,8 @@ final class M3SparseCopyFailureTest {
         private AllocationWitness() { }
         public static void main(String[] args) {
             int page = 1 << 20;
-            M3PrimitiveBigArray source = M3PrimitiveBigArray.sparse(M3PrimitiveKind.LONG, 2L * page, 20);
-            M3PrimitiveBigArray target = M3PrimitiveBigArray.sparse(M3PrimitiveKind.LONG, 2L * page, 20);
+            BigArray source = BigArray.sparse(PrimitiveKind.LONG, 2L * page, 20);
+            BigArray target = BigArray.sparse(PrimitiveKind.LONG, 2L * page, 20);
             source.setBits(page, 17);
             target.setBits(0, 29);
             long[] alias = (long[]) target.segmentArray(0);

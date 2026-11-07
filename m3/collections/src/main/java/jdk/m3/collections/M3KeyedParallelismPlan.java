@@ -34,7 +34,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
- * Explicit key-affinity execution plan for M3ObjectStream.
+ * Explicit key-affinity execution plan for ObjectStream.
  *
  * <p>Every input key is computed once by the coordinator and routed to one logical
  * lane using its hash. A lane has one worker, so equal keys are processed in source
@@ -52,10 +52,10 @@ public final class M3KeyedParallelismPlan<T, K> {
     private static final int MAX_PARTITIONS = 256;
     private static final int MAX_IN_FLIGHT = 65_536;
 
-    private final M3ObjectStream<T> source;
+    private final ObjectStream<T> source;
     private final Function<? super T, ? extends K> keyExtractor;
 
-    M3KeyedParallelismPlan(M3ObjectStream<T> source,
+    M3KeyedParallelismPlan(ObjectStream<T> source,
                            Function<? super T, ? extends K> keyExtractor) {
         this.source = Objects.requireNonNull(source, "source");
         this.keyExtractor = Objects.requireNonNull(keyExtractor, "keyExtractor");

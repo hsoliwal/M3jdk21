@@ -7,7 +7,7 @@ package jdk.m3.collections.interop;
 import static org.junit.jupiter.api.Assertions.*;
 
 import jdk.m3.collections.M3CountedBag;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3ObjectCounts;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ final class M3FiveProviderCountSharingRegressionTest {
         source.add("drop", 11);
         source.setFlags("drop", 0x00000002);
         var captured = M3FiveProviderFlagSelection.capture(source, 0x80000000, 0x2,
-                M3IndexPathMasks.Backend.JAVA);
+                IndexPathMasks.Backend.JAVA);
         M3CountedBag<String> shared = captured.m3Backend();
         var guava = captured.guavaMultiset();
         var eclipse = captured.eclipseBag();
@@ -67,17 +67,17 @@ final class M3FiveProviderCountSharingRegressionTest {
             int required = random.nextInt() & 0x80040001;
             int excluded = random.nextInt() & 0x20008002;
             var reference = M3FiveProviderFlagSelection.capture(source, required, excluded,
-                    M3IndexPathMasks.Backend.JAVA);
+                    IndexPathMasks.Backend.JAVA);
             assertTrue(reference.totalCount() >= 0);
-            if (M3IndexPathMasks.nativeAvailable()) {
+            if (IndexPathMasks.nativeAvailable()) {
                 var nativeResult = M3FiveProviderFlagSelection.capture(source, required, excluded,
-                        M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                        IndexPathMasks.Backend.NATIVE_REQUIRED);
                 assertEquals(reference.jdkCounts(), nativeResult.jdkCounts());
                 assertEquals(reference.totalCount(), nativeResult.totalCount());
             } else {
                 assertThrows(UnsatisfiedLinkError.class, () ->
                         M3FiveProviderFlagSelection.capture(source, required, excluded,
-                                M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                                IndexPathMasks.Backend.NATIVE_REQUIRED));
             }
         }
     }

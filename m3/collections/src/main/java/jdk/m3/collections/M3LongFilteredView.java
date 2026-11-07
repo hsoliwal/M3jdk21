@@ -12,7 +12,7 @@ import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 
 /**
- * Read-only live selection over any M3LongCollection. Stores one source and one predicate,
+ * Read-only live selection over any LongCollection. Stores one source and one predicate,
  * not a retained filtered copy. Iteration order is the source's order. Stable predicates
  * and no mutation during traversal are required; this is not a snapshot or a JDK view.
  *
@@ -21,11 +21,11 @@ import java.util.function.LongPredicate;
  * late-binding; a terminal operation sees backing changes made before traversal.
  * JNI is deliberately not used to invoke arbitrary Java predicates.
  */
-public final class M3LongFilteredView implements M3LongCollection {
-    private final M3LongCollection source;
+public final class M3LongFilteredView implements LongCollection {
+    private final LongCollection source;
     private final LongPredicate predicate;
 
-    public M3LongFilteredView(M3LongCollection source, LongPredicate predicate) {
+    public M3LongFilteredView(LongCollection source, LongPredicate predicate) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(predicate, "predicate");
         if (source instanceof M3LongFilteredView previous) {
@@ -47,7 +47,7 @@ public final class M3LongFilteredView implements M3LongCollection {
         // Reuse the authoritative primitive owner cursor; terminal count does
         // not need the intermediate filtering iterator or a new payload lane.
         int count = 0;
-        M3LongIterator input = source.iterator();
+        LongIterator input = source.iterator();
         while (input.hasNext()) {
             long value = input.nextLong();
             if (predicate.test(value)) count++;
@@ -58,7 +58,7 @@ public final class M3LongFilteredView implements M3LongCollection {
     @Override
     public boolean isEmpty() {
         // Retain first-match short-circuit semantics and predicate call order.
-        M3LongIterator input = source.iterator();
+        LongIterator input = source.iterator();
         while (input.hasNext()) {
             if (predicate.test(input.nextLong())) return false;
         }
@@ -75,7 +75,7 @@ public final class M3LongFilteredView implements M3LongCollection {
         Objects.requireNonNull(consumer, "consumer");
         // Each value and predicate is visited exactly once, in encounter order.
         // The direct cursor removes one intermediate iterator allocation.
-        M3LongIterator input = source.iterator();
+        LongIterator input = source.iterator();
         while (input.hasNext()) {
             long value = input.nextLong();
             if (predicate.test(value)) consumer.accept(value);
@@ -87,7 +87,7 @@ public final class M3LongFilteredView implements M3LongCollection {
     public long[] toArray() {
         long[] result = null;
         int count = 0;
-        M3LongIterator iterator = iterator();
+        LongIterator iterator = iterator();
         while (iterator.hasNext()) {
             if (result == null) {
                 result = new long[8];
@@ -108,13 +108,13 @@ public final class M3LongFilteredView implements M3LongCollection {
 
     /**
      * Unknown-size, late-binding, unsplittable cursor. SIZED, SORTED and
-     * DISTINCT cannot be promised for an arbitrary M3LongCollection source.
+     * DISTINCT cannot be promised for an arbitrary LongCollection source.
      * Parallel streams remain correct but traverse sequentially at the source.
      */
     @Override
     public Spliterator.OfLong longSpliterator() {
         return new Spliterator.OfLong() {
-            private M3LongIterator cursor;
+            private LongIterator cursor;
 
             @Override
             public boolean tryAdvance(LongConsumer action) {
@@ -137,9 +137,9 @@ public final class M3LongFilteredView implements M3LongCollection {
 
     /** One source iterator plus one filtering cursor per traversal, not per value. */
     @Override
-    public M3LongIterator iterator() {
-        M3LongIterator input = source.iterator();
-        return new M3LongIterator() {
+    public LongIterator iterator() {
+        LongIterator input = source.iterator();
+        return new LongIterator() {
             private long next;
             private boolean ready;
             private boolean ended;

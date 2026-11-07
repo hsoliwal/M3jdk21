@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Exact-width primitive deque retaining one circular primitive array, without per-entry wrappers.
  * Queue and stack operations share the same owner. This is not a {@link java.util.Deque};
- * carrier conversion, equality and BOOLEAN byte-array storage follow {@link M3PrimitiveKind}.
+ * carrier conversion, equality and BOOLEAN byte-array storage follow {@link PrimitiveKind}.
  *
  * <p>End operations are O(1), amortized for insertion because growth copies O(n) lanes.
  * Indexed reads are O(1); occurrence search/removal and bulk traversal are O(n).
@@ -24,7 +24,7 @@ import java.util.Objects;
  * Snapshots are independent arrays; payloadBytes excludes headers and temporary storage.
  */
 public final class M3PrimitiveArrayDeque {
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private Object elements;
     private int head;
     private int size;
@@ -34,7 +34,7 @@ public final class M3PrimitiveArrayDeque {
      * @param kind retained primitive kind
      * @throws NullPointerException if kind is null
      */
-    public M3PrimitiveArrayDeque(M3PrimitiveKind kind) {
+    public M3PrimitiveArrayDeque(PrimitiveKind kind) {
         this(kind, 8);
     }
 
@@ -46,7 +46,7 @@ public final class M3PrimitiveArrayDeque {
      * @throws IllegalArgumentException if initialCapacity is negative
      * @throws OutOfMemoryError if allocation fails
      */
-    public M3PrimitiveArrayDeque(M3PrimitiveKind kind, int initialCapacity) {
+    public M3PrimitiveArrayDeque(PrimitiveKind kind, int initialCapacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (initialCapacity < 0) throw new IllegalArgumentException("initialCapacity < 0");
         elements = kind.newArray(Math.max(1, initialCapacity));
@@ -56,7 +56,7 @@ public final class M3PrimitiveArrayDeque {
      * Returns the retained primitive kind.
      * @return the retained primitive kind
      */
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     /**
      * Returns number of retained values.
      * @return number of retained values
@@ -203,7 +203,7 @@ public final class M3PrimitiveArrayDeque {
      */
     public int addAllBits(Object source, int from, int length) {
         kind.checkRange(source, from, length);
-        int required = M3PrimitiveKind.checkedSize(size, length);
+        int required = PrimitiveKind.checkedSize(size, length);
         if (length == 0) return 0;
         if (source == elements) {
             Object snapshot = kind.newArray(length);
@@ -295,11 +295,11 @@ public final class M3PrimitiveArrayDeque {
         int capacity = capacity();
         int suffix = size - index - 1;
         if (index < suffix) {
-            M3PrimitiveKind.moveRing(elements, head, capacity, 0, 1, index);
+            PrimitiveKind.moveRing(elements, head, capacity, 0, 1, index);
             kind.clear(elements, head, head + 1);
             head = inc(head, capacity);
         } else {
-            M3PrimitiveKind.moveRing(elements, head, capacity, index + 1, index, suffix);
+            PrimitiveKind.moveRing(elements, head, capacity, index + 1, index, suffix);
             int tail = physicalIndex(size - 1);
             kind.clear(elements, tail, tail + 1);
         }
@@ -309,15 +309,15 @@ public final class M3PrimitiveArrayDeque {
     Object backingArray() { return elements; }
 
     private int physicalIndex(int logicalIndex) {
-        return M3PrimitiveKind.ringIndex(head, logicalIndex, capacity());
+        return PrimitiveKind.ringIndex(head, logicalIndex, capacity());
     }
 
-    private void ensure() { ensure(M3PrimitiveKind.checkedSize(size, 1)); }
+    private void ensure() { ensure(PrimitiveKind.checkedSize(size, 1)); }
 
     private void ensure(int required) {
         if (required <= capacity()) return;
         int oldCapacity = capacity();
-        int newCapacity = M3PrimitiveKind.grownCapacity(oldCapacity, required);
+        int newCapacity = PrimitiveKind.grownCapacity(oldCapacity, required);
         Object next = kind.newArray(newCapacity);
         int first = Math.min(size, oldCapacity - head);
         if (first > 0) System.arraycopy(elements, head, next, 0, first);

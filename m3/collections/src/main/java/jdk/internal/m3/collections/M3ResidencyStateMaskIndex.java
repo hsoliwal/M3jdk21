@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
-import jdk.m3.collections.M3ObjectResidency;
+import jdk.m3.collections.ObjectResidency;
 
 /**
  * Detached primitive-index selection against parent-owned M3 object state.
@@ -36,7 +36,7 @@ public final class M3ResidencyStateMaskIndex {
     /** Explicit native requests fail rather than silently taking the Java path. */
     public enum Backend { JAVA, JNI_REQUIRED }
 
-    private static final int ALL_STATES = (1 << M3ObjectResidency.State.values().length) - 1;
+    private static final int ALL_STATES = (1 << ObjectResidency.State.values().length) - 1;
 
     private M3ResidencyStateMaskIndex() { }
 
@@ -44,7 +44,7 @@ public final class M3ResidencyStateMaskIndex {
     public static boolean nativeAvailable() { return NativePeer.AVAILABLE; }
 
     /** One bit per lifecycle state, following State.ordinal(). */
-    public static int states(M3ObjectResidency.State... selected) {
+    public static int states(ObjectResidency.State... selected) {
         Objects.requireNonNull(selected, "selected");
         int mask = 0;
         for (var state : selected) mask |= 1 << Objects.requireNonNull(state, "state").ordinal();
@@ -52,7 +52,7 @@ public final class M3ResidencyStateMaskIndex {
     }
 
     /** Detached exact-size primitive row selection; no map entries or child references. */
-    public static int[] select(M3ObjectResidency<?> arena, int[] orderedSlots,
+    public static int[] select(ObjectResidency<?> arena, int[] orderedSlots,
             int offset, int count, int stride, long requiredBits, long forbiddenBits,
             int allowedStates, Backend backend) {
         Objects.requireNonNull(backend, "backend");
@@ -116,7 +116,7 @@ public final class M3ResidencyStateMaskIndex {
      *
      * @return the number of physical slot IDs written beginning at destinationOffset
      */
-    public static int selectInto(M3ObjectResidency<?> arena, int[] orderedSlots,
+    public static int selectInto(ObjectResidency<?> arena, int[] orderedSlots,
             int offset, int count, int stride, long requiredBits, long forbiddenBits,
             int allowedStates, int[] destination, int destinationOffset) {
         Objects.requireNonNull(destination, "destination");
@@ -157,7 +157,7 @@ public final class M3ResidencyStateMaskIndex {
     }
 
     /** Count matches without allocating output or materializing child objects. */
-    public static int count(M3ObjectResidency<?> arena, int[] orderedSlots,
+    public static int count(ObjectResidency<?> arena, int[] orderedSlots,
             int offset, int count, int stride, long requiredBits, long forbiddenBits,
             int allowedStates) {
         synchronized (Objects.requireNonNull(arena, "arena")) {
@@ -174,7 +174,7 @@ public final class M3ResidencyStateMaskIndex {
     }
 
     /** Return first selected physical slot, or -1; no result array allocation. */
-    public static int first(M3ObjectResidency<?> arena, int[] orderedSlots,
+    public static int first(ObjectResidency<?> arena, int[] orderedSlots,
             int offset, int count, int stride, long requiredBits, long forbiddenBits,
             int allowedStates) {
         synchronized (Objects.requireNonNull(arena, "arena")) {
@@ -196,7 +196,7 @@ public final class M3ResidencyStateMaskIndex {
                 && (bits & required) == required && (bits & forbidden) == 0L;
     }
 
-    private static void checkPath(M3ObjectResidency<?> arena, int[] rows,
+    private static void checkPath(ObjectResidency<?> arena, int[] rows,
             int offset, int count, int stride, long required, long forbidden,
             int allowedStates) {
         Objects.requireNonNull(rows, "orderedSlots");

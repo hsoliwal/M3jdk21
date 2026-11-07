@@ -5,8 +5,8 @@ package jdk.m3.collections;
 
 /** Optional event configuration exposed by a lazy provider or owner. */
 public interface M3LazyEventSource<M> {
-    default M3LazyEventPolicy lazyEventPolicy() {
-        return M3LazyEventPolicy.NONE;
+    default LazyEventPolicy lazyEventPolicy() {
+        return LazyEventPolicy.NONE;
     }
 
     default M3LazyEventSink<M> lazyEventSink() {

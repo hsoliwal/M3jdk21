@@ -25,10 +25,10 @@ import java.util.function.LongConsumer;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveFrozenList {
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final Object elements;
 
-    private M3PrimitiveFrozenList(M3PrimitiveKind kind, Object elements) {
+    private M3PrimitiveFrozenList(PrimitiveKind kind, Object elements) {
         this.kind = kind;
         this.elements = elements;
     }
@@ -38,7 +38,7 @@ public final class M3PrimitiveFrozenList {
         return new M3PrimitiveFrozenList(source.kind(), source.toPrimitiveArray());
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int size() { return java.lang.reflect.Array.getLength(elements); }
     public boolean isEmpty() { return size() == 0; }
     public long payloadBytes() { return kind.payloadBytes(size()); }

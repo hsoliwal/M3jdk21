@@ -28,7 +28,7 @@ import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
 
 /**
- * LS1 differential for {@link M3FrozenLongSet} against the JDK oracles it claims: {@code Set.copyOf} (membership,
+ * LS1 differential for {@link FrozenLongSet} against the JDK oracles it claims: {@code Set.copyOf} (membership,
  * size, equality, hash, immutability) and {@code TreeSet} (ascending order, first/last, ordinal and rank). At least
  * 40,000 mixed operations, extreme values, empty sets, iterator exhaustion; plus the field-shape and steady-state
  * zero-allocation proofs for the DOOP law (stored nodes NONE, per-element allocation 0).
@@ -42,7 +42,7 @@ final class M3FrozenLongSetTest {
         long operations = 0;
         for (int round = 0; round < 1200; round++) {
             long[] source = source(random, round);
-            M3FrozenLongSet set = M3FrozenLongSet.copyOf(source);
+            FrozenLongSet set = FrozenLongSet.copyOf(source);
             List<Long> boxed = new ArrayList<>();
             for (long value : source) boxed.add(value);
             Set<Long> jdk = Set.copyOf(boxed);
@@ -78,7 +78,7 @@ final class M3FrozenLongSetTest {
                 assertEquals((long) tree.last(), set.last());
             }
             operations += 2 + iterate(set, tree) + immutable(set, jdk, random);
-            M3FrozenLongSet again = M3FrozenLongSet.copyOf(set.toArray());
+            FrozenLongSet again = FrozenLongSet.copyOf(set.toArray());
             assertEquals(set, again);
             assertEquals(set.hashCode(), again.hashCode());
             operations += 2;
@@ -89,29 +89,29 @@ final class M3FrozenLongSetTest {
     @Test
     void sourceIsCopiedAndExportsAreDefensive() {
         long[] source = {5, 3, 5, 9};
-        M3FrozenLongSet set = M3FrozenLongSet.copyOf(source);
+        FrozenLongSet set = FrozenLongSet.copyOf(source);
         source[0] = 100;
         assertFalse(set.contains(100));
         long[] exported = set.toArray();
         exported[0] = -7;
         assertEquals(3, set.first());
-        assertThrows(NullPointerException.class, () -> M3FrozenLongSet.copyOf(null));
+        assertThrows(NullPointerException.class, () -> FrozenLongSet.copyOf(null));
         assertThrows(NullPointerException.class, () -> set.forEach(null));
-        assertSame(M3FrozenLongSet.copyOf(new long[0]), M3FrozenLongSet.copyOf(new long[0]));
-        assertEquals(new M3FrozenLongSet(), M3FrozenLongSet.copyOf(new long[0]));
-        assertNotEquals(set, M3FrozenLongSet.copyOf(new long[] {3, 5}));
+        assertSame(FrozenLongSet.copyOf(new long[0]), FrozenLongSet.copyOf(new long[0]));
+        assertEquals(new FrozenLongSet(), FrozenLongSet.copyOf(new long[0]));
+        assertNotEquals(set, FrozenLongSet.copyOf(new long[] {3, 5}));
         assertNotEquals(set, "[3, 5, 9]");
-        assertEquals((int) M3FrozenLongSet.STATE_FROZEN, set.stateWord());
+        assertEquals((int) FrozenLongSet.STATE_FROZEN, set.stateWord());
     }
 
     @Test
     void storedShapeHasNoEntryNodes() {
         Map<String, Class<?>> fields = new TreeMap<>();
-        for (Field field : M3FrozenLongSet.class.getDeclaredFields()) {
+        for (Field field : FrozenLongSet.class.getDeclaredFields()) {
             if (!Modifier.isStatic(field.getModifiers())) fields.put(field.getName(), field.getType());
         }
         assertEquals(Map.of("valueLane", long[].class, "stateMaskWords", long[].class, "size", int.class), fields);
-        for (Class<?> nested : M3FrozenLongSet.class.getDeclaredClasses()) {
+        for (Class<?> nested : FrozenLongSet.class.getDeclaredClasses()) {
             throw new AssertionError("unexpected nested storage type " + nested);
         }
     }
@@ -123,7 +123,7 @@ final class M3FrozenLongSetTest {
         bean.setThreadAllocatedMemoryEnabled(true);
         long[] values = new long[512];
         for (int i = 0; i < values.length; i++) values[i] = i * 3L - 700;
-        M3FrozenLongSet set = M3FrozenLongSet.copyOf(values);
+        FrozenLongSet set = FrozenLongSet.copyOf(values);
         long[] sink = new long[1];
         java.util.function.LongConsumer visit = value -> sink[0] += value;
         Runnable work = () -> {
@@ -165,7 +165,7 @@ final class M3FrozenLongSetTest {
         return mode == 2 ? random.nextLong(-41, 42) : random.nextLong();
     }
 
-    private static int iterate(M3FrozenLongSet set, TreeSet<Long> tree) {
+    private static int iterate(FrozenLongSet set, TreeSet<Long> tree) {
         PrimitiveIterator.OfLong cursor = set.iterator();
         Iterator<Long> oracle = tree.iterator();
         int steps = 0;
@@ -187,7 +187,7 @@ final class M3FrozenLongSetTest {
         return steps + 3;
     }
 
-    private static int immutable(M3FrozenLongSet set, Set<Long> jdk, SplittableRandom random) {
+    private static int immutable(FrozenLongSet set, Set<Long> jdk, SplittableRandom random) {
         long value = random.nextLong(-5, 6);
         assertThrows(UnsupportedOperationException.class, () -> jdk.add(value));
         assertThrows(UnsupportedOperationException.class, () -> set.add(value));

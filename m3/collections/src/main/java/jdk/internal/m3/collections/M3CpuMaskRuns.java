@@ -3,7 +3,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 
 /**
  * Run-length CPU atom over the existing indexed multi-plane mask selector.
@@ -14,7 +14,7 @@ import jdk.m3.collections.M3IndexPathMasks;
  * only scratch payload is one reusable primitive int[4096] window; there are
  * no per-row Entry objects or boxed values. No text payload is materialized.
  *
- * <p>The Java policy is delegated to M3IndexPathMasks. NATIVE_REQUIRED delegates
+ * <p>The Java policy is delegated to IndexPathMasks. NATIVE_REQUIRED delegates
  * to that owner's optional C17/JNI implementation, including explicit library
  * refusal. The callback may observe earlier runs before a later geometry,
  * concurrent modification, or callback failure; this operation is not atomic.
@@ -37,29 +37,29 @@ public final class M3CpuMaskRuns {
     public static int scan(int[] orderedRows, int[] physicalOffsets,
             int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
             int first, int count, int stride, int maxRuns,
-            M3IndexPathMasks.Backend backend, RunConsumer consumer) {
+            IndexPathMasks.Backend backend, RunConsumer consumer) {
         Objects.requireNonNull(backend, "backend");
         Objects.requireNonNull(consumer, "consumer");
         if (maxRuns < 0) throw new IllegalArgumentException("negative run budget");
         // Always validate borrowed geometry and the JNI boundary before any callbacks.
         // The zero-length output is shared safely because limit zero never writes it.
-        M3IndexPathMasks.scanWindow(orderedRows, physicalOffsets, statePlanes,
+        IndexPathMasks.scanWindow(orderedRows, physicalOffsets, statePlanes,
                 requiredMasks, forbiddenMasks, first, count, stride, 0,
                 NO_OUTPUT, 0, 0, backend);
         if (maxRuns == 0 || count == 0) return 0;
 
-        int[] window = new int[M3IndexPathMasks.MAX_WINDOW];
+        int[] window = new int[IndexPathMasks.MAX_WINDOW];
         int next = 0;
         int runCount = 0;
         boolean pending = false;
         int currentRow = 0;
         long length = 0;
         while (next < count) {
-            long result = M3IndexPathMasks.scanWindow(orderedRows, physicalOffsets,
+            long result = IndexPathMasks.scanWindow(orderedRows, physicalOffsets,
                     statePlanes, requiredMasks, forbiddenMasks, first, count,
                     stride, next, window, 0, window.length, backend);
-            int following = M3IndexPathMasks.nextOrdinal(result);
-            int written = M3IndexPathMasks.written(result);
+            int following = IndexPathMasks.nextOrdinal(result);
+            int written = IndexPathMasks.written(result);
             if (following <= next || following > count
                     || written < 0 || written > window.length) {
                 throw new IllegalStateException("mask window made invalid progress");

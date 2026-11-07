@@ -16,7 +16,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
- * Finite differential comparison of {@link M3LongLinkedHashSet} against {@code LinkedHashSet<Long>}
+ * Finite differential comparison of {@link LongLinkedHashSet} against {@code LinkedHashSet<Long>}
  * (a {@code SequencedSet}); this is not JDK replacement proof. Zero, the extrema and a dense small
  * key range are over-represented so tombstones, compaction and growth rehashes are exercised with
  * encounter order checked after every step.
@@ -43,7 +43,7 @@ final class M3LongLinkedHashSetTest {
     @Test
     void matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash() {
         Random random = new Random(0x4d334c4c4853L);
-        M3LongLinkedHashSet actual = new M3LongLinkedHashSet();
+        LongLinkedHashSet actual = new LongLinkedHashSet();
         LinkedHashSet<Long> expected = new LinkedHashSet<>();
         for (int step = 0; step < 40_000; step++) {
             long v = value(random, step);
@@ -90,9 +90,9 @@ final class M3LongLinkedHashSetTest {
 
     @Test
     void edgeContractsFailFastAndSizing() {
-        M3LongLinkedHashSet set = new M3LongLinkedHashSet(0);
+        LongLinkedHashSet set = new LongLinkedHashSet(0);
         assertEquals(8, set.capacity());
-        assertThrows(IllegalArgumentException.class, () -> new M3LongLinkedHashSet(-1));
+        assertThrows(IllegalArgumentException.class, () -> new LongLinkedHashSet(-1));
         assertThrows(NoSuchElementException.class, set::first);
         assertThrows(NoSuchElementException.class, set::last);
         assertThrows(NoSuchElementException.class, set::removeFirst);
@@ -107,7 +107,7 @@ final class M3LongLinkedHashSetTest {
         set.addLast(Long.MIN_VALUE);
         assertArrayEquals(new long[] {Long.MAX_VALUE, 0L, Long.MIN_VALUE}, set.toArray());
         assertArrayEquals(new long[] {Long.MIN_VALUE, 0L, Long.MAX_VALUE}, set.toReversedArray());
-        M3LongIterator iterator = set.iterator();
+        LongIterator iterator = set.iterator();
         assertEquals(Long.MAX_VALUE, iterator.nextLong());
         assertTrue(set.remove(0L));
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
@@ -115,7 +115,7 @@ final class M3LongLinkedHashSetTest {
         assertEquals(Long.MIN_VALUE, set.removeLast());
         assertTrue(set.isEmpty());
         set.clear();
-        M3LongIterator empty = set.iterator();
+        LongIterator empty = set.iterator();
         assertFalse(empty.hasNext());
         assertThrows(NoSuchElementException.class, empty::nextLong);
         // Grow across rehashes, delete two thirds (compaction), order must survive both.
@@ -141,7 +141,7 @@ final class M3LongLinkedHashSetTest {
 
     @Test
     void retainsOnlyPrimitiveLanes() {
-        var fields = Arrays.stream(M3LongLinkedHashSet.class.getDeclaredFields())
+        var fields = Arrays.stream(LongLinkedHashSet.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()

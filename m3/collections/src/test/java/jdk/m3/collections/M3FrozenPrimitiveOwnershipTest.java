@@ -38,9 +38,9 @@ import org.junit.jupiter.api.Test;
 final class M3FrozenPrimitiveOwnershipTest {
     @Test
     void emptyPublicConstructorsProvideUsableImmutableOwners() {
-        M3FrozenIntList ints = new M3FrozenIntList();
-        M3FrozenLongList longs = new M3FrozenLongList();
-        M3FrozenLongSet set = new M3FrozenLongSet();
+        FrozenIntList ints = new FrozenIntList();
+        FrozenLongList longs = new FrozenLongList();
+        FrozenLongSet set = new FrozenLongSet();
         assertEquals(0, ints.size());
         assertEquals(0, longs.size());
         assertEquals(0, set.size());
@@ -77,9 +77,9 @@ final class M3FrozenPrimitiveOwnershipTest {
         int[] expectedInts = intSource.clone();
         long[] expectedLongs = longSource.clone();
         long[] expectedSet = {Long.MIN_VALUE, -1, 4, Long.MAX_VALUE};
-        M3FrozenIntList ints = M3FrozenIntList.copyOf(intSource);
-        M3FrozenLongList longs = M3FrozenLongList.copyOf(longSource);
-        M3FrozenLongSet set = M3FrozenLongSet.copyOf(longSource);
+        FrozenIntList ints = FrozenIntList.copyOf(intSource);
+        FrozenLongList longs = FrozenLongList.copyOf(longSource);
+        FrozenLongSet set = FrozenLongSet.copyOf(longSource);
         Arrays.fill(intSource, 81);
         Arrays.fill(longSource, 81);
         int[] intExport = ints.toArray();
@@ -100,18 +100,18 @@ final class M3FrozenPrimitiveOwnershipTest {
         assertEquals(Integer.MIN_VALUE, ints.get(0));
         assertEquals(Long.MIN_VALUE, longs.get(0));
         assertEquals(Long.MIN_VALUE, set.first());
-        assertThrows(NullPointerException.class, () -> M3FrozenIntList.copyOf(null));
-        assertThrows(NullPointerException.class, () -> M3FrozenLongList.copyOf(null));
-        assertThrows(NullPointerException.class, () -> M3FrozenLongSet.copyOf(null));
+        assertThrows(NullPointerException.class, () -> FrozenIntList.copyOf(null));
+        assertThrows(NullPointerException.class, () -> FrozenLongList.copyOf(null));
+        assertThrows(NullPointerException.class, () -> FrozenLongSet.copyOf(null));
     }
 
     @Test
     void nestedLongViewsShareNonemptyPayloadAndDetachEmptyProperSlices() throws Exception {
         long[] source = new long[4096];
         for (int i = 0; i < source.length; i++) source[i] = i - 2048L;
-        M3FrozenLongList owner = M3FrozenLongList.copyOf(source);
-        M3FrozenLongList view = owner.subList(500, 3500);
-        M3FrozenLongList nested = view.subList(120, 1000);
+        FrozenLongList owner = FrozenLongList.copyOf(source);
+        FrozenLongList view = owner.subList(500, 3500);
+        FrozenLongList nested = view.subList(120, 1000);
         assertSame(payload(owner), payload(view));
         assertSame(payload(owner), payload(nested));
         assertArrayEquals(Arrays.copyOfRange(source, 620, 1500), nested.toArray());
@@ -121,14 +121,14 @@ final class M3FrozenPrimitiveOwnershipTest {
         assertEquals(source[1499], nested.get(nested.size() - 1));
         assertArrayEquals(source, owner.toArray());
         for (int at : new int[]{0, nested.size() / 2, nested.size()}) {
-            M3FrozenLongList empty = nested.subList(at, at);
+            FrozenLongList empty = nested.subList(at, at);
             assertEquals(0, empty.size());
             assertEquals(0, payload(empty).length);
             assertNotSame(payload(owner), payload(empty));
             assertArrayEquals(new long[0], empty.subList(0, 0).toArray());
         }
         // An empty owner's full-range view may retain its already-empty owner.
-        M3FrozenLongList emptyOwner = new M3FrozenLongList();
+        FrozenLongList emptyOwner = new FrozenLongList();
         assertEquals(0, payload(emptyOwner.subList(0, 0)).length);
     }
 
@@ -138,7 +138,7 @@ final class M3FrozenPrimitiveOwnershipTest {
             List<Long> values = new ArrayList<>();
             for (int i = 0; i < size; i++) values.add(i - 2L);
             List<Long> oracle = List.copyOf(values);
-            M3FrozenLongList owner = M3FrozenLongList.copyOf(
+            FrozenLongList owner = FrozenLongList.copyOf(
                     oracle.stream().mapToLong(Long::longValue).toArray());
             assertRangeMatrix(oracle, owner);
             if (size > 1) {
@@ -155,8 +155,8 @@ final class M3FrozenPrimitiveOwnershipTest {
                 Long.MIN_VALUE, -1, Long.MAX_VALUE};
         List<Integer> intOracle = List.copyOf(Arrays.stream(values).boxed().toList());
         List<Long> longOracle = List.copyOf(Arrays.stream(longValues).boxed().toList());
-        M3FrozenIntList ints = M3FrozenIntList.copyOf(values);
-        M3FrozenLongList longs = M3FrozenLongList.copyOf(longValues);
+        FrozenIntList ints = FrozenIntList.copyOf(values);
+        FrozenLongList longs = FrozenLongList.copyOf(longValues);
         for (int query : new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE, -1, 0, 1, 17}) {
             assertEquals(intOracle.indexOf(query), ints.indexOf(query));
         }
@@ -172,9 +172,9 @@ final class M3FrozenPrimitiveOwnershipTest {
     void primitiveAndBoxedIterationPreserveOrderAndRejectExhaustedReads() {
         int[] ints = {Integer.MIN_VALUE, 7, 7, Integer.MAX_VALUE};
         long[] longs = {Long.MIN_VALUE, 7, 7, Long.MAX_VALUE};
-        M3FrozenIntList intOwner = M3FrozenIntList.copyOf(ints);
-        M3FrozenLongList longOwner = M3FrozenLongList.copyOf(longs);
-        M3FrozenLongSet setOwner = M3FrozenLongSet.copyOf(longs);
+        FrozenIntList intOwner = FrozenIntList.copyOf(ints);
+        FrozenLongList longOwner = FrozenLongList.copyOf(longs);
+        FrozenLongSet setOwner = FrozenLongSet.copyOf(longs);
         assertIntCursor(intOwner.iterator(), ints);
         assertLongCursor(longOwner.iterator(), longs);
         assertLongCursor(longOwner.subList(1, 3).iterator(), new long[]{7, 7});
@@ -193,7 +193,7 @@ final class M3FrozenPrimitiveOwnershipTest {
     @Test
     void throwingRemainingActionsPreserveThrowableIdentityAndConsumeTheOffendingValue() {
         RuntimeException failure = new IllegalStateException("frozen callback witness");
-        PrimitiveIterator.OfInt ints = M3FrozenIntList.copyOf(new int[]{11, 22, 33}).iterator();
+        PrimitiveIterator.OfInt ints = FrozenIntList.copyOf(new int[]{11, 22, 33}).iterator();
         List<Integer> intSeen = new ArrayList<>();
         assertSame(failure, assertThrows(IllegalStateException.class,
                 () -> ints.forEachRemaining((int value) -> {
@@ -204,10 +204,10 @@ final class M3FrozenPrimitiveOwnershipTest {
         assertEquals(33, ints.nextInt());
         assertFalse(ints.hasNext());
         assertLongFailureProgress(
-                M3FrozenLongList.copyOf(new long[]{-9, 0, 5}).iterator(), failure);
+                FrozenLongList.copyOf(new long[]{-9, 0, 5}).iterator(), failure);
         assertLongFailureProgress(
-                M3FrozenLongSet.copyOf(new long[]{5, -9, 0, 0}).iterator(), failure);
-        PrimitiveIterator.OfLong boxed = M3FrozenLongList.copyOf(new long[]{-9, 0, 5}).iterator();
+                FrozenLongSet.copyOf(new long[]{5, -9, 0, 0}).iterator(), failure);
+        PrimitiveIterator.OfLong boxed = FrozenLongList.copyOf(new long[]{-9, 0, 5}).iterator();
         List<Long> boxedSeen = new ArrayList<>();
         assertSame(failure, assertThrows(IllegalStateException.class,
                 () -> boxed.forEachRemaining((Consumer<Long>) value -> {
@@ -222,9 +222,9 @@ final class M3FrozenPrimitiveOwnershipTest {
     @Test
     void ownerCallbacksPreserveExceptionIdentityOrderAndImmutableContents() {
         RuntimeException failure = new IllegalArgumentException("frozen owner callback witness");
-        M3FrozenIntList ints = M3FrozenIntList.copyOf(new int[]{11, 22, 33});
-        M3FrozenLongList longs = M3FrozenLongList.copyOf(new long[]{11, 22, 33});
-        M3FrozenLongSet set = M3FrozenLongSet.copyOf(new long[]{33, 11, 22, 22});
+        FrozenIntList ints = FrozenIntList.copyOf(new int[]{11, 22, 33});
+        FrozenLongList longs = FrozenLongList.copyOf(new long[]{11, 22, 33});
+        FrozenLongSet set = FrozenLongSet.copyOf(new long[]{33, 11, 22, 22});
         List<Integer> intSeen = new ArrayList<>();
         List<Long> longSeen = new ArrayList<>();
         List<Long> setSeen = new ArrayList<>();
@@ -254,7 +254,7 @@ final class M3FrozenPrimitiveOwnershipTest {
     @Test
     void nullActionsAreRejectedForEmptyPopulatedAndExhaustedTraversals() {
         for (int[] values : new int[][]{new int[0], new int[]{7}}) {
-            M3FrozenIntList owner = M3FrozenIntList.copyOf(values);
+            FrozenIntList owner = FrozenIntList.copyOf(values);
             assertThrows(NullPointerException.class, () -> owner.forEach(null));
             PrimitiveIterator.OfInt cursor = owner.iterator();
             assertIntNullActions(cursor);
@@ -263,8 +263,8 @@ final class M3FrozenPrimitiveOwnershipTest {
             assertIntNullActions(cursor);
         }
         for (long[] values : new long[][]{new long[0], new long[]{7}}) {
-            M3FrozenLongList list = M3FrozenLongList.copyOf(values);
-            M3FrozenLongSet set = M3FrozenLongSet.copyOf(values);
+            FrozenLongList list = FrozenLongList.copyOf(values);
+            FrozenLongSet set = FrozenLongSet.copyOf(values);
             assertThrows(NullPointerException.class, () -> list.forEach(null));
             assertThrows(NullPointerException.class, () -> set.forEach(null));
             for (PrimitiveIterator.OfLong cursor : List.of(list.iterator(), set.iterator())) {
@@ -282,7 +282,7 @@ final class M3FrozenPrimitiveOwnershipTest {
         TreeSet<Long> oracle = new TreeSet<>();
         for (long value : source) oracle.add(value);
         List<Long> ordered = List.copyOf(oracle);
-        M3FrozenLongSet set = M3FrozenLongSet.copyOf(source);
+        FrozenLongSet set = FrozenLongSet.copyOf(source);
         assertArrayEquals(ordered.stream().mapToLong(Long::longValue).toArray(), set.toArray());
         assertEquals(oracle.first().longValue(), set.first());
         assertEquals(oracle.last().longValue(), set.last());
@@ -310,10 +310,10 @@ final class M3FrozenPrimitiveOwnershipTest {
         TreeSet<Long> setOracle = new TreeSet<>();
         for (long value : inputLongs) setOracle.add(value);
         long[] expectedSet = setOracle.stream().mapToLong(Long::longValue).toArray();
-        M3FrozenIntList ints = M3FrozenIntList.copyOf(inputInts);
-        M3FrozenLongList longs = M3FrozenLongList.copyOf(inputLongs);
-        M3FrozenLongList view = longs.subList(17, 401);
-        M3FrozenLongSet set = M3FrozenLongSet.copyOf(inputLongs);
+        FrozenIntList ints = FrozenIntList.copyOf(inputInts);
+        FrozenLongList longs = FrozenLongList.copyOf(inputLongs);
+        FrozenLongList view = longs.subList(17, 401);
+        FrozenLongSet set = FrozenLongSet.copyOf(inputLongs);
         long[] expectedView = Arrays.copyOfRange(expectedLongs, 17, 401);
         Arrays.fill(inputInts, 71);
         Arrays.fill(inputLongs, 71);
@@ -354,7 +354,7 @@ final class M3FrozenPrimitiveOwnershipTest {
         assertArrayEquals(expectedView, view.toArray());
     }
 
-    private static void assertRangeMatrix(List<Long> oracle, M3FrozenLongList owner) {
+    private static void assertRangeMatrix(List<Long> oracle, FrozenLongList owner) {
         int size = oracle.size();
         int[] positions = {Integer.MIN_VALUE, -2, -1, 0, 1, size - 1,
                 size, size + 1, Integer.MAX_VALUE};
@@ -380,8 +380,8 @@ final class M3FrozenPrimitiveOwnershipTest {
         }
     }
 
-    private static long[] payload(M3FrozenLongList owner) throws Exception {
-        Field field = M3FrozenLongList.class.getDeclaredField("valueLane");
+    private static long[] payload(FrozenLongList owner) throws Exception {
+        Field field = FrozenLongList.class.getDeclaredField("valueLane");
         field.setAccessible(true);
         return (long[]) field.get(owner);
     }

@@ -36,14 +36,14 @@ public final class M3CollectionAllocationSelfTest {
         for (int i = 0; i < length; i++) result.add(i);
         return result;
     }
-    private static M3ObjectIndexSnapshot<Integer> snapshot(int length) {
+    private static ObjectIndexSnapshot<Integer> snapshot(int length) {
         Object[] values = new Object[length];
         int[] slots = new int[length];
         byte[] states = new byte[length];
         for (int i = 0; i < length; i++) {
             values[i] = i; slots[i] = 3 * i + 2; states[i] = (byte) i;
         }
-        return M3ObjectIndexSnapshot.capture(values, slots, states);
+        return ObjectIndexSnapshot.capture(values, slots, states);
     }
     private static void filtering() {
         Random random = new Random(0x20261018L);

@@ -106,7 +106,7 @@ final class M3TreeMapGetOrDefaultTest {
         lazy.defer(7); comparator.reset();
         assertNull(lazy.getOrDefault(7, "fallback"));
         assertEquals(List.of("7:7"), comparator.events); assertEquals(1, loads[0]);
-        assertEquals(M3LazyValueProvider.LOADED, lazy.valueFlags(7));
+        assertEquals(LazyValueProvider.LOADED, lazy.valueFlags(7));
         comparator.reset(); assertEquals("fallback", lazy.getOrDefault(17, "fallback"));
         assertEquals(List.of("17:7"), comparator.events); assertEquals(1, loads[0]);
         comparator.reset(); assertNull(lazy.get(7));

@@ -21,7 +21,7 @@ public final class M3LongSlidingWindowExtremaSelfTest {
         if (!ok) throw new AssertionError(message);
     }
 
-    private static void emptyThrows(M3LongSlidingWindow window) {
+    private static void emptyThrows(LongSlidingWindow window) {
         try { window.min(); throw new AssertionError("min empty"); }
         catch (NoSuchElementException expected) { checks++; }
         try { window.max(); throw new AssertionError("max empty"); }
@@ -32,7 +32,7 @@ public final class M3LongSlidingWindowExtremaSelfTest {
         catch (NoSuchElementException expected) { checks++; }
     }
 
-    private static void verify(M3LongSlidingWindow window, ArrayDeque<Long> oracle, int capacity) {
+    private static void verify(LongSlidingWindow window, ArrayDeque<Long> oracle, int capacity) {
         check(window.size() == oracle.size(), "size");
         check(window.isEmpty() == oracle.isEmpty(), "empty");
         check(window.isFull() == (oracle.size() == capacity), "full");
@@ -73,7 +73,7 @@ public final class M3LongSlidingWindowExtremaSelfTest {
     }
 
     private static void randomized(int capacity, int seed) {
-        M3LongSlidingWindow window = new M3LongSlidingWindow(capacity);
+        LongSlidingWindow window = new LongSlidingWindow(capacity);
         ArrayDeque<Long> oracle = new ArrayDeque<>();
         Random random = new Random(0x6d335f4c4c445750L ^ seed ^ capacity);
         for (int step = 0; step < 30000; step++) {
@@ -107,14 +107,14 @@ public final class M3LongSlidingWindowExtremaSelfTest {
         Field minKnown;
         Field maxKnown;
         try {
-            minKnown = M3LongSlidingWindow.class.getDeclaredField("minKnown");
-            maxKnown = M3LongSlidingWindow.class.getDeclaredField("maxKnown");
+            minKnown = LongSlidingWindow.class.getDeclaredField("minKnown");
+            maxKnown = LongSlidingWindow.class.getDeclaredField("maxKnown");
         } catch (NoSuchFieldException originalSource) {
             return;
         }
         minKnown.setAccessible(true);
         maxKnown.setAccessible(true);
-        M3LongSlidingWindow window = new M3LongSlidingWindow(3);
+        LongSlidingWindow window = new LongSlidingWindow(3);
         window.add(1L, -99L);
         window.add(9L, -99L);
         window.add(3L, -99L);
@@ -144,7 +144,7 @@ public final class M3LongSlidingWindowExtremaSelfTest {
     }
 
     public static void main(String[] args) throws Exception {
-        try { new M3LongSlidingWindow(0); throw new AssertionError("zero capacity accepted"); }
+        try { new LongSlidingWindow(0); throw new AssertionError("zero capacity accepted"); }
         catch (IllegalArgumentException expected) { checks++; }
         for (int capacity : new int[] {1, 2, 3, 4, 7, 16, 31, 64}) randomized(capacity, 1);
         cacheState();

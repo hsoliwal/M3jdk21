@@ -48,7 +48,7 @@ final class M3AdaptiveEnumLongMapTest {
     private static int expectedSwitchSize(int domainSize) {
         long direct = (long) domainSize * Long.BYTES + (long) Math.max(1, (domainSize + 63) >>> 6) * Long.BYTES;
         for (int n = 0; n <= domainSize; n++) {
-            if (direct <= M3IntLongHashMap.payloadBytesFor(Math.max(1, n))) {
+            if (direct <= IntLongHashMap.payloadBytesFor(Math.max(1, n))) {
                 return n;
             }
         }
@@ -96,7 +96,7 @@ final class M3AdaptiveEnumLongMapTest {
                     assertEquals(expected.size() >= switchSize, actual.isDirect());
                     assertEquals(actual.isDirect()
                                     ? actual.directPayloadBytes()
-                                    : M3IntLongHashMap.payloadBytesFor(actual.size()),
+                                    : IntLongHashMap.payloadBytesFor(actual.size()),
                             actual.payloadBytes());
                 }
                 case 7 -> {
@@ -121,7 +121,7 @@ final class M3AdaptiveEnumLongMapTest {
             assertEquals(expected.isEmpty(), actual.isEmpty());
             if (!actual.isDirect()) {
                 assertTrue(actual.size() < switchSize, "sparse at size " + actual.size());
-                assertTrue(actual.payloadBytes() >= M3IntLongHashMap.payloadBytesFor(actual.size()));
+                assertTrue(actual.payloadBytes() >= IntLongHashMap.payloadBytesFor(actual.size()));
             } else {
                 assertEquals(actual.directPayloadBytes(), actual.payloadBytes());
             }
@@ -135,7 +135,7 @@ final class M3AdaptiveEnumLongMapTest {
         int switchSize = map.directSwitchSize();
         assertEquals(21, switchSize);
         assertFalse(map.isDirect());
-        assertEquals(M3IntLongHashMap.payloadBytesFor(0), map.payloadBytes());
+        assertEquals(IntLongHashMap.payloadBytesFor(0), map.payloadBytes());
         // Insert in reverse ordinal order; traversal must still be ordinal order.
         for (int i = 0; i < switchSize - 1; i++) {
             assertTrue(map.put(keys[69 - i], i));
@@ -168,7 +168,7 @@ final class M3AdaptiveEnumLongMapTest {
         assertTrue(new M3AdaptiveEnumLongMap<>(Wide.class, switchSize).isDirect());
         var below = new M3AdaptiveEnumLongMap<>(Wide.class, switchSize - 1);
         assertFalse(below.isDirect());
-        assertEquals(M3IntLongHashMap.payloadBytesFor(switchSize - 1), below.payloadBytes());
+        assertEquals(IntLongHashMap.payloadBytesFor(switchSize - 1), below.payloadBytes());
         assertEquals(0, new M3AdaptiveEnumLongMap<>(Narrow.class).directSwitchSize());
         // Removal never migrates implicitly; compact re-chooses the backing.
         for (int i = 0; i < switchSize - 1; i++) {
@@ -180,21 +180,21 @@ final class M3AdaptiveEnumLongMapTest {
         assertFalse(map.isDirect());
         assertEquals(1, map.size());
         assertEquals(-1L, map.getAsLong(keys[0]));
-        assertEquals(M3IntLongHashMap.payloadBytesFor(1), map.payloadBytes());
+        assertEquals(IntLongHashMap.payloadBytesFor(1), map.payloadBytes());
         // A sparse table that grew and emptied keeps its capacity until compact shrinks it.
         for (int i = 1; i < switchSize - 1; i++) {
             assertTrue(map.put(keys[i], i));
         }
         assertFalse(map.isDirect());
         long grown = map.payloadBytes();
-        assertTrue(grown > M3IntLongHashMap.payloadBytesFor(1));
+        assertTrue(grown > IntLongHashMap.payloadBytesFor(1));
         for (int i = 1; i < switchSize - 1; i++) {
             assertTrue(map.removeKey(keys[i]));
         }
         assertEquals(grown, map.payloadBytes());
         map.compact();
         assertFalse(map.isDirect());
-        assertEquals(M3IntLongHashMap.payloadBytesFor(1), map.payloadBytes());
+        assertEquals(IntLongHashMap.payloadBytesFor(1), map.payloadBytes());
         assertEquals(1, map.size());
         map.clear();
         assertTrue(map.isEmpty());
@@ -283,7 +283,7 @@ final class M3AdaptiveEnumLongMapTest {
                 .map(f -> f.getType().getSimpleName())
                 .sorted()
                 .toList();
-        assertEquals(List.of("Class", "M3EnumLongMap", "M3IntLongHashMap", "int"), fields);
+        assertEquals(List.of("Class", "IntLongHashMap", "M3EnumLongMap", "int"), fields);
         var map = new M3AdaptiveEnumLongMap<>(Wide.class);
         for (Wide key : Wide.values()) {
             map.put(key, key.ordinal());

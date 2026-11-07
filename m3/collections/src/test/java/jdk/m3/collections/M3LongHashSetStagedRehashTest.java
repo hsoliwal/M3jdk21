@@ -15,7 +15,7 @@ final class M3LongHashSetStagedRehashTest {
     @Test void randomizedOperationsPreserveKeysAndStateLanes() throws Exception {
         for (int trial = 0; trial < 5; trial++) {
             Random random = new Random(0x705A34L + trial);
-            M3LongHashSet actual = new M3LongHashSet();
+            LongHashSet actual = new LongHashSet();
             Set<Long> model = new HashSet<>();
             for (int step = 0; step < 12000; step++) {
                 long key = switch (step % 29) {
@@ -47,7 +47,7 @@ final class M3LongHashSetStagedRehashTest {
     }
 
     @Test void tombstoneRebuildPreservesZeroExtremesAndIteratorEpoch() throws Exception {
-        M3LongHashSet set = new M3LongHashSet();
+        LongHashSet set = new LongHashSet();
         Set<Long> model = new HashSet<>();
         for (long value : new long[] {0L, Long.MIN_VALUE, Long.MAX_VALUE, -1L, 1L, 19L, 37L}) {
             assertEquals(model.add(value), set.add(value));
@@ -78,10 +78,10 @@ final class M3LongHashSetStagedRehashTest {
         return result;
     }
 
-    private static void assertAligned(M3LongHashSet set) throws Exception {
-        Field keyField = M3LongHashSet.class.getDeclaredField("keys");
-        Field stateField = M3LongHashSet.class.getDeclaredField("states");
-        Field countField = M3LongHashSet.class.getDeclaredField("occupied");
+    private static void assertAligned(LongHashSet set) throws Exception {
+        Field keyField = LongHashSet.class.getDeclaredField("keys");
+        Field stateField = LongHashSet.class.getDeclaredField("states");
+        Field countField = LongHashSet.class.getDeclaredField("occupied");
         keyField.setAccessible(true);
         stateField.setAccessible(true);
         countField.setAccessible(true);

@@ -22,14 +22,14 @@ public final class M3LongLongMapSharedTrace {
         checks++;
         if (!value) throw new AssertionError(reason);
     }
-    private static Object field(M3LongLongHashMap map, String name) {
+    private static Object field(LongLongHashMap map, String name) {
         try {
-            Field f = M3LongLongHashMap.class.getDeclaredField(name);
+            Field f = LongLongHashMap.class.getDeclaredField(name);
             f.setAccessible(true);
             return f.get(map);
         } catch (ReflectiveOperationException e) { throw new AssertionError(e); }
     }
-    private static void update(MessageDigest sha, M3LongLongHashMap map, int step) {
+    private static void update(MessageDigest sha, LongLongHashMap map, int step) {
         String state = step + "|" + map.size() + "|" + map.capacity() + "|"
                 + field(map,"modCount") + "|" + field(map,"occupied") + "|"
                 + Arrays.toString((long[])field(map,"keys")) + "|"
@@ -44,7 +44,7 @@ public final class M3LongLongMapSharedTrace {
         keys[0] = Long.MIN_VALUE; keys[1] = Long.MAX_VALUE; keys[2] = 0L;
         for (int seed=0;seed<8;seed++) {
             Random random = new Random(0x561ffabcL + seed);
-            M3LongLongHashMap map = new M3LongLongHashMap();
+            LongLongHashMap map = new LongLongHashMap();
             HashMap<Long,Long> ref = new HashMap<>();
             for (int step=0;step<20000;step++) {
                 long key = keys[random.nextInt(keys.length)];

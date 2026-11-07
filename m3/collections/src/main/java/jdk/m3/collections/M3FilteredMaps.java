@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  * Modified 2026: target M3 collection namespace; behavior retained.
- * Design references: Synexia M3CollectionViews; Guava Maps filtered-entry views
+ * Design references: Synexia CollectionViews; Guava Maps filtered-entry views
  * (Google LLC, Apache-2.0). Exact donor/category decisions accompany the recipe.
  */
 package jdk.m3.collections;
@@ -111,7 +111,7 @@ public final class M3FilteredMaps {
             if (source instanceof FilteredMap<?, ?> old) {
                 FilteredMap<K, V> prior = (FilteredMap<K, V>) old;
                 backing = prior.backing;
-                predicate = M3CollectionViews.orderedAnd(prior.predicate, filter);
+                predicate = CollectionViews.orderedAnd(prior.predicate, filter);
             } else {
                 backing = source;
                 predicate = filter;
@@ -132,7 +132,7 @@ public final class M3FilteredMaps {
         }
 
         protected final Set<Entry<K, V>> selectedEntries() {
-            return M3CollectionViews.filtered(backing.entrySet(), this::visible);
+            return CollectionViews.filtered(backing.entrySet(), this::visible);
         }
 
         @Override public int size() { return selectedEntries().size(); }
@@ -378,7 +378,7 @@ public final class M3FilteredMaps {
             return filtered(navigable.descendingMap(), predicate);
         }
         @Override public NavigableSet<K> navigableKeySet() {
-            return M3CollectionViews.filtered(navigable.navigableKeySet(),
+            return CollectionViews.filtered(navigable.navigableKeySet(),
                     key -> predicate.test(key, navigable.get(key)));
         }
         @Override public NavigableSet<K> keySet() { return navigableKeySet(); }

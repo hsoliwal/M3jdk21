@@ -37,22 +37,22 @@ public final class M3IndexPathMaskWindowSelfTest {
     private static void scenario(int[] rows, int[] physical, int[][] planes,
                                  int[] required, int[] forbidden,
                                  int first, int count, int stride,
-                                 M3IndexPathMasks.Backend backend,
+                                 IndexPathMasks.Backend backend,
                                  int capacity) {
-        int[] expected = M3IndexPathMasks.select(rows, physical, planes,
-                required, forbidden, first, count, stride, M3IndexPathMasks.Backend.JAVA);
+        int[] expected = IndexPathMasks.select(rows, physical, planes,
+                required, forbidden, first, count, stride, IndexPathMasks.Backend.JAVA);
         ArrayList<Integer> collected = new ArrayList<>(); // Test oracle only, never product state.
         int cursor = 0;
         while (cursor < count) {
-            int limit = Math.min(M3IndexPathMasks.MAX_WINDOW, 1 + RANDOM.nextInt(capacity));
+            int limit = Math.min(IndexPathMasks.MAX_WINDOW, 1 + RANDOM.nextInt(capacity));
             int offset = 3;
             int[] output = new int[offset + limit + 5];
             Arrays.fill(output, SENTINEL);
-            long result = M3IndexPathMasks.scanWindow(rows, physical, planes,
+            long result = IndexPathMasks.scanWindow(rows, physical, planes,
                     required, forbidden, first, count, stride, cursor,
                     output, offset, limit, backend);
-            int next = M3IndexPathMasks.nextOrdinal(result);
-            int written = M3IndexPathMasks.written(result);
+            int next = IndexPathMasks.nextOrdinal(result);
+            int written = IndexPathMasks.written(result);
             check(next > cursor && next <= count, "strict progress");
             check(written >= 0 && written <= limit, "bounded result");
             check(written <= next - cursor, "output cannot exceed input rows");
@@ -66,19 +66,19 @@ public final class M3IndexPathMaskWindowSelfTest {
         int[] actual = collected.stream().mapToInt(Integer::intValue).toArray();
         equal(actual, expected, "exact ordinal/path/JNI parity");
         int[] zero = {SENTINEL, SENTINEL, SENTINEL};
-        long hold = M3IndexPathMasks.scanWindow(rows, physical, planes,
+        long hold = IndexPathMasks.scanWindow(rows, physical, planes,
                 required, forbidden, first, count, stride,
                 count, zero, 1, 0, backend);
-        check(M3IndexPathMasks.nextOrdinal(hold) == count && M3IndexPathMasks.written(hold) == 0,
+        check(IndexPathMasks.nextOrdinal(hold) == count && IndexPathMasks.written(hold) == 0,
                 "terminal zero limit");
         equal(zero, new int[] {SENTINEL,SENTINEL,SENTINEL}, "terminal unchanged");
-        hold = M3IndexPathMasks.scanWindow(rows, physical, planes,
+        hold = IndexPathMasks.scanWindow(rows, physical, planes,
                 required, forbidden, first, count, stride, 0, zero, 1, 0, backend);
-        check(M3IndexPathMasks.nextOrdinal(hold) == 0 && M3IndexPathMasks.written(hold) == 0,
+        check(IndexPathMasks.nextOrdinal(hold) == 0 && IndexPathMasks.written(hold) == 0,
                 "zero limit retains cursor");
         equal(zero, new int[] {SENTINEL,SENTINEL,SENTINEL}, "zero result unchanged");
     }
-    private static void randomized(M3IndexPathMasks.Backend backend) {
+    private static void randomized(IndexPathMasks.Backend backend) {
         for (int seed = 0; seed < 650; seed++) {
             int n = RANDOM.nextInt(140);
             int[] rows = new int[n];
@@ -121,7 +121,7 @@ public final class M3IndexPathMaskWindowSelfTest {
         }
     }
     /** Both sides of the 4,096-element bounded window are actual output tests. */
-    private static void maximumWindow(M3IndexPathMasks.Backend backend) {
+    private static void maximumWindow(IndexPathMasks.Backend backend) {
         final int n = 5000;
         int[] rows = new int[n];
         int[] offsets = new int[n];
@@ -131,34 +131,34 @@ public final class M3IndexPathMaskWindowSelfTest {
             offsets[i] = i;
             planes[0][i] = Integer.MIN_VALUE;
         }
-        int[] buffer = new int[M3IndexPathMasks.MAX_WINDOW + 2];
+        int[] buffer = new int[IndexPathMasks.MAX_WINDOW + 2];
         Arrays.fill(buffer, SENTINEL);
-        long result = M3IndexPathMasks.scanWindow(rows, offsets, planes,
+        long result = IndexPathMasks.scanWindow(rows, offsets, planes,
                 new int[] {Integer.MIN_VALUE}, new int[] {0}, 0, n, 1, 0,
-                buffer, 1, M3IndexPathMasks.MAX_WINDOW, backend);
-        check(M3IndexPathMasks.nextOrdinal(result) == 4096
-                && M3IndexPathMasks.written(result) == 4096, "full 4096 window");
+                buffer, 1, IndexPathMasks.MAX_WINDOW, backend);
+        check(IndexPathMasks.nextOrdinal(result) == 4096
+                && IndexPathMasks.written(result) == 4096, "full 4096 window");
         for (int i = 0; i < 4096; i++) check(buffer[i + 1] == rows[i], "full forward window value");
         check(buffer[0] == SENTINEL && buffer[4097] == SENTINEL,
                 "full window preserves surrounding state");
-        result = M3IndexPathMasks.scanWindow(rows, offsets, planes,
+        result = IndexPathMasks.scanWindow(rows, offsets, planes,
                 new int[] {Integer.MIN_VALUE}, new int[] {0}, n - 1, n, -1, 0,
-                buffer, 1, M3IndexPathMasks.MAX_WINDOW, backend);
-        check(M3IndexPathMasks.nextOrdinal(result) == 4096
-                && M3IndexPathMasks.written(result) == 4096, "full reversed 4096 window");
+                buffer, 1, IndexPathMasks.MAX_WINDOW, backend);
+        check(IndexPathMasks.nextOrdinal(result) == 4096
+                && IndexPathMasks.written(result) == 4096, "full reversed 4096 window");
         for (int i = 0; i < 4096; i++) check(buffer[i + 1] == rows[n - 1 - i],
                 "full reverse window value");
         Arrays.fill(buffer, SENTINEL);
-        result = M3IndexPathMasks.scanWindow(rows, offsets, planes,
+        result = IndexPathMasks.scanWindow(rows, offsets, planes,
                 new int[] {Integer.MIN_VALUE}, new int[] {0}, n - 1, n, -1, 4096,
-                buffer, 1, M3IndexPathMasks.MAX_WINDOW, backend);
-        check(M3IndexPathMasks.nextOrdinal(result) == n
-                && M3IndexPathMasks.written(result) == n - 4096, "resumed trailing window");
+                buffer, 1, IndexPathMasks.MAX_WINDOW, backend);
+        check(IndexPathMasks.nextOrdinal(result) == n
+                && IndexPathMasks.written(result) == n - 4096, "resumed trailing window");
         check(buffer[0] == SENTINEL && buffer[1 + n - 4096] == SENTINEL,
                 "reused output untouched suffix");
     }
 
-    private static void edges(M3IndexPathMasks.Backend backend) {
+    private static void edges(IndexPathMasks.Backend backend) {
         int[] rows = {5, 5, -7, Integer.MIN_VALUE, 0};
         int[] offsets = {2, 2, 0, 1, 2};
         int[][] planes = {{Integer.MIN_VALUE, 0, Integer.MIN_VALUE}};
@@ -171,65 +171,65 @@ public final class M3IndexPathMaskWindowSelfTest {
         scenario(rows, offsets, planes, required, forbidden, 5, 0, -1, backend, 1);
         int[] output = {SENTINEL, SENTINEL, SENTINEL, SENTINEL, SENTINEL};
         refuses(IllegalArgumentException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, offsets, planes, required,
-                        forbidden, 0, 5, 1, 0, output, 0, M3IndexPathMasks.MAX_WINDOW + 1, backend),
+                () -> IndexPathMasks.scanWindow(rows, offsets, planes, required,
+                        forbidden, 0, 5, 1, 0, output, 0, IndexPathMasks.MAX_WINDOW + 1, backend),
                 "bounded limit");
         refuses(IndexOutOfBoundsException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, offsets, planes, required,
+                () -> IndexPathMasks.scanWindow(rows, offsets, planes, required,
                         forbidden, 0, 5, 1, 6, output, 0, 1, backend), "invalid ordinal");
         refuses(IndexOutOfBoundsException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, offsets, planes, required,
+                () -> IndexPathMasks.scanWindow(rows, offsets, planes, required,
                         forbidden, 0, 5, 1, 0, output, 4, 2, backend), "out of output bounds");
         refuses(IllegalArgumentException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, offsets, planes, required,
+                () -> IndexPathMasks.scanWindow(rows, offsets, planes, required,
                         forbidden, 0, 5, 1, 0, rows, 0, 1, backend), "row/output alias");
         refuses(IllegalArgumentException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, offsets, planes, required,
+                () -> IndexPathMasks.scanWindow(rows, offsets, planes, required,
                         forbidden, 0, 5, 1, 0, offsets, 0, 1, backend), "offset/output alias");
         refuses(IllegalArgumentException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, offsets, planes, required,
+                () -> IndexPathMasks.scanWindow(rows, offsets, planes, required,
                         forbidden, 0, 5, 1, 0, planes[0], 0, 1, backend), "state/output alias");
         refuses(IndexOutOfBoundsException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, offsets, planes, required,
+                () -> IndexPathMasks.scanWindow(rows, offsets, planes, required,
                         forbidden, 0, 5, 0, 0, output, 0, 1, backend), "zero stride");
         refuses(IllegalArgumentException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, offsets, new int[][] {}, required,
+                () -> IndexPathMasks.scanWindow(rows, offsets, new int[][] {}, required,
                         forbidden, 0, 5, 1, 0, output, 0, 1, backend), "stage shape");
         int[] lateBad = {2, 2, 0, 99, 2};
-        long result = M3IndexPathMasks.scanWindow(rows, lateBad, planes, required,
+        long result = IndexPathMasks.scanWindow(rows, lateBad, planes, required,
                 forbidden, 0, 5, 1, 0, output, 0, 1, backend);
-        check(M3IndexPathMasks.nextOrdinal(result) == 1, "later invalid offset not scanned early");
+        check(IndexPathMasks.nextOrdinal(result) == 1, "later invalid offset not scanned early");
         int[] preserved = output.clone();
         refuses(IndexOutOfBoundsException.class,
-                () -> M3IndexPathMasks.scanWindow(rows, lateBad, planes, required,
+                () -> IndexPathMasks.scanWindow(rows, lateBad, planes, required,
                         forbidden, 0, 5, 1, 1, output, 0, 3, backend), "next window invalid physical offset");
         equal(output, preserved, "preflight refusal cannot mutate output");
         // Full valid geometry but all masks fail: cursor must still finish.
         int[][] empty = {{0, 0, 0}};
         Arrays.fill(output, SENTINEL);
-        long nothing = M3IndexPathMasks.scanWindow(rows, offsets, empty,
+        long nothing = IndexPathMasks.scanWindow(rows, offsets, empty,
                 required, forbidden, 0, 5, 1, 0, output, 0, 2, backend);
-        check(M3IndexPathMasks.nextOrdinal(nothing) == 5
-                && M3IndexPathMasks.written(nothing) == 0, "empty-match full progress");
+        check(IndexPathMasks.nextOrdinal(nothing) == 5
+                && IndexPathMasks.written(nothing) == 0, "empty-match full progress");
         equal(output, new int[] {SENTINEL,SENTINEL,SENTINEL,SENTINEL,SENTINEL}, "no output written");
     }
     public static void main(String[] args) {
-        M3IndexPathMasks.Backend backend = args.length > 0 && args[0].equals("--native")
-                ? M3IndexPathMasks.Backend.NATIVE_REQUIRED : M3IndexPathMasks.Backend.JAVA;
-        if (backend == M3IndexPathMasks.Backend.JAVA) {
+        IndexPathMasks.Backend backend = args.length > 0 && args[0].equals("--native")
+                ? IndexPathMasks.Backend.NATIVE_REQUIRED : IndexPathMasks.Backend.JAVA;
+        if (backend == IndexPathMasks.Backend.JAVA) {
             int[] output = {SENTINEL};
-            if (!M3IndexPathMasks.nativeAvailable()) {
+            if (!IndexPathMasks.nativeAvailable()) {
                 refuses(UnsatisfiedLinkError.class,
-                        () -> M3IndexPathMasks.scanWindow(new int[] {1}, new int[] {0},
+                        () -> IndexPathMasks.scanWindow(new int[] {1}, new int[] {0},
                                 new int[][] {{1}}, new int[] {1}, new int[] {0}, 0, 1,
-                                1, 0, output, 0, 1, M3IndexPathMasks.Backend.NATIVE_REQUIRED),
+                                1, 0, output, 0, 1, IndexPathMasks.Backend.NATIVE_REQUIRED),
                         "explicit native-required refusal");
             }
-        } else check(M3IndexPathMasks.nativeAvailable(), "real JNI loaded");
+        } else check(IndexPathMasks.nativeAvailable(), "real JNI loaded");
         edges(backend);
         maximumWindow(backend);
         randomized(backend);
         System.out.println("M3_PATH_MASK_WINDOW_PASS checks=" + checks
-                + " backend=" + backend + " nativeAvailable=" + M3IndexPathMasks.nativeAvailable());
+                + " backend=" + backend + " nativeAvailable=" + IndexPathMasks.nativeAvailable());
     }
 }

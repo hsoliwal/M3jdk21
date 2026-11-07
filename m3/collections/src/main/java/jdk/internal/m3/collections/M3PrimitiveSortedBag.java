@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 import jdk.m3.collections.M3PrimitiveSortedGapMap;
 
 /**
@@ -31,16 +31,16 @@ public final class M3PrimitiveSortedBag {
         void accept(long valueBits, int count);
     }
 
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final M3PrimitiveSortedGapMap counts;
     private long size;
 
-    public M3PrimitiveSortedBag(M3PrimitiveKind kind) {
+    public M3PrimitiveSortedBag(PrimitiveKind kind) {
         this.kind = Objects.requireNonNull(kind, "kind");
-        counts = new M3PrimitiveSortedGapMap(kind, M3PrimitiveKind.INT);
+        counts = new M3PrimitiveSortedGapMap(kind, PrimitiveKind.INT);
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public long size() { return size; }
     public int distinctSize() { return counts.size(); }
     public boolean isEmpty() { return size == 0; }

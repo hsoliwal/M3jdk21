@@ -16,7 +16,7 @@ import java.util.function.LongConsumer;
 
 /**
  * Resizable exact-width primitive list backed by one primitive array, without per-entry wrappers.
- * Carrier narrowing, floating equality and BOOLEAN byte storage follow {@link M3PrimitiveKind}.
+ * Carrier narrowing, floating equality and BOOLEAN byte storage follow {@link PrimitiveKind}.
  * This class is not a {@link java.util.List}; it retains primitive rather than boxed values.
  *
  * <p>Indexed access/replacement is O(1); append is amortized O(1); insertion/removal inside
@@ -30,7 +30,7 @@ import java.util.function.LongConsumer;
  * contract is implied. payloadBytes reports capacity times lane width, not total memory use.
  */
 public final class M3PrimitiveArrayList {
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private Object elements;
     private int size;
 
@@ -39,7 +39,7 @@ public final class M3PrimitiveArrayList {
      * @param kind retained primitive kind
      * @throws NullPointerException if kind is null
      */
-    public M3PrimitiveArrayList(M3PrimitiveKind kind) {
+    public M3PrimitiveArrayList(PrimitiveKind kind) {
         this(kind, 8);
     }
 
@@ -51,7 +51,7 @@ public final class M3PrimitiveArrayList {
      * @throws IllegalArgumentException if capacity is negative
      * @throws OutOfMemoryError if allocation fails
      */
-    public M3PrimitiveArrayList(M3PrimitiveKind kind, int initialCapacity) {
+    public M3PrimitiveArrayList(PrimitiveKind kind, int initialCapacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (initialCapacity < 0) throw new IllegalArgumentException("initialCapacity < 0");
         elements = kind.newArray(Math.max(1, initialCapacity));
@@ -61,7 +61,7 @@ public final class M3PrimitiveArrayList {
      * Returns the retained primitive kind.
      * @return the retained primitive kind
      */
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     /**
      * Returns number of retained values.
      * @return number of retained values
@@ -89,7 +89,7 @@ public final class M3PrimitiveArrayList {
      * @throws OutOfMemoryError if size overflows or allocation fails
      */
     public void addBits(long bits) {
-        ensure(M3PrimitiveKind.checkedSize(size, 1));
+        ensure(PrimitiveKind.checkedSize(size, 1));
         kind.writeBits(elements, size++, bits);
     }
 
@@ -102,7 +102,7 @@ public final class M3PrimitiveArrayList {
      */
     public void addBits(int index, long bits) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException(index);
-        int required = M3PrimitiveKind.checkedSize(size, 1);
+        int required = PrimitiveKind.checkedSize(size, 1);
         Object target = insertionStorage(index, 1, required);
         kind.writeBits(target, index, bits);
         elements = target;
@@ -265,7 +265,7 @@ public final class M3PrimitiveArrayList {
     public int addAllBits(int index, Object source, int from, int length) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException(index);
         kind.checkRange(source, from, length);
-        int required = M3PrimitiveKind.checkedSize(size, length);
+        int required = PrimitiveKind.checkedSize(size, length);
         if (length == 0) return 0;
         if (source == elements) {
             Object snapshot = kind.newArray(length);
@@ -350,7 +350,7 @@ public final class M3PrimitiveArrayList {
             System.arraycopy(elements, index, elements, index + added, size - index);
             return elements;
         }
-        Object grown = kind.newArray(M3PrimitiveKind.grownCapacity(capacity, required));
+        Object grown = kind.newArray(PrimitiveKind.grownCapacity(capacity, required));
         // Every old spare lane is covered by the new logical range after insertion.
         // Keep ensureCapacity's full-tail copy for the package-visible backing array.
         System.arraycopy(elements, 0, grown, 0, index);
@@ -361,7 +361,7 @@ public final class M3PrimitiveArrayList {
     private void ensure(int required) {
         int capacity = capacity();
         if (required <= capacity) return;
-        int next = M3PrimitiveKind.grownCapacity(capacity, required);
+        int next = PrimitiveKind.grownCapacity(capacity, required);
         elements = kind.copyOf(elements, next);
     }
 }

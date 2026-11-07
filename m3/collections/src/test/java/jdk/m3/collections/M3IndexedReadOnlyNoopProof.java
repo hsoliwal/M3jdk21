@@ -84,7 +84,7 @@ public final class M3IndexedReadOnlyNoopProof {
 
         // On an empty JDK reverse view removeFirst/removeLast can be specified as
         // NoSuchElementException. The owner itself intentionally refuses always.
-        if (readOnly instanceof M3ObjectIndexSnapshot<?>
+        if (readOnly instanceof ObjectIndexSnapshot<?>
                 || readOnly instanceof M3IndexedListSnapshot<?>) {
             refusal(readOnly::removeFirst, name + " removeFirst");
             refusal(readOnly::removeLast, name + " removeLast");
@@ -116,7 +116,7 @@ public final class M3IndexedReadOnlyNoopProof {
         check(Arrays.equals(referenceArray, readOnly.toArray()), name + " unchanged array");
     }
 
-    private static M3ObjectIndexSnapshot<Integer> objectSnapshot(Integer[] input) {
+    private static ObjectIndexSnapshot<Integer> objectSnapshot(Integer[] input) {
         Object[] owned = Arrays.copyOf(input, input.length, Object[].class);
         int[] slots = new int[input.length];
         byte[] flags = new byte[input.length];
@@ -124,11 +124,11 @@ public final class M3IndexedReadOnlyNoopProof {
             slots[i] = i;
             flags[i] = (byte) ((i % 3 == 0) ? 1 : 0);
         }
-        return M3ObjectIndexSnapshot.capture(owned, slots, flags);
+        return ObjectIndexSnapshot.capture(owned, slots, flags);
     }
 
     private static void checkOwner(Integer[] input, String name) {
-        M3ObjectIndexSnapshot<Integer> object = objectSnapshot(input);
+        ObjectIndexSnapshot<Integer> object = objectSnapshot(input);
         verify(object, name + " object direct");
         verify(object.filtered(x -> x == null || x >= 0), name + " object filtered");
         verify(object.filteredByState(1, 0), name + " object state mask");

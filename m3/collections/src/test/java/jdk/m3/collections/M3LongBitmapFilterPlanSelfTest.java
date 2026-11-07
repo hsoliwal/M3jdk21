@@ -78,7 +78,7 @@ public final class M3LongBitmapFilterPlanSelfTest {
             check(Arrays.equals(plan.longStream().toArray(), plan.toArray()), "stream");
             check(Arrays.equals(plan.parallelLongStream().toArray(), plan.toArray()), "parallel split");
             int position = 0;
-            M3LongIterator it = plan.iterator();
+            LongIterator it = plan.iterator();
             while (it.hasNext()) {
                 check(it.nextLong() == plan.get(position), "ordinal iterator");
                 position++;

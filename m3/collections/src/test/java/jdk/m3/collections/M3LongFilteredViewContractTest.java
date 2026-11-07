@@ -31,7 +31,7 @@ public final class M3LongFilteredViewContractTest {
     @Test
     public void composableAndReadOnly() {
         Counting source = new Counting(-3, -2, -1, 0, 1, 2, 3, Long.MAX_VALUE);
-        M3LongCollection view = new M3LongFilteredView(source, v -> (v & 1) != 0);
+        LongCollection view = new M3LongFilteredView(source, v -> (v & 1) != 0);
         expect(Arrays.equals(view.toArray(), new long[]{-3, -1, 1, 3, Long.MAX_VALUE}),
                 "primitive filtered result");
         expect(view.size() == 5, "filtered size");
@@ -125,7 +125,7 @@ public final class M3LongFilteredViewContractTest {
         M3LongFilteredView view = new M3LongFilteredView(source, v -> true);
         rejects(NullPointerException.class, () -> view.forEachLong(null));
         rejects(NullPointerException.class, () -> view.longSpliterator().tryAdvance((java.util.function.LongConsumer) null));
-        M3LongIterator it = view.iterator();
+        LongIterator it = view.iterator();
         expect(it.nextLong() == 1 && it.nextLong() == 2, "iterator sequencing");
         rejects(NoSuchElementException.class, it::nextLong);
         rejects(UnsupportedOperationException.class,
@@ -147,7 +147,7 @@ public final class M3LongFilteredViewContractTest {
         throw new AssertionError("expected " + type + " but succeeded");
     }
 
-    private static final class Counting implements M3LongCollection {
+    private static final class Counting implements LongCollection {
         private final List<Long> items = new ArrayList<>();
         private int sizeCalls;
         private int iteratorCalls;
@@ -162,10 +162,10 @@ public final class M3LongFilteredViewContractTest {
         @Override public boolean contains(long n) { return items.contains(n); }
         @Override public void clear() { items.clear(); }
         @Override public long[] toArray() { return snapshot(); }
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             iteratorCalls++;
             var iterator = items.iterator();
-            return new M3LongIterator() {
+            return new LongIterator() {
                 @Override public boolean hasNext() { return iterator.hasNext(); }
                 @Override public long nextLong() { return iterator.next(); }
             };

@@ -12,19 +12,19 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
- * Differential proof of the M3LongBag algebra restored from PR #1084 (fold-close audit leaf L0030) against a
+ * Differential proof of the LongBag algebra restored from PR #1084 (fold-close audit leaf L0030) against a
  * {@code Map<Long, Long>} count model, written to the master bag's conventions (add returns the previous count,
  * remove returns the number removed).
  */
 final class M3LongBagAlgebraTest {
-    private static Map<Long, Long> model(M3LongBag bag) {
+    private static Map<Long, Long> model(LongBag bag) {
         Map<Long, Long> m = new HashMap<>();
         bag.forEachCount((k, v) -> assertNull(m.put(k, v), "duplicate key"));
         return m;
     }
 
-    private static M3LongBag random(Random r, int n) {
-        M3LongBag bag = new M3LongBag();
+    private static LongBag random(Random r, int n) {
+        LongBag bag = new LongBag();
         for (int i = 0; i < n; i++) bag.add(r.nextInt(23) - 11, 1 + r.nextInt(5));
         return bag;
     }
@@ -32,7 +32,7 @@ final class M3LongBagAlgebraTest {
     @Test void algebraMatchesCountModel() {
         Random r = new Random(0x1084L);
         for (int trial = 0; trial < 200; trial++) {
-            M3LongBag a = random(r, r.nextInt(40)), b = random(r, r.nextInt(40));
+            LongBag a = random(r, r.nextInt(40)), b = random(r, r.nextInt(40));
             Map<Long, Long> ma = model(a), mb = model(b);
             Map<Long, Long> union = new HashMap<>(ma), inter = new HashMap<>(), sum = new HashMap<>(ma), diff = new HashMap<>();
             mb.forEach((k, v) -> union.merge(k, v, Math::max));
@@ -53,18 +53,18 @@ final class M3LongBagAlgebraTest {
     }
 
     @Test void lanesRoundTripAndValidate() {
-        M3LongBag bag = M3LongBag.fromCounts(new long[] {5, -3, 5, 0, Long.MIN_VALUE}, new long[] {2, 4, 3, 0, 1});
+        LongBag bag = LongBag.fromCounts(new long[] {5, -3, 5, 0, Long.MIN_VALUE}, new long[] {2, 4, 3, 0, 1});
         assertEquals(5, bag.count(5));
         assertEquals(4, bag.count(-3));
         assertFalse(bag.contains(0));
         assertEquals(10, bag.totalCount());
         assertArrayEquals(new long[] {5, 0, 1, 4}, bag.countsFor(new long[] {5, 7, Long.MIN_VALUE, -3}));
-        assertThrows(IllegalArgumentException.class, () -> M3LongBag.fromCounts(new long[] {1}, new long[] {1, 2}));
-        assertThrows(IllegalArgumentException.class, () -> M3LongBag.fromCounts(new long[] {1}, new long[] {-1}));
+        assertThrows(IllegalArgumentException.class, () -> LongBag.fromCounts(new long[] {1}, new long[] {1, 2}));
+        assertThrows(IllegalArgumentException.class, () -> LongBag.fromCounts(new long[] {1}, new long[] {-1}));
     }
 
     @Test void removeAllCompareAndSetAndTrim() {
-        M3LongBag bag = new M3LongBag(64);
+        LongBag bag = new LongBag(64);
         bag.add(9, 4);
         bag.add(2, 1);
         assertEquals(4, bag.removeAll(9));
@@ -81,7 +81,7 @@ final class M3LongBagAlgebraTest {
     }
 
     @Test void sumOverflowLeavesInputsUnchanged() {
-        M3LongBag a = new M3LongBag(), b = new M3LongBag();
+        LongBag a = new LongBag(), b = new LongBag();
         a.add(1, Long.MAX_VALUE);
         b.add(2, 1);
         assertThrows(ArithmeticException.class, () -> a.sum(b));

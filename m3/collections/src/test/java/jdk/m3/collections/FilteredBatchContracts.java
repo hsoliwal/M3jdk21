@@ -64,7 +64,7 @@ public final class FilteredBatchContracts {
                 default -> new TreeSet<Integer>().descendingSet();
             };
             var input=new ChangingInput<>(List.of(2,4),List.of(3,5));
-            Collection<Integer> view=M3CollectionViews.filtered(backing,x->x%2==0);
+            Collection<Integer> view=CollectionViews.filtered(backing,x->x%2==0);
             check(view.addAll(input),"changing input added");
             if(!candidate) {
                 check(backing.contains(3)&&backing.contains(5),"BASELINE_UNVALIDATED_SECOND_READ");
@@ -78,11 +78,11 @@ public final class FilteredBatchContracts {
     private static void failureAndAliasing() {
         var owner=new ArrayList<Integer>(List.of(1,2));
         var calls=new ArrayList<Integer>();
-        var view=M3CollectionViews.filtered(owner,x->{calls.add(x);return x%2==0;});
+        var view=CollectionViews.filtered(owner,x->{calls.add(x);return x%2==0;});
         rejects(IllegalArgumentException.class,()->view.addAll(List.of(4,5,6)));
         eq(List.of(4,5),calls,"short-circuit admission");eq(List.of(1,2),owner,"rejection before owner mutation");
         var sentinel=new IllegalStateException("predicate-sentinel");
-        var failed=M3CollectionViews.filtered(owner,x->{if(x==6)throw sentinel;return true;});
+        var failed=CollectionViews.filtered(owner,x->{if(x==6)throw sentinel;return true;});
         check(rejects(IllegalStateException.class,()->failed.addAll(List.of(4,6)))==sentinel,"predicate failure identity");
         eq(List.of(1,2),owner,"predicate failure before write");
         var inputFailure=new AssertionError("source-sentinel");
@@ -98,12 +98,12 @@ public final class FilteredBatchContracts {
         eq(List.of(1,2),owner,"iterator failure before owner write");
         rejects(NullPointerException.class,()->view.addAll(null));
         eq(false,view.addAll(List.of()),"mutable empty batch");
-        var readOnly=M3CollectionViews.filtered(Collections.unmodifiableCollection(owner),x->true);
+        var readOnly=CollectionViews.filtered(Collections.unmodifiableCollection(owner),x->true);
         rejects(UnsupportedOperationException.class,()->readOnly.addAll(List.of()));
         rejects(UnsupportedOperationException.class,()->readOnly.addAll(List.of(2)));
-        var self=new ArrayList<Integer>(List.of(2,4));var selfView=M3CollectionViews.filtered(self,x->true);
+        var self=new ArrayList<Integer>(List.of(2,4));var selfView=CollectionViews.filtered(self,x->true);
         check(selfView.addAll(selfView),"self-view admission");eq(List.of(2,4,2,4),self,"self snapshot order");
-        var nulls=new ArrayList<Integer>();var nullable=M3CollectionViews.filtered(nulls,x->x==null||x%2==0);
+        var nulls=new ArrayList<Integer>();var nullable=CollectionViews.filtered(nulls,x->x==null||x%2==0);
         nullable.addAll(Arrays.asList(null,2,null,2));eq(Arrays.asList(null,2,null,2),nulls,"nulls duplicates retained");
         check(nulls.get(1)==nulls.get(3),"reference duplicate retained");
         var roFailure=new IllegalArgumentException("owner-sentinel");
@@ -111,30 +111,30 @@ public final class FilteredBatchContracts {
             private static final long serialVersionUID=1L;
             @Override public boolean addAll(Collection<? extends Integer> e){throw roFailure;}
         };
-        check(rejects(IllegalArgumentException.class,()->M3CollectionViews.filtered(rejectingOwner,x->true).addAll(List.of(2)))==roFailure,"backing error identity");
+        check(rejects(IllegalArgumentException.class,()->CollectionViews.filtered(rejectingOwner,x->true).addAll(List.of(2)))==roFailure,"backing error identity");
     }
     private static void nestedAndSorted() {
         List<String> order=new ArrayList<>();
-        Collection<Integer> view=M3CollectionViews.filtered(new ArrayList<>(),x->{order.add("a"+x);return x>=0;});
-        view=M3CollectionViews.filtered(view,x->{order.add("b"+x);return x%2==0;});
+        Collection<Integer> view=CollectionViews.filtered(new ArrayList<>(),x->{order.add("a"+x);return x>=0;});
+        view=CollectionViews.filtered(view,x->{order.add("b"+x);return x%2==0;});
         Collection<Integer> nested=view;
         rejects(IllegalArgumentException.class,()->nested.addAll(List.of(2,-1,4)));
         eq(List.of("a2","b2","a-1"),order,"nested order and early refusal");check(nested.isEmpty(),"nested no mutation");
-        Collection<Integer> deep=M3CollectionViews.filtered(new ArrayList<>(),x->true);
-        for(int i=0;i<65536;i++)deep=M3CollectionViews.filtered(deep,x->true);
+        Collection<Integer> deep=CollectionViews.filtered(new ArrayList<>(),x->true);
+        for(int i=0;i<65536;i++)deep=CollectionViews.filtered(deep,x->true);
         deep.addAll(List.of(2,4));eq(List.of(2,4),new ArrayList<>(deep),"deep predicate reuse");
         NavigableSet<Integer> parent=new TreeSet<>(List.of(0,1,2,3,4,5,6,7,8,9));
-        NavigableSet<Integer> selected=M3CollectionViews.filtered(parent,x->x%2==0);
+        NavigableSet<Integer> selected=CollectionViews.filtered(parent,x->x%2==0);
         NavigableSet<Integer> range=selected.subSet(2,true,8,false);
         eq(null,range.lower(-100),"query below range");eq(2,range.ceiling(-100),"ceiling below range");
         eq(6,range.floor(100),"floor above range");eq(null,range.higher(100),"higher above range");
         check(selected.headSet(8) instanceof NavigableSet<?>,"legacy range runtime capability");
         range.descendingSet().clear();eq(List.of(0,1,3,5,7,8,9),new ArrayList<>(parent),"only visible range removed");
         var strings=new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);strings.add("ADMIN");
-        var lower=M3CollectionViews.filtered(strings,s->s.equals(s.toLowerCase(java.util.Locale.ROOT)));
+        var lower=CollectionViews.filtered(strings,s->s.equals(s.toLowerCase(java.util.Locale.ROOT)));
         check(!lower.contains("admin")&&!lower.remove("admin"),"sorted stored representative retained");
         var nullable=new TreeSet<Integer>(Comparator.nullsFirst(Integer::compare));
-        var nullableView=M3CollectionViews.filtered(nullable,x->x==null||x%2==0);
+        var nullableView=CollectionViews.filtered(nullable,x->x==null||x%2==0);
         nullableView.addAll(Arrays.asList(null,2,4));eq(null,nullableView.first(),"null first");
         eq(2,nullableView.higher(null),"null navigation");eq(4,nullableView.descendingSet().first(),"reverse comparator");
         rejects(IllegalArgumentException.class,()->range.addAll(List.of(10)));
@@ -154,14 +154,14 @@ public final class FilteredBatchContracts {
                     default -> new CopyOnWriteArrayList<>();
                 };
                 var all=new ArrayList<>(input);all.removeIf(x->x%2!=0);
-                var view=M3CollectionViews.filtered(owner,x->x%2==0);
+                var view=CollectionViews.filtered(owner,x->x%2==0);
                 eq(!all.isEmpty(),view.addAll(all),"addAll changed");
                 List<Integer> expected=kind==0||kind==4?all:new ArrayList<>(new TreeSet<>(all));
                 List<Integer> actual=new ArrayList<>(view);
                 if(kind==1)actual.sort(null);if(kind==3)Collections.reverse(actual);
                 eq(expected,actual,"owner order and duplicates");
                 eq(all.stream().sorted().distinct().toList(),new ArrayList<>(new TreeSet<>(view)),"same unique members");
-                var snap=M3CollectionViews.filteredSortedSnapshot(view,x->true,Comparator.reverseOrder());
+                var snap=CollectionViews.filteredSortedSnapshot(view,x->true,Comparator.reverseOrder());
                 eq(view.stream().sorted(Comparator.reverseOrder()).toList(),snap,"stable sorted result");
                 owner.add(100);check(!snap.contains(100),"snapshot not live");check(view.contains(100),"filtered live");
                 Spliterator<Integer> split=view.spliterator();
@@ -171,7 +171,7 @@ public final class FilteredBatchContracts {
                 rejects(UnsupportedOperationException.class,()->snap.add(200));
             }
             List<Item> items=new ArrayList<>();for(int i=0;i<30;i++)items.add(new Item(random.nextInt(4),i));
-            List<Item> sorted=M3CollectionViews.filteredSortedSnapshot(items,x->x.key()!=1,Comparator.comparingInt(Item::key));
+            List<Item> sorted=CollectionViews.filteredSortedSnapshot(items,x->x.key()!=1,Comparator.comparingInt(Item::key));
             eq(items.stream().filter(x->x.key()!=1).sorted(Comparator.comparingInt(Item::key)).toList(),sorted,"stable equal-key identities");
             for(Item value:sorted)check(value==items.get(value.ordinal()),"same element reference");
         }

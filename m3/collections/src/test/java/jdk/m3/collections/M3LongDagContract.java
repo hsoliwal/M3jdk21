@@ -35,7 +35,7 @@ public final class M3LongDagContract {
     }
 
     private static void liveFilterAndStableSort() {
-        M3LongArrayList owner = M3LongArrayList.copyOf(new long[]{3, 1, 2, -1});
+        LongArrayList owner = LongArrayList.copyOf(new long[]{3, 1, 2, -1});
         M3LongDag plan = M3LongDag.filtered(owner, value -> value > 0).map(value -> value * 2);
         owner.add(7);
         eq(new long[]{6, 2, 4, 14}, plan.toArrayBounded(4), "live filtered owner and mapping order");
@@ -59,15 +59,15 @@ public final class M3LongDagContract {
     }
 
     private static void deepPlanAndLargeVirtualAccumulation() {
-        M3LongDag source = M3LongDag.from(M3LongArrayList.copyOf(new long[] {1, 2, 3}));
+        M3LongDag source = M3LongDag.from(LongArrayList.copyOf(new long[] {1, 2, 3}));
         M3LongDag deep = source;
         for (int i = 0; i < 10_000; i++) deep = deep.skip(0);
         eq(10_001, deep.nodeCount(), "stack-safe DAG node inventory");
-        M3LongCollection generated = new M3LongCollection() {
+        LongCollection generated = new LongCollection() {
             public int size() { return 100_000; }
             public boolean contains(long value) { return value >= 0 && value < 100_000; }
             public void clear() { throw new UnsupportedOperationException(); }
-            public M3LongIterator iterator() { throw new AssertionError("owner stream path required"); }
+            public LongIterator iterator() { throw new AssertionError("owner stream path required"); }
             public long[] toArray() { throw new AssertionError("unbounded clone forbidden"); }
             public LongStream longStream() { return LongStream.range(0, 100_000); }
         };
@@ -77,7 +77,7 @@ public final class M3LongDagContract {
                 "100k virtual accumulator without input array materialization");
     }
 
-    private static final class TestSortedSet implements M3LongSortedSet {
+    private static final class TestSortedSet implements LongSortedSet {
         private final java.util.TreeSet<Long> values = new java.util.TreeSet<>();
         public boolean add(long value) { return values.add(value); }
         public boolean remove(long value) { return values.remove(value); }
@@ -85,9 +85,9 @@ public final class M3LongDagContract {
         public boolean contains(long value) { return values.contains(value); }
         public void clear() { values.clear(); }
         public long[] toArray() { return values.stream().mapToLong(v -> v).toArray(); }
-        public M3LongIterator iterator() {
+        public LongIterator iterator() {
             java.util.Iterator<Long> iterator = values.iterator();
-            return new M3LongIterator() {
+            return new LongIterator() {
                 public boolean hasNext() { return iterator.hasNext(); }
                 public long nextLong() { return iterator.next(); }
             };
@@ -114,7 +114,7 @@ public final class M3LongDagContract {
     }
 
     private static void planCompositionAndStreaming() {
-        M3LongArrayList owner = M3LongArrayList.copyOf(new long[]{0, 1, 2, 3, 4, 5});
+        LongArrayList owner = LongArrayList.copyOf(new long[]{0, 1, 2, 3, 4, 5});
         M3LongDag common = M3LongDag.from(owner);
         M3LongDag child = common.filter(v -> (v & 1) == 0);
         M3LongDag dag = child.map(v -> v + 10).concat(child.map(v -> -v));
@@ -129,7 +129,7 @@ public final class M3LongDagContract {
     }
 
     private static void virtualAccumulatorAndCollector() {
-        M3LongArrayList owner = M3LongArrayList.copyOf(new long[]{3, 5, 7, 9});
+        LongArrayList owner = LongArrayList.copyOf(new long[]{3, 5, 7, 9});
         M3LongDag dag = M3LongDag.from(owner);
         AtomicInteger starts = new AtomicInteger();
         AtomicInteger folds = new AtomicInteger();
@@ -158,7 +158,7 @@ public final class M3LongDagContract {
     }
 
     private static void batchBoundaries() {
-        var dag = M3LongDag.from(M3LongArrayList.copyOf(new long[]{1, 2, 3, 4, 5}));
+        var dag = M3LongDag.from(LongArrayList.copyOf(new long[]{1, 2, 3, 4, 5}));
         try (var batches = dag.batches(2)) {
             var result = batches.toList();
             eq(3, result.size(), "three batches");
@@ -168,29 +168,29 @@ public final class M3LongDagContract {
         }
         raises(IllegalArgumentException.class, () -> dag.batches(0), "zero batch width");
         raises(IllegalArgumentException.class, () -> dag.batches(65_537), "oversized batch width");
-        try (var empty = M3LongDag.from(M3LongArrayList.copyOf(new long[0])).batches(1)) {
+        try (var empty = M3LongDag.from(LongArrayList.copyOf(new long[0])).batches(1)) {
             eq(0, empty.count(), "empty batch stream");
         }
     }
 
     private static void distinctAndBudgetRefusal() {
-        M3LongArrayList owner = M3LongArrayList.copyOf(new long[]{Long.MIN_VALUE, 0, 0, Long.MAX_VALUE, Long.MIN_VALUE, 7});
+        LongArrayList owner = LongArrayList.copyOf(new long[]{Long.MIN_VALUE, 0, 0, Long.MAX_VALUE, Long.MIN_VALUE, 7});
         var plan = M3LongDag.from(owner);
         eq(new long[]{Long.MIN_VALUE, 0, Long.MAX_VALUE, 7},
                 plan.distinctBounded(4).toArrayBounded(4), "first-seen order and extreme longs");
         raises(IllegalStateException.class, () -> plan.distinctBounded(3).count(), "distinct budget failure");
         raises(IllegalArgumentException.class, () -> plan.distinctBounded(-1), "negative distinct budget");
         eq(6, owner.size(), "set stage must not alter original collection");
-        eq(0, M3LongDag.from(M3LongArrayList.copyOf(new long[0])).sortedBounded(0).count(), "empty sort budget zero");
+        eq(0, M3LongDag.from(LongArrayList.copyOf(new long[0])).sortedBounded(0).count(), "empty sort budget zero");
     }
 
     private static void sourceClosureAndFailures() {
         AtomicInteger closed = new AtomicInteger();
-        M3LongCollection owner = new M3LongCollection() {
+        LongCollection owner = new LongCollection() {
             public int size() { return 3; }
             public boolean contains(long value) { return value >= 1 && value <= 3; }
             public void clear() { throw new UnsupportedOperationException(); }
-            public M3LongIterator iterator() { throw new AssertionError("stream override expected"); }
+            public LongIterator iterator() { throw new AssertionError("stream override expected"); }
             public long[] toArray() { return new long[]{1, 2, 3}; }
             public LongStream longStream() { return LongStream.of(1, 2, 3).onClose(closed::incrementAndGet); }
         };
@@ -211,7 +211,7 @@ public final class M3LongDagContract {
             int count = random.nextInt(400);
             long[] rows = new long[count];
             for (int i = 0; i < count; i++) rows[i] = random.nextInt(101) - 50;
-            var owner = M3LongArrayList.copyOf(rows);
+            var owner = LongArrayList.copyOf(rows);
             var dag = M3LongDag.from(owner).filter(x -> x % 3 != 0).map(x -> x * 2)
                     .distinctBounded(101).sortedBounded(101);
             long[] expected = Arrays.stream(rows).filter(x -> x % 3 != 0).map(x -> x * 2).distinct().sorted().toArray();
@@ -221,7 +221,7 @@ public final class M3LongDagContract {
     }
 
     private static void jdkCollectorAndNativeMaskBoundary() {
-        M3LongArrayList rows = M3LongArrayList.copyOf(new long[]{3, 1, -1, 5});
+        LongArrayList rows = LongArrayList.copyOf(new long[]{3, 1, -1, 5});
         M3LongDag dag = M3LongDag.filtered(rows, x -> x > 0);
         eq(List.of(3L, 1L, 5L), dag.collect(Collectors.toList()), "JDK Collector bridge");
         int[] order = {3, 0, 2, 1};

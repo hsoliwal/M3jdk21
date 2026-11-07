@@ -45,35 +45,35 @@ final class M3LongIndexProjectionPathMasksTest {
 
         M3LongIndexProjection all =
                 view.filteredPathMasks(planes, new int[] {0, 0},
-                        new int[] {0, 0}, 4, 5, -1, M3IndexPathMasks.Backend.JAVA);
+                        new int[] {0, 0}, 4, 5, -1, IndexPathMasks.Backend.JAVA);
         check(all.order() == M3LongIndexProjection.Order.DESCENDING, "reversed ascending");
         M3LongIndexProjection ascending =
                 view.sortedDescending().filteredPathMasks(
                         planes, new int[] {0, 0}, new int[] {0, 0},
-                        4, 5, -1, M3IndexPathMasks.Backend.JAVA);
+                        4, 5, -1, IndexPathMasks.Backend.JAVA);
         check(ascending.order() == M3LongIndexProjection.Order.ASCENDING, "reversed descending");
         check(Arrays.equals(original, root.toArray()), "source isolation");
 
         reject(IndexOutOfBoundsException.class, () ->
                 view.filteredPathMasks(planes, required, forbidden,
-                        view.size(), 1, 1, M3IndexPathMasks.Backend.JAVA));
+                        view.size(), 1, 1, IndexPathMasks.Backend.JAVA));
         reject(IndexOutOfBoundsException.class, () ->
                 view.filteredPathMasks(planes, required, forbidden,
-                        0, 2, -1, M3IndexPathMasks.Backend.JAVA));
+                        0, 2, -1, IndexPathMasks.Backend.JAVA));
         reject(IndexOutOfBoundsException.class, () ->
                 view.filteredPathMasks(planes, required, forbidden,
-                        0, 1, 0, M3IndexPathMasks.Backend.JAVA));
+                        0, 1, 0, IndexPathMasks.Backend.JAVA));
         reject(IndexOutOfBoundsException.class, () ->
                 view.filteredPathMasks(planes, required, forbidden,
-                        0, -1, 1, M3IndexPathMasks.Backend.JAVA));
+                        0, -1, 1, IndexPathMasks.Backend.JAVA));
         reject(NullPointerException.class, () ->
                 view.filteredPathMasks(planes, required, forbidden, 0, 0, 1, null));
         reject(IllegalArgumentException.class, () ->
                 view.filteredPathMasks(planes, new int[0], forbidden, 0, 0, 1,
-                        M3IndexPathMasks.Backend.JAVA));
+                        IndexPathMasks.Backend.JAVA));
         reject(IndexOutOfBoundsException.class, () ->
                 view.filteredPathMasks(new int[][] {{0}, {0}}, required, forbidden, 0, 1, 1,
-                        M3IndexPathMasks.Backend.JAVA));
+                        IndexPathMasks.Backend.JAVA));
     }
 
     @Test
@@ -147,7 +147,7 @@ final class M3LongIndexProjectionPathMasksTest {
         int[] slots = expected.stream().mapToInt(Integer::intValue).toArray();
         M3LongIndexProjection selected = view.filteredPathMasks(
                 stages, required, forbidden, first, count, stride,
-                M3IndexPathMasks.Backend.JAVA);
+                IndexPathMasks.Backend.JAVA);
         check(Arrays.equals(slots, selected.physicalIndices()), "physical slot selection");
         check(selected.size() == slots.length, "logical size");
         for (int i = 0; i < slots.length; i++) {
@@ -166,16 +166,16 @@ final class M3LongIndexProjectionPathMasksTest {
             check(selected.physicalIndex(0) == slots[0], "detached index directory");
         }
         if (nativeCheck) {
-            if (M3IndexPathMasks.nativeAvailable()) {
+            if (IndexPathMasks.nativeAvailable()) {
                 M3LongIndexProjection nativeSelected = view.filteredPathMasks(
                         stages, required, forbidden, first, count, stride,
-                        M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                        IndexPathMasks.Backend.NATIVE_REQUIRED);
                 check(Arrays.equals(slots, nativeSelected.physicalIndices()),
                         "actual native path parity");
             } else {
                 reject(UnsatisfiedLinkError.class, () -> view.filteredPathMasks(
                         stages, required, forbidden, first, count, stride,
-                        M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                        IndexPathMasks.Backend.NATIVE_REQUIRED));
             }
         }
     }

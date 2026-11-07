@@ -9,7 +9,7 @@ package jdk.m3.collections.interop;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3LinkedList;
 import java.util.AbstractCollection;
@@ -37,7 +37,7 @@ import java.util.Set;
  * views mutate the same array/index backing; removing a last value releases its key.
  * This is not concurrent and does not claim Guava concrete-class or wire identity.</p>
  *
- * <p>Index and state-mask projection uses the existing M3IndexPathMasks Java/C17 JNI
+ * <p>Index and state-mask projection uses the existing IndexPathMasks Java/C17 JNI
  * selector with full 32-bit state words. JNI receives primitive indexes and masks only:
  * Java references, user predicates and comparators remain in Java. The selection result
  * is an independent M3 owner; it is not a live filtered predicate view.</p>
@@ -414,7 +414,7 @@ public final class M3GuavaListMultimap<K, V> implements ListMultimap<K, V> {
 
     /** Exact 32-bit-mask indexed occurrence projection over detached selected rows. */
     public M3GuavaListMultimap<K, V> selectedByStates(int[] states, int required,
-            int forbidden, M3IndexPathMasks.Backend backend) {
+            int forbidden, IndexPathMasks.Backend backend) {
         Objects.requireNonNull(states, "states");
         Objects.requireNonNull(backend, "backend");
         if (states.length != pairs) throw new IllegalArgumentException("unaligned state lane");
@@ -432,7 +432,7 @@ public final class M3GuavaListMultimap<K, V> implements ListMultimap<K, V> {
             }
         }
         if (ordinal != pairs || expected != revision) throw new ConcurrentModificationException();
-        int[] kept = M3IndexPathMasks.select(positions, positions, new int[][]{states},
+        int[] kept = IndexPathMasks.select(positions, positions, new int[][]{states},
                 new int[]{required}, new int[]{forbidden}, 0, pairs, 1, backend);
         if (expected != revision) throw new ConcurrentModificationException();
         M3GuavaListMultimap<K, V> result = new M3GuavaListMultimap<>();

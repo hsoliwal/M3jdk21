@@ -24,7 +24,7 @@ final class M3StableDescendingSnapshotTest {
         M3StableDescendingSnapshotProof.main(new String[0]);
     }
     @Test void nativeParityWhenAvailable() {
-        if (M3IndexPathMasks.nativeAvailable()) {
+        if (IndexPathMasks.nativeAvailable()) {
             M3StableDescendingSnapshotProof.main(new String[] {"--native"});
         }
     }

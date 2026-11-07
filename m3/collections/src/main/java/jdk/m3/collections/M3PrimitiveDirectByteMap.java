@@ -35,7 +35,7 @@ public final class M3PrimitiveDirectByteMap {
         void accept(byte key, long valueBits);
     }
 
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind valueKind;
     private final Object values;
     private long present0;
     private long present1;
@@ -43,12 +43,12 @@ public final class M3PrimitiveDirectByteMap {
     private long present3;
     private int size;
 
-    public M3PrimitiveDirectByteMap(M3PrimitiveKind valueKind) {
+    public M3PrimitiveDirectByteMap(PrimitiveKind valueKind) {
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         this.values = valueKind.newArray(DOMAIN_SIZE);
     }
 
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int keyCapacity() { return DOMAIN_SIZE; }

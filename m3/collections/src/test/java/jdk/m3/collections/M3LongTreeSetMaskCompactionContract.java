@@ -36,7 +36,7 @@ public final class M3LongTreeSetMaskCompactionContract {
     }
 
     private static void verifyScenario(Random random, int capacity, int length, int run) {
-        M3LongTreeSet owner = new M3LongTreeSet(0, capacity);
+        LongTreeSet owner = new LongTreeSet(0, capacity);
         long[] values = inputs(random, length);
         int[] order = new int[length];
         for (int i = 0; i < length; i++) order[i] = i;
@@ -57,7 +57,7 @@ public final class M3LongTreeSetMaskCompactionContract {
         boolean poison = stop < length;
         long[] expected = expected(before, stop, policy);
         int[] visited = {0};
-        M3LongIterator stale = owner.iterator();
+        LongIterator stale = owner.iterator();
         LongPredicate predicate = value -> {
             require(Arrays.equals(before, owner.toArray()), "predicate observed premature compaction");
             require(owner.pageCount() == beforePages && owner.capacity() == beforeCapacity
@@ -134,7 +134,7 @@ public final class M3LongTreeSetMaskCompactionContract {
         };
     }
 
-    private static void checkNavigable(M3LongTreeSet owner, TreeSet<Long> oracle, long[] before) {
+    private static void checkNavigable(LongTreeSet owner, TreeSet<Long> oracle, long[] before) {
         require(Arrays.equals(owner.toArray(), oracle.stream().mapToLong(Long::longValue).toArray()),
                 "owner/oracle array mismatch");
         if (oracle.isEmpty()) return;
@@ -154,7 +154,7 @@ public final class M3LongTreeSetMaskCompactionContract {
         }
     }
 
-    private static void expectConcurrentModification(M3LongIterator cursor) {
+    private static void expectConcurrentModification(LongIterator cursor) {
         try {
             cursor.hasNext();
             throw new AssertionError("structural compaction should invalidate old iterator");

@@ -30,17 +30,17 @@ public final class M3PrimitiveSortedArrayMap {
         void accept(long keyBits, long valueBits);
     }
 
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private Object keys;
     private Object values;
     private int size;
 
-    public M3PrimitiveSortedArrayMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind) {
+    public M3PrimitiveSortedArrayMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this(keyKind, valueKind, 8);
     }
 
-    public M3PrimitiveSortedArrayMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind, int initialCapacity) {
+    public M3PrimitiveSortedArrayMap(PrimitiveKind keyKind, PrimitiveKind valueKind, int initialCapacity) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         if (initialCapacity < 0) throw new IllegalArgumentException("initialCapacity < 0");
@@ -49,8 +49,8 @@ public final class M3PrimitiveSortedArrayMap {
         values = valueKind.newArray(capacity);
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return java.lang.reflect.Array.getLength(keys); }
@@ -130,14 +130,14 @@ public final class M3PrimitiveSortedArrayMap {
         return keyKind.binarySearch(keys, 0, size, keyBits);
     }
 
-    /** Test-only copy injection; preserves M3PrimitiveKind exact-width storage. */
+    /** Test-only copy injection; preserves PrimitiveKind exact-width storage. */
     @FunctionalInterface
     interface BackingCopier {
-        Object copy(M3PrimitiveKind kind, Object source, int capacity);
+        Object copy(PrimitiveKind kind, Object source, int capacity);
     }
 
     private void ensure(int required) {
-        ensure(required, M3PrimitiveKind::copyOf);
+        ensure(required, PrimitiveKind::copyOf);
     }
 
     /** Stage both typed arrays before either becomes visible to the map. */

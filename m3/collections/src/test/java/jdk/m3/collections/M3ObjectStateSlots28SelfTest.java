@@ -56,18 +56,18 @@ public final class M3ObjectStateSlots28SelfTest {
     }
 
     private static void lifecycleAndMemory() throws Exception {
-        var state = new M3ObjectStateSlots28();
+        var state = new ObjectStateSlots28();
         equal(state.size(), 0);equal(state.statePayloadBytes(), 0L);
         equal(state.allocatedStateBlocks(), 0);
         long first = state.allocate();
         equal(state.state(first), 0);equal(state.allocatedStateBlocks(), 0);
         equal(state.setState(first, 0), 0);
-        equal(state.update(first, 0, M3ObjectStateSlots28.DIRTY), 0);
+        equal(state.update(first, 0, ObjectStateSlots28.DIRTY), 0);
         equal(state.allocatedStateBlocks(), 0);
-        equal(state.update(first, M3ObjectStateSlots28.VISIBLE | M3ObjectStateSlots28.DIRTY, 0), 0);
+        equal(state.update(first, ObjectStateSlots28.VISIBLE | ObjectStateSlots28.DIRTY, 0), 0);
         equal(state.state(first), 3);equal(state.stateBitCount(first), 2);
         equal(state.allocatedStateBlocks(), 1);equal(state.statePayloadBytes(), 4096L);
-        equal(state.update(first, 0, M3ObjectStateSlots28.DIRTY), 3);
+        equal(state.update(first, 0, ObjectStateSlots28.DIRTY), 3);
         equal(state.state(first), 1);
         refuse(IllegalArgumentException.class, () -> state.update(first, 1, 1));
         refuse(IllegalArgumentException.class, () -> state.update(first, -1, 0));
@@ -77,7 +77,7 @@ public final class M3ObjectStateSlots28SelfTest {
         refuse(IllegalStateException.class, () -> state.state(first));
         refuse(IllegalStateException.class, () -> state.release(first));
         long next = state.allocate();
-        equal(M3SlotAllocator28.slot(first), M3SlotAllocator28.slot(next));
+        equal(SlotAllocator28.slot(first), SlotAllocator28.slot(next));
         test(first != next);equal(state.state(next), 0);
         refuse(IllegalStateException.class, () -> state.update(first, 2, 0));
         equal(state.state(next), 0);
@@ -107,7 +107,7 @@ public final class M3ObjectStateSlots28SelfTest {
         long recycled = state.allocate();equal(state.state(recycled), 0);
         equal(state.allocatedStateBlocks(), 2);state.release(recycled);
         // All state is primitive bytes; no per-slot Object[], Entry or payload array.
-        for (Field field : M3ObjectStateSlots28.class.getDeclaredFields()) {
+        for (Field field : ObjectStateSlots28.class.getDeclaredFields()) {
             if (Modifier.isStatic(field.getModifiers())) continue;
             test(field.getType() != Object[].class);
             test(field.getType() != Object.class);
@@ -115,7 +115,7 @@ public final class M3ObjectStateSlots28SelfTest {
     }
 
     private static void rangeAndRefusal() {
-        var lane = new M3ObjectStateSlots28();
+        var lane = new ObjectStateSlots28();
         long a = lane.allocate(1), b = lane.allocate(3), c = lane.allocate(2);
         long[] input = {-1L, a, b, c, b, a, -2L};
         long[] original = input.clone();
@@ -156,7 +156,7 @@ public final class M3ObjectStateSlots28SelfTest {
     private static void randomized() {
         long seedBase = 0x4d33415252415953L;
         for (int seed = 0; seed < 48; seed++) {
-            var lane = new M3ObjectStateSlots28();
+            var lane = new ObjectStateSlots28();
             var oracle = new HashMap<Long, Integer>();
             var active = new ArrayList<Long>();
             Random rng = new Random(seedBase + seed);
@@ -170,12 +170,12 @@ public final class M3ObjectStateSlots28SelfTest {
                 } else if (action == 3) {
                     int idx = rng.nextInt(active.size());
                     long removed = active.remove(idx);
-                    int slot = M3SlotAllocator28.slot(removed);
+                    int slot = SlotAllocator28.slot(removed);
                     lane.release(removed);oracle.remove(removed);
                     test(!lane.isLive(removed));
                     if (rng.nextInt(3) == 0) {
                         long recycled = lane.allocate();
-                        equal(M3SlotAllocator28.slot(recycled), slot);
+                        equal(SlotAllocator28.slot(recycled), slot);
                         equal(lane.state(recycled), 0);
                         active.add(recycled);oracle.put(recycled, 0);
                     }
@@ -200,7 +200,7 @@ public final class M3ObjectStateSlots28SelfTest {
                     int required = rng.nextInt(256), excluded = rng.nextInt(256);
                     int[] expected = oracle.entrySet().stream()
                             .filter(e -> matches(e.getValue(), required, excluded))
-                            .mapToInt(e -> M3SlotAllocator28.slot(e.getKey()))
+                            .mapToInt(e -> SlotAllocator28.slot(e.getKey()))
                             .sorted().toArray();
                     equal(lane.countMatching(0, lane.highWaterMark(), required, excluded), expected.length);
                     int cursor = 0;
@@ -241,7 +241,7 @@ public final class M3ObjectStateSlots28SelfTest {
     }
 
     private static void indexedMaskBridge(boolean nativeRun) {
-        var states = new M3ObjectStateSlots28();
+        var states = new ObjectStateSlots28();
         long first = states.allocate(1);
         long second = states.allocate(3);
         long third = states.allocate(4);
@@ -281,7 +281,7 @@ public final class M3ObjectStateSlots28SelfTest {
                     () -> states.matchingPositions(handles, 1, 6, 0, 0, nativeBackend));
         }
         long reused = states.allocate(1);
-        equal(M3SlotAllocator28.slot(reused), M3SlotAllocator28.slot(second));
+        equal(SlotAllocator28.slot(reused), SlotAllocator28.slot(second));
         refuse(IllegalStateException.class,
                 () -> states.matchingPositions(handles, 1, 6, 0, 0, javaBackend));
         states.release(reused);
@@ -290,7 +290,7 @@ public final class M3ObjectStateSlots28SelfTest {
 
         Random rng = new Random(0x4d33534c4f544d4cL);
         for (int trial = 0; trial < 96; trial++) {
-            var arena = new M3ObjectStateSlots28();
+            var arena = new ObjectStateSlots28();
             long[] ids = new long[1 + rng.nextInt(96)];
             for (int i = 0; i < ids.length; i++) {
                 ids[i] = i > 0 && i % 7 == 0

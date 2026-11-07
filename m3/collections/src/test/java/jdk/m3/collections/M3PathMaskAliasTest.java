@@ -5,6 +5,6 @@ import org.junit.jupiter.api.Test;
 
 class M3PathMaskAliasTest {
     @Test void maskInputsRemainBorrowedAndWindowsRemainStable() {
-        M3PathMaskAliasContract.run(M3IndexPathMasks.Backend.JAVA);
+        M3PathMaskAliasContract.run(IndexPathMasks.Backend.JAVA);
     }
 }

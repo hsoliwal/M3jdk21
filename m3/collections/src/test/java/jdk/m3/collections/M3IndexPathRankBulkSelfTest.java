@@ -47,7 +47,7 @@ public final class M3IndexPathRankBulkSelfTest {
             int first = count == 0 ? length
                     : stride > 0 ? rng.nextInt(length - count + 1)
                     : count - 1 + rng.nextInt(length - count + 1);
-            M3IndexPathRank snapshot = M3IndexPathRank.snapshot(
+            IndexPathRank snapshot = IndexPathRank.snapshot(
                     rows, physical, states, required, forbidden, first, count, stride);
             int[] original = rows.clone();
             for (int trialWindow = 0; trialWindow < 8; trialWindow++) {
@@ -112,7 +112,7 @@ public final class M3IndexPathRankBulkSelfTest {
             states[0][i] = (i % 5 == 0 || i == 63 || i == 64 || i == 65
                     || i == 127 || i == 128 || i == 255) ? 0 : Integer.MIN_VALUE;
         }
-        var rank = M3IndexPathRank.snapshot(rows, physical, states,
+        var rank = IndexPathRank.snapshot(rows, physical, states,
                 new int[]{Integer.MIN_VALUE}, new int[]{0}, 0, length, 1);
         for (int from : new int[]{0, 1, 62, 63, 64, 65, 66, 126, 127, 128, 129, 255, 256, 257}) {
             for (int to = from; to <= length; to += 17) {
@@ -139,7 +139,7 @@ public final class M3IndexPathRankBulkSelfTest {
         int[] rows = {8, -2, 8, 4};
         int[] physical = {0, 1, 0, 2};
         int[][] states = {{Integer.MIN_VALUE, 0, Integer.MIN_VALUE}};
-        var rank = M3IndexPathRank.snapshot(rows, physical, states,
+        var rank = IndexPathRank.snapshot(rows, physical, states,
                 new int[]{Integer.MIN_VALUE}, new int[]{0}, 0, rows.length, 1);
         var view = rank.window(1, 4);
         int[] output = {SENTINEL, SENTINEL, SENTINEL};

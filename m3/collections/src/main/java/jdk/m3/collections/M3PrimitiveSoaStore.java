@@ -20,7 +20,7 @@ public final class M3PrimitiveSoaStore {
     public static final int ROW_IDS = 1 << 1;
     public static final int VERSION_LONGS = 1 << 2;
 
-    private final M3PrimitiveKind[] laneKinds;
+    private final PrimitiveKind[] laneKinds;
     private final int metadataMask;
     private Object[] lanes;
     private byte[] states;
@@ -30,11 +30,11 @@ public final class M3PrimitiveSoaStore {
     private int nextRowId;
     private volatile long version;
 
-    public M3PrimitiveSoaStore(M3PrimitiveKind... laneKinds) {
+    public M3PrimitiveSoaStore(PrimitiveKind... laneKinds) {
         this(8, 0, laneKinds);
     }
 
-    public M3PrimitiveSoaStore(int initialCapacity, int metadataMask, M3PrimitiveKind... laneKinds) {
+    public M3PrimitiveSoaStore(int initialCapacity, int metadataMask, PrimitiveKind... laneKinds) {
         Objects.requireNonNull(laneKinds, "laneKinds");
         if (laneKinds.length == 0) throw new IllegalArgumentException("at least one lane required");
         if (initialCapacity < 0) throw new IllegalArgumentException("initialCapacity < 0");
@@ -46,7 +46,7 @@ public final class M3PrimitiveSoaStore {
         int capacity = Math.max(1, initialCapacity);
         lanes = new Object[laneKinds.length];
         for (int lane = 0; lane < laneKinds.length; lane++) {
-            M3PrimitiveKind kind = Objects.requireNonNull(laneKinds[lane], "lane kind");
+            PrimitiveKind kind = Objects.requireNonNull(laneKinds[lane], "lane kind");
             lanes[lane] = kind.newArray(capacity);
         }
         if (hasMetadata(STATE_BYTES)) states = new byte[capacity];
@@ -55,7 +55,7 @@ public final class M3PrimitiveSoaStore {
     }
 
     public int laneCount() { return laneKinds.length; }
-    public M3PrimitiveKind laneKind(int lane) { return laneKinds[checkLane(lane)]; }
+    public PrimitiveKind laneKind(int lane) { return laneKinds[checkLane(lane)]; }
     public int metadataMask() { return metadataMask; }
     public synchronized int size() { return size; }
     public synchronized boolean isEmpty() { return size == 0; }
@@ -65,7 +65,7 @@ public final class M3PrimitiveSoaStore {
     public synchronized long payloadBytes() {
         long bytes = 0L;
         int capacity = capacity();
-        for (M3PrimitiveKind kind : laneKinds) bytes += kind.payloadBytes(capacity);
+        for (PrimitiveKind kind : laneKinds) bytes += kind.payloadBytes(capacity);
         if (states != null) bytes += states.length;
         if (rowIds != null) bytes += (long) rowIds.length * Integer.BYTES;
         if (versions != null) bytes += (long) versions.length * Long.BYTES;
@@ -254,7 +254,7 @@ public final class M3PrimitiveSoaStore {
         int b = checkRow(right);
         if (a == b) return;
         for (int lane = 0; lane < laneKinds.length; lane++) {
-            M3PrimitiveKind kind = laneKinds[lane];
+            PrimitiveKind kind = laneKinds[lane];
             long temp = kind.readBits(lanes[lane], a);
             kind.writeBits(lanes[lane], a, kind.readBits(lanes[lane], b));
             kind.writeBits(lanes[lane], b, temp);
@@ -387,7 +387,7 @@ public final class M3PrimitiveSoaStore {
 
     private void copyRowRaw(int source, int target) {
         for (int lane = 0; lane < laneKinds.length; lane++) {
-            M3PrimitiveKind kind = laneKinds[lane];
+            PrimitiveKind kind = laneKinds[lane];
             kind.writeBits(lanes[lane], target, kind.readBits(lanes[lane], source));
         }
         if (states != null) states[target] = states[source];

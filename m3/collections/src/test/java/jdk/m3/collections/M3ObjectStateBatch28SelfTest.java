@@ -23,7 +23,7 @@ public final class M3ObjectStateBatch28SelfTest {
         throw new AssertionError("missing refusal " + type);
     }
     private static void boundaries() {
-        var state = new M3ObjectStateSlots28();
+        var state = new ObjectStateSlots28();
         long a = state.allocate(0x80), b = state.allocate(0x01);
         long[] order = {17, a, b, a, 19};
         equal(M3ObjectStateBatch28.countMatching(state, order, 1, 3, 0x80, 0), 2);
@@ -54,7 +54,7 @@ public final class M3ObjectStateBatch28SelfTest {
         state.release(a);state.release(b);
     }
     private static void multiPageAndReuse() {
-        var state = new M3ObjectStateSlots28();
+        var state = new ObjectStateSlots28();
         long[] handles = new long[4097];
         for (int i = 0; i < handles.length; i++) handles[i] = state.allocate(i % 2 == 0 ? 0x80 : 0);
         equal(state.allocatedStateBlocks(), 2);
@@ -62,7 +62,7 @@ public final class M3ObjectStateBatch28SelfTest {
         equal(M3ObjectStateBatch28.update(state,handles,4095,2,1,0),2);
         equal(state.state(handles[4095]),1);equal(state.state(handles[4096]),0x81);
         long stale = handles[4096];state.release(stale);long fresh = state.allocate(7);
-        equal(M3SlotAllocator28.slot(stale),M3SlotAllocator28.slot(fresh));
+        equal(SlotAllocator28.slot(stale),SlotAllocator28.slot(fresh));
         refuse(IllegalStateException.class,()->M3ObjectStateBatch28.update(state,handles,4095,2,4,0));
         equal(state.state(handles[4095]),1);
         for(int i=0;i<4096;i++)state.release(handles[i]);state.release(fresh);
@@ -70,7 +70,7 @@ public final class M3ObjectStateBatch28SelfTest {
     private static void randomized() {
         long operations=0;
         for(int seed=0;seed<96;seed++) {
-            var rng=new Random(1733L+seed);var state=new M3ObjectStateSlots28();
+            var rng=new Random(1733L+seed);var state=new ObjectStateSlots28();
             long[] handles=new long[32];int[] expected=new int[32];
             for(int i=0;i<handles.length;i++){
                 expected[i]=rng.nextInt(256);handles[i]=state.allocate(expected[i]);

@@ -25,7 +25,7 @@ import java.util.Objects;
  * No retained Cell, Entry, Node, vendor adapter or per-occurrence object exists.
  *
  * <p>Existing {@link M3LinkedHashMap} directories intern distinct row/column keys;
- * {@link M3LongLongHashMap} indexes collision-free packed row/column IDs to
+ * {@link LongLongHashMap} indexes collision-free packed row/column IDs to
  * physical cell slots. Each axis has an independent contiguous primitive-link
  * directory. Slots recycle after deletion and clear their Java payload reference;
  * coordinate IDs recycle only after the last matching cell is removed; the
@@ -50,7 +50,7 @@ public final class M3IndexedTable<R, C, V> {
 
     private final M3LinkedHashMap<R, Integer> rowDirectory = new M3LinkedHashMap<>();
     private final M3LinkedHashMap<C, Integer> columnDirectory = new M3LinkedHashMap<>();
-    private final M3LongLongHashMap pairToSlot = new M3LongLongHashMap();
+    private final LongLongHashMap pairToSlot = new LongLongHashMap();
 
     private Object[] rowKeys = M3SlotArrays.EMPTY_OBJECTS;
     private Object[] columnKeys = M3SlotArrays.EMPTY_OBJECTS;

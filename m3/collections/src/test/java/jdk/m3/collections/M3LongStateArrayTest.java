@@ -167,17 +167,17 @@ final class M3LongStateArrayTest {
         owner.add(Long.MAX_VALUE, 3);
         owner.add(0, -1);
         var snapshot = owner.snapshot();
-        var javaResult = snapshot.prepare(0x8000_0000, 2, M3IndexPathMasks.Backend.JAVA);
+        var javaResult = snapshot.prepare(0x8000_0000, 2, IndexPathMasks.Backend.JAVA);
         assertArrayEquals(new long[] {-1}, javaResult.toArray());
-        if (M3IndexPathMasks.nativeAvailable()) {
+        if (IndexPathMasks.nativeAvailable()) {
             var nativeResult = snapshot.prepare(0x8000_0000, 2,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                    IndexPathMasks.Backend.NATIVE_REQUIRED);
             assertArrayEquals(javaResult.toArray(), nativeResult.toArray());
             assertEquals(javaResult.sourceOrdinal(0), nativeResult.sourceOrdinal(0));
         } else {
             assertThrows(UnsatisfiedLinkError.class, () ->
                     snapshot.prepare(0x8000_0000, 2,
-                            M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                            IndexPathMasks.Backend.NATIVE_REQUIRED));
         }
         assertArrayEquals(new long[]{-1, Long.MIN_VALUE, 0},
                 snapshot.prepare(0x8000_0000, 0).toArray());
@@ -212,6 +212,6 @@ final class M3LongStateArrayTest {
                 .map(java.lang.reflect.Field::getType)
                 .toList();
         assertEquals(3, types.size());
-        assertEquals(Set.of(M3LongArrayList.class, int[].class, long.class), Set.copyOf(types));
+        assertEquals(Set.of(LongArrayList.class, int[].class, long.class), Set.copyOf(types));
     }
 }

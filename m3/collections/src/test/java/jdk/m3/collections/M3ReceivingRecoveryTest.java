@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 /** Current-target integration oracle; historical superseded contracts stay frozen separately. */
 final class M3ReceivingRecoveryTest {
     @Test void restoredSequenceAndCurrentListAreOneOwnerThroughTheFactory() {
-        M3LongArrayList owner = M3Collections.longArrayList(0);
-        M3LongList current = owner;
+        LongArrayList owner = M3Collections.longArrayList(0);
+        LongList current = owner;
         M3LongSequence restored = current;
         assertSame(owner, restored);
         assertEquals(0, restored.capacity());
@@ -35,7 +35,7 @@ final class M3ReceivingRecoveryTest {
 
     @Test void restoredFactoryKeepsCurrentSmallListSortInvalidation() {
         for (int size = 0; size <= 1; size++) {
-            M3LongList list = M3Collections.longArrayList();
+            LongList list = M3Collections.longArrayList();
             if (size == 1) list.add(7);
             var cursor = list.iterator();
             list.sort();
@@ -44,7 +44,7 @@ final class M3ReceivingRecoveryTest {
     }
 
     @Test void restoredDequeFactoryKeepsCurrentCallbackFailureAndNoOpSemantics() {
-        M3LongDeque deque = M3Collections.longArrayDeque(8);
+        LongDeque deque = M3Collections.longArrayDeque(8);
         for (long value = 1; value <= 5; value++) deque.addLast(value);
         var unchanged = deque.iterator();
         assertEquals(0, deque.filterInPlace(value -> true));

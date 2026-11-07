@@ -57,7 +57,7 @@ final class M3PrimitiveHashSetAlgebraTest {
 
     @Test
     void allPrimitiveKindsUseTheirExistingEqualityRules() {
-        for (M3PrimitiveKind kind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind kind : PrimitiveKind.values()) {
             M3PrimitiveHashSet left = new M3PrimitiveHashSet(kind);
             M3PrimitiveHashSet right = new M3PrimitiveHashSet(kind);
             left.addBits(0L);
@@ -70,8 +70,8 @@ final class M3PrimitiveHashSetAlgebraTest {
             M3PrimitiveHashSet intersection = left.intersection(right);
             M3PrimitiveHashSet difference = left.difference(right);
 
-            int expectedUnion = kind == M3PrimitiveKind.BOOLEAN ? 2 : 4;
-            int expectedDifference = kind == M3PrimitiveKind.BOOLEAN ? 1 : 2;
+            int expectedUnion = kind == PrimitiveKind.BOOLEAN ? 2 : 4;
+            int expectedDifference = kind == PrimitiveKind.BOOLEAN ? 1 : 2;
             assertEquals(expectedUnion, union.size(), kind.name());
             assertEquals(1, intersection.size(), kind.name());
             assertEquals(expectedDifference, difference.size(), kind.name());
@@ -80,7 +80,7 @@ final class M3PrimitiveHashSetAlgebraTest {
 
     @Test
     void floatingNaNsAndSignedZerosFollowPrimitiveKindIdentity() {
-        M3PrimitiveHashSet floats = new M3PrimitiveHashSet(M3PrimitiveKind.FLOAT);
+        M3PrimitiveHashSet floats = new M3PrimitiveHashSet(PrimitiveKind.FLOAT);
         long nanA = Integer.toUnsignedLong(0x7fc00001);
         long nanB = Integer.toUnsignedLong(0x7fc00002);
         long negativeZero = Integer.toUnsignedLong(0x80000000);
@@ -92,7 +92,7 @@ final class M3PrimitiveHashSetAlgebraTest {
         assertTrue(floats.addBits(positiveZero));
         assertEquals(3, floats.size());
 
-        M3PrimitiveHashSet other = new M3PrimitiveHashSet(M3PrimitiveKind.FLOAT);
+        M3PrimitiveHashSet other = new M3PrimitiveHashSet(PrimitiveKind.FLOAT);
         other.addBits(nanB);
         other.addBits(positiveZero);
         assertEquals(2, floats.intersection(other).size());
@@ -100,8 +100,8 @@ final class M3PrimitiveHashSetAlgebraTest {
 
     @Test
     void kindMismatchFailsBeforeMutation() {
-        M3PrimitiveHashSet ints = new M3PrimitiveHashSet(M3PrimitiveKind.INT);
-        M3PrimitiveHashSet longs = new M3PrimitiveHashSet(M3PrimitiveKind.LONG);
+        M3PrimitiveHashSet ints = new M3PrimitiveHashSet(PrimitiveKind.INT);
+        M3PrimitiveHashSet longs = new M3PrimitiveHashSet(PrimitiveKind.LONG);
         ints.addBits(1);
         longs.addBits(1);
 
@@ -114,7 +114,7 @@ final class M3PrimitiveHashSetAlgebraTest {
     }
 
     private static M3PrimitiveHashSet longs(long... values) {
-        M3PrimitiveHashSet result = new M3PrimitiveHashSet(M3PrimitiveKind.LONG);
+        M3PrimitiveHashSet result = new M3PrimitiveHashSet(PrimitiveKind.LONG);
         for (long value : values) result.addBits(value);
         return result;
     }

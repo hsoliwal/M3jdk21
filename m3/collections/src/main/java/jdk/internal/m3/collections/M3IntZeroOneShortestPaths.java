@@ -15,8 +15,8 @@
 package jdk.internal.m3.collections;
 
 import java.util.Arrays;
-import jdk.m3.collections.M3IntArrayDeque;
-import jdk.m3.collections.M3IntLongAdjacencyGraph;
+import jdk.m3.collections.IntArrayDeque;
+import jdk.m3.collections.graph.IntLongAdjacencyGraph;
 
 /**
  * 0-1 BFS shortest paths with one primitive ring deque.
@@ -29,7 +29,7 @@ public final class M3IntZeroOneShortestPaths {
     private M3IntZeroOneShortestPaths() {}
 
     /** Unreachable vertices are Integer.MAX_VALUE. All edge weights must be exactly 0 or 1. */
-    public static int[] distances(M3IntLongAdjacencyGraph graph, int source) {
+    public static int[] distances(IntLongAdjacencyGraph graph, int source) {
         int n = graph.vertexCount();
         if (source < 0 || source >= n) throw new IndexOutOfBoundsException(source);
 
@@ -37,7 +37,7 @@ public final class M3IntZeroOneShortestPaths {
         Arrays.fill(distance, Integer.MAX_VALUE);
         distance[source] = 0;
 
-        M3IntArrayDeque deque = new M3IntArrayDeque(Math.max(2, n));
+        IntArrayDeque deque = new IntArrayDeque(Math.max(2, n));
         deque.addLast(source);
 
         while (!deque.isEmpty()) {

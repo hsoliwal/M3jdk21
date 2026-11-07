@@ -36,7 +36,7 @@ final class M3LongArrayDequeTest {
 
     @Test
     void primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams() {
-        var actual = new M3LongArrayDeque(0);
+        var actual = new LongArrayDeque(0);
         var expected = new ArrayDeque<Long>();
         Random random = new Random(0x4d334445515545L);
         for (int step = 0; step < 6_000; step++) {
@@ -100,13 +100,13 @@ final class M3LongArrayDequeTest {
         assertThrows(NoSuchElementException.class, actual::first);
         assertThrows(NoSuchElementException.class, actual::last);
         assertThrows(IndexOutOfBoundsException.class, () -> actual.get(0));
-        assertThrows(IllegalArgumentException.class, () -> new M3LongArrayDeque(-1));
+        assertThrows(IllegalArgumentException.class, () -> new LongArrayDeque(-1));
     }
 
     @Test
     void callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap() {
         for (int failAt = 0; failAt < 16; failAt++) {
-            var deque = new M3LongArrayDeque(8);
+            var deque = new LongArrayDeque(8);
             // Nonzero head so the logical range wraps around the physical ring.
             for (int i = 0; i < 5; i++) { deque.addLast(-1); }
             for (int i = 0; i < 5; i++) { deque.removeFirstLong(); }
@@ -127,7 +127,7 @@ final class M3LongArrayDequeTest {
             assertArrayEquals(values(expected), deque.toArray());
             assertEquals(expected.size(), deque.size());
         }
-        var deque = new M3LongArrayDeque();
+        var deque = new LongArrayDeque();
         deque.addLast(1);
         deque.addLast(2);
         deque.addLast(3);
@@ -147,7 +147,7 @@ final class M3LongArrayDequeTest {
 
     @Test
     void queueAndIndexedViewsAreJdkShapedAliases() {
-        var deque = new M3LongArrayDeque();
+        var deque = new LongArrayDeque();
         assertTrue(deque.offer(5));
         assertTrue(deque.offerLast(6));
         assertTrue(deque.offerFirst(4));

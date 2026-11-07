@@ -22,7 +22,7 @@ import java.util.Random;
 import java.util.function.LongPredicate;
 import jdk.internal.m3.collections.M3PrimitiveFilteredSequences;
 
-/** Protected public-API oracle; its backing payload is the actual M3LongArrayDeque. */
+/** Protected public-API oracle; its backing payload is the actual LongArrayDeque. */
 public final class M3FilteredDequeDispatchProof {
     private int checks;
 
@@ -46,7 +46,7 @@ public final class M3FilteredDequeDispatchProof {
         TapDeque owner = new TapDeque(tape);
         owner.offerAccepted = false;
         owner.addFailure = new IllegalStateException("capacity refused");
-        M3LongDeque view = M3PrimitiveFilteredSequences.deque(owner, value -> true);
+        LongDeque view = M3PrimitiveFilteredSequences.deque(owner, value -> true);
         Throwable actual = thrown(() -> insert(view, first, false, 42L));
         if (actual != owner.addFailure) {
             throw new AssertionError((first ? "addFirst" : "addLast")
@@ -70,7 +70,7 @@ public final class M3FilteredDequeDispatchProof {
                 for (boolean offer : new boolean[] {false, true}) {
                     StringBuilder tape = new StringBuilder();
                     TapDeque owner = new TapDeque(tape);
-                    M3LongDeque view = accepting(owner, tape, "P;");
+                    LongDeque view = accepting(owner, tape, "P;");
                     check(insert(view, first, offer, value), "accepted insertion");
                     check(tape.toString().equals("P;" + operation(first, offer)), "matching dispatch");
                     equal(inserted(owner.initial, first, value), owner.toArray(), "accepted payload");
@@ -83,7 +83,7 @@ public final class M3FilteredDequeDispatchProof {
                         owner.addFailure = failure;
                         owner.partial = partial;
                         owner.offerAccepted = false;
-                        M3LongDeque view = accepting(owner, tape, "P;");
+                        LongDeque view = accepting(owner, tape, "P;");
                         check(thrown(() -> insert(view, first, false, value)) == failure,
                                 "backing failure identity");
                         check(tape.toString().equals("P;" + operation(first, false)), "failure dispatch");
@@ -107,7 +107,7 @@ public final class M3FilteredDequeDispatchProof {
             for (boolean offer : new boolean[] {false, true}) {
                 StringBuilder tape = new StringBuilder();
                 TapDeque owner = new TapDeque(tape);
-                M3LongDeque readonly = M3PrimitiveFilteredSequences.readOnlyDeque(owner, value -> {
+                LongDeque readonly = M3PrimitiveFilteredSequences.readOnlyDeque(owner, value -> {
                     tape.append("P;");
                     throw new AssertionError("readonly filter evaluated");
                 });
@@ -116,7 +116,7 @@ public final class M3FilteredDequeDispatchProof {
                 check("read-only filtered collection".equals(refused.getMessage()), "readonly message");
                 check(tape.length() == 0, "readonly precedes predicate and owner");
                 equal(owner.initial, owner.toArray(), "readonly payload");
-                M3LongDeque rejected = M3PrimitiveFilteredSequences.deque(owner, value -> {
+                LongDeque rejected = M3PrimitiveFilteredSequences.deque(owner, value -> {
                     tape.append("P;");
                     return false;
                 });
@@ -128,7 +128,7 @@ public final class M3FilteredDequeDispatchProof {
                 for (Throwable failure : new Throwable[] {
                         new IllegalArgumentException("predicate failure"), new AssertionError("predicate error")}) {
                     tape.setLength(0);
-                    M3LongDeque throwing = M3PrimitiveFilteredSequences.deque(owner, value -> {
+                    LongDeque throwing = M3PrimitiveFilteredSequences.deque(owner, value -> {
                         tape.append("P;");
                         raise(failure);
                         return true;
@@ -147,26 +147,26 @@ public final class M3FilteredDequeDispatchProof {
             for (boolean offer : new boolean[] {false, true}) {
                 StringBuilder tape = new StringBuilder();
                 TapDeque owner = new TapDeque(tape);
-                M3LongDeque inner = accepting(owner, tape, "inner;");
-                M3LongDeque outer = accepting(inner, tape, "outer;");
+                LongDeque inner = accepting(owner, tape, "inner;");
+                LongDeque outer = accepting(inner, tape, "outer;");
                 check(insert(outer, first, offer, 2L), "nested insertion");
                 check(tape.toString().equals("outer;inner;" + operation(first, offer)), "nested order");
                 equal(inserted(owner.initial, first, 2L), owner.toArray(), "nested effects");
                 tape.setLength(0);
-                M3LongDeque innerReadonly = M3PrimitiveFilteredSequences.readOnlyDeque(owner, value -> {
+                LongDeque innerReadonly = M3PrimitiveFilteredSequences.readOnlyDeque(owner, value -> {
                     tape.append("forbidden;");
                     return true;
                 });
-                M3LongDeque nestedReadonly = accepting(innerReadonly, tape, "outer;");
+                LongDeque nestedReadonly = accepting(innerReadonly, tape, "outer;");
                 check(thrown(() -> insert(nestedReadonly, first, offer, 2L))
                         instanceof UnsupportedOperationException, "inner readonly refusal");
                 check(tape.toString().equals("outer;"), "inner readonly effect order");
                 tape.setLength(0);
-                M3LongDeque innerReject = M3PrimitiveFilteredSequences.deque(owner, value -> {
+                LongDeque innerReject = M3PrimitiveFilteredSequences.deque(owner, value -> {
                     tape.append("inner;");
                     return false;
                 });
-                M3LongDeque nestedReject = accepting(innerReject, tape, "outer;");
+                LongDeque nestedReject = accepting(innerReject, tape, "outer;");
                 check(thrown(() -> insert(nestedReject, first, offer, 3L))
                         instanceof IllegalArgumentException, "inner rejection");
                 check(tape.toString().equals("outer;inner;"), "nested rejection order");
@@ -177,8 +177,8 @@ public final class M3FilteredDequeDispatchProof {
     private void arrayOwnerWorkloads() {
         for (int seed = 0; seed < 400; seed++) {
             Random random = new Random(0x6d337f00L + seed);
-            M3LongArrayDeque owner = new M3LongArrayDeque(seed % 17);
-            M3LongDeque view = M3PrimitiveFilteredSequences.deque(owner, value -> (value & 1L) == 0L);
+            LongArrayDeque owner = new LongArrayDeque(seed % 17);
+            LongDeque view = M3PrimitiveFilteredSequences.deque(owner, value -> (value & 1L) == 0L);
             ArrayDeque<Long> model = new ArrayDeque<>();
             for (int step = 0; step < 80; step++) {
                 long even = step % 29 == 0 ? Long.MIN_VALUE : (random.nextInt(9) - 4L) * 2L;
@@ -222,15 +222,15 @@ public final class M3FilteredDequeDispatchProof {
         return null;
     }
 
-    private static long remove(M3LongDeque view, boolean first) {
+    private static long remove(LongDeque view, boolean first) {
         return first ? view.removeFirstLong() : view.removeLastLong();
     }
 
-    private static M3LongDeque accepting(M3LongDeque owner, StringBuilder tape, String label) {
+    private static LongDeque accepting(LongDeque owner, StringBuilder tape, String label) {
         return M3PrimitiveFilteredSequences.deque(owner, value -> { tape.append(label); return true; });
     }
 
-    private static boolean insert(M3LongDeque view, boolean first, boolean offer, long value) {
+    private static boolean insert(LongDeque view, boolean first, boolean offer, long value) {
         if (offer) return first ? view.offerFirst(value) : view.offerLast(value);
         if (first) view.addFirst(value); else view.addLast(value);
         return true;
@@ -267,9 +267,9 @@ public final class M3FilteredDequeDispatchProof {
         throw (Error) failure;
     }
 
-    private static final class TapDeque implements M3LongDeque {
+    private static final class TapDeque implements LongDeque {
         private final StringBuilder tape;
-        private final M3LongArrayDeque payload = new M3LongArrayDeque();
+        private final LongArrayDeque payload = new LongArrayDeque();
         private final long[] initial = {-3L, 2L, 7L, 2L};
         private boolean offerAccepted = true;
         private boolean partial;
@@ -307,8 +307,8 @@ public final class M3FilteredDequeDispatchProof {
         @Override public int capacity() { return payload.capacity(); }
         @Override public boolean contains(long value) { return payload.contains(value); }
         @Override public void clear() { payload.clear(); }
-        @Override public M3LongIterator iterator() { return payload.iterator(); }
-        @Override public M3LongIterator descendingIterator() { return payload.descendingIterator(); }
+        @Override public LongIterator iterator() { return payload.iterator(); }
+        @Override public LongIterator descendingIterator() { return payload.descendingIterator(); }
         @Override public long[] toArray() { return payload.toArray(); }
         @Override public long get(int index) { return payload.get(index); }
         @Override public long getFirst() { return payload.getFirst(); }

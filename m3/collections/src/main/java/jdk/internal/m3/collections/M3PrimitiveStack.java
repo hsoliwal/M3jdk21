@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import jdk.m3.collections.M3PrimitiveArrayList;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * LIFO semantics over the shared exact-width primitive list core.
@@ -29,11 +29,11 @@ import jdk.m3.collections.M3PrimitiveKind;
 public final class M3PrimitiveStack {
     private final M3PrimitiveArrayList values;
 
-    public M3PrimitiveStack(M3PrimitiveKind kind) {
+    public M3PrimitiveStack(PrimitiveKind kind) {
         values = new M3PrimitiveArrayList(Objects.requireNonNull(kind, "kind"));
     }
 
-    public M3PrimitiveKind kind() { return values.kind(); }
+    public PrimitiveKind kind() { return values.kind(); }
     public int size() { return values.size(); }
     public boolean isEmpty() { return values.isEmpty(); }
     public long payloadBytes() { return values.payloadBytes(); }

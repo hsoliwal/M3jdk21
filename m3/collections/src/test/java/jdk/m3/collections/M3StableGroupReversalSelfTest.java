@@ -92,12 +92,12 @@ public final class M3StableGroupReversalSelfTest {
         M3IndexedListSnapshot<Integer> owner = M3IndexedListSnapshot.copyOf(input);
         int[] states = {1, 0, 1, 1, 0, 1, 1};
         M3IndexedListSnapshot<Integer> javaSelection = owner.maskedByPhysicalState(
-                states, 1, 0, M3IndexPathMasks.Backend.JAVA);
+                states, 1, 0, IndexPathMasks.Backend.JAVA);
         M3IndexedListSnapshot<Integer> javaOrdered = javaSelection.sortedDescending(c);
         check(javaOrdered.size() == 5, "precomputed physical-mask admission");
-        if (M3IndexPathMasks.nativeAvailable()) {
+        if (IndexPathMasks.nativeAvailable()) {
             M3IndexedListSnapshot<Integer> nativeSelection = owner.maskedByPhysicalState(
-                    states, 1, 0, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                    states, 1, 0, IndexPathMasks.Backend.NATIVE_REQUIRED);
             M3IndexedListSnapshot<Integer> nativeOrdered = nativeSelection.sortedDescending(c);
             check(Arrays.equals(javaOrdered.physicalIndices(), nativeOrdered.physicalIndices()),
                     "existing Java/JNI mask selection and stable sorting parity");

@@ -17,7 +17,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
- * Finite differential comparison of {@link M3LongLongLinkedHashMap} against
+ * Finite differential comparison of {@link LongLongLinkedHashMap} against
  * {@code LinkedHashMap<Long, Long>} (a {@code SequencedMap}); this is not JDK replacement proof.
  * Zero, the extrema and a dense small key range are over-represented as keys and values so
  * tombstones, compaction and growth rehashes are exercised with encounter order and value
@@ -50,7 +50,7 @@ final class M3LongLongLinkedHashMapTest {
         return map.sequencedValues().reversed().stream().mapToLong(Long::longValue).toArray();
     }
 
-    private static void assertSameOrder(LinkedHashMap<Long, Long> expected, M3LongLongLinkedHashMap actual) {
+    private static void assertSameOrder(LinkedHashMap<Long, Long> expected, LongLongLinkedHashMap actual) {
         assertArrayEquals(keys(expected), actual.keysToArray());
         assertArrayEquals(values(expected), actual.valuesToArray());
         assertArrayEquals(reversedKeys(expected), actual.reversedKeysToArray());
@@ -64,7 +64,7 @@ final class M3LongLongLinkedHashMapTest {
         });
         assertArrayEquals(keys(expected), seenKeys);
         assertArrayEquals(values(expected), seenValues);
-        M3LongIterator iterator = actual.keyIterator();
+        LongIterator iterator = actual.keyIterator();
         for (long key : keys(expected)) {
             assertTrue(iterator.hasNext());
             assertEquals(key, iterator.nextLong());
@@ -75,7 +75,7 @@ final class M3LongLongLinkedHashMapTest {
     @Test
     void matchesJdkSequencedMapAcrossChurnIncludingMovesAndRehash() {
         Random random = new Random(0x4d334c4c4c484dL);
-        M3LongLongLinkedHashMap actual = new M3LongLongLinkedHashMap();
+        LongLongLinkedHashMap actual = new LongLongLinkedHashMap();
         LinkedHashMap<Long, Long> expected = new LinkedHashMap<>();
         for (int step = 0; step < 40_000; step++) {
             long k = value(random, step);
@@ -137,9 +137,9 @@ final class M3LongLongLinkedHashMapTest {
 
     @Test
     void edgeContractsFailFastAndSizing() {
-        M3LongLongLinkedHashMap map = new M3LongLongLinkedHashMap(0);
+        LongLongLinkedHashMap map = new LongLongLinkedHashMap(0);
         assertEquals(8, map.capacity());
-        assertThrows(IllegalArgumentException.class, () -> new M3LongLongLinkedHashMap(-1));
+        assertThrows(IllegalArgumentException.class, () -> new LongLongLinkedHashMap(-1));
         assertThrows(NoSuchElementException.class, map::firstKey);
         assertThrows(NoSuchElementException.class, map::lastKey);
         assertThrows(NoSuchElementException.class, map::firstValue);
@@ -168,7 +168,7 @@ final class M3LongLongLinkedHashMapTest {
         assertTrue(map.replace(0L, 3L, 4L));
         assertFalse(map.replace(0L, 3L, 5L));
         assertFalse(map.remove(0L, 3L));
-        M3LongIterator iterator = map.keyIterator();
+        LongIterator iterator = map.keyIterator();
         assertEquals(Long.MAX_VALUE, iterator.nextLong());
         assertTrue(map.remove(0L, 4L));
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
@@ -178,7 +178,7 @@ final class M3LongLongLinkedHashMapTest {
         assertEquals(Long.MIN_VALUE, map.removeLast());
         assertTrue(map.isEmpty());
         map.clear();
-        M3LongIterator empty = map.keyIterator();
+        LongIterator empty = map.keyIterator();
         assertFalse(empty.hasNext());
         assertThrows(NoSuchElementException.class, empty::nextLong);
         // Grow across rehashes, delete two thirds (compaction); order and values must survive both.
@@ -207,7 +207,7 @@ final class M3LongLongLinkedHashMapTest {
 
     @Test
     void retainsOnlyPrimitiveLanes() {
-        var fields = Arrays.stream(M3LongLongLinkedHashMap.class.getDeclaredFields())
+        var fields = Arrays.stream(LongLongLinkedHashMap.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()

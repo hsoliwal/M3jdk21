@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.collections;
 
-import jdk.m3.collections.M3LongLongConsumer;
+import jdk.m3.collections.LongLongConsumer;
 
 /** Primitive-long bag/multiset contract. */
 //FLLDCIM: RELOCATE - donor blob 26af98f01de2 at commit d5ad5090d87e (repository, path, URL and digests: m3/collections/recipe/four-library-bags-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/four-library-bags-20261106/relocate.py v1
@@ -81,7 +81,7 @@ public interface M3PackedLongBagContract {
      *                 and the occurrence count as its second argument
      * @throws NullPointerException if consumer is null
      */
-    void forEachCount(M3LongLongConsumer consumer);
+    void forEachCount(LongLongConsumer consumer);
 
     /** Removes all occurrences from this bag. */
     void clear();

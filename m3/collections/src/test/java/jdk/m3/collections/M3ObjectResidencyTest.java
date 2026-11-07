@@ -16,7 +16,7 @@ final class M3ObjectResidencyTest {
         String text;
         Value(int id, String text) { this.canonicalId = id; this.text = text; }
     }
-    private static final class MemoryStore implements M3ObjectResidency.SpillStore {
+    private static final class MemoryStore implements ObjectResidency.SpillStore {
         final Map<Integer, byte[]> bytes = new HashMap<>();
         @Override public void write(int slot, byte[] value) { bytes.put(slot, value.clone()); }
         @Override public byte[] read(int slot) throws IOException {
@@ -26,7 +26,7 @@ final class M3ObjectResidencyTest {
         }
         @Override public void delete(int slot) { bytes.remove(slot); }
     }
-    private static final M3ObjectResidency.Codec<Value> CODEC = new M3ObjectResidency.Codec<>() {
+    private static final ObjectResidency.Codec<Value> CODEC = new ObjectResidency.Codec<>() {
         @Override public byte[] encode(Value value) {
             return (value.canonicalId + "\n" + value.text).getBytes(StandardCharsets.UTF_8);
         }
@@ -39,15 +39,15 @@ final class M3ObjectResidencyTest {
     };
 
     @Test void parentBitsRemainCanonicalAcrossProjectionRecreation() {
-        var arena = new M3ObjectResidency<String>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.RECREATE,
+        var arena = new ObjectResidency<String>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.RECREATE,
                 8, 0, slot -> "projection-" + slot, null, null);
         arena.writeParentBits(0, 0b0010L);
         assertEquals(0b0110L, arena.updateParentBits(0, bits -> bits | 0b0100L));
         assertEquals(0b0110L, arena.readParentBits(0));
         arena.use(0, 8, value -> value.length());
         arena.use(1, 8, value -> value.length()); // LRU releases slot 0 projection.
-        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(ObjectResidency.State.ABSENT, arena.state(0));
         assertEquals(0b0110L, arena.readParentBits(0));
         assertEquals("projection-0", arena.use(0, 8, value -> value));
         assertEquals(0b0110L, arena.readParentBits(0));
@@ -55,26 +55,26 @@ final class M3ObjectResidencyTest {
 
 
     @Test void exposedProjectionIsPinnedAndNeverSilentlyReplaced() {
-        var arena = new M3ObjectResidency<StringBuilder>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU
-                        | M3ObjectResidency.RECREATE | M3ObjectResidency.PIN_EXPOSED,
+        var arena = new ObjectResidency<StringBuilder>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU
+                        | ObjectResidency.RECREATE | ObjectResidency.PIN_EXPOSED,
                 8, 0, slot -> new StringBuilder("slot-" + slot), null, null);
         StringBuilder exposed = arena.use(0, 8, value -> value);
         assertEquals("slot-0", exposed.toString());
-        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+        assertThrows(ObjectResidency.BudgetExceededException.class,
                 () -> arena.use(1, 8, value -> value.append("x").length()));
-        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
         assertEquals("slot-0", exposed.toString());
     }
 
     @Test void exposedInstallIsPinnedFromTheMomentItEntersTheArena() {
-        var arena = new M3ObjectResidency<StringBuilder>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU
-                        | M3ObjectResidency.RECREATE | M3ObjectResidency.PIN_EXPOSED,
+        var arena = new ObjectResidency<StringBuilder>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU
+                        | ObjectResidency.RECREATE | ObjectResidency.PIN_EXPOSED,
                 8, 0, slot -> new StringBuilder("slot-" + slot), null, null);
         StringBuilder installed = new StringBuilder("externally-held");
         arena.install(0, installed, 8);
-        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+        assertThrows(ObjectResidency.BudgetExceededException.class,
                 () -> arena.use(1, 8, value -> value.length()));
         assertSame(installed, arena.use(0, 8, value -> value));
         assertEquals("externally-held", installed.toString());
@@ -82,93 +82,93 @@ final class M3ObjectResidencyTest {
 
     @Test void lazyCreateAndStableIntegerSlot() {
         java.util.concurrent.atomic.AtomicInteger creates = new java.util.concurrent.atomic.AtomicInteger();
-        var arena = new M3ObjectResidency<Value>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.PRESSURE_AWARE,
+        var arena = new ObjectResidency<Value>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.PRESSURE_AWARE,
                 1024, 0, slot -> { creates.incrementAndGet(); return new Value(slot, "v" + slot); },
                 null, null);
-        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(ObjectResidency.State.ABSENT, arena.state(0));
         assertEquals("v0", arena.use(0, 64, value -> value.text));
         assertEquals("v0", arena.use(0, 64, value -> value.text));
         assertEquals(1, creates.get());
-        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
     }
 
     @Test void swapsToSecondaryAndRestoresWithoutChangingLogicalValue() {
         var store = new MemoryStore();
-        var arena = new M3ObjectResidency<Value>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.SWAP_SECONDARY,
+        var arena = new ObjectResidency<Value>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.SWAP_SECONDARY,
                 64, 0, slot -> new Value(slot, "parent-state-" + slot), CODEC, store);
         arena.use(0, 48, value -> { value.text = "mutated"; return null; });
         arena.use(1, 48, value -> value.text);
-        assertEquals(M3ObjectResidency.State.SWAPPED, arena.state(0));
+        assertEquals(ObjectResidency.State.SWAPPED, arena.state(0));
         assertEquals("mutated", arena.use(0, 48, value -> value.text));
-        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
         assertFalse(store.bytes.containsKey(0));
     }
 
     @Test void neverEvictsActiveSlotAndReportsUnrecoverableBudget() {
-        var arena = new M3ObjectResidency<String>(1,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU,
+        var arena = new ObjectResidency<String>(1,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU,
                 8, 0, slot -> "v", null, null);
-        assertThrows(M3ObjectResidency.BudgetExceededException.class, () -> arena.use(0, 16, value -> value));
+        assertThrows(ObjectResidency.BudgetExceededException.class, () -> arena.use(0, 16, value -> value));
     }
 
     @Test void strictScopeRejectsReturningTheProjection() {
-        var arena = new M3ObjectResidency<Object>(1,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.STRICT_NO_ESCAPE,
+        var arena = new ObjectResidency<Object>(1,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.STRICT_NO_ESCAPE,
                 128, 0, slot -> new Object(), null, null);
         assertThrows(IllegalStateException.class, () -> arena.use(0, 8, value -> value));
     }
 
     @Test void rejectsUnknownFlagsAndIncompleteSwapConfiguration() {
         assertThrows(IllegalArgumentException.class, () ->
-                new M3ObjectResidency<Object>(1, 1 << 20, 128, 0, slot -> new Object(), null, null));
+                new ObjectResidency<Object>(1, 1 << 20, 128, 0, slot -> new Object(), null, null));
         assertThrows(IllegalArgumentException.class, () ->
-                new M3ObjectResidency<Object>(1, M3ObjectResidency.SWAP_SECONDARY,
+                new ObjectResidency<Object>(1, ObjectResidency.SWAP_SECONDARY,
                         128, 0, slot -> new Object(), null, null));
     }
 
     @Test void lruDoesNotSpinWhenNoEvictionStrategyIsConfigured() {
-        var arena = new M3ObjectResidency<String>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU,
+        var arena = new ObjectResidency<String>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU,
                 16, 0, slot -> "slot-" + slot, null, null);
         arena.use(0, 8, value -> value.length());
-        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+        assertThrows(ObjectResidency.BudgetExceededException.class,
                 () -> arena.use(1, 16, value -> value.length()));
     }
 
     @Test void recreatesOnlyFromCanonicalParentState() {
         String[] parentState = {"initial", "other"};
-        var arena = new M3ObjectResidency<String>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.RECREATE,
+        var arena = new ObjectResidency<String>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.RECREATE,
                 8, 0, slot -> parentState[slot], null, null);
         assertEquals("initial", arena.use(0, 8, value -> value));
         parentState[0] = "updated-in-parent";
         arena.use(1, 8, value -> value.length());
-        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(ObjectResidency.State.ABSENT, arena.state(0));
         assertEquals("updated-in-parent", arena.use(0, 8, value -> value));
     }
 
     @Test void failedSwapLeavesOriginalProjectionResident() {
-        M3ObjectResidency.SpillStore failing = new M3ObjectResidency.SpillStore() {
+        ObjectResidency.SpillStore failing = new ObjectResidency.SpillStore() {
             @Override public void write(int slot, byte[] bytes) throws IOException {
                 throw new IOException("disk full");
             }
             @Override public byte[] read(int slot) throws IOException { throw new IOException("missing"); }
             @Override public void delete(int slot) { }
         };
-        var arena = new M3ObjectResidency<String>(2,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU | M3ObjectResidency.SWAP_SECONDARY,
-                8, 0, slot -> "v" + slot, new M3ObjectResidency.Codec<>() {
+        var arena = new ObjectResidency<String>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.SWAP_SECONDARY,
+                8, 0, slot -> "v" + slot, new ObjectResidency.Codec<>() {
                     @Override public byte[] encode(String value) { return value.getBytes(StandardCharsets.UTF_8); }
                     @Override public String decode(int slot, byte[] bytes) {
                         return new String(bytes, StandardCharsets.UTF_8);
                     }
                 }, failing);
         arena.use(0, 8, value -> value.length());
-        assertThrows(M3ObjectResidency.ResidencyException.class,
+        assertThrows(ObjectResidency.ResidencyException.class,
                 () -> arena.use(1, 8, value -> value.length()));
-        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
         assertEquals("v0", arena.use(0, 8, value -> value));
     }
 
@@ -185,7 +185,7 @@ final class M3ObjectResidencyTest {
     }
 
     static final class AnnotatedProjection {
-        @M3Residency(flags = M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.SWAP_SECONDARY,
+        @M3Residency(flags = ObjectResidency.LAZY_CREATE | ObjectResidency.SWAP_SECONDARY,
                 estimatedBytes = 128, parent = "owner", strategy = M3Residency.Strategy.SWAP)
         Object marker;
     }

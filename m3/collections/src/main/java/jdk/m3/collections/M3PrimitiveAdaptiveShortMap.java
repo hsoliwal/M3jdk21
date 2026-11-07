@@ -37,15 +37,15 @@ public final class M3PrimitiveAdaptiveShortMap {
         void accept(short key, long valueBits);
     }
 
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind valueKind;
     private M3PrimitivePrimitiveHashMap sparse;
     private M3PrimitiveDirectShortMap direct;
 
-    public M3PrimitiveAdaptiveShortMap(M3PrimitiveKind valueKind) {
+    public M3PrimitiveAdaptiveShortMap(PrimitiveKind valueKind) {
         this(valueKind, 16);
     }
 
-    public M3PrimitiveAdaptiveShortMap(M3PrimitiveKind valueKind, int expectedSize) {
+    public M3PrimitiveAdaptiveShortMap(PrimitiveKind valueKind, int expectedSize) {
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         if (expectedSize < 0 || expectedSize > DOMAIN_SIZE) {
             throw new IllegalArgumentException("expectedSize must be 0..65536");
@@ -54,11 +54,11 @@ public final class M3PrimitiveAdaptiveShortMap {
             direct = new M3PrimitiveDirectShortMap(valueKind);
         } else {
             sparse = new M3PrimitivePrimitiveHashMap(
-                    M3PrimitiveKind.SHORT, valueKind, Math.max(1, expectedSize), LOAD_FACTOR);
+                    PrimitiveKind.SHORT, valueKind, Math.max(1, expectedSize), LOAD_FACTOR);
         }
     }
 
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int size() { return direct != null ? direct.size() : sparse.size(); }
     public boolean isEmpty() { return size() == 0; }
     public boolean isDirect() { return direct != null; }
@@ -136,7 +136,7 @@ public final class M3PrimitiveAdaptiveShortMap {
 
     private long sparsePayloadBytes(int expectedSize) {
         int capacity = M3DenseHash.capacityFor(expectedSize, LOAD_FACTOR);
-        long bytesPerSlot = M3PrimitiveKind.SHORT.widthBytes()
+        long bytesPerSlot = PrimitiveKind.SHORT.widthBytes()
                 + (long) valueKind.widthBytes()
                 + Byte.BYTES;
         return bytesPerSlot * capacity;
@@ -152,7 +152,7 @@ public final class M3PrimitiveAdaptiveShortMap {
 
     private void migrateToSparse() {
         M3PrimitivePrimitiveHashMap next = new M3PrimitivePrimitiveHashMap(
-                M3PrimitiveKind.SHORT, valueKind, Math.max(1, direct.size()), LOAD_FACTOR);
+                PrimitiveKind.SHORT, valueKind, Math.max(1, direct.size()), LOAD_FACTOR);
         direct.forEach((key, valueBits) -> next.putBits(key, valueBits, 0L));
         sparse = next;
         direct = null;

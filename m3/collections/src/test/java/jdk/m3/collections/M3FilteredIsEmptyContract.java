@@ -119,7 +119,7 @@ public final class M3FilteredIsEmptyContract {
             recorded.events.add("PREDICATE:" + x);
             return x != null && x >= threshold;
         };
-        Collection<Integer> view = M3CollectionViews.filtered((Collection<Integer>) recorded, filter);
+        Collection<Integer> view = CollectionViews.filtered((Collection<Integer>) recorded, filter);
         Result before = capture(recorded, () -> view.iterator().hasNext());
         Result after = capture(recorded, () -> !view.isEmpty());
         equal(before, after, "recorded collection");
@@ -128,7 +128,7 @@ public final class M3FilteredIsEmptyContract {
 
     private static void verifyPredicateFailure(RuntimeException fail) {
         Recorded backing = new Recorded(List.of(1, 2, 3));
-        Collection<Integer> view = M3CollectionViews.filtered((Collection<Integer>) backing, x -> {
+        Collection<Integer> view = CollectionViews.filtered((Collection<Integer>) backing, x -> {
             backing.events.add("PREDICATE:" + x);
             if (x == 2) throw fail;
             return false;
@@ -145,7 +145,7 @@ public final class M3FilteredIsEmptyContract {
         for (Collection<Integer> input : List.of(list, set, navigable, sorted)) {
             for (int limit : new int[]{0, 1, 4, 5, 6}) {
                 List<Integer> trace = new ArrayList<>();
-                Collection<Integer> view = M3CollectionViews.filtered(input, x -> {
+                Collection<Integer> view = CollectionViews.filtered(input, x -> {
                     trace.add(x);
                     return x >= limit;
                 });
@@ -162,7 +162,7 @@ public final class M3FilteredIsEmptyContract {
 
     private static void verifyLiveBacking() {
         List<Integer> backing = new ArrayList<>(List.of(1, 2));
-        Collection<Integer> view = M3CollectionViews.filtered(backing, x -> x > 10);
+        Collection<Integer> view = CollectionViews.filtered(backing, x -> x > 10);
         must(view.isEmpty(), "initially empty");
         backing.add(11);
         must(!view.isEmpty(), "late backing addition visible");

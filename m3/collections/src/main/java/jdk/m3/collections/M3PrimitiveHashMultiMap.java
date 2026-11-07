@@ -35,8 +35,8 @@ public final class M3PrimitiveHashMultiMap {
         void accept(long keyBits, long valueBits);
     }
 
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private final boolean uniquePairs;
     private final M3PrimitivePrimitiveHashMap heads;
     private Object keys;
@@ -47,12 +47,12 @@ public final class M3PrimitiveHashMultiMap {
     private int freeHead = -1;
     private int size;
 
-    public M3PrimitiveHashMultiMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind) {
+    public M3PrimitiveHashMultiMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this(keyKind, valueKind, 16, false);
     }
 
     public M3PrimitiveHashMultiMap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind,
+            PrimitiveKind keyKind, PrimitiveKind valueKind,
             int initialCapacity, boolean uniquePairs) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
@@ -62,12 +62,12 @@ public final class M3PrimitiveHashMultiMap {
         values = valueKind.newArray(capacity);
         links = new int[capacity];
         occupied = new byte[capacity];
-        heads = new M3PrimitivePrimitiveHashMap(keyKind, M3PrimitiveKind.INT);
+        heads = new M3PrimitivePrimitiveHashMap(keyKind, PrimitiveKind.INT);
         this.uniquePairs = uniquePairs;
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public boolean uniquePairs() { return uniquePairs; }
     public int size() { return size; }
     public int keyCount() { return heads.size(); }
@@ -212,7 +212,7 @@ public final class M3PrimitiveHashMultiMap {
     /**
      * Copies a key's values into a caller-owned exact-width primitive array in
      * the same newest-first order as forEachValueBits. Missing keys yield an
-     * empty array. Boolean lanes use byte[] as specified by M3PrimitiveKind.
+     * empty array. Boolean lanes use byte[] as specified by PrimitiveKind.
      */
     public Object valuesArrayBits(long keyBits) {
         Object result = valueKind.newArray(countKeyBits(keyBits));

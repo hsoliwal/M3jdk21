@@ -28,8 +28,8 @@ class M3ProviderBackedPrimitiveLongTreeTest {
                         13, 8, 12,
                         provider,
                         2,
-                        M3PrimitiveKind.LONG,
-                        M3PrimitiveKind.INT);
+                        PrimitiveKind.LONG,
+                        PrimitiveKind.INT);
 
         assertTrue(tree.logicalCapacity() > Integer.MAX_VALUE);
         assertEquals(2, tree.loadNextChildPage(ROOT));
@@ -67,7 +67,7 @@ class M3ProviderBackedPrimitiveLongTreeTest {
                         13, 8, 12,
                         provider,
                         2,
-                        M3PrimitiveKind.LONG);
+                        PrimitiveKind.LONG);
 
         tree.loadNextChildPage(ROOT);
         assertEquals(ROOT_CURSOR_2, tree.nextChildCursor(ROOT));
@@ -89,7 +89,7 @@ class M3ProviderBackedPrimitiveLongTreeTest {
                         13, 8, 12,
                         provider,
                         2,
-                        M3PrimitiveKind.LONG);
+                        PrimitiveKind.LONG);
 
         tree.loadNextChildPage(ROOT);
         tree.touch(CHILD_1);
@@ -126,7 +126,7 @@ class M3ProviderBackedPrimitiveLongTreeTest {
                         13, 8, 12,
                         noProgress,
                         2,
-                        M3PrimitiveKind.LONG);
+                        PrimitiveKind.LONG);
 
         assertThrows(
                 M3ProviderLoadException.class,
@@ -165,7 +165,7 @@ class M3ProviderBackedPrimitiveLongTreeTest {
                         13, 8, 12,
                         cycle,
                         2,
-                        M3PrimitiveKind.LONG);
+                        PrimitiveKind.LONG);
         assertEquals(1, cycleTree.loadNextChildPage(ROOT));
 
         assertThrows(

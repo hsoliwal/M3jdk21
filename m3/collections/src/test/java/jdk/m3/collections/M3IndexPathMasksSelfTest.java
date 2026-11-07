@@ -15,7 +15,7 @@ public final class M3IndexPathMasksSelfTest {
 
     public static void main(String[] args) {
         boolean nativeRun = args.length == 1 && "--native".equals(args[0]);
-        if (nativeRun && !M3IndexPathMasks.nativeAvailable()) {
+        if (nativeRun && !IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("required JNI library did not load");
         }
         boundaries(nativeRun);
@@ -30,62 +30,62 @@ public final class M3IndexPathMasksSelfTest {
                 {0x00, 0x08, 0x04, 0x08}};
         int[] need = {0x02, 0x08};
         int[] deny = {0x04, 0x01};
-        eq(new int[] {9, 9, 3}, M3IndexPathMasks.select(rows, locations, planes,
-                need, deny, 0, 6, 1, M3IndexPathMasks.Backend.JAVA));
-        eq(new int[] {3, 9, 9}, M3IndexPathMasks.select(rows, locations, planes,
-                need, deny, 3, 4, -1, M3IndexPathMasks.Backend.JAVA));
-        eq(new int[] {9, 9}, M3IndexPathMasks.select(rows, locations, planes,
-                need, deny, 0, 3, 2, M3IndexPathMasks.Backend.JAVA));
-        eq(0, M3IndexPathMasks.firstMatchingIndex(rows, locations, planes,
+        eq(new int[] {9, 9, 3}, IndexPathMasks.select(rows, locations, planes,
+                need, deny, 0, 6, 1, IndexPathMasks.Backend.JAVA));
+        eq(new int[] {3, 9, 9}, IndexPathMasks.select(rows, locations, planes,
+                need, deny, 3, 4, -1, IndexPathMasks.Backend.JAVA));
+        eq(new int[] {9, 9}, IndexPathMasks.select(rows, locations, planes,
+                need, deny, 0, 3, 2, IndexPathMasks.Backend.JAVA));
+        eq(0, IndexPathMasks.firstMatchingIndex(rows, locations, planes,
                 need, deny, 0, 6, 1));
-        eq(-1, M3IndexPathMasks.firstMatchingIndex(rows, locations, planes,
+        eq(-1, IndexPathMasks.firstMatchingIndex(rows, locations, planes,
                 new int[] {4, 0}, new int[] {0, 0}, 0, 6, 1));
-        eq(new int[0], M3IndexPathMasks.select(rows, locations, planes,
-                need, deny, rows.length, 0, 1, M3IndexPathMasks.Backend.JAVA));
+        eq(new int[0], IndexPathMasks.select(rows, locations, planes,
+                need, deny, rows.length, 0, 1, IndexPathMasks.Backend.JAVA));
         int[] originals = rows.clone();
-        M3IndexPathMasks.select(rows, locations, planes, need, deny,
-                0, 6, 1, M3IndexPathMasks.Backend.JAVA)[0] = 200;
+        IndexPathMasks.select(rows, locations, planes, need, deny,
+                0, 6, 1, IndexPathMasks.Backend.JAVA)[0] = 200;
         eq(originals, rows);
         if (nativeRun) {
-            eq(new int[] {9, 9, 3}, M3IndexPathMasks.select(rows, locations, planes,
-                    need, deny, 0, 6, 1, M3IndexPathMasks.Backend.NATIVE_REQUIRED));
-            eq(new int[] {3, 9, 9}, M3IndexPathMasks.select(rows, locations, planes,
-                    need, deny, 3, 4, -1, M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+            eq(new int[] {9, 9, 3}, IndexPathMasks.select(rows, locations, planes,
+                    need, deny, 0, 6, 1, IndexPathMasks.Backend.NATIVE_REQUIRED));
+            eq(new int[] {3, 9, 9}, IndexPathMasks.select(rows, locations, planes,
+                    need, deny, 3, 4, -1, IndexPathMasks.Backend.NATIVE_REQUIRED));
         }
-        fails(NullPointerException.class, () -> M3IndexPathMasks.select(null, locations,
-                planes, need, deny, 0, 1, 1, M3IndexPathMasks.Backend.JAVA));
-        fails(NullPointerException.class, () -> M3IndexPathMasks.select(rows, locations,
+        fails(NullPointerException.class, () -> IndexPathMasks.select(null, locations,
+                planes, need, deny, 0, 1, 1, IndexPathMasks.Backend.JAVA));
+        fails(NullPointerException.class, () -> IndexPathMasks.select(rows, locations,
                 new int[][] {null}, new int[] {0}, new int[] {0}, 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(NullPointerException.class, () -> M3IndexPathMasks.select(rows, locations,
+                IndexPathMasks.Backend.JAVA));
+        fails(NullPointerException.class, () -> IndexPathMasks.select(rows, locations,
                 planes, need, deny, 0, 1, 1, null));
-        fails(IllegalArgumentException.class, () -> M3IndexPathMasks.select(rows,
+        fails(IllegalArgumentException.class, () -> IndexPathMasks.select(rows,
                 new int[] {0}, planes, need, deny, 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IllegalArgumentException.class, () -> M3IndexPathMasks.select(rows,
+                IndexPathMasks.Backend.JAVA));
+        fails(IllegalArgumentException.class, () -> IndexPathMasks.select(rows,
                 locations, new int[0][], new int[0], new int[0], 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IllegalArgumentException.class, () -> M3IndexPathMasks.select(rows,
+                IndexPathMasks.Backend.JAVA));
+        fails(IllegalArgumentException.class, () -> IndexPathMasks.select(rows,
                 locations, planes, new int[] {1}, deny, 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.select(rows,
+                IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.select(rows,
                 locations, planes, need, deny, 0, 1, 0,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.select(rows,
+                IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.select(rows,
                 locations, planes, need, deny, 1, Integer.MAX_VALUE, Integer.MAX_VALUE,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.select(rows,
+                IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.select(rows,
                 locations, planes, need, deny, 0, 2, -1,
-                M3IndexPathMasks.Backend.JAVA));
+                IndexPathMasks.Backend.JAVA));
         int[] invalid = locations.clone();
         invalid[4] = Integer.MAX_VALUE;
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.select(rows,
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.select(rows,
                 invalid, planes, need, deny, 0, 6, 1,
-                M3IndexPathMasks.Backend.JAVA));
+                IndexPathMasks.Backend.JAVA));
         // Precomputed integer masks use all 32 bits (including the sign bit).
-        eq(new int[] {9}, M3IndexPathMasks.select(rows, locations, planes,
+        eq(new int[] {9}, IndexPathMasks.select(rows, locations, planes,
                 new int[] {Integer.MIN_VALUE, 0}, new int[] {4, 0},
-                0, 1, 1, M3IndexPathMasks.Backend.JAVA));
+                0, 1, 1, IndexPathMasks.Backend.JAVA));
     }
 
     private static void randomPaths(boolean nativeRun) {
@@ -138,11 +138,11 @@ public final class M3IndexPathMasksSelfTest {
             }
             int[] expected = oracle(rows, offsets, planes, required, forbidden,
                     first, count, stride);
-            eq(expected, M3IndexPathMasks.select(rows, offsets, planes, required,
-                    forbidden, first, count, stride, M3IndexPathMasks.Backend.JAVA));
+            eq(expected, IndexPathMasks.select(rows, offsets, planes, required,
+                    forbidden, first, count, stride, IndexPathMasks.Backend.JAVA));
             if (nativeRun) {
-                eq(expected, M3IndexPathMasks.select(rows, offsets, planes, required,
-                        forbidden, first, count, stride, M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                eq(expected, IndexPathMasks.select(rows, offsets, planes, required,
+                        forbidden, first, count, stride, IndexPathMasks.Backend.NATIVE_REQUIRED));
             }
             int expectedFirst = -1;
             if (expected.length > 0) {
@@ -154,7 +154,7 @@ public final class M3IndexPathMasksSelfTest {
                     }
                 }
             }
-            eq(expectedFirst, M3IndexPathMasks.firstMatchingIndex(rows, offsets,
+            eq(expectedFirst, IndexPathMasks.firstMatchingIndex(rows, offsets,
                     planes, required, forbidden, first, count, stride));
         }
     }

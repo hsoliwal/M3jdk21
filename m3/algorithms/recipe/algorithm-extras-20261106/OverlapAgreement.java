@@ -44,7 +44,7 @@ import jdk.m3.algorithm.M3StackAlgorithms;
 import jdk.m3.algorithm.M3StringAlgorithms;
 import jdk.m3.algorithm.M3StringTrie;
 import jdk.m3.algorithm.M3TreeAlgorithms;
-import jdk.m3.collections.M3LongFenwickTree;
+import jdk.m3.collections.range.LongFenwickTree;
 import jdk.m3.tools.cpu.M3ArrayGraph;
 import jdk.m3.tools.cpu.M3BipartiteMatching;
 import jdk.m3.tools.cpu.M3KnapsackSelection;
@@ -968,7 +968,7 @@ public final class OverlapAgreement {
     // ---------------------------------------------------------------- other owners
 
     private static void otherOwners() {
-        compare("RangeQueryStructures.FenwickTree (DROP_TYPE)", "jdk.m3.collections.M3LongFenwickTree", CASES, r -> {
+        compare("RangeQueryStructures.FenwickTree (DROP_TYPE)", "jdk.m3.collections.range.LongFenwickTree", CASES, r -> {
             int n = r.nextInt(0, 20);
             long[] values = new long[n];
             for (int i = 0; i < n; i++) {
@@ -979,10 +979,10 @@ public final class OverlapAgreement {
             StringBuilder donor = new StringBuilder();
             StringBuilder owner = new StringBuilder();
             RangeQueryStructures.FenwickTree[] d = new RangeQueryStructures.FenwickTree[1];
-            M3LongFenwickTree[] o = new M3LongFenwickTree[1];
+            LongFenwickTree[] o = new LongFenwickTree[1];
             donor.append(run(() -> (d[0] = fromValues ? new RangeQueryStructures.FenwickTree(values)
                     : new RangeQueryStructures.FenwickTree(n)).size()));
-            owner.append(run(() -> (o[0] = fromValues ? new M3LongFenwickTree(values) : new M3LongFenwickTree(n))
+            owner.append(run(() -> (o[0] = fromValues ? new LongFenwickTree(values) : new LongFenwickTree(n))
                     .size()));
             for (int op = 0; op < 15 && d[0] != null && o[0] != null; op++) {
                 int a = r.nextInt(-1, n + 1);
@@ -1057,7 +1057,7 @@ public final class OverlapAgreement {
         if (tree instanceof RangeQueryStructures.FenwickTree donor) {
             donor.add(index, delta);
         } else {
-            ((M3LongFenwickTree) tree).add(index, delta);
+            ((LongFenwickTree) tree).add(index, delta);
         }
         return "ok";
     }

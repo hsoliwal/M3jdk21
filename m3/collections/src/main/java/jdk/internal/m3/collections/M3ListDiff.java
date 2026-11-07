@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Arrays;
-import jdk.m3.collections.M3LongLongHashMap;
+import jdk.m3.collections.LongLongHashMap;
 
 /**
  * Diff between two keyed snapshots (diffable-snapshot pattern): the keys present in both, in an order that keeps the
@@ -23,7 +23,7 @@ import jdk.m3.collections.M3LongLongHashMap;
  * inserted, and a key that is removed and inserted is reported as a move. The result is an {@link M3Patch} of int
  * runs.
  * <p>Keys must be unique within each snapshot. Cost: O((n + m) log(n + m)) time, O(n + m) int lanes plus two
- * open-addressed key maps ({@link M3LongLongHashMap}); no entry objects.</p>
+ * open-addressed key maps ({@link LongLongHashMap}); no entry objects.</p>
  */
 public final class M3ListDiff {
 	private M3ListDiff () {
@@ -31,7 +31,7 @@ public final class M3ListDiff {
 
 	/** Diffs {@code before} into {@code after}; throws {@link IllegalArgumentException} on a duplicate key. */
 	public static M3Patch diff (long [] before, long [] after) {
-		M3LongLongHashMap newIndex = index (after, "after");
+		LongLongHashMap newIndex = index (after, "after");
 		index (before, "before");
 		int n = before.length;
 		/* positions in the new snapshot of the old keys that survive, in old order */
@@ -64,8 +64,8 @@ public final class M3ListDiff {
 		return new M3Patch (removes [0], removes [1], inserts [0], inserts [1], moveFrom, moveTo, kept);
 	}
 
-	private static M3LongLongHashMap index (long [] keys, String side) {
-		M3LongLongHashMap map = new M3LongLongHashMap (keys.length);
+	private static LongLongHashMap index (long [] keys, String side) {
+		LongLongHashMap map = new LongLongHashMap (keys.length);
 		for (int i = 0; i < keys.length; i++) {
 			if (!map.put (keys [i], i))
 				throw new IllegalArgumentException ("duplicate key in " + side + ": " + keys [i]);

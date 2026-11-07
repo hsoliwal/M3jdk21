@@ -8,14 +8,14 @@ import java.util.function.LongPredicate;
 import java.util.stream.LongStream;
 import jdk.internal.m3.collections.M3ForwardingLongSequence;
 
-/** Actual M3LongArrayList backend plus one-dispatch operation counters. */
+/** Actual LongArrayList backend plus one-dispatch operation counters. */
 //FLLDCIM: RELOCATE - donor blob c5ed056f42fe at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 final class M3PolicyProbe extends M3ForwardingLongSequence {
-    final M3LongArrayList data;
+    final LongArrayList data;
     int adds,addIfs,bulks,inserts,sets,removeAts,removes,filters,clears,trims;
     int eaches,spliterators,streams,parallelStreams;
     long[] lastBulk;
-    M3PolicyProbe(long... values){data=M3LongArrayList.copyOf(values);}
+    M3PolicyProbe(long... values){data=LongArrayList.copyOf(values);}
     @Override protected M3LongSequence delegate(){return data;}
     @Override public boolean add(long v){adds++;return data.add(v);}
     @Override public boolean addIf(long v,LongPredicate p) {

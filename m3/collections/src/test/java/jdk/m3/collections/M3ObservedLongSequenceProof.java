@@ -58,7 +58,7 @@ public final class M3ObservedLongSequenceProof {
         eq(1,rejected.failures());
         RuntimeException original=new IllegalArgumentException("backend");
         M3LongSequence hostile=new M3ForwardingLongSequence() {
-            final M3LongArrayList storage=new M3LongArrayList();
+            final LongArrayList storage=new LongArrayList();
             @Override protected M3LongSequence delegate(){return storage;}
             @Override public int size(){throw new IllegalStateException("size");}
             @Override public boolean add(long v){throw original;}

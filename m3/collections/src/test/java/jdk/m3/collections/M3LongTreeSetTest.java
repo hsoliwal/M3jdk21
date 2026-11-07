@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import jdk.internal.m3.collections.M3LongCompositeViews;
 
 /**
- * Finite differential comparison of {@link M3LongTreeSet} against {@code TreeSet<Long>} as a
+ * Finite differential comparison of {@link LongTreeSet} against {@code TreeSet<Long>} as a
  * {@code NavigableSet}; this is not JDK replacement proof. Zero, the extrema, a dense small range,
  * a moving cluster and monotone runs are over-represented so page splits at both ends and in the
  * interior, merges, free-slot reuse and lane growth are exercised with order checked throughout.
@@ -48,7 +48,7 @@ final class M3LongTreeSetTest {
         return values.stream().mapToLong(Long::longValue).toArray();
     }
 
-    private static void assertNavigation(NavigableSet<Long> expected, M3LongSortedSet actual, long pivot) {
+    private static void assertNavigation(NavigableSet<Long> expected, LongSortedSet actual, long pivot) {
         assertNavigated(expected.floor(pivot), actual.floor(pivot, FALLBACK));
         assertNavigated(expected.ceiling(pivot), actual.ceiling(pivot, FALLBACK));
         assertNavigated(expected.lower(pivot), actual.lower(pivot, FALLBACK));
@@ -59,7 +59,7 @@ final class M3LongTreeSetTest {
         assertEquals(expected == null ? FALLBACK : expected.longValue(), actual);
     }
 
-    private static void assertEnds(NavigableSet<Long> expected, M3LongSortedSet actual) {
+    private static void assertEnds(NavigableSet<Long> expected, LongSortedSet actual) {
         if (expected.isEmpty()) {
             assertTrue(actual.isEmpty());
             assertThrows(NoSuchElementException.class, actual::first);
@@ -70,7 +70,7 @@ final class M3LongTreeSetTest {
         }
     }
 
-    private static void differential(M3LongTreeSet actual, int steps, long seed) {
+    private static void differential(LongTreeSet actual, int steps, long seed) {
         Random random = new Random(seed);
         TreeSet<Long> expected = new TreeSet<>();
         for (int step = 0; step < steps; step++) {
@@ -86,7 +86,7 @@ final class M3LongTreeSetTest {
                     long from = Math.min(v, other);
                     long to = Math.max(v, other);
                     NavigableSet<Long> jdkSub = expected.subSet(from, true, to, false);
-                    M3LongSortedSet sub = M3LongSortedViews.subSet(actual, from, to);
+                    LongSortedSet sub = M3LongSortedViews.subSet(actual, from, to);
                     assertArrayEquals(order(jdkSub), sub.toArray());
                     assertEnds(jdkSub, sub);
                     assertNavigation(jdkSub, sub, value(random, step + 11));
@@ -113,7 +113,7 @@ final class M3LongTreeSetTest {
                     }
                 }
                 case 11 -> {
-                    M3LongIterator cursor = actual.iterator();
+                    LongIterator cursor = actual.iterator();
                     if (actual.add(v)) {
                         expected.add(v);
                         assertThrows(ConcurrentModificationException.class, cursor::hasNext);
@@ -145,17 +145,17 @@ final class M3LongTreeSetTest {
 
     @Test
     void matchesJdkNavigableSetAcrossChurnIncludingViewsAndFilters() {
-        differential(new M3LongTreeSet(), 40_000, 0x4d334c545345L);
+        differential(new LongTreeSet(), 40_000, 0x4d334c545345L);
     }
 
     @Test
     void matchesJdkNavigableSetWithTinyPages() {
-        differential(new M3LongTreeSet(0, 4), 10_000, 0x50414745345L);
+        differential(new LongTreeSet(0, 4), 10_000, 0x50414745345L);
     }
 
     @Test
     void growthSplitsPagesAndRemovalMergesAndTrimsThem() {
-        M3LongTreeSet set = new M3LongTreeSet();
+        LongTreeSet set = new LongTreeSet();
         TreeSet<Long> expected = new TreeSet<>();
         assertEquals(64, set.capacity());
         for (long i = 1; i <= 100_000; i++) {
@@ -210,12 +210,12 @@ final class M3LongTreeSetTest {
 
     @Test
     void edgeContractsFailFastAndSizing() {
-        M3LongTreeSet set = new M3LongTreeSet(0);
+        LongTreeSet set = new LongTreeSet(0);
         assertEquals(64, set.capacity());
         assertEquals(64, set.pageCapacity());
         assertEquals(0, set.pageCount());
-        assertThrows(IllegalArgumentException.class, () -> new M3LongTreeSet(-1));
-        assertThrows(IllegalArgumentException.class, () -> new M3LongTreeSet(0, 3));
+        assertThrows(IllegalArgumentException.class, () -> new LongTreeSet(-1));
+        assertThrows(IllegalArgumentException.class, () -> new LongTreeSet(0, 3));
         assertThrows(NoSuchElementException.class, set::first);
         assertThrows(NoSuchElementException.class, set::last);
         assertEquals(FALLBACK, set.floor(0, FALLBACK));
@@ -241,7 +241,7 @@ final class M3LongTreeSetTest {
         assertEquals(Long.MAX_VALUE, set.higher(1L, FALLBACK));
         assertEquals(0L, set.lower(Long.MAX_VALUE, FALLBACK));
         assertEquals(0L, set.higher(Long.MIN_VALUE, FALLBACK));
-        M3LongIterator iterator = set.iterator();
+        LongIterator iterator = set.iterator();
         assertEquals(Long.MIN_VALUE, iterator.nextLong());
         assertTrue(set.remove(0L));
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
@@ -254,7 +254,7 @@ final class M3LongTreeSetTest {
         assertArrayEquals(new long[] {Long.MIN_VALUE, Long.MAX_VALUE}, set.longStream().toArray());
         set.clear();
         set.clear();
-        M3LongIterator empty = set.iterator();
+        LongIterator empty = set.iterator();
         assertFalse(empty.hasNext());
         assertThrows(NoSuchElementException.class, empty::nextLong);
         assertEquals(64, set.capacity());
@@ -263,7 +263,7 @@ final class M3LongTreeSetTest {
 
     @Test
     void filterInPlaceCommitsPriorRejectionsAndKeepsTheThrowingSuffix() {
-        M3LongTreeSet set = new M3LongTreeSet(0, 4);
+        LongTreeSet set = new LongTreeSet(0, 4);
         for (long i = 1; i <= 10; i++) {
             assertTrue(set.add(i));
         }
@@ -283,7 +283,7 @@ final class M3LongTreeSetTest {
         assertEquals(3, set.filterInPlace(v -> v < 7 || v == 10));
         assertArrayEquals(new long[] {1, 3, 5, 10}, set.toArray());
         assertEquals(0, set.filterInPlace(v -> true));
-        M3LongIterator cursor = set.iterator();
+        LongIterator cursor = set.iterator();
         assertEquals(4, set.filterInPlace(v -> false));
         assertThrows(ConcurrentModificationException.class, cursor::hasNext);
         assertTrue(set.isEmpty());
@@ -294,13 +294,13 @@ final class M3LongTreeSetTest {
 
     @Test
     void sortedViewsAndUnionsWorkOverTheOwnerAsBackingSet() {
-        M3LongTreeSet actual = new M3LongTreeSet(0, 4);
+        LongTreeSet actual = new LongTreeSet(0, 4);
         TreeSet<Long> expected = new TreeSet<>();
         for (long i = -200; i <= 200; i += 3) {
             assertTrue(actual.add(i));
             expected.add(i);
         }
-        M3LongSortedSet sub = M3LongSortedViews.subSet(actual, -50, 50);
+        LongSortedSet sub = M3LongSortedViews.subSet(actual, -50, 50);
         NavigableSet<Long> jdk = expected.subSet(-50L, true, 50L, false);
         assertArrayEquals(order(jdk), sub.toArray());
         assertFalse(sub.add(7));
@@ -323,16 +323,16 @@ final class M3LongTreeSetTest {
         assertArrayEquals(order(expected), actual.toArray());
         assertEnds(expected.headSet(-100L, false), M3LongSortedViews.headSet(actual, -100));
         assertEnds(expected.tailSet(100L, true), M3LongSortedViews.tailSet(actual, 100));
-        M3LongSortedSet unmodifiable = M3LongSortedViews.unmodifiable(actual);
+        LongSortedSet unmodifiable = M3LongSortedViews.unmodifiable(actual);
         assertThrows(UnsupportedOperationException.class, () -> unmodifiable.add(1));
         assertEquals(expected.first().longValue(), unmodifiable.first());
-        M3LongTreeSet other = new M3LongTreeSet();
+        LongTreeSet other = new LongTreeSet();
         TreeSet<Long> union = new TreeSet<>(expected);
         for (long i = -205; i <= 205; i += 5) {
             other.add(i);
             union.add(i);
         }
-        M3LongSortedSet merged = M3LongCompositeViews.sortedUnion(actual, other);
+        LongSortedSet merged = M3LongCompositeViews.sortedUnion(actual, other);
         assertArrayEquals(order(union), merged.toArray());
         assertEnds(union, merged);
         assertNavigation(union, merged, 0);
@@ -343,7 +343,7 @@ final class M3LongTreeSetTest {
 
     @Test
     void retainsOnlyPrimitiveLanes() {
-        var fields = Arrays.stream(M3LongTreeSet.class.getDeclaredFields())
+        var fields = Arrays.stream(LongTreeSet.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()

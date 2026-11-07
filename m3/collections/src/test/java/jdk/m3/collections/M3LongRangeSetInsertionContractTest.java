@@ -17,12 +17,13 @@ import java.util.BitSet;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.range.LongRangeSet;
 
 /** Public-contract oracles independent of the insertion-position implementation. */
 final class M3LongRangeSetInsertionContractTest {
     @Test
     void emptyFrontTailGapAndTwoSidedTouchesRetainExactUnion() {
-        M3LongRangeSet set = new M3LongRangeSet();
+        LongRangeSet set = new LongRangeSet();
         assertRanges(set);
         set.add(10, 20);
         assertRanges(set, 10, 20);
@@ -44,15 +45,15 @@ final class M3LongRangeSetInsertionContractTest {
 
     @Test
     void oneSidedTouchAndOverlapDoNotAbsorbAnUncoveredGap() {
-        M3LongRangeSet left = ranges(10, 20, 30, 40);
+        LongRangeSet left = ranges(10, 20, 30, 40);
         left.add(0, 10);
         assertRanges(left, 0, 20, 30, 40);
 
-        M3LongRangeSet right = ranges(10, 20, 30, 40);
+        LongRangeSet right = ranges(10, 20, 30, 40);
         right.add(40, 50);
         assertRanges(right, 10, 20, 30, 50);
 
-        M3LongRangeSet overlap = ranges(10, 20, 30, 40, 50, 60);
+        LongRangeSet overlap = ranges(10, 20, 30, 40, 50, 60);
         overlap.add(15, 35);
         assertRanges(overlap, 10, 40, 50, 60);
         assertFalse(overlap.contains(40));
@@ -65,7 +66,7 @@ final class M3LongRangeSetInsertionContractTest {
         final int offset = 4;
         final int cells = 8;
         for (int mask = 0; mask < (1 << cells); mask++) {
-            M3LongRangeSet original = new M3LongRangeSet();
+            LongRangeSet original = new LongRangeSet();
             BitSet coverage = new BitSet(cells);
             for (int bit = 0; bit < cells; bit++) {
                 if ((mask & (1 << bit)) != 0) {
@@ -76,7 +77,7 @@ final class M3LongRangeSetInsertionContractTest {
             assertCoverage(original, coverage, offset, cells);
             for (int from = -offset; from <= offset; from++) {
                 for (int to = from; to <= offset; to++) {
-                    M3LongRangeSet candidate = original.snapshot();
+                    LongRangeSet candidate = original.snapshot();
                     BitSet expected = (BitSet) coverage.clone();
                     candidate.add(from, to);
                     expected.set(from + offset, to + offset);
@@ -89,7 +90,7 @@ final class M3LongRangeSetInsertionContractTest {
 
     @Test
     void containedIdenticalEmptyAndRejectedAddsPreserveStateAndCapacity() {
-        M3LongRangeSet set = ranges(10, 20, 30, 40);
+        LongRangeSet set = ranges(10, 20, 30, 40);
         int capacity = set.capacity();
         set.add(11, 19);
         set.add(30, 40);
@@ -104,7 +105,7 @@ final class M3LongRangeSetInsertionContractTest {
 
     @Test
     void nonstructuralAddsInsideRangeCallbackDoNotInvalidateTraversal() {
-        M3LongRangeSet set = ranges(10, 20, 30, 40);
+        LongRangeSet set = ranges(10, 20, 30, 40);
         List<Long> visited = new ArrayList<>();
         set.forEachRange((from, to) -> {
             visited.add(from);
@@ -119,7 +120,7 @@ final class M3LongRangeSetInsertionContractTest {
 
     @Test
     void structuralAddInsideCallbackFailsFastAfterPreservingMutation() {
-        M3LongRangeSet set = ranges(10, 20, 30, 40);
+        LongRangeSet set = ranges(10, 20, 30, 40);
         List<Long> visited = new ArrayList<>();
         assertThrows(ConcurrentModificationException.class, () ->
                 set.forEachRange((from, to) -> {
@@ -133,7 +134,7 @@ final class M3LongRangeSetInsertionContractTest {
 
     @Test
     void callbackExceptionIdentityAndPriorityArePreserved() {
-        M3LongRangeSet set = ranges(10, 20, 30, 40);
+        LongRangeSet set = ranges(10, 20, 30, 40);
         IllegalStateException marker = new IllegalStateException("callback marker");
         int[] visits = {0};
         IllegalStateException actual = assertThrows(IllegalStateException.class, () ->
@@ -147,13 +148,13 @@ final class M3LongRangeSetInsertionContractTest {
         assertRanges(set, 10, 20, 30, 40, 50, 60);
         assertThrows(NullPointerException.class, () -> set.forEachRange(null));
         assertThrows(NullPointerException.class,
-                () -> new M3LongRangeSet().forEachRange(null));
+                () -> new LongRangeSet().forEachRange(null));
     }
 
     @Test
     void snapshotsAndReturnedLanesRemainDetachedAcrossInsertions() {
-        M3LongRangeSet set = ranges(-10, -2, 4, 9);
-        M3LongRangeSet snapshot = set.snapshot();
+        LongRangeSet set = ranges(-10, -2, 4, 9);
+        LongRangeSet snapshot = set.snapshot();
         long[] exposedStarts = set.startsToArray();
         long[] exposedEnds = set.endsToArray();
         long[] snapshotStarts = snapshot.startsToArray();
@@ -178,7 +179,7 @@ final class M3LongRangeSetInsertionContractTest {
 
     @Test
     void signedExtremeTouchesPreserveExclusiveMaximumAndExactCardinality() {
-        M3LongRangeSet set = ranges(Long.MIN_VALUE, Long.MIN_VALUE + 1,
+        LongRangeSet set = ranges(Long.MIN_VALUE, Long.MIN_VALUE + 1,
                 -1, 1, Long.MAX_VALUE - 1, Long.MAX_VALUE);
         set.add(Long.MIN_VALUE + 1, -1);
         assertRanges(set, Long.MIN_VALUE, 1, Long.MAX_VALUE - 1, Long.MAX_VALUE);
@@ -196,15 +197,15 @@ final class M3LongRangeSetInsertionContractTest {
         assertRanges(set, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    private static M3LongRangeSet ranges(long... coordinates) {
-        M3LongRangeSet set = new M3LongRangeSet(coordinates.length / 2);
+    private static LongRangeSet ranges(long... coordinates) {
+        LongRangeSet set = new LongRangeSet(coordinates.length / 2);
         for (int i = 0; i < coordinates.length; i += 2) {
             set.add(coordinates[i], coordinates[i + 1]);
         }
         return set;
     }
 
-    private static void assertRanges(M3LongRangeSet set, long... coordinates) {
+    private static void assertRanges(LongRangeSet set, long... coordinates) {
         int count = coordinates.length / 2;
         long[] starts = new long[count];
         long[] ends = new long[count];
@@ -224,7 +225,7 @@ final class M3LongRangeSetInsertionContractTest {
         assertEquals(cardinality, set.cardinality());
     }
 
-    private static void assertCoverage(M3LongRangeSet set, BitSet expected,
+    private static void assertCoverage(LongRangeSet set, BitSet expected,
             int offset, int cells) {
         List<Long> endpoints = new ArrayList<>();
         int cursor = 0;

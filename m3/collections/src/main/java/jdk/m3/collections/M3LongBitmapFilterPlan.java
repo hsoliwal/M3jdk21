@@ -30,7 +30,7 @@ import java.util.function.LongPredicate;
  * only primitive index and byte-mask arrays. A Java selection is memoized;
  * NATIVE_REQUIRED always crosses the explicit existing JNI boundary.
  */
-public final class M3LongBitmapFilterPlan implements M3LongCollection {
+public final class M3LongBitmapFilterPlan implements LongCollection {
     private final M3LongIndexProjection source;
     private final BitSet selected;
     private final int size;
@@ -244,9 +244,9 @@ public final class M3LongBitmapFilterPlan implements M3LongCollection {
     @Override public void clear() {
         throw new UnsupportedOperationException("immutable indexed bitmap filter plan");
     }
-    @Override public M3LongIterator iterator() {
+    @Override public LongIterator iterator() {
         M3LongIndexProjection image = projection();
-        return new M3LongIterator() {
+        return new LongIterator() {
             private int cursor;
             @Override public boolean hasNext() { return cursor < size; }
             @Override public long nextLong() {

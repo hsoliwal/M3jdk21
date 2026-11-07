@@ -32,29 +32,29 @@ public final class M3PrimitiveBigHashSet {
     private static final float DEFAULT_LOAD_FACTOR = 0.65f;
     private static final long MAX_CAPACITY = 1L << 40;
 
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final float loadFactor;
     private final int segmentShift;
-    private final M3PrimitiveBigArray.Factory arrays;
-    private M3PrimitiveBigArray keys;
+    private final BigArray.Factory arrays;
+    private BigArray keys;
     private long mask;
     private long threshold;
     private long size;
     private boolean hasZeroKey;
 
-    public M3PrimitiveBigHashSet(M3PrimitiveKind kind) {
-        this(kind, 16L, DEFAULT_LOAD_FACTOR, M3PrimitiveBigArray.DEFAULT_SEGMENT_SHIFT);
+    public M3PrimitiveBigHashSet(PrimitiveKind kind) {
+        this(kind, 16L, DEFAULT_LOAD_FACTOR, BigArray.DEFAULT_SEGMENT_SHIFT);
     }
 
     public M3PrimitiveBigHashSet(
-            M3PrimitiveKind kind, long expected, float loadFactor, int segmentShift) {
-        this(kind, expected, loadFactor, segmentShift, M3PrimitiveBigArray::new);
+            PrimitiveKind kind, long expected, float loadFactor, int segmentShift) {
+        this(kind, expected, loadFactor, segmentShift, BigArray::new);
     }
 
     /** Package-private cold allocation seam; public construction retains ordinary arrays. */
     M3PrimitiveBigHashSet(
-            M3PrimitiveKind kind, long expected, float loadFactor, int segmentShift,
-            M3PrimitiveBigArray.Factory arrays) {
+            PrimitiveKind kind, long expected, float loadFactor, int segmentShift,
+            BigArray.Factory arrays) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (!(loadFactor > 0.0f && loadFactor < 1.0f)) {
             throw new IllegalArgumentException("loadFactor must be in (0,1)");
@@ -68,7 +68,7 @@ public final class M3PrimitiveBigHashSet {
         threshold = threshold(capacity, loadFactor);
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public long size() { return size; }
     public boolean isEmpty() { return size == 0L; }
     public long capacity() { return mask + 1L; }
@@ -175,10 +175,10 @@ public final class M3PrimitiveBigHashSet {
 
     private void rehash(long newCapacity) {
         if (newCapacity > MAX_CAPACITY) throw new IllegalStateException("collection too large");
-        M3PrimitiveBigArray oldKeys = keys;
+        BigArray oldKeys = keys;
         long oldCapacity = capacity();
 
-        M3PrimitiveBigArray nextKeys = allocate(newCapacity);
+        BigArray nextKeys = allocate(newCapacity);
         long nextMask = newCapacity - 1L;
 
         for (long i = 0; i < oldCapacity; i++) {
@@ -194,8 +194,8 @@ public final class M3PrimitiveBigHashSet {
         threshold = threshold(newCapacity, loadFactor);
     }
 
-    private M3PrimitiveBigArray allocate(long capacity) {
-        M3PrimitiveBigArray result = Objects.requireNonNull(
+    private BigArray allocate(long capacity) {
+        BigArray result = Objects.requireNonNull(
                 arrays.create(kind, capacity, segmentShift), "allocated array");
         if (result.kind() != kind || result.length() != capacity
                 || result.segmentShift() != segmentShift) {

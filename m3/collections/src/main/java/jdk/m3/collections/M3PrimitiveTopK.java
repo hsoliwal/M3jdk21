@@ -27,13 +27,13 @@ import java.util.Objects;
 public final class M3PrimitiveTopK {
     public enum Mode { KEEP_SMALLEST, KEEP_LARGEST }
 
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final Mode mode;
     private final int limit;
     private final Object heap;
     private int size;
 
-    public M3PrimitiveTopK(M3PrimitiveKind kind, int limit, Mode mode) {
+    public M3PrimitiveTopK(PrimitiveKind kind, int limit, Mode mode) {
         this.kind = Objects.requireNonNull(kind, "kind");
         this.mode = Objects.requireNonNull(mode, "mode");
         if (limit <= 0) throw new IllegalArgumentException("limit <= 0");
@@ -43,7 +43,7 @@ public final class M3PrimitiveTopK {
 
     public int size() { return size; }
     public int limit() { return limit; }
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public Mode mode() { return mode; }
     public long payloadBytes() { return kind.payloadBytes(limit); }
 

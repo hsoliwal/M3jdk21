@@ -6,30 +6,30 @@ import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3IndexPathMasks;
-import jdk.m3.collections.M3IndexPathRank;
-import jdk.m3.collections.M3LongArrayList;
+import jdk.m3.collections.IndexPathMasks;
+import jdk.m3.collections.IndexPathRank;
+import jdk.m3.collections.LongArrayList;
 import jdk.m3.collections.M3LongIndexProjection;
 
 /**
  * Mutable long-value array plus an aligned full-width int state-mask lane.
  *
- * <p>The existing {@link M3LongArrayList} is the sole mutable value owner. This
+ * <p>The existing {@link LongArrayList} is the sole mutable value owner. This
  * class owns only parallel metadata: insertion/removal shifts the two logical
  * arrays together and replacement never silently moves the object's flags.
  * State bits are application metadata, not object headers, native addresses
  * or GC roots. Positions are not persistent generation-tagged handles.
  *
- * <p>Detached snapshots reuse {@link M3IndexPathRank} for occurrence rank/select
+ * <p>Detached snapshots reuse {@link IndexPathRank} for occurrence rank/select
  * and {@link M3LongIndexProjection} for sorted index permutations. Explicit
- * JNI selection reuses {@link M3IndexPathMasks}'s established primitive ABI
+ * JNI selection reuses {@link IndexPathMasks}'s established primitive ABI
  * with the Java rank index as the semantic oracle. No element Entry objects,
  * user callbacks or object references cross JNI. This owner is single-threaded.
  */
 public final class M3LongStateArray {
     private static final int DEFAULT_CAPACITY = 10;
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
-    private final M3LongArrayList values;
+    private final LongArrayList values;
     private int[] states;
     private long generation;
 
@@ -37,7 +37,7 @@ public final class M3LongStateArray {
 
     public M3LongStateArray(int initialCapacity) {
         if (initialCapacity < 0) throw new IllegalArgumentException("negative capacity");
-        values = new M3LongArrayList(initialCapacity);
+        values = new LongArrayList(initialCapacity);
         states = new int[initialCapacity];
     }
 
@@ -198,15 +198,15 @@ public final class M3LongStateArray {
          * Overlapping masks select an empty set without changing the owner.
          */
         public Selection prepare(int requiredMask, int forbiddenMask,
-                                 M3IndexPathMasks.Backend backend) {
+                                 IndexPathMasks.Backend backend) {
             Objects.requireNonNull(backend, "backend");
             int[][] planes = {states};
             int[] required = {requiredMask};
             int[] forbidden = {forbiddenMask};
-            M3IndexPathRank rank = M3IndexPathRank.snapshot(
+            IndexPathRank rank = IndexPathRank.snapshot(
                     ordinalIds, ordinalIds, planes, required, forbidden, 0, size(), 1);
-            if (backend == M3IndexPathMasks.Backend.NATIVE_REQUIRED) {
-                int[] nativeOrdinals = M3IndexPathMasks.select(
+            if (backend == IndexPathMasks.Backend.NATIVE_REQUIRED) {
+                int[] nativeOrdinals = IndexPathMasks.select(
                         ordinalIds, ordinalIds, planes, required, forbidden,
                         0, size(), 1, backend);
                 if (!Arrays.equals(rank.toArray(), nativeOrdinals)) {
@@ -218,16 +218,16 @@ public final class M3LongStateArray {
         }
 
         public Selection prepare(int requiredMask, int forbiddenMask) {
-            return prepare(requiredMask, forbiddenMask, M3IndexPathMasks.Backend.JAVA);
+            return prepare(requiredMask, forbiddenMask, IndexPathMasks.Backend.JAVA);
         }
     }
 
     /** Immutable selected occurrence index; no per-row wrapper objects. */
     public static final class Selection {
         private final Snapshot owner;
-        private final M3IndexPathRank rank;
+        private final IndexPathRank rank;
 
-        private Selection(Snapshot owner, M3IndexPathRank rank) {
+        private Selection(Snapshot owner, IndexPathRank rank) {
             this.owner = owner;
             this.rank = rank;
         }
@@ -272,9 +272,9 @@ public final class M3LongStateArray {
     /** Half-open source-ordinal rank/select window, sharing immutable bitmap. */
     public static final class Window {
         private final Snapshot owner;
-        private final M3IndexPathRank.Window rank;
+        private final IndexPathRank.Window rank;
 
-        private Window(Snapshot owner, M3IndexPathRank.Window rank) {
+        private Window(Snapshot owner, IndexPathRank.Window rank) {
             this.owner = owner;
             this.rank = rank;
         }

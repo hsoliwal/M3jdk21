@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections.interop;
 
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -119,16 +119,16 @@ final class M3FiveLibraryState32Test {
         assertThrows(NullPointerException.class, () -> source.filteredByStatePlanes(
                 planes(), null, excluded()));
         var empty = source.slice(0, 0);
-        if (!M3IndexPathMasks.nativeAvailable()) {
+        if (!IndexPathMasks.nativeAvailable()) {
             assertThrows(UnsatisfiedLinkError.class, () -> empty.filteredByStatePlanes(
-                    planes(), required(), excluded(), M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                    planes(), required(), excluded(), IndexPathMasks.Backend.NATIVE_REQUIRED));
         } else {
             assertTrue(empty.filteredByStatePlanes(
-                    planes(), required(), excluded(), M3IndexPathMasks.Backend.NATIVE_REQUIRED)
+                    planes(), required(), excluded(), IndexPathMasks.Backend.NATIVE_REQUIRED)
                     .isEmpty());
             assertEquals(source.filteredByStatePlanes(planes(), required(), excluded()).asJdkList(),
                     source.filteredByStatePlanes(planes(), required(), excluded(),
-                            M3IndexPathMasks.Backend.NATIVE_REQUIRED).asJdkList());
+                            IndexPathMasks.Backend.NATIVE_REQUIRED).asJdkList());
         }
     }
 
@@ -182,9 +182,9 @@ final class M3FiveLibraryState32Test {
                     source.firstMatchingOrdinalByStatePlanes(stages, need, forbid),
                     "first matching ordinal at trial " + trial);
             assertArrayEquals(original, rows);
-            if (M3IndexPathMasks.nativeAvailable() && trial % 17 == 0) {
+            if (IndexPathMasks.nativeAvailable() && trial % 17 == 0) {
                 assertEquals(expected, source.filteredByStatePlanes(stages, need, forbid,
-                        M3IndexPathMasks.Backend.NATIVE_REQUIRED).asJdkList(),
+                        IndexPathMasks.Backend.NATIVE_REQUIRED).asJdkList(),
                         "JNI parity trial " + trial);
             }
         }

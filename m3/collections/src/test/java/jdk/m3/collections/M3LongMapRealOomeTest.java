@@ -15,7 +15,7 @@ public final class M3LongMapRealOomeTest {
         if (!condition) throw new AssertionError(what);
     }
     private static Field field(String name) {
-        try { Field f = M3LongLongHashMap.class.getDeclaredField(name); f.setAccessible(true); return f; }
+        try { Field f = LongLongHashMap.class.getDeclaredField(name); f.setAccessible(true); return f; }
         catch (ReflectiveOperationException error) { throw new AssertionError(error); }
     }
     private static int asInt(Field field, Object owner) {
@@ -28,7 +28,7 @@ public final class M3LongMapRealOomeTest {
     public static void main(String[] arguments) {
         if (arguments.length != 1 || (!arguments[0].equals("direct") && !arguments[0].equals("conditional")))
             throw new IllegalArgumentException("direct or conditional");
-        M3LongLongHashMap map = new M3LongLongHashMap(20_000);
+        LongLongHashMap map = new LongLongHashMap(20_000);
         for (int i = 0; i < 6_000; i++) map.put(i, 11L * i + 7);
         for (int i = 0; i < 3_000; i++) ok(map.remove(i), "setup deletion");
         Field keysField = field("keys"), valuesField = field("values"), statesField = field("states");
@@ -39,7 +39,7 @@ public final class M3LongMapRealOomeTest {
         byte[] oldStates = states.clone();
         int size = asInt(sizeField, map), occupied = asInt(occupiedField, map), epoch = asInt(modField, map);
         ok(size == 3_000 && occupied == 6_000 && keys.length == 32768, "compaction precondition");
-        M3LongIterator before = map.keyIterator();
+        LongIterator before = map.keyIterator();
         ArrayList<byte[]> ballast = new ArrayList<>();
         boolean ballastOome = false;
         try {

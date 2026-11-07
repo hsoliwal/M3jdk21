@@ -9,7 +9,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.*;
-import jdk.m3.collections.M3LongLongHashMap;
+import jdk.m3.collections.LongLongHashMap;
 import jdk.m3.collections.M3TreeProjection;
 
 /**
@@ -32,10 +32,10 @@ public final class M3TreeWindowPlan {
 	private long [] keys = new long [0], handles = new long [0];
 	private int [] parentSlots = new int [0];
 	private int size;
-	private final M3LongLongHashMap slotByKey = new M3LongLongHashMap ();
-	private final M3LongLongHashMap slotByHandle = new M3LongLongHashMap ();
+	private final LongLongHashMap slotByKey = new LongLongHashMap ();
+	private final LongLongHashMap slotByHandle = new LongLongHashMap ();
 	/* Reusable primitive-only admission index; never clears the committed handle map on refusal. */
-	private final M3LongLongHashMap commitHandleAdmission = new M3LongLongHashMap ();
+	private final LongLongHashMap commitHandleAdmission = new LongLongHashMap ();
 
 	private long [] planned = new long [0], retired = new long [0];
 	/** Bounded primitive key snapshot: commit must publish the exact planned coordinates. */
@@ -46,7 +46,7 @@ public final class M3TreeWindowPlan {
 	private int [] preorderAncestors = new int [0];
 	private boolean [] kept = new boolean [0];
 	/* Primitive scratch directory for duplicate-coordinates admission. */
-	private final M3LongLongHashMap planCoordinates = new M3LongLongHashMap ();
+	private final LongLongHashMap planCoordinates = new LongLongHashMap ();
 	private int plannedCount, retiredCount;
 
 	public M3TreeWindowPlan () {

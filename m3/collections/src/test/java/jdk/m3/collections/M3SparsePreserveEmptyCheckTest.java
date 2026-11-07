@@ -19,7 +19,7 @@ final class M3SparsePreserveEmptyCheckTest {
     private static final int SHIFT = 10;
     private static final long SIZE = 1L << 18;
 
-    private static long raw(M3PrimitiveKind kind, int n) {
+    private static long raw(PrimitiveKind kind, int n) {
         return switch (kind) {
             case BOOLEAN -> n % 4 == 0 ? 0L : 1L;
             case BYTE, SHORT, CHAR, INT, LONG -> n % 11 == 0 ? 0L : 0x4dd7L + 43L * n;
@@ -43,7 +43,7 @@ final class M3SparsePreserveEmptyCheckTest {
     @Test
     void preservingCompleteRangeKeepsEveryPhysicalLeafAndDirectory() {
         long[] points = {0L, 1035L, 1L << 30, (1L << 42) + 7L, Long.MAX_VALUE - 1L};
-        for (M3PrimitiveKind kind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind kind : PrimitiveKind.values()) {
             M3LazyPrimitiveAddressSpace owner = M3LazyPrimitiveAddressSpace.paged(
                     kind, Long.MAX_VALUE, SHIFT);
             Object[] pages = new Object[points.length];
@@ -77,7 +77,7 @@ final class M3SparsePreserveEmptyCheckTest {
     @Test
     void partialPreserveThenReleaseOnlyDetachesFullyCoveredPages() {
         M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(
-                M3PrimitiveKind.LONG, 1L << 23, SHIFT);
+                PrimitiveKind.LONG, 1L << 23, SHIFT);
         long[] p = {10L, 1030L, 2050L, 4100L};
         for (int i = 0; i < p.length; i++) space.setBits(p[i], i + 11L);
         Object first = space.existingLeaf(p[0]);
@@ -104,7 +104,7 @@ final class M3SparsePreserveEmptyCheckTest {
 
     @Test
     void mixedRandomizedClearAndMutationPreserveOriginalRawBits() {
-        for (M3PrimitiveKind kind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind kind : PrimitiveKind.values()) {
             M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(
                     kind, SIZE, SHIFT);
             Map<Long, Long> expected = new HashMap<>();
@@ -154,8 +154,8 @@ final class M3SparsePreserveEmptyCheckTest {
 
     @Test
     void sparseCopyUsesPreservingClearWithoutDestroysUnrelatedRoots() {
-        M3PrimitiveBigArray from = M3PrimitiveBigArray.sparse(M3PrimitiveKind.LONG, 1L << 20, SHIFT);
-        M3PrimitiveBigArray target = M3PrimitiveBigArray.sparse(M3PrimitiveKind.LONG, 1L << 20, SHIFT);
+        BigArray from = BigArray.sparse(PrimitiveKind.LONG, 1L << 20, SHIFT);
+        BigArray target = BigArray.sparse(PrimitiveKind.LONG, 1L << 20, SHIFT);
         from.setBits(1021, 17L);
         from.setBits(2055, 31L);
         from.setBits(6145, 49L);
@@ -179,7 +179,7 @@ final class M3SparsePreserveEmptyCheckTest {
     @Test
     void emptyAndInvalidRangeRefuseWithoutPageOrDirectoryMutation() {
         M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(
-                M3PrimitiveKind.LONG, 1L << 20, SHIFT);
+                PrimitiveKind.LONG, 1L << 20, SHIFT);
         space.setBits(42L, 99L);
         Object page = space.existingLeaf(42L);
         long leaves = space.allocatedLeafCount64();

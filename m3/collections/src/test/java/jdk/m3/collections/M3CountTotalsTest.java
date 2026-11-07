@@ -27,12 +27,12 @@ final class M3CountTotalsTest {
     @Test void bagTotalsMatchMaterializedAlgebraAndIndependentFrequencyOracle() {
         for (int seed = 0; seed < 32; seed++) {
             Random r = new Random(seed);
-            M3LongBag a = new M3LongBag(), b = new M3LongBag();
+            LongBag a = new LongBag(), b = new LongBag();
             Map<Long, Long> x = new HashMap<>(), y = new HashMap<>();
             for (int i = 0; i < 300; i++) {
                 long key = i % 31 == 0 ? Long.MIN_VALUE : i % 37 == 0 ? Long.MAX_VALUE : r.nextInt(64);
                 long n = r.nextInt(1000);
-                M3LongBag bag = (i & 1) == 0 ? a : b;
+                LongBag bag = (i & 1) == 0 ? a : b;
                 Map<Long, Long> ref = (i & 1) == 0 ? x : y;
                 bag.setCount(key, n);
                 if (n == 0) ref.remove(key); else ref.put(key, n);
@@ -41,7 +41,7 @@ final class M3CountTotalsTest {
             checkBags(a, b, x, y);
         }
     }
-    private static void checkBags(M3LongBag a, M3LongBag b, Map<Long, Long> x, Map<Long, Long> y) {
+    private static void checkBags(LongBag a, LongBag b, Map<Long, Long> x, Map<Long, Long> y) {
         long overlap = 0;
         for (var e : x.entrySet()) overlap += Math.min(e.getValue(), y.getOrDefault(e.getKey(), 0L));
         long ax = x.values().stream().mapToLong(Long::longValue).sum();
@@ -59,7 +59,7 @@ final class M3CountTotalsTest {
         y.forEach((k, n) -> assertEquals(n.longValue(), b.count(k)));
     }
     @Test void bagSelfEmptyAndSparseCapacityCases() {
-        M3LongBag sparse = new M3LongBag(100_000), small = new M3LongBag();
+        LongBag sparse = new LongBag(100_000), small = new LongBag();
         sparse.add(7, 10); small.add(7, 4); small.add(9, 2);
         assertEquals(4, M3CountTotals.intersection(sparse, small));
         assertEquals(4, M3CountTotals.intersection(small, sparse));
@@ -73,7 +73,7 @@ final class M3CountTotalsTest {
         sparse.trimToSize(); assertEquals(10, M3CountTotals.sum(sparse, small));
     }
     @Test void overlapIsSubtractedBeforeUnionOverflowCheck() {
-        M3LongBag a = new M3LongBag(), b = new M3LongBag();
+        LongBag a = new LongBag(), b = new LongBag();
         a.add(Long.MIN_VALUE, Long.MAX_VALUE); b.add(Long.MIN_VALUE, Long.MAX_VALUE);
         assertEquals(Long.MAX_VALUE, M3CountTotals.union(a, b));
         assertEquals(Long.MAX_VALUE, M3CountTotals.intersection(a, b));
@@ -86,7 +86,7 @@ final class M3CountTotalsTest {
         assertEquals(Long.MAX_VALUE, a.totalCount()); assertEquals(1, b.totalCount());
     }
     @Test void bagNullsRejectedEvenWhenOtherInputIsEmpty() {
-        M3LongBag empty = new M3LongBag();
+        LongBag empty = new LongBag();
         assertThrows(NullPointerException.class, () -> M3CountTotals.sum(null, empty));
         assertThrows(NullPointerException.class, () -> M3CountTotals.sum(empty, null));
         assertThrows(NullPointerException.class, () -> M3CountTotals.intersection(null, empty));

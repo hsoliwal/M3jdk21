@@ -20,10 +20,10 @@ public final class M3IntArrayListContractProof {
     private static void equal(Object expected, Object got, String where) {
         check(Objects.equals(expected, got), where + " expected=" + expected + " got=" + got);
     }
-    private static List<Integer> boxed(M3IntArrayList a) {
+    private static List<Integer> boxed(IntArrayList a) {
         return Arrays.stream(a.toArray()).boxed().toList();
     }
-    private static void inspect(M3IntArrayList a, List<Integer> oracle) {
+    private static void inspect(IntArrayList a, List<Integer> oracle) {
         equal(oracle, boxed(a), "owner elements");
         equal(oracle.size(), a.size(), "owner size");
         equal(oracle.stream().mapToInt(Integer::intValue).sum(), a.intStream().sum(), "sum");
@@ -31,7 +31,7 @@ public final class M3IntArrayListContractProof {
         check(a.capacity() >= a.size(), "logical size <= capacity");
         int[] snapshot = a.toArray();
         if (snapshot.length != 0) { int was = snapshot[0]; snapshot[0] ^= 0x77; check(a.get(0) == was, "defensive toArray"); }
-        M3IntIterator cursor = a.iterator();
+        IntIterator cursor = a.iterator();
         int i = 0;
         while(cursor.hasNext()) {
             check(i < oracle.size(), "length");
@@ -44,7 +44,7 @@ public final class M3IntArrayListContractProof {
     }
     public static void main(String[] args) {
         Random r = new Random(0x20261018);
-        M3IntArrayList a = new M3IntArrayList();
+        IntArrayList a = new IntArrayList();
         List<Integer> j = new ArrayList<>();
         inspect(a,j);
         for (int step=0;step<9000;step++) {
@@ -73,7 +73,7 @@ public final class M3IntArrayListContractProof {
         equal(j.size()-distinct.size(),removed,"dedup count");
         equal(distinct,boxed(a),"dedup sorted");
         for (int i=0;i<a.size();i++) check(a.binarySearch(a.get(i))>=0,"binarySearch");
-        M3IntIterator old = a.iterator(); a.add(5);
+        IntIterator old = a.iterator(); a.add(5);
         boolean refused=false;
         try{old.hasNext();}catch(ConcurrentModificationException correct){refused=true;}
         check(refused,"iterator fail fast");

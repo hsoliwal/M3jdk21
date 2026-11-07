@@ -4,7 +4,7 @@
  */
 package jdk.internal.m3.collections;
 
-import jdk.m3.collections.M3LongLongConsumer;
+import jdk.m3.collections.LongLongConsumer;
 
 /**
  * M3 five-library superset scaffold {@code M3LruLongLongMap}: API group {@code LRU_LONG_MAP} over arrays and state masks.
@@ -93,7 +93,7 @@ public final class M3LruLongLongMap {
     }
 
     /** LRU to MRU traversal (scaffold: not yet received). */
-    public void forEach(M3LongLongConsumer action) {
+    public void forEach(LongLongConsumer action) {
         throw new M3NotYetReceived("M3LruLongLongMap.forEach");
     }
 

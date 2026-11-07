@@ -34,7 +34,7 @@ final class M3StagedPhysicalStateSnapshotTest {
 
     @Test
     void nativeParityWhenAvailable() {
-        if (M3IndexPathMasks.nativeAvailable()) {
+        if (IndexPathMasks.nativeAvailable()) {
             M3StagedPhysicalStateSnapshotProof.main(new String[] {"--native"});
         }
     }
@@ -46,7 +46,7 @@ final class M3StagedPhysicalStateSnapshotTest {
         var result = M3CollectionSdk.maskedSortedIndexedSnapshot(
                 source, state, new int[] {1, 2}, new int[] {0, 0},
                 Comparator.nullsFirst(Comparator.naturalOrder()),
-                M3IndexPathMasks.Backend.JAVA);
+                IndexPathMasks.Backend.JAVA);
         assertEquals(Arrays.asList(null, 3, 7), result);
         assertEquals(3, result.size());
         assertThrows(UnsupportedOperationException.class, result::clear);

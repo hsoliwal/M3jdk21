@@ -16,8 +16,8 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveBigArray;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.BigArray;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Long-indexed, six-byte integer lanes over the existing BYTE storage owners.
@@ -38,22 +38,22 @@ public final class M3Packed48Array {
     public static final long MIN_SIGNED = -(1L << 47);
     public static final long MAX_SIGNED = (1L << 47) - 1;
 
-    private final M3PrimitiveBigArray dense;
+    private final BigArray dense;
     private final M3LazyPrimitiveAddressSpace sparse;
     private final long byteOffset;
     private final long length;
 
     /** Allocates exactly six payload bytes per logical value, excluding array metadata. */
     public M3Packed48Array(long length) {
-        this(length, M3PrimitiveBigArray.DEFAULT_SEGMENT_SHIFT);
+        this(length, BigArray.DEFAULT_SEGMENT_SHIFT);
     }
 
     public M3Packed48Array(long length, int segmentShift) {
-        this(new M3PrimitiveBigArray(M3PrimitiveKind.BYTE, bytesFor(length), segmentShift),
+        this(new BigArray(PrimitiveKind.BYTE, bytesFor(length), segmentShift),
                 null, 0L, length);
     }
 
-    private M3Packed48Array(M3PrimitiveBigArray dense, M3LazyPrimitiveAddressSpace sparse,
+    private M3Packed48Array(BigArray dense, M3LazyPrimitiveAddressSpace sparse,
                           long byteOffset, long length) {
         this.dense = dense;
         this.sparse = sparse;
@@ -61,7 +61,7 @@ public final class M3Packed48Array {
         this.length = length;
     }
 
-    public static M3Packed48Array view(M3PrimitiveBigArray bytes, long byteOffset, long length) {
+    public static M3Packed48Array view(BigArray bytes, long byteOffset, long length) {
         Objects.requireNonNull(bytes, "bytes");
         requireByteKind(bytes.kind());
         Objects.checkFromIndexSize(byteOffset, bytesFor(length), bytes.length());
@@ -137,7 +137,7 @@ public final class M3Packed48Array {
         return length * BYTES_PER_VALUE;
     }
 
-    private static void requireByteKind(M3PrimitiveKind kind) {
-        if (kind != M3PrimitiveKind.BYTE) throw new IllegalArgumentException("BYTE owner required");
+    private static void requireByteKind(PrimitiveKind kind) {
+        if (kind != PrimitiveKind.BYTE) throw new IllegalArgumentException("BYTE owner required");
     }
 }

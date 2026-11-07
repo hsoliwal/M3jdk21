@@ -29,7 +29,7 @@ public final class M3SortableTopK {
             int lane, int maximum, boolean ascending) {
         Objects.requireNonNull(store, "store");
         Objects.requireNonNull(rows, "rows");
-        M3PrimitiveKind kind = store.laneKind(lane); // Validate the signal even for empty results.
+        PrimitiveKind kind = store.laneKind(lane); // Validate the signal even for empty results.
         if (maximum < 0) throw new IllegalArgumentException("negative top-K maximum");
         if (store.version() != sourceVersion) throw new java.util.ConcurrentModificationException();
         int count = Math.min(maximum, rows.length);
@@ -41,7 +41,7 @@ public final class M3SortableTopK {
 
     /** Package-private pressure seam: test both cache and no-cache paths deterministically. */
     static int[] select(M3PrimitiveSoaStore store, int[] rows, long sourceVersion, int lane,
-            M3PrimitiveKind kind, int count, boolean ascending, boolean cacheSignals) {
+            PrimitiveKind kind, int count, boolean ascending, boolean cacheSignals) {
         if (count < 0 || count > rows.length) throw new IllegalArgumentException("top-K count");
         if (store.version() != sourceVersion) throw new java.util.ConcurrentModificationException();
         if (count == 0) return new int[0];
@@ -77,20 +77,20 @@ public final class M3SortableTopK {
     }
 
     private static int compare(int leftId, long leftSignal, int rightId, long rightSignal,
-            M3PrimitiveKind kind, boolean ascending) {
+            PrimitiveKind kind, boolean ascending) {
         int order = kind.compareBits(leftSignal, rightSignal);
         if (order == 0) order = Integer.compare(leftId, rightId);
         return ascending ? order : -order;
     }
 
     private static int compareAt(int[] heap, long[] cached, int a, int b,
-            M3PrimitiveSoaStore store, int lane, M3PrimitiveKind kind, boolean ascending) {
+            M3PrimitiveSoaStore store, int lane, PrimitiveKind kind, boolean ascending) {
         return compare(heap[a], signal(heap, cached, a, store, lane),
                 heap[b], signal(heap, cached, b, store, lane), kind, ascending);
     }
 
     private static void rise(int[] heap, long[] cache, int at,
-            M3PrimitiveSoaStore store, int lane, M3PrimitiveKind kind, boolean ascending) {
+            M3PrimitiveSoaStore store, int lane, PrimitiveKind kind, boolean ascending) {
         while (at > 0) {
             int parent = (at - 1) >>> 1;
             if (compareAt(heap, cache, at, parent, store, lane, kind, ascending) <= 0) break;
@@ -100,7 +100,7 @@ public final class M3SortableTopK {
     }
 
     private static void sink(int[] heap, long[] cache, int at, int size,
-            M3PrimitiveSoaStore store, int lane, M3PrimitiveKind kind, boolean ascending) {
+            M3PrimitiveSoaStore store, int lane, PrimitiveKind kind, boolean ascending) {
         while (at < (size >>> 1)) {
             int child = (at << 1) + 1;
             if (child + 1 < size && compareAt(heap, cache, child + 1, child,

@@ -17,6 +17,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.concurrent.ConcurrentBitSet;
+import jdk.m3.collections.concurrent.ConcurrentLongMap;
+import jdk.m3.collections.concurrent.ConcurrentLongSet;
 
 final class M3ConcurrentLaneContractTest {
     @Test void atomicValuesWrapAndZeroWritesKeepPublicationLocations() {
@@ -94,9 +97,9 @@ final class M3ConcurrentLaneContractTest {
     }
 
     @Test void concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder() {
-        M3ConcurrentLongMap map = new M3ConcurrentLongMap();
-        M3ConcurrentLongSet set = new M3ConcurrentLongSet();
-        M3ConcurrentBitSet bits = new M3ConcurrentBitSet(10003);
+        ConcurrentLongMap map = new ConcurrentLongMap();
+        ConcurrentLongSet set = new ConcurrentLongSet();
+        ConcurrentBitSet bits = new ConcurrentBitSet(10003);
         for (int i = 2000; i >= 0; i--) { map.put(i, 2L * i); set.add(i); bits.set(i * 3); }
         var keys = map.keyStream(); var values = map.valueStream(); var members = set.parallelLongStream();
         map.clear(); set.clear();
@@ -106,7 +109,7 @@ final class M3ConcurrentLaneContractTest {
         int[] expected = java.util.stream.IntStream.rangeClosed(0, 2000).map(i -> i * 3).toArray();
         assertArrayEquals(expected, bits.setBitStream().toArray());
         assertArrayEquals(expected, bits.parallelSetBitStream().toArray());
-        assertEquals(0, new M3ConcurrentBitSet(0).parallelSetBitStream().count());
+        assertEquals(0, new ConcurrentBitSet(0).parallelSetBitStream().count());
         bits.set(10002);
         assertEquals(10002, bits.parallelSetBitStream().max().orElseThrow());
         assertFalse(bits.setBitStream().spliterator().hasCharacteristics(Spliterator.SIZED));

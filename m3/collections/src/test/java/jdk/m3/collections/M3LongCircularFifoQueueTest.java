@@ -47,7 +47,7 @@ public final class M3LongCircularFifoQueueTest {
         oracle.addLast(value);
     }
 
-    private static void checkState(M3LongCircularFifoQueue queue, ArrayDeque<Long> oracle, int cap) {
+    private static void checkState(LongCircularFifoQueue queue, ArrayDeque<Long> oracle, int cap) {
         yes(queue.capacity() == cap, "capacity");
         yes(queue.size() == oracle.size(), "size");
         yes(queue.remainingCapacity() == cap - oracle.size(), "remaining capacity");
@@ -55,7 +55,7 @@ public final class M3LongCircularFifoQueueTest {
         long[] actual = queue.toArray();
         long[] expected = oracle.stream().mapToLong(Long::longValue).toArray();
         yes(Arrays.equals(actual, expected), "order: " + Arrays.toString(actual) + " vs " + Arrays.toString(expected));
-        M3LongIterator cursor = queue.iterator();
+        LongIterator cursor = queue.iterator();
         int i = 0;
         while (cursor.hasNext()) {
             yes(cursor.nextLong() == expected[i++], "iterator value");
@@ -73,13 +73,13 @@ public final class M3LongCircularFifoQueueTest {
 
     @Test
     public void randomizedDifferential() {
-        expect(IllegalArgumentException.class, () -> new M3LongCircularFifoQueue(0));
-        expect(IllegalArgumentException.class, () -> new M3LongCircularFifoQueue(-1));
-        yes(new M3LongCircularFifoQueue().capacity() == 32, "default cap");
+        expect(IllegalArgumentException.class, () -> new LongCircularFifoQueue(0));
+        expect(IllegalArgumentException.class, () -> new LongCircularFifoQueue(-1));
+        yes(new LongCircularFifoQueue().capacity() == 32, "default cap");
         final Random random = new Random(0x6d3354a2L);
         long transitions = 0;
         for (int cap : new int[] {1, 2, 3, 4, 7, 8, 16, 17, 31, 32, 97}) {
-            M3LongCircularFifoQueue queue = new M3LongCircularFifoQueue(cap);
+            LongCircularFifoQueue queue = new LongCircularFifoQueue(cap);
             ArrayDeque<Long> oracle = new ArrayDeque<>();
             for (int step = 0; step < 9000; step++) {
                 switch (random.nextInt(10)) {
@@ -111,7 +111,7 @@ public final class M3LongCircularFifoQueueTest {
                         yes(queue.contains(probe) == oracle.contains(probe), "contains");
                     }
                     case 9 -> {
-                        M3LongIterator cursor = queue.iterator();
+                        LongIterator cursor = queue.iterator();
                         long[] snapshot = queue.toArray();
                         expect(IndexOutOfBoundsException.class, () -> queue.get(-1));
                         expect(IndexOutOfBoundsException.class, () -> queue.get(queue.size()));

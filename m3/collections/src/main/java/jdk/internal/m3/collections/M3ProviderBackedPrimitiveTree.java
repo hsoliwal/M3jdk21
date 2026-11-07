@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.LongConsumer;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Pageable provider-backed tree with primitive columnar payload and relationship lanes.
@@ -65,7 +65,7 @@ public final class M3ProviderBackedPrimitiveTree {
     public M3ProviderBackedPrimitiveTree(
             M3PagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this(
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
                 M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
@@ -81,7 +81,7 @@ public final class M3ProviderBackedPrimitiveTree {
             int leafBits,
             M3PagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this.provider = Objects.requireNonNull(provider, "provider");
         if (pageSize <= 0) throw new IllegalArgumentException("pageSize <= 0");
         this.pageSize = pageSize;
@@ -871,6 +871,6 @@ public final class M3ProviderBackedPrimitiveTree {
     private static M3LazyPrimitiveAddressSpace ints(
             int rootBits, int directoryBits, int leafBits) {
         return new M3LazyPrimitiveAddressSpace(
-                M3PrimitiveKind.INT, rootBits, directoryBits, leafBits);
+                PrimitiveKind.INT, rootBits, directoryBits, leafBits);
     }
 }

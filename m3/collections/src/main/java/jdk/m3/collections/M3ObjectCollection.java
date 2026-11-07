@@ -22,16 +22,16 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/** Read-only Collection facade over a replayable M3ObjectStream plan. */
+/** Read-only Collection facade over a replayable ObjectStream plan. */
 public final class M3ObjectCollection<T> extends AbstractCollection<T> {
-    private final M3ObjectStream<T> plan;
+    private final ObjectStream<T> plan;
 
-    M3ObjectCollection(M3ObjectStream<T> plan) {
+    M3ObjectCollection(ObjectStream<T> plan) {
         this.plan = Objects.requireNonNull(plan, "plan");
         if (!plan.replayable()) throw new IllegalArgumentException("a virtual collection requires a replayable plan");
     }
 
-    public M3ObjectStream<T> plan() { return plan; }
+    public ObjectStream<T> plan() { return plan; }
 
     @Override public Iterator<T> iterator() {
         Stream<T> stream = plan.stream();

@@ -72,7 +72,7 @@ public final class M3FilteredSetNullContract {
 
     private static <E> NavigableSet<E> owner(Surface surface, NavigableSet<E> source) {
         return surface == Surface.OVER_COMPOSITION
-                ? M3CollectionViews.filtered(source, value -> true) : source;
+                ? CollectionViews.filtered(source, value -> true) : source;
     }
 
     private static <E> NavigableSet<E> view(Surface surface, NavigableSet<E> source,

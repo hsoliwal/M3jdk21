@@ -5,7 +5,7 @@ import java.util.Spliterator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.stream.LongStream;
-import jdk.m3.collections.M3LongIterator;
+import jdk.m3.collections.LongIterator;
 import jdk.m3.collections.M3LongSequence;
 
 /** Primitive direct forwarding, including native bulk and primitive traversal. */
@@ -29,7 +29,7 @@ public abstract class M3ForwardingLongSequence implements M3LongSequence {
     @Override public int size() { return delegate().size(); }
     @Override public boolean contains(long v) { return delegate().contains(v); }
     @Override public void clear() { delegate().clear(); }
-    @Override public M3LongIterator iterator() { return delegate().iterator(); }
+    @Override public LongIterator iterator() { return delegate().iterator(); }
     @Override public long[] toArray() { return delegate().toArray(); }
     @Override public boolean isEmpty() { return delegate().isEmpty(); }
     @Override public void forEachLong(LongConsumer c) { delegate().forEachLong(c); }

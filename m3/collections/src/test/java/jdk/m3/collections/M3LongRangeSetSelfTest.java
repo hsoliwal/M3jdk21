@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Random;
+import jdk.m3.collections.range.LongRangeSet;
 
 /** Finite deterministic oracle for disjoint array intervals, offsets, and mask selection. */
 public final class M3LongRangeSetSelfTest {
@@ -19,7 +20,7 @@ public final class M3LongRangeSetSelfTest {
         if (!condition) throw new AssertionError(context);
     }
 
-    private static void compare(M3LongRangeSet actual, boolean[] reference, String label) {
+    private static void compare(LongRangeSet actual, boolean[] reference, String label) {
         actual.verifyInvariants();
         long[] starts = actual.startsToArray();
         long[] ends = actual.endsToArray();
@@ -41,13 +42,13 @@ public final class M3LongRangeSetSelfTest {
             check(starts[i] < ends[i], label + " nonempty");
             if (i > 0) check(ends[i - 1] < starts[i], label + " nonadjacent");
         }
-        M3LongRangeSet snapshot = actual.snapshot();
+        LongRangeSet snapshot = actual.snapshot();
         check(Arrays.equals(snapshot.startsToArray(), starts), label + " clone starts");
         check(Arrays.equals(snapshot.endsToArray(), ends), label + " clone ends");
     }
 
     private static void seeded() {
-        M3LongRangeSet actual = new M3LongRangeSet();
+        LongRangeSet actual = new LongRangeSet();
         boolean[] ref = new boolean[256];
         Random random = new Random(0x4D3352414E4745L);
         for (int operation = 0; operation < 20_000; operation++) {
@@ -77,7 +78,7 @@ public final class M3LongRangeSetSelfTest {
     }
 
     private static void extremesAndStateMasks() {
-        M3LongRangeSet set = new M3LongRangeSet();
+        LongRangeSet set = new LongRangeSet();
         set.add(Long.MIN_VALUE, Long.MAX_VALUE);
         check(set.contains(Long.MIN_VALUE), "MIN member");
         check(set.contains(Long.MAX_VALUE - 1), "MAX-1 member");
@@ -92,14 +93,14 @@ public final class M3LongRangeSetSelfTest {
         set.add(0, 10);
         set.add(20, 30);
         set.add(40, 50);
-        M3LongRangeSet selected = set.selectedByState(new int[] {0x80000001, 0x00000001, 0x80000003},
-                0x80000001, 0x00000002, M3IndexPathMasks.Backend.JAVA);
+        LongRangeSet selected = set.selectedByState(new int[] {0x80000001, 0x00000001, 0x80000003},
+                0x80000001, 0x00000002, IndexPathMasks.Backend.JAVA);
         check(Arrays.equals(new long[] {0}, selected.startsToArray()), "32-bit mask start");
         check(Arrays.equals(new long[] {10}, selected.endsToArray()), "32-bit mask end");
         int[] flags = new int[] {1, 0, 1};
-        M3LongRangeSet other = set.selectedByState(flags, 1, 0, M3IndexPathMasks.Backend.JAVA);
+        LongRangeSet other = set.selectedByState(flags, 1, 0, IndexPathMasks.Backend.JAVA);
         check(Arrays.equals(new long[] {0, 40}, other.startsToArray()), "mask skip midpoint");
-        M3LongRangeSet untouched = set.snapshot();
+        LongRangeSet untouched = set.snapshot();
         int[] count = {0};
         untouched.forEachRange((start, end) -> count[0]++);
         check(count[0] == 3, "primitive consumer");
@@ -113,17 +114,17 @@ public final class M3LongRangeSetSelfTest {
         try { set.add(20, 1); } catch (IllegalArgumentException expected) { refused = true; }
         check(refused, "reversed range refusal");
         refused = false;
-        try { set.selectedByState(new int[0], 1, 0, M3IndexPathMasks.Backend.JAVA); }
+        try { set.selectedByState(new int[0], 1, 0, IndexPathMasks.Backend.JAVA); }
         catch (IllegalArgumentException expected) { refused = true; }
         check(refused, "unaligned state mask refusal");
-        if (M3IndexPathMasks.nativeAvailable()) {
-            M3LongRangeSet nativeSelected = set.selectedByState(
-                    new int[set.rangeCount()], 0, 0, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+        if (IndexPathMasks.nativeAvailable()) {
+            LongRangeSet nativeSelected = set.selectedByState(
+                    new int[set.rangeCount()], 0, 0, IndexPathMasks.Backend.NATIVE_REQUIRED);
             check(nativeSelected.rangeCount() == set.rangeCount(), "native selected all");
         } else {
             refused = false;
             try { set.selectedByState(new int[set.rangeCount()], 0, 0,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED); }
+                    IndexPathMasks.Backend.NATIVE_REQUIRED); }
             catch (UnsatisfiedLinkError expected) { refused = true; }
             check(refused, "required native failure not silently demoted");
         }

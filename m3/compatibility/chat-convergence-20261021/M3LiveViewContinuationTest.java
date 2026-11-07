@@ -27,7 +27,7 @@ public final class M3LiveViewContinuationTest {
         List<Integer> delivered = new ArrayList<>();
         RuntimeException failure = new RuntimeException("exact nested failure");
         if (mode.equals("predicate")) {
-            cursor.set(M3CollectionViews.filtered(new ArrayList<>(List.of(1, 2, 3)), value -> {
+            cursor.set(CollectionViews.filtered(new ArrayList<>(List.of(1, 2, 3)), value -> {
                 if (value == 1) check(cursor.get().tryAdvance(delivered::add), "nested predicate advance");
                 return true;
             }).spliterator());
@@ -36,7 +36,7 @@ public final class M3LiveViewContinuationTest {
             cursor.get().forEachRemaining(delivered::add);
             check(delivered.equals(List.of(2, 1, 3)), "remaining traversal");
         } else if (mode.equals("exhaustion")) {
-            cursor.set(M3CollectionViews.filtered(new ArrayList<>(List.of(1)), value -> true).spliterator());
+            cursor.set(CollectionViews.filtered(new ArrayList<>(List.of(1)), value -> true).spliterator());
             boolean actual = cursor.get().tryAdvance(value -> {
                 delivered.add(value);
                 check(!cursor.get().tryAdvance(delivered::add), "nested end");
@@ -44,7 +44,7 @@ public final class M3LiveViewContinuationTest {
             check(actual, "outer true after nested exhaustion");
             check(delivered.equals(List.of(1)), "one delivery");
         } else if (mode.equals("exception")) {
-            cursor.set(M3CollectionViews.filtered(new ArrayList<>(List.of(1, 2, 3)), value -> {
+            cursor.set(CollectionViews.filtered(new ArrayList<>(List.of(1, 2, 3)), value -> {
                 if (value == 1) {
                     try {
                         cursor.get().tryAdvance(nested -> { throw failure; });
@@ -58,7 +58,7 @@ public final class M3LiveViewContinuationTest {
             check(cursor.get().tryAdvance(delivered::add), "later independent call");
             check(delivered.equals(List.of(1, 3)), "exact consumed occurrences");
         } else if (mode.equals("null")) {
-            cursor.set(M3CollectionViews.filtered(new ArrayList<>(List.of(1)), value -> {
+            cursor.set(CollectionViews.filtered(new ArrayList<>(List.of(1)), value -> {
                 try { cursor.get().tryAdvance(null); throw new AssertionError("missing null check"); }
                 catch (NullPointerException expected) { assertions++; }
                 return true;
@@ -74,7 +74,7 @@ public final class M3LiveViewContinuationTest {
             TreeSet<Integer> source = new TreeSet<>(order);
             for (int i = 0; i < 40; i++) source.add(random.nextInt(100));
             Predicate<Integer> predicate = value -> (value & 3) != 1;
-            NavigableSet<Integer> view = M3CollectionViews.filtered(source, predicate);
+            NavigableSet<Integer> view = CollectionViews.filtered(source, predicate);
             TreeSet<Integer> oracle = new TreeSet<>(order);
             source.stream().filter(predicate).forEach(oracle::add);
             check(new ArrayList<>(view).equals(new ArrayList<>(oracle)), "ordered filter");
@@ -100,9 +100,9 @@ public final class M3LiveViewContinuationTest {
             }
         }
         ArrayList<String> source = new ArrayList<>(Arrays.asList(null, "b", "a", "b", "hidden"));
-        Collection<String> view = M3CollectionViews.filtered(source, v -> !"hidden".equals(v));
+        Collection<String> view = CollectionViews.filtered(source, v -> !"hidden".equals(v));
         check(new ArrayList<>(view).equals(Arrays.asList(null,"b","a","b")), "null duplicates");
-        List<String> sorted = M3CollectionViews.filteredSortedSnapshot(source, v -> !"hidden".equals(v), Comparator.nullsFirst(Comparator.naturalOrder()));
+        List<String> sorted = CollectionViews.filteredSortedSnapshot(source, v -> !"hidden".equals(v), Comparator.nullsFirst(Comparator.naturalOrder()));
         source.clear();
         check(view.isEmpty(), "live owner");
         check(sorted.equals(Arrays.asList(null,"a","b","b")), "detached stable snapshot");
@@ -113,7 +113,7 @@ public final class M3LiveViewContinuationTest {
         Collection<Integer> deep = new ArrayList<>(List.of(7));
         for (int i = 0; i < 8192; i++) {
             int step = i;
-            deep = M3CollectionViews.filtered(deep, v -> { calls.add(step); return step < 4096; });
+            deep = CollectionViews.filtered(deep, v -> { calls.add(step); return step < 4096; });
         }
         check(deep.isEmpty(), "deep filter rejection");
         check(calls.size() == 4097, "short circuit count");
@@ -133,7 +133,7 @@ public final class M3LiveViewContinuationTest {
             Collection<Integer> owner = kind == 0
                     ? new java.util.concurrent.CopyOnWriteArrayList<>(List.of(1, 2, 3, 4))
                     : new java.util.concurrent.CopyOnWriteArraySet<>(List.of(1, 2, 3, 4));
-            Collection<Integer> view = M3CollectionViews.filtered(owner, v -> v % 2 == 0);
+            Collection<Integer> view = CollectionViews.filtered(owner, v -> v % 2 == 0);
             check(view.removeAll(List.of(2, 3)), "COW visible bulk remove");
             check(new ArrayList<>(owner).equals(List.of(1, 3, 4)), "hidden COW occurrence survives");
             check(view.addAll(List.of(6, 8)), "COW admitted addAll");
@@ -146,13 +146,13 @@ public final class M3LiveViewContinuationTest {
         }
         CowSubclass subclass = new CowSubclass();
         try {
-            M3CollectionViews.filtered(subclass, v -> true).clear();
+            CollectionViews.filtered(subclass, v -> true).clear();
             throw new AssertionError("subclass iterator contract changed");
         } catch (UnsupportedOperationException expected) { assertions++; }
         check(subclass.overrides == 0, "exact-class dispatch preserves subclass");
         check(subclass.equals(List.of(1, 2)), "subclass not mutated");
         int[] visits = {0};
-        Collection<Integer> view = M3CollectionViews.filtered(new ArrayList<>(List.of(1, 2, 3)), v -> { visits[0]++; return v == 2; });
+        Collection<Integer> view = CollectionViews.filtered(new ArrayList<>(List.of(1, 2, 3)), v -> { visits[0]++; return v == 2; });
         check(!view.isEmpty() && visits[0] == 2, "isEmpty short circuit retained");
     }
     public static void main(String[] args) {

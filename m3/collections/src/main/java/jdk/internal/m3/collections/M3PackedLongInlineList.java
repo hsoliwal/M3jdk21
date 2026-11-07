@@ -8,9 +8,9 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
-import jdk.m3.collections.M3LongIterator;
+import jdk.m3.collections.LongIterator;
 import jdk.m3.collections.M3LongSequence;
-import jdk.m3.collections.M3LongStack;
+import jdk.m3.collections.LongStack;
 
 /**
  * Small-buffer primitive long sequence adapted from the Apache-2.0 Abseil InlinedVector mechanic.
@@ -20,7 +20,7 @@ import jdk.m3.collections.M3LongStack;
  * Existing {@link M3LongArrayList} remains the general one-array owner.</p>
  */
 //FLLDCIM: RELOCATE - donor blob c0b02969ffe9 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
-public final class M3PackedLongInlineList implements M3LongSequence, M3LongStack {
+public final class M3PackedLongInlineList implements M3LongSequence, LongStack {
     public static final int INLINE_CAPACITY = 4;
 
     private long e0;
@@ -288,8 +288,8 @@ public final class M3PackedLongInlineList implements M3LongSequence, M3LongStack
     }
 
     @Override
-    public M3LongIterator iterator() {
-        return new M3LongIterator() {
+    public LongIterator iterator() {
+        return new LongIterator() {
             private int index;
             @Override public boolean hasNext() { return index < size; }
             @Override public long nextLong() {

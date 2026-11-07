@@ -4,7 +4,7 @@
  */
 package jdk.internal.m3.collections;
 
-import jdk.m3.collections.M3LongLongConsumer;
+import jdk.m3.collections.LongLongConsumer;
 
 /**
  * M3 five-library superset scaffold {@code M3FrozenLongMultimap}: API group {@code FROZEN_LONG_MULTIMAP} over arrays and state masks.
@@ -94,7 +94,7 @@ public final class M3FrozenLongMultimap {
     }
 
     /** Multimap.forEach (scaffold: not yet received). */
-    public void forEach(M3LongLongConsumer action) {
+    public void forEach(LongLongConsumer action) {
         throw new M3NotYetReceived("M3FrozenLongMultimap.forEach");
     }
 

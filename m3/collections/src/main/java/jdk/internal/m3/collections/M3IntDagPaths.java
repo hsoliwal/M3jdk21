@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3IntLongAdjacencyGraph;
+import jdk.m3.collections.graph.IntLongAdjacencyGraph;
 
 /**
  * Shortest/longest path relaxation for directed acyclic graphs.
@@ -31,7 +31,7 @@ public final class M3IntDagPaths {
 
     private M3IntDagPaths() {}
 
-    public static long[] shortestPaths(M3IntLongAdjacencyGraph graph, int source) {
+    public static long[] shortestPaths(IntLongAdjacencyGraph graph, int source) {
         Objects.requireNonNull(graph, "graph");
         int[] order = M3IntGraphAlgorithms.topologicalOrder(graph);
         int n = graph.vertexCount();
@@ -53,7 +53,7 @@ public final class M3IntDagPaths {
         return distance;
     }
 
-    public static long[] longestPaths(M3IntLongAdjacencyGraph graph, int source) {
+    public static long[] longestPaths(IntLongAdjacencyGraph graph, int source) {
         Objects.requireNonNull(graph, "graph");
         int[] order = M3IntGraphAlgorithms.topologicalOrder(graph);
         int n = graph.vertexCount();

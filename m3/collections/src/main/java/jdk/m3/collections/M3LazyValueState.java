@@ -15,11 +15,11 @@ import jdk.internal.m3.collections.M3SystemProgress;
 /** Optional state lane; values remain exclusively in the incumbent tree's payload array. */
 final class M3LazyValueState<K, V> {
     private static final short[] EMPTY = new short[0];
-    private final M3LazyValueProvider<? super K, ? extends V> provider;
+    private final LazyValueProvider<? super K, ? extends V> provider;
     private short[] flags = EMPTY;
     private int activeCalls;
 
-    M3LazyValueState(M3LazyValueProvider<? super K, ? extends V> provider) {
+    M3LazyValueState(LazyValueProvider<? super K, ? extends V> provider) {
         this.provider = Objects.requireNonNull(provider, "provider");
     }
 
@@ -44,10 +44,10 @@ final class M3LazyValueState<K, V> {
     int capacity() { return flags.length; }
     short flags(int slot) { return flags[slot]; }
     void admitted(int slot, boolean loaded) {
-        writable(); flags[slot] = loaded ? M3LazyValueProvider.LOADED : M3LazyValueProvider.UNLOADED;
+        writable(); flags[slot] = loaded ? LazyValueProvider.LOADED : LazyValueProvider.UNLOADED;
     }
-    void erased(int slot) { writable(); flags[slot] = M3LazyValueProvider.UNLOADED; }
-    void cleared() { writable(); Arrays.fill(flags, M3LazyValueProvider.UNLOADED); }
+    void erased(int slot) { writable(); flags[slot] = LazyValueProvider.UNLOADED; }
+    void cleared() { writable(); Arrays.fill(flags, LazyValueProvider.UNLOADED); }
 
     V read(int slot, K key, Object[] values, M3Progress monitor) {
         return read(slot, key, values, M3LazyOperation.READ, null, monitor);
@@ -58,7 +58,7 @@ final class M3LazyValueState<K, V> {
             K key,
             Object[] values,
             M3LazyOperation operation,
-            M3LazyEventPolicy invocationPolicy,
+            LazyEventPolicy invocationPolicy,
             M3Progress monitor) {
         // Keep the canonical slot stable through policy, monitor and observer callbacks too.
         activeCalls++;
@@ -74,92 +74,92 @@ final class M3LazyValueState<K, V> {
             K key,
             Object[] values,
             M3LazyOperation operation,
-            M3LazyEventPolicy invocationPolicy,
+            LazyEventPolicy invocationPolicy,
             M3Progress monitor) {
         Objects.requireNonNull(operation, "operation");
-        M3LazyEventPolicy policy = eventPolicy(invocationPolicy);
+        LazyEventPolicy policy = eventPolicy(invocationPolicy);
         try (M3ProgressScope scope = M3ProgressScope.resolve(monitor, 1L)) {
             M3Progress active = scope.monitor();
             short initial = flags[slot];
             boolean cancellationEventEmitted = false;
-            emit(policy, M3LazyEventBits.BEFORE_TOUCH, M3LazyEventGranularity.ELEMENT,
+            emit(policy, M3LazyEventBits.BEFORE_TOUCH, LazyEventGranularity.ELEMENT,
                     slot, initial, initial, operation, active, null);
             try {
                 checkCancelled(active);
-                if (flags[slot] == M3LazyValueProvider.LOADED) {
-                    emit(policy, M3LazyEventBits.CACHE_HIT, M3LazyEventGranularity.ELEMENT,
+                if (flags[slot] == LazyValueProvider.LOADED) {
+                    emit(policy, M3LazyEventBits.CACHE_HIT, LazyEventGranularity.ELEMENT,
                             slot, flags[slot], flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.AFTER_TOUCH, M3LazyEventGranularity.ELEMENT,
+                    emit(policy, M3LazyEventBits.AFTER_TOUCH, LazyEventGranularity.ELEMENT,
                             slot, initial, flags[slot], operation, active, null);
                     return value(values, slot);
                 }
-                if (flags[slot] == M3LazyValueProvider.LOADING) {
+                if (flags[slot] == LazyValueProvider.LOADING) {
                     throw new IllegalStateException("recursive lazy value load");
                 }
 
                 short oldState = flags[slot];
-                flags[slot] = M3LazyValueProvider.LOADING;
+                flags[slot] = LazyValueProvider.LOADING;
                 Throwable providerFailure = null;
                 try {
-                    emit(policy, M3LazyEventBits.CACHE_MISS, M3LazyEventGranularity.ELEMENT,
+                    emit(policy, M3LazyEventBits.CACHE_MISS, LazyEventGranularity.ELEMENT,
                             slot, oldState, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.STATE_CHANGED, M3LazyEventGranularity.STATE_TRANSITION,
+                    emit(policy, M3LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
                             slot, oldState, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.BEFORE_LOAD, M3LazyEventGranularity.OPERATION,
+                    emit(policy, M3LazyEventBits.BEFORE_LOAD, LazyEventGranularity.OPERATION,
                             slot, oldState, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.PROVIDER_BEGIN, M3LazyEventGranularity.OPERATION,
+                    emit(policy, M3LazyEventBits.PROVIDER_BEGIN, LazyEventGranularity.OPERATION,
                             slot, flags[slot], flags[slot], operation, active, null);
 
                     V result = provider.load(key, active);
                     checkCancelled(active);
                     values[slot] = result;
                     short loading = flags[slot];
-                    flags[slot] = M3LazyValueProvider.LOADED;
-                    emit(policy, M3LazyEventBits.STATE_CHANGED, M3LazyEventGranularity.STATE_TRANSITION,
+                    flags[slot] = LazyValueProvider.LOADED;
+                    emit(policy, M3LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
                             slot, loading, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.AFTER_LOAD, M3LazyEventGranularity.OPERATION,
+                    emit(policy, M3LazyEventBits.AFTER_LOAD, LazyEventGranularity.OPERATION,
                             slot, loading, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.AFTER_TOUCH, M3LazyEventGranularity.ELEMENT,
+                    emit(policy, M3LazyEventBits.AFTER_TOUCH, LazyEventGranularity.ELEMENT,
                             slot, initial, flags[slot], operation, active, null);
                     return result;
                 } catch (CancellationException canceled) {
                     providerFailure = canceled;
                     short loading = flags[slot];
-                    if (loading != M3LazyValueProvider.LOADED) {
+                    if (loading != LazyValueProvider.LOADED) {
                         values[slot] = null;
-                        flags[slot] = M3LazyValueProvider.FAILED;
-                        emitFailure(policy, M3LazyEventBits.STATE_CHANGED, M3LazyEventGranularity.STATE_TRANSITION,
+                        flags[slot] = LazyValueProvider.FAILED;
+                        emitFailure(policy, M3LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
                                 slot, loading, flags[slot], operation, active, canceled);
                     }
                     cancellationEventEmitted = true;
-                    emitFailure(policy, M3LazyEventBits.CANCELLED, M3LazyEventGranularity.OPERATION,
+                    emitFailure(policy, M3LazyEventBits.CANCELLED, LazyEventGranularity.OPERATION,
                             slot, loading, flags[slot], operation, active, canceled);
                     throw canceled;
                 } catch (RuntimeException | Error problem) {
                     providerFailure = problem;
                     short loading = flags[slot];
                     // A successfully published value stays loaded if an AFTER_* observer fails.
-                    if (loading != M3LazyValueProvider.LOADED) {
+                    if (loading != LazyValueProvider.LOADED) {
                         values[slot] = null;
-                        flags[slot] = M3LazyValueProvider.FAILED;
-                        emitFailure(policy, M3LazyEventBits.STATE_CHANGED, M3LazyEventGranularity.STATE_TRANSITION,
+                        flags[slot] = LazyValueProvider.FAILED;
+                        emitFailure(policy, M3LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
                                 slot, loading, flags[slot], operation, active, problem);
-                        emitFailure(policy, M3LazyEventBits.LOAD_FAILED, M3LazyEventGranularity.OPERATION,
+                        emitFailure(policy, M3LazyEventBits.LOAD_FAILED, LazyEventGranularity.OPERATION,
                                 slot, loading, flags[slot], operation, active, problem);
                     }
                     throw problem;
                 } finally {
                     if (providerFailure == null) {
-                        emit(policy, M3LazyEventBits.PROVIDER_END, M3LazyEventGranularity.OPERATION,
+                        emit(policy, M3LazyEventBits.PROVIDER_END, LazyEventGranularity.OPERATION,
                                 slot, flags[slot], flags[slot], operation, active, null);
                     } else {
-                        emitFailure(policy, M3LazyEventBits.PROVIDER_END, M3LazyEventGranularity.OPERATION,
+                        emitFailure(policy, M3LazyEventBits.PROVIDER_END, LazyEventGranularity.OPERATION,
                                 slot, flags[slot], flags[slot], operation, active, providerFailure);
                     }
                 }
             } catch (CancellationException canceled) {
                 if (!cancellationEventEmitted) {
-                    emitFailure(policy, M3LazyEventBits.CANCELLED, M3LazyEventGranularity.OPERATION,
+                    emitFailure(policy, M3LazyEventBits.CANCELLED, LazyEventGranularity.OPERATION,
                             slot, initial, flags[slot], operation, active, canceled);
                 }
                 throw canceled;
@@ -167,7 +167,7 @@ final class M3LazyValueState<K, V> {
         }
     }
 
-    M3LazyEventPolicy eventPolicy(M3LazyEventPolicy invocationPolicy) {
+    LazyEventPolicy eventPolicy(LazyEventPolicy invocationPolicy) {
         activeCalls++;
         try {
             return provider.lazyEventPolicy().overlay(invocationPolicy);
@@ -177,9 +177,9 @@ final class M3LazyValueState<K, V> {
     }
 
     void emit(
-            M3LazyEventPolicy policy,
+            LazyEventPolicy policy,
             long eventBit,
-            M3LazyEventGranularity granularity,
+            LazyEventGranularity granularity,
             long slot,
             short oldState,
             short newState,
@@ -199,9 +199,9 @@ final class M3LazyValueState<K, V> {
 
     /** Observation failures must not replace a provider's original exception. */
     private void emitFailure(
-            M3LazyEventPolicy policy,
+            LazyEventPolicy policy,
             long eventBit,
-            M3LazyEventGranularity granularity,
+            LazyEventGranularity granularity,
             long slot,
             short oldState,
             short newState,
@@ -222,10 +222,10 @@ final class M3LazyValueState<K, V> {
 
     void verifySlot(int slot, boolean live, Object[] values) {
         short state = flags[slot];
-        if (!live && state != M3LazyValueProvider.UNLOADED
-                || live && state != M3LazyValueProvider.UNLOADED && state != M3LazyValueProvider.LOADING
-                && state != M3LazyValueProvider.LOADED && state != M3LazyValueProvider.FAILED
-                || state != M3LazyValueProvider.LOADED && values[slot] != null) {
+        if (!live && state != LazyValueProvider.UNLOADED
+                || live && state != LazyValueProvider.UNLOADED && state != LazyValueProvider.LOADING
+                && state != LazyValueProvider.LOADED && state != LazyValueProvider.FAILED
+                || state != LazyValueProvider.LOADED && values[slot] != null) {
             throw new AssertionError("lazy slot ownership/state");
         }
     }

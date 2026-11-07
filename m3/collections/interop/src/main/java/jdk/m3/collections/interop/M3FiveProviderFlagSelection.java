@@ -7,7 +7,7 @@ package jdk.m3.collections.interop;
 
 import com.google.common.collect.Multiset;
 import jdk.m3.collections.M3CountedBag;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3ObjectCounts;
 import jdk.m3.collections.M3TreeMap;
@@ -46,7 +46,7 @@ public final class M3FiveProviderFlagSelection<E> {
     /** Filter one version of the source and preserve duplicate counts without re-filtering. */
     public static <E> M3FiveProviderFlagSelection<E> capture(
             M3ObjectCounts<E> source, int requiredMask, int excludedMask,
-            M3IndexPathMasks.Backend backend) {
+            IndexPathMasks.Backend backend) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(backend, "backend");
         long stamp = source.countRevision();

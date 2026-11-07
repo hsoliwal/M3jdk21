@@ -14,30 +14,30 @@
  *******************************************************************************/
 package jdk.m3.collections.interop;
 
-import jdk.m3.collections.M3ObjectStream;
+import jdk.m3.collections.ObjectStream;
 import java.util.Objects;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.list.MutableList;
 /** Opt-in RichIterable/MutableList gateway into M3JDK 21 operations. */
 public final class M3EclipseStreams {
     private M3EclipseStreams() {}
-    public static <T> M3ObjectStream<T> snapshot(RichIterable<T> input) {
-        return M3ObjectStream.snapshot((Iterable<T>) Objects.requireNonNull(input, "input"));
+    public static <T> ObjectStream<T> snapshot(RichIterable<T> input) {
+        return ObjectStream.snapshot((Iterable<T>) Objects.requireNonNull(input, "input"));
     }
-    public static <T> M3ObjectStream<T> snapshotList(MutableList<T> input) {
-        return M3ObjectStream.snapshot(Objects.requireNonNull(input, "input"));
+    public static <T> ObjectStream<T> snapshotList(MutableList<T> input) {
+        return ObjectStream.snapshot(Objects.requireNonNull(input, "input"));
     }
-    public static <T> M3ObjectStream<T> liveList(MutableList<T> input) {
-        return M3ObjectStream.live(Objects.requireNonNull(input, "input"));
+    public static <T> ObjectStream<T> liveList(MutableList<T> input) {
+        return ObjectStream.live(Objects.requireNonNull(input, "input"));
     }
 
     /** Universal Iterable adapter for List, Set, Queue, Bag and other provider occurrences. */
-    public static <T> M3ObjectStream<T> snapshotAny(Iterable<? extends T> source) {
-        return M3ObjectStream.snapshot(Objects.requireNonNull(source, "source"));
+    public static <T> ObjectStream<T> snapshotAny(Iterable<? extends T> source) {
+        return ObjectStream.snapshot(Objects.requireNonNull(source, "source"));
     }
 
     /** Universal live adapter; encounter and fail-fast semantics remain provider-owned. */
-    public static <T> M3ObjectStream<T> liveAny(java.util.Collection<T> source) {
-        return M3ObjectStream.live(Objects.requireNonNull(source, "source"));
+    public static <T> ObjectStream<T> liveAny(java.util.Collection<T> source) {
+        return ObjectStream.live(Objects.requireNonNull(source, "source"));
     }
 }

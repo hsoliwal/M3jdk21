@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 import jdk.internal.m3.collections.M3LongMinimumSpanningForest;
+import jdk.m3.collections.graph.IntBipartiteMatching;
+import jdk.m3.collections.graph.WeightedIntCsrGraph;
 
 class M3AdvancedGraphStructuresTest {
     @Test void forestsMatchEnumerationOfEverySmallEdgeSubset() {
@@ -28,7 +30,7 @@ class M3AdvancedGraphStructuresTest {
                 } }
                 if (groupCount(labels(chosen)) == components) { best = Math.min(best, sum); }
             }
-            var forest = new M3LongMinimumSpanningForest(M3WeightedIntCsrGraph.undirected(n, from, to, weight));
+            var forest = new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(n, from, to, weight));
             assertEquals(best, forest.totalWeight()); assertEquals(components, forest.componentCount());
             assertEquals(n - components, forest.selectedEdgeCount());
             long[] componentWeights = new long[components]; boolean[][] chosen = new boolean[n][n];
@@ -48,17 +50,17 @@ class M3AdvancedGraphStructuresTest {
     }
 
     @Test void forestTiesExtremesAndRejectionContracts() {
-        var ties = new M3LongMinimumSpanningForest(M3WeightedIntCsrGraph.undirected(4,
+        var ties = new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(4,
                 new int[]{0, 1, 0, 2, 0}, new int[]{1, 2, 2, 3, 0}, new long[]{5, 5, 5, 5, -99}));
         assertEquals(0, ties.edgeAt(0)); assertEquals(1, ties.edgeAt(1)); assertEquals(3, ties.edgeAt(2));
         assertFalse(ties.containsEdge(4)); assertEquals(15, ties.totalWeight());
-        var extreme = new M3LongMinimumSpanningForest(M3WeightedIntCsrGraph.undirected(2, new int[]{0}, new int[]{1}, new long[]{Long.MIN_VALUE}));
+        var extreme = new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(2, new int[]{0}, new int[]{1}, new long[]{Long.MIN_VALUE}));
         assertEquals(Long.MIN_VALUE, extreme.totalWeight());
-        assertThrows(ArithmeticException.class, () -> new M3LongMinimumSpanningForest(M3WeightedIntCsrGraph.undirected(3,
+        assertThrows(ArithmeticException.class, () -> new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(3,
                 new int[]{0, 1}, new int[]{1, 2}, new long[]{Long.MAX_VALUE, 1})));
-        assertThrows(ArithmeticException.class, () -> new M3LongMinimumSpanningForest(M3WeightedIntCsrGraph.undirected(3,
+        assertThrows(ArithmeticException.class, () -> new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(3,
                 new int[]{0, 1}, new int[]{1, 2}, new long[]{Long.MIN_VALUE, -1})));
-        assertThrows(IllegalArgumentException.class, () -> new M3LongMinimumSpanningForest(M3WeightedIntCsrGraph.directed(0, new int[0], new int[0], new long[0])));
+        assertThrows(IllegalArgumentException.class, () -> new M3LongMinimumSpanningForest(WeightedIntCsrGraph.directed(0, new int[0], new int[0], new long[0])));
         assertThrows(IndexOutOfBoundsException.class, () -> ties.edgeAt(3));
         assertThrows(IndexOutOfBoundsException.class, () -> ties.componentWeight(1));
     }
@@ -69,7 +71,7 @@ class M3AdvancedGraphStructuresTest {
             int l = random.nextInt(7), r = random.nextInt(7), edges = l == 0 || r == 0 ? 0 : random.nextInt(28);
             int[] from = new int[edges], to = new int[edges]; boolean[][] adjacent = new boolean[l][r];
             for (int e = 0; e < edges; e++) { from[e] = random.nextInt(l); to[e] = random.nextInt(r); adjacent[from[e]][to[e]] = true; }
-            var match = new M3IntBipartiteMatching(l, r, from, to);
+            var match = new IntBipartiteMatching(l, r, from, to);
             assertEquals(maximum(adjacent, 0, 0), match.cardinality());
             int matchedLeft = 0, matchedRight = 0, cover = 0;
             for (int a = 0; a < l; a++) {
@@ -92,19 +94,19 @@ class M3AdvancedGraphStructuresTest {
             from[at] = vertex; to[at++] = vertex; from[at] = vertex; to[at++] = vertex + 1;
         }
         from[at] = n - 1; to[at] = 0;
-        var match = new M3IntBipartiteMatching(n, n, from, to);
+        var match = new IntBipartiteMatching(n, n, from, to);
         assertEquals(n, match.cardinality()); assertEquals(0, match.partnerOfLeft(n - 1));
         for (int vertex = 0; vertex < n - 1; vertex++) { assertEquals(vertex + 1, match.partnerOfLeft(vertex)); }
     }
 
     @Test void matchingValidatesAndRetainsOnlyResults() {
-        int[] left = {0, 0, 1}, right = {0, 0, 1}; var match = new M3IntBipartiteMatching(2, 2, left, right);
+        int[] left = {0, 0, 1}, right = {0, 0, 1}; var match = new IntBipartiteMatching(2, 2, left, right);
         Arrays.fill(left, 100); Arrays.fill(right, 100); assertEquals(2, match.cardinality());
         assertEquals(0, match.partnerOfLeft(0)); assertEquals(1, match.partnerOfLeft(1));
-        assertEquals(0, new M3IntBipartiteMatching(0, 5, new int[0], new int[0]).cardinality());
-        assertThrows(IllegalArgumentException.class, () -> new M3IntBipartiteMatching(-1, 0, new int[0], new int[0]));
-        assertThrows(IllegalArgumentException.class, () -> new M3IntBipartiteMatching(1, 1, new int[0], new int[1]));
-        assertThrows(IndexOutOfBoundsException.class, () -> new M3IntBipartiteMatching(1, 1, new int[]{0}, new int[]{1}));
+        assertEquals(0, new IntBipartiteMatching(0, 5, new int[0], new int[0]).cardinality());
+        assertThrows(IllegalArgumentException.class, () -> new IntBipartiteMatching(-1, 0, new int[0], new int[0]));
+        assertThrows(IllegalArgumentException.class, () -> new IntBipartiteMatching(1, 1, new int[0], new int[1]));
+        assertThrows(IndexOutOfBoundsException.class, () -> new IntBipartiteMatching(1, 1, new int[]{0}, new int[]{1}));
     }
 
     private static int maximum(boolean[][] adjacent, int left, int used) {

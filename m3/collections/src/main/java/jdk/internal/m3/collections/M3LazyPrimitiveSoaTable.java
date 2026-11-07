@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongConsumer;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Sparse struct-of-arrays table over stable logical row ids.
@@ -31,11 +31,11 @@ import jdk.m3.collections.M3PrimitiveKind;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3LazyPrimitiveSoaTable {
-    private final M3PrimitiveKind[] laneKinds;
+    private final PrimitiveKind[] laneKinds;
     private final M3LazyPrimitiveAddressSpace[] lanes;
     private final M3LazyBitAddressSpace present;
 
-    public M3LazyPrimitiveSoaTable(M3PrimitiveKind... laneKinds) {
+    public M3LazyPrimitiveSoaTable(PrimitiveKind... laneKinds) {
         this(
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
                 M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
@@ -47,13 +47,13 @@ public final class M3LazyPrimitiveSoaTable {
             int rootBits,
             int directoryBits,
             int leafBits,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         Objects.requireNonNull(laneKinds, "laneKinds");
         if (laneKinds.length == 0) throw new IllegalArgumentException("at least one lane required");
         this.laneKinds = laneKinds.clone();
         lanes = new M3LazyPrimitiveAddressSpace[laneKinds.length];
         for (int lane = 0; lane < laneKinds.length; lane++) {
-            M3PrimitiveKind kind = Objects.requireNonNull(laneKinds[lane], "lane kind");
+            PrimitiveKind kind = Objects.requireNonNull(laneKinds[lane], "lane kind");
             lanes[lane] =
                     new M3LazyPrimitiveAddressSpace(kind, rootBits, directoryBits, leafBits);
         }
@@ -61,7 +61,7 @@ public final class M3LazyPrimitiveSoaTable {
     }
 
     public int laneCount() { return lanes.length; }
-    public M3PrimitiveKind laneKind(int lane) { return laneKinds[checkLane(lane)]; }
+    public PrimitiveKind laneKind(int lane) { return laneKinds[checkLane(lane)]; }
     public long logicalCapacity() { return present.logicalCapacity(); }
     public long size() { return present.cardinality(); }
 

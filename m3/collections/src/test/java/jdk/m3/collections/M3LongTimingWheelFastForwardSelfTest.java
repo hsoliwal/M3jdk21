@@ -25,7 +25,7 @@ public final class M3LongTimingWheelFastForwardSelfTest {
     /** Same bounded random schedule applies to both exact original and candidate. */
     private static void ordinary() {
         for (int width : new int[] {1, 2, 4, 8, 16, 64}) {
-            M3LongTimingWheel wheel = new M3LongTimingWheel(width, 1L, 100L);
+            LongTimingWheel wheel = new LongTimingWheel(width, 1L, 100L);
             Random random = new Random(0x83bada88df00b88aL ^ width);
             Map<Long, Long> pending = new HashMap<>();
             List<Long> delivered = new ArrayList<>();
@@ -67,7 +67,7 @@ public final class M3LongTimingWheelFastForwardSelfTest {
 
     private static void huge() {
         long billion = 1_000_000_000L;
-        M3LongTimingWheel empty = new M3LongTimingWheel(4, 1L, 0L);
+        LongTimingWheel empty = new LongTimingWheel(4, 1L, 0L);
         check(empty.advanceTo(billion, v -> { throw new AssertionError("unexpected"); }) == 0,
                 "empty billion advance");
         check(empty.currentTick() == billion + 1, "empty next tick");
@@ -79,7 +79,7 @@ public final class M3LongTimingWheelFastForwardSelfTest {
         check(empty.advanceTo(billion + 4, ids::add) == 1, "future due after skip");
         check(ids.equals(List.of(7L)), "future ID");
 
-        M3LongTimingWheel spaced = new M3LongTimingWheel(4, 1L, 0L);
+        LongTimingWheel spaced = new LongTimingWheel(4, 1L, 0L);
         spaced.schedule(99L, billion + 8);
         spaced.schedule(11L, billion);
         spaced.schedule(12L, billion + 4);
@@ -93,7 +93,7 @@ public final class M3LongTimingWheelFastForwardSelfTest {
         check(spaced.currentTick() == billion + 11 && spaced.size() == 0,
                 "cursor/size after sparse skip");
 
-        M3LongTimingWheel retry = new M3LongTimingWheel(2, 1L, 0L);
+        LongTimingWheel retry = new LongTimingWheel(2, 1L, 0L);
         retry.schedule(88L, billion + 2);
         retry.schedule(77L, billion);
         RuntimeException failure = new RuntimeException("callback failed");
@@ -108,7 +108,7 @@ public final class M3LongTimingWheelFastForwardSelfTest {
         check(retry.advanceTo(billion + 4, observed::add) == 2, "retry drain count");
         check(observed.equals(List.of(77L, 88L)), "retry drain order");
 
-        M3LongTimingWheel bound = new M3LongTimingWheel(2, 1L, Long.MIN_VALUE);
+        LongTimingWheel bound = new LongTimingWheel(2, 1L, Long.MIN_VALUE);
         check(bound.advanceTo(Long.MAX_VALUE, v -> { throw new AssertionError("empty should not visit"); }) == 0,
                 "signed long full-range empty skip");
         check(bound.currentTick() == Long.MAX_VALUE, "terminal cursor");
@@ -120,7 +120,7 @@ public final class M3LongTimingWheelFastForwardSelfTest {
         } catch (IllegalStateException expected) {
             check("timing wheel exhausted".equals(expected.getMessage()), "terminal refusal");
         }
-        M3LongTimingWheel overflow = new M3LongTimingWheel(2, 1L, Long.MIN_VALUE);
+        LongTimingWheel overflow = new LongTimingWheel(2, 1L, Long.MIN_VALUE);
         overflow.schedule(88L, Long.MAX_VALUE - 1L);
         check(overflow.advanceTo(Long.MAX_VALUE - 2L, value -> {
             throw new AssertionError("early across signed range");

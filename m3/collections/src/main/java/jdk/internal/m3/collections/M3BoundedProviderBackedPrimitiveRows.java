@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Provider-backed primitive rows with bounded steady-state residency.
@@ -58,7 +58,7 @@ public final class M3BoundedProviderBackedPrimitiveRows {
     public M3BoundedProviderBackedPrimitiveRows(
             int maxResidentRows,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this(
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
                 M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
@@ -74,7 +74,7 @@ public final class M3BoundedProviderBackedPrimitiveRows {
             int leafBits,
             int maxResidentRows,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         if (maxResidentRows <= 0) {
             throw new IllegalArgumentException("maxResidentRows <= 0");
         }
@@ -84,12 +84,12 @@ public final class M3BoundedProviderBackedPrimitiveRows {
                 rootBits, directoryBits, leafBits,
                 Objects.requireNonNull(provider, "provider"), laneKinds);
         slotByRow = new M3LazyPrimitiveAddressSpace(
-                M3PrimitiveKind.INT, rootBits, directoryBits, leafBits);
+                PrimitiveKind.INT, rootBits, directoryBits, leafBits);
         referenced = new M3LazyBitAddressSpace(rootBits, directoryBits, leafBits);
     }
 
     public int laneCount() { return rows.laneCount(); }
-    public M3PrimitiveKind laneKind(int lane) { return rows.laneKind(lane); }
+    public PrimitiveKind laneKind(int lane) { return rows.laneKind(lane); }
     public long logicalCapacity() { return rows.logicalCapacity(); }
     public long materializedSize() { return rows.materializedSize(); }
     public int maxResidentRows() { return maxResidentRows; }

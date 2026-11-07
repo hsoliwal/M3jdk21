@@ -54,7 +54,7 @@ public final class M3FrequencyMaskChecks {
     private static void mapCases() throws Exception {
         Random random = new Random(0x1362150L);
         for (int round = 0; round < 12; round++) {
-            M3IntIntHashMap map = new M3IntIntHashMap(round % 3);
+            jdk.m3.collections.IntIntHashMap map = new jdk.m3.collections.IntIntHashMap(round % 3);
             IntIntHashMap donor = new IntIntHashMap(round % 3, round % 2 == 0 ? 0.65f : 0.3f);
             Map<Integer, Integer> oracle = new HashMap<>();
             for (int step = 0; step < 4000; step++) {
@@ -110,18 +110,18 @@ public final class M3FrequencyMaskChecks {
             }
         }
         for (int key : new int[]{0, 1, -1, Integer.MIN_VALUE, Integer.MAX_VALUE}) {
-            M3IntIntHashMap map = new M3IntIntHashMap();
+            jdk.m3.collections.IntIntHashMap map = new jdk.m3.collections.IntIntHashMap();
             require(map.addTo(key, 0) == 0 && map.containsKey(key), "zero delta inserts");
             map.put(key, Integer.MAX_VALUE);
-            M3IntIterator it = map.keyIterator();
+            IntIterator it = map.keyIterator();
             require(map.addTo(key, 1) == Integer.MIN_VALUE, "overflow wraps");
             require(it.hasNext() && it.nextInt() == key && !it.hasNext(), "overwrite iterator");
-            M3IntIterator invalidated = map.keyIterator();
+            IntIterator invalidated = map.keyIterator();
             map.addTo(key ^ 0x4a4a4a4a, 0);
             expect(ConcurrentModificationException.class, invalidated::hasNext);
         }
         // Force wraparound collision runs, delete interior keys, then count again.
-        M3IntIntHashMap map = new M3IntIntHashMap(30);
+        jdk.m3.collections.IntIntHashMap map = new jdk.m3.collections.IntIntHashMap(30);
         Map<Integer, Integer> oracle = new HashMap<>();
         int found = 0;
         for (int key = 1; found < 25; key++) {
@@ -157,7 +157,7 @@ public final class M3FrequencyMaskChecks {
                 };
             }
             int[] saved = input.clone();
-            M3IntIntHashMap counts = new M3IntIntHashMap();
+            jdk.m3.collections.IntIntHashMap counts = new jdk.m3.collections.IntIntHashMap();
             for (int i = from; i < from + n; i++) counts.addTo(input[i], 1);
             byte[] flags = new byte[n];
             for (int i = 0; i < n; i++) {
@@ -268,7 +268,7 @@ public final class M3FrequencyMaskChecks {
             var field = map.getClass().getDeclaredField(name); field.setAccessible(true); tape(field.getInt(map));
         }
         var zero = map.getClass().getDeclaredField("hasZero"); zero.setAccessible(true); tape(zero.getBoolean(map) ? 1 : 0);
-        if (map instanceof M3IntIntHashMap) {
+        if (map instanceof jdk.m3.collections.IntIntHashMap) {
             var mod = map.getClass().getDeclaredField("modCount"); mod.setAccessible(true); tape(mod.getInt(map));
         }
     }

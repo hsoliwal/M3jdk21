@@ -8,7 +8,7 @@ package jdk.m3.collections.interop;
 import com.google.common.collect.ForwardingSetMultimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3LinkedHashSet;
 import java.util.Collection;
@@ -67,7 +67,7 @@ public final class M3GuavaSetMultimap<K, V> extends ForwardingSetMultimap<K, V> 
      */
     public M3GuavaSetMultimap<K, V> selectedByStates(
             int[] states, int requiredMask, int forbiddenMask,
-            M3IndexPathMasks.Backend backend) {
+            IndexPathMasks.Backend backend) {
         Objects.requireNonNull(states, "states");
         Objects.requireNonNull(backend, "backend");
         int count = size();
@@ -88,7 +88,7 @@ public final class M3GuavaSetMultimap<K, V> extends ForwardingSetMultimap<K, V> 
         if (ordinal != count || size() != count) {
             throw new ConcurrentModificationException("set multimap resized during capture");
         }
-        int[] selected = M3IndexPathMasks.select(
+        int[] selected = IndexPathMasks.select(
                 positions, positions, new int[][] {states},
                 new int[] {requiredMask}, new int[] {forbiddenMask},
                 0, count, 1, backend);

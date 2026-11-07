@@ -33,7 +33,7 @@ final class M3FilteredSplitsMaskSpansTest {
                 "all-native qualification is an explicit, isolated lane");
         org.junit.jupiter.api.Assertions.assertAll(
                 () -> org.junit.jupiter.api.Assertions.assertTrue(M3IndexMaskCompactor.nativeAvailable(), "mask"),
-                () -> org.junit.jupiter.api.Assertions.assertTrue(M3IndexPathMasks.nativeAvailable(), "pathmask"),
+                () -> org.junit.jupiter.api.Assertions.assertTrue(IndexPathMasks.nativeAvailable(), "pathmask"),
                 () -> org.junit.jupiter.api.Assertions.assertTrue(M3LongIndexPathMasksJNI.nativeAvailable(), "long-path-masks"),
                 () -> org.junit.jupiter.api.Assertions.assertTrue(M3LongAddressKernel.nativeAvailable(), "address"),
                 () -> org.junit.jupiter.api.Assertions.assertTrue(M3SpanIndex.nativeAvailable(), "span"),

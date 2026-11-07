@@ -27,7 +27,7 @@ class M3LongTimingWheelFastForwardTest {
 
     @Test
     void existingPublicInterfaceIsBytecodeCompatible() {
-        var methods = Arrays.stream(M3LongTimingWheel.class.getDeclaredMethods())
+        var methods = Arrays.stream(LongTimingWheel.class.getDeclaredMethods())
                 .filter(m -> Modifier.isPublic(m.getModifiers())
                         || Modifier.isProtected(m.getModifiers()))
                 .map(m -> m.getName() + "/" + m.getParameterCount())
@@ -35,8 +35,8 @@ class M3LongTimingWheelFastForwardTest {
         assertEquals(java.util.List.of("advanceTo/2", "clear/0", "currentTick/0",
                 "payloadBytes/0", "schedule/2", "size/0", "tickNanos/0",
                 "wheelSize/0"), methods);
-        assertEquals(1, M3LongTimingWheel.class.getDeclaredConstructors().length);
-        assertTrue(Modifier.isPublic(M3LongTimingWheel.class
+        assertEquals(1, LongTimingWheel.class.getDeclaredConstructors().length);
+        assertTrue(Modifier.isPublic(LongTimingWheel.class
                 .getDeclaredConstructors()[0].getModifiers()));
     }
 }

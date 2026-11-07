@@ -86,7 +86,7 @@ public final class M3CollectionSdkCatalogSelfTest {
         check(spring.disposition() == M3CollectionSdkCatalog.Disposition.OPTIONAL_ADAPTER,
                 "optional Spring adapter is not core or pending");
         check(M3CollectionSdkCatalog.require("org.eclipse.collections.api.list.primitive.MutableLongList")
-                .existingM3Owner().equals("jdk.m3.collections.M3LongArrayList"), "Eclipse long shape only");
+                .existingM3Owner().equals("jdk.m3.collections.LongArrayList"), "Eclipse long shape only");
         for (String jdk : List.of("java.util.ArrayList", "java.util.SequencedSet",
                 "java.util.SequencedCollection", "java.util.SequencedMap",
                 "java.util.concurrent.ConcurrentHashMap")) {

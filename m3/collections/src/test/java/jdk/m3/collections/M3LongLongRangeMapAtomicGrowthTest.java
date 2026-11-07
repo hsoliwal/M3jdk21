@@ -16,13 +16,13 @@ final class M3LongLongRangeMapAtomicGrowthTest {
     @Test
     void failureOfEachArrayCopyPreservesAllThreeOriginalLanes() {
         for (int failAt = 1; failAt <= 3; failAt++) {
-            M3LongLongRangeMap map = new M3LongLongRangeMap(1);
+            LongLongRangeMap map = new LongLongRangeMap(1);
             map.put(2, 7, 41);
             int oldCapacity = map.capacity();
             long oldPayload = map.payloadBytes();
             AtomicInteger calls = new AtomicInteger();
             int failedCopy = failAt;
-            M3LongLongRangeMap.BackingCopier injected = (source, capacity) -> {
+            LongLongRangeMap.BackingCopier injected = (source, capacity) -> {
                 if (calls.incrementAndGet() == failedCopy) {
                     throw new OutOfMemoryError("synthetic array " + failedCopy);
                 }
@@ -46,7 +46,7 @@ final class M3LongLongRangeMapAtomicGrowthTest {
 
     @Test
     void malformedNullAndShortCopiesFailBeforePublishingAnyLane() {
-        M3LongLongRangeMap map = new M3LongLongRangeMap(1);
+        LongLongRangeMap map = new LongLongRangeMap(1);
         map.put(-10, -3, 67);
         assertThrows(NullPointerException.class, () -> map.ensure(10, (source, size) -> null));
         assertThrows(IllegalStateException.class, () -> map.ensure(10,
@@ -58,7 +58,7 @@ final class M3LongLongRangeMapAtomicGrowthTest {
 
     @Test
     void growthThatIsNotNeededNeverInvokesInjectedCopier() {
-        M3LongLongRangeMap map = new M3LongLongRangeMap(8);
+        LongLongRangeMap map = new LongLongRangeMap(8);
         map.put(1, 2, 3);
         map.ensure(8, (source, capacity) -> {
             throw new AssertionError("copy invoked for already sufficient capacity");
@@ -69,7 +69,7 @@ final class M3LongLongRangeMapAtomicGrowthTest {
 
     @Test
     void deterministicOverwriteRemoveAndCoalescingMatchPointwiseOracle() {
-        M3LongLongRangeMap map = new M3LongLongRangeMap(1);
+        LongLongRangeMap map = new LongLongRangeMap(1);
         long[] values = new long[257];
         boolean[] present = new boolean[257];
         for (int operation = 0; operation < 1_024; operation++) {

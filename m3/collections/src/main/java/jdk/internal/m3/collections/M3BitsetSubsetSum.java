@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3PackedBitVector;
+import jdk.m3.collections.bits.PackedBitVector;
 
 /**
  * 0/1 subset-sum reachability for nonnegative integer weights and a bounded sum domain.
@@ -50,8 +50,8 @@ public final class M3BitsetSubsetSum {
         if(tail!=0) reachable[reachable.length-1]&=(1L<<tail)-1;
     }
     public boolean contains(int sum) { Objects.checkIndex(sum,limit+1);return (reachable[sum>>>6]&(1L<<(sum&63)))!=0; }
-    public M3PackedBitVector snapshot() { return new M3PackedBitVector(reachable,limit+1); }
-    public static M3PackedBitVector solve(int[] weights,int limit) {
+    public PackedBitVector snapshot() { return new PackedBitVector(reachable,limit+1); }
+    public static PackedBitVector solve(int[] weights,int limit) {
         Objects.requireNonNull(weights,"weights");
         for(int w:weights) if(w<0) throw new IllegalArgumentException("negative weight");
         M3BitsetSubsetSum state=new M3BitsetSubsetSum(limit);

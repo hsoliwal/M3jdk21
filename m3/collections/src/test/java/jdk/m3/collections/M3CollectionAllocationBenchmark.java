@@ -31,7 +31,7 @@ public final class M3CollectionAllocationBenchmark {
         for (int i = 0; i < n; i++) {
             source.add(i); values[i] = i; slots[i] = i; bag.addOccurrences(i, 1);
         }
-        var snapshot = M3ObjectIndexSnapshot.<Integer>capture(values, slots, flags);
+        var snapshot = ObjectIndexSnapshot.<Integer>capture(values, slots, flags);
         var counts = bag.sortedCounts(null);
         String selection = workload.substring(workload.indexOf('-') + 1);
         Predicate<Integer> reject = switch (selection) {

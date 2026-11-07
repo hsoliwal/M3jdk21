@@ -30,7 +30,7 @@ import java.util.function.LongConsumer;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveHashSet {
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final float loadFactor;
     private Object keys;
     private int mask;
@@ -38,11 +38,11 @@ public final class M3PrimitiveHashSet {
     private int size;
     private boolean hasZeroKey;
 
-    public M3PrimitiveHashSet(M3PrimitiveKind kind) {
+    public M3PrimitiveHashSet(PrimitiveKind kind) {
         this(kind, 16, M3DenseHash.DEFAULT_LOAD_FACTOR);
     }
 
-    public M3PrimitiveHashSet(M3PrimitiveKind kind, int expected, float loadFactor) {
+    public M3PrimitiveHashSet(PrimitiveKind kind, int expected, float loadFactor) {
         this.kind = Objects.requireNonNull(kind, "kind");
         this.loadFactor = loadFactor;
         int capacity = M3DenseHash.capacityFor(expected, loadFactor);
@@ -51,7 +51,7 @@ public final class M3PrimitiveHashSet {
         threshold = M3DenseHash.threshold(capacity, loadFactor);
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return java.lang.reflect.Array.getLength(keys); }

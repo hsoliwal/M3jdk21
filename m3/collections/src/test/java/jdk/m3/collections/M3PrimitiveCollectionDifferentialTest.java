@@ -27,7 +27,7 @@ final class M3PrimitiveCollectionDifferentialTest {
     }
 
     @Test void primitiveListMatchesJdkAcrossGrowthCompactionSortingAndStreams() {
-        var actual = new M3LongArrayList(0); var expected = new ArrayList<Long>();
+        var actual = new LongArrayList(0); var expected = new ArrayList<Long>();
         Random random = new Random(0x4d334c495354L);
         for (int step = 0; step < 4_000; step++) {
             long v = value(random, step); int index = random.nextInt(expected.size() + 1);
@@ -79,11 +79,11 @@ final class M3PrimitiveCollectionDifferentialTest {
         }
         assertThrows(IndexOutOfBoundsException.class, () -> actual.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> actual.insert(actual.size() + 1, 1));
-        assertThrows(IllegalArgumentException.class, () -> new M3LongArrayList(-1));
+        assertThrows(IllegalArgumentException.class, () -> new LongArrayList(-1));
     }
 
     @Test void primitiveListSnapshotFilterFailureAndOwnerBoundStream() {
-        long[] input = {1, 2, 3, 4, 5}; var actual = M3LongArrayList.copyOf(input);
+        long[] input = {1, 2, 3, 4, 5}; var actual = LongArrayList.copyOf(input);
         input[0] = 99; assertEquals(1, actual.get(0));
         var stream = actual.longStream(); actual.ensureCapacity(4096); actual.set(0, 8);
         assertArrayEquals(new long[] {8, 2, 3, 4, 5}, stream.toArray());
@@ -99,7 +99,7 @@ final class M3PrimitiveCollectionDifferentialTest {
     }
 
     @Test void primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams() {
-        var actual = new M3LongArrayDeque(0); var expected = new ArrayDeque<Long>();
+        var actual = new LongArrayDeque(0); var expected = new ArrayDeque<Long>();
         Random random = new Random(0x4d334445515545L);
         for (int step = 0; step < 6_000; step++) {
             long v = value(random, step);
@@ -145,6 +145,6 @@ final class M3PrimitiveCollectionDifferentialTest {
         assertThrows(NoSuchElementException.class, actual::poll);
         assertThrows(NoSuchElementException.class, actual::peek);
         assertThrows(IndexOutOfBoundsException.class, () -> actual.get(0));
-        assertThrows(IllegalArgumentException.class, () -> new M3LongArrayDeque(-1));
+        assertThrows(IllegalArgumentException.class, () -> new LongArrayDeque(-1));
     }
 }

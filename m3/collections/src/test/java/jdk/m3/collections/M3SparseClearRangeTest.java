@@ -20,7 +20,7 @@ final class M3SparseClearRangeTest {
     private static final int SHIFT = 10;
     private static final int PAGE_SIZE = 1 << SHIFT;
 
-    private static long sample(M3PrimitiveKind kind, int n) {
+    private static long sample(PrimitiveKind kind, int n) {
         return switch (kind) {
             case BOOLEAN -> n % 3 == 0 ? 0L : 1L;
             case BYTE, SHORT, CHAR, INT, LONG -> n % 7 == 0 ? 0L
@@ -45,7 +45,7 @@ final class M3SparseClearRangeTest {
     @Test
     void repeatedClearAndPreservingClearMatchIndependentRawBitOracleForEveryKind() {
         final int capacity = 1 << 17;
-        for (M3PrimitiveKind kind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind kind : PrimitiveKind.values()) {
             M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(kind, capacity, SHIFT);
             Random random = new Random(0x4d33534c4f54534cL + kind.ordinal());
             Map<Long, Long> wanted = new HashMap<>();
@@ -92,7 +92,7 @@ final class M3SparseClearRangeTest {
     @Test
     void completeLeafClearDetachesOnlyCoveredOwnerRoots() {
         M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(
-                M3PrimitiveKind.LONG, 1L << 23, SHIFT);
+                PrimitiveKind.LONG, 1L << 23, SHIFT);
         space.setBits(11, 111);
         space.setBits(1033, 222);
         space.setBits(2070, 333);
@@ -117,7 +117,7 @@ final class M3SparseClearRangeTest {
     @Test
     void preflightZeroingRetainsTheExactOldBackingLeaf() {
         M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(
-                M3PrimitiveKind.LONG, 1L << 20, SHIFT);
+                PrimitiveKind.LONG, 1L << 20, SHIFT);
         space.setBits(1040, 911L);
         space.setBits(1072, 827L);
         Object root = space.existingLeaf(1040);
@@ -135,7 +135,7 @@ final class M3SparseClearRangeTest {
     @Test
     void extremeSignedLongExclusiveCapacityAndTruncatedTailStayCorrect() {
         M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(
-                M3PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
+                PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
         space.setBits(1L, 17L);
         space.setBits(1L << 42, 29L);
         space.setBits(Long.MAX_VALUE - 1, 73L);
@@ -160,7 +160,7 @@ final class M3SparseClearRangeTest {
     @Test
     void emptyAndIllegalBoundsCannotAllocateOrChangeStorage() {
         M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(
-                M3PrimitiveKind.LONG, 1L << 17, SHIFT);
+                PrimitiveKind.LONG, 1L << 17, SHIFT);
         space.setBits(42L, 99L);
         long before = space.allocatedLeafCount64();
         Object root = space.existingLeaf(42L);
@@ -180,10 +180,10 @@ final class M3SparseClearRangeTest {
 
     @Test
     void sparseCopyStillPreservesZeroHolesAndUnrelatedDestinationAfterClear() {
-        M3PrimitiveBigArray source = M3PrimitiveBigArray.sparse(
-                M3PrimitiveKind.LONG, 1L << 20, SHIFT);
-        M3PrimitiveBigArray target = M3PrimitiveBigArray.sparse(
-                M3PrimitiveKind.LONG, 1L << 20, SHIFT);
+        BigArray source = BigArray.sparse(
+                PrimitiveKind.LONG, 1L << 20, SHIFT);
+        BigArray target = BigArray.sparse(
+                PrimitiveKind.LONG, 1L << 20, SHIFT);
         source.setBits(1017L, 111L);
         source.setBits(2053L, 222L);
         source.setBits(6131L, 333L);

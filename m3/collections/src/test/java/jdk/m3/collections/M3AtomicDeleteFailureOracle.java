@@ -10,16 +10,16 @@ public final class M3AtomicDeleteFailureOracle {
     private static int checks;
     private M3AtomicDeleteFailureOracle() { }
     private static Field field(String name) {
-        try { Field f=M3LongLongHashMap.class.getDeclaredField(name); f.setAccessible(true); return f; }
+        try { Field f=LongLongHashMap.class.getDeclaredField(name); f.setAccessible(true); return f; }
         catch (ReflectiveOperationException e) { throw new AssertionError(e); }
     }
-    private static Object get(Field f, M3LongLongHashMap m) {
+    private static Object get(Field f, LongLongHashMap m) {
         try { return f.get(m); } catch (IllegalAccessException e) { throw new AssertionError(e); }
     }
-    private static int getInt(Field f, M3LongLongHashMap m) {
+    private static int getInt(Field f, LongLongHashMap m) {
         try { return f.getInt(m); } catch (IllegalAccessException e) { throw new AssertionError(e); }
     }
-    private static void setInt(Field f, M3LongLongHashMap m, int value) {
+    private static void setInt(Field f, LongLongHashMap m, int value) {
         try { f.setInt(m, value); } catch (IllegalAccessException e) { throw new AssertionError(e); }
     }
     private static void check(boolean ok, String reason) {
@@ -28,7 +28,7 @@ public final class M3AtomicDeleteFailureOracle {
     public static void main(String[] args) {
         checks=0;
         for (boolean conditional:new boolean[]{false,true}) {
-            M3LongLongHashMap map = new M3LongLongHashMap(12);
+            LongLongHashMap map = new LongLongHashMap(12);
             for (int k=0;k<12;k++) map.put(k,k*3L);
             Field kf=field("keys"), vf=field("values"), sf=field("states");
             Field of=field("occupied"), sz=field("size"), mod=field("modCount");
@@ -40,7 +40,7 @@ public final class M3AtomicDeleteFailureOracle {
             byte[] states=(byte[])get(sf,map);
             long[] priorKeys=keys.clone(), priorValues=values.clone(); byte[] priorStates=states.clone();
             int oldSize=getInt(sz,map), oldOcc=getInt(of,map), oldEpoch=getInt(mod,map);
-            M3LongIterator cursor=map.keyIterator();
+            LongIterator cursor=map.keyIterator();
             try { if(conditional)map.remove(5L,15L); else map.remove(5L); throw new AssertionError("expected staged failure"); }
             catch (IllegalStateException expected) { checks++; }
             check(get(kf,map)==keys&&get(vf,map)==values&&get(sf,map)==states,"owner array identity");

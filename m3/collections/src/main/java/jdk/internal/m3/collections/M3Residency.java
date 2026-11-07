@@ -5,7 +5,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import jdk.m3.collections.M3ObjectResidency;
+import jdk.m3.collections.ObjectResidency;
 
 /**
  * Compile-time hint for M3's opt-in object-residency recipe.
@@ -16,9 +16,9 @@ import jdk.m3.collections.M3ObjectResidency;
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.CONSTRUCTOR})
 public @interface M3Residency {
-    int flags() default M3ObjectResidency.LAZY_CREATE
-            | M3ObjectResidency.LRU
-            | M3ObjectResidency.PRESSURE_AWARE;
+    int flags() default ObjectResidency.LAZY_CREATE
+            | ObjectResidency.LRU
+            | ObjectResidency.PRESSURE_AWARE;
     long estimatedBytes() default -1L;
     String parent() default "";
     Strategy strategy() default Strategy.RECREATE;

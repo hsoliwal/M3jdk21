@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 
 class M3BigArrayAtomicResizeTest {
     @Test void failingNewSegmentDoesNotPublishAnyDirectoryChanges() {
-        M3PrimitiveBigArray array = new M3PrimitiveBigArray(M3PrimitiveKind.LONG, 1_025, 10);
+        BigArray array = new BigArray(PrimitiveKind.LONG, 1_025, 10);
         array.setBits(0, 100);
         array.setBits(1_024, 200);
         Object first = array.segmentArray(0);
         Object last = array.segmentArray(1);
-        M3PrimitiveBigArray.ResizeOps failure = new M3PrimitiveBigArray.ResizeOps() {
-            public Object newSegment(M3PrimitiveKind kind, int length) {
+        BigArray.ResizeOps failure = new BigArray.ResizeOps() {
+            public Object newSegment(PrimitiveKind kind, int length) {
                 throw new IllegalStateException("synthetic segment allocation failure");
             }
-            public Object copySegment(M3PrimitiveKind kind, Object source, int length) {
+            public Object copySegment(PrimitiveKind kind, Object source, int length) {
                 return kind.copyOf(source, length);
             }
         };
@@ -34,14 +34,14 @@ class M3BigArrayAtomicResizeTest {
     }
 
     @Test void failingShortTailCopyDoesNotChangeExistingGeometry() {
-        M3PrimitiveBigArray array = new M3PrimitiveBigArray(M3PrimitiveKind.LONG, 1_025, 10);
+        BigArray array = new BigArray(PrimitiveKind.LONG, 1_025, 10);
         array.setBits(1_024, 12345);
         Object old = array.segmentArray(1);
-        M3PrimitiveBigArray.ResizeOps failure = new M3PrimitiveBigArray.ResizeOps() {
-            public Object newSegment(M3PrimitiveKind kind, int length) {
+        BigArray.ResizeOps failure = new BigArray.ResizeOps() {
+            public Object newSegment(PrimitiveKind kind, int length) {
                 return kind.newArray(length);
             }
-            public Object copySegment(M3PrimitiveKind kind, Object source, int length) {
+            public Object copySegment(PrimitiveKind kind, Object source, int length) {
                 throw new IllegalStateException("synthetic tail resize failure");
             }
         };
@@ -54,7 +54,7 @@ class M3BigArrayAtomicResizeTest {
     }
 
     @Test void ordinaryWindowResizePreservesIndexAndElementContracts() {
-        M3PrimitiveBigArray array = new M3PrimitiveBigArray(M3PrimitiveKind.LONG, 3, 10);
+        BigArray array = new BigArray(PrimitiveKind.LONG, 3, 10);
         array.setBits(0, 99);
         array.setBits(2, 101);
         array.resize(2_100);

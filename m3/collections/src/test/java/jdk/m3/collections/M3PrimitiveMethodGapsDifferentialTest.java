@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  * positional answer checked against {@code TreeSet}/{@code TreeMap} plus a sorted {@code ArrayList}
  * ({@link Collections#binarySearch(List, Object)} for the absent encoding); sorted batches against
  * {@code addAll}/{@code putAll}; {@code trimToSize} against the pre-trim contents and the canonical rebuilt
- * order; {@code M3IntArrayDeque.get} against {@code ArrayDeque}, including ring wrap-around. Page capacity
+ * order; {@code IntArrayDeque.get} against {@code ArrayDeque}, including ring wrap-around. Page capacity
  * four, five and the default exercise page boundaries, splits, merges and fresh tail pages.
  */
 final class M3PrimitiveMethodGapsDifferentialTest {
@@ -40,7 +40,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
     private static final int RARE_MASK = 1_023;
     private static final int DENSE_RANGE = 3_000;
     private static final int MAX_BATCH = 48;
-    private static final int[] PAGE_CAPACITIES = {4, 5, M3LongTreeSet.DEFAULT_PAGE_CAPACITY};
+    private static final int[] PAGE_CAPACITIES = {4, 5, LongTreeSet.DEFAULT_PAGE_CAPACITY};
     private static final int ALLOCATION_CALLS = 200_000;
     private static final long ALLOCATION_SLACK_BYTES = 1_024;
 
@@ -67,7 +67,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         return new ArrayList<>(expected);
     }
 
-    private static void assertPositions(M3LongTreeSet actual, TreeSet<Long> expected) {
+    private static void assertPositions(LongTreeSet actual, TreeSet<Long> expected) {
         List<Long> list = sorted(expected);
         assertEquals(list.size(), actual.size());
         for (int i = 0; i < list.size(); i++) {
@@ -87,7 +87,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
     void treeSetGetIndexOfAndAddAllSortedMatchTreeSet() {
         for (int pageCapacity : PAGE_CAPACITIES) {
             SplittableRandom random = new SplittableRandom(SEED + pageCapacity);
-            M3LongTreeSet actual = new M3LongTreeSet(0, pageCapacity);
+            LongTreeSet actual = new LongTreeSet(0, pageCapacity);
             TreeSet<Long> expected = new TreeSet<>();
             for (int step = 0; step < STEPS; step++) {
                 treeSetStep(random, step, actual, expected);
@@ -99,7 +99,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         }
     }
 
-    private static void treeSetStep(SplittableRandom random, int step, M3LongTreeSet actual, TreeSet<Long> expected) {
+    private static void treeSetStep(SplittableRandom random, int step, LongTreeSet actual, TreeSet<Long> expected) {
         long v = value(random);
         switch (random.nextInt(12)) {
             case 0, 1, 2, 3 -> assertEquals(expected.add(v), actual.add(v));
@@ -133,7 +133,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         }
     }
 
-    private static void addSortedSlice(SplittableRandom random, M3LongTreeSet actual, TreeSet<Long> expected) {
+    private static void addSortedSlice(SplittableRandom random, LongTreeSet actual, TreeSet<Long> expected) {
         long[] batch = sortedBatch(random);
         int from = batch.length == 0 ? 0 : random.nextInt(batch.length + 1);
         int to = from + random.nextInt(batch.length - from + 1);
@@ -149,7 +149,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         for (int pageCapacity : PAGE_CAPACITIES) {
             SplittableRandom random = new SplittableRandom(SEED ^ pageCapacity);
             for (int trial = 0; trial < 200; trial++) {
-                M3LongTreeSet actual = new M3LongTreeSet(0, pageCapacity);
+                LongTreeSet actual = new LongTreeSet(0, pageCapacity);
                 TreeSet<Long> expected = new TreeSet<>();
                 int existing = random.nextInt(4 * pageCapacity);
                 for (int i = 0; i < existing; i++) {
@@ -178,12 +178,12 @@ final class M3PrimitiveMethodGapsDifferentialTest {
 
     @Test
     void treeSetEdgesPageBoundariesAndRefusals() {
-        M3LongTreeSet empty = new M3LongTreeSet();
+        LongTreeSet empty = new LongTreeSet();
         assertThrows(IndexOutOfBoundsException.class, () -> empty.get(0));
         assertEquals(-1, empty.indexOf(42L));
         assertEquals(0, empty.addAllSorted(new long[0], 0, 0));
 
-        M3LongTreeSet set = new M3LongTreeSet(0, 4);
+        LongTreeSet set = new LongTreeSet(0, 4);
         SplittableRandom random = new SplittableRandom(SEED);
         int count = 1_000;
         long[] shuffled = new long[count];
@@ -210,9 +210,9 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         assertRefusalsLeaveSetUnchanged(set);
     }
 
-    private static void assertRefusalsLeaveSetUnchanged(M3LongTreeSet set) {
+    private static void assertRefusalsLeaveSetUnchanged(LongTreeSet set) {
         long[] before = set.toArray();
-        M3LongIterator live = set.iterator();
+        LongIterator live = set.iterator();
         assertThrows(IllegalArgumentException.class, () -> set.addAllSorted(new long[] {1, 5, 3}, 0, 3));
         assertThrows(IndexOutOfBoundsException.class, () -> set.addAllSorted(new long[] {1, 2}, 1, 3));
         assertThrows(IndexOutOfBoundsException.class, () -> set.addAllSorted(new long[] {1, 2}, -1, 1));
@@ -227,7 +227,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
 
     @Test
     void treeSetPrefixLaneSurvivesTrimAndIsCounted() {
-        M3LongTreeSet set = new M3LongTreeSet(4_096, 8);
+        LongTreeSet set = new LongTreeSet(4_096, 8);
         for (long v = 0; v < 1_000; v++) {
             set.add(v * 3);
         }
@@ -250,8 +250,8 @@ final class M3PrimitiveMethodGapsDifferentialTest {
 
     @Test
     void positionalReadsAllocateNothing() {
-        M3LongTreeSet set = new M3LongTreeSet();
-        M3LongLongTreeMap map = new M3LongLongTreeMap();
+        LongTreeSet set = new LongTreeSet();
+        LongLongTreeMap map = new LongLongTreeMap();
         for (long v = 0; v < 50_000; v++) {
             set.add(v * 7);
             map.put(v * 7, v);
@@ -266,7 +266,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         assertTrue(allocated < ALLOCATION_SLACK_BYTES, "allocated " + allocated + " bytes, sink " + sink);
     }
 
-    private static long readPositions(M3LongTreeSet set, M3LongLongTreeMap map, SplittableRandom random) {
+    private static long readPositions(LongTreeSet set, LongLongTreeMap map, SplittableRandom random) {
         long sink = 0;
         for (int call = 0; call < ALLOCATION_CALLS; call++) {
             int index = random.nextInt(set.size());
@@ -275,7 +275,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         return sink;
     }
 
-    private static void assertEntries(M3LongLongTreeMap actual, TreeMap<Long, Long> expected) {
+    private static void assertEntries(LongLongTreeMap actual, TreeMap<Long, Long> expected) {
         List<Long> keys = new ArrayList<>(expected.keySet());
         assertEquals(keys.size(), actual.size());
         int i = 0;
@@ -297,7 +297,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
     @Test
     void treeMapKeyAtValueAtIndexOfKeyAndPutAllSortedMatchTreeMap() {
         SplittableRandom random = new SplittableRandom(SEED + 1);
-        M3LongLongTreeMap actual = new M3LongLongTreeMap();
+        LongLongTreeMap actual = new LongLongTreeMap();
         TreeMap<Long, Long> expected = new TreeMap<>();
         for (int step = 0; step < STEPS; step++) {
             long k = value(random);
@@ -338,7 +338,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         assertEntries(actual, expected);
     }
 
-    private static void putSortedSlice(SplittableRandom random, M3LongLongTreeMap actual, TreeMap<Long, Long> expected) {
+    private static void putSortedSlice(SplittableRandom random, LongLongTreeMap actual, TreeMap<Long, Long> expected) {
         long[] keys = sortedBatch(random);
         long[] values = new long[keys.length];
         for (int i = 0; i < values.length; i++) {
@@ -355,11 +355,11 @@ final class M3PrimitiveMethodGapsDifferentialTest {
 
     @Test
     void treeMapPutAllSortedRangeRefusalsAndFullRange() {
-        M3LongLongTreeMap map = new M3LongLongTreeMap();
+        LongLongTreeMap map = new LongLongTreeMap();
         map.put(5, 50);
         long[] keys = {1, 5, 5, 9};
         long[] values = {10, 51, 52, 90};
-        M3LongIterator live = map.keyIterator();
+        LongIterator live = map.keyIterator();
         assertThrows(IllegalArgumentException.class, () -> map.putAllSorted(keys, new long[3], 0, 3));
         assertThrows(IndexOutOfBoundsException.class, () -> map.putAllSorted(keys, values, 3, 5));
         assertThrows(IndexOutOfBoundsException.class, () -> map.putAllSorted(keys, values, -1, 2));
@@ -375,26 +375,26 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         assertArrayEquals(new long[] {10, 52, 90}, map.valuesToArray());
         assertEquals(1, map.putAllSorted(new long[] {7, -1}, new long[] {70, 0}, 0, 1));
         assertEquals(70L, map.valueAt(map.indexOfKey(7)));
-        assertEquals(-1, new M3LongLongTreeMap().indexOfKey(3));
-        assertThrows(IndexOutOfBoundsException.class, () -> new M3LongLongTreeMap().keyAt(0));
+        assertEquals(-1, new LongLongTreeMap().indexOfKey(3));
+        assertThrows(IndexOutOfBoundsException.class, () -> new LongLongTreeMap().keyAt(0));
     }
 
     /** One owner's trim observations: capacity, keys in iteration order, contents. */
     private record Shape(int capacity, long[] order, Map<Long, Long> contents) {}
 
-    private static Shape shape(M3IntIntHashMap map) {
+    private static Shape shape(IntIntHashMap map) {
         Map<Long, Long> contents = new HashMap<>();
         map.forEach((k, v) -> contents.put((long) k, (long) v));
         return new Shape(map.capacity(), Arrays.stream(map.keysToArray()).asLongStream().toArray(), contents);
     }
 
-    private static Shape shape(M3IntLongHashMap map) {
+    private static Shape shape(IntLongHashMap map) {
         Map<Long, Long> contents = new HashMap<>();
         map.forEach((k, v) -> contents.put((long) k, v));
         return new Shape(map.capacity(), Arrays.stream(map.keysToArray()).asLongStream().toArray(), contents);
     }
 
-    private static Shape shape(M3LongLongHashMap map) {
+    private static Shape shape(LongLongHashMap map) {
         Map<Long, Long> contents = new HashMap<>();
         map.forEach(contents::put);
         return new Shape(map.capacity(), map.keysToArray(), contents);
@@ -424,7 +424,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
     void intIntTrimToSizePreservesContentsAndReducesCapacity() {
         SplittableRandom random = new SplittableRandom(SEED + 2);
         for (int trial = 0; trial < 60; trial++) {
-            M3IntIntHashMap map = new M3IntIntHashMap(random.nextInt(64));
+            IntIntHashMap map = new IntIntHashMap(random.nextInt(64));
             HashMap<Integer, Integer> model = new HashMap<>();
             int inserts = random.nextInt(2_000);
             for (int i = 0; i < inserts; i++) {
@@ -438,11 +438,11 @@ final class M3PrimitiveMethodGapsDifferentialTest {
                 }
             }
             Shape before = shape(map);
-            M3IntIntHashMap fresh = new M3IntIntHashMap(map.size() - (map.containsKey(0) ? 1 : 0));
+            IntIntHashMap fresh = new IntIntHashMap(map.size() - (map.containsKey(0) ? 1 : 0));
             for (long k : before.order()) {
                 fresh.put((int) k, map.getOrDefault((int) k, 0));
             }
-            M3IntIterator live = map.keyIterator();
+            IntIterator live = map.keyIterator();
             map.trimToSize();
             assertTrimmed(before, shape(map), shape(fresh));
             if (shape(map).capacity() < before.capacity()) {
@@ -452,7 +452,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         }
     }
 
-    private static void continueIntInt(SplittableRandom random, M3IntIntHashMap map, Map<Integer, Integer> model) {
+    private static void continueIntInt(SplittableRandom random, IntIntHashMap map, Map<Integer, Integer> model) {
         for (int i = 0; i < 500; i++) {
             int k = intKey(random);
             if (random.nextBoolean()) {
@@ -473,7 +473,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
     void intLongTrimToSizePreservesContentsAndReducesCapacity() {
         SplittableRandom random = new SplittableRandom(SEED + 3);
         for (int trial = 0; trial < 60; trial++) {
-            M3IntLongHashMap map = new M3IntLongHashMap(random.nextInt(64));
+            IntLongHashMap map = new IntLongHashMap(random.nextInt(64));
             HashMap<Integer, Long> model = new HashMap<>();
             int inserts = random.nextInt(2_000);
             for (int i = 0; i < inserts; i++) {
@@ -488,7 +488,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
                 }
             }
             Shape before = shape(map);
-            M3IntLongHashMap fresh = new M3IntLongHashMap(map.size() - (map.containsKey(0) ? 1 : 0));
+            IntLongHashMap fresh = new IntLongHashMap(map.size() - (map.containsKey(0) ? 1 : 0));
             for (long k : before.order()) {
                 fresh.put((int) k, map.getOrDefault((int) k, 0L));
             }
@@ -510,7 +510,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
     void longLongTrimToSizePurgesTombstonesAndReducesCapacity() {
         SplittableRandom random = new SplittableRandom(SEED + 4);
         for (int trial = 0; trial < 60; trial++) {
-            M3LongLongHashMap map = new M3LongLongHashMap(random.nextInt(64));
+            LongLongHashMap map = new LongLongHashMap(random.nextInt(64));
             HashMap<Long, Long> model = new HashMap<>();
             int inserts = random.nextInt(2_000);
             for (int i = 0; i < inserts; i++) {
@@ -525,7 +525,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
                 }
             }
             Shape before = shape(map);
-            M3LongLongHashMap fresh = new M3LongLongHashMap(map.size());
+            LongLongHashMap fresh = new LongLongHashMap(map.size());
             for (long k : before.order()) {
                 fresh.put(k, map.getOrDefault(k, 0L));
             }
@@ -547,7 +547,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
 
     @Test
     void longLongTrimToSizeFailsLiveIteratorsOnlyWhenItRebuilds() {
-        M3LongLongHashMap map = new M3LongLongHashMap();
+        LongLongHashMap map = new LongLongHashMap();
         for (long k = 0; k < 1_000; k++) {
             map.put(k, k);
         }
@@ -555,11 +555,11 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         for (long k = 0; k < 990; k++) {
             map.remove(k);
         }
-        M3LongIterator live = map.keyIterator();
+        LongIterator live = map.keyIterator();
         map.trimToSize();
         assertTrue(map.capacity() < grown);
         assertThrows(ConcurrentModificationException.class, live::hasNext);
-        M3LongIterator after = map.keyIterator();
+        LongIterator after = map.keyIterator();
         map.trimToSize();
         assertTrue(after.hasNext(), "a no-op trim is not a modification");
     }
@@ -567,7 +567,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
     @Test
     void intArrayDequeGetMatchesArrayDequeAcrossWrapAround() {
         SplittableRandom random = new SplittableRandom(SEED + 5);
-        M3IntArrayDeque actual = new M3IntArrayDeque(2);
+        IntArrayDeque actual = new IntArrayDeque(2);
         ArrayDeque<Integer> expected = new ArrayDeque<>();
         for (int step = 0; step < STEPS; step++) {
             int v = random.nextInt();
@@ -601,7 +601,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
         assertDequeGets(actual, expected);
     }
 
-    private static void assertDequeGets(M3IntArrayDeque actual, ArrayDeque<Integer> expected) {
+    private static void assertDequeGets(IntArrayDeque actual, ArrayDeque<Integer> expected) {
         List<Integer> list = new ArrayList<>(expected);
         assertEquals(list.size(), actual.size());
         for (int i = 0; i < list.size(); i++) {
@@ -613,7 +613,7 @@ final class M3PrimitiveMethodGapsDifferentialTest {
 
     @Test
     void intArrayDequeGetReadsAcrossTheRingSeam() {
-        M3IntArrayDeque deque = new M3IntArrayDeque(8);
+        IntArrayDeque deque = new IntArrayDeque(8);
         assertThrows(IndexOutOfBoundsException.class, () -> deque.get(0));
         for (int i = 0; i < 6; i++) {
             deque.addLast(i);

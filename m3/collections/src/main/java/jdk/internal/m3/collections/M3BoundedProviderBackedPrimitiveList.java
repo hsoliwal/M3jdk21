@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Fixed-logical-size provider-backed list with bounded payload residency.
@@ -36,7 +36,7 @@ public final class M3BoundedProviderBackedPrimitiveList {
             long logicalSize,
             int maximumResident,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this(
                 logicalSize,
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
@@ -54,7 +54,7 @@ public final class M3BoundedProviderBackedPrimitiveList {
             int leafBits,
             int maximumResident,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         if (logicalSize < 0L) throw new IllegalArgumentException("logicalSize < 0");
         this.logicalSize = logicalSize;
         rows = new M3BoundedProviderBackedPrimitiveRows(
@@ -73,7 +73,7 @@ public final class M3BoundedProviderBackedPrimitiveList {
     public long size() { return logicalSize; }
     public boolean isEmpty() { return logicalSize == 0L; }
     public int laneCount() { return rows.laneCount(); }
-    public M3PrimitiveKind laneKind(int lane) { return rows.laneKind(lane); }
+    public PrimitiveKind laneKind(int lane) { return rows.laneKind(lane); }
     public long materializedSize() { return rows.materializedSize(); }
     public int maximumResident() { return rows.maxResidentRows(); }
     public int residentCount() { return rows.residentCount(); }

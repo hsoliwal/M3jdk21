@@ -5,7 +5,7 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongUnaryOperator;
-import jdk.m3.collections.M3LongLongConsumer;
+import jdk.m3.collections.LongLongConsumer;
 
 /**
  * Open-addressed primitive {@code long -> long} map.
@@ -168,7 +168,7 @@ public final class M3PackedLongLongHashMap implements M3PackedLongLongMap {
         return before - size;
     }
 
-    public void forEach(M3LongLongConsumer consumer) {
+    public void forEach(LongLongConsumer consumer) {
         Objects.requireNonNull(consumer, "consumer");
         for (int i = 0; i < states.length; i++) {
             if (states[i] == OCCUPIED) {

@@ -38,9 +38,9 @@ public final class M3PrimitiveSortedTable {
         void accept(long keyBits, long valueBits);
     }
 
-    private final M3PrimitiveKind rowKind;
-    private final M3PrimitiveKind columnKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind rowKind;
+    private final PrimitiveKind columnKind;
+    private final PrimitiveKind valueKind;
     private Object rows;
     private Object columns;
     private Object values;
@@ -48,13 +48,13 @@ public final class M3PrimitiveSortedTable {
     private TransposedView transposed;
 
     public M3PrimitiveSortedTable(
-            M3PrimitiveKind rowKind, M3PrimitiveKind columnKind, M3PrimitiveKind valueKind) {
+            PrimitiveKind rowKind, PrimitiveKind columnKind, PrimitiveKind valueKind) {
         this(rowKind, columnKind, valueKind, 8);
     }
 
     public M3PrimitiveSortedTable(
-            M3PrimitiveKind rowKind, M3PrimitiveKind columnKind,
-            M3PrimitiveKind valueKind, int initialCapacity) {
+            PrimitiveKind rowKind, PrimitiveKind columnKind,
+            PrimitiveKind valueKind, int initialCapacity) {
         this.rowKind = Objects.requireNonNull(rowKind, "rowKind");
         this.columnKind = Objects.requireNonNull(columnKind, "columnKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
@@ -65,9 +65,9 @@ public final class M3PrimitiveSortedTable {
         values = valueKind.newArray(capacity);
     }
 
-    public M3PrimitiveKind rowKind() { return rowKind; }
-    public M3PrimitiveKind columnKind() { return columnKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind rowKind() { return rowKind; }
+    public PrimitiveKind columnKind() { return columnKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return java.lang.reflect.Array.getLength(rows); }
@@ -162,9 +162,9 @@ public final class M3PrimitiveSortedTable {
 
     public final class TransposedView {
         private TransposedView() {}
-        public M3PrimitiveKind rowKind() { return columnKind; }
-        public M3PrimitiveKind columnKind() { return rowKind; }
-        public M3PrimitiveKind valueKind() { return valueKind; }
+        public PrimitiveKind rowKind() { return columnKind; }
+        public PrimitiveKind columnKind() { return rowKind; }
+        public PrimitiveKind valueKind() { return valueKind; }
         public int size() { return M3PrimitiveSortedTable.this.size(); }
         public boolean isEmpty() { return M3PrimitiveSortedTable.this.isEmpty(); }
         public boolean containsCellBits(long rowBits, long columnBits) {

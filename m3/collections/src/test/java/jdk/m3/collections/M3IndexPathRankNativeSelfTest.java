@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * Strict parity of the new rank/index projection against the existing JNI
- * M3IndexPathMasks selector. Run with -Xcheck:jni and the existing C library.
+ * IndexPathMasks selector. Run with -Xcheck:jni and the existing C library.
  * The test refuses if the native backend is unavailable; it never substitutes
  * Java while claiming to have tested JNI.
  */
@@ -17,7 +17,7 @@ public final class M3IndexPathRankNativeSelfTest {
     private M3IndexPathRankNativeSelfTest() { }
 
     public static void main(String[] args) {
-        if (!M3IndexPathMasks.nativeAvailable()) {
+        if (!IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("JNI path-mask peer unavailable; parity test cannot pass");
         }
         Random rng = new Random(0x4d334a4e492026L);
@@ -43,12 +43,12 @@ public final class M3IndexPathRankNativeSelfTest {
             int first = count == 0 ? length
                     : stride > 0 ? rng.nextInt(length - count + 1)
                     : count - 1 + rng.nextInt(length - count + 1);
-            M3IndexPathRank index = M3IndexPathRank.snapshot(rows, positions, stages,
+            IndexPathRank index = IndexPathRank.snapshot(rows, positions, stages,
                     required, forbidden, first, count, stride);
-            int[] reference = M3IndexPathMasks.select(rows, positions, stages,
-                    required, forbidden, first, count, stride, M3IndexPathMasks.Backend.JAVA);
-            int[] nativeRows = M3IndexPathMasks.select(rows, positions, stages,
-                    required, forbidden, first, count, stride, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+            int[] reference = IndexPathMasks.select(rows, positions, stages,
+                    required, forbidden, first, count, stride, IndexPathMasks.Backend.JAVA);
+            int[] nativeRows = IndexPathMasks.select(rows, positions, stages,
+                    required, forbidden, first, count, stride, IndexPathMasks.Backend.NATIVE_REQUIRED);
             int[] bulkRows = new int[index.size()];
             index.window(0, index.sourceSize()).copySelectedRowIds(
                     0, bulkRows, 0, bulkRows.length);

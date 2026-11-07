@@ -43,8 +43,8 @@ public final class M3ZeroMaskArrayFastPathProof {
     private static void exactAllPassAndFailFast() {
         long[] values = {Long.MIN_VALUE, 0, -7, 42, Long.MAX_VALUE, -7};
         byte[] states = {(byte) 0xff, 0, (byte) 0x80, 1, (byte) 0x55, -1};
-        M3LongArrayList list = M3LongArrayList.copyOf(values);
-        M3LongIterator before = list.iterator();
+        LongArrayList list = LongArrayList.copyOf(values);
+        LongIterator before = list.iterator();
         check(list.retainByStateMask(states, 0) == 0, "zero-mask removes nothing");
         equalsLong(values, list.toArray(), "zero-mask preserves element occurrences");
         check(before.hasNext() && before.nextLong() == Long.MIN_VALUE,
@@ -151,8 +151,8 @@ public final class M3ZeroMaskArrayFastPathProof {
                     reference.add(longValues[i]);
                 }
             }
-            M3LongArrayList list = M3LongArrayList.copyOf(longValues);
-            M3LongIterator cursor = list.iterator();
+            LongArrayList list = LongArrayList.copyOf(longValues);
+            LongIterator cursor = list.iterator();
             int removed = list.retainByStateMask(wholeStates, required);
             check(removed == n - reference.size(), "removed occurrences");
             long[] expected = new long[reference.size()];
@@ -183,8 +183,8 @@ public final class M3ZeroMaskArrayFastPathProof {
                 == length - 1, "large offset window all-pass");
         equalsInt(before, slots, "large index lane unchanged");
         equalsBytes(beforeFlags, flags, "large state-mask lane unchanged");
-        M3LongArrayList list = M3LongArrayList.copyOf(values);
-        M3LongIterator cursor = list.iterator();
+        LongArrayList list = LongArrayList.copyOf(values);
+        LongIterator cursor = list.iterator();
         check(list.retainByStateMask(flags, 0) == 0, "large primitive all-pass");
         equalsLong(values, list.toArray(), "large payload unchanged");
         check(cursor.hasNext() && cursor.nextLong() == values[0], "large iterator valid");

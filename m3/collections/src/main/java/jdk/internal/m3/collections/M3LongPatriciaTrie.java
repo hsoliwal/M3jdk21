@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
-import jdk.m3.collections.M3LongIterator;
+import jdk.m3.collections.LongIterator;
 
 /**
  * Primitive long-to-long PATRICIA (crit-bit) trie on dense lanes, ordered by the keys' bit
@@ -294,9 +294,9 @@ public final class M3LongPatriciaTrie {
     }
 
     /** Unsigned-order key iterator; fail-fast against structural modification. */
-    public M3LongIterator keyIterator() {
+    public LongIterator keyIterator() {
         int expectedModCount = modCount;
-        return new M3LongIterator() {
+        return new LongIterator() {
             private int following = size == 0 ? NONE : leftmost(root);
 
             @Override

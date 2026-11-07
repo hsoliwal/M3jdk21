@@ -47,43 +47,43 @@ public final class M3ObjectSlotIndexSelfTest {
     }
 
     private static void lifecycleAndState() {
-        M3ObjectSlotStore28<String> store = new M3ObjectSlotStore28<>();
-        long a = store.add("a", M3ObjectStateSlots28.VISIBLE);
-        long b = store.add("b", M3ObjectStateSlots28.DIRTY);
-        long c = store.add("c", M3ObjectStateSlots28.VISIBLE | M3ObjectStateSlots28.DIRTY);
-        long n = store.add(null, M3ObjectStateSlots28.VISIBLE);
+        ObjectSlotStore28<String> store = new ObjectSlotStore28<>();
+        long a = store.add("a", ObjectStateSlots28.VISIBLE);
+        long b = store.add("b", ObjectStateSlots28.DIRTY);
+        long c = store.add("c", ObjectStateSlots28.VISIBLE | ObjectStateSlots28.DIRTY);
+        long n = store.add(null, ObjectStateSlots28.VISIBLE);
 
         equal(4, store.size(), "size");
         equal("a", store.get(a), "get");
         equal(null, store.get(n), "null payload");
         check(store.allocatedPayloadBlocks() == 1, "non-null payloads share first page");
 
-        M3ObjectIndexSnapshot<String> before = store.snapshot();
+        ObjectIndexSnapshot<String> before = store.snapshot();
         equal(Arrays.asList("a", "b", "c", null), Arrays.asList(before.toArray()), "physical-slot snapshot");
         equal(new int[] {0, 1, 2, 3}, before.physicalSlots(), "physical slots");
-        check(before.order() == M3ObjectIndexSnapshot.Order.PHYSICAL_SLOT, "physical order");
+        check(before.order() == ObjectIndexSnapshot.Order.PHYSICAL_SLOT, "physical order");
 
-        M3ObjectIndexSnapshot<String> visibleClean = before.filteredByState(
-                M3ObjectStateSlots28.VISIBLE, M3ObjectStateSlots28.DIRTY);
+        ObjectIndexSnapshot<String> visibleClean = before.filteredByState(
+                ObjectStateSlots28.VISIBLE, ObjectStateSlots28.DIRTY);
         equal(2, visibleClean.size(), "visible non-dirty");
         equal("a", visibleClean.get(0), "first clean");
         equal(null, visibleClean.get(1), "null clean");
 
         equal("b", store.remove(b), "remove");
         refuse(IllegalStateException.class, () -> store.get(b));
-        long d = store.add("d", M3ObjectStateSlots28.USER_0);
-        equal(M3SlotAllocator28.slot(b), M3SlotAllocator28.slot(d), "slot reuse");
+        long d = store.add("d", ObjectStateSlots28.USER_0);
+        equal(SlotAllocator28.slot(b), SlotAllocator28.slot(d), "slot reuse");
         check(b != d, "generation changes");
         equal("a", store.set(a, "A"), "replace");
         equal("a", before.get(0), "detached snapshot keeps old reference");
         equal("A", store.get(a), "store sees replacement");
 
-        int old = store.updateState(d, M3ObjectStateSlots28.VISIBLE, 0);
-        equal(M3ObjectStateSlots28.USER_0, old, "state update old");
-        check((store.state(d) & M3ObjectStateSlots28.VISIBLE) != 0, "state update new");
+        int old = store.updateState(d, ObjectStateSlots28.VISIBLE, 0);
+        equal(ObjectStateSlots28.USER_0, old, "state update old");
+        check((store.state(d) & ObjectStateSlots28.VISIBLE) != 0, "state update new");
         check(store.revision() > 0, "revision advances");
 
-        M3ObjectIndexSnapshot<String> after = store.snapshot();
+        ObjectIndexSnapshot<String> after = store.snapshot();
         equal(Arrays.asList("A", "d", "c", null), Arrays.asList(after.toArray()), "reused slot order");
         check(after.retainedPrimitiveBytes() > 0, "primitive metadata retained");
         equal(4, after.retainedReferenceSlots(), "captured references");
@@ -98,15 +98,15 @@ public final class M3ObjectSlotIndexSelfTest {
 
     private static void predicateAndSorting() {
         record Item(int rank, String id) { }
-        M3ObjectSlotStore28<Item> store = new M3ObjectSlotStore28<>();
+        ObjectSlotStore28<Item> store = new ObjectSlotStore28<>();
         store.add(new Item(2, "a"), 1);
         store.add(new Item(1, "b"), 1);
         store.add(new Item(1, "c"), 3);
         store.add(new Item(2, "d"), 1);
 
-        M3ObjectIndexSnapshot<Item> all = store.snapshot();
+        ObjectIndexSnapshot<Item> all = store.snapshot();
         AtomicInteger calls = new AtomicInteger();
-        M3ObjectIndexSnapshot<Item> rankOne = all.filtered(item -> {
+        ObjectIndexSnapshot<Item> rankOne = all.filtered(item -> {
             calls.incrementAndGet();
             return item.rank() == 1;
         });
@@ -117,11 +117,11 @@ public final class M3ObjectSlotIndexSelfTest {
         rankOne.sorted(Comparator.comparing(Item::id));
         equal(4, calls.get(), "predicate result is cached as index projection");
 
-        M3ObjectIndexSnapshot<Item> stable = all.sorted(Comparator.comparingInt(Item::rank));
+        ObjectIndexSnapshot<Item> stable = all.sorted(Comparator.comparingInt(Item::rank));
         equal(List.of("b", "c", "a", "d"), stable.stream().map(Item::id).toList(), "stable ties");
 
         AtomicInteger projected = new AtomicInteger();
-        M3ObjectIndexSnapshot<Item> signal = all.sortedBySignal(item -> {
+        ObjectIndexSnapshot<Item> signal = all.sortedBySignal(item -> {
             projected.incrementAndGet();
             return item.rank();
         }, false);
@@ -133,7 +133,7 @@ public final class M3ObjectSlotIndexSelfTest {
 
         AtomicInteger nativeProjected = new AtomicInteger();
         if (M3SignalOrderNative.available()) {
-            M3ObjectIndexSnapshot<Item> nativeSignal = all.sortedBySignal(item -> {
+            ObjectIndexSnapshot<Item> nativeSignal = all.sortedBySignal(item -> {
                 nativeProjected.incrementAndGet();
                 return item.rank();
             }, false, M3SignalOrder.Backend.NATIVE_REQUIRED);
@@ -148,11 +148,11 @@ public final class M3ObjectSlotIndexSelfTest {
         escaped[0] = -1;
         check(all.physicalSlotAt(0) >= 0, "physical slot array is defensive");
 
-        M3ObjectIndexSnapshot<Item> state = all.filteredByState(1, 2);
+        ObjectIndexSnapshot<Item> state = all.filteredByState(1, 2);
         equal(List.of("a", "b", "d"), state.stream().map(Item::id).toList(), "required/excluded mask");
 
         if (M3IndexMaskCompactor.nativeAvailable()) {
-            M3ObjectIndexSnapshot<Item> nativeState = all.filteredByState(
+            ObjectIndexSnapshot<Item> nativeState = all.filteredByState(
                     1, 2, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
             equal(state.physicalSlots(), nativeState.physicalSlots(), "JNI state-mask parity");
         } else {
@@ -162,7 +162,7 @@ public final class M3ObjectSlotIndexSelfTest {
     }
 
     private static void sparseNullPayload() {
-        M3ObjectSlotStore28<Object> store = new M3ObjectSlotStore28<>();
+        ObjectSlotStore28<Object> store = new ObjectSlotStore28<>();
         long[] handles = new long[4097];
         for (int i = 0; i < handles.length; i++) handles[i] = store.add(null);
         equal(0, store.allocatedPayloadBlocks(), "null payload does not allocate reference pages");

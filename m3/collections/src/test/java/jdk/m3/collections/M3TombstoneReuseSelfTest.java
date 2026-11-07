@@ -37,8 +37,8 @@ public final class M3TombstoneReuseSelfTest {
     }
     private static void boundary() {
         long[] input = colliding(6);
-        var set = new M3LongHashSet();
-        var map = new M3LongLongHashMap();
+        var set = new LongHashSet();
+        var map = new LongLongHashMap();
         for (int i = 0; i < 5; i++) {
             require(set.add(input[i]), "set initial admission");
             require(map.put(input[i], i + 120L), "map initial admission");
@@ -84,8 +84,8 @@ public final class M3TombstoneReuseSelfTest {
     }
     private static void differential() {
         Random random = new Random(0x534E59584D334A4CL);
-        M3LongHashSet actualSet = new M3LongHashSet();
-        M3LongLongHashMap actualMap = new M3LongLongHashMap();
+        LongHashSet actualSet = new LongHashSet();
+        LongLongHashMap actualMap = new LongLongHashMap();
         Set<Long> oracleSet = new HashSet<>();
         Map<Long, Long> oracleMap = new HashMap<>();
         for (int step = 0; step < 140_000; step++) {
@@ -110,7 +110,7 @@ public final class M3TombstoneReuseSelfTest {
             require(actualMap.getOrDefault(item.getKey(), -1) == item.getValue(), "final map pair");
         }
     }
-    private static void requireFailsConcurrent(M3LongIterator iterator, String what) {
+    private static void requireFailsConcurrent(LongIterator iterator, String what) {
         try {
             iterator.hasNext();
             throw new AssertionError(what + " did not fail fast");
@@ -119,7 +119,7 @@ public final class M3TombstoneReuseSelfTest {
         }
     }
     private static void shape() {
-        for (Class<?> type : new Class<?>[] {M3LongHashSet.class, M3LongLongHashMap.class}) {
+        for (Class<?> type : new Class<?>[] {LongHashSet.class, LongLongHashMap.class}) {
             for (Field field : type.getDeclaredFields()) {
                 Class<?> fieldType = field.getType();
                 require(!Map.Entry.class.isAssignableFrom(fieldType), "retained Entry " + field);

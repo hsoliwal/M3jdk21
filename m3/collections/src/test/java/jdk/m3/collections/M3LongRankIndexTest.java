@@ -19,7 +19,7 @@ class M3LongRankIndexTest {
 
     @Test
     void freezesLiveFilteredInputWithoutMutatingSource() {
-        M3LongArrayList source = M3LongArrayList.copyOf(new long[]{5, 2, 2, 3, 4});
+        LongArrayList source = LongArrayList.copyOf(new long[]{5, 2, 2, 3, 4});
         M3LongFilteredView view = new M3LongFilteredView(source, value -> value % 2 == 0);
         M3LongRankIndex snapshot = M3LongRankIndex.snapshot(view);
         assertArrayEquals(new long[]{2, 2, 4}, snapshot.toArray());

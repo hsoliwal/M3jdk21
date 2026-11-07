@@ -35,13 +35,13 @@ public final class M3EnumPrimitiveMap<E extends Enum<E>> {
     }
 
     private final Class<E> keyType;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind valueKind;
     private final int domainSize;
     private final Object values;
     private final long[] present;
     private int size;
 
-    public M3EnumPrimitiveMap(Class<E> keyType, M3PrimitiveKind valueKind) {
+    public M3EnumPrimitiveMap(Class<E> keyType, PrimitiveKind valueKind) {
         this.keyType = Objects.requireNonNull(keyType, "keyType");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         E[] constants = keyType.getEnumConstants();
@@ -52,7 +52,7 @@ public final class M3EnumPrimitiveMap<E extends Enum<E>> {
     }
 
     public Class<E> keyType() { return keyType; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int keyCapacity() { return domainSize; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }

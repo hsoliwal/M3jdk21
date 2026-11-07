@@ -36,34 +36,34 @@ public final class M3PrimitiveBigHashMap {
     private static final float DEFAULT_LOAD_FACTOR = 0.65f;
     private static final long MAX_CAPACITY = 1L << 40;
 
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private final float loadFactor;
     private final int segmentShift;
-    private final M3PrimitiveBigArray.Factory arrays;
-    private M3PrimitiveBigArray keys;
-    private M3PrimitiveBigArray values;
+    private final BigArray.Factory arrays;
+    private BigArray keys;
+    private BigArray values;
     private long mask;
     private long threshold;
     private long size;
     private boolean hasZeroKey;
     private long zeroValueBits;
 
-    public M3PrimitiveBigHashMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind) {
+    public M3PrimitiveBigHashMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this(keyKind, valueKind, 16L, DEFAULT_LOAD_FACTOR,
-                M3PrimitiveBigArray.DEFAULT_SEGMENT_SHIFT);
+                BigArray.DEFAULT_SEGMENT_SHIFT);
     }
 
     public M3PrimitiveBigHashMap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind,
+            PrimitiveKind keyKind, PrimitiveKind valueKind,
             long expected, float loadFactor, int segmentShift) {
-        this(keyKind, valueKind, expected, loadFactor, segmentShift, M3PrimitiveBigArray::new);
+        this(keyKind, valueKind, expected, loadFactor, segmentShift, BigArray::new);
     }
 
     /** Package-private cold allocation seam; public construction retains ordinary arrays. */
     M3PrimitiveBigHashMap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind,
-            long expected, float loadFactor, int segmentShift, M3PrimitiveBigArray.Factory arrays) {
+            PrimitiveKind keyKind, PrimitiveKind valueKind,
+            long expected, float loadFactor, int segmentShift, BigArray.Factory arrays) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         if (!(loadFactor > 0.0f && loadFactor < 1.0f)) {
@@ -79,8 +79,8 @@ public final class M3PrimitiveBigHashMap {
         threshold = threshold(capacity, loadFactor);
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public long size() { return size; }
     public boolean isEmpty() { return size == 0L; }
     public long capacity() { return mask + 1L; }
@@ -206,12 +206,12 @@ public final class M3PrimitiveBigHashMap {
 
     private void rehash(long newCapacity) {
         if (newCapacity > MAX_CAPACITY) throw new IllegalStateException("collection too large");
-        M3PrimitiveBigArray oldKeys = keys;
-        M3PrimitiveBigArray oldValues = values;
+        BigArray oldKeys = keys;
+        BigArray oldValues = values;
         long oldCapacity = capacity();
 
-        M3PrimitiveBigArray nextKeys = allocate(keyKind, newCapacity);
-        M3PrimitiveBigArray nextValues = allocate(valueKind, newCapacity);
+        BigArray nextKeys = allocate(keyKind, newCapacity);
+        BigArray nextValues = allocate(valueKind, newCapacity);
         long nextMask = newCapacity - 1L;
 
         for (long i = 0; i < oldCapacity; i++) {
@@ -230,8 +230,8 @@ public final class M3PrimitiveBigHashMap {
         threshold = threshold(newCapacity, loadFactor);
     }
 
-    private M3PrimitiveBigArray allocate(M3PrimitiveKind kind, long capacity) {
-        M3PrimitiveBigArray result = Objects.requireNonNull(
+    private BigArray allocate(PrimitiveKind kind, long capacity) {
+        BigArray result = Objects.requireNonNull(
                 arrays.create(kind, capacity, segmentShift), "allocated array");
         if (result.kind() != kind || result.length() != capacity
                 || result.segmentShift() != segmentShift) {

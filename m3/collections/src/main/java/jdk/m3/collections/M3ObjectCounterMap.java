@@ -41,7 +41,7 @@ public final class M3ObjectCounterMap<K> {
 
     public M3ObjectCounterMap(long missingValue) {
         this.missingValue = missingValue;
-        counts = new M3ObjectPrimitiveHashMap<>(M3PrimitiveKind.LONG);
+        counts = new M3ObjectPrimitiveHashMap<>(PrimitiveKind.LONG);
     }
 
     public long missingValue() { return missingValue; }

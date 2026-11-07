@@ -64,7 +64,7 @@ public final class M3CollectionCostProbe {
                     () -> sequence(new M3LinkedList<>(), keys, size));
             measure("long-list-admission", "JDK_ArrayList_boxed_long", size,
                     () -> boxedLongs(size));
-            measure("long-list-admission", "M3LongArrayList", size,
+            measure("long-list-admission", "LongArrayList", size,
                     () -> primitiveLongs(size));
         }
         System.out.println("# blackhole=" + blackhole);
@@ -120,7 +120,7 @@ public final class M3CollectionCostProbe {
     }
 
     private static Fixture primitiveLongs(int size) {
-        M3LongArrayList list = new M3LongArrayList();
+        LongArrayList list = new LongArrayList();
         for (int i = 0; i < size; i++) list.add(1000L + i);
         return new Fixture() {
             @Override public long read() {

@@ -37,43 +37,43 @@ public final class M3SortableProcessorContract {
         String person = """
                 package probe;
                 import jdk.m3.collections.*;
-                @M3Sortable public record Person(
-                    @M3SortField(priority=0) String lastName,
-                    @M3SortField(priority=1) String firstName,
+                @Sortable public record Person(
+                    @SortField(priority=0) String lastName,
+                    @SortField(priority=1) String firstName,
                     int age, double score) {
-                  @M3SortSignal public double relevance() { return score; }
-                  @M3SortDistance public double distance(Person other) throws IllegalArgumentException {
+                  @SortSignal public double relevance() { return score; }
+                  @SortDistance public double distance(Person other) throws IllegalArgumentException {
                     return Math.abs(score-other.score);
                   }
-                  String decoy() { return "@M3SortField(priority=99)"; }
-                  String regex() { return "(class|@M3Sortable)"; }
+                  String decoy() { return "@SortField(priority=99)"; }
+                  String regex() { return "(class|@Sortable)"; }
                 }
                 """;
         String bean = """
                 package probe;
                 import jdk.m3.collections.*;
-                @M3Sortable public class Bean {
-                  @M3SortField(priority=0) final int age;
+                @Sortable public class Bean {
+                  @SortField(priority=0) final int age;
                   final String name;
                   public Bean(int age,String name) {this.age=age;this.name=name;}
-                  @M3SortField(priority=1) String label() {return name;}
-                  @M3SortSignal double score() throws IllegalStateException {return age*0.5;}
+                  @SortField(priority=1) String label() {return name;}
+                  @SortSignal double score() throws IllegalStateException {return age*0.5;}
                 }
                 """;
         String descending = """
                 package probe;
                 import jdk.m3.collections.*;
-                @M3Sortable public record Descending(
-                    @M3SortField(priority=0, descending=true) long rank,
-                    @M3SortField(priority=1) int tie) { }
+                @Sortable public record Descending(
+                    @SortField(priority=0, descending=true) long rank,
+                    @SortField(priority=1) int tie) { }
                 """;
         String scoreOnly = """
                 package probe;
                 import jdk.m3.collections.*;
-                @M3Sortable public final class ScoreOnly {
+                @Sortable public final class ScoreOnly {
                   private final double score;
                   public ScoreOnly(double score) { this.score = score; }
-                  @M3SortSignal public double score() { return score; }
+                  @SortSignal public double score() { return score; }
                 }
                 """;
         try (Result first = compile(true, List.of(
@@ -98,7 +98,7 @@ public final class M3SortableProcessorContract {
             check(a.contains("dependency:probe.Person"), "type dependency recorded");
             check(a.contains("method:relevance()"), "method name recorded");
             check(a.contains("package:probe"), "package recorded");
-            check(!a.contains("@M3SortField(priority=99)"), "code-looking string not parsed as field");
+            check(!a.contains("@SortField(priority=99)"), "code-looking string not parsed as field");
             Class<?> personType = first.loader.loadClass("probe.Person");
             Class<?> sortableType = first.loader.loadClass("probe.PersonSortable");
             List<?> structural = (List<?>) sortableType
@@ -116,7 +116,7 @@ public final class M3SortableProcessorContract {
             check(structural.contains("dependency:java.lang.String"),
                     "declared dependency dimension");
             check(structural.stream().noneMatch(
-                    feature -> feature.toString().contains("@M3SortField(priority=99)")),
+                    feature -> feature.toString().contains("@SortField(priority=99)")),
                     "regex/code-like method body is not a declaration");
             String structureId = (String) sortableType
                     .getField("STRUCTURAL_FEATURES_SHA256").get(null);
@@ -159,7 +159,7 @@ public final class M3SortableProcessorContract {
                     .invoke(personEvidence) - 0.4) < 1e-9,
                     "numeric signal gap is preserved, not reduced to comparator sign");
             check((Boolean) evidenceType.getMethod("domainDistanceAvailable").invoke(personEvidence),
-                    "explicit @M3SortDistance evidence is preserved");
+                    "explicit @SortDistance evidence is preserved");
             check(Math.abs((Double) evidenceType.getMethod("domainDistance")
                     .invoke(personEvidence) - 0.4) < 1e-9,
                     "domain distance survives comparison");
@@ -233,22 +233,22 @@ public final class M3SortableProcessorContract {
         String ordinary = """
                 package probe;
                 import jdk.m3.collections.*;
-                @M3Sortable public record Policy(
-                    @M3SortField(priority=0) int first,
-                    @M3SortField(priority=1) int second) {
-                    String regex() { return "@M3SortField(priority=991)"; }
+                @Sortable public record Policy(
+                    @SortField(priority=0) int first,
+                    @SortField(priority=1) int second) {
+                    String regex() { return "@SortField(priority=991)"; }
                 }
                 """;
         String swapped = ordinary
-                .replace("@M3SortField(priority=0) int first",
-                        "@M3SortField(priority=1) int first")
-                .replace("@M3SortField(priority=1) int second",
-                        "@M3SortField(priority=0) int second");
+                .replace("@SortField(priority=0) int first",
+                        "@SortField(priority=1) int first")
+                .replace("@SortField(priority=1) int second",
+                        "@SortField(priority=0) int second");
         String descending = ordinary.replace(
-                "@M3SortField(priority=0) int first",
-                "@M3SortField(priority=0,descending=true) int first");
+                "@SortField(priority=0) int first",
+                "@SortField(priority=0,descending=true) int first");
         String decoy = ordinary.replace(
-                "@M3SortField(priority=991)", "@M3SortField(priority=992)");
+                "@SortField(priority=991)", "@SortField(priority=992)");
         try (Result normal = compile(true, List.of(new Source("probe.Policy", ordinary)));
              Result flipped = compile(true, List.of(new Source("probe.Policy", swapped)));
              Result reverse = compile(true, List.of(new Source("probe.Policy", descending)));
@@ -311,21 +311,21 @@ public final class M3SortableProcessorContract {
         String source = """
                 package probe;
                 import jdk.m3.collections.*;
-                @M3Sortable
-                @M3SortDependency({"probe.Repository#load()", "probe.Cache"})
+                @Sortable
+                @SortDependency({"probe.Repository#load()", "probe.Cache"})
                 public class Declared {
-                  @M3SortField(priority=0) public final int rank;
-                  @M3SortDependency({"probe.FieldIndex#scan()"})
+                  @SortField(priority=0) public final int rank;
+                  @SortDependency({"probe.FieldIndex#scan()"})
                   public final String name;
                   public Declared(int rank, String name) { this.rank=rank; this.name=name; }
-                  @M3SortDependency({"probe.Service#fetch(int)"})
+                  @SortDependency({"probe.Service#fetch(int)"})
                   public int hint() { return rank; }
                   public String decoy() { return "probe.Decoy#never()"; }
                 }
                 """;
         String reordered = source.replace(
-                "@M3SortDependency({\"probe.Repository#load()\", \"probe.Cache\"})",
-                "@M3SortDependency({\"probe.Cache\", \"probe.Repository#load()\"})");
+                "@SortDependency({\"probe.Repository#load()\", \"probe.Cache\"})",
+                "@SortDependency({\"probe.Cache\", \"probe.Repository#load()\"})");
         String changed = source.replace("probe.Service#fetch(int)", "probe.Service#save(int)");
         try (Result first = compile(true, List.of(new Source("probe.Declared", source)));
              Result second = compile(true, List.of(new Source("probe.Declared", reordered)));
@@ -361,18 +361,18 @@ public final class M3SortableProcessorContract {
                     .invoke(null, a, b) < 0, "metadata does not change exact ordering");
         }
         String[] invalid = {
-            "@M3SortDependency({})",
-            "@M3SortDependency({\"  \"})",
-            "@M3SortDependency({\"probe.A#go()\", \"probe.A#go()\"})"
+            "@SortDependency({})",
+            "@SortDependency({\"  \"})",
+            "@SortDependency({\"probe.A#go()\", \"probe.A#go()\"})"
         };
         for (String annotation : invalid) {
             String bad = "package negative; import jdk.m3.collections.*;"
                     + annotation
-                    + "@M3Sortable public class X { @M3SortField(priority=0) int value; }";
+                    + "@Sortable public class X { @SortField(priority=0) int value; }";
             try (Result failure = compile(false, List.of(new Source("negative.X", bad)))) {
                 check(!failure.success, "invalid declared dependency must fail compilation");
                 check(failure.diagnostics.stream().anyMatch(
-                        text -> text.contains("@M3SortDependency")),
+                        text -> text.contains("@SortDependency")),
                         "invalid declared dependency diagnostic required");
             }
         }
@@ -380,13 +380,13 @@ public final class M3SortableProcessorContract {
 
     private static void negatives() throws Exception {
         String[] invalid = {
-            "@M3Sortable public class X { @M3SortField(priority=0) private int age; }",
-            "@M3Sortable public class X { @M3SortField(priority=0) int age; @M3SortField(priority=0) int score; }",
-            "@M3Sortable public class X { @M3SortSignal int score() { return 1; } }",
-            "@M3Sortable public class X { @M3SortField(priority=0) Object opaque; }",
-            "@M3Sortable public class X { @M3SortDistance double dist(String s) { return 1; } "
-                    + "@M3SortField(priority=0) int n; }",
-            "@M3Sortable public class X<T> { @M3SortField(priority=0) int n; }"
+            "@Sortable public class X { @SortField(priority=0) private int age; }",
+            "@Sortable public class X { @SortField(priority=0) int age; @SortField(priority=0) int score; }",
+            "@Sortable public class X { @SortSignal int score() { return 1; } }",
+            "@Sortable public class X { @SortField(priority=0) Object opaque; }",
+            "@Sortable public class X { @SortDistance double dist(String s) { return 1; } "
+                    + "@SortField(priority=0) int n; }",
+            "@Sortable public class X<T> { @SortField(priority=0) int n; }"
         };
         for (String bad : invalid) {
             try (Result result=compile(false, List.of(new Source("negative.X",
@@ -396,12 +396,12 @@ public final class M3SortableProcessorContract {
         }
 
         String[] checkedThrows = {
-            "@M3Sortable public class X { @M3SortSignal double score() "
+            "@Sortable public class X { @SortSignal double score() "
                     + "throws java.io.IOException { return 1.0; } }",
-            "@M3Sortable public class X { @M3SortField(priority=0) double key() "
+            "@Sortable public class X { @SortField(priority=0) double key() "
                     + "throws java.io.IOException { return 1.0; } }",
-            "@M3Sortable public class X { @M3SortField(priority=0) int n; "
-                    + "@M3SortDistance double distance(X other) "
+            "@Sortable public class X { @SortField(priority=0) int n; "
+                    + "@SortDistance double distance(X other) "
                     + "throws java.io.IOException { return 1.0; } }"
         };
         for (String bad : checkedThrows) {
@@ -416,7 +416,7 @@ public final class M3SortableProcessorContract {
 
         StringBuilder oversize = new StringBuilder(
                 "package negative; import jdk.m3.collections.*;"
-                    + "@M3Sortable public class X { @M3SortSignal double score(){return 0.0;}");
+                    + "@Sortable public class X { @SortSignal double score(){return 0.0;}");
         for (int index = 0; index < 129; index++) {
             oversize.append(" int field").append(index).append(";");
         }
@@ -425,7 +425,7 @@ public final class M3SortableProcessorContract {
                 new Source("negative.X", oversize.toString())))) {
             check(!result.success, "oversize metadata must fail compilation");
             check(result.diagnostics.stream().anyMatch(
-                    d -> d.contains("invalid @M3Sortable schema: @M3Sortable schema budget exceeded")),
+                    d -> d.contains("invalid @Sortable schema: @Sortable schema budget exceeded")),
                     "oversize schema must emit diagnostic rather than throwing");
         }
     }

@@ -38,14 +38,14 @@ public final class M3LazyTreeMapSelfTest {
         int[] calls = {0};
         var map = new M3TreeMap<Integer, Integer>(null, (key, progress) -> { calls[0]++; return key * 3; });
         equal(null, map.get(7)); equal(0, map.size()); equal(0, calls[0]);
-        equal(M3LazyValueProvider.ABSENT, map.valueFlags(7));
+        equal(LazyValueProvider.ABSENT, map.valueFlags(7));
         for (int i = 0; i < 128; i++) { require(map.defer(i), "new key admission"); }
         require(!map.defer(7), "existing key unchanged");
         equal(128, map.size()); equal(0, map.firstKey()); equal(127, map.lastKey());
         equal(6, map.lowerKey(7)); equal(7, map.floorKey(7)); equal(8, map.higherKey(7));
         equal(7, map.ceilingKey(7)); require(map.containsKey(7), "deferred membership");
         equal(128, new ArrayList<>(map.navigableKeySet()).size()); equal(0, calls[0]);
-        equal(M3LazyValueProvider.UNLOADED, map.valueFlags(7));
+        equal(LazyValueProvider.UNLOADED, map.valueFlags(7));
         Iterator<Integer> keys = map.navigableKeySet().iterator();
         equal(21, map.touch(7)); equal(21, map.get(7)); equal(1, calls[0]);
         require(map.isValueLoaded(7), "loaded flag"); equal(0, keys.next());
@@ -72,7 +72,7 @@ public final class M3LazyTreeMapSelfTest {
         for (int i = 0; i < 12; i++) { map.defer(i); }
         var view = map.subMap(3, true, 8, false).descendingMap();
         equal(List.of(7, 6, 5, 4, 3), new ArrayList<>(view.navigableKeySet()));
-        equal(M3LazyValueProvider.ABSENT, view.valueFlags(8)); equal(null, view.touch(8));
+        equal(LazyValueProvider.ABSENT, view.valueFlags(8)); equal(null, view.touch(8));
         failure(IllegalArgumentException.class, () -> view.defer(9)); equal(0, calls[0]);
         Map.Entry<Integer, Object> live = view.entrySet().iterator().next();
         equal(7, live.getKey()); equal(0, calls[0]);
@@ -118,14 +118,14 @@ public final class M3LazyTreeMapSelfTest {
             if (++attempts[0] == 1) { throw original; } return key * 3;
         });
         map.defer(2); same(original, failure(RuntimeException.class, () -> map.put(2, 9)));
-        require(map.containsKey(2), "failed replacement keeps key"); equal(M3LazyValueProvider.FAILED, map.valueFlags(2));
+        require(map.containsKey(2), "failed replacement keeps key"); equal(LazyValueProvider.FAILED, map.valueFlags(2));
         equal(6, map.put(2, 9)); equal(9, map.get(2)); equal(2, attempts[0]); map.verifyInvariants();
 
         AtomicReference<M3TreeMap<Integer, Integer>> owner = new AtomicReference<>();
         var cycle = new M3TreeMap<Integer, Integer>(null, (key, progress) -> owner.get().get(3 - key));
         owner.set(cycle); cycle.defer(1); cycle.defer(2);
         failure(IllegalStateException.class, () -> cycle.touch(1));
-        equal(M3LazyValueProvider.FAILED, cycle.valueFlags(1)); equal(M3LazyValueProvider.FAILED, cycle.valueFlags(2));
+        equal(LazyValueProvider.FAILED, cycle.valueFlags(1)); equal(LazyValueProvider.FAILED, cycle.valueFlags(2));
         cycle.verifyInvariants(); cycle.clear(); require(cycle.isEmpty(), "cycle guard released");
         var nested = new M3TreeMap<Integer, Integer>(null,
                 (key, progress) -> key == 1 ? owner.get().get(2) + 1 : 20);
@@ -143,7 +143,7 @@ public final class M3LazyTreeMapSelfTest {
             owner.set(guarded); guarded.defer(1); guarded.put(2, 22);
             failure(IllegalStateException.class, () -> guarded.touch(1));
             equal(List.of(1, 2), new ArrayList<>(guarded.keySet())); equal(22, guarded.get(2));
-            equal(M3LazyValueProvider.FAILED, guarded.valueFlags(1)); guarded.verifyInvariants();
+            equal(LazyValueProvider.FAILED, guarded.valueFlags(1)); guarded.verifyInvariants();
             guarded.clear(); require(guarded.isEmpty(), "provider guard released after failure");
         }
         var removal = new M3TreeMap<Integer, Integer>(null, (key, progress) -> { throw original; });
@@ -169,7 +169,7 @@ public final class M3LazyTreeMapSelfTest {
             return 9;
         });
         late.defer(1); failure(CancellationException.class, () -> late.touch(1, M3Progress.of(1)));
-        equal(M3LazyValueProvider.FAILED, late.valueFlags(1)); require(!late.isValueLoaded(1), "late cancel not committed");
+        equal(LazyValueProvider.FAILED, late.valueFlags(1)); require(!late.isValueLoaded(1), "late cancel not committed");
         equal(9, late.touch(1, null)); late.verifyInvariants();
 
         var changed = new M3TreeMap<Integer, Integer>(null, (key, progress) -> key); changed.defer(1);
@@ -181,7 +181,7 @@ public final class M3LazyTreeMapSelfTest {
     private static void observability() {
         List<Long> events = new ArrayList<>();
         AtomicReference<M3Progress> seenProgress = new AtomicReference<>();
-        M3LazyValueProvider<Integer, Integer> provider = new M3LazyValueProvider<>() {
+        LazyValueProvider<Integer, Integer> provider = new LazyValueProvider<>() {
             @Override public Integer load(Integer key, M3Progress progress) {
                 seenProgress.set(progress);
                 return key * 2;
@@ -193,10 +193,10 @@ public final class M3LazyTreeMapSelfTest {
         };
         var map = new M3TreeMap<Integer, Integer>(null, provider);
         map.defer(1);
-        M3LazyEventPolicy touchPolicy = M3LazyEventPolicy.of(
+        LazyEventPolicy touchPolicy = LazyEventPolicy.of(
                 M3LazyEventBits.BEFORE_TOUCH | M3LazyEventBits.CACHE_MISS
                         | M3LazyEventBits.STATE_CHANGED | M3LazyEventBits.AFTER_LOAD,
-                M3LazyEventGranularity.STATE_TRANSITION);
+                LazyEventGranularity.STATE_TRANSITION);
         long systemBefore = M3SystemProgress.get().state().worked();
         equal(2, map.touch(1, touchPolicy, null));
         require(M3SystemProgress.get().state().worked() >= systemBefore + 1L,
@@ -213,9 +213,9 @@ public final class M3LazyTreeMapSelfTest {
         same(explicit, seenProgress.get());
 
         map.defer(3); map.defer(4); events.clear();
-        M3LazyEventPolicy rangePolicy = M3LazyEventPolicy.of(
+        LazyEventPolicy rangePolicy = LazyEventPolicy.of(
                 M3LazyEventBits.RANGE_BEGIN | M3LazyEventBits.RANGE_END | M3LazyEventBits.PROGRESS,
-                M3LazyEventGranularity.ELEMENT);
+                LazyEventGranularity.ELEMENT);
         map.preload(rangePolicy, null);
         require(events.contains(M3LazyEventBits.RANGE_BEGIN)
                         && events.contains(M3LazyEventBits.RANGE_END)
@@ -294,7 +294,7 @@ public final class M3LazyTreeMapSelfTest {
         same(tree, field(map.subMap(10, true, 30, false).descendingMap(), "tree"));
         map.verifyInvariants(); map.clear(); map.verifyInvariants();
         require(Arrays.stream((Object[]) field(tree, "keys")).allMatch(Objects::isNull), "key references cleared");
-        for (short flag : (short[]) field(state, "flags")) { equal(M3LazyValueProvider.UNLOADED, flag); }
+        for (short flag : (short[]) field(state, "flags")) { equal(LazyValueProvider.UNLOADED, flag); }
     }
 
     private static Object field(Object owner, String name) throws Exception {

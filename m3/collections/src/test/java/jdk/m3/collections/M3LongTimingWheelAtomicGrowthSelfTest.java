@@ -21,9 +21,9 @@ public final class M3LongTimingWheelAtomicGrowthSelfTest {
         if (!yes) throw new AssertionError(where);
     }
 
-    private static Object field(M3LongTimingWheel wheel, String name) {
+    private static Object field(LongTimingWheel wheel, String name) {
         try {
-            Field f = M3LongTimingWheel.class.getDeclaredField(name);
+            Field f = LongTimingWheel.class.getDeclaredField(name);
             f.setAccessible(true);
             return f.get(wheel);
         } catch (ReflectiveOperationException failure) {
@@ -31,8 +31,8 @@ public final class M3LongTimingWheelAtomicGrowthSelfTest {
         }
     }
 
-    private static M3LongTimingWheel full() {
-        M3LongTimingWheel wheel = new M3LongTimingWheel(2, 1L, 0L);
+    private static LongTimingWheel full() {
+        LongTimingWheel wheel = new LongTimingWheel(2, 1L, 0L);
         for (int i = 0; i < 8; i++) {
             wheel.schedule(1000L + i, 20L + i % 5);
         }
@@ -42,7 +42,7 @@ public final class M3LongTimingWheelAtomicGrowthSelfTest {
     }
 
     private static void proveFailure(int phase, boolean malformed, int iteration) {
-        M3LongTimingWheel wheel = full();
+        LongTimingWheel wheel = full();
         long[] values = (long[]) field(wheel, "values");
         long[] deadlines = (long[]) field(wheel, "deadlineTick");
         int[] next = (int[]) field(wheel, "next");
@@ -56,7 +56,7 @@ public final class M3LongTimingWheelAtomicGrowthSelfTest {
         int freeHead = (int) field(wheel, "freeHead");
         OutOfMemoryError oom = new OutOfMemoryError("synthetic lane " + phase);
         int[] copies = {0};
-        M3LongTimingWheel.ArrayCopier copier = new M3LongTimingWheel.ArrayCopier() {
+        LongTimingWheel.ArrayCopier copier = new LongTimingWheel.ArrayCopier() {
             @Override public long[] copy(long[] source, int capacity) {
                 int at = ++copies[0];
                 if (!malformed && at == phase) throw oom;
@@ -115,10 +115,10 @@ public final class M3LongTimingWheelAtomicGrowthSelfTest {
     }
 
     private static void smoke() {
-        M3LongTimingWheel wheel = full();
+        LongTimingWheel wheel = full();
         // No OOME or malformed copier: the test-only seam must preserve the
         // incumbent allocation capacity and all due times in the normal case.
-        wheel.grow(new M3LongTimingWheel.ArrayCopier() {
+        wheel.grow(new LongTimingWheel.ArrayCopier() {
             @Override public long[] copy(long[] source, int capacity) {
                 return Arrays.copyOf(source, capacity);
             }

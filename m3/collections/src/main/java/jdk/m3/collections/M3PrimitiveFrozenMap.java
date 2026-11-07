@@ -33,13 +33,13 @@ public final class M3PrimitiveFrozenMap {
         void accept(long keyBits, long valueBits);
     }
 
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private final Object keys;
     private final Object values;
 
     private M3PrimitiveFrozenMap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind, Object keys, Object values) {
+            PrimitiveKind keyKind, PrimitiveKind valueKind, Object keys, Object values) {
         this.keyKind = keyKind;
         this.valueKind = valueKind;
         this.keys = keys;
@@ -49,8 +49,8 @@ public final class M3PrimitiveFrozenMap {
     public static M3PrimitiveFrozenMap copyOf(M3PrimitivePrimitiveHashMap source) {
         Objects.requireNonNull(source, "source");
         int size = source.size();
-        M3PrimitiveKind keyKind = source.keyKind();
-        M3PrimitiveKind valueKind = source.valueKind();
+        PrimitiveKind keyKind = source.keyKind();
+        PrimitiveKind valueKind = source.valueKind();
         Object keys = keyKind.newArray(size);
         Object values = valueKind.newArray(size);
         int[] cursor = new int[1];
@@ -63,8 +63,8 @@ public final class M3PrimitiveFrozenMap {
         return new M3PrimitiveFrozenMap(keyKind, valueKind, keys, values);
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int size() { return java.lang.reflect.Array.getLength(keys); }
     public boolean isEmpty() { return size() == 0; }
     public long payloadBytes() {
@@ -156,7 +156,7 @@ public final class M3PrimitiveFrozenMap {
     }
 
     private static void heapSortPairs(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind,
+            PrimitiveKind keyKind, PrimitiveKind valueKind,
             Object keys, Object values, int size) {
         for (int parent = (size >>> 1) - 1; parent >= 0; parent--) {
             siftDown(keyKind, valueKind, keys, values, parent, size);
@@ -168,7 +168,7 @@ public final class M3PrimitiveFrozenMap {
     }
 
     private static void siftDown(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind,
+            PrimitiveKind keyKind, PrimitiveKind valueKind,
             Object keys, Object values, int root, int size) {
         int index = root;
         while (true) {
@@ -192,7 +192,7 @@ public final class M3PrimitiveFrozenMap {
     }
 
     private static void swap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind,
+            PrimitiveKind keyKind, PrimitiveKind valueKind,
             Object keys, Object values, int left, int right) {
         long key = keyKind.readBits(keys, left);
         long value = valueKind.readBits(values, left);

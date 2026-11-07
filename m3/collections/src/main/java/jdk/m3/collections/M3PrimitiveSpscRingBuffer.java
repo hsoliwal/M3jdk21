@@ -43,14 +43,14 @@ public final class M3PrimitiveSpscRingBuffer {
         }
     }
 
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final Object elements;
     private final int capacity;
     private final int mask;
     private volatile long head;
     private volatile long tail;
 
-    public M3PrimitiveSpscRingBuffer(M3PrimitiveKind kind, int requestedCapacity) {
+    public M3PrimitiveSpscRingBuffer(PrimitiveKind kind, int requestedCapacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (requestedCapacity <= 0) throw new IllegalArgumentException("capacity <= 0");
         int rounded = 1;
@@ -63,7 +63,7 @@ public final class M3PrimitiveSpscRingBuffer {
         elements = kind.newArray(capacity);
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int capacity() { return capacity; }
     public long payloadBytes() { return kind.payloadBytes(capacity); }
 

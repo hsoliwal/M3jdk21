@@ -49,7 +49,7 @@ public final class M3IndexedDescendingGroupMaskSelfTest {
 
     public static void main(String[] arguments) {
         boolean requireNative = arguments.length != 0 && "native".equals(arguments[0]);
-        if (requireNative && !M3IndexPathMasks.nativeAvailable()) {
+        if (requireNative && !IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("required existing native path-mask selector is unavailable");
         }
         boundaryShapes(requireNative);
@@ -107,10 +107,10 @@ public final class M3IndexedDescendingGroupMaskSelfTest {
         int[] required = new int[] {SIGN, 0};
         int[] forbidden = new int[] {0, 0};
         verifyMasked(ascending, items, states, required, forbidden,
-                M3IndexPathMasks.Backend.JAVA);
+                IndexPathMasks.Backend.JAVA);
         if (requireNative) {
             verifyMasked(ascending, items, states, required, forbidden,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                    IndexPathMasks.Backend.NATIVE_REQUIRED);
         }
         // A full-mask zero selection is still a valid empty projection.
         if (items.length > 0) {
@@ -120,13 +120,13 @@ public final class M3IndexedDescendingGroupMaskSelfTest {
                     Arrays.copyOf(absent[1], items.length)
             };
             verifyMasked(ascending, items, expanded,
-                    new int[] {SIGN, SIGN}, forbidden, M3IndexPathMasks.Backend.JAVA);
+                    new int[] {SIGN, SIGN}, forbidden, IndexPathMasks.Backend.JAVA);
         }
     }
 
     private static void verifyMasked(M3IndexedListSnapshot<Item> source, Item[] items,
             int[][] states, int[] required, int[] forbidden,
-            M3IndexPathMasks.Backend backend) {
+            IndexPathMasks.Backend backend) {
         M3IndexedListSnapshot<Item> selected = source.maskedByPhysicalStates(
                 states, required, forbidden, backend);
         int[] selectedBefore = selected.physicalIndices();

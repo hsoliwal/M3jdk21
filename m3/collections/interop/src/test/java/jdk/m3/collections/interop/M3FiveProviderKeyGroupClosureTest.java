@@ -6,7 +6,7 @@ package jdk.m3.collections.interop;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -137,15 +137,15 @@ final class M3FiveProviderKeyGroupClosureTest {
                 () -> groups.filteredGroupStates(states, new int[] {0}, forbidden));
 
         var empty = groups.groupWindow(0, 0);
-        if (M3IndexPathMasks.nativeAvailable()) {
+        if (IndexPathMasks.nativeAvailable()) {
             assertEquals(keys(selected), keys(groups.filteredGroupStates(states,
-                    required, forbidden, M3IndexPathMasks.Backend.NATIVE_REQUIRED)));
+                    required, forbidden, IndexPathMasks.Backend.NATIVE_REQUIRED)));
             assertTrue(empty.filteredGroupStates(states, required, forbidden,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED).groupCount() == 0);
+                    IndexPathMasks.Backend.NATIVE_REQUIRED).groupCount() == 0);
         } else {
             assertThrows(UnsatisfiedLinkError.class,
                     () -> empty.filteredGroupStates(states, required, forbidden,
-                            M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                            IndexPathMasks.Backend.NATIVE_REQUIRED));
         }
         assertEquals(Arrays.asList("green", null, "blue", "red"),
                 keys(groups.rankedGroupsByCount(false)));
@@ -239,9 +239,9 @@ final class M3FiveProviderKeyGroupClosureTest {
                     assertEquals(e.getValue().size(), selected.asApacheKeyMultiSet().getCount(key));
                 }
             }
-            if (M3IndexPathMasks.nativeAvailable() && trial % 29 == 0) {
+            if (IndexPathMasks.nativeAvailable() && trial % 29 == 0) {
                 assertEquals(expectedKeys, keys(groups.filteredGroupStates(planes,
-                        needed, denied, M3IndexPathMasks.Backend.NATIVE_REQUIRED)));
+                        needed, denied, IndexPathMasks.Backend.NATIVE_REQUIRED)));
             }
         }
     }

@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongConsumer;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Provider-backed pageable primitive tree with long logical ids and opaque long child cursors.
@@ -50,7 +50,7 @@ public final class M3ProviderBackedPrimitiveLongTree {
     public M3ProviderBackedPrimitiveLongTree(
             M3CursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this(
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
                 M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
@@ -66,7 +66,7 @@ public final class M3ProviderBackedPrimitiveLongTree {
             int leafBits,
             M3CursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this.provider = Objects.requireNonNull(provider, "provider");
         if (pageSize <= 0) throw new IllegalArgumentException("pageSize <= 0");
         this.pageSize = pageSize;
@@ -475,6 +475,6 @@ public final class M3ProviderBackedPrimitiveLongTree {
     private static M3LazyPrimitiveAddressSpace longs(
             int rootBits, int directoryBits, int leafBits) {
         return new M3LazyPrimitiveAddressSpace(
-                M3PrimitiveKind.LONG, rootBits, directoryBits, leafBits);
+                PrimitiveKind.LONG, rootBits, directoryBits, leafBits);
     }
 }

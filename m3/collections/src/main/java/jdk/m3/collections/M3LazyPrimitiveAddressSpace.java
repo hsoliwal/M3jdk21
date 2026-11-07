@@ -41,7 +41,7 @@ public final class M3LazyPrimitiveAddressSpace {
         void accept(long baseIndex, Object primitiveLeaf);
     }
 
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final int rootBits;
     private final int directoryBits;
     private final int leafBits;
@@ -54,17 +54,17 @@ public final class M3LazyPrimitiveAddressSpace {
     private long allocatedMiddleDirectories;
     private long allocatedLeaves;
 
-    public M3LazyPrimitiveAddressSpace(M3PrimitiveKind kind) {
+    public M3LazyPrimitiveAddressSpace(PrimitiveKind kind) {
         this(kind, DEFAULT_ROOT_BITS, DEFAULT_DIRECTORY_BITS, DEFAULT_LEAF_BITS);
     }
 
-    public M3LazyPrimitiveAddressSpace(M3PrimitiveKind kind, int rootBits,
+    public M3LazyPrimitiveAddressSpace(PrimitiveKind kind, int rootBits,
                                      int directoryBits, int leafBits) {
         this(Objects.requireNonNull(kind, "kind"), rootBits, directoryBits, leafBits, 2,
                 checkedCapacity(rootBits, directoryBits, leafBits));
     }
 
-    private M3LazyPrimitiveAddressSpace(M3PrimitiveKind kind, int rootBits,
+    private M3LazyPrimitiveAddressSpace(PrimitiveKind kind, int rootBits,
                                       int directoryBits, int leafBits,
                                       int levels, long logicalCapacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
@@ -88,7 +88,7 @@ public final class M3LazyPrimitiveAddressSpace {
      * Even Long.MAX_VALUE is representable; actual residency remains bounded
      * by the available heap and checked byte-accounting arithmetic.
      */
-    public static M3LazyPrimitiveAddressSpace paged(M3PrimitiveKind kind,
+    public static M3LazyPrimitiveAddressSpace paged(PrimitiveKind kind,
                                                   long capacity, int leafBits) {
         Objects.requireNonNull(kind, "kind");
         if (capacity < 0) throw new IllegalArgumentException("capacity < 0");
@@ -102,7 +102,7 @@ public final class M3LazyPrimitiveAddressSpace {
         return new M3LazyPrimitiveAddressSpace(kind, rootBits, 8, leafBits, levels, capacity);
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int rootBits() { return rootBits; }
     public int directoryBits() { return directoryBits; }
     public int leafBits() { return leafBits; }

@@ -10,8 +10,8 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.SortedSetMultimap;
 import jdk.m3.collections.M3IndexMaskCompactor;
 import jdk.m3.collections.M3ArrayifiedIndexOps;
-import jdk.m3.collections.M3IndexMaskWindow;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexMaskWindow;
+import jdk.m3.collections.IndexPathMasks;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -41,7 +41,7 @@ import org.springframework.util.MultiValueMap;
  * public interface, views and mutation rules remain owned by its actual library.
  * The results are <em>detached</em>, unlike the separate live M3FilteredViews wrappers.
  *
- * <p>JNI is opt-in and reuses the existing {@link M3IndexMaskWindow} C17 primitive
+ * <p>JNI is opt-in and reuses the existing {@link IndexMaskWindow} C17 primitive
  * selector. Java predicates, comparators, keys, values and object pointers never enter
  * JNI. NATIVE_REQUIRED never silently falls back. Not thread-safe during construction,
  * not a serializable concrete vendor class, and no throughput superiority is presumed.
@@ -203,17 +203,17 @@ public final class M3FiveLibraryIndexViews<K, V> {
             }
         } else if (expected == 0) {
             // Even empty inputs must require an actual installed native ABI.
-            M3IndexMaskWindow.scan(ordered, aligned, 0, required, excluded,
+            IndexMaskWindow.scan(ordered, aligned, 0, required, excluded,
                     admitted, 0, 0, backend);
         } else {
             int cursor = 0;
             int written = 0;
             while (cursor < ordered.length && written < expected) {
-                int limit = Math.min(M3IndexMaskWindow.MAX_WINDOW, expected - written);
-                long result = M3IndexMaskWindow.scan(ordered, aligned, cursor,
+                int limit = Math.min(IndexMaskWindow.MAX_WINDOW, expected - written);
+                long result = IndexMaskWindow.scan(ordered, aligned, cursor,
                         required, excluded, admitted, written, limit, backend);
-                int next = M3IndexMaskWindow.nextIndex(result);
-                int emitted = M3IndexMaskWindow.written(result);
+                int next = IndexMaskWindow.nextIndex(result);
+                int emitted = IndexMaskWindow.written(result);
                 if (next <= cursor || emitted > expected - written) {
                     throw new IllegalStateException("native selector failed to advance");
                 }
@@ -249,13 +249,13 @@ public final class M3FiveLibraryIndexViews<K, V> {
      */
     public M3FiveLibraryIndexViews<K, V> filteredByStatePlanes(
             int[][] statePlanes, int[] required, int[] excluded,
-            M3IndexPathMasks.Backend backend) {
+            IndexPathMasks.Backend backend) {
         Objects.requireNonNull(backend, "backend");
         requireAlignedStages(statePlanes);
         int[] ordered = Arrays.copyOfRange(rows, from, to);
         // The ordered row IDs are also physical offsets into all supplied
         // planes. Aliasing these two READ-ONLY selector inputs is intentional.
-        int[] selected = M3IndexPathMasks.select(ordered, ordered, statePlanes,
+        int[] selected = IndexPathMasks.select(ordered, ordered, statePlanes,
                 required, excluded, 0, ordered.length, 1, backend);
         return new M3FiveLibraryIndexViews<>(keys, values, states,
                 selected, 0, selected.length);
@@ -265,7 +265,7 @@ public final class M3FiveLibraryIndexViews<K, V> {
     public M3FiveLibraryIndexViews<K, V> filteredByStatePlanes(
             int[][] statePlanes, int[] required, int[] excluded) {
         return filteredByStatePlanes(statePlanes, required, excluded,
-                M3IndexPathMasks.Backend.JAVA);
+                IndexPathMasks.Backend.JAVA);
     }
 
     /** Index of the first passing occurrence, relative to this slice, or -1. */
@@ -273,7 +273,7 @@ public final class M3FiveLibraryIndexViews<K, V> {
             int[][] statePlanes, int[] required, int[] excluded) {
         requireAlignedStages(statePlanes);
         int[] ordered = Arrays.copyOfRange(rows, from, to);
-        return M3IndexPathMasks.firstMatchingIndex(ordered, ordered, statePlanes,
+        return IndexPathMasks.firstMatchingIndex(ordered, ordered, statePlanes,
                 required, excluded, 0, ordered.length, 1);
     }
 

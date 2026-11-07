@@ -6,6 +6,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
+import jdk.m3.collections.sketch.LongCountMinSketch;
 
 /** Independent row-matrix oracle and exact saturation-red witness. */
 public final class M3CountMinSaturationSelfTest {
@@ -88,7 +89,7 @@ public final class M3CountMinSaturationSelfTest {
     private static void ordinary() {
         for (int width : new int[] {1, 2, 3, 4, 17, 128}) {
             for (int depth : new int[] {1, 2, 4, 8, 16, 32}) {
-                M3LongCountMinSketch sketch = new M3LongCountMinSketch(width, depth);
+                LongCountMinSketch sketch = new LongCountMinSketch(width, depth);
                 IndependentMatrix oracle = new IndependentMatrix(width, depth);
                 Random random = new Random(0x2179f105a4f01c11L ^ ((long) width << 16) ^ depth);
                 check(sketch.width() == oracle.rows[0].length, "normalized width");
@@ -108,7 +109,7 @@ public final class M3CountMinSaturationSelfTest {
                     } else if (operation < 13) {
                         check(sketch.estimate(key) == oracle.read(key), "read estimate");
                     } else if (operation < 15) {
-                        M3LongCountMinSketch other = new M3LongCountMinSketch(width, depth);
+                        LongCountMinSketch other = new LongCountMinSketch(width, depth);
                         IndependentMatrix reference = new IndependentMatrix(width, depth);
                         for (int i = 0; i < 3; i++) {
                             long anotherKey = values[random.nextInt(values.length)];
@@ -132,11 +133,11 @@ public final class M3CountMinSaturationSelfTest {
             }
         }
         // Invalid geometry and negative delta retain original validation.
-        try { new M3LongCountMinSketch(1, 0); throw new AssertionError("zero depth"); }
+        try { new LongCountMinSketch(1, 0); throw new AssertionError("zero depth"); }
         catch (IllegalArgumentException expected) { checks++; }
-        try { new M3LongCountMinSketch(0, 1); throw new AssertionError("zero width"); }
+        try { new LongCountMinSketch(0, 1); throw new AssertionError("zero width"); }
         catch (IllegalArgumentException expected) { checks++; }
-        M3LongCountMinSketch sketch = new M3LongCountMinSketch(2, 2);
+        LongCountMinSketch sketch = new LongCountMinSketch(2, 2);
         try { sketch.add(1L, -1L); throw new AssertionError("negative delta"); }
         catch (IllegalArgumentException expected) { checks++; }
         check(sketch.totalCount() == 0L, "reject without mutation");
@@ -146,7 +147,7 @@ public final class M3CountMinSaturationSelfTest {
     private static void saturation() {
         for (int width : new int[] {1, 2, 4, 17, 128}) {
             for (int depth : new int[] {1, 2, 4, 8, 16, 32}) {
-                M3LongCountMinSketch sketch = new M3LongCountMinSketch(width, depth);
+                LongCountMinSketch sketch = new LongCountMinSketch(width, depth);
                 IndependentMatrix oracle = new IndependentMatrix(width, depth);
                 long key = 0xdeadbeefL ^ width ^ ((long) depth << 32);
                 // A saturated counter is a real value, not an "unseen" sentinel.
@@ -157,7 +158,7 @@ public final class M3CountMinSaturationSelfTest {
                         "saturated query must not become zero");
                 check(sketch.add(key, 0L) == Long.MAX_VALUE, "zero delta preserves max");
                 check(sketch.add(key, 1L) == Long.MAX_VALUE, "next add stays saturated");
-                M3LongCountMinSketch other = new M3LongCountMinSketch(width, depth);
+                LongCountMinSketch other = new LongCountMinSketch(width, depth);
                 IndependentMatrix otherOracle = new IndependentMatrix(width, depth);
                 check(other.add(key, Long.MAX_VALUE - 2L)
                         == otherOracle.add(key, Long.MAX_VALUE - 2L), "peer saturation");

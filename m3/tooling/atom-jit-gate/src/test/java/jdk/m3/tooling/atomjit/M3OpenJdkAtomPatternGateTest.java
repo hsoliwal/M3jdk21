@@ -71,7 +71,7 @@ final class M3OpenJdkAtomPatternGateTest {
     @Test
     void ordinaryM3AndAnyOtherJavaRepositoryUseSameCanonicalRecipes() {
         var m3 = M3OpenJdkAtomPatternGate.plan(PRODUCT,
-                "m3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java",
+                "m3/collections/src/main/java/jdk/m3/collections/LongHashSet.java",
                 BLOB, "JAVA");
         var donor = M3OpenJdkAtomPatternGate.plan("hsoliwal/guava",
                 "guava/src/jdk/m3/collections/guava/ImmutableList.java", BLOB, "JAVA");

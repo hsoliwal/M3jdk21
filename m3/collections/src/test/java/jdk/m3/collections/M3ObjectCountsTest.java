@@ -83,7 +83,7 @@ final class M3ObjectCountsTest {
         counts.elementSet().removeIf(k -> true);
         assertEquals(0, counts.totalCount()); counts.verifyInvariants();
         counts.add(null, 4); counts.setFlags(null, Integer.MIN_VALUE);
-        assertEquals(Arrays.asList((String) null), counts.flaggedElements(Integer.MIN_VALUE, 0, M3IndexPathMasks.Backend.JAVA));
+        assertEquals(Arrays.asList((String) null), counts.flaggedElements(Integer.MIN_VALUE, 0, IndexPathMasks.Backend.JAVA));
     }
 
     @Test void primitiveColumnsShareKeySlotsWithoutCountBoxesOrRetainedEntries() throws Exception {
@@ -106,14 +106,14 @@ final class M3ObjectCountsTest {
     }
 
     @Test void flagWindowsAgreeWithScalarOracleForAllBitsOffsetsAndBothDirections() {
-        checkFlags(M3IndexPathMasks.Backend.JAVA);
+        checkFlags(IndexPathMasks.Backend.JAVA);
         if (Boolean.getBoolean("m3.interop.requireNative")) {
-            assertTrue(M3IndexPathMasks.nativeAvailable(), "explicit JNI qualification must load real library");
-            checkFlags(M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+            assertTrue(IndexPathMasks.nativeAvailable(), "explicit JNI qualification must load real library");
+            checkFlags(IndexPathMasks.Backend.NATIVE_REQUIRED);
         }
     }
 
-    private static void checkFlags(M3IndexPathMasks.Backend backend) {
+    private static void checkFlags(IndexPathMasks.Backend backend) {
         Random random = new Random(0x534c4f54464c4147L);
         M3ObjectCounts<Integer> counts = new M3ObjectCounts<>();
         List<Integer> order = new ArrayList<>();
@@ -153,10 +153,10 @@ final class M3ObjectCountsTest {
         assertEquals(5, counts.totalCount());
         assertThrows(ConcurrentModificationException.class, () -> counts.forEachCount((k, v) -> counts.setFlags(k, 1)));
         M3Progress canceled = M3Progress.of(2); canceled.cancel();
-        assertThrows(CancellationException.class, () -> counts.flaggedElements(0, 0, 0, 2, 1, M3IndexPathMasks.Backend.JAVA, canceled));
+        assertThrows(CancellationException.class, () -> counts.flaggedElements(0, 0, 0, 2, 1, IndexPathMasks.Backend.JAVA, canceled));
         assertThrows(CancellationException.class, () -> counts.forEachCount((k, v) -> fail(), canceled));
         M3Progress reentrant = M3Progress.of(2, p -> counts.add("new", 1));
-        assertThrows(ConcurrentModificationException.class, () -> counts.flaggedElements(0, 0, 0, 2, 1, M3IndexPathMasks.Backend.JAVA, reentrant));
+        assertThrows(ConcurrentModificationException.class, () -> counts.flaggedElements(0, 0, 0, 2, 1, IndexPathMasks.Backend.JAVA, reentrant));
         counts.verifyInvariants();
     }
 }

@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Objects;
 import java.util.function.LongConsumer;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Version-consistent facade over the existing provider-backed long-id tree.
@@ -37,7 +37,7 @@ public final class M3VersionedProviderBackedPrimitiveLongTree {
     public M3VersionedProviderBackedPrimitiveLongTree(
             M3VersionedCursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this(
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
                 M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
@@ -53,7 +53,7 @@ public final class M3VersionedProviderBackedPrimitiveLongTree {
             int leafBits,
             M3VersionedCursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         adapter = new VersionPinningAdapter(
                 rootBits,
                 directoryBits,
@@ -152,7 +152,7 @@ public final class M3VersionedProviderBackedPrimitiveLongTree {
                 M3VersionedCursorPagedPrimitiveTreeProvider provider) {
             this.provider = provider;
             versions = new M3LazyPrimitiveAddressSpace(
-                    M3PrimitiveKind.LONG, rootBits, directoryBits, leafBits);
+                    PrimitiveKind.LONG, rootBits, directoryBits, leafBits);
             known = new M3LazyBitAddressSpace(rootBits, directoryBits, leafBits);
         }
 

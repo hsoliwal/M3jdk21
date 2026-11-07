@@ -82,7 +82,7 @@ public final class M3IntDisjointSetSelfTest {
     }
 
     private static void runSize(int size, long seed) {
-        M3IntDisjointSet actual = new M3IntDisjointSet(size);
+        IntDisjointSet actual = new IntDisjointSet(size);
         Oracle reference = new Oracle(size);
         Random random = new Random(seed);
         eq(size, actual.size());
@@ -139,7 +139,7 @@ public final class M3IntDisjointSetSelfTest {
     private static void adversarial() {
         // Large balanced unions create actual maximum-height union-by-size trees.
         final int n = 1 << 14;
-        M3IntDisjointSet actual = new M3IntDisjointSet(n);
+        IntDisjointSet actual = new IntDisjointSet(n);
         for (int step = 1; step < n; step <<= 1) {
             for (int i = 0; i < n; i += step << 1) {
                 ok(actual.union(i, i + step));

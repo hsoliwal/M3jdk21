@@ -21,12 +21,12 @@ final class M3LazyObserverRegressionTest {
             AtomicBoolean first = new AtomicBoolean(true);
             AtomicInteger calls = new AtomicInteger();
             RuntimeException observer = new IllegalArgumentException("observer-" + bit);
-            var provider = new M3LazyValueProvider<Integer, String>() {
+            var provider = new LazyValueProvider<Integer, String>() {
                 @Override public String load(Integer key, M3Progress monitor) {
                     assertNotNull(monitor); calls.incrementAndGet(); return "v" + key;
                 }
-                @Override public M3LazyEventPolicy lazyEventPolicy() {
-                    return M3LazyEventPolicy.of(bit, M3LazyEventGranularity.STATE_TRANSITION);
+                @Override public LazyEventPolicy lazyEventPolicy() {
+                    return LazyEventPolicy.of(bit, LazyEventGranularity.STATE_TRANSITION);
                 }
                 @Override public M3LazyEventSink<M3Progress> lazyEventSink() {
                     return (event, slot, oldState, newState, operation, monitor, failure) -> {
@@ -39,7 +39,7 @@ final class M3LazyObserverRegressionTest {
             assertSame(observer, assertThrows(RuntimeException.class,
                     () -> map.touch(1, M3Progress.NULL)));
             map.verifyInvariants();
-            assertEquals(M3LazyValueProvider.LOADED, map.valueFlags(1));
+            assertEquals(LazyValueProvider.LOADED, map.valueFlags(1));
             assertEquals("v1", map.touch(1, M3Progress.NULL));
             assertEquals(1, calls.get(), "observer failure must not repeat completed provider work");
             map.verifyInvariants();
@@ -51,14 +51,14 @@ final class M3LazyObserverRegressionTest {
         RuntimeException observerFailure = new IllegalStateException("failure observer");
         RuntimeException finalObserverFailure = new IllegalStateException("final observer");
         AtomicInteger calls = new AtomicInteger();
-        var provider = new M3LazyValueProvider<Integer, String>() {
+        var provider = new LazyValueProvider<Integer, String>() {
             @Override public String load(Integer key, M3Progress monitor) {
                 if (calls.getAndIncrement() == 0) { throw providerFailure; }
                 return "v" + key;
             }
-            @Override public M3LazyEventPolicy lazyEventPolicy() {
-                return M3LazyEventPolicy.of(M3LazyEventBits.LOAD_FAILED | M3LazyEventBits.PROVIDER_END,
-                        M3LazyEventGranularity.STATE_TRANSITION);
+            @Override public LazyEventPolicy lazyEventPolicy() {
+                return LazyEventPolicy.of(M3LazyEventBits.LOAD_FAILED | M3LazyEventBits.PROVIDER_END,
+                        LazyEventGranularity.STATE_TRANSITION);
             }
             @Override public M3LazyEventSink<M3Progress> lazyEventSink() {
                 return (event, slot, oldState, newState, operation, monitor, failure) -> {
@@ -73,7 +73,7 @@ final class M3LazyObserverRegressionTest {
                 () -> map.touch(7, M3Progress.NULL)));
         assertEquals(List.of(observerFailure, finalObserverFailure),
                 List.of(providerFailure.getSuppressed()));
-        assertEquals(M3LazyValueProvider.FAILED, map.valueFlags(7));
+        assertEquals(LazyValueProvider.FAILED, map.valueFlags(7));
         map.verifyInvariants();
         assertEquals("v7", map.touch(7, M3Progress.NULL));
         assertEquals(2, calls.get());
@@ -83,10 +83,10 @@ final class M3LazyObserverRegressionTest {
     @Test void beforeTouchObserverCannotRetargetRecycledSlot() {
         AtomicReference<M3TreeMap<Integer, String>> owner = new AtomicReference<>();
         AtomicBoolean first = new AtomicBoolean(true);
-        var provider = new M3LazyValueProvider<Integer, String>() {
+        var provider = new LazyValueProvider<Integer, String>() {
             @Override public String load(Integer key, M3Progress monitor) { return "v" + key; }
-            @Override public M3LazyEventPolicy lazyEventPolicy() {
-                return M3LazyEventPolicy.of(M3LazyEventBits.BEFORE_TOUCH, M3LazyEventGranularity.ELEMENT);
+            @Override public LazyEventPolicy lazyEventPolicy() {
+                return LazyEventPolicy.of(M3LazyEventBits.BEFORE_TOUCH, LazyEventGranularity.ELEMENT);
             }
             @Override public M3LazyEventSink<M3Progress> lazyEventSink() {
                 return (event, slot, oldState, newState, operation, monitor, failure) -> {
@@ -97,7 +97,7 @@ final class M3LazyObserverRegressionTest {
         var map = new M3TreeMap<Integer, String>(null, provider); owner.set(map); map.defer(1);
         assertThrows(IllegalStateException.class, () -> map.touch(1, M3Progress.NULL));
         assertEquals(List.of(1), new ArrayList<>(map.keySet()));
-        assertEquals(M3LazyValueProvider.UNLOADED, map.valueFlags(1));
+        assertEquals(LazyValueProvider.UNLOADED, map.valueFlags(1));
         assertEquals("v1", map.touch(1, M3Progress.NULL));
         assertNull(map.get(2));
         map.verifyInvariants();
@@ -108,10 +108,10 @@ final class M3LazyObserverRegressionTest {
                 M3LazyEventBits.PROVIDER_END}) {
             AtomicReference<M3TreeMap<Integer, String>> owner = new AtomicReference<>();
             AtomicBoolean armed = new AtomicBoolean(false);
-            var provider = new M3LazyValueProvider<Integer, String>() {
+            var provider = new LazyValueProvider<Integer, String>() {
                 @Override public String load(Integer key, M3Progress monitor) { return "v" + key; }
-                @Override public M3LazyEventPolicy lazyEventPolicy() {
-                    return M3LazyEventPolicy.of(bit, M3LazyEventGranularity.STATE_TRANSITION);
+                @Override public LazyEventPolicy lazyEventPolicy() {
+                    return LazyEventPolicy.of(bit, LazyEventGranularity.STATE_TRANSITION);
                 }
                 @Override public M3LazyEventSink<M3Progress> lazyEventSink() {
                     return (event, slot, oldState, newState, operation, monitor, failure) -> {
@@ -147,15 +147,15 @@ final class M3LazyObserverRegressionTest {
         assertThrows(IllegalStateException.class, () -> map.subMap(1, true, 3, true).preload(progress));
         assertEquals(List.of(1, 2), order);
         assertTrue(map.isValueLoaded(1)); assertNull(map.get(1));
-        assertEquals(M3LazyValueProvider.FAILED, map.valueFlags(2));
-        assertEquals(M3LazyValueProvider.UNLOADED, map.valueFlags(3));
+        assertEquals(LazyValueProvider.FAILED, map.valueFlags(2));
+        assertEquals(LazyValueProvider.UNLOADED, map.valueFlags(3));
         assertEquals(1, progress.getWorkedSoFar()); assertFalse(progress.isDone());
         order.clear(); map.subMap(1, true, 3, true).descendingMap().preload(M3Progress.NULL);
         assertEquals(List.of(3, 2), order);
-        assertEquals(M3LazyValueProvider.UNLOADED, map.valueFlags(4));
+        assertEquals(LazyValueProvider.UNLOADED, map.valueFlags(4));
         M3Progress canceled = M3Progress.of(1); canceled.cancel();
         assertThrows(CancellationException.class, () -> map.touch(4, canceled));
-        assertEquals(M3LazyValueProvider.UNLOADED, map.valueFlags(4));
+        assertEquals(LazyValueProvider.UNLOADED, map.valueFlags(4));
         map.verifyInvariants();
     }
 }

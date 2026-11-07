@@ -16,6 +16,7 @@ import java.util.TreeSet;
 import java.util.function.BiPredicate;
 import jdk.internal.m3.collections.M3CollectionSdk;
 import jdk.internal.m3.collections.M3IndexedMultiValueMap;
+import jdk.m3.collections.range.LongRangeSet;
 
 /** Differential proof of SDK factories over the existing M3 array/index/mask owners. */
 public final class M3SdkOwnerFactorySelfTest {
@@ -102,7 +103,7 @@ public final class M3SdkOwnerFactorySelfTest {
     }
 
     private static void ranges() {
-        M3LongRangeSet set = M3CollectionSdk.longRangeSet();
+        LongRangeSet set = M3CollectionSdk.longRangeSet();
         set.add(0, 10);
         set.add(10, 20);
         eq(1, set.rangeCount(), "adjacent merge by two parallel long lanes");
