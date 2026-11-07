@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# One-line mutants of recipe/catalogue-kernels-20261107/mutants.py; dump = donor-anchored M3CatalogueKernelsDump digest (seed 20261107, 4000 cases) vs 9a521edbce0ebbed; junit = ported donor tests + M3CatalogueKernelsReferenceTest.
+id	class	effect	dump	junit	junit_summary	verdict
+Z1	M3ZAlgorithm	zArray Z-box reuse one unit too long	KILL	KILL	[         2 tests failed          ]	KILLED
+Z2	M3ZAlgorithm	zSearch extended-Z reuse one unit too long	KILL	KILL	[         4 tests failed          ]	KILLED
+O1	M3OneMismatchWindowSearch	windows with two mismatches admitted	KILL	KILL	[         5 tests failed          ]	KILLED
+O2	M3OneMismatchWindowSearch	matchesAt admits two mismatches	KILL	KILL	[         3 tests failed          ]	KILLED
+P1	M3ZPrefixMatch	full-length prefix matches clipped by one	KILL	KILL	[         2 tests failed          ]	KILLED
+P2	M3ZPrefixMatch	Z-box reuse one unit past the box	KILL	KILL	[         3 tests failed          ]	KILLED
+L1	M3IntLcsWitness	split tie-break moves to the last optimal column	KILL	KILL	[         1 tests failed          ]	KILLED
+L2	M3IntLcsWitness	forward DP row loses its left neighbour	KILL	KILL	[         3 tests failed          ]	KILLED
+C1	M3ProgressChecks	thread interruption no longer cancels	KILL	KILL	[         1 tests failed          ]	KILLED
