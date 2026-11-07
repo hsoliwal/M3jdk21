@@ -39,3 +39,31 @@ same rules.
 
 `.github/workflows/m3-jdk-naming.yml` runs the recipe tests, the tree fixed point and the JUnit conformance on every
 pull request. The standalone check (`m3/release/check_standalone.py`) must not grow a D-kind; its N-kinds drop.
+
+
+## Historical recipe-memory guard integrity (2026-11-07)
+
+The append-only `RECIPE_MEMORY.tsv` has three historical entries where the
+`guard` column contains prose instead of a `file#testMethod` pointer:
+`PATTERN:SPLIT_PACKAGE_NAME_COLLISION`,
+`PATTERN:JVM_DESCRIPTOR_PREFIX`, and
+`PATTERN:DONOR_FACT_AND_ESCAPED_SPANS`.
+
+Keep the original eight-column events unchanged; do not relabel an old
+correction as though it had been written correctly at the time. The
+`RECIPE_MEMORY_GUARD_BINDINGS.json` file is a **three-record, exact-match
+audit overlay**, not another recipe or runtime registration. For each entry it
+seals the UTC time, pattern, recipe, original malformed guard, corrected
+`file#method` test and the original evidence file.
+
+`test_jdk_naming.py` rejects stale bindings, new malformed/unregistered
+guards, nonexistent test methods, missing evidence files, or changed original
+ledger bytes. The three new checks verify current file-name collision
+ownership, Java classfile descriptor strings, and historical donor/sidecar
+alignment. They are **source/receipt checks**; they do not replace the
+source-built product, Maven, JUnit, JNI, jtreg or performance gates.
+
+Re-run `python3 -I m3/tooling/jdk-naming/test_jdk_naming.py` and
+`python3 -I m3/tooling/jdk-naming/test_reseal.py` on the exact
+candidate tree. Never suppress a malformed future guard by adding a wildcard
+or by making the parser ignore rows.

@@ -8,6 +8,7 @@ from __future__ import annotations
 import contextlib
 import importlib.util
 import io
+import json
 import re
 import subprocess
 import tempfile
@@ -212,24 +213,107 @@ class JdkNamingTest(unittest.TestCase):
         self.assertEqual(jn.renamed_path(".github/workflows/m3-jdk21-backports.yml"), ".github/workflows/m3jdk21-backports.yml")
 
     def test_recipe_memory_rows_name_a_recipe_and_a_fixture_that_exist(self):
-        """RECIPE_MEMORY.tsv: eight non-empty fields, an ISO-8601 UTC time, a recipe file next to the ledger, and
-        every guard `file#method` resolving to a test method (the memory gate of the com.synexia stack recipes)."""
+        """Preserve historical rows and resolve only the three exact bad guard cells.
+
+        Original recipe-memory events are append-only evidence. Never silently
+        weaken validation or edit their contents to make a CI run green.
+        """
         here = Path(__file__).parent
-        lines = (here / "RECIPE_MEMORY.tsv").read_text(encoding="utf-8").splitlines()
-        self.assertEqual(lines[0], "utc\trecipe\ttrigger\tobserved\tcorrection\tcorrected_by\tguard\tlesson")
-        for line in lines[1:]:
+        root = here.parents[2]
+        raw = (here / "RECIPE_MEMORY.tsv").read_text(encoding="utf-8").splitlines()
+        self.assertEqual(raw[0],
+                         "utc\trecipe\ttrigger\tobserved\tcorrection\tcorrected_by\tguard\tlesson")
+        bindings = json.loads((here / "RECIPE_MEMORY_GUARD_BINDINGS.json").read_text(encoding="utf-8"))
+        self.assertEqual("M3_JDK_NAMING_GUARD_BINDINGS_V1", bindings["schema"])
+        entries = bindings["entries"]
+        self.assertEqual(3, len(entries), "only three pinned historical malformed cells exist")
+        corrections = {(item["utc"], item["trigger"]): item for item in entries}
+        self.assertEqual(len(entries), len(corrections), "duplicate correction keys")
+        found = set()
+        sources = {
+            "test_jdk_naming.py": here / "test_jdk_naming.py",
+            "test_reseal.py": here / "test_reseal.py",
+            "JdkNamingConformanceTest":
+                here / "conformance/src/test/java/jdk/m3/tooling/naming/JdkNamingConformanceTest.java",
+        }
+        for line in raw[1:]:
             fields = line.split("\t")
-            self.assertEqual(len(fields), 8, line[:60])
-            self.assertTrue(all(fields), line[:60])
+            self.assertEqual(8, len(fields), line[:90])
+            self.assertTrue(all(fields), line[:90])
             self.assertRegex(fields[0], r"^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$")
             self.assertTrue((here / fields[1]).is_file(), fields[1])
             self.assertTrue(fields[2].startswith("PATTERN:"), fields[2])
-            for guard in fields[6].split("; "):
-                file, method = guard.split("#")
-                sources = {"test_jdk_naming.py": here / file, "test_reseal.py": here / file,
-                           "JdkNamingConformanceTest": here / "conformance/src/test/java/jdk/m3/tooling/naming/"
-                           "JdkNamingConformanceTest.java"}
-                self.assertIn(method, sources[file].read_text(encoding="utf-8"), guard)
+            key = (fields[0], fields[2])
+            binding = corrections.get(key)
+            if binding:
+                self.assertNotIn("#", fields[6],
+                                 "an exact historical malformed field is expected")
+                self.assertEqual(fields[1], binding["recipe"])
+                self.assertEqual(fields[6], binding["original_guard"],
+                                 "historical source changed: review the correction itself")
+                self.assertTrue((root / binding["evidence_path"]).is_file())
+                guards = binding["resolved_guard"].split("; ")
+                found.add(key)
+            else:
+                guards = fields[6].split("; ")
+            for guard in guards:
+                pieces = guard.split("#")
+                self.assertEqual(2, len(pieces), f"unbound legacy guard: {guard}")
+                file, method = pieces
+                self.assertIn(file, sources, guard)
+                source = sources[file].read_text(encoding="utf-8")
+                if file.endswith(".py"):
+                    self.assertRegex(source, r"(?m)^\s*def " + re.escape(method) + r"\(")
+                else:
+                    self.assertRegex(source, r"\b" + re.escape(method) + r"\s*\(")
+        self.assertEqual(set(corrections), found,
+                         "unnecessary correction or newly unbound guard discovered")
+
+    def test_split_package_file_unify_receipt(self):
+        """Structural name-collision gate, not a substitute for a Maven/JNI run."""
+        root = Path(__file__).resolve().parents[3]
+        path = root / "m3/qualification/file-unify-20261106/NAME_COLLISION.tsv"
+        lines = [x for x in path.read_text(encoding="utf-8").splitlines()
+                 if x and not x.startswith("#")]
+        names = [x.split("\t") for x in lines[1:]]
+        self.assertEqual(4, len(names))
+        # Each family has one donor-mapped survivor and one NIO role rename.
+        expected = {
+            ("M3File", "m3/file", "M3NioFile.java"),
+            ("M3File", "m3/ports/file", "M3File.java"),
+            ("M3FileDelta", "m3/file", "M3NioFileDelta.java"),
+            ("M3FileDelta", "m3/ports/file", "M3FileDelta.java"),
+        }
+        self.assertEqual(expected, {
+            (item[0], item[1], Path(item[3]).name) for item in names
+        })
+        for item in names:
+            self.assertTrue((root / item[3]).is_file(), item[3])
+            self.assertEqual("RENAMED" in item[9], item[1] == "m3/file")
+
+    def test_jvm_residency_descriptor_references(self):
+        """Verify all three current descriptor owners and the JUnit test source."""
+        root = Path(__file__).resolve().parents[3]
+        main = root / "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java"
+        test = root / "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ItemReferenceScanTest.java"
+        source = main.read_text(encoding="utf-8")
+        self.assertTrue(test.is_file())
+        for name in ("M3Transient", "M3Retains", "M3BehaviourOnly"):
+            self.assertIn('"Ljdk/m3/residency/' + name + ';"', source)
+            self.assertNotIn('"Lcom/m3/residency/' + name + ';"', source)
+
+    def test_core_donor_fact_and_sidecar_receipt(self):
+        """Check the repaired donor fact, target owner and retained build receipt."""
+        root = Path(__file__).resolve().parents[3]
+        test = (root / "m3/core/test/M3NumberSpaceContractTest.java").read_text(encoding="utf-8")
+        gates = (root / "m3/core/qualification/rename-damage-20261107/GATES.tsv").read_text(
+            encoding="utf-8")
+        self.assertIn('String.join("-", "synexia", "dictlang")', test)
+        self.assertIn("jdk.m3.text.M3NumberSpace", test)
+        self.assertIn("m3-number-target-map.tsv", test)
+        self.assertIn("m3-precompute-field-map.tsv", test)
+        self.assertIn("3_build\tbash m3/build.sh (this change)\tPASS", gates)
+        # This is custody of an executed historical result, NOT a present-JDK pass.
 
     def test_a_code_line_naming_a_license_is_still_renamed(self):
         self.put("m3/x/Rules.java", "import com.synexia.m3.x.LicenseRule;\n")
