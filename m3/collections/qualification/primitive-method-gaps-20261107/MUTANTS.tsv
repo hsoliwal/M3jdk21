@@ -1,0 +1,26 @@
+mutant	member	owner	state	failed_tests	first_signal
+M01	M3LongTreeSet.get(int)	M3LongTreeSet	KILLED	6	=> org.opentest4j.AssertionFailedError: expected: <2> but was: <668>
+M02	M3LongTreeSet.get(int)	M3LongTreeSet	KILLED	4	=> java.lang.ArrayIndexOutOfBoundsException: Index 2384 out of bounds for length 1896
+M03	M3LongTreeSet.indexOf(long)	M3LongTreeSet	KILLED	3	=> org.opentest4j.AssertionFailedError: expected: <-2> but was: <-1>
+M04	M3LongTreeSet.indexOf(long)	M3LongTreeSet	KILLED	2	=> org.opentest4j.AssertionFailedError: expected: <-1> but was: <0>
+M05	M3LongTreeSet.addAllSorted(long[],int,int)	M3LongTreeSet	KILLED	2	=> java.lang.IllegalArgumentException: input must be sorted ascending
+M06	M3LongTreeSet.addAllSorted(long[],int,int)	M3LongTreeSet	KILLED	2	=> org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+M07	M3LongTreeSet.addAllSorted(long[],int,int)	M3LongTreeSet	KILLED	2	=> org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+M08	M3LongTreeSet.addAllSorted(long[],int,int)	M3LongTreeSet	KILLED	2	=> java.lang.ArrayIndexOutOfBoundsException: Index 2384 out of bounds for length 1896
+M09	M3LongTreeSet.payloadBytes() prefix lane	M3LongTreeSet	KILLED	1	=> org.opentest4j.AssertionFailedError: the built prefix lane is retained payload ==> expected: <true> but was: <false>
+M10	M3LongTreeSet.trimToSize() prefix lane	M3LongTreeSet	KILLED	1	=> org.opentest4j.AssertionFailedError: trimToSize shrinks the prefix lane with the page lanes ==> expected: <7304> but was: <9020>
+M11	M3LongLongTreeMap.keyAt(int)	M3LongLongTreeMap	KILLED	3	=> org.opentest4j.AssertionFailedError: expected: <-664> but was: <5244352678312665507>
+M12	M3LongLongTreeMap.keyAt(int)	M3LongLongTreeMap	KILLED	2	=> org.opentest4j.AssertionFailedError: Expected java.lang.IndexOutOfBoundsException to be thrown, but nothing was thrown.
+M13	M3LongLongTreeMap.valueAt(int)	M3LongLongTreeMap	KILLED	4	=> org.opentest4j.AssertionFailedError: expected: <5244352678312665507> but was: <-664>
+M14	M3LongLongTreeMap.indexOfKey(long)	M3LongLongTreeMap	KILLED	1	=> org.opentest4j.AssertionFailedError: expected: <-2> but was: <-1>
+M15	M3LongLongTreeMap.putAllSorted(long[],long[],int,int)	M3LongLongTreeMap	KILLED	1	=> org.opentest4j.AssertionFailedError: expected: <2> but was: <13>
+M16	M3LongLongTreeMap.putAllSorted(long[],long[],int,int)	M3LongLongTreeMap	KILLED	1	=> org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.IndexOutOfBoundsException> but was: <java.lang.IllegalArgumentExc
+M17	M3IntIntHashMap.trimToSize()	M3IntIntHashMap	KILLED	1	=> org.opentest4j.AssertionFailedError: trimToSize reaches the minimal capacity ==> expected: <16> but was: <256>
+M18	M3IntIntHashMap.trimToSize()	M3IntIntHashMap	KILLED	1	=> org.opentest4j.AssertionFailedError: Expected java.util.ConcurrentModificationException to be thrown, but nothing was thrown.
+M19	M3IntIntHashMap.trimToSize()	M3IntIntHashMap	KILLED	1	=> org.opentest4j.AssertionFailedError: trimToSize reaches the minimal capacity ==> expected: <16> but was: <32>
+M20	M3IntLongHashMap.trimToSize()	M3IntLongHashMap	KILLED	1	=> org.opentest4j.AssertionFailedError: trimToSize reaches the minimal capacity ==> expected: <256> but was: <2048>
+M21	M3IntLongHashMap.trimToSize()	M3IntLongHashMap	KILLED	1	=> org.opentest4j.AssertionFailedError: trimToSize preserves the mappings ==> expected: <{840697118=-4651467027947354228, 195547557=1938972044152393189, -915125
+M22	M3LongLongHashMap.trimToSize()	M3LongLongHashMap	KILLED	1	=> org.opentest4j.AssertionFailedError: expected: <256> but was: <2048>
+M23	M3LongLongHashMap.trimToSize()	M3LongLongHashMap	KILLED	1	=> org.opentest4j.AssertionFailedError: Expected java.util.ConcurrentModificationException to be thrown, but nothing was thrown.
+M24	M3IntArrayDeque.get(int)	M3IntArrayDeque	KILLED	2	=> java.lang.ArrayIndexOutOfBoundsException: Index 32 out of bounds for length 32
+M25	M3IntArrayDeque.get(int)	M3IntArrayDeque	KILLED	2	=> org.opentest4j.AssertionFailedError: Expected java.lang.IndexOutOfBoundsException to be thrown, but nothing was thrown.

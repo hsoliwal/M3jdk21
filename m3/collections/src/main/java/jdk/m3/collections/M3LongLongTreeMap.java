@@ -40,6 +40,10 @@ import java.util.Objects;
  * {@code firstKey}, {@code lastKey} and the poll calls throw {@link NoSuchElementException} on an
  * empty map; the key iterator and the forEach walks are fail-fast. This is an M3 proving-ground
  * backend, not a {@code java.util.TreeMap} replacement.</p>
+ *
+ * <p>Positional access ({@link #keyAt(int)}, {@link #valueAt(int)}, {@link #indexOfKey(long)})
+ * reads the sorted lanes directly: O(1) by rank and O(log n) by key, allocation-free, with the
+ * contracts of the m3scale donor {@code LongLongSortedMap}.</p>
  */
 public final class M3LongLongTreeMap implements M3LongLongSortedMap {
     private static final int MIN_CAPACITY = 8;
@@ -121,6 +125,50 @@ public final class M3LongLongTreeMap implements M3LongLongSortedMap {
             modCount++;
         }
         return added;
+    }
+
+    //FLLDCIM: MRL - primitive-method-gaps G2 putAllSorted range (donor LongLongGapSortedMap.putAllSorted, blob 58df86d7628f)
+    /**
+     * Merges the slice {@code [from, to)} of parallel nondecreasing key and value lanes with the
+     * contract of {@link #putAllSorted(long[], long[])}: the last incoming value wins, present keys
+     * are replaced and the result is the number of new keys (the donor returns nothing). Lane
+     * lengths must match and the range must lie inside them; both are checked before any change.
+     * A proper slice is staged as two copies, so the validated backward merge and its capacity
+     * rule are reused unchanged.
+     *
+     * @throws IndexOutOfBoundsException if {@code [from, to)} is not a range of the lanes
+     */
+    public int putAllSorted(long[] sourceKeys, long[] sourceValues, int from, int to) {
+        Objects.requireNonNull(sourceKeys, "sourceKeys");
+        Objects.requireNonNull(sourceValues, "sourceValues");
+        if (sourceKeys.length != sourceValues.length) {
+            throw new IllegalArgumentException("key/value length mismatch");
+        }
+        Objects.checkFromToIndex(from, to, sourceKeys.length);
+        if (from == 0 && to == sourceKeys.length) {
+            return putAllSorted(sourceKeys, sourceValues);
+        }
+        return putAllSorted(Arrays.copyOfRange(sourceKeys, from, to),
+                Arrays.copyOfRange(sourceValues, from, to));
+    }
+
+    //FLLDCIM: MRL - primitive-method-gaps G2 keyAt/valueAt/indexOfKey (donor LongLongSortedMap, blob 5b0e75813d6c)
+    /** Key of zero-based rank {@code index}; throws IndexOutOfBoundsException outside {@code [0, size())}. */
+    public long keyAt(int index) {
+        return keys[Objects.checkIndex(index, size)];
+    }
+
+    /** Value at zero-based rank {@code index}; throws IndexOutOfBoundsException outside {@code [0, size())}. */
+    public long valueAt(int index) {
+        return values[Objects.checkIndex(index, size)];
+    }
+
+    /**
+     * Rank of {@code key} when present, else {@code -(insertion rank) - 1}: the
+     * {@link Arrays#binarySearch(long[], int, int, long)} convention of the donor.
+     */
+    public int indexOfKey(long key) {
+        return Arrays.binarySearch(keys, 0, size, key);
     }
 
     @Override
