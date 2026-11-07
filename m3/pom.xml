@@ -275,6 +275,15 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <!-- //FLLDCIM: MRL - reactor-wiring-20261107: poms outside the default reactor whose wiring gate was RED (first error in DECISION.tsv); one flag away: -Pm3-offreactor-held -->
+      <id>m3-offreactor-held</id>
+      <modules>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ast HELD (gate gate-ast: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>ast</module>
+        <!-- m3-offreactor-held:end -->
+      </modules>
+    </profile>
   </profiles>
 
   <build>
