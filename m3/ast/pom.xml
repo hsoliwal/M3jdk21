@@ -9,7 +9,9 @@
  <name>M3 AST L0-L5 receiver candidate</name>
  <packaging>jar</packaging>
  <properties>
-  <maven.compiler.release>21</maven.compiler.release>
+  <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: source/target instead of release (javac refuses --add-exports of a java.base package together with --release) -->
+  <maven.compiler.source>21</maven.compiler.source>
+  <maven.compiler.target>21</maven.compiler.target>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
  </properties>
  <dependencies>
@@ -27,9 +29,13 @@
     <artifactId>maven-compiler-plugin</artifactId>
     <version>3.13.0</version>
     <configuration>
-     <release>21</release>
+     <source>21</source>
+     <target>21</target>
      <proc>none</proc>
      <compilerArgs>
+      <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: test M3SyntaxGrowthAgent reads jdk.internal.org.objectweb.asm (JDK-internal ASM; no external ASM, M3JDK21 standalone) -->
+      <arg>--add-exports</arg>
+      <arg>java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED</arg>
       <arg>-Xlint:all</arg>
       <arg>-Werror</arg>
      </compilerArgs>
@@ -39,6 +45,10 @@
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-surefire-plugin</artifactId>
     <version>3.2.5</version>
+    <configuration>
+     <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: the same export at test runtime -->
+     <argLine>--add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED</argLine>
+    </configuration>
    </plugin>
   </plugins>
  </build>
