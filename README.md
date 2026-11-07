@@ -64,12 +64,14 @@ used by [m3/build.sh](m3/build.sh), including `sha256sum`. Run from the checkout
 git clone https://github.com/hsoliwal/M3jdk21.git
 cd M3jdk21
 git rev-parse HEAD
-export M3_JDK=/absolute/path/to/jdk-21
-"$M3_JDK/bin/java" -version
+export M3JDK=/absolute/path/to/jdk-21
+"$M3JDK/bin/java" -version
 bash m3/build.sh
 ```
 
-A successful script produces `m3/build/com.m3.text.jar`, logs under
+The build script requires the exact environment variable `M3JDK` (not `M3_JDK`) and compiles the `jdk.m3.text` module.
+
+A successful script produces `m3/build/jdk.m3.text.jar`, logs under
 `m3/build/logs/`, and a small fixture image. Stop on failure and inspect the logs;
 the presence of an earlier JAR does not mean the full script passed. This route
 tests the separate module in several VM modes, not the modified JDK's acceptance.
@@ -77,11 +79,11 @@ tests the separate module in several VM modes, not the modified JDK's acceptance
 After a successful build, open JShell with the module:
 
 ```sh
-"$M3_JDK/bin/jshell" --module-path m3/build/com.m3.text.jar --add-modules com.m3.text
+"$M3JDK/bin/jshell" --module-path m3/build/jdk.m3.text.jar --add-modules jdk.m3.text
 ```
 
 ```java
-import com.m3.text.*;
+import jdk.m3.text.*;
 var original = new LocalM3Arena().copyUtf16("ABCDE".toCharArray());
 var middle = original.subSequence(1, 4);
 var joined = M3StringPiece.join(middle, original.subSequence(4, 5));
