@@ -50,8 +50,13 @@ final class M3IndexSort {
                     // Left side wins ties: equal keys retain input encounter order.
                     destination[out++] = order <= 0 ? source[left++] : source[right++];
                 }
-                while (left < mid) destination[out++] = source[left++];
-                while (right < high) destination[out++] = source[right++];
+                //FLLDCIM: MRL - mergeloss leaf 20 (origin 0e68366337b, dropped by retain merge fb9b504bc047):
+                // bulk-copy the unopposed tail; no comparison or value-access callback follows.
+                if (left < mid) {
+                    System.arraycopy(source, left, destination, out, mid - left);
+                } else if (right < high) {
+                    System.arraycopy(source, right, destination, out, high - right);
+                }
             }
             int[] previous = source;
             source = destination;
