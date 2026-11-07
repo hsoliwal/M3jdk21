@@ -40,6 +40,36 @@
     <module>compression</module>
     <module>lexicon/receiver</module>
     <module>optane</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: eclipse/core-runtime WIRED (gate gate-eclipse-core-runtime, GATES.tsv) -->
+    <module>eclipse/core-runtime</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: eclipse/framework WIRED (gate gate-eclipse-framework, GATES.tsv) -->
+    <module>eclipse/framework</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: migration WIRED (gate gate-migration, GATES.tsv) -->
+    <module>migration</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: lexicon/hf-intake WIRED (gate gate-lexicon-hf-intake, GATES.tsv) -->
+    <module>lexicon/hf-intake</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/capability-runtime WIRED (gate gate-ports-capability-runtime, GATES.tsv) -->
+    <module>ports/capability-runtime</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/precompute WIRED (gate gate-ports-precompute, GATES.tsv) -->
+    <module>ports/precompute</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/indexstring WIRED (gate gate-ports-indexstring, GATES.tsv) -->
+    <module>ports/indexstring</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel WIRED (gate gate-ports-parallel, GATES.tsv) -->
+    <module>ports/parallel</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/vcpu WIRED (gate gate-ports-vcpu, GATES.tsv) -->
+    <module>ports/vcpu</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/regex-cursor WIRED (gate gate-ports-regex-cursor, GATES.tsv) -->
+    <module>ports/regex-cursor</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/primitive-address-identity WIRED (gate gate-runtime-integration-primitive-address-identity, GATES.tsv) -->
+    <module>runtime-integration/primitive-address-identity</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/regex-precompute WIRED (gate gate-runtime-integration-regex-precompute, GATES.tsv) -->
+    <module>runtime-integration/regex-precompute</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/gc-interop WIRED (gate gate-collections-gc-interop, GATES.tsv) -->
+    <module>collections/gc-interop</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/interop WIRED (gate gate-collections-interop, GATES.tsv) -->
+    <module>collections/interop</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/signal-codegen WIRED (gate gate-collections-signal-codegen, GATES.tsv) -->
+    <module>collections/signal-codegen</module>
   </modules>
 
   <profiles>
@@ -274,6 +304,31 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <!-- //FLLDCIM: MRL - reactor-wiring-20261107: poms outside the default reactor whose wiring gate was RED (first error in DECISION.tsv); one flag away: -Pm3-offreactor-held -->
+      <id>m3-offreactor-held</id>
+      <modules>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ast HELD (gate gate-ast: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>ast</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: history HELD (gate gate-history: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>history</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/compiletime HELD (gate gate-ports-compiletime: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>ports/compiletime</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/swing-viewport HELD (gate gate-ports-swing-viewport: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>ports/swing-viewport</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/jfx-viewport HELD (gate gate-ports-jfx-viewport: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>ports/jfx-viewport</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/pcollections HELD (gate gate-collections-pcollections: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>collections/pcollections</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk HELD (gate gate-ports-parallel-bulk: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>ports/parallel-bulk</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/fix HELD (gate gate-runtime-integration-fix: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>runtime-integration/fix</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/fix-root-ascii-case HELD (gate gate-runtime-integration-fix-root-ascii-case: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>runtime-integration/fix-root-ascii-case</module>
+        <!-- m3-offreactor-held:end -->
+      </modules>
     </profile>
   </profiles>
 
