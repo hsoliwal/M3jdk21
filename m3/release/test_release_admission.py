@@ -111,7 +111,7 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
             }
             if ident == "M3_CHANGED_ATOM_COVERAGE":
                 inventory_file = self.evidence_dir / (ident + ".tsv")
-                inventory_file.write_text("id\\tsource_path\\nfixture.Example#run\\tsrc/example.java\\n")
+                inventory_file.write_text("id\tsource_path\nfixture.Example#run\tsrc/example.java\n")
                 gate["artifacts"].append({
                     "path": inventory_file.name, "sha256": release.sha256(inventory_file)})
                 gate["coverage"] = {
