@@ -15,6 +15,7 @@
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: restore fresh caller-owned entry projections without retained facade storage.
 // Modified 2026 by Hitesh Soliwal and contributors: slot cursors read the revision before their first slot (TREEMAP_ABA_GUARD).
+// Modified 2026 by Hitesh Soliwal and contributors: re-entrant key/value callbacks (HASH_REENTRANT_GUARD).
 package jdk.m3.collections;
 
 import java.lang.ref.Reference;
@@ -52,6 +53,24 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
      * structural change returns -1 then; the cursor read the revision before and reports it.
      */
     int firstCursorSlot() { return firstSlot(); }
+    //FLLDCIM: MRL - recipe HASH_REENTRANT_GUARD v1 (qualification/hash-reentrant-guard-20261107): re-entrant key/value callbacks
+    /**
+     * Walks a key lookup repeats when the key's equals changed the structure under it, and
+     * lookups remove(key, value) and replace(key, old, new) repeat when the value's equals did,
+     * before the operation gives up with ConcurrentModificationException.
+     */
+    static final int REWALKS = 8;
+    /**
+     * One lookup for the read-modify-write operations: the key's slot (low 32 bits, -1 when
+     * absent) and an owner hint for insertAbsent (high 32 bits; the hash owners' key hash).
+     */
+    long locate(Object key) { return findSlot(key) & 0xFFFFFFFFL; }
+    /**
+     * Inserts a key locate found absent, the structure unchanged since (revision expected). Hash
+     * owners insert by the hint without calling key code again, as java.util.HashMap's compute
+     * does with its single walk; the default puts.
+     */
+    void insertAbsent(K key, V value, int hint, int expected) { put(key, value); }
     int entrySlot(K key, int hint, int expected) { return findSlot(key); }
     final Entry<K, V> entryAt(int slot) { return new LiveEntry(keyAt(slot), slot, revision()); }
     final void check(int expected) {
@@ -88,9 +107,13 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         int s = findSlot(key); return s < 0 ? null : eraseAt(s);
     }
     @Override public boolean remove(Object key, Object value) {
-        int s = findSlot(key);
-        if (s < 0 || !Objects.equals(value, valueAt(s))) { return false; }
-        eraseAt(s); return true;
+        for (int lookups = 0; ; lookups++) {
+            int s = findSlot(key);
+            if (s < 0) { return false; }
+            int expected = revision(); boolean same = Objects.equals(value, valueAt(s));
+            if (revision() == expected) { if (same) { eraseAt(s); } return same; }
+            if (lookups == REWALKS) { throw new ConcurrentModificationException(); }
+        }
     }
     @Override public void putAll(Map<? extends K, ? extends V> source) {
         if (source != this && !putAllSorted(source)) { source.forEach(this::put); }
@@ -98,8 +121,8 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     /** Optional internal bulk path; ordinary slot maps retain per-mapping insertion. */
     boolean putAllSorted(Map<? extends K, ? extends V> source) { return false; }
     @Override public V putIfAbsent(K key, V value) {
-        int s = findSlot(key);
-        if (s < 0) { return put(key, value); }
+        long located = locate(key); int s = (int) located;
+        if (s < 0) { insertAbsent(key, value, (int) (located >>> 32), revision()); return null; }
         V old = valueAt(s);
         if (old == null) { writeAt(s, value); }
         accessed(s); return old;
@@ -110,16 +133,21 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         V old = writeAt(s, value); accessed(s); return old;
     }
     @Override public boolean replace(K key, V old, V value) {
-        int s = findSlot(key);
-        if (s < 0 || !Objects.equals(old, valueAt(s))) { return false; }
-        writeAt(s, value); accessed(s); return true;
+        for (int lookups = 0; ; lookups++) {
+            int s = findSlot(key);
+            if (s < 0) { return false; }
+            int expected = revision(); boolean same = Objects.equals(old, valueAt(s));
+            if (revision() == expected) { if (same) { writeAt(s, value); accessed(s); } return same; }
+            if (lookups == REWALKS) { throw new ConcurrentModificationException(); }
+        }
     }
     @Override public V computeIfAbsent(K key, Function<? super K, ? extends V> action) {
         Objects.requireNonNull(action);
-        int s = findSlot(key);
+        long located = locate(key); int s = (int) located;
         if (s >= 0 && valueAt(s) != null) { V v = valueAt(s); accessed(s); return v; }
         int expected = revision(); V v = action.apply(key); check(expected);
-        if (v != null) { put(key, v); }
+        if (v == null) { return null; }
+        if (s >= 0) { writeAt(s, v); accessed(s); } else { insertAbsent(key, v, (int) (located >>> 32), expected); }
         return v;
     }
     @Override public V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> action) {
@@ -131,16 +159,21 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
         return v;
     }
     @Override public V compute(K key, BiFunction<? super K, ? super V, ? extends V> action) {
-        Objects.requireNonNull(action); int s = findSlot(key), expected = revision();
+        Objects.requireNonNull(action); long located = locate(key); int s = (int) located, expected = revision();
         V v = action.apply(key, s < 0 ? null : valueAt(s)); check(expected);
-        if (v == null) { if (s >= 0) { eraseAt(s); } } else { put(key, v); }
+        if (v == null) { if (s >= 0) { eraseAt(s); } }
+        else if (s >= 0) { writeAt(s, v); accessed(s); }
+        else { insertAbsent(key, v, (int) (located >>> 32), expected); }
         return v;
     }
     @Override public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> action) {
         Objects.requireNonNull(action); Objects.requireNonNull(value);
-        int s = findSlot(key), expected = revision(); V old = s < 0 ? null : valueAt(s);
+        long located = locate(key); int s = (int) located, expected = revision();
+        V old = s < 0 ? null : valueAt(s);
         V v = old == null ? value : action.apply(old, value); check(expected);
-        if (v == null) { if (s >= 0) { eraseAt(s); } } else { put(key, v); }
+        if (v == null) { if (s >= 0) { eraseAt(s); } }
+        else if (s >= 0) { writeAt(s, v); accessed(s); }
+        else { insertAbsent(key, v, (int) (located >>> 32), expected); }
         return v;
     }
     @Override public void forEach(BiConsumer<? super K, ? super V> action) {

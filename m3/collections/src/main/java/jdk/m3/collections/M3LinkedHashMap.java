@@ -15,6 +15,7 @@
 // Modified 2026 by Hitesh Soliwal and contributors: adaptive clearing of reusable linked slots.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // Modified 2026 by Hitesh Soliwal and contributors: lazy expected-key reservation.
+// Modified 2026 by Hitesh Soliwal and contributors: re-entrant key/value callbacks (HASH_REENTRANT_GUARD).
 package jdk.m3.collections;
 
 import java.util.Arrays;
@@ -69,6 +70,14 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
         if (s < 0) { table.insert(key, value, hash, false); return null; }
         V old = writeAt(s, value); accessed(s); return old;
     }
+    @Override long locate(Object key) {
+        int hash = M3SlotArrays.hash(key);
+        return (long) hash << 32 | table.find(key, hash) & 0xFFFFFFFFL;
+    }
+    @Override void insertAbsent(K key, V value, int hint, int expected) {
+        if (table.modifications != expected) { throw new java.util.ConcurrentModificationException(); }
+        table.insert(key, value, hint, false);
+    }
     private V positioned(K key, V value, boolean first) {
         int hash = M3SlotArrays.hash(key), s = table.find(key, hash);
         if (s < 0) { table.insert(key, value, hash, first); return null; }
@@ -107,13 +116,24 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             if (expectedKeys < 0) { throw new IllegalArgumentException("negative expectedKeys"); }
             this.accessOrder = accessOrder; this.keyOnly = keyOnly; this.expectedKeys = expectedKeys;
         }
-        int find(Object key, int hash) {
+        //FLLDCIM: MRL - recipe HASH_REENTRANT_GUARD v1 (qualification/hash-reentrant-guard-20261107): re-entrant key/value callbacks
+        int find(Object key, int hash) { return find(key, hash, 0); }
+        private int find(Object key, int hash, int walks) {
             if (index.length == 0) { return -1; }
-            for (int p = hash & (index.length - 1); index[p] != 0; p = (p + 1) & (index.length - 1)) {
+            int mask = index.length - 1, expected = modifications;
+            for (int p = hash & mask; index[p] != 0; p = (p + 1) & mask) {
                 int s = index[p] - 1;
-                if (s >= 0 && hashes[s] == hash && Objects.equals(key, keys[s])) { return s; }
+                if (s >= 0 && hashes[s] == hash) {
+                    boolean same = Objects.equals(key, keys[s]);
+                    if (modifications != expected) { return rewalk(key, hash, walks); } // equals changed it
+                    if (same) { return s; }
+                }
             }
             return -1;
+        }
+        private int rewalk(Object key, int hash, int walks) {
+            if (walks == M3SlotMap.REWALKS) { throw new java.util.ConcurrentModificationException(); }
+            return find(key, hash, walks + 1);
         }
         int vacant(int hash) {
             int p = hash & (index.length - 1);
