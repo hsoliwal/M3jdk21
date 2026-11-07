@@ -15,6 +15,7 @@
 package jdk.m3.collections;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Append-only persistent point-update/range-sum tree over [0,size).
@@ -37,6 +38,11 @@ public final class M3PersistentLongSumTree {
     private long[] sums;
     private int nodeCount = 1; // node 0 is the implicit all-zero sentinel.
 
+    //FLLDCIM: MRL - census3 P3-009, donor MIndexPersistentLongSumTree blob cc78be1a0a82: forkAdd path lanes, presized by the restored constructor and allocated by forkAdd otherwise
+    private int[] scratchNodes;
+    private long[] scratchSums;
+    private boolean[] scratchRight;
+
     public M3PersistentLongSumTree(int size) {
         if (size < 0) throw new IllegalArgumentException("size < 0");
         this.size = size;
@@ -46,7 +52,36 @@ public final class M3PersistentLongSumTree {
         sums = new long[16];
     }
 
+    //FLLDCIM: MRL - census3 P3-009, donor MIndexPersistentLongSumTree blob cc78be1a0a82: presizing constructor (positive length, expected additional versions)
+    public M3PersistentLongSumTree(int length, int expectedAdditionalVersions) {
+        if (length <= 0) {
+            throw new IllegalArgumentException("length must be positive");
+        }
+        if (expectedAdditionalVersions < 0) {
+            throw new IllegalArgumentException("expectedAdditionalVersions");
+        }
+        this.size = length;
+
+        int pathNodes = pathNodeCount(length);
+        scratchNodes = new int[pathNodes];
+        scratchSums = new long[pathNodes];
+        scratchRight = new boolean[pathNodes];
+
+        roots = new int[Math.max(1, Math.addExact(expectedAdditionalVersions, 1))];
+
+        long estimatedNodes = 1L
+                + (long) Math.max(1, expectedAdditionalVersions) * pathNodes;
+        int initialNodes = (int) Math.min(
+                PackedCapacity.MAX,
+                Math.max(8L, estimatedNodes));
+        left = new int[initialNodes];
+        right = new int[initialNodes];
+        sums = new long[initialNodes];
+    }
+
     public int size() { return size; }
+    //FLLDCIM: MRL - census3 P3-009, donor MIndexPersistentLongSumTree blob cc78be1a0a82: donor name of size()
+    public int length() { return size; }
     public int versionCount() { return versionCount; }
     public int nodeCount() { return nodeCount; }
     public long payloadBytes() {
@@ -85,6 +120,83 @@ public final class M3PersistentLongSumTree {
     public long total(int version) {
         checkVersion(version);
         return sums[roots[version]];
+    }
+
+    /**
+     * Forks {@code baseVersion} and adds {@code delta} to one position.
+     *
+     * <p>Arithmetic is validated along the complete path before any version/node state changes.
+     * A zero delta shares the base root.
+     */
+    //FLLDCIM: MRL - census3 P3-009, donor MIndexPersistentLongSumTree blob cc78be1a0a82: checked fork-add
+    public int forkAdd(int baseVersion, int index, long delta) {
+        checkVersion(baseVersion);
+        Objects.checkIndex(index, size);
+
+        ensureRootCapacity(Math.addExact(versionCount, 1));
+        if (delta == 0L) {
+            roots[versionCount] = roots[baseVersion];
+            return versionCount++;
+        }
+        if (scratchNodes == null) {
+            int pathNodes = pathNodeCount(size);
+            scratchNodes = new int[pathNodes];
+            scratchSums = new long[pathNodes];
+            scratchRight = new boolean[pathNodes];
+        }
+
+        int oldNode = roots[baseVersion];
+        int from = 0;
+        int to = size;
+        int depth = 0;
+
+        while (true) {
+            scratchNodes[depth] = oldNode;
+            scratchSums[depth] = Math.addExact(sums[oldNode], delta);
+            if (to - from == 1) {
+                break;
+            }
+            int middle = (from + to) >>> 1;
+            boolean goRight = index >= middle;
+            scratchRight[depth] = goRight;
+            if (goRight) {
+                oldNode = right[oldNode];
+                from = middle;
+            } else {
+                oldNode = left[oldNode];
+                to = middle;
+            }
+            depth++;
+        }
+
+        ensureNodeCapacity(Math.addExact(nodeCount, depth + 1));
+
+        int newChild = 0;
+        for (int level = depth; level >= 0; level--) {
+            int source = scratchNodes[level];
+            int created = nodeCount++;
+            left[created] = left[source];
+            right[created] = right[source];
+            sums[created] = scratchSums[level];
+
+            if (level < depth) {
+                if (scratchRight[level]) {
+                    right[created] = newChild;
+                } else {
+                    left[created] = newChild;
+                }
+            }
+            newChild = created;
+        }
+
+        roots[versionCount] = newChild;
+        return versionCount++;
+    }
+
+    //FLLDCIM: MRL - census3 P3-009, donor MIndexPersistentLongSumTree blob cc78be1a0a82: root node id of a version
+    public int rootNode(int version) {
+        checkVersion(version);
+        return roots[version];
     }
 
     private int update(int node, int leftBound, int rightBound, int index, long value) {
@@ -157,5 +269,24 @@ public final class M3PersistentLongSumTree {
         if (fromInclusive < 0 || fromInclusive > toExclusive || toExclusive > size) {
             throw new IndexOutOfBoundsException(fromInclusive + ".." + toExclusive);
         }
+    }
+
+    //FLLDCIM: MRL - census3 P3-009, donor MIndexPersistentLongSumTree blob cc78be1a0a82: root-to-leaf path length
+    private static int pathNodeCount(int length) {
+        int nodes = 1;
+        long span = 1L;
+        while (span < length) {
+            span <<= 1;
+            nodes++;
+        }
+        return nodes;
+    }
+
+    /** Local array-capacity bound of the presizing constructor, keeping this kernel JDK-only. */
+    //FLLDCIM: MRL - census3 P3-009, donor MIndexPersistentLongSumTree blob cc78be1a0a82: PackedCapacity (grow is PRESENT_EVOLVED as ensureNodeCapacity/ensureRootCapacity)
+    private static final class PackedCapacity {
+        private static final int MAX = Integer.MAX_VALUE - 8;
+
+        private PackedCapacity() {}
     }
 }
