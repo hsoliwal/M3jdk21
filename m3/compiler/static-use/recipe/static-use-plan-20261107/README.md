@@ -17,6 +17,9 @@ of the first-party donor `hsoliwal/com.synexia` (develop `d5ad5090d87e`), reloca
 
 * The consumer is the donor's javac annotation processor `M3StaticFactsProcessor`, so the plan joins the `m3/compiler`
   family as its own module, a default module of `m3/pom.xml` (S1). The processor is the next leaf (OMIT row, S3).
+* Naming follows the `m3/compiler` siblings with a descriptor (S7, verify.sh gate `siblings`): module
+  `org.m3jdk.compiler.<x>`, package `jdk.m3.compiler.<x>`, coordinates `com.m3:m3-compiler-<dir>`, exactly as
+  `lifetime-slots` (`org.m3jdk.compiler.lifetime`, `com.m3:m3-compiler-lifetime-slots`) and `nullness-facts`.
 * `M3GcUsePlan` (`m3/collections/gc-interop`) is the nearest shape, with different facts and modes: NEC, both kept (S2).
 * Lineage: the develop-live 155-line class is the head; the census named the 83-line recovery postimage (S5).
 * FOSS ([FOSS_REUSE_DECISION.tsv](FOSS_REUSE_DECISION.tsv)): C2 escape and counted-loop analysis are architectural

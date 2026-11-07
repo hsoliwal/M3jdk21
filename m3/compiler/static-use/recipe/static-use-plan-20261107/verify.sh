@@ -8,6 +8,8 @@
 #   3        differential.sh: donor vs relocated dumps byte-identical (default, -Xint), donor JUnit test, mutants refused, javap
 #   reactor  mvn -f m3/pom.xml -DskipTests package -pl compiler/static-use -am (the module is a default reactor module)
 #   naming   jdk_naming.py apply --only m3/compiler/static-use/ reports 0 moves, 0 rewrites, 0 refusals (new files staged first)
+#   siblings every m3/compiler/<dir> module descriptor is 'module org.m3jdk.compiler.<x>' exporting jdk.m3.compiler.<x>, every
+#            m3/compiler pom has groupId com.m3, and every main source package is jdk.m3.compiler.<x> (this module included)
 # Every JVM gets -Djava.io.tmpdir=<scratch>/tmp (surefire through -DargLine, Maven through MAVEN_OPTS).
 # usage: JAVA_HOME=<JDK 21> verify.sh <donor-git-dir> <donor-rev> <scratch-dir> <junit-console-jar> [maven-repo-local [maven-repo-local-tail]]
 set -uo pipefail
@@ -50,6 +52,32 @@ if grep -q "BUILD SUCCESS" "$SCRATCH/reactor-package.log" && ! grep -qE "^\[ERRO
 else
     gate reactor FAIL "log=$SCRATCH/reactor-package.log"
 fi
+
+siblings=$(python -I - "$ROOT/m3/compiler" <<'EOF'
+import re, sys
+from pathlib import Path
+root = Path(sys.argv[1]); rows = []; bad = 0
+for module in sorted(p for p in root.iterdir() if (p / "pom.xml").is_file()):
+    pom = (module / "pom.xml").read_text(encoding="utf-8")
+    group = re.search(r"<modelVersion>4.0.0</modelVersion>\s*<groupId>([^<]+)</groupId>\s*<artifactId>([^<]+)</artifactId>", pom)
+    packages = sorted({m.group(1) for f in (module / "src/main/java").rglob("*.java") if f.name != "module-info.java"
+                       for m in [re.search(r"(?m)^package\s+([\w.]+);", f.read_text(encoding="utf-8"))] if m})
+    info = module / "src/main/java/module-info.java"
+    name = exports = "-"
+    if info.is_file():
+        text = info.read_text(encoding="utf-8")
+        name = re.search(r"(?m)^\s*module\s+([\w.]+)", text).group(1)
+        exports = ",".join(re.findall(r"(?m)^\s*exports\s+([\w.]+);", text))
+        ok = bool(re.fullmatch(r"org\.m3jdk\.compiler\.[a-z]+", name)) and exports == "jdk.m3.compiler." + name.rsplit(".", 1)[1]
+    else:
+        ok = True
+    ok = ok and group is not None and group.group(1) == "com.m3" and all(p.startswith("jdk.m3.compiler.") for p in packages)
+    bad += not ok
+    rows.append("%s:%s/%s:%s:%s:%s" % (module.name, group.group(1) if group else "?", group.group(2) if group else "?", name, exports, "|".join(packages)))
+print(("OK " if bad == 0 else "MISMATCH ") + " ".join(rows))
+EOF
+)
+case "$siblings" in OK*) gate siblings PASS "$siblings" ;; *) gate siblings FAIL "$siblings" ;; esac
 
 naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compiler/static-use/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
