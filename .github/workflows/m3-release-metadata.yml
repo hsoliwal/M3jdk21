@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: Apache-2.0
+# Metadata-only gate: never a JDK image, recipe replay or release admission.
+name: M3 release metadata and naming
+on:
+  pull_request:
+    paths:
+      - 'm3/release/**'
+      - '.github/workflows/m3-release-metadata.yml'
+  push:
+    branches: [master, 'release/**']
+    paths:
+      - 'm3/release/**'
+      - '.github/workflows/m3-release-metadata.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  release-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Freeze current source commit and tree for this audit
+        run: |
+          git rev-parse HEAD
+          git rev-parse 'HEAD^{tree}'
+      - name: Enforce release-documentation regression tests
+        run: python3 -m unittest discover -s m3/release -p 'test_release_metadata.py' -v
+      - name: Verify contract, notes and checklist use one preview name
+        run: python3 m3/release/audit_release_identity.py --root . --release
+      - name: Explain qualified scope
+        if: always()
+        run: |
+          echo 'Metadata, naming and policy only. No JDK/JNI tests, M3 coverage or release evidence are produced by this job.' >> "$GITHUB_STEP_SUMMARY"
