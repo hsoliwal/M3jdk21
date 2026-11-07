@@ -27,6 +27,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.StreamSupport;
+import jdk.internal.m3.collections.M3FilteredNavigableSet;
 
 /** Recursive split oracle, live-view checks and callback-order compatibility. */
 public final class M3FilteredSplitContract {

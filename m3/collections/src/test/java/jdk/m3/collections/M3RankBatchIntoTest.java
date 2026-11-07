@@ -2,6 +2,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3RankBatchIntoContract;
 
 /** Real Java/JNI parity for LeetCode-category primitive count/upper-bound batches. */
 final class M3RankBatchIntoTest {

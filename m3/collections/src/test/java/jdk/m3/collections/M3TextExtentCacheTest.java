@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3ShortLabel;
 
 /** Contract and seeded differential tests of {@link M3TextExtentCache}. */
 final class M3TextExtentCacheTest {

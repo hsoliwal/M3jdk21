@@ -226,7 +226,7 @@ public class M3ListModelTest {
 				measured.incrementAndGet();
 				return s.length();
 			};
-			Handle model = new Handle("jdk.m3.collections.M3ListModel", measure);
+			Handle model = new Handle("jdk.internal.m3.collections.M3ListModel", measure);
 			Oracle oracle = new Oracle();
 			model.call("setGeometry", 2, 10);
 			for (int step = 0; step < 500; step++) {
@@ -239,7 +239,7 @@ public class M3ListModelTest {
 
 	@Test
 	public void invalidArgumentsAreRejectedWithoutChangingState() {
-		Handle model = new Handle("jdk.m3.collections.M3ListModel", (ToIntFunction<String>) String::length);
+		Handle model = new Handle("jdk.internal.m3.collections.M3ListModel", (ToIntFunction<String>) String::length);
 		model.call("setItems", (Object) new String[] {"a", "bb", "ccc"});
 		assertThrows(IllegalArgumentException.class, () -> model.callTyped("add", new Class<?>[] {String.class}, (Object) null));
 		assertThrows(IllegalArgumentException.class, () -> model.call("add", "x", 4));
@@ -260,7 +260,7 @@ public class M3ListModelTest {
 
 	@Test
 	public void topIndexStaysInsideTheScrollableRange() {
-		Handle model = new Handle("jdk.m3.collections.M3ListModel", (ToIntFunction<String>) String::length);
+		Handle model = new Handle("jdk.internal.m3.collections.M3ListModel", (ToIntFunction<String>) String::length);
 		model.call("setGeometry", 2, 10);
 		String[] items = new String[100];
 		Arrays.fill(items, "item");
@@ -280,7 +280,7 @@ public class M3ListModelTest {
 	@Test
 	public void widestIndexRebuildsOnlyWhenTheLastMaximumLeavesAndNeverRemeasures() {
 		AtomicInteger measured = new AtomicInteger();
-		Handle width = new Handle("jdk.m3.collections.M3ListWidth", (ToIntFunction<String>) s -> {
+		Handle width = new Handle("jdk.internal.m3.collections.M3ListWidth", (ToIntFunction<String>) s -> {
 			measured.incrementAndGet();
 			return s.length();
 		});
@@ -300,7 +300,7 @@ public class M3ListModelTest {
 
 	@Test
 	public void replacingTheMaximumWithEqualWidthKeepsTheIndexFresh() {
-		Handle width = new Handle("jdk.m3.collections.M3ListWidth", (ToIntFunction<String>) String::length);
+		Handle width = new Handle("jdk.internal.m3.collections.M3ListWidth", (ToIntFunction<String>) String::length);
 		width.call("insert", 0, "aaa");
 		width.call("insert", 1, "bbbbbbbbb");
 		assertEquals(9, width.number("maxWidth"));
@@ -314,7 +314,7 @@ public class M3ListModelTest {
 	@Test
 	public void largeListKeepsItemsSelectionAndWidthConsistent() {
 		int size = 200_000;
-		Handle model = new Handle("jdk.m3.collections.M3ListModel", (ToIntFunction<String>) String::length);
+		Handle model = new Handle("jdk.internal.m3.collections.M3ListModel", (ToIntFunction<String>) String::length);
 		String[] items = new String[size];
 		for (int i = 0; i < size; i++) items[i] = "n" + i;
 		model.call("setItems", (Object) items);

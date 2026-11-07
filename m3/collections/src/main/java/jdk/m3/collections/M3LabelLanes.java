@@ -16,6 +16,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
+import jdk.internal.m3.collections.M3ShortLabel;
 
 /**
  * The label lanes of one row model: one label per cell.

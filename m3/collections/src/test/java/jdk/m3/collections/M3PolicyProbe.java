@@ -6,6 +6,7 @@ import java.util.Spliterator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.stream.LongStream;
+import jdk.internal.m3.collections.M3ForwardingLongSequence;
 
 /** Actual M3LongArrayList backend plus one-dispatch operation counters. */
 //FLLDCIM: RELOCATE - donor blob c5ed056f42fe at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6

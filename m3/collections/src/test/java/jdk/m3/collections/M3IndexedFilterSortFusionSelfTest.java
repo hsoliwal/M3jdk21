@@ -23,6 +23,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
+import jdk.internal.m3.collections.M3GenericCollections;
 
 /** Standalone JDK21 differential oracle for fused offset/mask selection and stable sort. */
 public final class M3IndexedFilterSortFusionSelfTest {

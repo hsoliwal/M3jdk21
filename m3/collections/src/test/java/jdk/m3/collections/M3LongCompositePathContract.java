@@ -19,6 +19,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Spliterator;
 import java.util.stream.StreamSupport;
+import jdk.internal.m3.collections.M3LongCompositeViews;
 
 /** Executable Java 21 oracle: primitive, live, parent-owned nested paths. */
 public final class M3LongCompositePathContract {

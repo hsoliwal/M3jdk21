@@ -18,6 +18,8 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import jdk.internal.m3.collections.M3LongIndexPathBudget;
+import jdk.internal.m3.collections.M3LongIndexPathMasksJNI;
 
 /** Deterministic Java21 oracle of input-work-bounded Java/JNI path selection. */
 public final class M3LongIndexPathBudgetSelfTest {

@@ -5,6 +5,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3FilteredNavigableSetRangeContract;
 
 final class M3FilteredNavigableSetRangeTest {
     @Test

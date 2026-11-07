@@ -11,6 +11,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.ObjLongConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+import jdk.internal.m3.collections.M3LongDag;
+import jdk.internal.m3.collections.M3VirtualAccumulator;
+import jdk.internal.m3.collections.M3VirtualCollector;
 
 /** Differential Java 21 oracle for parent-owned DOOP DAGs and virtual aggregation. */
 public final class M3LongDagContract {

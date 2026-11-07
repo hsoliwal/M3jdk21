@@ -3,6 +3,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3PatchApplyRunsContract;
 
 /** Source-owned JUnit execution of the primitive packed-patch run oracle. */
 public final class M3PatchApplyRunsTest {

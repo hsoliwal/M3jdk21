@@ -2,6 +2,7 @@
 package jdk.m3.collections;
 import java.util.*;
 import java.util.function.LongPredicate;
+import jdk.internal.m3.collections.M3PrimitiveFilteredSequences;
 
 /** Standalone Java21 JDK differential; test-only ArrayList storage is the independent oracle. */
 public final class M3PrimitiveFilteredSequencesRuntimeContract {

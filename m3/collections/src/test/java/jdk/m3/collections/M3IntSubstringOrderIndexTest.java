@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3IntSubstringOrderIndex;
 
 class M3IntSubstringOrderIndexTest {
     @Test void allSmallBinaryTextsMatchEnumeratedDistinctSubstrings() {

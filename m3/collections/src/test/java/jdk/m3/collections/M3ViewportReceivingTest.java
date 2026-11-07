@@ -15,6 +15,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3ViewportPlanProof;
 
 /** Ordinary Maven/JUnit discovery; native-required execution is separately explicit. */
 class M3ViewportReceivingTest {

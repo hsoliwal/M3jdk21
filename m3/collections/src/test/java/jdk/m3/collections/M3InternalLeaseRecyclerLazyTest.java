@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3InternalLeaseRecycler;
 
 /** Contract-and-lifecycle JUnit bridge; self-test has no external test dependency. */
 class M3InternalLeaseRecyclerLazyTest {

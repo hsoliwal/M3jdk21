@@ -26,6 +26,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3FilteredLists;
 
 /**
  * Reference model of the M3FilteredViews members restored by qualification/mergeloss2-filtered-views-20261107.

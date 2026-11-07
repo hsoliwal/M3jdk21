@@ -4,6 +4,8 @@
  */
 package jdk.m3.collections;
 
+import jdk.internal.m3.collections.M3NotYetReceived;
+
 /**
  * M3 five-library superset scaffold {@code M3MpscQueue}: API group {@code MPSC_QUEUE} over arrays and state masks.
  *

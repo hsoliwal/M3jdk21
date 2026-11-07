@@ -4,6 +4,8 @@ package jdk.m3.collections;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.TreeSet;
+import jdk.internal.m3.collections.M3LongRankBatchNative;
+import jdk.internal.m3.collections.M3LongRankIndex;
 
 /** Dependency-free deterministic differential regression, including the opt-in native lane. */
 public final class M3LongRankIndexSelfTest {

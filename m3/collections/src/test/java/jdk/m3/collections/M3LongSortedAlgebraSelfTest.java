@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.Spliterator;
 import java.util.TreeSet;
 import java.util.function.LongPredicate;
+import jdk.internal.m3.collections.M3LongCompositeViews;
 
 /**
  * Differential test of actual primitive sorted set algebra against JDK TreeSet.

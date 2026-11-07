@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3CursorPagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.M3PagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.M3ProviderBackedPrimitiveLongTree;
+import jdk.internal.m3.collections.M3ProviderLoadException;
 
 class M3ProviderBackedPrimitiveLongTreeTest {
 

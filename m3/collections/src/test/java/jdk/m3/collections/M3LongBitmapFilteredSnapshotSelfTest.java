@@ -16,6 +16,7 @@ import java.util.Spliterator;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.LongPredicate;
+import jdk.internal.m3.collections.M3LongBitmapFilteredSnapshot;
 
 /** Plain Java 21 differential/metamorphic suite. No JUnit dependency. */
 public final class M3LongBitmapFilteredSnapshotSelfTest {

@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Spliterator;
 import java.util.concurrent.atomic.AtomicInteger;
+import jdk.internal.m3.collections.M3BagRankIndex;
 
 /** Deterministic M3-native order-statistics and Java/JNI-masks oracle. */
 public final class M3BagRankIndexSelfTest {

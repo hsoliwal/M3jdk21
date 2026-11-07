@@ -5,6 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3BoundedProviderBackedPrimitiveRows;
+import jdk.internal.m3.collections.M3FuzzyProviderCollectionFactory;
+import jdk.internal.m3.collections.M3PagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.M3PrimitiveRowProvider;
+import jdk.internal.m3.collections.M3ProviderCollectionRequirements;
+import jdk.internal.m3.collections.M3ProviderLoadException;
+import jdk.internal.m3.collections.M3VersionedCursorPagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.M3VersionedProviderBackedPrimitiveLongTree;
 
 class M3ProviderResidencyVersionedTreeTest {
 

@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.ConcurrentModificationException;
+import jdk.internal.m3.collections.M3StateMaskArrays;
 
 /** JDK21 contract oracle for zero-mask no-op and state/offset compaction. */
 public final class M3ZeroMaskArrayFastPathProof {

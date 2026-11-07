@@ -17,6 +17,7 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import jdk.internal.m3.collections.M3ResidencyStateMaskIndex;
 
 /** Standalone seeded contract oracle; also runs with the original M3ObjectResidency owner. */
 public final class M3ResidencyStateMaskProof {

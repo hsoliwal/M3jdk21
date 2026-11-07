@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import jdk.internal.m3.collections.M3LazyElementFlags;
 
 /** Independent comparator-and-sort oracle; usable with original OR candidate class. */
 //FLLDCIM: RELOCATE - donor blob e2027e901579 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4

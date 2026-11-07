@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.NavigableSet;
 import java.util.Random;
 import java.util.TreeSet;
+import jdk.internal.m3.collections.M3LongCompositeViews;
 
 /** Independent JDK21 signed-long navigation oracle for real M3TreeSet storage. */
 public final class M3IndexedSetAlgebraSeekProof {

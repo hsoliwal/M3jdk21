@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.collections;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3FilteredListsDeepCompositionProof;
 /** JUnit adapter for exact deep composition and JDK 21 List order contracts. */
 final class M3FilteredListsDeepCompositionTest {
     @Test void deepChainShortCircuitAndSortedListInterop() {

@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Comparator;
 import java.util.function.LongPredicate;
+import jdk.internal.m3.collections.M3LongBitmapFilteredSnapshot;
 
 /** Exact occurrence/callback contracts and separate, threshold-free resource observations. */
 public final class M3BitmapOccurrenceRefinementProbe {

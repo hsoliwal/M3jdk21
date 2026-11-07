@@ -27,6 +27,8 @@ import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.SortedMap;
+import jdk.internal.m3.collections.M3LazyEventBits;
+import jdk.internal.m3.collections.M3ProgressScope;
 
 /**
  * AVL map with reference payload arrays and integer child/parent/free links.

@@ -4,6 +4,8 @@
  */
 package jdk.m3.collections;
 
+import jdk.internal.m3.collections.M3NotYetReceived;
+
 /**
  * M3 five-library superset scaffold {@code M3FrozenIntSet}: API group {@code FROZEN_INT_SET} over arrays and state masks.
  *

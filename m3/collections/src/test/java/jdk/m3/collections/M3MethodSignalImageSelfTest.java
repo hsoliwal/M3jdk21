@@ -11,6 +11,7 @@ import java.util.HexFormat;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TreeMap;
+import jdk.internal.m3.collections.M3MethodSignalImage;
 
 /** Independent deterministic method-signal schema, graph and refusal oracle. */
 public final class M3MethodSignalImageSelfTest {

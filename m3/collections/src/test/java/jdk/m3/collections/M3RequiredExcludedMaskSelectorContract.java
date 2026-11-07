@@ -19,6 +19,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
+import jdk.internal.m3.collections.M3SignalDimensions;
 
 /** Independent oracle for exact required/excluded logical-position selection. */
 public final class M3RequiredExcludedMaskSelectorContract {

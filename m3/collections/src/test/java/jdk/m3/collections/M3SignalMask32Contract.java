@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import jdk.internal.m3.collections.M3SignalDimensions;
 
 /**
  * Independent JDK-comparator oracle for full-width mask and stable signal ordering.

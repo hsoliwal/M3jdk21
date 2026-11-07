@@ -4,6 +4,7 @@ package jdk.m3.collections;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import static jdk.m3.collections.M3PolicyAssertions.*;
+import jdk.internal.m3.collections.M3BoundedLongSequence;
 
 //FLLDCIM: RELOCATE - donor blob 1d2af871dbe2 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class M3BoundedLongSequenceProof {

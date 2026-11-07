@@ -15,6 +15,7 @@
 package jdk.m3.collections;
 
 import java.util.Objects;
+import jdk.internal.m3.collections.M3PackedUnsignedLongVector;
 
 /**
  * Immutable Elias-Fano-style representation for nonnegative nondecreasing long sequences.

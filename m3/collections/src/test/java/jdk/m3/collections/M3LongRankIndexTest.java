@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LongRankIndex;
 
 /** Maven/Surefire entry point for the source-sealed rank/select differential oracle. */
 class M3LongRankIndexTest {

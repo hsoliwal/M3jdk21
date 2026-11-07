@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import jdk.internal.m3.collections.M3StateMaskArrays;
 
 /** Self-contained Java21 differential oracle; no test framework dependency. */
 public final class M3StateMaskArraysSelfTest {

@@ -16,6 +16,7 @@ import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+import jdk.internal.m3.collections.M3FilteredNavigableSet;
 
 /** Independent descending results, callback tapes, and a deep private-owner witness. */
 public final class M3FilteredDescendingDepthContract {

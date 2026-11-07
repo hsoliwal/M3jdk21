@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3Residency;
 
 final class M3ObjectResidencyTest {
     private static final class Value {
@@ -178,7 +179,7 @@ final class M3ObjectResidencyTest {
                 "M3ObjectResidencyTest$AnnotatedProjection.class")) {
             assertNotNull(stream);
             String bytecode = new String(stream.readAllBytes(), StandardCharsets.ISO_8859_1);
-            assertTrue(bytecode.contains("Ljdk/m3/collections/M3Residency;"),
+            assertTrue(bytecode.contains("Ljdk/internal/m3/collections/M3Residency;"),
                     "class file retains compile-time metadata");
         }
     }

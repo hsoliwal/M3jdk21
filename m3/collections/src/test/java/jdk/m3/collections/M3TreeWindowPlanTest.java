@@ -44,7 +44,7 @@ public class M3TreeWindowPlanTest {
 
 	static Object construct () {
 		try {
-			Constructor<?> c = Class.forName ("jdk.m3.collections.M3TreeWindowPlan").getDeclaredConstructor ();
+			Constructor<?> c = Class.forName ("jdk.internal.m3.collections.M3TreeWindowPlan").getDeclaredConstructor ();
 			c.setAccessible (true);
 			return c.newInstance ();
 		} catch (ReflectiveOperationException e) {

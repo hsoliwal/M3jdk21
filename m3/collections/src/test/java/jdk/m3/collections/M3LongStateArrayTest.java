@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LongStateArray;
 
 /** Differential contract proof for the primitive value/state dynamic-array owner. */
 final class M3LongStateArrayTest {

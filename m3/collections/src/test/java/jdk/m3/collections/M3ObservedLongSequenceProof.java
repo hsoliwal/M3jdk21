@@ -5,6 +5,11 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.List;
 import static jdk.m3.collections.M3PolicyAssertions.*;
+import jdk.internal.m3.collections.M3BoundedLongSequence;
+import jdk.internal.m3.collections.M3ForwardingLongSequence;
+import jdk.internal.m3.collections.M3LongSequenceCompletion;
+import jdk.internal.m3.collections.M3LongSequenceMetrics;
+import jdk.internal.m3.collections.M3ObservedLongSequence;
 
 //FLLDCIM: RELOCATE - donor blob b8202ade2a5e at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class M3ObservedLongSequenceProof {

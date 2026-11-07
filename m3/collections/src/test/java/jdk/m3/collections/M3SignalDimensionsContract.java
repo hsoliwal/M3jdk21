@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.function.ToDoubleFunction;
+import jdk.internal.m3.collections.M3SignalDimensions;
 
 /** Deterministic comparison-oracle differential proof; independent of production radix passes. */
 public final class M3SignalDimensionsContract {

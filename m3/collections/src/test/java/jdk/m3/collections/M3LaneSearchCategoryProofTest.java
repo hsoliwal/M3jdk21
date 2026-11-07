@@ -4,6 +4,7 @@ package jdk.m3.collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LaneSearchCategoryProof;
 
 /** Runs the independent sorted-lane linear oracle against the actual M3LaneSearch owner. */
 final class M3LaneSearchCategoryProofTest {

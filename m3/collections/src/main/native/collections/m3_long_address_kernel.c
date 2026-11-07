@@ -205,7 +205,7 @@ static void m3_max_throw(JNIEnv *env, const char *kind, const char *message) {
 }
 
 JNIEXPORT void JNICALL
-Java_jdk_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
+Java_jdk_internal_m3_collections_M3LaneAlgorithms_slidingMaximumIndices0(
         JNIEnv *env, jclass unused, jlongArray values,
         jint from, jint to, jint window, jintArray output, jint output_from) {
     (void) unused;
@@ -312,7 +312,7 @@ static void m3_partition_throw(JNIEnv *env, const char *name, const char *messag
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_collections_M3LaneAlgorithms_partition3Long0(
+Java_jdk_internal_m3_collections_M3LaneAlgorithms_partition3Long0(
         JNIEnv *env, jclass unused, jlongArray array, jint from, jint to, jlong pivot) {
     (void) unused;
     if (array == NULL) {
@@ -344,7 +344,7 @@ Java_jdk_m3_collections_M3LaneAlgorithms_partition3Long0(
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_collections_M3LaneAlgorithms_partition3Int0(
+Java_jdk_internal_m3_collections_M3LaneAlgorithms_partition3Int0(
         JNIEnv *env, jclass unused, jintArray array, jint from, jint to, jint pivot) {
     (void) unused;
     if (array == NULL) {

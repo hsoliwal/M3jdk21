@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LongMinimumSpanningForest;
 
 class M3AdvancedGraphStructuresTest {
     @Test void forestsMatchEnumerationOfEverySmallEdgeSubset() {

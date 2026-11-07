@@ -20,6 +20,7 @@ import java.util.TreeSet;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import jdk.internal.m3.collections.M3FilteredNavigableSet;
 
 /** Independent navigation and comparator-entry oracles with callback bounds. */
 public final class M3FilteredSortedEdgesContract {

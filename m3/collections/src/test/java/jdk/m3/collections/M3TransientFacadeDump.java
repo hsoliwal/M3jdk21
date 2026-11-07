@@ -10,6 +10,8 @@ import java.util.HexFormat;
 import java.util.Map;
 import java.util.SplittableRandom;
 import java.util.function.Supplier;
+import jdk.internal.m3.collections.M3InternalLeaseRecycler;
+import jdk.internal.m3.collections.M3LazyElementFlags;
 
 /**
  * Differential dump of the transient facade residency family (recipe transient-facade-20261106, M3JDK-authored).

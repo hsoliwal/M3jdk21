@@ -4,6 +4,8 @@ package jdk.m3.collections;
 
 import java.lang.management.ManagementFactory;
 import java.util.Arrays;
+import jdk.internal.m3.collections.M3CountLanes;
+import jdk.internal.m3.collections.M3CountTotals;
 
 /** Paired Java-heap allocation diagnostic, not a throughput benchmark or universal claim. */
 //FLLDCIM: MRL - fold-close audit leaf L0173: ADD from PR #1084 head 6b16a20dcedf blob 7684db3d4224, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1

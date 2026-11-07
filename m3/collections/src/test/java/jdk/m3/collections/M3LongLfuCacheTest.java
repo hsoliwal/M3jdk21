@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LongLfuCache;
 
 /**
  * Finite differential comparison of {@link M3LongLfuCache} against a boxed reference model

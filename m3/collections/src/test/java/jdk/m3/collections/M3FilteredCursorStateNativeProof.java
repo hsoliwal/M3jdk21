@@ -10,6 +10,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import jdk.internal.m3.collections.M3FilteredLists;
 
 /**
  * Required existing JNI selector oracle. Every Java predicate stays in Java;

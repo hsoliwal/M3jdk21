@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3IntOfflineConnectivity;
+import jdk.internal.m3.collections.M3IntUndirectedLowLink;
 
 class M3PrimitiveConnectivityKernelsTest {
     @Test void lowLinkMatchesIndependentEdgeAndVertexRemoval() {

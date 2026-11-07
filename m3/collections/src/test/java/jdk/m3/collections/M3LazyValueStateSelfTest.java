@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicReference;
+import jdk.internal.m3.collections.M3LazyEventBits;
+import jdk.internal.m3.collections.M3SystemProgress;
 
 /** Real provider/state owner checks, executable without Maven or test dependencies. */
 public final class M3LazyValueStateSelfTest {

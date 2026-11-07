@@ -16,6 +16,12 @@ package jdk.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3RangeSet;
+import jdk.internal.m3.collections.M3ScrollMetrics;
+import jdk.internal.m3.collections.M3TreeWindowPlan;
+import jdk.internal.m3.collections.M3WindowPlan;
+import jdk.internal.m3.collections.M3WindowPlanner;
+import jdk.internal.m3.collections.M3WindowRuntime;
 
 /** Edge tests of the viewport core: selection representations, flat window plan, plane bands, topology, projection. */
 public class M3WindowEdgesTest {

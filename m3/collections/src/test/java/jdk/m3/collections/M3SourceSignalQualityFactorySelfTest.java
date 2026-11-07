@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
+import jdk.internal.m3.collections.M3SourceSignalQualityFactory;
 
 /** Original javac SHA-256 source image → exact typed scalar quality/epoch contract. */
 public final class M3SourceSignalQualityFactorySelfTest {

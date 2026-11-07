@@ -3,6 +3,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3TreeWindowShiftContract;
 
 /** Maven/JUnit discovery of the original M3 tree coordinate-shift oracle. */
 public final class M3TreeWindowShiftTest {

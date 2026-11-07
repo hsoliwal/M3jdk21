@@ -17,6 +17,7 @@ import java.util.Random;
 import java.util.RandomAccess;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+import jdk.internal.m3.collections.M3FilteredLists;
 
 /**
  * Behavioral proof for the explicit List owner at deep predicate composition.

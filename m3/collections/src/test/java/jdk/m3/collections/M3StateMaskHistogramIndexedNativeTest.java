@@ -15,6 +15,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3StateMaskHistogramIndexedNativeContract;
 
 /** Owning JUnit5 binding for indexed original-array JNI differential proof. */
 final class M3StateMaskHistogramIndexedNativeTest {

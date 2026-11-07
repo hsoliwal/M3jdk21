@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LongStateArray;
 
 /** JUnit and existing JNI-selector parity gates for the implicit identity path. */
 //FLLDCIM: MRL - fold-close audit leaf L0180: ADD from PR #1791 head f452419fdcee, retained variant blob d9bf058b77b4, retain merge of #2070 (2028b1fb5f4) kept master's side; recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1

@@ -18,6 +18,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.nio.ByteOrder;
 import java.util.Objects;
+import jdk.internal.m3.collections.M3PrimitiveBits;
 
 /**
  * Fixed-size byte-packed integers, including 24/40/48/56-bit widths.

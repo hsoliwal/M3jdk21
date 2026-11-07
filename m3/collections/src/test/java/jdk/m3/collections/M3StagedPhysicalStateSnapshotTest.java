@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import jdk.internal.m3.collections.M3CollectionSdk;
 
 /** Actual Maven/JUnit gate for the product owner and its SDK factory. */
 final class M3StagedPhysicalStateSnapshotTest {

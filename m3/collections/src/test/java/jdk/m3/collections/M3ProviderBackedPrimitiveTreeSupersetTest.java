@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LazyElementFlags;
+import jdk.internal.m3.collections.M3PagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.M3ProviderBackedPrimitiveTree;
+import jdk.internal.m3.collections.M3ProviderLoadException;
 
 class M3ProviderBackedPrimitiveTreeSupersetTest {
 

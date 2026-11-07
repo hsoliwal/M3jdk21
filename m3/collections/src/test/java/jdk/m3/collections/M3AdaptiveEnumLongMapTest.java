@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3AdaptiveEnumLongMap;
 
 /**
  * Finite differential comparison of {@link M3AdaptiveEnumLongMap} against {@code EnumMap<E,

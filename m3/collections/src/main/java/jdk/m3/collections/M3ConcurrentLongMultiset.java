@@ -4,6 +4,8 @@
  */
 package jdk.m3.collections;
 
+import jdk.internal.m3.collections.M3NotYetReceived;
+
 /**
  * M3 five-library superset scaffold {@code M3ConcurrentLongMultiset}: API group {@code CONCURRENT_LONG_MULTISET} over arrays and state masks.
  *

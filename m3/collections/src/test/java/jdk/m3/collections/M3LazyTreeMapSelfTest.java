@@ -19,6 +19,8 @@ import java.util.TreeMap;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+import jdk.internal.m3.collections.M3LazyEventBits;
+import jdk.internal.m3.collections.M3SystemProgress;
 
 /** Actual Java 21 AVL owner, provider, views, eager oracle and storage checks. No stubs. */
 public final class M3LazyTreeMapSelfTest {

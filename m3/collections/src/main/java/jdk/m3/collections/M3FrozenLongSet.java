@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.PrimitiveIterator;
 import java.util.function.LongConsumer;
+import jdk.internal.m3.collections.M3LaneSearch;
 
 /**
  * Immutable, sorted, duplicate-free set of {@code long} values over one dense value lane.

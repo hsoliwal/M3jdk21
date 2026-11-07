@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Random;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3CountLanes;
+import jdk.internal.m3.collections.M3CountTotals;
 
 //FLLDCIM: MRL - fold-close audit leaf L0107: ADD from PR #1084 head 6b16a20dcedf blob 67d23af6cc9c, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 //FLLDCIM: MRL - MAPPED: the origin counts/ module has no pom on master; the file joins the real module tree

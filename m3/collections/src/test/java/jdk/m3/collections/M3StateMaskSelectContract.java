@@ -5,6 +5,7 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import jdk.internal.m3.collections.M3StateMaskArrays;
 
 /** Original-owner Java 21 index/state differential; JNI remains an opt-in backend. */
 public final class M3StateMaskSelectContract {

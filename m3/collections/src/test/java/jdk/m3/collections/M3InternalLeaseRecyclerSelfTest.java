@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+import jdk.internal.m3.collections.M3InternalLeaseRecycler;
 
 /** Runnable Java21 regression oracle; does not assume GC or JUnit availability. */
 public final class M3InternalLeaseRecyclerSelfTest {

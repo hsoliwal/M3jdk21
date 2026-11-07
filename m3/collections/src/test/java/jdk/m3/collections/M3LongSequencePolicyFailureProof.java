@@ -3,6 +3,10 @@
 package jdk.m3.collections;
 
 import static jdk.m3.collections.M3PolicyAssertions.*;
+import jdk.internal.m3.collections.M3BoundedLongSequence;
+import jdk.internal.m3.collections.M3LongSequenceMetrics;
+import jdk.internal.m3.collections.M3ObservedLongSequence;
+import jdk.internal.m3.collections.M3ValidatingLongSequence;
 
 //FLLDCIM: RELOCATE - donor blob 70f63c4dac4b at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class M3LongSequencePolicyFailureProof {

@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.List;
+import jdk.internal.m3.collections.M3RowTree;
+import jdk.internal.m3.collections.M3RowTreeItem;
+import jdk.internal.m3.collections.M3WindowPlan;
 
 /** Actual folded viewport owners + existing mask selector; fixtures are caller-owned items. */
 public final class M3ViewportTreeProof {

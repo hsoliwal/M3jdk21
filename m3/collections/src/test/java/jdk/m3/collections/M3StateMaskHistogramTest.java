@@ -2,6 +2,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3StateMaskHistogramSelfTest;
 
 /** Owning module JUnit hook for the standalone deterministic Java/JNI contract. */
 public final class M3StateMaskHistogramTest {

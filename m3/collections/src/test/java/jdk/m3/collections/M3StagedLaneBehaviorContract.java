@@ -20,6 +20,9 @@ import java.util.Random;
 import java.util.Spliterator;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import jdk.internal.m3.collections.M3LongPatriciaTrie;
+import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.M3ObjectIdentityMap;
 
 /**
  * Task-local behavior oracle, frozen independently of recipe postimages. JDK models supply

@@ -13,6 +13,10 @@ import java.util.Random;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.Comparator;
+import jdk.internal.m3.collections.M3IndexedBiMap;
+import jdk.internal.m3.collections.M3IndexedSetMultiMap;
+import jdk.internal.m3.collections.M3ListMultiValueMap;
+import jdk.internal.m3.collections.M3NativeFiveLibrarySdk;
 
 /** Standalone deterministic differential oracle, including null and aliasing. */
 public final class M3NativeFiveLibrarySelfTest {

@@ -5,6 +5,7 @@ package jdk.m3.collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3TreeWindowPlan;
 
 /** Mixed-overload source-identity contract for the original native Tree window owner. */
 final class M3TreePlanBindingTest {

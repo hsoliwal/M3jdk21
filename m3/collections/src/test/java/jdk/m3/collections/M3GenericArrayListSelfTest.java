@@ -20,6 +20,7 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.function.Predicate;
 import java.util.concurrent.atomic.AtomicInteger;
+import jdk.internal.m3.collections.M3GenericCollections;
 
 /** Standalone randomized differential oracle with no test-library dependency. */
 public final class M3GenericArrayListSelfTest {
