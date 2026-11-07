@@ -62,6 +62,81 @@ The current public P0 foundation is intentionally narrower than the full M3 prog
 
 Current implementations and pending claims are evaluated independently.
 
+## Release names and naming gate scope
+
+The product name is **M3JDK21**. The tag workflow accepts
+`m3jdk-<Java-version>-m3.<revision>[-<qualifier>]` and checks the Java version
+against `make/conf/version-numbers`. Use the same tag in the release title,
+archive names and evidence pack. A preview qualifier describes release maturity;
+it does not qualify an implementation or satisfy a test gate.
+
+| Surface | Naming rule | Evidence required before release |
+| --- | --- | --- |
+| Standard Java API | Preserve `java.*`, `javax.*` and the actual owning JDK module; preserve JVM/JNI descriptors | API/binary and behavioral checks on the candidate image |
+| Additive public M3 companion | Use an explicitly admitted `com.m3.*` owner and public module export | Exact source hashes, matching package/path/type and module ownership, plus independent compatibility review |
+| Internal M3 implementation | Keep the existing mapped internal owner and visibility | Canonical map and exact source declaration checks; internal implementation is not a public replacement API |
+| Compatibility alias | Preserve the existing `toAdpater` spelling where the compatibility contract requires it | Caller and behavioral regression checks before any future deprecation |
+| Migration queue | Keep stable mapping IDs, lineage and `QUEUED` state until the required proofs exist | Exact `name-mapping.json` Git blob in `name-plan.json`; no status promotion from test counts |
+
+The naming receiver ignores comments, strings and text blocks when checking
+mapped declarations. A nested type or two conflicting top-level declarations
+cannot establish the top-level source owner. Package-private internal owners
+remain valid; public companions have separate public/export checks. These are
+lexical and mapping checks, not a substitute for Java compilation or jtreg.
+
+Run the complete naming suite as well as the live receiver and census:
+
+```sh
+python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
+python3 m3/tooling/name-contract/check.py
+python3 m3/tooling/name-contract/audit.py --strict
+```
+
+The naming workflow installs `m3/migration/requirements.txt`, checks out the
+schema and every concrete mapped target, and runs its refusal tests even when
+the live authority gate fails. A successful synthetic fixture suite does not
+make a stale authority pin, missing lineage, schema violation or source hash
+mismatch acceptable. Repair the canonical source/mapping owner and replay its
+sealed recipe; do not merely replace a digest to manufacture readiness.
+
+## Test coverage evidence
+
+Keep three results separate in a release proof pack: **test outcome**, **measured
+tooling coverage**, and **candidate-image compatibility**. Include the exact
+source commit/tree, command, dependency versions, raw logs and hashes for each.
+The release suite covers the admission consumer, standalone dependency checker
+and retained-source queue. The isolated naming receiver suite covers its own
+refusal/declaration logic. Neither suite reports coverage of the JDK, HotSpot,
+JNI implementations or SWT.
+
+For a reproducible local tooling measurement, install `coverage==7.13.4` in an
+isolated Python 3.12 environment and use separate data files:
+
+```sh
+python3 -m coverage run --branch --source=m3/release --omit='*/test_*.py' \
+  --data-file=/tmp/m3-release.coverage \
+  -m unittest discover -s m3/release -p 'test_*.py' -v
+python3 -m coverage report --data-file=/tmp/m3-release.coverage --show-missing
+python3 -m coverage json --data-file=/tmp/m3-release.coverage \
+  -o /tmp/m3-release-coverage.json
+
+python3 -m coverage run --branch --include='*/m3/tooling/name-contract/check.py' \
+  --data-file=/tmp/m3-naming-receiver.coverage \
+  -m unittest discover -s m3/tooling/name-contract -p 'test_check.py' -v
+python3 -m coverage report --data-file=/tmp/m3-naming-receiver.coverage --show-missing
+python3 -m coverage json --data-file=/tmp/m3-naming-receiver.coverage \
+  -o /tmp/m3-naming-receiver-coverage.json
+```
+
+These commands measure the instrumented Python process; child-process execution
+is not included. Preserve statement and branch totals, missing lines and test
+failures, rather than quoting a percentage without its denominator. Run the
+complete naming suite above independently: a scoped coverage measurement cannot
+replace its current-authority and source-successor regressions. No percentage
+here is a release threshold or a performance claim. The ten mandatory gates in
+`release-contract.json` still require current execution receipts, including the
+OpenJDK platform matrix and the relevant String/JNI contracts.
+
 ## Mandatory proof pack
 
 A release candidate must preserve:
