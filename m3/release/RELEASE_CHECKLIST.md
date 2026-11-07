@@ -2,6 +2,19 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 # Release checklist: `m3jdk-21.0.14-m3.1-preview`
 
+> [!WARNING]
+> **Historical checklist — not executable as current release instructions
+> (reviewed 2026-11-07).** The currently checked-in machine contract
+> [`release-contract.json`](release-contract.json) sets
+> `release.release_branch = release/first-clean-boundary-20261007`, while this
+> October 31 checklist uses `release/m3jdk-21.0.14-m3.1-preview`.
+> Those are different release identities. **Do not delete or recreate a
+> branch, mint the tag, or run the scripted commit-tree/push commands below**
+> until maintainers reconcile the two authorities, re-pin the source tree,
+> verify licensing and secure the complete ten-gate evidence manifest.
+> See [current release preparation](RELEASE_PREPARATION.md). The steps below
+> remain for historical traceability and are not proof of a released product.
+
 These are the user's actions, in order. Agents prepare branches, evidence and notes. Approvals,
 merges, repository secrets, the tag and the GitHub Release are the user's. Every command runs from
 a normal (non-shallow) clone of `hsoliwal/M3jdk21`. The [release notes](RELEASE_NOTES.md) carry
