@@ -82,6 +82,27 @@ public final class M3IntPriorityQueue implements M3IntCollection {
         return result;
     }
 
+    /**
+     * Smallest value without removing it; the Synexia mat-lane {@code MatIntPriorityQueue.peek} name, merged into this
+     * owner (mat overlap merge 2026-11-07). Throws {@link NoSuchElementException} when empty, like {@link #firstInt()}.
+     */
+    public int peek() {
+        return firstInt();
+    }
+
+    /**
+     * Removes and returns the smallest value; the Synexia mat-lane {@code MatIntPriorityQueue.poll} name. Throws
+     * {@link NoSuchElementException} when empty, like {@link #removeFirstInt()}.
+     */
+    public int poll() {
+        return removeFirstInt();
+    }
+
+    /** Retained primitive payload under the Synexia mat-lane name; equal to {@link #payloadBytes()}. */
+    public long primitivePayloadBytes() {
+        return payloadBytes();
+    }
+
     public boolean remove(int value) {
         for (int i = 0; i < size; i++) {
             if (heap[i] == value) {
