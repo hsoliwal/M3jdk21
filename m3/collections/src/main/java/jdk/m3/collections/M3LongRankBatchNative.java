@@ -41,6 +41,12 @@ public final class M3LongRankBatchNative {
     private static volatile boolean INTERSECTION_VALUES_ABI_MISSING;
     private static volatile boolean UNION_VALUES_ABI_MISSING;
     private static volatile boolean RUN_STATISTICS_ABI_MISSING;
+    //FLLDCIM: MRL - follow-up of #2693: per-export ABI flags for the three restored natives whose callers had none,
+    // so an older libm3rankbatch (master 7-export build) falls back to Java like every other restored kernel;
+    // the hot path reads one volatile boolean, no allocation; recipe m3/collections/qualification/rank-stack-followup-20261107/pinned_edits.py v1
+    private static volatile boolean BOUND_BATCH_ABI_MISSING;
+    private static volatile boolean RANGE_COUNT_ABI_MISSING;
+    private static volatile boolean INTERSECTION_COUNT_ABI_MISSING;
     private static final int NATIVE_MIN_RUN_STATISTICS = 256;
     private static final boolean PAIR_DISTANCE_NATIVE_OPT_IN =
             Boolean.getBoolean("m3.collections.rank.pairdistance.native");
@@ -104,9 +110,13 @@ public final class M3LongRankBatchNative {
             Arrays.fill(output, outputFrom, outputFrom + length, 0);
             return;
         }
-        if (AVAILABLE && length >= NATIVE_MIN_BATCH) {
-            boundBatchInto0(sorted, queries, queryFrom, length, output, outputFrom, 0);
-            return;
+        if (AVAILABLE && !BOUND_BATCH_ABI_MISSING && length >= NATIVE_MIN_BATCH) {
+            try {
+                boundBatchInto0(sorted, queries, queryFrom, length, output, outputFrom, 0);
+                return;
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                BOUND_BATCH_ABI_MISSING = true;
+            }
         }
         for (int i = 0; i < length; i++) {
             output[outputFrom + i] = bound(sorted, queries[queryFrom + i], false);
@@ -265,10 +275,14 @@ public final class M3LongRankBatchNative {
             Arrays.fill(output, outputFrom, outputFrom + length, 0);
             return;
         }
-        if (AVAILABLE && length >= NATIVE_MIN_BATCH) {
-            rangeCountInto0(sorted, fromInclusive, toExclusive,
-                    queryFrom, length, output, outputFrom);
-            return;
+        if (AVAILABLE && !RANGE_COUNT_ABI_MISSING && length >= NATIVE_MIN_BATCH) {
+            try {
+                rangeCountInto0(sorted, fromInclusive, toExclusive,
+                        queryFrom, length, output, outputFrom);
+                return;
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                RANGE_COUNT_ABI_MISSING = true;
+            }
         }
         for (int i = 0; i < length; i++) {
             int at = queryFrom + i;
@@ -289,9 +303,13 @@ public final class M3LongRankBatchNative {
             Arrays.fill(output, outputFrom, outputFrom + length, 0);
             return;
         }
-        if (AVAILABLE && length >= NATIVE_MIN_BATCH) {
-            boundBatchInto0(sorted, queries, queryFrom, length, output, outputFrom, mode);
-            return;
+        if (AVAILABLE && !BOUND_BATCH_ABI_MISSING && length >= NATIVE_MIN_BATCH) {
+            try {
+                boundBatchInto0(sorted, queries, queryFrom, length, output, outputFrom, mode);
+                return;
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                BOUND_BATCH_ABI_MISSING = true;
+            }
         }
         for (int i = 0; i < length; i++) {
             long target = queries[queryFrom + i];
@@ -325,8 +343,13 @@ public final class M3LongRankBatchNative {
         Objects.requireNonNull(left, "left");
         Objects.requireNonNull(right, "right");
         if (left.length == 0 || right.length == 0) return 0L;
-        if (AVAILABLE && Math.min(left.length, right.length) >= NATIVE_MIN_INTERSECTION) {
-            return intersectionCount0(left, right);
+        if (AVAILABLE && !INTERSECTION_COUNT_ABI_MISSING
+                && Math.min(left.length, right.length) >= NATIVE_MIN_INTERSECTION) {
+            try {
+                return intersectionCount0(left, right);
+            } catch (UnsatisfiedLinkError olderNativeLibrary) {
+                INTERSECTION_COUNT_ABI_MISSING = true;
+            }
         }
         int i = 0;
         int j = 0;
