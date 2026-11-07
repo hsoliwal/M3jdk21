@@ -59,7 +59,7 @@ OpenJDK sanity workflow (`main.yml`) completes green at the release commit.
 
 ## Mandatory gates
 
-All ten gates in `mandatory_release_gates` need a receipt bound to the release commit and tree in
+All eleven gates in `mandatory_release_gates` need a receipt bound to the release commit and tree in
 the `M3_RELEASE_EVIDENCE_V1` manifest. The GitHub Release lists each gate's state, PASS or PENDING,
 with its producer.
 
@@ -72,6 +72,7 @@ with its producer.
 | `OPENJDK_SANITY_MATRIX` | `.github/workflows/main.yml` (OpenJDK GHA Sanity Checks), CI only |
 | `M3_MAVEN_CONTROL_REACTOR` | **HOLD — owner policy conflict.** `AGENTS.md` assigns canonical recipe execution to Synexia, but `release-contract.json` assigns this gate to `hsoliwal/M3jdk21`. No producer receipt is authorized by this table until the policy owners reconcile the conflict. |
 | `STRING_UTF16_CONTRACT` | no workflow job or command is bound to this gate yet |
+| `M3_CHANGED_ATOM_COVERAGE` | **PENDING** — instrumented, source-hash-checked >=90% line and branch coverage of changed contract-bearing M3 atoms, with complete inventory and raw report hashes; does not assert whole-JDK coverage |
 
 ## Platform matrix
 
@@ -111,6 +112,10 @@ Recompute build, test and coverage evidence against the final candidate commit a
   update the canonical contract/verifier and verify the exact executed receipt. The historical
   `m3-a3.yml` private Synexia pin must be reviewed for necessity before adding credentials.
 - **`STRING_UTF16_CONTRACT`:** this gate has no bound producer.
+- **Changed atom test coverage:** `M3_CHANGED_ATOM_COVERAGE` is PENDING until
+  source-pinned instrumented counts and the complete contract-atom inventory
+  satisfy the 90% minimum line/branch gate; 99% remains a stricter objective.
+  No whole-JDK line/branch percentage is claimed.
 - **Tokenizer image workflow:** `M3JDK21 tokenizer source-built image and jtreg` stops before the
   build, at the `get-jtreg` step: the artifact `bundles-jtreg-8.2.1+1` is not found (last run 40992710079,
   2026-10-30). The earlier doclint failure in `TokenMatcher.java`

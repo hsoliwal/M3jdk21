@@ -58,6 +58,14 @@ SHA-256 evidence to the final product commit after the last merge.
 | Arrays and collections | module tests and independent provider-contract tests | contract-by-contract JUnit, mutations/views/concurrency/serialization and ABI |
 | Swing/SWT coupling | separate SWT backend matrix | exact SWT revision, matched Java/native artifacts, GUI, resource and JNI evidence |
 
+The machine-readable preview contract now requires
+`M3_CHANGED_ATOM_COVERAGE` with at least 90% instrumented line and branch
+coverage **for every inventoried changed M3 contract atom**. A source
+SHA-256, nonempty inventory, raw report artifact, and explicit zero-unmeasured
+count are required; branchless atoms need an explanation. This does not
+establish that every changed source atom was inventoried — reviewers must
+compare the inventory against the actual release Git diff.
+
 For each contract-bearing **atom**, record its source file/method, behavior
 branches, matching tests, error/null/overflow/concurrency boundaries, baseline
 oracle and raw result. A 90%+ line/branch **engineering target** is not an achieved

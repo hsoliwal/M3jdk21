@@ -42,6 +42,7 @@
     "PRECOMPUTE_JNI_NATIVE_PARITY",
     "M3_MAVEN_CONTROL_REACTOR",
     "STRING_UTF16_CONTRACT",
+    "M3_CHANGED_ATOM_COVERAGE",
     "RELEASE_CLAIMS_VALIDATION",
     "PROOF_PACK_SHA256"
   ],
@@ -164,5 +165,16 @@
     "required_for_release": true,
     "baseline": "m3/release/STANDALONE_BASELINE.tsv",
     "rule": "M3JDK21 builds, tests, gates and releases without any other repository (user 2026-10-31); check_standalone.py: development mode is a ratchet, release mode needs zero cross-repository dependencies"
+  },
+  "coverage_policy": {
+    "schema": "M3_CHANGED_ATOM_COVERAGE_V1",
+    "scope": "M3_OWNED_CHANGED_CONTRACT_ATOMS",
+    "minimum_line_ratio": 0.9,
+    "minimum_branch_ratio": 0.9,
+    "all_changed_atoms_measured": true,
+    "exclude_unmeasured_from_release": true,
+    "critical_atom_objective_ratio": 0.99,
+    "coverage_receipt_gate": "M3_CHANGED_ATOM_COVERAGE",
+    "evidence_kind": "source-pinned instrumented line/branch counts and raw artifact SHA-256; full JDK coverage is not claimed"
   }
 }

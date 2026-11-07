@@ -80,7 +80,10 @@ gh pr create -R hsoliwal/M3jdk21 --base master --head release/m3jdk-21.0.14-m3.1
 ## 5. Evidence and admission
 
 A push to `release/**` runs `m3-first-release-admission.yml`: contract, foundation, precompute and
-control-reactor. `main.yml` (OpenJDK sanity matrix) also runs on branch pushes. Then, on a
+control-reactor. `main.yml` (OpenJDK sanity matrix) also runs on branch pushes.
+The `M3_CHANGED_ATOM_COVERAGE` receipt remains PENDING until a real instrumented
+line/branch report, complete changed-atom inventory and source SHA-256s are
+recorded. A synthetic verifier test does not meet this gate. Then, on a
 checkout of the release commit:
 
 ```sh

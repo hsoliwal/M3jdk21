@@ -39,6 +39,15 @@ class ReleaseMetadataTest(unittest.TestCase):
         self.assertIn("PENDING", self.prep)
         self.assertIn("JCov/Jacoco", self.prep)
 
+    def test_changed_atom_coverage_is_mandatory(self):
+        self.assertIn("M3_CHANGED_ATOM_COVERAGE",
+                      self.contract["mandatory_release_gates"])
+        policy = self.contract["coverage_policy"]
+        self.assertEqual(0.90, policy["minimum_line_ratio"])
+        self.assertEqual(0.90, policy["minimum_branch_ratio"])
+        self.assertTrue(policy["all_changed_atoms_measured"])
+        self.assertIn("M3_CHANGED_ATOM_COVERAGE", self.notes)
+
     def test_unqualified_contracts_are_not_promoted_by_release_notes(self):
         claims = self.contract["current_claims"]
         for name in ("java_lang_string_backed_by_m3_string",

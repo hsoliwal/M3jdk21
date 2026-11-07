@@ -43,7 +43,7 @@ REQUIRED_GATES = frozenset({
     "OPENJDK_SANITY_MATRIX", "M3_FOUNDATION_TESTS",
     "PRECOMPUTE_JAVA_DIFFERENTIAL", "PRECOMPUTE_JNI_NATIVE_PARITY",
     "M3_MAVEN_CONTROL_REACTOR", "STRING_UTF16_CONTRACT",
-    "RELEASE_CLAIMS_VALIDATION", "PROOF_PACK_SHA256",
+    "M3_CHANGED_ATOM_COVERAGE", "RELEASE_CLAIMS_VALIDATION", "PROOF_PACK_SHA256",
 })
 RECIPE_ROOTS = (
     ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
@@ -61,6 +61,10 @@ DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
 # is owned and executed by this repository; donor lineage stays in ledgers (m3/tooling/standalone/).
 PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
 MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
+COVERAGE_GATE = "M3_CHANGED_ATOM_COVERAGE"
+COVERAGE_SCHEMA = "M3_CHANGED_ATOM_COVERAGE_V1"
+COVERAGE_SCOPE = "M3_OWNED_CHANGED_CONTRACT_ATOMS"
+MIN_ATOM_COVERAGE = 0.90
 SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 GATE_ID = re.compile(r"[A-Z][A-Z0-9_]*\Z")
@@ -133,6 +137,68 @@ def safe_artifact(base: Path, relative: str) -> Path:
     if not current.is_file():
         raise ValueError("evidence artifact missing: " + relative)
     return current
+
+
+def validate_coverage_receipt(root: Path, entry: dict) -> str:
+    """Validate numeric/source integrity of a changed-atom coverage receipt.
+
+    This does not prove inventory completeness or the execution provenance:
+    the producer, the raw report and the atom inventory still require review.
+    It deliberately refuses unmeasured or excluded atoms in this P0 scope.
+    """
+    coverage = entry.get("coverage")
+    if not isinstance(coverage, dict):
+        raise ValueError("coverage receipt missing")
+    if coverage.get("schema") != COVERAGE_SCHEMA or coverage.get("scope") != COVERAGE_SCOPE:
+        raise ValueError("coverage schema/scope mismatch")
+    if coverage.get("instrumented") is not True or coverage.get("inventory_complete") is not True:
+        raise ValueError("instrumentation and complete atom inventory must be evidenced")
+    if type(coverage.get("unmeasured_count")) is not int or coverage["unmeasured_count"] != 0:
+        raise ValueError("unmeasured changed atoms are not release-qualified")
+    if coverage.get("excluded_atoms") != []:
+        raise ValueError("excluded atoms require a separate, reviewed release policy")
+    if not isinstance(coverage.get("tool"), str) or not coverage["tool"].strip():
+        raise ValueError("coverage instrumentation tool identity is missing")
+    artifact = coverage.get("report_artifact")
+    paths = {item.get("path") for item in entry.get("artifacts", [])
+             if isinstance(item, dict)}
+    if not isinstance(artifact, str) or artifact not in paths:
+        raise ValueError("coverage must name its own hash-verified raw report artifact")
+    atoms = coverage.get("atoms")
+    if not isinstance(atoms, list) or not atoms:
+        raise ValueError("a nonempty measured atom inventory is required")
+    if type(coverage.get("measured_count")) is not int or coverage["measured_count"] != len(atoms):
+        raise ValueError("measured atom count does not match the inventory")
+    seen = set()
+    for atom in atoms:
+        if not isinstance(atom, dict):
+            raise ValueError("invalid coverage atom")
+        ident, path, digest = (atom.get("id"), atom.get("source_path"),
+                               atom.get("source_sha256"))
+        if not isinstance(ident, str) or not ident.strip() or ident in seen:
+            raise ValueError("missing or duplicate measured atom ID")
+        seen.add(ident)
+        if (not isinstance(path, str) or not path.startswith(("m3/", "src/"))
+                or Path(path).suffix not in (".java", ".c", ".cc", ".cpp", ".h")):
+            raise ValueError("atom source must be an M3/JDK Java or native source file")
+        if not isinstance(digest, str) or not SHA256.fullmatch(digest):
+            raise ValueError("invalid atom source SHA-256")
+        if sha256(safe_artifact(root, path)) != digest:
+            raise ValueError("atom source hash mismatch: " + path)
+        for family in ("line", "branch"):
+            measured, missed = atom.get(family + "_covered"), atom.get(family + "_missed")
+            if type(measured) is not int or type(missed) is not int or min(measured, missed) < 0:
+                raise ValueError("invalid " + family + " coverage counts: " + ident)
+            total = measured + missed
+            if not total:
+                if family == "line":
+                    raise ValueError("unmeasured line coverage: " + ident)
+                reason = atom.get("branchless_explanation")
+                if not isinstance(reason, str) or not reason.strip():
+                    raise ValueError("zero-branch atom needs an explicit explanation: " + ident)
+            elif measured / total < MIN_ATOM_COVERAGE:
+                raise ValueError(f"{family} coverage below 90%: {ident}")
+    return f"{len(atoms)} changed atoms, instrumented line/branch counts >=90% or explicit branchless explanation"
 
 
 def recipe_candidate(path: str) -> bool:
@@ -209,6 +275,18 @@ def validate(root: Path, release_mode: bool = False,
         block("contract.unqualified_claims", f"unqualified claims promoted: {bad}")
     else:
         passed("contract.unqualified_claims")
+
+    coverage_policy = contract.get("coverage_policy")
+    if (not isinstance(coverage_policy, dict)
+            or coverage_policy.get("schema") != COVERAGE_SCHEMA
+            or coverage_policy.get("scope") != COVERAGE_SCOPE
+            or coverage_policy.get("minimum_line_ratio") != MIN_ATOM_COVERAGE
+            or coverage_policy.get("minimum_branch_ratio") != MIN_ATOM_COVERAGE
+            or coverage_policy.get("all_changed_atoms_measured") is not True
+            or coverage_policy.get("exclude_unmeasured_from_release") is not True):
+        block("contract.coverage_policy", "source-pinned >=90% changed-atom line/branch policy missing or weakened")
+    else:
+        passed("contract.coverage_policy")
 
     gates = contract.get("mandatory_release_gates")
     if (not isinstance(gates, list) or not gates
@@ -436,6 +514,8 @@ def validate(root: Path, release_mode: bool = False,
                         or not isinstance(canonical.get("recipe_id"), str)
                         or not canonical["recipe_id"].strip()):
                     raise ValueError("exact recipe repository, revision and identity missing")
+            if ident == COVERAGE_GATE:
+                validate_coverage_receipt(root, entry)
             artifacts = entry.get("artifacts")
             if not isinstance(artifacts, list) or not artifacts:
                 raise ValueError("raw execution artifacts missing")
