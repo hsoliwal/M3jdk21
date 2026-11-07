@@ -285,6 +285,8 @@
       <modules>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ast HELD (gate gate-ast: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>ast</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: history HELD (gate gate-history: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>history</module>
         <!-- m3-offreactor-held:end -->
       </modules>
     </profile>
