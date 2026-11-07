@@ -30,7 +30,7 @@ from pathlib import Path
 RECIPE = "apply.py"
 VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
-BASE_COMMIT = "092bd739190e64276552279e673cd0ca847c33f3"
+BASE_COMMIT = "ee47f1325def394f24b8716669ed1b84750675b1"
 EDITS_NAME = "EDITS.tsv"
 EDITS_COLUMNS = ("file", "before_sha256", "after_sha256", "leaf", "rule")
 ROW = "\t".join((
