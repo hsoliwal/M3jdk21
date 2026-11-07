@@ -13,8 +13,9 @@
     compile-time admission decision from compiler-proven facts (escape, effect, identity / monitor / reflection / JNI /
     serialization / reachability observations, ordering and owner-lifetime proofs) to DIRECT_PARENT, LAZY_HANDLE,
     MATERIALIZE or REFUSE (unknown is refused), its reference mode, the int-induction condition-only loop entry bound
-    and the opt-in @Analyze / @CompilerSummary annotations its javac processor reads. Pure Java 21, no dependency
-    outside java.base. Relocated by recipe (recipe/static-use-plan-20261107/relocate.py, RELOCATION_MAP.tsv,
+    and the opt-in @Analyze / @CompilerSummary annotations, plus M3StaticFactsProcessor, the opt-in javac annotation
+    processor that writes one @CompilerSummary companion per @Analyze method and the META-INF/m3/compiler-facts.tsv
+    ledger (java.compiler / jdk.compiler as static, compile-time-only module dependencies). Pure Java 21. Relocated by recipe (recipe/static-use-plan-20261107/relocate.py, RELOCATION_MAP.tsv,
     PROVENANCE.tsv) from the donor hsoliwal/com.synexia develop d5ad5090d87e; the donor JUnit 5 test and the
     module's differential dump (exhaustive fact space against a reference model) run in the test phase.</description>
   <properties>
