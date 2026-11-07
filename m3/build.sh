@@ -19,7 +19,9 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
   core/test/SharedLexiconFamilyContractTest.java core/test/M3SiUnitDecoderTest.java \
   core/test/M3NumberSpaceTest.java core/test/M3NumberSpaceContractTest.java \
   core/test/M3LanguageGrammarSupportTest.java \
-  core/test/M3InstanceIndexPrecomputeTest.java
+  core/test/M3InstanceIndexPrecomputeTest.java \
+  core/test/M3LanguageCorpusManifestTest.java core/test/M3RopeTextIndexTest.java \
+  core/test/M3PrecomputePayloadFieldPatternTest.java core/test/M3WordRowsContractTest.java
 for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
@@ -41,7 +43,15 @@ for mode in jit int nocompact c2; do
  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconFamilyContractTest | tee "build/logs/m3-family-contract-$mode.log"
  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3SiUnitDecoderTest | tee "build/logs/m3-si-unit-$mode.log"
  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3LanguageGrammarSupportTest | tee "build/logs/grammar-support-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3LanguageCorpusManifestTest | tee "build/logs/corpus-manifest-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3RopeTextIndexTest | tee "build/logs/rope-text-index-$mode.log"
 done
+# The remaining executable core tests are slower contract/differential gates;
+# run them once in the normal VM mode. Their logs are mandatory, not optional.
+"$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text --add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED -cp build/tests M3PrecomputePayloadFieldPatternTest | tee build/logs/payload-field-pattern.log
+# Word-row fixture workers inherit java.class.path but not --module-path;
+# run this test on the complete module JAR classpath so its worker can resolve it.
+"$M3JDK/bin/java" -ea -esa -cp build/tests:build/jdk.m3.text.jar M3WordRowsContractTest | tee build/logs/word-rows-contract.log
 # Build in a private temporary directory, then publish a complete content-addressed file.
 lexicon_tmp=$(mktemp -d build/lexicon.XXXXXX)
 trap 'rm -rf "$lexicon_tmp"' EXIT
