@@ -148,6 +148,17 @@ public final class M3IntArrayDeque {
         for (int i = 0; i < size; i++) action.accept(elements[(head + i) & (elements.length - 1)]);
     }
 
+    //FLLDCIM: MRL - primitive-method-gaps G4 get(int) (donor IntDeque.get, blob 28abd2c9da20; sibling M3LongArrayDeque.get)
+    /**
+     * Inspects the value at zero-based position {@code index} from the head, without removal.
+     * @param index position from the head
+     * @return value at the position
+     * @throws IndexOutOfBoundsException if index is outside [0, size)
+     */
+    public int get(int index) {
+        return elements[(head + java.util.Objects.checkIndex(index, size)) & (elements.length - 1)];
+    }
+
     /**
      * Inspects the first value without removal.
      * @return first value
