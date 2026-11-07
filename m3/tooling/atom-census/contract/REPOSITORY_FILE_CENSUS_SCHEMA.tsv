@@ -1,0 +1,14 @@
+file	position	column	type	constraint
+FILES.tsv	1	source_path	path	normalized committed Git tree path; unique; strictly sorted
+FILES.tsv	2	mode	git-mode	exact six-octal-digit tree entry mode
+FILES.tsv	3	object_type	enum	blob or commit; commit denotes a gitlink
+FILES.tsv	4	object_id	git-object-id	lowercase SHA-1 or SHA-256 repository object identity
+FILES.tsv	5	source_size	integer	nonnegative exact blob byte count or canonical gitlink pointer byte count
+FILES.tsv	6	source_sha256	sha256	lowercase SHA-256 of exact blob bytes or canonical gitlink pointer bytes
+FILES.tsv	7	source_family	enum	M3SourceFamily name used to dispatch later atomizers
+FILES.tsv	8	owner	string	deterministic module, test, build, automation, M3 or top-level repository owner
+FILES.tsv	9	atom_id	string	stable path-derived FILE_CONTAINER atom identity; unique
+REPOSITORY_CENSUS_RECEIPT.tsv	1	key	string	closed deterministic receipt key
+REPOSITORY_CENSUS_RECEIPT.tsv	2	value	string	hash-bound value; timestamps are prohibited
+FILE_IDENTITY_OVERRIDES.tsv	1	source_path	path	tracked path receiving a reviewed stable identity; strictly sorted and unique
+FILE_IDENTITY_OVERRIDES.tsv	2	atom_id	string	existing or reviewed stable atom identity; unique across overrides and generated rows
