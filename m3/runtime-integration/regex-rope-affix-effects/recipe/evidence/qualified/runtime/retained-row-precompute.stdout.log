@@ -1,0 +1,2 @@
+M3_JDK_REGEX_ROW_PRECOMPUTE_PASS checks=637128 regexes=10034 rows=532
+M3JDK21_REGEX_ROW_RECEIVER_PASS sources_sha256=true patch_module=true

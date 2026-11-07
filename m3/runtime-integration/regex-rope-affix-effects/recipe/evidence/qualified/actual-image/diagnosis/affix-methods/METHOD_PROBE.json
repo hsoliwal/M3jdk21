@@ -1,0 +1,77 @@
+{
+  "scope": "selected methods from the actual SDK-emitted jtreg class, preserving the separate full jtreg failure",
+  "compiler_command": [
+    "/tmp/m3jdk21-product-build/images/jdk/bin/javac",
+    "-J-Xmx512m",
+    "-J-XX:ActiveProcessorCount=2",
+    "-Xlint:all",
+    "-Werror",
+    "-d",
+    "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/affix-methods/classes",
+    "/workspace/scratch/edcb3bae74f7/regex-work/runtime/M3StringRegexMethodProbe.java"
+  ],
+  "probe_sha256": "3f3fab3d57e2d19b962370e32a5d4660622a7d35defe4000baa8dfdffa1cada8",
+  "sdk_test_class_sha256": "753b7d009a9aeeaa2ecdc0be7e7d8798860151730071b23d3c9defc36c6947ec",
+  "sdk_test_source_sha256": "e5228286bfb5e1531e5a5ebcee02c44d134cb49f833dce2e867d65600775781d",
+  "runs": [
+    {
+      "label": "compact",
+      "command": [
+        "/tmp/m3jdk21-product-build/images/jdk/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/affix-methods/classes:/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/work/classes/java/lang/String/M3StringRegexDpTest.d",
+        "M3StringRegexMethodProbe",
+        "mandatoryLiteralAffixes",
+        "compositeDagsAndLongPlans"
+      ],
+      "exit_code": 1,
+      "seconds": 4.351491648000774,
+      "log_sha256": "0279153283cb17006f0853fbb934985b22525af4cd7bb0be0345465eb6241700"
+    },
+    {
+      "label": "utf16",
+      "command": [
+        "/tmp/m3jdk21-product-build/images/jdk/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-XX:-CompactStrings",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/affix-methods/classes:/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/work/classes/java/lang/String/M3StringRegexDpTest.d",
+        "M3StringRegexMethodProbe",
+        "mandatoryLiteralAffixes",
+        "compositeDagsAndLongPlans"
+      ],
+      "exit_code": 1,
+      "seconds": 4.6880447819994515,
+      "log_sha256": "0279153283cb17006f0853fbb934985b22525af4cd7bb0be0345465eb6241700"
+    },
+    {
+      "label": "interpreted",
+      "command": [
+        "/tmp/m3jdk21-product-build/images/jdk/bin/java",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-Xint",
+        "-cp",
+        "/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/affix-methods/classes:/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/work/classes/java/lang/String/M3StringRegexDpTest.d",
+        "M3StringRegexMethodProbe",
+        "mandatoryLiteralAffixes",
+        "compositeDagsAndLongPlans"
+      ],
+      "exit_code": 1,
+      "seconds": 4.8729852409996965,
+      "log_sha256": "0279153283cb17006f0853fbb934985b22525af4cd7bb0be0345465eb6241700"
+    }
+  ]
+}

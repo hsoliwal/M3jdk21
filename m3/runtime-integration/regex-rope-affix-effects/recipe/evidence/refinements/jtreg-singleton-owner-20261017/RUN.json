@@ -1,0 +1,40 @@
+{
+  "status": "FAIL",
+  "command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+    "-Xmx512m",
+    "-XX:ActiveProcessorCount=2",
+    "-jar",
+    "/tmp/m3-toolchain/jtreg-7.3.1+1/jtreg/lib/jtreg.jar",
+    "-verbose:summary",
+    "-othervm",
+    "-conc:1",
+    "-timeoutFactor:2",
+    "-timeoutHandlerTimeout:15",
+    "-retain:all",
+    "-jdk:/tmp/m3jdk21-product-build/images/jdk",
+    "-dir:/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk",
+    "-w:/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/work",
+    "-r:/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-with-group-prerequisites/report",
+    "-vmoptions:-Xmx512m -XX:ActiveProcessorCount=2",
+    "java/lang/String/M3StringRegexDpTest.java",
+    "java/lang/String/M3StringRegexPreparedBatchTest.java"
+  ],
+  "cwd": "/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk",
+  "started_utc": "2026-10-17T09:53:42.935931+00:00",
+  "fixture_sdk_binding_sha256": "5dd85e551e4c7fa1b2fc53c48e8fc5296959197fa9230031cb7aa6b9fca3a2d4",
+  "test_sources_sha256": {
+    "java/lang/String/M3StringRegexDpTest.java": "e5228286bfb5e1531e5a5ebcee02c44d134cb49f833dce2e867d65600775781d",
+    "java/lang/String/M3StringRegexPreparedBatchTest.java": "465e1002df44eb9453b3d6c45670af4b9a9de90e7fc746d9b82a2c85423be0ef"
+  },
+  "concurrency": 1,
+  "default_test_heap": "512m",
+  "suite_timeout_seconds": 1800,
+  "full_string_stage_accepted": false,
+  "cuda_device": "NOT_RUN",
+  "exit_code": 2,
+  "seconds": 16.021,
+  "termination_signals": [],
+  "finished_utc": "2026-10-17T09:53:58.957112+00:00",
+  "log_sha256": "50adb68cf236dc5046eeb88556e595ec58407530a7420cd467898891703e06e4"
+}

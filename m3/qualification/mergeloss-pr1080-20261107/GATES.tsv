@@ -1,0 +1,11 @@
+gate	scope	master	merged	note
+javac_patch_module	JDK 21.0.9 javac --patch-module java.base=<master share/classes + merged owners>; M3StringRegexDp, M3StringFacts, M3RegexDpPlan (implicit closure)	rc=0 errors=0 classes=5194	rc=0 errors=0 owner_warnings=0	-Xlint:all,-serial,-deprecation,-removal,-this-escape
+pr1080_qualify_sh	#1080 recipe/contract/batch/qualify.sh unchanged; WSL Ubuntu 24.04 gcc 13.3 -Werror, OpenJDK 21	PASS on #1080 head 6adadadf64ae	PASS	java-only checks=231580; JNI checks=231612 jniRows=46278; portable -Xint PASS; UBSan PASS; allocation injectedFailures=5 liveAllocations=0; merged run seeds master jdk.internal.mindex siblings (owner calls M3StateRelation.compose)
+jni_export_superset	gcc -Werror -shared master vs merged M3RegexDpPlan.c, nm -D Java_*	exports=3	exports=7 lost=0	added batchAbi0 batchCreate0 batchEvaluate0 batchClose0
+mingw_werror	C:/ProgramData/mingw64 gcc -std=c17 -Wall -Wextra -Werror -shared, merged M3RegexDpPlan.c	-	rc=0	win32 JNI headers
+atom_tests	master test/jdk/jdk/internal/mindex/atoms/M3RegexDpPlanAtomTest (JUnit 1.12.2) on stock JDK 21 with patched jdk.internal.mindex	37/37	37/37	-
+jtreg_source_compile	stock javac --release 21 -proc:none -Xlint:all,-serial -Werror test/jdk/java/lang/String/M3StringRegexDpTest.java	-	rc=0	the batch test compiles inside qualify.sh
+name_mapping_validators	pytest m3/compatibility test_m3_full_family, test_m3_string_concat_dag_successor, test_public_names, test_integrated_utility_coverage, test_m3_public_target_policy over a partial tree	43 failed (partial-tree inputs)	43 failed, identical set	every mappings entry keeps a target key; 73 -> 76 entries
+line_accounting	diff master vs merged per modified file	-	removed lines: 0 in 5 files; M3RegexDpPlan.c 19 moved lines + 1 dropped forward declaration	first_bit and fail() moved above the CUDA-provider guard with master's bodies
+NOT_RUN	jtreg M3StringRegexDpTest / M3StringRegexPreparedBatchTest on an M3JDK image	-	-	java.lang owners cannot load patched on a stock VM
+NOT_RUN	#1080 source-extracted A/B fixtures (regex-plan-amalgamation, regex-mandatory-affixes, regex-rolling-cursor)	-	-	fixture anchor M3String.CodeUnitCursor is absent from master's evolved M3String; receipts restored byte-exact and pin #1080 product hashes 3029950078524419, b9bbf14010da526e, d18122b42e9e4bcb

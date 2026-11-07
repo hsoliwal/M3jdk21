@@ -1,0 +1,37 @@
+{
+  "schema": "M3_PRODUCT_IMAGE_BUILD_V1",
+  "status": "PASS",
+  "platform": "Linux x86_64",
+  "configuration": "fastdebug server headless",
+  "source_parent": "3bbb4712fb20adba1405741db8457164b9f436f5",
+  "source_root": "/workspace/scratch/edcb3bae74f7/m3-string",
+  "final_receiving_root": "/workspace/scratch/edcb3bae74f7/m3-string-review",
+  "final_sdk_core_sha256": {
+    "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java": "44e60be49cee95ec53efa9eb809d0a463fb3bd217e3e22e8a1a7046c2c0b0b4e",
+    "src/java.base/share/native/libjava/M3RegexDpPlan.c": "b263d55dbcfa817c8b256d56995e389d6992b503f3a46bc5f1b075d82340605c"
+  },
+  "core_sources_identical_to_final_sdk": true,
+  "configure_command": [
+    "bash",
+    "/workspace/scratch/edcb3bae74f7/m3-string/configure",
+    "--with-boot-jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "--with-debug-level=fastdebug",
+    "--with-jvm-variants=server",
+    "--enable-headless-only",
+    "--disable-warnings-as-errors",
+    "--with-freetype=bundled",
+    "--disable-javac-server"
+  ],
+  "build_command": [
+    "make",
+    "images",
+    "JOBS=6"
+  ],
+  "build_directory": "/tmp/m3jdk21-product-build",
+  "image": "/tmp/m3jdk21-product-build/images/jdk",
+  "tests_receipt": "See separate actual-image runtime evidence; image build alone does not qualify all tests.",
+  "warning_policy": "Full inherited product built with --disable-warnings-as-errors; focused native source uses strict C17 warnings-as-errors in separate contract gate.",
+  "jvm_sha256": "017658899cb1e4d2e8284234bd7d889bf4317b72a0efa58bd41a5c13d49971a4",
+  "libjava_sha256": "0491aeb8a07f769e0811755b92c8dfcc927e5d586fc73208989196f69de48ee6"
+}
