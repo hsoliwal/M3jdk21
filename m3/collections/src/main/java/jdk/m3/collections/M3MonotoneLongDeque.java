@@ -99,6 +99,17 @@ public final class M3MonotoneLongDeque {
         return indexes[head];
     }
 
+    //FLLDCIM: MRL - census3 P3-006, donor MIndexMonotoneLongDeque blob 4ec10eec0a07: tail accessors (the tail is the latest offer under either equal-value policy)
+    public long lastIndex() {
+        requireNonEmpty();
+        return indexes[physical(size - 1)];
+    }
+
+    public long lastValue() {
+        requireNonEmpty();
+        return values[physical(size - 1)];
+    }
+
     public void clear() {
         M3RingLiveClear.clear(indexes, head, size);
         M3RingLiveClear.clear(values, head, size);
@@ -122,6 +133,13 @@ public final class M3MonotoneLongDeque {
     private int physical(int logicalOffset) {
         int index = head + logicalOffset;
         return index >= values.length ? index - values.length : index;
+    }
+
+    //FLLDCIM: MRL - census3 P3-006, donor MIndexMonotoneLongDeque blob 4ec10eec0a07: empty guard of the restored tail accessors
+    private void requireNonEmpty() {
+        if (size == 0) {
+            throw new NoSuchElementException("empty monotone deque");
+        }
     }
 
     private boolean dominated(long retained, long incoming) {
