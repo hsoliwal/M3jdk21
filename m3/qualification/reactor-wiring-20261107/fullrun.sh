@@ -19,7 +19,7 @@ TS=$(sed -n '1s/^START \([^ ]*\) .*/\1/p' "$LOG"); TE=$(grep -o -E '^END [^ ]+' 
 WALL=$(( $(date -d "$TE" +%s) - $(date -d "$TS" +%s) ))
 BUILD=$(grep -o -E 'BUILD (SUCCESS|FAILURE)' "$LOG" | tail -1); BUILD=${BUILD:-NO_BUILD_RESULT}
 SUMMARY=$(sed -n '/Reactor Summary/,/BUILD/p' "$LOG")
-NS=$(echo "$SUMMARY" | grep -c -E '\.\.\. SUCCESS'); NF=$(echo "$SUMMARY" | grep -c -E '\.\.\. FAILURE'); NK=$(echo "$SUMMARY" | grep -c -E '\.\.\. SKIPPED')
+NS=$(echo "$SUMMARY" | grep -c -E ' SUCCESS \['); NF=$(echo "$SUMMARY" | grep -c -E ' FAILURE \['); NK=$(echo "$SUMMARY" | grep -c -E ' SKIPPED *$')
 TOTAL=$(grep -E '^\[(INFO|WARNING|ERROR)\] Tests run: [0-9]+, Failures: [0-9]+, Errors: [0-9]+, Skipped: [0-9]+$' "$LOG" | sed -E 's/^\[[A-Z]+\] //' | awk -F'[:,]' '{r+=$2; f+=$4; e+=$6; s+=$8} END {printf "Tests run: %d, Failures: %d, Errors: %d, Skipped: %d", r, f, e, s}')
 LOGSHA=$(sha256sum "$LOG" | cut -c1-64)
 python -I "$Q/testsum.py" "$LOG" > "$Q/${TAG}_TESTS.tsv"
