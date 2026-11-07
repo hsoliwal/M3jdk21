@@ -87,5 +87,95 @@ class ImporterTest(unittest.TestCase):
             self.build()
 
 
+    def test_source_path_refuses_missing_backslash_and_symlink(self):
+        for bad in ("", "m3\\file.java", "m3/missing.java", "/m3/file.java"):
+            with self.subTest(path=bad), self.assertRaises(ValueError):
+                importer.source_file(self.root, bad)
+        link = self.root / "m3/linked.java"
+        try:
+            link.symlink_to(self.root / "m3/core/src/com/m3/Example.java")
+        except (OSError, NotImplementedError):
+            return  # Windows environments without symlink privileges
+        with self.assertRaisesRegex(ValueError, "symlink"):
+            importer.source_file(self.root, "m3/linked.java")
+
+    def test_jacoco_rejects_missing_and_duplicate_method_fields(self):
+        original = self.report.read_text()
+        cases = (
+            ("<report/>", "no measured methods"),
+            (original.replace(' desc="()Z"', ''), "method key"),
+            (original.replace('</class>', '<method name="run" desc="()Z"/></class>'), "method key"),
+            (original.replace('<counter type="BRANCH" missed="1" covered="19"/>', ''), "line/branch"),
+            (original.replace('covered="19"', 'covered="-1"', 1), "invalid JaCoCo count"),
+            (original.replace('</method>', '<counter type="LINE" covered="1" missed="0"/></method>'),
+             "duplicate JaCoCo counter"),
+        )
+        for xml, reason in cases:
+            self.report.write_text(xml)
+            with self.subTest(reason=reason), self.assertRaisesRegex(ValueError, reason):
+                self.build()
+        self.report.write_text(original)
+        self.report.write_text(original.replace('<method name="run"',
+            '<method name="unused" desc="()V"><counter type="INSTRUCTION" covered="1" missed="0"/>'
+            '<counter type="LINE" covered="1" missed="0"/>'
+            '<counter type="BRANCH" covered="0" missed="0"/></method><method name="run"'))
+        self.assertEqual(1, self.build()["measured_count"])
+
+    def test_inventory_format_and_missing_line_proofs(self):
+        old = self.inventory.read_text()
+        for content, reason in (
+            ("not-a-column\n", "columns"),
+            (old.splitlines()[0] + "\n", "empty coverage inventory"),
+        ):
+            self.inventory.write_text(content)
+            with self.subTest(reason=reason), self.assertRaisesRegex(ValueError, reason):
+                self.build()
+        self.inventory.write_text(old)
+        xml = self.report.read_text()
+        self.report.write_text(xml.replace('type="LINE" missed="1" covered="19"',
+                                          'type="LINE" missed="0" covered="0"'))
+        with self.assertRaisesRegex(ValueError, "no instrumented lines"):
+            self.build()
+
+    def test_tool_identity_and_distinct_artifacts(self):
+        with self.assertRaisesRegex(ValueError, "tool identity"):
+            importer.build(self.root, self.report, self.inventory, "x", "y", "", False)
+        with self.assertRaisesRegex(ValueError, "distinct report"):
+            importer.build(self.root, self.report, self.inventory, "x", "x", "tool", False)
+
+    def test_many_atoms_reuse_one_source(self):
+        self.report.write_text(self.report.read_text().replace(
+            '</class>', '<method name="second" desc="()V">'
+            '<counter type="LINE" missed="0" covered="3"/>'
+            '<counter type="BRANCH" missed="0" covered="0"/>'
+            '</method></class>'))
+        with self.inventory.open("a") as out:
+            out.write("example.second\tcom/m3/Example\tsecond\t()V\t"
+                      "m3/core/src/com/m3/Example.java\tNo branches\n")
+        result = self.build(True)
+        self.assertEqual(2, result["measured_count"])
+        self.assertEqual(1, len(set(x["source_sha256"] for x in result["atoms"])))
+
+    def test_cli_success_and_input_failure(self):
+        import contextlib
+        import io
+        import json
+        out = self.root / "result.json"
+        args = ["--root", str(self.root), "--report", str(self.report),
+                "--inventory", str(self.inventory),
+                "--report-artifact", "coverage.xml", "--inventory-artifact", "atoms.tsv",
+                "--tool", "JaCoCo synthetic", "--out", str(out)]
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(0, importer.main(args))
+        self.assertFalse(json.loads(out.read_text())["inventory_complete"])
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(0, importer.main(args + ["--reviewed-complete-inventory"]))
+        self.assertTrue(json.loads(out.read_text())["inventory_complete"])
+        with contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as exit_info:
+                importer.main(args[:-1] + [str(self.root / "bad.json"), "--tool", ""])
+        self.assertEqual(2, exit_info.exception.code)
+
+
 if __name__ == "__main__":
     unittest.main()
