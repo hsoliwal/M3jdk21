@@ -24,10 +24,12 @@ must run in the order `m3/build.sh` followed by
 and installed-image gates. CI can be queued/cancelled; such states are
 **PENDING**, never PASS.
 
-Release reviewers must also resolve
-[`release-identity.json`](audit_release_identity.py) inconsistency between
-the machine release branch and the October preview notes, plus conflicting
-recipe-control scope between
+A newer `master` release-contract update now **reconciles the preview
+branch name** across the machine contract, notes and checklist. Verify that
+[`release-identity.json`](audit_release_identity.py) remains consistent
+after merging this PR. Changed-atom JaCoCo line/branch coverage is an
+additional mandatory gate and remains PENDING. Release reviewers must still
+resolve conflicting recipe-control scope between
 [`AGENTS.md`](../../AGENTS.md) and the
 [`release contract`](release-contract.json). A green isolated test cannot
 override these hard policy gates.

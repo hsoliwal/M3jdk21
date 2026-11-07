@@ -88,17 +88,22 @@ documented in [the release pack](README.md).
 
 - An exact release candidate still needs a green **OpenJDK sanity/jtreg
   matrix**, source-built matched JDK image, Java/JNI parity and complete
-  ten-gate manifest; do not rely on prior-branch successes.
+  all-mandatory-gates manifest; do not rely on prior-branch successes.
 - Legacy recipe custody and cross-repository dependency concerns remain
   governed by the existing release verifier and standalone audit. No recipe,
   donor catalogue or obsolete source is silently deleted here.
-- The earlier [release checklist](RELEASE_CHECKLIST.md) and
-  [release notes](RELEASE_NOTES.md) name
-  `release/m3jdk-21.0.14-m3.1-preview`, while the current machine contract
-  names `release/first-clean-boundary-20261007`. The
-  [release identity audit](audit_release_identity.py) now records these exact
-  values in `release-identity.json` and rejects the discrepancy in final
-  `--release` mode. Reconcile and review **before** creating any final branch or tag.
+- The revised [release checklist](RELEASE_CHECKLIST.md),
+  [release notes](RELEASE_NOTES.md) and updated
+  [machine contract](release-contract.json) now agree on
+  `release/m3jdk-21.0.14-m3.1-preview` in current `master`.
+  The [release identity audit](audit_release_identity.py) prevents a future
+  name split; it does not assert that a release branch or tag is qualified.
+- The new `M3_CHANGED_ATOM_COVERAGE` mandatory contract gate requires
+  reviewed changed-atom method inventory, raw JaCoCo XML, source SHA-256,
+  and measured >=90% line **and branch** coverage for each changed
+  contract-bearing atom. See the upstream
+  [naming/documentation/coverage specification](NAMING_DOCUMENTATION_COVERAGE.md).
+  No instrumented result is claimed in this PR; the gate remains PENDING.
 - [`AGENTS.md`](../../AGENTS.md) declares Synexia the exclusive
   recipe-authoring/execution workspace, while
   `release-contract.json.execution_evidence.maven_gate_scope` describes
