@@ -1,0 +1,10 @@
+gate	result
+javac patch-module (JDK 21.0.9), restored M3RX7.java	rc=0 errors=0 warnings=0
+MinGW gcc -Werror, master and restored M3RX7.c	rc=0
+WSL gcc 13.3 -Werror, master and restored M3RX7.c	rc=0, exports 4 = 4
+contracts on master owner	do not compile (33 + 4 errors: LexicalPlan, lexical closures absent)
+M3RX7LexicalContract on restored	PASS checks=51286
+RX7FindConvergence on restored	PASS checks=251558
+M3RX7ArrayPowerContract on restored	PASS Java assertions=329862; native assertions=632868 (-Xcheck:jni)
+M3RX7NativeBoundaryContract on restored	java-default checks=2052; native checks=9980517 (-Xcheck:jni); same contract with master C: FAIL (aliasing not rejected)
+M3RX7TransitionCompositionContract	HELD (TokenIndex String fields; OWNER_REVIEW)
