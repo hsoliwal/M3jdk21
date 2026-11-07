@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gates of recipe parent-owned-processor-20261107, run 2026-11-07 on JDK 21 (C:/Program Files/Java/jdk-21), Maven 3.9.14, scratch S:/m3-scratch/converge-20261106/po (M3JDK master 1d13daa5a16b; m3-arrays / m3-collections installed from that master into a private local repository, the shared one as tail).
+gate	command	state	evidence
+recipe_idempotent	python -I m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/relocate.py --donor-git <com.synexia git> --donor-rev eaacff5931ef16a1a52425043bb71b821eda3515 --check	PASS	files=2 held=0 changed=0 provenance=UNCHANGED
+1_package_lint_werror	JAVA_HOME=<JDK 21> mvn -o -B -ntp -f m3/compiler/parent-owned/pom.xml clean package (-Dmaven.repo.local=<head> -Dmaven.repo.local.tail=<tail>)	PASS	BUILD SUCCESS; 0 [WARNING]; jar --describe-module: org.m3jdk.compiler.parentowned, exports jdk.m3.compiler.parentowned, requires java.compiler static transitive, requires jdk.m3.collections static
+2_test_phase	surefire: M3ParentOwnedProcessorTest (the donor's JUnit test)	PASS	Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+3_bytecode	javac -g:none both sides; javap -v -p -c -constants normalized for the two package names; javap_v_equal.py (constant pool as an order-independent multiset)	PASS	donor com.synexia.primitives.M3ParentOwnedProcessor vs relocated: EQUAL (annotation values and string-concat recipes included)
+mutant	one-literal mutant of the relocated processor (UNKNOWN -> UNKNOWX in the sidecar row)	PASS	refused by the -v comparison (constant pool entry differs); the -c comparison alone let it pass (RECIPE_MEMORY row 2)
+naming	python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compiler/parent-owned	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0; FIXED_POINT moves=0 rewrites=0
+siblings	the m3/compiler/static-use recipe verify.sh siblings check over every m3/compiler module	PASS	OK for 7 modules incl. parent-owned:com.m3/m3-compiler-parent-owned:org.m3jdk.compiler.parentowned:jdk.m3.compiler.parentowned

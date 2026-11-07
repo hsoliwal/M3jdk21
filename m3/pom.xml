@@ -30,6 +30,7 @@
     <module>compiler/nullness-facts</module>
     <module>compiler/static-use</module>
     <module>compiler/mat-sortable</module>
+    <module>compiler/parent-owned</module>
     <module>ports/collections</module>
     <module>native</module>
     <module>nlp</module>
