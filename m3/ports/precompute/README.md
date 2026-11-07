@@ -25,7 +25,9 @@ This port owns the broader second-pass fabric:
   SimHash and MinHash/Jaccard sketches;
 - `M3RegexShape`: fail-closed literal/prefix/suffix/exact regex recognition;
 - `M3EditDistancePlan`: exact bounded Levenshtein with single-word Myers for short
-  patterns plus reusable DP/banded workspaces;
+  patterns plus reusable DP/banded workspaces (test-scope proof oracle `M3EditDistancePlanOracle`
+  bound to both lanes, 46,960 reference differentials in the test phase; donor com.synexia crate
+  `m3-utf16-bitparallel-edit-20261105`, recipe `recipe/utf16-edit-oracle-20261107`);
 - `M3LcsPlan`: exact bounded LCS length over UTF-16 code units (63-unit bit-vector recurrence,
   same Myers family; donor com.synexia crate `m3-utf16-lcs-bitvector-20261105`, recipe
   `recipe/utf16-atoms-20261106`);
