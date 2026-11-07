@@ -66,7 +66,8 @@ class ImporterTest(unittest.TestCase):
             '<counter type="BRANCH" missed="0" covered="0"/>'))
         with self.assertRaisesRegex(ValueError, "branchless"):
             self.build()
-        self.inventory.write_text(self.inventory.read_text().rstrip() + "No branches\n")
+        self.inventory.write_text(self.inventory.read_text().replace(
+            "Example.java\t\n", "Example.java\tNo branches\n"))
         self.assertEqual(0, self.build()["atoms"][0]["branch_missed"])
 
     def test_source_escape_or_symlink_is_refused(self):
