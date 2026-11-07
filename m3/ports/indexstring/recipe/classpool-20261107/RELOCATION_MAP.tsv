@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/classpool-20261107/relocate.py (INDEXSTRING_RELOCATE_CLASSPOOL v1); donor hsoliwal/com.synexia develop 78cf2ad4c7e5.
+kind	donor	target	note
+PACKAGE	com.synexia.indexstring.type	jdk.internal.m3.indexstring.type	JDK naming rule PKG; census2 P2-099 proposed package
+ADAPT	MatIndexStringPool (text pool)	jdk.m3.intern.M3InternSpace	existing M3JDK owner: internString/string; atom ids dense 1..2^24 -> Math.toIntExact into the int handle lanes
+ADAPT	MIndexClassPool(IndexResolver, int)	MIndexClassPool(int)	a pool over its own fresh M3InternSpace; IndexResolver has no M3JDK owner
+ADAPT	retainedTextTokenCount (donor token count)	retainedTextAtomCount	distinct interned strings of the text space
+TYPE	MIndexString (name accessor results)	String	MIndexClass/MIndexClassMember/MIndexClassPool name accessors
+KEEP	textFeature hash	same	donor javaHash == String.hashCode over the same UTF-16 units, so every class/member hash and SHA-256 is unchanged
