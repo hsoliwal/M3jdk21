@@ -2,11 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.arrays;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.indexstring.MIndexArgumentRoleBits}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}.
+ * Every member body throws {@link M3NotYetReceived}, except: census3 P3-007 (qualification/census3-gaps-20261107) received the atoms of requireKnown, has, hasAny, names and their private helpers from the same donor blob at develop 78cf2ad4c7e5.
  *
  * <p>Lineage: Synexia {@code m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexArgumentRoleBits.java}
  * blob {@code 7dc48bec582fd7768142739cb15a8177dd581288} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},
@@ -57,19 +58,42 @@ public final class M3ArgumentRoleBits {
         throw new M3NotYetReceived("M3ArgumentRoleBits#<init>/0");
     }
 
+    //FLLDCIM: MRL - census3 P3-007, donor MIndexArgumentRoleBits blob 7dc48bec582f: atoms received
     public static void requireKnown(int bits) {
-        throw new M3NotYetReceived("M3ArgumentRoleBits#requireKnown/1");
+        if ((bits & ~KNOWN_MASK) != 0) {
+            throw new IllegalArgumentException("unknown argument role bits: " + bits);
+        }
     }
 
     public static boolean has(int bits, int required) {
-        throw new M3NotYetReceived("M3ArgumentRoleBits#has/2");
+        requireKnown(required);
+        return (bits & required) == required;
     }
 
     public static boolean hasAny(int bits, int mask) {
-        throw new M3NotYetReceived("M3ArgumentRoleBits#hasAny/2");
+        requireKnown(mask);
+        return (bits & mask) != 0;
     }
 
     public static List<String> names(int bits) {
-        throw new M3NotYetReceived("M3ArgumentRoleBits#names/1");
+        requireKnown(bits);
+        ArrayList<String> names = new ArrayList<>();
+        add(names, bits, CLAIM, "CLAIM");
+        add(names, bits, FACT, "FACT");
+        add(names, bits, EVIDENCE, "EVIDENCE");
+        add(names, bits, REASON, "REASON");
+        add(names, bits, RULE, "RULE");
+        add(names, bits, CONCLUSION, "CONCLUSION");
+        add(names, bits, CONTEXT, "CONTEXT");
+        add(names, bits, ASSUMPTION, "ASSUMPTION");
+        add(names, bits, OBSERVATION, "OBSERVATION");
+        add(names, bits, COUNTEREXAMPLE, "COUNTEREXAMPLE");
+        add(names, bits, OTHER, "OTHER");
+        return List.copyOf(names);
+    }
+
+    //FLLDCIM: MRL - census3 P3-007, donor MIndexArgumentRoleBits blob 7dc48bec582f: restored private helper
+    private static void add(List<String> names, int bits, int mask, String name) {
+        if ((bits & mask) != 0) names.add(name);
     }
 }
