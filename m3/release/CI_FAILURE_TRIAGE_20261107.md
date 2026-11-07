@@ -1,0 +1,33 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# M3JDK21 release CI failure triage — 2026-11-07
+
+**Status: release HOLD.** This is a historical, exact-run diagnostic of failed
+PR checks at review commit `e01d7556e5c11efcb8c1fcd6c77406cf69c6e5bf`.
+It is **not** evidence that any subsequent commit passed. Never rewrite the
+failure witness as a PASS without an actual exact-head, full-run receipt.
+
+| Failed workflow/run | Observed failure | Disposition for release |
+| --- | --- | --- |
+| [Current core contract matrix](https://github.com/hsoliwal/M3jdk21/actions/runs/42356173984), original-core | `ValueError: source identity drift: m3/build.sh` | **Addressed in candidate** by restoring `m3/build.sh` byte-for-byte to the `master` Git blob and placing four additional tests in `m3/release/run_extra_core_contracts.sh`. Must rerun to verify |
+| [Current core contract matrix](https://github.com/hsoliwal/M3jdk21/actions/runs/42356173984), wordrows-native | `ValueError: native source drift: m3/lexicon/run-wordrows-proof.sh` | **Outstanding**; repin only through the reviewed source/recipe and native-custody admission, not by deleting the check |
+| [Public JDK naming contract](https://github.com/hsoliwal/M3jdk21/actions/runs/42356173915) | `test_new_donor_imports_in_jdk_owner_refused`: missed legacy `jdk.internal.m3.indexstring` donor import | **Addressed in candidate** by extending the lexical new-donor guard; real naming tests must rerun |
+| [M3 JDK naming standard](https://github.com/hsoliwal/M3jdk21/actions/runs/42356173940) | `test_recipe_memory_rows_name_a_recipe_and_a_fixture_that_exist` crashes splitting a guard without `#` | **Outstanding**; three rows of `m3/tooling/jdk-naming/RECIPE_MEMORY.tsv` contain prose in the guard field (lines 18, 21 and 22 of the reviewed file). Canonical memory/recipe custody must be settled in Synexia, not bypassed in this product |
+| [Current core runtime proof](https://github.com/hsoliwal/M3jdk21/actions/runs/42356173991) | Joined-range bootstrap expects `row['path'] in transition` and raises `AssertionError` | **Outstanding**; reconcile historical transitions and exact source seals |
+| [Merged recipe atom preservation](https://github.com/hsoliwal/M3jdk21/actions/runs/42356174017) | `M3_PRODUCT_SOURCE_RECIPE_HANDOFF_REFUSED invalid immutable first-party recipe custody` | **Outstanding**; source provenance and recipe export need admission |
+| [Historical Joined reference replay](https://github.com/hsoliwal/M3jdk21/actions/runs/42356173934) | Historical qualification gate failed | **Outstanding**; see uploaded run evidence, preserve original source pins |
+| [Standalone references](https://github.com/hsoliwal/M3jdk21/actions/runs/42356173919) | Ledger and lineage-reference guard failed | **Outstanding**; inspect exact changed references without discarding history |
+
+**New candidate scope:** the restored foundation build and added naming-guard
+regression are **proposed remediations**, not green results. Separate tests
+must run in the order `m3/build.sh` followed by
+`m3/release/run_extra_core_contracts.sh`, then relevant native, Java21, JNI
+and installed-image gates. CI can be queued/cancelled; such states are
+**PENDING**, never PASS.
+
+Release reviewers must also resolve
+[`release-identity.json`](audit_release_identity.py) inconsistency between
+the machine release branch and the October preview notes, plus conflicting
+recipe-control scope between
+[`AGENTS.md`](../../AGENTS.md) and the
+[`release contract`](release-contract.json). A green isolated test cannot
+override these hard policy gates.
