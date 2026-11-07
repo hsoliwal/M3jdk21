@@ -101,7 +101,7 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
         String imageDigest = sha256(Files.readAllBytes(image));
         write(root, "m3.shards.tsv",
                 "shard_id\tfile\tfirst_lexeme\tlast_lexeme\timage_records\tutf16_units\tsha256\n"
-                        + "0\tsynexia.m3lex\talpha\talpha\t1\t5\t" + imageDigest + "\n");
+                        + "0\tm3.m3lex\talpha\talpha\t1\t5\t" + imageDigest + "\n");
         write(root, "m3.records.tsv",
                 "source_id\tsource_path\tsource_kind\tlanguage_tag\trecord_id\tlexeme\tshard_id\timage_row\tmapping_id\tmapping_name\ttranslation_profile\tprecompute_profile\tprecompute_payload\n"
                         + "source-a\tpath\tdictionary\ten\trecord-a\talpha\t0\t0\t-\t-\t-\tfixture\t{}\n");

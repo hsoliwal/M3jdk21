@@ -52,7 +52,11 @@ public final class M3NumberSpaceContractTest {
                 .orElseThrow(() -> new AssertionError("number manifest row missing"));
         String[] columns = row.split("\\t", -1);
         check(columns.length == 9);
-        check(columns[2].equals("m3-dictlang/src/main/java/com/dictlang/values/NumberValue.java"));
+        // Donor fact: the source path inside the donor repository hsoliwal/com.synexia, whose dictlang module
+        // name carries the donor prefix. It is composed so the JDK-naming rename (rule KEBAB) never rewrites a
+        // donor path; fe35ea98841 had renamed this literal while the manifest correctly kept the donor path.
+        String donorModule = String.join("-", "synexia", "dictlang");
+        check(columns[2].equals(donorModule + "/src/main/java/com/dictlang/values/NumberValue.java"));
         check(columns[3].equals(M3NumberSpace.SOURCE_RECORD_ID_FIELD));
         check(columns[4].equals("value"));
         check(columns[7].contains("M3 generates the inclusive 0..10000 domain"));
