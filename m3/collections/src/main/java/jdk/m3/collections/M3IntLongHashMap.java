@@ -200,6 +200,21 @@ public final class M3IntLongHashMap {
         modCount++;
     }
 
+    //FLLDCIM: MRL - primitive-method-gaps G3 trimToSize (donor IntLongHashMap.trimToSize, blob 3d7d6f89bf72)
+    /**
+     * Rebuilds the probe lane at the smallest capacity whose load threshold holds the live keys
+     * (the off-lane zero key needs no slot); a no-op when that is the current capacity. A rebuild
+     * re-inserts keys in slot order, so iteration follows the trimmed table, and it invalidates
+     * live iterators. Allocation precedes publication: a failure leaves the map unchanged.
+     */
+    public void trimToSize() {
+        int target = capacityFor(size - (hasZero ? 1 : 0));
+        if (target < keys.length) {
+            rebuildProbeLane(target);
+            modCount++;
+        }
+    }
+
     /** Visits mappings: the zero key first (if present), then slot order. */
     public void forEach(M3IntLongConsumer consumer) {
         Objects.requireNonNull(consumer, "consumer");
@@ -339,6 +354,34 @@ public final class M3IntLongHashMap {
         values = nextValues;
         mask = nextMask;
         threshold = thresholdFor(newCapacity);
+    }
+
+    //FLLDCIM: MRL - primitive-method-gaps G3: rehash(int) without its growth guard, for a smaller capacity
+    /** Re-inserts the live probe keys in slot order into fresh lanes of {@code capacity} slots. */
+    private void rebuildProbeLane(int capacity) {
+        int[] nextKeys = new int[capacity];
+        long[] nextValues = new long[capacity];
+        int nextMask = capacity - 1;
+        for (int i = 0; i < keys.length; i++) {
+            if (keys[i] != 0) {
+                int pos = emptySlot(nextKeys, keys[i], nextMask);
+                nextKeys[pos] = keys[i];
+                nextValues[pos] = values[i];
+            }
+        }
+        keys = nextKeys;
+        values = nextValues;
+        mask = nextMask;
+        threshold = thresholdFor(capacity);
+    }
+
+    /** First empty slot of the probe run of {@code key} in a lane under construction. */
+    private static int emptySlot(int[] lane, int key, int laneMask) {
+        int pos = mix(key) & laneMask;
+        while (lane[pos] != 0) {
+            pos = (pos + 1) & laneMask;
+        }
+        return pos;
     }
 
     private static int capacityFor(int expectedSize) {

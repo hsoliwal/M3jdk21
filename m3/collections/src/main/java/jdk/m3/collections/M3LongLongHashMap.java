@@ -195,6 +195,21 @@ public final class M3LongLongHashMap {
         modCount++;
     }
 
+    //FLLDCIM: MRL - primitive-method-gaps G3 trimToSize (donor LongLongHashMap.trimToSize, blob 41a55a6f8646)
+    /**
+     * Rebuilds the lanes at the smallest capacity whose load limit holds the live keys, also when
+     * tombstones remain at the current capacity (as the donor does); a no-op otherwise. A rebuild
+     * re-inserts keys in slot order, so iteration follows the rebuilt table, and it invalidates
+     * live iterators. Allocation precedes publication: a failure leaves the map unchanged.
+     */
+    public void trimToSize() {
+        int target = capacityFor(size);
+        if (target < keys.length || occupied != size) {
+            rehash(target);
+            modCount++;
+        }
+    }
+
     public void forEach(M3LongLongConsumer consumer) {
         Objects.requireNonNull(consumer, "consumer");
         int expectedModCount = modCount;
