@@ -62,7 +62,7 @@ REL=$(git commit-tree "$TREE" -p 890adb6410dab4606a4f26a942aed02fb2f55387 \
   -m "M3JDK21 21.0.14 m3.1 technical preview" \
   -m "Single release commit above openjdk/jdk21 jdk-21+35 (890adb6410dab4606a4f26a942aed02fb2f55387). Release tree $TREE from hsoliwal/M3jdk21 $SRC.")
 git rev-parse "$REL^" "$REL^{tree}"   # must print the baseline and $TREE
-git push origin --delete release/m3jdk-21.0.14-m3.1-preview   # only when rebuilding
+# If this branch already exists, STOP and review; do not delete or force-push it.
 git push origin "$REL:refs/heads/release/m3jdk-21.0.14-m3.1-preview"
 ```
 
