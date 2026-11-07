@@ -59,11 +59,12 @@ public final class M3FS implements AutoCloseable {
     public List<DirEntry> entries() { return table.entries(); }
     public boolean hasMore() { return hasMore; }
     public String nextAfter() { return table.size() == 0 ? null : table.name(table.size() - 1); }
+    //FLLDCIM: MRL - mergeloss leaf 31 (origin 8a3540d43c2, dropped by retain merge a7d07c6b1f00)
     @Override public boolean equals(Object other) {
       return other instanceof DirectoryPage page && hasMore == page.hasMore
-          && entries().equals(page.entries());
+          && table.equals(page.table);
     }
-    @Override public int hashCode() { return 31 * entries().hashCode() + Boolean.hashCode(hasMore); }
+    @Override public int hashCode() { return 31 * table.entriesHashCode() + Boolean.hashCode(hasMore); }
     @Override public String toString() {
       return "DirectoryPage[entries=" + entries() + ", hasMore=" + hasMore + "]";
     }
