@@ -148,6 +148,8 @@ jobs:
           echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
       - name: Build and test P0 immutable text foundation
         run: bash ./m3/build.sh
+      - name: Execute separately qualified additional core contracts
+        run: bash ./m3/release/run_extra_core_contracts.sh
       - name: Verify Synexia compatibility and shared mapping
         run: |
           python3 m3/compatibility/check-m3.py
