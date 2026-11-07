@@ -1,0 +1,232 @@
+/*******************************************************************************
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
+ * Public License 2.0, which are available at
+ * https://www.apache.org/licenses/LICENSE-2.0 and
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ *
+ * Contributors:
+ *     Hitesh Soliwal (Synexia) - initial API and implementation
+ *******************************************************************************/
+package jdk.m3.collections;
+
+import java.util.Arrays;
+import java.util.Objects;
+
+/**
+ * Open-addressing long-to-byte map.
+ *
+ * <p>Storage is exactly one long[] key lane plus one byte[] value lane.
+ * Key zero is represented by one collection-level flag/value so zero remains
+ * available without a state object or per-bucket occupancy byte.
+ *
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/LongByteHashMap.java}
+ * blob {@code 498a8b2989d50a04ccbed8c53ff156f0a5c11280} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ */
+public final class M3LongByteHashMap {
+    @FunctionalInterface
+    public interface Consumer {
+        void accept(long key, byte value);
+    }
+
+    private long[] keys;
+    private byte[] values;
+    private int mask;
+    private int threshold;
+    private int size;
+    private boolean hasZero;
+    private byte zeroValue;
+    private final float loadFactor;
+
+    public M3LongByteHashMap() {
+        this(16, M3DenseHash.DEFAULT_LOAD_FACTOR);
+    }
+
+    public M3LongByteHashMap(int expected) {
+        this(expected, M3DenseHash.DEFAULT_LOAD_FACTOR);
+    }
+
+    public M3LongByteHashMap(int expected, float loadFactor) {
+        this.loadFactor = loadFactor;
+        int capacity = M3DenseHash.capacityFor(expected, loadFactor);
+        keys = new long[capacity];
+        values = new byte[capacity];
+        mask = capacity - 1;
+        threshold = M3DenseHash.threshold(capacity, loadFactor);
+    }
+
+    public int size() { return size; }
+    public boolean isEmpty() { return size == 0; }
+    public int capacity() { return keys.length; }
+    public long payloadBytes() { return (long) keys.length * Long.BYTES + values.length; }
+
+    public void ensureCapacity(int expectedSize) {
+        if (expectedSize < 0) throw new IllegalArgumentException("expectedSize < 0");
+        int capacity = M3DenseHash.capacityFor(expectedSize, loadFactor);
+        if (capacity > keys.length) rehash(capacity);
+    }
+
+    public boolean containsKey(long key) {
+        return key == 0L ? hasZero : find(key) >= 0;
+    }
+
+    public byte get(long key) {
+        if (key == 0L) return hasZero ? zeroValue : 0;
+        int index = find(key);
+        return index < 0 ? 0 : values[index];
+    }
+
+    public int getUnsigned(long key) {
+        return Byte.toUnsignedInt(get(key));
+    }
+
+    public byte getOrDefault(long key, byte defaultValue) {
+        if (key == 0L) return hasZero ? zeroValue : defaultValue;
+        int index = find(key);
+        return index < 0 ? defaultValue : values[index];
+    }
+
+    public byte put(long key, byte value) {
+        if (key == 0L) {
+            byte old = zeroValue;
+            if (!hasZero) {
+                hasZero = true;
+                size++;
+            }
+            zeroValue = value;
+            if (size > threshold) rehash(keys.length << 1);
+            return old;
+        }
+
+        int index = M3DenseHash.mix(key) & mask;
+        long current;
+        while ((current = keys[index]) != 0L) {
+            if (current == key) {
+                byte old = values[index];
+                values[index] = value;
+                return old;
+            }
+            index = (index + 1) & mask;
+        }
+        keys[index] = key;
+        values[index] = value;
+        if (++size > threshold) rehash(keys.length << 1);
+        return 0;
+    }
+
+    public byte putUnsigned(long key, int value) {
+        if ((value & ~0xff) != 0) throw new IllegalArgumentException("value must be 0..255");
+        return put(key, (byte) value);
+    }
+
+    public void putAll(long[] sourceKeys, byte[] sourceValues) {
+        Objects.requireNonNull(sourceKeys, "sourceKeys");
+        Objects.requireNonNull(sourceValues, "sourceValues");
+        if (sourceKeys.length != sourceValues.length) {
+            throw new IllegalArgumentException("key/value length mismatch");
+        }
+        ensureCapacity(size + sourceKeys.length);
+        for (int i = 0; i < sourceKeys.length; i++) {
+            put(sourceKeys[i], sourceValues[i]);
+        }
+    }
+
+    public byte remove(long key) {
+        if (key == 0L) {
+            if (!hasZero) return 0;
+            hasZero = false;
+            size--;
+            byte old = zeroValue;
+            zeroValue = 0;
+            return old;
+        }
+
+        int index = M3DenseHash.mix(key) & mask;
+        long current;
+        while ((current = keys[index]) != 0L) {
+            if (current == key) {
+                byte old = values[index];
+                shiftKeys(index);
+                size--;
+                return old;
+            }
+            index = (index + 1) & mask;
+        }
+        return 0;
+    }
+
+    public void clear() {
+        Arrays.fill(keys, 0L);
+        Arrays.fill(values, (byte) 0);
+        size = 0;
+        hasZero = false;
+        zeroValue = 0;
+    }
+
+    public void forEach(Consumer consumer) {
+        Objects.requireNonNull(consumer, "consumer");
+        if (hasZero) consumer.accept(0L, zeroValue);
+        int remaining = size - (hasZero ? 1 : 0);
+        for (int i = 0; remaining > 0 && i < keys.length; i++) {
+            long key = keys[i];
+            if (key != 0L) {
+                consumer.accept(key, values[i]);
+                remaining--;
+            }
+        }
+    }
+
+    private int find(long key) {
+        int index = M3DenseHash.mix(key) & mask;
+        long current;
+        while ((current = keys[index]) != 0L) {
+            if (current == key) return index;
+            index = (index + 1) & mask;
+        }
+        return -1;
+    }
+
+    private void shiftKeys(int index) {
+        for (;;) {
+            int last = index;
+            index = (index + 1) & mask;
+            long current;
+            while ((current = keys[index]) != 0L) {
+                int slot = M3DenseHash.mix(current) & mask;
+                if (last <= index ? last >= slot || slot > index : last >= slot && slot > index) break;
+                index = (index + 1) & mask;
+            }
+            if (current == 0L) {
+                keys[last] = 0L;
+                values[last] = 0;
+                return;
+            }
+            keys[last] = current;
+            values[last] = values[index];
+        }
+    }
+
+    private void rehash(int newCapacity) {
+        long[] oldKeys = keys;
+        byte[] oldValues = values;
+        keys = new long[newCapacity];
+        values = new byte[newCapacity];
+        mask = newCapacity - 1;
+        threshold = M3DenseHash.threshold(newCapacity, loadFactor);
+
+        for (int i = 0; i < oldKeys.length; i++) {
+            long key = oldKeys[i];
+            if (key != 0L) {
+                int index = M3DenseHash.mix(key) & mask;
+                while (keys[index] != 0L) index = (index + 1) & mask;
+                keys[index] = key;
+                values[index] = oldValues[i];
+            }
+        }
+    }
+}
