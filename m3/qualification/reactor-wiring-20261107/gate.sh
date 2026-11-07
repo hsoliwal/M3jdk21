@@ -51,7 +51,7 @@ elif [ -n "$E_TEST" ]; then
 elif [ -n "$E_GOAL" ]; then EF="$FAILED_PROJECT"; EL="-"; EM=$(echo "$E_GOAL" | sed -E 's/^\[ERROR\] //')
 elif [ -n "$E_ANY" ]; then EF="-"; EL="-"; EM=$(echo "$E_ANY" | sed -E 's/^\[ERROR\] //')
 else EF="-"; EL="-"; EM="-"; fi
-EF=$(echo "$EF" | sed -E 's#^[A-Za-z]:[/\\]m3-scratch[/\\]eb-conv[/\\]wt-reactor[/\\]##' | tr '\\' '/' | tr '\t' ' ')
+EF=$(echo "$EF" | sed -E 's#^/?[A-Za-z]:[/\\]m3-scratch[/\\]eb-conv[/\\]wt-reactor[/\\]##' | tr '\\' '/' | tr '\t' ' ')
 EM=$(echo "$EM" | tr '\t' ' ' | cut -c1-400)
 LOGSHA=$(sha256sum "$LOG" | cut -c1-64)
 # 5 decision + recorded edit
