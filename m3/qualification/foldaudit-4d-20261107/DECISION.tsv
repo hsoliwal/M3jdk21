@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Fold-audit (0e, S:/m3-scratch/eb-conv/foldaudit/LEAVES.tsv) lane 4d, correctness priority: decisions taken 2026-11-07.
+leaf	owner_file	origin	verdict	evidence
+L0062	src/java.base/share/classes/java/util/regex/M3PatternQuery.java	#1985 head e3148c01ec7b (retained-variants/pr1985)	RESTORED (tail hunk only)	master already exceeds the retained copy (minimumLength rejection, dead-frontier exits, word-local predicate masks); the one missing hunk, tail-run routing in matchesMixed, is restored; GATES.tsv
+L0046	src/java.base/share/classes/jdk/internal/math/M3FastDoubleMath.java	#2182 head b97ce66fb04c (ancestor of master)	PRESENT_EVOLVED	tryDecToDoubleWithFastAlgorithm is on master; the lost Clinger condition is isClingerFastPath/clingerFastPath (fb02ebb8375c JIT_ATOMIZE v1, 1b778c489faa HEX_RECONCILE v1)
+L0058	src/java.base/share/classes/jdk/internal/math/M3FastFloatMath.java	#2182 head b97ce66fb04c	PRESENT_EVOLVED	tryDecToFloatWithFastAlgorithm with isClingerFastPath (same commits)
+L0047	src/java.base/share/classes/jdk/internal/math/M3FftMultiplier.java	#2182 head b97ce66fb04c	PRESENT_EVOLVED	bitsPerFftPoint on master with POINT_BITS_* named constants (bf16b7866375 LITERAL_CONSTANTS v1); square fix 43396c7c548e
+L0059	src/java.base/share/classes/jdk/internal/math/M3AbstractNumberParser.java	#2182 head b97ce66fb04c	PRESENT_EVOLVED	digit loop uses DIGIT_ZERO..DIGIT_NINE (bf16b7866375)
