@@ -36,9 +36,9 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '1672a1c590ce4ca55961c6f6749d11503eea1f5d'
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '6f3ad756ef31ed270078e217fca9c57c57bc1510'
-          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'a4276617061bd509807843de68772b0379dd9c38'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '2b34720f00d04ad05d8a164084dbda6af0773def'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '66a31672a814a5553c386e9c5496f350c3073a59'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'cb947382187606dd2cccc5293932254e47fbe825'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyContract.java)" = 'ef5822c5ff9f283dd7f4ce419a46f38390d5b65c'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyTest.java)" = 'd35c068e3e5323d1b93d80a192cb1aec6340da92'
       - name: Compile original M3 rank source and LC347 independent Java oracle
