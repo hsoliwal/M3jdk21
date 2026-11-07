@@ -62,6 +62,8 @@ python3 -m unittest discover -s m3/release -p 'test_*.py' -v
 python3 m3/release/verify_test_wiring.py --root . --strict \
   --json-out m3/release/queue/current/core-test-wiring.json
 python3 m3/tooling/name-contract/check.py
+python3 m3/release/audit_release_identity.py --root . \
+  --json-out m3/release/queue/current/release-identity.json
 export M3JDK=/absolute/path/to/a/JDK-21-installation
 bash m3/build.sh
 mvn -B -ntp -f m3/ports/precompute/pom.xml test
@@ -84,10 +86,25 @@ documented in [the release pack](README.md).
 - Legacy recipe custody and cross-repository dependency concerns remain
   governed by the existing release verifier and standalone audit. No recipe,
   donor catalogue or obsolete source is silently deleted here.
-- The earlier [release checklist](RELEASE_CHECKLIST.md) names
+- The earlier [release checklist](RELEASE_CHECKLIST.md) and
+  [release notes](RELEASE_NOTES.md) name
   `release/m3jdk-21.0.14-m3.1-preview`, while the current machine contract
-  names `release/first-clean-boundary-20261007`. Reconcile and review that
-  discrepancy **before** creating any final release branch or tag.
+  names `release/first-clean-boundary-20261007`. The
+  [release identity audit](audit_release_identity.py) now records these exact
+  values in `release-identity.json` and rejects the discrepancy in final
+  `--release` mode. Reconcile and review **before** creating any final branch or tag.
+- [`AGENTS.md`](../../AGENTS.md) declares Synexia the exclusive
+  recipe-authoring/execution workspace, while
+  `release-contract.json.execution_evidence.maven_gate_scope` describes
+  target-local Maven/OpenRewrite control-reactor execution under the
+  2026-10-31 standalone rule. Both policies currently exist: **do not
+  silently choose or claim compliance with both**. Obtain one reviewed
+  authoritative gate/custody policy and a matching execution receipt before
+  release.
+- The updated admission workflow now uploads raw
+  `m3/build/logs/` foundation logs and their SHA-256 list, the
+  `core-test-wiring.json` audit, and Maven precompute Surefire/native
+  reports. Artifacts are evidence inputs, not automatic PASS statuses.
 - The [SWT fork](https://github.com/hsoliwal/eclipse.platform.swt) has its
   own native, UI, platform and coverage gates. SWT qualification is not
   inherited from a successful M3 foundation test.
