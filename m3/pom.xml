@@ -52,6 +52,8 @@
     <module>ports/capability-runtime</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/precompute WIRED (gate gate-ports-precompute, GATES.tsv) -->
     <module>ports/precompute</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/indexstring WIRED (gate gate-ports-indexstring, GATES.tsv) -->
+    <module>ports/indexstring</module>
   </modules>
 
   <profiles>
