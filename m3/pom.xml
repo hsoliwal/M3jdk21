@@ -46,6 +46,8 @@
     <module>eclipse/framework</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: migration WIRED (gate gate-migration, GATES.tsv) -->
     <module>migration</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: lexicon/hf-intake WIRED (gate gate-lexicon-hf-intake, GATES.tsv) -->
+    <module>lexicon/hf-intake</module>
   </modules>
 
   <profiles>

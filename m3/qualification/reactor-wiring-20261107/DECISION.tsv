@@ -4,3 +4,4 @@ lane 37	eclipse/core-runtime	lane37	WIRED	com.m3:m3-eclipse-core-runtime-bridge:
 lane 37	eclipse/framework	lane37	WIRED	com.m3:m3-eclipse-framework-forward:0.1.0-SNAPSHOT	com.m3::m3-collections::0.1.0-SNAPSHOT 	gate-eclipse-framework	BUILD SUCCESS	-	-	-	-	Tests run: 25, Failures: 0, Errors: 0, Skipped: 0
 lane 37	history	lane37	HELD	com.m3:history-audit-recipe:0.1.0-SNAPSHOT:pom	-	gate-history	BUILD FAILURE	history-audit-recipe	history-audit-recipe	-	Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.6.4:exec (history-contract-tests) on project history-audit-recipe: Command execution failed. Process exited with an error: 1 (Exit value: 1) -> [Help 1]	n/a
 lane 37	migration	lane37	WIRED	com.m3:migration-recipes:0.1.0-SNAPSHOT	-	gate-migration	BUILD SUCCESS	-	-	-	-	Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+lane 37	lexicon/hf-intake	lane37	WIRED	com.m3:m3-hf-lexicon-intake-recipe:0.1.0-SNAPSHOT	-	gate-lexicon-hf-intake	BUILD SUCCESS	-	-	-	-	n/a
