@@ -179,7 +179,6 @@ public final class ChromeMlTaskService {
     }
     private static String hash(String value) { return ForgeJson.hash(value.getBytes(StandardCharsets.UTF_8)); }
     public static Map<String, Object> capabilities() {
-        //FLLDCIM: MRL - retained-port-20261107: jdk_naming CONST_KEBAB renamed the capabilities schema id (user decision 2026-10-31); the only runtime string this restore changes
         return Map.of("schema", "M3-CHROMEML-CAPABILITIES/1", "tasks", Arrays.stream(Kind.values()).map(Enum::name).toList(),
                 "execution", "EXPLICIT_CLI_OR_IN_PROCESS", "taskImplementation", "PROMPT_RECIPES",
                 "browserNativeApis", "SEPARATE_PROVIDER", "googleAccountAccess", false,
