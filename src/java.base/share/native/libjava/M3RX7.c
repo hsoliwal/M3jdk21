@@ -63,6 +63,10 @@ JNIEXPORT void JNICALL Java_jdk_internal_mindex_M3RX7_buildPacked0(
         invalid(env, "missing DFA token arrays");
         return;
     }
+    if ((*env)->IsSameObject(env, dfaArray, outArray)) {
+        invalid(env, "DFA token output aliases input");
+        return;
+    }
     size = (*env)->GetArrayLength(env, dfaArray);
     states = size / M3_ASCII;
     count = (*env)->GetArrayLength(env, startArray);
