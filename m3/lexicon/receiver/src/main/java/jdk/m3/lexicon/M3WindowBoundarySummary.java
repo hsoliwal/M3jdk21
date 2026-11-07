@@ -92,16 +92,9 @@ public final class M3WindowBoundarySummary {
         return length;
     }
 
+    //FLLDCIM: MRL - merge-loss leaf 102 (origin bf42c35a3e38, dropped by fold merge fc917d80ea3c): the scalar lives on as M3CaseBoundaryPrecompute.scalar, the generator and invalid-type fallback of the tables
     static boolean boundary(M3SeparatorKind kind, int before, int at, int after) {
-        if (kind == M3SeparatorKind.CAMEL) {
-            return at == Character.UPPERCASE_LETTER
-                    && (before == Character.LOWERCASE_LETTER || before == Character.DECIMAL_DIGIT_NUMBER);
-        }
-        boolean change = at != before
-                && !(at == Character.LOWERCASE_LETTER && before == Character.UPPERCASE_LETTER);
-        boolean acronymTail = after == Character.LOWERCASE_LETTER && at == Character.UPPERCASE_LETTER
-                && before == Character.UPPERCASE_LETTER;
-        return change || acronymTail;
+        return M3CaseBoundaryPrecompute.boundary(kind, before, at, after);
     }
 
     private int seamType(M3WindowBoundarySummary right, int position) {
