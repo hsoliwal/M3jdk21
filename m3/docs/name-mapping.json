@@ -10496,8 +10496,6 @@
           "version": "20261029",
           "path": null,
           "sha256": null,
-          "canonical_repository": "hsoliwal/com.synexia",
-          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/resources/META-INF/rewrite/m3jdk21-api-companions-target-20261029.yml",
           "preconditions": [
             "Exact target base 669a949d192345acefcfc5e9bb0b3724174d270c and checked source/module pins.",
             "Source-sealed named Maven/OpenRewrite replay; fixed point and drift/missing/duplicate refusal.",
@@ -10575,7 +10573,7 @@
               "repo": "hsoliwal/M3jdk21",
               "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
               "module": "com.m3.arrays",
-              "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
+              "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
               "symbol": "com.m3.arrays.M3Arrays",
               "signatures": [
                 "bytes(byte[])",
@@ -10588,8 +10586,8 @@
                 "join(M3IntArrayView...)",
                 "join(M3LongArrayView...)"
               ],
-              "sha256": "a7f4c973aa2a29fd457365bad5faeb421f559b19a3a419694e86642edacf4bd4",
-              "git_blob_sha1": "4145c7d2ec231f27cf05eea351521550800a8e0d",
+              "sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
+              "git_blob_sha1": "ffece349f5ef3f1c48191fb54a8b037f8e635d63",
               "fingerprint": null,
               "revision_role": "pinned"
             }
@@ -10599,7 +10597,7 @@
               "repo": "hsoliwal/M3jdk21",
               "commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
               "module": "com.m3.arrays",
-              "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
+              "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
               "symbol": "com.m3.arrays.M3Arrays",
               "signatures": [
                 "bytes(byte[])",
@@ -10612,8 +10610,8 @@
                 "join(M3IntArrayView...)",
                 "join(M3LongArrayView...)"
               ],
-              "sha256": "a7f4c973aa2a29fd457365bad5faeb421f559b19a3a419694e86642edacf4bd4",
-              "git_blob_sha1": "4145c7d2ec231f27cf05eea351521550800a8e0d",
+              "sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
+              "git_blob_sha1": "ffece349f5ef3f1c48191fb54a8b037f8e635d63",
               "fingerprint": null,
               "revision_role": "pinned"
             }

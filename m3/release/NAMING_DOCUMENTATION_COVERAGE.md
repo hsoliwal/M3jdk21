@@ -28,11 +28,13 @@ python3 -m unittest discover -s m3/release -p 'test_*.py' -v
 Do not bulk-reformat `src/**` during release hardening. Any approved internal
 rename must have an exact mapping ID, donor/rights evidence, deterministic
 recipe execution and binary/JNI/reflection/serialization compatibility proof.
-Naming transformations and their recipe custody must follow the repository
-policy resolved at review time; there is a current conflict between `AGENTS.md`
-(Synexia-only authoring/execution) and the standalone release contract
-(M3JDK21-local recipe execution). This **blocks sign-off**, not just documentation.
-The historical private-repository token is not a substitute for the owner decision.
+Naming transformations and recipe custody follow `AGENTS.md` and the release
+contract: Synexia owns canonical Maven/OpenRewrite authoring and execution.
+`M3_MAVEN_CONTROL_REACTOR` consumes a source-bound, hash-verified execution receipt
+as passive data; the product verifier never executes its recorded command.
+M3JDK21 owns product build, runtime and target acceptance gates. Release still
+requires zero executable dependencies on another repository. The canonical
+receipt does not establish installed-image acceptance or complete runtime coverage.
 
 ## Documentation freeze
 
