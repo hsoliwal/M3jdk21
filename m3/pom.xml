@@ -64,6 +64,8 @@
     <module>runtime-integration/primitive-address-identity</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/regex-precompute WIRED (gate gate-runtime-integration-regex-precompute, GATES.tsv) -->
     <module>runtime-integration/regex-precompute</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/gc-interop WIRED (gate gate-collections-gc-interop, GATES.tsv) -->
+    <module>collections/gc-interop</module>
   </modules>
 
   <profiles>
