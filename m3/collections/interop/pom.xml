@@ -113,6 +113,44 @@
         <configuration>
           <useModulePath>false</useModulePath>
           <failIfNoTests>true</failIfNoTests>
+          <!-- FLLDCIM: MRL - interop bindings/gating, recipe qualification/bindings-gating-20261107. JNI test gating (m3/collections/pom.xml pattern,
+               jni-test-gating-20261106): the m3_arrays JNI-dependent classes (EXCLUDED.tsv, enumerated from
+               surefire XML) are excluded from the default build and re-included by -Pm3-collections-native. -->
+          <excludes>
+            <exclude>**/M3ApacheBagContractTest.java</exclude>
+            <exclude>**/M3ApacheBidiMapContractTest.java</exclude>
+            <exclude>**/M3ApacheCollectionsTest.java</exclude>
+            <exclude>**/M3BiMapTest.java</exclude>
+            <exclude>**/M3CountedProviderContractTest.java</exclude>
+            <exclude>**/M3EclipseBagMultimapTest.java</exclude>
+            <exclude>**/M3EclipseMultimapTest.java</exclude>
+            <exclude>**/M3FiveFamilyPreparedSelectionTest.java</exclude>
+            <exclude>**/M3FiveLibraryArrayificationTest.java</exclude>
+            <exclude>**/M3FiveLibraryExpandedContractsTest.java</exclude>
+            <exclude>**/M3FiveLibraryIndexViewsTest.java</exclude>
+            <exclude>**/M3FiveLibraryInteropContractTest.java</exclude>
+            <exclude>**/M3FiveLibraryKeyRangesTest.java</exclude>
+            <exclude>**/M3FiveLibraryPreparedRowsTest.java</exclude>
+            <exclude>**/M3FiveLibraryState32Test.java</exclude>
+            <exclude>**/M3FiveListFamiliesTest.java</exclude>
+            <exclude>**/M3FiveProviderBagContractTest.java</exclude>
+            <exclude>**/M3FiveProviderCountSharingRegressionTest.java</exclude>
+            <exclude>**/M3FiveProviderFlagSelectionTest.java</exclude>
+            <exclude>**/M3FiveProviderIntegrationTest.java</exclude>
+            <exclude>**/M3FiveProviderKeyGroupClosureTest.java</exclude>
+            <exclude>**/M3FiveProviderKeyGroupsTest.java</exclude>
+            <exclude>**/M3GuavaBiMapContractTest.java</exclude>
+            <exclude>**/M3GuavaClassToInstanceMapsTest.java</exclude>
+            <exclude>**/M3GuavaListMultimapRealTest.java</exclude>
+            <exclude>**/M3GuavaRowSortedTableTest.java</exclude>
+            <exclude>**/M3GuavaSetMultimapTest.java</exclude>
+            <exclude>**/M3LibraryClosureTest.java</exclude>
+            <exclude>**/M3LibraryCollectionsTest.java</exclude>
+            <exclude>**/M3SdkFamiliesTest.java</exclude>
+            <exclude>**/M3SpringArrayContractTest.java</exclude>
+            <exclude>**/M3SpringCaseInsensitiveSdkFactoryTest.java</exclude>
+            <exclude>**/M3SpringCaseInsensitiveTest.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
       <plugin>
@@ -122,4 +160,30 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <!-- Native tests: build m3/arrays/src/main/native with CMake first, then -Pm3-collections-native -Dm3.collections.native.dir=<dir>. -->
+      <id>m3-collections-native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
+            <configuration>
+              <useModulePath>false</useModulePath>
+              <excludes combine.self="override"/>
+              <systemPropertyVariables>
+                <m3.arrays.native.path>${m3.collections.native.dir}/${m3.collections.native.prefix}m3_arrays${m3.collections.native.suffix}</m3.arrays.native.path>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <m3.collections.native.prefix>lib</m3.collections.native.prefix>
+        <m3.collections.native.suffix>.so</m3.collections.native.suffix>
+      </properties>
+    </profile>
+  </profiles>
 </project>
