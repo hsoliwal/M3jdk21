@@ -48,6 +48,8 @@
     <module>migration</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: lexicon/hf-intake WIRED (gate gate-lexicon-hf-intake, GATES.tsv) -->
     <module>lexicon/hf-intake</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/capability-runtime WIRED (gate gate-ports-capability-runtime, GATES.tsv) -->
+    <module>ports/capability-runtime</module>
   </modules>
 
   <profiles>
