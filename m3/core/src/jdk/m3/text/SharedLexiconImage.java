@@ -176,15 +176,29 @@ public final class SharedLexiconImage {
         return low;
     }
 
+    //FLLDCIM: MRL - merge-loss #2472 (origin 5a6209f8b2ca, fold 3fb1026f54f3): UTF-16 long lanes
     /** Exact UTF-16 prefix test directly against mapped bytes. */
     boolean startsWith(int index, String prefix) {
         Objects.requireNonNull(prefix);
         Objects.checkIndex(index, offsets.length);
-        int begin = payloadOffset + offsets[index] * 2;
-        if (prefix.length() > lengths[index]) return false;
-        for (int at = 0; at < prefix.length(); at++) {
-            int offset = begin + at * 2;
-            int unit = (mapping.get(offset) & 0xff) | ((mapping.get(offset + 1) & 0xff) << 8);
+        int units = prefix.length();
+        if (units > lengths[index]) return false;
+        int begin = payloadOffset + offsets[index] * Character.BYTES;
+        int stride = Long.BYTES / Character.BYTES;
+        int strideLimit = units & -stride;
+        int at = 0;
+        for (; at < strideLimit; at += stride) {
+            int offset = begin + at * Character.BYTES;
+            long word = Long.reverseBytes(mapping.getLong(offset));
+            long query = prefix.charAt(at)
+                    | ((long) prefix.charAt(at + 1) << Character.SIZE)
+                    | ((long) prefix.charAt(at + 2) << (2 * Character.SIZE))
+                    | ((long) prefix.charAt(at + 3) << (3 * Character.SIZE));
+            if (word != query) return false;
+        }
+        for (; at < units; at++) {
+            int offset = begin + at * Character.BYTES;
+            int unit = Short.toUnsignedInt(Short.reverseBytes(mapping.getShort(offset)));
             if (unit != prefix.charAt(at)) return false;
         }
         return true;
