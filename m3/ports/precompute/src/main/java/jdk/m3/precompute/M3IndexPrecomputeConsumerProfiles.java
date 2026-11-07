@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * <p>Profiles nominate existing capability IDs; they never compile facets or build a second
  * cache, interner, regex engine, collection index, or runtime executor. Only the existing
- * {@link IndexPrecomputePlanner} and {@link IndexPrecomputeMultipassCompiler} can select and
+ * {@link M3IndexPrecomputePlanner} and {@link M3IndexPrecomputeMultipassCompiler} can select and
  * materialize candidates under actual storage/dependency budgets. Scores are proposed
  * relative priorities, not measured latency/energy or proof of cost amortization.
  *
