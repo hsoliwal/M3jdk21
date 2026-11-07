@@ -101,7 +101,12 @@ public final class M3LongHashSet implements M3LongCollection {
             Arrays.fill(states, EMPTY);
             occupied = 0;
         } else if ((long) occupied > (long) size * 2 && keys.length > MIN_CAPACITY) {
-            rehash(keys.length);
+            try {
+                rehash(keys.length);
+            } catch (OutOfMemoryError optionalCompactionFailure) {
+                // Removal already committed. Keep the valid tombstoned table so
+                // callers can update aggregate counts instead of observing a false failure.
+            }
         }
         return true;
     }
