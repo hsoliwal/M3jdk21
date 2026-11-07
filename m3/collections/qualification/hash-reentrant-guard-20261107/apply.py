@@ -21,7 +21,9 @@ The guard therefore never fails where a linearizable answer exists (not stricter
     structure unchanged since the walk (their existing revision check covers the user function in between): the
     same callback sequence as java.util.HashMap's single-walk compute; the base looked an absent key up a second
     time through put, whose key callbacks could insert it meanwhile (a lost racing insert);
-  - M3WeakHashMap.put computes the key's hash once, like WeakHashMap.
+  - M3WeakHashMap.put keeps its second hashCode call (pinned by M3FootprintContractTest: callback count and a
+    failure in that call leaving a usable empty owner) but looks the key up again when that call changed the
+    structure (bounded); the base inserted without looking again and could duplicate the key.
 Hash computation before a walk needs no check: the walk that follows sees the changed structure.
 
 Engine of qualification/treemap-aba-guard-20261107/apply.py: anchored "sub" edits, every anchor exactly once, LF
@@ -43,7 +45,7 @@ from pathlib import Path
 RECIPE = "apply.py"
 VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
-BASE_COMMIT = "0b97282f6d1d"
+BASE_COMMIT = "784f2c20e580"
 EDITS_NAME = "EDITS.tsv"
 EDITS_COLUMNS = ("file", "before_sha256", "after_sha256", "behaviour", "rule")
 SRC = "m3/collections/src/main/java/jdk/m3/collections/"
@@ -305,9 +307,14 @@ WEAK_EDITS = [
      "        if (s >= 0) { return writeAt(s, value); }\n"
      "        if (states.length == 0) { rehash(16); }\n",
      "    @Override public V put(K key, V value) {\n"
-     "        drain(); int hash = M3SlotArrays.hash(key), s = find(key, hash);\n"
-     "        if (s >= 0) { return writeAt(s, value); }\n"
-     "        insertNew(key, value, hash); return null;\n"
+     "        for (int lookups = 0; ; lookups++) {\n"
+     "            int s = findSlot(key);\n"
+     "            if (s >= 0) { return writeAt(s, value); }\n"
+     "            int expected = modifications;\n"
+     "            int hash = M3SlotArrays.hash(key); // the second hash call is pinned (M3FootprintContractTest)\n"
+     "            if (modifications == expected) { insertNew(key, value, hash); return null; }\n"
+     "            if (lookups == REWALKS) { throw new java.util.ConcurrentModificationException(); }\n"
+     "        }\n"
      "    }\n"
      "    @Override long locate(Object key) {\n"
      "        drain(); int hash = M3SlotArrays.hash(key);\n"
@@ -344,7 +351,8 @@ RULES = (
      "Table.find walks again after a key equals changed the structure; locate/insertAbsent",
      LINKED_EDITS),
     (SRC + "M3WeakHashMap.java", "2cfac9e572e199fcb8e5d6f529a5c1b0776449d6", "S1",
-     "find walks again after a key equals changed the structure; put hashes the key once (find + insertNew);"
+     "find walks again after a key equals changed the structure; put looks again when its pinned second hash"
+     " call changed the structure (find + insertNew);"
      " locate/insertAbsent",
      WEAK_EDITS),
 )

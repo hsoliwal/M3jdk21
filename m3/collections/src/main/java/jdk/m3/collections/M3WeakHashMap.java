@@ -82,9 +82,14 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
     }
     @Override public int size() { drain(); return size; }
     @Override public V put(K key, V value) {
-        drain(); int hash = M3SlotArrays.hash(key), s = find(key, hash);
-        if (s >= 0) { return writeAt(s, value); }
-        insertNew(key, value, hash); return null;
+        for (int lookups = 0; ; lookups++) {
+            int s = findSlot(key);
+            if (s >= 0) { return writeAt(s, value); }
+            int expected = modifications;
+            int hash = M3SlotArrays.hash(key); // the second hash call is pinned (M3FootprintContractTest)
+            if (modifications == expected) { insertNew(key, value, hash); return null; }
+            if (lookups == REWALKS) { throw new java.util.ConcurrentModificationException(); }
+        }
     }
     @Override long locate(Object key) {
         drain(); int hash = M3SlotArrays.hash(key);

@@ -29,7 +29,7 @@ HEAD_SHA256 = {
     SM: "2206adec3e18b96b23a4fc70db1d09475dc618c05f1e059b4a78e5e9fa76d83d",
     HM: "0d3c317cb81bada479bbd27f911b28beacefbfc207775d6e22f475d4b1f78e4a",
     LH: "722b825f759f817d24bb2d765bf5996d66693b0230056d83c3d2b2d7c0fa0858",
-    WH: "52aebf7ac54f419651b823a4de091324d37654a7a34614c330c23bf1c2384160",
+    WH: "60b371cc1a17175277dde2f3ac9ad141b1b2daec18da85649d8522859ff6e12b",
 }
 ABSENT = "insertAbsent(key, v, (int) (located >>> 32), expected); }"
 # id, check, [(file, line, expected text, replacement lines)], note
@@ -43,9 +43,9 @@ MUTANTS = (
     ("WH-1", "S1 M3WeakHashMap find walks again after a key equals changed the structure",
      [(WH, 59, "                if (modifications != expected) { return rewalk(target, hash, walks); } // equals"
        " changed it", [])], ""),
-    ("WH-2", "S1 M3WeakHashMap.put hashes the key once",
-     [(WH, 87, "        insertNew(key, value, hash); return null;",
-       ["        insertNew(key, value, M3SlotArrays.hash(key)); return null;"])], ""),
+    ("WH-2", "S1 M3WeakHashMap.put looks again when its pinned second hash call changed the structure",
+     [(WH, 90, "            if (modifications == expected) { insertNew(key, value, hash); return null; }",
+       ["            if (modifications == expected || true) { insertNew(key, value, hash); return null; }"])], ""),
     ("SM-1", "S2 remove(k,v) looks again after the value's equals changed the structure",
      [(SM, 114, "            if (revision() == expected) { if (same) { eraseAt(s); } return same; }",
        ["            if (revision() == expected || true) { if (same) { eraseAt(s); } return same; }"])], ""),
@@ -78,7 +78,7 @@ MUTANTS = (
      [(LH, 78, "        if (table.modifications != expected) { throw new java.util.ConcurrentModificationException(); }",
        [])], "BACKSTOP"),
     ("WH-3", "insertAbsent precondition (M3WeakHashMap)",
-     [(WH, 94, "        if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }", [])],
+     [(WH, 99, "        if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }", [])],
      "BACKSTOP"),
 )
 ORACLES = ("jdk.m3.collections.M3HashReentrantLookupSelfTest", "jdk.m3.collections.M3TreeMapReentrantLookupSelfTest",

@@ -228,7 +228,7 @@ M3LinkedHashSet	LinkedHashSet	spread/reuse	set.remove(6)	BEFORE=1 DAMAGED=1	BEFO
 M3WeakHashMap	WeakHashMap	collide/race9	compute(new)	BEFORE=1 WRONG=8 DAMAGED=7	BEFORE=8 WRONG=8 DAMAGED=1	BEFORE=8
 M3WeakHashMap	WeakHashMap	collide/race9	computeIfAbsent(new)	BEFORE=1 WRONG=8 DAMAGED=7	BEFORE=8 WRONG=8 DAMAGED=1	BEFORE=8
 M3WeakHashMap	WeakHashMap	collide/race9	merge(new)	BEFORE=1 WRONG=8 DAMAGED=7	BEFORE=8 WRONG=8 DAMAGED=1	BEFORE=8
-M3WeakHashMap	WeakHashMap	collide/race9	put(new)	BEFORE=1 DAMAGED=7	BEFORE=8 DAMAGED=1	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/race9	put(new)	BEFORE=1 DAMAGED=7	BEFORE=8 DAMAGED=1	BEFORE=9
 M3WeakHashMap	WeakHashMap	collide/race9	putIfAbsent(new)	BEFORE=1 WRONG=8 DAMAGED=7	BEFORE=8 WRONG=8 DAMAGED=1	BEFORE=8
 M3WeakHashMap	WeakHashMap	collide/reuse	compute(new)	BEFORE=16	BEFORE=17	BEFORE=8
 M3WeakHashMap	WeakHashMap	collide/reuse	compute(remove)	BEFORE=8 DAMAGED=6	BEFORE=2 WRONG=1	BEFORE=3
@@ -248,7 +248,7 @@ M3WeakHashMap	WeakHashMap	collide/reuse	merge(new)	BEFORE=16	BEFORE=17	BEFORE=8
 M3WeakHashMap	WeakHashMap	collide/reuse	merge(remove)	BEFORE=1 AFTER=7 DAMAGED=6	BEFORE=2 WRONG=1	BEFORE=3
 M3WeakHashMap	WeakHashMap	collide/reuse	merge(write)	BEFORE=1 AFTER=6 WRONG=7	BEFORE=2 WRONG=4	BEFORE=3
 M3WeakHashMap	WeakHashMap	collide/reuse	put(existing)	BEFORE=1 AFTER=6	BEFORE=2 WRONG=1	BEFORE=3
-M3WeakHashMap	WeakHashMap	collide/reuse	put(new)	BEFORE=8	BEFORE=9	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/reuse	put(new)	BEFORE=8	BEFORE=9	BEFORE=9
 M3WeakHashMap	WeakHashMap	collide/reuse	putIfAbsent(existing)	BEFORE=1 AFTER=6	BEFORE=2 WRONG=1	BEFORE=3
 M3WeakHashMap	WeakHashMap	collide/reuse	putIfAbsent(new)	BEFORE=16	BEFORE=17	BEFORE=8
 M3WeakHashMap	WeakHashMap	collide/reuse	remove	BEFORE=1 DAMAGED=6	BEFORE=2 WRONG=1	BEFORE=3
@@ -260,7 +260,7 @@ M3WeakHashMap	WeakHashMap	collide/reuse	values.remove	AFTER=1 FAILFAST=6 DAMAGED
 M3WeakHashMap	WeakHashMap	spread/race9	compute(new)	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1 DAMAGED=1	BEFORE=1
 M3WeakHashMap	WeakHashMap	spread/race9	computeIfAbsent(new)	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1 DAMAGED=1	BEFORE=1
 M3WeakHashMap	WeakHashMap	spread/race9	merge(new)	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1 DAMAGED=1	BEFORE=1
-M3WeakHashMap	WeakHashMap	spread/race9	put(new)	BEFORE=1	BEFORE=1 DAMAGED=1	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/race9	put(new)	BEFORE=1	BEFORE=1 DAMAGED=1	BEFORE=2
 M3WeakHashMap	WeakHashMap	spread/race9	putIfAbsent(new)	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1 DAMAGED=1	BEFORE=1
 M3WeakHashMap	WeakHashMap	spread/reuse	compute(new)	BEFORE=2	BEFORE=3	BEFORE=1
 M3WeakHashMap	WeakHashMap	spread/reuse	compute(remove)	BEFORE=3 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
@@ -280,7 +280,7 @@ M3WeakHashMap	WeakHashMap	spread/reuse	merge(new)	BEFORE=2	BEFORE=3	BEFORE=1
 M3WeakHashMap	WeakHashMap	spread/reuse	merge(remove)	BEFORE=1 AFTER=2 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
 M3WeakHashMap	WeakHashMap	spread/reuse	merge(write)	BEFORE=1 AFTER=1 WRONG=2	BEFORE=1 WRONG=3	BEFORE=2
 M3WeakHashMap	WeakHashMap	spread/reuse	put(existing)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
-M3WeakHashMap	WeakHashMap	spread/reuse	put(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/reuse	put(new)	BEFORE=1	BEFORE=2	BEFORE=2
 M3WeakHashMap	WeakHashMap	spread/reuse	putIfAbsent(existing)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
 M3WeakHashMap	WeakHashMap	spread/reuse	putIfAbsent(new)	BEFORE=2	BEFORE=3	BEFORE=1
 M3WeakHashMap	WeakHashMap	spread/reuse	remove	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
@@ -293,6 +293,6 @@ M3WeakHashMap	WeakHashMap	spread/reuse	values.remove	AFTER=1 FAILFAST=6	FAILFAST
 TOTAL	M3HashMap			BEFORE=99 AFTER=55 FAILFAST=4 WRONG=8 DAMAGED=57	BEFORE=206 AFTER=8 FAILFAST=4 WRONG=76 DAMAGED=2	BEFORE=206 AFTER=4 FAILFAST=4
 TOTAL	M3LinkedHashMap			BEFORE=109 AFTER=56 FAILFAST=4 DAMAGED=72	BEFORE=224 AFTER=8 FAILFAST=4 WRONG=76 DAMAGED=2	BEFORE=224 AFTER=4 FAILFAST=4
 TOTAL	M3LinkedHashMap(access)			BEFORE=109 AFTER=20 FAILFAST=4 DAMAGED=108	BEFORE=222 AFTER=8 FAILFAST=4 WRONG=76 DAMAGED=4	BEFORE=224 AFTER=4 FAILFAST=4
-TOTAL	M3WeakHashMap			BEFORE=145 AFTER=129 FAILFAST=12 WRONG=92 DAMAGED=87	BEFORE=219 AFTER=8 FAILFAST=5 WRONG=76 DAMAGED=10	BEFORE=207 AFTER=4 FAILFAST=5
+TOTAL	M3WeakHashMap			BEFORE=145 AFTER=129 FAILFAST=12 WRONG=92 DAMAGED=87	BEFORE=219 AFTER=8 FAILFAST=5 WRONG=76 DAMAGED=10	BEFORE=211 AFTER=4 FAILFAST=5
 TOTAL	M3HashSet			BEFORE=19 AFTER=6 WRONG=1 DAMAGED=16	BEFORE=43 AFTER=13 WRONG=2 DAMAGED=2	BEFORE=51 AFTER=9
 TOTAL	M3LinkedHashSet			BEFORE=19 AFTER=6 DAMAGED=17	BEFORE=43 AFTER=13 WRONG=2 DAMAGED=2	BEFORE=51 AFTER=9

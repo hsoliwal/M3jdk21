@@ -38,7 +38,7 @@ The java.util twins answer reads with the pre-change value, and are themselves d
   calling key code again. This is the callback sequence of java.util.HashMap's compute.
 - `M3WeakHashMap.put` hashes the key once, as WeakHashMap does.
 
-Head: 0 of 1014 M3 cases fail. M3 fails fast only in `values().remove`, the iterator's CME, where every twin fails
+Head: 0 of 1018 M3 cases fail. M3 fails fast only in `values().remove`, the iterator's CME, where every twin fails
 fast too. The test asserts the brief's rules:
 - never DAMAGED;
 - WRONG only on a read where the twin is WRONG too;
