@@ -1,0 +1,29 @@
+row	file	kind	literal
+P2-026	m3/fs/src/main/java/jdk/m3/fs/MFileContent.java	BLOB	6bec98dffffe15baf3923841174886bccd0babf6
+P2-026	m3/fs/src/main/java/jdk/m3/fs/MFileContent.java	PRESENT	private static long transferAndCloseInput(InputStream input, OutputStream destination)
+P2-026	m3/fs/src/main/java/jdk/m3/fs/MFileContent.java	PRESENT	promises a borrowed output with no flush, so own the copy loop.
+P2-026	m3/fs/src/main/java/jdk/m3/fs/MFileContent.java	ABSENT	try (MFileStreams.Input input = openInputStream(progress)) {
+P2-026	m3/fs/src/test/java/jdk/m3/fs/MFileContentDefaultsTest.java	PRESENT	@Test void providerTransferOverrideCannotFlushBorrowedOutput() throws IOException {
+P2-027	m3/fs/src/main/java/jdk/m3/fs/MFiles.java	BLOB	e76c8ea637fb119fe9709524bdcbba11514b7253
+P2-027	m3/fs/src/main/java/jdk/m3/fs/MFiles.java	PRESENT	throw new IOException("MFiles parallel root does not exist or has no supported type");
+P2-027	m3/fs/src/main/java/jdk/m3/fs/MFiles.java	PRESENT	default <V> FileTask<V> andThen(Function<? super R, ? extends V> after) {
+P2-027	m3/fs/src/main/java/jdk/m3/fs/MFiles.java	PRESENT	plan.path == null || plan.path.getFileSystem() != FileSystems.getDefault()
+P2-027	m3/fs/src/main/java/jdk/m3/fs/MFiles.java	PRESENT	FileObject resolve(Path path) throws IOException {
+P2-027	m3/fs/src/main/java/jdk/m3/fs/MFiles.java	ABSENT	: session.manager.toFileObject(plan.path.toAbsolutePath().toFile());
+P2-027	m3/fs/src/main/java/jdk/m3/fs/MFiles.java	ABSENT	plan.path == null ? null : node -> fork(plan, node),
+P2-027	m3/fs/src/test/java/jdk/m3/fs/MFilesParallelTest.java	BLOB	014331f5d5c80d59165e9d1020b0f94ad1b7be3b
+P2-028	m3/mop/src/main/java/jdk/m3/mop/M3RecipeMemory.java	BLOB	ef7b319ba2ba91bbfcb5a9564a5d313bb4866b7c
+P2-028	m3/mop/src/main/java/jdk/m3/mop/M3RecipeMemory.java	PRESENT	"M3_RECIPE_PROOF_V1\t"
+P2-028	m3/mop/src/main/java/jdk/m3/mop/M3RecipeMemory.java	ABSENT	List<String> lessons(String recipe)
+P2-028	m3/mop/MOP_PILLARS.md	PRESENT	M3JDK21 `com.m3.mop.M3RecipeMemory` proof-receipt memory is unchanged and not involved.
+P2-029	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3File.java	BLOB	b5138d2c78b1d99b3f2306b00ae9bd9bbec9f1e0
+P2-029	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3File.java	PRESENT	public static M3File fromCaptured(URI uri, ByteBuffer captured, String expectedByteSha256,
+P2-029	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3File.java	PRESENT	known = M3FileSourceFacts.sourceSha256ImmutableView(source);
+P2-029	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3File.java	ABSENT	public String sourceSha256() { return M3FileSourceFacts.sourceSha256(source); }
+P2-030	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java	BLOB	cb867305b4f9be16afa4e2c7c6186fab47df4a88
+P2-030	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java	PRESENT	private static final class FrozenInputs implements SourceResolver {
+P2-030	m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java	ABSENT	Map<URI, M3File> frozen = Map.copyOf(files);
+P2-093	m3/ports/compiletime/pom.xml	PRESENT	<compileSourceRoot>${project.basedir}/../../vendor/m3/m3-mindex/compiler/src/main/java</compileSourceRoot>
+P2-093	m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexASTDocument.java	PRESENT	public record MIndexASTDocument(
+P2-093	m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexASTOccurrence.java	PRESENT	public record MIndexASTOccurrence(
+P2-093	m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexJavaAST.java	PRESENT	public final class MIndexJavaAST {
