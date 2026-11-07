@@ -42,6 +42,15 @@ jobs:
         run: |
           python3 m3/release/verify_test_wiring.py --root . --strict \
             --json-out m3/release/queue/current/core-test-wiring.json
+      - name: Record human/machine release branch identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m3/release/queue/current
+          mode=()
+          if [[ "${GITHUB_REF}" == refs/heads/release/* ]]; then mode=(--release); fi
+          python3 m3/release/audit_release_identity.py --root . \
+            --json-out m3/release/queue/current/release-identity.json "${mode[@]}"
       - name: Validate release claims and boundaries
         shell: bash
         run: |
