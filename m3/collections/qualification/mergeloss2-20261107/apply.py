@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Recipe MERGELOSS2_RESTORE v1: restore merge-loss audit phase-2 leaves 45 and 59 (m3/collections).
+"""Recipe MERGELOSS2_RESTORE v1: restore merge-loss audit phase-2 leaf 59 (m3/collections, Spring view).
 
 Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1 (anchored "sub" edits, LF payloads
 re-joined with the preimage's line ending). Extension: every edit names how many times its anchor occurs (default 1).
@@ -12,10 +12,12 @@ only; --check writes nothing and exits 1 when a run would change a file.
 
 Each rule cites the origin commit of the lost lines and the merge that dropped them, and the 3-way merge it was
 checked against: base = origin commit's parent blob, theirs = origin commit's blob (both put through
-m3/tooling/jdk-naming rewrite_text), ours = the pinned master blob. A conflicting hunk is resolved by ADD/SUB rows
-that take ours and apply only the origin commit's own substitution (named in the rule note).
+m3/tooling/jdk-naming rewrite_text), ours = the pinned master blob. A conflicting hunk would be resolved by ADD/SUB
+rows that take ours and apply only the origin commit's own substitution (named in the rule note). Leaf 45
+(M3ObjectResidency pressure sampling) left this recipe: draft #2653 (322af721aa7, residency fold leaf PS) restores
+the same lines, so its decision is RESTORED_SINCE #2653 (record-only PR).
 
-usage: python -I apply.py [--root DIR] [--check] [--leaf 45|59]
+usage: python -I apply.py [--root DIR] [--check] [--leaf 59]
 """
 from __future__ import annotations
 
@@ -32,7 +34,6 @@ BASE_COMMIT = "baafdafdc817217d9fb40e91ece2042269f0a871"
 EDITS_NAME = "EDITS.tsv"
 EDITS_COLUMNS = ("file", "before_sha256", "after_sha256", "leaf", "origin_commit", "dropping_merge", "threeway",
                  "rule")
-SRC = "m3/collections/src/main/java/jdk/m3/collections/"
 SPRING = "m3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/"
 
 
@@ -42,24 +43,6 @@ class Refused(Exception):
 
 # leaf, path, preimage blob, origin commit, dropping merge, 3-way record, rule note, edits [(old, new, count)]
 RULES = (
-    ("45", SRC + "M3ObjectResidency.java", "4791d26b0d5a47d867f3212f1af9243d7e411748",
-     "4e229782bf1405cdbfb7ca003dbacdb821564d8c", "7c6ddb6b7aae8b093bab9be863e3fb422f4dabf3",
-     "base=e7f690493e34 theirs=e8347cd7780d ours=4791d26b0d5a git-merge-file=CONFLICT:1 (admit, restructured on"
-     " master by census L066/victim progress P1); resolved SUB: ours with the origin's own substitution",
-     "RESTORE: heap snapshots are sampled only with PRESSURE_AWARE; the four budget call sites share targetBudget()"
-     " (origin receipt m3/qualification/m3-doop-pressure-sampling-20261030.json: snapshot_call_sites_before_after"
-     " [4, 1], fixed_budget_signalMemoryPressure 48 -> 0 bytes per call under -Xint)", [
-         ("targetBudget(HeapSnapshot.current())", "targetBudget()", 4),
-         ("    private long targetBudget(HeapSnapshot heap) {\n"
-          "        long target = maxResidentBytes;\n"
-          "        if ((flags & PRESSURE_AWARE) != 0) {\n",
-          "    //FLLDCIM: MRL - merge-loss leaf 45 (origin 4e229782bf14, dropped by retain merge 7c6ddb6b7aae): sample"
-          " the heap only for PRESSURE_AWARE budgets\n"
-          "    private long targetBudget() {\n"
-          "        long target = maxResidentBytes;\n"
-          "        if ((flags & PRESSURE_AWARE) != 0) {\n"
-          "            HeapSnapshot heap = HeapSnapshot.current();\n", 1),
-     ]),
     ("59", SPRING + "M3SingleValueMapView.java", "ab4ffb7245687d4f837d969bd719c7a5a142fc39",
      "554b4d715e0b2679f3219d2e8140e917f49b7825", "fc917d80ea3cb2a888d327240766311a03e14d42",
      "base=e397cb4ab042 theirs=bf28adb8154e ours=ab4ffb724568 git-merge-file=CLEAN (result blob 1c5e41760e14 ="

@@ -343,7 +343,7 @@ public final class M3ObjectResidency<T> {
         }
         long oldBytes = weights[source];
         long others = residentBytes - oldBytes;
-        long budget = targetBudget();
+        long budget = targetBudget(HeapSnapshot.current());
         if (estimatedBytes > budget || others > budget - estimatedBytes) return false;
 
         @SuppressWarnings("unchecked") T projection = (T) resident[source];
@@ -354,7 +354,7 @@ public final class M3ObjectResidency<T> {
             reset.reinitialize(projection, target);
             // The callback may reenter unrelated slots or change memory pressure.
             others = residentBytes - oldBytes;
-            budget = targetBudget();
+            budget = targetBudget(HeapSnapshot.current());
             if (estimatedBytes > budget || others > budget - estimatedBytes) {
                 throw new BudgetExceededException(estimatedBytes, others, budget);
             }
@@ -481,7 +481,7 @@ public final class M3ObjectResidency<T> {
         State before = stateAt(requestedSlot);
         setState(requestedSlot, before == State.SWAPPED ? State.RESTORING : State.CREATING);
         try {
-            long target = targetBudget();
+            long target = targetBudget(HeapSnapshot.current());
             while (wouldExceed(incomingBytes, target)) {
                 if ((flags & OBSERVE_ONLY) != 0) break;
                 int victim = leastRecentlyUsed(requestedSlot);
@@ -501,7 +501,7 @@ public final class M3ObjectResidency<T> {
     }
 
     private void enforceBudget(int requestedSlot, long incomingBytes) {
-        long target = targetBudget();
+        long target = targetBudget(HeapSnapshot.current());
         while (wouldExceed(incomingBytes, target)) {
             if ((flags & OBSERVE_ONLY) != 0) {
                 decision(requestedSlot, stateAtOrAbsent(requestedSlot), stateAtOrAbsent(requestedSlot),
@@ -519,11 +519,9 @@ public final class M3ObjectResidency<T> {
         }
     }
 
-    //FLLDCIM: MRL - merge-loss leaf 45 (origin 4e229782bf14, dropped by retain merge 7c6ddb6b7aae): sample the heap only for PRESSURE_AWARE budgets
-    private long targetBudget() {
+    private long targetBudget(HeapSnapshot heap) {
         long target = maxResidentBytes;
         if ((flags & PRESSURE_AWARE) != 0) {
-            HeapSnapshot heap = HeapSnapshot.current();
             long available = Math.max(0L, heap.estimatedHeadroomBytes() - reserveBytes);
             target = Math.min(target, available);
         }
