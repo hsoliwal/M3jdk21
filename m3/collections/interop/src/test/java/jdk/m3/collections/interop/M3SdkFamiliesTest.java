@@ -23,9 +23,10 @@ import static org.junit.jupiter.api.Assertions.*;
 /** Actual pinned donors and existing M3 owners are required; no test doubles are permitted here. */
 class M3SdkFamiliesTest {
     @Test void everyFactoryHasExactNamesAndAvailableM3Owners() throws Exception {
-        // The canonical SDK table now declares 25 actual first-party factories.
-        assertEquals(25, M3LibraryBindings.all().size());
-        assertEquals(25, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
+        //FLLDCIM: MRL - mergeloss case 01: restored from origin 58a72d0b2b8 (PR #1174), dropped by ancestry merge f4fbe3333946; recipe qualification/mergeloss-01-15-20261106
+        // The canonical SDK table now declares 30 actual first-party factories.
+        assertEquals(30, M3LibraryBindings.all().size());
+        assertEquals(30, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
     }
     @Test void apacheBackingOwnersAreM3RatherThanRenamedDonorStorage() throws Exception {
         var list = new M3ApacheListValuedMap<String, Integer>();

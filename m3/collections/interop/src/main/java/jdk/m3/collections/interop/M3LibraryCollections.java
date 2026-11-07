@@ -6,6 +6,7 @@ package jdk.m3.collections.interop;
 
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.SortedSetMultimap;
 import com.google.common.collect.Table;
@@ -24,13 +25,18 @@ import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.Set;
+import org.apache.commons.collections4.Bag;
+import org.apache.commons.collections4.MultiSet;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 import org.eclipse.collections.impl.map.mutable.MapAdapter;
+import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.sorted.mutable.SortedMapAdapter;
 import org.eclipse.collections.impl.set.mutable.SetAdapter;
 import org.eclipse.collections.impl.set.sorted.mutable.SortedSetAdapter;
@@ -155,6 +161,25 @@ public final class M3LibraryCollections {
     public static <K, V> org.apache.commons.collections4.SetValuedMap<K, V> apacheSetValuedMap() {
         return new M3ApacheSetValuedMap<>();
     }
+
+    //FLLDCIM: MRL - mergeloss case 01: restored from origin 58a72d0b2b8 (PR #1174), dropped by ancestry merge f4fbe3333946; recipe qualification/mergeloss-01-15-20261106
+    /** Guava count contract, with insertion-ordered distinct elements and primitive counts. */
+    public static <E> Multiset<E> guavaMultiset() { return new M3GuavaMultiset<>(); }
+
+    /** Eclipse ordered-map operations over an insertion-ordered M3 map. */
+    public static <K, V> MutableOrderedMap<K, V> eclipseOrderedMap() {
+        return OrderedMapAdapter.adapt(new M3LinkedHashMap<>());
+    }
+
+    /** Eclipse occurrence contract over the shared M3 primitive count owner. */
+    public static <E> MutableBag<E> eclipseBag() { return new M3EclipseBag<>(); }
+
+    /** Apache MultiSet old-count returns and per-element saturation over primitive counts. */
+    public static <E> MultiSet<E> apacheMultiSet() { return new M3ApacheMultiSet<>(); }
+
+    /** Legacy Apache Bag cardinality rules, including remove(element) removing all copies. */
+    @SuppressWarnings("deprecation")
+    public static <E> Bag<E> apacheBag() { return new M3ApacheBag<>(); }
 
     /**
      * Guava live filtered Collection over an existing M3 list owner; never a snapshot.
