@@ -325,6 +325,8 @@
         <module>runtime-integration/fix-root-ascii-case</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/pcollections HELD (gate gate-collections-pcollections: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>collections/pcollections</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk HELD (gate gate-ports-parallel-bulk: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>ports/parallel-bulk</module>
         <!-- m3-offreactor-held:end -->
       </modules>
     </profile>
