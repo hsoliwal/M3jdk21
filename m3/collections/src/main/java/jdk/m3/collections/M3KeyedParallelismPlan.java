@@ -183,7 +183,11 @@ public final class M3KeyedParallelismPlan<T, K> {
     private static <E> void put(BlockingQueue<E> queue, E value,
                                 AtomicReference<Throwable> laneFailure)
             throws InterruptedException {
-        if (queue.offer(value)) return;
+    //FLLDCIM: MRL - mergeloss2 leaf 17: fast-admission failure check restored from origin 3538a25a194 (PR #1522), dropped by retain merge 6d0e9f5461e6; recipe qualification/mergeloss2-filtered-views-20261107
+        if (queue.offer(value)) {
+            checkFailure(laneFailure.get());
+            return;
+        }
         do {
             checkFailure(laneFailure.get());
         } while (!queue.offer(value, 25, TimeUnit.MILLISECONDS));

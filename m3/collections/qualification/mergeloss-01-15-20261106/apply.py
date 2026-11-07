@@ -16,6 +16,10 @@ postimage (already applied, no-op); anything else is drift and the recipe refuse
 target must be absent or equal the postimage. Idempotent: a second run reports changed=0 and EDITS.tsv is a fixed
 point. --check writes nothing and exits 1 when a run would change a file. Every lost member's disposition
 (RESTORED, MAPPED, PRESENT, NEC, SUPERSEDED) is declared in HUNKS.tsv; DECISION.tsv records the case decisions.
+v1.1 (hand-off only; RULES and the edit logic are unchanged): a file this recipe wrote may be handed to a successor
+recipe in SUCCESSORS, pinned by this recipe's postimage sha256 and the successor's postimage sha256. When the target
+equals the successor's postimage it is reported FILE SUPERSEDED (no write, no refusal); its original EDITS.tsv row is
+kept as history and a SUPERSEDED_BY row names the successor owner.
 
 usage: python -I apply.py [--root DIR] [--check]
 """
@@ -28,7 +32,7 @@ import sys
 from pathlib import Path
 
 RECIPE = "apply.py"
-VERSION = "v1"
+VERSION = "v1.1"
 RECIPE_DIR = Path(__file__).resolve().parent
 BASE_COMMIT = "b28b7c938e2"
 EDITS_NAME = "EDITS.tsv"
@@ -244,6 +248,15 @@ RULES = (
 )
 
 
+# file, this recipe's postimage sha256, successor postimage sha256, successor recipe dir, successor commit/merge
+SUCCESSORS = (
+    ("m3/collections/interop/sdk-family-bindings.tsv",
+     "f12946941000d97a14f68b1f762b52ff03dc06427485c9c938009e8b7a6887f5",
+     "97654ada7e6d7e386f8e42927ccba0c97ae6b17f7071f61cd99cf08d2f3fbaad",
+     "m3/collections/interop/qualification/bindings-gating-20261107", "#2648 cbc58194a44 merged 33541216b2cd"),
+)
+
+
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -303,10 +316,16 @@ def run(root: Path, check: bool) -> int:
     for case, kind, rel, before, post, *_ in plan:
         firsts.setdefault(rel, (kind, before))
     rows, writes, changed = [], [], 0
+    handed = {rel: (before, after, owner, cite) for rel, before, after, owner, cite in SUCCESSORS}
     for rel, final in finals.items():
         kind, first = firsts[rel]
         target = root / rel
         on_disk = target.read_bytes() if target.exists() else None
+        if rel in handed and sha256(final) != handed[rel][0]:
+            raise Refused("hand-off pin of %s does not match this recipe's postimage" % rel)
+        if rel in handed and on_disk is not None and sha256(on_disk) == handed[rel][1]:
+            print("FILE SUPERSEDED %s by %s" % (rel, handed[rel][2]))
+            continue
         if kind == "CREATE":
             if on_disk not in (None, final):
                 raise Refused("CREATE target %s exists with other content (blob %s)" % (rel, blob_sha(on_disk)))
@@ -323,6 +342,10 @@ def run(root: Path, check: bool) -> int:
     for case, kind, rel, before, post, origin, merge, donors, note in plan:
         rows.append((rel, sha256(before) if before else "ABSENT", sha256(post), case, origin, merge, donors,
                      kind + " " + note))
+    for rel, before, after, owner, cite in SUCCESSORS:
+        rows.append((rel, before, after, "01", "-", "-", "successor=" + owner.rsplit("/", 1)[-1],
+                     "SUPERSEDED_BY %s (%s): successor owner of this file; this recipe's postimage is its pinned"
+                     " preimage, its postimage is accepted here without a write" % (owner, cite)))
     if not check:  # every preimage verified before the first write: a refusal leaves the tree untouched
         for target, data in writes:
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -332,8 +355,9 @@ def run(root: Path, check: bool) -> int:
     table_state = not edits_path.exists() or edits_path.read_bytes() != table.encode("utf-8")
     if table_state and not check:
         edits_path.write_bytes(table.encode("utf-8"))
-    print("MERGELOSS_01_15 recipe=%s %s base=%s rules=%d files=%d changed=%d edits=%s" % (  # rules = EDITS rows
-        RECIPE, VERSION, BASE_COMMIT, len(rows), len(finals), changed, "CHANGED" if table_state else "UNCHANGED"))
+    print("MERGELOSS_01_15 recipe=%s %s base=%s rules=%d files=%d changed=%d superseded_by=%d edits=%s" % (
+        RECIPE, VERSION, BASE_COMMIT, len(plan), len(finals), changed, len(SUCCESSORS),
+        "CHANGED" if table_state else "UNCHANGED"))
     return 1 if check and (changed or table_state) else 0
 
 

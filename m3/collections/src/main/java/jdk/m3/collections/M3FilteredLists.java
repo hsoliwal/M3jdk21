@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -409,19 +410,33 @@ public final class M3FilteredLists {
             @Override public int previousIndex() { live(); return logical - 1; }
 
             //FLLDCIM: MRL - census P2-043, crate m3jdk21-engine-pin-admission-20261021 (dataset m3jdk21-filtered-list-mutation-20261018, donor blob 25e243eabdbf): fail-fast probe before backing writes
+            //FLLDCIM: MRL - mergeloss2 leaf 43: reverse provider probe and empty insertion restored from origin d1b9aa9f35c (PR #1616), dropped by retain merge 92805fd23aed; recipe qualification/mergeloss2-filtered-views-20261107
             /** Validate the original cursor without changing its physical position.
              * Keep writes on the backing List: a writable list may expose an
              * unmodifiable/snapshot iterator. next() also checks an exhausted
              * fail-fast cursor; hasNext() alone need not detect invalidation.
+             * A bounded provider can refuse next() at its end before checking
+             * structural generation, so probe the reverse direction as well.
+             * Return true only when neither direction has an element.
              */
-            private void checkForComodification() {
+            private boolean checkForComodification() {
                 try {
                     try {
                         iterator.next();
                     } catch (NoSuchElementException exhausted) {
-                        return;
+                        try {
+                            iterator.previous();
+                        } catch (NoSuchElementException empty) {
+                            if (lastPhysical >= 0) {
+                                throw new ConcurrentModificationException("delivered element disappeared");
+                            }
+                            return true;
+                        }
+                        iterator.next();
+                        return false;
                     }
                     iterator.previous();
+                    return false;
                 } catch (RuntimeException | Error failure) {
                     state |= FAILED;
                     throw failure;
@@ -455,9 +470,23 @@ public final class M3FilteredLists {
             @Override public void add(E value) {
                 live();
                 requireAccepted(value);
-                checkForComodification();
+                boolean empty = checkForComodification();
                 int position = iterator.nextIndex();
-                backing.add(position, value);
+                if (empty) {
+                    // Empty bounded iterators may bypass generation checks in both
+                    // traversal directions. Let their own insertion validate and write.
+                    // Snapshot iterators can forbid writes on an editable backing list.
+                    try {
+                        iterator.add(value);
+                    } catch (UnsupportedOperationException unsupported) {
+                        backing.add(position, value);
+                    } catch (ConcurrentModificationException invalidated) {
+                        state |= FAILED;
+                        throw invalidated;
+                    }
+                } else {
+                    backing.add(position, value);
+                }
                 iterator = backing.listIterator(position + 1);
                 logical++;
                 lastPhysical = -1;
