@@ -6,3 +6,4 @@ lane 37	history	lane37	HELD	com.m3:history-audit-recipe:0.1.0-SNAPSHOT:pom	-	gat
 lane 37	migration	lane37	WIRED	com.m3:migration-recipes:0.1.0-SNAPSHOT	-	gate-migration	BUILD SUCCESS	-	-	-	-	Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
 lane 37	lexicon/hf-intake	lane37	WIRED	com.m3:m3-hf-lexicon-intake-recipe:0.1.0-SNAPSHOT	-	gate-lexicon-hf-intake	BUILD SUCCESS	-	-	-	-	n/a
 lane 37	ports/capability-runtime	lane37	WIRED	com.m3:m3-cpu-capability-runtime:0.1.0-SNAPSHOT	-	gate-ports-capability-runtime	BUILD SUCCESS	-	-	-	-	n/a
+lane 37	ports/precompute	lane37	WIRED	com.m3:m3-precompute:0.1.0-SNAPSHOT	-	gate-ports-precompute	BUILD SUCCESS	-	-	-	-	Tests run: 120, Failures: 0, Errors: 0, Skipped: 2

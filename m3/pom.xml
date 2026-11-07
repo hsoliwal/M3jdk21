@@ -50,6 +50,8 @@
     <module>lexicon/hf-intake</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/capability-runtime WIRED (gate gate-ports-capability-runtime, GATES.tsv) -->
     <module>ports/capability-runtime</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/precompute WIRED (gate gate-ports-precompute, GATES.tsv) -->
+    <module>ports/precompute</module>
   </modules>
 
   <profiles>
