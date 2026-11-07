@@ -65,6 +65,17 @@
             </configuration>
           </execution>
           <execution>
+            <id>word-break</id>
+            <phase>test</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>jdk.internal.m3.indexstring.MIndexWordBreakSmokeMain</mainClass>
+              <classpathScope>test</classpathScope>
+            </configuration>
+          </execution>
+          <execution>
             <id>character-flags-combine</id>
             <phase>test</phase>
             <goals>

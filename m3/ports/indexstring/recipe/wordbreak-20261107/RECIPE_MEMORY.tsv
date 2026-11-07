@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# RECIPE_MEMORY.tsv - append-only lesson memory of recipe wordbreak-20261107 (INDEXSTRING_RELOCATE_IX2): one row per lesson.
+date	recipe	version	lesson	evidence
+2026-11-07	relocate.py	v1	a new field named rows collided with the local int[] rows of ordered(); the frozen rows field is spellings	javac: variable rows might not have been initialized
+2026-11-07	relocate.py	v1	Javadoc rule sites are matched on the {@link ...} span alone; the paragraph prefix (<p>) differs from the first guess and a whole-line site refused as drift	REFUSE ... found 0x
+2026-11-07	gate.sh	v1	the donor's FrozenChars/FrozenBytes reach the 356-class MIndexString closure; the donor side compiles the module's own copies repackaged, so both sides read rows through the same FrozenChars	donor javac: FrozenBytes -> MIndexAddressedView
+2026-11-07	MIndexWordBreakSmokeMain	-	pineapplepenapple has two 3-segment splits; minimumSegments keeps the stable first (pine|applepen|apple), matching the donor	smoke first expected pineapple|pen|apple
