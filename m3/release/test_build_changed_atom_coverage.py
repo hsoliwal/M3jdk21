@@ -45,6 +45,11 @@ class ImporterTest(unittest.TestCase):
         self.assertTrue(self.build(True)["inventory_complete"])
         self.assertEqual(1, raw["measured_count"])
         self.assertEqual(19, raw["atoms"][0]["line_covered"])
+        self.assertEqual("JACOCO_XML", raw["format"])
+        self.assertEqual(("com/m3/Example", "run", "()Z"),
+                         (raw["atoms"][0]["jacoco_class"],
+                          raw["atoms"][0]["jacoco_method"],
+                          raw["atoms"][0]["jacoco_descriptor"]))
         self.assertEqual(64, len(raw["inventory_sha256"]))
         self.assertEqual(64, len(raw["atoms"][0]["source_sha256"]))
 
