@@ -70,6 +70,8 @@
     <module>collections/interop</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/signal-codegen WIRED (gate gate-collections-signal-codegen, GATES.tsv) -->
     <module>collections/signal-codegen</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/swing-viewport WIRED (gate gate-ports-swing-viewport, GATES.tsv) -->
+    <module>ports/swing-viewport</module>
   </modules>
 
   <profiles>
