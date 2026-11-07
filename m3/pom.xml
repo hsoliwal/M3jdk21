@@ -66,6 +66,8 @@
     <module>runtime-integration/regex-precompute</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/gc-interop WIRED (gate gate-collections-gc-interop, GATES.tsv) -->
     <module>collections/gc-interop</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/interop WIRED (gate gate-collections-interop, GATES.tsv) -->
+    <module>collections/interop</module>
   </modules>
 
   <profiles>

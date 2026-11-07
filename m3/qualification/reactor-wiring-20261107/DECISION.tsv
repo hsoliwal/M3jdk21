@@ -20,3 +20,4 @@ lane 37	runtime-integration/fix-root-ascii-case	lane37	HELD	com.m3.tooling:root-
 lane 37	runtime-integration/primitive-address-identity	lane37	WIRED	com.m3.proof:primitive-address-identity-receiver:1.0-SNAPSHOT:pom	-	gate-runtime-integration-primitive-address-identity	BUILD SUCCESS	-	-	-	-	n/a
 lane 37	runtime-integration/regex-precompute	lane37	WIRED	com.m3.proof:regex-precompute-receiver:1.0-SNAPSHOT:pom	-	gate-runtime-integration-regex-precompute	BUILD SUCCESS	-	-	-	-	n/a
 lane a4 (by request)	collections/gc-interop	a4	WIRED	com.m3:m3-gc-interop:0.1.0-SNAPSHOT:jar	-	gate-collections-gc-interop	BUILD SUCCESS	-	-	-	-	n/a
+lane a4 (by request)	collections/interop	a4	WIRED	com.m3:m3-collections-interop:0.1.0-SNAPSHOT	com.m3::m3-collections::0.1.0-SNAPSHOT 	gate-collections-interop	BUILD SUCCESS	-	-	-	-	Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
