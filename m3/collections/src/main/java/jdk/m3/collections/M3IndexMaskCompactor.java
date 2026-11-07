@@ -612,6 +612,50 @@ public final class M3IndexMaskCompactor {
     private static native long[] selectLongWindowNative(long[] rows, int rowOffset,
             byte[] states, int stateOffset, int length, int mask);
 
+    //FLLDCIM: MRL - union of the Synexia M3IndexMaskCompactor API (count, firstEqualBits) for the PrimitiveBig* absorption
+    /**
+     * Counts rows whose state has every {@code requiredMask} bit, under the Synexia name; the same contract as
+     * {@link #selectedCount(byte[], int, Backend)}.
+     */
+    public static int count(byte[] rowStates, int requiredMask, Backend backend) {
+        return selectedCount(rowStates, requiredMask, backend);
+    }
+
+    /**
+     * Finds the first equality-normalized primitive value in one bounded physical page range.
+     *
+     * <p>The result is an absolute index within {@code values}, or {@code -1} when absent. BOOLEAN uses byte storage
+     * with nonzero meaning true; integral carriers narrow as Java casts do; floating NaNs compare equal and
+     * positive/negative zero remain distinct. The input array is neither mutated nor retained and must not change
+     * during the call. JAVA performs the typed scan; NATIVE_REQUIRED needs the optional library and its
+     * {@code firstEqualBits0} symbol and never silently falls back.
+     *
+     * @throws NullPointerException when kind, values or backend is null
+     * @throws IllegalArgumentException when the array type does not match kind
+     * @throws IndexOutOfBoundsException when from/count do not describe a valid array range
+     * @throws UnsatisfiedLinkError when the requested native library or symbol is unavailable
+     */
+    public static int firstEqualBits(M3PrimitiveKind kind, Object values, int from, int count,
+                                     long bits, Backend backend) {
+        Objects.requireNonNull(kind, "kind");
+        Objects.requireNonNull(values, "values");
+        Objects.requireNonNull(backend, "backend");
+        kind.checkRange(values, from, count);
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+            }
+            return firstEqualBits0(kind.ordinal(), values, from, count, bits);
+        }
+        return kind.indexOfBits(values, from, from + count, bits);
+    }
+
+    /*
+     * JNI ABI kind IDs are the M3PrimitiveKind declaration order (identical to the Synexia PrimitiveKind order):
+     * BOOLEAN=0, BYTE=1, SHORT=2, CHAR=3, INT=4, LONG=5, FLOAT=6, DOUBLE=7.
+     */
+    private static native int firstEqualBits0(int kind, Object values, int from, int count, long bits);
+
     private static final class NativeLibrary {
         private static final boolean AVAILABLE;
 
