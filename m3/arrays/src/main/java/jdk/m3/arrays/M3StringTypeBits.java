@@ -2,11 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.arrays;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.indexstring.MIndexStringTypeBits}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}.
+ * Every member body throws {@link M3NotYetReceived}, except: census3 P3-007 (qualification/census3-gaps-20261107) received the atoms of requireKnown, has, hasAny, names and their private helpers from the same donor blob at develop 78cf2ad4c7e5.
  *
  * <p>Lineage: Synexia {@code m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStringTypeBits.java}
  * blob {@code 52545a951b49a049aa75dab2c6f66c5af2194477} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},
@@ -24,7 +25,7 @@ import java.util.List;
  *
  * <p>Not yet received:
  * <ul>
- *   <li>{@code constant NUMERIC (int)}</li>
+ *   <li>{@code member classify(MIndexString, int, byte)} and its private predicates isWord, isIdentifier, isPunctuation, isSymbol (HOLD_DEP: no M3 owner for MIndexString, IndexCharacterFlags, MIndexStringMetadata; census3 P3-007)</li>
  * </ul>
  */
 public final class M3StringTypeBits {
@@ -54,6 +55,9 @@ public final class M3StringTypeBits {
 
     public static final int OTHER = 1 << 12;
 
+    //FLLDCIM: MRL - census3 P3-007, donor MIndexStringTypeBits blob 52545a951b49: constant received
+    public static final int NUMERIC = INTEGER | DECIMAL;
+
     public static final int KNOWN_MASK = (1 << 13) - 1;
 
     /** DOOP slot bound: number of live slots addressed by offset in every lane. */
@@ -66,15 +70,44 @@ public final class M3StringTypeBits {
         throw new M3NotYetReceived("M3StringTypeBits#<init>/0");
     }
 
+    //FLLDCIM: MRL - census3 P3-007, donor MIndexStringTypeBits blob 52545a951b49: atoms received
     public static boolean has(int bits, int required) {
-        throw new M3NotYetReceived("M3StringTypeBits#has/2");
+        requireKnown(required);
+        return (bits & required) == required;
     }
 
     public static boolean hasAny(int bits, int mask) {
-        throw new M3NotYetReceived("M3StringTypeBits#hasAny/2");
+        requireKnown(mask);
+        return (bits & mask) != 0;
     }
 
     public static List<String> names(int bits) {
-        throw new M3NotYetReceived("M3StringTypeBits#names/1");
+        requireKnown(bits);
+        ArrayList<String> names = new ArrayList<>();
+        add(names, bits, EMPTY, "EMPTY");
+        add(names, bits, BLANK, "BLANK");
+        add(names, bits, WORD, "WORD");
+        add(names, bits, IDENTIFIER, "IDENTIFIER");
+        add(names, bits, INTEGER, "INTEGER");
+        add(names, bits, DECIMAL, "DECIMAL");
+        add(names, bits, BOOLEAN, "BOOLEAN");
+        add(names, bits, PUNCTUATION, "PUNCTUATION");
+        add(names, bits, SYMBOL, "SYMBOL");
+        add(names, bits, ASCII, "ASCII");
+        add(names, bits, COMPOSITE, "COMPOSITE");
+        add(names, bits, MASKED, "MASKED");
+        add(names, bits, OTHER, "OTHER");
+        return List.copyOf(names);
+    }
+
+    //FLLDCIM: MRL - census3 P3-007, donor MIndexStringTypeBits blob 52545a951b49: restored private helpers
+    private static void requireKnown(int bits) {
+        if ((bits & ~KNOWN_MASK) != 0) {
+            throw new IllegalArgumentException("unknown M3String type bits: " + bits);
+        }
+    }
+
+    private static void add(List<String> out, int bits, int mask, String name) {
+        if ((bits & mask) != 0) out.add(name);
     }
 }
