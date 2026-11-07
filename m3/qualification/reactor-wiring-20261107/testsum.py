@@ -44,7 +44,11 @@ def parse(path: str):
                 continue
         g = GOAL.match(line)
         if g:
-            target = by_artifact.get(g.group(1), cur)
+            # "for project G:A:packaging:version" names the project exactly; artifactIds alone can collide
+            named = re.search(r"for project ([^:\s]+:[^:\s]+)", g.group(2) or "")
+            by_ga = {m["ga"]: m for m in mods}
+            target = by_ga.get(named.group(1)) if named else None
+            target = target or by_artifact.get(g.group(1), cur)
             if target is not None:
                 target["goal"] = (g.group(2) or "goal failure").replace("\t", " ")[:200]
             continue
