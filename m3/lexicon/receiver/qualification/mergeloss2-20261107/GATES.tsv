@@ -1,0 +1,12 @@
+gate	command	before	after	verdict
+recipe_apply	python -I apply.py (from master), apply.py again, apply.py --check	-	changed=1, then changed=0 edits=UNCHANGED; --check rc=0	PASS (idempotent, EDITS.tsv fixed point)
+recipe_drift	append one line to M3WindowBoundarySummary.java, python -I apply.py	-	REFUSED drifted preimage (on disk 51587b7316fe, pinned 6f4c00a2bb3a) rc=2, no file written	PASS
+threeway_102	git merge-file --diff3 ours=6f4c00a2bb3a base=fdce0b7b067f theirs=483d57a722c1 (base/theirs via jdk_naming.rewrite_text)	-	CLEAN, result blob 6f77c5d28721 == postimage without the //FLLDCIM line == retained-variants/pr2390 copy	PASS
+module_build	mvn -B -ntp -f m3/lexicon/receiver/pom.xml verify (real pom: --release 21, -Xlint:all -Werror -proc:none)	BUILD SUCCESS, 0 compiler diagnostics	BUILD SUCCESS, 0 compiler diagnostics	PASS
+module_tests	surefire + the verify-phase exec proofs	Tests run 5, Failures 0; M3LexiconReceiverProof PASS checks=806797; BOUNDARY checks=203 failures=0; COMPOSITION_PASS checks=2734316	identical	PASS
+class_files	sha256 of target/classes + target/test-classes (55 class files)	-	54 byte-identical; M3WindowBoundarySummary differs	PASS
+javap_102	javap -c -p -l -s -constants, per member, constant-pool indices, offsets and line tables normalised	-	14 members SAME; DIFF boundary(M3SeparatorKind,int,int,int): body is invokestatic M3CaseBoundaryPrecompute.boundary	PASS (restored member only)
+parity_java	java -ea [-Xint] jdk.m3.lexicon.M3CaseLiangParityProof (every kind x before x at x after in -1..30 plus the invalid-type fallback, against an independent scalar oracle)	M3_CASE_LIANG_PARITY_PASS checks=1698185 (JIT and -Xint)	M3_CASE_LIANG_PARITY_PASS checks=1698185 (JIT and -Xint)	PASS
+parity_jni	WSL Ubuntu 24.04: gcc 13.3 -std=c17 -O2 -fPIC -shared -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror src/test/native/M3CaseLiangJniOracle.c; java -ea -Xcheck:jni [-Xint] M3CaseLiangJniParityProof	gcc 0 diagnostics; M3_CASE_LIANG_JNI_PASS checks=133436, 0 JNI warnings (JIT and -Xint)	same	PASS
+jdk_naming	python -I m3/tooling/jdk-naming/jdk_naming.py plan --only <touched files>	-	moves=0 rewrites=0 refusals=0 absent=0 shadows=0	PASS (fixed point)
+pre_existing	m3/lexicon/receiver/verify-case-liang-20261103.sh	its 6 sha256 source pins predate the JDK naming rename and already mismatch master (e.g. M3CaseBoundaryPrecompute pin 330de9d8, master 68a6e2f2)	unchanged; its compile/run steps were executed above without the pins	NOT CAUSED HERE
