@@ -92,6 +92,7 @@ public final class M3JniArrayReferences {
         }
     }
 
+    //FLLDCIM: MRL - the two source borrows were two monitor transitions and an observer under the table monitor saw one edge of the pair; the pair is now one synchronized(table) transition, as beginBatch/endBatch already do
     /**
      * Retain each source once for the entire lifetime of a zero-copy
      * native concatenation. An aliased pair intentionally counts twice.
@@ -100,34 +101,41 @@ public final class M3JniArrayReferences {
     public static void retainSources(M3ScopedLeaseTable table, long leftId,
                                      long rightId) {
         Objects.requireNonNull(table, "table");
-        table.beginJniArrayAccess(leftId);
-        try {
-            table.beginJniArrayAccess(rightId);
-        } catch (RuntimeException | Error failure) {
+        // Reuse the canonical table monitor across both registered source edges.
+        synchronized (table) {
+            table.beginJniArrayAccess(leftId);
             try {
-                table.endJniArrayAccess(leftId);
-            } catch (RuntimeException | Error cleanup) {
-                if (failure != cleanup) failure.addSuppressed(cleanup);
+                table.beginJniArrayAccess(rightId);
+            } catch (RuntimeException | Error failure) {
+                try {
+                    table.endJniArrayAccess(leftId);
+                } catch (RuntimeException | Error cleanup) {
+                    if (failure != cleanup) failure.addSuppressed(cleanup);
+                }
+                throw failure;
             }
-            throw failure;
         }
     }
 
+    //FLLDCIM: MRL - releaseSources: the reverse release pair under the same table monitor; the first failure stays primary, the second is suppressed
     /** Release both retained source edges, including aliased occurrences. */
     public static void releaseSources(M3ScopedLeaseTable table, long leftId,
                                       long rightId) {
         Objects.requireNonNull(table, "table");
-        try {
-            table.endJniArrayAccess(rightId);
-        } catch (RuntimeException | Error first) {
+        // Keep reverse releases and failure suppression within one owner transition.
+        synchronized (table) {
             try {
-                table.endJniArrayAccess(leftId);
-            } catch (RuntimeException | Error second) {
-                if (first != second) first.addSuppressed(second);
+                table.endJniArrayAccess(rightId);
+            } catch (RuntimeException | Error first) {
+                try {
+                    table.endJniArrayAccess(leftId);
+                } catch (RuntimeException | Error second) {
+                    if (first != second) first.addSuppressed(second);
+                }
+                throw first;
             }
-            throw first;
+            table.endJniArrayAccess(leftId);
         }
-        table.endJniArrayAccess(leftId);
     }
 
     /**

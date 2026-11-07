@@ -30,6 +30,7 @@ public final class M3NativeLeaseScan {
         return NATIVE_AVAILABLE;
     }
 
+    //FLLDCIM: MRL - a loadable m3_scoped_leases without the full-scan export threw UnsatisfiedLinkError out of collect (collectWindow already fell back); the native call now falls back to collectJava, same inputs, same stable prefix
     public static int collect(long[] ids, int[] leases, int[] pins, byte[] states,
                               int count, long[] output, boolean preferNative) {
         Objects.requireNonNull(ids, "ids");
@@ -51,7 +52,13 @@ public final class M3NativeLeaseScan {
             }
         }
         if (preferNative && NATIVE_AVAILABLE) {
-            return collectNative(ids, leases, pins, states, count, output);
+            try {
+                return collectNative(ids, leases, pins, states, count, output);
+            } catch (UnsatisfiedLinkError oldLibraryWithoutFullScanSymbol) {
+                // Optional native libraries may not export the full-scan JNI entry.
+                // Preserve Java parity just as collectWindow does for old window peers.
+                return collectJava(ids, leases, pins, states, count, output);
+            }
         }
         return collectJava(ids, leases, pins, states, count, output);
     }
