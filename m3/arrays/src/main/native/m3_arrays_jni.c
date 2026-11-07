@@ -38,6 +38,10 @@ Java_jdk_m3_arrays_M3ArrayNative_nativeCompareUtf16(
     return 0;
   }
 
+  //FLLDCIM: MRL - mergeloss leaf 27 (origin 259703f9fea, dropped by landing merge fc917d80ea3c)
+  /* Validation still precedes the zero-count fast return for direct native callers. */
+  if (count == 0) return 0;
+
   /* Validate ranges first; JNI reference identity is not pointer-handle equality. */
   if (left_start == right_start
       && (*env)->IsSameObject(env, left_array, right_array) == JNI_TRUE) {
