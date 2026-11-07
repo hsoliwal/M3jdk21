@@ -134,3 +134,34 @@ Tool fixes in this directory: `gate.sh` records the log path it actually wrote (
 worktree prefix from the first-error file; `reconfirm.sh` adds a DECISION.tsv row for a HELD module from CPU evidence
 without a Maven run. After its gate the ast pom received one comment-only edit (`M3JDK21` -> `M3JDK 21`, jdk_naming
 `PROSE_PRODUCT_VERSION`); `jdk_naming.py plan --only <touched files>` ends at `moves=0 rewrites=0 refusals=0`.
+
+## Vendor stage 0 2026-11-07 (reactor-unhold-20261107b; branch `m3/reactor-unhold-20261107b`)
+
+The two `-m3-source-1` HELD modules depended on artifacts that exist in this repository only as vendored sources
+(`m3/vendor/third_party/`; standalone law: no Central artifact, no sibling-repo jar). `stage0.sh` installs them from
+those sources into the head local repo with ONE Maven run each and records a `stage0-<slug>` GATES.tsv row; then the
+usual `unhold.sh` + `gate.sh` pair gated the module. Base: master `a4c85e8b397` (#2783). No module source touched.
+
+| module | stage 0 | gate | own tests |
+|---|---|---|---|
+| ports/compiletime | `stage0-asm-9.6`: `-f m3/vendor/third_party/pom.xml -pl asm-9.6,asm-tree,asm-analysis,asm-util install -DskipTests`, 13 s, `org.ow2.asm:asm{,-tree,-analysis,-util}:9.6-m3-source-1` installed | WIRED (gate-ports-compiletime, 27 s) | 30/0/0/0 |
+| collections/pcollections (a4's module; its HELD row was a4's gate) | `stage0-pcollections`: `-f m3/vendor/third_party/pcollections/pom.xml install -DskipTests`, 9 s, `org.pcollections:pcollections:5.0.0-m3-source-1` installed. That pom is NOT a `<module>` of the vendor aggregator although the aggregator README says "Build all" installs every vendored artifact (debt, vendor lane) | WIRED (gate-collections-pcollections, 89 s) | 4/0/0/0 |
+
+Full-reactor runs (`mvn -B -ntp -T1 -fae -f m3/pom.xml verify -Dmaven.test.failure.ignore=true`), compared with #2783's
+`FULL_UNHOLD_FAILING.tsv` (its `full-verify-unhold` run on master `7b155a401e8` + that branch):
+
+| run | result |
+|---|---|
+| full-verify-vendorhold (run 1) | 3677 tests, 2 failures, 2 errors, 162 skipped; failing set = #2783's + ONE row: `history-audit-recipe` exec `read-only-history-recipe` refused (`AUDIT_REFUSED: output must not already exist`): `m3/history/pom.xml` wrote the audit to the fixed name `${java.io.tmpdir}/m3-history-audit`, and the shared Maven tmpdir (`S:/m3-scratch/eb-conv/reactor/tmp`) still held #2783's output. Environment-order defect of the module, not of this branch; kept as evidence (`FULL_VENDORHOLD_*.tsv`) |
+| regate-history-verify | after the recorded fix (`m3.output` = `${java.io.tmpdir}/m3-history-audit-${maven.build.timestamp}`, format `yyyyMMdd-HHmmss-SSS`, one directory per build session): BUILD SUCCESS, 290 s (`regate.sh history lane37 verify`) |
+| full-verify-vendorhold2 (run 2) | 3677 tests, 2 failures, 2 errors, 162 skipped; `FULL_VENDORHOLD2_FAILING.tsv` byte-identical to `FULL_UNHOLD_FAILING.tsv`; per-module diff of `FULL_VENDORHOLD2_TESTS.tsv` against `FULL_UNHOLD_TESTS.tsv` = only the two added SUCCESS rows (m3-compiletime-precompute 30, m3-pcollections 4) |
+
+Tools added here: `stage0.sh` (vendor install + GATES row; `f:<pom>` for a vendor pom the aggregator does not list),
+`fullrun.sh` (one GATES row + `<TAG>_TESTS.tsv`/`<TAG>_FAILING.tsv` from an existing full-run log through `testsum.py`;
+wall time from the log's START/END stamps), `regate.sh` (one Maven run for an already-wired module after a recorded
+fix; `REGATED_GREEN`/`REGATED_RED` DECISION.tsv row). Standing prerequisite the default reactor already had and this
+section makes explicit: the vendored artifacts a module pins (`junit-jupiter 5.10.2-m3-source-1`, `slf4j-api
+2.0.12-m3-source-1`, now `asm 9.6-m3-source-1` and `pcollections 5.0.0-m3-source-1`) must be installed once per local
+repo from `m3/vendor/third_party` (`mvn -B -ntp -f m3/vendor/third_party/pom.xml install`, plus the pcollections pom
+until the aggregator lists it); aggregating the ~110 vendor modules into every reactor run was not done here.
+Remaining in `m3-offreactor-held`: `runtime-integration/fix`, `runtime-integration/fix-root-ascii-case` (lane d7).

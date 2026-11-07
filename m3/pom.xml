@@ -80,6 +80,10 @@
     <module>ast</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk WIRED (gate gate-ports-parallel-bulk, GATES.tsv) -->
     <module>ports/parallel-bulk</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/compiletime WIRED (gate gate-ports-compiletime, GATES.tsv) -->
+    <module>ports/compiletime</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/pcollections WIRED (gate gate-collections-pcollections, GATES.tsv) -->
+    <module>collections/pcollections</module>
   </modules>
 
   <profiles>
@@ -319,10 +323,6 @@
       <!-- //FLLDCIM: MRL - reactor-wiring-20261107: poms outside the default reactor whose wiring gate was RED (first error in DECISION.tsv); one flag away: -Pm3-offreactor-held -->
       <id>m3-offreactor-held</id>
       <modules>
-        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/compiletime HELD (gate gate-ports-compiletime: BUILD FAILURE; first error in DECISION.tsv) -->
-        <module>ports/compiletime</module>
-        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/pcollections HELD (gate gate-collections-pcollections: BUILD FAILURE; first error in DECISION.tsv) -->
-        <module>collections/pcollections</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/fix HELD (gate gate-runtime-integration-fix: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>runtime-integration/fix</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/fix-root-ascii-case HELD (gate gate-runtime-integration-fix-root-ascii-case: BUILD FAILURE; first error in DECISION.tsv) -->
