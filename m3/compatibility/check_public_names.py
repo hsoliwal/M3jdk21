@@ -53,7 +53,7 @@ JDK_PRODUCT_SOURCE = re.compile(
 DONOR_REFERENCE = re.compile(
     r"(?<![A-Za-z0-9_$.])(?:com\.synexia|com\.m3|com\.google\.common|"
     r"org\.eclipse\.collections|org\.apache\.commons\.collections4|"
-    r"org\.springframework)(?:\.[A-Za-z_$][\w$]*)+"
+    r"org\.springframework|jdk\.internal\.m3\.indexstring)(?:\.[A-Za-z_$][\w$]*)+"
 )
 
 
