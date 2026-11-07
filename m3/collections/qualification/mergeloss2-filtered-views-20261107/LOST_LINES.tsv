@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# The 508 lost lines of the scope rows (ATOM_VERDICTS.tsv, normalised), re-tested on the base 0b97282f6d1d (now), on master 33541216b2cd and on its state before #2641 (b8fb8956aaac^1); side_blob = the PR-side blob that carried the line.
+# The 508 lost lines of the scope rows (ATOM_VERDICTS.tsv, normalised), re-tested on the base, master c33045ec7c3 (now), on master 33541216b2cd and on its state before #2641 (b8fb8956aaac^1); side_blob = the PR-side blob that carried the line.
 n	merge	file	side_blob	line	enclosing	now	master_33541216b2cd	before_2641	text
 1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	978	requestedEntry	ABSENT	ABSENT	ABSENT	private Entry<K, V> requestedEntry(M3TreeMap<K, V> owner, int slot) {
 1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	980	requestedEntry	ABSENT	ABSENT	ABSENT	return slot < 0 ? null : new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
@@ -360,8 +360,8 @@ n	merge	file	side_blob	line	enclosing	now	master_33541216b2cd	before_2641	text
 17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	58	m3_select_range	ABSENT	ABSENT	ABSENT	return m3_verify_empty(env, states, 0, n, required_mask) ? result : NULL;
 17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	357	-	ABSENT	ABSENT	ABSENT	if (kept == 0) {
 17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	358	-	ABSENT	ABSENT	ABSENT	return m3_verify_empty(env, states, state_offset, length, mask) ? result : NULL;
-19	082b54fa4ab7	M3LongIndexPathMasks.java	4031e69e1e8e	37	select	ABSENT	ABSENT	ABSENT	return M3IndexPathMasks.selectLongJava(rows, physicalOffsets, statePlanes,
-19	082b54fa4ab7	M3LongIndexPathMasks.java	4031e69e1e8e	39	select	ABSENT	ABSENT	ABSENT	} catch (ConcurrentModificationException changed) {
+19	082b54fa4ab7	M3LongIndexPathMasks.java	4031e69e1e8e	37	select	EXACT	ABSENT	ABSENT	return M3IndexPathMasks.selectLongJava(rows, physicalOffsets, statePlanes,
+19	082b54fa4ab7	M3LongIndexPathMasks.java	4031e69e1e8e	39	select	EXACT	ABSENT	ABSENT	} catch (ConcurrentModificationException changed) {
 19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	309	anyStageImpossible	ABSENT	ABSENT	ABSENT	private static boolean anyStageImpossible(int[] required, int[] forbidden) {
 19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	311	anyStageImpossible	ABSENT	ABSENT	ABSENT	if ((required[stage] & forbidden[stage]) != 0) return true;
 19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	313	anyStageImpossible	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	return false;
