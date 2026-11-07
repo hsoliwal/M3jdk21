@@ -58,6 +58,8 @@
     <module>ports/parallel</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/vcpu WIRED (gate gate-ports-vcpu, GATES.tsv) -->
     <module>ports/vcpu</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/regex-cursor WIRED (gate gate-ports-regex-cursor, GATES.tsv) -->
+    <module>ports/regex-cursor</module>
   </modules>
 
   <profiles>
