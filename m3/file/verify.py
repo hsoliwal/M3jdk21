@@ -228,9 +228,18 @@ def main():
         # recipe durable-extent-store-20261107: the extent-store JUnit classes run in the surefire test phase.
         maven_junit_sources = {'M3FileDeltaTest', 'M3ChunkDeltaGeneratorContractTest', 'M3ContentExtentTest',
                                'M3DurableExtentStoreTest', 'M3DurableExtentStoreOracleTest'}
+        # windows-green-20261107: JUnit classes and the main() contracts their wrappers call run in the surefire phase
+        # (M3FileRetainedContractsTest -> M3FileEncodedEditsContract + M3FileTextCoordinatesContract; M3GrammarTest ->
+        # M3GrammarContract); per-stem evidence in qualification/windows-green-20261107/INVENTORY.tsv.
+        maven_junit_sources |= {'M3FileCensus3Test', 'M3FileRetainedContractsTest', 'M3FileScopeTest', 'M3GrammarTest',
+                                'M3FileEncodedEditsContract', 'M3FileTextCoordinatesContract', 'M3GrammarContract',
+                                'M3PageableTreeDonorDifferentialTest'}
+        # Donor fixtures (qualification/pageable-tree-donor-verify-20261107): test-tree sources without an entrypoint,
+        # compiled by surefire's testCompile for the differential test; never module contracts.
+        fixture_sources = {path.stem for path in test_sources if path.parent.name == 'donor'}
         all_entrypoints = (set(contracts) | set(image_delta_contracts)
                            | set(host_compiler_contracts) | set(bounded_probe_contracts)
-                           | maven_junit_sources)
+                           | maven_junit_sources | fixture_sources)
         if ({path.stem for path in test_sources} != all_entrypoints
                 or len(test_sources) != len(all_entrypoints)):
             raise RuntimeError('module contract inventory changed; review each executable contract')
@@ -253,12 +262,13 @@ def main():
                     '"-Xmx48m"')):
             raise RuntimeError('Maven/JUnit chunk-delta proof changed; review its execution gate')
         module_contract_sources = [path for path in test_sources
-                                   if path.stem not in maven_junit_sources]
+                                   if path.stem not in maven_junit_sources and path.stem not in fixture_sources]
         receipt['contract_inventory'] = {
             'source_count': len(test_sources),
             'host_and_image': sorted(set(contracts) | set(image_delta_contracts)),
             'host_javac_only': sorted(host_compiler_contracts),
             'bounded_probe_host_and_image': sorted(bounded_probe_contracts),
+            'fixtures_no_entrypoint': sorted(fixture_sources),
             'maven_junit_separate_gate': sorted(maven_junit_sources),
         }
         write_receipt()

@@ -41,15 +41,16 @@ public final class M3FileDeltaCli {
         var oldState = M3NioFileDelta.snapshot(read(before), beforeContext);
         var newState = M3NioFileDelta.snapshot(read(after), afterContext);
         var result = M3NioFileDelta.compare(oldState, newState);
-        output.println("M3FILEDELTA_RECEIPT_V1");
-        output.println("BEFORE\t" + result.previousRoot());
-        output.println("AFTER\t" + result.currentRoot());
-        output.println("CONTEXT_CHANGED\t" + result.contextChanged());
-        output.println("IDENTICAL_EVIDENCE\t" + result.sameEvidence());
+        //FLLDCIM: MRL - windows-green-20261107: receipt lines end with LF on every platform (println emits CRLF on Windows; M3FileDeltaSelfTest asserts the LF receipt header), like every other jdk.m3.file writer
+        output.print("M3FILEDELTA_RECEIPT_V1\n");
+        output.print("BEFORE\t" + result.previousRoot() + "\n");
+        output.print("AFTER\t" + result.currentRoot() + "\n");
+        output.print("CONTEXT_CHANGED\t" + result.contextChanged() + "\n");
+        output.print("IDENTICAL_EVIDENCE\t" + result.sameEvidence() + "\n");
         for (var delta : result.changes()) {
-            output.println(delta.kind() + "\t" + delta.path() + "\t" + delta.change()
+            output.print(delta.kind() + "\t" + delta.path() + "\t" + delta.change()
                     + "\t" + delta.abi() + "\t" + nullField(delta.previousSha256())
-                    + "\t" + nullField(delta.currentSha256()));
+                    + "\t" + nullField(delta.currentSha256()) + "\n");
         }
     }
 
