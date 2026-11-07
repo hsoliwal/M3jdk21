@@ -17,4 +17,13 @@ design: its results are this recipe's pre-images. No native code, pom or workflo
 ## Gates
 
 `GATES.tsv`; `oldlib-gate.sh` (Linux) runs master's library build (blob `97f1b4387f2c`, 7 exports) with the new Java;
-the #2693 `native-gate.sh` is re-run unchanged.
+the #2693 `native-gate.sh` is re-run unchanged (its STALE row is gone: `M3RankBatchIntoContract` native-required passes).
+
+With master's 7-export library opted in, the `-Pm3-collections-native` lane moves from 12 errors to 7 errors + 2
+failures: the three guarded callers' tests (`M3LongLowerBoundWindowTest`, `M3LongRankUpperCountSweepTest`,
+`M3LongRankIntersectionTest`) pass; `M3RankBatchIntoTest` and `M3RankIntervalBatchTest` pass every owner-API check
+and fail only their final reflective raw-export probe. The 7 remaining errors are contracts that require their own
+export whenever a library is loaded (`differenceValues0`, `distinctDifferencePairCount0`, `distinctTripletSumCount0`,
+`intersectionWindowCount0`, `unionValues0`, `selectMergedInto0`, `pairSumIndicesInto0`); their owners already fall back
+(the digest on the master library equals Java with no `UnsatisfiedLinkError`), so those are test-mode assertions,
+outside the three exports of this follow-up.
