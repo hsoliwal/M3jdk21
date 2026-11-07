@@ -139,7 +139,7 @@ def safe_artifact(base: Path, relative: str) -> Path:
     return current
 
 
-def validate_coverage_receipt(root: Path, entry: dict) -> str:
+def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> str:
     """Validate numeric/source integrity of a changed-atom coverage receipt.
 
     This does not prove inventory completeness or the execution provenance:
@@ -164,6 +164,13 @@ def validate_coverage_receipt(root: Path, entry: dict) -> str:
              if isinstance(item, dict)}
     if not isinstance(artifact, str) or artifact not in paths:
         raise ValueError("coverage must name its own hash-verified raw report artifact")
+    inventory_path, inventory_sha = (coverage.get("inventory_artifact"),
+                                     coverage.get("inventory_sha256"))
+    if (not isinstance(inventory_path, str) or inventory_path not in paths
+            or inventory_path == artifact or not isinstance(inventory_sha, str)
+            or not SHA256.fullmatch(inventory_sha)
+            or sha256(safe_artifact(evidence_dir, inventory_path)) != inventory_sha):
+        raise ValueError("coverage inventory artifact is missing or not hash-verified")
     atoms = coverage.get("atoms")
     if not isinstance(atoms, list) or not atoms:
         raise ValueError("a nonempty measured atom inventory is required")
@@ -515,7 +522,7 @@ def validate(root: Path, release_mode: bool = False,
                         or not canonical["recipe_id"].strip()):
                     raise ValueError("exact recipe repository, revision and identity missing")
             if ident == COVERAGE_GATE:
-                validate_coverage_receipt(root, entry)
+                validate_coverage_receipt(root, entry, manifest_path.parent)
             artifacts = entry.get("artifacts")
             if not isinstance(artifacts, list) or not artifacts:
                 raise ValueError("raw execution artifacts missing")
