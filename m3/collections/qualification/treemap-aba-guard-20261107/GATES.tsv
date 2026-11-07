@@ -15,3 +15,4 @@ mutants	python -I mutants.py ... (shapes, P2-098 self test, differential, repro 
 jdk_naming	python -I m3/tooling/jdk-naming/jdk_naming.py plan --root . --only <path> for this directory, the 3 owners, the 2 tests and the edited oracle	PASS	moves=0 rewrites=0 refusals=0 absent=0 shadows=0 for each
 protected_owners	census2small PROTECTED_PR_FILES.tsv (63's absorb PR files) + file lists of 63's later absorb/naming PRs #2628 #2631 #2632 #2633 #2642 #2659	PASS	0 hits for M3TreeMap, M3TreeSet, M3SlotMap, M3OrderedSlotMap, M3FilteredViews, M3MutableFilteredViews, the new tests or the two qualification directories
 scope	git diff --name-only <base> | grep -v '^m3/collections/'	PASS	empty
+rebase_resync	git rebase origin/master (2ec96ee32ff: #2671 jdk-naming RECIPE_MEMORY row only) + apply.py --check + sites.py --check	PASS	git diff 05789961c767..2ec96ee32ff -- m3/collections m3/arrays is empty, so the gated build inputs are unchanged; recipe changed=0; guards 18/18
