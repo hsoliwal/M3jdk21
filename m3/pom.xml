@@ -319,8 +319,6 @@
         <module>ports/swing-viewport</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/jfx-viewport HELD (gate gate-ports-jfx-viewport: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>ports/jfx-viewport</module>
-        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk HELD (gate gate-ports-parallel-bulk: BUILD FAILURE; first error in DECISION.tsv) -->
-        <module>ports/parallel-bulk</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/fix HELD (gate gate-runtime-integration-fix: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>runtime-integration/fix</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/fix-root-ascii-case HELD (gate gate-runtime-integration-fix-root-ascii-case: BUILD FAILURE; first error in DECISION.tsv) -->

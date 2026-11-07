@@ -141,8 +141,8 @@ def main(argv=None) -> int:
     p.add_argument("--note")
     a = p.parse_args(argv)
     if a.mode in ("edit", "record"):
-        if not (a.file and a.anchor is not None and (a.text is not None or a.text_file)):
-            p.error("edit/record need --file, --anchor and --text or --text-file")
+        if not (a.file and (a.anchor is not None or a.op == "delete-block") and (a.text is not None or a.text_file)):
+            p.error("edit/record need --file, --anchor (insert-before) and --text or --text-file")
         return do_edit(a, a.mode == "record")
     return do_apply(a, a.mode == "verify")
 
