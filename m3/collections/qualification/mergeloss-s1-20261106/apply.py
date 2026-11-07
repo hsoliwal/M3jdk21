@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Recipe MERGELOSS_RESTORE v1 (S1): restore the M3IndexPathMasks long-row members and JNI entry dropped by merge e913ab890566.
+"""Recipe MERGELOSS_RESTORE v2 (S1): restore the M3IndexPathMasks long-row members and JNI entry dropped by merge e913ab890566.
 
 Derived from m3/collections/qualification/census-small-batch-20261106/apply.py v1: anchored "sub" edits, every anchor
 exactly once, LF payloads re-joined with the preimage's line ending. An EDIT rule names the git blob sha of its preimage
@@ -22,7 +22,12 @@ master's validateShape through a row-size overload (the split the retained #1294
 4738bd290e62), and m3_select is master's uncached selectNative body generalised over int[]/long[] rows with the cached
 int fast path kept int-only. L2 un-holds the origin's two tests from #2517's held/ directory (HELD.tsv rows 3-4).
 
-usage: python -I apply.py [--root DIR] [--check] [--leaf L1|L2]
+v2 adds L3, merge-loss leaf 20 (held HOLD_CASE05 by that leaf's session): origin 0e68366337be (2026-10-21, 'refine
+lexical reuse, primitive indices and JNI result writes') batched m3_select_cached's output into 128-element Regions;
+the retain merge fb9b504bc047 (#1788) dropped it. Several EDIT rules on one file chain: rule k+1 pins the git blob
+of rule k's postimage, the file must equal one stage of the chain, and the rules before that stage count as applied.
+
+usage: python -I apply.py [--root DIR] [--check] [--leaf L1|L2|L3]
 """
 from __future__ import annotations
 
@@ -33,7 +38,7 @@ import sys
 from pathlib import Path
 
 RECIPE = "apply.py"
-VERSION = "v1"
+VERSION = "v2"
 RECIPE_DIR = Path(__file__).resolve().parent
 BASE_COMMIT = "c33ef9458dcc"
 ORIGIN = "ebbfcbdf93aa30f13179fd8a9f2bb26de80f410c"
@@ -231,6 +236,50 @@ C_EDITS = [
      "}\n"),
 ]
 
+L20_ORIGIN = "0e68366337be549b91ecbde593194e3ea97afd7f"
+L20_MERGE = "fb9b504bc047"
+L20_CITED = "origin=" + L20_ORIGIN[:12] + ";dropped_by=" + L20_MERGE + " (RETAIN #1788);merge-loss leaf 20"
+L20_ANCHOR = ("//FLLDCIM: MRL - mergeloss-s1-20261106 L3: merge-loss leaf 20, chunked cached-lane output writes restored from"
+              " origin 0e68366337be, dropped by retain merge fb9b504bc047 (#1788)")
+
+C_L3_EDITS = [
+    (" * Optional JNI parity backend for precomputed integer mask stages.\n",
+     " * Optional JNI parity backend for precomputed integer mask stages.\n"
+     " * Modified 2026: batch only detached output writes in the existing cached lane.\n"),
+    ("#define M3_CACHED_STAGE_LIMIT 8\n",
+     "#define M3_CACHED_STAGE_LIMIT 8\n"
+     + L20_ANCHOR + "\n"
+     "/* Reuse the bounded pending-output Region pattern from m3_index_mask_window.c.\n"
+     " * Only the private result is buffered; every source read retains its order.\n"
+     " */\n"
+     "#define M3_PATH_OUTPUT_CHUNK 128\n"),
+    ("    jintArray result = NULL;\n    jsize matching = 0;\n",
+     "    jintArray result = NULL;\n    jsize matching = 0;\n    jint selected[M3_PATH_OUTPUT_CHUNK];\n"),
+    ("        jsize written = 0;\n        jlong at = first;\n",
+     "        jsize written = 0;\n        jsize pending = 0;\n        jlong at = first;\n"),
+    ("                (*env)->SetIntArrayRegion(env, result, written++, 1, &row);\n"
+     "                if ((*env)->ExceptionCheck(env)) goto failure;\n",
+     "                selected[pending++] = row;\n"
+     "                ++written;\n"
+     "                if (pending == M3_PATH_OUTPUT_CHUNK) {\n"
+     "                    (*env)->SetIntArrayRegion(env, result, written - pending,\n"
+     "                            pending, selected);\n"
+     "                    if ((*env)->ExceptionCheck(env)) goto failure;\n"
+     "                    pending = 0;\n"
+     "                }\n"),
+    ("            m3_release_stages(env, &cache);\n            return result;\n",
+     "            if (pending != 0) {\n"
+     "                (*env)->SetIntArrayRegion(env, result, written - pending,\n"
+     "                        pending, selected);\n"
+     "                if ((*env)->ExceptionCheck(env)) goto failure;\n"
+     "            }\n"
+     "            m3_release_stages(env, &cache);\n            return result;\n"),
+]
+
+L3_NOTE = ("APPLICABLE (merge-loss leaf 20, held HOLD_CASE05 by the leaf-20 session): the origin's m3_index_path_masks.c"
+           " hunk (bounded 128-element output Regions in m3_select_cached) applies verbatim on the L1 postimage, whose"
+           " cached int lane L1 left unchanged; chained after L1 (pinned blob = L1 postimage)")
+
 L1_NOTE = ("MAPPED by member name: selectLong, selectLongJava, selectLongNative, validateGeometry (origin text) over"
            " master's validateShape via a row-size overload; JNI m3_select = master's uncached selectNative body"
            " generalised over int[]/long[] rows (cached int path unchanged and int-only) + selectLongNative export")
@@ -247,6 +296,8 @@ RULES = (
      "aa090bc23aa0dc3298e879b3377eceaea40dee92", "UNHOLD", CITED + ";held_by=#2517", L2_NOTE, None),
     ("L2", "MOVE", (HELD + TEST + "M3IndexPathMasksLongTest.java", TEST + "M3IndexPathMasksLongTest.java"),
      "85308c0dc6601f3dbda6f048ae0131f790d8fba1", "UNHOLD", CITED + ";held_by=#2517", L2_NOTE, None),
+    ("L3", "EDIT", NATIVE + "m3_index_path_masks.c", "fe98290ee524a7730ea81bfcb47662d39cb16afe", "RESTORE",
+     L20_CITED, L3_NOTE, C_L3_EDITS),
 )
 
 
@@ -282,16 +333,25 @@ def postimage(pre: bytes, edits, path: str) -> bytes:
     return text.encode("utf-8")
 
 
-def plan_edit(root: Path, rel: str, blob: str, edits):
+def plan_chain(root: Path, rel: str, rules):
+    """Stages of one file's EDIT rules applied in order: [pinned preimage, after rule 1, after rule 2, ...].
+
+    Rule k+1's pinned blob must be the git blob of rule k's postimage. The file on disk must equal one stage; the rules
+    before that stage are applied (UNCHANGED), the rest are CHANGED. Anything else is drift (refusal)."""
     target = root / rel
     if not target.exists():
-        raise Refused("missing preimage %s (pinned blob %s)" % (rel, blob))
+        raise Refused("missing preimage %s (pinned blob %s)" % (rel, rules[0][3]))
     on_disk = target.read_bytes()
-    pre = on_disk if blob_sha(on_disk) == blob else git_blob(root, blob)
-    post = postimage(pre, edits, rel)
-    if blob_sha(on_disk) != blob and on_disk != post:
-        raise Refused("drifted preimage %s: on disk %s, pinned blob %s" % (rel, blob_sha(on_disk), blob))
-    return rel, sha256(pre), sha256(post), (None if on_disk == post else (target, post, None))
+    first_blob = rules[0][3]
+    stages = [on_disk if blob_sha(on_disk) == first_blob else git_blob(root, first_blob)]
+    for rule in rules:
+        if blob_sha(stages[-1]) != rule[3]:
+            raise Refused("chained rule %s on %s pins %s, previous stage is %s" % (
+                rule[0], rel, rule[3], blob_sha(stages[-1])))
+        stages.append(postimage(stages[-1], rule[7], rel))
+    if on_disk not in stages:
+        raise Refused("drifted preimage %s: on disk %s, pinned blob %s" % (rel, blob_sha(on_disk), first_blob))
+    return target, stages, stages.index(on_disk)
 
 
 def plan_move(root: Path, pair, blob: str):
@@ -307,18 +367,36 @@ def plan_move(root: Path, pair, blob: str):
 
 def run(root: Path, check: bool, leaf: str | None) -> int:
     rows, changed, applied, writes = [], 0, 0, []
+    chains = {}
+    for rule in RULES:
+        if rule[1] == "EDIT":
+            chains.setdefault(rule[2], []).append(rule)
+    planned = {rel: plan_chain(root, rel, chain) for rel, chain in chains.items()}
+    reached = {rel: plan[2] for rel, plan in planned.items()}  # stage index the run leaves the file at
     for rleaf, kind, where, blob, decision, cited, note, edits in RULES:
-        name, before, after, work = (plan_edit(root, where, blob, edits) if kind == "EDIT"
-                                     else plan_move(root, where, blob))
-        state = "UNCHANGED" if work is None else "CHANGED"
-        if state == "CHANGED" and leaf not in (None, rleaf):
-            state = "PENDING"
-        elif state == "CHANGED":
-            changed += 1
-            writes.append(work)
+        if kind == "EDIT":
+            target, stages, at = planned[where]
+            k = chains[where].index((rleaf, kind, where, blob, decision, cited, note, edits))
+            name, before, after = where, sha256(stages[k]), sha256(stages[k + 1])
+            if k < at:
+                state = "UNCHANGED"
+            elif leaf not in (None, rleaf) or reached[where] != k:
+                state = "PENDING"  # not selected, or an earlier rule of this file is still pending
+            else:
+                state = "CHANGED"
+                reached[where] = k + 1
+        else:
+            name, before, after, work = plan_move(root, where, blob)
+            state = "UNCHANGED" if work is None else "PENDING" if leaf not in (None, rleaf) else "CHANGED"
+            if state == "CHANGED":
+                writes.append(work)
+        changed += state == "CHANGED"
         applied += state != "PENDING"
         rows.append((name, before, after, rleaf, decision, cited, kind + " " + note))
         print("%s %s %s %s" % (kind, rleaf, state, name))
+    for rel, (target, stages, at) in planned.items():
+        if reached[rel] != at:
+            writes.append((target, stages[reached[rel]], None))
     if not check:  # every preimage verified before the first write: a refusal leaves the tree untouched
         for target, data, remove in writes:
             target.parent.mkdir(parents=True, exist_ok=True)

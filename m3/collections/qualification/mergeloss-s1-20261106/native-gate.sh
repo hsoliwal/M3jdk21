@@ -13,8 +13,13 @@
 #      -Xint: Java path (no library) and native (-Xcheck:jni); 0 JNI warnings; the long contract also on the UBSan build.
 #   5. M3PathMaskRestoreDigest: native vs Java byte-identical (default and -Xint, two seeds); with BASE given, master
 #      classes + master library vs restored classes + restored library byte-identical on the four existing int ops.
-#   6. mutants (sed on copies): C long-row output size, C long-row write index, C cached-path guard, Java long kernel
-#      value, Java row-size preflight; the long contract must fail in the mutated mode.
+#   6. L3 (merge-loss leaf 20): the origin 0e68366337be's own oracles, oracle/M3IndexPathNativeBatchContract.java
+#      (--java-only and --native, default and -Xint, -Xcheck:jni) and the instrumented-JNI region test
+#      oracle/m3_path_mask_output_regions.c (--candidate on this C; with BASE: --baseline on master's C, equal input
+#      traces, and --candidate on master's C must fail).
+#   7. mutants (sed on copies): C long-row output size, C long-row write index, C cached-path guard, Java long kernel
+#      value, Java row-size preflight (the long contract must fail in the mutated mode); L3 final flush dropped (the
+#      region test and the batch contract must fail).
 # usage: TMPDIR=<tmp> native-gate.sh <out-dir> <head-module-dir> [<base-module-dir>]   (JDK: $JAVA_HOME or ~/jdk/jdk-21*)
 set -uo pipefail
 HERE=$(cd "$(dirname "$0")" && pwd)
@@ -47,7 +52,7 @@ compile_java() { # <module> <classes> [<hdr>]
     javac -J$JOPT --release 21 -proc:none -Xlint:all,-module -Werror "${h[@]}" -d "$2" "$1/$J/M3IndexPathMasks.java" \
         "$1/$T/M3IndexPathMasksSelfTest.java" "$1/$T/M3IndexPathMasksAliasContract.java" \
         $( [ -f "$1/$T/M3IndexPathMasksLongSelfTest.java" ] && echo "$1/$T/M3IndexPathMasksLongSelfTest.java" ) \
-        "$HERE/M3PathMaskRestoreDigest.java"
+        "$HERE/M3PathMaskRestoreDigest.java" "$HERE/oracle/M3IndexPathNativeBatchContract.java"
 }
 step "javac -h (owner, contracts, digest driver)"
 compile_java "$MODULE" "$OUT/classes" "$OUT/hdr" || fail "javac"
@@ -151,6 +156,42 @@ if [ -n "$BASE" ]; then
     done
 fi
 
+step "L3 (merge-loss leaf 20): origin 0e68366337be oracles"
+batch() { # <classes> <vm> <mode> <libdir>
+    local opts=(); [ "$2" = xint ] && opts=(-Xint)
+    if [ "$3" = native ]; then
+        java $JOPT -Xcheck:jni "${opts[@]}" -Djava.library.path="$4" -cp "$1" jdk.m3.collections.M3IndexPathNativeBatchContract --native
+    else
+        java $JOPT "${opts[@]}" -Djava.library.path="$OUT/missing" -cp "$1" jdk.m3.collections.M3IndexPathNativeBatchContract --java-only
+    fi
+}
+for vm in default xint; do
+    for mode in java native; do
+        batch "$OUT/classes" $vm $mode "$OUT/lib" > "$OUT/run/batch-$vm-$mode.out" 2> "$OUT/run/batch-$vm-$mode.err" || fail "batch contract $vm $mode"
+        echo "M3IndexPathNativeBatchContract $vm $mode: $(tail -1 "$OUT/run/batch-$vm-$mode.out") jni_warnings=$(grep -ci warning "$OUT/run/batch-$vm-$mode.err")"
+    done
+done
+regions() { # <c-file> <exe>
+    gcc -std=c17 -O2 -Wall -Wextra -I"$JDK/include" -I"$JDK/include/linux" -I"$(dirname "$1")" -I"$(dirname "$C")" \
+        "$HERE/oracle/m3_path_mask_output_regions.c" "$1" -o "$2" 2> "$2.gcc.log"
+}
+regions "$C" "$OUT/regions-head" || fail "regions gcc"
+echo "region test gcc diagnostics: $(grep -cE 'warning:|error:' "$OUT/regions-head.gcc.log")"
+"$OUT/regions-head" --candidate > "$OUT/run/regions-head.out" 2> "$OUT/run/regions-head.err" || fail "regions --candidate on this C"
+echo "regions --candidate (this C): $(cat "$OUT/run/regions-head.out") $(head -1 "$OUT/run/regions-head.err")"
+if [ -n "$BASE" ]; then
+    regions "$BASE/src/main/native/collections/m3_index_path_masks.c" "$OUT/regions-base" || fail "regions gcc base"
+    "$OUT/regions-base" --baseline > "$OUT/run/regions-base.out" 2> "$OUT/run/regions-base.err" || fail "regions --baseline on master C"
+    echo "regions --baseline (master C): $(cat "$OUT/run/regions-base.out")"
+    tb=$(grep -o 'input_trace=[0-9a-f]*' "$OUT/run/regions-base.out"); th=$(grep -o 'input_trace=[0-9a-f]*' "$OUT/run/regions-head.out")
+    [ -n "$tb" ] && [ "$tb" = "$th" ] && echo "input traces equal: $th" || fail "input traces differ ($tb vs $th)"
+    if "$OUT/regions-base" --candidate > "$OUT/run/regions-base-cand.out" 2> "$OUT/run/regions-base-cand.err"; then
+        fail "regions --candidate passed on master C (no discrimination)"
+    else
+        echo "regions --candidate (master C): FAILS as expected ($(head -1 "$OUT/run/regions-base-cand.err"))"
+    fi
+fi
+
 step "mutants: the long contract must fail in the mutated mode"
 cmutant() { # <id> <sed> <description>
     local dir="$OUT/mut/$1"; mkdir -p "$dir"
@@ -180,5 +221,17 @@ cmutant M2 's/SetLongArrayRegion(env, (jlongArray)output, written, 1, &row)/SetL
 cmutant M3 's/if (!long_rows \&\& stages <= M3_CACHED_STAGE_LIMIT/if (stages <= M3_CACHED_STAGE_LIMIT/' 'long rows routed to the int-only cached path'
 jmutant M4 '/static long\[\] selectLongJava/,/^    }/ s/selected\[written++\] = rows\[index\];/selected[written++] = rows[index] ^ 1L;/' 'Java long kernel value'
 jmutant M5 's/if (rowSize != positions.length) {/if (rowSize < positions.length) {/' 'row-size preflight'
+l3mutant() { # <id> <sed> <description>: the region test and the batch contract must both fail
+    local dir="$OUT/mut/$1"; mkdir -p "$dir"
+    sed "$2" "$C" > "$dir/m.c"
+    if cmp -s "$C" "$dir/m.c"; then fail "mutant $1 did not apply"; return; fi
+    gcc $FLAGS $INC -I"$(dirname "$C")" $HDR "$dir/m.c" -o "$dir/libm3_collections_pathmask.so" 2> "$dir/gcc.log" || { fail "mutant $1 gcc"; return; }
+    regions "$dir/m.c" "$dir/regions" || { fail "mutant $1 regions gcc"; return; }
+    local r=CAUGHT b=CAUGHT
+    "$dir/regions" --candidate > "$dir/regions.out" 2> "$dir/regions.err" && { r=SURVIVED; fail "mutant $1 SURVIVED the region test"; }
+    batch "$OUT/classes" default native "$dir" > "$dir/batch.out" 2> "$dir/batch.err" && { b=SURVIVED; fail "mutant $1 SURVIVED the batch contract"; }
+    echo "$1 $3: regions $r ($(head -1 "$dir/regions.err" | cut -c1-90)); batch contract $b ($(grep -h -m1 -E 'AssertionError|Exception:' "$dir/batch.err" "$dir/batch.out" | head -1 | cut -c1-90))"
+}
+l3mutant M6 's/            if (pending != 0) {/            if (0 \&\& pending != 0) {/' 'L3 final partial flush dropped'
 echo "NATIVE_GATE $status"
 [ "$status" = PASS ]
