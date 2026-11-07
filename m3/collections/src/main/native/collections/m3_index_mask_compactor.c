@@ -58,15 +58,18 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_selectedCountNative(
     return result < 0 ? 0 : result;
 }
 
-/* First retained ordinal in one bounded marks page. Zero-mask never reads marks. */
-static jsize m3_first_selected(const jbyte *marks, jsize size, jint mask) {
-    if (mask == 0) return 0;
+//FLLDCIM: MRL - mergeloss2 leaves 35+27: enclosing admitted span restored from origin 22c3d19339c (PR #1513), dropped by retain merge 09ff95dd6cf3 (row 27: 01952e935de, #1619, 1633da209622); recipe qualification/mergeloss2-fv-handoff-20261107
+/* Reuse the state lane to bound each row fetch. Empty selection chunks never
+ * cross JNI for row values. Bounds are local offsets; no heap scratch or new ABI.
+ * Zero-mask never reads marks: the whole page is the span.
+ */
+static jsize m3_selected_span(const jbyte *marks, jsize length, jint mask, jsize *end) {
     jsize first = 0;
-    while (first < size) {
-        unsigned int flags = (unsigned int)(unsigned char)marks[first];
-        if ((flags & (unsigned int)mask) == (unsigned int)mask) break;
-        first++;
-    }
+    *end = length;
+    if (mask == 0) return first;
+    while (first < length && (((unsigned char) marks[first] & (unsigned int) mask) != (unsigned int) mask)) first++;
+    if (first == length) { *end = first; return first; }
+    while (*end > first && (((unsigned char) marks[*end - 1] & (unsigned int) mask) != (unsigned int) mask)) (*end)--;
     return first;
 }
 
@@ -88,21 +91,24 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
             (*env)->GetByteArrayRegion(env, states, state_first + offset, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
-        jsize begin = m3_first_selected(marks, chunk, required_mask);
-        if (begin == chunk) {
+        //FLLDCIM: MRL - mergeloss2 leaves 35+27: enclosing admitted span restored from origin 22c3d19339c (PR #1513), dropped by retain merge 09ff95dd6cf3 (row 27: 01952e935de, #1619, 1633da209622); recipe qualification/mergeloss2-fv-handoff-20261107
+        jsize stop;
+        jsize begin = m3_selected_span(marks, chunk, required_mask, &stop);
+        if (begin == stop) {
             /* Keep the second state scan/drift check, but do not fetch rejected payload. */
             offset += chunk;
             continue;
         }
-        (*env)->GetIntArrayRegion(env, rows, first + offset, chunk, row_ids);
+        /* Only the enclosing admitted span crosses JNI. */
+        (*env)->GetIntArrayRegion(env, rows, first + offset + begin, stop - begin, row_ids);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize accepted = chunk;
+        jsize accepted = stop - begin;
         if (required_mask != 0) {
             accepted = 0;
-            for (jsize i = begin; i < chunk; i++) {
+            for (jsize i = begin; i < stop; i++) {
                 unsigned int bits = (unsigned int)(unsigned char)marks[i];
                 if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) {
-                    row_ids[accepted++] = row_ids[i];
+                    row_ids[accepted++] = row_ids[i - begin];
                 }
             }
         }
@@ -402,21 +408,19 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
             (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
             if ((*env)->ExceptionCheck(env)) return NULL;
         }
-        jsize begin = m3_first_selected(marks, chunk, mask);
-        if (begin == chunk) {
-            position += chunk;
-            continue;
-        }
-        (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);
+        //FLLDCIM: MRL - mergeloss2 leaves 35+27: enclosing admitted span restored from origin 22c3d19339c (PR #1513), dropped by retain merge 09ff95dd6cf3 (row 27: 01952e935de, #1619, 1633da209622); recipe qualification/mergeloss2-fv-handoff-20261107
+        jsize stop;
+        jsize begin = m3_selected_span(marks, chunk, mask, &stop);
+        if (begin == stop) { position += chunk; continue; }
+        (*env)->GetLongArrayRegion(env, rows, row_offset + position + begin, stop - begin, values);
         if ((*env)->ExceptionCheck(env)) return NULL;
-        jsize batch = chunk;
+        jsize batch = stop - begin;
         if (mask != 0) {
-            /* Stable prefix compaction: batch <= i, so unread values stay intact. */
+            /* Stable prefix compaction: batch <= i - begin, so unread values stay intact. */
             batch = 0;
-            /* Prefix compaction cannot overwrite an unread row: batch <= i. */
-            for (jsize i = begin; i < chunk; i++) {
+            for (jsize i = begin; i < stop; i++) {
                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
-                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i - begin];
             }
         }
         if (batch > kept - written) {
