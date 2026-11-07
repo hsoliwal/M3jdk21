@@ -333,7 +333,7 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
      */
     @Override
     public Spliterator.OfLong longSpliterator() {
-        return new M3LongListSpliterator(this, 0, size);
+        return new M3LongListSpliterator(this, 0, size, () -> modCount);
     }
 
     @Override
