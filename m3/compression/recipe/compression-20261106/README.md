@@ -93,6 +93,26 @@ Oracles (all run in the test phase unless noted):
   through lz4-java (Java and JNI), aircompressor, Commons Compress and snappy-java; the M3EC corpus decodes through
   liblz4 / libsnappy and an M3CZ corpus written by them replays through `M3CompressionInteropSelfTest`.
 
+## Native leaf: JNI prefix kernels (2026-11-06, fourth commit)
+
+The JNI owner of the family and its native directory, relocated by the same `relocate.py` (six OMIT rows became FILE
+rows, three native FILE rows and one JNI row were added; the native extension of the recipe handles line-comment C
+headers and CMake files and leaves every earlier row's fixed point unchanged).
+
+| Owner | Kind | Contract |
+|---|---|---|
+| `M3LzNative` | public | explicitly loaded JNI batch prefix matcher: absolute real path, ABI 1, load-time parity proof against `M3LzByteKernels`, batches up to 16 MiB input and 65,536 lanes, every native result re-checked; never selected implicitly |
+| `src/main/native/m3_lz_jni.c` | C11 | `m3_lz_prefix` (8-byte `memcpy` word compare, scalar tail) and `Java_jdk_m3_compression_M3LzNative_{nativeAbi,nativeMatches}`: one call-scoped aligned arena filled by `Get*ArrayRegion`, every lane checked, no Java pointer retained |
+| `src/main/native/CMakeLists.txt`, `tests/m3_lz_test.c` | build, C oracle | the donor's build file (shared library `m3_lz_compression`, `-Werror` flag set, CTest `m3_lz_test`) |
+
+The Java kernels stay the backend: without `-Pnative-linux` the JNI lanes of `M3LzSelfTest`,
+`M3LzFourWayNativeInteropSelfTest` and `M3LzNativeParityProbe` (test scope, new: JNI vs Java prefix lanes over the
+format oracle's 100,000 inputs) are skipped and print so. With `-Pnative-linux` (Linux, CMake and a C compiler) the
+module pom configures, builds and CTests `src/main/native` and passes `libm3_lz_compression.so` through `m3.lz.library`.
+[native-gate.sh](native-gate.sh) (Linux host) compares the donor's and the relocated `javac -h` headers and exported
+symbols, compiles both C files with `-Werror`, builds with CMake, runs the oracles under `-Xcheck:jni` against both
+libraries (byte-identical output) and the parity probe, and refuses a one-line kernel mutant at load.
+
 ## Run
 
 ```sh
