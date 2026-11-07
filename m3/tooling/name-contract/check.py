@@ -94,12 +94,17 @@ def find_mapped_target(root: Path, record: dict, name: str) -> str:
         file = local_file(root, path)
         if not file.is_file():
             refuse("mapped source file missing: " + path)
-        content = file.read_text(encoding="utf-8")
+        # Names in comments, strings, or text blocks are not declarations. Internal
+        # owners need not be public, but the mapped file must own the top-level type.
+        code = code_without_literals(file.read_text(encoding="utf-8"))
         package = name.rsplit(".", 1)[0]
         simple = name.rsplit(".", 1)[1]
-        if not re.search(r"(?m)^\s*package\s+" + re.escape(package) + r"\s*;", content):
+        if re.findall(r"(?m)^\s*package\s+([\w$.]+)\s*;", code) != [package]:
             refuse("declared package disagrees: " + path)
-        if not re.search(r"\b(class|interface|enum|record)\s+" + re.escape(simple) + r"\b", content):
+        declarations = [match for match in re.finditer(
+            r"\b(class|interface|enum|record)\s+" + re.escape(simple) + r"(?![\w$])", code)
+            if code[:match.start()].count("{") == code[:match.start()].count("}")]
+        if len(declarations) != 1:
             refuse("declared type disagrees: " + path)
         return path
     refuse("candidate not recorded as a canonical M3JDK21 target: " + name)
