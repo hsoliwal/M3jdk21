@@ -1,6 +1,6 @@
 # M3JDK21 evidence-first release pack
 
-[Release preparation: names and tests](RELEASE_PREPARATION.md) · [Visible release queue](queue/README.md) · [Release contract](release-contract.json)
+[Visible release queue](queue/README.md) · [Release contract](release-contract.json) · [Naming, documentation and coverage](NAMING_DOCUMENTATION_COVERAGE.md) · [Additional test runner and CI triage](RELEASE_PREPARATION.md) · [CI failures](CI_FAILURE_TRIAGE_20261107.md)
 
 The first public M3JDK21 release is admitted by evidence, not by repository size, PR count, donor
 catalogue size, or marketing language.
@@ -71,6 +71,9 @@ A release candidate must preserve:
 - M3/Synexia rights and licensing notices;
 - foundation build/test logs;
 - Java precompute differential results;
+- **changed-atom instrumented line/branch coverage**: reviewed TSV inventory,
+  raw JaCoCo XML where applicable, each source SHA-256, >=90% per measured
+  contract atom (99% objective for critical atoms), and explicit exclusions/HOLD;
 - JNI/native parity results where JNI/native is used;
 - Maven/OpenRewrite control-reactor execution and replay receipts produced in this repository;
 - product compilation and applicable installed-image/module tests;

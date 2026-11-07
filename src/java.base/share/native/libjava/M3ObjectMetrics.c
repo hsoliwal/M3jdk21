@@ -6,6 +6,15 @@
  */
 #include <jni.h>
 #include <jvmti.h>
+#include <stdatomic.h>
+
+/* Copyright (c) 2026, Hitesh Soliwal and contributors.
+ * JVMTI GetEnv creates an environment, unlike the thread-local JNI lookup.
+ * libjava and this private, cross-thread JVMTI connection have VM lifetime.
+ * Only the published environment is retained; cold-race losers are disposed.
+ * No capabilities, events, tags, monitors or object references are installed.
+ */
+static _Atomic(jvmtiEnv *) object_metrics_jvmti = NULL;
 
 static void throw_illegal_state(JNIEnv *env, const char *message) {
     jclass type = (*env)->FindClass(env, "java/lang/IllegalStateException");
@@ -29,14 +38,33 @@ JNIEXPORT jlong JNICALL Java_jdk_internal_m3_M3ObjectMetrics_shallowSize0(
         }
         return 0;
     }
-    if ((*env)->GetJavaVM(env, &vm) != JNI_OK || vm == NULL ||
-            (*vm)->GetEnv(vm, (void **) &jvmti, JVMTI_VERSION_1_2) != JNI_OK) {
+    if ((*env)->GetJavaVM(env, &vm) != JNI_OK || vm == NULL) {
         throw_illegal_state(env, "JVMTI GetEnv is unavailable for M3 object size");
         return 0;
     }
+    jvmti = atomic_load_explicit(&object_metrics_jvmti, memory_order_acquire);
     if (jvmti == NULL) {
-        throw_illegal_state(env, "JVMTI is unavailable for M3 object size");
-        return 0;
+        jvmtiEnv *created = NULL;
+        jvmtiEnv *winner = NULL;
+        if ((*vm)->GetEnv(vm, (void **) &created, JVMTI_VERSION_1_2) != JNI_OK) {
+            throw_illegal_state(env, "JVMTI GetEnv is unavailable for M3 object size");
+            return 0;
+        }
+        if (created == NULL) {
+            throw_illegal_state(env, "JVMTI is unavailable for M3 object size");
+            return 0;
+        }
+        if (atomic_compare_exchange_strong_explicit(&object_metrics_jvmti,
+                &winner, created, memory_order_acq_rel, memory_order_acquire)) {
+            jvmti = created;
+        } else {
+            result = (*created)->DisposeEnvironment(created);
+            if (result != JVMTI_ERROR_NONE) {
+                throw_illegal_state(env, "JVMTI DisposeEnvironment failed for M3 object size");
+                return 0;
+            }
+            jvmti = winner;
+        }
     }
     result = (*jvmti)->GetObjectSize(jvmti, object, &bytes);
     if (result != JVMTI_ERROR_NONE) {
