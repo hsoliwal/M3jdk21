@@ -325,6 +325,8 @@
         <module>ports/parallel-bulk</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/fix HELD (gate gate-runtime-integration-fix: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>runtime-integration/fix</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/fix-root-ascii-case HELD (gate gate-runtime-integration-fix-root-ascii-case: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>runtime-integration/fix-root-ascii-case</module>
         <!-- m3-offreactor-held:end -->
       </modules>
     </profile>
