@@ -1,0 +1,9 @@
+leaf	target	hunk	donor_pre	donor_post	relocated_base	relocated_theirs	host_ours	host_result	three_way	first_line
+A	src/main/java/jdk/m3/collections/M3TransientFacadeStore.java	1	160,1	160,1	159,1	159,1	159,1	159,1	CLEAN_THEIRS	slot = insertCreated(logicalId, facade);
+A	src/main/java/jdk/m3/collections/M3TransientFacadeStore.java	2	195,1	195,1	194,1	194,1	194,1	194,1	CLEAN_THEIRS	slot = insertCreated(logicalId, facade);
+A	src/main/java/jdk/m3/collections/M3TransientFacadeStore.java	3	443,0	443,28	442,0	442,28	442,0	442,28	CLEAN_THEIRS	/**
+A	src/main/java/jdk/m3/collections/M3TransientFacadeStore.java	3way	-	-	-	-	-	-	ours_vs_base_hunks=0 theirs_hunks=3 conflicts=0	-
+B	src/main/java/jdk/m3/collections/M3TransientFacadeStore.java	1	414,0	414,9	413,0	413,9	413,0	413,9	CLEAN_THEIRS	ensureReusableCapacity(required, ARRAY_COPY);
+B	src/main/java/jdk/m3/collections/M3TransientFacadeStore.java	2	415,0	424,1	414,0	423,1	414,0	423,1	CLEAN_THEIRS	Objects.requireNonNull(copies, "copies");
+B	src/main/java/jdk/m3/collections/M3TransientFacadeStore.java	3	417,2	427,7	416,2	426,7	416,2	426,7	CLEAN_THEIRS	Object[] nextFacades = Objects.requireNonNull(
+B	src/main/java/jdk/m3/collections/M3TransientFacadeStore.java	3way	-	-	-	-	-	-	ours_vs_base_hunks=1 theirs_hunks=3 conflicts=0	-
