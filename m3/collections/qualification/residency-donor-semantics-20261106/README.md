@@ -49,3 +49,10 @@ All gates are in `GATES.tsv`.
 - The census L066 oracle, the transient-facade dump and P1's victim-progress oracle are byte-identical between P1 and this head.
 
 `RECIPE_MEMORY.tsv` records the corrections.
+
+## Leaf PS (recipe v3, residency fold 20261107)
+
+`apply.py` v3 adds a third serial leaf on the leaf CD postimage: the crate step `m3-doop-pressure-sampling-20261030`
+(M3JDK `4e229782bf1`, PR #2157, lost by the same retain merge `7c6ddb6b7aa`). `targetBudget()` takes
+`HeapSnapshot.current()` only with `PRESSURE_AWARE`; admission, `signalMemoryPressure()` and both reuse budget checks
+call it. Decision, behavioural test and gates: `../residency-fold-20261107/`.

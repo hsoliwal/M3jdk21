@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Recipe RESIDENCY_DONOR_ATOMS v2: the remaining residency atoms of crate m3-doop-reuse-20261030 on M3ObjectResidency.
+"""Recipe RESIDENCY_DONOR_ATOMS v3: the remaining residency atoms of crate m3-doop-reuse-20261030 on M3ObjectResidency.
 
 v2 = qualification/residency-victim-progress-20261106/apply.py v1 (anchored "sub" edits, every anchor exactly once,
 LF payloads re-joined with the preimage's line ending, every preimage verified before the first write, EDITS.tsv
@@ -24,8 +24,14 @@ it (group D: master's detach-first order let a reentrant resetter publish over t
 residentBytes=20 at budget 16); runtime exceptions and errors keep their identity; a failure discards the tainted
 shell and records a decision. Owner strings are kept (IllegalArgumentException and ResidencyException messages, the
 success reason).
+Leaf PS (v3, ADOPT, residency fold 20261107, crate m3-doop-reuse-20261030 enhancement step
+m3-doop-pressure-sampling-20261030, received by M3JDK as 4e229782bf1 (PR #2157, postimage blob e8347cd7780d) and lost by
+the retain merge 7c6ddb6b7aa): the four budget boundaries (admission, enforceBudget, both reuse budget checks) call
+targetBudget(), which takes HeapSnapshot.current() only when PRESSURE_AWARE is set; fixed-budget owners no longer
+build a snapshot they ignore. Pressure-aware owners sample at the same boundaries in the same order. Decision:
+../residency-fold-20261107/DECISION.tsv.
 
-usage: python -I apply.py [--root DIR] [--check] [--leaf A|CD]
+usage: python -I apply.py [--root DIR] [--check] [--leaf A|CD|PS]
 """
 from __future__ import annotations
 
@@ -36,7 +42,7 @@ import sys
 from pathlib import Path
 
 RECIPE = "apply.py"
-VERSION = "v2"
+VERSION = "v3"
 RECIPE_DIR = Path(__file__).resolve().parent
 BASE_COMMIT = "d97c5603f21"  # the P1 head (PR #2610); preimage blob b7a83aa92326
 DONOR_COMMIT = "ca1aafc4d94f9dd1ee288226dcca070cc60991c9"
@@ -48,6 +54,8 @@ ANCHOR_A = ("    //FLLDCIM: MRL - residency donor semantics P2 group A, crate " 
             + " (m3-doop-callback-error-20261030, donor blob 45caaf707b47): ")
 ANCHOR_CD = ("    //FLLDCIM: MRL - residency donor semantics P2 groups C+D, crate " + DOOP
              + " (rebindUnborrowedProjection of m3-doop-publication-budget-20261030, donor blob 8966285b99e2): ")
+ANCHOR_PS = ("    //FLLDCIM: MRL - residency fold leaf PS, crate " + DOOP
+             + " (m3-doop-pressure-sampling-20261030, M3JDK 4e229782bf1 blob e8347cd7780d): ")
 PRE = "b7a83aa92326eb7a06df9b7d7d06a458b725d472"
 
 
@@ -244,6 +252,32 @@ RULES = (
          ('    public synchronized boolean reuseUnborrowedProjection(int source, int target,\n',
           ANCHOR_CD + 'the donor rebind semantics under the owner name\n'
            '    public synchronized boolean reuseUnborrowedProjection(int source, int target,\n'),
+     ]),
+    ("PS", SRC + "M3ObjectResidency.java", None, DOOP,
+     "post=e8347cd7780dbeb5a95759ef734a6dbf942d9edd (M3JDK 4e229782bf1, PR #2157) canonical=com.synexia"
+     " 00bdbea3ee2fe0a7fc8a991f39e5dad2a0e8d604",
+     "ADOPT m3-doop-pressure-sampling-20261030: targetBudget() samples HeapSnapshot.current() only with"
+     " PRESSURE_AWARE; the four budget boundaries call it without building an ignored snapshot", [
+         ('        long budget = targetBudget(HeapSnapshot.current());\n',
+          '        long budget = targetBudget();\n'),
+         ('            budget = targetBudget(HeapSnapshot.current());\n',
+          '            budget = targetBudget();\n'),
+         ('        try {\n'
+          '            long target = targetBudget(HeapSnapshot.current());\n',
+          '        try {\n'
+          '            long target = targetBudget();\n'),
+         ('    private void enforceBudget(int requestedSlot, long incomingBytes) {\n'
+          '        long target = targetBudget(HeapSnapshot.current());\n',
+          '    private void enforceBudget(int requestedSlot, long incomingBytes) {\n'
+          '        long target = targetBudget();\n'),
+         ('    private long targetBudget(HeapSnapshot heap) {\n'
+          '        long target = maxResidentBytes;\n'
+          '        if ((flags & PRESSURE_AWARE) != 0) {\n',
+          ANCHOR_PS + 'no heap snapshot without PRESSURE_AWARE\n'
+          '    private long targetBudget() {\n'
+          '        long target = maxResidentBytes;\n'
+          '        if ((flags & PRESSURE_AWARE) != 0) {\n'
+          '            HeapSnapshot heap = HeapSnapshot.current();\n'),
      ]),
 )
 

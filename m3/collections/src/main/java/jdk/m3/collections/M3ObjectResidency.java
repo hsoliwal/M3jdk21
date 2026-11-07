@@ -343,7 +343,7 @@ public final class M3ObjectResidency<T> {
         }
         long oldBytes = weights[source];
         long others = residentBytes - oldBytes;
-        long budget = targetBudget(HeapSnapshot.current());
+        long budget = targetBudget();
         if (estimatedBytes > budget || others > budget - estimatedBytes) return false;
 
         @SuppressWarnings("unchecked") T projection = (T) resident[source];
@@ -354,7 +354,7 @@ public final class M3ObjectResidency<T> {
             reset.reinitialize(projection, target);
             // The callback may reenter unrelated slots or change memory pressure.
             others = residentBytes - oldBytes;
-            budget = targetBudget(HeapSnapshot.current());
+            budget = targetBudget();
             if (estimatedBytes > budget || others > budget - estimatedBytes) {
                 throw new BudgetExceededException(estimatedBytes, others, budget);
             }
@@ -481,7 +481,7 @@ public final class M3ObjectResidency<T> {
         State before = stateAt(requestedSlot);
         setState(requestedSlot, before == State.SWAPPED ? State.RESTORING : State.CREATING);
         try {
-            long target = targetBudget(HeapSnapshot.current());
+            long target = targetBudget();
             while (wouldExceed(incomingBytes, target)) {
                 if ((flags & OBSERVE_ONLY) != 0) break;
                 int victim = leastRecentlyUsed(requestedSlot);
@@ -501,7 +501,7 @@ public final class M3ObjectResidency<T> {
     }
 
     private void enforceBudget(int requestedSlot, long incomingBytes) {
-        long target = targetBudget(HeapSnapshot.current());
+        long target = targetBudget();
         while (wouldExceed(incomingBytes, target)) {
             if ((flags & OBSERVE_ONLY) != 0) {
                 decision(requestedSlot, stateAtOrAbsent(requestedSlot), stateAtOrAbsent(requestedSlot),
@@ -519,9 +519,11 @@ public final class M3ObjectResidency<T> {
         }
     }
 
-    private long targetBudget(HeapSnapshot heap) {
+    //FLLDCIM: MRL - residency fold leaf PS, crate m3-doop-reuse-20261030 (m3-doop-pressure-sampling-20261030, M3JDK 4e229782bf1 blob e8347cd7780d): no heap snapshot without PRESSURE_AWARE
+    private long targetBudget() {
         long target = maxResidentBytes;
         if ((flags & PRESSURE_AWARE) != 0) {
+            HeapSnapshot heap = HeapSnapshot.current();
             long available = Math.max(0L, heap.estimatedHeadroomBytes() - reserveBytes);
             target = Math.min(target, available);
         }
