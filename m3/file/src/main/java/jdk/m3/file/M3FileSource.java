@@ -91,6 +91,9 @@ public final class M3FileSource {
     }
 
     public int length() { return bytes.length; }
+    //FLLDCIM: MRL - RESTORE member byteAt(int) of M3FileSource at 9023729d8ae2 (blob eba0212f4c3652e6a7220971ea37cbc2d6594d6e, parent of the #1975 retain merge); recipe m3/file/qualification/retained-port-20261107
+    /** Read one immutable physical source byte without cloning the whole image. */
+    public int byteAt(int offset) { return Byte.toUnsignedInt(bytes[Objects.checkIndex(offset, bytes.length)]); }
     public String sha256() { return sha256; }
     public byte[] bytes() { return bytes.clone(); }
     public byte[] bytes(int start, int end) {

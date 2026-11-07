@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# retained-port-20261107 (m3/file): corrections made while the recipe was built (self-improving recipe memory)
+date	correction	rule
+2026-11-07	the first probe restored the parent blobs byte for byte and failed to compile (66 javac errors in 13 files): the donor entry facade M3File, the donor M3FileSource interface, M3FileProgress and the old M3FileSnapshot/M3FileDelta no longer exist on master under those names	probe-compile every retained set against the base classes before deciding; decide per dependency closure of the missing hub types (HOLD), not per file
+2026-11-07	M3FileTaskWindowContract fails on this machine with the donor class itself (cancellation, line 137) and with the restored class	a contract red on the donor side is not a port regression but blocks the port of that class; record the evidence and supersede or hold
+2026-11-07	jdk_naming plan rewrote the FLLDCIM anchors and the recipe tables because they spelled the pre-rename package and its path (PKG_COM_M3, PKG_PATH_COM_M3)	cite donor files as hsoliwal/M3jdk21 blob links (KEEP_SPAN REPOSITORY_M3JDK keeps them whole) and build donor package strings in scripts from split literals; never spell the pre-rename package in prose
+2026-11-07	the first worktree was shared with a pre-restart agent writing the same module; the coordinator moved this port to wt-file-c / branch -c	one worktree and one Maven head repository per agent; check git worktree list and the recipe directory for foreign writes before staging
