@@ -8,6 +8,8 @@ validation only; it is never a release, JDK/JNI, benchmark or recipe receipt.
 from __future__ import annotations
 
 import contextlib
+import copy
+import csv
 import hashlib
 import importlib.util
 import io
@@ -18,6 +20,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 MODULE_PATH = Path(__file__).with_name("verify_release_admission.py")
 spec = importlib.util.spec_from_file_location("m3_release_admission", MODULE_PATH)
@@ -223,6 +226,41 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         if name:
             self.assertIn(name, {b["name"] for b in result["blockers"]}, result)
 
+    def coverage_gate(self):
+        return next(g for g in self.evidence["gates"] if g["id"] == release.COVERAGE_GATE)
+
+    def write_coverage_artifact(self, field, content):
+        gate = self.coverage_gate()
+        path = self.evidence_dir / gate["coverage"][field]
+        path.write_text(content, encoding="utf-8")
+        digest = release.sha256(path)
+        next(item for item in gate["artifacts"] if item["path"] == path.name)["sha256"] = digest
+        if field == "inventory_artifact":
+            gate["coverage"]["inventory_sha256"] = digest
+
+    def change_atom_binding(self, field, value):
+        gate = self.coverage_gate()
+        gate["coverage"]["atoms"][0][field] = value
+        path = self.evidence_dir / gate["coverage"]["inventory_artifact"]
+        reader = csv.DictReader(io.StringIO(path.read_text()), delimiter="\t")
+        rows = list(reader)
+        column = {"jacoco_class": "class", "jacoco_method": "method",
+                  "jacoco_descriptor": "descriptor"}.get(field, field)
+        rows[0][column] = value
+        text = io.StringIO()
+        writer = csv.DictWriter(text, fieldnames=reader.fieldnames, delimiter="\t")
+        writer.writeheader()
+        writer.writerows(rows)
+        self.write_coverage_artifact("inventory_artifact", text.getvalue())
+
+    def assert_coverage_refused(self, detail=None):
+        result = self.result()
+        self.assert_blocked(result, "gate:" + release.COVERAGE_GATE)
+        if detail:
+            blocker = next(row for row in result["blockers"]
+                           if row["name"] == "gate:" + release.COVERAGE_GATE)
+            self.assertIn(detail, blocker["detail"])
+
     def test_missing_all_execution_evidence_never_reports_ready(self):
         for mode in (False, True):
             with self.subTest(release=mode):
@@ -307,6 +345,147 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         result = self.result()
         self.assertTrue(result["release_ready"], result)
 
+    def test_malformed_coverage_container_fields_are_reported_without_crash(self):
+        item = next(g for g in self.evidence["gates"] if g["id"] == release.COVERAGE_GATE)
+        original = copy.deepcopy(item)
+        scenarios = [
+            ("null artifacts", lambda gate: gate.update(artifacts=None)),
+            ("unhashable artifact path", lambda gate: gate["artifacts"][0].update(path=[])),
+            ("unhashable atom ID", lambda gate: gate["coverage"]["atoms"][0].update(id=[])),
+            ("unhashable source path", lambda gate: gate["coverage"]["atoms"][0].update(source_path={})),
+            ("unhashable method key", lambda gate: gate["coverage"]["atoms"][0].update(jacoco_method=[])),
+            ("non-object atom", lambda gate: gate["coverage"].update(atoms=[None])),
+        ]
+        for name, mutate in scenarios:
+            with self.subTest(name=name):
+                item.clear()
+                item.update(copy.deepcopy(original))
+                mutate(item)
+                self.assert_blocked(self.result(), "gate:" + release.COVERAGE_GATE)
+
+    def test_coverage_envelope_requires_exact_report_inventory_and_counts(self):
+        gate = self.coverage_gate()
+        original = copy.deepcopy(gate)
+        for field, value in (
+                ("schema", "OTHER"), ("scope", "ALL_COPIED_CODE"), ("tool", "  "),
+                ("format", "SUMMARY_ONLY"), ("unmeasured_count", False),
+                ("measured_count", True), ("measured_count", 2),
+                ("atoms", None), ("atoms", []), ("report_artifact", None),
+                ("inventory_artifact", original["coverage"]["report_artifact"]),
+                ("inventory_artifact", "unlisted.tsv"), ("inventory_sha256", "not-a-digest")):
+            with self.subTest(field=field, value=value):
+                gate.clear()
+                gate.update(copy.deepcopy(original))
+                gate["coverage"][field] = value
+                self.assert_coverage_refused()
+
+    def test_inventory_requires_columns_unique_rows_and_exact_atom_bindings(self):
+        gate = self.coverage_gate()
+        original = (self.evidence_dir / gate["coverage"]["inventory_artifact"]).read_text()
+        header, row = original.splitlines()
+        for content in ("id\nfixture\n", original + row + "\n", header + "\n",
+                        original.replace("()V", "(I)V")):
+            with self.subTest(content=content):
+                self.write_coverage_artifact("inventory_artifact", content)
+                self.assert_coverage_refused()
+
+    def test_raw_report_requires_unambiguous_complete_method_counters(self):
+        gate = self.coverage_gate()
+        original = (self.evidence_dir / gate["coverage"]["report_artifact"]).read_text()
+        method = original[original.index("<method"):original.index("</method>") + len("</method>")]
+        line = '<counter type="LINE" covered="99" missed="1"/>'
+        branch = '<counter type="BRANCH" covered="99" missed="1"/>'
+        reports = [
+            "<coverage/>", "<report", original.replace(method, ""),
+            original.replace("</class>", method + "</class>"),
+            original.replace('class name="fixture/Example"', 'class name=""'),
+            original.replace('method name="run"', 'method'),
+            original.replace(branch, ""), original.replace(line, line + line),
+            original.replace('covered="99"', 'covered="-1"', 1),
+            original.replace('covered="99"', 'covered="unmeasured"', 1),
+        ]
+        for report in reports:
+            with self.subTest(report=report):
+                self.write_coverage_artifact("report_artifact", report)
+                self.assert_coverage_refused()
+        self.write_coverage_artifact("report_artifact", original.replace(
+            "</method>", '<counter type="INSTRUCTION" covered="99" missed="1"/></method>'))
+        self.assertTrue(self.result()["release_ready"])
+
+    def test_atom_identity_and_source_seals_cannot_be_replaced_by_summary_labels(self):
+        gate = self.coverage_gate()
+        original = copy.deepcopy(gate)
+        inventory = (self.evidence_dir / gate["coverage"]["inventory_artifact"]).read_text()
+        for field, value in (("id", " "), ("source_path", "README.md"),
+                             ("source_path", "src/example.txt"),
+                             ("source_path", "src/../example.java"),
+                             ("source_path", "src/missing.java")):
+            with self.subTest(field=field, value=value):
+                gate.clear()
+                gate.update(copy.deepcopy(original))
+                self.write_coverage_artifact("inventory_artifact", inventory)
+                self.change_atom_binding(field, value)
+                self.assert_coverage_refused()
+        for digest in (None, "not-a-digest", "F" * 64):
+            with self.subTest(digest=digest):
+                gate.clear()
+                gate.update(copy.deepcopy(original))
+                self.write_coverage_artifact("inventory_artifact", inventory)
+                gate["coverage"]["atoms"][0]["source_sha256"] = digest
+                self.assert_coverage_refused("invalid atom source SHA-256")
+
+    def test_measured_counts_require_nonnegative_integers_and_observed_lines(self):
+        gate = self.coverage_gate()
+        original = copy.deepcopy(gate)
+        for field in ("line_covered", "line_missed", "branch_covered", "branch_missed"):
+            for value in (False, "99", 99.0, -1, None):
+                with self.subTest(field=field, value=value):
+                    gate.clear()
+                    gate.update(copy.deepcopy(original))
+                    gate["coverage"]["atoms"][0][field] = value
+                    self.assert_coverage_refused("invalid " + field.split("_")[0] + " coverage counts")
+        gate.clear()
+        gate.update(original)
+        gate["coverage"]["atoms"][0].update(line_covered=0, line_missed=0)
+        self.assert_coverage_refused("unmeasured line coverage")
+
+    def test_exact_ninety_percent_threshold_uses_matching_raw_counts(self):
+        gate = self.coverage_gate()
+        original = copy.deepcopy(gate)
+        report = (self.evidence_dir / gate["coverage"]["report_artifact"]).read_text()
+        for family in ("line", "branch"):
+            for covered in (90, 89):
+                with self.subTest(family=family, covered=covered):
+                    gate.clear()
+                    gate.update(copy.deepcopy(original))
+                    atom = gate["coverage"]["atoms"][0]
+                    atom[family + "_covered"], atom[family + "_missed"] = covered, 100 - covered
+                    before = f'<counter type="{family.upper()}" covered="99" missed="1"/>'
+                    after = f'<counter type="{family.upper()}" covered="{covered}" missed="{100 - covered}"/>'
+                    self.write_coverage_artifact("report_artifact", report.replace(before, after))
+                    if covered == 90:
+                        self.assertTrue(self.result()["release_ready"])
+                    else:
+                        self.assert_coverage_refused(family + " coverage below 90%")
+
+    def test_distinct_methods_share_a_source_seal_but_not_an_atom_id(self):
+        gate = self.coverage_gate()
+        first = gate["coverage"]["atoms"][0]
+        second = dict(first, id="fixture.Example#other", jacoco_method="other")
+        gate["coverage"]["atoms"].append(second)
+        gate["coverage"]["measured_count"] = 2
+        report = (self.evidence_dir / gate["coverage"]["report_artifact"]).read_text()
+        method = report[report.index("<method"):report.index("</method>") + len("</method>")]
+        self.write_coverage_artifact("report_artifact", report.replace(
+            "</class>", method.replace('name="run"', 'name="other"') + "</class>"))
+        inventory = (self.evidence_dir / gate["coverage"]["inventory_artifact"]).read_text()
+        second_row = "fixture.Example#other\tfixture/Example\tother\t()V\tsrc/example.java\t\n"
+        self.write_coverage_artifact("inventory_artifact", inventory + second_row)
+        self.assertTrue(self.result()["release_ready"])
+        second["id"] = first["id"]
+        self.write_coverage_artifact("inventory_artifact", inventory + second_row.replace("#other", "#run"))
+        self.assert_coverage_refused("duplicate measured atom ID")
+
     def test_missing_one_mandatory_gate_is_not_a_pass(self):
         removed = self.evidence["gates"].pop()
         self.assert_blocked(self.result(), "gate:" + removed["id"])
@@ -365,6 +544,38 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assert_blocked(self.result(), "gate:" + entry["id"])
         file.unlink()
         self.assert_blocked(self.result(), "gate:" + entry["id"])
+
+    def test_artifact_records_require_digests_and_cannot_refer_to_the_manifest(self):
+        entry = self.evidence["gates"][0]
+        original = copy.deepcopy(entry["artifacts"])
+        for artifacts in ([None], [dict(original[0], sha256=None)],
+                          [dict(original[0], sha256="A" * 64)],
+                          [dict(original[0], path=self.manifest.name)], original * 2):
+            with self.subTest(artifacts=artifacts):
+                entry["artifacts"] = artifacts
+                self.assert_blocked(self.result(), "gate:" + entry["id"])
+
+    def test_raw_coverage_bytes_are_verified_before_report_parsing(self):
+        gate = self.coverage_gate()
+        report = self.evidence_dir / gate["coverage"]["report_artifact"]
+        report.write_text("<report")  # Deliberately retain the previously sealed digest.
+        self.assert_coverage_refused("execution artifact SHA-256 mismatch")
+
+    def test_source_change_during_artifact_validation_invalidates_snapshot(self):
+        observed_artifact = self.evidence_dir / self.evidence["gates"][0]["artifacts"][0]["path"]
+        original_hash = release.sha256
+
+        def publish_source_while_hashing(path):
+            digest = original_hash(path)
+            if path == observed_artifact:
+                self.write("src/arrived-during-validation.java", "class Arrived {}\n")
+            return digest
+
+        with mock.patch.object(release, "sha256", side_effect=publish_source_while_hashing):
+            result = self.result()
+        self.assert_blocked(result, "git.stable_snapshot")
+        initial = next(check for check in result["checks"] if check["name"] == "git.clean_source")
+        self.assertEqual(initial["status"], "PASS")
 
     def test_artifact_traversal_absolute_and_alias_paths_are_refused(self):
         entry = self.evidence["gates"][0]
@@ -548,6 +759,20 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assertIn("PENDING", text)
         self.assertIn("QUEUED", text)
         self.assertIn(self.git("rev-parse", "HEAD"), text)
+
+    def test_cli_hash_manifest_seals_each_available_boundary_file(self):
+        self.save_evidence()
+        hashes = Path(self.tmp.name) / "reports" / "boundary.sha256"
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            code = release.main(["--root", str(self.root), "--release",
+                                 "--evidence", str(self.manifest), "--sha256-out", str(hashes)])
+        self.assertEqual(code, 0)
+        self.assertTrue(json.loads(output.getvalue())["release_ready"])
+        entries = dict(line.split("  ", 1)[::-1] for line in hashes.read_text().splitlines())
+        self.assertEqual(set(entries), set(release.REQUIRED_FILES))
+        for path, digest in entries.items():
+            self.assertEqual(digest, hashlib.sha256((self.root / path).read_bytes()).hexdigest())
 
 
 if __name__ == "__main__":

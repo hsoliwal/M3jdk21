@@ -28,6 +28,9 @@ M3_OWNER_PREFIXES = ("jdk.internal.", "jdk.m3.", "com.sun.tools.javac.m3.", "jav
 COMPANION_PREFIX = "jdk.m3."
 COMPANION_FORMS = frozenset({"STATIC_OPERATIONS", "TYPED_VIEW"})
 MODULE_NAME = re.compile(r"^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*$")
+# Java identifier parts extend beyond Python's \w. Match a declaration
+# separator, using Java's lexical whitespace rather than Unicode whitespace.
+TYPE_NAME_END = r"(?=[ \t\n\r\f<{(]|\Z)"
 
 # Reuse the repository's public-name lexical helper; this is not Java attribution.
 _PUBLIC_NAMES_SPEC = importlib.util.spec_from_file_location(
@@ -83,9 +86,14 @@ def checked_fqn(value: str, field: str) -> None:
 
 
 def find_mapped_target(root: Path, record: dict, name: str) -> str:
-    for item in record.get("targets", []):
-        if not isinstance(item, dict) or item.get("symbol") != name:
-            continue
+    targets = record.get("targets", [])
+    if not isinstance(targets, list):
+        refuse("invalid canonical target list")
+    matches = [item for item in targets
+               if isinstance(item, dict) and item.get("symbol") == name]
+    if len(matches) > 1:
+        refuse("ambiguous canonical target ownership: " + name)
+    for item in matches:
         path = item.get("path")
         if not isinstance(path, str) or not path.startswith(("src/", "m3/")):
             refuse("invalid canonical target path")
@@ -103,7 +111,7 @@ def find_mapped_target(root: Path, record: dict, name: str) -> str:
         if re.findall(r"(?m)^\s*package\s+([\w$.]+)\s*;", code) != [package]:
             refuse("declared package disagrees: " + path)
         declarations = [match for match in re.finditer(
-            r"\b(class|interface|enum|record)\s+" + re.escape(simple) + r"(?![\w$])", code)
+            r"\b(class|interface|enum|record)\s+" + re.escape(simple) + TYPE_NAME_END, code)
             if code[:match.start()].count("{") == code[:match.start()].count("}")]
         if len(declarations) != 1:
             refuse("declared type disagrees: " + path)
@@ -117,7 +125,8 @@ def public_type_chain(code: str, names: list[str]) -> None:
     for name in names:
         pattern = (r"(?<![\w$])(?P<modifiers>(?:(?:public|protected|private|abstract|final|"
                    r"static|sealed|non-sealed|strictfp)\s+)*)"
-                   r"(?P<kind>@interface|class|interface|enum|record)\s+" + re.escape(name) + r"\b")
+                   r"(?P<kind>@interface|class|interface|enum|record)\s+"
+                   + re.escape(name) + TYPE_NAME_END)
         declarations = [match for match in re.finditer(pattern, code)
                         if code[:match.start()].count("{") == code[:match.start()].count("}")]
         if len(declarations) != 1:
@@ -251,7 +260,8 @@ def validate(root: Path) -> tuple[int, list[str]]:
         refuse("AGENTS.md lacks naming contract link")
     plan = json.loads(local_file(root, PLAN).read_text(encoding="utf-8"),
                       object_pairs_hook=unique_keys)
-    if plan.get("schema") != SCHEMA or plan.get("authority") != MAP:
+    if (not isinstance(plan, dict)
+            or plan.get("schema") != SCHEMA or plan.get("authority") != MAP):
         refuse("plan uses wrong schema or a competing map")
     blob = plan.get("authority_blob")
     if not isinstance(blob, str) or not SHA.fullmatch(blob):
@@ -261,9 +271,12 @@ def validate(root: Path) -> tuple[int, list[str]]:
         refuse("canonical naming map drift: re-pin and review changes")
     official = json.loads(original.decode("utf-8"),
                           object_pairs_hook=unique_keys)
-    if official.get("schema") != 1:
+    if not isinstance(official, dict) or official.get("schema") != 1:
         refuse("unexpected canonical naming map schema")
-    records = official.get("migration", {}).get("records", [])
+    migration = official.get("migration")
+    if not isinstance(migration, dict):
+        refuse("canonical migration records missing")
+    records = migration.get("records", [])
     if not isinstance(records, list):
         refuse("canonical migration records missing")
     ids: dict[str, dict] = {}
@@ -296,11 +309,12 @@ def validate(root: Path) -> tuple[int, list[str]]:
     seen = set()
     states = []
     for op in operations:
-        if not isinstance(op, dict) or op.get("mapping_id") not in ids:
+        if (not isinstance(op, dict) or not isinstance(op.get("mapping_id"), str)
+                or op["mapping_id"] not in ids):
             refuse("unknown capability mapping ID")
-        if op.get("kind") not in KINDS:
+        if not isinstance(op.get("kind"), str) or op["kind"] not in KINDS:
             refuse("unrecognized naming operation")
-        if op.get("state") not in STATUSES:
+        if not isinstance(op.get("state"), str) or op["state"] not in STATUSES:
             refuse("target receiver refuses unproven active changes; run pinned Synexia recipe first")
         if "proofs" in op or "installer_crate" in op:
             refuse("queued row falsely carries promotion material")
