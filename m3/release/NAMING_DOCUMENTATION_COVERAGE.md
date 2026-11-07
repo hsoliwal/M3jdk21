@@ -61,8 +61,12 @@ SHA-256 evidence to the final product commit after the last merge.
 The machine-readable preview contract now requires
 `M3_CHANGED_ATOM_COVERAGE` with at least 90% instrumented line and branch
 coverage **for every inventoried changed M3 contract atom**. A source
-SHA-256, nonempty inventory, raw report artifact, and explicit zero-unmeasured
-count are required; branchless atoms need an explanation. This does not
+SHA-256, complete inventory TSV and its SHA-256, raw report artifact, and
+explicit zero-unmeasured count are required; branchless atoms need an
+explanation. Produce the receipt fragment with
+`build_changed_atom_coverage.py` from a real JaCoCo XML and reviewed
+source/method inventory; a fragment without the original raw artifacts and
+the current release manifest is not admissible. This does not
 establish that every changed source atom was inventoried — reviewers must
 compare the inventory against the actual release Git diff.
 
