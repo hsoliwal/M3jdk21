@@ -29,7 +29,8 @@
          methods that also open a POSIX region; excluded (surefire test filter, the only parameter that takes method
          patterns) unless the profile m3-optane-native supplies the library; the source-slices oracles
          (recipe/pmem-source-image-20261106) map POSIX regions only -->
-    <m3.optane.test.filter>!M3PmemAtomCorrectnessJUnitTest, !M3PmemNativeKmpPrefix32JUnitTest, !M3PmemSourceSlicesJUnitTest, !M3PmemSourceSlicesLifecycleJUnitTest, !M3PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
+    <!-- M3PmemAcceleratorJUnitTest (recipe/pmem-accelerator-20261107) needs libm3pmemaccel.so: native profile only -->
+    <m3.optane.test.filter>!M3PmemAcceleratorJUnitTest, !M3PmemAtomCorrectnessJUnitTest, !M3PmemNativeKmpPrefix32JUnitTest, !M3PmemSourceSlicesJUnitTest, !M3PmemSourceSlicesLifecycleJUnitTest, !M3PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
     <!-- the oracles write sparse files above 2 GiB (NTFS fills the gap): temporary files go next to the build output,
          never to the system temporary directory; implicit exceptions keep their messages (no fast throw), so the
          replay digests of the dump drivers are reproducible -->
@@ -94,7 +95,7 @@
       <id>m3-optane-native</id>
       <properties>
         <m3.optane.test.filter>*Test</m3.optane.test.filter>
-        <m3.optane.surefire.argLine>-Xcheck:jni -XX:-OmitStackTraceInFastThrow -Dpmem.streaming.native=true -Dpmem.source.reuse.native=true -Dpmem.gram.native=true -Dpmem.corpus.selected.native=true -Dpmem.corpus.native=true -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
+        <m3.optane.surefire.argLine>-Xcheck:jni -XX:-OmitStackTraceInFastThrow -Dpmem.streaming.native=true -Dpmem.source.reuse.native=true -Dpmem.gram.native=true -Dpmem.corpus.selected.native=true -Dpmem.corpus.native=true -Dpmem.accelerator.native=true -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
       </properties>
     </profile>
     <profile>

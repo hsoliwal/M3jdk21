@@ -1,0 +1,63 @@
+@@@ FILE m3/optane/src/main/native/CMakeLists.txt
+@@@ HUNK L008-cmake-1
+@@@ OLD
+# m3optane.c declares _DEFAULT_SOURCE and m3pmemsdk.c _GNU_SOURCE themselves (madvise, O_CLOEXEC, O_NOFOLLOW, fdatasync)
+@@@ NEW
+# m3optane.c declares _DEFAULT_SOURCE and m3pmemsdk.c _GNU_SOURCE themselves (madvise, O_CLOEXEC, O_NOFOLLOW, fdatasync)
+
+#FLLDCIM: RELOCATE - recipe/pmem-accelerator-20261107 (census L008): m3pmemaccel, the JNI library of jdk.internal.m3.optane.M3PmemAccelerator (read-only mapped tensors, FS-DAX attribute, NUMA pin, ordered signed-Q8 x FP32 matvec; donor: the m3pmem.c and build.sh of the accelerator-pmem jmod, FILE row 3 of ../../recipe/pmem-accelerator-20261107/RELOCATION_MAP.tsv)
+set(internal "${CMAKE_CURRENT_SOURCE_DIR}/../java/jdk/internal/m3/optane")
+set(accel_header "${generated}/jdk_internal_m3_optane_M3PmemAccelerator.h")
+add_custom_command(OUTPUT "${accel_header}"
+  COMMAND "${CMAKE_COMMAND}" -E make_directory "${generated}/accel"
+  COMMAND "${Java_JAVAC_EXECUTABLE}" --release 21 -proc:none -Xlint:all -Werror
+    -h "${generated}" -d "${generated}/accel"
+    "${internal}/M3PmemAccelerator.java"
+  DEPENDS "${internal}/M3PmemAccelerator.java"
+  VERBATIM)
+add_library(m3pmemaccel SHARED m3pmemaccel.c "${accel_header}")
+target_include_directories(m3pmemaccel PRIVATE ${JNI_INCLUDE_DIRS} "${generated}")
+set_target_properties(m3pmemaccel PROPERTIES C_STANDARD 17 C_STANDARD_REQUIRED YES C_EXTENSIONS NO)
+if(MSVC)
+  target_compile_options(m3pmemaccel PRIVATE /W4 /WX /fp:strict)
+else()
+  # the donor build.sh flags: the Q8 kernel folds FP32 products in strict column order, so no FMA contraction
+  target_compile_options(m3pmemaccel PRIVATE -Wall -Wextra -Wpedantic -Werror -ffp-contract=off -fno-fast-math)
+endif()
+# m3pmemaccel.c declares _GNU_SOURCE itself (statx, sched_setaffinity, O_CLOEXEC); Linux only, like m3pmemsdk
+@@@ END
+@@@ FILE m3/optane/pom.xml
+@@@ HUNK L008-pom-1
+@@@ OLD
+    <m3.optane.test.filter>!M3PmemAtomCorrectnessJUnitTest, !M3PmemNativeKmpPrefix32JUnitTest, !M3PmemSourceSlicesJUnitTest, !M3PmemSourceSlicesLifecycleJUnitTest, !M3PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
+@@@ NEW
+    <!-- M3PmemAcceleratorJUnitTest (recipe/pmem-accelerator-20261107) needs libm3pmemaccel.so: native profile only -->
+    <m3.optane.test.filter>!M3PmemAcceleratorJUnitTest, !M3PmemAtomCorrectnessJUnitTest, !M3PmemNativeKmpPrefix32JUnitTest, !M3PmemSourceSlicesJUnitTest, !M3PmemSourceSlicesLifecycleJUnitTest, !M3PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
+@@@ END
+@@@ HUNK L008-pom-2
+@@@ OLD
+        <m3.optane.surefire.argLine>-Xcheck:jni -XX:-OmitStackTraceInFastThrow -Dpmem.streaming.native=true -Dpmem.source.reuse.native=true -Dpmem.gram.native=true -Dpmem.corpus.selected.native=true -Dpmem.corpus.native=true -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
+@@@ NEW
+        <m3.optane.surefire.argLine>-Xcheck:jni -XX:-OmitStackTraceInFastThrow -Dpmem.streaming.native=true -Dpmem.source.reuse.native=true -Dpmem.gram.native=true -Dpmem.corpus.selected.native=true -Dpmem.corpus.native=true -Dpmem.accelerator.native=true -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
+@@@ END
+@@@ FILE m3/optane/README.md
+@@@ HUNK L008-readme-1
+@@@ OLD
+| gates | `recipe/pmem-region-core-20261106/GATES.tsv`, lessons in `RECIPE_MEMORY.tsv` |
+
+## Build and use
+@@@ NEW
+| gates | `recipe/pmem-region-core-20261106/GATES.tsv`, lessons in `RECIPE_MEMORY.tsv` |
+
+### Census pass-1 remainder: the PMem tensor accelerator and the CPU-list parser (`recipe/pmem-accelerator-20261107`)
+
+<!-- FLLDCIM: RELOCATE - recipe/pmem-accelerator-20261107 (census L008 + L047): the non-exported package jdk.internal.m3.optane gains M3PmemAccelerator (JNI library m3pmemaccel) and M3NumaTopology -->
+| Item | Value |
+|---|---|
+| `jdk.internal.m3.optane.M3PmemAccelerator` (L008) | read-only `mmap` of a tensor file, FS-DAX attribute through `statx`, NUMA pin of the calling thread, bounded signed-Q8 x FP32 matrix-vector kernel folded in strict FP32 column order (scalar/AVX2 dispatch; the AVX-512 kernel of crate `m3-pmem-ordered-avx512-20261030` is HOLD until an AVX-512 host runs it); JNI library `m3pmemaccel` (CMake target, `src/main/native/m3pmemaccel.c`); NEC with the SDK's `M3PmemRegion` family (same shape, other contract), nothing of the SDK edited |
+| `jdk.internal.m3.optane.M3NumaTopology` (L047) | the strict one-pass Linux CPU-list parser `parseCpuList` (`0-3,7,10-11`, optional leading `+`, refusals for empty elements, inverted ranges, indexes above 65535 and bad separators); `discover()`/`nativeFeatures()` of the donor are HOLD (they need the accelerator jmod family's JNI and a multi-node host) |
+| oracles | `M3PmemAcceleratorSelfTest` (donor, 2,048 FP32 column-order cases, 64-row tile boundaries, > 2 GiB mapping, FS-DAX gate) through `M3PmemAcceleratorJUnitTest` under `-Pm3-optane-native`; `M3NumaTopologyCpuListTest` (hand-derived table and a reference-model differential) on every build |
+| recipe | `python -I m3/optane/recipe/pmem-accelerator-20261107/relocate.py --donor-git <clone> --donor-rev 56cbdc631259 [--check]` (`RELOCATE_CENSUS1_REMAINDER` v4) and `python -I m3/optane/recipe/pmem-accelerator-20261107/apply.py [--check]` for the three edited files (this section, the CMake target, the surefire filter); gates in `GATES.tsv`, decisions in `DECISION.tsv` |
+
+## Build and use
+@@@ END
