@@ -34,8 +34,10 @@ case "$MODE" in plan|compile|test) ;; *) echo "usage: self_contained_gate.sh [pl
 TOOLS="$(cd "$(dirname "$0")" && pwd)"
 REPO="${REPO:-$(git -C "$TOOLS" rev-parse --show-toplevel 2>/dev/null)}"
 [ -n "$REPO" ] && [ -f "$REPO/${ROOT_POM:-m3/pom.xml}" ] || { echo "no repository root with ${ROOT_POM:-m3/pom.xml}" >&2; exit 2; }
-REPO="$(cd "$REPO" && pwd)"
-OUT="${OUT:-$REPO/../m3-selfcontained-out}"; mkdir -p "$OUT"; OUT="$(cd "$OUT" && pwd)"
+# absolute paths in the form the JDK tools accept (Windows: H:/x, not the MSYS /h/x)
+apath() { (cd "$1" && { pwd -W 2>/dev/null || pwd; }); }
+REPO="$(apath "$REPO")"
+OUT="${OUT:-$REPO/../m3-selfcontained-out}"; mkdir -p "$OUT"; OUT="$(apath "$OUT")"
 case "$OUT/" in "$REPO"/*) echo "OUT must be outside the repository" >&2; exit 2;; esac
 JDK="${JDK:-${JAVA_HOME:-}}"; ROOT_POM="${ROOT_POM:-m3/pom.xml}"
 TEST_TIMEOUT="${TEST_TIMEOUT:-1800}"; KEEP_CLASSES="${KEEP_CLASSES:-0}"; HEARTBEAT="${HEARTBEAT:-300}"
@@ -151,15 +153,24 @@ javac_unit() {  # unit pom, role, phase, outdir, classpath-list-file
   enc=$(awk -F'\t' -v u="$u" '$1 == u { print $6 }' "$OUT/UNITS.tsv"); enc="${enc:-UTF-8}"
   args=(-J-Xmx1500m -encoding "$enc" -proc:none -nowarn -Xlint:none -Xmaxerrs 500 -implicit:none -d "$od")
   local ex; ex=$(grep -o -- '--add-exports[= ][^<[:space:]]*' "$u" 2>/dev/null | sed 's/^--add-exports[= ]//' | sort -u)
-  if [ -n "$ex" ]; then
-    args+=(-source 21 -target 21); while IFS= read -r r; do args+=(--add-exports "$r"); done <<< "$ex"; note="$note add-exports"
-  else args+=(--release 21); fi
+  # release: the pom's maven.compiler.release/source (1.x -> x, floor 8); none declared -> 21, then 8 (the
+  # maven-compiler-plugin default target) when the donor source only compiles against the Java 8 API
+  rel=$(awk -F'\t' -v u="$u" '$1 == u { print $7 }' "$OUT/UNITS.tsv"); rel="${rel#1.}"; case "$rel" in ''|*[!0-9]*) rel="";; esac
+  [ -n "$rel" ] && [ "$rel" -lt 8 ] && rel=8
+  local rels="${rel:-21 8}" rr
   [ "$ncp" -gt 0 ] && args+=(-cp "$(paste -sd "$PS" "$cpf")")
   mkdir -p "$od"
-  "$JAVAC" "${args[@]}" "@$lst" > "$OUT/logs/$(key "$u").$ph.javac.log" 2>&1; rc=$?
+  for rr in $rels; do
+    if [ -n "$ex" ]; then
+      local xa=(-source "$rr" -target "$rr"); while IFS= read -r r; do xa+=(--add-exports "$r"); done <<< "$ex"
+    else local xa=(--release "$rr"); fi
+    "$JAVAC" "${args[@]}" "${xa[@]}" "@$lst" > "$OUT/logs/$(key "$u").$ph.javac.log" 2>&1; rc=$?
+    [ "$rc" = 0 ] && break
+  done
+  note="$note release=$rr${ex:+ add-exports}"; [ -z "$rel" ] && [ "$rr" != 21 ] && note="$note (fallback: no release declared)"
   e=$(cnt -E '^.*\.java:[0-9]+: error: ' "$OUT/logs/$(key "$u").$ph.javac.log")
   sed -n -E 's#^(.*\.java):([0-9]+): error: (.*)$#\1\t\2\t\3#p' "$OUT/logs/$(key "$u").$ph.javac.log" \
-    | sed "s#^$REPO/##" | awk -v u="$u" -v ph="$ph" -F'\t' -v OFS='\t' '{ print u, ph, $1, $2, $3 }' >> "$OUT/COMPILE_ERRORS.tsv"
+    | awk -v u="$u" -v ph="$ph" -v repo="$REPO/" -F'\t' -v OFS='\t' '{ gsub(/\\/, "/", $1); if (index($1, repo) == 1) $1 = substr($1, length(repo) + 1); print u, ph, $1, $2, $3 }' >> "$OUT/COMPILE_ERRORS.tsv"
   local st=PASS; [ "$rc" = 0 ] || st=FAIL
   printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$u" "$role" "$ph" "$n" "$rc" "$e" "$st" "$ncp" "${note# }" >> "$OUT/COMPILE.tsv"
   # resources (main: src/main/resources, test: src/test/resources) onto the class output

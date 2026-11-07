@@ -35,13 +35,13 @@ TOOLS="$(cd "$(dirname "$0")" && pwd)"
 WT="${WT:-.}"; OUT="${OUT:?OUT must name a scratch directory outside the worktree}"; JDK="${JDK:-${JAVA_HOME:-}}"
 DISK_MOUNT="${DISK_MOUNT:-/h}"; DISK_FLOOR_KB="${DISK_FLOOR_KB:-1000000}"
 VENDOR=m3/vendor/third_party
-LEDGER='^(\./)?(\.m3/task-crates/|m3/sanitize/|.*/(qualification|verification|evidence|receipts|snapshots|history|retained-variants|upstream-excluded|META-INF)/)'
+LEDGER='^([.]/)?([.]m3/task-crates/|m3/sanitize/|.*/(qualification|verification|evidence|receipts|snapshots|history|retained-variants|upstream-excluded|META-INF)/)'
 log() { printf '%s %s\n' "$(date +%H:%M:%S)" "$*"; }
 TOUCHED=()
 restore() { [ ${#TOUCHED[@]} -gt 0 ] && git restore --source=HEAD --staged --worktree -- "${TOUCHED[@]}" 2>/dev/null; }
 die() { log "HELD: $*"; printf 'HELD\t%s\n' "$*" > "$OUT/HELD_${OLD}.txt"; restore; exit 2; }
 cd "$WT" || { echo "no worktree $WT" >&2; exit 2; }
-mkdir -p "$OUT"; OUT="$(cd "$OUT" && pwd)"; rm -f "$OUT/HELD_${OLD}.txt"
+mkdir -p "$OUT"; OUT="$(cd "$OUT" && { pwd -W 2>/dev/null || pwd; })"; rm -f "$OUT/HELD_${OLD}.txt"
 log "worktree $(pwd) head $(git rev-parse --short HEAD) branch $(git branch --show-current)"
 [ -f "$VENDOR/$OLD/pom.xml" ] && [ -f "$VENDOR/$NEW/pom.xml" ] || die "donor poms missing (the sparse set must hold every pom under m3/)"
 
