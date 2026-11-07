@@ -54,3 +54,11 @@ if(BUILD_TESTING)
   add_test(NAME m3_derivative_regex_checks COMMAND m3_derivative_regex_checks)
 
 endif()
+
+# Synexia precompute planner kernels join the module's JNI library (recipe m3/ports/precompute/recipe/planner-native-20261107):
+# Java_jdk_m3_precompute_M3NativePrecomputeOps_{nativeAbiVersion,lookupPairsNative,tupleLookupAbiVersionNative,
+# lookupTuplesNative}: coarse batch lookups over one frozen tuple index, every borrowed array released before returning,
+# nothing published on a refused shape; M3NativePrecomputeOps keeps the Java path as the semantic oracle.
+target_sources(m3_precompute PRIVATE
+  src/m3_precompute_pair_jni.c
+  src/m3_precompute_tuple_jni.c)
