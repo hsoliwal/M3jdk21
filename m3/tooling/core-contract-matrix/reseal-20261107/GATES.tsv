@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# core-contract-matrix re-seal (2026-11-07), master 08fa7d2e705205eea0a685cfb14f39fd0f4b448e; WSL Ubuntu, OpenJDK 21 (stock) for the build replay.
+gate	command	state	evidence
+1_old_admission	python check_admission.py <master tree> <old qualify.py> <old CURRENT_INPUTS.json>	FAIL (baseline)	ValueError: source identity drift: m3/build.sh (12 pinned files had changed since 306b54ad6c70; 2 new tests unlisted)
+2_reseal	python reseal_ccm.py <master tree> <old json> <old qualify.py> <out> 08fa7d2e705205eea0a685cfb14f39fd0f4b448e	PASS	files 59 -> 61 (2 tests added, 12 identities carried, 5 m3/lexicon inputs kept), programs 16 -> 18 in build.sh order, executions 64 -> 72; new markers SharedLexiconCatalogPayloadReleaseTest=M3JDK_LEXICON_PAYLOAD_RELEASE_PASS, SharedLexiconCatalogWarmLookupTest=M3JDK_LEXICON_WARM_LOOKUP_PASS (read from the test sources)
+3_new_admission	python check_admission.py <master tree> <new qualify.py> <new CURRENT_INPUTS.json>	PASS	ADMISSION_PASS files=61 java=55 programs=18
+4_build_replay	M3JDK=<OpenJDK 21> bash m3/build.sh (with the workflow's sparse m3/lexicon inputs)	FAIL (pre-existing, not this change)	jit mode: FoundationTest, the 2 new lexicon tests, typed-precompute, instance-index, number-space pass; M3NumberSpaceContractTest fails at check 30020: the test expects donor path "m3-dictlang/src/main/java/com/dictlang/values/NumberValue.java" (renamed by fe35ea98841) while m3/lexicon/m3-source-manifest.tsv keeps the donor fact "synexia-dictlang/..."; the workflow now fails at that test instead of at the identity pins
+5_scope	compare master...head	PASS	m3/tooling/core-contract-matrix/** only
