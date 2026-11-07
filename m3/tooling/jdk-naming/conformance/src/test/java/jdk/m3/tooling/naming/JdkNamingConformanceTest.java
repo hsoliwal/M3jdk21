@@ -106,6 +106,14 @@ class JdkNamingConformanceTest {
     }
 
     @Test
+    void aDottedSegmentBeforeAWildcardOrTheEndOfAPrefixLiteral() {
+        assertEquals("rules.add(\"jdk.m3.rewrite.m3.*\"); p.startsWith(\"jdk.m3.rewrite.m3.\") "
+                        + "p.startsWith(\"com.synexia.\") p.startsWith(\"org.synexia.\") the donor is synexia. m3/vendor/synexia.",
+                rewritten("rules.add(\"com.m3.rewrite.synexia.*\"); p.startsWith(\"jdk.m3.rewrite.synexia.\") "
+                        + "p.startsWith(\"com.synexia.\") p.startsWith(\"org.synexia.\") the donor is synexia. m3/vendor/synexia."));
+    }
+
+    @Test
     void theProductNameFollowsThePerKindJdkStyle() {
         assertEquals("// Adapted for the M3JDK 21 M3FS runtime", rewritten("// Adapted for the M3JDK21 M3FS runtime"));
         assertEquals("# built in M3JDK 21; see hsoliwal/M3jdk21 and M3jdk21 #2216",

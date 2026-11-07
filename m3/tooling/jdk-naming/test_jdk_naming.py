@@ -181,6 +181,18 @@ class JdkNamingTest(unittest.TestCase):
         self.assertEqual(jn.renamed_path("src/java.base/share/legal/synexia.md"), "src/java.base/share/legal/synexia.md")
         self.assertTrue(jn.KEEP_PATH.search("src/java.base/share/legal/synexia.md"))
 
+    def test_a_dotted_segment_before_a_wildcard_or_the_end_of_a_prefix_literal(self):
+        """SEGMENT_DOT_END: fe35ea98841 left rewrite.synexia.* and "rewrite.synexia." (SEGMENT_DOT needs a letter after
+        the dot) while the package moved to rewrite.m3; the donor prefix checks com.synexia. / org.synexia., prose and a
+        path segment ending a literal (not this rule) stay."""
+        line = ('rules.add("com.m3.rewrite.synexia.*"); p.startsWith("jdk.m3.rewrite.synexia.") '
+                'p.startsWith("com.synexia.") p.startsWith("org.synexia.") the donor is synexia. m3/vendor/synexia.')
+        counts: dict = {}
+        self.assertEqual(jn.rewrite_line(line, counts),
+                         'rules.add("jdk.m3.rewrite.m3.*"); p.startsWith("jdk.m3.rewrite.m3.") '
+                         'p.startsWith("com.synexia.") p.startsWith("org.synexia.") the donor is synexia. m3/vendor/synexia.')
+        self.assertEqual(counts.get("SEGMENT_DOT_END"), 2)
+
     def test_the_product_name_follows_the_per_kind_jdk_style(self):
         """User decision 2026-10-31: prose M3JDK (comment lines only), types M3Jdk*, constants M3JDK_*, kebab m3jdk-*;
         the repository name hsoliwal/M3jdk21, PR references and string literals stay."""

@@ -16,6 +16,7 @@ TEXT	KEBAB_SUFFIX	(?<=[A-Za-z0-9]-)synexia(?![A-Za-z0-9_])	m3	a kebab name endin
 TEXT	CONST_KEBAB	(?<![A-Za-z0-9])SYNEXIA-(?=[A-Z0-9])	M3-	invariant and ledger ids (SYNEXIA-LLM-FIRST-2)
 TEXT	SEGMENT	(?<![^/])synexia(?=/)	m3	a whole path segment (m3/vendor/synexia/)
 TEXT	SEGMENT_DOT	(?<![A-Za-z0-9_-])synexia(?=\.[A-Za-z])(?!\.(?:com|io|org|net|dev|ai)\b)	m3	a whole dotted segment (com.m3.synexia.importer, schema id synexia.recipe-source-custody); never a domain name
+TEXT	SEGMENT_DOT_END	(?<=[a-z0-9]\.)(?<!com\.)(?<!org\.)synexia(?=\.(?![A-Za-z0-9]))	m3	a dotted segment of a package before a wildcard or the end of a prefix literal (jdk.m3.rewrite.synexia.*, "jdk.m3.rewrite.synexia."); the bare donor prefix com.synexia. stays a check
 TEXT	PKG_COM_M3	(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))com\.m3\.(?=[a-z])	jdk.m3.	exported M3 packages take the JDK module prefix (Maven groupId spans are kept)
 TEXT	PKG_PATH_COM_M3	(?:(?<![A-Za-z0-9])|(?<=\\[tnr]))com/m3/(?=[a-z])	jdk/m3/	exported package as a path
 TEXT	JNI_COM_M3	(?:(?<=Java_)|(?<![A-Za-z0-9_]))com_m3_(?=[a-z])	jdk_m3_	JNI symbol and header name of an exported package

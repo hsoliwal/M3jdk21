@@ -47,7 +47,7 @@ final class M3RecipeOwnershipPolicyTest {
                 row.targetOwner().startsWith("jdk.m3.rewrite.a3.")
                         && row.classification().synexiaCanonicalResidue()));
         assertTrue(rows.stream().anyMatch(row ->
-                row.targetOwner().startsWith("jdk.m3.rewrite.synexia.")
+                row.targetOwner().startsWith("jdk.m3.rewrite.m3.")
                         && row.classification().thinAdapterOnly()));
         assertTrue(rows.stream().anyMatch(row ->
                 row.targetOwner().startsWith("jdk.m3.rewrite.backport.")

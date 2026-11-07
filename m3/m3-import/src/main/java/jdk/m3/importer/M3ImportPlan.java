@@ -27,7 +27,7 @@ import java.util.Set;
  * Plans and stages a current/full Synexia delivery without writing the vendored target tree.
  *
  * <p>The plan compares the sealed delivery manifest with the current
- * {@code m3/vendor/synexia} snapshot. Only ADD/REPLACE candidates may be copied, and only under
+ * {@code m3/vendor/m3} snapshot. Only ADD/REPLACE candidates may be copied, and only under
  * {@code m3/build}. KEEP rows prove reuse; STALE rows are evidence only and never authorize
  * deletion.</p>
  */
@@ -337,7 +337,7 @@ public final class M3ImportPlan {
             Path root,
             Set<String> manifestTargets,
             List<Row> rows) throws IOException {
-        Path vendor = root.resolve("m3/vendor/synexia");
+        Path vendor = root.resolve("m3/vendor/m3");
         if (!Files.exists(vendor, LinkOption.NOFOLLOW_LINKS)) return;
         if (Files.isSymbolicLink(vendor) || !Files.isDirectory(vendor, LinkOption.NOFOLLOW_LINKS)) {
             throw new IllegalStateException("Synexia vendor root is not a regular directory");

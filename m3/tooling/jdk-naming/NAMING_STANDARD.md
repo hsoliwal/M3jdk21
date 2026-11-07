@@ -109,6 +109,7 @@ one example per rule.
 | `CONST_KEBAB` | `SYNEXIA-LLM-FIRST-2` | `M3-LLM-FIRST-2` |
 | `SEGMENT` | `m3/vendor/synexia/lib` | `m3/vendor/m3/lib` |
 | `SEGMENT_DOT` | `jdk.m3.synexia.importer`, `synexia.recipe-source-custody/1` | `jdk.m3.importer`, `m3.recipe-source-custody/1` |
+| `SEGMENT_DOT_END` | `jdk.m3.rewrite.synexia.*`, `"jdk.m3.rewrite.synexia."` | `jdk.m3.rewrite.m3.*`, `"jdk.m3.rewrite.m3."` |
 | `PKG_COM_M3` | `com.m3.collections.A` | `jdk.m3.collections.A` |
 | `PKG_PATH_COM_M3` | `com/m3/collections/` | `jdk/m3/collections/` |
 | `JNI_COM_M3` | `Java_com_m3_fs_M3FsNative_open` | `Java_jdk_m3_fs_M3FsNative_open` |

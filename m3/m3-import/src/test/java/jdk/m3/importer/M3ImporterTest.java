@@ -421,7 +421,7 @@ final class M3ImporterTest {
                         List.of(entry),
                         "");
         assertEquals(
-                "01b4e1f8804e2699c9133c3ca7dbf3f2841f2ff3991096778a6131cbc9c3fc55",
+                "a03b12ba031692aa982fdd8edce0f015a369d03463c01d917377c0aa871e09d5",
                 manifest.root());
     }
 

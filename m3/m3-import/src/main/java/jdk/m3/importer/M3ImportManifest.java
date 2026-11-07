@@ -121,7 +121,7 @@ public record M3ImportManifest(
             targetPath = relative(targetPath, "targetPath");
             if (!targetPath.startsWith("m3/vendor/m3/")) {
                 throw new IllegalArgumentException(
-                        "automatic Synexia import must remain below m3/vendor/synexia");
+                        "automatic Synexia import must remain below m3/vendor/m3");
             }
             sha256 = sha(sha256, "sha256");
             license = token(license, "license");
