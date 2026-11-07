@@ -1,0 +1,99 @@
+LEAF 68	NO_ORIGIN	? unresolved
+LEAF 69	CONFLICT	2879a91f48c	2879a91f48c 2026-10-20 Add progress-aware streams, bounded shadows and
+   CONFLICT=1	src/java.base/share/classes/java/io/InputStream.java
+   CONFLICT=1	src/java.base/share/classes/java/io/OutputStream.java
+   CLEAN=theirs	src/java.base/share/classes/jdk/internal/m3/io/M3IO.java
+LEAF 70	CLEAN	685675e2969	685675e2969 2026-10-24 Converge original collection views, atomic arra
+   CLEAN=theirs	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java
+   CLEAN	src/java.base/share/native/libjava/M3IndexMaskWindow.c
+LEAF 71	CLEAN	43f50e1f76e	43f50e1f76e 2026-10-25 Compact metadata in original Matcher and M3TQ o
+   CLEAN	src/java.base/share/classes/java/util/regex/Matcher.java
+   CLEAN	src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
+LEAF 72	CONFLICT	00eedf4329e	00eedf4329e 2026-10-18 java.base: token-sequence regex scaffold in jdk
+   CONFLICT=1	src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java
+LEAF 73	CONFLICT	f5ab46c5688	f5ab46c5688 2026-10-22 perf(java.base): receive qualified existing Syn
+   CONFLICT=1	src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java
+LEAF 74	CONFLICT	4316758d7e5	4316758d7e5 2026-10-21 Refine filtered and sorted array/index views an
+   CONFLICT=1	src/java.base/share/classes/java/util/CollectionViews.java
+LEAF 75	CONFLICT	01952e935de	01952e935de 2026-10-21 Refine composed String-key comparisons, sorted 
+   CONFLICT=3	src/java.base/share/classes/java/lang/M3String.java
+   CONFLICT=1	src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java
+LEAF 76	CLEAN	dce32109366	dce32109366 2026-10-21 Refine M3 arrays, monitored scheduling, and Ecl
+   CLEAN=theirs	src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java
+LEAF 77	CONFLICT	bbd3b6175b2	bbd3b6175b2 2026-10-19 M3StringPool: bound frozen lookup metadata and 
+   CONFLICT=17	src/java.base/share/classes/java/lang/M3StringPool.java
+LEAF 78	CLEAN	38a246c3869	38a246c3869 2026-10-26 Reuse prepared regex ASCII frontiers across qua
+   CLEAN	src/java.base/share/classes/java/util/regex/M3PatternQuery.java
+LEAF 79	CONFLICT	e47eeda7c05	e47eeda7c05 2026-10-20 m3: consolidate internal JNI exception atoms an
+   CLEAN=theirs	src/java.base/share/native/libjava/M3BitLane28.c
+   CONFLICT=1	src/java.base/share/native/libjava/M3RX7.c
+   CLEAN	src/java.base/share/native/libjava/M3RegexDpPlan.c
+   CLEAN	src/java.base/share/native/libjava/M3StateRelation.c
+   CLEAN	src/java.base/share/native/libjava/M3StringPool.c
+   CLEAN	src/java.base/share/native/libjava/M3StringRegexDp.c
+LEAF 80	CLEAN	f3534220214	f3534220214 2026-10-21 Receive composed String ownership and Java/JNI 
+   CLEAN	src/java.base/share/classes/java/lang/M3StringAtom.java
+LEAF 81	CONFLICT	db58e71cf96	db58e71cf96 2026-10-20 feat(m3string): materialize token-aware regex l
+   CONFLICT=1	src/java.base/share/classes/java/lang/M3StringPool.java
+LEAF 82	CONFLICT	8ac8ea2d658	8ac8ea2d658 2026-10-26 Prepare bounded ASCII-tail mask reuse for revie
+   CONFLICT=1	src/java.base/share/classes/java/util/regex/M3PatternQuery.java
+LEAF 83	CONFLICT	9a017a8ef11	9a017a8ef11 2026-10-29 8310849: Pattern matching for instanceof and ar
+   CONFLICT=2	src/java.base/share/classes/java/lang/invoke/MethodType.java
+LEAF 84	CONFLICT	ba10b4eb6bc	ba10b4eb6bc 2026-10-19 Converge M3String fixed JNI and interning on ar
+   CONFLICT=17	src/java.base/share/classes/java/lang/M3StringPool.java
+LEAF 85	CONFLICT	a60b82ffcc8	a60b82ffcc8 2026-10-22 fix(java.base): preserve backing Collection ide
+   CONFLICT=1	src/java.base/share/classes/java/util/CollectionViews.java
+LEAF 86	CLEAN	5dc53409c03	5dc53409c03 2026-10-20 feat(m3string): materialize token-aware regex l
+   CLEAN	src/java.base/share/classes/java/lang/M3String.java
+LEAF 87	NO_ORIGIN	? unresolved
+LEAF 88	CLEAN	a12623b2633	a12623b2633 2026-10-21 feat(file): add one-read M3Grammar paragraph la
+   CLEAN=theirs	src/java.base/share/classes/java/util/concurrent/ThreadPerTaskExecutor.java
+LEAF 89	CONFLICT	0331524b74a	0331524b74a 2026-10-21 perf(java.base): use the existing M3 direct-own
+   CONFLICT=1	src/java.base/share/classes/java/util/CollectionViews.java
+LEAF 90	CONFLICT	eb49a2035ca	eb49a2035ca 2026-10-24 Receive qualified per-file refinement: m3-regex
+   CONFLICT=1	src/java.base/share/classes/java/lang/M3StringRegexDp.java
+LEAF 91	CONFLICT	5e0480f1f30	5e0480f1f30 2026-10-25 Amortize existing JNI count transfers with boun
+   CONFLICT=2	src/java.base/share/native/libjava/M3IndexMaskWindow.c
+LEAF 104	CONFLICT	aab69ff8ffb	aab69ff8ffb 2026-10-25 feat(parser): project existing foreign ASTs wit
+   CONFLICT=10	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+   CONFLICT=2	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+LEAF 105	CONFLICT	b7f85533d18	b7f85533d18 2026-10-27 Receive actual Synexia recipe-generated bounded
+   CONFLICT=1	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+LEAF 106	CONFLICT	22c3d19339c	22c3d19339c 2026-10-19 m3: refine JDT semantic indexes, filtered views
+   CONFLICT=3	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+   CLEAN	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java
+LEAF 107	CONFLICT	19d77ba95b9	19d77ba95b9 2026-10-20 feat(m3ast): ingest original javac parse into l
+   CONFLICT=9	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+   CONFLICT=3	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java
+   CLEAN	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java
+LEAF 108	CONFLICT	4a06aff3c3d	4a06aff3c3d 2026-10-27 Receive exact generated bounded multi-hunk M3Fi
+   CONFLICT=1	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+LEAF 109	CONFLICT	a7d66ed5754	a7d66ed5754 2026-10-25 feat(m3ast): preserve field-list positions and 
+   CONFLICT=12	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+   CLEAN	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java
+   CONFLICT=2	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+LEAF 110	CONFLICT	6338eaa9b3e	6338eaa9b3e 2026-10-29 text-tools: native wc kernel in libm3textio wit
+   CONFLICT=1	m3/tooling/module-packs/text-tools/native/m3textio.c
+LEAF 111	CONFLICT	32354b31d1c	32354b31d1c 2026-10-26 feat(m3ast): receive recipe-qualified full span
+   CONFLICT=7	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+   CONFLICT=3	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+LEAF 112	CONFLICT	9b97ffa8342	9b97ffa8342 2026-10-20 feat(parser): receive canonical javac indexed A
+   CONFLICT=9	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+LEAF 113	CONFLICT	477ae612ef1	477ae612ef1 2026-10-21 Add scoped file observations and primitive AST 
+   CONFLICT=1	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+LEAF 114	CLEAN	d0aa391652d	d0aa391652d 2026-10-26 feat(m3file): receive recipe-qualified one-pass
+   CLEAN	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+LEAF 115	CONFLICT	38bab128b6d	38bab128b6d 2026-10-21 feat(jdk.m3.parser): expose immutable MIndexAST
+   CONFLICT=1	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+LEAF 116	CONFLICT	6f151d7ad12	6f151d7ad12 2026-10-20 Reuse unchanged binary dependencies in scoped o
+   CONFLICT=1	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+LEAF 117	CLEAN	07c48df7a58	07c48df7a58 2026-10-20 feat: share compiler source deltas and stream c
+   CLEAN	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java
+LEAF 118	CONFLICT	57bfc12577d	57bfc12577d 2026-10-25 feat(parser): source-bound M3File change envelo
+   CONFLICT=1	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+LEAF 119	CONFLICT	df129e0319e	df129e0319e 2026-10-26 feat(m3ast): receive qualified Unicode scalar A
+   CONFLICT=2	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java
+LEAF 120	CONFLICT	4d0791d9f7f	4d0791d9f7f 2026-10-31 java.base number parse: reject non-hex letters 
+   CONFLICT=2	m3/tooling/jdk-superset/number-parse/gate/M3ParseDifferential.java
+LEAF 121	CLEAN	2838ec852fd	2838ec852fd 2026-10-20 feat(parser): share javac PARSED M3ASTIndex thr
+   CLEAN	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java
