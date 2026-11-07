@@ -29,20 +29,23 @@ Inspect current `master`, its ancestry, the incoming release-preparation PRs,
 and the no-loss/source-retention queue. Never base a release on the older
 `bb66a8c16642` snapshot or assume that its earlier preview tree is still current.
 
-## 2. Repository secret (user)
+## 2. Review upstream recipe and credential boundary
 
-Add `SYNEXIA_READ_TOKEN`: a fine-grained token with read-only Contents access to
-`hsoliwal/com.synexia`. `m3-a3.yml` uses it to fetch the private A3 pin (audit blocker 10).
-
-```sh
-gh secret set SYNEXIA_READ_TOKEN -R hsoliwal/M3jdk21
-```
+The historical `m3-a3.yml` workflow references a private Synexia A3 pin and
+may require `SYNEXIA_READ_TOKEN` with read-only Contents scope. **Do not add
+new credentials as part of this release-preparation PR.** First reconcile the
+standalone release-contract versus `AGENTS.md` recipe execution/ownership
+disagreement. If the final reviewed build still needs the private pin, configure
+the least-privileged read-only secret explicitly as a separate owner action.
+Do not print the token or embed it in release artifacts.
 
 ## 3. Legacy recipe custody (user, after its dependency)
 
-Merge the legacy-custody deletion PR (811 executable candidates under the nine legacy recipe
-roots) once the Synexia importer repoint patch has landed. Until then, `legacy_recipe_custody`
-stays HOLD and `--release` cannot report `release_ready: true`.
+Review the historic 2026-10-31 custody inventory (811 candidates under nine
+legacy roots) against the *current* source tree. Only remove migrated files in a
+separate reviewed, content-preserving migration with sealed owner/consumer closure;
+do not assume that the old count or unmerged-PR list is still current.
+`legacy_recipe_custody` remains HOLD until current release evidence closes it.
 
 ## 4. Release branch
 
