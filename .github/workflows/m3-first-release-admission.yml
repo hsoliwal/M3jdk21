@@ -38,6 +38,10 @@ jobs:
         run: git diff --check
       - name: Unit-test the release verifier
         run: python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+      - name: Fail if standalone M3 core tests are omitted
+        run: |
+          python3 m3/release/verify_test_wiring.py --root . --strict \
+            --json-out m3/release/queue/current/core-test-wiring.json
       - name: Validate release claims and boundaries
         shell: bash
         run: |
@@ -114,7 +118,7 @@ jobs:
   foundation:
     name: immutable text foundation
     runs-on: ubuntu-22.04
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
