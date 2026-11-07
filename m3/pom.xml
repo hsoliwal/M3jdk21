@@ -315,8 +315,6 @@
         <module>history</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/compiletime HELD (gate gate-ports-compiletime: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>ports/compiletime</module>
-        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/jfx-viewport HELD (gate gate-ports-jfx-viewport: BUILD FAILURE; first error in DECISION.tsv) -->
-        <module>ports/jfx-viewport</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/pcollections HELD (gate gate-collections-pcollections: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>collections/pcollections</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk HELD (gate gate-ports-parallel-bulk: BUILD FAILURE; first error in DECISION.tsv) -->
