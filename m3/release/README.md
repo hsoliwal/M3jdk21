@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK 21 release preparation
 
-[Release preparation: names and tests](RELEASE_PREPARATION.md) · [Visible release queue](queue/README.md) · [Release contract](release-contract.json) · [Naming, documentation and coverage](NAMING_DOCUMENTATION_COVERAGE.md) · [Candidate notes](RELEASE_NOTES.md) · [Checklist](RELEASE_CHECKLIST.md) · [Candidate checklist #2756](RELEASE_CHECKLIST_CANDIDATE_2756.md)
+[Release preparation: names and tests](RELEASE_PREPARATION.md) · [Visible release queue](queue/README.md) · [Release contract](release-contract.json) · [Naming, documentation and coverage](NAMING_DOCUMENTATION_COVERAGE.md) · [Fixed-point refusal evidence](NAMING_FIXED_POINT_EVIDENCE.md) · [Candidate notes](RELEASE_NOTES.md) · [Checklist](RELEASE_CHECKLIST.md) · [Candidate checklist #2756](RELEASE_CHECKLIST_CANDIDATE_2756.md)
 
 M3JDK21 is one integrated Java/HotSpot/JNI SDK. Release claims require evidence
 for the exact candidate commit and tree. A naming pass, finite component test,
@@ -47,9 +47,9 @@ The current public P0 foundation is intentionally narrower than the full M3 prog
 - an independently authored immutable-text/precompute foundation exists under the explicit
   first-party licensing boundary;
 - product verification machinery, Java precompute differential tests and JNI/native
-  parity tests exist here; under the standalone rule (2026-10-31) the transformation
-  recipes this repository carries and their control-reactor evidence are executed here
-  as well, with donor lineage kept in ledgers (`m3/tooling/standalone/`);
+  parity tests exist here; canonical Maven/OpenRewrite transformation recipes are
+  authored and executed in `hsoliwal/com.synexia`, while M3JDK21 retains passive,
+  source-bound receipt data and independently executes product acceptance;
 - the project has a deterministic release contract, rights/provenance record, and proof-pack
   checksum process.
 
@@ -153,7 +153,8 @@ A release candidate must preserve:
   raw JaCoCo XML where applicable, each source SHA-256, >=90% per measured
   contract atom (99% objective for critical atoms), and explicit exclusions/HOLD;
 - JNI/native parity results where JNI/native is used;
-- Maven/OpenRewrite control-reactor execution and replay receipts produced in this repository;
+- Maven/OpenRewrite control-reactor execution receipt **produced in Synexia** and
+  consumed here as passive source-bound data, never an executed target recipe;
 - product compilation and applicable installed-image/module tests;
 - release-contract validation;
 - generated SHA-256 manifest;

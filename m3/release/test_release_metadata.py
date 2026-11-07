@@ -68,6 +68,28 @@ class ReleaseMetadataTest(unittest.TestCase):
         self.assertIn("PENDING — exact canonical receipt required", self.notes)
         self.assertIn("HOLD", self.notes)
 
+    def test_release_readme_agrees_on_recipe_execution_owner(self):
+        readme = self.readme
+        preparation = (PACK / "RELEASE_PREPARATION.md").read_text(encoding="utf-8")
+        triage = (PACK / "CI_FAILURE_TRIAGE_20261107.md").read_text(encoding="utf-8")
+        self.assertEqual(
+            "hsoliwal/com.synexia",
+            self.contract["execution_evidence"]["gate_owners"]["M3_MAVEN_CONTROL_REACTOR"])
+        self.assertIn("authored and executed in `hsoliwal/com.synexia`", readme)
+        self.assertIn("produced in Synexia", readme)
+        self.assertIn("M3JDK21 consumes an exact, hash-verified", preparation)
+        self.assertIn("agree that canonical", triage)
+        self.assertNotIn("control-reactor evidence are executed here", readme)
+        self.assertNotIn("control-reactor execution and replay receipts produced in this repository", readme)
+        self.assertNotIn("Both policies currently exist", preparation)
+
+    def test_naming_fixed_point_evidence_uses_stable_path(self):
+        evidence = PACK / "NAMING_FIXED_POINT_EVIDENCE.md"
+        self.assertTrue(evidence.is_file())
+        self.assertIn("NAMING_FIXED_POINT_EVIDENCE.md", self.readme)
+        self.assertIn("moves=35 rewrites=56", evidence.read_text(encoding="utf-8"))
+        self.assertFalse((PACK / "NAMING_FIXED_POINT_EVIDENCE_20261107.md").exists())
+
     def test_historical_ci_numbers_are_explicitly_dated(self):
         self.assertIn("Historical CI snapshot only", self.notes)
         self.assertIn("not 2026-11-07 current", self.notes)

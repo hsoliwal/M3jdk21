@@ -28,8 +28,12 @@ A newer `master` release-contract update now **reconciles the preview
 branch name** across the machine contract, notes and checklist. Verify that
 [`release-identity.json`](audit_release_identity.py) remains consistent
 after merging this PR. Changed-atom JaCoCo line/branch coverage is an
-additional mandatory gate and remains PENDING. Release reviewers must still
-resolve conflicting recipe-control scope between
-[`AGENTS.md`](../../AGENTS.md) and the
-[`release contract`](release-contract.json). A green isolated test cannot
-override these hard policy gates.
+additional mandatory gate and remains PENDING. The current
+[`AGENTS.md`](../../AGENTS.md) and
+[`release contract`](release-contract.json) agree that canonical
+recipe execution belongs to Synexia, while this product must independently
+qualify its JDK/JNI/runtime acceptance. The missing source-bound execution
+receipt and historical recipe migration remain open HOLDs. A green isolated
+test cannot override these hard policy gates. For the separately failed
+whole-tree name fixed point, retain the
+[original audited evidence](NAMING_FIXED_POINT_EVIDENCE.md).
