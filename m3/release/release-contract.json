@@ -5,9 +5,12 @@
     "tier": "P0_TECHNICAL_PREVIEW",
     "upstream_repository": "openjdk/jdk21",
     "upstream_baseline": "890adb6410dab4606a4f26a942aed02fb2f55387",
-    "release_branch": "release/first-clean-boundary-20261007",
+    "release_branch": "release/m3jdk-21.0.14-m3.1-preview",
     "single_fork_commit_required": true,
-    "released_history_immutable_after_tag": true
+    "released_history_immutable_after_tag": true,
+    "display_name": "M3JDK 21",
+    "version": "21.0.14",
+    "tag": "m3jdk-21.0.14-m3.1-preview"
   },
   "priority_order": [
     "M3_STRING",
@@ -122,9 +125,9 @@
     "artifact_paths_relative_to": "manifest_directory",
     "legacy_recipe_sources_block_release": true,
     "gate_owners": {
-      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/M3jdk21"
+      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/com.synexia"
     },
-    "maven_gate_scope": "Preserve this existing gate ID. Standalone rule (user, 2026-10-31): M3JDK builds, tests and releases without any other repository, so its Maven/OpenRewrite control-reactor execution is owned and executed by hsoliwal/M3jdk21 from the recipes and sources it carries; the evidence names this repository, the exact commit and the recipe identity. Donor lineage stays in ledgers (m3/tooling/standalone/M3_REFS.tsv). Legacy recipe roots remain a visible HOLD (legacy_recipe_custody).",
+    "maven_gate_scope": "Preserve this existing gate ID. Canonical Maven/OpenRewrite authoring, execution and recipe memory remain exclusively in Synexia under AGENTS.md and the porting invariant. M3JDK21 consumes an exact source-bound, hash-verified receipt as data; it never runs its command. All product build, runtime and target acceptance gates remain M3JDK21-owned. Legacy recipe roots remain visible HOLD debt; a passive provenance receipt does not introduce a target runtime or build dependency.",
     "required_manifest_fields": [
       "schema",
       "source_commit",
@@ -163,6 +166,6 @@
   "standalone": {
     "required_for_release": true,
     "baseline": "m3/release/STANDALONE_BASELINE.tsv",
-    "rule": "M3JDK21 builds, tests, gates and releases without any other repository (user 2026-10-31); check_standalone.py: development mode is a ratchet, release mode needs zero cross-repository dependencies"
+    "rule": "The M3JDK21 target builds and runs without another repository. check_standalone.py retains the dependency ratchet and requires zero executable cross-repository dependencies for release. The separately verified canonical recipe execution receipt is provenance data, not a recipe executable or runtime dependency."
   }
 }

@@ -24,7 +24,8 @@ SHA = re.compile(r"^[0-9a-f]{40}$")
 FQN = re.compile(r"^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)+$")
 KINDS = frozenset({"FORMAT_ONLY", "INTERNAL_MOVE", "JDK_BACKEND"})
 STATUSES = frozenset({"QUEUED"})
-INTERNAL_PREFIXES = ("jdk.internal.", "com.m3.", "com.sun.tools.javac.m3.", "java.lang.M3")
+M3_OWNER_PREFIXES = ("jdk.internal.", "jdk.m3.", "com.sun.tools.javac.m3.", "java.lang.M3")
+COMPANION_PREFIX = "jdk.m3."
 COMPANION_FORMS = frozenset({"STATIC_OPERATIONS", "TYPED_VIEW"})
 MODULE_NAME = re.compile(r"^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*$")
 
@@ -94,7 +95,7 @@ def find_mapped_target(root: Path, record: dict, name: str) -> str:
         file = local_file(root, path)
         if not file.is_file():
             refuse("mapped source file missing: " + path)
-        content = file.read_text(encoding="utf-8")
+        content = code_without_literals(file.read_text(encoding="utf-8"))
         package = name.rsplit(".", 1)[0]
         simple = name.rsplit(".", 1)[1]
         if not re.search(r"(?m)^\s*package\s+" + re.escape(package) + r"\s*;", content):
@@ -154,6 +155,8 @@ def exported_artifact(root: Path, artifact: dict, symbol: str, *, companion: boo
         refuse("companion relation requires an exact named module")
     if companion and module == "java.base":
         refuse("public companion must not be owned by java.base")
+    if companion and not module.startswith(COMPANION_PREFIX):
+        refuse("public companion must use a jdk.m3 module")
     if (not isinstance(path, str) or not path.endswith(".java")
             or any(part in ("", ".", "..") for part in path.split("/"))):
         refuse("invalid companion relation source path")
@@ -185,8 +188,8 @@ def exported_artifact(root: Path, artifact: dict, symbol: str, *, companion: boo
     elif not (source_root.startswith("m3/")
               and source_root.endswith(("/src/main/java/", "/src/"))):
         refuse("companion source requires a mapped module source root: " + path)
-    if companion and not (package == "com.m3" or package.startswith("com.m3.")):
-        refuse("public companion must use the com.m3 namespace")
+    if companion and not package.startswith(COMPANION_PREFIX):
+        refuse("public companion must use the jdk.m3 namespace")
     if companion and ".internal." in symbol:
         refuse("public companion must not expose an internal namespace")
     public_type_chain(code, names)
@@ -218,8 +221,8 @@ def validate_companion(root: Path, record: dict) -> str | None:
         refuse("unknown public companion form")
     target = relation["target_symbol"]
     checked_fqn(target, "public companion type")
-    if not target.startswith("com.m3.") or target == api["symbol"]:
-        refuse("public companion must use a distinct com.m3 type")
+    if not target.startswith(COMPANION_PREFIX) or target == api["symbol"]:
+        refuse("public companion must use a distinct jdk.m3 type")
     sources, targets = record.get("sources"), record.get("targets")
     if not isinstance(sources, list) or not isinstance(targets, list):
         refuse("companion relation requires mapped source and target artifacts")
@@ -310,8 +313,8 @@ def validate(root: Path) -> tuple[int, list[str]]:
         find_mapped_target(root, canonical, old)
         if "companion_of" in canonical and op["kind"] in {"JDK_BACKEND", "INTERNAL_MOVE"}:
             refuse("public companion is not an internal replacement owner")
-        if not old.startswith(INTERNAL_PREFIXES):
-            refuse("candidate must be an internal M3JDK21 owner")
+        if not old.startswith(M3_OWNER_PREFIXES):
+            refuse("candidate must be a mapped M3JDK21 owner")
         if op["kind"] == "JDK_BACKEND":
             if new.startswith("java.lang.M3") or not new.startswith(("java.", "javax.")):
                 refuse("public JDK backend target must retain canonical JDK class name")
@@ -323,7 +326,7 @@ def validate(root: Path) -> tuple[int, list[str]]:
             if not local_file(root, jdk_path).is_file():
                 refuse("public JDK target path requires explicit owner/module review")
         elif op["kind"] == "INTERNAL_MOVE":
-            if old == new or not new.startswith(INTERNAL_PREFIXES):
+            if old == new or not new.startswith(M3_OWNER_PREFIXES):
                 refuse("internal move must name a different internal M3 owner")
         else:
             if old != new:

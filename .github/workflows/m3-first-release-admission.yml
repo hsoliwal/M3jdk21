@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Hitesh Soliwal and contributors to the Synexia Project.
 # SPDX-License-Identifier: Apache-2.0
 name: M3 first release admission
 
@@ -9,6 +10,7 @@ on:
       - 'M3-SYNEXIA-AUTHORS.md'
       - 'm3/**'
       - '.github/workflows/m3-first-release-admission.yml'
+      - '.github/workflows/m3-release.yml'
   push:
     branches:
       - 'release/**'
@@ -34,10 +36,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install pinned naming-schema test dependencies
+        run: python3 -m pip install --disable-pip-version-check -r m3/migration/requirements.txt
       - name: Diff hygiene
         run: git diff --check
       - name: Unit-test the release verifier
         run: python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+      - name: Test canonical naming and package refusals
+        run: python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
       - name: Validate release claims and boundaries
         shell: bash
         run: |
@@ -159,7 +165,7 @@ jobs:
         run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
 
   control-reactor:
-    name: Maven control-reactor evidence (this repository)
+    name: Canonical Synexia recipe execution evidence
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
@@ -170,7 +176,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Require executed control-reactor recipe evidence
+      - name: Require executed Synexia control-reactor recipe evidence
         shell: bash
         run: |
           set -euo pipefail
@@ -190,7 +196,7 @@ jobs:
           print(json.dumps({'source_commit': result['source_commit'],
                             'canonical_maven_gate': checks}, sort_keys=True))
           if not result['policy_valid'] or len(checks) != 1 or checks[0]['status'] != 'PASS':
-              raise SystemExit('HOLD: execute and qualify the source-bound Maven/OpenRewrite control reactor in this repository; attach the exact command, source pins and raw artifact hashes.')
+              raise SystemExit('HOLD: execute and qualify the source-bound Maven/OpenRewrite control reactor in hsoliwal/com.synexia; attach the exact command, source pins and raw artifact hashes. This target consumes evidence and never executes recipe sources.')
           PYCODE
       - name: Full-family and receiving-policy verification
         if: always()
@@ -221,7 +227,7 @@ jobs:
             echo "| contract/provenance | ${{ needs.contract.result }} |"
             echo "| immutable text foundation | ${{ needs.foundation.result }} |"
             echo "| Java + JNI precompute parity | ${{ needs.precompute.result }} |"
-            echo "| Maven control-reactor evidence (this repository) | ${{ needs.control-reactor.result }} |"
+            echo "| Canonical Synexia recipe execution evidence | ${{ needs.control-reactor.result }} |"
             echo
             echo 'The existing OpenJDK GHA sanity workflow remains the product-build/platform matrix.'
             echo 'A passing proof summary does not upgrade any claim marked NOT_CLAIMED in release-contract.json.'

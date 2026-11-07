@@ -1,10 +1,10 @@
 {
   "schema": "M3JDK21_CANONICAL_API_INTERNALITY_RECEIPT_V1",
-  "date": "2026-10-27",
+  "date": "2026-11-07",
   "product": {
     "repository": "hsoliwal/M3jdk21",
     "base_branch": "master",
-    "base_commit": "4848f0f6f9c16ceada6a1de5d9281660cbf9e8f6",
+    "base_commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
     "source_path": "test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java",
     "product_jdk_classes_modified": 0,
     "public_JDK_API_changed": false,
@@ -17,9 +17,9 @@
     "recipe_code_shipped_to_product": false
   },
   "postimage": {
-    "git_blob_sha1": "0fb7af04b0abb0a358d73d5917264d6abd20c3e6",
-    "sha256": "ff85356d511db71c6694c3711c5253b5631fb5f19fa9b4c5e0f3fd45bde81bfd",
-    "utf8_bytes": 11623,
+    "git_blob_sha1": "bd06cd672196a7ebe549bcc45638232e295d5ef7",
+    "sha256": "000bd640822eef478162204c534fcc8e94b0c5affe25d5102f63c31bab758aa8",
+    "utf8_bytes": 12460,
     "java_release": 21,
     "license": "GPLv2 with Classpath exception (first-party OpenJDK jtreg target source)"
   },
@@ -49,16 +49,23 @@
       "jdk.internal.mindex remains unexported and unopened",
       "JDK class initialization avoided by Class.forName(false) on scanned M3 classes",
       "compiled java.base ModuleReader checks top-level M3-named types in all module-exposed packages"
+    ],
+    "signature_namespace_prefixes": [
+      "jdk.m3",
+      "com.m3"
     ]
   },
   "local_proof": {
-    "host_jdk": "OpenJDK 21.0.12.1",
-    "compile_command": "javac -Xlint:all -Werror -d classes test/M3CanonicalApiBoundaryTest.java",
+    "host_jdk": "Temurin OpenJDK 21.0.13+9-LTS",
+    "producer": ".github/workflows/m3jdk21-canonical-api-internality-20261027.yml existing compile and patched-module fixture steps",
+    "compile_command": "javac --release 21 -Xlint:all -Werror -d classes test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java",
     "compile": "PASS",
     "positive": "PASS M3JDK_CANONICAL_API_BOUNDARY_PASS 19 canonical owners, 2 required internal owners; isolated java.base patch with first-party stubs",
     "negative_public_M3String": "PASS: deliberate violation refused with AssertionError",
     "negative_runtime_export": "PASS: --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED refused",
-    "code_blob_matches_target_readback": true
+    "namespace_regressions": "PASS current/legacy direct and generic namespace checks; ordinary JDK, near-prefix and application-qualified names are accepted",
+    "code_blob_matches_local_candidate": true,
+    "source_built_product_image": false
   },
   "pending": {
     "source_built_M3JDK21_image_jtreg": "NOT_RUN",
@@ -67,5 +74,89 @@
     "heap_native_CPU_performance": "NOT_RUN",
     "complete_platform_support": "NOT_RUN"
   },
-  "admission": "DRAFT_JTREG_ADDITION_ONLY_NOT_PRODUCT_RUNTIME_PROMOTION"
+  "admission": "DRAFT_JTREG_ADDITION_ONLY_NOT_PRODUCT_RUNTIME_PROMOTION",
+  "release_preparation": {
+    "preimage_git_blob_sha1": "0fb7af04b0abb0a358d73d5917264d6abd20c3e6",
+    "preimage_sha256": "ff85356d511db71c6694c3711c5253b5631fb5f19fa9b4c5e0f3fd45bde81bfd",
+    "preimage_actual_utf8_bytes": 11624,
+    "preimage_observation": "Existing receipt claimed 11623 bytes and failed source admission. Independently executing the existing compile/fixture steps failed jdk.m3.collections.SlotArray recognition.",
+    "correction": "Recognize exact current jdk.m3 and legacy com.m3 signature namespaces with Java identifier boundaries; preserve module/internality and source-built-image gates.",
+    "canonical_recipe_evidence": "Separate Synexia execution and receiving receipt required; this target receipt records only local guard-mechanism proof."
+  },
+  "history": [
+    {
+      "recorded_receipt": {
+        "schema": "M3JDK21_CANONICAL_API_INTERNALITY_RECEIPT_V1",
+        "date": "2026-10-27",
+        "product": {
+          "repository": "hsoliwal/M3jdk21",
+          "base_branch": "master",
+          "base_commit": "4848f0f6f9c16ceada6a1de5d9281660cbf9e8f6",
+          "source_path": "test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java",
+          "product_jdk_classes_modified": 0,
+          "public_JDK_API_changed": false,
+          "modules_or_export_directives_modified": false
+        },
+        "reuse": {
+          "source": "existing tested target jtreg candidate in hsoliwal/M3jdk21 PR #1868",
+          "prior_source_git_blob_sha1": "433d19968a818b4eff4026c6ee65b66d062d7981",
+          "convergence_owner": "hsoliwal/com.synexia",
+          "recipe_code_shipped_to_product": false
+        },
+        "postimage": {
+          "git_blob_sha1": "0fb7af04b0abb0a358d73d5917264d6abd20c3e6",
+          "sha256": "ff85356d511db71c6694c3711c5253b5631fb5f19fa9b4c5e0f3fd45bde81bfd",
+          "utf8_bytes": 11623,
+          "java_release": 21,
+          "license": "GPLv2 with Classpath exception (first-party OpenJDK jtreg target source)"
+        },
+        "coverage": {
+          "canonical_JDK_classes": 19,
+          "required_internal_owners": [
+            "java.lang.M3String",
+            "jdk.internal.mindex.M3Class"
+          ],
+          "module_descriptors": [
+            "java.base",
+            "jdk.compiler"
+          ],
+          "permanent_internal_namespace_prefixes": [
+            "jdk.internal.m3",
+            "jdk.internal.mindex",
+            "com.sun.tools.javac.m3"
+          ],
+          "legacy_standalone_apis_out_of_scope": [
+            "com.m3.collections.M3ArrayList",
+            "com.m3.file.M3File"
+          ],
+          "guarantees": [
+            "public/protected canonical JDK type signatures cannot expose M3 names or qualified internal package identities",
+            "module M3-owned packages must not be exported/opened, including qualified directives",
+            "java.lang.M3String package-private in java.base",
+            "jdk.internal.mindex remains unexported and unopened",
+            "JDK class initialization avoided by Class.forName(false) on scanned M3 classes",
+            "compiled java.base ModuleReader checks top-level M3-named types in all module-exposed packages"
+          ]
+        },
+        "local_proof": {
+          "host_jdk": "OpenJDK 21.0.12.1",
+          "compile_command": "javac -Xlint:all -Werror -d classes test/M3CanonicalApiBoundaryTest.java",
+          "compile": "PASS",
+          "positive": "PASS M3JDK_CANONICAL_API_BOUNDARY_PASS 19 canonical owners, 2 required internal owners; isolated java.base patch with first-party stubs",
+          "negative_public_M3String": "PASS: deliberate violation refused with AssertionError",
+          "negative_runtime_export": "PASS: --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED refused",
+          "code_blob_matches_target_readback": true
+        },
+        "pending": {
+          "source_built_M3JDK21_image_jtreg": "NOT_RUN",
+          "suggested_command": "make run-test TEST=test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java",
+          "abi_serialization_JNI_GC_JMM": "NOT_RUN",
+          "heap_native_CPU_performance": "NOT_RUN",
+          "complete_platform_support": "NOT_RUN"
+        },
+        "admission": "DRAFT_JTREG_ADDITION_ONLY_NOT_PRODUCT_RUNTIME_PROMOTION"
+      },
+      "scope": "Prior receipt retained verbatim as historical reported evidence; its execution claims do not qualify the current candidate."
+    }
+  ]
 }

@@ -121,6 +121,41 @@ class NameContractReceiverTests(unittest.TestCase):
         self.save()
         self.assertEqual(GATE.validate(self.root)[0], 1)
 
+    def test_existing_jdk_m3_owner_remains_a_queued_candidate(self):
+        target = self.mapping["migration"]["records"][0]["targets"][0]
+        target.update(symbol="jdk.m3.algorithm.M3PrefixZ",
+                      path="m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java")
+        write(self.root, target["path"],
+              "package jdk.m3.algorithm; public final class M3PrefixZ {}\n")
+        row = self.plan["operations"][0]
+        row.update(kind="INTERNAL_MOVE", before_type=target["symbol"],
+                   after_type="jdk.m3.algorithms.M3PrefixZ")
+        self.save()
+        self.assertEqual(GATE.validate(self.root), (1, ["class.view"]))
+        self.assertEqual(row["state"], "QUEUED")
+
+    def test_neighbor_namespace_is_not_a_mapped_m3_owner(self):
+        target = self.mapping["migration"]["records"][0]["targets"][0]
+        target.update(symbol="jdk.m30.algorithm.M3PrefixZ",
+                      path="m3/algorithms/src/jdk/m30/algorithm/M3PrefixZ.java")
+        write(self.root, target["path"],
+              "package jdk.m30.algorithm; public final class M3PrefixZ {}\n")
+        self.plan["operations"][0].update(
+            kind="FORMAT_ONLY", before_type=target["symbol"], after_type=target["symbol"])
+        self.save()
+        with self.assertRaisesRegex(ValueError, "mapped M3JDK21 owner"):
+            GATE.validate(self.root)
+
+    def test_queued_type_cannot_be_declared_by_comment_or_literal(self):
+        target = self.mapping["migration"]["records"][0]["targets"][0]
+        for content in (
+                "package jdk.internal.mindex; /* class M3Class {} */ class Hidden {}\n",
+                'package jdk.internal.mindex; class Hidden { String s = "class M3Class {}"; }\n'):
+            with self.subTest(content=content):
+                write(self.root, target["path"], content)
+                with self.assertRaisesRegex(ValueError, "declared type disagrees"):
+                    GATE.validate(self.root)
+
 
 class PublicCompanionContractTests(unittest.TestCase):
     """Real declaration fixtures exercise the existing map without runtime promotion."""
@@ -183,6 +218,21 @@ class PublicCompanionContractTests(unittest.TestCase):
 
     def test_exported_static_companion_preserves_queued_acceptance(self):
         self.assert_queued_only()
+
+    def test_companion_namespace_is_exact_not_a_similar_prefix(self):
+        for symbol in ("jdk.m30.arrays.M3Arrays", "jdk.m3x.arrays.M3Arrays",
+                       "jdk.internal.m3.arrays.M3Arrays"):
+            with self.subTest(symbol=symbol):
+                self.record["companion_of"]["target_symbol"] = symbol
+                self.assert_refused("distinct jdk.m3 type")
+
+    def test_companion_module_is_m3_owned_even_with_exported_package(self):
+        for module in ("example.arrays", "jdk.m30.arrays", "jdk.internal.m3.arrays"):
+            with self.subTest(module=module):
+                self.target["module"] = module
+                write(self.root, "m3/arrays/src/main/java/module-info.java",
+                      "module " + module + " { exports jdk.m3.arrays; }\n")
+                self.assert_refused("must use a jdk.m3 module")
 
     def test_typed_view_form_does_not_promote_runtime(self):
         self.record["companion_of"]["form"] = "TYPED_VIEW"
@@ -317,10 +367,10 @@ class PublicCompanionContractTests(unittest.TestCase):
         for target in ("java.util.M3Arrays", "java.util.Arrays", "jdk.internal.m3.M3Arrays"):
             with self.subTest(target=target):
                 self.record["companion_of"]["target_symbol"] = target
-                self.assert_refused("distinct com.m3 type")
+                self.assert_refused("distinct jdk.m3 type")
         self.record["companion_of"]["target_symbol"] = self.target["symbol"]
         self.record["companion_of"]["java_api"]["symbol"] = self.target["symbol"]
-        self.assert_refused("distinct com.m3 type")
+        self.assert_refused("distinct jdk.m3 type")
 
     def test_artifact_hash_drift_refused_for_both_owners_and_pins(self):
         for artifact in (self.source, self.target):

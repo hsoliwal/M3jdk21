@@ -181,7 +181,9 @@ class WorkflowCoverageTest(unittest.TestCase):
             targets.add("src/" + api["module"] + "/share/classes/module-info.java")
             companion = next(target for target in record["targets"]
                              if target["symbol"] == relation["target_symbol"])
-            targets.add(companion["path"].split("com/m3/", 1)[0] + "module-info.java")
+            suffix = companion["symbol"].replace(".", "/") + ".java"
+            self.assertTrue(companion["path"].endswith(suffix))
+            targets.add(companion["path"][:-len(suffix)] + "module-info.java")
             targets.add("m3/compatibility/check_public_names.py")
         # The workflow uses exact paths and explicit recursive owner subtrees.
         # Actual Git sparse-checkout behavior is also qualified in the recipe receipt.
@@ -194,16 +196,19 @@ class WorkflowCoverageTest(unittest.TestCase):
 class CanonicalRelatedOwnerTest(unittest.TestCase):
     def test_related_target_class_owner_retains_method_contract(self):
         records = json.loads((AUDIT.ROOT / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
-        record = next(row for row in records if row["id"] == "m3.lexicons.related-source-range")
+        history = json.loads((AUDIT.ROOT / "m3/tooling/name-contract/receipts/"
+                              "release-preparation/source-identity.json").read_text())
+        record = next(row for row in records
+                      if row["id"] == history["anchors"]["related_source_range"])
         target = record["targets"][0]
         self.assertEqual(target["symbol"], "jdk.m3.text.SharedRelatedLexemeCatalog")
         self.assertEqual(target["path"], "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java")
         signature = "java.util.List<Relation> findBySource(java.lang.String)"
         self.assertIn(signature, target["signatures"])
-        self.assertEqual(record["sources"][0]["symbol"],
-                         "jdk.m3.text.SharedRelatedLexemeCatalog.findBySource")
+        historical_symbol = history["restored_records"][0]["source_symbol"]
+        self.assertEqual(record["sources"][0]["symbol"], historical_symbol)
         self.assertIn(signature, record["sources"][0]["signatures"])
-        self.assertTrue(any(previous["symbol"] == "jdk.m3.text.SharedRelatedLexemeCatalog.findBySource"
+        self.assertTrue(any(previous["symbol"] == historical_symbol
                             and signature in previous["signatures"]
                             for previous in record["lineage"]["previous_targets"]))
         rows = [row for row in AUDIT.snapshot(AUDIT.ROOT)

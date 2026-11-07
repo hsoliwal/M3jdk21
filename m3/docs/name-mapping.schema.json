@@ -820,7 +820,7 @@
         },
         "target_symbol": {
           "type": "string",
-          "pattern": "^com\\.m3\\..+"
+          "pattern": "^jdk\\.m3\\..+"
         },
         "form": {
           "enum": [

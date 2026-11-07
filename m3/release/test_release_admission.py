@@ -12,6 +12,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import os
 import shutil
 import subprocess
 import tempfile
@@ -53,6 +54,37 @@ class ReleaseAdmissionUnitTest(unittest.TestCase):
                 release.sha256(path),
             )
 
+    def test_preview_name_matches_the_configured_jdk_version(self):
+        root = Path(__file__).resolve().parents[2]
+        contract = json.loads(Path(__file__).with_name("release-contract.json").read_text())
+        text = (root / "make/conf/version-numbers.conf").read_text()
+        release.release_identity(contract["release"], text)
+        self.assertEqual(contract["release"]["tag"], "m3jdk-21.0.14-m3.1-preview")
+
+    def test_preview_identity_drift_is_refused(self):
+        contract = json.loads(Path(__file__).with_name("release-contract.json").read_text())
+        text = "DEFAULT_VERSION_FEATURE=21\nDEFAULT_VERSION_INTERIM=0\n" \
+               "DEFAULT_VERSION_UPDATE=14\nDEFAULT_VERSION_PATCH=0\n"
+        for field, value in (("version", "22.0.14"), ("version", "21.0.14\n"),
+                             ("release_branch", "release/first-clean-boundary-20261007"),
+                             ("tag", "m3jdk-21.0.15-m3.1-preview"),
+                             ("display_name", "M3 + JDK")):
+            candidate = dict(contract["release"], **{field: value})
+            with self.subTest(field=field, value=value):
+                with self.assertRaisesRegex(ValueError, "disagree"):
+                    release.release_identity(candidate, text)
+
+    def test_changed_duplicate_or_missing_build_version_is_refused(self):
+        contract = json.loads(Path(__file__).with_name("release-contract.json").read_text())
+        text = "DEFAULT_VERSION_FEATURE=21\nDEFAULT_VERSION_INTERIM=0\n" \
+               "DEFAULT_VERSION_UPDATE=14\nDEFAULT_VERSION_PATCH=0\n"
+        for candidate in (text.replace("UPDATE=14", "UPDATE=15"),
+                          text + "DEFAULT_VERSION_FEATURE=21\n",
+                          text.replace("DEFAULT_VERSION_PATCH=0\n", "")):
+            with self.subTest(text=candidate):
+                with self.assertRaises(ValueError):
+                    release.release_identity(contract["release"], candidate)
+
 
 class ReleaseEvidenceGitTest(unittest.TestCase):
     def setUp(self):
@@ -80,6 +112,9 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
                    "No speedup, complete compatibility, or full jtreg pass is claimed.")
         self.write("m3/release/README.md", "Synthetic release fixture")
         self.write("m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md", "No benchmark result")
+        self.write("make/conf/version-numbers.conf",
+                   "DEFAULT_VERSION_FEATURE=21\nDEFAULT_VERSION_INTERIM=0\n"
+                   "DEFAULT_VERSION_UPDATE=14\nDEFAULT_VERSION_PATCH=0\n")
         self.write("src/example.java", "class Example {}\n")
         mapping = {
             "schema": 1,
@@ -104,14 +139,14 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
             artifact.write_text("SYNTHETIC VALIDATOR FIXTURE ONLY " + ident + "\n")
             gate = {
                 "id": ident, "status": "PASS", "exit_code": 0,
-                "owner_repository": release.PRODUCT_REPOSITORY,
+                "owner_repository": release.gate_owner(ident),
                 "command": ["synthetic-fixture", ident],
                 "environment": {"os": "fixture-os", "architecture": "fixture-arch", "toolchain": "fixture-toolchain"},
                 "artifacts": [{"path": artifact.name, "sha256": release.sha256(artifact)}],
             }
             if ident == "M3_MAVEN_CONTROL_REACTOR":
                 gate["canonical_recipe"] = {
-                    "repository": release.PRODUCT_REPOSITORY, "commit": "1" * 40,
+                    "repository": release.CANONICAL_RECIPE_REPOSITORY, "commit": "1" * 40,
                     "recipe_id": "synthetic.fixture.only",
                 }
             self.evidence["gates"].append(gate)
@@ -240,6 +275,18 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
             with self.subTest(path=path):
                 self.assert_blocked(self.result(), "gate:" + entry["id"])
 
+    def test_windows_drive_paths_are_refused_on_every_host(self):
+        entry = self.evidence["gates"][0]
+        for relative in ("C:/logs/proof.log", "C:proof.log"):
+            if os.name != "nt":
+                file = self.evidence_dir / relative
+                file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_text("a real file must not turn a drive path into portable evidence")
+                entry["artifacts"][0]["sha256"] = release.sha256(file)
+            entry["artifacts"][0]["path"] = relative
+            with self.subTest(path=relative):
+                self.assert_blocked(self.result(), "gate:" + entry["id"])
+
     def test_artifact_and_manifest_symlinks_are_refused(self):
         entry = self.evidence["gates"][0]
         artifact = self.evidence_dir / entry["artifacts"][0]["path"]
@@ -280,16 +327,27 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assert_blocked(self.result(), "contract.mandatory_gates")
 
     def test_maven_gate_owner_and_recipe_identity_are_required(self):
-        # standalone (2026-10-31): another repository can neither own the gate nor supply its recipe
+        # Only the exact canonical recipe authority can supply this receipt.
         other = "example/another-repository"
         entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
         entry["owner_repository"] = other
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
-        entry["owner_repository"] = release.PRODUCT_REPOSITORY
+        entry["owner_repository"] = release.CANONICAL_RECIPE_REPOSITORY
         entry["canonical_recipe"]["repository"] = other
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
         del entry["canonical_recipe"]
         self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_product_cannot_self_attest_the_canonical_recipe_execution(self):
+        entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+        entry["owner_repository"] = release.PRODUCT_REPOSITORY
+        entry["canonical_recipe"]["repository"] = release.PRODUCT_REPOSITORY
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_canonical_recipe_receipt_cannot_attest_a_product_gate(self):
+        entry = next(g for g in self.evidence["gates"] if g["id"] == "STRING_UTF16_CONTRACT")
+        entry["owner_repository"] = release.CANONICAL_RECIPE_REPOSITORY
+        self.assert_blocked(self.result(), "gate:" + entry["id"])
 
     def test_contract_naming_another_maven_gate_owner_is_refused(self):
         self.contract["execution_evidence"]["gate_owners"][release.MAVEN_GATE] = "example/another-repository"
@@ -344,24 +402,39 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
     def test_existing_single_fork_commit_requirement_is_preserved(self):
         self.write("next.txt", "another commit\n")
         self.commit("synthetic successor")
+        history = self.git("rev-list", "HEAD")
         self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
         self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
         for mode in (False, True):
             with self.subTest(release=mode):
                 self.assert_blocked(self.result(mode), "git.single_release_commit")
+        self.assertEqual(self.git("rev-list", "HEAD"), history,
+                         "a failed history gate must preserve append-only ancestry")
 
     def test_standalone_rule_refuses_release_while_the_contract_needs_another_repository(self):
-        # the contract still names another repository as the M3_MAVEN_CONTROL_REACTOR owner: not standalone
+        # A real checkout is an executable dependency; a passive recipe receipt is not.
         self.contract["standalone"]["required_for_release"] = True
         self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.write(".github/workflows/external-runtime.yml",
+                   "jobs:\n  build:\n    steps:\n      - uses: actions/checkout@v4\n"
+                   "        with:\n          repository: hsoliwal/com.synexia\n")
         self.repin_queue()
-        self.commit("enforce the standalone rule")
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic tree requiring external runtime")
+        spec = importlib.util.spec_from_file_location(
+            "standalone_release_fixture", Path(__file__).with_name("check_standalone.py"))
+        standalone = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(standalone)
+        standalone.write_baseline(self.root, standalone.scan(self.root))
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic external-runtime dependency baseline")
         self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
         self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
         result = self.result(True)
         self.assert_blocked(result, "standalone.no_external_repo_dependency")
         detail = next(b["detail"] for b in result["blockers"] if b["name"] == "standalone.no_external_repo_dependency")
-        self.assertIn("D_REPO_REF=", detail)
+        self.assertIn("D_CHECKOUT=1", detail)
+        self.assertIn("dependencies on another repository remain", detail)
 
     def test_cli_distinguishes_policy_pass_from_release_acceptance_and_writes_queue(self):
         report = Path(self.tmp.name) / "reports" / "admission.json"
