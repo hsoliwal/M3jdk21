@@ -60,6 +60,8 @@
     <module>ports/vcpu</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/regex-cursor WIRED (gate gate-ports-regex-cursor, GATES.tsv) -->
     <module>ports/regex-cursor</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/primitive-address-identity WIRED (gate gate-runtime-integration-primitive-address-identity, GATES.tsv) -->
+    <module>runtime-integration/primitive-address-identity</module>
   </modules>
 
   <profiles>
