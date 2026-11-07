@@ -33,7 +33,7 @@
      <target>21</target>
      <proc>none</proc>
      <compilerArgs>
-      <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: test M3SyntaxGrowthAgent reads jdk.internal.org.objectweb.asm (JDK-internal ASM; no external ASM, M3JDK21 standalone) -->
+      <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: test M3SyntaxGrowthAgent reads jdk.internal.org.objectweb.asm (JDK-internal ASM; no external ASM, M3JDK 21 standalone) -->
       <arg>--add-exports</arg>
       <arg>java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED</arg>
       <arg>-Xlint:all</arg>
