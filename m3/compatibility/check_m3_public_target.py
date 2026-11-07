@@ -13,14 +13,16 @@ HERE = Path(__file__).resolve().parent
 POLICY = HERE / "m3-public-target-policy.tsv"
 APACHE_HANDOFF_PIN = HERE / "m3-apache-handoff-pin.tsv"
 PACKET_VERSION = "# M3_HANDOFF_V1"
-LICENSE_POLICY = "M3_FIRST_PARTY_APACHE2_V1"
+# These protocol values identify the donor and its recorded custody. Package
+# renaming must not relabel the unchanged policy TSV, handoff pin or packets.
+LICENSE_POLICY = "SYNEXIA_FIRST_PARTY_APACHE2_V1"
 FAST_LANE_LICENSE = "Apache-2.0"
 SHA256 = re.compile(r"[0-9a-f]{64}")
 
 REQUIRED_ROWS = {
-    ("M3_FIRST_PARTY", "Apache-2.0", "M3_TOOLING", "COPY_PRESERVE_LICENSE", "Apache-2.0"),
-    ("M3_FIRST_PARTY", "Apache-2.0", "M3_RECIPE", "COPY_PRESERVE_LICENSE", "Apache-2.0"),
-    ("M3_FIRST_PARTY", "Apache-2.0", "JDK_SEPARATE_COMPONENT", "COPY_WITH_LEGAL_NOTICE", "Apache-2.0"),
+    ("SYNEXIA_FIRST_PARTY", "Apache-2.0", "M3_TOOLING", "COPY_PRESERVE_LICENSE", "Apache-2.0"),
+    ("SYNEXIA_FIRST_PARTY", "Apache-2.0", "M3_RECIPE", "COPY_PRESERVE_LICENSE", "Apache-2.0"),
+    ("SYNEXIA_FIRST_PARTY", "Apache-2.0", "JDK_SEPARATE_COMPONENT", "COPY_WITH_LEGAL_NOTICE", "Apache-2.0"),
     ("THIRD_PARTY", "*", "ANY", "SEPARATE_ARTIFACT_REVIEW", "ORIGINAL"),
     ("REFERENCE_ONLY", "*", "ANY", "NO_SOURCE_COPY", "N/A"),
     (
@@ -92,7 +94,7 @@ def load_apache_handoff_pin(path: Path = APACHE_HANDOFF_PIN) -> dict[str, str]:
         "source_manifest_sha256": "98274241cc6a0655e600d5fb5c58d70170aca0111770f95c14609041a1f1289a",
         "source_license": "Apache-2.0",
         "copyright_notice": "Copyright 2026 Hitesh Soliwal and contributors",
-        "canonical_owner": "m3-recipe",
+        "canonical_owner": "synexia-m3-recipe",
         "delivery_state": "SOURCE_MERGED_PROOF_PENDING",
         "target_role": "QUALIFICATION_INPUT_ONLY",
         "automatic_application": "false",
