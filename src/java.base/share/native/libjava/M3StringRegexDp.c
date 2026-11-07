@@ -10,17 +10,14 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "java_lang_M3StringRegexDp.h"
+#include "m3_jni_util.h"
 
 #define M3_REGEX_STAR UINT32_C(65536)
 #define M3_REGEX_MAX_ATOMS 32
 #define M3_REGEX_MAX_UNITS 8192
 
 static jlong refuse(JNIEnv *env, const char *message) {
-    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-    if (type != NULL) {
-        (void) (*env)->ThrowNew(env, type, message);
-        (*env)->DeleteLocalRef(env, type);
-    }
+    m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException", message);
     return (jlong) -1;
 }
 

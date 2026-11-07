@@ -5,14 +5,11 @@
  * Modified 2026: isolate endpoint masks from interior word counting.
  */
 #include "jdk_internal_mindex_M3BitLane28.h"
+#include "m3_jni_util.h"
 #include <stdint.h>
 
 static void invalid(JNIEnv *env, const char *message) {
-    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
-    if (type != NULL) {
-        (*env)->ThrowNew(env, type, message);
-        (*env)->DeleteLocalRef(env, type);
-    }
+    m3_jni_throw_by_name(env, "java/lang/IllegalArgumentException", message);
 }
 
 /* Portable unsigned population count; no signed overflow or shift-by-64. */
