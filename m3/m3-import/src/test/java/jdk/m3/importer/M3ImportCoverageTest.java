@@ -28,14 +28,14 @@ final class M3ImportCoverageTest {
                 new String[] {
                     "verify",
                     manifest.toString(),
-                    fixture.synexia().toString(),
+                    fixture.m3().toString(),
                     fixture.m3jdk().toString()
                 });
         M3ImportCli.main(
                 new String[] {
                     "materialize",
                     manifest.toString(),
-                    fixture.synexia().toString(),
+                    fixture.m3().toString(),
                     fixture.m3jdk().toString()
                 });
         assertTrue(Files.isRegularFile(fixture.m3jdk().resolve(fixture.targetPath())));
@@ -44,7 +44,7 @@ final class M3ImportCoverageTest {
                 new String[] {
                     "verify-target",
                     manifest.toString(),
-                    fixture.synexia().toString(),
+                    fixture.m3().toString(),
                     fixture.m3jdk().toString()
                 });
 
@@ -55,7 +55,7 @@ final class M3ImportCoverageTest {
                                 new String[] {
                                     "unknown",
                                     manifest.toString(),
-                                    fixture.synexia().toString(),
+                                    fixture.m3().toString(),
                                     fixture.m3jdk().toString()
                                 }));
     }
@@ -182,7 +182,7 @@ final class M3ImportCoverageTest {
         Files.createDirectories(target);
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(fixture.synexia(), fixture.m3jdk(), fixture.manifest()));
+                () -> M3Importer.verify(fixture.m3(), fixture.m3jdk(), fixture.manifest()));
         assertThrows(
                 IllegalStateException.class,
                 () -> M3Importer.verifyTargetSnapshot(fixture.m3jdk(), fixture.manifest()));
@@ -202,9 +202,9 @@ final class M3ImportCoverageTest {
     }
 
     private Fixture fixture(String name) throws Exception {
-        Path synexia = temp.resolve(name + "-synexia");
+        Path m3 = temp.resolve(name + "-synexia");
         Path m3jdk = temp.resolve(name + "-m3jdk");
-        Files.createDirectories(synexia);
+        Files.createDirectories(m3);
         Files.createDirectories(m3jdk);
 
         String sourcePath =
@@ -232,7 +232,7 @@ final class M3ImportCoverageTest {
                         "m3jdk21",
                         List.of(entry),
                         "");
-        return new Fixture(synexia, m3jdk, targetPath, manifest);
+        return new Fixture(m3, m3jdk, targetPath, manifest);
     }
 
     private static M3ImportManifest.Entry validEntry() {
@@ -251,7 +251,7 @@ final class M3ImportCoverageTest {
     }
 
     private record Fixture(
-            Path synexia,
+            Path m3,
             Path m3jdk,
             String targetPath,
             M3ImportManifest manifest) {}

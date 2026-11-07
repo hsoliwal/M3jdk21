@@ -71,7 +71,7 @@ final class M3ImportPlanTest {
         Path out = Path.of("m3/build/m3-import/full");
         M3ImportPlan.Plan staged =
                 M3ImportPlan.stage(
-                        fixture.synexia(), fixture.m3jdk(), fixture.manifest(), out);
+                        fixture.m3(), fixture.m3jdk(), fixture.manifest(), out);
         assertEquals(plan, staged);
 
         Path stagedRoot = fixture.m3jdk().resolve(out);
@@ -80,15 +80,15 @@ final class M3ImportPlanTest {
         assertFalse(
                 Files.exists(stagedRoot.resolve("candidate").resolve(fixture.keepTarget())));
         assertEquals(
-                sha256(Files.readAllBytes(fixture.synexia().resolve(fixture.replaceSource()))),
+                sha256(Files.readAllBytes(fixture.m3().resolve(fixture.replaceSource()))),
                 sha256(Files.readAllBytes(
                         stagedRoot.resolve("candidate").resolve(fixture.replaceTarget()))));
         assertEquals(
-                sha256(Files.readAllBytes(fixture.synexia().resolve(fixture.addSource()))),
+                sha256(Files.readAllBytes(fixture.m3().resolve(fixture.addSource()))),
                 sha256(Files.readAllBytes(
                         stagedRoot.resolve("candidate").resolve(fixture.addTarget()))));
         assertEquals(
-                sha256(Files.readAllBytes(fixture.synexia().resolve(fixture.resourceSource()))),
+                sha256(Files.readAllBytes(fixture.m3().resolve(fixture.resourceSource()))),
                 sha256(Files.readAllBytes(
                         stagedRoot.resolve("candidate").resolve(fixture.resourceTarget()))));
 
@@ -100,29 +100,29 @@ final class M3ImportPlanTest {
         assertEquals(
                 staged,
                 M3ImportPlan.stage(
-                        fixture.synexia(), fixture.m3jdk(), fixture.manifest(), out));
+                        fixture.m3(), fixture.m3jdk(), fixture.manifest(), out));
     }
 
     @Test
     void sourceOnlyVerifierAllowsReplacementButRefusesSourceDrift() throws Exception {
         Fixture fixture = fixture();
-        M3Importer.verifySources(fixture.synexia(), fixture.manifest());
+        M3Importer.verifySources(fixture.m3(), fixture.manifest());
 
         assertThrows(
                 IllegalStateException.class,
                 () -> M3Importer.verify(
-                        fixture.synexia(), fixture.m3jdk(), fixture.manifest()));
+                        fixture.m3(), fixture.m3jdk(), fixture.manifest()));
 
         Files.writeString(
-                fixture.synexia().resolve(fixture.addSource()),
+                fixture.m3().resolve(fixture.addSource()),
                 "// SPDX-License-Identifier: Apache-2.0\nchanged\n");
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verifySources(fixture.synexia(), fixture.manifest()));
+                () -> M3Importer.verifySources(fixture.m3(), fixture.manifest()));
         assertThrows(
                 IllegalStateException.class,
                 () -> M3ImportPlan.stage(
-                        fixture.synexia(),
+                        fixture.m3(),
                         fixture.m3jdk(),
                         fixture.manifest(),
                         Path.of("m3/build/m3-import/drift")));
@@ -370,7 +370,7 @@ final class M3ImportPlanTest {
         M3ImportPlanCli.main(new String[] {
             "stage",
             manifestFile.toString(),
-            fixture.synexia().toString(),
+            fixture.m3().toString(),
             fixture.m3jdk().toString(),
             "m3/build/m3-import/cli-stage"
         });
@@ -395,12 +395,12 @@ final class M3ImportPlanTest {
     @Test
     void strictStageRequiresExactCleanM3Checkout() throws Exception {
         Fixture fixture = fixture();
-        git(fixture.synexia(), "init");
-        git(fixture.synexia(), "config", "user.email", "m3@example.invalid");
-        git(fixture.synexia(), "config", "user.name", "M3 Test");
-        git(fixture.synexia(), "add", ".");
-        git(fixture.synexia(), "commit", "-m", "fixture");
-        String head = git(fixture.synexia(), "rev-parse", "HEAD").trim();
+        git(fixture.m3(), "init");
+        git(fixture.m3(), "config", "user.email", "m3@example.invalid");
+        git(fixture.m3(), "config", "user.name", "M3 Test");
+        git(fixture.m3(), "add", ".");
+        git(fixture.m3(), "commit", "-m", "fixture");
+        String head = git(fixture.m3(), "rev-parse", "HEAD").trim();
 
         M3ImportManifest strictManifest =
                 new M3ImportManifest(
@@ -415,7 +415,7 @@ final class M3ImportPlanTest {
                 new String[] {
                     "stage-strict",
                     manifestFile.toString(),
-                    fixture.synexia().toString(),
+                    fixture.m3().toString(),
                     fixture.m3jdk().toString(),
                     "m3/build/m3-import/strict-stage"
                 });
@@ -425,8 +425,8 @@ final class M3ImportPlanTest {
                                 .resolve("m3/build/m3-import/strict-stage/ROOT")));
 
         Files.writeString(
-                fixture.synexia().resolve(fixture.keepSource()),
-                Files.readString(fixture.synexia().resolve(fixture.keepSource())) + "// drift\n");
+                fixture.m3().resolve(fixture.keepSource()),
+                Files.readString(fixture.m3().resolve(fixture.keepSource())) + "// drift\n");
         assertThrows(
                 IllegalStateException.class,
                 () ->
@@ -434,7 +434,7 @@ final class M3ImportPlanTest {
                                 new String[] {
                                     "stage-strict",
                                     manifestFile.toString(),
-                                    fixture.synexia().toString(),
+                                    fixture.m3().toString(),
                                     fixture.m3jdk().toString(),
                                     "m3/build/m3-import/strict-stage-drift"
                                 }));
@@ -479,9 +479,9 @@ final class M3ImportPlanTest {
     }
 
     private Fixture fixture() throws Exception {
-        Path synexia = temp.resolve("synexia");
+        Path m3 = temp.resolve("synexia");
         Path m3jdk = temp.resolve("m3jdk");
-        Files.createDirectories(synexia);
+        Files.createDirectories(m3);
         Files.createDirectories(m3jdk);
 
         String keepSource =
@@ -548,7 +548,7 @@ final class M3ImportPlanTest {
                         "");
 
         return new Fixture(
-                synexia,
+                m3,
                 m3jdk,
                 manifest,
                 keepSource,
@@ -597,7 +597,7 @@ final class M3ImportPlanTest {
     }
 
     private record Fixture(
-            Path synexia,
+            Path m3,
             Path m3jdk,
             M3ImportManifest manifest,
             String keepSource,

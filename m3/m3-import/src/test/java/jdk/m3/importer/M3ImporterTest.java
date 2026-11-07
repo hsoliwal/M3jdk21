@@ -23,9 +23,9 @@ final class M3ImporterTest {
 
     @Test
     void exactSourceMaterializesAndSecondPassIsIdempotent() throws Exception {
-        Path synexia = temp.resolve("synexia");
+        Path m3 = temp.resolve("synexia");
         Path m3jdk = temp.resolve("m3jdk");
-        Files.createDirectories(synexia);
+        Files.createDirectories(m3);
         Files.createDirectories(m3jdk);
 
         String sourcePath =
@@ -39,23 +39,23 @@ final class M3ImporterTest {
         write(m3.resolve(sourcePath), bytes);
 
         M3ImportManifest manifest = manifest(sourcePath, targetPath, bytes);
-        M3Importer.verify(synexia, m3jdk, manifest);
+        M3Importer.verify(m3, m3jdk, manifest);
         assertFalse(Files.exists(m3jdk.resolve(targetPath)));
 
-        M3Importer.materialize(synexia, m3jdk, manifest);
+        M3Importer.materialize(m3, m3jdk, manifest);
         M3Importer.verifyTargetSnapshot(m3jdk, manifest);
         assertTrue(Files.isRegularFile(m3jdk.resolve(targetPath)));
         assertEquals(sha256(bytes), sha256(Files.readAllBytes(m3jdk.resolve(targetPath))));
 
-        M3Importer.materialize(synexia, m3jdk, manifest);
+        M3Importer.materialize(m3, m3jdk, manifest);
         assertEquals(sha256(bytes), sha256(Files.readAllBytes(m3jdk.resolve(targetPath))));
     }
 
     @Test
     void sourceDriftAndTargetDriftFailClosed() throws Exception {
-        Path synexia = temp.resolve("m3-drift");
+        Path m3 = temp.resolve("m3-drift");
         Path m3jdk = temp.resolve("m3jdk-drift");
-        Files.createDirectories(synexia);
+        Files.createDirectories(m3);
         Files.createDirectories(m3jdk);
 
         String sourcePath = "module/src/main/java/p/A.java";
@@ -67,7 +67,7 @@ final class M3ImporterTest {
         write(m3.resolve(sourcePath), apache("package p; final class A { int x; }\n"));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(synexia, m3jdk, manifest));
+                () -> M3Importer.verify(m3, m3jdk, manifest));
 
         write(m3.resolve(sourcePath), before);
         write(m3jdk.resolve(targetPath), apache("package p; final class A { int y; }\n"));
@@ -76,17 +76,17 @@ final class M3ImporterTest {
                 () -> M3Importer.verifyTargetSnapshot(m3jdk, manifest));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(synexia, m3jdk, manifest));
+                () -> M3Importer.verify(m3, m3jdk, manifest));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.materialize(synexia, m3jdk, manifest));
+                () -> M3Importer.materialize(m3, m3jdk, manifest));
     }
 
     @Test
     void missingSourceAndUnsafeRootsFailClosed() throws Exception {
-        Path synexia = temp.resolve("m3-missing");
+        Path m3 = temp.resolve("m3-missing");
         Path m3jdk = temp.resolve("m3jdk-missing");
-        Files.createDirectories(synexia);
+        Files.createDirectories(m3);
         Files.createDirectories(m3jdk);
 
         String sourcePath = "module/src/main/java/p/A.java";
@@ -96,21 +96,21 @@ final class M3ImporterTest {
 
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(synexia, m3jdk, manifest));
+                () -> M3Importer.verify(m3, m3jdk, manifest));
         assertThrows(
                 IllegalArgumentException.class,
                 () -> M3Importer.verify(temp.resolve("absent"), m3jdk, manifest));
         write(m3.resolve(sourcePath), bytes);
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3Importer.verify(synexia, temp.resolve("absent-target"), manifest));
+                () -> M3Importer.verify(m3, temp.resolve("absent-target"), manifest));
     }
 
     @Test
     void materializeRollsBackEarlierAddsWhenALaterWriteFails() throws Exception {
-        Path synexia = temp.resolve("m3-rollback");
+        Path m3 = temp.resolve("m3-rollback");
         Path m3jdk = temp.resolve("m3jdk-rollback");
-        Files.createDirectories(synexia);
+        Files.createDirectories(m3);
         Files.createDirectories(m3jdk);
 
         byte[] a = apache("package p; final class A {}\n");
@@ -138,7 +138,7 @@ final class M3ImporterTest {
                 IOException.class,
                 () ->
                         M3Importer.materialize(
-                                synexia,
+                                m3,
                                 m3jdk,
                                 manifest,
                                 (index, entry) -> {
@@ -154,9 +154,9 @@ final class M3ImporterTest {
 
     @Test
     void strictCliRequiresManifestRevisionAndCleanTrackedCheckout() throws Exception {
-        Path synexia = temp.resolve("m3-git");
+        Path m3 = temp.resolve("m3-git");
         Path m3jdk = temp.resolve("m3jdk-git");
-        Files.createDirectories(synexia);
+        Files.createDirectories(m3);
         Files.createDirectories(m3jdk);
 
         String sourcePath = "module/src/main/java/p/A.java";
@@ -164,12 +164,12 @@ final class M3ImporterTest {
         byte[] bytes = apache("package p; final class A {}\n");
         write(m3.resolve(sourcePath), bytes);
         Files.writeString(m3.resolve("README.md"), "clean\n");
-        git(synexia, "init");
-        git(synexia, "config", "user.email", "m3@example.invalid");
-        git(synexia, "config", "user.name", "M3 Test");
-        git(synexia, "add", sourcePath, "README.md");
-        git(synexia, "commit", "-m", "fixture");
-        String head = git(synexia, "rev-parse", "HEAD").trim();
+        git(m3, "init");
+        git(m3, "config", "user.email", "m3@example.invalid");
+        git(m3, "config", "user.name", "M3 Test");
+        git(m3, "add", sourcePath, "README.md");
+        git(m3, "commit", "-m", "fixture");
+        String head = git(m3, "rev-parse", "HEAD").trim();
 
         M3ImportManifest manifest =
                 new M3ImportManifest(
@@ -239,7 +239,7 @@ final class M3ImporterTest {
                                 }));
         assertFalse(Files.exists(m3jdk.resolve(targetPath)));
 
-        git(synexia, "checkout", "--", "README.md");
+        git(m3, "checkout", "--", "README.md");
         String untrackedSource = "module/src/main/java/p/B.java";
         String untrackedTarget = "m3/vendor/m3/" + untrackedSource;
         write(
@@ -305,10 +305,10 @@ final class M3ImporterTest {
 
     @Test
     void intermediateSymlinksFailClosedWhenSupported() throws Exception {
-        Path synexia = temp.resolve("m3-symlink");
+        Path m3 = temp.resolve("m3-symlink");
         Path m3jdk = temp.resolve("m3jdk-symlink");
         Path outside = temp.resolve("outside");
-        Files.createDirectories(synexia);
+        Files.createDirectories(m3);
         Files.createDirectories(m3jdk);
         Files.createDirectories(outside.resolve("src"));
         byte[] bytes = apache("package p; final class A {}\n");
@@ -328,7 +328,7 @@ final class M3ImporterTest {
                         bytes);
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verifySources(synexia, manifest));
+                () -> M3Importer.verifySources(m3, manifest));
     }
 
     private static String git(Path root, String... args) throws Exception {
