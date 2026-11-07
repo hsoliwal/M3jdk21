@@ -31,6 +31,14 @@ import java.util.function.LongPredicate;
  * sibling-borrow heuristic of the paged donor is not carried. The iterator is fail-fast. This is
  * an M3 proving-ground backend, not a {@code java.util.TreeSet} replacement; live range views are
  * {@link M3LongSortedViews}.</p>
+ *
+ * <p>Positional access ({@link #get(int)}, {@link #indexOf(long)}) binary-searches a page-prefix
+ * lane (the rank of each logical page's first value) that is rebuilt lazily, in O(pages), by the
+ * first positional call after a mutation (the revision is {@code modCount}); mutations pay nothing
+ * for it and repeated positional calls are O(log n) and allocation-free.
+ * {@link #addAllSorted(long[], int, int)} admits a sorted slice and fills fresh full pages with
+ * the values above the current last one. The positional contracts are those of the m3scale donors
+ * {@code LongGapSortedSet} and {@code LongSortedSet}.</p>
  */
 public final class M3LongTreeSet implements M3LongSortedSet {
     /** Donor page size: 64 longs, so an interior insert shifts at most 512 bytes. */
@@ -50,6 +58,10 @@ public final class M3LongTreeSet implements M3LongSortedSet {
     private int freeCount;
     private int size;
     private int modCount;
+    //FLLDCIM: MRL - primitive-method-gaps G1: lazy page-prefix lane for positional access (revision = modCount)
+    /** First rank of each logical page; valid only while {@code prefixRevision == modCount}. */
+    private int[] pagePrefix;
+    private int prefixRevision;
 
     public M3LongTreeSet() {
         this(0, DEFAULT_PAGE_CAPACITY);
@@ -257,6 +269,73 @@ public final class M3LongTreeSet implements M3LongSortedSet {
         return before - size;
     }
 
+    //FLLDCIM: MRL - primitive-method-gaps G1 get(int) (donor LongGapSortedSet.get, blob 87dc58978af6)
+    /**
+     * Returns the value of zero-based rank {@code index} in ascending order: a binary search of the
+     * page-prefix lane, then one page read. O(log n) and allocation-free while no mutation
+     * intervenes; the first positional call after a mutation rebuilds the lane in O(pages).
+     *
+     * @throws IndexOutOfBoundsException if {@code index} is outside {@code [0, size())}
+     */
+    public long get(int index) {
+        Objects.checkIndex(index, size);
+        int[] prefix = pagePrefix();
+        int page = Arrays.binarySearch(prefix, 0, pageCount, index);
+        if (page < 0) {
+            // Absent: the rank lies in the page before the insertion point (page 0 starts at 0).
+            page = -page - 2;
+        }
+        return values[pageOffset(page) + index - prefix[page]];
+    }
+
+    //FLLDCIM: MRL - primitive-method-gaps G1 indexOf(long) (donor LongSortedSet.indexOf, blob d2e0467cb0c4)
+    /**
+     * Returns the rank of {@code value} when present, else {@code -(insertion rank) - 1}: the
+     * {@link Arrays#binarySearch(long[], long)} convention of the donor (unlike
+     * {@link M3LongSortedSnapshot#indexOf(long)}, which returns -1). O(log n) and allocation-free
+     * while no mutation intervenes.
+     */
+    public int indexOf(long value) {
+        if (pageCount == 0) {
+            return -1;
+        }
+        int page = locatePage(value);
+        int offset = pageOffset(page);
+        int found = Arrays.binarySearch(values, offset, offset + pageCounts[page], value);
+        // Physical result to rank: shift by the page's first rank minus its physical offset.
+        int shift = pagePrefix()[page] - offset;
+        return found >= 0 ? found + shift : found - shift;
+    }
+
+    //FLLDCIM: MRL - primitive-method-gaps G1 addAllSorted (donor LongGapSortedSet.addAllSorted, blob 87dc58978af6)
+    /**
+     * Admits the nondecreasing slice {@code sorted[from, to)} and returns the number of new values;
+     * duplicates in the slice and values already present collapse. The range and the order are
+     * validated before any change. Values above the current last value fill the tail page and then
+     * fresh full pages in one pass; the others insert one at a time (O(log n) plus one page shift
+     * each). A capacity failure part-way keeps the values admitted before it.
+     *
+     * @throws NullPointerException if {@code sorted} is null
+     * @throws IndexOutOfBoundsException if {@code [from, to)} is not a range of {@code sorted}
+     * @throws IllegalArgumentException if the slice is not sorted ascending
+     */
+    public int addAllSorted(long[] sorted, int from, int to) {
+        Objects.requireNonNull(sorted, "sorted");
+        Objects.checkFromToIndex(from, to, sorted.length);
+        for (int i = from + 1; i < to; i++) {
+            if (sorted[i] < sorted[i - 1]) {
+                throw new IllegalArgumentException("input must be sorted ascending");
+            }
+        }
+        int before = size;
+        int tail = size == 0 ? from : M3LaneSearch.upperBound(sorted, from, to, last());
+        for (int i = from; i < tail; i++) {
+            add(sorted[i]);
+        }
+        appendAscending(sorted, tail, to);
+        return size - before;
+    }
+
     @Override
     public int size() {
         return size;
@@ -276,10 +355,13 @@ public final class M3LongTreeSet implements M3LongSortedSet {
         return pageCapacity;
     }
 
-    /** Retained primitive lane bytes: the value lane plus the four page lanes. */
+    /** Retained primitive lane bytes: the value lane, the four page lanes and the prefix lane once built. */
     public long payloadBytes() {
+        //FLLDCIM: MRL - primitive-method-gaps G1: the lazily built prefix lane is retained payload
+        long prefixBytes = pagePrefix == null ? 0L : (long) pagePrefix.length * Integer.BYTES;
         return (long) values.length * Long.BYTES + (long) pageMaxima.length * Long.BYTES
-                + ((long) pageCounts.length + pageSlot.length + freeSlots.length) * Integer.BYTES;
+                + ((long) pageCounts.length + pageSlot.length + freeSlots.length) * Integer.BYTES
+                + prefixBytes;
     }
 
     /** Repacks the live pages into slot order and shrinks every lane to the live page count. */
@@ -290,6 +372,9 @@ public final class M3LongTreeSet implements M3LongSortedSet {
         int[] nextCounts = Arrays.copyOf(pageCounts, pages);
         int[] nextSlots = Arrays.copyOf(pageSlot, pages);
         int[] nextFree = new int[pages];
+        //FLLDCIM: MRL - primitive-method-gaps G1: the prefix lane shrinks with the page lanes; logical counts, so
+        // the prefix sums and their revision, are unchanged by a repack
+        int[] nextPrefix = pagePrefix == null ? null : Arrays.copyOf(pagePrefix, pages);
         for (int page = 0; page < pageCount; page++) {
             System.arraycopy(values, pageOffset(page), packed, page * pageCapacity, pageCounts[page]);
             nextSlots[page] = page;
@@ -299,6 +384,7 @@ public final class M3LongTreeSet implements M3LongSortedSet {
         pageCounts = nextCounts;
         pageSlot = nextSlots;
         freeSlots = nextFree;
+        pagePrefix = nextPrefix;
         slotsUsed = pageCount;
         freeCount = 0;
     }
@@ -377,6 +463,62 @@ public final class M3LongTreeSet implements M3LongSortedSet {
             }
             @Override public java.util.Comparator<? super Long> getComparator() { return null; }
         };
+    }
+
+    //FLLDCIM: MRL - primitive-method-gaps G1: lazy prefix rebuild, cold path, O(pages) at most once per revision
+    /** The page-prefix lane at the current revision; reallocated only after the page lanes grew. */
+    private int[] pagePrefix() {
+        int[] prefix = pagePrefix;
+        if (prefix != null && prefixRevision == modCount) {
+            return prefix;
+        }
+        if (prefix == null || prefix.length < pageCount) {
+            prefix = new int[pageCounts.length];
+        }
+        int rank = 0;
+        for (int page = 0; page < pageCount; page++) {
+            prefix[page] = rank;
+            rank += pageCounts[page];
+        }
+        pagePrefix = prefix;
+        prefixRevision = modCount;
+        return prefix;
+    }
+
+    /** Appends a nondecreasing slice whose values all exceed the current last value. */
+    private void appendAscending(long[] sorted, int from, int to) {
+        if (from == to) {
+            return;
+        }
+        // Count the change first: a capacity failure part-way must still invalidate the prefix lane.
+        modCount++;
+        for (int i = from; i < to; i++) {
+            if (i == from || sorted[i] != sorted[i - 1]) {
+                appendValue(sorted[i]);
+            }
+        }
+    }
+
+    /** Appends one value above the current last value to the tail page, opening a page when full. */
+    private void appendValue(long value) {
+        int page = pageCount - 1;
+        if (page < 0 || pageCounts[page] == pageCapacity) {
+            page = openTailPage();
+        }
+        int count = pageCounts[page];
+        values[pageOffset(page) + count] = value;
+        pageCounts[page] = count + 1;
+        pageMaxima[page] = value;
+        size++;
+    }
+
+    /** Opens an empty logical page after the last one, allocating as {@link #splitPage} does. */
+    private int openTailPage() {
+        ensurePages(pageCount + 1);
+        int slot = allocateSlot();
+        pageSlot[pageCount] = slot;
+        pageCounts[pageCount] = 0;
+        return pageCount++;
     }
 
     /** Value at {@code candidate} when it lies in the page, else the last value of the page before. */

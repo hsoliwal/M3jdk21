@@ -347,7 +347,8 @@ final class M3LongTreeSetTest {
                 .map(f -> f.getType().getSimpleName())
                 .sorted()
                 .toList();
-        assertEquals(List.of("int", "int", "int", "int", "int", "int", "int[]", "int[]", "int[]",
-                "long[]", "long[]"), fields);
+        //FLLDCIM: MRL - primitive-method-gaps G1: + int[] pagePrefix and int prefixRevision (positional lane)
+        assertEquals(List.of("int", "int", "int", "int", "int", "int", "int", "int[]", "int[]", "int[]",
+                "int[]", "long[]", "long[]"), fields);
     }
 }
