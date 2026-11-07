@@ -235,7 +235,7 @@ END {
     u = order[i]; enc = lookupProp(u, "", "project.build.sourceEncoding"); enc = (enc == "\001") ? "UTF-8" : res(enc, u, "")
     rel = lookupProp(u, "", "maven.compiler.release"); if (rel == "\001") rel = lookupProp(u, "", "maven.compiler.source")
     rel = (rel == "\001") ? "" : res(rel, u, "")
-    print u, unitRole[u], cp[u], i, reactorProf[u], enc, rel > (OUT "/UNITS.tsv")
+    print u, unitRole[u], cp[u], i, (reactorProf[u] == "" ? "-" : reactorProf[u]), enc, (rel == "" ? "-" : rel) > (OUT "/UNITS.tsv")
   }
   # resolved source roots (default build) of every unit
   for (i = 1; i <= norder; i++) {
