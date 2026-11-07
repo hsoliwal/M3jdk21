@@ -8,6 +8,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
 "$M3JDK/bin/jar" --create --file build/jdk.m3.text.jar -C build/classes .
 "$M3JDK/bin/javac" --release 21 --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -d build/tests \
   core/test/FoundationTest.java core/test/M3LexiconPrecomputeTest.java \
+  core/test/SharedLexiconCatalogPayloadReleaseTest.java \
   core/test/M3DictionaryFrequencyContractTest.java \
   core/test/M3TranslationReceiverMapTest.java \
   core/test/M3PrecomputePayloadTest.java core/test/M3PrecomputeReceiverTest.java \
@@ -21,6 +22,7 @@ mapfile -t sources < <(find core/src -name '*.java' | sort)
 for mode in jit int nocompact c2; do
  flags=();case "$mode" in int)flags=(-Xint);; nocompact)flags=(-XX:-CompactStrings);; c2)flags=(-Xbatch -XX:-TieredCompilation);; esac
  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests FoundationTest | tee "build/logs/test-$mode.log"
+ "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests SharedLexiconCatalogPayloadReleaseTest | tee "build/logs/m3-payload-release-$mode.log"
  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3LexiconPrecomputeTest | tee "build/logs/typed-precompute-$mode.log"
  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3InstanceIndexPrecomputeTest | tee "build/logs/instance-index-$mode.log"
 # Run numeric ownership/mapping proofs before the independent dictionary-frequency gate.
