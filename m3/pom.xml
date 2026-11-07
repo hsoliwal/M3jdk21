@@ -44,6 +44,8 @@
     <module>eclipse/core-runtime</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: eclipse/framework WIRED (gate gate-eclipse-framework, GATES.tsv) -->
     <module>eclipse/framework</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: migration WIRED (gate gate-migration, GATES.tsv) -->
+    <module>migration</module>
   </modules>
 
   <profiles>
