@@ -19,20 +19,20 @@ import org.junit.jupiter.api.Test;
 final class M3PrimitiveCollectionFacadesTest {
     @Test
     void primitiveKindsPreserveLaneWidths() {
-        assertEquals(1, M3PrimitiveKind.BOOLEAN.widthBytes());
-        assertEquals(1, M3PrimitiveKind.BYTE.widthBytes());
-        assertEquals(2, M3PrimitiveKind.SHORT.widthBytes());
-        assertEquals(2, M3PrimitiveKind.CHAR.widthBytes());
-        assertEquals(4, M3PrimitiveKind.INT.widthBytes());
-        assertEquals(8, M3PrimitiveKind.LONG.widthBytes());
-        assertEquals(4, M3PrimitiveKind.FLOAT.widthBytes());
-        assertEquals(8, M3PrimitiveKind.DOUBLE.widthBytes());
-        assertEquals(28, M3PrimitiveKind.INT.payloadBytes(7));
+        assertEquals(1, PrimitiveKind.BOOLEAN.widthBytes());
+        assertEquals(1, PrimitiveKind.BYTE.widthBytes());
+        assertEquals(2, PrimitiveKind.SHORT.widthBytes());
+        assertEquals(2, PrimitiveKind.CHAR.widthBytes());
+        assertEquals(4, PrimitiveKind.INT.widthBytes());
+        assertEquals(8, PrimitiveKind.LONG.widthBytes());
+        assertEquals(4, PrimitiveKind.FLOAT.widthBytes());
+        assertEquals(8, PrimitiveKind.DOUBLE.widthBytes());
+        assertEquals(28, PrimitiveKind.INT.payloadBytes(7));
     }
 
     @Test
     void primitiveArrayListPreservesExactWidthOwnerContract() {
-        M3PrimitiveArrayList list = new M3PrimitiveArrayList(M3PrimitiveKind.INT, 1);
+        M3PrimitiveArrayList list = new M3PrimitiveArrayList(PrimitiveKind.INT, 1);
         list.addBits(3);
         list.addBits(1);
         list.addBits(1, 2);
@@ -57,7 +57,7 @@ final class M3PrimitiveCollectionFacadesTest {
 
     @Test
     void primitiveArrayDequePreservesLogicalOrderAndThrowingEmptyContract() {
-        M3PrimitiveArrayDeque deque = new M3PrimitiveArrayDeque(M3PrimitiveKind.INT, 1);
+        M3PrimitiveArrayDeque deque = new M3PrimitiveArrayDeque(PrimitiveKind.INT, 1);
         deque.addLastBits(2);
         deque.addFirstBits(1);
         deque.addLastBits(3);
@@ -79,7 +79,7 @@ final class M3PrimitiveCollectionFacadesTest {
 
     @Test
     void intArrayDequePreservesPrimitiveOwnerContract() {
-        M3IntArrayDeque deque = new M3IntArrayDeque(2);
+        IntArrayDeque deque = new IntArrayDeque(2);
         deque.addLast(2);
         deque.addFirst(1);
         deque.addAll(new int[] {3, 4, 5}, 0, 3);
@@ -97,7 +97,7 @@ final class M3PrimitiveCollectionFacadesTest {
 
     @Test
     void primitiveMinMaxQueuePreservesSortedExtremaContract() {
-        M3PrimitiveMinMaxQueue queue = new M3PrimitiveMinMaxQueue(M3PrimitiveKind.INT, 1);
+        M3PrimitiveMinMaxQueue queue = new M3PrimitiveMinMaxQueue(PrimitiveKind.INT, 1);
         queue.offerBits(5);
         queue.offerBits(1);
         queue.offerBits(3);

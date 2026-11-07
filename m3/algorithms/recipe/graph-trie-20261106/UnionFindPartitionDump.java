@@ -18,7 +18,7 @@ import java.util.SplittableRandom;
 //FLLDCIM: DIFFERENTIAL - owner check 1 of recipe/graph-trie-20261106 (unionfind_differential.sh): the donor union-find is verified against the M3JDK owner, never ported
 /**
  * Partition differential of the donor {@code IntUnionFind} (a class given by name, loaded from the donor compile tree,
- * every method taking a progress monitor) against the owner {@code jdk.m3.collections.M3IntDisjointSet}: both replay
+ * every method taking a progress monitor) against the owner {@code jdk.m3.collections.IntDisjointSet}: both replay
  * the same seeded sequences of union / connected / find / componentSize / componentCount operations over sizes 1 to
  * 100,000 (and the empty set), and each side writes one dump line per operation to its own file with every observation
  * that belongs to the partition (union result, connected result, component size and count, out-of-range refusals) but
@@ -145,7 +145,7 @@ public final class UnionFindPartitionDump {
 
         private void sequence(int size, long count, SplittableRandom random) throws Exception {
             Object donorSet = donor.create(size);
-            jdk.m3.collections.M3IntDisjointSet owner = new jdk.m3.collections.M3IntDisjointSet(size);
+            jdk.m3.collections.IntDisjointSet owner = new jdk.m3.collections.IntDisjointSet(size);
             maxSize = Math.max(maxSize, size);
             String head = "seq " + sequences + " n=" + size + " ";
             donorOut.print(head + "begin\n");

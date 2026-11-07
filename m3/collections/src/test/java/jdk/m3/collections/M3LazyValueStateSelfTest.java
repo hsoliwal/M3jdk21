@@ -24,18 +24,18 @@ public final class M3LazyValueStateSelfTest {
         require(state.capacity() == 0, "empty state allocation"); state.grow(4);
         same(null, state.read(0, 0, values, M3Progress.NULL));
         same(null, state.read(0, 0, values, M3Progress.NULL));
-        require(state.flags(0) == M3LazyValueProvider.LOADED && calls[0] == 1, "null memoized");
+        require(state.flags(0) == LazyValueProvider.LOADED && calls[0] == 1, "null memoized");
         same(identity, state.read(1, 1, values, M3Progress.NULL));
         same(identity, state.read(1, 1, values, M3Progress.NULL));
         require(calls[0] == 2, "warm read avoids callback");
         state.grow(8); values = java.util.Arrays.copyOf(values, 8);
-        require(state.flags(1) == M3LazyValueProvider.LOADED, "growth preserves flags");
+        require(state.flags(1) == LazyValueProvider.LOADED, "growth preserves flags");
         state.verifySlot(0, true, values); state.verifySlot(1, true, values);
         state.erased(1); values[1] = null; state.verifySlot(1, false, values);
         state.admitted(1, false); same(identity, state.read(1, 1, values, M3Progress.NULL));
         require(calls[0] == 3, "reused slot reloads");
         state.cleared(); java.util.Arrays.fill(values, null);
-        require(state.flags(0) == M3LazyValueProvider.UNLOADED, "clear state");
+        require(state.flags(0) == LazyValueProvider.UNLOADED, "clear state");
 
         RuntimeException original = new IllegalArgumentException("provider failure"); int[] attempts = {0};
         var retry = new M3LazyValueState<Integer, Object>((key, progress) -> {
@@ -43,7 +43,7 @@ public final class M3LazyValueStateSelfTest {
         });
         retry.grow(1); Object[] result = new Object[1];
         same(original, failure(RuntimeException.class, () -> retry.read(0, 0, result, M3Progress.NULL)));
-        require(retry.flags(0) == M3LazyValueProvider.FAILED && result[0] == null, "failure not published");
+        require(retry.flags(0) == LazyValueProvider.FAILED && result[0] == null, "failure not published");
         retry.writable(); same(identity, retry.read(0, 0, result, M3Progress.NULL));
         require(attempts[0] == 2, "failed read can retry");
 
@@ -52,7 +52,7 @@ public final class M3LazyValueStateSelfTest {
                 recursive.get().read(0, key, result, progress));
         recursive.set(cycle); cycle.grow(1); result[0] = null;
         failure(IllegalStateException.class, () -> cycle.read(0, 0, result, M3Progress.NULL));
-        require(cycle.flags(0) == M3LazyValueProvider.FAILED, "recursive state reset"); cycle.writable();
+        require(cycle.flags(0) == LazyValueProvider.FAILED, "recursive state reset"); cycle.writable();
 
         AtomicReference<M3LazyValueState<Integer, Object>> mutating = new AtomicReference<>();
         var guard = new M3LazyValueState<Integer, Object>((key, progress) -> {
@@ -69,7 +69,7 @@ public final class M3LazyValueStateSelfTest {
         });
         lateCancel.grow(1); M3Progress monitored = M3Progress.of(1);
         failure(CancellationException.class, () -> lateCancel.read(0, 0, result, monitored));
-        require(result[0] == null && lateCancel.flags(0) == M3LazyValueProvider.FAILED,
+        require(result[0] == null && lateCancel.flags(0) == LazyValueProvider.FAILED,
                 "canceled result not published"); lateCancel.writable();
         same(identity, lateCancel.read(0, 0, result, M3Progress.NULL));
 
@@ -78,17 +78,17 @@ public final class M3LazyValueStateSelfTest {
 
         List<Long> events = new ArrayList<>();
         int[] observedCalls = {0};
-        M3LazyValueProvider<Integer, Object> observedProvider = new M3LazyValueProvider<>() {
+        LazyValueProvider<Integer, Object> observedProvider = new LazyValueProvider<>() {
             @Override public Object load(Integer key, M3Progress progress) {
                 observedCalls[0]++;
                 return identity;
             }
-            @Override public M3LazyEventPolicy lazyEventPolicy() {
-                return M3LazyEventPolicy.of(
+            @Override public LazyEventPolicy lazyEventPolicy() {
+                return LazyEventPolicy.of(
                         M3LazyEventBits.BEFORE_TOUCH | M3LazyEventBits.CACHE_MISS
                                 | M3LazyEventBits.STATE_CHANGED | M3LazyEventBits.AFTER_LOAD
                                 | M3LazyEventBits.CANCELLED,
-                        M3LazyEventGranularity.STATE_TRANSITION);
+                        LazyEventGranularity.STATE_TRANSITION);
             }
             @Override public M3LazyEventSink<M3Progress> lazyEventSink() {
                 return (eventBit, slot, oldState, newState, operation, progress, failure) ->

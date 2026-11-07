@@ -49,12 +49,12 @@ public final class M3FilteredSetIdentityContract {
         Key alias = new Key("same", true);
         Set<Key> owner = identitySet();
         owner.add(stored);
-        Set<Key> view = M3CollectionViews.filtered(owner, key -> key.visible);
+        Set<Key> view = CollectionViews.filtered(owner, key -> key.visible);
         check(false, view.contains(alias), "foreign identity alias is absent");
         check(false, view.remove(alias), "foreign identity alias cannot remove a stored reference");
         check(true, owner.contains(stored), "foreign removal preserves exact stored reference");
         Collection<Key> erased = owner;
-        Collection<Key> erasedView = M3CollectionViews.filtered(erased, key -> key.visible);
+        Collection<Key> erasedView = CollectionViews.filtered(erased, key -> key.visible);
         check(false, erasedView.contains(alias), "Collection overload preserves runtime identity Set");
         check(false, erasedView.remove(alias), "Collection overload removal preserves identity membership");
     }
@@ -65,7 +65,7 @@ public final class M3FilteredSetIdentityContract {
         Set<Key> owner = identitySet();
         owner.add(hidden);
         owner.add(selected);
-        Set<Key> view = M3CollectionViews.filtered(owner, key -> key.visible);
+        Set<Key> view = CollectionViews.filtered(owner, key -> key.visible);
         check(false, view.contains(hidden), "hidden exact reference cannot borrow visible equal sibling");
         check(false, view.remove(hidden), "hidden exact removal cannot delete visible equal sibling");
         check(true, owner.contains(hidden), "hidden exact reference remains owned");
@@ -80,11 +80,11 @@ public final class M3FilteredSetIdentityContract {
         Set<Key> owner = identitySet();
         Key selected = new Key("selected", true);
         owner.add(null); owner.add(selected);
-        Set<Key> nonNull = M3CollectionViews.filtered(owner, key -> key != null);
+        Set<Key> nonNull = CollectionViews.filtered(owner, key -> key != null);
         check(false, nonNull.contains(null), "hidden exact null is absent");
         check(false, nonNull.remove(null), "hidden exact null cannot be removed");
         check(true, owner.contains(null), "hidden null stays owned");
-        Set<Key> onlyNull = M3CollectionViews.filtered(owner, key -> key == null);
+        Set<Key> onlyNull = CollectionViews.filtered(owner, key -> key == null);
         check(true, onlyNull.contains(null), "visible null is present");
         check(true, onlyNull.remove(null), "visible null is removed");
         check(false, owner.contains(null), "null removed from identity owner");
@@ -96,7 +96,7 @@ public final class M3FilteredSetIdentityContract {
             Key stored = new Key("same", true);
             Key hiddenAlias = new Key("same", false);
             owner.add(stored);
-            Set<Key> view = M3CollectionViews.filtered(owner, key -> key.visible);
+            Set<Key> view = CollectionViews.filtered(owner, key -> key.visible);
             check(true, view.contains(hiddenAlias), "equals owner tests stored representative");
             check(true, view.remove(hiddenAlias), "equals alias removes admitted stored representative");
             check(true, owner.isEmpty(), "equals owner changed through alias");
@@ -114,8 +114,8 @@ public final class M3FilteredSetIdentityContract {
         Key hidden = new Key("same", false);
         Key selected = new Key("same", true);
         Set<Key> owner = identitySet(); owner.add(hidden); owner.add(selected);
-        Set<Key> first = M3CollectionViews.filtered(owner, key -> key != null);
-        Set<Key> nested = M3CollectionViews.filtered(first, key -> key.visible);
+        Set<Key> first = CollectionViews.filtered(owner, key -> key != null);
+        Set<Key> nested = CollectionViews.filtered(first, key -> key.visible);
         check(false, nested.contains(hidden), "nested filters retain exact hidden identity");
         check(false, nested.remove(hidden), "nested removal preserves visible sibling");
         check(true, nested.remove(selected), "nested exact visible removal writes through");
@@ -128,7 +128,7 @@ public final class M3FilteredSetIdentityContract {
             @Override public int size() { return rows.size(); }
             @Override public boolean remove(Object value) { throw new UnsupportedOperationException("direct remove"); }
         };
-        check(true, M3CollectionViews.filtered(iteratorWritable, key -> true).remove(selected),
+        check(true, CollectionViews.filtered(iteratorWritable, key -> true).remove(selected),
                 "exact removal preserves writable iterator behavior");
         check(true, rows.isEmpty(), "iterator-writable owner changed");
     }
@@ -137,7 +137,7 @@ public final class M3FilteredSetIdentityContract {
         Key selected = new Key("same", true);
         RuntimeException predicateFailure = new IllegalStateException("predicate marker");
         Set<Key> owner = identitySet(); owner.add(selected);
-        Set<Key> throwing = M3CollectionViews.filtered(owner, key -> { throw predicateFailure; });
+        Set<Key> throwing = CollectionViews.filtered(owner, key -> { throw predicateFailure; });
         try { throwing.contains(selected); throw new AssertionError("contains must propagate predicate failure"); }
         catch (RuntimeException actual) { same(predicateFailure, actual, "contains preserves predicate exception identity"); }
         try { throwing.remove(selected); throw new AssertionError("remove must propagate predicate failure"); }
@@ -151,7 +151,7 @@ public final class M3FilteredSetIdentityContract {
             @Override public int size() { return 1; }
             @Override public boolean contains(Object value) { throw ownerFailure; }
         };
-        Set<Key> failedView = M3CollectionViews.filtered(failedOwner, key -> { callbacks[0]++; return true; });
+        Set<Key> failedView = CollectionViews.filtered(failedOwner, key -> { callbacks[0]++; return true; });
         try { failedView.contains(selected); throw new AssertionError("owner contains must remain authoritative"); }
         catch (RuntimeException actual) { same(ownerFailure, actual, "contains preserves owner failure identity"); }
         try { failedView.remove(selected); throw new AssertionError("owner membership gates removal"); }

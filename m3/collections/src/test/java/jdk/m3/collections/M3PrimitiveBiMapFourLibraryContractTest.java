@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 final class M3PrimitiveBiMapFourLibraryContractTest {
     @Test
     void strictPutReplacesOwnValueAndRejectsForeignValueWithoutMutation() {
-        M3PrimitiveBiMap map = new M3PrimitiveBiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+        M3PrimitiveBiMap map = new M3PrimitiveBiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         assertEquals(-1, map.putStrictBits(1, 10, -1));
         assertEquals(-1, map.putStrictBits(2, 20, -1));
         assertEquals(10, map.putStrictBits(1, 30, -1));
@@ -27,7 +27,7 @@ final class M3PrimitiveBiMapFourLibraryContractTest {
 
     @Test
     void replacingPutEvictsTheExistingValueOwner() {
-        M3PrimitiveBiMap map = new M3PrimitiveBiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+        M3PrimitiveBiMap map = new M3PrimitiveBiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         map.putStrictBits(1, 10, -1);
         map.putStrictBits(2, 20, -1);
 
@@ -42,7 +42,7 @@ final class M3PrimitiveBiMapFourLibraryContractTest {
 
     @Test
     void inverseIsCachedAndInverseOfInverseIsOriginal() {
-        M3PrimitiveBiMap map = new M3PrimitiveBiMap(M3PrimitiveKind.INT, M3PrimitiveKind.LONG);
+        M3PrimitiveBiMap map = new M3PrimitiveBiMap(PrimitiveKind.INT, PrimitiveKind.LONG);
         M3PrimitiveBiMap inverse = map.inverse();
 
         assertSame(inverse, map.inverse());
@@ -56,7 +56,7 @@ final class M3PrimitiveBiMapFourLibraryContractTest {
 
     @Test
     void legacyInsertOnlyPutRemainsUnchanged() {
-        M3PrimitiveBiMap map = new M3PrimitiveBiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+        M3PrimitiveBiMap map = new M3PrimitiveBiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         assertTrue(map.putBits(1, 10));
         assertFalse(map.putBits(1, 20));
         assertEquals(10, map.getValueOrDefaultBits(1, -1));
@@ -67,8 +67,8 @@ final class M3PrimitiveBiMapFourLibraryContractTest {
 
     @Test
     void collisionPoliciesWorkAcrossAllPrimitiveKindPairs() {
-        for (M3PrimitiveKind keyKind : M3PrimitiveKind.values()) {
-            for (M3PrimitiveKind valueKind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind keyKind : PrimitiveKind.values()) {
+            for (PrimitiveKind valueKind : PrimitiveKind.values()) {
                 M3PrimitiveBiMap map = new M3PrimitiveBiMap(keyKind, valueKind);
                 assertSame(map, map.inverse().inverse());
                 assertTrue(map.putBits(0, 0));
@@ -89,7 +89,7 @@ final class M3PrimitiveBiMapFourLibraryContractTest {
     }
     @Test
     void returningRemovalsMatchMapAndBidiMapShapes() {
-        M3PrimitiveBiMap map = new M3PrimitiveBiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+        M3PrimitiveBiMap map = new M3PrimitiveBiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         map.putStrictBits(1, 10, -1);
         map.putStrictBits(2, 20, -1);
 

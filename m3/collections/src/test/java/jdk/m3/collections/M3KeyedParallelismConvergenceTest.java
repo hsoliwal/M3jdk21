@@ -51,7 +51,7 @@ final class M3KeyedParallelismConvergenceTest {
         AtomicInteger keys = new AtomicInteger();
         AtomicInteger mapped = new AtomicInteger();
         try (Invocation<List<Integer>> invocation = new Invocation<>(() ->
-                M3ObjectStream.snapshot(List.of(0, 1, 2, 3, 4, 5, 6, 7, 8))
+                ObjectStream.snapshot(List.of(0, 1, 2, 3, 4, 5, 6, 7, 8))
                         .parallelByKey(value -> {
                             keys.incrementAndGet();
                             if (value == 3) fourthKey.countDown();
@@ -80,7 +80,7 @@ final class M3KeyedParallelismConvergenceTest {
         AtomicInteger keys = new AtomicInteger();
         AtomicInteger mapped = new AtomicInteger();
         try (Invocation<List<Integer>> invocation = new Invocation<>(() ->
-                M3ObjectStream.snapshot(input).parallelByKey(value -> {
+                ObjectStream.snapshot(input).parallelByKey(value -> {
                     keys.incrementAndGet();
                     return null;
                 }).mapOrdered(value -> {
@@ -105,7 +105,7 @@ final class M3KeyedParallelismConvergenceTest {
         AtomicBoolean restoredInterrupt = new AtomicBoolean();
         try (Invocation<List<Integer>> invocation = new Invocation<>(() -> {
             try {
-                return M3ObjectStream.snapshot(List.of(0, 1, 2, 3, 4))
+                return ObjectStream.snapshot(List.of(0, 1, 2, 3, 4))
                         .parallelByKey(value -> {
                             if (value == 3) fourthKey.countDown();
                             return 0;

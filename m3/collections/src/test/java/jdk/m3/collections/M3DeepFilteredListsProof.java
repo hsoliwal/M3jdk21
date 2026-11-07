@@ -241,7 +241,7 @@ public final class M3DeepFilteredListsProof {
         List<String> selected = backing.stream().filter(Objects::nonNull).filter(prepared).toList();
         equal(selected, new ArrayList<>(view), "compiled full-match predicate composition");
         Comparator<String> byLength = Comparator.comparingInt(String::length);
-        List<String> snapshot = M3CollectionViews.filteredSortedSnapshot(view, value -> true, byLength);
+        List<String> snapshot = CollectionViews.filteredSortedSnapshot(view, value -> true, byLength);
         ArrayList<String> oracle = new ArrayList<>(selected);
         oracle.sort(byLength);
         equal(oracle, snapshot, "stable filtered sorted snapshot");

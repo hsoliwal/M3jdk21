@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.graph.IntLinkCutForest;
 
 class M3IntLinkCutForestTest {
     @Test void dynamicOperationsMatchRebuiltAdjacencyPaths() {
@@ -13,7 +14,7 @@ class M3IntLinkCutForestTest {
         int n = 25;
         int[] values = new int[n];
         for (int i = 0; i < n; i++) { values[i] = random.nextInt(); }
-        M3IntLinkCutForest forest = new M3IntLinkCutForest(values);
+        IntLinkCutForest forest = new IntLinkCutForest(values);
         boolean[][] edges = new boolean[n][n];
         for (int step = 0; step < 30_000; step++) {
             int a = random.nextInt(n), b = random.nextInt(n);
@@ -50,7 +51,7 @@ class M3IntLinkCutForestTest {
     @Test void deepChainsUseExplicitAncestorsAndExactLongAggregates() {
         int n = 120_000;
         int[] values = new int[n]; Arrays.fill(values, Integer.MAX_VALUE);
-        M3IntLinkCutForest forest = new M3IntLinkCutForest(values);
+        IntLinkCutForest forest = new IntLinkCutForest(values);
         for (int i = 1; i < n; i++) { assertTrue(forest.link(i - 1, i)); }
         assertEquals((long) n * Integer.MAX_VALUE, forest.pathSum(0, n - 1));
         assertEquals(n, forest.pathSize(n - 1, 0));
@@ -66,7 +67,7 @@ class M3IntLinkCutForestTest {
 
     @Test void snapshotsAndRejectedOperationsPreserveLogicalState() {
         int[] values = {Integer.MIN_VALUE, 7, Integer.MAX_VALUE, -5};
-        M3IntLinkCutForest forest = new M3IntLinkCutForest(values);
+        IntLinkCutForest forest = new IntLinkCutForest(values);
         values[0] = 123;
         assertEquals(Integer.MIN_VALUE, forest.valueAt(0));
         assertTrue(forest.link(0, 1)); assertTrue(forest.link(1, 2));
@@ -83,11 +84,11 @@ class M3IntLinkCutForestTest {
         assertEquals(6, forest.pathSum(0, 2));
         assertEquals(2, forest.vertexAt(2, 0, 0)); assertEquals(0, forest.vertexAt(2, 0, 2));
         assertTrue(forest.cut(2, 1)); assertFalse(forest.connected(0, 2));
-        assertEquals(0, new M3IntLinkCutForest(new int[0]).vertices());
-        assertThrows(NullPointerException.class, () -> new M3IntLinkCutForest(null));
+        assertEquals(0, new IntLinkCutForest(new int[0]).vertices());
+        assertThrows(NullPointerException.class, () -> new IntLinkCutForest(null));
     }
 
-    private static void assertPath(M3IntLinkCutForest forest, int[] values, int[] path) {
+    private static void assertPath(IntLinkCutForest forest, int[] values, int[] path) {
         long sum = 0; int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
         for (int vertex : path) { sum += values[vertex]; min = Math.min(min, values[vertex]); max = Math.max(max, values[vertex]); }
         int from = path[0], to = path[path.length - 1];

@@ -6,7 +6,7 @@ package jdk.m3.collections.interop;
 
 import static org.junit.jupiter.api.Assertions.*;
 import com.google.common.collect.Multiset;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3LinkedList;
 import jdk.m3.collections.M3ObjectCounts;
@@ -26,7 +26,7 @@ import org.springframework.util.MultiValueMap;
 
 /** Five actual SDK contracts on primitive M3 index/flag snapshots. */
 final class M3FiveProviderFlagSelectionTest {
-    private static final M3IndexPathMasks.Backend JAVA = M3IndexPathMasks.Backend.JAVA;
+    private static final IndexPathMasks.Backend JAVA = IndexPathMasks.Backend.JAVA;
 
     @Test void selectedCountsAreM3OwnedForAllFiveRealProviders() {
         M3ObjectCounts<String> source = new M3ObjectCounts<>();
@@ -113,7 +113,7 @@ final class M3FiveProviderFlagSelectionTest {
 
     @Test void seededFull32BitFlagAndDuplicateCountOracle() {
         if (Boolean.getBoolean("m3.interop.requireNative")) {
-            assertTrue(M3IndexPathMasks.nativeAvailable(), "required C17 JNI backend must load");
+            assertTrue(IndexPathMasks.nativeAvailable(), "required C17 JNI backend must load");
         }
         Random random = new Random(0x4d3305F17L);
         M3ObjectCounts<Integer> source = new M3ObjectCounts<>();
@@ -159,9 +159,9 @@ final class M3FiveProviderFlagSelectionTest {
                 assertEquals(count.intValue(), eclipse.occurrencesOf(key));
                 assertEquals(List.of(count), spring.get(key));
             });
-            if (M3IndexPathMasks.nativeAvailable()) {
+            if (IndexPathMasks.nativeAvailable()) {
                 var nativeSnapshot = M3FiveProviderFlagSelection.capture(source, required,
-                        excluded, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                        excluded, IndexPathMasks.Backend.NATIVE_REQUIRED);
                 assertEquals(reference, nativeSnapshot.jdkCounts());
             }
         }

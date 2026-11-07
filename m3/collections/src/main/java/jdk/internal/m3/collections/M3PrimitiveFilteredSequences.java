@@ -19,11 +19,11 @@ import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.LongPredicate;
-import jdk.m3.collections.M3LongDeque;
-import jdk.m3.collections.M3LongIterator;
-import jdk.m3.collections.M3LongList;
-import jdk.m3.collections.M3LongQueue;
-import jdk.m3.collections.M3LongStack;
+import jdk.m3.collections.LongDeque;
+import jdk.m3.collections.LongIterator;
+import jdk.m3.collections.LongList;
+import jdk.m3.collections.LongQueue;
+import jdk.m3.collections.LongStack;
 
 /**
  * Live filtered adapters over the existing primitive list, deque, queue and stack owners.
@@ -47,37 +47,37 @@ import jdk.m3.collections.M3LongStack;
 public final class M3PrimitiveFilteredSequences {
     private M3PrimitiveFilteredSequences() { }
 
-    public static M3LongList list(M3LongList source, LongPredicate predicate) {
+    public static LongList list(LongList source, LongPredicate predicate) {
         return new ListView(source, predicate, true);
     }
 
-    public static M3LongList readOnlyList(M3LongList source, LongPredicate predicate) {
+    public static LongList readOnlyList(LongList source, LongPredicate predicate) {
         return new ListView(source, predicate, false);
     }
 
-    public static M3LongDeque deque(M3LongDeque source, LongPredicate predicate) {
+    public static LongDeque deque(LongDeque source, LongPredicate predicate) {
         return new DequeView(source, predicate, true);
     }
 
-    public static M3LongDeque readOnlyDeque(M3LongDeque source, LongPredicate predicate) {
+    public static LongDeque readOnlyDeque(LongDeque source, LongPredicate predicate) {
         return new DequeView(source, predicate, false);
     }
 
     /** The resulting deque also implements the primitive queue contract. */
-    public static M3LongQueue queue(M3LongDeque source, LongPredicate predicate) {
+    public static LongQueue queue(LongDeque source, LongPredicate predicate) {
         return deque(source, predicate);
     }
 
-    public static M3LongQueue readOnlyQueue(M3LongDeque source, LongPredicate predicate) {
+    public static LongQueue readOnlyQueue(LongDeque source, LongPredicate predicate) {
         return readOnlyDeque(source, predicate);
     }
 
     /** The existing indexed list owns the stack's physical order and tail removal. */
-    public static M3LongStack stack(M3LongList source, LongPredicate predicate) {
+    public static LongStack stack(LongList source, LongPredicate predicate) {
         return new StackView(source, predicate, true);
     }
 
-    public static M3LongStack readOnlyStack(M3LongList source, LongPredicate predicate) {
+    public static LongStack readOnlyStack(LongList source, LongPredicate predicate) {
         return new StackView(source, predicate, false);
     }
 
@@ -91,14 +91,14 @@ public final class M3PrimitiveFilteredSequences {
         return new UnsupportedOperationException("read-only filtered collection");
     }
 
-    private static final class Cursor implements M3LongIterator {
-        private final M3LongIterator source;
+    private static final class Cursor implements LongIterator {
+        private final LongIterator source;
         private final LongPredicate predicate;
         private boolean ready;
         private boolean ended;
         private long next;
 
-        Cursor(M3LongIterator source, LongPredicate predicate) {
+        Cursor(LongIterator source, LongPredicate predicate) {
             this.source = source;
             this.predicate = predicate;
         }
@@ -125,7 +125,7 @@ public final class M3PrimitiveFilteredSequences {
         }
     }
 
-    private static int count(M3LongIterator it) {
+    private static int count(LongIterator it) {
         int result = 0;
         while (it.hasNext()) {
             it.nextLong();
@@ -135,7 +135,7 @@ public final class M3PrimitiveFilteredSequences {
     }
 
     /** One-pass primitive materialization; no source.size() assumption or boxing. */
-    private static long[] copy(M3LongIterator it) {
+    private static long[] copy(LongIterator it) {
         long[] values = new long[0];
         int used = 0;
         while (it.hasNext()) {
@@ -168,7 +168,7 @@ public final class M3PrimitiveFilteredSequences {
             admit(predicate, value);
         }
 
-        final M3LongIterator filter(M3LongIterator source) {
+        final LongIterator filter(LongIterator source) {
             return new Cursor(source, predicate);
         }
     }
@@ -179,7 +179,7 @@ public final class M3PrimitiveFilteredSequences {
      * values or predicate results. Do not call LongPredicate.and: these views
      * have always called test directly, including for predicates overriding and.
      */
-    private static M3LongIterator filterPlan(M3LongIterator source, LongPredicate[] plan) {
+    private static LongIterator filterPlan(LongIterator source, LongPredicate[] plan) {
         return new Cursor(source, value -> {
             for (LongPredicate predicate : plan) {
                 if (!predicate.test(value)) return false;
@@ -188,10 +188,10 @@ public final class M3PrimitiveFilteredSequences {
         });
     }
 
-    private static final class ListView extends View implements M3LongList {
-        private final M3LongList source;
+    private static final class ListView extends View implements LongList {
+        private final LongList source;
 
-        ListView(M3LongList source, LongPredicate predicate, boolean writable) {
+        ListView(LongList source, LongPredicate predicate, boolean writable) {
             super(predicate, writable);
             this.source = Objects.requireNonNull(source, "source");
         }
@@ -215,7 +215,7 @@ public final class M3PrimitiveFilteredSequences {
         @Override public boolean contains(long value) {
             return source.contains(value) && predicate.test(value);
         }
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             // Two cursor frames are bounded and cheaper than a separate plan array.
             if (!(source instanceof ListView previous)
                     || !(previous.source instanceof ListView)) return filter(source.iterator());
@@ -273,7 +273,7 @@ public final class M3PrimitiveFilteredSequences {
         @Override public int indexOf(long value) {
             if (!predicate.test(value)) return -1;
             int visible = 0;
-            M3LongIterator it = iterator();
+            LongIterator it = iterator();
             while (it.hasNext()) {
                 if (it.nextLong() == value) return visible;
                 visible++;
@@ -284,7 +284,7 @@ public final class M3PrimitiveFilteredSequences {
             if (!predicate.test(value)) return -1;
             int visible = 0;
             int last = -1;
-            M3LongIterator it = iterator();
+            LongIterator it = iterator();
             while (it.hasNext()) {
                 if (it.nextLong() == value) last = visible;
                 visible++;
@@ -323,7 +323,7 @@ public final class M3PrimitiveFilteredSequences {
         /** Sorted visible values required; linear lower bound avoids a scratch array. */
         @Override public int binarySearch(long target) {
             int index = 0;
-            M3LongIterator it = iterator();
+            LongIterator it = iterator();
             while (it.hasNext()) {
                 long current = it.nextLong();
                 if (current >= target) return current == target ? index : -(index + 1);
@@ -353,10 +353,10 @@ public final class M3PrimitiveFilteredSequences {
         }
     }
 
-    private static final class DequeView extends View implements M3LongDeque {
-        private final M3LongDeque source;
+    private static final class DequeView extends View implements LongDeque {
+        private final LongDeque source;
 
-        DequeView(M3LongDeque source, LongPredicate predicate, boolean writable) {
+        DequeView(LongDeque source, LongPredicate predicate, boolean writable) {
             super(predicate, writable);
             this.source = Objects.requireNonNull(source, "source");
         }
@@ -366,10 +366,10 @@ public final class M3PrimitiveFilteredSequences {
         @Override public boolean contains(long value) {
             return source.contains(value) && predicate.test(value);
         }
-        @Override public M3LongIterator iterator() { return iterator(false); }
-        @Override public M3LongIterator descendingIterator() { return iterator(true); }
+        @Override public LongIterator iterator() { return iterator(false); }
+        @Override public LongIterator descendingIterator() { return iterator(true); }
 
-        private M3LongIterator iterator(boolean descending) {
+        private LongIterator iterator(boolean descending) {
             if (!(source instanceof DequeView previous)
                     || !(previous.source instanceof DequeView)) {
                 return filter(descending ? source.descendingIterator() : source.iterator());
@@ -393,7 +393,7 @@ public final class M3PrimitiveFilteredSequences {
         @Override public long get(int index) {
             if (index < 0) throw new IndexOutOfBoundsException(index);
             int cursor = 0;
-            M3LongIterator it = iterator();
+            LongIterator it = iterator();
             while (it.hasNext()) {
                 long value = it.nextLong();
                 if (cursor++ == index) return value;
@@ -401,12 +401,12 @@ public final class M3PrimitiveFilteredSequences {
             throw new IndexOutOfBoundsException(index);
         }
         @Override public long getFirst() {
-            M3LongIterator it = iterator();
+            LongIterator it = iterator();
             if (!it.hasNext()) throw new NoSuchElementException();
             return it.nextLong();
         }
         @Override public long getLast() {
-            M3LongIterator it = descendingIterator();
+            LongIterator it = descendingIterator();
             if (!it.hasNext()) throw new NoSuchElementException();
             return it.nextLong();
         }
@@ -466,10 +466,10 @@ public final class M3PrimitiveFilteredSequences {
         }
     }
 
-    private static final class StackView extends View implements M3LongStack {
-        private final M3LongList source;
+    private static final class StackView extends View implements LongStack {
+        private final LongList source;
 
-        StackView(M3LongList source, LongPredicate predicate, boolean writable) {
+        StackView(LongList source, LongPredicate predicate, boolean writable) {
             super(predicate, writable);
             this.source = Objects.requireNonNull(source, "source");
         }
@@ -478,7 +478,7 @@ public final class M3PrimitiveFilteredSequences {
         @Override public boolean contains(long value) {
             return source.contains(value) && predicate.test(value);
         }
-        @Override public M3LongIterator iterator() { return filter(source.iterator()); }
+        @Override public LongIterator iterator() { return filter(source.iterator()); }
         @Override public long[] toArray() { return copy(iterator()); }
         private int top() {
             for (int i = source.size() - 1; i >= 0; i--) {

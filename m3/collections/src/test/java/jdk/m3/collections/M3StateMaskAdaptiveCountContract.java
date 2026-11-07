@@ -121,10 +121,10 @@ public final class M3StateMaskAdaptiveCountContract {
                 int actual = original.countMatching(required, forbidden);
                 check(actual == expected, "repeat/signed/strided indexed histogram parity");
                 if ((attempt & 31) == 0) {
-                    int[] selected = M3IndexPathMasks.select(rowIds, positions,
+                    int[] selected = IndexPathMasks.select(rowIds, positions,
                             new int[][] {asWords(states)}, new int[] {required},
                             new int[] {forbidden}, first, positions.length, stride,
-                            M3IndexPathMasks.Backend.JAVA);
+                            IndexPathMasks.Backend.JAVA);
                     check(selected.length == actual, "original 32-bit path mask selects same occurrences");
                 }
             }

@@ -85,7 +85,7 @@ public final class M3TreePathRows {
 			}
 
 			public boolean expanded (int id) {
-				return topology.flag (id, M3ItemState.EXPANDED);
+				return topology.flag (id, ItemState.EXPANDED);
 			}
 
 			public long visibleExtraRows (int id) {

@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 final class M3PrimitiveSortedArrayMapAtomicGrowthTest {
     @Test
     void sixtyFourKindPairsRefusePartialGrowthAndRetainOriginalEntries() {
-        for (M3PrimitiveKind keyKind : M3PrimitiveKind.values()) {
-            for (M3PrimitiveKind valueKind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind keyKind : PrimitiveKind.values()) {
+            for (PrimitiveKind valueKind : PrimitiveKind.values()) {
                 M3PrimitiveSortedArrayMap map = new M3PrimitiveSortedArrayMap(keyKind, valueKind, 1);
                 map.putBits(1, 2, -1);
                 Object oldKeys = map.keyArray();
@@ -34,7 +34,7 @@ final class M3PrimitiveSortedArrayMapAtomicGrowthTest {
                 assertSame(oldValues, map.valueArray());
                 assertTrue(map.containsKeyBits(1));
                 assertEquals(valueKind.storageBits(2), map.getOrDefaultBits(1, -1));
-                map.ensure(2, M3PrimitiveKind::copyOf);
+                map.ensure(2, PrimitiveKind::copyOf);
                 assertEquals(2, map.capacity());
                 assertEquals(valueKind.storageBits(2), map.getOrDefaultBits(1, -1));
             }
@@ -44,7 +44,7 @@ final class M3PrimitiveSortedArrayMapAtomicGrowthTest {
     @Test
     void incorrectlyTypedAndShortCopiesCannotCorruptSortedMap() {
         M3PrimitiveSortedArrayMap map =
-                new M3PrimitiveSortedArrayMap(M3PrimitiveKind.INT, M3PrimitiveKind.LONG, 1);
+                new M3PrimitiveSortedArrayMap(PrimitiveKind.INT, PrimitiveKind.LONG, 1);
         map.putBits(8, 80, -1);
         Object keys = map.keyArray();
         Object values = map.valueArray();
@@ -65,7 +65,7 @@ final class M3PrimitiveSortedArrayMapAtomicGrowthTest {
     @Test
     void sortedInsertAndRemoveRemainEquivalentToTreeMap() {
         M3PrimitiveSortedArrayMap map =
-                new M3PrimitiveSortedArrayMap(M3PrimitiveKind.LONG, M3PrimitiveKind.LONG, 1);
+                new M3PrimitiveSortedArrayMap(PrimitiveKind.LONG, PrimitiveKind.LONG, 1);
         TreeMap<Long, Long> oracle = new TreeMap<>();
         for (int step = 0; step < 1_024; step++) {
             long key = (step * 73L + 19L) % 251L - 125L;

@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import jdk.m3.collections.M3PrimitiveArrayList;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 import jdk.m3.collections.M3PrimitivePrimitiveHashMap;
 
 /**
@@ -35,11 +35,11 @@ public final class M3PrimitiveOrderedMap {
         void accept(long keyBits, long valueBits);
     }
 
-    private final M3PrimitiveKind keyKind;
+    private final PrimitiveKind keyKind;
     private final M3PrimitivePrimitiveHashMap values;
     private final M3PrimitiveArrayList order;
 
-    public M3PrimitiveOrderedMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind) {
+    public M3PrimitiveOrderedMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         Objects.requireNonNull(valueKind, "valueKind");
         values = new M3PrimitivePrimitiveHashMap(keyKind, valueKind);

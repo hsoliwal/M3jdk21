@@ -47,7 +47,7 @@ public final class M3IndexPathRankWordWalkProof {
                     }
                     int first = direction == 0 || length == 0 ? 0 : length - 1;
                     int stride = direction == 0 ? 1 : -1;
-                    M3IndexPathRank snapshot = M3IndexPathRank.snapshot(
+                    IndexPathRank snapshot = IndexPathRank.snapshot(
                             rows, slots, planes,
                             new int[] {0x8000_0000, 0b100},
                             new int[] {0, 0b001},
@@ -55,7 +55,7 @@ public final class M3IndexPathRankWordWalkProof {
                     for (int caseNumber = 0; caseNumber < 30; caseNumber++) {
                         int from = random.nextInt(length + 1);
                         int to = from + random.nextInt(length - from + 1);
-                        M3IndexPathRank.Window window = snapshot.window(from, to);
+                        IndexPathRank.Window window = snapshot.window(from, to);
                         int[] expected = new int[window.size()];
                         int write = 0;
                         for (int ordinal = from; ordinal < to; ordinal++) {

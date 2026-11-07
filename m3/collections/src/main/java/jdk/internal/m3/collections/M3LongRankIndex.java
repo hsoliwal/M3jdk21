@@ -21,13 +21,13 @@ import java.util.Spliterators;
 import java.util.function.LongPredicate;
 import java.util.stream.LongStream;
 import java.util.stream.StreamSupport;
-import jdk.m3.collections.M3LongCollection;
-import jdk.m3.collections.M3LongIterator;
+import jdk.m3.collections.LongCollection;
+import jdk.m3.collections.LongIterator;
 
 /**
  * Immutable, signed-long, duplicate-aware order-statistics snapshot.
  *
- * <p>Capture is one encounter-order traversal of an {@link M3LongCollection} without
+ * <p>Capture is one encounter-order traversal of an {@link LongCollection} without
  * consulting its size or calling its toArray method. The resulting primitive array is
  * sorted once, privately owned, and never exposed to callers. Unlike M3's backed filtered
  * and sorted views, subsequent source mutations do not change this index. A predicate
@@ -56,24 +56,24 @@ public final class M3LongRankIndex {
     }
 
     /** Captures all occurrences, including duplicates. */
-    public static M3LongRankIndex snapshot(M3LongCollection source) {
+    public static M3LongRankIndex snapshot(LongCollection source) {
         return capture(source, value -> true, false);
     }
 
     /** Captures matching occurrences, including duplicates. */
     public static M3LongRankIndex snapshotFiltered(
-            M3LongCollection source, LongPredicate predicate) {
+            LongCollection source, LongPredicate predicate) {
         return capture(source, predicate, false);
     }
 
     /** Captures each distinct value once, for dense ranks and sorted-set projections. */
-    public static M3LongRankIndex snapshotDistinct(M3LongCollection source) {
+    public static M3LongRankIndex snapshotDistinct(LongCollection source) {
         return capture(source, value -> true, true);
     }
 
     /** Captures distinct matching values in signed order. */
     public static M3LongRankIndex snapshotFilteredDistinct(
-            M3LongCollection source, LongPredicate predicate) {
+            LongCollection source, LongPredicate predicate) {
         return capture(source, predicate, true);
     }
 
@@ -89,10 +89,10 @@ public final class M3LongRankIndex {
     }
 
     private static M3LongRankIndex capture(
-            M3LongCollection source, LongPredicate predicate, boolean distinct) {
+            LongCollection source, LongPredicate predicate, boolean distinct) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(predicate, "predicate");
-        M3LongIterator cursor = source.iterator();
+        LongIterator cursor = source.iterator();
         long[] buffer = EMPTY;
         int count = 0;
         while (cursor.hasNext()) {

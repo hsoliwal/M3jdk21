@@ -56,10 +56,10 @@ public final class M3StagedLaneBehaviorContract {
 
 
     public static void intInt() {
-        Check c = new Check("M3IntIntHashMap");
-        c.throwsType(IllegalArgumentException.class, () -> new M3IntIntHashMap(-1));
-        c.throwsType(IllegalArgumentException.class, () -> new M3IntIntHashMap(Integer.MAX_VALUE));
-        M3IntIntHashMap actual = new M3IntIntHashMap();
+        Check c = new Check("IntIntHashMap");
+        c.throwsType(IllegalArgumentException.class, () -> new IntIntHashMap(-1));
+        c.throwsType(IllegalArgumentException.class, () -> new IntIntHashMap(Integer.MAX_VALUE));
+        IntIntHashMap actual = new IntIntHashMap();
         Map<Integer, Integer> expected = new HashMap<>();
         c.eq(8, actual.capacity(), "initial capacity");
         actual.put(0, 0);
@@ -119,7 +119,7 @@ public final class M3StagedLaneBehaviorContract {
         }
         actual.clear();
         actual.put(0, 1);
-        M3IntIterator cursor = actual.keyIterator();
+        IntIterator cursor = actual.keyIterator();
         actual.put(0, 2);
         c.eq(true, cursor.hasNext(), "replacement preserves iterator");
         c.eq(0, cursor.nextInt(), "zero iterator key");
@@ -127,7 +127,7 @@ public final class M3StagedLaneBehaviorContract {
         c.throwsType(NoSuchElementException.class, cursor::nextInt);
         cursor = actual.keyIterator();
         actual.put(1, 3);
-        M3IntIterator stale = cursor;
+        IntIterator stale = cursor;
         c.throwsType(ConcurrentModificationException.class, stale::hasNext);
         c.throwsType(ConcurrentModificationException.class, stale::nextInt);
         c.throwsType(NullPointerException.class, () -> actual.forEach(null));
@@ -140,7 +140,7 @@ public final class M3StagedLaneBehaviorContract {
         c.done();
     }
 
-    private static void intIntSnapshot(Check c, M3IntIntHashMap actual, Map<Integer, Integer> expected) {
+    private static void intIntSnapshot(Check c, IntIntHashMap actual, Map<Integer, Integer> expected) {
         int[] snapshot = actual.keysToArray();
         c.eq(expected.size(), snapshot.length, "snapshot size");
         HashSet<Integer> seen = new HashSet<>();
@@ -167,10 +167,10 @@ public final class M3StagedLaneBehaviorContract {
     }
 
     public static void intLong() {
-        Check c = new Check("M3IntLongHashMap");
-        c.throwsType(IllegalArgumentException.class, () -> new M3IntLongHashMap(-1));
-        c.throwsType(IllegalArgumentException.class, () -> new M3IntLongHashMap(Integer.MAX_VALUE));
-        M3IntLongHashMap actual = new M3IntLongHashMap();
+        Check c = new Check("IntLongHashMap");
+        c.throwsType(IllegalArgumentException.class, () -> new IntLongHashMap(-1));
+        c.throwsType(IllegalArgumentException.class, () -> new IntLongHashMap(Integer.MAX_VALUE));
+        IntLongHashMap actual = new IntLongHashMap();
         Map<Integer, Long> expected = new HashMap<>();
         c.eq(8, actual.capacity(), "initial capacity");
         actual.put(0, 0);
@@ -230,7 +230,7 @@ public final class M3StagedLaneBehaviorContract {
         }
         actual.clear();
         actual.put(0, 1);
-        M3IntIterator cursor = actual.keyIterator();
+        IntIterator cursor = actual.keyIterator();
         actual.put(0, 2);
         c.eq(true, cursor.hasNext(), "replacement preserves iterator");
         c.eq(0, cursor.nextInt(), "zero iterator key");
@@ -238,7 +238,7 @@ public final class M3StagedLaneBehaviorContract {
         c.throwsType(NoSuchElementException.class, cursor::nextInt);
         cursor = actual.keyIterator();
         actual.put(1, 3);
-        M3IntIterator stale = cursor;
+        IntIterator stale = cursor;
         c.throwsType(ConcurrentModificationException.class, stale::hasNext);
         c.throwsType(ConcurrentModificationException.class, stale::nextInt);
         c.throwsType(NullPointerException.class, () -> actual.forEach(null));
@@ -247,13 +247,13 @@ public final class M3StagedLaneBehaviorContract {
         c.eq(capacity, actual.capacity(), "clear retains capacity");
         c.eq(true, actual.isEmpty(), "clear empty");
         iterator(c, actual.keyIterator(), new int[0]);
-        for (int expectedSize : new int[] {0, 1, 5, 6, 13, 1024}) c.eq(new M3IntLongHashMap(expectedSize).payloadBytes(), M3IntLongHashMap.payloadBytesFor(expectedSize), "static payload estimate");
-        c.throwsType(IllegalArgumentException.class, () -> M3IntLongHashMap.payloadBytesFor(-1));
-        c.throwsType(IllegalArgumentException.class, () -> M3IntLongHashMap.payloadBytesFor(Integer.MAX_VALUE));
+        for (int expectedSize : new int[] {0, 1, 5, 6, 13, 1024}) c.eq(new IntLongHashMap(expectedSize).payloadBytes(), IntLongHashMap.payloadBytesFor(expectedSize), "static payload estimate");
+        c.throwsType(IllegalArgumentException.class, () -> IntLongHashMap.payloadBytesFor(-1));
+        c.throwsType(IllegalArgumentException.class, () -> IntLongHashMap.payloadBytesFor(Integer.MAX_VALUE));
         c.done();
     }
 
-    private static void intLongSnapshot(Check c, M3IntLongHashMap actual, Map<Integer, Long> expected) {
+    private static void intLongSnapshot(Check c, IntLongHashMap actual, Map<Integer, Long> expected) {
         int[] snapshot = actual.keysToArray();
         c.eq(expected.size(), snapshot.length, "snapshot size");
         HashSet<Integer> seen = new HashSet<>();
@@ -377,10 +377,10 @@ public final class M3StagedLaneBehaviorContract {
     }
 
     public static void longHash() {
-        Check c = new Check("M3LongLongHashMap");
-        c.throwsType(IllegalArgumentException.class, () -> new M3LongLongHashMap(-1));
-        c.throwsType(IllegalArgumentException.class, () -> new M3LongLongHashMap(Integer.MAX_VALUE));
-        M3LongLongHashMap actual = new M3LongLongHashMap();
+        Check c = new Check("LongLongHashMap");
+        c.throwsType(IllegalArgumentException.class, () -> new LongLongHashMap(-1));
+        c.throwsType(IllegalArgumentException.class, () -> new LongLongHashMap(Integer.MAX_VALUE));
+        LongLongHashMap actual = new LongLongHashMap();
         Map<Long, Long> expected = new HashMap<>();
         c.eq(8, actual.capacity(), "initial capacity");
         for (long key = 0; key < 1024; key++) {
@@ -421,7 +421,7 @@ public final class M3StagedLaneBehaviorContract {
         longHashSnapshot(c, actual, expected);
         actual.clear();
         actual.put(0, Long.MIN_VALUE);
-        M3LongIterator cursor = actual.keyIterator();
+        LongIterator cursor = actual.keyIterator();
         actual.put(0, Long.MAX_VALUE);
         c.eq(true, cursor.hasNext(), "value replacement preserves iterator");
         c.eq(0, cursor.nextLong(), "zero key");
@@ -429,7 +429,7 @@ public final class M3StagedLaneBehaviorContract {
         c.throwsType(NoSuchElementException.class, cursor::nextLong);
         cursor = actual.keyIterator();
         actual.put(1, -1);
-        M3LongIterator stale = cursor;
+        LongIterator stale = cursor;
         c.throwsType(ConcurrentModificationException.class, stale::hasNext);
         c.throwsType(ConcurrentModificationException.class, stale::nextLong);
         c.throwsType(NullPointerException.class, () -> actual.forEach(null));
@@ -441,7 +441,7 @@ public final class M3StagedLaneBehaviorContract {
         c.done();
     }
 
-    private static void longHashSnapshot(Check c, M3LongLongHashMap actual, Map<Long, Long> expected) {
+    private static void longHashSnapshot(Check c, LongLongHashMap actual, Map<Long, Long> expected) {
         long[] snapshot = actual.keysToArray();
         c.eq(expected.size(), snapshot.length, "snapshot size");
         HashSet<Long> seen = new HashSet<>();
@@ -464,9 +464,9 @@ public final class M3StagedLaneBehaviorContract {
     }
 
     public static void sortedMap() throws Exception {
-        Check c = new Check("M3LongLongTreeMap");
-        c.throwsType(IllegalArgumentException.class, () -> new M3LongLongTreeMap(-1));
-        M3LongLongTreeMap actual = new M3LongLongTreeMap();
+        Check c = new Check("LongLongTreeMap");
+        c.throwsType(IllegalArgumentException.class, () -> new LongLongTreeMap(-1));
+        LongLongTreeMap actual = new LongLongTreeMap();
         NavigableMap<Long, Long> expected = new TreeMap<>();
         c.eq(8, actual.capacity(), "initial capacity");
         c.throwsType(NoSuchElementException.class, actual::firstKey);
@@ -507,19 +507,19 @@ public final class M3StagedLaneBehaviorContract {
         c.array(beforeValues, actual.valuesToArray(), "invalid batch leaves values");
         c.eq(capacity, actual.capacity(), "invalid batch leaves capacity");
         c.eq(0, actual.putAllSorted(new long[0], new long[0]), "empty batch");
-        Method grow = M3LongLongTreeMap.class.getDeclaredMethod("growCapacity", int.class, int.class);
+        Method grow = LongLongTreeMap.class.getDeclaredMethod("growCapacity", int.class, int.class);
         grow.setAccessible(true);
         c.throwsType(OutOfMemoryError.class, () -> invoke(grow, null, 8, Integer.MAX_VALUE));
         c.throwsType(OutOfMemoryError.class, () -> invoke(grow, null, 8, -1));
         actual.clear();
         actual.put(2, 3);
-        M3LongIterator iterator = actual.keyIterator();
+        LongIterator iterator = actual.keyIterator();
         actual.put(2, 4);
         actual.trimToSize();
         c.eq(2, iterator.nextLong(), "nonstructural replacement and trim");
         iterator = actual.keyIterator();
         actual.put(3, 9);
-        M3LongIterator stale = iterator;
+        LongIterator stale = iterator;
         c.throwsType(ConcurrentModificationException.class, stale::hasNext);
         c.throwsType(ConcurrentModificationException.class, stale::nextLong);
         c.throwsType(ConcurrentModificationException.class, () -> actual.forEach((k, v) -> actual.clear()));
@@ -527,7 +527,7 @@ public final class M3StagedLaneBehaviorContract {
         c.done();
     }
 
-    private static void sortedSnapshot(Check c, M3LongLongTreeMap actual, NavigableMap<Long, Long> expected) {
+    private static void sortedSnapshot(Check c, LongLongTreeMap actual, NavigableMap<Long, Long> expected) {
         long[] keys = longs(expected.keySet());
         c.array(keys, actual.keysToArray(), "signed key order");
         c.array(longs(expected.values()), actual.valuesToArray(), "aligned value order");
@@ -545,7 +545,7 @@ public final class M3StagedLaneBehaviorContract {
         c.ok(actual.capacity() >= Math.max(8, expected.size()), "capacity covers live entries");
     }
 
-    private static void sortedNavigation(Check c, M3LongLongTreeMap actual, NavigableMap<Long, Long> expected, long key) {
+    private static void sortedNavigation(Check c, LongLongTreeMap actual, NavigableMap<Long, Long> expected, long key) {
         c.eq(orMissing(expected.floorKey(key)), actual.floorKey(key, MISSING), "floor");
         c.eq(orMissing(expected.ceilingKey(key)), actual.ceilingKey(key, MISSING), "ceiling");
         c.eq(orMissing(expected.lowerKey(key)), actual.lowerKey(key, MISSING), "lower");
@@ -602,7 +602,7 @@ public final class M3StagedLaneBehaviorContract {
         c.array(new long[] {0, Long.MAX_VALUE, Long.MIN_VALUE, -1}, actual.keysToArray(), "unsigned edge order");
         c.eq(Long.MIN_VALUE, actual.higherKeyOrDefault(Long.MAX_VALUE, MISSING), "signed boundary successor");
         c.eq(Long.MAX_VALUE, actual.lowerKeyOrDefault(Long.MIN_VALUE, MISSING), "signed boundary predecessor");
-        M3LongIterator iterator = actual.keyIterator();
+        LongIterator iterator = actual.keyIterator();
         actual.putKey(0, 77);
         c.eq(0, iterator.nextLong(), "value replacement keeps iterator");
         actual.removeKey(0);
@@ -627,12 +627,12 @@ public final class M3StagedLaneBehaviorContract {
     }
 
     public static void pagedSet() throws Exception {
-        Check c = new Check("M3LongTreeSet");
-        c.throwsType(IllegalArgumentException.class, () -> new M3LongTreeSet(-1));
-        c.throwsType(IllegalArgumentException.class, () -> new M3LongTreeSet(0, 3));
-        c.throwsType(IllegalArgumentException.class, () -> new M3LongTreeSet(0, (1 << 24) + 1));
+        Check c = new Check("LongTreeSet");
+        c.throwsType(IllegalArgumentException.class, () -> new LongTreeSet(-1));
+        c.throwsType(IllegalArgumentException.class, () -> new LongTreeSet(0, 3));
+        c.throwsType(IllegalArgumentException.class, () -> new LongTreeSet(0, (1 << 24) + 1));
         for (int pageCapacity : new int[] {4, 7, 64}) {
-            M3LongTreeSet actual = new M3LongTreeSet(0, pageCapacity);
+            LongTreeSet actual = new LongTreeSet(0, pageCapacity);
             TreeSet<Long> expected = new TreeSet<>();
             c.eq(pageCapacity, actual.capacity(), "initial one-page capacity");
             c.eq(0, actual.pageCount(), "initial no live pages");
@@ -670,7 +670,7 @@ public final class M3StagedLaneBehaviorContract {
             }
             pageSnapshot(c, actual, expected);
             // Overflow preflight is reflected only to avoid allocating multi-gigabyte arrays.
-            Method ensure = M3LongTreeSet.class.getDeclaredMethod("ensurePages", int.class);
+            Method ensure = LongTreeSet.class.getDeclaredMethod("ensurePages", int.class);
             ensure.setAccessible(true);
             long[] before = actual.toArray();
             int capacity = actual.capacity();
@@ -682,7 +682,7 @@ public final class M3StagedLaneBehaviorContract {
             RuntimeException marker = new RuntimeException("predicate witness");
             c.throwsSame(marker, () -> actual.filterInPlace(k -> { if (k == 5) throw marker; return (k & 1) == 0; }));
             c.array(new long[] {0, 2, 4, 5, 6, 7, 8, 9}, actual.toArray(), "throwing filter partial commit");
-            M3LongIterator iterator = actual.iterator();
+            LongIterator iterator = actual.iterator();
             actual.add(0);
             actual.trimToSize();
             c.eq(0, iterator.nextLong(), "duplicate/trim keep iterator");
@@ -701,7 +701,7 @@ public final class M3StagedLaneBehaviorContract {
         c.done();
     }
 
-    private static void pageSnapshot(Check c, M3LongTreeSet actual, TreeSet<Long> expected) {
+    private static void pageSnapshot(Check c, LongTreeSet actual, TreeSet<Long> expected) {
         long[] keys = longs(expected);
         c.array(keys, actual.toArray(), "signed set order");
         iterator(c, actual.iterator(), keys);
@@ -743,13 +743,13 @@ public final class M3StagedLaneBehaviorContract {
 
     private static long orMissing(Long value) { return value == null ? MISSING : value; }
 
-    private static void iterator(Check c, M3LongIterator iterator, long[] expected) {
+    private static void iterator(Check c, LongIterator iterator, long[] expected) {
         for (long key : expected) { c.eq(true, iterator.hasNext(), "iterator availability"); c.eq(key, iterator.nextLong(), "iterator order"); }
         c.eq(false, iterator.hasNext(), "iterator exhausted");
         c.throwsType(NoSuchElementException.class, iterator::nextLong);
     }
 
-    private static void iterator(Check c, M3IntIterator iterator, int[] expected) {
+    private static void iterator(Check c, IntIterator iterator, int[] expected) {
         for (int key : expected) { c.eq(true, iterator.hasNext(), "iterator availability"); c.eq(key, iterator.nextInt(), "iterator order"); }
         c.eq(false, iterator.hasNext(), "iterator exhausted");
         c.throwsType(NoSuchElementException.class, iterator::nextInt);

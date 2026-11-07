@@ -275,7 +275,7 @@ static jarray m3_select(JNIEnv *env, jarray rows, jintArray offsets,
     return NULL;
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_m3_collections_M3IndexPathMasks_selectNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_collections_IndexPathMasks_selectNative(
         JNIEnv *env, jclass owner, jintArray rows, jintArray offsets,
         jobjectArray planes, jintArray required, jintArray forbidden,
         jint first, jint count, jint stride) {
@@ -285,7 +285,7 @@ JNIEXPORT jintArray JNICALL Java_jdk_m3_collections_M3IndexPathMasks_selectNativ
 }
 
 //FLLDCIM: MRL - mergeloss-s1-20261106 L1: m3_select + selectLongNative restored from origin ebbfcbdf93aa, dropped by ancestry merge e913ab890566 (case 05)
-JNIEXPORT jlongArray JNICALL Java_jdk_m3_collections_M3IndexPathMasks_selectLongNative(
+JNIEXPORT jlongArray JNICALL Java_jdk_m3_collections_IndexPathMasks_selectLongNative(
         JNIEnv *env, jclass owner, jlongArray rows, jintArray offsets,
         jobjectArray planes, jintArray required, jintArray forbidden,
         jint first, jint count, jint stride) {

@@ -15,7 +15,7 @@ public final class M3PrimitiveSelectionWordContract {
     public static void main(String[] args) {
         for (int size : new int[] {0, 1, 63, 64, 65, 127, 128, 129, 257}) {
             var store = new M3PrimitiveSoaStore(Math.max(1, size),
-                    M3PrimitiveSoaStore.STATE_BYTES, M3PrimitiveKind.LONG);
+                    M3PrimitiveSoaStore.STATE_BYTES, PrimitiveKind.LONG);
             for (int i = 0; i < size; i++) store.appendRow(new long[] {i}, (byte) -1, 0L);
             var identity = M3PrimitiveIndexView.identity(store);
             var views = new M3PrimitiveIndexView[] {identity, identity.reversed(),

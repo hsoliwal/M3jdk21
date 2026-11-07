@@ -45,8 +45,8 @@ final class M3FrozenPrimitiveContractTest {
             }
             List<Integer> iOracle = List.copyOf(boxedInts);
             List<Long> lOracle = List.copyOf(boxedLongs);
-            M3FrozenIntList iOwner = M3FrozenIntList.copyOf(ints);
-            M3FrozenLongList lOwner = M3FrozenLongList.copyOf(longs);
+            FrozenIntList iOwner = FrozenIntList.copyOf(ints);
+            FrozenLongList lOwner = FrozenLongList.copyOf(longs);
             int[] iBefore = ints.clone();
             long[] lBefore = longs.clone();
             Arrays.fill(ints, 17);
@@ -77,7 +77,7 @@ final class M3FrozenPrimitiveContractTest {
             assertEquals(lOracle, longObserved);
             if (size > 1) {
                 int start = size / 3, end = size - size / 4;
-                M3FrozenLongList view = lOwner.subList(start, end);
+                FrozenLongList view = lOwner.subList(start, end);
                 assertArrayEquals(lOracle.subList(start, end).stream()
                         .mapToLong(Long::longValue).toArray(), view.toArray());
                 assertArrayEquals(view.subList(1, view.size()).toArray(),
@@ -103,7 +103,7 @@ final class M3FrozenPrimitiveContractTest {
                 oracle.add(source[i]);
             }
             long[] expected = oracle.stream().mapToLong(Long::longValue).toArray();
-            M3FrozenLongSet owner = M3FrozenLongSet.copyOf(source);
+            FrozenLongSet owner = FrozenLongSet.copyOf(source);
             Arrays.fill(source, 900);
             assertArrayEquals(expected, owner.toArray());
             assertEquals(expected.length, owner.size());
@@ -132,9 +132,9 @@ final class M3FrozenPrimitiveContractTest {
 
     @Test
     void primitiveListsAndSetRejectMutationAndInvalidRanges() throws Exception {
-        M3FrozenIntList ints = M3FrozenIntList.copyOf(new int[]{3, 3, 1});
-        M3FrozenLongList longs = M3FrozenLongList.copyOf(new long[]{3, 3, 1});
-        M3FrozenLongSet set = M3FrozenLongSet.copyOf(new long[]{3, 3, 1});
+        FrozenIntList ints = FrozenIntList.copyOf(new int[]{3, 3, 1});
+        FrozenLongList longs = FrozenLongList.copyOf(new long[]{3, 3, 1});
+        FrozenLongSet set = FrozenLongSet.copyOf(new long[]{3, 3, 1});
         assertThrows(UnsupportedOperationException.class, () -> ints.add(4));
         assertThrows(UnsupportedOperationException.class, () -> longs.add(4));
         assertThrows(UnsupportedOperationException.class, () -> longs.set(0, 4));
@@ -147,14 +147,14 @@ final class M3FrozenPrimitiveContractTest {
         assertThrows(IndexOutOfBoundsException.class, () -> longs.get(3));
         assertThrows(IndexOutOfBoundsException.class, () -> set.get(2));
         assertThrows(IllegalArgumentException.class, () -> longs.subList(2, 1));
-        assertThrows(NullPointerException.class, () -> M3FrozenLongSet.copyOf(null));
-        assertThrows(NullPointerException.class, () -> M3FrozenLongList.copyOf(null));
-        assertThrows(NullPointerException.class, () -> M3FrozenIntList.copyOf(null));
+        assertThrows(NullPointerException.class, () -> FrozenLongSet.copyOf(null));
+        assertThrows(NullPointerException.class, () -> FrozenLongList.copyOf(null));
+        assertThrows(NullPointerException.class, () -> FrozenIntList.copyOf(null));
         assertThrows(NullPointerException.class, () -> ints.forEach(null));
         assertThrows(NullPointerException.class, () -> longs.forEach(null));
         assertThrows(NullPointerException.class, () -> set.forEach(null));
-        for (Class<?> type : new Class<?>[]{M3FrozenLongList.class,
-                M3FrozenIntList.class, M3FrozenLongSet.class}) {
+        for (Class<?> type : new Class<?>[]{FrozenLongList.class,
+                FrozenIntList.class, FrozenLongSet.class}) {
             for (Field field : type.getDeclaredFields()) {
                 if (Modifier.isStatic(field.getModifiers())) continue;
                 assertTrue(Modifier.isFinal(field.getModifiers()), field.getName());
@@ -163,9 +163,9 @@ final class M3FrozenPrimitiveContractTest {
                         field.getType() == int[].class, field.getName());
             }
         }
-        Field payload = M3FrozenLongList.class.getDeclaredField("valueLane");
+        Field payload = FrozenLongList.class.getDeclaredField("valueLane");
         payload.setAccessible(true);
-        M3FrozenLongList slice = longs.subList(1, 3);
+        FrozenLongList slice = longs.subList(1, 3);
         assertSame(payload.get(longs), payload.get(slice));
         assertArrayEquals(new long[]{3, 1}, slice.toArray());
     }

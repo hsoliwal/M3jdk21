@@ -13,7 +13,7 @@ final class M3PrimitiveFrozenMapNavigationTest {
     @Test
     void snapshotIsDetachedNavigableAndValueSearchable() {
         M3PrimitivePrimitiveHashMap source =
-                new M3PrimitivePrimitiveHashMap(M3PrimitiveKind.INT, M3PrimitiveKind.LONG);
+                new M3PrimitivePrimitiveHashMap(PrimitiveKind.INT, PrimitiveKind.LONG);
         source.putBits(10, 100L, -1L);
         source.putBits(30, 300L, -1L);
         source.putBits(20, 200L, -1L);
@@ -40,7 +40,7 @@ final class M3PrimitiveFrozenMapNavigationTest {
         M3PrimitiveFrozenMap empty =
                 M3PrimitiveFrozenMap.copyOf(
                         new M3PrimitivePrimitiveHashMap(
-                                M3PrimitiveKind.INT, M3PrimitiveKind.INT));
+                                PrimitiveKind.INT, PrimitiveKind.INT));
         assertThrows(NoSuchElementException.class, empty::firstKeyBits);
         assertThrows(NoSuchElementException.class, empty::lastKeyBits);
         assertEquals(7L, empty.floorKeyOrDefaultBits(1L, 7L));

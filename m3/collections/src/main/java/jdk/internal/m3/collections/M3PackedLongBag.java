@@ -3,7 +3,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3LongLongConsumer;
+import jdk.m3.collections.LongLongConsumer;
 
 /**
  * Primitive multiset with long occurrence counts and a checked long total.
@@ -149,7 +149,7 @@ public final class M3PackedLongBag implements M3PackedLongBagContract {
      * @param consumer callback which must not mutate this bag
      * @throws NullPointerException if consumer is null
      */
-    @Override public void forEachCount(M3LongLongConsumer consumer) {
+    @Override public void forEachCount(LongLongConsumer consumer) {
         Objects.requireNonNull(consumer, "consumer");
         counts.forEach(consumer);
     }

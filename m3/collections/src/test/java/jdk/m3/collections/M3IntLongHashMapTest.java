@@ -15,7 +15,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
- * Finite differential comparison of {@link M3IntLongHashMap} against {@code HashMap<Integer,
+ * Finite differential comparison of {@link IntLongHashMap} against {@code HashMap<Integer,
  * Long>}; this is not JDK replacement proof. Zero, the extrema and a dense small key range are
  * over-represented so the zero sentinel, backward-shift deletion and rehash paths are exercised.
  */
@@ -46,7 +46,7 @@ final class M3IntLongHashMapTest {
     @Test
     void matchesJdkAcrossChurnIncludingZeroKeyAndRehash() {
         Random random = new Random(0x4d33494e544c4f4eL);
-        M3IntLongHashMap actual = new M3IntLongHashMap();
+        IntLongHashMap actual = new IntLongHashMap();
         HashMap<Integer, Long> expected = new HashMap<>();
         for (int step = 0; step < 30_000; step++) {
             int k = key(random, step);
@@ -84,7 +84,7 @@ final class M3IntLongHashMapTest {
         actual.forEach((k, v) -> assertNull(visited.put(k, v)));
         assertEquals(expected, visited);
         int[] viaIterator = new int[actual.size()];
-        M3IntIterator iterator = actual.keyIterator();
+        IntIterator iterator = actual.keyIterator();
         for (int i = 0; i < viaIterator.length; i++) {
             viaIterator[i] = iterator.nextInt();
         }
@@ -97,20 +97,20 @@ final class M3IntLongHashMapTest {
 
     @Test
     void edgeContractsFailFastAndSizing() {
-        M3IntLongHashMap map = new M3IntLongHashMap(0);
+        IntLongHashMap map = new IntLongHashMap(0);
         assertEquals(8, map.capacity());
-        assertThrows(IllegalArgumentException.class, () -> new M3IntLongHashMap(-1));
-        assertThrows(IllegalArgumentException.class, () -> M3IntLongHashMap.payloadBytesFor(-1));
-        assertEquals(8L * (Integer.BYTES + Long.BYTES), M3IntLongHashMap.payloadBytesFor(0));
+        assertThrows(IllegalArgumentException.class, () -> new IntLongHashMap(-1));
+        assertThrows(IllegalArgumentException.class, () -> IntLongHashMap.payloadBytesFor(-1));
+        assertEquals(8L * (Integer.BYTES + Long.BYTES), IntLongHashMap.payloadBytesFor(0));
         for (int n : new int[]{0, 1, 5, 6, 20, 21, 1_000}) {
-            assertEquals(M3IntLongHashMap.payloadBytesFor(n), new M3IntLongHashMap(n).payloadBytes(), "n=" + n);
+            assertEquals(IntLongHashMap.payloadBytesFor(n), new IntLongHashMap(n).payloadBytes(), "n=" + n);
         }
         assertTrue(map.put(0, Long.MIN_VALUE));
         assertFalse(map.put(0, Long.MAX_VALUE));
         assertEquals(Long.MAX_VALUE, map.getOrDefault(0, 0L));
         assertTrue(map.containsValue(Long.MAX_VALUE));
         assertFalse(map.containsValue(Long.MIN_VALUE));
-        M3IntIterator iterator = map.keyIterator();
+        IntIterator iterator = map.keyIterator();
         assertTrue(iterator.hasNext());
         assertEquals(0, iterator.nextInt());
         assertFalse(iterator.hasNext());

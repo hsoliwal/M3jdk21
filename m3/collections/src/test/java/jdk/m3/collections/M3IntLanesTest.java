@@ -42,7 +42,7 @@ final class M3IntLanesTest {
     @Test
     void hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash() {
         Random random = new Random(0x4d33494e5453L);
-        M3IntHashSet actual = new M3IntHashSet();
+        IntHashSet actual = new IntHashSet();
         HashSet<Integer> expected = new HashSet<>();
         for (int step = 0; step < 30_000; step++) {
             int v = value(random, step);
@@ -70,14 +70,14 @@ final class M3IntLanesTest {
 
     @Test
     void hashSetEdgeContractsAndFailFast() {
-        M3IntHashSet set = new M3IntHashSet(0);
+        IntHashSet set = new IntHashSet(0);
         assertEquals(8, set.capacity());
-        assertThrows(IllegalArgumentException.class, () -> new M3IntHashSet(-1));
+        assertThrows(IllegalArgumentException.class, () -> new IntHashSet(-1));
         assertTrue(set.add(0));
         assertFalse(set.add(0));
         assertTrue(set.contains(0));
         assertArrayEquals(new int[]{0}, set.toArray());
-        M3IntIterator iterator = set.iterator();
+        IntIterator iterator = set.iterator();
         assertTrue(iterator.hasNext());
         assertEquals(0, iterator.nextInt());
         assertFalse(iterator.hasNext());
@@ -100,7 +100,7 @@ final class M3IntLanesTest {
     @Test
     void intIntMapMatchesJdkAcrossChurnIncludingZeroKey() {
         Random random = new Random(0x4d33494e544d4150L);
-        M3IntIntHashMap actual = new M3IntIntHashMap();
+        IntIntHashMap actual = new IntIntHashMap();
         HashMap<Integer, Integer> expected = new HashMap<>();
         for (int step = 0; step < 30_000; step++) {
             int k = value(random, step);
@@ -142,8 +142,8 @@ final class M3IntLanesTest {
 
     @Test
     void intIntMapEdgeContractsAndFailFast() {
-        M3IntIntHashMap map = new M3IntIntHashMap();
-        assertThrows(IllegalArgumentException.class, () -> new M3IntIntHashMap(-1));
+        IntIntHashMap map = new IntIntHashMap();
+        assertThrows(IllegalArgumentException.class, () -> new IntIntHashMap(-1));
         assertTrue(map.put(0, 5));
         assertFalse(map.put(0, 6));
         assertEquals(6, map.getOrDefault(0, -1));
@@ -153,7 +153,7 @@ final class M3IntLanesTest {
         assertFalse(map.remove(0, 6));
         assertEquals(9, map.addTo(0, 2));
         assertEquals(3, map.addTo(42, 3));
-        M3IntIterator keys = map.keyIterator();
+        IntIterator keys = map.keyIterator();
         assertEquals(0, keys.nextInt());
         assertTrue(map.remove(0, 9));
         assertThrows(ConcurrentModificationException.class, keys::hasNext);
@@ -169,7 +169,7 @@ final class M3IntLanesTest {
     @Test
     void priorityQueueMatchesJdkHeadContentsAndRemoval() {
         Random random = new Random(0x4d33494e5051L);
-        M3IntPriorityQueue actual = new M3IntPriorityQueue();
+        IntPriorityQueue actual = new IntPriorityQueue();
         PriorityQueue<Integer> expected = new PriorityQueue<>();
         for (int step = 0; step < 20_000; step++) {
             int operation = random.nextInt(5);
@@ -200,12 +200,12 @@ final class M3IntLanesTest {
         assertTrue(actual.isEmpty());
         assertThrows(NoSuchElementException.class, actual::firstInt);
         assertThrows(NoSuchElementException.class, actual::removeFirstInt);
-        assertThrows(IllegalArgumentException.class, () -> new M3IntPriorityQueue(-1));
-        assertEquals(0, new M3IntPriorityQueue().capacity());
-        M3IntPriorityQueue small = new M3IntPriorityQueue(2);
+        assertThrows(IllegalArgumentException.class, () -> new IntPriorityQueue(-1));
+        assertEquals(0, new IntPriorityQueue().capacity());
+        IntPriorityQueue small = new IntPriorityQueue(2);
         small.add(3);
         small.add(1);
-        M3IntIterator iterator = small.iterator();
+        IntIterator iterator = small.iterator();
         assertEquals(1, iterator.nextInt());
         small.add(2);
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
@@ -215,7 +215,7 @@ final class M3IntLanesTest {
 
     @Test
     void intLanesRetainOnlyPrimitiveFields() {
-        for (Class<?> owner : List.of(M3IntHashSet.class, M3IntIntHashMap.class, M3IntPriorityQueue.class)) {
+        for (Class<?> owner : List.of(IntHashSet.class, IntIntHashMap.class, IntPriorityQueue.class)) {
             List<String> fields = Arrays.stream(owner.getDeclaredFields())
                     .filter(f -> !Modifier.isStatic(f.getModifiers()))
                     .map(f -> f.getType().getSimpleName())

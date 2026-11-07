@@ -68,16 +68,16 @@ public final class M3IndexPathMaskClassificationProof {
         int first = stride < 0 ? Math.max(0, length - 1) : 0;
         int count = (length + Math.abs(stride) - 1) / Math.abs(stride);
         int[] expected = reference(rows, offsets, states, required, forbidden, first, count, stride);
-        int[] selected = M3IndexPathMasks.select(rows, offsets, states, required,
-                forbidden, first, count, stride, M3IndexPathMasks.Backend.JAVA);
+        int[] selected = IndexPathMasks.select(rows, offsets, states, required,
+                forbidden, first, count, stride, IndexPathMasks.Backend.JAVA);
         if (!Arrays.equals(expected, selected) || selected == rows) {
             throw new AssertionError("selection mismatch length=" + length + " stages=" + stages
                     + " mode=" + pattern + " stride=" + stride);
         }
-        if (M3IndexPathMasks.nativeAvailable()
+        if (IndexPathMasks.nativeAvailable()
                 && (scenarios % 11 == 0 || (pattern < 2 && stages <= 8 && stride == 1))) {
-            int[] nativeRows = M3IndexPathMasks.select(rows, offsets, states, required,
-                    forbidden, first, count, stride, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+            int[] nativeRows = IndexPathMasks.select(rows, offsets, states, required,
+                    forbidden, first, count, stride, IndexPathMasks.Backend.NATIVE_REQUIRED);
             if (!Arrays.equals(expected, nativeRows)) {
                 throw new AssertionError("Java/JNI mismatch: " + length + "/" + stages);
             }
@@ -91,7 +91,7 @@ public final class M3IndexPathMaskClassificationProof {
                 break;
             }
         }
-        if (expectedFirst != M3IndexPathMasks.firstMatchingIndex(rows, offsets, states,
+        if (expectedFirst != IndexPathMasks.firstMatchingIndex(rows, offsets, states,
                 required, forbidden, first, count, stride)) {
             throw new AssertionError("first matching logical index mismatch");
         }
@@ -119,25 +119,25 @@ public final class M3IndexPathMaskClassificationProof {
         int[][] planes = {{Integer.MIN_VALUE}};
         int[] zero = {0}, one = {1};
         // A zero or contradictory mask must never bypass validation.
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.select(rows,
-                offsets, planes, zero, zero, 0, 2, 1, M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.select(rows,
-                offsets, planes, one, one, 0, 2, 1, M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.select(rows,
-                offsets, planes, zero, zero, 0, 3, 1, M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.select(rows,
-                offsets, planes, zero, zero, 0, 1, 0, M3IndexPathMasks.Backend.JAVA));
-        fails(NullPointerException.class, () -> M3IndexPathMasks.select(rows,
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.select(rows,
+                offsets, planes, zero, zero, 0, 2, 1, IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.select(rows,
+                offsets, planes, one, one, 0, 2, 1, IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.select(rows,
+                offsets, planes, zero, zero, 0, 3, 1, IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.select(rows,
+                offsets, planes, zero, zero, 0, 1, 0, IndexPathMasks.Backend.JAVA));
+        fails(NullPointerException.class, () -> IndexPathMasks.select(rows,
                 offsets, new int[][]{null}, zero, zero, 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IllegalArgumentException.class, () -> M3IndexPathMasks.select(rows,
+                IndexPathMasks.Backend.JAVA));
+        fails(IllegalArgumentException.class, () -> IndexPathMasks.select(rows,
                 offsets, planes, new int[0], zero, 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
+                IndexPathMasks.Backend.JAVA));
         int[] goodOffsets = {0, 0};
-        if (!M3IndexPathMasks.nativeAvailable()) {
-            fails(UnsatisfiedLinkError.class, () -> M3IndexPathMasks.select(rows,
+        if (!IndexPathMasks.nativeAvailable()) {
+            fails(UnsatisfiedLinkError.class, () -> IndexPathMasks.select(rows,
                     goodOffsets, planes, zero, zero, 0, 2, 1,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                    IndexPathMasks.Backend.NATIVE_REQUIRED));
         }
     }
 

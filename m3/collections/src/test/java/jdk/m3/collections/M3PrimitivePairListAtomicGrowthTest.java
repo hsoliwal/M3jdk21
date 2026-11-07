@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 final class M3PrimitivePairListAtomicGrowthTest {
     @Test
     void failedSecondArrayCopyPreservesEveryOneOfSixtyFourPrimitivePairShapes() {
-        for (M3PrimitiveKind left : M3PrimitiveKind.values()) {
-            for (M3PrimitiveKind right : M3PrimitiveKind.values()) {
+        for (PrimitiveKind left : PrimitiveKind.values()) {
+            for (PrimitiveKind right : PrimitiveKind.values()) {
                 M3PrimitivePairList pairs = new M3PrimitivePairList(left, right, 1);
                 pairs.addBits(1, 2);
                 Object oldLeft = pairs.leftBackingArray();
@@ -42,7 +42,7 @@ final class M3PrimitivePairListAtomicGrowthTest {
 
     @Test
     void wrongArrayTypeNullAndWrongLengthAreRejectedBeforePublication() {
-        M3PrimitivePairList pairs = new M3PrimitivePairList(M3PrimitiveKind.LONG, M3PrimitiveKind.DOUBLE, 1);
+        M3PrimitivePairList pairs = new M3PrimitivePairList(PrimitiveKind.LONG, PrimitiveKind.DOUBLE, 1);
         pairs.addBits(9, Double.doubleToRawLongBits(-0.0));
         Object left = pairs.leftBackingArray();
         Object right = pairs.rightBackingArray();
@@ -59,7 +59,7 @@ final class M3PrimitivePairListAtomicGrowthTest {
 
     @Test
     void capacityAlreadySufficientAvoidsCallbackAndExistingIdentityRemainsStable() {
-        M3PrimitivePairList pairs = new M3PrimitivePairList(M3PrimitiveKind.INT, M3PrimitiveKind.FLOAT, 8);
+        M3PrimitivePairList pairs = new M3PrimitivePairList(PrimitiveKind.INT, PrimitiveKind.FLOAT, 8);
         pairs.addBits(42, Float.floatToRawIntBits(1.5f));
         Object left = pairs.leftBackingArray();
         pairs.ensure(8, (kind, source, capacity) -> {

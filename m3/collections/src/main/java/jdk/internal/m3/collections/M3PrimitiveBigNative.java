@@ -15,8 +15,8 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3PrimitiveBigArray;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.BigArray;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Explicit Java/JNI bulk operations over the existing segmented LONG owner.
@@ -49,8 +49,8 @@ public final class M3PrimitiveBigNative {
      * Bounds and kind failures occur before any destination write. An unexpected
      * runtime/JNI failure after copying begins is not an atomic transaction.
      */
-    public static void copyLongs(M3PrimitiveBigArray source, long sourceIndex,
-                                 M3PrimitiveBigArray target, long targetIndex,
+    public static void copyLongs(BigArray source, long sourceIndex,
+                                 BigArray target, long targetIndex,
                                  long count, Backend backend) {
         requireLong(source, "source");
         requireLong(target, "target");
@@ -72,7 +72,7 @@ public final class M3PrimitiveBigNative {
     }
 
     /** Fills the half-open range after validating its complete bounds. */
-    public static void fillLongs(M3PrimitiveBigArray target, long fromInclusive,
+    public static void fillLongs(BigArray target, long fromInclusive,
                                  long toExclusive, long value, Backend backend) {
         requireLong(target, "target");
         Objects.requireNonNull(backend, "backend");
@@ -93,7 +93,7 @@ public final class M3PrimitiveBigNative {
     }
 
     /** Returns the first matching global index in the half-open range, or -1. */
-    public static long indexOfLong(M3PrimitiveBigArray source, long fromInclusive,
+    public static long indexOfLong(BigArray source, long fromInclusive,
                                     long toExclusive, long value, Backend backend) {
         requireLong(source, "source");
         Objects.requireNonNull(backend, "backend");
@@ -118,8 +118,8 @@ public final class M3PrimitiveBigNative {
         return -1L;
     }
 
-    private static void copyForward(M3PrimitiveBigArray source, long sourceIndex,
-                                     M3PrimitiveBigArray target, long targetIndex,
+    private static void copyForward(BigArray source, long sourceIndex,
+                                     BigArray target, long targetIndex,
                                      long remaining) {
         while (remaining > 0) {
             long[] sourceLane = lane(source, sourceIndex);
@@ -135,7 +135,7 @@ public final class M3PrimitiveBigNative {
         }
     }
 
-    private static void copyBackward(M3PrimitiveBigArray owner, long sourceIndex,
+    private static void copyBackward(BigArray owner, long sourceIndex,
                                       long targetIndex, long remaining) {
         long sourceEnd = sourceIndex + remaining;
         long targetEnd = targetIndex + remaining;
@@ -160,17 +160,17 @@ public final class M3PrimitiveBigNative {
         return -1;
     }
 
-    private static long[] lane(M3PrimitiveBigArray owner, long index) {
+    private static long[] lane(BigArray owner, long index) {
         return (long[]) owner.segmentArray((int) (index >>> owner.segmentShift()));
     }
 
-    private static int offset(M3PrimitiveBigArray owner, long index) {
+    private static int offset(BigArray owner, long index) {
         return (int) (index & (owner.segmentSize() - 1L));
     }
 
-    private static void requireLong(M3PrimitiveBigArray owner, String name) {
+    private static void requireLong(BigArray owner, String name) {
         Objects.requireNonNull(owner, name);
-        if (owner.kind() != M3PrimitiveKind.LONG) {
+        if (owner.kind() != PrimitiveKind.LONG) {
             throw new IllegalArgumentException(name + " must use M3PrimitiveKind.LONG");
         }
     }

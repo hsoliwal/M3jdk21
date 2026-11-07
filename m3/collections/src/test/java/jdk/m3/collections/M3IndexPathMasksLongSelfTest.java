@@ -18,7 +18,7 @@ public final class M3IndexPathMasksLongSelfTest {
         if (args.length > 1 || (args.length == 1 && !nativeRun)) {
             throw new IllegalArgumentException("expected --native or no argument");
         }
-        if (nativeRun && !M3IndexPathMasks.nativeAvailable()) {
+        if (nativeRun && !IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("JNI library required for long-row parity");
         }
         boundaries(nativeRun);
@@ -52,37 +52,37 @@ public final class M3IndexPathMasksLongSelfTest {
         long[] detached = select(ids, positions, planes, required, forbidden, 0, 6, 1, nativeRun);
         detached[0] = 1;
         eq(immutableSource, ids);
-        fails(NullPointerException.class, () -> M3IndexPathMasks.selectLong(
+        fails(NullPointerException.class, () -> IndexPathMasks.selectLong(
                 null, positions, planes, required, forbidden, 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(NullPointerException.class, () -> M3IndexPathMasks.selectLong(
+                IndexPathMasks.Backend.JAVA));
+        fails(NullPointerException.class, () -> IndexPathMasks.selectLong(
                 ids, positions, planes, required, forbidden, 0, 1, 1, null));
-        fails(NullPointerException.class, () -> M3IndexPathMasks.selectLong(
+        fails(NullPointerException.class, () -> IndexPathMasks.selectLong(
                 ids, positions, new int[][] {null}, new int[] {0}, new int[] {0},
-                0, 1, 1, M3IndexPathMasks.Backend.JAVA));
-        fails(IllegalArgumentException.class, () -> M3IndexPathMasks.selectLong(
+                0, 1, 1, IndexPathMasks.Backend.JAVA));
+        fails(IllegalArgumentException.class, () -> IndexPathMasks.selectLong(
                 ids, new int[0], planes, required, forbidden, 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IllegalArgumentException.class, () -> M3IndexPathMasks.selectLong(
+                IndexPathMasks.Backend.JAVA));
+        fails(IllegalArgumentException.class, () -> IndexPathMasks.selectLong(
                 ids, positions, new int[0][], new int[0], new int[0], 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IllegalArgumentException.class, () -> M3IndexPathMasks.selectLong(
+                IndexPathMasks.Backend.JAVA));
+        fails(IllegalArgumentException.class, () -> IndexPathMasks.selectLong(
                 ids, positions, planes, new int[] {0}, forbidden, 0, 1, 1,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.selectLong(
+                IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.selectLong(
                 ids, positions, planes, required, forbidden, 0, 1, 0,
-                M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.selectLong(
+                IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.selectLong(
                 ids, positions, planes, required, forbidden, 1, Integer.MAX_VALUE,
-                Integer.MAX_VALUE, M3IndexPathMasks.Backend.JAVA));
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.selectLong(
+                Integer.MAX_VALUE, IndexPathMasks.Backend.JAVA));
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.selectLong(
                 ids, positions, planes, required, forbidden, 0, 2, -1,
-                M3IndexPathMasks.Backend.JAVA));
+                IndexPathMasks.Backend.JAVA));
         int[] invalid = positions.clone();
         invalid[4] = Integer.MAX_VALUE;
-        fails(IndexOutOfBoundsException.class, () -> M3IndexPathMasks.selectLong(
+        fails(IndexOutOfBoundsException.class, () -> IndexPathMasks.selectLong(
                 ids, invalid, planes, required, forbidden, 0, 6, 1,
-                M3IndexPathMasks.Backend.JAVA));
+                IndexPathMasks.Backend.JAVA));
     }
 
     private static void randomized(boolean nativeRun) {
@@ -164,10 +164,10 @@ public final class M3IndexPathMasksLongSelfTest {
     private static long[] select(long[] rows, int[] positions, int[][] planes,
             int[] required, int[] forbidden, int first, int count, int stride,
             boolean nativeRun) {
-        return M3IndexPathMasks.selectLong(rows, positions, planes, required,
+        return IndexPathMasks.selectLong(rows, positions, planes, required,
                 forbidden, first, count, stride,
-                nativeRun ? M3IndexPathMasks.Backend.NATIVE_REQUIRED
-                        : M3IndexPathMasks.Backend.JAVA);
+                nativeRun ? IndexPathMasks.Backend.NATIVE_REQUIRED
+                        : IndexPathMasks.Backend.JAVA);
     }
 
     private static void eq(long[] expected, long[] actual) {

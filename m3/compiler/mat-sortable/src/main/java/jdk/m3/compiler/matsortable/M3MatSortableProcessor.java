@@ -32,18 +32,18 @@ import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 
 /**
- * Portable JSR-269 generator for a Lombok-style @M3Sortable companion.
+ * Portable JSR-269 generator for a Lombok-style @Sortable companion.
  * It never mutates the annotated class, loads it reflectively, or assumes runtime instance values.
  * The processor intentionally locates the MAT annotation by its canonical name so that its
  * canonical mat-value-processor module need not acquire a new dependency on mat-collections.
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/56cbdc6312594f06e21ef56f0ce33b605383270b/synexia-mat-value-processor/src/main/java/com/synexia/matvalue/processor/MatSortableProcessor.java blob 095ac09526a5; recipe m3/compiler/mat-sortable/recipe/mat-sortable-processor-20261107/relocate.py v1
 public final class M3MatSortableProcessor extends AbstractProcessor {
-    private static final String SORTABLE = "jdk.m3.collections.M3Sortable";
-    private static final String FIELD = "jdk.m3.collections.M3SortField";
-    private static final String SIGNAL = "jdk.m3.collections.M3SortSignal";
-    private static final String DISTANCE = "jdk.m3.collections.M3SortDistance";
-    private static final String DECLARED_DEPENDENCY = "jdk.m3.collections.M3SortDependency";
+    private static final String SORTABLE = "jdk.m3.collections.Sortable";
+    private static final String FIELD = "jdk.m3.collections.SortField";
+    private static final String SIGNAL = "jdk.m3.collections.SortSignal";
+    private static final String DISTANCE = "jdk.m3.collections.SortDistance";
+    private static final String DECLARED_DEPENDENCY = "jdk.m3.collections.SortDependency";
     private static final Set<String> EXACT_TYPES = Set.of(
             "java.lang.String", "java.lang.Boolean", "java.lang.Byte", "java.lang.Short",
             "java.lang.Character", "java.lang.Integer", "java.lang.Long", "java.lang.Float",
@@ -74,7 +74,7 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
         if (marker == null) return false;
         for (Element element : round.getElementsAnnotatedWith(marker)) {
             if (!(element instanceof TypeElement type)) {
-                error(element, "@M3Sortable must annotate a class or record");
+                error(element, "@Sortable must annotate a class or record");
                 continue;
             }
             String qualified = type.getQualifiedName().toString();
@@ -87,27 +87,27 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
             if (hasAnnotatedInvalidMethod(type, SIGNAL, signal)
                     || hasAnnotatedInvalidMethod(type, DISTANCE, distance)) continue;
             if (signal != null && signal.getReturnType().getKind() != TypeKind.DOUBLE) {
-                error(signal, "@M3SortSignal must return primitive double");
+                error(signal, "@SortSignal must return primitive double");
                 continue;
             }
             if (distance != null && (distance.getReturnType().getKind() != TypeKind.DOUBLE
                     || !processingEnv.getTypeUtils().isSameType(
                             processingEnv.getTypeUtils().erasure(distance.getParameters().get(0).asType()),
                             processingEnv.getTypeUtils().erasure(type.asType())))) {
-                error(distance, "@M3SortDistance must take this type and return primitive double");
+                error(distance, "@SortDistance must take this type and return primitive double");
                 continue;
             }
             if (components.isEmpty() && signal == null) {
-                error(type, "@M3Sortable requires @M3SortField, record components, or @M3SortSignal");
+                error(type, "@Sortable requires @SortField, record components, or @SortSignal");
                 continue;
             }
             try {
                 generate(type, components, signal, distance);
             } catch (IOException exception) {
-                error(type, "cannot write @M3Sortable companion: " + exception.getMessage());
+                error(type, "cannot write @Sortable companion: " + exception.getMessage());
             } catch (IllegalArgumentException exception) {
                 // Schema bounds are user-source diagnostics, not uncaught processor failures.
-                error(type, "invalid @M3Sortable schema: " + exception.getMessage());
+                error(type, "invalid @Sortable schema: " + exception.getMessage());
             }
         }
         // Let AnOP's independent behavior processors see their annotations too.
@@ -116,26 +116,26 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
 
     private boolean admittedType(TypeElement type) {
         if (type.getKind() != ElementKind.CLASS && type.getKind() != ElementKind.RECORD) {
-            error(type, "@M3Sortable requires a concrete class or record");
+            error(type, "@Sortable requires a concrete class or record");
             return false;
         }
         if (type.getModifiers().contains(Modifier.ABSTRACT)
                 || !type.getTypeParameters().isEmpty()) {
-            error(type, "@M3Sortable requires a concrete non-generic type");
+            error(type, "@Sortable requires a concrete non-generic type");
             return false;
         }
         Element cursor = type;
         while (cursor instanceof TypeElement owner) {
             if (owner.getModifiers().contains(Modifier.PRIVATE)
                     || !owner.getTypeParameters().isEmpty()) {
-                error(type, "@M3Sortable type and enclosing classes must be accessible and non-generic");
+                error(type, "@Sortable type and enclosing classes must be accessible and non-generic");
                 return false;
             }
             cursor = owner.getEnclosingElement();
         }
         if (type.getNestingKind() != NestingKind.TOP_LEVEL
                 && type.getNestingKind() != NestingKind.MEMBER) {
-            error(type, "@M3Sortable cannot annotate local or anonymous types");
+            error(type, "@Sortable cannot annotate local or anonymous types");
             return false;
         }
         return true;
@@ -156,7 +156,7 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
             if (child.getKind() == ElementKind.FIELD) {
                 if (child.getModifiers().contains(Modifier.PRIVATE)
                         || child.getModifiers().contains(Modifier.STATIC)) {
-                    error(child, "@M3SortField must be accessible and nonstatic");
+                    error(child, "@SortField must be accessible and nonstatic");
                     return null;
                 }
                 selected.add(toComponent(child, child.getSimpleName().toString()));
@@ -165,7 +165,7 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
                 if (!validMethod(method, 0)) return null;
                 selected.add(toComponent(child, child.getSimpleName().toString() + "()"));
             } else {
-                error(child, "@M3SortField requires an instance field, accessor or record component");
+                error(child, "@SortField requires an instance field, accessor or record component");
                 return null;
             }
         }
@@ -180,11 +180,11 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
         Set<Integer> priorities = new HashSet<>();
         for (Component c : selected) {
             if (!priorities.add(c.priority())) {
-                error(c.origin(), "duplicate @M3SortField priority " + c.priority());
+                error(c.origin(), "duplicate @SortField priority " + c.priority());
                 return null;
             }
             if (!exactType(c.type())) {
-                error(c.origin(), "unsupported @M3SortField type: " + c.type());
+                error(c.origin(), "unsupported @SortField type: " + c.type());
                 return null;
             }
         }
@@ -277,7 +277,7 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
         try (Writer w = file.openWriter()) {
             w.write("// SPDX-License-Identifier: Apache-2.0\n");
             if (!packageName.isEmpty()) w.write("package " + packageName + ";\n\n");
-            w.write("/** Deterministic @M3Sortable companion generated at source time. */\n");
+            w.write("/** Deterministic @Sortable companion generated at source time. */\n");
             w.write("public final class " + simple + " {\n");
             w.write("    public static final String SCHEMA_SHA256 = \"" + digest + "\";\n");
             w.write("    public static final String ORDER_POLICY_SHA256 = \"" + policyDigest + "\";\n");
@@ -476,7 +476,7 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
             }
         }
         members.sort(String::compareTo);
-        if (members.size() > 128) throw new IllegalArgumentException("@M3Sortable schema budget exceeded");
+        if (members.size() > 128) throw new IllegalArgumentException("@Sortable schema budget exceeded");
         lines.addAll(members);
         deps.remove("none");
         deps.remove("void");
@@ -499,12 +499,12 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
             }
         }
         if (declarations.size() > 128) {
-            throw new IllegalArgumentException("@M3SortDependency total edge budget exceeded");
+            throw new IllegalArgumentException("@SortDependency total edge budget exceeded");
         }
         declarations.sort(String::compareTo);
         lines.addAll(declarations);
         String result = String.join("\n", lines) + "\n";
-        if (result.length() > 16_384) throw new IllegalArgumentException("@M3Sortable schema size exceeded");
+        if (result.length() > 16_384) throw new IllegalArgumentException("@Sortable schema size exceeded");
         return result;
     }
 
@@ -597,7 +597,7 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
         if (!has(element, DECLARED_DEPENDENCY)) return List.of();
         Object raw = annotationValue(element, DECLARED_DEPENDENCY, "value");
         if (!(raw instanceof List<?> entries) || entries.isEmpty() || entries.size() > 64) {
-            throw new IllegalArgumentException("@M3SortDependency requires 1..64 descriptors");
+            throw new IllegalArgumentException("@SortDependency requires 1..64 descriptors");
         }
         TreeSet<String> edges = new TreeSet<>();
         for (Object item : entries) {
@@ -606,10 +606,10 @@ public final class M3MatSortableProcessor extends AbstractProcessor {
                     || descriptor.isBlank() || descriptor.length() > 256
                     || !descriptor.equals(descriptor.strip())
                     || descriptor.chars().anyMatch(Character::isISOControl)) {
-                throw new IllegalArgumentException("invalid @M3SortDependency descriptor");
+                throw new IllegalArgumentException("invalid @SortDependency descriptor");
             }
             if (!edges.add("declared-edge:" + owner + "->" + descriptor)) {
-                throw new IllegalArgumentException("duplicate @M3SortDependency descriptor");
+                throw new IllegalArgumentException("duplicate @SortDependency descriptor");
             }
         }
         return List.copyOf(edges);

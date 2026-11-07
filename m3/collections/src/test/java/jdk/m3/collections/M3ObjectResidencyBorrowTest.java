@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 
 /** Exact cooperative DOOP lease counts, not HotSpot object reachability. */
 final class M3ObjectResidencyBorrowTest {
-    private static final int MODE = M3ObjectResidency.LAZY_CREATE
-            | M3ObjectResidency.LRU | M3ObjectResidency.RECREATE
-            | M3ObjectResidency.STRICT_NO_ESCAPE;
+    private static final int MODE = ObjectResidency.LAZY_CREATE
+            | ObjectResidency.LRU | ObjectResidency.RECREATE
+            | ObjectResidency.STRICT_NO_ESCAPE;
 
     @Test
     void independentBorrowersPreventEarlyReclamationAndStaleReuse() {
         int[] constructed = new int[2];
-        var arena = new M3ObjectResidency<Integer>(2, MODE, 8, 0,
+        var arena = new ObjectResidency<Integer>(2, MODE, 8, 0,
                 slot -> ++constructed[slot], null, null);
         arena.writeParentBits(0, 0x55L);
         long a = arena.retainProjection(0, 8);
@@ -26,7 +26,7 @@ final class M3ObjectResidencyBorrowTest {
         assertEquals(2, arena.projectionBorrowCount(0));
         assertEquals(1L, arena.useProjection(a, Integer::longValue).longValue());
         assertFalse(arena.retireUnborrowedProjection(0));
-        assertThrows(M3ObjectResidency.BudgetExceededException.class,
+        assertThrows(ObjectResidency.BudgetExceededException.class,
                 () -> arena.use(1, 8, value -> 1L));
         arena.releaseProjection(a);
         assertEquals(1, arena.projectionBorrowCount(0));
@@ -35,7 +35,7 @@ final class M3ObjectResidencyBorrowTest {
         arena.releaseProjection(b);
         assertEquals(0, arena.projectionBorrowCount(0));
         assertTrue(arena.retireUnborrowedProjection(0));
-        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(ObjectResidency.State.ABSENT, arena.state(0));
         assertEquals(0x55L, arena.readParentBits(0));
         assertEquals(2L, arena.use(0, 8, Integer::longValue).longValue());
         assertEquals(2, constructed[0]);
@@ -47,7 +47,7 @@ final class M3ObjectResidencyBorrowTest {
 
     @Test
     void callbackExceptionAndReentrantReleasePreserveCount() {
-        var arena = new M3ObjectResidency<StringBuilder>(1, MODE, 64, 0,
+        var arena = new ObjectResidency<StringBuilder>(1, MODE, 64, 0,
                 slot -> new StringBuilder("a"), null, null);
         long token = arena.retainProjection(0, 8);
         assertThrows(IllegalArgumentException.class, () -> arena.useProjection(token,
@@ -67,13 +67,13 @@ final class M3ObjectResidencyBorrowTest {
 
     @Test
     void ExternalAndUnprovenOwnersNeverFastRetire() {
-        var installed = new M3ObjectResidency<Object>(1, MODE, 8, 0,
+        var installed = new ObjectResidency<Object>(1, MODE, 8, 0,
                 slot -> new Object(), null, null);
         installed.install(0, new Object(), 8);
         assertFalse(installed.retireUnborrowedProjection(0));
 
-        var unproven = new M3ObjectResidency<Object>(1,
-                M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.RECREATE,
+        var unproven = new ObjectResidency<Object>(1,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.RECREATE,
                 8, 0, slot -> new Object(), null, null);
         unproven.use(0, 8, value -> 1L);
         assertFalse(unproven.retireUnborrowedProjection(0));
@@ -85,7 +85,7 @@ final class M3ObjectResidencyBorrowTest {
 
     @Test
     void asynchronousBorrowKeepsEventOwnerUntilAck() throws Exception {
-        var arena = new M3ObjectResidency<StringBuilder>(1, MODE, 8, 0,
+        var arena = new ObjectResidency<StringBuilder>(1, MODE, 8, 0,
                 slot -> new StringBuilder("event"), null, null);
         long token = arena.retainProjection(0, 8);
         var started = new CountDownLatch(1);

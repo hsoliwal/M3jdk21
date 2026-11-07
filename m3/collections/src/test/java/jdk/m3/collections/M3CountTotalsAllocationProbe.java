@@ -25,7 +25,7 @@ public final class M3CountTotalsAllocationProbe {
         allocation.setThreadAllocatedMemoryEnabled(true);
         long[] a = new long[16384], b = new long[16384];
         Arrays.fill(a,3); Arrays.fill(b,2);
-        M3LongBag x=new M3LongBag(2048), y=new M3LongBag(2048);
+        LongBag x=new LongBag(2048), y=new LongBag(2048);
         for (int i=0;i<2048;i++) {x.add(i,3);y.add(i+512,2);}
         long expected = 81920;
         System.out.println("case\titerations\tallocated_bytes\tbytes_per_operation");
@@ -39,7 +39,7 @@ public final class M3CountTotalsAllocationProbe {
             long sum=0; for(long value:result) sum+=value; escapedTotal=sum;},300);
         long nativeTotal=measure(allocation,"jni_total",()->escapedTotal=M3CountTotals.combineNative(a,0,b,0,a.length,0),300);
         if (escapedTotal!=expected) throw new AssertionError("JNI total");
-        long bag=measure(allocation,"intersection_bag",()->{M3LongBag result=x.intersection(y);escapedResult=result;escapedTotal=result.totalCount();},300);
+        long bag=measure(allocation,"intersection_bag",()->{LongBag result=x.intersection(y);escapedResult=result;escapedTotal=result.totalCount();},300);
         long total=measure(allocation,"intersection_total",()->escapedTotal=M3CountTotals.intersection(x,y),300);
         if (escapedTotal!=3072) throw new AssertionError("bag total");
         if (!(javaTotal<javaArray && nativeTotal<nativeArray && total<bag)) {

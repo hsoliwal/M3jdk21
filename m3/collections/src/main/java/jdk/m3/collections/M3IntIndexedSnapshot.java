@@ -13,7 +13,7 @@ import java.util.function.IntConsumer;
  * Filtering and sorting manipulate only coordinates; slices share both backing arrays.
  * No Integer, Map.Entry, Node, or Java predicate ever crosses the JNI boundary.
  */
-public final class M3IntIndexedSnapshot implements M3IntCollection {
+public final class M3IntIndexedSnapshot implements IntCollection {
     public enum Order { ENCOUNTER, ASCENDING, DESCENDING }
     private final int[] values;
     private final int[] rows;
@@ -148,8 +148,8 @@ public final class M3IntIndexedSnapshot implements M3IntCollection {
         for (int i = 0; i < copy.length; i++) copy[i] = get(i);
         return copy;
     }
-    @Override public M3IntIterator iterator() {
-        return new M3IntIterator() {
+    @Override public IntIterator iterator() {
+        return new IntIterator() {
             int cursor = from;
             @Override public boolean hasNext() { return cursor < to; }
             @Override public int nextInt() {

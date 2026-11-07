@@ -30,8 +30,8 @@ final class M3DequeSpanCopyTest {
         };
     }
 
-    private static M3LongArrayDeque ring(int capacity, int head, int size) {
-        var deque = new M3LongArrayDeque(capacity - 1);
+    private static LongArrayDeque ring(int capacity, int head, int size) {
+        var deque = new LongArrayDeque(capacity - 1);
         assertEquals(capacity, deque.capacity());
         for (int i = 0; i < head; i++) { deque.addLast(-7L); deque.removeFirstLong(); }
         for (int i = 0; i < size; i++) deque.addLast(value(i));

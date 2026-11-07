@@ -2,13 +2,13 @@
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // SPDX-License-Identifier: Apache-2.0
 // Modified 2026 by Hitesh Soliwal and contributors: align receiving mutation returns
-// with the existing M3LongArrayList boolean contracts; canonical Synexia APIs are unchanged.
+// with the existing LongArrayList boolean contracts; canonical Synexia APIs are unchanged.
 package jdk.m3.collections;
 
 import java.util.function.LongPredicate;
 
 /** Mutable indexed primitive-long sequence. */
-public interface M3LongSequence extends M3LongCollection {
+public interface M3LongSequence extends LongCollection {
     /** Adds one value and returns true. */
     boolean add(long value);
     boolean addIf(long value, LongPredicate predicate);

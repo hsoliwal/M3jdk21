@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Spliterator;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.packed.PackedLongList;
 
 /**
  * Finite primitive-list contract comparisons for the union owner; this is not JDK List
@@ -29,7 +30,7 @@ final class M3LongArrayListTest {
         for (int seed = 0; seed < 32; seed++) {
             var random = new Random(seed);
             var expected = new ArrayList<Long>();
-            var actual = new M3LongArrayList(seed % 9);
+            var actual = new LongArrayList(seed % 9);
             for (int step = 0; step < 1024; step++) {
                 long value = switch (step % 11) {
                     case 0 -> Long.MIN_VALUE;
@@ -83,7 +84,7 @@ final class M3LongArrayListTest {
     void callbackFailurePreservesThrowingValueAndUnreadSuffix() {
         for (int failAt = 0; failAt < 16; failAt++) {
             long[] values = java.util.stream.LongStream.range(0, 16).toArray();
-            var list = M3LongArrayList.copyOf(values);
+            var list = LongArrayList.copyOf(values);
             var seen = new ArrayList<Long>();
             var expected = new ArrayList<Long>();
             for (int i = 0; i < failAt; i++) if ((i & 1) == 0) expected.add((long) i);
@@ -99,7 +100,7 @@ final class M3LongArrayListTest {
                     seen.stream().mapToLong(Long::longValue).toArray());
             assertArrayEquals(expected.stream().mapToLong(Long::longValue).toArray(), list.toArray());
         }
-        var list = M3LongArrayList.copyOf(new long[]{1, 2, 3});
+        var list = LongArrayList.copyOf(new long[]{1, 2, 3});
         assertThrows(NullPointerException.class, () -> list.filterInPlace(null));
         assertArrayEquals(new long[]{1, 2, 3}, list.toArray());
         assertEquals(2, list.filterInPlace(v -> v == 2));
@@ -111,7 +112,7 @@ final class M3LongArrayListTest {
 
     @Test
     void directStreamsRetainOwnerAcrossStorageRelocation() {
-        var list = M3LongArrayList.copyOf(new long[]{5, 6, 7, 8});
+        var list = LongArrayList.copyOf(new long[]{5, 6, 7, 8});
         var iterator = list.iterator();
         var split = list.longSpliterator();
         var prefix = split.trySplit();
@@ -149,7 +150,7 @@ final class M3LongArrayListTest {
                 data[i] = i % 5 == 0 ? Long.MIN_VALUE
                         : i % 7 == 0 ? Long.MAX_VALUE : random.nextInt(17) - 8;
             }
-            var list = M3LongArrayList.copyOf(data);
+            var list = LongArrayList.copyOf(data);
             Arrays.sort(data);
             list.sort();
             assertArrayEquals(data, list.toArray());
@@ -164,22 +165,22 @@ final class M3LongArrayListTest {
 
     @Test
     void structuralMutationsFailFastAndStackIsJdkShapedRemoval() {
-        var list = M3LongArrayList.copyOf(new long[]{1, 2, 3, 4});
+        var list = LongArrayList.copyOf(new long[]{1, 2, 3, 4});
         var iterator = list.iterator();
         assertEquals(1, iterator.nextLong());
         list.sort();
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
-        var dedup = M3LongArrayList.copyOf(new long[]{1, 1, 2});
+        var dedup = LongArrayList.copyOf(new long[]{1, 1, 2});
         var dedupIterator = dedup.iterator();
         assertEquals(1, dedup.deduplicateSorted());
         assertThrows(ConcurrentModificationException.class, dedupIterator::hasNext);
-        var filtered = M3LongArrayList.copyOf(new long[]{1, 2, 3});
+        var filtered = LongArrayList.copyOf(new long[]{1, 2, 3});
         var filteredIterator = filtered.iterator();
         assertEquals(0, filtered.filterInPlace(v -> true));
         assertTrue(filteredIterator.hasNext()); // no structural change, no fail-fast
         assertEquals(2, filtered.filterInPlace(v -> v == 2));
         assertThrows(ConcurrentModificationException.class, filteredIterator::hasNext);
-        var stack = new M3LongArrayList();
+        var stack = new LongArrayList();
         stack.push(7);
         stack.push(9);
         var stackIterator = stack.iterator();
@@ -192,8 +193,8 @@ final class M3LongArrayListTest {
 
     @Test
     void boundsOwnershipAndStackExceptions() {
-        assertThrows(IllegalArgumentException.class, () -> new M3LongArrayList(-1));
-        assertThrows(NullPointerException.class, () -> M3LongArrayList.copyOf(null));
+        assertThrows(IllegalArgumentException.class, () -> new LongArrayList(-1));
+        assertThrows(NullPointerException.class, () -> LongArrayList.copyOf(null));
         var empty = M3Collections.longArrayList();
         assertThrows(NoSuchElementException.class, empty::peek);
         assertThrows(NoSuchElementException.class, empty::pop);
@@ -204,7 +205,7 @@ final class M3LongArrayListTest {
         assertThrows(IndexOutOfBoundsException.class, () -> empty.set(-1, 9));
         assertThrows(NullPointerException.class, () -> empty.addAll(null));
         long[] source = {Long.MIN_VALUE, Long.MAX_VALUE};
-        var list = M3LongArrayList.copyOf(source);
+        var list = LongArrayList.copyOf(source);
         source[0] = 0;
         assertEquals(Long.MIN_VALUE, list.get(0));
         long[] exported = list.toArray();
@@ -218,16 +219,16 @@ final class M3LongArrayListTest {
 
     @Test
     void primitiveStorageAndCapacityChecksStayBounded() throws Exception {
-        var fields = Arrays.stream(M3LongArrayList.class.getDeclaredFields())
+        var fields = Arrays.stream(LongArrayList.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(java.lang.reflect.Field::getType)
                 .toList();
         assertEquals(List.of(long[].class, int.class, int.class), fields);
-        assertThrows(OutOfMemoryError.class, () -> new M3LongArrayList().ensureCapacity(-1));
-        var list = new M3LongArrayList(8192);
+        assertThrows(OutOfMemoryError.class, () -> new LongArrayList().ensureCapacity(-1));
+        var list = new LongArrayList(8192);
         list.add(3);
         list.add(4);
-        var storage = M3LongArrayList.class.getDeclaredField("elements");
+        var storage = LongArrayList.class.getDeclaredField("elements");
         storage.setAccessible(true);
         Object old = storage.get(list);
         list.trimToSize();

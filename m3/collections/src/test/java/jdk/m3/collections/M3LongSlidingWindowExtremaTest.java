@@ -20,7 +20,7 @@ class M3LongSlidingWindowExtremaTest {
 
     @Test
     void publicMethodSetAndConstructorStayUnchanged() {
-        var names = Arrays.stream(M3LongSlidingWindow.class.getDeclaredMethods())
+        var names = Arrays.stream(LongSlidingWindow.class.getDeclaredMethods())
                 .filter(m -> Modifier.isPublic(m.getModifiers())
                         || Modifier.isProtected(m.getModifiers()))
                 .map(m -> m.getName() + "/" + m.getParameterCount())
@@ -28,8 +28,8 @@ class M3LongSlidingWindowExtremaTest {
         assertEquals(java.util.List.of("add/2", "average/0", "capacity/0", "clear/0",
                 "forEach/1", "getFromOldest/1", "isEmpty/0", "isFull/0", "max/0",
                 "min/0", "newest/0", "oldest/0", "payloadBytes/0", "size/0", "sum/0"), names);
-        assertEquals(1, M3LongSlidingWindow.class.getDeclaredConstructors().length);
-        assertTrue(Modifier.isPublic(M3LongSlidingWindow.class.getDeclaredConstructors()[0]
+        assertEquals(1, LongSlidingWindow.class.getDeclaredConstructors().length);
+        assertTrue(Modifier.isPublic(LongSlidingWindow.class.getDeclaredConstructors()[0]
                 .getModifiers()));
     }
 }

@@ -22,7 +22,7 @@ public final class M3PrimitiveIndexViewFilterContract {
 
     public static void main(String[] args) {
         Random random = new Random(0x4d33566965774cL);
-        for (M3PrimitiveKind kind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind kind : PrimitiveKind.values()) {
             for (int size : new int[] {0, 1, 2, 7, 63, 64, 65, 257}) {
                 verifyFixture(kind, size, random);
             }
@@ -32,11 +32,11 @@ public final class M3PrimitiveIndexViewFilterContract {
                 + " kinds=8 fixtures=64");
     }
 
-    private static void verifyFixture(M3PrimitiveKind kind, int size, Random random) {
+    private static void verifyFixture(PrimitiveKind kind, int size, Random random) {
         M3PrimitiveSoaStore store = new M3PrimitiveSoaStore(Math.max(1, size),
                 M3PrimitiveSoaStore.STATE_BYTES | M3PrimitiveSoaStore.ROW_IDS
                         | M3PrimitiveSoaStore.VERSION_LONGS,
-                kind, M3PrimitiveKind.LONG);
+                kind, PrimitiveKind.LONG);
         long[] values = new long[size];
         byte[] states = new byte[size];
         long[] specials = {0L, -1L, Long.MIN_VALUE, Long.MAX_VALUE,
@@ -194,11 +194,11 @@ public final class M3PrimitiveIndexViewFilterContract {
             throw marker;
         })), "callback failure precedes final version check");
 
-        M3PrimitiveIndexView empty = M3PrimitiveIndexView.identity(new M3PrimitiveSoaStore(M3PrimitiveKind.LONG));
+        M3PrimitiveIndexView empty = M3PrimitiveIndexView.identity(new M3PrimitiveSoaStore(PrimitiveKind.LONG));
         LongPredicate forbidden = bits -> { throw new AssertionError("empty callback"); };
         equal(List.of(), indexes(empty.filterLane(-1, forbidden)), "empty view does not validate lane");
         equal(List.of(), indexes(empty.filterStateMask(1)), "empty view does not read absent metadata");
-        M3PrimitiveSoaStore noMetadata = new M3PrimitiveSoaStore(M3PrimitiveKind.LONG);
+        M3PrimitiveSoaStore noMetadata = new M3PrimitiveSoaStore(PrimitiveKind.LONG);
         noMetadata.append1(1L);
         throwsType(IllegalStateException.class,
                 () -> M3PrimitiveIndexView.identity(noMetadata).filterStateMask(0));
@@ -206,7 +206,7 @@ public final class M3PrimitiveIndexViewFilterContract {
 
     private static M3PrimitiveSoaStore smallStore() {
         M3PrimitiveSoaStore store = new M3PrimitiveSoaStore(3, M3PrimitiveSoaStore.STATE_BYTES,
-                M3PrimitiveKind.LONG);
+                PrimitiveKind.LONG);
         for (long value : new long[] {10L, 20L, 30L}) {
             store.appendRow(new long[] {value}, (byte) 1, 0L);
         }
@@ -217,7 +217,7 @@ public final class M3PrimitiveIndexViewFilterContract {
         return mode == 0 || (mode == 2 && (bits & 3L) == 1L);
     }
 
-    private static long storedBits(M3PrimitiveKind kind, long raw) {
+    private static long storedBits(PrimitiveKind kind, long raw) {
         return switch (kind) {
             case BOOLEAN -> raw == 0L ? 0L : 1L;
             case BYTE -> (byte) raw;
@@ -229,7 +229,7 @@ public final class M3PrimitiveIndexViewFilterContract {
         };
     }
 
-    private static int compareBits(M3PrimitiveKind kind, long a, long b) {
+    private static int compareBits(PrimitiveKind kind, long a, long b) {
         return switch (kind) {
             case BOOLEAN, BYTE, SHORT, CHAR, INT, LONG -> Long.compare(a, b);
             case FLOAT -> Float.compare(Float.intBitsToFloat((int) a), Float.intBitsToFloat((int) b));

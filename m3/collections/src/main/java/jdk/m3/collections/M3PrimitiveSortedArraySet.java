@@ -25,21 +25,21 @@ import java.util.function.LongConsumer;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveSortedArraySet {
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private Object elements;
     private int size;
 
-    public M3PrimitiveSortedArraySet(M3PrimitiveKind kind) {
+    public M3PrimitiveSortedArraySet(PrimitiveKind kind) {
         this(kind, 8);
     }
 
-    public M3PrimitiveSortedArraySet(M3PrimitiveKind kind, int initialCapacity) {
+    public M3PrimitiveSortedArraySet(PrimitiveKind kind, int initialCapacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (initialCapacity < 0) throw new IllegalArgumentException("initialCapacity < 0");
         elements = kind.newArray(Math.max(1, initialCapacity));
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return java.lang.reflect.Array.getLength(elements); }

@@ -32,18 +32,18 @@ import java.util.function.LongConsumer;
 public final class M3PrimitiveSortedGapSet {
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final float loadFactor;
     private Object elements;
     private int gapStart;
     private int gapEnd;
     private int size;
 
-    public M3PrimitiveSortedGapSet(M3PrimitiveKind kind) {
+    public M3PrimitiveSortedGapSet(PrimitiveKind kind) {
         this(kind, 8, DEFAULT_LOAD_FACTOR);
     }
 
-    public M3PrimitiveSortedGapSet(M3PrimitiveKind kind, int expected, float loadFactor) {
+    public M3PrimitiveSortedGapSet(PrimitiveKind kind, int expected, float loadFactor) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (expected < 0) throw new IllegalArgumentException("expected < 0");
         if (!(loadFactor > 0.0f && loadFactor < 1.0f)) {
@@ -56,7 +56,7 @@ public final class M3PrimitiveSortedGapSet {
         gapEnd = capacity;
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return java.lang.reflect.Array.getLength(elements); }

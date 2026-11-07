@@ -45,7 +45,7 @@ public final class M3KeyedParallelismAdmissionContract {
         AtomicInteger mapperCalls = new AtomicInteger();
         FutureTask<Throwable> outcome = new FutureTask<>(() -> {
             try {
-                M3ObjectStream.snapshot(List.of(0, 1, 2, 3)).parallelByKey(item -> {
+                ObjectStream.snapshot(List.of(0, 1, 2, 3)).parallelByKey(item -> {
                     keyCalls.incrementAndGet();
                     // Two partitions and four in-flight slots give this lane two queue slots.
                     // Reaching item 3 proves item 0 was taken and items 1/2 filled the queue.
@@ -96,7 +96,7 @@ public final class M3KeyedParallelismAdmissionContract {
             AtomicInteger mapped = new AtomicInteger();
             AtomicBoolean reordered = new AtomicBoolean();
             int[] lastByKey = {-1, -1, -1, -1};
-            List<Integer> actual = M3ObjectStream.snapshot(source).parallelByKey(item -> {
+            List<Integer> actual = ObjectStream.snapshot(source).parallelByKey(item -> {
                 keys.incrementAndGet();
                 return item % 4;
             }).mapOrdered(item -> {
@@ -114,7 +114,7 @@ public final class M3KeyedParallelismAdmissionContract {
             expect(UnsupportedOperationException.class, () -> actual.add(256));
         }
         List<Integer> nullable = Arrays.asList(null, 1, null, 2, 3, null);
-        List<Integer> actual = M3ObjectStream.snapshot(nullable).parallelByKey(item -> item)
+        List<Integer> actual = ObjectStream.snapshot(nullable).parallelByKey(item -> item)
                 .mapOrdered(item -> item == null ? null : item * 2, 2, 3, nullable.size());
         equal(Arrays.asList(null, 2, null, 4, 6, null), actual, "null keys, inputs and mapped values");
     }
@@ -125,7 +125,7 @@ public final class M3KeyedParallelismAdmissionContract {
         AtomicBoolean restoredInterrupt = new AtomicBoolean();
         FutureTask<Throwable> outcome = new FutureTask<>(() -> {
             try {
-                M3ObjectStream.snapshot(List.of(0, 1, 2, 3)).parallelByKey(item -> 0)
+                ObjectStream.snapshot(List.of(0, 1, 2, 3)).parallelByKey(item -> 0)
                         .mapOrdered(item -> {
                             mapperEntered.countDown();
                             await(releaseMapper);

@@ -109,7 +109,7 @@ public final class M3FilteredSortedEdgesContract {
         checkNavigation(expected.descendingSet(), readonly.descendingSet(), queries, "reverse");
         checkNavigation(expected, M3FilteredNavigableSet.view(source, visible), queries, "facade");
         checkNavigation(expected, M3MutableFilteredViews.filter(source, visible), queries, "mutable");
-        checkNavigation(expected, M3CollectionViews.filtered(source, visible), queries, "collection");
+        checkNavigation(expected, CollectionViews.filtered(source, visible), queries, "collection");
         NavigableMap<Integer, String> map = new TreeMap<>(source.comparator());
         for (Integer value : source) map.put(value, value == null ? null : "v" + value);
         NavigableMap<Integer, String> filteredMap = M3FilteredViews.filterEntries(map,

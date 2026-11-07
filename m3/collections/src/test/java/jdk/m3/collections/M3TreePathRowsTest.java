@@ -95,7 +95,7 @@ final class M3TreePathRowsTest {
 		for (List<Integer> path : order) materialize (path, random);
 		List<List<Integer>> deepestFirst = new ArrayList<> (expanded);
 		deepestFirst.sort ((a, b) -> b.size () - a.size ());
-		for (List<Integer> path : deepestFirst) topology.flag (ids.get (path), M3ItemState.EXPANDED, true);
+		for (List<Integer> path : deepestFirst) topology.flag (ids.get (path), ItemState.EXPANDED, true);
 	}
 
 	private void grow (List<Integer> path, int depth, Random random, List<List<Integer>> order) {

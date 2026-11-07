@@ -46,7 +46,7 @@ public final class M3LongHashSetSingleProbeTest {
         } catch (ReflectiveOperationException problem) { throw new AssertionError(problem); }
     }
 
-    private static void snapshot(M3LongHashSet current, M3LongHashSetBaseline original, Set<Long> oracle) {
+    private static void snapshot(LongHashSet current, M3LongHashSetBaseline original, Set<Long> oracle) {
         yes(current.size() == oracle.size(), "candidate size");
         yes(original.size() == oracle.size(), "original size");
         yes(current.capacity() == original.capacity(), "exact capacity");
@@ -66,7 +66,7 @@ public final class M3LongHashSetSingleProbeTest {
         }
         yes(occupied == ((int) field(current,"occupied")), "authoritative occupancy");
         yes(live == current.size(), "live slots");
-        M3LongIterator ia=current.iterator(), ib=original.iterator();
+        LongIterator ia=current.iterator(), ib=original.iterator();
         for (long v : array) {
             yes(ia.hasNext() && ib.hasNext(), "iterator hasNext");
             yes(ia.nextLong()==v && ib.nextLong()==v, "iterator order");
@@ -76,7 +76,7 @@ public final class M3LongHashSetSingleProbeTest {
         catch (NoSuchElementException expected) { checks++; }
     }
 
-    private static void exercise(M3LongHashSet current, M3LongHashSetBaseline original,
+    private static void exercise(LongHashSet current, M3LongHashSetBaseline original,
             Set<Long> oracle, int kind, long value) {
         operations++;
         switch (kind) {
@@ -102,10 +102,10 @@ public final class M3LongHashSetSingleProbeTest {
     }
 
     private static void iteratorEpochProof() {
-        M3LongHashSet subject = new M3LongHashSet();
+        LongHashSet subject = new LongHashSet();
         M3LongHashSetBaseline baseline = new M3LongHashSetBaseline();
         subject.add(9);baseline.add(9);
-        M3LongIterator ci=subject.iterator(), bi=baseline.iterator();
+        LongIterator ci=subject.iterator(), bi=baseline.iterator();
         yes(!subject.add(9) && !baseline.add(9), "duplicate is no-op");
         yes(ci.hasNext() && bi.hasNext(), "duplicate preserves iterators");
         subject.add(10); baseline.add(10);
@@ -116,7 +116,7 @@ public final class M3LongHashSetSingleProbeTest {
     }
 
     public static void main(String[] args) {
-        M3LongHashSet current = new M3LongHashSet();
+        LongHashSet current = new LongHashSet();
         M3LongHashSetBaseline original = new M3LongHashSetBaseline();
         Set<Long> oracle = new HashSet<>();
         // Growth, probe collisions and tombstone pressure at larger stable occupancies.
@@ -133,7 +133,7 @@ public final class M3LongHashSetSingleProbeTest {
         }
         snapshot(current,original,oracle);
         iteratorEpochProof();
-        try {new M3LongHashSet(-1);throw new AssertionError("negative cap accepted");}
+        try {new LongHashSet(-1);throw new AssertionError("negative cap accepted");}
         catch(IllegalArgumentException expected){checks++;}
         System.out.println("PASS operations="+operations+" checks="+checks+" finalSize="+current.size());
     }

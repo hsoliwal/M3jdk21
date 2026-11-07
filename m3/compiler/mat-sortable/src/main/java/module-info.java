@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 /**
  * Mat sortable annotation processor of M3JDK (package jdk.m3.compiler.matsortable): M3MatSortableProcessor, the opt-in
- * JSR-269 processor that locates jdk.m3.collections.M3Sortable, M3SortField, M3SortSignal, M3SortDistance and
+ * JSR-269 processor that locates jdk.m3.collections.Sortable, M3SortField, M3SortSignal, M3SortDistance and
  * M3SortDependency by canonical name and writes one deterministic source companion per annotated class or record
  * (schema / order-policy / structural seals, compareExact, exactComparator, primary, signals, distance and the
  * ComparisonEvidence receipt). It never mutates the annotated type and runs inside javac only: java.compiler is a

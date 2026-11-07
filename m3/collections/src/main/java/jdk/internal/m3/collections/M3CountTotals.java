@@ -2,18 +2,18 @@
  * SPDX-License-Identifier: Apache-2.0
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
  * Derived from Synexia PackedLongBag / bag_counts.c (6c33a5772a12ca99c8bff6a02403b28be4202bb3)
- * and M3LongBag / M3CountLanes (4191ebe76c972725b3ebc5a76771f0d56b43fb62).
+ * and LongBag / M3CountLanes (4191ebe76c972725b3ebc5a76771f0d56b43fb62).
  * Modified: scalar reductions reuse the existing count owners without result collections.
  */
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3LongBag;
+import jdk.m3.collections.LongBag;
 
 /**
  * Scalar totals for the existing M3 bag and aligned-count algebra. No new storage
  * owner, boxed count table, key alignment scheme, or occurrence expansion is used.
- * Inputs must stay unchanged throughout a call, as for M3LongBag's snapshot algebra.
+ * Inputs must stay unchanged throughout a call, as for LongBag's snapshot algebra.
  * No result bag or result array is created. Bag intersection uses a constant-size
  * callback accumulator; a universal zero-allocation or speedup claim is not made.
  *
@@ -22,12 +22,12 @@ import jdk.m3.collections.M3LongBag;
  * two 1024-jlong lanes (16 KiB), with no pinned or retained Java heap pointers.
  */
     //FLLDCIM: MRL - fold-close audit leaf L0025: ADD from PR #1084 head 6b16a20dcedf blob 31ce540046a3, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
-    //FLLDCIM: MRL - the PR-head owner spelled size()/distinctSize()/add(long); master's M3LongBag (e6722c63e9b, blob d00efc879547) spells totalCount()/distinctCount()/add(long, long): calls renamed, contract unchanged (HANDOFF.tsv)
+    //FLLDCIM: MRL - the PR-head owner spelled size()/distinctSize()/add(long); master's LongBag (e6722c63e9b, blob d00efc879547) spells totalCount()/distinctCount()/add(long, long): calls renamed, contract unchanged (HANDOFF.tsv)
 public final class M3CountTotals {
     private M3CountTotals() { }
 
     /** Checked sum of occurrence totals, equivalent to left.sum(right).totalCount(). */
-    public static long sum(M3LongBag left, M3LongBag right) {
+    public static long sum(LongBag left, LongBag right) {
         Objects.requireNonNull(left, "left");
         Objects.requireNonNull(right, "right");
         return Math.addExact(left.totalCount(), right.totalCount());
@@ -39,13 +39,13 @@ public final class M3CountTotals {
      * chooses the scan owner; the scan still includes its unused backing capacity.
      * This is a heuristic, not a promise that this owner has the smaller capacity.
      */
-    public static long intersection(M3LongBag left, M3LongBag right) {
+    public static long intersection(LongBag left, LongBag right) {
         Objects.requireNonNull(left, "left");
         Objects.requireNonNull(right, "right");
         if (left == right) return left.totalCount();
         if (left.isEmpty() || right.isEmpty()) return 0L;
-        M3LongBag scan = left.distinctCount() <= right.distinctCount() ? left : right;
-        M3LongBag lookup = scan == left ? right : left;
+        LongBag scan = left.distinctCount() <= right.distinctCount() ? left : right;
+        LongBag lookup = scan == left ? right : left;
         long[] total = {0L};
         scan.forEachCount((key, amount) ->
                 total[0] = Math.addExact(total[0], Math.min(amount, lookup.count(key))));
@@ -57,13 +57,13 @@ public final class M3CountTotals {
      * Subtracts overlap before adding the second total, avoiding false overflow
      * for overlapping bags whose individual totals are near Long.MAX_VALUE.
      */
-    public static long union(M3LongBag left, M3LongBag right) {
+    public static long union(LongBag left, LongBag right) {
         long overlap = intersection(left, right);
         return Math.addExact(left.totalCount() - overlap, right.totalCount());
     }
 
     /** Directed, zero-floored difference, equivalent to left.difference(right).totalCount(). */
-    public static long difference(M3LongBag left, M3LongBag right) {
+    public static long difference(LongBag left, LongBag right) {
         return Objects.requireNonNull(left, "left").totalCount() - intersection(left, right);
     }
 

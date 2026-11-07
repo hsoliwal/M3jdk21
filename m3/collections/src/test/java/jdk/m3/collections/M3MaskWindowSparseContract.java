@@ -26,9 +26,9 @@ public final class M3MaskWindowSparseContract {
             if ((flags & required) == required && (flags & excluded) == 0) expected[offset + written++] = rows[next];
             next++;
         }
-        long result = M3IndexMaskWindow.scan(rows, states, first, required, excluded, actual, offset, limit, backend);
-        check(M3IndexMaskWindow.nextIndex(result) == next);
-        check(M3IndexMaskWindow.written(result) == written);
+        long result = IndexMaskWindow.scan(rows, states, first, required, excluded, actual, offset, limit, backend);
+        check(IndexMaskWindow.nextIndex(result) == next);
+        check(IndexMaskWindow.written(result) == written);
         check(Arrays.equals(expected, actual));
         check(Arrays.equals(rows, originalRows));
         check(Arrays.equals(states, originalStates));
@@ -72,22 +72,22 @@ public final class M3MaskWindowSparseContract {
         int[] guard = {11, 12, 13, 14, 15};
         int[] frozen = guard.clone();
         for (int mask : new int[] {-1, 256, Integer.MAX_VALUE}) {
-            refuses(IllegalArgumentException.class, () -> M3IndexMaskWindow.scan(source, flags, 0, mask, 0, guard, 0, 1, backend));
-            refuses(IllegalArgumentException.class, () -> M3IndexMaskWindow.scan(source, flags, 0, 0, mask, guard, 0, 1, backend));
+            refuses(IllegalArgumentException.class, () -> IndexMaskWindow.scan(source, flags, 0, mask, 0, guard, 0, 1, backend));
+            refuses(IllegalArgumentException.class, () -> IndexMaskWindow.scan(source, flags, 0, 0, mask, guard, 0, 1, backend));
         }
-        refuses(IllegalArgumentException.class, () -> M3IndexMaskWindow.scan(source, flags, 0, 0, 0, source, 0, 1, backend));
-        refuses(IllegalArgumentException.class, () -> M3IndexMaskWindow.scan(source, new byte[3], 0, 0, 0, guard, 0, 1, backend));
-        refuses(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scan(source, flags, -1, 0, 0, guard, 0, 1, backend));
-        refuses(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scan(source, flags, 5, 0, 0, guard, 0, 1, backend));
-        refuses(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scan(source, flags, 0, 0, 0, guard, 5, 1, backend));
-        refuses(IllegalArgumentException.class, () -> M3IndexMaskWindow.scan(source, flags, 0, 0, 0, guard, 0, 4097, backend));
-        refuses(NullPointerException.class, () -> M3IndexMaskWindow.scan(source, flags, 0, 0, 0, guard, 0, 1, null));
+        refuses(IllegalArgumentException.class, () -> IndexMaskWindow.scan(source, flags, 0, 0, 0, source, 0, 1, backend));
+        refuses(IllegalArgumentException.class, () -> IndexMaskWindow.scan(source, new byte[3], 0, 0, 0, guard, 0, 1, backend));
+        refuses(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scan(source, flags, -1, 0, 0, guard, 0, 1, backend));
+        refuses(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scan(source, flags, 5, 0, 0, guard, 0, 1, backend));
+        refuses(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scan(source, flags, 0, 0, 0, guard, 5, 1, backend));
+        refuses(IllegalArgumentException.class, () -> IndexMaskWindow.scan(source, flags, 0, 0, 0, guard, 0, 4097, backend));
+        refuses(NullPointerException.class, () -> IndexMaskWindow.scan(source, flags, 0, 0, 0, guard, 0, 1, null));
         check(Arrays.equals(frozen, guard));
         if (args.length > 0 && args[0].equals("missing")) {
             check(!M3IndexMaskCompactor.nativeAvailable());
             for (int limit : new int[] {0, 1}) {
-                refuses(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scan(source, flags, 0, 0, 0, guard, 0, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
-                refuses(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scan(source, flags, 0, 1, 1, guard, 0, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                refuses(UnsatisfiedLinkError.class, () -> IndexMaskWindow.scan(source, flags, 0, 0, 0, guard, 0, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                refuses(UnsatisfiedLinkError.class, () -> IndexMaskWindow.scan(source, flags, 0, 1, 1, guard, 0, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
             }
         }
         System.out.println("PASS M3MaskWindowSparseContract backend=" + backend + " checks=" + checks);

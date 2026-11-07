@@ -12,14 +12,14 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
- * The Synexia mat-lane MatIntPriorityQueue API merged into M3IntPriorityQueue (peek, poll, primitivePayloadBytes; isEmpty
- * comes from M3IntCollection). Replays the Mat deep contract (heap order against {@code PriorityQueue<Integer>}) through
+ * The Synexia mat-lane MatIntPriorityQueue API merged into IntPriorityQueue (peek, poll, primitivePayloadBytes; isEmpty
+ * comes from IntCollection). Replays the Mat deep contract (heap order against {@code PriorityQueue<Integer>}) through
  * the merged names, with interleaved peeks, duplicates and the int extremes.
  */
 final class M3IntPriorityQueueMatApiTest {
     @Test void matContractHeapOrderThroughMergedNames() {
         Random random = new Random(0x4D41_5451L);
-        M3IntPriorityQueue queue = new M3IntPriorityQueue();
+        IntPriorityQueue queue = new IntPriorityQueue();
         PriorityQueue<Integer> oracle = new PriorityQueue<>();
         for (int i = 0; i < 100_000; i++) {
             int value = switch (i % 17) {
@@ -43,7 +43,7 @@ final class M3IntPriorityQueueMatApiTest {
 
     @Test void interleavedOffersAndPollsMatchOracle() {
         Random random = new Random(7L);
-        M3IntPriorityQueue queue = new M3IntPriorityQueue(1);
+        IntPriorityQueue queue = new IntPriorityQueue(1);
         PriorityQueue<Integer> oracle = new PriorityQueue<>();
         for (int step = 0; step < 20_000; step++) {
             if (oracle.isEmpty() || random.nextInt(3) != 0) {
@@ -59,7 +59,7 @@ final class M3IntPriorityQueueMatApiTest {
     }
 
     @Test void emptyAndPayloadContract() {
-        M3IntPriorityQueue queue = new M3IntPriorityQueue(16);
+        IntPriorityQueue queue = new IntPriorityQueue(16);
         assertThrows(NoSuchElementException.class, queue::peek);
         assertThrows(NoSuchElementException.class, queue::poll);
         assertEquals(queue.payloadBytes(), queue.primitivePayloadBytes());

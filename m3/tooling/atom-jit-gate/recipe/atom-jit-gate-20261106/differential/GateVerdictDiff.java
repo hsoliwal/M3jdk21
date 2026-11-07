@@ -25,7 +25,7 @@ public final class GateVerdictDiff {
         "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
         "src/java.base/share/classes/java/util/ArrayList.java",
         "m3/arrays/src/main/native/m3_arrays_jni.c",
-        "m3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java"};
+        "m3/collections/src/main/java/jdk/m3/collections/LongHashSet.java"};
     private static final String NONE = "-";
 
     private record Side(Class<?> gate, Class<?> receipt, Class<?> phase, Class<?> status, Method review) { }

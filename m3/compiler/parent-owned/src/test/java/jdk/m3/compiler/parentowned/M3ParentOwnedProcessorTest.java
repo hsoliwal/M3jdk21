@@ -15,10 +15,10 @@ class M3ParentOwnedProcessorTest {
     @Test void emitsDeterministicConservativeCompilerMetadata() throws Exception {
         Path root = Files.createTempDirectory("m3-parent-owned-proof-");
         Path source = root.resolve("Foo.java");
-        String code = "package proof; import jdk.m3.collections.M3ParentOwned;"
-                + "@M3ParentOwned(owner=\"tree\",flags=13) public class Foo {"
-                + "@M3ParentOwned(owner=\"rows\") int bits;"
-                + "@M3ParentOwned void work(long id) {} }";
+        String code = "package proof; import jdk.m3.collections.ParentOwned;"
+                + "@ParentOwned(owner=\"tree\",flags=13) public class Foo {"
+                + "@ParentOwned(owner=\"rows\") int bits;"
+                + "@ParentOwned void work(long id) {} }";
         Files.writeString(source, code, StandardCharsets.UTF_8);
         Path output = root.resolve("classes");
         Files.createDirectories(output);

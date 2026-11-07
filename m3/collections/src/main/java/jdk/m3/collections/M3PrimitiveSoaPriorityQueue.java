@@ -30,7 +30,7 @@ import java.util.Objects;
 public final class M3PrimitiveSoaPriorityQueue {
     private final M3PrimitiveSoaStore store;
     private final int priorityLane;
-    private final M3PrimitiveKind priorityKind;
+    private final PrimitiveKind priorityKind;
     private final boolean minFirst;
 
     public M3PrimitiveSoaPriorityQueue(
@@ -38,7 +38,7 @@ public final class M3PrimitiveSoaPriorityQueue {
             int metadataMask,
             int priorityLane,
             boolean minFirst,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         Objects.requireNonNull(laneKinds, "laneKinds");
         if (priorityLane < 0 || priorityLane >= laneKinds.length) {
             throw new IndexOutOfBoundsException(priorityLane);
@@ -52,7 +52,7 @@ public final class M3PrimitiveSoaPriorityQueue {
     public synchronized int size() { return store.size(); }
     public synchronized boolean isEmpty() { return store.isEmpty(); }
     public int laneCount() { return store.laneCount(); }
-    public M3PrimitiveKind laneKind(int lane) { return store.laneKind(lane); }
+    public PrimitiveKind laneKind(int lane) { return store.laneKind(lane); }
     public int priorityLane() { return priorityLane; }
     public boolean minFirst() { return minFirst; }
     public synchronized long payloadBytes() { return store.payloadBytes(); }

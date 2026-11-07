@@ -24,7 +24,7 @@ public final class M3LongSortedExcludedMaskTest {
     @Test void requiredExcludedMasksPreserveSortedSnapshotContracts() {
         long[] values = {Long.MIN_VALUE, -1L, 0L, 1L, 5L, Long.MAX_VALUE};
         byte[] flags = {(byte) 0x80, 0x01, 0x03, (byte) 0x81, (byte) 0xff, 0x00};
-        M3LongSortedSnapshot admitted = M3LongSortedSnapshot.fromAlignedMasks(values, flags, 1, 2);
+        LongSortedSnapshot admitted = LongSortedSnapshot.fromAlignedMasks(values, flags, 1, 2);
         assertArrayEquals(new long[]{-1L, 1L}, admitted.toArray());
         assertEquals(2, admitted.size());
         assertEquals(1, admitted.rank(1L));
@@ -44,19 +44,19 @@ public final class M3LongSortedExcludedMaskTest {
     }
 
     @Test void invalidMasksAndUnsuitableInputsAreRefused() {
-        assertArrayEquals(new long[0], M3LongSortedSnapshot.fromAlignedMasks(
+        assertArrayEquals(new long[0], LongSortedSnapshot.fromAlignedMasks(
                 new long[]{1, 2}, new byte[]{1, 1}, 1, 1).toArray());
-        assertThrows(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasks(
+        assertThrows(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasks(
                 new long[]{1, 2}, new byte[]{1}, 1, 0));
-        assertThrows(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasks(
+        assertThrows(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasks(
                 new long[]{2, 1}, new byte[]{1, 1}, 1, 0));
-        assertThrows(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasks(
+        assertThrows(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasks(
                 new long[]{1, 1}, new byte[]{1, 1}, 1, 0));
-        assertThrows(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasks(
+        assertThrows(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasks(
                 new long[]{1}, new byte[]{1}, 256, 0));
-        assertThrows(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromAlignedMasks(
+        assertThrows(IllegalArgumentException.class, () -> LongSortedSnapshot.fromAlignedMasks(
                 new long[]{1}, new byte[]{1}, 0, -1));
-        assertArrayEquals(new long[]{1, 2}, M3LongSortedSnapshot.fromAlignedMasks(
+        assertArrayEquals(new long[]{1, 2}, LongSortedSnapshot.fromAlignedMasks(
                 new long[]{1, 2}, new byte[]{1, 1}, 1, 0).toArray(),
                 "zero excluded mask retains original required-only behavior");
     }
@@ -83,8 +83,8 @@ public final class M3LongSortedExcludedMaskTest {
                 }
             }
             expected = Arrays.copyOf(expected, count);
-            M3LongSortedSnapshot selected =
-                    M3LongSortedSnapshot.fromAlignedMasks(values, states, required, excluded);
+            LongSortedSnapshot selected =
+                    LongSortedSnapshot.fromAlignedMasks(values, states, required, excluded);
             assertArrayEquals(expected, selected.toArray(), "round " + round);
             assertEquals(count, selected.size(), "round " + round);
             for (int i = 0; i < count; i++) {

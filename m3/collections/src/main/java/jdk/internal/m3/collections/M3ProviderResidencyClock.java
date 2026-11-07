@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Collection-level CLOCK residency bookkeeping shared by bounded provider facades.
@@ -61,7 +61,7 @@ final class M3ProviderResidencyClock {
         }
         residentIds = new long[maximumResident];
         slotById = new M3LazyPrimitiveAddressSpace(
-                M3PrimitiveKind.INT, rootBits, directoryBits, leafBits);
+                PrimitiveKind.INT, rootBits, directoryBits, leafBits);
         referenced = new M3LazyBitAddressSpace(rootBits, directoryBits, leafBits);
     }
 

@@ -4,7 +4,7 @@
  */
 package jdk.m3.viewport;
 
-import jdk.m3.collections.M3ItemState;
+import jdk.m3.collections.ItemState;
 
 /**
  * The cross-toolkit row painter of the M3 renderer (see {@code m3/docs/viewport-everywhere/DESIGN.md} section 6).
@@ -13,6 +13,6 @@ import jdk.m3.collections.M3ItemState;
  * mask) and the active theme; no toolkit item object is needed to paint. Damage is a set of row rectangles.</p>
  */
 public interface M3RowPainter {
-	/** Paints logical {@code row} into the rectangle {@code (x, y, width, height)}; {@code stateMask} uses {@link M3ItemState} bits. */
+	/** Paints logical {@code row} into the rectangle {@code (x, y, width, height)}; {@code stateMask} uses {@link ItemState} bits. */
 	void paintRow (int row, int x, int y, int width, int height, int stateMask);
 }

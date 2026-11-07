@@ -15,6 +15,7 @@
 package jdk.m3.collections;
 
 import java.util.Objects;
+import jdk.m3.collections.bits.LongBitSet;
 
 /**
  * Non-negative int-key direct table with exact-width primitive values.
@@ -32,24 +33,24 @@ public final class M3PrimitiveDirectIntMap {
         void accept(int key, long valueBits);
     }
 
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind valueKind;
     private Object values;
-    private final M3LongBitSet present;
+    private final LongBitSet present;
     private int size;
 
-    public M3PrimitiveDirectIntMap(M3PrimitiveKind valueKind) {
+    public M3PrimitiveDirectIntMap(PrimitiveKind valueKind) {
         this(valueKind, 64);
     }
 
-    public M3PrimitiveDirectIntMap(M3PrimitiveKind valueKind, int initialKeyCapacity) {
+    public M3PrimitiveDirectIntMap(PrimitiveKind valueKind, int initialKeyCapacity) {
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         if (initialKeyCapacity < 0) throw new IllegalArgumentException("initialKeyCapacity < 0");
         int capacity = Math.max(1, initialKeyCapacity);
         values = valueKind.newArray(capacity);
-        present = new M3LongBitSet(capacity);
+        present = new LongBitSet(capacity);
     }
 
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int keyCapacity() { return java.lang.reflect.Array.getLength(values); }
@@ -108,6 +109,6 @@ public final class M3PrimitiveDirectIntMap {
         int next = keyCapacity() + (keyCapacity() >>> 1) + 1;
         if (next < required) next = required;
         values = valueKind.copyOf(values, next);
-        // M3LongBitSet grows on set(), so there is no second resize step here.
+        // LongBitSet grows on set(), so there is no second resize step here.
     }
 }

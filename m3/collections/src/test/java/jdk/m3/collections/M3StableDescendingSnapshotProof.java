@@ -65,7 +65,7 @@ public final class M3StableDescendingSnapshotProof {
     }
 
     private static void verify(Integer[] input, Random random,
-            M3IndexPathMasks.Backend backend) {
+            IndexPathMasks.Backend backend) {
         M3IndexedListSnapshot<Integer> origin = M3IndexedListSnapshot.copyOf(input);
         int start = random.nextInt(input.length + 1);
         int count = random.nextInt(input.length - start + 1);
@@ -146,13 +146,13 @@ public final class M3StableDescendingSnapshotProof {
         var empty = M3IndexedListSnapshot.copyOf(new Integer[0]);
         same(List.of(), empty.sortedDescending(), "empty reverse");
 
-        if (!M3IndexPathMasks.nativeAvailable()) {
+        if (!IndexPathMasks.nativeAvailable()) {
             AtomicInteger callbacks = new AtomicInteger();
             throwsType(UnsatisfiedLinkError.class, () ->
                     all.sortedMaskedByPhysicalStatesDescending(
                         new int[][] {{1, 1, 1}}, new int[] {1}, new int[] {0},
                         (a, b) -> { callbacks.incrementAndGet(); return Integer.compare(a, b); },
-                        M3IndexPathMasks.Backend.NATIVE_REQUIRED),
+                        IndexPathMasks.Backend.NATIVE_REQUIRED),
                     "explicit native-required refusal");
             same(0, callbacks.get(), "JNI refusal before comparator callbacks");
         }
@@ -160,13 +160,13 @@ public final class M3StableDescendingSnapshotProof {
 
     public static void main(String[] args) {
         boolean nativeRequired = args.length == 1 && "--native".equals(args[0]);
-        if (nativeRequired && !M3IndexPathMasks.nativeAvailable()) {
+        if (nativeRequired && !IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("native library explicitly required for this run");
         }
         edgeCases();
         Random random = new Random(0x4d33535441424c45L);
-        var backend = nativeRequired ? M3IndexPathMasks.Backend.NATIVE_REQUIRED
-                : M3IndexPathMasks.Backend.JAVA;
+        var backend = nativeRequired ? IndexPathMasks.Backend.NATIVE_REQUIRED
+                : IndexPathMasks.Backend.JAVA;
         for (Integer[] input : new Integer[][] {
                 {}, {null}, {0}, {null, 5, 9, 1, 1, null}, {4, 0, -4, 2, -2, 6}
         }) verify(input, random, backend);

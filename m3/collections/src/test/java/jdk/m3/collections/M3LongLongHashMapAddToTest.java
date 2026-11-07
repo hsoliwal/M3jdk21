@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 final class M3LongLongHashMapAddToTest {
     @Test
     void everyLongKeyAndZeroDeltaHaveOrdinaryMapSemantics() {
-        M3LongLongHashMap actual = new M3LongLongHashMap();
+        LongLongHashMap actual = new LongLongHashMap();
         long[] keys = {0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE};
         for (long key : keys) {
             assertEquals(0L, actual.addTo(key, 0L));
@@ -35,11 +35,11 @@ final class M3LongLongHashMapAddToTest {
 
     @Test
     void presentUpdatesPreserveCapacityAndLiveIteratorEpoch() {
-        M3LongLongHashMap actual = new M3LongLongHashMap();
+        LongLongHashMap actual = new LongLongHashMap();
         for (int key = 0; key < 5; key++) actual.put(key, key);
         int capacity = actual.capacity();
         long[] order = actual.keysToArray();
-        M3LongIterator cursor = actual.keyIterator();
+        LongIterator cursor = actual.keyIterator();
         for (long key : order) assertEquals(key + 9L, actual.addTo(key, 9L));
         assertEquals(capacity, actual.capacity());
         assertArrayEquals(order, actual.keysToArray());
@@ -48,15 +48,15 @@ final class M3LongLongHashMapAddToTest {
             assertEquals(key, cursor.nextLong());
         }
         assertFalse(cursor.hasNext());
-        M3LongIterator beforeInsert = actual.keyIterator();
+        LongIterator beforeInsert = actual.keyIterator();
         assertEquals(0L, actual.addTo(Long.MIN_VALUE, 0L));
         assertThrows(ConcurrentModificationException.class, beforeInsert::hasNext);
     }
 
     @Test
     void collisionTombstoneReuseMatchesEstablishedPutLayout() {
-        M3LongLongHashMap actual = new M3LongLongHashMap();
-        M3LongLongHashMap incumbent = new M3LongLongHashMap();
+        LongLongHashMap actual = new LongLongHashMap();
+        LongLongHashMap incumbent = new LongLongHashMap();
         // Discover a probe cluster without copying the owner's hash implementation.
         long[] collision = collisionKeys();
         for (int i = 0; i < 5; i++) {
@@ -77,7 +77,7 @@ final class M3LongLongHashMapAddToTest {
 
     @Test
     void seededMixedOperationsMatchIndependentJdkModel() {
-        M3LongLongHashMap actual = new M3LongLongHashMap();
+        LongLongHashMap actual = new LongLongHashMap();
         Map<Long, Long> expected = new HashMap<>();
         Random random = new Random(0x4d33414444544fL);
         for (int step = 0; step < 20_000; step++) {
@@ -109,8 +109,8 @@ final class M3LongLongHashMapAddToTest {
 
     @Test
     void mixedGrowthAndDeletionKeepIncumbentCapacityAndPhysicalOrder() {
-        M3LongLongHashMap actual = new M3LongLongHashMap();
-        M3LongLongHashMap incumbent = new M3LongLongHashMap();
+        LongLongHashMap actual = new LongLongHashMap();
+        LongLongHashMap incumbent = new LongLongHashMap();
         Random random = new Random(0x51524f575448L);
         for (int step = 0; step < 8_000; step++) {
             long key = random.nextInt(401) - 200L;
@@ -128,7 +128,7 @@ final class M3LongLongHashMapAddToTest {
 
     @Test
     void callbackUpdatesRetainExistingStructuralMutationRules() {
-        M3LongLongHashMap actual = new M3LongLongHashMap();
+        LongLongHashMap actual = new LongLongHashMap();
         actual.put(0L, 1L);
         actual.put(Long.MIN_VALUE, 2L);
         actual.forEach((key, value) -> assertEquals(value + 3L, actual.addTo(key, 3L)));
@@ -155,10 +155,10 @@ final class M3LongLongHashMapAddToTest {
         long[] result = new long[6];
         int found = 0;
         for (long key = 1; found < result.length; key++) {
-            M3LongLongHashMap probe = new M3LongLongHashMap();
+            LongLongHashMap probe = new LongLongHashMap();
             probe.put(key, key);
             try {
-                var field = M3LongLongHashMap.class.getDeclaredField("states");
+                var field = LongLongHashMap.class.getDeclaredField("states");
                 field.setAccessible(true);
                 byte[] states = (byte[]) field.get(probe);
                 if (states[0] != 0) result[found++] = key;
@@ -169,8 +169,8 @@ final class M3LongLongHashMapAddToTest {
         return result;
     }
 
-    private static void assertEquivalentOwners(M3LongLongHashMap actual,
-            M3LongLongHashMap incumbent) {
+    private static void assertEquivalentOwners(LongLongHashMap actual,
+            LongLongHashMap incumbent) {
         assertEquals(incumbent.size(), actual.size());
         assertEquals(incumbent.capacity(), actual.capacity());
         assertArrayEquals(incumbent.keysToArray(), actual.keysToArray());
@@ -179,7 +179,7 @@ final class M3LongLongHashMapAddToTest {
         }
     }
 
-    private static void assertMatchesModel(M3LongLongHashMap actual, Map<Long, Long> expected) {
+    private static void assertMatchesModel(LongLongHashMap actual, Map<Long, Long> expected) {
         long[] keys = actual.keysToArray();
         Arrays.sort(keys);
         assertArrayEquals(expected.keySet().stream().mapToLong(Long::longValue).sorted().toArray(), keys);

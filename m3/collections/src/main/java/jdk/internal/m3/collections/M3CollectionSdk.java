@@ -34,15 +34,15 @@ import jdk.m3.collections.M3ArrayList;
 import jdk.m3.collections.M3Collections;
 import jdk.m3.collections.M3FilteredViews;
 import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3IndexedListSnapshot;
 import jdk.m3.collections.M3IndexedTable;
-import jdk.m3.collections.M3LongArrayList;
-import jdk.m3.collections.M3LongBag;
-import jdk.m3.collections.M3LongHashSet;
+import jdk.m3.collections.LongArrayList;
+import jdk.m3.collections.LongBag;
+import jdk.m3.collections.LongHashSet;
 import jdk.m3.collections.M3LongIndexProjection;
-import jdk.m3.collections.M3LongLongHashMap;
-import jdk.m3.collections.M3LongRangeSet;
+import jdk.m3.collections.LongLongHashMap;
+import jdk.m3.collections.range.LongRangeSet;
 import jdk.m3.collections.M3MutableFilteredViews;
 import jdk.m3.collections.M3TreeMap;
 import jdk.m3.collections.M3TreeSet;
@@ -133,19 +133,19 @@ public final class M3CollectionSdk {
     }
 
     /** Primitive positional storage with existing dynamic long[] owner. */
-    public static M3LongArrayList longArrayList() { return M3Collections.longArrayList(); }
+    public static LongArrayList longArrayList() { return M3Collections.longArrayList(); }
 
-    public static M3LongHashSet longHashSet() { return M3Collections.longHashSet(); }
+    public static LongHashSet longHashSet() { return M3Collections.longHashSet(); }
 
-    public static M3LongLongHashMap longLongHashMap() {
+    public static LongLongHashMap longLongHashMap() {
         return M3Collections.longLongHashMap();
     }
 
     /** M3 analogue of counted bags, not a Guava/Eclipse/Apache interface implementation. */
-    public static M3LongBag longBag() { return new M3LongBag(); }
+    public static LongBag longBag() { return new LongBag(); }
 
-    public static M3LongBag longBag(int expectedDistinct) {
-        return new M3LongBag(expectedDistinct);
+    public static LongBag longBag(int expectedDistinct) {
+        return new LongBag(expectedDistinct);
     }
 
     /** Live unmodifiable outer index with backed JDK subList partitions. */
@@ -190,7 +190,7 @@ public final class M3CollectionSdk {
     public static <E> M3IndexedListSnapshot<E> maskedSortedIndexedSnapshot(
             Collection<? extends E> source, int[][] physicalStates,
             int[] requiredMasks, int[] forbiddenMasks,
-            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
+            Comparator<? super E> comparator, IndexPathMasks.Backend backend) {
         return M3CollectionSdk.<E>indexedObjectSnapshot(source).sortedMaskedByPhysicalStates(
                 physicalStates, requiredMasks, forbiddenMasks, comparator, backend);
     }
@@ -203,8 +203,8 @@ public final class M3CollectionSdk {
     /** Explicit Java or required-native 32-bit staged mask selector: no predicate JNI callback. */
     public static int[] selectMaskedPath(int[] rows, int[] physicalOffsets,
             int[][] statePlanes, int[] required, int[] forbidden,
-            int first, int count, int stride, M3IndexPathMasks.Backend backend) {
-        return M3IndexPathMasks.select(rows, physicalOffsets, statePlanes,
+            int first, int count, int stride, IndexPathMasks.Backend backend) {
+        return IndexPathMasks.select(rows, physicalOffsets, statePlanes,
                 required, forbidden, first, count, stride, backend);
     }
     /** M3 dynamic Object[] list, distinct from the retained JDK ArrayList factory. */
@@ -223,7 +223,7 @@ public final class M3CollectionSdk {
     }
 
     /** M3 signed-long interval set over sorted parallel start/end arrays. */
-    public static M3LongRangeSet longRangeSet() {
-        return new M3LongRangeSet();
+    public static LongRangeSet longRangeSet() {
+        return new LongRangeSet();
     }
 }

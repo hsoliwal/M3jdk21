@@ -13,7 +13,7 @@ final class M3PrimitiveHashMultiMapValuesViewTest {
     @Test
     void missingViewIsLiveAndPreservesNewestFirstOwnerOrder() {
         M3PrimitiveHashMultiMap map =
-                new M3PrimitiveHashMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+                new M3PrimitiveHashMultiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         M3PrimitiveHashMultiMap.ValuesView view = map.valuesViewBits(7);
         assertTrue(view.isEmpty());
         assertFalse(map.containsKeyBits(7));
@@ -35,7 +35,7 @@ final class M3PrimitiveHashMultiMapValuesViewTest {
     @Test
     void multipleViewsStayLiveAcrossClearAndReadd() {
         M3PrimitiveHashMultiMap map =
-                new M3PrimitiveHashMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.LONG);
+                new M3PrimitiveHashMultiMap(PrimitiveKind.INT, PrimitiveKind.LONG);
         M3PrimitiveHashMultiMap.ValuesView first = map.valuesViewBits(5);
         M3PrimitiveHashMultiMap.ValuesView second = map.valuesViewBits(5);
         first.addBits(100L);
@@ -55,7 +55,7 @@ final class M3PrimitiveHashMultiMapValuesViewTest {
     void uniquePairModeKeepsSetLikeDuplicateSuppression() {
         M3PrimitiveHashMultiMap map =
                 new M3PrimitiveHashMultiMap(
-                        M3PrimitiveKind.INT, M3PrimitiveKind.INT, 4, true);
+                        PrimitiveKind.INT, PrimitiveKind.INT, 4, true);
         M3PrimitiveHashMultiMap.ValuesView view = map.valuesViewBits(1);
         assertTrue(view.addBits(9));
         assertFalse(view.addBits(9));
@@ -69,7 +69,7 @@ final class M3PrimitiveHashMultiMapValuesViewTest {
     @Test
     void viewsForDifferentKeysRemainIndependentAndBoundsAreChecked() {
         M3PrimitiveHashMultiMap map =
-                new M3PrimitiveHashMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+                new M3PrimitiveHashMultiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         M3PrimitiveHashMultiMap.ValuesView left = map.valuesViewBits(1);
         M3PrimitiveHashMultiMap.ValuesView right = map.valuesViewBits(2);
         left.addBits(10);

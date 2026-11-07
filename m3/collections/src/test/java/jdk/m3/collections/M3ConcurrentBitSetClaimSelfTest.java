@@ -26,6 +26,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import jdk.m3.collections.concurrent.ConcurrentBitSet;
 
 /** Java 21 standalone API/differential/concurrency oracle; no donor implementation code. */
 public final class M3ConcurrentBitSetClaimSelfTest {
@@ -46,7 +47,7 @@ public final class M3ConcurrentBitSetClaimSelfTest {
     }
 
     private static void ascendingAndReuse(int capacity) {
-        M3ConcurrentBitSet bits = new M3ConcurrentBitSet(capacity);
+        ConcurrentBitSet bits = new ConcurrentBitSet(capacity);
         check(bits.bitCapacity() == capacity, "capacity");
         for (int expected = 0; expected < capacity; expected++) {
             check(bits.claimFirstClearBit() == expected, "ascending claim at " + expected);
@@ -71,7 +72,7 @@ public final class M3ConcurrentBitSetClaimSelfTest {
     }
 
     private static void randomModel(int capacity) {
-        M3ConcurrentBitSet actual = new M3ConcurrentBitSet(capacity);
+        ConcurrentBitSet actual = new ConcurrentBitSet(capacity);
         BitSet model = new BitSet(capacity);
         Random random = new Random(0x4d33424cL + capacity);
         for (int op = 0; op < 500; op++) {
@@ -95,7 +96,7 @@ public final class M3ConcurrentBitSetClaimSelfTest {
     }
 
     private static void parallelClaims(int capacity, int workers) throws Exception {
-        M3ConcurrentBitSet bits = new M3ConcurrentBitSet(capacity);
+        ConcurrentBitSet bits = new ConcurrentBitSet(capacity);
         ExecutorService pool = Executors.newFixedThreadPool(workers);
         CountDownLatch start = new CountDownLatch(1);
         List<Future<List<Integer>>> results = new ArrayList<>();

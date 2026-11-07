@@ -52,7 +52,7 @@ public class M3TreeWindowScenarioTest {
 	}
 
 	private static long expanded () throws Exception {
-		Field field = Class.forName ("jdk.m3.collections.M3ItemState").getDeclaredField ("EXPANDED");
+		Field field = Class.forName ("jdk.m3.collections.ItemState").getDeclaredField ("EXPANDED");
 		field.setAccessible (true);
 		return field.getLong (null);
 	}

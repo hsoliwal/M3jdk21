@@ -45,13 +45,13 @@ public final class M3IndexMaskWindowSelfTest {
         assertWindows(new int[0], new byte[0], 0, 0, 1, nativeRun);
         int[] output = {CANARY, CANARY, CANARY};
         for (M3IndexMaskCompactor.Backend backend : backends(nativeRun)) {
-            long zero = M3IndexMaskWindow.scan(rows, states, 1, 0, 0, output, 1, 0, backend);
-            eq(M3IndexMaskWindow.nextIndex(zero), 1);
-            eq(M3IndexMaskWindow.written(zero), 0);
+            long zero = IndexMaskWindow.scan(rows, states, 1, 0, 0, output, 1, 0, backend);
+            eq(IndexMaskWindow.nextIndex(zero), 1);
+            eq(IndexMaskWindow.written(zero), 0);
             eq(output, CANARY, CANARY, CANARY);
-            long empty = M3IndexMaskWindow.scan(rows, states, rows.length, 0, 0, output, 1, 1, backend);
-            eq(M3IndexMaskWindow.nextIndex(empty), rows.length);
-            eq(M3IndexMaskWindow.written(empty), 0);
+            long empty = IndexMaskWindow.scan(rows, states, rows.length, 0, 0, output, 1, 1, backend);
+            eq(IndexMaskWindow.nextIndex(empty), rows.length);
+            eq(IndexMaskWindow.written(empty), 0);
             eq(output, CANARY, CANARY, CANARY);
         }
     }
@@ -127,15 +127,15 @@ public final class M3IndexMaskWindowSelfTest {
         for (M3IndexMaskCompactor.Backend backend : backends(nativeRun)) {
             Arrays.fill(selected, CANARY);
             long first = scan(source, states, 0, 1, 0, selected, 0, 2, backend);
-            eq(M3IndexMaskWindow.nextIndex(first), 2);
+            eq(IndexMaskWindow.nextIndex(first), 2);
             eq(selected[0], 10);
             eq(selected[1], 20);
             // Caller changes authoritative state only between scans; existing output is detached.
             states[2] = 0;
-            long next = scan(source, states, M3IndexMaskWindow.nextIndex(first),
+            long next = scan(source, states, IndexMaskWindow.nextIndex(first),
                     1, 0, selected, 2, 1, backend);
-            eq(M3IndexMaskWindow.nextIndex(next), 3);
-            eq(M3IndexMaskWindow.written(next), 0);
+            eq(IndexMaskWindow.nextIndex(next), 3);
+            eq(IndexMaskWindow.written(next), 0);
             eq(selected, 10, 20, CANARY);
             states[2] = 1;
         }
@@ -159,8 +159,8 @@ public final class M3IndexMaskWindowSelfTest {
                 Arrays.fill(output, CANARY);
                 long result = scan(rows, states, cursor, required, excluded,
                         output, 1, window, backend);
-                int next = M3IndexMaskWindow.nextIndex(result);
-                int written = M3IndexMaskWindow.written(result);
+                int next = IndexMaskWindow.nextIndex(result);
+                int written = IndexMaskWindow.written(result);
                 check(next > cursor && next <= rows.length);
                 check(written >= 0 && written <= window);
                 check(written <= next - cursor);
@@ -183,7 +183,7 @@ public final class M3IndexMaskWindowSelfTest {
     private static long scan(int[] rows, byte[] states, int first, int required,
             int excluded, int[] output, int offset, int limit,
             M3IndexMaskCompactor.Backend backend) {
-        return M3IndexMaskWindow.scan(rows, states, first, required, excluded,
+        return IndexMaskWindow.scan(rows, states, first, required, excluded,
                 output, offset, limit, backend);
     }
 

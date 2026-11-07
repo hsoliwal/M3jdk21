@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.collections.verification;
 
-import jdk.m3.collections.M3ObjectResidency;
+import jdk.m3.collections.ObjectResidency;
 
 /** Real small-Xmx LRU/recreation proof with canonical state retained in the parent. */
 public final class M3ResidencyPressureProbe {
@@ -22,9 +22,9 @@ public final class M3ResidencyPressureProbe {
     public static void main(String[] args) {
         long[] parentState = new long[SLOTS];
         int[] creations = new int[SLOTS];
-        int flags = M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.LRU
-                | M3ObjectResidency.PRESSURE_AWARE | M3ObjectResidency.RECREATE;
-        M3ObjectResidency<Projection> arena = new M3ObjectResidency<>(
+        int flags = ObjectResidency.LAZY_CREATE | ObjectResidency.LRU
+                | ObjectResidency.PRESSURE_AWARE | ObjectResidency.RECREATE;
+        ObjectResidency<Projection> arena = new ObjectResidency<>(
                 SLOTS, flags, Long.MAX_VALUE, 24L << 20,
                 slot -> {
                     creations[slot]++;
@@ -35,14 +35,14 @@ public final class M3ResidencyPressureProbe {
             long observed = arena.use(slot, ESTIMATED_PROJECTION_BYTES, Projection::incrementCanonicalState);
             if (observed != 1L) throw new AssertionError("first canonical mutation lost at slot " + slot);
         }
-        if (arena.state(0) != M3ObjectResidency.State.ABSENT) {
+        if (arena.state(0) != ObjectResidency.State.ABSENT) {
             throw new AssertionError("small-Xmx pressure did not evict the cold first projection");
         }
         long restored = arena.use(0, ESTIMATED_PROJECTION_BYTES, Projection::incrementCanonicalState);
         if (restored != 2L || creations[0] < 2) {
             throw new AssertionError("recreated projection did not observe parent-owned canonical state");
         }
-        M3ObjectResidency.HeapSnapshot heap = M3ObjectResidency.HeapSnapshot.current();
+        ObjectResidency.HeapSnapshot heap = ObjectResidency.HeapSnapshot.current();
         if (heap.maxBytes() <= 0 || heap.estimatedHeadroomBytes() < 0) {
             throw new AssertionError("invalid heap observation");
         }

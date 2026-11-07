@@ -36,17 +36,17 @@ public final class M3PrimitiveDirectShortMap {
         void accept(short key, long valueBits);
     }
 
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind valueKind;
     private final Object values;
     private final long[] present = new long[DOMAIN_SIZE >>> 6];
     private int size;
 
-    public M3PrimitiveDirectShortMap(M3PrimitiveKind valueKind) {
+    public M3PrimitiveDirectShortMap(PrimitiveKind valueKind) {
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         values = valueKind.newArray(DOMAIN_SIZE);
     }
 
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int keyCapacity() { return DOMAIN_SIZE; }

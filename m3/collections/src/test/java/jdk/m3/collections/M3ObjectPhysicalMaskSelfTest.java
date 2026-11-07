@@ -39,7 +39,7 @@ public final class M3ObjectPhysicalMaskSelfTest {
     }
 
     private static void projectedSortedAndSliced() {
-        M3ObjectSlotStore28<Item> owner = new M3ObjectSlotStore28<>();
+        ObjectSlotStore28<Item> owner = new ObjectSlotStore28<>();
         owner.add(new Item(2, "a"));
         long removed = owner.add(new Item(0, "removed"));
         owner.add(new Item(1, "b"));
@@ -47,7 +47,7 @@ public final class M3ObjectPhysicalMaskSelfTest {
         owner.add(new Item(2, "d"));
         owner.remove(removed); // Leave a physical-slot gap in the detached snapshot.
 
-        M3ObjectIndexSnapshot<Item> sorted =
+        ObjectIndexSnapshot<Item> sorted =
                 owner.snapshot().sorted(Comparator.comparingInt(Item::rank));
         equal(List.of("b", "c", "a", "d"),
                 sorted.stream().map(Item::label).toList(), "stable sorted path");
@@ -63,16 +63,16 @@ public final class M3ObjectPhysicalMaskSelfTest {
             };
         }
 
-        M3ObjectIndexSnapshot<Item> selection = sorted.filteredByPhysicalStatePlane(
+        ObjectIndexSnapshot<Item> selection = sorted.filteredByPhysicalStatePlane(
                 stateBySlot, 0x8000_0000, 0x0000_0002);
         equal(List.of("c", "a"), selection.stream().map(Item::label).toList(),
                 "mask accepts signed high bit in existing logical order");
-        check(selection.order() == M3ObjectIndexSnapshot.Order.COMPARATOR,
+        check(selection.order() == ObjectIndexSnapshot.Order.COMPARATOR,
                 "order identity preserved");
         equal(sorted.physicalSlotAt(1), selection.physicalSlotAt(0),
                 "logical ordinal maps to original physical slot");
 
-        M3ObjectIndexSnapshot<Item> slice = sorted.subList(1, 3);
+        ObjectIndexSnapshot<Item> slice = sorted.subList(1, 3);
         equal(List.of("c", "a"),
                 slice.filteredByPhysicalStatePlane(stateBySlot, 0x8000_0000, 2)
                         .stream().map(Item::label).toList(),
@@ -82,15 +82,15 @@ public final class M3ObjectPhysicalMaskSelfTest {
         equal(List.of("c", "a"), selection.stream().map(Item::label).toList(),
                 "external mutable state is not retained");
 
-        if (M3IndexPathMasks.nativeAvailable()) {
+        if (IndexPathMasks.nativeAvailable()) {
             for (int i = 0; i < sorted.size(); i++) {
                 stateBySlot[sorted.physicalSlotAt(i)] =
                         "a".equals(sorted.get(i).label()) || "c".equals(sorted.get(i).label())
                                 ? 0x8000_0001 : 0x0000_0002;
             }
-            M3ObjectIndexSnapshot<Item> nativeResult = sorted.filteredByPhysicalStatePlane(
+            ObjectIndexSnapshot<Item> nativeResult = sorted.filteredByPhysicalStatePlane(
                     stateBySlot, 0x8000_0000, 0x0000_0002,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                    IndexPathMasks.Backend.NATIVE_REQUIRED);
             equal(List.of("c", "a"), nativeResult.stream().map(Item::label).toList(),
                     "C/JNI signed-mask and row-order parity");
             check(Arrays.equals(selection.physicalSlots(), nativeResult.physicalSlots()),
@@ -98,21 +98,21 @@ public final class M3ObjectPhysicalMaskSelfTest {
         } else {
             refuse(UnsatisfiedLinkError.class,
                     () -> sorted.filteredByPhysicalStatePlane(
-                            stateBySlot, 0, 0, M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                            stateBySlot, 0, 0, IndexPathMasks.Backend.NATIVE_REQUIRED));
         }
 
         refuse(IndexOutOfBoundsException.class,
                 () -> sorted.filteredByPhysicalStatePlane(new int[0], 0, 0));
         refuse(IndexOutOfBoundsException.class,
-                () -> M3ObjectIndexSnapshot.<String>capture(
+                () -> ObjectIndexSnapshot.<String>capture(
                         new Object[] { "x" }, new int[] { -1 }, new byte[] { 0 })
                         .filteredByPhysicalStatePlane(new int[1], 0, 0));
         check(sorted.size() == 4, "failed selections do not mutate source");
     }
 
     private static void strictReadonlyEvenForNoOps() {
-        M3ObjectIndexSnapshot<String> empty =
-                new M3ObjectSlotStore28<String>().snapshot();
+        ObjectIndexSnapshot<String> empty =
+                new ObjectSlotStore28<String>().snapshot();
         equal(0, empty.size(), "empty snapshot");
         equal(0, empty.filteredByPhysicalStatePlane(new int[0], 0, 0).size(),
                 "empty zero-capacity state plane");
@@ -135,12 +135,12 @@ public final class M3ObjectPhysicalMaskSelfTest {
         if (!nativeRequired && args.length != 0) {
             throw new IllegalArgumentException("only optional --native supported");
         }
-        if (nativeRequired && !M3IndexPathMasks.nativeAvailable()) {
+        if (nativeRequired && !IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("native-required physical-state projection library missing");
         }
         projectedSortedAndSliced();
         strictReadonlyEvenForNoOps();
         System.out.println("PASS M3_OBJECT_PHYSICAL_MASK checks=" + checks
-                + " native=" + M3IndexPathMasks.nativeAvailable());
+                + " native=" + IndexPathMasks.nativeAvailable());
     }
 }

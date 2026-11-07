@@ -16,4 +16,11 @@
 module jdk.m3.collections {
     requires jdk.m3.arrays;
     exports jdk.m3.collections;
+    exports jdk.m3.collections.bits;
+    exports jdk.m3.collections.concurrent;
+    exports jdk.m3.collections.graph;
+    exports jdk.m3.collections.packed;
+    exports jdk.m3.collections.range;
+    exports jdk.m3.collections.sketch;
+    exports jdk.m3.collections.text;
 }

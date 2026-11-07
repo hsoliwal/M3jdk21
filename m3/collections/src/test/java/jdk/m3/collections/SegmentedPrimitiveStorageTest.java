@@ -71,10 +71,10 @@ final class SegmentedPrimitiveStorageTest {
 
     @Test
     void allocatorRejectsStaleHandlesAfterReuse() {
-        M3SlotAllocator28 allocator = new M3SlotAllocator28();
+        SlotAllocator28 allocator = new SlotAllocator28();
         long first = allocator.allocate();
-        int slot = M3SlotAllocator28.slot(first);
-        int generation = M3SlotAllocator28.generation(first);
+        int slot = SlotAllocator28.slot(first);
+        int generation = SlotAllocator28.generation(first);
         assertTrue(allocator.isLive(first));
 
         allocator.release(first);
@@ -83,8 +83,8 @@ final class SegmentedPrimitiveStorageTest {
             () -> allocator.requireLiveSlot(first));
 
         long second = allocator.allocate();
-        assertEquals(slot, M3SlotAllocator28.slot(second));
-        assertEquals(generation + 1, M3SlotAllocator28.generation(second));
+        assertEquals(slot, SlotAllocator28.slot(second));
+        assertEquals(generation + 1, SlotAllocator28.generation(second));
         assertNotEquals(first, second);
         assertTrue(allocator.isLive(second));
         assertEquals(1, allocator.highWaterMark());
@@ -128,8 +128,8 @@ final class SegmentedPrimitiveStorageTest {
         long fifteen = list.insertAfter(ten, 15);
         assertArrayEquals(new long[] {5, 10, 15, 30}, list.toArray());
         assertEquals(
-            M3SlotAllocator28.slot(twenty),
-            M3SlotAllocator28.slot(fifteen));
+            SlotAllocator28.slot(twenty),
+            SlotAllocator28.slot(fifteen));
         assertNotEquals(twenty, fifteen);
         assertThrows(IllegalStateException.class, () -> list.value(twenty));
 
@@ -173,8 +173,8 @@ final class SegmentedPrimitiveStorageTest {
 
         long reused = store.allocate2(4, 44);
         assertEquals(
-            M3SlotAllocator28.slot(b),
-            M3SlotAllocator28.slot(reused));
+            SlotAllocator28.slot(b),
+            SlotAllocator28.slot(reused));
         assertFalse(store.isLive(b));
         assertEquals(4, store.get(reused, 0));
         assertEquals(44, store.get(reused, 1));

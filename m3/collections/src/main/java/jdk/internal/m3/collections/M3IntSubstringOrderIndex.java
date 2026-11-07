@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3IntSuffixArray;
+import jdk.m3.collections.text.IntSuffixArray;
 
 /**
  * Distinct-substring order statistics over the canonical signed-int suffix-array snapshot.
@@ -25,13 +25,13 @@ import jdk.m3.collections.M3IntSuffixArray;
  * RELOCATE_M3_OWNER v4 (algorithms collections batch: identifiers and package only; bytecode equal to the source modulo names).
  */
 public final class M3IntSubstringOrderIndex {
-    private final M3IntSuffixArray suffixes;
+    private final IntSuffixArray suffixes;
     private final long[] cumulative;
 
-    public M3IntSubstringOrderIndex(int[] tokens) { this(new M3IntSuffixArray(tokens)); }
+    public M3IntSubstringOrderIndex(int[] tokens) { this(new IntSuffixArray(tokens)); }
 
     /** Reuses the same immutable owner; only the cumulative-count lane is added. */
-    public M3IntSubstringOrderIndex(M3IntSuffixArray suffixes) {
+    public M3IntSubstringOrderIndex(IntSuffixArray suffixes) {
         this.suffixes = Objects.requireNonNull(suffixes, "suffixes");
         cumulative = new long[Math.addExact(suffixes.length(), 1)];
         for (int rank = 0; rank < suffixes.length(); rank++) {
@@ -40,7 +40,7 @@ public final class M3IntSubstringOrderIndex {
         }
     }
 
-    public M3IntSuffixArray suffixArray() { return suffixes; }
+    public IntSuffixArray suffixArray() { return suffixes; }
     public int length() { return suffixes.length(); }
     public long distinctCount() { return cumulative[length()]; }
 

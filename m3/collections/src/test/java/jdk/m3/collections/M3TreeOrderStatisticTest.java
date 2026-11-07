@@ -52,7 +52,7 @@ public class M3TreeOrderStatisticTest {
 
 		static {
 			try {
-				Class<?> state = type ("jdk.m3.collections.M3ItemState"), topology = type ("jdk.m3.collections.M3TreeTopology");
+				Class<?> state = type ("jdk.m3.collections.ItemState"), topology = type ("jdk.m3.collections.M3TreeTopology");
 				Class<?> projection = type ("jdk.m3.collections.M3TreeProjection");
 				Class<?> row = type ("jdk.m3.collections.M3TreeProjection$Row");
 				Class<?> residency = type ("jdk.m3.collections.M3TreeProjection$Residency");

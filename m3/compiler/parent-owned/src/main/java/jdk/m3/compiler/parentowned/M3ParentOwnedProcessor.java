@@ -16,13 +16,13 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import javax.tools.StandardLocation;
-import jdk.m3.collections.M3ParentOwned;
+import jdk.m3.collections.ParentOwned;
 
 /**
  * Opt-in javac annotation processor. Emits deterministic, conservative sidecar
  * metadata. Neither static reference counts nor escape proofs are fabricated.
  */
-@SupportedAnnotationTypes("jdk.m3.collections.M3ParentOwned")
+@SupportedAnnotationTypes("jdk.m3.collections.ParentOwned")
 @SupportedSourceVersion(SourceVersion.RELEASE_21)
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/eaacff5931ef16a1a52425043bb71b821eda3515/synexia-primitives/src/main/java/com/synexia/primitives/M3ParentOwnedProcessor.java blob 9bb160d48a44; recipe m3/compiler/parent-owned/recipe/parent-owned-processor-20261107/relocate.py v1
 public final class M3ParentOwnedProcessor extends AbstractProcessor {
@@ -36,8 +36,8 @@ public final class M3ParentOwnedProcessor extends AbstractProcessor {
     @Override
     public boolean process(java.util.Set<? extends TypeElement> annotations,
                            RoundEnvironment round) {
-        for (Element element : round.getElementsAnnotatedWith(M3ParentOwned.class)) {
-            M3ParentOwned hint = element.getAnnotation(M3ParentOwned.class);
+        for (Element element : round.getElementsAnnotatedWith(ParentOwned.class)) {
+            ParentOwned hint = element.getAnnotation(ParentOwned.class);
             if (hint == null) continue;
             String id = identifier(element);
             String owner = hint.owner();

@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 
-/** Real M3PrimitiveBigArray copyTo differential checks for bounded sparse visitation. */
+/** Real BigArray copyTo differential checks for bounded sparse visitation. */
 final class M3SparseCopyRangeTest {
     private static final int SHIFT = 10;
     private static final long LENGTH = 1L << 17;
 
-    private static long bits(M3PrimitiveKind kind, int n) {
+    private static long bits(PrimitiveKind kind, int n) {
         return switch (kind) {
             case BOOLEAN -> n % 3 == 0 ? 0L : 1L;
             case BYTE, SHORT, CHAR, INT, LONG -> n == 0 ? 0L : 0x5dd5L + (long) n * 31;
@@ -38,9 +38,9 @@ final class M3SparseCopyRangeTest {
 
     @Test
     void sparseToSparseCopiesExactlyTheOriginalSourceWindowInEveryPrimitiveKind() {
-        for (M3PrimitiveKind kind : M3PrimitiveKind.values()) {
-            M3PrimitiveBigArray source = M3PrimitiveBigArray.sparse(kind, LENGTH, SHIFT);
-            M3PrimitiveBigArray target = M3PrimitiveBigArray.sparse(kind, LENGTH, SHIFT);
+        for (PrimitiveKind kind : PrimitiveKind.values()) {
+            BigArray source = BigArray.sparse(kind, LENGTH, SHIFT);
+            BigArray target = BigArray.sparse(kind, LENGTH, SHIFT);
             Random random = new Random(0x4d33535041525345L + kind.ordinal());
             for (int i = 0; i < 280; i++) {
                 source.setBits(random.nextInt((int) LENGTH), bits(kind, i + 1));
@@ -71,9 +71,9 @@ final class M3SparseCopyRangeTest {
 
     @Test
     void sparseToDenseRetainsZeroHolesAndRawFloatingPointPayloads() {
-        for (M3PrimitiveKind kind : M3PrimitiveKind.values()) {
-            M3PrimitiveBigArray source = M3PrimitiveBigArray.sparse(kind, 1L << 15, SHIFT);
-            M3PrimitiveBigArray target = new M3PrimitiveBigArray(kind, 1L << 15, SHIFT);
+        for (PrimitiveKind kind : PrimitiveKind.values()) {
+            BigArray source = BigArray.sparse(kind, 1L << 15, SHIFT);
+            BigArray target = new BigArray(kind, 1L << 15, SHIFT);
             source.setBits(1020, bits(kind, 3));
             source.setBits(2050, bits(kind, 2));
             source.setBits(4109, bits(kind, 7));
@@ -91,10 +91,10 @@ final class M3SparseCopyRangeTest {
 
     @Test
     void boundedCopyPreservesExtremeLongCoordinatesAndUnrelatedPages() {
-        M3PrimitiveBigArray source = M3PrimitiveBigArray.sparse(
-                M3PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
-        M3PrimitiveBigArray target = M3PrimitiveBigArray.sparse(
-                M3PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
+        BigArray source = BigArray.sparse(
+                PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
+        BigArray target = BigArray.sparse(
+                PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
         source.setBits(1, 17L);
         source.setBits(1L << 42, 29L);
         source.setBits(Long.MAX_VALUE - 1L, 73L);
@@ -117,8 +117,8 @@ final class M3SparseCopyRangeTest {
 
     @Test
     void stagingForOverlappingSparseMemmoveMatchesIndependentSnapshot() {
-        M3PrimitiveBigArray array = M3PrimitiveBigArray.sparse(
-                M3PrimitiveKind.LONG, 1L << 16, SHIFT);
+        BigArray array = BigArray.sparse(
+                PrimitiveKind.LONG, 1L << 16, SHIFT);
         for (int i : new int[] {1000, 1023, 1024, 2048, 3072, 4095, 5010, 7999}) {
             array.setBits(i, i + 100);
         }
@@ -140,7 +140,7 @@ final class M3SparseCopyRangeTest {
     @Test
     void boundedTraversalMatchesOriginalResidentLeafIdentityAndOrder() {
         M3LazyPrimitiveAddressSpace owner = M3LazyPrimitiveAddressSpace.paged(
-                M3PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
+                PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
         long[] positions = {0L, 1024L, 1L << 31, 1L << 42,
                 Long.MAX_VALUE - 2049, Long.MAX_VALUE - 1};
         for (int i = 0; i < positions.length; i++) owner.setBits(positions[i], i + 1);
@@ -165,10 +165,10 @@ final class M3SparseCopyRangeTest {
 
     @Test
     void invalidRangesAndKindsRefuseBeforeModifyingTheTarget() {
-        M3PrimitiveBigArray source = M3PrimitiveBigArray.sparse(
-                M3PrimitiveKind.LONG, 1L << 15, SHIFT);
-        M3PrimitiveBigArray target = M3PrimitiveBigArray.sparse(
-                M3PrimitiveKind.LONG, 1L << 15, SHIFT);
+        BigArray source = BigArray.sparse(
+                PrimitiveKind.LONG, 1L << 15, SHIFT);
+        BigArray target = BigArray.sparse(
+                PrimitiveKind.LONG, 1L << 15, SHIFT);
         target.setBits(17L, 99L);
         assertThrows(IndexOutOfBoundsException.class,
                 () -> source.copyTo(-1L, target, 10L, 1L));
@@ -177,8 +177,8 @@ final class M3SparseCopyRangeTest {
         assertThrows(ArithmeticException.class,
                 () -> source.copyTo(Long.MAX_VALUE, target, 0L, 2L));
         assertThrows(IllegalArgumentException.class,
-                () -> source.copyTo(0L, M3PrimitiveBigArray.sparse(
-                        M3PrimitiveKind.INT, 1L << 15, SHIFT), 0L, 1L));
+                () -> source.copyTo(0L, BigArray.sparse(
+                        PrimitiveKind.INT, 1L << 15, SHIFT), 0L, 1L));
         assertEquals(99L, target.getBits(17L));
     }
 }

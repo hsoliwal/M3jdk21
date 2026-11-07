@@ -11,7 +11,7 @@ import java.util.function.LongPredicate;
  * Primitive, live, backed sorted-set wrappers. Does not copy keys or own their payloads.
  *
  * <p>These wrappers use natural signed-long order, preserve the existing
- * {@link M3LongSortedSet} contract and do not implement JDK {@code NavigableSet}.
+ * {@link LongSortedSet} contract and do not implement JDK {@code NavigableSet}.
  * Predicates must be stable for a value during each operation. Neither the backing set
  * nor the predicate may be mutated from a predicate/iteration callback. No wrapper is
  * thread-safe unless the backing set separately guarantees the needed synchronization.
@@ -26,12 +26,12 @@ public final class M3LongSortedViews {
     private M3LongSortedViews() { }
 
     /** Original read-only primitive collection filtering remains the single generic owner. */
-    public static M3LongFilteredView filter(M3LongCollection source, LongPredicate predicate) {
+    public static M3LongFilteredView filter(LongCollection source, LongPredicate predicate) {
         return new M3LongFilteredView(source, predicate);
     }
 
     /** Live, mutable filtered set; excluded keys are invisible but stay in the backing set. */
-    public static M3LongSortedSet filter(M3LongSortedSet source, LongPredicate predicate) {
+    public static LongSortedSet filter(LongSortedSet source, LongPredicate predicate) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(predicate, "predicate");
         if (source instanceof Filtered previous) {
@@ -42,7 +42,7 @@ public final class M3LongSortedViews {
     }
 
     /** Live view of [fromInclusive, toExclusive); the equal-endpoint view is empty. */
-    public static M3LongSortedSet subSet(M3LongSortedSet source, long fromInclusive, long toExclusive) {
+    public static LongSortedSet subSet(LongSortedSet source, long fromInclusive, long toExclusive) {
         Objects.requireNonNull(source, "source");
         if (fromInclusive > toExclusive) {
             throw new IllegalArgumentException("fromInclusive > toExclusive");
@@ -51,17 +51,17 @@ public final class M3LongSortedViews {
     }
 
     /** Live view of keys strictly below {@code toExclusive}. */
-    public static M3LongSortedSet headSet(M3LongSortedSet source, long toExclusive) {
+    public static LongSortedSet headSet(LongSortedSet source, long toExclusive) {
         return filter(source, v -> v < toExclusive);
     }
 
     /** Live view of keys at or above {@code fromInclusive}. */
-    public static M3LongSortedSet tailSet(M3LongSortedSet source, long fromInclusive) {
+    public static LongSortedSet tailSet(LongSortedSet source, long fromInclusive) {
         return filter(source, v -> v >= fromInclusive);
     }
 
     /** Live read-only wrapper. Every mutation method refuses, including no-op mutations. */
-    public static M3LongSortedSet unmodifiable(M3LongSortedSet source) {
+    public static LongSortedSet unmodifiable(LongSortedSet source) {
         Objects.requireNonNull(source, "source");
         return source instanceof Unmodifiable ? source : new Unmodifiable(source);
     }
@@ -84,7 +84,7 @@ public final class M3LongSortedViews {
      *
      * @return the number of longs emitted into the caller's existing lane
      */
-    public static int copyPage(M3LongSortedSet source, int skip, int limit,
+    public static int copyPage(LongSortedSet source, int skip, int limit,
             long[] destination, int destinationOffset) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(destination, "destination");
@@ -92,7 +92,7 @@ public final class M3LongSortedViews {
             throw new IndexOutOfBoundsException("negative sorted page coordinate");
         Objects.checkFromIndexSize(destinationOffset, limit, destination.length);
         if (limit == 0) return 0;
-        M3LongIterator iterator = source.iterator();
+        LongIterator iterator = source.iterator();
         int omitted = 0;
         while (omitted < skip && iterator.hasNext()) {
             iterator.nextLong();
@@ -111,9 +111,9 @@ public final class M3LongSortedViews {
      * queries remain allocation-free and do not call the backing collection.
      * The source owns post-binding interference/fail-fast behavior.
      */
-    private static Spliterator.OfLong sortedCursor(M3LongCollection source) {
+    private static Spliterator.OfLong sortedCursor(LongCollection source) {
         return new Spliterator.OfLong() {
-            private M3LongIterator cursor;
+            private LongIterator cursor;
             @Override public boolean tryAdvance(LongConsumer action) {
                 Objects.requireNonNull(action, "action");
                 if (cursor == null) cursor = source.iterator();
@@ -128,12 +128,12 @@ public final class M3LongSortedViews {
         };
     }
 
-    private static final class Filtered implements M3LongSortedSet {
-        private final M3LongSortedSet source;
+    private static final class Filtered implements LongSortedSet {
+        private final LongSortedSet source;
         private final LongPredicate predicate;
         private final M3LongFilteredView selection;
 
-        private Filtered(M3LongSortedSet source, LongPredicate predicate) {
+        private Filtered(LongSortedSet source, LongPredicate predicate) {
             this.source = source;
             this.predicate = predicate;
             this.selection = new M3LongFilteredView(source, predicate);
@@ -143,7 +143,7 @@ public final class M3LongSortedViews {
         @Override public boolean isEmpty() { return selection.isEmpty(); }
         @Override public boolean contains(long value) { return selection.contains(value); }
         @Override public long[] toArray() { return selection.toArray(); }
-        @Override public M3LongIterator iterator() { return selection.iterator(); }
+        @Override public LongIterator iterator() { return selection.iterator(); }
         @Override public Spliterator.OfLong longSpliterator() { return sortedCursor(this); }
 
         @Override public boolean add(long value) {
@@ -215,15 +215,15 @@ public final class M3LongSortedViews {
         }
     }
 
-    private static final class Unmodifiable implements M3LongSortedSet {
-        private final M3LongSortedSet source;
+    private static final class Unmodifiable implements LongSortedSet {
+        private final LongSortedSet source;
 
-        private Unmodifiable(M3LongSortedSet source) { this.source = source; }
+        private Unmodifiable(LongSortedSet source) { this.source = source; }
         @Override public int size() { return source.size(); }
         @Override public boolean isEmpty() { return source.isEmpty(); }
         @Override public boolean contains(long value) { return source.contains(value); }
         @Override public long[] toArray() { return source.toArray(); }
-        @Override public M3LongIterator iterator() { return source.iterator(); }
+        @Override public LongIterator iterator() { return source.iterator(); }
         @Override public Spliterator.OfLong longSpliterator() { return sortedCursor(this); }
         @Override public long first() { return source.first(); }
         @Override public long last() { return source.last(); }

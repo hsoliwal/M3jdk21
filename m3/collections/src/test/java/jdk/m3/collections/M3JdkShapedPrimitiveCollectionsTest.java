@@ -20,7 +20,7 @@ final class M3JdkShapedPrimitiveCollectionsTest {
     @Test
     void arrayListMatchesJdkAcrossDeterministicMutationSequence() {
         Random random = new Random(0x4d334c495354L);
-        M3LongArrayList actual = new M3LongArrayList();
+        LongArrayList actual = new LongArrayList();
         ArrayList<Long> expected = new ArrayList<>();
 
         for (int step = 0; step < 10_000; step++) {
@@ -56,7 +56,7 @@ final class M3JdkShapedPrimitiveCollectionsTest {
     @Test
     void hashSetMatchesJdkAcrossCollisionsDeletionAndRehash() {
         Random random = new Random(0x4d33534554L);
-        M3LongHashSet actual = new M3LongHashSet();
+        LongHashSet actual = new LongHashSet();
         HashSet<Long> expected = new HashSet<>();
 
         for (int step = 0; step < 30_000; step++) {
@@ -80,7 +80,7 @@ final class M3JdkShapedPrimitiveCollectionsTest {
     @Test
     void hashMapMatchesJdkAcrossReplacementDeletionAndRehash() {
         Random random = new Random(0x4d334d4150L);
-        M3LongLongHashMap actual = new M3LongLongHashMap();
+        LongLongHashMap actual = new LongLongHashMap();
         HashMap<Long, Long> expected = new HashMap<>();
         long missing = 0x5aa55aa55aa55aa5L;
 
@@ -121,7 +121,7 @@ final class M3JdkShapedPrimitiveCollectionsTest {
     @Test
     void arrayDequeMatchesJdkOrderAndOccurrenceRemoval() {
         Random random = new Random(0x4d334445515545L);
-        M3LongArrayDeque actual = new M3LongArrayDeque();
+        LongArrayDeque actual = new LongArrayDeque();
         ArrayDeque<Long> expected = new ArrayDeque<>();
 
         for (int step = 0; step < 20_000; step++) {
@@ -159,7 +159,7 @@ final class M3JdkShapedPrimitiveCollectionsTest {
     @Test
     void priorityQueueMatchesJdkHeadContentsAndRemoval() {
         Random random = new Random(0x4d335051L);
-        M3LongPriorityQueue actual = new M3LongPriorityQueue();
+        LongPriorityQueue actual = new LongPriorityQueue();
         PriorityQueue<Long> expected = new PriorityQueue<>();
 
         for (int step = 0; step < 20_000; step++) {
@@ -192,16 +192,16 @@ final class M3JdkShapedPrimitiveCollectionsTest {
 
     @Test
     void duplicateSetAddAndMapValueReplacementAreNonStructural() {
-        M3LongHashSet set = new M3LongHashSet();
+        LongHashSet set = new LongHashSet();
         set.add(7);
-        M3LongIterator setIterator = set.iterator();
+        LongIterator setIterator = set.iterator();
         assertFalse(set.add(7));
         assertTrue(setIterator.hasNext());
         assertEquals(7L, setIterator.nextLong());
 
-        M3LongLongHashMap map = new M3LongLongHashMap();
+        LongLongHashMap map = new LongLongHashMap();
         map.put(7, 11);
-        M3LongIterator keyIterator = map.keyIterator();
+        LongIterator keyIterator = map.keyIterator();
         assertFalse(map.put(7, 13));
         assertTrue(keyIterator.hasNext());
         assertEquals(7L, keyIterator.nextLong());
@@ -210,33 +210,33 @@ final class M3JdkShapedPrimitiveCollectionsTest {
 
     @Test
     void iteratorsAreFailFastOnStructuralMutation() {
-        M3LongArrayList list = new M3LongArrayList();
+        LongArrayList list = new LongArrayList();
         list.add(1);
-        M3LongIterator listIterator = list.iterator();
+        LongIterator listIterator = list.iterator();
         list.add(2);
         assertThrows(java.util.ConcurrentModificationException.class, listIterator::hasNext);
 
-        M3LongHashSet set = new M3LongHashSet();
+        LongHashSet set = new LongHashSet();
         set.add(1);
-        M3LongIterator setIterator = set.iterator();
+        LongIterator setIterator = set.iterator();
         set.add(2);
         assertThrows(java.util.ConcurrentModificationException.class, setIterator::nextLong);
 
-        M3LongArrayDeque deque = new M3LongArrayDeque();
+        LongArrayDeque deque = new LongArrayDeque();
         deque.addLast(1);
-        M3LongIterator dequeIterator = deque.iterator();
+        LongIterator dequeIterator = deque.iterator();
         deque.addFirst(2);
         assertThrows(java.util.ConcurrentModificationException.class, dequeIterator::hasNext);
 
-        M3LongPriorityQueue queue = new M3LongPriorityQueue();
+        LongPriorityQueue queue = new LongPriorityQueue();
         queue.add(1);
-        M3LongIterator queueIterator = queue.iterator();
+        LongIterator queueIterator = queue.iterator();
         queue.add(0);
         assertThrows(java.util.ConcurrentModificationException.class, queueIterator::nextLong);
 
-        M3LongLongHashMap map = new M3LongLongHashMap();
+        LongLongHashMap map = new LongLongHashMap();
         map.put(1, 1);
-        M3LongIterator keyIterator = map.keyIterator();
+        LongIterator keyIterator = map.keyIterator();
         map.put(2, 2);
         assertThrows(java.util.ConcurrentModificationException.class, keyIterator::hasNext);
     }

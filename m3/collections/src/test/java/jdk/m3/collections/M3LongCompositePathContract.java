@@ -37,11 +37,11 @@ public final class M3LongCompositePathContract {
         }
     }
     private static void deep() {
-        M3LongCollection nested = M3LongCompositeViews.concat();
+        LongCollection nested = M3LongCompositeViews.concat();
         final int depth = 16_384;
         for (int i = 0; i < depth; i++) {
             nested = M3LongCompositeViews.concat(
-                    nested, M3LongArrayList.copyOf(new long[] {i}));
+                    nested, LongArrayList.copyOf(new long[] {i}));
         }
         require(nested.size() == depth && !nested.isEmpty(), "deep composed size");
         require(nested.contains(0) && nested.contains(depth / 2)
@@ -49,7 +49,7 @@ public final class M3LongCompositePathContract {
         long[] output = nested.toArray();
         require(output.length == depth, "deep export size");
         for (int i = 0; i < depth; i++) require(output[i] == i, "deep occurrence order");
-        M3LongIterator cursor = nested.iterator();
+        LongIterator cursor = nested.iterator();
         for (int i = 0; i < depth; i++) {
             require(cursor.hasNext() && cursor.hasNext(), "idempotent deep hasNext");
             require(cursor.nextLong() == i, "deep next");
@@ -58,16 +58,16 @@ public final class M3LongCompositePathContract {
         try { cursor.nextLong(); throw new AssertionError("exhausted next permitted"); }
         catch (NoSuchElementException expected) { checks++; }
 
-        M3LongCollection empty = M3LongCompositeViews.concat();
+        LongCollection empty = M3LongCompositeViews.concat();
         for (int i = 0; i < depth; i++) empty = M3LongCompositeViews.concat(empty);
         require(empty.size() == 0 && empty.isEmpty(), "nested empty subpaths");
         require(!empty.iterator().hasNext() && empty.toArray().length == 0, "empty cursor/export");
     }
     private static void liveLateBinding() {
-        M3LongArrayList a = M3LongArrayList.copyOf(new long[] {1, 3});
-        M3LongArrayList b = M3LongArrayList.copyOf(new long[] {4});
-        M3LongArrayList c = M3LongArrayList.copyOf(new long[] {4, 8});
-        M3LongCollection path = M3LongCompositeViews.concat(
+        LongArrayList a = LongArrayList.copyOf(new long[] {1, 3});
+        LongArrayList b = LongArrayList.copyOf(new long[] {4});
+        LongArrayList c = LongArrayList.copyOf(new long[] {4, 8});
+        LongCollection path = M3LongCompositeViews.concat(
                 M3LongCompositeViews.concat(a, M3LongCompositeViews.concat(b)),
                 M3LongCompositeViews.concat(M3LongCompositeViews.concat(), c));
         Spliterator.OfLong unbound = path.longSpliterator();
@@ -77,7 +77,7 @@ public final class M3LongCompositePathContract {
         c.add(9);
         equal(StreamSupport.longStream(unbound, false).toArray(), 1, 3, 0, 4, 4, 8, 9);
         require(path.contains(4) && !path.contains(99) && path.size() == 7, "live views");
-        M3LongIterator late = path.iterator();
+        LongIterator late = path.iterator();
         b.add(5); // leaf iterator cannot have been opened by path.iterator()
         equal(path.toArray(), 1, 3, 0, 4, 5, 4, 8, 9);
         long[] received = new long[8];
@@ -92,13 +92,13 @@ public final class M3LongCompositePathContract {
     private static void random() {
         Random r = new Random(0x4d33504154483431L);
         for (int trial = 0; trial < 360; trial++) {
-            M3LongCollection path = M3LongCompositeViews.concat();
+            LongCollection path = M3LongCompositeViews.concat();
             long[] expected = new long[0];
             int n = r.nextInt(40);
             for (int i = 0; i < n; i++) {
                 long[] leaf = new long[r.nextInt(4)];
                 for (int j = 0; j < leaf.length; j++) leaf[j] = r.nextInt(11) - 5;
-                M3LongCollection piece = M3LongArrayList.copyOf(leaf);
+                LongCollection piece = LongArrayList.copyOf(leaf);
                 path = (i & 1) == 0 ? M3LongCompositeViews.concat(path, piece)
                         : M3LongCompositeViews.concat(M3LongCompositeViews.concat(path),
                                 M3LongCompositeViews.concat(piece));

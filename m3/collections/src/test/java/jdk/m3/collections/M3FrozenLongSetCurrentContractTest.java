@@ -20,8 +20,8 @@ final class M3FrozenLongSetCurrentContractTest {
     @Test
     void keepsTheOriginalScaffoldDescriptorWhileReceivingFunctionalBehavior() {
         assertEquals("M3FrozenLongSet|FROZEN_LONG_SET|LONG|FROZEN|long[] valueLane",
-                M3FrozenLongSet.scaffoldDescriptor());
-        M3FrozenLongSet empty = new M3FrozenLongSet();
+                FrozenLongSet.scaffoldDescriptor());
+        FrozenLongSet empty = new FrozenLongSet();
         assertTrue(empty.isEmpty());
         assertEquals(0, empty.size());
         assertThrows(NoSuchElementException.class, empty::first);
@@ -46,7 +46,7 @@ final class M3FrozenLongSetCurrentContractTest {
                         : random.nextLong();
             }
             long[] saved = input.clone();
-            M3FrozenLongSet set = M3FrozenLongSet.copyOf(input);
+            FrozenLongSet set = FrozenLongSet.copyOf(input);
             assertArrayEquals(saved, input, "caller lane must remain unchanged");
             TreeSet<Long> oracle = new TreeSet<>();
             for (long value : input) oracle.add(value);

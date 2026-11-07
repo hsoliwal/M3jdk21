@@ -15,12 +15,13 @@ import java.util.BitSet;
 import java.util.ConcurrentModificationException;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.range.LongRangeSet;
 
 /** Real owner tests: interval lower-bound, unsigned count, Java/JNI mask parity. */
 final class M3LongRangeSetAtomTest {
     @Test
     void binaryLowerBoundRetainsHalfOpenRemovalContracts() {
-        M3LongRangeSet set = new M3LongRangeSet();
+        LongRangeSet set = new LongRangeSet();
         BitSet oracle = new BitSet(256);
         Random random = new Random(0x4d3352414e4745L);
         for (int i = 0; i < 24000; i++) {
@@ -53,7 +54,7 @@ final class M3LongRangeSetAtomTest {
 
     @Test
     void unsignedAccumulationKeepsExactBigIntegerContracts() {
-        M3LongRangeSet set = new M3LongRangeSet();
+        LongRangeSet set = new LongRangeSet();
         assertEquals(BigInteger.ZERO, set.cardinality());
         set.add(Long.MIN_VALUE, Long.MAX_VALUE);
         assertEquals(BigInteger.ONE.shiftLeft(64).subtract(BigInteger.ONE), set.cardinality());
@@ -75,7 +76,7 @@ final class M3LongRangeSetAtomTest {
 
     @Test
     void directJavaMaskCompactionMatchesNativeWhenPresent() {
-        M3LongRangeSet set = new M3LongRangeSet();
+        LongRangeSet set = new LongRangeSet();
         for (int i = 0; i < 4096; i++) set.add(3L * i, 3L * i + 1);
         int[] states = new int[set.rangeCount()];
         Random random = new Random(0x5e1ec7);
@@ -87,8 +88,8 @@ final class M3LongRangeSetAtomTest {
             for (int state : states) {
                 if ((state & mask[0]) == mask[0] && (state & mask[1]) == 0) count++;
             }
-            M3LongRangeSet javaResult = set.selectedByState(states, mask[0], mask[1],
-                    M3IndexPathMasks.Backend.JAVA);
+            LongRangeSet javaResult = set.selectedByState(states, mask[0], mask[1],
+                    IndexPathMasks.Backend.JAVA);
             assertEquals(count, javaResult.rangeCount());
             int written = 0;
             long[] starts = javaResult.startsToArray();
@@ -99,19 +100,19 @@ final class M3LongRangeSetAtomTest {
                     assertEquals(3L * i + 1, ends[written++]);
                 }
             }
-            if (M3IndexPathMasks.nativeAvailable()) {
-                M3LongRangeSet nativeResult = set.selectedByState(states, mask[0], mask[1],
-                        M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+            if (IndexPathMasks.nativeAvailable()) {
+                LongRangeSet nativeResult = set.selectedByState(states, mask[0], mask[1],
+                        IndexPathMasks.Backend.NATIVE_REQUIRED);
                 assertArrayEquals(starts, nativeResult.startsToArray());
                 assertArrayEquals(ends, nativeResult.endsToArray());
             } else {
                 assertThrows(UnsatisfiedLinkError.class, () -> set.selectedByState(
-                        states, mask[0], mask[1], M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                        states, mask[0], mask[1], IndexPathMasks.Backend.NATIVE_REQUIRED));
             }
         }
         assertEquals(4096, set.rangeCount(), "selection must be detached");
         assertThrows(IllegalArgumentException.class, () -> set.selectedByState(
-                new int[0], 0, 0, M3IndexPathMasks.Backend.JAVA));
+                new int[0], 0, 0, IndexPathMasks.Backend.JAVA));
         assertThrows(ConcurrentModificationException.class, () -> set.forEachRange(
                 (start, end) -> set.remove(start, end)));
     }

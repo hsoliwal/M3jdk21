@@ -13,7 +13,7 @@ final class M3PrimitiveSortedMultiMapValuesViewTest {
     @Test
     void missingKeyReturnsEmptyLiveViewAndAppendOrderIsPreserved() {
         M3PrimitiveSortedMultiMap map =
-                new M3PrimitiveSortedMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+                new M3PrimitiveSortedMultiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         M3PrimitiveSortedMultiMap.ValuesView view = map.valuesViewBits(7);
         assertTrue(view.isEmpty());
         assertFalse(map.containsKeyBits(7));
@@ -34,7 +34,7 @@ final class M3PrimitiveSortedMultiMapValuesViewTest {
     @Test
     void viewMutationIsVisibleToOwnerAndOwnerMutationIsVisibleToView() {
         M3PrimitiveSortedMultiMap map =
-                new M3PrimitiveSortedMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.LONG);
+                new M3PrimitiveSortedMultiMap(PrimitiveKind.INT, PrimitiveKind.LONG);
         M3PrimitiveSortedMultiMap.ValuesView first = map.valuesViewBits(5);
         M3PrimitiveSortedMultiMap.ValuesView second = map.valuesViewBits(5);
         first.addBits(100L);
@@ -56,7 +56,7 @@ final class M3PrimitiveSortedMultiMapValuesViewTest {
     @Test
     void uniquePairModeKeepsSetLikeDuplicateSuppressionThroughView() {
         M3PrimitiveSortedMultiMap map =
-                new M3PrimitiveSortedMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT, 2, true);
+                new M3PrimitiveSortedMultiMap(PrimitiveKind.INT, PrimitiveKind.INT, 2, true);
         M3PrimitiveSortedMultiMap.ValuesView view = map.valuesViewBits(1);
         assertTrue(view.addBits(9));
         assertFalse(view.addBits(9));
@@ -67,7 +67,7 @@ final class M3PrimitiveSortedMultiMapValuesViewTest {
     @Test
     void differentKeysRemainIsolatedAndBoundsAreCheckedLive() {
         M3PrimitiveSortedMultiMap map =
-                new M3PrimitiveSortedMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+                new M3PrimitiveSortedMultiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         M3PrimitiveSortedMultiMap.ValuesView left = map.valuesViewBits(1);
         M3PrimitiveSortedMultiMap.ValuesView right = map.valuesViewBits(2);
         left.addBits(10);

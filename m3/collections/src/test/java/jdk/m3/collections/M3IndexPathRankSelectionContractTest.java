@@ -33,10 +33,10 @@ final class M3IndexPathRankSelectionContractTest {
         return offsets;
     }
 
-    private static M3IndexPathRank sparse(int[] rows, int[] acceptedOrdinals) {
+    private static IndexPathRank sparse(int[] rows, int[] acceptedOrdinals) {
         int[] states = new int[rows.length];
         for (int ordinal : acceptedOrdinals) states[ordinal] = 1;
-        return M3IndexPathRank.snapshot(rows, identity(rows.length), new int[][] {states},
+        return IndexPathRank.snapshot(rows, identity(rows.length), new int[][] {states},
                 new int[] {1}, new int[] {0}, 0, rows.length, 1);
     }
 
@@ -46,7 +46,7 @@ final class M3IndexPathRankSelectionContractTest {
         return result;
     }
 
-    private static void check(M3IndexPathRank actual, int[] capturedRows, int[] acceptedOrdinals) {
+    private static void check(IndexPathRank actual, int[] capturedRows, int[] acceptedOrdinals) {
         assertEquals(capturedRows.length, actual.sourceSize());
         assertEquals(acceptedOrdinals.length, actual.size());
         int before = 0;
@@ -75,7 +75,7 @@ final class M3IndexPathRankSelectionContractTest {
         assertThrows(IndexOutOfBoundsException.class, () -> actual.rank(capturedRows.length + 1));
     }
 
-    private static void checkWindow(M3IndexPathRank.Window actual, int[] capturedRows,
+    private static void checkWindow(IndexPathRank.Window actual, int[] capturedRows,
             int[] acceptedOrdinals, int from, int to) {
         List<Integer> selected = new ArrayList<>();
         for (int ordinal : acceptedOrdinals) if (ordinal >= from && ordinal < to) selected.add(ordinal);
@@ -134,12 +134,12 @@ final class M3IndexPathRankSelectionContractTest {
     @Test void nestedSourceWindowsTranslateSelectedRanksAcrossEmptyWords() {
         int[] capturedRows = rows(641);
         int[] accepted = {0, 63, 64, 65, 128, 191, 320, 383, 511, 576};
-        M3IndexPathRank snapshot = sparse(capturedRows, accepted);
+        IndexPathRank snapshot = sparse(capturedRows, accepted);
         for (int[] range : new int[][] {{0, 641}, {63, 577}, {64, 512}, {65, 576},
                 {129, 384}, {192, 320}, {319, 384}, {576, 641}, {641, 641}}) {
             int from = range[0];
             int to = range[1];
-            M3IndexPathRank.Window window = snapshot.window(from, to);
+            IndexPathRank.Window window = snapshot.window(from, to);
             checkWindow(window, capturedRows, accepted, from, to);
             int trim = Math.min(1, to - from);
             checkWindow(window.window(trim, to - from), capturedRows, accepted, from + trim, to);
@@ -166,7 +166,7 @@ final class M3IndexPathRankSelectionContractTest {
         for (int ordinal : accepted) planes[0][offsets[first + ordinal * stride]] = Integer.MIN_VALUE;
         // A matching required bit must still lose to a forbidden bit.
         planes[0][offsets[first + 10 * stride]] = Integer.MIN_VALUE | 2;
-        M3IndexPathRank snapshot = M3IndexPathRank.snapshot(inputRows, offsets, planes,
+        IndexPathRank snapshot = IndexPathRank.snapshot(inputRows, offsets, planes,
                 needs, denies, first, count, stride);
         Arrays.fill(inputRows, 42);
         Arrays.fill(offsets, -1);
@@ -182,14 +182,14 @@ final class M3IndexPathRankSelectionContractTest {
         int[] capturedRows = rows(129);
         int[] offsets = identity(capturedRows.length);
         int[][] states = {new int[capturedRows.length]};
-        M3IndexPathRank all = M3IndexPathRank.snapshot(capturedRows, offsets, states,
+        IndexPathRank all = IndexPathRank.snapshot(capturedRows, offsets, states,
                 new int[] {0}, new int[] {0}, 0, capturedRows.length, 1);
         check(all, capturedRows, identity(capturedRows.length));
-        M3IndexPathRank none = M3IndexPathRank.snapshot(capturedRows, offsets, states,
+        IndexPathRank none = IndexPathRank.snapshot(capturedRows, offsets, states,
                 new int[] {1}, new int[] {1}, 0, capturedRows.length, 1);
         check(none, capturedRows, new int[0]);
         checkWindow(none.window(63, 129), capturedRows, new int[0], 63, 129);
-        M3IndexPathRank empty = M3IndexPathRank.snapshot(capturedRows, offsets, states,
+        IndexPathRank empty = IndexPathRank.snapshot(capturedRows, offsets, states,
                 new int[] {0}, new int[] {0}, capturedRows.length, 0, -3);
         check(empty, new int[0], new int[0]);
         checkWindow(empty.window(0, 0), new int[0], new int[0], 0, 0);

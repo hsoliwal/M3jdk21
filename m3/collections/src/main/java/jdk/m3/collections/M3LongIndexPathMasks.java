@@ -8,7 +8,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
 /**
- * Primitive-long counterpart of {@link M3IndexPathMasks}: logical encounter-order
+ * Primitive-long counterpart of {@link IndexPathMasks}: logical encounter-order
  * row values, physical offsets, and composable 32-bit state planes.
  *
  * <p>Rows may repeat and need not be sorted; sorted owners retain their existing
@@ -18,7 +18,7 @@ import java.util.Objects;
  * All input arrays must remain stable during each operation.
  *
  * <p>This specialization remains a Java operation. The shared
- * {@code M3IndexPathMasks} owner retains explicit JNI backend admission; this
+ * {@code IndexPathMasks} owner retains explicit JNI backend admission; this
  * facade adds no native entry point or implicit backend fallback.
  */
 public final class M3LongIndexPathMasks {
@@ -26,7 +26,7 @@ public final class M3LongIndexPathMasks {
 
     private M3LongIndexPathMasks() { }
 
-    //FLLDCIM: MRL - p2-057-20261107 P1: census2 P2-057, crate m3-long-pathmask-bridge-20261018 (candidate blob 4031e69e1e8e); select reuses M3IndexPathMasks.selectLongJava restored by #2649
+    //FLLDCIM: MRL - p2-057-20261107 P1: census2 P2-057, crate m3-long-pathmask-bridge-20261018 (candidate blob 4031e69e1e8e); select reuses IndexPathMasks.selectLongJava restored by #2649
     /** Select a detached array, in path order. O(count * planes), O(matches) output. */
     public static long[] select(long[] rows, int[] physicalOffsets,
             int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks,
@@ -35,7 +35,7 @@ public final class M3LongIndexPathMasks {
                 requiredMasks, forbiddenMasks, first, count, stride);
         validateVisitedOffsets(physicalOffsets, first, count, stride, capacity);
         try {
-            return M3IndexPathMasks.selectLongJava(rows, physicalOffsets, statePlanes,
+            return IndexPathMasks.selectLongJava(rows, physicalOffsets, statePlanes,
                     requiredMasks, forbiddenMasks, first, count, stride);
         } catch (ConcurrentModificationException changed) {
             // The shared primitive kernel has no callbacks; preserve this owner's diagnostic.

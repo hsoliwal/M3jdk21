@@ -32,7 +32,7 @@ public final class M3LongSortedLateBindingSelfTest {
 
     private static void filteredStreamBindsOnlyOnTraversal() {
         CountedSorted owner = new CountedSorted(1, 2, 3);
-        M3LongSortedSet filtered = M3LongSortedViews.filter(owner, v -> (v & 1) == 0);
+        LongSortedSet filtered = M3LongSortedViews.filter(owner, v -> (v & 1) == 0);
         var first = filtered.longStream();
         var second = filtered.parallelLongStream();
         Spliterator.OfLong direct = filtered.longSpliterator();
@@ -62,7 +62,7 @@ public final class M3LongSortedLateBindingSelfTest {
 
     private static void unmodifiableIsStillLiveBeforeTraversal() {
         CountedSorted owner = new CountedSorted(Long.MIN_VALUE, 0);
-        M3LongSortedSet view = M3LongSortedViews.unmodifiable(owner);
+        LongSortedSet view = M3LongSortedViews.unmodifiable(owner);
         var stream = view.longStream();
         Spliterator.OfLong split = view.longSpliterator();
         eq(owner.cursorCalls, 0, "unmodifiable view remains unbound");
@@ -85,11 +85,11 @@ public final class M3LongSortedLateBindingSelfTest {
     private static void nestedRangesAndExceptionBoundaries() {
         CountedSorted owner = new CountedSorted(-4, -3, -2, -1, 0, 1, 2, 3);
         StringBuilder order = new StringBuilder();
-        M3LongSortedSet first = M3LongSortedViews.filter(owner, v -> {
+        LongSortedSet first = M3LongSortedViews.filter(owner, v -> {
             order.append("A");
             return v >= 0;
         });
-        M3LongSortedSet next = M3LongSortedViews.filter(first, v -> {
+        LongSortedSet next = M3LongSortedViews.filter(first, v -> {
             order.append("B");
             return (v & 1) != 0;
         });
@@ -109,7 +109,7 @@ public final class M3LongSortedLateBindingSelfTest {
 
         CountedSorted bounded = new CountedSorted(Long.MIN_VALUE, -3, 0, 3,
                 Long.MAX_VALUE);
-        M3LongSortedSet range = M3LongSortedViews.subSet(bounded, -4, Long.MAX_VALUE);
+        LongSortedSet range = M3LongSortedViews.subSet(bounded, -4, Long.MAX_VALUE);
         var pending = range.longStream();
         eq(bounded.cursorCalls, 0, "range view late stream");
         bounded.add(4);
@@ -126,7 +126,7 @@ public final class M3LongSortedLateBindingSelfTest {
             for (int n = 0; n < 48; n++) owner.add(random.nextInt(160) - 80);
             long mask = random.nextInt(32);
             LongPredicate predicate = value -> ((value ^ mask) & 7L) <= 3;
-            M3LongSortedSet view = M3LongSortedViews.filter(owner, predicate);
+            LongSortedSet view = M3LongSortedViews.filter(owner, predicate);
             var pending = view.longStream();
             long added = 200L + iteration;
             owner.add(added);
@@ -171,7 +171,7 @@ public final class M3LongSortedLateBindingSelfTest {
         throw new AssertionError("expected " + type.getSimpleName());
     }
 
-    private static final class CountedSorted implements M3LongSortedSet {
+    private static final class CountedSorted implements LongSortedSet {
         private final NavigableSet<Long> keys = new TreeSet<>();
         private int cursorCalls;
         private int sizeCalls;
@@ -183,10 +183,10 @@ public final class M3LongSortedLateBindingSelfTest {
         @Override public long[] toArray() {
             return keys.stream().mapToLong(Long::longValue).toArray();
         }
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             cursorCalls++;
             Iterator<Long> cursor = keys.iterator();
-            return new M3LongIterator() {
+            return new LongIterator() {
                 @Override public boolean hasNext() { return cursor.hasNext(); }
                 @Override public long nextLong() { return cursor.next(); }
             };

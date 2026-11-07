@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Long-indexed provider-backed primitive list over the shared lazy row owner.
@@ -34,7 +34,7 @@ public final class M3ProviderBackedPrimitiveList {
     public M3ProviderBackedPrimitiveList(
             long logicalSize,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this(
                 logicalSize,
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
@@ -50,7 +50,7 @@ public final class M3ProviderBackedPrimitiveList {
             int directoryBits,
             int leafBits,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         if (logicalSize < 0L) throw new IllegalArgumentException("logicalSize < 0");
         rows = new M3ProviderBackedPrimitiveRows(
                 rootBits,
@@ -68,7 +68,7 @@ public final class M3ProviderBackedPrimitiveList {
     public long size() { return logicalSize; }
     public boolean isEmpty() { return logicalSize == 0L; }
     public int laneCount() { return rows.laneCount(); }
-    public M3PrimitiveKind laneKind(int lane) { return rows.laneKind(lane); }
+    public PrimitiveKind laneKind(int lane) { return rows.laneKind(lane); }
     public long materializedSize() { return rows.materializedSize(); }
     public long allocatedPayloadBytes() { return rows.allocatedPayloadBytes(); }
 

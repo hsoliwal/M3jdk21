@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.ImmutableSortedSet;
-import jdk.m3.collections.M3FrozenLongSet;
+import jdk.m3.collections.FrozenLongSet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +24,7 @@ import org.eclipse.collections.impl.factory.primitive.LongSets;
 import org.junit.jupiter.api.Test;
 
 /**
- * LS1 provider differentials for {@link M3FrozenLongSet}, each against its own oracle (no cross-provider
+ * LS1 provider differentials for {@link FrozenLongSet}, each against its own oracle (no cross-provider
  * equivalence): Guava {@code ImmutableSortedSet} (order, first/last, asList get/indexOf, hash, toString,
  * immutability) and Eclipse Collections {@code ImmutableLongSet} (primitive membership, size, sorted export,
  * min/max, hash). At least 40,000 operations per provider.
@@ -38,7 +38,7 @@ final class M3FrozenLongSetProviderTest {
         long operations = 0;
         for (int round = 0; round < 1000; round++) {
             long[] source = source(random, round);
-            M3FrozenLongSet set = M3FrozenLongSet.copyOf(source);
+            FrozenLongSet set = FrozenLongSet.copyOf(source);
             Long[] boxed = new Long[source.length];
             for (int i = 0; i < source.length; i++) boxed[i] = source[i];
             ImmutableSortedSet<Long> guava = ImmutableSortedSet.copyOf(boxed);
@@ -94,7 +94,7 @@ final class M3FrozenLongSetProviderTest {
         long operations = 0;
         for (int round = 0; round < 1000; round++) {
             long[] source = source(random, round);
-            M3FrozenLongSet set = M3FrozenLongSet.copyOf(source);
+            FrozenLongSet set = FrozenLongSet.copyOf(source);
             ImmutableLongSet eclipse = LongSets.immutable.with(source);
             assertEquals(eclipse.size(), set.size());
             assertEquals(eclipse.isEmpty(), set.isEmpty());

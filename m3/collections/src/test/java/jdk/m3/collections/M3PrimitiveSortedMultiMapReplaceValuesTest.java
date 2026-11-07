@@ -12,7 +12,7 @@ final class M3PrimitiveSortedMultiMapReplaceValuesTest {
     @Test
     void removeAllReturnsOrderedSnapshotAndLeavesLiveViewEmpty() {
         M3PrimitiveSortedMultiMap map =
-                new M3PrimitiveSortedMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+                new M3PrimitiveSortedMultiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         M3PrimitiveSortedMultiMap.ValuesView view = map.valuesViewBits(7);
         view.addBits(10);
         view.addBits(20);
@@ -30,7 +30,7 @@ final class M3PrimitiveSortedMultiMapReplaceValuesTest {
     @Test
     void replaceValuesReturnsPreviousSnapshotAndUpdatesExistingView() {
         M3PrimitiveSortedMultiMap map =
-                new M3PrimitiveSortedMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.LONG);
+                new M3PrimitiveSortedMultiMap(PrimitiveKind.INT, PrimitiveKind.LONG);
         M3PrimitiveSortedMultiMap.ValuesView view = map.valuesViewBits(3);
         view.addBits(100L);
         view.addBits(200L);
@@ -46,7 +46,7 @@ final class M3PrimitiveSortedMultiMapReplaceValuesTest {
     @Test
     void uniquePairModeSuppressesReplacementDuplicatesInInputOrder() {
         M3PrimitiveSortedMultiMap map =
-                new M3PrimitiveSortedMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT, 2, true);
+                new M3PrimitiveSortedMultiMap(PrimitiveKind.INT, PrimitiveKind.INT, 2, true);
         map.addBits(1, 99);
         int[] replacement = {7, 7, 8, 7, 9};
         Object previous = map.replaceValuesBits(1, replacement, 0, replacement.length);
@@ -57,7 +57,7 @@ final class M3PrimitiveSortedMultiMapReplaceValuesTest {
     @Test
     void validationFailureDoesNotMutateExistingValues() {
         M3PrimitiveSortedMultiMap map =
-                new M3PrimitiveSortedMultiMap(M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+                new M3PrimitiveSortedMultiMap(PrimitiveKind.INT, PrimitiveKind.INT);
         map.addBits(4, 40);
         map.addBits(4, 50);
         org.junit.jupiter.api.Assertions.assertThrows(

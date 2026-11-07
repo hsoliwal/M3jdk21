@@ -27,7 +27,7 @@ public final class M3LongSortedSnapshotSelfTest {
         for (long value : boundaries) source.add(value);
         AtomicInteger evaluated = new AtomicInteger();
         LongPredicate predicate = value -> { evaluated.incrementAndGet(); return value != -2 && value != 3; };
-        M3LongSortedSnapshot selected = M3LongSortedSnapshot.filtered(source, predicate);
+        LongSortedSnapshot selected = LongSortedSnapshot.filtered(source, predicate);
         eq(boundaries.length, evaluated.get(), "predicate one evaluation per backing item");
         source.clear();
         array(new long[] {Long.MIN_VALUE, -100, 0, 5, Long.MAX_VALUE}, selected.toArray(), "snapshot detached");
@@ -53,23 +53,23 @@ public final class M3LongSortedSnapshotSelfTest {
         expect(UnsupportedOperationException.class, () -> selected.add(7), "immutable add");
         expect(UnsupportedOperationException.class, () -> selected.remove(5), "immutable remove");
         expect(UnsupportedOperationException.class, () -> selected.filterInPlace(v -> true), "immutable retain");
-        expect(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromSorted(new long[] {7,7}), "duplicate rejected");
-        expect(IllegalArgumentException.class, () -> M3LongSortedSnapshot.fromSorted(new long[] {7,6}), "inversion rejected");
+        expect(IllegalArgumentException.class, () -> LongSortedSnapshot.fromSorted(new long[] {7,7}), "duplicate rejected");
+        expect(IllegalArgumentException.class, () -> LongSortedSnapshot.fromSorted(new long[] {7,6}), "inversion rejected");
         expect(IndexOutOfBoundsException.class, () -> selected.select(5), "rank out of range");
         expect(IllegalArgumentException.class, () -> selected.subSet(3,2), "reversed range refused");
-        M3LongSortedSnapshot empty = M3LongSortedSnapshot.fromSorted(new long[0]);
+        LongSortedSnapshot empty = LongSortedSnapshot.fromSorted(new long[0]);
         expect(NoSuchElementException.class, empty::first, "empty first");
         expect(NoSuchElementException.class, empty::last, "empty last");
         eq(0, empty.rank(2), "empty rank");
         var iter = empty.iterator();
         expect(NoSuchElementException.class, iter::nextLong, "empty primitive iterator");
-        M3LongSortedSnapshot mask = M3LongSortedSnapshot.fromAlignedMask(
+        LongSortedSnapshot mask = LongSortedSnapshot.fromAlignedMask(
                 new long[] {-4,-1,0,1,7},new byte[] {1,0,3,2,7},1);
         array(new long[] {-4,0,7}, mask.toArray(), "existing mask compactor reusable");
         expect(IllegalArgumentException.class,
-                () -> M3LongSortedSnapshot.fromAlignedMask(new long[]{1}, new byte[0],1), "unaligned mask");
+                () -> LongSortedSnapshot.fromAlignedMask(new long[]{1}, new byte[0],1), "unaligned mask");
         expect(IllegalArgumentException.class,
-                () -> M3LongSortedSnapshot.fromAlignedMask(new long[]{1}, new byte[]{1},256), "invalid mask");
+                () -> LongSortedSnapshot.fromAlignedMask(new long[]{1}, new byte[]{1},256), "invalid mask");
         int traits = selected.longSpliterator().characteristics();
         ok((traits & (Spliterator.SORTED|Spliterator.DISTINCT|Spliterator.SIZED|Spliterator.SUBSIZED|Spliterator.IMMUTABLE))
                 == (Spliterator.SORTED|Spliterator.DISTINCT|Spliterator.SIZED|Spliterator.SUBSIZED|Spliterator.IMMUTABLE), "honest snapshot characteristics");
@@ -80,7 +80,7 @@ public final class M3LongSortedSnapshotSelfTest {
         for (int round=0; round<256; round++) {
             MutableSorted mutable = new MutableSorted();
             for (int index=0; index<100 + round; index++) mutable.add(random.nextLong(500)-250L);
-            M3LongSortedSnapshot snapshot = M3LongSortedSnapshot.filtered(mutable,v -> (v & 3L)==0);
+            LongSortedSnapshot snapshot = LongSortedSnapshot.filtered(mutable,v -> (v & 3L)==0);
             TreeSet<Long> oracle = new TreeSet<>();
             for(long v: mutable.set) if((v & 3L)==0) oracle.add(v);
             long[] expected=oracle.stream().mapToLong(Long::longValue).toArray();
@@ -107,7 +107,7 @@ public final class M3LongSortedSnapshotSelfTest {
     private static void array(long[] expected,long[] actual,String label){assertions++; if(!Arrays.equals(expected,actual)) throw new AssertionError(label+" expected="+Arrays.toString(expected)+" actual="+Arrays.toString(actual));}
     private static void expect(Class<? extends Throwable> clazz,Runnable callback,String label){ assertions++; try{callback.run();}catch(Throwable found){if(clazz.isInstance(found))return;throw new AssertionError(label+" wrong exception",found);} throw new AssertionError(label+" did not reject");}
 
-    private static final class MutableSorted implements M3LongSortedSet {
+    private static final class MutableSorted implements LongSortedSet {
         private final NavigableSet<Long> set=new TreeSet<>();
         @Override public int size(){return set.size();}
         @Override public boolean contains(long value){return set.contains(value);}
@@ -116,7 +116,7 @@ public final class M3LongSortedSnapshotSelfTest {
         @Override public void clear(){set.clear();}
         @Override public int filterInPlace(LongPredicate keep){int before=set.size();set.removeIf(v->!keep.test(v));return before-set.size();}
         @Override public long[] toArray(){return set.stream().mapToLong(Long::longValue).toArray();}
-        @Override public M3LongIterator iterator(){var cursor=set.iterator();return new M3LongIterator(){@Override public boolean hasNext(){return cursor.hasNext();}@Override public long nextLong(){return cursor.next();}};}
+        @Override public LongIterator iterator(){var cursor=set.iterator();return new LongIterator(){@Override public boolean hasNext(){return cursor.hasNext();}@Override public long nextLong(){return cursor.next();}};}
         @Override public long first(){return set.first();}
         @Override public long last(){return set.last();}
         @Override public long lower(long value,long fallback){return orFallback(set.lower(value));}

@@ -499,7 +499,7 @@ public final class M3TreeProjection {
             if (parentId == M3TreeTopology.ROOT) {
                 return offset;
             }
-            if (!topology.flag(parentId, M3ItemState.EXPANDED)) {
+            if (!topology.flag(parentId, ItemState.EXPANDED)) {
                 return -1;
             }
 			offset = Math.addExact (offset, 1);

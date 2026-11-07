@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3IntCsrGraph;
+import jdk.m3.collections.graph.IntCsrGraph;
 
 /**
  * Hierarchical scope-cover reduction. Binding obligation: selecting a node retrieves its ENTIRE
@@ -37,7 +37,7 @@ public final class M3HierarchyCover {
         for(int v:requested)Objects.checkIndex(v,n);
         int[] from=new int[edges],to=new int[edges];int w=0;
         for(int v=0;v<n;v++)if(parent[v]>=0){from[w]=parent[v];to[w++]=v;}
-        M3IntCsrGraph graph=M3IntCsrGraph.fromEdges(n,from,to);
+        IntCsrGraph graph=IntCsrGraph.fromEdges(n,from,to);
         int[] order=new int[n],end=new int[n],stack=new int[n],cursor=new int[n];int count=0;
         for(int root=0;root<n;root++)if(parent[root]==-1){
             int depth=0;stack[depth++]=root;cursor[root]=graph.start(root);order[count++]=root;

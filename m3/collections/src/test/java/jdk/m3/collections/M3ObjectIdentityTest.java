@@ -138,7 +138,7 @@ final class M3ObjectIdentityTest {
     void identitySetMatchesJdkAcrossChurn() {
         Object[] members = pool(300);
         Random random = new Random(0x4d3349445345L);
-        M3ObjectIdentitySet<Object> actual = new M3ObjectIdentitySet<>();
+        ObjectIdentitySet<Object> actual = new ObjectIdentitySet<>();
         Set<Object> expected = Collections.newSetFromMap(new IdentityHashMap<>());
         for (int step = 0; step < 30_000; step++) {
             Object m = pick(random, members);
@@ -164,7 +164,7 @@ final class M3ObjectIdentityTest {
         }
         String a = new String("same");
         String b = new String("same");
-        M3ObjectIdentitySet<String> set = new M3ObjectIdentitySet<>(0);
+        ObjectIdentitySet<String> set = new ObjectIdentitySet<>(0);
         assertTrue(set.add(a));
         assertTrue(set.add(b));
         assertFalse(set.add(a));
@@ -174,7 +174,7 @@ final class M3ObjectIdentityTest {
         assertTrue(set.remove(null));
         assertFalse(set.remove(null));
         assertThrows(ConcurrentModificationException.class, () -> set.forEach(member -> set.add(new String("y"))));
-        assertThrows(IllegalArgumentException.class, () -> new M3ObjectIdentitySet<>(-1));
+        assertThrows(IllegalArgumentException.class, () -> new ObjectIdentitySet<>(-1));
         assertEquals(set.capacity(), set.referenceSlots());
     }
 
@@ -186,7 +186,7 @@ final class M3ObjectIdentityTest {
                 .sorted()
                 .toList();
         assertEquals(List.of("Object", "Object[]", "Object[]", "boolean", "int", "int", "int", "int"), mapFields);
-        List<String> setFields = Arrays.stream(M3ObjectIdentitySet.class.getDeclaredFields())
+        List<String> setFields = Arrays.stream(ObjectIdentitySet.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()

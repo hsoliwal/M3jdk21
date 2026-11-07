@@ -22,8 +22,8 @@ class M3ProviderBackedPrimitiveRowsTest {
         M3ProviderBackedPrimitiveRows rows =
                 new M3ProviderBackedPrimitiveRows(
                         provider,
-                        M3PrimitiveKind.LONG,
-                        M3PrimitiveKind.INT);
+                        PrimitiveKind.LONG,
+                        PrimitiveKind.INT);
 
         assertFalse(rows.isMaterialized(5L));
         assertEquals(50L, rows.getBits(0, 5L));
@@ -47,7 +47,7 @@ class M3ProviderBackedPrimitiveRowsTest {
         };
 
         M3ProviderBackedPrimitiveRows rows =
-                new M3ProviderBackedPrimitiveRows(provider, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveRows(provider, PrimitiveKind.LONG);
 
         M3ProviderLoadException failure =
                 assertThrows(M3ProviderLoadException.class, () -> rows.touch(9L));
@@ -71,7 +71,7 @@ class M3ProviderBackedPrimitiveRowsTest {
         M3ProviderBackedPrimitiveRows rows =
                 new M3ProviderBackedPrimitiveRows(
                         (rowId, target) -> target[0] = rowId,
-                        M3PrimitiveKind.LONG);
+                        PrimitiveKind.LONG);
 
         rows.applicationFlags(
                 11L,
@@ -106,7 +106,7 @@ class M3ProviderBackedPrimitiveRowsTest {
         };
 
         M3ProviderBackedPrimitiveRows rows =
-                new M3ProviderBackedPrimitiveRows(provider, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveRows(provider, PrimitiveKind.LONG);
         M3ProviderLoadException failure =
                 assertThrows(M3ProviderLoadException.class, () -> rows.touch(1L));
 

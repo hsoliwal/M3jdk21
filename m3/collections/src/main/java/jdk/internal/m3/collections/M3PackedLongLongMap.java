@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.collections;
 
-import jdk.m3.collections.M3LongLongConsumer;
+import jdk.m3.collections.LongLongConsumer;
 
 /**
  * Mutable primitive {@code long -> long} map contract.
@@ -26,7 +26,7 @@ public interface M3PackedLongLongMap {
 
     int filterInPlace(M3LongLongPredicate predicate);
 
-    void forEach(M3LongLongConsumer consumer);
+    void forEach(LongLongConsumer consumer);
 
     int size();
 

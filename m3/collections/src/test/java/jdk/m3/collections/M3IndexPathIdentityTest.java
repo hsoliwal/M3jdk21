@@ -24,23 +24,23 @@ final class M3IndexPathIdentityTest {
         }
         M3LongStateArray.Snapshot capture = owner.snapshot();
         M3LongStateArray.Selection java = capture.prepare(
-                Integer.MIN_VALUE, 0, M3IndexPathMasks.Backend.JAVA);
+                Integer.MIN_VALUE, 0, IndexPathMasks.Backend.JAVA);
         int count = 0;
         for (int i = 0; i < capture.size(); i++) {
             if ((capture.stateAt(i) & Integer.MIN_VALUE) != 0) count++;
         }
         assertEquals(count, java.size());
         assertEquals(count, java.rank(capture.size()));
-        if (M3IndexPathMasks.nativeAvailable()) {
+        if (IndexPathMasks.nativeAvailable()) {
             M3LongStateArray.Selection nativeSelected = capture.prepare(
-                    Integer.MIN_VALUE, 0, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                    Integer.MIN_VALUE, 0, IndexPathMasks.Backend.NATIVE_REQUIRED);
             assertArrayEquals(java.toArray(), nativeSelected.toArray());
             for (int i = 0; i < java.size(); i++) {
                 assertEquals(java.sourceOrdinal(i), nativeSelected.sourceOrdinal(i));
             }
         } else {
             assertThrows(UnsatisfiedLinkError.class, () -> capture.prepare(
-                    Integer.MIN_VALUE, 0, M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                    Integer.MIN_VALUE, 0, IndexPathMasks.Backend.NATIVE_REQUIRED));
         }
     }
 }

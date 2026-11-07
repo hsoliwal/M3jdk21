@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 import jdk.m3.collections.M3PrimitivePrimitiveHashMap;
 
 /**
@@ -35,21 +35,21 @@ public final class M3PrimitiveCounterMap {
         void accept(long keyBits, long count);
     }
 
-    private final M3PrimitiveKind keyKind;
+    private final PrimitiveKind keyKind;
     private final long missingValue;
     private final M3PrimitivePrimitiveHashMap counts;
 
-    public M3PrimitiveCounterMap(M3PrimitiveKind keyKind) {
+    public M3PrimitiveCounterMap(PrimitiveKind keyKind) {
         this(keyKind, 0L);
     }
 
-    public M3PrimitiveCounterMap(M3PrimitiveKind keyKind, long missingValue) {
+    public M3PrimitiveCounterMap(PrimitiveKind keyKind, long missingValue) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.missingValue = missingValue;
-        counts = new M3PrimitivePrimitiveHashMap(keyKind, M3PrimitiveKind.LONG);
+        counts = new M3PrimitivePrimitiveHashMap(keyKind, PrimitiveKind.LONG);
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
     public long missingValue() { return missingValue; }
     public int size() { return counts.size(); }
     public boolean isEmpty() { return counts.isEmpty(); }

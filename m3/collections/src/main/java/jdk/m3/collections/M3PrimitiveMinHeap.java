@@ -25,21 +25,21 @@ import java.util.Objects;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveMinHeap {
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private Object heap;
     private int size;
 
-    public M3PrimitiveMinHeap(M3PrimitiveKind kind) {
+    public M3PrimitiveMinHeap(PrimitiveKind kind) {
         this(kind, 8);
     }
 
-    public M3PrimitiveMinHeap(M3PrimitiveKind kind, int capacity) {
+    public M3PrimitiveMinHeap(PrimitiveKind kind, int capacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
         if (capacity < 0) throw new IllegalArgumentException("capacity < 0");
         heap = kind.newArray(Math.max(1, capacity));
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return java.lang.reflect.Array.getLength(heap); }

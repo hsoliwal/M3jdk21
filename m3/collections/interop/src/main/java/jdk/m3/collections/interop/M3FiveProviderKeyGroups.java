@@ -270,14 +270,14 @@ public final class M3FiveProviderKeyGroups<K, V> {
      */
     public M3FiveProviderKeyGroups<K, V> filteredGroupStates(
             int[][] planes, int[] required, int[] forbidden,
-            jdk.m3.collections.M3IndexPathMasks.Backend backend) {
+            jdk.m3.collections.IndexPathMasks.Backend backend) {
         checkGroupPlanes(planes);
         Objects.requireNonNull(backend, "backend");
         int[] selected = Arrays.copyOfRange(groupOrder, from, to);
-        int[] accepted = jdk.m3.collections.M3IndexPathMasks.select(
+        int[] accepted = jdk.m3.collections.IndexPathMasks.select(
                 selected, selected, planes, required, forbidden,
                 0, selected.length, 1, backend);
-        if (backend == jdk.m3.collections.M3IndexPathMasks.Backend.JAVA
+        if (backend == jdk.m3.collections.IndexPathMasks.Backend.JAVA
                 && accepted.length == selected.length) return this;
         return new M3FiveProviderKeyGroups<>(source, groupIds, keys,
                 starts, ordinals, accepted, 0, accepted.length);
@@ -286,7 +286,7 @@ public final class M3FiveProviderKeyGroups<K, V> {
     public M3FiveProviderKeyGroups<K, V> filteredGroupStates(
             int[][] planes, int[] required, int[] forbidden) {
         return filteredGroupStates(planes, required, forbidden,
-                jdk.m3.collections.M3IndexPathMasks.Backend.JAVA);
+                jdk.m3.collections.IndexPathMasks.Backend.JAVA);
     }
 
     /** Zero-based current group ordinal of first matching mask, or -1. */
@@ -294,7 +294,7 @@ public final class M3FiveProviderKeyGroups<K, V> {
             int[][] planes, int[] required, int[] forbidden) {
         checkGroupPlanes(planes);
         int[] current = Arrays.copyOfRange(groupOrder, from, to);
-        return jdk.m3.collections.M3IndexPathMasks.firstMatchingIndex(
+        return jdk.m3.collections.IndexPathMasks.firstMatchingIndex(
                 current, current, planes, required, forbidden,
                 0, current.length, 1);
     }

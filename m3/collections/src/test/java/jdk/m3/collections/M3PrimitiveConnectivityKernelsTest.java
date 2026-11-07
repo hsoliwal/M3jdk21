@@ -8,6 +8,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 import jdk.internal.m3.collections.M3IntOfflineConnectivity;
 import jdk.internal.m3.collections.M3IntUndirectedLowLink;
+import jdk.m3.collections.graph.WeightedIntCsrGraph;
 
 class M3PrimitiveConnectivityKernelsTest {
     @Test void lowLinkMatchesIndependentEdgeAndVertexRemoval() {
@@ -16,7 +17,7 @@ class M3PrimitiveConnectivityKernelsTest {
             int n = random.nextInt(11), edges = n == 0 ? 0 : random.nextInt(27);
             int[] from = new int[edges], to = new int[edges];
             for (int e = 0; e < edges; e++) { from[e] = random.nextInt(n); to[e] = random.nextInt(n); }
-            M3IntUndirectedLowLink low = new M3IntUndirectedLowLink(M3WeightedIntCsrGraph.undirected(n, from, to, new long[edges]));
+            M3IntUndirectedLowLink low = new M3IntUndirectedLowLink(WeightedIntCsrGraph.undirected(n, from, to, new long[edges]));
             boolean[] removed = new boolean[edges], bridges = new boolean[edges];
             int original = componentCount(labels(n, from, to, removed, -1));
             for (int e = 0; e < edges; e++) {
@@ -35,16 +36,16 @@ class M3PrimitiveConnectivityKernelsTest {
     @Test void lowLinkHandlesDeepChainsAndParallelParentEdges() {
         int n = 120_000; int[] from = new int[n - 1], to = new int[n - 1];
         for (int e = 0; e < from.length; e++) { from[e] = e; to[e] = e + 1; }
-        M3IntUndirectedLowLink chain = new M3IntUndirectedLowLink(M3WeightedIntCsrGraph.undirected(n, from, to, new long[n - 1]));
+        M3IntUndirectedLowLink chain = new M3IntUndirectedLowLink(WeightedIntCsrGraph.undirected(n, from, to, new long[n - 1]));
         assertEquals(n, chain.componentCount());
         for (int e = 0; e < from.length; e++) { assertTrue(chain.isBridge(e)); }
         for (int v = 0; v < n; v++) { assertEquals(v > 0 && v < n - 1, chain.isArticulation(v)); }
-        M3IntUndirectedLowLink parallel = new M3IntUndirectedLowLink(M3WeightedIntCsrGraph.undirected(3,
+        M3IntUndirectedLowLink parallel = new M3IntUndirectedLowLink(WeightedIntCsrGraph.undirected(3,
                 new int[]{0, 0, 1, 1}, new int[]{1, 1, 2, 1}, new long[4]));
         assertFalse(parallel.isBridge(0)); assertFalse(parallel.isBridge(1));
         assertTrue(parallel.isBridge(2)); assertFalse(parallel.isBridge(3));
         assertTrue(parallel.isArticulation(1)); assertEquals(2, parallel.componentCount());
-        assertThrows(IllegalArgumentException.class, () -> new M3IntUndirectedLowLink(M3WeightedIntCsrGraph.directed(0, new int[0], new int[0], new long[0])));
+        assertThrows(IllegalArgumentException.class, () -> new M3IntUndirectedLowLink(WeightedIntCsrGraph.directed(0, new int[0], new int[0], new long[0])));
     }
 
     @Test void offlineConnectivityMatchesFreshGraphAtEveryQueryTime() {

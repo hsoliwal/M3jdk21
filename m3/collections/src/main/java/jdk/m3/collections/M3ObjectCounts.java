@@ -28,7 +28,7 @@ import java.util.function.ObjIntConsumer;
  * define their own return values, occurrence removal and equality. Distinct-key iterators
  * detect structural key changes on a best-effort basis. Bulk callbacks must not modify the
  * owner. Flag selection returns a detached unmodifiable list, not a live provider view.
- * Optional JNI receives primitive metadata only and reuses {@link M3IndexPathMasks}.
+ * Optional JNI receives primitive metadata only and reuses {@link IndexPathMasks}.
  */
 public final class M3ObjectCounts<E> {
     private final M3LinkedHashMap<E, Object> elements = new M3LinkedHashMap<>(false, true);
@@ -214,7 +214,7 @@ public final class M3ObjectCounts<E> {
     }
 
     /** Selects all matching distinct elements into an unmodifiable detached snapshot. */
-    public List<E> flaggedElements(int requiredMask, int forbiddenMask, M3IndexPathMasks.Backend backend) {
+    public List<E> flaggedElements(int requiredMask, int forbiddenMask, IndexPathMasks.Backend backend) {
         return flaggedElements(requiredMask, forbiddenMask, 0, distinctSize(), 1, backend, null);
     }
 
@@ -227,7 +227,7 @@ public final class M3ObjectCounts<E> {
      * callback are detected before a result is published; concurrent access is unsupported.
      */
     public List<E> flaggedElements(int requiredMask, int forbiddenMask, int first, int count,
-            int stride, M3IndexPathMasks.Backend backend, M3ProgressMonitor monitor) {
+            int stride, IndexPathMasks.Backend backend, M3ProgressMonitor monitor) {
         Objects.requireNonNull(backend, "backend");
         int size = distinctSize();
         if (stride == 0 || count < 0 || first < 0 || first > size)
@@ -249,7 +249,7 @@ public final class M3ObjectCounts<E> {
             progress.checkCanceled();
             checkEpoch(expected);
         }
-        int[] selected = M3IndexPathMasks.select(slots, slots, new int[][] {flags},
+        int[] selected = IndexPathMasks.select(slots, slots, new int[][] {flags},
                 new int[] {requiredMask}, new int[] {forbiddenMask}, first, count, stride, backend);
         checkEpoch(expected);
         List<E> result = new M3LinkedList<>();

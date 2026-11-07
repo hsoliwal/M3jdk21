@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.Table;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -177,7 +177,7 @@ final class M3FiveLibraryExpandedContractsTest {
                 wantCounts.merge(values[index], 1, Integer::sum);
             }
             var selected = source.filteredByStatePlanes(
-                    flags, required, forbidden, M3IndexPathMasks.Backend.JAVA);
+                    flags, required, forbidden, IndexPathMasks.Backend.JAVA);
             assertArrayEquals(expectedPath, indexes);
             assertEquals(want, selected.asJdkList(), "path " + trial);
             assertEquals(want, new ArrayList<>(selected.asJdkDeque()));
@@ -193,9 +193,9 @@ final class M3FiveLibraryExpandedContractsTest {
                 assertEquals(amount, eclipse.occurrencesOf(value));
                 assertEquals(amount, apache.getCount(value));
             }
-            if (M3IndexPathMasks.nativeAvailable() && trial % 19 == 0) {
+            if (IndexPathMasks.nativeAvailable() && trial % 19 == 0) {
                 assertEquals(want, source.filteredByStatePlanes(
-                        flags, required, forbidden, M3IndexPathMasks.Backend.NATIVE_REQUIRED)
+                        flags, required, forbidden, IndexPathMasks.Backend.NATIVE_REQUIRED)
                         .asJdkList(), "real JNI parity trial " + trial);
             }
         }

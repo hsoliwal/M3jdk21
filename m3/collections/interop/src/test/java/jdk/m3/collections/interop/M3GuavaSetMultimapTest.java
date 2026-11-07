@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,20 +110,20 @@ final class M3GuavaSetMultimapTest {
             }
         }
         var selected = source.selectedByStates(states, 0x8000_0004, 0,
-                M3IndexPathMasks.Backend.JAVA);
+                IndexPathMasks.Backend.JAVA);
         assertEquals(expected, selected);
         source.clear();
         assertEquals(expected, selected); // detached payload/index owner
         assertThrows(IllegalArgumentException.class, () -> selected.selectedByStates(
-                new int[selected.size()+1], 0, 0, M3IndexPathMasks.Backend.JAVA));
-        if (M3IndexPathMasks.nativeAvailable()) {
+                new int[selected.size()+1], 0, 0, IndexPathMasks.Backend.JAVA));
+        if (IndexPathMasks.nativeAvailable()) {
             var nativeSource = new M3GuavaSetMultimap<String, Integer>();
             for (Map.Entry<String, Integer> e : encounter) nativeSource.put(e.getKey(), e.getValue());
             assertEquals(expected, nativeSource.selectedByStates(states, 0x8000_0004, 0,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                    IndexPathMasks.Backend.NATIVE_REQUIRED));
         } else {
             assertThrows(UnsatisfiedLinkError.class, () -> selected.selectedByStates(
-                    new int[selected.size()], 0, 0, M3IndexPathMasks.Backend.NATIVE_REQUIRED));
+                    new int[selected.size()], 0, 0, IndexPathMasks.Backend.NATIVE_REQUIRED));
         }
     }
 

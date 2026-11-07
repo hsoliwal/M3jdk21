@@ -36,7 +36,7 @@ public final class M3IndexedSetAlgebraSeekProof {
         }
         return output;
     }
-    private static M3LongSortedSet actual(M3LongSortedSet a, M3LongSortedSet b, int op) {
+    private static LongSortedSet actual(LongSortedSet a, LongSortedSet b, int op) {
         return switch (op) {
             case 0 -> M3LongCompositeViews.sortedIntersection(a, b);
             case 1 -> M3LongCompositeViews.sortedDifference(a, b);
@@ -44,7 +44,7 @@ public final class M3IndexedSetAlgebraSeekProof {
             default -> throw new AssertionError(op);
         };
     }
-    private static void compare(M3LongSortedSet got, NavigableSet<Long> want, long[] probes) {
+    private static void compare(LongSortedSet got, NavigableSet<Long> want, long[] probes) {
         long[] values = new long[want.size()];
         int i = 0;
         for (Long value : want) values[i++] = value;
@@ -63,7 +63,7 @@ public final class M3IndexedSetAlgebraSeekProof {
     private static void run() {
         Random random = new Random(0x4d334c4f4e47494eL);
         for (int seed = 0; seed < 80; seed++) {
-            M3LongTreeSet a = new M3LongTreeSet(), b = new M3LongTreeSet();
+            LongTreeSet a = new LongTreeSet(), b = new LongTreeSet();
             TreeSet<Long> jdkA = new TreeSet<>(), jdkB = new TreeSet<>();
             for (int phase = 0; phase < 5; phase++) {
                 for (int i = 0; i < 48; i++) {
@@ -75,7 +75,7 @@ public final class M3IndexedSetAlgebraSeekProof {
                     };
                     boolean first = random.nextBoolean();
                     boolean add = random.nextInt(3) != 0;
-                    M3LongTreeSet owner = first ? a : b;
+                    LongTreeSet owner = first ? a : b;
                     TreeSet<Long> oracle = first ? jdkA : jdkB;
                     boolean expected = add ? oracle.add(key) : oracle.remove(key);
                     boolean actual = add ? owner.add(key) : owner.remove(key);
@@ -93,7 +93,7 @@ public final class M3IndexedSetAlgebraSeekProof {
                         expected(positive, jdkB, 0), probes);
             }
         }
-        M3LongTreeSet a = new M3LongTreeSet(), b = new M3LongTreeSet();
+        LongTreeSet a = new LongTreeSet(), b = new LongTreeSet();
         TreeSet<Long> jdkA = new TreeSet<>(), jdkB = new TreeSet<>();
         for (int i = 0; i < 4096; i++) {
             long x = Long.MIN_VALUE + (long) i * 997L;

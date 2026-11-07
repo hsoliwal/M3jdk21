@@ -43,7 +43,7 @@ public final class M3PrimitiveMpscRingBuffer {
         }
     }
 
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final Object elements;
     private final long[] sequences;
     private final int capacity;
@@ -51,7 +51,7 @@ public final class M3PrimitiveMpscRingBuffer {
     private volatile long producerIndex;
     private volatile long consumerIndex;
 
-    public M3PrimitiveMpscRingBuffer(M3PrimitiveKind kind, int requestedCapacity) {
+    public M3PrimitiveMpscRingBuffer(PrimitiveKind kind, int requestedCapacity) {
         this.kind = Objects.requireNonNull(kind, "kind");
         capacity = roundCapacity(requestedCapacity);
         mask = capacity - 1;
@@ -60,7 +60,7 @@ public final class M3PrimitiveMpscRingBuffer {
         for (int i = 0; i < capacity; i++) sequences[i] = i;
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int capacity() { return capacity; }
     public long payloadBytes() {
         return kind.payloadBytes(capacity) + (long) capacity * Long.BYTES;

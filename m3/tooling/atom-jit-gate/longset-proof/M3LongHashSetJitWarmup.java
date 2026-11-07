@@ -16,7 +16,7 @@ public final class M3LongHashSetJitWarmup {
         M3LongHashSetSingleProbeTest.main(args);
         long witnessed = 0L;
         for (int round = 0; round < ROUNDS; round++) {
-            M3LongHashSet set = new M3LongHashSet();
+            LongHashSet set = new LongHashSet();
             long prefix = (long) round << KEY_SHIFT;
             for (int index = 0; index < KEYS_PER_ROUND; index++) {
                 long key = prefix | index;

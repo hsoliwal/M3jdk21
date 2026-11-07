@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Port of the matching semantics of com.synexia {@code LeanGapSortedCollectionsTest} (common module, blob
  * 2deb436110d7, develop 0616288bfa7d) onto the M3 owners that absorbed the positional gap: the gap-buffer set
- * and map scenarios run on {@link M3LongTreeSet} and {@link M3LongLongTreeMap} with the donor seeds, key
+ * and map scenarios run on {@link LongTreeSet} and {@link LongLongTreeMap} with the donor seeds, key
  * distribution and step counts, and every comparison also walks the positional API. Classification of each
  * donor test and assertion: qualification/primitive-method-gaps-20261107/PORT_CLASSIFICATION.tsv (gap-buffer
  * instrumentation, the fail-closed callback rule and the factories do not match and are not ported).
@@ -33,7 +33,7 @@ final class M3LeanGapSortedPortTest {
 
     @Test
     void treeMapMatchesTreeMapAcrossLocalizedAndDistantEdits() {
-        M3LongLongTreeMap actual = new M3LongLongTreeMap();
+        LongLongTreeMap actual = new LongLongTreeMap();
         TreeMap<Long, Long> expected = new TreeMap<>();
         Random random = new Random(MAP_SEED);
         for (int step = 0; step < STEPS; step++) {
@@ -50,7 +50,7 @@ final class M3LeanGapSortedPortTest {
                 case 5 -> assertEquals(expected.getOrDefault(key, value), actual.getOrDefault(key, value));
                 case 6 -> compareNavigation(actual, expected, key, random.nextLong());
                 case 7 -> {
-                    // donor case 7 is filterInPlace, which M3LongLongTreeMap does not carry (NOT_APPLICABLE)
+                    // donor case 7 is filterInPlace, which LongLongTreeMap does not carry (NOT_APPLICABLE)
                 }
                 case 8 -> {
                     if ((step & 4095) == 0) {
@@ -74,7 +74,7 @@ final class M3LeanGapSortedPortTest {
 
     @Test
     void treeSetMatchesTreeSetAcrossLocalizedAndDistantEdits() {
-        M3LongTreeSet actual = new M3LongTreeSet();
+        LongTreeSet actual = new LongTreeSet();
         TreeSet<Long> expected = new TreeSet<>();
         Random random = new Random(SET_SEED);
         for (int step = 0; step < STEPS; step++) {
@@ -113,8 +113,8 @@ final class M3LeanGapSortedPortTest {
 
     @Test
     void extremesEmptyContractsAndStructure() {
-        M3LongLongTreeMap map = new M3LongLongTreeMap();
-        M3LongTreeSet set = new M3LongTreeSet();
+        LongLongTreeMap map = new LongLongTreeMap();
+        LongTreeSet set = new LongTreeSet();
         assertTrue(map.isEmpty());
         assertTrue(set.isEmpty());
         assertThrows(NoSuchElementException.class, map::firstKey);
@@ -136,14 +136,14 @@ final class M3LeanGapSortedPortTest {
         assertEquals(Long.MAX_VALUE, set.get(2));
         assertEquals(0, set.indexOf(Long.MIN_VALUE));
 
-        assertLean(M3LongLongTreeMap.class);
-        assertLean(M3LongTreeSet.class);
-        assertEquals(0, M3LongLongTreeMap.class.getDeclaredClasses().length);
-        assertEquals(0, M3LongTreeSet.class.getDeclaredClasses().length);
-        assertThrows(IllegalArgumentException.class, () -> new M3LongLongTreeMap(-1));
+        assertLean(LongLongTreeMap.class);
+        assertLean(LongTreeSet.class);
+        assertEquals(0, LongLongTreeMap.class.getDeclaredClasses().length);
+        assertEquals(0, LongTreeSet.class.getDeclaredClasses().length);
+        assertThrows(IllegalArgumentException.class, () -> new LongLongTreeMap(-1));
     }
 
-    private static void compareMap(M3LongLongTreeMap actual, TreeMap<Long, Long> expected) {
+    private static void compareMap(LongLongTreeMap actual, TreeMap<Long, Long> expected) {
         assertEquals(expected.size(), actual.size());
         long[] keys = new long[expected.size()];
         long[] values = new long[expected.size()];
@@ -166,7 +166,7 @@ final class M3LeanGapSortedPortTest {
         }
     }
 
-    private static void compareSet(M3LongTreeSet actual, TreeSet<Long> expected) {
+    private static void compareSet(LongTreeSet actual, TreeSet<Long> expected) {
         assertEquals(expected.size(), actual.size());
         long[] values = new long[expected.size()];
         int index = 0;
@@ -184,7 +184,7 @@ final class M3LeanGapSortedPortTest {
         }
     }
 
-    private static void compareNavigation(M3LongLongTreeMap actual, TreeMap<Long, Long> expected, long key,
+    private static void compareNavigation(LongLongTreeMap actual, TreeMap<Long, Long> expected, long key,
             long fallback) {
         assertEquals(or(expected.floorKey(key), fallback), actual.floorKey(key, fallback));
         assertEquals(or(expected.ceilingKey(key), fallback), actual.ceilingKey(key, fallback));
@@ -192,7 +192,7 @@ final class M3LeanGapSortedPortTest {
         assertEquals(or(expected.higherKey(key), fallback), actual.higherKey(key, fallback));
     }
 
-    private static void compareNavigation(M3LongTreeSet actual, TreeSet<Long> expected, long value, long fallback) {
+    private static void compareNavigation(LongTreeSet actual, TreeSet<Long> expected, long value, long fallback) {
         assertEquals(or(expected.floor(value), fallback), actual.floor(value, fallback));
         assertEquals(or(expected.ceiling(value), fallback), actual.ceiling(value, fallback));
         assertEquals(or(expected.lower(value), fallback), actual.lower(value, fallback));

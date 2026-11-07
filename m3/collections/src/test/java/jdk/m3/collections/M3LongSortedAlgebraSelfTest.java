@@ -42,9 +42,9 @@ public final class M3LongSortedAlgebraSelfTest {
             if (random.nextBoolean()) right.add(value(random, i + 7));
         }
 
-        M3LongSortedSet intersection = M3LongCompositeViews.sortedIntersection(left, right);
-        M3LongSortedSet difference = M3LongCompositeViews.sortedDifference(left, right);
-        M3LongSortedSet xor = M3LongCompositeViews.sortedSymmetricDifference(left, right);
+        LongSortedSet intersection = M3LongCompositeViews.sortedIntersection(left, right);
+        LongSortedSet difference = M3LongCompositeViews.sortedDifference(left, right);
+        LongSortedSet xor = M3LongCompositeViews.sortedSymmetricDifference(left, right);
 
         for (int phase = 0; phase < 8; phase++) {
             TreeSet<Long> expectedIntersection = new TreeSet<>(left.elements);
@@ -71,12 +71,12 @@ public final class M3LongSortedAlgebraSelfTest {
     }
 
     private static void verify(
-            M3LongSortedSet view, NavigableSet<Long> expected, Random random) {
+            LongSortedSet view, NavigableSet<Long> expected, Random random) {
         long[] wanted = asLongs(expected);
         eq(wanted, view.toArray());
         check(view.size() == expected.size(), "size");
         check(view.isEmpty() == expected.isEmpty(), "isEmpty");
-        M3LongIterator iter = view.iterator();
+        LongIterator iter = view.iterator();
         for (long value : wanted) {
             check(iter.hasNext() && iter.hasNext(), "hasNext idempotent");
             check(iter.nextLong() == value, "ordered primitive iteration");
@@ -162,9 +162,9 @@ public final class M3LongSortedAlgebraSelfTest {
         first.add(5L);
         second.add(5L);
         second.add(9L);
-        M3LongSortedSet intersection = M3LongCompositeViews.sortedIntersection(first, second);
-        M3LongSortedSet difference = M3LongCompositeViews.sortedDifference(first, second);
-        M3LongSortedSet xor = M3LongCompositeViews.sortedSymmetricDifference(first, second);
+        LongSortedSet intersection = M3LongCompositeViews.sortedIntersection(first, second);
+        LongSortedSet difference = M3LongCompositeViews.sortedDifference(first, second);
+        LongSortedSet xor = M3LongCompositeViews.sortedSymmetricDifference(first, second);
 
         eq(new long[] {5L}, intersection.toArray());
         eq(new long[] {1L}, difference.toArray());
@@ -195,12 +195,12 @@ public final class M3LongSortedAlgebraSelfTest {
             left.add(k);
             if ((k & 1L) == 0L) right.add(k);
         }
-        M3LongSortedSet visible = M3LongSortedViews.filter(left, v -> v >= 0);
-        M3LongSortedSet even = M3LongCompositeViews.sortedIntersection(visible, right);
+        LongSortedSet visible = M3LongSortedViews.filter(left, v -> v >= 0);
+        LongSortedSet even = M3LongCompositeViews.sortedIntersection(visible, right);
         eq(new long[] {0, 2, 4, 6, 8, 10, 12}, even.toArray());
         eq(new long[] {1, 3, 5, 7, 9, 11},
                 M3LongCompositeViews.sortedDifference(visible, right).toArray());
-        M3LongSortedSet flipped = M3LongCompositeViews.sortedSymmetricDifference(visible, right);
+        LongSortedSet flipped = M3LongCompositeViews.sortedSymmetricDifference(visible, right);
         eq(new long[] {-12, -10, -8, -6, -4, -2, 1, 3, 5, 7, 9, 11}, flipped.toArray());
         // A detached snapshot stays independent while the live algebra changes.
         long[] snapshot = even.toArray();
@@ -228,7 +228,7 @@ public final class M3LongSortedAlgebraSelfTest {
     private static void noRetainedPerEntryObjects() throws Exception {
         JdkSortedLongSet first = new JdkSortedLongSet(false);
         JdkSortedLongSet second = new JdkSortedLongSet(false);
-        M3LongSortedSet algebra = M3LongCompositeViews.sortedIntersection(first, second);
+        LongSortedSet algebra = M3LongCompositeViews.sortedIntersection(first, second);
         for (Class<?> owner : new Class<?>[] {
                 algebra.getClass(), algebra.iterator().getClass()}) {
             for (Field field : owner.getDeclaredFields()) {
@@ -285,7 +285,7 @@ public final class M3LongSortedAlgebraSelfTest {
     }
 
     /** Independent test oracle; boxed values are confined strictly to tests. */
-    private static final class JdkSortedLongSet implements M3LongSortedSet {
+    private static final class JdkSortedLongSet implements LongSortedSet {
         private final TreeSet<Long> elements = new TreeSet<>();
         private final boolean descendingTraversal;
 
@@ -324,10 +324,10 @@ public final class M3LongSortedAlgebraSelfTest {
             Long result = elements.ceiling(v);
             return result == null ? fallback : result;
         }
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             Iterator<Long> jdk = descendingTraversal
                     ? elements.descendingIterator() : elements.iterator();
-            return new M3LongIterator() {
+            return new LongIterator() {
                 @Override public boolean hasNext() { return jdk.hasNext(); }
                 @Override public long nextLong() { return jdk.next(); }
             };

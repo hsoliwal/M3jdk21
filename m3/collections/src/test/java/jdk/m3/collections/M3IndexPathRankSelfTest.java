@@ -1,7 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
- * Differential oracle for source-sealed M3IndexPathRank.
+ * Differential oracle for source-sealed IndexPathRank.
  */
 package jdk.m3.collections;
 
@@ -42,7 +42,7 @@ public final class M3IndexPathRankSelfTest {
             int first = count == 0 ? length
                     : stride > 0 ? rng.nextInt(length - count + 1)
                     : count - 1 + rng.nextInt(length - count + 1);
-            M3IndexPathRank rank = M3IndexPathRank.snapshot(rows, offsets, stages,
+            IndexPathRank rank = IndexPathRank.snapshot(rows, offsets, stages,
                     needs, denies, first, count, stride);
             List<Integer> expected = new ArrayList<>();
             List<Integer> ordinals = new ArrayList<>();
@@ -80,7 +80,7 @@ public final class M3IndexPathRankSelfTest {
             for (int w = 0; w < 10; w++) {
                 int from = rng.nextInt(count + 1);
                 int to = from + rng.nextInt(count - from + 1);
-                M3IndexPathRank.Window window = rank.window(from, to);
+                IndexPathRank.Window window = rank.window(from, to);
                 int[] expectWindow = expectedWindow(prefix, expected, from, to);
                 assertArray(expectWindow, window.toArray(), "window selection");
                 assertEqual(to - from, window.sourceSize(), "window source-size");
@@ -116,13 +116,13 @@ public final class M3IndexPathRankSelfTest {
         int[][] planes = {{0b11, 0b01, 0b10}, {0b10, 0b11, 0b10}};
         int[] needs = {1, 2};
         int[] excludes = {2, 0};
-        M3IndexPathRank index = M3IndexPathRank.snapshot(rows, offsets, planes, needs, excludes, 4, 5, -1);
+        IndexPathRank index = IndexPathRank.snapshot(rows, offsets, planes, needs, excludes, 4, 5, -1);
         assertArray(new int[]{7, 7}, index.toArray(), "reversed-path multi-stage");
         assertEqual(2, index.size(), "selected-count");
         assertEqual(0, index.rank(1), "rank-before-1");
         assertEqual(4, index.selectedSourceOrdinal(1), "second selected source-index");
         assertArray(new int[]{7}, index.window(1, 4).toArray(), "window-relative");
-        M3IndexPathRank empty = M3IndexPathRank.snapshot(rows, offsets, planes, needs, excludes,
+        IndexPathRank empty = IndexPathRank.snapshot(rows, offsets, planes, needs, excludes,
                 rows.length, 0, 3);
         assertEqual(0, empty.size(), "empty-path");
         assertEqual(0, empty.rank(0), "empty rank");
@@ -139,7 +139,7 @@ public final class M3IndexPathRankSelfTest {
             stages[0][i] = (i == 63 || i == 128 || i == 255) ? 0 : 0x8000_0000;
             stages[1][i] = 0x8000_0000;
         }
-        M3IndexPathRank index = M3IndexPathRank.snapshot(rows, slots, stages,
+        IndexPathRank index = IndexPathRank.snapshot(rows, slots, stages,
                 new int[]{0x8000_0000, 0x8000_0000}, new int[]{0, 0}, 0, rows.length, 1);
         assertEqual(254, index.size(), "three sparse holes across word boundaries");
         for (int i = 0; i <= rows.length; i++) {
@@ -152,7 +152,7 @@ public final class M3IndexPathRankSelfTest {
         }
         assertArray(new int[0], index.window(63, 64).toArray(), "fully-excluded single-row window");
         assertEqual(128 - 1, index.window(1, 130).size(), "window rank across 128");
-        M3IndexPathRank none = M3IndexPathRank.snapshot(rows, slots, stages,
+        IndexPathRank none = IndexPathRank.snapshot(rows, slots, stages,
                 new int[]{0x8000_0000, 0}, new int[]{0x8000_0000, 0}, 0, 257, 1);
         assertEqual(0, none.size(), "overlapping masks select nothing");
         assertEqual(0, none.rank(257), "empty selection at full boundary");
@@ -164,14 +164,14 @@ public final class M3IndexPathRankSelfTest {
         int[][] states = {{1, 2}};
         int[] need = {1};
         int[] deny = {0};
-        fail(NullPointerException.class, () -> M3IndexPathRank.snapshot(null, slots, states, need, deny, 0, 0, 1));
-        fail(IllegalArgumentException.class, () -> M3IndexPathRank.snapshot(row, new int[0], states, need, deny, 0, 0, 1));
-        fail(IllegalArgumentException.class, () -> M3IndexPathRank.snapshot(row, slots, new int[0][], need, deny, 0, 0, 1));
-        fail(IndexOutOfBoundsException.class, () -> M3IndexPathRank.snapshot(row, slots, states, need, deny, 0, 2, -1));
-        fail(IndexOutOfBoundsException.class, () -> M3IndexPathRank.snapshot(row, slots, states, need, deny, 2, 1, 1));
-        fail(IndexOutOfBoundsException.class, () -> M3IndexPathRank.snapshot(row, slots, states, need, deny, 0, 1, 0));
-        fail(IndexOutOfBoundsException.class, () -> M3IndexPathRank.snapshot(row, new int[]{2, 0}, states, need, deny, 0, 1, 1));
-        M3IndexPathRank index = M3IndexPathRank.snapshot(row, slots, states, need, deny, 0, 2, 1);
+        fail(NullPointerException.class, () -> IndexPathRank.snapshot(null, slots, states, need, deny, 0, 0, 1));
+        fail(IllegalArgumentException.class, () -> IndexPathRank.snapshot(row, new int[0], states, need, deny, 0, 0, 1));
+        fail(IllegalArgumentException.class, () -> IndexPathRank.snapshot(row, slots, new int[0][], need, deny, 0, 0, 1));
+        fail(IndexOutOfBoundsException.class, () -> IndexPathRank.snapshot(row, slots, states, need, deny, 0, 2, -1));
+        fail(IndexOutOfBoundsException.class, () -> IndexPathRank.snapshot(row, slots, states, need, deny, 2, 1, 1));
+        fail(IndexOutOfBoundsException.class, () -> IndexPathRank.snapshot(row, slots, states, need, deny, 0, 1, 0));
+        fail(IndexOutOfBoundsException.class, () -> IndexPathRank.snapshot(row, new int[]{2, 0}, states, need, deny, 0, 1, 1));
+        IndexPathRank index = IndexPathRank.snapshot(row, slots, states, need, deny, 0, 2, 1);
         fail(IndexOutOfBoundsException.class, () -> index.rank(3));
         fail(IndexOutOfBoundsException.class, () -> index.selectedRowId(index.size()));
         fail(IndexOutOfBoundsException.class, () -> index.window(1, 3));

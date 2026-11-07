@@ -7,9 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.range.PersistentLongSumTree;
 
 /**
- * Census pass 3 restored members of leaves P3-006 (M3MonotoneLongDeque) and P3-009 (M3PersistentLongSumTree),
+ * Census pass 3 restored members of leaves P3-006 (MonotoneLongDeque) and P3-009 (PersistentLongSumTree),
  * donor com.synexia develop 78cf2ad4c7e5. Every test names members absent on master (test compilation fails there).
  */
 //FLLDCIM: MRL - census3 P3-006/P3-009 restored-member tests (qualification/census3-gaps-20261107)
@@ -17,7 +18,7 @@ class M3Census3GapsTest {
 
     @Test
     void monotoneTailIsTheLatestOffer() {
-        M3MonotoneLongDeque max = new M3MonotoneLongDeque(4, M3MonotoneLongDeque.Mode.MAX);
+        MonotoneLongDeque max = new MonotoneLongDeque(4, MonotoneLongDeque.Mode.MAX);
         max.offer(0, 5L);
         max.offer(1, 3L);
         assertEquals(1L, max.lastIndex());
@@ -30,7 +31,7 @@ class M3Census3GapsTest {
         assertEquals(3L, max.lastIndex());
         assertEquals(9L, max.lastValue());
 
-        M3MonotoneLongDeque min = new M3MonotoneLongDeque(3, M3MonotoneLongDeque.Mode.MIN);
+        MonotoneLongDeque min = new MonotoneLongDeque(3, MonotoneLongDeque.Mode.MIN);
         min.offer(10, 4L);
         min.offer(11, 7L);
         assertEquals(11L, min.lastIndex());
@@ -40,7 +41,7 @@ class M3Census3GapsTest {
 
     @Test
     void monotoneTailOfAnEmptyDequeThrows() {
-        M3MonotoneLongDeque deque = new M3MonotoneLongDeque(2, M3MonotoneLongDeque.Mode.MIN);
+        MonotoneLongDeque deque = new MonotoneLongDeque(2, MonotoneLongDeque.Mode.MIN);
         assertEquals("empty monotone deque",
                 assertThrows(NoSuchElementException.class, deque::lastIndex).getMessage());
         deque.offer(4, 1L);
@@ -51,7 +52,7 @@ class M3Census3GapsTest {
 
     @Test
     void forkAddCreatesVersionsAndKeepsTheBase() {
-        M3PersistentLongSumTree tree = new M3PersistentLongSumTree(8, 4);
+        PersistentLongSumTree tree = new PersistentLongSumTree(8, 4);
         assertEquals(8, tree.length());
         assertEquals(0, tree.rootNode(0));
         int v1 = tree.forkAdd(0, 3, 5L);
@@ -74,7 +75,7 @@ class M3Census3GapsTest {
 
     @Test
     void zeroDeltaSharesTheBaseRoot() {
-        M3PersistentLongSumTree tree = new M3PersistentLongSumTree(5);
+        PersistentLongSumTree tree = new PersistentLongSumTree(5);
         int v1 = tree.forkAdd(0, 2, 9L);
         int nodes = tree.nodeCount();
         int v2 = tree.forkAdd(v1, 4, 0L);
@@ -85,7 +86,7 @@ class M3Census3GapsTest {
 
     @Test
     void overflowRefusesBeforeAnyStateChange() {
-        M3PersistentLongSumTree tree = new M3PersistentLongSumTree(4, 1);
+        PersistentLongSumTree tree = new PersistentLongSumTree(4, 1);
         int v1 = tree.forkAdd(0, 1, Long.MAX_VALUE);
         int nodes = tree.nodeCount();
         int versions = tree.versionCount();
@@ -97,9 +98,9 @@ class M3Census3GapsTest {
 
     @Test
     void presizingConstructorAndRootNodeValidate() {
-        assertThrows(IllegalArgumentException.class, () -> new M3PersistentLongSumTree(0, 1));
-        assertThrows(IllegalArgumentException.class, () -> new M3PersistentLongSumTree(3, -1));
-        M3PersistentLongSumTree tree = new M3PersistentLongSumTree(1, 0);
+        assertThrows(IllegalArgumentException.class, () -> new PersistentLongSumTree(0, 1));
+        assertThrows(IllegalArgumentException.class, () -> new PersistentLongSumTree(3, -1));
+        PersistentLongSumTree tree = new PersistentLongSumTree(1, 0);
         assertEquals(1, tree.length());
         assertThrows(IndexOutOfBoundsException.class, () -> tree.rootNode(1));
         assertThrows(IndexOutOfBoundsException.class, () -> tree.forkAdd(0, 1, 1L));

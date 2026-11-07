@@ -14,7 +14,7 @@
  *******************************************************************************/
 package jdk.m3.pcollections;
 
-import jdk.m3.collections.M3CollectionViews;
+import jdk.m3.collections.CollectionViews;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
@@ -77,15 +77,15 @@ public final class M3PCollections {
 
     /** Live filtered collection, with the existing owner's complete mutation contract. */
     public static <E> Collection<E> liveFiltered(Collection<E> source, Predicate<? super E> predicate) {
-        return M3CollectionViews.filtered(source, predicate);
+        return CollectionViews.filtered(source, predicate);
     }
     public static <E> Set<E> liveFiltered(Set<E> source, Predicate<? super E> predicate) {
-        return M3CollectionViews.filtered(source, predicate);
+        return CollectionViews.filtered(source, predicate);
     }
     public static <E> SortedSet<E> liveFiltered(SortedSet<E> source, Predicate<? super E> predicate) {
-        return M3CollectionViews.filtered(source, predicate);
+        return CollectionViews.filtered(source, predicate);
     }
     public static <E> NavigableSet<E> liveFiltered(NavigableSet<E> source, Predicate<? super E> predicate) {
-        return M3CollectionViews.filtered(source, predicate);
+        return CollectionViews.filtered(source, predicate);
     }
 }

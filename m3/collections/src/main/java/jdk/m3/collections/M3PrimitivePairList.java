@@ -29,17 +29,17 @@ public final class M3PrimitivePairList {
         void accept(long leftBits, long rightBits);
     }
 
-    private final M3PrimitiveKind leftKind;
-    private final M3PrimitiveKind rightKind;
+    private final PrimitiveKind leftKind;
+    private final PrimitiveKind rightKind;
     private Object left;
     private Object right;
     private int size;
 
-    public M3PrimitivePairList(M3PrimitiveKind leftKind, M3PrimitiveKind rightKind) {
+    public M3PrimitivePairList(PrimitiveKind leftKind, PrimitiveKind rightKind) {
         this(leftKind, rightKind, 8);
     }
 
-    public M3PrimitivePairList(M3PrimitiveKind leftKind, M3PrimitiveKind rightKind, int initialCapacity) {
+    public M3PrimitivePairList(PrimitiveKind leftKind, PrimitiveKind rightKind, int initialCapacity) {
         this.leftKind = Objects.requireNonNull(leftKind, "leftKind");
         this.rightKind = Objects.requireNonNull(rightKind, "rightKind");
         if (initialCapacity < 0) throw new IllegalArgumentException("initialCapacity < 0");
@@ -48,8 +48,8 @@ public final class M3PrimitivePairList {
         right = rightKind.newArray(capacity);
     }
 
-    public M3PrimitiveKind leftKind() { return leftKind; }
-    public M3PrimitiveKind rightKind() { return rightKind; }
+    public PrimitiveKind leftKind() { return leftKind; }
+    public PrimitiveKind rightKind() { return rightKind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return java.lang.reflect.Array.getLength(left); }
@@ -114,14 +114,14 @@ public final class M3PrimitivePairList {
         return index;
     }
 
-    /** Test-only copy injection; the default remains the existing M3PrimitiveKind owner. */
+    /** Test-only copy injection; the default remains the existing PrimitiveKind owner. */
     @FunctionalInterface
     interface BackingCopier {
-        Object copy(M3PrimitiveKind kind, Object source, int capacity);
+        Object copy(PrimitiveKind kind, Object source, int capacity);
     }
 
     private void ensure(int required) {
-        ensure(required, M3PrimitiveKind::copyOf);
+        ensure(required, PrimitiveKind::copyOf);
     }
 
     /** Two-phase, type-checked backing growth; no partial lane publication. */

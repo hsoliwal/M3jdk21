@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Structured construction requirements for provider-backed lean collections.
@@ -36,7 +36,7 @@ public final class M3ProviderCollectionRequirements {
     private final long logicalSize;
     private final int pageSize;
     private final int maxResidentRows;
-    private final M3PrimitiveKind[] laneKinds;
+    private final PrimitiveKind[] laneKinds;
 
     private M3ProviderCollectionRequirements(Builder builder) {
         purpose = builder.purpose;
@@ -50,7 +50,7 @@ public final class M3ProviderCollectionRequirements {
         validate();
     }
 
-    public static Builder builder(Purpose purpose, M3PrimitiveKind... laneKinds) {
+    public static Builder builder(Purpose purpose, PrimitiveKind... laneKinds) {
         return new Builder(purpose, laneKinds);
     }
 
@@ -61,8 +61,8 @@ public final class M3ProviderCollectionRequirements {
     public long logicalSize() { return logicalSize; }
     public int pageSize() { return pageSize; }
     public int maxResidentRows() { return maxResidentRows; }
-    public M3PrimitiveKind[] laneKinds() { return laneKinds.clone(); }
-    M3PrimitiveKind[] rawLaneKinds() { return laneKinds; }
+    public PrimitiveKind[] laneKinds() { return laneKinds.clone(); }
+    PrimitiveKind[] rawLaneKinds() { return laneKinds; }
 
     public IdWidth resolvedIdWidth() {
         if (idWidth != IdWidth.AUTO) return idWidth;
@@ -91,7 +91,7 @@ public final class M3ProviderCollectionRequirements {
         if (logicalSize < 0L) throw new IllegalArgumentException("logicalSize < 0");
         if (maxResidentRows < 0) throw new IllegalArgumentException("maxResidentRows < 0");
         if (laneKinds.length == 0) throw new IllegalArgumentException("at least one lane required");
-        for (M3PrimitiveKind kind : laneKinds) Objects.requireNonNull(kind, "lane kind");
+        for (PrimitiveKind kind : laneKinds) Objects.requireNonNull(kind, "lane kind");
 
         switch (purpose) {
             case ROWS -> {
@@ -132,7 +132,7 @@ public final class M3ProviderCollectionRequirements {
 
     public static final class Builder {
         private final Purpose purpose;
-        private final M3PrimitiveKind[] laneKinds;
+        private final PrimitiveKind[] laneKinds;
         private IdWidth idWidth = IdWidth.AUTO;
         private Paging paging;
         private long maximumLogicalId = Integer.MAX_VALUE - 1L;
@@ -140,7 +140,7 @@ public final class M3ProviderCollectionRequirements {
         private int pageSize;
         private int maxResidentRows;
 
-        private Builder(Purpose purpose, M3PrimitiveKind... laneKinds) {
+        private Builder(Purpose purpose, PrimitiveKind... laneKinds) {
             this.purpose = Objects.requireNonNull(purpose, "purpose");
             Objects.requireNonNull(laneKinds, "laneKinds");
             this.laneKinds = laneKinds.clone();

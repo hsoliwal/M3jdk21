@@ -278,11 +278,11 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
      * preserves encounter order, duplicate values, and the current slice.
      *
      * <p>No object reference or user callback enters JNI. Native-required mode
-     * reuses M3IndexPathMasks and refuses when its existing library is absent.
+     * reuses IndexPathMasks and refuses when its existing library is absent.
      */
     public M3IndexedListSnapshot<E> maskedByPhysicalState(
             int[] physicalStates, int requiredMask, int forbiddenMask,
-            M3IndexPathMasks.Backend backend) {
+            IndexPathMasks.Backend backend) {
         Objects.requireNonNull(physicalStates, "physicalStates");
         Objects.requireNonNull(backend, "backend");
         return maskedByPhysicalStates(
@@ -300,11 +300,11 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
      * required/forbidden masks retain all 32 bits, including the sign bit.
      * The caller must not mutate a plane during selection. The resulting
      * immutable snapshot retains neither plane nor mask vector. JNI is an
-     * explicit opt-in to the existing primitive M3IndexPathMasks kernel.
+     * explicit opt-in to the existing primitive IndexPathMasks kernel.
      */
     public M3IndexedListSnapshot<E> maskedByPhysicalStates(
             int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
-            M3IndexPathMasks.Backend backend) {
+            IndexPathMasks.Backend backend) {
         Objects.requireNonNull(physicalStates, "physicalStates");
         Objects.requireNonNull(requiredMasks, "requiredMasks");
         Objects.requireNonNull(forbiddenMasks, "forbiddenMasks");
@@ -321,7 +321,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
                 throw new IllegalArgumentException("state words must align with physical slots");
             }
         }
-        int[] admitted = M3IndexPathMasks.select(
+        int[] admitted = IndexPathMasks.select(
                 positions, positions, physicalStates, requiredMasks, forbiddenMasks,
                 from, size(), 1, backend);
         return new M3IndexedListSnapshot<>(values, admitted, 0, admitted.length, null);
@@ -334,7 +334,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
      */
     public M3IndexedListSnapshot<E> sortedMaskedByPhysicalState(
             int[] physicalStates, int requiredMask, int forbiddenMask,
-            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
+            Comparator<? super E> comparator, IndexPathMasks.Backend backend) {
         M3IndexedListSnapshot<E> selected = maskedByPhysicalState(
                 physicalStates, requiredMask, forbiddenMask, backend);
         selected.sortPositions(selected.positions, comparator);
@@ -349,7 +349,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
      */
     public M3IndexedListSnapshot<E> sortedMaskedByPhysicalStates(
             int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
-            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
+            Comparator<? super E> comparator, IndexPathMasks.Backend backend) {
         M3IndexedListSnapshot<E> selected = maskedByPhysicalStates(
                 physicalStates, requiredMasks, forbiddenMasks, backend);
         selected.sortPositions(selected.positions, comparator);
@@ -390,7 +390,7 @@ public final class M3IndexedListSnapshot<E> extends AbstractList<E> implements R
      */
     public M3IndexedListSnapshot<E> sortedMaskedByPhysicalStatesDescending(
             int[][] physicalStates, int[] requiredMasks, int[] forbiddenMasks,
-            Comparator<? super E> comparator, M3IndexPathMasks.Backend backend) {
+            Comparator<? super E> comparator, IndexPathMasks.Backend backend) {
         M3IndexedListSnapshot<E> selected = maskedByPhysicalStates(
                 physicalStates, requiredMasks, forbiddenMasks, backend);
         selected.orderDescending(selected.positions, comparator);

@@ -24,7 +24,7 @@ final class M3SortedPrimitiveBinarySearchTest {
      * Frozen reference algorithm from prior M3PrimitiveSortedArraySet/Map.search.
      * This must not call kind.binarySearch, so a regression cannot compare itself.
      */
-    private static int legacySearch(M3PrimitiveKind kind, Object lanes, int size, long wanted) {
+    private static int legacySearch(PrimitiveKind kind, Object lanes, int size, long wanted) {
         int low = 0;
         int high = size - 1;
         while (low <= high) {
@@ -40,10 +40,10 @@ final class M3SortedPrimitiveBinarySearchTest {
     @Test
     void allEightPrimitiveKindsHaveExactIndicesAndInsertionPoints() {
         Random random = new Random(0x4d33_5352L);
-        for (M3PrimitiveKind kind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind kind : PrimitiveKind.values()) {
             M3PrimitiveSortedArraySet set = new M3PrimitiveSortedArraySet(kind, 1);
             M3PrimitiveSortedArrayMap map =
-                    new M3PrimitiveSortedArrayMap(kind, M3PrimitiveKind.LONG, 1);
+                    new M3PrimitiveSortedArrayMap(kind, PrimitiveKind.LONG, 1);
             assertEquals(-1, set.binarySearchBits(0L));
             assertEquals(-1, map.binarySearchKeyBits(0L));
             for (int iteration = 0; iteration < 120; iteration++) {
@@ -72,8 +72,8 @@ final class M3SortedPrimitiveBinarySearchTest {
     void allSixtyFourMapPrimitivePairingsPreserveExactValueBits() {
         long[] keys = {-9L, 0L, 1L, 4L, Long.MIN_VALUE, Long.MAX_VALUE,
                        0x7ff8_0000_0000_0001L, 0x8000_0000_0000_0000L};
-        for (M3PrimitiveKind keyKind : M3PrimitiveKind.values()) {
-            for (M3PrimitiveKind valueKind : M3PrimitiveKind.values()) {
+        for (PrimitiveKind keyKind : PrimitiveKind.values()) {
+            for (PrimitiveKind valueKind : PrimitiveKind.values()) {
                 M3PrimitiveSortedArrayMap map =
                         new M3PrimitiveSortedArrayMap(keyKind, valueKind, 1);
                 for (int i = 0; i < keys.length; i++) {
@@ -97,15 +97,15 @@ final class M3SortedPrimitiveBinarySearchTest {
 
     @Test
     void nanPayloadsAndSignedZeroRetainFloatAndDoubleOrdering() {
-        for (M3PrimitiveKind kind : new M3PrimitiveKind[] {
-                M3PrimitiveKind.FLOAT, M3PrimitiveKind.DOUBLE }) {
+        for (PrimitiveKind kind : new PrimitiveKind[] {
+                PrimitiveKind.FLOAT, PrimitiveKind.DOUBLE }) {
             M3PrimitiveSortedArraySet set = new M3PrimitiveSortedArraySet(kind, 1);
-            long negativeZero = kind == M3PrimitiveKind.FLOAT
+            long negativeZero = kind == PrimitiveKind.FLOAT
                     ? 0x8000_0000L : 0x8000_0000_0000_0000L;
             long positiveZero = 0L;
-            long nanA = kind == M3PrimitiveKind.FLOAT
+            long nanA = kind == PrimitiveKind.FLOAT
                     ? 0x7fc0_0001L : 0x7ff8_0000_0000_0001L;
-            long nanB = kind == M3PrimitiveKind.FLOAT
+            long nanB = kind == PrimitiveKind.FLOAT
                     ? 0x7fc0_0002L : 0x7ff8_0000_0000_0002L;
             assertTrue(set.addBits(negativeZero));
             assertTrue(set.addBits(positiveZero));
@@ -123,9 +123,9 @@ final class M3SortedPrimitiveBinarySearchTest {
     void mapAndSetLongMutationsMatchIndependentJdkSortedOwners() {
         Random random = new Random(0x2121_5151L);
         M3PrimitiveSortedArraySet set =
-                new M3PrimitiveSortedArraySet(M3PrimitiveKind.LONG, 1);
+                new M3PrimitiveSortedArraySet(PrimitiveKind.LONG, 1);
         M3PrimitiveSortedArrayMap map =
-                new M3PrimitiveSortedArrayMap(M3PrimitiveKind.LONG, M3PrimitiveKind.LONG, 1);
+                new M3PrimitiveSortedArrayMap(PrimitiveKind.LONG, PrimitiveKind.LONG, 1);
         TreeSet<Long> expectedSet = new TreeSet<>();
         TreeMap<Long, Long> expectedMap = new TreeMap<>();
         for (int operation = 0; operation < 3_072; operation++) {

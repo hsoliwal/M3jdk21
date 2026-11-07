@@ -7,11 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.bits.LongBitSet;
 
 final class M3LongBitSetNavigationTest {
     @Test
     void navigationMatchesJdkBoundarySemantics() {
-        M3LongBitSet bits = new M3LongBitSet(64);
+        LongBitSet bits = new LongBitSet(64);
         bits.set(0);
         bits.set(2);
         bits.set(63);
@@ -38,7 +39,7 @@ final class M3LongBitSetNavigationTest {
 
     @Test
     void lengthAndEmptyTrackHighestSetBitNotCapacity() {
-        M3LongBitSet bits = new M3LongBitSet(256);
+        LongBitSet bits = new LongBitSet(256);
         assertTrue(bits.isEmpty());
         assertEquals(0, bits.length());
         bits.set(130);
@@ -52,8 +53,8 @@ final class M3LongBitSetNavigationTest {
 
     @Test
     void intersectsAndAndNotMatchExactSetSemantics() {
-        M3LongBitSet left = new M3LongBitSet();
-        M3LongBitSet right = new M3LongBitSet();
+        LongBitSet left = new LongBitSet();
+        LongBitSet right = new LongBitSet();
         left.set(1);
         left.set(64);
         left.set(130);
@@ -70,7 +71,7 @@ final class M3LongBitSetNavigationTest {
 
     @Test
     void allAllocatedBitsSetStillFindsClearBitAtLogicalEnd() {
-        M3LongBitSet bits = new M3LongBitSet(64);
+        LongBitSet bits = new LongBitSet(64);
         for (int i = 0; i < 64; i++) bits.set(i);
         assertEquals(64, bits.nextClearBit(0));
         assertEquals(-1, bits.previousClearBit(63));
@@ -78,7 +79,7 @@ final class M3LongBitSetNavigationTest {
 
     @Test
     void nullExactSetOperandsAreRejected() {
-        M3LongBitSet bits = new M3LongBitSet();
+        LongBitSet bits = new LongBitSet();
         assertThrows(NullPointerException.class, () -> bits.intersects(null));
         assertThrows(NullPointerException.class, () -> bits.andNot(null));
     }

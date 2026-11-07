@@ -4,7 +4,7 @@ package jdk.m3.collections.interop;
 
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
-import jdk.m3.collections.M3LongBag;
+import jdk.m3.collections.LongBag;
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -23,14 +23,14 @@ import java.util.function.ObjIntConsumer;
  *
  * <p>Each key's count is bounded by Integer.MAX_VALUE. size() saturates at that
  * value; internal aggregate size is checked long. add/remove return OLD counts,
- * unlike M3LongBag. Iterators retain a primitive snapshot of distinct keys (not
+ * unlike LongBag. Iterators retain a primitive snapshot of distinct keys (not
  * occurrences), are best-effort fail-fast, and support removal through the live owner.
  * Entry projections are immutable snapshots. Views themselves stay backed.
  */
 //FLLDCIM: MRL - fold-close audit leaf L0014: ADD from PR #1084 head 6b16a20dcedf blob 4bef22568f1d, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
-//FLLDCIM: MRL - the PR-head owner spelled size()/distinctSize()/add(long); master's M3LongBag (e6722c63e9b, blob d00efc879547) spells totalCount()/distinctCount()/add(long, long): calls renamed, contract unchanged (HANDOFF.tsv)
+//FLLDCIM: MRL - the PR-head owner spelled size()/distinctSize()/add(long); master's LongBag (e6722c63e9b, blob d00efc879547) spells totalCount()/distinctCount()/add(long, long): calls renamed, contract unchanged (HANDOFF.tsv)
 public final class M3GuavaLongMultiset extends AbstractCollection<Long> implements Multiset<Long> {
-    private final M3LongBag counts = new M3LongBag();
+    private final LongBag counts = new LongBag();
     private long version;
     private Set<Long> elements;
     private Set<Entry<Long>> entries;
@@ -223,7 +223,7 @@ public final class M3GuavaLongMultiset extends AbstractCollection<Long> implemen
     @Override public String toString() { return entrySet().toString(); }
 
     /** Independent primitive snapshot; mutating it cannot bypass the facade's int-count limit. */
-    public M3LongBag toLongBag() { return counts.copy(); }
+    public LongBag toLongBag() { return counts.copy(); }
 
     private void check(long expected) {
         if (expected != version) throw new ConcurrentModificationException();

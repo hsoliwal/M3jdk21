@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.text.IntKmpPattern;
 
 /** Contract oracle for exactly the frozen KMP constructor/failure-table atom. */
 final class M3IntKmpPatternFrozenSnapshotTest {
@@ -23,7 +24,7 @@ final class M3IntKmpPatternFrozenSnapshotTest {
     void callerMutationCannotAlterRetainedPatternOrFailure() {
         int[] source = {1, 2, 1, 2, 1, 3, 1, 2, 1};
         int[] frozen = source.clone();
-        M3IntKmpPattern compiled = new M3IntKmpPattern(source);
+        IntKmpPattern compiled = new IntKmpPattern(source);
         Arrays.fill(source, -1);
         assertArrayEquals(frozen, compiled.copyPattern());
         assertArrayEquals(referenceFailure(frozen), compiled.copyFailureFunction());
@@ -43,7 +44,7 @@ final class M3IntKmpPatternFrozenSnapshotTest {
                 input[i] = (round % 13 == 0) ? 0 : random.nextInt(11) - 5;
             }
             int[] snapshot = input.clone();
-            M3IntKmpPattern compiled = new M3IntKmpPattern(input);
+            IntKmpPattern compiled = new IntKmpPattern(input);
             assertArrayEquals(referenceFailure(snapshot), compiled.copyFailureFunction());
             List<Integer> expected = referenceMatches(text, snapshot);
             assertEquals(expected.size(), compiled.count(text));
@@ -73,7 +74,7 @@ final class M3IntKmpPatternFrozenSnapshotTest {
         });
         try {
             for (int trial = 0; trial < RACE_TRIALS; trial++) {
-                M3IntKmpPattern compiled = new M3IntKmpPattern(input);
+                IntKmpPattern compiled = new IntKmpPattern(input);
                 assertArrayEquals(referenceFailure(compiled.copyPattern()),
                         compiled.copyFailureFunction(), "retained snapshot trial " + trial);
             }

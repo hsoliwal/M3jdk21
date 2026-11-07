@@ -69,7 +69,7 @@ public final class M3StagedPhysicalStateSnapshotProof {
     }
 
     private static void caseOf(Integer[] original, Random random,
-            M3IndexPathMasks.Backend backend) {
+            IndexPathMasks.Backend backend) {
         Integer[] originalCopy = original.clone();
         M3IndexedListSnapshot<Integer> source = M3IndexedListSnapshot.copyOf(original);
         int start = random.nextInt(source.size() + 1);
@@ -150,7 +150,7 @@ public final class M3StagedPhysicalStateSnapshotProof {
                 () -> sorted.addAll(List.of()), "read-only zero-op addAll");
     }
 
-    private static void edges(M3IndexPathMasks.Backend backend) {
+    private static void edges(IndexPathMasks.Backend backend) {
         Integer[] values = {null, 3, 3, -3, null, 7};
         M3IndexedListSnapshot<Integer> view = M3IndexedListSnapshot.copyOf(values);
         int[][] planes = {
@@ -196,7 +196,7 @@ public final class M3StagedPhysicalStateSnapshotProof {
     }
 
     private static void nativeRefusal() {
-        if (M3IndexPathMasks.nativeAvailable()) return;
+        if (IndexPathMasks.nativeAvailable()) return;
         M3IndexedListSnapshot<Integer> source =
                 M3IndexedListSnapshot.copyOf(new Integer[] {1, 2, 3});
         AtomicInteger called = new AtomicInteger();
@@ -206,19 +206,19 @@ public final class M3StagedPhysicalStateSnapshotProof {
                         (left, right) -> {
                             called.incrementAndGet();
                             return Integer.compare(left, right);
-                        }, M3IndexPathMasks.Backend.NATIVE_REQUIRED),
+                        }, IndexPathMasks.Backend.NATIVE_REQUIRED),
                 "native-required rejection");
         same(0, called.get(), "native refusal precedes Java comparator");
     }
 
     public static void main(String[] arguments) {
         boolean nativeRequired = arguments.length == 1 && "--native".equals(arguments[0]);
-        if (nativeRequired && !M3IndexPathMasks.nativeAvailable()) {
+        if (nativeRequired && !IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("real JNI required by test command");
         }
         nativeRefusal();
-        M3IndexPathMasks.Backend backend = nativeRequired
-                ? M3IndexPathMasks.Backend.NATIVE_REQUIRED : M3IndexPathMasks.Backend.JAVA;
+        IndexPathMasks.Backend backend = nativeRequired
+                ? IndexPathMasks.Backend.NATIVE_REQUIRED : IndexPathMasks.Backend.JAVA;
         edges(backend);
         Random random = new Random(0x4d33535441474544L);
         for (Integer[] values : new Integer[][] {

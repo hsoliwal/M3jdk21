@@ -20,37 +20,37 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
-import jdk.m3.collections.M3LongCollection;
-import jdk.m3.collections.M3LongIterator;
-import jdk.m3.collections.M3LongSortedSet;
-import jdk.m3.collections.M3LongTreeSet;
+import jdk.m3.collections.LongCollection;
+import jdk.m3.collections.LongIterator;
+import jdk.m3.collections.LongSortedSet;
+import jdk.m3.collections.LongTreeSet;
 
 /** Live, read-only primitive composition with no retained objects per element. */
 public final class M3LongCompositeViews {
     private M3LongCompositeViews() { }
 
-    public static M3LongCollection concat(M3LongCollection... backings) {
+    public static LongCollection concat(LongCollection... backings) {
         return new Concatenation(validate(backings));
     }
-    public static M3LongSortedSet sortedUnion(M3LongSortedSet... backings) {
+    public static LongSortedSet sortedUnion(LongSortedSet... backings) {
         return new Union(validate(backings));
     }
 
     /** Live read-only intersection; sorted set occurrences are unique. */
-    public static M3LongSortedSet sortedIntersection(
-            M3LongSortedSet left, M3LongSortedSet right) {
+    public static LongSortedSet sortedIntersection(
+            LongSortedSet left, LongSortedSet right) {
         return new BinarySetAlgebra(left, right, SetOperation.INTERSECTION);
     }
 
     /** Live read-only left-minus-right, without copying backing values. */
-    public static M3LongSortedSet sortedDifference(
-            M3LongSortedSet left, M3LongSortedSet right) {
+    public static LongSortedSet sortedDifference(
+            LongSortedSet left, LongSortedSet right) {
         return new BinarySetAlgebra(left, right, SetOperation.DIFFERENCE);
     }
 
     /** Live read-only symmetric set difference, not bag disjunction. */
-    public static M3LongSortedSet sortedSymmetricDifference(
-            M3LongSortedSet left, M3LongSortedSet right) {
+    public static LongSortedSet sortedSymmetricDifference(
+            LongSortedSet left, LongSortedSet right) {
         return new BinarySetAlgebra(left, right, SetOperation.SYMMETRIC_DIFFERENCE);
     }
 
@@ -59,9 +59,9 @@ public final class M3LongCompositeViews {
         for (T source : result) Objects.requireNonNull(source, "source");
         return result;
     }
-    private static Spliterator.OfLong cursorSpliterator(M3LongCollection source, int flags) {
+    private static Spliterator.OfLong cursorSpliterator(LongCollection source, int flags) {
         return new Spliterator.OfLong() {
-            private M3LongIterator cursor;
+            private LongIterator cursor;
             public boolean tryAdvance(LongConsumer action) {
                 Objects.requireNonNull(action, "action");
                 if (cursor == null) cursor = source.iterator();
@@ -82,18 +82,18 @@ public final class M3LongCompositeViews {
      * Nested compositions are paths through existing child directories, not a
      * reason to recursively wrap every child or materialize primitive payloads.
      */
-    private static final class Concatenation implements M3LongCollection {
-        private final M3LongCollection[] inputs;
-        Concatenation(M3LongCollection[] inputs) { this.inputs = inputs; }
+    private static final class Concatenation implements LongCollection {
+        private final LongCollection[] inputs;
+        Concatenation(LongCollection[] inputs) { this.inputs = inputs; }
 
         /** One reference-array frame and one int offset per nesting level. */
         private static final class PathCursor {
-            private M3LongCollection[][] frames = new M3LongCollection[8][];
+            private LongCollection[][] frames = new LongCollection[8][];
             private int[] offsets = new int[8];
             private int depth = 1;
-            private M3LongCollection ready;
+            private LongCollection ready;
 
-            PathCursor(M3LongCollection[] roots) { frames[0] = roots; }
+            PathCursor(LongCollection[] roots) { frames[0] = roots; }
 
             boolean hasNext() {
                 if (ready != null) return true;
@@ -104,7 +104,7 @@ public final class M3LongCompositeViews {
                         depth--;
                         continue;
                     }
-                    M3LongCollection child = frames[frame][offsets[frame]++];
+                    LongCollection child = frames[frame][offsets[frame]++];
                     if (child instanceof Concatenation nested) {
                         if (depth == frames.length) {
                             int capacity = Math.multiplyExact(frames.length, 2);
@@ -121,9 +121,9 @@ public final class M3LongCompositeViews {
                 return false;
             }
 
-            M3LongCollection next() {
+            LongCollection next() {
                 if (!hasNext()) throw new NoSuchElementException();
-                M3LongCollection leaf = ready;
+                LongCollection leaf = ready;
                 ready = null;
                 return leaf;
             }
@@ -149,7 +149,7 @@ public final class M3LongCompositeViews {
         public long[] toArray() {
             long[] result = new long[size()];
             int i = 0;
-            M3LongIterator cursor = iterator();
+            LongIterator cursor = iterator();
             while (cursor.hasNext()) {
                 if (i == result.length) throw new IllegalStateException("backing size changed");
                 result[i++] = cursor.nextLong();
@@ -157,10 +157,10 @@ public final class M3LongCompositeViews {
             if (i != result.length) throw new IllegalStateException("backing size changed");
             return result;
         }
-        public M3LongIterator iterator() {
-            return new M3LongIterator() {
+        public LongIterator iterator() {
+            return new LongIterator() {
                 private PathCursor path;
-                private M3LongIterator active;
+                private LongIterator active;
                 public boolean hasNext() {
                     if (path == null) path = new PathCursor(inputs);
                     while (active == null || !active.hasNext()) {
@@ -179,30 +179,30 @@ public final class M3LongCompositeViews {
             return cursorSpliterator(this, Spliterator.ORDERED | Spliterator.NONNULL);
         }
     }
-    private static final class Union implements M3LongSortedSet {
-        private final M3LongSortedSet[] inputs;
-        Union(M3LongSortedSet[] inputs) { this.inputs = inputs; }
+    private static final class Union implements LongSortedSet {
+        private final LongSortedSet[] inputs;
+        Union(LongSortedSet[] inputs) { this.inputs = inputs; }
         public boolean add(long v) { throw new UnsupportedOperationException("read-only union"); }
         public boolean remove(long v) { throw new UnsupportedOperationException("read-only union"); }
         public void clear() { throw new UnsupportedOperationException("read-only union"); }
         public int filterInPlace(LongPredicate p) { throw new UnsupportedOperationException("read-only union"); }
         public boolean contains(long v) {
-            for (M3LongSortedSet s : inputs) if (s.contains(v)) return true;
+            for (LongSortedSet s : inputs) if (s.contains(v)) return true;
             return false;
         }
         public boolean isEmpty() {
-            for (M3LongSortedSet s : inputs) if (!s.isEmpty()) return false;
+            for (LongSortedSet s : inputs) if (!s.isEmpty()) return false;
             return true;
         }
-        public M3LongIterator iterator() { return new Merge(inputs); }
+        public LongIterator iterator() { return new Merge(inputs); }
         public int size() {
-            int n = 0; M3LongIterator i = iterator();
+            int n = 0; LongIterator i = iterator();
             while (i.hasNext()) { i.nextLong(); n = Math.addExact(n, 1); }
             return n;
         }
         public long[] toArray() {
             long[] result = new long[Math.min(8, inputs.length)]; int size = 0;
-            M3LongIterator i = iterator();
+            LongIterator i = iterator();
             while (i.hasNext()) {
                 if (size == result.length) result = Arrays.copyOf(result,
                         Math.max(size + 1, Math.max(8, result.length + (result.length >>> 1))));
@@ -214,10 +214,10 @@ public final class M3LongCompositeViews {
             return cursorSpliterator(this, Spliterator.ORDERED | Spliterator.NONNULL
                     | Spliterator.SORTED | Spliterator.DISTINCT);
         }
-        public long first() { M3LongIterator i = iterator(); if (!i.hasNext()) throw new NoSuchElementException(); return i.nextLong(); }
+        public long first() { LongIterator i = iterator(); if (!i.hasNext()) throw new NoSuchElementException(); return i.nextLong(); }
         public long last() {
             boolean found = false; long result = 0;
-            for (M3LongSortedSet source : inputs) if (!source.isEmpty()) {
+            for (LongSortedSet source : inputs) if (!source.isEmpty()) {
                 long x = source.last(); if (!found || x > result) result = x; found = true;
             }
             if (!found) throw new NoSuchElementException();
@@ -225,7 +225,7 @@ public final class M3LongCompositeViews {
         }
         public long lower(long q, long fallback) {
             boolean found = false; long result = 0;
-            for (M3LongSortedSet s : inputs) {
+            for (LongSortedSet s : inputs) {
                 long x = s.lower(q, q); if (x == q) continue;
                 if (!found || x > result) result = x; found = true;
             }
@@ -233,7 +233,7 @@ public final class M3LongCompositeViews {
         }
         public long higher(long q, long fallback) {
             boolean found = false; long result = 0;
-            for (M3LongSortedSet s : inputs) {
+            for (LongSortedSet s : inputs) {
                 long x = s.higher(q, q); if (x == q) continue;
                 if (!found || x < result) result = x; found = true;
             }
@@ -247,14 +247,14 @@ public final class M3LongCompositeViews {
     /**
      * Parent-owned live descriptor. Neither an entry node nor an element payload
      * array is created or retained. Contract: ascending signed-long sorted sets.
-     * The comparator cannot be arbitrary because M3LongSortedSet has no comparator.
+     * The comparator cannot be arbitrary because LongSortedSet has no comparator.
      */
-    private static final class BinarySetAlgebra implements M3LongSortedSet {
-        private final M3LongSortedSet left;
-        private final M3LongSortedSet right;
+    private static final class BinarySetAlgebra implements LongSortedSet {
+        private final LongSortedSet left;
+        private final LongSortedSet right;
         private final SetOperation operation;
 
-        BinarySetAlgebra(M3LongSortedSet left, M3LongSortedSet right,
+        BinarySetAlgebra(LongSortedSet left, LongSortedSet right,
                          SetOperation operation) {
             this.left = Objects.requireNonNull(left, "left");
             this.right = Objects.requireNonNull(right, "right");
@@ -273,7 +273,7 @@ public final class M3LongCompositeViews {
 
         @Override public int size() {
             int count = 0;
-            M3LongIterator cursor = iterator();
+            LongIterator cursor = iterator();
             while (cursor.hasNext()) {
                 cursor.nextLong();
                 count = Math.addExact(count, 1);
@@ -284,7 +284,7 @@ public final class M3LongCompositeViews {
         /** Exactly one returned primitive array, with no intermediate entry list. */
         @Override public long[] toArray() {
             long[] values = new long[size()];
-            M3LongIterator cursor = iterator();
+            LongIterator cursor = iterator();
             int count = 0;
             while (cursor.hasNext()) {
                 if (count == values.length) {
@@ -300,7 +300,7 @@ public final class M3LongCompositeViews {
             return values;
         }
 
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             return new BinarySetCursor(left.iterator(), right.iterator(), operation);
         }
 
@@ -310,13 +310,13 @@ public final class M3LongCompositeViews {
         }
 
         @Override public long first() {
-            M3LongIterator cursor = iterator();
+            LongIterator cursor = iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             return cursor.nextLong();
         }
 
         @Override public long last() {
-            M3LongIterator cursor = iterator();
+            LongIterator cursor = iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             long last;
             do { last = cursor.nextLong(); } while (cursor.hasNext());
@@ -324,8 +324,8 @@ public final class M3LongCompositeViews {
         }
 
         /**
-         * Only the final, first-party M3LongTreeSet supplies proven, signed-long
-         * indexed neighbors. Other M3LongSortedSet implementations retain the
+         * Only the final, first-party LongTreeSet supplies proven, signed-long
+         * indexed neighbors. Other LongSortedSet implementations retain the
          * original cursor traversal, including order/callback validation.
          * For a STRICT neighbor the query itself is a safe miss marker:
          * an existing predecessor or successor cannot equal that query.
@@ -381,16 +381,16 @@ public final class M3LongCompositeViews {
             return fallback;
         }
 
-        private static long neighbor(M3LongSortedSet owner, long pivot,
+        private static long neighbor(LongSortedSet owner, long pivot,
                 boolean forward) {
             return forward ? owner.higher(pivot, pivot) : owner.lower(pivot, pivot);
         }
 
         private long seek(long query, long fallback, boolean forward, boolean inclusive) {
-            if (left instanceof M3LongTreeSet && right instanceof M3LongTreeSet) {
+            if (left instanceof LongTreeSet && right instanceof LongTreeSet) {
                 return indexedSeek(query, fallback, forward, inclusive);
             }
-            M3LongIterator cursor = iterator();
+            LongIterator cursor = iterator();
             boolean found = false;
             long last = 0L;
             while (cursor.hasNext()) {
@@ -440,9 +440,9 @@ public final class M3LongCompositeViews {
      * Advances never allocate a value wrapper or per-element intermediate node.
      * Rejects incorrect source ordering without sentinel MIN_VALUE/MAX_VALUE.
      */
-    private static final class BinarySetCursor implements M3LongIterator {
-        private final M3LongIterator left;
-        private final M3LongIterator right;
+    private static final class BinarySetCursor implements LongIterator {
+        private final LongIterator left;
+        private final LongIterator right;
         private final SetOperation operation;
         private long leftValue;
         private long rightValue;
@@ -457,7 +457,7 @@ public final class M3LongCompositeViews {
         private boolean outputReady;
         private boolean finished;
 
-        BinarySetCursor(M3LongIterator left, M3LongIterator right, SetOperation operation) {
+        BinarySetCursor(LongIterator left, LongIterator right, SetOperation operation) {
             this.left = left;
             this.right = right;
             this.operation = operation;
@@ -566,15 +566,15 @@ public final class M3LongCompositeViews {
     }
 
     /** One primitive heap head per source; no Map.Entry or per-value nodes. */
-    private static final class Merge implements M3LongIterator {
-        private final M3LongIterator[] input;
+    private static final class Merge implements LongIterator {
+        private final LongIterator[] input;
         private final long[] head;
         private final int[] owner;
         private int size;
         private boolean ready, previous;
         private long next, last;
-        Merge(M3LongSortedSet[] sources) {
-            input = new M3LongIterator[sources.length];
+        Merge(LongSortedSet[] sources) {
+            input = new LongIterator[sources.length];
             head = new long[sources.length]; owner = new int[sources.length];
             for (int n = 0; n < sources.length; n++) {
                 input[n] = sources[n].iterator();

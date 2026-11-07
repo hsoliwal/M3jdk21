@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3LinkedList;
 import java.util.ArrayList;
@@ -135,7 +135,7 @@ final class M3GuavaListMultimapRealTest {
         for (int i = 0; i < states.length; i++)
             states[i] = (i % 3 == 0 ? Integer.MIN_VALUE : 0) | (i % 5 == 0 ? 2 : 0);
         var java = input.selectedByStates(states, Integer.MIN_VALUE, 2,
-                M3IndexPathMasks.Backend.JAVA);
+                IndexPathMasks.Backend.JAVA);
         var reference = ArrayListMultimap.<String,Integer>create();
         List<Map.Entry<String,Integer>> rows = new ArrayList<>(input.entries());
         for (int i = 0; i < states.length; i++)
@@ -143,9 +143,9 @@ final class M3GuavaListMultimapRealTest {
                 reference.put(rows.get(i).getKey(), rows.get(i).getValue());
         assertEquals(reference.asMap(), java.asMap());
         if (Boolean.getBoolean("m3.interop.requireNative")) {
-            assertTrue(M3IndexPathMasks.nativeAvailable(), "native JNI required and not available");
+            assertTrue(IndexPathMasks.nativeAvailable(), "native JNI required and not available");
             var nativeMap = input.selectedByStates(states, Integer.MIN_VALUE, 2,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                    IndexPathMasks.Backend.NATIVE_REQUIRED);
             assertEquals(reference.asMap(), nativeMap.asMap());
         }
         java.put("extra", null);

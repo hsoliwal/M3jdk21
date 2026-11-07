@@ -35,16 +35,16 @@ public final class M3AdaptiveEnumPrimitiveMap<E extends Enum<E>> {
     }
 
     private final Class<E> keyType;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind valueKind;
     private final int domainSize;
     private M3PrimitivePrimitiveHashMap sparse;
     private M3EnumPrimitiveMap<E> direct;
 
-    public M3AdaptiveEnumPrimitiveMap(Class<E> keyType, M3PrimitiveKind valueKind) {
+    public M3AdaptiveEnumPrimitiveMap(Class<E> keyType, PrimitiveKind valueKind) {
         this(keyType, valueKind, 0);
     }
 
-    public M3AdaptiveEnumPrimitiveMap(Class<E> keyType, M3PrimitiveKind valueKind, int expectedSize) {
+    public M3AdaptiveEnumPrimitiveMap(Class<E> keyType, PrimitiveKind valueKind, int expectedSize) {
         this.keyType = Objects.requireNonNull(keyType, "keyType");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         E[] constants = keyType.getEnumConstants();
@@ -57,12 +57,12 @@ public final class M3AdaptiveEnumPrimitiveMap<E extends Enum<E>> {
             direct = new M3EnumPrimitiveMap<>(keyType, valueKind);
         } else {
             sparse = new M3PrimitivePrimitiveHashMap(
-                    M3PrimitiveKind.INT, valueKind, Math.max(1, expectedSize), LOAD_FACTOR);
+                    PrimitiveKind.INT, valueKind, Math.max(1, expectedSize), LOAD_FACTOR);
         }
     }
 
     public Class<E> keyType() { return keyType; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int keyCapacity() { return domainSize; }
     public int size() { return direct != null ? direct.size() : sparse.size(); }
     public boolean isEmpty() { return size() == 0; }
@@ -164,7 +164,7 @@ public final class M3AdaptiveEnumPrimitiveMap<E extends Enum<E>> {
 
     private void migrateToSparse() {
         M3PrimitivePrimitiveHashMap next = new M3PrimitivePrimitiveHashMap(
-                M3PrimitiveKind.INT, valueKind, Math.max(1, direct.size()), LOAD_FACTOR);
+                PrimitiveKind.INT, valueKind, Math.max(1, direct.size()), LOAD_FACTOR);
         direct.forEachOrdinal((ordinal, valueBits) -> next.putBits(ordinal, valueBits, 0L));
         sparse = next;
         direct = null;

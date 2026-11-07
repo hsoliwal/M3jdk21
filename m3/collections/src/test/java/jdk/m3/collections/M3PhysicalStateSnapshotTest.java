@@ -16,7 +16,7 @@ final class M3PhysicalStateSnapshotTest {
 
     @Test
     void optionalNativeParity() {
-        if (M3IndexPathMasks.nativeAvailable()) {
+        if (IndexPathMasks.nativeAvailable()) {
             M3PhysicalStateSnapshotProof.main(new String[] {"--native"});
         }
     }

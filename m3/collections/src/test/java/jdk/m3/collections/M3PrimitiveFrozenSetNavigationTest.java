@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 final class M3PrimitiveFrozenSetNavigationTest {
     @Test
     void snapshotIsDetachedAndNavigable() {
-        M3PrimitiveHashSet source = new M3PrimitiveHashSet(M3PrimitiveKind.INT);
+        M3PrimitiveHashSet source = new M3PrimitiveHashSet(PrimitiveKind.INT);
         source.addBits(10);
         source.addBits(30);
         source.addBits(20);
@@ -42,7 +42,7 @@ final class M3PrimitiveFrozenSetNavigationTest {
     @Test
     void emptyFirstAndLastThrow() {
         M3PrimitiveFrozenSet empty =
-                M3PrimitiveFrozenSet.copyOf(new M3PrimitiveHashSet(M3PrimitiveKind.LONG));
+                M3PrimitiveFrozenSet.copyOf(new M3PrimitiveHashSet(PrimitiveKind.LONG));
         assertThrows(NoSuchElementException.class, empty::firstBits);
         assertThrows(NoSuchElementException.class, empty::lastBits);
         assertEquals(7L, empty.floorOrDefaultBits(1L, 7L));

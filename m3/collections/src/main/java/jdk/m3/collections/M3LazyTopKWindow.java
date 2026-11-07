@@ -43,8 +43,8 @@ public final class M3LazyTopKWindow {
     private static final int[] EMPTY = new int[0];
 
     private final M3PrimitiveSoaStore source;
-    private final M3PrimitiveKind firstKind;
-    private final M3PrimitiveKind nextKind;
+    private final PrimitiveKind firstKind;
+    private final PrimitiveKind nextKind;
     private final int firstLane;
     private final int nextLane;
     private final boolean ascending;

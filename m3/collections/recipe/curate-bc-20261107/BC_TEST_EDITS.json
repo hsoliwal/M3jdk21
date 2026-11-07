@@ -1,0 +1,14 @@
+[
+  {
+    "file": "collections/src/test/java/jdk/m3/collections/M3AdaptiveEnumLongMapTest.java",
+    "why": "the asserted list of field type names is sorted; IntLongHashMap now sorts before M3EnumLongMap",
+    "old": "List.of(\"Class\", \"M3EnumLongMap\", \"IntLongHashMap\", \"int\")",
+    "new": "List.of(\"Class\", \"IntLongHashMap\", \"M3EnumLongMap\", \"int\")"
+  },
+  {
+    "file": "collections/src/test/java/jdk/m3/collections/M3IntIntHashMapConditionalRemoveDifferentialTest.java",
+    "why": "the preimage fixture is frozen (its sha256 is pinned); the test translates its old type names before compiling it",
+    "old": "        String text = new String(source, StandardCharsets.UTF_8);\n",
+    "new": "        String text = new String(source, StandardCharsets.UTF_8).replace(\"M3IntIntConsumer\", \"IntIntConsumer\").replace(\"M3IntIterator\", \"IntIterator\").replace(\"M3LongLongHashMap\", \"LongLongHashMap\").replace(\"M3IntIntHashMap\", \"IntIntHashMap\"); // curation-keep-names: the frozen preimage keeps the pre-curation names\n"
+  }
+]

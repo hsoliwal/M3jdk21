@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.function.LongConsumer;
 import jdk.m3.collections.M3PrimitiveArrayList;
 import jdk.m3.collections.M3PrimitiveHashSet;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Insertion-ordered primitive set.
@@ -32,17 +32,17 @@ import jdk.m3.collections.M3PrimitiveKind;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveOrderedSet {
-    private final M3PrimitiveKind kind;
+    private final PrimitiveKind kind;
     private final M3PrimitiveHashSet membership;
     private final M3PrimitiveArrayList order;
 
-    public M3PrimitiveOrderedSet(M3PrimitiveKind kind) {
+    public M3PrimitiveOrderedSet(PrimitiveKind kind) {
         this.kind = Objects.requireNonNull(kind, "kind");
         membership = new M3PrimitiveHashSet(kind);
         order = new M3PrimitiveArrayList(kind);
     }
 
-    public M3PrimitiveKind kind() { return kind; }
+    public PrimitiveKind kind() { return kind; }
     public int size() { return order.size(); }
     public boolean isEmpty() { return order.isEmpty(); }
     public long payloadBytes() { return membership.payloadBytes() + order.payloadBytes(); }

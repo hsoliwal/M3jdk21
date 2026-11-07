@@ -71,8 +71,8 @@ public final class M3FilteredCowOwnerContract {
     }
 
     private static Collection<Integer> view(Collection<Integer> owner, boolean nested) {
-        Collection<Integer> view = M3CollectionViews.filtered(owner, value -> (value & 1) == 0);
-        return nested ? M3CollectionViews.filtered(view, value -> value >= 2) : view;
+        Collection<Integer> view = CollectionViews.filtered(owner, value -> (value & 1) == 0);
+        return nested ? CollectionViews.filtered(view, value -> value >= 2) : view;
     }
 
     private static boolean visible(int value, boolean nested) {
@@ -137,11 +137,11 @@ public final class M3FilteredCowOwnerContract {
         List<Integer> input = List.of(0, 1, 2, 3, 4, 5, 6);
         Collection<Integer> owner = owner(set, false, input);
         RuntimeException marker = new RuntimeException("intentional predicate failure");
-        Collection<Integer> filtered = M3CollectionViews.filtered(owner, value -> {
+        Collection<Integer> filtered = CollectionViews.filtered(owner, value -> {
             if (visibilityFailure && value == 4) throw marker;
             return (value & 1) == 0;
         });
-        if (nested) filtered = M3CollectionViews.filtered(filtered, value -> value >= 2);
+        if (nested) filtered = CollectionViews.filtered(filtered, value -> value >= 2);
         RuntimeException observed = null;
         try {
             filtered.removeIf(value -> {
@@ -158,7 +158,7 @@ public final class M3FilteredCowOwnerContract {
     private static void nullValidation(boolean set) {
         Collection<Integer> owner = owner(set, false, List.of(0, 1, 2));
         int[] calls = { 0 };
-        Collection<Integer> filtered = M3CollectionViews.filtered(owner, value -> {
+        Collection<Integer> filtered = CollectionViews.filtered(owner, value -> {
             calls[0]++;
             return true;
         });
@@ -189,7 +189,7 @@ public final class M3FilteredCowOwnerContract {
         Entry hidden = new Entry(7, false);
         Entry selected = new Entry(7, true);
         CopyOnWriteArrayList<Entry> owner = new CopyOnWriteArrayList<>(List.of(hidden, selected));
-        Collection<Entry> filtered = M3CollectionViews.filtered(owner, entry -> entry.visible);
+        Collection<Entry> filtered = CollectionViews.filtered(owner, entry -> entry.visible);
         check(filtered.removeAll(List.of(new Entry(7, true))), "equal visible entry not removed");
         check(owner.size() == 1 && owner.get(0) == hidden, "hidden equal reference was removed");
     }

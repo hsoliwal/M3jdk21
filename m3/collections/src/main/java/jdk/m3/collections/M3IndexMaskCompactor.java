@@ -635,7 +635,7 @@ public final class M3IndexMaskCompactor {
      * @throws IndexOutOfBoundsException when from/count do not describe a valid array range
      * @throws UnsatisfiedLinkError when the requested native library or symbol is unavailable
      */
-    public static int firstEqualBits(M3PrimitiveKind kind, Object values, int from, int count,
+    public static int firstEqualBits(PrimitiveKind kind, Object values, int from, int count,
                                      long bits, Backend backend) {
         Objects.requireNonNull(kind, "kind");
         Objects.requireNonNull(values, "values");
@@ -651,7 +651,7 @@ public final class M3IndexMaskCompactor {
     }
 
     /*
-     * JNI ABI kind IDs are the M3PrimitiveKind declaration order (identical to the Synexia PrimitiveKind order):
+     * JNI ABI kind IDs are the PrimitiveKind declaration order (identical to the Synexia PrimitiveKind order):
      * BOOLEAN=0, BYTE=1, SHORT=2, CHAR=3, INT=4, LONG=5, FLOAT=6, DOUBLE=7.
      */
     private static native int firstEqualBits0(int kind, Object values, int from, int count, long bits);

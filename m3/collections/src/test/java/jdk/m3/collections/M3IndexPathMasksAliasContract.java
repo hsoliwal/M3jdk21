@@ -66,14 +66,14 @@ public final class M3IndexPathMasksAliasContract {
     }
 
     private static long scan(Inputs input, int first, int count, int stride, int next,
-            int[] output, int outputOffset, int limit, M3IndexPathMasks.Backend backend) {
-        return M3IndexPathMasks.scanWindow(input.rows(), input.offsets(), input.planes(),
+            int[] output, int outputOffset, int limit, IndexPathMasks.Backend backend) {
+        return IndexPathMasks.scanWindow(input.rows(), input.offsets(), input.planes(),
                 input.required(), input.forbidden(), first, count, stride, next,
                 output, outputOffset, limit, backend);
     }
 
     private static void refuses(Inputs input, int[] output, int first, int count,
-            int stride, int next, int offset, int limit, M3IndexPathMasks.Backend backend,
+            int stride, int next, int offset, int limit, IndexPathMasks.Backend backend,
             Class<? extends RuntimeException> expected, String message) {
         Inputs before = copy(input);
         int[] outputBefore = output.clone();
@@ -94,7 +94,7 @@ public final class M3IndexPathMasksAliasContract {
     }
 
     private static void aliasesBeforeAnyWrite() {
-        for (M3IndexPathMasks.Backend backend : M3IndexPathMasks.Backend.values()) {
+        for (IndexPathMasks.Backend backend : IndexPathMasks.Backend.values()) {
             for (int masks = 0; masks < 3; masks++) {
                 for (int category = 0; category < 6; category++) {
                     for (int variant = 0; variant < 7; variant++) {
@@ -119,7 +119,7 @@ public final class M3IndexPathMasksAliasContract {
     }
 
     private static void sharedMasksAndEmptyInputs() {
-        for (M3IndexPathMasks.Backend backend : M3IndexPathMasks.Backend.values()) {
+        for (IndexPathMasks.Backend backend : IndexPathMasks.Backend.values()) {
             for (int limit : new int[] {0, 1, 2}) {
                 Inputs normal = inputs(0);
                 int[] masks = {1, 0};
@@ -142,13 +142,13 @@ public final class M3IndexPathMasksAliasContract {
     }
 
     private static void validationOrder() {
-        for (M3IndexPathMasks.Backend backend : M3IndexPathMasks.Backend.values()) {
+        for (IndexPathMasks.Backend backend : IndexPathMasks.Backend.values()) {
             Inputs input = inputs(0);
             refuses(input, input.required(), 0, 6, 1, -1, 0, 1, backend,
                     IndexOutOfBoundsException.class, "path ordinal");
             refuses(input, input.required(), 0, 6, 1, 0, 0, -1, backend,
                     IllegalArgumentException.class, "bounded window");
-            refuses(input, input.forbidden(), 0, 6, 1, 0, 0, M3IndexPathMasks.MAX_WINDOW + 1,
+            refuses(input, input.forbidden(), 0, 6, 1, 0, 0, IndexPathMasks.MAX_WINDOW + 1,
                     backend, IllegalArgumentException.class, "bounded window");
             refuses(input, input.required(), 0, 6, 1, 0, 3, 0, backend,
                     IndexOutOfBoundsException.class, null);
@@ -163,12 +163,12 @@ public final class M3IndexPathMasksAliasContract {
 
     private static void result(long packed, int next, int written) {
         checks++;
-        if (M3IndexPathMasks.nextOrdinal(packed) != next || M3IndexPathMasks.written(packed) != written) {
+        if (IndexPathMasks.nextOrdinal(packed) != next || IndexPathMasks.written(packed) != written) {
             throw new AssertionError("wrong cursor or selected count");
         }
     }
 
-    private static void validSeparateOutput(M3IndexPathMasks.Backend backend) {
+    private static void validSeparateOutput(IndexPathMasks.Backend backend) {
         Inputs input = new Inputs(new int[] {9, 9, 9, 7, -1, Integer.MIN_VALUE},
                 new int[] {5, 4, 3, 2, 1, 0},
                 new int[][] {{1, 0, 3, 1, 1, 1}, {0, 0, 0, 2, 0, 0}},
@@ -206,20 +206,20 @@ public final class M3IndexPathMasksAliasContract {
 
     public static void main(String[] args) {
         nativeRun = args.length != 0 && args[0].equals("--native");
-        if (nativeRun != M3IndexPathMasks.nativeAvailable()) {
+        if (nativeRun != IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("requested native availability does not match actual library");
         }
         aliasesBeforeAnyWrite();
         sharedMasksAndEmptyInputs();
         validationOrder();
-        validSeparateOutput(M3IndexPathMasks.Backend.JAVA);
-        if (nativeRun) validSeparateOutput(M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+        validSeparateOutput(IndexPathMasks.Backend.JAVA);
+        if (nativeRun) validSeparateOutput(IndexPathMasks.Backend.NATIVE_REQUIRED);
         else {
             Inputs input = inputs(0);
             int[] output = {101, 101};
             checks++;
             try {
-                scan(input, 0, 6, 1, 0, output, 0, 2, M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                scan(input, 0, 6, 1, 0, output, 0, 2, IndexPathMasks.Backend.NATIVE_REQUIRED);
                 throw new AssertionError("missing native library was not refused");
             } catch (UnsatisfiedLinkError expected) {
                 same(new int[] {101, 101}, output, "missing native wrote output");

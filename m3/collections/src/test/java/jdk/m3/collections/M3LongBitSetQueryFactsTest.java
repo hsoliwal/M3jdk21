@@ -11,6 +11,7 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.bits.LongBitSet;
 
 /** Exact state/iteration contract of the M3 bitmap query-fact cache. */
 final class M3LongBitSetQueryFactsTest {
@@ -18,7 +19,7 @@ final class M3LongBitSetQueryFactsTest {
     void repeatedQueriesAndMutationsMatchJavaBitSet() {
         Random random = new Random(0xC011EC7L);
         for (int bits : new int[] {0, 1, 63, 64, 65, 127, 128, 129, 8192}) {
-            M3LongBitSet actual = new M3LongBitSet(bits);
+            LongBitSet actual = new LongBitSet(bits);
             BitSet reference = new BitSet(bits);
             for (int i = 0; i < 4096; i++) {
                 int index = random.nextInt(Math.max(1, bits + 64));
@@ -41,9 +42,9 @@ final class M3LongBitSetQueryFactsTest {
 
     @Test
     void bulkOperationsAndSelfAliasingInvalidateCorrectly() {
-        M3LongBitSet actual = new M3LongBitSet(1000);
+        LongBitSet actual = new LongBitSet(1000);
         BitSet expected = new BitSet(1000);
-        M3LongBitSet mask = new M3LongBitSet(1000);
+        LongBitSet mask = new LongBitSet(1000);
         BitSet referenceMask = new BitSet(1000);
         for (int i = 0; i < 1000; i += 3) { actual.set(i); expected.set(i); }
         for (int i = 0; i < 1000; i += 7) { mask.set(i); referenceMask.set(i); }
@@ -71,7 +72,7 @@ final class M3LongBitSetQueryFactsTest {
 
     @Test
     void callbackMutationStillObservesLiveFutureBits() {
-        M3LongBitSet bits = new M3LongBitSet(256);
+        LongBitSet bits = new LongBitSet(256);
         bits.set(1); bits.set(64); bits.set(66);
         List<Integer> observed = new ArrayList<>();
         bits.forEachSetBit(index -> {

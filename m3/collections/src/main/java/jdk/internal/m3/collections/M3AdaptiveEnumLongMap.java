@@ -6,7 +6,7 @@ package jdk.internal.m3.collections;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import jdk.m3.collections.M3IntLongHashMap;
+import jdk.m3.collections.IntLongHashMap;
 
 /**
  * Enum-keyed primitive-long map that hashes ordinals while sparse and switches to the dense
@@ -15,8 +15,8 @@ import jdk.m3.collections.M3IntLongHashMap;
  * <p>This is the adaptive variant deferred from {@link M3EnumLongMap}, adapted from the
  * first-party Synexia donor {@code jdk.internal.m3.primitives.AdaptiveEnumPrimitiveMap} onto the
  * single {@code long} value lane of the proving ground. The backing is chosen by retained
- * primitive bytes: {@code n} mappings stay sparse in an {@link M3IntLongHashMap} while
- * {@link M3IntLongHashMap#payloadBytesFor(int) payloadBytesFor(n)} is below
+ * primitive bytes: {@code n} mappings stay sparse in an {@link IntLongHashMap} while
+ * {@link IntLongHashMap#payloadBytesFor(int) payloadBytesFor(n)} is below
  * {@link #directPayloadBytes()}, and the insertion that reaches {@link #directSwitchSize()}
  * migrates every mapping to the dense lane. Removal never migrates implicitly;
  * {@link #compact()} re-applies the rule to the current size and shrinks a sparse table.
@@ -32,7 +32,7 @@ import jdk.m3.collections.M3IntLongHashMap;
 public final class M3AdaptiveEnumLongMap<E extends Enum<E>> {
     private final Class<E> keyType;
     private final int domainSize;
-    private M3IntLongHashMap sparse;
+    private IntLongHashMap sparse;
     private M3EnumLongMap<E> direct;
 
     public M3AdaptiveEnumLongMap(Class<E> keyType) {
@@ -54,7 +54,7 @@ public final class M3AdaptiveEnumLongMap<E extends Enum<E>> {
         if (shouldUseDirect(expectedSize)) {
             direct = new M3EnumLongMap<>(keyType);
         } else {
-            sparse = new M3IntLongHashMap(expectedSize);
+            sparse = new IntLongHashMap(expectedSize);
         }
     }
 
@@ -234,7 +234,7 @@ public final class M3AdaptiveEnumLongMap<E extends Enum<E>> {
             migrateToDirect();
             return;
         }
-        if (M3IntLongHashMap.payloadBytesFor(currentSize) < sparse.payloadBytes()) {
+        if (IntLongHashMap.payloadBytesFor(currentSize) < sparse.payloadBytes()) {
             sparse = copySparse(currentSize);
         }
     }
@@ -289,7 +289,7 @@ public final class M3AdaptiveEnumLongMap<E extends Enum<E>> {
 
     private boolean shouldUseDirect(int expectedSize) {
         return directPayloadBytes(domainSize)
-                <= M3IntLongHashMap.payloadBytesFor(Math.max(1, expectedSize));
+                <= IntLongHashMap.payloadBytesFor(Math.max(1, expectedSize));
     }
 
     private static long directPayloadBytes(int domainSize) {
@@ -306,14 +306,14 @@ public final class M3AdaptiveEnumLongMap<E extends Enum<E>> {
     }
 
     private void migrateToSparse() {
-        M3IntLongHashMap next = new M3IntLongHashMap(direct.size());
+        IntLongHashMap next = new IntLongHashMap(direct.size());
         direct.forEachOrdinal(next::put);
         sparse = next;
         direct = null;
     }
 
-    private M3IntLongHashMap copySparse(int expectedSize) {
-        M3IntLongHashMap next = new M3IntLongHashMap(expectedSize);
+    private IntLongHashMap copySparse(int expectedSize) {
+        IntLongHashMap next = new IntLongHashMap(expectedSize);
         sparse.forEach(next::put);
         return next;
     }

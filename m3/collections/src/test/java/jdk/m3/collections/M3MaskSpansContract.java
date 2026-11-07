@@ -45,7 +45,7 @@ public final class M3MaskSpansContract {
                 if ((flags & required) == required && (flags & excluded) == 0) expected[offset + count++] = rows[next];
                 next++;
             }
-            long result = M3IndexMaskWindow.scanBounded(rows, states, first, budget,
+            long result = IndexMaskWindow.scanBounded(rows, states, first, budget,
                     required, excluded, actual, offset, cap, backend);
             if (result != (((long) next << 32) | count) || !Arrays.equals(actual, expected)
                     || !Arrays.equals(rows, frozenRows) || !Arrays.equals(states, frozenStates)) {

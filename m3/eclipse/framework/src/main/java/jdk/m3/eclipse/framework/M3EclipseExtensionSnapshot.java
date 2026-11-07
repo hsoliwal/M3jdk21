@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.eclipse.framework;
 
-import jdk.m3.collections.M3ObjectStateSlots28;
+import jdk.m3.collections.ObjectStateSlots28;
 import java.util.List;
 import java.util.Objects;
 import org.eclipse.core.runtime.IExtensionPoint;
@@ -17,8 +17,8 @@ import org.eclipse.core.runtime.IExtensionRegistry;
  * {@link #livePoint(String)} forwards to the canonical registry instead.</p>
  */
 public final class M3EclipseExtensionSnapshot {
-    public static final int VALID_AT_CAPTURE = M3ObjectStateSlots28.VISIBLE;
-    public static final int INVALID_AT_CAPTURE = M3ObjectStateSlots28.DIRTY;
+    public static final int VALID_AT_CAPTURE = ObjectStateSlots28.VISIBLE;
+    public static final int INVALID_AT_CAPTURE = ObjectStateSlots28.DIRTY;
 
     private final IExtensionRegistry registry;
     private final M3EclipseIndexedSnapshot<IExtensionPoint> rows =

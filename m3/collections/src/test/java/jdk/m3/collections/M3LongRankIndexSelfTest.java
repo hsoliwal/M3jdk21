@@ -96,7 +96,7 @@ public final class M3LongRankIndexSelfTest {
         }
     }
 
-    private static final class ArraySource implements M3LongCollection {
+    private static final class ArraySource implements LongCollection {
         private final long[] values;
         private int length;
 
@@ -112,8 +112,8 @@ public final class M3LongRankIndexSelfTest {
         }
         @Override public void clear() { length = 0; }
         @Override public long[] toArray() { return Arrays.copyOf(values, length); }
-        @Override public M3LongIterator iterator() {
-            return new M3LongIterator() {
+        @Override public LongIterator iterator() {
+            return new LongIterator() {
                 private int position;
                 @Override public boolean hasNext() { return position < length; }
                 @Override public long nextLong() {

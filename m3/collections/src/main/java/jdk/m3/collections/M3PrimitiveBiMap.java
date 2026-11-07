@@ -32,20 +32,20 @@ public final class M3PrimitiveBiMap {
         void accept(long keyBits, long valueBits);
     }
 
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private final M3PrimitivePrimitiveHashMap forward;
     private final M3PrimitivePrimitiveHashMap reverse;
     private M3PrimitiveBiMap inverse;
 
-    public M3PrimitiveBiMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind) {
+    public M3PrimitiveBiMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         forward = new M3PrimitivePrimitiveHashMap(keyKind, valueKind);
         reverse = new M3PrimitivePrimitiveHashMap(valueKind, keyKind);
     }
 
-    private M3PrimitiveBiMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind,
+    private M3PrimitiveBiMap(PrimitiveKind keyKind, PrimitiveKind valueKind,
             M3PrimitivePrimitiveHashMap forward, M3PrimitivePrimitiveHashMap reverse,
             M3PrimitiveBiMap inverse) {
         this.keyKind = keyKind;
@@ -55,8 +55,8 @@ public final class M3PrimitiveBiMap {
         this.inverse = inverse;
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
 
     /**
      * Returns a live inverse sharing the same two flat indexes. Changes through

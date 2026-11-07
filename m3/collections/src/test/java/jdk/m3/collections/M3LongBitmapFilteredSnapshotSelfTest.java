@@ -128,7 +128,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         leaked.clear();
         check(cached.physicalMaskCopy().cardinality() == cached.size(), "defensive bitset");
         int encounter = 0;
-        M3LongIterator cursor = cached.iterator();
+        LongIterator cursor = cached.iterator();
         while (cursor.hasNext()) check(cursor.nextLong() == selected[encounter++], "cursor");
         check(encounter == selected.length, "iterator exhaustion");
         fails(NoSuchElementException.class, cursor::nextLong);
@@ -176,7 +176,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         }
     }
 
-    private static final class MutableSource implements M3LongCollection {
+    private static final class MutableSource implements LongCollection {
         private long[] items;
         MutableSource(long... items) { this.items = items.clone(); }
         void replace(long... value) { items = value.clone(); }
@@ -187,9 +187,9 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         }
         @Override public void clear() { items = new long[0]; }
         @Override public long[] toArray() { return items.clone(); }
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             long[] capture = items;
-            return new M3LongIterator() {
+            return new LongIterator() {
                 int index;
                 @Override public boolean hasNext() { return index < capture.length; }
                 @Override public long nextLong() {
@@ -219,7 +219,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
         M3LongBitmapFilteredSnapshot asc = cached.sortedAscending();
         check(cached.sortedAscending() == asc, "sorted wrapper reused by revision");
         check(callbacks.get() == 5, "cached sort must not retest");
-        M3LongIterator old = cached.iterator();
+        LongIterator old = cached.iterator();
         check(old.nextLong() == 3L, "iterator begins");
         source.replace(5, 4, 3, 2, 1, 0);
         epoch.incrementAndGet();
@@ -274,7 +274,7 @@ public final class M3LongBitmapFilteredSnapshotSelfTest {
             check(holder[0].sortedAscending() == asc
                     && holder[0].sortedDescending() == desc, "sorted sidecars remain memoized");
             check(calls.get() == 6, "sorted sidecars do not rerun predicates");
-            M3LongIterator old = holder[0].iterator();
+            LongIterator old = holder[0].iterator();
             check(old.nextLong() == 3, "manual invalidation cursor begins");
             source.replace(9);
             holder[0].invalidate();

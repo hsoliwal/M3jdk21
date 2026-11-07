@@ -29,11 +29,11 @@ final class M3ObjectResidencyPressureAllocationTest {
     private static final long OVER_BUDGET_BYTES = BUDGET + 1L;
     private static final Object PROJECTION = new Object();
     private static final Function<Object, Boolean> TOUCH = projection -> Boolean.TRUE;
-    private static final M3ObjectResidency.Reinitializer<Object> RESET = (projection, slot) -> { };
-    private static final int AWARE = M3ObjectResidency.LAZY_CREATE | M3ObjectResidency.PRESSURE_AWARE;
-    private static final int AWARE_REUSABLE = AWARE | M3ObjectResidency.RECREATE
-            | M3ObjectResidency.STRICT_NO_ESCAPE;
-    private static volatile M3ObjectResidency.Decision sink;
+    private static final ObjectResidency.Reinitializer<Object> RESET = (projection, slot) -> { };
+    private static final int AWARE = ObjectResidency.LAZY_CREATE | ObjectResidency.PRESSURE_AWARE;
+    private static final int AWARE_REUSABLE = AWARE | ObjectResidency.RECREATE
+            | ObjectResidency.STRICT_NO_ESCAPE;
+    private static volatile ObjectResidency.Decision sink;
 
     private static com.sun.management.ThreadMXBean meter() {
         com.sun.management.ThreadMXBean bean = (com.sun.management.ThreadMXBean) ManagementFactory.getThreadMXBean();
@@ -42,8 +42,8 @@ final class M3ObjectResidencyPressureAllocationTest {
         return bean;
     }
 
-    private static M3ObjectResidency<Object> owner(int slots, int flags, long budget) {
-        return new M3ObjectResidency<>(slots, flags, budget, 0L, slot -> PROJECTION, null, null);
+    private static ObjectResidency<Object> owner(int slots, int flags, long budget) {
+        return new ObjectResidency<>(slots, flags, budget, 0L, slot -> PROJECTION, null, null);
     }
 
     /** Bytes CALLS iterations of the loop allocated beyond an empty measurement (after WARMUP_CALLS iterations). */
@@ -63,7 +63,7 @@ final class M3ObjectResidencyPressureAllocationTest {
     @Test
     void pressureAwareResidentUseTakesNoSnapshot() {
         com.sun.management.ThreadMXBean bean = meter();
-        M3ObjectResidency<Object> arena = owner(2, AWARE, BUDGET);
+        ObjectResidency<Object> arena = owner(2, AWARE, BUDGET);
         assertEquals(Boolean.TRUE, arena.use(0, PROJECTION_BYTES, TOUCH));
         long bytes = allocated(bean, n -> {
             for (int i = 0; i < n; i++) arena.use(0, PROJECTION_BYTES, TOUCH);
@@ -75,19 +75,19 @@ final class M3ObjectResidencyPressureAllocationTest {
     @Test
     void pressureAwareSignalTakesNoSnapshot() {
         com.sun.management.ThreadMXBean bean = meter();
-        M3ObjectResidency<Object> arena = owner(2, AWARE, BUDGET);
+        ObjectResidency<Object> arena = owner(2, AWARE, BUDGET);
         arena.use(0, PROJECTION_BYTES, TOUCH);
         long bytes = allocated(bean, n -> {
             for (int i = 0; i < n; i++) arena.signalMemoryPressure();
         });
         assertBelowOneBytePerCall(bytes, "a PRESSURE_AWARE signalMemoryPressure() allocated");
-        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
     }
 
     @Test
     void pressureAwareRefusedReuseTakesNoSnapshot() {
         com.sun.management.ThreadMXBean bean = meter();
-        M3ObjectResidency<Object> arena = owner(2, AWARE_REUSABLE, BUDGET);
+        ObjectResidency<Object> arena = owner(2, AWARE_REUSABLE, BUDGET);
         arena.use(0, PROJECTION_BYTES, TOUCH);
         assertFalse(arena.reuseUnborrowedProjection(0, 1, OVER_BUDGET_BYTES, RESET));
         long bytes = allocated(bean, n -> {
@@ -98,21 +98,21 @@ final class M3ObjectResidencyPressureAllocationTest {
             }
         });
         assertBelowOneBytePerCall(bytes, "a PRESSURE_AWARE budget-refused reuse allocated");
-        assertEquals(M3ObjectResidency.State.ABSENT, arena.state(1));
+        assertEquals(ObjectResidency.State.ABSENT, arena.state(1));
     }
 
     @Test
     void pressureAwareAdmissionAllocatesOnlyItsDecision() {
         com.sun.management.ThreadMXBean bean = meter();
-        M3ObjectResidency<Object> arena = owner(CALLS + WARMUP_CALLS + 1, AWARE, Long.MAX_VALUE);
+        ObjectResidency<Object> arena = owner(CALLS + WARMUP_CALLS + 1, AWARE, Long.MAX_VALUE);
         int[] next = {0};
         long admissions = allocated(bean, n -> {
             for (int end = next[0] + n; next[0] < end; next[0]++) arena.use(next[0], 1L, TOUCH);
         });
         long decisions = allocated(bean, n -> {
             for (int slot = 0; slot < n; slot++) {
-                sink = new M3ObjectResidency.Decision(slot, M3ObjectResidency.State.ABSENT,
-                        M3ObjectResidency.State.RESIDENT, slot, Long.MAX_VALUE, "created");
+                sink = new ObjectResidency.Decision(slot, ObjectResidency.State.ABSENT,
+                        ObjectResidency.State.RESIDENT, slot, Long.MAX_VALUE, "created");
             }
         });
         assertBelowOneBytePerCall(admissions - decisions, "a PRESSURE_AWARE admission allocated beyond its Decision");

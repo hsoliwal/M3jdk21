@@ -15,15 +15,15 @@ import java.util.stream.LongStream;
 import org.junit.jupiter.api.Test;
 
 /**
- * Merge-loss case 06 restore: {@link M3LongArrayList#longSpliterator()} is fail-fast like the list's own
+ * Merge-loss case 06 restore: {@link LongArrayList#longSpliterator()} is fail-fast like the list's own
  * iterators (the count is captured when the spliterator is created), restoring the behaviour the 2026-10-07
  * IndexSpliterator had before merge e6ff978d1145 dropped it.
  */
 final class M3LongArrayListSpliteratorFailFastTest {
     private static final int SIZE = 64;
 
-    private static M3LongArrayList filled() {
-        M3LongArrayList list = new M3LongArrayList();
+    private static LongArrayList filled() {
+        LongArrayList list = new LongArrayList();
         for (long value = 0; value < SIZE; value++) {
             list.add(value * 3);
         }
@@ -32,7 +32,7 @@ final class M3LongArrayListSpliteratorFailFastTest {
 
     @Test
     void unmodifiedTraversalVisitsEveryElementInOrder() {
-        M3LongArrayList list = filled();
+        LongArrayList list = filled();
         long[] seen = new long[SIZE];
         int[] at = new int[1];
         list.longSpliterator().forEachRemaining((long value) -> seen[at[0]++] = value);
@@ -41,7 +41,7 @@ final class M3LongArrayListSpliteratorFailFastTest {
 
     @Test
     void structuralChangeAfterCreationFailsOnAdvance() {
-        M3LongArrayList list = filled();
+        LongArrayList list = filled();
         Spliterator.OfLong split = list.longSpliterator();
         list.add(7L);
         assertThrows(ConcurrentModificationException.class, () -> split.tryAdvance((long value) -> { }));
@@ -49,7 +49,7 @@ final class M3LongArrayListSpliteratorFailFastTest {
 
     @Test
     void structuralChangeByTheActionFailsTheBulkTraversal() {
-        M3LongArrayList list = filled();
+        LongArrayList list = filled();
         assertThrows(ConcurrentModificationException.class,
                 () -> list.longSpliterator().forEachRemaining((long value) -> {
                     if (value == 0L) {
@@ -60,7 +60,7 @@ final class M3LongArrayListSpliteratorFailFastTest {
 
     @Test
     void splitChildSharesTheCapturedCount() {
-        M3LongArrayList list = filled();
+        LongArrayList list = filled();
         Spliterator.OfLong parent = list.longSpliterator();
         Spliterator.OfLong child = parent.trySplit();
         assertNotNull(child);
@@ -71,7 +71,7 @@ final class M3LongArrayListSpliteratorFailFastTest {
 
     @Test
     void nonStructuralReadsKeepWorking() {
-        M3LongArrayList list = filled();
+        LongArrayList list = filled();
         Spliterator.OfLong split = list.longSpliterator();
         assertTrue(split.tryAdvance((long value) -> { }));
         assertTrue(split.estimateSize() == SIZE - 1);

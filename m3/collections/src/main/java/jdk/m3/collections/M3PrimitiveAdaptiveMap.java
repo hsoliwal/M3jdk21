@@ -34,16 +34,16 @@ public final class M3PrimitiveAdaptiveMap {
         void accept(long keyBits, long valueBits);
     }
 
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private final Object backend;
 
-    public M3PrimitiveAdaptiveMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind) {
+    public M3PrimitiveAdaptiveMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this(keyKind, valueKind, 16);
     }
 
     public M3PrimitiveAdaptiveMap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind, int expectedSize) {
+            PrimitiveKind keyKind, PrimitiveKind valueKind, int expectedSize) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         if (expectedSize < 0) throw new IllegalArgumentException("expectedSize < 0");
@@ -60,8 +60,8 @@ public final class M3PrimitiveAdaptiveMap {
         };
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
 
     public int size() {
         return switch (keyKind) {

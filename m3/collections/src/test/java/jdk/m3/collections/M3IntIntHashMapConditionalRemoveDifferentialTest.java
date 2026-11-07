@@ -78,8 +78,8 @@ final class M3IntIntHashMapConditionalRemoveDifferentialTest {
     @Test
     void liveConditionalRemoveProbesOnceBeforeDelegating() throws Exception {
         java.util.spi.ToolProvider javap = java.util.spi.ToolProvider.findFirst("javap").orElseThrow();
-        Path classFile = Path.of(M3IntIntHashMap.class.getProtectionDomain().getCodeSource().getLocation().toURI())
-                .resolve("jdk/m3/collections/M3IntIntHashMap.class");
+        Path classFile = Path.of(IntIntHashMap.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+                .resolve("jdk/m3/collections/IntIntHashMap.class");
         assertTrue(Files.isRegularFile(classFile), classFile.toString());
         StringWriter out = new StringWriter();
         StringWriter err = new StringWriter();
@@ -164,7 +164,7 @@ final class M3IntIntHashMapConditionalRemoveDifferentialTest {
     }
 
     static Subject live() {
-        M3IntIntHashMap map = new M3IntIntHashMap();
+        IntIntHashMap map = new IntIntHashMap();
         return new Subject() {
             @Override public boolean put(int key, int value) { return map.put(key, value); }
             @Override public boolean remove(int key) { return map.remove(key); }
@@ -195,17 +195,17 @@ final class M3IntIntHashMapConditionalRemoveDifferentialTest {
         }
         assertEquals(FIXTURE_SHA256, HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(source)),
                 "fixture digest (master blob d50114519d36)");
-        String text = new String(source, StandardCharsets.UTF_8);
+        String text = new String(source, StandardCharsets.UTF_8).replace("M3IntIntConsumer", "IntIntConsumer").replace("M3IntIterator", "IntIterator").replace("M3LongLongHashMap", "LongLongHashMap").replace("M3IntIntHashMap", "IntIntHashMap"); // curation-keep-names: the frozen preimage keeps the pre-curation names
         assertTrue(text.contains(OWNER_PACKAGE_LINE), OWNER_PACKAGE_LINE);
         String rewritten = text.replace(OWNER_PACKAGE_LINE, "package " + PREIMAGE_PACKAGE + ";\n\n"
-                + "import jdk.m3.collections.M3IntIntConsumer;\nimport jdk.m3.collections.M3IntIterator;");
+                + "import jdk.m3.collections.IntIntConsumer;\nimport jdk.m3.collections.IntIterator;");
         Path out = Files.createTempDirectory("m3-intint-preimage");
         JavaCompiler javac = javax.tools.ToolProvider.getSystemJavaCompiler();
         assertNotNull(javac, "a JDK compiler is required");
-        String classpath = Path.of(M3IntIntConsumer.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+        String classpath = Path.of(IntIntConsumer.class.getProtectionDomain().getCodeSource().getLocation().toURI())
                 .toString();
         JavaFileObject unit = new SimpleJavaFileObject(
-                URI.create("string:///" + PREIMAGE_PACKAGE.replace('.', '/') + "/M3IntIntHashMap.java"),
+                URI.create("string:///" + PREIMAGE_PACKAGE.replace('.', '/') + "/IntIntHashMap.java"),
                 JavaFileObject.Kind.SOURCE) {
             @Override public CharSequence getCharContent(boolean ignoreEncodingErrors) { return rewritten; }
         };
@@ -214,9 +214,9 @@ final class M3IntIntHashMapConditionalRemoveDifferentialTest {
                 List.of("-d", out.toString(), "-cp", classpath, "--release", "21", "-Xlint:all", "-Werror", "-proc:none"),
                 null, List.of(unit)).call();
         assertTrue(ok, diagnostics.toString());
-        URLClassLoader loader = new URLClassLoader(new URL[] {out.toUri().toURL()}, M3IntIntHashMap.class.getClassLoader());
-        Class<?> type = Class.forName(PREIMAGE_PACKAGE + ".M3IntIntHashMap", true, loader);
-        assertNotSame(M3IntIntHashMap.class, type);
+        URLClassLoader loader = new URLClassLoader(new URL[] {out.toUri().toURL()}, IntIntHashMap.class.getClassLoader());
+        Class<?> type = Class.forName(PREIMAGE_PACKAGE + ".IntIntHashMap", true, loader);
+        assertNotSame(IntIntHashMap.class, type);
         Object instance = type.getConstructor().newInstance();
         MethodHandles.Lookup lookup = MethodHandles.publicLookup();
         MethodHandle put = lookup.findVirtual(type, "put",

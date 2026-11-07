@@ -4,8 +4,8 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3LazyEventGranularity;
-import jdk.m3.collections.M3LazyEventPolicy;
+import jdk.m3.collections.LazyEventGranularity;
+import jdk.m3.collections.LazyEventPolicy;
 import jdk.m3.collections.M3LazyEventSink;
 import jdk.m3.collections.M3LazyOperation;
 
@@ -15,17 +15,17 @@ public final class M3LazyEvents {
     }
 
     public static <M> void emit(
-            M3LazyEventPolicy policy,
+            LazyEventPolicy policy,
             M3LazyEventSink<? super M> sink,
             long eventBit,
-            M3LazyEventGranularity required,
+            LazyEventGranularity required,
             long slot,
             short oldState,
             short newState,
             M3LazyOperation operation,
             M monitor,
             Throwable failure) {
-        M3LazyEventPolicy actualPolicy = Objects.requireNonNull(policy, "policy");
+        LazyEventPolicy actualPolicy = Objects.requireNonNull(policy, "policy");
         if (!actualPolicy.enabled(eventBit, required, oldState, newState)) {
             return;
         }

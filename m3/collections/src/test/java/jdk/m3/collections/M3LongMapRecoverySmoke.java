@@ -22,7 +22,7 @@ public final class M3LongMapRecoverySmoke {
     public static void main(String[] arguments) {
         for (int seed = 0; seed < 12; seed++) {
             Random random = new Random(0x5ee7fa71L + seed * 1907);
-            M3LongLongHashMap map = new M3LongLongHashMap();
+            LongLongHashMap map = new LongLongHashMap();
             Map<Long, Long> reference = new HashMap<>();
             for (int step = 0; step < 10000; step++) {
                 long key = step % 17 == 0 ? Long.MIN_VALUE : step % 19 == 0

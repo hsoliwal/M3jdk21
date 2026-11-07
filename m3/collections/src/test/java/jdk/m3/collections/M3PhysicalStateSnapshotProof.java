@@ -46,7 +46,7 @@ public final class M3PhysicalStateSnapshotProof {
     }
 
     private static void scenario(Integer[] input, Random random,
-            int required, int forbidden, M3IndexPathMasks.Backend backend) {
+            int required, int forbidden, IndexPathMasks.Backend backend) {
         M3IndexedListSnapshot<Integer> base = M3IndexedListSnapshot.copyOf(input);
         int from = random.nextInt(input.length + 1);
         int length = random.nextInt(input.length - from + 1);
@@ -101,24 +101,24 @@ public final class M3PhysicalStateSnapshotProof {
                 M3IndexedListSnapshot.copyOf(new Integer[] {null, 7, 7, -5, null});
         int[] states = {Integer.MIN_VALUE, 1, 1, -1, 0};
         rejected(NullPointerException.class,
-                () -> source.maskedByPhysicalState(null, 0, 0, M3IndexPathMasks.Backend.JAVA),
+                () -> source.maskedByPhysicalState(null, 0, 0, IndexPathMasks.Backend.JAVA),
                 "null physical lane");
         rejected(NullPointerException.class,
                 () -> source.maskedByPhysicalState(states, 0, 0, null), "null backend");
         rejected(IllegalArgumentException.class,
-                () -> source.maskedByPhysicalState(new int[4], 0, 0, M3IndexPathMasks.Backend.JAVA),
+                () -> source.maskedByPhysicalState(new int[4], 0, 0, IndexPathMasks.Backend.JAVA),
                 "unequal physical state capacity");
         equal(List.of(), source.maskedByPhysicalState(states, 1, 1,
-                M3IndexPathMasks.Backend.JAVA), "contradictory masks reject");
+                IndexPathMasks.Backend.JAVA), "contradictory masks reject");
         M3IndexedListSnapshot<Integer> selected = source.maskedByPhysicalState(
-                states, Integer.MIN_VALUE, 0, M3IndexPathMasks.Backend.JAVA);
+                states, Integer.MIN_VALUE, 0, IndexPathMasks.Backend.JAVA);
         equal(Arrays.asList(null, -5), selected, "sign bit selection");
         check(selected.physicalIndex(0) == 0, "sign mask physical slots");
         check(selected.physicalIndex(1) == 3, "sign mask must retain encounter order");
     }
 
     private static void nativeRefusal() {
-        if (M3IndexPathMasks.nativeAvailable()) return;
+        if (IndexPathMasks.nativeAvailable()) return;
         M3IndexedListSnapshot<Integer> source =
                 M3IndexedListSnapshot.copyOf(new Integer[] {1, 2, 3});
         AtomicInteger calls = new AtomicInteger();
@@ -127,20 +127,20 @@ public final class M3PhysicalStateSnapshotProof {
                         new int[] {1, 1, 1}, 1, 0, (a, b) -> {
                             calls.incrementAndGet();
                             return Integer.compare(a, b);
-                        }, M3IndexPathMasks.Backend.NATIVE_REQUIRED),
+                        }, IndexPathMasks.Backend.NATIVE_REQUIRED),
                 "native must refuse rather than fall back");
         equal(0, calls.get(), "no comparator callback before JNI refusal");
     }
 
     public static void main(String[] args) {
         boolean nativeRequired = args.length == 1 && "--native".equals(args[0]);
-        if (nativeRequired && !M3IndexPathMasks.nativeAvailable()) {
+        if (nativeRequired && !IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("requested M3 pathmask JNI is unavailable");
         }
         boundaries();
         nativeRefusal();
-        M3IndexPathMasks.Backend backend = nativeRequired
-                ? M3IndexPathMasks.Backend.NATIVE_REQUIRED : M3IndexPathMasks.Backend.JAVA;
+        IndexPathMasks.Backend backend = nativeRequired
+                ? IndexPathMasks.Backend.NATIVE_REQUIRED : IndexPathMasks.Backend.JAVA;
         Random random = new Random(0x4d334d41534b3231L);
         Integer[][] seeds = {
             {}, {null}, {0}, {null, 7, 7, -5, null}, {3, 3, 2, 2, 1, 1}

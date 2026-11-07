@@ -32,10 +32,10 @@ public final class M3IndexPathIdentitySelfTest {
                 int required = trial % 11 == 0 ? 0 : 1 << random.nextInt(32);
                 int forbidden = trial % 13 == 0 ? required
                         : trial % 7 == 0 ? 0 : 1 << random.nextInt(32);
-                M3IndexPathRank ordinary = M3IndexPathRank.snapshot(
+                IndexPathRank ordinary = IndexPathRank.snapshot(
                         identities, identities, new int[][]{states},
                         new int[]{required}, new int[]{forbidden}, 0, size, 1);
-                M3IndexPathRank implicit = M3IndexPathRank.snapshotIdentity(
+                IndexPathRank implicit = IndexPathRank.snapshotIdentity(
                         states, required, forbidden);
                 eq(size, implicit.sourceSize(), "source size");
                 eq(ordinary.size(), implicit.size(), "selected size");
@@ -57,8 +57,8 @@ public final class M3IndexPathIdentitySelfTest {
                 for (int window = 0; window < 12; window++) {
                     int from = random.nextInt(size + 1);
                     int to = from + random.nextInt(size - from + 1);
-                    M3IndexPathRank.Window a = ordinary.window(from, to);
-                    M3IndexPathRank.Window b = implicit.window(from, to);
+                    IndexPathRank.Window a = ordinary.window(from, to);
+                    IndexPathRank.Window b = implicit.window(from, to);
                     eq(a.size(), b.size(), "window size");
                     eq(a.sourceSize(), b.sourceSize(), "window source size");
                     array(a.toArray(), b.toArray(), "window rows");
@@ -82,15 +82,15 @@ public final class M3IndexPathIdentitySelfTest {
                         eq(a.selectedRowId(selected),
                                 b.selectedRowId(selected), "window row");
                     }
-                    M3IndexPathRank.Window aa = a.window(0, a.sourceSize());
-                    M3IndexPathRank.Window bb = b.window(0, b.sourceSize());
+                    IndexPathRank.Window aa = a.window(0, a.sourceSize());
+                    IndexPathRank.Window bb = b.window(0, b.sourceSize());
                     array(aa.toArray(), bb.toArray(), "nested window");
                 }
                 int[] before = implicit.toArray();
                 Arrays.fill(states, Integer.MAX_VALUE);
                 Arrays.fill(identities, -99);
                 array(before, implicit.toArray(), "caller-array snapshot isolation");
-                Field backing = M3IndexPathRank.class.getDeclaredField("rows");
+                Field backing = IndexPathRank.class.getDeclaredField("rows");
                 backing.setAccessible(true);
                 same(null, backing.get(implicit), "no retained identity int[]");
             }

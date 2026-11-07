@@ -24,7 +24,7 @@ final class M3LongHashSetAddAtomTest {
     void singleProbeAddMaintainsJdkMembershipUnderCollisionsAndTombstones() {
         for (int trial = 0; trial < TRIALS; trial++) {
             Random random = new Random(SEED + trial);
-            M3LongHashSet actual = new M3LongHashSet();
+            LongHashSet actual = new LongHashSet();
             Set<Long> model = new HashSet<>();
             for (int step = 0; step < OPERATIONS_PER_TRIAL; step++) {
                 long key = switch (step % 19) {
@@ -53,12 +53,12 @@ final class M3LongHashSetAddAtomTest {
 
     @Test
     void duplicateInsertionDoesNotAdvanceIteratorButNewInsertionDoes() {
-        M3LongHashSet actual = new M3LongHashSet();
+        LongHashSet actual = new LongHashSet();
         for (long key : new long[]{0L, Long.MIN_VALUE, Long.MAX_VALUE, 17L}) {
             assertTrue(actual.add(key));
             assertFalse(actual.add(key));
         }
-        M3LongIterator before = actual.iterator();
+        LongIterator before = actual.iterator();
         assertTrue(before.hasNext());
         assertFalse(actual.add(Long.MIN_VALUE));
         assertTrue(before.hasNext());
@@ -69,7 +69,7 @@ final class M3LongHashSetAddAtomTest {
 
     @Test
     void absentInsertionAfterDeletionRetainsUniquenessAndSafeCapacity() {
-        M3LongHashSet actual = new M3LongHashSet();
+        LongHashSet actual = new LongHashSet();
         Set<Long> model = new HashSet<>();
         for (long key = 1; key <= 2_048L; key++) {
             assertEquals(model.add(key), actual.add(key));

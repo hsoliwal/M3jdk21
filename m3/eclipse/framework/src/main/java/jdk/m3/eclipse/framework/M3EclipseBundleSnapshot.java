@@ -4,9 +4,9 @@ package jdk.m3.eclipse.framework;
 
 import jdk.m3.collections.M3Collections;
 import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3LongArrayList;
+import jdk.m3.collections.LongArrayList;
 import jdk.m3.collections.M3LongIndexProjection;
-import jdk.m3.collections.M3LongLongHashMap;
+import jdk.m3.collections.LongLongHashMap;
 import java.util.List;
 import java.util.Objects;
 import org.osgi.framework.Bundle;
@@ -21,8 +21,8 @@ import org.osgi.framework.BundleContext;
  */
 public final class M3EclipseBundleSnapshot {
     private final M3EclipseIndexedSnapshot<Bundle> rows = new M3EclipseIndexedSnapshot<>();
-    private final M3LongLongHashMap byId = new M3LongLongHashMap();
-    private final M3LongArrayList capturedIds = M3Collections.longArrayList();
+    private final LongLongHashMap byId = new LongLongHashMap();
+    private final LongArrayList capturedIds = M3Collections.longArrayList();
 
     private M3EclipseBundleSnapshot() {}
 

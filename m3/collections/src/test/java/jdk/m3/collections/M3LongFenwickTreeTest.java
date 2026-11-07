@@ -6,11 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.range.LongFenwickTree;
 
 final class M3LongFenwickTreeTest {
     @Test
     void exactQueriesAndMutationsMatchTheDocumentedFenwickContract() {
-        M3LongFenwickTree tree = new M3LongFenwickTree(new long[] {1, 2, 3, 4, 5});
+        LongFenwickTree tree = new LongFenwickTree(new long[] {1, 2, 3, 4, 5});
         assertEquals(5, tree.size());
         assertEquals(3, tree.point(2));
         assertEquals(6, tree.prefixSum(3));
@@ -38,14 +39,14 @@ final class M3LongFenwickTreeTest {
 
     @Test
     void lowerBoundRejectsNegativePoints() {
-        M3LongFenwickTree tree = new M3LongFenwickTree(new long[] {1, 2});
+        LongFenwickTree tree = new LongFenwickTree(new long[] {1, 2});
         tree.set(0, -1);
         assertThrows(IllegalStateException.class, () -> tree.lowerBound(1));
     }
 
     @Test
     void mutationOverflowIsFailureAtomic() {
-        M3LongFenwickTree tree = new M3LongFenwickTree(new long[] {Long.MAX_VALUE, 0});
+        LongFenwickTree tree = new LongFenwickTree(new long[] {Long.MAX_VALUE, 0});
         assertThrows(ArithmeticException.class, () -> tree.add(1, 1));
         assertEquals(Long.MAX_VALUE, tree.point(0));
         assertEquals(0, tree.point(1));

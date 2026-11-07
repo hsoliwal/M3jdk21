@@ -15,10 +15,10 @@
 package jdk.internal.m3.collections;
 
 import java.util.Arrays;
-import jdk.m3.collections.M3IntLongAdjacencyGraph;
+import jdk.m3.collections.graph.IntLongAdjacencyGraph;
 
 /**
- * Bellman-Ford shortest paths over an {@link M3IntLongAdjacencyGraph}.
+ * Bellman-Ford shortest paths over an {@link IntLongAdjacencyGraph}.
  *
  * <p>Supports signed edge weights and reports every vertex whose shortest
  * distance is undefined because it is reachable from a reachable negative cycle.
@@ -142,7 +142,7 @@ public final class M3IntLongBellmanFord {
 
     private M3IntLongBellmanFord() {}
 
-    public static Result shortestPaths(M3IntLongAdjacencyGraph graph, int source) {
+    public static Result shortestPaths(IntLongAdjacencyGraph graph, int source) {
         int vertices = graph.vertexCount();
         if (source < 0 || source >= vertices) throw new IndexOutOfBoundsException(source);
 

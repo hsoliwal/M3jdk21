@@ -11,10 +11,10 @@ public final class M3IntDisjointSetStructuralSelfTest {
     private M3IntDisjointSetStructuralSelfTest() { }
 
     public static long run() {
-        M3IntDisjointSet dsu = new M3IntDisjointSet(8);
+        IntDisjointSet dsu = new IntDisjointSet(8);
         final int[] parent;
         try {
-            Field field = M3IntDisjointSet.class.getDeclaredField("parent");
+            Field field = IntDisjointSet.class.getDeclaredField("parent");
             field.setAccessible(true);
             parent = (int[]) field.get(dsu);
         } catch (ReflectiveOperationException error) {

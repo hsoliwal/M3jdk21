@@ -37,7 +37,7 @@ final class M3LongSortedSnapshotRecipeTest {
     private static final String ROOT =
             "/jdk/internal/m3/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017/";
     private static final String MAIN =
-            "m3/collections/src/main/java/jdk/m3/collections/M3LongSortedSnapshot.java";
+            "m3/collections/src/main/java/jdk/m3/collections/LongSortedSnapshot.java";
     private static final String TEST =
             "m3/collections/src/test/java/jdk/m3/collections/M3LongSortedSnapshotSelfTest.java";
 

@@ -35,19 +35,19 @@ public final class M3PrimitiveSemaphoreMpmcQueue {
     private final Semaphore slots;
     private final Semaphore items;
 
-    public M3PrimitiveSemaphoreMpmcQueue(M3PrimitiveKind kind, int capacity) {
+    public M3PrimitiveSemaphoreMpmcQueue(PrimitiveKind kind, int capacity) {
         this(kind, capacity, false);
     }
 
     public M3PrimitiveSemaphoreMpmcQueue(
-            M3PrimitiveKind kind, int capacity, boolean fairWaiters) {
+            PrimitiveKind kind, int capacity, boolean fairWaiters) {
         queue = new M3PrimitiveMpmcRingBuffer(
                 Objects.requireNonNull(kind, "kind"), capacity);
         slots = new Semaphore(queue.capacity(), fairWaiters);
         items = new Semaphore(0, fairWaiters);
     }
 
-    public M3PrimitiveKind kind() { return queue.kind(); }
+    public PrimitiveKind kind() { return queue.kind(); }
     public int capacity() { return queue.capacity(); }
     public long payloadBytes() { return queue.payloadBytes(); }
     public int size() { return queue.size(); }

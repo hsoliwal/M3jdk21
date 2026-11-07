@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
+import jdk.m3.collections.packed.DeltaEncodedLongList;
 
 /**
  * Independent Java 21 oracle for the existing delta wire, private query checkpoints
@@ -35,7 +36,7 @@ final class M3DeltaEncodedLongListCheckpointTest {
         Random rng = new Random(0x4d33564c4f4e474cL);
         for (int trial = 0; trial < lengths.length * 3; trial++) {
             int length = lengths[trial % lengths.length];
-            M3DeltaEncodedLongList data = new M3DeltaEncodedLongList(trial % 2);
+            DeltaEncodedLongList data = new DeltaEncodedLongList(trial % 2);
             long[] expected = new long[length];
             long value = trial % 3 == 0 ? Long.MIN_VALUE
                     : trial % 3 == 1 ? Long.MAX_VALUE - 65_535L
@@ -77,7 +78,7 @@ final class M3DeltaEncodedLongListCheckpointTest {
     }
 
     @Test void rejectionClearAndForEachKeepOriginalContract() {
-        M3DeltaEncodedLongList data = new M3DeltaEncodedLongList(0);
+        DeltaEncodedLongList data = new DeltaEncodedLongList(0);
         assertDoesNotThrow(() -> data.forEach(null), "empty callback accepted by baseline");
         assertThrows(java.util.NoSuchElementException.class, data::first);
         assertThrows(java.util.NoSuchElementException.class, data::last);

@@ -89,7 +89,7 @@ public final class M3DeepFilterCompositionProof {
         AtomicInteger calls = new AtomicInteger();
         Predicate<Integer> same = value -> { calls.incrementAndGet(); return value != null; };
         Collection<Integer> view = source;
-        for (int i = 0; i < depth; i++) view = M3CollectionViews.filtered(view, same);
+        for (int i = 0; i < depth; i++) view = CollectionViews.filtered(view, same);
         equal(0, calls.get(), "constructor evaluated predicates");
         if (inspect) shape(view, depth);
         Spliterator<Integer> spliterator = view.spliterator();
@@ -102,7 +102,7 @@ public final class M3DeepFilterCompositionProof {
         source.add(null);
         equal(List.of(7, 9), rows(view), "deep collection stays live");
         Collection<Integer> prefix = view;
-        Collection<Integer> reject = M3CollectionViews.filtered(view, value -> false);
+        Collection<Integer> reject = CollectionViews.filtered(view, value -> false);
         equal(List.of(), rows(reject), "rejecting suffix");
         equal(List.of(7, 9), rows(prefix), "append mutated retained prefix");
         check(field(view, "backing") == source, "second element owner or wrapper chain");
@@ -141,8 +141,8 @@ public final class M3DeepFilterCompositionProof {
         NavigableSet<Integer> source = new TreeSet<>(order);
         source.addAll(Arrays.asList(null, -3, -2, -1, 0, 1, 2, 3));
         Collection<Integer> erased = source;
-        NavigableSet<Integer> view = (NavigableSet<Integer>) M3CollectionViews.filtered(erased, Objects::nonNull);
-        for (int i = 1; i < depth; i++) view = M3CollectionViews.filtered(view, value -> true);
+        NavigableSet<Integer> view = (NavigableSet<Integer>) CollectionViews.filtered(erased, Objects::nonNull);
+        for (int i = 1; i < depth; i++) view = CollectionViews.filtered(view, value -> true);
         check(view.comparator() == order, "comparator identity lost");
         NavigableSet<Integer> range = view.subSet(-2, true, 3, false).descendingSet();
         equal(List.of(2, 1, 0, -1, -2), rows(range), "deep reversed bounded set");
@@ -155,8 +155,8 @@ public final class M3DeepFilterCompositionProof {
         NavigableSet<Integer> frozen = Collections.unmodifiableNavigableSet(view);
         expect(UnsupportedOperationException.class, () -> frozen.add(99));
         SortedSet<Integer> nonNavigable = Collections.unmodifiableSortedSet(source);
-        SortedSet<Integer> sortedOnly = M3CollectionViews.filtered(nonNavigable, Objects::nonNull);
-        for (int i = 1; i < depth; i++) sortedOnly = M3CollectionViews.filtered(sortedOnly, value -> true);
+        SortedSet<Integer> sortedOnly = CollectionViews.filtered(nonNavigable, Objects::nonNull);
+        for (int i = 1; i < depth; i++) sortedOnly = CollectionViews.filtered(sortedOnly, value -> true);
         equal(-3, sortedOnly.first(), "sorted-only capability");
 
         NavigableMap<String, Integer> mapSource = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -185,7 +185,7 @@ public final class M3DeepFilterCompositionProof {
             Collection<Integer> view = List.of(4);
             for (int i = 0; i < 257; i++) {
                 int stage = i;
-                view = M3CollectionViews.filtered(view, value -> { trace.add(stage); return stage != stop; });
+                view = CollectionViews.filtered(view, value -> { trace.add(stage); return stage != stop; });
             }
             check(view.isEmpty(), "false predicate ignored");
             equal(java.util.stream.IntStream.rangeClosed(0, stop).boxed().toList(), trace,
@@ -206,11 +206,11 @@ public final class M3DeepFilterCompositionProof {
             equal(java.util.stream.IntStream.rangeClosed(0, stop).boxed().toList(), trace,
                     "exception order changed");
         }
-        Collection<Integer> nulls = M3CollectionViews.filtered(Arrays.asList(null, 1), Objects::nonNull);
-        nulls = M3CollectionViews.filtered(nulls, n -> n > 0);
+        Collection<Integer> nulls = CollectionViews.filtered(Arrays.asList(null, 1), Objects::nonNull);
+        nulls = CollectionViews.filtered(nulls, n -> n > 0);
         equal(List.of(1), rows(nulls), "null guard order");
         Collection<Integer> existing = nulls;
-        expect(NullPointerException.class, () -> M3CollectionViews.filtered(existing, null));
+        expect(NullPointerException.class, () -> CollectionViews.filtered(existing, null));
         expect(NullPointerException.class, () -> M3FilteredMaps.filtered(Map.of(1, 2), null));
         Iterator<Integer> iterator = nulls.iterator();
         iterator.next();
@@ -235,15 +235,15 @@ public final class M3DeepFilterCompositionProof {
                 if (keep) expected.add(value);
             }
             Collection<Integer> view = input;
-            for (Predicate<Integer> predicate : predicates) view = M3CollectionViews.filtered(view, predicate);
+            for (Predicate<Integer> predicate : predicates) view = CollectionViews.filtered(view, predicate);
             equal(expected, rows(view), "differential list");
             equal(expected, view.parallelStream().toList(), "parallel shared immutable plan");
             equal(expected.size(), view.size(), "exact filtered size");
             List<Integer> sorted = new ArrayList<>(expected); sorted.sort(Comparator.reverseOrder());
-            equal(sorted, M3CollectionViews.sortedSnapshot(view, Comparator.reverseOrder()), "stable snapshot");
+            equal(sorted, CollectionViews.sortedSnapshot(view, Comparator.reverseOrder()), "stable snapshot");
             Set<Integer> set = new LinkedHashSet<>(input);
             Set<Integer> filteredSet = set;
-            for (Predicate<Integer> predicate : predicates) filteredSet = M3CollectionViews.filtered(filteredSet, predicate);
+            for (Predicate<Integer> predicate : predicates) filteredSet = CollectionViews.filtered(filteredSet, predicate);
             equal(new LinkedHashSet<>(expected), filteredSet, "set contract");
             Map<Integer, Integer> backing = new LinkedHashMap<>();
             for (int i = 0; i < input.size(); i++) backing.put(i, input.get(i));
@@ -259,12 +259,12 @@ public final class M3DeepFilterCompositionProof {
     private static void sharedPlanAndReentrancy() {
         Collection<Integer> source = java.util.stream.IntStream.range(0, 1024).boxed().toList();
         Collection<Integer> view = source;
-        for (int i = 0; i < 4096; i++) view = M3CollectionViews.filtered(view, value -> true);
+        for (int i = 0; i < 4096; i++) view = CollectionViews.filtered(view, value -> true);
         Collection<Integer> immutable = view;
         List<CompletableFuture<Long>> workers = new ArrayList<>();
         for (int i = 0; i < 4; i++) workers.add(CompletableFuture.supplyAsync(() -> immutable.stream().count()));
         for (CompletableFuture<Long> worker : workers) equal(1024L, worker.join(), "concurrent read plan");
-        Collection<Integer> reentrant = M3CollectionViews.filtered(view, value -> immutable.contains(value));
+        Collection<Integer> reentrant = CollectionViews.filtered(view, value -> immutable.contains(value));
         check(reentrant.contains(9), "reentrant traversal state corruption");
     }
     public static void main(String[] args) throws Exception {

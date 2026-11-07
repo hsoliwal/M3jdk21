@@ -10,7 +10,7 @@ import java.util.Objects;
  * generation-safe 64-bit handle. Every data lane uses the same logical slot mapping.
  */
 public final class M3LongLaneStore28 {
-    private final M3SlotAllocator28 allocator = new M3SlotAllocator28();
+    private final SlotAllocator28 allocator = new SlotAllocator28();
     private final M3LongLane28[] lanes;
 
     public M3LongLaneStore28(int laneCount) {
@@ -42,14 +42,14 @@ public final class M3LongLaneStore28 {
     public long allocate1(long first) {
         requireLaneCount(1);
         long handle = allocator.allocate();
-        lanes[0].set(M3SlotAllocator28.slot(handle), first);
+        lanes[0].set(SlotAllocator28.slot(handle), first);
         return handle;
     }
 
     public long allocate2(long first, long second) {
         requireLaneCount(2);
         long handle = allocator.allocate();
-        int slot = M3SlotAllocator28.slot(handle);
+        int slot = SlotAllocator28.slot(handle);
         lanes[0].set(slot, first);
         lanes[1].set(slot, second);
         return handle;
@@ -58,7 +58,7 @@ public final class M3LongLaneStore28 {
     public long allocate3(long first, long second, long third) {
         requireLaneCount(3);
         long handle = allocator.allocate();
-        int slot = M3SlotAllocator28.slot(handle);
+        int slot = SlotAllocator28.slot(handle);
         lanes[0].set(slot, first);
         lanes[1].set(slot, second);
         lanes[2].set(slot, third);

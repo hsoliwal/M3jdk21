@@ -5,7 +5,7 @@
 package jdk.m3.collections.interop;
 
 import com.google.common.collect.ListMultimap;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,7 +47,7 @@ public final class M3FiveListFamiliesContract {
         int[] flags=new int[source.size()];
         List<Map.Entry<String,Integer>> original=new ArrayList<>(source.entries());
         for(int i=0;i<flags.length;i++) flags[i]=(i%2==0?Integer.MIN_VALUE:0)|(i%3==0?4:0);
-        var selected=M3FiveListFamilies.snapshot(source,flags,Integer.MIN_VALUE,4,M3IndexPathMasks.Backend.JAVA);
+        var selected=M3FiveListFamilies.snapshot(source,flags,Integer.MIN_VALUE,4,IndexPathMasks.Backend.JAVA);
         List<Map.Entry<String,Integer>> kept=new ArrayList<>();
         for(int i=0;i<flags.length;i++) if((flags[i]&Integer.MIN_VALUE)!=0 && (flags[i]&4)==0)
             kept.add(original.get(i));

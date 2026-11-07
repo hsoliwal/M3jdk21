@@ -165,7 +165,7 @@ final class M3LongLfuCacheTest {
             assertArrayEquals(expected.keysByEviction(), actual.keysByEviction(), "step " + step);
         }
         long[] iterated = new long[actual.size()];
-        M3LongIterator iterator = actual.keyIterator();
+        LongIterator iterator = actual.keyIterator();
         for (int i = 0; i < iterated.length; i++) {
             iterated[i] = iterator.nextLong();
         }
@@ -220,7 +220,7 @@ final class M3LongLfuCacheTest {
         assertEquals(44L, cache.peekOrDefault(4L, 0L));
         assertEquals(3, cache.frequencyOf(4L));
         assertArrayEquals(new long[] {3L, 4L}, cache.keysByEviction());
-        M3LongIterator iterator = cache.keyIterator();
+        LongIterator iterator = cache.keyIterator();
         assertEquals(3L, iterator.nextLong());
         assertEquals(3L, cache.getOrDefault(3L, -1L));
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
@@ -230,7 +230,7 @@ final class M3LongLfuCacheTest {
         cache.clear();
         assertEquals(0, cache.evictionCount());
         assertEquals(0, cache.minFrequency());
-        M3LongIterator empty = cache.keyIterator();
+        LongIterator empty = cache.keyIterator();
         assertFalse(empty.hasNext());
         assertThrows(NoSuchElementException.class, empty::nextLong);
         // Stream 50,000 distinct keys through a capacity-5 cache: tombstones must be swept, the

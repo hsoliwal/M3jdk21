@@ -12,7 +12,7 @@ import java.util.function.LongPredicate;
 public final class M3FilteredTerminalProof {
     private static long assertions;
     private static final StringBuilder TAPE = new StringBuilder(1 << 20);
-    private static final class Source implements M3LongCollection {
+    private static final class Source implements LongCollection {
         private final long[] values;
         private final int failAt;
         Source(long[] values, int failAt) { this.values=values;this.failAt=failAt; }
@@ -20,9 +20,9 @@ public final class M3FilteredTerminalProof {
         @Override public boolean contains(long value) {TAPE.append('C');for(long v:values)if(v==value)return true;return false;}
         @Override public void clear() {throw new UnsupportedOperationException();}
         @Override public long[] toArray() {throw new AssertionError("no source-toArray allowed");}
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             TAPE.append('I');
-            return new M3LongIterator() {
+            return new LongIterator() {
                 private int cursor;
                 @Override public boolean hasNext() {
                     TAPE.append('H').append(cursor).append(';');return cursor<values.length;

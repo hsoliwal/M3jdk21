@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
-import jdk.m3.collections.M3ParentOwned;
+import jdk.m3.collections.ParentOwned;
 import jdk.m3.collections.M3RuntimeHeap;
 import jdk.m3.collections.M3TransientFacadeStore;
 
@@ -42,7 +42,7 @@ import jdk.m3.collections.M3TransientFacadeStore;
  * non-escape before using {@link #withInternalFacade(long, Consumer)}. There is no
  * source-to-bytecode rewrite or JVM-level escape proof in this component.
  */
-@M3ParentOwned(owner = "M3DeferredChildTree", flags = M3TransientFacadeStore.DEFAULT_MODE
+@ParentOwned(owner = "M3DeferredChildTree", flags = M3TransientFacadeStore.DEFAULT_MODE
         | M3TransientFacadeStore.AUTO_HEAP_PRESSURE | (1 << 16))
 /**
  * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/M3DeferredChildTree.java}

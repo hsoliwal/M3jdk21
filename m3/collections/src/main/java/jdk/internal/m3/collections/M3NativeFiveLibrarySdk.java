@@ -11,7 +11,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.Objects;
 import jdk.m3.collections.M3ArrayList;
-import jdk.m3.collections.M3CollectionViews;
+import jdk.m3.collections.CollectionViews;
 import jdk.m3.collections.M3CountedBag;
 import jdk.m3.collections.M3FilteredDeques;
 import jdk.m3.collections.M3FilteredViews;
@@ -68,7 +68,7 @@ public final class M3NativeFiveLibrarySdk {
      */
     public static <E> Collection<E> filteredCollection(
             Collection<E> owner, Predicate<? super E> accepted) {
-        return M3CollectionViews.filtered(Objects.requireNonNull(owner, "owner"),
+        return CollectionViews.filtered(Objects.requireNonNull(owner, "owner"),
                 Objects.requireNonNull(accepted, "accepted"));
     }
 

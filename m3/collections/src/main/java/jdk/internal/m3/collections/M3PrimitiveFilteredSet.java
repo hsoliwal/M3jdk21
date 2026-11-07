@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Objects;
 import java.util.function.LongPredicate;
 import jdk.m3.collections.M3PrimitiveHashSet;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Admission-filtered primitive hash set; rejected values never enter retained storage.
@@ -30,7 +30,7 @@ public final class M3PrimitiveFilteredSet {
     private final M3PrimitiveHashSet delegate;
     private final LongPredicate admission;
 
-    public M3PrimitiveFilteredSet(M3PrimitiveKind kind, LongPredicate admission) {
+    public M3PrimitiveFilteredSet(PrimitiveKind kind, LongPredicate admission) {
         this(new M3PrimitiveHashSet(kind), admission);
     }
 
@@ -39,7 +39,7 @@ public final class M3PrimitiveFilteredSet {
         this.admission = Objects.requireNonNull(admission, "admission");
     }
 
-    public M3PrimitiveKind kind() { return delegate.kind(); }
+    public PrimitiveKind kind() { return delegate.kind(); }
     public int size() { return delegate.size(); }
     public boolean isEmpty() { return delegate.isEmpty(); }
     public long payloadBytes() { return delegate.payloadBytes(); }

@@ -25,7 +25,7 @@ public final class M3LongTimingWheelSafeAdvanceSelfTest {
     private static void ordinary() {
         Random random = new Random(0x6255afe70becc11aL);
         for (int wheelSize : new int[] {1, 2, 4, 8, 16, 64}) {
-            M3LongTimingWheel wheel = new M3LongTimingWheel(wheelSize, 1L, 0L);
+            LongTimingWheel wheel = new LongTimingWheel(wheelSize, 1L, 0L);
             Map<Long, Long> pending = new HashMap<>();
             long id = 100L;
             List<Long> report = new ArrayList<>();
@@ -68,7 +68,7 @@ public final class M3LongTimingWheelSafeAdvanceSelfTest {
     }
 
     private static void callbackFailure() {
-        M3LongTimingWheel wheel = new M3LongTimingWheel(2, 1L, 0L);
+        LongTimingWheel wheel = new LongTimingWheel(2, 1L, 0L);
         wheel.schedule(40L, 4L); // future rotation in same modulo bucket.
         wheel.schedule(20L, 0L);
         wheel.schedule(30L, 0L);
@@ -106,7 +106,7 @@ public final class M3LongTimingWheelSafeAdvanceSelfTest {
     }
 
     private static void finalTick() {
-        M3LongTimingWheel wheel = new M3LongTimingWheel(2, 1L, Long.MAX_VALUE);
+        LongTimingWheel wheel = new LongTimingWheel(2, 1L, Long.MAX_VALUE);
         wheel.schedule(44L, Long.MAX_VALUE);
         List<Long> received = new ArrayList<>();
         require(wheel.advanceTo(Long.MAX_VALUE, received::add) == 1,

@@ -5,7 +5,7 @@
 package jdk.m3.collections.interop;
 
 import com.google.common.collect.ListMultimap;
-import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3LinkedList;
 import java.util.List;
@@ -46,7 +46,7 @@ public final class M3FiveListFamilies {
      * into a detached M3 indexed multimap, preserving key/value encounter order.
      */
     public static <K,V> Snapshot<K,V> snapshot(M3GuavaListMultimap<K,V> source,
-            int[] physicalStates, int required, int excluded, M3IndexPathMasks.Backend backend) {
+            int[] physicalStates, int required, int excluded, IndexPathMasks.Backend backend) {
         Objects.requireNonNull(source,"source");
         return new Snapshot<>(source.selectedByStates(physicalStates,required,excluded,backend));
     }

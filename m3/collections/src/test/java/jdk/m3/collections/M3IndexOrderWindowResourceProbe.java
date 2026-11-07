@@ -115,10 +115,10 @@ public final class M3IndexOrderWindowResourceProbe {
             int cursor = 0; long checksum = 0;
             while (cursor < size) {
                 long progress = budget == Integer.MAX_VALUE
-                        ? M3IndexMaskWindow.scan(rows, states, cursor, required, excluded, output, 0, limit, backend)
-                        : M3IndexMaskWindow.scanBounded(rows, states, cursor, budget, required, excluded,
+                        ? IndexMaskWindow.scan(rows, states, cursor, required, excluded, output, 0, limit, backend)
+                        : IndexMaskWindow.scanBounded(rows, states, cursor, budget, required, excluded,
                                 output, 0, limit, backend);
-                int next = M3IndexMaskWindow.nextIndex(progress), written = M3IndexMaskWindow.written(progress);
+                int next = IndexMaskWindow.nextIndex(progress), written = IndexMaskWindow.written(progress);
                 if (next <= cursor) throw new AssertionError("positive work/result budget must progress");
                 checksum ^= progress;
                 if (written != 0) checksum ^= (long) output[0] + output[written - 1];

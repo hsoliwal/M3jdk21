@@ -15,7 +15,7 @@ final class M3PrimitiveSortedTableLiveViewTest {
     void rowViewIsEmptyLiveAndMutatesOwner() {
         M3PrimitiveSortedTable table =
                 new M3PrimitiveSortedTable(
-                        M3PrimitiveKind.INT, M3PrimitiveKind.INT, M3PrimitiveKind.LONG);
+                        PrimitiveKind.INT, PrimitiveKind.INT, PrimitiveKind.LONG);
         M3PrimitiveSortedTable.RowView row = table.rowViewBits(7);
         assertTrue(row.isEmpty());
         assertFalse(table.containsRowBits(7));
@@ -39,7 +39,7 @@ final class M3PrimitiveSortedTableLiveViewTest {
     void columnViewIsEmptyLiveAndMutatesOwner() {
         M3PrimitiveSortedTable table =
                 new M3PrimitiveSortedTable(
-                        M3PrimitiveKind.INT, M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+                        PrimitiveKind.INT, PrimitiveKind.INT, PrimitiveKind.INT);
         M3PrimitiveSortedTable.ColumnView column = table.columnViewBits(5);
         assertTrue(column.isEmpty());
         column.putBits(2, 25, -1);
@@ -59,13 +59,13 @@ final class M3PrimitiveSortedTableLiveViewTest {
     void transposeIsCachedLiveAndRoundTripsOwner() {
         M3PrimitiveSortedTable table =
                 new M3PrimitiveSortedTable(
-                        M3PrimitiveKind.INT, M3PrimitiveKind.LONG, M3PrimitiveKind.INT);
+                        PrimitiveKind.INT, PrimitiveKind.LONG, PrimitiveKind.INT);
         table.putBits(1, 100L, 7, -1);
         M3PrimitiveSortedTable.TransposedView transposed = table.transpose();
         assertSame(transposed, table.transpose());
         assertSame(table, transposed.transpose());
-        assertEquals(M3PrimitiveKind.LONG, transposed.rowKind());
-        assertEquals(M3PrimitiveKind.INT, transposed.columnKind());
+        assertEquals(PrimitiveKind.LONG, transposed.rowKind());
+        assertEquals(PrimitiveKind.INT, transposed.columnKind());
         assertEquals(7L, transposed.getOrDefaultBits(100L, 1, -1));
         assertEquals(-1L, transposed.putBits(200L, 2, 8, -1));
         assertEquals(8L, table.getOrDefaultBits(2, 200L, -1));
@@ -79,7 +79,7 @@ final class M3PrimitiveSortedTableLiveViewTest {
     void transposeForEachSwapsRowAndColumn() {
         M3PrimitiveSortedTable table =
                 new M3PrimitiveSortedTable(
-                        M3PrimitiveKind.INT, M3PrimitiveKind.INT, M3PrimitiveKind.INT);
+                        PrimitiveKind.INT, PrimitiveKind.INT, PrimitiveKind.INT);
         table.putBits(1, 10, 100, -1);
         table.putBits(2, 20, 200, -1);
         List<String> cells = new ArrayList<>();

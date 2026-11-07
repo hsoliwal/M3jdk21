@@ -195,27 +195,27 @@ public final class M3IndexOrderWindowContract {
         int[] expected = new int[offset + limit + 4]; Arrays.fill(expected, CANARY);
         int[] actual = expected.clone();
         long want = reference(rows, states, first, budget, required, excluded, expected, offset, limit);
-        long got = M3IndexMaskWindow.scanBounded(rows, states, first, budget, required, excluded,
+        long got = IndexMaskWindow.scanBounded(rows, states, first, budget, required, excluded,
                 actual, offset, limit, M3IndexMaskCompactor.Backend.JAVA);
         check(got == want, "exact bounded Java cursor/count");
         same(expected, actual, "bounded Java ordered output and guards");
         observe(got); for (int value : actual) observe(value);
         if (budget == Integer.MAX_VALUE) {
             Arrays.fill(actual, CANARY);
-            got = M3IndexMaskWindow.scan(rows, states, first, required, excluded, actual,
+            got = IndexMaskWindow.scan(rows, states, first, required, excluded, actual,
                     offset, limit, M3IndexMaskCompactor.Backend.JAVA);
             check(got == want, "legacy Java cursor/count");
             same(expected, actual, "legacy Java full-remainder parity");
         }
         if (nativeMode) {
             Arrays.fill(actual, CANARY);
-            got = M3IndexMaskWindow.scanBounded(rows, states, first, budget, required, excluded,
+            got = IndexMaskWindow.scanBounded(rows, states, first, budget, required, excluded,
                     actual, offset, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
             check(got == want, "exact bounded JNI cursor/count");
             same(expected, actual, "bounded JNI ordered output and guards");
             if (budget == Integer.MAX_VALUE) {
                 Arrays.fill(actual, CANARY);
-                got = M3IndexMaskWindow.scan(rows, states, first, required, excluded, actual,
+                got = IndexMaskWindow.scan(rows, states, first, required, excluded, actual,
                         offset, limit, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
                 check(got == want, "legacy JNI cursor/count");
                 same(expected, actual, "legacy JNI full-remainder parity");
@@ -284,14 +284,14 @@ public final class M3IndexOrderWindowContract {
                 while (cursor < rows.length) {
                     Arrays.fill(out, CANARY); Arrays.fill(oracle, CANARY);
                     long want = reference(rows, states, cursor, budget, 128, 0, oracle, 2, limit);
-                    long got = M3IndexMaskWindow.scanBounded(rows, states, cursor, budget, 128, 0,
+                    long got = IndexMaskWindow.scanBounded(rows, states, cursor, budget, 128, 0,
                             out, 2, limit, backend);
                     check(got == want, "resumed exact cursor/count");
                     same(oracle, out, "resumed output guards");
-                    int next = M3IndexMaskWindow.nextIndex(got);
+                    int next = IndexMaskWindow.nextIndex(got);
                     check(next > cursor && next <= rows.length && (long) next - cursor <= budget,
                             "positive budgets make bounded progress");
-                    for (int i = 0; i < M3IndexMaskWindow.written(got); i++) emitted.add(out[i + 2]);
+                    for (int i = 0; i < IndexMaskWindow.written(got); i++) emitted.add(out[i + 2]);
                     observe(got); cursor = next;
                 }
                 check(expected.equals(emitted), "resumption preserves every duplicate occurrence exactly once");
@@ -312,21 +312,21 @@ public final class M3IndexOrderWindowContract {
 
     private static void failures(M3IndexMaskCompactor.Backend backend) {
         int[] rows = {3, 3, -1}, out = {CANARY, CANARY, CANARY}; byte[] states = {1, 2, 3};
-        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(null, states, -1, -1, -1, -1, out, -1, -1, backend), out);
-        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(rows, null, 0, 0, 0, 0, out, 0, 0, backend), out);
-        refusal(NullPointerException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, 0, 0, null), out);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, rows, 0, 0, backend), rows);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, new byte[0], -1, -1, -1, -1, out, -1, -1, backend), out);
+        refusal(NullPointerException.class, () -> IndexMaskWindow.scanBounded(null, states, -1, -1, -1, -1, out, -1, -1, backend), out);
+        refusal(NullPointerException.class, () -> IndexMaskWindow.scanBounded(rows, null, 0, 0, 0, 0, out, 0, 0, backend), out);
+        refusal(NullPointerException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, 0, 0, null), out);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, rows, 0, 0, backend), rows);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, new byte[0], -1, -1, -1, -1, out, -1, -1, backend), out);
         for (int bad : new int[] {-1, 256, Integer.MIN_VALUE, Integer.MAX_VALUE}) {
-            refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, -1, -1, bad, 0, out, 0, 0, backend), out);
-            refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, bad, out, 0, 0, backend), out);
+            refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, -1, -1, bad, 0, out, 0, 0, backend), out);
+            refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, bad, out, 0, 0, backend), out);
         }
-        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, -1, -1, 0, 0, out, 0, 0, backend), out);
-        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 4, 0, 0, 0, out, 0, 0, backend), out);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, -1, 0, 0, out, 0, 0, backend), out);
-        refusal(IllegalArgumentException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, 0, 4097, backend), out);
-        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, -1, 0, 0, out, -1, 0, backend), out);
-        refusal(IndexOutOfBoundsException.class, () -> M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, Integer.MAX_VALUE, 1, backend), out);
+        refusal(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scanBounded(rows, states, -1, -1, 0, 0, out, 0, 0, backend), out);
+        refusal(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scanBounded(rows, states, 4, 0, 0, 0, out, 0, 0, backend), out);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, -1, 0, 0, out, 0, 0, backend), out);
+        refusal(IllegalArgumentException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, 0, 4097, backend), out);
+        refusal(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, -1, 0, 0, out, -1, 0, backend), out);
+        refusal(IndexOutOfBoundsException.class, () -> IndexMaskWindow.scanBounded(rows, states, 0, 0, 0, 0, out, Integer.MAX_VALUE, 1, backend), out);
         M3LongIndexProjection view = M3LongIndexProjection.snapshot(new long[] {3, 2, 1});
         refusal(IndexOutOfBoundsException.class, () -> view.slice(1, Integer.MAX_VALUE), out);
         refusal(IndexOutOfBoundsException.class, () -> view.get(-1), out);
@@ -336,9 +336,9 @@ public final class M3IndexOrderWindowContract {
     }
 
     private static void rawRefusals() throws Exception {
-        Method legacy = M3IndexMaskWindow.class.getDeclaredMethod("scanNative", int[].class,
+        Method legacy = IndexMaskWindow.class.getDeclaredMethod("scanNative", int[].class,
                 byte[].class, int.class, int.class, int.class, int[].class, int.class, int.class);
-        Method bounded = M3IndexMaskWindow.class.getDeclaredMethod("scanBoundedNative", int[].class,
+        Method bounded = IndexMaskWindow.class.getDeclaredMethod("scanBoundedNative", int[].class,
                 byte[].class, int.class, int.class, int.class, int.class, int[].class, int.class, int.class);
         legacy.setAccessible(true); bounded.setAccessible(true);
         int[] rows = {7, 7, -1}, out = {CANARY, CANARY, CANARY}; byte[] states = {1, 1, 1};
@@ -376,18 +376,18 @@ public final class M3IndexOrderWindowContract {
         check(M3IndexMaskCompactor.nativeAvailable() == oldBinary, "requested isolated native-library mode");
         int[] rows = {7}, out = {CANARY}; byte[] states = {(byte) 128};
         var backend = M3IndexMaskCompactor.Backend.NATIVE_REQUIRED;
-        refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scanBounded(rows, states,
+        refusal(UnsatisfiedLinkError.class, () -> IndexMaskWindow.scanBounded(rows, states,
                 0, 1, 128, 0, out, 0, 1, backend), out);
         if (oldBinary) {
-            long got = M3IndexMaskWindow.scan(rows, states, 0, 128, 0, out, 0, 1, backend);
+            long got = IndexMaskWindow.scan(rows, states, 0, 128, 0, out, 0, 1, backend);
             check(got == ((1L << 32) | 1) && out[0] == 7, "legacy JNI symbol remains usable");
-            check(M3IndexMaskWindow.scanBounded(rows, states, 0, 0, 128, 0, out, 0, 1, backend) == 0,
+            check(IndexMaskWindow.scanBounded(rows, states, 0, 0, 128, 0, out, 0, 1, backend) == 0,
                     "old binary preserves public zero-work shortcut after library availability");
         } else {
             for (int limit : new int[] {0, 1}) {
-                refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scan(rows, states,
+                refusal(UnsatisfiedLinkError.class, () -> IndexMaskWindow.scan(rows, states,
                         0, 128, 128, out, 0, limit, backend), out);
-                refusal(UnsatisfiedLinkError.class, () -> M3IndexMaskWindow.scanBounded(rows, states,
+                refusal(UnsatisfiedLinkError.class, () -> IndexMaskWindow.scanBounded(rows, states,
                         0, 0, 128, 128, out, 0, limit, backend), out);
             }
             refusal(UnsatisfiedLinkError.class, () -> M3LongIndexProjection.snapshot(new long[] {1})

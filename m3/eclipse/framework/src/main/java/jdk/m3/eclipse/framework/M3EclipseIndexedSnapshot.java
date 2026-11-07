@@ -3,9 +3,9 @@
 package jdk.m3.eclipse.framework;
 
 import jdk.m3.collections.M3Collections;
-import jdk.m3.collections.M3LongArrayList;
-import jdk.m3.collections.M3ObjectStateSlots28;
-import jdk.m3.collections.M3SlotAllocator28;
+import jdk.m3.collections.LongArrayList;
+import jdk.m3.collections.ObjectStateSlots28;
+import jdk.m3.collections.SlotAllocator28;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,15 +20,15 @@ import java.util.Objects;
  */
 final class M3EclipseIndexedSnapshot<T> {
     private final List<T> payloads = M3Collections.arrayList();
-    private final M3LongArrayList handles = M3Collections.longArrayList();
-    private final M3ObjectStateSlots28 states = new M3ObjectStateSlots28();
+    private final LongArrayList handles = M3Collections.longArrayList();
+    private final ObjectStateSlots28 states = new ObjectStateSlots28();
 
     /** The physical slot equals the appended ordinal because snapshot slots are never reused. */
     long add(T object, int flags) {
         Objects.requireNonNull(object, "object");
         if ((flags & ~0xff) != 0) throw new IllegalArgumentException("state must fit byte");
         long handle = states.allocate(flags);
-        int slot = M3SlotAllocator28.slot(handle);
+        int slot = SlotAllocator28.slot(handle);
         if (slot != payloads.size()) {
             states.release(handle);
             throw new IllegalStateException("M3 snapshot handle and reference planes diverged");
@@ -71,6 +71,6 @@ final class M3EclipseIndexedSnapshot<T> {
         if (!states.isLive(handle)) {
             throw new IllegalStateException("stale M3 Eclipse snapshot handle");
         }
-        return payloads.get(M3SlotAllocator28.slot(handle));
+        return payloads.get(SlotAllocator28.slot(handle));
     }
 }

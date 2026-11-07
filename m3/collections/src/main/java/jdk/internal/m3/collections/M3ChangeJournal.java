@@ -15,8 +15,8 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3IntArrayList;
-import jdk.m3.collections.M3LongArrayList;
+import jdk.m3.collections.IntArrayList;
+import jdk.m3.collections.LongArrayList;
 
 /**
  * Bounded, parent-owned primitive change history for indexed M3 state.
@@ -37,17 +37,17 @@ import jdk.m3.collections.M3LongArrayList;
  */
 public final class M3ChangeJournal {
     private final int capacity;
-    private final M3LongArrayList identities;
-    private final M3IntArrayList changeMasks;
-    private final M3IntArrayList statePairs;
+    private final LongArrayList identities;
+    private final IntArrayList changeMasks;
+    private final IntArrayList statePairs;
     private long newestSequence;
 
     public M3ChangeJournal(int capacity) {
         if (capacity < 1) throw new IllegalArgumentException("capacity must be positive");
         this.capacity = capacity;
-        identities = new M3LongArrayList(capacity);
-        changeMasks = new M3IntArrayList(capacity);
-        statePairs = new M3IntArrayList(capacity);
+        identities = new LongArrayList(capacity);
+        changeMasks = new IntArrayList(capacity);
+        statePairs = new IntArrayList(capacity);
     }
 
     public int capacity() { return capacity; }

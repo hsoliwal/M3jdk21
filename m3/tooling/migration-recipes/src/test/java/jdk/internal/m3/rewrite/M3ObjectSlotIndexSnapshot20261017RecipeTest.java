@@ -22,7 +22,7 @@ import org.openrewrite.java.JavaParser;
 final class M3ObjectSlotIndexSnapshot20261017RecipeTest {
     private static final String CRATE = "m3-object-slot-index-snapshot-20261017";
     private static final String STORE =
-            "m3/collections/src/main/java/jdk/m3/collections/M3ObjectSlotStore28.java";
+            "m3/collections/src/main/java/jdk/m3/collections/ObjectSlotStore28.java";
 
     private static InMemoryExecutionContext ctx() {
         return new InMemoryExecutionContext(error -> {
@@ -34,7 +34,7 @@ final class M3ObjectSlotIndexSnapshot20261017RecipeTest {
     void exactAdditiveTargetsReachFixedPoint() {
         var recipe = new M3HashPinnedJavaSnapshotRecipe(CRATE);
         assertEquals(List.of(
-                "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java",
+                "m3/collections/src/main/java/jdk/m3/collections/ObjectIndexSnapshot.java",
                 STORE,
                 "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexSelfTest.java",
                 "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexTest.java"),
@@ -53,10 +53,10 @@ final class M3ObjectSlotIndexSnapshot20261017RecipeTest {
         assertEquals(4, generated.size());
         assertTrue(generated.get(STORE).printAll().contains("M3ObjectStateSlots28"));
         assertTrue(generated.get(
-                "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java")
+                "m3/collections/src/main/java/jdk/m3/collections/ObjectIndexSnapshot.java")
                 .printAll().contains("M3IndexMaskWindow.scan"));
         assertTrue(generated.get(
-                "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java")
+                "m3/collections/src/main/java/jdk/m3/collections/ObjectIndexSnapshot.java")
                 .printAll().contains("M3SignalOrder.filtered"));
 
         var second = recipe.run(

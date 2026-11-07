@@ -48,9 +48,9 @@ public final class M3ZeroSlotCapacityContract {
         }
     }
     private static void capacity(boolean required) {
-        M3IntHashSet a = new M3IntHashSet();
-        M3IntIntHashMap b = new M3IntIntHashMap();
-        M3IntLongHashMap c = new M3IntLongHashMap();
+        IntHashSet a = new IntHashSet();
+        IntIntHashMap b = new IntIntHashMap();
+        IntLongHashMap c = new IntLongHashMap();
         for (int i = 1; i <= 5; i++) {
             check(a.add(i), "set initial"); check(b.put(i, i), "int map initial");
             check(c.put(i, (long) i), "long map initial");
@@ -88,9 +88,9 @@ public final class M3ZeroSlotCapacityContract {
             check(b.containsKey(i), "int map survives growth");
             check(c.containsKey(i), "long map survives growth");
         }
-        M3IntHashSet first = new M3IntHashSet();
-        M3IntIntHashMap second = new M3IntIntHashMap();
-        M3IntLongHashMap third = new M3IntLongHashMap();
+        IntHashSet first = new IntHashSet();
+        IntIntHashMap second = new IntIntHashMap();
+        IntLongHashMap third = new IntLongHashMap();
         first.add(0); second.put(0, 10); third.put(0, 20);
         for (int i = 1; i <= 5; i++) {
             first.add(i); second.put(i, i); third.put(i, i);
@@ -106,7 +106,7 @@ public final class M3ZeroSlotCapacityContract {
         eq(5, third.size(), "long map zero removal");
     }
     private static void set(int loops) {
-        M3IntHashSet actual = new M3IntHashSet(0);
+        IntHashSet actual = new IntHashSet(0);
         Set<Integer> expected = new HashSet<>();
         Random random = new Random(0x334134);
         for (int step = 0; step < loops; step++) {
@@ -125,14 +125,14 @@ public final class M3ZeroSlotCapacityContract {
             if ((step & 255) == 0) {
                 ids(actual.toArray(),expected,"set snapshot " + step);
                 Set<Integer> iterated = new HashSet<>();
-                M3IntIterator itr = actual.iterator();
+                IntIterator itr = actual.iterator();
                 while (itr.hasNext()) check(iterated.add(itr.nextInt()), "set iterator duplicate");
                 eq(expected,iterated,"set iterated");
             }
         }
     }
     private static void intMap(int loops) {
-        M3IntIntHashMap actual=new M3IntIntHashMap(0);
+        IntIntHashMap actual=new IntIntHashMap(0);
         Map<Integer,Integer> expected=new HashMap<>();
         Random random=new Random(0x776633);
         for (int step=0;step<loops;step++) {
@@ -176,7 +176,7 @@ public final class M3ZeroSlotCapacityContract {
         }
     }
     private static void longMap(int loops) {
-        M3IntLongHashMap actual=new M3IntLongHashMap(0);
+        IntLongHashMap actual=new IntLongHashMap(0);
         Map<Integer,Long> expected=new HashMap<>();
         Random random=new Random(0x226644);
         for(int step=0;step<loops;step++){
@@ -205,27 +205,27 @@ public final class M3ZeroSlotCapacityContract {
         }
     }
     private static void iterators() {
-        M3IntHashSet s=new M3IntHashSet();s.add(0);s.add(1);
-        M3IntIterator a=s.iterator();eq(0,a.nextInt(),"set zero first");check(!s.add(0),"set duplicate zero");eq(1,a.nextInt(),"set duplicate does not invalidate");
+        IntHashSet s=new IntHashSet();s.add(0);s.add(1);
+        IntIterator a=s.iterator();eq(0,a.nextInt(),"set zero first");check(!s.add(0),"set duplicate zero");eq(1,a.nextInt(),"set duplicate does not invalidate");
         a=s.iterator();s.add(2);
         try{a.hasNext();throw new AssertionError("set new key should invalidate iterator");}
         catch(ConcurrentModificationException okay){checks++;}
-        M3IntIntHashMap m=new M3IntIntHashMap();m.put(0,10);m.put(1,11);
-        M3IntIterator b=m.keyIterator();eq(0,b.nextInt(),"int map zero first");check(!m.put(0,99),"int map existing zero");eq(1,b.nextInt(),"int map nonstructural write keeps iterator");
+        IntIntHashMap m=new IntIntHashMap();m.put(0,10);m.put(1,11);
+        IntIterator b=m.keyIterator();eq(0,b.nextInt(),"int map zero first");check(!m.put(0,99),"int map existing zero");eq(1,b.nextInt(),"int map nonstructural write keeps iterator");
         b=m.keyIterator();m.put(2,2);
         try{b.hasNext();throw new AssertionError("int map new key must invalidate");}
         catch(ConcurrentModificationException okay){checks++;}
-        M3IntLongHashMap l=new M3IntLongHashMap();l.put(0,10L);l.put(1,11L);
-        M3IntIterator c=l.keyIterator();eq(0,c.nextInt(),"long map zero first");check(!l.put(0,99L),"long map existing zero");eq(1,c.nextInt(),"long map nonstructural write keeps iterator");
+        IntLongHashMap l=new IntLongHashMap();l.put(0,10L);l.put(1,11L);
+        IntIterator c=l.keyIterator();eq(0,c.nextInt(),"long map zero first");check(!l.put(0,99L),"long map existing zero");eq(1,c.nextInt(),"long map nonstructural write keeps iterator");
         c=l.keyIterator();l.put(2,2L);
         try{c.hasNext();throw new AssertionError("long map new key must invalidate");}
         catch(ConcurrentModificationException okay){checks++;}
     }
     public static void main(String[] args) {
         boolean physical = args.length == 0 || !args[0].equals("--values-only");
-        ensureNoNodeFields(M3IntHashSet.class);
-        ensureNoNodeFields(M3IntIntHashMap.class);
-        ensureNoNodeFields(M3IntLongHashMap.class);
+        ensureNoNodeFields(IntHashSet.class);
+        ensureNoNodeFields(IntIntHashMap.class);
+        ensureNoNodeFields(IntLongHashMap.class);
         capacity(physical);
         set(65_537);
         intMap(65_537);

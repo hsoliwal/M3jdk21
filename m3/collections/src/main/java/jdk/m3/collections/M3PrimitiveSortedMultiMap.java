@@ -28,17 +28,17 @@ import java.util.function.LongConsumer;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveSortedMultiMap {
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private final M3PrimitiveSoaStore rows;
     private final boolean uniquePairs;
 
-    public M3PrimitiveSortedMultiMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind) {
+    public M3PrimitiveSortedMultiMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this(keyKind, valueKind, 8, false);
     }
 
     public M3PrimitiveSortedMultiMap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind, int initialCapacity, boolean uniquePairs) {
+            PrimitiveKind keyKind, PrimitiveKind valueKind, int initialCapacity, boolean uniquePairs) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         rows = new M3PrimitiveSoaStore(initialCapacity, 0, keyKind, valueKind);
@@ -48,8 +48,8 @@ public final class M3PrimitiveSortedMultiMap {
     public int size() { return rows.size(); }
     public boolean isEmpty() { return rows.isEmpty(); }
     public long payloadBytes() { return rows.payloadBytes(); }
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public boolean uniquePairs() { return uniquePairs; }
 
     /**

@@ -15,7 +15,7 @@ final class M3FilteredNavigationReconciliationTest {
 
     @Test
     void maskAliasesRefuseBeforeEitherBackendWrites() {
-        M3IndexPathMasksAliasContract.main(M3IndexPathMasks.nativeAvailable()
+        M3IndexPathMasksAliasContract.main(IndexPathMasks.nativeAvailable()
                 ? new String[] {"--native"} : new String[0]);
     }
 }

@@ -44,16 +44,16 @@ public final class M3StagedLaneOrderDifferential {
 
     public static void compare(ClassLoader original, ClassLoader candidate) throws Exception {
         if (original == candidate) throw new IllegalArgumentException("original and candidate need distinct loaders");
-        for (String owner : new String[] {"M3IntIntHashMap", "M3IntLongHashMap", "M3ObjectIdentityMap",
-                "M3LongLongHashMap", "M3LongLongTreeMap", "M3LongPatriciaTrie", "M3LongTreeSet"}) {
+        for (String owner : new String[] {"IntIntHashMap", "IntLongHashMap", "M3ObjectIdentityMap",
+                "LongLongHashMap", "LongLongTreeMap", "M3LongPatriciaTrie", "LongTreeSet"}) {
             Pair pair = new Pair(owner, original, candidate);
             boolean identity = owner.equals("M3ObjectIdentityMap");
-            boolean intInt = owner.equals("M3IntIntHashMap");
-            boolean intLong = owner.equals("M3IntLongHashMap");
+            boolean intInt = owner.equals("IntIntHashMap");
+            boolean intLong = owner.equals("IntLongHashMap");
             boolean ints = intInt || intLong;
             boolean trie = owner.equals("M3LongPatriciaTrie");
-            boolean pages = owner.equals("M3LongTreeSet");
-            boolean sorted = owner.equals("M3LongLongTreeMap");
+            boolean pages = owner.equals("LongTreeSet");
+            boolean sorted = owner.equals("LongLongTreeMap");
             Object[] identityKeys = new Object[513], identityValues = new Object[31];
             for (int i = 1; i < identityKeys.length; i++) identityKeys[i] = new String("equal-key-" + (i % 11));
             for (int i = 1; i < identityValues.length; i++) identityValues[i] = new String("equal-value-" + (i % 7));

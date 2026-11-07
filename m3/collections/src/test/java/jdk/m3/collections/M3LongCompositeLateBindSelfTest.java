@@ -28,7 +28,7 @@ public final class M3LongCompositeLateBindSelfTest {
     private static void lazyUnion() {
         CountedSorted left = new CountedSorted(1, 3);
         CountedSorted right = new CountedSorted(2, 3);
-        M3LongSortedSet union = M3LongCompositeViews.sortedUnion(left, right);
+        LongSortedSet union = M3LongCompositeViews.sortedUnion(left, right);
         var stream = union.longStream();
         Spliterator.OfLong direct = union.longSpliterator();
         eq(left.iteratorCalls + right.iteratorCalls, 0);
@@ -130,15 +130,15 @@ public final class M3LongCompositeLateBindSelfTest {
         }
     }
 
-    private static final class CountedSorted implements M3LongSortedSet {
-        final M3LongTreeSet owner = new M3LongTreeSet();
+    private static final class CountedSorted implements LongSortedSet {
+        final LongTreeSet owner = new LongTreeSet();
         int iteratorCalls;
         CountedSorted(long... values) { for (long v : values) owner.add(v); }
         @Override public int size() { return owner.size(); }
         @Override public boolean isEmpty() { return owner.isEmpty(); }
         @Override public boolean contains(long v) { return owner.contains(v); }
         @Override public void clear() { owner.clear(); }
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             iteratorCalls++;
             return owner.iterator();
         }

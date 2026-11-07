@@ -14,7 +14,7 @@
  *******************************************************************************/
 package jdk.internal.m3.collections;
 
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Construction-time factory for provider-backed lean collection families.
@@ -34,14 +34,14 @@ public final class M3ProviderCollectionFactory {
 
     public M3ProviderBackedPrimitiveRows rows(
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3ProviderBackedPrimitiveRows(provider, laneKinds);
     }
 
     public M3ProviderBackedPrimitiveList list(
             long logicalSize,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3ProviderBackedPrimitiveList(logicalSize, provider, laneKinds);
     }
 
@@ -51,7 +51,7 @@ public final class M3ProviderCollectionFactory {
             int directoryBits,
             int leafBits,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3ProviderBackedPrimitiveList(
                 logicalSize,
                 rootBits,
@@ -66,7 +66,7 @@ public final class M3ProviderCollectionFactory {
             int directoryBits,
             int leafBits,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3ProviderBackedPrimitiveRows(
                 rootBits, directoryBits, leafBits, provider, laneKinds);
     }
@@ -74,7 +74,7 @@ public final class M3ProviderCollectionFactory {
     public M3ProviderBackedPrimitiveTree tree(
             M3PagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3ProviderBackedPrimitiveTree(provider, pageSize, laneKinds);
     }
 
@@ -84,7 +84,7 @@ public final class M3ProviderCollectionFactory {
             int leafBits,
             M3PagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3ProviderBackedPrimitiveTree(
                 rootBits, directoryBits, leafBits, provider, pageSize, laneKinds);
     }
@@ -92,7 +92,7 @@ public final class M3ProviderCollectionFactory {
     public M3ProviderBackedPrimitiveLongTree longTree(
             M3CursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3ProviderBackedPrimitiveLongTree(provider, pageSize, laneKinds);
     }
 
@@ -102,14 +102,14 @@ public final class M3ProviderCollectionFactory {
             int leafBits,
             M3CursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3ProviderBackedPrimitiveLongTree(
                 rootBits, directoryBits, leafBits, provider, pageSize, laneKinds);
     }
     public M3BoundedProviderBackedPrimitiveRows boundedRows(
             int maximumResident,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3BoundedProviderBackedPrimitiveRows(
                 maximumResident, provider, laneKinds);
     }
@@ -118,7 +118,7 @@ public final class M3ProviderCollectionFactory {
             long logicalSize,
             int maximumResident,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3BoundedProviderBackedPrimitiveList(
                 logicalSize, maximumResident, provider, laneKinds);
     }
@@ -127,7 +127,7 @@ public final class M3ProviderCollectionFactory {
             int maximumResident,
             M3PagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3BoundedProviderBackedPrimitiveTree(
                 maximumResident, provider, pageSize, laneKinds);
     }
@@ -136,7 +136,7 @@ public final class M3ProviderCollectionFactory {
             int maximumResident,
             M3CursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3BoundedProviderBackedPrimitiveLongTree(
                 maximumResident, provider, pageSize, laneKinds);
     }
@@ -144,7 +144,7 @@ public final class M3ProviderCollectionFactory {
     public M3VersionedProviderBackedPrimitiveLongTree versionedLongTree(
             M3VersionedCursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3VersionedProviderBackedPrimitiveLongTree(
                 provider, pageSize, laneKinds);
     }
@@ -153,7 +153,7 @@ public final class M3ProviderCollectionFactory {
             int maximumResident,
             M3VersionedCursorPagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         return new M3BoundedVersionedProviderBackedPrimitiveLongTree(
                 maximumResident, provider, pageSize, laneKinds);
     }

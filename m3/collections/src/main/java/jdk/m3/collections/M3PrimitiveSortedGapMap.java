@@ -32,8 +32,8 @@ public final class M3PrimitiveSortedGapMap {
 
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
-    private final M3PrimitiveKind keyKind;
-    private final M3PrimitiveKind valueKind;
+    private final PrimitiveKind keyKind;
+    private final PrimitiveKind valueKind;
     private final float loadFactor;
     private Object keys;
     private Object values;
@@ -41,12 +41,12 @@ public final class M3PrimitiveSortedGapMap {
     private int gapEnd;
     private int size;
 
-    public M3PrimitiveSortedGapMap(M3PrimitiveKind keyKind, M3PrimitiveKind valueKind) {
+    public M3PrimitiveSortedGapMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this(keyKind, valueKind, 8, DEFAULT_LOAD_FACTOR);
     }
 
     public M3PrimitiveSortedGapMap(
-            M3PrimitiveKind keyKind, M3PrimitiveKind valueKind, int expected, float loadFactor) {
+            PrimitiveKind keyKind, PrimitiveKind valueKind, int expected, float loadFactor) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
         if (expected < 0) throw new IllegalArgumentException("expected < 0");
@@ -61,8 +61,8 @@ public final class M3PrimitiveSortedGapMap {
         gapEnd = capacity;
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
-    public M3PrimitiveKind valueKind() { return valueKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind valueKind() { return valueKind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return java.lang.reflect.Array.getLength(keys); }

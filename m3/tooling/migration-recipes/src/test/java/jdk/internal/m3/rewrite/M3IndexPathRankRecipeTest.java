@@ -58,7 +58,7 @@ class M3IndexPathRankRecipeTest {
     }
 
     @Test void refusesDriftedOwnedTarget() {
-        String path = "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java";
+        String path = "m3/collections/src/main/java/jdk/m3/collections/IndexPathRank.java";
         String source = resource("M3IndexPathRank.java.txt") + "\n// unexpected edit\n";
         SourceFile drifted = JavaParser.fromJavaVersion().build().parse(source)
                 .findFirst().orElseThrow().withSourcePath(Path.of(path));

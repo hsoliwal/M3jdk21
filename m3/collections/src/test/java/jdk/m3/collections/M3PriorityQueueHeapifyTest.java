@@ -27,8 +27,8 @@ final class M3PriorityQueueHeapifyTest {
             long[] longs = new long[length];
             PriorityQueue<Integer> jdkInts = new PriorityQueue<>();
             PriorityQueue<Long> jdkLongs = new PriorityQueue<>();
-            M3IntPriorityQueue incrementalInts = new M3IntPriorityQueue();
-            M3LongPriorityQueue incrementalLongs = new M3LongPriorityQueue();
+            IntPriorityQueue incrementalInts = new IntPriorityQueue();
+            LongPriorityQueue incrementalLongs = new LongPriorityQueue();
             for (int i = 0; i < length; i++) {
                 ints[i] = round % 7 == 0 ? 0 : i % 31 == 0 ? Integer.MIN_VALUE
                         : i % 37 == 0 ? Integer.MAX_VALUE : random.nextInt(201) - 100;
@@ -41,8 +41,8 @@ final class M3PriorityQueueHeapifyTest {
             }
             int[] immutableInts = ints.clone();
             long[] immutableLongs = longs.clone();
-            M3IntPriorityQueue bulkInts = new M3IntPriorityQueue(ints);
-            M3LongPriorityQueue bulkLongs = new M3LongPriorityQueue(longs);
+            IntPriorityQueue bulkInts = new IntPriorityQueue(ints);
+            LongPriorityQueue bulkLongs = new LongPriorityQueue(longs);
             assertArrayEquals(immutableInts, ints);
             assertArrayEquals(immutableLongs, longs);
             assertEquals(length, bulkInts.size());
@@ -79,8 +79,8 @@ final class M3PriorityQueueHeapifyTest {
     @Test void inputIsDetachedAndMutationRulesRemainIntact() {
         int[] ints = {9, -1, 3, -1, 0, Integer.MAX_VALUE};
         long[] longs = {9, -1, 3, -1, 0, Long.MIN_VALUE};
-        M3IntPriorityQueue qi = new M3IntPriorityQueue(ints);
-        M3LongPriorityQueue ql = new M3LongPriorityQueue(longs);
+        IntPriorityQueue qi = new IntPriorityQueue(ints);
+        LongPriorityQueue ql = new LongPriorityQueue(longs);
         ints[0] = -1000;
         longs[0] = -1000;
         assertEquals(-1, qi.firstInt());
@@ -102,10 +102,10 @@ final class M3PriorityQueueHeapifyTest {
     }
 
     @Test void nullAndEmptyConstructionAreDefined() {
-        assertThrows(NullPointerException.class, () -> new M3IntPriorityQueue((int[]) null));
-        assertThrows(NullPointerException.class, () -> new M3LongPriorityQueue((long[]) null));
-        var qi = new M3IntPriorityQueue(new int[0]);
-        var ql = new M3LongPriorityQueue(new long[0]);
+        assertThrows(NullPointerException.class, () -> new IntPriorityQueue((int[]) null));
+        assertThrows(NullPointerException.class, () -> new LongPriorityQueue((long[]) null));
+        var qi = new IntPriorityQueue(new int[0]);
+        var ql = new LongPriorityQueue(new long[0]);
         assertEquals(0, qi.capacity());
         assertEquals(0, ql.capacity());
         qi.offer(1);

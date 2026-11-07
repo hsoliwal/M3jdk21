@@ -14,9 +14,9 @@ import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3LongCollection;
+import jdk.m3.collections.LongCollection;
 import jdk.m3.collections.M3LongIndexProjection;
-import jdk.m3.collections.M3LongIterator;
+import jdk.m3.collections.LongIterator;
 
 /**
  * Immutable, occurrence-preserving primitive filtered collection over the existing
@@ -35,7 +35,7 @@ import jdk.m3.collections.M3LongIterator;
  * a theoretical address-space maximum. Sorting permutes only existing indices;
  * slicing shares the immutable value and index backing.</p>
  */
-public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
+public final class M3LongBitmapFilteredSnapshot implements LongCollection {
     private final M3LongIndexProjection selected;
     private final BitSet physicalMask;
 
@@ -163,8 +163,8 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
         throw new UnsupportedOperationException("immutable bitmap filtered snapshot");
     }
 
-    @Override public M3LongIterator iterator() {
-        return new M3LongIterator() {
+    @Override public LongIterator iterator() {
+        return new LongIterator() {
             private int cursor;
             @Override public boolean hasNext() { return cursor < size(); }
             @Override public long nextLong() {
@@ -211,8 +211,8 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
      * revision signals are not supported. Changing revision during capture fails
      * rather than publishing an invalid cache. No automatic JDK live-view claim.
      */
-    public static final class VersionedView implements M3LongCollection {
-        private final M3LongCollection source;
+    public static final class VersionedView implements LongCollection {
+        private final LongCollection source;
         private final LongPredicate predicate;
         private final LongSupplier revision;
         private volatile Cache cache;
@@ -231,7 +231,7 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
             }
         }
 
-        public VersionedView(M3LongCollection source, LongPredicate predicate,
+        public VersionedView(LongCollection source, LongPredicate predicate,
                              LongSupplier revision) {
             this.source = Objects.requireNonNull(source, "source");
             this.predicate = Objects.requireNonNull(predicate, "predicate");
@@ -306,10 +306,10 @@ public final class M3LongBitmapFilteredSnapshot implements M3LongCollection {
         @Override public void clear() {
             throw new UnsupportedOperationException("read-only epoch filtered view");
         }
-        @Override public M3LongIterator iterator() {
+        @Override public LongIterator iterator() {
             Cache owner = current();
-            M3LongIterator delegate = owner.bitmap.iterator();
-            return new M3LongIterator() {
+            LongIterator delegate = owner.bitmap.iterator();
+            return new LongIterator() {
                 @Override public boolean hasNext() {
                     requireUnchanged(owner);
                     return delegate.hasNext();

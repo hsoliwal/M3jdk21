@@ -19,9 +19,9 @@ class M3IndexPathRankTest {
         int[][] stages = {{0, 1, -1, 3, 1}, {1, 0, -1, 1, 3}};
         int[] needs = {1, 1};
         int[] excludes = {2, 2};
-        int[] expected = M3IndexPathMasks.select(rows, slots, stages, needs, excludes,
-                0, rows.length, 1, M3IndexPathMasks.Backend.JAVA);
-        M3IndexPathRank result = M3IndexPathRank.snapshot(rows, slots, stages, needs,
+        int[] expected = IndexPathMasks.select(rows, slots, stages, needs, excludes,
+                0, rows.length, 1, IndexPathMasks.Backend.JAVA);
+        IndexPathRank result = IndexPathRank.snapshot(rows, slots, stages, needs,
                 excludes, 0, rows.length, 1);
         assertArrayEquals(expected, result.toArray());
     }

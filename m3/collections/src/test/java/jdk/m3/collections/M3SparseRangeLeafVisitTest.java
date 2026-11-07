@@ -21,7 +21,7 @@ final class M3SparseRangeLeafVisitTest {
     @Test
     void oldWholeTreeTraversalAndNewRangeTraversalSelectIdenticalLeafReferences() {
         M3LazyPrimitiveAddressSpace space = M3LazyPrimitiveAddressSpace.paged(
-                M3PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
+                PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
         long[] indexes = {0L, 1023L, 1024L, 65535L, (1L << 31),
                 3_000_000_000L, (1L << 42) + 7L, Long.MAX_VALUE - 2048L,
                 Long.MAX_VALUE - 1L};
@@ -65,7 +65,7 @@ final class M3SparseRangeLeafVisitTest {
 
     @Test
     void originalThreeLevelGeometryAndRangeRefusalsRemainUnchanged() {
-        M3LazyPrimitiveAddressSpace space = new M3LazyPrimitiveAddressSpace(M3PrimitiveKind.LONG, 2, 3, 6);
+        M3LazyPrimitiveAddressSpace space = new M3LazyPrimitiveAddressSpace(PrimitiveKind.LONG, 2, 3, 6);
         for (long address : new long[] {4L, 70L, 1300L}) space.setBits(address, address);
         List<Long> visited = new ArrayList<>();
         space.forEachAllocatedLeaf(64, 65, (base, page) -> visited.add(base));
@@ -85,7 +85,7 @@ final class M3SparseRangeLeafVisitTest {
 
     @Test
     void ownerFirstAndLastSearchPreserveSparseZerosAndExtremeCoordinates() {
-        M3PrimitiveBigArray array = M3PrimitiveBigArray.sparse(M3PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
+        BigArray array = BigArray.sparse(PrimitiveKind.LONG, Long.MAX_VALUE, SHIFT);
         array.setBits(7L, 11L);
         array.setBits(1L << 42, 37L);
         array.setBits(Long.MAX_VALUE - 1, 73L);
@@ -108,7 +108,7 @@ final class M3SparseRangeLeafVisitTest {
 
     @Test
     void boundedSearchMatchesIndependentLinearOracleAcrossManySmallRanges() {
-        M3PrimitiveBigArray array = M3PrimitiveBigArray.sparse(M3PrimitiveKind.LONG, 1L << 22, SHIFT);
+        BigArray array = BigArray.sparse(PrimitiveKind.LONG, 1L << 22, SHIFT);
         Random random = new Random(0x4d33535041525345L);
         for (int i = 0; i < 70; i++) array.setBits(random.nextInt(1 << 22), i + 1);
         long before = array.allocatedPayloadBytes();

@@ -23,18 +23,18 @@ public final class M3LongLongSharedTrace {
 
     private static Field field(String name) {
         try {
-            Field value = M3LongLongHashMap.class.getDeclaredField(name);
+            Field value = LongLongHashMap.class.getDeclaredField(name);
             value.setAccessible(true);
             return value;
         } catch (ReflectiveOperationException failure) { throw new AssertionError(failure); }
     }
-    private static long[] longs(Field field, M3LongLongHashMap map) {
+    private static long[] longs(Field field, LongLongHashMap map) {
         try { return (long[]) field.get(map); } catch (IllegalAccessException failure) { throw new AssertionError(failure); }
     }
-    private static byte[] bytes(Field field, M3LongLongHashMap map) {
+    private static byte[] bytes(Field field, LongLongHashMap map) {
         try { return (byte[]) field.get(map); } catch (IllegalAccessException failure) { throw new AssertionError(failure); }
     }
-    private static int integer(Field field, M3LongLongHashMap map) {
+    private static int integer(Field field, LongLongHashMap map) {
         try { return field.getInt(map); } catch (IllegalAccessException failure) { throw new AssertionError(failure); }
     }
     private static void check(boolean value, String reason) {
@@ -44,7 +44,7 @@ public final class M3LongLongSharedTrace {
     private static void number(MessageDigest digest, long n) {
         for (int shift = 56; shift >= 0; shift -= 8) digest.update((byte) (n >>> shift));
     }
-    private static void physical(MessageDigest digest, M3LongLongHashMap map) {
+    private static void physical(MessageDigest digest, LongLongHashMap map) {
         number(digest, integer(SIZE, map));
         number(digest, integer(OCCUPIED, map));
         number(digest, integer(MOD, map));
@@ -72,7 +72,7 @@ public final class M3LongLongSharedTrace {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         for (int seed = 0; seed < 3; seed++) {
             Random random = new Random(0x4d33564d434f4d50L + seed * 13L);
-            M3LongLongHashMap map = new M3LongLongHashMap(20);
+            LongLongHashMap map = new LongLongHashMap(20);
             Map<Long, Long> model = new HashMap<>();
             for (int step = 0; step < 33_333; step++) {
                 long key = key(random, step), value = random.nextLong();

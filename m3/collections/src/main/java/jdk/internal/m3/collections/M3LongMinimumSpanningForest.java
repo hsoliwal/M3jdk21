@@ -16,8 +16,8 @@ package jdk.internal.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3IntCsrGraph;
-import jdk.m3.collections.M3WeightedIntCsrGraph;
+import jdk.m3.collections.graph.IntCsrGraph;
+import jdk.m3.collections.graph.WeightedIntCsrGraph;
 
 /**
  * Immutable signed-weight Kruskal forest; stable input edge IDs break equal-weight ties.
@@ -35,13 +35,13 @@ public final class M3LongMinimumSpanningForest {
     private final long totalWeight;
 
     /** Disconnected/empty graphs are valid. Every evaluated weight sum is checked. */
-    public M3LongMinimumSpanningForest(M3WeightedIntCsrGraph graph) {
+    public M3LongMinimumSpanningForest(WeightedIntCsrGraph graph) {
         Objects.requireNonNull(graph, "graph");
         if (!graph.isUndirected()) { throw new IllegalArgumentException("undirected graph required"); }
         int vertices = graph.vertices(), edges = graph.inputEdges();
         int[] from = new int[edges], to = new int[edges], order = new int[edges];
         long[] weights = new long[edges];
-        M3IntCsrGraph topology = graph.topology();
+        IntCsrGraph topology = graph.topology();
         for (int vertex = 0; vertex < vertices; vertex++) {
             for (int arc = topology.start(vertex); arc < topology.end(vertex); arc++) {
                 int edge = graph.inputEdgeId(arc);

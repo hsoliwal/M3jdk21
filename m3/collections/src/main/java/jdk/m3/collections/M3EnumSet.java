@@ -7,6 +7,7 @@ package jdk.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
+import jdk.m3.collections.bits.LongBitSet;
 
 /**
  * Enum set backed only by presence words: one bit per constant, no per-element object.

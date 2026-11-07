@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Sparse primitive SoA rows that materialize through one callback on first touch.
@@ -48,7 +48,7 @@ public final class M3ProviderBackedPrimitiveRows {
 
     public M3ProviderBackedPrimitiveRows(
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this(
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
                 M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
@@ -62,19 +62,19 @@ public final class M3ProviderBackedPrimitiveRows {
             int directoryBits,
             int leafBits,
             M3PrimitiveRowProvider provider,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this.provider = Objects.requireNonNull(provider, "provider");
         this.touchObserver = provider instanceof M3PrimitiveTouchObserver observer ? observer : null;
         Objects.requireNonNull(laneKinds, "laneKinds");
         if (laneKinds.length == 0) throw new IllegalArgumentException("at least one lane required");
         rows = new M3LazyPrimitiveSoaTable(rootBits, directoryBits, leafBits, laneKinds);
         flags = new M3LazyPrimitiveAddressSpace(
-                M3PrimitiveKind.SHORT, rootBits, directoryBits, leafBits);
+                PrimitiveKind.SHORT, rootBits, directoryBits, leafBits);
         scratch = new long[laneKinds.length];
     }
 
     public int laneCount() { return rows.laneCount(); }
-    public M3PrimitiveKind laneKind(int lane) { return rows.laneKind(lane); }
+    public PrimitiveKind laneKind(int lane) { return rows.laneKind(lane); }
     public long logicalCapacity() { return rows.logicalCapacity(); }
     public long materializedSize() { return rows.size(); }
     public long allocatedPayloadBytes() {

@@ -116,7 +116,7 @@ final class M3LongPatriciaTrieTest {
         }
         assertArrayEquals(keys(expected), actual.keysToArray());
         long[] iterated = new long[actual.size()];
-        M3LongIterator iterator = actual.keyIterator();
+        LongIterator iterator = actual.keyIterator();
         for (int i = 0; i < iterated.length; i++) {
             iterated[i] = iterator.nextLong();
         }
@@ -162,7 +162,7 @@ final class M3LongPatriciaTrieTest {
         assertArrayEquals(new long[] {-1L}, trie.prefixKeys(-1L, 64));
         assertEquals(0, trie.prefixCount(-2L, 64));
         assertEquals(4, trie.prefixCount(12345L, 0));
-        M3LongIterator iterator = trie.keyIterator();
+        LongIterator iterator = trie.keyIterator();
         assertEquals(0L, iterator.nextLong());
         assertTrue(trie.removeKey(0L));
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
@@ -171,7 +171,7 @@ final class M3LongPatriciaTrieTest {
         assertTrue(trie.removeKey(Long.MAX_VALUE));
         assertTrue(trie.removeKey(Long.MIN_VALUE));
         assertTrue(trie.isEmpty());
-        M3LongIterator empty = trie.keyIterator();
+        LongIterator empty = trie.keyIterator();
         assertFalse(empty.hasNext());
         assertThrows(NoSuchElementException.class, empty::nextLong);
         // Dense run and stride keys across several doublings, then remove every other key in

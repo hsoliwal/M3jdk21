@@ -308,16 +308,16 @@ public final class M3IndexMaskCompactorSelfTest {
             eq(expected, M3IndexMaskCompactor.selectLong(inputs, states, required));
             ok(M3IndexMaskCompactor.selectedCount(states, required) == expected.length);
 
-            M3LongArrayList list = M3LongArrayList.copyOf(inputs);
-            M3LongArrayDeque deque = new M3LongArrayDeque(0);
+            LongArrayList list = LongArrayList.copyOf(inputs);
+            LongArrayDeque deque = new LongArrayDeque(0);
             // Wrap the ring before selection, then exercise wrapped and grown states.
             for (int i = 0; i < 13; i++) {
                 deque.addLast(i);
                 deque.removeFirstLong();
             }
             for (long v : inputs) deque.addLast(v);
-            M3LongIterator listCursor = list.iterator();
-            M3LongIterator dequeCursor = deque.iterator();
+            LongIterator listCursor = list.iterator();
+            LongIterator dequeCursor = deque.iterator();
             int removed = length - expected.length;
             ok(list.retainByStateMask(states, required) == removed);
             ok(deque.retainByStateMask(states, required) == removed);
@@ -331,8 +331,8 @@ public final class M3IndexMaskCompactorSelfTest {
                 ok(dequeCursor.hasNext() == (length != 0));
             }
         }
-        M3LongArrayList list = M3LongArrayList.copyOf(new long[] {1, 2, 3});
-        M3LongArrayDeque deque = new M3LongArrayDeque();
+        LongArrayList list = LongArrayList.copyOf(new long[] {1, 2, 3});
+        LongArrayDeque deque = new LongArrayDeque();
         deque.addLast(1); deque.addLast(2); deque.addLast(3);
         for (int invalid : new int[] {-1, 256}) {
             fails(IllegalArgumentException.class,
@@ -349,17 +349,17 @@ public final class M3IndexMaskCompactorSelfTest {
 
         // Zero-mask validation is still mandatory, but a valid identity selection must not
         // invalidate an existing iterator or disturb the circular deque's logical order.
-        M3LongArrayDeque zeroMaskDeque = new M3LongArrayDeque(0);
+        LongArrayDeque zeroMaskDeque = new LongArrayDeque(0);
         zeroMaskDeque.addLast(Long.MIN_VALUE);
         zeroMaskDeque.addLast(0L);
         zeroMaskDeque.addLast(Long.MAX_VALUE);
-        M3LongIterator zeroMaskCursor = zeroMaskDeque.iterator();
+        LongIterator zeroMaskCursor = zeroMaskDeque.iterator();
         ok(zeroMaskDeque.retainByStateMask(new byte[] {0, (byte) 0xff, 1}, 0) == 0);
         ok(zeroMaskCursor.hasNext());
         ok(zeroMaskCursor.nextLong() == Long.MIN_VALUE);
         eq(new long[] {Long.MIN_VALUE, 0L, Long.MAX_VALUE}, zeroMaskDeque.toArray());
 
-        for (Class<?> owner : new Class<?>[] {M3LongArrayList.class, M3LongArrayDeque.class}) {
+        for (Class<?> owner : new Class<?>[] {LongArrayList.class, LongArrayDeque.class}) {
             for (java.lang.reflect.Field field : owner.getDeclaredFields()) {
                 Class<?> fieldType = field.getType();
                 if (fieldType.isArray()) ok(fieldType.getComponentType().isPrimitive());

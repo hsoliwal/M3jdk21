@@ -4,7 +4,7 @@ package jdk.m3.collections.interop;
 
 import static org.junit.jupiter.api.Assertions.*;
 import com.google.common.collect.*;
-import jdk.m3.collections.M3LongBag;
+import jdk.m3.collections.LongBag;
 import java.util.*;
 import java.util.stream.*;
 import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
@@ -74,7 +74,7 @@ final class M3BagInteropTest {
     @Test void failFastAndCopiesCannotMutateOwner() {
         var bag = M3GuavaLongMultiset.create(List.of(1L)); var iterator = bag.iterator(); bag.add(1L);
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
-        M3LongBag copy = bag.toLongBag(); copy.setCount(1, Long.MAX_VALUE); assertEquals(2, bag.count(1L));
+        LongBag copy = bag.toLongBag(); copy.setCount(1, Long.MAX_VALUE); assertEquals(2, bag.count(1L));
         assertThrows(ConcurrentModificationException.class, () -> bag.forEachEntry((key, n) -> bag.add(key)));
     }
     @Test void actualGuavaAlgebraViewsRemainLive() {
@@ -90,7 +90,7 @@ final class M3BagInteropTest {
         same(HashMultiset.create(values), actual);
         assertFalse(M3LibraryBags.<Long>toGuavaLongMultiset(Long::longValue).characteristics().contains(Collector.Characteristics.CONCURRENT));
         var eclipse = new LongHashBag(); values.forEach(eclipse::add);
-        M3LongBag imported = M3LibraryBags.fromEclipse(eclipse), jdk = M3LibraryBags.fromJdk(values), guava = M3LibraryBags.fromGuava(actual);
+        LongBag imported = M3LibraryBags.fromEclipse(eclipse), jdk = M3LibraryBags.fromJdk(values), guava = M3LibraryBags.fromGuava(actual);
         assertEquals(20000, imported.totalCount()); for (long key = 0; key < 113; key++) {
             assertEquals(eclipse.occurrencesOf(key), imported.count(key)); assertEquals(imported.count(key), jdk.count(key));
             assertEquals(imported.count(key), guava.count(key));

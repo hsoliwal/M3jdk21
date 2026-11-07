@@ -101,7 +101,7 @@ class M3LongIndexProjectionUnionTest {
         M3LongIndexProjection source = M3LongIndexProjection.snapshot(values).sortedAscending();
         int[][] planes = {new int[values.length]};
         M3LongIndexProjection selected = source.filteredPathMasks(planes, new int[] {0},
-                new int[] {0}, source.size() - 1, source.size(), -1, M3IndexPathMasks.Backend.JAVA);
+                new int[] {0}, source.size() - 1, source.size(), -1, IndexPathMasks.Backend.JAVA);
         List<Integer> expected = Arrays.stream(selected.physicalIndices()).boxed().toList();
         for (boolean descending : new boolean[] {false, true}) {
             List<Integer> ordered = new ArrayList<>(expected);
@@ -122,7 +122,7 @@ class M3LongIndexProjectionUnionTest {
     @Test
     void anExplicitNativeQualificationCannotPassThroughAnAbsentLibrary() {
         if (Boolean.getBoolean("m3.projection.nativeRequired")) {
-            assertTrue(M3IndexPathMasks.nativeAvailable(), "actual path-mask JNI is required");
+            assertTrue(IndexPathMasks.nativeAvailable(), "actual path-mask JNI is required");
             assertTrue(M3IndexMaskCompactor.nativeAvailable(), "actual byte-mask JNI is required");
         }
     }

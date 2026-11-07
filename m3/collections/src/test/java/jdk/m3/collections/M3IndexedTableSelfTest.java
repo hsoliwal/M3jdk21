@@ -217,7 +217,7 @@ public final class M3IndexedTableSelfTest {
             if (Modifier.isStatic(field.getModifiers())) continue;
             Class<?> type = field.getType();
             ok(type == int[].class || type == byte[].class || type == Object[].class
-                    || type == M3LinkedHashMap.class || type == M3LongLongHashMap.class
+                    || type == M3LinkedHashMap.class || type == LongLongHashMap.class
                     || type == int.class || type == long.class,
                     "no per-cell object/node/entry field: " + field);
         }

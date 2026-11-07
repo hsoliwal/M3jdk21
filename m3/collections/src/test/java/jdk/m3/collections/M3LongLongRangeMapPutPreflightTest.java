@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 /** Regression for failure-atomic interval overwrite with exact capacity preflight. */
 final class M3LongLongRangeMapPutPreflightTest {
-    private static String rows(M3LongLongRangeMap map) {
+    private static String rows(LongLongRangeMap map) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < map.rangeCount(); i++) {
             result.append(map.startAt(i)).append(':').append(map.endAt(i))
@@ -26,7 +26,7 @@ final class M3LongLongRangeMapPutPreflightTest {
     @Test
     void eachBackingCopyFailureOccursBeforeAnyOverwrittenIntervalIsChanged() {
         for (int failureAt = 1; failureAt <= 3; failureAt++) {
-            M3LongLongRangeMap map = new M3LongLongRangeMap(1);
+            LongLongRangeMap map = new LongLongRangeMap(1);
             map.put(0, 10, 41);
             AtomicInteger copies = new AtomicInteger();
             int failingLane = failureAt;
@@ -50,7 +50,7 @@ final class M3LongLongRangeMapPutPreflightTest {
 
     @Test
     void exactPreflightAvoidsSpuriousGrowthDuringOverwrite() {
-        M3LongLongRangeMap one = new M3LongLongRangeMap(1);
+        LongLongRangeMap one = new LongLongRangeMap(1);
         one.put(0, 10, 7);
         one.put(0, 10, 9, (source, capacity) -> {
             throw new AssertionError("full overwrite must reuse current capacity");
@@ -58,7 +58,7 @@ final class M3LongLongRangeMapPutPreflightTest {
         assertEquals(1, one.capacity());
         assertEquals("0:10:9;", rows(one));
 
-        M3LongLongRangeMap many = new M3LongLongRangeMap(3);
+        LongLongRangeMap many = new LongLongRangeMap(3);
         many.put(0, 10, 11);
         many.put(20, 30, 12);
         many.put(40, 50, 13);
@@ -71,7 +71,7 @@ final class M3LongLongRangeMapPutPreflightTest {
 
     @Test
     void disjointInsertionFailureDoesNotChangeExistingRows() {
-        M3LongLongRangeMap map = new M3LongLongRangeMap(1);
+        LongLongRangeMap map = new LongLongRangeMap(1);
         map.put(0, 10, 7);
         assertThrows(OutOfMemoryError.class,
                 () -> map.put(20, 30, 8, (source, capacity) -> {
@@ -84,7 +84,7 @@ final class M3LongLongRangeMapPutPreflightTest {
 
     @Test
     void malformedCopiedLaneRefusesBeforeMutation() {
-        M3LongLongRangeMap map = new M3LongLongRangeMap(1);
+        LongLongRangeMap map = new LongLongRangeMap(1);
         map.put(-10, 10, 21);
         assertThrows(IllegalStateException.class,
                 () -> map.put(-3, 5, 22, (source, capacity) -> new long[capacity - 1]));
@@ -98,7 +98,7 @@ final class M3LongLongRangeMapPutPreflightTest {
 
     @Test
     void deterministicMutationsMatchPointwiseIntervalOracle() {
-        M3LongLongRangeMap map = new M3LongLongRangeMap(1);
+        LongLongRangeMap map = new LongLongRangeMap(1);
         boolean[] present = new boolean[257];
         long[] values = new long[257];
         Random random = new Random(0x1357BEEFL);
@@ -126,7 +126,7 @@ final class M3LongLongRangeMapPutPreflightTest {
 
     @Test
     void extremeSignedLongEndpointsStillFollowHalfOpenBounds() {
-        M3LongLongRangeMap map = new M3LongLongRangeMap(1);
+        LongLongRangeMap map = new LongLongRangeMap(1);
         map.put(Long.MIN_VALUE, Long.MIN_VALUE + 4, 7);
         map.put(Long.MAX_VALUE - 4, Long.MAX_VALUE, 9);
         map.put(Long.MIN_VALUE + 1, Long.MIN_VALUE + 3, 11);

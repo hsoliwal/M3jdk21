@@ -17,26 +17,26 @@ public final class M3ObjectRangeMapNativeProof {
         if (args.length != 1 || !"--native".equals(args[0])) {
             throw new IllegalArgumentException("usage: --native (real JNI required)");
         }
-        if (!M3IndexPathMasks.nativeAvailable()) {
+        if (!IndexPathMasks.nativeAvailable()) {
             throw new AssertionError("real M3IndexPathMasks JNI required; no fallback");
         }
         Random random = new Random(0x4d334a4e4952414eL);
         for (int trial = 0; trial < 600; trial++) {
-            var map = new M3ObjectRangeMap<Integer, Integer>(Comparator.naturalOrder());
+            var map = new ObjectRangeMap<Integer, Integer>(Comparator.naturalOrder());
             int width = random.nextInt(84);
             for (int i = 0; i < width; i++) {
                 int begin = i * 4;
-                int mask = random.nextInt() & ~M3ObjectRangeMap.LIVE;
+                int mask = random.nextInt() & ~ObjectRangeMap.LIVE;
                 map.put(begin, begin+2, (i & 3) == 0 ? null : i, mask);
             }
             var root = map.spans();
             var view = trial % 3 == 0 ? root.reversed()
                     : trial % 3 == 1 ? root.slice(root.size()/3, root.size()) : root;
-            int required = trial % 2 == 0 ? Integer.MIN_VALUE : M3ObjectRangeMap.VISIBLE;
-            int forbidden = trial % 3 == 0 ? M3ObjectRangeMap.DIRTY : 0;
-            var javaSelection = view.selected(required, forbidden, M3IndexPathMasks.Backend.JAVA);
+            int required = trial % 2 == 0 ? Integer.MIN_VALUE : ObjectRangeMap.VISIBLE;
+            int forbidden = trial % 3 == 0 ? ObjectRangeMap.DIRTY : 0;
+            var javaSelection = view.selected(required, forbidden, IndexPathMasks.Backend.JAVA);
             var nativeSelection = view.selected(required, forbidden,
-                    M3IndexPathMasks.Backend.NATIVE_REQUIRED);
+                    IndexPathMasks.Backend.NATIVE_REQUIRED);
             ok(Arrays.equals(javaSelection.physicalOrdinals(), nativeSelection.physicalOrdinals()),
                     "native 32-bit index parity, slices and reverse");
             for (int i = 0; i < javaSelection.size(); i++) {

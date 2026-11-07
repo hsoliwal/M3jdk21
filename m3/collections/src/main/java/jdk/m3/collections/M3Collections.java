@@ -40,7 +40,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  * concrete JDK class identity or serialized-form compatibility.
  *
  * <p>The existing sparse lanes remain available for stable addresses and lazy page growth.
- * Dense primitive sequences use the same M3LongCollection and M3LongIterator contracts.
+ * Dense primitive sequences use the same LongCollection and LongIterator contracts.
  * Representation choice depends on workload; these factories do not assert universal speed.
  */
 public final class M3Collections {
@@ -58,8 +58,8 @@ public final class M3Collections {
         return new M3BitLane28();
     }
 
-    public static M3SlotAllocator28 stableSlots() {
-        return new M3SlotAllocator28();
+    public static SlotAllocator28 stableSlots() {
+        return new SlotAllocator28();
     }
 
     public static M3LongLaneStore28 longRows(int laneCount) {
@@ -172,27 +172,27 @@ public final class M3Collections {
     }
 
     /** Dense primitive-long positional list, with no retained Long wrappers. */
-    public static M3LongArrayList longArrayList() { return new M3LongArrayList(); }
+    public static LongArrayList longArrayList() { return new LongArrayList(); }
 
     /** Dense primitive-long positional list with an explicit initial capacity. */
-    public static M3LongArrayList longArrayList(int expectedSize) {
-        return new M3LongArrayList(expectedSize);
+    public static LongArrayList longArrayList(int expectedSize) {
+        return new LongArrayList(expectedSize);
     }
 
     /** Primitive-long ring deque. */
-    public static M3LongArrayDeque longArrayDeque() { return new M3LongArrayDeque(); }
+    public static LongArrayDeque longArrayDeque() { return new LongArrayDeque(); }
 
     /** Primitive-long ring deque with an explicit initial capacity. */
-    public static M3LongArrayDeque longArrayDeque(int expectedSize) {
-        return new M3LongArrayDeque(expectedSize);
+    public static LongArrayDeque longArrayDeque(int expectedSize) {
+        return new LongArrayDeque(expectedSize);
     }
 
     /** Open-addressed primitive-long set with independent occupancy bytes for all long values. */
-    public static M3LongHashSet longHashSet() { return new M3LongHashSet(); }
+    public static LongHashSet longHashSet() { return new LongHashSet(); }
 
     /** Open-addressed primitive-long key/value map; insertion reports whether a key is new. */
-    public static M3LongLongHashMap longLongHashMap() { return new M3LongLongHashMap(); }
+    public static LongLongHashMap longLongHashMap() { return new LongLongHashMap(); }
 
     /** Primitive-long binary min-heap in natural order. */
-    public static M3LongPriorityQueue longPriorityQueue() { return new M3LongPriorityQueue(); }
+    public static LongPriorityQueue longPriorityQueue() { return new LongPriorityQueue(); }
 }

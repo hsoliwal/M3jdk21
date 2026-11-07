@@ -28,7 +28,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Standalone, deterministic checks against the actual M3ObjectStream/keyed-plan owners.
+ * Standalone, deterministic checks against the actual ObjectStream/keyed-plan owners.
  * The gates exercise stable/null results, masked ring wrap, bounded admission and
  * failure of a lane whose queue would otherwise strand the coordinator.
  */
@@ -48,7 +48,7 @@ public final class M3KeyedOrderRingContract {
         int count = 4097;
         List<Integer> source = new ArrayList<>(count);
         for (int i = 0; i < count; i++) source.add(i);
-        List<Integer> result = M3ObjectStream.snapshot(source)
+        List<Integer> result = ObjectStream.snapshot(source)
                 .parallelByKey(value -> value % 13)
                 .mapOrdered(value -> value % 31 == 0 ? null : value, 13, 65, count);
         equal(count, result.size());
@@ -74,7 +74,7 @@ public final class M3KeyedOrderRingContract {
             List<Integer> values = new ArrayList<>();
             for (int i = 0; i < 1000; i++) values.add(i);
             Future<List<Integer>> future = call.submit(() ->
-                    M3ObjectStream.snapshot(values)
+                    ObjectStream.snapshot(values)
                             .parallelByKey(value -> {
                                 admissionCount.incrementAndGet();
                                 return value == 0 ? 0 : 1;
@@ -115,7 +115,7 @@ public final class M3KeyedOrderRingContract {
             Integer[] values = new Integer[1024];
             Arrays.setAll(values, index -> index);
             Future<List<Integer>> future = call.submit(() ->
-                    M3ObjectStream.snapshot(Arrays.asList(values))
+                    ObjectStream.snapshot(Arrays.asList(values))
                             .parallelByKey(value -> 0)
                             .mapOrdered(value -> {
                                 if (value == 0) throw new IllegalStateException("lane-failure-sentinel");

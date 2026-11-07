@@ -45,7 +45,7 @@ public class M3TreeTopologyTest {
 		constructor.setAccessible (true); return constructor.newInstance ();
 	}
 	private static long bit (String name) throws Exception {
-		Field field = Class.forName ("jdk.m3.collections.M3ItemState").getDeclaredField (name);
+		Field field = Class.forName ("jdk.m3.collections.ItemState").getDeclaredField (name);
 		field.setAccessible (true); return field.getLong (null);
 	}
 	private static Object chain () throws Exception {

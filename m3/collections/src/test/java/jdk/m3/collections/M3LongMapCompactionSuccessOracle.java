@@ -16,13 +16,13 @@ public final class M3LongMapCompactionSuccessOracle {
     private M3LongMapCompactionSuccessOracle() { }
 
     private static Field field(String name) {
-        try { Field f=M3LongLongHashMap.class.getDeclaredField(name); f.setAccessible(true); return f; }
+        try { Field f=LongLongHashMap.class.getDeclaredField(name); f.setAccessible(true); return f; }
         catch (ReflectiveOperationException error) { throw new AssertionError(error); }
     }
-    private static Object get(Field f,M3LongLongHashMap m) {
+    private static Object get(Field f,LongLongHashMap m) {
         try { return f.get(m); } catch (IllegalAccessException error) { throw new AssertionError(error); }
     }
-    private static int number(Field f,M3LongLongHashMap m) {
+    private static int number(Field f,LongLongHashMap m) {
         try { return f.getInt(m); } catch (IllegalAccessException error) { throw new AssertionError(error); }
     }
     private static void assertThat(boolean condition,String description) {
@@ -31,7 +31,7 @@ public final class M3LongMapCompactionSuccessOracle {
     private static void appendLong(MessageDigest digest,long value) {
         for(int shift=56;shift>=0;shift-=8) digest.update((byte)(value>>>shift));
     }
-    private static void snapshot(MessageDigest digest,M3LongLongHashMap m) {
+    private static void snapshot(MessageDigest digest,LongLongHashMap m) {
         appendLong(digest,number(SIZE,m)); appendLong(digest,number(OCCUPIED,m));
         appendLong(digest,number(MOD,m));
         long[] keys=(long[])get(KEYS,m), values=(long[])get(VALUES,m);
@@ -50,7 +50,7 @@ public final class M3LongMapCompactionSuccessOracle {
         checks=0; compactions=0;
         MessageDigest digest=MessageDigest.getInstance("SHA-256");
         for(int n:new int[]{20,40,80}) {
-            M3LongLongHashMap map=new M3LongLongHashMap(n);
+            LongLongHashMap map=new LongLongHashMap(n);
             Map<Long,Long> model=new HashMap<>();
             for(int i=0;i<n;i++) {
                 long k=key(i),v=i*29L+7L;
@@ -61,7 +61,7 @@ public final class M3LongMapCompactionSuccessOracle {
             for(int i=0;i<n-1;i++) {
                 long k=key(i),v=model.get(k);
                 long[] old=(long[])get(KEYS,map);
-                M3LongIterator oldCursor=map.keyIterator();
+                LongIterator oldCursor=map.keyIterator();
                 if((i&1)==0) assertThat(map.remove(k),"remove");
                 else assertThat(map.remove(k,v),"conditional remove");
                 model.remove(k);

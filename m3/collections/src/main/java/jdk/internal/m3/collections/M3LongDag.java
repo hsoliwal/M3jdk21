@@ -19,10 +19,10 @@ import java.util.stream.Collector;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-import jdk.m3.collections.M3LongCollection;
+import jdk.m3.collections.LongCollection;
 import jdk.m3.collections.M3LongFilteredView;
-import jdk.m3.collections.M3LongHashSet;
-import jdk.m3.collections.M3LongSortedSet;
+import jdk.m3.collections.LongHashSet;
+import jdk.m3.collections.LongSortedSet;
 import jdk.m3.collections.M3LongSortedViews;
 
 /**
@@ -46,17 +46,17 @@ public final class M3LongDag {
     private M3LongDag(Node node) { this.node = node; }
 
     /** New plan over the canonical primitive owner, not a cloned collection. */
-    public static M3LongDag from(M3LongCollection owner) {
+    public static M3LongDag from(LongCollection owner) {
         return new M3LongDag(new Source(Objects.requireNonNull(owner, "owner")));
     }
 
     /** Reuse Synexia's existing late-bound, read-only primitive filtered view. */
-    public static M3LongDag filtered(M3LongCollection owner, LongPredicate predicate) {
+    public static M3LongDag filtered(LongCollection owner, LongPredicate predicate) {
         return from(new M3LongFilteredView(owner, predicate));
     }
 
     /** Reuse the existing sorted-set live filter; do not copy or replace its owner. */
-    public static M3LongDag sortedFiltered(M3LongSortedSet owner, LongPredicate predicate) {
+    public static M3LongDag sortedFiltered(LongSortedSet owner, LongPredicate predicate) {
         return from(M3LongSortedViews.filter(owner, predicate));
     }
 
@@ -233,7 +233,7 @@ public final class M3LongDag {
     }
 
     private sealed interface Node permits Source, Unary, Concat { }
-    private record Source(M3LongCollection owner) implements Node { }
+    private record Source(LongCollection owner) implements Node { }
     private record Unary(Node parent, Stage stage) implements Node { }
     private record Concat(Node left, Node right) implements Node { }
     private record Frame(Node node, boolean completed) { }
@@ -255,7 +255,7 @@ public final class M3LongDag {
     }
     private record Distinct(int maxKeys) implements Stage {
         public LongStream apply(LongStream source) {
-            M3LongHashSet keys = new M3LongHashSet();
+            LongHashSet keys = new LongHashSet();
             return source.filter(value -> {
                 if (keys.contains(value)) return false;
                 if (keys.size() == maxKeys) throw new IllegalStateException("distinct key budget exceeded");

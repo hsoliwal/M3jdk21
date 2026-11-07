@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Objects;
 import java.util.function.LongConsumer;
 import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
-import jdk.m3.collections.M3PrimitiveKind;
+import jdk.m3.collections.PrimitiveKind;
 
 /**
  * Offset-paged provider tree with bounded materialized-payload residency.
@@ -46,7 +46,7 @@ public final class M3BoundedProviderBackedPrimitiveTree {
             int maximumResident,
             M3PagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         this(
                 M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
                 M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
@@ -64,7 +64,7 @@ public final class M3BoundedProviderBackedPrimitiveTree {
             int maximumResident,
             M3PagedPrimitiveTreeProvider provider,
             int pageSize,
-            M3PrimitiveKind... laneKinds) {
+            PrimitiveKind... laneKinds) {
         tree = new M3ProviderBackedPrimitiveTree(
                 rootBits,
                 directoryBits,

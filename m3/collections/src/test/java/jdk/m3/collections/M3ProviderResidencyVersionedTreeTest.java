@@ -24,7 +24,7 @@ class M3ProviderResidencyVersionedTreeTest {
             target[0] = rowId * 10L;
         };
         M3BoundedProviderBackedPrimitiveRows rows =
-                new M3BoundedProviderBackedPrimitiveRows(2, provider, M3PrimitiveKind.LONG);
+                new M3BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
 
         assertEquals(10L, rows.getBits(0, 1L));
         assertEquals(20L, rows.getBits(0, 2L));
@@ -53,7 +53,7 @@ class M3ProviderResidencyVersionedTreeTest {
             target[0] = rowId;
         };
         M3BoundedProviderBackedPrimitiveRows rows =
-                new M3BoundedProviderBackedPrimitiveRows(1, provider, M3PrimitiveKind.LONG);
+                new M3BoundedProviderBackedPrimitiveRows(1, provider, PrimitiveKind.LONG);
 
         assertEquals(1L, rows.getBits(0, 1L));
         assertThrows(M3ProviderLoadException.class, () -> rows.getBits(0, 2L));
@@ -69,7 +69,7 @@ class M3ProviderResidencyVersionedTreeTest {
     void allPinnedResidentsRejectAdmissionAndRestoreBound() {
         M3PrimitiveRowProvider provider = (rowId, target) -> target[0] = rowId;
         M3BoundedProviderBackedPrimitiveRows rows =
-                new M3BoundedProviderBackedPrimitiveRows(2, provider, M3PrimitiveKind.LONG);
+                new M3BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
 
         rows.getBits(0, 1L);
         rows.getBits(0, 2L);
@@ -95,7 +95,7 @@ class M3ProviderResidencyVersionedTreeTest {
             target[0] = 77L;
         };
         M3BoundedProviderBackedPrimitiveRows rows =
-                new M3BoundedProviderBackedPrimitiveRows(2, provider, M3PrimitiveKind.LONG);
+                new M3BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
 
         assertThrows(M3ProviderLoadException.class, () -> rows.touch(7L));
         assertTrue(rows.retry(7L));
@@ -114,7 +114,7 @@ class M3ProviderResidencyVersionedTreeTest {
         M3VersionedProviderBackedPrimitiveLongTree tree =
                 new M3VersionedProviderBackedPrimitiveLongTree(
                         13, 8, 12,
-                        provider, 2, M3PrimitiveKind.LONG);
+                        provider, 2, PrimitiveKind.LONG);
 
         assertEquals(2, tree.loadNextChildPage(100L));
         assertTrue(tree.hasPinnedChildVersion(100L));
@@ -145,8 +145,8 @@ class M3ProviderResidencyVersionedTreeTest {
         M3ProviderCollectionRequirements boundedRows =
                 M3ProviderCollectionRequirements.builder(
                                 M3ProviderCollectionRequirements.Purpose.ROWS,
-                                M3PrimitiveKind.LONG,
-                                M3PrimitiveKind.INT)
+                                PrimitiveKind.LONG,
+                                PrimitiveKind.INT)
                         .maximumLogicalId(1_000_000L)
                         .maxResidentRows(1024)
                         .build();
@@ -158,7 +158,7 @@ class M3ProviderResidencyVersionedTreeTest {
         M3ProviderCollectionRequirements offsetTree =
                 M3ProviderCollectionRequirements.builder(
                                 M3ProviderCollectionRequirements.Purpose.TREE,
-                                M3PrimitiveKind.LONG)
+                                PrimitiveKind.LONG)
                         .maximumLogicalId(1_000_000L)
                         .paging(M3ProviderCollectionRequirements.Paging.OFFSET)
                         .pageSize(64)
@@ -168,7 +168,7 @@ class M3ProviderResidencyVersionedTreeTest {
         M3ProviderCollectionRequirements versionedTree =
                 M3ProviderCollectionRequirements.builder(
                                 M3ProviderCollectionRequirements.Purpose.TREE,
-                                M3PrimitiveKind.LONG)
+                                PrimitiveKind.LONG)
                         .maximumLogicalId(6_000_000_000L)
                         .paging(M3ProviderCollectionRequirements.Paging.VERSIONED_CURSOR)
                         .pageSize(128)
@@ -183,7 +183,7 @@ class M3ProviderResidencyVersionedTreeTest {
         M3ProviderCollectionRequirements impossible =
                 M3ProviderCollectionRequirements.builder(
                                 M3ProviderCollectionRequirements.Purpose.TREE,
-                                M3PrimitiveKind.LONG)
+                                PrimitiveKind.LONG)
                         .maximumLogicalId(6_000_000_000L)
                         .paging(M3ProviderCollectionRequirements.Paging.OFFSET)
                         .pageSize(10)

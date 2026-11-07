@@ -27,13 +27,13 @@ public final class M3SdkRecoverySelfTest {
 
     public static void main(String[] args) {
         boolean nativeRun = args.length == 1 && "--native".equals(args[0]);
-        if (nativeRun && !M3IndexPathMasks.nativeAvailable())
+        if (nativeRun && !IndexPathMasks.nativeAvailable())
             throw new AssertionError("required native path-mask library missing");
         partitions();
         countedBag();
         facades();
-        indexedMasks(nativeRun ? M3IndexPathMasks.Backend.NATIVE_REQUIRED
-                : M3IndexPathMasks.Backend.JAVA);
+        indexedMasks(nativeRun ? IndexPathMasks.Backend.NATIVE_REQUIRED
+                : IndexPathMasks.Backend.JAVA);
         System.out.println("PASS M3SdkRecoverySelfTest checks=" + checks + " native=" + nativeRun);
     }
 
@@ -61,7 +61,7 @@ public final class M3SdkRecoverySelfTest {
     }
 
     private static void countedBag() {
-        M3LongBag bag = M3CollectionSdk.longBag();
+        LongBag bag = M3CollectionSdk.longBag();
         Map<Long,Long> reference = new HashMap<>();
         Random rng = new Random(0x4d3353444b424147L);
         long[] keys = {0L, Long.MIN_VALUE, Long.MAX_VALUE, -1L, 3L, 7L};
@@ -88,7 +88,7 @@ public final class M3SdkRecoverySelfTest {
         fails(IllegalArgumentException.class,()->bag.add(0,-1));
         fails(IllegalArgumentException.class,()->bag.remove(0,-1));
         fails(IllegalArgumentException.class,()->bag.setCount(0,-1));
-        M3LongBag max=new M3LongBag();
+        LongBag max=new LongBag();
         max.add(0,Long.MAX_VALUE);
         fails(ArithmeticException.class,()->max.add(0,1));
         fails(ArithmeticException.class,()->max.add(1,1));
@@ -98,11 +98,11 @@ public final class M3SdkRecoverySelfTest {
 
     private static void facades() {
         ok(M3CollectionSdk.jdkArrayList() instanceof ArrayList<?>);
-        M3LongArrayList list=M3CollectionSdk.longArrayList();
+        LongArrayList list=M3CollectionSdk.longArrayList();
         list.add(Long.MIN_VALUE);eq(Long.MIN_VALUE,list.get(0));
-        M3LongHashSet set=M3CollectionSdk.longHashSet();
+        LongHashSet set=M3CollectionSdk.longHashSet();
         ok(set.add(0L));ok(set.contains(0L));
-        M3LongLongHashMap map=M3CollectionSdk.longLongHashMap();
+        LongLongHashMap map=M3CollectionSdk.longLongHashMap();
         ok(map.put(0L,Long.MAX_VALUE));eq(Long.MAX_VALUE,map.getOrDefault(0L,-1L));
         M3TreeMap<Integer,String> sortedMap=M3CollectionSdk.treeMap();
         sortedMap.put(3,"three");eq("three",sortedMap.get(3));
@@ -137,7 +137,7 @@ public final class M3SdkRecoverySelfTest {
         data[0]=55;eq(7L,snap.get(0));
     }
 
-    private static void indexedMasks(M3IndexPathMasks.Backend backend) {
+    private static void indexedMasks(IndexPathMasks.Backend backend) {
         int[] rows={42,19,42,-7,0},offsets={1,0,1,2,3};
         int[][] planes={{1,0x80000001,0,1},{2,2,2,0}};
         int[] required={0x80000001,2},excluded={4,0};

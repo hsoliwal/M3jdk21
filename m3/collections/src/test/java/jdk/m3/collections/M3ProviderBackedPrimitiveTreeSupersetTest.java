@@ -21,7 +21,7 @@ class M3ProviderBackedPrimitiveTreeSupersetTest {
     void rootsPageIndependentlyWithoutMaterializingPayload() {
         ForestProvider provider = new ForestProvider();
         M3ProviderBackedPrimitiveTree tree =
-                new M3ProviderBackedPrimitiveTree(provider, 2, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveTree(provider, 2, PrimitiveKind.LONG);
 
         assertEquals(M3PagedPrimitiveTreeProvider.ChildHint.SOME, tree.rootHint());
         assertEquals(2, tree.loadNextRootPage());
@@ -70,7 +70,7 @@ class M3ProviderBackedPrimitiveTreeSupersetTest {
         };
 
         M3ProviderBackedPrimitiveTree tree =
-                new M3ProviderBackedPrimitiveTree(provider, 4, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveTree(provider, 4, PrimitiveKind.LONG);
         assertEquals(1, tree.loadNextRootPage());
         assertEquals(M3PagedPrimitiveTreeProvider.ROOT_PARENT_ID, seenParent[0]);
         assertEquals(7, tree.firstLoadedRoot());
@@ -81,7 +81,7 @@ class M3ProviderBackedPrimitiveTreeSupersetTest {
     void childSiblingLinksAreBidirectionalAndInvalidateCleanly() {
         ForestProvider provider = new ForestProvider();
         M3ProviderBackedPrimitiveTree tree =
-                new M3ProviderBackedPrimitiveTree(provider, 8, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveTree(provider, 8, PrimitiveKind.LONG);
 
         assertEquals(3, tree.loadNextChildPage(10L));
         assertEquals(101, tree.firstLoadedChild(10L));
@@ -123,7 +123,7 @@ class M3ProviderBackedPrimitiveTreeSupersetTest {
         };
 
         M3ProviderBackedPrimitiveTree tree =
-                new M3ProviderBackedPrimitiveTree(provider, 2, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveTree(provider, 2, PrimitiveKind.LONG);
         assertEquals(1, tree.loadNextRootPage());
         assertThrows(M3ProviderLoadException.class, () -> tree.loadNextChildPage(1L));
         assertEquals(-1, tree.parentOf(9L));
@@ -134,7 +134,7 @@ class M3ProviderBackedPrimitiveTreeSupersetTest {
     void boundedEnsureLoadsOnlyRequiredPages() {
         ForestProvider provider = new ForestProvider();
         M3ProviderBackedPrimitiveTree tree =
-                new M3ProviderBackedPrimitiveTree(provider, 2, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveTree(provider, 2, PrimitiveKind.LONG);
 
         assertEquals(2, tree.ensureLoadedRoots(3, 1));
         assertEquals(1, provider.rootPageLoads);
@@ -151,7 +151,7 @@ class M3ProviderBackedPrimitiveTreeSupersetTest {
     void visibleLoadedCursorUsesExpansionBitsWithoutProviderCalls() {
         ForestProvider provider = new ForestProvider();
         M3ProviderBackedPrimitiveTree tree =
-                new M3ProviderBackedPrimitiveTree(provider, 8, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveTree(provider, 8, PrimitiveKind.LONG);
 
         tree.loadNextRootPage();
         tree.loadNextRootPage();
@@ -185,7 +185,7 @@ class M3ProviderBackedPrimitiveTreeSupersetTest {
     void visibleCursorFailsFastWhenRelationshipsOrExpansionChange() {
         ForestProvider provider = new ForestProvider();
         M3ProviderBackedPrimitiveTree tree =
-                new M3ProviderBackedPrimitiveTree(provider, 8, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveTree(provider, 8, PrimitiveKind.LONG);
         tree.loadNextRootPage();
 
         M3ProviderBackedPrimitiveTree.VisibleCursor cursor = tree.visibleLoadedCursor();
@@ -198,7 +198,7 @@ class M3ProviderBackedPrimitiveTreeSupersetTest {
     void rootInvalidationDropsOnlyForestLinksAndKeepsPayload() {
         ForestProvider provider = new ForestProvider();
         M3ProviderBackedPrimitiveTree tree =
-                new M3ProviderBackedPrimitiveTree(provider, 8, M3PrimitiveKind.LONG);
+                new M3ProviderBackedPrimitiveTree(provider, 8, PrimitiveKind.LONG);
 
         tree.loadNextRootPage();
         tree.touch(10L);

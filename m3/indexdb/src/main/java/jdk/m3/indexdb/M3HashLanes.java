@@ -8,7 +8,7 @@ import java.util.Arrays;
 /**
  * Packed-lane helpers (DOOP): growth, trimming, sorted-distinct and byte views of primitive lanes.
  *
- * <p>Growth doubles like {@code jdk.m3.collections.M3LongArrayList.ensureCapacity}; the M3JDK 21
+ * <p>Growth doubles like {@code jdk.m3.collections.LongArrayList.ensureCapacity}; the M3JDK 21
  * receiver replaces these with {@code M3LongArrayList}/{@code M3IntArrayList} (same add/get/size/
  * toArray contract, verified with javap on m3-collections 0.1.0-SNAPSHOT). Effects: none beyond the
  * returned arrays. Failure: none.</p>

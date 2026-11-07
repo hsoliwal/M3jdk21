@@ -30,7 +30,7 @@ public final class M3PrimitiveObjectHashMap<V> {
         void accept(long keyBits, V value);
     }
 
-    private final M3PrimitiveKind keyKind;
+    private final PrimitiveKind keyKind;
     private final float loadFactor;
     private Object keys;
     private Object[] values;
@@ -40,11 +40,11 @@ public final class M3PrimitiveObjectHashMap<V> {
     private boolean hasZeroKey;
     private V zeroValue;
 
-    public M3PrimitiveObjectHashMap(M3PrimitiveKind keyKind) {
+    public M3PrimitiveObjectHashMap(PrimitiveKind keyKind) {
         this(keyKind, 16, M3DenseHash.DEFAULT_LOAD_FACTOR);
     }
 
-    public M3PrimitiveObjectHashMap(M3PrimitiveKind keyKind, int expected, float loadFactor) {
+    public M3PrimitiveObjectHashMap(PrimitiveKind keyKind, int expected, float loadFactor) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         this.loadFactor = loadFactor;
         int capacity = M3DenseHash.capacityFor(expected, loadFactor);
@@ -54,7 +54,7 @@ public final class M3PrimitiveObjectHashMap<V> {
         threshold = M3DenseHash.threshold(capacity, loadFactor);
     }
 
-    public M3PrimitiveKind keyKind() { return keyKind; }
+    public PrimitiveKind keyKind() { return keyKind; }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
     public int capacity() { return values.length; }

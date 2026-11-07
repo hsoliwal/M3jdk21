@@ -66,7 +66,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
      * Missing get calls never admit keys. Explicit put values, including null, are loaded.
      */
     public M3TreeMap(Comparator<? super K> comparator,
-            M3LazyValueProvider<? super K, ? extends V> provider) {
+            LazyValueProvider<? super K, ? extends V> provider) {
         this(new Tree<>(comparator, false, Objects.requireNonNull(provider, "provider")),
                 false, null, false, false, null, false, false);
     }
@@ -164,7 +164,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     private V valueAt(
             int slot,
             M3LazyOperation operation,
-            M3LazyEventPolicy eventPolicy,
+            LazyEventPolicy eventPolicy,
             M3Progress monitor) {
         return tree.lazy == null ? (tree.keyOnly ? null : M3SlotArrays.get(tree.values, slot))
                 : tree.lazy.read(slot, keyAt(slot), tree.values, operation, eventPolicy, monitor);
@@ -269,17 +269,17 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     /** State without invoking the provider; ABSENT denotes a key outside this view. */
     public short valueFlags(Object key) {
         int s = findSlot(key);
-        return s < 0 ? M3LazyValueProvider.ABSENT
-                : tree.lazy == null ? M3LazyValueProvider.LOADED : tree.lazy.flags(s);
+        return s < 0 ? LazyValueProvider.ABSENT
+                : tree.lazy == null ? LazyValueProvider.LOADED : tree.lazy.flags(s);
     }
     /** True for resolved/explicit values, including null; never loads an element. */
-    public boolean isValueLoaded(Object key) { return valueFlags(key) == M3LazyValueProvider.LOADED; }
+    public boolean isValueLoaded(Object key) { return valueFlags(key) == LazyValueProvider.LOADED; }
     /** Synchronous pre-touch hook for a visible, hovered or selected model item. */
     public V touch(Object key) { return touch(key, null, null); }
     /** Value access with caller progress/cancellation; an absent key remains absent. */
     public V touch(Object key, M3Progress monitor) { return touch(key, null, monitor); }
     /** Value access with per-call event mask/granularity override. */
-    public V touch(Object key, M3LazyEventPolicy eventPolicy, M3Progress monitor) {
+    public V touch(Object key, LazyEventPolicy eventPolicy, M3Progress monitor) {
         try (M3ProgressScope scope = M3ProgressScope.resolve(monitor, 1L)) {
             M3Progress progress = scope.monitor();
             M3LazyValueState.checkCancelled(progress);
@@ -297,17 +297,17 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
      * with map structure is detected before continuing traversal. The event policy may
      * enable range, element, progress or state-transition observations for this call.
      */
-    public void preload(M3LazyEventPolicy eventPolicy, M3Progress monitor) {
+    public void preload(LazyEventPolicy eventPolicy, M3Progress monitor) {
         int expected = revision();
         int work = size();
         try (M3ProgressScope scope = M3ProgressScope.resolve(monitor, Math.max(1L, work))) {
             M3Progress progress = scope.monitor();
-            M3LazyEventPolicy policy =
-                    tree.lazy == null ? M3LazyEventPolicy.NONE : tree.lazy.eventPolicy(eventPolicy);
+            LazyEventPolicy policy =
+                    tree.lazy == null ? LazyEventPolicy.NONE : tree.lazy.eventPolicy(eventPolicy);
             Throwable failure = null;
             if (tree.lazy != null) {
                 tree.lazy.emit(
-                        policy, M3LazyEventBits.RANGE_BEGIN, M3LazyEventGranularity.RANGE,
+                        policy, M3LazyEventBits.RANGE_BEGIN, LazyEventGranularity.RANGE,
                         M3LazyEventSink.NO_SLOT, (short) 0, (short) 0,
                         M3LazyOperation.PRELOAD, progress, null);
             }
@@ -321,7 +321,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                     if (tree.lazy != null) {
                         short state = tree.lazy.flags(s);
                         tree.lazy.emit(
-                                policy, M3LazyEventBits.PROGRESS, M3LazyEventGranularity.ELEMENT,
+                                policy, M3LazyEventBits.PROGRESS, LazyEventGranularity.ELEMENT,
                                 s, state, state, M3LazyOperation.PRELOAD, progress, null);
                     }
                     check(expected);
@@ -334,7 +334,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             } finally {
                 if (tree.lazy != null) {
                     tree.lazy.emit(
-                            policy, M3LazyEventBits.RANGE_END, M3LazyEventGranularity.RANGE,
+                            policy, M3LazyEventBits.RANGE_END, LazyEventGranularity.RANGE,
                             M3LazyEventSink.NO_SLOT, (short) 0, (short) 0,
                             M3LazyOperation.PRELOAD, progress, failure);
                 }
@@ -459,7 +459,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         private final boolean keyOnly;
         private final M3LazyValueState<K, V> lazy;
         Tree(Comparator<? super K> comparator, boolean keyOnly,
-                M3LazyValueProvider<? super K, ? extends V> provider) {
+                LazyValueProvider<? super K, ? extends V> provider) {
             this.comparator = comparator; this.keyOnly = keyOnly;
             lazy = provider == null ? null : new M3LazyValueState<>(provider);
         }

@@ -127,7 +127,7 @@ final class M3TreeReflection {
 
 	/** A <code>VirtualItemState</code> bit. */
 	static long bit (String name) {
-		return (Long) staticField ("jdk.m3.collections.M3ItemState", name);
+		return (Long) staticField ("jdk.m3.collections.ItemState", name);
 	}
 
 	static Object topology () {

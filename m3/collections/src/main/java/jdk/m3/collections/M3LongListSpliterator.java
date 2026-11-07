@@ -20,21 +20,21 @@ import java.util.function.LongConsumer;
  * ({@link ConcurrentModificationException}) like the owner's iterators, with the count captured at creation.
  */
 final class M3LongListSpliterator implements Spliterator.OfLong {
-    private final M3LongList owner;
+    private final LongList owner;
     private int index;
     private final int fence;
     private final IntSupplier modCount;
     private final int expectedModCount;
 
-    M3LongListSpliterator(M3LongList owner, int index, int fence) {
+    M3LongListSpliterator(LongList owner, int index, int fence) {
         this(owner, index, fence, null, 0);
     }
 
-    M3LongListSpliterator(M3LongList owner, int index, int fence, IntSupplier modCount) {
+    M3LongListSpliterator(LongList owner, int index, int fence, IntSupplier modCount) {
         this(owner, index, fence, modCount, modCount == null ? 0 : modCount.getAsInt());
     }
 
-    private M3LongListSpliterator(M3LongList owner, int index, int fence, IntSupplier modCount,
+    private M3LongListSpliterator(LongList owner, int index, int fence, IntSupplier modCount,
             int expectedModCount) {
         this.owner = Objects.requireNonNull(owner, "owner");
         Objects.checkFromToIndex(index, fence, owner.size());

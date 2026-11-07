@@ -24,7 +24,7 @@ public final class M3LongLongHashMapEmptyValueProof {
         checksum = Long.rotateLeft(checksum ^ (actual ? 0xa0761d6478bd642fL : checks), 13);
     }
 
-    private static void equalSize(int expected, M3LongLongHashMap actual) {
+    private static void equalSize(int expected, LongLongHashMap actual) {
         checks++;
         if (actual.size() != expected) {
             throw new AssertionError("size mismatch at case " + checks);
@@ -32,7 +32,7 @@ public final class M3LongLongHashMapEmptyValueProof {
     }
 
     public static void main(String[] args) {
-        M3LongLongHashMap largeEmpty = new M3LongLongHashMap(32768);
+        LongLongHashMap largeEmpty = new LongLongHashMap(32768);
         for (long value : new long[]{0L, 1L, -1L, Long.MIN_VALUE, Long.MAX_VALUE}) {
             equal(false, largeEmpty.containsValue(value), "new empty large map");
         }
@@ -47,7 +47,7 @@ public final class M3LongLongHashMapEmptyValueProof {
         equal(false, largeEmpty.containsValue(Long.MIN_VALUE), "empty after clear");
         equalSize(0, largeEmpty);
 
-        M3LongLongHashMap actual = new M3LongLongHashMap(128);
+        LongLongHashMap actual = new LongLongHashMap(128);
         Map<Long, Long> oracle = new HashMap<>();
         Random random = new Random(0x7057060FFL);
         for (int operation = 0; operation < 80_000; operation++) {
