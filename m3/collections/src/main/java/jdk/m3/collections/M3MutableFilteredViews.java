@@ -105,7 +105,7 @@ public final class M3MutableFilteredViews {
         SlotCursor(M3TreeMap<?, ?> slots, boolean fromLast) {
             this.slots = slots;
             expected = slots.revision();
-            pending = fromLast ? slots.lastSlot() : slots.firstSlot();
+            pending = slots.cursorStart(fromLast); // TREEMAP_ABA_GUARD: creation never fails
         }
 
         /** Predicate visibility of a live slot. */

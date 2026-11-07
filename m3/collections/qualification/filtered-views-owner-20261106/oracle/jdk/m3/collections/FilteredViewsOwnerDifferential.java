@@ -192,6 +192,27 @@ public final class FilteredViewsOwnerDifferential {
         } catch (RuntimeException failure) {
             result = "!" + failure.getClass().getSimpleName();
         }
+        record(s, step, op, result);
+        if (result.startsWith("!") && op.startsWith("cursor.")) {
+            try {
+                s.cursor = open(s);
+                s.out.append("s").append(s.id).append(" t").append(step).append(" reopen\n");
+            } catch (RuntimeException failure) {
+                // Opening can fail too (treemap-aba-guard-20261107: a bounded owner lookup fails fast when the
+                // comparator changes the structure during it): record it like an operation; reopen lazily.
+                s.cursor = null;
+                record(s, step, "reopen", "!" + failure.getClass().getSimpleName());
+            }
+        }
+    }
+
+    /** The scenario's cursor; reopened first when its last (re)open failed. */
+    private static Iterator<?> cursor(Scenario s) {
+        if (s.cursor == null) s.cursor = open(s);
+        return s.cursor;
+    }
+
+    private static void record(Scenario s, int step, String op, String result) {
         int cmp = s.order.calls - s.lastCmp;
         s.lastCmp = s.order.calls;
         s.out.append("s").append(s.id).append(" t").append(step).append(' ').append(op).append(" -> ").append(result)
@@ -202,17 +223,13 @@ public final class FilteredViewsOwnerDifferential {
                 .append(" ext=").append(s.external).append(" pm=").append(s.pm ? 1 : 0).append(" cm=").append(s.cm ? 1 : 0)
                 .append('\n');
         s.predicateCalls.clear();
-        if (result.startsWith("!") && op.startsWith("cursor.")) {
-            s.cursor = open(s);
-            s.out.append("s").append(s.id).append(" t").append(step).append(" reopen\n");
-        }
     }
 
     private static void step(Scenario s, int step) {
         int choice = s.random.nextInt(12);
-        if (choice <= 3) line(s, step, "cursor.hasNext", () -> String.valueOf(s.cursor.hasNext()));
-        else if (choice <= 6) line(s, step, "cursor.next", () -> render(s.cursor.next()));
-        else if (choice == 7) line(s, step, "cursor.remove", () -> { s.cursor.remove(); return "removed"; });
+        if (choice <= 3) line(s, step, "cursor.hasNext", () -> String.valueOf(cursor(s).hasNext()));
+        else if (choice <= 6) line(s, step, "cursor.next", () -> render(cursor(s).next()));
+        else if (choice == 7) line(s, step, "cursor.remove", () -> { cursor(s).remove(); return "removed"; });
         else if (choice == 8) {
             int kind = s.random.nextInt(4);
             line(s, step, "owner.mutate", () -> {
