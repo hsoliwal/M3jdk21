@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-compiler-static-use</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Compiler Static Use Plan</name>
+  <description>jdk.m3.compiler.staticuse (module org.m3jdk.compiler.staticuse): M3StaticUsePlan, the pure, deterministic
+    compile-time admission decision from compiler-proven facts (escape, effect, identity / monitor / reflection / JNI /
+    serialization / reachability observations, ordering and owner-lifetime proofs) to DIRECT_PARENT, LAZY_HANDLE,
+    MATERIALIZE or REFUSE (unknown is refused), its reference mode, the int-induction condition-only loop entry bound
+    and the opt-in @Analyze / @CompilerSummary annotations its javac processor reads. Pure Java 21, no dependency
+    outside java.base. Relocated by recipe (recipe/static-use-plan-20261107/relocate.py, RELOCATION_MAP.tsv,
+    PROVENANCE.tsv) from the donor hsoliwal/com.synexia develop d5ad5090d87e; the donor JUnit 5 test and the
+    module's differential dump (exhaustive fact space against a reference model) run in the test phase.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <!-- classpath run; the module descriptor is for consumers -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
