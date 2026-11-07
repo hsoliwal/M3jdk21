@@ -9,7 +9,7 @@
  <name>M3 AST L0-L5 receiver candidate</name>
  <packaging>jar</packaging>
  <properties>
-  <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: source/target instead of release (javac refuses --add-exports of a java.base package together with --release) -->
+  <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: source/target instead of release (javac refuses an add-exports of a java.base package together with release) -->
   <maven.compiler.source>21</maven.compiler.source>
   <maven.compiler.target>21</maven.compiler.target>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
