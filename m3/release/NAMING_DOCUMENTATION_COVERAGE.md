@@ -80,6 +80,38 @@ as `PENDING`, never as 0% or 100%. Count unique tests, skips and disabled tests
 separately. For JDK modules, do not substitute library-JAR test coverage for
 a source-built installed-image/jtreg run.
 
+## Building the changed-atom coverage receipt (data only)
+
+Once instrumented JaCoCo XML has been produced by the actual M3 product/test
+run and the full set of *changed contract-bearing methods* has been reviewed,
+build its pinned receipt fragment:
+
+```sh
+python3 m3/release/build_changed_atom_coverage.py \
+  --root . \
+  --report /absolute/evidence/jacoco.xml \
+  --inventory /absolute/evidence/changed-atoms.tsv \
+  --report-artifact jacoco.xml \
+  --inventory-artifact changed-atoms.tsv \
+  --tool 'JaCoCo instrumented M3JDK21 build; exact version in producer logs' \
+  --reviewed-complete-inventory \
+  --out /absolute/evidence/changed-atom-coverage-fragment.json
+```
+
+The tab-separated inventory contains columns
+`id`, `class`, `method`, `descriptor`, `source_path` and optional
+`branchless_explanation`. JaCoCo class names use JVM slashes,
+and `descriptor` is the JVM method descriptor. The importer does
+**not** infer inventory completeness from JaCoCo and without
+`--reviewed-complete-inventory` sets `inventory_complete: false`.
+
+Place the generated JSON object into the matching
+`M3_CHANGED_ATOM_COVERAGE` evidence gate's `coverage` property.
+The outer manifest must include the raw XML and original inventory TSV in the
+gate's SHA-256-verified `artifacts`, and bind the exact product commit
+and tree. The importer output alone never qualifies a release. Check actual
+source diff versus inventory before setting review complete.
+
 ## Release refusal conditions
 
 No publication-ready assertion until the independent product build, ABI/source
