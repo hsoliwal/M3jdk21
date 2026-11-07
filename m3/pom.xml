@@ -29,6 +29,7 @@
     <module>compiler/lifetime-slots</module>
     <module>compiler/nullness-facts</module>
     <module>compiler/static-use</module>
+    <module>compiler/mat-sortable</module>
     <module>ports/collections</module>
     <module>native</module>
     <module>nlp</module>
