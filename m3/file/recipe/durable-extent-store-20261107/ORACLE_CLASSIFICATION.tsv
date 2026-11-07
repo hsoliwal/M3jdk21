@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+# Every scenario of the synexia-mllm extent-store tests (origin/main f616c321987b, private repo, clone under S:/m3-scratch/eb-conv/scout-private/clones/synexia-mllm) classified against the relocated store. MATCH: same visible contract, ported as JUnit. PARTIAL: the matching part is ported, the rest is named. DIFFERENT: the two contracts disagree (the relocated store's rule is asserted). NOT_IN_DONOR: a feature of the oracle's page-allocator design that the donor does not have. NOT_APPLICABLE: no counterpart in Java or in this design. Ported tests: src/test/java/jdk/m3/file/M3DurableExtentStoreOracleTest.java.
+oracle	scenario	verdict	difference	ported_as
+tests/test_extent_store_append_rollback_reopen.py	test_failed_append_with_failed_rollback_preserves_reopenable_committed_prefix	PARTIAL	visibility MATCH (the committed key reads back, the failed one is absent after reopen); torn-tail quarantine file and health()['recovered_torn_index_tails'] are NOT_APPLICABLE: the index is never appended, a failed put leaves the previous index file byte-identical (asserted) and no staged index	failedPublishKeepsTheCommittedPrefixAcrossReopen
+tests/test_extent_store_append_rollback_reopen.py	test_complete_row_with_failed_fsync_and_rollback_is_not_replayed_as_committed	MATCH	the complete, forced, sealed index that was not renamed is asserted complete inside the failpoint and is not replayed	completeForcedButUnpublishedIndexIsNotReplayed
+tests/test_extent_store_append_rollback_reopen.py	test_failed_commit_marker_sync_with_failed_rollback_replays_as_open_tail	DIFFERENT	the oracle un-commits a row whose commit-marker directory sync failed; here the rename is the commit point and a refused directory sync is ignored, so the put is visible after reopen	theRenameIsTheCommitPointNotTheDirectorySync
+tests/test_extent_store_append_rollback_reopen.py	test_retry_syncs_existing_quarantine_entry_before_truncating_index	NOT_APPLICABLE	no append log, quarantine file or index truncation	-
+tests/test_extent_store_append_rollback_reopen.py	test_reopen_rejects_missing_committed_current_extent_without_recreating_it	PARTIAL	open admits the index (it does not stat blobs); read and verifyAll refuse 'missing content blob'; the blob is not recreated	missingCommittedBlobIsRefusedOnReadAndNeverRecreated
+tests/test_extent_store_append_rollback_reopen.py	test_reopen_rejects_truncated_committed_extent_without_extending_it	PARTIAL	refused on read ('truncated or extended extent blob'), not on open; the file keeps its truncated size	truncatedCommittedBlobIsRefusedAndNotExtended
+tests/test_extent_store_append_rollback_reopen.py	test_read_rejects_missing_committed_historical_extent_without_recreating_it	MATCH	the other keys still read	missingHistoricalBlobIsRefusedWhileTheOthersStillRead
+tests/test_extent_store_concurrency.py	test_extent_index_allows_only_one_live_writer	MATCH	IOException 'extent store already has a writer' (the oracle raises RuntimeError); cross-process exclusion is the LOCK lane of differential/M3ExtentCrash	onlyOneLiveWriterAndARecoveredWriterAfterClose
+tests/test_extent_store_concurrency.py	test_inherited_store_rejects_writes_from_forked_child	NOT_APPLICABLE	Java has no fork; a second process is refused by the file lock (crash gate LOCK lane)	-
+tests/test_extent_store_concurrency.py	test_extent_descriptor_closes_when_mmap_creation_fails	NOT_APPLICABLE	the read path closes its channel by try-with-resources; the donor has no seam to fail map() and none is added	-
+tests/test_extent_store_concurrency.py	test_default_root_uses_xdg_data_home_without_storage_provider	NOT_APPLICABLE	the store directory is always explicit	-
+tests/test_extent_store_concurrency.py	test_namespace_package_without_legacy_storage_imports_and_replays	NOT_APPLICABLE	Python packaging	-
+tests/test_extent_store_concurrency.py	test_concurrent_writes_on_one_store_serialize_index_appends	MATCH	publication is serialized by the store monitor: at most one thread inside the failpoint (asserted), all 8 keys read back after reopen	concurrentWritesSerializeIndexPublication
+ExtentStoreTest.java	factoryCreatesPersistentIndexWithMagic	DIFFERENT	format: index.bin / EXIDX001 versus index.m3 / M3EXTIDX1; open creates and seals an empty index (donor M3DurableExtentStoreTest.optionsAndPostCloseAccessAreChecked)	-
+ExtentStoreTest.java	writesReadsMetadataAndMasksByteFields	NOT_IN_DONOR	dtype / flags / page metadata	-
+ExtentStoreTest.java	emptyPayloadConsumesOnePageAndSupersedeIsExplicit	PARTIAL	empty payload and explicit supersede MATCH; page accounting NOT_IN_DONOR	rejectsInvalidWritesMissingReadsAndKeepsEmptyPayloads, committedSupersedeIsTheLatestValueAfterReopen
+ExtentStoreTest.java	invalidSupersedeRetainsOriginalRecordAndReplaysAfterReopen	MATCH	the invalid replacement is a null or tampered payload (no size cap: the extent sizes the payload)	invalidSupersedeRetainsTheOriginalAcrossReopen
+ExtentStoreTest.java	committedSupersedeRemainsTheLatestValueAfterReopen	MATCH	dtype / flags NOT_IN_DONOR	committedSupersedeIsTheLatestValueAfterReopen
+ExtentStoreTest.java	rejectsInvalidWritesAndMissingReads	MATCH	no size cap (NOT_IN_DONOR)	rejectsInvalidWritesMissingReadsAndKeepsEmptyPayloads
+ExtentStoreTest.java	keysAreSortedFilteredAndLimited	MATCH	limit 0 means unlimited on both	keysAreSortedFilteredAndLimited
+ExtentStoreTest.java	zeroCopySliceMapsExactlyTheLogicalPayload	NOT_IN_DONOR	HELD H2 (DECISION.tsv)	-
+ExtentStoreTest.java	manifestCombinesKeyAndMetadata	DIFFERENT	the donor manifest is an M3ContentExtent.ContentExtentManifest (ordered extent ids and a root), without keys	-
+ExtentStoreTest.java	statsReportLogicalPhysicalWasteAndCurrentExtent	NOT_IN_DONOR	allocator statistics	-
+ExtentStoreTest.java	reloadReplaysTheAppendOnlyIndexAndAllocator	MATCH	reopen replays the sealed index (no allocator)	reopenReplaysEveryPublishedKey
+ExtentStoreTest.java	rolloverStartsASecondExtentWhenTheCurrentSpanIsFull	NOT_IN_DONOR	content-addressed blobs, no extent files	-
+ExtentStoreTest.java	indexHeaderCorruptionFailsClosed	MATCH	IOException 'malformed extent index header or seal' (the oracle raises IllegalStateException)	indexHeaderCorruptionFailsClosed
+ExtentStoreTest.java	checksumIsStableForRepeatedMetadataReads	PARTIAL	extent identity and content digest are stable (M3ContentExtentTest.canonicalIdentityIsStableAndPlacementIndependent); no per-record checksum field	-
+NativeExtentStoreTest.java	extentMetadataUsesThePackedLittleEndianContract	NOT_IN_DONOR	packed 28-byte metadata	-
+NativeExtentStoreTest.java	customPageOffsetsValidateBoundsAndDetectOverflow	PARTIAL	byte-range overflow refusal (M3ContentExtentTest.validationFailsClosedForTamperingAndInvalidMetadata, dump FROMBYTES rows); pages NOT_IN_DONOR	-
+NativeExtentStoreTest.java	truncatedMetadataIsRejected	PARTIAL	truncated index refused (dump R truncate@ rows)	-
+NativeExtentStoreTest.java	lifecycleIsIdempotentAndWriteRequiresOpen	MATCH	close is idempotent and a closed store refuses every call (dump R closed rows, donor optionsAndPostCloseAccessAreChecked)	-
+NativeExtentStoreTest.java	readsMmapPayloadsAndTracksObservability	PARTIAL	mapped read MATCH; observability counters NOT_IN_DONOR	-
+NativeExtentStoreTest.java	truncatedBackingNeverReturnsAnIncompleteLogicalPayload	MATCH	a truncated blob is refused, never returned short	truncatedCommittedBlobIsRefusedAndNotExtended
+NativeExtentStoreTest.java	readsExtentsUsingConfiguredPageSize	NOT_IN_DONOR	page size	-
+NativeExtentStoreTest.java	readsPayloadsAtTheConfiguredPageOffset	NOT_IN_DONOR	page offsets	-
+NativeExtentStoreTest.java	rejectsNonpositiveConfiguredPageSizes	NOT_IN_DONOR	page size	-
+NativeExtentStoreTest.java	batchReadKeepsOnlyFoundKeysAndWriteOverwritesMetadata	DIFFERENT	no batch read; a key is immutable and replaced only by supersede	-
+NativeExtentStoreTest.java	malformedMetadataFailsAtDecodeWithoutChangingErrorCounters	PARTIAL	malformed index rows refused (dump R crafted rows); error counters NOT_IN_DONOR	-

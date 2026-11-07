@@ -101,6 +101,39 @@ onto it (the #2523 recipe, one `TYPE` row), so it and `jdk.internal.m3.indexstri
 Public API unchanged; `differential.sh` proves both classes byte-identical over the exhaustive 1,024 x 1,024 `combine`
 table and the #2523 inputs.
 
+## Durable extent store (recipe relocation 2026-11-07)
+
+`M3DurableExtentStore` is a single-writer, append-only store of source-bound byte extents. An `M3ContentExtent`
+names a byte range of a source (source id and SHA-256, `[byteStart, byteEnd)`, content SHA-256, logical kind); its
+`extentId` is the SHA-256 of the sorted-key canonical JSON of those fields. `write` (a new, immutable key) and
+`supersede` (an existing key) verify the exact payload, write and force a content-addressed blob
+(`blobs/<sha256>.bin`, published by atomic rename), then write and force a complete, sorted index sealed with its
+own SHA-256 and publish it by one atomic rename over `index.m3`. A failure before that rename leaves the previous
+index in force (an unreachable blob may remain). `read` refuses a missing, truncated, extended or altered blob
+(exact length first, then SHA-256) and returns a fresh array copied out of a READ_ONLY mapping; no mapping escapes.
+`writer.lock` admits one writer per directory, across processes.
+
+**Durability is limited to the atomic rename.** The store needs a filesystem with atomic same-directory rename and
+fails closed without one. It attempts a directory fsync where the platform allows one and ignores the refusal
+(Windows always refuses). There is no portable power-loss guarantee: no Java API orders persistence across a power
+loss on every filesystem, and nothing here has been qualified for one. The recipe's crash gate kills a writer
+process before every filesystem step of a put (52 kills): every reopen saw the previous or the new index, never a
+torn one.
+
+On Windows a blob that was read stays mapped until its buffer is collected; replacing or truncating that file from
+outside fails meanwhile. The store itself never rewrites a blob.
+
+Relocated by recipe from hsoliwal/com.synexia `synexia-storage-sdk` (develop 0616288bfa7d, origin 29621ea829f) in
+[recipe/durable-extent-store-20261107](recipe/durable-extent-store-20261107/README.md): `relocate.py`
+(RELOCATE_DURABLE_EXTENT_STORE v1) over `RELOCATION_MAP.tsv`, pins in `PROVENANCE.tsv`, decisions in
+`DECISION.tsv`. The donor's read facade `StorageStore` (segmented MAPPED_FILE and optional PMDK backends) and its
+backend-selecting `open(Path, StorageOptions)` are HELD; the default read is restated on `FileChannel`. The schema
+ids follow JDK naming (`m3.content-extent.v1`), so extent ids differ from the donor's; index files do not.
+`M3ContentExtentTest` and `M3DurableExtentStoreTest` (the donor's) and `M3DurableExtentStoreOracleTest` (the
+synexia-mllm extent-store scenarios whose semantics match) run in the surefire test phase; `differential.sh` proves
+the donor and relocated dumps byte-identical under JIT and `-Xint` (32,190 lines), runs the crash gate and kills 5
+of 5 mutants.
+
 Canonical recipe: `com.synexia.m3jdk.CollectionsContractRefinement20261017`,
 dataset `file-content-delta-20261020`, in Synexia's existing
 `synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017`.

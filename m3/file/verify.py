@@ -225,7 +225,9 @@ def main():
             'M3ChunkDeltaWorkspaceProbe': (('script', 'PASS script 5000x5000'),
                                            ('distance', 'PASS distance 5000x5000')),
         }
-        maven_junit_sources = {'M3FileDeltaTest', 'M3ChunkDeltaGeneratorContractTest'}
+        # recipe durable-extent-store-20261107: the extent-store JUnit classes run in the surefire test phase.
+        maven_junit_sources = {'M3FileDeltaTest', 'M3ChunkDeltaGeneratorContractTest', 'M3ContentExtentTest',
+                               'M3DurableExtentStoreTest', 'M3DurableExtentStoreOracleTest'}
         all_entrypoints = (set(contracts) | set(image_delta_contracts)
                            | set(host_compiler_contracts) | set(bounded_probe_contracts)
                            | maven_junit_sources)
