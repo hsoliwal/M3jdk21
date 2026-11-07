@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
  * Modified 2026 by Hitesh Soliwal and contributors: bind range and split
  * cursors to the backing version after lazy index selection.
+ * Modified 2026-10-25: defer index-directory allocation until successful selection.
  */
 package jdk.internal.m3;
 
@@ -35,7 +36,9 @@ final class M3IndexedView<E> extends AbstractList<E> implements RandomAccess {
     private final int requiredMask;
     private final int forbiddenMask;
     private final boolean stateAware;
-    private int[] indexes = new int[0];
+    // Every reader refreshes/binds or checks a previously bound epoch first.
+    // Publish a directory only after successful selection under the backing lock.
+    private int[] indexes;
     private long indexedVersion = Long.MIN_VALUE;
 
     M3IndexedView(M3IndexedArray<E> backing, Predicate<? super E> predicate,
