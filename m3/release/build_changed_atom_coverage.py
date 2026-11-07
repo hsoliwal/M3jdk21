@@ -111,6 +111,8 @@ def build(root: Path, report: Path, inventory: Path, report_artifact: str,
         atom = {
             "id": ident, "source_path": row["source_path"],
             "source_sha256": digest(source),
+            "jacoco_class": row["class"], "jacoco_method": row["method"],
+            "jacoco_descriptor": row["descriptor"],
             "line_covered": line_covered, "line_missed": line_missed,
             "branch_covered": branch_covered, "branch_missed": branch_missed,
         }
@@ -121,7 +123,8 @@ def build(root: Path, report: Path, inventory: Path, report_artifact: str,
             atom["branchless_explanation"] = reason
         atoms.append(atom)
     return {
-        "schema": SCHEMA, "scope": SCOPE, "instrumented": True,
+        "schema": SCHEMA, "scope": SCOPE, "format": "JACOCO_XML",
+        "instrumented": True,
         "inventory_complete": bool(reviewed_complete),
         "unmeasured_count": 0, "excluded_atoms": [],
         "tool": tool, "report_artifact": report_artifact,
