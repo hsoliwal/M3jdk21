@@ -19,7 +19,7 @@ public final class M3ObjectSignalSelfTest {
         stringContainsParity();
         customBitSignals();
         bulkBackendParity();
-        System.out.println("PASS: " + checks + " object-signal checks");
+        System.out.println("PASS: " + checks + " object-signal checks; JNI=" + M3ObjectSignalOps.available());
     }
 
     private static void stringEqualityParity() {

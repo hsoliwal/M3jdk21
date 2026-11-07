@@ -94,7 +94,8 @@ python -I m3/collections/qualification/object-signal-20261107/apply.py [--check]
 
 ## Next leaves (not in this PR)
 
-* The JNI kernel next to `src/main/native/collections/m3_signal_order_jni.c` (opt-in), with its four seams.
+* The JNI kernel next to `src/main/native/collections/m3_signal_order_jni.c` (opt-in), with its four seams: done by
+  `../object-signal-native-20261107` (relocate.py v2: KEEP rows, C FILE row, library m3signalorder).
 * `immutableId()` over `M3ImmutableId`; `byCanonicalBytes` over an M3 codec once the codec family lands.
 * The search-family projectors and the com.synexia `MatIndexObjectSignal` family (owner: m3/ports/indexstring).
 * The `m3-object-projection` gate family (its own scope call).
