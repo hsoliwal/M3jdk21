@@ -43,7 +43,7 @@ def main():
         raise ValueError("owned runner output required")
     manifest = json.loads(regular(source/"m3/tooling/core-contract-matrix/CURRENT_INPUTS.json"))
     assert manifest["schema"] == "M3_CURRENT_CORE_CONTRACT_INPUTS_V1"
-    assert manifest["repository"] == "hsoliwal/M3jdk21" and len(manifest["files"]) == 59
+    assert manifest["repository"] == "hsoliwal/M3jdk21" and len(manifest["files"]) == 61
     rows = manifest["files"]
     before = {r["path"]: regular(source/relative(r["path"])) for r in rows}
     admit(rows, before)
@@ -51,7 +51,7 @@ def main():
     assert java_paths == {p for p in before if p.endswith(".java")}, "unlisted Java source"
     build = before["m3/build.sh"].decode("utf-8")
     selected = re.findall(r'-cp build/tests ([A-Za-z0-9_]+) \| tee "build/logs/([^"]+)\-\$mode\.log"', build)
-    assert [r[0] for r in selected] == manifest["programs"] and len(selected) == 16
+    assert [r[0] for r in selected] == manifest["programs"] and len(selected) == 18
     assert manifest["modes"] == ["jit", "int", "nocompact", "c2"]
     assert not (source/"m3/build").exists(), "never overwrite a prior build"
     work = out/"contract"
@@ -115,7 +115,7 @@ source "$M3_BOUNDED_COHORT/m3/build.sh"
             raise AssertionError("unchanged original build failed; retain original-build.log")
         expected = {prefix+"-"+mode+".log" for _, prefix in selected for mode in manifest["modes"]}
         actual = {p.name for p in (source/"m3/build/logs").glob("*.log")}
-        assert actual == expected | {"compile.log"}, "all64 original test logs required"
+        assert actual == expected | {"compile.log"}, "all72 original test logs required"
         counts = {}
         for name in sorted(expected):
             text = regular(source/"m3/build/logs"/name).decode("utf-8")
@@ -129,7 +129,7 @@ source "$M3_BOUNDED_COHORT/m3/build.sh"
         for p in (source/"m3/build/classes").rglob("*.class"):
             raw = regular(p)
             assert raw[:4] == bytes.fromhex("cafebabe") and int.from_bytes(raw[6:8], "big") == 65
-        result.update(status="PASS_CURRENT_ORIGINAL_CORE_BUILD", originalExecutions=64,
+        result.update(status="PASS_CURRENT_ORIGINAL_CORE_BUILD", originalExecutions=72,
                       originalPassMarkers=counts, compiledClasses=classes,
                       coreJar=identity(regular(source/"m3/build/jdk.m3.text.jar")))
     except Exception:
