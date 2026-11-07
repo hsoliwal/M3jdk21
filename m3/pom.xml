@@ -62,6 +62,8 @@
     <module>ports/regex-cursor</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/primitive-address-identity WIRED (gate gate-runtime-integration-primitive-address-identity, GATES.tsv) -->
     <module>runtime-integration/primitive-address-identity</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: runtime-integration/regex-precompute WIRED (gate gate-runtime-integration-regex-precompute, GATES.tsv) -->
+    <module>runtime-integration/regex-precompute</module>
   </modules>
 
   <profiles>
