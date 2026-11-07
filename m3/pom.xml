@@ -72,6 +72,8 @@
     <module>collections/signal-codegen</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/swing-viewport WIRED (gate gate-ports-swing-viewport, GATES.tsv) -->
     <module>ports/swing-viewport</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/jfx-viewport WIRED (gate gate-ports-jfx-viewport, GATES.tsv) -->
+    <module>ports/jfx-viewport</module>
   </modules>
 
   <profiles>
