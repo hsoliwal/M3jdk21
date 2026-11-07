@@ -1,0 +1,10 @@
+kind	file	line	method	declared	used	use_lines
+METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImportCoverageTest.java	204	fixture	synexia	m3	217
+METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java	481	fixture	synexia	m3	508,509,510,511
+METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	25	exactSourceMaterializesAndSecondPassIsIdempotent	synexia	m3	39
+METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	55	sourceDriftAndTargetDriftFailClosed	synexia	m3	64,67,72
+METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	86	missingSourceAndUnsafeRootsFailClosed	synexia	m3	103
+METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	110	materializeRollsBackEarlierAddsWhenALaterWriteFails	synexia	m3	122,123
+METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	156	strictCliRequiresManifestRevisionAndCleanTrackedCheckout	synexia	m3	165,166,193,209,225,229,237,246,269,277,300
+METHOD	m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	307	intermediateSymlinksFailClosedWhenSupported	synexia	m3	317
+METHOD	m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-delivery-a3/M3ImportPlanTest.java	417	fixture	synexia	m3	444,445,446,447

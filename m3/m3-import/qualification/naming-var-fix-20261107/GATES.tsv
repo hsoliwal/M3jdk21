@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gates of NAMING_VAR_FIX v1, run 2026-11-07 on JDK 21.0.9 (C:/Program Files/Java/jdk-21), Maven 3.9.14 (offline), Python 3.12.6, sparse worktree S:/m3-scratch/eb-conv/wt-m3import (M3JDK master aa4c65c3701f5bb3c36f1f6e3bb5292d2f566c83; sparse set m3/m3-import, m3/pom.xml, m3/tooling/jdk-naming, .m3/atomize-patternize, m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite)
+gate	command	state	evidence
+test_compile_before	mvn -o -f m3/m3-import/pom.xml test-compile (master)	FAIL	24 errors cannot find symbol: variable m3 (ERRORS_BEFORE.tsv: M3ImportCoverageTest 1, M3ImportPlanTest 4, M3ImporterTest 19); main compiled
+test_compile_after	mvn -o -f m3/m3-import/pom.xml clean test-compile	PASS	0 errors, 0 warnings; 10 main + 9 test sources, release 21, -Xlint:all -Werror (the module pom's compilerArgs), BUILD SUCCESS
+xlint	-Xlint:all -Werror from m3/m3-import/pom.xml	PASS	no [WARNING] line in the compile log
+recipe_apply	python -I apply.py	PASS	CHANGED x3 (tokens 9 + 25 + 29 = 63); second run changed=0
+recipe_check	python -I apply.py --check	PASS	CHECK files=3 failed=0 (postimages recomputed from the pinned preimage blobs)
+token_diff	git diff --word-diff=porcelain --word-diff-regex=<java identifier or one non-space char> -- m3/m3-import/src	PASS	-synexia x63, +m3 x63, no other token changed
+jdk_naming_root_cause	jdk_naming.py plan --only m3/m3-import/ (master)	INFO	moves=0 rewrites=0: no rule renames a bare identifier, so the naming recipe cannot finish the rename; rule SEGMENT_DOT of fe35ea98841 renamed the word only before a dot
+jdk_naming_fixed_point	jdk_naming.py plan --only m3/m3-import/ (after)	PASS	moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+census_master	python -I census.py --rev aa4c65c3701f5bb3c36f1f6e3bb5292d2f566c83	INFO	scanned=1127 METHOD hits=9 in 4 files (HITS.tsv); the 24 m3/m3-import use lines equal the 24 compiler error lines (diff empty)
+census_after	python -I census.py --rev <tree of this commit>	PASS	hits=1, none in m3/m3-import; open: migration-recipes hash-pinned-java/m3-full-delivery-a3/M3ImportPlanTest.java fixture (444-447)
+test_after	mvn -o -f m3/m3-import/pom.xml test	FAIL_OPEN	50 run, 43 pass, 4 failures, 3 errors: all rename data drift (README.md, Test results); not caused by this edit
+test_pre_rename	mvn -o -f m3/synexia-import/pom.xml test at 06495fea415 (parent of fe35ea98841)	INFO	50 run, 49 pass, 1 error (seed snapshot reads vendored files outside the sparse checkout)
+scope	git diff --cached --name-only	PASS	every path under m3/m3-import/
+whitespace	git diff --cached --check	PASS	no output
