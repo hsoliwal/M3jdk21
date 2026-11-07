@@ -28,7 +28,7 @@ def main():
     tests = [root / 'src/test/java/jdk/m3/collections' / (name + '.java')
              for name in ('M3MaskViewportKernelContract', 'M3MaskViewportWindowContract')]
     native = root / 'src/main/c/m3maskviewport.c'
-    regions = root / 'src/test/native/m3_mask_viewport_regions.c'
+    # FLLDCIM: MRL - viewport-regions-retire-20261107 R1: region steps removed with the retired src/test/native/m3_mask_viewport_regions.c (its counts describe d0cec9717801's project(), replaced by 7fb4de24b1e8)
     records = []
 
     def run(name, command):
@@ -49,23 +49,19 @@ def main():
              '-I' + str(jdk / 'include'), '-I' + str(jdk / 'include/linux')]
     library = out / 'libm3maskviewport.so'
     run('jni-compile', [args.cc, *flags, '-fPIC', '-shared', native, '-o', library])
-    run('regions-compile', [args.cc, *flags, regions, '-o', out / 'regions'])
-    region_output = run('regions', [out / 'regions'])
-    if 'PASS viewport JNI regions:' not in region_output:
-        raise SystemExit('missing region completion marker')
     for test in tests:
         output = run(test.stem, [jdk / 'bin/java', '-Xcheck:jni', '-Dm3.native.path=' + str(library),
                                 '-cp', out / 'classes', 'jdk.m3.collections.' + test.stem])
         if 'PASS checks=' not in output or 'jni=true' not in output:
             raise SystemExit('missing mandatory JNI completion marker')
     receipt = {'schema': 'M3_MASK_VIEWPORT_VERIFICATION_V1', 'status': 'PASS',
-               'sources': {p.relative_to(root).as_posix(): sha(p) for p in [*java, *tests, native, regions]},
+               'sources': {p.relative_to(root).as_posix(): sha(p) for p in [*java, *tests, native]},
                'jdk_modules_sha256': sha(jdk / 'lib/modules'),
                'native_library_sha256': sha(library),
                'scope': 'Finite Java/JNI contracts on the supplied JDK; not full product-image qualification',
                'performance_claim': 'NONE'}
     (out / 'RESULT.json').write_text(json.dumps(receipt, indent=2) + '\n')
-    print('PASS mandatory JNI, bounded regions, Java differential, and UBSan')
+    print('PASS mandatory JNI, Java differential, and UBSan')
 
 
 if __name__ == '__main__':
