@@ -62,6 +62,23 @@
             <arg>-Werror</arg>
           </compilerArgs>
         </configuration>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <configuration>
+              <!-- The ast owners import the vendored mindex AST (jdk.internal.m3.mindex.compiler.ast) and its
+                   runtime closure. M3JDK carries those sources under m3/vendor/m3 without a pom (the same shape
+                   as m3/tooling/m3jdk-a3-recipes), so main compilation adds them as source roots; tests keep
+                   the default test root. -->
+              <compileSourceRoots>
+                <compileSourceRoot>${project.basedir}/src/main/java</compileSourceRoot>
+                <compileSourceRoot>${project.basedir}/../../vendor/m3/m3-mindex/compiler/src/main/java</compileSourceRoot>
+                <compileSourceRoot>${project.basedir}/../../vendor/m3/m3-mindex/runtime/src/main/java</compileSourceRoot>
+                <compileSourceRoot>${project.basedir}/../../vendor/m3/m3-native-interop/src/main/java</compileSourceRoot>
+              </compileSourceRoots>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
