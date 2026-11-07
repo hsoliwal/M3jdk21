@@ -1,0 +1,9 @@
+{
+  "label": "retained-amalgamation-before-after",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/target/contract-proof/overlay/m3/runtime-integration/regex-plan-amalgamation/source_extracted_java21.py"
+  ],
+  "exit_code": null,
+  "timeout_seconds": 240
+}

@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.RopeAffixPreparedEffects20261017
+displayName: Refine rope full-match affixes and prepared composite effects
+description: >-
+  Refine existing M3String regex boundaries and the internal M3RegexDpPlan owner
+  through exact, serial, contract-preserving Java and native transformations.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-rope-affix-effects-20261017
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-rope-affix-effects-20261017

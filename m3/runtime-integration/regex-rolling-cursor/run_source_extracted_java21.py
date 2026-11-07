@@ -18,8 +18,8 @@ REGEX = "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
 STRING = "src/java.base/share/classes/java/lang/M3String.java"
 BASE = "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55"
 OLD = "9a5d9511b996d780f26672e2f5dc6ccc0a2747fe33f0c5ef1a9c62629564a41e"
-NEW = "f875210dfb605799b6c8dbee53b28ad6383e000d90da775f7fd285464da7b2d3"
-TEST = "108087f9706b1f426b9330eccd4baa2e4e30ed327f0dba644a11e21f3a6eb0ad"
+NEW = "3029950078524419af52edbcbaaccab545bd5b1bed824ee80218250b8c748ef4"
+TEST = "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a"
 
 def call(cmd, **kwargs):
     result = subprocess.run(cmd, check=False, **kwargs)

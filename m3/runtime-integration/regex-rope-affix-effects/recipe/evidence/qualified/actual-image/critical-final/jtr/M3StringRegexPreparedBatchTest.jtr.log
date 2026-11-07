@@ -1,0 +1,225 @@
+#Test Results (version 2)
+#Sat Oct 17 04:12:10 CST 2026
+#-----testdescription-----
+$file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java
+$root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk
+keywords=othervm
+modules=java.base/jdk.internal.mindex
+run=USER_SPECIFIED main/othervm -Xcheck\:jni --add-opens\=java.base/jdk.internal.mindex\=ALL-UNNAMED M3StringRegexPreparedBatchTest\nUSER_SPECIFIED main/othervm -Xint -Xcheck\:jni --add-opens\=java.base/jdk.internal.mindex\=ALL-UNNAMED M3StringRegexPreparedBatchTest\n
+source=M3StringRegexPreparedBatchTest.java
+title=Prepared regex effects preserve UTF-16 joins, exact row truth and JNI ownership
+
+#-----environment-----
+
+#-----testresult-----
+description=file\:/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java
+elapsed=5384 0\:00\:05.384
+end=Sat Oct 17 04\:12\:10 CST 2026
+environment=regtest
+execStatus=Passed. Execution successful
+harnessLoaderMode=Classpath Loader
+harnessVariety=Full Bundle
+hostname=296846eabe80
+javatestOS=Linux 6.18.55 (amd64)
+javatestVersion=6.0-ea+b24-2026-10-05-${BUILT_FROM_COMMIT}
+jtregVersion=jtreg 7.3.1 dev 0
+modules=java.base/jdk.internal.mindex
+script=com.sun.javatest.regtest.exec.RegressionScript
+sections=script_messages build compile main build main
+start=Sat Oct 17 04\:12\:04 CST 2026
+test=java/lang/String/M3StringRegexPreparedBatchTest.java
+testJDK=/tmp/m3jdk21-product-build/images/jdk
+testJDK_OS=[name\:Linux,arch\:amd64,version\:6.18.55,family\:linux,simple_arch\:x64,simple_version\:6.18,processors\:2,maxMemory\:8589934592,maxSwap\:0]
+testJDK_os.arch=amd64
+testJDK_os.name=Linux
+testJDK_os.version=6.18.55
+totalTime=5444
+user.name=root
+work=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/java/lang/String
+
+#section:script_messages
+----------messages:(4/271)----------
+JDK under test: /tmp/m3jdk21-product-build/images/jdk
+openjdk version "21-internal" 2023-09-19
+OpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.m3-string)
+OpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.m3-string, mixed mode, sharing)
+
+#section:build
+----------messages:(7/250)----------
+command: build M3StringRegexPreparedBatchTest
+reason: Named class compiled on demand
+started: Sat Oct 17 04:12:04 CST 2026
+Test directory:
+  compile: M3StringRegexPreparedBatchTest
+finished: Sat Oct 17 04:12:07 CST 2026
+elapsed time (seconds): 2.379
+result: Passed. Build successful
+
+#section:compile
+----------messages:(7/436)----------
+command: compile /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java
+reason: .class file out of date or does not exist
+started: Sat Oct 17 04:12:04 CST 2026
+Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED
+Mode: othervm
+finished: Sat Oct 17 04:12:07 CST 2026
+elapsed time (seconds): 2.379
+----------configuration:(7/520)----------
+javac compilation environment
+  add modules: java.base                     
+  add exports: java.base/jdk.internal.mindex ALL-UNNAMED
+  source path: /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String 
+  class path:  /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String 
+               /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d 
+
+----------rerun:(26/1918)*----------
+cd /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/java/lang/String/M3StringRegexPreparedBatchTest && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=America/Mexico_City \\
+    /tmp/m3jdk21-product-build/images/jdk/bin/javac \\
+        -J-Xmx512m \\
+        -J-XX:ActiveProcessorCount=2 \\
+        -J-Dtest.vm.opts='-Xmx512m -XX:ActiveProcessorCount=2' \\
+        -J-Dtest.tool.vm.opts='-J-Xmx512m -J-XX:ActiveProcessorCount=2' \\
+        -J-Dtest.compiler.opts= \\
+        -J-Dtest.java.opts=-Xcheck:jni \\
+        -J-Dtest.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -J-Dcompile.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -J-Dtest.timeout.factor=2.0 \\
+        -J-Dtest.root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk \\
+        -J-Dtest.name=java/lang/String/M3StringRegexPreparedBatchTest.java \\
+        -J-Dtest.file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java \\
+        -J-Dtest.src=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String \\
+        -J-Dtest.src.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String \\
+        -J-Dtest.classes=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d \\
+        -J-Dtest.class.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d \\
+        -J-Dtest.modules=java.base/jdk.internal.mindex \\
+        @/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/java/lang/String/M3StringRegexPreparedBatchTest.d/compile.0.jta
+----------System.out:(0/0)----------
+----------System.err:(0/0)----------
+result: Passed. Compilation successful
+
+#section:main
+----------messages:(7/513)----------
+command: main -Xcheck:jni --add-opens=java.base/jdk.internal.mindex=ALL-UNNAMED M3StringRegexPreparedBatchTest
+reason: User specified action: run main/othervm -Xcheck:jni --add-opens=java.base/jdk.internal.mindex=ALL-UNNAMED M3StringRegexPreparedBatchTest 
+started: Sat Oct 17 04:12:07 CST 2026
+Mode: othervm [/othervm specified]
+Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED
+finished: Sat Oct 17 04:12:07 CST 2026
+elapsed time (seconds): 0.654
+----------configuration:(5/172)----------
+Boot Layer
+  add modules: java.base                     
+  add exports: java.base/jdk.internal.mindex ALL-UNNAMED
+  add opens:   java.base/jdk.internal.mindex ALL-UNNAMED
+
+----------System.out:(1/89)----------
+M3_STRING_REGEX_PREPARED_BATCH_PASS checks=231612 jniRows=46278 cudaRows=0 requested=JNI
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(32/2440)*----------
+cd /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/java/lang/String/M3StringRegexPreparedBatchTest && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=America/Mexico_City \\
+CLASSPATH=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d:/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String:/tmp/m3-toolchain/jtreg-7.3.1+1/jtreg/lib/jtreg.jar \\
+    /tmp/m3jdk21-product-build/images/jdk/bin/java \\
+        -Dtest.vm.opts='-Xmx512m -XX:ActiveProcessorCount=2' \\
+        -Dtest.tool.vm.opts='-J-Xmx512m -J-XX:ActiveProcessorCount=2' \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts=-Xcheck:jni \\
+        -Dtest.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dcompile.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dtest.timeout.factor=2.0 \\
+        -Dtest.root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk \\
+        -Dtest.name=java/lang/String/M3StringRegexPreparedBatchTest.java \\
+        -Dtest.file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java \\
+        -Dtest.src=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String \\
+        -Dtest.src.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String \\
+        -Dtest.classes=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d \\
+        -Dtest.class.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d \\
+        -Dtest.modules=java.base/jdk.internal.mindex \\
+        --add-modules java.base \\
+        --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \\
+        -Xmx512m \\
+        -XX:ActiveProcessorCount=2 \\
+        -Xcheck:jni \\
+        -Xcheck:jni \\
+        --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/java/lang/String/M3StringRegexPreparedBatchTest.d/main.1.jta
+result: Passed. Execution successful
+
+#section:build
+----------messages:(5/190)----------
+command: build M3StringRegexPreparedBatchTest
+reason: Named class compiled on demand
+started: Sat Oct 17 04:12:07 CST 2026
+finished: Sat Oct 17 04:12:07 CST 2026
+elapsed time (seconds): 0.0
+result: Passed. All files up to date
+
+#section:main
+----------messages:(7/525)----------
+command: main -Xint -Xcheck:jni --add-opens=java.base/jdk.internal.mindex=ALL-UNNAMED M3StringRegexPreparedBatchTest
+reason: User specified action: run main/othervm -Xint -Xcheck:jni --add-opens=java.base/jdk.internal.mindex=ALL-UNNAMED M3StringRegexPreparedBatchTest 
+started: Sat Oct 17 04:12:07 CST 2026
+Mode: othervm [/othervm specified]
+Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED
+finished: Sat Oct 17 04:12:10 CST 2026
+elapsed time (seconds): 2.347
+----------configuration:(5/172)----------
+Boot Layer
+  add modules: java.base                     
+  add exports: java.base/jdk.internal.mindex ALL-UNNAMED
+  add opens:   java.base/jdk.internal.mindex ALL-UNNAMED
+
+----------System.out:(1/89)----------
+M3_STRING_REGEX_PREPARED_BATCH_PASS checks=231612 jniRows=46278 cudaRows=0 requested=JNI
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(33/2457)*----------
+cd /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/java/lang/String/M3StringRegexPreparedBatchTest && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=America/Mexico_City \\
+CLASSPATH=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d:/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String:/tmp/m3-toolchain/jtreg-7.3.1+1/jtreg/lib/jtreg.jar \\
+    /tmp/m3jdk21-product-build/images/jdk/bin/java \\
+        -Dtest.vm.opts='-Xmx512m -XX:ActiveProcessorCount=2' \\
+        -Dtest.tool.vm.opts='-J-Xmx512m -J-XX:ActiveProcessorCount=2' \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts=-Xcheck:jni \\
+        -Dtest.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dcompile.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dtest.timeout.factor=2.0 \\
+        -Dtest.root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk \\
+        -Dtest.name=java/lang/String/M3StringRegexPreparedBatchTest.java \\
+        -Dtest.file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java \\
+        -Dtest.src=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String \\
+        -Dtest.src.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture-final/source/test/jdk/java/lang/String \\
+        -Dtest.classes=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d \\
+        -Dtest.class.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/classes/java/lang/String/M3StringRegexPreparedBatchTest.d \\
+        -Dtest.modules=java.base/jdk.internal.mindex \\
+        --add-modules java.base \\
+        --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \\
+        -Xmx512m \\
+        -XX:ActiveProcessorCount=2 \\
+        -Xcheck:jni \\
+        -Xint \\
+        -Xcheck:jni \\
+        --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/critical-final/work/java/lang/String/M3StringRegexPreparedBatchTest.d/main.2.jta
+result: Passed. Execution successful
+
+
+test result: Passed. Execution successful
