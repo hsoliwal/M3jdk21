@@ -82,6 +82,8 @@
     <module>ports/parallel-bulk</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/compiletime WIRED (gate gate-ports-compiletime, GATES.tsv) -->
     <module>ports/compiletime</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/pcollections WIRED (gate gate-collections-pcollections, GATES.tsv) -->
+    <module>collections/pcollections</module>
   </modules>
 
   <profiles>
