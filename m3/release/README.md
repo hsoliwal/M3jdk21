@@ -1,6 +1,6 @@
 # M3JDK21 evidence-first release pack
 
-[Visible release queue](queue/README.md) · [Release contract](release-contract.json)
+[Release preparation: names and tests](RELEASE_PREPARATION.md) · [Visible release queue](queue/README.md) · [Release contract](release-contract.json)
 
 The first public M3JDK21 release is admitted by evidence, not by repository size, PR count, donor
 catalogue size, or marketing language.
