@@ -223,6 +223,7 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
     if len(atom_keys) != len(atoms) or atom_keys != inventory_keys:
         raise ValueError("coverage atoms differ from source-pinned inventory TSV")
     seen = set()
+    source_digests = {}  # one source-file read even for many covered methods
     for atom in atoms:
         if not isinstance(atom, dict):
             raise ValueError("invalid coverage atom")
@@ -236,7 +237,9 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
             raise ValueError("atom source must be an M3/JDK Java or native source file")
         if not isinstance(digest, str) or not SHA256.fullmatch(digest):
             raise ValueError("invalid atom source SHA-256")
-        if sha256(safe_artifact(root, path)) != digest:
+        if path not in source_digests:
+            source_digests[path] = sha256(safe_artifact(root, path))
+        if source_digests[path] != digest:
             raise ValueError("atom source hash mismatch: " + path)
         for family in ("line", "branch"):
             measured, missed = atom.get(family + "_covered"), atom.get(family + "_missed")
