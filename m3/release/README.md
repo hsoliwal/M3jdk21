@@ -71,6 +71,9 @@ A release candidate must preserve:
 - M3/Synexia rights and licensing notices;
 - foundation build/test logs;
 - Java precompute differential results;
+- **changed-atom instrumented line/branch coverage**: reviewed TSV inventory,
+  raw JaCoCo XML where applicable, each source SHA-256, >=90% per measured
+  contract atom (99% objective for critical atoms), and explicit exclusions/HOLD;
 - JNI/native parity results where JNI/native is used;
 - Maven/OpenRewrite control-reactor execution and replay receipts produced in this repository;
 - product compilation and applicable installed-image/module tests;
