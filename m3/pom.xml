@@ -56,6 +56,8 @@
     <module>ports/indexstring</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel WIRED (gate gate-ports-parallel, GATES.tsv) -->
     <module>ports/parallel</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/vcpu WIRED (gate gate-ports-vcpu, GATES.tsv) -->
+    <module>ports/vcpu</module>
   </modules>
 
   <profiles>
