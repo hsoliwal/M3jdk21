@@ -27,12 +27,16 @@ import java.util.Objects;
  * owner, a stable generation check, or a concurrency/snapshot transaction.
  */
 public final class M3IndexPathRank {
+    // Null only for the identity-path mode: row ID is the source ordinal.
     private final int[] rows;
+    //FLLDCIM: MRL - fold-close audit leaf L0048: RESTORE from PR #1791 head f452419fdcee (retained variant blob 54de439ba38d on master), dropped by the retain merge of #2070 (2028b1fb5f4) which kept master's pre-identity owner; 3-way base = pr1791 parent 5b779429120f blob 4a60fd1fab76, ours = master blob 647d2dc0452d, theirs = 905797a33244: clean except Window.copySelectedRowIds (one token, rowIdAt); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
+    private final int sourceLength;
     private final long[] selected;
     private final int[] wordPrefix;
 
-    private M3IndexPathRank(int[] rows, long[] selected, int[] wordPrefix) {
+    private M3IndexPathRank(int[] rows, int sourceLength, long[] selected, int[] wordPrefix) {
         this.rows = rows;
+        this.sourceLength = sourceLength;
         this.selected = selected;
         this.wordPrefix = wordPrefix;
     }
@@ -98,28 +102,62 @@ public final class M3IndexPathRank {
             }
             if (keep) words[ordinal >>> 6] |= 1L << (ordinal & 63);
         }
-        int[] prefix = new int[words.length + 1];
-        for (int word = 0; word < words.length; word++) {
-            prefix[word + 1] = prefix[word] + Long.bitCount(words[word]);
+        return new M3IndexPathRank(copy, count, words, prefixCounts(words));
+    }
+
+    /**
+     * Capture an implicit identity path from an already detached, aligned
+     * full-width state lane. No 0..n-1 row IDs, physical offsets or copies
+     * of either are retained. Each selected row ID is its source ordinal.
+     *
+     * <p>Package-private so public collection and JNI contracts stay unchanged.
+     * State is read once and not retained; later caller changes cannot alter
+     * the captured immutable bitmap and prefix ranks.</p>
+     */
+    //FLLDCIM: MRL - identity path (rows == null): package-private; origin callers M3LongStateArray.Snapshot.prepare (HANDOFF.tsv, owner not in this leaf) and M3IndexPathIdentitySelfTest
+    static M3IndexPathRank snapshotIdentity(
+            int[] states, int requiredMask, int forbiddenMask) {
+        Objects.requireNonNull(states, "states");
+        int count = states.length;
+        long[] words = new long[(int) (((long) count + 63L) >>> 6)];
+        for (int ordinal = 0; ordinal < count; ordinal++) {
+            int state = states[ordinal];
+            if ((state & requiredMask) == requiredMask
+                    && (state & forbiddenMask) == 0) {
+                words[ordinal >>> 6] |= 1L << (ordinal & 63);
+            }
         }
-        return new M3IndexPathRank(copy, words, prefix);
+        return new M3IndexPathRank(null, count, words, prefixCounts(words));
+    }
+
+    private static int[] prefixCounts(long[] words) {
+        int[] prefix = new int[words.length + 1];
+        for (int i = 0; i < words.length; i++) {
+            prefix[i + 1] = prefix[i] + Long.bitCount(words[i]);
+        }
+        return prefix;
+    }
+
+    //FLLDCIM: HPCPOP - hot path: one final-field null test per selected row; RankStackExistingDifferential IPR digest identical on master and head (GATES.tsv)
+    private int rowIdAt(int sourceOrdinal) {
+        return rows == null ? sourceOrdinal : rows[sourceOrdinal];
     }
 
     /** Number of captured input occurrences, including filtered-out occurrences. */
-    public int sourceSize() { return rows.length; }
+    public int sourceSize() { return sourceLength; }
 
     /** Number of admitted occurrences, including repeated row IDs. */
     public int size() { return wordPrefix[wordPrefix.length - 1]; }
 
     /** Is the given source ordinal admitted? */
     public boolean containsSourceOrdinal(int ordinal) {
-        Objects.checkIndex(ordinal, rows.length);
+        Objects.checkIndex(ordinal, sourceLength);
         return (selected[ordinal >>> 6] & (1L << (ordinal & 63))) != 0;
     }
 
     /** Exclusive occurrence rank among the first {@code endExclusive} path positions. */
     public int rank(int endExclusive) {
-        Objects.checkFromToIndex(0, endExclusive, rows.length);
+        Objects.checkFromToIndex(0, endExclusive, sourceLength);
         int wholeWords = endExclusive >>> 6;
         int result = wordPrefix[wholeWords];
         int residue = endExclusive & 63;
@@ -145,14 +183,14 @@ public final class M3IndexPathRank {
     }
 
     /** Stable signed or duplicate row ID at selected rank; no Entry materialized. */
-    public int selectedRowId(int rank) { return rows[selectedSourceOrdinal(rank)]; }
+    public int selectedRowId(int rank) { return rowIdAt(selectedSourceOrdinal(rank)); }
 
     /** A defensive, exact-length array containing only selected row IDs. */
     public int[] toArray() { return window(0, sourceSize()).toArray(); }
 
     /** Zero-copy (of payload and index) half-open source-ordinal window. */
     public Window window(int fromInclusive, int toExclusive) {
-        Objects.checkFromToIndex(fromInclusive, toExclusive, rows.length);
+        Objects.checkFromToIndex(fromInclusive, toExclusive, sourceLength);
         return new Window(this, fromInclusive, toExclusive);
     }
 
@@ -239,7 +277,7 @@ public final class M3IndexPathRank {
                 while (bits != 0 && copied < count) {
                     int sourceOrdinal =
                             (wordIndex << 6) + Long.numberOfTrailingZeros(bits);
-                    output[outputOffset + copied++] = owner.rows[sourceOrdinal];
+                    output[outputOffset + copied++] = owner.rowIdAt(sourceOrdinal);
                     bits &= bits - 1;
                 }
             }

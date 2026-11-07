@@ -1,0 +1,147 @@
+[
+ {
+  "pre_line": 30,
+  "old": [],
+  "new": [
+   "    // Null only for the identity-path mode: row ID is the source ordinal."
+  ]
+ },
+ {
+  "pre_line": 31,
+  "old": [],
+  "new": [
+   "    //FLLDCIM: MRL - fold-close audit leaf L0048: RESTORE from PR #1791 head f452419fdcee (retained variant blob 54de439ba38d on master), dropped by the retain merge of #2070 (2028b1fb5f4) which kept master's pre-identity owner; 3-way base = pr1791 parent 5b779429120f blob 4a60fd1fab76, ours = master blob 647d2dc0452d, theirs = 905797a33244: clean except Window.copySelectedRowIds (one token, rowIdAt); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1",
+   "    private final int sourceLength;"
+  ]
+ },
+ {
+  "pre_line": 34,
+  "old": [
+   "    private M3IndexPathRank(int[] rows, long[] selected, int[] wordPrefix) {"
+  ],
+  "new": [
+   "    private M3IndexPathRank(int[] rows, int sourceLength, long[] selected, int[] wordPrefix) {"
+  ]
+ },
+ {
+  "pre_line": 36,
+  "old": [],
+  "new": [
+   "        this.sourceLength = sourceLength;"
+  ]
+ },
+ {
+  "pre_line": 101,
+  "old": [],
+  "new": [
+   "        return new M3IndexPathRank(copy, count, words, prefixCounts(words));",
+   "    }",
+   "",
+   "    /**",
+   "     * Capture an implicit identity path from an already detached, aligned",
+   "     * full-width state lane. No 0..n-1 row IDs, physical offsets or copies",
+   "     * of either are retained. Each selected row ID is its source ordinal.",
+   "     *",
+   "     * <p>Package-private so public collection and JNI contracts stay unchanged.",
+   "     * State is read once and not retained; later caller changes cannot alter",
+   "     * the captured immutable bitmap and prefix ranks.</p>",
+   "     */",
+   "    //FLLDCIM: MRL - identity path (rows == null): package-private; origin callers M3LongStateArray.Snapshot.prepare (HANDOFF.tsv, owner not in this leaf) and M3IndexPathIdentitySelfTest",
+   "    static M3IndexPathRank snapshotIdentity(",
+   "            int[] states, int requiredMask, int forbiddenMask) {",
+   "        Objects.requireNonNull(states, \"states\");",
+   "        int count = states.length;",
+   "        long[] words = new long[(int) (((long) count + 63L) >>> 6)];",
+   "        for (int ordinal = 0; ordinal < count; ordinal++) {",
+   "            int state = states[ordinal];",
+   "            if ((state & requiredMask) == requiredMask",
+   "                    && (state & forbiddenMask) == 0) {",
+   "                words[ordinal >>> 6] |= 1L << (ordinal & 63);",
+   "            }",
+   "        }",
+   "        return new M3IndexPathRank(null, count, words, prefixCounts(words));",
+   "    }",
+   "",
+   "    private static int[] prefixCounts(long[] words) {"
+  ]
+ },
+ {
+  "pre_line": 102,
+  "old": [
+   "        for (int word = 0; word < words.length; word++) {",
+   "            prefix[word + 1] = prefix[word] + Long.bitCount(words[word]);"
+  ],
+  "new": [
+   "        for (int i = 0; i < words.length; i++) {",
+   "            prefix[i + 1] = prefix[i] + Long.bitCount(words[i]);"
+  ]
+ },
+ {
+  "pre_line": 105,
+  "old": [
+   "        return new M3IndexPathRank(copy, words, prefix);"
+  ],
+  "new": [
+   "        return prefix;",
+   "    }",
+   "",
+   "    //FLLDCIM: HPCPOP - hot path: one final-field null test per selected row; RankStackExistingDifferential IPR digest identical on master and head (GATES.tsv)",
+   "    private int rowIdAt(int sourceOrdinal) {",
+   "        return rows == null ? sourceOrdinal : rows[sourceOrdinal];"
+  ]
+ },
+ {
+  "pre_line": 109,
+  "old": [
+   "    public int sourceSize() { return rows.length; }"
+  ],
+  "new": [
+   "    public int sourceSize() { return sourceLength; }"
+  ]
+ },
+ {
+  "pre_line": 116,
+  "old": [
+   "        Objects.checkIndex(ordinal, rows.length);"
+  ],
+  "new": [
+   "        Objects.checkIndex(ordinal, sourceLength);"
+  ]
+ },
+ {
+  "pre_line": 122,
+  "old": [
+   "        Objects.checkFromToIndex(0, endExclusive, rows.length);"
+  ],
+  "new": [
+   "        Objects.checkFromToIndex(0, endExclusive, sourceLength);"
+  ]
+ },
+ {
+  "pre_line": 148,
+  "old": [
+   "    public int selectedRowId(int rank) { return rows[selectedSourceOrdinal(rank)]; }"
+  ],
+  "new": [
+   "    public int selectedRowId(int rank) { return rowIdAt(selectedSourceOrdinal(rank)); }"
+  ]
+ },
+ {
+  "pre_line": 155,
+  "old": [
+   "        Objects.checkFromToIndex(fromInclusive, toExclusive, rows.length);"
+  ],
+  "new": [
+   "        Objects.checkFromToIndex(fromInclusive, toExclusive, sourceLength);"
+  ]
+ },
+ {
+  "pre_line": 242,
+  "old": [
+   "                    output[outputOffset + copied++] = owner.rows[sourceOrdinal];"
+  ],
+  "new": [
+   "                    output[outputOffset + copied++] = owner.rowIdAt(sourceOrdinal);"
+  ]
+ }
+]
