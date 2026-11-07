@@ -128,3 +128,37 @@ python3 m3/release/verify_release_admission.py --root . --release \
 A failing or absent gate is recorded as **PENDING/HOLD** and stays in the queue.
 The [SWT release-readiness pack](https://github.com/hsoliwal/eclipse.platform.swt/tree/master/docs)
 is a separate downstream qualification and never upgrades an M3JDK runtime claim.
+
+## Reproduce validator regression coverage
+
+The naming receiver and release-evidence verifier have their own measured Python
+regression scope. Their malformed-input fixtures exercise controlled refusal of
+ambiguous declarations, unsafe source paths and invalid receipt shapes. A legal
+Java identifier suffix such as `$Extra` must not establish ownership of the
+shorter mapped type. A duplicate owner or JSON key must not be resolved by input
+order. Rejected evidence must produce a useful gate diagnostic.
+
+With `coverage.py` installed in the development environment, measure each owner
+separately from the repository root:
+
+```sh
+python3 -m coverage run --branch --data-file=.coverage-naming \
+  --include='*/m3/tooling/name-contract/check.py' \
+  -m unittest discover -s m3/tooling/name-contract -p test_check.py -v
+python3 -m coverage report --data-file=.coverage-naming -m
+python3 -m coverage json --data-file=.coverage-naming -o naming-tool-coverage.json
+
+python3 -m coverage run --branch --data-file=.coverage-release \
+  --include='*/m3/release/verify_release_admission.py' \
+  -m unittest discover -s m3/release -p test_release_admission.py -v
+python3 -m coverage report --data-file=.coverage-release -m
+python3 -m coverage json --data-file=.coverage-release -o release-verifier-coverage.json
+```
+
+Keep the exact tested commit/tree, full test logs, covered/missed counters and
+raw JSON together. The two explicit `--include` selections define tooling-only
+measurements; compare percentages only when the source identity and denominator
+also match. Child-process execution is not instrumented by these commands.
+Neither synthetic receipts nor validator coverage satisfy the instrumented M3
+contract-atom, installed-image, jtreg, JNI or SWT platform gates above. The full
+live naming authority remains an independently executed gate.
