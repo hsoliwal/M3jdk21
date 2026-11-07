@@ -29,7 +29,9 @@ Not this lane (recorded, untouched): `collections/recipe`, `collections/snapshot
 | `GATES.tsv` | every Maven run: command, log path (S: scratch), rc, build result, wall seconds, reactor modules built, own tests, log sha256 |
 | `testsum.py` | per-module test counts and failing set from a reactor log (BLLSE-LAW) |
 | `BASELINE_TESTS.tsv`, `BASELINE_FAILING.tsv` | master (untouched pom) `verify -fae -Dmaven.test.failure.ignore=true`: per-module counts and the 9-row failing set |
-| `FULL_TESTS.tsv`, `FULL_FAILING.tsv` | the same for the wired reactor (final run) |
+| `FULL_TESTS.tsv`, `FULL_FAILING.tsv` | the same for the wired reactor (final run of #2779) |
+| `BASELINE_POST2781_*.tsv`, `FULL_UNHOLD_*.tsv` | the same on master 7b155a401e8 before and after the un-hold (section below) |
+| `reconfirm.sh` | DECISION.tsv row re-confirming a HELD module from CPU evidence, no Maven run |
 
 Replay on a checkout of the base: `python -I m3/qualification/reactor-wiring-20261107/apply.py apply --root .`
 (`verify` reports whether `m3/pom.xml` is at the chain's final sha256).
@@ -44,12 +46,12 @@ HELD 8 — see the table. Lane a4 (by request, 4 modules): WIRED 3 — `collecti
 
 | module | decision | first error (DECISION.tsv has the full row) |
 |--------|----------|----------------------------------------------|
-| ast | HELD | `src/test/java/jdk/m3/ast/M3SyntaxGrowthAgent.java:9` package `jdk.internal.org.objectweb.asm` is not visible (testCompile) |
-| history | HELD | exec `history-contract-tests` (python3) exit 1: `OSError [Errno 22]` writing a fixture named `spaces tab<TAB>and<LF>newlines-λ.java` (Windows filename) |
+| ast | HELD -> WIRED 2026-11-07 (un-hold section) | `src/test/java/jdk/m3/ast/M3SyntaxGrowthAgent.java:9` package `jdk.internal.org.objectweb.asm` is not visible (testCompile) |
+| history | HELD -> WIRED 2026-11-07 (un-hold section) | exec `history-contract-tests` (python3) exit 1: `OSError [Errno 22]` writing a fixture named `spaces tab<TAB>and<LF>newlines-λ.java` (Windows filename) |
 | ports/compiletime | HELD | could not resolve `org.ow2.asm:asm{,-tree,-analysis}:9.6-m3-source-1` (not in the local repos nor Central) |
-| ports/swing-viewport | HELD | `src/test/java/jdk/m3/swing/testkit/M3JUnitLauncher.java:25` package `org.junit.platform.launcher` does not exist |
-| ports/jfx-viewport | HELD | could not resolve `com.m3:m3-swing-viewport:0.1.0-SNAPSHOT` (its dependency is HELD) |
-| ports/parallel-bulk | HELD | run 1: Ant `<copy>` from `../../../src/java.base/.../jdk/internal/vm/parallel` (outside the `m3/` sparse checkout, environment); re-gate after adding that path: `maven-compiler-plugin:3.15.0:testCompile` failed: `Cannot invoke "java.util.Map.get(Object)" because the return value of "AbstractCompilerMojo.getPathElements()" is null` |
+| ports/swing-viewport | HELD -> WIRED 2026-11-07 (un-hold section) | `src/test/java/jdk/m3/swing/testkit/M3JUnitLauncher.java:25` package `org.junit.platform.launcher` does not exist |
+| ports/jfx-viewport | HELD -> WIRED 2026-11-07 (un-hold section) | could not resolve `com.m3:m3-swing-viewport:0.1.0-SNAPSHOT` (its dependency is HELD) |
+| ports/parallel-bulk | HELD -> WIRED 2026-11-07 (un-hold section) | run 1: Ant `<copy>` from `../../../src/java.base/.../jdk/internal/vm/parallel` (outside the `m3/` sparse checkout, environment); re-gate after adding that path: `maven-compiler-plugin:3.15.0:testCompile` failed: `Cannot invoke "java.util.Map.get(Object)" because the return value of "AbstractCompilerMojo.getPathElements()" is null` |
 | runtime-integration/fix | HELD | run 1: `FileNotFoundError src/hotspot/share/prims/jni.cpp` (sparse checkout, environment); re-gate: `FileNotFoundError src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java` (file absent from master) + `test_patch_and_dependency_identity` sha256 mismatch |
 | runtime-integration/fix-root-ascii-case | HELD | run 1: `FileNotFoundError src/java.base/share/classes/java/lang/String.java` (sparse checkout); re-gate: `ValueError: verification drift: test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java`, `'storage != null && locale.equals(Locale.ROOT)' not found` in String.java, identity sha256 mismatch |
 | collections/pcollections | HELD | could not resolve `org.pcollections:pcollections:5.0.0-m3-source-1` (not in the local repos nor Central) |
@@ -102,3 +104,33 @@ Newly wired modules' own `verify`-phase results (their `package` gate was GREEN;
 
 `jdk_naming.py plan --only m3/pom.xml --only m3/qualification/reactor-wiring-20261107`: moves=0 rewrites=0 refusals=0
 (fixed point). Maven logs: `S:/m3-scratch/eb-conv/reactor/logs/` (sha256 of each gate log in `GATES.tsv`).
+
+## Un-hold 2026-11-07 (reactor-unhold-20261107; branch `m3/reactor-unhold-20261107a`)
+
+Build-configuration fixes only (poms, one Python test fixture); no production source touched. Every fix is a
+hash-pinned `EDITS.tsv` edit with a `//FLLDCIM: MRL` anchor; every module went through `unhold.sh` then one `gate.sh`
+run (`-pl <module> -am -DskipTests=false package`, module's own `-Werror`, JDK 21). Base: master `7b155a401e8` (#2781).
+
+| module | decision | fix (EDITS.tsv) | gate | own tests |
+|---|---|---|---|---|
+| ast | WIRED | `maven.compiler.source/target` 21 instead of `release` (javac refuses an add-exports of a java.base package together with `--release`); javac `--add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED` (the only `jdk.internal.org.objectweb.asm.*` package the test imports); surefire `argLine` with the same export. No m3 module had a JDK-internal-ASM precedent (`grep add-exports m3/**/pom.xml`: only vendored guava/eclipse-collections `-J` flags); the form is ports/parallel-bulk's. | gate-ast run 2, 28 s (run 1: non-parseable POM, `--` inside an XML comment of the fix; reworded) | 19 / 0 / 0 / 0 |
+| ports/swing-viewport | WIRED | test dependency `org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1` (the platform version `junit-jupiter:5.10.2-m3-source-1` already brings; jar with classes in the tail repo) | gate-ports-swing-viewport, 17 s | 375 / 0 / 0 / 0 |
+| ports/jfx-viewport | WIRED | none (its only error was the HELD dependency) | gate-ports-jfx-viewport, 13 s | no surefire |
+| ports/parallel-bulk | WIRED | maven-compiler-plugin 3.13.0 (every other m3 module; m3/pom.xml has no pluginManagement) did NOT remove the testCompile NPE (`AbstractCompilerMojo.execute:1152`, `getPathElements()` null for a test compile without a module descriptor when `--patch-module`/`--add-exports` are given as two tokens: the plugin's `META-INF/jpms.args` post-processing); fix: one-token `--patch-module=java.base=...` and `--add-exports=java.base/jdk.internal.vm.parallel=ALL-UNNAMED` javac args (javac accepts `option=value`). The Ant `<copy>` source path of #2779 is kept (`src/java.base/share/classes/jdk/internal/vm/parallel` is in the sparse set). | gate-ports-parallel-bulk run 2, 5 s (run 1: 3.13.0 pin alone, same NPE) | 6 / 0 / 0 / 0 |
+| history | WIRED | test-harness fix in `test_audit.py` setUp: on `os.name == 'nt'` the odd fixture path is `spaces tab and newlines-λ.java` (NTFS refuses tab/newline: `OSError 22`); POSIX fixture unchanged; `test_odd_paths_binary_patches_and_hashes` still asserts the JSON path round trip. Not a contract change. | gate-history, 44 s (unittest: 78 tests OK; was 22 errors) | python unittest 78 OK |
+| ports/compiletime | HELD (re-confirmed, no Maven run) | `org.ow2.asm:asm{,-tree,-analysis}:9.6-m3-source-1`: only `.lastUpdated` markers in both local repos, not in Central | reconfirm-ports-compiletime | - |
+| collections/pcollections | HELD (re-confirmed) | `org.pcollections:pcollections:5.0.0-m3-source-1`: only `.lastUpdated` markers (tail repo has 3.2.0, 4.0.2) | reconfirm-collections-pcollections | - |
+| runtime-integration/fix | HELD (re-confirmed) | `manifest.json`/`runtime.patch` pin `src/hotspot/share/prims/jni.cpp` (moved java.base/hotspot input outside `m3/`: lane d7) | reconfirm-runtime-integration-fix | - |
+| runtime-integration/fix-root-ascii-case | HELD (re-confirmed) | `test_fix.py:108` pins `src/java.base/share/classes/java/lang/String.java` (lane d7 input) | reconfirm-runtime-integration-fix-root-ascii-case | - |
+
+Full-reactor runs (`mvn -B -ntp -T1 -fae -f m3/pom.xml verify -Dmaven.test.failure.ignore=true`, both on master `7b155a401e8`):
+
+| run | pom | result |
+|---|---|---|
+| baseline-post2781-verify | untouched (#2779 wiring as merged) | 3243 tests, 2 failures, 2 errors, 162 skipped; `BASELINE_POST2781_FAILING.tsv` = 12 rows, byte-identical to `FULL_FAILING.tsv` (#2781 changed no module result) |
+| full-verify-unhold | this branch | 3643 tests, 2 failures, 2 errors, 162 skipped; `FULL_UNHOLD_FAILING.tsv` byte-identical to `BASELINE_POST2781_FAILING.tsv`; the only per-module differences are the 5 added SUCCESS rows (ast 19, swing-viewport 375, parallel-bulk 6, jfx-viewport and history-audit-recipe: no surefire; history's `verify`-phase `audit.py` exec SUCCESS) |
+
+Tool fixes in this directory: `gate.sh` records the log path it actually wrote (`cygpath -m "$LOG"`) and strips any `wt-*`
+worktree prefix from the first-error file; `reconfirm.sh` adds a DECISION.tsv row for a HELD module from CPU evidence
+without a Maven run. After its gate the ast pom received one comment-only edit (`M3JDK21` -> `M3JDK 21`, jdk_naming
+`PROSE_PRODUCT_VERSION`); `jdk_naming.py plan --only <touched files>` ends at `moves=0 rewrites=0 refusals=0`.
