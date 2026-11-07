@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.util.concurrent.CancellationException;
+import jdk.internal.m3.collections.M3ShadowStreams;
 
 /** Dependency-light progress/cancellation SPI shared below job and collection layers. */
 public interface M3ProgressMonitor {

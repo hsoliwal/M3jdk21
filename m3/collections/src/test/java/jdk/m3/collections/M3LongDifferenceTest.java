@@ -2,6 +2,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LongDifferenceContract;
 
 /** Existing Maven/Surefire collection owner: LeetCode category JNI parity. */
 final class M3LongDifferenceTest {

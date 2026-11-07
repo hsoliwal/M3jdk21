@@ -9,6 +9,7 @@ import java.util.Spliterator;
 import java.util.TreeSet;
 import java.util.function.LongPredicate;
 import java.util.stream.StreamSupport;
+import jdk.internal.m3.collections.M3LongCompositeViews;
 
 /** Bounded contract oracle: stream/spliterator acquisition never opens source iterators. */
 public final class M3LongCompositeLateBindSelfTest {

@@ -3,6 +3,9 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3FilteredListsContract;
+import jdk.internal.m3.collections.M3FilteredListsEdges;
+import jdk.internal.m3.collections.M3FilteredListsWorkProof;
 
 /** Maven/JUnit receiver, authored but not represented as an executed SDK/JUnit run. */
 class M3FilteredListsTest {

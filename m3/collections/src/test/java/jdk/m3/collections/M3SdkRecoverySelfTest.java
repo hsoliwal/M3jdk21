@@ -17,6 +17,8 @@ import java.util.Random;
 import java.util.RandomAccess;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import jdk.internal.m3.collections.M3CollectionSdk;
+import jdk.internal.m3.collections.M3IndexPartitions;
 
 /** Deterministic Java21 SDK contract oracle; --native requires actual JNI. */
 public final class M3SdkRecoverySelfTest {

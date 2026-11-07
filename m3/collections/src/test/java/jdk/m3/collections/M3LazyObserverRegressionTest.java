@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LazyEventBits;
 
 /** Independent receiver regressions for caller code crossing a lazy slot boundary. */
 final class M3LazyObserverRegressionTest {

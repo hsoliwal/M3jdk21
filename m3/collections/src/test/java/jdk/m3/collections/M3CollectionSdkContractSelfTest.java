@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import jdk.internal.m3.collections.M3CollectionSdkNames;
+import jdk.internal.m3.collections.M3IndexedMultiValueMap;
 
 /** Dependency-free Java21 differential oracle. No external provider dependency or fake adapter. */
 public final class M3CollectionSdkContractSelfTest {

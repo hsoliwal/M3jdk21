@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.function.LongPredicate;
+import jdk.internal.m3.collections.M3PrimitiveFilteredSequences;
 
 /** Protected public-API oracle; its backing payload is the actual M3LongArrayDeque. */
 public final class M3FilteredDequeDispatchProof {

@@ -17,6 +17,7 @@ package jdk.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongConsumer;
+import jdk.internal.m3.collections.M3PrimitiveBits;
 
 /**
  * Mutable 1..64-bit signed/unsigned sequence in one primitive word array.

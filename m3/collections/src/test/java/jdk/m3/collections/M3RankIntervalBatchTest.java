@@ -2,6 +2,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3RankIntervalBatchContract;
 
 /** Original owner Java/JNI interval-batch JUnit adapter. */
 final class M3RankIntervalBatchTest {

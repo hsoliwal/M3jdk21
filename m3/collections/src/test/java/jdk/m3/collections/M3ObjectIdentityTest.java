@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3ObjectIdentityMap;
 
 /**
  * Finite differential comparisons of the identity owners against {@link IdentityHashMap} and

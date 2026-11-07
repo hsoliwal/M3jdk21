@@ -56,7 +56,7 @@ public class M3BitLanesTest {
 	}
 
 	private static Object lanes (int count) throws Exception {
-		return construct ("jdk.m3.collections.M3BitLanes", new Class<?> [] {int.class}, count);
+		return construct ("jdk.internal.m3.collections.M3BitLanes", new Class<?> [] {int.class}, count);
 	}
 
 	/** Oracle: a growable list of boolean rows per lane. */
@@ -203,9 +203,9 @@ public class M3BitLanesTest {
 
 	@Test
 	public void test_blockCacheReservesEvictsLeastRecentAndProtectsCurrentFrame () throws Exception {
-		Object cache = construct ("jdk.m3.collections.M3BlockCache", new Class<?> [] {int.class, int.class, int.class}, 4, 3, 2);
-		int loaded = staticInt ("jdk.m3.collections.M3BlockStore", "LOADED");
-		int pending = staticInt ("jdk.m3.collections.M3BlockStore", "PENDING");
+		Object cache = construct ("jdk.internal.m3.collections.M3BlockCache", new Class<?> [] {int.class, int.class, int.class}, 4, 3, 2);
+		int loaded = staticInt ("jdk.internal.m3.collections.M3BlockStore", "LOADED");
+		int pending = staticInt ("jdk.internal.m3.collections.M3BlockStore", "PENDING");
 		call (cache, "nextFrame");
 		int a = (int) call (cache, "reserve", -1, 0);
 		int b = (int) call (cache, "reserve", -1, 1);
@@ -233,7 +233,7 @@ public class M3BitLanesTest {
 	}
 
 	private static Object selection () throws Exception {
-		return construct ("jdk.m3.collections.M3RangeSet", new Class<?> [0]);
+		return construct ("jdk.internal.m3.collections.M3RangeSet", new Class<?> [0]);
 	}
 
 	private static void assertSelectionSame (boolean [] oracle, Object model) throws Exception {

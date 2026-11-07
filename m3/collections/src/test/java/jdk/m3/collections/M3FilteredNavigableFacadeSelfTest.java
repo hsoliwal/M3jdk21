@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Predicate;
+import jdk.internal.m3.collections.M3FilteredNavigableSet;
 
 /** Dependency-free Java 21 differential and complexity-shape oracle. */
 public final class M3FilteredNavigableFacadeSelfTest {

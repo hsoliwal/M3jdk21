@@ -40,7 +40,7 @@ public class M3ColumnarLanesTest {
 
 	private static Object construct (int objectFields, int [] intDefaults, int columns) {
 		try {
-			Constructor<?> constructor = Class.forName ("jdk.m3.collections.M3ColumnarLanes").getDeclaredConstructor (int.class, int [].class, int.class);
+			Constructor<?> constructor = Class.forName ("jdk.internal.m3.collections.M3ColumnarLanes").getDeclaredConstructor (int.class, int [].class, int.class);
 			constructor.setAccessible (true);
 			return constructor.newInstance (objectFields, intDefaults, columns);
 		} catch (ReflectiveOperationException failure) {

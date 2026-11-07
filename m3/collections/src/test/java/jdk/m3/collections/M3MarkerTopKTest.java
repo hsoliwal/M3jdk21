@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3MarkerTopKContract;
+import jdk.internal.m3.collections.M3MarkerTopKIndex;
+import jdk.internal.m3.collections.M3SortSignalLane;
+import jdk.internal.m3.collections.M3SortableFirstSignalOrder;
 
 /** Oracle and canonical first-@Sortable signal owner integration. */
 final class M3MarkerTopKTest {

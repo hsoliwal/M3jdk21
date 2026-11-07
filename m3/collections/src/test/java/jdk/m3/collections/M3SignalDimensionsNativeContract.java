@@ -3,6 +3,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
+import jdk.internal.m3.collections.M3SignalDimensions;
 
 /** Actual JNI differential parity using the existing M3 stable unsigned radix symbol. */
 public final class M3SignalDimensionsNativeContract {

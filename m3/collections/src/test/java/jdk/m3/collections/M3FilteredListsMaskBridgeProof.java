@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Spliterator;
+import jdk.internal.m3.collections.M3FilteredLists;
 
 /**
  * Java 21 reference proof: live filtered List semantics against detached

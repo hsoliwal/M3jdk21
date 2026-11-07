@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import jdk.internal.m3.collections.M3LazyElementFlags;
 
 /**
  * Parent-owned residency for transient object facades over stable logical IDs.

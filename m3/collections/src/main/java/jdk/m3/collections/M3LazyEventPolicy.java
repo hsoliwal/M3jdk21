@@ -4,6 +4,7 @@
 package jdk.m3.collections;
 
 import java.util.Objects;
+import jdk.internal.m3.collections.M3LazyEventBits;
 
 /** Immutable bitmask and granularity policy for lazy operation observation. */
 public record M3LazyEventPolicy(

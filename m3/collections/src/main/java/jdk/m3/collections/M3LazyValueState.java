@@ -7,6 +7,10 @@ package jdk.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
+import jdk.internal.m3.collections.M3LazyEventBits;
+import jdk.internal.m3.collections.M3LazyEvents;
+import jdk.internal.m3.collections.M3ProgressScope;
+import jdk.internal.m3.collections.M3SystemProgress;
 
 /** Optional state lane; values remain exclusively in the incumbent tree's payload array. */
 final class M3LazyValueState<K, V> {

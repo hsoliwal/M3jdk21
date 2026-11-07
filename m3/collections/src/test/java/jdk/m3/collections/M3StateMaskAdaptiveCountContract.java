@@ -16,6 +16,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
+import jdk.internal.m3.collections.M3StateMaskHistogram;
 
 /**
  * Real M3JDK 21 Java21 array/index/state-mask oracle for both exact-byte and

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
+import jdk.internal.m3.collections.M3InternalLeaseRecycler;
 public final class M3InternalLeaseRecyclerLazySelfTest {
  private static int checks;
  private static void check(boolean ok,String message) {checks++;if(!ok)throw new AssertionError(message);}

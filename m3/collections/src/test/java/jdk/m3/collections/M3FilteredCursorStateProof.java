@@ -15,6 +15,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+import jdk.internal.m3.collections.M3FilteredLists;
 
 /** Pure Java 21 contract oracle for existing filtered list/deque/collection owners. */
 public final class M3FilteredCursorStateProof {

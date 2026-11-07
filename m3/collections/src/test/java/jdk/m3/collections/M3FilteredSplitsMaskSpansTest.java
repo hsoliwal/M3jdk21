@@ -15,6 +15,10 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LongIndexPathMasksJNI;
+import jdk.internal.m3.collections.M3LongRankBatchNative;
+import jdk.internal.m3.collections.M3ResidencyStateMaskIndex;
+import jdk.internal.m3.collections.M3StateMaskHistogram;
 
 final class M3FilteredSplitsMaskSpansTest {
     @Test void filteredRecursiveSplits() { M3FilteredSplitContract.main(new String[0]); }

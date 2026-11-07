@@ -27,6 +27,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
+import jdk.internal.m3.collections.M3FilteredNavigableSet;
 
 /** Endpoint refusal must precede observation of a strict filtered owner. */
 public final class M3FilteredFacadeEndpointContract {

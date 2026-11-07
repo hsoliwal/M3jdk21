@@ -14,6 +14,8 @@ import java.util.Random;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.BiPredicate;
+import jdk.internal.m3.collections.M3CollectionSdk;
+import jdk.internal.m3.collections.M3IndexedMultiValueMap;
 
 /** Differential proof of SDK factories over the existing M3 array/index/mask owners. */
 public final class M3SdkOwnerFactorySelfTest {

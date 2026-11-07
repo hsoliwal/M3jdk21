@@ -3,6 +3,10 @@
 package jdk.m3.collections;
 
 import static jdk.m3.collections.M3PolicyAssertions.*;
+import jdk.internal.m3.collections.M3ForwardingLongSequence;
+import jdk.internal.m3.collections.M3LongSequenceCompletion;
+import jdk.internal.m3.collections.M3LongSequenceMetrics;
+import jdk.internal.m3.collections.M3ObservedLongSequence;
 
 //FLLDCIM: RELOCATE - donor blob acc0f167caa7 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class M3ObserverIsolationProof {

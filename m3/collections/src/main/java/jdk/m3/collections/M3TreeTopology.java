@@ -20,6 +20,7 @@
 package jdk.m3.collections;
 
 import java.util.*;
+import jdk.internal.m3.collections.M3OrderStatisticForest;
 
 /**
  * Sparse columnar topology for materialized coordinates of a virtual Tree.

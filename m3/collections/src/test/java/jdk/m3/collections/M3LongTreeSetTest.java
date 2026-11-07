@@ -17,6 +17,7 @@ import java.util.Random;
 import java.util.Spliterator;
 import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LongCompositeViews;
 
 /**
  * Finite differential comparison of {@link M3LongTreeSet} against {@code TreeSet<Long>} as a

@@ -3,6 +3,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3WindowPlanChangeContract;
 
 /** Discovery hook: run the complete strict Java21 model-to-viewport delta oracle. */
 public final class M3WindowPlanChangeTest {

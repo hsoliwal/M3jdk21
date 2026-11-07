@@ -196,7 +196,7 @@ public class M3TreeWindowScenarioTest {
 	}
 	/** Target the real package-owned Tree viewport, never a synthetic adapter. */
 	private static Object viewport (Object projection, int overscan) throws Exception {
-		Class<?> type = Class.forName ("jdk.m3.collections.M3TreeWindow");
+		Class<?> type = Class.forName ("jdk.internal.m3.collections.M3TreeWindow");
 		Constructor<?> constructor = type.getDeclaredConstructor (projection.getClass (), int.class);
 		constructor.setAccessible (true);
 		return constructor.newInstance (projection, overscan);
@@ -281,7 +281,7 @@ public class M3TreeWindowScenarioTest {
 
 	@Test
 	public void nativeOverscanPressureOraclePreservesVisibleAndCapacity () throws Exception {
-		Class<?> type = Class.forName ("jdk.m3.collections.M3TreeWindow");
+		Class<?> type = Class.forName ("jdk.internal.m3.collections.M3TreeWindow");
 		Method method = type.getDeclaredMethod ("adaptiveOverscan", int.class, int.class,
 				int.class, long.class, long.class);
 		method.setAccessible (true);

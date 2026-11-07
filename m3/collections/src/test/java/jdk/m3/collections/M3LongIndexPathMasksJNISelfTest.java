@@ -6,6 +6,7 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import jdk.internal.m3.collections.M3LongIndexPathMasksJNI;
 
 /** Java21 oracle of the optional real JNI Region backend (no native stand-in). */
 public final class M3LongIndexPathMasksJNISelfTest {

@@ -6,6 +6,7 @@
 package jdk.m3.collections;
 
 import java.util.Objects;
+import jdk.internal.m3.collections.M3LaneSearch;
 
 /**
  * Immutable occurrence-rank index for a strided, mask-filtered primitive row path.

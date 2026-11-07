@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+import jdk.internal.m3.collections.M3IndexedMultiValueMap;
 
 /**
  * Independent ordered-multimap oracle for slot unlink, duplicate/null state,

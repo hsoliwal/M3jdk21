@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3ShortLabel;
 
 /**
  * Pool-on versus pool-off differential of {@link M3LabelLanes}: the same seeded

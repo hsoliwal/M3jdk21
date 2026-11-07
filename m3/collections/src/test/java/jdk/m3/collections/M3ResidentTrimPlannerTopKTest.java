@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LazyElementFlags;
 
 /** Retains source module contract and runs the independent 499k-case oracle. */
 //FLLDCIM: RELOCATE - donor blob 7cd338c319a8 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4

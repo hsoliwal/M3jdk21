@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Spliterator;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3FilteredLists;
 
 /** JDK21 sorted-source interop; filtering never claims a sorted List spliterator. */
 class M3FilteredListsSortedInteropTest {

@@ -6,6 +6,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+import jdk.internal.m3.collections.M3InternalLeaseRecycler;
 
 /** JDK21-only lifecycle oracle: close may occur inside factory, rebind or action. */
 public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {

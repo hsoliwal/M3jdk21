@@ -3,6 +3,10 @@ package jdk.m3.collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LazyElementFlags;
+import jdk.internal.m3.collections.M3PrimitiveRowProvider;
+import jdk.internal.m3.collections.M3ProviderBackedPrimitiveRows;
+import jdk.internal.m3.collections.M3ProviderLoadException;
 
 class M3ProviderBackedPrimitiveRowsTest {
 

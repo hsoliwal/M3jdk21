@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
+import jdk.internal.m3.collections.M3ObservableList;
 
 /** Standalone Java 21 differential contract for observable indexed selection. */
 public final class M3ObservableIndexedViewsContract {

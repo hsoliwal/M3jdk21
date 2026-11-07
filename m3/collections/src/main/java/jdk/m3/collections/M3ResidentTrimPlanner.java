@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.collections;
 
+import jdk.internal.m3.collections.M3LazyElementFlags;
+
 /**
  * Cold-path, index-only LRU victim selection for parent-owned facades.
  * No Entry/Node/Consumer or copied timestamp lanes; public pinned identity wins.

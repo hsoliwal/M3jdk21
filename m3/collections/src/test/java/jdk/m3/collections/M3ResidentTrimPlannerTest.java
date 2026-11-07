@@ -4,6 +4,7 @@ package jdk.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LazyElementFlags;
 
 //FLLDCIM: RELOCATE - donor blob 64273bba6a26 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
 class M3ResidentTrimPlannerTest {

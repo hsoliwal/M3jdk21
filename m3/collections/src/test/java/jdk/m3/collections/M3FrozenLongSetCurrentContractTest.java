@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 import java.util.SplittableRandom;
 import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3LaneSearch;
 
 /** Current-receiver regression for original scaffold identity and shared lower-bound kernel. */
 final class M3FrozenLongSetCurrentContractTest {

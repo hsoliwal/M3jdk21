@@ -2,6 +2,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3DisjointIndexSelfTest;
 
 final class M3DisjointIndexTest {
     @Test void indexedUnionAndMasksAgainstIndependentGraph() {

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.LongPredicate;
+import jdk.internal.m3.collections.M3LaneSearch;
 
 /**
  * Detached, immutable primitive-long sorted-set snapshot with precomputed rank/select geometry.

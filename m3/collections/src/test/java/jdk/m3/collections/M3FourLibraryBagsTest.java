@@ -10,6 +10,9 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.M3BagAlgebraProof;
+import jdk.internal.m3.collections.M3BagMapFailureProof;
+import jdk.internal.m3.collections.M3FourLibraryBagsReferenceModel;
 
 /**
  * Owning-module JUnit test of the relocated packed long bag and map (recipe four-library-bags-20261106): the crate's

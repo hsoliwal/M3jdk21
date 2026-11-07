@@ -19,6 +19,7 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+import jdk.internal.m3.collections.M3FilteredNavigableSet;
 
 /** Stored string references and owner equivalence survive filtered view composition. */
 public final class M3FilteredSortedRepresentativeContract {

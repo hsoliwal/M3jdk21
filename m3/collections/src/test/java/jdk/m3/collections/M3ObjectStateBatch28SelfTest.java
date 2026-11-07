@@ -3,6 +3,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
+import jdk.internal.m3.collections.M3ObjectStateBatch28;
 
 /** Deterministic generation-safe array/offset/mask differential oracle. */
 public final class M3ObjectStateBatch28SelfTest {

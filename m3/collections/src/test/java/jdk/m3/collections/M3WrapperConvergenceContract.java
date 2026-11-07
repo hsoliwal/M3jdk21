@@ -19,6 +19,7 @@ import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import jdk.internal.m3.collections.M3FilteredLists;
 
 /**
  * Frozen Java 21 wrapper counterexamples and contract checks.

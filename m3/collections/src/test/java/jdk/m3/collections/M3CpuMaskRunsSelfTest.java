@@ -4,6 +4,7 @@ package jdk.m3.collections;
 
 import java.util.ArrayList;
 import java.util.List;
+import jdk.internal.m3.collections.M3CpuMaskRuns;
 
 /** Dependency-free JDK21 executable contract oracle for the CPU mask-runs atom. */
 public final class M3CpuMaskRunsSelfTest {

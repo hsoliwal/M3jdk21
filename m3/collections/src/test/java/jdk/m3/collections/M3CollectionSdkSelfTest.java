@@ -13,6 +13,9 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
+import jdk.internal.m3.collections.M3CollectionSdk;
+import jdk.internal.m3.collections.M3CollectionSdkCatalog;
+import jdk.internal.m3.collections.M3CollectionSdkCatalogSelfTest;
 
 /** Standalone Java 21 SDK naming and existing-wrapper differential oracle. */
 public final class M3CollectionSdkSelfTest {
