@@ -51,7 +51,7 @@ elif [ -n "$E_TEST" ]; then
 elif [ -n "$E_GOAL" ]; then EF="$FAILED_PROJECT"; EL="-"; EM=$(echo "$E_GOAL" | sed -E 's/^\[ERROR\] //')
 elif [ -n "$E_ANY" ]; then EF="-"; EL="-"; EM=$(echo "$E_ANY" | sed -E 's/^\[ERROR\] //')
 else EF="-"; EL="-"; EM="-"; fi
-EF=$(echo "$EF" | sed -E 's#^/?[A-Za-z]:[/\\]m3-scratch[/\\]eb-conv[/\\]wt-reactor[/\\]##' | tr '\\' '/' | tr '\t' ' ')
+EF=$(echo "$EF" | sed -E 's#^/?[A-Za-z]:[/\\]m3-scratch[/\\]eb-conv[/\\]wt-[a-z-]+[/\\]##' | tr '\\' '/' | tr '\t' ' ')
 EM=$(echo "$EM" | tr '\t' ' ' | cut -c1-400)
 LOGSHA=$(sha256sum "$LOG" | cut -c1-64)
 # 5 decision + recorded edit
@@ -72,6 +72,6 @@ fi
 test -f "$Q/DECISION.tsv" || printf 'section\tmodule\tlane\tdecision\tgav\treactor_deps\tgate\tbuild\tfailed_project\tfirst_error_file\tfirst_error_line\tfirst_error_message\town_tests\n' > "$Q/DECISION.tsv"
 test -f "$Q/GATES.tsv" || printf 'gate\tmodule\tcommand\tlog\trc\tbuild\twall_s\treactor_built\town_tests\tlog_sha256\n' > "$Q/GATES.tsv"
 printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$SECTION" "$M" "$LANE" "$DEC" "$GAV_FULL" "${RDEPS:--}" "gate-$SLUG" "$BUILD" "$FAILED_PROJECT" "$EF" "$EL" "$EM" "$OWN" >> "$Q/DECISION.tsv"
-printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "gate-$SLUG" "$M" "$CMD" "S:/m3-scratch/eb-conv/reactor/logs/gate-$SLUG.log" "$RC" "$BUILD" "$((T1-T0))" "${BUILT:--}" "$OWN" "$LOGSHA" >> "$Q/GATES.tsv"
+printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "gate-$SLUG" "$M" "$CMD" "$(cygpath -m "$LOG")" "$RC" "$BUILD" "$((T1-T0))" "${BUILT:--}" "$OWN" "$LOGSHA" >> "$Q/GATES.tsv"
 git add m3/pom.xml m3/qualification/reactor-wiring-20261107 && git commit -q -m "reactor-wiring: $M $DEC ($LANE)" || { echo "GATE_ABORT $M commit"; exit 7; }
 echo "GATE_DONE $M $DEC build=$BUILD rc=$RC wall=$((T1-T0))s own_tests=[$OWN] failed_project=$FAILED_PROJECT first_error=$EF:$EL $(echo "$EM" | cut -c1-160)"

@@ -66,17 +66,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.15.0</version>
+        <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ports/parallel-bulk: 3.13.0 as every other m3 module (3.15.0 testCompile NPE in AbstractCompilerMojo.getPathElements) -->
+        <version>3.13.0</version>
         <configuration>
           <source>21</source>
           <target>21</target>
           <proc>none</proc>
           <fork>true</fork>
           <compilerArgs>
-            <arg>--patch-module</arg>
-            <arg>java.base=${project.build.directory}/bulk-patch-classes</arg>
-            <arg>--add-exports</arg>
-            <arg>java.base/jdk.internal.vm.parallel=ALL-UNNAMED</arg>
+            <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ports/parallel-bulk: one-token option=value form (javac accepts it); the two-token form (option, value) makes maven-compiler-plugin 3.13.0 and 3.15.0 testCompile build META-INF/jpms.args and NPE in AbstractCompilerMojo.execute (getPathElements() is null for a test compile without a module descriptor) -->
+            <arg>--patch-module=java.base=${project.build.directory}/bulk-patch-classes</arg>
+            <arg>--add-exports=java.base/jdk.internal.vm.parallel=ALL-UNNAMED</arg>
             <arg>-Xlint:all,-module</arg>
             <arg>-Werror</arg>
           </compilerArgs>
