@@ -33,6 +33,10 @@ import java.util.function.IntConsumer;
  * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveRoaringIntSet {
+    /** Creates an empty set (explicit form of the default constructor; required by -Xlint:all -Werror). */
+    public M3PrimitiveRoaringIntSet() {
+    }
+
     private static final byte ARRAY = 0;
     private static final byte BITMAP = 1;
     private static final int ARRAY_TO_BITMAP = 4096;
