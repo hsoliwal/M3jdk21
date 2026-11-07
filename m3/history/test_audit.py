@@ -32,7 +32,10 @@ class HistoryContractTest(unittest.TestCase):
         self.git("checkout", "-b", "feature")
         (self.repo / "runtime.java").write_text("class RuntimeOwner {}\n")
         (self.repo / "evidence.json").write_text('{"status":"historical"}\n')
-        self.odd = 'spaces tab\tand\nnewlines-λ.java'
+        # //FLLDCIM: MRL - reactor-unhold-20261107 history: test-harness fix only; Windows (os.name == 'nt') refuses a file
+        # name with tab or newline (OSError 22), so the odd path keeps spaces and λ there; the POSIX fixture is unchanged.
+        self.odd = ('spaces tab and newlines-λ.java' if os.name == 'nt'
+                    else 'spaces tab\tand\nnewlines-λ.java')
         (self.repo / self.odd).write_text("same content\n")
         (self.repo / "duplicate.java").write_text("same content\n")
         (self.repo / "binary.dat").write_bytes(b"\0\xff\0\x81")
