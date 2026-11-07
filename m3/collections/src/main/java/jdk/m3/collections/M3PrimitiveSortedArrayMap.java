@@ -20,9 +20,9 @@ import java.util.Objects;
 /**
  * Read-dense sorted primitive map: binary search + parallel-array copy on mutation.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedArrayMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveSortedArrayMap.java}
  * blob {@code b9cfb4b013c01db233f6ea5e6a1fa53de06951dd} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveSortedArrayMap {
     @FunctionalInterface

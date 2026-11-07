@@ -21,9 +21,9 @@ import java.util.Objects;
  *
  * <p>The recursive call stack is O(log n); retained tree state has no node/tag objects.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/RangeAddLongSumTree.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/RangeAddLongSumTree.java}
  * blob {@code 756fe761bc764843bfd897df15a91c02a0cb2984} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3RangeAddLongSumTree {
     private final int size;

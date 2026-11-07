@@ -28,9 +28,9 @@ import java.util.function.IntConsumer;
  * <p>Iteration order is unsigned-int order because chunk keys are the unsigned
  * high 16 bits.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveRoaringIntSet.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveRoaringIntSet.java}
  * blob {@code 6b9b17a4e38de9b4566e955d106ca440e9d0bde7} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveRoaringIntSet {
     /** Creates an empty set (explicit form of the default constructor; required by -Xlint:all -Werror). */

@@ -20,9 +20,9 @@ import java.util.Objects;
 /**
  * Immutable sorted-unique int dictionary for coordinate/value compression.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntCoordinateCompressor.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntCoordinateCompressor.java}
  * blob {@code 8d00ada0cdf023c181da4730335eb308bc616f81} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3IntCoordinateCompressor {
     private final int[] values;

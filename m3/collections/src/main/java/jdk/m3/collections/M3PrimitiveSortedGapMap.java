@@ -20,9 +20,9 @@ import java.util.Objects;
 /**
  * Sorted exact-width primitive map with aligned key/value lanes and one movable sparse gap.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedGapMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveSortedGapMap.java}
  * blob {@code 8e575aa0e0178149178c2248bd4e8127f0ba3c47} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveSortedGapMap {
     @FunctionalInterface

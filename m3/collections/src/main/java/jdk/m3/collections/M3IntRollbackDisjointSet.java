@@ -23,9 +23,9 @@ import java.util.Arrays;
  * deliberately omitted so snapshots can be restored exactly; union-by-size
  * keeps find depth logarithmic.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntRollbackDisjointSet.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntRollbackDisjointSet.java}
  * blob {@code a3139dfd0fa7b70578e61f22fa5afa006fbb57df} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3IntRollbackDisjointSet {
     private final int[] parentOrSize;

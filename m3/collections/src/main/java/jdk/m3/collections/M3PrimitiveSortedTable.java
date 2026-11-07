@@ -23,9 +23,9 @@ import java.util.Objects;
  * <p>Cells are ordered lexicographically by row then column. There is no nested
  * Map-of-Map graph and no Cell/Entry object retained per mapping.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedTable.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveSortedTable.java}
  * blob {@code e6c9d1fe866974ff5eeba8f79cfa00b19cb3f1f5} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveSortedTable {
     @FunctionalInterface

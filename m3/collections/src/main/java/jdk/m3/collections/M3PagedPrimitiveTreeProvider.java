@@ -19,9 +19,9 @@ package jdk.m3.collections;
  *
  * <p>Child IDs are written into caller-owned reusable storage and must not be retained.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PagedPrimitiveTreeProvider.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PagedPrimitiveTreeProvider.java}
  * blob {@code 383e86bf0b4fd741533137948c7fb47370292a50} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public interface M3PagedPrimitiveTreeProvider extends M3PrimitiveRowProvider {
 

@@ -24,9 +24,9 @@ import java.util.Objects;
  * slots. Presence costs one bit per possible key. No key array or hash metadata
  * is retained.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectShortMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveDirectShortMap.java}
  * blob {@code 86d5e373df4f361c2c4ed8474521c23c149df5ce} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveDirectShortMap {
     private static final int DOMAIN_SIZE = 1 << Short.SIZE;

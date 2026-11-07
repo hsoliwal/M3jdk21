@@ -27,9 +27,9 @@ import java.util.function.Consumer;
  * compacted away before the candidate is appended. Storage is one Object[]
  * reference lane; there is no hash node, tree node or wrapper per element.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/DenseDominanceSet.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/DenseDominanceSet.java}
  * blob {@code 1e03e2f85a749a4fde9aa9bc9a2857467c6eb50f} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3DenseDominanceSet<E> {
     private Object[] elements;

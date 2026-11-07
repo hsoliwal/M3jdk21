@@ -22,9 +22,9 @@ import java.util.Objects;
  *
  * <p>All graph and search state is primitive arrays. Augmenting-path DFS is iterative.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntBipartiteMatcher.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntBipartiteMatcher.java}
  * blob {@code ff70d6cc7710ad481b3d6285e1b693ad68859c87} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3IntBipartiteMatcher {
     private static final int INF = Integer.MAX_VALUE;

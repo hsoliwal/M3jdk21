@@ -25,9 +25,9 @@ import java.util.function.LongConsumer;
  * occupancy/tombstone lane and no per-entry object. Deletion uses backward
  * shifting.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveHashSet.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveHashSet.java}
  * blob {@code 3c757420722cb2cd5aa9d65b25546014f6031b08} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveHashSet {
     private final M3PrimitiveKind kind;

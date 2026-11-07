@@ -37,9 +37,9 @@ import java.util.function.LongUnaryOperator;
  * require multiple refinements. Worst-case certification can evaluate all remaining items;
  * this is not a promise of uniformly distributed work or bounded peek latency.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/LongLazyPriorityFrontier.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/LongLazyPriorityFrontier.java}
  * blob {@code 63b800324034f0fcb626e7d6e62a2c1cb23ba064} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3LongLazyPriorityFrontier {
     private long[] ids;

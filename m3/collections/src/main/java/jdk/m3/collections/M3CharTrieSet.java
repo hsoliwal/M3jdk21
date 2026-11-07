@@ -24,9 +24,9 @@ import java.util.Objects;
  * next-sibling index and one terminal byte; no node object or retained String is
  * allocated per prefix component.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/CharTrieSet.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/CharTrieSet.java}
  * blob {@code a2f9bcd5e71965b49178b24271ee307d1dd007b6} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3CharTrieSet {
     private char[] label;

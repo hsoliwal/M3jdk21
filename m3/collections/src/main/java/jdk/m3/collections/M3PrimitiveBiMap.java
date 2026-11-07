@@ -22,9 +22,9 @@ import java.util.Objects;
  * <p>Keys and values are duplicated across two flat primitive tables to provide
  * O(1) lookup in both directions; there is still no object per mapping.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBiMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveBiMap.java}
  * blob {@code 27e6ac6606ccbf681c7a254a235fa03de925c380} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveBiMap {
     @FunctionalInterface
