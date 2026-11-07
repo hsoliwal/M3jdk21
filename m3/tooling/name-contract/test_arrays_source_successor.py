@@ -21,13 +21,28 @@ class ArraysJdk8309665SourceTest(unittest.TestCase):
         current = VERIFY.read(VERIFY.ROOT / VERIFY.SOURCE)
         patch = VERIFY.read(FILE.parent / "jdk-8309665.patch.txt")
         with self.assertRaisesRegex(ValueError, "identity drift"):
-            VERIFY.reverse_patch(current + b"\n// mutated\n", patch)
+            VERIFY.reconstruct_source_chain(current + b"\n// mutated\n", VERIFY.read(VERIFY.CURRENT_PATCH), patch)
 
     def test_patch_mutation_rejected(self):
         current = VERIFY.read(VERIFY.ROOT / VERIFY.SOURCE)
         patch = VERIFY.read(FILE.parent / "jdk-8309665.patch.txt")
         with self.assertRaisesRegex(ValueError, "identity drift"):
-            VERIFY.reverse_patch(current, patch + b"\n# mutated\n")
+            VERIFY.reconstruct_source_chain(current, VERIFY.read(VERIFY.CURRENT_PATCH), patch + b"\n# mutated\n")
+
+    def test_live_successor_patch_mutation_rejected(self):
+        with self.assertRaisesRegex(ValueError, "identity drift"):
+            VERIFY.reconstruct_source_chain(
+                VERIFY.read(VERIFY.ROOT / VERIFY.SOURCE),
+                VERIFY.read(VERIFY.CURRENT_PATCH) + b"\n# mutated\n",
+                VERIFY.read(FILE.parent / "jdk-8309665.patch.txt"))
+
+    def test_original_and_intermediate_source_pins_survive_live_successor(self):
+        historical, original = VERIFY.reconstruct_source_chain(
+            VERIFY.read(VERIFY.ROOT / VERIFY.SOURCE), VERIFY.read(VERIFY.CURRENT_PATCH),
+            VERIFY.read(FILE.parent / "jdk-8309665.patch.txt"))
+        self.assertEqual(VERIFY.git_blob(historical), VERIFY.NEW_BLOB)
+        self.assertEqual(VERIFY.git_blob(original), VERIFY.OLD_BLOB)
+        self.assertNotEqual(historical, original)
 
 
 if __name__ == "__main__":

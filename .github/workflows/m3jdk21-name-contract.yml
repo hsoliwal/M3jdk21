@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Hitesh Soliwal and contributors to the Synexia Project.
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 mapped naming and package queue
 on:
@@ -15,6 +16,10 @@ on:
       - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
       - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
       - 'src/java.base/share/classes/module-info.java'
+      - 'src/java.base/share/classes/java/lang/Object.java'
+      - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
+      - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
+      - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
       - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
       - 'm3/tooling/name-contract/**'
       - '.github/workflows/m3jdk21-name-contract.yml'
@@ -55,6 +60,10 @@ jobs:
             test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c
             src/java.base/share/classes/module-info.java
             src/java.base/share/classes/java/lang/Class.java
+            src/java.base/share/classes/java/lang/Object.java
+            src/java.base/share/classes/java/security/SHA256Adapter.java
+            test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java
+            test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c
             src/java.base/share/classes/java/lang/M3StringRegexDp.java
             src/java.base/share/classes/java/util/regex/Matcher.java
             src/java.base/share/classes/jdk/internal/mindex/**

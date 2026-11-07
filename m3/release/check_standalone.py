@@ -21,6 +21,8 @@ in the working tree, two families of findings:
 Documentation and ledgers (Markdown, text, TSV, NOTICE/LICENSE, m3/docs, release audits) record lineage and
 attribution, which the absorb-first rule keeps; they are not counted. The baseline (STANDALONE_BASELINE.tsv) pins
 the count per kind: development mode fails when a kind grows; release mode fails unless every DEPENDENCY kind is 0.
+Only the exact structured canonical Maven receipt owner in release-contract.json is passive metadata; other
+references in that contract and all executable checkout/build references remain scanned.
 --tree REV scans the files of a revision from their blobs instead of the working tree, so a sparse checkout scans
 everything (nothing is unscanned) and a commit can be checked before it is checked out.
 CLI: python -I check_standalone.py [--root DIR] [--tree REV] [--release] [--tsv OUT] [--write-baseline]
@@ -28,6 +30,7 @@ CLI: python -I check_standalone.py [--root DIR] [--tree REV] [--release] [--tsv 
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import subprocess
@@ -63,6 +66,60 @@ RULES = (
     ("N_NAME", re.compile(r"\bSynexia\w*|\bSYNEXIA_\w+|\bsynexia[-_]\w+|\bcom\.synexia\b")),
 )
 POM_NS = re.compile(r"^\{[^}]*\}")
+PASSIVE_MAVEN_OWNER = re.compile(
+    r'"M3_MAVEN_CONTROL_REACTOR"\s*:\s*"(?P<owner>hsoliwal/com\.synexia)"')
+
+
+def dependency_scan_text(path: str, text: str) -> str:
+    """Mask only the canonical recipe receipt's structured owner value.
+
+    A receipt owner is provenance, not a checkout or runtime dependency. The
+    surrounding contract remains scanned, including commands on the same line.
+    Malformed/duplicate-key JSON or ambiguous occurrences get no exemption.
+    This classifies metadata; it does not validate or execute a receipt.
+    """
+    if path != "m3/release/release-contract.json":
+        return text
+
+    def unique_fields(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("duplicate contract key")
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise ValueError("non-finite JSON constant: " + value)
+
+    try:
+        contract = json.loads(text, object_pairs_hook=unique_fields,
+                              parse_constant=reject_constant)
+        if not isinstance(contract, dict) or contract.get("schema") != "M3_RELEASE_CONTRACT_V1":
+            return text
+        evidence = contract.get("execution_evidence")
+        if not isinstance(evidence, dict) or evidence.get("schema") != "M3_RELEASE_EVIDENCE_V1":
+            return text
+        owners = evidence.get("gate_owners")
+        if not isinstance(owners, dict) or owners.get("M3_MAVEN_CONTROL_REACTOR") != "hsoliwal/com.synexia":
+            return text
+        pending, owner_count = [contract], 0
+        while pending:
+            value = pending.pop()
+            if isinstance(value, dict):
+                owner_count += value.get("M3_MAVEN_CONTROL_REACTOR") == "hsoliwal/com.synexia"
+                pending.extend(value.values())
+            elif isinstance(value, list):
+                pending.extend(value)
+        if owner_count != 1:
+            return text
+        matches = list(PASSIVE_MAVEN_OWNER.finditer(text))
+        if len(matches) != 1:
+            return text
+        start, end = matches[0].span("owner")
+        return text[:start] + " " * (end - start) + text[end:]
+    except (ValueError, RecursionError):
+        return text
 
 
 def tracked(root: Path, rev: str | None = None) -> list[str]:
@@ -158,14 +215,15 @@ def scan_text(path: str, text: str) -> list[tuple[str, str, int, str]]:
     In a pom, com.synexia groupId lines are left to maven_findings."""
     found = [("N_PATH", path, 0, path)] if "synexia" in path.lower() else []
     pom = is_pom(path)
-    for number, line in enumerate(text.splitlines(), 1):
+    original_lines = text.splitlines()
+    for number, line in enumerate(dependency_scan_text(path, text).splitlines(), 1):
         if pom and GROUP_ID_LINE.search(line):
             continue
         for kind, rule in RULES:
             if kind == "N_PACKAGE" and not path.endswith(".java"):
                 continue
             if rule.search(line):
-                found.append((kind, path, number, line.strip()[:200]))
+                found.append((kind, path, number, original_lines[number - 1].strip()[:200]))
                 break
     return found
 

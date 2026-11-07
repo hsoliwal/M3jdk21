@@ -4,7 +4,7 @@
 
 Release preparation has a visible home for intermediate results and unresolved
 work. Generate `current/admission.json`, `current/README.md` and `current/SHA256SUMS`
-with the commands in [the release guide](../README.md#inspect-readiness-and-publish-the-work-queue).
+with the commands in [the release guide](../README.md#exact-source-execution-evidence).
 The current report is tied to the inspected Git commit/tree. CI uploads these
 files and exposes the Markdown report in its run summary, including failures.
 A saved report is a snapshot; rerun it after any source or receipt changes.

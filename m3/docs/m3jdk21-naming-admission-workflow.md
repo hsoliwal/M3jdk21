@@ -16,7 +16,7 @@ reviewed stable capability ID there. No parallel list is authoritative.
 
 When a qualified M3 implementation is proven more efficient under all required contracts, it
 **becomes the internal body/atoms of the existing standard JDK class**. Separately, every standard
-Java API may have an optional additive public `com.m3.*` companion with useful static operations
+Java API may have an optional additive public `jdk.m3.*` companion with useful static operations
 on original Java values or typed views sharing an admitted owner. The standard type and its
 compatibility contract remain authoritative. No one-class-per-API rule or subclass requirement
 follows; final and sealed Java types keep their existing restrictions. For implementation work:
@@ -52,7 +52,7 @@ existing target owner first.
   `java.lang.M3*`, `java.util.M3*` or module-specific `com.sun.tools.javac.m3.M3*`
   owner. Keep those implementation packages internal; reconcile duplicate helpers only after
   dependency closure without deleting an admitted companion surface.
-- **Additive companion or other extension:** use an existing, separately admitted `com.m3.*`
+- **Additive companion or other extension:** use an existing, separately admitted `jdk.m3.*`
   module/package, with deliberate exports and full installed-image evidence; do not add the
   companion to `java.*` or rename its standard API. Share admitted owners instead of creating
   another payload store. `java.lang.M3String` and storage/precompute internals stay internal.
@@ -69,6 +69,10 @@ existing target owner first.
   to conceal unrelated changes. Formatting, moves, docs and source signatures are all
   SHA-256-sealed edits.
 
+Preserve the existing public `Object.toAdapter(Class<T>)` operation and the exact
+compatibility alias **`Object.toAdpater(Class<T>)`**. A spelling preference is not
+authorization to remove either published method or change a native consumer.
+
 ## One mapping record per capability, many-to-many atom lineage
 
 Before authoring a recipe, inventory existing source, snapshots/branch history and mapped
@@ -77,7 +81,8 @@ module, path, type, method/constructor descriptors, hashes, owners, aliases and 
 status. One donor may supply several JDK owners; several compatible donors may become one
 JDK internal atom. Splits, consolidations and package moves preserve the capability ID,
 source/target atom DAG relationships, older lineage and an explicit disposition for every
-left-behind helper.
+left-behind helper. Stable `synexia.*` capability IDs and historical `com.m3.*` donor
+symbols remain unchanged when current target Java packages use `jdk.m3.*`.
 
 The source of truth for received names is `name-mapping.json`. Synexia's
 `CANONICAL_RECIPE_HOME.tsv` maps **recipe ownership**, not JDK public symbols.
@@ -91,7 +96,7 @@ Keep its stable ID, exact target artifact, source lineage, status and existing r
 A relation documents the intended additional surface and never grants method coverage,
 substitutability or runtime qualification. There is no companion registry beside this map.
 
-The first source-inventoried example is `com.m3.arrays.M3Arrays` in module `com.m3.arrays`,
+The first source-inventoried example is `jdk.m3.arrays.M3Arrays` in module `jdk.m3.arrays`,
 at `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java`, with module descriptor
 `m3/arrays/src/main/java/module-info.java`. Its static factory/composition surface can be
 related to `java.base` / `java.util.Arrays` /
@@ -137,8 +142,8 @@ entire image or itself promote classes.** Its `READY_FOR_PINNED_REPLAY` decision
 only that the sealed recipe candidate may be attempted; the target acceptance decision is
 separately reviewed and must follow every actual proof command and readback.
 
-The synthetic demonstration retains `com.m3.example.StableList`'s public constructor and
-method while extracting a private-in-package `M3Slots` helper. It has no JDK runtime effect.
+The historical synthetic demonstration retains `com.m3.example.StableList`'s public constructor and
+method while extracting a private-in-package `M3Slots` helper. It has no JDK runtime effect and does not set the current companion namespace.
 Do not copy its synthetic ID, test receipts or package to `name-mapping.json`.
 
 ## Gates and promotion decision

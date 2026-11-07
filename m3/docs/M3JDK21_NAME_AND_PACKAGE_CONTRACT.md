@@ -11,7 +11,7 @@ The public `java.lang.String`, `java.lang.Class`, `java.util.HashMap`,
 method descriptors, superclass/interface shape and supported compatibility contracts.
 
 **Every standard Java API may also have an optional, additive public M3 companion.**
-Use the existing `com.m3.*` owner for useful static operations on original Java values
+Use the existing `jdk.m3.*` owner for useful static operations on original Java values
 or typed views sharing an admitted owner. A companion adds a separately documented
 surface; it does not replace the standard type, require callers to switch APIs for an
 internal optimization, or require one new class per Java API. Subclassing is not required.
@@ -46,13 +46,13 @@ a second registry. Preserve earlier lineage when packages/classes move.
 | Role | Actual class/package policy | File location |
 | --- | --- | --- |
 | Public JDK String | `java.lang.String`; use internal M3String owner/coordinates | `src/java.base/share/classes/java/lang/String.java` |
-| Public JDK collections | `java.util.*` / `java.util.concurrent.*` retain their contracts; additive companions use their own admitted `com.m3.*` surface | `src/java.base/share/classes/java/util/**`, `java/util/concurrent/**` |
+| Public JDK collections | `java.util.*` / `java.util.concurrent.*` retain their contracts; additive companions use their own admitted `jdk.m3.*` surface | `src/java.base/share/classes/java/util/**`, `java/util/concurrent/**` |
 | Public regex | `java.util.regex.Pattern` / `Matcher` stay public; internal M3TQ is fact/search helper | `src/java.base/share/classes/java/util/regex/**`; `jdk/internal/mindex/M3TQ.java` |
 | Public Class/reflection | `java.lang.Class`, `java.lang.reflect.*`; `M3Class` is internal | `src/java.base/share/classes/java/lang/**`; `jdk/internal/mindex/**` |
 | Internal string/array/index owners | Reuse already mapped `java.lang.M3String`, `jdk.internal.mindex.M3*`, qualified array/mask/lane owners | Owner module's `src/<module>/share/classes/<qualified-name>.java` |
 | Compiler/AST internals | `com.sun.tools.javac.*` or mapped compiler module owner; no `jdk.compiler` dependency leaking into `java.base` | `src/jdk.compiler/share/classes/**` |
-| Optional public M3 companion | Existing `com.m3.*` static operations or owner-sharing typed views; standard Java owner remains unchanged | Existing owner/module, initially `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java` in `com.m3.arrays` |
-| Isolated SDK/port candidate | Source presence or a `com.m3.*` name does not establish installed-image admission or standard-API equivalence | Existing `m3/<family>/**` source layout |
+| Optional public M3 companion | Existing `jdk.m3.*` static operations or owner-sharing typed views; standard Java owner remains unchanged | Existing owner/module, initially `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java` in `jdk.m3.arrays` |
+| Isolated SDK/port candidate | Source presence or a `jdk.m3.*` name does not establish installed-image admission or standard-API equivalence | Existing `m3/<family>/**` source layout |
 | JNI/HotSpot implementation | Target-owned symbols/headers in owning module; no stale heap pointer; preserve ABI | `src/<module>/share/native/**`, `src/hotspot/**` where applicable |
 | Recipe and evidence | Canonical reusable Maven/OpenRewrite implementation remains in Synexia; M3JDK target-only receiver, tests, jtreg and receipts here | Synexia `synexia-openrewrite-recipes/**`; target `m3/tooling/**` |
 
@@ -67,6 +67,32 @@ a public JDK overload, break native entry points, or change checked exceptions
 via text replacement. Atomization and JNI acceleration are implementation
 details of the existing contract.
 
+## Release naming and historical identities
+
+The preview display name is **M3JDK 21**, version **21.0.14**, with tag
+`m3jdk-21.0.14-m3.1-preview` and branch
+`release/m3jdk-21.0.14-m3.1-preview`. The release verifier checks these fields
+against `make/conf/version-numbers.conf`; `M3JDK21` remains the machine product ID.
+
+Current companion packages and modules use the exact `jdk.m3.` prefix, as
+verified by the existing array source and module descriptor. Similar prefixes,
+`jdk.internal.*`, standard `java.*` owners, and arbitrary companion module
+names are refused. Historical `com.m3.*` donor symbols and `synexia.*` capability
+IDs are retained as lineage data; they are not current package declarations.
+Do not rename stable IDs when source packages move.
+
+The published `Object` extension retains both `toAdapter(Class<T>)` and the
+exact compatibility spelling **`toAdpater(Class<T>)`**. Documentation, mapping,
+JNI consumers and test fixtures must preserve both names. This preparation
+changes naming metadata and tests, not those method declarations.
+
+The data-only [source identity receipt](../tooling/name-contract/receipts/release-preparation/source-identity.json)
+pins the inspected source and restores the original
+`synexia.lexicons.related-source-range` record without changing its
+`implemented-unverified` state. Prior symbols, method signatures and source
+hashes stay in lineage. Native-presence and pending-missing census rows remain
+explicitly unqualified.
+
 ## Companion relation in the existing authority
 
 Record a companion with the optional `migration.records[].companion_of` field in
@@ -79,7 +105,7 @@ Record a companion with the optional `migration.records[].companion_of` field in
     "symbol": "java.util.Arrays",
     "path": "src/java.base/share/classes/java/util/Arrays.java"
   },
-  "target_symbol": "com.m3.arrays.M3Arrays",
+  "target_symbol": "jdk.m3.arrays.M3Arrays",
   "form": "STATIC_OPERATIONS"
 }
 ```
@@ -91,8 +117,8 @@ receipts. Absence of `companion_of` leaves the original mapping meaning intact. 
 an additive relation in the same authority, not a new registry, a subclass requirement
 or a claim that every method of the Java API has a counterpart.
 
-The **first source-inventoried example** is the existing `com.m3.arrays.M3Arrays` in
-module `com.m3.arrays`, declared by `m3/arrays/src/main/java/module-info.java`. Its current
+The **first source-inventoried example** is the existing `jdk.m3.arrays.M3Arrays` in
+module `jdk.m3.arrays`, declared by `m3/arrays/src/main/java/module-info.java`. Its current
 static factories snapshot mutable arrays at an explicit ingress boundary; slices and
 joins use existing immutable owner/view contracts. Retain those semantics rather than
 claiming that snapshots share the caller's mutable array or that all `java.util.Arrays`
@@ -229,11 +255,13 @@ packages (including qualified exports and modules opened with runtime flags).
 It also inspects the installed `java.base` class resource index and
 public/protected JDK generic signatures, rejecting M3/MIndex/MatIndex types
 or renamed implementation types from `jdk.internal.m3`,
-`jdk.internal.mindex`, `com.sun.tools.javac.m3` or `com.m3.*`.
+`jdk.internal.mindex`, `com.sun.tools.javac.m3`, current `jdk.m3.*` or legacy
+`com.m3.*`. Its namespace self-tests retain generic signatures and refuse
+false positives from similarly prefixed or application-qualified packages.
 No M3 implementation class is initialized simply to inspect its identity.
 
 This guard protects standard Java signatures and internal implementation packages. It does
-not prohibit a separately admitted public `com.m3.*` companion in its owning module.
+not prohibit a separately admitted public `jdk.m3.*` companion in its owning module.
 Its internal `M3String` and storage checks remain mandatory; companion exports and added
 signatures require their own exact installed-image acceptance. The receiving order remains
 **String -> arrays -> collections -> AST/compiler -> remaining families**, with String

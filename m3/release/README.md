@@ -1,11 +1,14 @@
-# M3JDK21 evidence-first release pack
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# M3JDK 21 release preparation
 
-[Release preparation: names and tests](RELEASE_PREPARATION.md) · [Visible release queue](queue/README.md) · [Release contract](release-contract.json) · [Naming, documentation and coverage](NAMING_DOCUMENTATION_COVERAGE.md)
+[Release preparation: names and tests](RELEASE_PREPARATION.md) · [Visible release queue](queue/README.md) · [Release contract](release-contract.json) · [Naming, documentation and coverage](NAMING_DOCUMENTATION_COVERAGE.md) · [Candidate notes](RELEASE_NOTES.md) · [Checklist](RELEASE_CHECKLIST.md) · [Candidate checklist #2756](RELEASE_CHECKLIST_CANDIDATE_2756.md)
 
-The first public M3JDK21 release is admitted by evidence, not by repository size, PR count, donor
-catalogue size, or marketing language.
+M3JDK21 is one integrated Java/HotSpot/JNI SDK. Release claims require evidence
+for the exact candidate commit and tree. A naming pass, finite component test,
+recipe replay or historical CI run does not establish installed-JDK acceptance.
 
-## Release theorem
+## Product and version names
 
 A claim is publishable only when the release proof pack contains the exact source revision,
 upstream baseline, commands, environment, raw result or test receipt, and SHA-256 needed to
@@ -211,132 +214,142 @@ all mandatory execution evidence, a clean inspected source revision and no
 blocking custody/qualification items. A development policy pass is insufficient
 for release. The historical single-commit publication requirement remains
 explicit; this preparation does not rewrite or consolidate repository history.
+| Field | Value and authority |
+| --- | --- |
+| Display name | **M3JDK 21** |
+| Machine product ID | `M3JDK21` |
+| Version | `21.0.14`, from `make/conf/version-numbers.conf` |
+| Preview tag | `m3jdk-21.0.14-m3.1-preview` |
+| Release branch | `release/m3jdk-21.0.14-m3.1-preview` |
+| Tier | `P0_TECHNICAL_PREVIEW` |
+
+`verify_release_admission.py` checks the display name, numeric version, preview
+tag and branch together against the configured JDK version. Public Java SE
+owners retain their original names. Current additive companion packages use the
+source-declared `jdk.m3.*` namespace and separately reviewed module exports.
+Stable mapping IDs and historical donor symbols remain lineage data.
+Both `Object.toAdapter(Class<T>)` and the exact compatibility spelling
+`Object.toAdpater(Class<T>)` remain part of the current source contract.
+
+## Recipe ownership and product acceptance
+
+[AGENTS.md](../../AGENTS.md) and the
+[porting invariant](../docs/m3jdk21-porting-invariant.md) place all recipe
+creation, execution, qualification and improvement memory in canonical Synexia.
+This target receives executed product postimages, target tests and passive
+provenance receipts. It does not run a recipe command supplied in a receipt.
+
+The existing mandatory gate `M3_MAVEN_CONTROL_REACTOR` therefore consumes an
+execution receipt owned by `hsoliwal/com.synexia`, including its exact canonical
+commit and recipe ID. Every other mandatory gate is M3JDK21-owned. The
+standalone dependency check exempts only the structured canonical gate-owner
+metadata; actual external checkout/build/runtime references remain blockers.
+Historical target-local recipe roots remain custody debt. Preserve their source
+and dependencies until a separately reviewed, content-preserving migration has
+been qualified in Synexia; do not introduce another receiver-side recipe copy.
+
+## Claims and receiving order
+
+The current contract records an immutable-text foundation with a repository test
+surface. It does not claim a complete String backend, full regex precomputation,
+full jtreg compatibility, performance superiority, qualified arrays/collections,
+or SWT/Eclipse integration. Source presence and published tests describe what
+can be checked; a passing current-source receipt establishes what was checked.
+
+Runtime receiving follows **String → arrays → collections → AST/compiler →
+remaining families**. The release contract further prioritizes regex and general
+precompute within the String work before later layers. Inventory work may
+proceed independently; only exact target evidence can advance a phase.
+
+## Checks available during preparation
+
+Run these from the target root after installing the pinned schema dependency:
 
 ```sh
-python3 -m unittest discover -s m3/release -p 'test_*.py' -v
-python3 m3/release/verify_release_admission.py --root . \
-  --json-out m3/release/queue/current/admission.json \
-  --queue-out m3/release/queue/current/README.md \
-  --sha256-out m3/release/queue/current/SHA256SUMS
-
-# A real candidate requires an independently produced evidence manifest:
-python3 m3/release/verify_release_admission.py --root . --release \
-  --evidence /absolute/path/to/release-evidence.json \
-  --json-out m3/release/queue/current/admission.json \
-  --queue-out m3/release/queue/current/README.md
-```
-
-The `M3_RELEASE_EVIDENCE_V1` manifest binds the inspected commit and tree to
-one receipt for every `mandatory_release_gates` entry. Each passing receipt
-records the executed command, zero exit status, toolchain/platform, a safe
-relative artifact path and the artifact's SHA-256. Missing, duplicate, stale,
-failed or malformed evidence is refused. Artifact integrity is a review aid;
-the reviewer must still establish that the command and evidence prove the
-claimed gate. Synthetic verifier fixtures are never release receipts.
-
-Historical recipe-bearing target POMs and scripts are custody debt. Do not run
-them as new transformation entrypoints. Keep product tests and raw evidence
-available, recover each canonical recipe and its callers as a deterministic,
-re-runnable tool in this repository (`m3/tooling/<lane>/tools/`), then perform
-an executed, source-preserving cleanup. Moving a recipe to another folder
-without that recovery and an executed proof does not satisfy this boundary.
-Standalone rule (2026-10-31): no other repository owns or executes a recipe
-that a release needs (`release-contract.json`, `maven_gate_scope`).
-
-Receipt field details: artifact paths resolve relative to the manifest directory.
-Every gate includes `owner_repository` and an `environment` object with `os`,
-`architecture` and `toolchain`. `M3_MAVEN_CONTROL_REACTOR` also requires
-`canonical_recipe` with `repository`, `commit` and `recipe_id`; its repository
-is `hsoliwal/M3jdk21` (standalone rule, 2026-10-31). The product verifier consumes these records as data
-and never executes command text supplied by a receipt.
-
-## Retained PR source and naming queues
-
-The first release workflow exports three **read-only review artifacts** alongside
-the release-admission receipt:
-
-- `m3/release/queue/current/name-census.tsv`: the canonical mapping declaration/path
-  census from existing `m3/tooling/name-contract/audit.py`; not rename authority.
-- `m3/release/queue/current/retained-source-queue.tsv`: preserved source from
-  `m3/qualification/master-landing-20261028/retained-variants/pr<N>/` compared
-  against its **original path in the checked-out Git HEAD tree**.
-  Each row has archived/active modes and Git blob OIDs.
-- `m3/release/queue/current/retained-source-summary.json`: pinned HEAD,
-  classification totals, SHA-256, and `merge_authorized: false`,
-  `rename_authorized: false`, `runtime_qualified: false`.
-
-Reproduce the queue on a full checkout without changing active source:
-
-```sh
-python3 -m unittest discover -s m3/release -p 'test_*.py' -v
+python3 -m pip install -r m3/migration/requirements.txt
 python3 m3/tooling/name-contract/check.py
 python3 m3/tooling/name-contract/audit.py --strict
-python3 m3/release/retained_source_queue.py --root . \
-  --tsv-out m3/release/queue/current/retained-source-queue.tsv \
-  --summary-out m3/release/queue/current/retained-source-summary.json
+python3 -m unittest discover -s m3/tooling/name-contract -p 'test_*.py' -v
+python3 -m unittest discover -s m3/release -p 'test_*.py' -v
 ```
 
-The queue is deterministic for one Git HEAD. On `release/**` branches,
-the first-release workflow adds `--strict` and blocks release proof if any
-archived source path remains unresolved. Artifact upload uses `if: always()`
-so the queue remains available on failure. On ordinary PRs, unresolved rows
-are reported without assuming that archived candidates must be promoted.
+These checks cover queue/map identity, current package/type/path declarations,
+module boundaries, schema and stable-ID preservation, evidence admission,
+release naming, artifact-path integrity, dependency and packaging refusals.
+They are **release-tooling regression coverage**. They do not measure Java,
+HotSpot, native, jtreg or line/branch coverage of the product.
 
-| Path classification | Interpretation / required next action |
-| --- | --- |
-| `EXACT_ACTIVE_PATH` | Same bytes and mode at the original path; **not** behavior proof |
-| `REVIEW_ABSENT_ACTIVE_PATH` | Investigate rename, replacement or intentional exclusion |
-| `REVIEW_DIVERGENT_ACTIVE_PATH` | Compare evolved contracts; never overwrite current code |
-| `REVIEW_MODE_DIFFERENCE` | Check file-mode change before any replay |
-| `HOLD_ARCHIVE_MODE` | Refuse promotion of unreviewed source type/mode |
+The [naming source receipt](../tooling/name-contract/receipts/release-preparation/source-identity.json)
+records the exact inspected baseline and original stable IDs. The strict census
+keeps missing pending paths and present-but-unverified native paths visible;
+it does not promote those capabilities. The four proposed renames stay `QUEUED`.
 
-For example, [PR #2084](https://github.com/hsoliwal/M3jdk21/pull/2084)
-has archived native `wc` sources with no original live path under
-`m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/`.
-This is a **path-level observation** only; it is not proof that the
-functionality is entirely absent, nor permission to copy archived code.
+## Exact-source execution evidence
 
-For each unresolved row, compare the exact merge base, donor parent,
-historical merge result and current delivered Git blobs with a deterministic
-tool carried in this repository (`m3/tooling/<lane>/tools/`), then prepare a
-bounded candidate behind compiler/JUnit gates. The donor-side
-`M3HistoricalCodeLossRecipe`, `M3HunkResolver`, `ExactFileHunkReplay` and
-`m3-pr-stack-preservation` gates are lineage only: none of them is in this tree,
-so absorb the logic as such a tool before relying on it (standalone rule,
-2026-10-31; `m3/tooling/standalone/M3_REFS.md`). The public queue is
-a review input, **not** a competing source transformation implementation.
-GitHub's merge action handles mergeable history, but even a clean merge
-needs content no-loss review. Conflicts require an explicit reviewed patch
-and compiler, JUnit and (where applicable) matched-image JNI/jtreg gates.
+On a full checkout, write inspection output outside the source tree so the
+report itself does not dirty the candidate:
 
-Public JDK class and method names stay those of Java 21. Internal class/method
-renames, package moves, documentation changes, service/reflection/JNI symbols
-and consumption must be registered under the stable capability ID in
-`m3/docs/name-mapping.json` and processed with a typed, deterministic recipe
-carried in this repository (name contract: `m3/tooling/name-contract/`) before
-target acceptance. Preserve ABI, serialization and native entry-point behavior.
-Standalone rule (2026-10-31): recipes, their execution memory
-(`RECIPE_MEMORY.tsv`, `GATES.tsv`) and the qualified product results and
-evidence all live in M3JDK21; donor lineage stays in ledgers
-(`m3/tooling/standalone/`).
+```sh
+python3 m3/release/verify_release_admission.py --root . \
+  --json-out /absolute/path/to/proof/admission-development.json \
+  --queue-out /absolute/path/to/proof/README.md \
+  --sha256-out /absolute/path/to/proof/SHA256SUMS
+python3 m3/release/verify_release_admission.py --root . --release \
+  --evidence /absolute/path/to/proof/evidence.json \
+  --json-out /absolute/path/to/proof/admission-release.json
+```
 
-## Canonical recipe execution and migration HOLD
+`policy_valid` describes static policy checks. `release_ready` also requires a
+clean exact source, all ten mandatory execution receipts, no blocking custody
+or dependency items, and the existing history gate. A development-policy pass
+is insufficient. Missing, duplicate, stale, failed or malformed receipts keep
+release admission on HOLD.
 
-The release workflow consumes the mandatory `M3_MAVEN_CONTROL_REACTOR` receipt
-from source-bound work executed in this repository (`hsoliwal/M3jdk21`). Standalone
-rule (2026-10-31): no other repository is needed to build, test, gate or release;
-donor lineage stays in `m3/tooling/standalone/` (`SYNEXIA_REFS.tsv`,
-`LINEAGE_SOURCES.tsv`). Its control job
-requires both `policy_valid` and an exact passing canonical Maven gate; absent,
-stale, malformed or failed evidence keeps the job and release summary on HOLD.
-Historical target-local recipe scripts and the target recipe reactor are no
-longer execution entrypoints in this workflow. Their retained sources remain
-visible custody migration debt (`legacy_recipe_custody` HOLD) and are preserved
-for a separately qualified cleanup.
+The `M3_RELEASE_EVIDENCE_V1` manifest binds `source_commit` and `source_tree`.
+Each gate includes its owner, executed command, zero exit status, OS,
+architecture, toolchain, and safe manifest-relative artifact paths with SHA-256.
+The canonical recipe gate additionally records `canonical_recipe.repository`,
+`commit` and `recipe_id`. Artifact bytes and structure can be verified locally;
+review must still establish that the actual execution covers the claimed
+contract. Synthetic verifier fixtures are never execution receipts.
 
-Foundation, precompute Java/JNI and full-family product checks remain active,
-along with naming and retained-source queues. The dated
-[validation snapshot](queue/2026-10-29/validation-summary.json) and
-[collections failure catalogue](queue/2026-10-29/collections-failures.tsv) retain
-the bounded runs and outstanding contract questions. These observations keep
-their original tested source pins; they do not satisfy all current release gates.
+## Product coverage required for release
+
+The [candidate notes](RELEASE_NOTES.md) distinguish current-source preparation
+checks from outstanding product gates. The proof pack must retain foundation,
+Java differential, JNI/native parity, UTF-16 contract and OpenJDK sanity results,
+plus rights, source/history, claims, canonical recipe and checksum receipts.
+`STRING_UTF16_CONTRACT` remains mandatory even though the first-release workflow
+has no dedicated producer bound to that ID. A source-built image and matching
+jtreg/native/platform evidence must resolve it; do not infer it from a Python
+suite or stock-JDK synthetic fixture.
+
+A String backend claim additionally needs UTF-16/unpaired-surrogate semantics,
+equals/hash/compare, substring/views, interning, exceptions, interpreter/C1/C2,
+GC/lifetime and CDS where affected. Full regex precompute needs the contract's
+10,000-case oracle and cache/invalidation/corruption proof. Performance claims
+require exact same-host M3JDK/OpenJDK comparisons with raw CPU, allocation,
+heap, native/RSS, GC, startup, cold/warm and variance evidence. See
+[BENCHMARK_AND_COMPATIBILITY_SPEC.md](BENCHMARK_AND_COMPATIBILITY_SPEC.md).
+
+## Retained source and history
+
+The workflow exports the existing canonical `name-census.tsv`, retained-source
+TSV and source summary as review artifacts, including on failure. They describe
+exact paths/blobs and do not authorize a rename or archived-source promotion.
+`retained_source_queue.py` compares retained variants to their original paths in
+Git HEAD; unresolved absent, divergent or mode-changing rows require current
+owner and contract review. Release branches retain its strict refusal.
+
+Resolve source loss or conflicts through the existing canonical Synexia recipe,
+then receive and test its sealed postimage. Keep active and historical source,
+license/NOTICE and receipts. A clean Git merge does not prove content or behavior
+preservation. The dated [2026-10-29 validation snapshot](queue/2026-10-29/validation-summary.json)
+retains its own tested pins and does not qualify a later candidate.
+
+Preparation is append-only. The contract's historical
+`single_fork_commit_required: true` requirement remains unchanged; a candidate
+that does not satisfy it stays on HOLD. This preparation does not delete/rebuild
+a branch, backdate authorship, rewrite ancestry or bypass the gate. Published
+release history remains immutable. See the [checklist](RELEASE_CHECKLIST.md) for
+the evidence required before a tag or release can be admitted.

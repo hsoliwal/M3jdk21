@@ -39,6 +39,7 @@ REQUIRED_FILES = [
     "m3/release/release-contract.json", "m3/release/README.md",
     "m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
     "m3/docs/name-mapping.json", "m3/tooling/name-contract/name-plan.json",
+    "make/conf/version-numbers.conf",
 ]
 REQUIRED_GATES = frozenset({
     "RIGHTS_AND_LICENSE_BOUNDARY", "SOURCE_TREE_AND_UPSTREAM_BASELINE",
@@ -59,9 +60,10 @@ NAME_MAP = "m3/docs/name-mapping.json"
 NAME_PLAN = "m3/tooling/name-contract/name-plan.json"
 EVIDENCE_SCHEMA = "M3_RELEASE_EVIDENCE_V1"
 DEFAULT_EVIDENCE = "m3/release/queue/current/evidence.json"
-# Standalone rule (user, 2026-10-31): every release gate, the Maven/OpenRewrite control reactor included,
-# is owned and executed by this repository; donor lineage stays in ledgers (m3/tooling/standalone/).
+# Product gates are independently accepted here. The canonical transformation
+# receipt is data from Synexia; this consumer never executes recipe source.
 PRODUCT_REPOSITORY = "hsoliwal/M3jdk21"
+CANONICAL_RECIPE_REPOSITORY = "hsoliwal/com.synexia"
 MAVEN_GATE = "M3_MAVEN_CONTROL_REACTOR"
 COVERAGE_GATE = "M3_CHANGED_ATOM_COVERAGE"
 COVERAGE_SCHEMA = "M3_CHANGED_ATOM_COVERAGE_V1"
@@ -74,6 +76,36 @@ SOURCE_SUFFIXES = frozenset({
     ".java", ".c", ".cc", ".cpp", ".cxx", ".h", ".hpp", ".py",
     ".sh", ".xml", ".yaml", ".yml", ".properties", ".json", ".tsv",
 })
+
+
+def gate_owner(ident: str) -> str:
+    return CANONICAL_RECIPE_REPOSITORY if ident == MAVEN_GATE else PRODUCT_REPOSITORY
+
+
+def release_identity(release: dict, version_text: str) -> None:
+    """Check the preview name against the actual configured JDK version."""
+    version, tag = release.get("version"), release.get("tag")
+    if (not isinstance(version, str)
+            or not re.fullmatch(r"21\.[0-9]+\.[0-9]+(?:\.[0-9]+)?", version)
+            or not isinstance(tag, str)
+            or not re.fullmatch(r"m3jdk-" + re.escape(version) + r"-m3\.[1-9][0-9]*-preview", tag)
+            or release.get("release_branch") != "release/" + tag
+            or release.get("display_name") != "M3JDK 21"):
+        raise ValueError("preview display name, JDK version, tag and release branch disagree")
+    values = {}
+    for name, value in re.findall(
+            r"(?m)^DEFAULT_VERSION_(FEATURE|INTERIM|UPDATE|PATCH)\s*=\s*([0-9]+)\s*(?:#.*)?$",
+            version_text):
+        if name in values:
+            raise ValueError("duplicate configured JDK version component: " + name)
+        values[name] = int(value)
+    if set(values) != {"FEATURE", "INTERIM", "UPDATE", "PATCH"}:
+        raise ValueError("configured JDK version components are missing")
+    parts = [values[name] for name in ("FEATURE", "INTERIM", "UPDATE")]
+    if values["PATCH"]:
+        parts.append(values["PATCH"])
+    if version != ".".join(map(str, parts)):
+        raise ValueError("release version differs from make/conf/version-numbers.conf")
 
 
 def unique_object(pairs):
@@ -124,6 +156,7 @@ def untracked_source(root: Path) -> list[str]:
 def safe_artifact(base: Path, relative: str) -> Path:
     """Reject aliases, traversal and every symlink component of an artifact."""
     if (not isinstance(relative, str) or not relative or "\\" in relative
+            or re.match(r"^[A-Za-z]:", relative)
             or any(ord(c) < 32 for c in relative)):
         raise ValueError("invalid evidence artifact path")
     parts = relative.split("/")
@@ -371,11 +404,12 @@ def validate(root: Path, release_mode: bool = False,
         passed("contract.execution_evidence")
     gate_owners = evidence_policy.get("gate_owners", {})
     foreign_owners = sorted(str(gate) for gate, owner in gate_owners.items()
-                            if owner != PRODUCT_REPOSITORY) if isinstance(gate_owners, dict) else []
+                            if gate not in gates or owner != gate_owner(gate)) if isinstance(gate_owners, dict) else []
     if (not isinstance(gate_owners, dict)
-            or gate_owners.get(MAVEN_GATE) != PRODUCT_REPOSITORY or foreign_owners):
-        block("contract.recipe_owner", "every release gate, " + MAVEN_GATE + " included, must be owned by "
-              + PRODUCT_REPOSITORY + "; owned elsewhere: " + (", ".join(foreign_owners) or "-"))
+            or gate_owners.get(MAVEN_GATE) != CANONICAL_RECIPE_REPOSITORY or foreign_owners):
+        block("contract.recipe_owner", MAVEN_GATE + " requires the canonical Synexia receipt; "
+              "all product gates remain owned by " + PRODUCT_REPOSITORY
+              + "; invalid declarations: " + (", ".join(foreign_owners) or "-"))
 
     notice = read_text("M3-SYNEXIA-NOTICE.md")
     rights = read_text("M3-SYNEXIA-RIGHTS.md")
@@ -445,6 +479,11 @@ def validate(root: Path, release_mode: bool = False,
     release = contract.get("release", {})
     if not isinstance(release, dict):
         release = {}
+    try:
+        release_identity(release, read_text("make/conf/version-numbers.conf"))
+        passed("contract.release_identity", release["tag"])
+    except ValueError as exc:
+        block("contract.release_identity", str(exc))
     upstream = release.get("upstream_baseline")
     if not isinstance(upstream, str) or not SHA1.fullmatch(upstream):
         block("git.upstream_baseline", "invalid exact upstream SHA")
@@ -554,8 +593,8 @@ def validate(root: Path, release_mode: bool = False,
         try:
             if entry.get("status") != "PASS" or type(entry.get("exit_code")) is not int or entry["exit_code"] != 0:
                 raise ValueError("gate did not record PASS with integer exit_code=0")
-            if entry.get("owner_repository") != PRODUCT_REPOSITORY:
-                raise ValueError("wrong gate owner; expected " + PRODUCT_REPOSITORY)
+            if entry.get("owner_repository") != gate_owner(ident):
+                raise ValueError("wrong gate owner; expected " + gate_owner(ident))
             command = entry.get("command")
             if (not isinstance(command, list) or not command
                     or any(not isinstance(x, str) or not x.strip() for x in command)):
@@ -568,7 +607,7 @@ def validate(root: Path, release_mode: bool = False,
             if ident == MAVEN_GATE:
                 canonical = entry.get("canonical_recipe")
                 if (not isinstance(canonical, dict)
-                        or canonical.get("repository") != PRODUCT_REPOSITORY
+                        or canonical.get("repository") != CANONICAL_RECIPE_REPOSITORY
                         or not isinstance(canonical.get("commit"), str)
                         or not SHA1.fullmatch(canonical["commit"])
                         or not isinstance(canonical.get("recipe_id"), str)
