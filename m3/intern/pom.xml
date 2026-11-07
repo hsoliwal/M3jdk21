@@ -17,7 +17,11 @@
     and PROVENANCE.tsv) from the first-party donor at develop fd9a233680b4 (2026-11-06); the seven donor proofs run in
     the test phase. The typed, bit-exact canonical literal pool M3CanonicalLiteralPool (nine named kinds as CONSTANT
     tuples of one space; a pool only, never a JVM constant-pool or ldc replacement) is relocated the same way by
-    recipe/canonical-literals-20261106 from develop b259ec9f5606; its ten donor JUnit tests run in the test phase.</description>
+    recipe/canonical-literals-20261106 from develop b259ec9f5606; its ten donor JUnit tests run in the test phase. The class-space family (M3ClassSpace: owner-scoped, budgeted,
+    failure-atomic exact-byte store of immutable classfile-byte candidates with a SHA-256 lane; M3ClassSpaceArchive:
+    the immutable M3CSIMG1 archive with per-entry and root SHA-256, mapped and pinned views; M3ClassFileAtoms: the
+    read-only constant-pool scanner; never a class loader, Klass table or CDS archive) is relocated the same way by
+    recipe/class-space-20261107 from develop d5ad5090d87e; its donor oracles run in the test phase.</description>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -45,6 +49,22 @@
             <arg>-Werror</arg>
           </compilerArgs>
         </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <compilerArgs combine.children="append">
+                <!-- test scope only (class-space oracles): javax.tools in-memory javac fixtures (java.compiler) and the
+                     allocation probe's com.sun.management.ThreadMXBean (jdk.management); the product descriptor
+                     requires neither -->
+                <arg>--add-modules</arg>
+                <arg>java.compiler,jdk.management</arg>
+                <arg>--add-reads</arg>
+                <arg>org.m3jdk.intern=java.compiler,jdk.management</arg>
+              </compilerArgs>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
