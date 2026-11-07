@@ -64,9 +64,9 @@ public final class M3ItemReferenceScan {
     static final String[] CLASS_NAMES = {"UNKNOWN", "BEHAVIOUR_ONLY", "RETAINS"};
     /** Same frame budget as {@code M3ClassScan} (PR #814). */
     static final long MAX_FRAME_CELLS = 4_000_000L;
-    static final String TRANSIENT = "Lcom/m3/residency/M3Transient;";
-    static final String RETAINS = "Lcom/m3/residency/M3Retains;";
-    static final String BEHAVIOUR_ONLY = "Lcom/m3/residency/M3BehaviourOnly;";
+    static final String TRANSIENT = "Ljdk/m3/residency/M3Transient;";
+    static final String RETAINS = "Ljdk/m3/residency/M3Retains;";
+    static final String BEHAVIOUR_ONLY = "Ljdk/m3/residency/M3BehaviourOnly;";
 
     /** Seeds for libraries that cannot carry {@code @M3Transient}. */
     static final String[] SEED_TYPES = {
