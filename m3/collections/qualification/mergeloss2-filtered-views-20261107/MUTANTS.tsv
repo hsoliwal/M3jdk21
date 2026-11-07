@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# mutants.py: one mutant per restored member, run against the relocated origin tests and the reference model (JUnit console launcher).
+id	leaf	member	owner	state	tests
+HEAD	-	unmutated head	-	PASS	[        21 tests successful      ] [         0 tests failed          ]
+M01	42	NavigableSetView.descendingIterator (chain peel)	M3FilteredViews.java	KILLED	[        19 tests successful      ] [         2 tests failed          ]
+M02	42	NavigableSetView.descendingIterator (inner-to-outer filter order)	M3FilteredViews.java	KILLED	[        17 tests successful      ] [         4 tests failed          ]
+M03	27	sortedMembershipOwner (sorted owner found)	M3FilteredViews.java	KILLED	[        18 tests successful      ] [         3 tests failed          ]
+M04	27	sortedMembershipOwner (private Set layer unwrapped)	M3FilteredViews.java	KILLED	[        19 tests successful      ] [         2 tests failed          ]
+M05	27	visibleMember (predicate on the stored representative)	M3FilteredViews.java	KILLED	[        18 tests successful      ] [         3 tests failed          ]
+M06	43	Cursor.checkForComodification (reverse probe)	M3FilteredLists.java	KILLED	[        17 tests successful      ] [         4 tests failed          ]
+M07	43	Cursor.checkForComodification (delivered element disappeared)	M3FilteredLists.java	KILLED	[        20 tests successful      ] [         1 tests failed          ]
+M08	43	Cursor.add (empty provider insertion through the provider iterator)	M3FilteredLists.java	KILLED	[        20 tests successful      ] [         1 tests failed          ]
+M09	17	put (fast admission re-checks the published failure)	M3KeyedParallelismPlan.java	KILLED	[        20 tests successful      ] [         1 tests failed          ]

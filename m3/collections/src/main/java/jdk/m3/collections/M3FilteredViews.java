@@ -188,9 +188,44 @@ public final class M3FilteredViews {
         return visibleMember(source, predicate, value);
     }
 
-    /** Membership has already succeeded; preserve the original representative probe order. */
+    //FLLDCIM: MRL - mergeloss2 leaf 27: sorted-owner membership restored from origin 01952e935de (PR #1619), dropped by retain merge 1633da209622; recipe qualification/mergeloss2-filtered-views-20261107
+    /**
+     * Resolve only our own private, identity-preserving view layers. The backing
+     * SortedSet owns comparator equivalence; equality-based alias scans do not.
+     * This is iterative to avoid recursive wrapper-depth growth.
+     */
+    @SuppressWarnings("unchecked")
+    private static <E> SortedSet<E> sortedMembershipOwner(Collection<E> source) {
+        Collection<E> owner = source;
+        while (true) {
+            if (owner instanceof SortedSet<?> sorted) return (SortedSet<E>) sorted;
+            if (owner.getClass() == SetView.class) {
+                owner = ((SetView<E>) owner).view.source;
+            } else if (owner.getClass() == CollectionView.class) {
+                owner = ((CollectionView<E>) owner).source;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    /**
+     * Membership has already succeeded: a sorted owner (directly or under private view layers)
+     * evaluates its retained representative; any other source keeps the original representative
+     * probe order.
+     */
     private static <E> boolean visibleMember(Collection<E> source,
             Predicate<? super E> predicate, Object value) {
+        SortedSet<E> sorted = sortedMembershipOwner(source);
+        if (sorted != null) {
+            @SuppressWarnings("unchecked") E alias = (E) value;
+            if (sorted instanceof NavigableSet<?> nav) {
+                // ceiling uses the stored representative without a new tail-range view.
+                @SuppressWarnings("unchecked") NavigableSet<E> navigable = (NavigableSet<E>) nav;
+                return predicate.test(navigable.ceiling(alias));
+            }
+            return predicate.test(sorted.tailSet(alias).first());
+        }
         if (source instanceof Set<?>) {
             for (E owned : source) {
                 if (owned == value) return predicate.test(owned);
@@ -518,10 +553,31 @@ public final class M3FilteredViews {
             return new NavigableSetView<>(nav.descendingSet(), predicate);
         }
         @Override public NavigableSet<E> reversed() { return descendingSet(); }
+        //FLLDCIM: MRL - mergeloss2 leaf 42: deep descending iteration restored from origin 793988c0c6a (PR #1368), dropped by retain merge 082b54fa4ab7; recipe qualification/mergeloss2-filtered-views-20261107
         @Override public Iterator<E> descendingIterator() {
-            M3TreeMap<?, ?> owner = sortedOwner(nav);
-            int expected = revisionOf(owner);
-            return ownerChecked(owner, expected, filtered(nav.descendingSet().iterator(), predicate));
+            if (!(nav instanceof NavigableSetView<?>)) {
+                M3TreeMap<?, ?> owner = sortedOwner(nav);
+                int expected = revisionOf(owner);
+                return ownerChecked(owner, expected, filtered(nav.descendingSet().iterator(), predicate));
+            }
+            // Reuse the ascending iterator's depth-sized predicate plan, opening
+            // the original descending owner only after the private chain is peeled.
+            ArrayList<Predicate<? super E>> filters = new ArrayList<>();
+            NavigableSetView<E> layer = this;
+            NavigableSet<E> backing;
+            while (true) {
+                filters.add(layer.predicate);
+                backing = layer.nav;
+                if (!(backing instanceof NavigableSetView<?> nested)) break;
+                @SuppressWarnings("unchecked")
+                NavigableSetView<E> inner = (NavigableSetView<E>) nested;
+                layer = inner;
+            }
+            Collection<E> descending = backing.descendingSet();
+            for (int index = filters.size() - 1; index >= 0; index--) {
+                descending = new CollectionView<>(descending, filters.get(index));
+            }
+            return descending.iterator();
         }
         @Override public NavigableSet<E> subSet(E from, boolean inclusiveFrom,
                 E to, boolean inclusiveTo) {
