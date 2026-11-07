@@ -20,6 +20,7 @@ import java.util.function.Supplier;
  * only drops unpinned facades that can be reconstructed from parent state.</p>
  */
 //FLLDCIM: RELOCATE - donor blob de85b08a83a7 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor blob 2dc527d4efa1 at eaacff5931ef; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
 public final class M3TransientFacadeStore<T> implements AutoCloseable {
     public static final int RECREATE_UNEXPOSED = 1 << 0;
     public static final int RETAIN_UNEXPOSED = 1 << 1;
@@ -220,7 +221,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
                 releaseInternal(logicalId, facade, reuseAllowed);
             } catch (RuntimeException | Error failure) {
                 if (thrown == null) throw failure;
-                thrown.addSuppressed(failure);
+                suppressDistinct(thrown, failure);
             }
         }
     }
@@ -379,7 +380,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
             if (closed) throw new IllegalStateException("owner closed during recycler rebind");
         } catch (RuntimeException | Error failure) {
             try { dispose(oldId, facade); }
-            catch (RuntimeException | Error cleanup) { failure.addSuppressed(cleanup); }
+            catch (RuntimeException | Error cleanup) { suppressDistinct(failure, cleanup); }
             throw failure;
         }
         reuseCount = nextReuseCount;
@@ -396,7 +397,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
             recycler.scrub(facade);
         } catch (RuntimeException | Error failure) {
             try { dispose(logicalId, facade); }
-            catch (RuntimeException | Error cleanup) { failure.addSuppressed(cleanup); }
+            catch (RuntimeException | Error cleanup) { suppressDistinct(failure, cleanup); }
             throw failure;
         }
         // Scrub is user code and can close or refill this owner reentrantly.
@@ -435,6 +436,11 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         freeIds = nextIds;
     }
 
+    /** A callback may rethrow the exact Throwable from cleanup; Java rejects self-suppression. */
+    private static void suppressDistinct(Throwable original, Throwable cleanup) {
+        if (original != cleanup) original.addSuppressed(cleanup);
+    }
+
     private T create(long logicalId) {
         T facade = Objects.requireNonNull(factory.create(logicalId), "factory result");
         creations = Math.addExact(creations, 1);
@@ -444,7 +450,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
             IllegalStateException failure =
                     new IllegalStateException("owner closed during factory callback");
             try { dispose(logicalId, facade); }
-            catch (RuntimeException | Error cleanup) { failure.addSuppressed(cleanup); }
+            catch (RuntimeException | Error cleanup) { suppressDistinct(failure, cleanup); }
             throw failure;
         }
         return facade;
@@ -477,7 +483,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
                 try {
                     dispose(logicalId, facade);
                 } catch (RuntimeException | Error cleanup) {
-                    if (cleanup != failure) failure.addSuppressed(cleanup);
+                    suppressDistinct(failure, cleanup);
                 }
             }
             throw failure;
@@ -517,7 +523,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
             dispose(logicalId, facade);
         } catch (RuntimeException | Error failure) {
             try { restoreSlot(logicalId, facade, flag, access); }
-            catch (RuntimeException | Error cleanup) { failure.addSuppressed(cleanup); }
+            catch (RuntimeException | Error cleanup) { suppressDistinct(failure, cleanup); }
             throw failure;
         }
     }
@@ -564,7 +570,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
                     dispose(logicalId, facade);
                 }
             } catch (RuntimeException | Error cleanup) {
-                failure.addSuppressed(cleanup);
+                suppressDistinct(failure, cleanup);
             }
         }
     }
