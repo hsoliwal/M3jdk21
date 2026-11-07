@@ -23,9 +23,9 @@ import java.util.Objects;
  * <p>The graph must have been built so every undirected edge is represented by two consecutive
  * reverse directed edges (the contract of M3IntLongAdjacencyGraph.addUndirected).
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntLowLink.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntLowLink.java}
  * blob {@code 7b81c466593bcbeb00957e8c7be92ec2da04cda7} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3IntLowLink {
     public static final class Result {

@@ -24,9 +24,9 @@ import java.util.function.BiConsumer;
  * <p>Keys use == and System.identityHashCode; null is the empty-slot sentinel
  * with one collection-level null-key sidecar.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/DenseIdentityHashMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/DenseIdentityHashMap.java}
  * blob {@code 69a1029547159e3bc7c4f39531283d03b0c2901d} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3DenseIdentityHashMap<K, V> {
     private final float loadFactor;

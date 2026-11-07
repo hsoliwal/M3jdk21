@@ -21,9 +21,9 @@ import java.util.function.Consumer;
 /**
  * Flat reference-identity set: == equality and System.identityHashCode hashing.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/DenseIdentityHashSet.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/DenseIdentityHashSet.java}
  * blob {@code 45a60f3e63eae41beaf47813eb2da2459d020b4c} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3DenseIdentityHashSet<E> {
     private final float loadFactor;

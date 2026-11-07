@@ -24,9 +24,9 @@ import java.util.function.IntConsumer;
  * useful for entity/state/behavior identifiers when the key domain is moderately
  * sparse and object hashing would be wasteful.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntSparseSet.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntSparseSet.java}
  * blob {@code 19c53bcc95e4af6cfc0ddf3b5b2a50c2e06553bd} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3IntSparseSet {
     private int[] dense;

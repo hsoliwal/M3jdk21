@@ -23,9 +23,9 @@ import java.util.stream.IntStream;
  * Values occupy consecutive LSB-first spans in caller-owned word arrays.
  * Native execution is optional; callers must keep inputs stable during a call.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/M3PackedNative.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/M3PackedNative.java}
  * blob {@code 006fab23ef1b6c9fdfaba5d6eb8ff6b931f22738} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PackedNative {
     private M3PackedNative() { }
@@ -109,7 +109,7 @@ public final class M3PackedNative {
 
         private static boolean load() {
             try {
-                System.loadLibrary("synexia_packed_integer");
+                System.loadLibrary("m3_packed_integer");
                 return true;
             } catch (UnsatisfiedLinkError unavailable) {
                 return false;

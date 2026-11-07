@@ -21,9 +21,9 @@ import java.util.function.LongUnaryOperator;
 /**
  * Exact-width primitive-to-primitive map covering the full 8x8 primitive matrix.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitivePrimitiveHashMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitivePrimitiveHashMap.java}
  * blob {@code 9e47a0ea6aed675aebd5efe5a3749d59e8374df3} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitivePrimitiveHashMap {
     @FunctionalInterface

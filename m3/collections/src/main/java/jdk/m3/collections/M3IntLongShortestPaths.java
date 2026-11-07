@@ -19,9 +19,9 @@ import java.util.Arrays;
 /**
  * Non-negative weighted shortest paths using a primitive lazy-decrease min heap.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntLongShortestPaths.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntLongShortestPaths.java}
  * blob {@code 571d88e7874e9ccffbb8d7ea78782d3a11b75517} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3IntLongShortestPaths {
     private M3IntLongShortestPaths() {}

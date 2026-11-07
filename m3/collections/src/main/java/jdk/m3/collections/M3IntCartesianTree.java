@@ -22,9 +22,9 @@ import java.util.Objects;
  *
  * <p>For MIN mode the root is a minimum; MAX mode mirrors the comparison.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntCartesianTree.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntCartesianTree.java}
  * blob {@code 4e8b415e0b0249aeee49204bc4fc374f9a0d600d} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3IntCartesianTree {
     public enum Mode { MIN, MAX }

@@ -24,9 +24,9 @@ import java.util.function.BiConsumer;
  * <p>Null is the empty key sentinel. A real null key is carried by one
  * collection-level sidecar, eliminating the former occupancy byte per slot.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/DenseObjectObjectHashMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/DenseObjectObjectHashMap.java}
  * blob {@code 9f03ef28e406719fe7451e1238d5a0bde2f03f35} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3DenseObjectObjectHashMap<K, V> {
     private final float loadFactor;

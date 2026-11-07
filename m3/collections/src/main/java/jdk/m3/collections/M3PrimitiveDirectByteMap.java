@@ -23,9 +23,9 @@ import java.util.Objects;
  * hold the 256 presence bits, so no key array, hash table, occupancy array,
  * node, entry, or wrapper is retained per mapping.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectByteMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveDirectByteMap.java}
  * blob {@code 4c5b0e27b866283016a0d8178712f0e460a99183} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3PrimitiveDirectByteMap {
     private static final int DOMAIN_SIZE = 1 << Byte.SIZE;

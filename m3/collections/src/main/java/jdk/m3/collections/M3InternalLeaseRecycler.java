@@ -36,9 +36,9 @@ import java.util.function.Supplier;
  * Existing {@link M3RuntimeHeap.Pressure} observations control optional idle
  * retention at explicit checkpoints, never the correctness of a live borrow.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/M3InternalLeaseRecycler.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/M3InternalLeaseRecycler.java}
  * blob {@code 132707c53896011d461afe800ea6ace09d474498} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
- * RELOCATE_SYNEXIA_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class M3InternalLeaseRecycler<T> implements AutoCloseable {
     public record Stats(int idle, int active, long created, long reused,
