@@ -42,6 +42,11 @@ public final class M3LongRankIndex {
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private final long[] values;
     private final boolean distinct;
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 32-35 (leaves 23; origins 35662be63ca); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    // Immutable snapshot fact sidecar. Benign concurrent first reads may
+    // recompute, but volatile publication makes subsequent reads allocation-free.
+    // Nonnegative packing permits -1L as an unequivocal UNCOMPUTED sentinel.
+    private volatile long cachedRunStatistics = -1L;
 
     private M3LongRankIndex(long[] owned, boolean distinct) {
         values = owned;
@@ -219,6 +224,42 @@ public final class M3LongRankIndex {
         return M3LongRankBatchNative.lowerBounds(values, queries);
     }
 
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 212-245 (leaves 8; origins fdf8f2875a2); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    /**
+     * LC #4 order-statistic category: select the zero-based rank from the
+     * multiset merge of two immutable sorted M3 long snapshots. The original
+     * long[] owners never move or materialize into a combined array.
+     * Worst case O(log(rank + 1)) time, O(1) auxiliary space.
+     */
+    public long selectMerged(M3LongRankIndex other, long rank) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.selectMerged(values, other.values, rank);
+    }
+
+    /**
+     * One detached result array for a batch of global zero-based ranks in the
+     * sorted multiset union. Duplicates retain their occurrence positions.
+     */
+    public long[] selectMergedBatch(M3LongRankIndex other, long[] ranks) {
+        Objects.requireNonNull(other, "other");
+        Objects.requireNonNull(ranks, "ranks");
+        long[] result = new long[ranks.length];
+        M3LongRankBatchNative.selectMergedInto(values, other.values,
+                ranks, 0, ranks.length, result, 0, false);
+        return result;
+    }
+
+    /**
+     * Write a checked rank window without an output allocation. The caller's
+     * output must not alias ranks; all invalid ranks fail before the first write.
+     */
+    public void selectMergedInto(M3LongRankIndex other, long[] ranks,
+            int rankFrom, int length, long[] output, int outputFrom) {
+        Objects.requireNonNull(other, "other");
+        M3LongRankBatchNative.selectMergedInto(values, other.values,
+                ranks, rankFrom, length, output, outputFrom, false);
+    }
+
     /**
      * Batched signed-long first/last insertion bounds, interleaved as
      * [lower(q0), upper(q0), lower(q1), upper(q1), ...].
@@ -243,6 +284,61 @@ public final class M3LongRankIndex {
         return M3LongRankBatchNative.topKFrequent(values, k);
     }
 
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 418-470 (leaves 6 20 23; origins 35662be63ca 66ddfd93f75 610f780df14); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    /**
+     * Number of different signed-long values in this immutable snapshot.
+     * LeetCode #26 (sorted duplicate runs) supplies the problem category,
+     * not transplanted challenge code. No mutation of the owning long[].
+     */
+    public int distinctValueCount() {
+        return distinct ? values.length : (int) (runStatistics() >>> 32);
+    }
+
+    /**
+     * Maximum number of distinct consecutive values in signed-long order.
+     * Duplicate occurrences do not extend a run; the Long.MAX_VALUE boundary
+     * never wraps to Long.MIN_VALUE. LC #128 is the catalogued problem type.
+     * One lazily cached packed scalar is shared by both queries.
+     */
+    public int longestConsecutiveRun() {
+        return (int) runStatistics();
+    }
+
+    private long runStatistics() {
+        long packed = cachedRunStatistics;
+        if (packed < 0L) {
+            packed = M3LongRankBatchNative.runStatistics(values);
+            cachedRunStatistics = packed;
+        }
+        return packed;
+    }
+
+    /**
+     * Counts distinct unordered signed-long value pairs separated by an exact,
+     * nonnegative absolute distance (LeetCode #532 category). For distance
+     * zero each counted value must occur at least twice. The immutable sorted
+     * snapshot is never exposed, reordered or materialized for JNI.
+     *
+     * <p>Native is an optional same-provider batch kernel above the normal
+     * size threshold, with a Java two-pointer oracle and no callback bridge.
+     * The result is long to retain a primitive order-statistic contract.</p>
+     */
+    /**
+     * LeetCode #15 unique 3Sum value-triplet count on immutable sorted longs.
+     * Duplicated physical occurrences never create duplicate value triples.
+     * Signed overflow is avoided with 128-bit comparison, not saturated sums.
+     * Runtime cost is O(n^2), O(1) Java scratch; optional existing m3rankbatch
+     * JNI copies only one temporary primitive input lane, never owner payload
+     * mutation, Java callbacks, or per-triplet allocation.
+     */
+    public long distinctTripletSumCount(long target) {
+        return M3LongRankBatchNative.distinctTripletSumCount(values, target);
+    }
+
+    public long distinctDifferencePairCount(long distance) {
+        return M3LongRankBatchNative.distinctDifferencePairCount(values, distance);
+    }
+
     /**
      * Writes the same pairs into a reusable caller-owned int[] of length
      * exactly 2 * queries.length, avoiding a fresh output allocation.
@@ -253,6 +349,159 @@ public final class M3LongRankIndex {
 
     public long[] toArray() {
         return values.clone();
+    }
+
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 251-401 (leaves 2 5 7 12 18 24 25 34 46; origins 8403833238f 2b78514275f 6e86f2b03c3 660a5f0e493 56460c92634 74278253fa3 a08a353b192 66a5e9127ee 28a25d16452); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    /**
+     * Batched half-open [lower, upper) coordinates in a flat primitive int[].
+     * Pair i resides at offsets 2*i and 2*i+1, including insertion coordinates
+     * when a value is absent. Explicit JNI batches never retain any entry object
+     * or invoke a caller comparator.
+     */
+    public int[] equalRanges(long[] queries) {
+        return M3LongRankBatchNative.equalRanges(values, queries);
+    }
+
+    /**
+     * Writes the batched half-open insertion endpoints into a caller-owned
+     * primitive int[] window. Each query consumes two consecutive int slots
+     * beginning at {@code outputFrom}; no per-query object or new result array
+     * is allocated. Query and output windows are fully checked before writing.
+     *
+     * <p>The native LeetCode #34/#35/#88 kernel is optional, reuses the
+     * existing m3rankbatch library, and releases all JNI array pins by page.
+     */
+    public void equalRangesInto(long[] queries, int queryFrom, int length,
+                                int[] output, int outputFrom) {
+        M3LongRankBatchNative.equalRangesInto(
+                values, queries, queryFrom, length, output, outputFrom);
+    }
+
+    /**
+     * Batched upper insertion coordinates for a signed-long query vector.
+     * JNI is optional and handles large batches without user callbacks.
+     */
+    public int[] upperBounds(long[] queries) {
+        return M3LongRankBatchNative.upperBounds(values, queries);
+    }
+
+    /**
+     * LeetCode #34 upper insertion bounds, batch-written into the caller's
+     * indexed result lane without an intermediate result array.
+     * Input/output windows are checked before the first write.
+     */
+    public void upperBoundsInto(long[] queries, int queryFrom, int length,
+                                int[] output, int outputFrom) {
+        M3LongRankBatchNative.upperBoundsInto(
+                values, queries, queryFrom, length, output, outputFrom);
+    }
+
+    /**
+     * Batched occurrence frequency for each query. Equivalent to
+     * upperBound(query) - lowerBound(query) with no Long.MAX_VALUE arithmetic.
+     */
+    public int[] counts(long[] queries) {
+        return M3LongRankBatchNative.counts(values, queries);
+    }
+
+    /**
+     * Writes occurrence frequencies into a caller-owned int[] window.
+     * Both windows are checked before any write; no boxed Entry is allocated.
+     */
+    public void countInto(long[] queries, int queryFrom, int length,
+                          int[] output, int outputFrom) {
+        M3LongRankBatchNative.countInto(values, queries, queryFrom, length, output, outputFrom);
+    }
+
+    /**
+     * Primitive counts of values within parallel half-open signed-long intervals.
+     *
+     * <p>LeetCode #986 (interval boundaries) and #34/#35 (binary insertion
+     * positions) are problem categories, not copied challenge code. Each
+     * interval [fromInclusive[i], toExclusive[i]) is checked before any
+     * result is written; duplicates count separately and no endpoint is
+     * incremented. The owned sorted snapshot is never exposed or mutated.</p>
+     */
+    public int[] rangeCounts(long[] fromInclusive, long[] toExclusive) {
+        return M3LongRankBatchNative.rangeCounts(values, fromInclusive, toExclusive);
+    }
+
+    /** Writes interval counts into one caller-owned primitive result window. */
+    public void rangeCountInto(long[] fromInclusive, long[] toExclusive, int queryFrom,
+                               int length, int[] output, int outputFrom) {
+        M3LongRankBatchNative.rangeCountInto(values, fromInclusive, toExclusive,
+                queryFrom, length, output, outputFrom);
+    }
+
+    /**
+     * LeetCode #350 sorted-two-pointer category: occurrence-aware intersection
+     * cardinality for immutable M3 rank snapshots. Each matching duplicate
+     * consumes one occurrence from each owner, so the result is the sum of
+     * minimum frequencies. No sorting, boxing or per-entry allocations occur.
+     *
+     * <p>The Java atom is the default; explicitly enabled large batches use
+     * the existing bounded-page m3rankbatch JNI library.</p>
+     */
+    public long intersectionCount(M3LongRankIndex other) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.intersectionCount(values, other.values);
+    }
+
+    /**
+     * Returns detached signed-sorted intersection values with no boxing.
+     * Distinct mode implements the LeetCode #349 set-intersection category;
+     * duplicate-preserving mode implements #350 with min occurrence counts.
+     * The existing parent-owned snapshots never move or expose their arrays.
+     * Large prepared primitive intersections use the existing optional JNI
+     * m3rankbatch owner; missing native support remains a Java fallback.
+     */
+    public long[] intersectionValues(M3LongRankIndex other, boolean distinctValues) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.intersectionValues(values, other.values, distinctValues);
+    }
+
+    /**
+     * Detached sorted primitive union. In occurrence-preserving mode the result
+     * retains the maximum frequency of each signed long across both snapshots;
+     * distinct mode emits each value only once (LeetCode #88 + #26 categories).
+     * No source payload moves or per-element object allocation occurs.
+     * The existing m3rankbatch JNI provider is optional for large inputs.
+     */
+    public long[] unionValues(M3LongRankIndex other, boolean distinctValues) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.unionValues(values, other.values, distinctValues);
+    }
+
+    /**
+     * Multiset union cardinality, counting each value's maximum multiplicity.
+     * Long arithmetic is required because two legal int-sized owners can have
+     * a combined cardinality exceeding Integer.MAX_VALUE.
+     */
+    public long unionCount(M3LongRankIndex other) {
+        Objects.requireNonNull(other, "other");
+        return (long) values.length + other.values.length - intersectionCount(other);
+    }
+
+    /**
+     * LeetCode #2215 / #350 category: sorted difference of this immutable
+     * rank snapshot and another. Distinct mode emits values not present in
+     * other; multiset mode emits max(this frequency - other frequency, 0)
+     * occurrences. Detached primitive results, no retained Entry objects.
+     */
+    public long[] differenceValues(M3LongRankIndex other, boolean distinctValues) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.differenceValues(values, other.values, distinctValues);
+    }
+
+    /**
+     * Sorted symmetric difference: distinct key XOR, or absolute difference
+     * of occurrence multiplicities. Reuses the same JNI provider as rank
+     * batches, without moving either immutable source payload.
+     */
+    public long[] symmetricDifferenceValues(M3LongRankIndex other, boolean distinctValues) {
+        Objects.requireNonNull(other, "other");
+        return M3LongRankBatchNative.symmetricDifferenceValues(
+                values, other.values, distinctValues);
     }
 
     //FLLDCIM: MRL - census P2-074, crate m3jdk21-lc719-pair-distance-java-20261026 (donor blob 0f9763abfa67): LC 719 pair-distance facade
@@ -301,6 +550,45 @@ public final class M3LongRankIndex {
             long[] output, int outputFrom) {
         M3LongRankBatchNative.kthPairDistancesInto(
                 values, ranks, rankFrom, length, output, outputFrom, false);
+    }
+
+    //FLLDCIM: MRL - RESTORE-ADD RLI theirs e884b52485f3 lines 519-555 (leaves 14 15; origins 30e8bbd762c 401dadb98a7); dropped by retain merge d92ed3c91214; recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+    /**
+     * LeetCode #658: primitive starting coordinates of the k nearest elements
+     * for each query, over this original immutable signed-long index.
+     * If distances tie, the lower value wins; equal-value windows use the
+     * earliest identical physical start. No per-entry allocation.
+     */
+    public int[] closestWindowStarts(long[] queries, int k) {
+        return M3LongRankBatchNative.closestWindowStarts(values, queries, k);
+    }
+
+    /**
+     * Writes k-closest starting coordinates to caller-owned primitive storage.
+     * Query/output ranges and k are validated before the first output write.
+     */
+    public void closestWindowStartsInto(long[] queries, int queryFrom, int length,
+            int k, int[] output, int outputFrom) {
+        M3LongRankBatchNative.closestWindowStartsInto(
+                values, queries, queryFrom, length, k, output, outputFrom, false);
+    }
+
+
+    /**
+     * LeetCode #167: sorted two-pointer pair search for many target sums.
+     * Returns zero-based flattened [left,right] physical-index pairs, or
+     * [-1,-1] when absent. Distinct occurrences are required even for ties.
+     * No entry objects, JNI callbacks, or unsafe signed-long addition.
+     */
+    public int[] pairSumIndices(long[] targets) {
+        return M3LongRankBatchNative.pairSumIndices(values, targets);
+    }
+
+    /** Writes the pair coordinates into caller-owned int slots, with full validation. */
+    public void pairSumIndicesInto(long[] targets, int targetFrom, int length,
+            int[] output, int outputFrom) {
+        M3LongRankBatchNative.pairSumIndicesInto(
+                values, targets, targetFrom, length, output, outputFrom, false);
     }
 
     /** Primitive stream over the immutable sorted snapshot, with no boxed values. */

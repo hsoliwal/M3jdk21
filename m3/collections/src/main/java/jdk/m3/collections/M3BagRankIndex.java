@@ -144,12 +144,8 @@ public final class M3BagRankIndex<E> extends AbstractCollection<E> {
         long size = exactSize();
         if (rank < 0 || rank >= size) throw new IndexOutOfBoundsException("occurrence " + rank);
         long ordinal = prefix[from] + rank;
-        int low = from, high = to;
-        while (low < high) {
-            int mid = low + ((high - low) >>> 1);
-            if (prefix[mid + 1] <= ordinal) low = mid + 1;
-            else high = mid;
-        }
+        //FLLDCIM: MRL - RESTORE-MERGE BRI leaf 26: clean 3-way (THREE_WAY.tsv BRI 1) takes the next line from theirs 0fe4e29e0aa4 (origin 3373515b972; dropped by retain merge 6f82d57908e8); recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+        int low = M3LaneSearch.upperBound(prefix, from + 1, to + 1, ordinal) - 1;
         return source.elementAt(physical[low]);
     }
 
