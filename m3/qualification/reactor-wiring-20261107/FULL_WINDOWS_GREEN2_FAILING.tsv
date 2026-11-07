@@ -1,0 +1,11 @@
+com.m3.proof:primitive-address-identity-receiver	GOAL: Command execution failed. Process exited with an error: 1 (Exit value: 1)
+com.m3.proof:regex-precompute-receiver	GOAL: Command execution failed. Process exited with an error: 2 (Exit value: 2)
+com.m3.tooling:migration-recipes	GOAL: Could not resolve dependencies for project com.m3.tooling:migration-recipes:jar:0.1.0-SNAPSHOT
+com.m3.tooling:module-pack-recipes	GOAL: Could not resolve dependencies for project com.m3.tooling:module-pack-recipes:jar:0.1.0-SNAPSHOT
+com.m3:jdk21-backport-admission	GOAL: Command execution failed. Process exited with an error: 1 (Exit value: 1)
+com.m3:m3-fs	GOAL: Command execution failed. Process exited with an error: 1 (Exit value: 1)
+com.m3:m3-hf-lexicon-intake-recipe	GOAL: An exception occurred while executing the Java class. language-resource row has nine fields: 280
+com.m3:m3-import	jdk.m3.importer.M3SeedSnapshotTest.checkedInSeedManifestMatchesEveryVendoredM3File
+com.m3:m3-import	jdk.m3.importer.PublicAtomPatternReceiverTest.publicModeIsSelfContainedAndMaintainerModeIsExplicit
+com.synexia:m3-openrewrite-recipes	jdk.internal.m3.rewrite.M3PureIntCustodyTest.custodySourcesRemainExactM3GitBlobs
+com.synexia:m3jdk-a3-recipes	GOAL: Could not resolve dependencies for project com.synexia:m3jdk-a3-recipes:jar:1.0.0-SNAPSHOT
