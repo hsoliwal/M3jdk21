@@ -29,8 +29,12 @@ JDK ABI change or a broad search-and-replace.
 ## Verified scope of the foundation test runner
 
 The `m3/core/test/` directory contains 22 **top-level executable `*Test.java`**
-classes at the reviewed source tree. The `m3/build.sh` runner now explicitly
-compiles and starts all of them. Four previously omitted entry points were added:
+classes at the reviewed source tree. The historical, exact-source-sealed
+[`m3/build.sh`](../build.sh) remains **unchanged** and explicitly runs 18.
+The separate additive
+[`run_extra_core_contracts.sh`](run_extra_core_contracts.sh) compiles and
+starts the remaining four after `m3/build.sh` has built the module JAR;
+the release workflow invokes both steps in order. The additional entry points:
 
 | Test | Execution lane | Contract exercised |
 | --- | --- | --- |
@@ -44,13 +48,14 @@ native library. Separate JNI/native acceptance remains mandatory. The four new
 test entries do not substitute for OpenJDK `jtreg`, GC/JIT, installed-image
 execution, or measurement against the upstream baseline.
 
-The [static wiring gate](verify_test_wiring.py) fails if any standalone
-`*Test.java` class is missing from the runner's compiler inputs or Java
-commands, or if either set names a missing class. It checks **wiring, not line
-coverage, branch coverage, or actual test success**. Its synthetic refusal
-regressions live in `test_test_wiring.py`; the existing release admission
-workflow runs these tests and writes `core-test-wiring.json`. Actual Java
-process results and their logs must pass independently.
+The [static wiring gate](verify_test_wiring.py) checks the union of the
+historically pinned build and the additive release runner. It fails if any
+standalone `*Test.java` class lacks a compile or launch reference, if an
+unknown class is referenced, or if CI does not invoke both scripts. It checks
+**wiring, not line coverage, branch coverage, or actual test success**. Its
+synthetic refusal tests also prove missing-runner and missing-invocation
+cases fail. The release workflow publishes `core-test-wiring.json` and
+source-bound logs; runtime results must independently pass.
 
 ## Reproduce and retain evidence
 
@@ -66,6 +71,7 @@ python3 m3/release/audit_release_identity.py --root . \
   --json-out m3/release/queue/current/release-identity.json
 export M3JDK=/absolute/path/to/a/JDK-21-installation
 bash m3/build.sh
+bash m3/release/run_extra_core_contracts.sh
 mvn -B -ntp -f m3/ports/precompute/pom.xml test
 mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
 python3 m3/release/verify_release_admission.py --root .
