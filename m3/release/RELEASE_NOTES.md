@@ -70,13 +70,15 @@ with its producer.
 | `PRECOMPUTE_JAVA_DIFFERENTIAL` | `mvn -B -ntp -f m3/ports/precompute/pom.xml test` (job `precompute`) |
 | `PRECOMPUTE_JNI_NATIVE_PARITY` | `mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test` (job `precompute`) |
 | `OPENJDK_SANITY_MATRIX` | `.github/workflows/main.yml` (OpenJDK GHA Sanity Checks), CI only |
-| `M3_MAVEN_CONTROL_REACTOR` | `hsoliwal/com.synexia` canonical recipe execution (owner per contract); imported receipt |
+| `M3_MAVEN_CONTROL_REACTOR` | **HOLD — owner policy conflict.** `AGENTS.md` assigns canonical recipe execution to Synexia, but `release-contract.json` assigns this gate to `hsoliwal/M3jdk21`. No producer receipt is authorized by this table until the policy owners reconcile the conflict. |
 | `STRING_UTF16_CONTRACT` | no workflow job or command is bound to this gate yet |
 
 ## Platform matrix
 
-These are the CI facts as of 2026-10-31 for master `bb66a8c16642`. "Pending" means no completed
-run exists at the release commit.
+**Historical CI snapshot only:** the entries below describe 2026-10-31 observations
+at master `bb66a8c16642`, not 2026-11-07 current `master` and not a release candidate.
+Recompute build, test and coverage evidence against the final candidate commit and tree.
+`Pending` means no qualifying run was recorded at the then-proposed release commit.
 
 | Platform | JDK build lane | Latest evidence | Preview state |
 | --- | --- | --- | --- |
@@ -93,14 +95,21 @@ run exists at the release commit.
 
 ## Known issues
 
-- **Platform builds:** no completed OpenJDK sanity run exists since 2026-10-19. The Actions queue
-  held 305 queued runs on 2026-10-31, so `OPENJDK_SANITY_MATRIX` is PENDING.
-- **Legacy recipe custody:** `legacy_recipe_custody` is HOLD. 811 executable candidates remain
-  under the legacy recipe roots. Their deletion depends on the Synexia importer repoint. Until it
-  lands, `verify_release_admission.py --release` cannot report `release_ready: true`.
-- **Synexia-owned gates:** the `M3_MAVEN_CONTROL_REACTOR` receipt is executed only in
-  `hsoliwal/com.synexia`. `m3-a3.yml` needs the `SYNEXIA_READ_TOKEN` repository secret to read
-  the private pin.
+- **Platform builds (snapshot 2026-10-31):** the last recorded completed OpenJDK
+  sanity run in this audit was from 2026-10-19; 305 Action runs were queued
+  on 2026-10-31. This is historical evidence, not a statement about the live
+  Actions queue. The final candidate's `OPENJDK_SANITY_MATRIX` remains unqualified
+  until current-revision results are included in the release evidence manifest.
+- **Legacy recipe custody (2026-10-31 inventory):** `legacy_recipe_custody` was HOLD
+  with 811 executable candidates across historical recipe roots. Re-run the current
+  verifier and inventory at the final source tree; do not assume that count remains
+  current, remove candidates without sealing provenance/callers, or waive the gate.
+- **Maven control-reactor ownership:** **HOLD.** `AGENTS.md` and the canonical porting
+  invariant describe Synexia-owned recipe authoring/execution; the machine release contract
+  currently requires a source-bound gate owned/executed by M3JDK21. No recipe execution owner
+  is silently redefined by this release note. Before enabling the producer, reconcile policy,
+  update the canonical contract/verifier and verify the exact executed receipt. The historical
+  `m3-a3.yml` private Synexia pin must be reviewed for necessity before adding credentials.
 - **`STRING_UTF16_CONTRACT`:** this gate has no bound producer.
 - **Tokenizer image workflow:** `M3JDK21 tokenizer source-built image and jtreg` stops before the
   build, at the `get-jtreg` step: the artifact `bundles-jtreg-8.2.1+1` is not found (last run 40992710079,
