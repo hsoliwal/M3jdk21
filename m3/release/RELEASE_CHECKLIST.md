@@ -20,13 +20,14 @@ the claims, non-claims, platform matrix and known issues.
 With these parameters, the release commit is a pure function of the release tree. Anyone can
 recompute it and get the same SHA.
 
-## 1. Merge the source PRs (user)
+## 1. Review the current source head and already-merged PRs
 
-1. Review, approve and merge [#2177](https://github.com/hsoliwal/M3jdk21/pull/2177). It is the
-   superset of #2168-#2171 and #2173-#2176. It is optional for the preview: if it is not merged,
-   the release tree stays master plus #2184.
-2. Review, approve and merge [#2184](https://github.com/hsoliwal/M3jdk21/pull/2184). It adds
-   swing-viewport `-Xlint:all -Werror` (blocker 12), these notes and this checklist.
+As of 2026-11-07, [#2177](https://github.com/hsoliwal/M3jdk21/pull/2177)
+(merged 2026-11-04) and [#2184](https://github.com/hsoliwal/M3jdk21/pull/2184)
+(merged 2026-11-03) are **historical inputs, not pending merge actions**.
+Inspect current `master`, its ancestry, the incoming release-preparation PRs,
+and the no-loss/source-retention queue. Never base a release on the older
+`bb66a8c16642` snapshot or assume that its earlier preview tree is still current.
 
 ## 2. Repository secret (user)
 
@@ -45,10 +46,11 @@ stays HOLD and `--release` cannot report `release_ready: true`.
 
 ## 4. Release branch
 
-The prepared branch is a candidate. It holds one commit whose tree is master `bb66a8c16642` plus
-#2184 at `70c28a8bfadf`. Steps 1-3 change master's tree (the custody deletion always does), so
-rebuild the commit from the final master tree. Never force-push: first delete the candidate
-branch, which is the user's call, then push the rebuilt commit.
+The preview commit/tree described in the historical 2026-10-31 notes is **stale** after
+subsequent merges. Recompute from the final reviewed `master` tree, preserve the exact
+OpenJDK baseline and source/evidence identity, and use a new candidate branch when possible.
+Never force-push or delete an existing release branch without explicit review. The
+commands below are a manual publication procedure, not an action performed by this PR.
 
 ```sh
 git fetch origin master

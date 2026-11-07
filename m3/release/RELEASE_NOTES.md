@@ -122,6 +122,9 @@ run exists at the release commit.
 - **Swing viewport serialization:** `M3PackedTableModel` throws `NotSerializableException` when
   it holds a column (`M3PackedColumn` is not `Serializable`). This was already true before this
   release.
-- **Contract field:** `release-contract.json` `release.release_branch` still names
-  `release/first-clean-boundary-20261007`. That branch was never created, and the verifier does
-  not read the field.
+- **Release branch identity:** the contract, this note and the checklist now agree on
+  `release/m3jdk-21.0.14-m3.1-preview`. This naming check does not establish a built or
+  tested release image.
+- **Recipe custody/owner policy:** `AGENTS.md` and the release contract have conflicting
+  descriptions of canonical recipe execution ownership. Reconcile them through a separately
+  reviewed policy change before treating the control-reactor proof as admissible.
