@@ -14,6 +14,7 @@
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // Modified 2026 by Hitesh Soliwal and contributors: refuse erasing a slot a re-entrant comparator already released (census2 P2-098 B4).
+// Modified 2026 by Hitesh Soliwal and contributors: fail fast when a comparator changes the structure during a slot lookup (TREEMAP_ABA_GUARD).
 package jdk.m3.collections;
 
 import java.util.Arrays;
@@ -35,8 +36,11 @@ import java.util.SortedMap;
  * An optional provider resolves explicitly deferred values on value access or touch.
  * Provider state is one short lane shared by all views; eager/key-only trees allocate none.
  * This collection is not thread-safe. Providers must not mutate its shared mappings.
- * A key removal whose comparator clears the map or erases that mapping during the lookup
- * throws ConcurrentModificationException instead of erasing a released slot.
+ * A key lookup or insertion during which the comparator changes the map's structure throws
+ * ConcurrentModificationException: the located slot may have been released or reused for
+ * another key, so it is never read, written, erased or returned. Creating an iterator never
+ * fails for it: the iterator reads the revision before its first slot and throws at its first
+ * call. Steps over bounded views, whose bound probes call the comparator, throw at once.
  */
 public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements NavigableMap<K, V> {
     private final Tree<K, V> tree;
@@ -98,14 +102,38 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         int s = hasHigh ? tree.near(high, highInclusive ? -1 : -2) : tree.extreme(tree.root, true);
         return slotWithin(s) ? s : -1;
     }
-    @Override int firstSlot() { return descending ? highest() : lowest(); }
-    @Override int lastSlot() { return descending ? lowest() : highest(); }
+    //FLLDCIM: MRL - recipe TREEMAP_ABA_GUARD v1 (qualification/treemap-aba-guard-20261107, review of #2641): revision-guarded comparator lookups
+    /**
+     * A bounded endpoint or step and a neighbor search probe the found slot's key against the
+     * view bounds (comparator calls after the walk): they return the slot only if the revision
+     * read before the lookup still holds. Key walks check after every comparator call.
+     */
+    private int located(int expected, int slot) { check(expected); return slot; }
+    @Override int firstSlot() { return located(revision(), descending ? highest() : lowest()); }
+    @Override int lastSlot() { return located(revision(), descending ? lowest() : highest()); }
+    /**
+     * First slot of a new cursor: creating a cursor never fails for a re-entrant comparator.
+     * A structural change during the lookup yields -1 and the cursor, which read the revision
+     * before, reports it at its first call; the comparator's own exceptions propagate.
+     */
+    int cursorStart(boolean last) {
+        int expected = revision();
+        try {
+            return last ? lastSlot() : firstSlot();
+        } catch (java.util.ConcurrentModificationException changed) {
+            if (revision() == expected) { throw changed; }
+            return -1;
+        }
+    }
+    @Override int firstCursorSlot() { return cursorStart(false); }
     @Override int nextSlot(int slot) {
-        int s = tree.step(slot, descending); return slotWithin(s) ? s : -1;
+        int expected = revision(), s = tree.step(slot, descending);
+        return located(expected, slotWithin(s) ? s : -1);
     }
     /** Opposite encounter direction on this bounded/descending array-backed owner. */
     int previousIndexedSlot(int slot) {
-        int s = tree.step(slot, !descending); return slotWithin(s) ? s : -1;
+        int expected = revision(), s = tree.step(slot, !descending);
+        return located(expected, slotWithin(s) ? s : -1);
     }
     /** Existing AVL neighbor kernel exposed to sibling filtered views as a slot only. */
     int nearIndexedSlot(K key, int relation) { return near(key, relation); }
@@ -170,16 +198,17 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     }
     @Override public V put(K key, V value) {
         tree.writable();
+        int expected = revision(); // before the admission and descent comparator calls
         // Ordinary nonempty roots validate against visited keys during descent.
         // Keep admission validation for the first key and all other value/view modes.
         if (tree.size == 0 || hasLow || hasHigh || descending || tree.lazy != null || tree.keyOnly) {
             checked(key);
         }
         if (!within(key)) { throw new IllegalArgumentException("key outside view"); }
-        int expected = revision(), p = -1, s = tree.root, cmp = 0;
+        int p = -1, s = tree.root, cmp = 0;
         while (s >= 0) {
-            cmp = tree.compare(key, keyAt(s));
-            if (cmp == 0) { check(expected); return writeAt(s, value); }
+            cmp = tree.compare(key, keyAt(s)); check(expected);
+            if (cmp == 0) { return writeAt(s, value); }
             p = s; s = cmp < 0 ? tree.left[s] : tree.right[s];
         }
         check(expected); tree.insert(p, cmp, key, value); return null;
@@ -229,8 +258,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         if (!within(key)) { throw new IllegalArgumentException("key outside view"); }
         int expected = revision(), p = -1, s = tree.root, cmp = 0;
         while (s >= 0) {
-            cmp = tree.compare(key, keyAt(s));
-            if (cmp == 0) { check(expected); return false; }
+            cmp = tree.compare(key, keyAt(s)); check(expected);
+            if (cmp == 0) { return false; }
             p = s; s = cmp < 0 ? tree.left[s] : tree.right[s];
         }
         check(expected); tree.insert(p, cmp, key, null, false); return true;
@@ -315,16 +344,16 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     }
     private int near(K key, int relation) {
         checked(key); int r = descending ? -relation : relation;
-        int s = tree.near(key, r);
+        int expected = revision(), s = tree.near(key, r);
         if (s < 0) { return -1; }
         if (r < 0 && hasHigh) {
-            int c = tree.compare(keyAt(s), high);
+            int c = tree.compare(keyAt(s), high); check(expected);
             if (c > 0 || c == 0 && !highInclusive) { s = highest(); }
         } else if (r > 0 && hasLow) {
-            int c = tree.compare(keyAt(s), low);
+            int c = tree.compare(keyAt(s), low); check(expected);
             if (c < 0 || c == 0 && !lowInclusive) { s = lowest(); }
         }
-        return slotWithin(s) ? s : -1;
+        return located(expected, slotWithin(s) ? s : -1);
     }
     private K nullableKey(int s) { return s < 0 ? null : keyAt(s); }
     private K requiredKey(int s) { if (s < 0) { throw new NoSuchElementException(); } return keyAt(s); }
@@ -436,9 +465,17 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         @SuppressWarnings("unchecked") int compare(K a, K b) {
             return comparator == null ? ((Comparable<? super K>) Objects.requireNonNull(a)).compareTo(b) : comparator.compare(a, b);
         }
+        //FLLDCIM: MRL - recipe TREEMAP_ABA_GUARD v1: a key walk never reads another slot after its comparator changed the structure
+        /** Ends a key walk whose comparator call changed the structure before another slot is read. */
+        void walked(int expected) {
+            if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }
+        }
         int find(K key) {
-            int s = root;
-            while (s >= 0) { int c = compare(key, M3SlotArrays.get(keys, s)); if (c == 0) { return s; } s = c < 0 ? left[s] : right[s]; }
+            int s = root, expected = modifications;
+            while (s >= 0) {
+                int c = compare(key, M3SlotArrays.get(keys, s)); walked(expected);
+                if (c == 0) { return s; } s = c < 0 ? left[s] : right[s];
+            }
             return -1;
         }
         int extreme(int s, boolean maximum) {
@@ -453,9 +490,9 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             return p;
         }
         int near(K key, int relation) {
-            int s = root, candidate = -1;
+            int s = root, candidate = -1, expected = modifications;
             while (s >= 0) {
-                int c = compare(key, M3SlotArrays.get(keys, s));
+                int c = compare(key, M3SlotArrays.get(keys, s)); walked(expected);
                 if (c == 0) { return Math.abs(relation) == 1 ? s : step(s, relation < 0); }
                 if (c < 0) { if (relation > 0) { candidate = s; } s = left[s]; }
                 else { if (relation < 0) { candidate = s; } s = right[s]; }

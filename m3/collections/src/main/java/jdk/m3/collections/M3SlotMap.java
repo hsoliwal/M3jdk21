@@ -14,6 +14,7 @@
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: restore fresh caller-owned entry projections without retained facade storage.
+// Modified 2026 by Hitesh Soliwal and contributors: slot cursors read the revision before their first slot (TREEMAP_ABA_GUARD).
 package jdk.m3.collections;
 
 import java.lang.ref.Reference;
@@ -46,6 +47,11 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     abstract int revision();
     boolean live(int slot) { return true; }
     void accessed(int slot) { }
+    /**
+     * First slot of a new slot cursor. An owner whose first-slot lookup can see a re-entrant
+     * structural change returns -1 then; the cursor read the revision before and reports it.
+     */
+    int firstCursorSlot() { return firstSlot(); }
     int entrySlot(K key, int hint, int expected) { return findSlot(key); }
     final Entry<K, V> entryAt(int slot) { return new LiveEntry(keyAt(slot), slot, revision()); }
     final void check(int expected) {
@@ -207,8 +213,8 @@ abstract class M3SlotMap<K, V> extends AbstractMap<K, V> {
     }
     final <T> Iterator<T> slots(int kind) {
         return new Iterator<>() {
-            private int cursor = firstSlot();
-            private int expected = revision();
+            private int expected = revision(); // before the first slot: its lookup may call the comparator
+            private int cursor = firstCursorSlot();
             private int last = -1;
             private K heldKey;
             private K lastKey;

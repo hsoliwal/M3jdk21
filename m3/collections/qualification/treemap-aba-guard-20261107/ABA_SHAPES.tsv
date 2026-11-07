@@ -1,0 +1,147 @@
+# SPDX-License-Identifier: Apache-2.0
+# M3TreeMapReentrantLookupSelfTest report mode on base 05789961c767 (owners = #2641 head b8fb8956aaac) and this leaf's head (real-pom classes): per operation shape and view, the cases (one per comparator call N of the operation; the action clear + put/add 50, 60 fires at call N) and the verdicts. DAMAGED = verifyInvariants fails; WRONG = neither fail-fast (CME with the action's content; a drained cursor may return a prefix of the plain walk first) nor the action-then-operation outcome. Totals: base cases=808 failures=353, head cases=808 failures=0. Per-case rows: differential.sh writes shapes-base.tsv / shapes-head.tsv.
+view	operation	cases	base_pass	base_wrong	base_damaged	head_pass	head_wrong	head_damaged	base_first_failure
+sub	creation(structural)	1	0	1	0	1	0	0	N=1 WRONG first call completed
+sub	creation(comparator's own CME)	1	1	0	0	1	0	0	-
+root	remove	2	1	1	0	2	0	0	N=2 v60 {50=v50} valid
+sub	remove	4	3	1	0	4	0	0	N=4 v60 {50=v50} valid
+descSub	remove	4	3	1	0	4	0	0	N=4 v60 {50=v50} valid
+root	remove(k,v)	2	1	1	0	2	0	0	N=2 true {50=v50} valid
+sub	remove(k,v)	4	3	1	0	4	0	0	N=4 true {50=v50} valid
+descSub	remove(k,v)	4	3	1	0	4	0	0	N=4 true {50=v50} valid
+root	keySet.remove	2	1	1	0	2	0	0	N=2 true {50=v50} valid
+sub	keySet.remove	4	3	1	0	4	0	0	N=4 true {50=v50} valid
+descSub	keySet.remove	4	3	1	0	4	0	0	N=4 true {50=v50} valid
+root	entrySet.remove	2	1	1	0	2	0	0	N=2 true {50=v50} valid
+sub	entrySet.remove	4	3	1	0	4	0	0	N=4 true {50=v50} valid
+descSub	entrySet.remove	4	3	1	0	4	0	0	N=4 true {50=v50} valid
+root	entrySet.contains	2	1	1	0	2	0	0	N=2 true {50=v50, 60=v60} valid
+sub	entrySet.contains	4	3	1	0	4	0	0	N=4 true {50=v50, 60=v60} valid
+descSub	entrySet.contains	4	3	1	0	4	0	0	N=4 true {50=v50, 60=v60} valid
+root	replace	2	1	1	0	2	0	0	N=2 v60 {50=v50, 60=r} valid
+sub	replace	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=r} valid
+descSub	replace	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=r} valid
+root	replace(k,old,new)	2	1	1	0	2	0	0	N=2 true {50=v50, 60=r} valid
+sub	replace(k,old,new)	4	3	1	0	4	0	0	N=4 true {50=v50, 60=r} valid
+descSub	replace(k,old,new)	4	3	1	0	4	0	0	N=4 true {50=v50, 60=r} valid
+root	putIfAbsent	2	1	1	0	2	0	0	N=2 v60 {50=v50, 60=v60} valid
+sub	putIfAbsent	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+descSub	putIfAbsent	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+root	computeIfAbsent	2	1	1	0	2	0	0	N=2 v60 {50=v50, 60=v60} valid
+sub	computeIfAbsent	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+descSub	computeIfAbsent	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+root	computeIfPresent	2	1	1	0	2	0	0	N=2 v60! {50=v50, 60=v60!} valid
+sub	computeIfPresent	4	3	1	0	4	0	0	N=4 v60! {50=v50, 60=v60!} valid
+descSub	computeIfPresent	4	3	1	0	4	0	0	N=4 v60! {50=v50, 60=v60!} valid
+root	compute(remove)	2	1	1	0	2	0	0	N=2 null {50=v50} valid
+sub	compute(remove)	4	3	1	0	4	0	0	N=4 null {50=v50} valid
+descSub	compute(remove)	4	3	1	0	4	0	0	N=4 null {50=v50} valid
+root	compute(write)	4	3	1	0	4	0	0	N=2 v60! {2=v60!, 50=v50, 60=v60} valid
+sub	compute(write)	9	5	4	0	9	0	0	N=4 v60! {2=v60!, 50=v50, 60=v60} valid
+descSub	compute(write)	9	5	4	0	9	0	0	N=4 v60! {2=v60!, 50=v50, 60=v60} valid
+root	merge(remove)	2	1	1	0	2	0	0	N=2 null {50=v50} valid
+sub	merge(remove)	4	3	1	0	4	0	0	N=4 null {50=v50} valid
+descSub	merge(remove)	4	3	1	0	4	0	0	N=4 null {50=v50} valid
+root	get	2	1	1	0	2	0	0	N=2 v60 {50=v50, 60=v60} valid
+sub	get	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+descSub	get	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+root	getOrDefault	2	1	1	0	2	0	0	N=2 v60 {50=v50, 60=v60} valid
+sub	getOrDefault	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+descSub	getOrDefault	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+root	containsKey	2	1	1	0	2	0	0	N=2 true {50=v50, 60=v60} valid
+sub	containsKey	4	3	1	0	4	0	0	N=4 true {50=v50, 60=v60} valid
+descSub	containsKey	4	3	1	0	4	0	0	N=4 true {50=v50, 60=v60} valid
+root	put	2	2	0	0	2	0	0	-
+sub	put	5	5	0	0	5	0	0	-
+descSub	put	5	5	0	0	5	0	0	-
+root	remove(6)	2	1	1	0	2	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	remove(6)	4	3	1	0	4	0	0	N=3 !NullPointerException {50=v50, 60=v60} valid
+descSub	remove(6)	4	3	1	0	4	0	0	N=3 !NullPointerException {50=v50, 60=v60} valid
+root	get(6)	2	1	1	0	2	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	get(6)	4	3	1	0	4	0	0	N=3 !NullPointerException {50=v50, 60=v60} valid
+descSub	get(6)	4	3	1	0	4	0	0	N=3 !NullPointerException {50=v50, 60=v60} valid
+root	put(6)	2	1	1	0	2	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	put(6)	5	4	1	0	5	0	0	N=4 !NullPointerException {50=v50, 60=v60} valid
+descSub	put(6)	5	4	1	0	5	0	0	N=4 !NullPointerException {50=v50, 60=v60} valid
+root	ceilingEntry	3	1	2	0	3	0	0	N=2 60=v60 {50=v50, 60=v60} valid
+sub	ceilingEntry	6	1	5	0	6	0	0	N=2 60=v60 {50=v50, 60=v60} valid
+descSub	ceilingEntry	6	2	4	0	6	0	0	N=3 60=v60 {50=v50, 60=v60} valid
+root	floorKey	3	2	1	0	3	0	0	N=3 60 {50=v50, 60=v60} valid
+sub	floorKey	6	2	4	0	6	0	0	N=3 60 {50=v50, 60=v60} valid
+descSub	floorKey	6	1	5	0	6	0	0	N=2 60 {50=v50, 60=v60} valid
+root	floorKey(6)	3	2	1	0	3	0	0	N=2 !NullPointerException {50=v50, 60=v60} valid
+sub	floorKey(6)	6	3	3	0	6	0	0	N=2 !NullPointerException {50=v50, 60=v60} valid
+descSub	floorKey(6)	6	1	5	0	6	0	0	N=2 !NullPointerException {50=v50, 60=v60} valid
+root	higherKey	3	1	2	0	3	0	0	N=2 60 {50=v50, 60=v60} valid
+sub	higherKey	6	1	5	0	6	0	0	N=2 60 {50=v50, 60=v60} valid
+descSub	higherKey	6	2	4	0	6	0	0	N=3 50 {50=v50, 60=v60} valid
+sub	firstEntry	5	3	2	0	5	0	0	N=1 60=v60 {50=v50, 60=v60} valid
+descSub	firstEntry	5	0	5	0	5	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	lastKey	5	0	5	0	5	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+descSub	lastKey	5	3	2	0	5	0	0	N=1 60 {50=v50, 60=v60} valid
+sub	pollFirstEntry	5	3	2	0	5	0	0	N=1 60=v60 {50=v50} valid
+descSub	pollFirstEntry	5	0	3	2	5	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	pollLastEntry	5	0	3	2	5	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+descSub	pollLastEntry	5	3	2	0	5	0	0	N=1 60=v60 {50=v50} valid
+sub	size	17	5	12	0	17	0	0	N=1 1 {50=v50, 60=v60} valid
+descSub	size	17	0	17	0	17	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	isEmpty	5	5	0	0	5	0	0	-
+descSub	isEmpty	5	2	3	0	5	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	clear	17	5	4	8	17	0	0	N=1 cleared {50=v50} valid
+descSub	clear	17	2	5	10	17	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	keys	17	15	2	0	17	0	0	N=1 [60] {50=v50, 60=v60} valid
+descSub	keys	17	12	5	0	17	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+sub	values	17	15	2	0	17	0	0	N=1 [v60] {50=v50, 60=v60} valid
+descSub	values	17	12	5	0	17	0	0	N=1 !NullPointerException {50=v50, 60=v60} valid
+root	set.remove	2	1	1	0	2	0	0	N=2 true [50] valid
+sub	set.remove	4	3	1	0	4	0	0	N=4 true [50] valid
+descSub	set.remove	4	3	1	0	4	0	0	N=4 true [50] valid
+root	set.remove(6)	2	1	1	0	2	0	0	N=1 !NullPointerException [50, 60] valid
+sub	set.remove(6)	4	3	1	0	4	0	0	N=3 !NullPointerException [50, 60] valid
+descSub	set.remove(6)	4	3	1	0	4	0	0	N=3 !NullPointerException [50, 60] valid
+root	set.contains	2	1	1	0	2	0	0	N=2 true [50, 60] valid
+sub	set.contains	4	3	1	0	4	0	0	N=4 true [50, 60] valid
+descSub	set.contains	4	3	1	0	4	0	0	N=4 true [50, 60] valid
+root	set.add	2	1	1	0	2	0	0	N=2 false [50, 60] valid
+sub	set.add	4	3	1	0	4	0	0	N=4 false [50, 60] valid
+descSub	set.add	4	3	1	0	4	0	0	N=4 false [50, 60] valid
+root	set.ceiling	3	1	2	0	3	0	0	N=2 60 [50, 60] valid
+sub	set.ceiling	6	1	5	0	6	0	0	N=2 60 [50, 60] valid
+descSub	set.ceiling	6	2	4	0	6	0	0	N=3 60 [50, 60] valid
+root	set.lower	4	2	2	0	4	0	0	N=3 60 [50, 60] valid
+sub	set.lower	7	2	5	0	7	0	0	N=3 60 [50, 60] valid
+descSub	set.lower	7	1	6	0	7	0	0	N=2 60 [50, 60] valid
+root	set.floor(6)	3	2	1	0	3	0	0	N=2 !NullPointerException [50, 60] valid
+sub	set.floor(6)	6	3	3	0	6	0	0	N=2 !NullPointerException [50, 60] valid
+descSub	set.floor(6)	6	1	5	0	6	0	0	N=2 !NullPointerException [50, 60] valid
+sub	set.first	5	3	2	0	5	0	0	N=1 60 [50, 60] valid
+descSub	set.first	5	0	5	0	5	0	0	N=1 !NullPointerException [50, 60] valid
+sub	set.pollFirst	5	3	2	0	5	0	0	N=1 60 [50] valid
+descSub	set.pollFirst	5	0	3	2	5	0	0	N=1 !NullPointerException [50, 60] valid
+sub	set.pollLast	5	0	3	2	5	0	0	N=1 !NullPointerException [50, 60] valid
+descSub	set.pollLast	5	3	2	0	5	0	0	N=1 60 [50] valid
+sub	set.size	17	5	12	0	17	0	0	N=1 1 [50, 60] valid
+descSub	set.size	17	0	17	0	17	0	0	N=1 !NullPointerException [50, 60] valid
+sub	set.clear	17	5	4	8	17	0	0	N=1 cleared [50] valid
+descSub	set.clear	17	2	5	10	17	0	0	N=1 !NullPointerException [50, 60] valid
+sub	set.keys	17	15	2	0	17	0	0	N=1 [60] [50, 60] valid
+descSub	set.keys	17	12	5	0	17	0	0	N=1 !NullPointerException [50, 60] valid
+sub	mutableFiltered.iterator	17	17	0	0	17	0	0	-
+descSub	mutableFiltered.iterator	17	14	3	0	17	0	0	N=1 !NullPointerException [50, 60] valid
+sub	mutableFiltered.descendingIterator	17	14	3	0	17	0	0	N=1 !NullPointerException [50, 60] valid
+descSub	mutableFiltered.descendingIterator	17	17	0	0	17	0	0	-
+root	defer	3	3	0	0	3	0	0	-
+sub	defer	5	5	0	0	5	0	0	-
+descSub	defer	5	5	0	0	5	0	0	-
+root	defer(6)	3	2	1	0	3	0	0	N=2 !NullPointerException {50=v50, 60=v60} valid
+sub	defer(6)	5	4	1	0	5	0	0	N=4 !NullPointerException {50=v50, 60=v60} valid
+descSub	defer(6)	5	4	1	0	5	0	0	N=4 !NullPointerException {50=v50, 60=v60} valid
+root	touch	2	1	1	0	2	0	0	N=2 v60 {50=v50, 60=v60} valid
+sub	touch	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+descSub	touch	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=v60} valid
+root	valueFlags	2	1	1	0	2	0	0	N=2 2 {50=v50, 60=v60} valid
+sub	valueFlags	4	3	1	0	4	0	0	N=4 2 {50=v50, 60=v60} valid
+descSub	valueFlags	4	3	1	0	4	0	0	N=4 2 {50=v50, 60=v60} valid
+root	entry.setValue	2	1	1	0	2	0	0	N=2 v60 {50=v50, 60=s} valid
+sub	entry.setValue	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=s} valid
+descSub	entry.setValue	4	3	1	0	4	0	0	N=4 v60 {50=v50, 60=s} valid
