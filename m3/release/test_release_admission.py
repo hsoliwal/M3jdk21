@@ -100,8 +100,17 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
             "gates": [],
         }
         for ident in self.contract["mandatory_release_gates"]:
-            artifact = self.evidence_dir / (ident + ".log")
-            artifact.write_text("SYNTHETIC VALIDATOR FIXTURE ONLY " + ident + "\n")
+            artifact = self.evidence_dir / (
+                ident + (".xml" if ident == "M3_CHANGED_ATOM_COVERAGE" else ".log"))
+            if ident == "M3_CHANGED_ATOM_COVERAGE":
+                artifact.write_text(
+                    '<report name="synthetic"><class name="fixture/Example">'
+                    '<method name="run" desc="()V">'
+                    '<counter type="LINE" covered="99" missed="1"/>'
+                    '<counter type="BRANCH" covered="99" missed="1"/>'
+                    '</method></class></report>')
+            else:
+                artifact.write_text("SYNTHETIC VALIDATOR FIXTURE ONLY " + ident + "\n")
             gate = {
                 "id": ident, "status": "PASS", "exit_code": 0,
                 "owner_repository": release.PRODUCT_REPOSITORY,
@@ -109,6 +118,30 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
                 "environment": {"os": "fixture-os", "architecture": "fixture-arch", "toolchain": "fixture-toolchain"},
                 "artifacts": [{"path": artifact.name, "sha256": release.sha256(artifact)}],
             }
+            if ident == "M3_CHANGED_ATOM_COVERAGE":
+                inventory_file = self.evidence_dir / (ident + ".tsv")
+                inventory_file.write_text(
+                    "id\tclass\tmethod\tdescriptor\tsource_path\tbranchless_explanation\n"
+                    "fixture.Example#run\tfixture/Example\trun\t()V\tsrc/example.java\t\n")
+                gate["artifacts"].append({
+                    "path": inventory_file.name, "sha256": release.sha256(inventory_file)})
+                gate["coverage"] = {
+                    "schema": release.COVERAGE_SCHEMA, "scope": release.COVERAGE_SCOPE,
+                    "format": "JACOCO_XML", "instrumented": True, "inventory_complete": True,
+                    "unmeasured_count": 0, "excluded_atoms": [],
+                    "tool": "synthetic instrumentation fixture", "report_artifact": artifact.name,
+                    "inventory_artifact": inventory_file.name,
+                    "inventory_sha256": release.sha256(inventory_file),
+                    "measured_count": 1, "atoms": [{
+                        "id": "fixture.Example#run",
+                        "source_path": "src/example.java",
+                        "source_sha256": release.sha256(self.root / "src/example.java"),
+                        "jacoco_class": "fixture/Example",
+                        "jacoco_method": "run", "jacoco_descriptor": "()V",
+                        "line_covered": 99, "line_missed": 1,
+                        "branch_covered": 99, "branch_missed": 1,
+                    }],
+                }
             if ident == "M3_MAVEN_CONTROL_REACTOR":
                 gate["canonical_recipe"] = {
                     "repository": release.PRODUCT_REPOSITORY, "commit": "1" * 40,
@@ -173,6 +206,71 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assertEqual(queued[0]["state"], "QUEUED")
         self.assertFalse(queued[0]["blocking"])
         self.assertEqual(result["source_commit"], self.git("rev-parse", "HEAD"))
+
+    def test_coverage_receipt_is_source_pinned_and_fail_closed(self):
+        item = next(g for g in self.evidence["gates"]
+                    if g["id"] == release.COVERAGE_GATE)
+        receipt = item["coverage"]
+        scenarios = [
+            ("missing receipt", lambda: item.pop("coverage"), "coverage receipt"),
+            ("missing instrumented proof", lambda: receipt.__setitem__("instrumented", False),
+             "instrumentation"),
+            ("incomplete inventory", lambda: receipt.__setitem__("inventory_complete", False),
+             "complete atom inventory"),
+            ("unmeasured", lambda: receipt.__setitem__("unmeasured_count", 1),
+             "unmeasured changed atoms"),
+            ("excluded", lambda: receipt.__setitem__("excluded_atoms", ["fixture"]),
+             "excluded atoms"),
+            ("wrong file digest", lambda: receipt["atoms"][0].__setitem__("source_sha256", "f" * 64),
+             "source hash mismatch"),
+            ("below branch threshold", lambda: receipt["atoms"][0].__setitem__("branch_covered", 8),
+             "branch coverage below 90%"),
+            ("below line threshold", lambda: receipt["atoms"][0].__setitem__("line_covered", 8),
+             "line coverage below 90%"),
+            ("missing report", lambda: receipt.__setitem__("report_artifact", "not-an-artifact.xml"),
+             "raw report artifact"),
+            ("inventory checksum mismatch", lambda: receipt.__setitem__("inventory_sha256", "f" * 64),
+             "coverage inventory artifact"),
+            ("invented numbers", lambda: receipt["atoms"][0].__setitem__("line_covered", 100),
+             "reported atom counts disagree with raw JaCoCo"),
+        ]
+        import copy
+        original = copy.deepcopy(item)
+        for name, change, detail in scenarios:
+            item.clear()
+            item.update(copy.deepcopy(original))
+            receipt = item["coverage"]
+            with self.subTest(name=name):
+                change()
+                result = self.result()
+                self.assert_blocked(result, "gate:" + release.COVERAGE_GATE)
+                blocker = next(b["detail"] for b in result["blockers"]
+                               if b["name"] == "gate:" + release.COVERAGE_GATE)
+                self.assertIn(detail, blocker)
+        item.clear()
+        item.update(original)
+
+    def test_coverage_policy_is_not_downgradable(self):
+        self.contract["coverage_policy"]["minimum_line_ratio"] = 0.0
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.assert_blocked(self.result(), "contract.coverage_policy")
+
+    def test_branchless_atom_requires_an_explicit_reason(self):
+        item = next(g for g in self.evidence["gates"]
+                    if g["id"] == release.COVERAGE_GATE)
+        atom = item["coverage"]["atoms"][0]
+        artifact_path = self.evidence_dir / item["coverage"]["report_artifact"]
+        artifact_path.write_text(artifact_path.read_text().replace(
+            '<counter type="BRANCH" covered="99" missed="1"/>',
+            '<counter type="BRANCH" covered="0" missed="0"/>'))
+        report_row = next(a for a in item["artifacts"] if a["path"] == artifact_path.name)
+        report_row["sha256"] = release.sha256(artifact_path)
+        atom["branch_covered"] = 0
+        atom["branch_missed"] = 0
+        self.assert_blocked(self.result(), "gate:" + release.COVERAGE_GATE)
+        atom["branchless_explanation"] = "No control flow in immutable field accessor fixture"
+        result = self.result()
+        self.assertTrue(result["release_ready"], result)
 
     def test_missing_one_mandatory_gate_is_not_a_pass(self):
         removed = self.evidence["gates"].pop()
