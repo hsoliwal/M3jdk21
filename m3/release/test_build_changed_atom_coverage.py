@@ -177,5 +177,24 @@ class ImporterTest(unittest.TestCase):
         self.assertEqual(2, exit_info.exception.code)
 
 
+    def test_main_script_entrypoint(self):
+        import contextlib
+        import io
+        import runpy
+        import sys
+        from unittest.mock import patch
+        out = self.root / "entrypoint.json"
+        argv = [str(MODULE), "--root", str(self.root), "--report", str(self.report),
+                "--inventory", str(self.inventory), "--report-artifact", "coverage.xml",
+                "--inventory-artifact", "atoms.tsv", "--tool", "JaCoCo fixture",
+                "--out", str(out)]
+        with patch.object(sys, "argv", argv):
+            with contextlib.redirect_stdout(io.StringIO()):
+                with self.assertRaises(SystemExit) as exited:
+                    runpy.run_path(str(MODULE), run_name="__main__")
+        self.assertEqual(0, exited.exception.code)
+        self.assertTrue(out.is_file())
+
+
 if __name__ == "__main__":
     unittest.main()
