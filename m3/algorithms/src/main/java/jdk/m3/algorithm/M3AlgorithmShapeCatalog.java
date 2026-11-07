@@ -96,6 +96,7 @@ public final class M3AlgorithmShapeCatalog {
             new Shape("coin-change", Family.DYNAMIC_PROGRAMMING, "O(amount*coins)", "O(amount)", "M3DynamicProgrammingAlgorithms.coinChange"),
             new Shape("lis-patience", Family.DYNAMIC_PROGRAMMING, "O(n log n)", "O(n)", "M3DynamicProgrammingAlgorithms.longestIncreasingSubsequence"),
             new Shape("lcs", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(min(m,n))", "M3DynamicProgrammingAlgorithms.longestCommonSubsequence"),
+            new Shape("lcs-witness", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(min(m,n))", "M3IntLcsWitness.javaWitness"),
             new Shape("edit-distance", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(min(m,n))", "M3DynamicProgrammingAlgorithms.editDistance"),
             new Shape("word-break", Family.DYNAMIC_PROGRAMMING, "O(n*L)", "O(n)", "M3DynamicProgrammingAlgorithms.wordBreak"),
             new Shape("unique-grid-paths", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(n)", "M3DynamicProgrammingAlgorithms.uniquePaths"),
@@ -105,6 +106,8 @@ public final class M3AlgorithmShapeCatalog {
             new Shape("bit-count", Family.BITWISE, "O(set bits)", "O(1)", "M3BitAlgorithms.hammingWeight"),
             new Shape("kmp", Family.STRING, "O(n+m)", "O(m)", "M3StringAlgorithms.kmpSearch"),
             new Shape("manacher", Family.STRING, "O(n)", "O(n)", "M3StringAlgorithms.longestPalindrome"),
+            new Shape("z-search", Family.STRING, "O(n+m)", "O(m)", "M3ZAlgorithm.zSearch"),
+            new Shape("one-mismatch-window", Family.STRING, "O(n+m)", "O(n+m)", "M3OneMismatchWindowSearch.allIndices"),
             new Shape("matrix-spiral", Family.MATRIX, "O(mn)", "O(1) aux", "M3MatrixAlgorithms.spiralOrder"),
             new Shape("island-flood", Family.MATRIX, "O(mn)", "O(mn)", "M3MatrixAlgorithms.countIslands"),
             new Shape("matrix-zeroes", Family.MATRIX, "O(mn)", "O(1)", "M3MatrixAlgorithms.setZeroes")
