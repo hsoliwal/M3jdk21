@@ -21,7 +21,7 @@ class ReleaseMetadataTest(unittest.TestCase):
 
     def test_release_identity_is_explicit_and_consistent(self):
         branch = self.contract["release"]["release_branch"]
-        self.assertRegex(branch, r"^release/m3jdk-21\\.\\d+\\.\\d+-m3\\.\\d+-preview$")
+        self.assertRegex(branch, r"^release/m3jdk-21\.\d+\.\d+-m3\.\d+-preview$")
         tag = branch.removeprefix("release/")
         self.assertIn("Branch: `" + branch + "`", self.notes)
         self.assertIn("| Release branch | `" + branch + "` |", self.checklist)
