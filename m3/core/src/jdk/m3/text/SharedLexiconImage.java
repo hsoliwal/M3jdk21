@@ -1,4 +1,6 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+ * Word-comparison portions copyright (C) 2009 The Guava Authors.
+ * Adapted from Guava UnsignedBytes; Apache-2.0, see m3/LICENSE.
  * SPDX-License-Identifier: Apache-2.0
  */
 package jdk.m3.text;
@@ -103,20 +105,37 @@ public final class SharedLexiconImage {
         return hash;
     }
 
+    //FLLDCIM: MRL - merge-loss leaf 69 (origin dfc6800c0696 #2473, fold 1488b5577619): UTF-16 long lanes
     private int compareRecords(int leftIndex, int rightIndex) {
         Objects.checkIndex(leftIndex, offsets.length);
         Objects.checkIndex(rightIndex, offsets.length);
-        int leftBegin = payloadOffset + offsets[leftIndex] * 2;
-        int rightBegin = payloadOffset + offsets[rightIndex] * 2;
-        int units = Math.min(lengths[leftIndex], lengths[rightIndex]);
-        for (int at = 0; at < units; at++) {
-            int leftUnit = (mapping.get(leftBegin + at * 2) & 0xff)
-                    | ((mapping.get(leftBegin + at * 2 + 1) & 0xff) << 8);
-            int rightUnit = (mapping.get(rightBegin + at * 2) & 0xff)
-                    | ((mapping.get(rightBegin + at * 2 + 1) & 0xff) << 8);
+        int leftBegin = payloadOffset + offsets[leftIndex] * Character.BYTES;
+        int rightBegin = payloadOffset + offsets[rightIndex] * Character.BYTES;
+        int leftUnits = lengths[leftIndex], rightUnits = lengths[rightIndex];
+        int units = Math.min(leftUnits, rightUnits);
+        int stride = Long.BYTES / Character.BYTES;
+        int strideLimit = units & -stride;
+        int at = 0;
+        for (; at < strideLimit; at += stride) {
+            int leftOffset = leftBegin + at * Character.BYTES;
+            int rightOffset = rightBegin + at * Character.BYTES;
+            long leftWord = Long.reverseBytes(mapping.getLong(leftOffset));
+            long rightWord = Long.reverseBytes(mapping.getLong(rightOffset));
+            long difference = leftWord ^ rightWord;
+            if (difference != 0) {
+                int shift = Long.numberOfTrailingZeros(difference) & -Character.SIZE;
+                return Integer.compare((int) (leftWord >>> shift) & Character.MAX_VALUE,
+                        (int) (rightWord >>> shift) & Character.MAX_VALUE);
+            }
+        }
+        for (; at < units; at++) {
+            int leftOffset = leftBegin + at * Character.BYTES;
+            int rightOffset = rightBegin + at * Character.BYTES;
+            int leftUnit = Short.toUnsignedInt(Short.reverseBytes(mapping.getShort(leftOffset)));
+            int rightUnit = Short.toUnsignedInt(Short.reverseBytes(mapping.getShort(rightOffset)));
             if (leftUnit != rightUnit) return Integer.compare(leftUnit, rightUnit);
         }
-        return Integer.compare(lengths[leftIndex], lengths[rightIndex]);
+        return Integer.compare(leftUnits, rightUnits);
     }
 
     /** Exact UTF-16 text for a record; unpaired surrogates are preserved. */
@@ -171,18 +190,37 @@ public final class SharedLexiconImage {
         return true;
     }
 
+    //FLLDCIM: MRL - merge-loss leaf 67 (origin 56847a4ec9d0 #2471, fold 87cd0f5408dc): UTF-16 long lanes
     private int compareRecordTo(int index, String value) {
         Objects.checkIndex(index, offsets.length);
         int begin = payloadOffset + offsets[index] * 2;
-        int units = Math.min(lengths[index], value.length());
-        for (int at = 0; at < units; at++) {
-            int offset = begin + at * 2;
-            int recordUnit = (mapping.get(offset) & 0xff)
-                    | ((mapping.get(offset + 1) & 0xff) << 8);
+        int recordUnits = lengths[index];
+        int units = Math.min(recordUnits, value.length());
+        int stride = Long.BYTES / Character.BYTES;
+        int strideLimit = units & -stride;
+        int at = 0;
+        // Guava's first-differing-byte pattern, adapted to unsigned UTF-16 lanes.
+        for (; at < strideLimit; at += stride) {
+            int offset = begin + at * Character.BYTES;
+            long word = Long.reverseBytes(mapping.getLong(offset));
+            long query = value.charAt(at)
+                    | ((long) value.charAt(at + 1) << Character.SIZE)
+                    | ((long) value.charAt(at + 2) << (2 * Character.SIZE))
+                    | ((long) value.charAt(at + 3) << (3 * Character.SIZE));
+            long difference = word ^ query;
+            if (difference != 0) {
+                int shift = Long.numberOfTrailingZeros(difference) & -Character.SIZE;
+                return Integer.compare((int) (word >>> shift) & Character.MAX_VALUE,
+                        (int) (query >>> shift) & Character.MAX_VALUE);
+            }
+        }
+        for (; at < units; at++) {
+            int offset = begin + at * Character.BYTES;
+            int recordUnit = Short.toUnsignedInt(Short.reverseBytes(mapping.getShort(offset)));
             char valueUnit = value.charAt(at);
             if (recordUnit != valueUnit) return Integer.compare(recordUnit, valueUnit);
         }
-        return Integer.compare(lengths[index], value.length());
+        return Integer.compare(recordUnits, value.length());
     }
     /** Copies and checks a record before it can become immutable local backing. */
     public LocalM3StringPiece copyRecord(int index, LocalM3Arena arena) throws IOException {
