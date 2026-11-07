@@ -7,6 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.channels.Channels;
+import java.nio.channels.WritableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -47,6 +49,17 @@ public final class M3FileEventWriter
 
   public M3FileEventWriter(OutputStream output) throws IOException {
     this(output, true);
+  }
+
+  //FLLDCIM: MRL - census3 P3-012, donor MIndexFileEventWriter blob ebc1d230c068: channel writer factory (wire format unchanged)
+  /**
+   * Creates a writer that encodes the standard MIDXEVT2 stream into a caller-owned channel.
+   *
+   * <p>Closing this writer closes the bridged channel. The OutputStream constructor and the embedded
+   * event envelope behaviour remain unchanged.</p>
+   */
+  public static M3FileEventWriter forChannel(WritableByteChannel channel) throws IOException {
+    return new M3FileEventWriter(Channels.newOutputStream(Objects.requireNonNull(channel, "channel")));
   }
 
   /** Construct an event writer whose frames are embedded in an outer stream envelope. */
