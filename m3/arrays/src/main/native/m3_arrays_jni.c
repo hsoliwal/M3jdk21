@@ -106,7 +106,13 @@ Java_jdk_m3_arrays_M3ArrayNative_nativeConcatenateUtf16(
   jsize destination = 0;
   for (jsize index = 0; index < count; index++) {
     jcharArray segment = (jcharArray)(*env)->GetObjectArrayElement(env, segments, index);
-    if (segment == NULL) return NULL;
+    //FLLDCIM: MRL - mergeloss leaf 26 (origin d3c0986e911, dropped by retain merge a7d07c6b1f00): release
+    // the unpublished result and refuse a bare null exactly like the first pass; a pending throwable is kept.
+    if (segment == NULL) {
+      (*env)->DeleteLocalRef(env, result);
+      throw_illegal(env, "null UTF-16 segment");
+      return NULL;
+    }
     jsize length = (*env)->GetArrayLength(env, segment);
     jsize source = 0;
     while (source < length) {
