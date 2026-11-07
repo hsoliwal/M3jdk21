@@ -24,21 +24,13 @@ for mode in jit int nocompact c2; do
     nocompact) flags=(-XX:-CompactStrings) ;;
     c2) flags=(-Xbatch -XX:-TieredCompilation) ;;
   esac
-  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar \
-    --add-modules jdk.m3.text -cp build/tests M3LanguageCorpusManifestTest \
-    | tee "build/logs/extra-corpus-manifest-$mode.log"
-  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar \
-    --add-modules jdk.m3.text -cp build/tests M3RopeTextIndexTest \
-    | tee "build/logs/extra-rope-text-index-$mode.log"
+  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3LanguageCorpusManifestTest | tee "build/logs/extra-corpus-manifest-$mode.log"
+  "$M3JDK/bin/java" -ea -esa "${flags[@]}" --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -cp build/tests M3RopeTextIndexTest | tee "build/logs/extra-rope-text-index-$mode.log"
 done
 
 # Reflective ownership proof has an explicit test-only module open.
-"$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar \
-  --add-modules jdk.m3.text --add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED \
-  -cp build/tests M3PrecomputePayloadFieldPatternTest \
-  | tee build/logs/extra-payload-field-pattern.log
+"$M3JDK/bin/java" -ea -esa --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text --add-opens jdk.m3.text/jdk.m3.text=ALL-UNNAMED -cp build/tests M3PrecomputePayloadFieldPatternTest | tee build/logs/extra-payload-field-pattern.log
 
 # Word-row fixture worker copies java.class.path, not --module-path. Keep the
 # complete released module JAR on this one test's classpath for child parity.
-"$M3JDK/bin/java" -ea -esa -cp build/tests:build/jdk.m3.text.jar \
-  M3WordRowsContractTest | tee build/logs/extra-word-rows-contract.log
+"$M3JDK/bin/java" -ea -esa -cp build/tests:build/jdk.m3.text.jar M3WordRowsContractTest | tee build/logs/extra-word-rows-contract.log
