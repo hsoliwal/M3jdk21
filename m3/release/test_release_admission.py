@@ -100,8 +100,17 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
             "gates": [],
         }
         for ident in self.contract["mandatory_release_gates"]:
-            artifact = self.evidence_dir / (ident + ".log")
-            artifact.write_text("SYNTHETIC VALIDATOR FIXTURE ONLY " + ident + "\n")
+            artifact = self.evidence_dir / (
+                ident + (".xml" if ident == "M3_CHANGED_ATOM_COVERAGE" else ".log"))
+            if ident == "M3_CHANGED_ATOM_COVERAGE":
+                artifact.write_text(
+                    '<report name="synthetic"><class name="fixture/Example">'
+                    '<method name="run" desc="()V">'
+                    '<counter type="LINE" covered="99" missed="1"/>'
+                    '<counter type="BRANCH" covered="99" missed="1"/>'
+                    '</method></class></report>')
+            else:
+                artifact.write_text("SYNTHETIC VALIDATOR FIXTURE ONLY " + ident + "\n")
             gate = {
                 "id": ident, "status": "PASS", "exit_code": 0,
                 "owner_repository": release.PRODUCT_REPOSITORY,
@@ -111,12 +120,14 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
             }
             if ident == "M3_CHANGED_ATOM_COVERAGE":
                 inventory_file = self.evidence_dir / (ident + ".tsv")
-                inventory_file.write_text("id\tsource_path\nfixture.Example#run\tsrc/example.java\n")
+                inventory_file.write_text(
+                    "id\tclass\tmethod\tdescriptor\tsource_path\tbranchless_explanation\n"
+                    "fixture.Example#run\tfixture/Example\trun\t()V\tsrc/example.java\t\n")
                 gate["artifacts"].append({
                     "path": inventory_file.name, "sha256": release.sha256(inventory_file)})
                 gate["coverage"] = {
                     "schema": release.COVERAGE_SCHEMA, "scope": release.COVERAGE_SCOPE,
-                    "instrumented": True, "inventory_complete": True,
+                    "format": "JACOCO_XML", "instrumented": True, "inventory_complete": True,
                     "unmeasured_count": 0, "excluded_atoms": [],
                     "tool": "synthetic instrumentation fixture", "report_artifact": artifact.name,
                     "inventory_artifact": inventory_file.name,
@@ -125,6 +136,8 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
                         "id": "fixture.Example#run",
                         "source_path": "src/example.java",
                         "source_sha256": release.sha256(self.root / "src/example.java"),
+                        "jacoco_class": "fixture/Example",
+                        "jacoco_method": "run", "jacoco_descriptor": "()V",
                         "line_covered": 99, "line_missed": 1,
                         "branch_covered": 99, "branch_missed": 1,
                     }],
@@ -218,6 +231,8 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
              "raw report artifact"),
             ("inventory checksum mismatch", lambda: receipt.__setitem__("inventory_sha256", "f" * 64),
              "coverage inventory artifact"),
+            ("invented numbers", lambda: receipt["atoms"][0].__setitem__("line_covered", 100),
+             "reported atom counts disagree with raw JaCoCo"),
         ]
         import copy
         original = copy.deepcopy(item)
@@ -244,6 +259,12 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         item = next(g for g in self.evidence["gates"]
                     if g["id"] == release.COVERAGE_GATE)
         atom = item["coverage"]["atoms"][0]
+        artifact_path = self.evidence_dir / item["coverage"]["report_artifact"]
+        artifact_path.write_text(artifact_path.read_text().replace(
+            '<counter type="BRANCH" covered="99" missed="1"/>',
+            '<counter type="BRANCH" covered="0" missed="0"/>'))
+        report_row = next(a for a in item["artifacts"] if a["path"] == artifact_path.name)
+        report_row["sha256"] = release.sha256(artifact_path)
         atom["branch_covered"] = 0
         atom["branch_missed"] = 0
         self.assert_blocked(self.result(), "gate:" + release.COVERAGE_GATE)
