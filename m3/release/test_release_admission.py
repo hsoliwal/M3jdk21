@@ -110,11 +110,17 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
                 "artifacts": [{"path": artifact.name, "sha256": release.sha256(artifact)}],
             }
             if ident == "M3_CHANGED_ATOM_COVERAGE":
+                inventory_file = self.evidence_dir / (ident + ".tsv")
+                inventory_file.write_text("id\\tsource_path\\nfixture.Example#run\\tsrc/example.java\\n")
+                gate["artifacts"].append({
+                    "path": inventory_file.name, "sha256": release.sha256(inventory_file)})
                 gate["coverage"] = {
                     "schema": release.COVERAGE_SCHEMA, "scope": release.COVERAGE_SCOPE,
                     "instrumented": True, "inventory_complete": True,
                     "unmeasured_count": 0, "excluded_atoms": [],
                     "tool": "synthetic instrumentation fixture", "report_artifact": artifact.name,
+                    "inventory_artifact": inventory_file.name,
+                    "inventory_sha256": release.sha256(inventory_file),
                     "measured_count": 1, "atoms": [{
                         "id": "fixture.Example#run",
                         "source_path": "src/example.java",
@@ -210,6 +216,8 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
              "line coverage below 90%"),
             ("missing report", lambda: receipt.__setitem__("report_artifact", "not-an-artifact.xml"),
              "raw report artifact"),
+            ("inventory checksum mismatch", lambda: receipt.__setitem__("inventory_sha256", "f" * 64),
+             "coverage inventory artifact"),
         ]
         import copy
         original = copy.deepcopy(item)
