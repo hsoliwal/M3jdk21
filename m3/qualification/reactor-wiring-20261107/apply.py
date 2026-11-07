@@ -79,7 +79,7 @@ def do_edit(args, record: bool) -> int:
     path = Path(args.root) / args.file
     text = args.text if args.text is not None else Path(args.text_file).read_text(encoding="utf-8").rstrip("\n")
     before = path.read_bytes()
-    after = insert_before(before, args.anchor, text)
+    after = transform(before, args.op, args.anchor or "", text)
     path.write_bytes(after)
     if record:
         rows = read_rows()
@@ -88,7 +88,7 @@ def do_edit(args, record: bool) -> int:
             path.write_bytes(before)
             raise SystemExit(f"REFUSED {args.file} is not at the chain's last after_sha256 (drift); edit reverted")
         append_row({"seq": str(len(rows) + 1), "file": args.file, "before_sha256": sha256(before),
-                    "after_sha256": sha256(after), "op": "insert-before", "anchor": json.dumps(args.anchor),
+                    "after_sha256": sha256(after), "op": args.op, "anchor": json.dumps(args.anchor or ""),
                     "payload": json.dumps(text), "note": args.note or ""})
     print(f"{'RECORDED' if record else 'EDITED'} {args.file} {sha256(before)[:12]} -> {sha256(after)[:12]}")
     return 0
@@ -120,7 +120,7 @@ def do_apply(args, verify_only: bool) -> int:
             rc = 3
             continue
         for r in chain[starts[0]:]:
-            data = insert_before(data, json.loads(r["anchor"]), json.loads(r["payload"]))
+            data = transform(data, r["op"], json.loads(r["anchor"]), json.loads(r["payload"]))
             if sha256(data) != r["after_sha256"]:
                 print(f"REFUSED {file} edit {r['seq']} produced {sha256(data)[:12]} != {r['after_sha256'][:12]}")
                 return 3
@@ -134,6 +134,7 @@ def main(argv=None) -> int:
     p.add_argument("mode", choices=("apply", "verify", "edit", "record"))
     p.add_argument("--root", default=".")
     p.add_argument("--file")
+    p.add_argument("--op", default="insert-before", choices=("insert-before", "delete-block"))
     p.add_argument("--anchor")
     p.add_argument("--text")
     p.add_argument("--text-file")

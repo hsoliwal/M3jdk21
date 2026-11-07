@@ -68,6 +68,8 @@
     <module>collections/gc-interop</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/interop WIRED (gate gate-collections-interop, GATES.tsv) -->
     <module>collections/interop</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 a4: collections/signal-codegen WIRED (gate gate-collections-signal-codegen, GATES.tsv) -->
+    <module>collections/signal-codegen</module>
   </modules>
 
   <profiles>
