@@ -164,3 +164,57 @@ also match. Child-process execution is not instrumented by these commands.
 Neither synthetic receipts nor validator coverage satisfy the instrumented M3
 contract-atom, installed-image, jtreg, JNI or SWT platform gates above. The full
 live naming authority remains an independently executed gate.
+
+## Preparation regression evidence — 2026-11-07
+
+The source-bound continuation on receiving commit
+`6540b35f8bb9cd2d8b2ee89aa3d5bbcbc642422a` preserves the existing release
+contract and adds 17 release-admission regression tests. All 52 original
+admission test methods and their helper/setup bodies remain unchanged. The
+complete release suite passes **141 tests**. Its unchanged release verifier
+executes **487/487 statements and 248/248 branches**, with zero implementation
+exclusions. This includes actual script-entry-point execution in the measured
+process; child processes are still outside the instrumented scope.
+
+The new cases check rights boundaries, receiving-phase promotion, malformed
+map/queue/evidence records, divergent or unavailable Git history, relative
+evidence paths and an artifact-directory replacement between validation steps.
+That filesystem case qualifies the tested interleaving only. A standalone
+baseline is also tested in both modes: development acceptance does not waive
+the release naming HOLD. Synthetic complete receipts remain validator fixtures,
+not authenticated build, native or product execution evidence.
+
+The public-target and full-family policy readers retain their original guards
+while restoring protocol identities from the preserved source authorities.
+`SYNEXIA_FIRST_PARTY`, `SYNEXIA_FIRST_PARTY_APACHE2_V1`, the original catalogue
+path, stable porting-invariant ID and receipt-field names are provenance and
+serialization contracts. They are not target package names. Their spelling
+must not be changed by a general naming substitution. Source pins, catalogue
+records, legal anchors and receiving-phase state are unchanged.
+
+The complete existing public-target policy workflow passes locally, including
+both live validators, legal anchors and **32 tests**. The existing 13 test
+method IDs remain and 19 methods add source/rights, malformed-input and
+premature-promotion refusals. Exact production coverage from these tests is:
+
+| Tool | Statements | Branches |
+| --- | ---: | ---: |
+| Release verifier | 487/487 — 100% | 248/248 — 100% |
+| Public-target policy reader | 122/127 — 96.06% | 61/66 — 92.42% |
+| Full-family policy reader | 130/135 — 96.30% | 77/82 — 93.90% |
+
+The release-verifier row is measured with the complete release suite:
+
+```sh
+python3 -m coverage run --branch --data-file=.coverage-release \
+  --source=m3/release --omit='*/test_*.py' \
+  -m unittest discover -s m3/release -p 'test_*.py' -v
+python3 -m coverage json --data-file=.coverage-release -o release-tool-coverage.json
+```
+
+The canonical `m3-release-preparation-20261107` task retains the exact inputs,
+executed recipe outputs, source hashes, raw reports and earlier failed
+attempts in its continuation-4 evidence. The product publication binds the
+exact canonical proof revision. These scoped results do not close the
+repository-wide naming fixed point, legacy recipe custody, global provenance,
+installed-image, jtreg/JNI, platform or authenticated-producer gates.

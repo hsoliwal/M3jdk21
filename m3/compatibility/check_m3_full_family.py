@@ -16,8 +16,10 @@ CATALOGUE = ROOT / "m3/docs/m3-full-family-catalogue.json"
 PRECOMPUTE = ROOT / "m3/docs/m3-mindex-precompute-inventory.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
+# These are immutable source and lineage identities, not current package names.
+# Keep the reader aligned with the preserved pin, catalogue and receiving map.
 EXPECTED = {
-    "schema": "M3JDK21_M3_FULL_FAMILY_PIN_V1",
+    "schema": "M3JDK21_SYNEXIA_FULL_FAMILY_PIN_V1",
     "source_repository": "hsoliwal/com.synexia",
     "source_pr": "9648",
     "source_commit": "b24262a92b741c78c44ca61afc8dac7ee1376d8a",
@@ -25,7 +27,7 @@ EXPECTED = {
     "machine_manifest_git_blob": "c30a30476c12f7511caa124c4f7e0d72cd4e8e55",
     "receiver_invariant_path": "docs/M3-SCALE/invariants/M3-SYNEXIA-RECEIVER-1.md",
     "receiver_invariant_git_blob": "7ac11f77328c12cea7c157253d99937292235151",
-    "catalogue_path": "m3-openrewrite-recipes/verification/m3-m3jdk-full-family-20261007/CATALOGUE_INDEX.json",
+    "catalogue_path": "synexia-openrewrite-recipes/verification/synexia-m3jdk-full-family-20261007/CATALOGUE_INDEX.json",
     "catalogue_git_blob": "8145c667c941a9358e9a5149489e455d950afc34",
     "inventory_source_revision": "7d2133f1412a9e7295296c3f86baae577bb3251c",
     "catalogue_total_paths": "4770",
@@ -182,7 +184,7 @@ def unique_json_object(pairs: list[tuple[str, object]]) -> dict:
 def validate_receiving_sequence(path: Path = ROOT / "m3/docs/name-mapping.json") -> dict:
     data = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_json_object)
     policy = data.get("porting_invariant")
-    if not isinstance(policy, dict) or policy.get("id") != "M3JDK-PORT-1":
+    if not isinstance(policy, dict) or policy.get("id") != "M3-JDK-PORT-1":
         raise ValueError("missing canonical porting invariant")
     plan = policy.get("receiving_sequence")
     if not isinstance(plan, dict):
@@ -238,7 +240,7 @@ def validate_receiving_sequence(path: Path = ROOT / "m3/docs/name-mapping.json")
  'license_copyright_notice_and_intake_mode',
  'dependency_effect_and_history_inventory',
  'target_owner_preimage_postimage',
- 'm3_recipe_revision_and_manifest',
+ 'synexia_recipe_revision_and_manifest',
  'locked_api_behavior_and_failure_oracle',
  'executed_build_contract_and_applicable_target_gates',
  'fixed_point_replay_and_drift_refusal',

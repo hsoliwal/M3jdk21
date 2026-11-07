@@ -15,8 +15,10 @@ import importlib.util
 import io
 import json
 import os
+import runpy
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -87,6 +89,51 @@ class ReleaseAdmissionUnitTest(unittest.TestCase):
             with self.subTest(text=candidate):
                 with self.assertRaises(ValueError):
                     release.release_identity(contract["release"], candidate)
+
+    def test_nonzero_patch_version_requires_matching_four_component_identity(self):
+        contract = json.loads(Path(__file__).with_name("release-contract.json").read_text())
+        candidate = dict(contract["release"], version="21.0.14.3",
+                         tag="m3jdk-21.0.14.3-m3.1-preview",
+                         release_branch="release/m3jdk-21.0.14.3-m3.1-preview")
+        text = "DEFAULT_VERSION_FEATURE=21\nDEFAULT_VERSION_INTERIM=0\n" \
+               "DEFAULT_VERSION_UPDATE=14\nDEFAULT_VERSION_PATCH=3\n"
+        release.release_identity(candidate, text)
+        for changed in (text.replace("PATCH=3", "PATCH=0"),
+                        text.replace("PATCH=3", "PATCH=4")):
+            with self.subTest(configuration=changed):
+                with self.assertRaisesRegex(ValueError, "differs from make/conf"):
+                    release.release_identity(candidate, changed)
+
+    def test_artifact_directory_swap_during_validation_is_refused(self):
+        with tempfile.TemporaryDirectory(prefix="m3-artifact-swap-") as td:
+            root = Path(td)
+            base, outside = root / "evidence", root / "outside"
+            directory = base / "reports"
+            directory.mkdir(parents=True)
+            outside.mkdir()
+            artifact = directory / "run.log"
+            artifact.write_bytes(b"declared evidence\n")
+            (outside / "run.log").write_bytes(b"different external evidence\n")
+            original_is_symlink = Path.is_symlink
+            swapped = False
+
+            def swap_after_component_check(path):
+                nonlocal swapped
+                result = original_is_symlink(path)
+                if path == artifact and not swapped:
+                    # Model an external directory replacement after the component
+                    # checks. The final containment check must still refuse it.
+                    directory.rename(base / "retained-reports")
+                    directory.symlink_to(outside, target_is_directory=True)
+                    swapped = True
+                return result
+
+            with mock.patch.object(Path, "is_symlink", autospec=True,
+                                   side_effect=swap_after_component_check):
+                with self.assertRaisesRegex(ValueError, "escapes manifest directory"):
+                    release.safe_artifact(base, "reports/run.log")
+            self.assertTrue(swapped)
+            self.assertEqual((outside / "run.log").read_bytes(), b"different external evidence\n")
 
 
 class ReleaseEvidenceGitTest(unittest.TestCase):
@@ -707,6 +754,196 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         plan["operations"][0]["state"] = "QUALIFIED"
         self.write(release.NAME_PLAN, json.dumps(plan))
         self.assert_blocked(self.result(), "name_queue")
+
+    def test_rights_boundaries_cannot_be_replaced_by_passing_receipts(self):
+        cases = (("M3-SYNEXIA-NOTICE.md", "rights.openjdk_boundary"),
+                 ("M3-SYNEXIA-RIGHTS.md", "rights.reservation"))
+        for path, check in cases:
+            original = (self.root / path).read_bytes()
+            with self.subTest(path=path):
+                self.write(path, "Synthetic altered rights statement\n")
+                result = self.result()
+                self.assert_blocked(result, check)
+                self.assertFalse(result["policy_valid"])
+            (self.root / path).write_bytes(original)
+
+    def test_receiving_order_and_active_phase_cannot_be_self_promoted(self):
+        original = json.loads((self.root / release.NAME_MAP).read_text())
+        for sequence in (None, [], {"order": list(reversed(release.EXPECTED_RECEIVING_ORDER)),
+                                    "active_phase": "STRING"},
+                         {"order": release.EXPECTED_RECEIVING_ORDER, "active_phase": "ARRAYS"}):
+            with self.subTest(sequence=sequence):
+                mapping = copy.deepcopy(original)
+                mapping["porting_invariant"]["receiving_sequence"] = sequence
+                self.write(release.NAME_MAP, json.dumps(mapping))
+                self.repin_queue()
+                result = self.result()
+                self.assert_blocked(result, "receiving_sequence")
+                self.assertFalse(result["policy_valid"])
+
+    def test_malformed_mapping_records_are_reported_as_naming_blockers(self):
+        original = json.loads((self.root / release.NAME_MAP).read_text())
+        for records in (None, {}, "fixture.owner", [None], ["fixture.owner"]):
+            with self.subTest(records=records):
+                mapping = copy.deepcopy(original)
+                mapping["migration"]["records"] = records
+                self.write(release.NAME_MAP, json.dumps(mapping))
+                self.repin_queue()
+                result = self.result()
+                self.assert_blocked(result, "name_queue")
+                self.assertIn("canonical mapping records missing",
+                              next(b["detail"] for b in result["blockers"] if b["name"] == "name_queue"))
+
+    def test_mapping_ids_must_be_nonempty_strings_and_unique(self):
+        original = json.loads((self.root / release.NAME_MAP).read_text())
+        for ids in ([None], [""], [[]], [{}], ["fixture.owner", "fixture.owner"]):
+            with self.subTest(ids=ids):
+                mapping = copy.deepcopy(original)
+                mapping["migration"]["records"] = [{"id": value, "targets": []} for value in ids]
+                self.write(release.NAME_MAP, json.dumps(mapping))
+                self.repin_queue()
+                result = self.result()
+                self.assert_blocked(result, "name_queue")
+                self.assertIn("invalid or duplicate canonical mapping IDs",
+                              next(b["detail"] for b in result["blockers"] if b["name"] == "name_queue"))
+
+    def test_naming_operations_must_be_an_explicit_list(self):
+        original = json.loads((self.root / release.NAME_PLAN).read_text())
+        for operations in (None, {}, "QUEUED", True):
+            with self.subTest(operations=operations):
+                self.write(release.NAME_PLAN, json.dumps(dict(original, operations=operations)))
+                result = self.result()
+                self.assert_blocked(result, "name_queue")
+                self.assertIn("naming operations missing",
+                              next(b["detail"] for b in result["blockers"] if b["name"] == "name_queue"))
+
+    def test_release_identity_container_cannot_replace_the_contract(self):
+        for value in (None, [], "21.0.14", True):
+            with self.subTest(release=value):
+                candidate = copy.deepcopy(self.contract)
+                candidate["release"] = value
+                self.write("m3/release/release-contract.json", json.dumps(candidate))
+                result = self.result()
+                self.assert_blocked(result, "contract.release_identity")
+                self.assert_blocked(result, "git.upstream_baseline")
+
+    def test_divergent_upstream_cannot_be_admitted_as_the_release_parent(self):
+        source = self.git("rev-parse", "HEAD")
+        self.git("checkout", "-qb", "fixture-divergent-upstream",
+                 self.contract["release"]["upstream_baseline"])
+        self.write("independent.txt", "synthetic divergent upstream\n")
+        self.commit("synthetic independent upstream")
+        divergent = self.git("rev-parse", "HEAD")
+        self.git("checkout", "-q", source)
+        self.contract["release"]["upstream_baseline"] = divergent
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.commit("synthetic mismatched upstream declaration")
+        before = self.git("rev-list", "HEAD")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        result = self.result()
+        self.assert_blocked(result, "git.merge_base")
+        self.assertEqual(before, self.git("rev-list", "HEAD"))
+
+    def test_unavailable_git_metadata_blocks_initial_and_final_inspection(self):
+        (self.root / ".git").rename(Path(self.tmp.name) / "saved-git-metadata")
+        result = self.result()
+        self.assert_blocked(result, "git.inspect")
+        self.assert_blocked(result, "git.stable_snapshot")
+        self.assertIsNone(result["source_commit"])
+        self.assertIsNone(result["source_tree"])
+
+    def test_standalone_baseline_does_not_waive_the_release_naming_gate(self):
+        self.contract["standalone"]["required_for_release"] = True
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        spec = importlib.util.spec_from_file_location(
+            "standalone_clean_fixture", Path(__file__).with_name("check_standalone.py"))
+        standalone = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(standalone)
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic standalone boundary")
+        scanned = standalone.scan(self.root)
+        self.assertEqual(sum(scanned["counts"][kind] for kind in standalone.DEPENDENCY_KINDS), 0)
+        self.assertEqual(scanned["unscanned"], 0)
+        self.assertGreater(sum(scanned["counts"][kind] for kind in standalone.NAMING_KINDS), 0)
+        standalone.write_baseline(self.root, scanned)
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic clean standalone baseline")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        # Preserve the canonical recipe declaration in the fixture. A matching
+        # development baseline does not authorize its release naming boundary.
+        result = self.result(False)
+        self.assertTrue(result["policy_valid"], result)
+        check = next(c for c in result["checks"] if c["name"] == "standalone.no_external_repo_dependency")
+        self.assertEqual(check["status"], "PASS")
+        result = self.result(True)
+        self.assert_blocked(result, "standalone.no_external_repo_dependency")
+        check = next(c for c in result["checks"] if c["name"] == "standalone.no_external_repo_dependency")
+        self.assertEqual(check["status"], "HOLD")
+        self.assertIn("Synexia names remain", check["detail"])
+
+    def test_invalid_standalone_baseline_is_a_controlled_blocker(self):
+        self.write("m3/release/STANDALONE_BASELINE.tsv", "kind\tcount\nD_CHECKOUT\tnot-an-integer\n")
+        result = self.result()
+        self.assert_blocked(result, "standalone.no_external_repo_dependency")
+        self.assertFalse(result["policy_valid"])
+
+    def test_relative_evidence_path_is_bound_to_the_candidate_checkout(self):
+        self.save_evidence()
+        destination = self.root / "target" / "evidence"
+        shutil.copytree(self.evidence_dir, destination)
+        result = release.validate(self.root, True, Path("target/evidence/evidence.json"))
+        self.assertTrue(result["release_ready"], result)
+        self.assertEqual(Path(result["evidence_manifest"]), destination / "evidence.json")
+
+    def test_evidence_gate_container_requires_an_array(self):
+        for gates in (None, {}, "PASS", True):
+            with self.subTest(gates=gates):
+                self.evidence["gates"] = gates
+                result = self.result()
+                self.assert_blocked(result, "evidence.manifest")
+                self.assertIn("evidence gates must be a list",
+                              next(b["detail"] for b in result["blockers"] if b["name"] == "evidence.manifest"))
+
+    def test_malformed_gate_entry_cannot_partially_admit_a_valid_prefix(self):
+        valid = copy.deepcopy(self.evidence["gates"][0])
+        for entry in (None, [], "PASS", False):
+            with self.subTest(entry=entry):
+                self.evidence["gates"] = [valid, entry]
+                result = self.result()
+                self.assert_blocked(result, "evidence.manifest")
+                checks = [c for c in result["checks"] if c["name"].startswith("gate:")]
+                self.assertEqual(len(checks), len(self.contract["mandatory_release_gates"]))
+                self.assertEqual({c["status"] for c in checks}, {"PENDING"})
+
+    def test_empty_naming_queue_renders_the_verified_synthetic_receipt_view(self):
+        plan = json.loads((self.root / release.NAME_PLAN).read_text())
+        plan["operations"] = []
+        self.write(release.NAME_PLAN, json.dumps(plan))
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic tree with no naming candidates")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        result = self.result()
+        self.assertTrue(result["release_ready"], result)
+        self.assertEqual(result["queue"], [])
+        rendered = release.render_queue(result)
+        self.assertIn("No pending items | VERIFIED_RECEIPTS", rendered)
+        self.assertIn("Review the exact proof pack before publication", rendered)
+
+    def test_script_entry_point_preserves_the_receipt_validation_exit_contract(self):
+        self.save_evidence()
+        output = io.StringIO()
+        argv = [str(MODULE_PATH), "--root", str(self.root), "--release",
+                "--evidence", str(self.manifest)]
+        with mock.patch.object(sys, "argv", argv), contextlib.redirect_stdout(output):
+            with self.assertRaises(SystemExit) as exited:
+                runpy.run_path(str(MODULE_PATH), run_name="__main__")
+        self.assertEqual(exited.exception.code, 0)
+        result = json.loads(output.getvalue())
+        self.assertTrue(result["release_ready"], result)
+        self.assertEqual(result["source_commit"], self.evidence["source_commit"])
 
     def test_existing_single_fork_commit_requirement_is_preserved(self):
         self.write("next.txt", "another commit\n")
