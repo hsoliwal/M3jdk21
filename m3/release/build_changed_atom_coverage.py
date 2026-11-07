@@ -94,6 +94,7 @@ def build(root: Path, report: Path, inventory: Path, report_artifact: str,
         raise ValueError("empty coverage inventory")
     atoms = []
     seen = set()
+    source_digests = {}  # reuse SHA-256 for atoms sharing one source file
     for row in rows:
         ident = row["id"]
         key = (row["class"], row["method"], row["descriptor"])
@@ -103,14 +104,15 @@ def build(root: Path, report: Path, inventory: Path, report_artifact: str,
         if key not in methods:
             raise ValueError("missing instrumented method: " + repr(key))
         counts = methods[key]
-        source = source_file(root, row["source_path"])
+        if row["source_path"] not in source_digests:
+            source_digests[row["source_path"]] = digest(source_file(root, row["source_path"]))
         line_covered, line_missed = counts["LINE"]
         branch_covered, branch_missed = counts["BRANCH"]
         if line_covered + line_missed == 0:
             raise ValueError("method has no instrumented lines: " + ident)
         atom = {
             "id": ident, "source_path": row["source_path"],
-            "source_sha256": digest(source),
+            "source_sha256": source_digests[row["source_path"]],
             "jacoco_class": row["class"], "jacoco_method": row["method"],
             "jacoco_descriptor": row["descriptor"],
             "line_covered": line_covered, "line_missed": line_missed,
