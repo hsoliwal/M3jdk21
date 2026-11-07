@@ -24,3 +24,8 @@ GUAVA	guavaFilteredNavigableSet	com.m3.collections.M3TreeSet;com.google.common.b
 GUAVA	guavaBiMap		com.google.common.collect.BiMap	com.m3.collections.interop.M3GuavaBiMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	33.4.8-jre
 APACHE_COMMONS_COLLECTIONS	apacheBidiMap		org.apache.commons.collections4.BidiMap	com.m3.collections.interop.M3ApacheBidiMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	4.5.0
 SPRING_FRAMEWORK	springCaseInsensitiveMap	java.util.Locale	java.util.Map	com.m3.collections.interop.M3SpringCaseInsensitiveMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	6.2.0
+GUAVA	guavaMultiset		com.google.common.collect.Multiset	jdk.m3.collections.interop.M3GuavaMultiset	jdk.m3.collections.M3CountedBag;jdk.m3.collections.M3LinkedHashMap	M3_CREATED	33.4.8-jre
+ECLIPSE_COLLECTIONS	eclipseOrderedMap		org.eclipse.collections.api.map.MutableOrderedMap	org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter	jdk.m3.collections.M3LinkedHashMap	M3_CREATED	11.1.0
+ECLIPSE_COLLECTIONS	eclipseBag		org.eclipse.collections.api.bag.MutableBag	jdk.m3.collections.interop.M3EclipseBag	jdk.m3.collections.M3CountedBag;jdk.m3.collections.M3LinkedHashMap	M3_CREATED	11.1.0
+APACHE_COMMONS_COLLECTIONS	apacheMultiSet		org.apache.commons.collections4.MultiSet	jdk.m3.collections.interop.M3ApacheMultiSet	jdk.m3.collections.M3CountedBag;jdk.m3.collections.M3LinkedHashMap	M3_CREATED	4.5.0
+APACHE_COMMONS_COLLECTIONS	apacheBag		org.apache.commons.collections4.Bag	jdk.m3.collections.interop.M3ApacheBag	jdk.m3.collections.M3CountedBag;jdk.m3.collections.M3LinkedHashMap	M3_CREATED	4.5.0
