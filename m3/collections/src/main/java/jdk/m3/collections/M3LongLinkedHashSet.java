@@ -257,7 +257,12 @@ public final class M3LongLinkedHashSet implements M3LongCollection {
             first = -1;
             last = -1;
         } else if ((long) occupied > (long) size * 2 && keys.length > MIN_CAPACITY) {
-            rehash(keys.length);
+            try {
+                rehash(keys.length);
+            } catch (OutOfMemoryError optionalCompactionFailure) {
+                // Removal already committed. Keep the valid tombstoned table so
+                // callers can update aggregate counts instead of observing a false failure.
+            }
         }
     }
 
@@ -316,37 +321,35 @@ public final class M3LongLinkedHashSet implements M3LongCollection {
     /** Rebuilds the table and re-links every key in its current encounter order. */
     private void rehash(int requestedCapacity) {
         int capacity = tableSizeFor(Math.max(MIN_CAPACITY, requestedCapacity));
-        long[] oldKeys = keys;
-        int[] oldNext = next;
-        int oldFirst = first;
-        int previousSize = size;
-        keys = new long[capacity];
-        states = new byte[capacity];
-        previous = new int[capacity];
-        next = new int[capacity];
-        first = -1;
-        last = -1;
-        size = 0;
-        occupied = 0;
-        for (int slot = oldFirst; slot >= 0; slot = oldNext[slot]) {
-            insertRehashed(oldKeys[slot]);
+        // Allocate and populate every replacement lane before publishing any field.
+        // A failed growth leaves the original owner and all existing iterators intact.
+        long[] newKeys = new long[capacity];
+        byte[] newStates = new byte[capacity];
+        int[] newPrevious = new int[capacity];
+        int[] newNext = new int[capacity];
+        int newFirst = -1, newLast = -1;
+        int inserted = 0;
+        int mask = capacity - 1;
+        for (int i = first; i >= 0; i = next[i]) {
+            int slot = mix(keys[i]) & mask;
+            while (newStates[slot] == USED) slot = (slot + 1) & mask;
+            newKeys[slot] = keys[i];
+            newStates[slot] = USED;
+            newPrevious[slot] = newLast;
+            newNext[slot] = -1;
+            if (newLast >= 0) newNext[newLast] = slot;
+            else newFirst = slot;
+            newLast = slot;
+            inserted++;
         }
-        if (size != previousSize) {
-            throw new IllegalStateException("rehash lost set entries");
-        }
-    }
-
-    private void insertRehashed(long key) {
-        int mask = keys.length - 1;
-        int index = mix(key) & mask;
-        while (states[index] == USED) {
-            index = (index + 1) & mask;
-        }
-        keys[index] = key;
-        states[index] = USED;
-        linkLast(index);
-        size++;
-        occupied++;
+        if (inserted != size) throw new IllegalStateException("rehash lost entries");
+        keys = newKeys;
+        states = newStates;
+        previous = newPrevious;
+        next = newNext;
+        first = newFirst;
+        last = newLast;
+        occupied = inserted;
     }
 
     private static int capacityFor(int expectedSize) {
