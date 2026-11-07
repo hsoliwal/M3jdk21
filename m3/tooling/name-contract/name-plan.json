@@ -4,7 +4,7 @@
   "authority_blob": "d3d78c4ebf02572a85ef889a36dc13684dc086e9",
   "operations": [
     {
-      "mapping_id": "m3.counterpart.MIndexClass",
+      "mapping_id": "synexia.counterpart.MIndexClass",
       "kind": "JDK_BACKEND",
       "state": "QUEUED",
       "before_type": "jdk.internal.mindex.M3Class",
@@ -12,7 +12,7 @@
       "reason": "M3Class is an internal indexed Class view, not a verified replacement for java.lang.Class. Do not promote without pinned source, full Class public/protected ABI and reflection/loader/serialization differential tests, image/jtreg/JNI-GC/runtime and CPU/heap/native-memory evidence."
     },
     {
-      "mapping_id": "m3.collections.SegmentedAddress28",
+      "mapping_id": "synexia.collections.SegmentedAddress28",
       "kind": "FORMAT_ONLY",
       "state": "QUEUED",
       "before_type": "jdk.internal.mindex.M3Address28",

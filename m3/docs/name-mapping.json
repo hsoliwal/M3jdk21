@@ -10310,8 +10310,10 @@
         "recipe": {
           "id": "com.synexia.m3.Jdk21ApiCompanionsTarget20261029",
           "version": "20261029",
-          "path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/resources/META-INF/rewrite/m3jdk21-api-companions-target-20261029.yml",
+          "path": null,
           "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-api-companions-20261029/resources/META-INF/rewrite/m3jdk21-api-companions-target-20261029.yml",
           "preconditions": [
             "Exact target base 669a949d192345acefcfc5e9bb0b3724174d270c and checked source/module pins.",
             "Source-sealed named Maven/OpenRewrite replay; fixed point and drift/missing/duplicate refusal.",

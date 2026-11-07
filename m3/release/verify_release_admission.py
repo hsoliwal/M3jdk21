@@ -215,18 +215,20 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
         raise ValueError("a nonempty measured atom inventory is required")
     if type(coverage.get("measured_count")) is not int or coverage["measured_count"] != len(atoms):
         raise ValueError("measured atom count does not match the inventory")
-    atom_keys = {
-        (atom.get("id"), atom.get("source_path"), atom.get("jacoco_class"),
-         atom.get("jacoco_method"), atom.get("jacoco_descriptor"))
-        for atom in atoms if isinstance(atom, dict)
-    }
+    atom_keys = set()
+    for atom in atoms:
+        if not isinstance(atom, dict):
+            raise ValueError("invalid coverage atom")
+        key = tuple(atom.get(field) for field in (
+            "id", "source_path", "jacoco_class", "jacoco_method", "jacoco_descriptor"))
+        if any(not isinstance(value, str) for value in key):
+            raise ValueError("coverage atom identity must use strings")
+        atom_keys.add(key)
     if len(atom_keys) != len(atoms) or atom_keys != inventory_keys:
         raise ValueError("coverage atoms differ from source-pinned inventory TSV")
     seen = set()
     source_digests = {}  # one source-file read even for many covered methods
     for atom in atoms:
-        if not isinstance(atom, dict):
-            raise ValueError("invalid coverage atom")
         ident, path, digest = (atom.get("id"), atom.get("source_path"),
                                atom.get("source_sha256"))
         if not isinstance(ident, str) or not ident.strip() or ident in seen:
@@ -574,8 +576,6 @@ def validate(root: Path, release_mode: bool = False,
                         or not isinstance(canonical.get("recipe_id"), str)
                         or not canonical["recipe_id"].strip()):
                     raise ValueError("exact recipe repository, revision and identity missing")
-            if ident == COVERAGE_GATE:
-                validate_coverage_receipt(root, entry, manifest_path.parent)
             artifacts = entry.get("artifacts")
             if not isinstance(artifacts, list) or not artifacts:
                 raise ValueError("raw execution artifacts missing")
@@ -594,6 +594,8 @@ def validate(root: Path, release_mode: bool = False,
                     raise ValueError("manifest cannot serve as its own execution artifact")
                 if sha256(file) != digest:
                     raise ValueError("execution artifact SHA-256 mismatch: " + path)
+            if ident == COVERAGE_GATE:
+                validate_coverage_receipt(root, entry, manifest_path.parent)
             passed("gate:" + ident, f"{len(artifacts)} hash-verified artifacts; command provenance requires review")
         except (ValueError, OSError, UnicodeError, ET.ParseError) as exc:
             block("gate:" + ident, str(exc), policy=False)

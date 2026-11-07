@@ -5,11 +5,16 @@ from __future__ import annotations
 
 import importlib.util
 import copy
+import contextlib
 import hashlib
+import io
 import json
 from pathlib import Path
+import runpy
+import sys
 import tempfile
 import unittest
+from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("m3_name_receiver", HERE / "check.py")
@@ -146,6 +151,221 @@ class NameContractReceiverTests(unittest.TestCase):
         row["after_type"] = "jdk.internal.mindex.M3ClassView"
         self.save()
         self.assertEqual(GATE.validate(self.root)[0], 1)
+
+    def assert_cli_refused(self):
+        output, error = io.StringIO(), io.StringIO()
+        with mock.patch.object(GATE, "ROOT", self.root), \
+                contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
+            self.assertEqual(GATE.main(["check.py"]), 2)
+        self.assertEqual(output.getvalue(), "")
+        self.assertIn("M3JDK21_NAME_RECEIVER_REFUSED:", error.getvalue())
+
+    def test_malformed_document_shapes_have_a_structured_cli_refusal(self):
+        original = copy.deepcopy(self.mapping)
+        for document in (None, [], "not an object", 1):
+            with self.subTest(document=document, file="plan"):
+                self.mapping = copy.deepcopy(original)
+                self.save()
+                write(self.root, GATE.PLAN, json.dumps(document))
+                self.assert_cli_refused()
+            with self.subTest(document=document, file="map"):
+                self.mapping = document
+                self.save()
+                self.assert_cli_refused()
+        for migration in (None, [], "not an object"):
+            with self.subTest(migration=migration):
+                self.mapping = copy.deepcopy(original)
+                self.mapping["migration"] = migration
+                self.save()
+                self.assert_cli_refused()
+
+    def test_unhashable_queue_fields_have_a_structured_cli_refusal(self):
+        original = copy.deepcopy(self.plan["operations"][0])
+        for field in ("mapping_id", "kind", "state"):
+            for invalid in ([], {}):
+                with self.subTest(field=field, value=invalid):
+                    self.plan["operations"] = [dict(original, **{field: invalid})]
+                    self.save()
+                    self.assert_cli_refused()
+
+    def test_target_collection_must_be_an_array(self):
+        record = self.mapping["migration"]["records"][0]
+        for invalid in (None, {}, "not an array"):
+            with self.subTest(targets=invalid):
+                record["targets"] = invalid
+                self.save()
+                self.assert_cli_refused()
+
+    def test_two_distinct_files_cannot_both_own_the_queued_type(self):
+        record = self.mapping["migration"]["records"][0]
+        duplicate = dict(record["targets"][0],
+                         path="m3/alternate/src/jdk/internal/mindex/M3Class.java")
+        write(self.root, duplicate["path"],
+              "package jdk.internal.mindex; final class M3Class { int otherOwner; }\n")
+        record["targets"].append(duplicate)
+        self.save()
+        with self.assertRaisesRegex(ValueError, "ambiguous canonical target"):
+            GATE.validate(self.root)
+
+    def test_unicode_identifier_suffix_does_not_own_the_shorter_queued_type(self):
+        path = self.mapping["migration"]["records"][0]["targets"][0]["path"]
+        # Java permits currency symbols, combining marks and connector punctuation.
+        for suffix in ("\u20ac", "\u0301", "\u203f"):
+            with self.subTest(suffix=ascii(suffix)):
+                write(self.root, path, "package jdk.internal.mindex; class M3Class"
+                      + suffix + "Peer {}\n")
+                with self.assertRaisesRegex(ValueError, "declared type disagrees"):
+                    GATE.validate(self.root)
+
+    def test_policy_document_and_agent_link_are_required(self):
+        (self.root / GATE.DOC).unlink()
+        with self.assertRaisesRegex(ValueError, "missing M3JDK21 naming"):
+            GATE.validate(self.root)
+        write(self.root, GATE.DOC, "Fixture naming policy\n")
+        write(self.root, "AGENTS.md", "No naming policy link\n")
+        with self.assertRaisesRegex(ValueError, "lacks naming contract link"):
+            GATE.validate(self.root)
+
+    def test_plan_cannot_substitute_an_authority_or_malformed_identity(self):
+        for field, value, reason in (
+                ("schema", "OTHER_PLAN", "wrong schema"),
+                ("authority", "alternate-map.json", "competing map"),
+                ("authority_blob", None, "invalid authoritative map"),
+                ("authority_blob", "a" * 39, "invalid authoritative map"),
+                ("authority_blob", "A" * 40, "invalid authoritative map")):
+            with self.subTest(field=field, value=value):
+                write(self.root, GATE.PLAN, json.dumps(dict(self.plan, **{field: value})))
+                with self.assertRaisesRegex(ValueError, reason):
+                    GATE.validate(self.root)
+
+    def test_map_schema_and_capability_records_cannot_be_ambiguous(self):
+        original = copy.deepcopy(self.mapping)
+        for records in (None, {}, [None], [{}], [{"id": 1}],
+                        original["migration"]["records"] * 2):
+            with self.subTest(records=records):
+                self.mapping = copy.deepcopy(original)
+                self.mapping["migration"]["records"] = records
+                self.save()
+                with self.assertRaises(ValueError):
+                    GATE.validate(self.root)
+        self.mapping = copy.deepcopy(original)
+        self.mapping["schema"] = 2
+        self.save()
+        with self.assertRaisesRegex(ValueError, "unexpected canonical naming map schema"):
+            GATE.validate(self.root)
+
+    def test_empty_or_non_array_queue_is_not_acceptance(self):
+        for operations in (None, {}, []):
+            with self.subTest(operations=operations):
+                self.plan["operations"] = operations
+                self.save()
+                with self.assertRaisesRegex(ValueError, "empty naming plan"):
+                    GATE.validate(self.root)
+
+    def test_operation_requires_typed_names_and_no_promotion_material(self):
+        original = copy.deepcopy(self.plan["operations"][0])
+        mutations = [
+            ("kind", "RENAME"), ("proofs", {"claimed": "PASS"}),
+            ("installer_crate", "unreviewed"), ("reason", None),
+            ("before_type", None), ("before_type", "Unqualified"),
+            ("after_type", "java..Class"), ("after_type", [])]
+        for field, value in mutations:
+            with self.subTest(field=field, value=value):
+                self.plan["operations"] = [dict(original, **{field: value})]
+                self.save()
+                self.assert_cli_refused()
+        self.plan["operations"] = [None]
+        self.save()
+        self.assert_cli_refused()
+
+    def test_queued_operation_kinds_cannot_cross_owner_boundaries(self):
+        original = copy.deepcopy(self.plan["operations"][0])
+        for kind, destination, reason in (
+                ("FORMAT_ONLY", "jdk.internal.mindex.Other", "format-only"),
+                ("INTERNAL_MOVE", original["before_type"], "different internal"),
+                ("INTERNAL_MOVE", "java.lang.Class", "different internal"),
+                ("JDK_BACKEND", "com.m3.Class", "canonical JDK class"),
+                ("JDK_BACKEND", "java.util.M3Arrays", "M3 name cannot"),
+                ("JDK_BACKEND", "javax.xml.parsers.DocumentBuilder", "explicit owner/module review")):
+            with self.subTest(kind=kind, destination=destination):
+                self.plan["operations"] = [dict(original, kind=kind, after_type=destination)]
+                self.save()
+                with self.assertRaisesRegex(ValueError, reason):
+                    GATE.validate(self.root)
+        self.mapping["migration"]["records"][0]["targets"] = [{
+            "symbol": "java.lang.Class",
+            "path": "src/java.base/share/classes/java/lang/Class.java"}]
+        self.plan["operations"] = [dict(original, before_type="java.lang.Class")]
+        self.save()
+        with self.assertRaisesRegex(ValueError, "must be an internal"):
+            GATE.validate(self.root)
+
+    def test_queued_source_must_have_the_exact_canonical_path_and_symbol(self):
+        record = self.mapping["migration"]["records"][0]
+        original = copy.deepcopy(record["targets"][0])
+        for path, reason in (
+                (None, "invalid canonical target path"),
+                ("elsewhere/jdk/internal/mindex/M3Class.java", "invalid canonical target path"),
+                ("src/java.base/share/classes/jdk/internal/mindex/Other.java", "path and type disagree")):
+            with self.subTest(path=path):
+                record["targets"] = [dict(original, path=path)]
+                self.save()
+                with self.assertRaisesRegex(ValueError, reason):
+                    GATE.validate(self.root)
+        record["targets"] = [None, {"symbol": "some.other.Owner"}, original]
+        self.save()
+        self.assertEqual(GATE.validate(self.root), (1, ["class.view"]))
+        record["targets"].pop()
+        self.save()
+        with self.assertRaisesRegex(ValueError, "not recorded as a canonical"):
+            GATE.validate(self.root)
+
+    def test_receiving_paths_refuse_aliases_and_symlink_owners(self):
+        for path in (None, "", "/outside.java", "C:/outside.java", "a\\b", "a\x00b",
+                     "m3//owner.java", "m3/./owner.java", "m3/../owner.java"):
+            with self.subTest(path=path), self.assertRaises(ValueError):
+                GATE.local_file(self.root, path)
+        path = self.mapping["migration"]["records"][0]["targets"][0]["path"]
+        owner = self.root / path
+        actual = self.root / "actual.java"
+        owner.rename(actual)
+        owner.symlink_to(actual)
+        with self.assertRaisesRegex(ValueError, "symlink target path forbidden"):
+            GATE.validate(self.root)
+
+    def test_duplicate_json_keys_cannot_override_a_pinned_document(self):
+        text = json.dumps(self.mapping).replace('"schema": 1', '"schema": 1, "schema": 1', 1)
+        write(self.root, GATE.MAP, text)
+        self.plan["authority_blob"] = GATE.git_blob(text.encode("utf-8"))
+        write(self.root, GATE.PLAN, json.dumps(self.plan))
+        self.assert_cli_refused()
+        self.save()
+        text = json.dumps(self.plan).replace('"schema": ', '"schema": "OTHER", "schema": ', 1)
+        write(self.root, GATE.PLAN, text)
+        self.assert_cli_refused()
+
+    def test_cli_success_and_input_errors_never_claim_product_acceptance(self):
+        output, error = io.StringIO(), io.StringIO()
+        with mock.patch.object(GATE, "ROOT", self.root), \
+                contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
+            self.assertEqual(GATE.main(["check.py"]), 0)
+        self.assertIn("queued=1 mappingIDs=class.view", output.getvalue())
+        self.assertIn("qualifiedJdkPromotions=0 productSourceEdits=0", output.getvalue())
+        self.assertEqual(error.getvalue(), "")
+        for content in (b"{", b"\xff"):
+            with self.subTest(content=content):
+                (self.root / GATE.PLAN).write_bytes(content)
+                self.assert_cli_refused()
+        (self.root / GATE.PLAN).unlink()
+        self.assert_cli_refused()
+
+    def test_script_entrypoint_refuses_unrecognized_arguments(self):
+        error = io.StringIO()
+        with mock.patch.object(sys, "argv", ["check.py", "--accept"]), \
+                contextlib.redirect_stderr(error), self.assertRaises(SystemExit) as raised:
+            runpy.run_path(str(HERE / "check.py"), run_name="__main__")
+        self.assertEqual(raised.exception.code, 2)
+        self.assertIn("usage: check.py", error.getvalue())
 
 
 class PublicCompanionContractTests(unittest.TestCase):
@@ -467,6 +687,71 @@ class PublicCompanionContractTests(unittest.TestCase):
                                           after_type=self.target["symbol"])
         self.save()
         self.assertEqual(GATE.validate(self.root), (1, [self.record["id"]]))
+
+    def test_dollar_suffix_is_not_the_mapped_public_class(self):
+        self.pin_content(self.target,
+                         "package com.m3.arrays; public class M3Arrays$Other {}\n")
+        self.assert_refused("public type declaration")
+
+    def test_unicode_identifier_suffix_is_not_the_mapped_public_class(self):
+        for suffix in ("\u20ac", "\u0301", "\u203f"):
+            with self.subTest(suffix=ascii(suffix)):
+                self.pin_content(self.target, "package com.m3.arrays; public class M3Arrays"
+                                 + suffix + "Peer {}\n")
+                self.assert_refused("public type declaration")
+
+    def test_explicit_dollar_identifier_is_preserved(self):
+        self.target.update(symbol="com.m3.arrays.M3Arrays$View",
+                           path="m3/arrays/src/main/java/com/m3/arrays/M3Arrays$View.java")
+        self.record["companion_of"]["target_symbol"] = self.target["symbol"]
+        self.pin_content(self.target,
+                         "package com.m3.arrays; public class M3Arrays$View {}\n")
+        self.assert_queued_only()
+
+    def test_public_type_bodies_must_be_present_and_balanced(self):
+        for body, reason in (("public class M3Arrays", "missing public type body"),
+                             ("public class M3Arrays {", "unbalanced public type body"),
+                             ("public class M3Arrays {} public class M3Arrays {}",
+                              "ambiguous public type declaration")):
+            with self.subTest(body=body):
+                self.pin_content(self.target, "package com.m3.arrays; " + body)
+                self.assert_refused(reason)
+
+    def test_record_component_annotation_braces_do_not_become_the_type_body(self):
+        self.pin_content(self.target,
+                         "package com.m3.arrays; @interface Mark { int[] value(); }\n"
+                         "public record M3Arrays(@Mark({1, 2}) int value) {}\n")
+        self.assert_queued_only()
+
+    def test_companion_artifact_collections_require_arrays(self):
+        for field in ("sources", "targets"):
+            original = self.record[field]
+            for value in (None, {}, "unreviewed"):
+                with self.subTest(field=field, value=value):
+                    self.record[field] = value
+                    self.assert_refused("mapped source and target artifacts")
+            self.record[field] = original
+
+    def test_companion_requires_exact_named_module_and_mapped_source_root(self):
+        for module in (None, "", "com..m3", []):
+            with self.subTest(module=module):
+                self.target["module"] = module
+                self.assert_refused("exact named module")
+        self.target["module"] = "com.m3.arrays"
+        self.target["path"] = "m3/generated/com/m3/arrays/M3Arrays.java"
+        self.pin_content(self.target, "package com.m3.arrays; public class M3Arrays {}\n")
+        self.assert_refused("mapped module source root")
+
+    def test_missing_companion_source_is_not_covered_by_its_receipt(self):
+        (self.root / self.target["path"]).unlink()
+        self.assert_refused("mapped companion relation source missing")
+
+    def test_companion_in_an_explicit_jdk_module_root_remains_eligible(self):
+        self.target["path"] = "src/com.m3.arrays/share/classes/com/m3/arrays/M3Arrays.java"
+        self.pin_content(self.target, "package com.m3.arrays; public class M3Arrays {}\n")
+        write(self.root, "src/com.m3.arrays/share/classes/module-info.java",
+              "module com.m3.arrays { exports com.m3.arrays; }\n")
+        self.assert_queued_only()
 
 
 if __name__ == "__main__":
