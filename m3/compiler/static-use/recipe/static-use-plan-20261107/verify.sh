@@ -37,7 +37,7 @@ else
     gate 1_package_lint_werror FAIL "[WARNING] lines=$warnings log=$SCRATCH/mvn-package.log"; grep -E "ERROR|FAIL" "$SCRATCH/mvn-package.log" | head -20
 fi
 surefire=$(grep -E "^\[INFO\] Tests run: [0-9]+, Failures: [0-9]+, Errors: [0-9]+, Skipped: [0-9]+$" "$SCRATCH/mvn-package.log" | tail -1 | tr -d '\r')
-figures=$(grep -E "^(facts|loops|growth|CHECKS|RESULT)" "$SCRATCH/mvn-package.log" | cut -d' ' -f1-4 | tr -d '\r' | tr '\n' ' ')
+figures=$(grep -E "^(facts|loops|growth|CHECKS|RESULT|CompilerOwnershipProof)" "$SCRATCH/mvn-package.log" | cut -d' ' -f1-4 | tr -d '\r' | tr '\n' ' ')
 case "$surefire $figures" in *"Failures: 0, Errors: 0, Skipped: 0"*"RESULT PASS"*) gate 2_test_phase PASS "$surefire; $figures" ;; *) gate 2_test_phase FAIL "$surefire; $figures" ;; esac
 
 if bash "$RECIPE_DIR/differential.sh" "$DONOR_GIT" "$REV" "$SCRATCH/differential" "$CONSOLE" > "$SCRATCH/differential.log" 2>&1; then

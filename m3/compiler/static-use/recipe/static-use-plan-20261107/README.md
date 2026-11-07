@@ -36,6 +36,22 @@ of the first-party donor `hsoliwal/com.synexia` (develop `d5ad5090d87e`), reloca
 * Differential ([differential.sh](differential.sh)): donor and relocated dumps byte-identical (default and `-Xint`),
   three one-line mutants refused by the reference model, `javap -p` of 11 classes identical.
 
+## Leaf 2: the javac processor (2026-11-07)
+
+`M3StaticFactsProcessor` (the former OMIT row) joined the module by the same recipe: the opt-in annotation processor
+(analyzer `m3-static-facts-v2`) over `@Analyze` methods, which reads real javac trees, admits only literal-start
+constant-step `int` for-loops bounded by a literal, an unmutated `int` parameter or an unmutated array parameter's
+length (everything else is `UNKNOWN`; escape, runtime counts and callee effects stay `UNPROVEN`), and writes one
+`@CompilerSummary` companion per method plus `META-INF/m3/compiler-facts.tsv`. It consumes `M3StaticUsePlan` only
+(DECISION.tsv S8). `java.compiler` / `jdk.compiler` are `requires static` (compile time only, S9); there is no service
+registration (opt-in, as in the donor).
+
+* Donor oracle `CompilerOwnershipProof` (test scope): 105,991 assertions, 52 javac compilations through the processor.
+* `M3StaticFactsProcessorOracle` (test scope, new): one fixture corpus (53 companions, 2 ledgers, 3 diagnostics) through
+  the donor and the relocated processor; byte-identical after the declared masking (S10).
+* Four processor mutants (single-level parentheses, loop budget 129, mutated parameter bound admitted, stripped source
+  hash) are refused by the relocated proof.
+
 ## Run
 
 ```sh
