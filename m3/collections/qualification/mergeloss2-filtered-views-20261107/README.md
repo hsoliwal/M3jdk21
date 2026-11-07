@@ -6,7 +6,10 @@ Source: merge-loss audit phase 2 (`S:/m3-scratch/eb-conv/mergeloss2`, `CLEAN_0E.
 `M3FilteredLists` and the files those rows name). Every lost line is a PR-side line of a RETAIN (or MERGE_RESOLVE)
 superset merge of 2026-10-28 (`ATOM_VERDICTS.tsv` other=NEVER). Re-tested on master `33541216b2cd`, after #2641
 (`b8fb8956aaac`, `qualification/filtered-views-owner-20261106`, whose `DECISION.tsv` rows ML2-B/ML2-O already
-decided these leaves).
+decided these leaves), and again on this change's base `0b97282f6d1d`: draft #2676 (TREEMAP_ABA_GUARD, not landed
+when this was pushed) over master `2ec96ee32ff`. This change stacks on #2676 and leaves its `M3TreeMap.cursorStart`
+change in `M3MutableFilteredViews` alone (no rule here targets that file); the gates ran on that base with the #2641
+differential harness as #2676 updated it.
 
 | decision | rows | citation |
 |---|---|---|
