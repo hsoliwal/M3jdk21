@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Relocation recipe RELOCATE_PLANNER_FAMILY v4 (recipe-first port, never by hand).
+"""Relocation recipe RELOCATE_PLANNER_FAMILY v5 (recipe-first port, never by hand).
 
 Copies every FILE row of RELOCATION_MAP.tsv (next to this script) from a donor git tree (--donor-git DIR at
 --donor-rev REV) into the module (--module DIR, default: the grandparent of this recipe directory, m3/ports/precompute).
@@ -41,6 +41,12 @@ is applied, a qualified reference that still starts with the root segments of a 
 segments of every PACKAGE row) is refused: such a reference would compile against nothing in M3JDK, and the naming
 rules would rewrite it outside the recipe (so the recipe and jdk_naming.py would no longer share one fixed point).
 
+PATCH rows (v5): PATCH <target> <recipe dir, module relative> names a later hash-pinned apply recipe (its EDITS.tsv)
+that refines a relocated FILE target. The relocated bytes must hash to the before value of that recipe's rows for the
+target (else the recipe refuses: the patch was written against other bytes); a target that hashes to their after value
+is left as it is and reported PATCHED, so relocate.py and apply.py share one fixed point. Any other content is rewritten
+with the relocated bytes, and apply.py then reapplies the patch.
+
 Derived from m3/ports/precompute/recipe/consumer-profiles-20261107/relocate.py v3 (RELOCATE_CONSUMER_PROFILES, the
 module's latest recipe, a copy of utf16-stitch-20261106 v3 and of bitmatrix-20261106 v3 before it): QUALIFIED rows and
 the residue refusal added; everything else unchanged.
@@ -57,7 +63,8 @@ import sys
 from pathlib import Path
 
 RECIPE = "relocate.py"
-VERSION = "v4"
+VERSION = "v4"  # output version: the relocated bytes (anchor lines) and PROVENANCE rows are unchanged since v4
+REVISION = "v5"  # recipe revision (PATCH rows), printed in the run log only, so no anchor is edited
 RECIPE_DIR = Path(__file__).resolve().parent
 RECIPE_PATH = "m3/ports/precompute/recipe/" + RECIPE_DIR.name + "/" + RECIPE
 DONOR_REPO = "hsoliwal/com.synexia"
@@ -84,7 +91,7 @@ def read_map(recipe_dir: Path) -> dict:
     rows = [line.split("\t") for line in (recipe_dir / MAP_NAME).read_text(encoding="utf-8").splitlines()
             if line.strip() and not line.startswith("#") and not line.startswith("kind\t")]
     mapping: dict = {"FILE": [], "PACKAGE": {}, "TYPE": {}, "EXTERNAL": {}, "DROP": [], "LITERAL": {}, "HELD": [],
-                     "QUALIFIED": {}}
+                     "QUALIFIED": {}, "PATCH": {}}
     for kind, donor, target, *note in rows:
         if kind == "FILE":
             mapping["FILE"].append((donor, target))
@@ -262,6 +269,21 @@ def write_if_changed(path: Path, data: bytes, check: bool) -> bool:
     return True
 
 
+def patched(module: Path, mapping: dict, target: str, relocated: bytes) -> str | None:
+    """The pinned after sha256 of a PATCH row's recipe for the target; refuses when its before is not the relocation."""
+    if target not in mapping["PATCH"]:
+        return None
+    rows = [line.split("\t") for line in (module / mapping["PATCH"][target] / "EDITS.tsv").read_text(encoding="utf-8")
+            .splitlines() if line and not line.startswith(("#", "id\t"))]
+    pins = {(row[2], row[3]) for row in rows if row[1].endswith("/" + target)}
+    if len(pins) != 1:
+        raise Refused("PATCH %s: %d before/after pins in %s/EDITS.tsv" % (target, len(pins), mapping["PATCH"][target]))
+    before, after = pins.pop()
+    if sha256(relocated) != before:
+        raise Refused("PATCH %s: the relocated bytes are not the pinned before of %s" % (target, mapping["PATCH"][target]))
+    return after
+
+
 def run(module: Path, recipe_dir: Path, donor: Path, rev: str, check: bool) -> int:
     mapping = read_map(recipe_dir)
     commit = git(donor, "rev-parse", rev + "^{commit}").decode().strip()
@@ -270,10 +292,16 @@ def run(module: Path, recipe_dir: Path, donor: Path, rev: str, check: bool) -> i
         blob = git(donor, "rev-parse", rev + ":" + donor_path).decode().strip()
         data = git(donor, "cat-file", "blob", blob)
         relocated, body_match, body_match_renamed, dropped = relocate(data, donor_path, blob, commit, mapping, seen)
-        state = write_if_changed(module / target, relocated, check)
+        after = patched(module, mapping, target, relocated)
+        current = module / target
+        if after is not None and current.exists() and sha256(current.read_bytes()) == after:
+            state, label = False, "PATCHED"
+        else:
+            state = write_if_changed(current, relocated, check)
+            label = "CHANGED" if state else "UNCHANGED"
         changed += state
         print("FILE %s body_match=%s body_match_renamed=%s declared_drops=%d %s" % (
-            "CHANGED" if state else "UNCHANGED", str(body_match).upper(), str(body_match_renamed).upper(), dropped, target))
+            label, str(body_match).upper(), str(body_match_renamed).upper(), dropped, target))
         rows.append((DONOR_REPO, commit, donor_path, blob, sha256(data), target, sha256(relocated),
                      str(body_match).upper(), str(body_match_renamed).upper(), str(dropped), RECIPE + " " + VERSION))
     for seen_key, count in seen.items():
@@ -291,7 +319,7 @@ def run(module: Path, recipe_dir: Path, donor: Path, rev: str, check: bool) -> i
     provenance = "\n".join(["\t".join(PROVENANCE_COLUMNS)] + ["\t".join(row) for row in rows]) + "\n"
     provenance_state = write_if_changed(recipe_dir / PROVENANCE_NAME, provenance.encode(), check)
     print("RELOCATE recipe=%s %s donor_commit=%s files=%d held=%d changed=%d provenance=%s" % (
-        RECIPE_PATH, VERSION, commit, len(rows), len(mapping["HELD"]), changed, "CHANGED" if provenance_state else "UNCHANGED"))
+        RECIPE_PATH, REVISION, commit, len(rows), len(mapping["HELD"]), changed, "CHANGED" if provenance_state else "UNCHANGED"))
     return 1 if check and (changed or provenance_state) else 0
 
 

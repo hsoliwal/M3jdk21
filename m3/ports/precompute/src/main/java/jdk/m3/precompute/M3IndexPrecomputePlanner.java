@@ -3,6 +3,7 @@
 package jdk.m3.precompute;
 
 import java.math.BigInteger;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumMap;
@@ -18,6 +19,10 @@ import java.util.Set;
  * <p>Up to 20 candidates are searched exactly. Larger catalogs use a deterministic
  * dependency-aware benefit/byte greedy pass, because exhaustive 2^N enumeration is not a sensible
  * build-time default for a universal capability catalog.</p>
+ *
+ * <p>Dependencies may form cycles. Both passes treat a cycle as one dependency-closed group: the exact
+ * search admits a capability only together with all of its dependencies, and the greedy pass closes a
+ * capability's dependencies visiting each capability once.</p>
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/0616288bfa7d91eb0abb754c7a29707f10318752/synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputePlanner.java blob 18b16bda6e3b; recipe m3/ports/precompute/recipe/planner-family-20261107/relocate.py v4
 public final class M3IndexPrecomputePlanner {
@@ -130,13 +135,19 @@ public final class M3IndexPrecomputePlanner {
       Map<M3IndexPrecomputeCapability, M3IndexPrecomputeCandidate> byCapability,
       Set<M3IndexPrecomputeCapability> already,
       EnumSet<M3IndexPrecomputeCapability> result) {
-    if (already.contains(capability) || result.contains(capability)) return;
-    M3IndexPrecomputeCandidate candidate = byCapability.get(capability);
-    if (candidate == null) throw new IllegalArgumentException("missing dependency candidate " + capability);
-    for (M3IndexPrecomputeCapability dependency : candidate.dependencies()) {
-      collect(dependency, byCapability, already, result);
+    //FLLDCIM: MRL - recipe planner-cycle-fix-20261107: explicit stack, one visit per capability (a dependency cycle closes as one group)
+    ArrayDeque<M3IndexPrecomputeCapability> pending = new ArrayDeque<>();
+    pending.push(capability);
+    while (!pending.isEmpty()) {
+      M3IndexPrecomputeCapability next = pending.pop();
+      if (already.contains(next) || result.contains(next)) continue;
+      M3IndexPrecomputeCandidate candidate = byCapability.get(next);
+      if (candidate == null) throw new IllegalArgumentException("missing dependency candidate " + next);
+      result.add(next);
+      for (M3IndexPrecomputeCapability dependency : candidate.dependencies()) {
+        pending.push(dependency);
+      }
     }
-    result.add(capability);
   }
 
   private static long score(
