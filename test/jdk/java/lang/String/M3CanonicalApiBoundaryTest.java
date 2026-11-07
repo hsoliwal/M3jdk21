@@ -51,6 +51,8 @@ public final class M3CanonicalApiBoundaryTest {
     private static final String[] INTERNAL_PREFIXES = {
         "M3", "MIndex", "MatIndex"
     };
+    private static final Pattern M3_COMPANION_NAMESPACE = Pattern.compile(
+            "(?<![\\p{javaJavaIdentifierPart}.])(?:jdk\\.m3|com\\.m3)\\.");
 
     private M3CanonicalApiBoundaryTest() {}
 
@@ -81,10 +83,21 @@ public final class M3CanonicalApiBoundaryTest {
         verifyModulePackages("java.base");
         verifyModulePackages("jdk.compiler");
         rejectInternalSurface("jdk.m3.collections.SlotArray", "self-test");
+        rejectInternalSurface("com.m3.collections.SlotArray", "legacy self-test");
+        rejectInternalSurface("java.util.List<jdk.m3.collections.SlotArray>", "generic self-test");
+        rejectInternalSurface("java.util.List<com.m3.collections.SlotArray>", "legacy generic self-test");
         rejectInternalSurface("jdk.internal.mindex.IndexRows", "self-test");
         rejectInternalSurface("com.sun.tools.javac.m3.ParsedRows", "self-test");
-        if (isInternalSurface("java.util.List<java.lang.String>")) {
-            throw new AssertionError("ordinary JDK type incorrectly rejected");
+        for (String ordinary : new String[] {
+                "java.util.List<java.lang.String>",
+                "jdk.m30.collections.SlotArray", "com.m30.collections.SlotArray",
+                "application.jdk.m3.collections.SlotArray",
+                "application.com.m3.collections.SlotArray",
+                "applicationjdk.m3.collections.SlotArray"
+        }) {
+            if (isInternalSurface(ordinary)) {
+                throw new AssertionError("ordinary type incorrectly rejected: " + ordinary);
+            }
         }
         for (Class<?> canonical : new Class<?>[] {
                 String.class, Class.class, InputStream.class, OutputStream.class,
@@ -240,7 +253,7 @@ public final class M3CanonicalApiBoundaryTest {
         for (String prefix : INTERNAL_MODULE_PACKAGES) {
             if (typeName.contains(prefix + ".")) return true;
         }
-        return typeName.contains("com.m3.");
+        return M3_COMPANION_NAMESPACE.matcher(typeName).find();
     }
 
     private static void rejectInternalSurface(String typeName, String location) {

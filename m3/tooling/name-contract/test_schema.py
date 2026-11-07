@@ -23,84 +23,18 @@ MAP = "m3/docs/name-mapping.json"
 SCHEMA = "m3/docs/name-mapping.schema.json"
 PLAN = "m3/tooling/name-contract/name-plan.json"
 SIGNAL = "m3.code-text-signal-batch"
-AST = "m3.counterpart.MIndexCompilerASTPrecompute"
 FS = "m3.fs.provider-defaults"
 COMPANION = "m3.arrays.api-companion"
 QUEUE = "m3.collections.evicting-queue.owner-naming"
 # Sealed receiving snapshot 5f1ac46f: future additions are allowed; removal needs explicit review.
-HISTORICAL_IDS = frozenset({
-    "bridge.MIndexCanonicalBridge",
-    "bridge.MIndexDagDeferredSwap",
-    "bridge.MIndexDagPage",
-    "bridge.MIndexDagPageCodec",
-    "bridge.MIndexKnowledgeArgumentCompiler",
-    "bridge.MIndexKnowledgeArguments",
-    "bridge.MIndexLexiconCoordinateCompilerCli",
-    "bridge.MIndexLexiconCoordinateManifest",
-    "bridge.MIndexLexiconCoordinatePublisher",
-    "bridge.MIndexLexiconCoordinateSpace",
-    "bridge.MIndexRuntimeStructuralAdapterProvider",
-    "bridge.MIndexStringConversionBridge",
-    "family.application-structures",
-    "family.entire-source-closure",
-    "family.structural-owners",
-    "family.substring-conflict",
-    "family.word-facts",
-    "m3.arrays.api-companion",
-    "m3.arrays.packed.native",
-    "m3.arrays.packed.signed",
-    "m3.arrays.packed.vint64",
-    "m3.build.change-journal-doclint",
-    "m3.code-text-signal-batch",
-    "m3.collections.evicting-queue.owner-naming",
-    "m3.collections.indexed-snapshot.packed-filter-directory",
-    "m3.fs.provider-defaults",
-    "m3.p0-view-dependencies",
-    "m3.prefix-z",
-    "route-a.canonical-storage",
-    "route-b.compiler-lowering",
-    "route-c.complete-jdk",
-    "m3.collections.PackedBitAtoms",
-    "m3.collections.SegmentedAddress28",
-    "m3.collections.SegmentedBitLane28",
-    "m3.collections.SegmentedIntLane28",
-    "m3.collections.SegmentedLongLane28",
-    "m3.collections.tree-window-sibling-shift",
-    "m3.counterpart.MIndexAST",
-    "m3.counterpart.MIndexASTPrecompute",
-    "m3.counterpart.MIndexClass",
-    "m3.counterpart.MIndexClassBoundary",
-    "m3.counterpart.MIndexClassFlags",
-    "m3.counterpart.MIndexClassIndex",
-    "m3.counterpart.MIndexCompilerASTPrecompute",
-    "m3.counterpart.MIndexConstructor",
-    "m3.counterpart.MIndexField",
-    "m3.counterpart.MIndexJvmDescriptor",
-    "m3.counterpart.MIndexLibraryRelease",
-    "m3.counterpart.MIndexMember",
-    "m3.counterpart.MIndexMemberFlags",
-    "m3.counterpart.MIndexMemberKind",
-    "m3.counterpart.MIndexMethod",
-    "m3.counterpart.MIndexRecordComponent",
-    "m3.counterpart.MIndexRegexTrigramQuery",
-    "m3.counterpart.MIndexRegexTrigramQuery.sparseLookup",
-    "m3.counterpart.MIndexVersionTable",
-    "m3.counterpart.MIndexVmPrecomputeKey",
-    "m3.counterpart.MIndexVmSession",
-    "m3.frozen-chars",
-    "m3.inventory-cli",
-    "m3.inventory-producer",
-    "m3.jcc-java-jni-regression",
-    "m3.jcc-recipe-laboratory",
-    "m3.regex.hierarchical-route-acceptance",
-    "m3.regex.metadata-pressure",
-    "m3.regex.mr",
-    "m3.regex.ordered-relations.adapter",
-    "m3.regex.ordered-relations.dispatch",
-    "m3.regex.prepared-utf16-effects.receiver",
-    "m3.regex.rxa",
-    "m3.regex.rxm",
-})
+# Historical capability IDs are protocol/lineage data, not Java source names.
+HISTORY_PATH = ROOT / "m3/tooling/name-contract/receipts/release-preparation/source-identity.json"
+HISTORY_BYTES = HISTORY_PATH.read_bytes()
+if hashlib.sha256(HISTORY_BYTES).hexdigest() != "cc4d3efdaf35cbc96afe94a51f813fb6323adcffb73c62fe7266d7aada3e1fef":
+    raise ValueError("historical naming source receipt identity drift")
+HISTORY = json.loads(HISTORY_BYTES)
+HISTORICAL_IDS = frozenset(HISTORY["historical_mapping_ids"])
+AST = HISTORY["anchors"]["compiler_ast_precompute"]
 TEST_DESCRIPTIONS = [
     "test/jdk/java/lang/String/M3CodeTextSignalBatchNativeTest.java",
     "Strict Java21, javac-h, C11/C17, Xcheck:jni and UBSan component parity in canonical packet.",
@@ -138,6 +72,15 @@ class NamingSchemaCompatibilityTests(unittest.TestCase):
 
     def test_complete_current_authority_validates(self):
         examine(self.doc, self.schema)
+
+    def test_companion_schema_requires_current_exact_jdk_m3_namespace(self):
+        self.record(COMPANION)["companion_of"]["target_symbol"] = "jdk.m3.arrays.M3Arrays"
+        examine(self.doc, self.schema)
+        for symbol in ("com.m3.arrays.M3Arrays", "jdk.m30.arrays.M3Arrays",
+                       "jdk.internal.m3.arrays.M3Arrays", "java.util.Arrays"):
+            with self.subTest(symbol=symbol):
+                self.record(COMPANION)["companion_of"]["target_symbol"] = symbol
+                self.assert_refused()
 
     def test_name_plan_pins_exact_authority_bytes(self):
         plan = json.loads((ROOT / PLAN).read_text(encoding="utf-8"))

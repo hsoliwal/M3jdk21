@@ -1,0 +1,250 @@
+{
+  "schema": "M3_RELEASE_NAMING_SOURCE_IDENTITY_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "source_repository": "hsoliwal/M3jdk21",
+  "source_commit": "b9cc756f726de31af10652b5583d9bba58ba27b2",
+  "source_map_git_blob_sha1": "40bcf0eaed5843f1ce343d42f904480fa9ac1965",
+  "source_map_sha256": "67fbeff5284b50a247ffb65ce478668e4cfaedc84d884fdfddfc62a032de6205",
+  "scope": "Current source names/hashes, original 71 stable-ID history anchors and one restored historical capability. Not rename authority or runtime evidence.",
+  "runtime_qualified": false,
+  "historical_mapping_ids": [
+    "bridge.MIndexCanonicalBridge",
+    "bridge.MIndexDagDeferredSwap",
+    "bridge.MIndexDagPage",
+    "bridge.MIndexDagPageCodec",
+    "bridge.MIndexKnowledgeArgumentCompiler",
+    "bridge.MIndexKnowledgeArguments",
+    "bridge.MIndexLexiconCoordinateCompilerCli",
+    "bridge.MIndexLexiconCoordinateManifest",
+    "bridge.MIndexLexiconCoordinatePublisher",
+    "bridge.MIndexLexiconCoordinateSpace",
+    "bridge.MIndexRuntimeStructuralAdapterProvider",
+    "bridge.MIndexStringConversionBridge",
+    "family.application-structures",
+    "family.entire-source-closure",
+    "family.structural-owners",
+    "family.substring-conflict",
+    "family.word-facts",
+    "m3.arrays.api-companion",
+    "m3.arrays.packed.native",
+    "m3.arrays.packed.signed",
+    "m3.arrays.packed.vint64",
+    "m3.build.change-journal-doclint",
+    "m3.code-text-signal-batch",
+    "m3.collections.evicting-queue.owner-naming",
+    "m3.collections.indexed-snapshot.packed-filter-directory",
+    "m3.fs.provider-defaults",
+    "m3.p0-view-dependencies",
+    "m3.prefix-z",
+    "route-a.canonical-storage",
+    "route-b.compiler-lowering",
+    "route-c.complete-jdk",
+    "synexia.collections.PackedBitAtoms",
+    "synexia.collections.SegmentedAddress28",
+    "synexia.collections.SegmentedBitLane28",
+    "synexia.collections.SegmentedIntLane28",
+    "synexia.collections.SegmentedLongLane28",
+    "synexia.collections.tree-window-sibling-shift",
+    "synexia.counterpart.MIndexAST",
+    "synexia.counterpart.MIndexASTPrecompute",
+    "synexia.counterpart.MIndexClass",
+    "synexia.counterpart.MIndexClassBoundary",
+    "synexia.counterpart.MIndexClassFlags",
+    "synexia.counterpart.MIndexClassIndex",
+    "synexia.counterpart.MIndexCompilerASTPrecompute",
+    "synexia.counterpart.MIndexConstructor",
+    "synexia.counterpart.MIndexField",
+    "synexia.counterpart.MIndexJvmDescriptor",
+    "synexia.counterpart.MIndexLibraryRelease",
+    "synexia.counterpart.MIndexMember",
+    "synexia.counterpart.MIndexMemberFlags",
+    "synexia.counterpart.MIndexMemberKind",
+    "synexia.counterpart.MIndexMethod",
+    "synexia.counterpart.MIndexRecordComponent",
+    "synexia.counterpart.MIndexRegexTrigramQuery",
+    "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup",
+    "synexia.counterpart.MIndexVersionTable",
+    "synexia.counterpart.MIndexVmPrecomputeKey",
+    "synexia.counterpart.MIndexVmSession",
+    "synexia.frozen-chars",
+    "synexia.inventory-cli",
+    "synexia.inventory-producer",
+    "synexia.jcc-java-jni-regression",
+    "synexia.jcc-recipe-laboratory",
+    "synexia.regex.hierarchical-route-acceptance",
+    "synexia.regex.metadata-pressure",
+    "synexia.regex.mr",
+    "synexia.regex.ordered-relations.adapter",
+    "synexia.regex.ordered-relations.dispatch",
+    "synexia.regex.prepared-utf16-effects.receiver",
+    "synexia.regex.rxa",
+    "synexia.regex.rxm"
+  ],
+  "anchors": {
+    "compiler_ast_precompute": "synexia.counterpart.MIndexCompilerASTPrecompute",
+    "related_source_range": "synexia.lexicons.related-source-range"
+  },
+  "source_files": [
+    {
+      "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
+      "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e",
+      "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0"
+    },
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java",
+      "git_blob_sha1": "71806f64bafa5a7e5a90ecc0eda8478546698074",
+      "sha256": "882cb9c52d4247dc23a7a00fd658867a4968ef99884ad939ca932b3c217cfb95"
+    },
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
+      "git_blob_sha1": "74df0916dd8d20c300ee4f0fa89ffd7f8a1614c2",
+      "sha256": "1d4751b26c5919707caa5d1f478cecd4870a073409bc7616b45606ff930a658a"
+    },
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int40Array.java",
+      "git_blob_sha1": "a3e8f262968b81b3f70abfbf7c8c6b5e37454969",
+      "sha256": "1268404ce81e9cecccd7cb38a68f1d92a584bdc46cef45e066e1933bb7fa6efa"
+    },
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int48Array.java",
+      "git_blob_sha1": "3b0155725748739405a80bff7df9c6a166de19f3",
+      "sha256": "73bb294e30260d755a2f888c0c380a63847acadf49181b96efb108a0cfdc7445"
+    },
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int56Array.java",
+      "git_blob_sha1": "eba7944ea36e14119789b260f0787ac0d8ee5786",
+      "sha256": "dabf5f8b0932977bcdbc4161de97861189eab7898fc6ead5843e2cad0451a251"
+    },
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedCodec.java",
+      "git_blob_sha1": "a8b09e14c3d4a146d8620dee4d65652cbbe6fcaf",
+      "sha256": "1a3d44719a760da416077e1a995997fb19074a49c8d79e246c4ca755586f3e27"
+    },
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedIntArray.java",
+      "git_blob_sha1": "0a134d193178b3d82ae41f436da4b7c346453674",
+      "sha256": "483ae5c1e077eec95da5734c02d36ee46aaf3c879a889356f5fb7ac6e57af9e3"
+    },
+    {
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/packed/VInt.java",
+      "git_blob_sha1": "346c05694f6921b8211d15fd5fc1da0cd01bae83",
+      "sha256": "fa5a7c5554000db43961536e09c82f6c0752c42f58f0a298092ba9fde8758f73"
+    },
+    {
+      "path": "m3/arrays/src/main/java/module-info.java",
+      "git_blob_sha1": "733f0901484c06fef2274c39ebad03b0038426cc",
+      "sha256": "afdeccd9cff2eb83b870d216bf7ea01933bed6b55a2117cd91298392aecd8fe0"
+    },
+    {
+      "path": "m3/collections/implementations/evicting-queue/src/main/java/jdk/m3/collections/queue/M3EvictingQueue.java",
+      "git_blob_sha1": "757f3fe1d7e0da2df15d176ccbea8097da55e689",
+      "sha256": "d98b9bcfbf55bcf541fe5a03ee18daeeb4254496bc985bc6d809fc674674f220"
+    },
+    {
+      "path": "m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java",
+      "git_blob_sha1": "c3951836a70cd1e03148e942c3cf93529687c326",
+      "sha256": "91c5044456cf3841d857dd5069ef7e5d61055ea154880ad5fed3984e15f686b7"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+      "git_blob_sha1": "803f5b911343d109c9ed2ef7ebf3918e7cbe0693",
+      "sha256": "d1d2b56affd6f58362039e95141e8582e110edbd45fb42e40acf7a616bb7f170"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
+      "git_blob_sha1": "05f940afd343aae7f6fba10200ca17b87da48059",
+      "sha256": "d8fe7e6039027edea4e58990f42b1b79cacd33c0b234c8d98bfdc7b4d85fdf64"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
+      "git_blob_sha1": "cf2a95db6bcd5729437dcf403252464822800254",
+      "sha256": "8632721e214a20e82376fa68dd4e4b882719c57297c650e07d1c9daad08f4dc3"
+    },
+    {
+      "path": "m3/collections/src/main/java/module-info.java",
+      "git_blob_sha1": "1c600d4a9f7b4e21d4735907b299932a2644a079",
+      "sha256": "17f29b50c74749cfdd87a34240fbf2bacacb7f0ffdb3997b5967fbb14ee68c28"
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
+      "git_blob_sha1": "a8a158e31665d56b737929661b83c8e7ed9a1402",
+      "sha256": "81322515e837de6473759e284464ac927578e691da16126a8a3f1b45e50c9b87"
+    },
+    {
+      "path": "m3/core/src/module-info.java",
+      "git_blob_sha1": "bdd278210a498e2665620c02413b1e658c79370e",
+      "sha256": "7a6e9eecdc3153219b6e222332e00b4cffb2a9e3b55bfaeb9c87e9a29ba009f2"
+    },
+    {
+      "path": "m3/fs/src/main/java/jdk/m3/fs/DatabaseFileName.java",
+      "git_blob_sha1": "ccc3a63209fd2ef768d6ccebc94bf946bd35f619",
+      "sha256": "4f909a319286d140637344b986d52e63b8b7203461a73a572d9b546e38bb5228"
+    },
+    {
+      "path": "m3/fs/src/main/java/jdk/m3/fs/DatabaseFileObject.java",
+      "git_blob_sha1": "8404fc8a29b2dc37b2d2c4037efc6cd61d78d103",
+      "sha256": "6a33b1aa5821d416a2b2d9815cef541589e1e7c034d482464d39917433523cfc"
+    },
+    {
+      "path": "m3/fs/src/main/java/jdk/m3/fs/DatabaseFileProvider.java",
+      "git_blob_sha1": "5c5d0294a544bce1f169e8d60956189e7b0e745b",
+      "sha256": "dc2d5ee976416e761ec06b590286e8dd59a487f8ca8787d924fb6582a4ac0694"
+    },
+    {
+      "path": "m3/fs/src/main/java/jdk/m3/fs/DatabaseFileSystem.java",
+      "git_blob_sha1": "468c3239bf551d3e5c70850c70e043d1601dfbcf",
+      "sha256": "fe902639ff39a61612ccfebd67c87f16842e336b72aca32777d51298f2636a5d"
+    },
+    {
+      "path": "m3/fs/src/main/java/jdk/m3/fs/NioFileProvider.java",
+      "git_blob_sha1": "9aa891c23f199a1dcb80d00a0a96d32ca08e296c",
+      "sha256": "ae463a91f9ed5268a5330fac27656a8348eaf287b1e84def47da3e4c40036644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
+      "git_blob_sha1": "92a0a0702c5c45bc22c03d16f3914f91fece41b4",
+      "sha256": "31a46d55b7aed55942e602b53b216f9e8e3ef5c0447d74c33ab9aac0cd13d714"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Object.java",
+      "git_blob_sha1": "1274e5238b2c34166df6f6619e5f9a9ea6ff280c",
+      "sha256": "79d1ae2c2e2aceca5ca388e23db942f59611298bd5e24ee3beb807826123bf32"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Arrays.java",
+      "git_blob_sha1": "23fcda31d0678a09caee8d458a7caeff12abec24",
+      "sha256": "d05ab40d783e91cd608ffd76892f141bef38a82c0e105b67c4a6ee2f01faeb4f"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+      "git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
+      "sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "git_blob_sha1": "25a1cb4f9cfcc90a1f45db325f2fd4b6cdbc696c",
+      "sha256": "e2c0731e03fbbfefde6098bab89a77fd8a54df2edde28cf6e206c93aec00e9c0"
+    },
+    {
+      "path": "src/java.base/share/classes/module-info.java",
+      "git_blob_sha1": "fdeb2bcc6d0be019584dec2782b53d6d252dfaa8",
+      "sha256": "ba60ef5028216f9dd767a2a647b58b4cafe42639153db647bdf9fb4b3fbd2502"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java",
+      "git_blob_sha1": "d188de82ddc00523aa2a46494bca4a4b5fc62c09",
+      "sha256": "7d7d3726d0d8caca1eb46897e1a2c1a136bd3ef8dbccaacc5b9bc265b2aa9108"
+    }
+  ],
+  "restored_records": [
+    {
+      "id": "synexia.lexicons.related-source-range",
+      "source_commit": "7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c",
+      "source_map_git_blob_sha1": "238a1eb89294570ae126e2e803f4dc687cc05fae",
+      "source_symbol": "com.m3.text.SharedRelatedLexemeCatalog.findBySource",
+      "status": "implemented-unverified",
+      "reason": "Historical capability record restored without renaming its stable ID or promoting target acceptance."
+    }
+  ]
+}

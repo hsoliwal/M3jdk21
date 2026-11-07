@@ -20,11 +20,11 @@
 #
 # Claims: m3/release/release-contract.json is the only claim authority. The
 # admission verifier runs in development mode and its JSON is attached as
-# evidence; release mode (--release) is recorded but not required, because
-# the P0 technical preview tag sits on the integration history (ahead of the
-# upstream baseline by thousands of commits) and no execution-evidence manifest
-# exists yet, so git.single_release_commit and evidence.manifest block it.
-# This workflow upgrades no claim.
+# evidence; release mode (--release) is also recorded. Candidate draft packaging
+# does not change the declared history requirement or replace exact source and
+# platform execution receipts. Integration-history candidates remain on HOLD
+# under git.single_release_commit, and missing receipts remain explicit blockers.
+# This workflow upgrades no claim and never publishes the draft.
 #
 # Startup contract (run on CPU before pushing a change to this file):
 #   python3 m3/tools/ci/reusable_call_check.py .
@@ -74,6 +74,7 @@ jobs:
       macos-x64: ${{ steps.include.outputs.macos-x64 }}
       macos-aarch64: ${{ steps.include.outputs.macos-aarch64 }}
       windows-x64: ${{ steps.include.outputs.windows-x64 }}
+      platforms: ${{ steps.include.outputs.platforms }}
 
     steps:
       - name: 'Checkout the scripts and the version configuration'
@@ -91,6 +92,10 @@ jobs:
           set -euo pipefail
           tag=''
           release='false'
+          if [[ "${INPUT_CONFIGURE_ARGUMENTS}" == *$'\n'* || "${INPUT_CONFIGURE_ARGUMENTS}" == *$'\r'* ]]; then
+            echo '::error::configure arguments must be a single line'
+            exit 1
+          fi
           configure_arguments="${INPUT_CONFIGURE_ARGUMENTS}"
           if [[ "${GITHUB_REF_TYPE}" == 'tag' ]]; then
             tag="${GITHUB_REF_NAME}"
@@ -131,12 +136,29 @@ jobs:
         run: |
           set -euo pipefail
           # Same contract as main.yml: an empty list (tag push) means every platform.
+          if [[ "${INPUT_PLATFORMS}" == *$'\n'* || "${INPUT_PLATFORMS}" == *$'\r'* ]]; then
+            echo '::error::platform selection must be a single line'
+            exit 1
+          fi
+          input="$(printf '%s' "${INPUT_PLATFORMS}" | tr '[:upper:]' '[:lower:]' | tr -d ' ')"
+          if [[ -n "${input}" ]]; then
+            if [[ ! "${input}" =~ ^[a-z0-9,-]+$ || "${input}" == *, ]]; then
+              echo '::error::platforms must be a comma-separated list of supported platforms'
+              exit 1
+            fi
+            IFS=',' read -r -a requested <<< "${input}"
+            for platform in "${requested[@]}"; do
+              case "${platform}" in
+                linux-x64|macos-x64|macos-aarch64|windows-x64|linux|macos|windows) ;;
+                *) echo "::error::unsupported platform '${platform}'"; exit 1 ;;
+              esac
+            done
+          fi
           function check_platform() {
-            if [[ -z "${INPUT_PLATFORMS}" ]]; then
+            if [[ -z "${input}" ]]; then
               echo 'true'
               return
             fi
-            input="$(echo "${INPUT_PLATFORMS}" | tr '[:upper:]' '[:lower:]' | tr -d ' ')"
             for p in "$@"; do
               if [[ ",${input}," == *",${p},"* ]]; then
                 echo 'true'
@@ -145,11 +167,21 @@ jobs:
             done
             echo 'false'
           }
+          linux_x64="$(check_platform linux-x64 linux)"
+          macos_x64="$(check_platform macos-x64 macos)"
+          macos_aarch64="$(check_platform macos-aarch64 macos)"
+          windows_x64="$(check_platform windows-x64 windows)"
+          selected=()
+          [[ "${linux_x64}" != true ]] || selected+=(linux-x64)
+          [[ "${macos_x64}" != true ]] || selected+=(macos-x64)
+          [[ "${macos_aarch64}" != true ]] || selected+=(macos-aarch64)
+          [[ "${windows_x64}" != true ]] || selected+=(windows-x64)
           {
-            echo "linux-x64=$(check_platform linux-x64 linux)"
-            echo "macos-x64=$(check_platform macos-x64 macos)"
-            echo "macos-aarch64=$(check_platform macos-aarch64 macos)"
-            echo "windows-x64=$(check_platform windows-x64 windows)"
+            echo "linux-x64=${linux_x64}"
+            echo "macos-x64=${macos_x64}"
+            echo "macos-aarch64=${macos_aarch64}"
+            echo "windows-x64=${windows_x64}"
+            echo "platforms=${selected[*]}"
           } >> "$GITHUB_OUTPUT"
 
   ###
@@ -233,6 +265,7 @@ jobs:
     env:
       TAG: ${{ needs.prepare.outputs.tag }}
       RELEASE: ${{ needs.prepare.outputs.release }}
+      EXPECTED_PLATFORMS: ${{ needs.prepare.outputs.platforms }}
 
     steps:
       - name: 'Prepare the output directories outside the source tree'
@@ -280,12 +313,23 @@ jobs:
         run: |
           set -euo pipefail
           ver="${TAG:-m3jdk-${GITHUB_SHA::12}}"
+          if [[ -z "${EXPECTED_PLATFORMS:-}" ]]; then
+            echo '::error::the preparation job did not select any platforms'
+            exit 1
+          fi
           found=0
           for platform in linux-x64 macos-x64 macos-aarch64 windows-x64; do
             dir="${ART}/bundles-${platform}"
-            if [[ ! -d "${dir}" ]]; then
-              echo "::notice::${platform}: no bundles (platform deselected or nothing uploaded)"
+            if [[ " ${EXPECTED_PLATFORMS} " != *" ${platform} "* ]]; then
+              if [[ -e "${dir}" ]]; then
+                echo "::error::${platform}: unexpected artifact for a deselected platform"
+                exit 1
+              fi
               continue
+            fi
+            if [[ ! -d "${dir}" ]]; then
+              echo "::error::${platform}: required bundle artifact is missing"
+              exit 1
             fi
             found=$((found + 1))
             jdk=''
