@@ -36,3 +36,33 @@ The two later passes:
 - **JIT:** C2 inlining decisions per atom; see the ARRAY_MAP crate's `M3ArrayMapJitTest`.
 - **Replace:** an atom may be swapped for a catalogue implementation only under its unchanged contract, through a
   recipe.
+
+## Repository-complete file-container census
+
+`M3RepositoryFileCensus` is the first repository-complete coverage leaf. It reads one exact committed Git tree and
+emits one `FILE_CONTAINER` atom for every tracked blob or gitlink. It never inventories the mutable working tree.
+For regular files it streams the exact Git blob through one `git cat-file --batch` process and records a SHA-256 of
+the committed bytes. A path-derived atom ID stays stable when content changes. Reviewed moves preserve identity
+through the exact-tree `contract/FILE_IDENTITY_OVERRIDES.tsv` table; unreviewed renames remain visible as delete/add.
+
+```text
+./verify-repository-census.sh
+```
+
+The verification script compiles the leaf with Java 21 and `-Xlint:all -Werror`, executes the dependency-free fixture
+proof, generates the entire repository census twice at `HEAD`, and requires byte-identical outputs. The accepted run
+is copied to the repository-root `build/m3-repository-file-census/` directory as an ignored build artifact, avoiding a cryptographic self-reference
+between a tracked ledger and its own source hash.
+
+Generated files:
+
+- `FILES.tsv`: exact Git mode, object identity, source byte size/hash, source family, owner and file atom ID;
+- `ATOMS.tsv`: strict `M3-ATOM-COVERAGE/1` file-container rows;
+- `EVIDENCE.tsv`: all required file-container gates, with only inventory, source identity, family-pattern binding and
+  the present normative contract marked `PASS`; every unexecuted gate remains explicit `NOT_RUN`;
+- `REPOSITORY_CENSUS_RECEIPT.tsv`: commit, root tree, object format, override count, census counts and output digests
+  without timestamps.
+
+This leaf establishes complete file representation and exact source identity. It does not claim language-level atom
+coverage, licence closure, correctness coverage, performance proof or product admission. Language-specific atomizers
+must consume `FILES.tsv` family by family and add semantic atoms without removing the enclosing file container.
