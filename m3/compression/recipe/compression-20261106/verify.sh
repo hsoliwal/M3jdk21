@@ -5,9 +5,12 @@
 #   recipe   relocate.py --check is a fixed point (changed=0 provenance=UNCHANGED)
 #   1        mvn package of m3/compression on JDK 21 (-Xlint:all -Werror on main and test sources), 0 compiler warnings
 #   2        the oracles ran in the test phase: donor workspace oracle, candidate-index oracle, format oracle
-#            (M3_COMPRESSION_FORMAT_RESULT=PASS), and the chunk-cache oracles when the module carries them
-#   3        differential.sh: donor closure vs relocated classes byte-identical (oracle outputs, wire corpus, format
-#            oracle digests, cache traces), mutants refused, allocation bytes/op equal
+#            (M3_COMPRESSION_FORMAT_RESULT=PASS), and the chunk-cache oracles when the module carries them; with the
+#            decoder leaf also the encoder / adversarial / grammar / four-way oracles, the decoder agreement oracle
+#            (M3_DECODER_AGREEMENT_RESULT=PASS) and the four-way encoding probe (M3_LZ_FOURWAY_RESULT=PASS)
+#   3        differential.sh: donor closure vs relocated classes byte-identical (oracle outputs, wire and M3EC corpora,
+#            format oracle digests, cache traces, decoder agreement and four-way probe reports), mutants refused,
+#            allocation bytes/op equal
 #   naming   jdk_naming.py apply --only m3/compression/ reports 0 moves, 0 rewrites, 0 refusals (new files staged first)
 # Every JVM gets -Djava.io.tmpdir=<scratch>/tmp (surefire through -DargLine).
 # usage: JAVA_HOME=<JDK 21> verify.sh <donor-git-dir> <donor-rev> <scratch-dir> [maven-repo-local [maven-repo-local-tail]]
@@ -34,8 +37,11 @@ if grep -q "BUILD SUCCESS" "$SCRATCH/mvn-package.log" && ! grep -qE "^\[ERROR\]"
 else
     gate 1_package_lint_werror FAIL "java warnings=$warnings log=$SCRATCH/mvn-package.log"; grep -E "ERROR|FAIL" "$SCRATCH/mvn-package.log" | head -20
 fi
-figures=$(grep -E "^(M3 compression reusable-workspace oracle checks|M3 LZ index oracle checks|M3 compressed chunk cache checks|M3_COMPRESSION_FORMAT_(INPUTS|LZ4_ROUNDTRIP|SNAPPY_ROUNDTRIP|RESULT)|M3_CHUNK_CACHE_(OPS|MODEL_MISMATCHES|RESULT))=" "$SCRATCH/mvn-package.log" | tr -d '\r' | tr '\n' ' ')
-case "$figures" in *"M3_COMPRESSION_FORMAT_RESULT=PASS"*) gate 2_oracle_test_phase PASS "$figures" ;; *) gate 2_oracle_test_phase FAIL "$figures" ;; esac
+figures=$(grep -E "^(M3 compression reusable-workspace oracle checks|M3 LZ index oracle checks|M3 compressed chunk cache checks|M3 compression (encoder oracle|adversarial|grammar) checks|M3 four-way LZ checks|M3_COMPRESSION_FORMAT_(INPUTS|LZ4_ROUNDTRIP|SNAPPY_ROUNDTRIP|RESULT)|M3_CHUNK_CACHE_(OPS|MODEL_MISMATCHES|RESULT)|M3_DECODER_AGREEMENT_(ENCODER_LZ4_ACCEPTED_BOTH|ENCODER_SNAPPY_ACCEPTED_BOTH|MALFORMED_LZ4_REFUSED_BOTH|MALFORMED_SNAPPY_REFUSED_BOTH|FUZZ_STREAMS|RESULT)|M3_LZ_FOURWAY_(TWIN_DIRECT_IDENTICAL|ROUNDTRIP_DONOR_DECODERS|RESULT))=" "$SCRATCH/mvn-package.log" | tr -d '\r' | tr '\n' ' ')
+need="M3_COMPRESSION_FORMAT_RESULT=PASS"   # the decoder leaf's two oracles when the module carries them
+[ -f "$ROOT/m3/compression/src/test/java/jdk/m3/compression/M3CompressionDecoderAgreement.java" ] && need="$need M3_DECODER_AGREEMENT_RESULT=PASS M3_LZ_FOURWAY_RESULT=PASS"
+oracles=PASS; for marker in $need; do case "$figures" in *"$marker"*) ;; *) oracles=FAIL ;; esac; done
+gate 2_oracle_test_phase "$oracles" "$figures"
 python -I - "$ROOT/m3/compression/target/surefire-reports" <<'EOF'
 import glob, re, sys
 t = f = e = s = 0

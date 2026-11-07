@@ -50,6 +50,49 @@ byte-for-byte.
   byte-identical, and so are the chunk-cache oracle output and the model trace digest over the donor cache; three
   one-line mutants (two encoder spec mutants, one cache eviction-order mutant) are refused.
 
+## Leaf 3: decoder pair and four-way index (2026-11-06, third commit)
+
+The next leaves the first two commits recorded: the donor decoder pair with its four oracles and the four-way candidate
+index, relocated by the same `relocate.py` (thirteen OMIT rows of [RELOCATION_MAP.tsv](RELOCATION_MAP.tsv) became FILE
+rows; donor commit unchanged, develop `165ceb5a0202` carries identical compression trees). The JNI kernels stay HELD:
+they are the native leaf of the family.
+
+| Owner | Kind | Contract |
+|---|---|---|
+| `M3Lz4RawBlockDecoder` | public | one LZ4 raw block, decoded size out-of-band, allocation cap; truncation, offset 0 or past the output, sequences past the declared size, a block ending after a match and trailing bytes refused (`IllegalArgumentException`) |
+| `M3SnappyRawDecoder` | public | one Snappy raw stream; length varint (at most 5 bytes) checked against the cap before allocation; COPY_1/2/4; exact size |
+| `M3LzFourWayCandidateIndex` | package-private | four-way bucketed variant of the candidate index (same lanes and slot budget); no encoder uses it |
+
+Oracles (all run in the test phase unless noted):
+
+* Donor oracles relocated with their JUnit wrappers: `M3CompressionEncoderSelfTest` (11,892 checks),
+  `M3CompressionAdversarialSelfTest` (232,000 checks: 100,000 random streams, 5,000 bit-flipped blocks, 4 workers),
+  `M3CompressionGrammarSelfTest` (4,717 checks), `M3LzFourWayCandidateSelfTest` (630,288 checks, collision witness
+  0 vs 156 hits). Mains not run by surefire: `M3CompressionInteropSelfTest` (replays an M3CZ corpus of native codecs) and
+  `M3CompressionEncodedCorpusCli` (writes the M3EC corpus for native decoders); both ran in the scratch interop lane.
+* `M3CompressionDecoderAgreement` (test scope, new): the donor decoder pair, reached by class name, against the strict
+  reference decoders of `M3CompressionSpecDecoders`: the format oracle's 100,000 encoder streams per codec and 20,000
+  grammar streams per codec (Snappy COPY_1 / COPY_4 tags and wide literal headers, LZ4 long extension runs and
+  overlapping offsets, which neither encoder emits) are accepted by both with equal output; 80,000 malformed streams
+  per codec (truncated, offset 0, offset past the output, literal overrun, match overrun, LZ4 255-run length overflow,
+  Snappy length-varint overflow, trailing bytes, declared size too long; 10,000 per kind) are refused by both with
+  `IllegalArgumentException` and the same refusal class (every refusal message maps to a class set: input end, offset,
+  output overrun, end-of-block rule, length header; donor and reference sets must intersect); 200,000 fuzz streams
+  through the donor decoders under bounded caps raise nothing but `IllegalArgumentException` and stay within the cap.
+  The only admitted disagreement: an LZ4 block the donor accepts and the reference decoder refuses for an encoder-side
+  end-of-block rule (155 fuzz streams); the donor decoder, like the reference C decoder, does not enforce those rules.
+* `M3LzFourWayEncodingProbe` (test scope, new): an encoder twin (the encoders' parse loops with the candidate index as
+  a parameter) reproduces both encoders' wire bytes over the direct-mapped index for all 100,000 inputs; over the
+  four-way index its wires round-trip through the donor decoders and the reference decoders. Ratio (informational):
+  four-way / direct wire bytes LZ4 1.0067, Snappy 1.0044.
+* Differential ([differential.sh](differential.sh) (f)-(i)): donor vs relocated oracle outputs, the M3EC corpus, the
+  agreement report and the four-way probe report (wire digests, candidate trace) are byte-identical; four mutants
+  (two decoder spec mutants, a decoder refusal-class mutant, a four-way eviction mutant) are refused.
+* Scratch interop (outside the module, [GATES.tsv](GATES.tsv) `decoders_native_interop`): third-party and native encoders
+  (liblz4 fast and HC, lz4-java, aircompressor, libsnappy) decode through the donor decoders; the four-way wires decode
+  through lz4-java (Java and JNI), aircompressor, Commons Compress and snappy-java; the M3EC corpus decodes through
+  liblz4 / libsnappy and an M3CZ corpus written by them replays through `M3CompressionInteropSelfTest`.
+
 ## Run
 
 ```sh
