@@ -125,6 +125,11 @@ public final class M3HostFileInventory {
         combined.update(toolContextSha256);
         byte[] context = combined.digest();
         Rows rows = new Rows(limits);
+        //FLLDCIM: MRL - mergeloss leaf 30 (origin 34467281b6b, dropped by retain merge edf132aa05a1)
+        // This pass is explicitly serial. Reuse a single bounded caller-owned
+        // byte lane for every M3NioFile provider channel, without per-file scratch
+        // allocation, duplicated file reads or extra retained native buffers.
+        byte[] scratch = new byte[64 * 1024];
         long total = 0;
         try (Stream<M3NioFile> walk = entries.sequential()) {
             Iterator<M3NioFile> cursor = walk.iterator();
@@ -155,7 +160,8 @@ public final class M3HostFileInventory {
                 M3StreamProgress child = progress.subProgress(metadata.size());
                 M3NioFile.Observation observed = entry.observe(
                         Math.min(limits.maxFileBytes(), limits.maxTotalBytes() - total),
-                        child, (bytes, from, length) -> layer.onBytes(entry, bytes, from, length));
+                        scratch, child,
+                        (bytes, from, length) -> layer.onBytes(entry, bytes, from, length));
                 layer.completed(entry, observed);
                 long count = observed.fingerprint().size();
                 total = Math.addExact(total, count);
