@@ -34,8 +34,9 @@ final class M3SpringCaseInsensitiveSdkFactoryTest {
         assertEquals("java.util.Map", binding.contractType());
         assertEquals("jdk.m3.collections.interop.M3SpringCaseInsensitiveMap", binding.adapterType());
         assertEquals("springCaseInsensitiveMap(java.util.Locale)", binding.descriptor());
-        // The canonical SDK table now declares 25 actual first-party factories.
-        assertEquals(25, M3LibraryBindings.all().size());
-        assertEquals(25, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
+        //FLLDCIM: MRL - interop bindings/gating, recipe qualification/bindings-gating-20261107: SDK factory pin 25 -> 30 as in M3SdkFamiliesTest (mergeloss-01-15-20261106)
+        // The canonical SDK table now declares 30 actual first-party factories.
+        assertEquals(30, M3LibraryBindings.all().size());
+        assertEquals(30, M3LibraryBindings.verifyRuntime(getClass().getClassLoader(), null));
     }
 }
