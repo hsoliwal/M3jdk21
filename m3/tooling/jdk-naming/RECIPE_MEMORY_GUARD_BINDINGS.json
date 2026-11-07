@@ -1,0 +1,30 @@
+{
+  "schema": "M3_JDK_NAMING_GUARD_BINDINGS_V1",
+  "policy": "Exact three historical non-guard fields only; original RECIPE_MEMORY.tsv is immutable. No tests or runtime gates are waived.",
+  "entries": [
+    {
+      "utc": "2026-11-06T12:49:41Z",
+      "recipe": "jdk_naming.py",
+      "trigger": "PATTERN:SPLIT_PACKAGE_NAME_COLLISION",
+      "original_guard": "unify.py refuses a move onto an existing path unless a RENAME row vacates it first, and pins the rename count per token and file",
+      "resolved_guard": "test_jdk_naming.py#test_split_package_file_unify_receipt",
+      "evidence_path": "m3/qualification/file-unify-20261106/NAME_COLLISION.tsv"
+    },
+    {
+      "utc": "2026-11-07T03:10:00Z",
+      "recipe": "jdk_naming.py",
+      "trigger": "PATTERN:JVM_DESCRIPTOR_PREFIX",
+      "original_guard": "a relocation that changes a package re-checks descriptor strings (\"L<path>;\", \"[L<path>;\") and Class.forName/FindClass names next to the PKG/PKG_PATH rules; a global DESCRIPTOR rule needs a whole-tree plan with all blobs first, because javap-style evidence text may hold such descriptors",
+      "resolved_guard": "test_jdk_naming.py#test_jvm_residency_descriptor_references",
+      "evidence_path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java"
+    },
+    {
+      "utc": "2026-11-07T05:00:00Z",
+      "recipe": "jdk_naming.py",
+      "trigger": "PATTERN:DONOR_FACT_AND_ESCAPED_SPANS",
+      "original_guard": "a rename treats a donor path as a fact, never as a name; TSVs consumed by tests are data and must be carried with the code they mirror",
+      "resolved_guard": "test_jdk_naming.py#test_core_donor_fact_and_sidecar_receipt",
+      "evidence_path": "m3/core/qualification/rename-damage-20261107/GATES.tsv"
+    }
+  ]
+}
