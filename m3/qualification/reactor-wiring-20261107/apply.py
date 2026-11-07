@@ -39,6 +39,26 @@ def insert_before(data: bytes, anchor: str, payload: str) -> bytes:
     return b"\n".join(lines[:i]) + (b"\n" if i else b"") + b"".join(new) + b"\n".join(lines[i:])
 
 
+def delete_block(data: bytes, payload: str) -> bytes:
+    lines = data.split(b"\n")
+    want = payload.split("\n")
+    n = len(want)
+    hits = [i for i in range(len(lines) - n + 1)
+            if all(lines[i + k].rstrip(b"\r").decode("utf-8") == want[k] for k in range(n))]
+    if len(hits) != 1:
+        raise SystemExit(f"REFUSED block matches {len(hits)} places (need exactly 1): {want[0]!r}")
+    i = hits[0]
+    return b"\n".join(lines[:i] + lines[i + n:])
+
+
+def transform(data: bytes, op: str, anchor: str, payload: str) -> bytes:
+    if op == "insert-before":
+        return insert_before(data, anchor, payload)
+    if op == "delete-block":
+        return delete_block(data, payload)
+    raise SystemExit(f"REFUSED unknown op {op!r}")
+
+
 def read_rows() -> list[dict]:
     if not EDITS.exists():
         return []
