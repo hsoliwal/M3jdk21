@@ -3,10 +3,12 @@
 package jdk.m3.eclipse.framework;
 
 import jdk.m3.collections.M3Collections;
+import jdk.m3.collections.M3IndexMaskCompactor;
 import jdk.m3.collections.M3LongArrayList;
 import jdk.m3.collections.M3ObjectIdentitySet;
 import java.util.List;
 import java.util.Objects;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 
 /**
@@ -17,14 +19,36 @@ import org.eclipse.core.resources.IResourceDelta;
  * ordinal lanes record ancestry and M3 byte state masks store Eclipse delta kinds.
  * The snapshot follows Eclipse's default getAffectedChildren visibility policy;
  * request a new snapshot after later workspace changes. Path/flag behavior remains
- * on each original IResourceDelta, rather than a lossy M3 reimplementation.</p>
+ * on each original IResourceDelta, rather than a lossy M3 reimplementation.
+ * {@link #captureChanges} additionally derives conservative build-work nominations;
+ * resource paths and operations remain on the original Eclipse handles.</p>
  */
 public final class M3EclipseResourceDeltaSnapshot {
+    //FLLDCIM: MRL - merge-loss leaf 97 (origin dce32109366, dropped by retain merge b11532eb12e1): work-state nominations of the pr1637 twin over master's always-captured flag lane
+    /** Case-sensitive Java source filename, including module-info.java. */
+    public static final int JAVA_SOURCE = 1;
+    /** Case-sensitive .class filename. */
+    public static final int CLASS_FILE = 2;
+    /** A recognized build or project descriptor filename. */
+    public static final int BUILD_DESCRIPTOR = 4;
+    /** Workspace root, project, or folder in the captured resource handle. */
+    public static final int CONTAINER = 8;
+    /** Content must be reconsidered; this does not prove that bytes changed. */
+    public static final int CONTENT_DIRTY = 16;
+    /** Removed resource or removed phantom. */
+    public static final int REMOVED = 32;
+    /** Build context must be reconsidered. */
+    public static final int CONTEXT_DIRTY = 64;
+    /** Descendant context may be invalid, including descendants absent from this delta. */
+    public static final int DESCENDANTS_DIRTY = 128;
+
     private final M3EclipseIndexedSnapshot<IResourceDelta> rows =
             new M3EclipseIndexedSnapshot<>();
     private final M3LongArrayList parents = M3Collections.longArrayList();
     /** Full 32-bit Eclipse IResourceDelta flag words in physical BFS order. */
     private final M3LongArrayList flags = M3Collections.longArrayList();
+    /** Unsigned work-state byte per row; null unless {@link #captureChanges} built it. */
+    private byte[] workStates;
 
     private M3EclipseResourceDeltaSnapshot() {}
 
@@ -57,6 +81,130 @@ public final class M3EclipseResourceDeltaSnapshot {
             }
         }
         return snapshot;
+    }
+
+    /**
+     * Captures the existing bounded breadth-first projection, including its full flag
+     * words, then reads each node's resource handle once in ordinal order. Resource type
+     * is read once; filename is read once for files only. Existing {@link #capture}
+     * callers do not incur these callbacks or the additional payload byte per row.
+     *
+     * <p>Call while Eclipse supplies a stable delta. Work
+     * state is a conservative nomination, not a dependency graph, content digest,
+     * workspace mutation, or proof that a compiler/build must execute. A descriptor
+     * content change nominates its parent subtree; inherited context propagates only
+     * through captured parent ordinals. Existing compiler and build owners resolve
+     * dependencies beyond this delta. No resource handle is passed to JNI.</p>
+     *
+     * <p>Descriptor names are case-sensitive: pom.xml, .classpath, .project,
+     * module-info.java, MANIFEST.MF, build.xml, build.gradle, build.gradle.kts,
+     * settings.gradle, and settings.gradle.kts. This list is a nomination aid and
+     * is not an exhaustive classification of supported build inputs.</p>
+     */
+    public static M3EclipseResourceDeltaSnapshot captureChanges(
+            IResourceDelta root, int maxNodes) {
+        M3EclipseResourceDeltaSnapshot snapshot = capture(root, maxNodes);
+        int count = snapshot.size();
+        byte[] states = new byte[count];
+        for (int ordinal = 0; ordinal < count; ordinal++) {
+            IResourceDelta delta = snapshot.at(ordinal);
+            IResource resource = Objects.requireNonNull(delta.getResource(), "delta resource");
+            states[ordinal] = (byte) workState(resource, snapshot.capturedKind(ordinal),
+                    snapshot.capturedFlags(ordinal));
+        }
+        // Descriptor changes affect sibling inputs too. Nominate the owning parent
+        // subtree before the single forward ancestry pass, independent of child order.
+        for (int ordinal = 0; ordinal < count; ordinal++) {
+            int state = Byte.toUnsignedInt(states[ordinal]);
+            if ((state & (BUILD_DESCRIPTOR | CONTENT_DIRTY))
+                    == (BUILD_DESCRIPTOR | CONTENT_DIRTY)) {
+                int parent = snapshot.parentOrdinal(ordinal);
+                if (parent >= 0) {
+                    states[parent] |= (byte) (CONTEXT_DIRTY | DESCENDANTS_DIRTY);
+                }
+            }
+        }
+        for (int ordinal = 1; ordinal < count; ordinal++) {
+            int parent = snapshot.parentOrdinal(ordinal);
+            if ((states[parent] & DESCENDANTS_DIRTY) != 0) {
+                states[ordinal] |= (byte) CONTEXT_DIRTY;
+                if ((states[ordinal] & CONTAINER) != 0) {
+                    states[ordinal] |= (byte) DESCENDANTS_DIRTY;
+                }
+            }
+        }
+        snapshot.workStates = states;
+        return snapshot;
+    }
+
+    private static int workState(IResource resource, int kind, int flags) {
+        int type = resource.getType();
+        int state = 0;
+        if (type == IResource.FILE) {
+            String name = Objects.requireNonNull(resource.getName(), "resource name");
+            if (name.endsWith(".java")) state |= JAVA_SOURCE;
+            if (name.endsWith(".class")) state |= CLASS_FILE;
+            if (isBuildDescriptor(name)) state |= BUILD_DESCRIPTOR;
+        } else if (type == IResource.ROOT || type == IResource.PROJECT || type == IResource.FOLDER) {
+            state |= CONTAINER;
+        }
+        boolean added = (kind & (IResourceDelta.ADDED | IResourceDelta.ADDED_PHANTOM)) != 0;
+        boolean removed = (kind & (IResourceDelta.REMOVED | IResourceDelta.REMOVED_PHANTOM)) != 0;
+        if (removed) state |= REMOVED;
+        int contentFlags = IResourceDelta.CONTENT | IResourceDelta.ENCODING
+                | IResourceDelta.REPLACED | IResourceDelta.TYPE | IResourceDelta.MOVED_FROM
+                | IResourceDelta.MOVED_TO | IResourceDelta.COPIED_FROM | IResourceDelta.LOCAL_CHANGED;
+        if (added || removed || (flags & contentFlags) != 0) state |= CONTENT_DIRTY;
+        int contextFlags = IResourceDelta.DESCRIPTION | IResourceDelta.OPEN | IResourceDelta.TYPE
+                | IResourceDelta.REPLACED | IResourceDelta.MOVED_FROM | IResourceDelta.MOVED_TO
+                | IResourceDelta.COPIED_FROM | IResourceDelta.ENCODING
+                | IResourceDelta.LOCAL_CHANGED | IResourceDelta.DERIVED_CHANGED;
+        if ((flags & contextFlags) != 0
+                || (state & (BUILD_DESCRIPTOR | CONTENT_DIRTY)) == (BUILD_DESCRIPTOR | CONTENT_DIRTY)
+                || ((state & CONTAINER) != 0 && (added || removed))) {
+            state |= CONTEXT_DIRTY;
+        }
+        if (((state & CONTAINER) != 0 && (state & (CONTENT_DIRTY | CONTEXT_DIRTY)) != 0)
+                || (flags & IResourceDelta.TYPE) != 0) {
+            // TYPE also covers folder -> file: the former descendants need invalidation.
+            state |= DESCENDANTS_DIRTY;
+        }
+        return state;
+    }
+
+    private static boolean isBuildDescriptor(String name) {
+        return switch (name) {
+            case "pom.xml", ".classpath", ".project", "module-info.java", "MANIFEST.MF",
+                    "build.xml", "build.gradle", "build.gradle.kts", "settings.gradle",
+                    "settings.gradle.kts" -> true;
+            default -> false;
+        };
+    }
+
+    /** Whether the work-state lane was requested during capture. */
+    public boolean hasCapturedChanges() { return workStates != null; }
+
+    /** Unsigned work-state byte; see {@link #captureChanges} for its limits. */
+    public int capturedWorkState(int ordinal) {
+        requireChanges();
+        return Byte.toUnsignedInt(workStates[Objects.checkIndex(ordinal, size())]);
+    }
+
+    /**
+     * Detached ascending ordinals selected through the existing primitive mask owner.
+     * Masks must fit an unsigned byte. NATIVE_REQUIRED preserves that owner's explicit
+     * failure when its compatible JNI library is unavailable; it never falls back to Java.
+     */
+    public int[] selectWorkOrdinals(int requiredState, int excludedState,
+            M3IndexMaskCompactor.Backend backend) {
+        requireChanges();
+        return M3IndexMaskCompactor.selectPositions(workStates, requiredState, excludedState, backend);
+    }
+
+    private void requireChanges() {
+        if (workStates == null) {
+            throw new IllegalStateException("work state requires captureChanges");
+        }
     }
 
     private static int kindMask(IResourceDelta delta) {
