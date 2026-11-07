@@ -520,14 +520,23 @@ public final class M3ObjectResidency<T> {
     }
 
     //FLLDCIM: MRL - residency fold leaf PS, crate m3-doop-reuse-20261030 (m3-doop-pressure-sampling-20261030, M3JDK 4e229782bf1 blob e8347cd7780d): no heap snapshot without PRESSURE_AWARE
+    //FLLDCIM: HPCPOP - residency-pressure-alloc-20261107: the PRESSURE_AWARE budget reads the heap into primitives; no HeapSnapshot per boundary (resident use() hit path 0 B/call under C2, -Xbatch and -Xint)
     private long targetBudget() {
         long target = maxResidentBytes;
         if ((flags & PRESSURE_AWARE) != 0) {
-            HeapSnapshot heap = HeapSnapshot.current();
-            long available = Math.max(0L, heap.estimatedHeadroomBytes() - reserveBytes);
+            long available = Math.max(0L, sampledHeadroomBytes() - reserveBytes);
             target = Math.min(target, available);
         }
         return target;
+    }
+
+    //FLLDCIM: MRL - residency-pressure-alloc-20261107: HeapSnapshot.current().estimatedHeadroomBytes() without the record (same Runtime reads, same order, same clamps)
+    /** The estimated headroom of {@link HeapSnapshot#current()}, sampled into primitives at each call. */
+    private static long sampledHeadroomBytes() {
+        Runtime runtime = Runtime.getRuntime();
+        long committed = runtime.totalMemory();
+        long used = Math.max(0L, committed - runtime.freeMemory());
+        return Math.max(0L, runtime.maxMemory() - used);
     }
 
     private boolean wouldExceed(long incoming, long target) {
