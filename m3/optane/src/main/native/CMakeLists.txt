@@ -42,6 +42,27 @@ foreach(library m3optane m3pmemsdk)
 endforeach()
 # m3optane.c declares _DEFAULT_SOURCE and m3pmemsdk.c _GNU_SOURCE themselves (madvise, O_CLOEXEC, O_NOFOLLOW, fdatasync)
 
+#FLLDCIM: RELOCATE - recipe/pmem-accelerator-20261107 (census L008): m3pmemaccel, the JNI library of jdk.internal.m3.optane.M3PmemAccelerator (read-only mapped tensors, FS-DAX attribute, NUMA pin, ordered signed-Q8 x FP32 matvec; donor: the m3pmem.c and build.sh of the accelerator-pmem jmod, FILE row 3 of ../../recipe/pmem-accelerator-20261107/RELOCATION_MAP.tsv)
+set(internal "${CMAKE_CURRENT_SOURCE_DIR}/../java/jdk/internal/m3/optane")
+set(accel_header "${generated}/jdk_internal_m3_optane_M3PmemAccelerator.h")
+add_custom_command(OUTPUT "${accel_header}"
+  COMMAND "${CMAKE_COMMAND}" -E make_directory "${generated}/accel"
+  COMMAND "${Java_JAVAC_EXECUTABLE}" --release 21 -proc:none -Xlint:all -Werror
+    -h "${generated}" -d "${generated}/accel"
+    "${internal}/M3PmemAccelerator.java"
+  DEPENDS "${internal}/M3PmemAccelerator.java"
+  VERBATIM)
+add_library(m3pmemaccel SHARED m3pmemaccel.c "${accel_header}")
+target_include_directories(m3pmemaccel PRIVATE ${JNI_INCLUDE_DIRS} "${generated}")
+set_target_properties(m3pmemaccel PROPERTIES C_STANDARD 17 C_STANDARD_REQUIRED YES C_EXTENSIONS NO)
+if(MSVC)
+  target_compile_options(m3pmemaccel PRIVATE /W4 /WX /fp:strict)
+else()
+  # the donor build.sh flags: the Q8 kernel folds FP32 products in strict column order, so no FMA contraction
+  target_compile_options(m3pmemaccel PRIVATE -Wall -Wextra -Wpedantic -Werror -ffp-contract=off -fno-fast-math)
+endif()
+# m3pmemaccel.c declares _GNU_SOURCE itself (statx, sched_setaffinity, O_CLOEXEC); Linux only, like m3pmemsdk
+
 if(M3_OPTANE_PMDK)
   find_package(PkgConfig REQUIRED)
   pkg_check_modules(PMEM2 REQUIRED IMPORTED_TARGET libpmem2)

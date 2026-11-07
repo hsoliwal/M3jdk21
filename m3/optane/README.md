@@ -77,6 +77,16 @@ run these tests.
 | naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/optane/`: 0 moves, 0 rewrites, 0 refusals |
 | gates | `recipe/pmem-region-core-20261106/GATES.tsv`, lessons in `RECIPE_MEMORY.tsv` |
 
+### Census pass-1 remainder: the PMem tensor accelerator and the CPU-list parser (`recipe/pmem-accelerator-20261107`)
+
+<!-- FLLDCIM: RELOCATE - recipe/pmem-accelerator-20261107 (census L008 + L047): the non-exported package jdk.internal.m3.optane gains M3PmemAccelerator (JNI library m3pmemaccel) and M3NumaTopology -->
+| Item | Value |
+|---|---|
+| `jdk.internal.m3.optane.M3PmemAccelerator` (L008) | read-only `mmap` of a tensor file, FS-DAX attribute through `statx`, NUMA pin of the calling thread, bounded signed-Q8 x FP32 matrix-vector kernel folded in strict FP32 column order (scalar/AVX2 dispatch; the AVX-512 kernel of crate `m3-pmem-ordered-avx512-20261030` is HOLD until an AVX-512 host runs it); JNI library `m3pmemaccel` (CMake target, `src/main/native/m3pmemaccel.c`); NEC with the SDK's `M3PmemRegion` family (same shape, other contract), nothing of the SDK edited |
+| `jdk.internal.m3.optane.M3NumaTopology` (L047) | the strict one-pass Linux CPU-list parser `parseCpuList` (`0-3,7,10-11`, optional leading `+`, refusals for empty elements, inverted ranges, indexes above 65535 and bad separators); `discover()`/`nativeFeatures()` of the donor are HOLD (they need the accelerator jmod family's JNI and a multi-node host) |
+| oracles | `M3PmemAcceleratorSelfTest` (donor, 2,048 FP32 column-order cases, 64-row tile boundaries, > 2 GiB mapping, FS-DAX gate) through `M3PmemAcceleratorJUnitTest` under `-Pm3-optane-native`; `M3NumaTopologyCpuListTest` (hand-derived table and a reference-model differential) on every build |
+| recipe | `python -I m3/optane/recipe/pmem-accelerator-20261107/relocate.py --donor-git <clone> --donor-rev 56cbdc631259 [--check]` (`RELOCATE_CENSUS1_REMAINDER` v4) and `python -I m3/optane/recipe/pmem-accelerator-20261107/apply.py [--check]` for the three edited files (this section, the CMake target, the surefire filter); gates in `GATES.tsv`, decisions in `DECISION.tsv` |
+
 ## Build and use
 
 | Step | Command |
