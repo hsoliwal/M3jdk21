@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# retained-port-20261107 (m3/file): anchored insertions into existing owners (apply.py); before_sha256 = owner content at the base, after_sha256 = pinned result (apply.py --pin wrote it); payload newlines are escaped as 
+file	op	anchor	payload	before_sha256	after_sha256
+m3/file/src/main/java/jdk/m3/file/M3FileSource.java	INSERT_BEFORE	    public String sha256() { return sha256; }	    //FLLDCIM: MRL - RESTORE member byteAt(int) of M3FileSource at 9023729d8ae2 (blob eba0212f4c3652e6a7220971ea37cbc2d6594d6e, parent of the #1975 retain merge); recipe m3/file/qualification/retained-port-20261107\n    /** Read one immutable physical source byte without cloning the whole image. */\n    public int byteAt(int offset) { return Byte.toUnsignedInt(bytes[Objects.checkIndex(offset, bytes.length)]); }\n	755e81d8a29c6ff1bef7277edcb66dff7300917dbbe82a5ea351de90a1613247	35c62a597d13c5ae8be8e6f28dd2661270175f83869da4e69ab6e7f6e3196a28
