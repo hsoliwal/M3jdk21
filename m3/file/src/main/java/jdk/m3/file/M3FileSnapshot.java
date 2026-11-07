@@ -4,6 +4,8 @@
 package jdk.m3.file;
 import jdk.m3.file.M3FileTextBuilder;
 import jdk.m3.file.M3Hash256;
+import java.io.IOException;
+import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 
 import jdk.m3.file.M3FileResolver;
@@ -65,6 +67,12 @@ public final class M3FileSnapshot {
   public M3FileText indexedText(M3FileResolver resolver) {
     Objects.requireNonNull(resolver, "resolver");
     return composeIndexedText(resolver, primitive.localHandles(), null);
+  }
+
+  //FLLDCIM: MRL - census3 P3-012, donor MIndexFileSnapshot blob cb5f5f518b7b: UTF-8 channel facade
+  /** Streams the detached indexed text as UTF-8 for the supplied resolver space without joining its atoms. */
+  public long writeUtf8To(M3FileResolver resolver, WritableByteChannel target) throws IOException {
+    return indexedText(Objects.requireNonNull(resolver, "resolver")).writeUtf8To(target);
   }
 
   /**

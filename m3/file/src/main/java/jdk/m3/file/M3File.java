@@ -4,6 +4,8 @@
 package jdk.m3.file;
 import jdk.m3.file.M3FileTextBuilder;
 import jdk.m3.file.M3Hash256;
+import java.io.IOException;
+import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 
 import jdk.m3.file.M3FileText;
@@ -380,6 +382,12 @@ public final class M3File {
    */
   public M3FileText asM3String() {
     return indexedText;
+  }
+
+  //FLLDCIM: MRL - census3 P3-012, donor MIndexFile blob d0f9abd3e320: UTF-8 channel facade
+  /** Streams the complete indexed file payload as UTF-8 without joining its atoms. */
+  public long writeUtf8To(WritableByteChannel target) throws IOException {
+    return asM3String().writeUtf8To(target);
   }
 
   /** Computes the complete indexed-text digest through the file text descriptor over ordinary String owners. */

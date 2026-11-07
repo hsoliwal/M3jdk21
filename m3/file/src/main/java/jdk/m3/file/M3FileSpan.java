@@ -3,6 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.file;
 import jdk.m3.file.M3Hash256;
+import java.io.IOException;
+import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 
 import jdk.m3.file.M3FileText;
@@ -61,6 +63,12 @@ public record M3FileSpan(M3File file, int startToken, int endToken) {
   /** Returns this token-boundary range as a resolver-owned indexed projection. */
   public M3FileText asM3String() {
     return file.asM3String().substring(utf16Start(), utf16End());
+  }
+
+  //FLLDCIM: MRL - census3 P3-012, donor MIndexFileSpan blob b5e4545df724: UTF-8 channel facade
+  /** Streams this token-boundary span as UTF-8 without joining its atoms. */
+  public long writeUtf8To(WritableByteChannel target) throws IOException {
+    return asM3String().writeUtf8To(target);
   }
 
   /** Computes the token-span digest through the file text descriptor over ordinary String owners. */

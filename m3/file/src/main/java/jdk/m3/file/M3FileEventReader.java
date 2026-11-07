@@ -52,10 +52,41 @@ public final class M3FileEventReader {
     throw new AssertionError("No instances");
   }
 
+  //FLLDCIM: MRL - census3 P3-012, donor MIndexFileEventReader blob b7fc8cdd9008: validating read without a sink
+  /** Reads and validates an event stream without retaining the event sequence. */
+  public static Summary read(InputStream input) throws IOException {
+    return read(input, M3FileStreamEvents.noOp());
+  }
+
   /** Read and validate one complete MIDXEVT2 stream without closing the caller-owned input. */
   public static Summary read(InputStream input, M3FileStreamEvents.Sink sink)
       throws IOException {
     return read(input, sink, DEFAULT_MAX_FRAME_BYTES);
+  }
+
+  //FLLDCIM: MRL - census3 P3-012, donor MIndexFileEventReader blob b7fc8cdd9008: indexed-text projections of the validated pass
+  /**
+   * Reads the complete occurrence stream as resolver-owned indexed text in the same validated event
+   * pass. The reader publishes no value until the terminal digest is authenticated.
+   */
+  public static M3FileText readIndexedText(InputStream input, M3FileResolver resolver)
+      throws IOException {
+    return readSelectedText(input, resolver, -1);
+  }
+
+  /** Reads a selected token-kind projection in the same validated event pass. */
+  public static M3FileText readProjectionText(
+      InputStream input, M3FileResolver resolver, M3FileTokenKind... selectedKinds)
+      throws IOException {
+    return readSelectedText(input, resolver, M3FileProjection.maskOf(selectedKinds));
+  }
+
+  private static M3FileText readSelectedText(
+      InputStream input, M3FileResolver resolver, int kindMask) throws IOException {
+    IndexedTextCollector collector =
+        new IndexedTextCollector(Objects.requireNonNull(resolver, "resolver"), kindMask);
+    read(input, collector);
+    return collector.finish();
   }
 
   /**
@@ -351,6 +382,42 @@ public final class M3FileEventReader {
     @Override
     public byte[] contentSha256() {
       return contentSha256.clone();
+    }
+  }
+
+  //FLLDCIM: MRL - census3 P3-012, donor MIndexFileEventReader blob b7fc8cdd9008: ID collector of the validated pass
+  /** Retains IDs, not source spellings; the reader remains the one validation authority. */
+  private static final class IndexedTextCollector implements M3FileStreamEvents.Sink {
+    private final M3FileTextBuilder indexedText;
+    private final int kindMask;
+    private final List<long[]> lexicon = new ArrayList<>();
+
+    private IndexedTextCollector(M3FileResolver resolver, int kindMask) {
+      indexedText = new M3FileTextBuilder(resolver);
+      this.kindMask = kindMask;
+    }
+
+    @Override
+    public void accept(M3FileStreamEvents.Event event) throws IOException {
+      if (event instanceof M3FileStreamEvents.Lexicon entry) {
+        if (entry.localHandle() != lexicon.size()) {
+          throw new IOException("non-contiguous MIDXEVT2 collector lexicon handle");
+        }
+        lexicon.add(entry.resolverTokenIds());
+      } else if (event instanceof M3FileStreamEvents.Token token) {
+        if (token.localHandle() < 0 || token.localHandle() >= lexicon.size()) {
+          throw new IOException("MIDXEVT2 collector token has no lexicon entry");
+        }
+        if ((kindMask & (1 << token.kind().ordinal())) != 0) {
+          for (long id : lexicon.get(token.localHandle())) {
+            indexedText.appendId(id);
+          }
+        }
+      }
+    }
+
+    private M3FileText finish() {
+      return indexedText.build();
     }
   }
 
