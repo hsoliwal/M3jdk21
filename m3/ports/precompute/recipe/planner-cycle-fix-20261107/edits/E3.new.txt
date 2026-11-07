@@ -1,0 +1,14 @@
+    //FLLDCIM: MRL - recipe planner-cycle-fix-20261107: explicit stack, one visit per capability (a dependency cycle closes as one group)
+    ArrayDeque<M3IndexPrecomputeCapability> pending = new ArrayDeque<>();
+    pending.push(capability);
+    while (!pending.isEmpty()) {
+      M3IndexPrecomputeCapability next = pending.pop();
+      if (already.contains(next) || result.contains(next)) continue;
+      M3IndexPrecomputeCandidate candidate = byCapability.get(next);
+      if (candidate == null) throw new IllegalArgumentException("missing dependency candidate " + next);
+      result.add(next);
+      for (M3IndexPrecomputeCapability dependency : candidate.dependencies()) {
+        pending.push(dependency);
+      }
+    }
+  }

@@ -7,7 +7,9 @@
 # rows), and the donor source of every QUALIFIED type (an OMIT row names its path); javac --release 21 -Xlint:all
 # -Werror. A second donor copy has the LITERAL rows applied (the recipe's only token renames besides names).
 # (a) M3IndexPrecomputePlannerDump on the renamed donor and on the relocated classes: byte-identical on the JIT
-#     (CASES) and under -Xint (XINT_CASES).
+#     (CASES) and under -Xint (XINT_CASES). The CYCLE_PROBE and CYCLIC lines and the TOTAL line are left out of every
+#     comparison: recipe planner-cycle-fix-20261107 deliberately departs from the donor on cyclic greedy catalogues
+#     (the donor overflows the stack there; the dump counts that in its default, non-strict mode).
 # (b) The same dump on the raw donor: identical to the relocated dump once the H:<sha256> root-hash fields are masked
 #     (the LITERAL row of the tuple hash domain is the only difference; the dump checks each hash against MessageDigest
 #     with the domain each side declares).
@@ -90,7 +92,8 @@ compare() {
     echo "$1 vs $2 $verdict sha256=$left/$right bytes=$(wc -c < "$SCRATCH/$1.txt") lines=$(wc -l < "$SCRATCH/$1.txt")"
 }
 dump() { # dump <name> <class path> <package> <prefix> <domain> <cases> [jvm flag]
-    "$JAVA_BIN/java" -Djava.io.tmpdir="$SCRATCH" ${7:-} -Xss1m -cp "$2" "$DUMP" "$3" "$4" "$5" "$6" | tr -d '\r' > "$SCRATCH/$1.txt"
+    "$JAVA_BIN/java" -Djava.io.tmpdir="$SCRATCH" ${7:-} -Xss1m -cp "$2" "$DUMP" "$3" "$4" "$5" "$6" | tr -d '\r' > "$SCRATCH/$1.full.txt"
+    grep -vE '^(CYCLE_PROBE|CYCLIC|TOTAL) ' "$SCRATCH/$1.full.txt" > "$SCRATCH/$1.txt" || true
 }
 dump renamed-dump "$SCRATCH/renamed$SEP$MODULE/target/test-classes" "$donor_package" "" "$domain_target" "$CASES"
 dump relocated-dump "$RELOCATED" "$target_package" M3 "$domain_target" "$CASES"
@@ -103,8 +106,8 @@ sed -E 's/H:[0-9a-f]{64}/H:<masked>/g' "$SCRATCH/raw-dump.txt" | grep -v '^TOTAL
 sed -E 's/H:[0-9a-f]{64}/H:<masked>/g' "$SCRATCH/relocated-dump.txt" | grep -v '^TOTAL' > "$SCRATCH/relocated-dump-masked.txt"
 compare raw-dump-masked relocated-dump-masked
 echo "root-hash fields: $(grep -o 'H:[0-9a-f]\{64\}' "$SCRATCH/relocated-dump.txt" | wc -l) per dump; raw vs relocated unmasked lines differing: $(diff "$SCRATCH/raw-dump.txt" "$SCRATCH/relocated-dump.txt" | grep -c '^>' || true)"
-tail -n 1 "$SCRATCH/relocated-dump.txt"
-tail -n 1 "$SCRATCH/relocated-dump-xint.txt"
+tail -n 1 "$SCRATCH/relocated-dump.full.txt"
+tail -n 1 "$SCRATCH/relocated-dump-xint.full.txt"
 # (c) crate tests on both sides
 cp -r "$SCRATCH/src-raw/." "$SCRATCH/src-test/"
 tests=()

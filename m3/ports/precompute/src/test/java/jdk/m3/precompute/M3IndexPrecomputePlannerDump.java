@@ -43,7 +43,15 @@ import java.util.StringJoiner;
  * positive closure that fits, exact cross-product density and the planner's tie-breaks) that must equal it;
  * tuple indexes against a HashMap of the rows (first duplicate row, capacity, retained bytes, every lookup, the root
  * hash recomputed with MessageDigest from the domain prefix args[2]); string hashes recomputed the same way.
- * Usage: {@code java -cp ... jdk.m3.precompute.M3IndexPrecomputePlannerDump PACKAGE PREFIX TUPLE_DOMAIN [CASES]}
+ *
+ * <p>Cyclic dependencies (recipe planner-cycle-fix-20261107): the exact search admits a capability only with all of its
+ * dependencies, so a cycle is one dependency-closed group; the greedy pass must close a capability's dependencies the
+ * same way, visiting each capability once. After the main corpus, CASES / 4 CYCLIC lines plan greedy catalogues
+ * (21..40 candidates) whose dependencies may form cycles, from a separate seed, against the recomputed greedy pass
+ * (which closes cycles); the CYCLE_PROBE line plans a 21-candidate two-cycle. A StackOverflowError there is the
+ * unfixed donor behaviour: counted and printed, or a drift when args[4] is {@code strict}. The main-corpus lines are
+ * unchanged, so PLAN, TUPLE and HASH lines stay byte-identical with the dump before this recipe.
+ * Usage: {@code java -cp ... jdk.m3.precompute.M3IndexPrecomputePlannerDump PACKAGE PREFIX TUPLE_DOMAIN [CASES [strict]]}
  */
 //FLLDCIM: TFG - dump driver from the template M3IndexPrecomputeConsumerProfilesDump (recipe consumer-profiles-20261107): reflective, serves donor and relocated classes
 public final class M3IndexPrecomputePlannerDump {
@@ -60,6 +68,8 @@ public final class M3IndexPrecomputePlannerDump {
     private static final String NONE_FITS = "java.lang.IllegalStateException: no valid precompute subset fits the byte budget";
     private static final String MANDATORY = "java.lang.IllegalStateException: mandatory precompute capabilities exceed byte budget";
     private static final String REFUSED = IllegalArgumentException.class.getName() + ": ";
+    private static final String OVERFLOW = StackOverflowError.class.getName();
+    private static final long CYCLIC_SALT = 0x4359_434C_4943_4752L;
 
     private final Object[] capabilities;
     private final Method capabilityId;
@@ -85,6 +95,10 @@ public final class M3IndexPrecomputePlannerDump {
     private final PrintStream out;
     private long references;
     private long refusals;
+    private boolean strict;
+    private long overflows;
+    private long bruteCyclic;
+    private long greedyCyclic;
     private long digest = FNV_BASIS;
 
     private M3IndexPrecomputePlannerDump(String pkg, String prefix, String tupleDomain, PrintStream out)
@@ -132,14 +146,21 @@ public final class M3IndexPrecomputePlannerDump {
     public static void main(String[] args) throws Exception {
         PrintStream out = new PrintStream(new BufferedOutputStream(System.out, 1 << 16), false, StandardCharsets.UTF_8);
         int cases = args.length > 3 ? Integer.parseInt(args[3]) : DEFAULT_CASES;
-        run(args[0], args[1], args[2], cases, out);
+        run(args[0], args[1], args[2], cases, args.length > 4 && "strict".equals(args[4]), out);
         out.flush();
     }
 
-    /** Runs the corpus; returns {cases, reference comparisons, refusals}. */
+    /** Runs the corpus, tolerating the donor's cyclic-greedy overflow; returns {cases, references, refusals}. */
     static long[] run(String pkg, String prefix, String tupleDomain, int cases, PrintStream out)
             throws ReflectiveOperationException {
+        return Arrays.copyOf(run(pkg, prefix, tupleDomain, cases, false, out), 3);
+    }
+
+    /** Runs the corpus; returns {cases, references, refusals, overflows, cyclic brute-force plans, cyclic greedy plans}. */
+    static long[] run(String pkg, String prefix, String tupleDomain, int cases, boolean strict, PrintStream out)
+            throws ReflectiveOperationException {
         M3IndexPrecomputePlannerDump dump = new M3IndexPrecomputePlannerDump(pkg, prefix, tupleDomain, out);
+        dump.strict = strict;
         dump.cycleProbe();
         Random random = new Random(SEED);
         for (int i = 0; i < cases; i++) {
@@ -151,9 +172,14 @@ public final class M3IndexPrecomputePlannerDump {
                 dump.hashCase(i, random);
             }
         }
+        Random cyclic = new Random(SEED ^ CYCLIC_SALT);
+        for (int k = 0; k < cases / 4; k++) {
+            dump.cyclicCase(k, cyclic);
+        }
         out.println("TOTAL cases=" + cases + " references=" + dump.references + " refusals=" + dump.refusals
+                + " overflows=" + dump.overflows + " cyclicBrute=" + dump.bruteCyclic + " cyclicGreedy=" + dump.greedyCyclic
                 + " digest=" + Long.toHexString(dump.digest));
-        return new long[] {cases, dump.references, dump.refusals};
+        return new long[] {cases, dump.references, dump.refusals, dump.overflows, dump.bruteCyclic, dump.greedyCyclic};
     }
 
     static PrintStream discard() {
@@ -171,7 +197,10 @@ public final class M3IndexPrecomputePlannerDump {
         int n = kind < 70 ? random.nextInt(BRUTE_LIMIT + 1)
                 : kind < 88 ? BRUTE_LIMIT + 1 + random.nextInt(EXACT_LIMIT - BRUTE_LIMIT)
                 : EXACT_LIMIT + 1 + random.nextInt(MAX_CANDIDATES - EXACT_LIMIT);
-        Catalogue catalogue = catalogue(n, random);
+        Catalogue catalogue = catalogue(n, random, false);
+        if (n <= BRUTE_LIMIT && "none".equals(catalogue.injection()) && cyclic(catalogue)) {
+            bruteCyclic++;
+        }
         Object workload = workload(random);
         long total = Arrays.stream(catalogue.bytes()).sum();
         long budget = "budget".equals(catalogue.injection()) ? -1 : random.nextInt((int) (total + total / 5 + 1));
@@ -185,7 +214,7 @@ public final class M3IndexPrecomputePlannerDump {
         emit("PLAN " + caseIndex + " n=" + n + " budget=" + budget + " inj=" + catalogue.injection() + " -> " + actual);
     }
 
-    private Catalogue catalogue(int n, Random random) {
+    private Catalogue catalogue(int n, Random random, boolean cyclicGreedy) {
         List<Integer> order = new ArrayList<>();
         for (int i = 0; i < capabilities.length; i++) {
             order.add(i);
@@ -202,7 +231,7 @@ public final class M3IndexPrecomputePlannerDump {
             bytes[j] = random.nextInt(8) == 0 ? 0 : random.nextInt(5_000);
             cost[j] = random.nextInt(51);
             reuse[j] = random.nextInt(1_001);
-            deps[j] = n > EXACT_LIMIT ? forward(j, n, random) : dependencies(j, n, random);
+            deps[j] = n > EXACT_LIMIT && !cyclicGreedy ? forward(j, n, random) : dependencies(j, n, random);
             mandatory[j] = random.nextInt(10) == 0;
         }
         int injection = random.nextInt(100);
@@ -248,8 +277,62 @@ public final class M3IndexPrecomputePlannerDump {
         Object b = builder.invoke(null);
         Object workload = build.invoke(b);
         String actual = outcome(() -> describe(recommend.invoke(planner, candidates(c), 0L, workload)));
-        expect(actual.startsWith(StackOverflowError.class.getName()), "cycle probe -> " + actual);
+        cyclicVerdict(actual, "caps=" + greedy(c, 0L, workload), "cycle probe");
         emit("CYCLE_PROBE n=" + n + " -> " + actual);
+    }
+
+    /** A greedy catalogue whose dependencies may form cycles, against the recomputed greedy pass. */
+    private void cyclicCase(int k, Random random) throws ReflectiveOperationException {
+        int n = EXACT_LIMIT + 1 + random.nextInt(MAX_CANDIDATES - EXACT_LIMIT);
+        Catalogue catalogue = catalogue(n, random, true);
+        Object workload = workload(random);
+        long total = Arrays.stream(catalogue.bytes()).sum();
+        long budget = "budget".equals(catalogue.injection()) ? -1 : random.nextInt((int) (total + total / 5 + 1));
+        greedyCyclic += cyclic(catalogue) && "none".equals(catalogue.injection()) ? 1 : 0;
+        String actual = outcome(() -> describe(recommend.invoke(planner, candidates(catalogue), budget, workload)));
+        cyclicVerdict(actual, expectedPlan(catalogue, budget, workload), "cyclic " + k);
+        emit("CYCLIC " + k + " n=" + n + " budget=" + budget + " inj=" + catalogue.injection() + " -> " + actual);
+    }
+
+    /** The donor's overflow is counted (a drift in strict mode); any other outcome must match the reference. */
+    private void cyclicVerdict(String actual, String expected, String what) {
+        if (actual.startsWith(OVERFLOW)) {
+            overflows++;
+            expect(!strict, what + " -> " + actual);
+            return;
+        }
+        expect(actual.startsWith(expected), what + " -> " + actual + " expected " + expected);
+    }
+
+    /** True when the dependency graph of the catalogue (positions) has a cycle (iterative colouring). */
+    private static boolean cyclic(Catalogue c) {
+        int n = c.caps().length;
+        int[] state = new int[n];
+        for (int start = 0; start < n; start++) {
+            if (state[start] != 0 || "missing".equals(c.injection())) {
+                continue;
+            }
+            List<int[]> stack = new ArrayList<>();
+            stack.add(new int[] {start, 0});
+            state[start] = 1;
+            while (!stack.isEmpty()) {
+                int[] top = stack.get(stack.size() - 1);
+                if (top[1] == c.deps()[top[0]].length) {
+                    state[top[0]] = 2;
+                    stack.remove(stack.size() - 1);
+                    continue;
+                }
+                int next = c.deps()[top[0]][top[1]++];
+                if (state[next] == 1) {
+                    return true;
+                }
+                if (state[next] == 0) {
+                    state[next] = 1;
+                    stack.add(new int[] {next, 0});
+                }
+            }
+        }
+        return false;
     }
 
     private Object workload(Random random) throws ReflectiveOperationException {
