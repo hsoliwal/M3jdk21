@@ -32,6 +32,7 @@ Naming transformations and their recipe custody must follow the repository
 policy resolved at review time; there is a current conflict between `AGENTS.md`
 (Synexia-only authoring/execution) and the standalone release contract
 (M3JDK21-local recipe execution). This **blocks sign-off**, not just documentation.
+The historical private-repository token is not a substitute for the owner decision.
 
 ## Documentation freeze
 
