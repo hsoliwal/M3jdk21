@@ -76,6 +76,9 @@ public final class M3PrecomputePayload {
 
     private enum Expected { BOOLEAN, DOUBLE, INT, LONG, STRING, STRING_OR_LONG, INT_ARRAY, LONG_ARRAY }
 
+    //FLLDCIM: MRL - fold-close audit L0064 (#2447 d58ff13e954 in #2424 head 95440f4a6944; retain b9445775f4a3 kept master): one compiled field-name pattern, no per-field String.matches compile
+    private static final java.util.regex.Pattern FIELD_NAME_PATTERN =
+            java.util.regex.Pattern.compile("[a-z][a-z0-9_]*");
     private static final Map<String, Expected> FIELD_TYPES = fieldTypes();
     private final Map<String, Field> fields;
 
@@ -232,7 +235,7 @@ public final class M3PrecomputePayload {
             while (true) {
                 skipWhitespace();
                 String name = string();
-                if (!name.matches("[a-z][a-z0-9_]*")) throw error("invalid payload field name");
+                if (!FIELD_NAME_PATTERN.matcher(name).matches()) throw error("invalid payload field name");
                 if (result.containsKey(name)) throw error("duplicate payload field");
                 skipWhitespace(); expect(':');
                 result.put(name, value(name));
