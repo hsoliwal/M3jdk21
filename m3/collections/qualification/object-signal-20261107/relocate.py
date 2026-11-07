@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Relocation recipe RELOCATE_OBJECT_SIGNAL v1 (recipe-first port, never by hand).
+"""Relocation recipe RELOCATE_OBJECT_SIGNAL v2 (recipe-first port, never by hand).
 
 Copies every FILE row of RELOCATION_MAP.tsv (next to this script) from a donor git tree (--donor-git DIR at
 --donor-rev REV) into the module (--module DIR, default: the grandparent of this recipe directory, m3/collections),
@@ -44,6 +44,18 @@ repository and module) by adding the relocate-only DROP_BLOCK and ADAPT rows, th
 non-verbatim main subset with declared rows, the HELD and OMIT rows and the adapted_lines provenance column; every v2
 rule is unchanged.
 
+v2 (leaf object-signal-native-20261107, the JNI kernel): KEEP rows and C FILE rows. A KEEP row
+'<DonorType>#<first-line regex>' -> '<count>:<sha256>' is the former DROP_BLOCK row of a seam that is now relocated: the
+block must still occur exactly once in the donor with the pinned bytes (relocate mode; a drifted donor is refused) and
+it is carried unchanged. A FILE row whose donor path ends in .c relocates a JNI kernel: (1) the first line, a donor
+SPDX comment, becomes the M3JDK header in a block comment (closed on its own line when the donor closed it on the same
+line), (2) one //FLLDCIM: anchor line is inserted before the first #include, (3) the JNI rows rename the
+Java_<mangled donor class>_ prefix of every exported function (whole-token prefixes), (4) the TYPE rows apply as whole
+words; every other byte is kept. Refused: a C file without an SPDX first line or #include, an #include of a javac -h
+header of a mapped donor package, or a JNI symbol of a mapped donor package left without a JNI row. body_match of a C
+file: the target without its header and anchor equals the donor body with the JNI and TYPE rows applied. The donor
+subset writes a C file verbatim (the donor-side native build).
+
 usage: python -I relocate.py --donor-git DIR --donor-rev REV [--module DIR] [--check] [--donor-subset DIR]
 """
 from __future__ import annotations
@@ -56,15 +68,22 @@ import sys
 from pathlib import Path
 
 RECIPE = "relocate.py"
-VERSION = "v1"
+VERSION = "v2"
+# The anchor keeps naming v1: CNPCDA anchors are never edited, and v2 reproduces every v1 file byte for byte (its rows
+# only add the C kernel and turn the DROP_BLOCK seam into KEEP rows), so a v1 anchor stays true for the whole family.
+ANCHOR_VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
 RECIPE_DIR_REL = "m3/collections/qualification/object-signal-20261107"
 MAP_NAME = "RELOCATION_MAP.tsv"
 PROVENANCE_NAME = "PROVENANCE.tsv"
 PROVENANCE_COLUMNS = ("donor_repo", "donor_commit", "donor_path", "donor_blob", "donor_sha256", "donor_url",
                       "target_path", "target_sha256", "type_renames", "import_rewrites", "rewritten_lines",
-                      "adapted_lines", "dropped_lines", "inserted_lines", "body_match", "recipe")
+                      "adapted_lines", "dropped_lines", "inserted_lines", "kept_lines", "body_match", "recipe")
 HEADER = (b"// Copyright 2026 Hitesh Soliwal and contributors", b"// SPDX-License-Identifier: Apache-2.0")
+C_HEADER = (b"/* Copyright 2026 Hitesh Soliwal and contributors", b" * SPDX-License-Identifier: Apache-2.0")
+C_HEADER_LINE = re.compile(rb"^(?:/\* |// )SPDX-License-Identifier: [\w.-]+\s*(?:\*/)?\s*$")
+INCLUDE_LINE = re.compile(rb"^#include\s+[<\"]([^>\"]+)[>\"]")
+JNI_SYMBOL = re.compile(rb"\bJava_(\w+)")
 HEADER_LINE = re.compile(rb"^(?:// |/\* )(?:SPDX-License-Identifier|SPDX-FileCopyrightText|Copyright)\b.*$")
 PACKAGE_LINE = re.compile(rb"^package\s+([\w.]+)\s*;")
 IMPORT_LINE = re.compile(rb"^(import\s+(static\s+)?)([\w.]+(?:\.\*)?)(\s*;.*)$")
@@ -74,9 +93,10 @@ ANCHOR_PREFIX = b"//FLLDCIM: RELOCATE"
 JDK_PREFIXES = ("java.", "javax.", "jdk.")
 LINES = re.compile(rb"[^\n]*\n|[^\n]+$")
 ROW_KINDS = ("REPO", "FILE", "PACKAGE", "SUBSET_PACKAGE", "TYPE", "EXTERNAL", "DROP_METHOD", "DROP_LINE", "REWRITE",
-             "INSERT_AFTER", "DROP_BLOCK", "ADAPT", "SKIP", "NEC", "HELD", "OMIT", "SUPERSEDED", "SUBSET_ONLY")
+             "INSERT_AFTER", "DROP_BLOCK", "ADAPT", "KEEP", "JNI", "SKIP", "NEC", "HELD", "OMIT", "SUPERSEDED",
+             "SUBSET_ONLY")
 INFO_KINDS = ("FILE", "SKIP", "NEC", "HELD", "OMIT", "SUPERSEDED", "SUBSET_ONLY")
-PATTERN_KINDS = ("DROP_LINE", "REWRITE", "INSERT_AFTER", "DROP_BLOCK", "ADAPT")
+PATTERN_KINDS = ("DROP_LINE", "REWRITE", "INSERT_AFTER", "DROP_BLOCK", "ADAPT", "KEEP")
 
 
 class Refused(Exception):
@@ -145,7 +165,7 @@ def map_import(fqn: str, static: bool, mapping: dict, donor_path: str) -> str:
 def anchor(blob: str, commit: str) -> bytes:
     return ("%s - donor blob %s at commit %s (repository, path, URL and digests: %s/%s); recipe %s/%s %s"
             % (ANCHOR_PREFIX.decode(), blob[:12], commit[:12], RECIPE_DIR_REL, PROVENANCE_NAME, RECIPE_DIR_REL,
-               RECIPE, VERSION)).encode()
+               RECIPE, ANCHOR_VERSION)).encode()
 
 
 def method_span(lines: list, method: str, donor_path: str) -> tuple[int, int]:
@@ -223,6 +243,24 @@ def apply_blocks(lines: list, donor_type: str, donor_path: str, mapping: dict) -
     return lines, dropped
 
 
+def check_keeps(lines: list, donor_type: str, donor_path: str, mapping: dict) -> int:
+    """The relocate-only KEEP rows: each pinned block ('<count>:<sha256>' from its one first-line match) must be
+    present unchanged; it is carried, not removed. Returns the number of kept lines."""
+    kept = 0
+    for regex, pin in mapping["KEEP"].get(donor_type, ()):
+        count_text, _colon, digest = pin.partition(":")
+        pattern = re.compile(regex.encode())
+        hits = [index for index, line in enumerate(lines) if pattern.match(split_eol(line)[0])]
+        if len(hits) != 1:
+            raise Refused("KEEP %s matches %d lines of %s" % (regex, len(hits), donor_path))
+        count = int(count_text)
+        block = b"".join(lines[hits[0]:hits[0] + count])
+        if hits[0] + count > len(lines) or hashlib.sha256(block).hexdigest() != digest:
+            raise Refused("KEEP %s of %s: %d lines do not hash to the pin %s" % (regex, donor_path, count, digest[:12]))
+        kept += count
+    return kept
+
+
 def apply_inserts(lines: list, donor_type: str, donor_path: str, mapping: dict) -> tuple[list, int]:
     """The INSERT_AFTER rows of the donor file: each inserts its lines (\\n-separated in the map, donor names, the
     file's line ending) after the one line its regex matches."""
@@ -271,18 +309,79 @@ def prepare(data: bytes, donor_path: str, mapping: dict, subset: bool) -> tuple[
     donor_type = Path(donor_path).stem
     header, body = strip_header(LINES.findall(data))
     body, dropped = apply_drops(body, donor_type, donor_path, mapping)
-    blocks = inserted = adapted = 0
+    blocks = inserted = adapted = kept = 0
     if not subset:
+        kept = check_keeps(body, donor_type, donor_path, mapping)
         body, blocks = apply_blocks(body, donor_type, donor_path, mapping)
         body, inserted = apply_inserts(body, donor_type, donor_path, mapping)
         adapted = count_hits(body, "ADAPT", donor_type, donor_path, mapping)
     rewritten = count_hits(body, "REWRITE", donor_type, donor_path, mapping)
     return header, body, {"dropped_lines": dropped + blocks, "inserted_lines": inserted, "adapted_lines": adapted,
+                          "kept_lines": kept,
                           "rewritten_lines": rewritten, "both_mode_rows": dropped + rewritten}
+
+
+def rename_jni(line: bytes, jni: dict) -> bytes:
+    for donor, target in jni.items():
+        line = re.sub(rb"(?<![\w])" + re.escape(donor.encode()) + rb"(?=\w)", target.encode(), line)
+    return line
+
+
+def c_mapped(line: bytes, mapping: dict) -> bytes:
+    return rename_types(rename_jni(line, mapping["JNI"]), mapping["TYPE"])
+
+
+def relocate_c(data: bytes, donor_path: str, blob: str, commit: str, mapping: dict, subset: bool) -> tuple[bytes, dict]:
+    """A JNI kernel: M3JDK header, one anchor before the first #include, JNI and TYPE rows; verbatim in the subset."""
+    counts = {"type_renames": 0, "import_rewrites": 0, "rewritten_lines": 0, "adapted_lines": 0, "dropped_lines": 0,
+              "inserted_lines": 0, "kept_lines": 0, "both_mode_rows": 0}
+    if subset:
+        return data, counts
+    lines = LINES.findall(data)
+    if not lines or not C_HEADER_LINE.match(split_eol(lines[0])[0]):
+        raise Refused("C file %s does not start with an SPDX comment line" % donor_path)
+    eol = split_eol(lines[0])[1] or b"\n"
+    out = [text + eol for text in (HEADER if lines[0].startswith(b"//") else C_HEADER)]
+    if split_eol(lines[0])[0].rstrip().endswith(b"*/"):
+        out.append(b" */" + eol)
+    anchored = False
+    donor_packages = [package.replace(".", "_") + "_" for package in mapping["PACKAGE"]]
+    for line in lines[1:]:
+        text, line_eol = split_eol(line)
+        included = INCLUDE_LINE.match(text)
+        if included:
+            if any(included.group(1).decode().startswith(prefix) for prefix in donor_packages):
+                raise Refused("#include of a javac -h header of a mapped donor package in %s" % donor_path)
+            if not anchored:
+                out.append(anchor(blob, commit) + line_eol)
+                anchored = True
+        renamed = c_mapped(line, mapping)
+        counts["type_renames"] += renamed != line
+        for symbol in JNI_SYMBOL.finditer(split_eol(renamed)[0]):
+            if any(symbol.group(1).decode().startswith(prefix) for prefix in donor_packages):
+                raise Refused("JNI symbol %s of a mapped donor package in %s without a JNI row"
+                              % (symbol.group(0).decode(), donor_path))
+        out.append(renamed)
+    if not anchored:
+        raise Refused("no #include in %s" % donor_path)
+    return b"".join(out), counts
+
+
+def c_body_match(target: bytes, data: bytes, mapping: dict) -> bool:
+    lines = LINES.findall(data)
+    target_lines = [line for line in LINES.findall(target) if not split_eol(line)[0].startswith(ANCHOR_PREFIX)]
+    header = list(HEADER if lines[0].startswith(b"//") else C_HEADER)
+    if split_eol(lines[0])[0].rstrip().endswith(b"*/"):
+        header.append(b" */")
+    anchors = sum(1 for line in LINES.findall(target) if split_eol(line)[0].startswith(ANCHOR_PREFIX))
+    return (anchors == 1 and [split_eol(line)[0] for line in target_lines[:len(header)]] == header
+            and target_lines[len(header):] == [c_mapped(line, mapping) for line in lines[1:]])
 
 
 def relocate(data: bytes, donor_path: str, blob: str, commit: str, mapping: dict, subset: bool) -> tuple[bytes, dict]:
     """The relocated bytes (or the donor-subset bytes) and the counts of renamed, mapped, rewritten and dropped lines."""
+    if donor_path.endswith(".c"):
+        return relocate_c(data, donor_path, blob, commit, mapping, subset)
     lines = LINES.findall(data)
     eol = split_eol(lines[0])[1] if lines else b"\n"
     donor_type = Path(donor_path).stem
@@ -404,15 +503,17 @@ def run(module: Path, donor: Path, rev: str, check: bool) -> int:
         state = write_if_changed(module / target, relocated, check)
         changed += state
         on_disk = (module / target).read_bytes() if (module / target).exists() else relocated
-        match = body_match(on_disk, data, donor_path, mapping)
-        print("FILE %s body_match=%s renames=%d imports=%d rewrites=%d adapts=%d drops=%d inserts=%d %s" % (
+        match = c_body_match(on_disk, data, mapping) if donor_path.endswith(".c") \
+            else body_match(on_disk, data, donor_path, mapping)
+        print("FILE %s body_match=%s renames=%d imports=%d rewrites=%d adapts=%d drops=%d inserts=%d keeps=%d %s" % (
             "CHANGED" if state else "UNCHANGED", str(match).upper(), counts["type_renames"],
             counts["import_rewrites"], counts["rewritten_lines"], counts["adapted_lines"], counts["dropped_lines"],
-            counts["inserted_lines"], target))
+            counts["inserted_lines"], counts["kept_lines"], target))
         rows.append((repo, commit, donor_path, blob, sha256(data), url + "/blob/" + commit + "/" + donor_path,
                      target, sha256(on_disk), str(counts["type_renames"]), str(counts["import_rewrites"]),
                      str(counts["rewritten_lines"]), str(counts["adapted_lines"]), str(counts["dropped_lines"]),
-                     str(counts["inserted_lines"]), str(match).upper(), RECIPE + " " + VERSION))
+                     str(counts["inserted_lines"]), str(counts["kept_lines"]), str(match).upper(),
+                     RECIPE + " " + VERSION))
     for kind in ("HELD", "OMIT"):
         for donor_path, reason in mapping[kind]:
             blob = git(donor, "rev-parse", rev + ":" + donor_path).decode().strip()
@@ -421,7 +522,7 @@ def run(module: Path, donor: Path, rev: str, check: bool) -> int:
     provenance = "\n".join(["\t".join(PROVENANCE_COLUMNS)] + ["\t".join(row) for row in rows]) + "\n"
     provenance_state = write_if_changed(RECIPE_DIR / PROVENANCE_NAME, provenance.encode(), check)
     print("RELOCATE recipe=%s %s donor_commit=%s files=%d changed=%d body_match=%d/%d held=%d omit=%d skips=%d nec=%d "
-          "provenance=%s" % (RECIPE, VERSION, commit, len(rows), changed, sum(row[14] == "TRUE" for row in rows),
+          "provenance=%s" % (RECIPE, VERSION, commit, len(rows), changed, sum(row[15] == "TRUE" for row in rows),
                              len(rows), len(mapping["HELD"]), len(mapping["OMIT"]), len(mapping["SKIP"]),
                              len(mapping["NEC"]), "CHANGED" if provenance_state else "UNCHANGED"))
     return 1 if check and (changed or provenance_state) else 0
