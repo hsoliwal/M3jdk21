@@ -305,6 +305,8 @@
         <module>ports/swing-viewport</module>
         <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/jfx-viewport HELD (gate gate-ports-jfx-viewport: BUILD FAILURE; first error in DECISION.tsv) -->
         <module>ports/jfx-viewport</module>
+        <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk HELD (gate gate-ports-parallel-bulk: BUILD FAILURE; first error in DECISION.tsv) -->
+        <module>ports/parallel-bulk</module>
         <!-- m3-offreactor-held:end -->
       </modules>
     </profile>
