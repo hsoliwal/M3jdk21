@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Corrections made while running this recipe; each names the rule it adds to the next relocation leaf.
+id	observation	rule
+SELF_TEST_MAINS	all four donor tests are main-method self tests named *Test; surefire runs none of them by name (no @Test)	keep the donor names and bodies (outputs name the class) and add one M3JDK-authored JUnit endpoint class per family
+MEASURED_FIELDS	the resources observation prints thread-allocated bytes and elapsed nanos; the allocation figure differs by a few hundred bytes between packages (longer or shorter class-name strings)	mask measured fields in the differential, keep structural counts (pages, spills, distinctBackings) exact
+ORACLE_PRESSURE_DEADLOCK	the first reference oracle kept three leases open on a two-page budget (every access refused "all resident pages pinned") and read back under injected pressure (refused "no evictable pages")	bound open leases to the resident budget minus one; close leases and stop injecting pressure before the final read-back
+STALE_SUREFIRE_REPORT	a -Dtest run of another leaf's test in the same worktree left its XML in target/surefire-reports, and the package run did not clean it	gate builds run mvn clean package; never reuse a worktree target directory across leaves
+SHELL_BACKSLASH	a differential.sh edit sent through a shell heredoc turned \1 into a control character	edit scripts with backslashes through a Python file written by the Write tool
+DONOR_TOKENS_IN_SCRIPT	the first differential.sh spelled the donor package and paths; jdk_naming plan reported rewrites=1 for it (DOUBLE, KEBAB, PKG_M3, PKG_PATH_M3)	scripts read every donor path and the donor package from RELOCATION_MAP.tsv (as transient-facade-20261106/differential.sh does); run jdk_naming plan on scripts too
