@@ -28,7 +28,8 @@ Follow-up leaf of `consumer-profiles-20261107` (PR #2665), which held the planne
 - LITERAL rows apply the naming-rule renames to two system properties, the library name (`m3_precompute`, the module's
   CMake library, which has no tuple-lookup symbol yet: the Java path runs) and the tuple root-hash domain
   (`M3_FROZEN_LONG_TUPLE_V1:`), so root hashes differ from the donor's by declaration.
-- DEFERRED: the C kernels `precompute_jni.c` / `tuple_lookup_jni.c` (WSL native gate not run). OMIT: the provider
+- DEFERRED here: the C kernels `precompute_jni.c` / `tuple_lookup_jni.c`; their newest lineages join `m3_precompute` through
+  recipe `planner-native-20261107` (WSL native gate). OMIT: the provider
   ServiceLoader descriptor and the crate tests whose closure leaves the family (mindex, indexstring, execution).
 - NEC, untouched: vendor `MIndexPrecomputePlan`, `MIndexPrecomputePressureBudget`, `m3/arrays` `M3LongCoordinateIndex`,
   `m3/fs` `M3PrecomputeKey`.
