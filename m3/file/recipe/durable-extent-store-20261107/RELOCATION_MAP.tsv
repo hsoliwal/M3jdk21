@@ -9,7 +9,7 @@ FILE	synexia-storage-sdk/src/test/java/com/synexia/storage/DurableExtentStoreTes
 FILE	synexia-storage-sdk/src/test/java/com/synexia/storage/ExtentStandaloneProof.java	recipe/durable-extent-store-20261107/differential/M3ExtentStandaloneProof.java		donor dependency-free smoke main; relocated next to the differential (compiled by differential.sh against target/classes, not a module test source: verify.py's closed contract inventory runs every main on the host and the linked image, and this main truncates a blob it has mapped, which Windows refuses; RECIPE_MEMORY.tsv)
 PACKAGE	com.synexia.storage	jdk.m3.file		the exported package of module org.m3jdk.file (m3/file, com.m3:m3-file), owner of durable file images published by atomic move (M3FileImage, M3FileSourceFactsImage, M3FileDeltaLedger) and of M3FileSourceFactsStore (DECISION.tsv D1)
 TYPE	ContentExtent	M3ContentExtent		nested ContentExtentManifest and ContentTamperedException keep their names under the M3 owner; the toString literal follows the type name
-TYPE	DurableExtentStore	M3DurableExtentStore		
+TYPE	DurableExtentStore	M3DurableExtentStore		the failpoint interface BeforePublish keeps its name under the M3 owner
 TYPE	ContentExtentTest	M3ContentExtentTest		surefire test phase
 TYPE	DurableExtentStoreTest	M3DurableExtentStoreTest		surefire test phase
 TYPE	ExtentStandaloneProof	M3ExtentStandaloneProof		differential.sh lane
