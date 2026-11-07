@@ -74,6 +74,8 @@
     <module>ports/swing-viewport</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/jfx-viewport WIRED (gate gate-ports-jfx-viewport, GATES.tsv) -->
     <module>ports/jfx-viewport</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: history WIRED (gate gate-history, GATES.tsv) -->
+    <module>history</module>
   </modules>
 
   <profiles>
