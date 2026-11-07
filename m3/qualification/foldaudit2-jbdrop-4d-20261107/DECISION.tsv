@@ -1,0 +1,11 @@
+n	merge	pr	path	verdict	evidence
+44	0332f02ad2ff	1456	src/java.base/share/native/libjava/M3ObjectMetrics.c	RESTORE	clean 3-way; one JVMTI env per VM instead of one per call (GetEnv creates an environment); OmProbe 20k calls: sizes identical, master +9 MB committed and 3,070 ms, restored +0 MB and 276 ms
+59	1633da209622	1619	src/java.base/share/classes/java/lang/M3StringAtom.java	RESTORE	clean 3-way; every factory frees its native allocation when construction fails and bounds-checks code-point writes before putUnit; master had leaking and unchecked paths
+84	e31a6ebe8aee	1936	src/java.base/share/classes/java/util/stream/GathererOp.java	RESTORE	clean 3-way; GatherSink.begin passes -1 because a gatherer changes cardinality; no stock-VM sink observed the old size (GathererOp clears SIZED), defensive fix
+157	f9c7ec048e4e	2410	src/java.base/share/classes/java/lang/Object.java	NEC	master clazz.cast(this) runs only after clazz.isInstance(this): same behaviour as the unchecked (T) this
+73	b11532eb12e1	1637	src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java	PUBLIC_API_HOLD	adds public default methods to an exported java.util.concurrent interface; user decision (same as merge-loss leaf 76)
+57	923c060d8f22	1608	src/java.base/share/classes/jdk/internal/m3/io/M3IO.java	PUBLIC_API_HOLD	internal half of the #1608 progress-stream API (InputStream/OutputStream.withProgress, cases 54/55/56); held with the public members
+29	1a6c72ad39ef	1381	src/java.base/share/classes/jdk/internal/mindex/M3RX7.java	WHOLE_PR	prepareVocabularyFilter (540 lines); restore with the rest of #1381 as one PR, as #1080
+51	9bd55114eabe	1586	src/java.base/share/classes/java/lang/M3String.java	WHOLE_PR	TokenSnapshot; pairs with case 53 and JavaLangAccess.m3StringAsciiTokens; restore #1586 as one PR
+53	9bd55114eabe	1586	src/java.base/share/classes/jdk/internal/mindex/M3RX7.java	WHOLE_PR	prepareM3TokenPlan over JavaLangAccess; restore #1586 as one PR
+64	1633da209622	1619	src/java.base/share/classes/java/util/IdentityHashMap.java	WHOLE_PR	package-private identity view kinds read by #1619 CollectionViews (cases 42/62/70/78/79/82); restore with #1619

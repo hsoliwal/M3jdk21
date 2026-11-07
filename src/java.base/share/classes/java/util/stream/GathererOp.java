@@ -22,6 +22,11 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
+
+/*
+ * Modified 2026-10-27 by Hitesh Soliwal and contributors:
+ * report unknown output size because a gatherer may change stream cardinality.
+ */
 package java.util.stream;
 
 import jdk.internal.vm.annotation.ForceInline;
@@ -161,7 +166,7 @@ final class GathererOp<T, A, R> extends ReferencePipeline<T, R> {
             final var initializer = gatherer.initializer();
             if (initializer != Gatherer.defaultInitializer()) // Optimization
                 state = initializer.get();
-            sink.begin(size);
+            sink.begin(-1); // GathererOp does not know the size of the output
         }
 
         @Override
