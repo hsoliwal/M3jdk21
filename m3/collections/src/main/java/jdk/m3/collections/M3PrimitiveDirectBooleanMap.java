@@ -1,0 +1,106 @@
+/*******************************************************************************
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
+ * Public License 2.0, which are available at
+ * https://www.apache.org/licenses/LICENSE-2.0 and
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ *
+ * Contributors:
+ *     Hitesh Soliwal (Synexia) - initial API and implementation
+ *******************************************************************************/
+package jdk.m3.collections;
+
+import java.util.Objects;
+
+/**
+ * Two-key direct map for boolean keys and exact-width primitive values.
+ *
+ * <p>The key itself selects index 0/1. A two-bit collection-level mask records
+ * presence, so there is no retained key lane, hash table, node or entry object.
+ *
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveDirectBooleanMap.java}
+ * blob {@code ed315445d6bc74943f533810460d4075780b1580} at com.synexia develop {@code fd9a233680b43197eb8c5745a729c342ca56c4e2} by
+ * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
+ */
+public final class M3PrimitiveDirectBooleanMap {
+    private static final int DOMAIN_SIZE = 2;
+
+    @FunctionalInterface
+    public interface EntryConsumer {
+        void accept(boolean key, long valueBits);
+    }
+
+    private final M3PrimitiveKind valueKind;
+    private final Object values;
+    private byte presentMask;
+    private int size;
+
+    public M3PrimitiveDirectBooleanMap(M3PrimitiveKind valueKind) {
+        this.valueKind = Objects.requireNonNull(valueKind, "valueKind");
+        values = valueKind.newArray(DOMAIN_SIZE);
+    }
+
+    public M3PrimitiveKind valueKind() { return valueKind; }
+    public int size() { return size; }
+    public boolean isEmpty() { return size == 0; }
+    public int keyCapacity() { return DOMAIN_SIZE; }
+
+    public long payloadBytes() {
+        return valueKind.payloadBytes(DOMAIN_SIZE) + Byte.BYTES;
+    }
+
+    public boolean containsKey(boolean key) {
+        return (presentMask & bit(key)) != 0;
+    }
+
+    public long getOrDefaultBits(boolean key, long defaultBits) {
+        int index = index(key);
+        return containsKey(key) ? valueKind.readBits(values, index) : defaultBits;
+    }
+
+    public long putBits(boolean key, long valueBits, long absentBits) {
+        int index = index(key);
+        byte bit = bit(key);
+        boolean present = (presentMask & bit) != 0;
+        long old = present ? valueKind.readBits(values, index) : absentBits;
+        valueKind.writeBits(values, index, valueBits);
+        if (!present) {
+            presentMask |= bit;
+            size++;
+        }
+        return old;
+    }
+
+    public long removeOrDefaultBits(boolean key, long defaultBits) {
+        int index = index(key);
+        byte bit = bit(key);
+        if ((presentMask & bit) == 0) return defaultBits;
+        long old = valueKind.readBits(values, index);
+        valueKind.clear(values, index, index + 1);
+        presentMask &= (byte) ~bit;
+        size--;
+        return old;
+    }
+
+    public void clear() {
+        if (size == 0) return;
+        valueKind.clear(values, 0, DOMAIN_SIZE);
+        presentMask = 0;
+        size = 0;
+    }
+
+    public void forEach(EntryConsumer consumer) {
+        Objects.requireNonNull(consumer, "consumer");
+        if ((presentMask & 1) != 0) consumer.accept(false, valueKind.readBits(values, 0));
+        if ((presentMask & 2) != 0) consumer.accept(true, valueKind.readBits(values, 1));
+    }
+
+    Object valueArray() { return values; }
+
+    private static int index(boolean key) { return key ? 1 : 0; }
+    private static byte bit(boolean key) { return (byte) (key ? 2 : 1); }
+}
