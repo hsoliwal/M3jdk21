@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
+// Modified 2026 by Hitesh Soliwal and contributors: re-entrant key/value callbacks (HASH_REENTRANT_GUARD).
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.collections;
 
@@ -44,14 +45,26 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
     }
     @Override int revision() { return modifications; }
     @Override int findSlot(Object key) {
-        drain(); int hash = M3SlotArrays.hash(key), mask = states.length - 1;
-        // Hash evaluation above remains observable even before storage is allocated.
+        // Hash evaluation remains observable even before storage is allocated.
+        drain(); return find(key, M3SlotArrays.hash(key));
+    }
+    //FLLDCIM: MRL - recipe HASH_REENTRANT_GUARD v1 (qualification/hash-reentrant-guard-20261107): re-entrant key/value callbacks
+    private int find(Object key, int hash) { return find(key == null ? NULL_KEY : key, hash, 0); }
+    private int find(Object target, int hash, int walks) {
         if (states.length == 0) { return -1; }
-        Object target = key == null ? NULL_KEY : key;
+        int mask = states.length - 1, expected = modifications;
         for (int s = hash & mask; states[s] != 0; s = (s + 1) & mask) {
-            if (states[s] == 1 && hashes[s] == hash && Objects.equals(target, referent(s))) { return s; }
+            if (states[s] == 1 && hashes[s] == hash) {
+                boolean same = Objects.equals(target, referent(s));
+                if (modifications != expected) { return rewalk(target, hash, walks); } // equals changed it
+                if (same) { return s; }
+            }
         }
         return -1;
+    }
+    private int rewalk(Object target, int hash, int walks) {
+        if (walks == REWALKS) { throw new java.util.ConcurrentModificationException(); }
+        return find(target, hash, walks + 1);
     }
     @Override K keyAt(int s) {
         Object key = referent(s);
@@ -69,18 +82,35 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
     }
     @Override public int size() { drain(); return size; }
     @Override public V put(K key, V value) {
-        int s = findSlot(key);
-        if (s >= 0) { return writeAt(s, value); }
+        for (int lookups = 0; ; lookups++) {
+            int s = findSlot(key);
+            if (s >= 0) { return writeAt(s, value); }
+            int expected = modifications;
+            int hash = M3SlotArrays.hash(key); // the second hash call is pinned (M3FootprintContractTest)
+            if (modifications == expected) { insertNew(key, value, hash); return null; }
+            if (lookups == REWALKS) { throw new java.util.ConcurrentModificationException(); }
+        }
+    }
+    @Override long locate(Object key) {
+        drain(); int hash = M3SlotArrays.hash(key);
+        return (long) hash << 32 | find(key, hash) & 0xFFFFFFFFL;
+    }
+    @Override void insertAbsent(K key, V value, int hint, int expected) {
+        if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }
+        insertNew(key, value, hint);
+    }
+    /** Inserts a key the walk just found absent, with its hash computed once; calls no user code. */
+    private void insertNew(K key, V value, int hash) {
         if (states.length == 0) { rehash(16); }
         else if (occupied + 1 >= states.length - states.length / 3) {
             rehash(size + 1 >= states.length - states.length / 3 ? M3SlotArrays.doubled(states.length) : states.length);
         }
-        int hash = M3SlotArrays.hash(key); s = hash & (states.length - 1);
+        int s = hash & (states.length - 1);
         while (states[s] == 1) { s = (s + 1) & (states.length - 1); }
         Object reference = key == null ? NULL_KEY : new KeyReference(key, queue, s);
         if (states[s] == 0) { occupied++; }
         references[s] = reference; values[s] = value; hashes[s] = hash; states[s] = 1;
-        size++; modifications++; return null;
+        size++; modifications++;
     }
     private void rehash(int capacity) {
         Object[] r = new Object[capacity], v = new Object[capacity];

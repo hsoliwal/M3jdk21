@@ -13,6 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 // Modified 2026: DOOP array/index/mask HashMap storage port; no stored Entry or Node.
+// Modified 2026 by Hitesh Soliwal and contributors: re-entrant key/value callbacks (HASH_REENTRANT_GUARD).
 package jdk.m3.collections;
 
 import java.io.Serial;
@@ -33,6 +34,8 @@ import java.util.Objects;
  * Empty owners share zero-length arrays. The map is not synchronized.
  * Colliding non-comparable keys have linear worst-case lookup time; JDK
  * tree-bin and serialization-shape equivalence are separate porting gates.
+ * A lookup whose key equals changes this map's structure walks again, so it never reads,
+ * writes or erases a slot the change released or reused.
  */
 public final class M3HashMap<K, V> extends M3SlotMap<K, V>
         implements Cloneable, Serializable {
@@ -91,16 +94,28 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
 
     private static int hash(Object key) { return M3SlotArrays.hash(key); }
 
-    private int find(Object key, int hash) {
+    //FLLDCIM: MRL - recipe HASH_REENTRANT_GUARD v1 (qualification/hash-reentrant-guard-20261107): re-entrant key/value callbacks
+    private int find(Object key, int hash) { return find(key, hash, 0); }
+
+    private int find(Object key, int hash, int walks) {
         if (index.length == 0) return -1;
-        int mask = index.length - 1;
+        int mask = index.length - 1, expected = modifications;
         for (int p = hash & mask, ref; (ref = index[p]) != 0; p = (p + 1) & mask) {
             if (ref > 0) {
                 int s = ref - 1;
-                if (hashes[s] == hash && Objects.equals(key, keys[s])) return s;
+                if (hashes[s] == hash) {
+                    boolean same = Objects.equals(key, keys[s]);
+                    if (modifications != expected) return rewalk(key, hash, walks); // equals changed the structure
+                    if (same) return s;
+                }
             }
         }
         return -1;
+    }
+
+    private int rewalk(Object key, int hash, int walks) {
+        if (walks == REWALKS) throw new java.util.ConcurrentModificationException();
+        return find(key, hash, walks + 1);
     }
 
     @Override int findSlot(Object key) { return find(key, hash(key)); }
@@ -138,7 +153,22 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
     @Override public V put(K key, V value) {
         int h = hash(key), existing = find(key, h);
         if (existing >= 0) return writeAt(existing, value);
+        insertNew(key, value, h);
+        return null;
+    }
 
+    @Override long locate(Object key) {
+        int h = hash(key);
+        return (long) h << 32 | find(key, h) & 0xFFFFFFFFL;
+    }
+
+    @Override void insertAbsent(K key, V value, int hint, int expected) {
+        if (modifications != expected) throw new java.util.ConcurrentModificationException();
+        insertNew(key, value, hint);
+    }
+
+    /** Inserts a key the walk just found absent; calls no user code. */
+    private void insertNew(K key, V value, int h) {
         // All allocation happens before claiming a slot or publishing a mapping.
         if (free < 0 && used == keys.length) growPayload();
         if (index.length == 0) {
@@ -168,7 +198,6 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
         index[p] = s + 1;
         size++;
         modifications++;
-        return null;
     }
 
     private void growPayload() {
