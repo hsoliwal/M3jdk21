@@ -156,7 +156,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         }
         misses = Math.addExact(misses, 1);
         T facade = create(logicalId);
-        slot = insert(logicalId, facade);
+        slot = insertCreated(logicalId, facade);
         flags[slot] = M3LazyElementFlags.add(
                 flags[slot],
                 (short) (M3LazyElementFlags.MATERIALIZED | M3LazyElementFlags.PINNED));
@@ -191,7 +191,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
                 && (autoPressure == null || autoPressure.mayRetain(this));
         T facade = borrowInternal(logicalId, reuseAllowed);
         if (retain) {
-            slot = insert(logicalId, facade);
+            slot = insertCreated(logicalId, facade);
             flags[slot] = M3LazyElementFlags.add(flags[slot], M3LazyElementFlags.MATERIALIZED);
             touch(slot);
             action.accept(facade);
@@ -409,12 +409,28 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         freeIds[freeCount++] = logicalId;
     }
 
+    //FLLDCIM: MRL - idle lanes grew one at a time (Object[] published before long[]); stage both copies, validate, publish as a pair
     private void ensureReusableCapacity(int required) {
+        ensureReusableCapacity(required, ARRAY_COPY);
+    }
+
+    /**
+     * Stage both idle object and ID lanes before publishing either. A failed
+     * allocation must not make a later return believe the pair already grew.
+     * Reuse the same source-local fault-injection seam as resident growth.
+     */
+    void ensureReusableCapacity(int required, BackingCopier copies) {
         if (required <= freeFacades.length) return;
+        Objects.requireNonNull(copies, "copies");
         int capacity = Math.min(maxIdle,
                 Math.max(required, Math.max(1, freeFacades.length * 2)));
-        Object[] nextFacades = Arrays.copyOf(freeFacades, capacity);
-        long[] nextIds = Arrays.copyOf(freeIds, capacity);
+        Object[] nextFacades = Objects.requireNonNull(
+                copies.objects(freeFacades, capacity), "idle facade copy");
+        long[] nextIds = Objects.requireNonNull(
+                copies.longs(freeIds, capacity), "idle ID copy");
+        if (nextFacades.length != capacity || nextIds.length != capacity) {
+            throw new IllegalStateException("incomplete M3 idle facade backing growth");
+        }
         freeFacades = nextFacades;
         freeIds = nextIds;
     }
@@ -437,6 +453,35 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
     private void dispose(long logicalId, T facade) {
         disposer.dispose(logicalId, facade);
         disposals = Math.addExact(disposals, 1);
+    }
+
+    //FLLDCIM: MRL - a reentrant factory admitted the id first; the outer insert threw and leaked its facade; retire only an unadmitted instance
+    /**
+     * Admit a factory-produced facade only once. A factory can reenter this
+     * synchronized owner and install the same ID before returning.
+     */
+    private int insertCreated(long logicalId, T facade) {
+        try {
+            return insert(logicalId, facade);
+        } catch (RuntimeException | Error failure) {
+            // Failure path only. Never dispose an instance admitted by a nested
+            // callback, even when a shared factory returns the same instance.
+            boolean alreadyResident = false;
+            for (int i = 0; i < size; i++) {
+                if (facades[i] == facade) {
+                    alreadyResident = true;
+                    break;
+                }
+            }
+            if (!alreadyResident) {
+                try {
+                    dispose(logicalId, facade);
+                } catch (RuntimeException | Error cleanup) {
+                    if (cleanup != failure) failure.addSuppressed(cleanup);
+                }
+            }
+            throw failure;
+        }
     }
 
     private int insert(long logicalId, T facade) {
