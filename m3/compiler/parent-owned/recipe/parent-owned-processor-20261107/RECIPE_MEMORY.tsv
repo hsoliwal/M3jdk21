@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# RECIPE_MEMORY.tsv - append-only lesson memory of recipe parent-owned-processor-20261107 (RELOCATE_PARENT_OWNED_PROCESSOR): one row per lesson, appended in the same commit as the correction.
+date	recipe	version	lesson	evidence
+2026-11-07	v1	v1	the mat-sortable engine recognizes only // license header lines; a donor with a block-comment header gets the M3JDK header prepended and keeps its own, so the block is removed by a declared, sha-pinned REPLACE row (same text, one header)	first run: both files carried two headers; REPLACE rows 3bf68cebcb02:4 / 6db173a09e5c:3; --check is a fixed point after
+2026-11-07	v1	v1	javap -c does not print indy string-concat recipes or annotation values, so a -c comparison lets a changed literal pass; compare javap -v -p -c -constants with the constant pool as an order-independent multiset (javap_v_equal.py), compiled -g:none on both sides	a one-literal mutant (UNKNOWN -> UNKNOWX) survived the -c comparison and is refused by the -v comparison
