@@ -40,6 +40,8 @@
     <module>compression</module>
     <module>lexicon/receiver</module>
     <module>optane</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: eclipse/core-runtime WIRED (gate gate-eclipse-core-runtime, GATES.tsv) -->
+    <module>eclipse/core-runtime</module>
   </modules>
 
   <profiles>

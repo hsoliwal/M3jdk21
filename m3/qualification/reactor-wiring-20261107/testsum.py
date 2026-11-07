@@ -18,8 +18,8 @@ HEADER = re.compile(r"^\[INFO\] -+< ([^ >]+) >-+$")
 BUILDING = re.compile(r"^\[INFO\] Building (.+?) +\[\d+/\d+\]$")
 SUMMARY = re.compile(r"^\[(?:INFO|WARNING|ERROR)\] Tests run: (\d+), Failures: (\d+), Errors: (\d+), Skipped: (\d+)$")
 FAILED_TEST = re.compile(r"^\[ERROR\] ([A-Za-z0-9_.$]+(?:\.[A-Za-z0-9_$]+)(?:\([^)]*\))?) -- Time elapsed: .* <<< (FAILURE|ERROR)!")
-GOAL = re.compile(r"^\[ERROR\] Failed to execute goal .*? on project ([^ :]+)(?:: (.*?))?(?: -> \[Help 1\])?$")
-STATUS = re.compile(r"^\[INFO\] (.+?) +\.{2,} *(SUCCESS|FAILURE|SKIPPED)")
+GOAL = re.compile(r"^\[ERROR\] Failed to execute goal(?: .*?)? on project ([^ :]+)(?:: (.*?))?(?: -> \[Help 1\])?$")
+STATUS = re.compile(r"^\[INFO\] (.+?) +(?:\.{2,} *)?(SUCCESS|FAILURE|SKIPPED)(?: +\[.*)?$")
 
 
 def parse(path: str):
