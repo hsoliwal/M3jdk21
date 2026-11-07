@@ -78,6 +78,8 @@
     <module>history</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ast WIRED (gate gate-ast, GATES.tsv) -->
     <module>ast</module>
+    <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk WIRED (gate gate-ports-parallel-bulk, GATES.tsv) -->
+    <module>ports/parallel-bulk</module>
   </modules>
 
   <profiles>
