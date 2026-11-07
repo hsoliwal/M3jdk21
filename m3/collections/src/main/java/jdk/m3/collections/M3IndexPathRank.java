@@ -132,15 +132,14 @@ public final class M3IndexPathRank {
     /** Zero-based selected rank to ordinal in the captured strided source path. */
     public int selectedSourceOrdinal(int rank) {
         Objects.checkIndex(rank, size());
-        int low = 0;
-        int high = selected.length;
-        while (low < high) {
-            int middle = low + ((high - low) >>> 1);
-            if (wordPrefix[middle + 1] <= rank) low = middle + 1;
-            else high = middle;
-        }
+        //FLLDCIM: MRL - RESTORE-MERGE IPR leaf 26: clean 3-way (THREE_WAY.tsv IPR 1) takes the next line from theirs 979763a143bb (origin 3373515b972; dropped by retain merge 6f82d57908e8); recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+        int low = M3LaneSearch.upperBound(wordPrefix, 1, wordPrefix.length, rank) - 1;
         long word = selected[low];
         int remainder = rank - wordPrefix[low];
+        //FLLDCIM: MRL - RESTORE-ADD IPR leaf 60: theirs 76a2600beade lines 146-148 (origin ad9056cdb1e, low-bit-run select fast path; dropped by retain merge d4021923792a); recipe m3/collections/qualification/rank-stack-restore-20261107/add_rows.py v2
+        // A nonzero low-bit run has ordinal == rank within this word.
+        // The identity also admits all 64 bits: -1L + 1L wraps to zero.
+        if ((word & (word + 1L)) == 0) return (low << 6) + remainder;
         while (remainder-- > 0) word &= word - 1;
         return (low << 6) + Long.numberOfTrailingZeros(word);
     }
