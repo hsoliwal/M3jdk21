@@ -48,6 +48,17 @@ class ReleaseMetadataTest(unittest.TestCase):
             self.assertEqual("NOT_CLAIMED", claims[name], name)
         self.assertIn("Non-claims", self.notes)
 
+    def test_release_notes_do_not_claim_a_contradictory_recipe_producer(self):
+        self.assertNotIn("owner per contract); imported receipt", self.notes)
+        self.assertIn("HOLD — owner policy conflict", self.notes)
+        self.assertIn("HOLD", self.notes)
+        self.assertIn("reconcile policy", self.notes)
+
+    def test_historical_ci_numbers_are_explicitly_dated(self):
+        self.assertIn("Historical CI snapshot only", self.notes)
+        self.assertIn("not 2026-11-07 current", self.notes)
+        self.assertIn("source tree", self.checklist)
+
     def test_custody_disagreement_is_visible_for_review(self):
         self.assertIn("Recipe custody/owner policy", self.notes)
         self.assertIn("blocks sign-off", self.prep)
