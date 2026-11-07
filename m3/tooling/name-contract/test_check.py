@@ -152,41 +152,6 @@ class NameContractReceiverTests(unittest.TestCase):
         self.save()
         self.assertEqual(GATE.validate(self.root)[0], 1)
 
-    def test_existing_jdk_m3_owner_remains_a_queued_candidate(self):
-        target = self.mapping["migration"]["records"][0]["targets"][0]
-        target.update(symbol="jdk.m3.algorithm.M3PrefixZ",
-                      path="m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java")
-        write(self.root, target["path"],
-              "package jdk.m3.algorithm; public final class M3PrefixZ {}\n")
-        row = self.plan["operations"][0]
-        row.update(kind="INTERNAL_MOVE", before_type=target["symbol"],
-                   after_type="jdk.m3.algorithms.M3PrefixZ")
-        self.save()
-        self.assertEqual(GATE.validate(self.root), (1, ["class.view"]))
-        self.assertEqual(row["state"], "QUEUED")
-
-    def test_neighbor_namespace_is_not_a_mapped_m3_owner(self):
-        target = self.mapping["migration"]["records"][0]["targets"][0]
-        target.update(symbol="jdk.m30.algorithm.M3PrefixZ",
-                      path="m3/algorithms/src/jdk/m30/algorithm/M3PrefixZ.java")
-        write(self.root, target["path"],
-              "package jdk.m30.algorithm; public final class M3PrefixZ {}\n")
-        self.plan["operations"][0].update(
-            kind="FORMAT_ONLY", before_type=target["symbol"], after_type=target["symbol"])
-        self.save()
-        with self.assertRaisesRegex(ValueError, "mapped M3JDK21 owner"):
-            GATE.validate(self.root)
-
-    def test_queued_type_cannot_be_declared_by_comment_or_literal(self):
-        target = self.mapping["migration"]["records"][0]["targets"][0]
-        for content in (
-                "package jdk.internal.mindex; /* class M3Class {} */ class Hidden {}\n",
-                'package jdk.internal.mindex; class Hidden { String s = "class M3Class {}"; }\n'):
-            with self.subTest(content=content):
-                write(self.root, target["path"], content)
-                with self.assertRaisesRegex(ValueError, "declared type disagrees"):
-                    GATE.validate(self.root)
-
     def assert_cli_refused(self):
         output, error = io.StringIO(), io.StringIO()
         with mock.patch.object(GATE, "ROOT", self.root), \
@@ -332,7 +297,7 @@ class NameContractReceiverTests(unittest.TestCase):
             "path": "src/java.base/share/classes/java/lang/Class.java"}]
         self.plan["operations"] = [dict(original, before_type="java.lang.Class")]
         self.save()
-        with self.assertRaisesRegex(ValueError, "must be an internal"):
+        with self.assertRaisesRegex(ValueError, "mapped M3JDK21 owner"):
             GATE.validate(self.root)
 
     def test_queued_source_must_have_the_exact_canonical_path_and_symbol(self):
@@ -402,6 +367,41 @@ class NameContractReceiverTests(unittest.TestCase):
         self.assertEqual(raised.exception.code, 2)
         self.assertIn("usage: check.py", error.getvalue())
 
+    def test_existing_jdk_m3_owner_remains_a_queued_candidate(self):
+        target = self.mapping["migration"]["records"][0]["targets"][0]
+        target.update(symbol="jdk.m3.algorithm.M3PrefixZ",
+                      path="m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java")
+        write(self.root, target["path"],
+              "package jdk.m3.algorithm; public final class M3PrefixZ {}\n")
+        row = self.plan["operations"][0]
+        row.update(kind="INTERNAL_MOVE", before_type=target["symbol"],
+                   after_type="jdk.m3.algorithms.M3PrefixZ")
+        self.save()
+        self.assertEqual(GATE.validate(self.root), (1, ["class.view"]))
+        self.assertEqual(row["state"], "QUEUED")
+
+    def test_neighbor_namespace_is_not_a_mapped_m3_owner(self):
+        target = self.mapping["migration"]["records"][0]["targets"][0]
+        target.update(symbol="jdk.m30.algorithm.M3PrefixZ",
+                      path="m3/algorithms/src/jdk/m30/algorithm/M3PrefixZ.java")
+        write(self.root, target["path"],
+              "package jdk.m30.algorithm; public final class M3PrefixZ {}\n")
+        self.plan["operations"][0].update(
+            kind="FORMAT_ONLY", before_type=target["symbol"], after_type=target["symbol"])
+        self.save()
+        with self.assertRaisesRegex(ValueError, "mapped M3JDK21 owner"):
+            GATE.validate(self.root)
+
+    def test_queued_type_cannot_be_declared_by_comment_or_literal(self):
+        target = self.mapping["migration"]["records"][0]["targets"][0]
+        for content in (
+                "package jdk.internal.mindex; /* class M3Class {} */ class Hidden {}\n",
+                'package jdk.internal.mindex; class Hidden { String s = "class M3Class {}"; }\n'):
+            with self.subTest(content=content):
+                write(self.root, target["path"], content)
+                with self.assertRaisesRegex(ValueError, "declared type disagrees"):
+                    GATE.validate(self.root)
+
 
 class PublicCompanionContractTests(unittest.TestCase):
     """Real declaration fixtures exercise the existing map without runtime promotion."""
@@ -416,15 +416,15 @@ class PublicCompanionContractTests(unittest.TestCase):
             "path": "src/java.base/share/classes/java/util/Arrays.java",
         }
         self.target = {
-            "module": "com.m3.arrays", "symbol": "com.m3.arrays.M3Arrays",
-            "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+            "module": "jdk.m3.arrays", "symbol": "jdk.m3.arrays.M3Arrays",
+            "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
         }
         self.pin_content(self.source, "package java.util; public final class Arrays {}\n")
-        self.pin_content(self.target, "package com.m3.arrays; public final class M3Arrays {}\n")
+        self.pin_content(self.target, "package jdk.m3.arrays; public final class M3Arrays {}\n")
         write(self.root, "src/java.base/share/classes/module-info.java",
               "module java.base { exports java.util; }\n")
         write(self.root, "m3/arrays/src/main/java/module-info.java",
-              "module com.m3.arrays { exports com.m3.arrays; }\n")
+              "module jdk.m3.arrays { exports jdk.m3.arrays; }\n")
         self.record = {
             "id": "arrays.companion", "status": "implemented-unverified",
             "sources": [self.source], "targets": [self.target],
@@ -466,7 +466,8 @@ class PublicCompanionContractTests(unittest.TestCase):
         self.assert_queued_only()
 
     def test_companion_namespace_is_exact_not_a_similar_prefix(self):
-        for symbol in ("jdk.m30.arrays.M3Arrays", "jdk.m3x.arrays.M3Arrays",
+        for symbol in ("com.m3.arrays.M3Arrays", "jdk.m30.arrays.M3Arrays",
+                       "jdk.m3x.arrays.M3Arrays",
                        "jdk.internal.m3.arrays.M3Arrays"):
             with self.subTest(symbol=symbol):
                 self.record["companion_of"]["target_symbol"] = symbol
@@ -485,11 +486,12 @@ class PublicCompanionContractTests(unittest.TestCase):
         self.assert_queued_only()
 
     def test_public_companion_requires_exact_com_m3_namespace(self):
-        for symbol in ("jdk.m3.arrays.M3Arrays", "java.util.M3Arrays",
-                       "javax.m3.M3Arrays", "com.m3evil.arrays.M3Arrays"):
+        # Preserve this regression ID while enforcing the current jdk.m3 policy.
+        for symbol in ("com.m3.arrays.M3Arrays", "java.util.M3Arrays",
+                       "javax.m3.M3Arrays", "jdk.m3evil.arrays.M3Arrays"):
             with self.subTest(symbol=symbol):
                 self.record["companion_of"]["target_symbol"] = symbol
-                self.assert_refused("distinct com.m3 type")
+                self.assert_refused("distinct jdk.m3 type")
 
     def test_org_w3c_dom_api_uses_actual_module_without_namespace_whitelist(self):
         self.replace_api("java.xml", "org.w3c.dom.Node",
@@ -519,9 +521,9 @@ class PublicCompanionContractTests(unittest.TestCase):
     def test_qualified_exports_are_not_public_companion_eligibility(self):
         for descriptor, content in (
                 ("src/java.base/share/classes/module-info.java",
-                 "module java.base { exports java.util to com.m3.arrays; }\n"),
+                 "module java.base { exports java.util to jdk.m3.arrays; }\n"),
                 ("m3/arrays/src/main/java/module-info.java",
-                 "module com.m3.arrays { exports com.m3.arrays to java.base; }\n")):
+                 "module jdk.m3.arrays { exports jdk.m3.arrays to java.base; }\n")):
             with self.subTest(descriptor=descriptor):
                 original = (self.root / descriptor).read_text(encoding="utf-8")
                 write(self.root, descriptor, content)
@@ -544,38 +546,38 @@ class PublicCompanionContractTests(unittest.TestCase):
             with self.subTest(descriptor=descriptor):
                 original = (self.root / descriptor).read_text(encoding="utf-8")
                 write(self.root, descriptor,
-                      "module wrong.owner { exports java.util; exports com.m3.arrays; }\n")
+                      "module wrong.owner { exports java.util; exports jdk.m3.arrays; }\n")
                 self.assert_refused("declared module disagrees")
                 write(self.root, descriptor, original)
 
     def test_public_companion_cannot_be_owned_by_java_base(self):
         self.target.update(module="java.base",
-                           path="src/java.base/share/classes/com/m3/arrays/M3Arrays.java")
-        self.pin_content(self.target, "package com.m3.arrays; public class M3Arrays {}\n")
+                           path="src/java.base/share/classes/jdk/m3/arrays/M3Arrays.java")
+        self.pin_content(self.target, "package jdk.m3.arrays; public class M3Arrays {}\n")
         write(self.root, "src/java.base/share/classes/module-info.java",
-              "module java.base { exports java.util; exports com.m3.arrays; }\n")
+              "module java.base { exports java.util; exports jdk.m3.arrays; }\n")
         self.assert_refused("must not be owned by java.base")
 
     def test_export_does_not_make_internal_companion_public(self):
-        self.target.update(symbol="com.m3.arrays.internal.M3Slots",
-                           path="m3/arrays/src/main/java/com/m3/arrays/internal/M3Slots.java")
+        self.target.update(symbol="jdk.m3.arrays.internal.M3Slots",
+                           path="m3/arrays/src/main/java/jdk/m3/arrays/internal/M3Slots.java")
         self.pin_content(self.target,
-                         "package com.m3.arrays.internal; public class M3Slots {}\n")
+                         "package jdk.m3.arrays.internal; public class M3Slots {}\n")
         self.record["companion_of"]["target_symbol"] = self.target["symbol"]
         write(self.root, "m3/arrays/src/main/java/module-info.java",
-              "module com.m3.arrays { exports com.m3.arrays.internal; }\n")
+              "module jdk.m3.arrays { exports jdk.m3.arrays.internal; }\n")
         self.assert_refused("must not expose an internal namespace")
 
     def test_open_companion_module_does_not_admit_private_storage(self):
         write(self.root, "m3/arrays/src/main/java/module-info.java",
-              "open module com.m3.arrays { exports com.m3.arrays; }\n")
+              "open module jdk.m3.arrays { exports jdk.m3.arrays; }\n")
         self.assert_refused("module must not be open")
 
     def test_opened_companion_package_refused_even_when_qualified(self):
-        for directive in ("opens com.m3.arrays;", "opens com.m3.arrays to java.base;"):
+        for directive in ("opens jdk.m3.arrays;", "opens jdk.m3.arrays to java.base;"):
             with self.subTest(directive=directive):
                 write(self.root, "m3/arrays/src/main/java/module-info.java",
-                      "module com.m3.arrays { exports com.m3.arrays; " + directive + " }\n")
+                      "module jdk.m3.arrays { exports jdk.m3.arrays; " + directive + " }\n")
                 self.assert_refused("package must not be opened")
 
     def test_source_relation_requires_exact_module_symbol_and_path(self):
@@ -596,7 +598,7 @@ class PublicCompanionContractTests(unittest.TestCase):
             self.record[field] = original
 
     def test_unknown_target_symbol_refused(self):
-        self.record["companion_of"]["target_symbol"] = "com.m3.arrays.NotMapped"
+        self.record["companion_of"]["target_symbol"] = "jdk.m3.arrays.NotMapped"
         self.assert_refused("missing or ambiguous companion artifact ownership")
 
     def test_internal_and_malformed_forms_refused(self):
@@ -655,9 +657,9 @@ class PublicCompanionContractTests(unittest.TestCase):
     def test_package_and_top_level_source_owner_must_agree(self):
         self.pin_content(self.target, "package other; public final class M3Arrays {}\n")
         self.assert_refused("declared package disagrees")
-        self.pin_content(self.target, "package com.m3.arrays; public final class M3Arrays {}\n")
-        self.target["path"] = "m3/arrays/src/main/java/com/m3/arrays/Other.java"
-        self.pin_content(self.target, "package com.m3.arrays; public final class M3Arrays {}\n")
+        self.pin_content(self.target, "package jdk.m3.arrays; public final class M3Arrays {}\n")
+        self.target["path"] = "m3/arrays/src/main/java/jdk/m3/arrays/Other.java"
+        self.pin_content(self.target, "package jdk.m3.arrays; public final class M3Arrays {}\n")
         self.assert_refused("top-level source owner disagrees")
 
     def test_source_path_must_be_owned_by_named_jdk_module(self):
@@ -667,16 +669,16 @@ class PublicCompanionContractTests(unittest.TestCase):
 
     def test_public_declaration_is_not_established_by_comment_or_string(self):
         for content in (
-                "package com.m3.arrays; /* public class M3Arrays {} */ class Hidden {}\n",
-                'package com.m3.arrays; class Hidden { String x = "public class M3Arrays {}"; }\n',
-                "package com.m3.arrays; class M3Arrays {}\n"):
+                "package jdk.m3.arrays; /* public class M3Arrays {} */ class Hidden {}\n",
+                'package jdk.m3.arrays; class Hidden { String x = "public class M3Arrays {}"; }\n',
+                "package jdk.m3.arrays; class M3Arrays {}\n"):
             with self.subTest(content=content):
                 self.pin_content(self.target, content)
                 self.assert_refused("public type declaration")
 
     def test_commented_module_export_does_not_count(self):
         write(self.root, "m3/arrays/src/main/java/module-info.java",
-              "module com.m3.arrays { /* exports com.m3.arrays; */ }\n")
+              "module jdk.m3.arrays { /* exports jdk.m3.arrays; */ }\n")
         self.assert_refused("not publicly exported")
 
     def test_source_path_traversal_refused(self):
@@ -714,11 +716,11 @@ class PublicCompanionContractTests(unittest.TestCase):
             key: source[key] for key in ("module", "symbol", "path")
         }
         target = second["targets"][0]
-        target.update(module="com.m3.another",
-                      path="m3/another/src/main/java/com/m3/arrays/M3Arrays.java")
-        self.pin_content(target, "package com.m3.arrays; public final class M3Arrays {}\n")
+        target.update(module="jdk.m3.another",
+                      path="m3/another/src/main/java/jdk/m3/arrays/M3Arrays.java")
+        self.pin_content(target, "package jdk.m3.arrays; public final class M3Arrays {}\n")
         write(self.root, "m3/another/src/main/java/module-info.java",
-              "module com.m3.another { exports com.m3.arrays; }\n")
+              "module jdk.m3.another { exports jdk.m3.arrays; }\n")
         self.mapping["migration"]["records"].append(second)
         self.assert_refused("conflicting public companion ownership")
 
@@ -740,22 +742,22 @@ class PublicCompanionContractTests(unittest.TestCase):
 
     def test_dollar_suffix_is_not_the_mapped_public_class(self):
         self.pin_content(self.target,
-                         "package com.m3.arrays; public class M3Arrays$Other {}\n")
+                         "package jdk.m3.arrays; public class M3Arrays$Other {}\n")
         self.assert_refused("public type declaration")
 
     def test_unicode_identifier_suffix_is_not_the_mapped_public_class(self):
         for suffix in ("\u20ac", "\u0301", "\u203f"):
             with self.subTest(suffix=ascii(suffix)):
-                self.pin_content(self.target, "package com.m3.arrays; public class M3Arrays"
+                self.pin_content(self.target, "package jdk.m3.arrays; public class M3Arrays"
                                  + suffix + "Peer {}\n")
                 self.assert_refused("public type declaration")
 
     def test_explicit_dollar_identifier_is_preserved(self):
-        self.target.update(symbol="com.m3.arrays.M3Arrays$View",
-                           path="m3/arrays/src/main/java/com/m3/arrays/M3Arrays$View.java")
+        self.target.update(symbol="jdk.m3.arrays.M3Arrays$View",
+                           path="m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays$View.java")
         self.record["companion_of"]["target_symbol"] = self.target["symbol"]
         self.pin_content(self.target,
-                         "package com.m3.arrays; public class M3Arrays$View {}\n")
+                         "package jdk.m3.arrays; public class M3Arrays$View {}\n")
         self.assert_queued_only()
 
     def test_public_type_bodies_must_be_present_and_balanced(self):
@@ -764,12 +766,12 @@ class PublicCompanionContractTests(unittest.TestCase):
                              ("public class M3Arrays {} public class M3Arrays {}",
                               "ambiguous public type declaration")):
             with self.subTest(body=body):
-                self.pin_content(self.target, "package com.m3.arrays; " + body)
+                self.pin_content(self.target, "package jdk.m3.arrays; " + body)
                 self.assert_refused(reason)
 
     def test_record_component_annotation_braces_do_not_become_the_type_body(self):
         self.pin_content(self.target,
-                         "package com.m3.arrays; @interface Mark { int[] value(); }\n"
+                         "package jdk.m3.arrays; @interface Mark { int[] value(); }\n"
                          "public record M3Arrays(@Mark({1, 2}) int value) {}\n")
         self.assert_queued_only()
 
@@ -787,9 +789,9 @@ class PublicCompanionContractTests(unittest.TestCase):
             with self.subTest(module=module):
                 self.target["module"] = module
                 self.assert_refused("exact named module")
-        self.target["module"] = "com.m3.arrays"
-        self.target["path"] = "m3/generated/com/m3/arrays/M3Arrays.java"
-        self.pin_content(self.target, "package com.m3.arrays; public class M3Arrays {}\n")
+        self.target["module"] = "jdk.m3.arrays"
+        self.target["path"] = "m3/generated/jdk/m3/arrays/M3Arrays.java"
+        self.pin_content(self.target, "package jdk.m3.arrays; public class M3Arrays {}\n")
         self.assert_refused("mapped module source root")
 
     def test_missing_companion_source_is_not_covered_by_its_receipt(self):
@@ -797,10 +799,10 @@ class PublicCompanionContractTests(unittest.TestCase):
         self.assert_refused("mapped companion relation source missing")
 
     def test_companion_in_an_explicit_jdk_module_root_remains_eligible(self):
-        self.target["path"] = "src/com.m3.arrays/share/classes/com/m3/arrays/M3Arrays.java"
-        self.pin_content(self.target, "package com.m3.arrays; public class M3Arrays {}\n")
-        write(self.root, "src/com.m3.arrays/share/classes/module-info.java",
-              "module com.m3.arrays { exports com.m3.arrays; }\n")
+        self.target["path"] = "src/jdk.m3.arrays/share/classes/jdk/m3/arrays/M3Arrays.java"
+        self.pin_content(self.target, "package jdk.m3.arrays; public class M3Arrays {}\n")
+        write(self.root, "src/jdk.m3.arrays/share/classes/module-info.java",
+              "module jdk.m3.arrays { exports jdk.m3.arrays; }\n")
         self.assert_queued_only()
 
 

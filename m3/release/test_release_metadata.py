@@ -58,10 +58,15 @@ class ReleaseMetadataTest(unittest.TestCase):
         self.assertIn("Non-claims", self.notes)
 
     def test_release_notes_do_not_claim_a_contradictory_recipe_producer(self):
+        owner = self.contract["execution_evidence"]["gate_owners"]["M3_MAVEN_CONTROL_REACTOR"]
+        self.assertEqual("hsoliwal/com.synexia", owner)
+        self.assertIn("`" + owner + "`", self.notes)
         self.assertNotIn("owner per contract); imported receipt", self.notes)
-        self.assertIn("HOLD — owner policy conflict", self.notes)
+        self.assertNotIn("release-contract.json` assigns this gate to `hsoliwal/M3jdk21`",
+                         self.notes)
+        self.assertIn("passive data", self.notes)
+        self.assertIn("PENDING — exact canonical receipt required", self.notes)
         self.assertIn("HOLD", self.notes)
-        self.assertIn("reconcile policy", self.notes)
 
     def test_historical_ci_numbers_are_explicitly_dated(self):
         self.assertIn("Historical CI snapshot only", self.notes)
@@ -69,8 +74,15 @@ class ReleaseMetadataTest(unittest.TestCase):
         self.assertIn("source tree", self.checklist)
 
     def test_custody_disagreement_is_visible_for_review(self):
+        # Keep this regression identity: resolved custody cannot promote product gates.
         self.assertIn("Recipe custody/owner policy", self.notes)
-        self.assertIn("blocks sign-off", self.prep)
+        self.assertIn("M3JDK21 owns product build, runtime and target acceptance gates", self.prep)
+        self.assertIn("as passive data", self.prep)
+        self.assertIn("never executes its recorded command", self.prep)
+        self.assertIn("zero executable dependencies", self.prep)
+        self.assertIn("does not establish installed-image acceptance", self.prep)
+        self.assertIn("separate namespace-policy reconciliation", self.notes)
+        self.assertTrue(self.contract["standalone"]["required_for_release"])
 
 
 if __name__ == "__main__":
