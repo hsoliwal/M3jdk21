@@ -26,7 +26,12 @@ public final class M3TranslationReceiverMapTest {
                 .orElseThrow();
         String[] columns = manifestRow.split("\\t", -1);
         check(columns.length >= 9);
-        check(columns[2].equals("m3-interned-language/src/main/java/jdk/internal/m3/language/TranslationTsvImporter.java"));
+        // Donor fact: the source path inside the donor repository hsoliwal/com.synexia (module and package carry
+        // the donor prefix). Composed so the JDK-naming rename (rules KEBAB, PKG_PATH) never rewrites a donor path;
+        // fe35ea98841 had renamed this literal while the manifest correctly kept the donor path.
+        String donor = "synexia";
+        check(columns[2].equals(donor + "-interned-language/src/main/java/com/" + donor
+                + "/language/TranslationTsvImporter.java"));
         check(columns[3].equals("source_language,target_language,source_token"));
         check(columns[7].contains("compact ASCII JSON"));
         check(columns[4].equals("source_language,target_language,source_token,target_token"));

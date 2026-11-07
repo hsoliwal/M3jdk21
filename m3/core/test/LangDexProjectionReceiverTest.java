@@ -116,6 +116,12 @@ public final class LangDexProjectionReceiverTest {
         Files.write(path, bytes.array(), StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
     }
 
+    // Donor fact: the schema path inside the donor repository hsoliwal/com.synexia (its unicodex module name
+    // carries the donor prefix). Composed so the JDK-naming rename (rule KEBAB) never rewrites a donor path;
+    // fe35ea98841 had renamed this literal while the manifest correctly kept the donor path.
+    private static final String DONOR_SCHEMA_PATH =
+            String.join("-", "synexia", "unicodex") + "/docs/langdex/UPSTREAM_SCHEMA.tsv";
+
     private static void verifyManifestAndFieldMap() throws Exception {
         List<String> manifest = Files.readAllLines(
                 Path.of("lexicon", "m3-source-manifest.tsv"), StandardCharsets.UTF_8);
@@ -124,7 +130,7 @@ public final class LangDexProjectionReceiverTest {
         check(rows.size() == 1);
         String[] row = rows.get(0).split("\t", -1);
         check(row.length == 9);
-        check(row[2].equals("m3-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv"));
+        check(row[2].equals(DONOR_SCHEMA_PATH));
         check(row[3].equals("lexeme_id"));
         check(row[4].equals("glottocode,lemma,source"));
         check(row[5].equals("M3StringFacts + LangDexCoordinate"));
@@ -215,7 +221,7 @@ public final class LangDexProjectionReceiverTest {
                         catalog.findMapping(SOURCE_ID, RECORD_ID).orElseThrow();
                 check(mapping.sourceId().equals(SOURCE_ID));
                 check(mapping.recordId().equals(RECORD_ID));
-                check(mapping.sourcePath().equals("m3-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv"));
+                check(mapping.sourcePath().equals(DONOR_SCHEMA_PATH));
                 check(mapping.lexeme().equals(LEXEME));
                 check(mapping.mappingId().equals("langdex:" + RECORD_ID));
                 check(mapping.precomputeProfile().equals("langdex"));
