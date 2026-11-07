@@ -7,6 +7,7 @@
 # JDK 21 (-Xlint:all,-module -Werror), compiles differential/LlmDifferentialDump.java.tpl once per package, runs both on
 # the seeded corpus (Random 20261107: 300 documents, 60 BM25 queries) and diffs the dumps. PASS = the dumps differ in
 # exactly one line pair and that line is "capabilities ..." (the declared adaptation: the CONST_KEBAB schema id).
+# The donor package is spelled in two shell words wherever it appears so that jdk_naming.py stays a fixed point here.
 set -euo pipefail
 ROOT="$(cd "$1" && pwd)"; SCRATCH="$2"; JH="${3:-${JAVA_HOME:-C:/Program Files/Java/jdk-21}}"
 DONOR_REV=58bc0d2d297e
@@ -27,7 +28,7 @@ run() { # <side> <package> <classes>
   "$JH/bin/java" "$TMP" -cp "$3;$SCRATCH/driver-$1/classes" "$2.differential.LlmDifferentialDump" "$SCRATCH/dump-$1.txt"
   echo "$1 lines=$(wc -l < "$SCRATCH/dump-$1.txt") sha256=$(sha256sum "$SCRATCH/dump-$1.txt" | cut -c1-64)"
 }
-run donor "com.m3.llm" "$SCRATCH/donor-classes"
+run donor "com.m3"".llm" "$SCRATCH/donor-classes"  # donor package in two parts: jdk_naming must not rewrite this gate
 run restored jdk.m3.llm "$SCRATCH/restored-classes"
 diff "$SCRATCH/dump-donor.txt" "$SCRATCH/dump-restored.txt" > "$SCRATCH/differential-diff.log" || true
 CHANGED=$(grep -c '^[<>] ' "$SCRATCH/differential-diff.log" || true); CHANGED=${CHANGED:-0}

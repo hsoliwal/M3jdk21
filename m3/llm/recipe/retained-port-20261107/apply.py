@@ -33,7 +33,7 @@ import sys
 from pathlib import Path
 
 RECIPE = "apply.py"
-VERSION = "v1"
+VERSION = "v2"
 RECIPE_DIR = Path(__file__).resolve().parent
 BASE_COMMIT = "c7be9541dbad424dd5b9598121e830a76e10f6e6"
 DONOR_COMMIT = "58bc0d2d297e"
@@ -71,9 +71,8 @@ LEGACY_SCHEMA_PREFIX = "SYNEXIA" + "-"  # two parts: the CONST_KEBAB rule must n
 EDITS: dict[str, list[tuple[str, str]]] = {
     TARGET_PREFIX_MAIN + "chrome/ChromeMlTaskService.java": [
         ('        return Map.of("schema", "' + LEGACY_SCHEMA_PREFIX + 'CHROMEML-CAPABILITIES/1", "tasks", ',
-         '        //FLLDCIM: MRL - retained-port-20261107: jdk_naming CONST_KEBAB renamed the capabilities schema id'
-         ' (user decision 2026-10-31); the only runtime string this restore changes\n'
-         '        return Map.of("schema", "M3-CHROMEML-CAPABILITIES/1", "tasks", '),
+         '        return Map.of("schema", "M3-CHROMEML-CAPABILITIES/1", "tasks", '),  # v2: no anchor comment, so the written
+         # bytes equal master's retained variant retained-variants/pr2108/m3/llm (coordinator decision 2026-11-07)
     ],
 }
 
