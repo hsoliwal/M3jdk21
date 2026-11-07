@@ -12,12 +12,14 @@ It never executes commands contained in a receipt or runs a transformation.
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import importlib.util
 import json
 import re
 import subprocess
 from pathlib import Path
+import xml.etree.ElementTree as ET
 
 EXPECTED_PRIORITY = [
     "M3_STRING", "REGEX_PRECOMPUTE", "GENERAL_PRECOMPUTE", "ARRAYS",
@@ -171,11 +173,55 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
             or not SHA256.fullmatch(inventory_sha)
             or sha256(safe_artifact(evidence_dir, inventory_path)) != inventory_sha):
         raise ValueError("coverage inventory artifact is missing or not hash-verified")
+    if coverage.get("format") != "JACOCO_XML":
+        raise ValueError("coverage raw report must be JaCoCo XML")
+    with safe_artifact(evidence_dir, inventory_path).open(
+            "r", encoding="utf-8-sig", newline="") as inventory_source:
+        reader = csv.DictReader(inventory_source, delimiter="\t")
+        required = {"id", "source_path", "class", "method", "descriptor"}
+        if reader.fieldnames is None or not required.issubset(reader.fieldnames):
+            raise ValueError("coverage inventory TSV columns missing")
+        inventory_rows = list(reader)
+    inventory_keys = {
+        (row["id"], row["source_path"], row["class"], row["method"], row["descriptor"])
+        for row in inventory_rows
+    }
+    if len(inventory_rows) != len(inventory_keys):
+        raise ValueError("duplicate method/source entry in coverage inventory")
+    report = ET.parse(safe_artifact(evidence_dir, artifact)).getroot()
+    if report.tag != "report":
+        raise ValueError("raw coverage artifact is not a JaCoCo XML report")
+    raw_methods = {}
+    for klass in report.findall(".//class"):
+        for method in klass.findall("method"):
+            key = (klass.get("name"), method.get("name"), method.get("desc"))
+            if key in raw_methods or not all(isinstance(value, str) and value for value in key):
+                raise ValueError("duplicate or incomplete JaCoCo method key")
+            counts = {}
+            for counter in method.findall("counter"):
+                kind = counter.get("type")
+                if kind in ("LINE", "BRANCH"):
+                    if kind in counts:
+                        raise ValueError("duplicate JaCoCo line/branch counter")
+                    covered, missed = int(counter.get("covered", "-1")), int(counter.get("missed", "-1"))
+                    if min(covered, missed) < 0:
+                        raise ValueError("invalid JaCoCo method counter")
+                    counts[kind] = (covered, missed)
+            if "LINE" not in counts or "BRANCH" not in counts:
+                raise ValueError("missing JaCoCo line/branch method counter")
+            raw_methods[key] = counts
     atoms = coverage.get("atoms")
     if not isinstance(atoms, list) or not atoms:
         raise ValueError("a nonempty measured atom inventory is required")
     if type(coverage.get("measured_count")) is not int or coverage["measured_count"] != len(atoms):
         raise ValueError("measured atom count does not match the inventory")
+    atom_keys = {
+        (atom.get("id"), atom.get("source_path"), atom.get("jacoco_class"),
+         atom.get("jacoco_method"), atom.get("jacoco_descriptor"))
+        for atom in atoms if isinstance(atom, dict)
+    }
+    if len(atom_keys) != len(atoms) or atom_keys != inventory_keys:
+        raise ValueError("coverage atoms differ from source-pinned inventory TSV")
     seen = set()
     for atom in atoms:
         if not isinstance(atom, dict):
@@ -205,7 +251,11 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
                     raise ValueError("zero-branch atom needs an explicit explanation: " + ident)
             elif measured / total < MIN_ATOM_COVERAGE:
                 raise ValueError(f"{family} coverage below 90%: {ident}")
-    return f"{len(atoms)} changed atoms, instrumented line/branch counts >=90% or explicit branchless explanation"
+            key = (atom["jacoco_class"], atom["jacoco_method"], atom["jacoco_descriptor"])
+            raw = raw_methods.get(key)
+            if raw is None or (measured, missed) != raw[family.upper()]:
+                raise ValueError("reported atom counts disagree with raw JaCoCo XML: " + ident)
+    return f"{len(atoms)} changed atoms, instrumented line/branch counts match JaCoCo XML and >=90% or explicit branchless explanation"
 
 
 def recipe_candidate(path: str) -> bool:
@@ -542,7 +592,7 @@ def validate(root: Path, release_mode: bool = False,
                 if sha256(file) != digest:
                     raise ValueError("execution artifact SHA-256 mismatch: " + path)
             passed("gate:" + ident, f"{len(artifacts)} hash-verified artifacts; command provenance requires review")
-        except (ValueError, OSError, UnicodeError) as exc:
+        except (ValueError, OSError, UnicodeError, ET.ParseError) as exc:
             block("gate:" + ident, str(exc), policy=False)
 
     # A source-changing concurrent process invalidates the snapshot inspected above.
