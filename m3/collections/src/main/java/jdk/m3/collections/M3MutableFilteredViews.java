@@ -14,8 +14,10 @@
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
 // Modified 2026 by Hitesh Soliwal and contributors: propagate mutable navigation comparator failures.
+// Modified 2026 by Hitesh Soliwal and contributors: fail-fast physical-slot cursors and a once-per-entry values view over M3 owners (census2 P2-098).
 package jdk.m3.collections;
 
+import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.ArrayList;
@@ -47,6 +49,11 @@ import java.util.function.Predicate;
  * <p>Predicates must be stable, deterministic and not mutate either owner. The
  * underlying owner must not be concurrently mutated without external synchronization;
  * iterators are cursor-based and do not promise the JDK's fail-fast detection.
+ * Over an M3TreeMap or M3TreeSet owner the cursors walk its physical slots and are
+ * fail-fast: the owner revision is read before the first slot and checked at every call and
+ * after every predicate call and slot step; the predicate runs once per slot,
+ * values() reads the slot's current value without a second predicate call, and an own
+ * remove keeps the prepared successor.
  * Iterator/entry wrappers are created on demand, never stored per element. This is
  * not a snapshot, not a concurrent collection and not a transparent JNI facade.</p>
  */
@@ -76,6 +83,74 @@ public final class M3MutableFilteredViews {
             if (visible.test(candidate)) return candidate;
         }
         return null;
+    }
+
+    //FLLDCIM: MRL - census2 P2-098, recipe FILTERED_VIEWS_OWNER v1 (crate m3jdk21-20261019, donor blob 883195b9b194 = retained variant pr1463): fail-fast physical-slot cursor
+    /**
+     * Physical-slot cursor shared by the set and map views over an M3 owner (an M3TreeMap or
+     * the owner of an M3TreeSet; bounds and direction included). The owner revision is read
+     * before the first slot and checked at every call and after every predicate call and slot
+     * step: an owner change, a mutating predicate or comparator, and a prepared or exhausted
+     * cursor fail fast, and remove checks it before its next-required state. The predicate runs
+     * once per slot. remove erases the returned slot itself (no comparator lookup, so no
+     * re-entrant window) and keeps the prepared successor slot.
+     */
+    private abstract static class SlotCursor<T> implements Iterator<T> {
+        private final M3TreeMap<?, ?> slots;
+        private int expected;
+        private int pending;
+        private int last = -1;
+        private boolean prepared;
+
+        SlotCursor(M3TreeMap<?, ?> slots, boolean fromLast) {
+            this.slots = slots;
+            expected = slots.revision();
+            pending = fromLast ? slots.lastSlot() : slots.firstSlot();
+        }
+
+        /** Predicate visibility of a live slot. */
+        abstract boolean visible(int slot);
+        /** The following slot in this cursor's direction, or -1. */
+        abstract int step(int slot);
+        /** The caller-visible element of a live slot. */
+        abstract T take(int slot);
+
+        final void check() { slots.check(expected); }
+
+        @Override public final boolean hasNext() {
+            check();
+            if (prepared) return true;
+            while (pending >= 0) {
+                boolean visible = visible(pending);
+                check();
+                if (visible) {
+                    prepared = true;
+                    return true;
+                }
+                pending = step(pending);
+                check();
+            }
+            return false;
+        }
+
+        @Override public final T next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            int slot = pending;
+            pending = step(slot);
+            check();
+            prepared = false;
+            T result = take(slot);
+            last = slot;
+            return result;
+        }
+
+        @Override public final void remove() {
+            check();
+            if (last < 0) throw new IllegalStateException("next required");
+            slots.eraseAt(last);
+            expected = slots.revision();
+            last = -1;
+        }
     }
 
     private static final class SetView<E> extends AbstractSet<E> implements NavigableSet<E> {
@@ -166,6 +241,14 @@ public final class M3MutableFilteredViews {
         @Override public Iterator<E> descendingIterator() { return cursor(true); }
 
         private Iterator<E> cursor(boolean descending) {
+            M3TreeMap<E, ?> owner = source instanceof M3TreeSet<E> m3 ? m3.indexedOwner() : null;
+            if (owner != null) return new SlotCursor<E>(owner, descending) {
+                @Override boolean visible(int slot) { return predicate.test(owner.keyAt(slot)); }
+                @Override int step(int slot) {
+                    return descending ? owner.previousIndexedSlot(slot) : owner.nextSlot(slot);
+                }
+                @Override E take(int slot) { return owner.keyAt(slot); }
+            };
             return new Iterator<>() {
                 private boolean started;
                 private boolean prepared;
@@ -496,6 +579,10 @@ public final class M3MutableFilteredViews {
         }
 
         private Iterator<Entry<K, V>> entryCursor() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner != null) return new MapSlotCursor<Entry<K, V>>(owner) {
+                @Override Entry<K, V> take(int slot) { return new LiveEntry(owner.keyAt(slot)); }
+            };
             return new Iterator<>() {
                 private boolean started;
                 private boolean prepared;
@@ -535,6 +622,48 @@ public final class M3MutableFilteredViews {
                     removable = false;
                     prepared = false;
                     exhausted = false;
+                }
+            };
+        }
+
+        /** The array-backed AVL owner of an M3 map (bounds and direction included), else null. */
+        private M3TreeMap<K, V> slotOwner() {
+            return source instanceof M3TreeMap<K, V> m3 ? m3 : null;
+        }
+
+        /** Entries and values of an M3 owner share one slot walk; only the projection differs. */
+        private abstract class MapSlotCursor<T> extends SlotCursor<T> {
+            final M3TreeMap<K, V> owner;
+
+            MapSlotCursor(M3TreeMap<K, V> owner) {
+                super(owner, false);
+                this.owner = owner;
+            }
+
+            @Override final boolean visible(int slot) {
+                return predicate.test(owner.keyAt(slot), owner.valueAt(slot));
+            }
+            @Override final int step(int slot) { return owner.nextSlot(slot); }
+        }
+
+        //FLLDCIM: MRL - census2 P2-098, recipe FILTERED_VIEWS_OWNER v1 (crate m3jdk21-20261019, donor blob 883195b9b194 = retained variant pr1463): once-per-entry values view
+        /**
+         * Over an M3 owner values() walks the same slot cursor: the predicate runs once per
+         * entry and each value is the slot's current payload. Other owners keep
+         * AbstractMap.values() (an entry walk whose LiveEntry.getValue re-tests visibility).
+         */
+        @Override public Collection<V> values() {
+            M3TreeMap<K, V> owner = slotOwner();
+            if (owner == null) return super.values();
+            return new AbstractCollection<>() {
+                @Override public int size() { return MapView.this.size(); }
+                @Override public boolean isEmpty() { return MapView.this.isEmpty(); }
+                @Override public boolean contains(Object value) { return MapView.this.containsValue(value); }
+                @Override public void clear() { MapView.this.clear(); }
+                @Override public Iterator<V> iterator() {
+                    return new MapSlotCursor<V>(owner) {
+                        @Override V take(int slot) { return owner.valueAt(slot); }
+                    };
                 }
             };
         }

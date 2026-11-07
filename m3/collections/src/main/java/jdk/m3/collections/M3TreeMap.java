@@ -13,6 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
+// Modified 2026 by Hitesh Soliwal and contributors: refuse erasing a slot a re-entrant comparator already released (census2 P2-098 B4).
 package jdk.m3.collections;
 
 import java.util.Arrays;
@@ -34,6 +35,8 @@ import java.util.SortedMap;
  * An optional provider resolves explicitly deferred values on value access or touch.
  * Provider state is one short lane shared by all views; eager/key-only trees allocate none.
  * This collection is not thread-safe. Providers must not mutate its shared mappings.
+ * A key removal whose comparator clears the map or erases that mapping during the lookup
+ * throws ConcurrentModificationException instead of erasing a released slot.
  */
 public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements NavigableMap<K, V> {
     private final Tree<K, V> tree;
@@ -142,7 +145,13 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         if (tree.lazy != null) { tree.lazy.admitted(slot, true); }
         return old;
     }
-    @Override V eraseAt(int slot) { tree.writable(); V old = valueAt(slot); forgetEntryFacade(keyAt(slot)); tree.erase(slot); return old; }
+    //FLLDCIM: MRL - census2 P2-098, recipe FILTERED_VIEWS_OWNER v1 (crate m3jdk21-20261019, found by its seeded differential): no erase of a released slot
+    @Override V eraseAt(int slot) {
+        // A slot located before a re-entrant comparator cleared the map or erased the mapping is
+        // free (height 0) or beyond the used prefix; erasing it would corrupt links and free list.
+        if (slot >= tree.used || tree.height[slot] == 0) { throw new java.util.ConcurrentModificationException(); }
+        tree.writable(); V old = valueAt(slot); forgetEntryFacade(keyAt(slot)); tree.erase(slot); return old;
+    }
     @Override int revision() { return tree.modifications; }
     @Override public int size() {
         if (!hasLow && !hasHigh) { return tree.size; }

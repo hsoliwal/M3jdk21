@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of qualification/filtered-views-owner-20261106/relocate.py (recipe RELOCATE_CENSUS v6, copied unchanged from qualification/census2-t2-20261106): the two P2-098 test files held by qualification/census2-t3-20261106 (HOLD_OWNER_EDIT, PR #2619), landed once the owner edits of apply.py (FILTERED_VIEWS_OWNER v1) make them pass. Donor bytes, package line mapped, one anchor line.
+# Donor: hsoliwal/com.synexia develop d5ad5090d87ef8477a56317e60ac0d29c65029f7 (census pass-2 pin). Row kinds as in m3/collections/qualification/census2-t2-20261106/RELOCATION_MAP.tsv.
+kind	donor	target	note
+REPO	hsoliwal/com.synexia	https://github.com/hsoliwal/com.synexia	donor repository; blob URL = <url>/blob/<commit>/<donor path>
+PACKAGE	com.m3.collections	jdk.m3.collections	the host package
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	junit-jupiter test scope (the donor JUnit wrapper)
+FILE	synexia-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-oracle-20261019/M3FilteredCursorReadinessSelfTest.java.txt	src/test/java/jdk/m3/collections/M3FilteredCursorReadinessSelfTest.java	P2-098 oracle (blob 97fa2d5b3158): selection-callback differential of the read-only and mutable filtered navigable views over M3TreeMap/M3TreeSet against the generic views over JDK TreeMap, with slot-reuse, bounded-comparator and iterator-state witnesses; was HOLD_OWNER_EDIT in census2-t3 (OWNER_VERDICTS.tsv 74 rows)
+FILE	synexia-openrewrite-recipes/crates/m3jdk21-20261019/collections/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-cursor-junit-20261019/M3FilteredCursorReadinessTest.java.txt	src/test/java/jdk/m3/collections/M3FilteredCursorReadinessTest.java	P2-098 JUnit 5 wrapper (blob 6086bc8870f2) of the self test main

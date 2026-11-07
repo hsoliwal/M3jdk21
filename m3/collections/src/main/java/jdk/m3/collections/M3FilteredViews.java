@@ -16,6 +16,7 @@
 // Modified 2026 by Hitesh Soliwal and contributors: reconcile merged sequenced guards and retain reversed split ordering.
 // Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
 // Reconciled 2026: retain the qualified guarded reverse atom after additive merge.
+// Modified 2026 by Hitesh Soliwal and contributors: fail-fast owner epoch on filtered cursors over M3 sorted owners (census2 P2-098).
 /*
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
@@ -48,6 +49,10 @@ import java.util.function.Predicate;
  *
  * <p>These views are backed and live: future operations see backing changes, while an
  * existing iterator follows its underlying iterator's concurrent-modification policy.
+ * Over an M3TreeMap or M3TreeSet owner that policy is fail-fast at every cursor call: the
+ * owner revision is read before the backing cursor opens and checked before and after each
+ * step, so prepared and exhausted cursors and mutating predicates or comparators also throw
+ * ConcurrentModificationException.
  * No data is copied, cached or eagerly predicate-evaluated at construction. The source's
  * comparator, range checks, ordering and object references remain authoritative.
  * Predicates must be stable during a traversal and consistent with equals for Set/Map
@@ -129,6 +134,40 @@ public final class M3FilteredViews {
         return new UnsupportedOperationException("read-only filtered view");
     }
 
+    //FLLDCIM: MRL - census2 P2-098, recipe FILTERED_VIEWS_OWNER v1 (crate m3jdk21-20261019, donor blob a6d82d9a076f = retained variant pr1463): owner epoch before the cursor opens
+    /** The array-backed AVL owner of an M3 sorted map or set (bounds and direction included), else null. */
+    private static M3TreeMap<?, ?> sortedOwner(Object source) {
+        if (source instanceof M3TreeMap<?, ?> map) return map;
+        return source instanceof M3TreeSet<?> set ? set.indexedOwner() : null;
+    }
+
+    private static int revisionOf(M3TreeMap<?, ?> owner) { return owner == null ? 0 : owner.revision(); }
+
+    /**
+     * Check a sorted M3 owner's revision, read before {@code cursor} was opened, at every call
+     * and after every step; any other source keeps its own iterator policy. Callbacks are
+     * unchanged, and a predicate exception still precedes the check of the step that raised it.
+     */
+    private static <E> Iterator<E> ownerChecked(M3TreeMap<?, ?> owner, int expected,
+            Iterator<E> cursor) {
+        if (owner == null) return cursor;
+        return new Iterator<>() {
+            @Override public boolean hasNext() {
+                owner.check(expected);
+                boolean ready = cursor.hasNext();
+                owner.check(expected);
+                return ready;
+            }
+            @Override public E next() {
+                owner.check(expected);
+                E result = cursor.next();
+                owner.check(expected);
+                return result;
+            }
+            @Override public void remove() { throw readonly(); }
+        };
+    }
+
     /** Natural or owner-comparator order, including comparator-admitted null keys. */
     @SuppressWarnings("unchecked")
     private static <T> int compareStored(T stored, T query,
@@ -192,14 +231,20 @@ public final class M3FilteredViews {
          * membership or backing iterators. The backing remains live.
          */
         @Override public Iterator<E> iterator() {
-            if (iterationView(source) == null) return filtered(source.iterator(), predicate);
+            if (iterationView(source) == null) {
+                M3TreeMap<?, ?> owner = sortedOwner(source);
+                int expected = revisionOf(owner);
+                return ownerChecked(owner, expected, filtered(source.iterator(), predicate));
+            }
             IterationPlan<E> plan = iterationPlan();
-            return filtered(plan.backing.iterator(), value -> {
+            M3TreeMap<?, ?> owner = sortedOwner(plan.backing);
+            int expected = revisionOf(owner);
+            return ownerChecked(owner, expected, filtered(plan.backing.iterator(), value -> {
                 for (Predicate<? super E> filter : plan.filters) {
                     if (!filter.test(value)) return false;
                 }
                 return true;
-            });
+            }));
         }
 
         private IterationPlan<E> iterationPlan() {
@@ -474,7 +519,9 @@ public final class M3FilteredViews {
         }
         @Override public NavigableSet<E> reversed() { return descendingSet(); }
         @Override public Iterator<E> descendingIterator() {
-            return filtered(nav.descendingSet().iterator(), predicate);
+            M3TreeMap<?, ?> owner = sortedOwner(nav);
+            int expected = revisionOf(owner);
+            return ownerChecked(owner, expected, filtered(nav.descendingSet().iterator(), predicate));
         }
         @Override public NavigableSet<E> subSet(E from, boolean inclusiveFrom,
                 E to, boolean inclusiveTo) {
@@ -581,16 +628,20 @@ public final class M3FilteredViews {
                             && Objects.equals(value, probe.getValue());
                 }
                 @Override public Iterator<Entry<K, V>> iterator() {
+                    M3TreeMap<?, ?> owner = sortedOwner(sorted);
+                    int expected = revisionOf(owner);
                     Iterator<Entry<K, V>> cursor = sorted.entrySet().iterator();
                     Iterator<Entry<K, V>> filtered = M3FilteredViews.filtered(cursor,
                             item -> predicate.test(item.getKey(), item.getValue()));
-                    return new Iterator<>() {
+                    // The entry copy reads the value through the owner (a comparator lookup):
+                    // the owner check after next() also covers that callback.
+                    return ownerChecked(owner, expected, new Iterator<Entry<K, V>>() {
                         @Override public boolean hasNext() { return filtered.hasNext(); }
                         @Override public Entry<K, V> next() {
                             return new SimpleImmutableEntry<>(filtered.next());
                         }
                         @Override public void remove() { throw readonly(); }
-                    };
+                    });
                 }
                 @Override public boolean add(Entry<K, V> entry) { throw readonly(); }
                 @Override public boolean remove(Object entry) { throw readonly(); }
