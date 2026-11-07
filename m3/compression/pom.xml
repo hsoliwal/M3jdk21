@@ -79,4 +79,82 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <!-- Native leaf: -Pnative-linux builds src/main/native (the donor's CMake file, relocated) with CMake, runs its CTest
+         oracle and hands libm3_lz_compression.so to the oracles through m3.lz.library. Without the profile the JNI lanes
+         are skipped and M3LzByteKernels (Java) stays the backend; M3LzNative is only ever loaded explicitly. -->
+    <profile>
+      <id>native-linux</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.3.0</version>
+            <executions>
+              <execution>
+                <id>configure-native</id>
+                <phase>generate-test-resources</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>cmake</executable>
+                  <arguments>
+                    <argument>-S</argument>
+                    <argument>${project.basedir}/src/main/native</argument>
+                    <argument>-B</argument>
+                    <argument>${project.build.directory}/native</argument>
+                    <argument>-DCMAKE_BUILD_TYPE=Release</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>build-native</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>cmake</executable>
+                  <arguments>
+                    <argument>--build</argument>
+                    <argument>${project.build.directory}/native</argument>
+                    <argument>--config</argument>
+                    <argument>Release</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>test-native</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>ctest</executable>
+                  <arguments>
+                    <argument>--test-dir</argument>
+                    <argument>${project.build.directory}/native</argument>
+                    <argument>--output-on-failure</argument>
+                    <argument>-C</argument>
+                    <argument>Release</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <m3.lz.library>${project.build.directory}/native/libm3_lz_compression.so</m3.lz.library>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

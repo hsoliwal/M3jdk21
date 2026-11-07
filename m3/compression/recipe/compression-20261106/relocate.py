@@ -18,7 +18,8 @@ refused unless it occurs exactly once, and (7) one //FLLDCIM: anchor line insert
 declaration, naming the donor blob URL at the donor commit. Every other byte of the file is kept (CRLF too).
 
 C files (.c, .h): rewrites only (1) the first line, a block-comment SPDX line, replaced by the M3JDK header inside
-the same block comment, (2) #include lines through the INCLUDE rows (the javac -h header of the donor class becomes
+the same block comment, or a line-comment SPDX line (// SPDX-License-Identifier: ...), replaced by the two-line M3JDK
+header in line comments (native extension, see below), (2) #include lines through the INCLUDE rows (the javac -h header of the donor class becomes
 <jni.h>, as every JNI source of this module includes it), (3) the JNI rows, the Java_<mangled donor class>_ symbol
 prefix of every exported function, as whole-token prefixes, (4) the TYPE and LITERAL rows as whole-word tokens, and
 (5) one //FLLDCIM: anchor line inserted before the first #include. Every other byte is kept.
@@ -28,9 +29,15 @@ the module is not decided here (never two owners of one shape); OMIT rows name d
 (a timing harness, JUnit wrappers replaced by the module template). Both kinds are informational: the recipe pins
 their donor blob in its run log (HELD lines) and copies nothing.
 
-The family has no native file: no build-file registration is written (the bitmatrix CMake registration block and its
-writer are removed; the C relocation path is kept unchanged so a later native row of the family is handled
-by the same recipe).
+CMake files (FILE rows whose donor path ends in CMakeLists.txt; native extension): rewrites only (1) the leading
+# SPDX / # Copyright comment lines, replaced by the M3JDK header as # comments, (2) the TYPE and LITERAL rows as
+whole-word tokens, and (3) one #FLLDCIM: anchor line inserted right after the header. Every other byte is kept.
+
+Native extension (native leaf of the family, 2026-11-06): the donor's JNI kernels carry their own CMakeLists.txt, which
+is relocated as a FILE row into src/main/native, so the module's native build is the donor's build file with the
+M3JDK header and no registration into another module's CMake file is written (the bitmatrix CMake registration block
+and its writer stay removed). The extension is additive: the Java path, the block-comment C path, the version (v3) and
+every anchor of the Java and C rows relocated before it are unchanged (relocate.py --check stays a fixed point).
 
 PROVENANCE.tsv (next to this script) pins donor commit, blob sha, donor sha256 and target sha256 of every FILE row
 and states body_match (the bytes after the header/package line, minus the anchor, equal the donor's),
@@ -73,7 +80,9 @@ PROVENANCE_COLUMNS = ("donor_repo", "donor_commit", "donor_path", "donor_blob", 
 HEADER = (b"// Copyright 2026 Hitesh Soliwal and contributors", b"// SPDX-License-Identifier: Apache-2.0")
 C_HEADER = (b"/* Copyright 2026 Hitesh Soliwal and contributors", b" * SPDX-License-Identifier: Apache-2.0")
 HEADER_LINE = re.compile(rb"^// (?:SPDX-License-Identifier|SPDX-FileCopyrightText|Copyright)\b")
-C_HEADER_LINE = re.compile(rb"^/\* SPDX-License-Identifier: [\w.-]+\s*$")
+C_HEADER_LINE = re.compile(rb"^(?:/\* |// )SPDX-License-Identifier: [\w.-]+\s*$")
+CMAKE_HEADER_LINE = re.compile(rb"^# (?:SPDX-License-Identifier|SPDX-FileCopyrightText|Copyright)\b")
+CMAKE_HEADER = (b"# Copyright 2026 Hitesh Soliwal and contributors", b"# SPDX-License-Identifier: Apache-2.0")
 PACKAGE_LINE = re.compile(rb"^package\s+([\w.]+)\s*;")
 IMPORT_LINE = re.compile(rb"^(import\s+(?:static\s+)?)([\w.]+)(\s*;.*)$")
 TYPE_LINE = re.compile(rb"^(?:(?:public|final|abstract|sealed|non-sealed|strictfp)\s+)*(?:class|interface|enum|record)\s+\w+")
@@ -250,7 +259,7 @@ def relocate_c(data: bytes, donor_path: str, blob: str, commit: str, mapping: di
     if not lines or not C_HEADER_LINE.match(split_eol(lines[0])[0]):
         raise Refused("C file %s does not start with a block-comment SPDX line" % donor_path)
     first_eol = split_eol(lines[0])[1] or b"\n"
-    out = [text + first_eol for text in C_HEADER]
+    out = [text + first_eol for text in (HEADER if lines[0].startswith(b"//") else C_HEADER)]
     donor_body, target_body = [], []
     anchored = False
     drops = drops_for(donor_path, mapping)
@@ -286,7 +295,26 @@ def relocate_c(data: bytes, donor_path: str, blob: str, commit: str, mapping: di
     return b"".join(out), b"".join(lines[1:]) == target_bytes, b"".join(renamed(l) for l in donor_body) == target_bytes, dropped
 
 
+def relocate_cmake(data: bytes, donor_path: str, blob: str, commit: str, mapping: dict,
+                   seen: dict) -> tuple[bytes, bool, bool, int]:
+    lines = LINES.findall(data)
+    index = 0
+    while index < len(lines) and CMAKE_HEADER_LINE.match(lines[index]):
+        index += 1
+    if index == 0:
+        raise Refused("CMake file %s does not start with a # SPDX line" % donor_path)
+    eol = split_eol(lines[0])[1] or b"\n"
+    out = [text + eol for text in CMAKE_HEADER] + [b"#" + anchor(donor_path, blob, commit)[2:] + eol]
+    donor_body = lines[index:]
+    target_body = [rename_literals(rename_types(line, mapping["TYPE"]), mapping["LITERAL"], seen) for line in donor_body]
+    renamed = [rename_literals(rename_types(line, mapping["TYPE"]), mapping["LITERAL"], {}) for line in donor_body]
+    target_bytes = b"".join(target_body)
+    return b"".join(out) + target_bytes, b"".join(donor_body) == target_bytes, b"".join(renamed) == target_bytes, 0
+
+
 def relocate(data: bytes, donor_path: str, blob: str, commit: str, mapping: dict, seen: dict) -> tuple[bytes, bool, bool, int]:
+    if donor_path.endswith("CMakeLists.txt"):
+        return relocate_cmake(data, donor_path, blob, commit, mapping, seen)
     if donor_path.endswith((".c", ".h")):
         return relocate_c(data, donor_path, blob, commit, mapping, seen)
     return relocate_java(data, donor_path, blob, commit, mapping, seen)

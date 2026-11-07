@@ -11,6 +11,8 @@
 #   3        differential.sh: donor closure vs relocated classes byte-identical (oracle outputs, wire and M3EC corpora,
 #            format oracle digests, cache traces, decoder agreement and four-way probe reports), mutants refused,
 #            allocation bytes/op equal
+#   4        native leaf, Linux hosts only (SKIP elsewhere): native-gate.sh over the differential scratch (javac -h headers,
+#            gcc -Werror, CMake build + ctest, -Xcheck:jni oracles donor vs relocated, JNI vs Java parity, mutant refused)
 #   naming   jdk_naming.py apply --only m3/compression/ reports 0 moves, 0 rewrites, 0 refusals (new files staged first)
 # Every JVM gets -Djava.io.tmpdir=<scratch>/tmp (surefire through -DargLine).
 # usage: JAVA_HOME=<JDK 21> verify.sh <donor-git-dir> <donor-rev> <scratch-dir> [maven-repo-local [maven-repo-local-tail]]
@@ -55,6 +57,16 @@ if bash "$RECIPE_DIR/differential.sh" "$DONOR_GIT" "$REV" "$SCRATCH/differential
     gate 3_differential PASS "$(grep -E ' (IDENTICAL|DIFFERENT) |^mutant ' "$SCRATCH/differential.log" | awk '{ if ($1 == "mutant") print $2"="$3; else print $1"="$2 }' | tr '\n' ' ')"
 else
     gate 3_differential FAIL "log=$SCRATCH/differential.log"; tail -8 "$SCRATCH/differential.log"
+fi
+
+if [ -f "$RECIPE_DIR/native-gate.sh" ] && [ "$(uname -s)" = Linux ]; then   # the native leaf's JNI lanes need a Linux host
+    if bash "$RECIPE_DIR/native-gate.sh" "$SCRATCH/differential" "$SCRATCH/native-gate" > "$SCRATCH/native-gate.log" 2>&1; then
+        gate 4_native PASS "$(grep -E 'IDENTICAL|MATCH|tests passed|^parity|^mutant' "$SCRATCH/native-gate.log" | cut -c1-90 | tr '\n' ';')"
+    else
+        gate 4_native FAIL "log=$SCRATCH/native-gate.log"; grep FAIL "$SCRATCH/native-gate.log" | head -8
+    fi
+elif [ -f "$RECIPE_DIR/native-gate.sh" ]; then
+    gate 4_native SKIP "not a Linux host: run native-gate.sh <scratch>/differential <out> there (GATES.tsv native_gate)"
 fi
 
 naming=$(cd "$ROOT" && python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/compression/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)

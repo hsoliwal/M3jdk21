@@ -29,6 +29,9 @@
 # (i) Mutant lane of the leaf: LZ4 decoder MIN_MATCH 4 -> 3, Snappy decoder COPY_1 length base 4 -> 3, LZ4 decoder
 #     offset-0 check removed (the refusal changes class) are refused by the agreement oracle; a four-way index that
 #     evicts even when a way is vacant changes the candidate trace of the probe (refused against the donor trace).
+# Native leaf (fourth commit): the donor C files of the map are written byte for byte to <scratch>/native for
+# native-gate.sh, and (j) the donor oracles of the JNI owner (M3LzSelfTest, M3LzFourWayNativeInteropSelfTest) print
+# byte-identical output on their Java lanes (no library here; the JNI lanes run in native-gate.sh on a Linux host).
 # The donor package comes from RELOCATION_MAP.tsv next to this script, so no file in the naming scope names it.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir> [inputs]
 set -euo pipefail
@@ -59,6 +62,13 @@ for path in "${donor_files[@]}"; do
 done
 echo "DONOR $donor_commit closure=$compiled (JUnit wrappers skipped)"
 "$JAVA_BIN/javac" --release 21 -Xlint:all -Werror -d "$SCRATCH/classes" $(find "$SCRATCH/src" -name '*.java')
+# native leaf: the donor C files of the map, byte for byte, for native-gate.sh (Linux host)
+mkdir -p "$SCRATCH/native"
+mapfile -t donor_native < <(awk -F'\t' '$1=="FILE" && $2 ~ /\.(c|h)$/ {print $2}' "$MAP")
+for path in "${donor_native[@]}"; do
+    git -C "$DONOR_GIT" show "$REV:$path" > "$SCRATCH/native/$(basename "$path")"
+done
+echo "DONOR native files=${#donor_native[@]} -> $SCRATCH/native"
 status=PASS
 verdict() { # label donor-file relocated-file
     local sha_d sha_r v=IDENTICAL
@@ -174,5 +184,12 @@ trace_mutant() { # label file sed-expression: the probe over the mutant index mu
 }
 trace_mutant fourway_evicts_with_vacant_way M3LzFourWayCandidateIndex.java \
     's/int slot = vacant >= 0 ? vacant : oldest;/int slot = oldest >= 0 ? oldest : vacant;/'
+# (j) native leaf, Java lanes (no library on this host; the JNI lanes run in native-gate.sh): the donor oracles of the
+#     JNI owner print byte-identical output with the Java kernels as the backend
+for oracle in M3LzSelfTest M3LzFourWayNativeInteropSelfTest; do
+    "${JAVA[@]}" -cp "$SCRATCH/classes" "$donor_package.$oracle" > "$SCRATCH/out/donor-$oracle.txt"
+    "${JAVA[@]}" -cp "$RELOCATED_CP" "$target_package.$oracle" > "$SCRATCH/out/relocated-$oracle.txt"
+    verdict "$oracle" "$SCRATCH/out/donor-$oracle.txt" "$SCRATCH/out/relocated-$oracle.txt"
+done
 echo "DIFFERENTIAL $status"
 [ "$status" = PASS ]
