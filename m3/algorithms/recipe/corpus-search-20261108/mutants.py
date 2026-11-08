@@ -82,7 +82,7 @@ def main(argv=None) -> int:
             return 2
         cp = sep.join([str(work / "classes"), str(MODULE / "target" / "classes"),
                        str(MODULE / "target" / "test-classes"), args.dep_cp])
-        dump = run([java, "-Xmx256m"] + tmp + ["-cp", cp, "jdk.m3.algorithm.M3CorpusSearchDump", "--seed", SEED,
+        dump = run([java, "-Xmx256m"] + tmp + ["-cp", cp, "jdk.m3.algorithm.CorpusSearchDump", "--seed", SEED,
                                               "--cases", CASES])
         digest = hashlib.sha256(dump.stdout).hexdigest()
         dump_kill = dump.returncode != 0 or digest != args.dump_sha256

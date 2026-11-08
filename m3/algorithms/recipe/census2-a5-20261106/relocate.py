@@ -54,7 +54,7 @@ NAIVE = "na" + chr(0xEF) + "ve"
 # tracked text, which would move this anchor off the donor bytes (RECIPE_MEMORY.tsv row 1).
 DONOR_PACKAGE = "com" + ".m3.tools.cpu"
 
-# The flow half of the wave9 contract, mapped onto the landed owner jdk.m3.algorithm.M3MinCostFlow (PR #2551):
+# The flow half of the wave9 contract, mapped onto the landed owner jdk.m3.algorithm.MinCostFlow (PR #2551):
 # solve(vertices, from, to, capacity, unitCost, source, sink, demand) -> Result {flow, cost, edgeFlows}; it refuses
 # self-loop edges and has no work budget. The rectangle-intersection half has no M3 owner (M3PackedSpatialIndex).
 ADAPTER = """    //FLLDCIM: MRL - census2 P2-070 (crate m3-cpu-structured-wave9-20261031): the wave9 call shape over the landed owner

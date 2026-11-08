@@ -3,7 +3,7 @@
 
 Census pass 2, leaf P2-070 (crate `m3-cpu-structured-wave9-20261031`, com.synexia develop
 `d5ad5090d87e`). The census matched the crate's `M3MinCostFlow` template by name to the owner landed by #2551
-(`jdk.m3.algorithm.M3MinCostFlow`, recipe [`../mincost-flow-20261106`](../mincost-flow-20261106/README.md)), whose
+(`jdk.m3.algorithm.MinCostFlow`, recipe [`../mincost-flow-20261106`](../mincost-flow-20261106/README.md)), whose
 map already holds that template as the SKIP row "template variant". Decision: **tests only**. The crate's flow
 contract becomes an extra oracle of the landed owner. The wave9 solver stays a NEC row: one fast implementation per
 JDK, never a second owner. The mapped contract passes on the owner, so there is no owner edit.

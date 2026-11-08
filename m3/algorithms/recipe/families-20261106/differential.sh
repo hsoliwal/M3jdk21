@@ -3,12 +3,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # Gate 3 of the relocation: the donor families (compiled from the donor git tree with javac --release 21 -Xlint:all
 # -Werror) and the relocated families (target/classes of this module) replay the same seeded inputs through the
-# reflective driver M3AlgorithmFamiliesDump (test scope); the donor dump, normalized by the PACKAGE, TYPE and
+# reflective driver AlgorithmFamiliesDump (test scope); the donor dump, normalized by the PACKAGE, TYPE and
 # DROP_DUMP rows of RELOCATION_MAP.tsv (type names inside messages and catalog strings; the dropped catalog row),
 # must be byte-identical to the relocated dump. Prints DIFFERENTIAL PASS|FAIL with the three sha256 digests.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir> [cases-per-family]   (JAVA_HOME = JDK 21; after mvn package)
 # env:   DEP_CP = the module's dependency jars for the relocated side (m3-collections and m3-arrays: the monitor
-#        is an adapter over jdk.m3.collections.M3ProgressMonitor), joined with ; on Windows and : elsewhere
+#        is an adapter over jdk.m3.collections.ProgressMonitor), joined with ; on Windows and : elsewhere
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
@@ -21,7 +21,7 @@ mkdir -p "$3/src" "$3/classes"
 SCRATCH=$(winpath "$3")
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
-DRIVER=jdk.m3.algorithm.M3AlgorithmFamiliesDump
+DRIVER=jdk.m3.algorithm.AlgorithmFamiliesDump
 # the JIT replaces a hot implicit exception by a preallocated one without message or trace, at a point that
 # depends on the run: with the optimization off the exception messages of the two dumps are deterministic
 JVM_FLAGS="-XX:-OmitStackTraceInFastThrow"

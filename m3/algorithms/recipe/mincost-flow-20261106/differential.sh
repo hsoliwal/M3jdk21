@@ -6,7 +6,7 @@
 #      tree and from the relocated oracle, each in JIT and -Xint;
 #   3  the chosen donor solver (FILE row under src/main/java, compiled from the donor tree with javac --release 21
 #      -Xlint:all -Werror) and the relocated solver (target/classes) replay the same seeded networks through the
-#      reflective driver M3MinCostFlowDump (test scope); the two dumps (flow, cost, every edge flow, refusals) must
+#      reflective driver MinCostFlowDump (test scope); the two dumps (flow, cost, every edge flow, refusals) must
 #      be byte-identical: the dump names no type, so no normalization is needed;
 #   3b the same at a smaller random count under -Xint on both sides, equal to the relocated JIT dump of that count;
 #   4  cross-solver agreement: the relocated solver against the unchosen donor solver (the SKIP row whose target
@@ -27,7 +27,7 @@ mkdir -p "$3"
 SCRATCH=$(winpath "$3")
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
-DRIVER=jdk.m3.algorithm.M3MinCostFlowDump
+DRIVER=jdk.m3.algorithm.MinCostFlowDump
 FIGURE="M3_MINCOST_FLOW_PASS checks=6671"
 LIMIT=120
 # implicit exceptions keep their messages (the families lesson), so refusal lines are deterministic

@@ -29,21 +29,21 @@ import java.util.SplittableRandom;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import jdk.m3.algorithm.M3AlgorithmShapeCatalog;
-import jdk.m3.algorithm.M3ArrayAlgorithms;
-import jdk.m3.algorithm.M3BacktrackingAlgorithms;
-import jdk.m3.algorithm.M3BitAlgorithms;
-import jdk.m3.algorithm.M3DynamicProgrammingAlgorithms;
-import jdk.m3.algorithm.M3GraphAlgorithms;
-import jdk.m3.algorithm.M3HeapAlgorithms;
-import jdk.m3.algorithm.M3IntervalGreedyAlgorithms;
-import jdk.m3.algorithm.M3ListAlgorithms;
-import jdk.m3.algorithm.M3MatrixAlgorithms;
-import jdk.m3.algorithm.M3ProgressMonitor;
-import jdk.m3.algorithm.M3StackAlgorithms;
-import jdk.m3.algorithm.M3StringAlgorithms;
-import jdk.m3.algorithm.M3StringTrie;
-import jdk.m3.algorithm.M3TreeAlgorithms;
+import jdk.m3.algorithm.AlgorithmShapeCatalog;
+import jdk.m3.algorithm.ArrayAlgorithms;
+import jdk.m3.algorithm.BacktrackingAlgorithms;
+import jdk.m3.algorithm.BitAlgorithms;
+import jdk.m3.algorithm.DynamicProgrammingAlgorithms;
+import jdk.m3.algorithm.GraphAlgorithms;
+import jdk.m3.algorithm.HeapAlgorithms;
+import jdk.m3.algorithm.IntervalGreedyAlgorithms;
+import jdk.m3.algorithm.ListAlgorithms;
+import jdk.m3.algorithm.MatrixAlgorithms;
+import jdk.m3.algorithm.ProgressMonitor;
+import jdk.m3.algorithm.StackAlgorithms;
+import jdk.m3.algorithm.StringAlgorithms;
+import jdk.m3.algorithm.StringTrie;
+import jdk.m3.algorithm.TreeAlgorithms;
 import jdk.m3.collections.range.LongFenwickTree;
 import jdk.m3.tools.cpu.M3ArrayGraph;
 import jdk.m3.tools.cpu.M3BipartiteMatching;
@@ -62,7 +62,7 @@ import jdk.m3.tools.cpu.M3SuffixArray;
 public final class OverlapAgreement {
     static final long SEED = 20261106L;
     private static final int CASES = 2_000;
-    private static final M3ProgressMonitor NONE = M3ProgressMonitor.none();
+    private static final ProgressMonitor NONE = ProgressMonitor.none();
 
     private record Outcome(String donor, String owner, boolean equivalent) {
     }
@@ -182,84 +182,84 @@ public final class OverlapAgreement {
     // ---------------------------------------------------------------- IntAlgorithms vs the landed array families
 
     private static void arrays() {
-        compare("IntAlgorithms.lowerBound(int[],int)+(..,M3ProgressMonitor)", "M3ArrayAlgorithms.lowerBound", CASES,
+        compare("IntAlgorithms.lowerBound(int[],int)+(..,M3ProgressMonitor)", "ArrayAlgorithms.lowerBound", CASES,
                 r -> {
                     int[] a = sorted(ints(r, r.nextInt(0, 30), 20));
                     int t = r.nextInt(5) == 0 ? (r.nextBoolean() ? Integer.MIN_VALUE : Integer.MAX_VALUE)
                             : r.nextInt(-25, 26);
                     return same(run(() -> IntAlgorithms.lowerBound(a, t)) + "/"
                             + run(() -> IntAlgorithms.lowerBound(a, t, null)),
-                            run(() -> M3ArrayAlgorithms.lowerBound(a, t, NONE)) + "/"
-                            + run(() -> M3ArrayAlgorithms.lowerBound(a, t, NONE)));
+                            run(() -> ArrayAlgorithms.lowerBound(a, t, NONE)) + "/"
+                            + run(() -> ArrayAlgorithms.lowerBound(a, t, NONE)));
                 });
-        compare("IntAlgorithms.upperBound(int[],int)+(..,M3ProgressMonitor)", "M3ArrayAlgorithms.upperBound", CASES,
+        compare("IntAlgorithms.upperBound(int[],int)+(..,M3ProgressMonitor)", "ArrayAlgorithms.upperBound", CASES,
                 r -> {
                     int[] a = sorted(ints(r, r.nextInt(0, 30), 20));
                     int t = r.nextInt(5) == 0 ? (r.nextBoolean() ? Integer.MIN_VALUE : Integer.MAX_VALUE)
                             : r.nextInt(-25, 26);
                     return same(run(() -> IntAlgorithms.upperBound(a, t)) + "/"
                             + run(() -> IntAlgorithms.upperBound(a, t, null)),
-                            run(() -> M3ArrayAlgorithms.upperBound(a, t, NONE)) + "/"
-                            + run(() -> M3ArrayAlgorithms.upperBound(a, t, NONE)));
+                            run(() -> ArrayAlgorithms.upperBound(a, t, NONE)) + "/"
+                            + run(() -> ArrayAlgorithms.upperBound(a, t, NONE)));
                 });
-        compare("IntAlgorithms.twoSumIndices(int[],int)+(..,M3ProgressMonitor)", "M3ArrayAlgorithms.twoSum", CASES,
+        compare("IntAlgorithms.twoSumIndices(int[],int)+(..,M3ProgressMonitor)", "ArrayAlgorithms.twoSum", CASES,
                 r -> {
                     int[] a = ints(r, r.nextInt(0, 12), 20);
                     int t = r.nextInt(4) == 0 ? (r.nextBoolean() ? Integer.MIN_VALUE : Integer.MAX_VALUE)
                             : r.nextInt(-40, 41);
                     return same(run(() -> IntAlgorithms.twoSumIndices(a, t)) + "/"
                             + run(() -> IntAlgorithms.twoSumIndices(a, t, null)),
-                            run(() -> M3ArrayAlgorithms.twoSum(a, t, NONE)) + "/"
-                            + run(() -> M3ArrayAlgorithms.twoSum(a, t, NONE)));
+                            run(() -> ArrayAlgorithms.twoSum(a, t, NONE)) + "/"
+                            + run(() -> ArrayAlgorithms.twoSum(a, t, NONE)));
                 });
-        compare("IntAlgorithms.sortedTwoSumIndices(int[],int)", "M3ArrayAlgorithms.sortedTwoSum", CASES, r -> {
+        compare("IntAlgorithms.sortedTwoSumIndices(int[],int)", "ArrayAlgorithms.sortedTwoSum", CASES, r -> {
             int[] a = sorted(ints(r, r.nextInt(0, 12), 20));
             int t = r.nextInt(-40, 41);
             return same(run(() -> IntAlgorithms.sortedTwoSumIndices(a, t)),
-                    run(() -> M3ArrayAlgorithms.sortedTwoSum(a, t, NONE)));
+                    run(() -> ArrayAlgorithms.sortedTwoSum(a, t, NONE)));
         });
         compare("IntAlgorithms.slidingWindowMaximum(int[],int)+(..,M3ProgressMonitor)",
-                "M3ArrayAlgorithms.maxSlidingWindow", CASES, r -> {
+                "ArrayAlgorithms.maxSlidingWindow", CASES, r -> {
                     int[] a = ints(r, r.nextInt(0, 20), 20);
                     int w = r.nextInt(-1, 22);
                     return same(run(() -> IntAlgorithms.slidingWindowMaximum(a, w)) + "/"
                             + run(() -> IntAlgorithms.slidingWindowMaximum(a, w, null)),
-                            run(() -> M3ArrayAlgorithms.maxSlidingWindow(a, w, NONE)) + "/"
-                            + run(() -> M3ArrayAlgorithms.maxSlidingWindow(a, w, NONE)));
+                            run(() -> ArrayAlgorithms.maxSlidingWindow(a, w, NONE)) + "/"
+                            + run(() -> ArrayAlgorithms.maxSlidingWindow(a, w, NONE)));
                 });
-        compare("IntAlgorithms.dailyTemperatures(int[])", "M3StackAlgorithms.dailyTemperatures", CASES, r -> {
+        compare("IntAlgorithms.dailyTemperatures(int[])", "StackAlgorithms.dailyTemperatures", CASES, r -> {
             int[] a = ints(r, r.nextInt(0, 20), 20);
             return same(run(() -> IntAlgorithms.dailyTemperatures(a)),
-                    run(() -> M3StackAlgorithms.dailyTemperatures(a, NONE)));
+                    run(() -> StackAlgorithms.dailyTemperatures(a, NONE)));
         });
-        compare("IntAlgorithms.prefixSums(int[])", "M3ArrayAlgorithms.prefixSums", CASES, r -> {
+        compare("IntAlgorithms.prefixSums(int[])", "ArrayAlgorithms.prefixSums", CASES, r -> {
             int[] a = ints(r, r.nextInt(0, 20), 1_000);
-            return same(run(() -> IntAlgorithms.prefixSums(a)), run(() -> M3ArrayAlgorithms.prefixSums(a, NONE)));
+            return same(run(() -> IntAlgorithms.prefixSums(a)), run(() -> ArrayAlgorithms.prefixSums(a, NONE)));
         });
-        compare("IntAlgorithms.rangeSum(long[],int,int)", "M3ArrayAlgorithms.rangeSum", CASES, r -> {
-            long[] p = M3ArrayAlgorithms.prefixSums(ints(r, r.nextInt(0, 20), 1_000), NONE);
+        compare("IntAlgorithms.rangeSum(long[],int,int)", "ArrayAlgorithms.rangeSum", CASES, r -> {
+            long[] p = ArrayAlgorithms.prefixSums(ints(r, r.nextInt(0, 20), 1_000), NONE);
             int a = r.nextInt(-1, p.length + 1);
             int b = r.nextInt(-1, p.length + 1);
-            return same(run(() -> IntAlgorithms.rangeSum(p, a, b)), run(() -> M3ArrayAlgorithms.rangeSum(p, a, b,
+            return same(run(() -> IntAlgorithms.rangeSum(p, a, b)), run(() -> ArrayAlgorithms.rangeSum(p, a, b,
                     NONE)));
         });
-        compare("IntAlgorithms.maxSubarraySum(int[])", "M3ArrayAlgorithms.maxSubarray", CASES, r -> {
+        compare("IntAlgorithms.maxSubarraySum(int[])", "ArrayAlgorithms.maxSubarray", CASES, r -> {
             int[] a = ints(r, r.nextInt(0, 20), 1_000);
-            return same(run(() -> IntAlgorithms.maxSubarraySum(a)), run(() -> M3ArrayAlgorithms.maxSubarray(a, NONE)));
+            return same(run(() -> IntAlgorithms.maxSubarraySum(a)), run(() -> ArrayAlgorithms.maxSubarray(a, NONE)));
         });
-        compare("IntAlgorithms.productExceptSelf(int[])", "M3ArrayAlgorithms.productExceptSelf", CASES, r -> {
+        compare("IntAlgorithms.productExceptSelf(int[])", "ArrayAlgorithms.productExceptSelf", CASES, r -> {
             int[] a = r.nextInt(5) == 0 ? ints(r, r.nextInt(0, 8), 1_000) : small(r, r.nextInt(0, 10), 9);
             return same(run(() -> IntAlgorithms.productExceptSelf(a)),
-                    run(() -> M3ArrayAlgorithms.productExceptSelf(a, NONE)));
+                    run(() -> ArrayAlgorithms.productExceptSelf(a, NONE)));
         });
-        compare("IntAlgorithms.missingNumber(int[])", "M3BitAlgorithms.missingNumber", CASES, r -> {
+        compare("IntAlgorithms.missingNumber(int[])", "BitAlgorithms.missingNumber", CASES, r -> {
             int n = r.nextInt(0, 20);
             int[] a = r.ints(0, n + 1).distinct().limit(n).toArray();
             int[] input = r.nextInt(10) == 0 ? ints(r, n, 30) : a;
             return same(run(() -> IntAlgorithms.missingNumber(input)),
-                    run(() -> M3BitAlgorithms.missingNumber(input, NONE)));
+                    run(() -> BitAlgorithms.missingNumber(input, NONE)));
         });
-        compare("IntAlgorithms.searchRotated(int[],int)", "M3ArrayAlgorithms.searchRotated", CASES, r -> {
+        compare("IntAlgorithms.searchRotated(int[],int)", "ArrayAlgorithms.searchRotated", CASES, r -> {
             int[] base = r.ints(-100, 100).distinct().limit(r.nextInt(0, 20)).sorted().toArray();
             int shift = base.length == 0 ? 0 : r.nextInt(base.length);
             int[] a = new int[base.length];
@@ -268,56 +268,56 @@ public final class OverlapAgreement {
             }
             int t = r.nextInt(-110, 110);
             return same(run(() -> IntAlgorithms.searchRotated(a, t)),
-                    run(() -> M3ArrayAlgorithms.searchRotated(a, t, NONE)));
+                    run(() -> ArrayAlgorithms.searchRotated(a, t, NONE)));
         });
-        compare("IntAlgorithms.canJump(int[])", "M3IntervalGreedyAlgorithms.canReachEnd", CASES, r -> {
+        compare("IntAlgorithms.canJump(int[])", "IntervalGreedyAlgorithms.canReachEnd", CASES, r -> {
             int[] a = r.nextInt(5) == 0 ? ints(r, r.nextInt(0, 10), 5) : small(r, r.nextInt(0, 12), 3);
-            return same(run(() -> IntAlgorithms.canJump(a)), run(() -> M3IntervalGreedyAlgorithms.canReachEnd(a,
+            return same(run(() -> IntAlgorithms.canJump(a)), run(() -> IntervalGreedyAlgorithms.canReachEnd(a,
                     NONE)));
         });
-        compare("IntAlgorithms.minJumps(int[])", "M3IntervalGreedyAlgorithms.minimumJumps", CASES, r -> {
+        compare("IntAlgorithms.minJumps(int[])", "IntervalGreedyAlgorithms.minimumJumps", CASES, r -> {
             int[] a = r.nextInt(5) == 0 ? ints(r, r.nextInt(0, 10), 5) : small(r, r.nextInt(0, 12), 3);
-            return same(run(() -> IntAlgorithms.minJumps(a)), run(() -> M3IntervalGreedyAlgorithms.minimumJumps(a,
+            return same(run(() -> IntAlgorithms.minJumps(a)), run(() -> IntervalGreedyAlgorithms.minimumJumps(a,
                     NONE)));
         });
-        compare("IntAlgorithms.trapRainWater(int[])", "M3ArrayAlgorithms.trapRainWater", CASES, r -> {
+        compare("IntAlgorithms.trapRainWater(int[])", "ArrayAlgorithms.trapRainWater", CASES, r -> {
             int[] a = r.nextInt(8) == 0 ? ints(r, r.nextInt(0, 10), 50) : small(r, r.nextInt(0, 20), 9);
-            return same(run(() -> IntAlgorithms.trapRainWater(a)), run(() -> M3ArrayAlgorithms.trapRainWater(a,
+            return same(run(() -> IntAlgorithms.trapRainWater(a)), run(() -> ArrayAlgorithms.trapRainWater(a,
                     NONE)));
         });
-        compare("IntAlgorithms.kthLargest(int[],int)", "M3HeapAlgorithms.kthLargest", CASES, r -> {
+        compare("IntAlgorithms.kthLargest(int[],int)", "HeapAlgorithms.kthLargest", CASES, r -> {
             int[] a = ints(r, r.nextInt(0, 20), 30);
             int k = r.nextInt(-1, a.length + 2);
-            return same(run(() -> IntAlgorithms.kthLargest(a, k)), run(() -> M3HeapAlgorithms.kthLargest(a, k, NONE)));
+            return same(run(() -> IntAlgorithms.kthLargest(a, k)), run(() -> HeapAlgorithms.kthLargest(a, k, NONE)));
         });
-        compare("IntAlgorithms.topKFrequent(int[],int)", "M3ArrayAlgorithms.topKFrequent", CASES, r -> {
+        compare("IntAlgorithms.topKFrequent(int[],int)", "ArrayAlgorithms.topKFrequent", CASES, r -> {
             int[] a = small(r, r.nextInt(0, 25), 4);
             int k = r.nextInt(-1, 6);
             String donor = run(() -> sorted(IntAlgorithms.topKFrequent(a, k)));
-            String owner = run(() -> sorted(M3ArrayAlgorithms.topKFrequent(a, k, NONE).stream()
+            String owner = run(() -> sorted(ArrayAlgorithms.topKFrequent(a, k, NONE).stream()
                     .mapToInt(Integer::intValue).toArray()));
             return new Outcome(donor, owner, validTopK(a, k, donor) && validTopK(a, k, owner));
         });
-        compare("IntAlgorithms.mergeIntervals(int[][])", "M3IntervalGreedyAlgorithms.merge", CASES, r -> {
+        compare("IntAlgorithms.mergeIntervals(int[][])", "IntervalGreedyAlgorithms.merge", CASES, r -> {
             int[][] rows = intervals(r);
             return same(run(() -> IntAlgorithms.mergeIntervals(rows)), run(() -> toRows(
-                    M3IntervalGreedyAlgorithms.merge(toIntervals(rows), NONE))));
+                    IntervalGreedyAlgorithms.merge(toIntervals(rows), NONE))));
         });
-        compare("IntAlgorithms.insertInterval(int[][],int[])", "M3IntervalGreedyAlgorithms.insert", CASES, r -> {
+        compare("IntAlgorithms.insertInterval(int[][],int[])", "IntervalGreedyAlgorithms.insert", CASES, r -> {
             int[][] rows = IntAlgorithms.mergeIntervals(Arrays.stream(intervals(r)).filter(x -> x[0] <= x[1])
                     .toArray(int[][]::new));
             int start = r.nextInt(-5, 40);
             int[] add = {start, start + r.nextInt(-2, 10)};
             return same(run(() -> IntAlgorithms.insertInterval(rows, add)), run(() -> toRows(
-                    M3IntervalGreedyAlgorithms.insert(toIntervals(rows), new M3IntervalGreedyAlgorithms.Interval(add[0],
+                    IntervalGreedyAlgorithms.insert(toIntervals(rows), new IntervalGreedyAlgorithms.Interval(add[0],
                             add[1]), NONE))));
         });
-        compare("IntAlgorithms.threeSumZero(int[])", "M3ArrayAlgorithms.threeSum", CASES, r -> {
+        compare("IntAlgorithms.threeSumZero(int[])", "ArrayAlgorithms.threeSum", CASES, r -> {
             int[] a = r.nextInt(8) == 0 ? ints(r, r.nextInt(0, 10), 5) : small(r, r.nextInt(0, 16), 6);
             return same(run(() -> canonicalRows(IntAlgorithms.threeSumZero(a))),
-                    run(() -> canonicalLists(M3ArrayAlgorithms.threeSum(a, NONE))));
+                    run(() -> canonicalLists(ArrayAlgorithms.threeSum(a, NONE))));
         });
-        compare("IntAlgorithms.sortColors012(int[])", "M3ArrayAlgorithms.sortColors", CASES, r -> {
+        compare("IntAlgorithms.sortColors012(int[])", "ArrayAlgorithms.sortColors", CASES, r -> {
             int[] a = small(r, r.nextInt(0, 20), 1);
             for (int i = 0; i < a.length; i++) {
                 a[i] = r.nextInt(30) == 0 ? 3 : Math.abs(a[i]) + (r.nextBoolean() ? 1 : 0);
@@ -327,7 +327,7 @@ public final class OverlapAgreement {
                 IntAlgorithms.sortColors012(a);
                 return a;
             }), run(() -> {
-                M3ArrayAlgorithms.sortColors(b, NONE);
+                ArrayAlgorithms.sortColors(b, NONE);
                 return b;
             }));
         });
@@ -387,15 +387,15 @@ public final class OverlapAgreement {
         return rows;
     }
 
-    private static List<M3IntervalGreedyAlgorithms.Interval> toIntervals(int[][] rows) {
-        List<M3IntervalGreedyAlgorithms.Interval> out = new ArrayList<>();
+    private static List<IntervalGreedyAlgorithms.Interval> toIntervals(int[][] rows) {
+        List<IntervalGreedyAlgorithms.Interval> out = new ArrayList<>();
         for (int[] row : rows) {
-            out.add(new M3IntervalGreedyAlgorithms.Interval(row[0], row[1]));
+            out.add(new IntervalGreedyAlgorithms.Interval(row[0], row[1]));
         }
         return out;
     }
 
-    private static int[][] toRows(List<M3IntervalGreedyAlgorithms.Interval> intervals) {
+    private static int[][] toRows(List<IntervalGreedyAlgorithms.Interval> intervals) {
         return intervals.stream().map(i -> new int[] {i.start(), i.end()}).toArray(int[][]::new);
     }
 
@@ -433,7 +433,7 @@ public final class OverlapAgreement {
     }
 
     private static void graphsAndStrings() {
-        compare("GraphAlgorithms.bfsDistances(CsrGraph,int)+(..,M3ProgressMonitor)", "M3GraphAlgorithms.shortestPaths",
+        compare("GraphAlgorithms.bfsDistances(CsrGraph,int)+(..,M3ProgressMonitor)", "GraphAlgorithms.shortestPaths",
                 CASES, r -> {
                     int n = r.nextInt(1, 15);
                     int[][] e = edges(r, n, 30);
@@ -441,11 +441,11 @@ public final class OverlapAgreement {
                     int s = r.nextInt(n);
                     return same(run(() -> IntAlgorithmsView.reachable(GraphAlgorithms.bfsDistances(g, s))) + "/"
                             + run(() -> IntAlgorithmsView.reachable(GraphAlgorithms.bfsDistances(g, s, null))),
-                            run(() -> new TreeMap<>(M3GraphAlgorithms.shortestPaths(adjacency(n, g.offsets(),
+                            run(() -> new TreeMap<>(GraphAlgorithms.shortestPaths(adjacency(n, g.offsets(),
                                     g.edges()), s, NONE))) + "/" + run(() -> new TreeMap<>(
-                                    M3GraphAlgorithms.shortestPaths(adjacency(n, g.offsets(), g.edges()), s, NONE))));
+                                    GraphAlgorithms.shortestPaths(adjacency(n, g.offsets(), g.edges()), s, NONE))));
                 });
-        compare("GraphAlgorithms.topologicalSort(CsrGraph)", "M3GraphAlgorithms.topologicalOrder", CASES, r -> {
+        compare("GraphAlgorithms.topologicalSort(CsrGraph)", "GraphAlgorithms.topologicalOrder", CASES, r -> {
             int n = r.nextInt(1, 12);
             int[][] e = edges(r, n, 14);
             if (r.nextInt(4) != 0) {
@@ -458,12 +458,12 @@ public final class OverlapAgreement {
             }
             GraphAlgorithms.CsrGraph g = GraphAlgorithms.CsrGraph.directed(n, e[0], e[1]);
             String donor = run(() -> GraphAlgorithms.topologicalSort(g));
-            String owner = run(() -> M3GraphAlgorithms.topologicalOrder(adjacency(n, g.offsets(), g.edges()),
+            String owner = run(() -> GraphAlgorithms.topologicalOrder(adjacency(n, g.offsets(), g.edges()),
                     Comparator.<Integer>naturalOrder(), NONE));
             return new Outcome(donor, owner, isTopological(n, e[0], e[1], donor)
                     && isTopological(n, e[0], e[1], owner));
         });
-        compare("GraphAlgorithms.dijkstra(WeightedCsrGraph,int)+(..,M3ProgressMonitor)", "M3GraphAlgorithms.dijkstra",
+        compare("GraphAlgorithms.dijkstra(WeightedCsrGraph,int)+(..,M3ProgressMonitor)", "GraphAlgorithms.dijkstra",
                 CASES, r -> {
                     int n = r.nextInt(1, 12);
                     int[][] e = edges(r, n, 24);
@@ -473,68 +473,68 @@ public final class OverlapAgreement {
                                 ? Long.MAX_VALUE / 2 : r.nextLong(0, 100);
                     }
                     GraphAlgorithms.WeightedCsrGraph g = GraphAlgorithms.WeightedCsrGraph.directed(n, e[0], e[1], w);
-                    Map<Integer, List<M3GraphAlgorithms.WeightedEdge<Integer>>> map = new HashMap<>();
+                    Map<Integer, List<GraphAlgorithms.WeightedEdge<Integer>>> map = new HashMap<>();
                     for (int v = 0; v < n; v++) {
                         map.put(v, new ArrayList<>());
                     }
                     for (int k = 0; k < w.length; k++) {
-                        map.get(e[0][k]).add(new M3GraphAlgorithms.WeightedEdge<>(e[1][k], w[k]));
+                        map.get(e[0][k]).add(new GraphAlgorithms.WeightedEdge<>(e[1][k], w[k]));
                     }
                     int s = r.nextInt(n);
                     return same(run(() -> IntAlgorithmsView.reachable(GraphAlgorithms.dijkstra(g, s))) + "/"
                             + run(() -> IntAlgorithmsView.reachable(GraphAlgorithms.dijkstra(g, s, null))),
-                            run(() -> new TreeMap<>(M3GraphAlgorithms.dijkstra(map, s, NONE))) + "/"
-                            + run(() -> new TreeMap<>(M3GraphAlgorithms.dijkstra(map, s, NONE))));
+                            run(() -> new TreeMap<>(GraphAlgorithms.dijkstra(map, s, NONE))) + "/"
+                            + run(() -> new TreeMap<>(GraphAlgorithms.dijkstra(map, s, NONE))));
                 });
         compare("AdvancedGraphAlgorithms.stronglyConnectedComponents(CsrGraph)",
-                "M3GraphAlgorithms.stronglyConnectedComponents", CASES, r -> {
+                "GraphAlgorithms.stronglyConnectedComponents", CASES, r -> {
                     int n = r.nextInt(0, 14);
                     int[][] e = edges(r, n, 30);
                     GraphAlgorithms.CsrGraph g = GraphAlgorithms.CsrGraph.directed(n, e[0], e[1]);
                     return same(run(() -> partition(AdvancedGraphAlgorithms.stronglyConnectedComponents(g)
-                            .componentOf())), run(() -> partitionLists(M3GraphAlgorithms.stronglyConnectedComponents(
+                            .componentOf())), run(() -> partitionLists(GraphAlgorithms.stronglyConnectedComponents(
                             adjacency(n, g.offsets(), g.edges()), Comparator.<Integer>naturalOrder(), NONE))));
                 });
-        compare("AdvancedStringAlgorithms.zFunction(String)", "M3StringAlgorithms.zFunction", CASES, r -> {
+        compare("AdvancedStringAlgorithms.zFunction(String)", "StringAlgorithms.zFunction", CASES, r -> {
             String s = text(r, r.nextInt(0, 20), "ab");
-            return same(run(() -> AdvancedStringAlgorithms.zFunction(s)), run(() -> M3StringAlgorithms.zFunction(s,
+            return same(run(() -> AdvancedStringAlgorithms.zFunction(s)), run(() -> StringAlgorithms.zFunction(s,
                     NONE)));
         });
-        compare("AdvancedStringAlgorithms.longestPalindromeRange(String)", "M3StringAlgorithms.longestPalindrome",
+        compare("AdvancedStringAlgorithms.longestPalindromeRange(String)", "StringAlgorithms.longestPalindrome",
                 CASES, r -> {
                     String s = text(r, r.nextInt(0, 20), "abc");
                     String donor = run(() -> {
                         int[] range = AdvancedStringAlgorithms.longestPalindromeRange(s);
                         return s.substring(range[0], range[1]);
                     });
-                    String owner = run(() -> M3StringAlgorithms.longestPalindrome(s, NONE));
+                    String owner = run(() -> StringAlgorithms.longestPalindrome(s, NONE));
                     return new Outcome(donor, owner, donor.length() == owner.length() && palindrome(donor)
                             && palindrome(owner) && s.contains(donor) && s.contains(owner));
                 });
         compare("StringAlgorithms.longestSubstringWithoutRepeating(String)+(..,M3ProgressMonitor)",
-                "M3ArrayAlgorithms.longestDistinctSubstring", CASES, r -> {
+                "ArrayAlgorithms.longestDistinctSubstring", CASES, r -> {
                     String s = text(r, r.nextInt(0, 20), r.nextInt(4) == 0 ? "ab😀" : "abcd");
                     return same(run(() -> StringAlgorithms.longestSubstringWithoutRepeating(s)) + "/"
                             + run(() -> StringAlgorithms.longestSubstringWithoutRepeating(s, null)),
-                            run(() -> M3ArrayAlgorithms.longestDistinctSubstring(s, NONE)) + "/"
-                            + run(() -> M3ArrayAlgorithms.longestDistinctSubstring(s, NONE)));
+                            run(() -> ArrayAlgorithms.longestDistinctSubstring(s, NONE)) + "/"
+                            + run(() -> ArrayAlgorithms.longestDistinctSubstring(s, NONE)));
                 });
-        compare("StringAlgorithms.prefixFunction(String)", "M3StringAlgorithms.prefixFunction", CASES, r -> {
+        compare("StringAlgorithms.prefixFunction(String)", "StringAlgorithms.prefixFunction", CASES, r -> {
             String s = text(r, r.nextInt(0, 20), "ab");
-            return same(run(() -> StringAlgorithms.prefixFunction(s)), run(() -> M3StringAlgorithms.prefixFunction(s,
+            return same(run(() -> StringAlgorithms.prefixFunction(s)), run(() -> StringAlgorithms.prefixFunction(s,
                     NONE)));
         });
-        compare("StringAlgorithms.longestPalindromicSubstring(String)", "M3StringAlgorithms.longestPalindrome", CASES,
+        compare("StringAlgorithms.longestPalindromicSubstring(String)", "StringAlgorithms.longestPalindrome", CASES,
                 r -> {
                     String s = text(r, r.nextInt(0, 20), "abc");
                     String donor = run(() -> StringAlgorithms.longestPalindromicSubstring(s));
-                    String owner = run(() -> M3StringAlgorithms.longestPalindrome(s, NONE));
+                    String owner = run(() -> StringAlgorithms.longestPalindrome(s, NONE));
                     return new Outcome(donor, owner, donor.length() == owner.length() && palindrome(donor)
                             && palindrome(owner));
                 });
-        compare("StringAlgorithms.validParentheses(String)", "M3StackAlgorithms.validBrackets", CASES, r -> {
+        compare("StringAlgorithms.validParentheses(String)", "StackAlgorithms.validBrackets", CASES, r -> {
             String s = text(r, r.nextInt(0, 12), r.nextInt(5) == 0 ? "()[]{}a" : "()[]{}");
-            return same(run(() -> StringAlgorithms.validParentheses(s)), run(() -> M3StackAlgorithms.validBrackets(s,
+            return same(run(() -> StringAlgorithms.validParentheses(s)), run(() -> StackAlgorithms.validBrackets(s,
                     NONE)));
         });
     }
@@ -611,20 +611,20 @@ public final class OverlapAgreement {
     // ---------------------------------------------------------------- dynamic programming, backtracking, bits
 
     private static void dynamicProgrammingAndBacktracking() {
-        compare("DynamicProgrammingAlgorithms.houseRobber(int[])", "M3DynamicProgrammingAlgorithms.houseRobber", CASES,
+        compare("DynamicProgrammingAlgorithms.houseRobber(int[])", "DynamicProgrammingAlgorithms.houseRobber", CASES,
                 r -> {
                     int[] a = r.nextInt(6) == 0 ? ints(r, r.nextInt(0, 8), 50) : small(r, r.nextInt(0, 15), 50);
                     return same(run(() -> DynamicProgrammingAlgorithms.houseRobber(a)),
-                            run(() -> M3DynamicProgrammingAlgorithms.houseRobber(a, NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.houseRobber(a, NONE)));
                 });
-        compare("DynamicProgrammingAlgorithms.coinChangeMin(int[],int)", "M3DynamicProgrammingAlgorithms.coinChange",
+        compare("DynamicProgrammingAlgorithms.coinChangeMin(int[],int)", "DynamicProgrammingAlgorithms.coinChange",
                 CASES, r -> {
                     int[] coins = small(r, r.nextInt(0, 5), 12);
                     int amount = r.nextInt(-1, 60);
                     return same(run(() -> DynamicProgrammingAlgorithms.coinChangeMin(coins, amount)),
-                            run(() -> M3DynamicProgrammingAlgorithms.coinChange(coins, amount, NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.coinChange(coins, amount, NONE)));
                 });
-        compare("DynamicProgrammingAlgorithms.knapsack01(int[],long[],int)", "M3DynamicProgrammingAlgorithms"
+        compare("DynamicProgrammingAlgorithms.knapsack01(int[],long[],int)", "DynamicProgrammingAlgorithms"
                 + ".knapsack01(int[],int[],int,M3ProgressMonitor)", CASES, r -> {
                     int n = r.nextInt(0, 10);
                     int[] weights = small(r, n, 10);
@@ -632,7 +632,7 @@ public final class OverlapAgreement {
                     long[] longValues = Arrays.stream(values).asLongStream().toArray();
                     int capacity = r.nextInt(-1, 40);
                     return same(run(() -> DynamicProgrammingAlgorithms.knapsack01(weights, longValues, capacity)),
-                            run(() -> M3DynamicProgrammingAlgorithms.knapsack01(weights, values, capacity, NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.knapsack01(weights, values, capacity, NONE)));
                 });
         compare("DynamicProgrammingAlgorithms.knapsack01(int[],long[],int)", "jdk.m3.tools.cpu.M3KnapsackSelection"
                 + ".maximize(int[],long[],int).value (cpu-tools, same erased signature)", CASES, r -> {
@@ -644,42 +644,42 @@ public final class OverlapAgreement {
                             run(() -> M3KnapsackSelection.maximize(weights, values, capacity).value()));
                 });
         compare("DynamicProgrammingAlgorithms.longestIncreasingSubsequenceLength(int[])",
-                "M3DynamicProgrammingAlgorithms.longestIncreasingSubsequence", CASES, r -> {
+                "DynamicProgrammingAlgorithms.longestIncreasingSubsequence", CASES, r -> {
                     int[] a = ints(r, r.nextInt(0, 20), 10);
                     return same(run(() -> DynamicProgrammingAlgorithms.longestIncreasingSubsequenceLength(a)),
-                            run(() -> M3DynamicProgrammingAlgorithms.longestIncreasingSubsequence(a, NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.longestIncreasingSubsequence(a, NONE)));
                 });
         compare("DynamicProgrammingAlgorithms.longestCommonSubsequenceLength(String,String)",
-                "M3DynamicProgrammingAlgorithms.longestCommonSubsequence", CASES, r -> {
+                "DynamicProgrammingAlgorithms.longestCommonSubsequence", CASES, r -> {
                     String a = text(r, r.nextInt(0, 15), "abc");
                     String b = text(r, r.nextInt(0, 15), "abc");
                     return same(run(() -> DynamicProgrammingAlgorithms.longestCommonSubsequenceLength(a, b)),
-                            run(() -> M3DynamicProgrammingAlgorithms.longestCommonSubsequence(a, b, NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.longestCommonSubsequence(a, b, NONE)));
                 });
         compare("DynamicProgrammingAlgorithms.editDistance(String,String)",
-                "M3DynamicProgrammingAlgorithms.editDistance", CASES, r -> {
+                "DynamicProgrammingAlgorithms.editDistance", CASES, r -> {
                     String a = text(r, r.nextInt(0, 12), "abc");
                     String b = text(r, r.nextInt(0, 12), "abc");
                     return same(run(() -> DynamicProgrammingAlgorithms.editDistance(a, b)),
-                            run(() -> M3DynamicProgrammingAlgorithms.editDistance(a, b, NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.editDistance(a, b, NONE)));
                 });
-        compare("DynamicProgrammingAlgorithms.uniquePaths(int,int)", "M3DynamicProgrammingAlgorithms.uniquePaths",
+        compare("DynamicProgrammingAlgorithms.uniquePaths(int,int)", "DynamicProgrammingAlgorithms.uniquePaths",
                 CASES, r -> {
                     int rows = r.nextInt(-1, 40);
                     int columns = r.nextInt(-1, 40);
                     return same(run(() -> DynamicProgrammingAlgorithms.uniquePaths(rows, columns)),
-                            run(() -> M3DynamicProgrammingAlgorithms.uniquePaths(rows, columns, NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.uniquePaths(rows, columns, NONE)));
                 });
         compare("DynamicProgrammingAlgorithms.canPartitionEqualSubset(int[])",
-                "M3DynamicProgrammingAlgorithms.canPartition", CASES, r -> {
+                "DynamicProgrammingAlgorithms.canPartition", CASES, r -> {
                     int[] a = small(r, r.nextInt(0, 12), 20);
                     for (int i = 0; i < a.length; i++) {
                         a[i] = r.nextInt(15) == 0 ? a[i] : Math.abs(a[i]);
                     }
                     return same(run(() -> DynamicProgrammingAlgorithms.canPartitionEqualSubset(a)),
-                            run(() -> M3DynamicProgrammingAlgorithms.canPartition(a, NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.canPartition(a, NONE)));
                 });
-        compare("DynamicProgrammingAlgorithms.wordBreak(String,String[])", "M3DynamicProgrammingAlgorithms.wordBreak",
+        compare("DynamicProgrammingAlgorithms.wordBreak(String,String[])", "DynamicProgrammingAlgorithms.wordBreak",
                 CASES, r -> {
                     String s = text(r, r.nextInt(0, 14), "ab");
                     String[] words = new String[r.nextInt(0, 5)];
@@ -687,19 +687,19 @@ public final class OverlapAgreement {
                         words[i] = text(r, r.nextInt(0, 4), "ab");
                     }
                     return same(run(() -> DynamicProgrammingAlgorithms.wordBreak(s, words)),
-                            run(() -> M3DynamicProgrammingAlgorithms.wordBreak(s, Arrays.asList(words), NONE)));
+                            run(() -> DynamicProgrammingAlgorithms.wordBreak(s, Arrays.asList(words), NONE)));
                 });
-        compare("BacktrackingAlgorithms.permutations(int[])", "M3BacktrackingAlgorithms.permutations", CASES, r -> {
+        compare("BacktrackingAlgorithms.permutations(int[])", "BacktrackingAlgorithms.permutations", CASES, r -> {
             int[] a = small(r, r.nextInt(0, 6), r.nextBoolean() ? 2 : 50);
             return same(run(() -> canonicalRows(BacktrackingAlgorithms.permutations(a))),
-                    run(() -> canonicalLists(M3BacktrackingAlgorithms.permutations(a, NONE))));
+                    run(() -> canonicalLists(BacktrackingAlgorithms.permutations(a, NONE))));
         });
-        compare("BacktrackingAlgorithms.subsets(int[])", "M3BacktrackingAlgorithms.subsets", CASES, r -> {
+        compare("BacktrackingAlgorithms.subsets(int[])", "BacktrackingAlgorithms.subsets", CASES, r -> {
             int[] a = small(r, r.nextInt(0, 8), r.nextBoolean() ? 2 : 50);
             return same(run(() -> canonicalRows(BacktrackingAlgorithms.subsets(a))),
-                    run(() -> canonicalLists(M3BacktrackingAlgorithms.subsets(a, NONE))));
+                    run(() -> canonicalLists(BacktrackingAlgorithms.subsets(a, NONE))));
         });
-        compare("BacktrackingAlgorithms.nQueensSolutions(int,int,M3ProgressMonitor)", "M3BacktrackingAlgorithms.nQueens",
+        compare("BacktrackingAlgorithms.nQueensSolutions(int,int,M3ProgressMonitor)", "BacktrackingAlgorithms.nQueens",
                 12, r -> {
                     int n = r.nextInt(0, 9);
                     String donor = run(() -> {
@@ -719,7 +719,7 @@ public final class OverlapAgreement {
                     });
                     String owner = run(() -> {
                         List<String> boards = new ArrayList<>();
-                        for (List<String> rows : M3BacktrackingAlgorithms.nQueens(n, NONE)) {
+                        for (List<String> rows : BacktrackingAlgorithms.nQueens(n, NONE)) {
                             boards.add(rows.toString());
                         }
                         boards.sort(null);
@@ -727,22 +727,22 @@ public final class OverlapAgreement {
                     });
                     return same(donor, owner);
                 });
-        compare("BitAlgorithms.hammingWeight(int)+reverseBits(int)", "M3BitAlgorithms.hammingWeight+reverseBits", CASES,
+        compare("BitAlgorithms.hammingWeight(int)+reverseBits(int)", "BitAlgorithms.hammingWeight+reverseBits", CASES,
                 r -> {
                     int v = r.nextInt();
                     return same(BitAlgorithms.hammingWeight(v) + "/" + BitAlgorithms.reverseBits(v),
-                            M3BitAlgorithms.hammingWeight(v, NONE) + "/" + M3BitAlgorithms.reverseBits(v, NONE));
+                            BitAlgorithms.hammingWeight(v, NONE) + "/" + BitAlgorithms.reverseBits(v, NONE));
                 });
     }
 
     // ---------------------------------------------------------------- lists, trees, matrices, the trie
 
-    private static M3ListAlgorithms.Node<Integer>[] nodes(int[] values, int[] next) {
+    private static ListAlgorithms.Node<Integer>[] nodes(int[] values, int[] next) {
         @SuppressWarnings("unchecked")
-        M3ListAlgorithms.Node<Integer>[] nodes = (M3ListAlgorithms.Node<Integer>[]) new M3ListAlgorithms.Node<?>[
+        ListAlgorithms.Node<Integer>[] nodes = (ListAlgorithms.Node<Integer>[]) new ListAlgorithms.Node<?>[
                 values.length];
         for (int i = 0; i < values.length; i++) {
-            nodes[i] = new M3ListAlgorithms.Node<>(values[i]);
+            nodes[i] = new ListAlgorithms.Node<>(values[i]);
         }
         for (int i = 0; i < values.length; i++) {
             nodes[i].next(next[i] < 0 ? null : nodes[next[i]]);
@@ -750,9 +750,9 @@ public final class OverlapAgreement {
         return nodes;
     }
 
-    private static String walk(M3ListAlgorithms.Node<Integer> head) {
+    private static String walk(ListAlgorithms.Node<Integer> head) {
         List<Integer> out = new ArrayList<>();
-        for (M3ListAlgorithms.Node<Integer> node = head; node != null && out.size() < 1_000; node = node.next()) {
+        for (ListAlgorithms.Node<Integer> node = head; node != null && out.size() < 1_000; node = node.next()) {
             out.add(node.value());
         }
         return out.toString();
@@ -762,18 +762,18 @@ public final class OverlapAgreement {
         return list(LinkedListAlgorithms.toArray(list)).toString();
     }
 
-    private static M3TreeAlgorithms.Node<Integer> tree(int[] values, int[] left, int[] right, int node) {
+    private static TreeAlgorithms.Node<Integer> tree(int[] values, int[] left, int[] right, int node) {
         if (node < 0) {
             return null;
         }
-        M3TreeAlgorithms.Node<Integer> out = new M3TreeAlgorithms.Node<>(values[node]);
+        TreeAlgorithms.Node<Integer> out = new TreeAlgorithms.Node<>(values[node]);
         out.left(tree(values, left, right, left[node]));
         out.right(tree(values, left, right, right[node]));
         return out;
     }
 
     private static void listsTreesMatrices() {
-        compare("LinkedListAlgorithms.cycleStartIndex(IntLinkedList)", "M3ListAlgorithms.cycleStart", CASES, r -> {
+        compare("LinkedListAlgorithms.cycleStartIndex(IntLinkedList)", "ListAlgorithms.cycleStart", CASES, r -> {
             int n = r.nextInt(0, 12);
             int[] values = small(r, n, 9);
             int[] next = new int[n];
@@ -781,20 +781,20 @@ public final class OverlapAgreement {
                 next[i] = r.nextInt(3) == 0 ? r.nextInt(-1, n) : i + 1 < n ? i + 1 : -1;
             }
             int head = n == 0 ? -1 : r.nextInt(n);
-            M3ListAlgorithms.Node<Integer>[] nodes = nodes(values, next);
+            ListAlgorithms.Node<Integer>[] nodes = nodes(values, next);
             IdentityHashMap<Object, Integer> index = new IdentityHashMap<>();
             for (int i = 0; i < n; i++) {
                 index.put(nodes[i], i);
             }
             return same(run(() -> LinkedListAlgorithms.cycleStartIndex(new LinkedListAlgorithms.IntLinkedList(values,
                     next, head))), run(() -> {
-                        M3ListAlgorithms.Node<Integer> start = M3ListAlgorithms.cycleStart(head < 0 ? null
+                        ListAlgorithms.Node<Integer> start = ListAlgorithms.cycleStart(head < 0 ? null
                                 : nodes[head], NONE);
                         return start == null ? -1 : index.get(start);
                     }));
         });
         compare("LinkedListAlgorithms.middleIndex+reversed+removeNthFromEnd(IntLinkedList..)",
-                "M3ListAlgorithms.middle+reverse+removeNthFromEnd", CASES, r -> {
+                "ListAlgorithms.middle+reverse+removeNthFromEnd", CASES, r -> {
                     int[] values = small(r, r.nextInt(0, 12), 9);
                     int nth = r.nextInt(0, values.length + 2);
                     LinkedListAlgorithms.IntLinkedList list = LinkedListAlgorithms.IntLinkedList.linear(values);
@@ -808,17 +808,17 @@ public final class OverlapAgreement {
                                 + "/" + run(() -> walk(LinkedListAlgorithms.removeNthFromEnd(list, nth)));
                     });
                     String owner = run(() -> {
-                        M3ListAlgorithms.Node<Integer> head = values.length == 0 ? null : nodes(values, linear)[0];
-                        M3ListAlgorithms.Node<Integer> middle = M3ListAlgorithms.middle(head, NONE);
-                        String reversed = walk(M3ListAlgorithms.reverse(values.length == 0 ? null
+                        ListAlgorithms.Node<Integer> head = values.length == 0 ? null : nodes(values, linear)[0];
+                        ListAlgorithms.Node<Integer> middle = ListAlgorithms.middle(head, NONE);
+                        String reversed = walk(ListAlgorithms.reverse(values.length == 0 ? null
                                 : nodes(values, linear)[0], NONE));
                         return (middle == null ? "null" : middle.value()) + "/" + reversed + "/" + run(() -> walk(
-                                M3ListAlgorithms.removeNthFromEnd(values.length == 0 ? null : nodes(values, linear)[0],
+                                ListAlgorithms.removeNthFromEnd(values.length == 0 ? null : nodes(values, linear)[0],
                                         nth, NONE)));
                     });
                     return same(donor, owner);
                 });
-        compare("LinkedListAlgorithms.mergeSorted(IntLinkedList,IntLinkedList)", "M3ListAlgorithms.mergeSorted", CASES,
+        compare("LinkedListAlgorithms.mergeSorted(IntLinkedList,IntLinkedList)", "ListAlgorithms.mergeSorted", CASES,
                 r -> {
                     int[] a = sorted(small(r, r.nextInt(0, 8), 20));
                     int[] b = sorted(small(r, r.nextInt(0, 8), 20));
@@ -832,33 +832,33 @@ public final class OverlapAgreement {
                     }
                     return same(run(() -> walk(LinkedListAlgorithms.mergeSorted(
                             LinkedListAlgorithms.IntLinkedList.linear(a), LinkedListAlgorithms.IntLinkedList.linear(b)))),
-                            run(() -> walk(M3ListAlgorithms.mergeSorted(a.length == 0 ? null : nodes(a, la)[0],
+                            run(() -> walk(ListAlgorithms.mergeSorted(a.length == 0 ? null : nodes(a, la)[0],
                                     b.length == 0 ? null : nodes(b, lb)[0], Comparator.<Integer>naturalOrder(),
                                     NONE))));
                 });
         compare("TreeAlgorithms.inorder+levelOrder+maxDepth+isBalanced+isValidBst+kthSmallestBst(BinaryTree..)",
-                "M3TreeAlgorithms.inorder+levelOrder+maxDepth+isBalanced+isValidBst+kthSmallest", CASES, r -> {
+                "TreeAlgorithms.inorder+levelOrder+maxDepth+isBalanced+isValidBst+kthSmallest", CASES, r -> {
                     int[][] t = randomTree(r, r.nextInt(0, 20), r.nextBoolean());
                     int k = r.nextInt(0, t[0].length + 2);
                     TreeAlgorithms.BinaryTree donorTree = new TreeAlgorithms.BinaryTree(t[0], t[1], t[2], t[3][0]);
-                    M3TreeAlgorithms.Node<Integer> root = tree(t[0], t[1], t[2], t[3][0]);
+                    TreeAlgorithms.Node<Integer> root = tree(t[0], t[1], t[2], t[3][0]);
                     String donor = run(() -> list(TreeAlgorithms.inorder(donorTree)))
                             + "/" + run(() -> list(TreeAlgorithms.levelOrder(donorTree)))
                             + "/" + run(() -> TreeAlgorithms.maxDepth(donorTree))
                             + "/" + run(() -> TreeAlgorithms.isBalanced(donorTree))
                             + "/" + run(() -> TreeAlgorithms.isValidBst(donorTree))
                             + "/" + run(() -> TreeAlgorithms.kthSmallestBst(donorTree, k));
-                    String owner = run(() -> M3TreeAlgorithms.inorder(root, NONE))
-                            + "/" + run(() -> M3TreeAlgorithms.levelOrder(root, NONE).stream().flatMap(List::stream)
+                    String owner = run(() -> TreeAlgorithms.inorder(root, NONE))
+                            + "/" + run(() -> TreeAlgorithms.levelOrder(root, NONE).stream().flatMap(List::stream)
                             .toList())
-                            + "/" + run(() -> M3TreeAlgorithms.maxDepth(root, NONE))
-                            + "/" + run(() -> M3TreeAlgorithms.isBalanced(root, NONE))
-                            + "/" + run(() -> M3TreeAlgorithms.isValidBst(root, Comparator.<Integer>naturalOrder(),
+                            + "/" + run(() -> TreeAlgorithms.maxDepth(root, NONE))
+                            + "/" + run(() -> TreeAlgorithms.isBalanced(root, NONE))
+                            + "/" + run(() -> TreeAlgorithms.isValidBst(root, Comparator.<Integer>naturalOrder(),
                             NONE))
-                            + "/" + run(() -> M3TreeAlgorithms.kthSmallest(root, k, NONE));
+                            + "/" + run(() -> TreeAlgorithms.kthSmallest(root, k, NONE));
                     return same(donor, owner);
                 });
-        compare("MatrixAlgorithms.countIslands(int[][])", "M3MatrixAlgorithms.countIslands(char[][],..)", CASES, r -> {
+        compare("MatrixAlgorithms.countIslands(int[][])", "MatrixAlgorithms.countIslands(char[][],..)", CASES, r -> {
             int[][] grid = grid(r, 2);
             char[][] chars = new char[grid.length][];
             for (int i = 0; i < grid.length; i++) {
@@ -867,11 +867,11 @@ public final class OverlapAgreement {
                     chars[i][j] = grid[i][j] != 0 ? '1' : '0';
                 }
             }
-            return same(run(() -> MatrixAlgorithms.countIslands(grid)), run(() -> M3MatrixAlgorithms.countIslands(chars,
+            return same(run(() -> MatrixAlgorithms.countIslands(grid)), run(() -> MatrixAlgorithms.countIslands(chars,
                     NONE)));
         });
         compare("MatrixAlgorithms.rotateSquareClockwise+spiralOrder+setZeroes(int[][])",
-                "M3MatrixAlgorithms.rotateClockwise+spiralOrder+setZeroes", CASES, r -> {
+                "MatrixAlgorithms.rotateClockwise+spiralOrder+setZeroes", CASES, r -> {
                     int[][] grid = grid(r, 3);
                     int[][] a = deep(grid);
                     int[][] b = deep(grid);
@@ -885,15 +885,15 @@ public final class OverlapAgreement {
                         return c;
                     });
                     String owner = run(() -> {
-                        M3MatrixAlgorithms.rotateClockwise(b, NONE);
+                        MatrixAlgorithms.rotateClockwise(b, NONE);
                         return b;
-                    }) + "/" + run(() -> M3MatrixAlgorithms.spiralOrder(grid, NONE)) + "/" + run(() -> {
-                        M3MatrixAlgorithms.setZeroes(d, NONE);
+                    }) + "/" + run(() -> MatrixAlgorithms.spiralOrder(grid, NONE)) + "/" + run(() -> {
+                        MatrixAlgorithms.setZeroes(d, NONE);
                         return d;
                     });
                     return same(donor, owner);
                 });
-        compare("MatrixAlgorithms.searchSortedMatrix(int[][],int)", "M3MatrixAlgorithms.searchSorted", CASES, r -> {
+        compare("MatrixAlgorithms.searchSortedMatrix(int[][],int)", "MatrixAlgorithms.searchSorted", CASES, r -> {
             int rows = r.nextInt(1, 6);
             int columns = r.nextInt(1, 6);
             int[][] grid = new int[rows][columns];
@@ -905,12 +905,12 @@ public final class OverlapAgreement {
             }
             int target = r.nextInt(0, 40);
             return same(run(() -> MatrixAlgorithms.searchSortedMatrix(grid, target)),
-                    run(() -> M3MatrixAlgorithms.searchSorted(grid, target, NONE)));
+                    run(() -> MatrixAlgorithms.searchSorted(grid, target, NONE)));
         });
         compare("PrimitiveTrie.add+contains+hasPrefix(String) (kept: structure unit)",
-                "M3StringTrie.insert+contains+startsWith", CASES, r -> {
+                "StringTrie.insert+contains+startsWith", CASES, r -> {
                     PrimitiveTrie primitive = new PrimitiveTrie();
-                    M3StringTrie trie = new M3StringTrie();
+                    StringTrie trie = new StringTrie();
                     StringBuilder donor = new StringBuilder();
                     StringBuilder owner = new StringBuilder();
                     for (int op = 0; op < 20; op++) {
@@ -1066,7 +1066,7 @@ public final class OverlapAgreement {
 
     private static void catalog() {
         Set<String> families = new HashSet<>();
-        for (M3AlgorithmShapeCatalog.Family family : M3AlgorithmShapeCatalog.Family.values()) {
+        for (AlgorithmShapeCatalog.Family family : AlgorithmShapeCatalog.Family.values()) {
             families.add(family.name());
         }
         Set<String> shapes = new HashSet<>();
@@ -1080,7 +1080,7 @@ public final class OverlapAgreement {
         OUT.append("AlgorithmCatalog.descriptors()+AlgorithmShape.values()\tM3AlgorithmShapeCatalog.shapes()+Family"
                 + ".values()\t1\t0\t0\t1\tdonor descriptors=" + AlgorithmCatalog.descriptors().size()
                 + " covering shapes=" + described.size() + " of " + shapes.size() + "; landed shapes="
-                + M3AlgorithmShapeCatalog.shapes().size() + " in families=" + families.size()
+                + AlgorithmShapeCatalog.shapes().size() + " in families=" + families.size()
                 + "; enum names in common=" + new java.util.TreeSet<>(common) + " (plan oracle (e): counts differ, "
                 + "not ported)\n");
     }

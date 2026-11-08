@@ -6,7 +6,7 @@
 # pom (-Xlint:all -Werror; the ported donor tests and the reference oracles in the test phase), the module
 # descriptor, the donor-vs-relocated differential (also -Xint), javap -p parity, the mutants, the donor's own proof
 # main (its figure must hold), and, when BASELINE_CLASSES names the target/classes of a master build, the
-# byte-identity of every untouched class file (the one owner edit, M3AlgorithmShapeCatalog, excepted).
+# byte-identity of every untouched class file (the one owner edit, AlgorithmShapeCatalog, excepted).
 # usage: verify.sh <donor-git-dir> <donor-rev> <scratch-dir> [cases]
 # env:   JAVA_HOME (a JDK 21); MAVEN_REPO_LOCAL (-Dmaven.repo.local, a drive path on Windows); MAVEN_REPO_TAIL
 #        (optional -Dmaven.repo.local.tail, read-only tail repository); JAVA_TOOL_TMP (optional java.io.tmpdir of every
@@ -43,7 +43,7 @@ grep -q "relocated_sha256=$DUMP_SHA" "$3/diff.log" || { echo "differential diges
 "$PY" -I -B "$RECIPE_DIR/mutants.py" "$3/mutants" --dump-sha256 "$DUMP_SHA" --console "$CONSOLE" --dep-cp "$DEP_CP" \
     ${JAVA_TOOL_TMP:+--tmp "$JAVA_TOOL_TMP"} | tail -n 1
 # the donor crate's own proof main, Java mode, on the donor compile of differential.sh (JIT and -Xint)
-proof_main=$(awk -F'\t' '$1=="FILE" && $3 ~ /\/M3IntLcsWitness\.java$/ {p=$2; sub(/^.*\/src\/main\/java\//, "", p);
+proof_main=$(awk -F'\t' '$1=="FILE" && $3 ~ /\/IntLcsWitness\.java$/ {p=$2; sub(/^.*\/src\/main\/java\//, "", p);
     sub(/\.java$/, "", p); gsub(/\//, ".", p); print p}' "$RECIPE_DIR/RELOCATION_MAP.tsv")
 for mode in "" "-Xint"; do
     out=$("$JAVA_HOME/bin/java" $mode -Xmx256m $TMP -cp "$3/diff/classes" "$proof_main" --java NO_LIB)
@@ -56,6 +56,6 @@ if [ -n "${BASELINE_CLASSES:-}" ]; then
         if cmp -s "$BASELINE_CLASSES/$rel" "$MODULE/target/classes/$rel"; then same=$((same + 1));
         else differ=$((differ + 1)); echo "DIFFERS $rel"; fi
     done < <(cd "$BASELINE_CLASSES" && find . -name '*.class' | sort)
-    echo "UNTOUCHED identical=$same differing=$differ (expected differing: the owner edit M3AlgorithmShapeCatalog.class)"
+    echo "UNTOUCHED identical=$same differing=$differ (expected differing: the owner edit AlgorithmShapeCatalog.class)"
 fi
 echo "VERIFY PASS"

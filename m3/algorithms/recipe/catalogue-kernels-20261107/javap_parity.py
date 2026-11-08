@@ -27,8 +27,8 @@ PARAM_STRIP = re.compile(r"\b(?:[a-z]\w*\.)+")
 LAMBDA = re.compile(r"(lambda\$\w+\$)\d+")
 # the javap effect of an EDIT row of RELOCATION_MAP.tsv: (old, new) on the normalized donor text
 JAVAP_EDITS = {
-    "E1_PACKAGE_PRIVATE": ("public final class jdk.m3.algorithm.M3ProgressChecks {",
-                           "final class jdk.m3.algorithm.M3ProgressChecks {"),
+    "E1_PACKAGE_PRIVATE": ("public final class jdk.m3.algorithm.ProgressChecks {",
+                           "final class jdk.m3.algorithm.ProgressChecks {"),
 }
 
 

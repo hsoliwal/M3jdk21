@@ -28,14 +28,14 @@ donor_commit=$(git -C "$DONOR_GIT" rev-parse "$REV^{commit}")
 rm -rf "$SCRATCH/uf-src" "$SCRATCH/uf-classes" "$SCRATCH/uf-dump"
 mkdir -p "$SCRATCH/uf-src" "$SCRATCH/uf-classes" "$SCRATCH/uf-dump"
 uf_path=$(awk -F'\t' '$1=="SKIP" && $2 ~ /IntUnionFind\.java$/ {print $2; exit}' "$MAP")
-monitor_path=$(awk -F'\t' '$1=="OWNED" && $2 ~ /M3ProgressMonitor\.java$/ {print $2; exit}' "$MAP")
+monitor_path=$(awk -F'\t' '$1=="OWNED" && $2 ~ /ProgressMonitor\.java$/ {print $2; exit}' "$MAP")
 for path in "$uf_path" "$monitor_path"; do
     git -C "$DONOR_GIT" show "$REV:$path" > "$SCRATCH/uf-src/$(basename "$path")"
 done
 "$JAVA_BIN/javac" --release 21 -Xlint:all -Werror -d "$SCRATCH/uf-classes" "$SCRATCH"/uf-src/*.java
 "$JAVA_BIN/javac" --release 21 -Xlint:all -Werror -cp "$DEP_CP" -d "$SCRATCH/uf-classes" "$RECIPE_DIR/UnionFindPartitionDump.java"
 donor_fqn=$(dirname "$uf_path" | sed -E 's#^(.*/)?src/main/java/##; s#/#.#g').IntUnionFind
-monitor_fqn=$(dirname "$monitor_path" | sed -E 's#^(.*/)?src/main/java/##; s#/#.#g').M3ProgressMonitor
+monitor_fqn=$(dirname "$monitor_path" | sed -E 's#^(.*/)?src/main/java/##; s#/#.#g').ProgressMonitor
 donor_blob=$(git -C "$DONOR_GIT" rev-parse "$REV:$uf_path")
 
 # 2. one program, both structures, two dumps

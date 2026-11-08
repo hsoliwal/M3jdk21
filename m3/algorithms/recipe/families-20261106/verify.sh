@@ -13,7 +13,7 @@ REPO=${MAVEN_REPO_LOCAL:+-Dmaven.repo.local=$MAVEN_REPO_LOCAL}
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';' ;; *) SEP=':' ;; esac
 M2=${MAVEN_REPO_LOCAL:-$HOME/.m2/repository}   # on Windows pass MAVEN_REPO_LOCAL as a drive path
 GROUP=com.m3   # the group directory is spelled through the variable: the naming recipe rewrites it as a package path
-# the relocated side of the differential loads jdk.m3.collections.M3ProgressMonitor, the progress-monitor owner
+# the relocated side of the differential loads jdk.m3.collections.ProgressMonitor, the progress-monitor owner
 export DEP_CP="$M2/${GROUP//.//}/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar$SEP$M2/${GROUP//.//}/m3-arrays/0.1.0-SNAPSHOT/m3-arrays-0.1.0-SNAPSHOT.jar"
 "$PY" -I "$RECIPE_DIR/relocate.py" --donor-git "$1" --donor-rev "$2" --check
 mvn -q -B -ntp $REPO -f "$MODULE/pom.xml" package

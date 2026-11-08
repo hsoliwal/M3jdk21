@@ -6,7 +6,7 @@
 # pom (-Xlint:all -Werror; the ported donor tests and the reference oracles in the test phase), the module
 # descriptor, the donor-vs-relocated differential (also -Xint), javap -p parity, and, when
 # BASELINE_CLASSES names the target/classes of a master build, the byte-identity of every untouched class file (the
-# one owner edit, M3ProgressChecks, excepted). This leaf has no mutants: the relocated type is an interface with one
+# one owner edit, ProgressChecks, excepted). This leaf has no mutants: the relocated type is an interface with one
 # abstract method and no bodies.
 # usage: verify.sh <donor-git-dir> <donor-rev> <scratch-dir> [cases]
 # env:   JAVA_HOME (a JDK 21); MAVEN_REPO_LOCAL (-Dmaven.repo.local, a drive path on Windows); MAVEN_REPO_TAIL
@@ -46,6 +46,6 @@ if [ -n "${BASELINE_CLASSES:-}" ]; then
         if cmp -s "$BASELINE_CLASSES/$rel" "$MODULE/target/classes/$rel"; then same=$((same + 1));
         else differ=$((differ + 1)); echo "DIFFERS $rel"; fi
     done < <(cd "$BASELINE_CLASSES" && find . -name '*.class' | sort)
-    echo "UNTOUCHED identical=$same differing=$differ (expected differing: the owner edit M3ProgressChecks.class)"
+    echo "UNTOUCHED identical=$same differing=$differ (expected differing: the owner edit ProgressChecks.class)"
 fi
 echo "VERIFY PASS"

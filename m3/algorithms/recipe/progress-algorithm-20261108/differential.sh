@@ -4,11 +4,11 @@
 # Gate 4 of recipe/progress-algorithm-20261108 (derived from recipe/corpus-search-20261108/differential.sh): the
 # donor kernels (the FILE rows under src/main/java plus the OWNED and DONOR_ONLY closure, compiled from the donor git
 # tree with javac --release 21 -Xlint:all -Werror, every member present, the dropped ones unused) and the relocated
-# classes (target/classes) replay the same seeded inputs through the dump driver M3CatalogueKernelsDump. One driver
+# classes (target/classes) replay the same seeded inputs through the dump driver CatalogueKernelsDump. One driver
 # source, two compiles: the relocated side runs the test-scope class of this module; the donor side compiles the same
 # file with the MEMBER and TYPE rows of RELOCATION_MAP.tsv reversed, in a neutral package that imports every donor
 # type of the FILE and OWNED rows and of the DONOR_ONLY rows whose note starts with DRIVER (the NEC subject of the
-# dump: here the donor progress helper ProgressMonitors, whose owner M3ProgressChecks the driver calls). The donor dump, normalized by the TYPE
+# dump: here the donor progress helper ProgressMonitors, whose owner ProgressChecks the driver calls). The donor dump, normalized by the TYPE
 # rows (type names inside member labels), must be byte-identical to the relocated dump, and the relocated dump must be
 # byte-identical under -Xint (interpreter only). Every run is bounded by timeout(1). Prints DIFFERENTIAL PASS|FAIL.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir> [cases]   (JAVA_HOME = JDK 21; after mvn package)
@@ -29,7 +29,7 @@ mkdir -p "$3"
 SCRATCH=$(winpath "$3")
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
-DRIVER=M3ProgressAlgorithmDump
+DRIVER=ProgressAlgorithmDump
 DRIVER_SRC="$MODULE/src/test/java/jdk/m3/algorithm/$DRIVER.java"
 TMP_FLAG=${JAVA_TOOL_TMP:+-Djava.io.tmpdir=$JAVA_TOOL_TMP}
 JAVAC_TMP=${JAVA_TOOL_TMP:+-J-Djava.io.tmpdir=$JAVA_TOOL_TMP}

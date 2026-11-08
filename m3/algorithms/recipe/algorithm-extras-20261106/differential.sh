@@ -4,7 +4,7 @@
 # Gate 2 of the relocation (derived from recipe/graph-trie-20261106/differential.sh): the donor catalogue (FILE and
 # OWNED rows under src/main/java, compiled from the donor git tree with javac --release 21 -Xlint:all -Werror, every
 # member present, the dropped ones unused) and the relocated classes (target/classes) replay the same seeded inputs
-# through the dump driver M3AlgorithmExtrasDump. One driver source, two compiles: the relocated side runs the test-scope
+# through the dump driver AlgorithmExtrasDump. One driver source, two compiles: the relocated side runs the test-scope
 # class of this module; the donor side compiles the same file with the TYPE rows of RELOCATION_MAP.tsv reversed, the
 # package line set to the donor package and the donor progress contract imported. The donor dump, normalized by the
 # PACKAGE and TYPE rows (type names inside messages), must be byte-identical to the relocated dump, and the relocated
@@ -12,7 +12,7 @@
 # Prints DIFFERENTIAL PASS|FAIL with the digests.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir> [cases-per-member]   (JAVA_HOME = JDK 21; after mvn package)
 # env:   DEP_CP = the module's dependency jars for the relocated side (m3-collections: the monitor is an adapter over
-#        jdk.m3.collections.M3ProgressMonitor), joined with ; on Windows and : elsewhere; RUN_SECONDS (default 120)
+#        jdk.m3.collections.ProgressMonitor), joined with ; on Windows and : elsewhere; RUN_SECONDS (default 120)
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
@@ -26,7 +26,7 @@ mkdir -p "$3"
 SCRATCH=$(winpath "$3")
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
-DRIVER_SRC="$MODULE/src/test/java/jdk/m3/algorithm/M3AlgorithmExtrasDump.java"
+DRIVER_SRC="$MODULE/src/test/java/jdk/m3/algorithm/AlgorithmExtrasDump.java"
 JVM_FLAGS="-XX:-OmitStackTraceInFastThrow -Xss16m"
 donor_commit=$(git -C "$DONOR_GIT" rev-parse "$REV^{commit}")
 
@@ -45,20 +45,20 @@ awk -F'\t' '$1=="TYPE" && $2!=$3 {print "s/\\b" $3 "\\b/" $2 "/g"}' "$MAP" > "$r
 donor_pkg=$(awk -F'\t' '$1=="PACKAGE" && $3=="jdk.m3.algorithm" && $2 ~ /algorithms$/ {print $2; exit}' "$MAP")
 progress_pkg=$(awk -F'\t' '$1=="PACKAGE" && $3=="jdk.m3.algorithm" && $2 ~ /progress$/ {print $2; exit}' "$MAP")
 sed -f "$reverse" "$DRIVER_SRC" \
-    | sed "s/^package jdk\.m3\.algorithm;/package $donor_pkg;\nimport $progress_pkg.M3ProgressMonitor;/" \
-    > "$SCRATCH/driver-src/M3AlgorithmExtrasDump.java"
+    | sed "s/^package jdk\.m3\.algorithm;/package $donor_pkg;\nimport $progress_pkg.ProgressMonitor;/" \
+    > "$SCRATCH/driver-src/AlgorithmExtrasDump.java"
 "$JAVA_BIN/javac" --release 21 -Xlint:all -Werror -cp "$SCRATCH/classes" -d "$SCRATCH/driver-classes" \
-    "$SCRATCH/driver-src/M3AlgorithmExtrasDump.java"
+    "$SCRATCH/driver-src/AlgorithmExtrasDump.java"
 
 # 3. the dumps: donor, relocated, relocated in the interpreter only
 RELOCATED_CP="$MODULE/target/classes$SEP$MODULE/target/test-classes${DEP_CP:+$SEP$DEP_CP}"
 timeout "$RUN_SECONDS" "$JAVA_BIN/java" $JVM_FLAGS -cp "$SCRATCH/classes$SEP$SCRATCH/driver-classes" \
-    "$donor_pkg.M3AlgorithmExtrasDump" --seed "$SEED" --cases "$CASES" > "$SCRATCH/donor.raw.txt"
+    "$donor_pkg.AlgorithmExtrasDump" --seed "$SEED" --cases "$CASES" > "$SCRATCH/donor.raw.txt"
 start=$(date +%s)
-timeout "$RUN_SECONDS" "$JAVA_BIN/java" $JVM_FLAGS -cp "$RELOCATED_CP" jdk.m3.algorithm.M3AlgorithmExtrasDump \
+timeout "$RUN_SECONDS" "$JAVA_BIN/java" $JVM_FLAGS -cp "$RELOCATED_CP" jdk.m3.algorithm.AlgorithmExtrasDump \
     --seed "$SEED" --cases "$CASES" > "$SCRATCH/relocated.txt"
 mid=$(date +%s)
-timeout "$RUN_SECONDS" "$JAVA_BIN/java" $JVM_FLAGS -Xint -cp "$RELOCATED_CP" jdk.m3.algorithm.M3AlgorithmExtrasDump \
+timeout "$RUN_SECONDS" "$JAVA_BIN/java" $JVM_FLAGS -Xint -cp "$RELOCATED_CP" jdk.m3.algorithm.AlgorithmExtrasDump \
     --seed "$SEED" --cases "$CASES" > "$SCRATCH/relocated-xint.txt"
 end=$(date +%s)
 

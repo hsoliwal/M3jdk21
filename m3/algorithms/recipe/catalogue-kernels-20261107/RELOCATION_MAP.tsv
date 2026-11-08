@@ -60,10 +60,10 @@ DROP_METHOD	ProgressMonitors.child	jdk.m3.collections.M3ProgressMonitor.split	OV
 DROP_METHOD	ProgressMonitors.taskName	-	not called by a kept member
 DROP_TYPE	ProgressMonitors.ChildProgressMonitor	jdk.m3.collections.M3ChildProgressMonitor	OVERLAP_OTHER_OWNER: the child slice of child()
 DROP_LINE	ProgressMonitors	^import com\.synexia\.job\.ProgressSnapshot;$	import used only by the dropped ChildProgressMonitor
-DROP_METHOD	ChallengeZSearch.indexOf(String,String)	jdk.m3.algorithm.M3ZAlgorithm.zSearch	same named algorithm (Z), same problem (first hit); one kept (P2-078 row)
-DROP_METHOD	ChallengeZSearch.indexOf(String,String,IProgressMonitor)	jdk.m3.algorithm.M3ZAlgorithm.zSearch	same named algorithm (Z), same problem (first hit); its JNI dispatch is not ported
-DROP_METHOD	ChallengeZSearch.indexOfJava(String,String)	jdk.m3.algorithm.M3ZAlgorithm.zSearch	the Java first-hit lane of the dropped indexOf
-DROP_METHOD	ChallengeZSearch.indexOfJava(String,String,IProgressMonitor)	jdk.m3.algorithm.M3ZAlgorithm.zSearch	private body of the dropped indexOfJava
+DROP_METHOD	ChallengeZSearch.indexOf(String,String)	jdk.m3.algorithm.ZAlgorithm.zSearch	same named algorithm (Z), same problem (first hit); one kept (P2-078 row)
+DROP_METHOD	ChallengeZSearch.indexOf(String,String,IProgressMonitor)	jdk.m3.algorithm.ZAlgorithm.zSearch	same named algorithm (Z), same problem (first hit); its JNI dispatch is not ported
+DROP_METHOD	ChallengeZSearch.indexOfJava(String,String)	jdk.m3.algorithm.ZAlgorithm.zSearch	the Java first-hit lane of the dropped indexOf
+DROP_METHOD	ChallengeZSearch.indexOfJava(String,String,IProgressMonitor)	jdk.m3.algorithm.ZAlgorithm.zSearch	private body of the dropped indexOfJava
 DROP_METHOD	ChallengeZSearch.verifyNativeIfPresent	-	JNI probe (module is pure Java)
 DROP_METHOD	ChallengeZSearch.requireResult	-	JNI result check of the dropped indexOf
 DROP_LINE	ChallengeZSearch	^    private static final int NATIVE_MIN_TEXT_UNITS = 512;$	member:NATIVE_MIN_TEXT_UNITS JNI dispatch threshold of the dropped indexOf
@@ -82,6 +82,6 @@ DROP_LINE	ChallengeZSearchTest	^import com\.synexia\.job\.ProgressSnapshot;$	imp
 SKIP	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeZSearchSelfTest.java	donor self-test	OMIT: plain-main JNI/Java selector self-test of the dropped indexOf
 SKIP	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeOneMismatchWindowBenchmark.java	donor benchmark	OMIT: opt-in wall-clock diagnostic, no correctness threshold
 SKIP	synexia-openrewrite-recipes/recipe-crates/m3-int-lcs-witness-20261105/src/test/java/com/synexia/m3/proof/IntLcsBridgeSelfTest.java	donor JNI self-test	OMIT: JNI bridge self-test
-NEC	synexia-algo/src/main/java/com/synexia/algorithms/string/StringsZAlgorithm.java#zArray	jdk.m3.algorithm.M3StringAlgorithms.zFunction	same Z array (z[0] = 0 in both; M3CatalogueKernelsReferenceTest asserts equality on every reference input); String vs CharSequence + monitor; kept as the closure of zSearch
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/string/StringsZAlgorithm.java#zArray	jdk.m3.algorithm.StringAlgorithms.zFunction	same Z array (z[0] = 0 in both; M3CatalogueKernelsReferenceTest asserts equality on every reference input); String vs CharSequence + monitor; kept as the closure of zSearch
 NEC	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengePostingQuery.java	jdk.m3.arrays.M3IntPostingIndex	P2-091: k-way sorted-posting union/intersection, owner in m3/arrays; donor contract differs (materialized union with budget refusal, limited intersection over Prepared lists, JNI lane); not relocated
-NEC	synexia-algo/src/main/java/com/synexia/algorithms/shapes/AlgorithmShape.java	jdk.m3.algorithm.M3AlgorithmShapeCatalog	P2-111: catalogue vocabulary (enum of mechanical shapes) vs the module catalog (families + Shape records naming landed entry points); the vocabulary goes with the catalogue (HANDOFF_4D.tsv)
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/shapes/AlgorithmShape.java	jdk.m3.algorithm.AlgorithmShapeCatalog	P2-111: catalogue vocabulary (enum of mechanical shapes) vs the module catalog (families + Shape records naming landed entry points); the vocabulary goes with the catalogue (HANDOFF_4D.tsv)

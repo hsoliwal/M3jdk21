@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""DROP_PRODUCT_PREFIX v1: inside an m3 package the package already names the product, so a type carries no M3 prefix.
+"""DROP_PRODUCT_PREFIX v1.2: inside an m3 package the package already names the product, so a type carries no M3 prefix.
 
 usage: rename_types.py --root DIR --package P [--package P2 ...] [--check] [--exclude PREFIX ...]
 For every top-level type M3<Rest> declared in package P (main or test source, file M3<Rest>.java) the type becomes
@@ -11,6 +11,8 @@ For every top-level type M3<Rest> declared in package P (main or test source, fi
          other string literals and comments are kept byte for byte;
   C/H    JNI symbols Java_<p>_M3<Rest>_ and javac -h header names <p>_M3<Rest>.h, where <p> is P with '_' for '.';
   shell  qualified names P.M3<Rest> and bare class names in scripts under make/ (launchers name test mains).
+v1.2: a type token qualified by another package (x.y.M3Rest) is left alone; --string-members also rewrites the
+literals "M3<Rest>.member" and "M3<Rest>" of renamed types (catalog entry points), off by default.
 Refused (exit 2, nothing written): <Rest> empty or not UpperCamel; <Rest> already a type of P; <Rest> a java.lang
 type; a file that references M3<Rest> while importing another package that declares the same simple name.
 Evidence records (paths under --exclude prefixes, default m3/evidence/ and m3/qualification/) are history and stay.
@@ -47,6 +49,8 @@ def main():
     ap.add_argument("--package", action="append", required=True)
     ap.add_argument("--exclude", action="append", default=["m3/evidence/", "m3/qualification/"])
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--string-members", action="store_true",
+                    help="also rewrite the literals M3Rest.member and M3Rest of renamed types in files of the package or importing it (v1.2)")
     a = ap.parse_args()
     root = Path(a.root)
     files = [p for p in root.rglob("*") if p.is_file() and not any(
@@ -102,7 +106,13 @@ def main():
                             rf"^import\s+{re.escape(k)}\.({old}|\*)\s*;", text, re.M)]
                         if clash:
                             sys.exit(f"REFUSE {rel}: {old} also imported from {clash}")
-                        new = masked_sub(new, re.compile(rf"(?<![\w$]){old}(?![\w$])"), rest)
+                        # v1.2: a token qualified by another package (x.y.M3Rest) is not this package's type
+                        new = masked_sub(new, re.compile(rf"(?<![\w$.]){old}(?![\w$])"), rest)
+                        if a.string_members:
+                            # declared opt-in: string literals naming a renamed type's member ("M3Rest.member") or the
+                            # bare type ("M3Rest") follow the rename (catalog entry points resolved by reflection)
+                            new = re.sub(rf'"{old}(\.[A-Za-z_])', rf'"{rest}\1', new)
+                            new = re.sub(rf'"{old}"', f'"{rest}"', new)
                 elif p.suffix in (".sh", ".gmk", ".yml", ".yaml") or (rel.startswith("make/") and p.suffix == ".txt"):
                     # Launchers and gates name test mains, source files and JNI headers: rename the JNI/header
                     # form, then the bare type name (whole word; a path segment M3X.java becomes X.java).

@@ -59,7 +59,7 @@ leaf-2 types `GraphAlgorithms`, `IntUnionFind`, `StringTrie`) and its one `singl
 | Donor | M3JDK owner | Note |
 |---|---|---|
 | `StringAlgorithms.zFunction` (blob `a947a2c59855`) | `m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java` (blob `317108234d76`) | both compute the Z array; donor over `CharSequence` into `int[]`, owner over a sealed `M3StringPiece` |
-| `progress.M3ProgressMonitor` (blob `6d0b659af853`) -> `jdk.m3.algorithm.M3ProgressMonitor` | `jdk.m3.collections.M3ProgressMonitor` (blob `117b4eadd484`), `jdk.m3.file.M3ProgressMonitor` (blob `223cad76aa79`) | int / default / `none()` vs long / abstract / `state()`. `m3/collections` builds and installs from a sparse tree (probe, exit 0) but the donor bodies and oracles do not compile against it (30 javac errors), so the donor contract is carried byte for byte and one monitor owner is a decision, not a recipe step |
+| `progress.M3ProgressMonitor` (blob `6d0b659af853`) -> `jdk.m3.algorithm.ProgressMonitor` | `jdk.m3.collections.M3ProgressMonitor` (blob `117b4eadd484`), `jdk.m3.file.M3ProgressMonitor` (blob `223cad76aa79`) | int / default / `none()` vs long / abstract / `state()`. `m3/collections` builds and installs from a sparse tree (probe, exit 0) but the donor bodies and oracles do not compile against it (30 javac errors), so the donor contract is carried byte for byte and one monitor owner is a decision, not a recipe step |
 
 ## Build
 

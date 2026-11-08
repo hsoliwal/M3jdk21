@@ -15,7 +15,7 @@ routed the core package to java.base, lane 4d). This leaf gives both an owner in
 
 | decision | rows | where |
 |---|---|---|
-| ABSORB, this leaf | 1 | `ProgressAlgorithm` -> `jdk.m3.algorithm.M3ProgressAlgorithm`, below |
+| ABSORB, this leaf | 1 | `ProgressAlgorithm` -> `jdk.m3.algorithm.ProgressAlgorithm`, below |
 | ALREADY, edited here | 1 | `ProgressMonitors` = `M3ProgressChecks`, made public by the owner-edit recipe (below) |
 | OMIT | 4 + 7 tests | `IAlgorithm` (the older compatibility contract: slf4j logger, `logged/timed/retry/when/map` over child slices), `AbstractAlgorithm` (hooks + name/time/space metadata; the catalog `Shape` rows carry the metadata), `AlgorithmException` (constructors log through slf4j; M3JDK carries no slf4j), `NativeParityGate` (JNI parity gate; the module is pure Java). Their donor users (shapes, eip, gof, microservices, pipeline) decide with their families |
 

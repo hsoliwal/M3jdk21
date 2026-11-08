@@ -2,7 +2,7 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 # m3/algorithms: bounded min-cost flow (leaf mincost-flow-20261106)
 
-`jdk.m3.algorithm.M3MinCostFlow` in module `org.m3jdk.algorithms` (Maven `com.m3:m3-algorithms:0.1.0-SNAPSHOT`),
+`jdk.m3.algorithm.MinCostFlow` in module `org.m3jdk.algorithms` (Maven `com.m3:m3-algorithms:0.1.0-SNAPSHOT`),
 relocated by recipe from the com.synexia leaf `M3CpuMinCostFlow`. Plan
 `C:/m3-superset/conv/plans/native-compiler-openjdk.tsv` rank 4 `m3-cpu-mincost-flow`, decision ABSORB. One solver
 only: the JDK owns one fast implementation, the other donor solver is oracle input of the differential and is not

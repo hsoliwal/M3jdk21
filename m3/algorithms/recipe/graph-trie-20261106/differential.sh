@@ -4,13 +4,13 @@
 # Gate 2 of the relocation (derived from recipe/families-20261106/differential.sh): the donor graph and trie families
 # (compiled from the donor git tree with javac --release 21 -Xlint:all -Werror, FILE and OWNED rows under src/main/java)
 # and the relocated families (target/classes of this module) replay the same seeded graphs and trie workloads through
-# the reflective driver M3GraphTrieDump (test scope); the donor dump, normalized by the PACKAGE, TYPE and DROP_DUMP rows
+# the reflective driver GraphTrieDump (test scope); the donor dump, normalized by the PACKAGE, TYPE and DROP_DUMP rows
 # of RELOCATION_MAP.tsv (type names inside messages), must be byte-identical to the relocated dump. Sizes are bounded
 # by the driver (at most 2,000 vertices and 20,000 edges per graph); the TOTAL line prints the counts. Prints
 # DIFFERENTIAL PASS|FAIL with the three sha256 digests.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir> [graph-cases] [trie-ops]   (JAVA_HOME = JDK 21; after mvn package)
 # env:   DEP_CP = the module's dependency jars for the relocated side (m3-collections and m3-arrays: the monitor
-#        is an adapter over jdk.m3.collections.M3ProgressMonitor), joined with ; on Windows and : elsewhere
+#        is an adapter over jdk.m3.collections.ProgressMonitor), joined with ; on Windows and : elsewhere
 set -euo pipefail
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
 RECIPE_DIR=$(winpath "$(dirname "$0")")
@@ -24,7 +24,7 @@ mkdir -p "$3/src" "$3/classes"
 SCRATCH=$(winpath "$3")
 JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
 MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
-DRIVER=jdk.m3.algorithm.M3GraphTrieDump
+DRIVER=jdk.m3.algorithm.GraphTrieDump
 # the JIT replaces a hot implicit exception by a preallocated one without message or trace, at a point that
 # depends on the run: with the optimization off the exception messages of the two dumps are deterministic
 JVM_FLAGS="-XX:-OmitStackTraceInFastThrow"

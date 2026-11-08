@@ -11,7 +11,7 @@ must hash to post; any other content is refused (exit 2): the owner changed sinc
 re-derived, never forced. Line endings of the owner are kept. Idempotent: a second run reports changed=0; --check
 writes nothing and exits 1 when a run would change a file.
 
-Here the edits are three rows of jdk.m3.algorithm.M3AlgorithmShapeCatalog naming the entry points this leaf adds
+Here the edits are three rows of jdk.m3.algorithm.AlgorithmShapeCatalog naming the entry points this leaf adds
 (z-search, one-mismatch-window, lcs-witness), so the module catalog keeps naming every canonical shape it owns.
 
 usage: python -I apply.py [--module DIR] [--check]
