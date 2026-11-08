@@ -14,9 +14,9 @@
  *******************************************************************************/
 package jdk.m3.collections.examples;
 
-import jdk.m3.collections.M3LabelLanes;
-import jdk.m3.collections.M3LabelPool;
-import jdk.m3.collections.M3TextExtentCache;
+import jdk.m3.collections.LabelLanes;
+import jdk.m3.collections.LabelPool;
+import jdk.m3.collections.TextExtentCache;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -86,7 +86,7 @@ public final class M3ImmediateLabelBench {
 		long fillMs = (System.nanoTime () - start) / 1_000_000;
 		long bytes = retained () - baseline;
 		String immediatePct = "0", entries = "0";
-		if (model instanceof M3LabelLanes lanes) {
+		if (model instanceof LabelLanes lanes) {
 			long immediate = 0;
 			for (int c = 0; c < columns; c++) immediate += lanes.immediateCells (c);
 			immediatePct = String.format ("%.1f", 100.0 * immediate / ((long) rows * columns));
@@ -106,7 +106,7 @@ public final class M3ImmediateLabelBench {
 			}
 			return cells;
 		}
-		M3LabelLanes lanes = new M3LabelLanes (columns, new M3LabelPool (4096), new M3TextExtentCache (4096), store.startsWith ("immediate"));
+		LabelLanes lanes = new LabelLanes (columns, new LabelPool (4096), new TextExtentCache (4096), store.startsWith ("immediate"));
 		lanes.setRowCount (rows);
 		for (int c = 0; c < columns; c++) {
 			for (int r = 0; r < rows; r++) lanes.setText (r, c, source [c] [r]);
@@ -120,9 +120,9 @@ public final class M3ImmediateLabelBench {
 		long [] samples = new long [FRAMES];
 		Random random = new Random (7);
 		long sink = 0;
-		M3LabelLanes lanes = model instanceof M3LabelLanes l ? l : null;
+		LabelLanes lanes = model instanceof LabelLanes l ? l : null;
 		String [] [] cells = lanes == null ? (String [] []) model : null;
-		M3TextExtentCache.Measurer measurer = lanes == null ? null : (label, font) -> M3TextExtentCache.pack (lanes.getChars (label, buffer, 0), font);
+		TextExtentCache.Measurer measurer = lanes == null ? null : (label, font) -> TextExtentCache.pack (lanes.getChars (label, buffer, 0), font);
 		for (int frame = 0; frame < FRAMES; frame++) {
 			int top = random.nextInt (rows - WINDOW);
 			long start = System.nanoTime ();
@@ -130,7 +130,7 @@ public final class M3ImmediateLabelBench {
 				for (int c = 0; c < columns; c++) {
 					if (lanes != null) {
 						sink += lanes.getChars (r, c, buffer, 0);
-						sink += M3TextExtentCache.width (lanes.extent (r, c, 0, measurer));
+						sink += TextExtentCache.width (lanes.extent (r, c, 0, measurer));
 					} else {
 						String text = cells [c] [r];
 						text.getChars (0, Math.min (text.length (), buffer.length), buffer, 0);

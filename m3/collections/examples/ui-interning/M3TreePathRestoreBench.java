@@ -14,7 +14,7 @@
  *******************************************************************************/
 package jdk.m3.collections.examples;
 
-import jdk.m3.collections.M3TreePathTrie;
+import jdk.m3.collections.TreePathTrie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -38,7 +38,7 @@ import java.util.Set;
  * (Object[] segments, hash = sum of segment hashes carried down the walk, a
  * HashSet of paths); no JFace code is used.</p>
  *
- * <p>{@link M3TreePathTrie} answers the same need with one int per path: the
+ * <p>{@link TreePathTrie} answers the same need with one int per path: the
  * restore walk derives the child's path id from the parent's id by one probe
  * of the edge table and reads the EXPANDED flag; no path object, no segment
  * array, no hashing of segments, and the state survives a rebuild of the
@@ -155,7 +155,7 @@ public final class M3TreePathRestoreBench {
 
 	/** The trie scheme: one path id per node, child id by one edge probe, EXPANDED flag in the lane. */
 	static final class PathIds {
-		final M3TreePathTrie trie = new M3TreePathTrie ();
+		final TreePathTrie trie = new TreePathTrie ();
 		final Tree tree;
 		int restored, probes;
 
@@ -164,27 +164,27 @@ public final class M3TreePathRestoreBench {
 		}
 
 		void expand (int node) {
-			trie.flag (pathId (node), M3TreePathTrie.EXPANDED, true);
+			trie.flag (pathId (node), TreePathTrie.EXPANDED, true);
 		}
 
 		int pathId (int node) {
-			return node < 0 ? M3TreePathTrie.ROOT : trie.child (pathId (tree.parent [node]), tree.element [node]);
+			return node < 0 ? TreePathTrie.ROOT : trie.child (pathId (tree.parent [node]), tree.element [node]);
 		}
 
 		void restore () {
 			restored = 0;
-			walk (0, M3TreePathTrie.ROOT);
+			walk (0, TreePathTrie.ROOT);
 		}
 
 		/* The trie is prefix-closed: below a path that is not interned no path is, so the subtree only collapses. */
 		private void walk (int node, int parentPath) {
-			int path = M3TreePathTrie.NOT_FOUND;
-			if (parentPath != M3TreePathTrie.NOT_FOUND) {
+			int path = TreePathTrie.NOT_FOUND;
+			if (parentPath != TreePathTrie.NOT_FOUND) {
 				probes++;
 				path = trie.find (parentPath, tree.element [node]);
-				if (path != M3TreePathTrie.NOT_FOUND && trie.flag (path, M3TreePathTrie.EXPANDED)) restored++;
+				if (path != TreePathTrie.NOT_FOUND && trie.flag (path, TreePathTrie.EXPANDED)) restored++;
 			}
-			int below = path != M3TreePathTrie.NOT_FOUND && trie.hasChildren (path) ? path : M3TreePathTrie.NOT_FOUND;
+			int below = path != TreePathTrie.NOT_FOUND && trie.hasChildren (path) ? path : TreePathTrie.NOT_FOUND;
 			for (int child = tree.firstChild [node]; child >= 0; child = tree.nextSibling [child]) walk (child, below);
 		}
 	}

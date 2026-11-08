@@ -5,7 +5,7 @@ package jdk.m3.eclipse.core.impl;
 import jdk.m3.arrays.M3Arrays;
 import jdk.m3.arrays.M3Utf16ArrayView;
 import jdk.m3.ast.M3ASTHierarchy;
-import jdk.m3.collections.M3LongIndexProjection;
+import jdk.m3.collections.LongIndexProjection;
 import jdk.m3.eclipse.core.M3EclipseCore;
 import jdk.m3.file.M3NioFile;
 import jdk.m3.text.LocalM3Arena;
@@ -35,8 +35,8 @@ public final class M3EclipseCoreProvider implements M3EclipseCore {
         return M3Arrays.chars(Objects.requireNonNull(source, "source"));
     }
 
-    @Override public M3LongIndexProjection index(long[] source) {
-        return M3LongIndexProjection.snapshot(Objects.requireNonNull(source, "source"));
+    @Override public LongIndexProjection index(long[] source) {
+        return LongIndexProjection.snapshot(Objects.requireNonNull(source, "source"));
     }
 
     @Override public M3ASTHierarchy hierarchy(

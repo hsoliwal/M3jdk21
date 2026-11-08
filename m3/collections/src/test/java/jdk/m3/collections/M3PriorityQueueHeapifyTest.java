@@ -115,12 +115,12 @@ final class M3PriorityQueueHeapifyTest {
     }
 
     @Test void sharedGrowthRetainsExactOriginalCapacityFormula() {
-        assertEquals(11, M3PriorityQueueGrowth.nextCapacity(0, 1));
-        assertEquals(24, M3PriorityQueueGrowth.nextCapacity(11, 12));
-        assertEquals(128, M3PriorityQueueGrowth.nextCapacity(63, 64));
-        assertEquals(96, M3PriorityQueueGrowth.nextCapacity(64, 65));
-        assertEquals(190, M3PriorityQueueGrowth.nextCapacity(127, 128));
+        assertEquals(11, PriorityQueueGrowth.nextCapacity(0, 1));
+        assertEquals(24, PriorityQueueGrowth.nextCapacity(11, 12));
+        assertEquals(128, PriorityQueueGrowth.nextCapacity(63, 64));
+        assertEquals(96, PriorityQueueGrowth.nextCapacity(64, 65));
+        assertEquals(190, PriorityQueueGrowth.nextCapacity(127, 128));
         assertEquals(Integer.MAX_VALUE,
-                M3PriorityQueueGrowth.nextCapacity(Integer.MAX_VALUE - 8, Integer.MAX_VALUE));
+                PriorityQueueGrowth.nextCapacity(Integer.MAX_VALUE - 8, Integer.MAX_VALUE));
     }
 }

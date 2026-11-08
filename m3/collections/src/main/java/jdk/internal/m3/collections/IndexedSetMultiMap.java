@@ -7,8 +7,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import jdk.m3.collections.M3ArrayList;
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3IndexedListSnapshot;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.IndexedListSnapshot;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3LinkedHashSet;
 
@@ -17,7 +17,7 @@ import jdk.m3.collections.M3LinkedHashSet;
  * storage: one M3 set per admitted key, no retained mapping Entry/Node owner.
  * Value duplicates are suppressed per key; total size counts pairs, not keys.
  * No Guava/Eclipse/Apache runtime or adapter is required. Snapshots use
- * M3IndexedListSnapshot's reusable physical-index filtering/sorting/JNI atoms.
+ * IndexedListSnapshot's reusable physical-index filtering/sorting/JNI atoms.
  */
 public final class IndexedSetMultiMap<K, V> {
     private final M3LinkedHashMap<K, M3LinkedHashSet<V>> groups = new M3LinkedHashMap<>();
@@ -56,16 +56,16 @@ public final class IndexedSetMultiMap<K, V> {
     }
 
     /** A detached M3 indexed snapshot; no live vendor value-collection contract. */
-    public M3IndexedListSnapshot<V> snapshot(Object key) {
+    public IndexedListSnapshot<V> snapshot(Object key) {
         Set<V> values = groups.get(key);
-        return values == null ? M3IndexedListSnapshot.<V>copyOf(new M3ArrayList<>())
-                : M3IndexedListSnapshot.copyOf(values);
+        return values == null ? IndexedListSnapshot.<V>copyOf(new M3ArrayList<>())
+                : IndexedListSnapshot.copyOf(values);
     }
 
     /** Filter once per admitted occurrence, then reuse immutable physical indexes. */
-    public M3IndexedListSnapshot<V> snapshotFiltered(
+    public IndexedListSnapshot<V> snapshotFiltered(
             Object key, Predicate<? super V> predicate,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         return snapshot(key).filtered(Objects.requireNonNull(predicate, "predicate"), backend);
     }
 
@@ -81,7 +81,7 @@ public final class IndexedSetMultiMap<K, V> {
             @Override public boolean remove(Object value) { return IndexedSetMultiMap.this.remove(key, value); }
             @Override public void clear() { IndexedSetMultiMap.this.removeAll(key); }
             @Override public Iterator<V> iterator() {
-                M3IndexedListSnapshot<V> snapshot = snapshot(key);
+                IndexedListSnapshot<V> snapshot = snapshot(key);
                 Iterator<V> selected = snapshot.iterator();
                 return new Iterator<>() {
                     private V last;
@@ -102,10 +102,10 @@ public final class IndexedSetMultiMap<K, V> {
         };
     }
 
-    public M3IndexedListSnapshot<V> removeAll(Object key) {
+    public IndexedListSnapshot<V> removeAll(Object key) {
         M3LinkedHashSet<V> removed = groups.remove(key);
-        if (removed == null) return M3IndexedListSnapshot.copyOf(new M3ArrayList<>());
-        M3IndexedListSnapshot<V> snapshot = M3IndexedListSnapshot.copyOf(removed);
+        if (removed == null) return IndexedListSnapshot.copyOf(new M3ArrayList<>());
+        IndexedListSnapshot<V> snapshot = IndexedListSnapshot.copyOf(removed);
         pairCount -= removed.size();
         revision++;
         return snapshot;

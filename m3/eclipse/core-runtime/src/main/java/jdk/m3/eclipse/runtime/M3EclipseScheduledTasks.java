@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.eclipse.runtime;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
@@ -36,7 +36,7 @@ public final class M3EclipseScheduledTasks {
     /** Submit an ordinary Callable without introducing a second task-state owner. */
     public static <V> Future<V> submit(
             ExecutorService executor,
-            M3ProgressMonitor owner,
+            ProgressMonitor owner,
             String taskName,
             long totalWork,
             Callable<V> callable) {
@@ -57,7 +57,7 @@ public final class M3EclipseScheduledTasks {
     /** Submit Runnable using the same Future/cancellation and progress contract. */
     public static Future<Void> submit(
             ExecutorService executor,
-            M3ProgressMonitor owner,
+            ProgressMonitor owner,
             String taskName,
             long totalWork,
             Runnable runnable) {
@@ -71,7 +71,7 @@ public final class M3EclipseScheduledTasks {
      */
     public static <V> ScheduledFuture<V> schedule(
             ScheduledExecutorService executor,
-            M3ProgressMonitor owner,
+            ProgressMonitor owner,
             String taskName,
             long totalWork,
             Callable<V> callable,
@@ -88,7 +88,7 @@ public final class M3EclipseScheduledTasks {
     /** Schedule Runnable, preserving the ScheduledFuture null-result contract. */
     public static ScheduledFuture<Void> schedule(
             ScheduledExecutorService executor,
-            M3ProgressMonitor owner,
+            ProgressMonitor owner,
             String taskName,
             long totalWork,
             Runnable runnable,
@@ -111,7 +111,7 @@ public final class M3EclipseScheduledTasks {
      */
     public static ScheduledFuture<IStatus> scheduleStatus(
             ScheduledExecutorService executor,
-            M3ProgressMonitor owner,
+            ProgressMonitor owner,
             String taskName,
             long totalWork,
             M3EclipseJobs.Task task,
@@ -129,20 +129,20 @@ public final class M3EclipseScheduledTasks {
     }
 
     private static void checked(
-            M3ProgressMonitor owner,
+            ProgressMonitor owner,
             String taskName,
             long totalWork,
             Object action) {
         Objects.requireNonNull(owner, "owner");
         Objects.requireNonNull(taskName, "taskName");
         Objects.requireNonNull(action, "action");
-        if (totalWork < M3ProgressMonitor.UNKNOWN) {
+        if (totalWork < ProgressMonitor.UNKNOWN) {
             throw new IllegalArgumentException("totalWork below UNKNOWN");
         }
     }
 
     private static <V> V invoke(
-            M3ProgressMonitor owner,
+            ProgressMonitor owner,
             String taskName,
             long totalWork,
             Callable<V> callable) throws Exception {
@@ -170,11 +170,11 @@ public final class M3EclipseScheduledTasks {
      */
     private static final class CancelAwareScheduledFuture<V> implements ScheduledFuture<V> {
         private final ScheduledFuture<V> delegate;
-        private final M3ProgressMonitor owner;
+        private final ProgressMonitor owner;
 
         private CancelAwareScheduledFuture(
                 ScheduledFuture<V> delegate,
-                M3ProgressMonitor owner) {
+                ProgressMonitor owner) {
             this.delegate = Objects.requireNonNull(delegate, "delegate");
             this.owner = Objects.requireNonNull(owner, "owner");
         }

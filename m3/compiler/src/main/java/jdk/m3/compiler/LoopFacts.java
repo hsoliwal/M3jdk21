@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.compiler;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.Objects;
 
 /** Counted int-loop arithmetic. Facts describe the header, never effects of the body. */
@@ -24,7 +24,7 @@ public final class LoopFacts {
 
   /** Includes the final induction update: it too must not wrap a Java int. */
   public static Count count(int start, int limit, int step, Relation relation,
-                            M3ProgressMonitor monitor) {
+                            ProgressMonitor monitor) {
     Objects.requireNonNull(relation, "relation");
     if (monitor != null) monitor.checkCanceled();
     boolean enters = switch (relation) {
@@ -51,7 +51,7 @@ public final class LoopFacts {
   private static Count unknown(String reason) { return new Count(Kind.UNKNOWN, -1, reason); }
 
   /** Four int lanes per loop: start, limit, step, Relation.ordinal(). Java is the default. */
-  public static long[] batch(int[] encoded, M3ProgressMonitor monitor) {
+  public static long[] batch(int[] encoded, ProgressMonitor monitor) {
     Objects.requireNonNull(encoded, "encoded");
     if (monitor != null) monitor.checkCanceled();
     if (encoded.length % 4 != 0) throw new IllegalArgumentException("four lanes per loop required");
@@ -67,7 +67,7 @@ public final class LoopFacts {
   }
 
   /** Explicit, opt-in JNI. The caller loads its reviewed library; there is no silent fallback. */
-  public static long[] nativeBatch(int[] encoded, M3ProgressMonitor monitor) {
+  public static long[] nativeBatch(int[] encoded, ProgressMonitor monitor) {
     Objects.requireNonNull(encoded, "encoded");
     if (monitor != null) monitor.checkCanceled();
     if (encoded.length % 4 != 0) throw new IllegalArgumentException("four lanes per loop required");

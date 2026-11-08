@@ -145,11 +145,11 @@ public final class IntArrayList implements IntList {
         return original - write;
     }
     /** Detached payload with persistent logical->physical index coordinates. */
-    @Override public M3IntIndexedSnapshot snapshot() { return M3IntIndexedSnapshot.copyOf(data, size); }
-    @Override public M3IntIndexedSnapshot filteredSnapshot(IntPredicate predicate) { return snapshot().filtered(predicate); }
-    @Override public M3IntIndexedSnapshot maskedSnapshot(byte[] states, int required,
-            M3IndexMaskCompactor.Backend backend) {
-        return M3IntIndexedSnapshot.fromAlignedMask(data, size, states, required, backend);
+    @Override public IntIndexedSnapshot snapshot() { return IntIndexedSnapshot.copyOf(data, size); }
+    @Override public IntIndexedSnapshot filteredSnapshot(IntPredicate predicate) { return snapshot().filtered(predicate); }
+    @Override public IntIndexedSnapshot maskedSnapshot(byte[] states, int required,
+            IndexMaskCompactor.Backend backend) {
+        return IntIndexedSnapshot.fromAlignedMask(data, size, states, required, backend);
     }
     @Override public void ensureCapacity(int minimumCapacity) {
         if (minimumCapacity < 0) throw new OutOfMemoryError("array size overflow");

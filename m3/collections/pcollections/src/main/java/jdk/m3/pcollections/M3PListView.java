@@ -14,8 +14,8 @@
  *******************************************************************************/
 package jdk.m3.pcollections;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3IndexMaskCompactor.Backend;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor.Backend;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serial;
@@ -126,7 +126,7 @@ public final class M3PListView<E> extends AbstractUnmodifiableList<E>
         for (int index = 0; index < length; index++) {
             if (predicate.test(get(index))) states[index] = 1;
         }
-        return selected(M3IndexMaskCompactor.selectPositions(states, 1, backend));
+        return selected(IndexMaskCompactor.selectPositions(states, 1, backend));
     }
 
     /**
@@ -140,12 +140,12 @@ public final class M3PListView<E> extends AbstractUnmodifiableList<E>
         if (states.length != length) throw new IllegalArgumentException("State/view lengths differ");
         if ((requiredMask & ~0xff) != 0) throw new IllegalArgumentException("Mask must fit an unsigned byte");
         requireBackend(backend);
-        return selected(M3IndexMaskCompactor.selectPositions(states.clone(), requiredMask, backend));
+        return selected(IndexMaskCompactor.selectPositions(states.clone(), requiredMask, backend));
     }
 
     private static void requireBackend(Backend backend) {
         Objects.requireNonNull(backend, "backend");
-        if (backend == Backend.NATIVE_REQUIRED && !M3IndexMaskCompactor.nativeAvailable()) {
+        if (backend == Backend.NATIVE_REQUIRED && !IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
         }
     }

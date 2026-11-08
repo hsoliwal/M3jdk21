@@ -34,15 +34,15 @@ public final class LongIntHashMap {
     private int zeroValue;
     private final float loadFactor;
 
-    public LongIntHashMap() { this(16, M3DenseHash.DEFAULT_LOAD_FACTOR); }
-    public LongIntHashMap(int expected) { this(expected, M3DenseHash.DEFAULT_LOAD_FACTOR); }
+    public LongIntHashMap() { this(16, DenseHash.DEFAULT_LOAD_FACTOR); }
+    public LongIntHashMap(int expected) { this(expected, DenseHash.DEFAULT_LOAD_FACTOR); }
     public LongIntHashMap(int expected, float loadFactor) {
         this.loadFactor = loadFactor;
-        int cap = M3DenseHash.capacityFor(expected, loadFactor);
+        int cap = DenseHash.capacityFor(expected, loadFactor);
         keys = new long[cap];
         values = new int[cap];
         mask = cap - 1;
-        threshold = M3DenseHash.threshold(cap, loadFactor);
+        threshold = DenseHash.threshold(cap, loadFactor);
     }
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
@@ -72,7 +72,7 @@ public final class LongIntHashMap {
             if (size > threshold) rehash(keys.length << 1);
             return old;
         }
-        int pos = M3DenseHash.mix(key) & mask;
+        int pos = DenseHash.mix(key) & mask;
         long cur;
         while ((cur = keys[pos]) != 0L) {
             if (cur == key) {
@@ -94,7 +94,7 @@ public final class LongIntHashMap {
             zeroValue = 0;
             return old;
         }
-        int pos = M3DenseHash.mix(key) & mask;
+        int pos = DenseHash.mix(key) & mask;
         long cur;
         while ((cur = keys[pos]) != 0L) {
             if (cur == key) {
@@ -114,7 +114,7 @@ public final class LongIntHashMap {
             put(0L, next);
             return next;
         }
-        int pos = M3DenseHash.mix(key) & mask;
+        int pos = DenseHash.mix(key) & mask;
         long current;
         while ((current = keys[pos]) != 0L) {
             if (current == key) return values[pos] += delta;
@@ -149,7 +149,7 @@ public final class LongIntHashMap {
     }
 
     private int find(long key) {
-        int pos = M3DenseHash.mix(key) & mask;
+        int pos = DenseHash.mix(key) & mask;
         long cur;
         while ((cur = keys[pos]) != 0L) {
             if (cur == key) return pos;
@@ -163,7 +163,7 @@ public final class LongIntHashMap {
             pos = (pos + 1) & mask;
             long cur;
             while ((cur = keys[pos]) != 0L) {
-                int slot = M3DenseHash.mix(cur) & mask;
+                int slot = DenseHash.mix(cur) & mask;
                 if (last <= pos ? last >= slot || slot > pos : last >= slot && slot > pos) break;
                 pos = (pos + 1) & mask;
             }
@@ -182,11 +182,11 @@ public final class LongIntHashMap {
         keys = new long[newCap];
         values = new int[newCap];
         mask = newCap - 1;
-        threshold = M3DenseHash.threshold(newCap, loadFactor);
+        threshold = DenseHash.threshold(newCap, loadFactor);
         for (int i = 0; i < oldK.length; i++) {
             long key = oldK[i];
             if (key != 0L) {
-                int p = M3DenseHash.mix(key) & mask;
+                int p = DenseHash.mix(key) & mask;
                 while (keys[p] != 0L) p = (p + 1) & mask;
                 keys[p] = key;
                 values[p] = oldV[i];

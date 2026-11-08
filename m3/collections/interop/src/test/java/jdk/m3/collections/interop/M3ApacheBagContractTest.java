@@ -3,8 +3,8 @@ package jdk.m3.collections.interop;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import jdk.m3.collections.M3CountedBag;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.CountedBag;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -81,7 +81,7 @@ final class M3ApacheBagContractTest {
 
     @Test void iteratorLiveUniqueAndRealPrimitiveMaskSelection() {
         M3ApacheBag<String> actual=new M3ApacheBag<>();
-        M3CountedBag<String> store=actual.m3Backend();
+        CountedBag<String> store=actual.m3Backend();
         actual.add("a",3);
         actual.add("b",2);
         var unique=actual.uniqueSet();
@@ -90,12 +90,12 @@ final class M3ApacheBagContractTest {
         actual.remove("b");
         assertEquals(1,unique.size());
         byte[] accepted={1};
-        M3CountedBag<String> selected=store.selectedDistinct(accepted,1,M3IndexMaskCompactor.Backend.JAVA);
+        CountedBag<String> selected=store.selectedDistinct(accepted,1,IndexMaskCompactor.Backend.JAVA);
         assertEquals(3,selected.count("a"));
-        if(M3IndexMaskCompactor.nativeAvailable()) {
-            assertEquals(3,store.selectedDistinct(accepted,1,M3IndexMaskCompactor.Backend.NATIVE_REQUIRED).count("a"));
+        if(IndexMaskCompactor.nativeAvailable()) {
+            assertEquals(3,store.selectedDistinct(accepted,1,IndexMaskCompactor.Backend.NATIVE_REQUIRED).count("a"));
         } else {
-            assertThrows(UnsatisfiedLinkError.class,()->store.selectedDistinct(accepted,1,M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+            assertThrows(UnsatisfiedLinkError.class,()->store.selectedDistinct(accepted,1,IndexMaskCompactor.Backend.NATIVE_REQUIRED));
         }
         actual.clear();
         assertTrue(unique.isEmpty());

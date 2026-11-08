@@ -3,10 +3,10 @@ package jdk.internal.m3.collections;
 
 import java.util.Locale;
 import java.util.Objects;
-import jdk.m3.collections.M3SignalColumns;
-import jdk.m3.collections.M3SignalDependencyEpochs;
-import jdk.m3.collections.M3SignalQualitySchema;
-import jdk.m3.collections.M3SourceSignalImage;
+import jdk.m3.collections.SignalColumns;
+import jdk.m3.collections.SignalDependencyEpochs;
+import jdk.m3.collections.SignalQualitySchema;
+import jdk.m3.collections.SourceSignalImage;
 
 /**
  * Manufacturer of precise SOURCE-OBSERVATION quality descriptors from the existing
@@ -18,8 +18,8 @@ import jdk.m3.collections.M3SourceSignalImage;
  * native and dynamically dispatched dependencies remain outside its proof.</p>
  */
 public final class SourceSignalQualityFactory {
-    private static final M3SourceSignalImage.Scalar[] SCALARS =
-            M3SourceSignalImage.Scalar.values();
+    private static final SourceSignalImage.Scalar[] SCALARS =
+            SourceSignalImage.Scalar.values();
 
     private SourceSignalQualityFactory() { }
 
@@ -30,19 +30,19 @@ public final class SourceSignalQualityFactory {
      * reflection, native/external mutation, and otherwise unrecorded relationships.
      */
     public static final class RecordedGraphBinding {
-        private final M3SignalQualitySchema schema;
-        private final M3SignalDependencyEpochs invalidations;
+        private final SignalQualitySchema schema;
+        private final SignalDependencyEpochs invalidations;
         private final boolean includeDispatchCandidates;
 
-        private RecordedGraphBinding(M3SignalQualitySchema schema,
-                M3SignalDependencyEpochs invalidations, boolean includeDispatchCandidates) {
+        private RecordedGraphBinding(SignalQualitySchema schema,
+                SignalDependencyEpochs invalidations, boolean includeDispatchCandidates) {
             this.schema = schema;
             this.invalidations = invalidations;
             this.includeDispatchCandidates = includeDispatchCandidates;
         }
 
-        public M3SignalQualitySchema schema() { return schema; }
-        public M3SignalDependencyEpochs invalidations() { return invalidations; }
+        public SignalQualitySchema schema() { return schema; }
+        public SignalDependencyEpochs invalidations() { return invalidations; }
         public boolean includesDispatchCandidates() { return includeDispatchCandidates; }
     }
 
@@ -53,10 +53,10 @@ public final class SourceSignalQualityFactory {
      * explicitly chosen direct/candidate policy; unrecorded edges require
      * conservative invalidation by the consuming runtime.
      */
-    public static RecordedGraphBinding bindRecordedGraph(M3SourceSignalImage image,
+    public static RecordedGraphBinding bindRecordedGraph(SourceSignalImage image,
             long sourceVersion, boolean includeDispatchCandidates) {
         Objects.requireNonNull(image, "verified compiler image");
-        M3SignalDependencyEpochs invalidations = M3SignalDependencyEpochs.from(
+        SignalDependencyEpochs invalidations = SignalDependencyEpochs.from(
                 image.relationships(), includeDispatchCandidates);
         return new RecordedGraphBinding(fromVerifiedCompilerImage(image,
                 invalidations, sourceVersion), invalidations, includeDispatchCandidates);
@@ -66,49 +66,49 @@ public final class SourceSignalQualityFactory {
      * Receive the original graph generation owner, with dispatch policy selected by
      * the caller. Returning a schema does not transfer or hide invalidation control.
      */
-    public static M3SignalQualitySchema fromVerifiedCompilerImage(
-            M3SourceSignalImage image, M3SignalDependencyEpochs epochs, long sourceVersion) {
+    public static SignalQualitySchema fromVerifiedCompilerImage(
+            SourceSignalImage image, SignalDependencyEpochs epochs, long sourceVersion) {
         Objects.requireNonNull(image, "verified compiler image");
         Objects.requireNonNull(epochs, "dependency epochs");
-        M3SignalColumns columns = image.columns();
+        SignalColumns columns = image.columns();
         if (columns.columnCount() != SCALARS.length || image.rowCount() != epochs.rowCount()) {
             throw new IllegalArgumentException("original compiler scalar schema / row mismatch");
         }
-        M3SignalQualitySchema.Spec[] specifications =
-                new M3SignalQualitySchema.Spec[SCALARS.length];
+        SignalQualitySchema.Spec[] specifications =
+                new SignalQualitySchema.Spec[SCALARS.length];
         for (int i = 0; i < SCALARS.length; i++) {
-            M3SourceSignalImage.Scalar scalar = SCALARS[i];
-            if (columns.origin(i) != M3SignalColumns.Origin.STATIC) {
+            SourceSignalImage.Scalar scalar = SCALARS[i];
+            if (columns.origin(i) != SignalColumns.Origin.STATIC) {
                 throw new IllegalArgumentException("source image non-static scalar");
             }
-            specifications[i] = new M3SignalQualitySchema.Spec(
+            specifications[i] = new SignalQualitySchema.Spec(
                     "javac." + scalar.name().toLowerCase(Locale.ROOT),
-                    family(scalar), M3SignalQualitySchema.Phase.COMPILER,
-                    M3SignalQualitySchema.Reliability.EXACT_FACT,
-                    M3SignalQualitySchema.Invalidation.SOURCE_VERSION,
+                    family(scalar), SignalQualitySchema.Phase.COMPILER,
+                    SignalQualitySchema.Reliability.EXACT_FACT,
+                    SignalQualitySchema.Invalidation.SOURCE_VERSION,
                     unit(scalar), "M3SourceSignals/javac21", Double.NaN, "");
         }
-        return M3SignalQualitySchema.fromCompilerImage(
+        return SignalQualitySchema.fromCompilerImage(
                 image, epochs, sourceVersion, specifications);
     }
 
-    private static M3SignalQualitySchema.Family family(M3SourceSignalImage.Scalar scalar) {
+    private static SignalQualitySchema.Family family(SourceSignalImage.Scalar scalar) {
         return switch (scalar) {
             case FIELDS, METHODS, CONSTRUCTORS, LAMBDAS ->
-                    M3SignalQualitySchema.Family.STRUCTURAL;
+                    SignalQualitySchema.Family.STRUCTURAL;
             case DISTINCT_TYPE_DEPENDENCIES, MEMBER_REFERENCES ->
-                    M3SignalQualitySchema.Family.DEPENDENCY;
+                    SignalQualitySchema.Family.DEPENDENCY;
             case CALL_SITES, DIRECT_CALLS, DISPATCH_CANDIDATES, UNRESOLVED_CALLS ->
-                    M3SignalQualitySchema.Family.CALL_GRAPH;
-            case ALLOCATION_SITES -> M3SignalQualitySchema.Family.ALLOCATION;
+                    SignalQualitySchema.Family.CALL_GRAPH;
+            case ALLOCATION_SITES -> SignalQualitySchema.Family.ALLOCATION;
             case LOOPS, BRANCHES, TRY_BLOCKS, CATCHES ->
-                    M3SignalQualitySchema.Family.CONTROL_FLOW;
+                    SignalQualitySchema.Family.CONTROL_FLOW;
             case INTERNAL_INCOMING_SITES, INTERNAL_OUTGOING_SITES ->
-                    M3SignalQualitySchema.Family.GRAPH;
+                    SignalQualitySchema.Family.GRAPH;
         };
     }
 
-    private static String unit(M3SourceSignalImage.Scalar scalar) {
+    private static String unit(SourceSignalImage.Scalar scalar) {
         return switch (scalar) {
             case DISTINCT_TYPE_DEPENDENCIES -> "recorded-types";
             case INTERNAL_INCOMING_SITES, INTERNAL_OUTGOING_SITES, CALL_SITES,

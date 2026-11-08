@@ -2,7 +2,7 @@
 package jdk.m3.collections.interop;
 
 import static org.junit.jupiter.api.Assertions.*;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -101,16 +101,16 @@ final class M3FiveLibraryPreparedRowsTest {
             Arrays.fill(escapedOrdinals, -1);
             assertEquals(a.cardinality(), first.size());
             var statesPlan = M3FiveLibraryPreparedRows.byState(source, 0x81, 0x04,
-                    M3IndexMaskCompactor.Backend.JAVA);
+                    IndexMaskCompactor.Backend.JAVA);
             BitSet statesExpected = new BitSet();
             for (int i = 0; i < original.size(); i++) {
                 int state = source.unsignedStateAt(i);
                 if ((state & 0x81) == 0x81 && (state & 4) == 0) statesExpected.set(i);
             }
             assertEquals(statesExpected, statesPlan.positionsCopy());
-            if (M3IndexMaskCompactor.nativeAvailable()) {
+            if (IndexMaskCompactor.nativeAvailable()) {
                 var nativePlan = M3FiveLibraryPreparedRows.byState(source, 0x81, 0x04,
-                        M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                        IndexMaskCompactor.Backend.NATIVE_REQUIRED);
                 assertArrayEquals(statesPlan.sourceOrdinalsCopy(), nativePlan.sourceOrdinalsCopy());
             }
         }
@@ -174,22 +174,22 @@ final class M3FiveLibraryPreparedRowsTest {
         assertThrows(IllegalArgumentException.class, () -> left.and(another));
         BitSet outside = new BitSet(); outside.set(2);
         assertThrows(IndexOutOfBoundsException.class, () -> M3FiveLibraryPreparedRows.fromBits(
-                source, outside, M3IndexMaskCompactor.Backend.JAVA));
+                source, outside, IndexMaskCompactor.Backend.JAVA));
         assertThrows(IndexOutOfBoundsException.class, () -> left.slice(0, 3));
         assertThrows(IllegalArgumentException.class, () -> M3FiveLibraryPreparedRows.byState(
-                source, 0x100, 0, M3IndexMaskCompactor.Backend.JAVA));
+                source, 0x100, 0, IndexMaskCompactor.Backend.JAVA));
         var empty = M3FiveLibraryPreparedRows.byState(source, 1, 1,
-                M3IndexMaskCompactor.Backend.JAVA);
+                IndexMaskCompactor.Backend.JAVA);
         assertTrue(empty.isEmpty());
         assertThrows(IllegalStateException.class, () -> left.refine((k, v) -> {
             throw new IllegalStateException("client predicate exception");
         }));
         assertEquals(2, left.size());
-        if (!M3IndexMaskCompactor.nativeAvailable()) {
+        if (!IndexMaskCompactor.nativeAvailable()) {
             AtomicInteger calls = new AtomicInteger();
             assertThrows(UnsatisfiedLinkError.class, () -> M3FiveLibraryPreparedRows.where(
                     source, (k, v) -> { calls.incrementAndGet(); return true; },
-                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                    IndexMaskCompactor.Backend.NATIVE_REQUIRED));
             assertEquals(0, calls.get());
         }
     }

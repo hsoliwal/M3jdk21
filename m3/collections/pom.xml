@@ -85,27 +85,27 @@
           <!-- JNI test gating (m3/search/pom.xml surefire pattern): the m3_arrays JNI-dependent classes are excluded from
                the default build and re-included by -Pm3-collections-native; see qualification/jni-test-gating-20261106. -->
           <excludes>
-            <exclude>**/M3BagRankIndexTest.java</exclude>
-            <exclude>**/M3ConcurrentContractTest.java</exclude>
-            <exclude>**/M3CountedBagTest.java</exclude>
-            <exclude>**/M3EntryFacadeCacheTest.java</exclude>
-            <exclude>**/M3FactoryContractTest.java</exclude>
-            <exclude>**/M3FootprintContractTest.java</exclude>
-            <exclude>**/M3IndexedMultiValueOccurrenceTest.java</exclude>
-            <exclude>**/M3IndexedOccurrenceArrayNativeTest.java</exclude>
-            <exclude>**/M3IndexedTableReentrantSortTest.java</exclude>
-            <exclude>**/M3IndexedTableReverseOffsetTest.java</exclude>
-            <exclude>**/M3IndexedTableTest.java</exclude>
-            <exclude>**/M3JdkCollectionDifferentialTest.java</exclude>
-            <exclude>**/M3LinkedHashBackshiftTest.java</exclude>
+            <exclude>**/BagRankIndexTest.java</exclude>
+            <exclude>**/ConcurrentContractTest.java</exclude>
+            <exclude>**/CountedBagTest.java</exclude>
+            <exclude>**/EntryFacadeCacheTest.java</exclude>
+            <exclude>**/FactoryContractTest.java</exclude>
+            <exclude>**/FootprintContractTest.java</exclude>
+            <exclude>**/IndexedMultiValueOccurrenceTest.java</exclude>
+            <exclude>**/IndexedOccurrenceArrayNativeTest.java</exclude>
+            <exclude>**/IndexedTableReentrantSortTest.java</exclude>
+            <exclude>**/IndexedTableReverseOffsetTest.java</exclude>
+            <exclude>**/IndexedTableTest.java</exclude>
+            <exclude>**/JdkCollectionDifferentialTest.java</exclude>
+            <exclude>**/LinkedHashBackshiftTest.java</exclude>
             <exclude>**/M3LinkedHashMapCapacityTest.java</exclude>
-            <exclude>**/M3MapContractTest.java</exclude>
+            <exclude>**/MapContractTest.java</exclude>
             <exclude>**/NativeFiveLibrarySdkNoVendorTest.java</exclude>
-            <exclude>**/M3NoRetainedStructuralEntryTest.java</exclude>
-            <exclude>**/M3ObjectCountsTest.java</exclude>
-            <exclude>**/M3RelationForEachTest.java</exclude>
-            <exclude>**/M3SdkOwnerFactoryTest.java</exclude>
-            <exclude>**/M3SequenceContractTest.java</exclude>
+            <exclude>**/NoRetainedStructuralEntryTest.java</exclude>
+            <exclude>**/ObjectCountsTest.java</exclude>
+            <exclude>**/RelationForEachTest.java</exclude>
+            <exclude>**/SdkOwnerFactoryTest.java</exclude>
+            <exclude>**/SequenceContractTest.java</exclude>
           </excludes>
         </configuration>
       </plugin>

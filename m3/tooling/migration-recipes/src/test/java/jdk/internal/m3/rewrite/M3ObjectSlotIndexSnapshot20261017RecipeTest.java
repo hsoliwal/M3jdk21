@@ -36,8 +36,8 @@ final class M3ObjectSlotIndexSnapshot20261017RecipeTest {
         assertEquals(List.of(
                 "m3/collections/src/main/java/jdk/m3/collections/ObjectIndexSnapshot.java",
                 STORE,
-                "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexSelfTest.java",
-                "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexTest.java"),
+                "m3/collections/src/test/java/jdk/m3/collections/ObjectSlotIndexSelfTest.java",
+                "m3/collections/src/test/java/jdk/m3/collections/ObjectSlotIndexTest.java"),
                 recipe.targetPaths());
 
         var first = recipe.run(

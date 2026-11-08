@@ -3,8 +3,8 @@
 // Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/CompiledSearch.java (blob bc7395a6953a) by M3_SEARCH_RELOCATE v1.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.nio.ByteBuffer;
 
 /** Precomputed search pattern safe for repeated byte-array lookups. */
@@ -12,8 +12,8 @@ public interface CompiledSearch extends AutoCloseable {
     int indexOf(byte[] haystack, int fromIndex);
 
     /** Progress-aware compatibility entrypoint; native execution polls only at its boundaries. */
-    default int indexOf(byte[] haystack, int fromIndex, M3ProgressMonitor monitor) {
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    default int indexOf(byte[] haystack, int fromIndex, ProgressMonitor monitor) {
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         int result = indexOf(haystack, fromIndex);
         checked.checkCanceled();
@@ -46,8 +46,8 @@ public interface CompiledSearch extends AutoCloseable {
     }
 
     /** Progress-aware reverse lookup; native execution polls at its existing Java boundaries. */
-    default int lastIndexOf(byte[] haystack, int fromIndex, M3ProgressMonitor monitor) {
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    default int lastIndexOf(byte[] haystack, int fromIndex, ProgressMonitor monitor) {
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         int result = lastIndexOf(haystack, fromIndex);
         checked.checkCanceled();
@@ -77,16 +77,16 @@ public interface CompiledSearch extends AutoCloseable {
         return lastIndexOf(copy, fromIndex);
     }
 
-    default int indexOf(ByteBuffer haystack, int fromIndex, M3ProgressMonitor monitor) {
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    default int indexOf(ByteBuffer haystack, int fromIndex, ProgressMonitor monitor) {
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         int result = indexOf(haystack, fromIndex);
         checked.checkCanceled();
         return result;
     }
 
-    default int lastIndexOf(ByteBuffer haystack, int fromIndex, M3ProgressMonitor monitor) {
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    default int lastIndexOf(ByteBuffer haystack, int fromIndex, ProgressMonitor monitor) {
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         int result = lastIndexOf(haystack, fromIndex);
         checked.checkCanceled();

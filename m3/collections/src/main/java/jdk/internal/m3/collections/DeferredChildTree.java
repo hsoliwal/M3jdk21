@@ -18,8 +18,8 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
 import jdk.m3.collections.ParentOwned;
-import jdk.m3.collections.M3RuntimeHeap;
-import jdk.m3.collections.M3TransientFacadeStore;
+import jdk.m3.collections.RuntimeHeap;
+import jdk.m3.collections.TransientFacadeStore;
 
 /**
  * DOOP parent-owned logical children: no per-child Java Entry or Node objects.
@@ -31,7 +31,7 @@ import jdk.m3.collections.M3TransientFacadeStore;
  * ordinal is O(log sibling count); reading a consecutive viewport is O(log n + window).
  * The original child order is never changed by scheduling or facade materialization.
  *
- * <p>The facade factory belongs to the existing {@link M3TransientFacadeStore}. Behavior
+ * <p>The facade factory belongs to the existing {@link TransientFacadeStore}. Behavior
  * operations change parent-owned bits without calling it. Publicly exposed facades are
  * pinned and keep ordinary Java identity. This class does not attempt to transparently
  * swap live Java references or persist mutable arbitrary object graphs. The existing
@@ -42,8 +42,8 @@ import jdk.m3.collections.M3TransientFacadeStore;
  * non-escape before using {@link #withInternalFacade(long, Consumer)}. There is no
  * source-to-bytecode rewrite or JVM-level escape proof in this component.
  */
-@ParentOwned(owner = "DeferredChildTree", flags = M3TransientFacadeStore.DEFAULT_MODE
-        | M3TransientFacadeStore.AUTO_HEAP_PRESSURE | (1 << 16))
+@ParentOwned(owner = "DeferredChildTree", flags = TransientFacadeStore.DEFAULT_MODE
+        | TransientFacadeStore.AUTO_HEAP_PRESSURE | (1 << 16))
 /**
  * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/DeferredChildTree.java}
  * blob {@code 50ed19dbb542d926c7e87c443da54dadf6d9ca13} at com.synexia develop {@code eaacff5931ef16a1a52425043bb71b821eda3515} by
@@ -54,12 +54,12 @@ public final class DeferredChildTree<T> implements AutoCloseable {
     public static final int VIEWPORT_OVERSCAN = 1 << 16;
     /** 4k maximum rows per query (visible + optional overscan). */
     public static final int MAX_WINDOW = 4096;
-    public static final int DEFAULT_MODE = M3TransientFacadeStore.DEFAULT_MODE
-            | M3TransientFacadeStore.AUTO_HEAP_PRESSURE | VIEWPORT_OVERSCAN;
+    public static final int DEFAULT_MODE = TransientFacadeStore.DEFAULT_MODE
+            | TransientFacadeStore.AUTO_HEAP_PRESSURE | VIEWPORT_OVERSCAN;
     private static final int SLOT_BYTES = 31;
     private static final long ESTIMATED_PREFETCH_BYTES = 128L;
 
-    private final M3TransientFacadeStore<T> facades;
+    private final TransientFacadeStore<T> facades;
     private final int mode;
 
     // Slot zero is an invisible root whose children are the top-level logical rows.
@@ -83,26 +83,26 @@ public final class DeferredChildTree<T> implements AutoCloseable {
     private int size;
     private boolean closed;
 
-    public DeferredChildTree(M3TransientFacadeStore.Factory<T> factory) {
+    public DeferredChildTree(TransientFacadeStore.Factory<T> factory) {
         this(factory, DEFAULT_MODE);
     }
 
     /** Construction flags include the existing facade-store policies and VIEWPORT_OVERSCAN. */
-    public DeferredChildTree(M3TransientFacadeStore.Factory<T> factory, int constructionFlags) {
+    public DeferredChildTree(TransientFacadeStore.Factory<T> factory, int constructionFlags) {
         this(factory, (id, facade) -> { }, constructionFlags);
     }
 
-    public DeferredChildTree(M3TransientFacadeStore.Factory<T> factory,
-            M3TransientFacadeStore.Disposer<T> disposer, int constructionFlags) {
-        int known = VIEWPORT_OVERSCAN | M3TransientFacadeStore.RECREATE_UNEXPOSED
-                | M3TransientFacadeStore.RETAIN_UNEXPOSED | M3TransientFacadeStore.PIN_EXPOSED
-                | M3TransientFacadeStore.PRESSURE_TRIMMABLE
-                | M3TransientFacadeStore.AUTO_HEAP_PRESSURE;
+    public DeferredChildTree(TransientFacadeStore.Factory<T> factory,
+            TransientFacadeStore.Disposer<T> disposer, int constructionFlags) {
+        int known = VIEWPORT_OVERSCAN | TransientFacadeStore.RECREATE_UNEXPOSED
+                | TransientFacadeStore.RETAIN_UNEXPOSED | TransientFacadeStore.PIN_EXPOSED
+                | TransientFacadeStore.PRESSURE_TRIMMABLE
+                | TransientFacadeStore.AUTO_HEAP_PRESSURE;
         if ((constructionFlags & ~known) != 0) {
             throw new IllegalArgumentException("unknown DOOP construction flag");
         }
         mode = constructionFlags;
-        facades = new M3TransientFacadeStore<>(Objects.requireNonNull(factory, "factory"),
+        facades = new TransientFacadeStore<>(Objects.requireNonNull(factory, "factory"),
                 Objects.requireNonNull(disposer, "disposer"), constructionFlags & ~VIEWPORT_OVERSCAN);
     }
 
@@ -300,7 +300,7 @@ public final class DeferredChildTree<T> implements AutoCloseable {
     /** Deterministic injection for boundary tests; zero-visible requests do no work. */
     synchronized int fillSortedChildWindow(long parentId, int firstOrdinal,
             int visibleRows, int overscanRows, long[] output, int offset,
-            M3RuntimeHeap.Snapshot observed) {
+            RuntimeHeap.Snapshot observed) {
         requireOpen();
         int parent = slotOrRoot(parentId);
         Objects.requireNonNull(output, "output");
@@ -315,7 +315,7 @@ public final class DeferredChildTree<T> implements AutoCloseable {
         int admitted = 0;
         if ((mode & VIEWPORT_OVERSCAN) != 0 && overscanRows > 0
                 && mandatory == visibleRows) {
-            M3RuntimeHeap.Snapshot heap = observed == null ? M3RuntimeHeap.current() : observed;
+            RuntimeHeap.Snapshot heap = observed == null ? RuntimeHeap.current() : observed;
             long spare = Math.max(0L, heap.freeToMaximum() - heap.safetyReserve());
             admitted = (int) Math.min((long) overscanRows, spare / ESTIMATED_PREFETCH_BYTES);
         }
@@ -378,7 +378,7 @@ public final class DeferredChildTree<T> implements AutoCloseable {
 
     /** Deterministic package-private pressure seam for tests. */
     synchronized int fillChildWindow(long parentId, int firstOrdinal, int visibleRows,
-            int overscanRows, long[] output, int offset, M3RuntimeHeap.Snapshot observed) {
+            int overscanRows, long[] output, int offset, RuntimeHeap.Snapshot observed) {
         requireOpen();
         int parent = slotOrRoot(parentId);
         Objects.requireNonNull(output, "output");
@@ -395,7 +395,7 @@ public final class DeferredChildTree<T> implements AutoCloseable {
         int admitted = 0;
         if ((mode & VIEWPORT_OVERSCAN) != 0 && overscanRows > 0
                 && mandatory == visibleRows) {
-            M3RuntimeHeap.Snapshot heap = observed == null ? M3RuntimeHeap.current() : observed;
+            RuntimeHeap.Snapshot heap = observed == null ? RuntimeHeap.current() : observed;
             long spare = Math.max(0L, heap.freeToMaximum() - heap.safetyReserve());
             admitted = (int) Math.min((long) overscanRows, spare / ESTIMATED_PREFETCH_BYTES);
         }
@@ -431,7 +431,7 @@ public final class DeferredChildTree<T> implements AutoCloseable {
     /** Package-private deterministic pressure source; ordinary callers need no knobs. */
     synchronized int fillChildWindowColumns(long parentId, int firstOrdinal,
             int visibleRows, int overscanRows, long[] ids, long[] bits,
-            short[] flagWords, int offset, M3RuntimeHeap.Snapshot observed) {
+            short[] flagWords, int offset, RuntimeHeap.Snapshot observed) {
         requireOpen();
         int parent = slotOrRoot(parentId);
         Objects.requireNonNull(ids, "ids");
@@ -456,7 +456,7 @@ public final class DeferredChildTree<T> implements AutoCloseable {
         int admitted = 0;
         if ((mode & VIEWPORT_OVERSCAN) != 0 && overscanRows > 0
                 && mandatory == visibleRows) {
-            M3RuntimeHeap.Snapshot heap = observed == null ? M3RuntimeHeap.current() : observed;
+            RuntimeHeap.Snapshot heap = observed == null ? RuntimeHeap.current() : observed;
             long spare = Math.max(0L, heap.freeToMaximum() - heap.safetyReserve());
             admitted = (int) Math.min((long) overscanRows, spare / ESTIMATED_PREFETCH_BYTES);
         }
@@ -708,7 +708,7 @@ public final class DeferredChildTree<T> implements AutoCloseable {
         if (wantedId < payload.length) return;
         int minimum = Math.addExact(wantedId, 1);
         long geometric = Math.max((long) minimum, (long) payload.length * 3L / 2L + 1L);
-        int next = Math.toIntExact(M3RuntimeHeap.chooseAmortizedCapacity(
+        int next = Math.toIntExact(RuntimeHeap.chooseAmortizedCapacity(
                 minimum, Math.min((long) Integer.MAX_VALUE - 1L, geometric), SLOT_BYTES));
         long[] nextPayload = Arrays.copyOf(payload, next);
         short[] nextFlags = Arrays.copyOf(flags, next);

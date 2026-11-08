@@ -19,7 +19,7 @@
  */
 package jdk.internal.m3.collections;
 
-import jdk.m3.collections.M3TreeProjection;
+import jdk.m3.collections.TreeProjection;
 
 /**
  * Logical viewport over a virtual Tree's flat visible-row projection.
@@ -35,17 +35,17 @@ public final class TreeWindow {
 	private static final long ESTIMATED_DERIVED_ROW_BYTES = 4_096;
 
 
-	private final M3TreeProjection projection;
+	private final TreeProjection projection;
 	private final ScrollMetrics scrollMetrics = new ScrollMetrics ();
 	private final WindowRuntime.RowWindow window = new WindowRuntime.RowWindow ();
 	private long generation;
 	private final int requestedOverscanRows;
 
-	public TreeWindow (M3TreeProjection projection) {
+	public TreeWindow (TreeProjection projection) {
 		this (projection, DEFAULT_OVERSCAN_ROWS);
 	}
 
-	public TreeWindow (M3TreeProjection projection, int overscanRows) {
+	public TreeWindow (TreeProjection projection, int overscanRows) {
 		if (projection == null) throw new IllegalArgumentException ("projection");
 		if (overscanRows < 0) throw new IllegalArgumentException ("negative overscan");
 		this.projection = projection;
@@ -176,16 +176,16 @@ public final class TreeWindow {
 		return window.paintCount ();
 	}
 
-	public M3TreeProjection.Row [] visibleWindow () {
+	public TreeProjection.Row [] visibleWindow () {
 		return projection.window (topRow (), visibleRows ());
 	}
 
-	public M3TreeProjection.Row [] paintWindow () {
+	public TreeProjection.Row [] paintWindow () {
 		return projection.window (firstPaintRow (), paintRowCount ());
 	}
 
 	/** Reuses caller-owned primitive storage for the current paint window and its ancestors. */
-	public void paintResidency (M3TreeProjection.Residency target) {
+	public void paintResidency (TreeProjection.Residency target) {
 		projection.residencyWindow (firstPaintRow (), paintRowCount (), target);
 	}
 

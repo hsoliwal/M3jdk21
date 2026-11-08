@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package jdk.internal.m3.indexstring;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import jdk.m3.precompute.EditDistancePlan;
 import java.util.Arrays;
 import java.util.Objects;
@@ -82,7 +82,7 @@ public final class MIndexTrieNavigation {
    * difference alone exceeds the cutoff.
    *
    * <p>A dead packed state is absorbing. Therefore {@link #walk(Utf16Machine, IntConsumer,
-   * WorkLimits, M3ProgressMonitor)} can reject an entire descendant subtree as soon as every band
+   * WorkLimits, ProgressMonitor)} can reject an entire descendant subtree as soon as every band
    * cell is above the cutoff. Shared prefixes are transitioned once by the existing trie walker,
    * rather than once for every vocabulary spelling below that prefix. States are opaque and belong
    * to the machine that produced them; they are not transferable between queries or cutoffs.
@@ -110,7 +110,7 @@ public final class MIndexTrieNavigation {
 
     /** The caller keeps the input stable during admission and owns monitor beginTask/done. */
     public BoundedLevenshteinMachine(CharSequence query, int maxEditDistance,
-        M3ProgressMonitor monitor) {
+        ProgressMonitor monitor) {
       Objects.requireNonNull(query, "query");
       if (maxEditDistance < 0 || maxEditDistance > MAX_EDIT_DISTANCE) {
         throw new IllegalArgumentException(
@@ -242,7 +242,7 @@ public final class MIndexTrieNavigation {
     }
 
     private static EditDistancePlan compileQuery(CharSequence query,
-        M3ProgressMonitor monitor) {
+        ProgressMonitor monitor) {
       if (query instanceof EditDistancePlan prepared) return prepared;
       final int length = query.length();
       // Invocation-local adapter only: the existing plan is the sole retained query snapshot.
@@ -271,7 +271,7 @@ public final class MIndexTrieNavigation {
   }
 
   public static Utf16Machine boundedLevenshtein(CharSequence query, int maxEditDistance,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     return new BoundedLevenshteinMachine(query, maxEditDistance, monitor);
   }
 
@@ -340,7 +340,7 @@ public final class MIndexTrieNavigation {
       return matchingRanks[Objects.checkIndex(ordinal, size())];
     }
     public int payloadAt(int ordinal) { return owner.payloadAtRank(rankAt(ordinal)); }
-    public int[] page(int offset, int length, M3ProgressMonitor monitor) {
+    public int[] page(int offset, int length, ProgressMonitor monitor) {
       Objects.checkFromIndexSize(offset, length, size());
       check(monitor);
       int[] result = new int[length];
@@ -391,7 +391,7 @@ public final class MIndexTrieNavigation {
   /** Package-private ownership boundary: all supplied lanes must already be permanently frozen. */
   static MIndexTrieNavigation compileShared(
       int[] starts, int[] counts, int[] terminals, char[] labels, int[] targets,
-      IntBinaryOperator transition, Limits limits, M3ProgressMonitor monitor) {
+      IntBinaryOperator transition, Limits limits, ProgressMonitor monitor) {
     Objects.requireNonNull(starts, "starts");
     Objects.requireNonNull(counts, "counts");
     Objects.requireNonNull(terminals, "terminals");
@@ -516,7 +516,7 @@ public final class MIndexTrieNavigation {
   public RankRange range(int state) { return new RankRange(firstRank(state), endRank(state)); }
 
   public int step(int state, char unit) { return step(state, unit, null); }
-  public int step(int state, char unit, M3ProgressMonitor monitor) {
+  public int step(int state, char unit, ProgressMonitor monitor) {
     checkedState(state);
     check(monitor);
     int result = transition.applyAsInt(state, unit);
@@ -534,7 +534,7 @@ public final class MIndexTrieNavigation {
 
   /** Consumes only the supplied range; a String slice is accepted as a CharSequence. */
   public int stateFor(CharSequence query, int begin, int end, Direction direction,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     Objects.requireNonNull(query, "query");
     Objects.requireNonNull(direction, "direction");
     Objects.checkFromToIndex(begin, end, query.length());
@@ -550,7 +550,7 @@ public final class MIndexTrieNavigation {
   }
 
   public int longestPrefixPayload(CharSequence query, int begin, int end, Direction direction,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     Objects.requireNonNull(query, "query");
     Objects.requireNonNull(direction, "direction");
     Objects.checkFromToIndex(begin, end, query.length());
@@ -568,7 +568,7 @@ public final class MIndexTrieNavigation {
   }
 
   /** Exact bounded page within a subtree. No rank sorting or spelling tests occur here. */
-  public int[] payloads(int state, int offset, int length, M3ProgressMonitor monitor) {
+  public int[] payloads(int state, int offset, int length, ProgressMonitor monitor) {
     int start = firstRank(state);
     Objects.checkFromIndexSize(offset, length, descendantCount(state));
     check(monitor);
@@ -587,13 +587,13 @@ public final class MIndexTrieNavigation {
    * have received earlier matches if it, the machine, cancellation or a work limit throws.
    */
   public WalkStats walk(Utf16Machine machine, IntConsumer onMatch, WorkLimits limits,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     Objects.requireNonNull(onMatch, "onMatch");
     return walkStates(machine, state -> onMatch.accept(terminalPayload[state]), limits, monitor);
   }
 
   private WalkStats walkStates(Utf16Machine machine, IntConsumer onMatch, WorkLimits limits,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     Objects.requireNonNull(machine, "machine");
     Objects.requireNonNull(limits, "limits");
     check(monitor);
@@ -659,7 +659,7 @@ public final class MIndexTrieNavigation {
   public Selection select(Utf16Machine machine) { return select(machine, WorkLimits.DEFAULT, null); }
 
   /** Materialized result with no partial publication on failure; use walk for streaming delivery. */
-  public Selection select(Utf16Machine machine, WorkLimits limits, M3ProgressMonitor monitor) {
+  public Selection select(Utf16Machine machine, WorkLimits limits, ProgressMonitor monitor) {
     Objects.requireNonNull(limits, "limits");
     check(monitor);
     int possible = Math.min(terminalCount(), limits.maxMatches());
@@ -685,7 +685,7 @@ public final class MIndexTrieNavigation {
    * A failure publishes no result. No parser, machine or query spelling is retained by the result.
    */
   public PreparedMatches precompute(Utf16Machine machine, WorkLimits limits,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     Objects.requireNonNull(machine, "machine");
     Objects.requireNonNull(limits, "limits");
     check(monitor);
@@ -710,7 +710,7 @@ public final class MIndexTrieNavigation {
 
   private int checkedState(int state) { return Objects.checkIndex(state, stateCount()); }
 
-  static void check(M3ProgressMonitor monitor) {
+  static void check(ProgressMonitor monitor) {
     if (Thread.currentThread().isInterrupted()) throw new CancellationException("trie operation interrupted");
     if (monitor != null) monitor.checkCanceled();
   }

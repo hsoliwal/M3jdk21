@@ -15,12 +15,12 @@ final class M3CollectionsPackTest {
 
     @Test
     void readOnlyFilteredAndSortedViews() {
-        M3FilteredViewsContract.main(new String[0]);
+        FilteredViewsContract.main(new String[0]);
     }
 
     @Test
     void mutableFilteredAndSortedViews() {
-        M3MutableFilteredViewsContract.main(new String[0]);
+        MutableFilteredViewsContract.main(new String[0]);
     }
 
     @Test

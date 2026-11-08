@@ -19,7 +19,7 @@ import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.LongConsumer;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.PrimitiveKind;
 import jdk.internal.m3.collections.bits.LazyBitAddressSpace;
 
@@ -46,13 +46,13 @@ public final class ProviderBackedPrimitiveTree {
     private final long[] childScratch;
     private final long[] validationScratch;
 
-    private final M3LazyPrimitiveAddressSpace parent;
-    private final M3LazyPrimitiveAddressSpace firstChild;
-    private final M3LazyPrimitiveAddressSpace lastChild;
-    private final M3LazyPrimitiveAddressSpace nextSibling;
-    private final M3LazyPrimitiveAddressSpace previousSibling;
-    private final M3LazyPrimitiveAddressSpace nextChildOffset;
-    private final M3LazyPrimitiveAddressSpace loadedChildCount;
+    private final LazyPrimitiveAddressSpace parent;
+    private final LazyPrimitiveAddressSpace firstChild;
+    private final LazyPrimitiveAddressSpace lastChild;
+    private final LazyPrimitiveAddressSpace nextSibling;
+    private final LazyPrimitiveAddressSpace previousSibling;
+    private final LazyPrimitiveAddressSpace nextChildOffset;
+    private final LazyPrimitiveAddressSpace loadedChildCount;
     private final LazyBitAddressSpace rootMembership;
     private final LazyBitAddressSpace expanded;
 
@@ -68,9 +68,9 @@ public final class ProviderBackedPrimitiveTree {
             int pageSize,
             PrimitiveKind... laneKinds) {
         this(
-                M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
                 provider,
                 pageSize,
                 laneKinds);
@@ -869,9 +869,9 @@ public final class ProviderBackedPrimitiveTree {
         return encoded == 0L ? -1 : Math.toIntExact(encoded) - 1;
     }
 
-    private static M3LazyPrimitiveAddressSpace ints(
+    private static LazyPrimitiveAddressSpace ints(
             int rootBits, int directoryBits, int leafBits) {
-        return new M3LazyPrimitiveAddressSpace(
+        return new LazyPrimitiveAddressSpace(
                 PrimitiveKind.INT, rootBits, directoryBits, leafBits);
     }
 }

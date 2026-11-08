@@ -43,7 +43,7 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
     private int last() { return backwards ? storage.first : storage.last; }
     private int next(int s) { return backwards ? storage.before[s] : storage.after[s]; }
     private int previous(int s) { return backwards ? storage.after[s] : storage.before[s]; }
-    private E value(int s) { return s < 0 ? null : M3SlotArrays.get(storage.values, s); }
+    private E value(int s) { return s < 0 ? null : SlotArrays.get(storage.values, s); }
     private void changed() { modCount++; if (reverse != null) { reverse.modCount++; } }
     private void insert(int before, int after, E value) {
         storage.insert(backwards ? after : before, backwards ? before : after, value); changed();
@@ -228,8 +228,8 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
     /** Validate live and free links and released references. */
     public void verifyInvariants() { storage.verify(); }
     private static final class Storage {
-        private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
-        private int[] before = M3SlotArrays.EMPTY_INTS, after = M3SlotArrays.EMPTY_INTS;
+        private Object[] values = SlotArrays.EMPTY_OBJECTS;
+        private int[] before = SlotArrays.EMPTY_INTS, after = SlotArrays.EMPTY_INTS;
         /** Physical-slot occupancy: one bit per slot, not one Java Node or Entry. */
         private static final long[] EMPTY_LIVE_MASK = new long[0];
         private long[] liveMask = EMPTY_LIVE_MASK;
@@ -258,7 +258,7 @@ public final class M3LinkedList<E> extends AbstractSequentialList<E> implements 
         }
         void insert(int b, int a, Object value) {
             if (free < 0 && used == values.length) {
-                int n = M3SlotArrays.grow(values.length);
+                int n = SlotArrays.grow(values.length);
                 Object[] v = Arrays.copyOf(values, n); int[] p = Arrays.copyOf(before, n), q = Arrays.copyOf(after, n);
                 long[] states = Arrays.copyOf(liveMask, ((n - 1) >>> 6) + 1);
                 values = v; before = p; after = q; liveMask = states;

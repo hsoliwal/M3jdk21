@@ -14,8 +14,8 @@
  *******************************************************************************/
 package jdk.m3.pcollections;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3IndexMaskCompactor.Backend;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor.Backend;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -48,7 +48,7 @@ public final class M3PViewsContract {
             case "--java" -> run();
             case "--absent" -> absentNative();
             case "--native" -> {
-                check(M3IndexMaskCompactor.nativeAvailable(), "Actual JNI library loaded");
+                check(IndexMaskCompactor.nativeAvailable(), "Actual JNI library loaded");
                 masks(Backend.NATIVE_REQUIRED);
                 predicateOrder(Backend.NATIVE_REQUIRED);
             }
@@ -209,7 +209,7 @@ public final class M3PViewsContract {
     }
 
     private static void absentNative() {
-        check(!M3IndexMaskCompactor.nativeAvailable(), "Absence probe must run without library");
+        check(!IndexMaskCompactor.nativeAvailable(), "Absence probe must run without library");
         AtomicInteger calls = new AtomicInteger();
         M3PListView<Integer> view = M3PListView.copyOf(List.of(1, 2, 3));
         expect(UnsatisfiedLinkError.class, () -> view.filter(value -> { calls.incrementAndGet(); return true; }, Backend.NATIVE_REQUIRED));

@@ -25,7 +25,7 @@ import org.apache.commons.collections4.set.PredicatedSortedSet;
  * live filtering views. Existing elements remain visible, rejected insertions
  * raise Apache-defined exceptions, and accepted mutations are forwarded to
  * the M3 storage owner. Do not substitute these for Guava filtered collections
- * or for {@link jdk.m3.collections.M3FilteredViews}, which hides elements.
+ * or for {@link jdk.m3.collections.FilteredViews}, which hides elements.
  *
  * <p>The public Commons API names, predicate type and sorted range contracts
  * remain Apache-owned. The M3 owners retain their array/slot/index layouts;

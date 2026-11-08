@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.compiler;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public final class Liveness {
    * A dead local is not a dead object: aliases, JNI/global roots, identity, synchronization,
    * weak-reference semantics and ownership remain separate proof obligations.
    */
-  public static Result analyze(long[] use, long[] def, int[][] successors, M3ProgressMonitor monitor) {
+  public static Result analyze(long[] use, long[] def, int[][] successors, ProgressMonitor monitor) {
     if (monitor != null) monitor.checkCanceled();
     Objects.requireNonNull(use, "use");
     Objects.requireNonNull(def, "def");
@@ -100,7 +100,7 @@ public final class Liveness {
    * Nodes are queued at most once; predecessor propagation uses the existing monotone equation.
    */
   public static WideResult analyze(BitSet[] use, BitSet[] def, int[][] successors,
-                                    int slotCount, M3ProgressMonitor monitor) {
+                                    int slotCount, ProgressMonitor monitor) {
     check(monitor);
     Objects.requireNonNull(use, "use"); Objects.requireNonNull(def, "def");
     Objects.requireNonNull(successors, "successors");
@@ -167,10 +167,10 @@ public final class Liveness {
     }
     return copy;
   }
-  private static void check(M3ProgressMonitor monitor) { if (monitor != null) monitor.checkCanceled(); }
+  private static void check(ProgressMonitor monitor) { if (monitor != null) monitor.checkCanceled(); }
 
   /** Batched lattice atom IN = USE | (OUT & ~DEF). Arrays must remain stable during the call. */
-  public static long[] transferBatch(long[] use, long[] def, long[] out, M3ProgressMonitor monitor) {
+  public static long[] transferBatch(long[] use, long[] def, long[] out, ProgressMonitor monitor) {
     check(monitor); dimensions(use, def, out);
     long[] result = new long[use.length];
     for (int i = 0; i < result.length; i++) {
@@ -181,7 +181,7 @@ public final class Liveness {
   }
 
   /** Opt-in JNI lattice atom using the same reviewed compiler library; never a per-node default. */
-  public static long[] nativeTransferBatch(long[] use, long[] def, long[] out, M3ProgressMonitor monitor) {
+  public static long[] nativeTransferBatch(long[] use, long[] def, long[] out, ProgressMonitor monitor) {
     check(monitor); dimensions(use, def, out);
     if (livenessAbi0() != 1) throw new LinkageError("M3 liveness JNI ABI mismatch");
     long[] result = new long[use.length];
@@ -201,7 +201,7 @@ public final class Liveness {
   private static native void transfer0(long[] use, long[] def, long[] out, long[] result, int offset, int length);
 
   /** Difference of local-slot requirement masks; does not identify expired heap objects. */
-  public static long[] endingBatch(long[] before, long[] after, M3ProgressMonitor monitor) {
+  public static long[] endingBatch(long[] before, long[] after, ProgressMonitor monitor) {
     check(monitor); endingDimensions(before, after);
     long[] result = new long[before.length];
     for (int i = 0; i < result.length; i++) {
@@ -212,7 +212,7 @@ public final class Liveness {
   }
 
   /** Explicit native batch; no library loading or silent fallback and no runtime object releases. */
-  public static long[] nativeEndingBatch(long[] before, long[] after, M3ProgressMonitor monitor) {
+  public static long[] nativeEndingBatch(long[] before, long[] after, ProgressMonitor monitor) {
     check(monitor); endingDimensions(before, after);
     if (endingAbi0() != 1) throw new LinkageError("M3 ending JNI ABI mismatch");
     long[] result = new long[before.length];

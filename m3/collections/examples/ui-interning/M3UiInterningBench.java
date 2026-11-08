@@ -14,10 +14,10 @@
  *******************************************************************************/
 package jdk.m3.collections.examples;
 
-import jdk.m3.collections.M3LabelLanes;
-import jdk.m3.collections.M3LabelPool;
-import jdk.m3.collections.M3TextExtentCache;
-import jdk.m3.collections.M3TreePathTrie;
+import jdk.m3.collections.LabelLanes;
+import jdk.m3.collections.LabelPool;
+import jdk.m3.collections.TextExtentCache;
+import jdk.m3.collections.TreePathTrie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -34,7 +34,7 @@ import java.util.Random;
  * provider hands over for every cell (formatted columns produce a fresh String
  * each time); {@code hashmap} canonicalizes through a {@code HashMap} (the
  * usual interner, one entry object per distinct label and the String kept);
- * {@code pool} keeps an int id per cell in {@link M3LabelLanes}. Repeat ratios
+ * {@code pool} keeps an int id per cell in {@link LabelLanes}. Repeat ratios
  * follow {@code REPEAT_RATIOS.tsv}: Explorer columns (name, type, size, date),
  * JSON keys, and the worst case where every label is distinct.</p>
  *
@@ -84,7 +84,7 @@ public final class M3UiInterningBench {
 		measured++;
 		int width = 0;
 		for (int i = 0; i < text.length (); i++) width += 5 + (text.charAt (i) & 7) + font;
-		return M3TextExtentCache.pack (width, 14 + font);
+		return TextExtentCache.pack (width, 14 + font);
 	}
 
 	static final class StringStore implements Store {
@@ -110,7 +110,7 @@ public final class M3UiInterningBench {
 
 		public int widest (int column, int font) {
 			int widest = 0;
-			for (int row = 0; row < ROWS; row++) widest = Math.max (widest, M3TextExtentCache.width (measure (cells [column] [row], font)));
+			for (int row = 0; row < ROWS; row++) widest = Math.max (widest, TextExtentCache.width (measure (cells [column] [row], font)));
 			return widest;
 		}
 
@@ -120,14 +120,14 @@ public final class M3UiInterningBench {
 	}
 
 	static final class PoolStore implements Store {
-		final M3LabelPool pool = new M3LabelPool (4096);
-		final M3TextExtentCache extents = new M3TextExtentCache (1 << 18);
-		final M3LabelLanes lanes;
-		final M3TextExtentCache.Measurer measurer = (label, font) -> measureLabel (label, font);
+		final LabelPool pool = new LabelPool (4096);
+		final TextExtentCache extents = new TextExtentCache (1 << 18);
+		final LabelLanes lanes;
+		final TextExtentCache.Measurer measurer = (label, font) -> measureLabel (label, font);
 		final char [] chars = new char [256];
 
 		PoolStore (int columns) {
-			lanes = new M3LabelLanes (columns, pool, extents);
+			lanes = new LabelLanes (columns, pool, extents);
 			lanes.setRowCount (ROWS);
 		}
 
@@ -213,7 +213,7 @@ public final class M3UiInterningBench {
 			for (int row = top; row < top + WINDOW; row++) {
 				for (int column = 0; column < columns; column++) {
 					sink += store.text (row, column).length ();
-					sink += M3TextExtentCache.width (store.extent (row, column, 0));
+					sink += TextExtentCache.width (store.extent (row, column, 0));
 				}
 			}
 			samples [frame] = (System.nanoTime () - start) / 1000;
@@ -255,8 +255,8 @@ public final class M3UiInterningBench {
 			}
 		}
 		long stringKb = (retained () - baseline) / 1024;
-		M3LabelPool pool = new M3LabelPool (0);
-		M3TreePathTrie trie = new M3TreePathTrie (pool);
+		LabelPool pool = new LabelPool (0);
+		TreePathTrie trie = new TreePathTrie (pool);
 		int [] ids = new int [ROWS];
 		long start = System.nanoTime ();
 		for (int i = 0; i < ROWS; i++) ids [i] = trie.internPath (paths [i], '/');
@@ -266,7 +266,7 @@ public final class M3UiInterningBench {
 		long trieKb = (retained () - baseline) / 1024;
 		int expanded = 0;
 		for (int i = 0; i < ROWS; i += 3) {
-			trie.flag (ids [i], M3TreePathTrie.EXPANDED, true);
+			trie.flag (ids [i], TreePathTrie.EXPANDED, true);
 			expanded++;
 		}
 		String line = String.format ("fs-paths\tstrings\t%d\t1\t%d\t%.1f\t0\t0\t0\t0\tone String path per node\n", ROWS, trie.size (), stringKb / 1024.0)

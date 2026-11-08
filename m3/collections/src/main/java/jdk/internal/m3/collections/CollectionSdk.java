@@ -32,18 +32,18 @@ import java.util.function.LongPredicate;
 import java.util.function.Predicate;
 import jdk.m3.collections.M3ArrayList;
 import jdk.m3.collections.M3Collections;
-import jdk.m3.collections.M3FilteredViews;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.FilteredViews;
+import jdk.m3.collections.IndexMaskCompactor;
 import jdk.m3.collections.IndexPathMasks;
-import jdk.m3.collections.M3IndexedListSnapshot;
-import jdk.m3.collections.M3IndexedTable;
+import jdk.m3.collections.IndexedListSnapshot;
+import jdk.m3.collections.IndexedTable;
 import jdk.m3.collections.LongArrayList;
 import jdk.m3.collections.LongBag;
 import jdk.m3.collections.LongHashSet;
-import jdk.m3.collections.M3LongIndexProjection;
+import jdk.m3.collections.LongIndexProjection;
 import jdk.m3.collections.LongLongHashMap;
 import jdk.m3.collections.range.LongRangeSet;
-import jdk.m3.collections.M3MutableFilteredViews;
+import jdk.m3.collections.MutableFilteredViews;
 import jdk.m3.collections.M3TreeMap;
 import jdk.m3.collections.M3TreeSet;
 import jdk.internal.m3.collections.bits.LongBitmapFilteredSnapshot;
@@ -56,7 +56,7 @@ import jdk.internal.m3.collections.bits.LongBitmapFilteredSnapshot;
  * documented JDK interfaces or distinct M3 types; they do not pretend to
  * implement other libraries' interfaces without those dependencies/contracts.
  * The underlying owners are reused rather than duplicated, and the JNI boundary
- * remains inside the existing M3IndexMaskCompactor.</p>
+ * remains inside the existing IndexMaskCompactor.</p>
  */
 public final class CollectionSdk {
     private CollectionSdk() { }
@@ -77,43 +77,43 @@ public final class CollectionSdk {
 
     /** Live read-only Set retaining its JDK equality/iteration owner. */
     public static <E> Set<E> readOnlyFilteredSet(Set<E> source, Predicate<? super E> predicate) {
-        return M3FilteredViews.filter(source, predicate);
+        return FilteredViews.filter(source, predicate);
     }
 
     /** Live, read-only, comparator-preserving SortedSet over the original storage. */
     public static <E> SortedSet<E> readOnlyFilteredSortedSet(
             SortedSet<E> source, Predicate<? super E> predicate) {
-        return M3FilteredViews.filter(source, predicate);
+        return FilteredViews.filter(source, predicate);
     }
 
     /** Live, read-only, comparator-preserving SortedMap with immutable entries. */
     public static <K, V> SortedMap<K, V> readOnlyFilteredSortedMap(
             SortedMap<K, V> source, BiPredicate<? super K, ? super V> predicate) {
-        return M3FilteredViews.filterEntries(source, predicate);
+        return FilteredViews.filterEntries(source, predicate);
     }
 
     /** Live NavigableSet wrapper retaining backing comparator/range ownership. */
     public static <E> NavigableSet<E> readOnlyFilteredNavigableSet(
             NavigableSet<E> source, Predicate<? super E> predicate) {
-        return M3FilteredViews.filter(source, predicate);
+        return FilteredViews.filter(source, predicate);
     }
 
     /** Live NavigableMap wrapper retaining backing comparator/range ownership. */
     public static <K,V> NavigableMap<K,V> readOnlyFilteredNavigableMap(
             NavigableMap<K,V> source, BiPredicate<? super K, ? super V> predicate) {
-        return M3FilteredViews.filterEntries(source, predicate);
+        return FilteredViews.filterEntries(source, predicate);
     }
 
     /** Live read-only Collection over the caller's contract-bearing JDK source. */
     public static <E> Collection<E> readOnlyFilteredCollection(
             Collection<E> source, Predicate<? super E> predicate) {
-        return M3FilteredViews.filter(source, predicate);
+        return FilteredViews.filter(source, predicate);
     }
 
     /** Immutable primitive-long projection; snapshot input before sorting indexes. */
-    public static M3LongIndexProjection sortedLongSnapshot(long[] source) {
+    public static LongIndexProjection sortedLongSnapshot(long[] source) {
         Objects.requireNonNull(source, "source");
-        return M3LongIndexProjection.snapshot(source).sortedAscending();
+        return LongIndexProjection.snapshot(source).sortedAscending();
     }
 
     /** Predicate runs once per original occurrence, then bitmap/index reuse. */
@@ -124,7 +124,7 @@ public final class CollectionSdk {
 
     /** Optional JNI only for primitive index compaction, never Java predicates. */
     public static LongBitmapFilteredSnapshot filteredLongSnapshot(
-            long[] source, LongPredicate predicate, M3IndexMaskCompactor.Backend backend) {
+            long[] source, LongPredicate predicate, IndexMaskCompactor.Backend backend) {
         return LongBitmapFilteredSnapshot.snapshot(source, predicate, backend);
     }
 
@@ -162,12 +162,12 @@ public final class CollectionSdk {
 
     public static <E> NavigableSet<E> mutableFilteredNavigableSet(
             NavigableSet<E> source, Predicate<? super E> predicate) {
-        return M3MutableFilteredViews.filter(source, predicate);
+        return MutableFilteredViews.filter(source, predicate);
     }
 
     public static <K, V> NavigableMap<K, V> mutableFilteredNavigableMap(
             NavigableMap<K, V> source, BiPredicate<? super K, ? super V> predicate) {
-        return M3MutableFilteredViews.filterEntries(source, predicate);
+        return MutableFilteredViews.filterEntries(source, predicate);
     }
 
     public static <K, V> M3TreeMap<K, V> treeMap() { return M3Collections.treeMap(); }
@@ -178,9 +178,9 @@ public final class CollectionSdk {
      * Detach an immutable Object[] owner and its physical int[] index directory.
      * This is an M3JDK 21 snapshot, not a live filtered java.util wrapper.
      */
-    public static <E> M3IndexedListSnapshot<E> indexedObjectSnapshot(
+    public static <E> IndexedListSnapshot<E> indexedObjectSnapshot(
             Collection<? extends E> source) {
-        return M3IndexedListSnapshot.copyOf(source);
+        return IndexedListSnapshot.copyOf(source);
     }
 
     /**
@@ -188,7 +188,7 @@ public final class CollectionSdk {
      * multi-stage state semantics reuse the product-owned Java/JNI mask kernel;
      * user comparators execute in Java after primitive selection only.
      */
-    public static <E> M3IndexedListSnapshot<E> maskedSortedIndexedSnapshot(
+    public static <E> IndexedListSnapshot<E> maskedSortedIndexedSnapshot(
             Collection<? extends E> source, int[][] physicalStates,
             int[] requiredMasks, int[] forbiddenMasks,
             Comparator<? super E> comparator, IndexPathMasks.Backend backend) {
@@ -197,8 +197,8 @@ public final class CollectionSdk {
     }
 
     /** Immutable snapshot; indexes and offsets are managed by the existing owner. */
-    public static M3LongIndexProjection indexedLongSnapshot(long[] input) {
-        return M3LongIndexProjection.snapshot(input);
+    public static LongIndexProjection indexedLongSnapshot(long[] input) {
+        return LongIndexProjection.snapshot(input);
     }
 
     /** Explicit Java or required-native 32-bit staged mask selector: no predicate JNI callback. */
@@ -214,8 +214,8 @@ public final class CollectionSdk {
     }
 
     /** M3 indexed table: object payloads plus primitive row/column/slot directories. */
-    public static <R, C, V> M3IndexedTable<R, C, V> indexedTable() {
-        return new M3IndexedTable<>();
+    public static <R, C, V> IndexedTable<R, C, V> indexedTable() {
+        return new IndexedTable<>();
     }
 
     /** M3 multivalue backend: one value lane plus primitive links and unsigned state masks. */

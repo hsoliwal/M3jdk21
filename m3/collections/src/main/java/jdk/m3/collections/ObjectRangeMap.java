@@ -35,10 +35,10 @@ public final class ObjectRangeMap<K, V> {
     public static final int PIN_REQUEST = 8; // metadata, not a GC pin
 
     private final Comparator<? super K> comparator;
-    private Object[] starts = M3SlotArrays.EMPTY_OBJECTS;
-    private Object[] ends = M3SlotArrays.EMPTY_OBJECTS;
-    private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
-    private int[] states = M3SlotArrays.EMPTY_INTS;
+    private Object[] starts = SlotArrays.EMPTY_OBJECTS;
+    private Object[] ends = SlotArrays.EMPTY_OBJECTS;
+    private Object[] values = SlotArrays.EMPTY_OBJECTS;
+    private int[] states = SlotArrays.EMPTY_INTS;
     private int size;
     private long revision;
 
@@ -110,7 +110,7 @@ public final class ObjectRangeMap<K, V> {
     private void ensureCapacity(int minimum) {
         if (minimum <= starts.length) return;
         int capacity = starts.length;
-        while (capacity < minimum) capacity = M3SlotArrays.grow(capacity);
+        while (capacity < minimum) capacity = SlotArrays.grow(capacity);
         // Construct all candidate arrays before publishing any replacement lane.
         Object[] s = Arrays.copyOf(starts, capacity);
         Object[] e = Arrays.copyOf(ends, capacity);

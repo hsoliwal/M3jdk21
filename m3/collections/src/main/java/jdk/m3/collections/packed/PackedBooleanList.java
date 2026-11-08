@@ -16,13 +16,13 @@ package jdk.m3.collections.packed;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3PrimitiveArrayList;
+import jdk.m3.collections.PrimitiveArrayList;
 
 /**
  * Mutable boolean list retaining exactly one bit per capacity element.
  *
  * <p>This is the minimum-memory boolean sequence. The universal
- * {@link M3PrimitiveArrayList} remains byte-backed for raw primitive-array
+ * {@link PrimitiveArrayList} remains byte-backed for raw primitive-array
  * compatibility; new boolean-heavy code should prefer this type.
  *
  * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PackedBooleanList.java}

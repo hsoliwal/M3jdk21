@@ -5,7 +5,7 @@ import com.sun.source.tree.*;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.io.IOException;
 import java.util.*;
 import javax.lang.model.element.Element;
@@ -62,7 +62,7 @@ public final class CRefPathCertainty {
     }
 
     public static Result analyze(Map<String,String> sources, ReferenceFlow.Result refs,
-            SourceLiveness.Result flow, M3ProgressMonitor monitor) throws IOException {
+            SourceLiveness.Result flow, ProgressMonitor monitor) throws IOException {
         Objects.requireNonNull(sources); Objects.requireNonNull(refs); Objects.requireNonNull(flow);
         // Original reference-flow authority verifies compiler snapshot and CFG.
         ReferenceFlow.project(refs, flow, monitor);
@@ -147,12 +147,12 @@ public final class CRefPathCertainty {
         final Trees trees;
         final MethodTree tree;
         final ReferenceFlow.MethodReferences original;
-        final M3ProgressMonitor monitor;
+        final ProgressMonitor monitor;
         final Map<Long,Integer> siteByPosition=new HashMap<>();
         final List<Snapshot> snapshots=new ArrayList<>();
         int statements;
         Runner(CompilationUnitTree unit,Trees trees,TreePath methodPath,MethodTree tree,
-                ReferenceFlow.MethodReferences original,M3ProgressMonitor monitor){
+                ReferenceFlow.MethodReferences original,ProgressMonitor monitor){
             this.unit=unit;this.trees=trees;this.tree=tree;
             this.original=original;this.monitor=monitor;
             for(var site:original.sites()) {

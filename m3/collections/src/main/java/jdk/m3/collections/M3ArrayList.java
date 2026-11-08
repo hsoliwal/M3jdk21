@@ -43,7 +43,7 @@ import java.util.function.Predicate;
  * removal first prepares a dynamically sized {@link BitSet} of rejected logical
  * positions and commits one stable compaction only after predicates succeed.
  * Thus repeated filtering is not required when callers obtain a separate immutable
- * {@link M3IndexedListSnapshot} through {@link #snapshot()}.
+ * {@link IndexedListSnapshot} through {@link #snapshot()}.
  *
  * <p>This M3 SDK class implements the JDK List contract but is <em>not</em>
  * {@code java.util.ArrayList}. It has its own serialized form and is not a
@@ -303,7 +303,7 @@ public final class M3ArrayList<E> extends AbstractList<E>
     }
 
     /** Detached data snapshot with reusable indirect sorted and filtered views. */
-    public M3IndexedListSnapshot<E> snapshot() { return M3IndexedListSnapshot.copyOf(this); }
+    public IndexedListSnapshot<E> snapshot() { return IndexedListSnapshot.copyOf(this); }
 
     @SuppressWarnings("unchecked")
     @Override public M3ArrayList<E> clone() {

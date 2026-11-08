@@ -4,20 +4,20 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import java.util.function.LongPredicate;
-import jdk.m3.collections.M3LongSequence;
+import jdk.m3.collections.LongSequence;
 
 /** Predicate admission; caller bulk arrays are snapshotted before validation. */
 //FLLDCIM: RELOCATE - donor blob 522c3ae14d22 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class ValidatingLongSequence extends ForwardingLongSequence {
-    private final M3LongSequence backend;
+    private final LongSequence backend;
     private final LongPredicate validator;
-    public ValidatingLongSequence(M3LongSequence backend,LongPredicate validator) {
+    public ValidatingLongSequence(LongSequence backend,LongPredicate validator) {
         this.backend=Objects.requireNonNull(backend,"backend");
         this.validator=Objects.requireNonNull(validator,"validator");
         long[] snapshot=backend.toArray().clone();
         for(long value:snapshot) validate(value);
     }
-    @Override protected M3LongSequence delegate(){return backend;}
+    @Override protected LongSequence delegate(){return backend;}
     private void validate(long value) {
         if(!validator.test(value)) throw new IllegalArgumentException("invalid: "+value);
     }

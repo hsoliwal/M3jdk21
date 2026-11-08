@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntToLongFunction;
 import java.util.function.LongSupplier;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Bounded, non-destructive top-K ordering over stable primitive IDs. The sole heap is
@@ -108,7 +108,7 @@ public final class SortableWindowOrder {
     /** Deterministic pressure input for package-local correctness tests. */
     int select(int[] ids, int from, int to, int visibleRows,
             int optionalOverscan, int[] output, int outputOffset,
-            boolean hintsOnly, M3RuntimeHeap.Snapshot observed) {
+            boolean hintsOnly, RuntimeHeap.Snapshot observed) {
         Objects.requireNonNull(ids, "ids");
         Objects.requireNonNull(output, "output");
         Objects.checkFromToIndex(from, to, ids.length);
@@ -127,12 +127,12 @@ public final class SortableWindowOrder {
         int optional = 0;
         boolean needSnapshot = optionalOverscan > 0
                 || (hintsOnly || authority == SignalAuthority.CERTIFIED_PRIMARY);
-        M3RuntimeHeap.Snapshot heap = observed != null ? observed
-                : needSnapshot ? M3RuntimeHeap.current() : null;
+        RuntimeHeap.Snapshot heap = observed != null ? observed
+                : needSnapshot ? RuntimeHeap.current() : null;
         if (optionalOverscan > 0 && mandatory == visibleRows) {
             long reserve = heap.safetyReserve();
             long free = Math.max(0L, heap.freeToMaximum() - reserve);
-            if (heap.pressure(0L) == M3RuntimeHeap.Pressure.NORMAL) {
+            if (heap.pressure(0L) == RuntimeHeap.Pressure.NORMAL) {
                 optional = (int) Math.min((long) optionalOverscan,
                         free / ESTIMATED_ITEM_WORK_BYTES);
             }
@@ -144,7 +144,7 @@ public final class SortableWindowOrder {
         // or when the full new backing is not affordable. Already cached evidence
         // is retained; the exact comparator remains the semantic fallback.
         boolean signals = (hintsOnly || authority == SignalAuthority.CERTIFIED_PRIMARY)
-                && (heap == null || heap.pressure(0L) == M3RuntimeHeap.Pressure.NORMAL)
+                && (heap == null || heap.pressure(0L) == RuntimeHeap.Pressure.NORMAL)
                 && affordableSignals(ids, from, to, heap);
         if (hintsOnly && !signals) {
             // Under pressure, retain original source order for *prefetch only*.
@@ -183,7 +183,7 @@ public final class SortableWindowOrder {
     }
 
     private boolean affordableSignals(int[] ids, int from, int to,
-            M3RuntimeHeap.Snapshot heap) {
+            RuntimeHeap.Snapshot heap) {
         int highest = 0;
         for (int i = from; i < to; i++) {
             int id = ids[i];
@@ -204,7 +204,7 @@ public final class SortableWindowOrder {
                 : Math.max(0L, heap.freeToMaximum() - heap.safetyReserve());
         // Strict budget: bounded total lane weight and peak room for two arrays.
         return bytes <= SIGNAL_CACHE_MAX_BYTES && bytes <= spare / 2L
-                && heap != null && heap.pressure(bytes) == M3RuntimeHeap.Pressure.NORMAL;
+                && heap != null && heap.pressure(bytes) == RuntimeHeap.Pressure.NORMAL;
     }
 
     private int comparePositions(int left, int right, int[] ids,

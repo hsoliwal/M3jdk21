@@ -14,7 +14,7 @@
  *******************************************************************************/
 package jdk.internal.m3.collections;
 
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.PrimitiveKind;
 import jdk.internal.m3.collections.bits.LazyBitAddressSpace;
 
@@ -47,7 +47,7 @@ final class ProviderResidencyClock {
     }
 
     private final long[] residentIds;
-    private final M3LazyPrimitiveAddressSpace slotById;
+    private final LazyPrimitiveAddressSpace slotById;
     private final LazyBitAddressSpace referenced;
     private int residentCount;
     private int clockHand;
@@ -61,7 +61,7 @@ final class ProviderResidencyClock {
             throw new IllegalArgumentException("maximumResident <= 0");
         }
         residentIds = new long[maximumResident];
-        slotById = new M3LazyPrimitiveAddressSpace(
+        slotById = new LazyPrimitiveAddressSpace(
                 PrimitiveKind.INT, rootBits, directoryBits, leafBits);
         referenced = new LazyBitAddressSpace(rootBits, directoryBits, leafBits);
     }

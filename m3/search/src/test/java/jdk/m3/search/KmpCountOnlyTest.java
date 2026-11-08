@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ final class KmpCountOnlyTest {
         Arrays.fill(input, (byte) 'x');
         Arrays.fill(pattern, (byte) 'x');
         KmpSearch kmp = new KmpSearch(pattern);
-        assertEquals(4096 - 256 + 1, kmp.countMatches(input, 0, new M3DefaultProgressMonitor()));
+        assertEquals(4096 - 256 + 1, kmp.countMatches(input, 0, new DefaultProgressMonitor()));
         assertEquals(4096 - 256 + 1, ByteOccurrences.count(kmp, input, 0, null));
         List<Integer> first = new ArrayList<>();
         assertEquals(3, ByteOccurrences.visit(kmp, input, 0, 3, first::add, null));
@@ -81,7 +81,7 @@ final class KmpCountOnlyTest {
                 "cancellation must not damage the precomputed pattern");
     }
 
-    private static final class Probe implements M3ProgressMonitor {
+    private static final class Probe implements ProgressMonitor {
         private final AtomicInteger polls = new AtomicInteger();
         private final int cancelAt;
         private Probe(int cancelAt) { this.cancelAt = cancelAt; }
@@ -96,6 +96,6 @@ final class KmpCountOnlyTest {
             return cancelAt >= 0 && observed >= cancelAt;
         }
         @Override public void setCanceled(boolean canceled) {}
-        @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+        @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
     }
 }

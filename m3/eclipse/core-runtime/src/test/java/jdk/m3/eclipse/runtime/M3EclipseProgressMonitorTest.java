@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -156,7 +156,7 @@ class M3EclipseProgressMonitorTest {
 
     @Test
     void realSubMonitorSequentialChildrenPreserveBudgetAndBorrowedCompletion() {
-        M3DefaultProgressMonitor owner = new M3DefaultProgressMonitor();
+        DefaultProgressMonitor owner = new DefaultProgressMonitor();
         IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(owner);
         SubMonitor root = SubMonitor.convert(eclipse, "compile", 10);
         long parentBudget = owner.state().totalWork();
@@ -176,7 +176,7 @@ class M3EclipseProgressMonitorTest {
 
     @Test
     void realSlicesReportParallelWorkAndKeepCancellationLocal() throws Exception {
-        M3DefaultProgressMonitor owner = new M3DefaultProgressMonitor();
+        DefaultProgressMonitor owner = new DefaultProgressMonitor();
         IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(owner);
         eclipse.beginTask("parallel", 100);
         IProgressMonitor first = eclipse.slice(30);
@@ -224,8 +224,8 @@ class M3EclipseProgressMonitorTest {
     }
 
     /** Real SPI delegate with one-shot synchronous observer callbacks. */
-    private static final class CallbackOwner implements M3ProgressMonitor {
-        private final M3DefaultProgressMonitor delegate = new M3DefaultProgressMonitor();
+    private static final class CallbackOwner implements ProgressMonitor {
+        private final DefaultProgressMonitor delegate = new DefaultProgressMonitor();
         private Runnable onBegin;
         private Runnable onDone;
         private LongConsumer onWorked;
@@ -259,12 +259,12 @@ class M3EclipseProgressMonitorTest {
         @Override public void subTask(String name) { delegate.subTask(name); }
         @Override public boolean isCanceled() { return delegate.isCanceled(); }
         @Override public void setCanceled(boolean value) { delegate.setCanceled(value); }
-        @Override public M3ProgressState state() { return delegate.state(); }
+        @Override public ProgressState state() { return delegate.state(); }
     }
 
     @Test
     void ownedModePreservesEclipseLifecycleAndFractionalProgress() {
-        M3DefaultProgressMonitor m3 = new M3DefaultProgressMonitor();
+        DefaultProgressMonitor m3 = new DefaultProgressMonitor();
         IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(m3);
         assertSame(m3, ((M3EclipseProgressMonitor) eclipse).owner());
         eclipse.beginTask("compile", 10);
@@ -286,7 +286,7 @@ class M3EclipseProgressMonitorTest {
 
     @Test
     void borrowedModeDoesNotChangeParentLifecycle() {
-        M3DefaultProgressMonitor m3 = new M3DefaultProgressMonitor();
+        DefaultProgressMonitor m3 = new DefaultProgressMonitor();
         m3.beginTask("outer", 20);
         IProgressMonitor eclipse = M3EclipseProgressMonitor.borrowed(m3);
         eclipse.beginTask("jdt", 10);
@@ -308,7 +308,7 @@ class M3EclipseProgressMonitorTest {
 
     @Test
     void ignoresNonFiniteAndNegativeWorkAndKeepsUnknownTotal() {
-        M3DefaultProgressMonitor m3 = new M3DefaultProgressMonitor();
+        DefaultProgressMonitor m3 = new DefaultProgressMonitor();
         IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(m3);
         eclipse.beginTask("unknown", IProgressMonitor.UNKNOWN);
         assertEquals(-1L, m3.state().totalWork());
@@ -324,7 +324,7 @@ class M3EclipseProgressMonitorTest {
 
     @Test
     void rejectsIllegalLifecycleAndDoesNotStartOnInvalidWork() {
-        M3DefaultProgressMonitor m3 = new M3DefaultProgressMonitor();
+        DefaultProgressMonitor m3 = new DefaultProgressMonitor();
         IProgressMonitor eclipse = M3EclipseProgressMonitor.owned(m3);
         assertThrows(IllegalArgumentException.class, () -> eclipse.beginTask("bad", -2));
         eclipse.beginTask("good", 1);
@@ -336,7 +336,7 @@ class M3EclipseProgressMonitorTest {
 
     @Test
     void preservesM3LongOverflowSaturationAndSingleOwner() {
-        M3DefaultProgressMonitor m3 = new M3DefaultProgressMonitor();
+        DefaultProgressMonitor m3 = new DefaultProgressMonitor();
         IProgressMonitor eclipse = M3EclipseProgressMonitor.borrowed(m3);
         eclipse.internalWorked(1.0e30d);
         assertEquals(Long.MAX_VALUE, m3.state().worked());

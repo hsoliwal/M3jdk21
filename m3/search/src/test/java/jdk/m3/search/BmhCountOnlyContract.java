@@ -2,9 +2,9 @@
 // Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/BmhCountOnlyContract.java (blob 54bdb86582fc) by M3_SEARCH_FORWARD v1.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public final class BmhCountOnlyContract {
         if (!condition) throw new AssertionError(label);
     }
 
-    private static final class Poll implements M3ProgressMonitor {
+    private static final class Poll implements ProgressMonitor {
         final int failAt;
         int calls;
         Poll(int failAt) { this.failAt = failAt; }
@@ -40,7 +40,7 @@ public final class BmhCountOnlyContract {
         @Override public void setTaskName(String name) { }
         @Override public void subTask(String name) { }
         @Override public void setCanceled(boolean canceled) { }
-        @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+        @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
     }
 
     private static List<Integer> oracle(byte[] haystack, byte[] needle, int from) {

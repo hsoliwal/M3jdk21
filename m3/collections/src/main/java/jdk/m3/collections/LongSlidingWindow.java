@@ -133,7 +133,7 @@ public final class LongSlidingWindow {
     }
 
     public void clear() {
-        M3RingLiveClear.clear(values, head, size);
+        RingLiveClear.clear(values, head, size);
         head = 0;
         size = 0;
         sum = 0L;

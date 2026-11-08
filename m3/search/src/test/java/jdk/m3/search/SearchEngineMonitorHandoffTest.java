@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.util.concurrent.CancellationException;
 import java.util.function.IntConsumer;
 import org.junit.jupiter.api.Test;
@@ -157,7 +157,7 @@ final class SearchEngineMonitorHandoffTest {
         }
     }
 
-    private static final class Monitor implements M3ProgressMonitor {
+    private static final class Monitor implements ProgressMonitor {
         private final IntConsumer script;
         private int polls;
         private Monitor(IntConsumer script) { this.script = script; }
@@ -170,6 +170,6 @@ final class SearchEngineMonitorHandoffTest {
         @Override public void subTask(String name) {}
         @Override public boolean isCanceled() { return false; }
         @Override public void setCanceled(boolean canceled) {}
-        @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+        @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
     }
 }

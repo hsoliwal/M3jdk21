@@ -17,7 +17,7 @@
  */
 package jdk.m3.file;
 
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.ProgressState;
 import java.time.Instant;
 
 /**
@@ -27,14 +27,14 @@ import java.time.Instant;
  * retaining Synexia's machine-readable snapshot model. Implementations must be thread-safe when
  * used by concurrent workers.
  *
- * <p>An adapter over the owner {@link jdk.m3.collections.M3ProgressMonitor}: the abstract methods,
+ * <p>An adapter over the owner {@link jdk.m3.collections.ProgressMonitor}: the abstract methods,
  * {@code UNKNOWN}, {@code checkCanceled()} and the shadow streams are the owner's; this interface
  * adds the snapshot model, the covariant weighted {@link #split(long)} and {@link #noop()}.
  *
  * @since ContextOS 1.0
  */
-//FLLDCIM: UNIFY - adapter over jdk.m3.collections.M3ProgressMonitor (long units on both sides; jdk.m3.file.M3Progress, M3ProgressChild and M3ProgressState retired); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
-public interface M3ProgressMonitor extends jdk.m3.collections.M3ProgressMonitor {
+//FLLDCIM: UNIFY - adapter over jdk.m3.collections.ProgressMonitor (long units on both sides; jdk.m3.file.M3Progress, M3ProgressChild and ProgressState retired); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
+public interface M3ProgressMonitor extends jdk.m3.collections.ProgressMonitor {
 
     /**
      * Returns the latest immutable progress state.
@@ -44,10 +44,10 @@ public interface M3ProgressMonitor extends jdk.m3.collections.M3ProgressMonitor 
     M3ProgressSnapshot snapshot();
 
     @Override
-    default M3ProgressState state() {
+    default ProgressState state() {
         M3ProgressSnapshot snapshot = snapshot();
         long startedAtMs = Math.max(0L, snapshot.timestamp().toEpochMilli() - snapshot.elapsedMs());
-        return new M3ProgressState(
+        return new ProgressState(
                 snapshot.taskName(),
                 snapshot.subTaskName(),
                 snapshot.worked(),

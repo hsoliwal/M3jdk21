@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.concurrent.CancellationException;
@@ -89,7 +89,7 @@ final class BmhKmpFallbackCancellationTest {
         assertEquals(0, ByteOccurrences.countBuffer(
                 new BoyerMooreHorspoolSearch(forward), buffer, 0, null));
         assertEquals(-1, new BoyerMooreHorspoolSearch(reverse)
-                .lastIndexOf(buffer, Integer.MAX_VALUE, new M3DefaultProgressMonitor()));
+                .lastIndexOf(buffer, Integer.MAX_VALUE, new DefaultProgressMonitor()));
         assertEquals(-1, new BoyerMooreHorspoolSearch(reverse)
                 .lastIndexOf(buffer, Integer.MAX_VALUE));
     }
@@ -114,7 +114,7 @@ final class BmhKmpFallbackCancellationTest {
         buffer.mark();
         return buffer;
     }
-    private static final class Polling implements M3ProgressMonitor {
+    private static final class Polling implements ProgressMonitor {
         final AtomicInteger polls = new AtomicInteger();
         final int cancelAt;
         final CancellationException failure;
@@ -130,6 +130,6 @@ final class BmhKmpFallbackCancellationTest {
         @Override public void subTask(String name) {}
         @Override public boolean isCanceled() { return false; }
         @Override public void setCanceled(boolean value) {}
-        @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+        @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
     }
 }

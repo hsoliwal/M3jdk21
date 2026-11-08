@@ -6,7 +6,7 @@
  * native is a Java keyword.
  */
 module org.m3jdk.jni {
-  // jdk.m3.collections.M3RuntimeHeap: one home for the former port owners since 2026-11-06
+  // jdk.m3.collections.RuntimeHeap: one home for the former port owners since 2026-11-06
   // (CONSOLIDATE_PORT_OWNERS v1); m3-collections declares the module jdk.m3.collections
   requires jdk.m3.collections;
   exports jdk.m3.jni;

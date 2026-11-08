@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections.packed;
 
 import java.util.Objects;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.BigArray;
 import jdk.m3.collections.PrimitiveKind;
 
@@ -39,7 +39,7 @@ public final class Packed48Array {
     public static final long MAX_SIGNED = (1L << 47) - 1;
 
     private final BigArray dense;
-    private final M3LazyPrimitiveAddressSpace sparse;
+    private final LazyPrimitiveAddressSpace sparse;
     private final long byteOffset;
     private final long length;
 
@@ -53,7 +53,7 @@ public final class Packed48Array {
                 null, 0L, length);
     }
 
-    private Packed48Array(BigArray dense, M3LazyPrimitiveAddressSpace sparse,
+    private Packed48Array(BigArray dense, LazyPrimitiveAddressSpace sparse,
                           long byteOffset, long length) {
         this.dense = dense;
         this.sparse = sparse;
@@ -68,7 +68,7 @@ public final class Packed48Array {
         return new Packed48Array(bytes, null, byteOffset, length);
     }
 
-    public static Packed48Array view(M3LazyPrimitiveAddressSpace bytes,
+    public static Packed48Array view(LazyPrimitiveAddressSpace bytes,
                                      long byteOffset, long length) {
         Objects.requireNonNull(bytes, "bytes");
         requireByteKind(bytes.kind());

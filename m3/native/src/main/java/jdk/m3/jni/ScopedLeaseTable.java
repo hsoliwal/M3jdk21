@@ -4,7 +4,7 @@ package jdk.m3.jni;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Explicit leases for monotonically assigned M3 logical handles, NOT Java object reference counts.
@@ -381,7 +381,7 @@ public final class ScopedLeaseTable implements AutoCloseable {
         if (required <= ids.length) return;
         int preferred = (int) Math.min((long) Integer.MAX_VALUE - 8L,
                 Math.max((long) required, (long) ids.length + (ids.length >>> 1) + 1L));
-        int capacity = Math.toIntExact(M3RuntimeHeap.chooseAmortizedCapacity(
+        int capacity = Math.toIntExact(RuntimeHeap.chooseAmortizedCapacity(
                 required, preferred, Long.BYTES + Integer.BYTES * 3 + Byte.BYTES * 3));
         long[] nextIds = Arrays.copyOf(ids, capacity);
         int[] nextLeases = Arrays.copyOf(leases, capacity);

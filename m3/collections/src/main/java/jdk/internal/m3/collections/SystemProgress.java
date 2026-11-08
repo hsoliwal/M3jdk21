@@ -3,28 +3,28 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.collections;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 
 /** Single process-wide progress root shared by common, job and lazy collection layers. */
 public final class SystemProgress {
-    private static final M3DefaultProgressMonitor ROOT = createRoot();
+    private static final DefaultProgressMonitor ROOT = createRoot();
 
     private SystemProgress() {}
 
-    public static M3ProgressMonitor get() { return ROOT; }
+    public static ProgressMonitor get() { return ROOT; }
 
-    public static M3ProgressMonitor split(long systemWork) {
+    public static ProgressMonitor split(long systemWork) {
         return ROOT.split(systemWork);
     }
 
-    public static M3ProgressMonitor resolve(M3ProgressMonitor monitor, long systemWork) {
+    public static ProgressMonitor resolve(ProgressMonitor monitor, long systemWork) {
         return monitor == null ? split(systemWork) : monitor;
     }
 
-    private static M3DefaultProgressMonitor createRoot() {
-        M3DefaultProgressMonitor monitor = new M3DefaultProgressMonitor();
-        monitor.beginTask("Synexia system", M3ProgressMonitor.UNKNOWN);
+    private static DefaultProgressMonitor createRoot() {
+        DefaultProgressMonitor monitor = new DefaultProgressMonitor();
+        monitor.beginTask("Synexia system", ProgressMonitor.UNKNOWN);
         return monitor;
     }
 }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -113,9 +113,9 @@ final class M3FiveLibraryKeyRangesTest {
             for (int i = 0; i < selected.size(); i++) {
                 assertEquals(expectedAdmitted.get(i), selected.view().physicalIndexAt(i));
             }
-            if (M3IndexMaskCompactor.nativeAvailable() && trial < 20) {
+            if (IndexMaskCompactor.nativeAvailable() && trial < 20) {
                 var nativeSelected = plan.filteredByState(required, excluded,
-                        M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                        IndexMaskCompactor.Backend.NATIVE_REQUIRED);
                 assertEquals(selected.view().asJdkList(), nativeSelected.view().asJdkList());
             }
         }

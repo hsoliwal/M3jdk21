@@ -2,7 +2,7 @@
 // Relocated from com.synexia m3-fastsearch/jdk/internal/m3/fastsearch/knowledge/index/JavaTopKSelector.java (blob 895ae23ef198) by M3_SEARCH_RELOCATE v3.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 
 /** Primitive worst-first heap; O(n log k + k log k) work and O(k) scratch space. */
 final class JavaTopKSelector implements TopKSelector {
@@ -17,13 +17,13 @@ final class JavaTopKSelector implements TopKSelector {
     }
 
     @Override
-    public int[] select(int[] documentIds, float[] scores, int limit, M3ProgressMonitor monitor) {
+    public int[] select(int[] documentIds, float[] scores, int limit, ProgressMonitor monitor) {
         return TopKInputs.monitored(monitor,
                 () -> selectInternal(documentIds, scores, limit, monitor));
     }
 
     private int[] selectInternal(
-            int[] documentIds, float[] scores, int limit, M3ProgressMonitor monitor) {
+            int[] documentIds, float[] scores, int limit, ProgressMonitor monitor) {
         int size = TopKInputs.validate(documentIds, scores, limit, monitor);
         if (monitor != null) monitor.subTask("Select and order Java top-k");
         int[] heap = new int[size];

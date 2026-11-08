@@ -249,8 +249,8 @@ public enum PrimitiveKind {
     int hashBits(long bits) {
         long normalized = normalizeBits(bits);
         return switch (this) {
-            case BOOLEAN, BYTE, SHORT, CHAR, INT, FLOAT -> M3DenseHash.mix((int) normalized);
-            case LONG, DOUBLE -> M3DenseHash.mix(normalized);
+            case BOOLEAN, BYTE, SHORT, CHAR, INT, FLOAT -> DenseHash.mix((int) normalized);
+            case LONG, DOUBLE -> DenseHash.mix(normalized);
         };
     }
 

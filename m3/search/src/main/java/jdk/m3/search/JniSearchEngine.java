@@ -3,8 +3,8 @@
 // Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/JniSearchEngine.java (blob e859500e294c) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import jdk.m3.file.M3JniLibraryLoader;
 import jdk.m3.file.M3NativeLibrarySpec;
 import java.nio.ByteBuffer;
@@ -59,8 +59,8 @@ public final class JniSearchEngine implements SearchEngine {
     public CompiledSearch compile(byte[] needle) { return compile(needle, null); }
 
     @Override
-    public CompiledSearch compile(byte[] needle, M3ProgressMonitor monitor) {
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    public CompiledSearch compile(byte[] needle, ProgressMonitor monitor) {
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         if (!available()) throw new IllegalStateException("JNI search provider is unavailable");
         if (needle == null || needle.length == 0) {
@@ -110,14 +110,14 @@ public final class JniSearchEngine implements SearchEngine {
     private static native void releaseNative(long handle);
 
     static int countIfNative(CompiledSearch compiled, byte[] haystack, int fromIndex,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         if (!(compiled instanceof NativePattern pattern)) return -1;
         return pattern.countOverlapping(haystack, fromIndex, monitor);
     }
 
     /** Null means the provider or additive native symbol is unavailable. */
     static int[] positionsIfNative(CompiledSearch compiled, byte[] haystack, int fromIndex,
-            int maxMatches, M3ProgressMonitor monitor) {
+            int maxMatches, ProgressMonitor monitor) {
         if (!(compiled instanceof NativePattern pattern)) return null;
         return pattern.positionsOverlapping(haystack, fromIndex, maxMatches, monitor);
     }
@@ -141,8 +141,8 @@ public final class JniSearchEngine implements SearchEngine {
         }
 
         @Override
-        public synchronized int indexOf(byte[] haystack, int fromIndex, M3ProgressMonitor monitor) {
-            M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+        public synchronized int indexOf(byte[] haystack, int fromIndex, ProgressMonitor monitor) {
+            ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
             checked.checkCanceled();
             int result = indexOf(haystack, fromIndex);
             checked.checkCanceled();
@@ -202,13 +202,13 @@ public final class JniSearchEngine implements SearchEngine {
         public int needleLength() { return needleLength; }
 
         private synchronized int countOverlapping(byte[] haystack, int fromIndex,
-                M3ProgressMonitor monitor) {
+                ProgressMonitor monitor) {
             requireBulkEntry();
             monitor.checkCanceled();
             requireOpen();
             // Older ABI-1 libraries can have bulk symbols but no monitored entrypoint.
             // Never run their unmonitored bulk scan for a caller-supplied monitor.
-            boolean monitored = monitor != new M3DefaultProgressMonitor();
+            boolean monitored = monitor != new DefaultProgressMonitor();
             if (monitored && !supportsMonitoredBulk()) return -1;
             int count;
             if (monitored) {
@@ -231,12 +231,12 @@ public final class JniSearchEngine implements SearchEngine {
         }
 
         private synchronized int[] positionsOverlapping(byte[] haystack, int fromIndex,
-                int maxMatches, M3ProgressMonitor monitor) {
+                int maxMatches, ProgressMonitor monitor) {
             requireBulkEntry();
             monitor.checkCanceled();
             requireOpen();
             // Preserve the Java fallback when the optional monitored JNI ABI is absent.
-            boolean monitored = monitor != new M3DefaultProgressMonitor();
+            boolean monitored = monitor != new DefaultProgressMonitor();
             if (monitored && !supportsMonitoredBulk()) return null;
             int[] positions;
             if (monitored) {
@@ -307,9 +307,9 @@ public final class JniSearchEngine implements SearchEngine {
 
         /** Called only by a monitored JNI operation while its native handle is borrowed. */
         private final class NativePoll {
-            private final M3ProgressMonitor monitor;
+            private final ProgressMonitor monitor;
 
-            private NativePoll(M3ProgressMonitor monitor) {
+            private NativePoll(ProgressMonitor monitor) {
                 this.monitor = monitor;
             }
 

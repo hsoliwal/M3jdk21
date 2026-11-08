@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.BitSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -64,12 +64,12 @@ public final class M3FiveFamilyPreparedSelectionTest {
         BitSet outside = new BitSet(); outside.set(2);
         assertThrows(IndexOutOfBoundsException.class,
                 () -> M3FiveFamilyPreparedSelection.fromBits(first, outside));
-        if (M3IndexMaskCompactor.nativeAvailable()) {
+        if (IndexMaskCompactor.nativeAvailable()) {
             assertEquals(selection.projection().asJdkList(),
-                    selection.projection(M3IndexMaskCompactor.Backend.NATIVE_REQUIRED).asJdkList());
+                    selection.projection(IndexMaskCompactor.Backend.NATIVE_REQUIRED).asJdkList());
         } else {
             assertThrows(UnsatisfiedLinkError.class,
-                    () -> selection.projection(M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                    () -> selection.projection(IndexMaskCompactor.Backend.NATIVE_REQUIRED));
         }
     }
 }

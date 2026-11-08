@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongConsumer;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.PrimitiveKind;
 
 /**
@@ -40,21 +40,21 @@ public final class ProviderBackedPrimitiveLongTree {
     private final long[] validationScratch;
     private final long[] nextCursorScratch = new long[1];
 
-    private final M3LazyPrimitiveAddressSpace parent;
-    private final M3LazyPrimitiveAddressSpace firstChild;
-    private final M3LazyPrimitiveAddressSpace lastChild;
-    private final M3LazyPrimitiveAddressSpace nextSibling;
-    private final M3LazyPrimitiveAddressSpace nextChildCursor;
-    private final M3LazyPrimitiveAddressSpace loadedChildCount;
+    private final LazyPrimitiveAddressSpace parent;
+    private final LazyPrimitiveAddressSpace firstChild;
+    private final LazyPrimitiveAddressSpace lastChild;
+    private final LazyPrimitiveAddressSpace nextSibling;
+    private final LazyPrimitiveAddressSpace nextChildCursor;
+    private final LazyPrimitiveAddressSpace loadedChildCount;
 
     public ProviderBackedPrimitiveLongTree(
             CursorPagedPrimitiveTreeProvider provider,
             int pageSize,
             PrimitiveKind... laneKinds) {
         this(
-                M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
                 provider,
                 pageSize,
                 laneKinds);
@@ -472,9 +472,9 @@ public final class ProviderBackedPrimitiveLongTree {
         return encoded == 0L ? NO_NODE : encoded - 1L;
     }
 
-    private static M3LazyPrimitiveAddressSpace longs(
+    private static LazyPrimitiveAddressSpace longs(
             int rootBits, int directoryBits, int leafBits) {
-        return new M3LazyPrimitiveAddressSpace(
+        return new LazyPrimitiveAddressSpace(
                 PrimitiveKind.LONG, rootBits, directoryBits, leafBits);
     }
 }

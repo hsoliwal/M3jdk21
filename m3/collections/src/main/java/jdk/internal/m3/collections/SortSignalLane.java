@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Versioned primitive sort-signal evidence indexed by stable ID, without an Entry or
@@ -201,7 +201,7 @@ public final class SortSignalLane {
         if (minimum <= values.length) return;
         long preferred = Math.max((long) minimum, values.length + (values.length >>> 1) + 1L);
         if (preferred > Integer.MAX_VALUE - 8L) preferred = minimum;
-        int capacity = Math.toIntExact(M3RuntimeHeap.chooseAmortizedCapacity(
+        int capacity = Math.toIntExact(RuntimeHeap.chooseAmortizedCapacity(
                 minimum, preferred, Long.BYTES * 2 + Byte.BYTES
                         + (classifiedWrite || evidenceKinds != null ? Byte.BYTES : 0)));
         long[] nextValues = Arrays.copyOf(values, capacity);

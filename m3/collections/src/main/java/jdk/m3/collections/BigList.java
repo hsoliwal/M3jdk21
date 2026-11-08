@@ -345,8 +345,8 @@ public final class BigList {
         long grown = grownCapacity(current, required, maxCapacity());
         // Charge only the new directory, replacement tail and newly allocated pages.
         // One heap observation at backing growth; no per-add probe or forced GC.
-        elements.resize(M3RuntimeHeap.chooseSegmentedAmortizedCapacity(
-                M3RuntimeHeap.current(), current, required, grown,
+        elements.resize(RuntimeHeap.chooseSegmentedAmortizedCapacity(
+                RuntimeHeap.current(), current, required, grown,
                 kind.widthBytes(), segmentShift));
     }
 

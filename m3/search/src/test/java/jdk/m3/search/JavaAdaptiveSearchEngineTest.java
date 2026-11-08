@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -101,7 +101,7 @@ class JavaAdaptiveSearchEngineTest {
         direct.put(text).flip();
         direct.mark();
         AtomicInteger polls = new AtomicInteger();
-        M3ProgressMonitor stopOnSixth = new M3ProgressMonitor() {
+        ProgressMonitor stopOnSixth = new ProgressMonitor() {
             @Override public void beginTask(String name, long total) {}
             @Override public void done() {}
             @Override public void worked(long work) {}
@@ -110,7 +110,7 @@ class JavaAdaptiveSearchEngineTest {
             @Override public void subTask(String name) {}
             @Override public boolean isCanceled() { return polls.incrementAndGet() >= 6; }
             @Override public void setCanceled(boolean value) {}
-            @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+            @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
         };
         try (CompiledSearch compiled = new BoyerMooreHorspoolSearch(needle)) {
             // The old default polls only at reverse-search boundaries.
@@ -167,7 +167,7 @@ class JavaAdaptiveSearchEngineTest {
                         view.mark();
                         assertEquals(expected, compiled.lastIndexOf(view, from));
                         assertEquals(expected, compiled.lastIndexOf(
-                                view, from, new M3DefaultProgressMonitor()));
+                                view, from, new DefaultProgressMonitor()));
                         assertEquals(pos, view.position());
                         assertEquals(limit, view.limit());
                         view.reset();

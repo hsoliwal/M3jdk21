@@ -11,7 +11,7 @@ package jdk.m3.collections;
  * Different-key reads are allowed; cyclic reads fail with IllegalStateException.
  */
 @FunctionalInterface
-public interface LazyValueProvider<K, V> extends M3LazyEventSource<M3Progress> {
+public interface LazyValueProvider<K, V> extends LazyEventSource<Progress> {
     /** No mapping in the queried view; this is not a stored flag. */
     short ABSENT = -1;
     /** Admitted key whose value has not been requested. */
@@ -24,5 +24,5 @@ public interface LazyValueProvider<K, V> extends M3LazyEventSource<M3Progress> {
     short FAILED = 4;
 
     /** Load one value; exceptions propagate unchanged and do not publish a value. */
-    V load(K key, M3Progress progress);
+    V load(K key, Progress progress);
 }

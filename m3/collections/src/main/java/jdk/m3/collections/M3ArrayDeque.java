@@ -46,13 +46,13 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
     private transient int size;
     private transient long revision;
 
-    public M3ArrayDeque() { values = M3SlotArrays.EMPTY_OBJECTS; states = M3SlotArrays.EMPTY_BYTES; }
+    public M3ArrayDeque() { values = SlotArrays.EMPTY_OBJECTS; states = SlotArrays.EMPTY_BYTES; }
     public M3ArrayDeque(int capacity) {
         if (capacity < 0 || capacity > MAX_CAPACITY) {
             throw new IllegalArgumentException("invalid initial capacity");
         }
-        values = capacity == 0 ? M3SlotArrays.EMPTY_OBJECTS : new Object[capacity];
-        states = capacity == 0 ? M3SlotArrays.EMPTY_BYTES : new byte[capacity];
+        values = capacity == 0 ? SlotArrays.EMPTY_OBJECTS : new Object[capacity];
+        states = capacity == 0 ? SlotArrays.EMPTY_BYTES : new byte[capacity];
     }
     public M3ArrayDeque(Collection<? extends E> values) {
         this(Objects.requireNonNull(values, "values").size());
@@ -95,10 +95,10 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
     }
     /** Return a detached physical index projection. JNI never receives object values. */
     public int[] selectedPhysicalIndices(int required, int forbidden,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         selectionBits(required, forbidden);
         Objects.requireNonNull(backend, "backend");
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
             int[] order = new int[size];
             byte[] admitted = new byte[size];
             for (int i = 0; i < size; i++) {
@@ -107,7 +107,7 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
                 admitted[i] = (byte) (((bits & required) == required
                         && (bits & forbidden) == 0) ? 1 : 0);
             }
-            return M3IndexMaskCompactor.select(order, admitted, 1, backend);
+            return IndexMaskCompactor.select(order, admitted, 1, backend);
         }
         int count = 0;
         for (int i = 0; i < size; i++) {
@@ -124,7 +124,7 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
     private void grow() {
         if (size < values.length) return;
         if (size >= MAX_CAPACITY) throw new OutOfMemoryError("M3 Deque capacity exhausted");
-        int nextCapacity = M3SlotArrays.grow(values.length);
+        int nextCapacity = SlotArrays.grow(values.length);
         Object[] nextValues = new Object[nextCapacity];
         byte[] nextStates = new byte[nextCapacity];
         copyValuesInto(nextValues);
@@ -323,8 +323,8 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
         stream.defaultReadObject();
         int count = stream.readInt();
         if (count < 0 || count > MAX_CAPACITY) throw new InvalidObjectException("invalid deque size");
-        values = count == 0 ? M3SlotArrays.EMPTY_OBJECTS : new Object[count];
-        states = count == 0 ? M3SlotArrays.EMPTY_BYTES : new byte[count];
+        values = count == 0 ? SlotArrays.EMPTY_OBJECTS : new Object[count];
+        states = count == 0 ? SlotArrays.EMPTY_BYTES : new byte[count];
         for (int i = 0; i < count; i++) {
             Object value = stream.readObject();
             byte bits = stream.readByte();

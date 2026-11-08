@@ -5,7 +5,7 @@
  */
 package jdk.m3.collections.interop;
 
-import jdk.m3.collections.M3CountedBag;
+import jdk.m3.collections.CountedBag;
 import java.util.Iterator;
 import java.util.Objects;
 import org.apache.commons.collections4.multiset.AbstractMultiSet;
@@ -17,13 +17,13 @@ import org.apache.commons.collections4.multiset.AbstractMultiSet;
  * semantics are reused, with counts, iteration, and revisions owned by M3.
  */
 public final class M3ApacheMultiSet<E> extends AbstractMultiSet<E> {
-    private final M3CountedBag<E> bag;
+    private final CountedBag<E> bag;
 
     /** Independent default indexed count owner; preserves the original contract. */
-    public M3ApacheMultiSet() { this(new M3CountedBag<>()); }
+    public M3ApacheMultiSet() { this(new CountedBag<>()); }
 
     /** Share a single existing M3 count owner with other provider facades. */
-    public M3ApacheMultiSet(M3CountedBag<E> owner) {
+    public M3ApacheMultiSet(CountedBag<E> owner) {
         this.bag = Objects.requireNonNull(owner, "owner");
     }
     public static <E> M3ApacheMultiSet<E> create() { return new M3ApacheMultiSet<>(); }
@@ -66,5 +66,5 @@ public final class M3ApacheMultiSet<E> extends AbstractMultiSet<E> {
         @Override public int getCount() { return count; }
     }
     public long totalOccurrences() { return bag.totalOccurrences(); }
-    public M3CountedBag<E> m3Backend() { return bag; }
+    public CountedBag<E> m3Backend() { return bag; }
 }

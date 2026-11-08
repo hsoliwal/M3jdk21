@@ -14,11 +14,11 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import jdk.m3.collections.M3CountedBag;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.CountedBag;
+import jdk.m3.collections.IndexMaskCompactor;
 
 /**
- * Native M3 order-statistics collection over the existing canonical M3CountedBag snapshot.
+ * Native M3 order-statistics collection over the existing canonical CountedBag snapshot.
  * This is NOT a Guava, Apache, Eclipse or Spring adapter. Exactly one M3 key/count
  * snapshot owns the GC-traced reference payload; this projection owns only primitive
  * int[] physical ordinals and long[] occurrence prefix geometry. Each view shares
@@ -33,7 +33,7 @@ import jdk.m3.collections.M3IndexMaskCompactor;
  * No Java reference, callback or comparator crosses the optional JNI boundary.
  */
 public final class BagRankIndex<E> extends AbstractCollection<E> {
-    private final M3CountedBag.CountSnapshot<E> source;
+    private final CountedBag.CountSnapshot<E> source;
     private final Comparator<? super E> comparator;
     private final int[] physical;
     private final long[] prefix;
@@ -41,7 +41,7 @@ public final class BagRankIndex<E> extends AbstractCollection<E> {
     private final int to;
     private final boolean descending;
 
-    private BagRankIndex(M3CountedBag.CountSnapshot<E> source,
+    private BagRankIndex(CountedBag.CountSnapshot<E> source,
             Comparator<? super E> comparator, int[] physical, long[] prefix,
             int from, int to, boolean descending) {
         this.source = source;
@@ -54,16 +54,16 @@ public final class BagRankIndex<E> extends AbstractCollection<E> {
     }
 
     /** Canonical M3 owner, not an independent element/Entry store. */
-    public static <E> BagRankIndex<E> snapshot(M3CountedBag<E> owner,
+    public static <E> BagRankIndex<E> snapshot(CountedBag<E> owner,
             Comparator<? super E> comparator) {
         Objects.requireNonNull(owner, "owner");
-        M3CountedBag.CountSnapshot<E> source = owner.sortedCounts(comparator);
+        CountedBag.CountSnapshot<E> source = owner.sortedCounts(comparator);
         int[] order = new int[source.distinctSize()];
         for (int i = 0; i < order.length; i++) order[i] = i;
         return create(source, comparator, order, false);
     }
 
-    private static <E> BagRankIndex<E> create(M3CountedBag.CountSnapshot<E> source,
+    private static <E> BagRankIndex<E> create(CountedBag.CountSnapshot<E> source,
             Comparator<? super E> comparator, int[] order, boolean reverse) {
         long[] countsPrefix = new long[order.length + 1];
         for (int i = 0; i < order.length; i++) {
@@ -189,11 +189,11 @@ public final class BagRankIndex<E> extends AbstractCollection<E> {
 
     /**
      * Filter precomputed per-group flags. JAVA performs a two-pass exact primitive
-     * selection; NATIVE_REQUIRED reuses the existing C/JNI M3IndexMaskCompactor.
+     * selection; NATIVE_REQUIRED reuses the existing C/JNI IndexMaskCompactor.
      * The aligned input flags are not retained. No silent Java fallback from JNI.
      */
     public BagRankIndex<E> selected(byte[] states, int required, int forbidden,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(states, "states");
         Objects.requireNonNull(backend, "backend");
         if (states.length != distinctSize()) throw new IllegalArgumentException("misaligned state vector");
@@ -206,7 +206,7 @@ public final class BagRankIndex<E> extends AbstractCollection<E> {
             if ((bits & required) == required && (bits & forbidden) == 0) count++;
         }
         int[] indexes;
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
             int[] ordered = selectedPhysicalOrdinals();
             byte[] binaryMask = new byte[states.length];
             for (int i = 0; i < states.length; i++) {
@@ -214,7 +214,7 @@ public final class BagRankIndex<E> extends AbstractCollection<E> {
                 binaryMask[i] = (byte) ((bits & required) == required
                         && (bits & forbidden) == 0 ? 1 : 0);
             }
-            indexes = M3IndexMaskCompactor.select(ordered, binaryMask, 1, backend);
+            indexes = IndexMaskCompactor.select(ordered, binaryMask, 1, backend);
         } else {
             indexes = new int[count];
             int out = 0;

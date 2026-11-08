@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import jdk.m3.collections.PrimitiveKind;
-import jdk.m3.collections.M3PrimitivePrimitiveHashMap;
+import jdk.m3.collections.PrimitivePrimitiveHashMap;
 
 /**
  * Primitive multiset/bag backed by a primitive-key to int-count hash table.
@@ -32,12 +32,12 @@ public final class PrimitiveBag {
     }
 
     private final PrimitiveKind kind;
-    private final M3PrimitivePrimitiveHashMap counts;
+    private final PrimitivePrimitiveHashMap counts;
     private long size;
 
     public PrimitiveBag(PrimitiveKind kind) {
         this.kind = Objects.requireNonNull(kind, "kind");
-        counts = new M3PrimitivePrimitiveHashMap(kind, PrimitiveKind.INT);
+        counts = new PrimitivePrimitiveHashMap(kind, PrimitiveKind.INT);
     }
 
     public PrimitiveKind kind() { return kind; }

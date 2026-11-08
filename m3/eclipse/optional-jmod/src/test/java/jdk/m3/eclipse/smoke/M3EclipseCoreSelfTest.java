@@ -3,8 +3,8 @@
 package jdk.m3.eclipse.smoke;
 
 import jdk.m3.ast.M3ASTHierarchy;
-import jdk.m3.collections.M3LongIndexProjection;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.LongIndexProjection;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.Arrays;
 import jdk.m3.eclipse.core.M3EclipseCore;
 import jdk.m3.file.M3NioFile;
@@ -34,10 +34,10 @@ public final class M3EclipseCoreSelfTest {
         require(m3.utf16(edge).javaHashCode() == edge.hashCode(), "UTF-16 Java hash parity");
 
         long[] values = {5L, Long.MIN_VALUE, 5L, 0L};
-        M3LongIndexProjection projection = m3.index(values);
+        LongIndexProjection projection = m3.index(values);
         values[0] = 9L;
         require(projection.get(0) == 5L, "M3 index source snapshot isolation");
-        M3LongIndexProjection sorted = projection.sortedAscending();
+        LongIndexProjection sorted = projection.sortedAscending();
         require(sorted.size() == 4 && sorted.get(0) == Long.MIN_VALUE,
                 "M3 signed stable index order");
         require(sorted.physicalIndex(2) == 0 && sorted.physicalIndex(3) == 2,
@@ -45,21 +45,21 @@ public final class M3EclipseCoreSelfTest {
         require(sorted.slice(1, 2).size() == 2, "M3 offset slice");
         int[] rowIds = {7, 0, 7, -1};
         byte[] stateBytes = {1, 3, 0, 1};
-        int[] javaRows = M3IndexMaskCompactor.select(rowIds, stateBytes, 1,
-                M3IndexMaskCompactor.Backend.JAVA);
+        int[] javaRows = IndexMaskCompactor.select(rowIds, stateBytes, 1,
+                IndexMaskCompactor.Backend.JAVA);
         require(Arrays.equals(javaRows, new int[]{7, 0, -1}),
                 "M3 Java index-mask encounter order and duplicates");
-        boolean nativePresent = M3IndexMaskCompactor.nativeAvailable();
+        boolean nativePresent = IndexMaskCompactor.nativeAvailable();
         if (Boolean.getBoolean("m3.native.required") && !nativePresent) {
             throw new AssertionError("existing M3 JNI mask library was required but unavailable");
         }
         if (nativePresent) {
-            int[] nativeRows = M3IndexMaskCompactor.select(rowIds, stateBytes, 1,
-                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+            int[] nativeRows = IndexMaskCompactor.select(rowIds, stateBytes, 1,
+                    IndexMaskCompactor.Backend.NATIVE_REQUIRED);
             require(Arrays.equals(javaRows, nativeRows), "existing M3 JNI parity");
         } else {
-            expect(UnsatisfiedLinkError.class, () -> M3IndexMaskCompactor.select(
-                    rowIds, stateBytes, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED),
+            expect(UnsatisfiedLinkError.class, () -> IndexMaskCompactor.select(
+                    rowIds, stateBytes, 1, IndexMaskCompactor.Backend.NATIVE_REQUIRED),
                     "missing M3 JNI must fail explicitly");
         }
 

@@ -23,17 +23,17 @@ public final class M3SpanIndexOracleTest {
         return best;
     }
     private static void verify(int[] starts, long[] ends, int[] flags, int required, int forbidden, int[] rows) {
-        M3SpanIndex index = new M3SpanIndex();
+        SpanIndex index = new SpanIndex();
         for (int i = 0; i < starts.length; i++) check(index.add(starts[i], ends[i], flags[i]) == i, "ordinal");
-        M3SpanIndex.Snapshot snapshot = index.snapshot(required, forbidden);
+        SpanIndex.Snapshot snapshot = index.snapshot(required, forbidden);
         int[] expected = new int[rows.length];
         for (int i = 0; i < rows.length; i++) {
             expected[i] = oracle(starts, ends, flags, rows[i], required, forbidden);
             check(snapshot.earliestCovering(rows[i]) == expected[i], "scalar query=" + rows[i]);
         }
         int[] before = rows.clone();
-        check(Arrays.equals(snapshot.earliestCoveringBatch(rows, M3SpanIndex.Backend.JAVA), expected), "Java batch");
-        check(Arrays.equals(snapshot.earliestCoveringBatch(rows, M3SpanIndex.Backend.NATIVE_REQUIRED), expected), "native batch");
+        check(Arrays.equals(snapshot.earliestCoveringBatch(rows, SpanIndex.Backend.JAVA), expected), "Java batch");
+        check(Arrays.equals(snapshot.earliestCoveringBatch(rows, SpanIndex.Backend.NATIVE_REQUIRED), expected), "native batch");
         check(Arrays.equals(rows, before), "query mutation");
         int previousStart = -1, previousOrdinal = -1;
         long max = Long.MIN_VALUE;
@@ -48,12 +48,12 @@ public final class M3SpanIndexOracleTest {
         }
         index.clear();
         index.add(0, Long.MAX_VALUE, -1);
-        check(Arrays.equals(snapshot.earliestCoveringBatch(rows, M3SpanIndex.Backend.JAVA), expected), "detached view");
-        check(Arrays.equals(snapshot.earliestCoveringBatch(rows, M3SpanIndex.Backend.NATIVE_REQUIRED), expected), "detached JNI");
-        check(snapshot.earliestCoveringBatch(new int[0], M3SpanIndex.Backend.NATIVE_REQUIRED).length == 0, "empty queries");
+        check(Arrays.equals(snapshot.earliestCoveringBatch(rows, SpanIndex.Backend.JAVA), expected), "detached view");
+        check(Arrays.equals(snapshot.earliestCoveringBatch(rows, SpanIndex.Backend.NATIVE_REQUIRED), expected), "detached JNI");
+        check(snapshot.earliestCoveringBatch(new int[0], SpanIndex.Backend.NATIVE_REQUIRED).length == 0, "empty queries");
     }
     public static void main(String[] args) {
-        check(M3SpanIndex.nativeAvailable(), "required native backend absent");
+        check(SpanIndex.nativeAvailable(), "required native backend absent");
         int[] boundaryRows = {Integer.MIN_VALUE, -1, 0, 1, 2, 3, 4, 5, 6, Integer.MAX_VALUE};
         // Every pair of small intervals, including duplicate starts and empty spans.
         for (int a = 0; a < 5; a++) for (int ae = a; ae <= 5; ae++) {

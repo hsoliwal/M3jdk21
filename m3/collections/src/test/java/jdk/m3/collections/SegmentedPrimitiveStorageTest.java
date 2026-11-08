@@ -17,27 +17,27 @@ final class SegmentedPrimitiveStorageTest {
             4096,
             (1 << 20) - 1,
             1 << 20,
-            M3Address28.MAX_SLOT
+            Address28.MAX_SLOT
         };
         for (int slot : slots) {
-            int region = M3Address28.region(slot);
-            int block = M3Address28.block(slot);
-            int offset = M3Address28.offset(slot);
-            assertEquals(slot, M3Address28.compose(region, block, offset));
+            int region = Address28.region(slot);
+            int block = Address28.block(slot);
+            int offset = Address28.offset(slot);
+            assertEquals(slot, Address28.compose(region, block, offset));
         }
         assertThrows(IndexOutOfBoundsException.class,
-            () -> M3Address28.region(-1));
+            () -> Address28.region(-1));
         assertThrows(IndexOutOfBoundsException.class,
-            () -> M3Address28.offset(M3Address28.MAX_SLOTS));
+            () -> Address28.offset(Address28.MAX_SLOTS));
     }
 
     @Test
     void longIntAndBitLanesAllocateOnlyTouchedPaths() {
-        M3LongLane28 longs = new M3LongLane28();
-        M3IntLane28 ints = new M3IntLane28();
-        M3BitLane28 bits = new M3BitLane28();
+        LongLane28 longs = new LongLane28();
+        IntLane28 ints = new IntLane28();
+        BitLane28 bits = new BitLane28();
 
-        int[] slots = {0, 4096, 1 << 20, M3Address28.MAX_SLOT};
+        int[] slots = {0, 4096, 1 << 20, Address28.MAX_SLOT};
         for (int i = 0; i < slots.length; i++) {
             longs.set(slots[i], 100L + i);
             ints.set(slots[i], 200 + i);
@@ -93,8 +93,8 @@ final class SegmentedPrimitiveStorageTest {
 
     @Test
     void segmentedArenaCrossesLeafBoundaryWithoutCopyingExistingOffsets() {
-        M3LongArena28 arena = new M3LongArena28();
-        for (int i = 0; i < M3Address28.VALUES_PER_BLOCK + 17; i++) {
+        LongArena28 arena = new LongArena28();
+        for (int i = 0; i < Address28.VALUES_PER_BLOCK + 17; i++) {
             assertEquals(i, arena.append(i * 3L));
         }
 
@@ -109,7 +109,7 @@ final class SegmentedPrimitiveStorageTest {
 
     @Test
     void linkedListKeepsOrderAcrossStableSlotReuse() {
-        M3LongLinkedList28 list = new M3LongLinkedList28();
+        LongLinkedList28 list = new LongLinkedList28();
         long ten = list.addLast(10);
         long thirty = list.addLast(30);
         long twenty = list.insertBefore(thirty, 20);
@@ -158,7 +158,7 @@ final class SegmentedPrimitiveStorageTest {
 
     @Test
     void multiLaneStoreDoesNotMoveOtherHandlesOnRemoval() {
-        M3LongLaneStore28 store = new M3LongLaneStore28(2);
+        LongLaneStore28 store = new LongLaneStore28(2);
         long a = store.allocate2(1, 11);
         long b = store.allocate2(2, 22);
         long c = store.allocate2(3, 33);

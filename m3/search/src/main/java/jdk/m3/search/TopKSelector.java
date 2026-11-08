@@ -2,7 +2,7 @@
 // Relocated from com.synexia m3-fastsearch/jdk/internal/m3/fastsearch/knowledge/index/TopKSelector.java (blob 05579759973c) by M3_SEARCH_RELOCATE v3.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 
 /**
  * Read-only selection over already scored, reader-local candidates.
@@ -29,7 +29,7 @@ public interface TopKSelector {
      * The monitor is caller-owned and must not be shared by simultaneous selections.
      * No partial result is returned on cancellation. A null monitor is rejected.
      */
-    default int[] select(int[] documentIds, float[] scores, int limit, M3ProgressMonitor monitor) {
+    default int[] select(int[] documentIds, float[] scores, int limit, ProgressMonitor monitor) {
         return TopKInputs.monitored(monitor, () -> select(documentIds, scores, limit));
     }
 

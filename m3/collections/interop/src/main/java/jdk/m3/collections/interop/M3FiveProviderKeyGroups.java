@@ -7,7 +7,7 @@ package jdk.m3.collections.interop;
 
 import com.google.common.collect.ListMultimap;
 import jdk.m3.collections.M3ArrayList;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import jdk.m3.collections.M3LinkedHashMap;
 import java.util.AbstractList;
 import java.util.Arrays;
@@ -119,7 +119,7 @@ public final class M3FiveProviderKeyGroups<K, V> {
     /** Select unsigned-byte state bits using the existing Java/checked-JNI selector first. */
     public static <K, V> M3FiveProviderKeyGroups<K, V> snapshotSelected(
             M3FiveLibraryIndexViews<K, V> source, int required, int excluded,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(backend, "backend");
         return snapshot(source.filteredByState(required, excluded, backend));

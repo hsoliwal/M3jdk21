@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.compiler;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
@@ -180,7 +180,7 @@ public final class CompilerReferenceCensus {
 
     /** No parsing/compilation/solver: take existing source/compiler-proven inputs. */
     public static Result analyze(ReferenceFlow.Result references,
-            SourceLiveness.Result flow, M3ProgressMonitor monitor) {
+            SourceLiveness.Result flow, ProgressMonitor monitor) {
         Objects.requireNonNull(references, "references");
         Objects.requireNonNull(flow, "flow");
         check(monitor);
@@ -429,7 +429,7 @@ public final class CompilerReferenceCensus {
     private static String key(String a, String b, long position) {
         return identity(a, b) + ":" + position;
     }
-    private static void check(M3ProgressMonitor monitor) {
+    private static void check(ProgressMonitor monitor) {
         if (monitor != null) monitor.checkCanceled();
     }
 }

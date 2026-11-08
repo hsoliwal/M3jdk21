@@ -6,9 +6,9 @@ package jdk.m3.collections.interop;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import jdk.m3.collections.M3CountedBag;
+import jdk.m3.collections.CountedBag;
 import jdk.m3.collections.IndexPathMasks;
-import jdk.m3.collections.M3ObjectCounts;
+import jdk.m3.collections.ObjectCounts;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 /** Cross-provider identity and 32-bit bitmap JNI regression proof on actual M3 owners. */
 final class M3FiveProviderCountSharingRegressionTest {
     @Test void liveGuavaEclipseApacheShareOneM3CountAndJdkSpringAreIndependent() {
-        M3ObjectCounts<String> source = new M3ObjectCounts<>();
+        ObjectCounts<String> source = new ObjectCounts<>();
         source.add(null, 2);
         source.setFlags(null, 0x80000001);
         source.add("keep", 3);
@@ -26,7 +26,7 @@ final class M3FiveProviderCountSharingRegressionTest {
         source.setFlags("drop", 0x00000002);
         var captured = M3FiveProviderFlagSelection.capture(source, 0x80000000, 0x2,
                 IndexPathMasks.Backend.JAVA);
-        M3CountedBag<String> shared = captured.m3Backend();
+        CountedBag<String> shared = captured.m3Backend();
         var guava = captured.guavaMultiset();
         var eclipse = captured.eclipseBag();
         var apache = captured.apacheMultiSet();
@@ -57,7 +57,7 @@ final class M3FiveProviderCountSharingRegressionTest {
     }
 
     @Test void nativeParityAndRefusalIncludeEmptyAndBitThirtyOne() {
-        M3ObjectCounts<Integer> source = new M3ObjectCounts<>();
+        ObjectCounts<Integer> source = new ObjectCounts<>();
         Random random = new Random(0x7382128b4L);
         for (int key = 0; key < 256; key++) {
             source.add(key, 1 + random.nextInt(13));

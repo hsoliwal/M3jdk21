@@ -328,7 +328,7 @@ public final class M3ArrayDequeGrowthContract {
 
     private static void assertMask(M3ArrayDeque<?> deque, List<Integer> states) {
         int[] result = deque.selectedPhysicalIndices(M3ArrayDeque.VISIBLE, M3ArrayDeque.DIRTY,
-                NATIVE ? M3IndexMaskCompactor.Backend.NATIVE_REQUIRED : M3IndexMaskCompactor.Backend.JAVA);
+                NATIVE ? IndexMaskCompactor.Backend.NATIVE_REQUIRED : IndexMaskCompactor.Backend.JAVA);
         int count = 0;
         for (int i = 0; i < states.size(); i++) {
             int bits = states.get(i);

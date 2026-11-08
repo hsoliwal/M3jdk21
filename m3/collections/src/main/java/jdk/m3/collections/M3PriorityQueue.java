@@ -56,8 +56,8 @@ public final class M3PriorityQueue<E> extends AbstractQueue<E>
         if (capacity < 0 || capacity > MAX_CAPACITY) {
             throw new IllegalArgumentException("invalid initial capacity");
         }
-        heap = capacity == 0 ? M3SlotArrays.EMPTY_OBJECTS : new Object[capacity];
-        states = capacity == 0 ? M3SlotArrays.EMPTY_BYTES : new byte[capacity];
+        heap = capacity == 0 ? SlotArrays.EMPTY_OBJECTS : new Object[capacity];
+        states = capacity == 0 ? SlotArrays.EMPTY_BYTES : new byte[capacity];
         identities = new long[capacity];
         this.comparator = comparator;
     }
@@ -115,10 +115,10 @@ public final class M3PriorityQueue<E> extends AbstractQueue<E>
     }
     /** Return a detached index list of the current heap-physical positions. */
     public int[] selectedPhysicalIndices(int required, int forbidden,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         selectedBits(required, forbidden);
         Objects.requireNonNull(backend, "backend");
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
             int[] positions = new int[size]; byte[] admitted = new byte[size];
             for (int i = 0; i < size; i++) {
                 int flags = states[i] & 255;
@@ -126,7 +126,7 @@ public final class M3PriorityQueue<E> extends AbstractQueue<E>
                 admitted[i] = (byte) (((flags & required) == required
                         && (flags & forbidden) == 0) ? 1 : 0);
             }
-            return M3IndexMaskCompactor.select(positions, admitted, 1, backend);
+            return IndexMaskCompactor.select(positions, admitted, 1, backend);
         }
         int count = 0;
         for (int i = 0; i < size; i++) {
@@ -157,7 +157,7 @@ public final class M3PriorityQueue<E> extends AbstractQueue<E>
         if (needed <= heap.length) return;
         if (needed > MAX_CAPACITY) throw new OutOfMemoryError("M3 PriorityQueue capacity exhausted");
         int next = heap.length;
-        do { next = M3SlotArrays.grow(next); } while (next < needed);
+        do { next = SlotArrays.grow(next); } while (next < needed);
         Object[] nextHeap = Arrays.copyOf(heap, next);
         byte[] nextStates = Arrays.copyOf(states, next);
         long[] nextIds = Arrays.copyOf(identities, next);

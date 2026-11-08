@@ -115,7 +115,7 @@ public final class IndexPathRank {
      * State is read once and not retained; later caller changes cannot alter
      * the captured immutable bitmap and prefix ranks.</p>
      */
-    //FLLDCIM: MRL - identity path (rows == null): package-private; origin callers M3LongStateArray.Snapshot.prepare (HANDOFF.tsv, owner not in this leaf) and M3IndexPathIdentitySelfTest
+    //FLLDCIM: MRL - identity path (rows == null): package-private; origin callers M3LongStateArray.Snapshot.prepare (HANDOFF.tsv, owner not in this leaf) and IndexPathIdentitySelfTest
     static IndexPathRank snapshotIdentity(
             int[] states, int requiredMask, int forbiddenMask) {
         Objects.requireNonNull(states, "states");

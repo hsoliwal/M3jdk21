@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.PrimitiveKind;
 import jdk.internal.m3.collections.bits.LazyBitAddressSpace;
 
@@ -39,7 +39,7 @@ public final class BoundedProviderBackedPrimitiveRows {
     private final ProviderBackedPrimitiveRows rows;
     private final int maxResidentRows;
     private final long[] residentIds;
-    private final M3LazyPrimitiveAddressSpace slotByRow;
+    private final LazyPrimitiveAddressSpace slotByRow;
     private final LazyBitAddressSpace referenced;
 
     private int residentCount;
@@ -61,9 +61,9 @@ public final class BoundedProviderBackedPrimitiveRows {
             PrimitiveRowProvider provider,
             PrimitiveKind... laneKinds) {
         this(
-                M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
                 maxResidentRows,
                 provider,
                 laneKinds);
@@ -84,7 +84,7 @@ public final class BoundedProviderBackedPrimitiveRows {
         rows = new ProviderBackedPrimitiveRows(
                 rootBits, directoryBits, leafBits,
                 Objects.requireNonNull(provider, "provider"), laneKinds);
-        slotByRow = new M3LazyPrimitiveAddressSpace(
+        slotByRow = new LazyPrimitiveAddressSpace(
                 PrimitiveKind.INT, rootBits, directoryBits, leafBits);
         referenced = new LazyBitAddressSpace(rootBits, directoryBits, leafBits);
     }

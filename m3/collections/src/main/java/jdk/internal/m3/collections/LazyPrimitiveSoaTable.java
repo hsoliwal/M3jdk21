@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongConsumer;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.PrimitiveKind;
 import jdk.internal.m3.collections.bits.LazyBitAddressSpace;
 
@@ -33,14 +33,14 @@ import jdk.internal.m3.collections.bits.LazyBitAddressSpace;
  */
 public final class LazyPrimitiveSoaTable {
     private final PrimitiveKind[] laneKinds;
-    private final M3LazyPrimitiveAddressSpace[] lanes;
+    private final LazyPrimitiveAddressSpace[] lanes;
     private final LazyBitAddressSpace present;
 
     public LazyPrimitiveSoaTable(PrimitiveKind... laneKinds) {
         this(
-                M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
                 laneKinds);
     }
 
@@ -52,11 +52,11 @@ public final class LazyPrimitiveSoaTable {
         Objects.requireNonNull(laneKinds, "laneKinds");
         if (laneKinds.length == 0) throw new IllegalArgumentException("at least one lane required");
         this.laneKinds = laneKinds.clone();
-        lanes = new M3LazyPrimitiveAddressSpace[laneKinds.length];
+        lanes = new LazyPrimitiveAddressSpace[laneKinds.length];
         for (int lane = 0; lane < laneKinds.length; lane++) {
             PrimitiveKind kind = Objects.requireNonNull(laneKinds[lane], "lane kind");
             lanes[lane] =
-                    new M3LazyPrimitiveAddressSpace(kind, rootBits, directoryBits, leafBits);
+                    new LazyPrimitiveAddressSpace(kind, rootBits, directoryBits, leafBits);
         }
         present = new LazyBitAddressSpace(rootBits, directoryBits, leafBits);
     }
@@ -68,13 +68,13 @@ public final class LazyPrimitiveSoaTable {
 
     public long allocatedPayloadBytes() {
         long bytes = present.allocatedPayloadBytes();
-        for (M3LazyPrimitiveAddressSpace lane : lanes) bytes += lane.allocatedPayloadBytes();
+        for (LazyPrimitiveAddressSpace lane : lanes) bytes += lane.allocatedPayloadBytes();
         return bytes;
     }
 
     public long directoryReferenceSlots() {
         long slots = present.directoryReferenceSlots();
-        for (M3LazyPrimitiveAddressSpace lane : lanes) slots += lane.directoryReferenceSlots();
+        for (LazyPrimitiveAddressSpace lane : lanes) slots += lane.directoryReferenceSlots();
         return slots;
     }
 
@@ -133,7 +133,7 @@ public final class LazyPrimitiveSoaTable {
 
     public boolean remove(long rowId) {
         if (!present.clear(rowId)) return false;
-        for (M3LazyPrimitiveAddressSpace lane : lanes) lane.clearBits(rowId);
+        for (LazyPrimitiveAddressSpace lane : lanes) lane.clearBits(rowId);
         return true;
     }
 
@@ -143,7 +143,7 @@ public final class LazyPrimitiveSoaTable {
 
     public void clear() {
         present.clear();
-        for (M3LazyPrimitiveAddressSpace lane : lanes) lane.clear();
+        for (LazyPrimitiveAddressSpace lane : lanes) lane.clear();
     }
 
     public int allocatedLeafCount(int lane) {

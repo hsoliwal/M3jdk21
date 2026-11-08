@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -40,7 +40,7 @@ final class JniSingleByteCountMemchrNativeTest {
                                 length / 2, length - 1, length, length + 1, Integer.MAX_VALUE}) {
                             int expected = oracle(input, needle, from);
                             int actual = JniSearchEngine.countIfNative(
-                                    compiled, input, from, new M3DefaultProgressMonitor());
+                                    compiled, input, from, new DefaultProgressMonitor());
                             assertEquals(expected, actual,
                                     "byte=" + wanted + " length=" + length + " from=" + from);
                         }
@@ -64,15 +64,15 @@ final class JniSingleByteCountMemchrNativeTest {
         Arrays.fill(repeat, one[0]);
         try (CompiledSearch compiled = engine.compile(one)) {
             assertEquals(repeat.length,
-                    JniSearchEngine.countIfNative(compiled, repeat, 0, new M3DefaultProgressMonitor()));
+                    JniSearchEngine.countIfNative(compiled, repeat, 0, new DefaultProgressMonitor()));
             assertEquals(repeat.length - 3,
-                    JniSearchEngine.countIfNative(compiled, repeat, 3, new M3DefaultProgressMonitor()));
+                    JniSearchEngine.countIfNative(compiled, repeat, 3, new DefaultProgressMonitor()));
         }
         for (byte[] needle : new byte[][]{{7, 7}, {0, 1, 0}, {8, 8, 8, 8}}) {
             try (CompiledSearch compiled = engine.compile(needle)) {
                 for (int from : new int[]{-1, 0, 1, 10, repeat.length, Integer.MAX_VALUE}) {
                     assertEquals(oracle(repeat, needle, from), JniSearchEngine.countIfNative(
-                            compiled, repeat, from, new M3DefaultProgressMonitor()));
+                            compiled, repeat, from, new DefaultProgressMonitor()));
                 }
             }
         }

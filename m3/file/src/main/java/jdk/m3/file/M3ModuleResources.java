@@ -7,8 +7,8 @@ package jdk.m3.file;
 //FLLDCIM: RESTORE - source m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/file/src/main/java/jdk/m3/file/M3ModuleResources.java blob f531701c4c1d4dacc7d42aeecc4ee9f5a00095c5 (retained PR #1538 head; parent 2c809333d0df blob e6ad1b3875fb2fb1b850826aaa7aa146e332cf31 https://github.com/hsoliwal/M3jdk21/blob/2c809333d0df/m3/file/src/main/java/com/m3/file/M3ModuleResources.java); recipe m3/file/qualification/retained-port-20261107 RESTORE_EXACT
 
 import jdk.m3.collections.M3ArrayList;
-import jdk.m3.collections.M3IndexedListSnapshot;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexedListSnapshot;
+import jdk.m3.collections.IndexMaskCompactor;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -103,7 +103,7 @@ public final class M3ModuleResources implements ModuleReader {
         ModuleReader reader = Objects.requireNonNull(reference.open(), "module reader");
         try {
             String[] names = captureNames(reader, maxEntries, maxNameChars);
-            int[] order = M3IndexedListSnapshot.copyOf(names).sorted().physicalIndices();
+            int[] order = IndexedListSnapshot.copyOf(names).sorted().physicalIndices();
             for (int i = 1; i < order.length; i++) {
                 if (names[order[i - 1]].equals(names[order[i]])) {
                     throw new IOException("duplicate module resource name at row " + order[i]);
@@ -203,19 +203,19 @@ public final class M3ModuleResources implements ModuleReader {
      * primitive storage. The returned array is detached; no selection is cached.
      */
     public int[] select(String prefix, int requiredMask, int excludedMask,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(prefix, "prefix");
         Objects.requireNonNull(backend, "backend");
         requireMask(requiredMask);
         requireMask(excludedMask);
         if (prefix.isEmpty()) {
-            return M3IndexMaskCompactor.selectPositions(states, requiredMask, excludedMask, backend);
+            return IndexMaskCompactor.selectPositions(states, requiredMask, excludedMask, backend);
         }
         int first = lowerBound(prefix);
         int end = prefixEnd(prefix, first);
         byte[] windowStates = new byte[end - first];
         for (int i = 0; i < windowStates.length; i++) windowStates[i] = states[nameOrder[first + i]];
-        int[] selected = M3IndexMaskCompactor.selectPositions(
+        int[] selected = IndexMaskCompactor.selectPositions(
                 windowStates, requiredMask, excludedMask, backend);
         for (int i = 0; i < selected.length; i++) selected[i] = nameOrder[first + selected[i]];
         Arrays.sort(selected);

@@ -6,13 +6,13 @@ import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.stream.LongStream;
 import jdk.m3.collections.LongIterator;
-import jdk.m3.collections.M3LongSequence;
+import jdk.m3.collections.LongSequence;
 
 /** Primitive direct forwarding, including native bulk and primitive traversal. */
 //FLLDCIM: RELOCATE - donor blob 492ecb94f0de at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
-public abstract class ForwardingLongSequence implements M3LongSequence {
+public abstract class ForwardingLongSequence implements LongSequence {
     protected ForwardingLongSequence() { }
-    protected abstract M3LongSequence delegate();
+    protected abstract LongSequence delegate();
     @Override public boolean add(long v) { return delegate().add(v); }
     @Override public boolean addIf(long v, LongPredicate p) { return delegate().addIf(v,p); }
     @Override public boolean addAll(long[] v) { return delegate().addAll(v); }

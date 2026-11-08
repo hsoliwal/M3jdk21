@@ -9,7 +9,7 @@ import java.util.Spliterator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import jdk.m3.collections.LongIterator;
-import jdk.m3.collections.M3LongSequence;
+import jdk.m3.collections.LongSequence;
 import jdk.m3.collections.LongStack;
 import jdk.internal.m3.collections.HeapGrowth;
 
@@ -21,7 +21,7 @@ import jdk.internal.m3.collections.HeapGrowth;
  * Existing {@link M3LongArrayList} remains the general one-array owner.</p>
  */
 //FLLDCIM: RELOCATE - donor blob c0b02969ffe9 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
-public final class PackedLongInlineList implements M3LongSequence, LongStack {
+public final class PackedLongInlineList implements LongSequence, LongStack {
     public static final int INLINE_CAPACITY = 4;
 
     private long e0;

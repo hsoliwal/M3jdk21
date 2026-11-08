@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import jdk.m3.collections.PrimitiveKind;
-import jdk.m3.collections.M3PrimitiveSortedGapMap;
+import jdk.m3.collections.PrimitiveSortedGapMap;
 
 /**
  * Sorted primitive multiset using the sparse-gap sorted map for value-to-count storage.
@@ -32,12 +32,12 @@ public final class PrimitiveSortedBag {
     }
 
     private final PrimitiveKind kind;
-    private final M3PrimitiveSortedGapMap counts;
+    private final PrimitiveSortedGapMap counts;
     private long size;
 
     public PrimitiveSortedBag(PrimitiveKind kind) {
         this.kind = Objects.requireNonNull(kind, "kind");
-        counts = new M3PrimitiveSortedGapMap(kind, PrimitiveKind.INT);
+        counts = new PrimitiveSortedGapMap(kind, PrimitiveKind.INT);
     }
 
     public PrimitiveKind kind() { return kind; }

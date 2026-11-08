@@ -1,4 +1,4 @@
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: read-only filtered NavigableSet facade over M3FilteredViews; preserve comparator metadata across filtered splits.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: read-only filtered NavigableSet facade over FilteredViews; preserve comparator metadata across filtered splits.
 /*
  * Copyright (C) 2010 The Guava Authors
  *
@@ -26,10 +26,10 @@ import java.util.Objects;
 import java.util.SortedSet;
 import java.util.Spliterator;
 import java.util.function.Predicate;
-import jdk.m3.collections.M3FilteredViews;
+import jdk.m3.collections.FilteredViews;
 
 /**
- * Compatibility facade for the canonical read-only {@link M3FilteredViews}
+ * Compatibility facade for the canonical read-only {@link FilteredViews}
  * NavigableSet implementation.
  *
  * <p>The public type and factory remain available for existing M3 callers, but filtering,
@@ -53,7 +53,7 @@ public final class FilteredNavigableSet<E> extends AbstractSet<E> implements Nav
             NavigableSet<E> backing, Predicate<? super E> predicate) {
         Objects.requireNonNull(backing, "backing");
         Objects.requireNonNull(predicate, "predicate");
-        return new FilteredNavigableSet<>(M3FilteredViews.filter(backing, predicate));
+        return new FilteredNavigableSet<>(FilteredViews.filter(backing, predicate));
     }
 
     private static <E> NavigableSet<E> wrap(NavigableSet<E> view) {

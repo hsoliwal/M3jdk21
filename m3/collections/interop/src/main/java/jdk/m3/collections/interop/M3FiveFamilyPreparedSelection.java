@@ -6,7 +6,7 @@
 package jdk.m3.collections.interop;
 
 import com.google.common.collect.ListMultimap;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Comparator;
@@ -145,15 +145,15 @@ public final class M3FiveFamilyPreparedSelection<K, V> {
         }
     }
     /** Native selection reuses the existing M3 int[]/byte[] compactor; no callbacks. */
-    public Projection<K, V> projection(M3IndexMaskCompactor.Backend backend) {
+    public Projection<K, V> projection(IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(backend, "backend");
-        if (backend == M3IndexMaskCompactor.Backend.JAVA) return projection();
+        if (backend == IndexMaskCompactor.Backend.JAVA) return projection();
         int n = source.size();
         int[] ordered = new int[n];
         byte[] admitted = new byte[n];
         for (int i = 0; i < n; i++) ordered[i] = i;
         for (int i = bits.nextSetBit(0); i >= 0; i = bits.nextSetBit(i + 1)) admitted[i] = 1;
-        int[] chosen = M3IndexMaskCompactor.select(ordered, admitted, 1, backend);
+        int[] chosen = IndexMaskCompactor.select(ordered, admitted, 1, backend);
         return new Projection<>(source, chosen, 0, chosen.length);
     }
 

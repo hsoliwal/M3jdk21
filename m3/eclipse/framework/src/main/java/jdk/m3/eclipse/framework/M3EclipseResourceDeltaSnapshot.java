@@ -3,7 +3,7 @@
 package jdk.m3.eclipse.framework;
 
 import jdk.m3.collections.M3Collections;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import jdk.m3.collections.LongArrayList;
 import jdk.m3.collections.ObjectIdentitySet;
 import java.util.List;
@@ -196,9 +196,9 @@ public final class M3EclipseResourceDeltaSnapshot {
      * failure when its compatible JNI library is unavailable; it never falls back to Java.
      */
     public int[] selectWorkOrdinals(int requiredState, int excludedState,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         requireChanges();
-        return M3IndexMaskCompactor.selectPositions(workStates, requiredState, excludedState, backend);
+        return IndexMaskCompactor.selectPositions(workStates, requiredState, excludedState, backend);
     }
 
     private void requireChanges() {

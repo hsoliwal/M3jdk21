@@ -31,8 +31,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.CONSTRUCTOR})
 public @interface ParentOwned {
-    /** Construction flags of M3TransientFacadeStore; no runtime behavior is injected. */
-    int flags() default M3TransientFacadeStore.DEFAULT_MODE;
+    /** Construction flags of TransientFacadeStore; no runtime behavior is injected. */
+    int flags() default TransientFacadeStore.DEFAULT_MODE;
     /** Stable descriptive owner; no source code or object addresses. */
     String owner() default "";
 }

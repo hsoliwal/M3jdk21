@@ -41,7 +41,7 @@ static jint m3_count_window(JNIEnv *env, jbyteArray states,
  * Preserve all existing exports and never allocate output row/index arrays.
  */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectedCountNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectedCountNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint required_mask) {
     (void)owner;
     if (states == NULL || required_mask < 0 || required_mask > 255) {
@@ -131,7 +131,7 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
 }
 
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask) {
     (void)owner;
     if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
@@ -158,13 +158,13 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
 
 /* Capability discovery keeps older binaries usable through their original native ABI. */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner) {
+Java_jdk_m3_collections_IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectRangeNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states,
         jint first, jint length, jint required_mask) {
     (void)owner;
@@ -226,13 +226,13 @@ static int m3_window_valid(JNIEnv *env, jarray rows, jbyteArray states,
 
 /* ABI probe for direct logical-position selection from the state lane. */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner) {
+Java_jdk_m3_collections_IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectPositionsNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint mask) {
     (void)owner;
     if (states == NULL || mask < 0 || mask > 255) {
@@ -291,14 +291,14 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
  * Existing required-only symbols remain unchanged for binary compatibility.
  */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(
+Java_jdk_m3_collections_IndexMaskCompactor_positionsMasksAbiNative(
         JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectPositionsMasksNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint required, jint excluded) {
     (void)owner;
     if (states == NULL || required < 0 || required > 255
@@ -376,7 +376,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
 }
 
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectWindowNative(
         JNIEnv *env, jclass owner, jintArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length, jint mask) {
     (void)owner;
@@ -387,7 +387,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectLongWindowNative(
         JNIEnv *env, jclass owner, jlongArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length, jint mask) {
     (void)owner;
@@ -485,7 +485,7 @@ static jint m3_count_window_two_masks(JNIEnv *env, jbyteArray states,
 }
 
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(
+Java_jdk_m3_collections_IndexMaskCompactor_windowMasksAbiNative(
         JNIEnv *env, jclass owner) {
     (void) env;
     (void) owner;
@@ -493,7 +493,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_windowMasksAbiNative(
 }
 
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectWindowMasksNative(
         JNIEnv *env, jclass owner, jintArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length,
         jint required, jint excluded) {
@@ -559,7 +559,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectLongWindowMasksNative(
         JNIEnv *env, jclass owner, jlongArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length,
         jint required, jint excluded) {
@@ -637,14 +637,14 @@ static void m3_positions_page_invalid(JNIEnv *env) {
 }
 
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_positionsPageAbiNative(
+Java_jdk_m3_collections_IndexMaskCompactor_positionsPageAbiNative(
         JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsPageNative(
+Java_jdk_m3_collections_IndexMaskCompactor_selectPositionsPageNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint first, jint length,
         jint required, jint excluded, jintArray output, jint output_offset,
         jint capacity) {
@@ -811,7 +811,7 @@ static int m3_validate(JNIEnv *env, jlongArray keys, jlongArray values, jbyteArr
 }
 
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_nativeSelect(JNIEnv *env, jclass clazz,
+Java_jdk_m3_collections_IndexMaskCompactor_nativeSelect(JNIEnv *env, jclass clazz,
         jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
         jlong key_min, jlong key_max, jlong value_min, jlong value_max) {
     (void) clazz;
@@ -837,7 +837,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_nativeSelect(JNIEnv *env, jclass cl
  * With stable input lanes, capacity and offset rejection occurs before first write.
  * No JVM array pointer or native reference survives this call. */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_nativeSelectInto(JNIEnv *env, jclass clazz,
+Java_jdk_m3_collections_IndexMaskCompactor_nativeSelectInto(JNIEnv *env, jclass clazz,
         jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
         jlong key_min, jlong key_max, jlong value_min, jlong value_max,
         jintArray output, jint output_start) {
@@ -874,7 +874,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_nativeSelectInto(JNIEnv *env, jclas
 
 /* One-pass no-allocation queries. No Java object comparisons or retained JNI pointers. */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_nativeCount(JNIEnv *env, jclass clazz,
+Java_jdk_m3_collections_IndexMaskCompactor_nativeCount(JNIEnv *env, jclass clazz,
         jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
         jlong key_min, jlong key_max, jlong value_min, jlong value_max) {
     (void) clazz;
@@ -887,7 +887,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_nativeCount(JNIEnv *env, jclass cla
 }
 
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_nativeFirst(JNIEnv *env, jclass clazz,
+Java_jdk_m3_collections_IndexMaskCompactor_nativeFirst(JNIEnv *env, jclass clazz,
         jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
         jlong key_min, jlong key_max, jlong value_min, jlong value_max) {
     (void) clazz;
@@ -902,7 +902,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_nativeFirst(JNIEnv *env, jclass cla
 /* One-pass bounded page, preserving physical slot order, using only primitive JNI regions.
  * No Java array address is retained. Next is absolute; count is packed in high 32 bits. */
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_nativeScanPageInto(JNIEnv *env, jclass clazz,
+Java_jdk_m3_collections_IndexMaskCompactor_nativeScanPageInto(JNIEnv *env, jclass clazz,
         jlongArray keys, jlongArray values, jbyteArray state, jint start, jint count,
         jlong key_min, jlong key_max, jlong value_min, jlong value_max,
         jintArray output, jint output_start) {
@@ -989,7 +989,7 @@ Java_jdk_m3_collections_M3IndexMaskCompactor_nativeScanPageInto(JNIEnv *env, jcl
  * older m3_collections_mask binaries keep their existing exports and the Java lane paths stay exact.
  */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3IndexMaskCompactor_laneKernelAbiNative(JNIEnv *env, jclass owner) {
+Java_jdk_m3_collections_IndexMaskCompactor_laneKernelAbiNative(JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }

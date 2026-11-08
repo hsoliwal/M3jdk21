@@ -41,7 +41,7 @@ public final class M3TransferQueue<E> extends AbstractQueue<E> implements Transf
     private int allocate(byte kind, E value) {
         if (sequence == Long.MAX_VALUE) { throw new IllegalStateException("iterator identity space exhausted"); }
         if (free < 0 && used == payload.length) {
-            int n = M3SlotArrays.grow(payload.length); Object[] p = Arrays.copyOf(payload, n);
+            int n = SlotArrays.grow(payload.length); Object[] p = Arrays.copyOf(payload, n);
             int[] b = Arrays.copyOf(before, n), a = Arrays.copyOf(after, n);
             byte[] s = Arrays.copyOf(state, n); long[] ids = Arrays.copyOf(identities, n);
             payload = p; before = b; after = a; state = s; identities = ids;
@@ -69,7 +69,7 @@ public final class M3TransferQueue<E> extends AbstractQueue<E> implements Transf
         int s = requestFirst; unlink(s, true); payload[s] = value; state[s] = MATCHED; changed.signalAll(); return true;
     }
     private E consume(int s) {
-        E value = M3SlotArrays.get(payload, s); boolean waiting = state[s] == TRANSFER;
+        E value = SlotArrays.get(payload, s); boolean waiting = state[s] == TRANSFER;
         unlink(s, false); payload[s] = null;
         if (waiting) { state[s] = MATCHED; changed.signalAll(); } else { release(s); }
         return value;
@@ -104,7 +104,7 @@ public final class M3TransferQueue<E> extends AbstractQueue<E> implements Transf
             if (timed && nanos <= 0) { return null; }
             int s = allocate(REQUEST, null);
             if (!awaitMatch(s, true, timed, nanos)) { return null; }
-            E value = M3SlotArrays.get(payload, s); release(s); return value;
+            E value = SlotArrays.get(payload, s); release(s); return value;
         } finally { lock.unlock(); }
     }
     @Override public boolean offer(E value) {
@@ -124,7 +124,7 @@ public final class M3TransferQueue<E> extends AbstractQueue<E> implements Transf
     @Override public E poll() { lock.lock(); try { return dataFirst < 0 ? null : consume(dataFirst); } finally { lock.unlock(); } }
     @Override public E take() throws InterruptedException { return receive(false, 0); }
     @Override public E poll(long timeout, TimeUnit unit) throws InterruptedException { return receive(true, unit.toNanos(timeout)); }
-    @Override public E peek() { lock.lock(); try { return rendezvous || dataFirst < 0 ? null : M3SlotArrays.get(payload, dataFirst); } finally { lock.unlock(); } }
+    @Override public E peek() { lock.lock(); try { return rendezvous || dataFirst < 0 ? null : SlotArrays.get(payload, dataFirst); } finally { lock.unlock(); } }
     @Override public int size() { lock.lock(); try { return rendezvous ? 0 : dataCount; } finally { lock.unlock(); } }
     @Override public int remainingCapacity() { return rendezvous ? 0 : Integer.MAX_VALUE; }
     @Override public boolean hasWaitingConsumer() { lock.lock(); try { return requestCount != 0; } finally { lock.unlock(); } }
@@ -150,14 +150,14 @@ public final class M3TransferQueue<E> extends AbstractQueue<E> implements Transf
         try {
             int count = 0;
             while (count < maximum && dataFirst >= 0) {
-                int s = dataFirst; long id = identities[s]; target.add(M3SlotArrays.get(payload, s));
+                int s = dataFirst; long id = identities[s]; target.add(SlotArrays.get(payload, s));
                 if (s != dataFirst || identities[s] != id) { throw new ConcurrentModificationException("drain callback changed source"); }
                 consume(s); count++;
             }
             return count;
         } finally { lock.unlock(); }
     }
-    @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.concurrent(iterator(), true, false); }
+    @Override public Spliterator<E> spliterator() { return SlotSpliterators.concurrent(iterator(), true, false); }
     @Override public Iterator<E> iterator() {
         Object[] values; long[] ids; lock.lock();
         try {
@@ -167,7 +167,7 @@ public final class M3TransferQueue<E> extends AbstractQueue<E> implements Transf
         return new Iterator<>() {
             private int cursor, last = -1;
             @Override public boolean hasNext() { return cursor < values.length; }
-            @Override public E next() { if (!hasNext()) { throw new NoSuchElementException(); } last = cursor++; return M3SlotArrays.get(values, last); }
+            @Override public E next() { if (!hasNext()) { throw new NoSuchElementException(); } last = cursor++; return SlotArrays.get(values, last); }
             @Override public void remove() {
                 if (last < 0) { throw new IllegalStateException(); } lock.lock();
                 try { for (int s = dataFirst; s >= 0; s = after[s]) { if (identities[s] == ids[last]) { consume(s); break; } } }

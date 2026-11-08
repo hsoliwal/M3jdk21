@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 package jdk.m3.collections.interop;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -32,14 +32,14 @@ final class M3FiveLibraryArrayificationTest {
         byte[] occurrenceFlags={1,2,0,2,0};
         assertEquals(List.of(6,7),view.selectedByOccurrenceStates(occurrenceFlags,2,0).asJdkList());
         assertEquals(List.of(),view.selectedByOccurrenceStates(occurrenceFlags,2,2).asJdkList());
-        if (M3IndexMaskCompactor.nativeAvailable()) {
+        if (IndexMaskCompactor.nativeAvailable()) {
             assertEquals(List.of(6,7),view.selectedByOccurrenceStates(occurrenceFlags,2,0,
-                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED).asJdkList());
+                    IndexMaskCompactor.Backend.NATIVE_REQUIRED).asJdkList());
             assertEquals(List.of(),view.selectedByOccurrenceStates(occurrenceFlags,2,2,
-                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED).asJdkList());
+                    IndexMaskCompactor.Backend.NATIVE_REQUIRED).asJdkList());
         } else {
             assertThrows(UnsatisfiedLinkError.class, () -> view.selectedByOccurrenceStates(
-                    occurrenceFlags,2,2,M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                    occurrenceFlags,2,2,IndexMaskCompactor.Backend.NATIVE_REQUIRED));
         }
         assertArrayEquals(order,new int[]{0,1,1,2,3});
         assertEquals(Integer.valueOf(5),view.valueAt(0));

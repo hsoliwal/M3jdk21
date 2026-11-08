@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import java.util.function.LongPredicate;
-import jdk.m3.collections.M3PrimitiveHashSet;
+import jdk.m3.collections.PrimitiveHashSet;
 import jdk.m3.collections.PrimitiveKind;
 
 /**
@@ -27,14 +27,14 @@ import jdk.m3.collections.PrimitiveKind;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class PrimitiveFilteredSet {
-    private final M3PrimitiveHashSet delegate;
+    private final PrimitiveHashSet delegate;
     private final LongPredicate admission;
 
     public PrimitiveFilteredSet(PrimitiveKind kind, LongPredicate admission) {
-        this(new M3PrimitiveHashSet(kind), admission);
+        this(new PrimitiveHashSet(kind), admission);
     }
 
-    public PrimitiveFilteredSet(M3PrimitiveHashSet delegate, LongPredicate admission) {
+    public PrimitiveFilteredSet(PrimitiveHashSet delegate, LongPredicate admission) {
         this.delegate = Objects.requireNonNull(delegate, "delegate");
         this.admission = Objects.requireNonNull(admission, "admission");
     }

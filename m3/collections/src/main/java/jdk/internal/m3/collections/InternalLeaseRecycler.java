@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Supplier;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Bounded, exclusive reuse of compiler-qualified non-escaping internal scratch objects.
@@ -34,7 +34,7 @@ import jdk.m3.collections.M3RuntimeHeap;
  * <p>Checkout removes an idle object before executing user code. Nested and
  * concurrent borrows cannot receive the same instance. Clearing executes on
  * every exit, including callback failure; failed clearing drops the object.
- * Existing {@link M3RuntimeHeap.Pressure} observations control optional idle
+ * Existing {@link RuntimeHeap.Pressure} observations control optional idle
  * retention at explicit checkpoints, never the correctness of a live borrow.</p>
  *
  * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/InternalLeaseRecycler.java}
@@ -135,7 +135,7 @@ public final class InternalLeaseRecycler<T> implements AutoCloseable {
     }
 
     /** Reuse the existing heap-pressure plane: no per-borrow JVM heap sampling. */
-    public synchronized int onPressure(M3RuntimeHeap.Pressure pressure) {
+    public synchronized int onPressure(RuntimeHeap.Pressure pressure) {
         Objects.requireNonNull(pressure, "pressure");
         retentionLimit = switch (pressure) {
             case NORMAL -> maxIdle;

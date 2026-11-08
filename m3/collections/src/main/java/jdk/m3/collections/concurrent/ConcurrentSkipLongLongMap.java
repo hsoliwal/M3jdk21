@@ -6,15 +6,15 @@ package jdk.m3.collections.concurrent;
 
 import jdk.internal.m3.collections.NotYetReceived;
 import jdk.m3.collections.LongLongConsumer;
-import jdk.m3.collections.M3LockedTreeMap;
-import jdk.m3.collections.M3LockedTreeSet;
+import jdk.m3.collections.LockedTreeMap;
+import jdk.m3.collections.LockedTreeSet;
 
 /**
  * M3 five-library superset scaffold {@code ConcurrentSkipLongLongMap}: API group {@code SKIP_LONG_MAP} over arrays and state masks.
  *
  * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
  * <ul>
- *   <li>JDK ConcurrentSkipListMap/Set: lock-free sorted; weakly consistent iter [license GPLv2+CPE; SUPERSET_VIEW VIEW_OF:M3LockedTreeMap (full lock-free = gap); priority P2; matrix owner M3LockedTreeMap/M3LockedTreeSet (interim)]</li>
+ *   <li>JDK ConcurrentSkipListMap/Set: lock-free sorted; weakly consistent iter [license GPLv2+CPE; SUPERSET_VIEW VIEW_OF:LockedTreeMap (full lock-free = gap); priority P2; matrix owner LockedTreeMap/LockedTreeSet (interim)]</li>
  * </ul>
  *
  * <p>DOOP mapping: lane kind LONG; lanes {@code long[] keyLane;long[] valueLane;int[] levelNextLane}; offset scheme slot + per-level next lanes (level*capacity+slot); state-mask bits OCCUPIED,DELETED,MARKED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: sorted lanes + monitor interim; skip-lane ladder PROPOSED / occupancy mask.

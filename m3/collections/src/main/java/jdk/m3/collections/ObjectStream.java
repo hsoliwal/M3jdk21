@@ -51,7 +51,7 @@ import java.util.stream.StreamSupport;
  * order, and never assume a reduction is associative.</p>
  *
  * <p>Object references and physical occurrence order remain in
- * {@link M3IndexedListSnapshot}; filtered/sorted projections use M3's integer index
+ * {@link IndexedListSnapshot}; filtered/sorted projections use M3's integer index
  * lane and byte-mask selector. JNI receives no Java object references, predicates,
  * comparators, or mapped values.</p>
  *
@@ -69,7 +69,7 @@ public final class ObjectStream<T> {
 
     /** Capture references and occurrence order once in M3's Object[]/int[] owner. */
     public static <T> ObjectStream<T> snapshot(Collection<? extends T> source) {
-        return fromSnapshot(M3IndexedListSnapshot.copyOf(Objects.requireNonNull(source, "source")));
+        return fromSnapshot(IndexedListSnapshot.copyOf(Objects.requireNonNull(source, "source")));
     }
 
     /** Snapshot an Iterable such as an Eclipse RichIterable without requiring a Collection API. */
@@ -84,7 +84,7 @@ public final class ObjectStream<T> {
         return snapshot(values);
     }
 
-    private static <T> ObjectStream<T> fromSnapshot(M3IndexedListSnapshot<T> snapshot) {
+    private static <T> ObjectStream<T> fromSnapshot(IndexedListSnapshot<T> snapshot) {
         return new ObjectStream<>(snapshot::stream, true);
     }
 
@@ -223,7 +223,7 @@ public final class ObjectStream<T> {
         requireNonNegative(maxElements, "maxElements");
         return new ObjectStream<>(() -> {
             List<T> values = toBoundedList(maxElements);
-            return M3IndexedListSnapshot.copyOf(values).sorted(comparator).stream();
+            return IndexedListSnapshot.copyOf(values).sorted(comparator).stream();
         }, replayable);
     }
 
@@ -232,7 +232,7 @@ public final class ObjectStream<T> {
         requireNonNegative(maxElements, "maxElements");
         return new ObjectStream<>(() -> {
             List<T> values = toBoundedList(maxElements);
-            return M3IndexedListSnapshot.copyOf(values).sorted().stream();
+            return IndexedListSnapshot.copyOf(values).sorted().stream();
         }, replayable);
     }
 
@@ -328,15 +328,15 @@ public final class ObjectStream<T> {
 
     /** Eager bounded capture of the complete current plan output, not a bookmark into the source cursor. */
     public Mark<T> mark(int maxElements) {
-        return new Mark<>(M3IndexedListSnapshot.copyOf(toBoundedList(maxElements)));
+        return new Mark<>(IndexedListSnapshot.copyOf(toBoundedList(maxElements)));
     }
 
     public static final class Mark<E> {
-        private final M3IndexedListSnapshot<E> captured;
-        private Mark(M3IndexedListSnapshot<E> captured) { this.captured = captured; }
+        private final IndexedListSnapshot<E> captured;
+        private Mark(IndexedListSnapshot<E> captured) { this.captured = captured; }
         public int size() { return captured.size(); }
         public ObjectStream<E> reprocess() { return fromSnapshot(captured); }
-        public M3IndexedListSnapshot<E> indexedSnapshot() { return captured; }
+        public IndexedListSnapshot<E> indexedSnapshot() { return captured; }
     }
 
     /** Explicit bounded materialization; the (max+1)th value is refused before being appended. */
@@ -354,33 +354,33 @@ public final class ObjectStream<T> {
     }
 
     /** Return an independently owned M3 Object[]/int[] snapshot within an explicit source budget. */
-    public M3IndexedListSnapshot<T> indexedSnapshot(int maxElements) {
-        return M3IndexedListSnapshot.copyOf(toBoundedList(maxElements));
+    public IndexedListSnapshot<T> indexedSnapshot(int maxElements) {
+        return IndexedListSnapshot.copyOf(toBoundedList(maxElements));
     }
 
     /** Predicate is evaluated once per selected source occurrence; native mode receives only byte flags. */
-    public M3IndexedListSnapshot<T> indexedFiltered(
-            Predicate<? super T> predicate, int maxElements, M3IndexMaskCompactor.Backend backend) {
+    public IndexedListSnapshot<T> indexedFiltered(
+            Predicate<? super T> predicate, int maxElements, IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(predicate, "predicate");
         Objects.requireNonNull(backend, "backend");
         return indexedSnapshot(maxElements).filtered(predicate, backend);
     }
 
-    public M3IndexedListSnapshot<T> indexedFiltered(Predicate<? super T> predicate, int maxElements) {
-        return indexedFiltered(predicate, maxElements, M3IndexMaskCompactor.Backend.JAVA);
+    public IndexedListSnapshot<T> indexedFiltered(Predicate<? super T> predicate, int maxElements) {
+        return indexedFiltered(predicate, maxElements, IndexMaskCompactor.Backend.JAVA);
     }
 
     /** Read-only Collection facade; its traversal reopens a replayable plan. */
-    public M3ObjectCollection<T> virtualCollection() {
+    public ObjectCollection<T> virtualCollection() {
         if (!replayable) throw new IllegalStateException("one-shot plan cannot be a virtual Collection; mark first");
-        return new M3ObjectCollection<>(this);
+        return new ObjectCollection<>(this);
     }
 
     /** Opt-in bounded key-affinity scheduler; equal keys share a sequential lane. */
-    public <K> M3KeyedParallelismPlan<T, K> parallelByKey(Function<? super T, ? extends K> keyExtractor) {
+    public <K> KeyedParallelismPlan<T, K> parallelByKey(Function<? super T, ? extends K> keyExtractor) {
         Objects.requireNonNull(keyExtractor, "keyExtractor");
         if (!replayable) throw new IllegalStateException("keyed replay plan requires a replayable source; mark first");
-        return new M3KeyedParallelismPlan<>(this, keyExtractor);
+        return new KeyedParallelismPlan<>(this, keyExtractor);
     }
 
     /** Ordered reduction. It intentionally makes no parallel-associativity assumption. */

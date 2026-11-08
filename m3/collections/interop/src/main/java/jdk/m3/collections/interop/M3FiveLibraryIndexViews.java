@@ -8,8 +8,8 @@ package jdk.m3.collections.interop;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.SortedSetMultimap;
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3ArrayifiedIndexOps;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.ArrayifiedIndexOps;
 import jdk.m3.collections.IndexMaskWindow;
 import jdk.m3.collections.IndexPathMasks;
 import java.util.Arrays;
@@ -94,13 +94,13 @@ public final class M3FiveLibraryIndexViews<K, V> {
      * payload keys/values/states remain in the same privately captured arrays.
      */
     public M3FiveLibraryIndexViews<K, V> takeOrdinals(int[] ordinals) {
-        int[] selected = M3ArrayifiedIndexOps.gather(rows, from, to, ordinals);
+        int[] selected = ArrayifiedIndexOps.gather(rows, from, to, ordinals);
         return new M3FiveLibraryIndexViews<>(keys, values, states, selected, 0, selected.length);
     }
 
     /** LeetCode #189: triple-reversal rotation on an index window only. */
     public M3FiveLibraryIndexViews<K, V> rotated(int distance) {
-        int[] selected = M3ArrayifiedIndexOps.rotated(rows, from, to, distance);
+        int[] selected = ArrayifiedIndexOps.rotated(rows, from, to, distance);
         return new M3FiveLibraryIndexViews<>(keys, values, states, selected, 0, selected.length);
     }
 
@@ -112,12 +112,12 @@ public final class M3FiveLibraryIndexViews<K, V> {
      */
     public M3FiveLibraryIndexViews<K, V> selectedByOccurrenceStates(
             byte[] occurrenceStates, int required, int excluded,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(occurrenceStates, "occurrenceStates");
         if (occurrenceStates.length != size()) {
             throw new IllegalArgumentException("state mask must align with logical occurrences");
         }
-        int[] selected = M3ArrayifiedIndexOps.selected(rows, from, to,
+        int[] selected = ArrayifiedIndexOps.selected(rows, from, to,
                 occurrenceStates, 0, required, excluded, backend);
         return new M3FiveLibraryIndexViews<>(keys, values, states, selected, 0, selected.length);
     }
@@ -126,7 +126,7 @@ public final class M3FiveLibraryIndexViews<K, V> {
     public M3FiveLibraryIndexViews<K, V> selectedByOccurrenceStates(
             byte[] occurrenceStates, int required, int excluded) {
         return selectedByOccurrenceStates(
-                occurrenceStates, required, excluded, M3IndexMaskCompactor.Backend.JAVA);
+                occurrenceStates, required, excluded, IndexMaskCompactor.Backend.JAVA);
     }
 
     /**
@@ -143,7 +143,7 @@ public final class M3FiveLibraryIndexViews<K, V> {
         if (keys != right.keys || values != right.values || states != right.states) {
             throw new IllegalArgumentException("cannot merge unrelated M3 captured payloads");
         }
-        int[] selected = M3ArrayifiedIndexOps.mergeSorted(
+        int[] selected = ArrayifiedIndexOps.mergeSorted(
                 rows, from, to, right.rows, right.from, right.to,
                 (a, b) -> comparator.compare(keyAtPhysical(a), keyAtPhysical(b)));
         return new M3FiveLibraryIndexViews<>(keys, values, states, selected, 0, selected.length);
@@ -177,11 +177,11 @@ public final class M3FiveLibraryIndexViews<K, V> {
      * <em>occurrence</em>, even if source index rows repeat.
      */
     public M3FiveLibraryIndexViews<K, V> filteredByState(int required, int excluded,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(backend, "backend");
         checkMask(required);
         checkMask(excluded);
-        if (required == 0 && excluded == 0 && backend == M3IndexMaskCompactor.Backend.JAVA) {
+        if (required == 0 && excluded == 0 && backend == IndexMaskCompactor.Backend.JAVA) {
             return this;
         }
         int[] ordered = Arrays.copyOfRange(rows, from, to);
@@ -193,7 +193,7 @@ public final class M3FiveLibraryIndexViews<K, V> {
             if ((flags & required) == required && (flags & excluded) == 0) expected++;
         }
         int[] admitted = new int[expected];
-        if (backend == M3IndexMaskCompactor.Backend.JAVA) {
+        if (backend == IndexMaskCompactor.Backend.JAVA) {
             int next = 0;
             for (int i = 0; i < ordered.length; i++) {
                 int flags = aligned[i] & 0xff;
@@ -229,7 +229,7 @@ public final class M3FiveLibraryIndexViews<K, V> {
     }
 
     public M3FiveLibraryIndexViews<K, V> filteredByState(int required, int excluded) {
-        return filteredByState(required, excluded, M3IndexMaskCompactor.Backend.JAVA);
+        return filteredByState(required, excluded, IndexMaskCompactor.Backend.JAVA);
     }
 
 
@@ -463,7 +463,7 @@ public final class M3FiveLibraryIndexViews<K, V> {
     public NavigableSet<V> asJdkReadOnlyFilteredSortedSet(
             Comparator<? super V> comparator, java.util.function.Predicate<? super V> predicate) {
         Objects.requireNonNull(predicate, "predicate");
-        return jdk.m3.collections.M3FilteredViews.filter(
+        return jdk.m3.collections.FilteredViews.filter(
                 asJdkSortedSet(comparator), predicate);
     }
 

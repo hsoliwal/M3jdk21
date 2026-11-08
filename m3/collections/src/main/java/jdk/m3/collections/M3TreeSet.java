@@ -50,7 +50,7 @@ public final class M3TreeSet<E> extends AbstractSet<E> implements NavigableSet<E
         int s = map.findSlot(value); if (s < 0) { return false; } map.eraseAt(s); return true;
     }
     @Override public void clear() { map.clear(); }
-    @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.sorted(this, comparator()); }
+    @Override public Spliterator<E> spliterator() { return SlotSpliterators.sorted(this, comparator()); }
     @Override public Iterator<E> iterator() { return map.slots(0); }
     @Override public Iterator<E> descendingIterator() { return map.descendingMap().slots(0); }
     @Override public Comparator<? super E> comparator() { return map.comparator(); }

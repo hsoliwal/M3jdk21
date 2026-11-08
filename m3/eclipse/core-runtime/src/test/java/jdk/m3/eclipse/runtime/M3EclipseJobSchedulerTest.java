@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.eclipse.core.runtime.IStatus;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 /** Differential behavior of original Job scheduling rule and both progress owners. */
 final class M3EclipseJobSchedulerTest {
     @Test void originalSchedulingRuleAndBothProgressOwners() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         ISchedulingRule rule = new ISchedulingRule() {
             @Override public boolean contains(ISchedulingRule other) { return other == this; }
             @Override public boolean isConflicting(ISchedulingRule other) { return other == this; }
@@ -44,7 +44,7 @@ final class M3EclipseJobSchedulerTest {
     }
 
     @Test void taskCancellationUpdatesBothOriginalJobAndM3() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         Job job = M3EclipseJobScheduler.schedule("scan", null, owner, 5, monitor -> {
             monitor.setCanceled(true);
             assertTrue(monitor.isCanceled());
@@ -57,7 +57,7 @@ final class M3EclipseJobSchedulerTest {
     }
 
     @Test void externalJobCancellationReachesSharedMonitor() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var entered = new CountDownLatch(1);
         var permit = new CountDownLatch(1);
         Job job = M3EclipseJobScheduler.schedule("cancel", null, owner, 2, monitor -> {
@@ -75,7 +75,7 @@ final class M3EclipseJobSchedulerTest {
     }
 
     @Test void failedTaskRetainsOriginalException() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var problem = new IllegalStateException("bad AST");
         Job job = M3EclipseJobScheduler.schedule("compile", null, owner, 7, monitor -> {
             throw problem;
@@ -87,7 +87,7 @@ final class M3EclipseJobSchedulerTest {
     }
 
     @Test void invalidWorkIsRejectedBeforeNativeSchedule() {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         assertThrows(IllegalArgumentException.class,
                 () -> M3EclipseJobScheduler.schedule("bad", null, owner, -2,
                         monitor -> Status.OK_STATUS));

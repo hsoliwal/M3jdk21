@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Timeout;
 final class M3EclipseScheduledTasksTest {
     @Test
     void scheduledCallableReturnsValueAndCompletesOneOwner() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         try (var executor = Executors.newSingleThreadScheduledExecutor()) {
             var scheduled = M3EclipseScheduledTasks.schedule(
                     executor, owner, "index", 4, () -> {
@@ -47,7 +47,7 @@ final class M3EclipseScheduledTasksTest {
 
     @Test
     void runnableResultIsNullAndNegativeDelayUsesJdkImmediateSemantics() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var calls = new java.util.concurrent.atomic.AtomicInteger();
         try (var executor = Executors.newSingleThreadScheduledExecutor()) {
             var scheduled = M3EclipseScheduledTasks.schedule(
@@ -61,7 +61,7 @@ final class M3EclipseScheduledTasksTest {
 
     @Test
     void scheduledStatusRetainsEclipseErrorAndCancelSemantics() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var problem = new IllegalStateException("invalid AST");
         try (var executor = Executors.newSingleThreadScheduledExecutor()) {
             var result = M3EclipseScheduledTasks.scheduleStatus(
@@ -73,7 +73,7 @@ final class M3EclipseScheduledTasksTest {
         }
         assertTrue(owner.state().done());
 
-        var canceled = new M3DefaultProgressMonitor();
+        var canceled = new DefaultProgressMonitor();
         canceled.setCanceled(true);
         try (var executor = Executors.newSingleThreadScheduledExecutor()) {
             var result = M3EclipseScheduledTasks.scheduleStatus(
@@ -86,7 +86,7 @@ final class M3EclipseScheduledTasksTest {
 
     @Test
     void cancelBeforeStartLeavesProgressUnbegun() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var entered = new CountDownLatch(1);
         var release = new CountDownLatch(1);
         try (var executor = Executors.newSingleThreadScheduledExecutor()) {
@@ -115,7 +115,7 @@ final class M3EclipseScheduledTasksTest {
 
     @Test
     void cancelRunningTaskInterruptsWorkerAndCompletesOwner() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var entered = new CountDownLatch(1);
         var finished = new CountDownLatch(1);
         try (var executor = Executors.newSingleThreadScheduledExecutor()) {
@@ -140,7 +140,7 @@ final class M3EclipseScheduledTasksTest {
 
     @Test
     void standardCallableFailureRetainsFutureExecutionException() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var failure = new IllegalStateException("source missing");
         try (var executor = Executors.newSingleThreadExecutor()) {
             var future = M3EclipseScheduledTasks.submit(
@@ -154,8 +154,8 @@ final class M3EclipseScheduledTasksTest {
 
     @Test
     void ordinaryRunnableAndCallableUseTheCallerExecutor() throws Exception {
-        var first = new M3DefaultProgressMonitor();
-        var second = new M3DefaultProgressMonitor();
+        var first = new DefaultProgressMonitor();
+        var second = new DefaultProgressMonitor();
         var counter = new java.util.concurrent.atomic.AtomicInteger();
         try (var pool = Executors.newFixedThreadPool(2)) {
             var a = M3EclipseScheduledTasks.submit(
@@ -172,7 +172,7 @@ final class M3EclipseScheduledTasksTest {
 
     @Test
     void rejectionAndInvalidArgumentsDoNotBeginProgress() {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var pool = Executors.newSingleThreadScheduledExecutor();
         pool.shutdown();
         assertThrows(RejectedExecutionException.class, () ->
@@ -196,7 +196,7 @@ final class M3EclipseScheduledTasksTest {
 
     @Test
     void exceptionAndCooperativeCancellationKeepDistinctCompletionContracts() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         try (var pool = Executors.newSingleThreadExecutor()) {
             var future = M3EclipseScheduledTasks.submit(
                     pool, owner, "cancel", 1,
@@ -208,7 +208,7 @@ final class M3EclipseScheduledTasksTest {
         assertTrue(owner.isCanceled());
         assertTrue(owner.state().done());
 
-        var statusOwner = new M3DefaultProgressMonitor();
+        var statusOwner = new DefaultProgressMonitor();
         try (var pool = Executors.newSingleThreadScheduledExecutor()) {
             var future = M3EclipseScheduledTasks.scheduleStatus(
                     pool, statusOwner, "status", 1, m -> Status.OK_STATUS,

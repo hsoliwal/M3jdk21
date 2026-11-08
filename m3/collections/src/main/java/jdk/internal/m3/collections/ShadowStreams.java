@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 
 /**
  * One physical I/O traversal with synchronous borrowed shadow-output consumers.
@@ -37,11 +37,11 @@ public final class ShadowStreams {
     private static final int SKIP_BUFFER = 8192;
     private ShadowStreams() { }
 
-    public static InputStream input(InputStream primary, M3ProgressMonitor monitor,
+    public static InputStream input(InputStream primary, ProgressMonitor monitor,
             OutputStream... observers) {
         return new ObservedInput(primary, monitor, admit(observers));
     }
-    public static OutputStream output(OutputStream primary, M3ProgressMonitor monitor,
+    public static OutputStream output(OutputStream primary, ProgressMonitor monitor,
             OutputStream... observers) {
         return new ObservedOutput(primary, monitor, admit(observers));
     }
@@ -56,12 +56,12 @@ public final class ShadowStreams {
         return new IOException("shadow output failed after original I/O advanced; no implicit replay", failure);
     }
     private static final class ObservedInput extends FilterInputStream {
-        private final M3ProgressMonitor monitor;
+        private final ProgressMonitor monitor;
         private final OutputStream[] observers;
         private boolean poisoned;
         private boolean dispatching;
         private boolean closed;
-        ObservedInput(InputStream input, M3ProgressMonitor monitor, OutputStream[] observers) {
+        ObservedInput(InputStream input, ProgressMonitor monitor, OutputStream[] observers) {
             super(Objects.requireNonNull(input, "primary input"));
             this.monitor = Objects.requireNonNull(monitor, "monitor");
             this.observers = observers;
@@ -128,12 +128,12 @@ public final class ShadowStreams {
     }
 
     private static final class ObservedOutput extends FilterOutputStream {
-        private final M3ProgressMonitor monitor;
+        private final ProgressMonitor monitor;
         private final OutputStream[] observers;
         private boolean poisoned;
         private boolean dispatching;
         private boolean closed;
-        ObservedOutput(OutputStream output, M3ProgressMonitor monitor, OutputStream[] observers) {
+        ObservedOutput(OutputStream output, ProgressMonitor monitor, OutputStream[] observers) {
             super(Objects.requireNonNull(output, "primary output"));
             this.monitor = Objects.requireNonNull(monitor, "monitor");
             this.observers = observers;

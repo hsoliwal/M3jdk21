@@ -4,8 +4,8 @@
 // Modified 2026: continue periodic Horspool overlaps through the existing KMP owner.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.nio.ByteBuffer;
 import java.util.Objects;
 import java.util.function.IntConsumer;
@@ -22,14 +22,14 @@ public final class ByteOccurrences {
      * during traversal. The returned count is the number of positions actually delivered.
      */
     public static int visit(CompiledSearch compiled, byte[] haystack, int fromIndex,
-            int maxMatches, IntConsumer receiver, M3ProgressMonitor monitor) {
+            int maxMatches, IntConsumer receiver, ProgressMonitor monitor) {
         Objects.requireNonNull(compiled, "compiled");
         Objects.requireNonNull(haystack, "haystack");
         Objects.requireNonNull(receiver, "receiver");
         if (maxMatches < 0) throw new IllegalArgumentException("maxMatches must be nonnegative");
         int length = compiled.needleLength();
         if (length <= 0) throw new IllegalArgumentException("compiled needle must be nonempty");
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         if (maxMatches == 0) return 0;
         int start = Math.max(0, fromIndex);
@@ -76,14 +76,14 @@ public final class ByteOccurrences {
      * method name avoids making legacy null-literal byte[] calls ambiguous.
      */
     public static int visitBuffer(CompiledSearch compiled, ByteBuffer haystack, int fromIndex,
-            int maxMatches, IntConsumer receiver, M3ProgressMonitor monitor) {
+            int maxMatches, IntConsumer receiver, ProgressMonitor monitor) {
         Objects.requireNonNull(compiled, "compiled");
         Objects.requireNonNull(haystack, "haystack");
         Objects.requireNonNull(receiver, "receiver");
         if (maxMatches < 0) throw new IllegalArgumentException("maxMatches must be nonnegative");
         int needleLength = compiled.needleLength();
         if (needleLength <= 0) throw new IllegalArgumentException("compiled needle must be nonempty");
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         if (maxMatches == 0) return 0;
 
@@ -121,16 +121,16 @@ public final class ByteOccurrences {
 
     /** Counts overlapping matches in the remaining ByteBuffer window, without retaining offsets. */
     public static int countBuffer(CompiledSearch compiled, ByteBuffer haystack, int fromIndex,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         if (compiled instanceof KmpSearch kmp) {
             Objects.requireNonNull(haystack, "haystack");
-            M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+            ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
             checked.checkCanceled();
             return kmp.countMatches(haystack.duplicate(), Math.max(0, fromIndex), checked);
         }
         if (compiled instanceof BoyerMooreHorspoolSearch horspool) {
             Objects.requireNonNull(haystack, "haystack");
-            M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+            ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
             checked.checkCanceled();
             return horspool.countMatches(haystack.duplicate(), Math.max(0, fromIndex), checked);
         }
@@ -139,14 +139,14 @@ public final class ByteOccurrences {
 
     /** Counts all overlapping occurrences without retaining positions. */
     public static int count(CompiledSearch compiled, byte[] haystack, int fromIndex,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         Objects.requireNonNull(compiled, "compiled");
         Objects.requireNonNull(haystack, "haystack");
         int needleLength = compiled.needleLength();
         if (needleLength <= 0) {
             throw new IllegalArgumentException("compiled needle must be nonempty");
         }
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         int nativeCount = JniSearchEngine.countIfNative(compiled, haystack, fromIndex, checked);
         if (nativeCount < -1) {

@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -64,7 +64,7 @@ final class JavaBmhNativeCrossParityTest {
                 assertEquals(2, ByteOccurrences.count(javaSearch, text, 0, null));
                 assertEquals(2, ByteOccurrences.count(nativeSearch, text, 0, null));
                 assertEquals(2, JniSearchEngine.countIfNative(
-                        nativeSearch, text, 0, new M3DefaultProgressMonitor()));
+                        nativeSearch, text, 0, new DefaultProgressMonitor()));
             }
         }
     }
@@ -99,7 +99,7 @@ final class JavaBmhNativeCrossParityTest {
                     assertEquals(expected.size(),
                             ByteOccurrences.count(nativeSearch, text, from, null));
                     assertEquals(expected.size(), JniSearchEngine.countIfNative(
-                            nativeSearch, text, from, new M3DefaultProgressMonitor()));
+                            nativeSearch, text, from, new DefaultProgressMonitor()));
                     int limit = Math.min(3, expected.size());
                     List<Integer> javaPositions = new ArrayList<>();
                     List<Integer> nativePositions = new ArrayList<>();
@@ -111,7 +111,7 @@ final class JavaBmhNativeCrossParityTest {
                     assertEquals(expected.subList(0, limit), nativePositions);
                     if (limit > 0) {
                         int[] actualNative = JniSearchEngine.positionsIfNative(
-                                nativeSearch, text, from, limit, new M3DefaultProgressMonitor());
+                                nativeSearch, text, from, limit, new DefaultProgressMonitor());
                         assertTrue(actualNative != null,
                                 "actual JNI positions symbol must run, never silently fall back");
                         assertEquals(expected.subList(0, limit),
@@ -161,7 +161,7 @@ final class JavaBmhNativeCrossParityTest {
                     assertEquals(starts, offsets, "ordered positions for category " + sample);
                 }
                 int[] nativePositions = JniSearchEngine.positionsIfNative(
-                        nativeSearch, text, 0, starts.size(), new M3DefaultProgressMonitor());
+                        nativeSearch, text, 0, starts.size(), new DefaultProgressMonitor());
                 assertTrue(nativePositions != null, "actual JNI positions required");
                 assertEquals(starts, Arrays.stream(nativePositions).boxed().toList());
             }

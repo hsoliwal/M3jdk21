@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.CancellationException;
@@ -25,7 +25,7 @@ final class JniCompileReleaseIdentityTest {
         JniSearchEngine engine = nativeEngine();
         AtomicInteger checks = new AtomicInteger();
         CancellationException failure = new CancellationException("third native compile checkpoint");
-        M3ProgressMonitor monitor = monitor(checks, () -> { throw failure; });
+        ProgressMonitor monitor = monitor(checks, () -> { throw failure; });
         assertSame(failure, assertThrows(CancellationException.class,
                 () -> engine.compile(new byte[] {42}, monitor)));
         assertEquals(3, checks.get());
@@ -60,8 +60,8 @@ final class JniCompileReleaseIdentityTest {
         return engine;
     }
 
-    private static M3ProgressMonitor monitor(AtomicInteger checks, Runnable onThirdPoll) {
-        return new M3ProgressMonitor() {
+    private static ProgressMonitor monitor(AtomicInteger checks, Runnable onThirdPoll) {
+        return new ProgressMonitor() {
             @Override public void checkCanceled() {
                 if (checks.incrementAndGet() == 3) onThirdPoll.run();
             }
@@ -73,8 +73,8 @@ final class JniCompileReleaseIdentityTest {
             @Override public void subTask(String name) {}
             @Override public boolean isCanceled() { return false; }
             @Override public void setCanceled(boolean canceled) {}
-            @Override public M3ProgressState state() {
-                return new M3DefaultProgressMonitor().state();
+            @Override public ProgressState state() {
+                return new DefaultProgressMonitor().state();
             }
         };
     }

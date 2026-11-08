@@ -10,8 +10,8 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.RandomAccess;
 import jdk.m3.collections.M3ArrayList;
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3IndexedLiveView;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.IndexedLiveView;
 
 /**
  * Observable {@link java.util.List} using the existing dynamic-array M3 owner.
@@ -67,19 +67,19 @@ public final class ObservableList<E> extends AbstractList<E> implements RandomAc
      * automatically invalidate that index; mutations to referenced objects
      * require explicit view.invalidate().
      */
-    public M3IndexedLiveView<E> filteredView(Predicate<? super E> predicate) {
-        return M3IndexedLiveView.filtered(elements, predicate);
+    public IndexedLiveView<E> filteredView(Predicate<? super E> predicate) {
+        return IndexedLiveView.filtered(elements, predicate);
     }
 
     /** Stable natural/comparator-sorted view; no sorting of the payload owner. */
-    public M3IndexedLiveView<E> sortedView(Comparator<? super E> comparator) {
-        return M3IndexedLiveView.sorted(elements, comparator);
+    public IndexedLiveView<E> sortedView(Comparator<? super E> comparator) {
+        return IndexedLiveView.sorted(elements, comparator);
     }
 
     /** One reusable filter-mask + stable primitive-index sort over the same owner. */
-    public M3IndexedLiveView<E> filteredSortedView(
+    public IndexedLiveView<E> filteredSortedView(
             Predicate<? super E> predicate, Comparator<? super E> comparator) {
-        return M3IndexedLiveView.filteredSorted(elements, predicate, comparator);
+        return IndexedLiveView.filteredSorted(elements, predicate, comparator);
     }
 
     /**
@@ -87,10 +87,10 @@ public final class ObservableList<E> extends AbstractList<E> implements RandomAc
      * predicates, comparators and ObservableList callbacks always run in Java.
      * NATIVE_REQUIRED fails if the matching native binary is unavailable.
      */
-    public M3IndexedLiveView<E> filteredSortedView(
+    public IndexedLiveView<E> filteredSortedView(
             Predicate<? super E> predicate, Comparator<? super E> comparator,
-            M3IndexMaskCompactor.Backend backend) {
-        return M3IndexedLiveView.filteredSorted(elements, predicate, comparator, backend);
+            IndexMaskCompactor.Backend backend) {
+        return IndexedLiveView.filteredSorted(elements, predicate, comparator, backend);
     }
 
     /** Duplicates are permitted and each registration receives one callback. */

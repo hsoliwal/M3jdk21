@@ -9,7 +9,7 @@ import com.google.common.collect.Multiset;
 import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3LinkedList;
-import jdk.m3.collections.M3ObjectCounts;
+import jdk.m3.collections.ObjectCounts;
 import jdk.m3.collections.M3TreeMap;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +29,7 @@ final class M3FiveProviderFlagSelectionTest {
     private static final IndexPathMasks.Backend JAVA = IndexPathMasks.Backend.JAVA;
 
     @Test void selectedCountsAreM3OwnedForAllFiveRealProviders() {
-        M3ObjectCounts<String> source = new M3ObjectCounts<>();
+        ObjectCounts<String> source = new ObjectCounts<>();
         source.add("alpha", 3);
         source.setFlags("alpha", Integer.MIN_VALUE | 1);
         source.add(null, 2);
@@ -116,7 +116,7 @@ final class M3FiveProviderFlagSelectionTest {
             assertTrue(IndexPathMasks.nativeAvailable(), "required C17 JNI backend must load");
         }
         Random random = new Random(0x4d3305F17L);
-        M3ObjectCounts<Integer> source = new M3ObjectCounts<>();
+        ObjectCounts<Integer> source = new ObjectCounts<>();
         LinkedHashMap<Integer, Integer> flags = new LinkedHashMap<>();
         LinkedHashMap<Integer, Integer> counts = new LinkedHashMap<>();
         for (int i = 0; i < 2400; i++) {
@@ -168,7 +168,7 @@ final class M3FiveProviderFlagSelectionTest {
     }
 
     @Test void emptyOverlapAndCallerMutationStayIndependent() {
-        M3ObjectCounts<String> source = new M3ObjectCounts<>();
+        ObjectCounts<String> source = new ObjectCounts<>();
         source.add("x", 2);
         source.setFlags("x", Integer.MIN_VALUE);
         var none = M3FiveProviderFlagSelection.capture(source, 1, 1, JAVA);
