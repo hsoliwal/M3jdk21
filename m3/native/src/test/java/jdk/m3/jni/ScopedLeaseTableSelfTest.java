@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /** Runnable with Java 21 javac alone; JUnit delegates to this immutable contract suite. */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/test/java/com/synexia/primitives/M3ScopedLeaseTableSelfTest.java blob d8e6debed226; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3ScopedLeaseTableSelfTest {
-    private M3ScopedLeaseTableSelfTest() { }
+public final class ScopedLeaseTableSelfTest {
+    private ScopedLeaseTableSelfTest() { }
 
     public static void main(String[] args) throws Exception {
         basicTransitions();
@@ -22,12 +22,12 @@ public final class M3ScopedLeaseTableSelfTest {
         poolOwnerRefcount();
         concurrentPoolRefcount();
         atomicPoolOwnershipTransfer();
-        System.out.println("M3ScopedLeaseTableSelfTest PASS native="
-                + M3NativeLeaseScan.nativeAvailable());
+        System.out.println("ScopedLeaseTableSelfTest PASS native="
+                + NativeLeaseScan.nativeAvailable());
     }
 
     private static void basicTransitions() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long a = table.allocate();
             long b = table.allocate();
             check(a == 1L && b == 2L, "stable monotonic ids");
@@ -49,7 +49,7 @@ public final class M3ScopedLeaseTableSelfTest {
     }
 
     private static void refusalAndClose() {
-        M3ScopedLeaseTable table = new M3ScopedLeaseTable();
+        ScopedLeaseTable table = new ScopedLeaseTable();
         long id = table.allocate();
         refusal(() -> table.release(id), IllegalStateException.class);
         refusal(() -> table.unpin(id), IllegalStateException.class);
@@ -69,7 +69,7 @@ public final class M3ScopedLeaseTableSelfTest {
 
     private static void deterministicScan() {
         Random random = new Random(0x4d335f6c696665L);
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             final int count = 1000;
             for (int i = 0; i < count; i++) table.allocate();
             for (long id = 1; id <= count; id++) {
@@ -103,7 +103,7 @@ public final class M3ScopedLeaseTableSelfTest {
     }
 
     private static void concurrentLeases() throws Exception {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
             int workers = 6;
             Thread[] threads = new Thread[workers];
@@ -132,7 +132,7 @@ public final class M3ScopedLeaseTableSelfTest {
 
 
     private static void jniArrayCounting() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long primitive = table.allocate();
             long references = table.allocate();
             refusal(() -> table.registerJniArray(primitive, new Object()),
@@ -172,7 +172,7 @@ public final class M3ScopedLeaseTableSelfTest {
     }
 
     private static void concurrentJniArrayCounting() throws Exception {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
             table.registerJniArray(id, new long[7]);
             int workers = 4;
@@ -209,7 +209,7 @@ public final class M3ScopedLeaseTableSelfTest {
 
 
     private static void poolOwnerRefcount() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
             int[] array = new int[8];
             table.registerJniArray(id, array);
@@ -259,7 +259,7 @@ public final class M3ScopedLeaseTableSelfTest {
     }
 
     private static void concurrentPoolRefcount() throws Exception {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
             table.retainPoolReference(id);
             Thread[] threads = new Thread[4];
@@ -294,7 +294,7 @@ public final class M3ScopedLeaseTableSelfTest {
     }
 
     private static void atomicPoolOwnershipTransfer() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
             table.registerJniArray(id, new int[16]);
             table.retainPoolReference(id);

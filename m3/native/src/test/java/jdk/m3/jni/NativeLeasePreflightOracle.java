@@ -11,11 +11,11 @@ import java.util.Random;
 
 /** Executable native/Java parity oracle. Baseline mode NEVER invokes unsafe direct malformed inputs. */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/test/java/com/synexia/primitives/NativeLeasePreflightOracle.java blob 7aab35439eff; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3NativeLeasePreflightOracle {
+public final class NativeLeasePreflightOracle {
     private static long checks;
     private static MessageDigest digest;
     private static Method direct;
-    private M3NativeLeasePreflightOracle() { }
+    private NativeLeasePreflightOracle() { }
 
     private static void verify(boolean pass, String label) {
         checks++;
@@ -54,8 +54,8 @@ public final class M3NativeLeasePreflightOracle {
             int[] beforeLeases = leases.clone();
             int[] beforePins = pins.clone();
             byte[] beforeStates = states.clone();
-            int expected = M3NativeLeaseScan.collect(ids, leases, pins, states, n, javaOut, false);
-            int actual = M3NativeLeaseScan.collect(ids, leases, pins, states, n, nativeOut, true);
+            int expected = NativeLeaseScan.collect(ids, leases, pins, states, n, javaOut, false);
+            int actual = NativeLeaseScan.collect(ids, leases, pins, states, n, nativeOut, true);
             verify(expected == actual, "count parity " + round);
             verify(Arrays.equals(javaOut, nativeOut), "output and suffix parity " + round);
             verify(Arrays.equals(ids, beforeIds), "ids unchanged " + round);
@@ -71,9 +71,9 @@ public final class M3NativeLeasePreflightOracle {
                 int first = n >>> 2;
                 long[] limitedJava = {Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE};
                 long[] limitedNative = limitedJava.clone();
-                long j = M3NativeLeaseScan.collectWindow(ids, leases, pins, states,
+                long j = NativeLeaseScan.collectWindow(ids, leases, pins, states,
                         n, first, limitedJava, false);
-                long k = M3NativeLeaseScan.collectWindow(ids, leases, pins, states,
+                long k = NativeLeaseScan.collectWindow(ids, leases, pins, states,
                         n, first, limitedNative, true);
                 verify(j == k, "window cursor parity " + round);
                 verify(Arrays.equals(limitedJava, limitedNative), "window output parity " + round);
@@ -113,7 +113,7 @@ public final class M3NativeLeasePreflightOracle {
         expectRefusal(ids, leases, pins, states, 5, null, "null output");
         verify(direct(new long[0], new int[0], new int[0], new byte[0], 0,
                 new long[0]) == 0, "empty direct scan is successful zero");
-        verify(M3NativeLeaseScan.collect(new long[0], new int[0], new int[0],
+        verify(NativeLeaseScan.collect(new long[0], new int[0], new int[0],
                 new byte[0], 0, new long[0], true) == 0, "empty public native scan");
         record("empty count=0");
     }
@@ -124,12 +124,12 @@ public final class M3NativeLeasePreflightOracle {
         byte[] states = {0, 1, 2};
         for (boolean preferNative : new boolean[]{false, true}) {
             boolean failed = false;
-            try { M3NativeLeaseScan.collect(ids, counts, counts, states, 4,
+            try { NativeLeaseScan.collect(ids, counts, counts, states, 4,
                     new long[3], preferNative); }
             catch (IllegalArgumentException expected) { failed = true; }
             verify(failed, "public rejects count overrun " + preferNative);
             failed = false;
-            try { M3NativeLeaseScan.collect(ids, counts, counts, states, 3,
+            try { NativeLeaseScan.collect(ids, counts, counts, states, 3,
                     ids, preferNative); }
             catch (IllegalArgumentException expected) { failed = true; }
             verify(failed, "public rejects alias " + preferNative);
@@ -137,7 +137,7 @@ public final class M3NativeLeasePreflightOracle {
     }
 
     private static void tableIntegration() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             for (int i = 0; i < 180; i++) {
                 long id = table.allocate();
                 if (i % 6 == 0) table.acquire(id);
@@ -164,8 +164,8 @@ public final class M3NativeLeasePreflightOracle {
         }
         checks = 0;
         digest = MessageDigest.getInstance("SHA-256");
-        verify(M3NativeLeaseScan.nativeAvailable(), "required native library must load");
-        direct = M3NativeLeaseScan.class.getDeclaredMethod("collectNative",
+        verify(NativeLeaseScan.nativeAvailable(), "required native library must load");
+        direct = NativeLeaseScan.class.getDeclaredMethod("collectNative",
                 long[].class, int[].class, int[].class, byte[].class,
                 int.class, long[].class);
         direct.setAccessible(true);

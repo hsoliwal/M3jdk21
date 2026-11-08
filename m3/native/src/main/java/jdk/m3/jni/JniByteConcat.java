@@ -9,7 +9,7 @@ import java.util.Objects;
  * owner. No global references, retained native pointers, or separate counters.
  *
  * <p>The caller must have registered each ID against its actual array through
- * M3ScopedLeaseTable.registerJniArray. This adapter cannot prove that mapping
+ * ScopedLeaseTable.registerJniArray. This adapter cannot prove that mapping
  * or infer all JVM aliases. Each input occurrence holds a registered JNI borrow,
  * including both occurrences when the same array/ID appears twice. The borrow
  * ends after the native function completes all array reads or on failure.</p>
@@ -19,7 +19,7 @@ import java.util.Objects;
  * mutable Java byte[] for compatibility at a JNI boundary.</p>
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/main/java/com/synexia/primitives/M3JniByteConcat.java blob 5aa88a35bf31; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3JniByteConcat {
+public final class JniByteConcat {
     private static final int MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
     // Java-only calls never attempt to load an optional native library.
     private static final class Native {
@@ -27,7 +27,7 @@ public final class M3JniByteConcat {
         private Native() { }
     }
 
-    private M3JniByteConcat() { }
+    private JniByteConcat() { }
 
     /** Library-load status; actual symbol availability is verified at invocation. */
     public static boolean nativeLibraryLoaded() {
@@ -48,7 +48,7 @@ public final class M3JniByteConcat {
      * before this call. The opt-in native path falls back to the exact Java
      * contract if an older optional library lacks the new symbol.
      */
-    public static byte[] concat(M3ScopedLeaseTable owner, long leftId, byte[] left,
+    public static byte[] concat(ScopedLeaseTable owner, long leftId, byte[] left,
                                 long rightId, byte[] right, boolean preferNative) {
         Objects.requireNonNull(owner, "owner");
         Objects.requireNonNull(left, "left");
@@ -58,7 +58,7 @@ public final class M3JniByteConcat {
             throw new OutOfMemoryError("M3 byte concatenation exceeds Java array limit");
         }
         int length = (int) required;
-        return M3JniArrayReferences.withConcat(owner, leftId, rightId,
+        return JniArrayReferences.withConcat(owner, leftId, rightId,
                 () -> perform(left, right, length, preferNative));
     }
 

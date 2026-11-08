@@ -10,7 +10,7 @@ import java.util.Objects;
  * A zero count is ONLY a candidate residency signal, never a JVM reachability oracle.
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/main/java/com/synexia/primitives/M3NativeLeaseScan.java blob 056cf09973d4; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3NativeLeaseScan {
+public final class NativeLeaseScan {
     private static final boolean NATIVE_AVAILABLE;
 
     static {
@@ -24,7 +24,7 @@ public final class M3NativeLeaseScan {
         NATIVE_AVAILABLE = loaded;
     }
 
-    private M3NativeLeaseScan() { }
+    private NativeLeaseScan() { }
 
     public static boolean nativeAvailable() {
         return NATIVE_AVAILABLE;
@@ -46,8 +46,8 @@ public final class M3NativeLeaseScan {
         // Guard against silently treating a corrupt/negative count as an unleased resource.
         for (int i = 0; i < count; i++) {
             if (ids[i] <= 0 || leases[i] < 0 || pins[i] < 0
-                    || states[i] < M3ScopedLeaseTable.CLEAN
-                    || states[i] > M3ScopedLeaseTable.RETIRED) {
+                    || states[i] < ScopedLeaseTable.CLEAN
+                    || states[i] > ScopedLeaseTable.RETIRED) {
                 throw new IllegalArgumentException("invalid handle/lease snapshot at " + i);
             }
         }
@@ -68,7 +68,7 @@ public final class M3NativeLeaseScan {
         int outputCount = 0;
         // Public callers use the validated entry point; keep this pure helper package-private.
         for (int i = 0; i < count; i++) {
-            if (states[i] == M3ScopedLeaseTable.CLEAN && leases[i] == 0 && pins[i] == 0) {
+            if (states[i] == ScopedLeaseTable.CLEAN && leases[i] == 0 && pins[i] == 0) {
                 output[outputCount++] = ids[i];
             }
         }
@@ -132,11 +132,11 @@ public final class M3NativeLeaseScan {
         int written = 0;
         while (next < count) {
             if (ids[next] <= 0 || leases[next] < 0 || pins[next] < 0
-                    || states[next] < M3ScopedLeaseTable.CLEAN
-                    || states[next] > M3ScopedLeaseTable.RETIRED) {
+                    || states[next] < ScopedLeaseTable.CLEAN
+                    || states[next] > ScopedLeaseTable.RETIRED) {
                 throw new IllegalArgumentException("invalid handle/lease window at " + next);
             }
-            if (states[next] == M3ScopedLeaseTable.CLEAN && leases[next] == 0
+            if (states[next] == ScopedLeaseTable.CLEAN && leases[next] == 0
                     && pins[next] == 0) {
                 output[written++] = ids[next];
             }

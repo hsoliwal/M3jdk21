@@ -15,11 +15,11 @@ import java.util.function.Supplier;
  * their explicitly registered counts; public Java facades keep their normal identity.</p>
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/main/java/com/synexia/primitives/M3LeaseScopes.java blob d8ac566afd4f; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3LeaseScopes {
-    private M3LeaseScopes() { }
+public final class LeaseScopes {
+    private LeaseScopes() { }
 
     /** Registers a logical lease throughout the callback, releasing it on every exit. */
-    public static void withLease(M3ScopedLeaseTable table, long id, Runnable body) {
+    public static void withLease(ScopedLeaseTable table, long id, Runnable body) {
         Objects.requireNonNull(table, "table");
         Objects.requireNonNull(body, "body");
         table.acquire(id);
@@ -31,7 +31,7 @@ public final class M3LeaseScopes {
     }
 
     /** Value-returning lexical lease; callback result may escape, so no object is reclaimed. */
-    public static <T> T withLease(M3ScopedLeaseTable table, long id,
+    public static <T> T withLease(ScopedLeaseTable table, long id,
                                   Supplier<? extends T> body) {
         Objects.requireNonNull(table, "table");
         Objects.requireNonNull(body, "body");
@@ -44,7 +44,7 @@ public final class M3LeaseScopes {
     }
 
     /** Pins a registered logical resource throughout a bounded callback. */
-    public static void withPin(M3ScopedLeaseTable table, long id, Runnable body) {
+    public static void withPin(ScopedLeaseTable table, long id, Runnable body) {
         Objects.requireNonNull(table, "table");
         Objects.requireNonNull(body, "body");
         table.pin(id);

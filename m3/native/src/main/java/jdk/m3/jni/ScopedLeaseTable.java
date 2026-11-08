@@ -19,7 +19,7 @@ import jdk.m3.collections.M3RuntimeHeap;
  * any underlying resource. In particular, this cannot authorize disposing reachable Java facades.</p>
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/main/java/com/synexia/primitives/M3ScopedLeaseTable.java blob 6e845b2af4a4; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3ScopedLeaseTable implements AutoCloseable {
+public final class ScopedLeaseTable implements AutoCloseable {
     static final byte CLEAN = 0;
     static final byte DIRTY = 1;
     static final byte RETIRED = 2;
@@ -297,7 +297,7 @@ public final class M3ScopedLeaseTable implements AutoCloseable {
         checkOpen();
         Objects.requireNonNull(output, "output");
         if (output.length < size) throw new IllegalArgumentException("output capacity < size");
-        return M3NativeLeaseScan.collect(ids, leases, pins, states, size, output, preferNative);
+        return NativeLeaseScan.collect(ids, leases, pins, states, size, output, preferNative);
     }
 
     /**
@@ -306,7 +306,7 @@ public final class M3ScopedLeaseTable implements AutoCloseable {
      *
      * <p>The high 32 bits of the result are the next zero-based table index to scan;
      * the low 32 bits are the number of IDs copied into output[0..written).
-     * Start with firstIndex=0, and repeat with M3NativeLeaseScan.nextIndex(result)
+     * Start with firstIndex=0, and repeat with NativeLeaseScan.nextIndex(result)
      * until the returned next index equals size(). Results are only candidates.
      * A sequence of calls is not an atomic snapshot if other threads mutate the table
      * between calls; owners must recheck eligibility before acting on any ID.</p>
@@ -320,7 +320,7 @@ public final class M3ScopedLeaseTable implements AutoCloseable {
         if (firstIndex < 0 || firstIndex > size || output.length == 0) {
             throw new IllegalArgumentException("invalid scan cursor or empty output");
         }
-        return M3NativeLeaseScan.collectWindow(ids, leases, pins, states, size,
+        return NativeLeaseScan.collectWindow(ids, leases, pins, states, size,
                 firstIndex, output, preferNative);
     }
 

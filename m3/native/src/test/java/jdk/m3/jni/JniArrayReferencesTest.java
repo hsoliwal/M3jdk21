@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
 
 /** JNI lifetime registration oracle, independent of native-library presence. */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/test/java/com/synexia/primitives/M3JniArrayReferencesTest.java blob e6a9c98b2e23; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-class M3JniArrayReferencesTest {
+class JniArrayReferencesTest {
     @Test
     void arrayExceptionRemainsPrimaryWhenNativeCleanupAlsoFails() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long id = table.allocate();
             table.registerJniArray(id, new byte[8]);
             IllegalArgumentException primary = new IllegalArgumentException("native fault");
             IllegalArgumentException actual = assertThrows(IllegalArgumentException.class,
-                    () -> M3JniArrayReferences.withArray(table, id, () -> {
+                    () -> JniArrayReferences.withArray(table, id, () -> {
                         table.endJniArrayAccess(id); // adversarial early Release
                         throw primary;
                     }));
@@ -32,12 +32,12 @@ class M3JniArrayReferencesTest {
 
     @Test
     void criticalExceptionRemainsPrimaryWhenCleanupFails() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long id = table.allocate();
             table.registerJniArray(id, new long[4]);
             AssertionError primary = new AssertionError("native critical fault");
             AssertionError actual = assertThrows(AssertionError.class,
-                    () -> M3JniArrayReferences.withCritical(table, id, () -> {
+                    () -> JniArrayReferences.withCritical(table, id, () -> {
                         table.endJniArrayAccess(id); // simulated native misuse
                         throw primary;
                     }));
@@ -50,10 +50,10 @@ class M3JniArrayReferencesTest {
 
     @Test
     void nativeArrayCountBlocksResidencyAndRestoresEligibility() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long array = table.allocate();
             table.registerJniArray(array, new byte[4]);
-            M3JniArrayReferences.withArray(table, array, () -> {
+            JniArrayReferences.withArray(table, array, () -> {
                 assertEquals(1, table.jniArrayBorrowCount(array));
                 assertFalse(table.eligible(array));
                 assertFalse(table.tryRetire(array));
@@ -65,25 +65,25 @@ class M3JniArrayReferencesTest {
 
     @Test
     void concatenationCountsTwoEdgesIncludingSameArrayTwice() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long left = table.allocate();
             long right = table.allocate();
             table.registerJniArray(left, new byte[4]);
             table.registerJniArray(right, new byte[4]);
             long unrelated = table.allocate();
-            M3JniArrayReferences.withConcat(table, left, right, (Runnable) () -> {
+            JniArrayReferences.withConcat(table, left, right, (Runnable) () -> {
                 assertEquals(1, table.jniArrayBorrowCount(left));
                 assertEquals(1, table.jniArrayBorrowCount(right));
                 long[] output = new long[table.size()];
                 assertEquals(1, table.collectEligible(output, false));
                 assertEquals(unrelated, output[0]);
-                M3JniArrayReferences.withConcat(table, left, left, (Runnable) () -> {
+                JniArrayReferences.withConcat(table, left, left, (Runnable) () -> {
                     assertEquals(3, table.jniArrayBorrowCount(left));
                     assertEquals(1, table.jniArrayBorrowCount(right));
                 });
                 assertEquals(1, table.jniArrayBorrowCount(left));
             });
-            M3JniArrayReferences.withConcat(table, left, left, (Runnable) () ->
+            JniArrayReferences.withConcat(table, left, left, (Runnable) () ->
                     assertEquals(2, table.jniArrayBorrowCount(left)));
             assertEquals(0, table.jniArrayBorrowCount(left));
             assertEquals(0, table.jniArrayBorrowCount(right));
@@ -92,16 +92,16 @@ class M3JniArrayReferencesTest {
 
     @Test
     void retainedZeroCopySourcesKeepCountsUntilExplicitRelease() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long left = table.allocate();
             long right = table.allocate();
             table.registerJniArray(left, new byte[4]);
             table.registerJniArray(right, new byte[4]);
-            M3JniArrayReferences.retainSources(table, left, right);
+            JniArrayReferences.retainSources(table, left, right);
             assertFalse(table.tryRetire(left));
             assertFalse(table.tryRetire(right));
             assertEquals(1, table.jniArrayBorrowCount(left));
-            M3JniArrayReferences.releaseSources(table, left, right);
+            JniArrayReferences.releaseSources(table, left, right);
             assertTrue(table.tryRetire(left));
             assertTrue(table.tryRetire(right));
         }
@@ -109,13 +109,13 @@ class M3JniArrayReferencesTest {
 
     @Test
     void failureDuringSecondRetainRollsBackFirst() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long live = table.allocate();
             long retired = table.allocate();
             table.registerJniArray(live, new byte[4]);
             assertTrue(table.tryRetire(retired));
             assertThrows(IllegalStateException.class,
-                    () -> M3JniArrayReferences.retainSources(table, live, retired));
+                    () -> JniArrayReferences.retainSources(table, live, retired));
             assertEquals(0, table.jniArrayBorrowCount(live));
             assertTrue(table.eligible(live));
         }
@@ -123,18 +123,18 @@ class M3JniArrayReferencesTest {
 
     @Test
     void exceptionalNativeCallBalancesBothEdges() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long left = table.allocate();
             long right = table.allocate();
             table.registerJniArray(left, new byte[4]);
             table.registerJniArray(right, new byte[4]);
             IllegalStateException failure = new IllegalStateException("JNI fault");
             assertSame(failure, assertThrows(IllegalStateException.class,
-                    () -> M3JniArrayReferences.withConcat(table, left, right,
+                    () -> JniArrayReferences.withConcat(table, left, right,
                             (Runnable) () -> { throw failure; })));
             assertEquals(0, table.jniArrayBorrowCount(left));
             assertEquals(0, table.jniArrayBorrowCount(right));
-            int returned = M3JniArrayReferences.withConcat(table, left, right,
+            int returned = JniArrayReferences.withConcat(table, left, right,
                     () -> table.jniArrayBorrowCount(left) + table.jniArrayBorrowCount(right));
             assertEquals(2, returned);
             assertEquals(0, table.jniArrayBorrowCount(left));
@@ -143,22 +143,22 @@ class M3JniArrayReferencesTest {
 
     @Test
     void nativeCriticalAndStrongGlobalPinsBlockRecycling() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long id = table.allocate();
             table.registerJniArray(id, new byte[4]);
-            M3JniArrayReferences.withCritical(table, id, () -> {
+            JniArrayReferences.withCritical(table, id, () -> {
                 assertEquals(1, table.pinCount(id));
                 assertFalse(table.eligible(id));
             });
             assertEquals(0, table.pinCount(id));
-            M3JniArrayReferences.pinGlobal(table, id);
-            M3JniArrayReferences.pinGlobal(table, id);
+            JniArrayReferences.pinGlobal(table, id);
+            JniArrayReferences.pinGlobal(table, id);
             assertEquals(2, table.pinCount(id));
             assertFalse(table.tryRetire(id));
-            M3JniArrayReferences.unpinGlobal(table, id);
+            JniArrayReferences.unpinGlobal(table, id);
             assertEquals(1, table.pinCount(id));
             assertFalse(table.eligible(id));
-            M3JniArrayReferences.unpinGlobal(table, id);
+            JniArrayReferences.unpinGlobal(table, id);
             assertTrue(table.eligible(id));
         }
     }
@@ -170,7 +170,7 @@ class M3JniArrayReferencesTest {
     @Test
     void checkedNativeThrowableWinsOverLeaseCleanupInEveryScopedVariant() {
         for (int variant = 0; variant < 6; variant++) {
-            try (var table = new M3ScopedLeaseTable()) {
+            try (var table = new ScopedLeaseTable()) {
                 long left = table.allocate();
                 long right = table.allocate();
                 table.registerJniArray(left, new byte[4]);
@@ -187,12 +187,12 @@ class M3JniArrayReferencesTest {
                 };
                 IOException actual = assertThrows(IOException.class, () -> {
                     switch (kind) {
-                        case 0 -> M3JniArrayReferences.withArray(table, left, callback);
-                        case 1 -> M3JniArrayReferences.withCritical(table, left, callback);
-                        case 2 -> M3JniArrayReferences.withConcat(table, left, right, callback);
-                        case 3 -> M3JniArrayReferences.withConcat(table, left, right, supplier);
-                        case 4 -> M3JniArrayReferences.withArrayBatch(table, new long[] {left}, callback);
-                        case 5 -> M3JniArrayReferences.withArrayBatch(table, new long[] {left}, supplier);
+                        case 0 -> JniArrayReferences.withArray(table, left, callback);
+                        case 1 -> JniArrayReferences.withCritical(table, left, callback);
+                        case 2 -> JniArrayReferences.withConcat(table, left, right, callback);
+                        case 3 -> JniArrayReferences.withConcat(table, left, right, supplier);
+                        case 4 -> JniArrayReferences.withArrayBatch(table, new long[] {left}, callback);
+                        case 5 -> JniArrayReferences.withArrayBatch(table, new long[] {left}, supplier);
                         default -> throw new AssertionError("unexpected variant");
                     }
                 });
@@ -207,12 +207,12 @@ class M3JniArrayReferencesTest {
 
     @Test
     void checkedNativeThrowableWithoutCleanupFailurePassesThroughUnchanged() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long id = table.allocate();
             table.registerJniArray(id, new byte[4]);
             IOException primary = new IOException("native checked exception");
             IOException actual = assertThrows(IOException.class, () ->
-                    M3JniArrayReferences.withArray(table, id, () -> nativeChecked(primary)));
+                    JniArrayReferences.withArray(table, id, () -> nativeChecked(primary)));
             assertSame(primary, actual);
             assertEquals(0, actual.getSuppressed().length);
             assertEquals(0, table.jniArrayBorrowCount(id));
@@ -225,21 +225,21 @@ class M3JniArrayReferencesTest {
     }
 
     private static void nativeChecked(Throwable primary) {
-        M3JniArrayReferencesTest.<RuntimeException>throwNative(primary);
+        JniArrayReferencesTest.<RuntimeException>throwNative(primary);
     }
 
     @Test
     void reverseReleasePreservesFirstAndSecondCleanupFailures() {
-        try (var table = new M3ScopedLeaseTable()) {
+        try (var table = new ScopedLeaseTable()) {
             long left = table.allocate();
             long right = table.allocate();
             table.registerJniArray(left, new byte[4]);
             table.registerJniArray(right, new byte[4]);
-            M3JniArrayReferences.retainSources(table, left, right);
+            JniArrayReferences.retainSources(table, left, right);
             table.endJniArrayAccess(right);
             table.endJniArrayAccess(left);
             IllegalStateException first = assertThrows(IllegalStateException.class,
-                    () -> M3JniArrayReferences.releaseSources(table, left, right));
+                    () -> JniArrayReferences.releaseSources(table, left, right));
             assertTrue(first.getMessage().contains(" " + right));
             assertEquals(1, first.getSuppressed().length);
             assertInstanceOf(IllegalStateException.class, first.getSuppressed()[0]);
@@ -252,7 +252,7 @@ class M3JniArrayReferencesTest {
     @Test
     void checkedNativeFailureRetainsBothReverseCleanupErrors() {
         for (boolean supplier : new boolean[] {false, true}) {
-            try (var table = new M3ScopedLeaseTable()) {
+            try (var table = new ScopedLeaseTable()) {
                 long left = table.allocate();
                 long right = table.allocate();
                 table.registerJniArray(left, new byte[4]);
@@ -265,12 +265,12 @@ class M3JniArrayReferencesTest {
                 };
                 IOException actual = assertThrows(IOException.class, () -> {
                     if (supplier) {
-                        M3JniArrayReferences.withConcat(table, left, right, () -> {
+                        JniArrayReferences.withConcat(table, left, right, () -> {
                             callback.run();
                             return 7;
                         });
                     } else {
-                        M3JniArrayReferences.withConcat(table, left, right, callback);
+                        JniArrayReferences.withConcat(table, left, right, callback);
                     }
                 });
                 assertSame(primary, actual);

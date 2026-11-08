@@ -17,20 +17,20 @@ import org.junit.jupiter.api.Test;
  * and the digest of the replay (the same text the differential gate compares with the donor's).
  */
 //FLLDCIM: RELOCATE - gate 2 wrapper of recipe m3/native/recipe/scoped-leases-20261106 (new, test scope)
-final class M3ScopedLeaseJavaParityTest {
+final class ScopedLeaseJavaParityTest {
     @Test void javaPathConcatParityAndScansOfTheRelocatedFamily() throws Exception {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        M3ScopedLeaseDump dump = new M3ScopedLeaseDump(M3ScopedLeaseTable.class.getPackageName(),
+        ScopedLeaseDump dump = new ScopedLeaseDump(ScopedLeaseTable.class.getPackageName(),
                 new PrintStream(bytes, true, StandardCharsets.UTF_8));
         int cases = dump.concatParity();
         dump.deterministicScan();
         dump.windowScans();
         String replay = bytes.toString(StandardCharsets.UTF_8);
-        assertEquals(M3ScopedLeaseDump.CONCAT_CASES, cases);
-        assertTrue(replay.contains("CONCAT_PARITY cases=1025 native=" + M3JniByteConcat.nativeLibraryLoaded()));
+        assertEquals(ScopedLeaseDump.CONCAT_CASES, cases);
+        assertTrue(replay.contains("CONCAT_PARITY cases=1025 native=" + JniByteConcat.nativeLibraryLoaded()));
         assertTrue(replay.contains("window cap=1024 "));
         System.out.println("M3_JNI_CONCAT_JAVA_PARITY_PASS cases=" + cases + " native="
-                + M3JniByteConcat.nativeLibraryLoaded() + " replay_lines=" + replay.lines().count()
-                + " replay_sha256_16=" + M3ScopedLeaseDump.sha16(bytes.toByteArray()));
+                + JniByteConcat.nativeLibraryLoaded() + " replay_lines=" + replay.lines().count()
+                + " replay_sha256_16=" + ScopedLeaseDump.sha16(bytes.toByteArray()));
     }
 }

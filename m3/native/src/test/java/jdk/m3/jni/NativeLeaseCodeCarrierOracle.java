@@ -24,8 +24,8 @@ import javax.tools.ToolProvider;
 
 /** Deterministic in-memory Java21 proof that code-looking text/regex remains data. */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/test/java/com/synexia/primitives/NativeLeaseCodeCarrierOracle.java blob f0811c10d5f1; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3NativeLeaseCodeCarrierOracle {
-    private M3NativeLeaseCodeCarrierOracle() { }
+public final class NativeLeaseCodeCarrierOracle {
+    private NativeLeaseCodeCarrierOracle() { }
 
     // The fixture carries a literal nested Java text block, so construct it without
     // embedding unescaped triple-quote delimiters in this outer Java source.
@@ -45,7 +45,7 @@ public final class M3NativeLeaseCodeCarrierOracle {
             + "}\n";
     private static final String BRIDGE = """
             package proof;
-            import jdk.m3.jni.M3NativeLeaseScan;
+            import jdk.m3.jni.NativeLeaseScan;
             public final class NativeBridge {
                 public static int execute() {
                     long[] ids = {1L,2L,3L,4L};
@@ -57,7 +57,7 @@ public final class M3NativeLeaseCodeCarrierOracle {
                             || TextPayload.matches("bad") || !TextPayload.BLOCK.contains("if (count")) {
                         throw new AssertionError("text carriers lost");
                     }
-                    int copied = M3NativeLeaseScan.collect(ids, leases, pins, states, 4, output, true);
+                    int copied = NativeLeaseScan.collect(ids, leases, pins, states, 4, output, true);
                     if (copied != 1 || output[0] != 1L || output[1] != -1L) {
                         throw new AssertionError("native result changed");
                     }
@@ -100,7 +100,7 @@ public final class M3NativeLeaseCodeCarrierOracle {
     private static class Loader extends ClassLoader {
         final Map<String, ByteUnit> classes;
         Loader(Map<String, ByteUnit> classes) {
-            super(M3NativeLeaseCodeCarrierOracle.class.getClassLoader());
+            super(NativeLeaseCodeCarrierOracle.class.getClassLoader());
             this.classes = classes;
         }
         @Override protected Class<?> findClass(String name) throws ClassNotFoundException {
@@ -111,7 +111,7 @@ public final class M3NativeLeaseCodeCarrierOracle {
         }
     }
     public static void main(String[] args) throws Exception {
-        if (!M3NativeLeaseScan.nativeAvailable()) throw new AssertionError("native unavailable");
+        if (!NativeLeaseScan.nativeAvailable()) throw new AssertionError("native unavailable");
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         if (compiler == null) throw new AssertionError("full JDK21 javac required");
         List<TextUnit> originals = List.of(
