@@ -840,11 +840,11 @@ public final class AlgorithmExtrasDump {
     private void dynamicProgramming() {
         each("climbStairs", cases, random -> {
             int n = random.nextInt(10) == 0 ? random.nextInt(-2, 0) : random.nextInt(0, 100);
-            return call("" + n, () -> "" + PrimitiveDynamicProgrammingAlgorithms.climbStairs(n));
+            return call("" + n, () -> "" + DynamicProgrammingAlgorithms.climbStairs(n));
         });
         each("minCostClimbingStairs", cases, random -> {
             int[] cost = ints(random, length(random) % 200, random.nextInt(6) == 0 ? 0 : 1_000);
-            return call(s(cost), () -> "" + PrimitiveDynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
+            return call(s(cost), () -> "" + DynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
         });
         each("coinChangeWays", cases, random -> {
             int[] coins = ints(random, random.nextInt(0, 6), 30);
@@ -855,11 +855,11 @@ public final class AlgorithmExtrasDump {
             }
             int amount = random.nextInt(15) == 0 ? -1 : random.nextInt(0, random.nextInt(10) == 0 ? 5_000 : 200);
             return call(s(coins) + " a=" + amount, () -> ""
-                    + PrimitiveDynamicProgrammingAlgorithms.coinChangeWays(coins, amount));
+                    + DynamicProgrammingAlgorithms.coinChangeWays(coins, amount));
         });
         each("minPathSum", cases, random -> {
             int[][] grid = grid(random, 1_000);
-            return call(s(grid), () -> "" + PrimitiveDynamicProgrammingAlgorithms.minPathSum(grid));
+            return call(s(grid), () -> "" + DynamicProgrammingAlgorithms.minPathSum(grid));
         });
         each("targetSumWays", cases, random -> {
             int[] values = ints(random, random.nextInt(0, 20), 12);
@@ -870,7 +870,7 @@ public final class AlgorithmExtrasDump {
             }
             int target = random.nextInt(-40, 41);
             return call(s(values) + " t=" + target, () -> ""
-                    + PrimitiveDynamicProgrammingAlgorithms.targetSumWays(values, target));
+                    + DynamicProgrammingAlgorithms.targetSumWays(values, target));
         });
         each("decodeWays", cases, random -> {
             int n = random.nextInt(0, 60);
@@ -881,7 +881,7 @@ public final class AlgorithmExtrasDump {
                         ? 3 : 10));
             }
             String value = new String(digits);
-            return call("'" + value + "'", () -> "" + PrimitiveDynamicProgrammingAlgorithms.decodeWays(value));
+            return call("'" + value + "'", () -> "" + DynamicProgrammingAlgorithms.decodeWays(value));
         });
     }
 
