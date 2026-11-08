@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Objects;
+import java.security.MessageDigest;
+import java.util.HexFormat;
+import java.util.Random;
 
 //FLLDCIM: RELOCATE - donor blob 233ca9858e0e at commit 3385d79a2968 (repository, path, URL and digests: m3/algorithms/recipe/families-20261106/PROVENANCE.tsv); recipe m3/algorithms/recipe/families-20261106/relocate.py v1
 public final class DynamicProgrammingAlgorithms {
@@ -409,4 +412,110 @@ public final class DynamicProgrammingAlgorithms {
             if (row.length != columns) throw new IllegalArgumentException("grid must be rectangular");
         }
     }
+
+    //FLLDCIM: FOLD - member IntLcsWitness.MAX_LENGTH from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    private static final int LCS_WITNESS_MAX_LENGTH = 4_096;
+    //FLLDCIM: FOLD - member IntLcsWitness.MAX_CELLS from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    private static final long LCS_WITNESS_MAX_CELLS = 8_388_608L;
+
+    //FLLDCIM: FOLD - member IntLcsWitness.admit from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    private static void admitLcsWitness(int[] a, int[] b) {
+        if (a == null || b == null) throw new NullPointerException("integer sequences");
+        if (a.length > LCS_WITNESS_MAX_LENGTH || b.length > LCS_WITNESS_MAX_LENGTH
+                || (long) a.length * b.length > LCS_WITNESS_MAX_CELLS) {
+            throw new IllegalArgumentException("bounded integer LCS witnesses only");
+        }
+    }
+
+    //FLLDCIM: FOLD - member IntLcsWitness.javaWitness from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    /** O(a.length*b.length) time and O(min(a.length,b.length)) work space, excluding output. */
+    public static int[] lcsWitness(int[] a, int[] b) {
+        admitLcsWitness(a, b);
+        if (a.length == 0 || b.length == 0) return new int[0];
+        // Hirschberg's second-dimension vector is chosen as the shorter input.
+        // This swap does not change the accepted witness contract.
+        int[] left = a.length >= b.length ? a : b;
+        int[] right = a.length >= b.length ? b : a;
+        int[] output = new int[right.length];
+        int count = lcsWitnessBuild(left, 0, left.length, right, 0, right.length, output, 0);
+        return Arrays.copyOf(output, count);
+    }
+
+    //FLLDCIM: FOLD - member IntLcsWitness.split from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    private static int lcsWitnessSplit(int[] a, int begin, int mid, int end,
+                             int[] b, int bBegin, int bEnd) {
+        int length = bEnd - bBegin;
+        int[] forward = new int[length + 1];
+        int[] backward = new int[length + 1];
+        for (int ai = begin; ai < mid; ai++) {
+            int northwest = 0;
+            for (int j = 0; j < length; j++) {
+                int prior = forward[j + 1];
+                if (a[ai] == b[bBegin + j]) forward[j + 1] = northwest + 1;
+                else forward[j + 1] = Math.max(forward[j], prior);
+                northwest = prior;
+            }
+        }
+        for (int ai = end - 1; ai >= mid; ai--) {
+            int southeast = 0;
+            for (int j = length - 1; j >= 0; j--) {
+                int prior = backward[j];
+                if (a[ai] == b[bBegin + j]) backward[j] = southeast + 1;
+                else backward[j] = Math.max(prior, backward[j + 1]);
+                southeast = prior;
+            }
+        }
+        int best = -1;
+        int index = 0;
+        for (int j = 0; j <= length; j++) {
+            int score = forward[j] + backward[j];
+            // Earliest split in b breaks ties; no lexicographic claim.
+            if (score > best) { best = score; index = j; }
+        }
+        return bBegin + index;
+    }
+
+    //FLLDCIM: FOLD - member IntLcsWitness.build from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    private static int lcsWitnessBuild(int[] a, int begin, int end, int[] b,
+                             int bBegin, int bEnd, int[] output, int used) {
+        if (begin == end || bBegin == bEnd) return used;
+        if (end - begin == 1) {
+            for (int j = bBegin; j < bEnd; j++) {
+                if (a[begin] == b[j]) { output[used++] = a[begin]; break; }
+            }
+            return used;
+        }
+        int mid = begin + (end - begin) / 2;
+        int cut = lcsWitnessSplit(a, begin, mid, end, b, bBegin, bEnd);
+        int next = lcsWitnessBuild(a, begin, mid, b, bBegin, cut, output, used);
+        return lcsWitnessBuild(a, mid, end, b, cut, bEnd, output, next);
+    }
+
+    //FLLDCIM: FOLD - member IntLcsWitness.referenceLength from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    /** Independent rolling-row length oracle, not derived from Hirschberg split logic. */
+    public static int lcsLength(int[] a, int[] b) {
+        admitLcsWitness(a, b);
+        int[] shorter = a.length <= b.length ? a : b;
+        int[] longer = a.length <= b.length ? b : a;
+        int[] row = new int[shorter.length + 1];
+        for (int value : longer) {
+            int diagonal = 0;
+            for (int j = 0; j < shorter.length; j++) {
+                int old = row[j + 1];
+                if (value == shorter[j]) row[j + 1] = diagonal + 1;
+                else row[j + 1] = Math.max(row[j], old);
+                diagonal = old;
+            }
+        }
+        return row[shorter.length];
+    }
+
+    //FLLDCIM: FOLD - member IntLcsWitness.isSubsequence from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    /** Test-only subsequence predicate; input equality is exact signed int equality. */
+    public static boolean isSubsequence(int[] needle, int[] haystack) {
+        int found = 0;
+        for (int value : haystack) if (found < needle.length && value == needle[found]) found++;
+        return found == needle.length;
+    }
+
 }

@@ -96,7 +96,7 @@ public final class AlgorithmShapeCatalog {
             new Shape("coin-change", Family.DYNAMIC_PROGRAMMING, "O(amount*coins)", "O(amount)", "DynamicProgrammingAlgorithms.coinChange"),
             new Shape("lis-patience", Family.DYNAMIC_PROGRAMMING, "O(n log n)", "O(n)", "DynamicProgrammingAlgorithms.longestIncreasingSubsequence"),
             new Shape("lcs", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(min(m,n))", "DynamicProgrammingAlgorithms.longestCommonSubsequence"),
-            new Shape("lcs-witness", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(min(m,n))", "IntLcsWitness.javaWitness"),
+            new Shape("lcs-witness", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(min(m,n))", "DynamicProgrammingAlgorithms.lcsWitness"),
             new Shape("edit-distance", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(min(m,n))", "DynamicProgrammingAlgorithms.editDistance"),
             new Shape("word-break", Family.DYNAMIC_PROGRAMMING, "O(n*L)", "O(n)", "DynamicProgrammingAlgorithms.wordBreak"),
             new Shape("unique-grid-paths", Family.DYNAMIC_PROGRAMMING, "O(mn)", "O(n)", "DynamicProgrammingAlgorithms.uniquePaths"),
