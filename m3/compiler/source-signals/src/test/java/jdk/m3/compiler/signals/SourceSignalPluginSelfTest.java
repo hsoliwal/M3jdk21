@@ -20,7 +20,7 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 /** Real JavacTask + Plugin ServiceLoader compiler tests, no javac internal mocks. */
-public final class M3SourceSignalPluginSelfTest {
+public final class SourceSignalPluginSelfTest {
     private static int checks;
     private static final String ANNOTATION = """
             package jdk.m3.collections.sortable;
@@ -63,7 +63,7 @@ public final class M3SourceSignalPluginSelfTest {
             }
             """;
 
-    private M3SourceSignalPluginSelfTest() {}
+    private SourceSignalPluginSelfTest() {}
 
     public static void main(String[] args) throws Exception {
         Path root = Files.createTempDirectory("m3-source-signals-contract-");
@@ -171,7 +171,7 @@ public final class M3SourceSignalPluginSelfTest {
         DiagnosticCollector<JavaFileObject> diagnostics=new DiagnosticCollector<>();
         Files.createDirectories(dir.resolve("classes"));
         // Maven uses target/classes, while standalone javac tests use the same ServiceLoader resource.
-        Path plugin=Path.of(M3SourceSignalPlugin.class.getProtectionDomain()
+        Path plugin=Path.of(SourceSignalPlugin.class.getProtectionDomain()
                 .getCodeSource().getLocation().toURI());
         try(StandardJavaFileManager manager=compiler.getStandardFileManager(
                 diagnostics,null,StandardCharsets.UTF_8)) {

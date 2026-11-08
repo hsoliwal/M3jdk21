@@ -44,7 +44,7 @@ bulk rename, generated alias, or silent public-surface change follows from this 
 
 ## Changed-source admission
 
-`M3ChangedNameGate` compares two exact Git commits, parses only M3-owned Java files changed between
+`ChangedNameGate` compares two exact Git commits, parses only M3-owned Java files changed between
 them, and refuses findings located on added source lines. Existing names on untouched lines do not
 block unrelated maintenance. A rename, a new declaration, or a new file necessarily adds the
 relevant declaration line and is therefore checked.
@@ -54,7 +54,7 @@ Ordinary OpenJDK owners are not reinterpreted as M3 APIs; the existing public-JD
 gates remain authoritative for them. `scheme=m3` remains a separate opt-in until namespace
 migration has an admitted compatibility recipe.
 
-`M3JdkStandardCensus` provides the complementary repository-wide, parse-only warning inventory.
+`JdkStandardCensus` provides the complementary repository-wide, parse-only warning inventory.
 It uses javac parsing without type attribution, so unresolved module or dependency closures do not
 hide names. Java syntax errors still fail closed. Reports are sorted by path, numeric line and
 numeric column, making repeated runs byte-stable.

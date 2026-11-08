@@ -66,7 +66,7 @@ import javax.lang.model.util.ElementFilter;
  * dispatch, reflection, generated code and dynamically loaded classes are not exhaustively known.
  * Hash values are candidate features, never equality or lexical-ordering certificates.</p>
  */
-public final class M3SourceSignalPlugin implements Plugin {
+public final class SourceSignalPlugin implements Plugin {
     private static final String ANNOTATION = "jdk.m3.collections.sortable.Sortable";
     private static final String SCHEMA = "M3JDK21-SOURCE-SIGNALS/1";
     private static final java.util.Comparator<Long> UNSIGNED = Long::compareUnsigned;
@@ -78,7 +78,7 @@ public final class M3SourceSignalPlugin implements Plugin {
     private final TreeMap<String, Facts> facts = new TreeMap<>();
     private Path output;
     private Path methodOutput;
-    private M3MethodSignals methodSignals;
+    private MethodSignals methodSignals;
     private boolean includeAll;
     private boolean written;
     private Trees trees;
@@ -118,8 +118,8 @@ public final class M3SourceSignalPlugin implements Plugin {
         }
         trees = Trees.instance(task);
         if (methodOutput != null) {
-            methodSignals = new M3MethodSignals(trees, methodOutput,
-                    M3SourceSignalPlugin::methodSignature);
+            methodSignals = new MethodSignals(trees, methodOutput,
+                    SourceSignalPlugin::methodSignature);
         }
         task.addTaskListener(new TaskListener() {
             @Override

@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /** Deterministic anti-pattern checks for new M3-owned type and method names. */
-final class M3NameQuality {
+final class NameQuality {
     private static final int MAX_TYPE_LENGTH = 48;
     private static final int MAX_METHOD_LENGTH = 40;
     private static final int MAX_TYPE_WORDS = 7;
@@ -31,7 +31,7 @@ final class M3NameQuality {
     private static final Pattern CAMEL_TOKEN = Pattern.compile(
             "M3|[A-Z]+(?=[A-Z][a-z]|[0-9]|$)|[A-Z]?[a-z]+|[0-9]+");
 
-    private M3NameQuality() {
+    private NameQuality() {
     }
 
     static Optional<String> typeIssue(String name) {
@@ -69,7 +69,7 @@ final class M3NameQuality {
             return Optional.of("has " + name.length() + " characters; limit " + maximumLength);
         }
 
-        long words = tokens.stream().filter(M3NameQuality::isSemanticWord).count();
+        long words = tokens.stream().filter(NameQuality::isSemanticWord).count();
         if (words > maximumWords) {
             return Optional.of("has " + words + " semantic words; limit " + maximumWords);
         }

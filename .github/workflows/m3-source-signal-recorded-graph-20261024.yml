@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java'
       - 'm3/collections/src/test/java/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java'
-      - 'm3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3MethodSignals.java'
+      - 'm3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/MethodSignals.java'
       - '.github/workflows/m3-source-signal-recorded-graph-20261024.yml'
   workflow_dispatch:
 permissions:
@@ -46,8 +46,8 @@ jobs:
           set -euo pipefail
           out="$RUNNER_TEMP/m3-recorded-binding"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/plugin" \
-            m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3MethodSignals.java \
-            m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3SourceSignalPlugin.java
+            m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/MethodSignals.java \
+            m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/SourceSignalPlugin.java
           cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
             "$out/plugin/META-INF/services/com.sun.source.util.Plugin"
           cat > "$out/demo/Example.java" <<'JAVA'

@@ -9,8 +9,8 @@ import java.nio.file.Path;
 import java.util.List;
 
 /** Parse-only census tests with unresolved dependencies, exclusions, and syntax refusal. */
-public final class M3JdkStandardCensusSelfTest {
-    private M3JdkStandardCensusSelfTest() {
+public final class JdkStandardCensusSelfTest {
+    private JdkStandardCensusSelfTest() {
     }
 
     /**
@@ -39,14 +39,14 @@ public final class M3JdkStandardCensusSelfTest {
                 }
                 """);
 
-        List<Path> discovered = M3JdkStandardCensus.discoverFiles(root);
+        List<Path> discovered = JdkStandardCensus.discoverFiles(root);
         check(discovered.equals(List.of(root.relativize(owned))),
                 "unexpected discovery " + discovered);
         Path first = root.resolve("first.tsv");
         Path second = root.resolve("second.tsv");
-        M3JdkStandardCensus.Result result = M3JdkStandardCensus.run(
+        JdkStandardCensus.Result result = JdkStandardCensus.run(
                 root, discovered, first, false);
-        M3JdkStandardCensus.run(root, discovered, second, false);
+        JdkStandardCensus.run(root, discovered, second, false);
         check(result.fileCount() == 1 && result.findingCount() == 2,
                 "unexpected census counts " + result);
         check(Files.mismatch(first, second) == -1L, "census is not deterministic");
@@ -60,7 +60,7 @@ public final class M3JdkStandardCensusSelfTest {
                 "m3/demo/src/main/java/jdk/m3/demo/M3Broken.java");
         write(broken, "package jdk.m3.demo; public final class M3Broken {\n");
         try {
-            M3JdkStandardCensus.run(syntaxRoot, List.of(broken),
+            JdkStandardCensus.run(syntaxRoot, List.of(broken),
                     syntaxRoot.resolve("broken.tsv"), false);
             throw new AssertionError("syntax error was accepted");
         } catch (IOException expected) {

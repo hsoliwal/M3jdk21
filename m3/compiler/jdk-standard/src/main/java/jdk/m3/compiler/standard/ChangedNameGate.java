@@ -14,12 +14,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /** Refuses naming findings introduced on added Java source lines. */
-public final class M3ChangedNameGate {
+public final class ChangedNameGate {
     private static final Pattern COMMIT = Pattern.compile("[0-9a-f]{40}");
     private static final Pattern HUNK = Pattern.compile(
             "^@@ -[0-9]+(?:,[0-9]+)? \\+([0-9]+)(?:,([0-9]+))? @@.*$");
 
-    private M3ChangedNameGate() {
+    private ChangedNameGate() {
     }
 
     /**
@@ -33,7 +33,7 @@ public final class M3ChangedNameGate {
         String diff = gitDiff(configuration.root(), configuration.base(), configuration.head());
         Map<Path, List<LineRange>> added = addedLines(diff);
         List<Path> sources = added.keySet().stream()
-                .filter(M3JdkStandardCensus::isM3OwnedSource)
+                .filter(JdkStandardCensus::isM3OwnedSource)
                 .sorted()
                 .toList();
         if (sources.isEmpty()) {
@@ -44,7 +44,7 @@ public final class M3ChangedNameGate {
 
         Path allReport = configuration.report().resolveSibling(
                 configuration.report().getFileName() + ".all.tsv");
-        M3JdkStandardCensus.Result result = M3JdkStandardCensus.run(
+        JdkStandardCensus.Result result = JdkStandardCensus.run(
                 configuration.root(), sources, allReport, configuration.m3Scheme());
         List<String> introduced = filterAddedFindings(result.findings(), added);
         writeReport(configuration.report(), introduced);
@@ -99,7 +99,7 @@ public final class M3ChangedNameGate {
                 result.add(row);
             }
         }
-        result.sort(M3JdkStandardCensus::compareFindingRows);
+        result.sort(JdkStandardCensus::compareFindingRows);
         return List.copyOf(result);
     }
 
@@ -157,7 +157,7 @@ public final class M3ChangedNameGate {
         }
         if (root == null || report == null || !isCommit(base) || !isCommit(head)) {
             throw new IllegalArgumentException(
-                    "usage: M3ChangedNameGate --root <repo> --base <sha> --head <sha> "
+                    "usage: ChangedNameGate --root <repo> --base <sha> --head <sha> "
                             + "--report <tsv> [--scheme=m3]");
         }
         return new Configuration(root.toAbsolutePath().normalize(), base, head,

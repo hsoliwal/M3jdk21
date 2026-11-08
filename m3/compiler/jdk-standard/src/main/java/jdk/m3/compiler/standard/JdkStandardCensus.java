@@ -27,13 +27,13 @@ import javax.tools.ToolProvider;
  * <p>The census deliberately stops after javac parsing. Source files can therefore be checked
  * without resolving their module or dependency closure. Syntax errors still fail closed.
  */
-public final class M3JdkStandardCensus {
+public final class JdkStandardCensus {
     private static final int BATCH_SIZE = 128;
     private static final Set<String> EXCLUDED_PARTS = Set.of(
             ".git", "archive-maven-projects", "evidence", "generated-sources", "out",
             "qualification", "retained-variants", "target", "third_party", "vendor");
 
-    private M3JdkStandardCensus() {
+    private JdkStandardCensus() {
     }
 
     /**
@@ -69,7 +69,7 @@ public final class M3JdkStandardCensus {
             throw new IOException("M3JDK21 source census parse errors:\n"
                     + String.join("\n", parseErrors));
         }
-        findings.sort(M3JdkStandardCensus::compareFindingRows);
+        findings.sort(JdkStandardCensus::compareFindingRows);
         Path parent = report.toAbsolutePath().normalize().getParent();
         if (parent != null) {
             Files.createDirectories(parent);
@@ -87,7 +87,7 @@ public final class M3JdkStandardCensus {
                     .filter(path -> path.getFileName().toString().endsWith(".java"))
                     .filter(path -> !Files.isSymbolicLink(path))
                     .map(normalizedRoot::relativize)
-                    .filter(M3JdkStandardCensus::isM3OwnedSource)
+                    .filter(JdkStandardCensus::isM3OwnedSource)
                     .sorted()
                     .toList();
         }
@@ -166,7 +166,7 @@ public final class M3JdkStandardCensus {
             List<String> options = List.of("--release", "21", "-proc:none", "-Xlint:none");
             JavacTask task = (JavacTask) compiler.getTask(
                     null, fileManager, diagnostics, options, null, units);
-            M3JdkStandardPlugin plugin = new M3JdkStandardPlugin();
+            JdkStandardPlugin plugin = new JdkStandardPlugin();
             if (m3Scheme) {
                 plugin.init(task, "mode=warning", "scheme=m3");
             } else {
@@ -179,7 +179,7 @@ public final class M3JdkStandardCensus {
         }
         diagnostics.getDiagnostics().stream()
                 .filter(diagnostic -> diagnostic.getKind() == Diagnostic.Kind.ERROR)
-                .map(M3JdkStandardCensus::formatDiagnostic)
+                .map(JdkStandardCensus::formatDiagnostic)
                 .forEach(parseErrors::add);
     }
 
@@ -246,7 +246,7 @@ public final class M3JdkStandardCensus {
         }
         if (root == null || report == null) {
             throw new IllegalArgumentException(
-                    "usage: M3JdkStandardCensus --root <repo> [--paths <file>] "
+                    "usage: JdkStandardCensus --root <repo> [--paths <file>] "
                             + "--report <tsv> [--scheme=m3]");
         }
         return new Configuration(root.toAbsolutePath().normalize(), pathsFile,

@@ -26,9 +26,9 @@ import javax.tools.ToolProvider;
  * quality fixture independently proves placeholder, promotional, versioned, repeated, overlong
  * and over-tokenized names. Error mode must fail both dirty fixtures and pass the clean one.
  */
-public final class M3JdkStandardPluginSelfTest {
+public final class JdkStandardPluginSelfTest {
     private static final System.Logger LOG =
-            System.getLogger(M3JdkStandardPluginSelfTest.class.getName());
+            System.getLogger(JdkStandardPluginSelfTest.class.getName());
 
     private static final String CLEAN = """
             package com.example.clean;
@@ -193,7 +193,7 @@ public final class M3JdkStandardPluginSelfTest {
             Map.entry("LOCAL_NAME", 1), Map.entry("WHITESPACE", 3), Map.entry("LINE_LENGTH", 1)));
     private static final Map<String, Integer> QUALITY_RULES = Map.of("NAME_QUALITY", 12);
 
-    private M3JdkStandardPluginSelfTest() {
+    private JdkStandardPluginSelfTest() {
     }
 
     /**
@@ -218,7 +218,7 @@ public final class M3JdkStandardPluginSelfTest {
         Run dirty = compile(work, "bad_type", DIRTY, "mode=warning",
                 "report=" + conventionReport);
         check(rules(dirty).equals(DIRTY_RULES), "dirty rules " + rules(dirty));
-        check(dirty.diagnostics().stream().map(M3JdkStandardPluginSelfTest::message)
+        check(dirty.diagnostics().stream().map(JdkStandardPluginSelfTest::message)
                 .noneMatch(m -> m.matches(".*parameter arg(ument)? .*")), "arg/argument refused");
 
         Run quality = compile(work, "QualityFixture", QUALITY, "mode=warning",
@@ -309,7 +309,7 @@ public final class M3JdkStandardPluginSelfTest {
     }
 
     private static void requireMessage(Run run, String expected) {
-        check(run.diagnostics().stream().map(M3JdkStandardPluginSelfTest::message)
+        check(run.diagnostics().stream().map(JdkStandardPluginSelfTest::message)
                 .anyMatch(message -> message.contains(expected)), "missing message " + expected);
     }
 

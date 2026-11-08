@@ -50,7 +50,7 @@ import javax.tools.Diagnostic;
  * {@code jdk.m3.<area>} or {@code jdk.internal.m3.<area>}, and no name carried over from Synexia
  * ({@code Synexia*}, {@code SYNEXIA_*} become {@code M3*}, {@code M3_*}).
  */
-public final class M3JdkStandardPlugin implements Plugin {
+public final class JdkStandardPlugin implements Plugin {
 
     /** The checked rules; every diagnostic names exactly one. */
     enum Rule {
@@ -81,7 +81,7 @@ public final class M3JdkStandardPlugin implements Plugin {
     private Trees trees;
 
     /** Creates the plugin; javac instantiates it through the service loader. */
-    public M3JdkStandardPlugin() {
+    public JdkStandardPlugin() {
     }
 
     @Override
@@ -99,7 +99,7 @@ public final class M3JdkStandardPlugin implements Plugin {
                 if (event.getKind() == TaskEvent.Kind.PARSE) {
                     new Unit(event.getCompilationUnit()).check();
                 } else if (event.getKind() == TaskEvent.Kind.COMPILATION) {
-                    report.ifPresent(M3JdkStandardPlugin.this::write);
+                    report.ifPresent(JdkStandardPlugin.this::write);
                 }
             }
         });
@@ -182,7 +182,7 @@ public final class M3JdkStandardPlugin implements Plugin {
             if (!name.isEmpty()) {
                 name(Rule.TYPE_NAME, TYPE, name, tree);
                 if (TYPE.matcher(name).matches()) {
-                    checkNameQuality("type", name, tree, M3NameQuality.typeIssue(name));
+                    checkNameQuality("type", name, tree, NameQuality.typeIssue(name));
                 }
             }
             tree.getTypeParameters().forEach(this::typeParameter);
@@ -195,7 +195,7 @@ public final class M3JdkStandardPlugin implements Plugin {
             if (!name.equals("<init>")) {
                 name(Rule.METHOD_NAME, MEMBER, name, tree);
                 if (MEMBER.matcher(name).matches() && !overrides(tree)) {
-                    checkNameQuality("method", name, tree, M3NameQuality.methodIssue(name));
+                    checkNameQuality("method", name, tree, NameQuality.methodIssue(name));
                 }
             }
             tree.getTypeParameters().forEach(this::typeParameter);
