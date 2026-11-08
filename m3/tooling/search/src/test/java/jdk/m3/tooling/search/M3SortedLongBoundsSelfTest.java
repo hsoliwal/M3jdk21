@@ -42,6 +42,11 @@ public final class M3SortedLongBoundsSelfTest {
         directionalFingerCases();
         boundedDuplicateRuns();
         multipleNativeSourceWindows();
+        wholeSlicePrefetchBoundaries();
+        orderedNativeMergeAndLateDescent();
+        largeSourceWindowedOrderedMerge();
+        nonAdjacentRepeatedKeys();
+        setAssociativeMemoCollisions();
         concurrentReaders();
         System.out.println("M3_SORTED_LONG_BOUNDS_TEST\tchecks=" + checks
                 + "\tjava=PASS\tnative_jni=PASS\tproduct_m3jdk=HOLD");
@@ -287,6 +292,192 @@ public final class M3SortedLongBoundsSelfTest {
                     }
                 }
                 compare(sorted, from, to, queries);
+            }
+        }
+    }
+
+    /**
+     * Covers the source copy threshold, short-query fallback, and offset-indexed whole-slice copy.
+     * The independent linear oracle decides correctness, not the candidate's binary-search code.
+     */
+    private static void wholeSlicePrefetchBoundaries() {
+        int[] sizes = {0, 1, 255, 256, 257, 1023, 1024, 1025, 2049};
+        int[] queryCounts = {0, 1, 127, 128, 129, 255, 256, 257, 513};
+        for (int size : sizes) {
+            long[] source = new long[size];
+            for (int i = 0; i < size; i++) {
+                source[i] = i / 3L - size / 4L;
+            }
+            if (size > 0) {
+                source[0] = Long.MIN_VALUE;
+                source[size - 1] = Long.MAX_VALUE;
+            }
+            int[] offsets = {0, Math.min(size, 1), size / 3, size / 2};
+            for (int from : offsets) {
+                int to = size > from + 1 ? size - 1 : size;
+                for (int count : queryCounts) {
+                    long[] keys = new long[count];
+                    for (int i = 0; i < count; i++) {
+                        keys[i] = switch (i % 7) {
+                            case 0 -> Long.MIN_VALUE;
+                            case 1 -> Long.MAX_VALUE;
+                            case 2 -> -1L;
+                            case 3 -> 0L;
+                            case 4 -> 1L;
+                            default -> to > from ? source[from + (int)((i * 127L + 11L) % (to - from))] : 0L;
+                        };
+                    }
+                    compare(source, from, to, keys);
+                    reverse(keys);
+                    compare(source, from, to, keys);
+                }
+            }
+        }
+    }
+
+    /** Proves ordered-prefix admission and correct irreversible fallback after a late descent. */
+    private static void orderedNativeMergeAndLateDescent() {
+        int[] sizes = {0, 1, 127, 255, 256, 257, 1023, 1024, 1025, 2049};
+        int[] queryCounts = {127, 128, 129, 255, 256, 257, 513, 1025};
+        for (int size : sizes) {
+            long[] sorted = new long[size];
+            for (int i = 0; i < size; i++) {
+                sorted[i] = i / 4L - size / 5L;
+            }
+            if (size > 0) {
+                sorted[0] = Long.MIN_VALUE;
+                sorted[size - 1] = Long.MAX_VALUE;
+            }
+            for (int from : new int[]{0, Math.min(11, size)}) {
+                int to = size > from + 3 ? size - 3 : size;
+                for (int queryCount : queryCounts) {
+                    long[] ordered = new long[queryCount];
+                    for (int i = 0; i < queryCount; i++) {
+                        ordered[i] = i / 3L - 160;
+                    }
+                    compare(sorted, from, to, ordered);
+                    long[] lateDrop = ordered.clone();
+                    for (int i = 256; i < lateDrop.length; i++) {
+                        lateDrop[i] = (i % 3 == 0) ? Long.MAX_VALUE :
+                                ((i % 3 == 1) ? Long.MIN_VALUE : 0L);
+                    }
+                    compare(sorted, from, to, lateDrop);
+                    reverse(lateDrop);
+                    compare(sorted, from, to, lateDrop);
+                }
+            }
+        }
+    }
+
+    /**
+     * Crosses the 1,024-value prefetch cap and proves streaming merge, its
+     * density refusal, late-descent fallback, and 8,192-value source ceiling.
+     */
+    private static void largeSourceWindowedOrderedMerge() {
+        int[][] domains = {
+                {1_025, 257}, {2_048, 513}, {4_096, 1_024}, {8_192, 2_048},
+                {8_193, 2_048}, {4_096, 127}, {4_096, 255}, {4_096, 4_096}
+        };
+        for (int[] domain : domains) {
+            int size = domain[0];
+            int queryCount = domain[1];
+            long[] sorted = new long[size];
+            for (int i = 0; i < size; i++) {
+                sorted[i] = i / 3L - size / 5L;
+            }
+            sorted[0] = Long.MIN_VALUE;
+            sorted[size - 1] = Long.MAX_VALUE;
+            long[] keys = new long[queryCount];
+            for (int i = 0; i < keys.length; i++) {
+                keys[i] = ((long) i * (size / 3L + 17L)) / queryCount - size / 5L;
+            }
+            compare(sorted, 0, size, keys);
+            if (size <= 4_096) {
+                compare(sorted, 113, size - 17, keys);
+            }
+            if (queryCount >= 513) {
+                long[] late = keys.clone();
+                for (int i = 257; i < late.length; i++) {
+                    late[i] = i % 2 == 0 ? Long.MIN_VALUE : Long.MAX_VALUE;
+                }
+                compare(sorted, 0, size, late);
+            }
+            if (size <= 4_096) {
+                long[] reversed = keys.clone();
+                reverse(reversed);
+                compare(sorted, 0, size, reversed);
+                Arrays.fill(reversed, 0L);
+                compare(sorted, 113, size - 17, reversed);
+            }
+        }
+    }
+
+    /**
+     * Independent linear oracle for native exact-key memo hits, direct-map
+     * collisions, 256-query windows, signed extremes and nonzero source offsets.
+     */
+    private static void nonAdjacentRepeatedKeys() {
+        for (int size : new int[]{1_024, 1_025, 4_096, 8_192, 8_193}) {
+            long[] sorted = new long[size];
+            for (int i = 0; i < sorted.length; i++) {
+                sorted[i] = i / 4L - size / 7L;
+            }
+            sorted[0] = Long.MIN_VALUE;
+            sorted[size - 1] = Long.MAX_VALUE;
+            for (int ring : new int[]{3, 7, 31, 63, 65}) {
+                for (int count : new int[]{127, 255, 256, 257, 513}) {
+                    long[] queries = new long[count];
+                    for (int i = 0; i < count; i++) {
+                        queries[i] = switch (i % 13) {
+                            case 0 -> Long.MIN_VALUE;
+                            case 1 -> Long.MAX_VALUE;
+                            case 2 -> -9_000_000_000_000L;
+                            case 3 -> 9_000_000_000_000L;
+                            default -> ((long)(i % ring) * 37L) - 581L;
+                        };
+                    }
+                    compare(sorted, 0, size, queries);
+                    compare(sorted, 117, size - 61, queries);
+                }
+            }
+            // A 7-key repeated first region admits the memo, followed by more
+            // than 64 distinct keys: direct-cache slot collisions are unavoidable.
+            long[] evicting = new long[513];
+            for (int i = 0; i < evicting.length; i++) {
+                evicting[i] = i < 64 ? ((i % 7) * 41L - 123L)
+                        : (((i * 17L) % 129L) * 41L - 123L);
+            }
+            compare(sorted, 0, size, evicting);
+            reverse(evicting);
+            compare(sorted, 13, size - 7, evicting);
+        }
+    }
+
+    /** Four signed-long keys deliberately sharing the previous 64-slot index. */
+    private static void setAssociativeMemoCollisions() {
+        long[] sameFormerSlot = {0L, 34L, 89L, 178L, 233L, 267L, 322L, 411L, 466L};
+        for (int size : new int[]{1_025, 4_096, 8_192, 8_193}) {
+            long[] source = new long[size];
+            for (int i = 0; i < size; i++) {
+                source[i] = i / 4L - size / 7L;
+            }
+            source[0] = Long.MIN_VALUE;
+            source[size - 1] = Long.MAX_VALUE;
+            for (int width : new int[]{2, 3, 4, 5, 8, 9}) {
+                for (int count : new int[]{127, 128, 255, 256, 257, 513, 1_025}) {
+                    long[] keys = new long[count];
+                    for (int i = 0; i < keys.length; i++) {
+                        keys[i] = sameFormerSlot[i % width];
+                    }
+                    compare(source, 0, source.length, keys);
+                    compare(source, 111, source.length - 17, keys);
+                    if (keys.length > 3) {
+                        keys[1] = Long.MIN_VALUE;
+                        keys[3] = Long.MAX_VALUE;
+                    }
+                    compare(source, 0, source.length, keys);
+                    compare(source, 117, 117, keys);
+                }
             }
         }
     }
