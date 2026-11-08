@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""FOLD_MEMBERS v1.7: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
+"""FOLD_MEMBERS v1.8: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
 
 usage: fold_members.py <repo root> <map.tsv> [--check]
 The map (tab separated; '#' comments) declares everything, the tool does nothing undeclared:
@@ -30,7 +30,8 @@ The map (tab separated; '#' comments) declares everything, the tool does nothing
                                                               inside the folded bodies of that donor follows (private helpers
                                                               whose signature the owner already declares with another body)
 Folded bodies are copied byte for byte from the donor file (Javadoc and annotations included), one //FLLDCIM: FOLD
-anchor per member names the donor blob; identical private helpers fold once; members the owner already declares (same
+anchor per member names the donor blob and member (`//FLLDCIM: FOLD <blob12> <Donor.member>`, within the
+100-column M3JdkStandard; the map path lives in the recipe directory); identical private helpers fold once; members the owner already declares (same
 name and parameter types, same normalized body) are PRESENT and skipped; a same-signature member with a different body is a CONFLICT and the run is refused unless the map declares SKIP or an EDIT. Idempotent: a second run changes nothing; --check writes nothing and
 exits 1 when a run would change a file. Refuses (exit 2) an EDIT whose old text does not match its pin exactly once."""
 from __future__ import annotations
@@ -251,8 +252,8 @@ def main() -> int:
                 continue
             seen[digest] = key
             present[(name, selector)] = digest
-            anchor = (f"    //FLLDCIM: FOLD - member {key} from donor blob {blob[:12]} ({donor_rel}); recipe "
-                      f"m3/tooling/jdk-naming/fold_members.py v1, map {MAP.relative_to(ROOT).as_posix()}\n").encode()
+            anchor = f"    //FLLDCIM: FOLD {blob[:12]} {key}
+".encode()  # <= 100 columns; map path lives in the recipe
             folded.append(anchor + body + (b"" if body.endswith(b"\n") else b"\n"))
             table.append((key, selector, "FOLD" if name == member["name"] else "FOLD as " + name))
     if conflicts:
@@ -301,7 +302,7 @@ def main() -> int:
         print("MEMBER\t" + "\t".join("" if c is None else str(c) for c in row))
     for c in changed:
         print("CHANGED\t" + c)
-    print(f"FOLD_MEMBERS v1.7 owner={m['OWNER']} folded={sum(1 for r in table if r[2].startswith('FOLD'))} changed={len(changed)} check={CHECK}")
+    print(f"FOLD_MEMBERS v1.8 owner={m['OWNER']} folded={sum(1 for r in table if r[2].startswith('FOLD'))} changed={len(changed)} check={CHECK}")
     return 1 if CHECK and changed else 0
 
 
