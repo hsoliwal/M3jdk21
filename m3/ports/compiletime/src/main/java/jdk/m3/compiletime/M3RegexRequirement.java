@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.compiletime;
 
-import jdk.m3.precompute.M3RegexShape;
+import jdk.m3.precompute.RegexShape;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -137,8 +137,8 @@ public final class M3RegexRequirement {
         if ((compiled.flags() & widening) != 0 || !nodes.singleCharThenAccept(matchRoot)) {
             return null;
         }
-        M3RegexShape shape = M3RegexShape.analyze(compiled.pattern());
-        if (shape.kind() != M3RegexShape.Kind.LITERAL || shape.literal().length() != 1
+        RegexShape shape = RegexShape.analyze(compiled.pattern());
+        if (shape.kind() != RegexShape.Kind.LITERAL || shape.literal().length() != 1
                 || hasSurrogate(shape.literal()) || !compiled.matcher(shape.literal()).matches()) {
             return null;
         }
