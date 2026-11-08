@@ -4,9 +4,9 @@ package jdk.m3.compiler.signals;
 import org.junit.jupiter.api.Test;
 
 /** Original M3JDK 21 Java21 javac module JUnit receiver for method-level facts. */
-final class M3MethodSignalsJUnitTest {
+final class MethodSignalsJUnitTest {
     @Test
     void attributedMethodSignalsAreDeterministicAndSourceSealed() throws Exception {
-        M3MethodSignalsSelfTest.main(new String[0]);
+        MethodSignalsSelfTest.main(new String[0]);
     }
 }

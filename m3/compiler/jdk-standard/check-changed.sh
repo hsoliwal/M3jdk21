@@ -25,4 +25,4 @@ args=(--root "$root" --base "$base" --head "$head" --report "$report")
 if [[ -n "$scheme" ]]; then
   args+=("$scheme")
 fi
-java -cp "$work/classes" jdk.m3.compiler.standard.M3ChangedNameGate "${args[@]}"
+java -cp "$work/classes" jdk.m3.compiler.standard.ChangedNameGate "${args[@]}"

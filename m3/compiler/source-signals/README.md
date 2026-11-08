@@ -60,8 +60,8 @@ classes or creates a second annotation type. There is no required runtime depend
 
 ## Tests and acceptance
 
-`M3SourceSignalPluginJUnitTest` runs the same focused harness through Maven/JUnit.
-`M3SourceSignalPluginSelfTest` invokes a *real* Java 21 `JavaCompiler` + ServiceLoader, covering
+`SourceSignalPluginJUnitTest` runs the same focused harness through Maven/JUnit.
+`SourceSignalPluginSelfTest` invokes a *real* Java 21 `JavaCompiler` + ServiceLoader, covering
 attributed static/virtual/constructor edges, annotated-only selection, source argument ordering,
 field/method declaration permutations, source mutation invalidation, SHA-256 trailer, and invalid
 option rejection. These are focused tests, not JDK image/jtreg/JCK parity or full compiler tests.

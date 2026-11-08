@@ -52,7 +52,7 @@ jobs:
           set -euo pipefail
           out="$RUNNER_TEMP/m3-compiler-image"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/plugin" \
-            m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3SourceSignalPlugin.java
+            m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/SourceSignalPlugin.java
           cp m3/compiler/source-signals/src/main/resources/META-INF/services/com.sun.source.util.Plugin \
             "$out/plugin/META-INF/services/com.sun.source.util.Plugin"
           mkdir -p "$out/demo"

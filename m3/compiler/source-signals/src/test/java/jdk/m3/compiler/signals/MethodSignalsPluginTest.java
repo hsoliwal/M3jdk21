@@ -23,7 +23,7 @@ import javax.tools.ToolProvider;
 import org.junit.jupiter.api.Test;
 
 /** Use the already-registered original javac Plugin ServiceLoader and compare both artifacts. */
-final class M3MethodSignalsPluginTest {
+final class MethodSignalsPluginTest {
     private static final String SOURCE = """
             package sample;
             class Alpha {
@@ -75,7 +75,7 @@ final class M3MethodSignalsPluginTest {
         Files.createDirectories(classes);
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         var diagnostics = new DiagnosticCollector<JavaFileObject>();
-        Path plugin = Path.of(M3SourceSignalPlugin.class.getProtectionDomain()
+        Path plugin = Path.of(SourceSignalPlugin.class.getProtectionDomain()
                 .getCodeSource().getLocation().toURI());
         try (var fm = compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8)) {
             String option = "-Xplugin:M3SourceSignals out=" + type

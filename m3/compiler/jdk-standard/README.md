@@ -31,14 +31,14 @@ Findings are compiler errors tagged `[M3JdkStandard RULE] line L:C message` (or 
 
 `verify.sh` builds the plugin with plain javac (`-Xlint:all -Werror`), compiles the plugin's own
 sources again with the plugin and `-Xdoclint:all/protected` (it meets the standard it enforces),
-and runs `M3JdkStandardPluginSelfTest`. The clean fixture must have no finding. Independent
+and runs `JdkStandardPluginSelfTest`. The clean fixture must have no finding. Independent
 convention and semantic-quality fixtures must break all 12 rules exactly as expected (25 findings).
 Discriminators prove that `arg` and `argument` pass while `arg0` is refused, inherited overrides
 retain their contract, and concise domain names pass while placeholders, promotional terms,
 versions, dates, repeated words and excessive names fail without confusing `Hyperlink` or `IPv6`
 for policy terms. The opt-in scheme fixture adds exactly three `NAME_SCHEME` findings for legacy
 Synexia ownership and none for valid M3 names. Maven runs the same test through
-`M3JdkStandardPluginJUnitTest`.
+`JdkStandardPluginJUnitTest`.
 
 ## Repository integration
 

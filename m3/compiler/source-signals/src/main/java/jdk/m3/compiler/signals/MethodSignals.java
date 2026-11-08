@@ -51,7 +51,7 @@ import javax.lang.model.element.Modifier;
  * call counts, exact dynamic-dispatch targets, a purity/escape proof or JIT profiling evidence.
  * The original S/T/E image remains byte-for-byte unchanged when methodOut is not supplied.
  */
-final class M3MethodSignals {
+final class MethodSignals {
     static final String SCHEMA = "M3JDK21-METHOD-SIGNALS/1";
     private static final int MAX_METHODS = 1_000_000;
     private static final int MAX_CALL_SHAPES = 2_000_000;
@@ -62,7 +62,7 @@ final class M3MethodSignals {
     private final TreeMap<String, MethodFacts> methods = new TreeMap<>();
     private int callShapes;
 
-    M3MethodSignals(Trees trees, Path output,
+    MethodSignals(Trees trees, Path output,
                     Function<ExecutableElement, String> signature) {
         this.trees = Objects.requireNonNull(trees, "trees");
         this.output = Objects.requireNonNull(output, "output");

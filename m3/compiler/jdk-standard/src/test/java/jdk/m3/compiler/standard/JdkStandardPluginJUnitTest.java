@@ -5,11 +5,11 @@ package jdk.m3.compiler.standard;
 import org.junit.jupiter.api.Test;
 
 /** Maven/JUnit entry point invoking the real javac and changed-source self-tests. */
-class M3JdkStandardPluginJUnitTest {
+class JdkStandardPluginJUnitTest {
     @Test
     void verifiesAllFixtures() throws Exception {
-        M3JdkStandardPluginSelfTest.main(new String[0]);
-        M3JdkStandardCensusSelfTest.main(new String[0]);
-        M3ChangedNameGateSelfTest.main(new String[0]);
+        JdkStandardPluginSelfTest.main(new String[0]);
+        JdkStandardCensusSelfTest.main(new String[0]);
+        ChangedNameGateSelfTest.main(new String[0]);
     }
 }

@@ -23,4 +23,4 @@ args=(--root "$root" --report "$report")
 if [[ -n "$scheme" ]]; then
   args+=("$scheme")
 fi
-java -cp "$work/classes" jdk.m3.compiler.standard.M3JdkStandardCensus "${args[@]}"
+java -cp "$work/classes" jdk.m3.compiler.standard.JdkStandardCensus "${args[@]}"

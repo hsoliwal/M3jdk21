@@ -23,9 +23,9 @@ import javax.tools.SimpleJavaFileObject;
 import javax.tools.ToolProvider;
 
 /** Deterministic actual javac ANALYZE oracle; source strings/comments are never calls. */
-public final class M3MethodSignalsSelfTest {
+public final class MethodSignalsSelfTest {
     private static long checks;
-    private M3MethodSignalsSelfTest() { }
+    private MethodSignalsSelfTest() { }
     public static void main(String[] args) throws Exception {
         Path root = Files.createTempDirectory("m3-method-signals-");
         try {
@@ -53,7 +53,7 @@ public final class M3MethodSignalsSelfTest {
                 String s=scan(sample(random.nextBoolean()?1:2), root.resolve("r"+round+".tsv"));
                 check(s.equals(first), "fixed source forms must converge");
             }
-            System.out.println("PASS M3MethodSignalsSelfTest checks="+checks);
+            System.out.println("PASS MethodSignalsSelfTest checks="+checks);
         } finally {
             try(var files=Files.walk(root)){
                 files.sorted(java.util.Comparator.reverseOrder()).forEach(p->{
@@ -82,7 +82,7 @@ public final class M3MethodSignalsSelfTest {
             Objects.requireNonNull(owner);
             TreePath path=trees.getPath(owner);
             Objects.requireNonNull(path);
-            M3MethodSignals signals=new M3MethodSignals(trees,target,M3MethodSignalsSelfTest::signature);
+            MethodSignals signals=new MethodSignals(trees,target,MethodSignalsSelfTest::signature);
             signals.collect(path);signals.publish();
         }
         return Files.readString(target);
