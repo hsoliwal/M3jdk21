@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 //FLLDCIM: ORACLE - M3JDK-authored reference oracle of recipe/algorithm-extras-20261106 (the donor catalogue has no tests)
 /**
- * Reference oracle of the relocated graph members (PrimitiveGraphAlgorithms) and string
+ * Reference oracle of the relocated graph members (GraphAlgorithms) and string
  * members (StringAlgorithms) against brute force on small instances:
  * Bellman-Ford over BigInteger, exhaustive 2-colouring, Prim per component, sorted suffix lists, quadratic windows.
  */
@@ -84,9 +84,9 @@ class GraphStringReferenceTest {
                 weights[k] = random.nextInt(2);
             }
             int source = random.nextInt(n);
-            PrimitiveGraphAlgorithms.WeightedCsrGraph graph = random.nextBoolean()
-                    ? PrimitiveGraphAlgorithms.WeightedCsrGraph.directed(n, e[0], e[1], weights)
-                    : PrimitiveGraphAlgorithms.WeightedCsrGraph.undirected(n, e[0], e[1], weights);
+            GraphAlgorithms.WeightedCsrGraph graph = random.nextBoolean()
+                    ? GraphAlgorithms.WeightedCsrGraph.directed(n, e[0], e[1], weights)
+                    : GraphAlgorithms.WeightedCsrGraph.undirected(n, e[0], e[1], weights);
             int[] offsets = graph.offsets();
             int[] targets = graph.edges();
             long[] csrWeights = graph.weights();
@@ -97,7 +97,7 @@ class GraphStringReferenceTest {
                 }
             }
             assertArrayEquals(expectedDistances(bellmanFord(n, from, targets, csrWeights, source)),
-                    PrimitiveGraphAlgorithms.zeroOneBfs(graph, source), "case " + i);
+                    GraphAlgorithms.zeroOneBfs(graph, source), "case " + i);
         }
         report("graph", "zeroOneBfs", GRAPH_CASES, GRAPH_CASES);
         long negativeCycles = 0;
@@ -110,13 +110,13 @@ class GraphStringReferenceTest {
             }
             int source = random.nextInt(n);
             BigInteger[] exact = bellmanFord(n, e[0], e[1], weights, source);
-            PrimitiveGraphAlgorithms.EdgeList list = new PrimitiveGraphAlgorithms.EdgeList(n, e[0], e[1], weights);
+            GraphAlgorithms.EdgeList list = new GraphAlgorithms.EdgeList(n, e[0], e[1], weights);
             if (exact == null) {
                 negativeCycles++;
-                assertThrows(IllegalArgumentException.class, () -> PrimitiveGraphAlgorithms.bellmanFord(list,
+                assertThrows(IllegalArgumentException.class, () -> GraphAlgorithms.bellmanFord(list,
                         source), "case " + i);
             } else {
-                assertArrayEquals(expectedDistances(exact), PrimitiveGraphAlgorithms.bellmanFord(list, source),
+                assertArrayEquals(expectedDistances(exact), GraphAlgorithms.bellmanFord(list, source),
                         "case " + i);
             }
         }
@@ -189,11 +189,11 @@ class GraphStringReferenceTest {
                 weights[k] = random.nextInt(-50, 51);
             }
             int c = components(n, e[0], e[1]);
-            assertEquals(c, PrimitiveGraphAlgorithms.unionFindComponents(n, e[0], e[1]), "case " + i);
-            assertEquals(c, PrimitiveGraphAlgorithms.connectedComponents(
-                    PrimitiveGraphAlgorithms.CsrGraph.undirected(n, e[0], e[1])), "case " + i);
-            assertEquals(e[0].length > n - c, PrimitiveGraphAlgorithms.hasUndirectedCycle(n, e[0], e[1]));
-            PrimitiveGraphAlgorithms.MstResult mst = PrimitiveGraphAlgorithms.kruskalMst(n, e[0], e[1], weights);
+            assertEquals(c, GraphAlgorithms.unionFindComponents(n, e[0], e[1]), "case " + i);
+            assertEquals(c, GraphAlgorithms.connectedComponents(
+                    GraphAlgorithms.CsrGraph.undirected(n, e[0], e[1])), "case " + i);
+            assertEquals(e[0].length > n - c, GraphAlgorithms.hasUndirectedCycle(n, e[0], e[1]));
+            GraphAlgorithms.MstResult mst = GraphAlgorithms.kruskalMst(n, e[0], e[1], weights);
             assertEquals(primForest(n, e[0], e[1], weights), mst.totalWeight(), "case " + i);
             assertEquals(n - c, mst.edgesUsed());
             assertEquals(n <= 1 || c == 1, mst.connected());
@@ -216,17 +216,17 @@ class GraphStringReferenceTest {
                 }
                 expected = ok;
             }
-            assertEquals(expected || n == 0, PrimitiveGraphAlgorithms.isBipartite(
-                    PrimitiveGraphAlgorithms.CsrGraph.undirected(n, e[0], e[1])), "case " + i);
+            assertEquals(expected || n == 0, GraphAlgorithms.isBipartite(
+                    GraphAlgorithms.CsrGraph.undirected(n, e[0], e[1])), "case " + i);
         }
         report("graph", "isBipartite", GRAPH_CASES, GRAPH_CASES);
         long canonicalDifferences = 0;
         for (int i = 0; i < GRAPH_CASES; i++) {
             int n = random.nextInt(1, 12);
             int[][] e = randomEdges(random, n, 24);
-            PrimitiveGraphAlgorithms.CsrGraph graph = PrimitiveGraphAlgorithms.CsrGraph.directed(n, e[0], e[1]);
+            GraphAlgorithms.CsrGraph graph = GraphAlgorithms.CsrGraph.directed(n, e[0], e[1]);
             int source = random.nextInt(n);
-            int[] order = PrimitiveGraphAlgorithms.dfsPreorder(graph, source);
+            int[] order = GraphAlgorithms.dfsPreorder(graph, source);
             List<Integer> recursive = new ArrayList<>();
             dfs(graph.offsets(), graph.edges(), source, new boolean[n], recursive);
             assertEquals(source, order[0]);
