@@ -6,11 +6,11 @@
 #include <jni.h>
 #include <stddef.h>
 #include <stdint.h>
-#include "jdk_m3_jni_M3JniByteConcat.h"
+#include "jdk_m3_jni_JniByteConcat.h"
 
 /* No native ownership, global JNI references, retained Java array pointers or off-heap state. */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_jni_M3NativeLeaseScan_collectNative(
+Java_jdk_m3_jni_NativeLeaseScan_collectNative(
         JNIEnv *env, jclass type, jlongArray idsArray, jintArray leasesArray,
         jintArray pinsArray, jbyteArray statesArray, jint count, jlongArray outputArray) {
     (void)type;
@@ -92,7 +92,7 @@ static jlong m3_invalid_window(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_jni_M3NativeLeaseScan_collectNativeWindow(
+Java_jdk_m3_jni_NativeLeaseScan_collectNativeWindow(
         JNIEnv *env, jclass type, jlongArray idsArray, jintArray leasesArray,
         jintArray pinsArray, jbyteArray statesArray, jint count, jint first,
         jlongArray outputArray) {
@@ -198,7 +198,7 @@ static jboolean m3_concat_copy_region(JNIEnv *env, jbyteArray source,
 }
 
 JNIEXPORT jbyteArray JNICALL
-Java_jdk_m3_jni_M3JniByteConcat_concatNative(
+Java_jdk_m3_jni_JniByteConcat_concatNative(
         JNIEnv *env, jclass type, jbyteArray left, jbyteArray right) {
     (void)type;
     if (left == NULL || right == NULL) {

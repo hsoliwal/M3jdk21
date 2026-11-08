@@ -1,0 +1,6 @@
+file	before	after	reason
+m3/optane/src/test/java/jdk/internal/m3/optane/PmemGramIndexReplayTest.java	"jdk.internal.m3.optane", "M3", OPERATIONS	"jdk.internal.m3.optane", "", OPERATIONS	the replay dump composes class names as package + prefix + name; the relocated types no longer carry M3 (as #2828 precompute)
+m3/optane/src/test/java/jdk/m3/optane/PmemFileReplayTest.java	replay("jdk.m3.optane", "M3", "jdk.m3.optane"	replay("jdk.m3.optane", "", "jdk.m3.optane"	the replay dump composes class names as package + prefix + name; the relocated types no longer carry M3 (as #2828 precompute)
+m3/optane/src/test/java/jdk/m3/optane/PmemSourceImageReplayTest.java	replay("jdk.m3.optane", "M3", OPERATIONS	replay("jdk.m3.optane", "", OPERATIONS	the replay dump composes class names as package + prefix + name; the relocated types no longer carry M3 (as #2828 precompute)
+m3/optane/src/test/java/jdk/m3/optane/PmemTaskLogReplayTest.java	replay("jdk.m3.optane", "M3", OPERATIONS	replay("jdk.m3.optane", "", OPERATIONS	the replay dump composes class names as package + prefix + name; the relocated types no longer carry M3 (as #2828 precompute)
+4 dump Javadocs (PmemGramIndexDump, PmemDump, PmemSourceImageDump, PmemTaskLogDump)	type prefix "M3"	type prefix ""	the comment follows the call

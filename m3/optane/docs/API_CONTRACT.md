@@ -12,28 +12,28 @@ It is a module of M3JDK 21 (m3/optane, Maven com.m3:m3-optane; verify.sh builds 
 import jdk.m3.optane.*;
 import java.nio.file.Path;
 
-try (M3PmemRegion model = M3PmemSdk.open(Path.of("/pmem/models/weights.bin"),
-        0, 8192, M3PmemAccess.READ_ONLY, M3PmemBackend.AUTO)) {
+try (PmemRegion model = PmemSdk.open(Path.of("/pmem/models/weights.bin"),
+        0, 8192, PmemAccess.READ_ONLY, PmemBackend.AUTO)) {
     byte[] header = new byte[32];
     model.read(0, header, 0, header.length);
 }
 ```
 
-`M3PmemSdk.capabilities()` returns JNI library loadability, whether the local JNI binary was built with libpmem2 support, and OS page size; it **does not** certify real Optane, namespace or DAX support.
+`PmemSdk.capabilities()` returns JNI library loadability, whether the local JNI binary was built with libpmem2 support, and OS page size; it **does not** certify real Optane, namespace or DAX support.
 
-`M3PmemSdk.open()` only accepts an **already existing regular file**, a nonnegative 64-bit offset, positive mapping length and a mapping range contained in that file. It deliberately does not provision PMem namespaces or silently grow files. A symlink in the final component is rejected: native backends use `O_NOFOLLOW`; FILE uses no-follow basic attributes and opens its channel with `LinkOption.NOFOLLOW_LINKS`. A writable mapping requires write permission. Files must not be truncated while mapped; external truncation can cause SIGBUS.
+`PmemSdk.open()` only accepts an **already existing regular file**, a nonnegative 64-bit offset, positive mapping length and a mapping range contained in that file. It deliberately does not provision PMem namespaces or silently grow files. A symlink in the final component is rejected: native backends use `O_NOFOLLOW`; FILE uses no-follow basic attributes and opens its channel with `LinkOption.NOFOLLOW_LINKS`. A writable mapping requires write permission. Files must not be truncated while mapped; external truncation can cause SIGBUS.
 
 | API | Contract |
 | --- | --- |
-| `M3PmemSdk.open(Path,long,long,M3PmemAccess,M3PmemBackend)` | Open a range; backend selected at runtime |
-| `M3PmemSdk.capabilities()` | Probe build/runtime capabilities, not hardware certification |
-| `M3PmemRegion.read(long,byte[],int,int)` | Bounds-checked copy from mapping; no pointer escape |
-| `M3PmemRegion.write(long,byte[],int,int)` | Bounds-checked write on read/write mapping |
-| `M3PmemRegion.persist(long,long)` | Synchronous flush of a range; not atomic |
-| `M3PmemRegion.close()` | Wait for in-flight SDK calls; idempotent |
-| `M3PmemRegion.backend()` | Actual selected backend: POSIX, PMDK or explicit FILE |
-| `M3PmemRegion.persistenceGranularity()` | BYTE, CACHE_LINE or PAGE; not transaction atomicity |
-| `M3PmemRegion.length()`, `fileOffset()`, `isOpen()` | 64-bit mapping metadata and state |
+| `PmemSdk.open(Path,long,long,PmemAccess,PmemBackend)` | Open a range; backend selected at runtime |
+| `PmemSdk.capabilities()` | Probe build/runtime capabilities, not hardware certification |
+| `PmemRegion.read(long,byte[],int,int)` | Bounds-checked copy from mapping; no pointer escape |
+| `PmemRegion.write(long,byte[],int,int)` | Bounds-checked write on read/write mapping |
+| `PmemRegion.persist(long,long)` | Synchronous flush of a range; not atomic |
+| `PmemRegion.close()` | Wait for in-flight SDK calls; idempotent |
+| `PmemRegion.backend()` | Actual selected backend: POSIX, PMDK or explicit FILE |
+| `PmemRegion.persistenceGranularity()` | BYTE, CACHE_LINE or PAGE; not transaction atomicity |
+| `PmemRegion.length()`, `fileOffset()`, `isOpen()` | 64-bit mapping metadata and state |
 
 ## Backends / actual meaning
 
@@ -55,11 +55,11 @@ try (M3PmemRegion model = M3PmemSdk.open(Path.of("/pmem/models/weights.bin"),
 ## v0.2 additive mapped-region transfer
 
 ```java
-try (M3PmemRegion weights = M3PmemSdk.open(sourcePath, 0, 8192, M3PmemAccess.READ_ONLY, M3PmemBackend.AUTO);
-     M3PmemRegion staging = M3PmemSdk.open(stagePath, 0, 8192, M3PmemAccess.READ_WRITE, M3PmemBackend.AUTO)) {
-    M3PmemTransfer.copy(weights, 128, staging, 256, 4096);
+try (PmemRegion weights = PmemSdk.open(sourcePath, 0, 8192, PmemAccess.READ_ONLY, PmemBackend.AUTO);
+     PmemRegion staging = PmemSdk.open(stagePath, 0, 8192, PmemAccess.READ_WRITE, PmemBackend.AUTO)) {
+    PmemTransfer.copy(weights, 128, staging, 256, 4096);
     staging.persist(256, 4096); // persistence is separate from copy
-    boolean same = M3PmemTransfer.equalRange(weights, 128, staging, 256, 4096);
+    boolean same = PmemTransfer.equalRange(weights, 128, staging, 256, 4096);
 }
 ```
 

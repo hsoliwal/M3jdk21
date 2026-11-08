@@ -5,7 +5,7 @@
 
 ## Ownership
 
-M3PmemSourceSlices is a primitive-offset adapter to an **already packed**, immutable
+PmemSourceSlices is a primitive-offset adapter to an **already packed**, immutable
 M3File-owned source image. It does not enumerate repositories, generate the
 image, own paths, infer missing source, parse ASTs, collect Maven quality findings,
 control Chrome/MLLM sessions, or promote source changes. M3File retains the
@@ -13,7 +13,7 @@ snapshot/lease until the single-file model work order has completed.
 
 ## Geometry and admission
 
-* One SDK-owned M3PmemRegion mapping, opened READ_ONLY; long[] offsets,
+* One SDK-owned PmemRegion mapping, opened READ_ONLY; long[] offsets,
   int[] byte lengths and 32 digest bytes per entry. Arrays are copied and
   checked for monotonic nonoverlapping spans, overflow and mapping bounds.
 * File-level SHA-256 covers **the exact bytes returned to the caller**, not
@@ -35,7 +35,7 @@ uses about 160 KB (long[] offsets) + 80 KB (int[] lengths) + 640 KB
 M3File's canonical path/AST/quality indices. Mapped pages are demand-paged;
 **a 1GB mapping does not prove 1GB physically resident RAM**.
 
-M3PmemSourceSlices.readSealed(i) makes one bounded file byte array, validates
+PmemSourceSlices.readSealed(i) makes one bounded file byte array, validates
 its SHA-256 and returns it. The canonical M3Scale quality campaign then
 combines source identity, complete findings, AST/atom facts and one per-file
 LLD/recipe work order. One model call is an upper bound / workflow contract,

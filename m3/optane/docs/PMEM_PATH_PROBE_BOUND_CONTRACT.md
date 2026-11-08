@@ -4,7 +4,7 @@
 # M3 PMEM bounded-probe insertion correction — exact original helper leaf
 
 Canonical source: hsoliwal/com.synexia PR #15356 at 20de3ad8748255bd2cf1de30fd2d3deac25210e1.
-Owner: src/main/java/jdk/m3/optane/M3PmemSourcePathIndex.java (donor m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSourcePathIndex.java).
+Owner: src/main/java/jdk/m3/optane/PmemSourcePathIndex.java (donor m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSourcePathIndex.java).
 
 ## Invariant / observed defect
 The optional hash slot table promises a 16-probe bound. Existing construction checks 16 occupied slots, advances to the seventeenth slot, and can insert there; lookup never probes that seventeenth slot. Existing binary-search fallback keeps exact lookup semantics, but violates the construction/probe bound. A 17-key deliberate Java hash collision is a minimal witness.
