@@ -398,7 +398,7 @@ class ArrayTreeDpReferenceTest {
                     }
                 }
                 List<String> got = new ArrayList<>();
-                for (int[] row : PrimitiveBacktrackingAlgorithms.combinations(n, k)) {
+                for (int[] row : BacktrackingAlgorithms.combinations(n, k)) {
                     got.add(Arrays.toString(row));
                 }
                 expected.sort(null);
@@ -408,7 +408,7 @@ class ArrayTreeDpReferenceTest {
         }
         int[] queens = {1, 1, 0, 0, 2, 10, 4, 40, 92, 352, 724};
         for (int n = 0; n < queens.length; n++, cases++) {
-            assertEquals(queens[n], PrimitiveBacktrackingAlgorithms.nQueensCount(n), "queens " + n);
+            assertEquals(queens[n], BacktrackingAlgorithms.nQueensCount(n), "queens " + n);
         }
         for (int i = 0; i < 2_000; i++, cases++) {
             int[] candidates = random.ints(1, 9).limit(random.nextInt(1, 5)).toArray();
@@ -416,7 +416,7 @@ class ArrayTreeDpReferenceTest {
             Set<String> expected = new HashSet<>();
             sums(Arrays.stream(candidates).distinct().sorted().toArray(), 0, target, new ArrayList<>(), expected);
             Set<String> got = new HashSet<>();
-            for (int[] row : PrimitiveBacktrackingAlgorithms.combinationSum(candidates, target)) {
+            for (int[] row : BacktrackingAlgorithms.combinationSum(candidates, target)) {
                 got.add(Arrays.toString(row));
             }
             assertEquals(expected, got, Arrays.toString(candidates) + " " + target);
@@ -426,12 +426,12 @@ class ArrayTreeDpReferenceTest {
             boolean wellFormed = board.length == 9 && Arrays.stream(board).allMatch(row -> row.length == 9)
                     && Arrays.stream(board).allMatch(row -> new String(row).matches("[1-9.]{9}"));
             if (!wellFormed || !consistent(board)) {
-                assertThrows(IllegalArgumentException.class, () -> PrimitiveBacktrackingAlgorithms.solveSudoku(board));
+                assertThrows(IllegalArgumentException.class, () -> BacktrackingAlgorithms.solveSudoku(board));
                 continue;
             }
             char[][] clues = Arrays.stream(board).map(char[]::clone).toArray(char[][]::new);
             boolean solvable = solve(Arrays.stream(board).map(char[]::clone).toArray(char[][]::new));
-            assertEquals(solvable, PrimitiveBacktrackingAlgorithms.solveSudoku(board));
+            assertEquals(solvable, BacktrackingAlgorithms.solveSudoku(board));
             if (!solvable) {
                 continue;
             }
@@ -445,7 +445,7 @@ class ArrayTreeDpReferenceTest {
         report("backtracking", "combinations+nQueensCount+combinationSum+solveSudoku", cases, cases);
         String empty;
         try {
-            empty = "returns " + PrimitiveBacktrackingAlgorithms.combinationSum(new int[0], 5).length + " rows";
+            empty = "returns " + BacktrackingAlgorithms.combinationSum(new int[0], 5).length + " rows";
         } catch (RuntimeException e) {
             empty = "throws " + e.getClass().getSimpleName();
         }
