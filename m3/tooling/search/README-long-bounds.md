@@ -30,3 +30,78 @@ invocations. No Java method, exception, native symbol or JNI descriptor changes.
 This is an explicit opt-in native path; it is not the default Java search and is not a
 source-built M3JDK performance claim. The canonical design and host/JNI checks remain
 under Synexia `docs/M3_JNI_FOUR_WINDOW_CACHE_20261101.md`.
+
+## Adaptive whole-slice JNI prefetch (host-only candidate)
+
+The native owner is still opt-in. For query batches >=128 with a source slice
+of at most 1,024 values, the first already copied query region is sampled for
+at least eight adjacent changes among the first 32 keys. Only then does one
+`GetLongArrayRegion` copy the whole source slice into the existing 8 KiB
+stack cache, and pure native bounds use that snapshot. Low-diversity batches,
+small batches, empty slices and larger sources keep the proven four-window
+demand-cache path. No heap pin, JNI reference, public signature, exception
+order or JNI export changes. LeetCode/HackerRank/GeeksforGeeks supply only
+problem-category references. The paired host tests show workload-dependent
+gains and a small clustered regression; there is **no automatic dispatch**
+and no source-built M3JDK product admission. The Synexia-owned specification
+is `docs/M3_JNI_SMALL_SLICE_PREFETCH_20261101.md`.
+
+## Ordered native merge over a fully prefetched source slice (2026-11-01)
+
+The existing C17/JNI native owner now recognizes a nondecreasing first query
+chunk with eight or more strict increases, while retaining the short-sample
+variation gate. For an eligible nonempty source slice of at most 1,024 signed
+longs and at least 128 query keys, one JNI region read fills existing stack
+storage; two forward-only cursors then find lower and upper bounds in O(n+q)
+for fully nondecreasing keys. This selection is provisional: **every** later
+query is compared with the preceding value and the first descending key
+irrevocably switches the rest of the invocation to the original native binary
+search against that same cache. Unqualified inputs keep the prior four-window
+JNI fallback or cached binary path. No Java API, exception ordering, JNI
+export, allocation ownership or automatic native dispatch changes. The
+canonical specification is `docs/M3_JNI_ORDERED_MERGE_20261101.md` in Synexia.
+Source-built M3JDK and actual OpenRewrite SDK acceptance remain **NOT_RUN**.
+
+## Large-source ordered query streaming (opt-in native)
+
+The C17/JNI implementation may use a forward-only two-cursor search for
+nondecreasing query batches over 1,025..8,192 sorted signed-long values when
+there are at least 256 keys and the source span is at most four times the
+query count. Qualification examines the already-copied first 256 keys; every
+later descending key irrevocably falls back to the original binary route.
+The four fixed 256-long native windows are reused; no full-source copy,
+retained Java reference, new JNI symbol, new Java API, or automatic native
+dispatch is introduced. The Java owner and its exception/ownership behavior
+are unchanged. Product acceptance requires source-built JDK tests.
+
+## Native nonadjacent repeated-key memo (2026-11-02)
+
+For sufficiently large **unordered** long-query batches, the optional JNI
+path samples the already copied first query chunk and enables a bounded
+invocation-local, 64-slot primitive cache only when at least ten keys recur
+nonadjacently. A memo hit requires an **exact signed-long key equality**;
+hash collisions cause a miss and replacement, never incorrect bounds.
+Source pages and the 4x256 native window cache are unchanged. Adjacent-key
+reuse, monotone streaming, original binary fallback, output-array ownership,
+all Java and JNI signatures and validation/exception ordering are preserved.
+This cache is neither shared among JNI invocations nor automatically selected
+from the Java-only API. See the Synexia recipe's
+`docs/M3_JNI_NONADJACENT_REPEAT_MEMO_20261102.md`. Source-built M3JDK/JNI
+ABI, jtreg, actual OpenRewrite SDK and product benchmarks remain NOT_RUN/HOLD.
+
+## Eight-way, collision-qualified JNI memo (2026-11-02)
+
+The prior direct-mapped 64-entry native memo remains the default for unordered
+repetition. A bounded classifier now enables an eight-way set-associative
+layout **without increasing the 64-entry primitive cache** only when its first
+64 query keys prove a former slot collision and each proposed set has <=8
+sampled distinct keys; otherwise the exact old direct-map loop remains.
+A nine-key sampled overcapacity refuses the associative path. Cache entries
+retain exact signed-long key checks, independent absolute lower/upper pairs,
+invocation-only stack state and deterministic round-robin replacement.
+See `docs/JNI_EIGHT_WAY_REPEAT_MEMO_20261102.md`,
+`validation/JNI_EIGHT_WAY_PAIRED_HOST.tsv`, the recorded rejected four-way
+trial, the source seals and regression oracle. LeetCode, HackerRank and
+GeeksforGeeks supply problem *categories only*; no third-party solutions were
+copied. Host JVM/JNI tests are not an executed Maven/OpenRewrite SDK or
+source-built M3JDK product qualification; both remain **NOT_RUN/HOLD**.
