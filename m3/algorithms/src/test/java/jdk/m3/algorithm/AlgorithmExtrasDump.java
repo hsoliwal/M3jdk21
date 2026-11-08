@@ -967,12 +967,12 @@ public final class AlgorithmExtrasDump {
             int r = random.nextInt(-1, 13);
             int c = random.nextInt(-1, 13);
             int color = random.nextInt(-2, 3);
-            return call(s(image) + " " + r + "," + c + "," + color, () -> s(PrimitiveMatrixAlgorithms.floodFill(image,
+            return call(s(image) + " " + r + "," + c + "," + color, () -> s(MatrixAlgorithms.floodFill(image,
                     r, c, color)) + " src=" + s(image));
         });
         each("shortestPathBinaryMatrix", cases, random -> {
             int[][] grid = grid(random, 1);
-            return call(s(grid), () -> "" + PrimitiveMatrixAlgorithms.shortestPathBinaryMatrix(grid));
+            return call(s(grid), () -> "" + MatrixAlgorithms.shortestPathBinaryMatrix(grid));
         });
         each("maximalSquareArea", cases, random -> {
             int[][] grid = grid(random, 1);
@@ -981,12 +981,12 @@ public final class AlgorithmExtrasDump {
                     row[c] = random.nextInt(4) == 0 ? 0 : row[c] == 0 ? 1 : row[c];
                 }
             }
-            return call(s(grid), () -> "" + PrimitiveMatrixAlgorithms.maximalSquareArea(grid));
+            return call(s(grid), () -> "" + MatrixAlgorithms.maximalSquareArea(grid));
         });
         each("deepCopy", cases / 4, random -> {
             int[][] grid = random.nextInt(20) == 0 ? new int[][] {null} : grid(random, 9);
             return call(s(grid), () -> {
-                int[][] copy = PrimitiveMatrixAlgorithms.deepCopy(grid);
+                int[][] copy = MatrixAlgorithms.deepCopy(grid);
                 return s(copy) + " shared=" + (copy.length > 0 && copy[0] == grid[0]);
             });
         });

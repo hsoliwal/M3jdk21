@@ -461,7 +461,7 @@ class ArrayTreeDpReferenceTest {
                     row[c] = random.nextInt(3) == 0 ? 1 : 0;
                 }
             }
-            assertEquals(bfs8(grid), PrimitiveMatrixAlgorithms.shortestPathBinaryMatrix(grid));
+            assertEquals(bfs8(grid), MatrixAlgorithms.shortestPathBinaryMatrix(grid));
             int best = 0;
             for (int r = 0; r < rows; r++) {
                 for (int c = 0; c < columns; c++) {
@@ -482,11 +482,11 @@ class ArrayTreeDpReferenceTest {
                     inverted[r][c] = 1 - grid[r][c];
                 }
             }
-            assertEquals(best * best, PrimitiveMatrixAlgorithms.maximalSquareArea(inverted));
+            assertEquals(best * best, MatrixAlgorithms.maximalSquareArea(inverted));
             int sr = random.nextInt(rows);
             int sc = random.nextInt(columns);
-            int[][] filled = PrimitiveMatrixAlgorithms.floodFill(grid, sr, sc, 7);
-            int[][] expected = PrimitiveMatrixAlgorithms.deepCopy(grid);
+            int[][] filled = MatrixAlgorithms.floodFill(grid, sr, sc, 7);
+            int[][] expected = MatrixAlgorithms.deepCopy(grid);
             fill(expected, sr, sc, grid[sr][sc], 7);
             assertTrue(Arrays.deepEquals(expected, filled));
         }
