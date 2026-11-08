@@ -26,12 +26,7 @@
     <module>collections</module>
     <module>intern</module>
     <module>file</module>
-    <module>compiler/lifetime-slots</module>
-    <module>compiler/nullness-facts</module>
-    <module>compiler/static-use</module>
-    <module>compiler/mat-sortable</module>
-    <module>compiler/parent-owned</module>
-    <module>compiler/reference-flow</module>
+    <module>compiler</module>
     <module>ports/collections</module>
     <module>native</module>
     <module>llm</module>

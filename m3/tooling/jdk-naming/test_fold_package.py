@@ -94,6 +94,21 @@ class FoldPackageTest(unittest.TestCase):
         self.fold()
         self.assertEqual(run(self.root, "--check").returncode, 0)
 
+    def test_other_resources_move_and_service_files_merge(self) -> None:
+        """v1.1: META-INF/services and test fixtures of A are product: they move to B, a service file by line union."""
+        svc = "src/main/resources/META-INF/services/com.sun.source.util.Plugin"
+        (self.root / "a" / svc).parent.mkdir(parents=True)
+        (self.root / "a" / svc).write_text("jdk.m3.p.Ngrams\n", encoding="utf-8")
+        (self.root / "b" / svc).parent.mkdir(parents=True)
+        (self.root / "b" / svc).write_text("jdk.m3.q.Search\n", encoding="utf-8")
+        (self.root / "a/src/test/resources/fixtures").mkdir(parents=True)
+        (self.root / "a/src/test/resources/fixtures/Sample.java").write_text("class Sample { }\n", encoding="utf-8")
+        self.fold()
+        self.assertEqual(self.read("b/" + svc), "jdk.m3.q.Search\njdk.m3.q.Ngrams\n")
+        self.assertFalse((self.root / "a" / svc).exists())
+        self.assertEqual(self.read("b/src/test/resources/fixtures/Sample.java"), "class Sample { }\n")
+        self.assertEqual(run(self.root, "--check").returncode, 0)
+
     def test_retire_moves_the_module_rest_to_evidence_and_leaves_no_root(self) -> None:
         (self.root / "pom.xml").write_text("<modules>\n    <module>a</module>\n    <module>b</module>\n</modules>\n",
                                            encoding="utf-8")
@@ -109,6 +124,21 @@ class FoldPackageTest(unittest.TestCase):
         self.assertEqual(self.read("ev/a/recipe/relocate.tsv"), TREE["a/recipe/relocate.tsv"])
         self.assertEqual(self.read("pom.xml"), "<modules>\n    <module>b</module>\n</modules>\n")
         self.assertEqual(run(self.root, "--check", "--retire-to", "ev/a", "--aggregator", "pom.xml").returncode, 0)
+
+    def test_aggregator_line_is_matched_by_the_path_relative_to_the_reactor(self) -> None:
+        """A reactor below the root names its modules by relative path (m3/pom.xml: <module>compiler/x</module>)."""
+        (self.root / "a/native/p.c").unlink()
+        mod = self.root / "m3/sub/a"
+        mod.parent.mkdir(parents=True)
+        (self.root / "a").rename(mod)
+        (self.root / "m3/pom.xml").write_text("<modules>\n    <module>sub/a</module>\n    <module>b</module>\n</modules>\n",
+                                              encoding="utf-8")
+        out = subprocess.run([sys.executable, "-I", str(TOOL), "--root", str(self.root), "--from-root", "m3/sub/a",
+                              "--from-package", "jdk.m3.p", "--to-root", "b", "--to-package", "jdk.m3.q",
+                              "--retire-to", "ev/a", "--aggregator", "m3/pom.xml"], capture_output=True, text=True)
+        self.assertEqual(out.returncode, 0, out.stdout + out.stderr)
+        self.assertEqual(self.read("m3/pom.xml"), "<modules>\n    <module>b</module>\n</modules>\n")
+        self.assertFalse((self.root / "m3/sub/a").exists())
 
 
 if __name__ == "__main__":

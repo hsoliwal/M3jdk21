@@ -236,6 +236,7 @@ class JdkNamingTest(unittest.TestCase):
             # guard files of the 2026-11-08 rows (pom_dependents #2829, rename_types v1.7)
             "test_pom_dependents.py": here / "test_pom_dependents.py",
             "test_rename_types.py": here / "test_rename_types.py",
+            "test_fold_package.py": here / "test_fold_package.py",
             "JdkNamingConformanceTest":
                 here / "conformance/src/test/java/jdk/m3/tooling/naming/JdkNamingConformanceTest.java",
         }

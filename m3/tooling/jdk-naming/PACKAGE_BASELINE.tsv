@@ -227,14 +227,9 @@ ROOT	m3/collections/recipes/sdk-guava-bimap-20261017	COPY
 ROOT	m3/collections/recipes/sdk-guava-bimap-20261017/before/m3/collections/interop	COPY
 ROOT	m3/collections/runtime	LOOSE
 ROOT	m3/collections/signal-codegen	REAL
+ROOT	m3/compiler	REAL
 ROOT	m3/compiler/jdk-standard	REAL
-ROOT	m3/compiler/lifetime-slots	REAL
-ROOT	m3/compiler/mat-sortable	REAL
-ROOT	m3/compiler/nullness-facts	REAL
-ROOT	m3/compiler/parent-owned	REAL
-ROOT	m3/compiler/reference-flow	REAL
 ROOT	m3/compiler/source-signals	REAL
-ROOT	m3/compiler/static-use	REAL
 ROOT	m3/eclipse/core-runtime	REAL
 ROOT	m3/eclipse/filesystem	REAL
 ROOT	m3/eclipse/framework	REAL
@@ -961,14 +956,9 @@ PACKAGE	jdk.m3.collections.sortable
 PACKAGE	jdk.m3.collections.spring
 PACKAGE	jdk.m3.collections.text
 PACKAGE	jdk.m3.collections.tooling
-PACKAGE	jdk.m3.compiler.lifetime
-PACKAGE	jdk.m3.compiler.matsortable
-PACKAGE	jdk.m3.compiler.nullness
-PACKAGE	jdk.m3.compiler.parentowned
-PACKAGE	jdk.m3.compiler.reference
+PACKAGE	jdk.m3.compiler
 PACKAGE	jdk.m3.compiler.signals
 PACKAGE	jdk.m3.compiler.standard
-PACKAGE	jdk.m3.compiler.staticuse
 PACKAGE	jdk.m3.compiletime
 PACKAGE	jdk.m3.compiletime.ast
 PACKAGE	jdk.m3.desktop.jfx
@@ -3119,39 +3109,6 @@ PREFIXED	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3Chang
 PREFIXED	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardCensusSelfTest.java
 PREFIXED	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardPluginJUnitTest.java
 PREFIXED	m3/compiler/jdk-standard/src/test/java/jdk/m3/compiler/standard/M3JdkStandardPluginSelfTest.java
-PREFIXED	m3/compiler/lifetime-slots/src/main/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlanner.java
-PREFIXED	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopCompatibleLifetimeSlotsSelfTest.java
-PREFIXED	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopCompatibleLifetimeSlotsTest.java
-PREFIXED	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlannerSelfTest.java
-PREFIXED	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3DoopLifetimeSlotPlannerTest.java
-PREFIXED	m3/compiler/lifetime-slots/src/test/java/jdk/m3/compiler/lifetime/M3LifetimeSlotPlanDump.java
-PREFIXED	m3/compiler/mat-sortable/src/main/java/jdk/m3/compiler/matsortable/M3MatSortableProcessor.java
-PREFIXED	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3MatSortableProcessorOracle.java
-PREFIXED	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3MatSortableProcessorTest.java
-PREFIXED	m3/compiler/mat-sortable/src/test/java/jdk/m3/compiler/matsortable/M3SortableProcessorContract.java
-PREFIXED	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessCompilerPlugin.java
-PREFIXED	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessFlow.java
-PREFIXED	m3/compiler/nullness-facts/src/main/java/jdk/m3/compiler/nullness/M3JavaNullnessJavacBridge.java
-PREFIXED	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3JavacBridgeProof.java
-PREFIXED	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3JavacGuardMatrixProof.java
-PREFIXED	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessFactsJUnitTest.java
-PREFIXED	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessFactsPluginSelfTest.java
-PREFIXED	m3/compiler/nullness-facts/src/test/java/jdk/m3/compiler/nullness/M3NullnessProof.java
-PREFIXED	m3/compiler/parent-owned/src/main/java/jdk/m3/compiler/parentowned/M3ParentOwnedProcessor.java
-PREFIXED	m3/compiler/parent-owned/src/test/java/jdk/m3/compiler/parentowned/M3ParentOwnedProcessorTest.java
-PREFIXED	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CRefPathCertainty.java
-PREFIXED	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CompilerFactsAudit.java
-PREFIXED	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3CompilerReferenceCensus.java
-PREFIXED	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3Liveness.java
-PREFIXED	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3LoopFacts.java
-PREFIXED	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3ReferenceFlow.java
-PREFIXED	m3/compiler/reference-flow/src/main/java/jdk/m3/compiler/reference/M3SourceLiveness.java
-PREFIXED	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CRefPathCertaintyProof.java
-PREFIXED	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CRefPathCertaintyTest.java
-PREFIXED	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CompilerReferenceCensusProof.java
-PREFIXED	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3CompilerReferenceCensusTest.java
-PREFIXED	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3ReferenceFlowQualification.java
-PREFIXED	m3/compiler/reference-flow/src/test/java/jdk/m3/compiler/reference/M3ReferenceFlowTest.java
 PREFIXED	m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3MethodSignals.java
 PREFIXED	m3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/M3SourceSignalPlugin.java
 PREFIXED	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsJUnitTest.java
@@ -3159,13 +3116,6 @@ PREFIXED	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3Meth
 PREFIXED	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3MethodSignalsSelfTest.java
 PREFIXED	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3SourceSignalPluginJUnitTest.java
 PREFIXED	m3/compiler/source-signals/src/test/java/jdk/m3/compiler/signals/M3SourceSignalPluginSelfTest.java
-PREFIXED	m3/compiler/static-use/src/main/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessor.java
-PREFIXED	m3/compiler/static-use/src/main/java/jdk/m3/compiler/staticuse/M3StaticUsePlan.java
-PREFIXED	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessorOracle.java
-PREFIXED	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticFactsProcessorTest.java
-PREFIXED	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanDump.java
-PREFIXED	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanDumpTest.java
-PREFIXED	m3/compiler/static-use/src/test/java/jdk/m3/compiler/staticuse/M3StaticUsePlanTest.java
 PREFIXED	m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobScheduler.java
 PREFIXED	m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java
 PREFIXED	m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitor.java

@@ -82,7 +82,10 @@ into their owner). `python -I fold_package.py --root . --from-root m3/nlp --from
 resources. The package declaration, imports, and the dotted, path, full-path and JNI references of its types follow;
 a package that only shares the prefix (jdk.m3.nlp.search) does not. The module's records move byte for byte to the
 evidence dir, and its reactor line goes. Refused: sub-packages, a split package, a name already in the target package,
-native sources in a retired module. Run `rename_types.py --package <target>` afterwards to drop the M3 prefix. Tests:
+native sources in a retired module. Run `rename_types.py --package <target>` afterwards to drop the M3 prefix.
+v1.1 (m3/compiler fold): `--retire-only` retires every sibling first (so no fold rewrites a sibling's records),
+`--aggregator` matches the module path relative to the reactor, and a module's other resources (META-INF/services,
+fixtures) move with the fold, service files merged by line union. Tests:
 `test_fold_package.py`, `test_rename_types.py` (both now in m3jdk-naming.yml).
 
 ## NAMING_KEEP.tsv (2026-11-08)
