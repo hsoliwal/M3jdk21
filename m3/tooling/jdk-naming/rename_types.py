@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""DROP_PRODUCT_PREFIX v1.4: inside an m3 package the package already names the product, so a type carries no M3 prefix.
+"""DROP_PRODUCT_PREFIX v1.5: inside an m3 package the package already names the product, so a type carries no M3 prefix.
 
 usage: rename_types.py --root DIR --package P [--package P2 ...] [--check] [--exclude PREFIX ...]
 For every top-level type M3<Rest> declared in package P (main or test source, file M3<Rest>.java) the type becomes
@@ -72,7 +72,10 @@ def masked_sub(text, rx, rep):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", required=True)
-    ap.add_argument("--package", action="append", required=True)
+    ap.add_argument("--package", action="append", default=[])
+    # v1.5: a jtreg-style test directory whose Java files declare no package is one pseudo-package "dir:<path>"
+    # (simple names in its own files and in launchers only; workflows name these mains by bare class name).
+    ap.add_argument("--test-dir", action="append", default=[])
     ap.add_argument("--exclude", action="append", default=["m3/evidence/", "m3/qualification/"])
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--string-members", action="store_true",
@@ -92,6 +95,9 @@ def main():
         m = re.search(r"^package\s+([\w.]+)\s*;", p.read_text(encoding="utf-8", errors="replace"), re.M)
         if m:
             pkg_of[p] = m.group(1)
+        elif p.parent.relative_to(root).as_posix() in {d.rstrip("/") for d in a.test_dir}:
+            pkg_of[p] = "dir:" + p.parent.relative_to(root).as_posix()
+    a.package = a.package + ["dir:" + d.rstrip("/") for d in sorted(a.test_dir)]
     renames = {}  # package -> {old: new}
     for pkg in a.package:
         declared = {p.stem for p, k in pkg_of.items() if k == pkg}
@@ -100,7 +106,7 @@ def main():
             if not t.startswith("M3") or t in ("M3",):
                 continue
             rest = t[2:]
-            if not re.match(r"^[A-Z][A-Za-z0-9]*$", rest):
+            if not re.match(r"^[A-Z][A-Za-z0-9_]*$", rest):  # v1.5: donor names such as CityAndFarmHash_1_1
                 sys.exit(f"REFUSE {pkg}.{t}: '{rest}' is not UpperCamel")
             if rest in declared:
                 sys.exit(f"REFUSE {pkg}.{t}: {rest} is already a type of {pkg}")
@@ -128,7 +134,14 @@ def main():
             if not plan:
                 continue
             jni = pkg.replace(".", "_")
+            pseudo = pkg.startswith("dir:")
             for old, rest in plan.items():
+                if pseudo:  # v1.5: default-package test directory
+                    if p.suffix == ".java" and pkg_of.get(p) == pkg:
+                        new = masked_sub(new, re.compile(rf"(?<![\w$.]){old}(?![\w$])"), rest)
+                    elif p.suffix in (".sh", ".gmk", ".yml", ".yaml") or (rel.startswith("make/") and p.suffix == ".txt"):
+                        new = re.sub(rf"(?<![\w$]){old}(?![\w$])", rest, new)
+                    continue
                 q = re.compile(rf"(?<![\w$]){re.escape(pkg)}\.{old}(?![\w$])")
                 new = q.sub(f"{pkg}.{rest}", new)  # qualified, everywhere (strings included)
                 if p.suffix in (".c", ".h", ".cpp", ".hpp"):

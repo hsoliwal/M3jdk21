@@ -4,7 +4,7 @@
 #
 # jit_gate.sh <repo root> <out dir> <variant> <java.base patch classes> <perf classes> <oracle classes>
 # The JIT stage of the hashing leaf on a stock JDK 21 (M3_GATE_JDK) with java.base patched. For every path
-# (M3HashAtomsPerf row group) one JVM runs the perf harness twice:
+# (HashAtomsPerf row group) one JVM runs the perf harness twice:
 #   jit    -XX:+UnlockDiagnosticVMOptions -XX:+PrintCompilation -XX:+PrintInlining (text log) and
 #          -XX:+LogCompilation (xml), both written under <out dir>/<variant>/, then jit_inlining.py scan and readcost;
 #   clean  no diagnostic flags (the PERF rows of record); M3_JIT_CLEAN=0 skips it (repeated jit runs).
@@ -40,7 +40,7 @@ for path in xxh3-64 xxh3-128 bytes string bytebuffer access,kernel all; do
     echo "[$(date +%H:%M:%S)] $variant $name: jit run (host load $(host_load)%, $(free_mb) MB free)"
     # shellcheck disable=SC2086
     "$jbin/java" -Xmx512m $run $diag "-XX:LogFile=$logs/$name.xml" "-Dm3.hash.oracle=$oracle" $only \
-        "-Dm3.hash.perf.run=$variant-jit-$name" "-Dm3.hash.perf.out=$out/PERF_ROWS.tsv" -cp "$perfc" M3HashAtomsPerf \
+        "-Dm3.hash.perf.run=$variant-jit-$name" "-Dm3.hash.perf.out=$out/PERF_ROWS.tsv" -cp "$perfc" HashAtomsPerf \
         > "$logs/$name.log" 2>&1
     python -I "$lane/tools/jit_inlining.py" scan "$variant" "$name" "$logs/$name.xml" "$logs/$name.log" \
         "$out/JIT_SUMMARY.tsv" "$out/JIT_FAILS.tsv"
@@ -51,6 +51,6 @@ for path in xxh3-64 xxh3-128 bytes string bytebuffer access,kernel all; do
     echo "[$(date +%H:%M:%S)] $variant $name: clean run (host load $(host_load)%)"
     # shellcheck disable=SC2086
     "$jbin/java" -Xmx512m $run "-Dm3.hash.oracle=$oracle" $only "-Dm3.hash.perf.run=$variant-clean-$name" \
-        "-Dm3.hash.perf.out=$out/PERF_ROWS.tsv" -cp "$perfc" M3HashAtomsPerf > "$logs/$name.clean.log" 2>&1
+        "-Dm3.hash.perf.out=$out/PERF_ROWS.tsv" -cp "$perfc" HashAtomsPerf > "$logs/$name.clean.log" 2>&1
     echo "[$(date +%H:%M:%S)] $variant $name: done (host load $(host_load)%)"
 done

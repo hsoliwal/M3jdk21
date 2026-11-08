@@ -44,7 +44,7 @@ public final class IndexedViewSortedSpliteratorTest {
     }
 
     public static void main(String[] ignored) {
-        M3IndexedArray<Item> owner = new M3IndexedArray<>();
+        IndexedArray<Item> owner = new IndexedArray<>();
         Item a = new Item(2, 0), b = new Item(1, 1), c = new Item(2, 2), d = new Item(3, 3);
         long ha = owner.append(a);
         owner.append(b);
@@ -73,9 +73,9 @@ public final class IndexedViewSortedSpliteratorTest {
         expect(IllegalStateException.class, unsorted::getComparator, "unsorted comparator");
         owner.retain(ha);
         owner.retain(hc);
-        int required = M3IndexedArray.LIVE | M3IndexedArray.LEASED;
+        int required = IndexedArray.LIVE | IndexedArray.LEASED;
         Spliterator<Item> masked = owner.maskedSortedStates(required,
-                M3IndexedArray.SHARED, comparator).spliterator();
+                IndexedArray.SHARED, comparator).spliterator();
         sorted(masked, comparator);
         check(drain(masked).equals(List.of(a, c)), "masked sorted");
         Spliterator<Item> plainMask = owner.maskedStates(required, 0).spliterator();

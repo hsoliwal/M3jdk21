@@ -1,0 +1,118 @@
+/*
+ * Copyright 2014 Higher Frequency Trading http://www.higherfrequencytrading.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * Changed by Synexia (2026-10-31): zero-allocation-hashing 0.16 (Apache License 2.0) absorbed into java.base
+ * as jdk.internal.m3.hash; the changes are listed in src/java.base/share/legal/zero-allocation-hashing.md.
+ */
+package jdk.internal.m3.hash;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
+public final class ByteBufferAccess extends Access<ByteBuffer> {
+    public static final ByteBufferAccess INSTANCE = new ByteBufferAccess();
+    private static final Access<ByteBuffer> INSTANCE_REVERSE = Access.newDefaultReverseAccess(INSTANCE);
+
+    private ByteBufferAccess() {}
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: i64 dispatches once, to this class's own getter
+    @Override
+    public long i64(final ByteBuffer input, final long offset) {
+        return getLong(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: u32 dispatches once, to this class's own getter
+    @Override
+    public long u32(final ByteBuffer input, final long offset) {
+        return getUnsignedInt(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: i32 dispatches once, to this class's own getter
+    @Override
+    public int i32(final ByteBuffer input, final long offset) {
+        return getInt(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: u16 dispatches once, to this class's own getter
+    @Override
+    public int u16(final ByteBuffer input, final long offset) {
+        return getUnsignedShort(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: i16 dispatches once, to this class's own getter
+    @Override
+    public int i16(final ByteBuffer input, final long offset) {
+        return getShort(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: u8 dispatches once, to this class's own getter
+    @Override
+    public int u8(final ByteBuffer input, final long offset) {
+        return getUnsignedByte(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: i8 dispatches once, to this class's own getter
+    @Override
+    public int i8(final ByteBuffer input, final long offset) {
+        return getByte(input, offset);
+    }
+
+    @Override
+    public long getLong(ByteBuffer input, long offset) {
+        return input.getLong((int) offset);
+    }
+
+    @Override
+    public long getUnsignedInt(ByteBuffer input, long offset) {
+        return Primitives.unsignedInt(getInt(input, offset));
+    }
+
+    @Override
+    public int getInt(ByteBuffer input, long offset) {
+        return input.getInt((int) offset);
+    }
+
+    @Override
+    public int getUnsignedShort(ByteBuffer input, long offset) {
+        return Primitives.unsignedShort(getShort(input, offset));
+    }
+
+    @Override
+    public int getShort(ByteBuffer input, long offset) {
+        return input.getShort((int) offset);
+    }
+
+    @Override
+    public int getUnsignedByte(ByteBuffer input, long offset) {
+        return Primitives.unsignedByte(getByte(input, offset));
+    }
+
+    @Override
+    public int getByte(ByteBuffer input, long offset) {
+        return input.get((int) offset);
+    }
+
+    @Override
+    public ByteOrder byteOrder(ByteBuffer input) {
+        return input.order();
+    }
+
+    @Override
+    protected Access<ByteBuffer> reverseAccess() {
+        return INSTANCE_REVERSE;
+    }
+}

@@ -4,11 +4,11 @@ name: M3JDK21 current array-mask wrapper convergence
 on:
   pull_request:
     paths:
-      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
-      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/IndexedView.java'
       - 'test/jdk/jdk/internal/m3/IndexedViewSortedSpliteratorTest.java'
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
-      - 'test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java'
+      - 'test/jdk/jdk/internal/m3/FusedMaskedFilteredSortedViewTest.java'
       - 'test/jdk/java/util/CollectionViews/**'
       - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
       - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java'
@@ -46,7 +46,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check origin/master...HEAD
-          test "$(git hash-object src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java)" = f3ba337134a4f639438c7e9e4336a34453e2dc59
+          test "$(git hash-object src/java.base/share/classes/jdk/internal/m3/IndexedArray.java)" = f3ba337134a4f639438c7e9e4336a34453e2dc59
           test "$(git hash-object src/java.base/share/classes/java/util/CollectionViews.java)" = 8840da98c37e2af8da36c63f2cacd6bdaf1cb0a8
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java)" = 45ad6df3a51e83c67dc70de7c7acd82bec2305d3
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java)" = 3c0d4b1629545d54c7519216618ce1a32990f327
@@ -60,17 +60,17 @@ jobs:
           set -euo pipefail
           out="$RUNNER_TEMP/m3-current-convergence"
           mkdir -p "$out/patch" "$out/tests" "$out/patch-src/jdk/internal/m3" "$out/patch-src/java/util"
-          cp src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java "$out/patch-src/jdk/internal/m3/"
-          cp src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java "$out/patch-src/jdk/internal/m3/"
+          cp src/java.base/share/classes/jdk/internal/m3/IndexedArray.java "$out/patch-src/jdk/internal/m3/"
+          cp src/java.base/share/classes/jdk/internal/m3/IndexedView.java "$out/patch-src/jdk/internal/m3/"
           cp src/java.base/share/classes/java/util/CollectionViews.java "$out/patch-src/java/util/"
           javac --release 21 -proc:none -Xlint:all -Werror \
             --patch-module java.base="$out/patch-src" -d "$out/patch" \
-            "$out/patch-src/jdk/internal/m3/M3IndexedArray.java" \
-            "$out/patch-src/jdk/internal/m3/M3IndexedView.java" \
+            "$out/patch-src/jdk/internal/m3/IndexedArray.java" \
+            "$out/patch-src/jdk/internal/m3/IndexedView.java" \
             "$out/patch-src/java/util/CollectionViews.java"
-          javac --release 21 -proc:none -Xlint:all -Werror             --patch-module java.base="$out/patch:test/jdk/jdk/internal/m3"             -d "$out/patch"             test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java
-          java --patch-module java.base="$out/patch"             jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
-          java -Xint --patch-module java.base="$out/patch"             jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
+          javac --release 21 -proc:none -Xlint:all -Werror             --patch-module java.base="$out/patch:test/jdk/jdk/internal/m3"             -d "$out/patch"             test/jdk/jdk/internal/m3/FusedMaskedFilteredSortedViewTest.java
+          java --patch-module java.base="$out/patch"             jdk.internal.m3.FusedMaskedFilteredSortedViewTest
+          java -Xint --patch-module java.base="$out/patch"             jdk.internal.m3.FusedMaskedFilteredSortedViewTest
           javac --release 21 -proc:none -Xlint:all -Werror \
             --patch-module "java.base=$out/patch:test/jdk/jdk/internal/m3" -d "$out/patch" \
             test/jdk/jdk/internal/m3/IndexedViewSortedSpliteratorTest.java

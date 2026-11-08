@@ -1,0 +1,187 @@
+TYPE	jdk.internal.m3.M3ByteSlices	jdk.internal.m3.ByteSlices
+TYPE	jdk.internal.m3.M3CompositeBytes	jdk.internal.m3.CompositeBytes
+TYPE	jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest	jdk.internal.m3.FusedMaskedFilteredSortedViewTest
+TYPE	jdk.internal.m3.M3IndexMaskWindow	jdk.internal.m3.IndexMaskWindow
+TYPE	jdk.internal.m3.M3IndexedArray	jdk.internal.m3.IndexedArray
+TYPE	jdk.internal.m3.M3IndexedView	jdk.internal.m3.IndexedView
+TYPE	jdk.internal.m3.M3IntAlgorithms	jdk.internal.m3.IntAlgorithms
+TYPE	jdk.internal.m3.M3MaskFullWindowTest	jdk.internal.m3.MaskFullWindowTest
+TYPE	jdk.internal.m3.M3ObjectMetrics	jdk.internal.m3.ObjectMetrics
+TYPE	jdk.internal.m3.hash.M3Access	jdk.internal.m3.hash.Access
+TYPE	jdk.internal.m3.hash.M3ByteArrayAccess	jdk.internal.m3.hash.ByteArrayAccess
+TYPE	jdk.internal.m3.hash.M3ByteBufferAccess	jdk.internal.m3.hash.ByteBufferAccess
+TYPE	jdk.internal.m3.hash.M3CharSequenceAccess	jdk.internal.m3.hash.CharSequenceAccess
+TYPE	jdk.internal.m3.hash.M3CityAndFarmHash_1_1	jdk.internal.m3.hash.CityAndFarmHash_1_1
+TYPE	jdk.internal.m3.hash.M3DualHashFunction	jdk.internal.m3.hash.DualHashFunction
+TYPE	jdk.internal.m3.hash.M3LongHashFunction	jdk.internal.m3.hash.LongHashFunction
+TYPE	jdk.internal.m3.hash.M3LongTupleHashFunction	jdk.internal.m3.hash.LongTupleHashFunction
+TYPE	jdk.internal.m3.hash.M3Maths	jdk.internal.m3.hash.Maths
+TYPE	jdk.internal.m3.hash.M3MetroHash	jdk.internal.m3.hash.MetroHash
+TYPE	jdk.internal.m3.hash.M3MurmurHash_3	jdk.internal.m3.hash.MurmurHash_3
+TYPE	jdk.internal.m3.hash.M3Primitives	jdk.internal.m3.hash.Primitives
+TYPE	jdk.internal.m3.hash.M3Util	jdk.internal.m3.hash.Util
+TYPE	jdk.internal.m3.hash.M3WyHash	jdk.internal.m3.hash.WyHash
+TYPE	jdk.internal.m3.hash.M3XXH3	jdk.internal.m3.hash.XXH3
+TYPE	jdk.internal.m3.hash.M3XxHash	jdk.internal.m3.hash.XxHash
+TYPE	jdk.internal.m3.hash.M3XxHash64Streaming	jdk.internal.m3.hash.XxHash64Streaming
+TYPE	dir:test/jdk/jdk/internal/m3.M3ByteSlicesTest	dir:test/jdk/jdk/internal/m3.ByteSlicesTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3CompositeBytesTest	dir:test/jdk/jdk/internal/m3.CompositeBytesTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3CompositeLiteralChecks	dir:test/jdk/jdk/internal/m3.CompositeLiteralChecks
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexAtomContract	dir:test/jdk/jdk/internal/m3.IndexAtomContract
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexAtomResourceProbe	dir:test/jdk/jdk/internal/m3.IndexAtomResourceProbe
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexMaskWindowJniTest	dir:test/jdk/jdk/internal/m3.IndexMaskWindowJniTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexedArrayGrowthAgent	dir:test/jdk/jdk/internal/m3.IndexedArrayGrowthAgent
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexedArrayGrowthFailureTest	dir:test/jdk/jdk/internal/m3.IndexedArrayGrowthFailureTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexedArrayGrowthFault	dir:test/jdk/jdk/internal/m3.IndexedArrayGrowthFault
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexedArraySortTraceTest	dir:test/jdk/jdk/internal/m3.IndexedArraySortTraceTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexedArrayTest	dir:test/jdk/jdk/internal/m3.IndexedArrayTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3IndexedViewEpochTest	dir:test/jdk/jdk/internal/m3.IndexedViewEpochTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3IntAlgorithmsTest	dir:test/jdk/jdk/internal/m3.IntAlgorithmsTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3ObjectMetricsTest	dir:test/jdk/jdk/internal/m3.ObjectMetricsTest
+TYPE	dir:test/jdk/jdk/internal/m3.M3StateMaskedIndexedViewTest	dir:test/jdk/jdk/internal/m3.StateMaskedIndexedViewTest
+TYPE	dir:test/jdk/jdk/internal/m3/atoms.M3IOAtomsTest	dir:test/jdk/jdk/internal/m3/atoms.IOAtomsTest
+TYPE	dir:test/jdk/jdk/internal/m3/atoms.M3IndexedArrayAtomsTest	dir:test/jdk/jdk/internal/m3/atoms.IndexedArrayAtomsTest
+TYPE	dir:test/jdk/jdk/internal/m3/atoms.M3IndexedViewAtomsPerf	dir:test/jdk/jdk/internal/m3/atoms.IndexedViewAtomsPerf
+TYPE	dir:test/jdk/jdk/internal/m3/atoms.M3IndexedViewAtomsTest	dir:test/jdk/jdk/internal/m3/atoms.IndexedViewAtomsTest
+TYPE	dir:test/jdk/jdk/internal/m3/atoms.M3IntAlgorithmsAtomsTest	dir:test/jdk/jdk/internal/m3/atoms.IntAlgorithmsAtomsTest
+TYPE	dir:test/jdk/jdk/internal/m3/hash.M3HashAtomsPerf	dir:test/jdk/jdk/internal/m3/hash.HashAtomsPerf
+TYPE	dir:test/jdk/jdk/internal/m3/hash.M3HashAtomsTest	dir:test/jdk/jdk/internal/m3/hash.HashAtomsTest
+TYPE	dir:test/jdk/jdk/internal/m3/hash.M3HashJitAtomsTest	dir:test/jdk/jdk/internal/m3/hash.HashJitAtomsTest
+TYPE	dir:test/jdk/jdk/internal/m3/hash.M3HashOracle	dir:test/jdk/jdk/internal/m3/hash.HashOracle
+TYPE	dir:test/jdk/jdk/internal/m3/hash.M3XxHash64StreamingAllocationProbe	dir:test/jdk/jdk/internal/m3/hash.XxHash64StreamingAllocationProbe
+TYPE	dir:test/jdk/jdk/internal/m3/hash.M3XxHash64StreamingDump	dir:test/jdk/jdk/internal/m3/hash.XxHash64StreamingDump
+TYPE	dir:test/jdk/jdk/internal/m3/hash.M3XxHash64StreamingProof	dir:test/jdk/jdk/internal/m3/hash.XxHash64StreamingProof
+TYPE	dir:test/jdk/jdk/internal/m3/hash.M3XxHash64StreamingTest	dir:test/jdk/jdk/internal/m3/hash.XxHash64StreamingTest
+TYPE	dir:test/jdk/jdk/internal/m3/io.M3IOTest	dir:test/jdk/jdk/internal/m3/io.IOTest
+EDIT	.github/workflows/collections-convergence.yml
+EDIT	.github/workflows/m3-indexed-array-atomic-growth.yml
+EDIT	.github/workflows/m3-state-masked-indexed-views-20261019.yml
+EDIT	.github/workflows/mindex-string-backing.yml
+EDIT	m3/docs/algorithm-catalogue/string-ast-index-recovery-20261020/catalogue.tsv
+EDIT	m3/docs/JAVA_BASE_CHANGE_JOURNAL_VIEWPORT_WINDOW_20261021.md
+EDIT	m3/docs/JAVA_BASE_FILTERED_REENTRANT_CURSOR_20261021.md
+EDIT	m3/docs/m3jdk21-native-mask-window-receiver-20261020.md
+EDIT	m3/docs/name-mapping.json
+EDIT	m3/tooling/atom-tests/util-lang-m3/specs/internal.tsv
+EDIT	m3/tooling/atom-tests/util-lang-m3/specs/perf.tsv
+EDIT	m3/tooling/atom-tests/util-lang-m3/specs/views.tsv
+EDIT	m3/tooling/atom-tests/util-lang-m3/templates/views.java.tmpl
+EDIT	m3/tooling/atom-tests/util-lang-m3/TEST_PATTERNS.tsv
+EDIT	m3/tooling/jdk-superset/hashing/tools/gate.sh
+EDIT	m3/tooling/jdk-superset/hashing/tools/jit_gate.sh
+EDIT	m3/tooling/jdk-superset/hashing/tools/jit_inlining.py
+EDIT	m3/tooling/jdk-superset/hashing/TYPE_RENAME.tsv
+EDIT	make/m3/test-local.sh
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3Access.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3ByteArrayAccess.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3ByteBufferAccess.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3CharSequenceAccess.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3DualHashFunction.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3LongHashFunction.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3LongTupleHashFunction.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3Maths.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3MetroHash.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3MurmurHash_3.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3Primitives.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3Util.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3WyHash.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3XXH3.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3XxHash.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/hash/M3XxHash64Streaming.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/M3ByteSlices.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/M3CompositeBytes.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/M3ObjectMetrics.java
+EDIT	src/java.base/share/native/libjava/M3IndexMaskWindow.c
+EDIT	src/java.base/share/native/libjava/M3ObjectMetrics.c
+EDIT	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java
+EDIT	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsPerf.java
+EDIT	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java
+EDIT	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java
+EDIT	test/jdk/jdk/internal/m3/atoms/M3IOAtomsTest.java
+EDIT	test/jdk/jdk/internal/m3/hash/M3HashAtomsPerf.java
+EDIT	test/jdk/jdk/internal/m3/hash/M3HashAtomsTest.java
+EDIT	test/jdk/jdk/internal/m3/hash/M3HashJitAtomsTest.java
+EDIT	test/jdk/jdk/internal/m3/hash/M3HashOracle.java
+EDIT	test/jdk/jdk/internal/m3/hash/M3XxHash64StreamingAllocationProbe.java
+EDIT	test/jdk/jdk/internal/m3/hash/M3XxHash64StreamingDump.java
+EDIT	test/jdk/jdk/internal/m3/hash/M3XxHash64StreamingProof.java
+EDIT	test/jdk/jdk/internal/m3/hash/M3XxHash64StreamingTest.java
+EDIT	test/jdk/jdk/internal/m3/IndexedViewSortedSpliteratorTest.java
+EDIT	test/jdk/jdk/internal/m3/io/M3IOTest.java
+EDIT	test/jdk/jdk/internal/m3/M3ByteSlicesTest.java
+EDIT	test/jdk/jdk/internal/m3/M3CompositeBytesTest.java
+EDIT	test/jdk/jdk/internal/m3/M3CompositeLiteralChecks.java
+EDIT	test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexAtomContract.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexAtomResourceProbe.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexedArrayGrowthAgent.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFault.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexedArraySortTraceTest.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexedArrayTest.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java
+EDIT	test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java
+EDIT	test/jdk/jdk/internal/m3/M3IntAlgorithmsTest.java
+EDIT	test/jdk/jdk/internal/m3/M3MaskFullWindowTest.java
+EDIT	test/jdk/jdk/internal/m3/M3ObjectMetricsTest.java
+EDIT	test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/M3ByteSlices.java	src/java.base/share/classes/jdk/internal/m3/ByteSlices.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/M3CompositeBytes.java	src/java.base/share/classes/jdk/internal/m3/CompositeBytes.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java	src/java.base/share/classes/jdk/internal/m3/IndexedArray.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java	src/java.base/share/classes/jdk/internal/m3/IndexedView.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java	src/java.base/share/classes/jdk/internal/m3/IndexMaskWindow.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java	src/java.base/share/classes/jdk/internal/m3/IntAlgorithms.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/M3ObjectMetrics.java	src/java.base/share/classes/jdk/internal/m3/ObjectMetrics.java
+MOVE	test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java	test/jdk/jdk/internal/m3/FusedMaskedFilteredSortedViewTest.java
+MOVE	test/jdk/jdk/internal/m3/M3MaskFullWindowTest.java	test/jdk/jdk/internal/m3/MaskFullWindowTest.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3Access.java	src/java.base/share/classes/jdk/internal/m3/hash/Access.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3ByteArrayAccess.java	src/java.base/share/classes/jdk/internal/m3/hash/ByteArrayAccess.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3ByteBufferAccess.java	src/java.base/share/classes/jdk/internal/m3/hash/ByteBufferAccess.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3CharSequenceAccess.java	src/java.base/share/classes/jdk/internal/m3/hash/CharSequenceAccess.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java	src/java.base/share/classes/jdk/internal/m3/hash/CityAndFarmHash_1_1.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3DualHashFunction.java	src/java.base/share/classes/jdk/internal/m3/hash/DualHashFunction.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3LongHashFunction.java	src/java.base/share/classes/jdk/internal/m3/hash/LongHashFunction.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3LongTupleHashFunction.java	src/java.base/share/classes/jdk/internal/m3/hash/LongTupleHashFunction.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3Maths.java	src/java.base/share/classes/jdk/internal/m3/hash/Maths.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3MetroHash.java	src/java.base/share/classes/jdk/internal/m3/hash/MetroHash.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3MurmurHash_3.java	src/java.base/share/classes/jdk/internal/m3/hash/MurmurHash_3.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3Primitives.java	src/java.base/share/classes/jdk/internal/m3/hash/Primitives.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3Util.java	src/java.base/share/classes/jdk/internal/m3/hash/Util.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3WyHash.java	src/java.base/share/classes/jdk/internal/m3/hash/WyHash.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3XXH3.java	src/java.base/share/classes/jdk/internal/m3/hash/XXH3.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3XxHash.java	src/java.base/share/classes/jdk/internal/m3/hash/XxHash.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/hash/M3XxHash64Streaming.java	src/java.base/share/classes/jdk/internal/m3/hash/XxHash64Streaming.java
+MOVE	test/jdk/jdk/internal/m3/M3ByteSlicesTest.java	test/jdk/jdk/internal/m3/ByteSlicesTest.java
+MOVE	test/jdk/jdk/internal/m3/M3CompositeBytesTest.java	test/jdk/jdk/internal/m3/CompositeBytesTest.java
+MOVE	test/jdk/jdk/internal/m3/M3CompositeLiteralChecks.java	test/jdk/jdk/internal/m3/CompositeLiteralChecks.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexAtomContract.java	test/jdk/jdk/internal/m3/IndexAtomContract.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexAtomResourceProbe.java	test/jdk/jdk/internal/m3/IndexAtomResourceProbe.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexedArrayGrowthAgent.java	test/jdk/jdk/internal/m3/IndexedArrayGrowthAgent.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.java	test/jdk/jdk/internal/m3/IndexedArrayGrowthFailureTest.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFault.java	test/jdk/jdk/internal/m3/IndexedArrayGrowthFault.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexedArraySortTraceTest.java	test/jdk/jdk/internal/m3/IndexedArraySortTraceTest.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexedArrayTest.java	test/jdk/jdk/internal/m3/IndexedArrayTest.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java	test/jdk/jdk/internal/m3/IndexedViewEpochTest.java
+MOVE	test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java	test/jdk/jdk/internal/m3/IndexMaskWindowJniTest.java
+MOVE	test/jdk/jdk/internal/m3/M3IntAlgorithmsTest.java	test/jdk/jdk/internal/m3/IntAlgorithmsTest.java
+MOVE	test/jdk/jdk/internal/m3/M3ObjectMetricsTest.java	test/jdk/jdk/internal/m3/ObjectMetricsTest.java
+MOVE	test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java	test/jdk/jdk/internal/m3/StateMaskedIndexedViewTest.java
+MOVE	test/jdk/jdk/internal/m3/atoms/M3IndexedArrayAtomsTest.java	test/jdk/jdk/internal/m3/atoms/IndexedArrayAtomsTest.java
+MOVE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsPerf.java	test/jdk/jdk/internal/m3/atoms/IndexedViewAtomsPerf.java
+MOVE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java	test/jdk/jdk/internal/m3/atoms/IndexedViewAtomsTest.java
+MOVE	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java	test/jdk/jdk/internal/m3/atoms/IntAlgorithmsAtomsTest.java
+MOVE	test/jdk/jdk/internal/m3/atoms/M3IOAtomsTest.java	test/jdk/jdk/internal/m3/atoms/IOAtomsTest.java
+MOVE	test/jdk/jdk/internal/m3/hash/M3HashAtomsPerf.java	test/jdk/jdk/internal/m3/hash/HashAtomsPerf.java
+MOVE	test/jdk/jdk/internal/m3/hash/M3HashAtomsTest.java	test/jdk/jdk/internal/m3/hash/HashAtomsTest.java
+MOVE	test/jdk/jdk/internal/m3/hash/M3HashJitAtomsTest.java	test/jdk/jdk/internal/m3/hash/HashJitAtomsTest.java
+MOVE	test/jdk/jdk/internal/m3/hash/M3HashOracle.java	test/jdk/jdk/internal/m3/hash/HashOracle.java
+MOVE	test/jdk/jdk/internal/m3/hash/M3XxHash64StreamingAllocationProbe.java	test/jdk/jdk/internal/m3/hash/XxHash64StreamingAllocationProbe.java
+MOVE	test/jdk/jdk/internal/m3/hash/M3XxHash64StreamingDump.java	test/jdk/jdk/internal/m3/hash/XxHash64StreamingDump.java
+MOVE	test/jdk/jdk/internal/m3/hash/M3XxHash64StreamingProof.java	test/jdk/jdk/internal/m3/hash/XxHash64StreamingProof.java
+MOVE	test/jdk/jdk/internal/m3/hash/M3XxHash64StreamingTest.java	test/jdk/jdk/internal/m3/hash/XxHash64StreamingTest.java
+MOVE	test/jdk/jdk/internal/m3/io/M3IOTest.java	test/jdk/jdk/internal/m3/io/IOTest.java

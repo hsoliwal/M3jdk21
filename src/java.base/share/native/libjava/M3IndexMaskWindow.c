@@ -3,7 +3,7 @@
 /* Internal mask-window ABI in the JDK-owned libjava shared library.
  * Fixed 128-element JNI regions; no persistent pins, Java callbacks, or native heap storage.
  */
-#include "jdk_internal_m3_M3IndexMaskWindow.h"
+#include "jdk_internal_m3_IndexMaskWindow.h"
 #include <stdint.h>
 
 #define M3_MASK_WINDOW_CHUNK 128
@@ -145,7 +145,7 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
 
 /* Internal M3JDK 21 ABI: retains the original full-remainder semantics. */
 JNIEXPORT jlong JNICALL
-Java_jdk_internal_m3_M3IndexMaskWindow_scanNative(
+Java_jdk_internal_m3_IndexMaskWindow_scanNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
         jint required, jint excluded, jintArray output, jint output_offset, jint limit) {
     (void) owner;
@@ -155,7 +155,7 @@ Java_jdk_internal_m3_M3IndexMaskWindow_scanNative(
 
 /* JDK libjava bounded JNI ABI: caller-admitted exclusive end ordinal. */
 JNIEXPORT jlong JNICALL
-Java_jdk_internal_m3_M3IndexMaskWindow_scanBoundedNative(
+Java_jdk_internal_m3_IndexMaskWindow_scanBoundedNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,
         jint end, jint required, jint excluded, jintArray output,
         jint output_offset, jint limit) {
@@ -183,7 +183,7 @@ static jint m3_window_count_matches(const jbyte *marks, jint take,
 /* Additive count ABI: only bounded state reads, 128 scratch bytes plus locals.
  * No row-ID reads, output writes, allocation, callbacks or critical-array pins. */
 JNIEXPORT jlong JNICALL
-Java_jdk_internal_m3_M3IndexMaskWindow_countBoundedNative(
+Java_jdk_internal_m3_IndexMaskWindow_countBoundedNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint first, jint end,
         jint required, jint excluded) {
     (void) owner;
