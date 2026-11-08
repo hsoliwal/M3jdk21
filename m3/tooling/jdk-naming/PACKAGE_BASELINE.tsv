@@ -1,6 +1,6 @@
 ROOT	.m3/openrewrite-recipes	REAL
 ROOT	m3/algorithms	REAL
-ROOT	m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner	COPY
+ROOT	m3/evidence/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner	COPY
 ROOT	m3/ast	REAL
 ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/qualified/ast-hierarchy-20261018/candidate/m3-indexstring	COPY
 ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/qualified/ast-hierarchy-target-20261018/candidate/m3/ast	COPY
