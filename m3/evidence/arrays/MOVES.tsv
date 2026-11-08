@@ -978,3 +978,5 @@ m3/arrays/recipe/posting-index-20261106/differential.sh	m3/evidence/arrays/recip
 m3/arrays/recipe/posting-index-20261106/native-gate.sh	m3/evidence/arrays/recipe/posting-index-20261106/native-gate.sh
 m3/arrays/recipe/posting-index-20261106/relocate.py	m3/evidence/arrays/recipe/posting-index-20261106/relocate.py
 m3/arrays/recipe/posting-index-20261106/verify.sh	m3/evidence/arrays/recipe/posting-index-20261106/verify.sh
+make/m3/arrays/fix_cmake_endif.py	m3/evidence/arrays/recipe/fix_cmake_endif.py
+m3/tooling/jdk-naming/MOVE_REFS_arrays.tsv	m3/evidence/arrays/MOVE_REFS.module.tsv
