@@ -13,7 +13,7 @@ The map (tab separated; '#' comments) declares everything, the tool does nothing
   TAKE   <Donor>.<member>[(<types>)]                          fold this member (every overload when no selector);
                                                               <Donor>.* takes every member; nested class/record/interface/enum
                                                               declarations at class level are members too (whole span)
-  SKIP   <Donor>.<member>  <reason>                           not folded (the owner already has it)
+  SKIP   <Donor>.<member>[(<types>)]  <reason>                not folded (the owner already has it); a selector limits it to one overload
   EDIT   <Donor>.<member>  <sha256 prefix of old>  <old>  <new>   declared substitution inside that folded body
   IMPORT <fqn>                                                import the owner needs for the folded bodies
   OWNER_EDIT <sha256 prefix of old>  <old>  <new>             one declared substitution in the owner text (exactly once;
@@ -211,8 +211,9 @@ def main() -> int:
             if member["name"] == donor_type:
                 continue
             taken = any(t == key or t == key + "(" + (member["selector"] or "") + ")" or t == donor_type + ".*" for t in m["TAKE"])
-            if key in m["SKIP"] or not taken:
-                table.append((key, member["selector"], "SKIP" if key in m["SKIP"] else "NOT_TAKEN"))
+            skipped = key in m["SKIP"] or (key + "(" + (member["selector"] or "") + ")") in m["SKIP"]
+            if skipped or not taken:
+                table.append((key, member["selector"], "SKIP" if skipped else "NOT_TAKEN"))
                 continue
             body = b"".join(lines[member["first"]:member["stop"]])
             for old_name, new_name in renames.items():
