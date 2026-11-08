@@ -1,0 +1,8 @@
+gate	result	evidence
+fold_members	PASS	7 members FOLD from PrimitiveMatrixAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+references	PASS	grep PrimitiveMatrixAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+owner_size	NOTE	MatrixAlgorithms is 367 lines after the fold
