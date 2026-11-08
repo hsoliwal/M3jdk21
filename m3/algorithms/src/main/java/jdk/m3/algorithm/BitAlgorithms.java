@@ -111,4 +111,117 @@ public final class BitAlgorithms {
         }
         return first <= second ? new int[] {first, second} : new int[] {second, first};
     }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.setBit from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Set bit at position i. */
+    public static int setBit(int n, int i) {
+        return n | (1 << i);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.clearBit from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Clear bit at position i. */
+    public static int clearBit(int n, int i) {
+        return n & ~(1 << i);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.toggleBit from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Toggle bit at position i. */
+    public static int toggleBit(int n, int i) {
+        return n ^ (1 << i);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.isSet from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Check if bit at position i is set. */
+    public static boolean isSet(int n, int i) {
+        return (n & (1 << i)) != 0;
+    }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.getBit from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Get bit at position i (0 or 1). */
+    public static int getBit(int n, int i) {
+        return (n >> i) & 1;
+    }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.updateBit from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Update bit at position i to value (0 or 1). */
+    public static int updateBit(int n, int i, int value) {
+        return (n & ~(1 << i)) | (value << i);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.clearMsbToI from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Clear all bits from most significant to i (inclusive). */
+    public static int clearMsbToI(int n, int i) {
+        return n & ((1 << i) - 1);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.clearIToLsb from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Clear all bits from i to 0 (inclusive). */
+    public static int clearIToLsb(int n, int i) {
+        return i >= Integer.SIZE - 1 ? 0 : n & (~0 << (i + 1));
+    }
+
+    //FLLDCIM: FOLD - member BitOpsBasic.highestSetBit from donor blob c3ca587e8d7e (donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Highest set bit position (0-indexed from right). */
+    public static int highestSetBit(int n) {
+        return 31 - Integer.numberOfLeadingZeros(n);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsPower.nextPowerOfTwo from donor blob 4901b187ccc6 (donor blob 4901b187ccc6 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Next power of 2 >= n. */
+    public static int nextPowerOfTwo(int n) {
+        if (n <= 0) return 1;
+        n--;
+        n |= n >> 1;
+        n |= n >> 2;
+        n |= n >> 4;
+        n |= n >> 8;
+        n |= n >> 16;
+        return n + 1;
+    }
+
+    //FLLDCIM: FOLD - member BitOpsPower.prevPowerOfTwo from donor blob 4901b187ccc6 (donor blob 4901b187ccc6 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Previous power of 2 <= n. */
+    public static int prevPowerOfTwo(int n) {
+        n |= n >> 1;
+        n |= n >> 2;
+        n |= n >> 4;
+        n |= n >> 8;
+        n |= n >> 16;
+        return n - (n >> 1);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsPower.roundUpPow2 from donor blob 4901b187ccc6 (donor blob 4901b187ccc6 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Round up to next power of 2. */
+    public static int roundUpPow2(int n) {
+        return isPowerOfTwo(n) ? n : nextPowerOfTwo(n);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsPower.isolateRightmost1 from donor blob 4901b187ccc6 (donor blob 4901b187ccc6 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Isolate rightmost 1-bit. */
+    public static int isolateRightmost1(int n) {
+        return n & (-n);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsPower.turnOffRightmost1 from donor blob 4901b187ccc6 (donor blob 4901b187ccc6 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Turn off rightmost 1-bit. */
+    public static int turnOffRightmost1(int n) {
+        return n & (n - 1);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsPower.turnOnRightmost0 from donor blob 4901b187ccc6 (donor blob 4901b187ccc6 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Turn on rightmost 0-bit. */
+    public static int turnOnRightmost0(int n) {
+        return n | (n + 1);
+    }
+
+    //FLLDCIM: FOLD - member BitOpsPower.isolateRightmost0 from donor blob 4901b187ccc6 (donor blob 4901b187ccc6 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Isolate rightmost 0-bit. */
+    public static int isolateRightmost0(int n) {
+        return ~n & (n + 1);
+    }
+    //FLLDCIM: FOLD - member MathsBits.hammingDistance from donor blob 0d2ac952f60b (donor blob 0d2ac952f60b at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/bit-ops-fold/FOLD_MAP.tsv
+    /** Hamming distance (differing bits). */
+    public static int hammingDistance(int x, int y) {
+        return Integer.bitCount(x ^ y);
+    }
 }

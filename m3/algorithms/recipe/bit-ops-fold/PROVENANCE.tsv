@@ -1,0 +1,4 @@
+donor	repository	commit	path	blob	role
+BitOpsBasic	hsoliwal/com.synexia	45da5f035	synexia-algo/src/main/java/com/synexia/algorithms/bit/BitOpsBasic.java	c3ca587e8d7e	members fold into jdk.m3.algorithm.BitAlgorithms (FOLD_MAP.tsv)
+BitOpsPower	hsoliwal/com.synexia	45da5f035	synexia-algo/src/main/java/com/synexia/algorithms/bit/BitOpsPower.java	4901b187ccc6	members fold into jdk.m3.algorithm.BitAlgorithms (FOLD_MAP.tsv)
+MathsBits	hsoliwal/com.synexia	45da5f035	synexia-algo/src/main/java/com/synexia/algorithms/math/MathsBits.java	0d2ac952f60b	members fold into jdk.m3.algorithm.BitAlgorithms (FOLD_MAP.tsv)

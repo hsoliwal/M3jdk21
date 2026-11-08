@@ -1,0 +1,25 @@
+# FOLD_MEMBERS v1.6 map (m3/tooling/jdk-naming/fold_members.py): the synexia-algo bit kernels BitOpsBasic, BitOpsPower and MathsBits fold into jdk.m3.algorithm.BitAlgorithms, the owner of the bit concept (no new class; 2026-11-08).
+# Donors are outside the tree (hsoliwal/com.synexia@45da5f035, PROVENANCE.tsv), pinned to their blobs. Plain wrappers over java.lang.Integer are not folded (the JDK owns them); members the owner already declares are not folded (same body up to the parameter name); log2 repeats highestSetBit.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/BitAlgorithms.java
+DONOR	S:/m3-scratch/eb-conv/algo/donor_bit/BitOpsBasic.java	c3ca587e8d7e	donor blob c3ca587e8d7e at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor_bit/BitOpsPower.java	4901b187ccc6	donor blob 4901b187ccc6 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor_bit/MathsBits.java	0d2ac952f60b	donor blob 0d2ac952f60b at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/bit-ops-fold/PROVENANCE.tsv)
+TAKE	BitOpsBasic.*
+TAKE	BitOpsPower.*
+TAKE	MathsBits.*
+SKIP	BitOpsBasic.countOnes	wrapper over Integer.bitCount: java.lang.Integer owns it
+SKIP	BitOpsBasic.countZeros	32 - Integer.bitCount: java.lang.Integer owns it
+SKIP	BitOpsBasic.leadingZeros	wrapper over Integer.numberOfLeadingZeros
+SKIP	BitOpsBasic.trailingZeros	wrapper over Integer.numberOfTrailingZeros
+SKIP	BitOpsBasic.lowestSetBit	wrapper over Integer.numberOfTrailingZeros
+SKIP	BitOpsPower.isPowerOfTwo	the owner declares isPowerOfTwo(int) with the same body up to the parameter name
+SKIP	BitOpsPower.log2	same body as BitOpsBasic.highestSetBit (31 - Integer.numberOfLeadingZeros)
+SKIP	BitOpsPower.reverseBits	wrapper over Integer.reverse; the owner declares reverseBits(int, ProgressMonitor)
+SKIP	BitOpsPower.rotateLeft	wrapper over Integer.rotateLeft
+SKIP	BitOpsPower.rotateRight	wrapper over Integer.rotateRight
+SKIP	MathsBits.countSetBits	wrapper over Integer.bitCount; the owner declares hammingWeight(int, ProgressMonitor)
+SKIP	MathsBits.isPowerOfTwo	the owner declares isPowerOfTwo(int) with the same body up to the parameter name
+SKIP	MathsBits.reverseBits	wrapper over Integer.reverse; the owner declares reverseBits(int, ProgressMonitor)
+EDIT	MathsBits.hammingDistance(int,int)	26dfba132edc	        return countSetBits(x ^ y);	        return Integer.bitCount(x ^ y);
+EDIT	BitOpsBasic.clearIToLsb(int,int)	f027d15b6bfb	        return n & (~0 << (i + 1));	        return i >= Integer.SIZE - 1 ? 0 : n & (~0 << (i + 1));
