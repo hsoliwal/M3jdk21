@@ -1,5 +1,6 @@
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project */
 /* SPDX-License-Identifier: Apache-2.0 */
+/* Modified 2026-11-08: additive exact packed range queries with bounded JNI ingress. */
 /* Modified 2026-10-29: target-owned M3 arrays codec adaptation from Synexia
  * 6f878f9e5d6c5044eda15efb9e743594e70ce7f7; six packed/full64 operations only. */
 #include "m3_packed_codec.h"
@@ -171,4 +172,31 @@ int m3_codec_encode_zigzag64(const int64_t *src, size_t n,
 int m3_codec_decode_zigzag64(const uint8_t *src, size_t n,
                                int64_t *dst, size_t cap, size_t *written) {
     return decode64(src, n, dst, cap, 1, written);
+}
+
+/* Fused exact scan; no materialized int64_t output, heap allocation or global state. */
+int m3_codec_query_packed(const uint8_t *src, size_t n, int bits,
+                          int64_t lower, int64_t upper, int first, size_t *result) {
+    if (!result) return M3_CODEC_ARGUMENT;
+    *result = 0;
+    if ((n && !src) || (first != 0 && first != 1)) return M3_CODEC_ARGUMENT;
+    size_t width = packed_width(bits);
+    if (!width || lower > upper) return M3_CODEC_FORMAT;
+    if (n > M3_PACKED_CODEC_MAX) return M3_CODEC_BOUND;
+    if (n % width) return M3_CODEC_FORMAT;
+    uint64_t sign = UINT64_C(1) << (bits - 1);
+    size_t matches = 0;
+    for (size_t at = 0; at < n; at += width) {
+        uint64_t value = 0;
+        for (size_t lane = 0; lane < width; ++lane)
+            value |= (uint64_t)src[at + lane] << (8 * lane);
+        int64_t decoded = (int64_t)(value & (sign - 1));
+        if (value & sign) decoded -= (int64_t)sign;
+        if (decoded >= lower && decoded <= upper) {
+            if (first) { *result = at / width; return M3_CODEC_OK; }
+            ++matches;
+        }
+    }
+    *result = first ? SIZE_MAX : matches;
+    return M3_CODEC_OK;
 }

@@ -222,6 +222,53 @@ public final class M3ArrayNative {
         return result;
     }
 
+    /**
+     * Counts signed packed values in an inclusive numeric interval through the required
+     * native library. Indices address elements, not bytes. Unlike codec materialization,
+     * the input may exceed MAX_CODEC_ITEMS: JNI scans aligned chunks of at most that
+     * many bytes with fixed scratch storage and never allocates a decoded long array.
+     * The caller owns the input and must keep it unchanged until return.
+     * Validation order is null, width, whole-payload geometry, window, numeric interval,
+     * then library availability; even empty windows require the library.
+     * @throws NullPointerException if bytes is null
+     * @throws IllegalArgumentException for unsupported width, partial payload or lower > upper
+     * @throws IndexOutOfBoundsException for an invalid element window
+     * @throws UnsatisfiedLinkError if the matching native library is unavailable
+     * @throws OutOfMemoryError if native error reporting fails without a pending exception
+     */
+    public static int countPackedInRangeRequired(byte[] bytes, int bits,
+            int fromIndex, int toIndex, long lower, long upper) {
+        return queryPackedRequired(bytes, bits, fromIndex, toIndex, lower, upper, false);
+    }
+
+    /**
+     * Returns the absolute first matching element index, or -1 for no match.
+     * Uses the ownership, validation and bounded-scratch contract of
+     * {@link #countPackedInRangeRequired}; stops after the first matching chunk.
+     */
+    public static int firstPackedInRangeRequired(byte[] bytes, int bits,
+            int fromIndex, int toIndex, long lower, long upper) {
+        return queryPackedRequired(bytes, bits, fromIndex, toIndex, lower, upper, true);
+    }
+
+    private static int queryPackedRequired(byte[] bytes, int bits,
+            int fromIndex, int toIndex, long lower, long upper, boolean first) {
+        Objects.requireNonNull(bytes, "bytes");
+        int width = codecWidth(bits);
+        if (bytes.length % width != 0) throw new IllegalArgumentException("partial packed element");
+        Objects.checkFromToIndex(fromIndex, toIndex, bytes.length / width);
+        if (lower > upper) throw new IllegalArgumentException("lower exceeds upper");
+        requireAllocationLengthAndLibrary(0);
+        int result = nativeQueryPacked(bytes, bits, fromIndex, toIndex, lower, upper, first);
+        if (result == Integer.MIN_VALUE) {
+            throw new OutOfMemoryError("packed query could not report native failure");
+        }
+        return result;
+    }
+
+    private static native int nativeQueryPacked(byte[] bytes, int bits,
+            int fromIndex, int toIndex, long lower, long upper, boolean first);
+
     private static int codecWidth(int bits) {
         if (bits != 40 && bits != 48 && bits != 56) {
             throw new IllegalArgumentException("packed width must be 40, 48 or 56");

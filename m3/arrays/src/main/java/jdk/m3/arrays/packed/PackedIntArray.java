@@ -238,6 +238,61 @@ public sealed abstract class PackedIntArray permits Int40Array, Int48Array, Int5
         return values;
     }
 
+    /**
+     * Counts values in the inclusive numeric interval without expanding this storage.
+     * Numeric endpoints may be outside the represented width. The element window is
+     * checked first, then the numeric interval, including for an empty window.
+     * @param fromIndex inclusive element start
+     * @param toIndex exclusive element end
+     * @param lower inclusive signed lower bound
+     * @param upper inclusive signed upper bound
+     * @return exact matching element count
+     * @throws IndexOutOfBoundsException if the element window is invalid
+     * @throws IllegalArgumentException if lower exceeds upper
+     */
+    public final int countInRange(int fromIndex, int toIndex, long lower, long upper) {
+        checkQuery(fromIndex, toIndex, lower, upper);
+        if (upper < minValue() || lower > maxValue()) return 0;
+        if (lower <= minValue() && upper >= maxValue()) return toIndex - fromIndex;
+        int bytes = bytesPerValue();
+        int end = toIndex * bytes;
+        int count = 0;
+        for (int offset = fromIndex * bytes; offset < end; offset += bytes) {
+            long value = PackedCodec.readSigned(data, offset, bytes);
+            if (value >= lower && value <= upper) count++;
+        }
+        return count;
+    }
+
+    /**
+     * Finds the first value in an inclusive numeric interval without materialization.
+     * Uses the same validation and interval rules as {@link #countInRange}.
+     * @param fromIndex inclusive element start
+     * @param toIndex exclusive element end
+     * @param lower inclusive signed lower bound
+     * @param upper inclusive signed upper bound
+     * @return absolute element index of the first match, or -1 if none matches
+     * @throws IndexOutOfBoundsException if the element window is invalid
+     * @throws IllegalArgumentException if lower exceeds upper
+     */
+    public final int firstInRange(int fromIndex, int toIndex, long lower, long upper) {
+        checkQuery(fromIndex, toIndex, lower, upper);
+        if (fromIndex == toIndex || upper < minValue() || lower > maxValue()) return -1;
+        if (lower <= minValue() && upper >= maxValue()) return fromIndex;
+        int bytes = bytesPerValue();
+        int offset = fromIndex * bytes;
+        for (int index = fromIndex; index < toIndex; index++, offset += bytes) {
+            long value = PackedCodec.readSigned(data, offset, bytes);
+            if (value >= lower && value <= upper) return index;
+        }
+        return -1;
+    }
+
+    private void checkQuery(int fromIndex, int toIndex, long lower, long upper) {
+        Objects.checkFromToIndex(fromIndex, toIndex, length());
+        if (lower > upper) throw new IllegalArgumentException("lower exceeds upper");
+    }
+
     private void checkValue(long value) {
         if (value < minValue() || value > maxValue()) {
             throw new IllegalArgumentException("value outside signed int" + bits + ": " + value);

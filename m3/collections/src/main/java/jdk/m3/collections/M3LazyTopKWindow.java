@@ -158,7 +158,7 @@ public final class M3LazyTopKWindow {
                 source.getBits(firstLane, a), source.getBits(firstLane, b));
         if (c == 0 && nextKind != null)
             c = nextKind.compareBits(source.getBits(nextLane, a), source.getBits(nextLane, b));
-        if (c == 0) c = Integer.compare(a, b);
+        if (c == 0) return Integer.compare(a, b);
         return ascending ? c : -c;
     }
 

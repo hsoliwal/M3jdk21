@@ -1,5 +1,6 @@
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project */
 /* SPDX-License-Identifier: Apache-2.0 */
+/* Modified 2026-11-08: additive exact packed range queries with bounded JNI ingress. */
 /* Modified 2026-10-29: target-owned M3 arrays codec adaptation from Synexia
  * 6f878f9e5d6c5044eda15efb9e743594e70ce7f7; six packed/full64 operations only. */
 #include <jni.h>
@@ -153,4 +154,60 @@ JNIEXPORT jlongArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeDecodeZigZag
         JNIEnv *env, jclass clazz, jbyteArray source) {
     (void)clazz;
     return decode_extended(env, source, M3_MODE_ZIGZAG64, 0);
+}
+
+/* Large payloads use bounded aligned region reads. No JNI array borrow is retained.
+ * INT32_MIN is reserved for failure: Java defends failure to construct an exception. */
+JNIEXPORT jint JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeQueryPacked(
+        JNIEnv *env, jclass clazz, jbyteArray source, jint bits,
+        jint from_index, jint to_index, jlong lower, jlong upper, jboolean first) {
+    (void)clazz;
+    if ((*env)->ExceptionCheck(env)) return INT32_MIN;
+    if (!source) {
+        m3_jni_throw_new(env, "java/lang/NullPointerException", "codec array");
+        return INT32_MIN;
+    }
+    jsize length = (*env)->GetArrayLength(env, source);
+    if ((*env)->ExceptionCheck(env)) return INT32_MIN;
+    if (bits != 40 && bits != 48 && bits != 56) {
+        m3_jni_throw_new(env, "java/lang/IllegalArgumentException", "packed width must be 40, 48 or 56");
+        return INT32_MIN;
+    }
+    jint width = bits / 8;
+    if (length < 0 || length % width != 0) {
+        m3_jni_throw_new(env, "java/lang/IllegalArgumentException", "partial packed element");
+        return INT32_MIN;
+    }
+    if (from_index < 0 || to_index < from_index || to_index > length / width) {
+        m3_jni_throw_new(env, "java/lang/IndexOutOfBoundsException", "packed element window");
+        return INT32_MIN;
+    }
+    if (lower > upper) {
+        m3_jni_throw_new(env, "java/lang/IllegalArgumentException", "lower exceeds upper");
+        return INT32_MIN;
+    }
+    jbyte bytes[M3_PACKED_CODEC_MAX];
+    uint8_t input[M3_PACKED_CODEC_MAX];
+    jint count_matches = 0;
+    const jint chunk_elements = (jint)M3_PACKED_CODEC_MAX / width;
+    for (jint start = from_index; start < to_index;) {
+        jint elements = to_index - start;
+        if (elements > chunk_elements) elements = chunk_elements;
+        /* Validated total geometry makes both products fit jsize. */
+        jint byte_count = elements * width;
+        (*env)->GetByteArrayRegion(env, source, start * width, byte_count, bytes);
+        if ((*env)->ExceptionCheck(env)) return INT32_MIN;
+        for (jint i = 0; i < byte_count; ++i) input[i] = (uint8_t)bytes[i];
+        size_t found = 0;
+        int status = m3_codec_query_packed(input, (size_t)byte_count, (int)bits,
+                (int64_t)lower, (int64_t)upper, first == JNI_TRUE, &found);
+        if (!status_ok(env, status)) return INT32_MIN;
+        if (first == JNI_TRUE) {
+            if (found != SIZE_MAX) return start + (jint)found;
+        } else {
+            count_matches += (jint)found;
+        }
+        start += elements;
+    }
+    return first == JNI_TRUE ? -1 : count_matches;
 }

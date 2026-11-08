@@ -1,5 +1,6 @@
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project */
 /* SPDX-License-Identifier: Apache-2.0 */
+/* Modified 2026-11-08: additive exact packed range queries with bounded JNI ingress. */
 /* Modified 2026-10-29: target-owned M3 arrays codec adaptation from Synexia
  * 6f878f9e5d6c5044eda15efb9e743594e70ce7f7; six packed/full64 operations only. */
 #ifndef M3_PACKED_CODEC_H
@@ -37,6 +38,14 @@ int m3_codec_encode_zigzag64(const int64_t *src, size_t n,
                                uint8_t *dst, size_t cap, size_t *written);
 int m3_codec_decode_zigzag64(const uint8_t *src, size_t n,
                                int64_t *dst, size_t cap, size_t *written);
+
+/* Exact inclusive range query over one complete bounded packed byte window.
+ * first must be 0 (count) or 1 (first relative element index, SIZE_MAX if absent).
+ * Endpoints may span the full int64_t domain. lower > upper is FORMAT.
+ * No destination payload is allocated or written; *result is zero on failure.
+ * Source and result storage must not overlap. */
+int m3_codec_query_packed(const uint8_t *src, size_t n, int bits,
+                          int64_t lower, int64_t upper, int first, size_t *result);
 
 #ifdef __cplusplus
 }
