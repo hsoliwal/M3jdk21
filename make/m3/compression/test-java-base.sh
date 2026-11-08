@@ -5,7 +5,7 @@
 # java.base patch (-Xlint:all,-serial -Werror); the tests share the package (they use package-private types), so they
 # are patched in too, with JUnit on the boot class path. Runs every JUnit class and every *SelfTest main without and
 # with the opt-in JNI library (built from src/java.base/share/native/libm3compression with the CMake warning set).
-# M3CompressionInteropSelfTest needs an external corpus and runs only when M3_LZ_CORPUS names one.
+# CompressionInteropSelfTest needs an external corpus and runs only when M3_LZ_CORPUS names one.
 # usage: test-java-base.sh <junit-platform-console-standalone.jar> [work-dir]
 set -euo pipefail
 root=$(cd "$(dirname "$0")/../../.." && pwd)
@@ -32,8 +32,8 @@ for lib in none native; do
     --disable-banner --details=summary --fail-if-no-tests
   for m in $mains; do
     case $m in
-      M3CompressionInteropSelfTest) [ -n "${M3_LZ_CORPUS:-}" ] || continue; args=("$M3_LZ_CORPUS") ;;
-      M3LzNativeArenaSelfTest) args=("$work/native/libm3lz.so") ;;
+      CompressionInteropSelfTest) [ -n "${M3_LZ_CORPUS:-}" ] || continue; args=("$M3_LZ_CORPUS") ;;
+      LzNativeArenaSelfTest) args=("$work/native/libm3lz.so") ;;
       *) args=() ;;
     esac
     "${run[@]}" "${props[@]}" $pkg.$m "${args[@]}" > "$work/$lib-$m.log"
