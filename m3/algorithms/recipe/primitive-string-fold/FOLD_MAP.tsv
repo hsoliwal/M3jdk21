@@ -1,0 +1,10 @@
+# FOLD_MEMBERS v1.3 map (m3/tooling/jdk-naming/fold_members.py): PrimitiveStringAlgorithms folds into StringAlgorithms, one owner per concept (2026-11-08).
+# Primitive overloads join the bare-named owner (java.util.Arrays holds int[] and Object[] overloads the same way); bodies byte for byte.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/StringAlgorithms.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java
+TAKE	PrimitiveStringAlgorithms.*
+IMPORT	java.util.Objects
+REFS	\(PrimitiveStringAlgorithms, StringAlgorithms\)	(StringAlgorithms)
+REFS	\bPrimitiveStringAlgorithms\b	StringAlgorithms
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java
