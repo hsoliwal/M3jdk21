@@ -723,4 +723,188 @@ public final class StringAlgorithms {
         return output.toString();
     }
 
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.Query from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    public record OneMismatchQuery(String text, String pattern) {
+        public OneMismatchQuery {
+            Objects.requireNonNull(text, "text");
+            requireOneMismatchPattern(pattern);
+        }
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.FIRST_MATCH_CAPACITY from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    private static final int ONE_MISMATCH_FIRST_MATCH_CAPACITY = 8;
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.firstIndex from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    public static int oneMismatchFirstIndex(OneMismatchQuery query, ProgressMonitor monitor) {
+        OneMismatchQuery checked = Objects.requireNonNull(query, "query");
+        return oneMismatchFirstIndex(checked.text(), checked.pattern(), monitor);
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.firstIndex from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    public static int oneMismatchFirstIndex(String text, String pattern) {
+        return oneMismatchFirstIndex(text, pattern, null);
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.firstIndex from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    public static int oneMismatchFirstIndex(
+            String text, String pattern, ProgressMonitor monitor) {
+        String haystack = Objects.requireNonNull(text, "text");
+        String needle = requireOneMismatchPattern(pattern);
+        ProgressMonitor checked = ProgressChecks.nonNull(monitor);
+        ProgressChecks.checkCanceled(checked);
+        if (needle.length() > haystack.length()) {
+            return -1;
+        }
+        // A one-code-unit window can differ in at most one code unit.
+        // Keep custom monitor callbacks on the original geometry path.
+        if (monitor == null && needle.length() == 1) {
+            ProgressChecks.checkCanceled(checked);
+            return 0;
+        }
+
+        OneMismatchGeometry geometry = oneMismatchGeometry(haystack, needle, checked);
+        int maximum = haystack.length() - needle.length();
+        for (int start = 0; start <= maximum; start++) {
+            if ((start & 1023) == 0) {
+                ProgressChecks.checkCanceled(checked);
+            }
+            if (geometry.matches(start)) {
+                ProgressChecks.checkCanceled(checked);
+                return start;
+            }
+        }
+        ProgressChecks.checkCanceled(checked);
+        return -1;
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.allIndices from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    public static int[] oneMismatchAllIndices(String text, String pattern) {
+        return oneMismatchAllIndices(text, pattern, null);
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.allIndices from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    public static int[] oneMismatchAllIndices(
+            String text, String pattern, ProgressMonitor monitor) {
+        String haystack = Objects.requireNonNull(text, "text");
+        String needle = requireOneMismatchPattern(pattern);
+        ProgressMonitor checked = ProgressChecks.nonNull(monitor);
+        ProgressChecks.checkCanceled(checked);
+        if (needle.length() > haystack.length()) {
+            return new int[0];
+        }
+        // Every singleton-pattern position is a match under distance <= 1.
+        // Avoid reverse strings and two text-sized Z tables on this Java path.
+        // Caller-supplied monitors keep their original progress/poll cadence.
+        if (monitor == null && needle.length() == 1) {
+            int[] everyPosition = new int[haystack.length()];
+            for (int index = 0; index < everyPosition.length; index++) {
+                if ((index & 1023) == 0) {
+                    ProgressChecks.checkCanceled(checked);
+                }
+                everyPosition[index] = index;
+            }
+            ProgressChecks.checkCanceled(checked);
+            return everyPosition;
+        }
+
+        OneMismatchGeometry geometry = oneMismatchGeometry(haystack, needle, checked);
+        int maximum = haystack.length() - needle.length();
+        // Allocate result slots only on observed hits, not for every possible window.
+        // The upper bound fits int because a nonempty needle is mandatory.
+        int limit = maximum + 1;
+        int[] matches = new int[0];
+        int count = 0;
+        for (int start = 0; start <= maximum; start++) {
+            if ((start & 1023) == 0) {
+                ProgressChecks.checkCanceled(checked);
+            }
+            if (geometry.matches(start)) {
+                if (count == matches.length) {
+                    int capacity = matches.length;
+                    int next = capacity == 0 ? Math.min(ONE_MISMATCH_FIRST_MATCH_CAPACITY, limit)
+                            : capacity >= limit - capacity ? limit : capacity * 2;
+                    matches = Arrays.copyOf(matches, next);
+                }
+                matches[count++] = start;
+            }
+        }
+        ProgressChecks.checkCanceled(checked);
+        return count == matches.length ? matches : Arrays.copyOf(matches, count);
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.matchesAt from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    /** Direct reference predicate used by parity/property tests and bounded callers. */
+    public static boolean oneMismatchMatchesAt(String text, String pattern, int start) {
+        String haystack = Objects.requireNonNull(text, "text");
+        String needle = requireOneMismatchPattern(pattern);
+        if (start < 0 || start > haystack.length() - needle.length()) {
+            return false;
+        }
+        int mismatches = 0;
+        for (int index = 0; index < needle.length(); index++) {
+            if (haystack.charAt(start + index) != needle.charAt(index)
+                    && ++mismatches > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.geometry from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    private static OneMismatchGeometry oneMismatchGeometry(
+            String text, String pattern, ProgressMonitor monitor) {
+        int[] prefix = StringAlgorithms.prefixMatchLengths(text, pattern, monitor);
+        String reversedText = reverseCodeUnits(text);
+        String reversedPattern = reverseCodeUnits(pattern);
+        int[] reversedPrefix =
+                StringAlgorithms.prefixMatchLengths(reversedText, reversedPattern, monitor);
+        return new OneMismatchGeometry(text.length(), pattern.length(), prefix, reversedPrefix);
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.Geometry from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    private record OneMismatchGeometry(
+            int textLength,
+            int patternLength,
+            int[] prefix,
+            int[] reversedPrefix) {
+        private OneMismatchGeometry {
+            if (patternLength < 1
+                    || prefix.length != textLength
+                    || reversedPrefix.length != textLength) {
+                throw new IllegalArgumentException("invalid one-mismatch geometry");
+            }
+        }
+
+        boolean matches(int start) {
+            int leading = Math.min(patternLength, prefix[start]);
+            if (leading >= patternLength) {
+                return true;
+            }
+            int reversedStart = textLength - start - patternLength;
+            int trailing = Math.min(patternLength, reversedPrefix[reversedStart]);
+            return leading + trailing >= patternLength - 1;
+        }
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.requirePattern from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    private static String requireOneMismatchPattern(String pattern) {
+        String value = Objects.requireNonNull(pattern, "pattern");
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException("pattern must not be empty");
+        }
+        return value;
+    }
+
+    //FLLDCIM: FOLD - member OneMismatchWindowSearch.reverseCodeUnits from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    /** Reverse raw UTF-16 code units; do not apply StringBuilder's surrogate-pair repair. */
+    private static String reverseCodeUnits(String value) {
+        char[] units = value.toCharArray();
+        for (int left = 0, right = units.length - 1; left < right; left++, right--) {
+            char swap = units[left];
+            units[left] = units[right];
+            units[right] = swap;
+        }
+        return new String(units);
+    }
 }

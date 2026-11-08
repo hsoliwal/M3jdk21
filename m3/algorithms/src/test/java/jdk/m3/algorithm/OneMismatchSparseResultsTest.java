@@ -16,8 +16,8 @@ final class OneMismatchSparseResultsTest {
     @Test
     void longNoMatchReturnsZeroResultsWithoutPreallocatingAllWindows() {
         String text = "x".repeat(131_072);
-        assertArrayEquals(new int[0], OneMismatchWindowSearch.allIndices(text, "abcdef"));
-        assertEquals(-1, OneMismatchWindowSearch.firstIndex(text, "abcdef"));
+        assertArrayEquals(new int[0], StringAlgorithms.oneMismatchAllIndices(text, "abcdef"));
+        assertEquals(-1, StringAlgorithms.oneMismatchFirstIndex(text, "abcdef"));
     }
 
     @Test
@@ -29,10 +29,10 @@ final class OneMismatchSparseResultsTest {
         }
         String haystack = new String(text);
         int[] expected = {9, 510, 1_001};
-        int[] first = OneMismatchWindowSearch.allIndices(haystack, "abcdef");
+        int[] first = StringAlgorithms.oneMismatchAllIndices(haystack, "abcdef");
         assertArrayEquals(expected, first);
         first[0] = Integer.MIN_VALUE;
-        assertArrayEquals(expected, OneMismatchWindowSearch.allIndices(haystack, "abcdef"));
+        assertArrayEquals(expected, StringAlgorithms.oneMismatchAllIndices(haystack, "abcdef"));
     }
 
     @Test
@@ -42,7 +42,7 @@ final class OneMismatchSparseResultsTest {
             int[] expected = new int[length];
             for (int i = 0; i < length; i++) expected[i] = i;
             assertArrayEquals(expected,
-                    OneMismatchWindowSearch.allIndices("a".repeat(length), "b"),
+                    StringAlgorithms.oneMismatchAllIndices("a".repeat(length), "b"),
                     "length=" + length);
         }
     }
@@ -58,24 +58,24 @@ final class OneMismatchSparseResultsTest {
                 pattern = text.substring(start, start + pattern.length());
             }
             int[] expected = naive(text, pattern);
-            assertArrayEquals(expected, OneMismatchWindowSearch.allIndices(text, pattern),
+            assertArrayEquals(expected, StringAlgorithms.oneMismatchAllIndices(text, pattern),
                     "trial=" + trial);
             assertEquals(expected.length == 0 ? -1 : expected[0],
-                    OneMismatchWindowSearch.firstIndex(text, pattern), "trial=" + trial);
+                    StringAlgorithms.oneMismatchFirstIndex(text, pattern), "trial=" + trial);
         }
     }
 
     @Test
     void invalidAndOversizedPatternBehaviorsRemainLocked() {
         assertThrows(NullPointerException.class,
-                () -> OneMismatchWindowSearch.allIndices(null, "x"));
+                () -> StringAlgorithms.oneMismatchAllIndices(null, "x"));
         assertThrows(NullPointerException.class,
-                () -> OneMismatchWindowSearch.allIndices("x", null));
+                () -> StringAlgorithms.oneMismatchAllIndices("x", null));
         assertThrows(IllegalArgumentException.class,
-                () -> OneMismatchWindowSearch.allIndices("x", ""));
-        assertArrayEquals(new int[0], OneMismatchWindowSearch.allIndices("x", "xyz"));
+                () -> StringAlgorithms.oneMismatchAllIndices("x", ""));
+        assertArrayEquals(new int[0], StringAlgorithms.oneMismatchAllIndices("x", "xyz"));
         assertArrayEquals(new int[] {0, 1, 2},
-                OneMismatchWindowSearch.allIndices("\u0000\ud800\udfff", "z"));
+                StringAlgorithms.oneMismatchAllIndices("\u0000\ud800\udfff", "z"));
     }
 
     private static int[] naive(String text, String pattern) {

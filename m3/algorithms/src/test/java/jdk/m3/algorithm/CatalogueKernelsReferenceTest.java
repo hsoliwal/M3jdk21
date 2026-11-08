@@ -69,7 +69,7 @@ final class CatalogueKernelsReferenceTest {
         assertThrows(CancellationException.class,
                 () -> StringAlgorithms.prefixMatchLengths("a".repeat(4096), "a".repeat(64) + "b", canceled));
         assertThrows(CancellationException.class, () -> StringAlgorithms.zSearch("abc", "c", canceled));
-        assertThrows(CancellationException.class, () -> OneMismatchWindowSearch.allIndices("abc", "ab", canceled));
+        assertThrows(CancellationException.class, () -> StringAlgorithms.oneMismatchAllIndices("abc", "ab", canceled));
     }
 
     @Test
@@ -83,9 +83,9 @@ final class CatalogueKernelsReferenceTest {
                 continue;
             }
             int[] expected = bruteForce(text, pattern);
-            assertArrayEquals(expected, OneMismatchWindowSearch.allIndices(text, pattern), "trial=" + trial);
+            assertArrayEquals(expected, StringAlgorithms.oneMismatchAllIndices(text, pattern), "trial=" + trial);
             assertEquals(expected.length == 0 ? -1 : expected[0],
-                    OneMismatchWindowSearch.firstIndex(text, pattern), "trial=" + trial);
+                    StringAlgorithms.oneMismatchFirstIndex(text, pattern), "trial=" + trial);
             windows += Math.max(0, text.length() - pattern.length() + 1);
         }
         System.out.println("REFERENCE one-mismatch brute-force windows=" + windows);
