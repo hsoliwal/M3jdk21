@@ -157,13 +157,13 @@ class ArrayTreeDpReferenceTest {
             int n = random.nextInt(1, 25);
             boolean bst = random.nextBoolean();
             int[][] t = AlgorithmExtrasDump.randomTree(random, n, bst);
-            PrimitiveTreeAlgorithms.BinaryTree tree = new PrimitiveTreeAlgorithms.BinaryTree(t[0], t[1], t[2],
+            TreeAlgorithms.BinaryTree tree = new TreeAlgorithms.BinaryTree(t[0], t[1], t[2],
                     t[3][0]);
             List<Integer> pre = new ArrayList<>();
             List<Integer> post = new ArrayList<>();
             walk(t, t[3][0], pre, post);
-            assertEquals(pre, box(PrimitiveTreeAlgorithms.preorder(tree)));
-            assertEquals(post, box(PrimitiveTreeAlgorithms.postorder(tree)));
+            assertEquals(pre, box(TreeAlgorithms.preorder(tree)));
+            assertEquals(post, box(TreeAlgorithms.postorder(tree)));
             int[] parent = new int[n];
             Arrays.fill(parent, -1);
             for (int v = 0; v < n; v++) {
@@ -187,9 +187,9 @@ class ArrayTreeDpReferenceTest {
                     bestPath = Math.max(bestPath, sum);
                 }
             }
-            assertEquals(diameter, PrimitiveTreeAlgorithms.diameterEdges(tree));
-            assertEquals(bestPath, PrimitiveTreeAlgorithms.maxPathSum(tree));
-            PrimitiveTreeAlgorithms.BinaryTree inverted = PrimitiveTreeAlgorithms.inverted(tree);
+            assertEquals(diameter, TreeAlgorithms.diameterEdges(tree));
+            assertEquals(bestPath, TreeAlgorithms.maxPathSum(tree));
+            TreeAlgorithms.BinaryTree inverted = TreeAlgorithms.inverted(tree);
             assertArrayEquals(t[2], inverted.left());
             assertArrayEquals(t[1], inverted.right());
             if (bst) {
@@ -203,7 +203,7 @@ class ArrayTreeDpReferenceTest {
                         expected = px.get(k);
                     }
                 }
-                assertEquals(expected, PrimitiveTreeAlgorithms.lowestCommonAncestorBstByValue(tree, x, y));
+                assertEquals(expected, TreeAlgorithms.lowestCommonAncestorBstByValue(tree, x, y));
             }
         }
         report("tree", "preorder+postorder+diameterEdges+maxPathSum+inverted+lowestCommonAncestorBstByValue",

@@ -821,15 +821,15 @@ public final class AlgorithmExtrasDump {
             int a = n == 0 ? 0 : random.nextBoolean() ? t[0][random.nextInt(n)] : random.nextInt(-60, 61);
             int b = n == 0 ? 0 : t[0][random.nextInt(n)];
             return call(s(t) + " a=" + a + " b=" + b, () -> {
-                PrimitiveTreeAlgorithms.BinaryTree tree = new PrimitiveTreeAlgorithms.BinaryTree(t[0], t[1], t[2],
+                TreeAlgorithms.BinaryTree tree = new TreeAlgorithms.BinaryTree(t[0], t[1], t[2],
                         t[3][0]);
                 return s(tree.values()) + s(tree.left()) + s(tree.right()) + tree.root()
-                        + call(" pre", () -> s(PrimitiveTreeAlgorithms.preorder(tree)))
-                        + call(" post", () -> s(PrimitiveTreeAlgorithms.postorder(tree)))
-                        + call(" dia", () -> "" + PrimitiveTreeAlgorithms.diameterEdges(tree))
-                        + call(" lca", () -> "" + PrimitiveTreeAlgorithms.lowestCommonAncestorBstByValue(tree, a, b))
-                        + call(" mps", () -> "" + PrimitiveTreeAlgorithms.maxPathSum(tree))
-                        + call(" inv", () -> s(PrimitiveTreeAlgorithms.preorder(PrimitiveTreeAlgorithms.inverted(
+                        + call(" pre", () -> s(TreeAlgorithms.preorder(tree)))
+                        + call(" post", () -> s(TreeAlgorithms.postorder(tree)))
+                        + call(" dia", () -> "" + TreeAlgorithms.diameterEdges(tree))
+                        + call(" lca", () -> "" + TreeAlgorithms.lowestCommonAncestorBstByValue(tree, a, b))
+                        + call(" mps", () -> "" + TreeAlgorithms.maxPathSum(tree))
+                        + call(" inv", () -> s(TreeAlgorithms.preorder(TreeAlgorithms.inverted(
                         tree))));
             });
         });
