@@ -3,7 +3,7 @@
 <!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/docs/TASK_LOG_CONTRACT.md blob 3a6ea9ec2255; recipe m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py v3 -->
 # PMEMSDK source-task receipt log — additive Java/JNI companion
 
-`M3PmemTaskLog` uses the existing `M3PmemRegion` JNI mapping, read, write and
+`PmemTaskLog` uses the existing `PmemRegion` JNI mapping, read, write and
 `persist` ABI. It adds no native symbols, independent scheduler, file crawler,
 AST parser, model runner or automatic source edit authority.
 
@@ -25,7 +25,7 @@ task/source/result SHA-256 digests, a SHA-256 integrity digest and an
 `M3COMMIT` marker. Candidate output bytes live outside the log in the existing
 content store. Each task should bind its repository/file/atom identity, prompt
 contract, diagnostics, model identity and context parameters into its task
-digest; `M3PmemTaskLog` validates exact SHA-256 syntax, not those upstream claims.
+digest; `PmemTaskLog` validates exact SHA-256 syntax, not those upstream claims.
 
 An append writes and persists a zero-marked body, then writes and persists the
 commit marker. Reopen scans in ordinal order and verifies each committed body;
@@ -39,7 +39,7 @@ outcome is unknown; the caller must reopen, verify and only then retry.
 The caller pre-sizes a dedicated mapping and grants **one log owner** exclusive
 write authority. The class serializes operations on that owner; it cannot
 coordinate independently created wrappers around the same region. Mapping
-closure, replacement and lifetime remain with `M3PmemRegion` and its existing
+closure, replacement and lifetime remain with `PmemRegion` and its existing
 Java/JNI leases. Never treat a candidate report as an admitted rewrite or
 interpret successful POSIX `msync` as actual Optane power-loss proof.
 

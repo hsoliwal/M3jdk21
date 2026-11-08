@@ -1,0 +1,171 @@
+TYPE	jdk.m3.optane.M3NativeByteOracle	jdk.m3.optane.NativeByteOracle
+TYPE	jdk.m3.optane.M3NativePmem	jdk.m3.optane.NativePmem
+TYPE	jdk.m3.optane.M3PmemAccess	jdk.m3.optane.PmemAccess
+TYPE	jdk.m3.optane.M3PmemAtomCases	jdk.m3.optane.PmemAtomCases
+TYPE	jdk.m3.optane.M3PmemAtomCorrectnessJUnitTest	jdk.m3.optane.PmemAtomCorrectnessJUnitTest
+TYPE	jdk.m3.optane.M3PmemBackend	jdk.m3.optane.PmemBackend
+TYPE	jdk.m3.optane.M3PmemCapabilities	jdk.m3.optane.PmemCapabilities
+TYPE	jdk.m3.optane.M3PmemCorpusAtom	jdk.m3.optane.PmemCorpusAtom
+TYPE	jdk.m3.optane.M3PmemCorpusAtomUnitTest	jdk.m3.optane.PmemCorpusAtomUnitTest
+TYPE	jdk.m3.optane.M3PmemDump	jdk.m3.optane.PmemDump
+TYPE	jdk.m3.optane.M3PmemFileBackendJUnitTest	jdk.m3.optane.PmemFileBackendJUnitTest
+TYPE	jdk.m3.optane.M3PmemFileReplayTest	jdk.m3.optane.PmemFileReplayTest
+TYPE	jdk.m3.optane.M3PmemGranularity	jdk.m3.optane.PmemGranularity
+TYPE	jdk.m3.optane.M3PmemMapping	jdk.m3.optane.PmemMapping
+TYPE	jdk.m3.optane.M3PmemNativeKmpPrefix32JUnitTest	jdk.m3.optane.PmemNativeKmpPrefix32JUnitTest
+TYPE	jdk.m3.optane.M3PmemRegion	jdk.m3.optane.PmemRegion
+TYPE	jdk.m3.optane.M3PmemSdk	jdk.m3.optane.PmemSdk
+TYPE	jdk.m3.optane.M3PmemSearch	jdk.m3.optane.PmemSearch
+TYPE	jdk.m3.optane.M3PmemSourceImage	jdk.m3.optane.PmemSourceImage
+TYPE	jdk.m3.optane.M3PmemSourceImageDump	jdk.m3.optane.PmemSourceImageDump
+TYPE	jdk.m3.optane.M3PmemSourceImageJUnitTest	jdk.m3.optane.PmemSourceImageJUnitTest
+TYPE	jdk.m3.optane.M3PmemSourceImagePathJUnitTest	jdk.m3.optane.PmemSourceImagePathJUnitTest
+TYPE	jdk.m3.optane.M3PmemSourceImageReplayTest	jdk.m3.optane.PmemSourceImageReplayTest
+TYPE	jdk.m3.optane.M3PmemSourceImageReusableBufferJUnitTest	jdk.m3.optane.PmemSourceImageReusableBufferJUnitTest
+TYPE	jdk.m3.optane.M3PmemSourcePathIndex	jdk.m3.optane.PmemSourcePathIndex
+TYPE	jdk.m3.optane.M3PmemSourcePathIndexJUnitTest	jdk.m3.optane.PmemSourcePathIndexJUnitTest
+TYPE	jdk.m3.optane.M3PmemSourcePathWiringJUnitTest	jdk.m3.optane.PmemSourcePathWiringJUnitTest
+TYPE	jdk.m3.optane.M3PmemSourceSlices	jdk.m3.optane.PmemSourceSlices
+TYPE	jdk.m3.optane.M3PmemSourceSlicesJUnitTest	jdk.m3.optane.PmemSourceSlicesJUnitTest
+TYPE	jdk.m3.optane.M3PmemSourceSlicesLifecycleJUnitTest	jdk.m3.optane.PmemSourceSlicesLifecycleJUnitTest
+TYPE	jdk.m3.optane.M3PmemStreamingSealJUnitTest	jdk.m3.optane.PmemStreamingSealJUnitTest
+TYPE	jdk.m3.optane.M3PmemTaskLog	jdk.m3.optane.PmemTaskLog
+TYPE	jdk.m3.optane.M3PmemTaskLogDump	jdk.m3.optane.PmemTaskLogDump
+TYPE	jdk.m3.optane.M3PmemTaskLogReplayTest	jdk.m3.optane.PmemTaskLogReplayTest
+TYPE	jdk.m3.optane.M3PmemTaskLogSmokeTest	jdk.m3.optane.PmemTaskLogSmokeTest
+TYPE	jdk.m3.optane.M3PmemTaskReplay	jdk.m3.optane.PmemTaskReplay
+TYPE	jdk.m3.optane.M3PmemTaskReplaySmokeTest	jdk.m3.optane.PmemTaskReplaySmokeTest
+TYPE	jdk.m3.optane.M3PmemTransfer	jdk.m3.optane.PmemTransfer
+TYPE	jdk.internal.m3.optane.M3NumaTopology	jdk.internal.m3.optane.NumaTopology
+TYPE	jdk.internal.m3.optane.M3NumaTopologyCpuListTest	jdk.internal.m3.optane.NumaTopologyCpuListTest
+TYPE	jdk.internal.m3.optane.M3PmemAccelerator	jdk.internal.m3.optane.PmemAccelerator
+TYPE	jdk.internal.m3.optane.M3PmemAcceleratorJUnitTest	jdk.internal.m3.optane.PmemAcceleratorJUnitTest
+TYPE	jdk.internal.m3.optane.M3PmemAcceleratorSelfTest	jdk.internal.m3.optane.PmemAcceleratorSelfTest
+TYPE	jdk.internal.m3.optane.M3PmemCorpusGramIndex	jdk.internal.m3.optane.PmemCorpusGramIndex
+TYPE	jdk.internal.m3.optane.M3PmemCorpusGramIndexJUnitTest	jdk.internal.m3.optane.PmemCorpusGramIndexJUnitTest
+TYPE	jdk.internal.m3.optane.M3PmemCorpusSearch	jdk.internal.m3.optane.PmemCorpusSearch
+TYPE	jdk.internal.m3.optane.M3PmemCorpusSearchJUnitTest	jdk.internal.m3.optane.PmemCorpusSearchJUnitTest
+TYPE	jdk.internal.m3.optane.M3PmemCorpusSelectedJUnitTest	jdk.internal.m3.optane.PmemCorpusSelectedJUnitTest
+TYPE	jdk.internal.m3.optane.M3PmemCorpusSelectedSearch	jdk.internal.m3.optane.PmemCorpusSelectedSearch
+TYPE	jdk.internal.m3.optane.M3PmemGramIndexDump	jdk.internal.m3.optane.PmemGramIndexDump
+TYPE	jdk.internal.m3.optane.M3PmemGramIndexReplayTest	jdk.internal.m3.optane.PmemGramIndexReplayTest
+TYPE	jdk.internal.m3.optane.M3PmemGramOneGigabyteProof	jdk.internal.m3.optane.PmemGramOneGigabyteProof
+EDIT	m3/optane/docs/API_CONTRACT.md
+EDIT	m3/optane/docs/PMEM_PATH_PROBE_BOUND_CONTRACT.md
+EDIT	m3/optane/docs/SEARCH_CONTRACT.md
+EDIT	m3/optane/docs/SORTED_LONG_SEARCH.md
+EDIT	m3/optane/docs/SOURCE_PATH_LOOKUP_CONTRACT.md
+EDIT	m3/optane/docs/SOURCE_SLICES_CONTRACT.md
+EDIT	m3/optane/docs/TASK_LOG_CONTRACT.md
+EDIT	m3/optane/docs/TASK_REPLAY_CONTRACT.md
+EDIT	m3/optane/docs/TRANSFER_CONTRACT.md
+EDIT	m3/optane/PORT-MAPPING.pending.json
+EDIT	m3/optane/README.md
+EDIT	m3/optane/src/main/java/jdk/internal/m3/optane/M3NumaTopology.java
+EDIT	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemAccelerator.java
+EDIT	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemCorpusGramIndex.java
+EDIT	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemCorpusSearch.java
+EDIT	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemCorpusSelectedSearch.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3NativePmem.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemAccess.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemBackend.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemCapabilities.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemCorpusAtom.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemGranularity.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemMapping.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemRegion.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemSdk.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemSearch.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemSourceImage.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemSourcePathIndex.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemSourceSlices.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemTaskLog.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemTaskReplay.java
+EDIT	m3/optane/src/main/java/jdk/m3/optane/M3PmemTransfer.java
+EDIT	m3/optane/src/main/native/CMakeLists.txt
+EDIT	m3/optane/src/main/native/m3pmemaccel.c
+EDIT	m3/optane/src/main/native/m3pmemsdk.c
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3NumaTopologyCpuListTest.java
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemAcceleratorJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemAcceleratorSelfTest.java
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemCorpusGramIndexJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemCorpusSearchJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemCorpusSelectedJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemGramIndexDump.java
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemGramIndexReplayTest.java
+EDIT	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemGramOneGigabyteProof.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3NativeByteOracle.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemAtomCases.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemAtomCorrectnessJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemCorpusAtomUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemDump.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemFileBackendJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemFileReplayTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemNativeKmpPrefix32JUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImageDump.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImageJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImagePathJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImageReplayTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImageReusableBufferJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourcePathIndexJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourcePathWiringJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceSlicesJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceSlicesLifecycleJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemStreamingSealJUnitTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemTaskLogDump.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemTaskLogReplayTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemTaskLogSmokeTest.java
+EDIT	m3/optane/src/test/java/jdk/m3/optane/M3PmemTaskReplaySmokeTest.java
+EDIT	m3/optane/src/test/native/M3GramOracle.c
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3NativePmem.java	m3/optane/src/main/java/jdk/m3/optane/NativePmem.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemAccess.java	m3/optane/src/main/java/jdk/m3/optane/PmemAccess.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemBackend.java	m3/optane/src/main/java/jdk/m3/optane/PmemBackend.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemCapabilities.java	m3/optane/src/main/java/jdk/m3/optane/PmemCapabilities.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemCorpusAtom.java	m3/optane/src/main/java/jdk/m3/optane/PmemCorpusAtom.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemGranularity.java	m3/optane/src/main/java/jdk/m3/optane/PmemGranularity.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemMapping.java	m3/optane/src/main/java/jdk/m3/optane/PmemMapping.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemRegion.java	m3/optane/src/main/java/jdk/m3/optane/PmemRegion.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemSdk.java	m3/optane/src/main/java/jdk/m3/optane/PmemSdk.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemSearch.java	m3/optane/src/main/java/jdk/m3/optane/PmemSearch.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemSourceImage.java	m3/optane/src/main/java/jdk/m3/optane/PmemSourceImage.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemSourcePathIndex.java	m3/optane/src/main/java/jdk/m3/optane/PmemSourcePathIndex.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemSourceSlices.java	m3/optane/src/main/java/jdk/m3/optane/PmemSourceSlices.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemTaskLog.java	m3/optane/src/main/java/jdk/m3/optane/PmemTaskLog.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemTaskReplay.java	m3/optane/src/main/java/jdk/m3/optane/PmemTaskReplay.java
+MOVE	m3/optane/src/main/java/jdk/m3/optane/M3PmemTransfer.java	m3/optane/src/main/java/jdk/m3/optane/PmemTransfer.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3NativeByteOracle.java	m3/optane/src/test/java/jdk/m3/optane/NativeByteOracle.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemAtomCases.java	m3/optane/src/test/java/jdk/m3/optane/PmemAtomCases.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemAtomCorrectnessJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemAtomCorrectnessJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemCorpusAtomUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemCorpusAtomUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemDump.java	m3/optane/src/test/java/jdk/m3/optane/PmemDump.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemFileBackendJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemFileBackendJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemFileReplayTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemFileReplayTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemNativeKmpPrefix32JUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemNativeKmpPrefix32JUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImageDump.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourceImageDump.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImageJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourceImageJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImagePathJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourceImagePathJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImageReplayTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourceImageReplayTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceImageReusableBufferJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourceImageReusableBufferJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourcePathIndexJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourcePathIndexJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourcePathWiringJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourcePathWiringJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceSlicesJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourceSlicesJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemSourceSlicesLifecycleJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemSourceSlicesLifecycleJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemStreamingSealJUnitTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemStreamingSealJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemTaskLogDump.java	m3/optane/src/test/java/jdk/m3/optane/PmemTaskLogDump.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemTaskLogReplayTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemTaskLogReplayTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemTaskLogSmokeTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemTaskLogSmokeTest.java
+MOVE	m3/optane/src/test/java/jdk/m3/optane/M3PmemTaskReplaySmokeTest.java	m3/optane/src/test/java/jdk/m3/optane/PmemTaskReplaySmokeTest.java
+MOVE	m3/optane/src/main/java/jdk/internal/m3/optane/M3NumaTopology.java	m3/optane/src/main/java/jdk/internal/m3/optane/NumaTopology.java
+MOVE	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemAccelerator.java	m3/optane/src/main/java/jdk/internal/m3/optane/PmemAccelerator.java
+MOVE	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemCorpusGramIndex.java	m3/optane/src/main/java/jdk/internal/m3/optane/PmemCorpusGramIndex.java
+MOVE	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemCorpusSearch.java	m3/optane/src/main/java/jdk/internal/m3/optane/PmemCorpusSearch.java
+MOVE	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemCorpusSelectedSearch.java	m3/optane/src/main/java/jdk/internal/m3/optane/PmemCorpusSelectedSearch.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3NumaTopologyCpuListTest.java	m3/optane/src/test/java/jdk/internal/m3/optane/NumaTopologyCpuListTest.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemAcceleratorJUnitTest.java	m3/optane/src/test/java/jdk/internal/m3/optane/PmemAcceleratorJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemAcceleratorSelfTest.java	m3/optane/src/test/java/jdk/internal/m3/optane/PmemAcceleratorSelfTest.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemCorpusGramIndexJUnitTest.java	m3/optane/src/test/java/jdk/internal/m3/optane/PmemCorpusGramIndexJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemCorpusSearchJUnitTest.java	m3/optane/src/test/java/jdk/internal/m3/optane/PmemCorpusSearchJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemCorpusSelectedJUnitTest.java	m3/optane/src/test/java/jdk/internal/m3/optane/PmemCorpusSelectedJUnitTest.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemGramIndexDump.java	m3/optane/src/test/java/jdk/internal/m3/optane/PmemGramIndexDump.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemGramIndexReplayTest.java	m3/optane/src/test/java/jdk/internal/m3/optane/PmemGramIndexReplayTest.java
+MOVE	m3/optane/src/test/java/jdk/internal/m3/optane/M3PmemGramOneGigabyteProof.java	m3/optane/src/test/java/jdk/internal/m3/optane/PmemGramOneGigabyteProof.java

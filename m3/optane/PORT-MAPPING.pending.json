@@ -24,61 +24,61 @@
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/NativePmem.java",
       "source_blob": "adb94eb2f091a8673a0b847c88bab53060862fb6",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3NativePmem.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/NativePmem.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemAccess.java",
       "source_blob": "a1526f406302c661669ebfa797a878b6de73bfb3",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemAccess.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemAccess.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemBackend.java",
       "source_blob": "eca28172f004a7d33d835ab3e55b07f33a3e89b0",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemBackend.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemBackend.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemCapabilities.java",
       "source_blob": "15b8edf634902400d309f25fa9cea18045fc8c95",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemCapabilities.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemCapabilities.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemGranularity.java",
       "source_blob": "c1c5b345d46044e152c85bb3ed253f34d09e5f21",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemGranularity.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemGranularity.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemMapping.java",
       "source_blob": "e6d8e5ca973055e42192ab2977f7df4f48834b98",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemMapping.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemMapping.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemRegion.java",
       "source_blob": "b7e090aec6961e2890eeaea45ac1923f027b56fe",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemRegion.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemRegion.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSdk.java",
       "source_blob": "360b782ed01b0fc13850a8d224439796d55c57e7",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemSdk.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemSdk.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSearch.java",
       "source_blob": "a8e2b66123f746b46091872861bccc4d38b5e691",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemSearch.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemSearch.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemTransfer.java",
       "source_blob": "ebd4dbc93549cbfc3c2715c60f3463995dcea5b0",
-      "target": "m3/optane/src/main/java/jdk/m3/optane/M3PmemTransfer.java",
+      "target": "m3/optane/src/main/java/jdk/m3/optane/PmemTransfer.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
@@ -90,25 +90,25 @@
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/test/java/test/PmemAtomCases.java",
       "source_blob": "bc3b13ce4f1bf570a05a75aae04ed9ca52bc7fb9",
-      "target": "m3/optane/src/test/java/jdk/m3/optane/M3PmemAtomCases.java",
+      "target": "m3/optane/src/test/java/jdk/m3/optane/PmemAtomCases.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/junit/java/test/PmemAtomCorrectnessJUnitTest.java",
       "source_blob": "5ca643f45d85b02747f03b4c5305cd19c714d8c0",
-      "target": "m3/optane/src/test/java/jdk/m3/optane/M3PmemAtomCorrectnessJUnitTest.java",
+      "target": "m3/optane/src/test/java/jdk/m3/optane/PmemAtomCorrectnessJUnitTest.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/junit/java/test/PmemFileBackendJUnitTest.java",
       "source_blob": "5d8fef1dd7f67a324a3a84fa00fe3ef4e3912fc8",
-      "target": "m3/optane/src/test/java/jdk/m3/optane/M3PmemFileBackendJUnitTest.java",
+      "target": "m3/optane/src/test/java/jdk/m3/optane/PmemFileBackendJUnitTest.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {
       "source": "https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/src/junit/java/test/PmemNativeKmpPrefix32JUnitTest.java",
       "source_blob": "db6ce8fa696ba74d7080f88e4ffe38517d1d48d2",
-      "target": "m3/optane/src/test/java/jdk/m3/optane/M3PmemNativeKmpPrefix32JUnitTest.java",
+      "target": "m3/optane/src/test/java/jdk/m3/optane/PmemNativeKmpPrefix32JUnitTest.java",
       "disposition": "RELOCATED by recipe/pmem-region-core-20261106 (relocate.py v2): body byte for byte, declared renames only (header, package, imports, M3 type names, JNI symbol prefix); body_match_renamed=TRUE; base_kind=DEVELOP"
     },
     {

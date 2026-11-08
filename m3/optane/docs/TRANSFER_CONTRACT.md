@@ -3,12 +3,12 @@
 <!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/docs/TRANSFER_CONTRACT.md blob ab0cd70c6a69; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2 -->
 # Owner-scoped zero-heap-staging PMEMSDK transfer — v0.2
 
-`M3PmemTransfer.copy(source, srcOffset, destination, destOffset, bytes)` copies
+`PmemTransfer.copy(source, srcOffset, destination, destOffset, bytes)` copies
 bytes directly between native file-backed mappings. No temporary Java `byte[]`,
 raw native address, or escaping `ByteBuffer` is involved. `equalRange(...)`
 compares bytes with `memcmp`. Both APIs use signed 64-bit relative offsets and
 check range overflow before JNI. They require SDK-owned mappings, not arbitrary
-user implementations of `M3PmemRegion`.
+user implementations of `PmemRegion`.
 
 The two owners are leased in a monotonically assigned lock order. A source takes
 a read lock; destination takes a write lock for copy. When source and destination
@@ -46,7 +46,7 @@ PMDK backend selection is optional and not exercised on physical Optane hardware
 
 ## v0.3: compare-before-copy
 
-`M3PmemTransfer.copyIfDifferent(source, sourceOffset, destination, destinationOffset, bytes)`
+`PmemTransfer.copyIfDifferent(source, sourceOffset, destination, destinationOffset, bytes)`
 returns `true` only when a copy occurred. It validates both native spans and
 backing-file aliases *before* reading; byte-identical content avoids a write.
 Both mapping leases are held throughout a single native JNI entry. It does **not**

@@ -89,7 +89,7 @@ static int array_bounded(JNIEnv *env, jbyteArray bytes, jint array_offset, jint 
     return 1;
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_optane_M3NativePmem_capabilities
+JNIEXPORT jint JNICALL Java_jdk_m3_optane_NativePmem_capabilities
 (JNIEnv *env, jclass cls) {
     (void)env; (void)cls;
 #ifdef M3_HAVE_LIBPMEM2
@@ -98,14 +98,14 @@ JNIEXPORT jint JNICALL Java_jdk_m3_optane_M3NativePmem_capabilities
     return 0;
 #endif
 }
-JNIEXPORT jint JNICALL Java_jdk_m3_optane_M3NativePmem_pageSize
+JNIEXPORT jint JNICALL Java_jdk_m3_optane_NativePmem_pageSize
 (JNIEnv *env, jclass cls) {
     (void)env; (void)cls;
     long p=sysconf(_SC_PAGESIZE);
     return p > 0 && p <= INT_MAX ? (jint)p : 0;
 }
 
-JNIEXPORT jlong JNICALL Java_jdk_m3_optane_M3NativePmem_open
+JNIEXPORT jlong JNICALL Java_jdk_m3_optane_NativePmem_open
 (JNIEnv *env, jclass cls, jbyteArray path_bytes, jlong offset, jlong length,
  jint access, jint requested_backend) {
     (void)cls;
@@ -207,28 +207,28 @@ JNIEXPORT jlong JNICALL Java_jdk_m3_optane_M3NativePmem_open
     r->granularity=2;
     return (jlong)(uintptr_t)r;
 }
-JNIEXPORT jint JNICALL Java_jdk_m3_optane_M3NativePmem_selectedBackend
+JNIEXPORT jint JNICALL Java_jdk_m3_optane_NativePmem_selectedBackend
 (JNIEnv *env, jclass cls, jlong handle) {
     (void)cls;region *r=validated(env,handle);return r?r->backend:0;
 }
-JNIEXPORT jint JNICALL Java_jdk_m3_optane_M3NativePmem_granularity
+JNIEXPORT jint JNICALL Java_jdk_m3_optane_NativePmem_granularity
 (JNIEnv *env, jclass cls, jlong handle) {
     (void)cls;region *r=validated(env,handle);return r?r->granularity:0;
 }
-JNIEXPORT void JNICALL Java_jdk_m3_optane_M3NativePmem_read
+JNIEXPORT void JNICALL Java_jdk_m3_optane_NativePmem_read
 (JNIEnv *env,jclass cls,jlong handle,jlong offset,jbyteArray out,jint start,jint length) {
     (void)cls;region *r=validated(env,handle);
     if (!r || !array_bounded(env,out,start,length) || !bounded(env,r,offset,length)) return;
     if (length) (*env)->SetByteArrayRegion(env,out,start,length,(jbyte*)(r->data+(size_t)offset));
 }
-JNIEXPORT void JNICALL Java_jdk_m3_optane_M3NativePmem_write
+JNIEXPORT void JNICALL Java_jdk_m3_optane_NativePmem_write
 (JNIEnv *env,jclass cls,jlong handle,jlong offset,jbyteArray data,jint start,jint length) {
     (void)cls;region *r=validated(env,handle);
     if (!r || !array_bounded(env,data,start,length) || !bounded(env,r,offset,length)) return;
     if (!r->writable) {throw_named(env,"java/lang/IllegalStateException","mapping read-only");return;}
     if (length) (*env)->GetByteArrayRegion(env,data,start,length,(jbyte*)(r->data+(size_t)offset));
 }
-JNIEXPORT void JNICALL Java_jdk_m3_optane_M3NativePmem_persist
+JNIEXPORT void JNICALL Java_jdk_m3_optane_NativePmem_persist
 (JNIEnv *env,jclass cls,jlong handle,jlong offset,jlong length) {
     (void)cls;region *r=validated(env,handle);
     if (!r || !bounded(env,r,offset,length)) return;
@@ -248,7 +248,7 @@ JNIEXPORT void JNICALL Java_jdk_m3_optane_M3NativePmem_persist
     if (msync((void *)lower,span,MS_SYNC)<0) {throw_errno(env,"msync",errno);return;}
     if (fdatasync(r->fd)<0) {throw_errno(env,"fdatasync",errno);return;}
 }
-JNIEXPORT void JNICALL Java_jdk_m3_optane_M3NativePmem_close
+JNIEXPORT void JNICALL Java_jdk_m3_optane_NativePmem_close
 (JNIEnv *env,jclass cls,jlong handle) {
     (void)cls;region *r=validated(env,handle);
     if (!r) return;
@@ -278,7 +278,7 @@ static int m3_same_file_overlap(const region *src, jlong src_offset,
     return a<=b ? b-a < size : a-b < size;
 }
 
-JNIEXPORT void JNICALL Java_jdk_m3_optane_M3NativePmem_copy
+JNIEXPORT void JNICALL Java_jdk_m3_optane_NativePmem_copy
 (JNIEnv *env, jclass cls, jlong src_handle, jlong src_offset,
  jlong dst_handle, jlong dst_offset, jlong amount) {
     (void)cls;
@@ -301,7 +301,7 @@ JNIEXPORT void JNICALL Java_jdk_m3_optane_M3NativePmem_copy
 }
 
 /* Compare-and-copy in one native lease, avoiding writes for identical weights. */
-JNIEXPORT jboolean JNICALL Java_jdk_m3_optane_M3NativePmem_copyIfDifferent
+JNIEXPORT jboolean JNICALL Java_jdk_m3_optane_NativePmem_copyIfDifferent
 (JNIEnv *env, jclass cls, jlong src_handle, jlong src_offset,
  jlong dst_handle, jlong dst_offset, jlong amount) {
     (void)cls;
@@ -327,7 +327,7 @@ JNIEXPORT jboolean JNICALL Java_jdk_m3_optane_M3NativePmem_copyIfDifferent
     return JNI_TRUE;
 }
 
-JNIEXPORT jboolean JNICALL Java_jdk_m3_optane_M3NativePmem_equalRange
+JNIEXPORT jboolean JNICALL Java_jdk_m3_optane_NativePmem_equalRange
 (JNIEnv *env, jclass cls, jlong a_handle, jlong a_offset,
  jlong b_handle, jlong b_offset, jlong amount) {
     (void)cls;
@@ -341,7 +341,7 @@ JNIEXPORT jboolean JNICALL Java_jdk_m3_optane_M3NativePmem_equalRange
                   (size_t)amount)==0 ? JNI_TRUE : JNI_FALSE;
 }
 /* KMP over a single leased mapping; no Java heap arrays or native pointers escape. */
-JNIEXPORT jlong JNICALL Java_jdk_m3_optane_M3NativePmem_indexOf
+JNIEXPORT jlong JNICALL Java_jdk_m3_optane_NativePmem_indexOf
 (JNIEnv *env, jclass cls, jlong handle, jlong offset, jlong count, jbyteArray pattern) {
     (void)cls;
     region *r=validated(env,handle);
@@ -411,7 +411,7 @@ JNIEXPORT jlong JNICALL Java_jdk_m3_optane_M3NativePmem_indexOf
 /* Sorted signed int64 LE lookup, independent of host alignment/endianness.
    Comparison uses a sign-bit flip to preserve signed sort in uint64_t order.
    The Java owner holds a mapping read lease throughout this JNI call. */
-JNIEXPORT jlong JNICALL Java_jdk_m3_optane_M3NativePmem_boundLongLE
+JNIEXPORT jlong JNICALL Java_jdk_m3_optane_NativePmem_boundLongLE
 (JNIEnv *env, jclass cls, jlong handle, jlong offset, jlong elements,
  jlong key, jboolean strict_upper) {
     (void)cls;
