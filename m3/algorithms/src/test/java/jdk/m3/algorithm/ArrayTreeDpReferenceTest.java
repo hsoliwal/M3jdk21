@@ -270,10 +270,10 @@ class ArrayTreeDpReferenceTest {
         BigInteger b = BigInteger.ONE;
         for (int n = 0; n <= 100; n++) {
             if (a.bitLength() < 64) {
-                assertEquals(a.longValueExact(), PrimitiveDynamicProgrammingAlgorithms.climbStairs(n), "" + n);
+                assertEquals(a.longValueExact(), DynamicProgrammingAlgorithms.climbStairs(n), "" + n);
             } else {
                 int steps = n;
-                assertThrows(ArithmeticException.class, () -> PrimitiveDynamicProgrammingAlgorithms.climbStairs(steps));
+                assertThrows(ArithmeticException.class, () -> DynamicProgrammingAlgorithms.climbStairs(steps));
             }
             BigInteger next = a.add(b);
             a = b;
@@ -286,10 +286,10 @@ class ArrayTreeDpReferenceTest {
             for (int k = 0; k < cost.length; k++) {
                 cost[k] = Math.abs(cost[k]);
             }
-            assertEquals(minCost(cost, cost.length), PrimitiveDynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
+            assertEquals(minCost(cost, cost.length), DynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
             int[] coins = random.ints(1, 12).distinct().limit(random.nextInt(0, 4)).toArray();
             int amount = random.nextInt(0, 40);
-            assertEquals(ways(coins, 0, amount), PrimitiveDynamicProgrammingAlgorithms.coinChangeWays(coins, amount));
+            assertEquals(ways(coins, 0, amount), DynamicProgrammingAlgorithms.coinChangeWays(coins, amount));
             int rows = random.nextInt(1, 6);
             int columns = random.nextInt(1, 6);
             int[][] grid = new int[rows][columns];
@@ -298,7 +298,7 @@ class ArrayTreeDpReferenceTest {
                     row[c] = random.nextInt(-20, 50);
                 }
             }
-            assertEquals(minPath(grid, 0, 0), PrimitiveDynamicProgrammingAlgorithms.minPathSum(grid));
+            assertEquals(minPath(grid, 0, 0), DynamicProgrammingAlgorithms.minPathSum(grid));
             int[] values = ints(random, random.nextInt(0, 12), 6);
             for (int k = 0; k < values.length; k++) {
                 values[k] = Math.abs(values[k]);
@@ -312,13 +312,13 @@ class ArrayTreeDpReferenceTest {
                 }
                 expected += sum == target ? 1 : 0;
             }
-            assertEquals(expected, PrimitiveDynamicProgrammingAlgorithms.targetSumWays(values, target));
+            assertEquals(expected, DynamicProgrammingAlgorithms.targetSumWays(values, target));
             char[] digits = new char[random.nextInt(0, 16)];
             for (int k = 0; k < digits.length; k++) {
                 digits[k] = (char) ('0' + random.nextInt(random.nextBoolean() ? 3 : 10));
             }
             String text = new String(digits);
-            assertEquals(text.isEmpty() ? 0 : decode(text, 0), PrimitiveDynamicProgrammingAlgorithms.decodeWays(text));
+            assertEquals(text.isEmpty() ? 0 : decode(text, 0), DynamicProgrammingAlgorithms.decodeWays(text));
         }
         String ones = "1".repeat(60);
         BigInteger exact = BigInteger.ONE;
@@ -329,12 +329,12 @@ class ArrayTreeDpReferenceTest {
             exact = next;
         }
         decodeOverflows += exact.bitLength() > 31 ? 1 : 0;
-        int wrapped = PrimitiveDynamicProgrammingAlgorithms.decodeWays(ones);
+        int wrapped = DynamicProgrammingAlgorithms.decodeWays(ones);
         report("dynamic-programming", "climbStairs+minCostClimbingStairs+coinChangeWays+minPathSum+targetSumWays+"
                 + "decodeWays", cases, cases);
         finding("decodeWays", "int arithmetic wraps without refusal: 60 x '1' has " + exact + " decodings, the member "
                 + "returns " + wrapped + " (overflowing inputs=" + decodeOverflows + "); Character.isDigit admits "
-                + "non-ASCII digits: decodeWays(\"\\u0661\") = " + PrimitiveDynamicProgrammingAlgorithms.decodeWays("\u0661"));
+                + "non-ASCII digits: decodeWays(\"\\u0661\") = " + DynamicProgrammingAlgorithms.decodeWays("\u0661"));
     }
 
     private static long minCost(int[] cost, int top) {
