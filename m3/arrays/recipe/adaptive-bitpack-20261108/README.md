@@ -38,3 +38,15 @@ passed. Whole JDK, jtreg, Maven reactor and cross-platform acceptance pending.
    before promotion. Local authoring environment lacked Maven: this gate
    remains pending and is **not** marked passed.
 6. Verify donor licensing/NOTICE on any future literal source adoption.
+
+## Per-group / blockwise exact packing
+`AdaptivePackedIntBlocks.of(values, blockSize)` partitions an input array
+into immutable independent delta planes. Each block chooses its own minimum and
+smallest width, so a narrow-range region does not pay 32 bits merely because
+a different region spans INT_MIN to INT_MAX. `ofRange` consumes source
+windows without allocating per-block int arrays. This is the exact-integer
+analog of per-group LLM quantization; it is **not** lossy.
+
+Single-block and multi-block differential checks cover input snapshots,
+irregular final groups, width 0/2/32, block selection, and signed values.
+Extra block objects/headers can outweigh payload savings for tiny blocks.

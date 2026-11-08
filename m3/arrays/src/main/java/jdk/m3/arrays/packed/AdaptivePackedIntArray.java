@@ -28,20 +28,29 @@ public final class AdaptivePackedIntArray {
     /** Snapshot a signed-int array without retaining or mutating the source. */
     public static AdaptivePackedIntArray of(int[] source) {
         Objects.requireNonNull(source, "source");
-        if (source.length == 0) return new AdaptivePackedIntArray(0, 0, 0, new byte[0]);
-        int min = source[0];
-        int max = source[0];
-        for (int value : source) {
+        return ofRange(source, 0, source.length);
+    }
+
+    /** Snapshot an input window directly, without an intermediate per-block int array. */
+    public static AdaptivePackedIntArray ofRange(int[] source, int from, int to) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromToIndex(from, to, source.length);
+        int length = to - from;
+        if (length == 0) return new AdaptivePackedIntArray(0, 0, 0, new byte[0]);
+        int min = source[from];
+        int max = source[from];
+        for (int i = from; i < to; i++) {
+            int value = source[i];
             if (value < min) min = value;
             if (value > max) max = value;
         }
         long range = (long) max - min;
         int bits = range == 0 ? 0 : Long.SIZE - Long.numberOfLeadingZeros(range);
-        byte[] data = new byte[checkedByteCount(source.length, bits)];
-        for (int i = 0; i < source.length; i++) {
-            writeUnsigned(data, (long) i * bits, bits, (long) source[i] - min);
+        byte[] data = new byte[checkedByteCount(length, bits)];
+        for (int i = 0; i < length; i++) {
+            writeUnsigned(data, (long) i * bits, bits, (long) source[from + i] - min);
         }
-        return new AdaptivePackedIntArray(source.length, min, bits, data);
+        return new AdaptivePackedIntArray(length, min, bits, data);
     }
 
     /** Import a bitplane, rejecting malformed geometry, padding and signed overflow. */

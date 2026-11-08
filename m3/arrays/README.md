@@ -197,3 +197,7 @@ approximation, or unconditional speedup claims are made.
 See [adaptive bitpack recipe](recipe/adaptive-bitpack-20261108/README.md) for
 LeetCode, HackerRank, GeeksforGeeks and Lucene donor classification, license
 decision, local test evidence and remaining qualification gates.
+
+The matching `AdaptivePackedIntBlocks` owner performs per-group exact
+bit-width selection, with no intermediate source-block copies or eager
+flattening. Payload-size savings depend on block size and value distribution.
