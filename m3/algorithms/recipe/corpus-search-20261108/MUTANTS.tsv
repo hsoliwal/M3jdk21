@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-# One-line mutants of recipe/corpus-search-20261108/mutants.py; dump = donor-anchored M3CorpusSearchDump digest (seed 20261108, 4000 cases) vs ddb7229f419e52f2; junit = ported donor tests + M3CorpusSearchReferenceTest.
-id	class	effect	dump	junit	junit_summary	verdict
-A1	M3MultiPatternSearch	every failure link falls to the root: overlapping patterns (hers after she) are missed	KILL	KILL	[         5 tests failed          ]	KILLED
-A2	M3MultiPatternSearch	empty patterns leave the empty-prefix multiplicity	KILL	KILL	[         3 tests failed          ]	KILLED
-A3	M3MultiPatternSearch	edge binary search steps past an equal label: no transition is ever found	KILL	KILL	[         8 tests failed          ]	KILLED
-A4	M3MultiPatternSearch	every emitted offset is one byte early	KILL	KILL	[         5 tests failed          ]	KILLED
-A5	M3MultiPatternSearch	the empty pattern has no exact multiplicity	KILL	KILL	[         3 tests failed          ]	KILLED
-X1	M3PrefixIndex	contains answers startsWith	KILL	KILL	[         2 tests failed          ]	KILLED
