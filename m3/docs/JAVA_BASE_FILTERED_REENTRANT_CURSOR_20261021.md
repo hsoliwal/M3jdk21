@@ -23,7 +23,7 @@ private `SelectionSpliterator.tryAdvance` behavioral atom.
   to the owning JDK file. Do not copy full wrappers, allocate cursor frames, add
   list stores, use per-element Entry objects or delegate predicates to JNI.
 - Challenge platforms are **taxonomy only**, not code donors. For array/mask
-  selection keep using the existing native `jdk.internal.m3.M3IndexMaskWindow`
+  selection keep using the existing native `jdk.internal.m3.IndexMaskWindow`
   owner. The public filtered/sorted/navigable capabilities, predicates,
   comparators, encounter order, spliterator flags and all signatures remain
   unchanged.

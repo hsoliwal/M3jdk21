@@ -35,7 +35,7 @@ owner monitor. The owner publishes complete `version` after all lanes.
 - **Donor selection**: own `java.util.ArrayDeque` circular-array precedent and
   `System.arraycopy`; no third-party code, runtime dependency or JNI entrypoint.
 - **Reuse**: existing `CollectionViews` owns filtered/sorted live wrappers;
-  existing `jdk.internal.m3.M3IndexMaskWindow` + `libjava` owns bounded
+  existing `jdk.internal.m3.IndexMaskWindow` + `libjava` owns bounded
   Java/JNI primitive-mask selection. This PR does not duplicate either.
 - **UI/language/theme**: filtered/sorted order and logical model remain on CPU.
   A renderer may invalidate presentation on a theme change, while text metrics,

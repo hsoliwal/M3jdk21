@@ -111,7 +111,7 @@ def callee_type(holder):
 
 
 def task_name(method_attr):
-    """'jdk.internal.m3.hash.M3XXH3 XXH3_128bits_internal (J[B...)J' -> holder, name."""
+    """'jdk.internal.m3.hash.XXH3 XXH3_128bits_internal (J[B...)J' -> holder, name."""
     holder, rest = method_attr.split(" ", 1)
     return holder, rest.split(" ", 1)[0]
 

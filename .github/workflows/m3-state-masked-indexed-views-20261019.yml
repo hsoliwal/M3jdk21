@@ -3,9 +3,9 @@ name: M3JDK21 Intrinsic Masked Views — OpenRewrite and jtreg contracts
 on:
   pull_request:
     paths:
-      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
-      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java'
-      - 'test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
+      - 'src/java.base/share/classes/jdk/internal/m3/IndexedView.java'
+      - 'test/jdk/jdk/internal/m3/StateMaskedIndexedViewTest.java'
       - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-state-masked-views-20261019/**'
       - '.github/workflows/m3-state-masked-indexed-views-20261019.yml'
   workflow_dispatch:
@@ -24,11 +24,11 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             .github/workflows/m3-state-masked-indexed-views-20261019.yml
-            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
-            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
-            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java
-            test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java
-            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+            src/java.base/share/classes/jdk/internal/m3/IndexedArray.java
+            src/java.base/share/classes/jdk/internal/m3/IndexedView.java
+            test/jdk/jdk/internal/m3/IndexedArrayTest.java
+            test/jdk/jdk/internal/m3/IndexedViewEpochTest.java
+            test/jdk/jdk/internal/m3/StateMaskedIndexedViewTest.java
             m3/tooling/shared-frontend/recipe-custody/
       - uses: actions/setup-java@v4
         with:
@@ -53,15 +53,15 @@ jobs:
           javac -Xlint:all,-serial -Werror \
             --patch-module java.base=src/java.base/share/classes \
             -d out/m3-state-views/classes \
-            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java \
-            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+            src/java.base/share/classes/jdk/internal/m3/IndexedArray.java \
+            src/java.base/share/classes/jdk/internal/m3/IndexedView.java
           javac -Xlint:all,-serial -Werror \
             --patch-module java.base=out/m3-state-views/classes \
             --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
             -d out/m3-state-views/tests \
-            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
-            test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java \
-            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+            test/jdk/jdk/internal/m3/IndexedArrayTest.java \
+            test/jdk/jdk/internal/m3/IndexedViewEpochTest.java \
+            test/jdk/jdk/internal/m3/StateMaskedIndexedViewTest.java
       - name: Run historical behavior and new state-mask oracles
         shell: bash
         run: |
@@ -69,7 +69,7 @@ jobs:
           for mode in normal interpreted; do
             jvm_flags=()
             if [ "$mode" = interpreted ]; then jvm_flags=(-Xint); fi
-            for test in M3IndexedArrayTest M3IndexedViewEpochTest M3StateMaskedIndexedViewTest; do
+            for test in IndexedArrayTest IndexedViewEpochTest StateMaskedIndexedViewTest; do
               java "${jvm_flags[@]}" --patch-module java.base=out/m3-state-views/classes \
                 --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
                 -cp out/m3-state-views/tests "$test"

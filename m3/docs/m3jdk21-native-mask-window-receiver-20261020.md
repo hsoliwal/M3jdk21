@@ -4,7 +4,7 @@
 
 ## Ownership, not an adapter
 The product is the actual **M3JDK21** Java / native / HotSpot tree.
-`jdk.internal.m3.M3IndexMaskWindow` resides inside `java.base`,
+`jdk.internal.m3.IndexMaskWindow` resides inside `java.base`,
 with JNI symbols compiled into its own `libjava`. There is no runtime
 dependency on Synexia, a Maven plugin, or the application library
 `m3_collections_mask`. Public Java SE arrays and existing

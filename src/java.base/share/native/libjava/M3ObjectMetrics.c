@@ -23,7 +23,7 @@ static void throw_illegal_state(JNIEnv *env, const char *message) {
     }
 }
 
-JNIEXPORT jlong JNICALL Java_jdk_internal_m3_M3ObjectMetrics_shallowSize0(
+JNIEXPORT jlong JNICALL Java_jdk_internal_m3_ObjectMetrics_shallowSize0(
         JNIEnv *env, jclass type, jobject object) {
     jlong bytes = 0;
     jvmtiEnv *jvmti = NULL;

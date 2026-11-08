@@ -13,13 +13,13 @@
 #   patch       the 16 jdk.internal.m3.hash sources with java.base's build flags (-Xlint:all -Werror)
 #   identity    bytecode_identity.py: the recipe output before LITERAL_CONSTANTS vs the committed sources, compiled
 #               alike: every method instruction-identical, only private static final constants added
-#   constants   literal_constants.py inventory of the JIT leaf's tests (M3HashJitAtomsTest, M3HashAtomsPerf): no
+#   constants   literal_constants.py inventory of the JIT leaf's tests (HashJitAtomsTest, HashAtomsPerf): no
 #               numeric literal left to name (0, 1 and -1, constant definitions and table data stay)
-#   junit       M3HashAtomsTest, oracle prebuilt, then compiled at run time from test.src (the jtreg path);
-#               M3HashJitAtomsTest (the JIT leaf's atoms, the read atom, the entry checks, the bounds proof) the same
+#   junit       HashAtomsTest, oracle prebuilt, then compiled at run time from test.src (the jtreg path);
+#               HashJitAtomsTest (the JIT leaf's atoms, the read atom, the entry checks, the bounds proof) the same
 #   surface     api_surface.py: vendored vs absorbed public/protected members
 #   mutants     mutation_gate.py: every recipe-slip mutant must fail a test of either class
-#   perf        M3HashAtomsPerf rows (evidence; -DM3_PERF_SLACK=<factor> to guard)
+#   perf        HashAtomsPerf rows (evidence; -DM3_PERF_SLACK=<factor> to guard)
 set -eu
 repo=$1
 out=$2
@@ -46,33 +46,33 @@ echo "patch: $(find "$out/patch" -name '*.class' | wc -l) classes"
 "$jbin/javac" $flags --patch-module "java.base=$out/absorb/renamed" -d "$out/prehoist" \
     $(find "$out/absorb/renamed" -name '*.java')
 python "$lane/tools/bytecode_identity.py" "$jbin/javap" "$out/prehoist" "$out/patch" "$out/BYTECODE_IDENTITY.tsv"
-python "$lane/tools/literal_constants.py" inventory "$tests" "$out/TEST_LITERALS.tsv" M3HashJitAtomsTest.java \
-    M3HashAtomsPerf.java
+python "$lane/tools/literal_constants.py" inventory "$tests" "$out/TEST_LITERALS.tsv" HashJitAtomsTest.java \
+    HashAtomsPerf.java
 hoist=$(awk -F'\t' 'NR > 1 && $4 == "number" && $10 == "HOIST"' "$out/TEST_LITERALS.tsv" | wc -l)
-echo "constants: $hoist numeric literals left to name in M3HashJitAtomsTest and M3HashAtomsPerf"
+echo "constants: $hoist numeric literals left to name in HashJitAtomsTest and HashAtomsPerf"
 [ "$hoist" -eq 0 ]
 "$jbin/javac" -g -Xlint:all -Xlint:-serial --patch-module "java.base=$out/patch" \
     --add-exports java.base/jdk.internal.m3.hash=ALL-UNNAMED -cp "$junit" -d "$out/testc" \
-    "$tests/M3HashOracle.java" "$tests/M3HashAtomsTest.java"
+    "$tests/HashOracle.java" "$tests/HashAtomsTest.java"
 "$jbin/javac" -g -Xlint:all -Xlint:-serial --patch-module "java.base=$out/patch" \
     --add-exports java.base/jdk.internal.m3.hash=ALL-UNNAMED -cp "$junit" -d "$out/testj" \
-    "$tests/M3HashOracle.java" "$tests/M3HashJitAtomsTest.java"
+    "$tests/HashOracle.java" "$tests/HashJitAtomsTest.java"
 "$jbin/javac" -g -Xlint:all -Xlint:-serial --patch-module "java.base=$out/patch" \
     --add-exports java.base/jdk.internal.m3.hash=ALL-UNNAMED -d "$out/perfc" \
-    "$tests/M3HashOracle.java" "$tests/M3HashAtomsPerf.java"
+    "$tests/HashOracle.java" "$tests/HashAtomsPerf.java"
 run="--patch-module java.base=$out/patch --add-opens java.base/jdk.internal.m3.hash=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED"
 # shellcheck disable=SC2086
 "$jbin/java" -Xmx1g $run "-Dm3.hash.oracle=$out/oracle" -cp "$out/testc;$junit" $launcher \
-    --select-class M3HashAtomsTest
+    --select-class HashAtomsTest
 # shellcheck disable=SC2086
 "$jbin/java" -Xmx1g "-Djava.io.tmpdir=$out/tmp" $run "-Dtest.src=$tests" -cp "$out/testc;$junit" $launcher \
-    --select-class M3HashAtomsTest
+    --select-class HashAtomsTest
 # shellcheck disable=SC2086
 "$jbin/java" -Xmx1g $run "-Dm3.hash.oracle=$out/oracle" -cp "$out/testj;$junit" $launcher \
-    --select-class M3HashJitAtomsTest
+    --select-class HashJitAtomsTest
 # shellcheck disable=SC2086
 "$jbin/java" -Xmx1g "-Djava.io.tmpdir=$out/tmp" $run "-Dtest.src=$tests" -cp "$out/testj;$junit" $launcher \
-    --select-class M3HashJitAtomsTest
+    --select-class HashJitAtomsTest
 python "$lane/tools/api_surface.py" "$jbin/javap" "$out/oracle" "$out/patch" "$out/API_SURFACE.tsv"
 python "$lane/tools/mutation_gate.py" "$jbin" "$src" "$out/testc,$out/testj" "$junit" "$out/oracle" "$out/mutants"
-"$jbin/java" -Xmx512m $run "-Dm3.hash.oracle=$out/oracle" -cp "$out/perfc" M3HashAtomsPerf
+"$jbin/java" -Xmx512m $run "-Dm3.hash.oracle=$out/oracle" -cp "$out/perfc" HashAtomsPerf

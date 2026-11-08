@@ -15,7 +15,7 @@ import java.util.Spliterator;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import jdk.internal.m3.M3IndexedArray;
+import jdk.internal.m3.IndexedArray;
 //@@ CONSTANTS
     /** Backing size, rank alphabet and the deterministic rank stride of the fixture. */
     private static final int ITEMS = 40;
@@ -204,7 +204,7 @@ import jdk.internal.m3.M3IndexedArray;
 
     static long stateVersion(Fixture f) {
         try {
-            return (long) new Access("jdk.internal.m3.M3IndexedArray").method("stateVersion").invoke(f.backing);
+            return (long) new Access("jdk.internal.m3.IndexedArray").method("stateVersion").invoke(f.backing);
         } catch (Throwable e) {
             throw new AssertionError(e);
         }

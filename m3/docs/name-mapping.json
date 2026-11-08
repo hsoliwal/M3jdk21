@@ -775,7 +775,7 @@
       "source_commit": "677437be295b23f7ccf7409be287008944d0e8b0",
       "source_blob_sha1": "d0dd0be5485a679290687542d334b37997bd0c9f",
       "source_role": "Live filtered/sorted/reversed projection over M3IndexedArray physical indices",
-      "target": "jdk.internal.m3.M3IndexedView",
+      "target": "jdk.internal.m3.IndexedView",
       "status": "existing-owner contract repair; no collection-family promotion",
       "target_rule": "Bind traversal after root refresh, bind subranges to source epoch, check before row delivery, and retain existing unsupported-operation bounds/null/callback ordering. Range and cursor facades store scalar coordinates and root reference; the root owns the single primitive index directory.",
       "source_license": "GPL-2.0-only WITH Classpath-exception-2.0; existing target notices retained",
