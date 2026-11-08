@@ -174,3 +174,25 @@ target_sources(m3_arrays PRIVATE
 # returning (JNI_ABORT on the input), publish nothing partial and retain no pointer.
 target_sources(m3_arrays PRIVATE
   m3_bit_matrix.c)
+
+# Lossless int32 adaptive bitplanes share the existing M3 arrays JNI library.
+# JNI performs bounded primitive-array region transfers; pure C atoms stay reusable.
+target_sources(m3_arrays PRIVATE
+  m3_adaptive_bitpack.c
+  m3_adaptive_bitpack_jni.c)
+
+if(BUILD_TESTING)
+  add_executable(m3_adaptive_bitpack_checks
+    tests/m3_adaptive_bitpack_checks.c
+    m3_adaptive_bitpack.c)
+  target_include_directories(m3_adaptive_bitpack_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_adaptive_bitpack_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_adaptive_bitpack_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_adaptive_bitpack_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_adaptive_bitpack_checks COMMAND m3_adaptive_bitpack_checks)
+endif()

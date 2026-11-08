@@ -1,0 +1,5 @@
+shape_id	family	platform	problem_id	url	contract_boundary	decision
+adaptive-int32-bitplane	BIT_PACKING	APACHE_LUCENE	BulkOperationPacked	https://apache.googlesource.com/lucene-solr/+/7ada4032180b516548fc0263f42da6a7a917f92b/lucene/core/src/java/org/apache/lucene/util/packed/BulkOperationPacked.java	Lucene geometry differs; M3 has signed min-delta and detached JNI.	concept only, Apache-2.0, no code copied
+adaptive-int32-bitplane	BITWISE	LEETCODE	338	https://leetcode.com/problems/counting-bits/	Popcount not integer-array compression.	semantic reference, reject code donor
+adaptive-int32-bitplane	BITWISE	HACKERRANK	flipping-bits	https://www.hackerrank.com/challenges/flipping-bits/problem	Unsigned 32-bit flip not an int32 codec.	semantic reference, reject code donor
+adaptive-int32-bitplane	BITWISE	GEEKSFORGEEKS	bitwise-operators	https://www.geeksforgeeks.org/computer-science-fundamentals/program-for-bitwise-operators-in-c-c-java-python-c-javascript/	Masks and shifts do not specify a storage contract.	concept only, reject code donor
