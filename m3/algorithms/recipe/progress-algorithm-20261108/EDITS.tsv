@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# Owner edits of recipe/progress-algorithm-20261108/apply.py (APPLY_PROGRESS_ALGORITHM_OWNER_EDITS v2). pre/post = sha256 of the whole owner file before/after its row group (master 0f693572d3d4 pre-image); a file matching neither is refused.
+file	edit_id	kind	anchor	line	pre_sha256	post_sha256	note
+src/main/java/jdk/m3/algorithm/M3ProgressChecks.java	E1_CHECKS_PUBLIC	REPLACE_LINE	final class M3ProgressChecks {	public final class M3ProgressChecks {	263458582b2d5b561444330304ff8623ddd6f7c95f4605d821c6c47813d5d0e8	34ea003a2628317c8ffdba8d5a1041e9b3f23b159487fb0b3e14ebc5ee60862d	the progress helper becomes exported API of jdk.m3.algorithm: the owner of the donor ProgressMonitors.nonNull / checkCanceled for m3/tooling (41 catalogue classes) and the collections handoff (5 monitor-bound structures); explicit private constructor already present
