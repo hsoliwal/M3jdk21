@@ -24,17 +24,26 @@ The input arrays are never written. The API assumes sortedness and no concurrent
 the call; unsorted and racy inputs are outside this contract. No caller-visible mutable native
 view or C pointer survives the call. Every successful invocation returns a new output array.
 
-**Runtime:** Java uses two independent overflow-safe binary-search passes per key for arbitrary
-queries (`O(Q log (N+1))`, `O(Q)` output). For at least 128 **nondecreasing query keys**, it
-selects a stable ascending-merge window (`O(N+Q)`), scanning source elements only once; an
-unsorted query batch stays on the binary path. This is a first-party category-based
-specialization, not borrowed challenge code. JNI copies the selected sorted range **once**
-per call and processes 256 keys per bounded JNI region, with the same sorted-query merge
-specialization (`O(N+Q)` when monotone; `O(N + Q log(N+1))` otherwise). Native scratch is
-`O(N)` and Java output `O(Q)`; empty ranges copy nothing. The native path requires
-explicit `-Dm3.native.sorted.search.library=/absolute/path/to/lib...`; it does not silently
-claim acceleration or automatically dispatch. The JNI implementation preserves C17 pointer
-lifetime, checks for pending JNI exceptions, and frees every owned allocation.
+**Runtime:** Java retains its overflow-safe binary bounds and exact adjacent-query reuse.
+For Q >= 128 nondecreasing query keys, the monotone scan is now eligible only when
+`N <= Q * bitLength(N)` (N is the selected range length; arithmetic is widened before
+multiplication). Each binary bound needs at most `bitLength(N)` source comparisons;
+the paired monotone scan advances its two cursors by at most 2N total. This guards
+against a sparse batch forcing an arbitrarily larger scan. Dense batches retain the
+existing merge specialization; unordered batches retain the existing binary path.
+The guard bounds search work, not elapsed time or the cost of input snapshots.
+
+JNI retains one invocation-owned source snapshot for nonempty source/query calls,
+256-key region windows, the original exception handling and native cleanup. The
+same widened search-budget predicate selects its monotone specialization. The
+first-party zero-query and empty-range paths from Synexia #15108 are composed
+unchanged: a new empty result needs no snapshot, and empty-range results repeat
+absolute `from` without source/key reads. No model or LLM is used in this hot path.
+
+For nonempty calls JNI still has O(N) snapshot time and native scratch even when
+search work is O(Q log(N+1)); Java allocates O(Q) result space. Native dispatch remains
+explicit through `-Dm3.native.sorted.search.library=/absolute/path/to/lib...`, never
+automatic. No universal speedup, public JDK replacement or product admission is inferred.
 
 ## Existing owners, category and provenance
 
