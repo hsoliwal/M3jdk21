@@ -45,5 +45,5 @@ jobs:
           javac --release 21 -proc:none -Xlint:all,-serial -Werror \
                 -d "$RUNNER_TEMP/m3-regex-amalgam-jtreg" \
                 test/jdk/java/lang/String/M3StringRegexDpTest.java
-      # Source-extracted fixture != matched modified M3JDK21 image.
+      # Source-extracted fixture != matched modified M3JDK 21 image.
       # Separate jtreg, JNI, GC, JIT, full reactor, JMH gates remain required.

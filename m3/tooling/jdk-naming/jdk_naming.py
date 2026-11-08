@@ -88,8 +88,36 @@ SELF_PREFIX = "m3/tooling/jdk-naming/"
 SELF = {"m3/release/check_standalone.py", "m3/release/test_check_standalone.py"}
 
 
+# files outside this recipe that name Synexia/com.m3 on purpose (user decision 2026-11-08: an explicit KEEP list,
+# not a rule): negative tests and detectors, checkers matched against pinned TSVs, donor-differential harnesses that
+# compile the real com.synexia sources, Maven com/m3 coordinates. One row per file with a reason class;
+# test_jdk_naming fails a row whose file is not in the tree, so the list never outlives its files.
+KEEP_FILE = Path(__file__).with_name("NAMING_KEEP.tsv")
+KEEP_CLASSES = ("DETECTOR", "PIN", "DONOR_DIFFERENTIAL", "MAVEN_COORDINATE", "LINEAGE_ID")
+
+
+def load_keep(path: Path = KEEP_FILE) -> dict:
+    """path -> (reason class, reason) of NAMING_KEEP.tsv; a malformed row stops the recipe."""
+    if not path.is_file():
+        return {}
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if lines[0] != "path\treason_class\treason":
+        raise SystemExit(f"NAMING_KEEP: bad header {lines[0]!r}")
+    rows = {}
+    for line in lines[1:]:
+        fields = line.split("\t")
+        if len(fields) != 3 or fields[1] not in KEEP_CLASSES or not fields[2].strip() or fields[0] in rows:
+            raise SystemExit(f"NAMING_KEEP: bad row {line!r}")
+        rows[fields[0]] = (fields[1], fields[2])
+    return rows
+
+
+KEEP_FILES = load_keep()
+
+
 def is_self(path: str) -> bool:
-    return path.startswith(SELF_PREFIX) or path in SELF
+    return path.startswith(SELF_PREFIX) or path in SELF or path in KEEP_FILES
+
 
 
 def tracked(root: Path) -> list[str]:

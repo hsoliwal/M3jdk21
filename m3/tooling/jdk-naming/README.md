@@ -84,3 +84,13 @@ a package that only shares the prefix (jdk.m3.nlp.search) does not. The module's
 evidence dir, and its reactor line goes. Refused: sub-packages, a split package, a name already in the target package,
 native sources in a retired module. Run `rename_types.py --package <target>` afterwards to drop the M3 prefix. Tests:
 `test_fold_package.py`, `test_rename_types.py` (both now in m3jdk-naming.yml).
+
+## NAMING_KEEP.tsv (2026-11-08)
+
+Files outside this recipe that name Synexia/com.m3 on purpose are listed here, one row per file:
+`path<TAB>reason_class<TAB>reason`. The reason classes are DETECTOR (negative tests), PIN (checkers matched against
+pinned TSVs), DONOR_DIFFERENTIAL (harnesses that compile the real com.synexia sources), MAVEN_COORDINATE (the real
+groupId com.m3) and LINEAGE_ID (historical ids). `jdk_naming.py` leaves these files out of scope, as it does `SELF`.
+A malformed row stops the recipe; a row whose file is gone fails `test_jdk_naming.py`. Every other file still has to
+reach the fixed point of `plan --tree HEAD` (user decision 2026-11-08: explicit KEEP list, not a looser rule).
+

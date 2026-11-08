@@ -471,6 +471,30 @@ class JdkNamingTest(unittest.TestCase):
         self.assertIn("SHADOW\tm3/fs/Fallback.java\t2:jdk\n", (self.root / "plan.tsv").read_text(encoding="utf-8"))
         self.assertEqual(jn.plan_tree(self.root, self.commit())["shadows"], expected)
 
+    def test_naming_keep_rows_have_a_reason_and_leave_their_files_out_of_scope(self):
+        """User decision 2026-11-08: a file that names Synexia/com.m3 on purpose (detector, pin, donor differential,
+        Maven coordinate, lineage id) is an explicit NAMING_KEEP.tsv row with a reason, never a looser rule."""
+        keep = jn.load_keep()
+        self.assertTrue(keep)
+        for path, (kind, reason) in keep.items():
+            self.assertIn(kind, jn.KEEP_CLASSES, path)
+            self.assertTrue(reason.strip(), path)
+            self.assertFalse(jn.in_scope(path, ()), path)
+        self.assertTrue(jn.in_scope("m3/x/src/main/java/a/Live.java", ()))
+        bad = self.root / "NAMING_KEEP.tsv"
+        header = "path\treason_class\treason\n"
+        for text in (header + "x.py\tFAVOURITE\tno\n",              # unknown reason class
+                     header + "x.py\tDETECTOR\t \n",                # blank reason
+                     header + "x.py\tPIN\ta\nx.py\tPIN\tb\n"):      # duplicate path
+            bad.write_text(text, encoding="utf-8")
+            with self.assertRaises(SystemExit):
+                jn.load_keep(bad)
+
+    def test_naming_keep_rows_name_files_of_the_tree(self):
+        """A KEEP row whose file is gone is stale: the list must never outlive its files (full checkout, as in CI)."""
+        root = Path(__file__).resolve().parents[3]
+        missing = [path for path in jn.load_keep() if not (root / path).is_file()]
+        self.assertEqual([], missing, "stale NAMING_KEEP.tsv rows")
 
 if __name__ == "__main__":
     unittest.main()
