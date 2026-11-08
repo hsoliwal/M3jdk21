@@ -1,0 +1,6 @@
+donor	repository	commit	path	blob	role
+Scheduling	hsoliwal/com.synexia	45da5f035	synexia-algo/src/main/java/com/synexia/algorithms/scheduling/Scheduling.java	55a8086883bd	facade delegating to the four holders: not folded (every member is one call)
+SchedulingIntervals	hsoliwal/com.synexia	45da5f035	synexia-algo/src/main/java/com/synexia/algorithms/scheduling/SchedulingIntervals.java	16db2c345488	kernel holder: members fold into IntervalGreedyAlgorithms (FOLD_MAP.tsv) and GraphAlgorithms (FOLD_MAP.graph.tsv)
+SchedulingJobs	hsoliwal/com.synexia	45da5f035	synexia-algo/src/main/java/com/synexia/algorithms/scheduling/SchedulingJobs.java	b91168726b62	kernel holder: members fold into IntervalGreedyAlgorithms (FOLD_MAP.tsv) and GraphAlgorithms (FOLD_MAP.graph.tsv)
+SchedulingTasks	hsoliwal/com.synexia	45da5f035	synexia-algo/src/main/java/com/synexia/algorithms/scheduling/SchedulingTasks.java	49428ba5b8e4	kernel holder: members fold into IntervalGreedyAlgorithms (FOLD_MAP.tsv) and GraphAlgorithms (FOLD_MAP.graph.tsv)
+SchedulingCPU	hsoliwal/com.synexia	45da5f035	synexia-algo/src/main/java/com/synexia/algorithms/scheduling/SchedulingCPU.java	e3a8c396c0c0	kernel holder: members fold into IntervalGreedyAlgorithms (FOLD_MAP.tsv) and GraphAlgorithms (FOLD_MAP.graph.tsv)

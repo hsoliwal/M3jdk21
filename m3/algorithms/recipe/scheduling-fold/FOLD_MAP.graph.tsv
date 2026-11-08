@@ -1,0 +1,15 @@
+# FOLD_MEMBERS v1.7 map: the Kahn kernels of synexia-algo SchedulingTasks fold into jdk.m3.algorithm.GraphAlgorithms (topologicalOrder over int[][] edges as the primitive overload of the owner's generic topologicalOrder; minimumTimeWithDependencies = weighted longest path over a DAG). canFinishCourses and courseOrder are one-call wrappers over topologicalOrder and are not folded (2026-11-08).
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/GraphAlgorithms.java
+DONOR	S:/m3-scratch/eb-conv/algo/donor_sched/SchedulingTasks.java	49428ba5b8e4	donor blob 49428ba5b8e4 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/scheduling-fold/PROVENANCE.tsv)
+TAKE	SchedulingTasks.topologicalOrder
+TAKE	SchedulingTasks.minTimeWithDeps
+SKIP	SchedulingTasks.canFinishCourses	one call: topologicalOrder(...) != null
+SKIP	SchedulingTasks.courseOrder	one call over reversed edges: topologicalOrder(numCourses, reversed)
+RENAME	SchedulingTasks.minTimeWithDeps	minimumTimeWithDependencies
+IMPORT	java.util.ArrayList
+IMPORT	java.util.Arrays
+IMPORT	java.util.LinkedList
+IMPORT	java.util.List
+IMPORT	java.util.Queue
+IMPORT	java.util.stream.IntStream

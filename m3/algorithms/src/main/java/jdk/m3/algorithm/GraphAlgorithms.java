@@ -16,6 +16,9 @@ import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.stream.IntStream;
 
 //FLLDCIM: RELOCATE - donor blob c5ac13fda361 at commit 3385d79a2968 (repository, path, URL and digests: m3/algorithms/recipe/graph-trie-20261106/PROVENANCE.tsv); recipe m3/algorithms/recipe/graph-trie-20261106/relocate.py v1
 public final class GraphAlgorithms {
@@ -712,6 +715,73 @@ public final class GraphAlgorithms {
             }
         }
         return distance;
+    }
+
+
+    //FLLDCIM: FOLD - member SchedulingTasks.minTimeWithDeps from donor blob 49428ba5b8e4 (donor blob 49428ba5b8e4 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/scheduling-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/scheduling-fold/FOLD_MAP.graph.tsv
+    /**
+     * Minimum time to complete tasks with dependencies. tasks[i] = time for task i
+     * deps[i] = list of tasks that must complete before i
+     */
+    public static int minimumTimeWithDependencies(int[] tasks, List<List<Integer>> deps) {
+        int n = tasks.length;
+        int[] inDegree = new int[n];
+        int[] earliest = new int[n];
+
+        IntStream.range(0, n).forEach(i -> deps.get(i).forEach(dep -> inDegree[dep]++));
+
+        Queue<Integer> queue = new LinkedList<>();
+        IntStream.range(0, n).filter(i -> inDegree[i] == 0).forEach(i -> {
+            queue.add(i);
+            earliest[i] = tasks[i];
+        });
+
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+            for (int next : deps.get(curr)) {
+                earliest[next] = Math.max(earliest[next], earliest[curr] + tasks[next]);
+                if (--inDegree[next] == 0) {
+                    queue.add(next);
+                }
+            }
+        }
+
+        return Arrays.stream(earliest).max().orElse(0);
+    }
+
+    //FLLDCIM: FOLD - member SchedulingTasks.topologicalOrder from donor blob 49428ba5b8e4 (donor blob 49428ba5b8e4 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/scheduling-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/scheduling-fold/FOLD_MAP.graph.tsv
+    /** Topological order for task dependencies. Returns null if cycle exists. */
+    public static int[] topologicalOrder(int numTasks, int[][] dependencies) {
+        List<List<Integer>> adj = new ArrayList<>();
+        int[] inDegree = new int[numTasks];
+
+        IntStream.range(0, numTasks).forEach(i -> adj.add(new ArrayList<>()));
+
+        Arrays.stream(dependencies).forEach(dep -> {
+            adj.get(dep[0]).add(dep[1]);
+            inDegree[dep[1]]++;
+        });
+
+        Queue<Integer> queue = IntStream.range(0, numTasks)
+                .filter(i -> inDegree[i] == 0)
+                .boxed()
+                .collect(java.util.stream.Collectors.toCollection(LinkedList::new));
+
+        int[] order = new int[numTasks];
+        int idx = 0;
+
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+            order[idx++] = curr;
+
+            for (int next : adj.get(curr)) {
+                if (--inDegree[next] == 0) {
+                    queue.add(next);
+                }
+            }
+        }
+
+        return idx == numTasks ? order : null; // null if cycle
     }
 
 }

@@ -1,0 +1,26 @@
+# FOLD_MEMBERS v1.7 map (m3/tooling/jdk-naming/fold_members.py): the kernel holders behind synexia-algo's Scheduling facade fold into jdk.m3.algorithm.IntervalGreedyAlgorithms, the owner of the interval and greedy scheduling concept (no new class; 2026-11-08).
+# Donors are outside the tree (hsoliwal/com.synexia@45da5f035, PROVENANCE.tsv), pinned to their blobs. The int[][] interval kernels become primitive overloads of the owner's merge / insert / eraseOverlapCount (one concept, one name); abbreviations are spelled out (RENAME rows). The topological and dependency kernels fold into GraphAlgorithms (FOLD_MAP.graph.tsv); the facade is not a donor.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/IntervalGreedyAlgorithms.java
+DONOR	S:/m3-scratch/eb-conv/algo/donor_sched/SchedulingIntervals.java	16db2c345488	donor blob 16db2c345488 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/scheduling-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor_sched/SchedulingJobs.java	b91168726b62	donor blob b91168726b62 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/scheduling-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor_sched/SchedulingCPU.java	e3a8c396c0c0	donor blob e3a8c396c0c0 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/scheduling-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor_sched/SchedulingTasks.java	49428ba5b8e4	donor blob 49428ba5b8e4 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/scheduling-fold/PROVENANCE.tsv)
+TAKE	SchedulingIntervals.*
+TAKE	SchedulingJobs.*
+TAKE	SchedulingCPU.*
+TAKE	SchedulingTasks.taskSchedulerWithCooldown
+RENAME	SchedulingIntervals.mergeIntervals	merge
+RENAME	SchedulingIntervals.insertInterval	insert
+RENAME	SchedulingIntervals.minRemoveForNonOverlapping	eraseOverlapCount
+RENAME	SchedulingJobs.sjf	shortestJobFirst
+RENAME	SchedulingJobs.avgWaitingTime	averageWaitingTime
+RENAME	SchedulingCPU.srtf	shortestRemainingTimeFirst
+IMPORT	java.util.ArrayList
+IMPORT	java.util.Arrays
+IMPORT	java.util.Comparator
+IMPORT	java.util.LinkedList
+IMPORT	java.util.List
+IMPORT	java.util.Queue
+IMPORT	java.util.stream.IntStream
+EDIT	SchedulingTasks.taskSchedulerWithCooldown(char[],int)	9f084223f713	        return Math.max(minLen, tasks.length);	        return tasks.length == 0 ? 0 : Math.max(minLen, tasks.length);
