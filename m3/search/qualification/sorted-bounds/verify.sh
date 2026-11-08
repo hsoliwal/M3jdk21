@@ -3,25 +3,25 @@
 # SPDX-License-Identifier: Apache-2.0
 # Real host Java21 + C17/JNI sorted batch bounds qualification, NOT M3JDK product admission.
 set -euo pipefail
-here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+here=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 jdk_home=$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")
 java_sources=(
-  "$here/src/main/java/jdk/m3/tooling/search/M3SortedIntBounds.java"
-  "$here/src/main/java/jdk/m3/tooling/search/M3NativeSortedIntBounds.java"
-  "$here/src/test/java/jdk/m3/tooling/search/M3SortedIntBoundsSelfTest.java"
-  "$here/src/test/java/jdk/m3/tooling/search/M3SortedIntBoundsBenchmark.java"
+  "$here/src/main/java/jdk/m3/search/M3SortedIntBounds.java"
+  "$here/src/main/java/jdk/m3/search/M3NativeSortedIntBounds.java"
+  "$here/src/test/java/jdk/m3/search/M3SortedIntBoundsSelfTest.java"
+  "$here/src/test/java/jdk/m3/search/M3SortedIntBoundsBenchmark.java"
 )
 mkdir -p "$work/classes" "$work/headers"
 javac --release 21 -Xlint:all -Werror -h "$work/headers" -d "$work/classes" "${java_sources[@]}"
-header="$work/headers/jdk_m3_tooling_search_M3NativeSortedIntBounds.h"
+header="$work/headers/jdk_m3_search_M3NativeSortedIntBounds.h"
 test -s "$header"
-grep -F 'Java_jdk_m3_tooling_search_M3NativeSortedIntBounds_nativeBounds' "$header"
+grep -F 'Java_jdk_m3_search_M3NativeSortedIntBounds_nativeBounds' "$header"
 gcc -std=c17 -O3 -Wall -Wextra -Werror -Wpedantic -fPIC -shared \
   -I"$jdk_home/include" -I"$jdk_home/include/linux" -I"$work/headers" \
   "$here/src/main/native/m3_native_sorted_bounds.c" -o "$work/libm3_sorted_bounds.so"
-nm -D --defined-only "$work/libm3_sorted_bounds.so" | grep -F 'Java_jdk_m3_tooling_search_M3NativeSortedIntBounds_nativeBounds'
+nm -D --defined-only "$work/libm3_sorted_bounds.so" | grep -F 'Java_jdk_m3_search_M3NativeSortedIntBounds_nativeBounds'
 sha_of() { sha256sum "$1" | cut -d' ' -f1; }
 native_sha=$(sha_of "$work/libm3_sorted_bounds.so")
 printf 'M3_JNI_BINARY_SHA256\tC17_SOURCE\t%s\n' "$(sha_of "$here/src/main/native/m3_native_sorted_bounds.c")"
@@ -38,10 +38,10 @@ for mode in interp c1 tiered; do
   esac
   echo "M3_SEARCH_RUNTIME_STAGE=$mode"
   java "${flags[@]}" -Dm3.native.sorted.search.library="$work/libm3_sorted_bounds.so" \
-    -cp "$work/classes" jdk.m3.tooling.search.M3SortedIntBoundsSelfTest
+    -cp "$work/classes" jdk.m3.search.M3SortedIntBoundsSelfTest
 done
 java -Dm3.native.sorted.search.library="$work/libm3_sorted_bounds.so" \
-  -cp "$work/classes" jdk.m3.tooling.search.M3SortedIntBoundsBenchmark
+  -cp "$work/classes" jdk.m3.search.M3SortedIntBoundsBenchmark
 if [[ "$(sha_of "$work/libm3_sorted_bounds.so")" != "$native_sha" ]]; then
   echo 'M3_NATIVE_LIBRARY_MUTATED_AFTER_RUNTIME' >&2
   exit 1

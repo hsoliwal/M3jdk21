@@ -7,7 +7,7 @@
 #include <limits.h>
 #include <stdint.h>
 #include <string.h>
-#include "jdk_m3_tooling_search_M3NativeSortedLongBounds.h"
+#include "jdk_m3_search_M3NativeSortedLongBounds.h"
 
 #define M3_JNI_WINDOW 256
 #define M3_JNI_CACHE_SLOTS 4
@@ -233,7 +233,7 @@ static void throw_illegal_argument(JNIEnv *env, const char *message) {
 
 /* Symbol name and descriptor are verified against javac -h generated header. */
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_tooling_search_M3NativeSortedLongBounds_nativeBounds(
+Java_jdk_m3_search_M3NativeSortedLongBounds_nativeBounds(
         JNIEnv *env, jclass ignored, jlongArray sorted, jint from, jint to,
         jlongArray keys) {
     (void)ignored;

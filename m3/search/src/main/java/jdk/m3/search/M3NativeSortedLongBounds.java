@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2026 Synexia contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-package jdk.m3.tooling.search;
+package jdk.m3.search;
 
 /** Opt-in native signed-long bounds backed by bounded C17/JNI primitive array regions. */
 public final class M3NativeSortedLongBounds {

@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2026 Synexia contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-package jdk.m3.tooling.search;
+package jdk.m3.search;
 
 /** Explicit opt-in JNI batch bounds: copies one sorted range per call, never stores Java heap pointers. */
 public final class M3NativeSortedIntBounds {

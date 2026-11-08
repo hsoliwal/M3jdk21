@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3 sorted signed-long bounds (opt-in tooling)
 
-`jdk.m3.tooling.search.M3SortedLongBounds` performs absolute lower/upper bound lookups on a nondecreasing signed `long[]` slice. It returns an interleaved fresh `int[]` of `[first >= key, first > key]` positions for each query. The source array and query array are never changed, and Java-only use needs no native library. A Java batch of 128+ sorted query values uses a forward-only merge; other batches use binary search. It is not a replacement of `java.util.Arrays.binarySearch`, nor a mutation to standard JDK 21 behavior.
+`jdk.m3.search.M3SortedLongBounds` performs absolute lower/upper bound lookups on a nondecreasing signed `long[]` slice. It returns an interleaved fresh `int[]` of `[first >= key, first > key]` positions for each query. The source array and query array are never changed, and Java-only use needs no native library. A Java batch of 128+ sorted query values uses a forward-only merge; other batches use binary search. It is not a replacement of `java.util.Arrays.binarySearch`, nor a mutation to standard JDK 21 behavior.
 
 `M3NativeSortedLongBounds` loads a native library only on explicit invocation using the `m3.native.sorted.long.search.library` property. Its C17 JNI implementation accesses both `long[]` inputs through fixed 256-element regions, writes at most 256 result pairs at once, stores no Java heap pointer, and exports one generated-header-pinned JNI symbol. The native route is for behavior qualification, not automatic speed selection. Supply the property as a full path and run `verify-long-bounds.sh` for host JDK21 differential evidence.
 
