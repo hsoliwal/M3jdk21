@@ -29,6 +29,7 @@ public final class M3SortedIntBoundsSelfTest {
         testRangesAndDuplicates();
         testDeterministicSpectrum();
         testLargeBatch();
+        testAdjacentDuplicateUnsortedQueries();
         testParallel();
         System.out.println("M3_SORTED_INT_BOUNDS_TEST\tchecks=" + checks
                 + "\tjava=PASS\tnative_jni=PASS\tproduct_jdk=HOLD");
@@ -103,6 +104,23 @@ public final class M3SortedIntBoundsSelfTest {
         Arrays.sort(probes);
         verify(sorted, 0, sorted.length, probes);
         verify(sorted, 117, 16_111, probes);
+    }
+
+    /** Duplicated adjacent keys in an unsorted batch must reuse exactly the prior absolute bounds. */
+    private static void testAdjacentDuplicateUnsortedQueries() {
+        int[] source = new int[257];
+        for (int i = 0; i < source.length; i++) {
+            source[i] = i / 3 - 41;
+        }
+        for (int length : new int[]{1, 127, 128, 129, 255, 257, 1025}) {
+            int[] queries = new int[length];
+            for (int i = 0; i < queries.length; i++) {
+                // Eight-query repeated groups alternate ordering to select the binary-search fallback.
+                queries[i] = ((i / 8) & 1) == 0 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            verify(source, 0, source.length, queries);
+            verify(source, 37, 184, queries);
+        }
     }
 
     private static void testParallel() throws Exception {

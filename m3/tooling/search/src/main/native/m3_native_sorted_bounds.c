@@ -48,6 +48,18 @@ static jint m3_upper(const jint *source, jint length, jint from, jint needle) {
     return from + low;
 }
 
+/* Same overflow-safe comparison budget as the Java owner; no new JNI entrypoint. */
+static int m3_merge_within_budget(jint range_length, jsize key_count) {
+    uint32_t remaining = (uint32_t)range_length;
+    unsigned int depth = 0;
+    while (remaining != 0) {
+        depth++;
+        remaining >>= 1;
+    }
+    return key_count >= 128
+            && (uint64_t)range_length <= (uint64_t)key_count * depth;
+}
+
 JNIEXPORT jintArray JNICALL Java_jdk_m3_tooling_search_M3NativeSortedIntBounds_nativeBounds(
         JNIEnv *env, jclass class_unused, jintArray sorted, jint from, jint to, jintArray keys) {
     (void)class_unused;
@@ -135,7 +147,7 @@ JNIEXPORT jintArray JNICALL Java_jdk_m3_tooling_search_M3NativeSortedIntBounds_n
     jint key_window[M3_KEY_BATCH];
     jint output_window[M3_KEY_BATCH * 2];
     /* Detect a monotone query batch without retaining any Java-heap reference. */
-    int monotone_keys = key_count >= 128;
+    int monotone_keys = m3_merge_within_budget(range_length, key_count);
     jint previous = 0;
     int has_previous = 0;
     for (jsize start = 0; monotone_keys && start < key_count;) {
@@ -157,6 +169,11 @@ JNIEXPORT jintArray JNICALL Java_jdk_m3_tooling_search_M3NativeSortedIntBounds_n
     }
     jint lower_cursor = 0;
     jint upper_cursor = 0;
+    /* Reuse the detection state as an invocation-local previous-key memo.
+     * Reset after the monotonicity probe; keep it across 256-key windows.
+     * Binary-mode cursors hold absolute bounds, not merge-mode offsets.
+     */
+    has_previous = 0;
     for (jsize start = 0; start < key_count;) {
         jsize count = key_count - start < M3_KEY_BATCH ? key_count - start : M3_KEY_BATCH;
         (*env)->GetIntArrayRegion(env, keys, start, count, key_window);
@@ -176,12 +193,17 @@ JNIEXPORT jintArray JNICALL Java_jdk_m3_tooling_search_M3NativeSortedIntBounds_n
                 output_window[2 * i] = from + lower_cursor;
                 output_window[2 * i + 1] = from + upper_cursor;
             } else {
-                /* Sorted input guarantees upper bound >= lower bound. */
-                jint lower = m3_lower(region, range_length, from, needle);
-                jint offset = lower - from;
-                output_window[2 * i] = lower;
-                output_window[2 * i + 1] = m3_upper(region + offset,
-                        range_length - offset, lower, needle);
+                if (!has_previous || needle != previous) {
+                    /* Sorted input guarantees upper bound >= lower bound. */
+                    lower_cursor = m3_lower(region, range_length, from, needle);
+                    jint offset = lower_cursor - from;
+                    upper_cursor = m3_upper(region + offset,
+                            range_length - offset, lower_cursor, needle);
+                    previous = needle;
+                    has_previous = 1;
+                }
+                output_window[2 * i] = lower_cursor;
+                output_window[2 * i + 1] = upper_cursor;
             }
         }
         (*env)->SetIntArrayRegion(env, output, start * 2, count * 2, output_window);

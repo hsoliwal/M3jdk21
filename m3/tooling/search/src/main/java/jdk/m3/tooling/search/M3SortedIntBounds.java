@@ -39,7 +39,8 @@ public final class M3SortedIntBounds {
             }
             return result;
         }
-        if (keys.length >= 128 && nonDecreasing(keys)) {
+        if (keys.length >= 128 && nonDecreasing(keys)
+                && mergeWithinBudget(to - from, keys.length)) {
             int lower = from;
             int upper = from;
             for (int i = 0; i < keys.length; i++) {
@@ -56,11 +57,17 @@ public final class M3SortedIntBounds {
         } else {
             for (int i = 0; i < keys.length; i++) {
                 int needle = keys[i];
-                // Sorted-order invariant: upperBound cannot precede lowerBound.
-                // Reuse the first bound to avoid searching the excluded prefix.
-                int lower = lowerBound(sorted, from, to, needle);
-                result[i * 2] = lower;
-                result[i * 2 + 1] = upperBound(sorted, lower, to, needle);
+                if (i > 0 && needle == keys[i - 1]) {
+                    // Exact adjacent duplicate: the preceding bounds have identical search semantics.
+                    result[i * 2] = result[(i - 1) * 2];
+                    result[i * 2 + 1] = result[(i - 1) * 2 + 1];
+                } else {
+                    // Sorted-order invariant: upperBound cannot precede lowerBound.
+                    // Reuse the first bound to avoid searching the excluded prefix.
+                    int lower = lowerBound(sorted, from, to, needle);
+                    result[i * 2] = lower;
+                    result[i * 2 + 1] = upperBound(sorted, lower, to, needle);
+                }
             }
         }
         return result;
@@ -93,6 +100,14 @@ public final class M3SortedIntBounds {
         if (keys.length > Integer.MAX_VALUE / 2) {
             throw new IllegalArgumentException("query batch too large to return two bounds per key");
         }
+    }
+
+    /** Admit a full range scan only within the binary-search comparison budget. */
+    private static boolean mergeWithinBudget(int rangeLength, int queryCount) {
+        // bitLength(N) bounds each binary search for N >= 0. Widen before multiplying;
+        // a sparse ordered batch must not force a scan over an arbitrarily large range.
+        return queryCount >= 128 && (long) rangeLength <= (long) queryCount
+                * (Integer.SIZE - Integer.numberOfLeadingZeros(rangeLength));
     }
 
     /** Check monotonic order once, without sorting or mutating callers' query values. */
