@@ -24,6 +24,8 @@ jobs:
             test/jdk/jdk/m3/arrays
             m3/native/include
             m3/collections
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
         with:
@@ -43,10 +45,10 @@ jobs:
           python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261024/probe_source_binding_successor_v5.py --jar "$M3_PROVIDER" --work "$M3_TASK_OUT/guard-probe"
           find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > "$M3_TASK_OUT/arrays.args"
           javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -d "$M3_TASK_OUT/arrays" @"$M3_TASK_OUT/arrays.args"
-          find m3/collections/src/main/java -name '*.java' | sort > "$M3_TASK_OUT/core.args"
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > "$M3_TASK_OUT/core.args"
           javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module --module-path "$M3_TASK_OUT/arrays" -Werror -d "$M3_TASK_OUT/core" @"$M3_TASK_OUT/core.args"
-          javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -cp "$M3_TASK_OUT/core:$M3_TASK_OUT/arrays:$M3_PROVIDER" -d "$M3_TASK_OUT/classes" @"$M3_TASK_OUT/owned.args" m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkCatalogSelfTest.java m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkSelfTest.java m3/collections/src/test/java/jdk/m3/collections/M3SdkOwnerFactorySelfTest.java m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3MultiValuedMapCounterDifferentialTest.java
-          gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o "$M3_TASK_OUT/native/libm3_collections_mask.so"
+          javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -cp "$M3_TASK_OUT/core:$M3_TASK_OUT/arrays:$M3_PROVIDER" -d "$M3_TASK_OUT/classes" @"$M3_TASK_OUT/owned.args" test/jdk/jdk/m3/collections/M3CollectionSdkCatalogSelfTest.java test/jdk/jdk/m3/collections/M3CollectionSdkSelfTest.java test/jdk/jdk/m3/collections/M3SdkOwnerFactorySelfTest.java m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3MultiValuedMapCounterDifferentialTest.java
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c -o "$M3_TASK_OUT/native/libm3_collections_mask.so"
           # Reuse the canonical m3/arrays JNI owner for required-backed collection factories.
           # The optional/absent mask tests above remain deliberately unchanged.
           cmake -S make/m3/arrays -B "$M3_TASK_OUT/native-array" -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release
@@ -73,6 +75,8 @@ jobs:
             make/m3/arrays
             test/jdk/jdk/m3/arrays
             m3/collections
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
         with:

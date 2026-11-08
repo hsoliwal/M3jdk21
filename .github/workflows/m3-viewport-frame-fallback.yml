@@ -3,8 +3,8 @@ name: M3 original frame-page Java fallback
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportKernel.java'
+      - 'test/jdk/jdk/m3/collections/M3FrameJavaContract.java'
       - 'm3/collections/qualification/viewport-frame/JAVA_FALLBACK_CURRENT_REVIEW.md'
       - '.github/workflows/m3-viewport-frame-fallback.yml'
   workflow_dispatch:
@@ -31,10 +31,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java)" = aefcdb933cbc2caa122a527180e20fda8e2a284d
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java)" = 37520b6fbcb02f45e038e7f0192b73d2acc2e1ac
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java)" = 4f73ddb9aae36dadb8003257d3a6988536a18066
-          test "$(git hash-object m3/collections/src/main/c/m3maskviewport.c)" = b0d387f2612a315c6b53a50a814432c916ca61c8
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportKernel.java)" = aefcdb933cbc2caa122a527180e20fda8e2a284d
+          test "$(git hash-object test/jdk/jdk/m3/collections/M3FrameJavaContract.java)" = 37520b6fbcb02f45e038e7f0192b73d2acc2e1ac
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportNative.java)" = 4f73ddb9aae36dadb8003257d3a6988536a18066
+          test "$(git hash-object src/jdk.m3.collections/share/native/libm3collections/m3maskviewport.c)" = b0d387f2612a315c6b53a50a814432c916ca61c8
           echo M3_FRAME_FALLBACK_SOURCE_ADMISSION_PASS
       - name: Compile existing Java kernel and all original frame/page contracts
         shell: bash
@@ -43,11 +43,11 @@ jobs:
           B="$RUNNER_TEMP/m3-viewport-frame-fallback"
           mkdir -p "$B/classes"
           javac --release 21 -encoding UTF-8 -Xlint:all -Werror -d "$B/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3MaskViewportKernelContract.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3MaskViewportPageContract.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportKernel.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportNative.java \
+            test/jdk/jdk/m3/collections/M3MaskViewportKernelContract.java \
+            test/jdk/jdk/m3/collections/M3MaskViewportPageContract.java \
+            test/jdk/jdk/m3/collections/M3FrameJavaContract.java
           for mode in mixed interpreted; do
             opts=(); if [[ "$mode" == interpreted ]]; then opts=(-Xint); fi
             java "${opts[@]}" -ea -Xmx64m -XX:+UseSerialGC -cp "$B/classes" \

@@ -179,7 +179,7 @@ class PackedNativeTest {
                 System.getProperty("java.class.path"));
         String java = Path.of(System.getProperty("java.home"), "bin", "java").toString();
         String absentPath = Path.of(System.getProperty("java.io.tmpdir"),
-                "synexia-packed-no-library-20261029").toString();
+                "m3-packed-no-library-20261029").toString();
         Process process = new ProcessBuilder(java, "-Xcheck:jni", "-Djava.library.path=" + absentPath,
                 "-cp", classPath, FallbackProbe.class.getName()).redirectErrorStream(true).start();
         boolean finished = process.waitFor(30, TimeUnit.SECONDS);
@@ -194,7 +194,7 @@ class PackedNativeTest {
 
     private static void requireNative() {
         boolean available = PackedNative.nativeAvailable();
-        if (Boolean.getBoolean("synexia.test.requireNative")) {
+        if (Boolean.getBoolean("m3.test.requireNative")) {
             assertTrue(available, "native execution is required for this qualification run");
         }
         Assumptions.assumeTrue(available, "optional JNI library is unavailable");

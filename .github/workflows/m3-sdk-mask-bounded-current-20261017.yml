@@ -5,9 +5,9 @@ on:
     branches: ['m3/sdk-mask-bounded-current-20261017']
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java'
-      - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3BudgetedMaskWindowContract.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskWindow.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c'
+      - 'test/jdk/jdk/m3/collections/M3BudgetedMaskWindowContract.java'
       - 'm3/collections/qualification/sdk-mask-bounded-current-20261017/**'
       - '.github/workflows/m3-sdk-mask-bounded-current-20261017.yml'
   workflow_dispatch:
@@ -40,8 +40,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pkg=m3/collections/src/main/java/jdk/m3/collections
-          proof=m3/collections/src/test/java/jdk/m3/collections
+          pkg=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          proof=test/jdk/jdk/m3/collections
           mkdir -p "$RUNNER_TEMP/m3-classes" "$RUNNER_TEMP/m3-headers" "$RUNNER_TEMP/m3-native" "$RUNNER_TEMP/m3-oldnative"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -h "$RUNNER_TEMP/m3-headers" -d "$RUNNER_TEMP/m3-classes" \
@@ -52,8 +52,8 @@ jobs:
           gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fsanitize=undefined \
             -fno-sanitize-recover=all -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -include "$javahdr" \
-            m3/collections/src/main/native/collections/m3_index_mask_window.c \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o "$RUNNER_TEMP/m3-native/libm3_collections_mask.so"
           UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 java -ea -Xcheck:jni \
             -Djava.library.path="$RUNNER_TEMP/m3-native" -cp "$RUNNER_TEMP/m3-classes" \
@@ -64,7 +64,7 @@ jobs:
           gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -include "$javahdr" \
             "$RUNNER_TEMP/m3-oldnative/old_window.c" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o "$RUNNER_TEMP/m3-oldnative/libm3_collections_mask.so"
           java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/m3-oldnative" \
             -cp "$RUNNER_TEMP/m3-classes" jdk.m3.collections.M3BudgetedMaskWindowContract --old-binary

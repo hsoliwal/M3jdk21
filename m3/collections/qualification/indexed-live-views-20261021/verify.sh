@@ -4,8 +4,8 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../../../.." && pwd)"
 Q="$ROOT/m3/collections/qualification/indexed-live-views-20261021"
-MAIN="$ROOT/m3/collections/src/main/java"
-TEST="$ROOT/m3/collections/src/test/java"
+MAIN="$ROOT/src/jdk.m3.collections/share/classes"
+TEST="$ROOT/test/jdk"
 OUTPUT="$(mktemp -d)"
 trap 'rm -rf "$OUTPUT"' EXIT
 python3 "$Q/verify_recipe.py"

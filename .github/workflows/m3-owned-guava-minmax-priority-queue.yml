@@ -24,6 +24,8 @@ jobs:
             make/m3/arrays
             test/jdk/jdk/m3/arrays
             m3/collections
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with: {distribution: temurin, java-version: '21'}
@@ -42,6 +44,8 @@ jobs:
             make/m3/arrays
             test/jdk/jdk/m3/arrays
             m3/collections
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with: {distribution: temurin, java-version: '21'}
@@ -56,6 +60,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with: {distribution: temurin, java-version: '21'}

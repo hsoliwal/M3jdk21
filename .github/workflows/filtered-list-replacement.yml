@@ -3,9 +3,9 @@ name: Filtered List replacement contracts
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsOwnerSetContract.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsOwnerSetTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
+      - 'test/jdk/jdk/m3/collections/M3FilteredListsOwnerSetContract.java'
+      - 'test/jdk/jdk/m3/collections/M3FilteredListsOwnerSetTest.java'
       - '.github/workflows/filtered-list-replacement.yml'
   workflow_dispatch:
 permissions:
@@ -31,17 +31,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '843267dce03f5909c357e1caeae5a2aa82bdae3e55323e1f46e0fb0789341a17  m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java' | sha256sum -c -
-          echo '510db034cdd46a3091dd9710e7be89cddf539015e4148fb6afcbc424fcd181e8  m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsOwnerSetContract.java' | sha256sum -c -
+          echo '843267dce03f5909c357e1caeae5a2aa82bdae3e55323e1f46e0fb0789341a17  src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java' | sha256sum -c -
+          echo '510db034cdd46a3091dd9710e7be89cddf539015e4148fb6afcbc424fcd181e8  test/jdk/jdk/m3/collections/M3FilteredListsOwnerSetContract.java' | sha256sum -c -
           mkdir -p "$RUNNER_TEMP/filtered-list-classes"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -d "$RUNNER_TEMP/filtered-list-classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsOwnerSetContract.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsContract.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsEdges.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsWorkProof.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java \
+            test/jdk/jdk/m3/collections/M3FilteredListsOwnerSetContract.java \
+            test/jdk/jdk/m3/collections/M3FilteredListsContract.java \
+            test/jdk/jdk/m3/collections/M3FilteredListsEdges.java \
+            test/jdk/jdk/m3/collections/M3FilteredListsWorkProof.java \
+            test/jdk/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java
       - name: Run indexed/iterator replacement and existing List contracts
         shell: bash
         run: |

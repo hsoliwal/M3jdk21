@@ -3,8 +3,8 @@ on:
   pull_request:
     paths:
       - 'm3/collections/qualification/m3-long-index-path-masks-20261018/**'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathMasksSelfTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathMasks.java'
+      - 'test/jdk/jdk/m3/collections/M3LongIndexPathMasksSelfTest.java'
       - '.github/workflows/m3-long-index-path-masks-20261018.yml'
   workflow_dispatch:
 permissions:
@@ -22,6 +22,9 @@ jobs:
         with:
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             .github/workflows/m3-long-index-path-masks-20261018.yml
       - uses: actions/setup-java@v4
         with:
@@ -37,8 +40,8 @@ jobs:
         run: |
           mkdir -p /tmp/m3-long-path
           javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-long-path \
-            m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathMasksSelfTest.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexPathMasks.java \
+            test/jdk/jdk/m3/collections/M3LongIndexPathMasksSelfTest.java
           java -ea -cp /tmp/m3-long-path jdk.m3.collections.M3LongIndexPathMasksSelfTest
       - name: Recipe fixed-point and drift refusal
         run: |

@@ -9,27 +9,27 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[3]
 MIRROR = HERE / "recipe-mirror"
 EXPECTED = {
-    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java": (
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java": (
         "12bdc2271eee96fb0d24ec188cbcbe37d6c110bf3bb61682715f1af7d5984333",
         "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5",
         "M3FilteredLists.java.txt"),
-    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java": (
+    "test/jdk/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java": (
         "ABSENT",
         "328c81308abc350e92e98ff0281a8599c72f5032be8816033d34b00fc5a531b5",
         "M3FilteredListsDeepCompositionProof.java.txt"),
-    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsDeepCompositionTest.java": (
+    "test/jdk/jdk/m3/collections/M3FilteredListsDeepCompositionTest.java": (
         "ABSENT",
         "ba60ff492aa468e97f1e9e9b31719a2918a1eb86574ff723c7ba297ecad5a9f0",
         "M3FilteredListsDeepCompositionTest.java.txt"),
-    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsMaskBridgeProof.java": (
+    "test/jdk/jdk/m3/collections/M3FilteredListsMaskBridgeProof.java": (
         "ABSENT",
         "762c21a3345d888ac8167fcf058483383f9ee8dba19e9dcdea5c66d35944beac",
         "M3FilteredListsMaskBridgeProof.java.txt"),
-    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsReadonlyDepthProof.java": (
+    "test/jdk/jdk/m3/collections/M3FilteredListsReadonlyDepthProof.java": (
         "ABSENT",
         "d606d65dcfaceaeb5c8ef09b9846be6d99a8a17c3284d25c6ee06f91674af92c",
         "M3FilteredListsReadonlyDepthProof.java.txt"),
-    "m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsReadonlyDepthTest.java": (
+    "test/jdk/jdk/m3/collections/M3FilteredListsReadonlyDepthTest.java": (
         "ABSENT",
         "b9d1922d94fbaefa8464a8398d8d8a1df0a7c27649ed62edfb776bfecc73e7c3",
         "M3FilteredListsReadonlyDepthTest.java.txt"),

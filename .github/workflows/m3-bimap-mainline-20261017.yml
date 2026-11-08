@@ -6,7 +6,7 @@ on:
       - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3BiMap*.java'
       - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3BiMapTest.java'
       - 'm3/collections/qualification/bimap-mainline-20261017/**'
-      - 'm3/collections/src/test/native/collections/m3_bimap_consumer.c'
+      - 'test/jdk/jdk/m3/collections/native/collections/m3_bimap_consumer.c'
       - '.github/workflows/m3-bimap-mainline-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -37,7 +37,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-bimap-native"
           cc -std=c17 -O1 -g -fPIC -shared -Wall -Wextra -Werror -fsanitize=undefined \
             -fno-sanitize-recover=all -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/test/native/collections/m3_bimap_consumer.c \
+            test/jdk/jdk/m3/collections/native/collections/m3_bimap_consumer.c \
             -o "$RUNNER_TEMP/m3-bimap-native/libm3_bimap_consumer.so"
       - name: Test real Java BiMap through checked JNI
         run: |

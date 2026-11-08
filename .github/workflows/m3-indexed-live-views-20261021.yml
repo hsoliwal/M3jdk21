@@ -6,11 +6,11 @@ on:
     branches: ['m3/indexed-live-views-20261021']
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexSort.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveView*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayList.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexSort.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
+      - 'test/jdk/jdk/m3/collections/M3IndexedLiveView*.java'
       - 'm3/collections/algorithm-catalog/indexed-live-views-20261021.tsv'
       - 'm3/collections/qualification/indexed-live-views-20261021/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021/**'
@@ -32,6 +32,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
             m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite
             m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021
             m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-indexed-live-views-20261021.yml

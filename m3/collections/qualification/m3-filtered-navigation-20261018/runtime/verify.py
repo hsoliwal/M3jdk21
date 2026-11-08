@@ -54,10 +54,10 @@ def main():
 
     namespace = {"m": "http://maven.apache.org/POM/4.0.0"}
     pom = ET.parse(here / "pom.xml").getroot()
-    test_paths = [root / "m3/collections/src/test/java" / item.text
+    test_paths = [root / "test/jdk" / item.text
                   for item in pom.findall(".//m:testInclude", namespace)]
-    main_paths = sorted((root / "m3/collections/src/main/java").rglob("*.java"))
-    c_root = root / "m3/collections/src/main/native/collections"
+    main_paths = sorted(path for base in ("m3/collections/src/main/java", "src/jdk.m3.collections/share/classes/jdk/m3/collections", "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections") for path in (root / base).rglob("*.java"))
+    c_root = root / "src/jdk.m3.collections/share/native/libm3collections/collections"
     c_paths = [c_root / name for name in ("m3_index_path_masks.c", "m3_index_mask_compactor.c",
                                         "m3_index_mask_window.c")]
     inputs = main_paths + test_paths + c_paths + [here / "pom.xml", Path(__file__).resolve()]

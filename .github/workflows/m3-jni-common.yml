@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/native/**'
       - 'src/jdk.m3.collections/share/native/libm3arrays/**'
-      - 'm3/collections/src/main/native/**'
+      - 'src/jdk.m3.collections/share/native/libm3collections/**'
       - '.github/workflows/m3-jni-common.yml'
   workflow_dispatch:
 

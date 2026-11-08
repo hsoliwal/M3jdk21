@@ -3,8 +3,8 @@ name: M3JDK21 original javac signal graph quality binding
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalQualityFactory.java'
+      - 'test/jdk/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java'
       - 'm3/compiler/source-signals/src/main/java/jdk/m3/compiler/signals/MethodSignals.java'
       - '.github/workflows/m3-source-signal-recorded-graph-20261024.yml'
   workflow_dispatch:
@@ -31,13 +31,13 @@ jobs:
           out="$RUNNER_TEMP/m3-recorded-binding"
           mkdir -p "$out/classes" "$out/plugin/META-INF/services" "$out/fixture-classes" "$out/demo"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalDependencyEpochs.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalQualitySchema.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalRelations.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalImage.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalDependencyEpochs.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalQualitySchema.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalQualityFactory.java \
+            test/jdk/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java
           java -cp "$out/classes" jdk.m3.collections.M3SourceSignalQualityFactorySelfTest
           java -Xint -cp "$out/classes" jdk.m3.collections.M3SourceSignalQualityFactorySelfTest
       - name: Execute original javac M3SourceSignals plugin and parse real S/T/E evidence

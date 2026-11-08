@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""MOVE_REFS v1: the live references of an area moved by move_module_area.py follow the move.
+"""MOVE_REFS v1.1: the live references of an area moved by move_module_area.py follow the move.
 
 usage: move_refs.py <repo root> <rules.tsv> [--check]
 Rules (tab separated, '#' comments):
@@ -12,6 +12,8 @@ Rules (tab separated, '#' comments):
                                         added entries follow it (same indentation), unless already listed
   RESIDUE <old prefix>                  after the run, a live reference to <old prefix> in the FILES is a finding
   KEEP    <literal>                     a residue line containing this literal is allowed (paths that still exist)
+  PROTECT <literal>                     a line containing this literal is never rewritten and never residue (v1.1:
+                                        paths inside a checkout of an older commit, e.g. baseline/m3/...)
 Idempotent; --check writes nothing and exits 1 when a run would change a file; exit 2 when RESIDUE findings remain.
 Written after the m3/arrays move (#2825) left 17 workflows and 4 scripts reading m3/arrays/src/main/java and
 m3/arrays/src/main/native, and sparse checkouts without the module paths (RECIPE: a move is not done until its live
@@ -29,12 +31,12 @@ SPARSE_HEAD = re.compile(r"^(\s*)sparse-checkout:\s*\|\s*$")
 
 
 def read_rules():
-    rules = {"FILES": [], "REPLACE": [], "SPARSE": [], "RESIDUE": [], "KEEP": []}
+    rules = {"FILES": [], "REPLACE": [], "SPARSE": [], "RESIDUE": [], "KEEP": [], "PROTECT": []}
     for raw in RULES.read_text(encoding="utf-8").splitlines():
         if not raw.strip() or raw.startswith("#"):
             continue
         kind, *rest = raw.split("\t")
-        rules[kind].append(rest[0] if kind in ("FILES", "RESIDUE", "KEEP") else tuple(rest))
+        rules[kind].append(rest[0] if kind in ("FILES", "RESIDUE", "KEEP", "PROTECT") else tuple(rest))
     return rules
 
 
@@ -84,8 +86,15 @@ def main() -> int:
     for path in files:
         text = path.read_text(encoding="utf-8")
         new = text
-        for old, rep in rules["REPLACE"]:
-            new = replace_all(new, old, rep)
+        if rules["PROTECT"]:
+            # v1.1: a line naming a PROTECT literal (e.g. a checkout of an older commit under baseline/) keeps its bytes
+            kept = new.split("\n")
+            for old, rep in rules["REPLACE"]:
+                kept = [line if any(p in line for p in rules["PROTECT"]) else replace_all(line, old, rep) for line in kept]
+            new = "\n".join(kept)
+        else:
+            for old, rep in rules["REPLACE"]:
+                new = replace_all(new, old, rep)
         if path.suffix in (".yml", ".yaml"):
             new = sparse_add(new, rules["SPARSE"])
         if new != text:
@@ -93,13 +102,13 @@ def main() -> int:
             if not CHECK:
                 path.write_text(new, encoding="utf-8", newline="\n")
         for number, line in enumerate(new.split("\n"), 1):
-            if any(r in line for r in rules["RESIDUE"]) and not any(k in line for k in rules["KEEP"]):
+            if any(r in line for r in rules["RESIDUE"]) and not any(k in line for k in rules["KEEP"] + rules["PROTECT"]):
                 findings.append(f"{path.relative_to(ROOT).as_posix()}:{number}: {line.strip()[:160]}")
     for c in changed:
         print("CHANGED\t" + c)
     for f in findings:
         print("RESIDUE\t" + f)
-    print(f"MOVE_REFS files={len(files)} changed={len(changed)} residue={len(findings)} check={CHECK}")
+    print(f"MOVE_REFS v1.1 files={len(files)} changed={len(changed)} residue={len(findings)} check={CHECK}")
     if findings:
         return 2
     return 1 if CHECK and changed else 0

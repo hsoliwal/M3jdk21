@@ -3,8 +3,8 @@ name: M3JDK21 typed signal facts Java 21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalColumns*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java'
+      - 'test/jdk/jdk/m3/collections/M3SignalColumns*.java'
       - '.github/workflows/m3-typed-signal-columns-20261022.yml'
   workflow_dispatch:
 permissions:
@@ -31,8 +31,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-signal-classes"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -d "$RUNNER_TEMP/m3-signal-classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SignalColumnsSelfTest.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java \
+            test/jdk/jdk/m3/collections/M3SignalColumnsSelfTest.java
           java -cp "$RUNNER_TEMP/m3-signal-classes" \
             jdk.m3.collections.M3SignalColumnsSelfTest
   original-maven-junit:

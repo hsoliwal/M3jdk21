@@ -3,8 +3,8 @@ name: M3JDK21 stable descending index groups
 on:
   pull_request:
     paths:
-      - "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java"
-      - "m3/collections/src/test/java/jdk/m3/collections/M3StableDescendingSnapshot*.java"
+      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java"
+      - "test/jdk/jdk/m3/collections/M3StableDescendingSnapshot*.java"
       - ".github/workflows/m3-stable-descending-index.yml"
   workflow_dispatch:
 concurrency:
@@ -26,11 +26,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p build/m3-stable-descending
-          src=m3/collections/src/main/java/jdk/m3/collections
+          src=src/jdk.m3.collections/share/classes/jdk/m3/collections
           javac --release 21 -Xlint:all -Werror -d build/m3-stable-descending \
             "$src/M3IndexMaskCompactor.java" "$src/M3IndexPathMasks.java" \
             "$src/M3IndexedListSnapshot.java" \
-            m3/collections/src/test/java/jdk/m3/collections/M3StableDescendingSnapshotProof.java
+            test/jdk/jdk/m3/collections/M3StableDescendingSnapshotProof.java
       - name: Java reference oracle
         run: java -cp build/m3-stable-descending jdk.m3.collections.M3StableDescendingSnapshotProof
       - name: Compile unchanged target JNI C17 selector strictly
@@ -39,7 +39,7 @@ jobs:
           set -euo pipefail
           cc -std=c17 -Wall -Wextra -Werror -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c \
             -o build/m3-stable-descending/libm3_collections_pathmask.so
       - name: Native-required JNI reference oracle
         run: |

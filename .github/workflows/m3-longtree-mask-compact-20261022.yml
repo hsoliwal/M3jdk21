@@ -4,8 +4,8 @@ name: M3JDK21 original long-tree packed-mask compaction
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongTreeSet.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetMaskCompaction*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongTreeSet.java'
+      - 'test/jdk/jdk/m3/collections/M3LongTreeSetMaskCompaction*.java'
       - '.github/workflows/m3-longtree-mask-compact-20261022.yml'
   workflow_dispatch:
 
@@ -37,11 +37,11 @@ jobs:
           from pathlib import Path
           import hashlib
           pinned = {
-              'm3/collections/src/main/java/jdk/m3/collections/M3LongTreeSet.java':
+              'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongTreeSet.java':
                   '2e8510d8abe6b9e65b9bf47e0e4548c7a351c5dfb5e70d4d9bd6975284f9f638',
-              'm3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetMaskCompactionContract.java':
+              'test/jdk/jdk/m3/collections/M3LongTreeSetMaskCompactionContract.java':
                   '7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25',
-              'm3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetMaskCompactionTest.java':
+              'test/jdk/jdk/m3/collections/M3LongTreeSetMaskCompactionTest.java':
                   '6b57349afcc52a7f97165a6096d9fc3982b6cea668db032efa688b5f1d7ef136',
           }
           for p, expected in pinned.items():
@@ -55,8 +55,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          core='m3/collections/src/main/java/jdk/m3/collections'
-          test='m3/collections/src/test/java/jdk/m3/collections'
+          core='src/jdk.m3.collections/share/classes/jdk/m3/collections'
+          test='test/jdk/jdk/m3/collections'
           mkdir -p build/m3-longtree-mask
           javac --release 21 -proc:none -Xlint:all -Werror -implicit:none -d build/m3-longtree-mask \
             "$core/M3LongIterator.java" \

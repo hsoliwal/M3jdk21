@@ -3,8 +3,8 @@ name: M3JDK21 keyed masked completion ring
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3KeyedParallelismPlan.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3KeyedOrderRing*'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3KeyedParallelismPlan.java'
+      - 'test/jdk/jdk/m3/collections/M3KeyedOrderRing*'
       - 'm3/collections/recipe/keyed-ordered-ring-20261019/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/keyed-ordered-ring-20261019/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-keyed-ordered-ring-20261019.yml'

@@ -8,9 +8,9 @@ on:
       - 'm3/object-slot-index-snapshot-20261017'
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectSlotStore28.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndex*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectSlotStore28.java'
+      - 'test/jdk/jdk/m3/collections/M3ObjectSlotIndex*.java'
       - 'm3/collections/qualification/m3-object-slot-index-snapshot-20261017/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-object-slot-index-snapshot-20261017.yml'
@@ -60,12 +60,12 @@ jobs:
           mkdir -p "$out/native"
           gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
-            m3/collections/src/main/native/collections/m3_index_mask_window.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c \
             -o "$out/native/libm3_collections_mask.so"
           gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_signal_order_jni.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_signal_order_jni.c \
             -o "$out/native/libm3signalorder.so"
           java -Xcheck:jni -Dm3.collections.signal.native=true \
             -Djava.library.path="$out/native" \

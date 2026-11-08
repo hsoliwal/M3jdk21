@@ -5,8 +5,8 @@ on:
       - 'm3/long-range-array-state-receiver-20261017'
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRangeSet*'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java'
+      - 'test/jdk/jdk/m3/collections/M3LongRangeSet*'
       - 'm3/collections/qualification/range-atom/successor/**'
       - 'm3/collections/qualification/m3-long-range-arrays-20261017/**'
       - '.github/workflows/m3-long-range-array-state-20261017.yml'
@@ -39,11 +39,11 @@ jobs:
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/range-classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/range-classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3LaneSearch.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSetSelfTest.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongLongConsumer.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LaneSearch.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java \
+            test/jdk/jdk/m3/collections/M3LongRangeSetSelfTest.java
           java -ea -Xmx64m -cp "$RUNNER_TEMP/range-classes" jdk.m3.collections.M3LongRangeSetSelfTest
       - name: Compile existing C17 JNI kernel and check real mask selection
         shell: bash
@@ -51,7 +51,7 @@ jobs:
           set -euo pipefail
           gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c \
             -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
           java -ea -Xmx64m -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
             -cp "$RUNNER_TEMP/range-classes" jdk.m3.collections.M3LongRangeSetSelfTest

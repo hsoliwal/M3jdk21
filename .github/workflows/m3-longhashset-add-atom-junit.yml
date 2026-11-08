@@ -3,8 +3,8 @@ name: M3JDK21 LC705 add(long) exact per-atom JUnit receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongHashSetAddAtomTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongHashSet.java'
+      - 'test/jdk/jdk/m3/collections/M3LongHashSetAddAtomTest.java'
       - 'm3/collections/qualification/leetcodify-longhashset-onepass/**'
       - '.github/workflows/m3-longhashset-add-atom-junit.yml'
   workflow_dispatch:
@@ -24,6 +24,8 @@ jobs:
             make/m3/arrays
             test/jdk/jdk/m3/arrays
             m3/collections
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
           sparse-checkout-cone-mode: true
       - uses: actions/setup-java@v4
         with:
@@ -33,8 +35,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD:m3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java)" = "2e07abc5a2c210ec48760d7105259470ec364500"
-          test "$(git rev-parse HEAD:m3/collections/src/test/java/jdk/m3/collections/M3LongHashSetAddAtomTest.java)" = "8582964eebce98001320aaec0863653f80dba0cd"
+          test "$(git rev-parse HEAD:src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongHashSet.java)" = "2e07abc5a2c210ec48760d7105259470ec364500"
+          test "$(git rev-parse HEAD:test/jdk/jdk/m3/collections/M3LongHashSetAddAtomTest.java)" = "8582964eebce98001320aaec0863653f80dba0cd"
           test "$(java -version 2>&1 | head -1 | grep -E '21[.]')" != ""
       - name: Build pinned M3 arrays Java21 dependency (no source mutations)
         shell: bash

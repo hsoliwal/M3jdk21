@@ -40,5 +40,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_path_masks.c -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
           JAVA_TOOL_OPTIONS="-Xcheck:jni -Djava.library.path=$RUNNER_TEMP" mvn -B -ntp -f m3/collections/interop/pom.xml -Dm3.interop.requireNative=true -Dtest=M3FiveProviderFlagSelectionTest test

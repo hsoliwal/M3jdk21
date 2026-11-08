@@ -3,9 +3,9 @@ name: M3JDK21 tree sibling index preflight
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftContract.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java'
+      - 'test/jdk/jdk/m3/collections/M3TreeWindowShiftContract.java'
+      - 'test/jdk/jdk/m3/collections/M3TreeWindowShiftTest.java'
       - 'm3/collections/qualification/tree-shift-20261021/**'
       - '.github/workflows/m3-tree-shift-20261021.yml'
   workflow_dispatch:
@@ -31,9 +31,9 @@ jobs:
         shell: bash
         run: |
           printf '%s  %s\n' \
-            'ce27f58fa068a61feb6e74d6067a5751241f41688b63e87085ecae34a1eeba6d' 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java' \
-            'f6ff05e9f1a3f8fee11e723cd9ba4a03dc076cb6890be240343263c58164c75c' 'm3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftContract.java' \
-            '2ca29d8e4ccd40749c20ca82e7dcc9ad24f972105f8465e1f8cf0cddcaf22749' 'm3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftTest.java' | sha256sum -c -
+            'ce27f58fa068a61feb6e74d6067a5751241f41688b63e87085ecae34a1eeba6d' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java' \
+            'f6ff05e9f1a3f8fee11e723cd9ba4a03dc076cb6890be240343263c58164c75c' 'test/jdk/jdk/m3/collections/M3TreeWindowShiftContract.java' \
+            '2ca29d8e4ccd40749c20ca82e7dcc9ad24f972105f8465e1f8cf0cddcaf22749' 'test/jdk/jdk/m3/collections/M3TreeWindowShiftTest.java' | sha256sum -c -
       - name: Compile actual M3 owner and existing primitive index map
         shell: bash
         run: |
@@ -51,11 +51,11 @@ jobs:
           STUB
           javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/classes" \
             "$RUNNER_TEMP/src/jdk/m3/collections/M3TreeProjection.java" \
-            m3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftContract.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongLongConsumer.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIterator.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongLongHashMap.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java \
+            test/jdk/jdk/m3/collections/M3TreeWindowShiftContract.java
           for mode in default interpreter c1 non-tiered; do
             case "$mode" in
               default) java_opts=() ;;

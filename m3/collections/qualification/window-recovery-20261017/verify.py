@@ -8,8 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 RECEIPT = Path(__file__).with_name('manifest.tsv')
 PIN = '5a31e842ac133187201a6a1fab8c08e3d057e4fd1fb60e43c19f5472921f2b09'
-PATHS = ('m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java', 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c', 'm3/collections/src/test/java/jdk/m3/collections/M3IndexMaskWindowRecoverySelfTest.java', 'm3/collections/src/test/java/jdk/m3/collections/M3IndexMaskWindowRecoveryTest.java')
-PREVIOUS = {'m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java': '5986cf6a903a0eddbf1191bfd0a8a80a9dbddb1c5d764b8227c54428532b5fee', 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c': 'ec1091ae700abede90db95bb04924ad2ea0eb53432e4ef91f5049227c3d25dcb'}
+PATHS = ('src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java', 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c', 'test/jdk/jdk/m3/collections/M3IndexMaskWindowRecoverySelfTest.java', 'test/jdk/jdk/m3/collections/M3IndexMaskWindowRecoveryTest.java')
+PREVIOUS = {'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java': '5986cf6a903a0eddbf1191bfd0a8a80a9dbddb1c5d764b8227c54428532b5fee', 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c': 'ec1091ae700abede90db95bb04924ad2ea0eb53432e4ef91f5049227c3d25dcb'}
 
 def verify() -> int:
     if RECEIPT.is_symlink() or not RECEIPT.is_file() or hashlib.sha256(RECEIPT.read_bytes()).hexdigest() != PIN:

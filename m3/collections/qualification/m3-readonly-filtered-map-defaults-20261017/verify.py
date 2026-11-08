@@ -9,15 +9,15 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 MIRROR = HERE / "recipe-mirror"
 EXPECTED = {
-    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java": (
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java": (
         "5a8fbb97cd9b5d26c7ac7ab9568ff59808ef03ac27bbaa153739dd5ca03a0f8b",
         "f96f5d027ce046fd69e4220ad48d2848b915ab572ca9e11526bcd5522207e10f",
         "M3FilteredViews.java.txt"),
-    "m3/collections/src/test/java/jdk/m3/collections/M3ReadOnlyMapDefaultsContract.java": (
+    "test/jdk/jdk/m3/collections/M3ReadOnlyMapDefaultsContract.java": (
         "ABSENT",
         "860a69901dc2959de7d8e56f4e3fe3d188845f9a261c07971c0ea545546c2fe4",
         "M3ReadOnlyMapDefaultsContract.java.txt"),
-    "m3/collections/src/test/java/jdk/m3/collections/M3ReadOnlyMapDefaultsTest.java": (
+    "test/jdk/jdk/m3/collections/M3ReadOnlyMapDefaultsTest.java": (
         "ABSENT",
         "5dc78eeeee91ad6f77b085b7eebbb464db73a893721769345451ae513ec1b090",
         "M3ReadOnlyMapDefaultsTest.java.txt"),

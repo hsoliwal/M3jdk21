@@ -5,10 +5,10 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongFilteredView.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongSortedViews.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongPredicates.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongDeepFilterSelfTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongFilteredView.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongSortedViews.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongPredicates.java'
+      - 'test/jdk/jdk/m3/collections/M3LongDeepFilterSelfTest.java'
       - 'm3/collections/qualification/long-predicate-balance-20261017/**'
       - '.github/workflows/m3-long-filter-balanced-20261017.yml'
 permissions:
@@ -36,8 +36,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root=m3/collections/src/main/java/jdk/m3/collections
-          test=m3/collections/src/test/java/jdk/m3/collections
+          root=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          test=test/jdk/jdk/m3/collections
           mkdir -p m3/collections/target/filter-balance
           javac --release 21 -proc:none -Xlint:all -Werror             -d m3/collections/target/filter-balance             "$root/M3LongIterator.java" "$root/M3LongCollection.java"             "$root/M3LongSortedSet.java" "$root/M3LongFilteredView.java"             "$root/M3LongSortedViews.java" "$root/M3LongPredicates.java"             "$test/M3LongDeepFilterSelfTest.java"
       - name: Deep predicate and sorted live-wrapper oracle

@@ -3,9 +3,9 @@ name: M3 indexed disjoint-set arrays JNI receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3DisjointIndex.java'
-      - 'm3/collections/src/main/native/collections/m3_disjoint_index.c'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3DisjointIndex*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3DisjointIndex.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_disjoint_index.c'
+      - 'test/jdk/jdk/m3/collections/M3DisjointIndex*.java'
       - 'm3/collections/qualification/disjoint-index-20261027.sha256'
       - '.github/workflows/m3-disjoint-index-jni-20261027.yml'
   workflow_dispatch:
@@ -32,8 +32,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/disjoint-classes" "$RUNNER_TEMP/disjoint-headers"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -h "$RUNNER_TEMP/disjoint-headers" -d "$RUNNER_TEMP/disjoint-classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3DisjointIndex.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3DisjointIndexSelfTest.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3DisjointIndex.java \
+            test/jdk/jdk/m3/collections/M3DisjointIndexSelfTest.java
       - name: Compile strict C17 and execute actual checked JNI and Java reference oracles
         shell: bash
         run: |
@@ -41,7 +41,7 @@ jobs:
           gcc -std=c17 -O2 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -fsanitize=undefined -fno-sanitize-recover=all -shared -fPIC \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_disjoint_index.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_disjoint_index.c \
             -o "$RUNNER_TEMP/libm3_disjoint_index.so"
           nm -D "$RUNNER_TEMP/libm3_disjoint_index.so" | grep -q 'Java_jdk_m3_collections_M3DisjointIndex_connectedNative'
           java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \

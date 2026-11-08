@@ -48,14 +48,14 @@ jobs:
           set -eu
           D="$RUNNER_TEMP/m3-jni-regression"
           mkdir -p "$D/classes" "$D/native"
-          TEST=m3/collections/src/test/java/jdk/m3/collections
+          TEST=test/jdk/jdk/m3/collections
           javac --release 21 -proc:none -Xlint:all -Werror \
             -cp m3/collections/target/classes -d "$D/classes" \
             "$TEST/M3IndexMaskCompactorSelfTest.java"
           cc -std=c17 -O1 -g -fPIC -shared -Wall -Wextra -Werror \
              -fsanitize=undefined -fno-sanitize-recover=all \
              -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+             src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
              -o "$D/native/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$D/native" -cp "$D/classes:m3/collections/target/classes" \
              jdk.m3.collections.M3IndexMaskCompactorSelfTest --native

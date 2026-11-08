@@ -4,8 +4,8 @@ on:
   pull_request:
     paths:
       - 'm3/collections/qualification/m3-sdk-families-20261017/**'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk*.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3CollectionSdk*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionSdk*.java'
+      - 'test/jdk/jdk/m3/collections/M3CollectionSdk*.java'
       - '.github/workflows/m3-sdk-families-20261017.yml'
   workflow_dispatch:
 concurrency:
@@ -31,8 +31,8 @@ jobs:
           mvn -B -ntp -f "$V3/pom.xml" verify
           TMP="$(mktemp -d)"
           trap 'rm -rf "$TMP"' EXIT
-          MAIN=m3/collections/src/main/java/jdk/m3/collections
-          TEST=m3/collections/src/test/java/jdk/m3/collections
+          MAIN=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          TEST=test/jdk/jdk/m3/collections
           mkdir -p "$TMP/$MAIN" "$TMP/$TEST"
           # These are v2 source-sealed templates, not reconstructed/manual preimages.
           cp "$V2/src/main/resources/templates/M3CollectionSdk.java" "$TMP/$MAIN/M3CollectionSdk.java"
@@ -54,8 +54,8 @@ jobs:
           set -eu
           OUT="$RUNNER_TEMP/m3-sdk/classes"
           mkdir -p "$OUT"
-          PKG=m3/collections/src/main/java/jdk/m3/collections
-          TEST=m3/collections/src/test/java/jdk/m3/collections
+          PKG=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          TEST=test/jdk/jdk/m3/collections
           javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT" \
             "$PKG/M3CollectionSdkCatalog.java" "$TEST/M3CollectionSdkCatalogSelfTest.java"
           java -cp "$OUT" jdk.m3.collections.M3CollectionSdkCatalogSelfTest
@@ -75,7 +75,7 @@ jobs:
           cc -std=c17 -O1 -g -Wall -Wextra -Werror -fPIC -shared \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o "$BIN/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$BIN" -cp "$OUT" \
             jdk.m3.collections.M3CollectionSdkSelfTest

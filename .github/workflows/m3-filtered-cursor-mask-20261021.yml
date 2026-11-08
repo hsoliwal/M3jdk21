@@ -3,10 +3,10 @@ name: M3JDK21 direct filtered sorted cursor masks Java21 JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorState*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredDeques.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
+      - 'test/jdk/jdk/m3/collections/M3FilteredCursorState*.java'
       - 'src/java.base/share/classes/java/util/CollectionViews.java'
       - 'test/jdk/java/util/CollectionViews/M3CollectionViewsCursorMaskContract.java'
       - 'm3/collections/qualification/filtered-cursor-mask-20261021/**'
@@ -43,19 +43,19 @@ jobs:
           set -euo pipefail
           out="$RUNNER_TEMP/m3-filtered"
           mkdir -p "$out/classes" "$out/native" "$out/patch-src/java/util" "$out/patch" "$out/test" "$out/sourcepath/com/m3"
-          test -f m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java
-          test -f m3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java
-          ln -s "$PWD/m3/collections/src/main/java/jdk/m3/collections" "$out/sourcepath/jdk/m3/collections"
+          test -f src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java
+          test -f src/jdk.m3.collections/share/classes/jdk/m3/collections/M3OrderedSlotMap.java
+          ln -s "$PWD/src/jdk.m3.collections/share/classes/jdk/m3/collections" "$out/sourcepath/jdk/m3/collections"
           javac --release 21 -proc:none -Xlint:all -Werror -sourcepath "$out/sourcepath" -d "$out/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorStateProof.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredDequeContract.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsOwnerRemovalContract.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotSpliterators.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredDeques.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java \
+            test/jdk/jdk/m3/collections/M3FilteredCursorStateProof.java \
+            test/jdk/jdk/m3/collections/M3FilteredDequeContract.java \
+            test/jdk/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java \
+            test/jdk/jdk/m3/collections/M3FilteredListsOwnerRemovalContract.java \
+            test/jdk/jdk/m3/collections/M3FilteredViewsContract.java
           java -cp "$out/classes" jdk.m3.collections.M3FilteredCursorStateProof
           java -cp "$out/classes" jdk.m3.collections.M3FilteredDequeContract
           java -cp "$out/classes" jdk.m3.collections.M3FilteredViewsContract
@@ -91,11 +91,11 @@ jobs:
           out="$RUNNER_TEMP/m3-filtered"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -cp "$out/classes" -d "$out/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorStateNativeProof.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java \
+            test/jdk/jdk/m3/collections/M3FilteredCursorStateNativeProof.java
           gcc -std=c11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -fPIC -shared -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o "$out/native/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$out/native" \
             -cp "$out/classes" jdk.m3.collections.M3FilteredCursorStateNativeProof

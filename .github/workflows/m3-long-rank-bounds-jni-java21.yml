@@ -5,11 +5,11 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-long-rank-bounds-jni-java21.yml'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java'
-      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRankBoundsContract.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRankBoundsTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankBatchNative.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankIndex.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
+      - 'test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java'
+      - 'test/jdk/jdk/m3/collections/M3LongRankBoundsTest.java'
       - 'm3/collections/qualification/rank-bounds-jni-20261029/**'
 
 permissions:
@@ -39,11 +39,11 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '2b34720f00d04ad05d8a164084dbda6af0773def'
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '66a31672a814a5553c386e9c5496f350c3073a59'
-          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'cb947382187606dd2cccc5293932254e47fbe825'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankBoundsContract.java)" = '8c38bf88eab4de2b70385fb1225c1fbde1109921'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankBoundsTest.java)" = 'bc599f991ec8e313475c32fffd511fdf85aae76c'
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankBatchNative.java)" = '2b34720f00d04ad05d8a164084dbda6af0773def'
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankIndex.java)" = '66a31672a814a5553c386e9c5496f350c3073a59'
+          test "$(git hash-object src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c)" = 'cb947382187606dd2cccc5293932254e47fbe825'
+          test "$(git hash-object test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java)" = '8c38bf88eab4de2b70385fb1225c1fbde1109921'
+          test "$(git hash-object test/jdk/jdk/m3/collections/M3LongRankBoundsTest.java)" = 'bc599f991ec8e313475c32fffd511fdf85aae76c'
       - name: Compile real original Java21 bisection owner and emit JNI header
         shell: bash
         run: |
@@ -51,9 +51,9 @@ jobs:
           out="$RUNNER_TEMP/m3rank"
           mkdir -p "$out/classes" "$out/headers" "$out/native"
           javac --release 21 -Xlint:all -Werror -h "$out/headers" -d "$out/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3LaneSearch.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3LongRankBoundsContract.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LaneSearch.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankBatchNative.java \
+            test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java
           grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerUpperBounds0 \
             "$out/headers/jdk_m3_collections_M3LongRankBatchNative.h"
           grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_capabilities0 \
@@ -67,7 +67,7 @@ jobs:
             -fsanitize=undefined -fno-sanitize-recover=undefined \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             -include "$out/headers/jdk_m3_collections_M3LongRankBatchNative.h" \
-            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c \
             -o "$out/native/libm3rankbatch.so"
           nm -D "$out/native/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerBounds0
           nm -D "$out/native/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerUpperBounds0
@@ -79,7 +79,7 @@ jobs:
             -fsanitize=undefined -fno-sanitize-recover=undefined \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             -include "$out/headers/jdk_m3_collections_M3LongRankBatchNative.h" \
-            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c \
             -o "$out/legacy/libm3rankbatch.so"
           nm -D "$out/legacy/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_lowerBounds0
           if nm -D "$out/legacy/libm3rankbatch.so" | grep -Fq Java_jdk_m3_collections_M3LongRankBatchNative_capabilities0; then
@@ -148,7 +148,7 @@ jobs:
           out="$RUNNER_TEMP/m3rank-modules"
           mkdir -p "$out/arrays" "$out/collections"
           find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -type f -name '*.java' | LC_ALL=C sort > "$out/arrays.sources"
-          find m3/collections/src/main/java -type f -name '*.java' | LC_ALL=C sort > "$out/collections.sources"
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -type f -name '*.java' | LC_ALL=C sort > "$out/collections.sources"
           test -s "$out/arrays.sources"
           test -s "$out/collections.sources"
           javac --release 21 -Xlint:all,-module -Werror -d "$out/arrays" @"$out/arrays.sources"

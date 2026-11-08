@@ -3,8 +3,8 @@ name: M3 Tree native-parent handle closure
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3ParentHandleClosureProof.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java'
+      - 'test/jdk/jdk/m3/collections/M3ParentHandleClosureProof.java'
       - 'm3/collections/qualification/viewport-tree-parent/**'
       - '.github/workflows/m3-viewport-tree-parent.yml'
   workflow_dispatch:
@@ -31,8 +31,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          SRC=m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java
-          PROOF=m3/collections/src/test/java/jdk/m3/collections/M3ParentHandleClosureProof.java
+          SRC=src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java
+          PROOF=test/jdk/jdk/m3/collections/M3ParentHandleClosureProof.java
           echo 'ce27f58fa068a61feb6e74d6067a5751241f41688b63e87085ecae34a1eeba6d  '"$SRC" | sha256sum -c -
           echo '08609e56a488a76f8f4ec35ff70d73941ed3cdb3445d39b631fdecb625ed71bf  '"$PROOF" | sha256sum -c -
           mkdir -p "$RUNNER_TEMP/m3-tree-parent/src/jdk/m3/collections"
@@ -43,8 +43,8 @@ jobs:
         run: |
           set -euo pipefail
           B="$RUNNER_TEMP/m3-tree-parent"
-          SOURCE=m3/collections/src/main/java/jdk/m3/collections
-          TEST=m3/collections/src/test/java/jdk/m3/collections/M3ParentHandleClosureProof.java
+          SOURCE=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          TEST=test/jdk/jdk/m3/collections/M3ParentHandleClosureProof.java
           mkdir -p "$B/baseline-classes" "$B/candidate-classes"
           DEPS=(M3LongLongHashMap M3LongLongConsumer M3LongIterator M3TreeProjection M3TreeTopology M3OrderStatisticForest M3ItemState)
           ARG=(); for cls in "${DEPS[@]}"; do ARG+=("$SOURCE/$cls.java"); done

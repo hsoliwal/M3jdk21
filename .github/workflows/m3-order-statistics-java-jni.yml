@@ -4,9 +4,9 @@ name: M3 order-statistics Java21 JNI recipe
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRank*.java'
-      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRankIndex*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRank*.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
+      - 'test/jdk/jdk/m3/collections/M3LongRankIndex*.java'
       - 'm3/collections/recipe/order-statistics/**'
       - 'm3/collections/algorithm-catalog/order-statistics.tsv'
       - '.github/workflows/m3-order-statistics-java-jni.yml'
@@ -54,8 +54,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "${{ runner.temp }}/rank-classes"
-          S=m3/collections/src/main/java/jdk/m3/collections
-          T=m3/collections/src/test/java/jdk/m3/collections
+          S=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          T=test/jdk/jdk/m3/collections
           javac --release 21 -Xlint:all -Werror -encoding UTF-8 \
             -d "${{ runner.temp }}/rank-classes" \
             "$S/M3LongIterator.java" "$S/M3LongCollection.java" \
@@ -71,7 +71,7 @@ jobs:
           JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
           cc -std=c11 -Wall -Wextra -Werror -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c \
             -o "${{ runner.temp }}/libm3rankbatch.so"
           java -Dm3.collections.rank.native=true \
             -Djava.library.path="${{ runner.temp }}" \

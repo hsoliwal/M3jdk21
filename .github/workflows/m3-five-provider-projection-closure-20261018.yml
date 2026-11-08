@@ -37,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/m3-core"
-          find m3/collections/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/m3-core-sources.txt"
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > "$RUNNER_TEMP/m3-core-sources.txt"
           test -s "$RUNNER_TEMP/m3-core-sources.txt"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -d "$RUNNER_TEMP/m3-core" @"$RUNNER_TEMP/m3-core-sources.txt"
@@ -51,9 +51,9 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-core-tests"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -cp "$RUNNER_TEMP/m3-core" -d "$RUNNER_TEMP/m3-core-tests" \
-            m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkSortedFactorySelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java
+            test/jdk/jdk/m3/collections/M3CollectionSdkSortedFactorySelfTest.java \
+            test/jdk/jdk/m3/collections/M3FilteredViewsContract.java \
+            test/jdk/jdk/m3/collections/M3IndexPathMasksSelfTest.java
           java -ea -cp "$RUNNER_TEMP/m3-core:$RUNNER_TEMP/m3-core-tests" \
             jdk.m3.collections.M3CollectionSdkSortedFactorySelfTest
           java -ea -cp "$RUNNER_TEMP/m3-core:$RUNNER_TEMP/m3-core-tests" \
@@ -81,12 +81,12 @@ jobs:
           set -euo pipefail
           gcc -std=c17 -fPIC -shared -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_path_masks.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c \
             -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
           gcc -std=c17 -fPIC -shared -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
-            m3/collections/src/main/native/collections/m3_index_mask_window.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c \
             -o "$RUNNER_TEMP/libm3_collections_mask.so"
       - name: Re-run real provider tests with checked JNI and signed masks
         shell: bash

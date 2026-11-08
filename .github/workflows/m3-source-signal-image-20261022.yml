@@ -3,9 +3,9 @@ name: M3JDK21 source-time typed signal CSR Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3SourceSignalImage*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalRelations.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalImage.java'
+      - 'test/jdk/jdk/m3/collections/M3SourceSignalImage*.java'
       - 'm3/collections/qualification/source-signal-image-20261022/**'
       - '.github/workflows/m3-source-signal-image-20261022.yml'
   workflow_dispatch:
@@ -41,10 +41,10 @@ jobs:
           out="$RUNNER_TEMP/m3-compiler-image"
           mkdir -p "$out/classes" "$out/plugin/META-INF/services" "$out/fixture-classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalImageSelfTest.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalColumns.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalRelations.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SourceSignalImage.java \
+            test/jdk/jdk/m3/collections/M3SourceSignalImageSelfTest.java
           java -cp "$out/classes" jdk.m3.collections.M3SourceSignalImageSelfTest
       - name: Compile actual existing javac M3SourceSignals plugin and produce attributed S/T/E
         shell: bash

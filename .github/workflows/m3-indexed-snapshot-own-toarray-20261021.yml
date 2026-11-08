@@ -6,8 +6,8 @@ on:
     branches: [m3/indexed-snapshot-own-toarray-20261021]
   pull_request:
     paths:
-      - m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
-      - m3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotSingleOwnerProof.java
+      - src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java
+      - test/jdk/jdk/m3/collections/M3IndexedSnapshotSingleOwnerProof.java
       - m3/collections/algorithm-catalogue/challenge-patterns-20261018/M3_TOARRAY_*
       - .github/workflows/m3-indexed-snapshot-own-toarray-20261021.yml
   workflow_dispatch:
@@ -35,8 +35,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ROOT=m3/collections/src/main/java/jdk/m3/collections
-          PROOF=m3/collections/src/test/java/jdk/m3/collections/M3IndexedSnapshotSingleOwnerProof.java
+          ROOT=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          PROOF=test/jdk/jdk/m3/collections/M3IndexedSnapshotSingleOwnerProof.java
           mkdir -p "$RUNNER_TEMP/m3-new" "$RUNNER_TEMP/m3-old/jdk/m3/collections"
           javac --release 21 -Xlint:all -Werror -proc:none \
             -d "$RUNNER_TEMP/m3-new" \

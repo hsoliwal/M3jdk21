@@ -5,8 +5,8 @@ on:
     branches: ['m3/direct-int-array-index-20261018']
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3Int*.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3IntArrayListContractProof.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Int*.java'
+      - 'test/jdk/jdk/m3/collections/M3IntArrayListContractProof.java'
       - 'm3/collections/qualification/m3-int-array-index-20261018/**'
       - '.github/workflows/m3-int-array-index-20261018.yml'
   workflow_dispatch:
@@ -37,8 +37,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pkg=m3/collections/src/main/java/jdk/m3/collections
-          test=m3/collections/src/test/java/jdk/m3/collections
+          pkg=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          test=test/jdk/jdk/m3/collections
           mkdir -p "$RUNNER_TEMP/classes" "$RUNNER_TEMP/headers" "$RUNNER_TEMP/native"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -h "$RUNNER_TEMP/headers" -d "$RUNNER_TEMP/classes" \
@@ -57,8 +57,8 @@ jobs:
             -fsanitize=undefined -fno-sanitize-recover=all -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             -include "$RUNNER_TEMP/headers/jdk_m3_collections_M3IndexMaskCompactor.h" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
-            m3/collections/src/main/native/collections/m3_index_mask_window.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c \
             -o "$RUNNER_TEMP/native/libm3_collections_mask.so"
           UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 java -ea -Xcheck:jni \
             -Djava.library.path="$RUNNER_TEMP/native" -cp "$RUNNER_TEMP/classes" \

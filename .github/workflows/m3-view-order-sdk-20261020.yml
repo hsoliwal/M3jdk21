@@ -7,10 +7,10 @@ on:
     paths:
       - '.github/workflows/m3-view-order-sdk-20261020.yml'
       - 'm3/collections/qualification/view-order-sdk-20261020/**'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java'
-      - 'm3/collections/src/main/native/collections/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexProjection.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredNavigableSet.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/**'
       - 'src/java.base/share/native/libjava/m3_jni_util.h'
 permissions:
   contents: read
@@ -68,12 +68,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          JAVA=m3/collections/src/main/java/jdk/m3/collections
+          JAVA=src/jdk.m3.collections/share/classes/jdk/m3/collections
           for name in M3FilteredViews M3FilteredNavigableSet M3SlotSpliterators M3IndexMaskCompactor M3LongAddressKernel; do
             cmp "$JAVA/$name.java" "current-stack/$JAVA/$name.java"
           done
           for file in m3_index_mask_compactor.c m3_long_address_kernel.c; do
-            cmp "m3/collections/src/main/native/collections/$file" "current-stack/m3/collections/src/main/native/collections/$file"
+            cmp "src/jdk.m3.collections/share/native/libm3collections/collections/$file" "current-stack/src/jdk.m3.collections/share/native/libm3collections/collections/$file"
           done
           cmp src/java.base/share/native/libjava/m3_jni_util.h current-stack/src/java.base/share/native/libjava/m3_jni_util.h
           cmp "$Q/verification/view-order-sdk-20261020/target/generated-receiver/$JAVA/M3LongIndexProjection.java" "$JAVA/M3LongIndexProjection.java"

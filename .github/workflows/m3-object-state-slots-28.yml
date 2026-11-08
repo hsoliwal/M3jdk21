@@ -3,8 +3,8 @@ name: M3 object state array masks Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectStateSlots28.java'
+      - 'test/jdk/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java'
       - 'm3/collections/qualification/object-state-slots-28/**'
       - '.github/workflows/m3-object-state-slots-28.yml'
 permissions:
@@ -32,8 +32,8 @@ jobs:
           set -euxo pipefail
           python3 m3/collections/qualification/object-state-slots-28/verify.py
           mkdir -p target/m3-object-state/classes target/m3-object-state/headers
-          S=m3/collections/src/main/java/jdk/m3/collections
-          T=m3/collections/src/test/java/jdk/m3/collections
+          S=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          T=test/jdk/jdk/m3/collections
           javac --release 21 -proc:none -Xlint:all -Werror \
             -h target/m3-object-state/headers -d target/m3-object-state/classes \
             "$S/M3Address28.java" "$S/M3IntLane28.java" \
@@ -53,7 +53,7 @@ jobs:
           gcc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -fPIC -shared -I"$INC" -I"$INC/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o target/m3-object-state/libm3_collections_mask.so
           UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 \
           java -Xmx256m -Xcheck:jni \

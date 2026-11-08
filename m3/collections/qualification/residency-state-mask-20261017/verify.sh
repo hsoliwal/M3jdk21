@@ -25,7 +25,7 @@ assert len(paths)==3 and paths==sorted(set(paths)),paths
 parts=(n/'manifest.tsv').read_text().strip().split('\t')
 assert len(parts)==4 and parts[:2]==['src/main/native/m3_residency_state_mask.c','ABSENT']
 native=(n/parts[3]).read_bytes()
-output=root/'m3/collections/src/main/native/collections/m3_residency_state_mask.c'
+output=root/'src/jdk.m3.collections/share/native/libm3collections/collections/m3_residency_state_mask.c'
 assert output.is_file() and not output.is_symlink()
 assert hashlib.sha256(native).hexdigest()==parts[2] and output.read_bytes()==native
 print('M3_RESIDENCY_MASK_SOURCE_RECEIPT_PASS java=3 native=1')
@@ -33,8 +33,8 @@ PY
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT HUP INT TERM
 mkdir -p "$work/classes" "$work/headers"
-src="$repo/m3/collections/src/main/java/jdk/m3/collections"
-tests="$repo/m3/collections/src/test/java/jdk/m3/collections"
+src="$repo/src/jdk.m3.collections/share/classes/jdk/m3/collections"
+tests="$repo/test/jdk/jdk/m3/collections"
 javac --release 21 -proc:none -Xlint:all,-serial -Werror -h "$work/headers" -d "$work/classes" \
     "$src/M3Address28.java" "$src/M3IntLane28.java" "$src/M3BitLane28.java" \
     "$src/M3SlotAllocator28.java" "$src/M3ObjectResidency.java" \
@@ -44,7 +44,7 @@ grep '^M3_RESIDENCY_STATE_MASK_PASS' "$work/java.log"
 javahome=$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")
 gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared \
     -I"$javahome/include" -I"$javahome/include/linux" -I"$work/headers" \
-    "$repo/m3/collections/src/main/native/collections/m3_residency_state_mask.c" \
+    "$repo/src/jdk.m3.collections/share/native/libm3collections/collections/m3_residency_state_mask.c" \
     -o "$work/libm3_residency_state_mask.so"
 expected=$(sed -n 's/.*fingerprint=\([0-9]*\).*/\1/p' "$work/java.log")
 for collector in Serial Parallel G1 Z Shenandoah; do

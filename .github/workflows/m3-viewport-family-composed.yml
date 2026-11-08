@@ -4,12 +4,12 @@ name: M3 viewport combined original-owner contracts
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/c/m3maskviewport.c'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewport*.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java'
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/m3maskviewport.c'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewport*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java'
+      - 'test/jdk/jdk/m3/collections/M3FrameJavaContract.java'
+      - 'test/jdk/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java'
       - 'm3/collections/viewport-proof/**'
       - '.github/workflows/m3-viewport-family-composed.yml'
   workflow_dispatch:
@@ -35,6 +35,8 @@ jobs:
             make/m3/arrays/**
             test/jdk/jdk/m3/arrays/**
             m3/collections/**
+            test/jdk/jdk/m3/collections/**
+            test/jdk/jdk/internal/m3/collections/**
             .github/workflows/**
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
@@ -48,13 +50,13 @@ jobs:
           import json,subprocess
           from pathlib import Path
           expected={
-            'm3/collections/src/main/c/m3maskviewport.c':'306133d9f08952816af76faa1423ea04d6615fa3',
-            'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java':'4f73ddb9aae36dadb8003257d3a6988536a18066',
-            'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java':'aefcdb933cbc2caa122a527180e20fda8e2a284d',
-            'm3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java':'ba6b2ebd0fac9f737deb28bce9385fff07164997',
-            'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java':'fd425edf2bb7446a0e4446b272a616015b200361',
-            'm3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java':'37520b6fbcb02f45e038e7f0192b73d2acc2e1ac',
-            'm3/collections/src/test/java/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java':'5bcccc59d4e45ef057f4ec2751f264440646c9f7',
+            'src/jdk.m3.collections/share/native/libm3collections/m3maskviewport.c':'306133d9f08952816af76faa1423ea04d6615fa3',
+            'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportNative.java':'4f73ddb9aae36dadb8003257d3a6988536a18066',
+            'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewportKernel.java':'aefcdb933cbc2caa122a527180e20fda8e2a284d',
+            'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java':'ba6b2ebd0fac9f737deb28bce9385fff07164997',
+            'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java':'fd425edf2bb7446a0e4446b272a616015b200361',
+            'test/jdk/jdk/m3/collections/M3FrameJavaContract.java':'37520b6fbcb02f45e038e7f0192b73d2acc2e1ac',
+            'test/jdk/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java':'5bcccc59d4e45ef057f4ec2751f264440646c9f7',
             'm3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt':'9cd8ffcd6967091ea4382e532d67454971c5804f',
             '.github/workflows/m3-mask-viewport-page-20261021.yml':'341bdd40c944b1b743916d1b135aa2a39cd63a8e',
             '.github/workflows/m3-pinned-java-parser-supply.yml':'552996c3bc6e99501017a28a991af6c54671a454',
@@ -72,9 +74,9 @@ jobs:
             'm3/collections/qualification/viewport-frame/ALLSTATE.json':'d94e6d66b9f49a76f1671cb343e26d9e49eb9cee',
             'm3/collections/qualification/viewport-frame/FRAME_JAVA_FALLBACK_RECEIVING.json':'35743678c8662b8c4fd847f6cafa97ad311cd30e',
             'm3/collections/qualification/viewport-frame/FRAME_PARITY_EXECUTION.json':'15d684f3d5db704b5127b337b4a8368570072b6b',
-            'm3/collections/src/test/java/jdk/m3/collections/M3TreeCoverageTest.java':'4e946c6d354c23018b788b88cbd88a7f751f95e5',
-            'm3/collections/src/test/java/jdk/m3/collections/M3TreeNativeLifecycleOracle.java':'74a75d9cf98ad8f2d339ca1c5d3fd94a079d8105',
-            'm3/collections/src/test/java/jdk/m3/collections/M3TreeResidencyTest.java':'65d8a366032c362a24d92b67571fed01b6434cce',
+            'test/jdk/jdk/m3/collections/M3TreeCoverageTest.java':'4e946c6d354c23018b788b88cbd88a7f751f95e5',
+            'test/jdk/jdk/m3/collections/M3TreeNativeLifecycleOracle.java':'74a75d9cf98ad8f2d339ca1c5d3fd94a079d8105',
+            'test/jdk/jdk/m3/collections/M3TreeResidencyTest.java':'65d8a366032c362a24d92b67571fed01b6434cce',
             'm3/collections/viewport-proof/verify.py':'ab13fc3abce872117bcacaa19eb98c28217f90d9',
           }
           for path,want in sorted(expected.items()):
@@ -120,7 +122,7 @@ jobs:
           set -euo pipefail
           B="$RUNNER_TEMP/m3-viewport-geometry"
           mkdir -p "$B/src/main/java/jdk/m3/collections" "$B/src/test/java/jdk/m3/collections"
-          S=m3/collections/src/main/java/jdk/m3/collections
+          S=src/jdk.m3.collections/share/classes/jdk/m3/collections
           for name in M3HeapGrowth M3SparseExtents M3WindowPlan; do
             cp "$S/$name.java" "$B/src/main/java/jdk/m3/collections/"
           done

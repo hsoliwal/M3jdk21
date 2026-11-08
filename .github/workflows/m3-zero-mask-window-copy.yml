@@ -3,13 +3,13 @@ name: M3 zero-mask JNI window copy
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
+      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
+      - 'test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
       - 'm3/collections/recipe/zero-mask-window-copy-20261017/**'
       - 'm3/collections/qualification/zero-mask-window-copy-20261017/**'
       - 'm3/collections/qualification/zero-mask-window-successor-20261031/**'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3ZeroMaskSuccessorTest.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3ZeroMaskSuccessorIT.java'
+      - 'test/jdk/jdk/m3/collections/M3ZeroMaskSuccessorTest.java'
+      - 'test/jdk/jdk/m3/collections/M3ZeroMaskSuccessorIT.java'
       - '.github/workflows/m3-zero-mask-window-copy.yml'
 permissions:
   contents: read
@@ -33,6 +33,9 @@ jobs:
           path: old-zero-mask-20261017
           sparse-checkout: |
             m3/collections
+            src/jdk.m3.collections/share
+            test/jdk/jdk/m3/collections
+            test/jdk/jdk/internal/m3/collections
           persist-credentials: false
       - uses: actions/setup-java@v4
         with:
@@ -55,16 +58,16 @@ jobs:
           jar --create --file proof/m3-arrays.jar -C proof/arrays .
           jar --describe-module --file proof/m3-arrays.jar | tee proof/arrays-module.txt
           grep -q '^jdk.m3.arrays ' proof/arrays-module.txt
-          find m3/collections/src/main/java -name '*.java' | sort > proof/core-sources.txt
+          find m3/collections/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/collections src/jdk.m3.collections/share/classes/jdk/internal/m3/collections -name '*.java' | sort > proof/core-sources.txt
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             --module-path proof/m3-arrays.jar -d proof/core @proof/core-sources.txt
           # Compile the original Java differential as a patched test class of
           # jdk.m3.collections; do not erase module-info.java or use a fake stub.
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             --module-path "proof/core:proof/m3-arrays.jar" \
-            --patch-module jdk.m3.collections=m3/collections/src/test/java \
+            --patch-module jdk.m3.collections=test/jdk \
             -d proof/core \
-            m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
+            test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
           java -Xmx512m -Djava.library.path="$PWD/proof/empty" \
             --module-path "proof/core:proof/m3-arrays.jar" \
             --module jdk.m3.collections/jdk.m3.collections.M3IndexMaskCompactorSelfTest
@@ -81,7 +84,7 @@ jobs:
       - name: Execute real JNI with undefined-behavior checks
         run: |
           set -euxo pipefail
-          gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -fsanitize=undefined -fno-sanitize-recover=all -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o proof/native/libm3_collections_mask.so
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -fsanitize=undefined -fno-sanitize-recover=all -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c -o proof/native/libm3_collections_mask.so
           UBSAN_OPTIONS=halt_on_error=1 java -Xmx512m -Xcheck:jni \
             -Djava.library.path="$PWD/proof/native" \
             --module-path "proof/core:proof/m3-arrays.jar" \

@@ -3,8 +3,8 @@ name: M3 IndexedTable reentrant comparator sort
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedTableReentrantSort*'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedTable.java'
+      - 'test/jdk/jdk/m3/collections/M3IndexedTableReentrantSort*'
       - 'm3/collections/qualification/m3jdk21-table-sort-guard-20261018/**'
       - '.github/workflows/m3-indexed-table-sort-guard-20261018.yml'
   workflow_dispatch:
@@ -41,12 +41,12 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/m3-classes"
           javac --release 21 -proc:none -Xlint:all,-serial,-module -Werror \
-            -sourcepath m3/collections/src/main/java \
+            -sourcepath m3/collections/src/main/java:src/jdk.m3.collections/share/classes \
             -d "$RUNNER_TEMP/m3-classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3IndexedTable.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3IndexedTableSelfTest.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3IndexedTableReentrantSortContract.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedTable.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java \
+            test/jdk/jdk/m3/collections/M3IndexedTableSelfTest.java \
+            test/jdk/jdk/m3/collections/M3IndexedTableReentrantSortContract.java
       - name: Existing table randomized proof plus new reentrant-sort contract
         run: |
           java -cp "$RUNNER_TEMP/m3-classes" jdk.m3.collections.M3IndexedTableSelfTest
@@ -58,7 +58,7 @@ jobs:
           gcc -std=c17 -fPIC -shared -Wall -Wextra -Werror -pedantic \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JDK_HOME/include" -I"$JDK_HOME/include/linux" \
-            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
             -o "$RUNNER_TEMP/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" -cp "$RUNNER_TEMP/m3-classes" \
             jdk.m3.collections.M3IndexedTableSelfTest --native

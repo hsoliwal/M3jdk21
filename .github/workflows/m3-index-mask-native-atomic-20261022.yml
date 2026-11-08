@@ -3,9 +3,9 @@ name: M3 original JNI index-mask atomic output Java21
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java'
-      - 'm3/collections/src/test/java/jdk/m3/collections/M3MaskWindowNativeStagingContract.java'
-      - 'm3/collections/src/test/native/m3_mask_fault.c'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskWindow.java'
+      - 'test/jdk/jdk/m3/collections/M3MaskWindowNativeStagingContract.java'
+      - 'test/jdk/jdk/m3/collections/native/m3_mask_fault.c'
       - '.github/workflows/m3-index-mask-native-atomic-20261022.yml'
       - 'm3/collections/qualification/mask-window-atomic-20261022/**'
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          actual="$(sha256sum m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java | awk '{print $1}')"
+          actual="$(sha256sum src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskWindow.java | awk '{print $1}')"
           test "$actual" = "e837290b8adb9c11e7b3250e4f5351a0c19d89f9f029db8595dc42eaad7e4dc8"
       - name: Build original Java21 owners and isolated test JNI library
         shell: bash
@@ -46,13 +46,13 @@ jobs:
           work="$(mktemp -d)"
           mkdir -p "$work/classes"
           javac --release 21 -Xlint:all -Werror -d "$work/classes" \
-            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java \
-            m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowNativeStagingContract.java
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskWindow.java \
+            test/jdk/jdk/m3/collections/M3MaskWindowNativeStagingContract.java
           cc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic \
             -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             -o "$work/libm3_collections_mask.so" \
-            m3/collections/src/test/native/m3_mask_fault.c
+            test/jdk/jdk/m3/collections/native/m3_mask_fault.c
           java -Xcheck:jni -Djava.library.path="$work" \
             -cp "$work/classes" jdk.m3.collections.M3MaskWindowNativeStagingContract
           java -Xint -Xcheck:jni -Djava.library.path="$work" \

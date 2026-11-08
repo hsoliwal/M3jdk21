@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 root="$(cd "$(dirname "$0")/../../../.." && pwd)"
-src="$root/m3/collections/src/main/java/jdk/m3/collections"
-native="$root/m3/collections/src/main/native/collections"
-test="$root/m3/collections/src/test/java/jdk/m3/collections"
+src="$root/src/jdk.m3.collections/share/classes/jdk/m3/collections"
+native="$root/src/jdk.m3.collections/share/native/libm3collections/collections"
+test="$root/test/jdk/jdk/m3/collections"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 mkdir -p "$work/classes" "$work/native"

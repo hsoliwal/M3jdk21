@@ -40,6 +40,39 @@
   </dependencies>
   <build>
     <plugins>
+      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, m3/tooling/jdk-naming/move_module_area.py): the sources live in the
+           JDK module src/jdk.m3.collections and the tests in test/jdk; this pom keeps its own configuration and adds them. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>jdk-module-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../src/jdk.m3.collections/share/classes/jdk/m3/algorithm</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jdk-module-test-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../test/jdk/jdk/m3/algorithm</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
