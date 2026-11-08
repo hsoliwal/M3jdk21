@@ -3,7 +3,7 @@
 // Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/M3ZSimilarity.java (blob a8b8c5146cb7) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
-import jdk.m3.algorithm.M3StringAlgorithms;
+import jdk.m3.algorithm.StringAlgorithms;
 import java.util.Objects;
 
 /**
@@ -24,7 +24,7 @@ public final class ZSimilarity {
     /** Computes the exact sum in O(n) time and O(n) primitive storage. */
     public static long sumJava(String input) {
         Objects.requireNonNull(input, "input");
-        int[] z = M3StringAlgorithms.zFunction(input, jdk.m3.algorithm.M3ProgressMonitor.none());
+        int[] z = StringAlgorithms.zFunction(input, jdk.m3.algorithm.ProgressMonitor.none());
         long sum = input.length();
         for (int i = 1; i < z.length; i++) sum += z[i];
         return sum;
