@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/KmpSearch.java (blob acbec15bb187) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/KmpSearch.java (blob f231dc64a1e6) by M3_SEARCH_FORWARD v1.
 // Modified 2026: share monitored prefix preparation and bound overlap fallback polling.
 package jdk.m3.search;
 
@@ -190,6 +190,17 @@ final class M3KmpSearch implements M3CompiledSearch {
      */
     int visitMatches(ByteBuffer haystack, int start, int maxMatches, IntConsumer receiver,
             M3ProgressMonitor monitor) {
+        return scanBufferMatches(haystack, start, maxMatches, receiver, false, monitor);
+    }
+
+    /** Count overlapping starts without invoking a per-hit discard callback. */
+    int countMatches(ByteBuffer haystack, int start, M3ProgressMonitor monitor) {
+        return scanBufferMatches(haystack, start, Integer.MAX_VALUE, null, true, monitor);
+    }
+
+    /** One prefix automaton and identical cancellation checkpoints for both buffer modes. */
+    private int scanBufferMatches(ByteBuffer haystack, int start, int maxMatches,
+            IntConsumer receiver, boolean countOnly, M3ProgressMonitor monitor) {
         int base = haystack.position();
         int length = haystack.remaining();
         int count = 0;
@@ -204,7 +215,7 @@ final class M3KmpSearch implements M3CompiledSearch {
             }
             if (value == needle[matched]) matched++;
             if (matched == needle.length) {
-                receiver.accept(index - needle.length + 1);
+                if (!countOnly) receiver.accept(index - needle.length + 1);
                 count++;
                 monitor.checkCanceled();
                 if (count == maxMatches) return count;

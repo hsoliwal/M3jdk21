@@ -1,6 +1,6 @@
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0 */
-// Relocated from com.synexia m3-fast-search/src/main/native/batch_subsequence_match_jni.c (blob e1d569511942) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/main/native/batch_subsequence_match_jni.c (blob 8463caba2101) by M3_SEARCH_FORWARD v1.
 #include <jni.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -67,15 +67,18 @@ Java_jdk_m3_search_M3BatchSubsequenceMatch_countNative(
     packed = (*env)->GetCharArrayElements(env, packedArray, NULL);
     if (packed == NULL) goto done;
     matches = 0;
+    jint remaining = 0; /* feasible nonempty entries; cleanup remains mandatory */
     for (jsize i = 0; i < patternCount; i++) {
         if (offsets[i] == offsets[i+1]) {
             matches++;
-        } else {
+        } else if (offsets[i+1] - offsets[i] <= sourceLength) {
+            remaining++;
             unsigned int c = (unsigned int)packed[offsets[i]];
             next[i] = head[c];
             head[c] = i;
         }
     }
+    if (remaining == 0) goto done;
     for (jsize i = 0; i < sourceLength; i++) {
         unsigned int c = (unsigned int)source[i];
         jint pending = head[c];
@@ -87,6 +90,7 @@ Java_jdk_m3_search_M3BatchSubsequenceMatch_countNative(
             jint start = offsets[id];
             if (position == offsets[id+1] - start) {
                 matches++;
+                if (--remaining == 0) goto done;
             } else {
                 unsigned int target = (unsigned int)packed[start + position];
                 next[id] = head[target];

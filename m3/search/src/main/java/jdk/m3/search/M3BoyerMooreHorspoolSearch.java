@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BoyerMooreHorspoolSearch.java (blob b50f40da62bc) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BoyerMooreHorspoolSearch.java (blob 8141756a8c2a) by M3_SEARCH_FORWARD v1.
 // Modified 2026: lazily reuse the KMP overlap owner with safe publication.
 package jdk.m3.search;
 
@@ -137,8 +137,7 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
             cursor = boundedNextCursor(
                     cursor, shifts[Byte.toUnsignedInt(haystack.get(base + cursor))], length);
             if (compared > budget && cursor < length) {
-                return overlapSearch(new M3DefaultProgressMonitor()).indexOf(
-                        haystack, cursor - needle.length + 1);
+                return monitoredKmpFirst(haystack, cursor - needle.length + 1, monitor);
             }
         }
         return -1;
@@ -190,7 +189,7 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
             compared += (long) pattern + 1L;
             candidate -= reverseShifts[Byte.toUnsignedInt(haystack.get(base + candidate))];
             if (compared > budget && candidate >= 0) {
-                return overlapSearch(new M3DefaultProgressMonitor()).lastIndexOf(haystack, candidate);
+                return monitoredKmpLast(haystack, candidate, monitor);
             }
         }
         return -1;
@@ -244,13 +243,23 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
     }
 
     /**
-     * Direct ByteBuffer match visitor: sparse matches use the existing BMH
-     * shift tables; dense overlapping hits switch once to the existing lazy
-     * KMP prefix automaton. One forward KMP pass avoids repeated searches
-     * and does not materialize the selected buffer window.
+     * Preserve the original byte-buffer visitor and dense KMP continuation.
+     * The count-only entry point reuses its exact search/cancellation checkpoints
+     * without a per-hit discard consumer or a materialized positions array.
      */
     int visitMatches(ByteBuffer haystack, int start, int maxMatches, IntConsumer receiver,
             M3ProgressMonitor monitor) {
+        return scanBufferMatches(haystack, start, maxMatches, receiver, false, monitor);
+    }
+
+    /** One count-only ByteBuffer scan using the incumbent BMH/KMP selector. */
+    int countMatches(ByteBuffer haystack, int start, M3ProgressMonitor monitor) {
+        return scanBufferMatches(haystack, start, Integer.MAX_VALUE, null, true, monitor);
+    }
+
+    /** Same match ordering and cancellation checkpoints in visit and count modes. */
+    private int scanBufferMatches(ByteBuffer haystack, int start, int maxMatches,
+            IntConsumer receiver, boolean countOnly, M3ProgressMonitor monitor) {
         int count = 0;
         int next = start;
         int densityStart = start;
@@ -259,7 +268,7 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
         while (next <= lastStart && count < maxMatches) {
             int found = indexOfBuffer(haystack, next, monitor);
             if (found < 0) break;
-            receiver.accept(found);
+            if (!countOnly) receiver.accept(found);
             count++;
             monitor.checkCanceled();
             next = found + 1;
@@ -269,13 +278,50 @@ final class M3BoyerMooreHorspoolSearch implements M3CompiledSearch {
             long covered = (long) found - densityStart + needle.length;
             // Exactly the original byte[] density heuristic; no new selector.
             if (matchedWork > 2L * covered) {
-                count += overlapSearch(monitor).visitMatches(
-                        haystack, next, maxMatches - count, receiver, monitor);
+                M3KmpSearch kmp = overlapSearch(monitor);
+                count += countOnly
+                        ? kmp.countMatches(haystack, next, monitor)
+                        : kmp.visitMatches(haystack, next, maxMatches - count, receiver, monitor);
                 break;
             }
         }
         monitor.checkCanceled();
         return count;
+    }
+
+    /**
+     * Preserve the direct KMP path for unmonitored calls. With a real monitor,
+     * continue through the existing bounded-polled KMP visitor rather than
+     * silently losing cancellation at the BMH work-budget boundary.
+     */
+    private int monitoredKmpFirst(ByteBuffer haystack, int start,
+            M3ProgressMonitor monitor) {
+        if (monitor == null || monitor == new M3DefaultProgressMonitor()) {
+            return overlapSearch(new M3DefaultProgressMonitor()).indexOf(haystack, start);
+        }
+        int[] result = {-1};
+        overlapSearch(monitor).visitMatches(
+                haystack, start, 1, position -> result[0] = position, monitor);
+        return result[0];
+    }
+
+    /**
+     * The last admitted start is inclusive. Restrict the KMP visitor's scan
+     * to that final start plus the pattern width, preserving every earlier
+     * candidate and excluding any later match. The supplied buffer remains
+     * borrowed and unmodified (including its original mark).
+     */
+    private int monitoredKmpLast(ByteBuffer haystack, int lastStart,
+            M3ProgressMonitor monitor) {
+        if (monitor == null || monitor == new M3DefaultProgressMonitor()) {
+            return overlapSearch(new M3DefaultProgressMonitor()).lastIndexOf(haystack, lastStart);
+        }
+        ByteBuffer bounded = haystack.duplicate();
+        bounded.limit(bounded.position() + lastStart + needle.length);
+        int[] result = {-1};
+        overlapSearch(monitor).visitMatches(
+                bounded, 0, Integer.MAX_VALUE, position -> result[0] = position, monitor);
+        return result[0];
     }
 
     private M3KmpSearch overlapSearch(M3ProgressMonitor monitor) {

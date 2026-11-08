@@ -1,6 +1,6 @@
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0 */
-// Relocated from com.synexia m3-fast-search/src/main/native/minimum_subsequence_window_jni.c (blob c6b4b8ab6b2d) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/main/native/minimum_subsequence_window_jni.c (blob 5db6498b1071) by M3_SEARCH_FORWARD v1.
 #include <jni.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -54,34 +54,77 @@ Java_jdk_m3_search_M3MinimumSubsequenceWindow_findNative(
     sequence = (*env)->GetCharArrayElements(env, sequenceArray, NULL);
     if (sequence == NULL) goto done;
 
-    jint bestStart = -1;
-    jint bestEnd = 0;
-    jint bestLength = INT32_MAX;
-    for (jsize i = 0; i < n; i++) {
-        jchar unit = source[i];
-        for (jsize j = m; j-- > 0;) {
-            if (unit == sequence[j]) {
-                if (j == 0) {
-                    starts[0] = i;
-                } else if (starts[j - 1] >= 0) {
-                    starts[j] = starts[j - 1];
-                }
+    /* A single jchar is not a byte or a Unicode scalar. Retain both acquisitions
+     * and the existing allocation/failure ordering, including the absent case. */
+    if (m == 1) {
+        jchar wanted = sequence[0];
+        for (jsize i = 0; i < n; i++) {
+            if (source[i] == wanted) {
+                result = ((jlong) i << 32) | (jlong) (uint32_t) (i + 1);
+                break;
             }
         }
-        jint currentStart = starts[m - 1];
-        if (currentStart >= 0) {
+        goto done;
+    }
+
+    /* Reachable prefixes form one contiguous nonnegative state interval. */
+    jsize reachable = 0;
+    jsize end = 0;
+    while (end < n && reachable < m) {
+        jchar unit = source[end];
+        /* j>0 has a reachable predecessor; j=0 must be refreshed last. */
+        for (jsize j = reachable; j > 0; j--) {
+            if (unit == sequence[j]) starts[j] = starts[j - 1];
+        }
+        if (unit == sequence[0]) starts[0] = end;
+        if (starts[reachable] >= 0) reachable++;
+        end++;
+    }
+    if (reachable < m) goto done;
+    jint bestStart = starts[m - 1];
+    jint bestEnd = end;
+    jint bestLength = end - bestStart;
+
+    /* A two-unit pattern needs only the previous first-unit index. Preserve
+     * allocation/acquisition order; all exits still use the original cleanup. */
+    if (bestLength != m && m == 2) {
+        jchar first = sequence[0], terminal = sequence[1];
+        jint latestFirst = starts[0];
+        for (jsize i = end; i < n; i++) {
+            jchar unit = source[i];
+            if (unit == terminal) {
+                jint length = i + 1 - latestFirst;
+                if (length < bestLength) {
+                    bestLength = length;
+                    bestStart = latestFirst;
+                    bestEnd = i + 1;
+                    if (length == 2) break;
+                }
+            }
+            /* Matching both units must not consume this source position twice. */
+            if (unit == first) latestFirst = i;
+        }
+    } else if (bestLength != m) {
+        for (jsize i = end; i < n; i++) {
+            jchar unit = source[i];
+            for (jsize j = m - 1; j > 0; j--) {
+                if (unit == sequence[j]) starts[j] = starts[j - 1];
+            }
+            if (unit == sequence[0]) starts[0] = i;
+            jint currentStart = starts[m - 1];
             jint length = i + 1 - currentStart;
             if (length < bestLength
                     || (length == bestLength && currentStart < bestStart)) {
                 bestLength = length;
                 bestStart = currentStart;
                 bestEnd = i + 1;
+                /* Exact minimum still exits through the original cleanup. */
+                if (length == m) break;
             }
         }
     }
-    if (bestStart >= 0) {
-        result = ((jlong) bestStart << 32) | (jlong) (uint32_t) bestEnd;
-    }
+    result = ((jlong) bestStart << 32) | (jlong) (uint32_t) bestEnd;
+
 done:
     if (sequence != NULL) {
         (*env)->ReleaseCharArrayElements(env, sequenceArray, sequence, JNI_ABORT);
