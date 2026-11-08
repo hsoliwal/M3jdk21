@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+# Gate 4 of recipe/corpus-search-20261108 (derived from recipe/catalogue-kernels-20261107/differential.sh): the
+# donor kernels (the FILE rows under src/main/java plus the OWNED and DONOR_ONLY closure, compiled from the donor git
+# tree with javac --release 21 -Xlint:all -Werror, every member present, the dropped ones unused) and the relocated
+# classes (target/classes) replay the same seeded inputs through the dump driver M3CatalogueKernelsDump. One driver
+# source, two compiles: the relocated side runs the test-scope class of this module; the donor side compiles the same
+# file with the MEMBER and TYPE rows of RELOCATION_MAP.tsv reversed, in a neutral package that imports every donor
+# type of the FILE and OWNED rows and of the DONOR_ONLY rows whose note starts with DRIVER (the NEC subject of the
+# dump, the donor Rabin-Karp lane, is compiled on the donor side only). The donor dump, normalized by the TYPE
+# rows (type names inside member labels), must be byte-identical to the relocated dump, and the relocated dump must be
+# byte-identical under -Xint (interpreter only). Every run is bounded by timeout(1). Prints DIFFERENTIAL PASS|FAIL.
+# usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir> [cases]   (JAVA_HOME = JDK 21; after mvn package)
+# env:   DEP_CP = the module's dependency jars for the relocated side (m3-collections), joined with ; on Windows and :
+#        elsewhere; DONOR_CP = the donor closure's compile jars (lombok, slf4j-api; also on the donor run classpath);
+#        LOMBOK_JAR = its annotation processor; RUN_SECONDS (default 120); JAVA_TOOL_TMP (optional -Djava.io.tmpdir
+#        for every JVM)
+set -euo pipefail
+case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=';'; winpath() { (cd "$1" && pwd -W); } ;; *) SEP=':'; winpath() { (cd "$1" && pwd); } ;; esac
+RECIPE_DIR=$(winpath "$(dirname "$0")")
+MODULE=$(winpath "$(dirname "$0")/../..")
+DONOR_GIT=$1
+REV=$2
+CASES=${4:-4000}
+SEED=20261108
+RUN_SECONDS=${RUN_SECONDS:-120}
+mkdir -p "$3"
+SCRATCH=$(winpath "$3")
+JAVA_BIN="${JAVA_HOME:?JAVA_HOME must point at a JDK 21}/bin"
+MAP="$RECIPE_DIR/RELOCATION_MAP.tsv"
+DRIVER=M3CorpusSearchDump
+DRIVER_SRC="$MODULE/src/test/java/jdk/m3/algorithm/$DRIVER.java"
+TMP_FLAG=${JAVA_TOOL_TMP:+-Djava.io.tmpdir=$JAVA_TOOL_TMP}
+JAVAC_TMP=${JAVA_TOOL_TMP:+-J-Djava.io.tmpdir=$JAVA_TOOL_TMP}
+JVM_FLAGS="-XX:-OmitStackTraceInFastThrow -Xss16m -Xmx256m $TMP_FLAG"
+donor_commit=$(git -C "$DONOR_GIT" rev-parse "$REV^{commit}")
+
+# 1. the donor sources of the FILE (main), OWNED and DONOR_ONLY rows, compiled from the donor tree
+rm -rf "$SCRATCH/src" "$SCRATCH/classes" "$SCRATCH/driver-src" "$SCRATCH/driver-classes"
+mkdir -p "$SCRATCH/src" "$SCRATCH/classes" "$SCRATCH/driver-src/m3dump" "$SCRATCH/driver-classes"
+awk -F'\t' '($1=="FILE" && $3 ~ /^src\/main\/java\//) || $1=="OWNED" || $1=="DONOR_ONLY" {print $2}' "$MAP" \
+    > "$SCRATCH/donor-paths.txt"
+while read -r path; do
+    rel=${path#*/src/main/java/}
+    mkdir -p "$SCRATCH/src/$(dirname "$rel")"
+    git -C "$DONOR_GIT" show "$REV:$path" > "$SCRATCH/src/$rel"
+done < "$SCRATCH/donor-paths.txt"
+find "$SCRATCH/src" -name '*.java' > "$SCRATCH/donor-sources.txt"
+# the donor progress closure (ProgressCalculationUtils) is annotated with lombok's @Slf4j: DONOR_CP holds the donor's
+# compile dependencies (lombok and slf4j-api), LOMBOK_JAR its annotation processor (donor side only; the relocated
+# kernels need neither); -g as maven-compiler-plugin (debug=true): a helpful NullPointerException message names the
+# parameter (without -g it reads <parameterN>)
+"$JAVA_BIN/javac" -J-Xmx384m $JAVAC_TMP --release 21 -g -Xlint:all -Werror \
+    ${DONOR_CP:+-cp "$DONOR_CP"} ${LOMBOK_JAR:+-processorpath "$LOMBOK_JAR"} -d "$SCRATCH/classes" @"$SCRATCH/donor-sources.txt"
+donor_classes=$(find "$SCRATCH/classes" -name '*.class' | wc -l | tr -d ' ')
+
+# 2. the donor variant of the driver: MEMBER then TYPE rows reversed (whole words), neutral package, donor imports
+reverse="$SCRATCH/reverse.sed"
+awk -F'\t' '$1=="MEMBER" {d=$2; t=$3; gsub(/\./, "\\.", t); print "s/\\b" t "\\b/" d "/g"}' "$MAP" > "$reverse"
+awk -F'\t' '$1=="TYPE" && $2!=$3 {print "s/\\b" $3 "\\b/" $2 "/g"}' "$MAP" >> "$reverse"
+imports=$(awk -F'\t' '($1=="FILE" && $3 ~ /^src\/main\/java\//) || ($1=="OWNED" && $3 != "-") || ($1=="DONOR_ONLY" && $4 ~ /^DRIVER/) {p=$2; sub(/^.*\/src\/main\/java\//, "", p); sub(/\.java$/, "", p); gsub(/\//, ".", p); printf "import %s;\\n", p}' "$MAP")
+sed -f "$reverse" "$DRIVER_SRC" | sed "s/^package jdk\.m3\.algorithm;/package m3dump;\n$imports/" \
+    > "$SCRATCH/driver-src/m3dump/$DRIVER.java"
+"$JAVA_BIN/javac" -J-Xmx384m $JAVAC_TMP --release 21 -Xlint:all -Xlint:-processing -cp "$SCRATCH/classes" \
+    -d "$SCRATCH/driver-classes" "$SCRATCH/driver-src/m3dump/$DRIVER.java"
+
+# 3. the dumps: donor, relocated, relocated in the interpreter only
+RELOCATED_CP="$MODULE/target/classes$SEP$MODULE/target/test-classes${DEP_CP:+$SEP$DEP_CP}"
+timeout "$RUN_SECONDS" "$JAVA_BIN/java" $JVM_FLAGS -cp "$SCRATCH/classes$SEP$SCRATCH/driver-classes${DONOR_CP:+$SEP$DONOR_CP}" \
+    "m3dump.$DRIVER" --seed "$SEED" --cases "$CASES" > "$SCRATCH/donor.raw.txt"
+start=$(date +%s)
+timeout "$RUN_SECONDS" "$JAVA_BIN/java" $JVM_FLAGS -cp "$RELOCATED_CP" "jdk.m3.algorithm.$DRIVER" \
+    --seed "$SEED" --cases "$CASES" > "$SCRATCH/relocated.txt"
+mid=$(date +%s)
+timeout "$RUN_SECONDS" "$JAVA_BIN/java" $JVM_FLAGS -Xint -cp "$RELOCATED_CP" "jdk.m3.algorithm.$DRIVER" \
+    --seed "$SEED" --cases "$CASES" > "$SCRATCH/relocated-xint.txt"
+end=$(date +%s)
+
+# 4. normalize the donor dump by the TYPE rows (member labels name the types)
+normalize="$SCRATCH/normalize.sed"
+awk -F'\t' '$1=="TYPE" && $2!=$3 {print "s/\\b" $2 "\\b/" $3 "/g"}' "$MAP" > "$normalize"
+sed -f "$normalize" "$SCRATCH/donor.raw.txt" > "$SCRATCH/donor.txt"
+types=$(awk -F'\t' '$1=="TYPE" && $2!=$3 {printf "%s%s", (n++ ? "|" : ""), $2}' "$MAP")
+renamed_lines=$(grep -cE "\b($types)\b" "$SCRATCH/donor.raw.txt" || true)
+
+donor_raw_sha=$(sha256sum "$SCRATCH/donor.raw.txt" | cut -d' ' -f1)
+donor_sha=$(sha256sum "$SCRATCH/donor.txt" | cut -d' ' -f1)
+relocated_sha=$(sha256sum "$SCRATCH/relocated.txt" | cut -d' ' -f1)
+xint_sha=$(sha256sum "$SCRATCH/relocated-xint.txt" | cut -d' ' -f1)
+echo "DONOR $donor_commit sources=$(wc -l < "$SCRATCH/donor-sources.txt" | tr -d ' ') classes=$donor_classes seed=$SEED cases=$CASES"
+tail -n 1 "$SCRATCH/relocated.txt"
+echo "MEMBERS $(cut -d'#' -f1 "$SCRATCH/relocated.txt" | grep -v '^TOTAL' | sort -u | wc -l | tr -d ' ') relocated_seconds=$((mid - start)) xint_seconds=$((end - mid))"
+if cmp -s "$SCRATCH/donor.txt" "$SCRATCH/relocated.txt" && cmp -s "$SCRATCH/relocated.txt" "$SCRATCH/relocated-xint.txt"; then
+    echo "DIFFERENTIAL PASS donor_raw_sha256=$donor_raw_sha donor_normalized_sha256=$donor_sha relocated_sha256=$relocated_sha xint_sha256=$xint_sha lines=$(wc -l < "$SCRATCH/relocated.txt" | tr -d ' ') bytes=$(wc -c < "$SCRATCH/relocated.txt" | tr -d ' ') normalized_lines=${renamed_lines:-0}"
+    rm -f "$SCRATCH/donor.raw.txt" "$SCRATCH/relocated-xint.txt"
+else
+    echo "DIFFERENTIAL FAIL donor_raw_sha256=$donor_raw_sha donor_normalized_sha256=$donor_sha relocated_sha256=$relocated_sha xint_sha256=$xint_sha"
+    diff "$SCRATCH/donor.txt" "$SCRATCH/relocated.txt" | head -n 10
+    diff "$SCRATCH/relocated.txt" "$SCRATCH/relocated-xint.txt" | head -n 10
+    exit 1
+fi
