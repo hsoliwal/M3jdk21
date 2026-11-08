@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""DROP_PRODUCT_PREFIX v1.6: inside an m3 package the package already names the product, so a type carries no M3 prefix.
+"""DROP_PRODUCT_PREFIX v1.7: inside an m3 package the package already names the product, so a type carries no M3 prefix.
 
 usage: rename_types.py --root DIR --package P [--package P2 ...] [--check] [--exclude PREFIX ...]
 For every top-level type M3<Rest> declared in package P (main or test source, file M3<Rest>.java) the type becomes
@@ -11,6 +11,11 @@ For every top-level type M3<Rest> declared in package P (main or test source, fi
          other string literals and comments are kept byte for byte;
   C/H    JNI symbols Java_<p>_M3<Rest>_ and javac -h header names <p>_M3<Rest>.h, where <p> is P with '_' for '.';
   shell  qualified names P.M3<Rest> and bare class names in scripts under make/ (launchers name test mains).
+  path   v1.7: the binary/resource path form <p>/M3<Rest> (p = P with '/' for '.') in every file outside evidence:
+         jar include filters (jdk/m3/x/M3Rest*), launcher source lists, class-file paths;
+  docs   v1.7: whole-word M3<Rest> in Markdown files under declared --doc prefixes (module READMEs, live docs).
+v1.7: evidence segments count only outside Java package directories (a package jdk.m3.tooling.recipe.agent is
+product, a module directory recipe/ or a resources tree before/ is evidence).
 v1.4: files under evidence segments anywhere (qualification, recipe, custody, proofs, images, retained variants,
 donors, fixtures) are never rewritten; v1.3: a bare name that is a java.* simple name of the running JDK (jimage list) keeps its prefix (KEEP row), the
 standard's exception; v1.2: a type token qualified by another package (x.y.M3Rest) is left alone; --string-members also rewrites the
@@ -69,6 +74,14 @@ def masked_sub(text, rx, rep):
     return "".join(out)
 
 
+def comment_sub(text, rx, rep):
+    """Apply rx->rep inside comments only (v1.7); string/char literals and code are kept."""
+    def one(m):
+        t = m.group(0)
+        return rx.sub(rep, t) if t.startswith("/") else t
+    return re.sub(r'"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])\'|//[^\n]*|/\*.*?\*/', one, text, flags=re.S)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", required=True)
@@ -78,6 +91,10 @@ def main():
     ap.add_argument("--test-dir", action="append", default=[])
     ap.add_argument("--exclude", action="append", default=["m3/evidence/", "m3/qualification/"])
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--comment-words", action="store_true",
+                    help="v1.7: inside comments of files of the package or importing it, rename every whole-word M3Rest of a renamed type ({@link M3Rest}, @see, prose)")
+    # v1.7: Markdown under these prefixes names renamed types by simple name (module READMEs, live docs)
+    ap.add_argument("--doc", action="append", default=[])
     ap.add_argument("--string-words", action="store_true",
                     help="v1.6: inside string literals of files of the package or importing it, rename every whole-word M3Rest of a renamed type (class names built at runtime \".M3Rest$Inner\", toString expectations \"M3Rest[...]\")")
     ap.add_argument("--string-members", action="store_true",
@@ -88,9 +105,16 @@ def main():
     # treats as copies (per-module qualification/recipe directories, custody, proofs, images, retained variants)
     evidence = re.compile(r"/(recipe-custody|custody|evidence|qualification|recipes?|retained-variants|proofs?|snapshots?|"
                           r"before|after|postimages?|preimages?|donors?|intakes?|fixtures?|golden|expected|samples?)/")
+    # v1.7: below a Java source root the directories are packages (jdk.m3.tooling.recipe.agent), not evidence
+    source_root = re.compile(r"^(.*?/src/(?:main|test)/java/|src/[^/]+/share/classes/|test/jdk/)")
+
+    def outside_packages(rel):
+        m = source_root.match(rel)
+        return m.group(1) if m else rel
+
     files = [p for p in root.rglob("*") if p.is_file() and not any(
         p.relative_to(root).as_posix().startswith(x) for x in a.exclude)
-        and not evidence.search("/" + p.relative_to(root).as_posix())]
+        and not evidence.search("/" + outside_packages(p.relative_to(root).as_posix()))]
     java = [p for p in files if p.suffix == ".java"]
     pkg_of = {}
     for p in java:
@@ -136,6 +160,7 @@ def main():
             if not plan:
                 continue
             jni = pkg.replace(".", "_")
+            pdir = pkg.replace(".", "/")
             pseudo = pkg.startswith("dir:")
             for old, rest in plan.items():
                 if pseudo:  # v1.5: default-package test directory
@@ -146,6 +171,12 @@ def main():
                     continue
                 q = re.compile(rf"(?<![\w$]){re.escape(pkg)}\.{old}(?![\w$])")
                 new = q.sub(f"{pkg}.{rest}", new)  # qualified, everywhere (strings included)
+                # v1.7: binary/resource path form, everywhere outside evidence (jar includes, launcher source lists)
+                new = re.sub(rf"(?<![\w$]){re.escape(pdir)}/{old}(?![\w$])", f"{pdir}/{rest}", new)
+                if p.suffix == ".md" and any(rel.startswith(d) for d in a.doc):
+                    # v1.7 declared docs: a simple name not qualified by another package nor a path segment (donor
+                    # URLs stay; paths of this tree follow by the path form above)
+                    new = re.sub(rf"(?<![\w$./]){old}(?![\w$])", rest, new)
                 if p.suffix in (".c", ".h", ".cpp", ".hpp"):
                     new = new.replace(f"Java_{jni}_{old}_", f"Java_{jni}_{rest}_").replace(f"{jni}_{old}.h", f"{jni}_{rest}.h")
                 elif p.suffix == ".java":
@@ -164,6 +195,11 @@ def main():
                             # names pkg + ".M3Rest$Inner", record toString expectations "M3Rest[...]") follows the rename
                             word = re.compile(rf"(?<![\w$]){old}(?![\w])")
                             new = STRING.sub(lambda m: word.sub(rest, m.group(0)), new)
+                        if a.comment_words:
+                            # v1.7 declared opt-in: Javadoc links and prose in this file's comments ({@link M3Rest},
+                            # @see M3Rest) name the renamed type; a token qualified by another package stays
+                            # (a token after / is a path segment: donor URLs in //FLLDCIM anchors are history)
+                            new = comment_sub(new, re.compile(rf"(?<![\w$./]){old}(?![\w$])"), rest)
                         if a.string_members:
                             # declared opt-in: string literals naming a renamed type's member ("M3Rest.member") or the
                             # bare type ("M3Rest") follow the rename (catalog entry points resolved by reflection)

@@ -10,4 +10,4 @@ mkdir -p "$classes"
 trap 'rm -rf "$work"' EXIT
 mapfile -t sources < <(find "$root/src/main/java" "$root/src/test/java" -name '*.java' -type f -print | sort)
 javac --release 21 -Xlint:all -Werror -d "$classes" "${sources[@]}"
-LANG=C.UTF-8 LC_ALL=C.UTF-8 java -cp "$classes" jdk.m3.tooling.cds.M3CdsTrainReplaySelfTest "$work"
+LANG=C.UTF-8 LC_ALL=C.UTF-8 java -cp "$classes" jdk.m3.tooling.cds.CdsTrainReplaySelfTest "$work"

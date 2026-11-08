@@ -36,12 +36,15 @@ SOURCE = re.compile(r"^(.*)/src/main/java/(.+)/([^/]+)\.java$")
 # A type file M3<Name>.java inside an M3 package (main, test or JDK module sources), outside copies and vendor.
 PREFIXED = re.compile(r"^(?:.*/src/(?:main|test)/java/|src/[^/]+/share/classes/|test/jdk/)jdk/(?:internal/)?m3/"
                       r"(?:[\w/]*/)?M3[A-Z][A-Za-z0-9]*\.java$")
+# The source root of a type file: the copy segments are read above it only, since below it the directories are
+# packages (jdk.m3.tooling.recipe.agent, jdk.m3.graphics.resources are product, not evidence).
+SOURCE_ROOT = re.compile(r"^(.*?/src/(?:main|test)/java/|src/[^/]+/share/classes/|test/jdk/)")
 
 
 def prefixed(paths):
     """Paths of M3-prefixed type files inside M3 packages (the user's 2026-11-08 rule: no product prefix there)."""
     return sorted(p for p in paths if PREFIXED.match(p) and not p.startswith("m3/vendor/")
-                  and not COPY.search("/" + p.rsplit("/", 1)[0] + "/"))
+                  and not COPY.search("/" + SOURCE_ROOT.match(p).group(1)))
 
 
 def layout(paths):

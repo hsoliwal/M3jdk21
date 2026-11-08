@@ -42,8 +42,8 @@ code. Do not treat it as a port of Excelsior JET, Leyden AOT caches, or compiled
 ## CLI
 
 ```text
-java -cp <tool-classes> jdk.m3.tooling.cds.M3CdsTrainReplay train <jdk-java> <application.jar> <MainClass> <new-output-dir> [app-args...]
-java -cp <tool-classes> jdk.m3.tooling.cds.M3CdsTrainReplay verify <existing-output-dir>
+java -cp <tool-classes> jdk.m3.tooling.cds.CdsTrainReplay train <jdk-java> <application.jar> <MainClass> <new-output-dir> [app-args...]
+java -cp <tool-classes> jdk.m3.tooling.cds.CdsTrainReplay verify <existing-output-dir>
 ```
 
 A **PASS** receipt binds an exact source/toolchain/archive and *bounded fixture output parity*.

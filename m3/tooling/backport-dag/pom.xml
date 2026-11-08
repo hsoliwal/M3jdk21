@@ -59,7 +59,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.6.4</version>
         <configuration>
-          <mainClass>jdk.m3.tooling.dag.M3BackportDagMain</mainClass>
+          <mainClass>jdk.m3.tooling.dag.BackportDagMain</mainClass>
         </configuration>
       </plugin>
       <plugin>
@@ -87,21 +87,21 @@
             </goals>
             <configuration>
               <includes>
-                <include>jdk/m3/tooling/dag/M3RecipeDag*</include>
-                <include>jdk/m3/tooling/dag/M3DagNode*</include>
-                <include>jdk/m3/tooling/dag/M3AdmissionFact*</include>
-                <include>jdk/m3/tooling/dag/M3RecipeAtom*</include>
-                <include>jdk/m3/tooling/dag/M3RecipeAtomEvidence*</include>
-                <include>jdk/m3/tooling/dag/M3BackportPacketEvidence*</include>
-                <include>jdk/m3/tooling/dag/M3BackportPacketEvidenceLoader*</include>
-                <include>jdk/m3/tooling/dag/M3AtomEvidenceRoot*</include>
-                <include>jdk/m3/tooling/dag/M3BackportPacket.class</include>
-                <include>jdk/m3/tooling/dag/M3BackportPacketLoader*</include>
-                <include>jdk/m3/tooling/dag/M3PacketDagComposer*</include>
-                <include>jdk/m3/tooling/dag/M3DagSemanticRoot*</include>
-                <include>jdk/m3/tooling/dag/M3DagProjection*</include>
-                <include>jdk/m3/tooling/dag/M3DagProjector*</include>
-                <include>jdk/m3/tooling/dag/M3A3BackportPreparation*</include>
+                <include>jdk/m3/tooling/dag/RecipeDag*</include>
+                <include>jdk/m3/tooling/dag/DagNode*</include>
+                <include>jdk/m3/tooling/dag/AdmissionFact*</include>
+                <include>jdk/m3/tooling/dag/RecipeAtom*</include>
+                <include>jdk/m3/tooling/dag/RecipeAtomEvidence*</include>
+                <include>jdk/m3/tooling/dag/BackportPacketEvidence*</include>
+                <include>jdk/m3/tooling/dag/BackportPacketEvidenceLoader*</include>
+                <include>jdk/m3/tooling/dag/AtomEvidenceRoot*</include>
+                <include>jdk/m3/tooling/dag/BackportPacket.class</include>
+                <include>jdk/m3/tooling/dag/BackportPacketLoader*</include>
+                <include>jdk/m3/tooling/dag/PacketDagComposer*</include>
+                <include>jdk/m3/tooling/dag/DagSemanticRoot*</include>
+                <include>jdk/m3/tooling/dag/DagProjection*</include>
+                <include>jdk/m3/tooling/dag/DagProjector*</include>
+                <include>jdk/m3/tooling/dag/A3BackportPreparation*</include>
               </includes>
               <rules>
                 <rule>

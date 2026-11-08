@@ -202,8 +202,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/jep493/projections"
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" exec:java
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $RUNNER_TEMP/jep493/projections $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $RUNNER_TEMP/jep493/projections $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" exec:java
           test -s "$RUNNER_TEMP/jep493/projections/M3BackportRoutes.java"
           test -s "$RUNNER_TEMP/jep493/projections/m3_backport_dag.py"
           test -s "$RUNNER_TEMP/jep493/projections/m3_backport_rules.drl"
