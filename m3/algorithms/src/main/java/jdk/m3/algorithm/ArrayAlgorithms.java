@@ -14,6 +14,7 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.function.IntPredicate;
 import java.util.Objects;
+import jdk.m3.collections.IntArrayDeque;
 
 //FLLDCIM: RELOCATE - donor blob d707fd5060a4 at commit 3385d79a2968 (repository, path, URL and digests: m3/algorithms/recipe/families-20261106/PROVENANCE.tsv); recipe m3/algorithms/recipe/families-20261106/relocate.py v1
 public final class ArrayAlgorithms {
@@ -711,5 +712,32 @@ public final class ArrayAlgorithms {
     //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.progress from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
     private static ProgressMonitor progress(ProgressMonitor monitor) {
         return monitor == null ? ProgressMonitor.none() : monitor;
+    }
+
+    //FLLDCIM: FOLD - member MonotonicStackMisc.minSlidingWindow from donor blob 6f7721ce52b9 (donor blob 6f7721ce52b9 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/monotonic-stack-fold/PROVENANCE.tsv)); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/monotonic-stack-fold/FOLD_MAP.array.tsv
+    /** Minimum in Sliding Window using monotonic deque. */
+    public static int[] minSlidingWindow(int[] nums, int k) {
+        if (nums.length == 0) return new int[0];
+
+        int n = nums.length;
+        int[] result = new int[n - k + 1];
+        IntArrayDeque deque = new IntArrayDeque();
+
+        for (int i = 0; i < n; i++) {
+            while (!deque.isEmpty() && deque.getFirst() <= i - k) {
+                deque.removeFirst();
+            }
+
+            while (!deque.isEmpty() && nums[deque.getLast()] > nums[i]) {
+                deque.removeLast();
+            }
+
+            deque.addLast(i);
+
+            if (i >= k - 1) {
+                result[i - k + 1] = nums[deque.getFirst()];
+            }
+        }
+        return result;
     }
 }

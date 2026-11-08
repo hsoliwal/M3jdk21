@@ -1,0 +1,9 @@
+# FOLD_MEMBERS v1.7 map: minSlidingWindow of synexia-algo MonotonicStackMisc folds into jdk.m3.algorithm.ArrayAlgorithms beside its maxSlidingWindow (one concept, one owner; 2026-11-08). Same donor pin and BODY rows as FOLD_MAP.tsv.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/ArrayAlgorithms.java
+DONOR	S:/m3-scratch/eb-conv/algo/donor_stack/MonotonicStackMisc.java	6f7721ce52b9	donor blob 6f7721ce52b9 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/monotonic-stack-fold/PROVENANCE.tsv)
+TAKE	MonotonicStackMisc.minSlidingWindow
+BODY	\bIntRingDeque\b	IntArrayDeque
+BODY	\.first\(\)	.getFirst()
+BODY	\.last\(\)	.getLast()
+IMPORT	jdk.m3.collections.IntArrayDeque

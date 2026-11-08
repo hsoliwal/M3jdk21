@@ -1,0 +1,24 @@
+# FOLD_MEMBERS v1.7 map (m3/tooling/jdk-naming/fold_members.py): the kernel holders behind synexia-algo's MonotonicStack facade fold into jdk.m3.algorithm.StackAlgorithms, the owner of the stack concept (no new class; 2026-11-08).
+# Donors are outside the tree (hsoliwal/com.synexia@45da5f035, PROVENANCE.tsv), pinned to their blobs. The donors' IntRingDeque becomes the module's jdk.m3.collections.IntArrayDeque (BODY rows). Members the owner or ArrayAlgorithms already declare are not folded; the facade is not a donor.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/StackAlgorithms.java
+DONOR	S:/m3-scratch/eb-conv/algo/donor_stack/MonotonicStackElements.java	0a288bd5c9f2	donor blob 0a288bd5c9f2 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/monotonic-stack-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor_stack/MonotonicStackRectangle.java	93e559ad6b46	donor blob 93e559ad6b46 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/monotonic-stack-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor_stack/MonotonicStackSubarray.java	ede7785f71a7	donor blob ede7785f71a7 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/monotonic-stack-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor_stack/MonotonicStackMisc.java	6f7721ce52b9	donor blob 6f7721ce52b9 at commit 45da5f035 (repository, path and digests: m3/algorithms/recipe/monotonic-stack-fold/PROVENANCE.tsv)
+TAKE	MonotonicStackElements.*
+TAKE	MonotonicStackRectangle.*
+TAKE	MonotonicStackSubarray.*
+TAKE	MonotonicStackMisc.*
+SKIP	MonotonicStackElements.nextGreater	the owner declares nextGreater(int[], ProgressMonitor): one lane per concept
+SKIP	MonotonicStackElements.nextGreaterCircular	ArrayAlgorithms declares nextGreaterCircular(int[])
+SKIP	MonotonicStackRectangle.largestRectangleHistogram	the owner declares largestRectangleArea(int[], ProgressMonitor): one lane per concept; maximalRectangle calls it (EDIT)
+SKIP	MonotonicStackSubarray.dailyTemperatures	the owner declares dailyTemperatures(int[], ProgressMonitor): one lane per concept
+SKIP	MonotonicStackMisc.maxSlidingWindow	ArrayAlgorithms declares maxSlidingWindow(int[], int)
+SKIP	MonotonicStackMisc.minSlidingWindow	folds into ArrayAlgorithms beside maxSlidingWindow (FOLD_MAP.array.tsv)
+EDIT	MonotonicStackRectangle.maximalRectangle(int[][])	2aea70665f30	            maxArea = Math.max(maxArea, largestRectangleHistogram(heights));	            maxArea = Math.max(maxArea, (int) largestRectangleArea(heights, ProgressMonitor.none()));
+BODY	\bIntRingDeque\b	IntArrayDeque
+BODY	\.first\(\)	.getFirst()
+BODY	\.last\(\)	.getLast()
+IMPORT	jdk.m3.collections.IntArrayDeque
+IMPORT	java.util.Arrays
