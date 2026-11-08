@@ -747,6 +747,16 @@ PACKAGE	com.sun.hotspot.tools.compiler
 PACKAGE	jdk.internal.m3.ast
 PACKAGE	jdk.internal.m3.bootstrap
 PACKAGE	jdk.internal.m3.collections
+PACKAGE	jdk.internal.m3.collections.bits
+PACKAGE	jdk.internal.m3.collections.concurrent
+PACKAGE	jdk.internal.m3.collections.graph
+PACKAGE	jdk.internal.m3.collections.mat
+PACKAGE	jdk.internal.m3.collections.packed
+PACKAGE	jdk.internal.m3.collections.range
+PACKAGE	jdk.internal.m3.collections.select
+PACKAGE	jdk.internal.m3.collections.shape
+PACKAGE	jdk.internal.m3.collections.sketch
+PACKAGE	jdk.internal.m3.collections.text
 PACKAGE	jdk.internal.m3.cpugpu
 PACKAGE	jdk.internal.m3.eclipse
 PACKAGE	jdk.internal.m3.indexstring
@@ -1702,7 +1712,7 @@ PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3IntZIndex.ja
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3IntZeroOneShortestPaths.java
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3Internable.java
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3InternalLeaseRecycler.java
-PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3KeyStore.java
+PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/shape/M3KeyStore.java
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3LaneAlgorithms.java
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3LaneGrowth.java
 PREFIXED	m3/collections/src/main/java/jdk/internal/m3/collections/M3LaneSearch.java
