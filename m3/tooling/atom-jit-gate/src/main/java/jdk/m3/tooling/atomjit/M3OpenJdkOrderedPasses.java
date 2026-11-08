@@ -18,9 +18,9 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import jdk.m3.tooling.atoms.M3AtomCensus;
-import jdk.m3.tooling.atoms.contract.M3AtomKind;
-import jdk.m3.tooling.atoms.contract.M3AtomRecord;
+import jdk.m3.tooling.atoms.AtomCensus;
+import jdk.m3.tooling.atoms.contract.AtomKind;
+import jdk.m3.tooling.atoms.contract.AtomRecord;
 
 /**
  * Read-only OpenJDK FILE atom -> actual HotSpot JIT -> pattern review -> JIT retest.
@@ -42,9 +42,9 @@ public final class M3OpenJdkOrderedPasses {
     public static final class Atomized {
         private final String path;
         private final String sourceSha256;
-        private final List<M3AtomRecord> atoms;
+        private final List<AtomRecord> atoms;
 
-        private Atomized(String path, String sourceSha256, List<M3AtomRecord> atoms) {
+        private Atomized(String path, String sourceSha256, List<AtomRecord> atoms) {
             this.path = path;
             this.sourceSha256 = sourceSha256;
             this.atoms = List.copyOf(atoms);
@@ -110,7 +110,7 @@ public final class M3OpenJdkOrderedPasses {
             throw new IllegalArgumentException("OpenJDK file size budget");
         }
         String module = path.substring(4, path.indexOf('/', 4));
-        List<M3AtomRecord> atoms = census(module, path, source,
+        List<AtomRecord> atoms = census(module, path, source,
                 Objects.requireNonNull(patternRules, "patternRules"));
         if (atoms.isEmpty()) {
             throw new IllegalArgumentException("no executable declaration atoms");
@@ -144,7 +144,7 @@ public final class M3OpenJdkOrderedPasses {
     public static PatternReviewed patternize(JitChecked tested) {
         Objects.requireNonNull(tested, "tested");
         Map<String, String> entries = tested.before.atoms.stream().collect(Collectors.toMap(
-                M3AtomRecord::atomId, atom -> atom.patternId() + ":" + atom.sourceSha256(),
+                AtomRecord::atomId, atom -> atom.patternId() + ":" + atom.sourceSha256(),
                 (left, right) -> { throw new IllegalStateException("duplicate atom identity"); }));
         if (entries.size() != tested.before.atoms.size()) {
             throw new IllegalStateException("duplicate or missing atom identity");
@@ -215,7 +215,7 @@ public final class M3OpenJdkOrderedPasses {
     private static final String CENSUS_CONTRACT = "m3/tooling/atom-census SEMANTIC_CENSUS_V1";
 
     /** Runs the census CLI ({@code --semantic}) on the one file at its logical path; keeps executable Java atoms. */
-    private static List<M3AtomRecord> census(String module, String path, byte[] source, Path rules) {
+    private static List<AtomRecord> census(String module, String path, byte[] source, Path rules) {
         Path work = null;
         try {
             work = Files.createTempDirectory("m3-atom-census-");
@@ -224,7 +224,7 @@ public final class M3OpenJdkOrderedPasses {
             Files.createDirectories(file.getParent());
             Files.write(file, source);
             Path out = work.resolve("out");
-            M3AtomCensus.main(new String[] {"--semantic", module, rules.toString(), out.toString(), root.toString()});
+            AtomCensus.main(new String[] {"--semantic", module, rules.toString(), out.toString(), root.toString()});
             return atoms(path, source, Files.readAllLines(
                     out.resolve("SEMANTIC_CENSUS_" + module + ".tsv"), StandardCharsets.UTF_8));
         } catch (IOException failure) {
@@ -235,19 +235,19 @@ public final class M3OpenJdkOrderedPasses {
     }
 
     /** The census rows of one file, bound to its exact bytes through the FILE_CONTAINER source digest. */
-    private static List<M3AtomRecord> atoms(String path, byte[] source, List<String> rows) {
+    private static List<AtomRecord> atoms(String path, byte[] source, List<String> rows) {
         if (rows.isEmpty() || !rows.get(0).startsWith(CENSUS_HEADER_PREFIX)) {
             throw new IllegalStateException("census ledger schema changed");
         }
-        List<M3AtomRecord> all = rows.stream().skip(1).map(row -> row.split("\t", -1)).map(cells -> {
+        List<AtomRecord> all = rows.stream().skip(1).map(row -> row.split("\t", -1)).map(cells -> {
             if (cells.length != CENSUS_COLUMNS || !path.equals(cells[2])) {
                 throw new IllegalStateException("census row outside the atomized file");
             }
-            return new M3AtomRecord(cells[0], cells[2], M3AtomKind.valueOf(cells[3]), cells[4], cells[6],
+            return new AtomRecord(cells[0], cells[2], AtomKind.valueOf(cells[3]), cells[4], cells[6],
                     cells[9], cells[10], CENSUS_CONTRACT, Boolean.parseBoolean(cells[11]));
         }).toList();
         String digest = sha256(source);
-        if (all.stream().noneMatch(atom -> atom.kind() == M3AtomKind.FILE_CONTAINER
+        if (all.stream().noneMatch(atom -> atom.kind() == AtomKind.FILE_CONTAINER
                 && atom.sourceSha256().equals(digest))) {
             throw new IllegalStateException("census source identity drift");
         }

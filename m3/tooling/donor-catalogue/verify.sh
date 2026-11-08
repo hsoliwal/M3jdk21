@@ -21,16 +21,16 @@ mkdir -p "$out"
 javac --release 21 -Xlint:all -Werror -d "$classes" "${main_sources[@]}" "${test_sources[@]}"
 javadoc -quiet -Werror -Xdoclint:all -d "$javadoc_out" "${main_sources[@]}" >"$out/javadoc.log" 2>&1
 java -Dm3.catalogue.dir="$here" -cp "$classes" \
-  jdk.m3.tooling.donors.M3DonorCatalogueSelfTest | tee "$out/self-test.log"
-java -cp "$classes" jdk.m3.tooling.donors.M3DonorCatalogue validate "$here" \
+  jdk.m3.tooling.donors.DonorCatalogueSelfTest | tee "$out/self-test.log"
+java -cp "$classes" jdk.m3.tooling.donors.DonorCatalogue validate "$here" \
   | tee "$out/catalogue-validation.log"
-java -cp "$classes" jdk.m3.tooling.donors.M3DonorCatalogue plan "$here" "$first" \
+java -cp "$classes" jdk.m3.tooling.donors.DonorCatalogue plan "$here" "$first" \
   >"$out/plan-first.log"
-java -cp "$classes" jdk.m3.tooling.donors.M3DonorCatalogue plan "$here" "$second" \
+java -cp "$classes" jdk.m3.tooling.donors.DonorCatalogue plan "$here" "$second" \
   >"$out/plan-second.log"
 cmp "$first" "$second"
 # Donor-delta planner and tree lanes (folded in from m3/tooling/donor-delta, 2026-11-08): self-tests and proof.
-for test in M3DonorDeltaPlannerSelfTest M3DonorTreeLanesSelfTest M3DonorTreeLanesGrowthTest M3DonorSortedFastPathProof; do
+for test in DonorDeltaPlannerSelfTest DonorTreeLanesSelfTest DonorTreeLanesGrowthTest DonorSortedFastPathProof; do
   java -cp "$classes" "jdk.m3.tooling.donors.$test" | tee "$out/$test.log"
 done
 cp "$first" "$out/DONOR_PLAN.tsv"

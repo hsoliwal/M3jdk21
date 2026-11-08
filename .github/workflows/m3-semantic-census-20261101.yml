@@ -49,10 +49,10 @@ jobs:
           root=m3/tooling/atom-census
           mkdir -p "$RUNNER_TEMP/m3-semantic"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-semantic" \
-            "$root/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomKind.java" \
-            "$root/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java" \
-            "$root/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticSelfTest.java"
-          java -cp "$RUNNER_TEMP/m3-semantic" jdk.m3.tooling.atoms.M3AtomCensusSemanticSelfTest \
+            "$root/src/main/java/jdk/m3/tooling/atoms/contract/AtomKind.java" \
+            "$root/src/main/java/jdk/m3/tooling/atoms/AtomCensus.java" \
+            "$root/src/test/java/jdk/m3/tooling/atoms/AtomCensusSemanticSelfTest.java"
+          java -cp "$RUNNER_TEMP/m3-semantic" jdk.m3.tooling.atoms.AtomCensusSemanticSelfTest \
             | tee "$RUNNER_TEMP/m3-semantic.log"
           grep -q $'M3_SEMANTIC_CENSUS_PROOF\tchecks=154\tstatus=PASS' "$RUNNER_TEMP/m3-semantic.log"
       - name: Verify canonical atom contract and fail-closed admission

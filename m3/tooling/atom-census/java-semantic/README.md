@@ -9,7 +9,7 @@ four-file `FILE_CONTAINER` output.
 Run after the committed-file census baseline has been received and independently verified:
 
 ```sh
-java -cp <compiled-atom-census-classes> jdk.m3.tooling.atoms.repository.M3JavaSemanticCensus \
+java -cp <compiled-atom-census-classes> jdk.m3.tooling.atoms.repository.JavaSemanticCensus \
     <repository-path> <commit-or-revision> <output-directory>
 ```
 

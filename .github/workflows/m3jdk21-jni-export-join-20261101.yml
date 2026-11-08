@@ -36,9 +36,9 @@ jobs:
           receipt=json.loads((root/'contract/M3_JNI_EXPORT_JOIN_RECEIPT.json').read_text())
           assert receipt['schema']=='M3_JNI_EXPORT_JOIN_RECEIVER/1'
           required={
-            'src/main/java/jdk/m3/tooling/atoms/M3JniExportJoin.java': 'b6aa82f5fb88cc93eddd5c3ba8e28667f68c903d92099ae6ace17719ee0bf7fc',
-            'src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinSelfTest.java': '3cb59a8a3c26d58cd12333affe5a3c586e204836305d693342bfcaf7be193720',
-            'src/test/java/jdk/m3/tooling/atoms/M3JniExportJoinTest.java': '6c0a20e08a88e625428f3769652049882c33d132b4a67157bba239d96dd25275',
+            'src/main/java/jdk/m3/tooling/atoms/JniExportJoin.java': 'b6aa82f5fb88cc93eddd5c3ba8e28667f68c903d92099ae6ace17719ee0bf7fc',
+            'src/test/java/jdk/m3/tooling/atoms/JniExportJoinSelfTest.java': '3cb59a8a3c26d58cd12333affe5a3c586e204836305d693342bfcaf7be193720',
+            'src/test/java/jdk/m3/tooling/atoms/JniExportJoinTest.java': '6c0a20e08a88e625428f3769652049882c33d132b4a67157bba239d96dd25275',
             'test-fixtures/jni-export-join/JniJoinRuntime.java': '6feda8e0868db0beccf0728c8606d1dbd46ee8618ede52f35444ceba2a61f4e6',
             'test-fixtures/jni-export-join/demo/pkg/Outer.java': '6b92a80fc03677194d100ea4f4038540abe5deed1fc3fde615c39a31de8906f4',
             'test-fixtures/jni-export-join/m3jni_export_join.c': '8ae1fa0283ddd70856b049450418d487e3d2cfe661bd6942243502bb11d970f5',
@@ -58,6 +58,6 @@ jobs:
         run: bash m3/tooling/atom-census/verify-jni-export-join.sh
       - name: Real JUnit / Surefire in the existing atom census Maven owner
         shell: bash
-        run: mvn -B -ntp -f m3/tooling/atom-census/pom.xml -Dtest=M3JniExportJoinTest test
+        run: mvn -B -ntp -f m3/tooling/atom-census/pom.xml -Dtest=JniExportJoinTest test
       - name: Preserve product qualification hold
         run: echo 'TESTED_JAVA21_TOOL_NOT_SOURCE_BUILT_M3JDK21_ABI_JTREG_JCK'
