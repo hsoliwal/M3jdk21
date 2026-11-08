@@ -1,0 +1,7 @@
+gate	master	merged
+verify-contract.sh (contract package + self-test, javac -Werror)	rc=0 M3_ATOM_COVERAGE_SELF_TEST checks=25 PASS	rc=0 checks=31 PASS
+verify-jni-projection.sh	rc=0 checks=53	rc=0 checks=53
+verify-repository-census.sh	rc=128: needs a git checkout (API-materialised subtree has none)	same
+verify-jni-export-join.sh	rc=2: needs clang (not installed)	same
+mutant: CONTRACT_CHANGE_AUTHORIZED admits any admissible status	-	rejected (self-test fails)
+mutant: refuse only X:/ again	-	rejected (self-test fails)
