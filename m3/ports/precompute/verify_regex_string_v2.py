@@ -92,8 +92,8 @@ def main() -> None:
 
     mapping = MAPPING.read_text(encoding="utf-8")
     for token in (
-        "jdk.m3.precompute.M3RegexStringTrialImage",
-        "jdk.m3.precompute.M3RegexStringSignals",
+        "jdk.m3.precompute.RegexStringTrialImage",
+        "jdk.m3.precompute.RegexStringSignals",
         "REUSED_TARGET_OWNER_NO_DIRECT_PORT",
     ):
         if token not in mapping:

@@ -3,7 +3,7 @@
 package jdk.internal.m3.indexstring;
 
 import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.precompute.M3EditDistancePlan;
+import jdk.m3.precompute.EditDistancePlan;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
@@ -93,7 +93,7 @@ public final class MIndexTrieNavigation {
     public static final int MAX_EDIT_DISTANCE = 4;
     private static final long DEAD_STATE = -1L;
 
-    private final M3EditDistancePlan query;
+    private final EditDistancePlan query;
     private final int maxEditDistance;
     private final int infinity;
     private final int width;
@@ -131,7 +131,7 @@ public final class MIndexTrieNavigation {
     }
 
     /** The existing immutable pattern owner; its storage is not copied by this machine. */
-    public M3EditDistancePlan queryPlan() { return query; }
+    public EditDistancePlan queryPlan() { return query; }
 
     public int queryLength() {
       return query.length();
@@ -241,9 +241,9 @@ public final class MIndexTrieNavigation {
       return ((long) depth << payloadBits) | packed;
     }
 
-    private static M3EditDistancePlan compileQuery(CharSequence query,
+    private static EditDistancePlan compileQuery(CharSequence query,
         M3ProgressMonitor monitor) {
-      if (query instanceof M3EditDistancePlan prepared) return prepared;
+      if (query instanceof EditDistancePlan prepared) return prepared;
       final int length = query.length();
       // Invocation-local adapter only: the existing plan is the sole retained query snapshot.
       CharSequence checked = new CharSequence() {
@@ -257,7 +257,7 @@ public final class MIndexTrieNavigation {
           return query.subSequence(start, end);
         }
       };
-      M3EditDistancePlan prepared = M3EditDistancePlan.compile(checked);
+      EditDistancePlan prepared = EditDistancePlan.compile(checked);
       check(monitor);
       if (monitor != null) monitor.worked((long) length);
       check(monitor);

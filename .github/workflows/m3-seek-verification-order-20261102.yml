@@ -43,7 +43,7 @@ jobs:
           from pathlib import Path
           import xml.etree.ElementTree as ET
           base=Path('m3/ports/regex-cursor/target/surefire-reports')
-          expected=(('M3TokenCursorSeekLocalityTest',3), ('M3CompleteTokenProjectionTest',2))
+          expected=(('TokenCursorSeekLocalityTest',3), ('CompleteTokenProjectionTest',2))
           for klass,minimum in expected:
               f=base/('TEST-jdk.m3.regexcursor.'+klass+'.xml')
               if not f.is_file(): raise SystemExit('MISSING real JUnit Surefire XML: '+str(f))
