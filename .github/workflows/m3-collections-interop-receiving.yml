@@ -25,6 +25,9 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
             m3/arrays
+            src/jdk.m3.collections/share
+            make/m3/arrays
+            test/jdk/jdk/m3/arrays
             m3/collections
             m3/native
             m3/tooling/migration-recipes
@@ -116,7 +119,7 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          find m3/arrays/src/main/java -name '*.java' | sort > proof/array-sources.txt
+          find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > proof/array-sources.txt
           sha256sum $(cat proof/array-sources.txt) > proof/array-source-hashes.txt
           javac --release 21 -Xlint:all,-module -Werror -d proof/array-classes @proof/array-sources.txt 2>&1 | tee proof/array-compile.log
           cp m3/arrays/{LICENSE,NOTICE,provenance.json} proof/array-classes/META-INF/
@@ -143,7 +146,7 @@ jobs:
           command -v cc
           test -s proof/m3-arrays.jar
           test -s m3/native/include/m3_jni_core.h
-          cmake -S m3/arrays/src/main/native \
+          cmake -S make/m3/arrays \
             -B proof/array-native-build -DCMAKE_BUILD_TYPE=Release \
             -DBUILD_TESTING=ON -DJAVA_HOME="$JAVA_HOME"
           cmake --build proof/array-native-build --config Release --parallel 2

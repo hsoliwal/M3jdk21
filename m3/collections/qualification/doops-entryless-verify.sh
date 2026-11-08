@@ -43,7 +43,7 @@ OUT="${RUNNER_TEMP:-$(mktemp -d)}/m3-doops-entryless"
 mkdir -p "$OUT/classes" "$OUT/native"
 
 SRC=m3/collections/src/main/java
-ARRAYS=m3/arrays/src/main/java
+ARRAYS=src/jdk.m3.collections/share/classes
 TEST=m3/collections/src/test/java/jdk/m3/collections
 
 # Compile the real first-party packages in a bounded unnamed-module test

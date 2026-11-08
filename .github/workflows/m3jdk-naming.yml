@@ -36,6 +36,7 @@ jobs:
         run: |
           python3 -I m3/tooling/jdk-naming/test_package_gate.py
           python3 -I m3/tooling/jdk-naming/test_pom_dependents.py
+          python3 -I m3/tooling/jdk-naming/test_move_refs.py
           python3 -I m3/tooling/jdk-naming/package_gate.py check --tree HEAD
       - name: Recipe fixed point on the tree
         run: |

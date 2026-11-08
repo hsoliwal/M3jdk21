@@ -1,0 +1,32 @@
+# MOVE_REFS v1 rules (m3/tooling/jdk-naming/move_refs.py) for the m3/arrays move of #2825 (MOVE_TO_JDK_MODULE v2):
+# the module jdk.m3.arrays is now the bridge descriptor m3/arrays/src/main/java/module-info.java plus the package sources
+# under src/jdk.m3.collections/share/classes/jdk/m3/arrays; the native library builds from make/m3/arrays (sources in
+# src/jdk.m3.collections/share/native/libm3arrays, C tests in test/jdk/jdk/m3/arrays/native).
+# Literals never end in a space (editors strip trailing blanks; a lost blank glued 'arrays-type' in the first run).
+FILES	.github/workflows/*.yml
+FILES	m3/collections/verification/primitive-filtered-sequences-20261017/verify.sh
+FILES	m3/collections/qualification/doops-entryless-verify.sh
+FILES	m3/collections/qualification/full-java-jni-20261018/verify.py
+FILES	m3/eclipse/optional-jmod/build.py
+REPLACE	find m3/arrays/src/main/java	find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays
+REPLACE	cmake -S m3/arrays/src/main/native	cmake -S make/m3/arrays
+REPLACE	'm3/arrays/src/main/java/**'	'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
+REPLACE	'm3/arrays/src/main/native/**'	'src/jdk.m3.collections/share/native/libm3arrays/**'
+REPLACE	'm3/arrays/src/test/**'	'test/jdk/jdk/m3/arrays/**'
+REPLACE	'm3/arrays/src/main/**'	'src/jdk.m3.collections/share/**'
+REPLACE	git diff --exit-code -- m3/arrays/src/main m3/	git diff --exit-code -- src/jdk.m3.collections/share m3/
+REPLACE	            m3/arrays/src/main/java/**	            src/jdk.m3.collections/share/classes/jdk/m3/arrays/**
+REPLACE	            m3/arrays/src/main/native/**	            src/jdk.m3.collections/share/native/libm3arrays/**
+REPLACE	            m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java	            src/jdk.m3.collections/share/classes/jdk/m3/arrays/M3Arrays.java
+REPLACE	            m3/arrays/src/main/**	            src/jdk.m3.collections/share/**
+REPLACE	ARRAYS=m3/arrays/src/main/java	ARRAYS=src/jdk.m3.collections/share/classes
+REPLACE	ROOT / 'm3/arrays/src/main/native'	ROOT / 'make/m3/arrays'
+REPLACE	("jdk.m3.arrays", ROOT / "m3/arrays/src/main/java", None),	("jdk.m3.arrays", ROOT / "src/jdk.m3.collections/share/classes/jdk/m3/arrays", ROOT / "m3/arrays/src/main/java/module-info.java"),
+SPARSE	m3/arrays	src/jdk.m3.collections/share	make/m3/arrays	test/jdk/jdk/m3/arrays
+SPARSE	m3/arrays/**	src/jdk.m3.collections/share/**	make/m3/arrays/**	test/jdk/jdk/m3/arrays/**
+SPARSE	src/jdk.m3.collections/share/classes/jdk/m3/arrays/**	m3/arrays/src/main/java/module-info.java	make/m3/arrays/**
+RESIDUE	m3/arrays/src/main/java
+RESIDUE	m3/arrays/src/main/native
+RESIDUE	m3/arrays/src/test
+KEEP	m3/arrays/src/main/java/module-info.java
+KEEP	find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays

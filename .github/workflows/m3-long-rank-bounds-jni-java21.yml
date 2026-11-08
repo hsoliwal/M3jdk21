@@ -147,7 +147,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           out="$RUNNER_TEMP/m3rank-modules"
           mkdir -p "$out/arrays" "$out/collections"
-          find m3/arrays/src/main/java -type f -name '*.java' | LC_ALL=C sort > "$out/arrays.sources"
+          find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -type f -name '*.java' | LC_ALL=C sort > "$out/arrays.sources"
           find m3/collections/src/main/java -type f -name '*.java' | LC_ALL=C sort > "$out/collections.sources"
           test -s "$out/arrays.sources"
           test -s "$out/collections.sources"

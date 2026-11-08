@@ -28,6 +28,9 @@ jobs:
           sparse-checkout: |
             m3/core
             m3/arrays
+            src/jdk.m3.collections/share
+            make/m3/arrays
+            test/jdk/jdk/m3/arrays
             m3/ast
             m3/collections
             m3/file

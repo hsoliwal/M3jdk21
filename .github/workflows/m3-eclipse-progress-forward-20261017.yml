@@ -77,7 +77,7 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p proof/arrays-classes proof/classes
-          find m3/arrays/src/main/java -name '*.java' | sort > proof/m3-arrays-sources.txt
+          find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > proof/m3-arrays-sources.txt
           test -s proof/m3-arrays-sources.txt
           javac --release 21 -Xlint:all,-module -Werror \
             -d proof/arrays-classes @proof/m3-arrays-sources.txt 2>&1 | tee proof/m3-arrays-compile.txt

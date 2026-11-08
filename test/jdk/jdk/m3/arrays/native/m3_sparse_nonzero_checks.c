@@ -16,7 +16,7 @@ static uint32_t next_random(void) {
 }
 
 int main(void) {
-  int32_t values[4096];
+  int32_t values[4096] = {0};
   size_t checks = 0U;
   for (size_t count = 0U; count <= 4096U; count++) {
     size_t expected = 0U;

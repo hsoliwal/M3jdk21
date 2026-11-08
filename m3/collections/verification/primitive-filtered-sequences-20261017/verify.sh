@@ -8,7 +8,7 @@ arrays="$work/arrays"
 collections="$work/collections"
 mkdir -p "$arrays" "$collections"
 # Build the actual original jdk.m3.arrays module, not a synthetic facade.
-mapfile -d '' array_sources < <(find m3/arrays/src/main/java -type f -name '*.java' -print0 | sort -z)
+mapfile -d '' array_sources < <(find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -type f -name '*.java' -print0 | sort -z)
 if [[ "${#array_sources[@]}" -lt 2 ]]; then
   echo 'missing original jdk.m3.arrays source closure' >&2
   exit 1

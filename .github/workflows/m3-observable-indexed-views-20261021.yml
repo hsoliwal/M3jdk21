@@ -4,7 +4,7 @@ name: M3 observable filtered and sorted indexed views Java21
 on:
   pull_request:
     paths:
-      - 'm3/arrays/src/main/java/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
       - 'm3/collections/src/main/java/**'
       - 'm3/collections/src/main/java/module-info.java'
       - 'm3/collections/src/main/java/jdk/internal/m3/collections/M3ObservableList.java'
@@ -44,7 +44,7 @@ jobs:
           modules="$RUNNER_TEMP/m3-observable/modules"
           mkdir -p "$modules/jdk.m3.arrays"
           mapfile -d '' -t array_sources < <(
-            find m3/arrays/src/main/java -type f -name '*.java' -print0 | sort -z
+            find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -type f -name '*.java' -print0 | sort -z
           )
           test "${#array_sources[@]}" -ge 2
           test -f m3/arrays/src/main/java/module-info.java

@@ -39,7 +39,7 @@ jobs:
           # The real native core requires the IN-PRODUCT jdk.m3.arrays module.
           # Compile source, do not resolve any external third-party runtime JAR.
           mkdir -p "$RUNNER_TEMP/arrays" "$RUNNER_TEMP/classes"
-          find m3/arrays/src/main/java -name '*.java' | sort > "$RUNNER_TEMP/arrays-sources.txt"
+          find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > "$RUNNER_TEMP/arrays-sources.txt"
           test -s "$RUNNER_TEMP/arrays-sources.txt"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -d "$RUNNER_TEMP/arrays" @"$RUNNER_TEMP/arrays-sources.txt"
@@ -70,7 +70,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cmake -S m3/arrays/src/main/native \
+          cmake -S make/m3/arrays \
             -B "$RUNNER_TEMP/m3-native-arrays-build" \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_STANDARD=17
           cmake --build "$RUNNER_TEMP/m3-native-arrays-build" --parallel 2

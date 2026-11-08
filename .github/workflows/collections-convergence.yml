@@ -127,7 +127,7 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f m3/vendor/third_party/pom.xml -pl junit-jupiter-5.10.2 -am -DskipTests install
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
-          cmake -S m3/arrays/src/main/native             -B "$RUNNER_TEMP/m3-arrays-native"             -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_STANDARD=17
+          cmake -S make/m3/arrays             -B "$RUNNER_TEMP/m3-arrays-native"             -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_STANDARD=17
           cmake --build "$RUNNER_TEMP/m3-arrays-native" --parallel 2
           ctest --test-dir "$RUNNER_TEMP/m3-arrays-native" --output-on-failure
           test -s "$RUNNER_TEMP/m3-arrays-native/libm3_arrays.so"
