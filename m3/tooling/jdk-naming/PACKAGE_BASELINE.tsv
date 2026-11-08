@@ -1,0 +1,1126 @@
+ROOT	.m3/openrewrite-recipes	REAL
+ROOT	m3/algorithms	REAL
+ROOT	m3/arrays	REAL
+ROOT	m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner	COPY
+ROOT	m3/ast	REAL
+ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/qualified/ast-hierarchy-20261018/candidate/m3-indexstring	COPY
+ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/qualified/ast-hierarchy-target-20261018/candidate/m3/ast	COPY
+ROOT	m3/ast/recipe-custody/hierarchy-encoding-20261018/sdk-owner	COPY
+ROOT	m3/collections	REAL
+ROOT	m3/collections/gc-interop	REAL
+ROOT	m3/collections/implementations/apache	LOOSE
+ROOT	m3/collections/implementations/apache-abstract-hashed-map	REAL
+ROOT	m3/collections/implementations/apache-array-list-valued-linked-hash-map	REAL
+ROOT	m3/collections/implementations/apache-array-stack	REAL
+ROOT	m3/collections/implementations/apache-case-insensitive-map	REAL
+ROOT	m3/collections/implementations/apache-circular-fifo	REAL
+ROOT	m3/collections/implementations/apache-collection-bag	REAL
+ROOT	m3/collections/implementations/apache-collection-sorted-bag	REAL
+ROOT	m3/collections/implementations/apache-composite-collection	REAL
+ROOT	m3/collections/implementations/apache-composite-map	REAL
+ROOT	m3/collections/implementations/apache-composite-set	REAL
+ROOT	m3/collections/implementations/apache-concurrent-reference-hash-map	REAL
+ROOT	m3/collections/implementations/apache-cursorable-linked-list	REAL
+ROOT	m3/collections/implementations/apache-defaulted-map	REAL
+ROOT	m3/collections/implementations/apache-dual-linked-hash-bidi-map	REAL
+ROOT	m3/collections/implementations/apache-dual-tree-bidi-map	REAL
+ROOT	m3/collections/implementations/apache-fixed-size-list	REAL
+ROOT	m3/collections/implementations/apache-fixed-size-map	REAL
+ROOT	m3/collections/implementations/apache-fixed-size-sorted-map	REAL
+ROOT	m3/collections/implementations/apache-flat3-map	REAL
+ROOT	m3/collections/implementations/apache-growth-list	REAL
+ROOT	m3/collections/implementations/apache-hash-bag	REAL
+ROOT	m3/collections/implementations/apache-hash-multi-set	REAL
+ROOT	m3/collections/implementations/apache-hashed-map	REAL
+ROOT	m3/collections/implementations/apache-indexed-collection	REAL
+ROOT	m3/collections/implementations/apache-lazy-list	REAL
+ROOT	m3/collections/implementations/apache-lazy-map	REAL
+ROOT	m3/collections/implementations/apache-lazy-sorted-map	REAL
+ROOT	m3/collections/implementations/apache-linked-hash-set-valued-linked-hash-map	REAL
+ROOT	m3/collections/implementations/apache-linked-map	REAL
+ROOT	m3/collections/implementations/apache-list-ordered-map	REAL
+ROOT	m3/collections/implementations/apache-list-ordered-set	REAL
+ROOT	m3/collections/implementations/apache-lru-map	REAL
+ROOT	m3/collections/implementations/apache-map-backed-set	REAL
+ROOT	m3/collections/implementations/apache-multi-key-map	REAL
+ROOT	m3/collections/implementations/apache-multi-value-map	REAL
+ROOT	m3/collections/implementations/apache-node-caching-linked-list	REAL
+ROOT	m3/collections/implementations/apache-ordered-properties	REAL
+ROOT	m3/collections/implementations/apache-passive-expiring-map	REAL
+ROOT	m3/collections/implementations/apache-patricia-trie	REAL
+ROOT	m3/collections/implementations/apache-predicated-bag	REAL
+ROOT	m3/collections/implementations/apache-predicated-collection	REAL
+ROOT	m3/collections/implementations/apache-predicated-list	REAL
+ROOT	m3/collections/implementations/apache-predicated-map	REAL
+ROOT	m3/collections/implementations/apache-predicated-multi-set	REAL
+ROOT	m3/collections/implementations/apache-predicated-navigable-set	REAL
+ROOT	m3/collections/implementations/apache-predicated-queue	REAL
+ROOT	m3/collections/implementations/apache-predicated-set	REAL
+ROOT	m3/collections/implementations/apache-predicated-sorted-bag	REAL
+ROOT	m3/collections/implementations/apache-predicated-sorted-map	REAL
+ROOT	m3/collections/implementations/apache-predicated-sorted-set	REAL
+ROOT	m3/collections/implementations/apache-reference-identity-map	REAL
+ROOT	m3/collections/implementations/apache-reference-map	REAL
+ROOT	m3/collections/implementations/apache-set-unique-list	REAL
+ROOT	m3/collections/implementations/apache-singleton-map	REAL
+ROOT	m3/collections/implementations/apache-sorted-properties	REAL
+ROOT	m3/collections/implementations/apache-static-bucket-map	REAL
+ROOT	m3/collections/implementations/apache-synchronized-bag	REAL
+ROOT	m3/collections/implementations/apache-synchronized-collection	REAL
+ROOT	m3/collections/implementations/apache-synchronized-multi-set	REAL
+ROOT	m3/collections/implementations/apache-synchronized-queue	REAL
+ROOT	m3/collections/implementations/apache-synchronized-sorted-bag	REAL
+ROOT	m3/collections/implementations/apache-transformed-bag	REAL
+ROOT	m3/collections/implementations/apache-transformed-collection	REAL
+ROOT	m3/collections/implementations/apache-transformed-list	REAL
+ROOT	m3/collections/implementations/apache-transformed-map	REAL
+ROOT	m3/collections/implementations/apache-transformed-multi-valued-map	REAL
+ROOT	m3/collections/implementations/apache-transformed-navigable-set	REAL
+ROOT	m3/collections/implementations/apache-transformed-queue	REAL
+ROOT	m3/collections/implementations/apache-transformed-set	REAL
+ROOT	m3/collections/implementations/apache-transformed-sorted-bag	REAL
+ROOT	m3/collections/implementations/apache-transformed-sorted-map	REAL
+ROOT	m3/collections/implementations/apache-transformed-sorted-set	REAL
+ROOT	m3/collections/implementations/apache-tree-bag	REAL
+ROOT	m3/collections/implementations/apache-tree-bidi-map	REAL
+ROOT	m3/collections/implementations/apache-tree-list	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-bag	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-bidi-map	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-bounded-collection	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-collection	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-entry-set	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-list	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-map	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-multi-valued-map	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-navigable-set	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-ordered-bidi-map	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-ordered-map	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-queue	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-sorted-bag	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-sorted-bidi-map	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-sorted-map	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-sorted-set	REAL
+ROOT	m3/collections/implementations/apache-unmodifiable-trie	REAL
+ROOT	m3/collections/implementations/commons-collections-4.5.0	REAL
+ROOT	m3/collections/implementations/eclipse-blocks	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections-api	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections-code-generator	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections-code-generator-maven-plugin	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections-forkjoin	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/eclipse-collections-testutils	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/jcstress-tests	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/jmh-tests	REAL
+ROOT	m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/m3/stream-interop	REAL
+ROOT	m3/collections/implementations/evicting-queue	REAL
+ROOT	m3/collections/implementations/guava	LOOSE
+ROOT	m3/collections/implementations/guava-array-list-multimap	REAL
+ROOT	m3/collections/implementations/guava-array-table	REAL
+ROOT	m3/collections/implementations/guava-concurrent-hash-multiset	REAL
+ROOT	m3/collections/implementations/guava-enum-bi-map	REAL
+ROOT	m3/collections/implementations/guava-enum-hash-bi-map	REAL
+ROOT	m3/collections/implementations/guava-enum-multiset	REAL
+ROOT	m3/collections/implementations/guava-evicting-queue	REAL
+ROOT	m3/collections/implementations/guava-hash-based-table	REAL
+ROOT	m3/collections/implementations/guava-hash-multimap	REAL
+ROOT	m3/collections/implementations/guava-hash-multiset	REAL
+ROOT	m3/collections/implementations/guava-immutable-list-multimap	REAL
+ROOT	m3/collections/implementations/guava-immutable-range-map	REAL
+ROOT	m3/collections/implementations/guava-immutable-range-set	REAL
+ROOT	m3/collections/implementations/guava-immutable-set-multimap	REAL
+ROOT	m3/collections/implementations/guava-immutable-sorted-map	REAL
+ROOT	m3/collections/implementations/guava-linked-hash-multimap	REAL
+ROOT	m3/collections/implementations/guava-linked-hash-multiset	REAL
+ROOT	m3/collections/implementations/guava-linked-list-multimap	REAL
+ROOT	m3/collections/implementations/guava-minmax-priority-queue	REAL
+ROOT	m3/collections/implementations/guava-tree-based-table	REAL
+ROOT	m3/collections/implementations/guava-tree-multimap	REAL
+ROOT	m3/collections/implementations/guava-tree-multiset	REAL
+ROOT	m3/collections/implementations/guava-tree-range-set	REAL
+ROOT	m3/collections/implementations/guava-unified	REAL
+ROOT	m3/collections/implementations/jdk-array-blocking-queue	REAL
+ROOT	m3/collections/implementations/jdk-attributes	REAL
+ROOT	m3/collections/implementations/jdk-concurrent-hash-map	REAL
+ROOT	m3/collections/implementations/jdk-concurrent-hash-map-key-set-view	REAL
+ROOT	m3/collections/implementations/jdk-concurrent-linked-deque	REAL
+ROOT	m3/collections/implementations/jdk-concurrent-linked-queue	REAL
+ROOT	m3/collections/implementations/jdk-concurrent-skip-list-map	REAL
+ROOT	m3/collections/implementations/jdk-concurrent-skip-list-set	REAL
+ROOT	m3/collections/implementations/jdk-copy-on-write-array-list	REAL
+ROOT	m3/collections/implementations/jdk-copy-on-write-array-set	REAL
+ROOT	m3/collections/implementations/jdk-delay-queue	REAL
+ROOT	m3/collections/implementations/jdk-enum-map	REAL
+ROOT	m3/collections/implementations/jdk-hashtable	REAL
+ROOT	m3/collections/implementations/jdk-linked-blocking-queue	REAL
+ROOT	m3/collections/implementations/jdk-priority-blocking-queue	REAL
+ROOT	m3/collections/implementations/jdk-properties	REAL
+ROOT	m3/collections/implementations/jdk-stack	REAL
+ROOT	m3/collections/implementations/jdk-synchronous-queue	REAL
+ROOT	m3/collections/implementations/jdk21-package-renamed	LOOSE
+ROOT	m3/collections/implementations/m3-long-object-linked-hash-map	REAL
+ROOT	m3/collections/implementations/spring	LOOSE
+ROOT	m3/collections/implementations/spring-auto-populating-list	REAL
+ROOT	m3/collections/implementations/spring-case-insensitive-map	REAL
+ROOT	m3/collections/implementations/spring-concurrent-reference-hash-map	REAL
+ROOT	m3/collections/implementations/spring-core-6.2.0-collections	LOOSE
+ROOT	m3/collections/implementations/spring-multi-value-map-adapter	REAL
+ROOT	m3/collections/interop	REAL
+ROOT	m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe	COPY
+ROOT	m3/collections/interop/qualification/spring-case-sdk-20261018/engine	COPY
+ROOT	m3/collections/pcollections	REAL
+ROOT	m3/collections/qualification/array-defaults-20261021/evidence/sdk-results/array-defaults-map-20261021/m3/collections	COPY
+ROOT	m3/collections/qualification/array-map-fill-20261031	COPY
+ROOT	m3/collections/qualification/bimap-mainline-20261017/recipe	COPY
+ROOT	m3/collections/qualification/deque-zero-mask-20261018	COPY
+ROOT	m3/collections/qualification/five-library-prepared-rows-20261018/recipe	COPY
+ROOT	m3/collections/qualification/five-provider-count-recovery-20261018/recipe	COPY
+ROOT	m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-arrayification-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-commons-bag-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-counted-sdk-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-entry-facade-cache-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-filtered-navigation-20261018/evidence/recipe/sdk-results/m3/collections	COPY
+ROOT	m3/collections/qualification/m3-filtered-navigation-20261018/recipe/sdk-owner	COPY
+ROOT	m3/collections/qualification/m3-five-fork-prepared-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-five-library-occurrences-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-five-provider-bimaps-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-five-provider-current-census-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-generic-object-list-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-guava-setmultimap-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-int-array-index-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-long-index-path-jni-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-long-index-path-masks-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-long-index-projection-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-long-path-input-budget-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-native-five-provider-core-20261018/recipe	COPY
+ROOT	m3/collections/qualification/m3-native-indexed-table-20261017/recipe-mirror	COPY
+ROOT	m3/collections/qualification/m3-sdk-families-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-sdk-families-20261017/recipe-v3	COPY
+ROOT	m3/collections/qualification/m3-sdk-provider-names-20261017/recipe	COPY
+ROOT	m3/collections/qualification/m3-state-mask-arrays-20261017/recipe	COPY
+ROOT	m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes	COPY
+ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1328	COPY
+ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1330	COPY
+ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1335	COPY
+ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1335/qualification/jdk21-array-only-entry-facades-20261018/recipe	COPY
+ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1342	COPY
+ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1435	COPY
+ROOT	m3/collections/qualification/master-landing-20261028/retained-variants/pr1451	COPY
+ROOT	m3/collections/qualification/sdk-bulk-capture-20261017/recipe	COPY
+ROOT	m3/collections/qualification/sdk-five-owner-repair-20261018/recipe	COPY
+ROOT	m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe	COPY
+ROOT	m3/collections/qualification/view-order-sdk-20261020	COPY
+ROOT	m3/collections/receiving/eclipse-indexed-rb-20261019/source/eclipse-collections	COPY
+ROOT	m3/collections/recipe/order-statistics	COPY
+ROOT	m3/collections/recipes/mask-window-core-20261018	COPY
+ROOT	m3/collections/recipes/native-index-range-20261017	COPY
+ROOT	m3/collections/recipes/native-index-range-20261017/before/m3/collections	COPY
+ROOT	m3/collections/recipes/native-index-range-20261017/src/main/resources/jdk/internal/m3/rewrite/native-index-range-20261017/templates/m3/collections	COPY
+ROOT	m3/collections/recipes/sdk-family-names-20261017	COPY
+ROOT	m3/collections/recipes/sdk-family-names-20261017/before/m3/collections/interop	COPY
+ROOT	m3/collections/recipes/sdk-family-names-20261017/src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017/templates/m3/collections/interop	COPY
+ROOT	m3/collections/recipes/sdk-guava-bimap-20261017	COPY
+ROOT	m3/collections/recipes/sdk-guava-bimap-20261017/before/m3/collections/interop	COPY
+ROOT	m3/collections/runtime	LOOSE
+ROOT	m3/collections/signal-codegen	REAL
+ROOT	m3/compiler/jdk-standard	REAL
+ROOT	m3/compiler/lifetime-slots	REAL
+ROOT	m3/compiler/mat-sortable	REAL
+ROOT	m3/compiler/nullness-facts	REAL
+ROOT	m3/compiler/parent-owned	REAL
+ROOT	m3/compiler/reference-flow	REAL
+ROOT	m3/compiler/source-signals	REAL
+ROOT	m3/compiler/static-use	REAL
+ROOT	m3/compression	REAL
+ROOT	m3/eclipse/core-runtime	REAL
+ROOT	m3/eclipse/filesystem	REAL
+ROOT	m3/eclipse/framework	REAL
+ROOT	m3/eclipse/jdt/receiving/array-nodelist-20261019	COPY
+ROOT	m3/eclipse/jdt/receiving/array-nodelist-20261019/proof	COPY
+ROOT	m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes	COPY
+ROOT	m3/eclipse/optional-jmod	REAL
+ROOT	m3/file	REAL
+ROOT	m3/fs	REAL
+ROOT	m3/indexdb	REAL
+ROOT	m3/intern	REAL
+ROOT	m3/lazyobjects	LOOSE
+ROOT	m3/lexicon/hf-intake	REAL
+ROOT	m3/lexicon/receiver	REAL
+ROOT	m3/llm	REAL
+ROOT	m3/m3-import	REAL
+ROOT	m3/m3-import/intakes/regex-precompute-v7-20261007/evidence/importer-replay-v3/drift-receiver/m3/m3-import	COPY
+ROOT	m3/m3-import/intakes/regex-precompute-v7-20261007/evidence/importer-replay-v3/receiver/m3/m3-import	COPY
+ROOT	m3/m3-import/pure-int-recipe-custody	REAL
+ROOT	m3/migration/original-provider-20261017/sdk	REAL
+ROOT	m3/migration/rx7-codec-cap-20261018/sdk	REAL
+ROOT	m3/mop	LOOSE
+ROOT	m3/native	REAL
+ROOT	m3/nlp	REAL
+ROOT	m3/optane	REAL
+ROOT	m3/ports/capability-runtime	REAL
+ROOT	m3/ports/collections	REAL
+ROOT	m3/ports/compiletime	REAL
+ROOT	m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/sdk-owner	COPY
+ROOT	m3/ports/indexstring	REAL
+ROOT	m3/ports/jfx-viewport	REAL
+ROOT	m3/ports/parallel	REAL
+ROOT	m3/ports/parallel-bulk	REAL
+ROOT	m3/ports/precompute	REAL
+ROOT	m3/ports/regex-cursor	REAL
+ROOT	m3/ports/swing-viewport	REAL
+ROOT	m3/ports/tornadovm-bulk	REAL
+ROOT	m3/ports/vcpu	REAL
+ROOT	m3/qualification/java-base-doclint-20261018/canonical-owner	COPY
+ROOT	m3/qualification/java-base-sparse-mask-20261018/recipe	COPY
+ROOT	m3/qualification/loss-guard-restore-20261106/held/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1294/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1332/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1357/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1357/m3/collections/qualification/convergence-20261018/recipe/sdk-owner	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1366/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1367/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1368/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1368/m3/collections/qualification/m3-long-index-path-jni-20261018/recipe	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1368/m3/collections/qualification/m3-long-path-input-budget-20261018/recipe	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1375/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1426/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1426/m3/collections/qualification/m3-sdk-families-20261017/recipe-v3	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1456/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1463/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1463/m3/eclipse/filesystem	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1463/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1479/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1513/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1513/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1515/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1515/m3/collections/qualification/owner-current-20261019/recipe-custody/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1515/m3/collections/recipes/mask-window-core-20261018/current-20261020	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1515/m3/collections/recipes/mask-window-core-20261018/union-20261020	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1515/m3/collections/recipes/mask-window-core-20261018/union-20261020/before/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/ports/swing-viewport	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/tooling/migration-recipes/viewport-convergence-20261019/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/tooling/migration-recipes/viewport-convergence-20261019/m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/before/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/tooling/migration-recipes/viewport-convergence-20261019/m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/before/m3/ports/swing-viewport	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/tooling/migration-recipes/viewport-convergence-20261019/m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/tooling/migration-recipes/viewport-convergence-20261019/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/templates/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/tooling/migration-recipes/viewport-convergence-20261019/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-convergence-20261019/templates/m3/ports/swing-viewport	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1522/m3/tooling/migration-recipes/viewport-convergence-20261019/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-view-convergence-20261019/templates/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/ast	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/eclipse/connect	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/lexicon/receiver	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/ports/compiletime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/runtime-integration/module-consumers/spring	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1538/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1546/m3/eclipse/jdt/receiving/array-nodelist-20261019	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1546/m3/eclipse/jdt/receiving/array-nodelist-20261019/proof	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1546/m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1546/m3/ports/compiletime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1553/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1559/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1573/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1573/m3/ports/compiletime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1573/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1577/m3/ast	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1577/m3/eclipse/jdt/receiving/array-nodelist-20261019	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1577/m3/eclipse/jdt/receiving/array-nodelist-20261019/proof	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1577/m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1577/m3/ports/compiletime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1581/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1590/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1596/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1597/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1602/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1608/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1608/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1608/m3/ports/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1608/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1611/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1611/m3/tooling/migration-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1614/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/eclipse/core-runtime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/recipes/interop-contracts-20261020/evidence/sdk-execution/qualified-inputs/owner	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/recipes/interop-contracts-20261020/sdk-owner	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/recipes/runtime-convergence-20261020/evidence/sdk-execution/generated/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/recipes/runtime-convergence-20261020/evidence/sdk-execution/generated/m3/eclipse/core-runtime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/recipes/runtime-convergence-20261020/evidence/sdk-execution/generated/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/recipes/runtime-convergence-20261020/sdk-owner	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1619/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1619/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1619/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1619/m3/mop	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1619/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1627/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1631/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1631/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/eclipse/core-runtime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/receiver/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/receiver/m3/eclipse/core-runtime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-001/receiver/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/receiver/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/receiver/m3/eclipse/core-runtime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-002-offline/receiver/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/receiver/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/receiver/m3/eclipse/core-runtime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/sdk-003-workflow-successor-offline/receiver/m3/eclipse/framework	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/target-observations-001/eclipse/eclipse-contract-candidate-02	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/target-observations-001/eclipse/eclipse-contract-donor-01	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/target-observations-001/eclipse/eclipse-current-candidate-03	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-maven4-effective-20261021/canonical/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-maven4-effective-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-maven4-effective-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-maven4-effective-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-maven4-effective-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-maven4-effective-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-maven4-effective-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/receiver/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-nlp-current-receiver-lock-20261021/canonical/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-nlp-current-receiver-lock-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/owner-candidate-001/baseline2779/m3/ports/compiletime	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/m3-nlp-current-receiver-lock-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/swt-current-owner-runtime-closure-20261021/canonical/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/swt-current-owner-runtime-closure-20261021/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/runtime-integration/recipes/swt-current-owner-runtime-closure-20261021/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1637/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1684/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1733/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1733/m3/collections/qualification/jdk21-array-only-entry-facades-20261018/recipe	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1734/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1753/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1755/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1764/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1765/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1766/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1766/m3/collections/interop	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1768/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1769/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1769/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1775/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1780/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1786/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1786/m3/lexicon/receiver	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1788/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1788/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1788/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1791/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1795/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1797/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1808/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1808/m3/collections/interop	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1814/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1814/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1817/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1817/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1823/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1823/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1824/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1824/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1825/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1836/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1841/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1843/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1847/m3/collections/interop	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1851/m3/fs	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1855/m3/collections/interop	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1876/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1881/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1882/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1914/m3/collections/implementations/evicting-queue	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1930/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1934/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1938/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1942/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1945/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1946/m3/tooling/module-packs/parser	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1958/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1964/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1969/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1975/m3/ast	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1975/m3/file	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr1988/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2011/m3/collections/interop	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2107/m3/tooling/module-packs/chrome-llm	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2108/m3/llm	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2115/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2127/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2129/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2131/m3/ports/swing-viewport	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2141/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2145/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2146/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2147/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2149/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2157/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2163/m3/collections	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2163/m3/m3-import/pure-int-recipe-custody	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2214/m3/tooling/jdk-naming/conformance	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/pr2390/m3/lexicon/receiver	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/rename-collision/m3/collections/implementations/apache-hashed-map	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/rename-collision/m3/collections/implementations/apache-linked-map	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/rename-collision/m3/collections/implementations/apache-lru-map	COPY
+ROOT	m3/qualification/master-landing-20261028/retained-variants/superset-31j/m3/tooling/atom-census	COPY
+ROOT	m3/qualification/progress-scope-lint-20261018/canonical-owner	COPY
+ROOT	m3/qualification/retained-twins-core-lanes-20261106/held/m3/collections	COPY
+ROOT	m3/runtime-integration/qualification/bitlane-count-skip-20261019	COPY
+ROOT	m3/runtime-integration/regex-rope-affix-effects/recipe/sdk-owner	COPY
+ROOT	m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/parser-source/rewrite-java-21	COPY
+ROOT	m3/search	REAL
+ROOT	m3/tooling	LOOSE
+ROOT	m3/tooling/a3	REAL
+ROOT	m3/tooling/atom-census	REAL
+ROOT	m3/tooling/atom-jit-gate	REAL
+ROOT	m3/tooling/backport-dag	REAL
+ROOT	m3/tooling/cds-training	LOOSE
+ROOT	m3/tooling/collection-dense-20261019/m3-openrewrite-recipes	LOOSE
+ROOT	m3/tooling/donor-catalogue	LOOSE
+ROOT	m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/before/m3-openrewrite-recipes	COPY
+ROOT	m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/out/m3-openrewrite-recipes	COPY
+ROOT	m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/out/m3-openrewrite-recipes	COPY
+ROOT	m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes	COPY
+ROOT	m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/out/m3/tooling/migration-recipes	COPY
+ROOT	m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes	COPY
+ROOT	m3/tooling/integrated-utilities/recipe	COPY
+ROOT	m3/tooling/jdk-naming/conformance	REAL
+ROOT	m3/tooling/jmod-recipes	REAL
+ROOT	m3/tooling/jmod-recipes/cpu-tools/model-quantize	REAL
+ROOT	m3/tooling/lazy-priority-frontier	LOOSE
+ROOT	m3/tooling/m3-image	REAL
+ROOT	m3/tooling/migration-recipes	REAL
+ROOT	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/epoch-review-v01/input-epoch/guards/m3/tooling/migration-recipes	COPY
+ROOT	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/receiving-input/guards/m3/tooling/migration-recipes	COPY
+ROOT	m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/receiving-input/guards/m3/tooling/migration-recipes	COPY
+ROOT	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/a3	COPY
+ROOT	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/backport-dag	COPY
+ROOT	m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/migration-recipes	COPY
+ROOT	m3/tooling/module-packs/build-support/graal-build-api/generated-sources	LOOSE
+ROOT	m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/build-logic/utils-plugins	LOOSE
+ROOT	m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/common/graalvm-reachability-metadata	LOOSE
+ROOT	m3/tooling/module-packs/build-support/graal-build-api/upstream/native-build-tools/common/utils	LOOSE
+ROOT	m3/tooling/module-packs/build-support/graal-build-api/upstream/openjson	REAL
+ROOT	m3/tooling/module-packs/build-support/gradle-provider	REAL
+ROOT	m3/tooling/module-packs/build-support/native-api/upstream/maven-native-api	REAL
+ROOT	m3/tooling/module-packs/build-support/native-api/upstream/maven-native-components/maven-native-generic-c	REAL
+ROOT	m3/tooling/module-packs/jackson	REAL
+ROOT	m3/tooling/module-packs/jackson/compiler	REAL
+ROOT	m3/tooling/module-packs/jackson/qualification/master-landing-20261028/retained-variants/pr1289	COPY
+ROOT	m3/tooling/module-packs/kernel	REAL
+ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.probe	COPY
+ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.provider	COPY
+ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/custom-spi/opennlp.fixture.spi	COPY
+ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/dependency-probe	COPY
+ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/spatial-core	COPY
+ROOT	m3/tooling/module-packs/nlp-search/current-forks/fixtures/spatial-features	COPY
+ROOT	m3/tooling/module-packs/nlp-search/frontend	REAL
+ROOT	m3/tooling/module-packs/nlp-search/m3-bridge	REAL
+ROOT	m3/tooling/module-packs/parser	REAL
+ROOT	m3/tooling/module-packs/parser-openrewrite	LOOSE
+ROOT	m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/m3-openrewrite-recipes	COPY
+ROOT	m3/tooling/module-packs/recipes	COPY
+ROOT	m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes	LOOSE
+ROOT	m3/tooling/recipe-agent-api	REAL
+ROOT	m3/tooling/region-foundation-repair	REAL
+ROOT	m3/tooling/shared-frontend/openrewrite	REAL
+ROOT	m3/tooling/shared-frontend/openrewrite-tool	REAL
+ROOT	m3/tooling/shared-frontend/recipe-custody/sdk-owner	COPY
+ROOT	m3/tooling/smart-build	REAL
+ROOT	m3/tooling/sort-recipes/m3-java-util-sorts-20261018	REAL
+ROOT	m3/tooling/text-metadata-current-owner/source/m3-mindex/runtime	LOOSE
+ROOT	m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes	LOOSE
+ROOT	m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/recipe-qualification	COPY
+ROOT	m3/tooling/vendor-recipes	REAL
+ROOT	m3/vendor/m3/m3-code-convergence	VENDOR
+ROOT	m3/vendor/m3/m3-indexstring	VENDOR
+ROOT	m3/vendor/m3/m3-mindex/compiler	VENDOR
+ROOT	m3/vendor/m3/m3-mindex/runtime	VENDOR
+ROOT	m3/vendor/m3/m3-native-interop	VENDOR
+ROOT	m3/vendor/m3/m3-openrewrite-recipes	VENDOR
+ROOT	m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes	VENDOR
+ROOT	m3/vendor/third_party-m3/nlp-search/third_party/lucene-core	VENDOR
+ROOT	m3/vendor/third_party-m3/nlp-search/third_party/lucene-queryparser	VENDOR
+ROOT	m3/vendor/third_party-m3/nlp-search/third_party/opennlp-tools	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/HdrHistogram	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/JavaEWAH	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/antlr4-runtime-4.13.2	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/classgraph	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/commonmark	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/commons-codec-1.22.1	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/commons-io-2.18.0	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/commons-lang3-3.17.0	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/commons-net	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/dec	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/fastdoubleparser-1.0.90	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/fastfilter	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/jackson-core-2.19.2	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/jsoup-1.23.2	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/pcollections	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/re2j	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/snakeyaml-2.6	VENDOR
+ROOT	m3/vendor/third_party-m3/relocated/xz	VENDOR
+ROOT	m3/vendor/third_party/HdrHistogram	VENDOR
+ROOT	m3/vendor/third_party/JavaEWAH	VENDOR
+ROOT	m3/vendor/third_party/LatencyUtils	VENDOR
+ROOT	m3/vendor/third_party/agrona	VENDOR
+ROOT	m3/vendor/third_party/annotations	VENDOR
+ROOT	m3/vendor/third_party/antlr4-runtime-4.11.1	VENDOR
+ROOT	m3/vendor/third_party/antlr4-runtime-4.13.2	VENDOR
+ROOT	m3/vendor/third_party/apiguardian-api	VENDOR
+ROOT	m3/vendor/third_party/asm-9.6	VENDOR
+ROOT	m3/vendor/third_party/asm-analysis	VENDOR
+ROOT	m3/vendor/third_party/asm-tree	VENDOR
+ROOT	m3/vendor/third_party/asm-util	VENDOR
+ROOT	m3/vendor/third_party/assertj-core	VENDOR
+ROOT	m3/vendor/third_party/byte-buddy	VENDOR
+ROOT	m3/vendor/third_party/caffeine	VENDOR
+ROOT	m3/vendor/third_party/cglib	VENDOR
+ROOT	m3/vendor/third_party/checker-qual-3.37.0	VENDOR
+ROOT	m3/vendor/third_party/checker-qual-3.55.1	VENDOR
+ROOT	m3/vendor/third_party/classgraph	VENDOR
+ROOT	m3/vendor/third_party/commonmark	VENDOR
+ROOT	m3/vendor/third_party/commons-codec-1.17.1	VENDOR
+ROOT	m3/vendor/third_party/commons-codec-1.22.1	VENDOR
+ROOT	m3/vendor/third_party/commons-compress-1.26.0	VENDOR
+ROOT	m3/vendor/third_party/commons-compress-1.27.1	VENDOR
+ROOT	m3/vendor/third_party/commons-csv	VENDOR
+ROOT	m3/vendor/third_party/commons-io-2.18.0	VENDOR
+ROOT	m3/vendor/third_party/commons-jexl3	VENDOR
+ROOT	m3/vendor/third_party/commons-lang3-3.17.0	VENDOR
+ROOT	m3/vendor/third_party/commons-logging	VENDOR
+ROOT	m3/vendor/third_party/commons-net	VENDOR
+ROOT	m3/vendor/third_party/commons-pool2	VENDOR
+ROOT	m3/vendor/third_party/commons-text	VENDOR
+ROOT	m3/vendor/third_party/dec	VENDOR
+ROOT	m3/vendor/third_party/eclipse-collections	VENDOR
+ROOT	m3/vendor/third_party/eclipse-collections-api	VENDOR
+ROOT	m3/vendor/third_party/error_prone_annotations	VENDOR
+ROOT	m3/vendor/third_party/failureaccess	VENDOR
+ROOT	m3/vendor/third_party/fastdoubleparser-0.9.0	VENDOR
+ROOT	m3/vendor/third_party/fastdoubleparser-1.0.0	VENDOR
+ROOT	m3/vendor/third_party/fastdoubleparser-1.0.90	VENDOR
+ROOT	m3/vendor/third_party/fastfilter	VENDOR
+ROOT	m3/vendor/third_party/gizmo	VENDOR
+ROOT	m3/vendor/third_party/guava	VENDOR
+ROOT	m3/vendor/third_party/j2objc-annotations	VENDOR
+ROOT	m3/vendor/third_party/jackson-annotations-2.19.2	VENDOR
+ROOT	m3/vendor/third_party/jackson-core-2.15.3	VENDOR
+ROOT	m3/vendor/third_party/jackson-core-2.16.1	VENDOR
+ROOT	m3/vendor/third_party/jackson-core-2.19.2	VENDOR
+ROOT	m3/vendor/third_party/jackson-databind-2.15.3	VENDOR
+ROOT	m3/vendor/third_party/jackson-databind-2.16.1	VENDOR
+ROOT	m3/vendor/third_party/jackson-databind-2.19.2	VENDOR
+ROOT	m3/vendor/third_party/jackson-dataformat-csv	VENDOR
+ROOT	m3/vendor/third_party/jackson-dataformat-smile	VENDOR
+ROOT	m3/vendor/third_party/jackson-dataformat-yaml	VENDOR
+ROOT	m3/vendor/third_party/jackson-datatype-jsr310-2.15.3	VENDOR
+ROOT	m3/vendor/third_party/jackson-datatype-jsr310-2.16.1	VENDOR
+ROOT	m3/vendor/third_party/jackson-module-parameter-names	VENDOR
+ROOT	m3/vendor/third_party/jandex	VENDOR
+ROOT	m3/vendor/third_party/java-object-diff	VENDOR
+ROOT	m3/vendor/third_party/jna-5.14.0	VENDOR
+ROOT	m3/vendor/third_party/jna-5.18.1	VENDOR
+ROOT	m3/vendor/third_party/jna-platform	VENDOR
+ROOT	m3/vendor/third_party/jsoup-1.17.2	VENDOR
+ROOT	m3/vendor/third_party/jsoup-1.23.2	VENDOR
+ROOT	m3/vendor/third_party/jspecify-1.0.1	VENDOR
+ROOT	m3/vendor/third_party/jsr305	VENDOR
+ROOT	m3/vendor/third_party/junit-jupiter-api-5.10.2	VENDOR
+ROOT	m3/vendor/third_party/junit-jupiter-engine-5.10.2	VENDOR
+ROOT	m3/vendor/third_party/junit-jupiter-params-5.10.2	VENDOR
+ROOT	m3/vendor/third_party/junit-platform-commons-1.10.2	VENDOR
+ROOT	m3/vendor/third_party/junit-platform-engine-1.10.2	VENDOR
+ROOT	m3/vendor/third_party/junit-platform-launcher-1.10.2	VENDOR
+ROOT	m3/vendor/third_party/lucene-analysis-common	VENDOR
+ROOT	m3/vendor/third_party/lucene-analysis-opennlp	VENDOR
+ROOT	m3/vendor/third_party/lucene-core	VENDOR
+ROOT	m3/vendor/third_party/lucene-queries	VENDOR
+ROOT	m3/vendor/third_party/lucene-queryparser	VENDOR
+ROOT	m3/vendor/third_party/lucene-sandbox	VENDOR
+ROOT	m3/vendor/third_party/lz4-java	VENDOR
+ROOT	m3/vendor/third_party/micrometer-core	VENDOR
+ROOT	m3/vendor/third_party/opennlp-tools	VENDOR
+ROOT	m3/vendor/third_party/opentest4j	VENDOR
+ROOT	m3/vendor/third_party/org.eclipse.jgit	VENDOR
+ROOT	m3/vendor/third_party/org.osgi.core	VENDOR
+ROOT	m3/vendor/third_party/pcollections	VENDOR
+ROOT	m3/vendor/third_party/picocli	VENDOR
+ROOT	m3/vendor/third_party/re2j	VENDOR
+ROOT	m3/vendor/third_party/rewrite-core	VENDOR
+ROOT	m3/vendor/third_party/rewrite-java	VENDOR
+ROOT	m3/vendor/third_party/rewrite-java-21	VENDOR
+ROOT	m3/vendor/third_party/rewrite-test	VENDOR
+ROOT	m3/vendor/third_party/rewrite-xml	VENDOR
+ROOT	m3/vendor/third_party/rewrite-yaml	VENDOR
+ROOT	m3/vendor/third_party/slf4j-api-2.0.12	VENDOR
+ROOT	m3/vendor/third_party/slf4j-simple	VENDOR
+ROOT	m3/vendor/third_party/snakeyaml-2.1	VENDOR
+ROOT	m3/vendor/third_party/snakeyaml-2.2	VENDOR
+ROOT	m3/vendor/third_party/snakeyaml-2.6	VENDOR
+ROOT	m3/vendor/third_party/snakeyaml-engine	VENDOR
+ROOT	m3/vendor/third_party/snappy-java	VENDOR
+ROOT	m3/vendor/third_party/sqlite-jdbc-3.45.1.0	VENDOR
+ROOT	m3/vendor/third_party/sqlite-jdbc-3.51.1.1	VENDOR
+ROOT	m3/vendor/third_party/tomlj-1.1.1	VENDOR
+ROOT	m3/vendor/third_party/tomlj-1.3.0	VENDOR
+ROOT	m3/vendor/third_party/univocity-parsers	VENDOR
+ROOT	m3/vendor/third_party/xz	VENDOR
+ROOT	m3/vendor/third_party/zero-allocation-hashing	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-annotation	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-api	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-benchmarks	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-cublas	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-cudf	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-cudnn	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-cufft	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-curand	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-cusparse	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-cutlass	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-cuvs	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-drivers/cuda	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-drivers/drivers-common	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-drivers/metal	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-drivers/opencl	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-drivers/ptx	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-drivers/spirv	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-examples	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-fuzz	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-matrices	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-runtime	VENDOR
+ROOT	m3/vendor/tornadovm/tornado-unittests	VENDOR
+ROOT	m3/viewport-core	REAL
+ROOT	make/m3/recipes	COPY
+ROOT	src/utils/IdealGraphVisualizer/Bytecodes	REAL
+ROOT	src/utils/IdealGraphVisualizer/ControlFlow	REAL
+ROOT	src/utils/IdealGraphVisualizer/Coordinator	REAL
+ROOT	src/utils/IdealGraphVisualizer/Data	REAL
+ROOT	src/utils/IdealGraphVisualizer/Difference	REAL
+ROOT	src/utils/IdealGraphVisualizer/Filter	REAL
+ROOT	src/utils/IdealGraphVisualizer/FilterWindow	REAL
+ROOT	src/utils/IdealGraphVisualizer/Graph	REAL
+ROOT	src/utils/IdealGraphVisualizer/HierarchicalLayout	REAL
+ROOT	src/utils/IdealGraphVisualizer/Layout	REAL
+ROOT	src/utils/IdealGraphVisualizer/NetworkConnection	REAL
+ROOT	src/utils/IdealGraphVisualizer/SelectionCoordinator	REAL
+ROOT	src/utils/IdealGraphVisualizer/ServerCompiler	REAL
+ROOT	src/utils/IdealGraphVisualizer/Settings	REAL
+ROOT	src/utils/IdealGraphVisualizer/Util	REAL
+ROOT	src/utils/IdealGraphVisualizer/View	REAL
+ROOT	src/utils/LogCompilation	REAL
+PACKAGE	com.github.openjson
+PACKAGE	com.google.common.collect
+PACKAGE	com.sun.hotspot.igv.bytecodes
+PACKAGE	com.sun.hotspot.igv.connection
+PACKAGE	com.sun.hotspot.igv.controlflow
+PACKAGE	com.sun.hotspot.igv.coordinator
+PACKAGE	com.sun.hotspot.igv.coordinator.actions
+PACKAGE	com.sun.hotspot.igv.data
+PACKAGE	com.sun.hotspot.igv.data.serialization
+PACKAGE	com.sun.hotspot.igv.data.services
+PACKAGE	com.sun.hotspot.igv.difference
+PACKAGE	com.sun.hotspot.igv.filter
+PACKAGE	com.sun.hotspot.igv.filterwindow
+PACKAGE	com.sun.hotspot.igv.filterwindow.actions
+PACKAGE	com.sun.hotspot.igv.graph
+PACKAGE	com.sun.hotspot.igv.hierarchicallayout
+PACKAGE	com.sun.hotspot.igv.layout
+PACKAGE	com.sun.hotspot.igv.selectioncoordinator
+PACKAGE	com.sun.hotspot.igv.servercompiler
+PACKAGE	com.sun.hotspot.igv.settings
+PACKAGE	com.sun.hotspot.igv.util
+PACKAGE	com.sun.hotspot.igv.view
+PACKAGE	com.sun.hotspot.igv.view.actions
+PACKAGE	com.sun.hotspot.igv.view.widgets
+PACKAGE	com.sun.hotspot.tools.compiler
+PACKAGE	jdk.internal.m3.ast
+PACKAGE	jdk.internal.m3.bootstrap
+PACKAGE	jdk.internal.m3.collections
+PACKAGE	jdk.internal.m3.cpugpu
+PACKAGE	jdk.internal.m3.eclipse
+PACKAGE	jdk.internal.m3.indexstring
+PACKAGE	jdk.internal.m3.indexstring.type
+PACKAGE	jdk.internal.m3.mindex
+PACKAGE	jdk.internal.m3.mindex.db
+PACKAGE	jdk.internal.m3.optane
+PACKAGE	jdk.internal.m3.rewrite
+PACKAGE	jdk.internal.m3.rewrite.sealed
+PACKAGE	jdk.internal.m3.rewrite.semantic
+PACKAGE	jdk.internal.m3.rewrite.sorts
+PACKAGE	jdk.m3.a3
+PACKAGE	jdk.m3.algorithm
+PACKAGE	jdk.m3.arrays
+PACKAGE	jdk.m3.arrays.packed
+PACKAGE	jdk.m3.ast
+PACKAGE	jdk.m3.collections
+PACKAGE	jdk.m3.collections.apache
+PACKAGE	jdk.m3.collections.apache.bag
+PACKAGE	jdk.m3.collections.apache.bidimap
+PACKAGE	jdk.m3.collections.apache.bloomfilter
+PACKAGE	jdk.m3.collections.apache.collection
+PACKAGE	jdk.m3.collections.apache.comparators
+PACKAGE	jdk.m3.collections.apache.functors
+PACKAGE	jdk.m3.collections.apache.iterators
+PACKAGE	jdk.m3.collections.apache.keyvalue
+PACKAGE	jdk.m3.collections.apache.list
+PACKAGE	jdk.m3.collections.apache.map
+PACKAGE	jdk.m3.collections.apache.multimap
+PACKAGE	jdk.m3.collections.apache.multiset
+PACKAGE	jdk.m3.collections.apache.properties
+PACKAGE	jdk.m3.collections.apache.queue
+PACKAGE	jdk.m3.collections.apache.sequence
+PACKAGE	jdk.m3.collections.apache.set
+PACKAGE	jdk.m3.collections.apache.splitmap
+PACKAGE	jdk.m3.collections.apache.trie
+PACKAGE	jdk.m3.collections.apache.trie.analyzer
+PACKAGE	jdk.m3.collections.bits
+PACKAGE	jdk.m3.collections.concurrent
+PACKAGE	jdk.m3.collections.eclipse
+PACKAGE	jdk.m3.collections.eclipse.api
+PACKAGE	jdk.m3.collections.eclipse.api.annotation
+PACKAGE	jdk.m3.collections.eclipse.api.annotation.category
+PACKAGE	jdk.m3.collections.eclipse.api.bag
+PACKAGE	jdk.m3.collections.eclipse.api.bag.sorted
+PACKAGE	jdk.m3.collections.eclipse.api.bimap
+PACKAGE	jdk.m3.collections.eclipse.api.block
+PACKAGE	jdk.m3.collections.eclipse.api.block.comparator
+PACKAGE	jdk.m3.collections.eclipse.api.block.factory
+PACKAGE	jdk.m3.collections.eclipse.api.block.function
+PACKAGE	jdk.m3.collections.eclipse.api.block.predicate
+PACKAGE	jdk.m3.collections.eclipse.api.block.procedure
+PACKAGE	jdk.m3.collections.eclipse.api.collection
+PACKAGE	jdk.m3.collections.eclipse.api.factory
+PACKAGE	jdk.m3.collections.eclipse.api.factory.bag
+PACKAGE	jdk.m3.collections.eclipse.api.factory.bag.sorted
+PACKAGE	jdk.m3.collections.eclipse.api.factory.bag.strategy
+PACKAGE	jdk.m3.collections.eclipse.api.factory.bimap
+PACKAGE	jdk.m3.collections.eclipse.api.factory.list
+PACKAGE	jdk.m3.collections.eclipse.api.factory.map
+PACKAGE	jdk.m3.collections.eclipse.api.factory.map.ordered
+PACKAGE	jdk.m3.collections.eclipse.api.factory.map.sorted
+PACKAGE	jdk.m3.collections.eclipse.api.factory.map.strategy
+PACKAGE	jdk.m3.collections.eclipse.api.factory.set
+PACKAGE	jdk.m3.collections.eclipse.api.factory.set.sorted
+PACKAGE	jdk.m3.collections.eclipse.api.factory.set.strategy
+PACKAGE	jdk.m3.collections.eclipse.api.factory.stack
+PACKAGE	jdk.m3.collections.eclipse.api.list
+PACKAGE	jdk.m3.collections.eclipse.api.map
+PACKAGE	jdk.m3.collections.eclipse.api.map.primitive
+PACKAGE	jdk.m3.collections.eclipse.api.map.sorted
+PACKAGE	jdk.m3.collections.eclipse.api.multimap
+PACKAGE	jdk.m3.collections.eclipse.api.multimap.bag
+PACKAGE	jdk.m3.collections.eclipse.api.multimap.list
+PACKAGE	jdk.m3.collections.eclipse.api.multimap.ordered
+PACKAGE	jdk.m3.collections.eclipse.api.multimap.set
+PACKAGE	jdk.m3.collections.eclipse.api.multimap.sortedbag
+PACKAGE	jdk.m3.collections.eclipse.api.multimap.sortedset
+PACKAGE	jdk.m3.collections.eclipse.api.ordered
+PACKAGE	jdk.m3.collections.eclipse.api.partition
+PACKAGE	jdk.m3.collections.eclipse.api.partition.bag
+PACKAGE	jdk.m3.collections.eclipse.api.partition.bag.sorted
+PACKAGE	jdk.m3.collections.eclipse.api.partition.list
+PACKAGE	jdk.m3.collections.eclipse.api.partition.ordered
+PACKAGE	jdk.m3.collections.eclipse.api.partition.set
+PACKAGE	jdk.m3.collections.eclipse.api.partition.set.sorted
+PACKAGE	jdk.m3.collections.eclipse.api.partition.stack
+PACKAGE	jdk.m3.collections.eclipse.api.set
+PACKAGE	jdk.m3.collections.eclipse.api.set.sorted
+PACKAGE	jdk.m3.collections.eclipse.api.stack
+PACKAGE	jdk.m3.collections.eclipse.api.tuple
+PACKAGE	jdk.m3.collections.eclipse.codegenerator
+PACKAGE	jdk.m3.collections.eclipse.codegenerator.maven
+PACKAGE	jdk.m3.collections.eclipse.codegenerator.model
+PACKAGE	jdk.m3.collections.eclipse.codegenerator.tools
+PACKAGE	jdk.m3.collections.eclipse.impl
+PACKAGE	jdk.m3.collections.eclipse.impl.bag
+PACKAGE	jdk.m3.collections.eclipse.impl.bag.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.bag.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.bag.mutable.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.bag.sorted.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.bag.sorted.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.bag.strategy.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.bimap
+PACKAGE	jdk.m3.collections.eclipse.impl.bimap.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.bimap.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.block.comparator
+PACKAGE	jdk.m3.collections.eclipse.impl.block.factory
+PACKAGE	jdk.m3.collections.eclipse.impl.block.factory.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.block.function
+PACKAGE	jdk.m3.collections.eclipse.impl.block.function.checked
+PACKAGE	jdk.m3.collections.eclipse.impl.block.function.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.block.predicate
+PACKAGE	jdk.m3.collections.eclipse.impl.block.predicate.checked
+PACKAGE	jdk.m3.collections.eclipse.impl.block.predicate.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.block.procedure
+PACKAGE	jdk.m3.collections.eclipse.impl.block.procedure.checked
+PACKAGE	jdk.m3.collections.eclipse.impl.block.procedure.checked.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.block.procedure.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.collection
+PACKAGE	jdk.m3.collections.eclipse.impl.collection.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.collection.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.collector
+PACKAGE	jdk.m3.collections.eclipse.impl.factory
+PACKAGE	jdk.m3.collections.eclipse.impl.forkjoin
+PACKAGE	jdk.m3.collections.eclipse.impl.jmh
+PACKAGE	jdk.m3.collections.eclipse.impl.jmh.domain
+PACKAGE	jdk.m3.collections.eclipse.impl.jmh.list
+PACKAGE	jdk.m3.collections.eclipse.impl.jmh.map
+PACKAGE	jdk.m3.collections.eclipse.impl.jmh.runner
+PACKAGE	jdk.m3.collections.eclipse.impl.jmh.set.sorted
+PACKAGE	jdk.m3.collections.eclipse.impl.lazy
+PACKAGE	jdk.m3.collections.eclipse.impl.lazy.iterator
+PACKAGE	jdk.m3.collections.eclipse.impl.lazy.parallel
+PACKAGE	jdk.m3.collections.eclipse.impl.lazy.parallel.bag
+PACKAGE	jdk.m3.collections.eclipse.impl.lazy.parallel.list
+PACKAGE	jdk.m3.collections.eclipse.impl.lazy.parallel.set
+PACKAGE	jdk.m3.collections.eclipse.impl.lazy.parallel.set.sorted
+PACKAGE	jdk.m3.collections.eclipse.impl.lazy.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.list
+PACKAGE	jdk.m3.collections.eclipse.impl.list.fixed
+PACKAGE	jdk.m3.collections.eclipse.impl.list.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.list.immutable.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.list.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.list.mutable.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.list.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.map
+PACKAGE	jdk.m3.collections.eclipse.impl.map.fixed
+PACKAGE	jdk.m3.collections.eclipse.impl.map.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.map.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.map.mutable.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.map.ordered.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.map.ordered.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.map.sorted.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.map.sorted.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.map.strategy.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.map.strategy.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.bag
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.bag.sorted
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.bag.sorted.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.bag.sorted.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.bag.strategy
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.list
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.set
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.set.sorted
+PACKAGE	jdk.m3.collections.eclipse.impl.multimap.set.strategy
+PACKAGE	jdk.m3.collections.eclipse.impl.parallel
+PACKAGE	jdk.m3.collections.eclipse.impl.partition.bag
+PACKAGE	jdk.m3.collections.eclipse.impl.partition.bag.sorted
+PACKAGE	jdk.m3.collections.eclipse.impl.partition.list
+PACKAGE	jdk.m3.collections.eclipse.impl.partition.set
+PACKAGE	jdk.m3.collections.eclipse.impl.partition.set.sorted
+PACKAGE	jdk.m3.collections.eclipse.impl.partition.set.strategy
+PACKAGE	jdk.m3.collections.eclipse.impl.partition.stack
+PACKAGE	jdk.m3.collections.eclipse.impl.set
+PACKAGE	jdk.m3.collections.eclipse.impl.set.fixed
+PACKAGE	jdk.m3.collections.eclipse.impl.set.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.set.immutable.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.set.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.set.mutable.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.set.sorted.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.set.sorted.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.set.strategy.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.set.strategy.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.stack.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.stack.mutable
+PACKAGE	jdk.m3.collections.eclipse.impl.stream
+PACKAGE	jdk.m3.collections.eclipse.impl.string.immutable
+PACKAGE	jdk.m3.collections.eclipse.impl.test
+PACKAGE	jdk.m3.collections.eclipse.impl.tuple
+PACKAGE	jdk.m3.collections.eclipse.impl.tuple.primitive
+PACKAGE	jdk.m3.collections.eclipse.impl.utility
+PACKAGE	jdk.m3.collections.eclipse.impl.utility.internal
+PACKAGE	jdk.m3.collections.graph
+PACKAGE	jdk.m3.collections.guava
+PACKAGE	jdk.m3.collections.id
+PACKAGE	jdk.m3.collections.interop
+PACKAGE	jdk.m3.collections.jdk
+PACKAGE	jdk.m3.collections.jdk.util
+PACKAGE	jdk.m3.collections.jdk.util.concurrent
+PACKAGE	jdk.m3.collections.jdk.util.jar
+PACKAGE	jdk.m3.collections.packed
+PACKAGE	jdk.m3.collections.queue
+PACKAGE	jdk.m3.collections.range
+PACKAGE	jdk.m3.collections.runtime
+PACKAGE	jdk.m3.collections.sketch
+PACKAGE	jdk.m3.collections.sortable
+PACKAGE	jdk.m3.collections.spring
+PACKAGE	jdk.m3.collections.text
+PACKAGE	jdk.m3.collections.tooling
+PACKAGE	jdk.m3.compiler.lifetime
+PACKAGE	jdk.m3.compiler.matsortable
+PACKAGE	jdk.m3.compiler.nullness
+PACKAGE	jdk.m3.compiler.parentowned
+PACKAGE	jdk.m3.compiler.reference
+PACKAGE	jdk.m3.compiler.signals
+PACKAGE	jdk.m3.compiler.standard
+PACKAGE	jdk.m3.compiler.staticuse
+PACKAGE	jdk.m3.compiletime
+PACKAGE	jdk.m3.compiletime.ast
+PACKAGE	jdk.m3.compression
+PACKAGE	jdk.m3.desktop.jfx
+PACKAGE	jdk.m3.eclipse.core
+PACKAGE	jdk.m3.eclipse.core.impl
+PACKAGE	jdk.m3.eclipse.filesystem
+PACKAGE	jdk.m3.eclipse.framework
+PACKAGE	jdk.m3.eclipse.runtime
+PACKAGE	jdk.m3.file
+PACKAGE	jdk.m3.file.json
+PACKAGE	jdk.m3.fs
+PACKAGE	jdk.m3.fs.internal.re2j
+PACKAGE	jdk.m3.fs.vfs
+PACKAGE	jdk.m3.fs.vfs.auth
+PACKAGE	jdk.m3.fs.vfs.cache
+PACKAGE	jdk.m3.fs.vfs.events
+PACKAGE	jdk.m3.fs.vfs.filter
+PACKAGE	jdk.m3.fs.vfs.function
+PACKAGE	jdk.m3.fs.vfs.impl
+PACKAGE	jdk.m3.fs.vfs.operations
+PACKAGE	jdk.m3.fs.vfs.operations.vcs
+PACKAGE	jdk.m3.fs.vfs.provider
+PACKAGE	jdk.m3.fs.vfs.provider.bzip2
+PACKAGE	jdk.m3.fs.vfs.provider.compressed
+PACKAGE	jdk.m3.fs.vfs.provider.ftp
+PACKAGE	jdk.m3.fs.vfs.provider.ftps
+PACKAGE	jdk.m3.fs.vfs.provider.gzip
+PACKAGE	jdk.m3.fs.vfs.provider.http
+PACKAGE	jdk.m3.fs.vfs.provider.http4
+PACKAGE	jdk.m3.fs.vfs.provider.http4s
+PACKAGE	jdk.m3.fs.vfs.provider.http5
+PACKAGE	jdk.m3.fs.vfs.provider.http5s
+PACKAGE	jdk.m3.fs.vfs.provider.https
+PACKAGE	jdk.m3.fs.vfs.provider.jar
+PACKAGE	jdk.m3.fs.vfs.provider.local
+PACKAGE	jdk.m3.fs.vfs.provider.ram
+PACKAGE	jdk.m3.fs.vfs.provider.res
+PACKAGE	jdk.m3.fs.vfs.provider.sftp
+PACKAGE	jdk.m3.fs.vfs.provider.tar
+PACKAGE	jdk.m3.fs.vfs.provider.temp
+PACKAGE	jdk.m3.fs.vfs.provider.url
+PACKAGE	jdk.m3.fs.vfs.provider.zip
+PACKAGE	jdk.m3.fs.vfs.util
+PACKAGE	jdk.m3.gc
+PACKAGE	jdk.m3.importer
+PACKAGE	jdk.m3.indexdb
+PACKAGE	jdk.m3.intern
+PACKAGE	jdk.m3.jackson
+PACKAGE	jdk.m3.jackson.compiler
+PACKAGE	jdk.m3.jni
+PACKAGE	jdk.m3.lexicon
+PACKAGE	jdk.m3.lexicon.hf
+PACKAGE	jdk.m3.llm.chrome
+PACKAGE	jdk.m3.llm.chrome.aix
+PACKAGE	jdk.m3.llm.evidence
+PACKAGE	jdk.m3.llm.extract
+PACKAGE	jdk.m3.llm.internal
+PACKAGE	jdk.m3.llm.internal.json
+PACKAGE	jdk.m3.llm.projection
+PACKAGE	jdk.m3.llm.summary
+PACKAGE	jdk.m3.mop
+PACKAGE	jdk.m3.nlp
+PACKAGE	jdk.m3.nlpsearch
+PACKAGE	jdk.m3.optane
+PACKAGE	jdk.m3.parallel
+PACKAGE	jdk.m3.parallel.bulk
+PACKAGE	jdk.m3.parallel.spi
+PACKAGE	jdk.m3.parser
+PACKAGE	jdk.m3.parser.grammar
+PACKAGE	jdk.m3.parser.openrewrite
+PACKAGE	jdk.m3.pcollections
+PACKAGE	jdk.m3.precompute
+PACKAGE	jdk.m3.regexcursor
+PACKAGE	jdk.m3.residency
+PACKAGE	jdk.m3.rewrite
+PACKAGE	jdk.m3.rewrite.a3
+PACKAGE	jdk.m3.rewrite.backport
+PACKAGE	jdk.m3.rewrite.jmod
+PACKAGE	jdk.m3.rewrite.m3
+PACKAGE	jdk.m3.rewrite.scope
+PACKAGE	jdk.m3.rewrite.semantic
+PACKAGE	jdk.m3.rewrite.vendor
+PACKAGE	jdk.m3.runtime.capability
+PACKAGE	jdk.m3.search
+PACKAGE	jdk.m3.swing.viewport
+PACKAGE	jdk.m3.swing.viewport.engine
+PACKAGE	jdk.m3.swing.viewport.engine.residency
+PACKAGE	jdk.m3.swing.viewport.engine.swap
+PACKAGE	jdk.m3.swing.web
+PACKAGE	jdk.m3.swing.web.adapter
+PACKAGE	jdk.m3.swing.web.model
+PACKAGE	jdk.m3.text.compat
+PACKAGE	jdk.m3.tooling.atomjit
+PACKAGE	jdk.m3.tooling.atoms
+PACKAGE	jdk.m3.tooling.atoms.contract
+PACKAGE	jdk.m3.tooling.atoms.repository
+PACKAGE	jdk.m3.tooling.cds
+PACKAGE	jdk.m3.tooling.dag
+PACKAGE	jdk.m3.tooling.donors
+PACKAGE	jdk.m3.tooling.image
+PACKAGE	jdk.m3.tooling.naming
+PACKAGE	jdk.m3.tooling.priority
+PACKAGE	jdk.m3.tooling.recipe.agent
+PACKAGE	jdk.m3.tooling.smartbuild
+PACKAGE	jdk.m3.tools.model.quantize
+PACKAGE	jdk.m3.tools.modulepack
+PACKAGE	jdk.m3.tornado
+PACKAGE	jdk.m3.util
+PACKAGE	jdk.m3.vcpu
+PACKAGE	jdk.m3.vcpu.internal
+PACKAGE	jdk.m3.viewport
+PACKAGE	org.apache.commons.collections4
+PACKAGE	org.apache.commons.logging
+PACKAGE	org.apache.commons.logging.impl
+PACKAGE	org.codehaus.mojo.natives
+PACKAGE	org.codehaus.mojo.natives.c
+PACKAGE	org.codehaus.mojo.natives.compiler
+PACKAGE	org.codehaus.mojo.natives.javah
+PACKAGE	org.codehaus.mojo.natives.linker
+PACKAGE	org.codehaus.mojo.natives.parser
+PACKAGE	org.codehaus.mojo.natives.util
+PACKAGE	org.eclipse.collections.api.block.function
+PACKAGE	org.eclipse.collections.api.block.predicate
+PACKAGE	org.eclipse.collections.api.block.procedure
+PACKAGE	org.graalvm.build
+PACKAGE	org.graalvm.buildtools
+PACKAGE	org.graalvm.buildtools.agent
+PACKAGE	org.graalvm.buildtools.model.resources
+PACKAGE	org.graalvm.buildtools.utils
+PACKAGE	org.graalvm.reachability
+PACKAGE	org.graalvm.reachability.internal
+PACKAGE	org.graalvm.reachability.internal.index.artifacts
+PACKAGE	org.graalvm.reachability.internal.index.modules
+PACKAGE	org.gradle.internal.m3.ast
+PACKAGE	org.m3.runtime.lazy
+PACKAGE	org.m3jdk.tooling.rewrite
+PACKAGE	org.m3jdk.tools.search
+PACKAGE	org.springframework.lang
+PACKAGE	org.springframework.util
+SPLIT	com.google.common.collect	3
+SPLIT	jdk.internal.m3.rewrite	8
+SPLIT	jdk.m3.collections.apache	94
+SPLIT	jdk.m3.collections.eclipse.impl.map.mutable	2
+SPLIT	jdk.m3.collections.guava	25
+SPLIT	jdk.m3.collections.jdk	18
+SPLIT	jdk.m3.collections.spring	6
+SPLIT	jdk.m3.rewrite.backport	2
+SPLIT	org.apache.commons.collections4	2
+SPLIT	org.m3jdk.tooling.rewrite	2
