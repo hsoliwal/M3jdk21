@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Spliterator;
 import java.util.stream.StreamSupport;
-import jdk.internal.m3.collections.M3LongCompositeViews;
+import jdk.internal.m3.collections.LongCompositeViews;
 
 /** Executable Java 21 oracle: primitive, live, parent-owned nested paths. */
 public final class M3LongCompositePathContract {
@@ -37,10 +37,10 @@ public final class M3LongCompositePathContract {
         }
     }
     private static void deep() {
-        LongCollection nested = M3LongCompositeViews.concat();
+        LongCollection nested = LongCompositeViews.concat();
         final int depth = 16_384;
         for (int i = 0; i < depth; i++) {
-            nested = M3LongCompositeViews.concat(
+            nested = LongCompositeViews.concat(
                     nested, LongArrayList.copyOf(new long[] {i}));
         }
         require(nested.size() == depth && !nested.isEmpty(), "deep composed size");
@@ -58,8 +58,8 @@ public final class M3LongCompositePathContract {
         try { cursor.nextLong(); throw new AssertionError("exhausted next permitted"); }
         catch (NoSuchElementException expected) { checks++; }
 
-        LongCollection empty = M3LongCompositeViews.concat();
-        for (int i = 0; i < depth; i++) empty = M3LongCompositeViews.concat(empty);
+        LongCollection empty = LongCompositeViews.concat();
+        for (int i = 0; i < depth; i++) empty = LongCompositeViews.concat(empty);
         require(empty.size() == 0 && empty.isEmpty(), "nested empty subpaths");
         require(!empty.iterator().hasNext() && empty.toArray().length == 0, "empty cursor/export");
     }
@@ -67,9 +67,9 @@ public final class M3LongCompositePathContract {
         LongArrayList a = LongArrayList.copyOf(new long[] {1, 3});
         LongArrayList b = LongArrayList.copyOf(new long[] {4});
         LongArrayList c = LongArrayList.copyOf(new long[] {4, 8});
-        LongCollection path = M3LongCompositeViews.concat(
-                M3LongCompositeViews.concat(a, M3LongCompositeViews.concat(b)),
-                M3LongCompositeViews.concat(M3LongCompositeViews.concat(), c));
+        LongCollection path = LongCompositeViews.concat(
+                LongCompositeViews.concat(a, LongCompositeViews.concat(b)),
+                LongCompositeViews.concat(LongCompositeViews.concat(), c));
         Spliterator.OfLong unbound = path.longSpliterator();
         require(unbound.trySplit() == null, "no copied split buffer");
         require((unbound.characteristics() & Spliterator.ORDERED) != 0, "ordered");
@@ -92,16 +92,16 @@ public final class M3LongCompositePathContract {
     private static void random() {
         Random r = new Random(0x4d33504154483431L);
         for (int trial = 0; trial < 360; trial++) {
-            LongCollection path = M3LongCompositeViews.concat();
+            LongCollection path = LongCompositeViews.concat();
             long[] expected = new long[0];
             int n = r.nextInt(40);
             for (int i = 0; i < n; i++) {
                 long[] leaf = new long[r.nextInt(4)];
                 for (int j = 0; j < leaf.length; j++) leaf[j] = r.nextInt(11) - 5;
                 LongCollection piece = LongArrayList.copyOf(leaf);
-                path = (i & 1) == 0 ? M3LongCompositeViews.concat(path, piece)
-                        : M3LongCompositeViews.concat(M3LongCompositeViews.concat(path),
-                                M3LongCompositeViews.concat(piece));
+                path = (i & 1) == 0 ? LongCompositeViews.concat(path, piece)
+                        : LongCompositeViews.concat(LongCompositeViews.concat(path),
+                                LongCompositeViews.concat(piece));
                 long[] merged = Arrays.copyOf(expected, expected.length + leaf.length);
                 System.arraycopy(leaf, 0, merged, expected.length, leaf.length);
                 expected = merged;

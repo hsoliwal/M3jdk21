@@ -5,7 +5,7 @@ package jdk.m3.collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3TreeWindowPlan;
+import jdk.internal.m3.collections.TreeWindowPlan;
 
 /** Mixed-overload source-identity contract for the original native Tree window owner. */
 final class M3TreePlanBindingTest {
@@ -25,7 +25,7 @@ final class M3TreePlanBindingTest {
 
     @Test
     void successfulDirectPlanInvalidatesEarlierResidencyCommitBinding() {
-        M3TreeWindowPlan planner = new M3TreeWindowPlan();
+        TreeWindowPlan planner = new TreeWindowPlan();
         planner.plan(roots(0));
         int[] parents = rootParents(), indices = {8, 9}, physical = rootPhysical();
         planner.plan(2, parents, indices, physical);
@@ -40,7 +40,7 @@ final class M3TreePlanBindingTest {
 
     @Test
     void rejectedDirectPlanDoesNotDestroyEarlierValidResidencyBinding() {
-        M3TreeWindowPlan planner = new M3TreeWindowPlan();
+        TreeWindowPlan planner = new TreeWindowPlan();
         planner.plan(roots(2));
         int[] indices = {8, 9};
         assertThrows(IllegalArgumentException.class,
@@ -54,7 +54,7 @@ final class M3TreePlanBindingTest {
 
     @Test
     void residencyAfterDirectPlanRebindsItsOwnCoordinateSnapshot() {
-        M3TreeWindowPlan planner = new M3TreeWindowPlan();
+        TreeWindowPlan planner = new TreeWindowPlan();
         planner.plan(2, rootParents(), new int[] {8, 9}, rootPhysical());
         planner.plan(roots(4));
         planner.commit(new long[] {401, 501});
@@ -65,7 +65,7 @@ final class M3TreePlanBindingTest {
 
     @Test
     void ordinaryRepeatedResidencyPlansKeepCommittedNativeIdentity() {
-        M3TreeWindowPlan planner = new M3TreeWindowPlan();
+        TreeWindowPlan planner = new TreeWindowPlan();
         planner.plan(roots(0));
         planner.commit(new long[] {101, 102});
         planner.plan(roots(1));
@@ -78,7 +78,7 @@ final class M3TreePlanBindingTest {
 
     @Test
     void mixedOverloadsRemainIndependentAcrossRepeatedWindowMoves() {
-        M3TreeWindowPlan planner = new M3TreeWindowPlan();
+        TreeWindowPlan planner = new TreeWindowPlan();
         for (int move = 0; move < 1024; move++) {
             planner.clear();
             planner.plan(roots(move % 25));

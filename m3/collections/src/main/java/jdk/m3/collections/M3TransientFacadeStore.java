@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import jdk.internal.m3.collections.M3LazyElementFlags;
+import jdk.internal.m3.collections.LazyElementFlags;
 
 /**
  * Parent-owned residency for transient object facades over stable logical IDs.
@@ -150,18 +150,18 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         int slot = find(logicalId);
         if (slot >= 0) {
             hits = Math.addExact(hits, 1);
-            flags[slot] = M3LazyElementFlags.add(
+            flags[slot] = LazyElementFlags.add(
                     flags[slot],
-                    (short) (M3LazyElementFlags.MATERIALIZED | M3LazyElementFlags.PINNED));
+                    (short) (LazyElementFlags.MATERIALIZED | LazyElementFlags.PINNED));
             touch(slot);
             return value(slot);
         }
         misses = Math.addExact(misses, 1);
         T facade = create(logicalId);
         slot = insertCreated(logicalId, facade);
-        flags[slot] = M3LazyElementFlags.add(
+        flags[slot] = LazyElementFlags.add(
                 flags[slot],
-                (short) (M3LazyElementFlags.MATERIALIZED | M3LazyElementFlags.PINNED));
+                (short) (LazyElementFlags.MATERIALIZED | LazyElementFlags.PINNED));
         touch(slot);
         return facade;
     }
@@ -194,7 +194,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         T facade = borrowInternal(logicalId, reuseAllowed);
         if (retain) {
             slot = insertCreated(logicalId, facade);
-            flags[slot] = M3LazyElementFlags.add(flags[slot], M3LazyElementFlags.MATERIALIZED);
+            flags[slot] = LazyElementFlags.add(flags[slot], LazyElementFlags.MATERIALIZED);
             touch(slot);
             action.accept(facade);
             return;
@@ -244,7 +244,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         checkOpen();
         checkId(logicalId);
         int slot = find(logicalId);
-        return slot >= 0 && M3LazyElementFlags.has(flags[slot], M3LazyElementFlags.PINNED);
+        return slot >= 0 && LazyElementFlags.has(flags[slot], LazyElementFlags.PINNED);
     }
 
     public synchronized short residencyFlags(long logicalId) {
@@ -345,7 +345,7 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         checkOpen();
         int count = 0;
         for (int i = 0; i < size; i++) {
-            if (M3LazyElementFlags.has(flags[i], M3LazyElementFlags.PINNED)) count++;
+            if (LazyElementFlags.has(flags[i], LazyElementFlags.PINNED)) count++;
         }
         return count;
     }

@@ -4,7 +4,7 @@
 package jdk.m3.collections;
 
 import java.util.Objects;
-import jdk.internal.m3.collections.M3LazyEventBits;
+import jdk.internal.m3.collections.bits.LazyEventBits;
 
 /** Immutable bitmask and granularity policy for lazy operation observation. */
 public record LazyEventPolicy(
@@ -18,8 +18,8 @@ public record LazyEventPolicy(
 
     public LazyEventPolicy {
         Objects.requireNonNull(granularity, "granularity");
-        if ((includeMask & ~M3LazyEventBits.ALL) != 0L
-                || (excludeMask & ~M3LazyEventBits.ALL) != 0L) {
+        if ((includeMask & ~LazyEventBits.ALL) != 0L
+                || (excludeMask & ~LazyEventBits.ALL) != 0L) {
             throw new IllegalArgumentException("event mask contains unknown bits");
         }
     }
@@ -56,7 +56,7 @@ public record LazyEventPolicy(
         if ((effectiveMask() & eventBit) == 0L || !granularity.includes(required)) {
             return false;
         }
-        if (eventBit == M3LazyEventBits.STATE_CHANGED && watchedStateMask != 0) {
+        if (eventBit == LazyEventBits.STATE_CHANGED && watchedStateMask != 0) {
             int changed = Short.toUnsignedInt((short) (oldState ^ newState));
             int watched = Short.toUnsignedInt(watchedStateMask);
             return (changed & watched) != 0;

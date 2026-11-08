@@ -2,11 +2,11 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongRankUpperCountSweepContract;
+import jdk.internal.m3.collections.LongRankUpperCountSweepContract;
 
 /** JDK 21/JNI scalar-vs-batch rank semantics; native availability remains opt-in. */
 final class M3LongRankUpperCountSweepTest {
     @Test void upperBoundsAndCountsRespectChunkAndSignedContracts() {
-        M3LongRankUpperCountSweepContract.contracts(false);
+        LongRankUpperCountSweepContract.contracts(false);
     }
 }

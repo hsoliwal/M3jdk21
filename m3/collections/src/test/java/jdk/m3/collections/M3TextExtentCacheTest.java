@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3ShortLabel;
+import jdk.internal.m3.collections.ShortLabel;
 
 /** Contract and seeded differential tests of {@link M3TextExtentCache}. */
 final class M3TextExtentCacheTest {
@@ -114,7 +114,7 @@ final class M3TextExtentCacheTest {
 	@Test
 	void immediateLabelsAreKeysToo () {
 		M3TextExtentCache cache = new M3TextExtentCache (16);
-		long [] labels = {M3ShortLabel.pack ("Error"), M3ShortLabel.pack ("Warning"), M3ShortLabel.pack ("Error"), 3L};
+		long [] labels = {ShortLabel.pack ("Error"), ShortLabel.pack ("Warning"), ShortLabel.pack ("Error"), 3L};
 		M3TextExtentCache.Measurer measurer = (label, font) -> M3TextExtentCache.pack ((int) (label % 1000), font);
 		int expected = 0;
 		for (long label : labels) expected = Math.max (expected, (int) (label % 1000));

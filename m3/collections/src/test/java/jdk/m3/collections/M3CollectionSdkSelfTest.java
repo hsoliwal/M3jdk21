@@ -13,9 +13,9 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
-import jdk.internal.m3.collections.M3CollectionSdk;
-import jdk.internal.m3.collections.M3CollectionSdkCatalog;
-import jdk.internal.m3.collections.M3CollectionSdkCatalogSelfTest;
+import jdk.internal.m3.collections.CollectionSdk;
+import jdk.internal.m3.collections.CollectionSdkCatalog;
+import jdk.internal.m3.collections.CollectionSdkCatalogSelfTest;
 
 /** Standalone Java 21 SDK naming and existing-wrapper differential oracle. */
 public final class M3CollectionSdkSelfTest {
@@ -36,23 +36,23 @@ public final class M3CollectionSdkSelfTest {
     }
     private static void wrappers() {
         ArrayList<Integer> backing = new ArrayList<>(List.of(5, 2, 3, 4, 1, 6));
-        List<Integer> live = M3CollectionSdk.filteredList(backing, x -> (x & 1) == 0);
+        List<Integer> live = CollectionSdk.filteredList(backing, x -> (x & 1) == 0);
         check(live.equals(List.of(2,4,6)), "live predicate/list bridge");
         backing.add(8);
         check(live.equals(List.of(2,4,6,8)), "live backing visibility");
-        var readonly = M3CollectionSdk.readOnlyFilteredList(backing, x -> x < 5);
+        var readonly = CollectionSdk.readOnlyFilteredList(backing, x -> x < 5);
         expect(UnsupportedOperationException.class, () -> readonly.add(0));
         TreeSet<Integer> ints = new TreeSet<>(List.of(1,2,3,4,5,6));
-        NavigableSet<Integer> filtered = M3CollectionSdk.readOnlyFilteredNavigableSet(ints, x -> (x & 1)==1);
+        NavigableSet<Integer> filtered = CollectionSdk.readOnlyFilteredNavigableSet(ints, x -> (x & 1)==1);
         check(filtered.equals(new TreeSet<>(List.of(1,3,5))), "sorted set values");
         check(filtered.descendingSet().first() == 5, "descending navigation");
         ints.add(7);
         check(filtered.last() == 7, "live navigable set");
         TreeMap<Integer, Integer> map = new TreeMap<>(Map.of(1, 10, 2, 20, 3, 30));
-        NavigableMap<Integer,Integer> view = M3CollectionSdk.readOnlyFilteredNavigableMap(map, (k,v)->v>=20);
+        NavigableMap<Integer,Integer> view = CollectionSdk.readOnlyFilteredNavigableMap(map, (k,v)->v>=20);
         check(view.firstKey() == 2 && view.lastKey() == 3, "sorted map predicate");
         SortedSet<Integer> simpleSorted = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6));
-        SortedSet<Integer> simpleView = M3CollectionSdk.readOnlyFilteredSortedSet(
+        SortedSet<Integer> simpleView = CollectionSdk.readOnlyFilteredSortedSet(
                 simpleSorted, x -> (x & 1) == 0);
         check(simpleView.equals(new TreeSet<>(List.of(2, 4, 6))), "SortedSet visibility");
         check(simpleView.first() == 2 && simpleView.last() == 6, "SortedSet navigation");
@@ -65,7 +65,7 @@ public final class M3CollectionSdkSelfTest {
         SortedMap<Integer, Integer> simpleSortedMap =
                 new TreeMap<>(Map.of(1, 10, 2, 20, 3, 30));
         SortedMap<Integer, Integer> simpleMapView =
-                M3CollectionSdk.readOnlyFilteredSortedMap(simpleSortedMap,
+                CollectionSdk.readOnlyFilteredSortedMap(simpleSortedMap,
                         (k, v) -> k % 2 == 0 && v >= 20);
         check(simpleMapView.size() == 1 && simpleMapView.firstKey() == 2,
                 "SortedMap entry visibility");
@@ -84,7 +84,7 @@ public final class M3CollectionSdkSelfTest {
             int n=r.nextInt(90); long[] source=new long[n];
             for (int i=0;i<n;i++) source[i]=r.nextInt(15)-7;
             AtomicInteger evaluations = new AtomicInteger();
-            var snapshot = M3CollectionSdk.filteredLongSnapshot(source, x->{
+            var snapshot = CollectionSdk.filteredLongSnapshot(source, x->{
                 evaluations.incrementAndGet(); return x >= 0;
             });
             check(evaluations.get()==n, "one predicate call per occurrence");
@@ -93,24 +93,24 @@ public final class M3CollectionSdkSelfTest {
             check(Arrays.equals(snapshot.toArray(),expected), "snapshot isolation");
             snapshot.longStream().sum(); snapshot.size(); snapshot.sortedDescending();
             check(evaluations.get()==n, "no filter reevaluation");
-            var sort=M3CollectionSdk.sortedLongSnapshot(expected);
+            var sort=CollectionSdk.sortedLongSnapshot(expected);
             long[] sorted=expected.clone(); Arrays.sort(sorted);
             check(Arrays.equals(sorted,sort.toArray()), "sorted index semantics");
             if (M3IndexMaskCompactor.nativeAvailable()) {
-                check(Arrays.equals(snapshot.toArray(), M3CollectionSdk.filteredLongSnapshot(
+                check(Arrays.equals(snapshot.toArray(), CollectionSdk.filteredLongSnapshot(
                         expected,x->true,M3IndexMaskCompactor.Backend.NATIVE_REQUIRED).toArray()),
                         "native parity on admitted values");
             } else {
-                expect(UnsatisfiedLinkError.class, () -> M3CollectionSdk.filteredLongSnapshot(
+                expect(UnsatisfiedLinkError.class, () -> CollectionSdk.filteredLongSnapshot(
                         expected,x->true,M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
             }
         }
     }
     public static void main(String[] args) throws Exception {
-        checks += M3CollectionSdkCatalogSelfTest.verify();
+        checks += CollectionSdkCatalogSelfTest.verify();
         wrappers();
         System.out.println("PASS M3CollectionSdkSelfTest checks="+checks
-                +" catalog="+M3CollectionSdkCatalog.size()
+                +" catalog="+CollectionSdkCatalog.size()
                 +" native="+M3IndexMaskCompactor.nativeAvailable());
     }
 }

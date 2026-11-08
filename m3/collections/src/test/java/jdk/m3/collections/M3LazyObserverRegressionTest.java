@@ -11,13 +11,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LazyEventBits;
+import jdk.internal.m3.collections.bits.LazyEventBits;
 
 /** Independent receiver regressions for caller code crossing a lazy slot boundary. */
 final class M3LazyObserverRegressionTest {
     @Test void successfulValueRemainsCoherentWhenCompletionObserverThrows() {
-        for (long bit : new long[] {M3LazyEventBits.AFTER_LOAD, M3LazyEventBits.AFTER_TOUCH,
-                M3LazyEventBits.PROVIDER_END}) {
+        for (long bit : new long[] {LazyEventBits.AFTER_LOAD, LazyEventBits.AFTER_TOUCH,
+                LazyEventBits.PROVIDER_END}) {
             AtomicBoolean first = new AtomicBoolean(true);
             AtomicInteger calls = new AtomicInteger();
             RuntimeException observer = new IllegalArgumentException("observer-" + bit);
@@ -57,13 +57,13 @@ final class M3LazyObserverRegressionTest {
                 return "v" + key;
             }
             @Override public LazyEventPolicy lazyEventPolicy() {
-                return LazyEventPolicy.of(M3LazyEventBits.LOAD_FAILED | M3LazyEventBits.PROVIDER_END,
+                return LazyEventPolicy.of(LazyEventBits.LOAD_FAILED | LazyEventBits.PROVIDER_END,
                         LazyEventGranularity.STATE_TRANSITION);
             }
             @Override public M3LazyEventSink<M3Progress> lazyEventSink() {
                 return (event, slot, oldState, newState, operation, monitor, failure) -> {
                     if (failure == null) { return; }
-                    if (event == M3LazyEventBits.LOAD_FAILED) { throw observerFailure; }
+                    if (event == LazyEventBits.LOAD_FAILED) { throw observerFailure; }
                     throw finalObserverFailure;
                 };
             }
@@ -86,7 +86,7 @@ final class M3LazyObserverRegressionTest {
         var provider = new LazyValueProvider<Integer, String>() {
             @Override public String load(Integer key, M3Progress monitor) { return "v" + key; }
             @Override public LazyEventPolicy lazyEventPolicy() {
-                return LazyEventPolicy.of(M3LazyEventBits.BEFORE_TOUCH, LazyEventGranularity.ELEMENT);
+                return LazyEventPolicy.of(LazyEventBits.BEFORE_TOUCH, LazyEventGranularity.ELEMENT);
             }
             @Override public M3LazyEventSink<M3Progress> lazyEventSink() {
                 return (event, slot, oldState, newState, operation, monitor, failure) -> {
@@ -104,8 +104,8 @@ final class M3LazyObserverRegressionTest {
     }
 
     @Test void rangeAndCachedValueObserversShareMutationGuard() {
-        for (long bit : new long[] {M3LazyEventBits.RANGE_BEGIN, M3LazyEventBits.CACHE_HIT,
-                M3LazyEventBits.PROVIDER_END}) {
+        for (long bit : new long[] {LazyEventBits.RANGE_BEGIN, LazyEventBits.CACHE_HIT,
+                LazyEventBits.PROVIDER_END}) {
             AtomicReference<M3TreeMap<Integer, String>> owner = new AtomicReference<>();
             AtomicBoolean armed = new AtomicBoolean(false);
             var provider = new LazyValueProvider<Integer, String>() {
@@ -121,10 +121,10 @@ final class M3LazyObserverRegressionTest {
             };
             var map = new M3TreeMap<Integer, String>(null, provider); owner.set(map);
             map.defer(1);
-            if (bit == M3LazyEventBits.CACHE_HIT) { assertEquals("v1", map.touch(1, M3Progress.NULL)); }
+            if (bit == LazyEventBits.CACHE_HIT) { assertEquals("v1", map.touch(1, M3Progress.NULL)); }
             armed.set(true);
             assertThrows(IllegalStateException.class, () -> {
-                if (bit == M3LazyEventBits.RANGE_BEGIN) { map.preload(M3Progress.NULL); }
+                if (bit == LazyEventBits.RANGE_BEGIN) { map.preload(M3Progress.NULL); }
                 else { map.touch(1, M3Progress.NULL); }
             });
             assertEquals(List.of(1), new ArrayList<>(map.keySet()));

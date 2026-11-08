@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Comparator;
 import java.util.function.LongPredicate;
-import jdk.internal.m3.collections.M3LongBitmapFilteredSnapshot;
+import jdk.internal.m3.collections.bits.LongBitmapFilteredSnapshot;
 
 /** Exact occurrence/callback contracts and separate, threshold-free resource observations. */
 public final class M3BitmapOccurrenceRefinementProbe {
@@ -35,7 +35,7 @@ public final class M3BitmapOccurrenceRefinementProbe {
     private static long checks;
 
     private record Fixture(M3LongIndexProjection projection, long[] values, int[] physical) { }
-    private record Sample(M3LongBitmapFilteredSnapshot result, long bytes, long cpu, long wall) { }
+    private record Sample(LongBitmapFilteredSnapshot result, long bytes, long cpu, long wall) { }
 
     private M3BitmapOccurrenceRefinementProbe() { }
 
@@ -94,7 +94,7 @@ public final class M3BitmapOccurrenceRefinementProbe {
         return Arrays.copyOf(admitted, count);
     }
 
-    private static void verify(M3LongBitmapFilteredSnapshot actual, long[] values, int[] physical) {
+    private static void verify(LongBitmapFilteredSnapshot actual, long[] values, int[] physical) {
         check(actual.size() == physical.length, "selected size");
         long[] expected = new long[physical.length];
         BitSet mask = new BitSet();
@@ -125,7 +125,7 @@ public final class M3BitmapOccurrenceRefinementProbe {
         int size = fixture.physical.length;
         long[] tape = new long[size];
         int[] calls = {0};
-        M3LongBitmapFilteredSnapshot actual = M3LongBitmapFilteredSnapshot.fromProjection(
+        LongBitmapFilteredSnapshot actual = LongBitmapFilteredSnapshot.fromProjection(
                 fixture.projection, value -> {
                     int ordinal = calls[0]++;
                     check(ordinal < size, "extra predicate call");
@@ -143,7 +143,7 @@ public final class M3BitmapOccurrenceRefinementProbe {
                 Arrays.copyOfRange(physical, start, physical.length));
         check(calls[0] == size, "sorting/slicing/membership must not repeat predicate");
         int[] furtherCalls = {0};
-        M3LongBitmapFilteredSnapshot further = actual.filtered(value -> {
+        LongBitmapFilteredSnapshot further = actual.filtered(value -> {
             int ordinal = furtherCalls[0]++;
             check(ordinal < physical.length && value == fixture.values[physical[ordinal]], "refinement order");
             return accepted(ordinal, "alternate");
@@ -162,7 +162,7 @@ public final class M3BitmapOccurrenceRefinementProbe {
         int[] calls = {0};
         RuntimeException sentinel = new IllegalStateException("predicate-sentinel");
         try {
-            M3LongBitmapFilteredSnapshot.fromProjection(fixture.projection, value -> {
+            LongBitmapFilteredSnapshot.fromProjection(fixture.projection, value -> {
                 int ordinal = calls[0]++;
                 check(value == fixture.values[fixture.physical[ordinal]], "throwing predicate order");
                 if (ordinal == stop) throw sentinel;
@@ -208,9 +208,9 @@ public final class M3BitmapOccurrenceRefinementProbe {
                                  M3IndexMaskCompactor.Backend backend, ThreadMXBean bean, int repetitions) {
         long thread = Thread.currentThread().threadId();
         long bytesBefore = allocated(bean, thread), cpuBefore = cpu(bean), wallBefore = System.nanoTime();
-        M3LongBitmapFilteredSnapshot result = null;
+        LongBitmapFilteredSnapshot result = null;
         for (int i = 0; i < repetitions; i++) {
-            result = M3LongBitmapFilteredSnapshot.fromProjection(fixture.projection, predicate, backend);
+            result = LongBitmapFilteredSnapshot.fromProjection(fixture.projection, predicate, backend);
             resultEscape = result;
         }
         long wall = System.nanoTime() - wallBefore, cpuAfter = cpu(bean), bytesAfter = allocated(bean, thread);
@@ -243,7 +243,7 @@ public final class M3BitmapOccurrenceRefinementProbe {
             verify(first.result, fixture.values, admitted);
             printSample(mask, "cold_first_case", size, 1, backend, first);
             for (int i = 0; i < 64; i++) {
-                resultEscape = M3LongBitmapFilteredSnapshot.fromProjection(fixture.projection, predicate, backend);
+                resultEscape = LongBitmapFilteredSnapshot.fromProjection(fixture.projection, predicate, backend);
             }
             for (int round = 0; round < 3; round++) {
                 Sample measured = sample(fixture, predicate, backend, bean, repetitions);

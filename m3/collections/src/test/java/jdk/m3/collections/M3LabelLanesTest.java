@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3ShortLabel;
+import jdk.internal.m3.collections.ShortLabel;
 
 /**
  * Pool-on versus pool-off differential of {@link M3LabelLanes}: the same seeded
@@ -185,8 +185,8 @@ final class M3LabelLanesTest {
 		for (int r = 0; r < texts.length; r++) lanes.setText (r, 0, texts [r]);
 		assertEquals (4, lanes.immediateCells (0));
 		assertEquals (2, pool.size ());
-		assertTrue (M3ShortLabel.isImmediate (lanes.label (0, 0)));
-		assertEquals (M3ShortLabel.pack ("Error"), lanes.label (0, 0));
+		assertTrue (ShortLabel.isImmediate (lanes.label (0, 0)));
+		assertEquals (ShortLabel.pack ("Error"), lanes.label (0, 0));
 		assertThrows (IllegalArgumentException.class, () -> lanes.labelId (0, 0));
 		assertEquals (pool.find ("a longer label"), lanes.labelId (4, 0));
 		char [] buffer = new char [20];

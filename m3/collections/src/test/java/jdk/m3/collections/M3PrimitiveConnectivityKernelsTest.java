@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3IntOfflineConnectivity;
-import jdk.internal.m3.collections.M3IntUndirectedLowLink;
+import jdk.internal.m3.collections.graph.IntOfflineConnectivity;
+import jdk.internal.m3.collections.graph.IntUndirectedLowLink;
 import jdk.m3.collections.graph.WeightedIntCsrGraph;
 
 class M3PrimitiveConnectivityKernelsTest {
@@ -17,7 +17,7 @@ class M3PrimitiveConnectivityKernelsTest {
             int n = random.nextInt(11), edges = n == 0 ? 0 : random.nextInt(27);
             int[] from = new int[edges], to = new int[edges];
             for (int e = 0; e < edges; e++) { from[e] = random.nextInt(n); to[e] = random.nextInt(n); }
-            M3IntUndirectedLowLink low = new M3IntUndirectedLowLink(WeightedIntCsrGraph.undirected(n, from, to, new long[edges]));
+            IntUndirectedLowLink low = new IntUndirectedLowLink(WeightedIntCsrGraph.undirected(n, from, to, new long[edges]));
             boolean[] removed = new boolean[edges], bridges = new boolean[edges];
             int original = componentCount(labels(n, from, to, removed, -1));
             for (int e = 0; e < edges; e++) {
@@ -36,16 +36,16 @@ class M3PrimitiveConnectivityKernelsTest {
     @Test void lowLinkHandlesDeepChainsAndParallelParentEdges() {
         int n = 120_000; int[] from = new int[n - 1], to = new int[n - 1];
         for (int e = 0; e < from.length; e++) { from[e] = e; to[e] = e + 1; }
-        M3IntUndirectedLowLink chain = new M3IntUndirectedLowLink(WeightedIntCsrGraph.undirected(n, from, to, new long[n - 1]));
+        IntUndirectedLowLink chain = new IntUndirectedLowLink(WeightedIntCsrGraph.undirected(n, from, to, new long[n - 1]));
         assertEquals(n, chain.componentCount());
         for (int e = 0; e < from.length; e++) { assertTrue(chain.isBridge(e)); }
         for (int v = 0; v < n; v++) { assertEquals(v > 0 && v < n - 1, chain.isArticulation(v)); }
-        M3IntUndirectedLowLink parallel = new M3IntUndirectedLowLink(WeightedIntCsrGraph.undirected(3,
+        IntUndirectedLowLink parallel = new IntUndirectedLowLink(WeightedIntCsrGraph.undirected(3,
                 new int[]{0, 0, 1, 1}, new int[]{1, 1, 2, 1}, new long[4]));
         assertFalse(parallel.isBridge(0)); assertFalse(parallel.isBridge(1));
         assertTrue(parallel.isBridge(2)); assertFalse(parallel.isBridge(3));
         assertTrue(parallel.isArticulation(1)); assertEquals(2, parallel.componentCount());
-        assertThrows(IllegalArgumentException.class, () -> new M3IntUndirectedLowLink(WeightedIntCsrGraph.directed(0, new int[0], new int[0], new long[0])));
+        assertThrows(IllegalArgumentException.class, () -> new IntUndirectedLowLink(WeightedIntCsrGraph.directed(0, new int[0], new int[0], new long[0])));
     }
 
     @Test void offlineConnectivityMatchesFreshGraphAtEveryQueryTime() {
@@ -57,8 +57,8 @@ class M3PrimitiveConnectivityKernelsTest {
                 from[e] = random.nextInt(n); to[e] = random.nextInt(n);
                 start[e] = random.nextInt(times + 1); end[e] = start[e] + random.nextInt(times - start[e] + 1);
             }
-            M3IntOfflineConnectivity schedule = new M3IntOfflineConnectivity(n, times, from, to, start, end);
-            M3IntOfflineConnectivity.Workspace workspace = schedule.workspace(50);
+            IntOfflineConnectivity schedule = new IntOfflineConnectivity(n, times, from, to, start, end);
+            IntOfflineConnectivity.Workspace workspace = schedule.workspace(50);
             for (int batch = 0; batch < 4; batch++) {
                 int q = random.nextInt(51); int[] queryTimes = new int[q], queryFrom = new int[q], queryTo = new int[q];
                 boolean[] actual = new boolean[q + 1]; Arrays.fill(actual, true);
@@ -77,7 +77,7 @@ class M3PrimitiveConnectivityKernelsTest {
 
     @Test void offlineHalfOpenLifetimesSnapshotAndMultipleWorkspaces() {
         int[] from = {0, 1, 0, 0}, to = {1, 2, 1, 0}, start = {0, 1, 2, 0}, end = {2, 3, 4, 4};
-        M3IntOfflineConnectivity schedule = new M3IntOfflineConnectivity(3, 4, from, to, start, end);
+        IntOfflineConnectivity schedule = new IntOfflineConnectivity(3, 4, from, to, start, end);
         Arrays.fill(from, 2); Arrays.fill(to, 2); Arrays.fill(start, 4); Arrays.fill(end, 4);
         int[] times = {3, 0, 2, 1, 2, 0}, a = {0, 0, 0, 0, 1, 2}, b = {2, 2, 2, 2, 1, 2};
         boolean[] output = new boolean[6], expected = {false, false, true, true, true, true};
@@ -91,7 +91,7 @@ class M3PrimitiveConnectivityKernelsTest {
     }
 
     @Test void offlineRejectsEntireInvalidBatchBeforeWritingAnyAnswer() {
-        M3IntOfflineConnectivity schedule = new M3IntOfflineConnectivity(2, 3, new int[]{0}, new int[]{1}, new int[]{0}, new int[]{1});
+        IntOfflineConnectivity schedule = new IntOfflineConnectivity(2, 3, new int[]{0}, new int[]{1}, new int[]{0}, new int[]{1});
         var workspace = schedule.workspace(2); boolean[] output = {false, true};
         assertThrows(IndexOutOfBoundsException.class, () -> workspace.solve(new int[]{0, 3}, new int[]{0, 0}, new int[]{1, 1}, output));
         assertArrayEquals(new boolean[]{false, true}, output);
@@ -103,15 +103,15 @@ class M3PrimitiveConnectivityKernelsTest {
         workspace.solve(new int[]{0, 1}, new int[]{0, 0}, new int[]{1, 1}, output);
         assertArrayEquals(new boolean[]{true, false}, output);
         assertThrows(IllegalArgumentException.class, () -> schedule.workspace(-1));
-        assertThrows(IndexOutOfBoundsException.class, () -> new M3IntOfflineConnectivity(2, 3, new int[]{0}, new int[]{1}, new int[]{2}, new int[]{1}));
-        assertThrows(IllegalArgumentException.class, () -> new M3IntOfflineConnectivity(0, Integer.MAX_VALUE, new int[0], new int[0], new int[0], new int[0]));
+        assertThrows(IndexOutOfBoundsException.class, () -> new IntOfflineConnectivity(2, 3, new int[]{0}, new int[]{1}, new int[]{2}, new int[]{1}));
+        assertThrows(IllegalArgumentException.class, () -> new IntOfflineConnectivity(0, Integer.MAX_VALUE, new int[0], new int[0], new int[0], new int[0]));
     }
 
     @Test void offlineAllowsEmptyHorizonAndIgnoredEmptyLifetimes() {
-        M3IntOfflineConnectivity empty = new M3IntOfflineConnectivity(0, 0, new int[0], new int[0], new int[0], new int[0]);
+        IntOfflineConnectivity empty = new IntOfflineConnectivity(0, 0, new int[0], new int[0], new int[0], new int[0]);
         empty.workspace(0).solve(new int[0], new int[0], new int[0], new boolean[0]);
         assertEquals(0, empty.scheduledOccurrences());
-        M3IntOfflineConnectivity zero = new M3IntOfflineConnectivity(1, 0, new int[]{0}, new int[]{0}, new int[]{0}, new int[]{0});
+        IntOfflineConnectivity zero = new IntOfflineConnectivity(1, 0, new int[]{0}, new int[]{0}, new int[]{0}, new int[]{0});
         assertEquals(0, zero.scheduledOccurrences());
         assertThrows(IndexOutOfBoundsException.class, () -> zero.workspace(1).solve(new int[]{0}, new int[]{0}, new int[]{0}, new boolean[1]));
     }

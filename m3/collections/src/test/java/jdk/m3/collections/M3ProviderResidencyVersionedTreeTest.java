@@ -5,26 +5,26 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3BoundedProviderBackedPrimitiveRows;
-import jdk.internal.m3.collections.M3FuzzyProviderCollectionFactory;
-import jdk.internal.m3.collections.M3PagedPrimitiveTreeProvider;
-import jdk.internal.m3.collections.M3PrimitiveRowProvider;
-import jdk.internal.m3.collections.M3ProviderCollectionRequirements;
-import jdk.internal.m3.collections.M3ProviderLoadException;
-import jdk.internal.m3.collections.M3VersionedCursorPagedPrimitiveTreeProvider;
-import jdk.internal.m3.collections.M3VersionedProviderBackedPrimitiveLongTree;
+import jdk.internal.m3.collections.BoundedProviderBackedPrimitiveRows;
+import jdk.internal.m3.collections.FuzzyProviderCollectionFactory;
+import jdk.internal.m3.collections.PagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.PrimitiveRowProvider;
+import jdk.internal.m3.collections.ProviderCollectionRequirements;
+import jdk.internal.m3.collections.ProviderLoadException;
+import jdk.internal.m3.collections.VersionedCursorPagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.VersionedProviderBackedPrimitiveLongTree;
 
 class M3ProviderResidencyVersionedTreeTest {
 
     @Test
     void boundedRowsUseClockWithoutPerRowCacheNodes() {
         int[] loads = {0};
-        M3PrimitiveRowProvider provider = (rowId, target) -> {
+        PrimitiveRowProvider provider = (rowId, target) -> {
             loads[0]++;
             target[0] = rowId * 10L;
         };
-        M3BoundedProviderBackedPrimitiveRows rows =
-                new M3BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
+        BoundedProviderBackedPrimitiveRows rows =
+                new BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
 
         assertEquals(10L, rows.getBits(0, 1L));
         assertEquals(20L, rows.getBits(0, 2L));
@@ -39,7 +39,7 @@ class M3ProviderResidencyVersionedTreeTest {
         assertEquals(4L, rows.stats().touches());
         assertEquals(1L, rows.stats().cacheHits());
 
-        for (var field : M3BoundedProviderBackedPrimitiveRows.class.getDeclaredFields()) {
+        for (var field : BoundedProviderBackedPrimitiveRows.class.getDeclaredFields()) {
             assertFalse(field.getType().getSimpleName().contains("Node"), field.toString());
             assertFalse(java.util.Map.class.isAssignableFrom(field.getType()), field.toString());
             assertFalse(java.util.Collection.class.isAssignableFrom(field.getType()), field.toString());
@@ -48,15 +48,15 @@ class M3ProviderResidencyVersionedTreeTest {
 
     @Test
     void failedMissDoesNotEvictAResidentRow() {
-        M3PrimitiveRowProvider provider = (rowId, target) -> {
+        PrimitiveRowProvider provider = (rowId, target) -> {
             if (rowId == 2L) throw new IllegalStateException("boom");
             target[0] = rowId;
         };
-        M3BoundedProviderBackedPrimitiveRows rows =
-                new M3BoundedProviderBackedPrimitiveRows(1, provider, PrimitiveKind.LONG);
+        BoundedProviderBackedPrimitiveRows rows =
+                new BoundedProviderBackedPrimitiveRows(1, provider, PrimitiveKind.LONG);
 
         assertEquals(1L, rows.getBits(0, 1L));
-        assertThrows(M3ProviderLoadException.class, () -> rows.getBits(0, 2L));
+        assertThrows(ProviderLoadException.class, () -> rows.getBits(0, 2L));
 
         assertTrue(rows.isMaterialized(1L));
         assertTrue(rows.isResident(1L));
@@ -67,9 +67,9 @@ class M3ProviderResidencyVersionedTreeTest {
 
     @Test
     void allPinnedResidentsRejectAdmissionAndRestoreBound() {
-        M3PrimitiveRowProvider provider = (rowId, target) -> target[0] = rowId;
-        M3BoundedProviderBackedPrimitiveRows rows =
-                new M3BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
+        PrimitiveRowProvider provider = (rowId, target) -> target[0] = rowId;
+        BoundedProviderBackedPrimitiveRows rows =
+                new BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
 
         rows.getBits(0, 1L);
         rows.getBits(0, 2L);
@@ -89,15 +89,15 @@ class M3ProviderResidencyVersionedTreeTest {
     @Test
     void explicitInvalidateAndRetryKeepResidencyLedgerCoherent() {
         int[] attempt = {0};
-        M3PrimitiveRowProvider provider = (rowId, target) -> {
+        PrimitiveRowProvider provider = (rowId, target) -> {
             attempt[0]++;
             if (rowId == 7L && attempt[0] == 1) throw new IllegalStateException("retry");
             target[0] = 77L;
         };
-        M3BoundedProviderBackedPrimitiveRows rows =
-                new M3BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
+        BoundedProviderBackedPrimitiveRows rows =
+                new BoundedProviderBackedPrimitiveRows(2, provider, PrimitiveKind.LONG);
 
-        assertThrows(M3ProviderLoadException.class, () -> rows.touch(7L));
+        assertThrows(ProviderLoadException.class, () -> rows.touch(7L));
         assertTrue(rows.retry(7L));
         assertTrue(rows.isResident(7L));
         assertEquals(77L, rows.getBits(0, 7L));
@@ -111,8 +111,8 @@ class M3ProviderResidencyVersionedTreeTest {
     @Test
     void versionedTreePinsOneVersionAcrossAllPagesUntilInvalidation() {
         VersionedModelProvider provider = new VersionedModelProvider();
-        M3VersionedProviderBackedPrimitiveLongTree tree =
-                new M3VersionedProviderBackedPrimitiveLongTree(
+        VersionedProviderBackedPrimitiveLongTree tree =
+                new VersionedProviderBackedPrimitiveLongTree(
                         13, 8, 12,
                         provider, 2, PrimitiveKind.LONG);
 
@@ -140,11 +140,11 @@ class M3ProviderResidencyVersionedTreeTest {
 
     @Test
     void fuzzyProviderFactorySelectsOnlyExactProviderSemantics() {
-        M3FuzzyProviderCollectionFactory factory = M3FuzzyProviderCollectionFactory.standard();
+        FuzzyProviderCollectionFactory factory = FuzzyProviderCollectionFactory.standard();
 
-        M3ProviderCollectionRequirements boundedRows =
-                M3ProviderCollectionRequirements.builder(
-                                M3ProviderCollectionRequirements.Purpose.ROWS,
+        ProviderCollectionRequirements boundedRows =
+                ProviderCollectionRequirements.builder(
+                                ProviderCollectionRequirements.Purpose.ROWS,
                                 PrimitiveKind.LONG,
                                 PrimitiveKind.INT)
                         .maximumLogicalId(1_000_000L)
@@ -152,47 +152,47 @@ class M3ProviderResidencyVersionedTreeTest {
                         .build();
         assertEquals("bounded-provider-rows", factory.plan(boundedRows).candidateId());
         assertInstanceOf(
-                M3BoundedProviderBackedPrimitiveRows.class,
+                BoundedProviderBackedPrimitiveRows.class,
                 factory.createRows(boundedRows, (rowId, target) -> target[0] = rowId));
 
-        M3ProviderCollectionRequirements offsetTree =
-                M3ProviderCollectionRequirements.builder(
-                                M3ProviderCollectionRequirements.Purpose.TREE,
+        ProviderCollectionRequirements offsetTree =
+                ProviderCollectionRequirements.builder(
+                                ProviderCollectionRequirements.Purpose.TREE,
                                 PrimitiveKind.LONG)
                         .maximumLogicalId(1_000_000L)
-                        .paging(M3ProviderCollectionRequirements.Paging.OFFSET)
+                        .paging(ProviderCollectionRequirements.Paging.OFFSET)
                         .pageSize(64)
                         .build();
         assertEquals("offset-provider-tree", factory.plan(offsetTree).candidateId());
 
-        M3ProviderCollectionRequirements versionedTree =
-                M3ProviderCollectionRequirements.builder(
-                                M3ProviderCollectionRequirements.Purpose.TREE,
+        ProviderCollectionRequirements versionedTree =
+                ProviderCollectionRequirements.builder(
+                                ProviderCollectionRequirements.Purpose.TREE,
                                 PrimitiveKind.LONG)
                         .maximumLogicalId(6_000_000_000L)
-                        .paging(M3ProviderCollectionRequirements.Paging.VERSIONED_CURSOR)
+                        .paging(ProviderCollectionRequirements.Paging.VERSIONED_CURSOR)
                         .pageSize(128)
                         .build();
         assertEquals(
-                M3ProviderCollectionRequirements.IdWidth.LONG64,
+                ProviderCollectionRequirements.IdWidth.LONG64,
                 factory.plan(versionedTree).resolvedIdWidth());
         assertEquals(
                 "versioned-cursor-provider-long-tree",
                 factory.plan(versionedTree).candidateId());
 
-        M3ProviderCollectionRequirements impossible =
-                M3ProviderCollectionRequirements.builder(
-                                M3ProviderCollectionRequirements.Purpose.TREE,
+        ProviderCollectionRequirements impossible =
+                ProviderCollectionRequirements.builder(
+                                ProviderCollectionRequirements.Purpose.TREE,
                                 PrimitiveKind.LONG)
                         .maximumLogicalId(6_000_000_000L)
-                        .paging(M3ProviderCollectionRequirements.Paging.OFFSET)
+                        .paging(ProviderCollectionRequirements.Paging.OFFSET)
                         .pageSize(10)
                         .build();
         assertThrows(IllegalArgumentException.class, () -> factory.plan(impossible));
     }
 
     private static final class VersionedModelProvider
-            implements M3VersionedCursorPagedPrimitiveTreeProvider {
+            implements VersionedCursorPagedPrimitiveTreeProvider {
         long currentVersion = 1L;
 
         @Override
@@ -201,10 +201,10 @@ class M3ProviderResidencyVersionedTreeTest {
         }
 
         @Override
-        public M3PagedPrimitiveTreeProvider.ChildHint childHint(long nodeId) {
+        public PagedPrimitiveTreeProvider.ChildHint childHint(long nodeId) {
             return nodeId == 100L
-                    ? M3PagedPrimitiveTreeProvider.ChildHint.SOME
-                    : M3PagedPrimitiveTreeProvider.ChildHint.NONE;
+                    ? PagedPrimitiveTreeProvider.ChildHint.SOME
+                    : PagedPrimitiveTreeProvider.ChildHint.NONE;
         }
 
         @Override

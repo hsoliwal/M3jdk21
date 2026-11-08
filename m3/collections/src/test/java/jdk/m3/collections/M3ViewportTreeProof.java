@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.List;
-import jdk.internal.m3.collections.M3RowTree;
-import jdk.internal.m3.collections.M3RowTreeItem;
-import jdk.internal.m3.collections.M3WindowPlan;
+import jdk.internal.m3.collections.RowTree;
+import jdk.internal.m3.collections.RowTreeItem;
+import jdk.internal.m3.collections.WindowPlan;
 
 /** Actual folded viewport owners + existing mask selector; fixtures are caller-owned items. */
 public final class M3ViewportTreeProof {
@@ -31,7 +31,7 @@ public final class M3ViewportTreeProof {
         digest = digest * 31 + actual;
     }
     private static void check(boolean value) { equal(1, value ? 1 : 0); }
-    private static final class Row implements M3RowTreeItem {
+    private static final class Row implements RowTreeItem {
         final int id;
         int height, slot = -1, last = -1, reads, entered, left;
         boolean visible;
@@ -44,7 +44,7 @@ public final class M3ViewportTreeProof {
         @Override public int getHeight() { reads++; return height; }
     }
     private static int extent(Row row) { return row.visible ? row.height+1 : 0; }
-    private static void verify(M3RowTree tree, List<Row> rows) {
+    private static void verify(RowTree tree, List<Row> rows) {
         long total=0; int visible=0;
         equal(rows.size(),tree.size());
         for (int i=0;i<rows.size();i++) {
@@ -69,13 +69,13 @@ public final class M3ViewportTreeProof {
         }
         int after=0;for(Row row:rows)after+=row.reads;equal(reads,after);
         if(!rows.isEmpty()) {
-            List<M3RowTreeItem> selected=List.of(rows.get(rows.size()-1),rows.get(0),rows.get(0));
+            List<RowTreeItem> selected=List.of(rows.get(rows.size()-1),rows.get(0),rows.get(0));
             check(Arrays.equals(new int[]{rows.size()-1,0,0},tree.rowsOf(selected)));
         }
     }
     private static void geometry() {
         for(int size:new int[]{0,1,2,3,7,31,64,129})for(int profile=0;profile<5;profile++) {
-            var tree=new M3RowTree();var rows=new ArrayList<Row>();
+            var tree=new RowTree();var rows=new ArrayList<Row>();
             for(int i=0;i<size;i++) {
                 Row row=new Row(i,i%7==0?Integer.MAX_VALUE-1:i%53,profile!=0&&(profile==1||i%profile!=0));
                 int at=(i*17)%(rows.size()+1);rows.add(at,row);tree.add(at,row);
@@ -106,11 +106,11 @@ public final class M3ViewportTreeProof {
     private static void unusualHeights() {
         // A blanket offset>=sum shortcut changes this legacy answer: total is five,
         // but the first row covers offset five before a later negative row weight.
-        var trap=new M3RowTree();trap.add(new Row(0,9,true));trap.add(new Row(1,-21,true));trap.add(new Row(2,14,true));
+        var trap=new RowTree();trap.add(new Row(0,9,true));trap.add(new Row(1,-21,true));trap.add(new Row(2,14,true));
         equal(5,trap.totalExtent());equal(0,trap.rankAtExtent(5));
         int[] heights={-21,-1,0,9,14,Integer.MAX_VALUE,Integer.MAX_VALUE-1};
         for(int a:heights)for(int b:heights)for(int c:heights)for(int visibility=0;visibility<8;visibility++) {
-            var tree=new M3RowTree();int[] h={a,b,c};
+            var tree=new RowTree();int[] h={a,b,c};
             for(int i=0;i<3;i++)tree.add(new Row(i,h[i],(visibility&(1<<i))!=0));
             long total=tree.totalExtent();
             // Compare the emitted fingerprint across original and candidate, rather
@@ -130,9 +130,9 @@ public final class M3ViewportTreeProof {
             }
             Arrays.sort(ordered);int[] order=new int[count];
             for(int i=0;i<count;i++)order[i]=(int)ordered[i];
-            var tree=new M3RowTree();var model=new ArrayList<Row>();
+            var tree=new RowTree();var model=new ArrayList<Row>();
             for(int i:order){tree.add(owners[i]);model.add(owners[i]);}
-            var plan=new M3WindowPlan();
+            var plan=new WindowPlan();
             for(int required:new int[]{0,1,3,128,255})for(int excluded:new int[]{0,2,128}) {
                 byte[] states=new byte[count];
                 for(int i=0;i<count;i++)states[i]=(byte)(owners[order[i]].id*37+11);

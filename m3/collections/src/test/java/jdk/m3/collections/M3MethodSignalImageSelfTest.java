@@ -11,7 +11,7 @@ import java.util.HexFormat;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TreeMap;
-import jdk.internal.m3.collections.M3MethodSignalImage;
+import jdk.internal.m3.collections.MethodSignalImage;
 
 /** Independent deterministic method-signal schema, graph and refusal oracle. */
 public final class M3MethodSignalImageSelfTest {
@@ -27,7 +27,7 @@ public final class M3MethodSignalImageSelfTest {
         if (arguments.length > 1) throw new IllegalArgumentException("at most one compiler sidecar");
         if (arguments.length == 1) {
             String file = Files.readString(Path.of(arguments[0]), StandardCharsets.UTF_8);
-            M3MethodSignalImage image = M3MethodSignalImage.parse(file);
+            MethodSignalImage image = MethodSignalImage.parse(file);
             check(image.rowCount() > 0, "real compiler sidecar contains attributed methods");
             check(image.sourceSha256().equals(digest(file.substring(0, file.lastIndexOf("# sha256\t")))),
                     "real compiler sidecar hash binds entire source image");
@@ -50,9 +50,9 @@ public final class M3MethodSignalImageSelfTest {
 
     private static void emptyImageAndCanonicalIdentity() {
         String image = seal(HEADER);
-        var empty = M3MethodSignalImage.parse(image);
+        var empty = MethodSignalImage.parse(image);
         check(empty.rowCount() == 0, "empty compiler universe is valid");
-        check(empty.columns().columnCount() == M3MethodSignalImage.Scalar.values().length,
+        check(empty.columns().columnCount() == MethodSignalImage.Scalar.values().length,
                 "all dimensions retained for empty image");
         check(empty.relationships().edgeCount() == 0, "empty graph");
         check(empty.sourceSha256().equals(digest(HEADER)), "complete source digest");
@@ -79,7 +79,7 @@ public final class M3MethodSignalImageSelfTest {
                 + call(alpha, "call:DIRECT:" + beta, 1)
                 + call(alpha, "reference:DISPATCH_CANDIDATE:p.Other#test():void", 1)
                 + method(beta, second);
-        var image = M3MethodSignalImage.parse(seal(payload));
+        var image = MethodSignalImage.parse(seal(payload));
         check(image.rowCount() == 2, "method universe");
         check(image.methodName(0).equals(alpha) && image.methodName(1).equals(beta),
                 "exact attributed names, not their hashes");
@@ -121,11 +121,11 @@ public final class M3MethodSignalImageSelfTest {
         String method = method(alpha, one);
         String edge = call(alpha, "call:DIRECT:" + beta, 1);
         String valid = seal(HEADER + method + edge);
-        throwsAs(IllegalArgumentException.class, () -> M3MethodSignalImage.parse(
+        throwsAs(IllegalArgumentException.class, () -> MethodSignalImage.parse(
                 valid.replace("DIRECT", "DISPATCH_CANDIDATE")));
-        throwsAs(IllegalArgumentException.class, () -> M3MethodSignalImage.parse(valid + "\n"));
-        throwsAs(IllegalArgumentException.class, () -> M3MethodSignalImage.parse(""));
-        throwsAs(NullPointerException.class, () -> M3MethodSignalImage.parse(null));
+        throwsAs(IllegalArgumentException.class, () -> MethodSignalImage.parse(valid + "\n"));
+        throwsAs(IllegalArgumentException.class, () -> MethodSignalImage.parse(""));
+        throwsAs(NullPointerException.class, () -> MethodSignalImage.parse(null));
         throwsPayload(HEADER + method + edge + edge); // sorted/unique C records
         throwsPayload(HEADER + method + method); // sorted/unique M records
         throwsPayload(HEADER + method(beta, counts()) + method); // M order
@@ -190,7 +190,7 @@ public final class M3MethodSignalImageSelfTest {
                     if (call.getKey().endsWith("external.E#missing():void")) externalRecords[row]++;
                 }
             }
-            M3MethodSignalImage image = M3MethodSignalImage.parse(seal(content.toString()));
+            MethodSignalImage image = MethodSignalImage.parse(seal(content.toString()));
             check(image.rowCount() == n, "seeded method cardinality");
             long expectedExternal = Arrays.stream(external).sum();
             check(image.externalCandidateSites() == expectedExternal, "seeded unknown targets");
@@ -275,7 +275,7 @@ public final class M3MethodSignalImageSelfTest {
         } catch (NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
     }
     private static void throwsPayload(String payload) {
-        throwsAs(IllegalArgumentException.class, () -> M3MethodSignalImage.parse(seal(payload)));
+        throwsAs(IllegalArgumentException.class, () -> MethodSignalImage.parse(seal(payload)));
     }
     private static void throwsAs(Class<? extends Throwable> kind, Runnable operation) {
         try { operation.run(); }

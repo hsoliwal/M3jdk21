@@ -27,8 +27,8 @@ import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.SortedMap;
-import jdk.internal.m3.collections.M3LazyEventBits;
-import jdk.internal.m3.collections.M3ProgressScope;
+import jdk.internal.m3.collections.bits.LazyEventBits;
+import jdk.internal.m3.collections.ProgressScope;
 
 /**
  * AVL map with reference payload arrays and integer child/parent/free links.
@@ -280,7 +280,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     public V touch(Object key, M3Progress monitor) { return touch(key, null, monitor); }
     /** Value access with per-call event mask/granularity override. */
     public V touch(Object key, LazyEventPolicy eventPolicy, M3Progress monitor) {
-        try (M3ProgressScope scope = M3ProgressScope.resolve(monitor, 1L)) {
+        try (ProgressScope scope = ProgressScope.resolve(monitor, 1L)) {
             M3Progress progress = scope.monitor();
             M3LazyValueState.checkCancelled(progress);
             int s = findSlot(key);
@@ -300,14 +300,14 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     public void preload(LazyEventPolicy eventPolicy, M3Progress monitor) {
         int expected = revision();
         int work = size();
-        try (M3ProgressScope scope = M3ProgressScope.resolve(monitor, Math.max(1L, work))) {
+        try (ProgressScope scope = ProgressScope.resolve(monitor, Math.max(1L, work))) {
             M3Progress progress = scope.monitor();
             LazyEventPolicy policy =
                     tree.lazy == null ? LazyEventPolicy.NONE : tree.lazy.eventPolicy(eventPolicy);
             Throwable failure = null;
             if (tree.lazy != null) {
                 tree.lazy.emit(
-                        policy, M3LazyEventBits.RANGE_BEGIN, LazyEventGranularity.RANGE,
+                        policy, LazyEventBits.RANGE_BEGIN, LazyEventGranularity.RANGE,
                         M3LazyEventSink.NO_SLOT, (short) 0, (short) 0,
                         M3LazyOperation.PRELOAD, progress, null);
             }
@@ -321,7 +321,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                     if (tree.lazy != null) {
                         short state = tree.lazy.flags(s);
                         tree.lazy.emit(
-                                policy, M3LazyEventBits.PROGRESS, LazyEventGranularity.ELEMENT,
+                                policy, LazyEventBits.PROGRESS, LazyEventGranularity.ELEMENT,
                                 s, state, state, M3LazyOperation.PRELOAD, progress, null);
                     }
                     check(expected);
@@ -334,7 +334,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             } finally {
                 if (tree.lazy != null) {
                     tree.lazy.emit(
-                            policy, M3LazyEventBits.RANGE_END, LazyEventGranularity.RANGE,
+                            policy, LazyEventBits.RANGE_END, LazyEventGranularity.RANGE,
                             M3LazyEventSink.NO_SLOT, (short) 0, (short) 0,
                             M3LazyOperation.PRELOAD, progress, failure);
                 }

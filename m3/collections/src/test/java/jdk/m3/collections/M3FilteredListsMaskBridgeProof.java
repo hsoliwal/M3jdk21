@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Spliterator;
-import jdk.internal.m3.collections.M3FilteredLists;
+import jdk.internal.m3.collections.FilteredLists;
 
 /**
  * Java 21 reference proof: live filtered List semantics against detached
@@ -45,7 +45,7 @@ public final class M3FilteredListsMaskBridgeProof {
         List<Integer> source = new ArrayList<>(
                 Arrays.asList(-7, 8, 8, 5, null, 10));
         List<Integer> filtered =
-                M3FilteredLists.filtered(source, v -> v != null && (v & 1) == 0);
+                FilteredLists.filtered(source, v -> v != null && (v & 1) == 0);
         int[] physical = {0, 1, 2, 3, 4, 5};
         byte[] state = {0, 1, 1, 0, 0, 1};
         int[] selected = M3IndexMaskCompactor.select(physical, state, 1,
@@ -96,7 +96,7 @@ public final class M3FilteredListsMaskBridgeProof {
                 physical[slot] = slot;
                 state[slot] = (byte) (value != null && (value & 1) == 0 ? 1 : 0);
             }
-            List<Integer> filtered = M3FilteredLists.filtered(
+            List<Integer> filtered = FilteredLists.filtered(
                     source, value -> value != null && (value & 1) == 0);
             int[] selected = M3IndexMaskCompactor.select(
                     physical, state, 1, M3IndexMaskCompactor.Backend.JAVA);

@@ -17,7 +17,7 @@ import java.util.Random;
 import java.util.Spliterator;
 import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongCompositeViews;
+import jdk.internal.m3.collections.LongCompositeViews;
 
 /**
  * Finite differential comparison of {@link LongTreeSet} against {@code TreeSet<Long>} as a
@@ -332,7 +332,7 @@ final class M3LongTreeSetTest {
             other.add(i);
             union.add(i);
         }
-        LongSortedSet merged = M3LongCompositeViews.sortedUnion(actual, other);
+        LongSortedSet merged = LongCompositeViews.sortedUnion(actual, other);
         assertArrayEquals(order(union), merged.toArray());
         assertEnds(union, merged);
         assertNavigation(union, merged, 0);

@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-import jdk.internal.m3.collections.M3CollectionSdkNames;
-import jdk.internal.m3.collections.M3IndexedMultiValueMap;
+import jdk.internal.m3.collections.CollectionSdkNames;
+import jdk.internal.m3.collections.IndexedMultiValueMap;
 
 /** Dependency-free Java21 differential oracle. No external provider dependency or fake adapter. */
 public final class M3CollectionSdkContractSelfTest {
@@ -34,34 +34,34 @@ public final class M3CollectionSdkContractSelfTest {
     }
 
     private static void names() {
-        check(M3CollectionSdkNames.size() >= 100, "at least 100 provider names reviewed");
-        for (M3CollectionSdkNames.Provider provider : M3CollectionSdkNames.Provider.values()) {
-            List<M3CollectionSdkNames.Family> entries = M3CollectionSdkNames.from(provider);
+        check(CollectionSdkNames.size() >= 100, "at least 100 provider names reviewed");
+        for (CollectionSdkNames.Provider provider : CollectionSdkNames.Provider.values()) {
+            List<CollectionSdkNames.Family> entries = CollectionSdkNames.from(provider);
             check(!entries.isEmpty(), "one or more known API owners per provider");
             for (var family : entries) {
                 check(family.provider() == provider, "provider index");
-                check(M3CollectionSdkNames.require(family.upstreamFqcn()) == family, "index identity");
+                check(CollectionSdkNames.require(family.upstreamFqcn()) == family, "index identity");
                 check(!family.vendorContractProven(), "no false third-party/JDK substitutability");
-                if (family.disposition() == M3CollectionSdkNames.Disposition.PENDING) {
+                if (family.disposition() == CollectionSdkNames.Disposition.PENDING) {
                     check(family.isProposedOnly(), "proposals must not masquerade as implemented");
                 }
             }
         }
-        check(M3CollectionSdkNames.require("com.google.common.collect.Multimap").isProposedOnly(),
+        check(CollectionSdkNames.require("com.google.common.collect.Multimap").isProposedOnly(),
                 "Guava namespace remains explicit");
-        check(M3CollectionSdkNames.require("org.springframework.util.MultiValueMap").isProposedOnly(),
+        check(CollectionSdkNames.require("org.springframework.util.MultiValueMap").isProposedOnly(),
                 "Spring is a map-of-lists, not Guava Multimap");
-        check(M3CollectionSdkNames.require("org.apache.commons.collections4.MultiValuedMap").isProposedOnly(),
+        check(CollectionSdkNames.require("org.apache.commons.collections4.MultiValuedMap").isProposedOnly(),
                 "Apache retains its API identity");
-        check(M3CollectionSdkNames.require("org.eclipse.collections.api.multimap.list.MutableListMultimap")
+        check(CollectionSdkNames.require("org.eclipse.collections.api.multimap.list.MutableListMultimap")
                 .isProposedOnly(), "Eclipse list multimap API identity");
-        check(M3CollectionSdkNames.require("java.util.ArrayList").hasExistingM3Backend(),
+        check(CollectionSdkNames.require("java.util.ArrayList").hasExistingM3Backend(),
                 "JDK owner retains a different backend name");
-        fails(IllegalArgumentException.class, () -> M3CollectionSdkNames.require("guava.Multimap"));
-        fails(NullPointerException.class, () -> M3CollectionSdkNames.from(null));
+        fails(IllegalArgumentException.class, () -> CollectionSdkNames.require("guava.Multimap"));
+        fails(NullPointerException.class, () -> CollectionSdkNames.from(null));
     }
 
-    private static void inspect(M3IndexedMultiValueMap<Integer,Integer> actual,
+    private static void inspect(IndexedMultiValueMap<Integer,Integer> actual,
             Map<Integer, List<Integer>> reference, Map<Integer,List<Integer>> referenceStates) {
         int size = 0;
         for (List<Integer> list : reference.values()) size += list.size();
@@ -92,7 +92,7 @@ public final class M3CollectionSdkContractSelfTest {
     }
 
     private static void test(Random random) {
-        M3IndexedMultiValueMap<Integer,Integer> target = new M3IndexedMultiValueMap<>();
+        IndexedMultiValueMap<Integer,Integer> target = new IndexedMultiValueMap<>();
         LinkedHashMap<Integer,List<Integer>> expected = new LinkedHashMap<>();
         LinkedHashMap<Integer,List<Integer>> flags = new LinkedHashMap<>();
         for (int n = 0; n < 14000; n++) {
@@ -150,7 +150,7 @@ public final class M3CollectionSdkContractSelfTest {
                 check(calls.get() == list.size(), "sorting and slicing do not refilter");
                 byte[] states = new byte[list.size()];
                 for (int i = 0; i < states.length; i++) states[i] = flags.get(probe).get(i).byteValue();
-                int required = M3IndexedMultiValueMap.DIRTY;
+                int required = IndexedMultiValueMap.DIRTY;
                 var javaSelected = target.selected(probe, required, 0, M3IndexMaskCompactor.Backend.JAVA);
                 ArrayList<Integer> byMask = new ArrayList<>();
                 for (int i = 0; i < list.size(); i++) if ((states[i] & required) == required) byMask.add(list.get(i));
@@ -166,7 +166,7 @@ public final class M3CollectionSdkContractSelfTest {
             }
         }
         inspect(target, expected, flags);
-        fails(IllegalArgumentException.class, () -> target.add(0, 1, M3IndexedMultiValueMap.LIVE));
+        fails(IllegalArgumentException.class, () -> target.add(0, 1, IndexedMultiValueMap.LIVE));
         fails(IllegalArgumentException.class, () -> target.updateState(0,0,1,0));
         fails(IllegalArgumentException.class, () -> target.selected(0,256,0, M3IndexMaskCompactor.Backend.JAVA));
         fails(IllegalArgumentException.class, () -> target.selected(0,2,2, M3IndexMaskCompactor.Backend.JAVA));

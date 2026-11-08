@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicReference;
-import jdk.internal.m3.collections.M3LazyEventBits;
-import jdk.internal.m3.collections.M3SystemProgress;
+import jdk.internal.m3.collections.bits.LazyEventBits;
+import jdk.internal.m3.collections.SystemProgress;
 
 /** Real provider/state owner checks, executable without Maven or test dependencies. */
 public final class M3LazyValueStateSelfTest {
@@ -85,9 +85,9 @@ public final class M3LazyValueStateSelfTest {
             }
             @Override public LazyEventPolicy lazyEventPolicy() {
                 return LazyEventPolicy.of(
-                        M3LazyEventBits.BEFORE_TOUCH | M3LazyEventBits.CACHE_MISS
-                                | M3LazyEventBits.STATE_CHANGED | M3LazyEventBits.AFTER_LOAD
-                                | M3LazyEventBits.CANCELLED,
+                        LazyEventBits.BEFORE_TOUCH | LazyEventBits.CACHE_MISS
+                                | LazyEventBits.STATE_CHANGED | LazyEventBits.AFTER_LOAD
+                                | LazyEventBits.CANCELLED,
                         LazyEventGranularity.STATE_TRANSITION);
             }
             @Override public M3LazyEventSink<M3Progress> lazyEventSink() {
@@ -97,14 +97,14 @@ public final class M3LazyValueStateSelfTest {
         };
         var observed = new M3LazyValueState<Integer, Object>(observedProvider);
         observed.grow(1); result[0] = null;
-        long systemBefore = M3SystemProgress.get().state().worked();
+        long systemBefore = SystemProgress.get().state().worked();
         same(identity, observed.read(0, 0, result, null));
-        require(M3SystemProgress.get().state().worked() >= systemBefore + 1L,
+        require(SystemProgress.get().state().worked() >= systemBefore + 1L,
                 "null monitor credits shared system root");
-        require(events.contains(M3LazyEventBits.BEFORE_TOUCH)
-                        && events.contains(M3LazyEventBits.CACHE_MISS)
-                        && events.contains(M3LazyEventBits.STATE_CHANGED)
-                        && events.contains(M3LazyEventBits.AFTER_LOAD),
+        require(events.contains(LazyEventBits.BEFORE_TOUCH)
+                        && events.contains(LazyEventBits.CACHE_MISS)
+                        && events.contains(LazyEventBits.STATE_CHANGED)
+                        && events.contains(LazyEventBits.AFTER_LOAD),
                 "configured state events");
 
         observed.admitted(0, false); result[0] = null; events.clear();
@@ -113,7 +113,7 @@ public final class M3LazyValueStateSelfTest {
         failure(CancellationException.class,
                 () -> observed.read(0, 0, result, preCanceled));
         require(observedCalls[0] == beforeCanceledCalls, "pre-cancel avoids provider");
-        require(events.contains(M3LazyEventBits.CANCELLED), "pre-cancel event emitted");
+        require(events.contains(LazyEventBits.CANCELLED), "pre-cancel event emitted");
 
         System.out.println(
                 "PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress");

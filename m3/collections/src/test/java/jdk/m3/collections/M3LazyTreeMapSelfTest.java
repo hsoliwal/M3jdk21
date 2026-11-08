@@ -19,8 +19,8 @@ import java.util.TreeMap;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
-import jdk.internal.m3.collections.M3LazyEventBits;
-import jdk.internal.m3.collections.M3SystemProgress;
+import jdk.internal.m3.collections.bits.LazyEventBits;
+import jdk.internal.m3.collections.SystemProgress;
 
 /** Actual Java 21 AVL owner, provider, views, eager oracle and storage checks. No stubs. */
 public final class M3LazyTreeMapSelfTest {
@@ -194,17 +194,17 @@ public final class M3LazyTreeMapSelfTest {
         var map = new M3TreeMap<Integer, Integer>(null, provider);
         map.defer(1);
         LazyEventPolicy touchPolicy = LazyEventPolicy.of(
-                M3LazyEventBits.BEFORE_TOUCH | M3LazyEventBits.CACHE_MISS
-                        | M3LazyEventBits.STATE_CHANGED | M3LazyEventBits.AFTER_LOAD,
+                LazyEventBits.BEFORE_TOUCH | LazyEventBits.CACHE_MISS
+                        | LazyEventBits.STATE_CHANGED | LazyEventBits.AFTER_LOAD,
                 LazyEventGranularity.STATE_TRANSITION);
-        long systemBefore = M3SystemProgress.get().state().worked();
+        long systemBefore = SystemProgress.get().state().worked();
         equal(2, map.touch(1, touchPolicy, null));
-        require(M3SystemProgress.get().state().worked() >= systemBefore + 1L,
+        require(SystemProgress.get().state().worked() >= systemBefore + 1L,
                 "touch uses shared system progress");
-        require(events.contains(M3LazyEventBits.BEFORE_TOUCH)
-                        && events.contains(M3LazyEventBits.CACHE_MISS)
-                        && events.contains(M3LazyEventBits.STATE_CHANGED)
-                        && events.contains(M3LazyEventBits.AFTER_LOAD),
+        require(events.contains(LazyEventBits.BEFORE_TOUCH)
+                        && events.contains(LazyEventBits.CACHE_MISS)
+                        && events.contains(LazyEventBits.STATE_CHANGED)
+                        && events.contains(LazyEventBits.AFTER_LOAD),
                 "touch policy selects events");
 
         map.defer(2);
@@ -214,12 +214,12 @@ public final class M3LazyTreeMapSelfTest {
 
         map.defer(3); map.defer(4); events.clear();
         LazyEventPolicy rangePolicy = LazyEventPolicy.of(
-                M3LazyEventBits.RANGE_BEGIN | M3LazyEventBits.RANGE_END | M3LazyEventBits.PROGRESS,
+                LazyEventBits.RANGE_BEGIN | LazyEventBits.RANGE_END | LazyEventBits.PROGRESS,
                 LazyEventGranularity.ELEMENT);
         map.preload(rangePolicy, null);
-        require(events.contains(M3LazyEventBits.RANGE_BEGIN)
-                        && events.contains(M3LazyEventBits.RANGE_END)
-                        && events.contains(M3LazyEventBits.PROGRESS),
+        require(events.contains(LazyEventBits.RANGE_BEGIN)
+                        && events.contains(LazyEventBits.RANGE_END)
+                        && events.contains(LazyEventBits.PROGRESS),
                 "preload range/progress events");
         map.verifyInvariants();
     }

@@ -20,9 +20,9 @@ import java.util.Random;
 import java.util.Spliterator;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import jdk.internal.m3.collections.M3LongPatriciaTrie;
-import jdk.internal.m3.collections.M3NotYetReceived;
-import jdk.internal.m3.collections.M3ObjectIdentityMap;
+import jdk.internal.m3.collections.LongPatriciaTrie;
+import jdk.internal.m3.collections.NotYetReceived;
+import jdk.internal.m3.collections.ObjectIdentityMap;
 
 /**
  * Task-local behavior oracle, frozen independently of recipe postimages. JDK models supply
@@ -280,10 +280,10 @@ public final class M3StagedLaneBehaviorContract {
     }
 
     public static void identity() {
-        Check c = new Check("M3ObjectIdentityMap");
-        c.throwsType(IllegalArgumentException.class, () -> new M3ObjectIdentityMap<>(-1));
-        c.throwsType(IllegalArgumentException.class, () -> new M3ObjectIdentityMap<>(Integer.MAX_VALUE));
-        M3ObjectIdentityMap<Object, Object> actual = new M3ObjectIdentityMap<>();
+        Check c = new Check("ObjectIdentityMap");
+        c.throwsType(IllegalArgumentException.class, () -> new ObjectIdentityMap<>(-1));
+        c.throwsType(IllegalArgumentException.class, () -> new ObjectIdentityMap<>(Integer.MAX_VALUE));
+        ObjectIdentityMap<Object, Object> actual = new ObjectIdentityMap<>();
         IdentityHashMap<Object, Object> expected = new IdentityHashMap<>();
         Object[] keys = new Object[513];
         Object[] values = new Object[65];
@@ -350,7 +350,7 @@ public final class M3StagedLaneBehaviorContract {
         c.done();
     }
 
-    private static void identitySnapshot(Check c, M3ObjectIdentityMap<Object, Object> actual,
+    private static void identitySnapshot(Check c, ObjectIdentityMap<Object, Object> actual,
             IdentityHashMap<Object, Object> expected, Object[] keys, Object[] values, Object fallback) {
         c.eq(expected.isEmpty(), actual.isEmpty(), "empty");
         c.eq(expected.size(), actual.size(), "snapshot size");
@@ -554,14 +554,14 @@ public final class M3StagedLaneBehaviorContract {
     }
 
     public static void patricia() {
-        Check c = new Check("M3LongPatriciaTrie");
-        c.throwsType(IllegalArgumentException.class, () -> new M3LongPatriciaTrie(-1));
-        M3LongPatriciaTrie actual = new M3LongPatriciaTrie();
+        Check c = new Check("LongPatriciaTrie");
+        c.throwsType(IllegalArgumentException.class, () -> new LongPatriciaTrie(-1));
+        LongPatriciaTrie actual = new LongPatriciaTrie();
         NavigableMap<Long, Long> expected = new TreeMap<>(Long::compareUnsigned);
         c.eq(8, actual.capacity(), "initial capacity");
-        c.throwsType(M3NotYetReceived.class, () -> actual.put(0, 1));
-        c.throwsType(M3NotYetReceived.class, () -> actual.remove(0));
-        c.throwsType(M3NotYetReceived.class, () -> actual.selectKey(0));
+        c.throwsType(NotYetReceived.class, () -> actual.put(0, 1));
+        c.throwsType(NotYetReceived.class, () -> actual.remove(0));
+        c.throwsType(NotYetReceived.class, () -> actual.selectKey(0));
         c.throwsType(IllegalArgumentException.class, () -> actual.prefixCount(0, -1));
         c.throwsType(IllegalArgumentException.class, () -> actual.prefixKeys(0, 65));
         c.throwsType(NoSuchElementException.class, actual::firstKey);
@@ -615,7 +615,7 @@ public final class M3StagedLaneBehaviorContract {
         c.done();
     }
 
-    private static void patriciaSnapshot(Check c, M3LongPatriciaTrie actual, NavigableMap<Long, Long> expected) {
+    private static void patriciaSnapshot(Check c, LongPatriciaTrie actual, NavigableMap<Long, Long> expected) {
         long[] keys = longs(expected.keySet());
         c.array(keys, actual.keysToArray(), "unsigned key order");
         iterator(c, actual.keyIterator(), keys);

@@ -17,7 +17,7 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import jdk.internal.m3.collections.M3ResidencyStateMaskIndex;
+import jdk.internal.m3.collections.ResidencyStateMaskIndex;
 
 /** Standalone seeded contract oracle; also runs with the original ObjectResidency owner. */
 public final class M3ResidencyStateMaskProof {
@@ -66,12 +66,12 @@ public final class M3ResidencyStateMaskProof {
 
     public static void main(String[] args) {
         boolean requireNative = args.length != 0 && "native".equals(args[0]);
-        boolean actualNative = M3ResidencyStateMaskIndex.nativeAvailable();
+        boolean actualNative = ResidencyStateMaskIndex.nativeAvailable();
         check(!requireNative || actualNative, "native binary installed for required proof");
         var absent = ObjectResidency.State.ABSENT;
         var live = ObjectResidency.State.RESIDENT;
-        int absentMask = M3ResidencyStateMaskIndex.states(absent);
-        int liveMask = M3ResidencyStateMaskIndex.states(live);
+        int absentMask = ResidencyStateMaskIndex.states(absent);
+        int liveMask = ResidencyStateMaskIndex.states(live);
         var arena = newOwner(71);
         int[] rows = {4, 0, 3, 4, 1, 2, 1, 70};
         arena.writeParentBits(4, Long.MIN_VALUE | 3L);
@@ -83,88 +83,88 @@ public final class M3ResidencyStateMaskProof {
         arena.use(0, 1L, v -> 1);
         arena.use(1, 1L, v -> 1);
         long req = Long.MIN_VALUE | 1L, notBits = 2L;
-        equal(new int[]{0,1,1}, M3ResidencyStateMaskIndex.select(arena, rows, 0,
-                rows.length, 1, req, notBits, liveMask, M3ResidencyStateMaskIndex.Backend.JAVA),
+        equal(new int[]{0,1,1}, ResidencyStateMaskIndex.select(arena, rows, 0,
+                rows.length, 1, req, notBits, liveMask, ResidencyStateMaskIndex.Backend.JAVA),
                 "preserve duplicates and source order");
-        equal(new int[]{1,1,0}, M3ResidencyStateMaskIndex.select(arena, rows,
+        equal(new int[]{1,1,0}, ResidencyStateMaskIndex.select(arena, rows,
                 rows.length - 1, rows.length, -1, req, notBits,
-                liveMask, M3ResidencyStateMaskIndex.Backend.JAVA), "reverse signed stride");
-        check(M3ResidencyStateMaskIndex.count(arena, rows, 0, rows.length, 1,
+                liveMask, ResidencyStateMaskIndex.Backend.JAVA), "reverse signed stride");
+        check(ResidencyStateMaskIndex.count(arena, rows, 0, rows.length, 1,
                 req, notBits, liveMask) == 3, "count matches");
-        check(M3ResidencyStateMaskIndex.first(arena, rows, 0, rows.length, 1,
+        check(ResidencyStateMaskIndex.first(arena, rows, 0, rows.length, 1,
                 req, notBits, liveMask) == 0, "first match without return array");
         int[] outputLane = new int[8];
         Arrays.fill(outputLane, -777);
-        int filled = M3ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
+        int filled = ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
                 req, notBits, liveMask, outputLane, 2);
         check(filled == 3, "in-place selection length");
         equal(new int[]{-777, -777, 0, 1, 1, -777, -777, -777}, outputLane,
                 "reuse caller-owned output lane without creating entries");
         int[] shortOutput = {19, 19, 19};
         throwsType(IndexOutOfBoundsException.class,
-                () -> M3ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
+                () -> ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
                         req, notBits, liveMask, shortOutput, 1),
                 "reject insufficient capacity before any output write");
         equal(new int[]{19, 19, 19}, shortOutput, "preflight preserves destination bytes");
         throwsType(IllegalArgumentException.class,
-                () -> M3ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
+                () -> ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
                         req, notBits, liveMask, rows, 0),
                 "reject output-input aliases to preserve future coordinates");
         throwsType(IndexOutOfBoundsException.class,
-                () -> M3ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
+                () -> ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
                         req, notBits, liveMask, shortOutput, -1),
                 "negative destination offset");
         equal(new int[]{19, 19, 19}, shortOutput, "invalid output offset left destination intact");
 
-        check(M3ResidencyStateMaskIndex.first(arena, rows, 0, rows.length, 1,
+        check(ResidencyStateMaskIndex.first(arena, rows, 0, rows.length, 1,
                 req, notBits, absentMask) == -1, "state exclusion");
-        equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, rows.length, 0,
-                -1, 0L, 0L, 0, M3ResidencyStateMaskIndex.Backend.JAVA), "empty path");
+        equal(new int[0], ResidencyStateMaskIndex.select(arena, rows, rows.length, 0,
+                -1, 0L, 0L, 0, ResidencyStateMaskIndex.Backend.JAVA), "empty path");
         // Both new empty-output atoms must preserve the full preflight contract.
         // The all-zero state mask and an absent parent bit produce zero matches
         // over a nonempty, duplicate-bearing, stable physical index path.
         int[] unmodified = {88, 88, 88};
-        equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, 0,
+        equal(new int[0], ResidencyStateMaskIndex.select(arena, rows, 0,
                 rows.length, 1, req, notBits, 0,
-                M3ResidencyStateMaskIndex.Backend.JAVA), "zero allowed-state mask");
-        equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, 0,
+                ResidencyStateMaskIndex.Backend.JAVA), "zero allowed-state mask");
+        equal(new int[0], ResidencyStateMaskIndex.select(arena, rows, 0,
                 rows.length, 1, 1L << 60, 0, liveMask,
-                M3ResidencyStateMaskIndex.Backend.JAVA), "zero parent-word match");
-        check(M3ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
+                ResidencyStateMaskIndex.Backend.JAVA), "zero parent-word match");
+        check(ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
                 req, notBits, 0, unmodified, 1) == 0, "zero-hit output count");
         equal(new int[]{88, 88, 88}, unmodified, "zero-hit output not modified");
         throwsType(IndexOutOfBoundsException.class,
-                () -> M3ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
+                () -> ResidencyStateMaskIndex.selectInto(arena, rows, 0, rows.length, 1,
                         req, notBits, 0, unmodified, unmodified.length + 1),
                 "zero-hit preflight still rejects invalid output start");
         if (actualNative) {
-            equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, 0,
+            equal(new int[0], ResidencyStateMaskIndex.select(arena, rows, 0,
                     rows.length, 1, req, notBits, 0,
-                    M3ResidencyStateMaskIndex.Backend.JNI_REQUIRED),
+                    ResidencyStateMaskIndex.Backend.JNI_REQUIRED),
                     "JNI zero allowed-state mask");
-            equal(new int[0], M3ResidencyStateMaskIndex.select(arena, rows, 0,
+            equal(new int[0], ResidencyStateMaskIndex.select(arena, rows, 0,
                     rows.length, 1, 1L << 60, 0, liveMask,
-                    M3ResidencyStateMaskIndex.Backend.JNI_REQUIRED),
+                    ResidencyStateMaskIndex.Backend.JNI_REQUIRED),
                     "JNI zero parent-word match");
         }
-        throwsType(IllegalArgumentException.class, () -> M3ResidencyStateMaskIndex.count(
+        throwsType(IllegalArgumentException.class, () -> ResidencyStateMaskIndex.count(
                 arena, rows, 0, 1, 1, 3, 1, liveMask), "overlap masks rejected");
-        throwsType(IllegalArgumentException.class, () -> M3ResidencyStateMaskIndex.count(
+        throwsType(IllegalArgumentException.class, () -> ResidencyStateMaskIndex.count(
                 arena, rows, 0, 1, 1, 0, 0, 64), "undefined lifecycle state rejected");
-        throwsType(IllegalArgumentException.class, () -> M3ResidencyStateMaskIndex.count(
+        throwsType(IllegalArgumentException.class, () -> ResidencyStateMaskIndex.count(
                 arena, rows, 0, 1, 0, 0, 0, liveMask), "zero stride rejected");
-        throwsType(IndexOutOfBoundsException.class, () -> M3ResidencyStateMaskIndex.count(
+        throwsType(IndexOutOfBoundsException.class, () -> ResidencyStateMaskIndex.count(
                 arena, rows, rows.length - 1, 2, 1, 0, 0, liveMask), "overflowing path rejected");
-        throwsType(IndexOutOfBoundsException.class, () -> M3ResidencyStateMaskIndex.count(
+        throwsType(IndexOutOfBoundsException.class, () -> ResidencyStateMaskIndex.count(
                 arena, new int[]{-1}, 0, 1, 1, 0, 0, liveMask), "bad physical slot rejected");
-        throwsType(NullPointerException.class, () -> M3ResidencyStateMaskIndex.count(
+        throwsType(NullPointerException.class, () -> ResidencyStateMaskIndex.count(
                 arena, null, 0, 0, 1, 0, 0, liveMask), "null ordered coords");
-        throwsType(NullPointerException.class, () -> M3ResidencyStateMaskIndex.states(
+        throwsType(NullPointerException.class, () -> ResidencyStateMaskIndex.states(
                 (ObjectResidency.State[]) null), "null state mask varargs");
         if (!actualNative) {
-            throwsType(UnsatisfiedLinkError.class, () -> M3ResidencyStateMaskIndex.select(arena,
+            throwsType(UnsatisfiedLinkError.class, () -> ResidencyStateMaskIndex.select(arena,
                     rows, 0, 2, 1, 0L, 0L, liveMask,
-                    M3ResidencyStateMaskIndex.Backend.JNI_REQUIRED), "no implicit native fallback");
+                    ResidencyStateMaskIndex.Backend.JNI_REQUIRED), "no implicit native fallback");
         }
 
         // A lifecycle transition is distinct from canonical parent state:
@@ -172,19 +172,19 @@ public final class M3ResidencyStateMaskProof {
         var lifetime = newOwner(3);
         lifetime.writeParentBits(1, 0x101L);
         int[] lifetimeRows = {1, 2, 1};
-        equal(new int[]{1, 1}, M3ResidencyStateMaskIndex.select(lifetime,
+        equal(new int[]{1, 1}, ResidencyStateMaskIndex.select(lifetime,
                 lifetimeRows, 0, lifetimeRows.length, 1, 0x101L, 0L, absentMask,
-                M3ResidencyStateMaskIndex.Backend.JAVA), "absent child with canonical state");
+                ResidencyStateMaskIndex.Backend.JAVA), "absent child with canonical state");
         lifetime.use(1, 1L, unused -> 1);
-        equal(new int[]{1, 1}, M3ResidencyStateMaskIndex.select(lifetime,
+        equal(new int[]{1, 1}, ResidencyStateMaskIndex.select(lifetime,
                 lifetimeRows, 0, lifetimeRows.length, 1, 0x101L, 0L, liveMask,
-                M3ResidencyStateMaskIndex.Backend.JAVA), "materialized child mask");
+                ResidencyStateMaskIndex.Backend.JAVA), "materialized child mask");
         check(lifetime.retireUnborrowedProjection(1), "cooperative unborrowed retire");
         check(lifetime.readParentBits(1) == 0x101L,
                 "logical state bits remain owned by parent across child recreation");
-        equal(new int[]{1, 1}, M3ResidencyStateMaskIndex.select(lifetime,
+        equal(new int[]{1, 1}, ResidencyStateMaskIndex.select(lifetime,
                 lifetimeRows, 0, lifetimeRows.length, 1, 0x101L, 0L, absentMask,
-                M3ResidencyStateMaskIndex.Backend.JAVA), "retired child absent again");
+                ResidencyStateMaskIndex.Backend.JAVA), "retired child absent again");
         // This selector never returns any child object: it returns slot ints only.
 
         Random random = new Random(20261017L);
@@ -206,12 +206,12 @@ public final class M3ResidencyStateMaskProof {
             int stateMask = random.nextInt(64);
             int[] expected = reference(owner, ordered, offset, n, stride,
                     required, forbidden, stateMask);
-            int[] actual = M3ResidencyStateMaskIndex.select(owner, ordered, offset, n, stride,
-                    required, forbidden, stateMask, M3ResidencyStateMaskIndex.Backend.JAVA);
+            int[] actual = ResidencyStateMaskIndex.select(owner, ordered, offset, n, stride,
+                    required, forbidden, stateMask, ResidencyStateMaskIndex.Backend.JAVA);
             equal(expected, actual, "java/reference round=" + round);
             int[] reused = new int[expected.length + 5];
             Arrays.fill(reused, Integer.MIN_VALUE);
-            int emitted = M3ResidencyStateMaskIndex.selectInto(owner, ordered, offset,
+            int emitted = ResidencyStateMaskIndex.selectInto(owner, ordered, offset,
                     n, stride, required, forbidden, stateMask, reused, 3);
             check(emitted == expected.length, "reused lane output length round=" + round);
             check(reused[0] == Integer.MIN_VALUE && reused[1] == Integer.MIN_VALUE
@@ -220,14 +220,14 @@ public final class M3ResidencyStateMaskProof {
                     "reused lane left outside segment untouched round=" + round);
             equal(expected, Arrays.copyOfRange(reused, 3, 3 + emitted),
                     "reused lane exact coordinates round=" + round);
-            check(M3ResidencyStateMaskIndex.count(owner, ordered, offset, n, stride,
+            check(ResidencyStateMaskIndex.count(owner, ordered, offset, n, stride,
                     required, forbidden, stateMask) == expected.length, "count round=" + round);
-            check(M3ResidencyStateMaskIndex.first(owner, ordered, offset, n, stride,
+            check(ResidencyStateMaskIndex.first(owner, ordered, offset, n, stride,
                     required, forbidden, stateMask) == (expected.length == 0 ? -1 : expected[0]),
                     "first round=" + round);
-            if (actualNative) equal(actual, M3ResidencyStateMaskIndex.select(owner,
+            if (actualNative) equal(actual, ResidencyStateMaskIndex.select(owner,
                     ordered, offset, n, stride, required, forbidden, stateMask,
-                    M3ResidencyStateMaskIndex.Backend.JNI_REQUIRED), "jni/reference round=" + round);
+                    ResidencyStateMaskIndex.Backend.JNI_REQUIRED), "jni/reference round=" + round);
             fingerprint = (fingerprint ^ actual.length) * 0x100000001b3L;
             for (int k : actual) fingerprint = (fingerprint ^ k) * 0x100000001b3L;
         }

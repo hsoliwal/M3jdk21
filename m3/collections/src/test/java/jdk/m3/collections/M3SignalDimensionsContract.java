@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.function.ToDoubleFunction;
-import jdk.internal.m3.collections.M3SignalDimensions;
+import jdk.internal.m3.collections.SignalDimensions;
 
 /** Deterministic comparison-oracle differential proof; independent of production radix passes. */
 public final class M3SignalDimensionsContract {
@@ -37,16 +37,16 @@ public final class M3SignalDimensionsContract {
         };
         boolean[] descending = {false, true};
         same(oracle(dimensions, descending, null, 0, 0),
-                M3SignalDimensions.order(dimensions, descending), "IEEE compound");
+                SignalDimensions.order(dimensions, descending), "IEEE compound");
         byte[] states = {1, 2, 1, 2, 1, 2, 1, 1, 1};
         same(oracle(dimensions, descending, states, 1, 2),
-                M3SignalDimensions.filtered(dimensions, descending, states, 1, 2,
+                SignalDimensions.filtered(dimensions, descending, states, 1, 2,
                         M3SignalOrder.Backend.JAVA), "masked IEEE compound");
-        same(new int[0], M3SignalDimensions.order(
+        same(new int[0], SignalDimensions.order(
                 new double[][] {new double[0]}, new boolean[] {false}), "empty");
-        same(new int[] {0}, M3SignalDimensions.order(
+        same(new int[] {0}, SignalDimensions.order(
                 new double[][] {{42}}, new boolean[] {true}), "singleton");
-        same(new int[] {1, 2, 0}, M3SignalDimensions.order(
+        same(new int[] {1, 2, 0}, SignalDimensions.order(
                 new double[][] {{10, 10, 10}, {5, 1, 3}},
                 new boolean[] {false, false}), "first signal ties refine");
     }
@@ -71,7 +71,7 @@ public final class M3SignalDimensionsContract {
         List<ToDoubleFunction<? super Person>> projections = List.of(
                 person -> {calls[0][person.id]++; return person.nameSignal;},
                 person -> {calls[1][person.id]++; return person.organizationSignal;});
-        int[] rows = M3SignalDimensions.project(people.length, row -> people[row],
+        int[] rows = SignalDimensions.project(people.length, row -> people[row],
                 projections, new boolean[] {false, true}, states, 1, 0,
                 M3SignalOrder.Backend.JAVA);
         same(new int[] {3, 4, 2, 0}, rows, "source-time signal columns");
@@ -103,11 +103,11 @@ public final class M3SignalDimensionsContract {
             double[][] pristine = copy(columns);
             byte[] originalState = state.clone();
             int[] expected = oracle(columns, descending, state, 1, 2);
-            int[] actual = M3SignalDimensions.filtered(columns, descending, state,
+            int[] actual = SignalDimensions.filtered(columns, descending, state,
                     1, 2, M3SignalOrder.Backend.JAVA);
             same(expected, actual, "random masked multi order " + trial);
             same(oracle(columns, descending, null, 0, 0),
-                    M3SignalDimensions.order(columns, descending),
+                    SignalDimensions.order(columns, descending),
                     "random unmasked order " + trial);
             for (int d = 0; d < dims; d++) {
                 yes(Arrays.equals(pristine[d], columns[d]), "sidecars retained caller ownership");
@@ -120,7 +120,7 @@ public final class M3SignalDimensionsContract {
         double[][] dimensions = {{-0.0, 0.0, 7, 1e308, -1e308},
                 {3, 3, 8, 4, 1}, {0.0, Double.NaN, 5.0, 0.0, 0.0}};
         boolean[] direction = {true, false, false};
-        M3SignalDimensions.Comparison c = M3SignalDimensions.compare(
+        SignalDimensions.Comparison c = SignalDimensions.compare(
                 dimensions, direction, 0, 1);
         yes(c.sign() == 1 && c.decisiveDimension() == 0, "signed zero decisive");
         yes(c.numericSeparations()[0] == 0.0, "zero ordered but no numeric gap");
@@ -128,54 +128,54 @@ public final class M3SignalDimensionsContract {
         double[] returned = c.numericSeparations();
         returned[0] = 12345;
         yes(c.numericSeparations()[0] == 0.0, "immutable receipt copy");
-        var same = M3SignalDimensions.compare(dimensions, direction, 0, 0);
+        var same = SignalDimensions.compare(dimensions, direction, 0, 0);
         yes(same.sign() == 0 && same.decisiveDimension() == -1, "equal comparison");
-        var overflow = M3SignalDimensions.compare(dimensions, direction, 3, 4);
+        var overflow = SignalDimensions.compare(dimensions, direction, 3, 4);
         yes(Double.isNaN(overflow.numericSeparations()[0]), "overflow numeric gap unavailable");
-        var reverse = M3SignalDimensions.compare(dimensions, direction, 1, 0);
+        var reverse = SignalDimensions.compare(dimensions, direction, 1, 0);
         yes(reverse.sign() == -c.sign(), "antisymmetry");
     }
 
     private static void refusals() {
         rejects(NullPointerException.class,
-                () -> M3SignalDimensions.order(null, new boolean[] {false}), "null input");
+                () -> SignalDimensions.order(null, new boolean[] {false}), "null input");
         rejects(IllegalArgumentException.class,
-                () -> M3SignalDimensions.order(new double[0][], new boolean[0]), "zero dimensions");
+                () -> SignalDimensions.order(new double[0][], new boolean[0]), "zero dimensions");
         rejects(IllegalArgumentException.class,
-                () -> M3SignalDimensions.order(new double[][] {{1}, {2, 3}},
+                () -> SignalDimensions.order(new double[][] {{1}, {2, 3}},
                         new boolean[] {false, false}), "jagged columns");
         rejects(IllegalArgumentException.class,
-                () -> M3SignalDimensions.order(new double[][] {{1}}, new boolean[0]), "directions");
+                () -> SignalDimensions.order(new double[][] {{1}}, new boolean[0]), "directions");
         rejects(IllegalArgumentException.class,
-                () -> M3SignalDimensions.filtered(new double[][] {{1}},
+                () -> SignalDimensions.filtered(new double[][] {{1}},
                         new boolean[] {false}, null, 1, 0,
                         M3SignalOrder.Backend.JAVA), "mask requires states");
         rejects(IllegalArgumentException.class,
-                () -> M3SignalDimensions.filtered(new double[][] {{1}},
+                () -> SignalDimensions.filtered(new double[][] {{1}},
                         new boolean[] {false}, new byte[1], -1, 0,
                         M3SignalOrder.Backend.JAVA), "negative mask");
         rejects(IllegalArgumentException.class,
-                () -> M3SignalDimensions.filtered(new double[][] {{1}},
+                () -> SignalDimensions.filtered(new double[][] {{1}},
                         new boolean[] {false}, new byte[1], 0, 256,
                         M3SignalOrder.Backend.JAVA), "wide mask");
         rejects(IllegalArgumentException.class,
-                () -> M3SignalDimensions.filtered(new double[][] {{1}},
+                () -> SignalDimensions.filtered(new double[][] {{1}},
                         new boolean[] {false}, new byte[2], 0, 0,
                         M3SignalOrder.Backend.JAVA), "state length");
         rejects(IndexOutOfBoundsException.class,
-                () -> M3SignalDimensions.compare(new double[][] {{1}},
+                () -> SignalDimensions.compare(new double[][] {{1}},
                         new boolean[] {false}, 0, 1), "index bounds");
         rejects(IllegalArgumentException.class,
-                () -> M3SignalDimensions.project(-1, row -> "x",
+                () -> SignalDimensions.project(-1, row -> "x",
                         List.of((ToDoubleFunction<String>) x -> 3.0), new boolean[] {false},
                         null, 0, 0, M3SignalOrder.Backend.JAVA), "negative rows");
         if (M3SignalOrderNative.available()) {
-            same(new int[] {1, 0}, M3SignalDimensions.order(new double[][] {{3, 1}},
+            same(new int[] {1, 0}, SignalDimensions.order(new double[][] {{3, 1}},
                     new boolean[] {false}, M3SignalOrder.Backend.NATIVE_REQUIRED),
                     "loaded JNI produces the exact ascending order");
         } else {
             rejects(UnsatisfiedLinkError.class,
-                    () -> M3SignalDimensions.order(new double[][] {{3, 1}},
+                    () -> SignalDimensions.order(new double[][] {{3, 1}},
                             new boolean[] {false}, M3SignalOrder.Backend.NATIVE_REQUIRED),
                     "JNI cannot silently fall back");
         }

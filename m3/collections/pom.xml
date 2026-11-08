@@ -100,7 +100,7 @@
             <exclude>**/M3LinkedHashBackshiftTest.java</exclude>
             <exclude>**/M3LinkedHashMapCapacityTest.java</exclude>
             <exclude>**/M3MapContractTest.java</exclude>
-            <exclude>**/M3NativeFiveLibrarySdkNoVendorTest.java</exclude>
+            <exclude>**/NativeFiveLibrarySdkNoVendorTest.java</exclude>
             <exclude>**/M3NoRetainedStructuralEntryTest.java</exclude>
             <exclude>**/M3ObjectCountsTest.java</exclude>
             <exclude>**/M3RelationForEachTest.java</exclude>

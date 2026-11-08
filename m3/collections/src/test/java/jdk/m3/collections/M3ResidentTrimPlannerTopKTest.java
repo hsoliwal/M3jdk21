@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LazyElementFlags;
+import jdk.internal.m3.collections.LazyElementFlags;
 
 /** Retains source module contract and runs the independent 499k-case oracle. */
 //FLLDCIM: RELOCATE - donor blob 7cd338c319a8 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
@@ -19,7 +19,7 @@ class M3ResidentTrimPlannerTopKTest {
 
     @Test
     void exactExistingOwnerContract() {
-        short pin = M3LazyElementFlags.PINNED;
+        short pin = LazyElementFlags.PINNED;
         assertArrayEquals(new int[] {2, 3, 0},
                 M3ResidentTrimPlanner.oldestSlots(new short[] {0, pin, 0, 0, pin},
                         new long[] {5, 1, 2, 2, 0}, 5, 3));

@@ -15,7 +15,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Spliterator;
 import java.util.concurrent.atomic.AtomicInteger;
-import jdk.internal.m3.collections.M3BagRankIndex;
+import jdk.internal.m3.collections.BagRankIndex;
 
 /** Deterministic M3-native order-statistics and Java/JNI-masks oracle. */
 public final class M3BagRankIndexSelfTest {
@@ -43,7 +43,7 @@ public final class M3BagRankIndexSelfTest {
         }
         throw new AssertionError(text + " did not refuse");
     }
-    private static <E> List<E> expanded(M3BagRankIndex<E> index) {
+    private static <E> List<E> expanded(BagRankIndex<E> index) {
         ArrayList<E> result = new ArrayList<>();
         for (E value : index) result.add(value);
         return result;
@@ -53,7 +53,7 @@ public final class M3BagRankIndexSelfTest {
         owner.addOccurrences("b", 3);
         owner.addOccurrences("a", 2);
         owner.addOccurrences("z", 1);
-        M3BagRankIndex<String> rank = M3BagRankIndex.snapshot(owner, null);
+        BagRankIndex<String> rank = BagRankIndex.snapshot(owner, null);
         eq(3, rank.distinctSize(), "groups");
         eq(6L, rank.exactSize(), "occurrences");
         eq(List.of("a", "a", "b", "b", "b", "z"), expanded(rank), "ascending");
@@ -82,7 +82,7 @@ public final class M3BagRankIndexSelfTest {
                         : M3IndexMaskCompactor.Backend.JAVA)), "Java/native masks parity");
         eq(List.of("a", "a", "z"), expanded(rank.selected(states, 128, 2,
                 M3IndexMaskCompactor.Backend.JAVA).slice(0, 2)), "masked slicing");
-        M3BagRankIndex<String> previouslyCreated = rank;
+        BagRankIndex<String> previouslyCreated = rank;
         owner.addOccurrences("b", 100);
         owner.addOccurrences("new", 19);
         eq(6L, previouslyCreated.exactSize(), "snapshot independent of owner writes");
@@ -118,7 +118,7 @@ public final class M3BagRankIndexSelfTest {
         bag.addOccurrences(null, 3);
         bag.addOccurrences("a", 4);
         Comparator<String> cmp = Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER);
-        var view = M3BagRankIndex.snapshot(bag, cmp);
+        var view = BagRankIndex.snapshot(bag, cmp);
         eq(List.of("a", "a", "a", "a", "b", "B", "B"),
                 expanded(view.slice(1, 4)), "stable comparator ties");
         eq(3L, view.comparatorCount("B"), "comparator-equivalent counts");
@@ -138,7 +138,7 @@ public final class M3BagRankIndexSelfTest {
         M3CountedBag<Integer> bag = new M3CountedBag<>();
         bag.addOccurrences(1, Integer.MAX_VALUE);
         bag.addOccurrences(2, Integer.MAX_VALUE);
-        var ranks = M3BagRankIndex.snapshot(bag, null);
+        var ranks = BagRankIndex.snapshot(bag, null);
         eq(4294967294L, ranks.exactSize(), "long total");
         eq(Integer.MAX_VALUE, ranks.size(), "collection saturated int size");
         eq(2147483647L, ranks.occurrencesBefore(2), "long rank count");
@@ -160,7 +160,7 @@ public final class M3BagRankIndexSelfTest {
                 source.addOccurrences(value, amount);
                 reference.merge(value, amount, Integer::sum);
             }
-            var sorted = M3BagRankIndex.snapshot(source, cmp);
+            var sorted = BagRankIndex.snapshot(source, cmp);
             List<Map.Entry<Integer, Integer>> groups = new ArrayList<>(reference.entrySet());
             groups.sort((a, b) -> cmp.compare(a.getKey(), b.getKey()));
             eq(groups.size(), sorted.distinctSize(), "distinct groups randomized");

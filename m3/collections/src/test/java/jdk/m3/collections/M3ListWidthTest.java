@@ -42,7 +42,7 @@ public class M3ListWidthTest {
 
 	private static Object construct () {
 		try {
-			Constructor<?> constructor = Class.forName ("jdk.internal.m3.collections.M3ListWidth").getDeclaredConstructor (ToIntFunction.class);
+			Constructor<?> constructor = Class.forName ("jdk.internal.m3.collections.ListWidth").getDeclaredConstructor (ToIntFunction.class);
 			constructor.setAccessible (true);
 			return constructor.newInstance (MEASURE);
 		} catch (ReflectiveOperationException failure) {
@@ -231,7 +231,7 @@ public class M3ListWidthTest {
 		assertThrows (IllegalArgumentException.class, () -> call ("measure", INT_STRING, 1, "1"));
 		Object negative = (ToIntFunction<String>) string -> -1;
 		try {
-			Constructor<?> constructor = Class.forName ("jdk.internal.m3.collections.M3ListWidth").getDeclaredConstructor (ToIntFunction.class);
+			Constructor<?> constructor = Class.forName ("jdk.internal.m3.collections.ListWidth").getDeclaredConstructor (ToIntFunction.class);
 			constructor.setAccessible (true);
 			Object bad = constructor.newInstance (negative);
 			Method insert = bad.getClass ().getDeclaredMethod ("insert", INT_STRING);

@@ -40,7 +40,7 @@ public class M3WindowPlanTest {
 
 	static Object construct () {
 		try {
-			Constructor<?> c = Class.forName ("jdk.internal.m3.collections.M3WindowPlan").getDeclaredConstructor ();
+			Constructor<?> c = Class.forName ("jdk.internal.m3.collections.WindowPlan").getDeclaredConstructor ();
 			c.setAccessible (true);
 			return c.newInstance ();
 		} catch (ReflectiveOperationException e) {

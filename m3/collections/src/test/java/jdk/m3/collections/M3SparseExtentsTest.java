@@ -42,7 +42,7 @@ public class M3SparseExtentsTest {
 
 		Extents(int estimate) {
 			try {
-				Constructor<?> c = Class.forName("jdk.internal.m3.collections.M3SparseExtents").getDeclaredConstructor(int.class);
+				Constructor<?> c = Class.forName("jdk.internal.m3.collections.SparseExtents").getDeclaredConstructor(int.class);
 				c.setAccessible(true);
 				target = c.newInstance(estimate);
 			} catch (InvocationTargetException e) {

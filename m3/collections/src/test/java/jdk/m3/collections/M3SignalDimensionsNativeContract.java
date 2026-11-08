@@ -3,7 +3,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
-import jdk.internal.m3.collections.M3SignalDimensions;
+import jdk.internal.m3.collections.SignalDimensions;
 
 /** Actual JNI differential parity using the existing M3 stable unsigned radix symbol. */
 public final class M3SignalDimensionsNativeContract {
@@ -27,14 +27,14 @@ public final class M3SignalDimensionsNativeContract {
             }
             byte[] states = new byte[n];
             random.nextBytes(states);
-            int[] javaRows = M3SignalDimensions.filtered(columns, descending, states, 0x4, 0x80,
+            int[] javaRows = SignalDimensions.filtered(columns, descending, states, 0x4, 0x80,
                     M3SignalOrder.Backend.JAVA);
-            int[] nativeRows = M3SignalDimensions.filtered(columns, descending, states, 0x4, 0x80,
+            int[] nativeRows = SignalDimensions.filtered(columns, descending, states, 0x4, 0x80,
                     M3SignalOrder.Backend.NATIVE_REQUIRED);
             if (!Arrays.equals(javaRows, nativeRows)) throw new AssertionError("JNI mismatch round " + round);
             checks++;
-            int[] j2 = M3SignalDimensions.order(columns, descending, M3SignalOrder.Backend.JAVA);
-            int[] n2 = M3SignalDimensions.order(columns, descending,
+            int[] j2 = SignalDimensions.order(columns, descending, M3SignalOrder.Backend.JAVA);
+            int[] n2 = SignalDimensions.order(columns, descending,
                     M3SignalOrder.Backend.NATIVE_REQUIRED);
             if (!Arrays.equals(j2, n2)) throw new AssertionError("JNI full mismatch round " + round);
             checks++;

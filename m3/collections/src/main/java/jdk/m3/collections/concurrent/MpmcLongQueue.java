@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections.concurrent;
 
-import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.NotYetReceived;
 
 /**
  * M3 five-library superset scaffold {@code MpmcLongQueue}: API group {@code MPMC_LONG_QUEUE} over arrays and state masks.
@@ -16,7 +16,7 @@ import jdk.internal.m3.collections.M3NotYetReceived;
  *
  * <p>DOOP mapping: lane kind LONG; lanes {@code long[] ringLane;long[] sequenceLane}; offset scheme ring + per-slot sequence (Vyukov); state-mask bits PUBLISHED; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: long ring lane + sequence lane / slot sequence bits.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class MpmcLongQueue {
@@ -43,31 +43,31 @@ public final class MpmcLongQueue {
 
     /** MpmcArrayQueue.offer (long lane) (scaffold: not yet received). */
     public boolean offer(long value) {
-        throw new M3NotYetReceived("M3MpmcLongQueue.offer");
+        throw new NotYetReceived("M3MpmcLongQueue.offer");
     }
 
     /** MpmcArrayQueue.poll (scaffold: not yet received). */
     public long pollOrDefault(long defaultValue) {
-        throw new M3NotYetReceived("M3MpmcLongQueue.pollOrDefault");
+        throw new NotYetReceived("M3MpmcLongQueue.pollOrDefault");
     }
 
     /** Queue.peek (scaffold: not yet received). */
     public long peekOrDefault(long defaultValue) {
-        throw new M3NotYetReceived("M3MpmcLongQueue.peekOrDefault");
+        throw new NotYetReceived("M3MpmcLongQueue.peekOrDefault");
     }
 
     /** MessagePassingQueue.drain (scaffold: not yet received). */
     public int drain(java.util.function.LongConsumer consumer, int limit) {
-        throw new M3NotYetReceived("M3MpmcLongQueue.drain");
+        throw new NotYetReceived("M3MpmcLongQueue.drain");
     }
 
     /** MessagePassingQueue.capacity (scaffold: not yet received). */
     public int capacity() {
-        throw new M3NotYetReceived("M3MpmcLongQueue.capacity");
+        throw new NotYetReceived("M3MpmcLongQueue.capacity");
     }
 
     /** Queue.size (approximate) (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3MpmcLongQueue.size");
+        throw new NotYetReceived("M3MpmcLongQueue.size");
     }
 }

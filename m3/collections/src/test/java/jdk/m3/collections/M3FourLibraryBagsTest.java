@@ -10,9 +10,9 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3BagAlgebraProof;
-import jdk.internal.m3.collections.M3BagMapFailureProof;
-import jdk.internal.m3.collections.M3FourLibraryBagsReferenceModel;
+import jdk.internal.m3.collections.BagAlgebraProof;
+import jdk.internal.m3.collections.BagMapFailureProof;
+import jdk.internal.m3.collections.FourLibraryBagsReferenceModel;
 
 /**
  * Owning-module JUnit test of the relocated packed long bag and map (recipe four-library-bags-20261106): the crate's
@@ -21,11 +21,11 @@ import jdk.internal.m3.collections.M3FourLibraryBagsReferenceModel;
  */
 final class M3FourLibraryBagsTest {
     @Test void bagAlgebraProof() {
-        M3BagAlgebraProof.main(new String[0]);
+        BagAlgebraProof.main(new String[0]);
     }
 
     @Test void referenceModel() {
-        M3FourLibraryBagsReferenceModel.main(new String[] {"100000", "20261106"});
+        FourLibraryBagsReferenceModel.main(new String[] {"100000", "20261106"});
     }
 
     @Test void rehashFailurePreservesLanes() throws Exception {
@@ -39,7 +39,7 @@ final class M3FourLibraryBagsTest {
     private static String isolated(String heap, String mode) throws IOException, InterruptedException {
         String java = Path.of(System.getProperty("java.home"), "bin", "java").toString();
         List<String> command = List.of(java, heap, "-cp", System.getProperty("java.class.path"),
-                M3BagMapFailureProof.class.getName(), mode);
+                BagMapFailureProof.class.getName(), mode);
         Process process = new ProcessBuilder(command).redirectErrorStream(true).start();
         String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8).trim();
         assertTrue(process.waitFor(120, TimeUnit.SECONDS), "isolated JVM timed out");

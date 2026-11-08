@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 import java.util.SplittableRandom;
 import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LaneSearch;
+import jdk.internal.m3.collections.LaneSearch;
 
 /** Current-receiver regression for original scaffold identity and shared lower-bound kernel. */
 final class M3FrozenLongSetCurrentContractTest {
@@ -58,7 +58,7 @@ final class M3FrozenLongSetCurrentContractTest {
                         : step == 2 ? 0L : step == 3 ? -1L
                         : step % 4 == 0 && selected.length > 0
                         ? selected[random.nextInt(selected.length)] : random.nextLong(-70, 71);
-                int lower = M3LaneSearch.lowerBound(selected, 0, selected.length, probe);
+                int lower = LaneSearch.lowerBound(selected, 0, selected.length, probe);
                 int expectedRank = lower < selected.length && selected[lower] == probe ? lower : -1;
                 assertEquals(expectedRank, set.rank(probe));
                 assertEquals(oracle.contains(probe), set.contains(probe));

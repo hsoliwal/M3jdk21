@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
-import jdk.internal.m3.collections.M3InternalLeaseRecycler;
+import jdk.internal.m3.collections.InternalLeaseRecycler;
 public final class M3InternalLeaseRecyclerLazySelfTest {
  private static int checks;
  private static void check(boolean ok,String message) {checks++;if(!ok)throw new AssertionError(message);}
- private static int capacity(M3InternalLeaseRecycler<?> r) {
-  try {Field f=M3InternalLeaseRecycler.class.getDeclaredField("idle");f.setAccessible(true);return ((Object[])f.get(r)).length;}
+ private static int capacity(InternalLeaseRecycler<?> r) {
+  try {Field f=InternalLeaseRecycler.class.getDeclaredField("idle");f.setAccessible(true);return ((Object[])f.get(r)).length;}
   catch(ReflectiveOperationException e){throw new AssertionError(e);}
  }
  static final class Item {long id=-1;Object payload;}
- private static M3InternalLeaseRecycler<Item> pool(int cap){return new M3InternalLeaseRecycler<>(Item::new,(v,id)->{
+ private static InternalLeaseRecycler<Item> pool(int cap){return new InternalLeaseRecycler<>(Item::new,(v,id)->{
   check(v.id==-1 && v.payload==null,"dirty acquired");v.id=id;
  },v->{v.payload=null;v.id=-1;},cap);}
  public static void main(String[] args)throws Exception {
@@ -69,6 +69,6 @@ public final class M3InternalLeaseRecyclerLazySelfTest {
   }
   System.out.println("PASS " + checks + " checked assertions (lazy backing, 10k reuse, 60 nesting, pressure and concurrency)");
  }
- private static void nested(M3InternalLeaseRecycler<Item> p,int depth){if(depth==0)return;p.withBorrowed(depth,x->nested(p,depth-1));}
+ private static void nested(InternalLeaseRecycler<Item> p,int depth){if(depth==0)return;p.withBorrowed(depth,x->nested(p,depth-1));}
  private static void await(CountDownLatch l){try{l.await();}catch(InterruptedException e){Thread.currentThread().interrupt();}}
 }

@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3Residency;
+import jdk.internal.m3.collections.Residency;
 
 final class M3ObjectResidencyTest {
     private static final class Value {
@@ -173,20 +173,20 @@ final class M3ObjectResidencyTest {
     }
 
     @Test void residencyAnnotationIsClassRetainedAndExplicit() throws Exception {
-        assertNull(AnnotatedProjection.class.getAnnotation(M3Residency.class),
+        assertNull(AnnotatedProjection.class.getAnnotation(Residency.class),
                 "CLASS retention must not add reflective runtime lookup");
         try (var stream = M3ObjectResidencyTest.class.getResourceAsStream(
                 "M3ObjectResidencyTest$AnnotatedProjection.class")) {
             assertNotNull(stream);
             String bytecode = new String(stream.readAllBytes(), StandardCharsets.ISO_8859_1);
-            assertTrue(bytecode.contains("Ljdk/internal/m3/collections/M3Residency;"),
+            assertTrue(bytecode.contains("Ljdk/internal/m3/collections/Residency;"),
                     "class file retains compile-time metadata");
         }
     }
 
     static final class AnnotatedProjection {
-        @M3Residency(flags = ObjectResidency.LAZY_CREATE | ObjectResidency.SWAP_SECONDARY,
-                estimatedBytes = 128, parent = "owner", strategy = M3Residency.Strategy.SWAP)
+        @Residency(flags = ObjectResidency.LAZY_CREATE | ObjectResidency.SWAP_SECONDARY,
+                estimatedBytes = 128, parent = "owner", strategy = Residency.Strategy.SWAP)
         Object marker;
     }
 }

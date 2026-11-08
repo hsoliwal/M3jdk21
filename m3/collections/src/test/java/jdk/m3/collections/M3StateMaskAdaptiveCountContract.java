@@ -16,7 +16,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
-import jdk.internal.m3.collections.M3StateMaskHistogram;
+import jdk.internal.m3.collections.sketch.StateMaskHistogram;
 
 /**
  * Real M3JDK 21 Java21 array/index/state-mask oracle for both exact-byte and
@@ -42,7 +42,7 @@ public final class M3StateMaskAdaptiveCountContract {
         return matches;
     }
 
-    private static void invalidMask(M3StateMaskHistogram histogram, int required, int forbidden) {
+    private static void invalidMask(StateMaskHistogram histogram, int required, int forbidden) {
         checks++;
         try {
             histogram.countMatching(required, forbidden);
@@ -55,8 +55,8 @@ public final class M3StateMaskAdaptiveCountContract {
     private static void exhaustive() {
         byte[] every = new byte[256];
         for (int value = 0; value < 256; value++) every[value] = (byte) value;
-        var hist = M3StateMaskHistogram.aligned(every, 0, 256, 1,
-                M3StateMaskHistogram.Backend.JAVA);
+        var hist = StateMaskHistogram.aligned(every, 0, 256, 1,
+                StateMaskHistogram.Backend.JAVA);
         check(hist.size() == 256 && hist.distinctStates() == 256, "all unsigned states");
         check(hist.retainedPrimitiveBytes() == 2 * 256 * Integer.BYTES,
                 "unchanged exact and supermask primitive lanes");
@@ -111,8 +111,8 @@ public final class M3StateMaskAdaptiveCountContract {
             boolean reverse = (iteration & 1) != 0;
             int first = reverse ? positions.length - 1 : 0;
             int stride = reverse ? -1 : 1;
-            var original = M3StateMaskHistogram.indexed(positions, states,
-                    first, positions.length, stride, M3StateMaskHistogram.Backend.JAVA);
+            var original = StateMaskHistogram.indexed(positions, states,
+                    first, positions.length, stride, StateMaskHistogram.Backend.JAVA);
             check(original.size() == positions.length, "capture original duplicate physical offsets");
             for (int attempt = 0; attempt < 1024; attempt++) {
                 int required = random.nextInt(256), forbidden = random.nextInt(256);
@@ -128,10 +128,10 @@ public final class M3StateMaskAdaptiveCountContract {
                     check(selected.length == actual, "original 32-bit path mask selects same occurrences");
                 }
             }
-            if (M3StateMaskHistogram.nativeAvailable()) {
-                var nativeHistogram = M3StateMaskHistogram.indexed(positions, states,
+            if (StateMaskHistogram.nativeAvailable()) {
+                var nativeHistogram = StateMaskHistogram.indexed(positions, states,
                         first, positions.length, stride,
-                        M3StateMaskHistogram.Backend.NATIVE_REQUIRED);
+                        StateMaskHistogram.Backend.NATIVE_REQUIRED);
                 for (int required = 0; required < 256; required += 7) {
                     int forbidden = (required * 11) & 255;
                     check(nativeHistogram.countMatching(required, forbidden)
@@ -141,8 +141,8 @@ public final class M3StateMaskAdaptiveCountContract {
             } else {
                 checks++;
                 try {
-                    M3StateMaskHistogram.indexed(positions, states, first, positions.length,
-                            stride, M3StateMaskHistogram.Backend.NATIVE_REQUIRED);
+                    StateMaskHistogram.indexed(positions, states, first, positions.length,
+                            stride, StateMaskHistogram.Backend.NATIVE_REQUIRED);
                     throw new AssertionError("native required silently fell back to Java");
                 } catch (UnsatisfiedLinkError expected) {
                     // The original explicit backend refusal must remain in place.
@@ -162,8 +162,8 @@ public final class M3StateMaskAdaptiveCountContract {
         exhaustive();
         stridedAndDuplicated();
         byte[] empty = new byte[0];
-        var none = M3StateMaskHistogram.aligned(empty, 0, 0, 1,
-                M3StateMaskHistogram.Backend.JAVA);
+        var none = StateMaskHistogram.aligned(empty, 0, 0, 1,
+                StateMaskHistogram.Backend.JAVA);
         check(none.countMatching(0, 0) == 0
                 && none.countMatching(0, 255) == 0, "empty histogram");
         System.out.println("M3_STATEHIST_ADAPTIVE_PASS checks=" + checks);

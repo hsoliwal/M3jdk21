@@ -9,12 +9,12 @@ package jdk.internal.m3.collections;
  *
  * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
  * <ul>
- *   <li>JDK DelayQueue/SynchronousQueue: time-ordered heap / rendezvous [license GPLv2+CPE; NEW_OWNER; priority P2; matrix owner PROPOSED:M3DelayLongQueue]</li>
+ *   <li>JDK DelayQueue/SynchronousQueue: time-ordered heap / rendezvous [license GPLv2+CPE; NEW_OWNER; priority P2; matrix owner PROPOSED:DelayLongQueue]</li>
  * </ul>
  *
  * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] handoffLane}; offset scheme single rendezvous slot per waiter; state-mask bits WAITING,FULFILLED; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: deadline lane + payload lane heap; time offsets / expired mask.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class M3SynchronousQueue<E> {
@@ -41,36 +41,36 @@ public final class M3SynchronousQueue<E> {
 
     /** SynchronousQueue.put (scaffold: not yet received). */
     public void put(E element) throws InterruptedException {
-        throw new M3NotYetReceived("M3SynchronousQueue.put");
+        throw new NotYetReceived("M3SynchronousQueue.put");
     }
 
     /** SynchronousQueue.take (scaffold: not yet received). */
     public E take() throws InterruptedException {
-        throw new M3NotYetReceived("M3SynchronousQueue.take");
+        throw new NotYetReceived("M3SynchronousQueue.take");
     }
 
     /** SynchronousQueue.offer (succeeds only with waiting taker) (scaffold: not yet received). */
     public boolean offer(E element) {
-        throw new M3NotYetReceived("M3SynchronousQueue.offer");
+        throw new NotYetReceived("M3SynchronousQueue.offer");
     }
 
     /** SynchronousQueue.offer(timeout) (scaffold: not yet received). */
     public boolean offer(E element, long timeout, java.util.concurrent.TimeUnit unit) throws InterruptedException {
-        throw new M3NotYetReceived("M3SynchronousQueue.offer");
+        throw new NotYetReceived("M3SynchronousQueue.offer");
     }
 
     /** SynchronousQueue.poll (scaffold: not yet received). */
     public E poll() {
-        throw new M3NotYetReceived("M3SynchronousQueue.poll");
+        throw new NotYetReceived("M3SynchronousQueue.poll");
     }
 
     /** SynchronousQueue.poll(timeout) (scaffold: not yet received). */
     public E poll(long timeout, java.util.concurrent.TimeUnit unit) throws InterruptedException {
-        throw new M3NotYetReceived("M3SynchronousQueue.poll");
+        throw new NotYetReceived("M3SynchronousQueue.poll");
     }
 
     /** SynchronousQueue.size (always 0) (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3SynchronousQueue.size");
+        throw new NotYetReceived("M3SynchronousQueue.size");
     }
 }

@@ -16,7 +16,7 @@ static unsigned trailing_zero_u64(uint64_t value) {
 }
 
 JNIEXPORT void JNICALL
-Java_jdk_internal_m3_collections_M3ObjectSignalOps_applyFeatureMasksNative(
+Java_jdk_internal_m3_collections_ObjectSignalOps_applyFeatureMasksNative(
         JNIEnv *env,
         jclass type,
         jlongArray planes_array,

@@ -26,10 +26,10 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongPatriciaTrie;
+import jdk.internal.m3.collections.LongPatriciaTrie;
 
 /**
- * Finite differential comparison of {@link M3LongPatriciaTrie} against
+ * Finite differential comparison of {@link LongPatriciaTrie} against
  * {@code TreeMap<Long, Long>(Long::compareUnsigned)}: the PATRICIA bit order is unsigned order,
  * and a Commons-style {@code prefixMap(prefix, bits)} is the unsigned sub-map
  * {@code [prefix & mask, prefix | ~mask]}; this is not JDK or Commons replacement proof. Keys mix
@@ -67,7 +67,7 @@ final class M3LongPatriciaTrieTest {
     @Test
     void matchesUnsignedTreeMapAcrossChurnPrefixesAndNavigation() {
         Random random = new Random(0x504154524943L);
-        M3LongPatriciaTrie actual = new M3LongPatriciaTrie();
+        LongPatriciaTrie actual = new LongPatriciaTrie();
         NavigableMap<Long, Long> expected = new TreeMap<>(Long::compareUnsigned);
         long base = random.nextLong();
         for (int step = 0; step < 48_000; step++) {
@@ -131,8 +131,8 @@ final class M3LongPatriciaTrieTest {
 
     @Test
     void edgeContractsFailFastGrowthAndRemovalToEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> new M3LongPatriciaTrie(-1));
-        M3LongPatriciaTrie trie = new M3LongPatriciaTrie(0);
+        assertThrows(IllegalArgumentException.class, () -> new LongPatriciaTrie(-1));
+        LongPatriciaTrie trie = new LongPatriciaTrie(0);
         assertEquals(8, trie.capacity());
         assertTrue(trie.isEmpty());
         assertThrows(NoSuchElementException.class, trie::firstKey);
@@ -201,7 +201,7 @@ final class M3LongPatriciaTrieTest {
 
     @Test
     void retainsOnlyPrimitiveLanes() {
-        var fields = Arrays.stream(M3LongPatriciaTrie.class.getDeclaredFields())
+        var fields = Arrays.stream(LongPatriciaTrie.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()

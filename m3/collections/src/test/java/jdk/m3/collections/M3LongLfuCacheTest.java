@@ -18,10 +18,10 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongLfuCache;
+import jdk.internal.m3.collections.LongLfuCache;
 
 /**
- * Finite differential comparison of {@link M3LongLfuCache} against a boxed reference model
+ * Finite differential comparison of {@link LongLfuCache} against a boxed reference model
  * ({@code HashMap} of value/frequency plus a {@code TreeMap<Integer, LinkedHashMap-order set>} of
  * frequency buckets, i.e. {@code java.util.LinkedHashMap} order with a manual frequency count);
  * this is not JDK replacement proof. Small key ranges with zero and the extrema force frequency
@@ -128,7 +128,7 @@ final class M3LongLfuCacheTest {
 
     private static void runDifferential(int capacity, int steps, long seed) {
         Random random = new Random(seed);
-        M3LongLfuCache actual = new M3LongLfuCache(capacity);
+        LongLfuCache actual = new LongLfuCache(capacity);
         Model expected = new Model(capacity);
         int spread = Math.max(4, capacity * 3);
         for (int step = 0; step < steps; step++) {
@@ -186,10 +186,10 @@ final class M3LongLfuCacheTest {
 
     @Test
     void edgeContractsFailFastAndSweeps() {
-        assertThrows(IllegalArgumentException.class, () -> new M3LongLfuCache(0));
-        assertThrows(IllegalArgumentException.class, () -> new M3LongLfuCache(-1));
-        assertThrows(IllegalArgumentException.class, () -> new M3LongLfuCache((1 << 29) + 1));
-        M3LongLfuCache cache = new M3LongLfuCache(2);
+        assertThrows(IllegalArgumentException.class, () -> new LongLfuCache(0));
+        assertThrows(IllegalArgumentException.class, () -> new LongLfuCache(-1));
+        assertThrows(IllegalArgumentException.class, () -> new LongLfuCache((1 << 29) + 1));
+        LongLfuCache cache = new LongLfuCache(2);
         assertEquals(8, cache.tableCapacity());
         assertTrue(cache.isEmpty());
         assertEquals(0, cache.minFrequency());
@@ -235,7 +235,7 @@ final class M3LongLfuCacheTest {
         assertThrows(NoSuchElementException.class, empty::nextLong);
         // Stream 50,000 distinct keys through a capacity-5 cache: tombstones must be swept, the
         // table never grows, and zero plus the extrema are ordinary keys.
-        M3LongLfuCache small = new M3LongLfuCache(5);
+        LongLfuCache small = new LongLfuCache(5);
         small.put(0L, 0L);
         small.put(Long.MIN_VALUE, 1L);
         small.put(Long.MAX_VALUE, 2L);
@@ -258,7 +258,7 @@ final class M3LongLfuCacheTest {
 
     @Test
     void retainsOnlyPrimitiveLanes() {
-        var fields = Arrays.stream(M3LongLfuCache.class.getDeclaredFields())
+        var fields = Arrays.stream(LongLfuCache.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()

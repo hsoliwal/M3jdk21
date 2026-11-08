@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongStateArray;
+import jdk.internal.m3.collections.LongStateArray;
 
 /** JUnit and existing JNI-selector parity gates for the implicit identity path. */
 //FLLDCIM: MRL - fold-close audit leaf L0180: ADD from PR #1791 head f452419fdcee, retained variant blob d9bf058b77b4, retain merge of #2070 (2028b1fb5f4) kept master's side; recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
@@ -17,13 +17,13 @@ final class M3IndexPathIdentityTest {
     }
 
     @Test void detachedLongStateArrayRetainsItsJavaAndJniContracts() {
-        M3LongStateArray owner = new M3LongStateArray();
+        LongStateArray owner = new LongStateArray();
         for (int i = 0; i < 257; i++) {
             owner.add(i % 9 - 4, i == 63 || i == 128 || i == 255
                     ? 0 : (i % 3 == 0 ? Integer.MIN_VALUE : -1));
         }
-        M3LongStateArray.Snapshot capture = owner.snapshot();
-        M3LongStateArray.Selection java = capture.prepare(
+        LongStateArray.Snapshot capture = owner.snapshot();
+        LongStateArray.Selection java = capture.prepare(
                 Integer.MIN_VALUE, 0, IndexPathMasks.Backend.JAVA);
         int count = 0;
         for (int i = 0; i < capture.size(); i++) {
@@ -32,7 +32,7 @@ final class M3IndexPathIdentityTest {
         assertEquals(count, java.size());
         assertEquals(count, java.rank(capture.size()));
         if (IndexPathMasks.nativeAvailable()) {
-            M3LongStateArray.Selection nativeSelected = capture.prepare(
+            LongStateArray.Selection nativeSelected = capture.prepare(
                     Integer.MIN_VALUE, 0, IndexPathMasks.Backend.NATIVE_REQUIRED);
             assertArrayEquals(java.toArray(), nativeSelected.toArray());
             for (int i = 0; i < java.size(); i++) {

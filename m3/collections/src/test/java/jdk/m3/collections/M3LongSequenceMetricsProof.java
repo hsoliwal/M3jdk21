@@ -3,19 +3,19 @@
 package jdk.m3.collections;
 
 import static jdk.m3.collections.M3PolicyAssertions.*;
-import jdk.internal.m3.collections.M3BoundedLongSequence;
-import jdk.internal.m3.collections.M3LongSequenceMetrics;
-import jdk.internal.m3.collections.M3ObservedLongSequence;
-import jdk.internal.m3.collections.M3ValidatingLongSequence;
+import jdk.internal.m3.collections.BoundedLongSequence;
+import jdk.internal.m3.collections.LongSequenceMetrics;
+import jdk.internal.m3.collections.ObservedLongSequence;
+import jdk.internal.m3.collections.ValidatingLongSequence;
 
 //FLLDCIM: RELOCATE - donor blob 001194a13d9d at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class M3LongSequenceMetricsProof {
     public static void main(String[] args) {
         M3PolicyProbe probe=new M3PolicyProbe(1,2);
-        M3LongSequence validated=new M3ValidatingLongSequence(probe,v->v>0);
-        M3LongSequence bounded=new M3BoundedLongSequence(validated,4);
-        M3LongSequenceMetrics metrics=new M3LongSequenceMetrics();
-        M3ObservedLongSequence observed=new M3ObservedLongSequence(bounded,metrics);
+        M3LongSequence validated=new ValidatingLongSequence(probe,v->v>0);
+        M3LongSequence bounded=new BoundedLongSequence(validated,4);
+        LongSequenceMetrics metrics=new LongSequenceMetrics();
+        ObservedLongSequence observed=new ObservedLongSequence(bounded,metrics);
         observed.add(3);
         check(!observed.addIf(8,v->false),"false addIf");
         observed.addAll(new long[]{4});

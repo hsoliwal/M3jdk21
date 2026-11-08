@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections.concurrent;
 
-import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.NotYetReceived;
 import jdk.m3.collections.M3BlockingDeque;
 
 /**
@@ -17,7 +17,7 @@ import jdk.m3.collections.M3BlockingDeque;
  *
  * <p>DOOP mapping: lane kind LONG; lanes {@code long[] ringLane}; offset scheme ring: head/tail offsets mod capacity; state-mask bits FULL; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: value ring lane; head/tail offsets; lock / none (dense ring).
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class ArrayBlockingLongQueue {
@@ -42,46 +42,46 @@ public final class ArrayBlockingLongQueue {
 
     /** ArrayBlockingQueue.put (scaffold: not yet received). */
     public void put(long value) throws InterruptedException {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.put");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.put");
     }
 
     /** ArrayBlockingQueue.offer (scaffold: not yet received). */
     public boolean offer(long value) {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.offer");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.offer");
     }
 
     /** ArrayBlockingQueue.offer(timeout) (scaffold: not yet received). */
     public boolean offer(long value, long timeout, java.util.concurrent.TimeUnit unit) throws InterruptedException {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.offer");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.offer");
     }
 
     /** ArrayBlockingQueue.take (scaffold: not yet received). */
     public long take() throws InterruptedException {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.take");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.take");
     }
 
     /** ArrayBlockingQueue.poll (scaffold: not yet received). */
     public long pollOrDefault(long defaultValue) {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.pollOrDefault");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.pollOrDefault");
     }
 
     /** ArrayBlockingQueue.peek (scaffold: not yet received). */
     public long peekOrDefault(long defaultValue) {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.peekOrDefault");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.peekOrDefault");
     }
 
     /** ArrayBlockingQueue.remainingCapacity (scaffold: not yet received). */
     public int remainingCapacity() {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.remainingCapacity");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.remainingCapacity");
     }
 
     /** ArrayBlockingQueue.size (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.size");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.size");
     }
 
     /** ArrayBlockingQueue.clear (scaffold: not yet received). */
     public void clear() {
-        throw new M3NotYetReceived("M3ArrayBlockingLongQueue.clear");
+        throw new NotYetReceived("M3ArrayBlockingLongQueue.clear");
     }
 }

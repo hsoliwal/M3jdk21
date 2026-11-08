@@ -19,7 +19,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
-import jdk.internal.m3.collections.M3SignalDimensions;
+import jdk.internal.m3.collections.SignalDimensions;
 
 /** Independent oracle for exact required/excluded logical-position selection. */
 public final class M3RequiredExcludedMaskSelectorContract {
@@ -98,9 +98,9 @@ public final class M3RequiredExcludedMaskSelectorContract {
         int[] expectedRows = M3IndexMaskCompactor.selectPositions(
                 states, 0, 1, M3IndexMaskCompactor.Backend.JAVA);
         int[] expected = oracleOrder(signals, descending, expectedRows);
-        eq(expected, M3SignalDimensions.filtered(
+        eq(expected, SignalDimensions.filtered(
                 signals, descending, states, 0, 1, M3SignalOrder.Backend.JAVA));
-        eq(expected, M3SignalDimensions.filtered(
+        eq(expected, SignalDimensions.filtered(
                 signals, descending, states, 0, 1, M3SignalOrder.Backend.JAVA,
                 M3IndexMaskCompactor.Backend.JAVA));
     }

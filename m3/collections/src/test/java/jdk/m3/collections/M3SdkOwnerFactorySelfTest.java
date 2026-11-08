@@ -14,8 +14,8 @@ import java.util.Random;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.BiPredicate;
-import jdk.internal.m3.collections.M3CollectionSdk;
-import jdk.internal.m3.collections.M3IndexedMultiValueMap;
+import jdk.internal.m3.collections.CollectionSdk;
+import jdk.internal.m3.collections.IndexedMultiValueMap;
 import jdk.m3.collections.range.LongRangeSet;
 
 /** Differential proof of SDK factories over the existing M3 array/index/mask owners. */
@@ -32,7 +32,7 @@ public final class M3SdkOwnerFactorySelfTest {
     }
 
     private static void arrayList() {
-        M3ArrayList<Integer> m3 = M3CollectionSdk.m3ArrayList();
+        M3ArrayList<Integer> m3 = CollectionSdk.m3ArrayList();
         ArrayList<Integer> jdk = new ArrayList<>();
         Random random = new Random(2026101801L);
         for (int step = 0; step < 4_096; step++) {
@@ -68,7 +68,7 @@ public final class M3SdkOwnerFactorySelfTest {
     }
 
     private static void table() {
-        M3IndexedTable<String, String, Integer> table = M3CollectionSdk.indexedTable();
+        M3IndexedTable<String, String, Integer> table = CollectionSdk.indexedTable();
         yes(table.isEmpty(), "new indexed table");
         eq(null, table.put("r", "c", null, M3IndexedTable.VISIBLE), "null-bearing cell insertion");
         yes(table.contains("r", "c"), "present null-bearing cell");
@@ -85,17 +85,17 @@ public final class M3SdkOwnerFactorySelfTest {
     }
 
     private static void multivalue() {
-        M3IndexedMultiValueMap<String, Integer> map = M3CollectionSdk.indexedMultiValueMap();
-        map.add("k", 7, M3IndexedMultiValueMap.VISIBLE);
-        map.add("k", 7, M3IndexedMultiValueMap.DIRTY);
-        map.add("k", null, M3IndexedMultiValueMap.VISIBLE);
-        map.add(null, -1, M3IndexedMultiValueMap.VISIBLE);
+        IndexedMultiValueMap<String, Integer> map = CollectionSdk.indexedMultiValueMap();
+        map.add("k", 7, IndexedMultiValueMap.VISIBLE);
+        map.add("k", 7, IndexedMultiValueMap.DIRTY);
+        map.add("k", null, IndexedMultiValueMap.VISIBLE);
+        map.add(null, -1, IndexedMultiValueMap.VISIBLE);
         eq(4, map.size(), "total array occurrences");
         eq(2, map.keyCount(), "distinct M3 slot-index groups");
         eq(3, map.valueCount("k"), "per-key occurrences");
         eq(Arrays.asList(7, 7, null), map.snapshot("k"), "detached duplicate/null snapshot");
         eq(Arrays.asList(7, null),
-                map.selected("k", M3IndexedMultiValueMap.VISIBLE, 0,
+                map.selected("k", IndexedMultiValueMap.VISIBLE, 0,
                         M3IndexMaskCompactor.Backend.JAVA), "bitmasked index selection");
         eq(3, map.removeKey("k"), "whole group deletion");
         yes(!map.containsKey("k"), "key index invalidated");
@@ -103,7 +103,7 @@ public final class M3SdkOwnerFactorySelfTest {
     }
 
     private static void ranges() {
-        LongRangeSet set = M3CollectionSdk.longRangeSet();
+        LongRangeSet set = CollectionSdk.longRangeSet();
         set.add(0, 10);
         set.add(10, 20);
         eq(1, set.rangeCount(), "adjacent merge by two parallel long lanes");
@@ -121,7 +121,7 @@ public final class M3SdkOwnerFactorySelfTest {
     private static void existingSortedContracts() {
         TreeSet<String> source = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         source.addAll(List.of("Alpha", "Beta", "Gamma"));
-        var sorted = M3CollectionSdk.readOnlyFilteredSortedSet(source, s -> !s.startsWith("B"));
+        var sorted = CollectionSdk.readOnlyFilteredSortedSet(source, s -> !s.startsWith("B"));
         eq(List.of("Alpha", "Gamma"), new ArrayList<>(sorted), "existing sorted filter");
         source.add("Delta");
         eq(List.of("Alpha", "Delta", "Gamma"), new ArrayList<>(sorted), "live sorted filter");
@@ -129,7 +129,7 @@ public final class M3SdkOwnerFactorySelfTest {
         TreeMap<Integer, Integer> map = new TreeMap<>();
         map.put(1, 2); map.put(3, 4); map.put(5, 6);
         BiPredicate<Integer,Integer> predicate = (key, value) -> (key & 1) == 1 && value > 3;
-        var view = M3CollectionSdk.readOnlyFilteredSortedMap(map, predicate);
+        var view = CollectionSdk.readOnlyFilteredSortedMap(map, predicate);
         eq(List.of(3, 5), new ArrayList<>(view.keySet()), "existing sorted map");
         map.put(7, 8);
         eq(List.of(3, 5, 7), new ArrayList<>(view.keySet()), "live sorted map filter");

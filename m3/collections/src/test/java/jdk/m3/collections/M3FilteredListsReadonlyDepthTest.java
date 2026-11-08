@@ -3,11 +3,11 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3FilteredListsReadonlyDepthProof;
+import jdk.internal.m3.collections.FilteredListsReadonlyDepthProof;
 
 /** Actual module JUnit harness of the isolated repeated-readonly contract oracle. */
 final class M3FilteredListsReadonlyDepthTest {
     @Test void nestedReadOnlyNeverRecursesOrLeaksWriteAccess() {
-        M3FilteredListsReadonlyDepthProof.main(new String[0]);
+        FilteredListsReadonlyDepthProof.main(new String[0]);
     }
 }

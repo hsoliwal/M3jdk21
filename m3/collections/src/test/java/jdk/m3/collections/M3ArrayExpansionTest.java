@@ -5,7 +5,7 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3ColumnarGrowthContract;
+import jdk.internal.m3.collections.ColumnarGrowthContract;
 
 /** Owning-module regression entry points; all oracles also run without JUnit. */
 final class M3ArrayExpansionTest {
@@ -14,10 +14,10 @@ final class M3ArrayExpansionTest {
     }
 
     @Test void columnarOrdinaryBehavior() {
-        M3ColumnarGrowthContract.runOrdinary();
+        ColumnarGrowthContract.runOrdinary();
     }
 
     @Test void columnarOverflowBoundaries() {
-        M3ColumnarGrowthContract.runBoundary();
+        ColumnarGrowthContract.runBoundary();
     }
 }

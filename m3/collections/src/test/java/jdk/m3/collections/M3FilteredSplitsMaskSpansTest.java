@@ -15,10 +15,10 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongIndexPathMasksJNI;
-import jdk.internal.m3.collections.M3LongRankBatchNative;
-import jdk.internal.m3.collections.M3ResidencyStateMaskIndex;
-import jdk.internal.m3.collections.M3StateMaskHistogram;
+import jdk.internal.m3.collections.LongIndexPathMasksJNI;
+import jdk.internal.m3.collections.LongRankBatchNative;
+import jdk.internal.m3.collections.ResidencyStateMaskIndex;
+import jdk.internal.m3.collections.sketch.StateMaskHistogram;
 
 final class M3FilteredSplitsMaskSpansTest {
     @Test void filteredRecursiveSplits() { M3FilteredSplitContract.main(new String[0]); }
@@ -34,13 +34,13 @@ final class M3FilteredSplitsMaskSpansTest {
         org.junit.jupiter.api.Assertions.assertAll(
                 () -> org.junit.jupiter.api.Assertions.assertTrue(M3IndexMaskCompactor.nativeAvailable(), "mask"),
                 () -> org.junit.jupiter.api.Assertions.assertTrue(IndexPathMasks.nativeAvailable(), "pathmask"),
-                () -> org.junit.jupiter.api.Assertions.assertTrue(M3LongIndexPathMasksJNI.nativeAvailable(), "long-path-masks"),
+                () -> org.junit.jupiter.api.Assertions.assertTrue(LongIndexPathMasksJNI.nativeAvailable(), "long-path-masks"),
                 () -> org.junit.jupiter.api.Assertions.assertTrue(M3LongAddressKernel.nativeAvailable(), "address"),
                 () -> org.junit.jupiter.api.Assertions.assertTrue(M3SpanIndex.nativeAvailable(), "span"),
-                () -> org.junit.jupiter.api.Assertions.assertTrue(M3StateMaskHistogram.nativeAvailable(), "statehist"),
-                () -> org.junit.jupiter.api.Assertions.assertTrue(M3LongRankBatchNative.nativeAvailable(), "rank"),
+                () -> org.junit.jupiter.api.Assertions.assertTrue(StateMaskHistogram.nativeAvailable(), "statehist"),
+                () -> org.junit.jupiter.api.Assertions.assertTrue(LongRankBatchNative.nativeAvailable(), "rank"),
                 () -> org.junit.jupiter.api.Assertions.assertTrue(M3SignalOrderNative.available(), "signal"),
-                () -> org.junit.jupiter.api.Assertions.assertTrue(M3ResidencyStateMaskIndex.nativeAvailable(), "residency"));
+                () -> org.junit.jupiter.api.Assertions.assertTrue(ResidencyStateMaskIndex.nativeAvailable(), "residency"));
         System.loadLibrary("m3bitlane");
         M3BitLane28 lane = new M3BitLane28();
         lane.set(0); lane.set(63); lane.set(4096);

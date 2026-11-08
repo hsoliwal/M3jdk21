@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongStateArray;
+import jdk.internal.m3.collections.LongStateArray;
 
 /** Differential contract proof for the primitive value/state dynamic-array owner. */
 final class M3LongStateArrayTest {
     @Test void randomizedMutationsKeepStateFlagsAligned() {
         for (int seed = 0; seed < 48; seed++) {
             Random random = new Random(0x4d335354415445L ^ seed);
-            var actual = new M3LongStateArray(seed % 7);
+            var actual = new LongStateArray(seed % 7);
             var values = new ArrayList<Long>();
             var states = new ArrayList<Integer>();
             for (int step = 0; step < 500; step++) {
@@ -114,7 +114,7 @@ final class M3LongStateArrayTest {
     }
 
     @Test void stateMaskCompactionUsesOneMutationEpochAndPreservesAlignment() {
-        var owner = new M3LongStateArray();
+        var owner = new LongStateArray();
         owner.add(10, 1);
         owner.add(20, 0);
         owner.add(30, 1);
@@ -133,7 +133,7 @@ final class M3LongStateArrayTest {
     }
 
     @Test void sortedAndFilteredViewsPreserveDuplicateOccurrences() {
-        var owner = new M3LongStateArray();
+        var owner = new LongStateArray();
         long[] values = {5, 1, 5, -2, 1};
         int[] states = {1, 0, 1, 1, 1};
         for (int i = 0; i < values.length; i++) owner.add(values[i], states[i]);
@@ -161,7 +161,7 @@ final class M3LongStateArrayTest {
     }
 
     @Test void fullWordMasksAndExistingNativeSelectorStayInParity() {
-        var owner = new M3LongStateArray();
+        var owner = new LongStateArray();
         owner.add(-1, 0x8000_0000);
         owner.add(Long.MIN_VALUE, 0x8000_0003);
         owner.add(Long.MAX_VALUE, 3);
@@ -184,8 +184,8 @@ final class M3LongStateArrayTest {
     }
 
     @Test void validationAndGenerationAreNonmutatingOnRefusal() {
-        assertThrows(IllegalArgumentException.class, () -> new M3LongStateArray(-1));
-        var owner = new M3LongStateArray();
+        assertThrows(IllegalArgumentException.class, () -> new LongStateArray(-1));
+        var owner = new LongStateArray();
         assertThrows(IndexOutOfBoundsException.class, () -> owner.insert(1, 10, 3));
         owner.add(10, 3);
         long generation = owner.generation();
@@ -207,7 +207,7 @@ final class M3LongStateArrayTest {
     }
 
     @Test void onlyOneValueOwnerAndOneAlignedMetadataLaneAreRetained() {
-        var types = Arrays.stream(M3LongStateArray.class.getDeclaredFields())
+        var types = Arrays.stream(LongStateArray.class.getDeclaredFields())
                 .filter(field -> !Modifier.isStatic(field.getModifiers()))
                 .map(java.lang.reflect.Field::getType)
                 .toList();

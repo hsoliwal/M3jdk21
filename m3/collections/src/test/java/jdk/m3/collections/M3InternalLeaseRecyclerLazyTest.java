@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3InternalLeaseRecycler;
+import jdk.internal.m3.collections.InternalLeaseRecycler;
 
 /** Contract-and-lifecycle JUnit bridge; self-test has no external test dependency. */
 class M3InternalLeaseRecyclerLazyTest {
@@ -19,12 +19,12 @@ class M3InternalLeaseRecyclerLazyTest {
 
     @Test
     void publicAndProtectedApiIsUnchanged() {
-        var publicNames = Arrays.stream(M3InternalLeaseRecycler.class.getDeclaredMethods())
+        var publicNames = Arrays.stream(InternalLeaseRecycler.class.getDeclaredMethods())
                 .filter(m -> Modifier.isPublic(m.getModifiers()) || Modifier.isProtected(m.getModifiers()))
                 .map(m -> m.getName() + "/" + m.getParameterCount()).sorted().toList();
         assertEquals(java.util.List.of("close/0", "onPressure/1", "stats/0",
                 "trimIdle/1", "withBorrowed/2"), publicNames);
-        assertEquals(1, M3InternalLeaseRecycler.class.getDeclaredConstructors().length);
-        assertTrue(Modifier.isPublic(M3InternalLeaseRecycler.class.getDeclaredConstructors()[0].getModifiers()));
+        assertEquals(1, InternalLeaseRecycler.class.getDeclaredConstructors().length);
+        assertTrue(Modifier.isPublic(InternalLeaseRecycler.class.getDeclaredConstructors()[0].getModifiers()));
     }
 }

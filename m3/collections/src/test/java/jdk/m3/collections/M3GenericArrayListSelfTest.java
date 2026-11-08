@@ -20,7 +20,7 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.function.Predicate;
 import java.util.concurrent.atomic.AtomicInteger;
-import jdk.internal.m3.collections.M3GenericCollections;
+import jdk.internal.m3.collections.GenericCollections;
 
 /** Standalone randomized differential oracle with no test-library dependency. */
 public final class M3GenericArrayListSelfTest {
@@ -211,11 +211,11 @@ public final class M3GenericArrayListSelfTest {
             for (int i = 0; i < input.length; i++) input[i] = value(random);
             verifySnapshot(input, random);
         }
-        M3ArrayList<Integer> fromFactory = M3GenericCollections.arrayList(List.of(9, 4, 7));
+        M3ArrayList<Integer> fromFactory = GenericCollections.arrayList(List.of(9, 4, 7));
         check(fromFactory.equals(List.of(9, 4, 7)), "real generic SDK factory");
-        check(M3GenericCollections.filteredSnapshot(List.of(1, 2, 3), i -> i > 1)
+        check(GenericCollections.filteredSnapshot(List.of(1, 2, 3), i -> i > 1)
                 .equals(List.of(2, 3)), "factory filtered snapshot");
-        check(M3GenericCollections.sortedSnapshot(List.of(3, 1, 2), Comparator.naturalOrder())
+        check(GenericCollections.sortedSnapshot(List.of(3, 1, 2), Comparator.naturalOrder())
                 .equals(List.of(1, 2, 3)), "factory sorted snapshot");
         M3ArrayList<Integer> owner = new M3ArrayList<>(List.of(1, 2, 3));
         M3IndexedListSnapshot<Integer> frozen = owner.snapshot();

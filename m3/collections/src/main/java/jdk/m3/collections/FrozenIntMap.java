@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections;
 
-import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.NotYetReceived;
 
 /**
  * M3 five-library superset scaffold {@code FrozenIntMap}: API group {@code FROZEN_INT_MAP} over arrays and state masks.
@@ -16,7 +16,7 @@ import jdk.internal.m3.collections.M3NotYetReceived;
  *
  * <p>DOOP mapping: lane kind INT; lanes {@code int[] keyLane;int[] valueLane;int[] hashIndexLane}; offset scheme sorted key ordinal + open-address hash index; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class FrozenIntMap {
@@ -45,41 +45,41 @@ public final class FrozenIntMap {
 
     /** JDK Map.copyOf (int lanes) (scaffold: not yet received). */
     public static FrozenIntMap copyOf(int[] keys, int[] values) {
-        throw new M3NotYetReceived("M3FrozenIntMap.copyOf");
+        throw new NotYetReceived("M3FrozenIntMap.copyOf");
     }
 
     /** Map.size (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3FrozenIntMap.size");
+        throw new NotYetReceived("M3FrozenIntMap.size");
     }
 
     /** Map.containsKey (scaffold: not yet received). */
     public boolean containsKey(int key) {
-        throw new M3NotYetReceived("M3FrozenIntMap.containsKey");
+        throw new NotYetReceived("M3FrozenIntMap.containsKey");
     }
 
     /** Map.getOrDefault (scaffold: not yet received). */
     public int getOrDefault(int key, int defaultValue) {
-        throw new M3NotYetReceived("M3FrozenIntMap.getOrDefault");
+        throw new NotYetReceived("M3FrozenIntMap.getOrDefault");
     }
 
     /** sorted ordinal access (scaffold: not yet received). */
     public int keyAt(int ordinal) {
-        throw new M3NotYetReceived("M3FrozenIntMap.keyAt");
+        throw new NotYetReceived("M3FrozenIntMap.keyAt");
     }
 
     /** sorted ordinal access (scaffold: not yet received). */
     public int valueAt(int ordinal) {
-        throw new M3NotYetReceived("M3FrozenIntMap.valueAt");
+        throw new NotYetReceived("M3FrozenIntMap.valueAt");
     }
 
     /** Map.forEach (primitive) (scaffold: not yet received). */
     public void forEach(IntIntConsumer action) {
-        throw new M3NotYetReceived("M3FrozenIntMap.forEach");
+        throw new NotYetReceived("M3FrozenIntMap.forEach");
     }
 
     /** UOE contract once received (JEP269) (scaffold: not yet received). */
     public int put(int key, int value) {
-        throw new M3NotYetReceived("M3FrozenIntMap.put");
+        throw new NotYetReceived("M3FrozenIntMap.put");
     }
 }

@@ -3,24 +3,24 @@ package jdk.m3.collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LazyElementFlags;
-import jdk.internal.m3.collections.M3PrimitiveRowProvider;
-import jdk.internal.m3.collections.M3ProviderBackedPrimitiveRows;
-import jdk.internal.m3.collections.M3ProviderLoadException;
+import jdk.internal.m3.collections.LazyElementFlags;
+import jdk.internal.m3.collections.PrimitiveRowProvider;
+import jdk.internal.m3.collections.ProviderBackedPrimitiveRows;
+import jdk.internal.m3.collections.ProviderLoadException;
 
 class M3ProviderBackedPrimitiveRowsTest {
 
     @Test
     void firstTouchLoadsOnceAndRepeatedReadsStayPrimitive() {
         int[] loads = {0};
-        M3PrimitiveRowProvider provider = (rowId, target) -> {
+        PrimitiveRowProvider provider = (rowId, target) -> {
             loads[0]++;
             target[0] = rowId * 10L;
             target[1] = rowId == 5L ? 0L : rowId + 1L;
         };
 
-        M3ProviderBackedPrimitiveRows rows =
-                new M3ProviderBackedPrimitiveRows(
+        ProviderBackedPrimitiveRows rows =
+                new ProviderBackedPrimitiveRows(
                         provider,
                         PrimitiveKind.LONG,
                         PrimitiveKind.INT);
@@ -30,7 +30,7 @@ class M3ProviderBackedPrimitiveRowsTest {
         assertEquals(0L, rows.getBits(1, 5L));
         assertEquals(1, loads[0]);
         assertTrue(rows.isMaterialized(5L));
-        assertTrue(M3LazyElementFlags.has(rows.flags(5L), M3LazyElementFlags.MATERIALIZED));
+        assertTrue(LazyElementFlags.has(rows.flags(5L), LazyElementFlags.MATERIALIZED));
 
         assertEquals(50L, rows.getBits(0, 5L));
         assertEquals(1, loads[0], "second touch must not reload");
@@ -40,19 +40,19 @@ class M3ProviderBackedPrimitiveRowsTest {
     @Test
     void invalidationAndRetryAreExplicit() {
         int[] attempts = {0};
-        M3PrimitiveRowProvider provider = (rowId, target) -> {
+        PrimitiveRowProvider provider = (rowId, target) -> {
             attempts[0]++;
             if (attempts[0] == 1) throw new IllegalStateException("first failure");
             target[0] = 77L;
         };
 
-        M3ProviderBackedPrimitiveRows rows =
-                new M3ProviderBackedPrimitiveRows(provider, PrimitiveKind.LONG);
+        ProviderBackedPrimitiveRows rows =
+                new ProviderBackedPrimitiveRows(provider, PrimitiveKind.LONG);
 
-        M3ProviderLoadException failure =
-                assertThrows(M3ProviderLoadException.class, () -> rows.touch(9L));
+        ProviderLoadException failure =
+                assertThrows(ProviderLoadException.class, () -> rows.touch(9L));
         assertEquals(9L, failure.logicalId());
-        assertTrue(M3LazyElementFlags.has(rows.flags(9L), M3LazyElementFlags.FAILED));
+        assertTrue(LazyElementFlags.has(rows.flags(9L), LazyElementFlags.FAILED));
         assertFalse(rows.isMaterialized(9L));
 
         assertThrows(IllegalStateException.class, () -> rows.touch(9L));
@@ -61,28 +61,28 @@ class M3ProviderBackedPrimitiveRowsTest {
         assertEquals(77L, rows.getBits(0, 9L));
 
         assertTrue(rows.invalidate(9L));
-        assertTrue(M3LazyElementFlags.has(rows.flags(9L), M3LazyElementFlags.INVALIDATED));
+        assertTrue(LazyElementFlags.has(rows.flags(9L), LazyElementFlags.INVALIDATED));
         assertEquals(77L, rows.getBits(0, 9L));
         assertEquals(3, attempts[0]);
     }
 
     @Test
     void applicationFlagsAndPinningShareOneShortWord() {
-        M3ProviderBackedPrimitiveRows rows =
-                new M3ProviderBackedPrimitiveRows(
+        ProviderBackedPrimitiveRows rows =
+                new ProviderBackedPrimitiveRows(
                         (rowId, target) -> target[0] = rowId,
                         PrimitiveKind.LONG);
 
         rows.applicationFlags(
                 11L,
-                (short) (M3LazyElementFlags.APPLICATION_1 | M3LazyElementFlags.APPLICATION_3));
+                (short) (LazyElementFlags.APPLICATION_1 | LazyElementFlags.APPLICATION_3));
         rows.pin(11L, true);
         rows.touch(11L);
 
         short flags = rows.flags(11L);
-        assertTrue(M3LazyElementFlags.has(flags, M3LazyElementFlags.PINNED));
+        assertTrue(LazyElementFlags.has(flags, LazyElementFlags.PINNED));
         assertEquals(
-                (short) (M3LazyElementFlags.APPLICATION_1 | M3LazyElementFlags.APPLICATION_3),
+                (short) (LazyElementFlags.APPLICATION_1 | LazyElementFlags.APPLICATION_3),
                 rows.applicationFlags(11L));
         assertFalse(rows.evict(11L), "pinned row must not evict");
 
@@ -93,7 +93,7 @@ class M3ProviderBackedPrimitiveRowsTest {
 
     @Test
     void providerFailureCallbackCannotMaskPrimaryFailure() {
-        M3PrimitiveRowProvider provider = new M3PrimitiveRowProvider() {
+        PrimitiveRowProvider provider = new PrimitiveRowProvider() {
             @Override
             public void load(long rowId, long[] target) {
                 throw new IllegalArgumentException("load");
@@ -105,10 +105,10 @@ class M3ProviderBackedPrimitiveRowsTest {
             }
         };
 
-        M3ProviderBackedPrimitiveRows rows =
-                new M3ProviderBackedPrimitiveRows(provider, PrimitiveKind.LONG);
-        M3ProviderLoadException failure =
-                assertThrows(M3ProviderLoadException.class, () -> rows.touch(1L));
+        ProviderBackedPrimitiveRows rows =
+                new ProviderBackedPrimitiveRows(provider, PrimitiveKind.LONG);
+        ProviderLoadException failure =
+                assertThrows(ProviderLoadException.class, () -> rows.touch(1L));
 
         assertInstanceOf(IllegalArgumentException.class, failure.getCause());
         assertEquals(1, failure.getCause().getSuppressed().length);
@@ -119,22 +119,22 @@ class M3ProviderBackedPrimitiveRowsTest {
     void flagsUseExactlySixteenBitsOfDeclaredState() {
         int union = 0;
         short[] bits = {
-                M3LazyElementFlags.DISCOVERED,
-                M3LazyElementFlags.LOADING,
-                M3LazyElementFlags.MATERIALIZED,
-                M3LazyElementFlags.FAILED,
-                M3LazyElementFlags.DIRTY,
-                M3LazyElementFlags.PINNED,
-                M3LazyElementFlags.INVALIDATED,
-                M3LazyElementFlags.CHILDREN_KNOWN,
-                M3LazyElementFlags.HAS_CHILDREN,
-                M3LazyElementFlags.CHILDREN_LOADING,
-                M3LazyElementFlags.CHILDREN_PARTIAL,
-                M3LazyElementFlags.CHILDREN_COMPLETE,
-                M3LazyElementFlags.APPLICATION_0,
-                M3LazyElementFlags.APPLICATION_1,
-                M3LazyElementFlags.APPLICATION_2,
-                M3LazyElementFlags.APPLICATION_3
+                LazyElementFlags.DISCOVERED,
+                LazyElementFlags.LOADING,
+                LazyElementFlags.MATERIALIZED,
+                LazyElementFlags.FAILED,
+                LazyElementFlags.DIRTY,
+                LazyElementFlags.PINNED,
+                LazyElementFlags.INVALIDATED,
+                LazyElementFlags.CHILDREN_KNOWN,
+                LazyElementFlags.HAS_CHILDREN,
+                LazyElementFlags.CHILDREN_LOADING,
+                LazyElementFlags.CHILDREN_PARTIAL,
+                LazyElementFlags.CHILDREN_COMPLETE,
+                LazyElementFlags.APPLICATION_0,
+                LazyElementFlags.APPLICATION_1,
+                LazyElementFlags.APPLICATION_2,
+                LazyElementFlags.APPLICATION_3
         };
         for (short bit : bits) {
             int unsigned = Short.toUnsignedInt(bit);

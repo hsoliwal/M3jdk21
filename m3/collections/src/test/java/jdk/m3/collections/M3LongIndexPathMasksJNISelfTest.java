@@ -6,7 +6,7 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import jdk.internal.m3.collections.M3LongIndexPathMasksJNI;
+import jdk.internal.m3.collections.LongIndexPathMasksJNI;
 
 /** Java21 oracle of the optional real JNI Region backend (no native stand-in). */
 public final class M3LongIndexPathMasksJNISelfTest {
@@ -20,19 +20,19 @@ public final class M3LongIndexPathMasksJNISelfTest {
         if (arguments.length > 1 || (arguments.length == 1 && !nativeRequired))
             throw new IllegalArgumentException("use --native or no argument");
         if (!nativeRequired) {
-            if (M3LongIndexPathMasksJNI.nativeAvailable())
+            if (LongIndexPathMasksJNI.nativeAvailable())
                 throw new AssertionError("no-native test must run without library path");
             fail(UnsatisfiedLinkError.class,
-                    () -> M3LongIndexPathMasksJNI.select(new long[0], new int[0],
+                    () -> LongIndexPathMasksJNI.select(new long[0], new int[0],
                             new int[][] {new int[0]}, new int[] {0}, new int[] {0}, 0, 0, 1));
             fail(UnsatisfiedLinkError.class,
-                    () -> M3LongIndexPathMasksJNI.scanWindow(new long[0], new int[0],
+                    () -> LongIndexPathMasksJNI.scanWindow(new long[0], new int[0],
                             new int[][] {new int[0]}, new int[] {0}, new int[] {0},
                             0, 0, 1, 0, new long[0], 0, 0));
             System.out.println("PASS M3_LONG_PATH_JNI_ABSENT|assertions=" + assertions);
             return;
         }
-        check(M3LongIndexPathMasksJNI.nativeAvailable(), "native library must actually load");
+        check(LongIndexPathMasksJNI.nativeAvailable(), "native library must actually load");
         boundaries();
         randomDifferential();
         System.out.println("PASS M3_LONG_PATH_JNI|assertions=" + assertions + "|rounds=1600");
@@ -44,86 +44,86 @@ public final class M3LongIndexPathMasksJNISelfTest {
         int[][] planes = {{1, 3, 0, 1, 1}, {8, 8, 8, 8, 0}};
         int[] needs = {1, 8}, denies = {2, 0};
         long[] expected = {Long.MIN_VALUE, Long.MAX_VALUE};
-        eq(expected, M3LongIndexPathMasksJNI.select(rows, offsets, planes,
+        eq(expected, LongIndexPathMasksJNI.select(rows, offsets, planes,
                 needs, denies, 0, 5, 1));
         eq(new long[] {Long.MAX_VALUE, Long.MIN_VALUE},
-                M3LongIndexPathMasksJNI.select(rows, offsets, planes,
+                LongIndexPathMasksJNI.select(rows, offsets, planes,
                         needs, denies, 3, 4, -1));
         eq(new long[] {Long.MAX_VALUE},
-                M3LongIndexPathMasksJNI.select(rows, offsets, planes,
+                LongIndexPathMasksJNI.select(rows, offsets, planes,
                         needs, denies, 3, 2, -2));
-        eq(new long[0], M3LongIndexPathMasksJNI.select(rows, offsets, planes,
+        eq(new long[0], LongIndexPathMasksJNI.select(rows, offsets, planes,
                 needs, denies, rows.length, 0, 1));
-        long[] detached = M3LongIndexPathMasksJNI.select(rows, offsets, planes,
+        long[] detached = LongIndexPathMasksJNI.select(rows, offsets, planes,
                 needs, denies, 0, 5, 1);
         detached[0] = 33;
         eq(Long.MIN_VALUE, rows[0]);
         long[] output = new long[5];
         Arrays.fill(output, CANARY);
-        long result = M3LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
+        long result = LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
                 needs, denies, 0, 5, 1, 0, output, 1, 1);
         eq(1, M3LongIndexPathMasks.nextOrdinal(result));
         eq(1, M3LongIndexPathMasks.written(result));
         eq(Long.MIN_VALUE, output[1]);
         eq(CANARY, output[0]);
         eq(CANARY, output[2]);
-        long resume = M3LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
+        long resume = LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
                 needs, denies, 0, 5, 1, 1, output, 2, 1);
         eq(4, M3LongIndexPathMasks.nextOrdinal(resume));
         eq(1, M3LongIndexPathMasks.written(resume));
         eq(Long.MAX_VALUE, output[2]);
-        long zero = M3LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
+        long zero = LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
                 needs, denies, 0, 5, 1, 2, output, 0, 0);
         eq(2, M3LongIndexPathMasks.nextOrdinal(zero));
         eq(0, M3LongIndexPathMasks.written(zero));
         eq(CANARY, output[0]);
         fail(IllegalArgumentException.class,
-                () -> M3LongIndexPathMasksJNI.select(rows, new int[0], planes,
+                () -> LongIndexPathMasksJNI.select(rows, new int[0], planes,
                         needs, denies, 0, 5, 1));
         fail(IndexOutOfBoundsException.class,
-                () -> M3LongIndexPathMasksJNI.select(rows, offsets, planes,
+                () -> LongIndexPathMasksJNI.select(rows, offsets, planes,
                         needs, denies, 0, 5, 0));
         fail(IndexOutOfBoundsException.class,
-                () -> M3LongIndexPathMasksJNI.select(rows, offsets, planes,
+                () -> LongIndexPathMasksJNI.select(rows, offsets, planes,
                         needs, denies, 0, 6, 1));
         fail(IllegalArgumentException.class,
-                () -> M3LongIndexPathMasksJNI.select(rows, offsets, planes,
+                () -> LongIndexPathMasksJNI.select(rows, offsets, planes,
                         new int[]{1}, denies, 0, 5, 1));
         fail(NullPointerException.class,
-                () -> M3LongIndexPathMasksJNI.select(null, offsets, planes,
+                () -> LongIndexPathMasksJNI.select(null, offsets, planes,
                         needs, denies, 0, 5, 1));
         fail(NullPointerException.class,
-                () -> M3LongIndexPathMasksJNI.select(rows, offsets,
+                () -> LongIndexPathMasksJNI.select(rows, offsets,
                         new int[][] {null, new int[8]}, needs, denies, 0, 5, 1));
         fail(IllegalArgumentException.class,
-                () -> M3LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
+                () -> LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
                         needs, denies, 0, 5, 1, 0, rows, 0, 1));
         fail(IllegalArgumentException.class,
-                () -> M3LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
+                () -> LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
                         needs, denies, 0, 5, 1, 0, output, 0,
                         M3LongIndexPathMasks.MAX_WINDOW + 1));
         fail(IndexOutOfBoundsException.class,
-                () -> M3LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
+                () -> LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
                         needs, denies, 0, 5, 1, 6, output, 0, 1));
         fail(IndexOutOfBoundsException.class,
-                () -> M3LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
+                () -> LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
                         needs, denies, 0, 5, 1, 0, output, output.length, 1));
         long[] sentinel = {1, 2, 3};
         int[] broken = {0, 1, 99, 3, 4};
         fail(IndexOutOfBoundsException.class,
-                () -> M3LongIndexPathMasksJNI.scanWindow(rows, broken, planes,
+                () -> LongIndexPathMasksJNI.scanWindow(rows, broken, planes,
                         needs, denies, 0, 5, 1, 0, sentinel, 0, 3));
         eq(new long[]{1, 2, 3}, sentinel);
         fail(IndexOutOfBoundsException.class,
-                () -> M3LongIndexPathMasksJNI.select(rows, broken, planes,
+                () -> LongIndexPathMasksJNI.select(rows, broken, planes,
                         needs, denies, 0, 5, 1));
         // Validate a later bad offset only when the window reaches that entry.
         long[] prefix = new long[2];
-        long prefixToken = M3LongIndexPathMasksJNI.scanWindow(rows, broken, planes,
+        long prefixToken = LongIndexPathMasksJNI.scanWindow(rows, broken, planes,
                 new int[]{0, 0}, new int[]{0, 0}, 0, 5, 1, 0, prefix, 0, 2);
         eq(2, M3LongIndexPathMasks.nextOrdinal(prefixToken));
         fail(IndexOutOfBoundsException.class,
-                () -> M3LongIndexPathMasksJNI.scanWindow(rows, broken, planes,
+                () -> LongIndexPathMasksJNI.scanWindow(rows, broken, planes,
                         new int[]{0, 0}, new int[]{0, 0}, 0, 5, 1, 2,
                         sentinel, 0, 1));
         eq(new long[]{1, 2, 3}, sentinel);
@@ -138,7 +138,7 @@ public final class M3LongIndexPathMasksJNISelfTest {
         }
         long[] page = new long[large.length + 2];
         Arrays.fill(page, CANARY);
-        long full = M3LongIndexPathMasksJNI.scanWindow(large, identity,
+        long full = LongIndexPathMasksJNI.scanWindow(large, identity,
                 new int[][]{states}, new int[]{Integer.MIN_VALUE}, new int[]{0},
                 0, large.length, 1, 0, page, 1, large.length);
         eq(large.length, M3LongIndexPathMasks.written(full));
@@ -190,7 +190,7 @@ public final class M3LongIndexPathMasksJNISelfTest {
             int count = random.nextInt(maximum + 1);
             long[] javaResult = M3LongIndexPathMasks.select(rows, offsets,
                     planes, required, forbidden, first, count, stride);
-            long[] nativeResult = M3LongIndexPathMasksJNI.select(rows, offsets,
+            long[] nativeResult = LongIndexPathMasksJNI.select(rows, offsets,
                     planes, required, forbidden, first, count, stride);
             eq(javaResult, nativeResult);
             if (nativeResult.length != 0) {
@@ -209,7 +209,7 @@ public final class M3LongIndexPathMasksJNISelfTest {
                 long a = M3LongIndexPathMasks.scanWindow(rows, offsets, planes,
                         required, forbidden, first, count, stride, next,
                         javaBuffer, 1, limit);
-                long b = M3LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
+                long b = LongIndexPathMasksJNI.scanWindow(rows, offsets, planes,
                         required, forbidden, first, count, stride, next,
                         nativeBuffer, 1, limit);
                 eq(a, b);

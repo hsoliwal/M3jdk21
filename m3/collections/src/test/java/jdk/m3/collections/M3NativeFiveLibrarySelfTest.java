@@ -13,10 +13,10 @@ import java.util.Random;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.Comparator;
-import jdk.internal.m3.collections.M3IndexedBiMap;
-import jdk.internal.m3.collections.M3IndexedSetMultiMap;
-import jdk.internal.m3.collections.M3ListMultiValueMap;
-import jdk.internal.m3.collections.M3NativeFiveLibrarySdk;
+import jdk.internal.m3.collections.IndexedBiMap;
+import jdk.internal.m3.collections.IndexedSetMultiMap;
+import jdk.internal.m3.collections.ListMultiValueMap;
+import jdk.internal.m3.collections.NativeFiveLibrarySdk;
 
 /** Standalone deterministic differential oracle, including null and aliasing. */
 public final class M3NativeFiveLibrarySelfTest {
@@ -35,7 +35,7 @@ public final class M3NativeFiveLibrarySelfTest {
         throw new AssertionError("expected " + kind);
     }
     private static void bimap() {
-        M3IndexedBiMap<Integer, Integer> actual = new M3IndexedBiMap<>();
+        IndexedBiMap<Integer, Integer> actual = new IndexedBiMap<>();
         Map<Integer, Integer> expected = new LinkedHashMap<>();
         Random r = new Random(0x23ae8901L);
         check(actual.inverse().inverse() == actual, "inverse identity");
@@ -113,7 +113,7 @@ public final class M3NativeFiveLibrarySelfTest {
             check(reversed.equals(actual.inverse()), "inverse map equality");
             check(actual.inverse().inverse() == actual, "inverse back reference");
         }
-        M3IndexedBiMap<String,Integer> shortMap = new M3IndexedBiMap<>();
+        IndexedBiMap<String,Integer> shortMap = new IndexedBiMap<>();
         shortMap.put("one", 1);
         var iter = shortMap.entrySet().iterator();
         var e = iter.next();
@@ -124,7 +124,7 @@ public final class M3NativeFiveLibrarySelfTest {
     }
 
     private static void mapOfLists() {
-        M3ListMultiValueMap<String, Integer> actual = new M3ListMultiValueMap<>();
+        ListMultiValueMap<String, Integer> actual = new ListMultiValueMap<>();
         Map<String, List<Integer>> oracle = new LinkedHashMap<>();
         Random r = new Random(0x789abc45L);
         List<Integer> supplied = new ArrayList<>(Arrays.asList(1, null, 2));
@@ -197,7 +197,7 @@ public final class M3NativeFiveLibrarySelfTest {
 
 
     private static void setMultimap() {
-        M3IndexedSetMultiMap<Integer, Integer> actual = new M3IndexedSetMultiMap<>();
+        IndexedSetMultiMap<Integer, Integer> actual = new IndexedSetMultiMap<>();
         Map<Integer, LinkedHashSet<Integer>> expected = new LinkedHashMap<>();
         Random random = new Random(0x615d271eL);
         for (int step = 0; step < 7000; step++) {
@@ -258,20 +258,20 @@ public final class M3NativeFiveLibrarySelfTest {
     }
 
     private static void nativeSdkFactories() {
-        check(M3NativeFiveLibrarySdk.list().isEmpty(), "M3 list factory");
-        check(M3NativeFiveLibrarySdk.set().isEmpty(), "M3 set factory");
-        check(M3NativeFiveLibrarySdk.map().isEmpty(), "M3 map factory");
-        check(M3NativeFiveLibrarySdk.sortedMap(Comparator.<Integer>naturalOrder()).isEmpty(),
+        check(NativeFiveLibrarySdk.list().isEmpty(), "M3 list factory");
+        check(NativeFiveLibrarySdk.set().isEmpty(), "M3 set factory");
+        check(NativeFiveLibrarySdk.map().isEmpty(), "M3 map factory");
+        check(NativeFiveLibrarySdk.sortedMap(Comparator.<Integer>naturalOrder()).isEmpty(),
                 "M3 sorted map factory");
-        check(M3NativeFiveLibrarySdk.bag() != null, "M3 bag factory");
-        check(M3NativeFiveLibrarySdk.biMap().inverse().inverse() != null, "M3 bimap factory");
-        check(M3NativeFiveLibrarySdk.listMultimap() != null, "M3 list multimap factory");
-        check(M3NativeFiveLibrarySdk.setMultimap().size() == 0, "M3 set multimap factory");
-        check(M3NativeFiveLibrarySdk.mapOfLists().size() == 0, "M3 map-of-lists factory");
-        check(M3NativeFiveLibrarySdk.table() != null, "M3 table factory");
-        check(M3NativeFiveLibrarySdk.snapshot(List.of(1,2,3)).size() == 3,
+        check(NativeFiveLibrarySdk.bag() != null, "M3 bag factory");
+        check(NativeFiveLibrarySdk.biMap().inverse().inverse() != null, "M3 bimap factory");
+        check(NativeFiveLibrarySdk.listMultimap() != null, "M3 list multimap factory");
+        check(NativeFiveLibrarySdk.setMultimap().size() == 0, "M3 set multimap factory");
+        check(NativeFiveLibrarySdk.mapOfLists().size() == 0, "M3 map-of-lists factory");
+        check(NativeFiveLibrarySdk.table() != null, "M3 table factory");
+        check(NativeFiveLibrarySdk.snapshot(List.of(1,2,3)).size() == 3,
                 "M3 immutable indexed snapshot factory");
-        check(M3NativeFiveLibrarySdk.longProjection(new long[0]) != null,
+        check(NativeFiveLibrarySdk.longProjection(new long[0]) != null,
                 "M3 long projection factory");
     }
     public static void main(String[] args) {

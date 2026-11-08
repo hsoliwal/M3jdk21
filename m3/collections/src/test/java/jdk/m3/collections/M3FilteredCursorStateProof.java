@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.TreeSet;
 import java.util.function.Predicate;
-import jdk.internal.m3.collections.M3FilteredLists;
+import jdk.internal.m3.collections.FilteredLists;
 
 /** Pure Java 21 contract oracle for existing filtered list/deque/collection owners. */
 public final class M3FilteredCursorStateProof {
@@ -37,7 +37,7 @@ public final class M3FilteredCursorStateProof {
 
     private static void filteredListReversibleProbe() {
         List<Integer> backing = new ArrayList<>(List.of(0, 1, 2, 3, 4, 5, 6));
-        List<Integer> view = M3FilteredLists.filtered(backing, item -> (item & 1) == 0);
+        List<Integer> view = FilteredLists.filtered(backing, item -> (item & 1) == 0);
         ListIterator<Integer> it = view.listIterator();
         check(it.hasNext() && it.hasNext(), "list lookahead repeat");
         equal(0, it.next(), "list first selected");
@@ -58,7 +58,7 @@ public final class M3FilteredCursorStateProof {
 
     private static void filteredListFailurePoisoning() {
         List<Integer> backing = new ArrayList<>(List.of(2, 4, 6));
-        ListIterator<Integer> it = M3FilteredLists.filtered(backing, item -> {
+        ListIterator<Integer> it = FilteredLists.filtered(backing, item -> {
             if (item == 4) throw new IllegalArgumentException("predicate refused");
             return true;
         }).listIterator();
@@ -195,7 +195,7 @@ public final class M3FilteredCursorStateProof {
                     (Collection<Integer>) original,
                     value -> Math.floorMod(value, mod) == 0);
             equal(expected, selected(readOnly), "read-only filtered encounter order");
-            List<Integer> live = M3FilteredLists.filtered(new ArrayList<>(original),
+            List<Integer> live = FilteredLists.filtered(new ArrayList<>(original),
                     value -> Math.floorMod(value, mod) == 0);
             equal(expected, selected(live), "list cursor encounter order");
             Deque<Integer> deque = new ArrayDeque<>(original);

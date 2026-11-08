@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections.concurrent;
 
-import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.NotYetReceived;
 import jdk.m3.collections.M3LockedTreeMap;
 import jdk.m3.collections.M3LockedTreeSet;
 
@@ -18,7 +18,7 @@ import jdk.m3.collections.M3LockedTreeSet;
  *
  * <p>DOOP mapping: lane kind LONG; lanes {@code long[] keyLane;int[] levelNextLane}; offset scheme slot + per-level next lanes (level*capacity+slot); state-mask bits OCCUPIED,DELETED,MARKED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: sorted lanes + monitor interim; skip-lane ladder PROPOSED / occupancy mask.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class ConcurrentSkipLongSet {
@@ -49,56 +49,56 @@ public final class ConcurrentSkipLongSet {
 
     /** ConcurrentSkipListSet.add (scaffold: not yet received). */
     public boolean add(long value) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.add");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.add");
     }
 
     /** ConcurrentSkipListSet.remove (scaffold: not yet received). */
     public boolean remove(long value) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.remove");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.remove");
     }
 
     /** ConcurrentSkipListSet.contains (scaffold: not yet received). */
     public boolean contains(long value) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.contains");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.contains");
     }
 
     /** NavigableSet.first (scaffold: not yet received). */
     public long first() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.first");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.first");
     }
 
     /** NavigableSet.last (scaffold: not yet received). */
     public long last() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.last");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.last");
     }
 
     /** NavigableSet.ceiling (scaffold: not yet received). */
     public long ceiling(long value) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.ceiling");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.ceiling");
     }
 
     /** NavigableSet.floor (scaffold: not yet received). */
     public long floor(long value) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.floor");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.floor");
     }
 
     /** NavigableSet.pollFirst (scaffold: not yet received). */
     public long pollFirst() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.pollFirst");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.pollFirst");
     }
 
     /** weakly consistent ascending traversal (scaffold: not yet received). */
     public void forEach(java.util.function.LongConsumer action) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.forEach");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.forEach");
     }
 
     /** Set.size (O(n) weakly consistent) (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.size");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.size");
     }
 
     /** Set.clear (scaffold: not yet received). */
     public void clear() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongSet.clear");
+        throw new NotYetReceived("M3ConcurrentSkipLongSet.clear");
     }
 }

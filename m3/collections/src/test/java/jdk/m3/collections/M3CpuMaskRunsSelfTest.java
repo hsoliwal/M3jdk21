@@ -4,7 +4,7 @@ package jdk.m3.collections;
 
 import java.util.ArrayList;
 import java.util.List;
-import jdk.internal.m3.collections.M3CpuMaskRuns;
+import jdk.internal.m3.collections.CpuMaskRuns;
 
 /** Dependency-free JDK21 executable contract oracle for the CPU mask-runs atom. */
 public final class M3CpuMaskRunsSelfTest {
@@ -22,14 +22,14 @@ public final class M3CpuMaskRunsSelfTest {
         int[] offsets = {0, 1, 2, 3, 4, 5, 6, 7};
         int[][] planes = {{1, 1, 0, 1, 1, 1, 1, 1}};
         List<String> runs = new ArrayList<>();
-        int count = M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1},
+        int count = CpuMaskRuns.scan(rows, offsets, planes, new int[]{1},
                 new int[]{0}, 0, rows.length, 1, 20,
                 IndexPathMasks.Backend.JAVA,
                 (row, len) -> runs.add(row + ":" + len));
         require(count == 4 && runs.equals(List.of("7:2", "3:2", "-5:2", "11:1")),
                 "forward filter and run grouping");
         runs.clear();
-        count = M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1},
+        count = CpuMaskRuns.scan(rows, offsets, planes, new int[]{1},
                 new int[]{0}, 7, 8, -1, 20,
                 IndexPathMasks.Backend.JAVA,
                 (row, len) -> runs.add(row + ":" + len));
@@ -48,14 +48,14 @@ public final class M3CpuMaskRunsSelfTest {
             state[i] = 0x80000000;
         }
         List<String> runs = new ArrayList<>();
-        int count = M3CpuMaskRuns.scan(rows, offsets, new int[][]{state},
+        int count = CpuMaskRuns.scan(rows, offsets, new int[][]{state},
                 new int[]{0x80000000}, new int[]{0},
                 0, n, 1, 4, IndexPathMasks.Backend.JAVA,
                 (row, len) -> runs.add(row + ":" + len));
         require(count == 2 && runs.equals(List.of("41:5000", "42:5000")),
                 "run must cross output windows");
         runs.clear();
-        count = M3CpuMaskRuns.scan(rows, offsets, new int[][]{state},
+        count = CpuMaskRuns.scan(rows, offsets, new int[][]{state},
                 new int[]{0x80000000}, new int[]{0},
                 0, n, 1, 1, IndexPathMasks.Backend.JAVA,
                 (row, len) -> runs.add(row + ":" + len));
@@ -67,30 +67,30 @@ public final class M3CpuMaskRunsSelfTest {
         int[] rows = {1, 2};
         int[] offsets = {0, 1};
         int[][] planes = {{1, 1}};
-        int count = M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1},
+        int count = CpuMaskRuns.scan(rows, offsets, planes, new int[]{1},
                 new int[]{0}, 0, 2, 1, 0,
                 IndexPathMasks.Backend.JAVA,
                 (row, len) -> { throw new AssertionError("zero run budget"); });
         require(count == 0, "zero output budget");
         expect(IllegalArgumentException.class, () ->
-                M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
+                CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
                         0, 2, 1, -1, IndexPathMasks.Backend.JAVA,
                         (row, len) -> { }));
         expect(IndexOutOfBoundsException.class, () ->
-                M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
+                CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
                         1, 2, 1, 0, IndexPathMasks.Backend.JAVA,
                         (row, len) -> { }));
         expect(IndexOutOfBoundsException.class, () ->
-                M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
+                CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
                         0, -1, 1, 1, IndexPathMasks.Backend.JAVA,
                         (row, len) -> { }));
         expect(IndexOutOfBoundsException.class, () ->
-                M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
+                CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
                         1, 2, 1, 1, IndexPathMasks.Backend.JAVA,
                         (row, len) -> { }));
         if (!IndexPathMasks.nativeAvailable()) {
             expect(UnsatisfiedLinkError.class, () ->
-                    M3CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
+                    CpuMaskRuns.scan(rows, offsets, planes, new int[]{1}, new int[]{0},
                             0, 2, 1, 1, IndexPathMasks.Backend.NATIVE_REQUIRED,
                             (row, len) -> { }));
         }

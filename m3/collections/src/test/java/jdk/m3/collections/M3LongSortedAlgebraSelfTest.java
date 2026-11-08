@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Spliterator;
 import java.util.TreeSet;
 import java.util.function.LongPredicate;
-import jdk.internal.m3.collections.M3LongCompositeViews;
+import jdk.internal.m3.collections.LongCompositeViews;
 
 /**
  * Differential test of actual primitive sorted set algebra against JDK TreeSet.
@@ -42,9 +42,9 @@ public final class M3LongSortedAlgebraSelfTest {
             if (random.nextBoolean()) right.add(value(random, i + 7));
         }
 
-        LongSortedSet intersection = M3LongCompositeViews.sortedIntersection(left, right);
-        LongSortedSet difference = M3LongCompositeViews.sortedDifference(left, right);
-        LongSortedSet xor = M3LongCompositeViews.sortedSymmetricDifference(left, right);
+        LongSortedSet intersection = LongCompositeViews.sortedIntersection(left, right);
+        LongSortedSet difference = LongCompositeViews.sortedDifference(left, right);
+        LongSortedSet xor = LongCompositeViews.sortedSymmetricDifference(left, right);
 
         for (int phase = 0; phase < 8; phase++) {
             TreeSet<Long> expectedIntersection = new TreeSet<>(left.elements);
@@ -135,24 +135,24 @@ public final class M3LongSortedAlgebraSelfTest {
         owner.add(0L);
         owner.add(Long.MAX_VALUE);
         eq(new long[] {Long.MIN_VALUE, 0L, Long.MAX_VALUE},
-                M3LongCompositeViews.sortedIntersection(owner, owner).toArray());
-        eq(new long[0], M3LongCompositeViews.sortedDifference(owner, owner).toArray());
-        eq(new long[0], M3LongCompositeViews.sortedSymmetricDifference(owner, owner).toArray());
+                LongCompositeViews.sortedIntersection(owner, owner).toArray());
+        eq(new long[0], LongCompositeViews.sortedDifference(owner, owner).toArray());
+        eq(new long[0], LongCompositeViews.sortedSymmetricDifference(owner, owner).toArray());
         JdkSortedLongSet other = new JdkSortedLongSet(false);
         other.add(Long.MIN_VALUE);
         other.add(Long.MAX_VALUE);
         eq(new long[] {Long.MIN_VALUE, Long.MAX_VALUE},
-                M3LongCompositeViews.sortedIntersection(owner, other).toArray());
-        eq(new long[] {0L}, M3LongCompositeViews.sortedDifference(owner, other).toArray());
-        eq(new long[] {0L}, M3LongCompositeViews.sortedSymmetricDifference(owner, other).toArray());
+                LongCompositeViews.sortedIntersection(owner, other).toArray());
+        eq(new long[] {0L}, LongCompositeViews.sortedDifference(owner, other).toArray());
+        eq(new long[] {0L}, LongCompositeViews.sortedSymmetricDifference(owner, other).toArray());
 
         JdkSortedLongSet empty = new JdkSortedLongSet(false);
-        eq(new long[0], M3LongCompositeViews.sortedIntersection(empty, owner).toArray());
-        eq(new long[0], M3LongCompositeViews.sortedDifference(empty, owner).toArray());
+        eq(new long[0], LongCompositeViews.sortedIntersection(empty, owner).toArray());
+        eq(new long[0], LongCompositeViews.sortedDifference(empty, owner).toArray());
         eq(new long[] {Long.MIN_VALUE, 0L, Long.MAX_VALUE},
-                M3LongCompositeViews.sortedDifference(owner, empty).toArray());
+                LongCompositeViews.sortedDifference(owner, empty).toArray());
         eq(new long[] {Long.MIN_VALUE, 0L, Long.MAX_VALUE},
-                M3LongCompositeViews.sortedSymmetricDifference(empty, owner).toArray());
+                LongCompositeViews.sortedSymmetricDifference(empty, owner).toArray());
     }
 
     private static void liveOwnershipAndRefusals() {
@@ -162,9 +162,9 @@ public final class M3LongSortedAlgebraSelfTest {
         first.add(5L);
         second.add(5L);
         second.add(9L);
-        LongSortedSet intersection = M3LongCompositeViews.sortedIntersection(first, second);
-        LongSortedSet difference = M3LongCompositeViews.sortedDifference(first, second);
-        LongSortedSet xor = M3LongCompositeViews.sortedSymmetricDifference(first, second);
+        LongSortedSet intersection = LongCompositeViews.sortedIntersection(first, second);
+        LongSortedSet difference = LongCompositeViews.sortedDifference(first, second);
+        LongSortedSet xor = LongCompositeViews.sortedSymmetricDifference(first, second);
 
         eq(new long[] {5L}, intersection.toArray());
         eq(new long[] {1L}, difference.toArray());
@@ -181,11 +181,11 @@ public final class M3LongSortedAlgebraSelfTest {
         eq(new long[] {1L, 5L}, xor.toArray());
 
         fails(NullPointerException.class, () ->
-                M3LongCompositeViews.sortedIntersection(null, first));
+                LongCompositeViews.sortedIntersection(null, first));
         fails(NullPointerException.class, () ->
-                M3LongCompositeViews.sortedDifference(first, null));
+                LongCompositeViews.sortedDifference(first, null));
         fails(NullPointerException.class, () ->
-                M3LongCompositeViews.sortedSymmetricDifference(null, null));
+                LongCompositeViews.sortedSymmetricDifference(null, null));
     }
 
     private static void sortedFilteredComposition() {
@@ -196,11 +196,11 @@ public final class M3LongSortedAlgebraSelfTest {
             if ((k & 1L) == 0L) right.add(k);
         }
         LongSortedSet visible = M3LongSortedViews.filter(left, v -> v >= 0);
-        LongSortedSet even = M3LongCompositeViews.sortedIntersection(visible, right);
+        LongSortedSet even = LongCompositeViews.sortedIntersection(visible, right);
         eq(new long[] {0, 2, 4, 6, 8, 10, 12}, even.toArray());
         eq(new long[] {1, 3, 5, 7, 9, 11},
-                M3LongCompositeViews.sortedDifference(visible, right).toArray());
-        LongSortedSet flipped = M3LongCompositeViews.sortedSymmetricDifference(visible, right);
+                LongCompositeViews.sortedDifference(visible, right).toArray());
+        LongSortedSet flipped = LongCompositeViews.sortedSymmetricDifference(visible, right);
         eq(new long[] {-12, -10, -8, -6, -4, -2, 1, 3, 5, 7, 9, 11}, flipped.toArray());
         // A detached snapshot stays independent while the live algebra changes.
         long[] snapshot = even.toArray();
@@ -218,17 +218,17 @@ public final class M3LongSortedAlgebraSelfTest {
             ascending.add(k);
         }
         fails(IllegalStateException.class, () ->
-                M3LongCompositeViews.sortedIntersection(descending, ascending).toArray());
+                LongCompositeViews.sortedIntersection(descending, ascending).toArray());
         fails(IllegalStateException.class, () ->
-                M3LongCompositeViews.sortedDifference(descending, ascending).toArray());
+                LongCompositeViews.sortedDifference(descending, ascending).toArray());
         fails(IllegalStateException.class, () ->
-                M3LongCompositeViews.sortedSymmetricDifference(descending, ascending).toArray());
+                LongCompositeViews.sortedSymmetricDifference(descending, ascending).toArray());
     }
 
     private static void noRetainedPerEntryObjects() throws Exception {
         JdkSortedLongSet first = new JdkSortedLongSet(false);
         JdkSortedLongSet second = new JdkSortedLongSet(false);
-        LongSortedSet algebra = M3LongCompositeViews.sortedIntersection(first, second);
+        LongSortedSet algebra = LongCompositeViews.sortedIntersection(first, second);
         for (Class<?> owner : new Class<?>[] {
                 algebra.getClass(), algebra.iterator().getClass()}) {
             for (Field field : owner.getDeclaredFields()) {

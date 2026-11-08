@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import jdk.internal.m3.collections.M3CollectionSdk;
+import jdk.internal.m3.collections.CollectionSdk;
 
 /** Actual Maven/JUnit gate for the product owner and its SDK factory. */
 final class M3StagedPhysicalStateSnapshotTest {
@@ -43,7 +43,7 @@ final class M3StagedPhysicalStateSnapshotTest {
     void sdkFactoryReusesTheSameProductOwner() {
         var source = Arrays.asList(null, 4, 8, 7, 3);
         int[][] state = {{1, 1, 0, 1, 1}, {2, 0, 2, 2, 2}};
-        var result = M3CollectionSdk.maskedSortedIndexedSnapshot(
+        var result = CollectionSdk.maskedSortedIndexedSnapshot(
                 source, state, new int[] {1, 2}, new int[] {0, 0},
                 Comparator.nullsFirst(Comparator.naturalOrder()),
                 IndexPathMasks.Backend.JAVA);

@@ -4,19 +4,19 @@ package jdk.m3.collections;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import static jdk.m3.collections.M3PolicyAssertions.*;
-import jdk.internal.m3.collections.M3BoundedLongSequence;
+import jdk.internal.m3.collections.BoundedLongSequence;
 
 //FLLDCIM: RELOCATE - donor blob 1d2af871dbe2 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class M3BoundedLongSequenceProof {
     public static void main(String[] args) {
-        fails(NullPointerException.class,()->new M3BoundedLongSequence(null,1));
+        fails(NullPointerException.class,()->new BoundedLongSequence(null,1));
         fails(IllegalArgumentException.class,
-                ()->new M3BoundedLongSequence(new M3PolicyProbe(),-1));
+                ()->new BoundedLongSequence(new M3PolicyProbe(),-1));
         M3PolicyProbe oversized=new M3PolicyProbe(1,2);
-        fails(IllegalArgumentException.class,()->new M3BoundedLongSequence(oversized,1));
+        fails(IllegalArgumentException.class,()->new BoundedLongSequence(oversized,1));
         values(oversized,1,2);
         M3PolicyProbe probe=new M3PolicyProbe(10);
-        M3BoundedLongSequence bound=new M3BoundedLongSequence(probe,1);
+        BoundedLongSequence bound=new BoundedLongSequence(probe,1);
         AtomicInteger predicates=new AtomicInteger();
         check(!bound.addIf(77,v->{predicates.incrementAndGet();return false;}),
                 "false predicate at capacity");

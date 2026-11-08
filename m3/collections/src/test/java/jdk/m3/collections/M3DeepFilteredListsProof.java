@@ -17,7 +17,7 @@ import java.util.Random;
 import java.util.RandomAccess;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
-import jdk.internal.m3.collections.M3FilteredLists;
+import jdk.internal.m3.collections.FilteredLists;
 
 /**
  * Behavioral proof for the explicit List owner at deep predicate composition.
@@ -58,7 +58,7 @@ public final class M3DeepFilteredListsProof {
     private static <E> List<E> nested(List<E> source, Predicate<? super E> predicate, int depth) {
         List<E> result = source;
         for (int index = 0; index < depth; index++) {
-            result = M3FilteredLists.filtered(result, predicate);
+            result = FilteredLists.filtered(result, predicate);
         }
         return result;
     }
@@ -77,7 +77,7 @@ public final class M3DeepFilteredListsProof {
                 "List did not use the owner flat constant-stack composition");
         check(!(view instanceof RandomAccess), "false random-access capability");
 
-        List<Integer> rejected = M3FilteredLists.filtered(view, value -> false);
+        List<Integer> rejected = FilteredLists.filtered(view, value -> false);
         equal(List.of(), new ArrayList<>(rejected), "rejecting suffix");
         backing.add(4);
         equal(List.of(2, 4), new ArrayList<>(view), "retained prefix changed or lost liveness");
@@ -93,7 +93,7 @@ public final class M3DeepFilteredListsProof {
             List<Integer> view = List.of(9);
             for (int index = 0; index < 257; index++) {
                 int stage = index;
-                view = M3FilteredLists.filtered(view, value -> {
+                view = FilteredLists.filtered(view, value -> {
                     trace.add(stage);
                     return stage != stop;
                 });
@@ -107,7 +107,7 @@ public final class M3DeepFilteredListsProof {
             List<Integer> throwing = List.of(9);
             for (int index = 0; index < 257; index++) {
                 int stage = index;
-                throwing = M3FilteredLists.filtered(throwing, value -> {
+                throwing = FilteredLists.filtered(throwing, value -> {
                     trace.add(stage);
                     if (stage == stop) throw marker;
                     return true;
@@ -119,12 +119,12 @@ public final class M3DeepFilteredListsProof {
             equal(java.util.stream.IntStream.rangeClosed(0, stop).boxed().toList(),
                     trace, "exception callback order changed");
         }
-        List<Integer> nulls = M3FilteredLists.filtered(Arrays.asList(null, 1, -1), Objects::nonNull);
-        nulls = M3FilteredLists.filtered(nulls, value -> value > 0);
+        List<Integer> nulls = FilteredLists.filtered(Arrays.asList(null, 1, -1), Objects::nonNull);
+        nulls = FilteredLists.filtered(nulls, value -> value > 0);
         equal(List.of(1), new ArrayList<>(nulls), "null guard moved after a dereference");
         List<Integer> existing = nulls;
-        expect(NullPointerException.class, () -> M3FilteredLists.filtered(existing, null));
-        expect(NullPointerException.class, () -> M3FilteredLists.filtered(null, Objects::nonNull));
+        expect(NullPointerException.class, () -> FilteredLists.filtered(existing, null));
+        expect(NullPointerException.class, () -> FilteredLists.filtered(null, Objects::nonNull));
     }
 
     private static void cursorContract(int depth) {
@@ -187,7 +187,7 @@ public final class M3DeepFilteredListsProof {
         equal(List.of(-1, 2, -3, -5, 40, 60, -7), backing, "range removal lost a hidden element");
         equal(List.of(60, 40), new ArrayList<>(reversed), "reversed range stopped being live");
 
-        List<Integer> readOnly = M3FilteredLists.readOnlyFiltered(view, value -> true);
+        List<Integer> readOnly = FilteredLists.readOnlyFiltered(view, value -> true);
         equal(List.of(60, 40, 2), new ArrayList<>(readOnly.reversed()), "read-only reversed order");
         expect(UnsupportedOperationException.class, () -> readOnly.addAll(List.of()));
         expect(UnsupportedOperationException.class, () -> readOnly.removeIf(value -> false));
@@ -234,9 +234,9 @@ public final class M3DeepFilteredListsProof {
         ArrayList<String> backing = new ArrayList<>(Arrays.asList(
                 null, "beta", new String("a2"), "a1", "alpha", "A0", new String("a2"),
                 "\ud83d\ude00", "a\n", "a\u00e9"));
-        List<String> view = M3FilteredLists.filtered(backing, Objects::nonNull);
+        List<String> view = FilteredLists.filtered(backing, Objects::nonNull);
         for (int stage = 1; stage < depth; stage++) {
-            view = M3FilteredLists.filtered(view, stage % 257 == 1 ? prepared : Objects::nonNull);
+            view = FilteredLists.filtered(view, stage % 257 == 1 ? prepared : Objects::nonNull);
         }
         List<String> selected = backing.stream().filter(Objects::nonNull).filter(prepared).toList();
         equal(selected, new ArrayList<>(view), "compiled full-match predicate composition");

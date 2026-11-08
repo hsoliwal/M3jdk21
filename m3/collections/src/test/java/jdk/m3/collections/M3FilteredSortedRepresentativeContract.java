@@ -19,7 +19,7 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Predicate;
-import jdk.internal.m3.collections.M3FilteredNavigableSet;
+import jdk.internal.m3.collections.FilteredNavigableSet;
 
 /** Stored string references and owner equivalence survive filtered view composition. */
 public final class M3FilteredSortedRepresentativeContract {
@@ -63,7 +63,7 @@ public final class M3FilteredSortedRepresentativeContract {
                 M3FilteredViews.filter((Set<String>) source, predicate),
                 M3FilteredViews.filter((SortedSet<String>) source, predicate),
                 M3FilteredViews.filter(source, predicate),
-                M3FilteredNavigableSet.view(source, predicate));
+                FilteredNavigableSet.view(source, predicate));
     }
 
     private static void overloadAndRangeMatrix() {

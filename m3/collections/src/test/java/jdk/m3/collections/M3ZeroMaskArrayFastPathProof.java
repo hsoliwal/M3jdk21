@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.ConcurrentModificationException;
-import jdk.internal.m3.collections.M3StateMaskArrays;
+import jdk.internal.m3.collections.StateMaskArrays;
 
 /** JDK21 contract oracle for zero-mask no-op and state/offset compaction. */
 public final class M3ZeroMaskArrayFastPathProof {
@@ -64,34 +64,34 @@ public final class M3ZeroMaskArrayFastPathProof {
         byte[] flags = {1, -1, 0, (byte) 0x80, 7, 3, (byte) 0xff};
         int[] initialSlots = slots.clone();
         byte[] initialFlags = flags.clone();
-        check(M3StateMaskArrays.compactWindow(slots, flags, 2, 6, 0, 0) == 6,
+        check(StateMaskArrays.compactWindow(slots, flags, 2, 6, 0, 0) == 6,
                 "zero masks retain exclusive offset");
         equalsInt(initialSlots, slots, "all-pass array index directory unchanged");
         equalsBytes(initialFlags, flags, "all-pass occurrence masks unchanged");
-        int previousState = M3StateMaskArrays.update(flags, 3, 0, 0);
+        int previousState = StateMaskArrays.update(flags, 3, 0, 0);
         check(previousState == (initialFlags[3] & 0xff),
                 "null bit-mask transition returns prior unsigned state");
         equalsBytes(initialFlags, flags, "null state update leaves every byte unchanged");
         refuses(IndexOutOfBoundsException.class,
-                () -> M3StateMaskArrays.update(flags, -1, 0, 0));
+                () -> StateMaskArrays.update(flags, -1, 0, 0));
         refuses(NullPointerException.class,
-                () -> M3StateMaskArrays.update(null, 0, 0, 0));
+                () -> StateMaskArrays.update(null, 0, 0, 0));
         refuses(IllegalArgumentException.class,
-                () -> M3StateMaskArrays.update(flags, 3, 0x01, 0x01));
-        check(M3StateMaskArrays.compactWindow(slots, flags, 0, 0, 0, 0) == 0,
+                () -> StateMaskArrays.update(flags, 3, 0x01, 0x01));
+        check(StateMaskArrays.compactWindow(slots, flags, 0, 0, 0, 0) == 0,
                 "empty zero-mask interval");
-        check(M3StateMaskArrays.compactWindow(slots, flags, slots.length, slots.length, 0, 0)
+        check(StateMaskArrays.compactWindow(slots, flags, slots.length, slots.length, 0, 0)
                 == slots.length, "empty terminal interval");
         refuses(IllegalArgumentException.class,
-                () -> M3StateMaskArrays.compactWindow(slots, flags, 0, 7, 1, 1));
+                () -> StateMaskArrays.compactWindow(slots, flags, 0, 7, 1, 1));
         refuses(IllegalArgumentException.class,
-                () -> M3StateMaskArrays.compactWindow(slots, flags, 0, 7, -1, 0));
+                () -> StateMaskArrays.compactWindow(slots, flags, 0, 7, -1, 0));
         refuses(IndexOutOfBoundsException.class,
-                () -> M3StateMaskArrays.compactWindow(slots, flags, -1, 7, 0, 0));
+                () -> StateMaskArrays.compactWindow(slots, flags, -1, 7, 0, 0));
         refuses(IndexOutOfBoundsException.class,
-                () -> M3StateMaskArrays.compactWindow(slots, flags, 0, 8, 0, 0));
+                () -> StateMaskArrays.compactWindow(slots, flags, 0, 8, 0, 0));
         refuses(IllegalArgumentException.class,
-                () -> M3StateMaskArrays.compactWindow(slots, new byte[1], 0, 1, 0, 0));
+                () -> StateMaskArrays.compactWindow(slots, new byte[1], 0, 1, 0, 0));
         equalsInt(initialSlots, slots, "refusal preserves row slots");
         equalsBytes(initialFlags, flags, "refusal preserves byte states");
     }
@@ -137,7 +137,7 @@ public final class M3ZeroMaskArrayFastPathProof {
                 expectedSlots[i] = i < end ? selectedSlots.get(i - from) : 0;
                 expectedStates[i] = i < end ? selectedStates.get(i - from) : 0;
             }
-            int result = M3StateMaskArrays.compactWindow(slots, states, from, to,
+            int result = StateMaskArrays.compactWindow(slots, states, from, to,
                     required, forbidden);
             check(result == end, "window exclusive end trial " + trial);
             equalsInt(expectedSlots, slots, "stable physical index occurrence compaction");
@@ -179,7 +179,7 @@ public final class M3ZeroMaskArrayFastPathProof {
         }
         int[] before = slots.clone();
         byte[] beforeFlags = flags.clone();
-        check(M3StateMaskArrays.compactWindow(slots, flags, 65537, length - 1, 0, 0)
+        check(StateMaskArrays.compactWindow(slots, flags, 65537, length - 1, 0, 0)
                 == length - 1, "large offset window all-pass");
         equalsInt(before, slots, "large index lane unchanged");
         equalsBytes(beforeFlags, flags, "large state-mask lane unchanged");

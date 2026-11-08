@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-import jdk.internal.m3.collections.M3InternalLeaseRecycler;
+import jdk.internal.m3.collections.InternalLeaseRecycler;
 
 /** Runnable Java21 regression oracle; does not assume GC or JUnit availability. */
 public final class M3InternalLeaseRecyclerSelfTest {
@@ -18,8 +18,8 @@ public final class M3InternalLeaseRecyclerSelfTest {
         final byte[] bits = new byte[32];
         Object reference;
     }
-    private static M3InternalLeaseRecycler<Buffer> pool(int maxIdle) {
-        return new M3InternalLeaseRecycler<>(Buffer::new,
+    private static InternalLeaseRecycler<Buffer> pool(int maxIdle) {
+        return new InternalLeaseRecycler<>(Buffer::new,
                 (buffer, id) -> {
                     check(buffer.id == -1, "dirty prior ID");
                     check(buffer.reference == null, "dirty reference");
@@ -76,7 +76,7 @@ public final class M3InternalLeaseRecyclerSelfTest {
             failed(() -> recycler.withBorrowed(-1L, ignored -> {}));
         }
         // A failed reset must drop the object and release the active count.
-        var badReset = new M3InternalLeaseRecycler<>(Buffer::new,
+        var badReset = new InternalLeaseRecycler<>(Buffer::new,
                 (buffer, id) -> buffer.id = id,
                 buffer -> { throw new IllegalStateException("reset refused"); }, 1);
         failed(() -> badReset.withBorrowed(1L, ignored -> {}));
@@ -113,7 +113,7 @@ public final class M3InternalLeaseRecyclerSelfTest {
         }
         System.out.println("PASS 1000 serial borrows, nested, concurrent, reset failure, pressure and close");
     }
-    private static void borrow(M3InternalLeaseRecycler<Buffer> recycler, long id,
+    private static void borrow(InternalLeaseRecycler<Buffer> recycler, long id,
             AtomicReference<Buffer> output, CountDownLatch entered,
             CountDownLatch release, AtomicReference<Throwable> error) {
         try {

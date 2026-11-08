@@ -3,12 +3,12 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3PatchApplyRunsContract;
+import jdk.internal.m3.collections.PatchApplyRunsContract;
 
 /** Source-owned JUnit execution of the primitive packed-patch run oracle. */
 public final class M3PatchApplyRunsTest {
     @Test
     void stableSingleDestinationRunComposition() {
-        M3PatchApplyRunsContract.main(new String[0]);
+        PatchApplyRunsContract.main(new String[0]);
     }
 }

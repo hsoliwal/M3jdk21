@@ -3,11 +3,11 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3InlineOwnerBehaviorProbe;
+import jdk.internal.m3.collections.InlineOwnerBehaviorProbe;
 
-//FLLDCIM: TMOP - JUnit 5 wrapper template of M3InlineOwnerBehaviorProbe.main; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
+//FLLDCIM: TMOP - JUnit 5 wrapper template of InlineOwnerBehaviorProbe.main; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 class M3PackedLongInlineListTest {
     @Test void proofMainPasses() throws Exception {
-        M3InlineOwnerBehaviorProbe.main(new String[] {"650"});
+        InlineOwnerBehaviorProbe.main(new String[] {"650"});
     }
 }

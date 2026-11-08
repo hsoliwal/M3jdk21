@@ -4,22 +4,22 @@ package jdk.m3.collections;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import static jdk.m3.collections.M3PolicyAssertions.*;
-import jdk.internal.m3.collections.M3ValidatingLongSequence;
+import jdk.internal.m3.collections.ValidatingLongSequence;
 
 //FLLDCIM: RELOCATE - donor blob fcb332079031 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class M3ValidatingLongSequenceProof {
     public static void main(String[] args) {
-        fails(NullPointerException.class,()->new M3ValidatingLongSequence(null,v->true));
+        fails(NullPointerException.class,()->new ValidatingLongSequence(null,v->true));
         fails(NullPointerException.class,
-                ()->new M3ValidatingLongSequence(new M3PolicyProbe(),null));
+                ()->new ValidatingLongSequence(new M3PolicyProbe(),null));
         M3PolicyProbe existing=new M3PolicyProbe(1,-2);
         fails(IllegalArgumentException.class,
-                ()->new M3ValidatingLongSequence(existing,v->v>=0));
+                ()->new ValidatingLongSequence(existing,v->v>=0));
         values(existing,1,-2);
         M3PolicyProbe probe=new M3PolicyProbe();
         long[] caller={4,5};
         AtomicInteger checks=new AtomicInteger();
-        M3ValidatingLongSequence validate=new M3ValidatingLongSequence(probe,v->{
+        ValidatingLongSequence validate=new ValidatingLongSequence(probe,v->{
             checks.incrementAndGet();
             if(v==4) caller[1]=-100;
             return v>=0;
@@ -53,7 +53,7 @@ public final class M3ValidatingLongSequenceProof {
         RuntimeException fault=new IllegalStateException("validator");
         AssertionError error=new AssertionError("validator");
         M3PolicyProbe other=new M3PolicyProbe();
-        M3ValidatingLongSequence throwing=new M3ValidatingLongSequence(other,v->{
+        ValidatingLongSequence throwing=new ValidatingLongSequence(other,v->{
             if(v==11)throw fault;
             if(v==12)throw error;
             return true;

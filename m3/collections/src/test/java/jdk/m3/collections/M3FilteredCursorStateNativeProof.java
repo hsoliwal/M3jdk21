@@ -10,7 +10,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import jdk.internal.m3.collections.M3FilteredLists;
+import jdk.internal.m3.collections.FilteredLists;
 
 /**
  * Required existing JNI selector oracle. Every Java predicate stays in Java;
@@ -43,7 +43,7 @@ public final class M3FilteredCursorStateNativeProof {
                     "existing JNI selector exactly equals Java primitive oracle");
             List<Integer> expected = new ArrayList<>(selected.length);
             for (int physical : selected) expected.add(values.get(physical));
-            equal(expected, copy(M3FilteredLists.filtered(
+            equal(expected, copy(FilteredLists.filtered(
                     new ArrayList<>(values), value -> (value & 1) == 0)),
                     "live list selection versus existing JNI ordinal masks");
             equal(expected, copy(M3FilteredViews.filter(

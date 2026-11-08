@@ -40,11 +40,11 @@ public class M3TreeWindowTest {
 	}
 
 	private static Object viewport (Object topology) {
-		return constructTyped ("jdk.internal.m3.collections.M3TreeWindow", new Class<?> [] {type ("jdk.m3.collections.M3TreeProjection")}, projection (topology));
+		return constructTyped ("jdk.internal.m3.collections.TreeWindow", new Class<?> [] {type ("jdk.m3.collections.M3TreeProjection")}, projection (topology));
 	}
 
 	private static Object viewport (Object topology, int overscan) {
-		return constructTyped ("jdk.internal.m3.collections.M3TreeWindow", new Class<?> [] {type ("jdk.m3.collections.M3TreeProjection"), int.class}, projection (topology), overscan);
+		return constructTyped ("jdk.internal.m3.collections.TreeWindow", new Class<?> [] {type ("jdk.m3.collections.M3TreeProjection"), int.class}, projection (topology), overscan);
 	}
 
 	private static void geometry (Object viewport, int rowExtent, int viewportExtent) {
@@ -60,19 +60,19 @@ public class M3TreeWindowTest {
 	}
 
 	private static int overscan (int wanted, int visible, int cap, long maxHeap, long usedHeap) {
-		return i (callStatic ("jdk.internal.m3.collections.M3TreeWindow", "adaptiveOverscan", POLICY, wanted, visible, cap, maxHeap, usedHeap));
+		return i (callStatic ("jdk.internal.m3.collections.TreeWindow", "adaptiveOverscan", POLICY, wanted, visible, cap, maxHeap, usedHeap));
 	}
 
 	@Test
 	public void constructionRejectsAMissingProjectionAndNegativeOverscan () {
 		Class<?> projectionType = type ("jdk.m3.collections.M3TreeProjection");
 		assertEquals ("projection", assertThrows (IllegalArgumentException.class,
-				() -> constructTyped ("jdk.internal.m3.collections.M3TreeWindow", new Class<?> [] {projectionType}, (Object) null)).getMessage ());
+				() -> constructTyped ("jdk.internal.m3.collections.TreeWindow", new Class<?> [] {projectionType}, (Object) null)).getMessage ());
 		Object projection = projection (roots (3));
 		assertEquals ("negative overscan", assertThrows (IllegalArgumentException.class,
-				() -> constructTyped ("jdk.internal.m3.collections.M3TreeWindow", new Class<?> [] {projectionType, int.class}, projection, -1)).getMessage ());
-		assertEquals (8, staticField ("jdk.internal.m3.collections.M3TreeWindow", "DEFAULT_OVERSCAN_ROWS"));
-		assertEquals (16_384, staticField ("jdk.internal.m3.collections.M3TreeWindow", "MAX_PAINT_ROWS"));
+				() -> constructTyped ("jdk.internal.m3.collections.TreeWindow", new Class<?> [] {projectionType, int.class}, projection, -1)).getMessage ());
+		assertEquals (8, staticField ("jdk.internal.m3.collections.TreeWindow", "DEFAULT_OVERSCAN_ROWS"));
+		assertEquals (16_384, staticField ("jdk.internal.m3.collections.TreeWindow", "MAX_PAINT_ROWS"));
 	}
 
 	@Test

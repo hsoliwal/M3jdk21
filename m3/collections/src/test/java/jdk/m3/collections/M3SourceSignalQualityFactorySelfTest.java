@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
-import jdk.internal.m3.collections.M3SourceSignalQualityFactory;
+import jdk.internal.m3.collections.SourceSignalQualityFactory;
 
 /** Original javac SHA-256 source image → exact typed scalar quality/epoch contract. */
 public final class M3SourceSignalQualityFactorySelfTest {
@@ -64,8 +64,8 @@ public final class M3SourceSignalQualityFactorySelfTest {
         var image = M3SourceSignalImage.parse(graphImageText());
         check(image.rowCount() == 3 && image.relationships().edgeCount() == 2,
                 "actual S/E parser supplies both direct and dispatch-candidate edges");
-        var direct = M3SourceSignalQualityFactory.bindRecordedGraph(image, 23, false);
-        var candidate = M3SourceSignalQualityFactory.bindRecordedGraph(image, 23, true);
+        var direct = SourceSignalQualityFactory.bindRecordedGraph(image, 23, false);
+        var candidate = SourceSignalQualityFactory.bindRecordedGraph(image, 23, true);
         check(!direct.includesDispatchCandidates() && candidate.includesDispatchCandidates(),
                 "explicit graph policy retained");
         check(direct.invalidations().dependencyEdgeCount() == 1,
@@ -92,10 +92,10 @@ public final class M3SourceSignalQualityFactorySelfTest {
         check(!candidate.schema().unchanged(old, 23, image.sourceSha256()),
                 "unknown external/reflective dependencies require full invalidation");
         refuses(IllegalArgumentException.class, () ->
-                M3SourceSignalQualityFactory.bindRecordedGraph(image, -1, false));
+                SourceSignalQualityFactory.bindRecordedGraph(image, -1, false));
         String tampered = graphImageText().replace("catalog.Gamma", "catalog.Zeta");
         refuses(IllegalArgumentException.class, () ->
-                M3SourceSignalQualityFactory.bindRecordedGraph(M3SourceSignalImage.parse(tampered), 23, true));
+                SourceSignalQualityFactory.bindRecordedGraph(M3SourceSignalImage.parse(tampered), 23, true));
     }
 
     /** Optional file is emitted by the original existing javac M3SourceSignals plugin. */
@@ -109,7 +109,7 @@ public final class M3SourceSignalQualityFactorySelfTest {
         var image = M3SourceSignalImage.parse(serialized);
         check(image.rowCount() >= 2 && image.relationships().edgeCount() >= 1,
                 "actual attributed S/T/E javac product fixture");
-        var binding = M3SourceSignalQualityFactory.bindRecordedGraph(image, 42, true);
+        var binding = SourceSignalQualityFactory.bindRecordedGraph(image, 42, true);
         check(binding.schema().dimensionCount() == M3SourceSignalImage.Scalar.values().length,
                 "original parsed javac image retains all seventeen typed dimensions");
         check(binding.schema().sourceAuthority()
@@ -137,7 +137,7 @@ public final class M3SourceSignalQualityFactorySelfTest {
         check(verified.columns().columnCount()==M3SourceSignalImage.Scalar.values().length,
                 "original static scalar column count");
         var epochs=M3SignalDependencyEpochs.from(verified.relationships(),true);
-        var quality=M3SourceSignalQualityFactory.fromVerifiedCompilerImage(verified,epochs,11);
+        var quality=SourceSignalQualityFactory.fromVerifiedCompilerImage(verified,epochs,11);
         check(quality.dimensionCount()==17,"17 original compiler columns");
         check(quality.sourceAuthority()==
                 M3SignalQualitySchema.SourceAuthority.COMPILER_IMAGE_SHA256_VERIFIED,
@@ -170,11 +170,11 @@ public final class M3SourceSignalQualityFactorySelfTest {
         String tampered=image.replace("catalog.Beta","catalog.Zeta");
         refuses(IllegalArgumentException.class, () -> M3SourceSignalImage.parse(tampered));
         refuses(IllegalArgumentException.class, () ->
-                M3SourceSignalQualityFactory.fromVerifiedCompilerImage(verified,
+                SourceSignalQualityFactory.fromVerifiedCompilerImage(verified,
                         M3SignalDependencyEpochs.from(M3SignalRelations.of(1,
                                 new int[0],new int[0],new byte[0],new int[0]),true),11));
         refuses(IllegalArgumentException.class, () ->
-                M3SourceSignalQualityFactory.fromVerifiedCompilerImage(verified,epochs,-1));
+                SourceSignalQualityFactory.fromVerifiedCompilerImage(verified,epochs,-1));
         System.out.println("M3_COMPILER_SIGNAL_QUALITY_PASS checks="+checks);
     }
 }

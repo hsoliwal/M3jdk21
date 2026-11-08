@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.util.concurrent.CancellationException;
-import jdk.internal.m3.collections.M3ShadowStreams;
+import jdk.internal.m3.collections.ShadowStreams;
 
 /** Dependency-light progress/cancellation SPI shared below job and collection layers. */
 public interface M3ProgressMonitor {
@@ -54,7 +54,7 @@ public interface M3ProgressMonitor {
         if (expectedBytes < UNKNOWN) throw new IllegalArgumentException("negative stream work");
         M3ProgressMonitor child = split(parentWork);
         child.beginTask("Shadow input", expectedBytes);
-        return M3ShadowStreams.input(source, child, shadows);
+        return ShadowStreams.input(source, child, shadows);
     }
 
     /** Mirror successful primary output writes to borrowed observers without rereading. */
@@ -63,6 +63,6 @@ public interface M3ProgressMonitor {
         if (expectedBytes < UNKNOWN) throw new IllegalArgumentException("negative stream work");
         M3ProgressMonitor child = split(parentWork);
         child.beginTask("Shadow output", expectedBytes);
-        return M3ShadowStreams.output(output, child, shadows);
+        return ShadowStreams.output(output, child, shadows);
     }
 }

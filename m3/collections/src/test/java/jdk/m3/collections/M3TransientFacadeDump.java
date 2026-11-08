@@ -10,14 +10,14 @@ import java.util.HexFormat;
 import java.util.Map;
 import java.util.SplittableRandom;
 import java.util.function.Supplier;
-import jdk.internal.m3.collections.M3InternalLeaseRecycler;
-import jdk.internal.m3.collections.M3LazyElementFlags;
+import jdk.internal.m3.collections.InternalLeaseRecycler;
+import jdk.internal.m3.collections.LazyElementFlags;
 
 /**
  * Differential dump of the transient facade residency family (recipe transient-facade-20261106, M3JDK-authored).
  *
  * <p>Seeded facade lifecycles over the public and package-private API of M3TransientFacadeStore,
- * M3InternalLeaseRecycler and M3ResidentTrimPlanner: create/expose/internal lease/return/trim/remove/close,
+ * InternalLeaseRecycler and M3ResidentTrimPlanner: create/expose/internal lease/return/trim/remove/close,
  * reentrant close from every callback, Disposer reentry during trim, post-close calls, injected heap pressure, top-k victim plans and
  * fault-injected backing growth. Every observable outcome (values, identities, callback order, exceptions with
  * their suppressed chains, stats) is digested per scenario family. differential.sh compiles this same source in
@@ -327,8 +327,8 @@ public final class M3TransientFacadeDump {
             int pinnedOdds = 1 + r.nextInt(8);
             int epochs = 1 + r.nextInt(capacity + 2);
             for (int slot = 0; slot < capacity; slot++) {
-                if (r.nextInt(pinnedOdds) == 0) flags[slot] = M3LazyElementFlags.PINNED;
-                if (r.nextInt(5) == 0) flags[slot] |= M3LazyElementFlags.MATERIALIZED;
+                if (r.nextInt(pinnedOdds) == 0) flags[slot] = LazyElementFlags.PINNED;
+                if (r.nextInt(5) == 0) flags[slot] |= LazyElementFlags.MATERIALIZED;
                 lastUse[slot] = r.nextInt(16) == 0 ? Long.MIN_VALUE + r.nextInt(3) : r.nextInt(epochs);
             }
             int requested = r.nextInt(32) == 0 ? -1 : r.nextInt(capacity + 3);
@@ -340,13 +340,13 @@ public final class M3TransientFacadeDump {
     private static void recycler(Log log, SplittableRandom r, int ops) {
         int[] serial = {0};
         int[] fault = {0};
-        Box<M3InternalLeaseRecycler<Facade>> box = new Box<>();
+        Box<InternalLeaseRecycler<Facade>> box = new Box<>();
         for (int i = 0; i < ops; i++) {
             if (box.value == null || i % 2_000 == 0) {
                 if (box.value != null) recyclerClose(log, box.value);
                 int maxIdle = r.nextInt(9);
                 log.add("recycler maxIdle=" + maxIdle);
-                box.value = new M3InternalLeaseRecycler<>(
+                box.value = new InternalLeaseRecycler<>(
                         () -> { if (fault[0] == 1) throw new IllegalStateException("factory fault"); return new Facade(-1, ++serial[0]); },
                         (facade, id) -> {
                             if (fault[0] == 2) throw new IllegalStateException("rebind fault");
@@ -363,7 +363,7 @@ public final class M3TransientFacadeDump {
         if (box.value != null) recyclerClose(log, box.value);
     }
 
-    private static void recyclerStep(Log log, SplittableRandom r, M3InternalLeaseRecycler<Facade> pool,
+    private static void recyclerStep(Log log, SplittableRandom r, InternalLeaseRecycler<Facade> pool,
             boolean actionFails, long id) {
         switch (r.nextInt(10)) {
             case 0, 1, 2, 3, 4 -> call(log, "borrow", () -> {
@@ -386,7 +386,7 @@ public final class M3TransientFacadeDump {
         }
     }
 
-    private static void recyclerClose(Log log, M3InternalLeaseRecycler<Facade> pool) {
+    private static void recyclerClose(Log log, InternalLeaseRecycler<Facade> pool) {
         call(log, "recycler.close", () -> { pool.close(); return pool.stats(); });
         call(log, "recycler.closed.borrow", () -> { pool.withBorrowed(1, facade -> { }); return "ran"; });
         call(log, "recycler.closed.trim", () -> pool.trimIdle(0));
