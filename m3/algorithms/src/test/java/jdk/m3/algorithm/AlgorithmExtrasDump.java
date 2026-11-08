@@ -529,7 +529,7 @@ public final class AlgorithmExtrasDump {
         });
     }
 
-    // ---------------------------------------------------------------- graphs (M3PrimitiveGraphAlgorithms, M3AdvancedGraphAlgorithms)
+    // ---------------------------------------------------------------- graphs (PrimitiveGraphAlgorithms)
 
     private static int vertices(SplittableRandom random) {
         int tier = random.nextInt(100);
@@ -604,7 +604,7 @@ public final class AlgorithmExtrasDump {
                         graph.vertices(), graph.offsets(), graph.edges(), graph.weights());
                 int source = random.nextInt(20) == 0 ? n : n == 0 ? 0 : random.nextInt(n);
                 return "eq=" + graph.equals(copy) + call(" 01bfs" + source,
-                        () -> shorten(s(AdvancedGraphAlgorithms.zeroOneBfs(graph, source))));
+                        () -> shorten(s(PrimitiveGraphAlgorithms.zeroOneBfs(graph, source))));
             });
         });
         each("bellmanFord", cases, random -> {

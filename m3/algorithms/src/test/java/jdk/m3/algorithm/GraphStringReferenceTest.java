@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 //FLLDCIM: ORACLE - M3JDK-authored reference oracle of recipe/algorithm-extras-20261106 (the donor catalogue has no tests)
 /**
- * Reference oracle of the relocated graph members (M3PrimitiveGraphAlgorithms, M3AdvancedGraphAlgorithms) and string
+ * Reference oracle of the relocated graph members (PrimitiveGraphAlgorithms) and string
  * members (M3PrimitiveStringAlgorithms, M3AdvancedStringAlgorithms) against brute force on small instances:
  * Bellman-Ford over BigInteger, exhaustive 2-colouring, Prim per component, sorted suffix lists, quadratic windows.
  */
@@ -97,7 +97,7 @@ class GraphStringReferenceTest {
                 }
             }
             assertArrayEquals(expectedDistances(bellmanFord(n, from, targets, csrWeights, source)),
-                    AdvancedGraphAlgorithms.zeroOneBfs(graph, source), "case " + i);
+                    PrimitiveGraphAlgorithms.zeroOneBfs(graph, source), "case " + i);
         }
         report("graph", "zeroOneBfs", GRAPH_CASES, GRAPH_CASES);
         long negativeCycles = 0;
