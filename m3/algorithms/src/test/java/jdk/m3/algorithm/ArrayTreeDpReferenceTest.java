@@ -46,10 +46,10 @@ class ArrayTreeDpReferenceTest {
             int[] sorted = values.clone();
             Arrays.sort(sorted);
             int target = random.nextInt(-10, 11);
-            int index = PrimitiveArrayAlgorithms.binarySearch(sorted, target);
+            int index = ArrayAlgorithms.binarySearch(sorted, target);
             assertEquals(Arrays.stream(sorted).anyMatch(v -> v == target), index >= 0);
             assertTrue(index < 0 || sorted[index] == target);
-            assertEquals(index, PrimitiveArrayAlgorithms.binarySearch(sorted, target, ProgressMonitor.none()));
+            assertEquals(index, ArrayAlgorithms.binarySearch(sorted, target, ProgressMonitor.none()));
             int[] circular = new int[n];
             for (int k = 0; k < n; k++) {
                 circular[k] = -1;
@@ -59,7 +59,7 @@ class ArrayTreeDpReferenceTest {
                     circular[k] = found ? values[(k + step) % n] : -1;
                 }
             }
-            assertArrayEquals(circular, PrimitiveArrayAlgorithms.nextGreaterCircular(values));
+            assertArrayEquals(circular, ArrayAlgorithms.nextGreaterCircular(values));
             if (n > 0) {
                 BigInteger best = null;
                 for (int a = 0; a < n; a++) {
@@ -69,7 +69,7 @@ class ArrayTreeDpReferenceTest {
                         best = best == null || product.compareTo(best) > 0 ? product : best;
                     }
                 }
-                assertEquals(best.longValueExact(), PrimitiveArrayAlgorithms.maxProductSubarray(values));
+                assertEquals(best.longValueExact(), ArrayAlgorithms.maxProductSubarray(values));
             }
             long profit = 0;
             long water = 0;
@@ -79,10 +79,10 @@ class ArrayTreeDpReferenceTest {
                     water = Math.max(water, (long) Math.min(values[a], values[b]) * (b - a));
                 }
             }
-            assertEquals(profit, PrimitiveArrayAlgorithms.maxProfitOneTransaction(values));
-            assertEquals(water, PrimitiveArrayAlgorithms.containerMostWater(values));
+            assertEquals(profit, ArrayAlgorithms.maxProfitOneTransaction(values));
+            assertEquals(water, ArrayAlgorithms.containerMostWater(values));
             int[] moved = values.clone();
-            PrimitiveArrayAlgorithms.moveZeroes(moved);
+            ArrayAlgorithms.moveZeroes(moved);
             int[] expectedMoved = new int[n];
             int w = 0;
             for (int v : values) {
@@ -93,7 +93,7 @@ class ArrayTreeDpReferenceTest {
             assertArrayEquals(expectedMoved, moved);
             int steps = random.nextInt(-30, 31);
             int[] rotated = values.clone();
-            PrimitiveArrayAlgorithms.rotateRight(rotated, steps);
+            ArrayAlgorithms.rotateRight(rotated, steps);
             for (int k = 0; k < n; k++) {
                 assertEquals(values[k], rotated[Math.floorMod(k + steps, n)]);
             }
@@ -106,15 +106,15 @@ class ArrayTreeDpReferenceTest {
                 majority = count > n / 2 ? Integer.valueOf(v) : majority;
             }
             if (majority == null) {
-                assertThrows(IllegalArgumentException.class, () -> PrimitiveArrayAlgorithms.majorityElement(values));
+                assertThrows(IllegalArgumentException.class, () -> ArrayAlgorithms.majorityElement(values));
             } else {
-                assertEquals(majority.intValue(), PrimitiveArrayAlgorithms.majorityElement(values));
+                assertEquals(majority.intValue(), ArrayAlgorithms.majorityElement(values));
             }
         }
         report("array", "binarySearch(x2)+nextGreaterCircular+maxProductSubarray+maxProfitOneTransaction+"
                 + "containerMostWater+moveZeroes+rotateRight+majorityElement", 10L * CASES, 10L * CASES);
         finding("nextGreaterCircular", "the LC 503 sentinel -1 also is a value: nextGreaterCircular([-2, -1]) = "
-                + Arrays.toString(PrimitiveArrayAlgorithms.nextGreaterCircular(new int[] {-2, -1}))
+                + Arrays.toString(ArrayAlgorithms.nextGreaterCircular(new int[] {-2, -1}))
                 + " (index 0 has the greater value -1, index 1 has none)");
         long more = 0;
         for (int i = 0; i < CASES; i++, more += 3) {
@@ -125,7 +125,7 @@ class ArrayTreeDpReferenceTest {
             for (int k = 0; k < n; k++) {
                 rotated[k] = base[(k + shift) % n];
             }
-            assertEquals(base[0], PrimitiveArrayAlgorithms.findMinRotated(rotated));
+            assertEquals(base[0], ArrayAlgorithms.findMinRotated(rotated));
             int[] duplicate = new int[n + 1];
             int repeated = random.nextInt(1, n + 1);
             for (int k = 0; k < n; k++) {
@@ -138,9 +138,9 @@ class ArrayTreeDpReferenceTest {
                 duplicate[k] = duplicate[j];
                 duplicate[j] = swap;
             }
-            assertEquals(repeated, PrimitiveArrayAlgorithms.findDuplicateFloyd(duplicate));
+            assertEquals(repeated, ArrayAlgorithms.findDuplicateFloyd(duplicate));
             int bits = random.nextInt(0, 2_000);
-            int[] counts = PrimitiveArrayAlgorithms.countBits(bits);
+            int[] counts = ArrayAlgorithms.countBits(bits);
             for (int k = 0; k <= bits; k++) {
                 assertEquals(Integer.bitCount(k), counts[k]);
             }
