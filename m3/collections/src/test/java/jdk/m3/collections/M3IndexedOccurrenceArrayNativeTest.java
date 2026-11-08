@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.collections;
 
-import jdk.m3.arrays.M3ArrayNative;
+import jdk.m3.arrays.ArrayNative;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
@@ -26,38 +26,38 @@ final class M3IndexedOccurrenceArrayNativeTest {
     @Test
     void objectAllocationIsNativeAndDetached() {
         requireConfiguredNativeProvider();
-        Object[] first = M3ArrayNative.allocateObjectsRequired(7);
+        Object[] first = ArrayNative.allocateObjectsRequired(7);
         assertArrayEquals(new Object[7], first);
-        assertNotSame(first, M3ArrayNative.allocateObjectsRequired(7));
-        assertTrue(M3ArrayNative.isLoaded(), "required JNI owner was not loaded");
+        assertNotSame(first, ArrayNative.allocateObjectsRequired(7));
+        assertTrue(ArrayNative.isLoaded(), "required JNI owner was not loaded");
         assertThrows(NegativeArraySizeException.class,
-                () -> M3ArrayNative.allocateObjectsRequired(-1));
+                () -> ArrayNative.allocateObjectsRequired(-1));
     }
 
     @Test
     void byteAllocationIsNativeAndZeroInitialized() {
         requireConfiguredNativeProvider();
-        byte[] first = M3ArrayNative.allocateBytesRequired(9);
+        byte[] first = ArrayNative.allocateBytesRequired(9);
         assertArrayEquals(new byte[9], first);
-        assertNotSame(first, M3ArrayNative.allocateBytesRequired(9));
-        assertTrue(M3ArrayNative.isLoaded(), "required JNI owner was not loaded");
+        assertNotSame(first, ArrayNative.allocateBytesRequired(9));
+        assertTrue(ArrayNative.isLoaded(), "required JNI owner was not loaded");
     }
 
     @Test
     void intAllocationIsNativeAndZeroInitialized() {
         requireConfiguredNativeProvider();
-        int[] first = M3ArrayNative.allocateIntsRequired(11);
+        int[] first = ArrayNative.allocateIntsRequired(11);
         assertArrayEquals(new int[11], first);
-        assertNotSame(first, M3ArrayNative.allocateIntsRequired(11));
-        assertTrue(M3ArrayNative.isLoaded(), "required JNI owner was not loaded");
+        assertNotSame(first, ArrayNative.allocateIntsRequired(11));
+        assertTrue(ArrayNative.isLoaded(), "required JNI owner was not loaded");
     }
 
     @Test
     void longAllocationIsNativeAndZeroInitialized() {
         requireConfiguredNativeProvider();
-        long[] first = M3ArrayNative.allocateLongsRequired(13);
+        long[] first = ArrayNative.allocateLongsRequired(13);
         assertArrayEquals(new long[13], first);
-        assertNotSame(first, M3ArrayNative.allocateLongsRequired(13));
-        assertTrue(M3ArrayNative.isLoaded(), "required JNI owner was not loaded");
+        assertNotSame(first, ArrayNative.allocateLongsRequired(13));
+        assertTrue(ArrayNative.isLoaded(), "required JNI owner was not loaded");
     }
 }

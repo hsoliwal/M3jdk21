@@ -47,7 +47,7 @@
       "stdout_sha256": "8886ec5e66f83839045eb8ed85bbf2c35ed5de819cf9a3931384925e1a205ee1"
     },
     "actual_java_test_class": {
-      "class": "jdk.m3.arrays.M3ArrayNativeTest",
+      "class": "jdk.m3.arrays.ArrayNativeTest",
       "status": "PASS_FOCUSED_DIRECT_METHOD_INVOCATION",
       "methods": [
         "javaFallbackHasExactCompareAndMaterializationSemantics",

@@ -97,8 +97,8 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
 
     private static Table createTable(boolean accessOrder, boolean keyOnly, int expectedKeys) {
         if (expectedKeys < 0) { throw new IllegalArgumentException("negative expectedKeys"); }
-        if (!jdk.m3.arrays.M3ArrayNative.isLoaded()) {
-            jdk.m3.arrays.M3ArrayNative.allocateObjectsRequired(0);
+        if (!jdk.m3.arrays.ArrayNative.isLoaded()) {
+            jdk.m3.arrays.ArrayNative.allocateObjectsRequired(0);
         }
         return new Table(accessOrder, keyOnly, expectedKeys);
     }
@@ -140,7 +140,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             while (index[p] != 0) { p = (p + 1) & (index.length - 1); } return p;
         }
         void rehash(int capacity) {
-            int[] replacement = jdk.m3.arrays.M3ArrayNative.allocateIntsRequired(capacity);
+            int[] replacement = jdk.m3.arrays.ArrayNative.allocateIntsRequired(capacity);
             for (int s = first; s >= 0; s = after[s]) {
                 int p = hashes[s] & (capacity - 1);
                 while (replacement[p] != 0) { p = (p + 1) & (capacity - 1); }
@@ -161,12 +161,12 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             return capacity;
         }
         private static Object[] copyObjects(Object[] source, int length) {
-            Object[] target = jdk.m3.arrays.M3ArrayNative.allocateObjectsRequired(length);
+            Object[] target = jdk.m3.arrays.ArrayNative.allocateObjectsRequired(length);
             System.arraycopy(source, 0, target, 0, Math.min(source.length, length));
             return target;
         }
         private static int[] copyInts(int[] source, int length) {
-            int[] target = jdk.m3.arrays.M3ArrayNative.allocateIntsRequired(length);
+            int[] target = jdk.m3.arrays.ArrayNative.allocateIntsRequired(length);
             System.arraycopy(source, 0, target, 0, Math.min(source.length, length));
             return target;
         }
@@ -174,7 +174,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             int n = keys.length == 0 ? initialPayloadCapacity() : M3SlotArrays.grow(keys.length);
             Object[] k = copyObjects(keys, n), v = keyOnly ? values : copyObjects(values, n);
             int[] h = copyInts(hashes, n), b = copyInts(before, n), a = copyInts(after, n), p = copyInts(positions, n);
-            int[] buckets = index.length == 0 ? jdk.m3.arrays.M3ArrayNative.allocateIntsRequired(initialIndexCapacity()) : index;
+            int[] buckets = index.length == 0 ? jdk.m3.arrays.ArrayNative.allocateIntsRequired(initialIndexCapacity()) : index;
             // Publish only after every payload, metadata and first index allocation succeeds.
             keys = k; values = v; hashes = h; before = b; after = a; positions = p; index = buckets;
         }
