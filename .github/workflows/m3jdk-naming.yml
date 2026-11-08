@@ -26,10 +26,12 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Recipe tests (rename, reseal)
+      - name: Recipe tests (rename, reseal, rename_types, fold_package)
         run: |
           python3 -I m3/tooling/jdk-naming/test_jdk_naming.py
           python3 -I m3/tooling/jdk-naming/test_reseal.py
+          python3 -I m3/tooling/jdk-naming/test_rename_types.py
+          python3 -I m3/tooling/jdk-naming/test_fold_package.py
       - name: Package layout gate (no new package, module root or split package without approval)
         run: |
           python3 -I m3/tooling/jdk-naming/test_package_gate.py

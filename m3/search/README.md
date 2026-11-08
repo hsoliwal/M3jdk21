@@ -5,21 +5,21 @@ Received from com.synexia `m3-fast-search` (develop 2026-11-06), absorbed under 
 
 | M3 owner | Donor | Shape |
 |---|---|---|
-| `M3SearchEngine`, `M3JavaAdaptiveSearchEngine`, `M3CompiledSearch` | SearchEngine, JavaAdaptiveSearchEngine, CompiledSearch | precompiled exact byte search, engine selection |
-| `M3KmpSearch` | KmpSearch | Knuth-Morris-Pratt prefix table |
-| `M3BoyerMooreHorspoolSearch` | BoyerMooreHorspoolSearch | BMH skip table, overlap fallback |
-| `M3BitapExactSearch` | BitapExactSearch | shift-and bit-parallel exact search (Java path; native entry points declared) |
-| `M3MinimumCoverWindow` | MinimumCoverWindow | minimum window substring (LC 76) |
-| `M3MinimumSubsequenceWindow` | MinimumSubsequenceWindow | minimum window subsequence (LC 727) |
-| `M3FixedWordConcatenation` | FixedWordConcatenation | substring with concatenation of all words (LC 30) |
-| `M3BatchSubsequenceMatch` | BatchSubsequenceMatch | number of matching subsequences (LC 792) |
+| `SearchEngine`, `JavaAdaptiveSearchEngine`, `CompiledSearch` | SearchEngine, JavaAdaptiveSearchEngine, CompiledSearch | precompiled exact byte search, engine selection |
+| `KmpSearch` | KmpSearch | Knuth-Morris-Pratt prefix table |
+| `BoyerMooreHorspoolSearch` | BoyerMooreHorspoolSearch | BMH skip table, overlap fallback |
+| `BitapExactSearch` | BitapExactSearch | shift-and bit-parallel exact search (Java path; native entry points declared) |
+| `MinimumCoverWindow` | MinimumCoverWindow | minimum window substring (LC 76) |
+| `MinimumSubsequenceWindow` | MinimumSubsequenceWindow | minimum window subsequence (LC 727) |
+| `FixedWordConcatenation` | FixedWordConcatenation | substring with concatenation of all words (LC 30) |
+| `BatchSubsequenceMatch` | BatchSubsequenceMatch | number of matching subsequences (LC 792) |
 
 Progress and cancellation use `jdk.m3.collections.M3ProgressMonitor` (the donor's `com.synexia.job.IProgressMonitor`).
 
 ## How it was received
 
 `qualification/relocation-20261106/`:
-- `closure.py`: LEAF_CLOSURE. Only donor classes whose non-JDK dependencies are the progress monitor joined. ByteOccurrences, M3BatchOffsetSearch, M3BatchReverseSearch, SearchEngines and JniSearchEngine reach `JniSearchEngine` / `synexia-native-interop` and form the native leaf (leaf 2, with the C kernels).
+- `closure.py`: LEAF_CLOSURE. Only donor classes whose non-JDK dependencies are the progress monitor joined. ByteOccurrences, BatchOffsetSearch, BatchReverseSearch, SearchEngines and JniSearchEngine reach `JniSearchEngine` / `synexia-native-interop` and form the native leaf (leaf 2, with the C kernels).
 - `relocate_search.py` + `rules.tsv`: M3_SEARCH_RELOCATE v1, the text-lane relocation recipe. It sets the package `jdk.m3.search`, maps the progress monitor, prefixes the M3 type names, and adds a provenance line with the donor blob.
 - `LEDGER.tsv`: one row per file, with the donor path, donor git blob, output path and output sha256.
 - `diff/SearchDiffDigest.java`: M3_SEARCH_DIFF v1.
@@ -40,10 +40,10 @@ rewriting for C, plus the native-loader mapping onto `jdk.m3.file.M3JniLibraryLo
 
 | M3 owner | Donor |
 |---|---|
-| `M3JniSearchEngine` | JniSearchEngine (pattern handles, bulk count/positions, monitored bulk ABI) |
-| `M3SearchEngines` | SearchEngines (JNI first, Java adaptive fallback) |
-| `M3ByteOccurrences` | ByteOccurrences (single-byte memchr/count/reverse lanes) |
-| `M3BatchOffsetSearch`, `M3BatchReverseSearch` | same names (batch first/last occurrence, byte[] and direct ByteBuffer) |
+| `JniSearchEngine` | JniSearchEngine (pattern handles, bulk count/positions, monitored bulk ABI) |
+| `SearchEngines` | SearchEngines (JNI first, Java adaptive fallback) |
+| `ByteOccurrences` | ByteOccurrences (single-byte memchr/count/reverse lanes) |
+| `BatchOffsetSearch`, `BatchReverseSearch` | same names (batch first/last occurrence, byte[] and direct ByteBuffer) |
 | `src/main/native/*.c` | jni_search.c (the m3search library) and the sidecars for minimum cover window, minimum subsequence window, fixed-word concatenation, batch subsequence and bitap |
 
 Donor corrections made at the source before receiving:
@@ -51,7 +51,7 @@ Donor corrections made at the source before receiving:
 - One test literal was corrected by recipe rule: `indexOfMany((byte[]) null, …)`, because the bare `null` was ambiguous between overloads.
 
 Not received:
-- `jni_z_similarity.c` and the Java `M3ZSimilarity` (the Z similarity shape, LC 2223, is owned by `jdk.m3.algorithm.M3PrefixZ`).
+- `jni_z_similarity.c` and the Java `ZSimilarity` (the Z similarity shape, LC 2223, is owned by `jdk.m3.algorithm.M3PrefixZ`).
 - `JniSearchEngineNativeTest` and the 11 donor tests that import `com.synexia.job.ProgressSnapshot` (no M3 equivalent API).
 - `BitapChunkedRegionProof`, which calls methods its donor class does not have.
 
@@ -73,10 +73,10 @@ in com.synexia. `closure_ffs.py` and `seed_closure.py` record the selection.
 
 | M3 owner | Donor | Shape |
 |---|---|---|
-| `M3TopKSelector`, `M3JavaTopKSelector`, `M3TopKInputs` | knowledge.index TopKSelector, JavaTopKSelector, TopKInputs | bounded top-K selection with progress and cancellation |
-| `M3ReciprocalRankFusion`, `M3HybridSearchOptions` | ReciprocalRankFusion, HybridSearchOptions | weighted reciprocal rank fusion of ranked lists |
-| `M3PreparationCache`, `M3QueryPreparationStats` | PreparationCache, QueryPreparationStats | bounded query-preparation cache |
-| `M3PairSumSearch`, `M3PairSumJni` + `pair_sum_search.c` (m3pairsum) | problem PairSumSearch, PairSumJni | two-sum over sorted and unsorted lanes (LC 1 and LC 167), Java and C17 JNI |
+| `TopKSelector`, `JavaTopKSelector`, `TopKInputs` | knowledge.index TopKSelector, JavaTopKSelector, TopKInputs | bounded top-K selection with progress and cancellation |
+| `ReciprocalRankFusion`, `HybridSearchOptions` | ReciprocalRankFusion, HybridSearchOptions | weighted reciprocal rank fusion of ranked lists |
+| `PreparationCache`, `QueryPreparationStats` | PreparationCache, QueryPreparationStats | bounded query-preparation cache |
+| `PairSumSearch`, `PairSumJni` + `pair_sum_search.c` (m3pairsum) | problem PairSumSearch, PairSumJni | two-sum over sorted and unsorted lanes (LC 1 and LC 167), Java and C17 JNI |
 
 The donor monitor `com.synexia.common.progress.ProgressMonitor` maps to `jdk.m3.collections.M3ProgressMonitor`. The kernels call beginTask, subTask, worked, done and checkCanceled, which have the same meaning on both.
 
@@ -92,7 +92,7 @@ Gates (Windows, JDK 21.0.9, MinGW-w64):
 ## Bitap update (2026-11-06)
 
 Landing #16732 had regressed com.synexia develop's `BitapExactSearch` and its JNI kernel to an older copy. The newer copy survived only as a retained variant, and com.synexia #16744 and #16745 restored it. Leaf 1 received the older copy, so this update re-applies M3_SEARCH_RELOCATE v2 to the restored donor (`LEDGER_v2b_bitap.tsv`). The M3 side had no edits beyond relocation, so the new relocation is the merged result.
-- `M3BitapExactSearch` gains the chunked-region and overlap-count API: `countOverlapping` and `*Native` region entries. `jni_bitap_exact.c` follows it.
+- `BitapExactSearch` gains the chunked-region and overlap-count API: `countOverlapping` and `*Native` region entries. `jni_bitap_exact.c` follows it.
 - `BitapChunkedRegionProof` was held out of leaf 1 because it called methods the old donor lacked. It is now received.
 
 Gates (Windows, JDK 21.0.9, MinGW-w64):
@@ -102,3 +102,19 @@ Gates (Windows, JDK 21.0.9, MinGW-w64):
 - `BitapChunkedRegionProof` against the m3bitap library: `M3_BITAP_CHUNK_REGION_PASS checks=8118`.
 - `BitapExactNativeParityMain`: `BITAP_JAVA_JNI_PARITY PASS assertions=910008`.
 - Both proofs give output byte-identical to the com.synexia originals.
+
+## Folded from m3/nlp (2026-11-08)
+
+`jdk.m3.nlp` joined `jdk.m3.search` (approved layout: jdk.m3.search = search + indexdb + nlp). The module root m3/nlp
+and its descriptor `org.m3jdk.nlp` are retired. `fold_package.py` (FOLD_PACKAGE v1) moved its 30 files and
+`rename_types.py` v1.7 dropped their M3 prefix:
+
+| Type | Shape |
+|---|---|
+| `BackoffWordNgrams` | word n-gram counts with backoff, ranked continuations |
+| `CooccurrencePpmi` | sparse co-occurrence with positive PMI ranking |
+| `NgramPerplexity` | scoped n-gram perplexity |
+| `ScopedNgrams` | scoped n-gram counts with top-k admission |
+
+The relocation records of the nlp leaves (GATES, PROVENANCE, RELOCATION_MAP, recipe/, verify.sh, pom and descriptor)
+are kept byte for byte in `m3/evidence/search/nlp/`. The fold itself is recorded in `m3/evidence/search/FOLD_nlp.md`.

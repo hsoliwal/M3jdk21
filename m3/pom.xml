@@ -34,7 +34,6 @@
     <module>compiler/reference-flow</module>
     <module>ports/collections</module>
     <module>native</module>
-    <module>nlp</module>
     <module>llm</module>
     <module>algorithms</module>
     <module>lexicon/receiver</module>
