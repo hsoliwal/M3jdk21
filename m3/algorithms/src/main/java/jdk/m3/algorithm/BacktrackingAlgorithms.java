@@ -219,7 +219,7 @@ public final class BacktrackingAlgorithms {
         values[right] = value;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.combinations from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.combinations
     public static int[][] combinations(int n, int k) {
         if (n < 0 || k < 0 || k > n) throw new IllegalArgumentException("requires 0<=k<=n");
         List<int[]> output = new ArrayList<>();
@@ -227,7 +227,7 @@ public final class BacktrackingAlgorithms {
         return output.toArray(int[][]::new);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.combinationSum from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.combinationSum
     public static int[][] combinationSum(int[] candidates, int target) {
         Objects.requireNonNull(candidates, "candidates");
         if (target < 0) throw new IllegalArgumentException("target must be non-negative");
@@ -240,7 +240,7 @@ public final class BacktrackingAlgorithms {
         return output.toArray(int[][]::new);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.nQueensCount from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.nQueensCount
     public static int nQueensCount(int n) {
         if (n < 0 || n > 63) throw new IllegalArgumentException("n must be in [0,63]");
         if (n == 0) return 1;
@@ -250,7 +250,7 @@ public final class BacktrackingAlgorithms {
         return (int) count;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.solveSudoku from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.solveSudoku
     public static boolean solveSudoku(char[][] board) {
         validateSudoku(board);
         int[] rowMask = new int[9];
@@ -280,7 +280,7 @@ public final class BacktrackingAlgorithms {
         return solveSudoku(board, empty, count, 0, rowMask, columnMask, boxMask);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.combine from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.combine
     private static void combine(
             int start,
             int n,
@@ -298,7 +298,7 @@ public final class BacktrackingAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.combinationSum from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.combinationSum
     private static void combinationSum(
             int[] candidates,
             int remaining,
@@ -319,7 +319,7 @@ public final class BacktrackingAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.queensCount from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.queensCount
     private static long queensCount(long mask, long columns, long left, long right) {
         if (columns == mask) return 1L;
         long available = mask & ~(columns | left | right);
@@ -338,7 +338,7 @@ public final class BacktrackingAlgorithms {
         return count;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.solveSudoku from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.solveSudoku
     private static boolean solveSudoku(
             char[][] board,
             int[] empty,
@@ -402,7 +402,7 @@ public final class BacktrackingAlgorithms {
         return false;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBacktrackingAlgorithms.validateSudoku from donor blob db414577380e (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBacktrackingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-backtracking-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD db414577380e PrimitiveBacktrackingAlgorithms.validateSudoku
     private static void validateSudoku(char[][] board) {
         Objects.requireNonNull(board, "board");
         if (board.length != 9) throw new IllegalArgumentException("Sudoku requires 9 rows");

@@ -241,14 +241,14 @@ public final class MatrixAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveMatrixAlgorithms.DIRECTIONS_4 from donor blob 7d1010c03b68 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveMatrixAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-matrix-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 7d1010c03b68 PrimitiveMatrixAlgorithms.DIRECTIONS_4
     private static final int[] DIRECTIONS_4 = {-1, 0, 1, 0, -1};
-    //FLLDCIM: FOLD - member PrimitiveMatrixAlgorithms.DIRECTIONS_8 from donor blob 7d1010c03b68 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveMatrixAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-matrix-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 7d1010c03b68 PrimitiveMatrixAlgorithms.DIRECTIONS_8
     private static final int[] DIRECTIONS_8 = {-1, -1, -1, 0, 0, 1, 1, 1};
-    //FLLDCIM: FOLD - member PrimitiveMatrixAlgorithms.DIRECTIONS_8_Y from donor blob 7d1010c03b68 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveMatrixAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-matrix-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 7d1010c03b68 PrimitiveMatrixAlgorithms.DIRECTIONS_8_Y
     private static final int[] DIRECTIONS_8_Y = {-1, 0, 1, -1, 1, -1, 0, 1};
 
-    //FLLDCIM: FOLD - member PrimitiveMatrixAlgorithms.floodFill from donor blob 7d1010c03b68 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveMatrixAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-matrix-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 7d1010c03b68 PrimitiveMatrixAlgorithms.floodFill
     public static int[][] floodFill(
             int[][] image,
             int startRow,
@@ -285,7 +285,7 @@ public final class MatrixAlgorithms {
         return output;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveMatrixAlgorithms.shortestPathBinaryMatrix from donor blob 7d1010c03b68 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveMatrixAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-matrix-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 7d1010c03b68 PrimitiveMatrixAlgorithms.shortestPathBinaryMatrix
     public static int shortestPathBinaryMatrix(int[][] grid) {
         validateNonEmptyRectangular(grid);
         int rows = grid.length;
@@ -318,7 +318,7 @@ public final class MatrixAlgorithms {
         return -1;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveMatrixAlgorithms.maximalSquareArea from donor blob 7d1010c03b68 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveMatrixAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-matrix-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 7d1010c03b68 PrimitiveMatrixAlgorithms.maximalSquareArea
     public static int maximalSquareArea(int[][] binary) {
         validateNonEmptyRectangular(binary);
         int columns = binary[0].length;
@@ -342,7 +342,7 @@ public final class MatrixAlgorithms {
         return Math.multiplyExact(best, best);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveMatrixAlgorithms.deepCopy from donor blob 7d1010c03b68 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveMatrixAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-matrix-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 7d1010c03b68 PrimitiveMatrixAlgorithms.deepCopy
     public static int[][] deepCopy(int[][] matrix) {
         Objects.requireNonNull(matrix, "matrix");
         int[][] copy = new int[matrix.length][];
@@ -352,7 +352,7 @@ public final class MatrixAlgorithms {
         return copy;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveMatrixAlgorithms.validateRectangular from donor blob 7d1010c03b68 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveMatrixAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-matrix-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 7d1010c03b68 PrimitiveMatrixAlgorithms.validateRectangular
     private static void validateNonEmptyRectangular(int[][] matrix) {
         Objects.requireNonNull(matrix, "matrix");
         if (matrix.length == 0) throw new IllegalArgumentException("matrix must not be empty");

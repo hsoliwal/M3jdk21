@@ -279,7 +279,7 @@ public final class TreeAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.BinaryTree from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.BinaryTree
     public record BinaryTree(int[] values, int[] left, int[] right, int root) {
         public BinaryTree {
             Objects.requireNonNull(values, "values");
@@ -303,7 +303,7 @@ public final class TreeAlgorithms {
         int[] rawRight() { return right; }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.preorder from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.preorder
     public static int[] preorder(BinaryTree tree) {
         Objects.requireNonNull(tree, "tree");
         int n = tree.rawValues().length;
@@ -325,7 +325,7 @@ public final class TreeAlgorithms {
         return output;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.postorder from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.postorder
     public static int[] postorder(BinaryTree tree) {
         Objects.requireNonNull(tree, "tree");
         int n = tree.rawValues().length;
@@ -337,7 +337,7 @@ public final class TreeAlgorithms {
         return output;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.diameterEdges from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.diameterEdges
     public static int diameterEdges(BinaryTree tree) {
         Objects.requireNonNull(tree, "tree");
         int n = tree.rawValues().length;
@@ -357,7 +357,7 @@ public final class TreeAlgorithms {
         return diameter;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.lowestCommonAncestorBstByValue from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.lowestCommonAncestorBstByValue
     public static int lowestCommonAncestorBstByValue(
             BinaryTree tree,
             int firstValue,
@@ -381,7 +381,7 @@ public final class TreeAlgorithms {
         return -1;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.maxPathSum from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.maxPathSum
     public static long maxPathSum(BinaryTree tree) {
         Objects.requireNonNull(tree, "tree");
         int n = tree.rawValues().length;
@@ -403,7 +403,7 @@ public final class TreeAlgorithms {
         return best;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.inverted from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.inverted
     public static BinaryTree inverted(BinaryTree tree) {
         Objects.requireNonNull(tree, "tree");
         return new BinaryTree(
@@ -413,7 +413,7 @@ public final class TreeAlgorithms {
                 tree.root());
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.containsBstValue from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.containsBstValue
     private static boolean containsBstValue(BinaryTree tree, int target) {
         int node = tree.root();
         int[] values = tree.rawValues();
@@ -427,7 +427,7 @@ public final class TreeAlgorithms {
         return false;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.nodeOrder from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.nodeOrder
     private static int[] nodeOrder(BinaryTree tree) {
         int n = tree.rawValues().length;
         if (n == 0) return new int[0];
@@ -448,7 +448,7 @@ public final class TreeAlgorithms {
         return order;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.validateTree from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.validateTree
     private static void validateTree(int n, int[] left, int[] right, int root) {
         if (n == 0) {
             if (root != -1) throw new IllegalArgumentException("empty tree root must be -1");
@@ -489,7 +489,7 @@ public final class TreeAlgorithms {
         if (count != n) throw new IllegalArgumentException("tree contains unreachable nodes");
     }
 
-    //FLLDCIM: FOLD - member PrimitiveTreeAlgorithms.validateChild from donor blob cec7b47283c6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-tree-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD cec7b47283c6 PrimitiveTreeAlgorithms.validateChild
     private static void validateChild(int n, int child) {
         if (child < -1 || child >= n) throw new IllegalArgumentException("child index out of range");
     }

@@ -287,7 +287,7 @@ public final class GraphAlgorithms {
         return result;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.CsrGraph from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.CsrGraph
     public record CsrGraph(int vertices, int[] offsets, int[] edges) {
         public CsrGraph {
             validateCsr(vertices, offsets, edges);
@@ -310,7 +310,7 @@ public final class GraphAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.WeightedCsrGraph from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.WeightedCsrGraph
     public record WeightedCsrGraph(
             int vertices,
             int[] offsets,
@@ -355,7 +355,7 @@ public final class GraphAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.EdgeList from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.EdgeList
     public record EdgeList(int vertices, int[] from, int[] to, long[] weights) {
         public EdgeList {
             if (vertices < 0) throw new IllegalArgumentException("vertices must be non-negative");
@@ -383,10 +383,10 @@ public final class GraphAlgorithms {
         long[] rawWeights() { return weights; }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.MstResult from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.MstResult
     public record MstResult(long totalWeight, int edgesUsed, boolean connected) {}
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.dfsPreorder from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.dfsPreorder
     public static int[] dfsPreorder(CsrGraph graph, int source) {
         Objects.requireNonNull(graph, "graph");
         checkVertex(graph.vertices(), source);
@@ -416,7 +416,7 @@ public final class GraphAlgorithms {
         return Arrays.copyOf(order, count);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.connectedComponents from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.connectedComponents
     public static int connectedComponents(CsrGraph undirectedGraph) {
         Objects.requireNonNull(undirectedGraph, "undirectedGraph");
         int n = undirectedGraph.vertices();
@@ -446,7 +446,7 @@ public final class GraphAlgorithms {
         return components;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.isBipartite from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.isBipartite
     public static boolean isBipartite(CsrGraph graph) {
         Objects.requireNonNull(graph, "graph");
         int n = graph.vertices();
@@ -477,7 +477,7 @@ public final class GraphAlgorithms {
         return true;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.bellmanFord from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.bellmanFord
     public static long[] bellmanFord(EdgeList graph, int source) {
         Objects.requireNonNull(graph, "graph");
         checkVertex(graph.vertices(), source);
@@ -512,7 +512,7 @@ public final class GraphAlgorithms {
         return distance;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.unionFindComponents from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.unionFindComponents
     public static int unionFindComponents(int vertices, int[] left, int[] right) {
         validateParallelEdges(vertices, left, right);
         AlgorithmSupport.DisjointSet set =
@@ -521,7 +521,7 @@ public final class GraphAlgorithms {
         return set.components();
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.hasUndirectedCycle from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.hasUndirectedCycle
     public static boolean hasUndirectedCycle(int vertices, int[] left, int[] right) {
         validateParallelEdges(vertices, left, right);
         AlgorithmSupport.DisjointSet set =
@@ -532,7 +532,7 @@ public final class GraphAlgorithms {
         return false;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.kruskalMst from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.kruskalMst
     public static MstResult kruskalMst(
             int vertices,
             int[] left,
@@ -563,7 +563,7 @@ public final class GraphAlgorithms {
         return new MstResult(total, used, connected);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.build from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.build
     private static CsrGraph build(
             int vertices,
             int[] from,
@@ -585,7 +585,7 @@ public final class GraphAlgorithms {
         return new CsrGraph(vertices, offsets, edges);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.buildWeighted from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.buildWeighted
     private static WeightedCsrGraph buildWeighted(
             int vertices,
             int[] from,
@@ -620,7 +620,7 @@ public final class GraphAlgorithms {
         return new WeightedCsrGraph(vertices, offsets, edges, csrWeights);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.validateCsr from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.validateCsr
     private static void validateCsr(int vertices, int[] offsets, int[] edges) {
         if (vertices < 0) throw new IllegalArgumentException("vertices must be non-negative");
         Objects.requireNonNull(offsets, "offsets");
@@ -635,7 +635,7 @@ public final class GraphAlgorithms {
         for (int edge : edges) checkVertex(vertices, edge);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.validateParallelEdges from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.validateParallelEdges
     private static void validateParallelEdges(int vertices, int[] left, int[] right) {
         if (vertices < 0) throw new IllegalArgumentException("vertices must be non-negative");
         Objects.requireNonNull(left, "left");
@@ -647,19 +647,19 @@ public final class GraphAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.checkVertex from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.checkVertex
     private static void checkVertex(int vertices, int vertex) {
         if (vertex < 0 || vertex >= vertices) {
             throw new IllegalArgumentException("vertex out of range: " + vertex);
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.prefix from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.prefix
     private static void prefix(int[] offsets) {
         for (int i = 1; i < offsets.length; i++) offsets[i] += offsets[i - 1];
     }
 
-    //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.zeroOneBfs from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ebddcaa6767d PrimitiveGraphAlgorithms.zeroOneBfs
     /** 0-1 BFS over a graph whose edge weights must be exactly 0 or 1. */
     public static long[] zeroOneBfs(GraphAlgorithms.WeightedCsrGraph graph, int source) {
         Objects.requireNonNull(graph, "graph");

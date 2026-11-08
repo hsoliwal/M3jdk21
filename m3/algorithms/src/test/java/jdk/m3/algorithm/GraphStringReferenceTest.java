@@ -116,7 +116,8 @@ class GraphStringReferenceTest {
                 assertThrows(IllegalArgumentException.class, () -> GraphAlgorithms.bellmanFord(list,
                         source), "case " + i);
             } else {
-                assertArrayEquals(expectedDistances(exact), GraphAlgorithms.bellmanFord(list, source),
+                assertArrayEquals(expectedDistances(exact),
+                        GraphAlgorithms.bellmanFord(list, source),
                         "case " + i);
             }
         }
@@ -323,7 +324,8 @@ class GraphStringReferenceTest {
                     ? haystack.substring(random.nextInt(haystack.length() / 2), haystack.length() / 2 + 1)
                     : text(random, random.nextInt(0, 5), "abc");
             int expected = haystack.indexOf(pattern);
-            assertEquals(expected, StringAlgorithms.kmpIndexOf(haystack, pattern), haystack + "/" + pattern);
+            assertEquals(expected, StringAlgorithms.kmpIndexOf(haystack, pattern), haystack + "/"
+                    + pattern);
             assertEquals(expected, StringAlgorithms.kmpIndexOf(haystack, pattern,
                     ProgressMonitor.none()));
             assertEquals(expected, StringAlgorithms.rabinKarpIndexOf(haystack, pattern));
@@ -372,7 +374,8 @@ class GraphStringReferenceTest {
                 }
                 common = k;
             }
-            assertEquals(group[0].substring(0, common), StringAlgorithms.longestCommonPrefix(group));
+            assertEquals(group[0].substring(0, common),
+                    StringAlgorithms.longestCommonPrefix(group));
         }
         report("string", "isAnagram+isPalindromeIgnoringNonAlphanumeric+reverseWords+longestCommonPrefix",
                 4L * STRING_CASES, 4L * STRING_CASES);

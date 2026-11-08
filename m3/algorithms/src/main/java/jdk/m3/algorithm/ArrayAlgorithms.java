@@ -525,12 +525,12 @@ public final class ArrayAlgorithms {
         values[right] = temporary;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.binarySearch from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.binarySearch
     public static int binarySearch(int[] values, int target) {
         return binarySearch(values, target, ProgressMonitor.none());
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.binarySearch from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.binarySearch
     public static int binarySearch(int[] values, int target, ProgressMonitor monitor) {
         Objects.requireNonNull(values, "values");
         ProgressMonitor progress = progress(monitor);
@@ -553,7 +553,7 @@ public final class ArrayAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.nextGreaterCircular from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.nextGreaterCircular
     public static int[] nextGreaterCircular(int[] values) {
         Objects.requireNonNull(values, "values");
         int n = values.length;
@@ -571,7 +571,7 @@ public final class ArrayAlgorithms {
         return output;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.maxProductSubarray from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.maxProductSubarray
     public static long maxProductSubarray(int[] values) {
         Objects.requireNonNull(values, "values");
         if (values.length == 0) throw new IllegalArgumentException("values must not be empty");
@@ -592,7 +592,7 @@ public final class ArrayAlgorithms {
         return best;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.maxProfitOneTransaction from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.maxProfitOneTransaction
     public static long maxProfitOneTransaction(int[] prices) {
         Objects.requireNonNull(prices, "prices");
         if (prices.length < 2) return 0L;
@@ -605,7 +605,7 @@ public final class ArrayAlgorithms {
         return best;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.majorityElement from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.majorityElement
     public static int majorityElement(int[] values) {
         Objects.requireNonNull(values, "values");
         if (values.length == 0) throw new IllegalArgumentException("values must not be empty");
@@ -623,7 +623,7 @@ public final class ArrayAlgorithms {
         return candidate;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.countBits from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.countBits
     public static int[] countBits(int n) {
         if (n < 0) throw new IllegalArgumentException("n must be non-negative");
         int[] output = new int[n + 1];
@@ -631,7 +631,7 @@ public final class ArrayAlgorithms {
         return output;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.findMinRotated from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.findMinRotated
     public static int findMinRotated(int[] values) {
         Objects.requireNonNull(values, "values");
         if (values.length == 0) throw new IllegalArgumentException("values must not be empty");
@@ -645,7 +645,7 @@ public final class ArrayAlgorithms {
         return values[low];
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.findDuplicateFloyd from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.findDuplicateFloyd
     public static int findDuplicateFloyd(int[] values) {
         Objects.requireNonNull(values, "values");
         if (values.length < 2) throw new IllegalArgumentException("requires n+1 values");
@@ -669,7 +669,7 @@ public final class ArrayAlgorithms {
         return slow;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.containerMostWater from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.containerMostWater
     public static long containerMostWater(int[] heights) {
         Objects.requireNonNull(heights, "heights");
         int left = 0;
@@ -684,7 +684,7 @@ public final class ArrayAlgorithms {
         return best;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.moveZeroes from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.moveZeroes
     public static void moveZeroes(int[] values) {
         Objects.requireNonNull(values, "values");
         int write = 0;
@@ -692,7 +692,7 @@ public final class ArrayAlgorithms {
         while (write < values.length) values[write++] = 0;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.rotateRight from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.rotateRight
     public static void rotateRight(int[] values, int steps) {
         Objects.requireNonNull(values, "values");
         if (values.length == 0) return;
@@ -703,12 +703,12 @@ public final class ArrayAlgorithms {
         reverse(values, normalized, values.length - 1);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.reverse from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.reverse
     private static void reverse(int[] values, int left, int right) {
         while (left < right) swap(values, left++, right--);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveArrayAlgorithms.progress from donor blob 4d8f839e45a6 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveArrayAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-array-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 4d8f839e45a6 PrimitiveArrayAlgorithms.progress
     private static ProgressMonitor progress(ProgressMonitor monitor) {
         return monitor == null ? ProgressMonitor.none() : monitor;
     }

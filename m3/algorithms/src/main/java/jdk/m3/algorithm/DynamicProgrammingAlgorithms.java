@@ -282,7 +282,7 @@ public final class DynamicProgrammingAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveDynamicProgrammingAlgorithms.climbStairs from donor blob a04e0a09f6de (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveDynamicProgrammingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-dp-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a04e0a09f6de PrimitiveDynamicProgrammingAlgorithms.climbStairs
     public static long climbStairs(int steps) {
         if (steps < 0) throw new IllegalArgumentException("steps must be non-negative");
         if (steps <= 1) return 1L;
@@ -296,7 +296,7 @@ public final class DynamicProgrammingAlgorithms {
         return current;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveDynamicProgrammingAlgorithms.minCostClimbingStairs from donor blob a04e0a09f6de (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveDynamicProgrammingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-dp-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a04e0a09f6de PrimitiveDynamicProgrammingAlgorithms.minCostClimbingStairs
     public static int minCostClimbingStairs(int[] cost) {
         Objects.requireNonNull(cost, "cost");
         if (cost.length <= 1) return 0;
@@ -313,7 +313,7 @@ public final class DynamicProgrammingAlgorithms {
         return (int) previousOne;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveDynamicProgrammingAlgorithms.coinChangeWays from donor blob a04e0a09f6de (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveDynamicProgrammingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-dp-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a04e0a09f6de PrimitiveDynamicProgrammingAlgorithms.coinChangeWays
     public static long coinChangeWays(int[] coins, int amount) {
         Objects.requireNonNull(coins, "coins");
         if (amount < 0) throw new IllegalArgumentException("amount must be non-negative");
@@ -328,7 +328,7 @@ public final class DynamicProgrammingAlgorithms {
         return dp[amount];
     }
 
-    //FLLDCIM: FOLD - member PrimitiveDynamicProgrammingAlgorithms.minPathSum from donor blob a04e0a09f6de (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveDynamicProgrammingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-dp-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a04e0a09f6de PrimitiveDynamicProgrammingAlgorithms.minPathSum
     public static long minPathSum(int[][] grid) {
         validateRectangular(grid);
         int rows = grid.length;
@@ -349,7 +349,7 @@ public final class DynamicProgrammingAlgorithms {
         return dp[columns - 1];
     }
 
-    //FLLDCIM: FOLD - member PrimitiveDynamicProgrammingAlgorithms.targetSumWays from donor blob a04e0a09f6de (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveDynamicProgrammingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-dp-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a04e0a09f6de PrimitiveDynamicProgrammingAlgorithms.targetSumWays
     public static long targetSumWays(int[] values, int target) {
         Objects.requireNonNull(values, "values");
         int sum = 0;
@@ -375,7 +375,7 @@ public final class DynamicProgrammingAlgorithms {
         return dp[subset];
     }
 
-    //FLLDCIM: FOLD - member PrimitiveDynamicProgrammingAlgorithms.decodeWays from donor blob a04e0a09f6de (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveDynamicProgrammingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-dp-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a04e0a09f6de PrimitiveDynamicProgrammingAlgorithms.decodeWays
     public static int decodeWays(String digits) {
         Objects.requireNonNull(digits, "digits");
         if (digits.isEmpty()) return 0;
@@ -400,7 +400,7 @@ public final class DynamicProgrammingAlgorithms {
         return previousOne;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveDynamicProgrammingAlgorithms.validateRectangular from donor blob a04e0a09f6de (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveDynamicProgrammingAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-dp-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a04e0a09f6de PrimitiveDynamicProgrammingAlgorithms.validateRectangular
     private static void validateRectangular(int[][] grid) {
         Objects.requireNonNull(grid, "grid");
         if (grid.length == 0) throw new IllegalArgumentException("grid must not be empty");
@@ -413,12 +413,12 @@ public final class DynamicProgrammingAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member IntLcsWitness.MAX_LENGTH from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 84cab3ebbc04 IntLcsWitness.MAX_LENGTH
     private static final int LCS_WITNESS_MAX_LENGTH = 4_096;
-    //FLLDCIM: FOLD - member IntLcsWitness.MAX_CELLS from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 84cab3ebbc04 IntLcsWitness.MAX_CELLS
     private static final long LCS_WITNESS_MAX_CELLS = 8_388_608L;
 
-    //FLLDCIM: FOLD - member IntLcsWitness.admit from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 84cab3ebbc04 IntLcsWitness.admit
     private static void admitLcsWitness(int[] a, int[] b) {
         if (a == null || b == null) throw new NullPointerException("integer sequences");
         if (a.length > LCS_WITNESS_MAX_LENGTH || b.length > LCS_WITNESS_MAX_LENGTH
@@ -427,7 +427,7 @@ public final class DynamicProgrammingAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member IntLcsWitness.javaWitness from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 84cab3ebbc04 IntLcsWitness.javaWitness
     /** O(a.length*b.length) time and O(min(a.length,b.length)) work space, excluding output. */
     public static int[] lcsWitness(int[] a, int[] b) {
         admitLcsWitness(a, b);
@@ -441,7 +441,7 @@ public final class DynamicProgrammingAlgorithms {
         return Arrays.copyOf(output, count);
     }
 
-    //FLLDCIM: FOLD - member IntLcsWitness.split from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 84cab3ebbc04 IntLcsWitness.split
     private static int lcsWitnessSplit(int[] a, int begin, int mid, int end,
                              int[] b, int bBegin, int bEnd) {
         int length = bEnd - bBegin;
@@ -475,7 +475,7 @@ public final class DynamicProgrammingAlgorithms {
         return bBegin + index;
     }
 
-    //FLLDCIM: FOLD - member IntLcsWitness.build from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 84cab3ebbc04 IntLcsWitness.build
     private static int lcsWitnessBuild(int[] a, int begin, int end, int[] b,
                              int bBegin, int bEnd, int[] output, int used) {
         if (begin == end || bBegin == bEnd) return used;
@@ -491,7 +491,7 @@ public final class DynamicProgrammingAlgorithms {
         return lcsWitnessBuild(a, mid, end, b, cut, bEnd, output, next);
     }
 
-    //FLLDCIM: FOLD - member IntLcsWitness.referenceLength from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 84cab3ebbc04 IntLcsWitness.referenceLength
     /** Independent rolling-row length oracle, not derived from Hirschberg split logic. */
     public static int lcsLength(int[] a, int[] b) {
         admitLcsWitness(a, b);
@@ -510,7 +510,7 @@ public final class DynamicProgrammingAlgorithms {
         return row[shorter.length];
     }
 
-    //FLLDCIM: FOLD - member IntLcsWitness.isSubsequence from donor blob 84cab3ebbc04 (m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/lcs-witness-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 84cab3ebbc04 IntLcsWitness.isSubsequence
     /** Test-only subsequence predicate; input equality is exact signed int equality. */
     public static boolean isSubsequence(int[] needle, int[] haystack) {
         int found = 0;

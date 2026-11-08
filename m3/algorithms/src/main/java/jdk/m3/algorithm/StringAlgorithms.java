@@ -534,15 +534,15 @@ public final class StringAlgorithms {
         return Integer.compare(leftSecond, rightSecond);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.CHAR_SPACE from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.CHAR_SPACE
     private static final int CHAR_SPACE = Character.MAX_VALUE + 1;
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.minimumWindow from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.minimumWindow
     public static String minimumWindow(String source, String required) {
         return minimumWindow(source, required, ProgressMonitor.none());
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.minimumWindow from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.minimumWindow
     public static String minimumWindow(
             String source,
             String required,
@@ -584,12 +584,12 @@ public final class StringAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.kmpIndexOf from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.kmpIndexOf
     public static int kmpIndexOf(String text, String pattern) {
         return kmpIndexOf(text, pattern, ProgressMonitor.none());
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.kmpIndexOf from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.kmpIndexOf
     public static int kmpIndexOf(
             String text,
             String pattern,
@@ -617,7 +617,7 @@ public final class StringAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.prefixFunction from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.prefixFunction
     public static int[] prefixFunction(String pattern) {
         Objects.requireNonNull(pattern, "pattern");
         int[] prefix = new int[pattern.length()];
@@ -632,7 +632,7 @@ public final class StringAlgorithms {
         return prefix;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.rabinKarpIndexOf from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.rabinKarpIndexOf
     public static int rabinKarpIndexOf(String text, String pattern) {
         Objects.requireNonNull(text, "text");
         Objects.requireNonNull(pattern, "pattern");
@@ -661,7 +661,7 @@ public final class StringAlgorithms {
         return -1;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.isAnagram from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.isAnagram
     public static boolean isAnagram(String left, String right) {
         Objects.requireNonNull(left, "left");
         Objects.requireNonNull(right, "right");
@@ -675,7 +675,7 @@ public final class StringAlgorithms {
         return true;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.isPalindromeIgnoringNonAlphanumeric from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.isPalindromeIgnoringNonAlphanumeric
     public static boolean isPalindromeIgnoringNonAlphanumeric(String value) {
         Objects.requireNonNull(value, "value");
         int left = 0;
@@ -693,7 +693,7 @@ public final class StringAlgorithms {
         return true;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.longestCommonPrefix from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.longestCommonPrefix
     public static String longestCommonPrefix(String[] values) {
         Objects.requireNonNull(values, "values");
         if (values.length == 0) return "";
@@ -709,7 +709,7 @@ public final class StringAlgorithms {
         return values[0].substring(0, length);
     }
 
-    //FLLDCIM: FOLD - member PrimitiveStringAlgorithms.reverseWords from donor blob 9f840d89c5a7 (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.reverseWords
     public static String reverseWords(String value) {
         Objects.requireNonNull(value, "value");
         String stripped = value.strip();
@@ -724,7 +724,7 @@ public final class StringAlgorithms {
     }
 
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.Query from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.Query
     public record OneMismatchQuery(String text, String pattern) {
         public OneMismatchQuery {
             Objects.requireNonNull(text, "text");
@@ -732,21 +732,21 @@ public final class StringAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.FIRST_MATCH_CAPACITY from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.FIRST_MATCH_CAPACITY
     private static final int ONE_MISMATCH_FIRST_MATCH_CAPACITY = 8;
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.firstIndex from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.firstIndex
     public static int oneMismatchFirstIndex(OneMismatchQuery query, ProgressMonitor monitor) {
         OneMismatchQuery checked = Objects.requireNonNull(query, "query");
         return oneMismatchFirstIndex(checked.text(), checked.pattern(), monitor);
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.firstIndex from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.firstIndex
     public static int oneMismatchFirstIndex(String text, String pattern) {
         return oneMismatchFirstIndex(text, pattern, null);
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.firstIndex from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.firstIndex
     public static int oneMismatchFirstIndex(
             String text, String pattern, ProgressMonitor monitor) {
         String haystack = Objects.requireNonNull(text, "text");
@@ -778,12 +778,12 @@ public final class StringAlgorithms {
         return -1;
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.allIndices from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.allIndices
     public static int[] oneMismatchAllIndices(String text, String pattern) {
         return oneMismatchAllIndices(text, pattern, null);
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.allIndices from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.allIndices
     public static int[] oneMismatchAllIndices(
             String text, String pattern, ProgressMonitor monitor) {
         String haystack = Objects.requireNonNull(text, "text");
@@ -833,7 +833,7 @@ public final class StringAlgorithms {
         return count == matches.length ? matches : Arrays.copyOf(matches, count);
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.matchesAt from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.matchesAt
     /** Direct reference predicate used by parity/property tests and bounded callers. */
     public static boolean oneMismatchMatchesAt(String text, String pattern, int start) {
         String haystack = Objects.requireNonNull(text, "text");
@@ -851,7 +851,7 @@ public final class StringAlgorithms {
         return true;
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.geometry from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.geometry
     private static OneMismatchGeometry oneMismatchGeometry(
             String text, String pattern, ProgressMonitor monitor) {
         int[] prefix = StringAlgorithms.prefixMatchLengths(text, pattern, monitor);
@@ -862,7 +862,7 @@ public final class StringAlgorithms {
         return new OneMismatchGeometry(text.length(), pattern.length(), prefix, reversedPrefix);
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.Geometry from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.Geometry
     private record OneMismatchGeometry(
             int textLength,
             int patternLength,
@@ -887,7 +887,7 @@ public final class StringAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.requirePattern from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.requirePattern
     private static String requireOneMismatchPattern(String pattern) {
         String value = Objects.requireNonNull(pattern, "pattern");
         if (value.isEmpty()) {
@@ -896,7 +896,7 @@ public final class StringAlgorithms {
         return value;
     }
 
-    //FLLDCIM: FOLD - member OneMismatchWindowSearch.reverseCodeUnits from donor blob a0482a54939c (m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/one-mismatch-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD a0482a54939c OneMismatchWindowSearch.reverseCodeUnits
     /** Reverse raw UTF-16 code units; do not apply StringBuilder's surrogate-pair repair. */
     private static String reverseCodeUnits(String value) {
         char[] units = value.toCharArray();

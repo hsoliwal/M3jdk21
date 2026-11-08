@@ -32,7 +32,7 @@ final class AlgorithmSupport {
         return new int[] {-1, -1};
     }
 
-    //FLLDCIM: FOLD - member PrimitiveAlgorithmSupport.LongIntMinHeap from donor blob ab947fa4cf6f (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveAlgorithmSupport.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-support-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ab947fa4cf6f PrimitiveAlgorithmSupport.LongIntMinHeap
     static final class LongIntMinHeap {
         private long[] priorities;
         private int[] values;
@@ -99,7 +99,7 @@ final class AlgorithmSupport {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveAlgorithmSupport.DisjointSet from donor blob ab947fa4cf6f (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveAlgorithmSupport.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-support-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD ab947fa4cf6f PrimitiveAlgorithmSupport.DisjointSet
     static final class DisjointSet {
         private final int[] parent;
         private final byte[] rank;

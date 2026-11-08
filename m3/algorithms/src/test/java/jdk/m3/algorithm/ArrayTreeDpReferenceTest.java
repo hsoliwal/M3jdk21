@@ -49,7 +49,8 @@ class ArrayTreeDpReferenceTest {
             int index = ArrayAlgorithms.binarySearch(sorted, target);
             assertEquals(Arrays.stream(sorted).anyMatch(v -> v == target), index >= 0);
             assertTrue(index < 0 || sorted[index] == target);
-            assertEquals(index, ArrayAlgorithms.binarySearch(sorted, target, ProgressMonitor.none()));
+            assertEquals(index,
+                    ArrayAlgorithms.binarySearch(sorted, target, ProgressMonitor.none()));
             int[] circular = new int[n];
             for (int k = 0; k < n; k++) {
                 circular[k] = -1;
@@ -106,7 +107,8 @@ class ArrayTreeDpReferenceTest {
                 majority = count > n / 2 ? Integer.valueOf(v) : majority;
             }
             if (majority == null) {
-                assertThrows(IllegalArgumentException.class, () -> ArrayAlgorithms.majorityElement(values));
+                assertThrows(IllegalArgumentException.class, () ->
+                        ArrayAlgorithms.majorityElement(values));
             } else {
                 assertEquals(majority.intValue(), ArrayAlgorithms.majorityElement(values));
             }
@@ -270,10 +272,12 @@ class ArrayTreeDpReferenceTest {
         BigInteger b = BigInteger.ONE;
         for (int n = 0; n <= 100; n++) {
             if (a.bitLength() < 64) {
-                assertEquals(a.longValueExact(), DynamicProgrammingAlgorithms.climbStairs(n), "" + n);
+                assertEquals(a.longValueExact(), DynamicProgrammingAlgorithms.climbStairs(n), ""
+                        + n);
             } else {
                 int steps = n;
-                assertThrows(ArithmeticException.class, () -> DynamicProgrammingAlgorithms.climbStairs(steps));
+                assertThrows(ArithmeticException.class, () ->
+                        DynamicProgrammingAlgorithms.climbStairs(steps));
             }
             BigInteger next = a.add(b);
             a = b;
@@ -286,10 +290,12 @@ class ArrayTreeDpReferenceTest {
             for (int k = 0; k < cost.length; k++) {
                 cost[k] = Math.abs(cost[k]);
             }
-            assertEquals(minCost(cost, cost.length), DynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
+            assertEquals(minCost(cost, cost.length),
+                    DynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
             int[] coins = random.ints(1, 12).distinct().limit(random.nextInt(0, 4)).toArray();
             int amount = random.nextInt(0, 40);
-            assertEquals(ways(coins, 0, amount), DynamicProgrammingAlgorithms.coinChangeWays(coins, amount));
+            assertEquals(ways(coins, 0, amount),
+                    DynamicProgrammingAlgorithms.coinChangeWays(coins, amount));
             int rows = random.nextInt(1, 6);
             int columns = random.nextInt(1, 6);
             int[][] grid = new int[rows][columns];
@@ -318,7 +324,8 @@ class ArrayTreeDpReferenceTest {
                 digits[k] = (char) ('0' + random.nextInt(random.nextBoolean() ? 3 : 10));
             }
             String text = new String(digits);
-            assertEquals(text.isEmpty() ? 0 : decode(text, 0), DynamicProgrammingAlgorithms.decodeWays(text));
+            assertEquals(text.isEmpty() ? 0 : decode(text, 0),
+                    DynamicProgrammingAlgorithms.decodeWays(text));
         }
         String ones = "1".repeat(60);
         BigInteger exact = BigInteger.ONE;
@@ -334,7 +341,8 @@ class ArrayTreeDpReferenceTest {
                 + "decodeWays", cases, cases);
         finding("decodeWays", "int arithmetic wraps without refusal: 60 x '1' has " + exact + " decodings, the member "
                 + "returns " + wrapped + " (overflowing inputs=" + decodeOverflows + "); Character.isDigit admits "
-                + "non-ASCII digits: decodeWays(\"\\u0661\") = " + DynamicProgrammingAlgorithms.decodeWays("\u0661"));
+                + "non-ASCII digits: decodeWays(\"\\u0661\") = "
+                        + DynamicProgrammingAlgorithms.decodeWays("\u0661"));
     }
 
     private static long minCost(int[] cost, int top) {
@@ -426,7 +434,8 @@ class ArrayTreeDpReferenceTest {
             boolean wellFormed = board.length == 9 && Arrays.stream(board).allMatch(row -> row.length == 9)
                     && Arrays.stream(board).allMatch(row -> new String(row).matches("[1-9.]{9}"));
             if (!wellFormed || !consistent(board)) {
-                assertThrows(IllegalArgumentException.class, () -> BacktrackingAlgorithms.solveSudoku(board));
+                assertThrows(IllegalArgumentException.class, () ->
+                        BacktrackingAlgorithms.solveSudoku(board));
                 continue;
             }
             char[][] clues = Arrays.stream(board).map(char[]::clone).toArray(char[][]::new);
@@ -445,7 +454,8 @@ class ArrayTreeDpReferenceTest {
         report("backtracking", "combinations+nQueensCount+combinationSum+solveSudoku", cases, cases);
         String empty;
         try {
-            empty = "returns " + BacktrackingAlgorithms.combinationSum(new int[0], 5).length + " rows";
+            empty = "returns " + BacktrackingAlgorithms.combinationSum(new int[0], 5).length
+                    + " rows";
         } catch (RuntimeException e) {
             empty = "throws " + e.getClass().getSimpleName();
         }

@@ -222,14 +222,16 @@ public final class AlgorithmExtrasDump {
             int[] values = sorted(ints(random, length(random), random.nextBoolean() ? 50 : 0));
             int target = values.length > 0 && random.nextBoolean() ? values[random.nextInt(values.length)]
                     : random.nextInt(-60, 61);
-            return call(s(values) + " t=" + target, () -> "" + ArrayAlgorithms.binarySearch(values, target));
+            return call(s(values) + " t=" + target, () -> ""
+                    + ArrayAlgorithms.binarySearch(values, target));
         });
         each("binarySearchMonitor", cases, random -> {
             int[] values = sorted(ints(random, length(random), 50));
             int target = random.nextInt(-60, 61);
             TraceMonitor monitor = monitor(random);
             ProgressMonitor passed = random.nextInt(10) == 0 ? null : monitor;
-            return call(s(values) + " t=" + target, () -> ArrayAlgorithms.binarySearch(values, target,
+            return call(s(values) + " t=" + target, () ->
+                    ArrayAlgorithms.binarySearch(values, target,
                     passed) + "") + " trace=" + monitor.trace();
         });
         each("nextGreaterCircular", cases, random -> {
@@ -587,7 +589,8 @@ public final class AlgorithmExtrasDump {
             int n = random.nextInt(-1, 5);
             int[] offsets = ints(random, random.nextInt(0, 7), 6);
             int[] edgeIds = ints(random, random.nextInt(0, 6), 5);
-            return call(n + s(offsets) + s(edgeIds), () -> new GraphAlgorithms.CsrGraph(n, offsets, edgeIds)
+            return call(n + s(offsets) + s(edgeIds), () ->
+                    new GraphAlgorithms.CsrGraph(n, offsets, edgeIds)
                     .vertices() + "");
         });
         each("WeightedCsrGraph", cases, random -> {
@@ -624,7 +627,8 @@ public final class AlgorithmExtrasDump {
             long[] w = weights(random, e[0].length, true, false);
             return call(edgeText(n, e) + " w=" + shorten(s(w)),
                     () -> call("ufc", () -> "" + GraphAlgorithms.unionFindComponents(n, e[0], e[1]))
-                            + call(" cyc", () -> "" + GraphAlgorithms.hasUndirectedCycle(n, e[0], e[1]))
+                            + call(" cyc", () -> ""
+                                    + GraphAlgorithms.hasUndirectedCycle(n, e[0], e[1]))
                             + call(" mst", () -> {
                                 GraphAlgorithms.MstResult mst = GraphAlgorithms.kruskalMst(n,
                                         e[0], e[1], w);
@@ -663,7 +667,8 @@ public final class AlgorithmExtrasDump {
         each("anagramPalindrome", cases, random -> {
             String left = text(random, random.nextInt(12), 16);
             String right = random.nextBoolean() ? shuffle(random, left) : text(random, left.length(), 16);
-            return call("'" + left + "' '" + right + "'", () -> StringAlgorithms.isAnagram(left, right)
+            return call("'" + left + "' '" + right + "'", () ->
+                    StringAlgorithms.isAnagram(left, right)
                     + "/" + StringAlgorithms.isPalindromeIgnoringNonAlphanumeric(left)
                     + "/" + StringAlgorithms.isPalindromeIgnoringNonAlphanumeric(left
                     + new StringBuilder(left).reverse()));
@@ -675,7 +680,8 @@ public final class AlgorithmExtrasDump {
                 values[i] = random.nextInt(30) == 0 ? null : stem.substring(0, random.nextInt(stem.length() + 1))
                         + text(random, random.nextInt(4), 3);
             }
-            return call(Arrays.toString(values), () -> StringAlgorithms.longestCommonPrefix(values));
+            return call(Arrays.toString(values), () ->
+                    StringAlgorithms.longestCommonPrefix(values));
         });
         each("reverseWords", cases, random -> {
             String value = text(random, random.nextInt(30), 8);
@@ -697,7 +703,8 @@ public final class AlgorithmExtrasDump {
         each("lcpArrayRefusal", cases / 10, random -> {
             String value = text(random, random.nextInt(6), 3);
             int[] order = ints(random, random.nextInt(7), 6);
-            return call("'" + value + "' " + s(order), () -> s(StringAlgorithms.lcpArray(value, order)));
+            return call("'" + value + "' " + s(order), () ->
+                    s(StringAlgorithms.lcpArray(value, order)));
         });
     }
 
@@ -827,7 +834,8 @@ public final class AlgorithmExtrasDump {
                         + call(" pre", () -> s(TreeAlgorithms.preorder(tree)))
                         + call(" post", () -> s(TreeAlgorithms.postorder(tree)))
                         + call(" dia", () -> "" + TreeAlgorithms.diameterEdges(tree))
-                        + call(" lca", () -> "" + TreeAlgorithms.lowestCommonAncestorBstByValue(tree, a, b))
+                        + call(" lca", () -> ""
+                                + TreeAlgorithms.lowestCommonAncestorBstByValue(tree, a, b))
                         + call(" mps", () -> "" + TreeAlgorithms.maxPathSum(tree))
                         + call(" inv", () -> s(TreeAlgorithms.preorder(TreeAlgorithms.inverted(
                         tree))));
@@ -844,7 +852,8 @@ public final class AlgorithmExtrasDump {
         });
         each("minCostClimbingStairs", cases, random -> {
             int[] cost = ints(random, length(random) % 200, random.nextInt(6) == 0 ? 0 : 1_000);
-            return call(s(cost), () -> "" + DynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
+            return call(s(cost), () -> ""
+                    + DynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
         });
         each("coinChangeWays", cases, random -> {
             int[] coins = ints(random, random.nextInt(0, 6), 30);
@@ -881,7 +890,8 @@ public final class AlgorithmExtrasDump {
                         ? 3 : 10));
             }
             String value = new String(digits);
-            return call("'" + value + "'", () -> "" + DynamicProgrammingAlgorithms.decodeWays(value));
+            return call("'" + value + "'", () -> ""
+                    + DynamicProgrammingAlgorithms.decodeWays(value));
         });
     }
 
@@ -967,7 +977,8 @@ public final class AlgorithmExtrasDump {
             int r = random.nextInt(-1, 13);
             int c = random.nextInt(-1, 13);
             int color = random.nextInt(-2, 3);
-            return call(s(image) + " " + r + "," + c + "," + color, () -> s(MatrixAlgorithms.floodFill(image,
+            return call(s(image) + " " + r + "," + c + "," + color, () ->
+                    s(MatrixAlgorithms.floodFill(image,
                     r, c, color)) + " src=" + s(image));
         });
         each("shortestPathBinaryMatrix", cases, random -> {
@@ -1000,7 +1011,8 @@ public final class AlgorithmExtrasDump {
             int b = ints(random, 1, random.nextBoolean() ? 100 : 0)[0];
             return call(a + "," + b, () -> BitAlgorithms.isPowerOfTwo(a) + "/"
                     + BitAlgorithms.addWithoutPlus(a, b)
-                    + call("/and", () -> "" + BitAlgorithms.rangeBitwiseAnd(Math.min(a, b), Math.max(a, b))));
+                    + call("/and", () -> ""
+                            + BitAlgorithms.rangeBitwiseAnd(Math.min(a, b), Math.max(a, b))));
         });
         each("twoSingleNumbers", cases, random -> {
             int pairs = random.nextInt(0, 10);

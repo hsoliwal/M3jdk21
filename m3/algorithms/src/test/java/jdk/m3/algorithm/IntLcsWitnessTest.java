@@ -43,7 +43,8 @@ final class IntLcsWitnessTest {
                 () -> DynamicProgrammingAlgorithms.lcsWitness(new int[4097], new int[]{1}));
         assertThrows(IllegalArgumentException.class,
                 () -> DynamicProgrammingAlgorithms.lcsWitness(new int[4096], new int[4096]));
-        assertArrayEquals(new int[0], DynamicProgrammingAlgorithms.lcsWitness(new int[]{1, 2}, new int[0]));
+        assertArrayEquals(new int[0],
+                DynamicProgrammingAlgorithms.lcsWitness(new int[]{1, 2}, new int[0]));
     }
 
     @Test void seededOracleAndUnchangedInputs() {

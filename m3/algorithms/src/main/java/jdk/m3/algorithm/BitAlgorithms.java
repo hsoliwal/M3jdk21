@@ -65,12 +65,12 @@ public final class BitAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBitAlgorithms.isPowerOfTwo from donor blob e34b3eb5615f (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBitAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-bit-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD e34b3eb5615f PrimitiveBitAlgorithms.isPowerOfTwo
     public static boolean isPowerOfTwo(int value) {
         return value > 0 && (value & (value - 1)) == 0;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBitAlgorithms.addWithoutPlus from donor blob e34b3eb5615f (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBitAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-bit-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD e34b3eb5615f PrimitiveBitAlgorithms.addWithoutPlus
     public static int addWithoutPlus(int left, int right) {
         int a = left;
         int b = right;
@@ -82,7 +82,7 @@ public final class BitAlgorithms {
         return a;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBitAlgorithms.rangeBitwiseAnd from donor blob e34b3eb5615f (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBitAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-bit-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD e34b3eb5615f PrimitiveBitAlgorithms.rangeBitwiseAnd
     public static int rangeBitwiseAnd(int left, int right) {
         if (left < 0 || right < left) {
             throw new IllegalArgumentException("requires 0<=left<=right");
@@ -96,7 +96,7 @@ public final class BitAlgorithms {
         return left << shift;
     }
 
-    //FLLDCIM: FOLD - member PrimitiveBitAlgorithms.twoSingleNumbers from donor blob e34b3eb5615f (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveBitAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-bit-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD e34b3eb5615f PrimitiveBitAlgorithms.twoSingleNumbers
     public static int[] twoSingleNumbers(int[] values) {
         if (values == null) throw new NullPointerException("values");
         int xor = 0;

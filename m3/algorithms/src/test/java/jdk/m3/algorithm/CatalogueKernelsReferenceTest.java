@@ -33,7 +33,8 @@ final class CatalogueKernelsReferenceTest {
         for (int trial = 0; trial < 20_000; trial++) {
             String text = text(random, random.nextInt(40));
             String pattern = pattern(random, text);
-            assertEquals(naiveFirst(text, pattern), StringAlgorithms.zSearch(text, pattern), "trial=" + trial);
+            assertEquals(naiveFirst(text, pattern), StringAlgorithms.zSearch(text, pattern),
+                    "trial=" + trial);
             int[] z = StringAlgorithms.zFunction(text, ProgressMonitor.none());
             assertArrayEquals(naiveZ(text), z, "trial=" + trial);
             assertArrayEquals(StringAlgorithms.zFunction(text, ProgressMonitor.none()), z, "trial=" + trial);
@@ -67,9 +68,12 @@ final class CatalogueKernelsReferenceTest {
             }
         };
         assertThrows(CancellationException.class,
-                () -> StringAlgorithms.prefixMatchLengths("a".repeat(4096), "a".repeat(64) + "b", canceled));
-        assertThrows(CancellationException.class, () -> StringAlgorithms.zSearch("abc", "c", canceled));
-        assertThrows(CancellationException.class, () -> StringAlgorithms.oneMismatchAllIndices("abc", "ab", canceled));
+                () -> StringAlgorithms.prefixMatchLengths("a".repeat(4096), "a".repeat(64) + "b",
+                        canceled));
+        assertThrows(CancellationException.class, () ->
+                StringAlgorithms.zSearch("abc", "c", canceled));
+        assertThrows(CancellationException.class, () ->
+                StringAlgorithms.oneMismatchAllIndices("abc", "ab", canceled));
     }
 
     @Test
@@ -83,7 +87,8 @@ final class CatalogueKernelsReferenceTest {
                 continue;
             }
             int[] expected = bruteForce(text, pattern);
-            assertArrayEquals(expected, StringAlgorithms.oneMismatchAllIndices(text, pattern), "trial=" + trial);
+            assertArrayEquals(expected, StringAlgorithms.oneMismatchAllIndices(text, pattern),
+                    "trial=" + trial);
             assertEquals(expected.length == 0 ? -1 : expected[0],
                     StringAlgorithms.oneMismatchFirstIndex(text, pattern), "trial=" + trial);
             windows += Math.max(0, text.length() - pattern.length() + 1);
@@ -103,7 +108,8 @@ final class CatalogueKernelsReferenceTest {
             int[][] table = table(a, b);
             assertEquals(table[a.length][b.length], witness.length, "trial=" + trial);
             assertTrue(subsequence(witness, a) && subsequence(witness, b), "trial=" + trial);
-            assertEquals(table[a.length][b.length], DynamicProgrammingAlgorithms.lcsLength(a, b), "trial=" + trial);
+            assertEquals(table[a.length][b.length], DynamicProgrammingAlgorithms.lcsLength(a, b),
+                    "trial=" + trial);
             cases++;
         }
         int exhaustive = 0;
@@ -136,7 +142,8 @@ final class CatalogueKernelsReferenceTest {
         java.util.function.BiConsumer<int[], int[]> verify = (a, b) -> {
             int[] witness = DynamicProgrammingAlgorithms.lcsWitness(a, b);
             assertEquals(DynamicProgrammingAlgorithms.lcsLength(a, b), witness.length);
-            assertTrue(DynamicProgrammingAlgorithms.isSubsequence(witness, a) && DynamicProgrammingAlgorithms.isSubsequence(witness, b));
+            assertTrue(DynamicProgrammingAlgorithms.isSubsequence(witness,
+                    a) && DynamicProgrammingAlgorithms.isSubsequence(witness, b));
             update(digest, witness.length);
             for (int value : witness) {
                 update(digest, value);
@@ -149,10 +156,14 @@ final class CatalogueKernelsReferenceTest {
         verify.accept(new int[] {7, 7, 7, 7}, new int[] {7, 7});
         verify.accept(new int[] {}, new int[] {});
         verify.accept(new int[] {1, 2, 1, 2}, new int[] {2, 1, 2, 1});
-        assertThrows(NullPointerException.class, () -> DynamicProgrammingAlgorithms.lcsWitness(null, new int[] {1}));
-        assertThrows(NullPointerException.class, () -> DynamicProgrammingAlgorithms.lcsWitness(new int[] {1}, null));
-        assertThrows(IllegalArgumentException.class, () -> DynamicProgrammingAlgorithms.lcsWitness(new int[4097], new int[] {1}));
-        assertThrows(IllegalArgumentException.class, () -> DynamicProgrammingAlgorithms.lcsWitness(new int[4096], new int[4096]));
+        assertThrows(NullPointerException.class, () ->
+                DynamicProgrammingAlgorithms.lcsWitness(null, new int[] {1}));
+        assertThrows(NullPointerException.class, () ->
+                DynamicProgrammingAlgorithms.lcsWitness(new int[] {1}, null));
+        assertThrows(IllegalArgumentException.class, () ->
+                DynamicProgrammingAlgorithms.lcsWitness(new int[4097], new int[] {1}));
+        assertThrows(IllegalArgumentException.class, () ->
+                DynamicProgrammingAlgorithms.lcsWitness(new int[4096], new int[4096]));
         cases[0] += 4;
         int[] alphabet = {-7, 0, 7};
         for (int n = 0; n <= 4; n++) {
