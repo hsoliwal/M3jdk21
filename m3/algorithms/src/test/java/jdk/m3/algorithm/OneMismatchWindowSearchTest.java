@@ -16,31 +16,31 @@ import org.junit.jupiter.api.Test;
 final class OneMismatchWindowSearchTest {
     @Test
     void exactAndSingleMismatchWindowsMatchButTwoMismatchesDoNot() {
-        assertEquals(2, OneMismatchWindowSearch.firstIndex("xxabcdyy", "abcd"));
-        assertEquals(2, OneMismatchWindowSearch.firstIndex("xxabxdyy", "abcd"));
-        assertEquals(-1, OneMismatchWindowSearch.firstIndex("xxaxxdyy", "abcd"));
+        assertEquals(2, StringAlgorithms.oneMismatchFirstIndex("xxabcdyy", "abcd"));
+        assertEquals(2, StringAlgorithms.oneMismatchFirstIndex("xxabxdyy", "abcd"));
+        assertEquals(-1, StringAlgorithms.oneMismatchFirstIndex("xxaxxdyy", "abcd"));
 
-        assertTrue(OneMismatchWindowSearch.matchesAt("xxabcdyy", "abcd", 2));
-        assertTrue(OneMismatchWindowSearch.matchesAt("xxabxdyy", "abcd", 2));
-        assertFalse(OneMismatchWindowSearch.matchesAt("xxaxxdyy", "abcd", 2));
+        assertTrue(StringAlgorithms.oneMismatchMatchesAt("xxabcdyy", "abcd", 2));
+        assertTrue(StringAlgorithms.oneMismatchMatchesAt("xxabxdyy", "abcd", 2));
+        assertFalse(StringAlgorithms.oneMismatchMatchesAt("xxaxxdyy", "abcd", 2));
     }
 
     @Test
     void oneUnitPatternMatchesEveryAvailableWindow() {
-        assertEquals(0, OneMismatchWindowSearch.firstIndex("xyz", "q"));
+        assertEquals(0, StringAlgorithms.oneMismatchFirstIndex("xyz", "q"));
         assertArrayEquals(
                 new int[] {0, 1, 2},
-                OneMismatchWindowSearch.allIndices("xyz", "q"));
+                StringAlgorithms.oneMismatchAllIndices("xyz", "q"));
     }
 
     @Test
     void retainsRawUtf16CodeUnitSemantics() {
         String text = "\u0000\ud800x\udfffy\u0000";
-        assertEquals(1, OneMismatchWindowSearch.firstIndex(text, "\ud800z"));
-        assertEquals(3, OneMismatchWindowSearch.firstIndex(text, "\udfffq"));
+        assertEquals(1, StringAlgorithms.oneMismatchFirstIndex(text, "\ud800z"));
+        assertEquals(3, StringAlgorithms.oneMismatchFirstIndex(text, "\udfffq"));
         assertArrayEquals(
                 naiveAll(text, "\ud800z"),
-                OneMismatchWindowSearch.allIndices(text, "\ud800z"));
+                StringAlgorithms.oneMismatchAllIndices(text, "\ud800z"));
     }
 
     @Test
@@ -65,11 +65,11 @@ final class OneMismatchWindowSearchTest {
             int[] expected = naiveAll(text, pattern);
             assertArrayEquals(
                     expected,
-                    OneMismatchWindowSearch.allIndices(text, pattern),
+                    StringAlgorithms.oneMismatchAllIndices(text, pattern),
                     "trial=" + trial);
             assertEquals(
                     expected.length == 0 ? -1 : expected[0],
-                    OneMismatchWindowSearch.firstIndex(text, pattern),
+                    StringAlgorithms.oneMismatchFirstIndex(text, pattern),
                     "trial=" + trial);
         }
     }
@@ -78,19 +78,19 @@ final class OneMismatchWindowSearchTest {
     void invalidPatternAndOutOfRangeReferenceChecksFailClosed() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> OneMismatchWindowSearch.firstIndex("abc", ""));
+                () -> StringAlgorithms.oneMismatchFirstIndex("abc", ""));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> OneMismatchWindowSearch.allIndices("abc", ""));
-        assertFalse(OneMismatchWindowSearch.matchesAt("abc", "bc", -1));
-        assertFalse(OneMismatchWindowSearch.matchesAt("abc", "bc", 2));
-        assertEquals(-1, OneMismatchWindowSearch.firstIndex("a", "longer"));
+                () -> StringAlgorithms.oneMismatchAllIndices("abc", ""));
+        assertFalse(StringAlgorithms.oneMismatchMatchesAt("abc", "bc", -1));
+        assertFalse(StringAlgorithms.oneMismatchMatchesAt("abc", "bc", 2));
+        assertEquals(-1, StringAlgorithms.oneMismatchFirstIndex("a", "longer"));
     }
 
     private static int[] naiveAll(String text, String pattern) {
         ArrayList<Integer> values = new ArrayList<>();
         for (int start = 0; start <= text.length() - pattern.length(); start++) {
-            if (OneMismatchWindowSearch.matchesAt(text, pattern, start)) {
+            if (StringAlgorithms.oneMismatchMatchesAt(text, pattern, start)) {
                 values.add(start);
             }
         }

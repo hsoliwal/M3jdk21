@@ -22,3 +22,80 @@ advanced-string	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run
 advanced-string	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
 advanced-string	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
 advanced-string	owner_size	NOTE	StringAlgorithms is 536 lines after the fold
+primitive-bit	fold_members	PASS	4 members FOLD from PrimitiveBitAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-bit	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-bit	references	PASS	grep PrimitiveBitAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-bit	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-bit	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-bit	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-bit	owner_size	NOTE	BitAlgorithms is 114 lines after the fold
+primitive-backtracking	fold_members	PASS	9 members FOLD from PrimitiveBacktrackingAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-backtracking	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-backtracking	references	PASS	grep PrimitiveBacktrackingAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-backtracking	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-backtracking	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-backtracking	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-backtracking	owner_size	NOTE	BacktrackingAlgorithms is 420 lines after the fold
+primitive-dp	fold_members	PASS	7 members FOLD from PrimitiveDynamicProgrammingAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-dp	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-dp	references	PASS	grep PrimitiveDynamicProgrammingAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-dp	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-dp	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-dp	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-dp	owner_size	NOTE	DynamicProgrammingAlgorithms is 412 lines after the fold
+primitive-string	fold_members	PASS	11 members FOLD from PrimitiveStringAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-string	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-string	references	PASS	grep PrimitiveStringAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-string	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-string	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-string	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-string	owner_size	NOTE	StringAlgorithms is 726 lines after the fold
+primitive-array	fold_members	PASS	14 members FOLD from PrimitiveArrayAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-array	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-array	references	PASS	grep PrimitiveArrayAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-array	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-array	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-array	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-array	owner_size	NOTE	ArrayAlgorithms is 715 lines after the fold
+primitive-matrix	fold_members	PASS	7 members FOLD from PrimitiveMatrixAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-matrix	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-matrix	references	PASS	grep PrimitiveMatrixAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-matrix	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-matrix	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-matrix	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-matrix	owner_size	NOTE	MatrixAlgorithms is 367 lines after the fold
+primitive-tree	fold_members	PASS	11 members FOLD from PrimitiveTreeAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-tree	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-tree	references	PASS	grep PrimitiveTreeAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-tree	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-tree	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-tree	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-tree	owner_size	NOTE	TreeAlgorithms is 496 lines after the fold
+primitive-graph	fold_members	PASS	18 members FOLD from PrimitiveGraphAlgorithms, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-graph	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-graph	references	PASS	grep PrimitiveGraphAlgorithms over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-graph	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-graph	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-graph	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-graph	owner_size	NOTE	GraphAlgorithms is 717 lines after the fold
+primitive-support	fold_members	PASS	2 members FOLD from PrimitiveAlgorithmSupport, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+primitive-support	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+primitive-support	references	PASS	grep PrimitiveAlgorithmSupport over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+primitive-support	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+primitive-support	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+primitive-support	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+primitive-support	owner_size	NOTE	AlgorithmSupport is 145 lines after the fold
+lcs-witness	fold_members	PASS	8 members FOLD from IntLcsWitness, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+lcs-witness	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+lcs-witness	references	PASS	grep IntLcsWitness over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+lcs-witness	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+lcs-witness	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+lcs-witness	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+lcs-witness	owner_size	NOTE	DynamicProgrammingAlgorithms is 521 lines after the fold
+one-mismatch	fold_members	PASS	12 members FOLD from OneMismatchWindowSearch, byte for byte with //FLLDCIM: FOLD anchors (MEMBER table of the apply run in the commit message)
+one-mismatch	fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0
+one-mismatch	references	PASS	grep OneMismatchWindowSearch over m3/algorithms src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+one-mismatch	tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 88, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline; 0 warnings (-Xlint:all -Werror)
+one-mismatch	package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+one-mismatch	jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+one-mismatch	owner_size	NOTE	StringAlgorithms is 910 lines after the fold

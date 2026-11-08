@@ -46,10 +46,11 @@ class ArrayTreeDpReferenceTest {
             int[] sorted = values.clone();
             Arrays.sort(sorted);
             int target = random.nextInt(-10, 11);
-            int index = PrimitiveArrayAlgorithms.binarySearch(sorted, target);
+            int index = ArrayAlgorithms.binarySearch(sorted, target);
             assertEquals(Arrays.stream(sorted).anyMatch(v -> v == target), index >= 0);
             assertTrue(index < 0 || sorted[index] == target);
-            assertEquals(index, PrimitiveArrayAlgorithms.binarySearch(sorted, target, ProgressMonitor.none()));
+            assertEquals(index,
+                    ArrayAlgorithms.binarySearch(sorted, target, ProgressMonitor.none()));
             int[] circular = new int[n];
             for (int k = 0; k < n; k++) {
                 circular[k] = -1;
@@ -59,7 +60,7 @@ class ArrayTreeDpReferenceTest {
                     circular[k] = found ? values[(k + step) % n] : -1;
                 }
             }
-            assertArrayEquals(circular, PrimitiveArrayAlgorithms.nextGreaterCircular(values));
+            assertArrayEquals(circular, ArrayAlgorithms.nextGreaterCircular(values));
             if (n > 0) {
                 BigInteger best = null;
                 for (int a = 0; a < n; a++) {
@@ -69,7 +70,7 @@ class ArrayTreeDpReferenceTest {
                         best = best == null || product.compareTo(best) > 0 ? product : best;
                     }
                 }
-                assertEquals(best.longValueExact(), PrimitiveArrayAlgorithms.maxProductSubarray(values));
+                assertEquals(best.longValueExact(), ArrayAlgorithms.maxProductSubarray(values));
             }
             long profit = 0;
             long water = 0;
@@ -79,10 +80,10 @@ class ArrayTreeDpReferenceTest {
                     water = Math.max(water, (long) Math.min(values[a], values[b]) * (b - a));
                 }
             }
-            assertEquals(profit, PrimitiveArrayAlgorithms.maxProfitOneTransaction(values));
-            assertEquals(water, PrimitiveArrayAlgorithms.containerMostWater(values));
+            assertEquals(profit, ArrayAlgorithms.maxProfitOneTransaction(values));
+            assertEquals(water, ArrayAlgorithms.containerMostWater(values));
             int[] moved = values.clone();
-            PrimitiveArrayAlgorithms.moveZeroes(moved);
+            ArrayAlgorithms.moveZeroes(moved);
             int[] expectedMoved = new int[n];
             int w = 0;
             for (int v : values) {
@@ -93,7 +94,7 @@ class ArrayTreeDpReferenceTest {
             assertArrayEquals(expectedMoved, moved);
             int steps = random.nextInt(-30, 31);
             int[] rotated = values.clone();
-            PrimitiveArrayAlgorithms.rotateRight(rotated, steps);
+            ArrayAlgorithms.rotateRight(rotated, steps);
             for (int k = 0; k < n; k++) {
                 assertEquals(values[k], rotated[Math.floorMod(k + steps, n)]);
             }
@@ -106,15 +107,16 @@ class ArrayTreeDpReferenceTest {
                 majority = count > n / 2 ? Integer.valueOf(v) : majority;
             }
             if (majority == null) {
-                assertThrows(IllegalArgumentException.class, () -> PrimitiveArrayAlgorithms.majorityElement(values));
+                assertThrows(IllegalArgumentException.class, () ->
+                        ArrayAlgorithms.majorityElement(values));
             } else {
-                assertEquals(majority.intValue(), PrimitiveArrayAlgorithms.majorityElement(values));
+                assertEquals(majority.intValue(), ArrayAlgorithms.majorityElement(values));
             }
         }
         report("array", "binarySearch(x2)+nextGreaterCircular+maxProductSubarray+maxProfitOneTransaction+"
                 + "containerMostWater+moveZeroes+rotateRight+majorityElement", 10L * CASES, 10L * CASES);
         finding("nextGreaterCircular", "the LC 503 sentinel -1 also is a value: nextGreaterCircular([-2, -1]) = "
-                + Arrays.toString(PrimitiveArrayAlgorithms.nextGreaterCircular(new int[] {-2, -1}))
+                + Arrays.toString(ArrayAlgorithms.nextGreaterCircular(new int[] {-2, -1}))
                 + " (index 0 has the greater value -1, index 1 has none)");
         long more = 0;
         for (int i = 0; i < CASES; i++, more += 3) {
@@ -125,7 +127,7 @@ class ArrayTreeDpReferenceTest {
             for (int k = 0; k < n; k++) {
                 rotated[k] = base[(k + shift) % n];
             }
-            assertEquals(base[0], PrimitiveArrayAlgorithms.findMinRotated(rotated));
+            assertEquals(base[0], ArrayAlgorithms.findMinRotated(rotated));
             int[] duplicate = new int[n + 1];
             int repeated = random.nextInt(1, n + 1);
             for (int k = 0; k < n; k++) {
@@ -138,9 +140,9 @@ class ArrayTreeDpReferenceTest {
                 duplicate[k] = duplicate[j];
                 duplicate[j] = swap;
             }
-            assertEquals(repeated, PrimitiveArrayAlgorithms.findDuplicateFloyd(duplicate));
+            assertEquals(repeated, ArrayAlgorithms.findDuplicateFloyd(duplicate));
             int bits = random.nextInt(0, 2_000);
-            int[] counts = PrimitiveArrayAlgorithms.countBits(bits);
+            int[] counts = ArrayAlgorithms.countBits(bits);
             for (int k = 0; k <= bits; k++) {
                 assertEquals(Integer.bitCount(k), counts[k]);
             }
@@ -157,13 +159,13 @@ class ArrayTreeDpReferenceTest {
             int n = random.nextInt(1, 25);
             boolean bst = random.nextBoolean();
             int[][] t = AlgorithmExtrasDump.randomTree(random, n, bst);
-            PrimitiveTreeAlgorithms.BinaryTree tree = new PrimitiveTreeAlgorithms.BinaryTree(t[0], t[1], t[2],
+            TreeAlgorithms.BinaryTree tree = new TreeAlgorithms.BinaryTree(t[0], t[1], t[2],
                     t[3][0]);
             List<Integer> pre = new ArrayList<>();
             List<Integer> post = new ArrayList<>();
             walk(t, t[3][0], pre, post);
-            assertEquals(pre, box(PrimitiveTreeAlgorithms.preorder(tree)));
-            assertEquals(post, box(PrimitiveTreeAlgorithms.postorder(tree)));
+            assertEquals(pre, box(TreeAlgorithms.preorder(tree)));
+            assertEquals(post, box(TreeAlgorithms.postorder(tree)));
             int[] parent = new int[n];
             Arrays.fill(parent, -1);
             for (int v = 0; v < n; v++) {
@@ -187,9 +189,9 @@ class ArrayTreeDpReferenceTest {
                     bestPath = Math.max(bestPath, sum);
                 }
             }
-            assertEquals(diameter, PrimitiveTreeAlgorithms.diameterEdges(tree));
-            assertEquals(bestPath, PrimitiveTreeAlgorithms.maxPathSum(tree));
-            PrimitiveTreeAlgorithms.BinaryTree inverted = PrimitiveTreeAlgorithms.inverted(tree);
+            assertEquals(diameter, TreeAlgorithms.diameterEdges(tree));
+            assertEquals(bestPath, TreeAlgorithms.maxPathSum(tree));
+            TreeAlgorithms.BinaryTree inverted = TreeAlgorithms.inverted(tree);
             assertArrayEquals(t[2], inverted.left());
             assertArrayEquals(t[1], inverted.right());
             if (bst) {
@@ -203,7 +205,7 @@ class ArrayTreeDpReferenceTest {
                         expected = px.get(k);
                     }
                 }
-                assertEquals(expected, PrimitiveTreeAlgorithms.lowestCommonAncestorBstByValue(tree, x, y));
+                assertEquals(expected, TreeAlgorithms.lowestCommonAncestorBstByValue(tree, x, y));
             }
         }
         report("tree", "preorder+postorder+diameterEdges+maxPathSum+inverted+lowestCommonAncestorBstByValue",
@@ -270,10 +272,12 @@ class ArrayTreeDpReferenceTest {
         BigInteger b = BigInteger.ONE;
         for (int n = 0; n <= 100; n++) {
             if (a.bitLength() < 64) {
-                assertEquals(a.longValueExact(), PrimitiveDynamicProgrammingAlgorithms.climbStairs(n), "" + n);
+                assertEquals(a.longValueExact(), DynamicProgrammingAlgorithms.climbStairs(n), ""
+                        + n);
             } else {
                 int steps = n;
-                assertThrows(ArithmeticException.class, () -> PrimitiveDynamicProgrammingAlgorithms.climbStairs(steps));
+                assertThrows(ArithmeticException.class, () ->
+                        DynamicProgrammingAlgorithms.climbStairs(steps));
             }
             BigInteger next = a.add(b);
             a = b;
@@ -286,10 +290,12 @@ class ArrayTreeDpReferenceTest {
             for (int k = 0; k < cost.length; k++) {
                 cost[k] = Math.abs(cost[k]);
             }
-            assertEquals(minCost(cost, cost.length), PrimitiveDynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
+            assertEquals(minCost(cost, cost.length),
+                    DynamicProgrammingAlgorithms.minCostClimbingStairs(cost));
             int[] coins = random.ints(1, 12).distinct().limit(random.nextInt(0, 4)).toArray();
             int amount = random.nextInt(0, 40);
-            assertEquals(ways(coins, 0, amount), PrimitiveDynamicProgrammingAlgorithms.coinChangeWays(coins, amount));
+            assertEquals(ways(coins, 0, amount),
+                    DynamicProgrammingAlgorithms.coinChangeWays(coins, amount));
             int rows = random.nextInt(1, 6);
             int columns = random.nextInt(1, 6);
             int[][] grid = new int[rows][columns];
@@ -298,7 +304,7 @@ class ArrayTreeDpReferenceTest {
                     row[c] = random.nextInt(-20, 50);
                 }
             }
-            assertEquals(minPath(grid, 0, 0), PrimitiveDynamicProgrammingAlgorithms.minPathSum(grid));
+            assertEquals(minPath(grid, 0, 0), DynamicProgrammingAlgorithms.minPathSum(grid));
             int[] values = ints(random, random.nextInt(0, 12), 6);
             for (int k = 0; k < values.length; k++) {
                 values[k] = Math.abs(values[k]);
@@ -312,13 +318,14 @@ class ArrayTreeDpReferenceTest {
                 }
                 expected += sum == target ? 1 : 0;
             }
-            assertEquals(expected, PrimitiveDynamicProgrammingAlgorithms.targetSumWays(values, target));
+            assertEquals(expected, DynamicProgrammingAlgorithms.targetSumWays(values, target));
             char[] digits = new char[random.nextInt(0, 16)];
             for (int k = 0; k < digits.length; k++) {
                 digits[k] = (char) ('0' + random.nextInt(random.nextBoolean() ? 3 : 10));
             }
             String text = new String(digits);
-            assertEquals(text.isEmpty() ? 0 : decode(text, 0), PrimitiveDynamicProgrammingAlgorithms.decodeWays(text));
+            assertEquals(text.isEmpty() ? 0 : decode(text, 0),
+                    DynamicProgrammingAlgorithms.decodeWays(text));
         }
         String ones = "1".repeat(60);
         BigInteger exact = BigInteger.ONE;
@@ -329,12 +336,13 @@ class ArrayTreeDpReferenceTest {
             exact = next;
         }
         decodeOverflows += exact.bitLength() > 31 ? 1 : 0;
-        int wrapped = PrimitiveDynamicProgrammingAlgorithms.decodeWays(ones);
+        int wrapped = DynamicProgrammingAlgorithms.decodeWays(ones);
         report("dynamic-programming", "climbStairs+minCostClimbingStairs+coinChangeWays+minPathSum+targetSumWays+"
                 + "decodeWays", cases, cases);
         finding("decodeWays", "int arithmetic wraps without refusal: 60 x '1' has " + exact + " decodings, the member "
                 + "returns " + wrapped + " (overflowing inputs=" + decodeOverflows + "); Character.isDigit admits "
-                + "non-ASCII digits: decodeWays(\"\\u0661\") = " + PrimitiveDynamicProgrammingAlgorithms.decodeWays("\u0661"));
+                + "non-ASCII digits: decodeWays(\"\\u0661\") = "
+                        + DynamicProgrammingAlgorithms.decodeWays("\u0661"));
     }
 
     private static long minCost(int[] cost, int top) {
@@ -398,7 +406,7 @@ class ArrayTreeDpReferenceTest {
                     }
                 }
                 List<String> got = new ArrayList<>();
-                for (int[] row : PrimitiveBacktrackingAlgorithms.combinations(n, k)) {
+                for (int[] row : BacktrackingAlgorithms.combinations(n, k)) {
                     got.add(Arrays.toString(row));
                 }
                 expected.sort(null);
@@ -408,7 +416,7 @@ class ArrayTreeDpReferenceTest {
         }
         int[] queens = {1, 1, 0, 0, 2, 10, 4, 40, 92, 352, 724};
         for (int n = 0; n < queens.length; n++, cases++) {
-            assertEquals(queens[n], PrimitiveBacktrackingAlgorithms.nQueensCount(n), "queens " + n);
+            assertEquals(queens[n], BacktrackingAlgorithms.nQueensCount(n), "queens " + n);
         }
         for (int i = 0; i < 2_000; i++, cases++) {
             int[] candidates = random.ints(1, 9).limit(random.nextInt(1, 5)).toArray();
@@ -416,7 +424,7 @@ class ArrayTreeDpReferenceTest {
             Set<String> expected = new HashSet<>();
             sums(Arrays.stream(candidates).distinct().sorted().toArray(), 0, target, new ArrayList<>(), expected);
             Set<String> got = new HashSet<>();
-            for (int[] row : PrimitiveBacktrackingAlgorithms.combinationSum(candidates, target)) {
+            for (int[] row : BacktrackingAlgorithms.combinationSum(candidates, target)) {
                 got.add(Arrays.toString(row));
             }
             assertEquals(expected, got, Arrays.toString(candidates) + " " + target);
@@ -426,12 +434,13 @@ class ArrayTreeDpReferenceTest {
             boolean wellFormed = board.length == 9 && Arrays.stream(board).allMatch(row -> row.length == 9)
                     && Arrays.stream(board).allMatch(row -> new String(row).matches("[1-9.]{9}"));
             if (!wellFormed || !consistent(board)) {
-                assertThrows(IllegalArgumentException.class, () -> PrimitiveBacktrackingAlgorithms.solveSudoku(board));
+                assertThrows(IllegalArgumentException.class, () ->
+                        BacktrackingAlgorithms.solveSudoku(board));
                 continue;
             }
             char[][] clues = Arrays.stream(board).map(char[]::clone).toArray(char[][]::new);
             boolean solvable = solve(Arrays.stream(board).map(char[]::clone).toArray(char[][]::new));
-            assertEquals(solvable, PrimitiveBacktrackingAlgorithms.solveSudoku(board));
+            assertEquals(solvable, BacktrackingAlgorithms.solveSudoku(board));
             if (!solvable) {
                 continue;
             }
@@ -445,7 +454,8 @@ class ArrayTreeDpReferenceTest {
         report("backtracking", "combinations+nQueensCount+combinationSum+solveSudoku", cases, cases);
         String empty;
         try {
-            empty = "returns " + PrimitiveBacktrackingAlgorithms.combinationSum(new int[0], 5).length + " rows";
+            empty = "returns " + BacktrackingAlgorithms.combinationSum(new int[0], 5).length
+                    + " rows";
         } catch (RuntimeException e) {
             empty = "throws " + e.getClass().getSimpleName();
         }
@@ -461,7 +471,7 @@ class ArrayTreeDpReferenceTest {
                     row[c] = random.nextInt(3) == 0 ? 1 : 0;
                 }
             }
-            assertEquals(bfs8(grid), PrimitiveMatrixAlgorithms.shortestPathBinaryMatrix(grid));
+            assertEquals(bfs8(grid), MatrixAlgorithms.shortestPathBinaryMatrix(grid));
             int best = 0;
             for (int r = 0; r < rows; r++) {
                 for (int c = 0; c < columns; c++) {
@@ -482,11 +492,11 @@ class ArrayTreeDpReferenceTest {
                     inverted[r][c] = 1 - grid[r][c];
                 }
             }
-            assertEquals(best * best, PrimitiveMatrixAlgorithms.maximalSquareArea(inverted));
+            assertEquals(best * best, MatrixAlgorithms.maximalSquareArea(inverted));
             int sr = random.nextInt(rows);
             int sc = random.nextInt(columns);
-            int[][] filled = PrimitiveMatrixAlgorithms.floodFill(grid, sr, sc, 7);
-            int[][] expected = PrimitiveMatrixAlgorithms.deepCopy(grid);
+            int[][] filled = MatrixAlgorithms.floodFill(grid, sr, sc, 7);
+            int[][] expected = MatrixAlgorithms.deepCopy(grid);
             fill(expected, sr, sc, grid[sr][sc], 7);
             assertTrue(Arrays.deepEquals(expected, filled));
         }
@@ -495,15 +505,15 @@ class ArrayTreeDpReferenceTest {
         for (int i = 0; i < CASES; i++, bits += 4) {
             int x = random.nextInt();
             int y = random.nextInt();
-            assertEquals(x > 0 && Integer.bitCount(x) == 1, PrimitiveBitAlgorithms.isPowerOfTwo(x));
-            assertEquals(x + y, PrimitiveBitAlgorithms.addWithoutPlus(x, y));
+            assertEquals(x > 0 && Integer.bitCount(x) == 1, BitAlgorithms.isPowerOfTwo(x));
+            assertEquals(x + y, BitAlgorithms.addWithoutPlus(x, y));
             int low = random.nextInt(0, 100_000);
             int high = low + random.nextInt(0, 300);
             int and = low;
             for (int v = low; v <= high; v++) {
                 and &= v;
             }
-            assertEquals(and, PrimitiveBitAlgorithms.rangeBitwiseAnd(low, high));
+            assertEquals(and, BitAlgorithms.rangeBitwiseAnd(low, high));
             int first = random.nextInt();
             int second = random.nextInt();
             if (first == second || first == 5 || first == 9 || second == 5 || second == 9) {
@@ -511,7 +521,7 @@ class ArrayTreeDpReferenceTest {
             }
             int[] values = {first, 5, 9, second, 9, 5};
             assertArrayEquals(new int[] {Math.min(first, second), Math.max(first, second)},
-                    PrimitiveBitAlgorithms.twoSingleNumbers(values));
+                    BitAlgorithms.twoSingleNumbers(values));
         }
         report("bit", "isPowerOfTwo+addWithoutPlus+rangeBitwiseAnd+twoSingleNumbers", bits, bits);
     }

@@ -16,24 +16,24 @@ import org.junit.jupiter.api.Test;
 final class OneMismatchSingletonFastPathTest {
     @Test
     void nonemptyTextAndOneUnitNeedleAdmitEveryPosition() {
-        assertArrayEquals(new int[0], OneMismatchWindowSearch.allIndices("", "x"));
-        assertEquals(-1, OneMismatchWindowSearch.firstIndex("", "x"));
-        assertArrayEquals(new int[] {0}, OneMismatchWindowSearch.allIndices("a", "b"));
-        assertEquals(0, OneMismatchWindowSearch.firstIndex("a", "b"));
+        assertArrayEquals(new int[0], StringAlgorithms.oneMismatchAllIndices("", "x"));
+        assertEquals(-1, StringAlgorithms.oneMismatchFirstIndex("", "x"));
+        assertArrayEquals(new int[] {0}, StringAlgorithms.oneMismatchAllIndices("a", "b"));
+        assertEquals(0, StringAlgorithms.oneMismatchFirstIndex("a", "b"));
         int[] expected = new int[65_536];
         for (int i = 0; i < expected.length; i++) expected[i] = i;
         assertArrayEquals(expected,
-                OneMismatchWindowSearch.allIndices("x".repeat(expected.length), "z"));
+                StringAlgorithms.oneMismatchAllIndices("x".repeat(expected.length), "z"));
     }
 
     @Test
     void isolatedSurrogatesAndNulAreRawUtf16Units() {
         String text = "\u0000\ud800\udfff\uffff$z";
         assertArrayEquals(new int[] {0, 1, 2, 3, 4, 5},
-                OneMismatchWindowSearch.allIndices(text, "\ud800"));
+                StringAlgorithms.oneMismatchAllIndices(text, "\ud800"));
         assertArrayEquals(new int[] {0, 1, 2, 3, 4, 5},
-                OneMismatchWindowSearch.allIndices(text, "\u0000"));
-        assertEquals(0, OneMismatchWindowSearch.firstIndex(text, "\udfff"));
+                StringAlgorithms.oneMismatchAllIndices(text, "\u0000"));
+        assertEquals(0, StringAlgorithms.oneMismatchFirstIndex(text, "\udfff"));
     }
 
     @Test
@@ -54,10 +54,10 @@ final class OneMismatchSingletonFastPathTest {
             String needle = String.valueOf((char) random.nextInt(Character.MAX_VALUE + 1));
             int[] expected = new int[text.length()];
             for (int i = 0; i < expected.length; i++) expected[i] = i;
-            assertArrayEquals(expected, OneMismatchWindowSearch.allIndices(text, needle),
+            assertArrayEquals(expected, StringAlgorithms.oneMismatchAllIndices(text, needle),
                     "trial=" + trial);
             assertEquals(text.isEmpty() ? -1 : 0,
-                    OneMismatchWindowSearch.firstIndex(text, needle), "trial=" + trial);
+                    StringAlgorithms.oneMismatchFirstIndex(text, needle), "trial=" + trial);
         }
     }
 
@@ -67,20 +67,20 @@ final class OneMismatchSingletonFastPathTest {
         String text = "\u0000\ud800$\udfffzy";
         int[] expected = {0, 1, 2, 3, 4, 5};
         assertArrayEquals(expected,
-                OneMismatchWindowSearch.allIndices(text, "x", monitor));
-        assertEquals(0, OneMismatchWindowSearch.firstIndex(text, "x", monitor));
+                StringAlgorithms.oneMismatchAllIndices(text, "x", monitor));
+        assertEquals(0, StringAlgorithms.oneMismatchFirstIndex(text, "x", monitor));
     }
 
     @Test
     void nullAndEmptyContractsAreUnchanged() {
         assertThrows(NullPointerException.class,
-                () -> OneMismatchWindowSearch.allIndices(null, "a"));
+                () -> StringAlgorithms.oneMismatchAllIndices(null, "a"));
         assertThrows(NullPointerException.class,
-                () -> OneMismatchWindowSearch.firstIndex("a", null));
+                () -> StringAlgorithms.oneMismatchFirstIndex("a", null));
         assertThrows(IllegalArgumentException.class,
-                () -> OneMismatchWindowSearch.allIndices("a", ""));
+                () -> StringAlgorithms.oneMismatchAllIndices("a", ""));
         assertArrayEquals(new int[0],
-                OneMismatchWindowSearch.allIndices("x", "much-longer"));
+                StringAlgorithms.oneMismatchAllIndices("x", "much-longer"));
     }
 
     @Test
@@ -89,15 +89,15 @@ final class OneMismatchSingletonFastPathTest {
         Thread.currentThread().interrupt();
         try {
             assertThrows(CancellationException.class,
-                    () -> OneMismatchWindowSearch.allIndices("abc", "a"));
+                    () -> StringAlgorithms.oneMismatchAllIndices("abc", "a"));
             interrupted = true;
         } finally {
             Thread.interrupted();
         }
         assertEquals(1, interrupted ? 1 : 0);
-        int[] first = OneMismatchWindowSearch.allIndices("abc", "a");
+        int[] first = StringAlgorithms.oneMismatchAllIndices("abc", "a");
         first[0] = 999;
         assertArrayEquals(new int[] {0, 1, 2},
-                OneMismatchWindowSearch.allIndices("abc", "a"));
+                StringAlgorithms.oneMismatchAllIndices("abc", "a"));
     }
 }

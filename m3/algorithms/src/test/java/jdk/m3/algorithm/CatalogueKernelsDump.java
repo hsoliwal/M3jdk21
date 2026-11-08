@@ -59,43 +59,57 @@ public final class CatalogueKernelsDump {
     }
 
     private static void mismatchCases(StringBuilder out, int index, String text, String pattern, Random random) {
-        line(out, "OneMismatchWindowSearch.firstIndex", index,
-                () -> OneMismatchWindowSearch.firstIndex(text, pattern));
-        line(out, "OneMismatchWindowSearch.allIndices", index,
-                () -> OneMismatchWindowSearch.allIndices(text, pattern));
-        line(out, "OneMismatchWindowSearch.allIndices#monitor", index,
-                () -> OneMismatchWindowSearch.allIndices(text, pattern, ProgressMonitor.none()));
-        line(out, "OneMismatchWindowSearch.firstIndex#query", index,
-                () -> OneMismatchWindowSearch.firstIndex(
-                        new OneMismatchWindowSearch.Query(text, pattern), ProgressMonitor.none()));
+        line(out, "StringAlgorithms.oneMismatchFirstIndex", index,
+                () -> StringAlgorithms.oneMismatchFirstIndex(text, pattern));
+        line(out, "StringAlgorithms.oneMismatchAllIndices", index,
+                () -> StringAlgorithms.oneMismatchAllIndices(text, pattern));
+        line(out, "StringAlgorithms.oneMismatchAllIndices#monitor", index,
+                () -> StringAlgorithms.oneMismatchAllIndices(text, pattern,
+                        ProgressMonitor.none()));
+        line(out, "StringAlgorithms.oneMismatchFirstIndex#query", index,
+                () -> StringAlgorithms.oneMismatchFirstIndex(
+                        new StringAlgorithms.OneMismatchQuery(text,
+                                pattern), ProgressMonitor.none()));
         int start = random.nextInt(text.length() + 3) - 1;
-        line(out, "OneMismatchWindowSearch.matchesAt", index,
-                () -> OneMismatchWindowSearch.matchesAt(text, pattern, start));
+        line(out, "StringAlgorithms.oneMismatchMatchesAt", index,
+                () -> StringAlgorithms.oneMismatchMatchesAt(text, pattern, start));
     }
 
     private static void lcsCases(StringBuilder out, int index, Random random) {
         int[] a = ints(random, random.nextInt(40));
         int[] b = ints(random, random.nextInt(40));
-        line(out, "IntLcsWitness.javaWitness", index, () -> IntLcsWitness.javaWitness(a, b));
-        line(out, "IntLcsWitness.referenceLength", index, () -> IntLcsWitness.referenceLength(a, b));
-        int[] witness = IntLcsWitness.javaWitness(a, b);
-        line(out, "IntLcsWitness.isSubsequence", index,
-                () -> IntLcsWitness.isSubsequence(witness, a) && IntLcsWitness.isSubsequence(witness, b)
-                        && !IntLcsWitness.isSubsequence(new int[] {1, 2, 3, 4, 5}, new int[] {5, 4, 3, 2, 1}));
+        line(out, "DynamicProgrammingAlgorithms.lcsWitness", index, () ->
+                DynamicProgrammingAlgorithms.lcsWitness(a, b));
+        line(out, "DynamicProgrammingAlgorithms.lcsLength", index, () ->
+                DynamicProgrammingAlgorithms.lcsLength(a, b));
+        int[] witness = DynamicProgrammingAlgorithms.lcsWitness(a, b);
+        line(out, "DynamicProgrammingAlgorithms.isSubsequence", index,
+                () -> DynamicProgrammingAlgorithms.isSubsequence(witness,
+                        a) && DynamicProgrammingAlgorithms.isSubsequence(witness, b)
+                        && !DynamicProgrammingAlgorithms.isSubsequence(new int[] {1, 2, 3, 4, 5},
+                                new int[] {5, 4, 3, 2, 1}));
     }
 
     private static void refusalCases(StringBuilder out) {
         line(out, "refusal.zSearch#nullPattern", 0, () -> StringAlgorithms.zSearch("x", null));
-        line(out, "refusal.firstIndex#emptyPattern", 0, () -> OneMismatchWindowSearch.firstIndex("abc", ""));
-        line(out, "refusal.allIndices#nullText", 0, () -> OneMismatchWindowSearch.allIndices(null, "a"));
-        line(out, "refusal.query#nullText", 0, () -> new OneMismatchWindowSearch.Query(null, "a"));
+        line(out, "refusal.firstIndex#emptyPattern", 0, () ->
+                StringAlgorithms.oneMismatchFirstIndex("abc", ""));
+        line(out, "refusal.allIndices#nullText", 0, () ->
+                StringAlgorithms.oneMismatchAllIndices(null, "a"));
+        line(out, "refusal.query#nullText", 0, () ->
+                new StringAlgorithms.OneMismatchQuery(null, "a"));
         line(out, "refusal.prefixMatchLengths#nullPattern", 0, () ->
                 StringAlgorithms.prefixMatchLengths("a", null));
-        line(out, "refusal.javaWitness#null", 0, () -> IntLcsWitness.javaWitness(null, new int[] {1}));
-        line(out, "refusal.javaWitness#length", 0, () -> IntLcsWitness.javaWitness(new int[4097], new int[] {1}));
-        line(out, "refusal.javaWitness#cells", 0, () -> IntLcsWitness.javaWitness(new int[4096], new int[4096]));
-        line(out, "refusal.referenceLength#null", 0, () -> IntLcsWitness.referenceLength(new int[0], null));
-        line(out, "interrupt.allIndices", 0, () -> interrupted(() -> OneMismatchWindowSearch.allIndices("abc", "a")));
+        line(out, "refusal.javaWitness#null", 0, () ->
+                DynamicProgrammingAlgorithms.lcsWitness(null, new int[] {1}));
+        line(out, "refusal.javaWitness#length", 0, () ->
+                DynamicProgrammingAlgorithms.lcsWitness(new int[4097], new int[] {1}));
+        line(out, "refusal.javaWitness#cells", 0, () ->
+                DynamicProgrammingAlgorithms.lcsWitness(new int[4096], new int[4096]));
+        line(out, "refusal.referenceLength#null", 0, () ->
+                DynamicProgrammingAlgorithms.lcsLength(new int[0], null));
+        line(out, "interrupt.allIndices", 0, () ->
+                interrupted(() -> StringAlgorithms.oneMismatchAllIndices("abc", "a")));
         line(out, "interrupt.zSearch#monitor", 0,
                 () -> interrupted(() ->
                         StringAlgorithms.zSearch("abc", "b", ProgressMonitor.none())));
