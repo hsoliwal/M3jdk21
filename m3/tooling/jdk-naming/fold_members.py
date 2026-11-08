@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""FOLD_MEMBERS v1.4: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
+"""FOLD_MEMBERS v1.5: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
 
 usage: fold_members.py <repo root> <map.tsv> [--check]
 The map (tab separated; '#' comments) declares everything, the tool does nothing undeclared:
   OWNER  <path of the owner .java>
   FILE   <path of a donor .java in the tree>                 a duplicate class whose members may fold
+  DONOR  <path outside the tree>  <blob sha prefix>  <provenance>   a donor file that is not in the tree (another
+                                                              repository); refused unless git hash-object matches the
+                                                              declared blob; the anchors carry <provenance> instead of a path
   TAKE   <Donor>.<member>[(<types>)]                          fold this member (every overload when no selector);
                                                               <Donor>.* takes every member; nested class/record/interface/enum
                                                               declarations at class level are members too (whole span)
@@ -15,6 +18,7 @@ The map (tab separated; '#' comments) declares everything, the tool does nothing
   IMPORT <fqn>                                                import the owner needs for the folded bodies
   OWNER_EDIT <sha256 prefix of old>  <old>  <new>             one declared substitution in the owner text (exactly once;
                                                               a no-op when <new> is already present)
+  OWNER_EDIT_FILE <sha256 prefix of old>  <old file>  <new file>   the same with multi-line texts read from files beside the map
   REFS   <regex>  <replacement>                               reference rewrite over main and test Java of the module
                                                               (owner package tree, folded bodies and the owner text included, anchors excluded), evidence segments excluded
   REMOVE <path>                                               donor file removed after its members are folded
@@ -124,7 +128,7 @@ def members(lines):
 
 
 def read_map():
-    m = {"OWNER": None, "FILE": [], "TAKE": [], "SKIP": {}, "EDIT": [], "IMPORT": [], "REFS": [], "REMOVE": [], "MOVE": [], "RENAME": [], "OWNER_EDIT": []}
+    m = {"OWNER": None, "FILE": [], "TAKE": [], "SKIP": {}, "EDIT": [], "IMPORT": [], "REFS": [], "REMOVE": [], "MOVE": [], "RENAME": [], "OWNER_EDIT": [], "DONOR": []}
     for raw in MAP.read_text(encoding="utf-8").splitlines():
         if not raw.strip() or raw.startswith("#") or raw.startswith("kind\t"):
             continue
@@ -145,6 +149,11 @@ def read_map():
             m["RENAME"].append((rest[0], rest[1]))
         elif kind == "OWNER_EDIT":
             m["OWNER_EDIT"].append((rest[0], rest[1], rest[2]))
+        elif kind == "OWNER_EDIT_FILE":
+            m["OWNER_EDIT"].append((rest[0], (MAP.parent / rest[1]).read_text(encoding="utf-8"),
+                                    (MAP.parent / rest[2]).read_text(encoding="utf-8")))
+        elif kind == "DONOR":
+            m["DONOR"].append((rest[0], rest[1], rest[2]))
     return m
 
 
@@ -184,11 +193,15 @@ def main() -> int:
     present = {(x["name"], x["selector"]): hashlib.sha256(re.sub(rb"\s+", b" ", b"".join(owner_lines[x["first"]:x["stop"]]))).hexdigest()[:12]
                for x in members(owner_lines)}
     folded, table, seen, conflicts = [], [], {}, []
-    for donor_rel in m["FILE"]:
-        donor_path = ROOT / donor_rel
+    donors = [(ROOT / rel, rel, None) for rel in m["FILE"]] + [(Path(path), note, pin) for path, pin, note in m["DONOR"]]
+    for donor_path, donor_rel, declared in donors:
         if not donor_path.exists():
+            if declared:
+                sys.exit(f"REFUSE DONOR {donor_rel}: {donor_path} is not present")
             continue  # already removed by an earlier run
-        blob = subprocess.run(["git", "-C", str(ROOT), "hash-object", donor_rel], capture_output=True, text=True).stdout.strip()
+        blob = subprocess.run(["git", "-C", str(ROOT), "hash-object", str(donor_path)], capture_output=True, text=True).stdout.strip()
+        if declared and not blob.startswith(declared):
+            sys.exit(f"REFUSE DONOR {donor_rel}: blob {blob[:12]} is not the declared {declared}")
         data = donor_path.read_bytes()
         lines = LINES.findall(data)
         donor_type = donor_path.stem
@@ -275,7 +288,7 @@ def main() -> int:
         print("MEMBER\t" + "\t".join("" if c is None else str(c) for c in row))
     for c in changed:
         print("CHANGED\t" + c)
-    print(f"FOLD_MEMBERS v1.4 owner={m['OWNER']} folded={sum(1 for r in table if r[2] == 'FOLD')} changed={len(changed)} check={CHECK}")
+    print(f"FOLD_MEMBERS v1.5 owner={m['OWNER']} folded={sum(1 for r in table if r[2] == 'FOLD')} changed={len(changed)} check={CHECK}")
     return 1 if CHECK and changed else 0
 
 
