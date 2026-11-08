@@ -1,20 +1,34 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""FOLD_MEMBERS v1.1: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
+"""FOLD_MEMBERS v1.7: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
 
 usage: fold_members.py <repo root> <map.tsv> [--check]
 The map (tab separated; '#' comments) declares everything, the tool does nothing undeclared:
   OWNER  <path of the owner .java>
   FILE   <path of a donor .java in the tree>                 a duplicate class whose members may fold
-  TAKE   <Donor>.<member>[(<types>)]                          fold this member (every overload when no selector)
-  SKIP   <Donor>.<member>  <reason>                           not folded (the owner already has it)
+  DONOR  <path outside the tree>  <blob sha prefix>  <provenance>   a donor file that is not in the tree (another
+                                                              repository); refused unless git hash-object matches the
+                                                              declared blob; the anchors carry <provenance> instead of a path
+  TAKE   <Donor>.<member>[(<types>)]                          fold this member (every overload when no selector);
+                                                              <Donor>.* takes every member; nested class/record/interface/enum
+                                                              declarations at class level are members too (whole span)
+  SKIP   <Donor>.<member>[(<types>)]  <reason>                not folded (the owner already has it); a selector limits it to one overload
   EDIT   <Donor>.<member>  <sha256 prefix of old>  <old>  <new>   declared substitution inside that folded body
+  BODY   <regex>  <replacement>                               rewrite inside every folded body only (donor-internal names
+                                                              such as a collection type and its accessors), never module-wide
   IMPORT <fqn>                                                import the owner needs for the folded bodies
-  REFS   <regex>  <replacement>                               reference rewrite over main and test Java of the module
+  OWNER_EDIT <sha256 prefix of old>  <old>  <new>             one declared substitution in the owner text (exactly once;
+                                                              a no-op when <new> is already present)
+  OWNER_EDIT_FILE <sha256 prefix of old>  <old file>  <new file>   the same with multi-line texts read from files beside the map
+  REFS   <regex>  <replacement>                               reference rewrite over main and test Java of the module;
+                                                              the replacement <DROP_LINE> removes every matching line
                                                               (owner package tree, folded bodies and the owner text included, anchors excluded), evidence segments excluded
   REMOVE <path>                                               donor file removed after its members are folded
   MOVE   <old test path>  <new test path>                     test file renamed (class name follows the file name)
+  RENAME <Donor>.<member>  <newName>                          the member folds under <newName>; every unqualified call to it
+                                                              inside the folded bodies of that donor follows (private helpers
+                                                              whose signature the owner already declares with another body)
 Folded bodies are copied byte for byte from the donor file (Javadoc and annotations included), one //FLLDCIM: FOLD
 anchor per member names the donor blob; identical private helpers fold once; members the owner already declares (same
 name and parameter types, same normalized body) are PRESENT and skipped; a same-signature member with a different body is a CONFLICT and the run is refused unless the map declares SKIP or an EDIT. Idempotent: a second run changes nothing; --check writes nothing and
@@ -34,6 +48,8 @@ LINES = re.compile(rb"[^\n]*\n|[^\n]+$")
 DECL = re.compile(rb"^(\s+)(?:(?:public|private|protected|static|final|synchronized|default|abstract)\s+)*"
                   rb"(?:<[^>]*>\s+)?(?!(?:return|new|throw|else|case|yield)\b)\w[\w.<>\[\], ?]*\s+(\w+)\s*\(")
 FIELD = re.compile(rb"^(\s+)(?:(?:public|private|protected|static|final)\s+)+[\w.<>\[\]]+\s+(\w+)\s*(?:=|;)")
+TYPE = re.compile(rb"^(\s+)(?:(?:public|private|protected|static|final|sealed|non-sealed|abstract|strictfp)\s+)*"
+                  rb"(class|record|interface|enum)\s+(\w+)\b")
 EVIDENCE = re.compile(r"/(recipe-custody|custody|evidence|qualification|recipes?|retained-variants|proofs?|snapshots?|"
                       r"before|after|postimages?|preimages?|donors?|intakes?|fixtures?|golden|expected|samples?)/")
 changed = []
@@ -80,8 +96,19 @@ def members(lines):
     found, index = [], 0
     while index < len(lines):
         text = eol_split(lines[index])[0]
-        method, field = DECL.match(text), FIELD.match(text)
-        if method and method.group(1) == b"    ":
+        method, field, kind = DECL.match(text), FIELD.match(text), TYPE.match(text)
+        if kind and kind.group(1) == b"    ":
+            first, end = leading_doc(lines, index), index
+            while end < len(lines) and eol_split(lines[end])[0] != b"    }" and not (
+                    end == index and text.rstrip().endswith(b"}") and text.count(b"{") == text.count(b"}")):
+                end += 1
+            stop = end + 1
+            if stop < len(lines) and eol_split(lines[stop])[0].strip() == b"":
+                stop += 1
+            found.append({"kind": kind.group(2).decode(), "name": kind.group(3).decode(), "selector": None,
+                          "first": first, "stop": stop})
+            index = stop
+        elif method and method.group(1) == b"    ":
             first, end = leading_doc(lines, index), index
             while end < len(lines) and eol_split(lines[end])[0] != b"    }" and not (
                     end == index and text.rstrip().endswith(b"}") and text.count(b"{") == text.count(b"}")):
@@ -104,7 +131,7 @@ def members(lines):
 
 
 def read_map():
-    m = {"OWNER": None, "FILE": [], "TAKE": [], "SKIP": {}, "EDIT": [], "IMPORT": [], "REFS": [], "REMOVE": [], "MOVE": []}
+    m = {"OWNER": None, "FILE": [], "TAKE": [], "SKIP": {}, "EDIT": [], "IMPORT": [], "REFS": [], "REMOVE": [], "MOVE": [], "RENAME": [], "OWNER_EDIT": [], "DONOR": [], "BODY": []}
     for raw in MAP.read_text(encoding="utf-8").splitlines():
         if not raw.strip() or raw.startswith("#") or raw.startswith("kind\t"):
             continue
@@ -121,6 +148,17 @@ def read_map():
             m["REFS"].append((rest[0], rest[1]))
         elif kind == "MOVE":
             m["MOVE"].append((rest[0], rest[1]))
+        elif kind == "RENAME":
+            m["RENAME"].append((rest[0], rest[1]))
+        elif kind == "OWNER_EDIT":
+            m["OWNER_EDIT"].append((rest[0], rest[1], rest[2]))
+        elif kind == "OWNER_EDIT_FILE":
+            m["OWNER_EDIT"].append((rest[0], (MAP.parent / rest[1]).read_text(encoding="utf-8"),
+                                    (MAP.parent / rest[2]).read_text(encoding="utf-8")))
+        elif kind == "DONOR":
+            m["DONOR"].append((rest[0], rest[1], rest[2]))
+        elif kind == "BODY":
+            m["BODY"].append((rest[0], rest[1]))
     return m
 
 
@@ -138,6 +176,10 @@ def refs(m, text: str) -> str:
         if "//FLLDCIM:" in one:
             return one
         for pattern, replacement in m["REFS"]:
+            if replacement == "<DROP_LINE>":
+                if re.search(pattern, one):
+                    return ""
+                continue
             one = re.sub(pattern, replacement, one)
         return one
     return "".join(line(one) for one in text.splitlines(keepends=True))
@@ -146,28 +188,49 @@ def refs(m, text: str) -> str:
 def main() -> int:
     m = read_map()
     owner_path = ROOT / m["OWNER"]
+    if not owner_path.exists():
+        sys.exit(f"REFUSE: owner {m['OWNER']} is not in the tree (folded away or moved); the map is obsolete")
     owner = refs(m, owner_path.read_bytes().decode("utf-8")).encode("utf-8")
+    for pin, old, new in m["OWNER_EDIT"]:
+        o, n = old.encode("utf-8"), new.encode("utf-8")
+        if owner.count(n) >= 1:
+            continue  # already applied (also when <old> is a substring of <new>)
+        if owner.count(o) != 1 or not hashlib.sha256(o).hexdigest().startswith(pin):
+            sys.exit(f"REFUSE OWNER_EDIT: old text occurs {owner.count(o)} times or pin {pin} mismatches")
+        owner = owner.replace(o, n)
     owner_lines = LINES.findall(owner)
     present = {(x["name"], x["selector"]): hashlib.sha256(re.sub(rb"\s+", b" ", b"".join(owner_lines[x["first"]:x["stop"]]))).hexdigest()[:12]
                for x in members(owner_lines)}
-    folded, table, seen = [], [], {}
-    for donor_rel in m["FILE"]:
-        donor_path = ROOT / donor_rel
+    folded, table, seen, conflicts = [], [], {}, []
+    donors = [(ROOT / rel, rel, None) for rel in m["FILE"]] + [(Path(path), note, pin) for path, pin, note in m["DONOR"]]
+    for donor_path, donor_rel, declared in donors:
         if not donor_path.exists():
+            if declared:
+                sys.exit(f"REFUSE DONOR {donor_rel}: {donor_path} is not present")
             continue  # already removed by an earlier run
-        blob = subprocess.run(["git", "-C", str(ROOT), "hash-object", donor_rel], capture_output=True, text=True).stdout.strip()
+        blob = subprocess.run(["git", "-C", str(ROOT), "hash-object", str(donor_path)], capture_output=True, text=True).stdout.strip()
+        if declared and not blob.startswith(declared):
+            sys.exit(f"REFUSE DONOR {donor_rel}: blob {blob[:12]} is not the declared {declared}")
         data = donor_path.read_bytes()
         lines = LINES.findall(data)
         donor_type = donor_path.stem
+        renames = {k.split(".", 1)[1]: v for k, v in m["RENAME"] if k.split(".", 1)[0] == donor_type}
         for member in members(lines):
             key = donor_type + "." + member["name"]
             if member["name"] == donor_type:
                 continue
-            taken = any(t == key or t == key + "(" + (member["selector"] or "") + ")" for t in m["TAKE"])
-            if key in m["SKIP"] or not taken:
-                table.append((key, member["selector"], "SKIP" if key in m["SKIP"] else "NOT_TAKEN"))
+            taken = any(t == key or t == key + "(" + (member["selector"] or "") + ")" or t == donor_type + ".*" for t in m["TAKE"])
+            skipped = key in m["SKIP"] or (key + "(" + (member["selector"] or "") + ")") in m["SKIP"]
+            if skipped or not taken:
+                table.append((key, member["selector"], "SKIP" if skipped else "NOT_TAKEN"))
                 continue
             body = b"".join(lines[member["first"]:member["stop"]])
+            for old_name, new_name in renames.items():
+                body = re.sub(rb"(?<![\w.])" + re.escape(old_name.encode()) + rb"\s*\(", new_name.encode() + b"(", body)
+            for pattern, replacement in m["BODY"]:
+                body = re.sub(pattern.encode("utf-8"), replacement.encode("utf-8"), body)
+            name = renames.get(member["name"], member["name"])
+            selector = refs(m, member["selector"]) if member["selector"] is not None else None  # type maps apply to the signature too
             for ekey, pin, old, new in m["EDIT"]:
                 if ekey not in (key, key + "(" + (member["selector"] or "") + ")"):
                     continue
@@ -177,20 +240,24 @@ def main() -> int:
                 body = body.replace(o, new.encode())
             body = refs(m, body.decode("utf-8")).encode("utf-8")
             digest = hashlib.sha256(re.sub(rb"\s+", b" ", body)).hexdigest()[:12]
-            if (member["name"], member["selector"]) in present:
-                if present[(member["name"], member["selector"])] != digest:
-                    sys.exit(f"REFUSE CONFLICT {key}({member['selector']}): the owner declares this member with a different body; declare SKIP or an EDIT")
+            if (name, selector) in present:
+                if present[(name, selector)] != digest:
+                    conflicts.append(f"REFUSE CONFLICT {key}({member['selector']}): the owner declares this member with a different body; declare SKIP or an EDIT")
+                    continue
                 table.append((key, member["selector"], "PRESENT"))
                 continue
             if digest in seen:
                 table.append((key, member["selector"], "DUPLICATE of " + seen[digest]))
                 continue
             seen[digest] = key
-            present[(member["name"], member["selector"])] = digest
+            present[(name, selector)] = digest
             anchor = (f"    //FLLDCIM: FOLD - member {key} from donor blob {blob[:12]} ({donor_rel}); recipe "
                       f"m3/tooling/jdk-naming/fold_members.py v1, map {MAP.relative_to(ROOT).as_posix()}\n").encode()
             folded.append(anchor + body + (b"" if body.endswith(b"\n") else b"\n"))
-            table.append((key, member["selector"], "FOLD"))
+            table.append((key, selector, "FOLD" if name == member["name"] else "FOLD as " + name))
+    if conflicts:
+        print("\n".join(conflicts))
+        sys.exit(2)
     if folded:
         close = max(i for i, line in enumerate(owner_lines) if eol_split(line)[0] == b"}")
         head = owner_lines[:close]
@@ -234,7 +301,7 @@ def main() -> int:
         print("MEMBER\t" + "\t".join("" if c is None else str(c) for c in row))
     for c in changed:
         print("CHANGED\t" + c)
-    print(f"FOLD_MEMBERS v1.1 owner={m['OWNER']} folded={sum(1 for r in table if r[2] == 'FOLD')} changed={len(changed)} check={CHECK}")
+    print(f"FOLD_MEMBERS v1.7 owner={m['OWNER']} folded={sum(1 for r in table if r[2].startswith('FOLD'))} changed={len(changed)} check={CHECK}")
     return 1 if CHECK and changed else 0
 
 
