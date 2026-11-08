@@ -1,0 +1,4 @@
+date	recipe	version	correction	rule
+2026-11-08	fold_members.py map monotonic-stack-fold	v1.7	the donors use com.synexia IntRingDeque (first()/last() accessors); a module-wide REFS rewrite of .first() would have touched unrelated code	BODY rows rewrite the folded bodies only: the donor collection type maps to the module type jdk.m3.collections.IntArrayDeque and its accessors to getFirst()/getLast(); the compile and the oracle are the gates
+2026-11-08	chain_fold.sh	v1	the leftover regex MonotonicStack\w* matched the oracle class MonotonicStackReferenceTest and the chain refused a green fold	the leftover regex names the donor classes exactly; the oracle may carry the donor family name
+2026-11-08	fold_members.py map monotonic-stack-fold	v1.7	one concept lives in another owner (maxSlidingWindow in ArrayAlgorithms)	a second map folds the sibling member (minSlidingWindow) into that owner instead of splitting the concept across classes
