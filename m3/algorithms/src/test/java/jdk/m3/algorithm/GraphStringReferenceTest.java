@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 //FLLDCIM: ORACLE - M3JDK-authored reference oracle of recipe/algorithm-extras-20261106 (the donor catalogue has no tests)
 /**
  * Reference oracle of the relocated graph members (PrimitiveGraphAlgorithms) and string
- * members (M3PrimitiveStringAlgorithms, M3AdvancedStringAlgorithms) against brute force on small instances:
+ * members (PrimitiveStringAlgorithms, StringAlgorithms) against brute force on small instances:
  * Bellman-Ford over BigInteger, exhaustive 2-colouring, Prim per component, sorted suffix lists, quadratic windows.
  */
 class GraphStringReferenceTest {
@@ -273,8 +273,8 @@ class GraphStringReferenceTest {
         for (int i = 0; i < STRING_CASES; i++) {
             String value = text(random, random.nextInt(0, 40), i % 2 == 0 ? "ab" : "abc😀");
             int n = value.length();
-            int[] odd = AdvancedStringAlgorithms.manacherOdd(value);
-            int[] even = AdvancedStringAlgorithms.manacherEven(value);
+            int[] odd = StringAlgorithms.manacherOdd(value);
+            int[] even = StringAlgorithms.manacherEven(value);
             for (int c = 0; c < n; c++) {
                 int k = 1;
                 while (c - k >= 0 && c + k < n && value.charAt(c - k) == value.charAt(c + k)) {
@@ -292,10 +292,10 @@ class GraphStringReferenceTest {
                 suffixes[s] = s;
             }
             Arrays.sort(suffixes, (x, y) -> value.substring(x).compareTo(value.substring(y)));
-            int[] order = AdvancedStringAlgorithms.suffixArray(value);
+            int[] order = StringAlgorithms.suffixArray(value);
             int[] expectedOrder = Arrays.stream(suffixes).mapToInt(Integer::intValue).toArray();
             assertArrayEquals(expectedOrder, order, value);
-            int[] lcp = AdvancedStringAlgorithms.lcpArray(value, order);
+            int[] lcp = StringAlgorithms.lcpArray(value, order);
             int best = 0;
             for (int s = 0; s + 1 < n; s++) {
                 int l = 0;
@@ -306,7 +306,7 @@ class GraphStringReferenceTest {
                 assertEquals(l, lcp[s], value + " lcp " + s);
                 best = Math.max(best, l);
             }
-            String repeated = AdvancedStringAlgorithms.longestRepeatedSubstring(value);
+            String repeated = StringAlgorithms.longestRepeatedSubstring(value);
             assertEquals(best, repeated.length(), value);
             assertTrue(repeated.isEmpty() || value.indexOf(repeated) != value.lastIndexOf(repeated), value);
         }
