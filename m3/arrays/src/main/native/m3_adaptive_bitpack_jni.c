@@ -45,7 +45,12 @@ JNIEXPORT jbyteArray JNICALL Java_jdk_m3_arrays_packed_AdaptivePackedIntNative_n
         return NULL;
     }
     jbyteArray result = (*env)->NewByteArray(env, (jsize)bytes);
-    if (!result || (*env)->ExceptionCheck(env)) return NULL;
+    if (!result) {
+        m3_jni_throw_new(env, "java/lang/OutOfMemoryError",
+                         "native adaptive result allocation failed");
+        return NULL;
+    }
+    if ((*env)->ExceptionCheck(env)) return NULL;
     if (bytes != 0u) (*env)->SetByteArrayRegion(env, result, 0, (jsize)bytes, (const jbyte *)output);
     return (*env)->ExceptionCheck(env) ? NULL : result;
 }
@@ -79,7 +84,12 @@ JNIEXPORT jintArray JNICALL Java_jdk_m3_arrays_packed_AdaptivePackedIntNative_na
     }
     for (jint i = 0; i < length; ++i) resultData[i] = (jint)output[i];
     jintArray result = (*env)->NewIntArray(env, length);
-    if (!result || (*env)->ExceptionCheck(env)) return NULL;
+    if (!result) {
+        m3_jni_throw_new(env, "java/lang/OutOfMemoryError",
+                         "native adaptive result allocation failed");
+        return NULL;
+    }
+    if ((*env)->ExceptionCheck(env)) return NULL;
     if (length != 0) (*env)->SetIntArrayRegion(env, result, 0, length, resultData);
     return (*env)->ExceptionCheck(env) ? NULL : result;
 }
