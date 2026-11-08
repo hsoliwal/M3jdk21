@@ -1,3 +1,0 @@
-date	recipe	version	correction	rule
-2026-11-08	fold_members.py	v1	an EDIT keyed by member name applied to every overload; the monitor overload of zSearch had no match and the run refused	EDIT keys carry the javap-style selector (Donor.member(Type,Type)); a bare key still means every overload
-2026-11-08	fold_members.py	v1	the second run rewrote the //FLLDCIM: FOLD anchors (REFS matched the donor member names inside the anchor text), so the recipe had no fixed point	REFS rewrite every line except //FLLDCIM: anchor lines (anchors are append-only, CNPCDA); the owner text and the folded bodies are rewritten before the anchors are added, and the owner is skipped in the module-wide pass
