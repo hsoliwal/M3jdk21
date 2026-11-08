@@ -22,7 +22,7 @@ final class CompiledSearchForwardProgressTest {
     @Test
     void rejectsNonprogressingThirdPartyProviderInsteadOfRevisitingSameStart() {
         AtomicInteger probes = new AtomicInteger();
-        M3CompiledSearch bad = new M3CompiledSearch() {
+        CompiledSearch bad = new CompiledSearch() {
             @Override public int indexOf(byte[] bytes, int start) {
                 probes.incrementAndGet();
                 return 0;  // First probe is valid, second violates start >= 1.
@@ -113,7 +113,7 @@ final class CompiledSearchForwardProgressTest {
     @Test
     void preservesOutOfWindowEarlyStopAndMonitorFailureIdentity() {
         AtomicInteger checks = new AtomicInteger();
-        M3CompiledSearch sparse = new M3CompiledSearch() {
+        CompiledSearch sparse = new CompiledSearch() {
             @Override public int indexOf(byte[] values, int from) {
                 if (from == 0) return 0;
                 if (from == 1) return 2;
@@ -164,7 +164,7 @@ final class CompiledSearchForwardProgressTest {
         };
     }
 
-    private static final class LinearCompiled implements M3CompiledSearch {
+    private static final class LinearCompiled implements CompiledSearch {
         private final byte[] needle;
         private LinearCompiled(byte[] values) { this.needle = Arrays.copyOf(values, values.length); }
         @Override public int needleLength() { return needle.length; }

@@ -16,10 +16,10 @@ import org.junit.jupiter.api.Test;
 class DocumentDeduplicatorConcurrencyTest {
     @Test
     void concurrentlyArrivingNearDuplicatesAdmitOnlyOne() throws Exception {
-        M3DocumentDeduplicator dedupe = new M3DocumentDeduplicator(3);
-        M3KnowledgeDocument left = document("urn:left",
+        DocumentDeduplicator dedupe = new DocumentDeduplicator(3);
+        KnowledgeDocument left = document("urn:left",
                 "Java search indexing keeps immutable evidence fast and searchable.");
-        M3KnowledgeDocument right = document("urn:right",
+        KnowledgeDocument right = document("urn:right",
                 "Java search indexing keeps immutable evidence fast and searchable!");
 
         CountDownLatch start = new CountDownLatch(1);
@@ -38,22 +38,22 @@ class DocumentDeduplicatorConcurrencyTest {
     }
 
     private static void classify(
-            M3DocumentDeduplicator dedupe,
-            M3KnowledgeDocument document,
+            DocumentDeduplicator dedupe,
+            KnowledgeDocument document,
             CountDownLatch start,
             AtomicInteger accepted) throws Exception {
         start.await();
-        if (dedupe.classify(document) == M3DocumentDeduplicator.Decision.ACCEPT) {
+        if (dedupe.classify(document) == DocumentDeduplicator.Decision.ACCEPT) {
             accepted.incrementAndGet();
         }
     }
 
-    private static M3KnowledgeDocument document(String uri, String text) {
-        return M3KnowledgeDocument.create(
+    private static KnowledgeDocument document(String uri, String text) {
+        return KnowledgeDocument.create(
                 URI.create(uri),
                 "test",
                 "text/plain",
-                M3SourceKind.LOCAL_FILE,
+                SourceKind.LOCAL_FILE,
                 "test",
                 Instant.EPOCH,
                 null,

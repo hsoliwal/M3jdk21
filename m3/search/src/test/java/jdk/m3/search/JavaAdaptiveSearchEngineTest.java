@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Test;
 class JavaAdaptiveSearchEngineTest {
     @Test
     void findsExactNeedlesWithPrecomputedStrategies() {
-        M3SearchEngine engine = new M3JavaAdaptiveSearchEngine();
-        try (M3CompiledSearch shortPattern = engine.compile(bytes("aba"));
-             M3CompiledSearch longPattern = engine.compile(bytes("needle-value"))) {
+        SearchEngine engine = new JavaAdaptiveSearchEngine();
+        try (CompiledSearch shortPattern = engine.compile(bytes("aba"));
+             CompiledSearch longPattern = engine.compile(bytes("needle-value"))) {
             assertEquals(2, shortPattern.indexOf(bytes("xxabaaba"), 0));
             assertEquals(7, longPattern.indexOf(bytes("prefix-needle-value-suffix"), 0));
             assertEquals(-1, longPattern.indexOf(bytes("no match"), 0));
@@ -34,10 +34,10 @@ class JavaAdaptiveSearchEngineTest {
 
     @Test
     void findsLastExactNeedleWithoutChangingForwardSemantics() {
-        M3SearchEngine engine = new M3JavaAdaptiveSearchEngine();
+        SearchEngine engine = new JavaAdaptiveSearchEngine();
         byte[] overlapping = bytes("ababa");
-        try (M3CompiledSearch kmp = engine.compile(bytes("aba"));
-             M3CompiledSearch horspool = engine.compile(bytes("needle-value"))) {
+        try (CompiledSearch kmp = engine.compile(bytes("aba"));
+             CompiledSearch horspool = engine.compile(bytes("needle-value"))) {
             assertEquals(2, kmp.lastIndexOf(overlapping, Integer.MAX_VALUE));
             assertEquals(0, kmp.lastIndexOf(overlapping, 1));
             assertEquals(-1, kmp.lastIndexOf(overlapping, -1));
@@ -54,7 +54,7 @@ class JavaAdaptiveSearchEngineTest {
 
     @Test
     void searchesHeapAndDirectBufferRemainingRangesWithoutMutatingState() {
-        M3SearchEngine engine = new M3JavaAdaptiveSearchEngine();
+        SearchEngine engine = new JavaAdaptiveSearchEngine();
         byte[] payload = bytes("xxababa/needle-value/needle-valueyy");
         for (boolean direct : new boolean[] {false, true}) {
             ByteBuffer buffer = direct
@@ -67,8 +67,8 @@ class JavaAdaptiveSearchEngineTest {
             buffer.limit(3 + payload.length);
             int position = buffer.position();
             int limit = buffer.limit();
-            try (M3CompiledSearch kmp = engine.compile(bytes("aba"));
-                 M3CompiledSearch horspool = engine.compile(bytes("needle-value"))) {
+            try (CompiledSearch kmp = engine.compile(bytes("aba"));
+                 CompiledSearch horspool = engine.compile(bytes("needle-value"))) {
                 assertEquals(2, kmp.indexOf(buffer, 0));
                 assertEquals(4, kmp.lastIndexOf(buffer, Integer.MAX_VALUE));
                 assertEquals(8, horspool.indexOf(buffer, 0));
@@ -82,7 +82,7 @@ class JavaAdaptiveSearchEngineTest {
     @Test
     void compiledPatternDoesNotRetainCallerArray() {
         byte[] needle = bytes("needle-value");
-        M3CompiledSearch compiled = new M3JavaAdaptiveSearchEngine().compile(needle);
+        CompiledSearch compiled = new JavaAdaptiveSearchEngine().compile(needle);
         String strategy = compiled.strategy();
         needle[0] = 'X';
         assertEquals(2, compiled.indexOf(bytes("xxneedle-value"), 0));
@@ -112,7 +112,7 @@ class JavaAdaptiveSearchEngineTest {
             @Override public void setCanceled(boolean value) {}
             @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
         };
-        try (M3CompiledSearch compiled = new M3BoyerMooreHorspoolSearch(needle)) {
+        try (CompiledSearch compiled = new BoyerMooreHorspoolSearch(needle)) {
             // The old default polls only at reverse-search boundaries.
             assertThrows(CancellationException.class,
                     () -> compiled.lastIndexOf(direct, Integer.MAX_VALUE, stopOnSixth));
@@ -156,7 +156,7 @@ class JavaAdaptiveSearchEngineTest {
                     break;
                 }
             }
-            try (M3CompiledSearch compiled = new M3BoyerMooreHorspoolSearch(needle)) {
+            try (CompiledSearch compiled = new BoyerMooreHorspoolSearch(needle)) {
                 for (boolean direct : new boolean[]{false, true}) {
                     ByteBuffer buffer = direct ? ByteBuffer.allocateDirect(text.length + 8)
                             : ByteBuffer.allocate(text.length + 8);

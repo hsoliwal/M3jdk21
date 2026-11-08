@@ -11,8 +11,8 @@ class SearchEnginesTest {
     @Test
     void javaFallbackIsAlwaysAvailableWhenNativeIsDisabled() {
         System.clearProperty("m3.native.enabled");
-        M3SearchEngine engine = M3SearchEngines.best();
+        SearchEngine engine = SearchEngines.best();
         assertEquals("JAVA_ADAPTIVE", engine.name());
-        assertFalse(new M3JniSearchEngine().available());
+        assertFalse(new JniSearchEngine().available());
     }
 }

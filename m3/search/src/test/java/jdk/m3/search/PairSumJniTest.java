@@ -16,13 +16,13 @@ import org.junit.jupiter.api.Test;
 
 /** JNI is mandatory for this proof: raw native results face a separate quadratic oracle. */
 final class PairSumJniTest {
-    private static M3PairSumJni.Provider nativeProvider;
+    private static PairSumJni.Provider nativeProvider;
 
     @BeforeAll
     static void loadBuiltNativeLibrary() {
         String library = System.getProperty("m3.pair.jni.library");
         assertNotNull(library, "compile C17 native proof and supply m3.pair.jni.library");
-        nativeProvider = M3PairSumJni.load(Path.of(library));
+        nativeProvider = PairSumJni.load(Path.of(library));
     }
 
     @Test
@@ -33,7 +33,7 @@ final class PairSumJniTest {
             long target = target(random, values, attempt);
             int[] copy = values.clone();
             long expected = quadraticOracle(values, target);
-            assertEquals(expected, M3PairSumJni.rawSorted(values, target),
+            assertEquals(expected, PairSumJni.rawSorted(values, target),
                     "raw JNI single case " + attempt);
             assertEquals(expected, nativeProvider.firstSorted(values, target),
                     "checked JNI single case " + attempt);
@@ -52,7 +52,7 @@ final class PairSumJniTest {
             }
             int[] copy = values.clone();
             long[] targetsCopy = targets.clone();
-            long[] raw = M3PairSumJni.rawSortedBatch(values, targets);
+            long[] raw = PairSumJni.rawSortedBatch(values, targets);
             long[] checked = nativeProvider.firstSortedBatch(values, targets);
             assertEquals(targets.length, raw.length);
             assertEquals(targets.length, checked.length);
@@ -74,7 +74,7 @@ final class PairSumJniTest {
             long target = target(random, values, attempt);
             int[] copy = values.clone();
             long expected = quadraticOracle(values, target);
-            assertEquals(expected, M3PairSumJni.rawUnsorted(values, target),
+            assertEquals(expected, PairSumJni.rawUnsorted(values, target),
                     "raw unsorted single " + attempt);
             assertEquals(expected, nativeProvider.firstUnsorted(values, target),
                     "validated unsorted single " + attempt);
@@ -91,7 +91,7 @@ final class PairSumJniTest {
             for (int i = 0; i < targets.length; i++) targets[i] = target(random, values, i);
             int[] copy = values.clone();
             long[] queriesCopy = targets.clone();
-            long[] raw = M3PairSumJni.rawUnsortedBatch(values, targets);
+            long[] raw = PairSumJni.rawUnsortedBatch(values, targets);
             long[] checked = nativeProvider.firstUnsortedBatch(values, targets);
             for (int i = 0; i < targets.length; i++) {
                 long oracle = quadraticOracle(values, targets[i]);
@@ -107,17 +107,17 @@ final class PairSumJniTest {
         assertArrayEquals(new long[] {1L, -1L},
                 nativeProvider.firstUnsortedBatch(oversized, new long[] {2L, 3L}));
         assertThrows(IllegalArgumentException.class,
-                () -> M3PairSumJni.rawUnsorted(oversized, 2L));
+                () -> PairSumJni.rawUnsorted(oversized, 2L));
         assertThrows(IllegalArgumentException.class,
                 () -> nativeProvider.firstUnsortedBatch(new int[] {1}, new long[8_193]));
 
         int[] values = {4, -1, -1};
         long[] candidates = {0L, 0L};
-        assertArrayEquals(new long[] {1L, -1L}, M3PairSumJni.validatedUnsortedBatch(
+        assertArrayEquals(new long[] {1L, -1L}, PairSumJni.validatedUnsortedBatch(
                 values, new long[] {3L, 9L}, candidates));
         assertArrayEquals(new long[] {0L, 0L}, candidates);
         assertThrows(IllegalArgumentException.class,
-                () -> M3PairSumJni.validatedUnsortedBatch(values, new long[] {3L}, candidates));
+                () -> PairSumJni.validatedUnsortedBatch(values, new long[] {3L}, candidates));
     }
 
     @Test
@@ -135,7 +135,7 @@ final class PairSumJniTest {
         assertArrayEquals(new long[0],
                 nativeProvider.firstSortedBatch(new int[0], new long[0]));
         assertThrows(IllegalArgumentException.class,
-                () -> M3PairSumJni.load(Path.of("nonexistent-native-library.so")));
+                () -> PairSumJni.load(Path.of("nonexistent-native-library.so")));
     }
 
     @Test
@@ -144,15 +144,15 @@ final class PairSumJniTest {
         long[] targets = {3L, 0L, 17L, Long.MAX_VALUE};
         long[] fabricated = {0L, 7L, 8L, 9L};
         long[] original = fabricated.clone();
-        long[] corrected = M3PairSumJni.validatedBatch(sorted, targets, fabricated);
+        long[] corrected = PairSumJni.validatedBatch(sorted, targets, fabricated);
         for (int i = 0; i < targets.length; i++) {
             assertEquals(quadraticOracle(sorted, targets[i]), corrected[i]);
         }
         assertArrayEquals(original, fabricated);
-        assertEquals(M3PairSumSearch.NOT_FOUND, M3PairSumJni.validated(
-                M3PairSumSearch.NOT_FOUND, 0L));
+        assertEquals(PairSumSearch.NOT_FOUND, PairSumJni.validated(
+                PairSumSearch.NOT_FOUND, 0L));
         assertThrows(IllegalArgumentException.class,
-                () -> M3PairSumJni.validatedBatch(sorted, targets, new long[2]));
+                () -> PairSumJni.validatedBatch(sorted, targets, new long[2]));
     }
 
     private static int[] lane(Random random, int size) {
@@ -199,6 +199,6 @@ final class PairSumJniTest {
                 }
             }
         }
-        return M3PairSumSearch.NOT_FOUND;
+        return PairSumSearch.NOT_FOUND;
     }
 }

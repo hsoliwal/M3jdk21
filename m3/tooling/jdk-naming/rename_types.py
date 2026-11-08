@@ -102,7 +102,10 @@ def main():
                         if clash:
                             sys.exit(f"REFUSE {rel}: {old} also imported from {clash}")
                         new = masked_sub(new, re.compile(rf"(?<![\w$]){old}(?![\w$])"), rest)
-                elif rel.startswith("make/") and p.suffix in (".sh", ".gmk", ".txt"):
+                elif p.suffix in (".sh", ".gmk", ".yml", ".yaml") or (rel.startswith("make/") and p.suffix == ".txt"):
+                    # Launchers and gates name test mains, source files and JNI headers: rename the JNI/header
+                    # form, then the bare type name (whole word; a path segment M3X.java becomes X.java).
+                    new = new.replace(f"Java_{jni}_{old}_", f"Java_{jni}_{rest}_").replace(f"{jni}_{old}.h", f"{jni}_{rest}.h")
                     new = re.sub(rf"(?<![\w$]){old}(?![\w$])", rest, new)
         if new != text:
             changed[p] = new

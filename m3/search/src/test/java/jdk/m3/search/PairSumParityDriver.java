@@ -13,14 +13,14 @@ public final class PairSumParityDriver {
 
     public static void main(String[] args) {
         if (args.length != 1) throw new IllegalArgumentException("library path required");
-        M3PairSumJni.Provider nativeProvider = M3PairSumJni.load(Path.of(args[0]));
+        PairSumJni.Provider nativeProvider = PairSumJni.load(Path.of(args[0]));
         Random random = new Random(0x1670_F00DL);
         for (int attempt = 0; attempt < 15_000; attempt++) {
             int[] values = lane(random, random.nextInt(38));
             int[] before = values.clone();
             long target = query(random, values, attempt);
             long expected = oracle(values, target);
-            check(M3PairSumJni.rawSorted(values, target) == expected, "raw single " + attempt);
+            check(PairSumJni.rawSorted(values, target) == expected, "raw single " + attempt);
             check(nativeProvider.firstSorted(values, target) == expected, "checked single " + attempt);
             check(Arrays.equals(before, values), "native mutated input " + attempt);
         }
@@ -32,7 +32,7 @@ public final class PairSumParityDriver {
             long[] targets = new long[8_192];
             for (int i = 0; i < targets.length; i++) targets[i] = query(random, values, i);
             long[] targetBefore = targets.clone();
-            long[] raw = M3PairSumJni.rawSortedBatch(values, targets);
+            long[] raw = PairSumJni.rawSortedBatch(values, targets);
             long[] checked = nativeProvider.firstSortedBatch(values, targets);
             check(raw.length == targets.length && checked.length == targets.length,
                     "batch length");
@@ -51,7 +51,7 @@ public final class PairSumParityDriver {
             int[] before = values.clone();
             long target = query(random, values, attempt);
             long expected = oracle(values, target);
-            check(M3PairSumJni.rawUnsorted(values, target) == expected,
+            check(PairSumJni.rawUnsorted(values, target) == expected,
                     "raw unsorted single " + attempt);
             check(nativeProvider.firstUnsorted(values, target) == expected,
                     "checked unsorted single " + attempt);
@@ -64,7 +64,7 @@ public final class PairSumParityDriver {
             long[] targets = new long[4_096];
             for (int i = 0; i < targets.length; i++) targets[i] = query(random, values, i);
             long[] targetBefore = targets.clone();
-            long[] raw = M3PairSumJni.rawUnsortedBatch(values, targets);
+            long[] raw = PairSumJni.rawUnsortedBatch(values, targets);
             long[] checked = nativeProvider.firstUnsortedBatch(values, targets);
             for (int i = 0; i < targets.length; i++) {
                 long expected = oracle(values, targets[i]);
@@ -81,10 +81,10 @@ public final class PairSumParityDriver {
         check(Arrays.equals(nativeProvider.firstUnsortedBatch(oversized,
                 new long[] {2L, 3L}), new long[] {1L, -1L}),
                 "oversized native batch did not use Java fallback");
-        check(M3PairSumJni.validatedUnsortedBatch(new int[] {4, -1, -1},
+        check(PairSumJni.validatedUnsortedBatch(new int[] {4, -1, -1},
                 new long[] {3L}, new long[] {0L})[0] == 1L,
                 "unsorted native candidate corruption not repaired");
-        check(M3PairSumJni.validated(-1L, 0L) == -1L, "invalid candidate not repaired");
+        check(PairSumJni.validated(-1L, 0L) == -1L, "invalid candidate not repaired");
         boolean refused = false;
         try {
             nativeProvider.firstSortedBatch(new int[] {1, 2}, new long[8_193]);

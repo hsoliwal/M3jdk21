@@ -27,52 +27,52 @@ final class BmhCountOnlyTest {
         byte[] pattern = new byte[768], input = new byte[3072];
         for (int i = 0; i < pattern.length; i++) pattern[i] = (byte) (i % 3);
         for (int i = 0; i < input.length; i++) input[i] = (byte) (i % 3);
-        M3BoyerMooreHorspoolSearch compiled = new M3BoyerMooreHorspoolSearch(pattern);
+        BoyerMooreHorspoolSearch compiled = new BoyerMooreHorspoolSearch(pattern);
         Field lazy = compiled.getClass().getDeclaredField("overlapSearch");
         lazy.setAccessible(true);
         assertEquals(null, lazy.get(compiled));
-        int count = M3ByteOccurrences.count(compiled, input, 0, null);
+        int count = ByteOccurrences.count(compiled, input, 0, null);
         assertEquals(769, count);
         assertTrue(lazy.get(compiled) != null, "dense fallback must reuse original KMP owner");
         List<Integer> visited = new ArrayList<>();
-        assertEquals(769, M3ByteOccurrences.visit(compiled, input, 0, Integer.MAX_VALUE,
+        assertEquals(769, ByteOccurrences.visit(compiled, input, 0, Integer.MAX_VALUE,
                 visited::add, null));
         for (int i = 0; i < visited.size(); i++) assertEquals(3 * i, visited.get(i).intValue());
-        assertEquals(0, M3ByteOccurrences.count(compiled, input, Integer.MAX_VALUE, null));
+        assertEquals(0, ByteOccurrences.count(compiled, input, Integer.MAX_VALUE, null));
     }
 
     @Test void cancellationChecksAndExceptionBoundaryEqualOldCountVisitor() {
         byte[] needle = new byte[24], input = new byte[9216];
         for (int i = 0; i < needle.length; i++) needle[i] = (byte) (i % 3);
         for (int i = 0; i < input.length; i++) input[i] = (byte) (i % 3);
-        M3BoyerMooreHorspoolSearch candidate = new M3BoyerMooreHorspoolSearch(needle);
-        M3BoyerMooreHorspoolSearch baseline = new M3BoyerMooreHorspoolSearch(needle);
+        BoyerMooreHorspoolSearch candidate = new BoyerMooreHorspoolSearch(needle);
+        BoyerMooreHorspoolSearch baseline = new BoyerMooreHorspoolSearch(needle);
         CheckMonitor counted = new CheckMonitor(-1), visited = new CheckMonitor(-1);
-        assertEquals(3065, M3ByteOccurrences.count(candidate, input, 0, counted));
+        assertEquals(3065, ByteOccurrences.count(candidate, input, 0, counted));
         visited.checkCanceled();
-        assertEquals(3065, M3ByteOccurrences.visit(baseline, input, 0,
+        assertEquals(3065, ByteOccurrences.visit(baseline, input, 0,
                 Integer.MAX_VALUE, ignored -> {}, visited));
         assertEquals(visited.polls.get(), counted.polls.get(),
                 "original count->visit and direct count must poll equally");
         CheckMonitor cancellation = new CheckMonitor(17);
         assertThrows(CancellationException.class,
-                () -> M3ByteOccurrences.count(candidate, input, 0, cancellation));
+                () -> ByteOccurrences.count(candidate, input, 0, cancellation));
         assertTrue(cancellation.polls.get() >= 17);
-        assertEquals(3065, M3ByteOccurrences.count(candidate, input, 0, null));
+        assertEquals(3065, ByteOccurrences.count(candidate, input, 0, null));
     }
 
     @Test void compiledNeedleOwnershipAndExternalProvidersRemainUnchanged() {
         byte[] needle = {0, -1, 0};
-        M3BoyerMooreHorspoolSearch candidate = new M3BoyerMooreHorspoolSearch(needle);
+        BoyerMooreHorspoolSearch candidate = new BoyerMooreHorspoolSearch(needle);
         needle[1] = 42;
         byte[] input = {0, -1, 0, -1, 0, -1, 0};
         byte[] original = input.clone();
-        assertEquals(3, M3ByteOccurrences.count(candidate, input, Integer.MIN_VALUE, null));
-        assertEquals(2, M3ByteOccurrences.count(candidate, input, 1, null));
-        assertEquals(0, M3ByteOccurrences.count(candidate, input, Integer.MAX_VALUE, null));
+        assertEquals(3, ByteOccurrences.count(candidate, input, Integer.MIN_VALUE, null));
+        assertEquals(2, ByteOccurrences.count(candidate, input, 1, null));
+        assertEquals(0, ByteOccurrences.count(candidate, input, Integer.MAX_VALUE, null));
         assertTrue(Arrays.equals(original, input), "count must not mutate caller byte array");
         assertThrows(IllegalArgumentException.class,
-                () -> M3ByteOccurrences.visit(candidate, input, 0, -1, ignored -> {}, null));
+                () -> ByteOccurrences.visit(candidate, input, 0, -1, ignored -> {}, null));
     }
 
     private static final class CheckMonitor implements M3ProgressMonitor {

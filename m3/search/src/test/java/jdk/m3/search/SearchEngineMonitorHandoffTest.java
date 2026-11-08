@@ -51,7 +51,7 @@ final class SearchEngineMonitorHandoffTest {
         OwnedPattern pattern = new OwnedPattern();
         Provider owner = new Provider(pattern);
         Monitor monitor = new Monitor(ignored -> {});
-        M3CompiledSearch returned = owner.compile(NEEDLE, monitor);
+        CompiledSearch returned = owner.compile(NEEDLE, monitor);
         assertSame(pattern, returned);
         assertEquals(2, monitor.polls);
         assertEquals(1, owner.compiles);
@@ -129,23 +129,23 @@ final class SearchEngineMonitorHandoffTest {
         assertEquals(0, pattern.closes);
     }
 
-    private static final class Provider implements M3SearchEngine {
-        private final M3CompiledSearch supplied;
+    private static final class Provider implements SearchEngine {
+        private final CompiledSearch supplied;
         private RuntimeException factoryFailure;
         private int compiles;
 
-        private Provider(M3CompiledSearch supplied) { this.supplied = supplied; }
+        private Provider(CompiledSearch supplied) { this.supplied = supplied; }
         @Override public String name() { return "lease-test-provider"; }
         @Override public int priority() { return 0; }
         @Override public boolean available() { return true; }
-        @Override public M3CompiledSearch compile(byte[] needle) {
+        @Override public CompiledSearch compile(byte[] needle) {
             compiles++;
             if (factoryFailure != null) throw factoryFailure;
             return supplied;
         }
     }
 
-    private static final class OwnedPattern implements M3CompiledSearch {
+    private static final class OwnedPattern implements CompiledSearch {
         private int closes;
         private RuntimeException closeFailure;
         @Override public int indexOf(byte[] values, int fromIndex) { return -1; }

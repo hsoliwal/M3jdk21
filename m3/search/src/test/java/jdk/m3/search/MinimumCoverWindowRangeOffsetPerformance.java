@@ -19,8 +19,8 @@ public final class MinimumCoverWindowRangeOffsetPerformance {
         char[] pattern = required.toCharArray();
         long expected = MinimumCoverWindowJavaAtomTest.independent(source, required);
         for (int i = 0; i < WARMUP; i++) {
-            long value = nativeMode ? M3MinimumCoverWindow.nativeSpan(haystack, pattern)
-                    : M3MinimumCoverWindow.javaSpan(source, required);
+            long value = nativeMode ? MinimumCoverWindow.nativeSpan(haystack, pattern)
+                    : MinimumCoverWindow.javaSpan(source, required);
             if (value != expected) throw new AssertionError("warmup contract mismatch");
             sink = value;
         }
@@ -28,8 +28,8 @@ public final class MinimumCoverWindowRangeOffsetPerformance {
         for (int batch = 0; batch < REPEATS; batch++) {
             long started = System.nanoTime();
             for (int i = 0; i < SAMPLES; i++) {
-                long value = nativeMode ? M3MinimumCoverWindow.nativeSpan(haystack, pattern)
-                        : M3MinimumCoverWindow.javaSpan(source, required);
+                long value = nativeMode ? MinimumCoverWindow.nativeSpan(haystack, pattern)
+                        : MinimumCoverWindow.javaSpan(source, required);
                 if (value != expected) throw new AssertionError("measured contract mismatch");
                 sink = value;
             }

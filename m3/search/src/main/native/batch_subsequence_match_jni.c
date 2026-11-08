@@ -18,7 +18,7 @@ static void m3_throw(JNIEnv *env, const char *type, const char *message) {
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_search_M3BatchSubsequenceMatch_countNative(
+Java_jdk_m3_search_BatchSubsequenceMatch_countNative(
         JNIEnv *env, jclass type, jcharArray sourceArray,
         jcharArray packedArray, jintArray offsetArray) {
     (void) type;

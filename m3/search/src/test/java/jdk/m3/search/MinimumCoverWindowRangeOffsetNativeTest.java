@@ -29,7 +29,7 @@ final class MinimumCoverWindowRangeOffsetNativeTest {
             char[] copySource = haystack.clone();
             char[] copyPattern = pattern.clone();
             assertEquals(MinimumCoverWindowJavaAtomTest.independent(source, required),
-                    M3MinimumCoverWindow.nativeSpan(haystack, pattern), required);
+                    MinimumCoverWindow.nativeSpan(haystack, pattern), required);
             assertArrayEquals(copySource, haystack);
             assertArrayEquals(copyPattern, pattern);
         }
@@ -38,10 +38,10 @@ final class MinimumCoverWindowRangeOffsetNativeTest {
     void aliasedCharArraysAndHighSparseCodeUnitsAreStable() {
         char[] shared = "\uffff\0\u4e2d".toCharArray();
         char[] copy = shared.clone();
-        assertEquals(M3MinimumCoverWindow.pack(0, shared.length),
-                M3MinimumCoverWindow.nativeSpan(shared, shared));
+        assertEquals(MinimumCoverWindow.pack(0, shared.length),
+                MinimumCoverWindow.nativeSpan(shared, shared));
         assertArrayEquals(copy, shared);
-        assertEquals(M3MinimumCoverWindow.pack(1, 2),
-                M3MinimumCoverWindow.nativeSpan("\0\uffff\0".toCharArray(), new char[]{'\uffff'}));
+        assertEquals(MinimumCoverWindow.pack(1, 2),
+                MinimumCoverWindow.nativeSpan("\0\uffff\0".toCharArray(), new char[]{'\uffff'}));
     }
 }

@@ -27,57 +27,57 @@ final class KmpCountOnlyTest {
         byte[] pattern = new byte[256];
         Arrays.fill(input, (byte) 'x');
         Arrays.fill(pattern, (byte) 'x');
-        M3KmpSearch kmp = new M3KmpSearch(pattern);
+        KmpSearch kmp = new KmpSearch(pattern);
         assertEquals(4096 - 256 + 1, kmp.countMatches(input, 0, new M3DefaultProgressMonitor()));
-        assertEquals(4096 - 256 + 1, M3ByteOccurrences.count(kmp, input, 0, null));
+        assertEquals(4096 - 256 + 1, ByteOccurrences.count(kmp, input, 0, null));
         List<Integer> first = new ArrayList<>();
-        assertEquals(3, M3ByteOccurrences.visit(kmp, input, 0, 3, first::add, null));
+        assertEquals(3, ByteOccurrences.visit(kmp, input, 0, 3, first::add, null));
         assertEquals(List.of(0, 1, 2), first);
     }
 
     @Test void byteArrayOwnershipAndExtremeOffsetsRemainUnchanged() {
         byte[] needle = {0, -1, 0};
-        M3KmpSearch kmp = new M3KmpSearch(needle);
+        KmpSearch kmp = new KmpSearch(needle);
         needle[1] = 12;
         byte[] input = {0, -1, 0, -1, 0, -1, 0};
-        assertEquals(3, M3ByteOccurrences.count(kmp, input, Integer.MIN_VALUE, null));
-        assertEquals(2, M3ByteOccurrences.count(kmp, input, 1, null));
-        assertEquals(0, M3ByteOccurrences.count(kmp, input, Integer.MAX_VALUE, null));
-        assertEquals(0, M3ByteOccurrences.count(kmp, new byte[0], 0, null));
+        assertEquals(3, ByteOccurrences.count(kmp, input, Integer.MIN_VALUE, null));
+        assertEquals(2, ByteOccurrences.count(kmp, input, 1, null));
+        assertEquals(0, ByteOccurrences.count(kmp, input, Integer.MAX_VALUE, null));
+        assertEquals(0, ByteOccurrences.count(kmp, new byte[0], 0, null));
     }
 
     @Test void cancelPollingMatchesOriginalVisitorCheckpoints() {
         byte[] haystack = new byte[65_537];
         byte[] needle = {1};
         Arrays.fill(haystack, (byte) 1);
-        M3KmpSearch kmp = new M3KmpSearch(needle);
+        KmpSearch kmp = new KmpSearch(needle);
         Probe counter = new Probe(-1);
         Probe visitor = new Probe(-1);
-        assertEquals(haystack.length, M3ByteOccurrences.count(kmp, haystack, 0, counter));
-        assertEquals(haystack.length, M3ByteOccurrences.visit(kmp, haystack, 0,
+        assertEquals(haystack.length, ByteOccurrences.count(kmp, haystack, 0, counter));
+        assertEquals(haystack.length, ByteOccurrences.visit(kmp, haystack, 0,
                 Integer.MAX_VALUE, ignored -> {}, visitor));
         assertEquals(visitor.polls.get() + 1, counter.polls.get(),
                 "count retains original count entry plus visit cancellation checks");
         Probe absentCount = new Probe(-1);
         Probe absentVisit = new Probe(-1);
         byte[] absent = new byte[8193];
-        assertEquals(0, M3ByteOccurrences.count(kmp, absent, 0, absentCount));
-        assertEquals(0, M3ByteOccurrences.visit(kmp, absent, 0, Integer.MAX_VALUE,
+        assertEquals(0, ByteOccurrences.count(kmp, absent, 0, absentCount));
+        assertEquals(0, ByteOccurrences.visit(kmp, absent, 0, Integer.MAX_VALUE,
                 ignored -> {}, absentVisit));
         assertEquals(absentVisit.polls.get() + 1, absentCount.polls.get(),
                 "no-hit count retains original count entry before visitor checkpoints");
         Probe pastEndCount = new Probe(-1);
         Probe pastEndVisit = new Probe(-1);
-        assertEquals(0, M3ByteOccurrences.count(kmp, absent, Integer.MAX_VALUE, pastEndCount));
-        assertEquals(0, M3ByteOccurrences.visit(kmp, absent, Integer.MAX_VALUE,
+        assertEquals(0, ByteOccurrences.count(kmp, absent, Integer.MAX_VALUE, pastEndCount));
+        assertEquals(0, ByteOccurrences.visit(kmp, absent, Integer.MAX_VALUE,
                 Integer.MAX_VALUE, ignored -> {}, pastEndVisit));
         assertEquals(pastEndVisit.polls.get() + 1, pastEndCount.polls.get(),
                 "past-end count retains original count and visitor entry/exit checks");
         Probe canceled = new Probe(17);
         assertThrows(CancellationException.class,
-                () -> M3ByteOccurrences.count(kmp, haystack, 0, canceled));
+                () -> ByteOccurrences.count(kmp, haystack, 0, canceled));
         assertTrue(canceled.polls.get() >= 17);
-        assertEquals(haystack.length, M3ByteOccurrences.count(kmp, haystack, 0, null),
+        assertEquals(haystack.length, ByteOccurrences.count(kmp, haystack, 0, null),
                 "cancellation must not damage the precomputed pattern");
     }
 

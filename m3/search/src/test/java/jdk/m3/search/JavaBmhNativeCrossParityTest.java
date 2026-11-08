@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
  * provider, and an independent offset oracle. No challenge solution is copied.
  */
 final class JavaBmhNativeCrossParityTest {
-    private static M3JniSearchEngine nativeEngine() {
+    private static JniSearchEngine nativeEngine() {
         String configured = System.getProperty("m3.native.library.path");
         assertTrue(configured != null && !configured.isBlank(),
                 "actual native library path is required, not a Java fallback");
@@ -33,20 +33,20 @@ final class JavaBmhNativeCrossParityTest {
         assertTrue(Files.isRegularFile(library), "native ABI-1 library must exist");
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path", library.toString());
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available(), "JNI provider must be available and ABI-checked");
         return engine;
     }
 
     @Test
     void pathologicalForwardAndReverseByteSearchAgreeWithNativeAndOracle() {
-        M3JniSearchEngine engine = nativeEngine();
+        JniSearchEngine engine = nativeEngine();
         for (boolean reverse : new boolean[] {false, true}) {
             byte[] needle = alternating(1025);
             needle[reverse ? needle.length - 1 : 0] = (byte) 'X';
             byte[] text = alternating(32_768);
-            try (M3CompiledSearch javaSearch = new M3BoyerMooreHorspoolSearch(needle);
-                    M3CompiledSearch nativeSearch = engine.compile(needle)) {
+            try (CompiledSearch javaSearch = new BoyerMooreHorspoolSearch(needle);
+                    CompiledSearch nativeSearch = engine.compile(needle)) {
                 assertEquals("BOYER_MOORE_HORSPOOL", javaSearch.strategy());
                 assertEquals("JNI_PRECOMPUTED_BMH", nativeSearch.strategy());
                 assertEquals(-1, javaSearch.indexOf(text, 0));
@@ -61,9 +61,9 @@ final class JavaBmhNativeCrossParityTest {
                     assertSameResults(javaSearch, nativeSearch, text, needle, from);
                 }
                 assertArrayEquals(needle, Arrays.copyOfRange(text, 4096, 4096 + needle.length));
-                assertEquals(2, M3ByteOccurrences.count(javaSearch, text, 0, null));
-                assertEquals(2, M3ByteOccurrences.count(nativeSearch, text, 0, null));
-                assertEquals(2, M3JniSearchEngine.countIfNative(
+                assertEquals(2, ByteOccurrences.count(javaSearch, text, 0, null));
+                assertEquals(2, ByteOccurrences.count(nativeSearch, text, 0, null));
+                assertEquals(2, JniSearchEngine.countIfNative(
                         nativeSearch, text, 0, new M3DefaultProgressMonitor()));
             }
         }
@@ -71,7 +71,7 @@ final class JavaBmhNativeCrossParityTest {
 
     @Test
     void seededArrayDirectBufferAndOverlappingPositionOracles() {
-        M3JniSearchEngine engine = nativeEngine();
+        JniSearchEngine engine = nativeEngine();
         Random random = new Random(0x4d33424d484eL);
         for (int sample = 0; sample < 480; sample++) {
             byte[] text = new byte[random.nextInt(512)];
@@ -88,29 +88,29 @@ final class JavaBmhNativeCrossParityTest {
                         random.nextInt(text.length - needle.length + 1), needle.length);
             }
             byte[] snapshot = text.clone();
-            try (M3CompiledSearch javaSearch = new M3BoyerMooreHorspoolSearch(needle);
-                    M3CompiledSearch nativeSearch = engine.compile(needle)) {
+            try (CompiledSearch javaSearch = new BoyerMooreHorspoolSearch(needle);
+                    CompiledSearch nativeSearch = engine.compile(needle)) {
                 for (int from : new int[] {-3, 0, 1, text.length / 2, text.length,
                         Integer.MAX_VALUE}) {
                     assertSameResults(javaSearch, nativeSearch, text, needle, from);
                     List<Integer> expected = allOffsets(text, needle, from);
                     assertEquals(expected.size(),
-                            M3ByteOccurrences.count(javaSearch, text, from, null));
+                            ByteOccurrences.count(javaSearch, text, from, null));
                     assertEquals(expected.size(),
-                            M3ByteOccurrences.count(nativeSearch, text, from, null));
-                    assertEquals(expected.size(), M3JniSearchEngine.countIfNative(
+                            ByteOccurrences.count(nativeSearch, text, from, null));
+                    assertEquals(expected.size(), JniSearchEngine.countIfNative(
                             nativeSearch, text, from, new M3DefaultProgressMonitor()));
                     int limit = Math.min(3, expected.size());
                     List<Integer> javaPositions = new ArrayList<>();
                     List<Integer> nativePositions = new ArrayList<>();
-                    assertEquals(limit, M3ByteOccurrences.visit(javaSearch, text, from,
+                    assertEquals(limit, ByteOccurrences.visit(javaSearch, text, from,
                             limit, javaPositions::add, null));
-                    assertEquals(limit, M3ByteOccurrences.visit(nativeSearch, text, from,
+                    assertEquals(limit, ByteOccurrences.visit(nativeSearch, text, from,
                             limit, nativePositions::add, null));
                     assertEquals(expected.subList(0, limit), javaPositions);
                     assertEquals(expected.subList(0, limit), nativePositions);
                     if (limit > 0) {
-                        int[] actualNative = M3JniSearchEngine.positionsIfNative(
+                        int[] actualNative = JniSearchEngine.positionsIfNative(
                                 nativeSearch, text, from, limit, new M3DefaultProgressMonitor());
                         assertTrue(actualNative != null,
                                 "actual JNI positions symbol must run, never silently fall back");
@@ -125,7 +125,7 @@ final class JavaBmhNativeCrossParityTest {
 
     @Test
     void challengeCategoriesPreserveFirstCountAndAllOffsetsAcrossProviders() {
-        M3JniSearchEngine engine = nativeEngine();
+        JniSearchEngine engine = nativeEngine();
         byte[][] texts = {
                 "sadbutsad".getBytes(StandardCharsets.US_ASCII),
                 "ABCDCDC".getBytes(StandardCharsets.US_ASCII),
@@ -145,22 +145,22 @@ final class JavaBmhNativeCrossParityTest {
             byte[] original = text.clone();
             byte[] needle = needles[sample];
             List<Integer> starts = expected.get(sample);
-            try (M3CompiledSearch javaSearch = new M3BoyerMooreHorspoolSearch(needle);
-                    M3CompiledSearch nativeSearch = engine.compile(needle)) {
-                for (M3CompiledSearch search : new M3CompiledSearch[] {javaSearch, nativeSearch}) {
+            try (CompiledSearch javaSearch = new BoyerMooreHorspoolSearch(needle);
+                    CompiledSearch nativeSearch = engine.compile(needle)) {
+                for (CompiledSearch search : new CompiledSearch[] {javaSearch, nativeSearch}) {
                     assertEquals(starts.get(0).intValue(), search.indexOf(text, 0),
                             "first offset for category " + sample);
                     assertEquals(starts.get(starts.size() - 1).intValue(),
                             search.lastIndexOf(text, Integer.MAX_VALUE),
                             "last offset for category " + sample);
-                    assertEquals(starts.size(), M3ByteOccurrences.count(search, text, 0, null),
+                    assertEquals(starts.size(), ByteOccurrences.count(search, text, 0, null),
                             "overlapping count for category " + sample);
                     List<Integer> offsets = new ArrayList<>();
-                    assertEquals(starts.size(), M3ByteOccurrences.visit(search, text, 0,
+                    assertEquals(starts.size(), ByteOccurrences.visit(search, text, 0,
                             Integer.MAX_VALUE, offsets::add, null));
                     assertEquals(starts, offsets, "ordered positions for category " + sample);
                 }
-                int[] nativePositions = M3JniSearchEngine.positionsIfNative(
+                int[] nativePositions = JniSearchEngine.positionsIfNative(
                         nativeSearch, text, 0, starts.size(), new M3DefaultProgressMonitor());
                 assertTrue(nativePositions != null, "actual JNI positions required");
                 assertEquals(starts, Arrays.stream(nativePositions).boxed().toList());
@@ -170,11 +170,11 @@ final class JavaBmhNativeCrossParityTest {
     }
     @Test
     void nativeHandleClosesWhileJavaOwnerRemainsIndependent() {
-        M3JniSearchEngine engine = nativeEngine();
+        JniSearchEngine engine = nativeEngine();
         byte[] needle = {(byte) 0xff, 0, 1, (byte) 0xff};
         byte[] text = {9, (byte) 0xff, 0, 1, (byte) 0xff, 2};
-        M3CompiledSearch nativeSearch = engine.compile(needle);
-        M3CompiledSearch javaSearch = new M3BoyerMooreHorspoolSearch(needle);
+        CompiledSearch nativeSearch = engine.compile(needle);
+        CompiledSearch javaSearch = new BoyerMooreHorspoolSearch(needle);
         assertEquals(1, nativeSearch.indexOf(text, 0));
         assertEquals(1, javaSearch.indexOf(text, 0));
         nativeSearch.close();
@@ -185,8 +185,8 @@ final class JavaBmhNativeCrossParityTest {
         javaSearch.close();
     }
 
-    private static void assertSameResults(M3CompiledSearch javaSearch,
-            M3CompiledSearch nativeSearch, byte[] text, byte[] needle, int from) {
+    private static void assertSameResults(CompiledSearch javaSearch,
+            CompiledSearch nativeSearch, byte[] text, byte[] needle, int from) {
         int expectedFirst = offset(text, needle, from, false);
         int expectedLast = offset(text, needle, from, true);
         assertEquals(expectedFirst, javaSearch.indexOf(text, from));

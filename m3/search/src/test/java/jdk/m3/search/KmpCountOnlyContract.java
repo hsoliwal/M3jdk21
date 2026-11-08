@@ -47,14 +47,14 @@ public final class KmpCountOnlyContract {
                 default -> random.nextInt(input.length + 20) - 10;
             };
             List<Integer> expected = oracle(input, pattern, from);
-            M3KmpSearch kmp = new M3KmpSearch(pattern);
+            KmpSearch kmp = new KmpSearch(pattern);
             int start = Math.max(0, from);
             check(kmp.countMatches(input, start, new M3DefaultProgressMonitor()) == expected.size(),
                     "direct count-only KMP vs oracle trial=" + trial);
-            check(M3ByteOccurrences.count(kmp, input, from, null) == expected.size(),
+            check(ByteOccurrences.count(kmp, input, from, null) == expected.size(),
                     "public count dispatch vs oracle trial=" + trial);
             List<Integer> visited = new ArrayList<>();
-            check(M3ByteOccurrences.visit(kmp, input, from, Integer.MAX_VALUE,
+            check(ByteOccurrences.visit(kmp, input, from, Integer.MAX_VALUE,
                     visited::add, null) == expected.size(),
                     "existing visitor count vs oracle trial=" + trial);
             check(visited.equals(expected), "visit order/overlap trial=" + trial);

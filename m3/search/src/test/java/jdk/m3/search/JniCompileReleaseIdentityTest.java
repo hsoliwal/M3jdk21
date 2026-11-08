@@ -22,14 +22,14 @@ import org.junit.jupiter.api.Test;
 final class JniCompileReleaseIdentityTest {
     @Test
     void postCompilationCancellationRetainsExceptionAndASecondCompileSucceeds() {
-        M3JniSearchEngine engine = nativeEngine();
+        JniSearchEngine engine = nativeEngine();
         AtomicInteger checks = new AtomicInteger();
         CancellationException failure = new CancellationException("third native compile checkpoint");
         M3ProgressMonitor monitor = monitor(checks, () -> { throw failure; });
         assertSame(failure, assertThrows(CancellationException.class,
                 () -> engine.compile(new byte[] {42}, monitor)));
         assertEquals(3, checks.get());
-        try (M3CompiledSearch compiled = engine.compile(new byte[] {42})) {
+        try (CompiledSearch compiled = engine.compile(new byte[] {42})) {
             assertNotNull(compiled);
             assertEquals(1, compiled.indexOf(new byte[] {1, 42, 3}, 0));
         }
@@ -37,25 +37,25 @@ final class JniCompileReleaseIdentityTest {
 
     @Test
     void nativePatternFailureWithErrorKeepsThrowableIdentity() {
-        M3JniSearchEngine engine = nativeEngine();
+        JniSearchEngine engine = nativeEngine();
         AtomicInteger checks = new AtomicInteger();
         AssertionError failure = new AssertionError("third checkpoint error");
         assertSame(failure, assertThrows(AssertionError.class,
                 () -> engine.compile(new byte[] {9}, monitor(checks, () -> { throw failure; }))));
         assertEquals(3, checks.get());
-        try (M3CompiledSearch compiled = engine.compile(new byte[] {9})) {
+        try (CompiledSearch compiled = engine.compile(new byte[] {9})) {
             assertEquals(0, compiled.indexOf(new byte[] {9}, 0));
         }
     }
 
-    private static M3JniSearchEngine nativeEngine() {
+    private static JniSearchEngine nativeEngine() {
         String configured = System.getProperty("m3.native.library.path");
         assertNotNull(configured, "real compiled native library is required");
         Path library = Path.of(configured).toAbsolutePath().normalize();
         assertTrue(Files.isRegularFile(library));
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path", library.toString());
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available(), "do not replace actual JNI with a Java fallback");
         return engine;
     }

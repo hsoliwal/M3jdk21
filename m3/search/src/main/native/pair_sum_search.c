@@ -96,7 +96,7 @@ static jlong pair_sum_sorted(const jint *values, jsize length, jlong target) {
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_search_M3PairSumJni_sortedPairNative(
+Java_jdk_m3_search_PairSumJni_sortedPairNative(
         JNIEnv *env, jclass owner, jintArray sorted, jlong target) {
     (void) owner;
     if (sorted == NULL) return (jlong) -1;
@@ -109,7 +109,7 @@ Java_jdk_m3_search_M3PairSumJni_sortedPairNative(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_jdk_m3_search_M3PairSumJni_sortedPairsNative(
+Java_jdk_m3_search_PairSumJni_sortedPairsNative(
         JNIEnv *env, jclass owner, jintArray sorted, jlongArray targets) {
     (void) owner;
     if (sorted == NULL || targets == NULL) return NULL;
@@ -150,7 +150,7 @@ Java_jdk_m3_search_M3PairSumJni_sortedPairsNative(
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_search_M3PairSumJni_unsortedPairNative(
+Java_jdk_m3_search_PairSumJni_unsortedPairNative(
         JNIEnv *env, jclass owner, jintArray values_array, jlong target) {
     (void) owner;
     if (values_array == NULL) {
@@ -180,7 +180,7 @@ Java_jdk_m3_search_M3PairSumJni_unsortedPairNative(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_jdk_m3_search_M3PairSumJni_unsortedPairsNative(
+Java_jdk_m3_search_PairSumJni_unsortedPairsNative(
         JNIEnv *env, jclass owner, jintArray values_array, jlongArray targets_array) {
     (void) owner;
     if (values_array == NULL || targets_array == NULL) {

@@ -29,20 +29,20 @@ class ByteOccurrencesTest {
             for (int i = 0; i < needle.length; i++) needle[i] = (byte) random.nextInt(4);
             int from = random.nextInt(haystack.length + 12) - 6;
             List<Integer> expected = oracle(haystack, needle, from);
-            M3CompiledSearch[] strategies = {
-                    new M3KmpSearch(needle), new M3BoyerMooreHorspoolSearch(needle),
-                    new M3JavaAdaptiveSearchEngine().compile(needle)};
-            for (M3CompiledSearch compiled : strategies) {
+            CompiledSearch[] strategies = {
+                    new KmpSearch(needle), new BoyerMooreHorspoolSearch(needle),
+                    new JavaAdaptiveSearchEngine().compile(needle)};
+            for (CompiledSearch compiled : strategies) {
                 try (compiled) {
                     for (int limit : new int[] {0, 1, 3, Integer.MAX_VALUE}) {
                         List<Integer> actual = new ArrayList<>();
-                        int delivered = M3ByteOccurrences.visit(compiled, haystack, from,
+                        int delivered = ByteOccurrences.visit(compiled, haystack, from,
                                 limit, actual::add, null);
                         List<Integer> prefix = expected.subList(0, Math.min(limit, expected.size()));
                         assertEquals(prefix, actual, "sample=" + sample + " " + compiled.strategy());
                         assertEquals(prefix.size(), delivered);
                     }
-                    assertEquals(expected.size(), M3ByteOccurrences.count(compiled, haystack,
+                    assertEquals(expected.size(), ByteOccurrences.count(compiled, haystack,
                             from, null));
                 }
             }
@@ -52,7 +52,7 @@ class ByteOccurrencesTest {
     @Test
     void pollsCancellationInsideLongKmpScanAndPreservesBorrowedPattern() {
         byte[] haystack = new byte[20_000];
-        try (M3CompiledSearch compiled = new M3KmpSearch(new byte[] {1})) {
+        try (CompiledSearch compiled = new KmpSearch(new byte[] {1})) {
             AtomicInteger polls = new AtomicInteger();
             M3ProgressMonitor cancelDuringScan = new M3ProgressMonitor() {
                 @Override public void beginTask(String name, long total) {}
@@ -68,11 +68,11 @@ class ByteOccurrencesTest {
                 }
             };
             assertThrows(CancellationException.class,
-                    () -> M3ByteOccurrences.count(compiled, haystack, 0, cancelDuringScan));
+                    () -> ByteOccurrences.count(compiled, haystack, 0, cancelDuringScan));
             assertTrue(polls.get() >= 3);
             assertEquals(-1, compiled.indexOf(haystack, 0));
             assertThrows(IllegalArgumentException.class,
-                    () -> M3ByteOccurrences.visit(compiled, haystack, 0, -1, ignored -> {}, null));
+                    () -> ByteOccurrences.visit(compiled, haystack, 0, -1, ignored -> {}, null));
         }
     }
 
@@ -82,11 +82,11 @@ class ByteOccurrencesTest {
         byte[] needle = new byte[256];
         Arrays.fill(haystack, (byte) 'a');
         Arrays.fill(needle, (byte) 'a');
-        try (M3CompiledSearch compiled = new M3JavaAdaptiveSearchEngine().compile(needle)) {
+        try (CompiledSearch compiled = new JavaAdaptiveSearchEngine().compile(needle)) {
             assertEquals("KMP", compiled.strategy());
-            assertEquals(4096 - 256 + 1, M3ByteOccurrences.count(compiled, haystack, 0, null));
+            assertEquals(4096 - 256 + 1, ByteOccurrences.count(compiled, haystack, 0, null));
             List<Integer> first = new ArrayList<>();
-            assertEquals(3, M3ByteOccurrences.visit(compiled, haystack, 0, 3,
+            assertEquals(3, ByteOccurrences.visit(compiled, haystack, 0, 3,
                     first::add, null));
             assertEquals(List.of(0, 1, 2), first);
         }
@@ -114,10 +114,10 @@ class ByteOccurrencesTest {
             direct.position(3).put(haystack).limit(3 + haystack.length).position(3);
             ByteBuffer[] buffers = {heap, heap.asReadOnlyBuffer(), direct,
                     direct.asReadOnlyBuffer()};
-            M3CompiledSearch[] strategies = {
-                    new M3KmpSearch(needle), new M3BoyerMooreHorspoolSearch(needle),
-                    new M3JavaAdaptiveSearchEngine().compile(needle)};
-            for (M3CompiledSearch compiled : strategies) {
+            CompiledSearch[] strategies = {
+                    new KmpSearch(needle), new BoyerMooreHorspoolSearch(needle),
+                    new JavaAdaptiveSearchEngine().compile(needle)};
+            for (CompiledSearch compiled : strategies) {
                 try (compiled) {
                     for (ByteBuffer buffer : buffers) {
                         int position = buffer.position();
@@ -125,7 +125,7 @@ class ByteOccurrencesTest {
                         buffer.mark();
                         for (int maximum : new int[]{0, 1, 3, Integer.MAX_VALUE}) {
                             List<Integer> observed = new ArrayList<>();
-                            int visited = M3ByteOccurrences.visitBuffer(compiled, buffer, from,
+                            int visited = ByteOccurrences.visitBuffer(compiled, buffer, from,
                                     maximum, observed::add, null);
                             List<Integer> prefix = expected.subList(0,
                                     Math.min(maximum, expected.size()));
@@ -137,7 +137,7 @@ class ByteOccurrencesTest {
                             assertEquals(position, buffer.position(), "buffer mark");
                         }
                         assertEquals(expected.size(),
-                                M3ByteOccurrences.countBuffer(compiled, buffer, from, null));
+                                ByteOccurrences.countBuffer(compiled, buffer, from, null));
                         buffer.reset();
                         assertEquals(position, buffer.position(), "buffer count mark");
                     }
@@ -154,18 +154,18 @@ class ByteOccurrencesTest {
         Arrays.fill(needle, (byte) 'a');
         ByteBuffer direct = ByteBuffer.allocateDirect(haystack.length);
         direct.put(haystack).flip();
-        try (M3CompiledSearch kmp = new M3KmpSearch(needle)) {
+        try (CompiledSearch kmp = new KmpSearch(needle)) {
             assertEquals(haystack.length - needle.length + 1,
-                    M3ByteOccurrences.countBuffer(kmp, direct, 0, null));
+                    ByteOccurrences.countBuffer(kmp, direct, 0, null));
             List<Integer> first = new ArrayList<>();
-            assertEquals(4, M3ByteOccurrences.visitBuffer(kmp, direct, 0, 4,
+            assertEquals(4, ByteOccurrences.visitBuffer(kmp, direct, 0, 4,
                     first::add, null));
             assertEquals(List.of(0, 1, 2, 3), first);
             assertThrows(IllegalArgumentException.class,
-                    () -> M3ByteOccurrences.visitBuffer(kmp, direct, 0, -1,
+                    () -> ByteOccurrences.visitBuffer(kmp, direct, 0, -1,
                             ignored -> {}, null));
             assertThrows(NullPointerException.class,
-                    () -> M3ByteOccurrences.countBuffer(kmp, null, 0, null));
+                    () -> ByteOccurrences.countBuffer(kmp, null, 0, null));
         }
         AtomicInteger polls = new AtomicInteger();
         M3ProgressMonitor cancel = new M3ProgressMonitor() {
@@ -181,19 +181,19 @@ class ByteOccurrencesTest {
                 return new M3DefaultProgressMonitor().state();
             }
         };
-        try (M3CompiledSearch kmp = new M3KmpSearch(new byte[] {0, 1})) {
+        try (CompiledSearch kmp = new KmpSearch(new byte[] {0, 1})) {
             assertThrows(CancellationException.class,
-                    () -> M3ByteOccurrences.countBuffer(kmp, direct, 0, cancel));
+                    () -> ByteOccurrences.countBuffer(kmp, direct, 0, cancel));
             assertTrue(polls.get() >= 3);
         }
-        M3CompiledSearch broken = new M3CompiledSearch() {
+        CompiledSearch broken = new CompiledSearch() {
             @Override public int needleLength() { return 1; }
             @Override public String strategy() { return "BROKEN"; }
             @Override public int indexOf(byte[] data, int from) { return -1; }
             @Override public int indexOf(ByteBuffer data, int from) { return 0; }
         };
         assertThrows(IllegalStateException.class,
-                () -> M3ByteOccurrences.visitBuffer(broken, ByteBuffer.wrap(new byte[] {1, 1}),
+                () -> ByteOccurrences.visitBuffer(broken, ByteBuffer.wrap(new byte[] {1, 1}),
                         0, 4, ignored -> {}, null));
     }
 
@@ -211,18 +211,18 @@ class ByteOccurrencesTest {
                 heap.position(4).put(haystack).limit(size + 4).position(4);
                 direct.position(4).put(haystack).limit(size + 4).position(4);
 
-                try (M3CompiledSearch compiled = new M3BoyerMooreHorspoolSearch(needle)) {
+                try (CompiledSearch compiled = new BoyerMooreHorspoolSearch(needle)) {
                     for (ByteBuffer buffer : new ByteBuffer[]{
                             heap, heap.asReadOnlyBuffer(),
                             direct, direct.asReadOnlyBuffer()}) {
                         int position = buffer.position();
                         int limit = buffer.limit();
                         buffer.mark();
-                        assertEquals(count, M3ByteOccurrences.countBuffer(
+                        assertEquals(count, ByteOccurrences.countBuffer(
                                 compiled, buffer, 0, null));
                         List<Integer> first = new ArrayList<>();
                         int capped = Math.min(count, 5);
-                        assertEquals(capped, M3ByteOccurrences.visitBuffer(
+                        assertEquals(capped, ByteOccurrences.visitBuffer(
                                 compiled, buffer, 0, 5, first::add, null));
                         for (int i = 0; i < first.size(); i++)
                             assertEquals(i, first.get(i));
@@ -259,15 +259,15 @@ class ByteOccurrencesTest {
             }
         };
         direct.mark();
-        try (M3CompiledSearch compiled = new M3BoyerMooreHorspoolSearch(needle)) {
+        try (CompiledSearch compiled = new BoyerMooreHorspoolSearch(needle)) {
             assertThrows(CancellationException.class,
-                    () -> M3ByteOccurrences.countBuffer(compiled, direct, 0, monitor));
+                    () -> ByteOccurrences.countBuffer(compiled, direct, 0, monitor));
             assertTrue(polls.get() >= 13);
             assertEquals(0, direct.position());
             direct.reset();
             assertEquals(0, direct.position());
             assertEquals(haystack.length - needle.length + 1,
-                    M3ByteOccurrences.countBuffer(compiled, direct, 0, null),
+                    ByteOccurrences.countBuffer(compiled, direct, 0, null),
                     "a canceled scan must not close or corrupt its borrowed pattern");
         }
     }
@@ -293,10 +293,10 @@ class ByteOccurrencesTest {
             @Override public void setCanceled(boolean value) {}
             @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
         };
-        try (M3CompiledSearch compiled = new M3BoyerMooreHorspoolSearch(needle)) {
+        try (CompiledSearch compiled = new BoyerMooreHorspoolSearch(needle)) {
             // Previous boundary-only implementation polls <6 times here.
             assertThrows(CancellationException.class,
-                    () -> M3ByteOccurrences.countBuffer(compiled, direct, 0, cancellation));
+                    () -> ByteOccurrences.countBuffer(compiled, direct, 0, cancellation));
             assertEquals(6, polls.get());
             assertEquals(0, direct.position());
             direct.reset();

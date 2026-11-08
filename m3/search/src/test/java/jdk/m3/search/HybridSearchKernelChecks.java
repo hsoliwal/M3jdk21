@@ -19,7 +19,7 @@ public final class HybridSearchKernelChecks {
     }
 
     public static void main(String[] args) throws Exception {
-        verifySelector(M3TopKSelector.javaSelector());
+        verifySelector(TopKSelector.javaSelector());
         verifyOptions();
         verifyFusion();
         verifyCache();
@@ -28,7 +28,7 @@ public final class HybridSearchKernelChecks {
                 + "LRU, failure, close and concurrency checks");
     }
 
-    public static void verifySelector(M3TopKSelector selector) throws Exception {
+    public static void verifySelector(TopKSelector selector) throws Exception {
         checkSelection(selector, new int[0], new float[0], Integer.MAX_VALUE);
         checkSelection(selector, new int[] {4}, new float[] {-0.0f}, 1);
         checkSelection(selector, new int[] {9, 2, 2, -7, Integer.MIN_VALUE, Integer.MAX_VALUE},
@@ -78,12 +78,12 @@ public final class HybridSearchKernelChecks {
     }
 
     public static void verifyOptions() throws Exception {
-        M3HybridSearchOptions defaults = M3HybridSearchOptions.defaults(5);
+        HybridSearchOptions defaults = HybridSearchOptions.defaults(5);
         require(defaults.candidateCount(100) == 20, "default expansion");
         require(defaults.candidateCount(2) == 2, "corpus bound");
         require(defaults.candidateCount(0) == 0, "empty corpus");
-        require(new M3HybridSearchOptions(5, 1, 1, 0).candidateCount(100) == 5, "unit expansion");
-        require(new M3HybridSearchOptions(Integer.MAX_VALUE, Integer.MAX_VALUE, 1, 0)
+        require(new HybridSearchOptions(5, 1, 1, 0).candidateCount(100) == 5, "unit expansion");
+        require(new HybridSearchOptions(Integer.MAX_VALUE, Integer.MAX_VALUE, 1, 0)
                 .candidateCount(Integer.MAX_VALUE) == Integer.MAX_VALUE, "wide multiplication");
         Random random = new Random(0xB0D6E7L);
         for (int i = 0; i < 10000; i++) {
@@ -91,15 +91,15 @@ public final class HybridSearchKernelChecks {
             int documents = random.nextInt(Integer.MAX_VALUE);
             int legacy = Math.min(documents,
                     Math.max(limit, Math.min(Integer.MAX_VALUE / 4, limit * 4)));
-            require(M3HybridSearchOptions.defaults(limit).candidateCount(documents) == legacy,
+            require(HybridSearchOptions.defaults(limit).candidateCount(documents) == legacy,
                     "legacy saturation contract");
         }
-        expect(IllegalArgumentException.class, () -> M3HybridSearchOptions.defaults(0));
-        expect(IllegalArgumentException.class, () -> new M3HybridSearchOptions(1, 0, 1, 1));
-        expect(IllegalArgumentException.class, () -> new M3HybridSearchOptions(1, 1, 0, -0.0f));
+        expect(IllegalArgumentException.class, () -> HybridSearchOptions.defaults(0));
+        expect(IllegalArgumentException.class, () -> new HybridSearchOptions(1, 0, 1, 1));
+        expect(IllegalArgumentException.class, () -> new HybridSearchOptions(1, 1, 0, -0.0f));
         for (float invalid : new float[] {-1, Float.NaN, Float.POSITIVE_INFINITY}) {
-            expect(IllegalArgumentException.class, () -> new M3HybridSearchOptions(1, 1, invalid, 1));
-            expect(IllegalArgumentException.class, () -> new M3HybridSearchOptions(1, 1, 1, invalid));
+            expect(IllegalArgumentException.class, () -> new HybridSearchOptions(1, 1, invalid, 1));
+            expect(IllegalArgumentException.class, () -> new HybridSearchOptions(1, 1, 1, invalid));
         }
         expect(IllegalArgumentException.class, () -> defaults.candidateCount(-1));
     }
@@ -111,8 +111,8 @@ public final class HybridSearchKernelChecks {
             int[] vector = random.ints(90, -120, 120).distinct().toArray();
             float lexicalWeight = trial % 5 == 0 ? 0.0f : trial % 3 == 0 ? Float.MAX_VALUE : 1.0f;
             float vectorWeight = trial % 7 == 0 && lexicalWeight != 0.0f ? 0.0f : 0.375f;
-            M3HybridSearchOptions options = new M3HybridSearchOptions(1 + trial % 200, 4, lexicalWeight, vectorWeight);
-            var actual = M3ReciprocalRankFusion.rank(lexical, vector, options, M3TopKSelector.javaSelector());
+            HybridSearchOptions options = new HybridSearchOptions(1 + trial % 200, 4, lexicalWeight, vectorWeight);
+            var actual = ReciprocalRankFusion.rank(lexical, vector, options, TopKSelector.javaSelector());
             java.util.Map<Integer, Float> expected = new java.util.HashMap<>();
             int[][] lanes = {lexical, vector};
             float[] weights = {lexicalWeight, vectorWeight};
@@ -140,38 +140,38 @@ public final class HybridSearchKernelChecks {
 
     public static void verifyCache() throws Exception {
         AtomicInteger loads = new AtomicInteger();
-        try (var cache = new M3PreparationCache<String>(2, 3)) {
-            M3PreparationCache.Loader<String> loader = key -> key + loads.incrementAndGet();
+        try (var cache = new PreparationCache<String>(2, 3)) {
+            PreparationCache.Loader<String> loader = key -> key + loads.incrementAndGet();
             String a = cache.get("a", loader);
             cache.get("b", loader);
             require(cache.get("a", loader) == a, "hit identity");
             cache.get("c", loader);
             require(cache.get("a", loader) == a, "access-order eviction");
             cache.get("b", loader);
-            require(cache.stats().equals(new M3QueryPreparationStats(2, 4, 2, 2)), "LRU stats");
+            require(cache.stats().equals(new QueryPreparationStats(2, 4, 2, 2)), "LRU stats");
             cache.get("oversized", loader);
             cache.get("oversized", loader);
             require(cache.stats().entries() == 2 && loads.get() == 6, "oversized bypass");
         }
-        try (var disabled = new M3PreparationCache<String>(0, 10)) {
+        try (var disabled = new PreparationCache<String>(0, 10)) {
             disabled.get("a", key -> "first");
             require(disabled.get("a", key -> "second").equals("second"), "disabled cache");
             require(disabled.stats().entries() == 0, "zero retention");
         }
-        try (var failures = new M3PreparationCache<String>(2, 5)) {
+        try (var failures = new PreparationCache<String>(2, 5)) {
             expect(IOException.class, () -> failures.get("bad", key -> { throw new IOException("expected"); }));
             expect(NullPointerException.class, () -> failures.get("bad", key -> null));
             require(failures.stats().entries() == 0, "failed value not retained");
             require(failures.get("bad", key -> "recovered").equals("recovered"), "retry succeeds");
         }
-        expect(IllegalArgumentException.class, () -> new M3PreparationCache<String>(-1, 2));
-        expect(IllegalArgumentException.class, () -> new M3PreparationCache<String>(1, -2));
+        expect(IllegalArgumentException.class, () -> new PreparationCache<String>(-1, 2));
+        expect(IllegalArgumentException.class, () -> new PreparationCache<String>(1, -2));
         verifyConcurrentPublication();
         verifyCloseDuringPreparation();
     }
 
     private static void verifyConcurrentPublication() throws Exception {
-        try (var cache = new M3PreparationCache<Object>(2, 10);
+        try (var cache = new PreparationCache<Object>(2, 10);
                 var executor = Executors.newFixedThreadPool(8)) {
             CountDownLatch started = new CountDownLatch(8);
             CountDownLatch release = new CountDownLatch(1);
@@ -194,7 +194,7 @@ public final class HybridSearchKernelChecks {
     }
 
     private static void verifyCloseDuringPreparation() throws Exception {
-        M3PreparationCache<Object> cache = new M3PreparationCache<>(1, 10);
+        PreparationCache<Object> cache = new PreparationCache<>(1, 10);
         try (var executor = Executors.newSingleThreadExecutor()) {
             CountDownLatch started = new CountDownLatch(1);
             CountDownLatch release = new CountDownLatch(1);
@@ -222,7 +222,7 @@ public final class HybridSearchKernelChecks {
         }
     }
 
-    private static void checkSelection(M3TopKSelector selector, int[] ids, float[] scores, int limit) {
+    private static void checkSelection(TopKSelector selector, int[] ids, float[] scores, int limit) {
         int[] originalIds = ids.clone();
         float[] originalScores = scores.clone();
         int[] expected = IntStream.range(0, ids.length).boxed()

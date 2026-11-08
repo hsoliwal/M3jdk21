@@ -34,7 +34,7 @@ final class KmpByteBufferAbsoluteParityTest {
                 System.arraycopy(pattern, 0, text,
                         random.nextInt(length - pattern.length + 1), pattern.length);
             }
-            try (M3CompiledSearch search = new M3KmpSearch(pattern)) {
+            try (CompiledSearch search = new KmpSearch(pattern)) {
                 assertEquals("KMP", search.strategy());
                 for (boolean direct : new boolean[] {false, true}) {
                     ByteBuffer original = direct
@@ -70,7 +70,7 @@ final class KmpByteBufferAbsoluteParityTest {
     void periodicOverlapsAndBoundsRetainOriginalKmpIndexPolicy() {
         byte[] text = {1, 2, 1, 2, 1, 2, 1, 2, 1};
         byte[] pattern = {1, 2, 1};
-        try (M3CompiledSearch search = new M3KmpSearch(pattern)) {
+        try (CompiledSearch search = new KmpSearch(pattern)) {
             for (ByteBuffer view : new ByteBuffer[] {
                     ByteBuffer.wrap(text), ByteBuffer.wrap(text).asReadOnlyBuffer()}) {
                 assertEquals(0, search.indexOf(view, Integer.MIN_VALUE));
@@ -86,7 +86,7 @@ final class KmpByteBufferAbsoluteParityTest {
     @Test
     void immutableCompiledPatternKeepsOriginalSnapshotAndNullPolicy() {
         byte[] needle = {0, -1, 0};
-        try (M3CompiledSearch compiled = new M3KmpSearch(needle)) {
+        try (CompiledSearch compiled = new KmpSearch(needle)) {
             Arrays.fill(needle, (byte) 9);
             ByteBuffer source = ByteBuffer.allocateDirect(8);
             source.put(2, (byte) 0);
@@ -103,7 +103,7 @@ final class KmpByteBufferAbsoluteParityTest {
             assertThrows(NullPointerException.class,
                     () -> compiled.lastIndexOf((ByteBuffer) null, 0));
         }
-        assertThrows(IllegalArgumentException.class, () -> new M3KmpSearch(new byte[0]));
+        assertThrows(IllegalArgumentException.class, () -> new KmpSearch(new byte[0]));
     }
 
     private static int firstOracle(byte[] text, byte[] needle, int from) {

@@ -36,15 +36,15 @@ public final class JavaOverlapDiagnostic {
             byte[] needle = periodic(1 + random.nextInt(96), period);
             byte[] haystack = periodic(random.nextInt(400), period);
             if (haystack.length > 0 && (sample & 1) == 0) haystack[random.nextInt(haystack.length)] = -1;
-            for (M3CompiledSearch compiled : new M3CompiledSearch[] {
-                    new M3KmpSearch(needle), new M3BoyerMooreHorspoolSearch(needle),
-                    new M3JavaAdaptiveSearchEngine().compile(needle)}) {
+            for (CompiledSearch compiled : new CompiledSearch[] {
+                    new KmpSearch(needle), new BoyerMooreHorspoolSearch(needle),
+                    new JavaAdaptiveSearchEngine().compile(needle)}) {
                 try (compiled) {
                     for (int from : new int[] {-5, 0, 1, haystack.length / 2, Integer.MAX_VALUE}) {
                         List<Integer> expected = oracle(haystack, needle, from);
                         List<Integer> observed = new ArrayList<>();
-                        int delivered = M3ByteOccurrences.visit(compiled, haystack, from, Integer.MAX_VALUE, observed::add, null);
-                        int count = M3ByteOccurrences.count(compiled, haystack, from, null);
+                        int delivered = ByteOccurrences.visit(compiled, haystack, from, Integer.MAX_VALUE, observed::add, null);
+                        int count = ByteOccurrences.count(compiled, haystack, from, null);
                         if (!expected.equals(observed) || count != expected.size() || delivered != count) {
                             throw new AssertionError("oracle mismatch " + sample + " " + compiled.strategy());
                         }
@@ -95,39 +95,39 @@ public final class JavaOverlapDiagnostic {
                 }
             }
             for (int iteration = 0; iteration < 100; iteration++) {
-                try (M3CompiledSearch pattern = new M3JavaAdaptiveSearchEngine().compile(needle)) {
+                try (CompiledSearch pattern = new JavaAdaptiveSearchEngine().compile(needle)) {
                     sink += pattern.needleLength();
-                    if (iteration < 12) sink += M3ByteOccurrences.count(pattern, haystack, 0, null);
+                    if (iteration < 12) sink += ByteOccurrences.count(pattern, haystack, 0, null);
                 }
             }
             int coldIterations = 200;
             long allocated = allocated(allocation, thread);
             long start = System.nanoTime();
             for (int iteration = 0; iteration < coldIterations; iteration++) {
-                try (M3CompiledSearch pattern = new M3JavaAdaptiveSearchEngine().compile(needle)) { sink += pattern.needleLength(); }
+                try (CompiledSearch pattern = new JavaAdaptiveSearchEngine().compile(needle)) { sink += pattern.needleLength(); }
             }
             emit(label, "cold-compile", coldIterations, System.nanoTime() - start, delta(allocation, thread, allocated), needle.length, haystack.length);
-            M3CompiledSearch[] cold = new M3CompiledSearch[12];
-            for (int index = 0; index < cold.length; index++) cold[index] = new M3JavaAdaptiveSearchEngine().compile(needle);
+            CompiledSearch[] cold = new CompiledSearch[12];
+            for (int index = 0; index < cold.length; index++) cold[index] = new JavaAdaptiveSearchEngine().compile(needle);
             allocated = allocated(allocation, thread);
             start = System.nanoTime();
-            for (M3CompiledSearch pattern : cold) sink += M3ByteOccurrences.count(pattern, haystack, 0, null);
+            for (CompiledSearch pattern : cold) sink += ByteOccurrences.count(pattern, haystack, 0, null);
             emit(label, "first-overlap", cold.length, System.nanoTime() - start, delta(allocation, thread, allocated), needle.length, haystack.length);
-            for (M3CompiledSearch pattern : cold) pattern.close();
-            try (M3CompiledSearch pattern = new M3JavaAdaptiveSearchEngine().compile(needle)) {
-                for (int iteration = 0; iteration < 12; iteration++) sink += M3ByteOccurrences.count(pattern, haystack, 0, null);
+            for (CompiledSearch pattern : cold) pattern.close();
+            try (CompiledSearch pattern = new JavaAdaptiveSearchEngine().compile(needle)) {
+                for (int iteration = 0; iteration < 12; iteration++) sink += ByteOccurrences.count(pattern, haystack, 0, null);
                 int repetitions = 30;
                 allocated = allocated(allocation, thread);
                 start = System.nanoTime();
-                for (int iteration = 0; iteration < repetitions; iteration++) sink += M3ByteOccurrences.count(pattern, haystack, 0, null);
+                for (int iteration = 0; iteration < repetitions; iteration++) sink += ByteOccurrences.count(pattern, haystack, 0, null);
                 emit(label, "warm-overlap", repetitions, System.nanoTime() - start, delta(allocation, thread, allocated), needle.length, haystack.length);
             }
-            try (M3CompiledSearch pattern = new M3JavaAdaptiveSearchEngine().compile(needle)) {
-                for (int iteration = 0; iteration < 200; iteration++) sink += M3ByteOccurrences.visit(pattern, haystack, 0, 1, DISCARD, null);
+            try (CompiledSearch pattern = new JavaAdaptiveSearchEngine().compile(needle)) {
+                for (int iteration = 0; iteration < 200; iteration++) sink += ByteOccurrences.visit(pattern, haystack, 0, 1, DISCARD, null);
                 int repetitions = 200;
                 allocated = allocated(allocation, thread);
                 start = System.nanoTime();
-                for (int iteration = 0; iteration < repetitions; iteration++) sink += M3ByteOccurrences.visit(pattern, haystack, 0, 1, DISCARD, null);
+                for (int iteration = 0; iteration < repetitions; iteration++) sink += ByteOccurrences.visit(pattern, haystack, 0, 1, DISCARD, null);
                 emit(label, "one-match-limit", repetitions, System.nanoTime() - start, delta(allocation, thread, allocated), needle.length, haystack.length);
             }
         }

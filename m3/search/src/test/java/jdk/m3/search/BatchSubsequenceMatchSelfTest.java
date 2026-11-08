@@ -54,7 +54,7 @@ public final class BatchSubsequenceMatchSelfTest {
 
     private static void compare(String source, String[] words) {
         long expected = oracle(source, words);
-        long observed = M3BatchSubsequenceMatch.count(source, words);
+        long observed = BatchSubsequenceMatch.count(source, words);
         check(expected == observed, "Java oracle case=" + cases);
         if (nativeMode) {
             char[] src = source.toCharArray();
@@ -63,7 +63,7 @@ public final class BatchSubsequenceMatchSelfTest {
             char[] srcBefore = src.clone();
             char[] dataBefore = data.clone();
             int[] endsBefore = ends.clone();
-            long actual = M3BatchSubsequenceMatch.countNative(src, data, ends);
+            long actual = BatchSubsequenceMatch.countNative(src, data, ends);
             check(expected == actual, "JNI oracle case=" + cases);
             check(Arrays.equals(src, srcBefore) && Arrays.equals(data, dataBefore)
                     && Arrays.equals(ends, endsBefore), "JNI inputs changed");
@@ -75,54 +75,54 @@ public final class BatchSubsequenceMatchSelfTest {
 
     private static void rejectsJava() {
         boolean fail = false;
-        try { M3BatchSubsequenceMatch.count(null, new String[0]); }
+        try { BatchSubsequenceMatch.count(null, new String[0]); }
         catch (NullPointerException expected) { fail = true; }
         check(fail, "Java null source");
         fail = false;
-        try { M3BatchSubsequenceMatch.count("abc", null); }
+        try { BatchSubsequenceMatch.count("abc", null); }
         catch (NullPointerException expected) { fail = true; }
         check(fail, "Java null array");
         fail = false;
-        try { M3BatchSubsequenceMatch.count("abc", new String[]{"a", null}); }
+        try { BatchSubsequenceMatch.count("abc", new String[]{"a", null}); }
         catch (NullPointerException expected) { fail = true; }
         check(fail, "Java null entry");
         fail = false;
-        try { M3BatchSubsequenceMatch.count("a".repeat(1_000_001), new String[]{""}); }
+        try { BatchSubsequenceMatch.count("a".repeat(1_000_001), new String[]{""}); }
         catch (IllegalArgumentException expected) { fail = true; }
         check(fail, "Java source cap");
         fail = false;
-        try { M3BatchSubsequenceMatch.count("", new String[65_537]); }
+        try { BatchSubsequenceMatch.count("", new String[65_537]); }
         catch (IllegalArgumentException expected) { fail = true; }
         check(fail, "Java count cap");
         fail = false;
-        try { M3BatchSubsequenceMatch.count("", new String[]{"a".repeat(1_000_001)}); }
+        try { BatchSubsequenceMatch.count("", new String[]{"a".repeat(1_000_001)}); }
         catch (IllegalArgumentException expected) { fail = true; }
         check(fail, "Java total cap");
     }
 
     private static void rejectsNative() {
         boolean fail = false;
-        try { M3BatchSubsequenceMatch.countNative(null, new char[0], new int[]{0}); }
+        try { BatchSubsequenceMatch.countNative(null, new char[0], new int[]{0}); }
         catch (NullPointerException expected) { fail = true; }
         check(fail, "JNI null");
         fail = false;
-        try { M3BatchSubsequenceMatch.countNative(new char[0], new char[0], new int[0]); }
+        try { BatchSubsequenceMatch.countNative(new char[0], new char[0], new int[0]); }
         catch (IllegalArgumentException expected) { fail = true; }
         check(fail, "JNI no offsets");
         fail = false;
-        try { M3BatchSubsequenceMatch.countNative(new char[0], new char[2], new int[]{0, 1}); }
+        try { BatchSubsequenceMatch.countNative(new char[0], new char[2], new int[]{0, 1}); }
         catch (IllegalArgumentException expected) { fail = true; }
         check(fail, "JNI final mismatch");
         fail = false;
-        try { M3BatchSubsequenceMatch.countNative(new char[0], new char[2], new int[]{0, 2, 1, 2}); }
+        try { BatchSubsequenceMatch.countNative(new char[0], new char[2], new int[]{0, 2, 1, 2}); }
         catch (IllegalArgumentException expected) { fail = true; }
         check(fail, "JNI nonmonotone offsets");
         fail = false;
-        try { M3BatchSubsequenceMatch.countNative(new char[1_000_001], new char[0], new int[]{0}); }
+        try { BatchSubsequenceMatch.countNative(new char[1_000_001], new char[0], new int[]{0}); }
         catch (IllegalArgumentException expected) { fail = true; }
         check(fail, "JNI source cap");
         fail = false;
-        try { M3BatchSubsequenceMatch.countNative(new char[0], new char[0], new int[65_538]); }
+        try { BatchSubsequenceMatch.countNative(new char[0], new char[0], new int[65_538]); }
         catch (IllegalArgumentException expected) { fail = true; }
         check(fail, "JNI count cap");
     }
@@ -145,10 +145,10 @@ public final class BatchSubsequenceMatchSelfTest {
                         String[] patterns = {"a", "aaa", "bcd", "bbbc", "", "", "z",
                                 i % 2 == 0 ? "abc" : "cba", "aa"};
                         long expected = oracle(source, patterns);
-                        if (M3BatchSubsequenceMatch.count(source, patterns) != expected) {
+                        if (BatchSubsequenceMatch.count(source, patterns) != expected) {
                             throw new AssertionError("concurrent Java divergence");
                         }
-                        if (nativeMode && M3BatchSubsequenceMatch.countNative(source.toCharArray(),
+                        if (nativeMode && BatchSubsequenceMatch.countNative(source.toCharArray(),
                                 packed(patterns), offsets(patterns)) != expected) {
                             throw new AssertionError("concurrent JNI divergence");
                         }
