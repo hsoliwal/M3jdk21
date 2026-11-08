@@ -219,6 +219,7 @@ def main() -> int:
             for old_name, new_name in renames.items():
                 body = re.sub(rb"(?<![\w.])" + re.escape(old_name.encode()) + rb"\s*\(", new_name.encode() + b"(", body)
             name = renames.get(member["name"], member["name"])
+            selector = refs(m, member["selector"]) if member["selector"] is not None else None  # type maps apply to the signature too
             for ekey, pin, old, new in m["EDIT"]:
                 if ekey not in (key, key + "(" + (member["selector"] or "") + ")"):
                     continue
@@ -228,8 +229,8 @@ def main() -> int:
                 body = body.replace(o, new.encode())
             body = refs(m, body.decode("utf-8")).encode("utf-8")
             digest = hashlib.sha256(re.sub(rb"\s+", b" ", body)).hexdigest()[:12]
-            if (name, member["selector"]) in present:
-                if present[(name, member["selector"])] != digest:
+            if (name, selector) in present:
+                if present[(name, selector)] != digest:
                     conflicts.append(f"REFUSE CONFLICT {key}({member['selector']}): the owner declares this member with a different body; declare SKIP or an EDIT")
                     continue
                 table.append((key, member["selector"], "PRESENT"))
@@ -238,11 +239,11 @@ def main() -> int:
                 table.append((key, member["selector"], "DUPLICATE of " + seen[digest]))
                 continue
             seen[digest] = key
-            present[(name, member["selector"])] = digest
+            present[(name, selector)] = digest
             anchor = (f"    //FLLDCIM: FOLD - member {key} from donor blob {blob[:12]} ({donor_rel}); recipe "
                       f"m3/tooling/jdk-naming/fold_members.py v1, map {MAP.relative_to(ROOT).as_posix()}\n").encode()
             folded.append(anchor + body + (b"" if body.endswith(b"\n") else b"\n"))
-            table.append((key, member["selector"], "FOLD" if name == member["name"] else "FOLD as " + name))
+            table.append((key, selector, "FOLD" if name == member["name"] else "FOLD as " + name))
     if conflicts:
         print("\n".join(conflicts))
         sys.exit(2)
@@ -289,7 +290,7 @@ def main() -> int:
         print("MEMBER\t" + "\t".join("" if c is None else str(c) for c in row))
     for c in changed:
         print("CHANGED\t" + c)
-    print(f"FOLD_MEMBERS v1.5 owner={m['OWNER']} folded={sum(1 for r in table if r[2] == 'FOLD')} changed={len(changed)} check={CHECK}")
+    print(f"FOLD_MEMBERS v1.5 owner={m['OWNER']} folded={sum(1 for r in table if r[2].startswith('FOLD'))} changed={len(changed)} check={CHECK}")
     return 1 if CHECK and changed else 0
 
 
