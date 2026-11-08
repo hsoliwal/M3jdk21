@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK 21 release preparation
 
-[Release preparation: names and tests](RELEASE_PREPARATION.md) · [Visible release queue](queue/README.md) · [Release contract](release-contract.json) · [Naming, documentation and coverage](NAMING_DOCUMENTATION_COVERAGE.md) · [Fixed-point refusal evidence](NAMING_FIXED_POINT_EVIDENCE.md) · [Candidate notes](RELEASE_NOTES.md) · [Checklist](RELEASE_CHECKLIST.md) · [Candidate checklist #2756](RELEASE_CHECKLIST_CANDIDATE_2756.md)
+[Release preparation: names and tests](RELEASE_PREPARATION.md) · [Visible release queue](queue/README.md) · [Release contract](release-contract.json) · [Naming, documentation and coverage](NAMING_DOCUMENTATION_COVERAGE.md) · [Fixed-point refusal evidence](NAMING_FIXED_POINT_EVIDENCE.md) · [Candidate notes](RELEASE_NOTES.md) · [Historical checklist](RELEASE_CHECKLIST.md) · [Current candidate checklist](RELEASE_CHECKLIST_CANDIDATE_2756.md)
 
 M3JDK21 is one integrated Java/HotSpot/JNI SDK. Release claims require evidence
 for the exact candidate commit and tree. A naming pass, finite component test,
@@ -67,16 +67,17 @@ Current implementations and pending claims are evaluated independently.
 
 ## Release names and naming gate scope
 
-The product name is **M3JDK21**. The tag workflow accepts
-`m3jdk-<Java-version>-m3.<revision>[-<qualifier>]` and checks the Java version
-against `make/conf/version-numbers`. Use the same tag in the release title,
+The machine product name is **M3JDK21**; the display name is **M3JDK 21**.
+The current preview tag is `m3jdk-21.0.14-m3.1-preview`, as specified by
+`release-contract.json` and checked against `make/conf/version-numbers.conf`.
+Use the same tag in the release title,
 archive names and evidence pack. A preview qualifier describes release maturity;
 it does not qualify an implementation or satisfy a test gate.
 
 | Surface | Naming rule | Evidence required before release |
 | --- | --- | --- |
 | Standard Java API | Preserve `java.*`, `javax.*` and the actual owning JDK module; preserve JVM/JNI descriptors | API/binary and behavioral checks on the candidate image |
-| Additive public M3 companion | Use an explicitly admitted `com.m3.*` owner and public module export | Exact source hashes, matching package/path/type and module ownership, plus independent compatibility review |
+| Additive public M3 companion | Preserve the source-declared `jdk.m3.*` owner and separately reviewed public module export | Exact source hashes, matching package/path/type and module ownership, plus independent compatibility review |
 | Internal M3 implementation | Keep the existing mapped internal owner and visibility | Canonical map and exact source declaration checks; internal implementation is not a public replacement API |
 | Compatibility alias | Preserve the existing `toAdpater` spelling where the compatibility contract requires it | Caller and behavioral regression checks before any future deprecation |
 | Migration queue | Keep stable mapping IDs, lineage and `QUEUED` state until the required proofs exist | Exact `name-mapping.json` Git blob in `name-plan.json`; no status promotion from test counts |
@@ -136,7 +137,7 @@ is not included. Preserve statement and branch totals, missing lines and test
 failures, rather than quoting a percentage without its denominator. Run the
 complete naming suite above independently: a scoped coverage measurement cannot
 replace its current-authority and source-successor regressions. No percentage
-here is a release threshold or a performance claim. The ten mandatory gates in
+here is a release threshold or a performance claim. The eleven mandatory gates in
 `release-contract.json` still require current execution receipts, including the
 OpenJDK platform matrix and the relevant String/JNI contracts.
 
@@ -196,8 +197,9 @@ seal cache keys by owner/snapshot/options/version, and test invalidation/corrupt
 
 ## Release immutability
 
-Before the first public tag, unreleased history may be consolidated while preserving the current
-tree and upstream ancestry. Once a release/tag is published, that released history is immutable.
+The existing single-fork-commit history requirement remains an explicit release gate.
+Resolve any incompatible ancestry through separate reviewed policy; this preparation does not
+consolidate, backdate or rewrite source history. Published release history and tags are immutable.
 Subsequent work starts after the release.
 
 See:
@@ -301,7 +303,7 @@ python3 m3/release/verify_release_admission.py --root . --release \
 ```
 
 `policy_valid` describes static policy checks. `release_ready` also requires a
-clean exact source, all ten mandatory execution receipts, no blocking custody
+clean exact source, all eleven mandatory execution receipts, no blocking custody
 or dependency items, and the existing history gate. A development-policy pass
 is insufficient. Missing, duplicate, stale, failed or malformed receipts keep
 release admission on HOLD.
@@ -338,9 +340,12 @@ heap, native/RSS, GC, startup, cold/warm and variance evidence. See
 The workflow exports the existing canonical `name-census.tsv`, retained-source
 TSV and source summary as review artifacts, including on failure. They describe
 exact paths/blobs and do not authorize a rename or archived-source promotion.
-`retained_source_queue.py` compares retained variants to their original paths in
-Git HEAD; unresolved absent, divergent or mode-changing rows require current
-owner and contract review. Release branches retain its strict refusal.
+`retained_source_queue.py` resolves Git HEAD once and compares retained variants
+to their original paths using that same immutable commit for both tree reads.
+A later branch movement does not change the census or its recorded source.
+Unresolved absent, divergent or mode-changing rows require current owner and
+contract review. Release branches retain its strict refusal; exact path/blob
+equality alone does not qualify behavior, history or runtime admission.
 
 Resolve source loss or conflicts through the existing canonical Synexia recipe,
 then receive and test its sealed postimage. Keep active and historical source,
@@ -352,5 +357,5 @@ Preparation is append-only. The contract's historical
 `single_fork_commit_required: true` requirement remains unchanged; a candidate
 that does not satisfy it stays on HOLD. This preparation does not delete/rebuild
 a branch, backdate authorship, rewrite ancestry or bypass the gate. Published
-release history remains immutable. See the [checklist](RELEASE_CHECKLIST.md) for
+release history remains immutable. See the [current candidate checklist](RELEASE_CHECKLIST_CANDIDATE_2756.md) for
 the evidence required before a tag or release can be admitted.

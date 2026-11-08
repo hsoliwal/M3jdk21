@@ -69,8 +69,11 @@ def read_jacoco(report: Path) -> dict:
                     if min(covered, missed) < 0:
                         raise ValueError("invalid JaCoCo count: " + str(key))
                     counters[kind] = (covered, missed)
-            if "LINE" not in counters or "BRANCH" not in counters:
-                raise ValueError("line/branch counter absent: " + str(key))
+            if "LINE" not in counters:
+                raise ValueError("line counter absent: " + str(key))
+            # JaCoCo omits zero-total counters; branchless methods still need
+            # an explicit inventory explanation before their receipt is built.
+            counters.setdefault("BRANCH", (0, 0))
             by_method[key] = counters
     if not by_method:
         raise ValueError("JaCoCo report has no measured methods")

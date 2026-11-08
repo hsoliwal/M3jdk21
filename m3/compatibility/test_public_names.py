@@ -148,9 +148,14 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_new_donor_imports_in_jdk_owner_refused(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
-        self.assertTrue(self.issue(
-            path, "package java.util;\nimport jdk.internal.m3.indexstring.MIndexString;\n"
-                  "class CollectionViews {}"))
+        # Historical donor facts and the current refused receiver are separate cases.
+        for parts in (("com", "synexia", "indexstring"),
+                      ("jdk", "internal", "m3", "indexstring")):
+            with self.subTest(namespace=parts):
+                donor = ".".join((*parts, "MIndexString"))
+                self.assertTrue(self.issue(
+                    path, f"package java.util;\nimport {donor};\n"
+                          "class CollectionViews {}"))
         self.assertTrue(self.issue(
             path, "package java.util;\nimport org.eclipse.collections.api.list.MutableList;\n"
                   "class CollectionViews {}"))
@@ -165,7 +170,8 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_lexical_guard_ignores_comments_and_text_blocks(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
-        program = ('package java.util;\n// import jdk.internal.m3.X;\n'
+        donor = ".".join(("com", "synexia", "X"))
+        program = (f'package java.util;\n// import {donor};\n'
                    '/* org.eclipse.collections.Y */\n'
                    'class CollectionViews { String s = """\n'
                    'com.google.common.collect.ImmutableList\n"""; }\n')
@@ -173,7 +179,8 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_old_only_reference_grandfathered_and_new_reference_rejected(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
-        old = "package java.util;\nimport jdk.m3.text.M3String;\nclass CollectionViews {}\n"
+        donor = ".".join(("com", "m3", "text", "M3String"))
+        old = f"package java.util;\nimport {donor};\n" "class CollectionViews {}\n"
         self.assertFalse(GATE.problems(GATE.Change("M", path), old, old))
         self.assertTrue(GATE.problems(
             GATE.Change("M", path), old + "\nimport org.springframework.context.X;", old))

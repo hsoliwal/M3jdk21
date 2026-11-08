@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'm3/file/**'
+      - 'm3/arrays/**'
+      - 'm3/collections/**'
       - '.github/workflows/m3-file-shadow-stream-20261020.yml'
   workflow_dispatch:
 permissions:
@@ -20,16 +22,26 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
+      - name: Verify source-bound file workflow wiring
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash -n m3/file/compile-dependencies.sh
+          python3 -m py_compile m3/file/verify.py m3/file/test_workflow_wiring.py
+          python3 -m unittest discover -s m3/file -p test_workflow_wiring.py -v
       - name: Qualify existing original M3File contracts on host and linked Java21 image
         shell: bash
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/m3-file-shadow-module-contracts"
-          python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$out"
+          deps="$RUNNER_TEMP/m3-file-shadow-dependencies"
+          bash m3/file/compile-dependencies.sh "$JAVA_HOME" "$deps"
+          python3 m3/file/verify.py --java-home "$JAVA_HOME" --module-path "$deps" --output "$out"
           python3 - "$out/receipt.json" <<'PY'
           import json
           from pathlib import Path
@@ -52,6 +64,7 @@ jobs:
           shared = {
               "M3BuildImpactPlanContract", "M3FileBuildImpactContract",
               "M3FileDeltaContractSelfTest", "M3FileDeltaLedgerContract",
+              "M3FileChangeMapBinarySearchProof",
               "M3FileEditBatchContract", "M3FileEditFramesContract",
               "M3FileMoveCandidatesContract", "M3FileObservationContract",
               "M3FileRangeContract", "M3FileSourceContract", "M3FileStreamsContract",
@@ -60,38 +73,52 @@ jobs:
               "M3ResourceLocksTimedContract", "M3ShadowStreamsContract",
           }
           host_only = {"M3FileDeltaSelfTest"}
-          if set(image) != shared or set(host) != shared | host_only:
+          bounded = {"M3ChunkDeltaWorkspaceProbe:script", "M3ChunkDeltaWorkspaceProbe:distance"}
+          if set(image) != shared | bounded or set(host) != shared | bounded | host_only:
               raise SystemExit("M3_FILE_SHADOW_EXACT_HOST_IMAGE_CENSUS_MISMATCH")
           expected_inventory = {
-              "source_count": 19,
+              "source_count": 45,
               "host_and_image": sorted(shared),
               "host_javac_only": sorted(host_only),
-              "maven_junit_separate_gate": ["M3FileDeltaTest"],
+              "bounded_probe_host_and_image": ["M3ChunkDeltaWorkspaceProbe"],
+              "fixtures_no_entrypoint": sorted({
+                  "InMemoryPageableTree", "PageableTreePaths", "PageableTreeSession",
+                  "PageableTreeSource", "PageableTreeWalker", "StaleTreeCursorException",
+                  "TreeCursor", "TreeNode", "TreePage", "TreePageRequest",
+                  "TreeProgressMonitor", "VisibleTreeWindow",
+              }),
+              "maven_junit_separate_gate": sorted({
+                  "M3ChunkDeltaGeneratorContractTest", "M3ContentExtentTest",
+                  "M3DurableExtentStoreOracleTest", "M3DurableExtentStoreTest",
+                  "M3FileCensus3Test", "M3FileDeltaTest", "M3FileEncodedEditsContract",
+                  "M3FileRetainedContractsTest", "M3FileScopeTest", "M3FileTextCoordinatesContract",
+                  "M3GrammarContract", "M3GrammarTest", "M3PageableTreeDonorDifferentialTest",
+              }),
           }
           if receipt.get("contract_inventory") != expected_inventory:
               raise SystemExit("M3_FILE_SHADOW_CONTRACT_ROLE_INVENTORY_MISMATCH")
           expected = {
               "M3FileStreamsContract": "M3_FILE_SHADOW_STREAM_PASS",
               "M3ShadowStreamsContract": "M3_SHADOW_STREAM_PASS",
+              "M3FileChangeMapBinarySearchProof": "M3_FILE_CHANGEMAP_LOWER_BOUND_V1",
+              "M3ChunkDeltaWorkspaceProbe:script": "PASS script 5000x5000",
+              "M3ChunkDeltaWorkspaceProbe:distance": "PASS distance 5000x5000",
           }
           for name, marker in expected.items():
               if marker not in host.get(name, "") or marker not in image.get(name, ""):
                   raise SystemExit("M3_FILE_SHADOW_CONTRACT_NOT_EXECUTED: " + name)
           if receipt.get("full_m3jdk21_bootstrap") != "NOT_RUN":
               raise SystemExit("M3_FILE_SHADOW_SCOPE_MARKER_CHANGED")
-          print("M3_FILE_SHADOW_HOST_LINKED_IMAGE_PASS host_contracts=18 image_contracts=17 sources=19")
+          if receipt.get("maven_fork_execution") != "SEPARATE_GATE":
+              raise SystemExit("M3_FILE_SHADOW_MAVEN_GATE_CHANGED")
+          print("M3_FILE_SHADOW_HOST_LINKED_IMAGE_PASS host_contracts=21 image_contracts=20 sources=45")
           PY
-      - name: Strict Java21 original M3File plus bounded shadow contracts
+      - name: Interpreted original M3File shadow contract using the verified module
         shell: bash
         run: |
           set -euo pipefail
-          out="$RUNNER_TEMP/m3-shadow-file"
-          mkdir -p "$out"
-          javac --release 21 -proc:none -Xlint:all -Werror -d "$out" \
-            m3/file/src/main/java/jdk/m3/file/M3NioFile.java \
-            m3/file/src/main/java/jdk/m3/file/M3FileStreams.java \
-            m3/file/src/main/java/jdk/m3/file/M3StreamProgress.java \
-            m3/file/src/main/java/jdk/m3/file/M3ShadowStreams.java \
-            m3/file/src/test/java/jdk/m3/file/M3FileStreamsContract.java
-          java -cp "$out" jdk.m3.file.M3FileStreamsContract
-          java -Xint -cp "$out" jdk.m3.file.M3FileStreamsContract
+          out="$RUNNER_TEMP/m3-file-shadow-module-contracts"
+          deps="$RUNNER_TEMP/m3-file-shadow-dependencies"
+          java -Xint --module-path "$out/m3-file.jar:$deps" \
+            --patch-module org.m3jdk.file="$out/module-tests" \
+            -m org.m3jdk.file/jdk.m3.file.M3FileStreamsContract

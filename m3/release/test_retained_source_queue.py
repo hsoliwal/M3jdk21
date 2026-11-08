@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("retained_source_queue", HERE / "retained_source_queue.py")
@@ -72,6 +73,38 @@ class RetainedSourceQueueTest(unittest.TestCase):
         before = QUEUE.scan(self.root)
         put(self.root, "src/java.base/share/classes/java/lang/Missing.java", "missing\n")
         self.assertEqual(before, QUEUE.scan(self.root))
+
+    def test_census_keeps_one_commit_when_head_advances(self):
+        before = QUEUE.scan(self.root)
+        original_head = before[2]["tree_head"]
+        put(self.root, "m3/tools/Evolved.java", "original\n")
+        self.archive("2084", "src/java.base/share/classes/java/lang/Missing.java", "revised\n")
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-qm", "advance both active and archived trees")
+        real_git = QUEUE.git
+        advanced_head = real_git(self.root, "rev-parse", "HEAD").decode("ascii").strip()
+        self.assertNotEqual(original_head, advanced_head)
+
+        for interleaving in ("after_head", "after_first_tree"):
+            with self.subTest(interleaving=interleaving):
+                git(self.root, "update-ref", "HEAD", original_head)
+                advanced = False
+
+                def read_then_advance(root, *args):
+                    nonlocal advanced
+                    result = real_git(root, *args)
+                    trigger = (args == ("rev-parse", "HEAD") if interleaving == "after_head"
+                               else bool(args) and args[0] == "ls-tree")
+                    if trigger and not advanced:
+                        real_git(root, "update-ref", "HEAD", advanced_head, original_head)
+                        advanced = True
+                    return result
+
+                with mock.patch.object(QUEUE, "git", side_effect=read_then_advance):
+                    actual = QUEUE.scan(self.root)
+                self.assertTrue(advanced, "the intended HEAD movement must occur")
+                self.assertEqual(advanced_head, real_git(self.root, "rev-parse", "HEAD").decode().strip())
+                self.assertEqual(before, actual)
 
     def test_strict_writes_queue_even_when_unresolved(self):
         path = self.root / "output/queue.tsv"

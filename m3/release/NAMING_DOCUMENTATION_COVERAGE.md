@@ -39,7 +39,7 @@ receipt does not establish installed-image acceptance or complete runtime covera
 ## Documentation freeze
 
 Review [the claims contract](release-contract.json), [release notes](RELEASE_NOTES.md),
-[publication checklist](RELEASE_CHECKLIST.md), upstream OpenJDK version, licensing
+[current candidate checklist](RELEASE_CHECKLIST_CANDIDATE_2756.md), upstream OpenJDK version, licensing
 and Synexia NOTICE on the **same release commit**. Avoid describing queued
 adapters/companions as installed-JDK features. Separate P0 foundation tests
 from proof of an integrated `java.lang.String` replacement.
@@ -103,7 +103,12 @@ python3 m3/release/build_changed_atom_coverage.py \
 The tab-separated inventory contains columns
 `id`, `class`, `method`, `descriptor`, `source_path` and optional
 `branchless_explanation`. JaCoCo class names use JVM slashes,
-and `descriptor` is the JVM method descriptor. The importer does
+and `descriptor` is the JVM method descriptor. JaCoCo may omit a zero-total
+`BRANCH` counter; both readers normalize that absence to zero covered and zero
+missed branches. Every selected branchless atom still needs a nonblank
+`branchless_explanation`; measured LINE proof and all supplied LINE/BRANCH
+counters must remain nonnegative and unique. Nonzero declared branch counts must match
+the raw report. The importer does
 **not** infer inventory completeness from JaCoCo and without
 `--reviewed-complete-inventory` sets `inventory_complete: false`.
 

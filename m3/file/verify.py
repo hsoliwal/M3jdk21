@@ -5,6 +5,7 @@
 # Modified 2026-11-05: Isolate mutable contract fixtures from the source/evidence tree.
 # Modified 2026-11-06 by m3/qualification/file-unify-20261106 (FILE_UNIFY v1): the module is org.m3jdk.file
 # and requires jdk.m3.collections: the module name is a constant, --module-path carries the dependency modules.
+# Modified 2026-11-08: Complete all contract compilation before host execution.
 """Compile the existing file module, run its independent contract, and check a linked image."""
 
 import argparse
@@ -176,12 +177,6 @@ def main():
                                  '-d', tests, *sources])
         admitted_tests = class_hashes(tests)
         receipt['contract_class_files'] = admitted_tests
-        main_class = 'jdk.m3.file.test.M3FileDeltaContract'
-        host = run('host-contract', [tool('java'), '--module-path', module_path(module_jar), '--add-modules',
-                                    MODULE + ',jdk.compiler', '-cp', tests, main_class])
-        if 'M3FileDeltaContract: PASS;' not in host:
-            raise RuntimeError('contract success marker missing')
-        receipt['host_result'] = host.strip()
         module_tests = output / 'module-tests'
         if module_tests.exists():
             if module_tests.is_symlink() or module_tests.parent != output:
@@ -277,6 +272,13 @@ def main():
                 '-d', module_tests, *module_contract_sources])
         module_test_hashes = class_hashes(module_tests)
         receipt['module_contract_class_files'] = module_test_hashes
+        # Compile every independent and module contract before any contract executes.
+        main_class = 'jdk.m3.file.test.M3FileDeltaContract'
+        host = run('host-contract', [tool('java'), '--module-path', module_path(module_jar), '--add-modules',
+                                    MODULE + ',jdk.compiler', '-cp', tests, main_class])
+        if 'M3FileDeltaContract: PASS;' not in host:
+            raise RuntimeError('contract success marker missing')
+        receipt['host_result'] = host.strip()
         # Delta fixtures intentionally edit/delete files while child javac runs.
         # Use isolated system temporary storage, outside source/evidence trees
         # that external workspace tools may observe or restore independently.

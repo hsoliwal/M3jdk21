@@ -76,7 +76,7 @@ performance data before making any performance claim.
 ## 5. Assemble and verify the proof pack
 
 Write the pack outside the source checkout. Use `M3_RELEASE_EVIDENCE_V1`, exact
-`source_commit`/`source_tree`, all ten mandatory gate IDs, correct owners, executed
+`source_commit`/`source_tree`, all eleven mandatory gate IDs, correct owners, executed
 commands, zero exits, environment records and safe manifest-relative artifact
 paths with SHA-256. The canonical gate also needs its repository, canonical
 commit and recipe ID. Synthetic test-fixture receipts are not admissible evidence.

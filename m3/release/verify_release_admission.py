@@ -240,8 +240,11 @@ def validate_coverage_receipt(root: Path, entry: dict, evidence_dir: Path) -> st
                     if min(covered, missed) < 0:
                         raise ValueError("invalid JaCoCo method counter")
                     counts[kind] = (covered, missed)
-            if "LINE" not in counts or "BRANCH" not in counts:
-                raise ValueError("missing JaCoCo line/branch method counter")
+            if "LINE" not in counts:
+                raise ValueError("missing JaCoCo line method counter")
+            # JaCoCo omits zero-total counters. A selected branchless atom
+            # still needs the explicit explanation checked below.
+            counts.setdefault("BRANCH", (0, 0))
             raw_methods[key] = counts
     atoms = coverage.get("atoms")
     if not isinstance(atoms, list) or not atoms:
