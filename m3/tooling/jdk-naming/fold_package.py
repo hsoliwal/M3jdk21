@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""FOLD_PACKAGE v1: one package of one module joins another package of another module (approved layout 2026-11-08:
+"""FOLD_PACKAGE v1.1: one package of one module joins another package of another module (approved layout 2026-11-08:
 families fold into their owner, e.g. jdk.m3.nlp into jdk.m3.search).
+v1.1: the module's other resources (A/src/{main,test}/resources/... outside <P>, e.g. META-INF/services and test
+fixtures) are product, not records: they move to the same path under B, a META-INF/services file is merged by line
+union (B's lines first), any other existing destination refuses.
 
 usage: fold_package.py --root DIR --from-root A --from-package P --to-root B --to-package Q [--exclude PREFIX ...]
                        [--check]
@@ -41,7 +44,7 @@ def retire(root, module, evidence, pkg_path, aggregator, check):
     """Every file of the module outside src/{main,test}/java/<P>/ moves byte for byte under the evidence dir (the
     descriptor src/main/java/module-info.java to <evidence>/module-info.java, other src/ files to
     <evidence>/src-remainder/...); the aggregator's <module> line of the module goes. RETIRE rows."""
-    keep = tuple(f"src/{k}/java/{pkg_path}/" for k in ("main", "test"))
+    keep = tuple(f"src/{k}/java/{pkg_path}/" for k in ("main", "test")) + ("src/main/resources/", "src/test/resources/")
     base = root / module
     native = [x for x in base.rglob("*") if x.is_file() and x.suffix in (".c", ".h", ".cc", ".cpp", ".hpp")
               and not EVIDENCE.search("/" + x.relative_to(root).as_posix())]
@@ -62,8 +65,10 @@ def retire(root, module, evidence, pkg_path, aggregator, check):
     if aggregator:
         pom = root / aggregator
         text = pom.read_bytes().decode("utf-8")
-        name = Path(module).name
-        line = re.compile(rf"^[ \t]*<module>{re.escape(name)}</module>[ \t]*\r?\n", re.M)
+        # the module's path relative to the reactor pom's directory (m3/pom.xml names m3/compiler/x as compiler/x)
+        name = Path(module).relative_to(Path(aggregator).parent).as_posix() if Path(aggregator).parent != Path(".") \
+            else module
+        line = re.compile(rf"^[ \t]*<module>{re.escape(name)}/?</module>[ \t]*\r?\n", re.M)
         if len(line.findall(text)) == 1:
             print(f"EDIT\t{aggregator}\t<module>{name}</module> removed")
             if not check:
@@ -79,11 +84,16 @@ def main():
     ap.add_argument("--retire-to", help="evidence dir: the rest of module A (pom, descriptor, records) moves there "
                                         "byte for byte first, and A's root is gone after the fold")
     ap.add_argument("--aggregator", help="reactor pom whose <module> line for A is removed with --retire-to")
+    ap.add_argument("--retire-only", action="store_true",
+                    help="v1.1: retire A's records and reactor line, fold nothing; when several sibling modules fold "
+                         "into one owner, retire them all first so no fold rewrites a sibling's records")
     a = ap.parse_args()
     root = Path(a.root)
     src_a, src_b = a.from_root.rstrip("/"), a.to_root.rstrip("/")
     if a.retire_to:
         retire(root, src_a, a.retire_to.rstrip("/"), a.from_package.replace(".", "/"), a.aggregator, a.check)
+        if a.retire_only:
+            return 0
         a.exclude.append(a.retire_to.rstrip("/") + "/")  # retired records keep their bytes
     p_pkg, q_pkg = a.from_package, a.to_package
     p_path, q_path = p_pkg.replace(".", "/"), q_pkg.replace(".", "/")
@@ -117,6 +127,20 @@ def main():
     for src, dst in moves:
         if dst.exists():
             sys.exit(f"REFUSE {rel[src]}: {dst.relative_to(root).as_posix()} exists")
+    merges, others = [], []  # v1.1: A's resources outside P
+    for kind in ("main", "test"):
+        base = f"{src_a}/src/{kind}/resources/"
+        for p in files:
+            r = rel[p]
+            if r.startswith(base) and not r.startswith(base + p_path + "/"):
+                dst = root / f"{src_b}/src/{kind}/resources/{r[len(base):]}"
+                if dst.exists() and "/META-INF/services/" in "/" + r[len(base):]:
+                    merges.append((p, dst))
+                elif dst.exists():
+                    sys.exit(f"REFUSE {r}: {dst.relative_to(root).as_posix()} exists")
+                else:
+                    others.append((p, dst))
+    moves += others
     names = "|".join(sorted((re.escape(t) for t in types), key=len, reverse=True))
     res = "|".join(sorted((re.escape(r) for r in resources), key=len, reverse=True))
     dotted = re.compile(rf"(?<![\w$]){re.escape(p_pkg)}\.({names})(?![\w$])")
@@ -155,13 +179,20 @@ def main():
             changed[p] = new
     for src, dst in moves:
         print(f"MOVE\t{rel[src]}\t{dst.relative_to(root).as_posix()}")
+    for src, dst in merges:
+        print(f"MERGE\t{rel[src]}\t{dst.relative_to(root).as_posix()}")
     for p in sorted(changed, key=lambda x: rel[x]):
         print(f"EDIT\t{rel[p]}")
     print(f"FOLD\t{p_pkg}\t{q_pkg}\ttypes={len(types)}\tresources={len(resources)}\tedits={len(changed)}", file=sys.stderr)
     if a.check:
-        return 1 if changed or moves else 0
+        return 1 if changed or moves or merges else 0
     for p, text in changed.items():
         p.write_bytes(text.encode("utf-8"))
+    for src, dst in merges:  # service providers: union of lines, the target's first
+        have = dst.read_bytes().decode("utf-8").splitlines()
+        add = [ln for ln in (changed.get(src) or src.read_bytes().decode("utf-8")).splitlines() if ln and ln not in have]
+        dst.write_bytes(("\n".join(have + add) + "\n").encode("utf-8"))
+        src.unlink()
     for src, dst in moves:
         dst.parent.mkdir(parents=True, exist_ok=True)
         src.rename(dst)
