@@ -1,6 +1,6 @@
-# m3/tooling/companion: companion admission planner (Java 21, no dependencies)
+# m3/tooling/atom-census: companion admission planner (Java 21, no dependencies)
 
-`jdk.m3.tooling.companion` helps decide whether an exported Java API type may get an optional M3 companion class. It
+`jdk.m3.tooling.atoms` helps decide whether an exported Java API type may get an optional M3 companion class. It
 never changes the JDK class, its API, native symbols, serialization, module exports or storage.
 
 | Class | Role |
@@ -9,10 +9,10 @@ never changes the JDK class, its API, native symbols, serialization, module expo
 | `M3SystemApiCensus` | Read-only inventory of class resources in the installed system modules (`ModuleFinder.ofSystem()`). |
 | `M3ClassfileSeal` | SHA-256 seal of a class file read from the runtime image. |
 
-Run `bash verify.sh` (javac `-Xlint:all -Werror`, then the four `main` proofs). From the command line:
+Run `bash verify-companion.sh` (javac `-Xlint:all -Werror`, then the four `main` proofs). From the command line:
 
 ```sh
-java -cp <classes> jdk.m3.tooling.companion.M3CompanionPlan java.base:java.lang.String java.base:java.util.List
+java -cp <classes> jdk.m3.tooling.atoms.M3CompanionPlan java.base:java.lang.String java.base:java.util.List
 ```
 
 Received from com.synexia `synexia-openrewrite-recipes/crates/m3jdk21-companion-admission-20261029`; see
