@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongUnaryOperator;
 import jdk.m3.collections.LongLongConsumer;
-import jdk.internal.m3.collections.LongLongPredicate;
+import jdk.m3.collections.LongLongPredicate;
 
 /**
  * Open-addressed primitive {@code long -> long} map.

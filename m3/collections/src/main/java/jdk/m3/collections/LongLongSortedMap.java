@@ -4,6 +4,9 @@
  */
 package jdk.m3.collections;
 
+import java.util.Objects;
+import java.util.stream.IntStream;
+
 /**
  * Mutable navigable primitive long-to-long map contract: the first-party Synexia donor
  * {@code LongLongSortedMap} contract under the M3 family naming (sibling of {@link LongSortedSet}).
@@ -36,6 +39,25 @@ public interface LongLongSortedMap {
     long lowerKey(long key, long defaultValue);
 
     long higherKey(long key, long defaultValue);
+
+    /**
+     * Removes every entry the predicate rejects, keeping the entries it accepts.
+     *
+     * <p>The default works over this contract (a key/value snapshot, then {@link #remove(long)}); implementations with
+     * packed storage override it with an in-place compaction.</p>
+     *
+     * @param predicate retention test over a key and its value
+     * @return the number of entries removed
+     * @throws NullPointerException if {@code predicate} is null
+     */
+    default int filterInPlace(LongLongPredicate predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        long[] keys = keysToArray();
+        long[] values = valuesToArray();
+        int[] drop = IntStream.range(0, keys.length).filter(i -> !predicate.test(keys[i], values[i])).toArray();
+        IntStream.of(drop).forEach(i -> remove(keys[i]));
+        return drop.length;
+    }
 
     void forEach(LongLongConsumer consumer);
 

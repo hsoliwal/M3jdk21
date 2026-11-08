@@ -1,6 +1,6 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-package jdk.internal.m3.collections;
+package jdk.m3.collections;
 
 /** Primitive two-long predicate used for allocation-free filtering of packed maps. */
 @FunctionalInterface

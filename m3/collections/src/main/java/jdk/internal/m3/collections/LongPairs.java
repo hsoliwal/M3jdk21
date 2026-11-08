@@ -15,6 +15,7 @@
 package jdk.internal.m3.collections;
 
 import jdk.m3.collections.LongLongConsumer;
+import jdk.m3.collections.LongLongPredicate;
 
 /**
  * Parallel primitive long/long pair sequence contract.

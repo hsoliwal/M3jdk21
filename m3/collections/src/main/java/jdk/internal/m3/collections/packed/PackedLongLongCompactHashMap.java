@@ -19,7 +19,7 @@ import jdk.m3.collections.LongLongConsumer;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongUnaryOperator;
-import jdk.internal.m3.collections.LongLongPredicate;
+import jdk.m3.collections.LongLongPredicate;
 
 /**
  * Memory-minimal primitive {@code long -> long} hash map.

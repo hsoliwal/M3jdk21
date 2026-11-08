@@ -20,6 +20,7 @@ import jdk.m3.collections.LongLongConsumer;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import jdk.m3.collections.LongLongPredicate;
 
 /**
  * Primitive insertion/access-ordered map: two long lanes, two integer link lanes,
