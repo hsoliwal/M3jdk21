@@ -529,7 +529,7 @@ public final class AlgorithmExtrasDump {
         });
     }
 
-    // ---------------------------------------------------------------- graphs (PrimitiveGraphAlgorithms)
+    // ---------------------------------------------------------------- graphs (GraphAlgorithms)
 
     private static int vertices(SplittableRandom random) {
         int tier = random.nextInt(100);
@@ -571,23 +571,23 @@ public final class AlgorithmExtrasDump {
             int[][] e = edges(random, n, true);
             boolean undirected = random.nextBoolean();
             return call(edgeText(n, e) + " u=" + undirected, () -> {
-                PrimitiveGraphAlgorithms.CsrGraph graph = undirected
-                        ? PrimitiveGraphAlgorithms.CsrGraph.undirected(n, e[0], e[1])
-                        : PrimitiveGraphAlgorithms.CsrGraph.directed(n, e[0], e[1]);
-                PrimitiveGraphAlgorithms.CsrGraph copy = new PrimitiveGraphAlgorithms.CsrGraph(graph.vertices(),
+                GraphAlgorithms.CsrGraph graph = undirected
+                        ? GraphAlgorithms.CsrGraph.undirected(n, e[0], e[1])
+                        : GraphAlgorithms.CsrGraph.directed(n, e[0], e[1]);
+                GraphAlgorithms.CsrGraph copy = new GraphAlgorithms.CsrGraph(graph.vertices(),
                         graph.offsets(), graph.edges());
                 int source = n == 0 ? 0 : random.nextInt(n);
                 return shorten(s(graph.offsets()) + s(graph.edges())) + " eq=" + graph.equals(copy)
-                        + call(" dfs" + source, () -> s(PrimitiveGraphAlgorithms.dfsPreorder(graph, source)))
-                        + call(" cc", () -> "" + PrimitiveGraphAlgorithms.connectedComponents(graph))
-                        + call(" bip", () -> "" + PrimitiveGraphAlgorithms.isBipartite(graph));
+                        + call(" dfs" + source, () -> s(GraphAlgorithms.dfsPreorder(graph, source)))
+                        + call(" cc", () -> "" + GraphAlgorithms.connectedComponents(graph))
+                        + call(" bip", () -> "" + GraphAlgorithms.isBipartite(graph));
             });
         });
         each("CsrGraphRaw", cases / 4, random -> {
             int n = random.nextInt(-1, 5);
             int[] offsets = ints(random, random.nextInt(0, 7), 6);
             int[] edgeIds = ints(random, random.nextInt(0, 6), 5);
-            return call(n + s(offsets) + s(edgeIds), () -> new PrimitiveGraphAlgorithms.CsrGraph(n, offsets, edgeIds)
+            return call(n + s(offsets) + s(edgeIds), () -> new GraphAlgorithms.CsrGraph(n, offsets, edgeIds)
                     .vertices() + "");
         });
         each("WeightedCsrGraph", cases, random -> {
@@ -597,14 +597,14 @@ public final class AlgorithmExtrasDump {
             long[] w = weights(random, e[0].length, random.nextInt(10) == 0, zeroOne);
             boolean undirected = random.nextBoolean();
             return call(edgeText(n, e) + " w=" + shorten(s(w)) + " u=" + undirected, () -> {
-                PrimitiveGraphAlgorithms.WeightedCsrGraph graph = undirected
-                        ? PrimitiveGraphAlgorithms.WeightedCsrGraph.undirected(n, e[0], e[1], w)
-                        : PrimitiveGraphAlgorithms.WeightedCsrGraph.directed(n, e[0], e[1], w);
-                PrimitiveGraphAlgorithms.WeightedCsrGraph copy = new PrimitiveGraphAlgorithms.WeightedCsrGraph(
+                GraphAlgorithms.WeightedCsrGraph graph = undirected
+                        ? GraphAlgorithms.WeightedCsrGraph.undirected(n, e[0], e[1], w)
+                        : GraphAlgorithms.WeightedCsrGraph.directed(n, e[0], e[1], w);
+                GraphAlgorithms.WeightedCsrGraph copy = new GraphAlgorithms.WeightedCsrGraph(
                         graph.vertices(), graph.offsets(), graph.edges(), graph.weights());
                 int source = random.nextInt(20) == 0 ? n : n == 0 ? 0 : random.nextInt(n);
                 return "eq=" + graph.equals(copy) + call(" 01bfs" + source,
-                        () -> shorten(s(PrimitiveGraphAlgorithms.zeroOneBfs(graph, source))));
+                        () -> shorten(s(GraphAlgorithms.zeroOneBfs(graph, source))));
             });
         });
         each("bellmanFord", cases, random -> {
@@ -613,9 +613,9 @@ public final class AlgorithmExtrasDump {
             long[] w = weights(random, e[0].length, true, false);
             int source = random.nextInt(20) == 0 ? -1 : n == 0 ? 0 : random.nextInt(n);
             return call(edgeText(n, e) + " w=" + shorten(s(w)) + " s=" + source, () -> {
-                PrimitiveGraphAlgorithms.EdgeList list = new PrimitiveGraphAlgorithms.EdgeList(n, e[0], e[1], w);
+                GraphAlgorithms.EdgeList list = new GraphAlgorithms.EdgeList(n, e[0], e[1], w);
                 return shorten(s(list.from()) + s(list.to()) + s(list.weights())) + " "
-                        + shorten(s(PrimitiveGraphAlgorithms.bellmanFord(list, source)));
+                        + shorten(s(GraphAlgorithms.bellmanFord(list, source)));
             });
         });
         each("unionFind", cases, random -> {
@@ -623,10 +623,10 @@ public final class AlgorithmExtrasDump {
             int[][] e = edges(random, n, true);
             long[] w = weights(random, e[0].length, true, false);
             return call(edgeText(n, e) + " w=" + shorten(s(w)),
-                    () -> call("ufc", () -> "" + PrimitiveGraphAlgorithms.unionFindComponents(n, e[0], e[1]))
-                            + call(" cyc", () -> "" + PrimitiveGraphAlgorithms.hasUndirectedCycle(n, e[0], e[1]))
+                    () -> call("ufc", () -> "" + GraphAlgorithms.unionFindComponents(n, e[0], e[1]))
+                            + call(" cyc", () -> "" + GraphAlgorithms.hasUndirectedCycle(n, e[0], e[1]))
                             + call(" mst", () -> {
-                                PrimitiveGraphAlgorithms.MstResult mst = PrimitiveGraphAlgorithms.kruskalMst(n,
+                                GraphAlgorithms.MstResult mst = GraphAlgorithms.kruskalMst(n,
                                         e[0], e[1], w);
                                 return mst.totalWeight() + "/" + mst.edgesUsed() + "/" + mst.connected();
                             }));
