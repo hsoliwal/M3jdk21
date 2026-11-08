@@ -14,7 +14,7 @@ import java.util.concurrent.CancellationException;
 
 /** Null-safe monitor and cancellation checks: thread interruption first, then the monitor. */
 //FLLDCIM: RELOCATE - donor blob 8507c2772316 at commit 78cf2ad4c7e5 (repository, path, URL and digests: m3/algorithms/recipe/catalogue-kernels-20261107/PROVENANCE.tsv); recipe m3/algorithms/recipe/catalogue-kernels-20261107/relocate.py v1
-final class M3ProgressChecks {
+public final class M3ProgressChecks {
     private M3ProgressChecks() { }
 
     public static M3ProgressMonitor nonNull(M3ProgressMonitor monitor) {
