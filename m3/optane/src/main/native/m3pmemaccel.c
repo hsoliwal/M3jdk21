@@ -26,7 +26,7 @@
 
 /* JNI handles remain private: Java synchronizes every operation with close. */
 typedef struct { const int8_t *base; size_t bytes; int dax; } region;
-#define JNI_NAME(name) Java_jdk_internal_m3_optane_M3PmemAccelerator_##name
+#define JNI_NAME(name) Java_jdk_internal_m3_optane_PmemAccelerator_##name
 static void fail(JNIEnv *env, const char *clazz, const char *message) {
     jclass type = (*env)->FindClass(env, clazz);
     if (type) { (*env)->ThrowNew(env, type, message); (*env)->DeleteLocalRef(env, type); }

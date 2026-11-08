@@ -3,24 +3,24 @@
 <!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/docs/TASK_REPLAY_CONTRACT.md blob e49a0c9bd83a; recipe m3/optane/recipe/pmem-task-log-replay-20261106/relocate.py v3 -->
 # M3 PMEM task receipt replay — source and candidate reconciliation
 
-`M3PmemTaskReplay` adds a **read-only Java** recovery verifier to the existing
-`M3PmemTaskLog`/`M3PmemRegion` owners. It does not change JNI symbols or region
+`PmemTaskReplay` adds a **read-only Java** recovery verifier to the existing
+`PmemTaskLog`/`PmemRegion` owners. It does not change JNI symbols or region
 ownership, introduce a direct dependency on ChromeML, run a model, or edit a
 source file. Promotion is always unauthorized by the returned record.
 
 ## Recovery preconditions and algorithm
 
 1. Persist every model candidate in an immutable content-addressed store,
-   keyed by SHA-256. Then append its receipt through `M3PmemTaskLog.append`.
+   keyed by SHA-256. Then append its receipt through `PmemTaskLog.append`.
    Each receipt already uses the two-persist, commit-marker ordering in the
    existing task journal. Keep a durable, separately reviewed catalogue of
    every task's contiguous ordinal, exact task SHA and exact source SHA.
 2. **After an interrupted/ambiguous append, reopen** the existing PMEM log
-   through `M3PmemTaskLog.open`; do not reuse a stale in-memory committed count.
+   through `PmemTaskLog.open`; do not reuse a stale in-memory committed count.
    The existing log scanner recovers only the contiguous committed prefix and
    exposes an incomplete tail. PMEM ownership and durability remain the
    responsibility of its caller and the selected region backend.
-3. Call `M3PmemTaskReplay.reconcile` on that reopened log with the complete
+3. Call `PmemTaskReplay.reconcile` on that reopened log with the complete
    immutable reviewed sequence, a `ContentReader` for persisted result bytes,
    and an existing cancellation/progress monitor adapter. The method validates
    each task SHA and source SHA against the reviewed catalogue and each
@@ -58,7 +58,7 @@ module/classpath. The independent test at
 sources from both modules. No reciprocal Maven module dependency is added.
 It instantiates 20,000 physical one-byte source files, executes 20,000 **fake**
 serial inference callbacks via the real `AiXSerialAtomPass`, persists receipts
-in a fake `M3PmemRegion`, reopens the log, and verifies recovered candidate bytes
+in a fake `PmemRegion`, reopens the log, and verifies recovered candidate bytes
 without re-inference. The separate PMEM smoke simulates a partial commit,
 missing/tampered results, review drift, empty/oversized manifest, cancellation
 and logical offsets beyond 2 GiB.

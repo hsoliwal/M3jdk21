@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # The two optional JNI libraries of jdk.m3.optane (module org.m3jdk.optane), Linux only:
 #   m3optane   - madvise hints behind jdk.m3.optane.NativeSupport (m3optane.c)
-#   m3pmemsdk  - the persistent-memory region family behind jdk.m3.optane.M3NativePmem (m3pmemsdk.c, relocated by
+#   m3pmemsdk  - the persistent-memory region family behind jdk.m3.optane.NativePmem (m3pmemsdk.c, relocated by
 #                recipe/pmem-region-core-20261106 from hsoliwal/com.synexia m3-pmem-sdk): POSIX mmap/msync/fdatasync
 #                regions; the libpmem2 (PMDK, BSD-3-Clause) backend is compiled only with -DM3_OPTANE_PMDK=ON, through
 #                pkg-config libpmem2 of the build host. M3JDK ships no PMDK source and no PMDK binary; with the option
@@ -42,7 +42,7 @@ foreach(library m3optane m3pmemsdk)
 endforeach()
 # m3optane.c declares _DEFAULT_SOURCE and m3pmemsdk.c _GNU_SOURCE themselves (madvise, O_CLOEXEC, O_NOFOLLOW, fdatasync)
 
-#FLLDCIM: RELOCATE - recipe/pmem-accelerator-20261107 (census L008): m3pmemaccel, the JNI library of jdk.internal.m3.optane.M3PmemAccelerator (read-only mapped tensors, FS-DAX attribute, NUMA pin, ordered signed-Q8 x FP32 matvec; donor: the m3pmem.c and build.sh of the accelerator-pmem jmod, FILE row 3 of ../../recipe/pmem-accelerator-20261107/RELOCATION_MAP.tsv)
+#FLLDCIM: RELOCATE - recipe/pmem-accelerator-20261107 (census L008): m3pmemaccel, the JNI library of jdk.internal.m3.optane.PmemAccelerator (read-only mapped tensors, FS-DAX attribute, NUMA pin, ordered signed-Q8 x FP32 matvec; donor: the m3pmem.c and build.sh of the accelerator-pmem jmod, FILE row 3 of ../../recipe/pmem-accelerator-20261107/RELOCATION_MAP.tsv)
 set(internal "${CMAKE_CURRENT_SOURCE_DIR}/../java/jdk/internal/m3/optane")
 set(accel_header "${generated}/jdk_internal_m3_optane_M3PmemAccelerator.h")
 add_custom_command(OUTPUT "${accel_header}"

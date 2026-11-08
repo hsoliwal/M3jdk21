@@ -27,19 +27,19 @@ relocated by `recipe/pmem-region-core-20261106` (below).
   survives a call. Errors/unavailable native code are explicit, not fake success.
 - Diagnostics launcher: prints a declared profile and native ABI availability, not
   a hardware detection report or a performance claim.
-- The PMem region core (`M3PmemSdk`, `M3PmemRegion`, `M3PmemMapping`, `M3PmemTransfer`, `M3PmemSearch`,
-  `M3PmemAccess`, `M3PmemBackend`, `M3PmemGranularity`, `M3PmemCapabilities`, `M3NativePmem`, `m3pmemsdk.c`):
+- The PMem region core (`PmemSdk`, `PmemRegion`, `PmemMapping`, `PmemTransfer`, `PmemSearch`,
+  `PmemAccess`, `PmemBackend`, `PmemGranularity`, `PmemCapabilities`, `NativePmem`, `m3pmemsdk.c`):
   a low-level, fail-closed, file-backed mapping API over an existing regular file with 64-bit offsets.
 
 | Owner | Role |
 |---|---|
-| `M3PmemSdk` | `capabilities()` (library loadability, never hardware proof); `open(path, offset, length, access, backend)` over an existing regular file, final symlink rejected, FILE identity captured across open |
-| `M3PmemRegion` | the region contract: `length`, `fileOffset`, `path`, `access`, `backend`, `persistenceGranularity`, `isOpen`, `read`, `write`, `persist`, `close` (idempotent, waits for in-flight calls) |
-| `M3PmemMapping` | the private owner: one fair `ReentrantReadWriteLock` lease authority over a native handle or a `FileChannel`; FILE positional I/O; the transfer atoms with ordered dual leases, memmove direction and file-identity alias refusal; streaming KMP with a per-thread 64 KiB window; sorted little-endian int64 bounds; `withReadLease` for multi-window consumers |
-| `M3PmemTransfer` | `copy`, `equalRange`, `copyIfDifferent` between SDK regions; no pointer, view or array escapes |
-| `M3PmemSearch` | `indexOf` (first exact byte sequence, `MAX_PATTERN_BYTES` 1 MiB), `lowerBoundLongLE`, `upperBoundLongLE` |
-| `M3PmemBackend` | `AUTO` (PMDK when compiled, else POSIX), `POSIX` (Linux mmap/msync/fdatasync, granularity PAGE), `PMDK` (libpmem2, compile-time optional, fails closed when absent), `FILE` (Java `FileChannel`, no JNI, every OS) |
-| `M3NativePmem`, `m3pmemsdk.c` | the 14 JNI exports `Java_jdk_m3_optane_M3NativePmem_*`; `System.loadLibrary("m3pmemsdk")` at class initialization, so the FILE backend never loads it |
+| `PmemSdk` | `capabilities()` (library loadability, never hardware proof); `open(path, offset, length, access, backend)` over an existing regular file, final symlink rejected, FILE identity captured across open |
+| `PmemRegion` | the region contract: `length`, `fileOffset`, `path`, `access`, `backend`, `persistenceGranularity`, `isOpen`, `read`, `write`, `persist`, `close` (idempotent, waits for in-flight calls) |
+| `PmemMapping` | the private owner: one fair `ReentrantReadWriteLock` lease authority over a native handle or a `FileChannel`; FILE positional I/O; the transfer atoms with ordered dual leases, memmove direction and file-identity alias refusal; streaming KMP with a per-thread 64 KiB window; sorted little-endian int64 bounds; `withReadLease` for multi-window consumers |
+| `PmemTransfer` | `copy`, `equalRange`, `copyIfDifferent` between SDK regions; no pointer, view or array escapes |
+| `PmemSearch` | `indexOf` (first exact byte sequence, `MAX_PATTERN_BYTES` 1 MiB), `lowerBoundLongLE`, `upperBoundLongLE` |
+| `PmemBackend` | `AUTO` (PMDK when compiled, else POSIX), `POSIX` (Linux mmap/msync/fdatasync, granularity PAGE), `PMDK` (libpmem2, compile-time optional, fails closed when absent), `FILE` (Java `FileChannel`, no JNI, every OS) |
+| `NativePmem`, `m3pmemsdk.c` | the 14 JNI exports `Java_jdk_m3_optane_M3NativePmem_*`; `System.loadLibrary("m3pmemsdk")` at class initialization, so the FILE backend never loads it |
 
 The contracts are in `docs/` (`API_CONTRACT.md`, `TRANSFER_CONTRACT.md`, `SEARCH_CONTRACT.md`,
 `SORTED_LONG_SEARCH.md`, relocated donor text with the module statements as declared rows).
@@ -79,12 +79,12 @@ run these tests.
 
 ### Census pass-1 remainder: the PMem tensor accelerator and the CPU-list parser (`recipe/pmem-accelerator-20261107`)
 
-<!-- FLLDCIM: RELOCATE - recipe/pmem-accelerator-20261107 (census L008 + L047): the non-exported package jdk.internal.m3.optane gains M3PmemAccelerator (JNI library m3pmemaccel) and M3NumaTopology -->
+<!-- FLLDCIM: RELOCATE - recipe/pmem-accelerator-20261107 (census L008 + L047): the non-exported package jdk.internal.m3.optane gains PmemAccelerator (JNI library m3pmemaccel) and NumaTopology -->
 | Item | Value |
 |---|---|
-| `jdk.internal.m3.optane.M3PmemAccelerator` (L008) | read-only `mmap` of a tensor file, FS-DAX attribute through `statx`, NUMA pin of the calling thread, bounded signed-Q8 x FP32 matrix-vector kernel folded in strict FP32 column order (scalar/AVX2 dispatch; the AVX-512 kernel of crate `m3-pmem-ordered-avx512-20261030` is HOLD until an AVX-512 host runs it); JNI library `m3pmemaccel` (CMake target, `src/main/native/m3pmemaccel.c`); NEC with the SDK's `M3PmemRegion` family (same shape, other contract), nothing of the SDK edited |
-| `jdk.internal.m3.optane.M3NumaTopology` (L047) | the strict one-pass Linux CPU-list parser `parseCpuList` (`0-3,7,10-11`, optional leading `+`, refusals for empty elements, inverted ranges, indexes above 65535 and bad separators); `discover()`/`nativeFeatures()` of the donor are HOLD (they need the accelerator jmod family's JNI and a multi-node host) |
-| oracles | `M3PmemAcceleratorSelfTest` (donor, 2,048 FP32 column-order cases, 64-row tile boundaries, > 2 GiB mapping, FS-DAX gate) through `M3PmemAcceleratorJUnitTest` under `-Pm3-optane-native`; `M3NumaTopologyCpuListTest` (hand-derived table and a reference-model differential) on every build |
+| `jdk.internal.m3.optane.PmemAccelerator` (L008) | read-only `mmap` of a tensor file, FS-DAX attribute through `statx`, NUMA pin of the calling thread, bounded signed-Q8 x FP32 matrix-vector kernel folded in strict FP32 column order (scalar/AVX2 dispatch; the AVX-512 kernel of crate `m3-pmem-ordered-avx512-20261030` is HOLD until an AVX-512 host runs it); JNI library `m3pmemaccel` (CMake target, `src/main/native/m3pmemaccel.c`); NEC with the SDK's `PmemRegion` family (same shape, other contract), nothing of the SDK edited |
+| `jdk.internal.m3.optane.NumaTopology` (L047) | the strict one-pass Linux CPU-list parser `parseCpuList` (`0-3,7,10-11`, optional leading `+`, refusals for empty elements, inverted ranges, indexes above 65535 and bad separators); `discover()`/`nativeFeatures()` of the donor are HOLD (they need the accelerator jmod family's JNI and a multi-node host) |
+| oracles | `PmemAcceleratorSelfTest` (donor, 2,048 FP32 column-order cases, 64-row tile boundaries, > 2 GiB mapping, FS-DAX gate) through `PmemAcceleratorJUnitTest` under `-Pm3-optane-native`; `NumaTopologyCpuListTest` (hand-derived table and a reference-model differential) on every build |
 | recipe | `python -I m3/optane/recipe/pmem-accelerator-20261107/relocate.py --donor-git <clone> --donor-rev 56cbdc631259 [--check]` (`RELOCATE_CENSUS1_REMAINDER` v4) and `python -I m3/optane/recipe/pmem-accelerator-20261107/apply.py [--check]` for the three edited files (this section, the CMake target, the surefire filter); gates in `GATES.tsv`, decisions in `DECISION.tsv` |
 
 ## Build and use
@@ -97,12 +97,12 @@ run these tests.
 | from the control reactor | `mvn -f m3/pom.xml -pl optane package` |
 | JMOD / jlink verifier | `bash m3/optane/verify.sh` (Linux x86_64; `M3_OPTANE_NO_NATIVE=1` for Java only; `M3_OPTANE_BUILD` selects the output) or `mvn -Pm3-optane-jmod -f m3/optane/pom.xml verify` |
 | differential | `bash m3/optane/recipe/pmem-region-core-20261106/differential.sh <donor clone> <donor rev> <scratch> [operations]` after `package` |
-| native matrix (Linux) | `bash m3/optane/recipe/pmem-region-core-20261106/native-matrix.sh jdk.m3.optane M3 jdk.m3.optane m3/optane/src/main/native/m3pmemsdk.c m3/optane/src/test/native/M3PmemKmpPrefix32Oracle.c <scratch> <operations> <the ten owners> <M3PmemAtomCases> <M3PmemDump>` |
+| native matrix (Linux) | `bash m3/optane/recipe/pmem-region-core-20261106/native-matrix.sh jdk.m3.optane M3 jdk.m3.optane m3/optane/src/main/native/m3pmemsdk.c m3/optane/src/test/native/M3PmemKmpPrefix32Oracle.c <scratch> <operations> <the ten owners> <PmemAtomCases> <PmemDump>` |
 | all Java gates | `bash m3/optane/recipe/pmem-region-core-20261106/verify.sh <donor clone> <donor rev> <scratch>` |
 
 ```java
-try (M3PmemRegion model = M3PmemSdk.open(Path.of("/pmem/models/weights.bin"), 0, 8192,
-        M3PmemAccess.READ_ONLY, M3PmemBackend.FILE)) {   // FILE needs no library; AUTO/POSIX need libm3pmemsdk
+try (PmemRegion model = PmemSdk.open(Path.of("/pmem/models/weights.bin"), 0, 8192,
+        PmemAccess.READ_ONLY, PmemBackend.FILE)) {   // FILE needs no library; AUTO/POSIX need libm3pmemsdk
     byte[] header = new byte[32];
     model.read(0, header, 0, header.length);
 }

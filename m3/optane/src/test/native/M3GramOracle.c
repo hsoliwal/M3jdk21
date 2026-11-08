@@ -8,7 +8,7 @@
 #include <string.h>
 
 /* Independent brute-force byte oracle, intentionally unlike production KMP. */
-JNIEXPORT jlong JNICALL Java_jdk_m3_optane_M3NativeByteOracle_firstHit(
+JNIEXPORT jlong JNICALL Java_jdk_m3_optane_NativeByteOracle_firstHit(
         JNIEnv *env, jclass type, jbyteArray haystack, jbyteArray pattern) {
     (void) type;
     if (haystack == NULL || pattern == NULL) {

@@ -5,12 +5,12 @@
 
 ## Public API and ownership
 
-`M3PmemSearch.indexOf(M3PmemRegion, long start, long count, byte[] needle)` returns
+`PmemSearch.indexOf(PmemRegion, long start, long count, byte[] needle)` returns
 an offset **relative to the mapped region**, not a file offset. The result is
 the first exact byte match in `[start, start + count)`, or `-1`. Empty patterns
 match at `start`, including when `start == region.length()` and `count == 0`.
 
-This is an additive API. No `M3PmemRegion` method or pre-existing JNI export is
+This is an additive API. No `PmemRegion` method or pre-existing JNI export is
 removed or changed. A full read lease is acquired before JNI searches memory
 and is released after return; `close()` must wait for the search. The native
 address is never returned to Java, and the pattern bytes are copied into
@@ -36,7 +36,7 @@ naive byte-array reference, includes 250 seeded trials, adversarial prefix
 repetition, 4 KiB page boundaries, binary bytes, sparse files above 2 GiB,
 close concurrency, invalid windows and null or over-limit patterns.
 
-`M3PmemAtomCases` adds `indexOf` as the 17th public method atom with an independent
+`PmemAtomCases` adds `indexOf` as the 17th public method atom with an independent
 correctness case and a checksummed, non-threshold performance workload.
 `PmemAtomJUnitRecipe` emits a JUnit 5 correctness test and an opt-in perf test
 for this atom; the Maven `verify` goal provisions the JUnit launcher and runs
@@ -56,7 +56,7 @@ proof, FSDAX/DEV DAX verification, or physical Optane/dual-Xeon performance.
 
 ## Extension: sorted signed 64-bit key lookup
 
-The `M3PmemSearch.lowerBoundLongLE`/`upperBoundLongLE` methods are **separate**
+The `PmemSearch.lowerBoundLongLE`/`upperBoundLongLE` methods are **separate**
 from KMP byte searching. The input is a pre-sorted array of `long` values
 stored as little-endian bytes; the methods return an element insertion point.
 See [SORTED_LONG_SEARCH.md](SORTED_LONG_SEARCH.md).
