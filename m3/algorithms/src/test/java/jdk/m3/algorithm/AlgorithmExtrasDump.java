@@ -906,7 +906,7 @@ public final class AlgorithmExtrasDump {
         each("combinations", cases, random -> {
             int n = random.nextInt(-1, 12);
             int k = random.nextInt(-1, 13);
-            return call(n + "C" + k, () -> shorten(s(PrimitiveBacktrackingAlgorithms.combinations(n, k))));
+            return call(n + "C" + k, () -> shorten(s(BacktrackingAlgorithms.combinations(n, k))));
         });
         each("combinationSum", cases, random -> {
             int[] candidates = ints(random, random.nextInt(0, 5), 12);
@@ -917,15 +917,15 @@ public final class AlgorithmExtrasDump {
             }
             int target = random.nextInt(15) == 0 ? -1 : random.nextInt(0, 30);
             return call(s(candidates) + " t=" + target, () -> shorten(s(
-                    PrimitiveBacktrackingAlgorithms.combinationSum(candidates, target))));
+                    BacktrackingAlgorithms.combinationSum(candidates, target))));
         });
         each("nQueensCount", 14, random -> {
             int n = random.nextInt(-1, 11);
-            return call("" + n, () -> "" + PrimitiveBacktrackingAlgorithms.nQueensCount(n));
+            return call("" + n, () -> "" + BacktrackingAlgorithms.nQueensCount(n));
         });
         each("solveSudoku", Math.max(10, cases / 10), random -> {
             char[][] board = sudoku(random);
-            return call(s(board), () -> PrimitiveBacktrackingAlgorithms.solveSudoku(board) + " " + s(board));
+            return call(s(board), () -> BacktrackingAlgorithms.solveSudoku(board) + " " + s(board));
         });
     }
 
