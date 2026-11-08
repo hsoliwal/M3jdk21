@@ -41,4 +41,4 @@ jobs:
           javac --release 21 -proc:none -Xlint:all,-serial -Werror \
               -d "$RUNNER_TEMP/m3-required-ngram-jtreg" \
               test/jdk/java/lang/String/M3StringRegexDpTest.java
-      # Full modified M3JDK21 source build, jtreg and native/GC/JIT parity not run here.
+      # Full modified M3JDK 21 source build, jtreg and native/GC/JIT parity not run here.
