@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /** Java/JNI preference parity; C11 missing-export fixture is a separate executable proof. */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/bee80508c334ec11d9f82ad05106b556f6036546/synexia-primitives/src/test/java/com/synexia/primitives/M3NativeLeaseFullscanFallbackTest.java blob efaeb2b05ee9; recipe m3/native/qualification/twin-fixes-20261107/apply.py v1
-final class M3NativeLeaseFullscanFallbackTest {
+final class NativeLeaseFullscanFallbackTest {
     @Test
     void nativePreferenceMatchesJavaAcrossBoundedStates() {
         long[] ids = {1, 2, 3, 4, 5, 6, 7};
@@ -27,9 +27,9 @@ final class M3NativeLeaseFullscanFallbackTest {
             pins[6] = (round >>> 2) & 1;
             Arrays.fill(reference, -17L);
             Arrays.fill(candidate, -17L);
-            int n = M3NativeLeaseScan.collect(ids, leases, pins, states,
+            int n = NativeLeaseScan.collect(ids, leases, pins, states,
                     ids.length, reference, false);
-            assertEquals(n, M3NativeLeaseScan.collect(ids, leases, pins, states,
+            assertEquals(n, NativeLeaseScan.collect(ids, leases, pins, states,
                     ids.length, candidate, true));
             assertArrayEquals(reference, candidate);
         }
@@ -42,9 +42,9 @@ final class M3NativeLeaseFullscanFallbackTest {
         int[] pins = {0, 0, 1, 0};
         byte[] states = {0, 0, 0, 0};
         long[] out = {-9, -9, -9, -9};
-        assertEquals(0, M3NativeLeaseScan.collect(ids, leases, pins, states,
+        assertEquals(0, NativeLeaseScan.collect(ids, leases, pins, states,
                 0, new long[0], true));
-        assertEquals(2, M3NativeLeaseScan.collect(ids, leases, pins, states,
+        assertEquals(2, NativeLeaseScan.collect(ids, leases, pins, states,
                 ids.length, out, true));
         assertArrayEquals(new long[]{1, 4, -9, -9}, out);
     }
@@ -57,15 +57,15 @@ final class M3NativeLeaseFullscanFallbackTest {
         byte[] states = {0, 0, 0};
         long[] output = {88, 88, 88};
         assertThrows(IllegalArgumentException.class,
-                () -> M3NativeLeaseScan.collect(ids, leases, pins, states,
+                () -> NativeLeaseScan.collect(ids, leases, pins, states,
                         ids.length, output, true));
         assertArrayEquals(new long[]{88, 88, 88}, output);
         leases[1] = 0;
         assertThrows(IllegalArgumentException.class,
-                () -> M3NativeLeaseScan.collect(ids, leases, pins, states,
+                () -> NativeLeaseScan.collect(ids, leases, pins, states,
                         ids.length, new long[2], true));
         assertThrows(IllegalArgumentException.class,
-                () -> M3NativeLeaseScan.collect(ids, leases, pins, states,
+                () -> NativeLeaseScan.collect(ids, leases, pins, states,
                         ids.length, ids, true));
     }
 
@@ -80,15 +80,15 @@ final class M3NativeLeaseFullscanFallbackTest {
         while (first < ids.length) {
             long[] javaOut = {-77, -77};
             long[] nativeOut = {-77, -77};
-            long expected = M3NativeLeaseScan.collectWindow(ids, leases, pins,
+            long expected = NativeLeaseScan.collectWindow(ids, leases, pins,
                     states, ids.length, first, javaOut, false);
-            long candidate = M3NativeLeaseScan.collectWindow(ids, leases, pins,
+            long candidate = NativeLeaseScan.collectWindow(ids, leases, pins,
                     states, ids.length, first, nativeOut, true);
             assertEquals(expected, candidate);
             assertArrayEquals(javaOut, nativeOut);
-            int next = M3NativeLeaseScan.nextIndex(candidate);
+            int next = NativeLeaseScan.nextIndex(candidate);
             assertTrue(next > first);
-            count += M3NativeLeaseScan.written(candidate);
+            count += NativeLeaseScan.written(candidate);
             first = next;
         }
         assertEquals(3, count);

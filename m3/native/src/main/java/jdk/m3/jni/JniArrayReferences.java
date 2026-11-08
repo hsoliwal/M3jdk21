@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
- * JNI array ownership bridges to the existing M3ScopedLeaseTable.
+ * JNI array ownership bridges to the existing ScopedLeaseTable.
  *
  * <p>Every source occurrence in a JNI concatenation is one registered
  * cooperative lease, including repeated uses of the same source array.
@@ -22,14 +22,14 @@ import java.util.function.Supplier;
  * must instead cover its entire lifetime. Native strong global references
  * use pinGlobal/unpinGlobal across successful NewGlobalRef/DeleteGlobalRef.
  * Unregistered native aliases, weak globals and unknown escapes always
- * disqualify DOOP recycling. Array IDs must first be registered with M3ScopedLeaseTable.registerJniArray. Counts are not arbitrary JVM references.</p>
+ * disqualify DOOP recycling. Array IDs must first be registered with ScopedLeaseTable.registerJniArray. Counts are not arbitrary JVM references.</p>
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/main/java/com/synexia/primitives/M3JniArrayReferences.java blob 9986c7a6b84a; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3JniArrayReferences {
-    private M3JniArrayReferences() { }
+public final class JniArrayReferences {
+    private JniArrayReferences() { }
 
     /** Count one registered JNI array borrow using the canonical JNI pin lane. */
-    public static void withArray(M3ScopedLeaseTable table, long arrayId,
+    public static void withArray(ScopedLeaseTable table, long arrayId,
                                  Runnable nativeCall) {
         Objects.requireNonNull(table, "table");
         Objects.requireNonNull(nativeCall, "nativeCall");
@@ -51,7 +51,7 @@ public final class M3JniArrayReferences {
     }
 
     /** Count both input-array edges during a copied JNI concatenation. */
-    public static void withConcat(M3ScopedLeaseTable table, long leftId,
+    public static void withConcat(ScopedLeaseTable table, long leftId,
                                   long rightId, Runnable nativeCall) {
         Objects.requireNonNull(nativeCall, "nativeCall");
         retainSources(table, leftId, rightId);
@@ -72,7 +72,7 @@ public final class M3JniArrayReferences {
     }
 
     /** Value-returning form; a returned ALIAS needs independent retained edges. */
-    public static <R> R withConcat(M3ScopedLeaseTable table, long leftId,
+    public static <R> R withConcat(ScopedLeaseTable table, long leftId,
                                     long rightId, Supplier<? extends R> nativeCall) {
         Objects.requireNonNull(nativeCall, "nativeCall");
         retainSources(table, leftId, rightId);
@@ -98,7 +98,7 @@ public final class M3JniArrayReferences {
      * native concatenation. An aliased pair intentionally counts twice.
      * All-or-nothing even if the second acquire fails.
      */
-    public static void retainSources(M3ScopedLeaseTable table, long leftId,
+    public static void retainSources(ScopedLeaseTable table, long leftId,
                                      long rightId) {
         Objects.requireNonNull(table, "table");
         // Reuse the canonical table monitor across both registered source edges.
@@ -119,7 +119,7 @@ public final class M3JniArrayReferences {
 
     //FLLDCIM: MRL - releaseSources: the reverse release pair under the same table monitor; the first failure stays primary, the second is suppressed
     /** Release both retained source edges, including aliased occurrences. */
-    public static void releaseSources(M3ScopedLeaseTable table, long leftId,
+    public static void releaseSources(ScopedLeaseTable table, long leftId,
                                       long rightId) {
         Objects.requireNonNull(table, "table");
         // Keep reverse releases and failure suppression within one owner transition.
@@ -142,7 +142,7 @@ public final class M3JniArrayReferences {
      * Scoped native critical access. The native function must complete its
      * ReleasePrimitiveArrayCritical before returning to this Java scope.
      */
-    public static void withCritical(M3ScopedLeaseTable table, long arrayId,
+    public static void withCritical(ScopedLeaseTable table, long arrayId,
                                     Runnable nativeCall) {
         Objects.requireNonNull(table, "table");
         Objects.requireNonNull(nativeCall, "nativeCall");
@@ -176,7 +176,7 @@ public final class M3JniArrayReferences {
      * Native critical regions must not invoke Java callbacks or blocking JNI operations.
      * Returned aliases/asynchronous native access require independent retained leases.
      */
-    public static void withArrayBatch(M3ScopedLeaseTable table, long[] arrayIds,
+    public static void withArrayBatch(ScopedLeaseTable table, long[] arrayIds,
                                       Runnable nativeCall) {
         Objects.requireNonNull(nativeCall, "nativeCall");
         long[] frozen = checkedArrayIds(table, arrayIds);
@@ -193,7 +193,7 @@ public final class M3JniArrayReferences {
     }
 
     /** Value-returning scoped form; returned native aliases need separate leases. */
-    public static <R> R withArrayBatch(M3ScopedLeaseTable table, long[] arrayIds,
+    public static <R> R withArrayBatch(ScopedLeaseTable table, long[] arrayIds,
                                        Supplier<? extends R> nativeCall) {
         Objects.requireNonNull(nativeCall, "nativeCall");
         long[] frozen = checkedArrayIds(table, arrayIds);
@@ -209,7 +209,7 @@ public final class M3JniArrayReferences {
         }
     }
 
-    private static long[] checkedArrayIds(M3ScopedLeaseTable table, long[] arrayIds) {
+    private static long[] checkedArrayIds(ScopedLeaseTable table, long[] arrayIds) {
         Objects.requireNonNull(table, "table");
         Objects.requireNonNull(arrayIds, "arrayIds");
         if (arrayIds.length == 0 || arrayIds.length > MAX_SCOPED_ARRAYS) {
@@ -227,7 +227,7 @@ public final class M3JniArrayReferences {
      * ownership monitor, and its synchronized per-ID methods reenter this lock.
      * No observer may mistake an incomplete array batch for a publishable state.
      */
-    private static void beginBatch(M3ScopedLeaseTable table, long[] ids) {
+    private static void beginBatch(ScopedLeaseTable table, long[] ids) {
         synchronized (table) {
             int acquired = 0;
             try {
@@ -246,7 +246,7 @@ public final class M3JniArrayReferences {
         }
     }
 
-    private static void endBatchPreservingFailure(M3ScopedLeaseTable table, long[] ids,
+    private static void endBatchPreservingFailure(ScopedLeaseTable table, long[] ids,
                                                    Throwable primary) {
         try {
             endBatch(table, ids, ids.length);
@@ -262,7 +262,7 @@ public final class M3JniArrayReferences {
      * cleanup error with later errors suppressed. The caller preserves its own
      * callback error in preference to a cleanup failure.
      */
-    private static void endBatch(M3ScopedLeaseTable table, long[] ids, int acquired) {
+    private static void endBatch(ScopedLeaseTable table, long[] ids, int acquired) {
         synchronized (table) {
             Throwable first = null;
             for (int i = acquired - 1; i >= 0; i--) {
@@ -279,12 +279,12 @@ public final class M3JniArrayReferences {
     }
 
     /** Call only AFTER a strong JNI NewGlobalRef has succeeded. */
-    public static void pinGlobal(M3ScopedLeaseTable table, long arrayId) {
+    public static void pinGlobal(ScopedLeaseTable table, long arrayId) {
         Objects.requireNonNull(table, "table").pin(arrayId);
     }
 
     /** Call when its matching strong global is deleted via DeleteGlobalRef. */
-    public static void unpinGlobal(M3ScopedLeaseTable table, long arrayId) {
+    public static void unpinGlobal(ScopedLeaseTable table, long arrayId) {
         Objects.requireNonNull(table, "table").unpin(arrayId);
     }
 }

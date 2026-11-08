@@ -7,29 +7,29 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /** Java 21 proof of balanced explicit ownership across exceptions and threads. */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/test/java/com/synexia/primitives/M3LeaseScopesSelfTest.java blob 236d58d87439; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3LeaseScopesSelfTest {
-    private M3LeaseScopesSelfTest() { }
+public final class LeaseScopesSelfTest {
+    private LeaseScopesSelfTest() { }
 
     public static void main(String[] args) throws Exception {
         nestedAndExceptionalScope();
         valueReturningAndPin();
         concurrentScope();
-        System.out.println("M3LeaseScopesSelfTest PASS");
+        System.out.println("LeaseScopesSelfTest PASS");
     }
 
     private static void nestedAndExceptionalScope() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
-            M3LeaseScopes.withLease(table, id, () -> {
+            LeaseScopes.withLease(table, id, () -> {
                 check(table.leaseCount(id) == 1, "outer lexical count");
-                M3LeaseScopes.withLease(table, id, () -> {
+                LeaseScopes.withLease(table, id, () -> {
                     check(table.leaseCount(id) == 2, "nested lexical count");
                 });
                 check(table.leaseCount(id) == 1, "inner finally release");
             });
             check(table.leaseCount(id) == 0, "outer finally release");
             try {
-                M3LeaseScopes.withLease(table, id, (Runnable) () -> {
+                LeaseScopes.withLease(table, id, (Runnable) () -> {
                     throw new IllegalStateException("callback failure");
                 });
                 throw new AssertionError("exception must propagate");
@@ -42,11 +42,11 @@ public final class M3LeaseScopesSelfTest {
     }
 
     private static void valueReturningAndPin() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
-            int number = M3LeaseScopes.withLease(table, id, () -> 13);
+            int number = LeaseScopes.withLease(table, id, () -> 13);
             check(number == 13 && table.leaseCount(id) == 0, "return and release");
-            M3LeaseScopes.withPin(table, id, () -> {
+            LeaseScopes.withPin(table, id, () -> {
                 check(table.pinCount(id) == 1, "pin held");
                 check(!table.tryRetire(id), "cannot retire pinned handle");
             });
@@ -55,7 +55,7 @@ public final class M3LeaseScopesSelfTest {
     }
 
     private static void concurrentScope() throws Exception {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
             CountDownLatch gate = new CountDownLatch(1);
             AtomicReference<Throwable> failure = new AtomicReference<>();
@@ -65,7 +65,7 @@ public final class M3LeaseScopesSelfTest {
                     try {
                         gate.await();
                         for (int j = 0; j < 300; j++) {
-                            M3LeaseScopes.withLease(table, id,
+                            LeaseScopes.withLease(table, id,
                                     () -> check(table.leaseCount(id) > 0, "in lexical scope"));
                         }
                     } catch (Throwable e) {

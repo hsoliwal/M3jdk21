@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 
 /** Contract oracle: source bytes, lease balance, aliasing and JNI parity. */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/test/java/com/synexia/primitives/M3JniByteConcatTest.java blob 098b1f6bc009; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-final class M3JniByteConcatTest {
+final class JniByteConcatTest {
     @Test
     void emptyUnequalAndAliasedSourcesProduceFreshArraysWithoutLeakedPins() {
-        try (var owner = new M3ScopedLeaseTable()) {
+        try (var owner = new ScopedLeaseTable()) {
             long leftId = owner.allocate();
             long rightId = owner.allocate();
             byte[] left = { 9, -1, 0 };
@@ -24,7 +24,7 @@ final class M3JniByteConcatTest {
             owner.registerJniArray(leftId, left);
             owner.registerJniArray(rightId, right);
 
-            byte[] result = M3JniByteConcat.concat(owner, leftId, left,
+            byte[] result = JniByteConcat.concat(owner, leftId, left,
                     rightId, right, false);
             assertArrayEquals(new byte[]{ 9, -1, 0, 1, 2 }, result);
             assertNotSame(result, left);
@@ -34,18 +34,18 @@ final class M3JniByteConcatTest {
             assertEquals(0, owner.pinCount(leftId));
             assertEquals(0, owner.pinCount(rightId));
 
-            byte[] repeated = M3JniByteConcat.concat(owner, leftId, left,
+            byte[] repeated = JniByteConcat.concat(owner, leftId, left,
                     leftId, left, false);
             assertArrayEquals(new byte[]{ 9, -1, 0, 9, -1, 0 }, repeated);
             assertEquals(0, owner.jniArrayBorrowCount(leftId));
             assertTrue(owner.eligible(leftId));
         }
 
-        try (var owner = new M3ScopedLeaseTable()) {
+        try (var owner = new ScopedLeaseTable()) {
             long id = owner.allocate();
             byte[] empty = new byte[0];
             owner.registerJniArray(id, empty);
-            byte[] copy = M3JniByteConcat.concat(owner, id, empty, id, empty, true);
+            byte[] copy = JniByteConcat.concat(owner, id, empty, id, empty, true);
             assertEquals(0, copy.length);
             assertNotSame(empty, copy);
             assertEquals(0, owner.pinCount(id));
@@ -54,13 +54,13 @@ final class M3JniByteConcatTest {
 
     @Test
     void nestedScopeBlocksReclamationEvenAfterInnerCall() {
-        try (var owner = new M3ScopedLeaseTable()) {
+        try (var owner = new ScopedLeaseTable()) {
             long id = owner.allocate();
             byte[] data = { 3, 5, 8 };
             owner.registerJniArray(id, data);
-            M3JniArrayReferences.withArray(owner, id, () -> {
+            JniArrayReferences.withArray(owner, id, () -> {
                 assertEquals(1, owner.jniArrayBorrowCount(id));
-                byte[] copy = M3JniByteConcat.concat(owner, id, data, id, data, true);
+                byte[] copy = JniByteConcat.concat(owner, id, data, id, data, true);
                 assertArrayEquals(new byte[]{ 3, 5, 8, 3, 5, 8 }, copy);
                 assertEquals(1, owner.jniArrayBorrowCount(id));
                 assertFalse(owner.tryRetire(id));
@@ -72,19 +72,19 @@ final class M3JniByteConcatTest {
 
     @Test
     void refuseUnknownRetiredOrNullInputWithoutLeakingFirstBorrow() {
-        try (var owner = new M3ScopedLeaseTable()) {
+        try (var owner = new ScopedLeaseTable()) {
             long valid = owner.allocate();
             long retired = owner.allocate();
             byte[] input = { 42 };
             owner.registerJniArray(valid, input);
             assertTrue(owner.tryRetire(retired));
             assertThrows(IllegalStateException.class,
-                    () -> M3JniByteConcat.concat(owner, valid, input,
+                    () -> JniByteConcat.concat(owner, valid, input,
                             retired, input, true));
             assertEquals(0, owner.jniArrayBorrowCount(valid));
             assertEquals(0, owner.pinCount(valid));
             assertThrows(NullPointerException.class,
-                    () -> M3JniByteConcat.concat(owner, valid, input,
+                    () -> JniByteConcat.concat(owner, valid, input,
                             valid, null, false));
             assertEquals(0, owner.jniArrayBorrowCount(valid));
         }
@@ -93,7 +93,7 @@ final class M3JniByteConcatTest {
     @Test
     void deterministicDifferentialJavaAndOptionalNativePaths() {
         Random random = new Random(0x4d334a4e494cL);
-        try (var owner = new M3ScopedLeaseTable()) {
+        try (var owner = new ScopedLeaseTable()) {
             for (int i = 0; i < 128; i++) {
                 int n = i % 33 == 0 ? 1025 + i : i % 129;
                 int m = i % 19 == 0 ? 4097 + i : (127 - i) % 71;
@@ -108,9 +108,9 @@ final class M3JniByteConcatTest {
                 byte[] expected = Arrays.copyOf(left, n + m);
                 System.arraycopy(right, 0, expected, n, m);
                 assertArrayEquals(expected,
-                        M3JniByteConcat.concat(owner, a, left, b, right, false));
+                        JniByteConcat.concat(owner, a, left, b, right, false));
                 assertArrayEquals(expected,
-                        M3JniByteConcat.concat(owner, a, left, b, right, true));
+                        JniByteConcat.concat(owner, a, left, b, right, true));
                 assertEquals(0, owner.jniArrayBorrowCount(a));
                 assertEquals(0, owner.jniArrayBorrowCount(b));
             }
@@ -123,7 +123,7 @@ final class M3JniByteConcatTest {
         Random random = new Random(0x4d334a4e4943524cL);
         int[] lengths = { 0, 1, 2, 127, 128, 129, 1023, 1024, 1025,
                 4095, 4096, 4097, 8191, 8192, 8193, 65535, 65536, 65537 };
-        try (var owner = new M3ScopedLeaseTable()) {
+        try (var owner = new ScopedLeaseTable()) {
             for (int length : lengths) {
                 byte[] left = new byte[length];
                 byte[] right = new byte[length / 2];
@@ -137,9 +137,9 @@ final class M3JniByteConcatTest {
                 owner.registerJniArray(rightId, right);
                 byte[] expected = Arrays.copyOf(left, left.length + right.length);
                 System.arraycopy(right, 0, expected, left.length, right.length);
-                byte[] javaCopy = M3JniByteConcat.concat(owner, leftId, left,
+                byte[] javaCopy = JniByteConcat.concat(owner, leftId, left,
                         rightId, right, false);
-                byte[] nativeCopy = M3JniByteConcat.concat(owner, leftId, left,
+                byte[] nativeCopy = JniByteConcat.concat(owner, leftId, left,
                         rightId, right, true);
                 assertArrayEquals(expected, javaCopy);
                 assertArrayEquals(expected, nativeCopy);
@@ -149,7 +149,7 @@ final class M3JniByteConcatTest {
 
                 byte[] aliasExpected = Arrays.copyOf(left, left.length * 2);
                 System.arraycopy(left, 0, aliasExpected, left.length, left.length);
-                byte[] aliasCopy = M3JniByteConcat.concat(owner, leftId, left,
+                byte[] aliasCopy = JniByteConcat.concat(owner, leftId, left,
                         leftId, left, true);
                 assertArrayEquals(aliasExpected, aliasCopy);
                 assertArrayEquals(leftBefore, left);
@@ -172,13 +172,13 @@ final class M3JniByteConcatTest {
     void directNativeEntryNullFailureDoesNotPoisonLaterCalls()
             throws ReflectiveOperationException {
         if (Boolean.getBoolean("jdk.m3.jni.requireNative")) {
-            assertTrue(M3JniByteConcat.nativeLibraryLoaded(),
+            assertTrue(JniByteConcat.nativeLibraryLoaded(),
                     "native-required direct JNI boundary must load the library");
         } else {
-            Assumptions.assumeTrue(M3JniByteConcat.nativeLibraryLoaded(),
+            Assumptions.assumeTrue(JniByteConcat.nativeLibraryLoaded(),
                     "optional JNI library unavailable");
         }
-        Method nativeCopy = M3JniByteConcat.class.getDeclaredMethod(
+        Method nativeCopy = JniByteConcat.class.getDeclaredMethod(
                 "concatNative", byte[].class, byte[].class);
         nativeCopy.setAccessible(true);
 
@@ -219,18 +219,18 @@ final class M3JniByteConcatTest {
     @Test
     void actualNativeRequiredGateDoesNotSilentlyPassWithoutLibrary() {
         if (Boolean.getBoolean("jdk.m3.jni.requireNative")) {
-            assertTrue(M3JniByteConcat.nativeLibraryLoaded(),
+            assertTrue(JniByteConcat.nativeLibraryLoaded(),
                     "native-required run must link the JNI owner library");
         } else {
-            Assumptions.assumeTrue(M3JniByteConcat.nativeLibraryLoaded(),
+            Assumptions.assumeTrue(JniByteConcat.nativeLibraryLoaded(),
                     "optional JNI byte-concatenation library unavailable");
         }
-        try (var owner = new M3ScopedLeaseTable()) {
+        try (var owner = new ScopedLeaseTable()) {
             long id = owner.allocate();
             byte[] source = { 1, 2, 3 };
             owner.registerJniArray(id, source);
             assertArrayEquals(new byte[]{ 1, 2, 3, 1, 2, 3 },
-                    M3JniByteConcat.concat(owner, id, source, id, source, true));
+                    JniByteConcat.concat(owner, id, source, id, source, true));
             assertEquals(0, owner.jniArrayBorrowCount(id));
         }
     }

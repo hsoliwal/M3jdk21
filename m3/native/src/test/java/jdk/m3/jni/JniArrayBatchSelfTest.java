@@ -8,14 +8,14 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Actual M3ScopedLeaseTable integration oracle; Java21 standalone, no test framework.
+ * Actual ScopedLeaseTable integration oracle; Java21 standalone, no test framework.
  * The JNI selection is tested in Java and preferNative modes. A native library is optional;
  * nativeAvailable=false does not establish native ABI qualification.
  */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/test/java/com/synexia/primitives/M3JniArrayBatchSelfTest.java blob 77c00f8e94b4; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3JniArrayBatchSelfTest {
+public final class JniArrayBatchSelfTest {
     private static long checks;
-    private M3JniArrayBatchSelfTest() { }
+    private JniArrayBatchSelfTest() { }
 
     public static void main(String[] args) throws Exception {
         repeatedAndMutatedInputs();
@@ -25,14 +25,14 @@ public final class M3JniArrayBatchSelfTest {
         concurrentBorrowers();
         batchPublicationIsAtomicToIndependentReaders();
         System.out.println("M3_JNI_ARRAY_BATCH_PASS checks=" + checks
-                + " nativeAvailable=" + M3NativeLeaseScan.nativeAvailable());
+                + " nativeAvailable=" + NativeLeaseScan.nativeAvailable());
     }
 
     private static void repeatedAndMutatedInputs() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long a = array(table), b = array(table), c = array(table);
             long[] requested = {a, b, a};
-            M3JniArrayReferences.withArrayBatch(table, requested, (Runnable) () -> {
+            JniArrayReferences.withArrayBatch(table, requested, (Runnable) () -> {
                 check(table.jniArrayBorrowCount(a) == 2, "aliased source counts twice");
                 check(table.jniArrayBorrowCount(b) == 1, "second source counted");
                 check(table.jniArrayLeaseBegins() == 3, "one borrow per array occurrence");
@@ -42,7 +42,7 @@ public final class M3JniArrayBatchSelfTest {
             check(table.jniArrayBorrowCount(a) == 0, "frozen input released original a");
             check(table.jniArrayBorrowCount(b) == 0, "frozen input released b");
             check(table.jniArrayBorrowCount(c) == 0, "mutation did not acquire c");
-            int result = M3JniArrayReferences.withArrayBatch(table, new long[]{c, c},
+            int result = JniArrayReferences.withArrayBatch(table, new long[]{c, c},
                     () -> table.jniArrayBorrowCount(c));
             check(result == 2, "returning callback sees all borrows");
             check(table.jniArrayBorrowCount(c) == 0, "returning callback balanced");
@@ -50,12 +50,12 @@ public final class M3JniArrayBatchSelfTest {
     }
 
     private static void rollbackAndFailureCausality() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long a = array(table), b = array(table), retired = array(table);
             check(table.tryRetire(retired), "retired ID fixture");
             boolean callbackReached = false;
             try {
-                M3JniArrayReferences.withArrayBatch(table, new long[]{a, b, a, retired},
+                JniArrayReferences.withArrayBatch(table, new long[]{a, b, a, retired},
                         (Runnable) () -> { throw new AssertionError("must not run"); });
             } catch (IllegalStateException expected) {
                 callbackReached = true;
@@ -67,7 +67,7 @@ public final class M3JniArrayBatchSelfTest {
 
             IllegalArgumentException primary = new IllegalArgumentException("native callback");
             try {
-                M3JniArrayReferences.withArrayBatch(table, new long[]{a, b},
+                JniArrayReferences.withArrayBatch(table, new long[]{a, b},
                         (Runnable) () -> {
                             table.endJniArrayAccess(b); // illegal premature JNI release fixture
                             throw primary;
@@ -80,7 +80,7 @@ public final class M3JniArrayBatchSelfTest {
             check(table.jniArrayBorrowCount(a) == 0
                     && table.jniArrayBorrowCount(b) == 0,
                     "remaining JNI edge released even after cleanup fault");
-            refuses(() -> M3JniArrayReferences.withArrayBatch(table, new long[]{a, b},
+            refuses(() -> JniArrayReferences.withArrayBatch(table, new long[]{a, b},
                     (Runnable) () -> table.endJniArrayAccess(b)),
                     IllegalStateException.class);
             check(table.eligible(a) && table.eligible(b), "cleanup-only failure leaves no pins");
@@ -88,26 +88,26 @@ public final class M3JniArrayBatchSelfTest {
     }
 
     private static void boundsAndCleanup() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long a = array(table);
-            refuses(() -> M3JniArrayReferences.withArrayBatch(table, new long[0],
+            refuses(() -> JniArrayReferences.withArrayBatch(table, new long[0],
                     (Runnable) () -> { }), IllegalArgumentException.class);
-            refuses(() -> M3JniArrayReferences.withArrayBatch(table, new long[]{0L},
+            refuses(() -> JniArrayReferences.withArrayBatch(table, new long[]{0L},
                     (Runnable) () -> { }), IllegalArgumentException.class);
-            refuses(() -> M3JniArrayReferences.withArrayBatch(table, new long[]{a, -1},
+            refuses(() -> JniArrayReferences.withArrayBatch(table, new long[]{a, -1},
                     (Runnable) () -> { }), IllegalArgumentException.class);
-            refuses(() -> M3JniArrayReferences.withArrayBatch(table,
-                    new long[M3JniArrayReferences.MAX_SCOPED_ARRAYS + 1],
+            refuses(() -> JniArrayReferences.withArrayBatch(table,
+                    new long[JniArrayReferences.MAX_SCOPED_ARRAYS + 1],
                     (Runnable) () -> { }), IllegalArgumentException.class);
-            refuses(() -> M3JniArrayReferences.withArrayBatch(table, null,
+            refuses(() -> JniArrayReferences.withArrayBatch(table, null,
                     (Runnable) () -> { }), NullPointerException.class);
-            refuses(() -> M3JniArrayReferences.withArrayBatch(table, new long[]{a},
+            refuses(() -> JniArrayReferences.withArrayBatch(table, new long[]{a},
                     (Runnable) null), NullPointerException.class);
-            refuses(() -> M3JniArrayReferences.withArrayBatch(null, new long[]{a},
+            refuses(() -> JniArrayReferences.withArrayBatch(null, new long[]{a},
                     (Runnable) () -> { }), NullPointerException.class);
-            long[] full = new long[M3JniArrayReferences.MAX_SCOPED_ARRAYS];
+            long[] full = new long[JniArrayReferences.MAX_SCOPED_ARRAYS];
             Arrays.fill(full, a);
-            M3JniArrayReferences.withArrayBatch(table, full, (Runnable) () ->
+            JniArrayReferences.withArrayBatch(table, full, (Runnable) () ->
                     check(table.jniArrayBorrowCount(a) == full.length,
                             "max bounded repeated source"));
             check(table.jniArrayBorrowCount(a) == 0, "max batch balanced");
@@ -116,7 +116,7 @@ public final class M3JniArrayBatchSelfTest {
 
     private static void nativeScanAndRandomizedDifferential() {
         Random random = new Random(0x4d334a4e49L);
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long[] resources = new long[6];
             for (int i = 0; i < resources.length; i++) resources[i] = array(table);
             long[] javaSelected = new long[resources.length];
@@ -130,7 +130,7 @@ public final class M3JniArrayBatchSelfTest {
                     sourceIds[i] = resources[k];
                     occurrences[k]++;
                 }
-                M3JniArrayReferences.withArrayBatch(table, sourceIds, (Runnable) () -> {
+                JniArrayReferences.withArrayBatch(table, sourceIds, (Runnable) () -> {
                     int distinct = 0;
                     for (int j = 0; j < resources.length; j++) {
                         check(table.jniArrayBorrowCount(resources[j]) == occurrences[j],
@@ -155,7 +155,7 @@ public final class M3JniArrayBatchSelfTest {
     }
 
     private static void concurrentBorrowers() throws Exception {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long a = array(table), b = array(table);
             Thread[] threads = new Thread[4];
             CountDownLatch start = new CountDownLatch(1);
@@ -165,7 +165,7 @@ public final class M3JniArrayBatchSelfTest {
                     try {
                         start.await();
                         for (int trial = 0; trial < 1500; trial++) {
-                            M3JniArrayReferences.withArrayBatch(table, new long[]{a, b, a},
+                            JniArrayReferences.withArrayBatch(table, new long[]{a, b, a},
                                     (Runnable) () -> {
                                         check(!table.eligible(a), "concurrent a pinned");
                                         check(!table.eligible(b), "concurrent b pinned");
@@ -192,7 +192,7 @@ public final class M3JniArrayBatchSelfTest {
      * from count equality after the batch callback finishes.
      */
     private static void batchPublicationIsAtomicToIndependentReaders() throws Exception {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long a = array(table), b = array(table), c = array(table);
             long[] batch = {a, b, a, c};
             CountDownLatch start = new CountDownLatch(1);
@@ -203,7 +203,7 @@ public final class M3JniArrayBatchSelfTest {
                 try {
                     start.await();
                     for (int i = 0; i < 16_000; i++) {
-                        M3JniArrayReferences.withArrayBatch(table, batch, (Runnable) () -> {
+                        JniArrayReferences.withArrayBatch(table, batch, (Runnable) () -> {
                             synchronized (table) {
                                 check(table.jniArrayBorrowCount(a) == 2
                                         && table.jniArrayBorrowCount(b) == 1
@@ -258,7 +258,7 @@ public final class M3JniArrayBatchSelfTest {
         }
     }
 
-    private static long array(M3ScopedLeaseTable table) {
+    private static long array(ScopedLeaseTable table) {
         long id = table.allocate();
         table.registerJniArray(id, new byte[8]);
         return id;

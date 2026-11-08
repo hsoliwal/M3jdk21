@@ -23,10 +23,10 @@ import java.util.function.Supplier;
  * probe on the Java path, the deterministic full scan and window scans of the donor self-tests, and a seeded stream
  * of random lease, pin, pool, JNI-borrow, scan, concat and scope operations with their results or refusals. Two
  * dumps of the same inputs must be byte-identical. Package names inside messages are erased so the two sides print
- * the same text. usage: java -cp &lt;classes&gt; jdk.m3.jni.M3ScopedLeaseDump &lt;package&gt; [operations=100000]
+ * the same text. usage: java -cp &lt;classes&gt; jdk.m3.jni.ScopedLeaseDump &lt;package&gt; [operations=100000]
  */
 //FLLDCIM: RELOCATE - differential driver of recipe m3/native/recipe/scoped-leases-20261106 (new, test scope)
-public final class M3ScopedLeaseDump {
+public final class ScopedLeaseDump {
     static final int CONCAT_CASES = 1025;
     static final long CONCAT_SEED = 0x4D334A4E494CL;
     static final long SCAN_SEED = 0x4d335f6c696665L;
@@ -50,22 +50,22 @@ public final class M3ScopedLeaseDump {
     private final Class<?> references;
     private final Class<?> concat;
 
-    public M3ScopedLeaseDump(String pkg, PrintStream out) throws ClassNotFoundException {
+    public ScopedLeaseDump(String pkg, PrintStream out) throws ClassNotFoundException {
         this.pkg = pkg;
         this.out = out;
-        table = Class.forName(pkg + ".M3ScopedLeaseTable");
-        scan = Class.forName(pkg + ".M3NativeLeaseScan");
-        window = Class.forName(pkg + ".M3LeaseWindowScan");
-        scopes = Class.forName(pkg + ".M3LeaseScopes");
-        references = Class.forName(pkg + ".M3JniArrayReferences");
-        concat = Class.forName(pkg + ".M3JniByteConcat");
+        table = Class.forName(pkg + ".ScopedLeaseTable");
+        scan = Class.forName(pkg + ".NativeLeaseScan");
+        window = Class.forName(pkg + ".LeaseWindowScan");
+        scopes = Class.forName(pkg + ".LeaseScopes");
+        references = Class.forName(pkg + ".JniArrayReferences");
+        concat = Class.forName(pkg + ".JniByteConcat");
     }
 
     public static void main(String[] args) throws Exception {
         if (args.length < 1 || args.length > 2) throw new IllegalArgumentException("<package> [operations]");
         int operations = args.length == 2 ? Integer.parseInt(args[1]) : DEFAULT_OPERATIONS;
-        M3ScopedLeaseDump dump = new M3ScopedLeaseDump(args[0], System.out);
-        dump.out.println("M3ScopedLeaseDump nativeScan=" + dump.staticCall(dump.scan, "nativeAvailable")
+        ScopedLeaseDump dump = new ScopedLeaseDump(args[0], System.out);
+        dump.out.println("ScopedLeaseDump nativeScan=" + dump.staticCall(dump.scan, "nativeAvailable")
                 + " nativeConcat=" + dump.staticCall(dump.concat, "nativeLibraryLoaded")
                 + " maxScopedArrays=" + dump.references.getField("MAX_SCOPED_ARRAYS").get(null));
         int cases = dump.concatParity();
@@ -210,7 +210,7 @@ public final class M3ScopedLeaseDump {
 
     // ---- section B: the self-tests' deterministic scans ----------------------------------------------------------
 
-    /** M3ScopedLeaseTableSelfTest.deterministicScan: 1,000 slots, seeded acquire/pin/dirty, full scans. */
+    /** ScopedLeaseTableSelfTest.deterministicScan: 1,000 slots, seeded acquire/pin/dirty, full scans. */
     public void deterministicScan() {
         Random random = new Random(SCAN_SEED);
         Object instance = newTable();
@@ -244,7 +244,7 @@ public final class M3ScopedLeaseDump {
         }
     }
 
-    /** M3ScopedLeaseWindowSelfTest.sparseAndDenseParity: 65,536 slots, every cap, Java and preferred paths. */
+    /** ScopedLeaseWindowSelfTest.sparseAndDenseParity: 65,536 slots, every cap, Java and preferred paths. */
     public void windowScans() {
         Random random = new Random(WINDOW_SEED);
         Object instance = newTable();

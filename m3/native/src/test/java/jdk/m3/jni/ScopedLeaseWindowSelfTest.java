@@ -7,20 +7,20 @@ import java.util.Random;
 
 /** Standalone Java21 compiler-and-runtime proof, with optional JNI parity in the same process. */
 //FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-primitives/src/test/java/com/synexia/primitives/M3ScopedLeaseWindowSelfTest.java blob 96a098376fb4; recipe m3/native/recipe/scoped-leases-20261106/relocate.py v1
-public final class M3ScopedLeaseWindowSelfTest {
-    private M3ScopedLeaseWindowSelfTest() { }
+public final class ScopedLeaseWindowSelfTest {
+    private ScopedLeaseWindowSelfTest() { }
 
     public static void main(String[] args) {
         sparseAndDenseParity();
         zeroCandidatesAndEndCursor();
         refusalAndDirtyState();
         concurrentOwnerRecheck();
-        System.out.println("M3ScopedLeaseWindowSelfTest PASS native="
-                + M3NativeLeaseScan.nativeAvailable());
+        System.out.println("ScopedLeaseWindowSelfTest PASS native="
+                + NativeLeaseScan.nativeAvailable());
     }
 
     private static void sparseAndDenseParity() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             int count = 65536;
             Random random = new Random(0x4d33_2026_1014L);
             boolean[] retired = new boolean[count + 1];
@@ -57,7 +57,7 @@ public final class M3ScopedLeaseWindowSelfTest {
         }
     }
 
-    private static long[] collect(M3ScopedLeaseTable table, int count, int capacity,
+    private static long[] collect(ScopedLeaseTable table, int count, int capacity,
                                   boolean preferNative) {
         long[] out = new long[capacity];
         long[] received = new long[count];
@@ -65,9 +65,9 @@ public final class M3ScopedLeaseWindowSelfTest {
         int total = 0;
         int steps = 0;
         while (first < count) {
-            long result = M3LeaseWindowScan.scan(table, first, out, preferNative);
-            int next = M3LeaseWindowScan.nextIndex(result);
-            int n = M3LeaseWindowScan.written(result);
+            long result = LeaseWindowScan.scan(table, first, out, preferNative);
+            int next = LeaseWindowScan.nextIndex(result);
+            int n = LeaseWindowScan.written(result);
             check(n >= 0 && n <= out.length, "bounded copied count");
             check(next > first && next <= count, "strict scan progress");
             System.arraycopy(out, 0, received, total, n);
@@ -79,70 +79,70 @@ public final class M3ScopedLeaseWindowSelfTest {
     }
 
     private static void zeroCandidatesAndEndCursor() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long[] one = new long[] {Long.MIN_VALUE};
-            long empty = M3LeaseWindowScan.scan(table, 0, one, true);
-            check(M3LeaseWindowScan.nextIndex(empty) == 0
-                    && M3LeaseWindowScan.written(empty) == 0,
+            long empty = LeaseWindowScan.scan(table, 0, one, true);
+            check(LeaseWindowScan.nextIndex(empty) == 0
+                    && LeaseWindowScan.written(empty) == 0,
                     "empty table has empty result");
             for (int i = 0; i < 300; i++) {
                 long id = table.allocate();
                 table.acquire(id);
             }
-            long packed = M3LeaseWindowScan.scan(table, 0, one, true);
-            check(M3LeaseWindowScan.nextIndex(packed) == table.size()
-                    && M3LeaseWindowScan.written(packed) == 0,
+            long packed = LeaseWindowScan.scan(table, 0, one, true);
+            check(LeaseWindowScan.nextIndex(packed) == table.size()
+                    && LeaseWindowScan.written(packed) == 0,
                     "busy slots scanned with no candidates");
             check(one[0] == Long.MIN_VALUE, "zero-candidate scan does not write output");
-            packed = M3LeaseWindowScan.scan(table, table.size(), one, false);
-            check(M3LeaseWindowScan.written(packed) == 0
-                    && M3LeaseWindowScan.nextIndex(packed) == table.size(),
+            packed = LeaseWindowScan.scan(table, table.size(), one, false);
+            check(LeaseWindowScan.written(packed) == 0
+                    && LeaseWindowScan.nextIndex(packed) == table.size(),
                     "terminal cursor is stable");
             for (int i = 1; i <= 300; i++) table.release(i);
         }
     }
 
     private static void refusalAndDirtyState() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
             long[] one = {0};
-            fail(() -> M3LeaseWindowScan.scan(table, -1, one, false),
+            fail(() -> LeaseWindowScan.scan(table, -1, one, false),
                     IllegalArgumentException.class);
-            fail(() -> M3LeaseWindowScan.scan(table, 2, one, false),
+            fail(() -> LeaseWindowScan.scan(table, 2, one, false),
                     IllegalArgumentException.class);
-            fail(() -> M3LeaseWindowScan.scan(table, 0, new long[0], false),
+            fail(() -> LeaseWindowScan.scan(table, 0, new long[0], false),
                     IllegalArgumentException.class);
-            fail(() -> M3LeaseWindowScan.scan(table, 0, null, false),
+            fail(() -> LeaseWindowScan.scan(table, 0, null, false),
                     NullPointerException.class);
             table.markDirty(id);
-            long result = M3LeaseWindowScan.scan(table, 0, one, true);
-            check(M3LeaseWindowScan.written(result) == 0, "dirty never appears eligible");
+            long result = LeaseWindowScan.scan(table, 0, one, true);
+            check(LeaseWindowScan.written(result) == 0, "dirty never appears eligible");
             table.markCommitted(id);
-            result = M3LeaseWindowScan.scan(table, 0, one, true);
-            check(M3LeaseWindowScan.written(result) == 1 && one[0] == id,
+            result = LeaseWindowScan.scan(table, 0, one, true);
+            check(LeaseWindowScan.written(result) == 1 && one[0] == id,
                     "committed and unleased may be a candidate");
         }
         long[] ids = {1, 2, 3};
         int[] zero = {0, 0, 0};
         byte[] invalid = {0, -1, 0};
         for (boolean nativeMode : new boolean[]{false, true}) {
-            fail(() -> M3NativeLeaseScan.collectWindow(ids, zero, zero, invalid,
+            fail(() -> NativeLeaseScan.collectWindow(ids, zero, zero, invalid,
                     3, 0, new long[3], nativeMode), IllegalArgumentException.class);
-            fail(() -> M3NativeLeaseScan.collectWindow(ids, zero, zero, new byte[3],
+            fail(() -> NativeLeaseScan.collectWindow(ids, zero, zero, new byte[3],
                     3, 0, ids, nativeMode), IllegalArgumentException.class);
         }
-        check(M3LeaseWindowScan.nextIndex(M3NativeLeaseScan.packWindow(19, 4)) == 19,
+        check(LeaseWindowScan.nextIndex(NativeLeaseScan.packWindow(19, 4)) == 19,
                 "cursor packing roundtrip");
-        check(M3LeaseWindowScan.written(M3NativeLeaseScan.packWindow(19, 4)) == 4,
+        check(LeaseWindowScan.written(NativeLeaseScan.packWindow(19, 4)) == 4,
                 "written packing roundtrip");
     }
 
     private static void concurrentOwnerRecheck() {
-        try (M3ScopedLeaseTable table = new M3ScopedLeaseTable()) {
+        try (ScopedLeaseTable table = new ScopedLeaseTable()) {
             long id = table.allocate();
             long[] one = new long[1];
-            long packed = M3LeaseWindowScan.scan(table, 0, one, true);
-            check(M3LeaseWindowScan.written(packed) == 1, "candidate observed");
+            long packed = LeaseWindowScan.scan(table, 0, one, true);
+            check(LeaseWindowScan.written(packed) == 1, "candidate observed");
             table.acquire(id);
             check(!table.tryRetire(id), "candidate never authorizes retirement after re-lease");
             table.release(id);
