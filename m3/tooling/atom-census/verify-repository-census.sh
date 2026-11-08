@@ -19,10 +19,10 @@ mapfile -t main_sources < <(
   find "$here/src/main/java/jdk/m3/tooling/atoms/repository" -name '*.java' -print | sort
 )
 javadoc --release 21 -quiet -Werror -Xdoclint:all -classpath "$classes" -d "$docs" "${main_sources[@]}"
-java -cp "$classes" jdk.m3.tooling.atoms.repository.M3RepositoryFileCensusSelfTest
-java -cp "$classes" jdk.m3.tooling.atoms.repository.M3RepositoryFileCensus \
+java -cp "$classes" jdk.m3.tooling.atoms.repository.RepositoryFileCensusSelfTest
+java -cp "$classes" jdk.m3.tooling.atoms.repository.RepositoryFileCensus \
   "$repository" HEAD "$runs/first"
-java -cp "$classes" jdk.m3.tooling.atoms.repository.M3RepositoryFileCensus \
+java -cp "$classes" jdk.m3.tooling.atoms.repository.RepositoryFileCensus \
   "$repository" HEAD "$runs/second"
 for file in FILES.tsv ATOMS.tsv EVIDENCE.tsv REPOSITORY_CENSUS_RECEIPT.tsv; do
   if ! cmp -s "$runs/first/$file" "$runs/second/$file"; then

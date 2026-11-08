@@ -9,10 +9,10 @@ MAIN="$HERE/src/main/java/jdk/m3/tooling/atoms"
 TEST="$HERE/src/test/java/jdk/m3/tooling/atoms"
 FIXTURE="$HERE/test-fixtures/jni-export-join"
 javac --release 21 -Xlint:all -Werror -d "$TARGET/classes" \
-  "$MAIN/contract/M3AtomKind.java" \
-  "$MAIN/M3AtomCensus.java" "$MAIN/M3JniDeclarationProjection.java" \
-  "$MAIN/M3JniExportJoin.java" "$TEST/M3JniExportJoinSelfTest.java"
-java -cp "$TARGET/classes" jdk.m3.tooling.atoms.M3JniExportJoinSelfTest \
+  "$MAIN/contract/AtomKind.java" \
+  "$MAIN/AtomCensus.java" "$MAIN/JniDeclarationProjection.java" \
+  "$MAIN/JniExportJoin.java" "$TEST/JniExportJoinSelfTest.java"
+java -cp "$TARGET/classes" jdk.m3.tooling.atoms.JniExportJoinSelfTest \
   | tee "$TARGET/selftest.log"
 grep -q $'M3_JNI_EXPORT_JOIN_PROOF\tchecks=28\tstatus=PASS' "$TARGET/selftest.log"
 javac --release 21 -Xlint:all -Werror -d "$TARGET/classes" \

@@ -8,7 +8,7 @@ unchanged for valid source input. The additive `--semantic` switch emits a
 third `SEMANTIC_CENSUS_<repo>.tsv` file from the same javac AST traversal:
 
 ```text
-java jdk.m3.tooling.atoms.M3AtomCensus --semantic <repo> <PATTERN_RULES.tsv> <out-dir> <java-source-root>...
+java jdk.m3.tooling.atoms.AtomCensus --semantic <repo> <PATTERN_RULES.tsv> <out-dir> <java-source-root>...
 ```
 
 The table contains `atom_id, repo, path, kind, owner, name, signature,

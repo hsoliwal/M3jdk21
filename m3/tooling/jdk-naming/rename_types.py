@@ -95,10 +95,11 @@ def main():
                     new = new.replace(f"Java_{jni}_{old}_", f"Java_{jni}_{rest}_").replace(f"{jni}_{old}.h", f"{jni}_{rest}.h")
                 elif p.suffix == ".java":
                     in_pkg = pkg_of.get(p) == pkg
-                    imports = re.search(rf"^import\s+{re.escape(pkg)}\.({old}|\*)\s*;", new, re.M)
+                    # Imports are read from the original text: the qualified rule above has already rewritten them.
+                    imports = re.search(rf"^import\s+{re.escape(pkg)}\.({old}|\*)\s*;", text, re.M)
                     if in_pkg or imports:
                         clash = [k for k in other_decl.get(old, ()) if k != pkg and re.search(
-                            rf"^import\s+{re.escape(k)}\.({old}|\*)\s*;", new, re.M)]
+                            rf"^import\s+{re.escape(k)}\.({old}|\*)\s*;", text, re.M)]
                         if clash:
                             sys.exit(f"REFUSE {rel}: {old} also imported from {clash}")
                         new = masked_sub(new, re.compile(rf"(?<![\w$]){old}(?![\w$])"), rest)

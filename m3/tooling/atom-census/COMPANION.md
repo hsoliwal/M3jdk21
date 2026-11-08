@@ -12,7 +12,7 @@ never changes the JDK class, its API, native symbols, serialization, module expo
 Run `bash verify-companion.sh` (javac `-Xlint:all -Werror`, then the four `main` proofs). From the command line:
 
 ```sh
-java -cp <classes> jdk.m3.tooling.atoms.M3CompanionPlan java.base:java.lang.String java.base:java.util.List
+java -cp <classes> jdk.m3.tooling.atoms.CompanionPlan java.base:java.lang.String java.base:java.util.List
 ```
 
 Received from com.synexia `synexia-openrewrite-recipes/crates/m3jdk21-companion-admission-20261029`; see
