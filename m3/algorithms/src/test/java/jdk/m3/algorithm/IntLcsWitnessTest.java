@@ -16,34 +16,34 @@ final class IntLcsWitnessTest {
     @Test void integerSequenceReconstruction() {
         int[] a = {1, 2, 3, 4, 1};
         int[] b = {3, 4, 1, 2, 1, 3};
-        int[] witness = IntLcsWitness.javaWitness(a, b);
+        int[] witness = DynamicProgrammingAlgorithms.javaWitness(a, b);
         assertEquals(3, witness.length);
-        assertTrue(IntLcsWitness.isSubsequence(witness, a));
-        assertTrue(IntLcsWitness.isSubsequence(witness, b));
-        assertEquals(IntLcsWitness.referenceLength(a, b), witness.length);
+        assertTrue(DynamicProgrammingAlgorithms.isSubsequence(witness, a));
+        assertTrue(DynamicProgrammingAlgorithms.isSubsequence(witness, b));
+        assertEquals(DynamicProgrammingAlgorithms.referenceLength(a, b), witness.length);
     }
 
     @Test void signedAndDuplicateIntegers() {
         int[] a = {Integer.MIN_VALUE, -1, 0, -1, Integer.MAX_VALUE};
         int[] b = {-1, Integer.MIN_VALUE, -1, Integer.MAX_VALUE};
-        int[] w = IntLcsWitness.javaWitness(a, b);
+        int[] w = DynamicProgrammingAlgorithms.javaWitness(a, b);
         assertEquals(3, w.length);
-        assertTrue(IntLcsWitness.isSubsequence(w, a));
-        assertTrue(IntLcsWitness.isSubsequence(w, b));
-        assertArrayEquals(new int[]{7, 7}, IntLcsWitness.javaWitness(
+        assertTrue(DynamicProgrammingAlgorithms.isSubsequence(w, a));
+        assertTrue(DynamicProgrammingAlgorithms.isSubsequence(w, b));
+        assertArrayEquals(new int[]{7, 7}, DynamicProgrammingAlgorithms.javaWitness(
                 new int[]{7, 7, 7}, new int[]{7, 7}));
     }
 
     @Test void rejectsNullAndBudgetDrift() {
         assertThrows(NullPointerException.class,
-                () -> IntLcsWitness.javaWitness(null, new int[0]));
+                () -> DynamicProgrammingAlgorithms.javaWitness(null, new int[0]));
         assertThrows(NullPointerException.class,
-                () -> IntLcsWitness.javaWitness(new int[0], null));
+                () -> DynamicProgrammingAlgorithms.javaWitness(new int[0], null));
         assertThrows(IllegalArgumentException.class,
-                () -> IntLcsWitness.javaWitness(new int[4097], new int[]{1}));
+                () -> DynamicProgrammingAlgorithms.javaWitness(new int[4097], new int[]{1}));
         assertThrows(IllegalArgumentException.class,
-                () -> IntLcsWitness.javaWitness(new int[4096], new int[4096]));
-        assertArrayEquals(new int[0], IntLcsWitness.javaWitness(new int[]{1, 2}, new int[0]));
+                () -> DynamicProgrammingAlgorithms.javaWitness(new int[4096], new int[4096]));
+        assertArrayEquals(new int[0], DynamicProgrammingAlgorithms.javaWitness(new int[]{1, 2}, new int[0]));
     }
 
     @Test void seededOracleAndUnchangedInputs() {
@@ -53,10 +53,10 @@ final class IntLcsWitnessTest {
             for (int i = 0; i < a.length; i++) a[i] = rng.nextInt(9) - 4;
             for (int j = 0; j < b.length; j++) b[j] = rng.nextInt(9) - 4;
             int[] beforeA = a.clone(), beforeB = b.clone();
-            int[] witness = IntLcsWitness.javaWitness(a, b);
-            assertEquals(IntLcsWitness.referenceLength(a, b), witness.length);
-            assertTrue(IntLcsWitness.isSubsequence(witness, a));
-            assertTrue(IntLcsWitness.isSubsequence(witness, b));
+            int[] witness = DynamicProgrammingAlgorithms.javaWitness(a, b);
+            assertEquals(DynamicProgrammingAlgorithms.referenceLength(a, b), witness.length);
+            assertTrue(DynamicProgrammingAlgorithms.isSubsequence(witness, a));
+            assertTrue(DynamicProgrammingAlgorithms.isSubsequence(witness, b));
             assertArrayEquals(beforeA, a);
             assertArrayEquals(beforeB, b);
         }
