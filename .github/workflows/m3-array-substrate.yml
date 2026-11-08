@@ -62,7 +62,7 @@ jobs:
       - name: Mapping JSON syntax
         run: python3 -m json.tool m3/docs/name-mapping.json >/dev/null
       - name: Provenance JSON syntax
-        run: python3 -m json.tool m3/arrays/provenance.json >/dev/null
+        run: python3 -m json.tool m3/evidence/arrays/provenance.json >/dev/null
 
   native:
     runs-on: ubuntu-24.04
