@@ -1,0 +1,9 @@
+# FOLD_MEMBERS v1.3 map (m3/tooling/jdk-naming/fold_members.py): OneMismatchWindowSearch folds into StringAlgorithms, one owner per concept (2026-11-08): one-mismatch window search joins the string family.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/StringAlgorithms.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java
+TAKE	OneMismatchWindowSearch.*
+IMPORT	java.util.Arrays
+IMPORT	java.util.Objects
+REFS	\bOneMismatchWindowSearch\b	StringAlgorithms
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/OneMismatchWindowSearch.java

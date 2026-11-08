@@ -1,0 +1,11 @@
+# FOLD_MEMBERS v1.3 map (m3/tooling/jdk-naming/fold_members.py): IntLcsWitness folds into DynamicProgrammingAlgorithms, one owner per concept (2026-11-08): LCS witness kernel joins the dynamic-programming family.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/DynamicProgrammingAlgorithms.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java
+TAKE	IntLcsWitness.*
+IMPORT	java.security.MessageDigest
+IMPORT	java.util.Arrays
+IMPORT	java.util.HexFormat
+IMPORT	java.util.Random
+REFS	\bIntLcsWitness\b	DynamicProgrammingAlgorithms
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/IntLcsWitness.java

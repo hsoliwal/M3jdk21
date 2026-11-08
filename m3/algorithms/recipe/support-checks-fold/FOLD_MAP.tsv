@@ -1,0 +1,12 @@
+# FOLD_MEMBERS v1.3 map (m3/tooling/jdk-naming/fold_members.py): ProgressChecks folds into AlgorithmSupport, one owner per concept (2026-11-08): monitor support helpers (nonNull, checkCanceled) join the module's support owner.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/AlgorithmSupport.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/ProgressChecks.java
+TAKE	ProgressChecks.*
+IMPORT	java.math.BigInteger
+IMPORT	java.time.Instant
+IMPORT	java.util.Objects
+IMPORT	java.util.concurrent.CancellationException
+REFS	\bProgressChecks\b	AlgorithmSupport
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/ProgressChecks.java
+OWNER_EDIT	adec5e53c18c	final class AlgorithmSupport {	public final class AlgorithmSupport {

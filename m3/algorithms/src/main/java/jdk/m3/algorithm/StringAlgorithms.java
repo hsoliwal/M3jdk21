@@ -235,12 +235,12 @@ public final class StringAlgorithms {
     //FLLDCIM: FOLD - member ZAlgorithm.zSearch from donor blob 5834d9dfa933 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZAlgorithm.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
     /** Progress-aware compatibility entrypoint. */
     public static int zSearch(String text, String pattern, ProgressMonitor monitor) {
-        ProgressMonitor checked = ProgressChecks.nonNull(monitor);
-        ProgressChecks.checkCanceled(checked);
+        ProgressMonitor checked = AlgorithmSupport.nonNull(monitor);
+        AlgorithmSupport.checkCanceled(checked);
         checked.beginTask("zSearch", 1L);
         try {
             var result = zSearch(text, pattern);
-            ProgressChecks.checkCanceled(checked);
+            AlgorithmSupport.checkCanceled(checked);
             checked.worked(1L);
             return result;
         } finally {
@@ -268,8 +268,8 @@ public final class StringAlgorithms {
             String text, String pattern, ProgressMonitor monitor) {
         String haystack = Objects.requireNonNull(text, "text");
         String needle = Objects.requireNonNull(pattern, "pattern");
-        ProgressMonitor checked = ProgressChecks.nonNull(monitor);
-        ProgressChecks.checkCanceled(checked);
+        ProgressMonitor checked = AlgorithmSupport.nonNull(monitor);
+        AlgorithmSupport.checkCanceled(checked);
         int[] matches = new int[haystack.length()];
         if (haystack.isEmpty() || needle.isEmpty()) {
             return matches;
@@ -279,7 +279,7 @@ public final class StringAlgorithms {
             throw new IllegalArgumentException("virtual Z geometry exceeds int range");
         }
         scanVirtualZ(haystack, needle, checked, matches, false);
-        ProgressChecks.checkCanceled(checked);
+        AlgorithmSupport.checkCanceled(checked);
         return matches;
     }
 
@@ -307,7 +307,7 @@ public final class StringAlgorithms {
         long comparisons = 0L;
         for (int index = 1; index < total; index++) {
             if ((index & 1023) == 0) {
-                ProgressChecks.checkCanceled(monitor);
+                AlgorithmSupport.checkCanceled(monitor);
             }
             if (index <= right) {
                 z[index] = Math.min(right - index + 1, z[index - left]);
@@ -318,7 +318,7 @@ public final class StringAlgorithms {
                             == virtualUnit(needle, haystack, index + z[index])) {
                 z[index]++;
                 if ((++comparisons & 1023L) == 0L) {
-                    ProgressChecks.checkCanceled(monitor);
+                    AlgorithmSupport.checkCanceled(monitor);
                 }
             }
 
@@ -334,12 +334,12 @@ public final class StringAlgorithms {
                     prefixMatches[textIndex] = matched;
                 }
                 if (stopAtFirstExact && matched >= patternLength) {
-                    ProgressChecks.checkCanceled(monitor);
+                    AlgorithmSupport.checkCanceled(monitor);
                     return textIndex;
                 }
             }
         }
-        ProgressChecks.checkCanceled(monitor);
+        AlgorithmSupport.checkCanceled(monitor);
         return -1;
     }
 

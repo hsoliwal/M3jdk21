@@ -35,7 +35,7 @@ final class ProgressAlgorithmTest {
         ProgressAlgorithm<int[], Long> sum = (input, monitor) -> {
             long total = 0L;
             for (int value : input) {
-                ProgressChecks.checkCanceled(monitor);
+                AlgorithmSupport.checkCanceled(monitor);
                 total += value;
                 monitor.worked(1L);
             }
@@ -49,7 +49,7 @@ final class ProgressAlgorithmTest {
     @Test
     void canceledMonitorAndInterruptionAreObservedThroughTheChecks() {
         ProgressAlgorithm<Integer, Integer> identity = (input, monitor) -> {
-            ProgressChecks.checkCanceled(ProgressChecks.nonNull(monitor));
+            AlgorithmSupport.checkCanceled(AlgorithmSupport.nonNull(monitor));
             return input;
         };
         CancelableProgressMonitor canceled = new CancelableProgressMonitor();
@@ -89,9 +89,9 @@ final class ProgressAlgorithmTest {
         assertEquals("execute", abstractMethods.get(0).getName());
         assertEquals(List.of(Object.class, ProgressMonitor.class),
                 List.of(abstractMethods.get(0).getParameterTypes()));
-        assertTrue(Modifier.isPublic(ProgressChecks.class.getModifiers()));
+        assertTrue(Modifier.isPublic(AlgorithmSupport.class.getModifiers()));
         for (String name : List.of("nonNull", "checkCanceled")) {
-            Method method = Arrays.stream(ProgressChecks.class.getMethods())
+            Method method = Arrays.stream(AlgorithmSupport.class.getMethods())
                     .filter(candidate -> candidate.getName().equals(name)).findFirst().orElseThrow();
             assertTrue(Modifier.isPublic(method.getModifiers()) && Modifier.isStatic(method.getModifiers()), name);
         }

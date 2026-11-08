@@ -5,9 +5,12 @@ package jdk.m3.algorithm;
 import jdk.m3.algorithm.ProgressMonitor;
 import java.util.Objects;
 import java.util.Arrays;
+import java.math.BigInteger;
+import java.time.Instant;
+import java.util.concurrent.CancellationException;
 
 //FLLDCIM: RELOCATE - donor blob ee97c7b89da3 at commit 3385d79a2968 (repository, path, URL and digests: m3/algorithms/recipe/families-20261106/PROVENANCE.tsv); recipe m3/algorithms/recipe/families-20261106/relocate.py v1
-final class AlgorithmSupport {
+public final class AlgorithmSupport {
     private AlgorithmSupport() {
     }
 
@@ -142,4 +145,18 @@ final class AlgorithmSupport {
 
         int components() { return components; }
     }
+
+    //FLLDCIM: FOLD - member ProgressChecks.nonNull from donor blob 1b20b59ef99d (m3/algorithms/src/main/java/jdk/m3/algorithm/ProgressChecks.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/support-checks-fold/FOLD_MAP.tsv
+    public static ProgressMonitor nonNull(ProgressMonitor monitor) {
+        return monitor == null ? ProgressMonitor.none() : monitor;
+    }
+
+    //FLLDCIM: FOLD - member ProgressChecks.checkCanceled from donor blob 1b20b59ef99d (m3/algorithms/src/main/java/jdk/m3/algorithm/ProgressChecks.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/support-checks-fold/FOLD_MAP.tsv
+    public static void checkCanceled(ProgressMonitor monitor) {
+        if (Thread.currentThread().isInterrupted()) {
+            throw new CancellationException("Algorithm thread interrupted");
+        }
+        monitor.checkCanceled();
+    }
+
 }

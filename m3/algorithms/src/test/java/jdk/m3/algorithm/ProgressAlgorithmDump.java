@@ -29,7 +29,7 @@ public final class ProgressAlgorithmDump {
         StringBuilder out = new StringBuilder(1 << 16);
         ProgressAlgorithm<int[], Long> sum = ProgressAlgorithmDump::sum;
         ProgressAlgorithm<int[], Integer> count = (input, monitor) -> {
-            ProgressChecks.checkCanceled(ProgressChecks.nonNull(monitor));
+            AlgorithmSupport.checkCanceled(AlgorithmSupport.nonNull(monitor));
             return Objects.requireNonNull(input, "input").length;
         };
         for (int index = 0; index < cases; index++) {
@@ -47,11 +47,11 @@ public final class ProgressAlgorithmDump {
     }
 
     private static Long sum(int[] input, ProgressMonitor supplied) {
-        ProgressMonitor monitor = ProgressChecks.nonNull(supplied);
-        ProgressChecks.checkCanceled(monitor);
+        ProgressMonitor monitor = AlgorithmSupport.nonNull(supplied);
+        AlgorithmSupport.checkCanceled(monitor);
         long total = 0L;
         for (int value : Objects.requireNonNull(input, "input")) {
-            ProgressChecks.checkCanceled(monitor);
+            AlgorithmSupport.checkCanceled(monitor);
             total += value;
             monitor.worked(1L);
         }

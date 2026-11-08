@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.algorithm;
 
-import jdk.m3.algorithm.ProgressChecks;
+import jdk.m3.algorithm.AlgorithmSupport;
 import jdk.m3.algorithm.ProgressMonitor;
 import java.util.Arrays;
 import java.util.Objects;
@@ -45,15 +45,15 @@ public final class OneMismatchWindowSearch {
             String text, String pattern, ProgressMonitor monitor) {
         String haystack = Objects.requireNonNull(text, "text");
         String needle = requirePattern(pattern);
-        ProgressMonitor checked = ProgressChecks.nonNull(monitor);
-        ProgressChecks.checkCanceled(checked);
+        ProgressMonitor checked = AlgorithmSupport.nonNull(monitor);
+        AlgorithmSupport.checkCanceled(checked);
         if (needle.length() > haystack.length()) {
             return -1;
         }
         // A one-code-unit window can differ in at most one code unit.
         // Keep custom monitor callbacks on the original geometry path.
         if (monitor == null && needle.length() == 1) {
-            ProgressChecks.checkCanceled(checked);
+            AlgorithmSupport.checkCanceled(checked);
             return 0;
         }
 
@@ -61,14 +61,14 @@ public final class OneMismatchWindowSearch {
         int maximum = haystack.length() - needle.length();
         for (int start = 0; start <= maximum; start++) {
             if ((start & 1023) == 0) {
-                ProgressChecks.checkCanceled(checked);
+                AlgorithmSupport.checkCanceled(checked);
             }
             if (geometry.matches(start)) {
-                ProgressChecks.checkCanceled(checked);
+                AlgorithmSupport.checkCanceled(checked);
                 return start;
             }
         }
-        ProgressChecks.checkCanceled(checked);
+        AlgorithmSupport.checkCanceled(checked);
         return -1;
     }
 
@@ -80,8 +80,8 @@ public final class OneMismatchWindowSearch {
             String text, String pattern, ProgressMonitor monitor) {
         String haystack = Objects.requireNonNull(text, "text");
         String needle = requirePattern(pattern);
-        ProgressMonitor checked = ProgressChecks.nonNull(monitor);
-        ProgressChecks.checkCanceled(checked);
+        ProgressMonitor checked = AlgorithmSupport.nonNull(monitor);
+        AlgorithmSupport.checkCanceled(checked);
         if (needle.length() > haystack.length()) {
             return new int[0];
         }
@@ -92,11 +92,11 @@ public final class OneMismatchWindowSearch {
             int[] everyPosition = new int[haystack.length()];
             for (int index = 0; index < everyPosition.length; index++) {
                 if ((index & 1023) == 0) {
-                    ProgressChecks.checkCanceled(checked);
+                    AlgorithmSupport.checkCanceled(checked);
                 }
                 everyPosition[index] = index;
             }
-            ProgressChecks.checkCanceled(checked);
+            AlgorithmSupport.checkCanceled(checked);
             return everyPosition;
         }
 
@@ -109,7 +109,7 @@ public final class OneMismatchWindowSearch {
         int count = 0;
         for (int start = 0; start <= maximum; start++) {
             if ((start & 1023) == 0) {
-                ProgressChecks.checkCanceled(checked);
+                AlgorithmSupport.checkCanceled(checked);
             }
             if (geometry.matches(start)) {
                 if (count == matches.length) {
@@ -121,7 +121,7 @@ public final class OneMismatchWindowSearch {
                 matches[count++] = start;
             }
         }
-        ProgressChecks.checkCanceled(checked);
+        AlgorithmSupport.checkCanceled(checked);
         return count == matches.length ? matches : Arrays.copyOf(matches, count);
     }
 
