@@ -174,3 +174,20 @@ target_sources(m3_arrays PRIVATE
 # returning (JNI_ABORT on the input), publish nothing partial and retain no pointer.
 target_sources(m3_arrays PRIVATE
   m3_bit_matrix.c)
+
+# Exact queries scan packed storage in bounded JNI chunks without full expansion.
+if(BUILD_TESTING)
+  add_executable(m3_packed_query_checks tests/m3_packed_query_checks.c m3_packed_codec.c)
+  add_executable(m3_packed_query_jni_fault_test
+    tests/m3_packed_query_jni_fault_test.c m3_packed_codec.c m3_packed_codec_jni.c)
+  foreach(query_test IN ITEMS m3_packed_query_checks m3_packed_query_jni_fault_test)
+    target_include_directories(${query_test} PRIVATE ${JNI_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/include)
+    target_compile_features(${query_test} PRIVATE c_std_17)
+    if(MSVC)
+      target_compile_options(${query_test} PRIVATE /W4 /WX)
+    else()
+      target_compile_options(${query_test} PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+    endif()
+    add_test(NAME ${query_test} COMMAND ${query_test})
+  endforeach()
+endif()

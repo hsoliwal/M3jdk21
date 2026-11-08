@@ -33,3 +33,11 @@ JNIEXPORT jlongArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeDecodeZigZag
     (void)env; (void)owner; (void)values;
     return NULL;
 }
+
+JNIEXPORT jint JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeQueryPacked(
+        JNIEnv *env, jclass owner, jbyteArray bytes, jint bits,
+        jint from, jint to, jlong lower, jlong upper, jboolean first) {
+    (void)env; (void)owner; (void)bytes; (void)bits;
+    (void)from; (void)to; (void)lower; (void)upper; (void)first;
+    return (-2147483647 - 1);
+}

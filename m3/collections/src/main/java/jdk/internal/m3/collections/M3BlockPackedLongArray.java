@@ -14,6 +14,7 @@
  *******************************************************************************/
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -125,10 +126,124 @@ public final class M3BlockPackedLongArray {
                 (long) offsets[block] * Long.SIZE + (long) within * width, width);
     }
 
+    /** Returns an independent, expanded snapshot in source order. */
     public long[] toArray() {
         long[] result = new long[size];
-        for (int i = 0; i < size; i++) result[i] = get(i);
+        copyTo(0, result, 0, size);
         return result;
+    }
+
+    /**
+     * Copies an exact source slice into the supplied array, decoding one block at a time.
+     * All arguments are checked before any destination element is written.
+     *
+     * @param sourceIndex first source index
+     * @param destination array receiving the values
+     * @param destinationIndex first destination index
+     * @param length number of values to copy
+     * @throws NullPointerException if destination is null
+     * @throws IndexOutOfBoundsException if either slice is outside its array
+     */
+    public void copyTo(int sourceIndex, long[] destination, int destinationIndex, int length) {
+        Objects.requireNonNull(destination, "destination");
+        Objects.checkFromIndexSize(sourceIndex, length, size);
+        Objects.checkFromIndexSize(destinationIndex, length, destination.length);
+        int remaining = length;
+        while (remaining != 0) {
+            int block = sourceIndex / blockSize;
+            int within = sourceIndex % blockSize;
+            int count = Math.min(blockSize - within, remaining);
+            int width = widths[block];
+            if (width == 0) {
+                Arrays.fill(destination, destinationIndex, destinationIndex + count, bases[block]);
+            } else if (width == Long.SIZE) {
+                System.arraycopy(plain, offsets[block] + within,
+                        destination, destinationIndex, count);
+            } else {
+                long base = bases[block];
+                long bit = (long) offsets[block] * Long.SIZE + (long) within * width;
+                for (int i = 0; i < count; i++, bit += width) {
+                    destination[destinationIndex + i] =
+                            base + M3PrimitiveBits.readPacked(packed, bit, width);
+                }
+            }
+            sourceIndex += count;
+            destinationIndex += count;
+            remaining -= count;
+        }
+    }
+
+    /** Counts exact occurrences without expanding the snapshot. */
+    public int countEqual(long value) {
+        return countInRange(0, size, value, value);
+    }
+
+    /**
+     * Counts exact occurrences in the half-open source slice.
+     * @throws IndexOutOfBoundsException if the source slice is invalid
+     */
+    public int countEqual(int fromIndex, int toIndex, long value) {
+        return countInRange(fromIndex, toIndex, value, value);
+    }
+
+    /**
+     * Counts values in the inclusive signed-long range without expanding the snapshot.
+     * @throws IllegalArgumentException if lowerInclusive exceeds upperInclusive
+     */
+    public int countInRange(long lowerInclusive, long upperInclusive) {
+        return countInRange(0, size, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Counts values in an inclusive signed-long range within a half-open source slice.
+     * Conservative block bounds skip or accept blocks; uncertain blocks are decoded
+     * and compared exactly. No temporary array or retained index is allocated.
+     *
+     * @throws IndexOutOfBoundsException if the source slice is invalid
+     * @throws IllegalArgumentException if lowerInclusive exceeds upperInclusive
+     */
+    public int countInRange(int fromIndex, int toIndex,
+            long lowerInclusive, long upperInclusive) {
+        Objects.checkFromToIndex(fromIndex, toIndex, size);
+        if (lowerInclusive > upperInclusive)
+            throw new IllegalArgumentException("lowerInclusive exceeds upperInclusive");
+        int matches = 0;
+        while (fromIndex < toIndex) {
+            int block = fromIndex / blockSize;
+            int within = fromIndex % blockSize;
+            int count = Math.min(blockSize - within, toIndex - fromIndex);
+            int width = widths[block];
+            long base = bases[block];
+            long upperBound;
+            if (width == 0) {
+                upperBound = base;
+            } else if (width == Long.SIZE) {
+                upperBound = Long.MAX_VALUE;
+            } else {
+                long maxDelta = -1L >>> (Long.SIZE - width);
+                upperBound = base + maxDelta;
+                if (upperBound < base) upperBound = Long.MAX_VALUE;
+            }
+            if (upperInclusive >= base && lowerInclusive <= upperBound) {
+                if (lowerInclusive <= base && upperInclusive >= upperBound) {
+                    matches += count;
+                } else if (width == Long.SIZE) {
+                    int start = offsets[block] + within;
+                    for (int i = 0; i < count; i++) {
+                        long value = plain[start + i];
+                        if (value >= lowerInclusive && value <= upperInclusive) matches++;
+                    }
+                } else {
+                    long bit = (long) offsets[block] * Long.SIZE + (long) within * width;
+                    for (int i = 0; i < count; i++, bit += width) {
+                        long value = base + M3PrimitiveBits.readPacked(packed, bit, width);
+                        if (value >= lowerInclusive && value <= upperInclusive) matches++;
+                    }
+                }
+            }
+            fromIndex += count;
+        }
+        return matches;
     }
 
     /** Retained primitive payload including block metadata; excludes JVM object headers. */

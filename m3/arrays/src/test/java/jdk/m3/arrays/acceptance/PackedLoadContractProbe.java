@@ -27,7 +27,9 @@ public final class PackedLoadContractProbe {
             () -> M3ArrayNative.encodeUnsigned64Required(new long[0]),
             () -> M3ArrayNative.decodeUnsigned64Required(new byte[0]),
             () -> M3ArrayNative.encodeZigZag64Required(new long[0]),
-            () -> M3ArrayNative.decodeZigZag64Required(new byte[0])
+            () -> M3ArrayNative.decodeZigZag64Required(new byte[0]),
+            () -> M3ArrayNative.countPackedInRangeRequired(new byte[0], 40, 0, 0, 0, 0),
+            () -> M3ArrayNative.firstPackedInRangeRequired(new byte[0], 40, 0, 0, 0, 0)
         };
         for (Runnable call : newCalls) {
             try { call.run(); throw new AssertionError("required native operation silently substituted"); }
@@ -42,6 +44,6 @@ public final class PackedLoadContractProbe {
             }
         }
         System.out.println("M3_PACKED_LOADING_PASS mode=" + (arguments.length == 0 ? "missing" : "baseline-library")
-                + " newCallsRefused=6");
+                + " newCallsRefused=8");
     }
 }
