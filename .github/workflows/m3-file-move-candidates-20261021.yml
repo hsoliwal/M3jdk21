@@ -8,10 +8,14 @@ on:
       - m3/restore-merged-atoms-ci-20261022
     paths:
       - 'm3/file/**'
+      - 'm3/arrays/**'
+      - 'm3/collections/**'
       - '.github/workflows/m3-file-move-candidates-20261021.yml'
   pull_request:
     paths:
       - 'm3/file/**'
+      - 'm3/arrays/**'
+      - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-file-move-candidates-20261021/**'
       - '.github/workflows/m3-file-move-candidates-20261021.yml'
   workflow_dispatch:
@@ -35,5 +39,17 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Verify source-bound file workflow wiring
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash -n m3/file/compile-dependencies.sh
+          python3 -m py_compile m3/file/verify.py m3/file/test_workflow_wiring.py
+          python3 -m unittest discover -s m3/file -p test_workflow_wiring.py -v
       - name: Verify M3File module and linked-image contracts
-        run: python3 m3/file/verify.py --java-home "$JAVA_HOME" --output "$RUNNER_TEMP/m3-file-move-contract"
+        shell: bash
+        run: |
+          set -euo pipefail
+          deps="$RUNNER_TEMP/m3-file-move-dependencies"
+          bash m3/file/compile-dependencies.sh "$JAVA_HOME" "$deps"
+          python3 m3/file/verify.py --java-home "$JAVA_HOME" --module-path "$deps" --output "$RUNNER_TEMP/m3-file-move-contract"

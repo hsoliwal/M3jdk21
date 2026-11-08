@@ -32,7 +32,12 @@ def git(root: Path, *args: str) -> bytes:
 
 
 def tree(root: Path, *paths: str) -> dict[str, tuple[str, str]]:
-    command = ["ls-tree", "-r", "-z", "HEAD"]
+    return _tree_at(root, "HEAD", *paths)
+
+
+def _tree_at(root: Path, revision: str, *paths: str) -> dict[str, tuple[str, str]]:
+    """Read one explicit revision; scan() passes its captured immutable commit."""
+    command = ["ls-tree", "-r", "-z", revision]
     if paths:
         command += ["--", *paths]
     data = git(root, *command)
@@ -70,11 +75,11 @@ def scan(root: Path) -> tuple[str, str, dict[str, object]]:
     head = git(root, "rev-parse", "HEAD").decode("ascii").strip()
     if not OID.fullmatch(head):
         raise ValueError("HEAD_NOT_SHA1_COMMIT")
-    archived = tree(root, ARCHIVE_ROOT)
+    archived = _tree_at(root, head, ARCHIVE_ROOT)
     if not archived:
         raise ValueError("RETAINED_VARIANTS_TREE_MISSING")
     # One all-path index, not a subprocess for every donor source file.
-    active = tree(root)
+    active = _tree_at(root, head)
     lines: list[str] = []
     seen: set[tuple[int, str]] = set()
     counts: Counter[str] = Counter()

@@ -25,6 +25,15 @@ class HandoffLineageTests(TestCase):
             verifier.EVOLVED_OWNER,
             "m3/file/src/test/java/jdk/m3/file/M3FileMoveCandidatesContract.java",
         ]
+        # Bind synthetic source bodies to the real immutable historical recipe IDs.
+        recipes = (
+            "com.synexia.m3.M3ObservableIndexedViews20261021",
+            "com.synexia.m3.M3ObservableIndexedViews20261021",
+            "com.synexia.m3.M3FileMoveCandidates20261021",
+            "com.synexia.m3.M3ResourceLocksConstructor20261022",
+            "com.synexia.m3.M3FileMoveCandidates20261021",
+        )
+        self.original_history_blob = verifier.HISTORY_BLOB
         self.old_bytes = b"class OriginalResourceLocks {}\n"
         self.new_bytes = b"class OriginalResourceLocks { /* additive timeout */ }\n"
         historical_rows = []
@@ -34,7 +43,7 @@ class HandoffLineageTests(TestCase):
             self.write(relative, current)
             digest = verifier.sha256(old)
             historical_rows.append("\t".join([
-                relative, "jdk.internal.m3.OriginalRecipe", "ABSENT", digest,
+                relative, recipes[n], "ABSENT", digest,
                 "M3JDK21#1810", "hsoliwal/com.synexia#12951",
                 "PENDING_RECIPE_AND_PRODUCT_CI", verifier.RIGHTS,
             ]))
@@ -61,6 +70,48 @@ class HandoffLineageTests(TestCase):
 
     def test_exact_historical_and_reviewed_successor(self):
         self.assertEqual((5, 1), verifier.verify(self.root))
+
+    def test_fixture_recipe_ids_match_immutable_history(self):
+        history = (Path(__file__).resolve().parents[2] / verifier.HISTORY).read_bytes()
+        self.assertEqual(self.original_history_blob, verifier.git_blob_sha1(history))
+
+        def identity_pairs(contents):
+            return [line.split("\t")[:2] for line in contents.decode("utf-8").splitlines()
+                    if line and not line.startswith("#")]
+
+        self.assertEqual(identity_pairs(history), identity_pairs(self.historical))
+        self.assertEqual((5, 1), verifier.verify(self.root))
+
+    def test_refuses_target_or_foreign_recipe_identity(self):
+        for recipe in (
+                "jdk.internal.m3.M3ObservableIndexedViews20261021",
+                "com.m3.M3ObservableIndexedViews20261021",
+                "com.synexia.m3evil.M3ObservableIndexedViews20261021",
+                "com.synexia.m3",
+                "evil.com.synexia.m3.M3ObservableIndexedViews20261021"):
+            with self.subTest(recipe=recipe):
+                rows = [line.split("\t")
+                        for line in self.historical.decode("utf-8").splitlines()
+                        if line and not line.startswith("#")]
+                # Change every row so a later canonical ID cannot mask old acceptance.
+                for row in rows:
+                    row[1] = recipe
+                forged = ("\n".join("\t".join(row) for row in rows) + "\n").encode("utf-8")
+                self.write(verifier.HISTORY, forged)
+                # Reseal only this temporary fixture to exercise the format guard.
+                with patch.object(verifier, "HISTORY_BLOB", verifier.git_blob_sha1(forged)):
+                    with self.assertRaisesRegex(verifier.HandoffRefusal,
+                                                "invalid immutable first-party recipe custody"):
+                        verifier.verify(self.root)
+
+    def test_refuses_forged_canonical_recipe_identity(self):
+        forged = self.historical.replace(
+            b"com.synexia.m3.M3ObservableIndexedViews20261021",
+            b"com.synexia.m3.ForgedRecipe", 1)
+        self.write(verifier.HISTORY, forged)
+        with self.assertRaisesRegex(verifier.HandoffRefusal,
+                                    "historical canonical handoff must be immutable"):
+            verifier.verify(self.root)
 
     def test_refuses_changed_source_without_new_review(self):
         self.write(verifier.EVOLVED_OWNER, self.new_bytes + b"unexpected\n")

@@ -135,7 +135,7 @@ Do not shorten arbitrary words into unexplained initials.
 ### Optional public companions for standard Java APIs
 
 Every standard Java API may have an optional additive public M3 companion in an existing
-`com.m3.*` owner. Prefer useful static operations on original Java values or typed views
+`jdk.m3.*` owner. Prefer useful static operations on original Java values or typed views
 sharing an admitted owner. This does not require subclassing, one class per Java API, a
 copy of every method or renamed `java.*` types. Standard implementations keep their original
 contracts; internal storage and `java.lang.M3String` remain internal.
@@ -146,7 +146,7 @@ and schema: `{java_api: {module, symbol, path}, target_symbol, form}`. `form` is
 record. Preserve the stable capability ID, exact source/target lineage, status and evidence.
 An optional relation is not a new registry or a declaration of full API/runtime parity.
 
-The first source-inventoried example is `com.m3.arrays.M3Arrays`, module `com.m3.arrays`, in
+The first source-inventoried example is `jdk.m3.arrays.M3Arrays`, module `jdk.m3.arrays`, in
 `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java` with
 `m3/arrays/src/main/java/module-info.java`. Its static factory/composition operations may be
 related to `java.base` / `java.util.Arrays` /

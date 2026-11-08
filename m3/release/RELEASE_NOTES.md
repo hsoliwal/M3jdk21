@@ -136,11 +136,13 @@ Recompute build, test and coverage evidence against the final candidate commit a
 - **Release branch identity:** the contract, this note and the checklist now agree on
   `release/m3jdk-21.0.14-m3.1-preview`. This naming check does not establish a built or
   tested release image.
-- **Recipe custody/owner policy:** the incoming contract reconciles canonical
-  Synexia authoring/execution with M3JDK21-owned product gates through passive
-  receipt verification. This split does not qualify the broader canonical naming
-  admission owner, which still needs separate namespace-policy reconciliation,
-  or any installed-image, JNI or runtime gate. Those admission holds remain explicit.
+- **Recipe custody/owner policy:** current target namespace and map policy
+  agree on declared `jdk.m3.*` companions, stable lineage IDs and queued naming
+  candidates. Synexia owns canonical recipe authoring/execution; M3JDK21 owns
+  product acceptance and consumes its receipt as passive data. The exact canonical
+  qualification and execution receipt, whole-tree naming fixed point, and
+  installed-image/JNI/runtime qualification remain separate pending gates.
+  Consistent target policy does not establish those execution results.
 | Surface | Required producer / evidence | Preparation disposition |
 | --- | --- | --- |
 | Naming and canonical target census | `name-contract/check.py`, `audit.py --strict`, and all `test_*.py` in that directory | Executed on the candidate text/source snapshot; no installed-image claim |
@@ -183,10 +185,10 @@ precompute, full jtreg compatibility, performance superiority, qualified arrays,
 qualified collections and SWT/Eclipse integration remain `NOT_CLAIMED`.
 Optional TornadoVM remains conditional on its exact matched-image gates.
 
-All ten `mandatory_release_gates` need PASS receipts for the final commit and
+All eleven `mandatory_release_gates` need PASS receipts for the final commit and
 tree: rights/license; source/upstream; OpenJDK sanity; foundation; Java parity;
-JNI/native parity; canonical Maven recipe execution; String UTF-16; release
-claims; and proof-pack SHA-256. The verifier checks artifact identity and
+JNI/native parity; canonical Maven recipe execution; String UTF-16; changed-atom
+instrumented line/branch coverage; release claims; and proof-pack SHA-256. The verifier checks artifact identity and
 manifest structure; reviewers must confirm the command's contract coverage.
 A gate's existence or unit test is not its execution evidence.
 
@@ -209,5 +211,5 @@ licensing does not relicense their output.
 Dated audit and queue receipts remain historical evidence at their recorded
 source revisions. Old PR numbers, queued-run counts, platform failures and
 secret setup instructions are not current release prerequisites. The
-[release checklist](RELEASE_CHECKLIST.md) defines current preparation and
+[current candidate checklist](RELEASE_CHECKLIST_CANDIDATE_2756.md) defines preparation and
 admission steps without assuming those historical observations still apply.

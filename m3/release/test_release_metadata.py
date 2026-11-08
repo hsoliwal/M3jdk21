@@ -103,7 +103,7 @@ class ReleaseMetadataTest(unittest.TestCase):
         self.assertIn("never executes its recorded command", self.prep)
         self.assertIn("zero executable dependencies", self.prep)
         self.assertIn("does not establish installed-image acceptance", self.prep)
-        self.assertIn("separate namespace-policy reconciliation", self.notes)
+        self.assertIn("whole-tree naming fixed point", self.notes)
         self.assertTrue(self.contract["standalone"]["required_for_release"])
 
 

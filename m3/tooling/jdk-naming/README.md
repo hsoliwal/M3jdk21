@@ -37,7 +37,7 @@ same rules.
 
 ## Gates
 
-`.github/workflows/m3-jdk-naming.yml` runs the recipe tests, the tree fixed point and the JUnit conformance on every
+`.github/workflows/m3jdk-naming.yml` runs the recipe tests, the tree fixed point and the JUnit conformance on every
 pull request. The standalone check (`m3/release/check_standalone.py`) must not grow a D-kind; its N-kinds drop.
 
 
@@ -57,11 +57,13 @@ seals the UTC time, pattern, recipe, original malformed guard, corrected
 `file#method` test and the original evidence file.
 
 `test_jdk_naming.py` rejects stale bindings, new malformed/unregistered
-guards, nonexistent test methods, missing evidence files, or changed original
-ledger bytes. The three new checks verify current file-name collision
-ownership, Java classfile descriptor strings, and historical donor/sidecar
-alignment. They are **source/receipt checks**; they do not replace the
-source-built product, Maven, JUnit, JNI, jtreg or performance gates.
+guards, nonexistent test methods, missing evidence files, or changes to a
+bound entry's timestamp, trigger, recipe or original guard. It checks that all
+eight event fields are present; it does not byte-seal every historical row.
+The three new checks verify current file-name collision ownership, Java
+classfile descriptor strings, and historical donor/sidecar alignment. They
+are **source/receipt checks**; they do not rerun historical product proofs or
+replace the source-built product, Maven, JUnit, JNI, jtreg or performance gates.
 
 Re-run `python3 -I m3/tooling/jdk-naming/test_jdk_naming.py` and
 `python3 -I m3/tooling/jdk-naming/test_reseal.py` on the exact

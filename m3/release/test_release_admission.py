@@ -623,6 +623,12 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assert_blocked(result, "git.stable_snapshot")
         initial = next(check for check in result["checks"] if check["name"] == "git.clean_source")
         self.assertEqual(initial["status"], "PASS")
+        self.assertEqual({"git.stable_snapshot"},
+                         {row["name"] for row in result["blockers"]})
+        passed_gates = {row["name"].removeprefix("gate:")
+                        for row in result["checks"]
+                        if row["name"].startswith("gate:") and row["status"] == "PASS"}
+        self.assertEqual(set(self.contract["mandatory_release_gates"]), passed_gates)
 
     def test_artifact_traversal_absolute_and_alias_paths_are_refused(self):
         entry = self.evidence["gates"][0]
@@ -1010,6 +1016,87 @@ class ReleaseEvidenceGitTest(unittest.TestCase):
         self.assertEqual(set(entries), set(release.REQUIRED_FILES))
         for path, digest in entries.items():
             self.assertEqual(digest, hashlib.sha256((self.root / path).read_bytes()).hexdigest())
+
+
+    def test_omitted_branch_counter_requires_an_explicit_reason(self):
+        item = next(g for g in self.evidence["gates"]
+                    if g["id"] == release.COVERAGE_GATE)
+        atom = item["coverage"]["atoms"][0]
+        artifact_path = self.evidence_dir / item["coverage"]["report_artifact"]
+        artifact_path.write_text(artifact_path.read_text().replace(
+            '<counter type="BRANCH" covered="99" missed="1"/>', ''))
+        report_row = next(a for a in item["artifacts"] if a["path"] == artifact_path.name)
+        report_row["sha256"] = release.sha256(artifact_path)
+        atom["branch_covered"] = 0
+        atom["branch_missed"] = 0
+        for explanation in (None, "   "):
+            if explanation is None:
+                atom.pop("branchless_explanation", None)
+            else:
+                atom["branchless_explanation"] = explanation
+            with self.subTest(explanation=explanation):
+                result = self.result()
+                self.assert_blocked(result, "gate:" + release.COVERAGE_GATE)
+                detail = next(b["detail"] for b in result["blockers"]
+                              if b["name"] == "gate:" + release.COVERAGE_GATE)
+                self.assertIn("zero-branch atom needs an explicit explanation", detail)
+        atom["branchless_explanation"] = "No control flow in branchless fixture"
+        result = self.result()
+        self.assertTrue(result["release_ready"], result)
+        atom["branch_covered"] = 1
+        result = self.result()
+        self.assert_blocked(result, "gate:" + release.COVERAGE_GATE)
+        detail = next(b["detail"] for b in result["blockers"]
+                      if b["name"] == "gate:" + release.COVERAGE_GATE)
+        self.assertIn("reported atom counts disagree with raw JaCoCo XML", detail)
+
+    def test_unselected_method_may_omit_its_branch_counter(self):
+        item = next(g for g in self.evidence["gates"]
+                    if g["id"] == release.COVERAGE_GATE)
+        artifact_path = self.evidence_dir / item["coverage"]["report_artifact"]
+        artifact_path.write_text(artifact_path.read_text().replace(
+            '</class>', '<method name="unused" desc="()V">'
+            '<counter type="LINE" covered="3" missed="0"/>'
+            '</method></class>'))
+        report_row = next(a for a in item["artifacts"] if a["path"] == artifact_path.name)
+        report_row["sha256"] = release.sha256(artifact_path)
+        result = self.result()
+        self.assertTrue(result["release_ready"], result)
+        self.assertEqual(1, item["coverage"]["measured_count"])
+        self.assertEqual(["fixture.Example#run"],
+                         [atom["id"] for atom in item["coverage"]["atoms"]])
+
+    def test_raw_line_proof_and_counter_validity_are_preserved(self):
+        item = next(g for g in self.evidence["gates"]
+                    if g["id"] == release.COVERAGE_GATE)
+        atom = item["coverage"]["atoms"][0]
+        artifact_path = self.evidence_dir / item["coverage"]["report_artifact"]
+        original = artifact_path.read_text()
+        report_row = next(a for a in item["artifacts"] if a["path"] == artifact_path.name)
+        line = '<counter type="LINE" covered="99" missed="1"/>'
+        cases = (
+            (original.replace(line, ''), (99, 1), "missing JaCoCo line method counter"),
+            (original.replace(line, '<counter type="LINE" covered="0" missed="0"/>'),
+             (0, 0), "unmeasured line coverage"),
+            (original.replace('</method>', line + '</method>'),
+             (99, 1), "duplicate JaCoCo line/branch counter"),
+            (original.replace('</method>', '<counter type="BRANCH" covered="1" missed="0"/></method>'),
+             (99, 1), "duplicate JaCoCo line/branch counter"),
+            (original.replace('type="LINE" covered="99"', 'type="LINE" covered="-1"'),
+             (99, 1), "invalid JaCoCo method counter"),
+            (original.replace('type="BRANCH" covered="99"', 'type="BRANCH" covered="-1"'),
+             (99, 1), "invalid JaCoCo method counter"),
+        )
+        for xml, line_counts, reason in cases:
+            artifact_path.write_text(xml)
+            report_row["sha256"] = release.sha256(artifact_path)
+            atom["line_covered"], atom["line_missed"] = line_counts
+            with self.subTest(reason=reason):
+                result = self.result()
+                self.assert_blocked(result, "gate:" + release.COVERAGE_GATE)
+                detail = next(b["detail"] for b in result["blockers"]
+                              if b["name"] == "gate:" + release.COVERAGE_GATE)
+                self.assertIn(reason, detail)
 
 
 if __name__ == "__main__":

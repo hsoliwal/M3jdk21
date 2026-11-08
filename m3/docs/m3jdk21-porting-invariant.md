@@ -135,7 +135,7 @@ MIndexMappedStringBacking           -> jdk.internal.mindex.M3MappedStringBacking
 
 The public Java API remains `java.lang.String`. `M3String` is the target-owned internal value
 representation. Donor `MIndex*` names are provenance and migration evidence, not names to copy
-blindly into the target. An optional public `com.m3.*` companion may add operations on the
+blindly into the target. An optional public `jdk.m3.*` companion may add operations on the
 original String or a contracted owner-sharing view without exporting `M3String` or its storage.
 
 Apply that same implementation-ownership pattern to the rest of the port, with additive
@@ -146,7 +146,7 @@ companions governed by the same naming authority below.
 1. **Public JDK contracts keep their JDK names.** `String`, `ArrayList`, `HashMap`,
    `ConcurrentHashMap`, `Pattern`, `Matcher`, `Class`, javac APIs and other standard
    surfaces retain their identities and contracts. Every standard Java API may additionally
-   have an optional public `com.m3.*` companion; the standard surface is not renamed.
+   have an optional public `jdk.m3.*` companion; the standard surface is not renamed.
 2. **Internal replacement owners use the established M3JDK21 M3 vocabulary.** Reuse an existing
    M3 owner before creating a new one.
 3. **Do not mechanically rename `MIndexFoo -> M3Foo`.** Map capability and ownership, not prefix.
@@ -214,11 +214,11 @@ regex or compiler semantics.
 
 Java arrays remain Java arrays. Public/runtime contracts for `byte[]`, `char[]`, primitive
 arrays and reference arrays are never renamed to M3 types and are not globally interned. M3 array
-owners may be internal implementation values or separately admitted public `com.m3.*` companion
+owners may be internal implementation values or separately admitted public `jdk.m3.*` companion
 operations/views, with explicit immutable/snapshot/range/composition ownership contracts.
 
-The first source-inventoried companion example is the existing `com.m3.arrays.M3Arrays` in
-module `com.m3.arrays`, at `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java`, with descriptor
+The first source-inventoried companion example is the existing `jdk.m3.arrays.M3Arrays` in
+module `jdk.m3.arrays`, at `m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java`, with descriptor
 `m3/arrays/src/main/java/module-info.java`. Its `STATIC_OPERATIONS` relation names the original
 `java.base` / `java.util.Arrays` / `src/java.base/share/classes/java/util/Arrays.java` API.
 Its current factories snapshot mutable inputs; existing slices/joins share immutable owners.
@@ -227,12 +227,12 @@ The existing target-owned proving surface remains `m3/arrays`:
 
 | Donor responsibility | M3JDK21 owner |
 | --- | --- |
-| immutable byte array/range view | `com.m3.arrays.M3ByteArrayView` |
-| immutable UTF-16 array/range view | `com.m3.arrays.M3Utf16ArrayView` |
-| exact composable UTF-16 facts | `com.m3.arrays.M3Utf16Facts` |
+| immutable byte array/range view | `jdk.m3.arrays.M3ByteArrayView` |
+| immutable UTF-16 array/range view | `jdk.m3.arrays.M3Utf16ArrayView` |
+| exact composable UTF-16 facts | `jdk.m3.arrays.M3Utf16Facts` |
 | immutable int/long value planes | `M3IntArrayView` / `M3LongArrayView` |
-| snapshot/slice/join factory | `com.m3.arrays.M3Arrays` |
-| optional JNI compare/materialization | `com.m3.arrays.M3ArrayNative` |
+| snapshot/slice/join factory | `jdk.m3.arrays.M3Arrays` |
+| optional JNI compare/materialization | `jdk.m3.arrays.M3ArrayNative` |
 
 Array laws:
 
@@ -263,7 +263,7 @@ Existing reusable target owners include:
 - `jdk.internal.mindex.M3LongLane28`
 - `jdk.internal.mindex.M3BitLane28`
 - `jdk.internal.mindex.M3Bits`
-- the separately verified Apache-2.0 `com.m3.collections` lane owners.
+- the separately verified Apache-2.0 `jdk.m3.collections` lane owners.
 
 The public JDK classes remain `ArrayList`, `HashMap`, `LinkedHashMap`, `TreeMap`,
 `IdentityHashMap`, `ArrayDeque`, `PriorityQueue`, `ConcurrentHashMap`,
@@ -296,7 +296,7 @@ Choose the target by the consumer:
 - `jdk.compiler` / `com.sun.tools.javac.m3`: compiler-only M3 state.
 - `m3/collections`: separately built Apache-2.0 collection/storage proving ground; promotion into
   JDK owners still needs JDK contract proof.
-- existing `com.m3.*` companion modules/packages: expose only the reviewed additive surface;
+- existing `jdk.m3.*` companion modules/packages: expose only the reviewed additive surface;
   retain their actual module descriptors, source ownership and installed-image gates.
 - other JDK modules: keep module boundaries; do not drag Synexia dependencies into the runtime.
 

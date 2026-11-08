@@ -17,7 +17,7 @@ This page does not promote any claim marked `NOT_CLAIMED` in
 | Internal implementation | Established `M3*` owners; do not automatically replace `MIndex*` with `M3*` |
 | Independent foundation module | `jdk.m3.text`; output `m3/build/jdk.m3.text.jar` |
 | Foundation build environment | `M3JDK=/absolute/path/to/JDK21`, the variable actually read by `m3/build.sh` |
-| Additional public M3 surface | Only separately admitted `com.m3.*` companions with explicit API/module verification; never confuse these with the foundation module |
+| Additional public M3 surface | Preserve declared `jdk.m3.*` companion packages and their separately reviewed API/module boundaries; a source declaration is not installed-image admission |
 | Mapping authority | [`m3/docs/name-mapping.json`](../docs/name-mapping.json) and [naming admission policy](../docs/m3jdk21-naming-admission-workflow.md) |
 | Source transformation | Follow [repository receiving/recipe policy](../../AGENTS.md); document exact donor provenance and preserve upstream license headers |
 

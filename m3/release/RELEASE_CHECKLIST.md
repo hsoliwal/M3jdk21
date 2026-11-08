@@ -3,17 +3,15 @@
 # Release checklist: `m3jdk-21.0.14-m3.1-preview`
 
 > [!WARNING]
-> **Historical checklist — not executable as current release instructions
-> (reviewed 2026-11-07).** The currently checked-in machine contract
-> [`release-contract.json`](release-contract.json) sets
-> `release.release_branch = release/first-clean-boundary-20261007`, while this
-> October 31 checklist uses `release/m3jdk-21.0.14-m3.1-preview`.
-> Those are different release identities. **Do not delete or recreate a
-> branch, mint the tag, or run the scripted commit-tree/push commands below**
-> until maintainers reconcile the two authorities, re-pin the source tree,
-> verify licensing and secure the complete ten-gate evidence manifest.
-> See [current release preparation](RELEASE_PREPARATION.md). The steps below
-> remain for historical traceability and are not proof of a released product.
+> **Historical October 31 publication procedure — use the
+> [current candidate checklist](RELEASE_CHECKLIST_CANDIDATE_2756.md) for preparation
+> (reviewed 2026-11-07).** The current machine contract and release notes agree on
+> `release/m3jdk-21.0.14-m3.1-preview`; the earlier branch-identity conflict is
+> resolved. **Do not delete or recreate a branch, mint the tag, or run the
+> historical commit-tree/push commands below** as part of preparation. The final
+> candidate still requires exact source, licensing, all eleven mandatory gate
+> receipts and the existing ancestry policy. Historical dates and commands remain
+> for traceability; they do not authorize rewriting history or establish a release.
 
 These are the user's actions, in order. Agents prepare branches, evidence and notes. Approvals,
 merges, repository secrets, the tag and the GitHub Release are the user's. Every command runs from
@@ -46,10 +44,11 @@ and the no-loss/source-retention queue. Never base a release on the older
 
 The historical `m3-a3.yml` workflow references a private Synexia A3 pin and
 may require `SYNEXIA_READ_TOKEN` with read-only Contents scope. **Do not add
-new credentials as part of this release-preparation PR.** First reconcile the
-standalone release-contract versus `AGENTS.md` recipe execution/ownership
-disagreement. If the final reviewed build still needs the private pin, configure
-the least-privileged read-only secret explicitly as a separate owner action.
+new credentials as part of this release-preparation PR.** The current contract
+and `AGENTS.md` place canonical recipe execution in Synexia; product acceptance
+remains M3JDK21-owned and requires zero executable external dependencies. Any
+credential for a separately reviewed historical build is a separate owner action
+and cannot substitute for the current receipt and standalone gates.
 Do not print the token or embed it in release artifacts.
 
 ## 3. Legacy recipe custody (user, after its dependency)
@@ -107,8 +106,8 @@ python3 -I m3/release/verify_release_admission.py --root . --release \
 ```
 
 The manifest binds the exact commit and tree. A receipt for another commit is refused. Release is
-admissible when `policy_valid` and `release_ready` are both `true`. Publishing with gates still
-PENDING is the user's decision. The release text must then list them, as `RELEASE_NOTES.md` does.
+admissible when `policy_valid` and `release_ready` are both `true`. Any mandatory gate still
+PENDING keeps the current candidate on HOLD; listing the missing evidence does not satisfy it.
 
 ## 6. Tag (user)
 

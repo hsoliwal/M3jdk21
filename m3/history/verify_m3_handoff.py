@@ -95,7 +95,8 @@ def verify(root: Path) -> tuple[int, int]:
         if relative <= last or not relative.endswith(".java"):
             raise HandoffRefusal("unsorted or invalid historical Java path")
         last = relative
-        if (not recipe.startswith("jdk.internal.m3.")
+        # Historical recipe IDs identify Synexia custody, not target Java packages.
+        if (not recipe.startswith("com.synexia.m3.")
                 or (previous != "ABSENT" and not HEX64.fullmatch(previous))
                 or not HEX64.fullmatch(original_sha)
                 or license_id != RIGHTS or review != "hsoliwal/com.synexia#12951"

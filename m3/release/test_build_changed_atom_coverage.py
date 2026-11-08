@@ -105,7 +105,7 @@ class ImporterTest(unittest.TestCase):
             ("<report/>", "no measured methods"),
             (original.replace(' desc="()Z"', ''), "method key"),
             (original.replace('</class>', '<method name="run" desc="()Z"/></class>'), "method key"),
-            (original.replace('<counter type="BRANCH" missed="1" covered="19"/>', ''), "line/branch"),
+            (original.replace('<counter type="BRANCH" missed="1" covered="19"/>', ''), "branchless"),
             (original.replace('covered="19"', 'covered="-1"', 1), "invalid JaCoCo count"),
             (original.replace('</method>', '<counter type="LINE" covered="1" missed="0"/></method>'),
              "duplicate JaCoCo counter"),
@@ -194,6 +194,35 @@ class ImporterTest(unittest.TestCase):
                     runpy.run_path(str(MODULE), run_name="__main__")
         self.assertEqual(0, exited.exception.code)
         self.assertTrue(out.is_file())
+
+
+    def test_omitted_branch_counter_requires_a_branchless_explanation(self):
+        self.report.write_text(self.report.read_text().replace(
+            '<counter type="BRANCH" missed="1" covered="19"/>', ''))
+        inventory = self.inventory.read_text()
+        for explanation in ("", "   "):
+            self.inventory.write_text(inventory.replace(
+                "Example.java\t\n", "Example.java\t" + explanation + "\n"))
+            with self.subTest(explanation=explanation):
+                with self.assertRaisesRegex(ValueError, "branchless method requires explanation"):
+                    self.build()
+        self.inventory.write_text(inventory.replace(
+            "Example.java\t\n", "Example.java\tNo control flow in branchless fixture\n"))
+        atom = self.build()["atoms"][0]
+        self.assertEqual((0, 0), (atom["branch_covered"], atom["branch_missed"]))
+        self.assertEqual((19, 1), (atom["line_covered"], atom["line_missed"]))
+        self.assertEqual("No control flow in branchless fixture", atom["branchless_explanation"])
+
+    def test_unselected_method_may_omit_its_branch_counter(self):
+        self.report.write_text(self.report.read_text().replace(
+            '</class>', '<method name="unused" desc="()V">'
+            '<counter type="LINE" covered="3" missed="0"/>'
+            '</method></class>'))
+        receipt = self.build()
+        self.assertEqual(1, receipt["measured_count"])
+        self.assertEqual(["example.run"], [atom["id"] for atom in receipt["atoms"]])
+        self.assertEqual((19, 1), (receipt["atoms"][0]["branch_covered"],
+                                  receipt["atoms"][0]["branch_missed"]))
 
 
 if __name__ == "__main__":
