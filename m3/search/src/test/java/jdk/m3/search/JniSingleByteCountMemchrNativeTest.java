@@ -24,13 +24,13 @@ final class JniSingleByteCountMemchrNativeTest {
         assertTrue(Files.isRegularFile(library), "native library unavailable");
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path", library.toString());
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available(), "JNI must not fall back silently");
         Random random = new Random(0x4d334d33434f554eL);
         int[] lengths = {0, 1, 2, 3, 7, 31, 127, 2048};
         for (int wanted = 0; wanted < 256; ++wanted) {
             byte[] needle = {(byte) wanted};
-            try (M3CompiledSearch compiled = engine.compile(needle)) {
+            try (CompiledSearch compiled = engine.compile(needle)) {
                 for (int length : lengths) {
                     for (int sample = 0; sample < 2; ++sample) {
                         byte[] input = new byte[length];
@@ -39,7 +39,7 @@ final class JniSingleByteCountMemchrNativeTest {
                         for (int from : new int[]{Integer.MIN_VALUE, -1, 0, 1,
                                 length / 2, length - 1, length, length + 1, Integer.MAX_VALUE}) {
                             int expected = oracle(input, needle, from);
-                            int actual = M3JniSearchEngine.countIfNative(
+                            int actual = JniSearchEngine.countIfNative(
                                     compiled, input, from, new M3DefaultProgressMonitor());
                             assertEquals(expected, actual,
                                     "byte=" + wanted + " length=" + length + " from=" + from);
@@ -57,21 +57,21 @@ final class JniSingleByteCountMemchrNativeTest {
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path",
                 Path.of(configured).toAbsolutePath().normalize().toString());
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available());
         byte[] one = {(byte) 7};
         byte[] repeat = new byte[131072];
         Arrays.fill(repeat, one[0]);
-        try (M3CompiledSearch compiled = engine.compile(one)) {
+        try (CompiledSearch compiled = engine.compile(one)) {
             assertEquals(repeat.length,
-                    M3JniSearchEngine.countIfNative(compiled, repeat, 0, new M3DefaultProgressMonitor()));
+                    JniSearchEngine.countIfNative(compiled, repeat, 0, new M3DefaultProgressMonitor()));
             assertEquals(repeat.length - 3,
-                    M3JniSearchEngine.countIfNative(compiled, repeat, 3, new M3DefaultProgressMonitor()));
+                    JniSearchEngine.countIfNative(compiled, repeat, 3, new M3DefaultProgressMonitor()));
         }
         for (byte[] needle : new byte[][]{{7, 7}, {0, 1, 0}, {8, 8, 8, 8}}) {
-            try (M3CompiledSearch compiled = engine.compile(needle)) {
+            try (CompiledSearch compiled = engine.compile(needle)) {
                 for (int from : new int[]{-1, 0, 1, 10, repeat.length, Integer.MAX_VALUE}) {
-                    assertEquals(oracle(repeat, needle, from), M3JniSearchEngine.countIfNative(
+                    assertEquals(oracle(repeat, needle, from), JniSearchEngine.countIfNative(
                             compiled, repeat, from, new M3DefaultProgressMonitor()));
                 }
             }

@@ -36,7 +36,7 @@ final class MinimumCoverWindowPairNativeTest {
         char[] sourceBefore = haystack.clone();
         char[] needleBefore = needle.clone();
         assertEquals(MinimumCoverWindowPairJavaTest.independent(source, required),
-                M3MinimumCoverWindow.nativeSpan(haystack, needle), "source length=" + source.length());
+                MinimumCoverWindow.nativeSpan(haystack, needle), "source length=" + source.length());
         assertArrayEquals(sourceBefore, haystack);
         assertArrayEquals(needleBefore, needle);
     }
@@ -51,8 +51,8 @@ final class MinimumCoverWindowPairNativeTest {
             parity(sample[0], sample[1]);
         }
         char[] alias = {'\uffff', '\0'};
-        assertEquals(M3MinimumCoverWindow.pack(0, alias.length),
-                M3MinimumCoverWindow.nativeSpan(alias, alias));
+        assertEquals(MinimumCoverWindow.pack(0, alias.length),
+                MinimumCoverWindow.nativeSpan(alias, alias));
         assertArrayEquals(new char[] {'\uffff', '\0'}, alias);
     }
 
@@ -91,7 +91,7 @@ final class MinimumCoverWindowPairNativeTest {
                         String requirement = "" + ALPHABET[random.nextInt(ALPHABET.length)]
                                 + ALPHABET[random.nextInt(ALPHABET.length)];
                         parity(source.toString(), requirement);
-                        assertEquals(sharedExpected, M3MinimumCoverWindow.nativeSpan(shared, required));
+                        assertEquals(sharedExpected, MinimumCoverWindow.nativeSpan(shared, required));
                     }
                     return null;
                 }));
@@ -106,15 +106,15 @@ final class MinimumCoverWindowPairNativeTest {
     @Test
     void nativeNullBudgetAndMillionUnitBoundary() {
         assertThrows(NullPointerException.class,
-                () -> M3MinimumCoverWindow.nativeSpan(null, new char[] {'a', 'b'}));
+                () -> MinimumCoverWindow.nativeSpan(null, new char[] {'a', 'b'}));
         assertThrows(NullPointerException.class,
-                () -> M3MinimumCoverWindow.nativeSpan(new char[] {'a', 'b'}, null));
+                () -> MinimumCoverWindow.nativeSpan(new char[] {'a', 'b'}, null));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.nativeSpan(new char[1_000_001], new char[] {'a', 'b'}));
+                () -> MinimumCoverWindow.nativeSpan(new char[1_000_001], new char[] {'a', 'b'}));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.nativeSpan(new char[] {'x'}, new char[1_000_001]));
-        assertEquals(M3MinimumCoverWindow.pack(999998, 1_000_000),
-                M3MinimumCoverWindow.nativeSpan(("x".repeat(999998) + "ab").toCharArray(),
+                () -> MinimumCoverWindow.nativeSpan(new char[] {'x'}, new char[1_000_001]));
+        assertEquals(MinimumCoverWindow.pack(999998, 1_000_000),
+                MinimumCoverWindow.nativeSpan(("x".repeat(999998) + "ab").toCharArray(),
                         new char[] {'a', 'b'}));
     }
 }

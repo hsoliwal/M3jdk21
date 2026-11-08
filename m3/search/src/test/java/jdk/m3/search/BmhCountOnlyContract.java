@@ -55,13 +55,13 @@ public final class BmhCountOnlyContract {
 
     private static void testCase(byte[] haystack, byte[] needle, int from, String label,
             boolean cancellationVariants) {
-        var candidate = new M3BoyerMooreHorspoolSearch(needle);
-        var baseline = new M3BoyerMooreHorspoolSearch(needle);
+        var candidate = new BoyerMooreHorspoolSearch(needle);
+        var baseline = new BoyerMooreHorspoolSearch(needle);
         List<Integer> expected = oracle(haystack, needle, from);
         Poll countPoll = new Poll(-1), historicalPoll = new Poll(-1);
-        int count = M3ByteOccurrences.count(candidate, haystack, from, countPoll);
+        int count = ByteOccurrences.count(candidate, haystack, from, countPoll);
         historicalPoll.checkCanceled(); // old count entry, then existing visitor
-        int prior = M3ByteOccurrences.visit(baseline, haystack, from, Integer.MAX_VALUE,
+        int prior = ByteOccurrences.visit(baseline, haystack, from, Integer.MAX_VALUE,
                 ignored -> {}, historicalPoll);
         require(count == expected.size(), "count vs naive " + label);
         require(count == prior, "count vs historical Horspool " + label);
@@ -71,9 +71,9 @@ public final class BmhCountOnlyContract {
         List<Integer> oldPositions = new ArrayList<>();
         var current = new Poll(-1);
         var original = new Poll(-1);
-        int n1 = M3ByteOccurrences.visit(candidate, haystack, from, Integer.MAX_VALUE,
+        int n1 = ByteOccurrences.visit(candidate, haystack, from, Integer.MAX_VALUE,
                 positions::add, current);
-        int n2 = M3ByteOccurrences.visit(baseline, haystack, from, Integer.MAX_VALUE,
+        int n2 = ByteOccurrences.visit(baseline, haystack, from, Integer.MAX_VALUE,
                 oldPositions::add, original);
         require(n1 == n2 && n1 == expected.size(), "visit count " + label);
         require(positions.equals(expected) && positions.equals(oldPositions), "visit offsets " + label);
@@ -83,11 +83,11 @@ public final class BmhCountOnlyContract {
             for (int cut = 1; cut <= cap; cut++) {
                 Poll now = new Poll(cut), before = new Poll(cut);
                 boolean currentThrown = false, oldThrown = false;
-                try { M3ByteOccurrences.count(candidate, haystack, from, now); }
+                try { ByteOccurrences.count(candidate, haystack, from, now); }
                 catch (CancellationException expectedCancel) { currentThrown = true; }
                 try {
                     before.checkCanceled(); // old count entry
-                    M3ByteOccurrences.visit(baseline, haystack, from, Integer.MAX_VALUE,
+                    ByteOccurrences.visit(baseline, haystack, from, Integer.MAX_VALUE,
                             ignored -> {}, before);
                 } catch (CancellationException expectedCancel) { oldThrown = true; }
                 require(currentThrown == oldThrown && now.calls == before.calls,

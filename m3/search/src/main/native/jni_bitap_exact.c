@@ -93,20 +93,20 @@ static jint find_exact(JNIEnv *env, jbyteArray needle_array, jbyteArray haystack
     return result;
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3BitapExactSearch_indexOfNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_BitapExactSearch_indexOfNative(
         JNIEnv *env, jclass owner, jbyteArray needle, jbyteArray haystack, jint from_index) {
     (void)owner;
     return find_exact(env, needle, haystack, from_index, 0, 0);
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3BitapExactSearch_lastIndexOfNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_BitapExactSearch_lastIndexOfNative(
         JNIEnv *env, jclass owner, jbyteArray needle, jbyteArray haystack, jint from_index) {
     (void)owner;
     return find_exact(env, needle, haystack, from_index, 1, 0);
 }
 
 /* Probe-only additive JNI symbol. All borrowed arrays are released via JNI_ABORT. */
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3BitapExactSearch_countOverlappingNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_BitapExactSearch_countOverlappingNative(
         JNIEnv *env, jclass owner, jbyteArray needle, jbyteArray haystack, jint from_index) {
     (void)owner;
     return find_exact(env, needle, haystack, from_index, 0, 1);

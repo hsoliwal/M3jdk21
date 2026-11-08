@@ -28,8 +28,8 @@ final class BmhKmpFallbackCancellationTest {
         CancellationException original = new CancellationException("forward-monitor");
         Polling monitor = new Polling(FALLBACK_CANCEL_POLL, original);
         assertSame(original, assertThrows(CancellationException.class,
-                () -> M3ByteOccurrences.countBuffer(
-                        new M3BoyerMooreHorspoolSearch(needle), buffer, 0, monitor)));
+                () -> ByteOccurrences.countBuffer(
+                        new BoyerMooreHorspoolSearch(needle), buffer, 0, monitor)));
         assertEquals(FALLBACK_CANCEL_POLL, monitor.polls.get());
         assertEquals(3, buffer.position());
         assertEquals(HAYSTACK_LENGTH + 3, buffer.limit());
@@ -44,7 +44,7 @@ final class BmhKmpFallbackCancellationTest {
         CancellationException original = new CancellationException("reverse-monitor");
         Polling monitor = new Polling(FALLBACK_CANCEL_POLL, original);
         assertSame(original, assertThrows(CancellationException.class,
-                () -> new M3BoyerMooreHorspoolSearch(needle)
+                () -> new BoyerMooreHorspoolSearch(needle)
                         .lastIndexOf(buffer, Integer.MAX_VALUE, monitor)));
         assertEquals(FALLBACK_CANCEL_POLL, monitor.polls.get());
         assertEquals(3, buffer.position());
@@ -64,16 +64,16 @@ final class BmhKmpFallbackCancellationTest {
         direct.position(3);
         direct.limit(text.length + 3);
         direct.mark();
-        assertEquals(1, M3ByteOccurrences.countBuffer(
-                new M3BoyerMooreHorspoolSearch(forward), direct, 0, new Polling(-1, null)));
-        assertEquals(60_000, new M3BoyerMooreHorspoolSearch(forward).indexOf(direct, 0));
+        assertEquals(1, ByteOccurrences.countBuffer(
+                new BoyerMooreHorspoolSearch(forward), direct, 0, new Polling(-1, null)));
+        assertEquals(60_000, new BoyerMooreHorspoolSearch(forward).indexOf(direct, 0));
         direct.reset();
         assertEquals(3, direct.position());
 
         Arrays.fill(text, (byte) 'a');
         text[NEEDLE_LENGTH - 1] = (byte) 'b';
         for (int i = 0; i < text.length; ++i) direct.put(i + 3, text[i]);
-        assertEquals(0, new M3BoyerMooreHorspoolSearch(reverseNeedle())
+        assertEquals(0, new BoyerMooreHorspoolSearch(reverseNeedle())
                 .lastIndexOf(direct, Integer.MAX_VALUE, new Polling(-1, null)));
         assertEquals(3, direct.position());
         assertEquals(HAYSTACK_LENGTH + 3, direct.limit());
@@ -86,11 +86,11 @@ final class BmhKmpFallbackCancellationTest {
         ByteBuffer buffer = directAllA();
         byte[] forward = forwardNeedle();
         byte[] reverse = reverseNeedle();
-        assertEquals(0, M3ByteOccurrences.countBuffer(
-                new M3BoyerMooreHorspoolSearch(forward), buffer, 0, null));
-        assertEquals(-1, new M3BoyerMooreHorspoolSearch(reverse)
+        assertEquals(0, ByteOccurrences.countBuffer(
+                new BoyerMooreHorspoolSearch(forward), buffer, 0, null));
+        assertEquals(-1, new BoyerMooreHorspoolSearch(reverse)
                 .lastIndexOf(buffer, Integer.MAX_VALUE, new M3DefaultProgressMonitor()));
-        assertEquals(-1, new M3BoyerMooreHorspoolSearch(reverse)
+        assertEquals(-1, new BoyerMooreHorspoolSearch(reverse)
                 .lastIndexOf(buffer, Integer.MAX_VALUE));
     }
 

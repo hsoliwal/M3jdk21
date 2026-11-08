@@ -37,7 +37,7 @@ final class MinimumCoverWindowNativeAtomTest {
             char[] originalHaystack = haystack.clone();
             char[] originalNeedle = needle.clone();
             long expected = MinimumCoverWindowJavaAtomTest.independent(source.toString(), required.toString());
-            assertEquals(expected, M3MinimumCoverWindow.nativeSpan(haystack, needle),
+            assertEquals(expected, MinimumCoverWindow.nativeSpan(haystack, needle),
                     "iteration=" + iteration);
             assertArrayEquals(originalHaystack, haystack);
             assertArrayEquals(originalNeedle, needle);
@@ -46,24 +46,24 @@ final class MinimumCoverWindowNativeAtomTest {
 
     @Test
     void nativeEmptyAndBoundaryRefusal() {
-        assertEquals(0L, M3MinimumCoverWindow.nativeSpan(new char[0], new char[0]));
-        assertEquals(-1L, M3MinimumCoverWindow.nativeSpan(new char[0], "x".toCharArray()));
-        assertEquals(M3MinimumCoverWindow.pack(0, 1),
-                M3MinimumCoverWindow.nativeSpan("a\uffffb".toCharArray(), new char[]{'a'}));
-        assertThrows(NullPointerException.class, () -> M3MinimumCoverWindow.nativeSpan(null, new char[]{'a'}));
-        assertThrows(NullPointerException.class, () -> M3MinimumCoverWindow.nativeSpan(new char[]{'a'}, null));
+        assertEquals(0L, MinimumCoverWindow.nativeSpan(new char[0], new char[0]));
+        assertEquals(-1L, MinimumCoverWindow.nativeSpan(new char[0], "x".toCharArray()));
+        assertEquals(MinimumCoverWindow.pack(0, 1),
+                MinimumCoverWindow.nativeSpan("a\uffffb".toCharArray(), new char[]{'a'}));
+        assertThrows(NullPointerException.class, () -> MinimumCoverWindow.nativeSpan(null, new char[]{'a'}));
+        assertThrows(NullPointerException.class, () -> MinimumCoverWindow.nativeSpan(new char[]{'a'}, null));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.nativeSpan(new char[1_000_001], new char[]{'a'}));
+                () -> MinimumCoverWindow.nativeSpan(new char[1_000_001], new char[]{'a'}));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.nativeSpan(new char[]{'a'}, new char[1_000_001]));
+                () -> MinimumCoverWindow.nativeSpan(new char[]{'a'}, new char[1_000_001]));
     }
 
     @Test
     void nativeSameArrayForSourceAndRequirementPreservesIdentity() {
         char[] shared = {'a', '\0', 'b', 'a', '\uD800', '\uDC00'};
         char[] original = shared.clone();
-        assertEquals(M3MinimumCoverWindow.pack(0, shared.length),
-                M3MinimumCoverWindow.nativeSpan(shared, shared));
+        assertEquals(MinimumCoverWindow.pack(0, shared.length),
+                MinimumCoverWindow.nativeSpan(shared, shared));
         assertArrayEquals(original, shared);
     }
 
@@ -105,12 +105,12 @@ final class MinimumCoverWindowNativeAtomTest {
                         long expected = MinimumCoverWindowJavaAtomTest.independent(
                                 haystack, needle);
                         assertEquals(expected,
-                                M3MinimumCoverWindow.nativeSpan(sourceArray, requiredArray),
+                                MinimumCoverWindow.nativeSpan(sourceArray, requiredArray),
                                 "worker=" + workerId + " case=" + iteration);
-                        assertEquals(expected, M3MinimumCoverWindow.javaSpan(haystack, needle),
+                        assertEquals(expected, MinimumCoverWindow.javaSpan(haystack, needle),
                                 "Java oracle worker=" + workerId + " case=" + iteration);
                         assertEquals(expectedCommon,
-                                M3MinimumCoverWindow.nativeSpan(commonSource, commonRequired),
+                                MinimumCoverWindow.nativeSpan(commonSource, commonRequired),
                                 "shared arrays worker=" + workerId + " case=" + iteration);
                     }
                     return null;

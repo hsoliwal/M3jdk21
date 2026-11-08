@@ -29,7 +29,7 @@ final class MinimumCoverWindowSingletonNativeTest {
             char[] copySource = haystack.clone();
             char[] copyPattern = pattern.clone();
             assertEquals(MinimumCoverWindowJavaAtomTest.independent(source, required),
-                    M3MinimumCoverWindow.nativeSpan(haystack, pattern), required);
+                    MinimumCoverWindow.nativeSpan(haystack, pattern), required);
             assertArrayEquals(copySource, haystack);
             assertArrayEquals(copyPattern, pattern);
         }
@@ -38,11 +38,11 @@ final class MinimumCoverWindowSingletonNativeTest {
     void aliasedCharArraysAndHighSparseCodeUnitsAreStable() {
         char[] shared = "\uffff\0\u4e2d".toCharArray();
         char[] copy = shared.clone();
-        assertEquals(M3MinimumCoverWindow.pack(0, shared.length),
-                M3MinimumCoverWindow.nativeSpan(shared, shared));
+        assertEquals(MinimumCoverWindow.pack(0, shared.length),
+                MinimumCoverWindow.nativeSpan(shared, shared));
         assertArrayEquals(copy, shared);
-        assertEquals(M3MinimumCoverWindow.pack(1, 2),
-                M3MinimumCoverWindow.nativeSpan("\0\uffff\0".toCharArray(), new char[]{'\uffff'}));
+        assertEquals(MinimumCoverWindow.pack(1, 2),
+                MinimumCoverWindow.nativeSpan("\0\uffff\0".toCharArray(), new char[]{'\uffff'}));
     }
 
     @Test
@@ -53,7 +53,7 @@ final class MinimumCoverWindowSingletonNativeTest {
             char[] before = source.clone();
             assertEquals(MinimumCoverWindowJavaAtomTest.independent(
                     new String(source), new String(required)),
-                    M3MinimumCoverWindow.nativeSpan(source, required), "unit=" + unit);
+                    MinimumCoverWindow.nativeSpan(source, required), "unit=" + unit);
             assertArrayEquals(before, source);
             assertArrayEquals(new char[] {(char) unit}, required);
         }
@@ -62,8 +62,8 @@ final class MinimumCoverWindowSingletonNativeTest {
     @Test
     void singletonNativeAliasedArrayAndConcurrentCalls() throws Exception {
         char[] alias = {'\uffff'};
-        assertEquals(M3MinimumCoverWindow.pack(0, 1),
-                M3MinimumCoverWindow.nativeSpan(alias, alias));
+        assertEquals(MinimumCoverWindow.pack(0, 1),
+                MinimumCoverWindow.nativeSpan(alias, alias));
         assertArrayEquals(new char[] {'\uffff'}, alias);
         char[] shared = {'\uffff', '\0', 'a', '\uD800', '\uDC00'};
         char[] original = shared.clone();
@@ -85,9 +85,9 @@ final class MinimumCoverWindowSingletonNativeTest {
                         char[] target = {alphabet[random.nextInt(alphabet.length)]};
                         assertEquals(MinimumCoverWindowJavaAtomTest.independent(
                                 new String(source), new String(target)),
-                                M3MinimumCoverWindow.nativeSpan(source, target));
-                        assertEquals(M3MinimumCoverWindow.pack(0, shared.length),
-                                M3MinimumCoverWindow.nativeSpan(shared, shared));
+                                MinimumCoverWindow.nativeSpan(source, target));
+                        assertEquals(MinimumCoverWindow.pack(0, shared.length),
+                                MinimumCoverWindow.nativeSpan(shared, shared));
                     }
                     return null;
                 }));

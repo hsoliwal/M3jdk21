@@ -11,38 +11,38 @@ import org.junit.jupiter.api.Test;
 /** Product-level JUnit contract. Actual Maven execution is separately required. */
 final class MinimumSubsequenceWindowTest {
     @Test void orderedCoverageIsNotMultisetCoverage() {
-        assertEquals(M3MinimumSubsequenceWindow.pack(1, 5),
-                M3MinimumSubsequenceWindow.find("abcdebdde", "bde"));
-        assertEquals(M3MinimumSubsequenceWindow.pack(0, 4),
-                M3MinimumSubsequenceWindow.find("abcd", "ad"));
-        assertEquals(-1L, M3MinimumSubsequenceWindow.find("cba", "abc"));
+        assertEquals(MinimumSubsequenceWindow.pack(1, 5),
+                MinimumSubsequenceWindow.find("abcdebdde", "bde"));
+        assertEquals(MinimumSubsequenceWindow.pack(0, 4),
+                MinimumSubsequenceWindow.find("abcd", "ad"));
+        assertEquals(-1L, MinimumSubsequenceWindow.find("cba", "abc"));
     }
 
     @Test void emptyNoMatchAndEarliestTie() {
-        assertEquals(0L, M3MinimumSubsequenceWindow.find("abc", ""));
-        assertEquals(-1L, M3MinimumSubsequenceWindow.find("", "a"));
-        assertEquals(M3MinimumSubsequenceWindow.pack(0, 2),
-                M3MinimumSubsequenceWindow.find("abab", "ab"));
+        assertEquals(0L, MinimumSubsequenceWindow.find("abc", ""));
+        assertEquals(-1L, MinimumSubsequenceWindow.find("", "a"));
+        assertEquals(MinimumSubsequenceWindow.pack(0, 2),
+                MinimumSubsequenceWindow.find("abab", "ab"));
     }
 
     @Test void utf16UnitSemanticsAndDuplicateRequirements() {
-        assertEquals(M3MinimumSubsequenceWindow.pack(0, 3),
-                M3MinimumSubsequenceWindow.find("\uD800\u0000\uDC00", "\uD800\uDC00"));
-        assertEquals(M3MinimumSubsequenceWindow.pack(0, 4),
-                M3MinimumSubsequenceWindow.find("aaaaa", "aaaa"));
+        assertEquals(MinimumSubsequenceWindow.pack(0, 3),
+                MinimumSubsequenceWindow.find("\uD800\u0000\uDC00", "\uD800\uDC00"));
+        assertEquals(MinimumSubsequenceWindow.pack(0, 4),
+                MinimumSubsequenceWindow.find("aaaaa", "aaaa"));
     }
 
     @Test void explicitInputBudgetAndNullRefusal() {
         assertThrows(NullPointerException.class,
-                () -> M3MinimumSubsequenceWindow.find(null, "a"));
+                () -> MinimumSubsequenceWindow.find(null, "a"));
         assertThrows(NullPointerException.class,
-                () -> M3MinimumSubsequenceWindow.find("a", null));
+                () -> MinimumSubsequenceWindow.find("a", null));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumSubsequenceWindow.find("a".repeat(1_000_001), ""));
+                () -> MinimumSubsequenceWindow.find("a".repeat(1_000_001), ""));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumSubsequenceWindow.find("abc", "x".repeat(4_097)));
+                () -> MinimumSubsequenceWindow.find("abc", "x".repeat(4_097)));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumSubsequenceWindow.find("a".repeat(8_000),
+                () -> MinimumSubsequenceWindow.find("a".repeat(8_000),
                         "a".repeat(4_096)));
     }
 }

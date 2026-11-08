@@ -15,19 +15,19 @@ final class MinimumCoverWindowSingletonJavaTest {
                 "\uD800", "\uDC00", "\u4e2d", "a", "ab", "\0\uffff",
                 "a\uffff", "\u4e2d\u4e2d", "b\u4e2d"}) {
             assertEquals(MinimumCoverWindowJavaAtomTest.independent(source, required),
-                    M3MinimumCoverWindow.javaSpan(source, required), required);
+                    MinimumCoverWindow.javaSpan(source, required), required);
         }
     }
     @Test
     void shiftedIndexPreservesEarliestStartAndEmptyWindow() {
-        assertEquals(M3MinimumCoverWindow.pack(1, 2),
-                M3MinimumCoverWindow.javaSpan("\0\uffff\0", "\uffff"));
-        assertEquals(M3MinimumCoverWindow.pack(1, 2),
-                M3MinimumCoverWindow.javaSpan("x\u4e2d\uffff", "\u4e2d"));
-        assertEquals(M3MinimumCoverWindow.pack(0, 1),
-                M3MinimumCoverWindow.javaSpan("\0\uffff", "\0"));
-        assertEquals(0L, M3MinimumCoverWindow.javaSpan("\uffff", ""));
-        assertEquals(-1L, M3MinimumCoverWindow.javaSpan("\0", "\uffff"));
+        assertEquals(MinimumCoverWindow.pack(1, 2),
+                MinimumCoverWindow.javaSpan("\0\uffff\0", "\uffff"));
+        assertEquals(MinimumCoverWindow.pack(1, 2),
+                MinimumCoverWindow.javaSpan("x\u4e2d\uffff", "\u4e2d"));
+        assertEquals(MinimumCoverWindow.pack(0, 1),
+                MinimumCoverWindow.javaSpan("\0\uffff", "\0"));
+        assertEquals(0L, MinimumCoverWindow.javaSpan("\uffff", ""));
+        assertEquals(-1L, MinimumCoverWindow.javaSpan("\0", "\uffff"));
     }
 
     @Test
@@ -36,18 +36,18 @@ final class MinimumCoverWindowSingletonJavaTest {
             String source = new String(new char[] {'\uffff', (char) unit, (char) unit, '\0'});
             String required = String.valueOf((char) unit);
             assertEquals(MinimumCoverWindowJavaAtomTest.independent(source, required),
-                    M3MinimumCoverWindow.javaSpan(source, required), "unit=" + unit);
+                    MinimumCoverWindow.javaSpan(source, required), "unit=" + unit);
         }
     }
 
     @Test
     void singletonAtMillionUnitBoundaryAndRefusals() {
-        assertEquals(M3MinimumCoverWindow.pack(999999, 1000000),
-                M3MinimumCoverWindow.javaSpan("a".repeat(999999) + "\uD800", "\uD800"));
-        assertEquals(-1L, M3MinimumCoverWindow.javaSpan("\uffff\0", "a"));
+        assertEquals(MinimumCoverWindow.pack(999999, 1000000),
+                MinimumCoverWindow.javaSpan("a".repeat(999999) + "\uD800", "\uD800"));
+        assertEquals(-1L, MinimumCoverWindow.javaSpan("\uffff\0", "a"));
         org.junit.jupiter.api.Assertions.assertThrows(NullPointerException.class,
-                () -> M3MinimumCoverWindow.javaSpan(null, "z"));
+                () -> MinimumCoverWindow.javaSpan(null, "z"));
         org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.javaSpan("z".repeat(1000001), "z"));
+                () -> MinimumCoverWindow.javaSpan("z".repeat(1000001), "z"));
     }
 }

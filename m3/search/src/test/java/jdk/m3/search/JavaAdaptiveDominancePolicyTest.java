@@ -15,7 +15,7 @@ final class JavaAdaptiveDominancePolicyTest {
     @Test
     void matchesIndependentOriginalStrategyForAllBoundedByteDistributions() {
         Random random = new Random(0x4d33444f4d494e41L);
-        M3JavaAdaptiveSearchEngine engine = new M3JavaAdaptiveSearchEngine();
+        JavaAdaptiveSearchEngine engine = new JavaAdaptiveSearchEngine();
         long compared = 0;
         for (int sample = 0; sample < 24_000; sample++) {
             int length = 1 + random.nextInt(513);
@@ -33,7 +33,7 @@ final class JavaAdaptiveDominancePolicyTest {
                 needle[i] = (byte) random.nextInt(alphabet);
             }
             String expected = referenceStrategy(needle);
-            try (M3CompiledSearch compiled = engine.compile(needle)) {
+            try (CompiledSearch compiled = engine.compile(needle)) {
                 assertEquals(expected, compiled.strategy(), "sample=" + sample);
             }
             compared++;
@@ -43,11 +43,11 @@ final class JavaAdaptiveDominancePolicyTest {
 
     @Test
     void meetsExactMajorityBoundariesAndPreservesShortNeedlePolicy() {
-        M3JavaAdaptiveSearchEngine engine = new M3JavaAdaptiveSearchEngine();
+        JavaAdaptiveSearchEngine engine = new JavaAdaptiveSearchEngine();
         for (int length = 1; length <= 3; length++) {
             byte[] shortNeedle = new byte[length];
             for (int i = 0; i < length; i++) shortNeedle[i] = (byte) i;
-            try (M3CompiledSearch compiled = engine.compile(shortNeedle)) {
+            try (CompiledSearch compiled = engine.compile(shortNeedle)) {
                 assertEquals("KMP", compiled.strategy());
             }
         }
@@ -58,7 +58,7 @@ final class JavaAdaptiveDominancePolicyTest {
             for (int i = threshold; i < concentrated.length; i++) {
                 concentrated[i] = (byte) (i % 127);
             }
-            try (M3CompiledSearch compiled = engine.compile(concentrated)) {
+            try (CompiledSearch compiled = engine.compile(concentrated)) {
                 assertEquals("KMP", compiled.strategy(), "length=" + length);
             }
         }
@@ -69,7 +69,7 @@ final class JavaAdaptiveDominancePolicyTest {
 
     @Test
     void majorityThresholdIsOverflowSafeAcrossFullIntDomain() throws Exception {
-        Method threshold = M3JavaAdaptiveSearchEngine.class.getDeclaredMethod("majorityThreshold", int.class);
+        Method threshold = JavaAdaptiveSearchEngine.class.getDeclaredMethod("majorityThreshold", int.class);
         threshold.setAccessible(true);
         int[] lengths = {0, 1, 2, 3, 4, 5, 1_073_741_822,
                 1_073_741_823, 1_073_741_824, 1_073_741_825,
@@ -84,11 +84,11 @@ final class JavaAdaptiveDominancePolicyTest {
 
     @Test
     void snapshotsCallerBytesAndRetainsNullAndEmptyValidation() {
-        M3JavaAdaptiveSearchEngine engine = new M3JavaAdaptiveSearchEngine();
+        JavaAdaptiveSearchEngine engine = new JavaAdaptiveSearchEngine();
         assertThrows(NullPointerException.class, () -> engine.compile(null));
         assertThrows(IllegalArgumentException.class, () -> engine.compile(new byte[0]));
         byte[] needle = {100, 100, 100, 100, 2, 3, 4, 5};
-        try (M3CompiledSearch compiled = engine.compile(needle)) {
+        try (CompiledSearch compiled = engine.compile(needle)) {
             Arrays.fill(needle, (byte) 1);
             assertEquals("KMP", compiled.strategy());
             assertEquals(2, compiled.indexOf(new byte[] {1, 2, 100, 100, 100, 100, 2, 3, 4, 5}, 0));
@@ -96,7 +96,7 @@ final class JavaAdaptiveDominancePolicyTest {
     }
 
     private static String strategy(byte[] needle) {
-        try (M3CompiledSearch compiled = new M3JavaAdaptiveSearchEngine().compile(needle)) {
+        try (CompiledSearch compiled = new JavaAdaptiveSearchEngine().compile(needle)) {
             return compiled.strategy();
         }
     }

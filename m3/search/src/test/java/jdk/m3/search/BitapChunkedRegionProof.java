@@ -35,15 +35,15 @@ public final class BitapChunkedRegionProof {
             byte[] unmodified = h.clone();
             int[] offsets = {Integer.MIN_VALUE, -1, 0, 1, 8190, 8191, 8192,
                     65535, 65536, 65537, n / 2, n - m, Integer.MAX_VALUE};
-            M3BitapExactSearch compiled = new M3BitapExactSearch(needle);
+            BitapExactSearch compiled = new BitapExactSearch(needle);
             for (int from : offsets) {
                 int[] oracle = oracle(h, needle, from);
                 eq(oracle[0], compiled.indexOf(h, from), caseNo, "java-first");
-                eq(oracle[0], M3BitapExactSearch.indexOfNative(needle, h, from), caseNo, "jni-first");
+                eq(oracle[0], BitapExactSearch.indexOfNative(needle, h, from), caseNo, "jni-first");
                 eq(oracle[1], compiled.lastIndexOf(h, from), caseNo, "java-last");
-                eq(oracle[1], M3BitapExactSearch.lastIndexOfNative(needle, h, from), caseNo, "jni-last");
+                eq(oracle[1], BitapExactSearch.lastIndexOfNative(needle, h, from), caseNo, "jni-last");
                 eq(oracle[2], compiled.countOverlapping(h, from), caseNo, "java-overlap");
-                eq(oracle[2], M3BitapExactSearch.countOverlappingNative(needle, h, from),
+                eq(oracle[2], BitapExactSearch.countOverlappingNative(needle, h, from),
                         caseNo, "jni-overlap");
                 if (from == 0 || from == 8191 || from == 65536) {
                     ByteBuffer view = ByteBuffer.allocateDirect(n + 8);
@@ -63,9 +63,9 @@ public final class BitapChunkedRegionProof {
         }
         byte[] same = new byte[63];
         Arrays.fill(same, (byte)0xff);
-        eq(0, M3BitapExactSearch.indexOfNative(same, same, 0), -1, "alias-first");
-        eq(0, M3BitapExactSearch.lastIndexOfNative(same, same, Integer.MAX_VALUE), -1, "alias-last");
-        eq(1, M3BitapExactSearch.countOverlappingNative(same, same, 0), -1, "alias-count");
+        eq(0, BitapExactSearch.indexOfNative(same, same, 0), -1, "alias-first");
+        eq(0, BitapExactSearch.lastIndexOfNative(same, same, Integer.MAX_VALUE), -1, "alias-last");
+        eq(1, BitapExactSearch.countOverlappingNative(same, same, 0), -1, "alias-count");
         System.out.println("M3_BITAP_CHUNK_REGION_PASS checks=" + checks + " seed=B17A2026 cases=" + (sizes.length * 5));
     }
 

@@ -60,8 +60,8 @@ final class M3HashFamilyNecProbe {
 
     /**
      * The crate's SimHash64.fingerprint (words incl. Unicode classes, unigram 1 + adjacent pair 2, UTF-16 FNV, ties 0)
-     * against jdk.m3.search.M3SimHash64.of (unigrams of [\p{L}\p{N}_']+, UTF-8 FNV, ties 1), and the lane FNV over
-     * UTF-16 units against jdk.m3.search.M3Utf8Fnv1a64 over the same texts: agree/disagree counts only.
+     * against jdk.m3.search.SimHash64.of (unigrams of [\p{L}\p{N}_']+, UTF-8 FNV, ties 1), and the lane FNV over
+     * UTF-16 units against jdk.m3.search.Utf8Fnv1a64 over the same texts: agree/disagree counts only.
      */
     static void crateVsSearch(String name, List<String> texts, Class<?> crate, Class<?> search, Class<?> fnv)
             throws ReflectiveOperationException {

@@ -21,7 +21,7 @@ static void m3_throw(JNIEnv *env, const char *type, const char *message) {
 
 /* Private proof-only JNI export: no pointers or workspaces survive this call. */
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_search_M3MinimumSubsequenceWindow_findNative(
+Java_jdk_m3_search_MinimumSubsequenceWindow_findNative(
         JNIEnv *env, jclass unused, jcharArray sourceArray, jcharArray sequenceArray) {
     (void) unused;
     jchar *source = NULL;

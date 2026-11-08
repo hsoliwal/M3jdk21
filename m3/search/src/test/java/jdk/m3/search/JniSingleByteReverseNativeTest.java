@@ -16,25 +16,25 @@ import org.junit.jupiter.api.Test;
 
 /** Native JNI-ABI1 reverse single-byte array/direct parity, with no Java fallback. */
 final class JniSingleByteReverseNativeTest {
-    private static M3JniSearchEngine nativeEngine() {
+    private static JniSearchEngine nativeEngine() {
         String configured = System.getProperty("m3.native.library.path");
         assertNotNull(configured, "a compiled native library must be supplied");
         Path library = Path.of(configured).toAbsolutePath().normalize();
         assertTrue(Files.isRegularFile(library), "native library is missing");
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path", library.toString());
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available(), "JNI must execute, not a Java fallback");
         return engine;
     }
 
     @Test
     void everyOctetReverseBoundMatchesIndependentJavaAndDirectBufferOracle() {
-        M3JniSearchEngine engine = nativeEngine();
+        JniSearchEngine engine = nativeEngine();
         Random random = new Random(0x4d33524556313231L);
         int[] lengths = {0, 1, 2, 3, 7, 32, 257, 4096};
         for (int octet = 0; octet < 256; octet++) {
-            try (M3CompiledSearch compiled = engine.compile(new byte[] {(byte) octet})) {
+            try (CompiledSearch compiled = engine.compile(new byte[] {(byte) octet})) {
                 assertEquals(1, compiled.needleLength());
                 for (int length : lengths) {
                     for (int trial = 0; trial < 4; trial++) {
@@ -71,7 +71,7 @@ final class JniSingleByteReverseNativeTest {
 
     @Test
     void longAbsentDenseAndNearEndReverseSearchPreservesLogicalOffsets() {
-        M3JniSearchEngine engine = nativeEngine();
+        JniSearchEngine engine = nativeEngine();
         byte[] bytes = new byte[1 << 20];
         Arrays.fill(bytes, (byte) 5);
         bytes[0] = (byte) 0xff;
@@ -80,7 +80,7 @@ final class JniSingleByteReverseNativeTest {
         for (int i = 0; i < bytes.length; i++) direct.put(2 + i, bytes[i]);
         direct.position(2);
         direct.limit(2 + bytes.length);
-        try (M3CompiledSearch compiled = engine.compile(new byte[] {(byte) 0xff})) {
+        try (CompiledSearch compiled = engine.compile(new byte[] {(byte) 0xff})) {
             assertEquals(bytes.length - 1, compiled.lastIndexOf(bytes, Integer.MAX_VALUE));
             assertEquals(0, compiled.lastIndexOf(bytes, bytes.length - 2));
             assertEquals(-1, compiled.lastIndexOf(bytes, -1));
@@ -88,7 +88,7 @@ final class JniSingleByteReverseNativeTest {
             assertEquals(0, compiled.lastIndexOf(direct, bytes.length - 2));
             assertEquals(-1, compiled.lastIndexOf(direct, -1));
         }
-        try (M3CompiledSearch absent = engine.compile(new byte[] {(byte) 0x80})) {
+        try (CompiledSearch absent = engine.compile(new byte[] {(byte) 0x80})) {
             assertEquals(-1, absent.lastIndexOf(bytes, Integer.MAX_VALUE));
             assertEquals(-1, absent.lastIndexOf(direct, Integer.MAX_VALUE));
         }

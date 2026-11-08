@@ -19,7 +19,7 @@ final class JavaBmhSingleWorkBudgetTest {
         byte[] needle = alternating(1025);
         needle[0] = (byte) 'X';
         byte[] text = alternating(65_536);
-        try (M3CompiledSearch search = new M3BoyerMooreHorspoolSearch(needle)) {
+        try (CompiledSearch search = new BoyerMooreHorspoolSearch(needle)) {
             assertEquals("BOYER_MOORE_HORSPOOL", search.strategy());
             assertNull(prepared(search), "KMP preparation must be lazy");
             assertEquals(-1, search.indexOf(text, 0));
@@ -38,7 +38,7 @@ final class JavaBmhSingleWorkBudgetTest {
         byte[] needle = alternating(1025);
         needle[needle.length - 1] = (byte) 'X';
         byte[] text = alternating(65_536);
-        try (M3CompiledSearch search = new M3BoyerMooreHorspoolSearch(needle)) {
+        try (CompiledSearch search = new BoyerMooreHorspoolSearch(needle)) {
             assertNull(prepared(search), "KMP preparation must be lazy");
             assertEquals(-1, search.lastIndexOf(text, Integer.MAX_VALUE));
             assertNotNull(prepared(search), "pathological reverse verification must reuse KMP");
@@ -72,7 +72,7 @@ final class JavaBmhSingleWorkBudgetTest {
             direct.position(7).put(text).limit(7 + text.length).position(7);
             ByteBuffer readonly = direct.asReadOnlyBuffer();
             readonly.mark();
-            try (M3CompiledSearch search = new M3BoyerMooreHorspoolSearch(needle)) {
+            try (CompiledSearch search = new BoyerMooreHorspoolSearch(needle)) {
                 for (int from : new int[] {-7, 0, 1, text.length / 2,
                         text.length, Integer.MAX_VALUE}) {
                     int expectedFirst = oracle(text, needle, from, false);
@@ -95,7 +95,7 @@ final class JavaBmhSingleWorkBudgetTest {
     void quickHitAndSparseMissDoNotPrepareTheLazyFallback() throws Exception {
         byte[] needle = alternating(512);
         byte[] sparse = new byte[65_536];
-        try (M3CompiledSearch search = new M3BoyerMooreHorspoolSearch(needle)) {
+        try (CompiledSearch search = new BoyerMooreHorspoolSearch(needle)) {
             assertEquals(-1, search.indexOf(sparse, 0));
             assertEquals(-1, search.lastIndexOf(sparse, Integer.MAX_VALUE));
             assertNull(prepared(search), "sparse scans must stay on shift tables");
@@ -106,7 +106,7 @@ final class JavaBmhSingleWorkBudgetTest {
         }
     }
 
-    private static void assertBuffers(M3CompiledSearch search, byte[] text,
+    private static void assertBuffers(CompiledSearch search, byte[] text,
             int first, int last, boolean reverse) {
         for (boolean direct : new boolean[] {false, true}) {
             ByteBuffer buffer = direct ? ByteBuffer.allocateDirect(text.length + 17)
@@ -127,8 +127,8 @@ final class JavaBmhSingleWorkBudgetTest {
         }
     }
 
-    private static Object prepared(M3CompiledSearch search) throws Exception {
-        Field field = M3BoyerMooreHorspoolSearch.class.getDeclaredField("overlapSearch");
+    private static Object prepared(CompiledSearch search) throws Exception {
+        Field field = BoyerMooreHorspoolSearch.class.getDeclaredField("overlapSearch");
         field.setAccessible(true);
         return field.get(search);
     }

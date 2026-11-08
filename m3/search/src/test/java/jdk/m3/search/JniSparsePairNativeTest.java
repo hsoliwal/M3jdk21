@@ -15,14 +15,14 @@ import org.junit.jupiter.api.Test;
 
 /** Executed original JNI owner oracle for the source-sealed sparse two-byte specialization. */
 final class JniSparsePairNativeTest {
-    private static M3JniSearchEngine requiredNative() {
+    private static JniSearchEngine requiredNative() {
         String configured = System.getProperty("m3.native.library.path");
         assertNotNull(configured, "compiled original JNI library must be supplied");
         Path library = Path.of(configured).toAbsolutePath().normalize();
         assertTrue(Files.isRegularFile(library), "JNI shared library does not exist");
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path", library.toString());
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available(), "native execution is mandatory: Java fallback is insufficient");
         return engine;
     }
@@ -38,7 +38,7 @@ final class JniSparsePairNativeTest {
 
     @Test
     void signedBytePairsAcrossSparseDenseAndExtremeOffsetsMatchTheIndependentOracle() {
-        M3JniSearchEngine engine = requiredNative();
+        JniSearchEngine engine = requiredNative();
         Random random = new Random(20261105L);
         int[] lengths = {0, 1, 2, 3, 63, 1024, 4095, 4096, 4097, 8192, 16384};
         byte[][] patterns = {
@@ -50,7 +50,7 @@ final class JniSparsePairNativeTest {
                 {(byte) 0xff, (byte) 0xff}
         };
         for (byte[] pair : patterns) {
-            try (M3CompiledSearch compiled = engine.compile(pair)) {
+            try (CompiledSearch compiled = engine.compile(pair)) {
                 for (int length : lengths) {
                     for (int shape = 0; shape < 5; shape++) {
                         byte[] text = new byte[length];
@@ -96,11 +96,11 @@ final class JniSparsePairNativeTest {
 
     @Test
     void millionByteSparseAndDenseCasesKeepLongRangeAndNeedleOwnership() {
-        M3JniSearchEngine engine = requiredNative();
+        JniSearchEngine engine = requiredNative();
         byte[][] pairs = {{1, 2}, {(byte) 0xff, 0}, {'a', 'b'}, {'a', 'a'}};
         for (byte[] pair : pairs) {
             byte[] original = pair.clone();
-            try (M3CompiledSearch compiled = engine.compile(pair)) {
+            try (CompiledSearch compiled = engine.compile(pair)) {
                 Arrays.fill(pair, (byte) 0x7f);
                 byte[] text = new byte[1 << 20];
                 Arrays.fill(text, original[0]);

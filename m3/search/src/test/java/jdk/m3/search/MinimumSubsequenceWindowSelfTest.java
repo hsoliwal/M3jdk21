@@ -47,19 +47,19 @@ public final class MinimumSubsequenceWindowSelfTest {
                 }
             }
         }
-        return bestStart < 0 ? -1L : M3MinimumSubsequenceWindow.pack(bestStart, bestEnd);
+        return bestStart < 0 ? -1L : MinimumSubsequenceWindow.pack(bestStart, bestEnd);
     }
 
     private static void compare(String source, String sequence) {
         long expected = oracle(source, sequence);
-        long javaObserved = M3MinimumSubsequenceWindow.find(source, sequence);
+        long javaObserved = MinimumSubsequenceWindow.find(source, sequence);
         check(javaObserved == expected, "java mismatch source=" + source.length()
                 + " sequence=" + sequence.length() + " expected=" + expected
                 + " observed=" + javaObserved);
         if (nativeMode) {
             char[] s = source.toCharArray(), t = sequence.toCharArray();
             char[] beforeS = s.clone(), beforeT = t.clone();
-            long nativeObserved = M3MinimumSubsequenceWindow.findNative(s, t);
+            long nativeObserved = MinimumSubsequenceWindow.findNative(s, t);
             check(nativeObserved == expected, "JNI mismatch source=" + source.length()
                     + " sequence=" + sequence.length()
                     + " expected=" + expected + " observed=" + nativeObserved);
@@ -91,52 +91,52 @@ public final class MinimumSubsequenceWindowSelfTest {
     }
 
     private static void refusal(boolean nativeRun) {
-        check(M3MinimumSubsequenceWindow.find("", "") == 0L, "both empty");
-        check(M3MinimumSubsequenceWindow.find("", "a") == -1L, "empty source");
+        check(MinimumSubsequenceWindow.find("", "") == 0L, "both empty");
+        check(MinimumSubsequenceWindow.find("", "a") == -1L, "empty source");
         boolean threw = false;
-        try { M3MinimumSubsequenceWindow.find(null, "a"); }
+        try { MinimumSubsequenceWindow.find(null, "a"); }
         catch (NullPointerException expected) { threw = true; }
         check(threw, "null source refusal");
         threw = false;
-        try { M3MinimumSubsequenceWindow.find("abc", null); }
+        try { MinimumSubsequenceWindow.find("abc", null); }
         catch (NullPointerException expected) { threw = true; }
         check(threw, "null sequence refusal");
         threw = false;
-        try { M3MinimumSubsequenceWindow.find("a".repeat(1_000_001), "a"); }
+        try { MinimumSubsequenceWindow.find("a".repeat(1_000_001), "a"); }
         catch (IllegalArgumentException expected) { threw = true; }
         check(threw, "source length refusal");
         threw = false;
-        try { M3MinimumSubsequenceWindow.find("x", "x".repeat(4_097)); }
+        try { MinimumSubsequenceWindow.find("x", "x".repeat(4_097)); }
         catch (IllegalArgumentException expected) { threw = true; }
         check(threw, "sequence length refusal");
         threw = false;
-        try { M3MinimumSubsequenceWindow.find("a".repeat(8_000), "a".repeat(4_096)); }
+        try { MinimumSubsequenceWindow.find("a".repeat(8_000), "a".repeat(4_096)); }
         catch (IllegalArgumentException expected) { threw = true; }
         check(threw, "multiplication budget refusal");
-        check(M3MinimumSubsequenceWindow.find("a".repeat(1_000_000), "z") == -1L,
+        check(MinimumSubsequenceWindow.find("a".repeat(1_000_000), "z") == -1L,
                 "million-unit maximum source");
         if (nativeRun) {
             threw = false;
-            try { M3MinimumSubsequenceWindow.findNative(null, new char[] {'a'}); }
+            try { MinimumSubsequenceWindow.findNative(null, new char[] {'a'}); }
             catch (NullPointerException expected) { threw = true; }
             check(threw, "JNI null source refusal");
             threw = false;
-            try { M3MinimumSubsequenceWindow.findNative(new char[] {'a'}, null); }
+            try { MinimumSubsequenceWindow.findNative(new char[] {'a'}, null); }
             catch (NullPointerException expected) { threw = true; }
             check(threw, "JNI null sequence refusal");
             threw = false;
-            try { M3MinimumSubsequenceWindow.findNative(new char[1_000_001], new char[1]); }
+            try { MinimumSubsequenceWindow.findNative(new char[1_000_001], new char[1]); }
             catch (IllegalArgumentException expected) { threw = true; }
             check(threw, "JNI source budget refusal");
             threw = false;
-            try { M3MinimumSubsequenceWindow.findNative(new char[1], new char[4_097]); }
+            try { MinimumSubsequenceWindow.findNative(new char[1], new char[4_097]); }
             catch (IllegalArgumentException expected) { threw = true; }
             check(threw, "JNI sequence budget refusal");
             threw = false;
-            try { M3MinimumSubsequenceWindow.findNative(new char[8_000], new char[4_096]); }
+            try { MinimumSubsequenceWindow.findNative(new char[8_000], new char[4_096]); }
             catch (IllegalArgumentException expected) { threw = true; }
             check(threw, "JNI multiplication budget refusal");
-            check(M3MinimumSubsequenceWindow.findNative(
+            check(MinimumSubsequenceWindow.findNative(
                     "a".repeat(1_000_000).toCharArray(), new char[] {'z'}) == -1L,
                     "JNI million-unit maximum source");
         }
@@ -153,10 +153,10 @@ public final class MinimumSubsequenceWindowSelfTest {
                         String source = "aaabcdebdde".repeat(5) + (char) (id + 'a');
                         String seq = (i & 1) == 0 ? "bde" : "eeb";
                         long expected = oracle(source, seq);
-                        check(M3MinimumSubsequenceWindow.find(source, seq) == expected,
+                        check(MinimumSubsequenceWindow.find(source, seq) == expected,
                                 "concurrent Java");
                         if (nativeMode) {
-                            check(M3MinimumSubsequenceWindow.findNative(
+                            check(MinimumSubsequenceWindow.findNative(
                                     source.toCharArray(), seq.toCharArray()) == expected,
                                     "concurrent JNI");
                         }

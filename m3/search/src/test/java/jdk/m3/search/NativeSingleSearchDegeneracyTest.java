@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 /** Native-only qualification fixture: the host must explicitly enable the real JNI provider. */
 final class NativeSingleSearchDegeneracyTest {
-    private static M3CompiledSearch compile(byte[] needle) {
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+    private static CompiledSearch compile(byte[] needle) {
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available(), "qualification requires the actual native library");
         return engine.compile(needle);
     }
@@ -27,7 +27,7 @@ final class NativeSingleSearchDegeneracyTest {
         needle[needle.length - 2] = 'b';
         byte[] text = new byte[65536];
         Arrays.fill(text, (byte) 'a');
-        try (M3CompiledSearch compiled = compile(needle)) {
+        try (CompiledSearch compiled = compile(needle)) {
             assertEquals(-1, compiled.indexOf(text, 0));
             assertEquals(-1, compiled.lastIndexOf(text, Integer.MAX_VALUE));
             System.arraycopy(needle, 0, text, 8192, needle.length);
@@ -37,7 +37,7 @@ final class NativeSingleSearchDegeneracyTest {
             assertEquals(49152, compiled.lastIndexOf(text, Integer.MAX_VALUE));
             assertEquals(8192, compiled.lastIndexOf(text, 49151));
             assertEquals(-1, compiled.lastIndexOf(text, 8191));
-            assertEquals(2, M3ByteOccurrences.count(compiled, text, 0, null));
+            assertEquals(2, ByteOccurrences.count(compiled, text, 0, null));
         }
     }
 
@@ -51,7 +51,7 @@ final class NativeSingleSearchDegeneracyTest {
         ByteBuffer owner = ByteBuffer.allocateDirect(text.length + 19);
         owner.position(7).put(text).limit(7 + text.length).position(7);
         ByteBuffer view = owner.asReadOnlyBuffer();
-        try (M3CompiledSearch compiled = compile(needle)) {
+        try (CompiledSearch compiled = compile(needle)) {
             assertEquals(-1, compiled.indexOf(view, 0));
             assertEquals(-1, compiled.lastIndexOf(view, Integer.MAX_VALUE));
             owner.position(7 + 16384).put(needle).position(7);
@@ -77,7 +77,7 @@ final class NativeSingleSearchDegeneracyTest {
             }
             ByteBuffer direct = ByteBuffer.allocateDirect(text.length + 4);
             direct.position(2).put(text).limit(2 + text.length).position(2);
-            try (M3CompiledSearch compiled = compile(needle)) {
+            try (CompiledSearch compiled = compile(needle)) {
                 for (int from : new int[] {-1, 0, text.length / 2, text.length, Integer.MAX_VALUE}) {
                     int first = naive(text, needle, from, false);
                     int last = naive(text, needle, from, true);
@@ -98,7 +98,7 @@ final class NativeSingleSearchDegeneracyTest {
         byte[] text = new byte[32768];
         System.arraycopy(needle, 0, text, 0, needle.length);
         System.arraycopy(needle, 0, text, text.length - needle.length, needle.length);
-        M3CompiledSearch compiled = compile(needle);
+        CompiledSearch compiled = compile(needle);
         assertEquals(0, compiled.indexOf(text, 0));
         assertEquals(text.length - needle.length, compiled.lastIndexOf(text, Integer.MAX_VALUE));
         compiled.close();

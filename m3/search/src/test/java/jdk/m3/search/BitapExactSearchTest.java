@@ -16,11 +16,11 @@ import org.junit.jupiter.api.Test;
 final class BitapExactSearchTest {
     @Test
     void rejectsInvalidPatternWithoutRetainingCallerStorage() {
-        assertThrows(NullPointerException.class, () -> new M3BitapExactSearch(null));
-        assertThrows(IllegalArgumentException.class, () -> new M3BitapExactSearch(new byte[0]));
-        assertThrows(IllegalArgumentException.class, () -> new M3BitapExactSearch(new byte[64]));
+        assertThrows(NullPointerException.class, () -> new BitapExactSearch(null));
+        assertThrows(IllegalArgumentException.class, () -> new BitapExactSearch(new byte[0]));
+        assertThrows(IllegalArgumentException.class, () -> new BitapExactSearch(new byte[64]));
         byte[] needle = {1, 2, 1};
-        M3BitapExactSearch compiled = new M3BitapExactSearch(needle);
+        BitapExactSearch compiled = new BitapExactSearch(needle);
         needle[0] = 99;
         assertEquals(0, compiled.indexOf(new byte[] {1, 2, 1, 4}, 0));
         assertEquals(3, compiled.needleLength());
@@ -34,14 +34,14 @@ final class BitapExactSearchTest {
     @Test
     void boundariesOverlapsAndUnsignedByteMasks() {
         byte[] source = {(byte) 0x80, (byte) 0xFF, (byte) 0x80, (byte) 0xFF, 0};
-        M3BitapExactSearch compiled = new M3BitapExactSearch(new byte[] {(byte) 0x80, (byte) 0xFF});
+        BitapExactSearch compiled = new BitapExactSearch(new byte[] {(byte) 0x80, (byte) 0xFF});
         assertEquals(0, compiled.indexOf(source, Integer.MIN_VALUE));
         assertEquals(2, compiled.indexOf(source, 1));
         assertEquals(-1, compiled.indexOf(source, Integer.MAX_VALUE));
         assertEquals(-1, compiled.lastIndexOf(source, -1));
         assertEquals(0, compiled.lastIndexOf(source, 0));
         assertEquals(2, compiled.lastIndexOf(source, Integer.MAX_VALUE));
-        M3BitapExactSearch overlaps = new M3BitapExactSearch(new byte[] {7, 7, 7});
+        BitapExactSearch overlaps = new BitapExactSearch(new byte[] {7, 7, 7});
         assertEquals(1, overlaps.indexOf(new byte[] {7, 7, 7, 7, 7}, 1));
         assertEquals(2, overlaps.lastIndexOf(new byte[] {7, 7, 7, 7, 7}, 10));
     }
@@ -49,7 +49,7 @@ final class BitapExactSearchTest {
     @Test
     void overlappingCountReusesOwnedMasksAndPreservesBufferCoordinates() {
         byte[] needle = {7, 7};
-        M3BitapExactSearch compiled = new M3BitapExactSearch(needle);
+        BitapExactSearch compiled = new BitapExactSearch(needle);
         needle[0] = 99; // Previously captured pattern remains unchanged.
         byte[] input = {7, 7, 7, 7, 1, 7, 7};
         assertEquals(4, compiled.countOverlapping(input, Integer.MIN_VALUE));
@@ -69,7 +69,7 @@ final class BitapExactSearchTest {
             assertEquals(1, buffer.position());
             assertEquals(8, buffer.limit());
         }
-        assertEquals(2, new M3BitapExactSearch(new byte[] {-1, -1})
+        assertEquals(2, new BitapExactSearch(new byte[] {-1, -1})
                 .countOverlapping(new byte[] {-1, -1, -1}, 0));
     }
 
@@ -96,7 +96,7 @@ final class BitapExactSearchTest {
                 case 3 -> 0;
                 default -> random.nextInt(200);
             };
-            M3BitapExactSearch compiled = new M3BitapExactSearch(needle);
+            BitapExactSearch compiled = new BitapExactSearch(needle);
             String evidence = "seed-case=" + caseNo + " from=" + from;
             int expectedFirst = oracle(text, needle, from, false);
             int expectedLast = oracle(text, needle, from, true);

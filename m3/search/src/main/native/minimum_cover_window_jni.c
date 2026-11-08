@@ -15,7 +15,7 @@ static void m3_cover_throw(JNIEnv *env, const char *class_name, const char *mess
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_m3_search_M3MinimumCoverWindow_nativeSpan(
+Java_jdk_m3_search_MinimumCoverWindow_nativeSpan(
         JNIEnv *env, jclass owner, jcharArray source_array, jcharArray required_array) {
     (void) owner;
     if (source_array == NULL || required_array == NULL) {

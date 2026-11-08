@@ -19,8 +19,8 @@ public final class MinimumCoverWindowPairPerformance {
         char[] requiredUnits = required.toCharArray();
         long expected = MinimumCoverWindowPairJavaTest.independent(source, required);
         for (int i = 0; i < WARMUP; i++) {
-            long value = nativeMode ? M3MinimumCoverWindow.nativeSpan(sourceUnits, requiredUnits)
-                    : M3MinimumCoverWindow.javaSpan(source, required);
+            long value = nativeMode ? MinimumCoverWindow.nativeSpan(sourceUnits, requiredUnits)
+                    : MinimumCoverWindow.javaSpan(source, required);
             if (value != expected) throw new AssertionError("warmup contract mismatch");
             observed = value;
         }
@@ -28,8 +28,8 @@ public final class MinimumCoverWindowPairPerformance {
         for (int repetition = 0; repetition < REPEATS; repetition++) {
             long start = System.nanoTime();
             for (int i = 0; i < SAMPLES; i++) {
-                long value = nativeMode ? M3MinimumCoverWindow.nativeSpan(sourceUnits, requiredUnits)
-                        : M3MinimumCoverWindow.javaSpan(source, required);
+                long value = nativeMode ? MinimumCoverWindow.nativeSpan(sourceUnits, requiredUnits)
+                        : MinimumCoverWindow.javaSpan(source, required);
                 if (value != expected) throw new AssertionError("measurement contract mismatch");
                 observed = value;
             }

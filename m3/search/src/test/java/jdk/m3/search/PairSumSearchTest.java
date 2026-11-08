@@ -17,9 +17,9 @@ final class PairSumSearchTest {
     void sortedDuplicatesHaveCanonicalZeroBasedIndicesAndRemainUnchanged() {
         int[] values = {-4, -1, 0, 0, 2, 2, 5};
         int[] copy = values.clone();
-        assertPair(2, 4, M3PairSumSearch.firstSorted(values, 2));
-        assertPair(2, 3, M3PairSumSearch.firstSorted(values, 0));
-        assertPair(-1, -1, M3PairSumSearch.firstSorted(values, 123));
+        assertPair(2, 4, PairSumSearch.firstSorted(values, 2));
+        assertPair(2, 3, PairSumSearch.firstSorted(values, 0));
+        assertPair(-1, -1, PairSumSearch.firstSorted(values, 123));
         assertArrayEquals(copy, values);
     }
 
@@ -27,27 +27,27 @@ final class PairSumSearchTest {
     void unsortedSuffixSearchReturnsEarliestLeftThenRight() {
         int[] values = {5, 9, 2, 7, 4, 2, 9};
         int[] copy = values.clone();
-        assertPair(0, 3, M3PairSumSearch.firstUnsorted(values, 12));
-        assertPair(1, 2, M3PairSumSearch.firstUnsorted(values, 11));
-        assertPair(2, 5, M3PairSumSearch.firstUnsorted(values, 4));
+        assertPair(0, 3, PairSumSearch.firstUnsorted(values, 12));
+        assertPair(1, 2, PairSumSearch.firstUnsorted(values, 11));
+        assertPair(2, 5, PairSumSearch.firstUnsorted(values, 4));
         assertArrayEquals(copy, values);
-        assertPair(-1, -1, M3PairSumSearch.firstUnsorted(values, -999));
+        assertPair(-1, -1, PairSumSearch.firstUnsorted(values, -999));
     }
 
     @Test
     void overflowAndInvalidSortedPreconditionsAreRejectedOrHandled() {
-        assertPair(0, 1, M3PairSumSearch.firstSorted(
+        assertPair(0, 1, PairSumSearch.firstSorted(
                 new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE}, 4_294_967_294L));
-        assertPair(0, 1, M3PairSumSearch.firstSorted(
+        assertPair(0, 1, PairSumSearch.firstSorted(
                 new int[] {Integer.MIN_VALUE, Integer.MIN_VALUE}, -4_294_967_296L));
-        assertPair(-1, -1, M3PairSumSearch.firstSorted(
+        assertPair(-1, -1, PairSumSearch.firstSorted(
                 new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE}, -2));
-        assertPair(-1, -1, M3PairSumSearch.firstUnsorted(
+        assertPair(-1, -1, PairSumSearch.firstUnsorted(
                 new int[] {Integer.MIN_VALUE, Integer.MAX_VALUE}, Long.MAX_VALUE));
-        assertThrows(NullPointerException.class, () -> M3PairSumSearch.firstSorted(null, 1));
-        assertThrows(NullPointerException.class, () -> M3PairSumSearch.firstUnsorted(null, 1));
+        assertThrows(NullPointerException.class, () -> PairSumSearch.firstSorted(null, 1));
+        assertThrows(NullPointerException.class, () -> PairSumSearch.firstUnsorted(null, 1));
         assertThrows(IllegalArgumentException.class,
-                () -> M3PairSumSearch.firstSorted(new int[] {2, 1}, Long.MAX_VALUE));
+                () -> PairSumSearch.firstSorted(new int[] {2, 1}, Long.MAX_VALUE));
     }
 
     @Test
@@ -69,14 +69,14 @@ final class PairSumSearchTest {
                 default -> random.nextLong();
             };
             int[] original = values.clone();
-            assertEquals(oracle(values, target), M3PairSumSearch.firstUnsorted(values, target),
+            assertEquals(oracle(values, target), PairSumSearch.firstUnsorted(values, target),
                     "unsorted differential case " + attempt);
             assertArrayEquals(original, values);
             Arrays.sort(values);
             long expected = oracle(values, target);
-            assertEquals(expected, M3PairSumSearch.firstSorted(values, target),
+            assertEquals(expected, PairSumSearch.firstSorted(values, target),
                     "sorted differential case " + attempt);
-            assertEquals(expected, M3PairSumSearch.firstUnsorted(values, target),
+            assertEquals(expected, PairSumSearch.firstUnsorted(values, target),
                     "sorted/unsorted parity case " + attempt);
         }
     }
@@ -89,11 +89,11 @@ final class PairSumSearchTest {
                 }
             }
         }
-        return M3PairSumSearch.NOT_FOUND;
+        return PairSumSearch.NOT_FOUND;
     }
 
     private static void assertPair(int left, int right, long packed) {
-        assertEquals(left, M3PairSumSearch.leftIndex(packed));
-        assertEquals(right, M3PairSumSearch.rightIndex(packed));
+        assertEquals(left, PairSumSearch.leftIndex(packed));
+        assertEquals(right, PairSumSearch.rightIndex(packed));
     }
 }

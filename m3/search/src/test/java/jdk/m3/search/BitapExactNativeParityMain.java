@@ -37,18 +37,18 @@ public final class BitapExactNativeParityMain {
                 case 3 -> 0;
                 default -> random.nextInt(250);
             };
-            M3BitapExactSearch compiled = new M3BitapExactSearch(needle);
+            BitapExactSearch compiled = new BitapExactSearch(needle);
             int expectedFirst = oracle(haystack, needle, from, false);
             int expectedLast = oracle(haystack, needle, from, true);
             int expectedCount = oracleCount(haystack, needle, from);
             check(expectedFirst, compiled.indexOf(haystack, from), caseNo, "java-first");
-            check(expectedFirst, M3BitapExactSearch.indexOfNative(needle, haystack, from),
+            check(expectedFirst, BitapExactSearch.indexOfNative(needle, haystack, from),
                     caseNo, "jni-first");
             check(expectedLast, compiled.lastIndexOf(haystack, from), caseNo, "java-last");
-            check(expectedLast, M3BitapExactSearch.lastIndexOfNative(needle, haystack, from),
+            check(expectedLast, BitapExactSearch.lastIndexOfNative(needle, haystack, from),
                     caseNo, "jni-last");
             check(expectedCount, compiled.countOverlapping(haystack, from), caseNo, "java-count");
-            check(expectedCount, M3BitapExactSearch.countOverlappingNative(needle, haystack, from),
+            check(expectedCount, BitapExactSearch.countOverlappingNative(needle, haystack, from),
                     caseNo, "jni-count");
             assertions += 6;
             byte[] padded = new byte[haystack.length + 6];
@@ -68,21 +68,21 @@ public final class BitapExactNativeParityMain {
                 assertions += 5;
             }
         }
-        check(-1, M3BitapExactSearch.indexOfNative(new byte[] {2}, new byte[0], 0), -1, "empty");
-        check(-1, M3BitapExactSearch.lastIndexOfNative(new byte[] {2}, new byte[] {2}, -1), -1, "negative");
+        check(-1, BitapExactSearch.indexOfNative(new byte[] {2}, new byte[0], 0), -1, "empty");
+        check(-1, BitapExactSearch.lastIndexOfNative(new byte[] {2}, new byte[] {2}, -1), -1, "negative");
         assertions += 2;
         requireThrows(NullPointerException.class,
-                () -> M3BitapExactSearch.indexOfNative(null, new byte[2], 0));
+                () -> BitapExactSearch.indexOfNative(null, new byte[2], 0));
         requireThrows(NullPointerException.class,
-                () -> M3BitapExactSearch.indexOfNative(new byte[] {1}, null, 0));
+                () -> BitapExactSearch.indexOfNative(new byte[] {1}, null, 0));
         requireThrows(IllegalArgumentException.class,
-                () -> M3BitapExactSearch.indexOfNative(new byte[64], new byte[100], 0));
+                () -> BitapExactSearch.indexOfNative(new byte[64], new byte[100], 0));
         requireThrows(IllegalArgumentException.class,
-                () -> M3BitapExactSearch.lastIndexOfNative(new byte[0], new byte[100], 0));
+                () -> BitapExactSearch.lastIndexOfNative(new byte[0], new byte[100], 0));
         requireThrows(NullPointerException.class,
-                () -> M3BitapExactSearch.countOverlappingNative(null, new byte[2], 0));
+                () -> BitapExactSearch.countOverlappingNative(null, new byte[2], 0));
         requireThrows(IllegalArgumentException.class,
-                () -> M3BitapExactSearch.countOverlappingNative(new byte[0], new byte[2], 0));
+                () -> BitapExactSearch.countOverlappingNative(new byte[0], new byte[2], 0));
         assertions += 6;
         System.out.println("BITAP_JAVA_JNI_PARITY PASS assertions=" + assertions + " seed=B17A2026");
     }

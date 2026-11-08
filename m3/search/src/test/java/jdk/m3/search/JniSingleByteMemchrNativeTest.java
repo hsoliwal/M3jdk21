@@ -24,13 +24,13 @@ final class JniSingleByteMemchrNativeTest {
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path", nativeLibrary.toString());
 
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available(), "do not replace unavailable JNI with a Java fallback");
         Random random = new Random(0x4d334d454d434852L);
         int[] lengths = {0, 1, 2, 3, 7, 32, 257, 4096};
 
         for (int wanted = 0; wanted < 256; wanted++) {
-            try (M3CompiledSearch compiled = engine.compile(new byte[] {(byte) wanted})) {
+            try (CompiledSearch compiled = engine.compile(new byte[] {(byte) wanted})) {
                 for (int length : lengths) {
                     for (int trial = 0; trial < 4; trial++) {
                         byte[] values = new byte[length];
@@ -69,13 +69,13 @@ final class JniSingleByteMemchrNativeTest {
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path",
                 Path.of(configured).toAbsolutePath().normalize().toString());
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available());
 
         byte[] values = new byte[1 << 20];
         Arrays.fill(values, (byte) 5);
         values[values.length - 1] = (byte) 0xff;
-        try (M3CompiledSearch compiled = engine.compile(new byte[] {(byte) 0xff})) {
+        try (CompiledSearch compiled = engine.compile(new byte[] {(byte) 0xff})) {
             assertEquals(values.length - 1, compiled.indexOf(values, 0));
             assertEquals(values.length - 1, compiled.indexOf(values, values.length - 1));
             assertEquals(-1, compiled.indexOf(values, values.length));
