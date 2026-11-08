@@ -515,8 +515,8 @@ public final class GraphAlgorithms {
     //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.unionFindComponents from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
     public static int unionFindComponents(int vertices, int[] left, int[] right) {
         validateParallelEdges(vertices, left, right);
-        PrimitiveAlgorithmSupport.DisjointSet set =
-                new PrimitiveAlgorithmSupport.DisjointSet(vertices);
+        AlgorithmSupport.DisjointSet set =
+                new AlgorithmSupport.DisjointSet(vertices);
         for (int i = 0; i < left.length; i++) set.union(left[i], right[i]);
         return set.components();
     }
@@ -524,8 +524,8 @@ public final class GraphAlgorithms {
     //FLLDCIM: FOLD - member PrimitiveGraphAlgorithms.hasUndirectedCycle from donor blob ebddcaa6767d (m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/primitive-graph-fold/FOLD_MAP.tsv
     public static boolean hasUndirectedCycle(int vertices, int[] left, int[] right) {
         validateParallelEdges(vertices, left, right);
-        PrimitiveAlgorithmSupport.DisjointSet set =
-                new PrimitiveAlgorithmSupport.DisjointSet(vertices);
+        AlgorithmSupport.DisjointSet set =
+                new AlgorithmSupport.DisjointSet(vertices);
         for (int i = 0; i < left.length; i++) {
             if (!set.union(left[i], right[i])) return true;
         }
@@ -541,13 +541,13 @@ public final class GraphAlgorithms {
         validateParallelEdges(vertices, left, right);
         Objects.requireNonNull(weights, "weights");
         if (weights.length != left.length) throw new IllegalArgumentException("weights length mismatch");
-        PrimitiveAlgorithmSupport.LongIntMinHeap heap =
-                new PrimitiveAlgorithmSupport.LongIntMinHeap(weights.length);
+        AlgorithmSupport.LongIntMinHeap heap =
+                new AlgorithmSupport.LongIntMinHeap(weights.length);
         for (int edge = 0; edge < weights.length; edge++) {
             heap.add(weights[edge], edge);
         }
-        PrimitiveAlgorithmSupport.DisjointSet set =
-                new PrimitiveAlgorithmSupport.DisjointSet(vertices);
+        AlgorithmSupport.DisjointSet set =
+                new AlgorithmSupport.DisjointSet(vertices);
         long total = 0L;
         int used = 0;
         while (!heap.isEmpty() && used < Math.max(0, vertices - 1)) {
