@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""FOLD_MEMBERS v1.1: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
+"""FOLD_MEMBERS v1.3: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
 
 usage: fold_members.py <repo root> <map.tsv> [--check]
 The map (tab separated; '#' comments) declares everything, the tool does nothing undeclared:
   OWNER  <path of the owner .java>
   FILE   <path of a donor .java in the tree>                 a duplicate class whose members may fold
-  TAKE   <Donor>.<member>[(<types>)]                          fold this member (every overload when no selector)
+  TAKE   <Donor>.<member>[(<types>)]                          fold this member (every overload when no selector);
+                                                              <Donor>.* takes every member; nested class/record/interface/enum
+                                                              declarations at class level are members too (whole span)
   SKIP   <Donor>.<member>  <reason>                           not folded (the owner already has it)
   EDIT   <Donor>.<member>  <sha256 prefix of old>  <old>  <new>   declared substitution inside that folded body
   IMPORT <fqn>                                                import the owner needs for the folded bodies
@@ -15,6 +17,9 @@ The map (tab separated; '#' comments) declares everything, the tool does nothing
                                                               (owner package tree, folded bodies and the owner text included, anchors excluded), evidence segments excluded
   REMOVE <path>                                               donor file removed after its members are folded
   MOVE   <old test path>  <new test path>                     test file renamed (class name follows the file name)
+  RENAME <Donor>.<member>  <newName>                          the member folds under <newName>; every unqualified call to it
+                                                              inside the folded bodies of that donor follows (private helpers
+                                                              whose signature the owner already declares with another body)
 Folded bodies are copied byte for byte from the donor file (Javadoc and annotations included), one //FLLDCIM: FOLD
 anchor per member names the donor blob; identical private helpers fold once; members the owner already declares (same
 name and parameter types, same normalized body) are PRESENT and skipped; a same-signature member with a different body is a CONFLICT and the run is refused unless the map declares SKIP or an EDIT. Idempotent: a second run changes nothing; --check writes nothing and
@@ -34,6 +39,8 @@ LINES = re.compile(rb"[^\n]*\n|[^\n]+$")
 DECL = re.compile(rb"^(\s+)(?:(?:public|private|protected|static|final|synchronized|default|abstract)\s+)*"
                   rb"(?:<[^>]*>\s+)?(?!(?:return|new|throw|else|case|yield)\b)\w[\w.<>\[\], ?]*\s+(\w+)\s*\(")
 FIELD = re.compile(rb"^(\s+)(?:(?:public|private|protected|static|final)\s+)+[\w.<>\[\]]+\s+(\w+)\s*(?:=|;)")
+TYPE = re.compile(rb"^(\s+)(?:(?:public|private|protected|static|final|sealed|non-sealed|abstract|strictfp)\s+)*"
+                  rb"(class|record|interface|enum)\s+(\w+)\b")
 EVIDENCE = re.compile(r"/(recipe-custody|custody|evidence|qualification|recipes?|retained-variants|proofs?|snapshots?|"
                       r"before|after|postimages?|preimages?|donors?|intakes?|fixtures?|golden|expected|samples?)/")
 changed = []
@@ -80,8 +87,19 @@ def members(lines):
     found, index = [], 0
     while index < len(lines):
         text = eol_split(lines[index])[0]
-        method, field = DECL.match(text), FIELD.match(text)
-        if method and method.group(1) == b"    ":
+        method, field, kind = DECL.match(text), FIELD.match(text), TYPE.match(text)
+        if kind and kind.group(1) == b"    ":
+            first, end = leading_doc(lines, index), index
+            while end < len(lines) and eol_split(lines[end])[0] != b"    }" and not (
+                    end == index and text.rstrip().endswith(b"}") and text.count(b"{") == text.count(b"}")):
+                end += 1
+            stop = end + 1
+            if stop < len(lines) and eol_split(lines[stop])[0].strip() == b"":
+                stop += 1
+            found.append({"kind": kind.group(2).decode(), "name": kind.group(3).decode(), "selector": None,
+                          "first": first, "stop": stop})
+            index = stop
+        elif method and method.group(1) == b"    ":
             first, end = leading_doc(lines, index), index
             while end < len(lines) and eol_split(lines[end])[0] != b"    }" and not (
                     end == index and text.rstrip().endswith(b"}") and text.count(b"{") == text.count(b"}")):
@@ -104,7 +122,7 @@ def members(lines):
 
 
 def read_map():
-    m = {"OWNER": None, "FILE": [], "TAKE": [], "SKIP": {}, "EDIT": [], "IMPORT": [], "REFS": [], "REMOVE": [], "MOVE": []}
+    m = {"OWNER": None, "FILE": [], "TAKE": [], "SKIP": {}, "EDIT": [], "IMPORT": [], "REFS": [], "REMOVE": [], "MOVE": [], "RENAME": []}
     for raw in MAP.read_text(encoding="utf-8").splitlines():
         if not raw.strip() or raw.startswith("#") or raw.startswith("kind\t"):
             continue
@@ -121,6 +139,8 @@ def read_map():
             m["REFS"].append((rest[0], rest[1]))
         elif kind == "MOVE":
             m["MOVE"].append((rest[0], rest[1]))
+        elif kind == "RENAME":
+            m["RENAME"].append((rest[0], rest[1]))
     return m
 
 
@@ -150,7 +170,7 @@ def main() -> int:
     owner_lines = LINES.findall(owner)
     present = {(x["name"], x["selector"]): hashlib.sha256(re.sub(rb"\s+", b" ", b"".join(owner_lines[x["first"]:x["stop"]]))).hexdigest()[:12]
                for x in members(owner_lines)}
-    folded, table, seen = [], [], {}
+    folded, table, seen, conflicts = [], [], {}, []
     for donor_rel in m["FILE"]:
         donor_path = ROOT / donor_rel
         if not donor_path.exists():
@@ -159,15 +179,19 @@ def main() -> int:
         data = donor_path.read_bytes()
         lines = LINES.findall(data)
         donor_type = donor_path.stem
+        renames = {k.split(".", 1)[1]: v for k, v in m["RENAME"] if k.split(".", 1)[0] == donor_type}
         for member in members(lines):
             key = donor_type + "." + member["name"]
             if member["name"] == donor_type:
                 continue
-            taken = any(t == key or t == key + "(" + (member["selector"] or "") + ")" for t in m["TAKE"])
+            taken = any(t == key or t == key + "(" + (member["selector"] or "") + ")" or t == donor_type + ".*" for t in m["TAKE"])
             if key in m["SKIP"] or not taken:
                 table.append((key, member["selector"], "SKIP" if key in m["SKIP"] else "NOT_TAKEN"))
                 continue
             body = b"".join(lines[member["first"]:member["stop"]])
+            for old_name, new_name in renames.items():
+                body = re.sub(rb"(?<![\w.])" + re.escape(old_name.encode()) + rb"\s*\(", new_name.encode() + b"(", body)
+            name = renames.get(member["name"], member["name"])
             for ekey, pin, old, new in m["EDIT"]:
                 if ekey not in (key, key + "(" + (member["selector"] or "") + ")"):
                     continue
@@ -177,20 +201,24 @@ def main() -> int:
                 body = body.replace(o, new.encode())
             body = refs(m, body.decode("utf-8")).encode("utf-8")
             digest = hashlib.sha256(re.sub(rb"\s+", b" ", body)).hexdigest()[:12]
-            if (member["name"], member["selector"]) in present:
-                if present[(member["name"], member["selector"])] != digest:
-                    sys.exit(f"REFUSE CONFLICT {key}({member['selector']}): the owner declares this member with a different body; declare SKIP or an EDIT")
+            if (name, member["selector"]) in present:
+                if present[(name, member["selector"])] != digest:
+                    conflicts.append(f"REFUSE CONFLICT {key}({member['selector']}): the owner declares this member with a different body; declare SKIP or an EDIT")
+                    continue
                 table.append((key, member["selector"], "PRESENT"))
                 continue
             if digest in seen:
                 table.append((key, member["selector"], "DUPLICATE of " + seen[digest]))
                 continue
             seen[digest] = key
-            present[(member["name"], member["selector"])] = digest
+            present[(name, member["selector"])] = digest
             anchor = (f"    //FLLDCIM: FOLD - member {key} from donor blob {blob[:12]} ({donor_rel}); recipe "
                       f"m3/tooling/jdk-naming/fold_members.py v1, map {MAP.relative_to(ROOT).as_posix()}\n").encode()
             folded.append(anchor + body + (b"" if body.endswith(b"\n") else b"\n"))
-            table.append((key, member["selector"], "FOLD"))
+            table.append((key, member["selector"], "FOLD" if name == member["name"] else "FOLD as " + name))
+    if conflicts:
+        print("\n".join(conflicts))
+        sys.exit(2)
     if folded:
         close = max(i for i, line in enumerate(owner_lines) if eol_split(line)[0] == b"}")
         head = owner_lines[:close]
@@ -234,7 +262,7 @@ def main() -> int:
         print("MEMBER\t" + "\t".join("" if c is None else str(c) for c in row))
     for c in changed:
         print("CHANGED\t" + c)
-    print(f"FOLD_MEMBERS v1.1 owner={m['OWNER']} folded={sum(1 for r in table if r[2] == 'FOLD')} changed={len(changed)} check={CHECK}")
+    print(f"FOLD_MEMBERS v1.3 owner={m['OWNER']} folded={sum(1 for r in table if r[2] == 'FOLD')} changed={len(changed)} check={CHECK}")
     return 1 if CHECK and changed else 0
 
 
