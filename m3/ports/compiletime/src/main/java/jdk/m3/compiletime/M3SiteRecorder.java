@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.compiletime;
 
-import jdk.m3.precompute.M3RegexShape;
+import jdk.m3.precompute.RegexShape;
 import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -65,7 +65,7 @@ final class M3SiteRecorder {
         M3InventoryState.RegexKey key = new M3InventoryState.RegexKey(pattern, flags);
         key.analysis = M3RegexRequirement.analyze(pattern, flags);
         key.shapeLiteral = (flags & Pattern.LITERAL) != 0
-                || M3RegexShape.analyze(pattern).kind() == M3RegexShape.Kind.LITERAL;
+                || RegexShape.analyze(pattern).kind() == RegexShape.Kind.LITERAL;
         return key;
     }
 

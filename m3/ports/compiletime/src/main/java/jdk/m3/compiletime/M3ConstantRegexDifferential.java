@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.compiletime;
 
-import jdk.m3.precompute.M3Progress;
-import jdk.m3.precompute.M3RegexOracleCorpus;
-import jdk.m3.precompute.M3RegexOracleHarness;
+import jdk.m3.precompute.Progress;
+import jdk.m3.precompute.RegexOracleCorpus;
+import jdk.m3.precompute.RegexOracleHarness;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.nio.ByteBuffer;
@@ -173,8 +173,8 @@ public final class M3ConstantRegexDifferential {
 
     /** Oracle corpus: image built from the frozen expressions, checked pair by pair. */
     private static long oracle(Map<String, String> receipt) throws IOException {
-        M3RegexOracleHarness harness = M3RegexOracleHarness.compile(M3Progress.none());
-        List<String> expressions = M3RegexOracleCorpus.expressions();
+        RegexOracleHarness harness = RegexOracleHarness.compile(Progress.none());
+        List<String> expressions = RegexOracleCorpus.expressions();
         List<M3ConstantRegexImageWriter.Item> items = new ArrayList<>();
         Map<String, Boolean> seen = new HashMap<>();
         for (int r = 0; r < expressions.size(); r++) {
@@ -187,11 +187,11 @@ public final class M3ConstantRegexDifferential {
                 M3ConstantRegexImageWriter.write(items, M3ConstantRegexImageWriter.sha256Ints(harness.oracleRoot()))));
         Map<String, M3ConstantRegexGate> gates = new HashMap<>();
         items.forEach(i -> gates.put(i.pattern(), M3ConstantRegexGate.compile(i.pattern(), 0, image)));
-        M3RegexOracleHarness.Report report = harness.check("m3-constant-regex-image",
+        RegexOracleHarness.Report report = harness.check("m3-constant-regex-image",
                 (regex, input) -> {
                     M3ConstantRegexGate g = gates.get(regex);
                     return g == null || !g.hit() || g.holds(input)
-                            ? M3RegexOracleHarness.Verdict.MAY_MATCH : M3RegexOracleHarness.Verdict.CANNOT_MATCH;
+                            ? RegexOracleHarness.Verdict.MAY_MATCH : RegexOracleHarness.Verdict.CANNOT_MATCH;
                 }, 16);
         long mismatches = 0;
         for (int r = 0; r < expressions.size(); r++) {
