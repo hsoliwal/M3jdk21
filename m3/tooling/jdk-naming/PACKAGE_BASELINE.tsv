@@ -258,7 +258,6 @@ ROOT	m3/migration/original-provider-20261017/sdk	REAL
 ROOT	m3/migration/rx7-codec-cap-20261018/sdk	REAL
 ROOT	m3/mop	LOOSE
 ROOT	m3/native	REAL
-ROOT	m3/nlp	REAL
 ROOT	m3/optane	REAL
 ROOT	m3/ports/capability-runtime	REAL
 ROOT	m3/ports/collections	REAL
@@ -1031,7 +1030,6 @@ PACKAGE	jdk.m3.llm.internal.json
 PACKAGE	jdk.m3.llm.projection
 PACKAGE	jdk.m3.llm.summary
 PACKAGE	jdk.m3.mop
-PACKAGE	jdk.m3.nlp
 PACKAGE	jdk.m3.nlpsearch
 PACKAGE	jdk.m3.optane
 PACKAGE	jdk.m3.parallel
@@ -3665,36 +3663,6 @@ PREFIXED	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseTableSelfTest.java
 PREFIXED	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseTableTest.java
 PREFIXED	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseWindowSelfTest.java
 PREFIXED	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseWindowTest.java
-PREFIXED	m3/nlp/src/main/java/jdk/m3/nlp/M3BackoffWordNgrams.java
-PREFIXED	m3/nlp/src/main/java/jdk/m3/nlp/M3CooccurrencePpmi.java
-PREFIXED	m3/nlp/src/main/java/jdk/m3/nlp/M3NgramPerplexity.java
-PREFIXED	m3/nlp/src/main/java/jdk/m3/nlp/M3ScopedNgrams.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsContextOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsContextOracleTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsDifferentialDump.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsRankOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsRankOracleTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsTrainingArrayFault.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsTrainingContextArrayFault.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsTrainingContextGrowthOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsTrainingContextIndexOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsTrainingContextIndexOracleTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsTrainingGrowthOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsTrainingOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3BackoffWordNgramsTrainingOracleTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3CooccurrencePpmiDifferentialDump.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3CooccurrencePpmiPositiveOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3CooccurrencePpmiPositiveOracleTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3CooccurrencePpmiRankingOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3CooccurrencePpmiRankingOracleTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3CooccurrencePpmiSparseOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3CooccurrencePpmiSparseOracleTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3NgramPerplexityDifferentialDump.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3NgramPerplexityTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3ScopedNgramsDifferentialDump.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3ScopedNgramsOracle.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3ScopedNgramsOracleTest.java
-PREFIXED	m3/nlp/src/test/java/jdk/m3/nlp/M3ScopedNgramsTopKAdmissionTest.java
 PREFIXED	m3/optane/src/main/java/jdk/internal/m3/optane/M3NumaTopology.java
 PREFIXED	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemAccelerator.java
 PREFIXED	m3/optane/src/main/java/jdk/internal/m3/optane/M3PmemCorpusGramIndex.java
