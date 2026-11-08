@@ -11,7 +11,7 @@ on:
       - 'test/jdk/jdk/m3/arrays/**'
       - 'make/m3/arrays/**'
       - 'make/modules/jdk.m3.collections/**'
-      - '.github/workflows/m3-jdk-modules.yml'
+      - '.github/workflows/m3jdk-modules.yml'
   push:
     branches: [master]
     paths:
