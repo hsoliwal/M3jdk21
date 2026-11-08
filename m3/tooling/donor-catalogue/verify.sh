@@ -29,6 +29,10 @@ java -cp "$classes" jdk.m3.tooling.donors.M3DonorCatalogue plan "$here" "$first"
 java -cp "$classes" jdk.m3.tooling.donors.M3DonorCatalogue plan "$here" "$second" \
   >"$out/plan-second.log"
 cmp "$first" "$second"
+# Donor-delta planner and tree lanes (folded in from m3/tooling/donor-delta, 2026-11-08): self-tests and proof.
+for test in M3DonorDeltaPlannerSelfTest M3DonorTreeLanesSelfTest M3DonorTreeLanesGrowthTest M3DonorSortedFastPathProof; do
+  java -cp "$classes" "jdk.m3.tooling.donors.$test" | tee "$out/$test.log"
+done
 cp "$first" "$out/DONOR_PLAN.tsv"
 
 {
