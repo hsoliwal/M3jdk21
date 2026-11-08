@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""FOLD_MEMBERS v1.6: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
+"""FOLD_MEMBERS v1.7: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
 
 usage: fold_members.py <repo root> <map.tsv> [--check]
 The map (tab separated; '#' comments) declares everything, the tool does nothing undeclared:
@@ -15,6 +15,8 @@ The map (tab separated; '#' comments) declares everything, the tool does nothing
                                                               declarations at class level are members too (whole span)
   SKIP   <Donor>.<member>[(<types>)]  <reason>                not folded (the owner already has it); a selector limits it to one overload
   EDIT   <Donor>.<member>  <sha256 prefix of old>  <old>  <new>   declared substitution inside that folded body
+  BODY   <regex>  <replacement>                               rewrite inside every folded body only (donor-internal names
+                                                              such as a collection type and its accessors), never module-wide
   IMPORT <fqn>                                                import the owner needs for the folded bodies
   OWNER_EDIT <sha256 prefix of old>  <old>  <new>             one declared substitution in the owner text (exactly once;
                                                               a no-op when <new> is already present)
@@ -129,7 +131,7 @@ def members(lines):
 
 
 def read_map():
-    m = {"OWNER": None, "FILE": [], "TAKE": [], "SKIP": {}, "EDIT": [], "IMPORT": [], "REFS": [], "REMOVE": [], "MOVE": [], "RENAME": [], "OWNER_EDIT": [], "DONOR": []}
+    m = {"OWNER": None, "FILE": [], "TAKE": [], "SKIP": {}, "EDIT": [], "IMPORT": [], "REFS": [], "REMOVE": [], "MOVE": [], "RENAME": [], "OWNER_EDIT": [], "DONOR": [], "BODY": []}
     for raw in MAP.read_text(encoding="utf-8").splitlines():
         if not raw.strip() or raw.startswith("#") or raw.startswith("kind\t"):
             continue
@@ -155,6 +157,8 @@ def read_map():
                                     (MAP.parent / rest[2]).read_text(encoding="utf-8")))
         elif kind == "DONOR":
             m["DONOR"].append((rest[0], rest[1], rest[2]))
+        elif kind == "BODY":
+            m["BODY"].append((rest[0], rest[1]))
     return m
 
 
@@ -223,6 +227,8 @@ def main() -> int:
             body = b"".join(lines[member["first"]:member["stop"]])
             for old_name, new_name in renames.items():
                 body = re.sub(rb"(?<![\w.])" + re.escape(old_name.encode()) + rb"\s*\(", new_name.encode() + b"(", body)
+            for pattern, replacement in m["BODY"]:
+                body = re.sub(pattern.encode("utf-8"), replacement.encode("utf-8"), body)
             name = renames.get(member["name"], member["name"])
             selector = refs(m, member["selector"]) if member["selector"] is not None else None  # type maps apply to the signature too
             for ekey, pin, old, new in m["EDIT"]:
@@ -295,7 +301,7 @@ def main() -> int:
         print("MEMBER\t" + "\t".join("" if c is None else str(c) for c in row))
     for c in changed:
         print("CHANGED\t" + c)
-    print(f"FOLD_MEMBERS v1.6 owner={m['OWNER']} folded={sum(1 for r in table if r[2].startswith('FOLD'))} changed={len(changed)} check={CHECK}")
+    print(f"FOLD_MEMBERS v1.7 owner={m['OWNER']} folded={sum(1 for r in table if r[2].startswith('FOLD'))} changed={len(changed)} check={CHECK}")
     return 1 if CHECK and changed else 0
 
 
