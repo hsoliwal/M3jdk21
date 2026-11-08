@@ -1,0 +1,10 @@
+gate	result	evidence
+baseline	PASS	master 25deae5216f0, mvn -f m3/algorithms/pom.xml clean package: 88 tests / 0 failures / 0 skipped in 22 classes, -Xlint:all -Werror, 0 warnings
+fold_fixed_point	PASS	fold_members.py --check after the apply run: folded=0 changed=0, exit 0
+fold_members	PASS	7 members FOLD (zSearch x2, SENTINEL, prefixMatchLengths x2, scanVirtualZ, virtualUnit), 2 SKIP (zArray x2: owner zFunction), 0 PRESENT, 0 DUPLICATE; one declared EDIT (sha256 0614436e8a5e) in zSearch(String,String)
+references	PASS	grep ZAlgorithm|ZPrefixMatch over m3/algorithms/src/main/java and src/test/java outside //FLLDCIM: FOLD anchors: 0 lines
+tests	PASS	post-fold mvn clean package: 88 tests / 0 failures / 0 skipped; per-class counts identical to the baseline after mapping the three renamed test classes; 0 warnings
+package_gate	PASS	package_gate.py check --paths <git ls-files of the head>: violations=0
+jdk_naming	PASS	jdk_naming.py plan --only m3/algorithms/: moves=0 rewrites=0 refusals=0
+scope	PASS	12 paths: owner + 2 main callers + catalog row, 2 removals, 3 test renames, 2 test rewrites, recipe dir, fold_members.py
+hard_limits	NOTE	StringAlgorithms grows 199 -> 358 lines (ClassLength 300 of the com.synexia doctrine exceeded by the fold; the user's no-sprawl order ranks above it); folded bodies are byte for byte, MethodLength unchanged

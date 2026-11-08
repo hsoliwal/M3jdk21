@@ -43,15 +43,15 @@ public final class CatalogueKernelsDump {
     }
 
     private static void zCases(StringBuilder out, int index, String text, String pattern) {
-        line(out, "ZAlgorithm.zArray", index, () -> ZAlgorithm.zArray(text));
-        line(out, "ZAlgorithm.zArray#monitor", index, () -> ZAlgorithm.zArray(text, ProgressMonitor.none()));
-        line(out, "ZAlgorithm.zSearch", index, () -> ZAlgorithm.zSearch(text, pattern));
-        line(out, "ZAlgorithm.zSearch#nullText", index, () -> ZAlgorithm.zSearch(null, pattern));
-        line(out, "ZAlgorithm.zSearch#monitor", index,
-                () -> ZAlgorithm.zSearch(text, pattern, ProgressMonitor.none()));
-        line(out, "ZPrefixMatch.prefixMatchLengths", index, () -> ZPrefixMatch.prefixMatchLengths(text, pattern));
-        line(out, "ZPrefixMatch.prefixMatchLengths#monitor", index,
-                () -> ZPrefixMatch.prefixMatchLengths(text, pattern, ProgressMonitor.none()));
+        line(out, "StringAlgorithms.zFunction", index, () -> StringAlgorithms.zFunction(text, ProgressMonitor.none()));
+        line(out, "StringAlgorithms.zFunction#monitor", index, () -> StringAlgorithms.zFunction(text, ProgressMonitor.none()));
+        line(out, "StringAlgorithms.zSearch", index, () -> StringAlgorithms.zSearch(text, pattern));
+        line(out, "StringAlgorithms.zSearch#nullText", index, () -> StringAlgorithms.zSearch(null, pattern));
+        line(out, "StringAlgorithms.zSearch#monitor", index,
+                () -> StringAlgorithms.zSearch(text, pattern, ProgressMonitor.none()));
+        line(out, "StringAlgorithms.prefixMatchLengths", index, () -> StringAlgorithms.prefixMatchLengths(text, pattern));
+        line(out, "StringAlgorithms.prefixMatchLengths#monitor", index,
+                () -> StringAlgorithms.prefixMatchLengths(text, pattern, ProgressMonitor.none()));
     }
 
     private static void mismatchCases(StringBuilder out, int index, String text, String pattern, Random random) {
@@ -81,19 +81,19 @@ public final class CatalogueKernelsDump {
     }
 
     private static void refusalCases(StringBuilder out) {
-        line(out, "refusal.zSearch#nullPattern", 0, () -> ZAlgorithm.zSearch("x", null));
+        line(out, "refusal.zSearch#nullPattern", 0, () -> StringAlgorithms.zSearch("x", null));
         line(out, "refusal.firstIndex#emptyPattern", 0, () -> OneMismatchWindowSearch.firstIndex("abc", ""));
         line(out, "refusal.allIndices#nullText", 0, () -> OneMismatchWindowSearch.allIndices(null, "a"));
         line(out, "refusal.query#nullText", 0, () -> new OneMismatchWindowSearch.Query(null, "a"));
-        line(out, "refusal.prefixMatchLengths#nullPattern", 0, () -> ZPrefixMatch.prefixMatchLengths("a", null));
+        line(out, "refusal.prefixMatchLengths#nullPattern", 0, () -> StringAlgorithms.prefixMatchLengths("a", null));
         line(out, "refusal.javaWitness#null", 0, () -> IntLcsWitness.javaWitness(null, new int[] {1}));
         line(out, "refusal.javaWitness#length", 0, () -> IntLcsWitness.javaWitness(new int[4097], new int[] {1}));
         line(out, "refusal.javaWitness#cells", 0, () -> IntLcsWitness.javaWitness(new int[4096], new int[4096]));
         line(out, "refusal.referenceLength#null", 0, () -> IntLcsWitness.referenceLength(new int[0], null));
         line(out, "interrupt.allIndices", 0, () -> interrupted(() -> OneMismatchWindowSearch.allIndices("abc", "a")));
         line(out, "interrupt.zSearch#monitor", 0,
-                () -> interrupted(() -> ZAlgorithm.zSearch("abc", "b", ProgressMonitor.none())));
-        line(out, "interrupt.prefixMatchLengths", 0, () -> interrupted(() -> ZPrefixMatch.prefixMatchLengths("ab", "a")));
+                () -> interrupted(() -> StringAlgorithms.zSearch("abc", "b", ProgressMonitor.none())));
+        line(out, "interrupt.prefixMatchLengths", 0, () -> interrupted(() -> StringAlgorithms.prefixMatchLengths("ab", "a")));
     }
 
     private static Object interrupted(Supplier<Object> call) {

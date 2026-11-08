@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /** JDK 21 indexOf oracle for UTF-16 Z-search, including the separator in inputs. */
 //FLLDCIM: RELOCATE - donor blob d4ea9270bc63 at commit 78cf2ad4c7e5 (repository, path, URL and digests: m3/algorithms/recipe/catalogue-kernels-20261107/PROVENANCE.tsv); recipe m3/algorithms/recipe/catalogue-kernels-20261107/relocate.py v1
-final class ZAlgorithmFirstHitContractTest {
+final class ZSearchFirstHitContractTest {
     private static final char[] ALPHABET = {'a', '$', 'b', '\0', '\ud800'};
 
     private static String word(int length, int digits) {
@@ -23,7 +23,7 @@ final class ZAlgorithmFirstHitContractTest {
     }
 
     private static void match(String text, String pattern) {
-        assertEquals(text.indexOf(pattern), ZAlgorithm.zSearch(text, pattern),
+        assertEquals(text.indexOf(pattern), StringAlgorithms.zSearch(text, pattern),
                 "UTF-16 first occurrence in text=" + text.length() + " pattern=" + pattern.length());
     }
 
@@ -38,7 +38,7 @@ final class ZAlgorithmFirstHitContractTest {
         match("$aaa$", "aa");
         match("a\ud800b", "\ud800");
         match("\ud800\udc00$\ud800\udc00", "\ud800\udc00");
-        assertThrows(NullPointerException.class, () -> ZAlgorithm.zSearch("abc", null));
+        assertThrows(NullPointerException.class, () -> StringAlgorithms.zSearch("abc", null));
     }
 
     @Test
@@ -74,9 +74,9 @@ final class ZAlgorithmFirstHitContractTest {
 
     @Test
     void unchangedZArrayAndProgressCompatibilityBoundary() {
-        assertArrayEquals(new int[] {0, 4, 3, 2, 1}, ZAlgorithm.zArray("aaaaa"));
-        assertArrayEquals(new int[0], ZAlgorithm.zArray(""));
-        assertEquals(0, ZAlgorithm.zSearch("ab$ab", "ab", ProgressMonitor.none()));
-        assertEquals(0, ZAlgorithm.zSearch("", "", ProgressMonitor.none()));
+        assertArrayEquals(new int[] {0, 4, 3, 2, 1}, StringAlgorithms.zFunction("aaaaa", ProgressMonitor.none()));
+        assertArrayEquals(new int[0], StringAlgorithms.zFunction("", ProgressMonitor.none()));
+        assertEquals(0, StringAlgorithms.zSearch("ab$ab", "ab", ProgressMonitor.none()));
+        assertEquals(0, StringAlgorithms.zSearch("", "", ProgressMonitor.none()));
     }
 }

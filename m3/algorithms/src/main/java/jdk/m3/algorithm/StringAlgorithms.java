@@ -5,6 +5,7 @@ package jdk.m3.algorithm;
 import jdk.m3.algorithm.ProgressMonitor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 //FLLDCIM: RELOCATE - donor blob a947a2c59855 at commit 3385d79a2968 (repository, path, URL and digests: m3/algorithms/recipe/families-20261106/PROVENANCE.tsv); recipe m3/algorithms/recipe/families-20261106/relocate.py v1
 public final class StringAlgorithms {
@@ -196,4 +197,162 @@ public final class StringAlgorithms {
             monitor.done();
         }
     }
+
+    //FLLDCIM: FOLD - member ZAlgorithm.zSearch from donor blob 5834d9dfa933 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZAlgorithm.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    /**
+     * First occurrence using extended Z matching over the pattern and text.
+     * Keeps only the pattern's Z table, never concatenates the input strings,
+     * and accepts every UTF-16 code unit (including '$' and unpaired surrogates).
+     * Time O(n + m), auxiliary memory O(m).
+     */
+    public static int zSearch(String text, String pattern) {
+        if (pattern.isEmpty()) return 0;
+        // Historical String concatenation converts a null text to the four
+        // UTF-16 units "null". Keep that existing observable contract.
+        text = String.valueOf(text);
+        int n = text.length(), m = pattern.length();
+        if (m > n) return -1;
+        int[] patternZ = zFunction(pattern, ProgressMonitor.none());
+        int left = 0, right = 0;
+        for (int i = 0; i <= n - m; i++) {
+            int matched = 0;
+            if (i < right) {
+                matched = Math.min(right - i, patternZ[i - left]);
+            }
+            while (matched < m && text.charAt(i + matched) == pattern.charAt(matched)) {
+                matched++;
+            }
+            if (i + matched > right) {
+                left = i;
+                right = i + matched;
+            }
+            if (matched == m) return i;
+        }
+        return -1;
+    }
+
+    //FLLDCIM: FOLD - member ZAlgorithm.zSearch from donor blob 5834d9dfa933 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZAlgorithm.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    /** Progress-aware compatibility entrypoint. */
+    public static int zSearch(String text, String pattern, ProgressMonitor monitor) {
+        ProgressMonitor checked = ProgressChecks.nonNull(monitor);
+        ProgressChecks.checkCanceled(checked);
+        checked.beginTask("zSearch", 1L);
+        try {
+            var result = zSearch(text, pattern);
+            ProgressChecks.checkCanceled(checked);
+            checked.worked(1L);
+            return result;
+        } finally {
+            checked.done();
+        }
+    }
+
+    //FLLDCIM: FOLD - member ZPrefixMatch.SENTINEL from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    private static final int SENTINEL = Character.MAX_VALUE + 1;
+
+    //FLLDCIM: FOLD - member ZPrefixMatch.prefixMatchLengths from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    /**
+     * Longest pattern-prefix match at every text position, in Java UTF-16 code units.
+     *
+     * <p>This is reusable Z geometry, not another search engine. Entry {@code i} is the length of
+     * the longest prefix of {@code pattern} equal to {@code text.substring(i)}. The virtual
+     * separator remains outside the complete char domain, so isolated surrogates and NUL are exact.
+     */
+    public static int[] prefixMatchLengths(String text, String pattern) {
+        return prefixMatchLengths(text, pattern, null);
+    }
+
+    //FLLDCIM: FOLD - member ZPrefixMatch.prefixMatchLengths from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    public static int[] prefixMatchLengths(
+            String text, String pattern, ProgressMonitor monitor) {
+        String haystack = Objects.requireNonNull(text, "text");
+        String needle = Objects.requireNonNull(pattern, "pattern");
+        ProgressMonitor checked = ProgressChecks.nonNull(monitor);
+        ProgressChecks.checkCanceled(checked);
+        int[] matches = new int[haystack.length()];
+        if (haystack.isEmpty() || needle.isEmpty()) {
+            return matches;
+        }
+        long totalLong = (long) needle.length() + 1L + haystack.length();
+        if (totalLong > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("virtual Z geometry exceeds int range");
+        }
+        scanVirtualZ(haystack, needle, checked, matches, false);
+        ProgressChecks.checkCanceled(checked);
+        return matches;
+    }
+
+    //FLLDCIM: FOLD - member ZPrefixMatch.scanVirtualZ from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    /**
+     * Shared virtual Z scan. When prefixMatches is non-null it receives one LCP length per text
+     * position. Exact search passes null and may return immediately at the first full match.
+     */
+    private static int scanVirtualZ(
+            String haystack,
+            String needle,
+            ProgressMonitor monitor,
+            int[] prefixMatches,
+            boolean stopAtFirstExact) {
+        int patternLength = needle.length();
+        int textLength = haystack.length();
+        int total = Math.toIntExact((long) patternLength + 1L + textLength);
+        if (prefixMatches != null && prefixMatches.length != textLength) {
+            throw new IllegalArgumentException("prefixMatches length");
+        }
+
+        int[] z = new int[total];
+        int left = 0;
+        int right = 0;
+        long comparisons = 0L;
+        for (int index = 1; index < total; index++) {
+            if ((index & 1023) == 0) {
+                ProgressChecks.checkCanceled(monitor);
+            }
+            if (index <= right) {
+                z[index] = Math.min(right - index + 1, z[index - left]);
+            }
+
+            while (z[index] < total - index
+                    && virtualUnit(needle, haystack, z[index])
+                            == virtualUnit(needle, haystack, index + z[index])) {
+                z[index]++;
+                if ((++comparisons & 1023L) == 0L) {
+                    ProgressChecks.checkCanceled(monitor);
+                }
+            }
+
+            int candidateRight = index + z[index] - 1;
+            if (candidateRight > right) {
+                left = index;
+                right = candidateRight;
+            }
+            if (index > patternLength) {
+                int textIndex = index - patternLength - 1;
+                int matched = Math.min(patternLength, z[index]);
+                if (prefixMatches != null) {
+                    prefixMatches[textIndex] = matched;
+                }
+                if (stopAtFirstExact && matched >= patternLength) {
+                    ProgressChecks.checkCanceled(monitor);
+                    return textIndex;
+                }
+            }
+        }
+        ProgressChecks.checkCanceled(monitor);
+        return -1;
+    }
+
+    //FLLDCIM: FOLD - member ZPrefixMatch.virtualUnit from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    private static int virtualUnit(
+            String pattern, String text, int virtualIndex) {
+        int patternLength = pattern.length();
+        if (virtualIndex < patternLength) {
+            return pattern.charAt(virtualIndex);
+        }
+        if (virtualIndex == patternLength) {
+            return SENTINEL;
+        }
+        return text.charAt(virtualIndex - patternLength - 1);
+    }
+
 }

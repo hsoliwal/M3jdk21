@@ -13,7 +13,7 @@ import java.util.Objects;
  * <p>This is the reviewed mechanical shape shared by public challenge metadata such as
  * LeetCode 3303 and HackerRank Save Humanity. Public problem pages are evidence/taxonomy donors
  * only; this implementation is original Synexia code. It composes the canonical Z-prefix geometry
- * in {@link M3ZPrefixMatch} in forward and reverse directions.</p>
+ * in {@link StringAlgorithms#prefixMatchLengths(String, String, ProgressMonitor)} in forward and reverse directions.</p>
  *
  * <p>For each alignment, let {@code p} be the longest matching prefix and {@code s} the longest
  * matching suffix. The window differs in at most one position iff {@code p + s >= m - 1}.
@@ -144,11 +144,11 @@ public final class OneMismatchWindowSearch {
 
     private static Geometry geometry(
             String text, String pattern, ProgressMonitor monitor) {
-        int[] prefix = ZPrefixMatch.prefixMatchLengths(text, pattern, monitor);
+        int[] prefix = StringAlgorithms.prefixMatchLengths(text, pattern, monitor);
         String reversedText = reverseCodeUnits(text);
         String reversedPattern = reverseCodeUnits(pattern);
         int[] reversedPrefix =
-                ZPrefixMatch.prefixMatchLengths(reversedText, reversedPattern, monitor);
+                StringAlgorithms.prefixMatchLengths(reversedText, reversedPattern, monitor);
         return new Geometry(text.length(), pattern.length(), prefix, reversedPrefix);
     }
 
