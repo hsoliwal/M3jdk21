@@ -633,7 +633,7 @@ public final class AlgorithmExtrasDump {
         });
     }
 
-    // ---------------------------------------------------------------- strings (PrimitiveStringAlgorithms, StringAlgorithms)
+    // ---------------------------------------------------------------- strings (StringAlgorithms)
 
     private void strings() {
         each("minimumWindow", cases, random -> {
@@ -642,8 +642,8 @@ public final class AlgorithmExtrasDump {
             boolean withMonitor = random.nextBoolean();
             TraceMonitor monitor = monitor(random);
             return call("'" + source + "' '" + required + "'", () -> (withMonitor
-                    ? PrimitiveStringAlgorithms.minimumWindow(source, required, monitor)
-                    : PrimitiveStringAlgorithms.minimumWindow(source, required)))
+                    ? StringAlgorithms.minimumWindow(source, required, monitor)
+                    : StringAlgorithms.minimumWindow(source, required)))
                     + (withMonitor ? " trace=" + monitor.trace() : "");
         });
         each("kmpIndexOf", cases, random -> {
@@ -654,18 +654,18 @@ public final class AlgorithmExtrasDump {
             boolean withMonitor = random.nextBoolean();
             TraceMonitor monitor = monitor(random);
             return call("'" + textValue + "' '" + pattern + "'", () -> (withMonitor
-                    ? PrimitiveStringAlgorithms.kmpIndexOf(textValue, pattern, monitor)
-                    : PrimitiveStringAlgorithms.kmpIndexOf(textValue, pattern))
-                    + "/rk=" + PrimitiveStringAlgorithms.rabinKarpIndexOf(textValue, pattern)
-                    + "/pf=" + s(PrimitiveStringAlgorithms.prefixFunction(pattern)))
+                    ? StringAlgorithms.kmpIndexOf(textValue, pattern, monitor)
+                    : StringAlgorithms.kmpIndexOf(textValue, pattern))
+                    + "/rk=" + StringAlgorithms.rabinKarpIndexOf(textValue, pattern)
+                    + "/pf=" + s(StringAlgorithms.prefixFunction(pattern)))
                     + (withMonitor ? " trace=" + monitor.trace() : "");
         });
         each("anagramPalindrome", cases, random -> {
             String left = text(random, random.nextInt(12), 16);
             String right = random.nextBoolean() ? shuffle(random, left) : text(random, left.length(), 16);
-            return call("'" + left + "' '" + right + "'", () -> PrimitiveStringAlgorithms.isAnagram(left, right)
-                    + "/" + PrimitiveStringAlgorithms.isPalindromeIgnoringNonAlphanumeric(left)
-                    + "/" + PrimitiveStringAlgorithms.isPalindromeIgnoringNonAlphanumeric(left
+            return call("'" + left + "' '" + right + "'", () -> StringAlgorithms.isAnagram(left, right)
+                    + "/" + StringAlgorithms.isPalindromeIgnoringNonAlphanumeric(left)
+                    + "/" + StringAlgorithms.isPalindromeIgnoringNonAlphanumeric(left
                     + new StringBuilder(left).reverse()));
         });
         each("longestCommonPrefix", cases, random -> {
@@ -675,11 +675,11 @@ public final class AlgorithmExtrasDump {
                 values[i] = random.nextInt(30) == 0 ? null : stem.substring(0, random.nextInt(stem.length() + 1))
                         + text(random, random.nextInt(4), 3);
             }
-            return call(Arrays.toString(values), () -> PrimitiveStringAlgorithms.longestCommonPrefix(values));
+            return call(Arrays.toString(values), () -> StringAlgorithms.longestCommonPrefix(values));
         });
         each("reverseWords", cases, random -> {
             String value = text(random, random.nextInt(30), 8);
-            return call("'" + value + "'", () -> "'" + PrimitiveStringAlgorithms.reverseWords(value) + "'");
+            return call("'" + value + "'", () -> "'" + StringAlgorithms.reverseWords(value) + "'");
         });
         each("manacher", cases, random -> {
             String value = text(random, length(random) % 200, random.nextBoolean() ? 2 : 6);
