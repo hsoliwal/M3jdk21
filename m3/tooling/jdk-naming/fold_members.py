@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""FOLD_MEMBERS v1.5: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
+"""FOLD_MEMBERS v1.6: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
 
 usage: fold_members.py <repo root> <map.tsv> [--check]
 The map (tab separated; '#' comments) declares everything, the tool does nothing undeclared:
@@ -19,7 +19,8 @@ The map (tab separated; '#' comments) declares everything, the tool does nothing
   OWNER_EDIT <sha256 prefix of old>  <old>  <new>             one declared substitution in the owner text (exactly once;
                                                               a no-op when <new> is already present)
   OWNER_EDIT_FILE <sha256 prefix of old>  <old file>  <new file>   the same with multi-line texts read from files beside the map
-  REFS   <regex>  <replacement>                               reference rewrite over main and test Java of the module
+  REFS   <regex>  <replacement>                               reference rewrite over main and test Java of the module;
+                                                              the replacement <DROP_LINE> removes every matching line
                                                               (owner package tree, folded bodies and the owner text included, anchors excluded), evidence segments excluded
   REMOVE <path>                                               donor file removed after its members are folded
   MOVE   <old test path>  <new test path>                     test file renamed (class name follows the file name)
@@ -171,6 +172,10 @@ def refs(m, text: str) -> str:
         if "//FLLDCIM:" in one:
             return one
         for pattern, replacement in m["REFS"]:
+            if replacement == "<DROP_LINE>":
+                if re.search(pattern, one):
+                    return ""
+                continue
             one = re.sub(pattern, replacement, one)
         return one
     return "".join(line(one) for one in text.splitlines(keepends=True))
@@ -290,7 +295,7 @@ def main() -> int:
         print("MEMBER\t" + "\t".join("" if c is None else str(c) for c in row))
     for c in changed:
         print("CHANGED\t" + c)
-    print(f"FOLD_MEMBERS v1.5 owner={m['OWNER']} folded={sum(1 for r in table if r[2].startswith('FOLD'))} changed={len(changed)} check={CHECK}")
+    print(f"FOLD_MEMBERS v1.6 owner={m['OWNER']} folded={sum(1 for r in table if r[2].startswith('FOLD'))} changed={len(changed)} check={CHECK}")
     return 1 if CHECK and changed else 0
 
 
