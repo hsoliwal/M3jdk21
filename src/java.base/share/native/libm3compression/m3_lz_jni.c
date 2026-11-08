@@ -38,14 +38,14 @@ static void m3_throw(JNIEnv *env, const char *klass, const char *message) {
     }
 }
 
-JNIEXPORT jint JNICALL Java_jdk_internal_m3_compression_M3LzNative_nativeAbi(
+JNIEXPORT jint JNICALL Java_jdk_internal_m3_compression_LzNative_nativeAbi(
         JNIEnv *env, jclass type) {
     (void) env;
     (void) type;
     return 1;
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_internal_m3_compression_M3LzNative_nativeMatches(
+JNIEXPORT jintArray JNICALL Java_jdk_internal_m3_compression_LzNative_nativeMatches(
         JNIEnv *env, jclass type, jbyteArray input, jintArray left, jintArray right,
         jintArray maximum) {
     (void) type;

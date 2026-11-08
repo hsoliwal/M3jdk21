@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 naming standard
 
-Status: normative. Decided by the user on 2026-10-31: M3JDK21 is standalone and self-sufficient, every M3 name follows
+Status: normative. Amended by the user on 2026-11-08: no naming or packaging sprawl in the JDK (few fixed packages; no product prefix on types inside M3 packages). Decided by the user on 2026-10-31: M3JDK21 is standalone and self-sufficient, every M3 name follows
 JDK naming, and the legacy Synexia-named code is renamed and kept (absorbed), not deleted. One rule table,
 [NAMING_RULES.tsv](NAMING_RULES.tsv), is the executable form of this document; it is read by the rename recipe
 [jdk_naming.py](jdk_naming.py) and by the JUnit conformance test in [conformance/](conformance/). A name that
@@ -24,10 +24,10 @@ of scope (section 4).
 | Module, internal | `jdk.internal.m3.<area>` | `jdk.internal.m3.rewrite` |
 | Package, exported | `jdk.m3.<area>[.<sub>]` (was `com.m3.<area>`) | `jdk.m3.collections.interop` |
 | Package, internal | `jdk.internal.m3.<area>` (was `com.synexia.m3.<area>`, `com.synexia.<area>`, `org.synexia.<area>`) | `jdk.internal.m3.common.collections` |
-| Type | `M3` + UpperCamel; the prefix appears once (`M3SynexiaX` and `SynexiaM3X` are `M3X`) | `M3LongArrayList` |
+| Type | UpperCamel. Inside `jdk.m3.*` and `jdk.internal.m3.*` packages there is no product prefix: the package already names M3 (user decision 2026-11-08; `jdk.m3.collections.M3LongArrayList` is `jdk.m3.collections.LongArrayList`). A type in a package outside M3, such as `java.lang`, keeps exactly one `M3` prefix (`M3SynexiaX` and `SynexiaM3X` are `M3X`) | `jdk.m3.collections.LongArrayList`, `java.lang.M3StringFacts` |
 | Member | lowerCamel; a `Synexia` infix becomes `M3` | `canonicalM3Owner` |
 | Constant, environment, property | UPPER_SNAKE; project prefix `M3_` (was `SYNEXIA_`) | `M3_RECIPE_HOME` |
-| JNI symbol | follows the package: `Java_jdk_internal_m3_<pkg>_<Type>_<method>`, `Java_jdk_m3_<pkg>_<Type>_<method>` | `Java_jdk_m3_fs_M3FsNative_open` |
+| JNI symbol | follows the package: `Java_jdk_internal_m3_<pkg>_<Type>_<method>`, `Java_jdk_m3_<pkg>_<Type>_<method>` | `Java_jdk_m3_fs_FsNative_open` |
 | JNI header | `jdk_internal_m3_<pkg>_<Type>.h`, `jdk_m3_<pkg>_<Type>.h` | `jdk_internal_m3_mindex_TextMetadata.h` |
 | Native library | `libm3<name>` | `libm3textio` |
 | Module, crate, artifact, script file | kebab `m3-<name>` (was `synexia-<name>`) | `m3-openrewrite-recipes` |
@@ -139,6 +139,7 @@ row of this table, so the table is a fixture, not a description.
 | JUnit conformance | `mvn -B -ntp -f m3/tooling/jdk-naming/conformance/pom.xml test` | `JdkNamingConformanceTest` finds no violation and agrees with the recipe on the shared fixtures |
 | Workflow | `.github/workflows/m3-jdk-naming.yml` | the three gates above, on every pull request |
 | Compile-time scheme | javac plugin `M3JdkStandard scheme=m3` (#2188) | package and name scheme of every compiled M3 source |
+| Package layout and type prefix | `python3 -I m3/tooling/jdk-naming/package_gate.py check --tree HEAD` | no new source root, product package, growing split package, or `M3`-prefixed type inside an M3 package beyond `PACKAGE_BASELINE.tsv`; existing prefixed types are renamed with `rename_types.py` (DROP_PRODUCT_PREFIX) and leave the baseline |
 
 ## 7. Changing a rule
 

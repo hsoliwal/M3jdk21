@@ -1,0 +1,131 @@
+TYPE	jdk.internal.m3.compression.M3CompressedChunkCache	jdk.internal.m3.compression.CompressedChunkCache
+TYPE	jdk.internal.m3.compression.M3CompressedChunkCacheModel	jdk.internal.m3.compression.CompressedChunkCacheModel
+TYPE	jdk.internal.m3.compression.M3CompressedChunkCacheModelTest	jdk.internal.m3.compression.CompressedChunkCacheModelTest
+TYPE	jdk.internal.m3.compression.M3CompressedChunkCacheSelfTest	jdk.internal.m3.compression.CompressedChunkCacheSelfTest
+TYPE	jdk.internal.m3.compression.M3CompressedChunkCacheTest	jdk.internal.m3.compression.CompressedChunkCacheTest
+TYPE	jdk.internal.m3.compression.M3CompressionAdversarialSelfTest	jdk.internal.m3.compression.CompressionAdversarialSelfTest
+TYPE	jdk.internal.m3.compression.M3CompressionAdversarialTest	jdk.internal.m3.compression.CompressionAdversarialTest
+TYPE	jdk.internal.m3.compression.M3CompressionAllocationProbe	jdk.internal.m3.compression.CompressionAllocationProbe
+TYPE	jdk.internal.m3.compression.M3CompressionByteSink	jdk.internal.m3.compression.CompressionByteSink
+TYPE	jdk.internal.m3.compression.M3CompressionDecoderAgreement	jdk.internal.m3.compression.CompressionDecoderAgreement
+TYPE	jdk.internal.m3.compression.M3CompressionDecoderAgreementTest	jdk.internal.m3.compression.CompressionDecoderAgreementTest
+TYPE	jdk.internal.m3.compression.M3CompressionEncodedCorpusCli	jdk.internal.m3.compression.CompressionEncodedCorpusCli
+TYPE	jdk.internal.m3.compression.M3CompressionEncoderSelfTest	jdk.internal.m3.compression.CompressionEncoderSelfTest
+TYPE	jdk.internal.m3.compression.M3CompressionEncoderTest	jdk.internal.m3.compression.CompressionEncoderTest
+TYPE	jdk.internal.m3.compression.M3CompressionFormatOracle	jdk.internal.m3.compression.CompressionFormatOracle
+TYPE	jdk.internal.m3.compression.M3CompressionFormatOracleTest	jdk.internal.m3.compression.CompressionFormatOracleTest
+TYPE	jdk.internal.m3.compression.M3CompressionGrammarSelfTest	jdk.internal.m3.compression.CompressionGrammarSelfTest
+TYPE	jdk.internal.m3.compression.M3CompressionGrammarTest	jdk.internal.m3.compression.CompressionGrammarTest
+TYPE	jdk.internal.m3.compression.M3CompressionInteropSelfTest	jdk.internal.m3.compression.CompressionInteropSelfTest
+TYPE	jdk.internal.m3.compression.M3CompressionSpecDecoders	jdk.internal.m3.compression.CompressionSpecDecoders
+TYPE	jdk.internal.m3.compression.M3CompressionWorkspaceSelfTest	jdk.internal.m3.compression.CompressionWorkspaceSelfTest
+TYPE	jdk.internal.m3.compression.M3CompressionWorkspaceTest	jdk.internal.m3.compression.CompressionWorkspaceTest
+TYPE	jdk.internal.m3.compression.M3Lz4RawBlockDecoder	jdk.internal.m3.compression.Lz4RawBlockDecoder
+TYPE	jdk.internal.m3.compression.M3Lz4RawBlockEncoder	jdk.internal.m3.compression.Lz4RawBlockEncoder
+TYPE	jdk.internal.m3.compression.M3LzByteKernels	jdk.internal.m3.compression.LzByteKernels
+TYPE	jdk.internal.m3.compression.M3LzFourWayCandidateIndex	jdk.internal.m3.compression.LzFourWayCandidateIndex
+TYPE	jdk.internal.m3.compression.M3LzFourWayCandidateIndexTest	jdk.internal.m3.compression.LzFourWayCandidateIndexTest
+TYPE	jdk.internal.m3.compression.M3LzFourWayCandidateSelfTest	jdk.internal.m3.compression.LzFourWayCandidateSelfTest
+TYPE	jdk.internal.m3.compression.M3LzFourWayEncodingProbe	jdk.internal.m3.compression.LzFourWayEncodingProbe
+TYPE	jdk.internal.m3.compression.M3LzFourWayEncodingProbeTest	jdk.internal.m3.compression.LzFourWayEncodingProbeTest
+TYPE	jdk.internal.m3.compression.M3LzFourWayNativeInteropSelfTest	jdk.internal.m3.compression.LzFourWayNativeInteropSelfTest
+TYPE	jdk.internal.m3.compression.M3LzFourWayNativeInteropTest	jdk.internal.m3.compression.LzFourWayNativeInteropTest
+TYPE	jdk.internal.m3.compression.M3LzKernelsTest	jdk.internal.m3.compression.LzKernelsTest
+TYPE	jdk.internal.m3.compression.M3LzMatchCandidateIndex	jdk.internal.m3.compression.LzMatchCandidateIndex
+TYPE	jdk.internal.m3.compression.M3LzMatchCandidateIndexTest	jdk.internal.m3.compression.LzMatchCandidateIndexTest
+TYPE	jdk.internal.m3.compression.M3LzMatchCandidateSelfTest	jdk.internal.m3.compression.LzMatchCandidateSelfTest
+TYPE	jdk.internal.m3.compression.M3LzNative	jdk.internal.m3.compression.LzNative
+TYPE	jdk.internal.m3.compression.M3LzNativeArenaSelfTest	jdk.internal.m3.compression.LzNativeArenaSelfTest
+TYPE	jdk.internal.m3.compression.M3LzNativeParityProbe	jdk.internal.m3.compression.LzNativeParityProbe
+TYPE	jdk.internal.m3.compression.M3LzNativeParityProbeTest	jdk.internal.m3.compression.LzNativeParityProbeTest
+TYPE	jdk.internal.m3.compression.M3LzSelfTest	jdk.internal.m3.compression.LzSelfTest
+TYPE	jdk.internal.m3.compression.M3SnappyRawDecoder	jdk.internal.m3.compression.SnappyRawDecoder
+TYPE	jdk.internal.m3.compression.M3SnappyRawEncoder	jdk.internal.m3.compression.SnappyRawEncoder
+EDIT	make/m3/compression/test-java-base.sh
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3CompressedChunkCache.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3CompressionByteSink.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3Lz4RawBlockDecoder.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3Lz4RawBlockEncoder.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3LzByteKernels.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3LzFourWayCandidateIndex.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3LzMatchCandidateIndex.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3LzNative.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3SnappyRawDecoder.java
+EDIT	src/java.base/share/classes/jdk/internal/m3/compression/M3SnappyRawEncoder.java
+EDIT	src/java.base/share/native/libm3compression/m3_lz_jni.c
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressedChunkCacheModel.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressedChunkCacheModelTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressedChunkCacheSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressedChunkCacheTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionAdversarialSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionAdversarialTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionAllocationProbe.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionDecoderAgreement.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionDecoderAgreementTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionEncodedCorpusCli.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionEncoderSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionEncoderTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionFormatOracle.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionFormatOracleTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionGrammarSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionGrammarTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionInteropSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionSpecDecoders.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionWorkspaceSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3CompressionWorkspaceTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzFourWayCandidateIndexTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzFourWayCandidateSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzFourWayEncodingProbe.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzFourWayEncodingProbeTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzFourWayNativeInteropSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzFourWayNativeInteropTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzKernelsTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzMatchCandidateIndexTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzMatchCandidateSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzNativeArenaSelfTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzNativeParityProbe.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzNativeParityProbeTest.java
+EDIT	test/jdk/jdk/internal/m3/compression/M3LzSelfTest.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3CompressedChunkCache.java	src/java.base/share/classes/jdk/internal/m3/compression/CompressedChunkCache.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3CompressionByteSink.java	src/java.base/share/classes/jdk/internal/m3/compression/CompressionByteSink.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3Lz4RawBlockDecoder.java	src/java.base/share/classes/jdk/internal/m3/compression/Lz4RawBlockDecoder.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3Lz4RawBlockEncoder.java	src/java.base/share/classes/jdk/internal/m3/compression/Lz4RawBlockEncoder.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3LzByteKernels.java	src/java.base/share/classes/jdk/internal/m3/compression/LzByteKernels.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3LzFourWayCandidateIndex.java	src/java.base/share/classes/jdk/internal/m3/compression/LzFourWayCandidateIndex.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3LzMatchCandidateIndex.java	src/java.base/share/classes/jdk/internal/m3/compression/LzMatchCandidateIndex.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3LzNative.java	src/java.base/share/classes/jdk/internal/m3/compression/LzNative.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3SnappyRawDecoder.java	src/java.base/share/classes/jdk/internal/m3/compression/SnappyRawDecoder.java
+MOVE	src/java.base/share/classes/jdk/internal/m3/compression/M3SnappyRawEncoder.java	src/java.base/share/classes/jdk/internal/m3/compression/SnappyRawEncoder.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressedChunkCacheModel.java	test/jdk/jdk/internal/m3/compression/CompressedChunkCacheModel.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressedChunkCacheModelTest.java	test/jdk/jdk/internal/m3/compression/CompressedChunkCacheModelTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressedChunkCacheSelfTest.java	test/jdk/jdk/internal/m3/compression/CompressedChunkCacheSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressedChunkCacheTest.java	test/jdk/jdk/internal/m3/compression/CompressedChunkCacheTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionAdversarialSelfTest.java	test/jdk/jdk/internal/m3/compression/CompressionAdversarialSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionAdversarialTest.java	test/jdk/jdk/internal/m3/compression/CompressionAdversarialTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionAllocationProbe.java	test/jdk/jdk/internal/m3/compression/CompressionAllocationProbe.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionDecoderAgreement.java	test/jdk/jdk/internal/m3/compression/CompressionDecoderAgreement.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionDecoderAgreementTest.java	test/jdk/jdk/internal/m3/compression/CompressionDecoderAgreementTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionEncodedCorpusCli.java	test/jdk/jdk/internal/m3/compression/CompressionEncodedCorpusCli.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionEncoderSelfTest.java	test/jdk/jdk/internal/m3/compression/CompressionEncoderSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionEncoderTest.java	test/jdk/jdk/internal/m3/compression/CompressionEncoderTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionFormatOracle.java	test/jdk/jdk/internal/m3/compression/CompressionFormatOracle.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionFormatOracleTest.java	test/jdk/jdk/internal/m3/compression/CompressionFormatOracleTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionGrammarSelfTest.java	test/jdk/jdk/internal/m3/compression/CompressionGrammarSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionGrammarTest.java	test/jdk/jdk/internal/m3/compression/CompressionGrammarTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionInteropSelfTest.java	test/jdk/jdk/internal/m3/compression/CompressionInteropSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionSpecDecoders.java	test/jdk/jdk/internal/m3/compression/CompressionSpecDecoders.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionWorkspaceSelfTest.java	test/jdk/jdk/internal/m3/compression/CompressionWorkspaceSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3CompressionWorkspaceTest.java	test/jdk/jdk/internal/m3/compression/CompressionWorkspaceTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzFourWayCandidateIndexTest.java	test/jdk/jdk/internal/m3/compression/LzFourWayCandidateIndexTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzFourWayCandidateSelfTest.java	test/jdk/jdk/internal/m3/compression/LzFourWayCandidateSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzFourWayEncodingProbe.java	test/jdk/jdk/internal/m3/compression/LzFourWayEncodingProbe.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzFourWayEncodingProbeTest.java	test/jdk/jdk/internal/m3/compression/LzFourWayEncodingProbeTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzFourWayNativeInteropSelfTest.java	test/jdk/jdk/internal/m3/compression/LzFourWayNativeInteropSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzFourWayNativeInteropTest.java	test/jdk/jdk/internal/m3/compression/LzFourWayNativeInteropTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzKernelsTest.java	test/jdk/jdk/internal/m3/compression/LzKernelsTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzMatchCandidateIndexTest.java	test/jdk/jdk/internal/m3/compression/LzMatchCandidateIndexTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzMatchCandidateSelfTest.java	test/jdk/jdk/internal/m3/compression/LzMatchCandidateSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzNativeArenaSelfTest.java	test/jdk/jdk/internal/m3/compression/LzNativeArenaSelfTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzNativeParityProbe.java	test/jdk/jdk/internal/m3/compression/LzNativeParityProbe.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzNativeParityProbeTest.java	test/jdk/jdk/internal/m3/compression/LzNativeParityProbeTest.java
+MOVE	test/jdk/jdk/internal/m3/compression/M3LzSelfTest.java	test/jdk/jdk/internal/m3/compression/LzSelfTest.java

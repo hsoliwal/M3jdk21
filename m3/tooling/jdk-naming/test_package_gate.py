@@ -15,6 +15,7 @@ BASE = [
     "m3/collections/implementations/b/pom.xml", "m3/collections/implementations/b/src/main/java/jdk/m3/collections/apache/B.java",
     "m3/search/qualification/x/recipe/src/main/java/jdk/m3/search/Copy.java",
     "m3/vendor/third_party/lib-1.0/src/main/java/org/lib/L.java",
+    "src/java.base/share/classes/jdk/internal/m3/zip/M3Codec.java",
 ]
 baseline = "\n".join(g.baseline_rows(BASE))
 checks = 0
@@ -42,4 +43,9 @@ expect(BASE + ["m3/collections/implementations/c/pom.xml",
 expect(BASE + ["m3/vendor/third_party/lib-2.0/src/main/java/org/lib/L.java"], ["NEW_ROOT"], "new vendored version")
 expect(BASE + ["m3/arrays/qualification/y/recipe/src/main/java/jdk/m3/zzz/Copy.java"], ["NEW_ROOT"],
        "new evidence copy root (a root, not a product package)")
+expect(BASE + ["m3/search/src/main/java/jdk/m3/search/M3Bmh.java"], ["NEW_PREFIXED_TYPE"], "new M3-prefixed type")
+expect(BASE + ["test/jdk/jdk/internal/m3/zip/M3CodecTest.java"], ["NEW_PREFIXED_TYPE"], "new prefixed test type")
+expect([p for p in BASE if not p.endswith("M3Codec.java")]
+       + ["src/java.base/share/classes/jdk/internal/m3/zip/Codec.java"], [], "legacy prefixed type renamed")
+expect(BASE + ["src/java.base/share/classes/java/lang/M3StringFacts.java"], [], "M3 prefix outside M3 packages kept")
 print(f"PACKAGE_LAYOUT_GATE_SELF_TEST checks={checks} PASS")
