@@ -13,7 +13,7 @@ import java.util.concurrent.CancellationException;
 import org.junit.jupiter.api.Test;
 
 //FLLDCIM: RELOCATE - donor blob bac5312e1e67 at commit 78cf2ad4c7e5 (repository, path, URL and digests: m3/algorithms/recipe/catalogue-kernels-20261107/PROVENANCE.tsv); recipe m3/algorithms/recipe/catalogue-kernels-20261107/relocate.py v1
-final class ZPrefixMatchTest {
+final class PrefixMatchLengthsTest {
 
     @Test
     void prefixGeometryMatchesNaiveLcpAtEveryTextPosition() {
@@ -21,7 +21,7 @@ final class ZPrefixMatchTest {
         for (int trial = 0; trial < 2_000; trial++) {
             String text = randomUtf16(random, random.nextInt(96));
             String pattern = randomUtf16(random, random.nextInt(24));
-            int[] actual = ZPrefixMatch.prefixMatchLengths(text, pattern);
+            int[] actual = StringAlgorithms.prefixMatchLengths(text, pattern);
             assertEquals(text.length(), actual.length);
             for (int start = 0; start < text.length(); start++) {
                 int expected = 0;

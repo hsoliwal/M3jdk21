@@ -529,7 +529,7 @@ public final class AlgorithmExtrasDump {
         });
     }
 
-    // ---------------------------------------------------------------- graphs (M3PrimitiveGraphAlgorithms, M3AdvancedGraphAlgorithms)
+    // ----------------------------------------------------------- graphs (PrimitiveGraphAlgorithms)
 
     private static int vertices(SplittableRandom random) {
         int tier = random.nextInt(100);
@@ -604,7 +604,7 @@ public final class AlgorithmExtrasDump {
                         graph.vertices(), graph.offsets(), graph.edges(), graph.weights());
                 int source = random.nextInt(20) == 0 ? n : n == 0 ? 0 : random.nextInt(n);
                 return "eq=" + graph.equals(copy) + call(" 01bfs" + source,
-                        () -> shorten(s(AdvancedGraphAlgorithms.zeroOneBfs(graph, source))));
+                        () -> shorten(s(PrimitiveGraphAlgorithms.zeroOneBfs(graph, source))));
             });
         });
         each("bellmanFord", cases, random -> {
@@ -633,7 +633,7 @@ public final class AlgorithmExtrasDump {
         });
     }
 
-    // ---------------------------------------------------------------- strings (M3PrimitiveStringAlgorithms, M3AdvancedStringAlgorithms)
+    // --------------------------------------- strings (PrimitiveStringAlgorithms, StringAlgorithms)
 
     private void strings() {
         each("minimumWindow", cases, random -> {
@@ -683,21 +683,22 @@ public final class AlgorithmExtrasDump {
         });
         each("manacher", cases, random -> {
             String value = text(random, length(random) % 200, random.nextBoolean() ? 2 : 6);
-            return call("'" + value + "'", () -> s(AdvancedStringAlgorithms.manacherOdd(value)) + "/"
-                    + s(AdvancedStringAlgorithms.manacherEven(value)));
+            return call("'" + value + "'", () -> s(StringAlgorithms.manacherOdd(value)) + "/"
+                    + s(StringAlgorithms.manacherEven(value)));
         });
         each("suffixArray", cases, random -> {
             String value = text(random, length(random) % 400, random.nextBoolean() ? 2 : 12);
             return call("'" + value + "'", () -> {
-                int[] order = AdvancedStringAlgorithms.suffixArray(value);
-                return s(order) + "/" + s(AdvancedStringAlgorithms.lcpArray(value, order)) + "/'"
-                        + AdvancedStringAlgorithms.longestRepeatedSubstring(value) + "'";
+                int[] order = StringAlgorithms.suffixArray(value);
+                return s(order) + "/" + s(StringAlgorithms.lcpArray(value, order)) + "/'"
+                        + StringAlgorithms.longestRepeatedSubstring(value) + "'";
             });
         });
         each("lcpArrayRefusal", cases / 10, random -> {
             String value = text(random, random.nextInt(6), 3);
             int[] order = ints(random, random.nextInt(7), 6);
-            return call("'" + value + "' " + s(order), () -> s(AdvancedStringAlgorithms.lcpArray(value, order)));
+            return call("'" + value + "' " + s(order), () ->
+                    s(StringAlgorithms.lcpArray(value, order)));
         });
     }
 

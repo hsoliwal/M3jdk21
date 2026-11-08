@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /** Source-sealed first-hit regression for the existing Java21 Z implementation. */
 //FLLDCIM: RELOCATE - donor blob bff16397d1ed at commit 78cf2ad4c7e5 (repository, path, URL and digests: m3/algorithms/recipe/catalogue-kernels-20261107/PROVENANCE.tsv); recipe m3/algorithms/recipe/catalogue-kernels-20261107/relocate.py v1
-final class ZAlgorithmExtentInvariantTest {
+final class ZSearchExtentInvariantTest {
     private static final char[] INPUT = {'a', 'b', '$', '\0', '\ud800', '\udc00'};
 
     @Test
@@ -23,19 +23,19 @@ final class ZAlgorithmExtentInvariantTest {
                 {"aaaaaaab", "aaab"}, {"aaaab", "aaaaab"}
         }) {
             assertEquals(pair[0].indexOf(pair[1]),
-                    ZAlgorithm.zSearch(pair[0], pair[1]));
+                    StringAlgorithms.zSearch(pair[0], pair[1]));
         }
     }
 
     @Test
     void historicalNullTextAndEmptyPatternSemanticsAreRetained() {
-        assertEquals(0, ZAlgorithm.zSearch(null, ""));
-        assertEquals(0, ZAlgorithm.zSearch(null, "n"));
-        assertEquals(0, ZAlgorithm.zSearch(null, "null"));
-        assertEquals(1, ZAlgorithm.zSearch(null, "ul"));
-        assertEquals(-1, ZAlgorithm.zSearch(null, "x"));
+        assertEquals(0, StringAlgorithms.zSearch(null, ""));
+        assertEquals(0, StringAlgorithms.zSearch(null, "n"));
+        assertEquals(0, StringAlgorithms.zSearch(null, "null"));
+        assertEquals(1, StringAlgorithms.zSearch(null, "ul"));
+        assertEquals(-1, StringAlgorithms.zSearch(null, "x"));
         assertThrows(NullPointerException.class,
-                () -> ZAlgorithm.zSearch("x", null));
+                () -> StringAlgorithms.zSearch("x", null));
     }
 
     @Test
@@ -53,13 +53,13 @@ final class ZAlgorithmExtentInvariantTest {
             String haystack = new String(text);
             String pattern = new String(needle);
             assertEquals(haystack.indexOf(pattern),
-                    ZAlgorithm.zSearch(haystack, pattern));
+                    StringAlgorithms.zSearch(haystack, pattern));
         }
     }
 
     @Test
     void existingPublicZArrayIsUntouched() {
         assertArrayEquals(new int[]{0, 1, 0, 2, 3, 1, 0},
-                ZAlgorithm.zArray("aabaaab"));
+                StringAlgorithms.zFunction("aabaaab", ProgressMonitor.none()));
     }
 }

@@ -33,8 +33,9 @@ final class CatalogueKernelsReferenceTest {
         for (int trial = 0; trial < 20_000; trial++) {
             String text = text(random, random.nextInt(40));
             String pattern = pattern(random, text);
-            assertEquals(naiveFirst(text, pattern), ZAlgorithm.zSearch(text, pattern), "trial=" + trial);
-            int[] z = ZAlgorithm.zArray(text);
+            assertEquals(naiveFirst(text, pattern), StringAlgorithms.zSearch(text, pattern),
+                    "trial=" + trial);
+            int[] z = StringAlgorithms.zFunction(text, ProgressMonitor.none());
             assertArrayEquals(naiveZ(text), z, "trial=" + trial);
             assertArrayEquals(StringAlgorithms.zFunction(text, ProgressMonitor.none()), z, "trial=" + trial);
             cases += 3;
@@ -49,7 +50,7 @@ final class CatalogueKernelsReferenceTest {
         for (int trial = 0; trial < 10_000; trial++) {
             String text = text(random, random.nextInt(48));
             String pattern = text(random, random.nextInt(10));
-            int[] actual = ZPrefixMatch.prefixMatchLengths(text, pattern);
+            int[] actual = StringAlgorithms.prefixMatchLengths(text, pattern);
             for (int start = 0; start < text.length(); start++) {
                 assertEquals(lcp(text, start, pattern), actual[start], "trial=" + trial + " start=" + start);
                 cases++;
@@ -67,8 +68,10 @@ final class CatalogueKernelsReferenceTest {
             }
         };
         assertThrows(CancellationException.class,
-                () -> ZPrefixMatch.prefixMatchLengths("a".repeat(4096), "a".repeat(64) + "b", canceled));
-        assertThrows(CancellationException.class, () -> ZAlgorithm.zSearch("abc", "c", canceled));
+                () -> StringAlgorithms.prefixMatchLengths("a".repeat(4096), "a".repeat(64) + "b",
+                        canceled));
+        assertThrows(CancellationException.class, () ->
+                StringAlgorithms.zSearch("abc", "c", canceled));
         assertThrows(CancellationException.class, () -> OneMismatchWindowSearch.allIndices("abc", "ab", canceled));
     }
 

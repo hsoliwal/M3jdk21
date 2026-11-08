@@ -1,0 +1,17 @@
+# FOLD_MEMBERS v1.1 map (m3/tooling/jdk-naming/fold_members.py): AdvancedStringAlgorithms folds into StringAlgorithms, one owner per concept (2026-11-08).
+# manacherOdd/manacherEven, suffixArray, lcpArray and longestRepeatedSubstring are string-family members; "Advanced" is an adjective split, not a concept.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/StringAlgorithms.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java
+TAKE	AdvancedStringAlgorithms.manacherOdd
+TAKE	AdvancedStringAlgorithms.manacherEven
+TAKE	AdvancedStringAlgorithms.suffixArray
+TAKE	AdvancedStringAlgorithms.lcpArray
+TAKE	AdvancedStringAlgorithms.longestRepeatedSubstring
+IMPORT	java.util.Arrays
+IMPORT	java.util.Objects
+REFS	\bAdvancedStringAlgorithms\.	StringAlgorithms.
+REFS	\(M3PrimitiveStringAlgorithms, M3AdvancedStringAlgorithms\)	(PrimitiveStringAlgorithms, StringAlgorithms)
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java
+TAKE	AdvancedStringAlgorithms.mergeSortSuffixes
+TAKE	AdvancedStringAlgorithms.compareSuffix

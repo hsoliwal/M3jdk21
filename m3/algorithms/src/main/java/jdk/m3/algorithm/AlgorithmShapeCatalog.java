@@ -106,7 +106,7 @@ public final class AlgorithmShapeCatalog {
             new Shape("bit-count", Family.BITWISE, "O(set bits)", "O(1)", "BitAlgorithms.hammingWeight"),
             new Shape("kmp", Family.STRING, "O(n+m)", "O(m)", "StringAlgorithms.kmpSearch"),
             new Shape("manacher", Family.STRING, "O(n)", "O(n)", "StringAlgorithms.longestPalindrome"),
-            new Shape("z-search", Family.STRING, "O(n+m)", "O(m)", "ZAlgorithm.zSearch"),
+            new Shape("z-search", Family.STRING, "O(n+m)", "O(m)", "StringAlgorithms.zSearch"),
             new Shape("one-mismatch-window", Family.STRING, "O(n+m)", "O(n+m)", "OneMismatchWindowSearch.allIndices"),
             new Shape("matrix-spiral", Family.MATRIX, "O(mn)", "O(1) aux", "MatrixAlgorithms.spiralOrder"),
             new Shape("island-flood", Family.MATRIX, "O(mn)", "O(mn)", "MatrixAlgorithms.countIslands"),
