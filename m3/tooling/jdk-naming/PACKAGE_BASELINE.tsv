@@ -236,7 +236,6 @@ ROOT	m3/compiler/parent-owned	REAL
 ROOT	m3/compiler/reference-flow	REAL
 ROOT	m3/compiler/source-signals	REAL
 ROOT	m3/compiler/static-use	REAL
-ROOT	m3/compression	REAL
 ROOT	m3/eclipse/core-runtime	REAL
 ROOT	m3/eclipse/filesystem	REAL
 ROOT	m3/eclipse/framework	REAL
@@ -976,7 +975,6 @@ PACKAGE	jdk.m3.compiler.standard
 PACKAGE	jdk.m3.compiler.staticuse
 PACKAGE	jdk.m3.compiletime
 PACKAGE	jdk.m3.compiletime.ast
-PACKAGE	jdk.m3.compression
 PACKAGE	jdk.m3.desktop.jfx
 PACKAGE	jdk.m3.eclipse.core
 PACKAGE	jdk.m3.eclipse.core.impl
