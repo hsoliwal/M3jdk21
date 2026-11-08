@@ -175,8 +175,8 @@ def main() -> int:
     owner = refs(m, owner_path.read_bytes().decode("utf-8")).encode("utf-8")
     for pin, old, new in m["OWNER_EDIT"]:
         o, n = old.encode("utf-8"), new.encode("utf-8")
-        if owner.count(o) == 0 and owner.count(n) >= 1:
-            continue  # already applied
+        if owner.count(n) >= 1:
+            continue  # already applied (also when <old> is a substring of <new>)
         if owner.count(o) != 1 or not hashlib.sha256(o).hexdigest().startswith(pin):
             sys.exit(f"REFUSE OWNER_EDIT: old text occurs {owner.count(o)} times or pin {pin} mismatches")
         owner = owner.replace(o, n)
