@@ -199,7 +199,7 @@ public final class StringAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member ZAlgorithm.zSearch from donor blob 5834d9dfa933 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZAlgorithm.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 5834d9dfa933 ZAlgorithm.zSearch
     /**
      * First occurrence using extended Z matching over the pattern and text.
      * Keeps only the pattern's Z table, never concatenates the input strings,
@@ -232,7 +232,7 @@ public final class StringAlgorithms {
         return -1;
     }
 
-    //FLLDCIM: FOLD - member ZAlgorithm.zSearch from donor blob 5834d9dfa933 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZAlgorithm.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 5834d9dfa933 ZAlgorithm.zSearch
     /** Progress-aware compatibility entrypoint. */
     public static int zSearch(String text, String pattern, ProgressMonitor monitor) {
         ProgressMonitor checked = ProgressChecks.nonNull(monitor);
@@ -248,10 +248,10 @@ public final class StringAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member ZPrefixMatch.SENTINEL from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 41f8af0ca760 ZPrefixMatch.SENTINEL
     private static final int SENTINEL = Character.MAX_VALUE + 1;
 
-    //FLLDCIM: FOLD - member ZPrefixMatch.prefixMatchLengths from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 41f8af0ca760 ZPrefixMatch.prefixMatchLengths
     /**
      * Longest pattern-prefix match at every text position, in Java UTF-16 code units.
      *
@@ -263,7 +263,7 @@ public final class StringAlgorithms {
         return prefixMatchLengths(text, pattern, null);
     }
 
-    //FLLDCIM: FOLD - member ZPrefixMatch.prefixMatchLengths from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 41f8af0ca760 ZPrefixMatch.prefixMatchLengths
     public static int[] prefixMatchLengths(
             String text, String pattern, ProgressMonitor monitor) {
         String haystack = Objects.requireNonNull(text, "text");
@@ -283,7 +283,7 @@ public final class StringAlgorithms {
         return matches;
     }
 
-    //FLLDCIM: FOLD - member ZPrefixMatch.scanVirtualZ from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 41f8af0ca760 ZPrefixMatch.scanVirtualZ
     /**
      * Shared virtual Z scan. When prefixMatches is non-null it receives one LCP length per text
      * position. Exact search passes null and may return immediately at the first full match.
@@ -343,7 +343,7 @@ public final class StringAlgorithms {
         return -1;
     }
 
-    //FLLDCIM: FOLD - member ZPrefixMatch.virtualUnit from donor blob 41f8af0ca760 (m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/z-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 41f8af0ca760 ZPrefixMatch.virtualUnit
     private static int virtualUnit(
             String pattern, String text, int virtualIndex) {
         int patternLength = pattern.length();
@@ -357,7 +357,7 @@ public final class StringAlgorithms {
     }
 
 
-    //FLLDCIM: FOLD - member AdvancedStringAlgorithms.manacherOdd from donor blob 739221ead5fa (m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/advanced-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.manacherOdd
     /** Odd-palindrome radii where radius includes the center character. */
     public static int[] manacherOdd(String value) {
         Objects.requireNonNull(value, "value");
@@ -377,7 +377,7 @@ public final class StringAlgorithms {
         return radius;
     }
 
-    //FLLDCIM: FOLD - member AdvancedStringAlgorithms.manacherEven from donor blob 739221ead5fa (m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/advanced-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.manacherEven
     /** Even-palindrome radii centered between i-1 and i. */
     public static int[] manacherEven(String value) {
         Objects.requireNonNull(value, "value");
@@ -400,7 +400,7 @@ public final class StringAlgorithms {
         return radius;
     }
 
-    //FLLDCIM: FOLD - member AdvancedStringAlgorithms.suffixArray from donor blob 739221ead5fa (m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/advanced-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.suffixArray
     /**
      * Suffix array of UTF-16 code-unit indices using doubling + primitive stable merge sort.
      * Complexity is O(n log^2 n) comparisons and O(n) auxiliary primitive storage.
@@ -437,7 +437,7 @@ public final class StringAlgorithms {
         return order;
     }
 
-    //FLLDCIM: FOLD - member AdvancedStringAlgorithms.lcpArray from donor blob 739221ead5fa (m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/advanced-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.lcpArray
     /** Kasai LCP array: result[i] is LCP(sa[i], sa[i+1]); length=max(0,n-1). */
     public static int[] lcpArray(String value, int[] suffixArray) {
         Objects.requireNonNull(value, "value");
@@ -475,7 +475,7 @@ public final class StringAlgorithms {
         return lcp;
     }
 
-    //FLLDCIM: FOLD - member AdvancedStringAlgorithms.longestRepeatedSubstring from donor blob 739221ead5fa (m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/advanced-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.longestRepeatedSubstring
     public static String longestRepeatedSubstring(String value) {
         Objects.requireNonNull(value, "value");
         int[] suffixes = suffixArray(value);
@@ -491,7 +491,7 @@ public final class StringAlgorithms {
         return value.substring(bestStart, bestStart + bestLength);
     }
 
-    //FLLDCIM: FOLD - member AdvancedStringAlgorithms.mergeSortSuffixes from donor blob 739221ead5fa (m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/advanced-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.mergeSortSuffixes
     private static void mergeSortSuffixes(
             int[] order,
             int[] buffer,
@@ -520,7 +520,7 @@ public final class StringAlgorithms {
         }
     }
 
-    //FLLDCIM: FOLD - member AdvancedStringAlgorithms.compareSuffix from donor blob 739221ead5fa (m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedStringAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/advanced-string-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.compareSuffix
     private static int compareSuffix(
             int left,
             int right,

@@ -367,7 +367,7 @@ public final class PrimitiveGraphAlgorithms {
     }
 
 
-    //FLLDCIM: FOLD - member AdvancedGraphAlgorithms.zeroOneBfs from donor blob 294339824f06 (m3/algorithms/src/main/java/jdk/m3/algorithm/AdvancedGraphAlgorithms.java); recipe m3/tooling/jdk-naming/fold_members.py v1, map m3/algorithms/recipe/advanced-graph-fold/FOLD_MAP.tsv
+    //FLLDCIM: FOLD 294339824f06 AdvancedGraphAlgorithms.zeroOneBfs
     /** 0-1 BFS over a graph whose edge weights must be exactly 0 or 1. */
     public static long[] zeroOneBfs(PrimitiveGraphAlgorithms.WeightedCsrGraph graph, int source) {
         Objects.requireNonNull(graph, "graph");

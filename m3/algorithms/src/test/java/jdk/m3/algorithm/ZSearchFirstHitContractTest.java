@@ -74,7 +74,8 @@ final class ZSearchFirstHitContractTest {
 
     @Test
     void unchangedZArrayAndProgressCompatibilityBoundary() {
-        assertArrayEquals(new int[] {0, 4, 3, 2, 1}, StringAlgorithms.zFunction("aaaaa", ProgressMonitor.none()));
+        assertArrayEquals(new int[] {0, 4, 3, 2, 1},
+                StringAlgorithms.zFunction("aaaaa", ProgressMonitor.none()));
         assertArrayEquals(new int[0], StringAlgorithms.zFunction("", ProgressMonitor.none()));
         assertEquals(0, StringAlgorithms.zSearch("ab$ab", "ab", ProgressMonitor.none()));
         assertEquals(0, StringAlgorithms.zSearch("", "", ProgressMonitor.none()));

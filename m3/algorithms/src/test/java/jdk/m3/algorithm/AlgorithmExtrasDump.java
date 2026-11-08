@@ -529,7 +529,7 @@ public final class AlgorithmExtrasDump {
         });
     }
 
-    // ---------------------------------------------------------------- graphs (PrimitiveGraphAlgorithms)
+    // ----------------------------------------------------------- graphs (PrimitiveGraphAlgorithms)
 
     private static int vertices(SplittableRandom random) {
         int tier = random.nextInt(100);
@@ -633,7 +633,7 @@ public final class AlgorithmExtrasDump {
         });
     }
 
-    // ---------------------------------------------------------------- strings (PrimitiveStringAlgorithms, StringAlgorithms)
+    // --------------------------------------- strings (PrimitiveStringAlgorithms, StringAlgorithms)
 
     private void strings() {
         each("minimumWindow", cases, random -> {
@@ -697,7 +697,8 @@ public final class AlgorithmExtrasDump {
         each("lcpArrayRefusal", cases / 10, random -> {
             String value = text(random, random.nextInt(6), 3);
             int[] order = ints(random, random.nextInt(7), 6);
-            return call("'" + value + "' " + s(order), () -> s(StringAlgorithms.lcpArray(value, order)));
+            return call("'" + value + "' " + s(order), () ->
+                    s(StringAlgorithms.lcpArray(value, order)));
         });
     }
 

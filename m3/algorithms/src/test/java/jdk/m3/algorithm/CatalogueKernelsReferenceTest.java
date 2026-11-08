@@ -33,7 +33,8 @@ final class CatalogueKernelsReferenceTest {
         for (int trial = 0; trial < 20_000; trial++) {
             String text = text(random, random.nextInt(40));
             String pattern = pattern(random, text);
-            assertEquals(naiveFirst(text, pattern), StringAlgorithms.zSearch(text, pattern), "trial=" + trial);
+            assertEquals(naiveFirst(text, pattern), StringAlgorithms.zSearch(text, pattern),
+                    "trial=" + trial);
             int[] z = StringAlgorithms.zFunction(text, ProgressMonitor.none());
             assertArrayEquals(naiveZ(text), z, "trial=" + trial);
             assertArrayEquals(StringAlgorithms.zFunction(text, ProgressMonitor.none()), z, "trial=" + trial);
@@ -67,8 +68,10 @@ final class CatalogueKernelsReferenceTest {
             }
         };
         assertThrows(CancellationException.class,
-                () -> StringAlgorithms.prefixMatchLengths("a".repeat(4096), "a".repeat(64) + "b", canceled));
-        assertThrows(CancellationException.class, () -> StringAlgorithms.zSearch("abc", "c", canceled));
+                () -> StringAlgorithms.prefixMatchLengths("a".repeat(4096), "a".repeat(64) + "b",
+                        canceled));
+        assertThrows(CancellationException.class, () ->
+                StringAlgorithms.zSearch("abc", "c", canceled));
         assertThrows(CancellationException.class, () -> OneMismatchWindowSearch.allIndices("abc", "ab", canceled));
     }
 
