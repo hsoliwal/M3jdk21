@@ -34,14 +34,14 @@ static uint64_t tuple_hash(const jlong *query, jint arity) {
 }
 
 JNIEXPORT jint JNICALL
-Java_jdk_m3_precompute_M3NativePrecomputeOps_tupleLookupAbiVersionNative(JNIEnv *env, jclass type) {
+Java_jdk_m3_precompute_NativePrecomputeOps_tupleLookupAbiVersionNative(JNIEnv *env, jclass type) {
   (void) env;
   (void) type;
   return 1;
 }
 
 JNIEXPORT void JNICALL
-Java_jdk_m3_precompute_M3NativePrecomputeOps_lookupTuplesNative(
+Java_jdk_m3_precompute_NativePrecomputeOps_lookupTuplesNative(
     JNIEnv *env, jclass type, jlongArray queries_array, jint arity,
     jlongArray keys_array, jintArray values_array, jintArray slots_array,
     jint default_value, jintArray output_array) {

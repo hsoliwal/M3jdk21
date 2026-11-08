@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""DROP_PRODUCT_PREFIX v1.5: inside an m3 package the package already names the product, so a type carries no M3 prefix.
+"""DROP_PRODUCT_PREFIX v1.6: inside an m3 package the package already names the product, so a type carries no M3 prefix.
 
 usage: rename_types.py --root DIR --package P [--package P2 ...] [--check] [--exclude PREFIX ...]
 For every top-level type M3<Rest> declared in package P (main or test source, file M3<Rest>.java) the type becomes
@@ -78,6 +78,8 @@ def main():
     ap.add_argument("--test-dir", action="append", default=[])
     ap.add_argument("--exclude", action="append", default=["m3/evidence/", "m3/qualification/"])
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--string-words", action="store_true",
+                    help="v1.6: inside string literals of files of the package or importing it, rename every whole-word M3Rest of a renamed type (class names built at runtime \".M3Rest$Inner\", toString expectations \"M3Rest[...]\")")
     ap.add_argument("--string-members", action="store_true",
                     help="also rewrite the literals M3Rest.member and M3Rest of renamed types in files of the package or importing it (v1.2)")
     a = ap.parse_args()
@@ -157,6 +159,11 @@ def main():
                             sys.exit(f"REFUSE {rel}: {old} also imported from {clash}")
                         # v1.2: a token qualified by another package (x.y.M3Rest) is not this package's type
                         new = masked_sub(new, re.compile(rf"(?<![\w$.]){old}(?![\w$])"), rest)
+                        if a.string_words:
+                            # v1.6 declared opt-in: a renamed type named inside this file's string literals (runtime class
+                            # names pkg + ".M3Rest$Inner", record toString expectations "M3Rest[...]") follows the rename
+                            word = re.compile(rf"(?<![\w$]){old}(?![\w])")
+                            new = STRING.sub(lambda m: word.sub(rest, m.group(0)), new)
                         if a.string_members:
                             # declared opt-in: string literals naming a renamed type's member ("M3Rest.member") or the
                             # bare type ("M3Rest") follow the rename (catalog entry points resolved by reflection)

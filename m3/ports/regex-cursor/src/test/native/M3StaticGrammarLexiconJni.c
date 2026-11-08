@@ -4,7 +4,7 @@
 #include <jni.h>
 
 JNIEXPORT jint JNICALL
-Java_jdk_m3_regexcursor_M3StaticGrammarLexiconNativeProof_exactNative(
+Java_jdk_m3_regexcursor_StaticGrammarLexiconNativeProof_exactNative(
         JNIEnv *env, jclass unused, jobject lexicon, jstring input, jint from, jint to) {
     (void)unused;
     if (lexicon == NULL || input == NULL) return -1;

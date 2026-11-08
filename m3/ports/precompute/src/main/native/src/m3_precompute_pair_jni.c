@@ -19,7 +19,7 @@ static uint64_t pair_hash(uint64_t left, uint64_t right) {
 }
 
 JNIEXPORT jint JNICALL
-Java_jdk_m3_precompute_M3NativePrecomputeOps_nativeAbiVersion(
+Java_jdk_m3_precompute_NativePrecomputeOps_nativeAbiVersion(
     JNIEnv *env, jclass type) {
   (void) env;
   (void) type;
@@ -49,7 +49,7 @@ static void failed_borrow(JNIEnv *env) {
 }
 
 JNIEXPORT void JNICALL
-Java_jdk_m3_precompute_M3NativePrecomputeOps_lookupPairsNative(
+Java_jdk_m3_precompute_NativePrecomputeOps_lookupPairsNative(
     JNIEnv *env,
     jclass type,
     jlongArray query_left_array,
