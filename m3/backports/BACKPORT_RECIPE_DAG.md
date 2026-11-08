@@ -73,7 +73,7 @@ inventory
 
 `runtime-parity` is included for VM/GC/HotSpot/native/JFR/network/AOT/high-risk work.
 
-The packet ABI is the existing `M3BackportPacketLoader` format:
+The packet ABI is the existing `BackportPacketLoader` format:
 
 ```text
 packet_id  atom_id  scope  scope_promotion_approved  work_ref  depends_on
@@ -95,13 +95,13 @@ never approval. An independently reviewed packet may subsequently record explici
 must still pass the canonical Java DAG, recipe-JUnit, compile/jtreg/runtime, fixed-point and serial
 promotion gates.
 
-`M3BackportPacketBatchMain` parses every generated packet. It composes FILE-safe packets and
+`BackportPacketBatchMain` parses every generated packet. It composes FILE-safe packets and
 reports broader packets lacking explicit approval as
 `M3_BACKPORT_PACKET_SCOPE_HOLD`; its summary distinguishes validated DAGs from scope holds.
 A batch schema/proof-planning pass is not a Java-21 compatibility or promotion verdict.
 Repository size alone never changes scope.
 
-The existing `M3RecipeDag` remains the enforcement oracle for silent scope escalation.
+The existing `RecipeDag` remains the enforcement oracle for silent scope escalation.
 
 ## Existing packet reuse
 
@@ -135,10 +135,10 @@ jtreg/runtime, VM/JNI or performance acceptance gates have passed.
 M3JDK21 already owns the generic execution/projection substrate under
 `m3/tooling/backport-dag`.
 
-The generated packet is parsed by `M3BackportPacketLoader`, composed by
-`M3PacketDagComposer`, and rejoined into the canonical verification tail.
+The generated packet is parsed by `BackportPacketLoader`, composed by
+`PacketDagComposer`, and rejoined into the canonical verification tail.
 
-`M3BackportPacketBatchMain` validates every generated packet in one JVM.
+`BackportPacketBatchMain` validates every generated packet in one JVM.
 
 The existing orchestration projector remains responsible for Camel/Airflow/Drools projections.
 Those projections do not become semantic or promotion authority.

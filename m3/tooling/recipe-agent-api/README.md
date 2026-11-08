@@ -27,8 +27,8 @@ From the M3JDK21 tree, run the actual Maven qualification gate:
 mvn -f m3/tooling/recipe-agent-api/pom.xml verify
 ```
 
-A plain Java 21 compiler can independently compile `M3RecipeAgent`, `M3RecipeCatalogue`
-and `M3RecipeAgentProof` and run its deterministic refusal proof without Maven/JUnit.
+A plain Java 21 compiler can independently compile `RecipeAgent`, `RecipeCatalogue`
+and `RecipeAgentProof` and run its deterministic refusal proof without Maven/JUnit.
 
 ## Supported verified-by-prototype operations
 
@@ -45,13 +45,13 @@ and `M3RecipeAgentProof` and run its deterministic refusal proof without Maven/J
 The agent is used through the Java API, not through a shell-executing recipe DSL:
 
 ```java
-M3RecipeAgent agent = new M3RecipeAgent();
-var scope = new M3RecipeAgent.Target(M3RecipeAgent.TargetKind.FOLDER,
+RecipeAgent agent = new RecipeAgent();
+var scope = new RecipeAgent.Target(RecipeAgent.TargetKind.FOLDER,
         "src/main/java", "*.java");
 var pre = agent.seal(workspace, scope);
-var action = new M3RecipeAgent.Action("add-marker", M3RecipeAgent.Operation.REGEX,
+var action = new RecipeAgent.Action("add-marker", RecipeAgent.Operation.REGEX,
         scope, "oldLabel", "newLabel", "", pre, 1, java.util.List.of(),
-        M3RecipeAgent.Authority.FOLDER, "");
+        RecipeAgent.Authority.FOLDER, "");
 var preview = agent.preview(workspace, java.util.List.of(action));
 // User/review process inspects preview.changes(), tests, gates and fingerprint.
 agent.apply(workspace, java.util.List.of(action), preview.fingerprint(), false);

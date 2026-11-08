@@ -231,7 +231,7 @@ remain mandatory. See `m3/docs/a3-native-jni.md`.
 Backport execution is composed from small immutable recipe/work atoms through the framework-neutral
 DAG in `m3/tooling/backport-dag`.
 
-The canonical authority is `m3-backport-dag.tsv` plus the Java validator `M3RecipeDag`.
+The canonical authority is `m3-backport-dag.tsv` plus the Java validator `RecipeDag`.
 Camel, Airflow and Drools files are orchestration/admission projections only; they do not gain
 authority to change dependencies, compatibility decisions, edit scope or promotion order.
 
@@ -255,7 +255,7 @@ composed DAG with one shared semantic SHA-256 root:
 
 ```bash
 mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-  -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+  -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain \
   -Dexec.args="m3/backports/recipes/<packet>/packet.tsv target/m3-orchestration/<packet>" \
   exec:java
 ```

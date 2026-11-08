@@ -9,7 +9,7 @@ The canonical authority is:
 
 `src/main/resources/com/m3/tooling/dag/m3-backport-dag.tsv`
 
-and its Java validator `M3RecipeDag`.
+and its Java validator `RecipeDag`.
 
 Camel, Airflow, Drools, CI and future workflow engines are projections only. They may schedule or
 visualize the graph; they may not change dependencies, edit scope, compatibility decisions or
@@ -81,7 +81,7 @@ fixed_point_required
 
 `fixed_point_required` must be `true`. Missing, extra, duplicate or mixed-packet evidence fails
 closed. The evidence manifest receives its own SHA-256 semantic root through
-`M3AtomEvidenceRoot`.
+`AtomEvidenceRoot`.
 
 This makes the M3 requirement executable:
 
@@ -99,11 +99,11 @@ The legacy one-file packet CLI remains useful for structural inspection. The evi
 ```bash
 mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
   exec:java \
-  -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+  -Dexec.mainClass=jdk.m3.tooling.dag.BackportPacketMain \
   -Dexec.args="packet.tsv atom-evidence.tsv"
 ```
 
-`M3OrchestrationProjectionMain` also accepts the evidence TSV as an optional third argument and
+`OrchestrationProjectionMain` also accepts the evidence TSV as an optional third argument and
 emits `atom-evidence.tsv` beside the framework projections.
 
 ## Framework projections

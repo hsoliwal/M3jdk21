@@ -80,7 +80,7 @@ The package join is not allowed to inherit PACKAGE authority silently. The packe
 
 ## Framework-neutral authority
 
-The canonical semantic authority is the Java `M3RecipeDag` plus its TSV input.
+The canonical semantic authority is the Java `RecipeDag` plus its TSV input.
 
 Camel, Airflow and Drools are projections:
 
@@ -96,7 +96,7 @@ projection therefore fails the build.
 
 ## Evidence-bound projection
 
-`M3OrchestrationProjectionMain` accepts:
+`OrchestrationProjectionMain` accepts:
 
 ```text
 <packet.tsv> <output-dir> [atom-evidence.tsv]

@@ -45,7 +45,7 @@ jobs:
           OUT="$PWD/target/jdk-8367584-orchestration"
           mkdir -p "$OUT"
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-            -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.mainClass=jdk.m3.tooling.dag.OrchestrationProjectionMain \
             -Dexec.args="$PWD/m3/backports/recipes/jdk-8367584/packet.tsv $OUT" \
             exec:java
           test -s "$OUT/M3BackportRoutes.java"

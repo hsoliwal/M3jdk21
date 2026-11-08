@@ -233,6 +233,9 @@ class JdkNamingTest(unittest.TestCase):
         sources = {
             "test_jdk_naming.py": here / "test_jdk_naming.py",
             "test_reseal.py": here / "test_reseal.py",
+            # guard files of the 2026-11-08 rows (pom_dependents #2829, rename_types v1.7)
+            "test_pom_dependents.py": here / "test_pom_dependents.py",
+            "test_rename_types.py": here / "test_rename_types.py",
             "JdkNamingConformanceTest":
                 here / "conformance/src/test/java/jdk/m3/tooling/naming/JdkNamingConformanceTest.java",
         }
@@ -257,6 +260,8 @@ class JdkNamingTest(unittest.TestCase):
             else:
                 guards = fields[6].split("; ")
             for guard in guards:
+                # a guard may carry a trailing note "file#method (how it is used)"; the method must still exist
+                guard = re.sub(r"\s+\([^()]*\)$", "", guard)
                 pieces = guard.split("#")
                 self.assertEqual(2, len(pieces), f"unbound legacy guard: {guard}")
                 file, method = pieces

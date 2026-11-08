@@ -39,7 +39,7 @@ jobs:
           mvn -B -ntp
           -f m3/pom.xml
           -pl tooling/backport-dag -am
-          -Dtest=M3RecipeDagTest,M3SecondPassReviewBindingTest
+          -Dtest=RecipeDagTest,SecondPassReviewBindingTest
           -Dsurefire.failIfNoSpecifiedTests=false
           test
 

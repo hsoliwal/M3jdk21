@@ -48,4 +48,8 @@ expect(BASE + ["test/jdk/jdk/internal/m3/zip/M3CodecTest.java"], ["NEW_PREFIXED_
 expect([p for p in BASE if not p.endswith("M3Codec.java")]
        + ["src/java.base/share/classes/jdk/internal/m3/zip/Codec.java"], [], "legacy prefixed type renamed")
 expect(BASE + ["src/java.base/share/classes/java/lang/M3StringFacts.java"], [], "M3 prefix outside M3 packages kept")
+expect(BASE + ["m3/search/src/main/java/jdk/m3/search/recipe/M3Agent.java"], ["NEW_PACKAGE", "NEW_PREFIXED_TYPE"],
+       "prefixed type in a package named like an evidence segment")
+expect(BASE + ["m3/search/qualification/x/recipe/src/main/java/jdk/m3/search/M3Copy.java"], [],
+       "prefixed type in an evidence copy root")
 print(f"PACKAGE_LAYOUT_GATE_SELF_TEST checks={checks} PASS")
