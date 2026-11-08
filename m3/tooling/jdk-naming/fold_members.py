@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""FOLD_MEMBERS v1: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
+"""FOLD_MEMBERS v1.1: one owner per concept. Members of duplicate classes fold into the owner class; the duplicates go.
 
 usage: fold_members.py <repo root> <map.tsv> [--check]
 The map (tab separated; '#' comments) declares everything, the tool does nothing undeclared:
@@ -17,7 +17,7 @@ The map (tab separated; '#' comments) declares everything, the tool does nothing
   MOVE   <old test path>  <new test path>                     test file renamed (class name follows the file name)
 Folded bodies are copied byte for byte from the donor file (Javadoc and annotations included), one //FLLDCIM: FOLD
 anchor per member names the donor blob; identical private helpers fold once; members the owner already declares (same
-name and parameter types) are PRESENT and skipped. Idempotent: a second run changes nothing; --check writes nothing and
+name and parameter types, same normalized body) are PRESENT and skipped; a same-signature member with a different body is a CONFLICT and the run is refused unless the map declares SKIP or an EDIT. Idempotent: a second run changes nothing; --check writes nothing and
 exits 1 when a run would change a file. Refuses (exit 2) an EDIT whose old text does not match its pin exactly once."""
 from __future__ import annotations
 
@@ -148,7 +148,8 @@ def main() -> int:
     owner_path = ROOT / m["OWNER"]
     owner = refs(m, owner_path.read_bytes().decode("utf-8")).encode("utf-8")
     owner_lines = LINES.findall(owner)
-    present = {(x["name"], x["selector"]) for x in members(owner_lines)}
+    present = {(x["name"], x["selector"]): hashlib.sha256(re.sub(rb"\s+", b" ", b"".join(owner_lines[x["first"]:x["stop"]]))).hexdigest()[:12]
+               for x in members(owner_lines)}
     folded, table, seen = [], [], {}
     for donor_rel in m["FILE"]:
         donor_path = ROOT / donor_rel
@@ -177,13 +178,15 @@ def main() -> int:
             body = refs(m, body.decode("utf-8")).encode("utf-8")
             digest = hashlib.sha256(re.sub(rb"\s+", b" ", body)).hexdigest()[:12]
             if (member["name"], member["selector"]) in present:
+                if present[(member["name"], member["selector"])] != digest:
+                    sys.exit(f"REFUSE CONFLICT {key}({member['selector']}): the owner declares this member with a different body; declare SKIP or an EDIT")
                 table.append((key, member["selector"], "PRESENT"))
                 continue
             if digest in seen:
                 table.append((key, member["selector"], "DUPLICATE of " + seen[digest]))
                 continue
             seen[digest] = key
-            present.add((member["name"], member["selector"]))
+            present[(member["name"], member["selector"])] = digest
             anchor = (f"    //FLLDCIM: FOLD - member {key} from donor blob {blob[:12]} ({donor_rel}); recipe "
                       f"m3/tooling/jdk-naming/fold_members.py v1, map {MAP.relative_to(ROOT).as_posix()}\n").encode()
             folded.append(anchor + body + (b"" if body.endswith(b"\n") else b"\n"))
@@ -231,7 +234,7 @@ def main() -> int:
         print("MEMBER\t" + "\t".join("" if c is None else str(c) for c in row))
     for c in changed:
         print("CHANGED\t" + c)
-    print(f"FOLD_MEMBERS v1 owner={m['OWNER']} folded={sum(1 for r in table if r[2] == 'FOLD')} changed={len(changed)} check={CHECK}")
+    print(f"FOLD_MEMBERS v1.1 owner={m['OWNER']} folded={sum(1 for r in table if r[2] == 'FOLD')} changed={len(changed)} check={CHECK}")
     return 1 if CHECK and changed else 0
 
 
