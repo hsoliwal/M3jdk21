@@ -32,11 +32,11 @@ final class M3LFUCache<K, V> {
         if (capacity < 0) {
             throw new IllegalArgumentException("negative capacity");
         }
-        keys = jdk.m3.arrays.M3ArrayNative.allocateObjectsRequired(capacity);
-        values = jdk.m3.arrays.M3ArrayNative.allocateObjectsRequired(capacity);
-        frequencies = jdk.m3.arrays.M3ArrayNative.allocateIntsRequired(capacity);
-        accessStamps = jdk.m3.arrays.M3ArrayNative.allocateLongsRequired(capacity);
-        states = jdk.m3.arrays.M3ArrayNative.allocateBytesRequired(capacity);
+        keys = jdk.m3.arrays.ArrayNative.allocateObjectsRequired(capacity);
+        values = jdk.m3.arrays.ArrayNative.allocateObjectsRequired(capacity);
+        frequencies = jdk.m3.arrays.ArrayNative.allocateIntsRequired(capacity);
+        accessStamps = jdk.m3.arrays.ArrayNative.allocateLongsRequired(capacity);
+        states = jdk.m3.arrays.ArrayNative.allocateBytesRequired(capacity);
     }
 
     @SuppressWarnings("unchecked")

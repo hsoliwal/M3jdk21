@@ -293,7 +293,7 @@ jobs:
               emitted=sdk/"target/emitted/regex-ascii-lexical-receiver-20261019/forward"
               compiler_path="src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java"
               test_path="test/jdk/java/util/regex/M3AutomatonDifferentialTest.java"
-              keep_names=("M3Automaton.java","M3AutomatonOps.java","M3RunTable.java","M3ChunkCursor.java","M3NotYetReceived.java")
+              keep_names=("M3Automaton.java","M3AutomatonOps.java","M3RunTable.java","M3ChunkCursor.java","NotYetReceived.java")
               dependencies=[fixture/"before/src/java.base/share/classes/jdk/internal/mindex"/name for name in keep_names]
               receiver=root/"receiver";receiver.mkdir(exist_ok=False)
               for cohort in ("baseline","negative","corrected"):

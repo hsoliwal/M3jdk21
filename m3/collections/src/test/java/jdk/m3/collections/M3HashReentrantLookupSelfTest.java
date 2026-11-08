@@ -282,7 +282,7 @@ public final class M3HashReentrantLookupSelfTest {
     /** M3LinkedHashMap and M3LinkedHashSet allocate through the m3_arrays JNI library (native test profile). */
     private static boolean jniAvailable() {
         String configured = System.getProperty("m3.arrays.native.path");
-        return jdk.m3.arrays.M3ArrayNative.isLoaded() || configured != null && !configured.isBlank();
+        return jdk.m3.arrays.ArrayNative.isLoaded() || configured != null && !configured.isBlank();
     }
 
     public static void main(String[] args) {

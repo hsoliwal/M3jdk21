@@ -155,16 +155,16 @@ jobs:
           mkdir -p proof/native-handshake
           cat > proof/native-handshake/M3ArrayNativeRequiredHandshake.java <<'JAVA'
           // SPDX-License-Identifier: Apache-2.0
-          import jdk.m3.arrays.M3ArrayNative;
+          import jdk.m3.arrays.ArrayNative;
           public final class M3ArrayNativeRequiredHandshake {
               public static void main(String[] args) {
                   if (args.length != 1) throw new AssertionError("native path argument");
                   System.setProperty("m3.arrays.native.path", args[0]);
-                  Object[] objects = M3ArrayNative.allocateObjectsRequired(3);
-                  byte[] bytes = M3ArrayNative.allocateBytesRequired(5);
-                  int[] ints = M3ArrayNative.allocateIntsRequired(7);
-                  long[] longs = M3ArrayNative.allocateLongsRequired(9);
-                  if (!M3ArrayNative.isLoaded() || objects.length != 3
+                  Object[] objects = ArrayNative.allocateObjectsRequired(3);
+                  byte[] bytes = ArrayNative.allocateBytesRequired(5);
+                  int[] ints = ArrayNative.allocateIntsRequired(7);
+                  long[] longs = ArrayNative.allocateLongsRequired(9);
+                  if (!ArrayNative.isLoaded() || objects.length != 3
                           || bytes.length != 5 || ints.length != 7 || longs.length != 9
                           || objects[0] != null || objects[2] != null
                           || bytes[4] != 0 || ints[6] != 0 || longs[8] != 0L) {

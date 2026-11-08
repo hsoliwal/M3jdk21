@@ -1,0 +1,48 @@
+name: M3 JDK modules
+# Product code moved from the m3/ side tree into real JDK modules under src/ (approved layout 2026-11-08).
+# One step per moved area runs make/m3/<area>/test-module.sh on a host JDK 21: the module compiles as a module,
+# its same-package tests run exactly as the former Maven module ran them, and the opt-in native lane builds the
+# library through make/m3/<area>/CMakeLists.txt.
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'src/jdk.m3.collections/**'
+      - 'test/jdk/jdk/m3/arrays/**'
+      - 'make/m3/arrays/**'
+      - 'make/modules/jdk.m3.collections/**'
+      - '.github/workflows/m3-jdk-modules.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'src/jdk.m3.collections/**'
+      - 'test/jdk/jdk/m3/arrays/**'
+      - 'make/m3/arrays/**'
+      - 'make/modules/jdk.m3.collections/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  modules:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: JUnit console launcher
+        run: mvn -B -ntp -q dependency:get -Dartifact=org.junit.platform:junit-platform-console-standalone:1.11.4
+      - name: jdk.m3.collections / arrays
+        run: bash make/m3/arrays/test-module.sh ~/.m2/repository/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar "$RUNNER_TEMP/m3-arrays"
+      - name: Maven bridge of the moved area (m3/arrays -> the module sources) and its first consumer
+        run: |
+          mvn -B -ntp -q -f m3/arrays/pom.xml install
+          mvn -B -ntp -q -f m3/collections/pom.xml -DskipTests package

@@ -13,7 +13,7 @@ on:
       - 'src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java'
-      - 'src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/NotYetReceived.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java'
       - 'test/jdk/java/util/regex/M3AutomatonDifferentialTest.java'
@@ -105,7 +105,7 @@ jobs:
             /src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java
             /src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java
             /src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java
-            /src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java
+            /src/java.base/share/classes/jdk/internal/mindex/NotYetReceived.java
             /src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java
             /src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java
             /test/jdk/java/util/regex/M3AutomatonDifferentialTest.java
