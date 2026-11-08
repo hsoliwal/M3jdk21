@@ -37,7 +37,7 @@ import org.apache.commons.collections4.map.Flat3Map;
 /**
  * Seeded lockstep differential of census leaf L075 (m3/collections/qualification/flat3map-single-owner-20261106).
  * {@code full}: Commons {@code Flat3Map} 4.5.0 against the facade {@link M3Flat3Map} over the whole Map/IterableMap
- * API; {@code subset}: Commons against the core {@code jdk.m3.collections.M3Flat3Map} over the API both share. Every
+ * API; {@code subset}: Commons against the core {@code jdk.m3.collections.Flat3Map} over the API both share. Every
  * op draws its parameters once and applies them to both sides; each side's records feed its own SHA-256. Records
  * are order-insensitive where Commons itself is mode-dependent (iteration order, toString layout): entries are
  * sorted before they are written, and iterator removals and setValue calls are chosen by key/value predicates. Raw
@@ -451,7 +451,7 @@ final class M3Flat3MapDifferential {
     /** The core over the shared subset: put/get/remove/contains/size/clear, cursor iteration, removeSlot, copy. */
     static final class CoreSide implements Side {
         private final List<String> order = new ArrayList<>();
-        private jdk.m3.collections.M3Flat3Map<Key, Integer> map = new jdk.m3.collections.M3Flat3Map<>();
+        private jdk.m3.collections.Flat3Map<Key, Integer> map = new jdk.m3.collections.Flat3Map<>();
 
         @Override
         public Object peerView() { return map; }
@@ -506,7 +506,7 @@ final class M3Flat3MapDifferential {
 
         private String canonical() { return canonical(map); }
 
-        private String canonical(jdk.m3.collections.M3Flat3Map<Key, Integer> source) {
+        private String canonical(jdk.m3.collections.Flat3Map<Key, Integer> source) {
             List<Map.Entry<Key, Integer>> entries = new ArrayList<>();
             for (int s = source.nextSlot(0); s >= 0; s = source.nextSlot(s + 1)) {
                 entries.add(new AbstractMap.SimpleEntry<>(source.slotKey(s), source.slotValue(s)));
@@ -530,7 +530,7 @@ final class M3Flat3MapDifferential {
         }
 
         private String copy(Op op) {
-            jdk.m3.collections.M3Flat3Map<Key, Integer> copy = map.copy();
+            jdk.m3.collections.Flat3Map<Key, Integer> copy = map.copy();
             String text = canonical(copy) + true + true;
             boolean had = map.containsKey(op.other);
             int size = map.size();

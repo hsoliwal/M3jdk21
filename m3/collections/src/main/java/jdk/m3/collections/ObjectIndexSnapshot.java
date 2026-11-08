@@ -43,7 +43,7 @@ import java.util.function.ToDoubleFunction;
  * <p>JNI is optional and explicit. State-mask selection can delegate to the
  * existing {@link IndexMaskWindow} primitive JNI kernel; no object reference,
  * predicate or comparator crosses the native boundary. Signal sorting reuses
- * {@link M3SignalOrder}'s existing Java/JNI primitive key/index engine.</p>
+ * {@link SignalOrder}'s existing Java/JNI primitive key/index engine.</p>
  *
  * <p>This is a detached read-only M3 view, not a replacement concrete identity
  * for {@code java.util.ArrayList}, {@code SortedSet} or another JDK collection.
@@ -153,7 +153,7 @@ public final class ObjectIndexSnapshot<E> extends AbstractList<E> implements Ran
     }
 
     public ObjectIndexSnapshot<E> filteredByState(
-            int requiredMask, int excludedMask, M3IndexMaskCompactor.Backend backend) {
+            int requiredMask, int excludedMask, IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(backend, "backend");
         checkMask(requiredMask);
         checkMask(excludedMask);
@@ -163,7 +163,7 @@ public final class ObjectIndexSnapshot<E> extends AbstractList<E> implements Ran
             if (accepts(flags, requiredMask, excludedMask)) selectedCount++;
         }
 
-        if (backend == M3IndexMaskCompactor.Backend.JAVA) {
+        if (backend == IndexMaskCompactor.Backend.JAVA) {
             if (selectedCount == size()) return this;
             int[] selected = new int[selectedCount];
             int written = 0;
@@ -207,7 +207,7 @@ public final class ObjectIndexSnapshot<E> extends AbstractList<E> implements Ran
     }
 
     public ObjectIndexSnapshot<E> filteredByState(int requiredMask, int excludedMask) {
-        return filteredByState(requiredMask, excludedMask, M3IndexMaskCompactor.Backend.JAVA);
+        return filteredByState(requiredMask, excludedMask, IndexMaskCompactor.Backend.JAVA);
     }
 
     /**
@@ -320,7 +320,7 @@ public final class ObjectIndexSnapshot<E> extends AbstractList<E> implements Ran
 
     public ObjectIndexSnapshot<E> sortedBySignal(
             ToDoubleFunction<? super E> projection, boolean ascending,
-            M3SignalOrder.Backend backend) {
+            SignalOrder.Backend backend) {
         Objects.requireNonNull(projection, "projection");
         Objects.requireNonNull(backend, "backend");
         double[] signals = new double[size()];
@@ -328,7 +328,7 @@ public final class ObjectIndexSnapshot<E> extends AbstractList<E> implements Ran
         for (int i = 0; i < signals.length; i++) {
             signals[i] = projection.applyAsDouble(get(i));
         }
-        M3SignalOrder signalOrder = M3SignalOrder.filtered(signals, all, 0, 0, ascending, backend);
+        SignalOrder signalOrder = SignalOrder.filtered(signals, all, 0, 0, ascending, backend);
         int[] selected = new int[signals.length];
         for (int i = 0; i < selected.length; i++) {
             selected[i] = rows[from + signalOrder.rowAt(i)];
@@ -338,7 +338,7 @@ public final class ObjectIndexSnapshot<E> extends AbstractList<E> implements Ran
 
     public ObjectIndexSnapshot<E> sortedBySignal(
             ToDoubleFunction<? super E> projection, boolean ascending) {
-        return sortedBySignal(projection, ascending, M3SignalOrder.Backend.JAVA);
+        return sortedBySignal(projection, ascending, SignalOrder.Backend.JAVA);
     }
 
     @Override

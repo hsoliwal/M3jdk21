@@ -1,11 +1,11 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: Apache-2.0
- * Source-preserving successor: compose Eclipse bag hooks over existing M3CountedBag.
+ * Source-preserving successor: compose Eclipse bag hooks over existing CountedBag.
  */
 package jdk.m3.collections.interop;
 
-import jdk.m3.collections.M3CountedBag;
+import jdk.m3.collections.CountedBag;
 import jdk.m3.collections.M3LinkedHashMap;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -29,19 +29,19 @@ import org.eclipse.collections.impl.set.mutable.SetAdapter;
  * entry objects. The upstream AbstractMutableBag remains responsible for Eclipse
  * collection-specific algorithms and factory return contracts. This is a
  * single-threaded mutable owner, not the vendor's concrete HashBag/serialized type.
- * The per-occurrence iterator is the incumbent fail-fast M3CountedBag cursor.
+ * The per-occurrence iterator is the incumbent fail-fast CountedBag cursor.
  */
 public final class M3EclipseBag<E> extends AbstractMutableBag<E> {
-    private final M3CountedBag<E> counts;
+    private final CountedBag<E> counts;
 
-    public M3EclipseBag() { this(new M3CountedBag<>()); }
+    public M3EclipseBag() { this(new CountedBag<>()); }
 
     /** New provider façade, same canonical M3 indexed count/value owner. */
-    public M3EclipseBag(M3CountedBag<E> counts) {
+    public M3EclipseBag(CountedBag<E> counts) {
         this.counts = Objects.requireNonNull(counts, "counts");
     }
 
-    public M3CountedBag<E> m3Backend() { return counts; }
+    public CountedBag<E> m3Backend() { return counts; }
 
     @Override public boolean equals(Object other) {
         if (other == this) return true;

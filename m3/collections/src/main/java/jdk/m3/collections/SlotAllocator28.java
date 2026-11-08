@@ -11,9 +11,9 @@ public final class SlotAllocator28 {
     /** Creates an empty instance with no populated storage. */
     public SlotAllocator28() {}
 
-    private final M3IntLane28 generations = new M3IntLane28();
-    private final M3IntLane28 freeNextEncoded = new M3IntLane28();
-    private final M3BitLane28 live = new M3BitLane28();
+    private final IntLane28 generations = new IntLane28();
+    private final IntLane28 freeNextEncoded = new IntLane28();
+    private final BitLane28 live = new BitLane28();
 
     private int highWater;
     private int freeHeadEncoded;
@@ -26,7 +26,7 @@ public final class SlotAllocator28 {
             freeHeadEncoded = freeNextEncoded.get(slot);
             freeNextEncoded.clear(slot);
         } else {
-            if (highWater == M3Address28.MAX_SLOTS) {
+            if (highWater == Address28.MAX_SLOTS) {
                 throw new IllegalStateException("segmented slot space exhausted");
             }
             slot = highWater++;
@@ -111,7 +111,7 @@ public final class SlotAllocator28 {
 
     /** Finds the next live physical slot, or -1, without scanning every free slot. */
     public int nextLiveSlot(int from) {
-        M3Address28.checkRange(from, M3Address28.MAX_SLOTS);
+        Address28.checkRange(from, Address28.MAX_SLOTS);
         return from >= highWater ? -1 : live.nextSetBit(from);
     }
 
@@ -136,7 +136,7 @@ public final class SlotAllocator28 {
 
     public static int slot(long handle) {
         long raw = handle & 0xffffffffL;
-        if (raw >= M3Address28.MAX_SLOTS) {
+        if (raw >= Address28.MAX_SLOTS) {
             return -1;
         }
         return (int) raw;
@@ -147,7 +147,7 @@ public final class SlotAllocator28 {
     }
 
     public static long handle(int slot, int generation) {
-        M3Address28.checkSlot(slot);
+        Address28.checkSlot(slot);
         if (generation == 0) {
             throw new IllegalArgumentException("generation zero is reserved");
         }

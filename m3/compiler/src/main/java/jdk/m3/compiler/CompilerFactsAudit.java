@@ -6,7 +6,7 @@ import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URI;
@@ -47,15 +47,15 @@ public final class CompilerFactsAudit {
   /** Read-only extension point; invoked only after the entire source set attributes successfully. */
   @FunctionalInterface
   public interface AttributedVisitor {
-    void visit(CompilationUnitTree unit, Trees trees, M3ProgressMonitor monitor);
+    void visit(CompilationUnitTree unit, Trees trees, ProgressMonitor monitor);
   }
 
-  public static Result analyze(Map<String, String> sources, M3ProgressMonitor monitor) throws IOException {
+  public static Result analyze(Map<String, String> sources, ProgressMonitor monitor) throws IOException {
     return analyze(sources, monitor, (unit, trees, progress) -> { });
   }
 
   /** Shares one javac attribution pass with additional analyses, without ambient classpath access. */
-  public static Result analyze(Map<String, String> sources, M3ProgressMonitor monitor,
+  public static Result analyze(Map<String, String> sources, ProgressMonitor monitor,
                                AttributedVisitor visitor) throws IOException {
     Objects.requireNonNull(visitor, "visitor");
     Objects.requireNonNull(sources, "sources");
@@ -120,10 +120,10 @@ public final class CompilerFactsAudit {
   private static final class Scanner extends TreePathScanner<Void, Void> {
     final CompilationUnitTree unit;
     final Trees trees;
-    final M3ProgressMonitor monitor;
+    final ProgressMonitor monitor;
     final List<Loop> loops;
     final List<Allocation> allocations;
-    Scanner(CompilationUnitTree unit, Trees trees, M3ProgressMonitor monitor,
+    Scanner(CompilationUnitTree unit, Trees trees, ProgressMonitor monitor,
             List<Loop> loops, List<Allocation> allocations) {
       this.unit = unit; this.trees = trees; this.monitor = monitor;
       this.loops = loops; this.allocations = allocations;

@@ -15,12 +15,12 @@ import java.util.Objects;
  * Values are strong and must not retain their keys if reclamation is desired.
  * Backing arrays are allocated on first insertion; reference-queue ownership is unchanged.
  */
-public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
+public final class M3WeakHashMap<K, V> extends SlotMap<K, V> {
     @Override protected boolean cacheEntryFacades() { return false; }
     private static final Object NULL_KEY = new Object();
-    private Object[] references = M3SlotArrays.EMPTY_OBJECTS, values = M3SlotArrays.EMPTY_OBJECTS;
-    private int[] hashes = M3SlotArrays.EMPTY_INTS;
-    private byte[] states = M3SlotArrays.EMPTY_BYTES;
+    private Object[] references = SlotArrays.EMPTY_OBJECTS, values = SlotArrays.EMPTY_OBJECTS;
+    private int[] hashes = SlotArrays.EMPTY_INTS;
+    private byte[] states = SlotArrays.EMPTY_BYTES;
     private final ReferenceQueue<Object> queue = new ReferenceQueue<>();
     private int size, occupied, modifications;
     /** Empty weak-key map supporting null keys and values. */
@@ -46,7 +46,7 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
     @Override int revision() { return modifications; }
     @Override int findSlot(Object key) {
         // Hash evaluation remains observable even before storage is allocated.
-        drain(); return find(key, M3SlotArrays.hash(key));
+        drain(); return find(key, SlotArrays.hash(key));
     }
     //FLLDCIM: MRL - recipe HASH_REENTRANT_GUARD v1 (qualification/hash-reentrant-guard-20261107): re-entrant key/value callbacks
     private int find(Object key, int hash) { return find(key == null ? NULL_KEY : key, hash, 0); }
@@ -70,7 +70,7 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
         Object key = referent(s);
         @SuppressWarnings("unchecked") K k = key == NULL_KEY ? null : (K) key; return k;
     }
-    @Override V valueAt(int s) { return M3SlotArrays.get(values, s); }
+    @Override V valueAt(int s) { return SlotArrays.get(values, s); }
     @Override V writeAt(int s, V value) { V old = valueAt(s); values[s] = value; return old; }
     @Override V eraseAt(int s) { forgetEntryFacade(keyAt(s)); return erase(s, true); }
     private V erase(int s, boolean structural) {
@@ -86,13 +86,13 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
             int s = findSlot(key);
             if (s >= 0) { return writeAt(s, value); }
             int expected = modifications;
-            int hash = M3SlotArrays.hash(key); // the second hash call is pinned (M3FootprintContractTest)
+            int hash = SlotArrays.hash(key); // the second hash call is pinned (FootprintContractTest)
             if (modifications == expected) { insertNew(key, value, hash); return null; }
             if (lookups == REWALKS) { throw new java.util.ConcurrentModificationException(); }
         }
     }
     @Override long locate(Object key) {
-        drain(); int hash = M3SlotArrays.hash(key);
+        drain(); int hash = SlotArrays.hash(key);
         return (long) hash << 32 | find(key, hash) & 0xFFFFFFFFL;
     }
     @Override void insertAbsent(K key, V value, int hint, int expected) {
@@ -103,7 +103,7 @@ public final class M3WeakHashMap<K, V> extends M3SlotMap<K, V> {
     private void insertNew(K key, V value, int hash) {
         if (states.length == 0) { rehash(16); }
         else if (occupied + 1 >= states.length - states.length / 3) {
-            rehash(size + 1 >= states.length - states.length / 3 ? M3SlotArrays.doubled(states.length) : states.length);
+            rehash(size + 1 >= states.length - states.length / 3 ? SlotArrays.doubled(states.length) : states.length);
         }
         int s = hash & (states.length - 1);
         while (states[s] == 1) { s = (s + 1) & (states.length - 1); }

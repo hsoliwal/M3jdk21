@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.indexstring;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -104,13 +104,13 @@ public final class MIndexWordBreakPlan {
   }
 
   public static MIndexWordBreakPlan compile(MIndexVocabularySearchTree vocabulary) {
-    return compile(vocabulary, new M3DefaultProgressMonitor());
+    return compile(vocabulary, new DefaultProgressMonitor());
   }
 
   public static MIndexWordBreakPlan compile(
-      MIndexVocabularySearchTree vocabulary, M3ProgressMonitor monitor) {
+      MIndexVocabularySearchTree vocabulary, ProgressMonitor monitor) {
     MIndexVocabularySearchTree words = Objects.requireNonNull(vocabulary, "vocabulary");
-    M3ProgressMonitor progress = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    ProgressMonitor progress = monitor == null ? new DefaultProgressMonitor() : monitor;
     progress.beginTask("compile MIndex word-break plan", words.size());
     try {
       MIndexTrieNavigation.check(progress);
@@ -134,7 +134,7 @@ public final class MIndexWordBreakPlan {
   }
 
   public Result segment(CharSequence input) {
-    return segment(input, new M3DefaultProgressMonitor());
+    return segment(input, new DefaultProgressMonitor());
   }
 
   /**
@@ -145,12 +145,12 @@ public final class MIndexWordBreakPlan {
    * query immediately. This result need not contain the fewest segments. Empty dictionary words
    * never create transitions.</p>
    */
-  public Result segment(CharSequence input, M3ProgressMonitor monitor) {
+  public Result segment(CharSequence input, ProgressMonitor monitor) {
     return evaluate(input, LEGACY_LIMITS, monitor, false);
   }
 
   /** Historical segmentation policy with explicit per-query resource bounds. */
-  public Result segment(CharSequence input, Limits limits, M3ProgressMonitor monitor) {
+  public Result segment(CharSequence input, Limits limits, ProgressMonitor monitor) {
     return evaluate(input, limits, monitor, false);
   }
 
@@ -168,15 +168,15 @@ public final class MIndexWordBreakPlan {
    * start/end order, independently of vocabulary insertion order. This method does not return at
    * the first complete path; later reachable starts may produce a shorter path.</p>
    */
-  public Result minimumSegments(CharSequence input, Limits limits, M3ProgressMonitor monitor) {
+  public Result minimumSegments(CharSequence input, Limits limits, ProgressMonitor monitor) {
     return evaluate(input, limits, monitor, true);
   }
 
   private Result evaluate(
-      CharSequence input, Limits limits, M3ProgressMonitor monitor, boolean minimum) {
+      CharSequence input, Limits limits, ProgressMonitor monitor, boolean minimum) {
     CharSequence source = Objects.requireNonNull(input, "input");
     Objects.requireNonNull(limits, "limits");
-    M3ProgressMonitor progress = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    ProgressMonitor progress = monitor == null ? new DefaultProgressMonitor() : monitor;
     MIndexTrieNavigation.check(progress);
     int length = source.length();
     MIndexTrieNavigation.check(progress);
@@ -249,7 +249,7 @@ public final class MIndexWordBreakPlan {
   }
 
   private static void initialize(
-      int[] predecessor, int[] wordRow, int[] best, M3ProgressMonitor monitor) {
+      int[] predecessor, int[] wordRow, int[] best, ProgressMonitor monitor) {
     for (int start = 0; start < predecessor.length; ) {
       MIndexTrieNavigation.check(monitor);
       int end = (int) Math.min(predecessor.length, (long) start + 1024L);
@@ -263,7 +263,7 @@ public final class MIndexWordBreakPlan {
 
   private Result reconstruct(
       CharSequence source, int length, int[] predecessor, int[] wordRow,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     monitor.subTask("reconstruct word-break segments");
     MIndexTrieNavigation.check(monitor);
     int segments = 0;

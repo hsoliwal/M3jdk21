@@ -16,7 +16,7 @@
 enum { M3_GATHER_CHUNK = 256 };
 
 JNIEXPORT void JNICALL
-Java_jdk_m3_collections_M3LongAddressKernel_gatherNative(
+Java_jdk_m3_collections_LongAddressKernel_gatherNative(
         JNIEnv *env, jclass ignored, jlongArray payload, jintArray addresses,
         jint address_from, jint length, jlongArray output, jint output_from) {
     (void) ignored;
@@ -104,7 +104,7 @@ static void m3_throw(JNIEnv *env, const char *type, const char *message) {
  * this code is original, not copied challenge code.
  */
 JNIEXPORT jint JNICALL
-Java_jdk_m3_collections_M3LongAddressKernel_gatherSelectedNative(
+Java_jdk_m3_collections_LongAddressKernel_gatherSelectedNative(
         JNIEnv *env, jclass ignored, jlongArray payload, jintArray addresses,
         jbyteArray row_states, jint address_from, jint length, jlongArray output,
         jint output_from, jint required, jint forbidden) {

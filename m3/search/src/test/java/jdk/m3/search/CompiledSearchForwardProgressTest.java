@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Random;
@@ -126,14 +126,14 @@ final class CompiledSearchForwardProgressTest {
         assertEquals(2, sparse.lastIndexOf(data, 3));
         assertEquals(-1, sparse.lastIndexOf(data, -1));
         CancellationException failure = new CancellationException("postcheck");
-        M3ProgressMonitor postcheck = polling(() -> {
+        ProgressMonitor postcheck = polling(() -> {
             if (checks.incrementAndGet() == 2) throw failure;
         });
         assertSame(failure, assertThrows(CancellationException.class,
                 () -> sparse.lastIndexOf(data, 3, postcheck)));
         assertEquals(2, checks.get());
         checks.set(0);
-        M3ProgressMonitor precheck = polling(() -> { checks.incrementAndGet(); throw failure; });
+        ProgressMonitor precheck = polling(() -> { checks.incrementAndGet(); throw failure; });
         assertSame(failure, assertThrows(CancellationException.class,
                 () -> sparse.lastIndexOf(data, 3, precheck)));
         assertEquals(1, checks.get());
@@ -149,8 +149,8 @@ final class CompiledSearchForwardProgressTest {
         return -1;
     }
 
-    private static M3ProgressMonitor polling(Runnable action) {
-        return new M3ProgressMonitor() {
+    private static ProgressMonitor polling(Runnable action) {
+        return new ProgressMonitor() {
             @Override public void beginTask(String name, long total) {}
             @Override public void done() {}
             @Override public void worked(long units) {}
@@ -160,7 +160,7 @@ final class CompiledSearchForwardProgressTest {
             @Override public boolean isCanceled() { return false; }
             @Override public void setCanceled(boolean canceled) {}
             @Override public void checkCanceled() { action.run(); }
-            @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+            @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
         };
     }
 

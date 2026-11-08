@@ -14,8 +14,8 @@
  *******************************************************************************/
 package jdk.m3.pcollections;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3IndexMaskCompactor.Backend;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor.Backend;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public final class M3PResourceProbe {
     public static void main(String[] arguments) {
         Backend backend = arguments.length > 0 && arguments[0].equals("--native")
                 ? Backend.NATIVE_REQUIRED : Backend.JAVA;
-        if (backend == Backend.NATIVE_REQUIRED && !M3IndexMaskCompactor.nativeAvailable()) {
+        if (backend == Backend.NATIVE_REQUIRED && !IndexMaskCompactor.nativeAvailable()) {
             throw new AssertionError("Native resource probe requires the actual JNI binary");
         }
         if (THREADS.isCurrentThreadCpuTimeSupported() && !THREADS.isThreadCpuTimeEnabled()) {
@@ -51,7 +51,7 @@ public final class M3PResourceProbe {
         if (named) {
             require("jdk.m3.pcollections".equals(M3PVector.class.getModule().getName()), "M3 module identity");
             require("org.pcollections".equals(TreePVector.class.getModule().getName()), "donor module identity");
-            require("jdk.m3.collections".equals(M3IndexMaskCompactor.class.getModule().getName()), "JNI owner module identity");
+            require("jdk.m3.collections".equals(IndexMaskCompactor.class.getModule().getName()), "JNI owner module identity");
         }
         System.out.println("{\"environment\":true,\"javaVersion\":\"" + clean(System.getProperty("java.version"))
                 + "\",\"javaVendor\":\"" + clean(System.getProperty("java.vendor"))
@@ -59,7 +59,7 @@ public final class M3PResourceProbe {
                 + "\",\"arch\":\"" + clean(System.getProperty("os.arch"))
                 + "\",\"backend\":\"" + backend + "\",\"m3Module\":\"" + M3PVector.class.getModule().getName()
                 + "\",\"donorModule\":\"" + TreePVector.class.getModule().getName()
-                + "\",\"jniOwnerModule\":\"" + M3IndexMaskCompactor.class.getModule().getName()
+                + "\",\"jniOwnerModule\":\"" + IndexMaskCompactor.class.getModule().getName()
                 + "\",\"size\":" + SIZE + ",\"retainedVersions\":" + VERSIONS + "}");
 
         ArrayList<Integer> input = new ArrayList<>(SIZE);

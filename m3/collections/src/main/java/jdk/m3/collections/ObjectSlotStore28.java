@@ -13,7 +13,7 @@ import java.util.ConcurrentModificationException;
  * <p>Payload references live in lazily allocated 4,096-reference pages. Slot
  * occupancy, generation and the unsigned eight-bit state mask are owned by
  * {@link ObjectStateSlots28}; this class does not create a second lifecycle
- * or state authority. A sparse {@link M3LongLane28} retains the current handle
+ * or state authority. A sparse {@link LongLane28} retains the current handle
  * for each live physical slot so snapshots can revalidate the allocator
  * generation without per-element entry objects.</p>
  *
@@ -28,8 +28,8 @@ public final class ObjectSlotStore28<E> {
     /** Preserve the original public zero-argument constructor and field-initializer order. */
     public ObjectSlotStore28() { }
     private final ObjectStateSlots28 states = new ObjectStateSlots28();
-    private final M3LongLane28 handles = new M3LongLane28();
-    private final Object[][][] payload = new Object[M3Address28.REGION_COUNT][][];
+    private final LongLane28 handles = new LongLane28();
+    private final Object[][][] payload = new Object[Address28.REGION_COUNT][][];
     private int payloadRegions;
     private int payloadBlocks;
     private long revision;
@@ -156,7 +156,7 @@ public final class ObjectSlotStore28<E> {
     }
 
     public long allocatedPayloadReferenceSlots() {
-        return (long) payloadBlocks * M3Address28.VALUES_PER_BLOCK;
+        return (long) payloadBlocks * Address28.VALUES_PER_BLOCK;
     }
     public int allocatedPayloadBlocks() { return payloadBlocks; }
     public int allocatedPayloadRegions() { return payloadRegions; }
@@ -166,16 +166,16 @@ public final class ObjectSlotStore28<E> {
     }
 
     private int nextMatching(int current, int requiredMask, int excludedMask) {
-        if (current == M3Address28.MAX_SLOT) return -1;
+        if (current == Address28.MAX_SLOT) return -1;
         return states.nextMatchingSlot(current + 1, requiredMask, excludedMask);
     }
 
     @SuppressWarnings("unchecked")
     private E readSlot(int slot) {
-        Object[][] region = payload[M3Address28.region(slot)];
+        Object[][] region = payload[Address28.region(slot)];
         if (region == null) return null;
-        Object[] block = region[M3Address28.block(slot)];
-        return block == null ? null : (E) block[M3Address28.offset(slot)];
+        Object[] block = region[Address28.block(slot)];
+        return block == null ? null : (E) block[Address28.offset(slot)];
     }
 
     private void writeSlot(int slot, E value) {
@@ -183,28 +183,28 @@ public final class ObjectSlotStore28<E> {
             clearSlot(slot);
             return;
         }
-        ensurePayloadBlock(slot)[M3Address28.offset(slot)] = value;
+        ensurePayloadBlock(slot)[Address28.offset(slot)] = value;
     }
 
     private void clearSlot(int slot) {
-        Object[][] region = payload[M3Address28.region(slot)];
+        Object[][] region = payload[Address28.region(slot)];
         if (region == null) return;
-        Object[] block = region[M3Address28.block(slot)];
-        if (block != null) block[M3Address28.offset(slot)] = null;
+        Object[] block = region[Address28.block(slot)];
+        if (block != null) block[Address28.offset(slot)] = null;
     }
 
     private Object[] ensurePayloadBlock(int slot) {
-        int regionIndex = M3Address28.region(slot);
+        int regionIndex = Address28.region(slot);
         Object[][] region = payload[regionIndex];
         if (region == null) {
-            region = new Object[M3Address28.BLOCKS_PER_REGION][];
+            region = new Object[Address28.BLOCKS_PER_REGION][];
             payload[regionIndex] = region;
             payloadRegions++;
         }
-        int blockIndex = M3Address28.block(slot);
+        int blockIndex = Address28.block(slot);
         Object[] block = region[blockIndex];
         if (block == null) {
-            block = new Object[M3Address28.VALUES_PER_BLOCK];
+            block = new Object[Address28.VALUES_PER_BLOCK];
             region[blockIndex] = block;
             payloadBlocks++;
         }

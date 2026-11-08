@@ -4,8 +4,8 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3Progress;
-import jdk.m3.collections.M3ProgressAdapters;
+import jdk.m3.collections.Progress;
+import jdk.m3.collections.ProgressAdapters;
 
 /**
  * Ownership-aware compatibility scope for legacy Progress consumers.
@@ -14,23 +14,23 @@ import jdk.m3.collections.M3ProgressAdapters;
  * SystemProgress root and exposes it through the legacy Progress surface.</p>
  */
 public final class ProgressScope implements AutoCloseable {
-    private final M3Progress monitor;
+    private final Progress monitor;
     private final boolean owned;
     private boolean closed;
 
-    private ProgressScope(M3Progress monitor, boolean owned) {
+    private ProgressScope(Progress monitor, boolean owned) {
         this.monitor = Objects.requireNonNull(monitor, "monitor");
         this.owned = owned;
     }
 
-    public static ProgressScope resolve(M3Progress monitor, long systemWork) {
+    public static ProgressScope resolve(Progress monitor, long systemWork) {
         if (systemWork < 0L) throw new IllegalArgumentException("systemWork must be non-negative");
         return monitor == null
-                ? new ProgressScope(M3ProgressAdapters.asLegacy(SystemProgress.split(systemWork)), true)
+                ? new ProgressScope(ProgressAdapters.asLegacy(SystemProgress.split(systemWork)), true)
                 : new ProgressScope(monitor, false);
     }
 
-    public M3Progress monitor() { return monitor; }
+    public Progress monitor() { return monitor; }
     public boolean owned() { return owned; }
 
     @Override public void close() {

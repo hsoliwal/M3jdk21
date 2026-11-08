@@ -6,7 +6,7 @@ import com.sun.source.util.TreePath;
 import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.TreeScanner;
 import com.sun.source.util.Trees;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -59,12 +59,12 @@ public final class ReferenceFlow {
     public boolean authorizesReclamation() { return false; }
   }
 
-  public static Result analyze(Map<String, String> sources, M3ProgressMonitor monitor) throws IOException {
+  public static Result analyze(Map<String, String> sources, ProgressMonitor monitor) throws IOException {
     return analyze(sources, SourceLiveness.Limits.defaults(), monitor);
   }
   /** Budgets bound constraint vertices, origin bits, syntax nesting and words per matrix, respectively. */
   public static Result analyze(Map<String, String> sources, SourceLiveness.Limits limits,
-                                M3ProgressMonitor monitor) throws IOException {
+                                ProgressMonitor monitor) throws IOException {
     Objects.requireNonNull(limits, "limits"); check(monitor);
     List<MethodReferences> result = new ArrayList<>();
     var facts = CompilerFactsAudit.analyze(sources, monitor, (unit, trees, progress) -> {
@@ -85,16 +85,16 @@ public final class ReferenceFlow {
   }
 
   public static Projection project(Result references, SourceLiveness.Result flow,
-                                    M3ProgressMonitor monitor) {
+                                    ProgressMonitor monitor) {
     return project(references, flow, false, monitor);
   }
   /** Explicit JNI selection uses Liveness.nativeEndingBatch from the existing compiler library. */
   public static Projection projectNative(Result references, SourceLiveness.Result flow,
-                                          M3ProgressMonitor monitor) {
+                                          ProgressMonitor monitor) {
     return project(references, flow, true, monitor);
   }
   private static Projection project(Result references, SourceLiveness.Result flow, boolean nativeMasks,
-                                     M3ProgressMonitor monitor) {
+                                     ProgressMonitor monitor) {
     Objects.requireNonNull(references, "references"); Objects.requireNonNull(flow, "flow"); check(monitor);
     if (!references.facts().baselineCompiles() || !flow.facts().baselineCompiles()
         || !references.facts().sourceDigest().equals(flow.facts().sourceDigest())
@@ -141,7 +141,7 @@ public final class ReferenceFlow {
     if (!byMethod.isEmpty()) throw new IllegalArgumentException("missing CFG method");
     check(monitor); return new Projection(result, unresolved);
   }
-  private static BitSet union(BitSet locals, BitSet[] origins, M3ProgressMonitor monitor) {
+  private static BitSet union(BitSet locals, BitSet[] origins, ProgressMonitor monitor) {
     BitSet result = new BitSet();
     for (int n = locals.nextSetBit(0); n >= 0; n = locals.nextSetBit(n + 1)) {
       check(monitor); if (origins[n] != null) result.or(origins[n]);
@@ -149,7 +149,7 @@ public final class ReferenceFlow {
     return result;
   }
   private static String key(String a, String b, long p) { return a.length() + ":" + a + b.length() + ":" + b + ":" + p; }
-  private static void check(M3ProgressMonitor monitor) { if (monitor != null) monitor.checkCanceled(); }
+  private static void check(ProgressMonitor monitor) { if (monitor != null) monitor.checkCanceled(); }
   private static String identity(String parent, SourceLiveness.Limits limits) throws IOException {
     try {
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -178,7 +178,7 @@ public final class ReferenceFlow {
 
   private static final class Builder {
     final CompilationUnitTree unit; final Trees trees; final TreePath methodPath; final MethodTree method;
-    final SourceLiveness.Limits limits; final M3ProgressMonitor monitor;
+    final SourceLiveness.Limits limits; final ProgressMonitor monitor;
     final IdentityHashMap<Tree, TreePath> paths = new IdentityHashMap<>();
     final Map<Element, Integer> variables = new LinkedHashMap<>();
     final List<Binding> bindings = new ArrayList<>(); final List<Allocation> sites = new ArrayList<>();
@@ -186,7 +186,7 @@ public final class ReferenceFlow {
     final List<BitSet> seeds = new ArrayList<>(); final List<TreeSet<Integer>> constraints = new ArrayList<>();
     final List<Exposure> exposures = new ArrayList<>();
     int external; long edgeCount;
-    Builder(CompilationUnitTree unit, Trees trees, TreePath path, SourceLiveness.Limits limits, M3ProgressMonitor monitor) {
+    Builder(CompilationUnitTree unit, Trees trees, TreePath path, SourceLiveness.Limits limits, ProgressMonitor monitor) {
       this.unit = unit; this.trees = trees; methodPath = path; method = (MethodTree) path.getLeaf();
       this.limits = limits; this.monitor = monitor;
     }

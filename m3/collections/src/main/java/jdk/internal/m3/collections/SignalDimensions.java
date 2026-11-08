@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.IntFunction;
 import java.util.function.ToDoubleFunction;
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3SignalOrder;
-import jdk.m3.collections.M3SignalOrderNative;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.SignalOrder;
+import jdk.m3.collections.SignalOrderNative;
 
 /**
  * Stable lexicographic ordering over independent, dimension-major double signal lanes.
@@ -41,19 +41,19 @@ public final class SignalDimensions {
     private SignalDimensions() { }
 
     public static int[] order(double[][] columns, boolean[] descending) {
-        return order(columns, descending, M3SignalOrder.Backend.JAVA);
+        return order(columns, descending, SignalOrder.Backend.JAVA);
     }
 
     public static int[] order(double[][] columns, boolean[] descending,
-            M3SignalOrder.Backend backend) {
+            SignalOrder.Backend backend) {
         return filtered(columns, descending, null, 0, 0, backend);
     }
 
     /** Masks are aligned to source row IDs, not to sorted positions. */
     public static int[] filtered(double[][] columns, boolean[] descending,
-            byte[] state, int required, int excluded, M3SignalOrder.Backend backend) {
+            byte[] state, int required, int excluded, SignalOrder.Backend backend) {
         return filtered(columns, descending, state, required, excluded, backend,
-                M3IndexMaskCompactor.Backend.JAVA);
+                IndexMaskCompactor.Backend.JAVA);
     }
 
     /**
@@ -61,18 +61,18 @@ public final class SignalDimensions {
      * so requesting native signal sorting does not acquire a new mask JNI dependency.
      */
     public static int[] filtered(double[][] columns, boolean[] descending,
-            byte[] state, int required, int excluded, M3SignalOrder.Backend backend,
-            M3IndexMaskCompactor.Backend maskBackend) {
+            byte[] state, int required, int excluded, SignalOrder.Backend backend,
+            IndexMaskCompactor.Backend maskBackend) {
         int length = validate(columns, descending);
         Objects.requireNonNull(backend, "backend");
         Objects.requireNonNull(maskBackend, "maskBackend");
         validateState(state, length, required, excluded);
-        if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED && !M3SignalOrderNative.available()) {
+        if (backend == SignalOrder.Backend.NATIVE_REQUIRED && !SignalOrderNative.available()) {
             throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
         }
         int[] rows = state == null
                 ? identity(length)
-                : M3IndexMaskCompactor.selectPositions(
+                : IndexMaskCompactor.selectPositions(
                         state, required, excluded, maskBackend);
         return orderSelected(columns, descending, backend, rows);
     }
@@ -85,15 +85,15 @@ public final class SignalDimensions {
      */
     public static int[] filtered32(double[][] columns, boolean[] descending,
             int[] states, int requiredMask, int excludedMask,
-            M3SignalOrder.Backend backend) {
+            SignalOrder.Backend backend) {
         int length = validate(columns, descending);
         Objects.requireNonNull(backend, "backend");
         Objects.requireNonNull(states, "states");
         if (states.length != length) {
             throw new IllegalArgumentException("state array length mismatch");
         }
-        if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED
-                && !M3SignalOrderNative.available()) {
+        if (backend == SignalOrder.Backend.NATIVE_REQUIRED
+                && !SignalOrderNative.available()) {
             throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
         }
         int selected = 0;
@@ -119,9 +119,9 @@ public final class SignalDimensions {
     public static <T> int[] project(int rowCount, IntFunction<? extends T> valueAt,
             List<? extends ToDoubleFunction<? super T>> projections,
             boolean[] descending, byte[] state, int required, int excluded,
-            M3SignalOrder.Backend backend) {
+            SignalOrder.Backend backend) {
         return project(rowCount, valueAt, projections, descending, state, required, excluded,
-                backend, M3IndexMaskCompactor.Backend.JAVA);
+                backend, IndexMaskCompactor.Backend.JAVA);
     }
 
     /**
@@ -131,7 +131,7 @@ public final class SignalDimensions {
     public static <T> int[] project(int rowCount, IntFunction<? extends T> valueAt,
             List<? extends ToDoubleFunction<? super T>> projections,
             boolean[] descending, byte[] state, int required, int excluded,
-            M3SignalOrder.Backend backend, M3IndexMaskCompactor.Backend maskBackend) {
+            SignalOrder.Backend backend, IndexMaskCompactor.Backend maskBackend) {
         if (rowCount < 0) throw new IllegalArgumentException("negative rowCount");
         Objects.requireNonNull(valueAt, "valueAt");
         Objects.requireNonNull(projections, "projections");
@@ -142,12 +142,12 @@ public final class SignalDimensions {
             throw new IllegalArgumentException("projection/direction dimension mismatch");
         }
         validateState(state, rowCount, required, excluded);
-        if (backend == M3SignalOrder.Backend.NATIVE_REQUIRED && !M3SignalOrderNative.available()) {
+        if (backend == SignalOrder.Backend.NATIVE_REQUIRED && !SignalOrderNative.available()) {
             throw new UnsatisfiedLinkError("m3signalorder JNI is unavailable");
         }
         int[] physical = state == null
                 ? identity(rowCount)
-                : M3IndexMaskCompactor.selectPositions(
+                : IndexMaskCompactor.selectPositions(
                         state, required, excluded, maskBackend);
         int selected = physical.length;
         double[][] prepared = new double[projections.size()][selected];
@@ -223,20 +223,20 @@ public final class SignalDimensions {
     }
 
     private static int[] orderSelected(double[][] columns, boolean[] descending,
-            M3SignalOrder.Backend backend, int[] rows) {
+            SignalOrder.Backend backend, int[] rows) {
         if (rows.length < 2) return rows;
         double[] workingSignals = new double[rows.length];
         int[] next = new int[rows.length];
-        byte[] nativeAll = backend == M3SignalOrder.Backend.NATIVE_REQUIRED
+        byte[] nativeAll = backend == SignalOrder.Backend.NATIVE_REQUIRED
                 ? new byte[rows.length] : null;
         for (int dimension = columns.length - 1; dimension >= 0; dimension--) {
             for (int index = 0; index < rows.length; index++) {
                 workingSignals[index] = columns[dimension][rows[index]];
             }
-            M3SignalOrder pass = backend == M3SignalOrder.Backend.JAVA
-                    ? (descending[dimension] ? M3SignalOrder.descending(workingSignals)
-                            : M3SignalOrder.ascending(workingSignals))
-                    : M3SignalOrder.filtered(workingSignals, nativeAll, 0, 0,
+            SignalOrder pass = backend == SignalOrder.Backend.JAVA
+                    ? (descending[dimension] ? SignalOrder.descending(workingSignals)
+                            : SignalOrder.ascending(workingSignals))
+                    : SignalOrder.filtered(workingSignals, nativeAll, 0, 0,
                             !descending[dimension], backend);
             for (int index = 0; index < rows.length; index++) {
                 next[index] = rows[pass.rowAt(index)];

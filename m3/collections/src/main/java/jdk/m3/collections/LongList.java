@@ -20,7 +20,7 @@ import jdk.m3.collections.packed.PackedLongList;
  * Synexia {@code LongSequence} names {@code insert} and {@code removeValue} remain as defaulted
  * aliases so neither lineage's callers change. One semantic owner: {@link LongArrayList}.</p>
  */
-public interface LongList extends M3LongSequence {
+public interface LongList extends LongSequence {
     boolean add(long value);
 
     void add(int index, long value);

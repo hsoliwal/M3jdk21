@@ -12,7 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import jdk.m3.collections.IndexMaskWindow;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -42,16 +42,16 @@ public final class MaskWindowConvergence {
         int end = first + Math.min(max, rows.length - first);
         long truth = reference(rows, states, first, end, must, not, expected, 3, limit);
         long a = IndexMaskWindow.scanBounded(rows, states, first, max, must, not, java, 3, limit,
-                M3IndexMaskCompactor.Backend.JAVA);
+                IndexMaskCompactor.Backend.JAVA);
         long b = IndexMaskWindow.scanBounded(rows, states, first, max, must, not, nativeOut, 3, limit,
-                M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                IndexMaskCompactor.Backend.NATIVE_REQUIRED);
         check(a == truth && b == truth, "bounded cursor");
         check(Arrays.equals(expected, java), "Java window contents/guard");
         check(Arrays.equals(expected, nativeOut), "JNI window contents/guard");
         Arrays.fill(expected, 0x57575757); Arrays.fill(nativeOut, 0x57575757);
         truth = reference(rows, states, first, rows.length, must, not, expected, 3, limit);
         b = IndexMaskWindow.scan(rows, states, first, must, not, nativeOut, 3, limit,
-                M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                IndexMaskCompactor.Backend.NATIVE_REQUIRED);
         check(truth == b && Arrays.equals(expected, nativeOut), "legacy full scan parity");
     }
     private static void invalid(Method nativeMethod, Object[] args, int[] output) throws Exception {
@@ -86,7 +86,7 @@ public final class MaskWindowConvergence {
         while (position < rows.length) {
             int[] out = new int[1];
             long value = IndexMaskWindow.scanBounded(rows, states, position, 17, 1, 0, out, 0, 1,
-                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                    IndexMaskCompactor.Backend.NATIVE_REQUIRED);
             int next = IndexMaskWindow.nextIndex(value), count = IndexMaskWindow.written(value);
             check(next > position && next - position <= 17, "progress/budget");
             if (count > 0) collected[total++] = out[0];
@@ -96,18 +96,18 @@ public final class MaskWindowConvergence {
     }
     public static void main(String[] args) throws Exception {
         if (args.length != 0) {
-            check(!M3IndexMaskCompactor.nativeAvailable(), "missing library stays missing");
+            check(!IndexMaskCompactor.nativeAvailable(), "missing library stays missing");
             int[] untouched = {99};
             try {
                 IndexMaskWindow.scan(new int[]{7}, new byte[]{1}, 0, 1, 0,
-                        untouched, 0, 0, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                        untouched, 0, 0, IndexMaskCompactor.Backend.NATIVE_REQUIRED);
                 throw new AssertionError("missing library silently accepted");
             } catch (UnsatisfiedLinkError expected) { checks++; }
             check(untouched[0] == 99, "missing library no writes");
             System.out.println("MASK_WINDOW_MISSING_NATIVE_PASS checks=" + checks);
             return;
         }
-        check(M3IndexMaskCompactor.nativeAvailable(), "required native library");
+        check(IndexMaskCompactor.nativeAvailable(), "required native library");
         Random r = new Random(0x4d41534b57494eL);
         // Exhaust every pair of byte masks over every possible state value.
         byte[] everyState = new byte[256]; int[] everyRow = new int[256];

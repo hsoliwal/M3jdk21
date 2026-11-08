@@ -13,7 +13,7 @@ import jdk.internal.m3.collections.LaneSearch;
 /**
  * Detached, immutable primitive-long sorted-set snapshot with precomputed rank/select geometry.
  *
- * <p>Unlike {@link M3LongSortedViews#filter(LongSortedSet, LongPredicate)}, this class does not
+ * <p>Unlike {@link LongSortedViews#filter(LongSortedSet, LongPredicate)}, this class does not
  * track subsequent source mutations. It consumes the sorted owner once, invokes the supplied
  * predicate once per encountered value, and retains only one dense primitive array. Queries do
  * not re-evaluate predicates or traverse the original owner. Empty and bounded slices retain the
@@ -83,7 +83,7 @@ public final class LongSortedSnapshot implements LongSortedSet {
     /**
      * Precomputed unsigned-byte row-mask selection over an already-sorted primitive value lane.
      *
-     * <p>Reuses {@link M3IndexMaskCompactor#selectLong(long[], byte[], int)} instead of creating
+     * <p>Reuses {@link IndexMaskCompactor#selectLong(long[], byte[], int)} instead of creating
      * a second mask engine. Selection preserves order and duplicates are rejected by the sorted
      * source contract. This Java path intentionally does not cross JNI for predicate callbacks;
      * the existing optional JNI mask kernel remains available to its original owners.</p>
@@ -92,7 +92,7 @@ public final class LongSortedSnapshot implements LongSortedSet {
             long[] sortedUnique, byte[] alignedStates, int requiredMask) {
         Objects.requireNonNull(sortedUnique, "sortedUnique");
         validateSortedUnique(sortedUnique);
-        long[] detached = M3IndexMaskCompactor.selectLong(
+        long[] detached = IndexMaskCompactor.selectLong(
                 sortedUnique, alignedStates, requiredMask);
         return new LongSortedSnapshot(detached, 0, detached.length);
     }
@@ -106,7 +106,7 @@ public final class LongSortedSnapshot implements LongSortedSet {
             long[] sortedUnique, byte[] alignedStates, int requiredMask, int excludedMask) {
         Objects.requireNonNull(sortedUnique, "sortedUnique");
         validateSortedUnique(sortedUnique);
-        long[] detached = M3IndexMaskCompactor.selectLong(
+        long[] detached = IndexMaskCompactor.selectLong(
                 sortedUnique, alignedStates, requiredMask, excludedMask);
         return new LongSortedSnapshot(detached, 0, detached.length);
     }
@@ -127,14 +127,14 @@ public final class LongSortedSnapshot implements LongSortedSet {
             int length, int requiredMask, int excludedMask) {
         return fromAlignedMasksWindow(sortedUniqueRows, rowOffset, states,
                 stateOffset, length, requiredMask, excludedMask,
-                M3IndexMaskCompactor.Backend.JAVA);
+                IndexMaskCompactor.Backend.JAVA);
     }
 
     /** Explicit JNI execution remains opt-in and fails if its exact mask ABI is unavailable. */
     public static LongSortedSnapshot fromAlignedMasksWindow(
             long[] sortedUniqueRows, int rowOffset, byte[] states, int stateOffset,
             int length, int requiredMask, int excludedMask,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(sortedUniqueRows, "sortedUniqueRows");
         Objects.requireNonNull(states, "states");
         Objects.requireNonNull(backend, "backend");
@@ -147,7 +147,7 @@ public final class LongSortedSnapshot implements LongSortedSet {
                         "sorted window must have strictly increasing unique long values");
             }
         }
-        long[] selected = M3IndexMaskCompactor.selectLongWindow(
+        long[] selected = IndexMaskCompactor.selectLongWindow(
                 sortedUniqueRows, rowOffset, states, stateOffset, length,
                 requiredMask, excludedMask, backend);
         return new LongSortedSnapshot(selected, 0, selected.length);

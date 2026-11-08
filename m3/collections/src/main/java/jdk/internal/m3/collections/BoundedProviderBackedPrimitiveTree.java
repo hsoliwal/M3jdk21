@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import java.util.function.LongConsumer;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.PrimitiveKind;
 
 /**
@@ -48,9 +48,9 @@ public final class BoundedProviderBackedPrimitiveTree {
             int pageSize,
             PrimitiveKind... laneKinds) {
         this(
-                M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
                 maximumResident,
                 provider,
                 pageSize,

@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.util.Arrays;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ class ByteOccurrencesTest {
         byte[] haystack = new byte[20_000];
         try (CompiledSearch compiled = new KmpSearch(new byte[] {1})) {
             AtomicInteger polls = new AtomicInteger();
-            M3ProgressMonitor cancelDuringScan = new M3ProgressMonitor() {
+            ProgressMonitor cancelDuringScan = new ProgressMonitor() {
                 @Override public void beginTask(String name, long total) {}
                 @Override public void done() {}
                 @Override public void worked(long work) {}
@@ -63,8 +63,8 @@ class ByteOccurrencesTest {
                 @Override public void subTask(String name) {}
                 @Override public boolean isCanceled() { return polls.incrementAndGet() >= 3; }
                 @Override public void setCanceled(boolean value) {}
-                @Override public M3ProgressState state() {
-                    return new M3DefaultProgressMonitor().state();
+                @Override public ProgressState state() {
+                    return new DefaultProgressMonitor().state();
                 }
             };
             assertThrows(CancellationException.class,
@@ -168,7 +168,7 @@ class ByteOccurrencesTest {
                     () -> ByteOccurrences.countBuffer(kmp, null, 0, null));
         }
         AtomicInteger polls = new AtomicInteger();
-        M3ProgressMonitor cancel = new M3ProgressMonitor() {
+        ProgressMonitor cancel = new ProgressMonitor() {
             @Override public void beginTask(String name, long total) {}
             @Override public void done() {}
             @Override public void worked(long work) {}
@@ -177,8 +177,8 @@ class ByteOccurrencesTest {
             @Override public void subTask(String name) {}
             @Override public boolean isCanceled() { return polls.incrementAndGet() >= 3; }
             @Override public void setCanceled(boolean value) {}
-            @Override public M3ProgressState state() {
-                return new M3DefaultProgressMonitor().state();
+            @Override public ProgressState state() {
+                return new DefaultProgressMonitor().state();
             }
         };
         try (CompiledSearch kmp = new KmpSearch(new byte[] {0, 1})) {
@@ -245,7 +245,7 @@ class ByteOccurrencesTest {
         ByteBuffer direct = ByteBuffer.allocateDirect(haystack.length);
         direct.put(haystack).flip();
         AtomicInteger polls = new AtomicInteger();
-        M3ProgressMonitor monitor = new M3ProgressMonitor() {
+        ProgressMonitor monitor = new ProgressMonitor() {
             @Override public void beginTask(String name, long total) {}
             @Override public void done() {}
             @Override public void worked(long work) {}
@@ -254,8 +254,8 @@ class ByteOccurrencesTest {
             @Override public void subTask(String name) {}
             @Override public boolean isCanceled() { return polls.incrementAndGet() >= 13; }
             @Override public void setCanceled(boolean value) {}
-            @Override public M3ProgressState state() {
-                return new M3DefaultProgressMonitor().state();
+            @Override public ProgressState state() {
+                return new DefaultProgressMonitor().state();
             }
         };
         direct.mark();
@@ -282,7 +282,7 @@ class ByteOccurrencesTest {
         direct.put(source).flip();
         direct.mark();
         AtomicInteger polls = new AtomicInteger();
-        M3ProgressMonitor cancellation = new M3ProgressMonitor() {
+        ProgressMonitor cancellation = new ProgressMonitor() {
             @Override public void beginTask(String name, long total) {}
             @Override public void done() {}
             @Override public void worked(long work) {}
@@ -291,7 +291,7 @@ class ByteOccurrencesTest {
             @Override public void subTask(String name) {}
             @Override public boolean isCanceled() { return polls.incrementAndGet() >= 6; }
             @Override public void setCanceled(boolean value) {}
-            @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+            @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
         };
         try (CompiledSearch compiled = new BoyerMooreHorspoolSearch(needle)) {
             // Previous boundary-only implementation polls <6 times here.

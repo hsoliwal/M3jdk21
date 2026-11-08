@@ -13,9 +13,9 @@ import java.util.Spliterator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import jdk.m3.collections.LongCollection;
-import jdk.m3.collections.M3LongIndexProjection;
+import jdk.m3.collections.LongIndexProjection;
 import jdk.m3.collections.LongIterator;
 
 /**
@@ -27,7 +27,7 @@ import jdk.m3.collections.LongIterator;
  * <p>Snapshots deliberately do <em>not</em> have the live semantics of
  * {@link M3LongFilteredView}. An externally changing predicate does not update
  * a snapshot. For opt-in revision-controlled sources, use {@link VersionedView}.
- * Java predicates never cross JNI; the existing M3IndexMaskCompactor selects the
+ * Java predicates never cross JNI; the existing IndexMaskCompactor selects the
  * admitted physical indexes using Java or explicitly requested JNI.</p>
  *
  * <p>No BitSet(Integer.MAX_VALUE), full-capacity state array or per-element
@@ -36,32 +36,32 @@ import jdk.m3.collections.LongIterator;
  * slicing shares the immutable value and index backing.</p>
  */
 public final class LongBitmapFilteredSnapshot implements LongCollection {
-    private final M3LongIndexProjection selected;
+    private final LongIndexProjection selected;
     private final BitSet physicalMask;
 
-    private LongBitmapFilteredSnapshot(M3LongIndexProjection selected, BitSet physicalMask) {
+    private LongBitmapFilteredSnapshot(LongIndexProjection selected, BitSet physicalMask) {
         this.selected = selected;
         this.physicalMask = physicalMask;
     }
 
     /** Defensively snapshots the mutable input before testing its values. */
     public static LongBitmapFilteredSnapshot snapshot(long[] values, LongPredicate predicate) {
-        return snapshot(values, predicate, M3IndexMaskCompactor.Backend.JAVA);
+        return snapshot(values, predicate, IndexMaskCompactor.Backend.JAVA);
     }
 
     /** JNI is optional, explicit, and used only for primitive index compaction. */
     public static LongBitmapFilteredSnapshot snapshot(
-            long[] values, LongPredicate predicate, M3IndexMaskCompactor.Backend backend) {
+            long[] values, LongPredicate predicate, IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(values, "values");
         Objects.requireNonNull(predicate, "predicate");
         requireBackend(backend);
-        return fromProjection(M3LongIndexProjection.snapshot(values), predicate, backend);
+        return fromProjection(LongIndexProjection.snapshot(values), predicate, backend);
     }
 
     /** Admits an already immutable M3 index projection without copying its payload. */
     public static LongBitmapFilteredSnapshot fromProjection(
-            M3LongIndexProjection projection, LongPredicate predicate,
-            M3IndexMaskCompactor.Backend backend) {
+            LongIndexProjection projection, LongPredicate predicate,
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(projection, "projection");
         Objects.requireNonNull(predicate, "predicate");
         requireBackend(backend);
@@ -73,25 +73,25 @@ public final class LongBitmapFilteredSnapshot implements LongCollection {
                 mask.set(projection.physicalIndex(i));
             }
         }
-        M3LongIndexProjection admitted = projection.filtered(alignedStates, 1, backend);
+        LongIndexProjection admitted = projection.filtered(alignedStates, 1, backend);
         return new LongBitmapFilteredSnapshot(admitted, mask);
     }
 
-    private static void requireBackend(M3IndexMaskCompactor.Backend backend) {
+    private static void requireBackend(IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(backend, "backend");
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED
-                && !M3IndexMaskCompactor.nativeAvailable()) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED
+                && !IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
         }
     }
 
     /** An additional predicate is evaluated once only for currently admitted occurrences. */
     public LongBitmapFilteredSnapshot filtered(LongPredicate predicate) {
-        return filtered(predicate, M3IndexMaskCompactor.Backend.JAVA);
+        return filtered(predicate, IndexMaskCompactor.Backend.JAVA);
     }
 
     public LongBitmapFilteredSnapshot filtered(
-            LongPredicate predicate, M3IndexMaskCompactor.Backend backend) {
+            LongPredicate predicate, IndexMaskCompactor.Backend backend) {
         return fromProjection(selected, predicate, backend);
     }
 
@@ -111,7 +111,7 @@ public final class LongBitmapFilteredSnapshot implements LongCollection {
      * No predicate is evaluated and no value payload is copied.
      */
     public LongBitmapFilteredSnapshot slice(int offset, int length) {
-        M3LongIndexProjection range = selected.slice(offset, length);
+        LongIndexProjection range = selected.slice(offset, length);
         if (offset == 0 && length == size()) return this;
         BitSet rangeBits = new BitSet();
         for (int i = 0; i < range.size(); i++) rangeBits.set(range.physicalIndex(i));
@@ -135,9 +135,9 @@ public final class LongBitmapFilteredSnapshot implements LongCollection {
     @Override public int size() { return selected.size(); }
 
     @Override public boolean contains(long value) {
-        M3LongIndexProjection.Order order = selected.order();
-        if (order != M3LongIndexProjection.Order.ENCOUNTER) {
-            return containsSorted(value, order == M3LongIndexProjection.Order.DESCENDING);
+        LongIndexProjection.Order order = selected.order();
+        if (order != LongIndexProjection.Order.ENCOUNTER) {
+            return containsSorted(value, order == LongIndexProjection.Order.DESCENDING);
         }
         for (int i = 0; i < size(); i++) if (selected.get(i) == value) return true;
         return false;

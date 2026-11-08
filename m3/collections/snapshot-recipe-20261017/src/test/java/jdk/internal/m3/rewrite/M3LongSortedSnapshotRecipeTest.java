@@ -39,7 +39,7 @@ final class M3LongSortedSnapshotRecipeTest {
     private static final String MAIN =
             "m3/collections/src/main/java/jdk/m3/collections/LongSortedSnapshot.java";
     private static final String TEST =
-            "m3/collections/src/test/java/jdk/m3/collections/M3LongSortedSnapshotSelfTest.java";
+            "m3/collections/src/test/java/jdk/m3/collections/LongSortedSnapshotSelfTest.java";
 
     @Test
     void generatedJavaSourcesEqualSealedImagesAndReplayIsFixedPoint() {

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 final class M3EclipseJobsTest {
     @Test
     void borrowedProgressAndCompletedStatus() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         try (var pool = Executors.newSingleThreadExecutor()) {
             var future = M3EclipseJobs.submit(pool, owner, "index", 10, monitor -> {
                 monitor.beginTask("nested", 5);
@@ -39,7 +39,7 @@ final class M3EclipseJobsTest {
 
     @Test
     void childProgressSharesOneParentWithoutCompletingIt() throws Exception {
-        var parent = new M3DefaultProgressMonitor();
+        var parent = new DefaultProgressMonitor();
         parent.beginTask("reactor", 100);
         try (var pool = Executors.newFixedThreadPool(2)) {
             var first = M3EclipseJobs.submitChild(pool, parent, 12, "compile", 4,
@@ -55,7 +55,7 @@ final class M3EclipseJobsTest {
 
     @Test
     void exceptionBecomesErrorStatusWithOriginalCause() {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var failure = new IllegalStateException("parser failed");
         IStatus status = M3EclipseJobs.runNow(owner, "parse", 1, m -> { throw failure; });
         assertEquals(IStatus.ERROR, status.getSeverity());
@@ -65,7 +65,7 @@ final class M3EclipseJobsTest {
 
     @Test
     void cooperativeCancellationProducesCancelStatus() {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         owner.setCanceled(true);
         IStatus status = M3EclipseJobs.runNow(owner, "cancel", 1, m -> {
             throw new AssertionError("canceled task must not run");
@@ -76,7 +76,7 @@ final class M3EclipseJobsTest {
 
     @Test
     void futureCancellationPropagatesToMonitorAndInterruptsWorker() throws Exception {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var entered = new CountDownLatch(1);
         var finished = new CountDownLatch(1);
         try (var pool = Executors.newSingleThreadExecutor()) {
@@ -100,7 +100,7 @@ final class M3EclipseJobsTest {
 
     @Test
     void executorRejectionLeavesProgressUnstarted() {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         var pool = Executors.newSingleThreadExecutor();
         pool.shutdown();
         assertThrows(RejectedExecutionException.class,
@@ -111,7 +111,7 @@ final class M3EclipseJobsTest {
 
     @Test
     void invalidInputsFailBeforeScheduling() {
-        var owner = new M3DefaultProgressMonitor();
+        var owner = new DefaultProgressMonitor();
         try (var pool = Executors.newSingleThreadExecutor()) {
             assertThrows(IllegalArgumentException.class,
                     () -> M3EclipseJobs.submit(pool, owner, "invalid", -2, m -> Status.OK_STATUS));

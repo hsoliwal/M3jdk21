@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.LongUnaryOperator;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Max-priority frontier with exact scores computed only when necessary to certify the top.
@@ -184,21 +184,21 @@ public final class LongLazyPriorityFrontier {
      * amortization; pressure reduces only speculative slack, never the required elements.
      * The old arrays remain reachable until all four replacements have been prepared.
      */
-    static int growthCapacity(M3RuntimeHeap.Snapshot heap, int current, int required) {
+    static int growthCapacity(RuntimeHeap.Snapshot heap, int current, int required) {
         Objects.requireNonNull(heap, "heap");
         if (current < 1 || required <= current)
             throw new IllegalArgumentException("growth must exceed current capacity");
         long geometric = (long) current + (current >>> 1) + 1L;
         long preferred = Math.min((long) Integer.MAX_VALUE,
                 Math.max((long) required, geometric));
-        return Math.toIntExact(M3RuntimeHeap.chooseAmortizedCapacity(
+        return Math.toIntExact(RuntimeHeap.chooseAmortizedCapacity(
                 heap, required, preferred, SLOT_BYTES));
     }
 
     private void ensureCapacity(int required) {
         if (required <= ids.length) return;
         // Single JVM Xmx/committed/used sample per growth, never per hot offer/peek.
-        int capacity = growthCapacity(M3RuntimeHeap.current(), ids.length, required);
+        int capacity = growthCapacity(RuntimeHeap.current(), ids.length, required);
         // Allocate each replacement before publishing any lane.
         long[] newIds = Arrays.copyOf(ids, capacity);
         long[] newPriorities = Arrays.copyOf(priorities, capacity);

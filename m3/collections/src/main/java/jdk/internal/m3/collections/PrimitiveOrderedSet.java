@@ -16,8 +16,8 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import java.util.function.LongConsumer;
-import jdk.m3.collections.M3PrimitiveArrayList;
-import jdk.m3.collections.M3PrimitiveHashSet;
+import jdk.m3.collections.PrimitiveArrayList;
+import jdk.m3.collections.PrimitiveHashSet;
 import jdk.m3.collections.PrimitiveKind;
 
 /**
@@ -33,13 +33,13 @@ import jdk.m3.collections.PrimitiveKind;
  */
 public final class PrimitiveOrderedSet {
     private final PrimitiveKind kind;
-    private final M3PrimitiveHashSet membership;
-    private final M3PrimitiveArrayList order;
+    private final PrimitiveHashSet membership;
+    private final PrimitiveArrayList order;
 
     public PrimitiveOrderedSet(PrimitiveKind kind) {
         this.kind = Objects.requireNonNull(kind, "kind");
-        membership = new M3PrimitiveHashSet(kind);
-        order = new M3PrimitiveArrayList(kind);
+        membership = new PrimitiveHashSet(kind);
+        order = new PrimitiveArrayList(kind);
     }
 
     public PrimitiveKind kind() { return kind; }

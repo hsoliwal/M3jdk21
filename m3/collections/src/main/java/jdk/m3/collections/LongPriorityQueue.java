@@ -207,7 +207,7 @@ public final class LongPriorityQueue implements LongCollection {
             return;
         }
         heap = Arrays.copyOf(heap,
-                M3PriorityQueueGrowth.nextCapacity(heap.length, minimumCapacity));
+                PriorityQueueGrowth.nextCapacity(heap.length, minimumCapacity));
     }
 
     private void checkForComodification(int expectedModCount) {

@@ -10,7 +10,7 @@ package jdk.internal.m3.collections;
 
 import java.util.*;
 import jdk.m3.collections.LongLongHashMap;
-import jdk.m3.collections.M3TreeProjection;
+import jdk.m3.collections.TreeProjection;
 
 /**
  * Native window of a viewport Tree: which native rows survive a window move, which are
@@ -24,7 +24,7 @@ import jdk.m3.collections.M3TreeProjection;
  * after its previous physical sibling, which keeps the logical order of every native
  * parent.</p>
  *
- * <p>Inputs are the dense preorder of {@link M3TreeProjection.Residency}:
+ * <p>Inputs are the dense preorder of {@link TreeProjection.Residency}:
  * logical parent id, child index and physical parent entry ({@code -1} for a root row).
  * The plan allocates nothing per logical row; its arrays are sized by the window.</p>
  */
@@ -177,7 +177,7 @@ public final class TreeWindowPlan {
 	private int [] lastParentIds, lastChildIndices, lastPhysicalParents;
 
 	/** Convenience form of {@link #plan(int, int[], int[], int[])} over a residency buffer. */
-	public void plan (M3TreeProjection.Residency next) {
+	public void plan (TreeProjection.Residency next) {
 		int count = next.size ();
 		if (bufferedParentIds.length < count) {
 			int nextCapacity = capacity (bufferedParentIds.length, count);

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntBinaryOperator;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /** Standalone Java 21 contract oracle, without requiring JUnit or a native installation. */
 public final class MarkerTopKContract {
@@ -80,7 +80,7 @@ public final class MarkerTopKContract {
         int[] ids = {9, 7, 5, 3, 1, 8, 6, 4, 2, 0};
         boolean[] released = new boolean[10];
         AtomicInteger count = new AtomicInteger();
-        M3RuntimeHeap.Snapshot high = new M3RuntimeHeap.Snapshot(32L << 20, 31L << 20, 30L << 20);
+        RuntimeHeap.Snapshot high = new RuntimeHeap.Snapshot(32L << 20, 31L << 20, 30L << 20);
         int[] result = MarkerTopKIndex.smallest(ids, 0, ids.length, 3, Integer::compare,
                 id -> { released[id] = true; count.incrementAndGet(); }, high);
         require(Arrays.equals(result, new int[]{0, 1, 2}), "pressure changed ranking");
@@ -89,7 +89,7 @@ public final class MarkerTopKContract {
     }
 
     public static void healthyHeapSkipsOptionalCleanup() {
-        M3RuntimeHeap.Snapshot normal = new M3RuntimeHeap.Snapshot(1L << 30, 200L << 20, 20L << 20);
+        RuntimeHeap.Snapshot normal = new RuntimeHeap.Snapshot(1L << 30, 200L << 20, 20L << 20);
         AtomicInteger releases = new AtomicInteger();
         int[] result = MarkerTopKIndex.smallest(new int[]{9, 8, 7, 1}, 0, 4, 2,
                 Integer::compare, id -> releases.incrementAndGet(), normal);
@@ -101,7 +101,7 @@ public final class MarkerTopKContract {
         int[] ids = {7, 6, 5, 4, 3};
         rejectState(() -> MarkerTopKIndex.smallest(ids, 0, ids.length, 2,
                 Integer::compare, id -> { throw new IllegalStateException("secondary cache failure"); },
-                new M3RuntimeHeap.Snapshot(32L << 20, 31L << 20, 30L << 20)));
+                new RuntimeHeap.Snapshot(32L << 20, 31L << 20, 30L << 20)));
         require(Arrays.equals(ids, new int[]{7, 6, 5, 4, 3}), "cache failure mutated caller's IDs");
     }
 

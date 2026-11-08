@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.compiler;
 
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.util.*;
 import java.util.concurrent.CancellationException;
 
@@ -184,12 +184,12 @@ public final class ReferenceFlowQualification {
     examples(nativeMode);randomized();runtimeObservations();
     System.out.println("REFERENCE_FLOW_PASS checks="+checks+" attributionCalls="+compilations+" oracleMethods=24 runtimeTraces=256 native="+nativeMode+" seed=0x4d33524546");
   }
-  private static final class Cancel implements M3ProgressMonitor {
+  private static final class Cancel implements ProgressMonitor {
     private final int at;private int ticks;Cancel(int at){this.at=at;}
     @Override public void checkCanceled(){if(++ticks>=at)throw new CancellationException("test");}
     @Override public void beginTask(String s,long n){} @Override public void done(){} @Override public void worked(long n){}
     @Override public void setProgress(long a,long b){} @Override public void setTaskName(String s){} @Override public void subTask(String s){}
     @Override public boolean isCanceled(){return ticks>=at;} @Override public void setCanceled(boolean value){}
-    @Override public M3ProgressState state(){return new M3ProgressState("test","",0,-1,isCanceled(),false,0,0);}
+    @Override public ProgressState state(){return new ProgressState("test","",0,-1,isCanceled(),false,0,0);}
   }
 }

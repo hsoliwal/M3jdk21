@@ -35,15 +35,15 @@ public final class IntObjectHashMap<V> {
     private V zeroValue;
     private final float loadFactor;
 
-    public IntObjectHashMap() { this(16, M3DenseHash.DEFAULT_LOAD_FACTOR); }
-    public IntObjectHashMap(int expected) { this(expected, M3DenseHash.DEFAULT_LOAD_FACTOR); }
+    public IntObjectHashMap() { this(16, DenseHash.DEFAULT_LOAD_FACTOR); }
+    public IntObjectHashMap(int expected) { this(expected, DenseHash.DEFAULT_LOAD_FACTOR); }
     public IntObjectHashMap(int expected, float loadFactor) {
         this.loadFactor = loadFactor;
-        int cap = M3DenseHash.capacityFor(expected, loadFactor);
+        int cap = DenseHash.capacityFor(expected, loadFactor);
         keys = new int[cap];
         values = new Object[cap];
         mask = cap - 1;
-        threshold = M3DenseHash.threshold(cap, loadFactor);
+        threshold = DenseHash.threshold(cap, loadFactor);
     }
     public int size() { return size; }
     public long primitivePayloadBytes() { return (long) keys.length * Integer.BYTES; }
@@ -71,7 +71,7 @@ public final class IntObjectHashMap<V> {
             zeroValue = value;
             return old;
         }
-        int p = M3DenseHash.mix(key) & mask;
+        int p = DenseHash.mix(key) & mask;
         int cur;
         while ((cur = keys[p]) != 0) {
             if (cur == key) {
@@ -85,7 +85,7 @@ public final class IntObjectHashMap<V> {
             // No user hash callbacks for primitive keys, but arrays must be committed
             // together before inserting the new pair.
             rehash(growthCapacity());
-            p = M3DenseHash.mix(key) & mask;
+            p = DenseHash.mix(key) & mask;
             while (keys[p] != 0) p = (p + 1) & mask;
         }
         keys[p] = key;
@@ -103,7 +103,7 @@ public final class IntObjectHashMap<V> {
             zeroValue = null;
             return old;
         }
-        int p = M3DenseHash.mix(key) & mask;
+        int p = DenseHash.mix(key) & mask;
         int cur;
         while ((cur = keys[p]) != 0) {
             if (cur == key) {
@@ -136,7 +136,7 @@ public final class IntObjectHashMap<V> {
         }
     }
     private int find(int key) {
-        int p = M3DenseHash.mix(key) & mask;
+        int p = DenseHash.mix(key) & mask;
         int cur;
         while ((cur = keys[p]) != 0) {
             if (cur == key) return p;
@@ -150,7 +150,7 @@ public final class IntObjectHashMap<V> {
             pos = (pos + 1) & mask;
             int cur;
             while ((cur = keys[pos]) != 0) {
-                int slot = M3DenseHash.mix(cur) & mask;
+                int slot = DenseHash.mix(cur) & mask;
                 if (last <= pos ? last >= slot || slot > pos : last >= slot && slot > pos) break;
                 pos = (pos + 1) & mask;
             }
@@ -169,11 +169,11 @@ public final class IntObjectHashMap<V> {
         int[] nextKeys = new int[cap];
         Object[] nextValues = new Object[cap];
         int nextMask = cap - 1;
-        int nextThreshold = M3DenseHash.threshold(cap, loadFactor);
+        int nextThreshold = DenseHash.threshold(cap, loadFactor);
         for (int i = 0; i < keys.length; i++) {
             int key = keys[i];
             if (key != 0) {
-                int p = M3DenseHash.mix(key) & nextMask;
+                int p = DenseHash.mix(key) & nextMask;
                 while (nextKeys[p] != 0) p = (p + 1) & nextMask;
                 nextKeys[p] = key;
                 nextValues[p] = values[i];

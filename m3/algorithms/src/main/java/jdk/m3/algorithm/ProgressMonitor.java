@@ -4,19 +4,19 @@ package jdk.m3.algorithm;
 
 import java.util.concurrent.CancellationException;
 
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.ProgressState;
 
 /**
  * Generic M3 progress/cancellation contract for every long-running operation: the donor's int-unit surface
  * ({@code int UNKNOWN}, {@code beginTask(String,int)}, {@code worked(int)}, every method default, {@code none()})
- * as an adapter over the owner {@link jdk.m3.collections.M3ProgressMonitor}. The int methods widen into the
+ * as an adapter over the owner {@link jdk.m3.collections.ProgressMonitor}. The int methods widen into the
  * owner's long methods; the owner's abstract methods carry no-op defaults, so a monitor that overrides only the
  * int methods (the donor oracles) compiles and still receives every algorithm call. There is no long-to-int
  * default: a monitor meant for owner-side callers overrides the long methods.
  */
 //FLLDCIM: RELOCATE - donor blob 6d0b659af853 at commit 3385d79a2968 (repository, path, URL and digests: the SUPERSEDED row of m3/algorithms/recipe/families-20261106/RELOCATION_MAP.tsv); recipe m3/algorithms/recipe/families-20261106/relocate.py v1
-//FLLDCIM: UNIFY - adapter over jdk.m3.collections.M3ProgressMonitor (int work units widen to long); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
-public interface ProgressMonitor extends jdk.m3.collections.M3ProgressMonitor {
+//FLLDCIM: UNIFY - adapter over jdk.m3.collections.ProgressMonitor (int work units widen to long); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
+public interface ProgressMonitor extends jdk.m3.collections.ProgressMonitor {
     /** Unknown total work in the donor's int unit; the same value as the owner's {@code long UNKNOWN}. */
     int UNKNOWN = -1;
 
@@ -40,8 +40,8 @@ public interface ProgressMonitor extends jdk.m3.collections.M3ProgressMonitor {
     @Override default void done() {}
 
     @Override
-    default M3ProgressState state() {
-        return new M3ProgressState("", "", 0L, UNKNOWN, isCanceled(), false, 0L, 0L);
+    default ProgressState state() {
+        return new ProgressState("", "", 0L, UNKNOWN, isCanceled(), false, 0L, 0L);
     }
 
     @Override

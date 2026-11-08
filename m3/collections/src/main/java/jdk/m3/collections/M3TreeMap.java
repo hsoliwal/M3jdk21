@@ -44,7 +44,7 @@ import jdk.internal.m3.collections.ProgressScope;
  * fails for it: the iterator reads the revision before its first slot and throws at its first
  * call. Steps over bounded views, whose bound probes call the comparator, throw at once.
  */
-public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements NavigableMap<K, V> {
+public final class M3TreeMap<K, V> extends OrderedSlotMap<K, V> implements NavigableMap<K, V> {
     private final Tree<K, V> tree;
     private final boolean hasLow;
     private final K low;
@@ -154,19 +154,19 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         return expected == revision() && hint >= 0 && hint < tree.used
                 && tree.height[hint] != 0 && tree.keys[hint] == key ? hint : findSlot(key);
     }
-    @Override K keyAt(int slot) { return M3SlotArrays.get(tree.keys, slot); }
+    @Override K keyAt(int slot) { return SlotArrays.get(tree.keys, slot); }
     @Override V valueAt(int slot) {
-        return valueAt(slot, M3LazyOperation.READ, null, null);
+        return valueAt(slot, LazyOperation.READ, null, null);
     }
-    private V valueAt(int slot, M3Progress monitor) {
-        return valueAt(slot, M3LazyOperation.READ, null, monitor);
+    private V valueAt(int slot, Progress monitor) {
+        return valueAt(slot, LazyOperation.READ, null, monitor);
     }
     private V valueAt(
             int slot,
-            M3LazyOperation operation,
+            LazyOperation operation,
             LazyEventPolicy eventPolicy,
-            M3Progress monitor) {
-        return tree.lazy == null ? (tree.keyOnly ? null : M3SlotArrays.get(tree.values, slot))
+            Progress monitor) {
+        return tree.lazy == null ? (tree.keyOnly ? null : SlotArrays.get(tree.values, slot))
                 : tree.lazy.read(slot, keyAt(slot), tree.values, operation, eventPolicy, monitor);
     }
     @Override V writeAt(int slot, V value) {
@@ -277,56 +277,56 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     /** Synchronous pre-touch hook for a visible, hovered or selected model item. */
     public V touch(Object key) { return touch(key, null, null); }
     /** Value access with caller progress/cancellation; an absent key remains absent. */
-    public V touch(Object key, M3Progress monitor) { return touch(key, null, monitor); }
+    public V touch(Object key, Progress monitor) { return touch(key, null, monitor); }
     /** Value access with per-call event mask/granularity override. */
-    public V touch(Object key, LazyEventPolicy eventPolicy, M3Progress monitor) {
+    public V touch(Object key, LazyEventPolicy eventPolicy, Progress monitor) {
         try (ProgressScope scope = ProgressScope.resolve(monitor, 1L)) {
-            M3Progress progress = scope.monitor();
-            M3LazyValueState.checkCancelled(progress);
+            Progress progress = scope.monitor();
+            LazyValueState.checkCancelled(progress);
             int s = findSlot(key);
-            return s < 0 ? null : valueAt(s, M3LazyOperation.TOUCH, eventPolicy, progress);
+            return s < 0 ? null : valueAt(s, LazyOperation.TOUCH, eventPolicy, progress);
         }
     }
     /** Resolve only the current bounded/descending view using system progress when absent. */
     public void preload() { preload(null, null); }
     /** Resolve the current view with caller progress/cancellation. */
-    public void preload(M3Progress monitor) { preload(null, monitor); }
+    public void preload(Progress monitor) { preload(null, monitor); }
     /**
      * Resolve the current view in encounter order. Completed slots survive failure or
      * cancellation; no success is credited for the failing slot. Monitor interference
      * with map structure is detected before continuing traversal. The event policy may
      * enable range, element, progress or state-transition observations for this call.
      */
-    public void preload(LazyEventPolicy eventPolicy, M3Progress monitor) {
+    public void preload(LazyEventPolicy eventPolicy, Progress monitor) {
         int expected = revision();
         int work = size();
         try (ProgressScope scope = ProgressScope.resolve(monitor, Math.max(1L, work))) {
-            M3Progress progress = scope.monitor();
+            Progress progress = scope.monitor();
             LazyEventPolicy policy =
                     tree.lazy == null ? LazyEventPolicy.NONE : tree.lazy.eventPolicy(eventPolicy);
             Throwable failure = null;
             if (tree.lazy != null) {
                 tree.lazy.emit(
                         policy, LazyEventBits.RANGE_BEGIN, LazyEventGranularity.RANGE,
-                        M3LazyEventSink.NO_SLOT, (short) 0, (short) 0,
-                        M3LazyOperation.PRELOAD, progress, null);
+                        LazyEventSink.NO_SLOT, (short) 0, (short) 0,
+                        LazyOperation.PRELOAD, progress, null);
             }
             try {
                 progress.beginTask("Load packed tree values", work); check(expected);
                 for (int s = firstSlot(); s >= 0; s = nextSlot(s)) {
-                    M3LazyValueState.checkCancelled(progress);
-                    valueAt(s, M3LazyOperation.PRELOAD, eventPolicy, progress);
+                    LazyValueState.checkCancelled(progress);
+                    valueAt(s, LazyOperation.PRELOAD, eventPolicy, progress);
                     check(expected);
                     progress.worked(1);
                     if (tree.lazy != null) {
                         short state = tree.lazy.flags(s);
                         tree.lazy.emit(
                                 policy, LazyEventBits.PROGRESS, LazyEventGranularity.ELEMENT,
-                                s, state, state, M3LazyOperation.PRELOAD, progress, null);
+                                s, state, state, LazyOperation.PRELOAD, progress, null);
                     }
                     check(expected);
                 }
-                M3LazyValueState.checkCancelled(progress);
+                LazyValueState.checkCancelled(progress);
                 progress.done();
             } catch (RuntimeException | Error problem) {
                 failure = problem;
@@ -335,8 +335,8 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                 if (tree.lazy != null) {
                     tree.lazy.emit(
                             policy, LazyEventBits.RANGE_END, LazyEventGranularity.RANGE,
-                            M3LazyEventSink.NO_SLOT, (short) 0, (short) 0,
-                            M3LazyOperation.PRELOAD, progress, failure);
+                            LazyEventSink.NO_SLOT, (short) 0, (short) 0,
+                            LazyOperation.PRELOAD, progress, failure);
                 }
             }
         }
@@ -421,7 +421,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
 
     /**
      * One private cursor per bulk transfer, not an Entry object for each mapping.
-     * Its separate lookup is intentional: M3SlotMap.LiveEntry.getValue() locates
+     * Its separate lookup is intentional: SlotMap.LiveEntry.getValue() locates
      * the stored key through M3TreeMap.findSlot, invoking the user comparator.
      * A direct valueAt(physicalSlot) shortcut would silently skip callbacks.
      */
@@ -449,19 +449,19 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     }
 
     private static final class Tree<K, V> {
-        private Object[] keys = M3SlotArrays.EMPTY_OBJECTS;
-        private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
-        private int[] left = M3SlotArrays.EMPTY_INTS, right = M3SlotArrays.EMPTY_INTS, parent = M3SlotArrays.EMPTY_INTS;
+        private Object[] keys = SlotArrays.EMPTY_OBJECTS;
+        private Object[] values = SlotArrays.EMPTY_OBJECTS;
+        private int[] left = SlotArrays.EMPTY_INTS, right = SlotArrays.EMPTY_INTS, parent = SlotArrays.EMPTY_INTS;
         // N(45)=2,971,215,072 exceeds the slot limit; even a transient height fits a byte.
-        private byte[] height = M3SlotArrays.EMPTY_BYTES;
+        private byte[] height = SlotArrays.EMPTY_BYTES;
         private int root = -1, free = -1, used, size, modifications;
         private final Comparator<? super K> comparator;
         private final boolean keyOnly;
-        private final M3LazyValueState<K, V> lazy;
+        private final LazyValueState<K, V> lazy;
         Tree(Comparator<? super K> comparator, boolean keyOnly,
                 LazyValueProvider<? super K, ? extends V> provider) {
             this.comparator = comparator; this.keyOnly = keyOnly;
-            lazy = provider == null ? null : new M3LazyValueState<>(provider);
+            lazy = provider == null ? null : new LazyValueState<>(provider);
         }
         void writable() { if (lazy != null) { lazy.writable(); } }
         @SuppressWarnings("unchecked") int compare(K a, K b) {
@@ -475,7 +475,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         int find(K key) {
             int s = root, expected = modifications;
             while (s >= 0) {
-                int c = compare(key, M3SlotArrays.get(keys, s)); walked(expected);
+                int c = compare(key, SlotArrays.get(keys, s)); walked(expected);
                 if (c == 0) { return s; } s = c < 0 ? left[s] : right[s];
             }
             return -1;
@@ -494,7 +494,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
         int near(K key, int relation) {
             int s = root, candidate = -1, expected = modifications;
             while (s >= 0) {
-                int c = compare(key, M3SlotArrays.get(keys, s)); walked(expected);
+                int c = compare(key, SlotArrays.get(keys, s)); walked(expected);
                 if (c == 0) { return Math.abs(relation) == 1 ? s : step(s, relation < 0); }
                 if (c < 0) { if (relation > 0) { candidate = s; } s = left[s]; }
                 else { if (relation < 0) { candidate = s; } s = right[s]; }
@@ -535,7 +535,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             }
         }
         void grow() {
-            int n = M3SlotArrays.grow(keys.length);
+            int n = SlotArrays.grow(keys.length);
             Object[] k = Arrays.copyOf(keys, n), v = keyOnly ? values : Arrays.copyOf(values, n);
             int[] l = Arrays.copyOf(left, n), r = Arrays.copyOf(right, n), p = Arrays.copyOf(parent, n);
             byte[] h = Arrays.copyOf(height, n);
@@ -554,7 +554,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                 throw new OutOfMemoryError("collection capacity exhausted");
             }
             int capacity = 0;
-            while (capacity < count) { capacity = M3SlotArrays.grow(capacity); }
+            while (capacity < count) { capacity = SlotArrays.grow(capacity); }
             // Keep the old empty storage intact until every source entry is read.
             Tree<K, V> built = new Tree<>(comparator, false, null);
             built.keys = new Object[capacity]; built.values = new Object[capacity];
@@ -591,7 +591,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                 throw new OutOfMemoryError("collection capacity exhausted");
             }
             int capacity = 0;
-            while (capacity < count) { capacity = M3SlotArrays.grow(capacity); }
+            while (capacity < count) { capacity = SlotArrays.grow(capacity); }
             Tree<K, V> built = new Tree<>(comparator, false, null);
             built.keys = new Object[capacity]; built.values = new Object[capacity];
             built.left = new int[capacity]; built.right = new int[capacity];
@@ -670,7 +670,7 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             if (n != used) { throw new AssertionError("unowned slots"); }
             int previous = -1;
             for (int s = extreme(root, false); s >= 0; s = step(s, false)) {
-                if (previous >= 0 && compare(M3SlotArrays.get(keys, previous), M3SlotArrays.get(keys, s)) >= 0) { throw new AssertionError("ordering"); }
+                if (previous >= 0 && compare(SlotArrays.get(keys, previous), SlotArrays.get(keys, s)) >= 0) { throw new AssertionError("ordering"); }
                 previous = s;
             }
         }

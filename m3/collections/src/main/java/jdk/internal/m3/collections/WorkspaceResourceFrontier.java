@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Minimal ancestor resource scope set over caller-owned portable workspace paths.
@@ -43,11 +43,11 @@ public final class WorkspaceResourceFrontier {
     private WorkspaceResourceFrontier() { }
 
     public static int minimalScopes(String[] paths, int[] output) {
-        return minimalScopes(paths, output, M3RuntimeHeap.current());
+        return minimalScopes(paths, output, RuntimeHeap.current());
     }
 
     /** Deterministic pressure sample seam for tests; no Java entry objects are admitted. */
-    static int minimalScopes(String[] paths, int[] output, M3RuntimeHeap.Snapshot heap) {
+    static int minimalScopes(String[] paths, int[] output, RuntimeHeap.Snapshot heap) {
         Objects.requireNonNull(paths, "paths");
         Objects.requireNonNull(output, "output");
         Objects.requireNonNull(heap, "heap");
@@ -57,7 +57,7 @@ public final class WorkspaceResourceFrontier {
         if (n == 0) return 0;
         for (int i = 0; i < n; i++) output[i] = i;
         long peak = 4L * n + 24L;
-        if (heap.pressure(peak) != M3RuntimeHeap.Pressure.NORMAL)
+        if (heap.pressure(peak) != RuntimeHeap.Pressure.NORMAL)
             heapSort(output, n, paths);
         else mergeSort(output, n, paths);
         String last = null;

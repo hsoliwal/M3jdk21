@@ -1,14 +1,14 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3LongIndexProjection;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.LongIndexProjection;
 import java.util.Arrays;
 
 /** No per-row wrappers: immutable payload + ordered physical IDs + logical offsets + flag bytes. */
 public final class IndexedMaskPipelineExample {
     public static void main(String[] args) {
         var backend = args.length > 0 && args[0].equals("native")
-                ? M3IndexMaskCompactor.Backend.NATIVE_REQUIRED : M3IndexMaskCompactor.Backend.JAVA;
-        var ranked = M3LongIndexProjection.snapshot(new long[]{40,10,10,30,20}).sortedAscending();
+                ? IndexMaskCompactor.Backend.NATIVE_REQUIRED : IndexMaskCompactor.Backend.JAVA;
+        var ranked = LongIndexProjection.snapshot(new long[]{40,10,10,30,20}).sortedAscending();
         var page = ranked.slice(1,3); // values [10,20,30]; physical IDs [2,4,3]
         byte[] logicalState = {(byte)0x81, 1, (byte)0x80};
         var selected = page.filtered(logicalState, 0x80, backend).sortedAscending();

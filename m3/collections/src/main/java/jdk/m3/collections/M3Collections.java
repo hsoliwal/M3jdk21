@@ -46,38 +46,38 @@ import java.util.concurrent.PriorityBlockingQueue;
 public final class M3Collections {
     private M3Collections() {}
 
-    public static M3LongLane28 longLane() {
-        return new M3LongLane28();
+    public static LongLane28 longLane() {
+        return new LongLane28();
     }
 
-    public static M3IntLane28 intLane() {
-        return new M3IntLane28();
+    public static IntLane28 intLane() {
+        return new IntLane28();
     }
 
-    public static M3BitLane28 bitLane() {
-        return new M3BitLane28();
+    public static BitLane28 bitLane() {
+        return new BitLane28();
     }
 
     public static SlotAllocator28 stableSlots() {
         return new SlotAllocator28();
     }
 
-    public static M3LongLaneStore28 longRows(int laneCount) {
-        return new M3LongLaneStore28(laneCount);
+    public static LongLaneStore28 longRows(int laneCount) {
+        return new LongLaneStore28(laneCount);
     }
 
-    public static M3LongArena28 longArena() {
-        return new M3LongArena28();
+    public static LongArena28 longArena() {
+        return new LongArena28();
     }
 
-    public static M3LongLinkedList28 longLinkedList() {
-        return new M3LongLinkedList28();
+    public static LongLinkedList28 longLinkedList() {
+        return new LongLinkedList28();
     }
     /** Concurrent primitive values or metadata, with explicit per-slot atomic operations. */
-    public static M3ConcurrentLongLane28 concurrentLongLane() { return new M3ConcurrentLongLane28(); }
+    public static ConcurrentLongLane28 concurrentLongLane() { return new ConcurrentLongLane28(); }
 
     /** Concurrent int metadata; allocating pages is separate from prepared-page operations. */
-    public static M3ConcurrentIntLane28 concurrentIntLane() { return new M3ConcurrentIntLane28(); }
+    public static ConcurrentIntLane28 concurrentIntLane() { return new ConcurrentIntLane28(); }
 
     /** Contiguous positional sequence. */
     public static <E> ArrayList<E> arrayList() { return new ArrayList<>(); }
@@ -126,19 +126,19 @@ public final class M3Collections {
     /** Copy-on-write array set. */
     public static <E> CopyOnWriteArraySet<E> copyOnWriteSet() { return new CopyOnWriteArraySet<>(); }
     /** Hash ConcurrentMap alternative using a shared lock. */
-    public static <K, V> M3LockedMap<K, V> lockedMap() { return new M3LockedMap<>(); }
+    public static <K, V> LockedMap<K, V> lockedMap() { return new LockedMap<>(); }
     /** Non-null, synchronized Map alternative to Hashtable; no Dictionary/serialization emulation. */
-    public static <K, V> M3LockedMap<K, V> lockedHashtableMap() { return new M3LockedMap<>(); }
+    public static <K, V> LockedMap<K, V> lockedHashtableMap() { return new LockedMap<>(); }
     /** Concurrent sorted map using the packed AVL tree and one shared lock. */
-    public static <K, V> M3LockedTreeMap<K, V> lockedTreeMap() { return new M3LockedTreeMap<>(); }
+    public static <K, V> LockedTreeMap<K, V> lockedTreeMap() { return new LockedTreeMap<>(); }
     /** Comparator-ordered concurrent map. */
-    public static <K, V> M3LockedTreeMap<K, V> lockedTreeMap(Comparator<? super K> comparator) { return new M3LockedTreeMap<>(comparator); }
+    public static <K, V> LockedTreeMap<K, V> lockedTreeMap(Comparator<? super K> comparator) { return new LockedTreeMap<>(comparator); }
     /** Concurrent hash set over packed map storage. */
-    public static <E> Set<E> lockedHashSet() { return Collections.newSetFromMap(new M3LockedMap<>()); }
+    public static <E> Set<E> lockedHashSet() { return Collections.newSetFromMap(new LockedMap<>()); }
     /** Concurrent sorted set with shared-lock range views. */
-    public static <E> M3LockedTreeSet<E> lockedTreeSet() { return new M3LockedTreeSet<>(); }
+    public static <E> LockedTreeSet<E> lockedTreeSet() { return new LockedTreeSet<>(); }
     /** Comparator-ordered concurrent set. */
-    public static <E> M3LockedTreeSet<E> lockedTreeSet(Comparator<? super E> comparator) { return new M3LockedTreeSet<>(comparator); }
+    public static <E> LockedTreeSet<E> lockedTreeSet(Comparator<? super E> comparator) { return new LockedTreeSet<>(comparator); }
     /** Concurrent FIFO alternative; operations acquire a lock. */
     public static <E> M3BlockingDeque<E> lockedQueue() { return new M3BlockingDeque<>(); }
     /** Concurrent deque alternative; operations acquire a lock. */

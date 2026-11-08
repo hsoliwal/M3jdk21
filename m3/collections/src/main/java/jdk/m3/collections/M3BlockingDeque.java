@@ -41,10 +41,10 @@ public final class M3BlockingDeque<E> extends AbstractQueue<E> implements Blocki
         lock = new ReentrantLock(fair); notEmpty = lock.newCondition(); notFull = lock.newCondition();
     }
     private int at(int offset) { int right = elements.length - head; return offset < right ? head + offset : offset - right; }
-    private E value(int offset) { return M3SlotArrays.get(elements, at(offset)); }
+    private E value(int offset) { return SlotArrays.get(elements, at(offset)); }
     private void grow() {
         if (size < elements.length) { return; }
-        int n = Math.min(capacity, M3SlotArrays.grow(elements.length)); Object[] e = new Object[n]; long[] ids = new long[n];
+        int n = Math.min(capacity, SlotArrays.grow(elements.length)); Object[] e = new Object[n]; long[] ids = new long[n];
         for (int i = 0; i < size; i++) { int s = at(i); e[i] = elements[s]; ids[i] = identities[s]; }
         elements = e; identities = ids; head = 0;
     }
@@ -161,7 +161,7 @@ public final class M3BlockingDeque<E> extends AbstractQueue<E> implements Blocki
             return n;
         } finally { lock.unlock(); }
     }
-    @Override public Spliterator<E> spliterator() { return M3SlotSpliterators.concurrent(iterator(), true, false); }
+    @Override public Spliterator<E> spliterator() { return SlotSpliterators.concurrent(iterator(), true, false); }
     @Override public Iterator<E> iterator() { return snapshot(false); }
     @Override public Iterator<E> descendingIterator() { return snapshot(true); }
     private Iterator<E> snapshot(boolean reverse) {
@@ -173,7 +173,7 @@ public final class M3BlockingDeque<E> extends AbstractQueue<E> implements Blocki
         return new Iterator<>() {
             private int cursor, last = -1;
             @Override public boolean hasNext() { return cursor < payload.length; }
-            @Override public E next() { if (!hasNext()) { throw new NoSuchElementException(); } last = cursor++; return M3SlotArrays.get(payload, last); }
+            @Override public E next() { if (!hasNext()) { throw new NoSuchElementException(); } last = cursor++; return SlotArrays.get(payload, last); }
             @Override public void remove() {
                 if (last < 0) { throw new IllegalStateException(); } lock.lock();
                 try { for (int i = 0; i < size; i++) { if (identities[at(i)] == ids[last]) { erase(i); break; } } }

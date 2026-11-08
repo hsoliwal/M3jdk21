@@ -15,9 +15,9 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3PrimitiveArrayList;
+import jdk.m3.collections.PrimitiveArrayList;
 import jdk.m3.collections.PrimitiveKind;
-import jdk.m3.collections.M3PrimitivePrimitiveHashMap;
+import jdk.m3.collections.PrimitivePrimitiveHashMap;
 
 /**
  * Insertion-ordered primitive map without linked entry objects.
@@ -36,14 +36,14 @@ public final class PrimitiveOrderedMap {
     }
 
     private final PrimitiveKind keyKind;
-    private final M3PrimitivePrimitiveHashMap values;
-    private final M3PrimitiveArrayList order;
+    private final PrimitivePrimitiveHashMap values;
+    private final PrimitiveArrayList order;
 
     public PrimitiveOrderedMap(PrimitiveKind keyKind, PrimitiveKind valueKind) {
         this.keyKind = Objects.requireNonNull(keyKind, "keyKind");
         Objects.requireNonNull(valueKind, "valueKind");
-        values = new M3PrimitivePrimitiveHashMap(keyKind, valueKind);
-        order = new M3PrimitiveArrayList(keyKind);
+        values = new PrimitivePrimitiveHashMap(keyKind, valueKind);
+        order = new PrimitiveArrayList(keyKind);
     }
 
     public int size() { return order.size(); }

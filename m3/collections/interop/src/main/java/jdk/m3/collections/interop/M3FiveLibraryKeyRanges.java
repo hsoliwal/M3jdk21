@@ -5,7 +5,7 @@
  */
 package jdk.m3.collections.interop;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -124,13 +124,13 @@ public final class M3FiveLibraryKeyRanges<K, V> {
      * directory. Java or explicit existing JNI selects occurrence indexes only.
      */
     public M3FiveLibraryKeyRanges<K, V> filteredByState(
-            int required, int excluded, M3IndexMaskCompactor.Backend backend) {
+            int required, int excluded, IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(backend, "backend");
         return new M3FiveLibraryKeyRanges<>(
                 ordered.filteredByState(required, excluded, backend), comparator);
     }
 
     public M3FiveLibraryKeyRanges<K, V> filteredByState(int required, int excluded) {
-        return filteredByState(required, excluded, M3IndexMaskCompactor.Backend.JAVA);
+        return filteredByState(required, excluded, IndexMaskCompactor.Backend.JAVA);
     }
 }

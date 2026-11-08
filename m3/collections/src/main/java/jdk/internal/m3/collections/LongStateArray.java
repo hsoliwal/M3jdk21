@@ -5,11 +5,11 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.IndexPathRank;
 import jdk.m3.collections.LongArrayList;
-import jdk.m3.collections.M3LongIndexProjection;
+import jdk.m3.collections.LongIndexProjection;
 
 /**
  * Mutable long-value array plus an aligned full-width int state-mask lane.
@@ -21,7 +21,7 @@ import jdk.m3.collections.M3LongIndexProjection;
  * or GC roots. Positions are not persistent generation-tagged handles.
  *
  * <p>Detached snapshots reuse {@link IndexPathRank} for occurrence rank/select
- * and {@link M3LongIndexProjection} for sorted index permutations. Explicit
+ * and {@link LongIndexProjection} for sorted index permutations. Explicit
  * JNI selection reuses {@link IndexPathMasks}'s established primitive ABI
  * with the Java rank index as the semantic oracle. No element Entry objects,
  * user callbacks or object references cross JNI. This owner is single-threaded.
@@ -256,17 +256,17 @@ public final class LongStateArray {
          * detached long[] capture and temporary byte[] bitmap are counted
          * as additional allocations, not asserted to be universally zero-copy.
          */
-        public M3LongIndexProjection indexed() {
+        public LongIndexProjection indexed() {
             byte[] accepted = new byte[owner.size()];
             for (int i = 0; i < rank.size(); i++) {
                 accepted[rank.selectedSourceOrdinal(i)] = 1;
             }
-            return M3LongIndexProjection.snapshot(owner.values)
-                    .filtered(accepted, 1, M3IndexMaskCompactor.Backend.JAVA);
+            return LongIndexProjection.snapshot(owner.values)
+                    .filtered(accepted, 1, IndexMaskCompactor.Backend.JAVA);
         }
 
-        public M3LongIndexProjection sortedAscending() { return indexed().sortedAscending(); }
-        public M3LongIndexProjection sortedDescending() { return indexed().sortedDescending(); }
+        public LongIndexProjection sortedAscending() { return indexed().sortedAscending(); }
+        public LongIndexProjection sortedDescending() { return indexed().sortedDescending(); }
     }
 
     /** Half-open source-ordinal rank/select window, sharing immutable bitmap. */

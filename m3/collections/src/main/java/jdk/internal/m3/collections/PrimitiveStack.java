@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import jdk.m3.collections.M3PrimitiveArrayList;
+import jdk.m3.collections.PrimitiveArrayList;
 import jdk.m3.collections.PrimitiveKind;
 
 /**
@@ -27,10 +27,10 @@ import jdk.m3.collections.PrimitiveKind;
  * RELOCATE_M3_OWNER v3 (identifiers only, global M3 owner map; bytecode equal to the source modulo names).
  */
 public final class PrimitiveStack {
-    private final M3PrimitiveArrayList values;
+    private final PrimitiveArrayList values;
 
     public PrimitiveStack(PrimitiveKind kind) {
-        values = new M3PrimitiveArrayList(Objects.requireNonNull(kind, "kind"));
+        values = new PrimitiveArrayList(Objects.requireNonNull(kind, "kind"));
     }
 
     public PrimitiveKind kind() { return values.kind(); }

@@ -33,9 +33,9 @@ public final class M3PrimitiveIndexViewFilterContract {
     }
 
     private static void verifyFixture(PrimitiveKind kind, int size, Random random) {
-        M3PrimitiveSoaStore store = new M3PrimitiveSoaStore(Math.max(1, size),
-                M3PrimitiveSoaStore.STATE_BYTES | M3PrimitiveSoaStore.ROW_IDS
-                        | M3PrimitiveSoaStore.VERSION_LONGS,
+        PrimitiveSoaStore store = new PrimitiveSoaStore(Math.max(1, size),
+                PrimitiveSoaStore.STATE_BYTES | PrimitiveSoaStore.ROW_IDS
+                        | PrimitiveSoaStore.VERSION_LONGS,
                 kind, PrimitiveKind.LONG);
         long[] values = new long[size];
         byte[] states = new byte[size];
@@ -48,7 +48,7 @@ public final class M3PrimitiveIndexViewFilterContract {
             store.appendRow(new long[] {input, 1000L + i}, states[i], i * 11L);
         }
         long version = store.version();
-        M3PrimitiveIndexView identity = M3PrimitiveIndexView.identity(store);
+        PrimitiveIndexView identity = PrimitiveIndexView.identity(store);
         List<Integer> rows = new ArrayList<>();
         for (int i = 0; i < size; i++) rows.add(i);
         verifyProjection(identity, rows, store, values, states);
@@ -77,13 +77,13 @@ public final class M3PrimitiveIndexViewFilterContract {
         }
     }
 
-    private static void verifyProjection(M3PrimitiveIndexView view, List<Integer> rows,
-            M3PrimitiveSoaStore store, long[] values, byte[] states) {
+    private static void verifyProjection(PrimitiveIndexView view, List<Integer> rows,
+            PrimitiveSoaStore store, long[] values, byte[] states) {
         equal(rows, indexes(view), "projection order");
         for (int mode = 0; mode < 3; mode++) {
             final int selectedMode = mode;
             List<Long> observed = new ArrayList<>();
-            M3PrimitiveIndexView selected = view.filterLane(0, bits -> {
+            PrimitiveIndexView selected = view.filterLane(0, bits -> {
                 observed.add(bits);
                 return admitted(selectedMode, bits);
             });
@@ -107,15 +107,15 @@ public final class M3PrimitiveIndexViewFilterContract {
         equal(rows, indexes(view), "filtering preserves original projection");
     }
 
-    private static void verifyExport(M3PrimitiveIndexView selected, List<Integer> expectedRows,
-            M3PrimitiveSoaStore store, long[] values, byte[] states) {
+    private static void verifyExport(PrimitiveIndexView selected, List<Integer> expectedRows,
+            PrimitiveSoaStore store, long[] values, byte[] states) {
         equal(expectedRows, indexes(selected), "selected row IDs");
         equal(expectedRows.size(), selected.size(), "selection size");
         equal(expectedRows.isEmpty(), selected.isEmpty(), "selection emptiness");
         int[] exported = selected.toIndexArray();
         Arrays.fill(exported, -7);
         equal(expectedRows, indexes(selected), "index export is defensive");
-        M3PrimitiveSoaStore copy = selected.materialize();
+        PrimitiveSoaStore copy = selected.materialize();
         equal(expectedRows.size(), copy.size(), "materialized size");
         for (int ordinal = 0; ordinal < expectedRows.size(); ordinal++) {
             int row = expectedRows.get(ordinal);
@@ -138,8 +138,8 @@ public final class M3PrimitiveIndexViewFilterContract {
     }
 
     private static void verifyExceptionAndVersionOrder() {
-        M3PrimitiveSoaStore store = smallStore();
-        M3PrimitiveIndexView view = M3PrimitiveIndexView.identity(store);
+        PrimitiveSoaStore store = smallStore();
+        PrimitiveIndexView view = PrimitiveIndexView.identity(store);
         throwsType(NullPointerException.class, () -> view.filterLane(0, null));
         List<Long> trace = new ArrayList<>();
         throwsType(IndexOutOfBoundsException.class,
@@ -166,8 +166,8 @@ public final class M3PrimitiveIndexViewFilterContract {
         equal(List.of(), trace, "stale view prevents callbacks");
         throwsType(ConcurrentModificationException.class, () -> view.filterStateMask(0));
 
-        M3PrimitiveSoaStore modified = smallStore();
-        M3PrimitiveIndexView modifiedView = M3PrimitiveIndexView.identity(modified);
+        PrimitiveSoaStore modified = smallStore();
+        PrimitiveIndexView modifiedView = PrimitiveIndexView.identity(modified);
         trace.clear();
         throwsType(ConcurrentModificationException.class, () -> modifiedView.filterLane(0, bits -> {
             trace.add(bits);
@@ -176,8 +176,8 @@ public final class M3PrimitiveIndexViewFilterContract {
         }));
         equal(List.of(10L, 99L, 30L), trace, "version check follows full callback scan");
 
-        M3PrimitiveSoaStore shortened = smallStore();
-        M3PrimitiveIndexView shortenedView = M3PrimitiveIndexView.identity(shortened);
+        PrimitiveSoaStore shortened = smallStore();
+        PrimitiveIndexView shortenedView = PrimitiveIndexView.identity(shortened);
         trace.clear();
         throwsType(IndexOutOfBoundsException.class, () -> shortenedView.filterLane(0, bits -> {
             trace.add(bits);
@@ -186,26 +186,26 @@ public final class M3PrimitiveIndexViewFilterContract {
         }));
         equal(List.of(10L, 20L), trace, "source access exception precedes final version check");
 
-        M3PrimitiveSoaStore changedThenFailed = smallStore();
-        M3PrimitiveIndexView failedView = M3PrimitiveIndexView.identity(changedThenFailed);
+        PrimitiveSoaStore changedThenFailed = smallStore();
+        PrimitiveIndexView failedView = PrimitiveIndexView.identity(changedThenFailed);
         Marker marker = new Marker();
         same(marker, thrown(() -> failedView.filterLane(0, bits -> {
             changedThenFailed.setBits(0, 0, 99L);
             throw marker;
         })), "callback failure precedes final version check");
 
-        M3PrimitiveIndexView empty = M3PrimitiveIndexView.identity(new M3PrimitiveSoaStore(PrimitiveKind.LONG));
+        PrimitiveIndexView empty = PrimitiveIndexView.identity(new PrimitiveSoaStore(PrimitiveKind.LONG));
         LongPredicate forbidden = bits -> { throw new AssertionError("empty callback"); };
         equal(List.of(), indexes(empty.filterLane(-1, forbidden)), "empty view does not validate lane");
         equal(List.of(), indexes(empty.filterStateMask(1)), "empty view does not read absent metadata");
-        M3PrimitiveSoaStore noMetadata = new M3PrimitiveSoaStore(PrimitiveKind.LONG);
+        PrimitiveSoaStore noMetadata = new PrimitiveSoaStore(PrimitiveKind.LONG);
         noMetadata.append1(1L);
         throwsType(IllegalStateException.class,
-                () -> M3PrimitiveIndexView.identity(noMetadata).filterStateMask(0));
+                () -> PrimitiveIndexView.identity(noMetadata).filterStateMask(0));
     }
 
-    private static M3PrimitiveSoaStore smallStore() {
-        M3PrimitiveSoaStore store = new M3PrimitiveSoaStore(3, M3PrimitiveSoaStore.STATE_BYTES,
+    private static PrimitiveSoaStore smallStore() {
+        PrimitiveSoaStore store = new PrimitiveSoaStore(3, PrimitiveSoaStore.STATE_BYTES,
                 PrimitiveKind.LONG);
         for (long value : new long[] {10L, 20L, 30L}) {
             store.appendRow(new long[] {value}, (byte) 1, 0L);
@@ -237,7 +237,7 @@ public final class M3PrimitiveIndexViewFilterContract {
         };
     }
 
-    private static List<Integer> indexes(M3PrimitiveIndexView view) {
+    private static List<Integer> indexes(PrimitiveIndexView view) {
         List<Integer> result = new ArrayList<>();
         for (int row : view.toIndexArray()) result.add(row);
         return result;

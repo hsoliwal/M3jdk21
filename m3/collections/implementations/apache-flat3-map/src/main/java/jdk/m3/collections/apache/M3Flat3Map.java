@@ -42,7 +42,7 @@ import org.apache.commons.collections4.Put;
 
 /**
  * Commons-compatible facade of {@code org.apache.commons.collections4.map.Flat3Map} over the single M3
- * implementation {@link jdk.m3.collections.M3Flat3Map}: every operation delegates to one private core
+ * implementation {@link jdk.m3.collections.Flat3Map}: every operation delegates to one private core
  * instance, and this class keeps no keys, values or slot states of its own.
  *
  * <p>{@link #entrySet()}, {@link #keySet()}, {@link #values()} and {@link #mapIterator()} are cursors over
@@ -53,7 +53,7 @@ import org.apache.commons.collections4.Put;
  * <p>Serialized form: this class's name, {@code serialVersionUID} 0 and no serializable fields (unchanged
  * from the scaffold), followed by the Commons data layout: the entry count, then each key and its value.
  */
-//FLLDCIM: MRL - L075 TEMPLATE: scaffold bodies replaced by delegation to the single owner jdk.m3.collections.M3Flat3Map
+//FLLDCIM: MRL - L075 TEMPLATE: scaffold bodies replaced by delegation to the single owner jdk.m3.collections.Flat3Map
 public final class M3Flat3Map<K, V>
         implements Cloneable,
                 java.io.Serializable,
@@ -68,10 +68,10 @@ public final class M3Flat3Map<K, V>
     private static final String THIS_MAP = "(this Map)";
 
     /** The single implementation; assigned only by the constructor, clone and readObject. */
-    private transient jdk.m3.collections.M3Flat3Map<K, V> core;
+    private transient jdk.m3.collections.Flat3Map<K, V> core;
 
     public M3Flat3Map() {
-        core = new jdk.m3.collections.M3Flat3Map<>();
+        core = new jdk.m3.collections.Flat3Map<>();
     }
 
     public M3Flat3Map(Map<? extends K, ? extends V> map) {
@@ -198,7 +198,7 @@ public final class M3Flat3Map<K, V>
     @SuppressWarnings("unchecked")
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        core = new jdk.m3.collections.M3Flat3Map<>();
+        core = new jdk.m3.collections.Flat3Map<>();
         for (int count = in.readInt(); count > 0; count--) core.put((K) in.readObject(), (V) in.readObject());
     }
 

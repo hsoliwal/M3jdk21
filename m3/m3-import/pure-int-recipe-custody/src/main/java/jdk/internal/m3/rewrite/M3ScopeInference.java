@@ -97,7 +97,7 @@ public final class M3ScopeInference {
         }
         String collectionProofRoot = "m3/collections/qualification/owner-current-20261019/proof-src/";
         if (path.equals(collectionProofRoot + "jdk/m3/collections/M3FilteredListMutationWitness.java")
-                || path.equals(collectionProofRoot + "jdk/m3/collections/M3IndexOrderWindowResourceProbe.java")) {
+                || path.equals(collectionProofRoot + "jdk/m3/collections/IndexOrderWindowResourceProbe.java")) {
             return location("m3/collections/qualification/owner-current-20261019",
                     path.substring(collectionProofRoot.length()), value);
         }

@@ -44,7 +44,7 @@ public final class IndexedLiveSortedSpliteratorContract {
         owner.add(first);
         owner.add(second);
         Comparator<Item> ascending = Comparator.comparingInt(Item::bucket);
-        M3IndexedLiveView<Item> view = M3IndexedLiveView.sorted(owner, ascending);
+        IndexedLiveView<Item> view = IndexedLiveView.sorted(owner, ascending);
         Spliterator<Item> cursor = view.spliterator();
         check((cursor.characteristics() & Spliterator.ORDERED) != 0, "sorted order");
         check((cursor.characteristics() & Spliterator.SORTED) != 0, "sorted characteristic");
@@ -64,7 +64,7 @@ public final class IndexedLiveSortedSpliteratorContract {
                 && observed.get(2) == first, "stable comparator ties");
         check(owner.get(0) == first, "original Object[] owner unchanged");
 
-        Spliterator<Item> filtered = M3IndexedLiveView.filtered(
+        Spliterator<Item> filtered = IndexedLiveView.filtered(
                 owner, element -> element.bucket() >= 1).spliterator();
         check((filtered.characteristics() & Spliterator.ORDERED) != 0, "filtered order");
         check((filtered.characteristics() & Spliterator.SORTED) == 0, "filtered not sorted");
@@ -72,7 +72,7 @@ public final class IndexedLiveSortedSpliteratorContract {
 
         // Natural-order metadata must return null, not an arbitrary comparator.
         M3ArrayList<Integer> numbers = new M3ArrayList<>(List.of(4, 1, 3, 2));
-        Spliterator<Integer> natural = M3IndexedLiveView.sorted(numbers, null).spliterator();
+        Spliterator<Integer> natural = IndexedLiveView.sorted(numbers, null).spliterator();
         check((natural.characteristics() & Spliterator.SORTED) != 0, "natural-order sorted");
         check(natural.getComparator() == null, "natural-order comparator is null");
         List<Integer> result = new ArrayList<>();
@@ -99,7 +99,7 @@ public final class IndexedLiveSortedSpliteratorContract {
             }
             List<Item> expected = new ArrayList<>(owner);
             expected.sort(order);
-            M3IndexedLiveView<Item> projected = M3IndexedLiveView.sorted(owner, order);
+            IndexedLiveView<Item> projected = IndexedLiveView.sorted(owner, order);
             Spliterator<Item> spliterator = projected.spliterator();
             check((spliterator.characteristics() & Spliterator.SORTED) != 0,
                     "random sorted characteristic");
@@ -110,7 +110,7 @@ public final class IndexedLiveSortedSpliteratorContract {
             for (int i = 0; i < actual.size(); i++) {
                 check(actual.get(i) == expected.get(i), "stable primitive index tie");
             }
-            M3IndexedLiveView<Item> filtered = M3IndexedLiveView.filteredSorted(
+            IndexedLiveView<Item> filtered = IndexedLiveView.filteredSorted(
                     owner, item -> (item.bucket() & 1) == 0, order);
             List<Item> expectedFiltered = new ArrayList<>();
             for (Item item : owner) {

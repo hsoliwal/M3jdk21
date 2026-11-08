@@ -6,7 +6,7 @@ import com.sun.source.util.TreePath;
 import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.TreeScanner;
 import com.sun.source.util.Trees;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -77,25 +77,25 @@ public final class SourceLiveness {
     public boolean authorizesSourceMutation() { return false; }
   }
 
-  public static Result analyze(Map<String, String> sources, M3ProgressMonitor monitor) throws IOException {
+  public static Result analyze(Map<String, String> sources, ProgressMonitor monitor) throws IOException {
     return analyze(sources, Limits.defaults(), monitor);
   }
-  public static Result analyze(Map<String, String> sources, Limits limits, M3ProgressMonitor monitor) throws IOException {
+  public static Result analyze(Map<String, String> sources, Limits limits, ProgressMonitor monitor) throws IOException {
     return analyzeModel(sources, limits, monitor, false);
   }
 
   /** Additive extended model. Legacy analyze overloads keep their v2 admission policy. */
   public static Result analyzeExtended(Map<String, String> sources, Limits limits,
-                                        M3ProgressMonitor monitor) throws IOException {
+                                        ProgressMonitor monitor) throws IOException {
     return analyzeModel(sources, limits, monitor, true);
   }
 
-  public static Result analyzeExtended(Map<String, String> sources, M3ProgressMonitor monitor) throws IOException {
+  public static Result analyzeExtended(Map<String, String> sources, ProgressMonitor monitor) throws IOException {
     return analyzeExtended(sources, Limits.defaults(), monitor);
   }
 
   private static Result analyzeModel(Map<String, String> sources, Limits limits,
-                                     M3ProgressMonitor monitor, boolean extended) throws IOException {
+                                     ProgressMonitor monitor, boolean extended) throws IOException {
     Objects.requireNonNull(limits, "limits"); check(monitor);
     List<MethodFlow> methods = new ArrayList<>();
     CompilerFactsAudit.Result facts = CompilerFactsAudit.analyze(sources, monitor, (unit, trees, progress) -> {
@@ -131,7 +131,7 @@ public final class SourceLiveness {
    * Only nodes reachable from method.entry are returned; implicit VM temporaries are excluded.
    * Returned slots may still denote escaped/shared/returned objects. Never emit releases from this alone.
    */
-  public static List<Boundary> boundaries(MethodFlow method, M3ProgressMonitor monitor) {
+  public static List<Boundary> boundaries(MethodFlow method, ProgressMonitor monitor) {
     Objects.requireNonNull(method, "method"); check(monitor);
     if (!method.complete()) throw new IllegalArgumentException("unresolved method has no boundary proof");
     Liveness.WideResult live = method.liveness().orElseThrow();
@@ -180,7 +180,7 @@ public final class SourceLiveness {
       return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(input.getBytes(StandardCharsets.UTF_8)));
     } catch (NoSuchAlgorithmException e) { throw new AssertionError(e); }
   }
-  private static void check(M3ProgressMonitor monitor) { if (monitor != null) monitor.checkCanceled(); }
+  private static void check(ProgressMonitor monitor) { if (monitor != null) monitor.checkCanceled(); }
   private static final class Unresolved extends RuntimeException {
     private static final long serialVersionUID = 1L;
     Unresolved(String message) { super(message); }
@@ -219,13 +219,13 @@ public final class SourceLiveness {
 
   private static final class Builder {
     final CompilationUnitTree unit; final Trees trees; final TreePath path; final MethodTree method;
-    final Limits limits; final M3ProgressMonitor monitor; final boolean extended;
+    final Limits limits; final ProgressMonitor monitor; final boolean extended;
     final LinkedHashMap<Element, Integer> symbols = new LinkedHashMap<>();
     final List<Slot> slots = new ArrayList<>();
     final IdentityHashMap<Tree, TreePath> paths = new IdentityHashMap<>();
     final List<MutableNode> nodes = new ArrayList<>();
     int depth;
-    Builder(CompilationUnitTree unit, Trees trees, TreePath path, Limits limits, M3ProgressMonitor monitor, boolean extended) {
+    Builder(CompilationUnitTree unit, Trees trees, TreePath path, Limits limits, ProgressMonitor monitor, boolean extended) {
       this.unit = unit; this.trees = trees; this.path = path; this.method = (MethodTree) path.getLeaf();
       this.limits = limits; this.monitor = monitor; this.extended = extended;
     }

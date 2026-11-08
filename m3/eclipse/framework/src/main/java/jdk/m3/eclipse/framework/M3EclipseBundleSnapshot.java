@@ -3,9 +3,9 @@
 package jdk.m3.eclipse.framework;
 
 import jdk.m3.collections.M3Collections;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import jdk.m3.collections.LongArrayList;
-import jdk.m3.collections.M3LongIndexProjection;
+import jdk.m3.collections.LongIndexProjection;
 import jdk.m3.collections.LongLongHashMap;
 import java.util.List;
 import java.util.Objects;
@@ -69,38 +69,38 @@ public final class M3EclipseBundleSnapshot {
 
     /** Detached signed-long bundle ID order, never changing framework bundle references. */
     public List<Bundle> sortedById(boolean descending) {
-        return sortedById(0, 0, descending, M3IndexMaskCompactor.Backend.JAVA);
+        return sortedById(0, 0, descending, IndexMaskCompactor.Backend.JAVA);
     }
 
     /** State masks select snapshot occurrences; sort permutes only M3 primitive indexes. */
     public List<Bundle> sortedById(int requiredStateMask, int excludedStateMask,
-            boolean descending, M3IndexMaskCompactor.Backend backend) {
+            boolean descending, IndexMaskCompactor.Backend backend) {
         return materialize(sortedIndex(requiredStateMask, excludedStateMask, descending, backend));
     }
 
     /** Logical half-open window after filtering and sorting, with only window references copied. */
     public List<Bundle> sortedWindowById(int requiredStateMask, int excludedStateMask,
-            boolean descending, int offset, int length, M3IndexMaskCompactor.Backend backend) {
-        M3LongIndexProjection sorted = sortedIndex(
+            boolean descending, int offset, int length, IndexMaskCompactor.Backend backend) {
+        LongIndexProjection sorted = sortedIndex(
                 requiredStateMask, excludedStateMask, descending, backend);
         return materialize(sorted.slice(offset, length));
     }
 
-    private M3LongIndexProjection sortedIndex(int requiredStateMask, int excludedStateMask,
-            boolean descending, M3IndexMaskCompactor.Backend backend) {
+    private LongIndexProjection sortedIndex(int requiredStateMask, int excludedStateMask,
+            boolean descending, IndexMaskCompactor.Backend backend) {
         byte[] states = new byte[rows.size()];
         for (int i = 0; i < states.length; i++) states[i] = (byte) rows.state(i);
         // Keep the existing required/excluded selector and projection owners. The
         // selector returns capture ordinals; only primitive IDs enter the sort lane.
-        int[] positions = M3IndexMaskCompactor.selectPositions(
+        int[] positions = IndexMaskCompactor.selectPositions(
                 states, requiredStateMask, excludedStateMask, backend);
         long[] selectedIds = new long[positions.length];
         for (int i = 0; i < positions.length; i++) selectedIds[i] = capturedIds.get(positions[i]);
-        M3LongIndexProjection filtered = M3LongIndexProjection.snapshot(selectedIds);
+        LongIndexProjection filtered = LongIndexProjection.snapshot(selectedIds);
         return descending ? filtered.sortedDescending() : filtered.sortedAscending();
     }
 
-    private List<Bundle> materialize(M3LongIndexProjection projection) {
+    private List<Bundle> materialize(LongIndexProjection projection) {
         List<Bundle> result = M3Collections.arrayList();
         for (int i = 0; i < projection.size(); i++) {
             result.add(byId(projection.get(i)));

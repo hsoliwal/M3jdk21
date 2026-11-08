@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Objects;
-import jdk.m3.collections.M3SignalColumns;
-import jdk.m3.collections.M3SignalRelations;
+import jdk.m3.collections.SignalColumns;
+import jdk.m3.collections.SignalRelations;
 
 /**
  * Verified primitive receiving image for the existing javac methodOut sidecar.
@@ -44,8 +44,8 @@ public final class MethodSignalImage {
         INTERNAL_INCOMING_SITES, INTERNAL_OUTGOING_SITES
     }
 
-    private final M3SignalColumns columns;
-    private final M3SignalRelations relations;
+    private final SignalColumns columns;
+    private final SignalRelations relations;
     private final byte[] names;
     private final int[] nameOffsets;
     private final String sourceSha256;
@@ -54,7 +54,7 @@ public final class MethodSignalImage {
     private final long externalCandidateSites;
     private final long unresolvedCandidateSites;
 
-    private MethodSignalImage(M3SignalColumns columns, M3SignalRelations relations,
+    private MethodSignalImage(SignalColumns columns, SignalRelations relations,
             byte[] names, int[] offsets, String sourceSha256, long identityHint,
             int externalCandidateRecords, long externalCandidateSites,
             long unresolvedCandidateSites) {
@@ -153,7 +153,7 @@ public final class MethodSignalImage {
                 callees.add(target.symbol());
                 kinds.add(target.kind());
                 occurrences.add(count);
-                if (target.kind() == M3SignalRelations.DIRECT) {
+                if (target.kind() == SignalRelations.DIRECT) {
                     direct = Math.addExact(direct, count);
                 } else {
                     dispatch = Math.addExact(dispatch, count);
@@ -184,14 +184,14 @@ public final class MethodSignalImage {
             }
         }
         int rows = identities.size();
-        M3SignalRelations graph = M3SignalRelations.of(rows, internalSources.toArray(),
+        SignalRelations graph = SignalRelations.of(rows, internalSources.toArray(),
                 internalTargets.toArray(), internalKinds.toArray(), internalSites.toArray());
         long hint = ByteBuffer.wrap(HexFormat.of().parseHex(digest), 0, 8).getLong();
-        long[] valid = M3SignalColumns.allValid(rows);
-        M3SignalColumns.Column[] typed = new M3SignalColumns.Column[Scalar.values().length];
+        long[] valid = SignalColumns.allValid(rows);
+        SignalColumns.Column[] typed = new SignalColumns.Column[Scalar.values().length];
         for (int d = 0; d < SOURCE_COUNTS; d++) {
-            typed[d] = new M3SignalColumns.Column(M3SignalColumns.Kind.INTEGER,
-                    M3SignalColumns.Origin.STATIC, hint ^ d, false,
+            typed[d] = new SignalColumns.Column(SignalColumns.Kind.INTEGER,
+                    SignalColumns.Origin.STATIC, hint ^ d, false,
                     valid, Arrays.copyOf(facts[d], rows), null, null);
         }
         long[] incoming = new long[rows], outgoing = new long[rows];
@@ -199,11 +199,11 @@ public final class MethodSignalImage {
             incoming[row] = graph.incomingSites(row);
             outgoing[row] = graph.outgoingSites(row);
         }
-        typed[SOURCE_COUNTS] = new M3SignalColumns.Column(M3SignalColumns.Kind.LONG,
-                M3SignalColumns.Origin.STATIC, hint ^ SOURCE_COUNTS, false,
+        typed[SOURCE_COUNTS] = new SignalColumns.Column(SignalColumns.Kind.LONG,
+                SignalColumns.Origin.STATIC, hint ^ SOURCE_COUNTS, false,
                 valid, null, incoming, null);
-        typed[SOURCE_COUNTS + 1] = new M3SignalColumns.Column(M3SignalColumns.Kind.LONG,
-                M3SignalColumns.Origin.STATIC, hint ^ (SOURCE_COUNTS + 1), false,
+        typed[SOURCE_COUNTS + 1] = new SignalColumns.Column(SignalColumns.Kind.LONG,
+                SignalColumns.Origin.STATIC, hint ^ (SOURCE_COUNTS + 1), false,
                 valid, null, outgoing, null);
         int[] offsets = new int[rows + 1];
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -212,14 +212,14 @@ public final class MethodSignalImage {
             bytes.writeBytes(identities.get(row).getBytes(StandardCharsets.UTF_8));
         }
         offsets[rows] = bytes.size();
-        return new MethodSignalImage(new M3SignalColumns(rows, typed), graph,
+        return new MethodSignalImage(new SignalColumns(rows, typed), graph,
                 bytes.toByteArray(), offsets, digest, hint, externalRecords, externalSites,
                 unresolved);
     }
 
     public int rowCount() { return nameOffsets.length - 1; }
-    public M3SignalColumns columns() { return columns; }
-    public M3SignalRelations relationships() { return relations; }
+    public SignalColumns columns() { return columns; }
+    public SignalRelations relationships() { return relations; }
     public String sourceSha256() { return sourceSha256; }
     /** Index hint only: collisions must be checked against sourceSha256(). */
     public long sourceIdentityHint() { return sourceIdentityHint; }
@@ -241,7 +241,7 @@ public final class MethodSignalImage {
         for (int edge = 0; edge < relations.outgoingEdges(caller); edge++) {
             if (relations.target(caller, edge) == callee
                     && (includeDispatchCandidates
-                    || relations.kind(caller, edge) == M3SignalRelations.DIRECT)) {
+                    || relations.kind(caller, edge) == SignalRelations.DIRECT)) {
                 total = Math.addExact(total, relations.callSites(caller, edge));
             }
         }
@@ -272,8 +272,8 @@ public final class MethodSignalImage {
             throw new IllegalArgumentException("unknown method call shape");
         }
         byte kind = switch (label.substring(a + 1, b)) {
-            case "DIRECT" -> M3SignalRelations.DIRECT;
-            case "DISPATCH_CANDIDATE" -> M3SignalRelations.DISPATCH_CANDIDATE;
+            case "DIRECT" -> SignalRelations.DIRECT;
+            case "DISPATCH_CANDIDATE" -> SignalRelations.DISPATCH_CANDIDATE;
             default -> throw new IllegalArgumentException("unrecognized dispatch evidence");
         };
         String symbol = label.substring(b + 1);

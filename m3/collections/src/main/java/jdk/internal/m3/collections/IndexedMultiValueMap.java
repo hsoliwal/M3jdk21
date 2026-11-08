@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.function.Predicate;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import jdk.m3.collections.M3LinkedHashMap;
 
 /**
@@ -33,7 +33,7 @@ import jdk.m3.collections.M3LinkedHashMap;
  * <p>Returned snapshots copy the referenced values once; thereafter filtered,
  * sorted, sliced and indexed views manipulate index arrays/BitSet facts without
  * reading a mutable parent or re-evaluating a preceding predicate. Native mask
- * selection reuses the existing M3IndexMaskCompactor ABI. No Java object,
+ * selection reuses the existing IndexMaskCompactor ABI. No Java object,
  * comparator or callback crosses JNI.
  */
 public final class IndexedMultiValueMap<K, V> {
@@ -288,7 +288,7 @@ public final class IndexedMultiValueMap<K, V> {
      * The returned snapshot is detached from all slot reuse and future writes.
      */
     public ValuesSnapshot<V> selected(Object key, int required, int forbidden,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(backend, "backend");
         checkMask(required);
         checkMask(forbidden);
@@ -306,7 +306,7 @@ public final class IndexedMultiValueMap<K, V> {
             ordinals[i] = i;
             cursor = next[cursor];
         }
-        int[] selected = M3IndexMaskCompactor.select(ordinals, eligible, 1, backend);
+        int[] selected = IndexMaskCompactor.select(ordinals, eligible, 1, backend);
         return new ValuesSnapshot<>(copied, selected, 0, selected.length);
     }
 

@@ -89,8 +89,8 @@ public final class ObjectResidency<T> {
     private final boolean[] callerInstalled;
     /** Generation-safe handles; allocate the primitive handle lanes only on first use. */
     private SlotAllocator28 borrowHandles;
-    private M3IntLane28 borrowOwner;
-    private M3IntLane28 borrowCalls;
+    private IntLane28 borrowOwner;
+    private IntLane28 borrowCalls;
     private long residentBytes;
     private long tick;
     private Decision lastDecision;
@@ -198,8 +198,8 @@ public final class ObjectResidency<T> {
         ensureResident(slot, estimatedBytes);
         if (borrowHandles == null) {
             SlotAllocator28 ids = new SlotAllocator28();
-            M3IntLane28 owners = new M3IntLane28();
-            M3IntLane28 calls = new M3IntLane28();
+            IntLane28 owners = new IntLane28();
+            IntLane28 calls = new IntLane28();
             borrowOwner = owners;
             borrowCalls = calls;
             borrowHandles = ids;

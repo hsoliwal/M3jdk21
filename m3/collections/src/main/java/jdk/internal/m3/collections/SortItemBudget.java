@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Primitive-only admission of optional sort-item cache state and viewport prefetch.
@@ -48,17 +48,17 @@ public final class SortItemBudget {
      * Item estimates include the sort key, ID and any separately measured/cache weight.
      */
     public static SortItemBudget current(long fixedPerItemBytes) {
-        return from(M3RuntimeHeap.current(), fixedPerItemBytes);
+        return from(RuntimeHeap.current(), fixedPerItemBytes);
     }
 
     /** Pure deterministic policy seam for tests and compiler admission. */
-    public static SortItemBudget from(M3RuntimeHeap.Snapshot heap, long fixedPerItemBytes) {
+    public static SortItemBudget from(RuntimeHeap.Snapshot heap, long fixedPerItemBytes) {
         Objects.requireNonNull(heap, "heap");
         if (fixedPerItemBytes < 0) throw new IllegalArgumentException("negative fixed item bytes");
         long headroom = Math.max(0L, heap.freeToMaximum() - heap.safetyReserve());
         long share = headroom / DEFAULT_SHARE_DENOMINATOR;
-        if (heap.pressure(0L) == M3RuntimeHeap.Pressure.HIGH) share = 0;
-        else if (heap.pressure(0L) == M3RuntimeHeap.Pressure.WARM) share /= 2;
+        if (heap.pressure(0L) == RuntimeHeap.Pressure.HIGH) share = 0;
+        else if (heap.pressure(0L) == RuntimeHeap.Pressure.WARM) share /= 2;
         return new SortItemBudget(share, fixedPerItemBytes);
     }
 

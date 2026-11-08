@@ -22,8 +22,8 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Predicate;
 import jdk.m3.collections.M3ArrayList;
-import jdk.m3.collections.M3IndexMaskCompactor;
-import jdk.m3.collections.M3IndexedListSnapshot;
+import jdk.m3.collections.IndexMaskCompactor;
+import jdk.m3.collections.IndexedListSnapshot;
 
 /**
  * Opt-in generic-object List SDK entry points, distinct from existing
@@ -45,12 +45,12 @@ public final class GenericCollections {
     }
 
     /** Detached immutable reference snapshot with the same null/duplicate values. */
-    public static <E> M3IndexedListSnapshot<E> snapshot(Collection<? extends E> source) {
-        return M3IndexedListSnapshot.copyOf(source);
+    public static <E> IndexedListSnapshot<E> snapshot(Collection<? extends E> source) {
+        return IndexedListSnapshot.copyOf(source);
     }
 
     /** User predicate runs once per original occurrence, never on indexed reads. */
-    public static <E> M3IndexedListSnapshot<E> filteredSnapshot(
+    public static <E> IndexedListSnapshot<E> filteredSnapshot(
             Collection<? extends E> source, Predicate<? super E> predicate) {
         Objects.requireNonNull(predicate, "predicate");
         return GenericCollections.<E>snapshot(source).filtered(predicate);
@@ -61,21 +61,21 @@ public final class GenericCollections {
      * selected physical int[] offsets. No per-row entry objects or boxed index
      * sorting, and no extra selected-index copy between the two operations.
      */
-    public static <E> M3IndexedListSnapshot<E> filteredSortedSnapshot(
+    public static <E> IndexedListSnapshot<E> filteredSortedSnapshot(
             Collection<? extends E> source, Predicate<? super E> predicate,
             Comparator<? super E> comparator) {
         return GenericCollections.<E>snapshot(source).filteredSorted(predicate, comparator);
     }
 
     /** Explicit JNI selection; native code receives mask bytes, never references. */
-    public static <E> M3IndexedListSnapshot<E> filteredSortedSnapshot(
+    public static <E> IndexedListSnapshot<E> filteredSortedSnapshot(
             Collection<? extends E> source, Predicate<? super E> predicate,
-            Comparator<? super E> comparator, M3IndexMaskCompactor.Backend backend) {
+            Comparator<? super E> comparator, IndexMaskCompactor.Backend backend) {
         return GenericCollections.<E>snapshot(source).filteredSorted(predicate, comparator, backend);
     }
 
     /** Sort only int[] physical indexes, never shuffle the Object[] payload. */
-    public static <E> M3IndexedListSnapshot<E> sortedSnapshot(
+    public static <E> IndexedListSnapshot<E> sortedSnapshot(
             Collection<? extends E> source, Comparator<? super E> comparator) {
         return GenericCollections.<E>snapshot(source).sorted(comparator);
     }

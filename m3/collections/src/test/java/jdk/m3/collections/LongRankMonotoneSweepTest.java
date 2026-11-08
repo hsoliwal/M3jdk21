@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: Apache-2.0
+package jdk.m3.collections;
+
+import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.LongRankMonotoneSweepContract;
+
+/** Original M3JDK 21 JNI batch-oracle product test; JNI is opt-in, never mandatory. */
+final class LongRankMonotoneSweepTest {
+    @Test void signedMonotoneAndUnsortedBatchParity() {
+        LongRankMonotoneSweepContract.contracts(false);
+    }
+}

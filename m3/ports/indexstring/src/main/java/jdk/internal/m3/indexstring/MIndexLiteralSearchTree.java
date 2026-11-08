@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.indexstring;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,7 +176,7 @@ public final class MIndexLiteralSearchTree {
     return navigation(MIndexTrieNavigation.Limits.DEFAULT, null);
   }
 
-  public MIndexTrieNavigation navigation(M3ProgressMonitor monitor) {
+  public MIndexTrieNavigation navigation(ProgressMonitor monitor) {
     return navigation(MIndexTrieNavigation.Limits.DEFAULT, monitor);
   }
 
@@ -185,7 +185,7 @@ public final class MIndexLiteralSearchTree {
    * spelling storage, IDs, search behavior and image format are not replaced or copied.
    */
   public synchronized MIndexTrieNavigation navigation(
-      MIndexTrieNavigation.Limits limits, M3ProgressMonitor monitor) {
+      MIndexTrieNavigation.Limits limits, ProgressMonitor monitor) {
     Objects.requireNonNull(limits, "limits");
     MIndexTrieNavigation.check(monitor);
     if (navigation != null) {
@@ -290,10 +290,10 @@ public final class MIndexLiteralSearchTree {
    * the number of occurrences already delivered.</p>
    */
   public long visitMatches(
-      CharSequence input, MatchConsumer consumer, M3ProgressMonitor monitor) {
+      CharSequence input, MatchConsumer consumer, ProgressMonitor monitor) {
     Objects.requireNonNull(input, "input");
     Objects.requireNonNull(consumer, "consumer");
-    M3ProgressMonitor progress = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    ProgressMonitor progress = monitor == null ? new DefaultProgressMonitor() : monitor;
     progress.beginTask("Visit literal matches", input.length());
     try {
       progress.checkCanceled();
@@ -464,7 +464,7 @@ public final class MIndexLiteralSearchTree {
     }
 
     /** Discard this mutable builder after cancellation or budget failure during admission. */
-    public Builder add(CharSequence literal, int payload, M3ProgressMonitor monitor) {
+    public Builder add(CharSequence literal, int payload, ProgressMonitor monitor) {
       MIndexTrieNavigation.check(monitor);
       Objects.requireNonNull(literal, "literal");
       if (payload < 0) throw new IllegalArgumentException("payload");
@@ -495,7 +495,7 @@ public final class MIndexLiteralSearchTree {
       return freeze(null);
     }
 
-    public MIndexLiteralSearchTree freeze(M3ProgressMonitor monitor) {
+    public MIndexLiteralSearchTree freeze(ProgressMonitor monitor) {
       MIndexTrieNavigation.check(monitor);
       int stateCount = nodes.size();
       int totalEdges = 0;

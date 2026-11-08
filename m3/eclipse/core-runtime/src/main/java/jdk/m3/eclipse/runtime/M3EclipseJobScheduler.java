@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.eclipse.runtime;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.Objects;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -27,11 +27,11 @@ public final class M3EclipseJobScheduler {
      * Return the actual Job so callers can use join, cancel, families and listeners.
      */
     public static Job schedule(String name, ISchedulingRule rule,
-            M3ProgressMonitor owner, long totalWork, M3EclipseJobs.Task task) {
+            ProgressMonitor owner, long totalWork, M3EclipseJobs.Task task) {
         Objects.requireNonNull(name, "name");
         Objects.requireNonNull(owner, "owner");
         Objects.requireNonNull(task, "task");
-        if (totalWork < M3ProgressMonitor.UNKNOWN) {
+        if (totalWork < ProgressMonitor.UNKNOWN) {
             throw new IllegalArgumentException("totalWork below UNKNOWN");
         }
         Job job = new Job(name) {

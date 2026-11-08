@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +75,7 @@ final class BmhCountOnlyTest {
                 () -> ByteOccurrences.visit(candidate, input, 0, -1, ignored -> {}, null));
     }
 
-    private static final class CheckMonitor implements M3ProgressMonitor {
+    private static final class CheckMonitor implements ProgressMonitor {
         private final AtomicInteger polls = new AtomicInteger();
         private final int failAt;
         CheckMonitor(int failAt) { this.failAt = failAt; }
@@ -89,6 +89,6 @@ final class BmhCountOnlyTest {
             return failAt > 0 && polls.incrementAndGet() >= failAt;
         }
         @Override public void setCanceled(boolean canceled) { }
-        @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+        @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
     }
 }

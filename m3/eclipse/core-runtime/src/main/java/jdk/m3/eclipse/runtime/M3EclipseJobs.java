@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.eclipse.runtime;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutorService;
@@ -41,7 +41,7 @@ public final class M3EclipseJobs {
      * by unrelated concurrent tasks. No progress lifecycle starts on rejection.
      */
     public static Future<IStatus> submit(ExecutorService executor,
-            M3ProgressMonitor owner, String taskName, long totalWork, Task task) {
+            ProgressMonitor owner, String taskName, long totalWork, Task task) {
         Objects.requireNonNull(executor, "executor");
         Objects.requireNonNull(owner, "owner");
         Objects.requireNonNull(taskName, "taskName");
@@ -66,7 +66,7 @@ public final class M3EclipseJobs {
      * Cancellation of a child is intentionally propagated to its parent.
      */
     public static Future<IStatus> submitChild(ExecutorService executor,
-            M3ProgressMonitor parent, long parentWork, String taskName,
+            ProgressMonitor parent, long parentWork, String taskName,
             long childTotalWork, Task task) {
         Objects.requireNonNull(parent, "parent");
         if (parentWork < 0L) throw new IllegalArgumentException("negative parentWork");
@@ -78,7 +78,7 @@ public final class M3EclipseJobs {
      * Exceptions become ERROR status; interruption/cancellation becomes CANCEL.
      * JVM Errors propagate after progress is completed.
      */
-    public static IStatus runNow(M3ProgressMonitor owner,
+    public static IStatus runNow(ProgressMonitor owner,
             String taskName, long totalWork, Task task) {
         Objects.requireNonNull(owner, "owner");
         Objects.requireNonNull(taskName, "taskName");
@@ -108,7 +108,7 @@ public final class M3EclipseJobs {
     }
 
     private static void requireWork(long work) {
-        if (work < M3ProgressMonitor.UNKNOWN) {
+        if (work < ProgressMonitor.UNKNOWN) {
             throw new IllegalArgumentException("totalWork below UNKNOWN");
         }
     }

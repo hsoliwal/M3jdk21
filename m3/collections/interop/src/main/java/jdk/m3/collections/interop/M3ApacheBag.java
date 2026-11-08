@@ -5,7 +5,7 @@
  */
 package jdk.m3.collections.interop;
 
-import jdk.m3.collections.M3CountedBag;
+import jdk.m3.collections.CountedBag;
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,28 +22,28 @@ import org.apache.commons.collections4.Bag;
  * <p>Apache Bag intentionally differs from the JDK Collection contract: a
  * one-element add returns true only for a newly distinct key; one-element remove
  * erases every copy; containsAll, removeAll and retainAll honor multiplicity.
- * The backing {@link M3CountedBag} owns GC-traced values and count/index offsets.
+ * The backing {@link CountedBag} owns GC-traced values and count/index offsets.
  * API views and temporary input-cardinality maps allocate as needed, but no
  * per-occurrence resident Entry or MutableInteger object is retained.
  *
  * <p>Mutable, single-threaded, non-serializable, and not the concrete HashBag type.
  * Iterator reads are fail-fast for all underlying count mutations. JNI callbacks
  * never handle Java values; native indexed-mask selection remains an optional
- * operation of the existing backing M3CountedBag.
+ * operation of the existing backing CountedBag.
  */
 public final class M3ApacheBag<E> extends AbstractCollection<E> implements Bag<E> {
-    private final M3CountedBag<E> counts;
+    private final CountedBag<E> counts;
     private transient Set<E> unique;
 
     /** Independent M3-backed bag, with lazy backing allocation. */
-    public M3ApacheBag() { this(new M3CountedBag<>()); }
+    public M3ApacheBag() { this(new CountedBag<>()); }
 
     /** Views may intentionally share one M3 owner; there is no retained second store. */
-    public M3ApacheBag(M3CountedBag<E> counts) {
+    public M3ApacheBag(CountedBag<E> counts) {
         this.counts = Objects.requireNonNull(counts, "counts");
     }
 
-    public M3CountedBag<E> m3Backend() { return counts; }
+    public CountedBag<E> m3Backend() { return counts; }
 
     @Override public int size() { return counts.size(); }
     @Override public boolean isEmpty() { return counts.isEmpty(); }
@@ -98,7 +98,7 @@ public final class M3ApacheBag<E> extends AbstractCollection<E> implements Bag<E
             }
             return true;
         }
-        M3CountedBag<Object> requested = tally(source);
+        CountedBag<Object> requested = tally(source);
         for (Object key : requested.distinctElements()) {
             if (getCount(key) < requested.count(key)) return false;
         }
@@ -108,7 +108,7 @@ public final class M3ApacheBag<E> extends AbstractCollection<E> implements Bag<E
     /** Unlike Collection.removeAll, remove only the requested multiplicities. */
     @Override public boolean removeAll(Collection<?> source) {
         Objects.requireNonNull(source, "source");
-        M3CountedBag<Object> wanted = tally(source);
+        CountedBag<Object> wanted = tally(source);
         boolean changed = false;
         for (Object key : wanted.distinctElements()) {
             changed |= remove(key, wanted.count(key));
@@ -124,7 +124,7 @@ public final class M3ApacheBag<E> extends AbstractCollection<E> implements Bag<E
     @Override public boolean retainAll(Collection<?> source) {
         Objects.requireNonNull(source, "source");
         if (source == this) return false;
-        M3CountedBag<Object> wanted = tally(source);
+        CountedBag<Object> wanted = tally(source);
         boolean changed = false;
         for (E key : new ArrayList<>(counts.distinctElements())) {
             int owned = counts.count(key);
@@ -136,8 +136,8 @@ public final class M3ApacheBag<E> extends AbstractCollection<E> implements Bag<E
         return changed;
     }
 
-    private static M3CountedBag<Object> tally(Collection<?> source) {
-        M3CountedBag<Object> wanted = new M3CountedBag<>();
+    private static CountedBag<Object> tally(Collection<?> source) {
+        CountedBag<Object> wanted = new CountedBag<>();
         if (source instanceof Bag<?> bag) {
             for (Object element : bag.uniqueSet()) {
                 wanted.addOccurrences(element, bag.getCount(element));

@@ -17,7 +17,7 @@ package jdk.internal.m3.collections.bits;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongConsumer;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 
 /**
  * Sparse hierarchical bit address space using lazily allocated long[] leaf bitmaps.
@@ -45,9 +45,9 @@ public final class LazyBitAddressSpace {
 
     public LazyBitAddressSpace() {
         this(
-                M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS);
+                LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS);
     }
 
     public LazyBitAddressSpace(int rootBits, int directoryBits, int leafBits) {

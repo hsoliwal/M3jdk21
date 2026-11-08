@@ -4,7 +4,7 @@ package jdk.m3.eclipse.core;
 
 import jdk.m3.arrays.M3Utf16ArrayView;
 import jdk.m3.ast.M3ASTHierarchy;
-import jdk.m3.collections.M3LongIndexProjection;
+import jdk.m3.collections.LongIndexProjection;
 import jdk.m3.file.M3NioFile;
 import jdk.m3.text.M3StringPiece;
 import java.nio.file.Path;
@@ -27,7 +27,7 @@ public interface M3EclipseCore {
     M3Utf16ArrayView utf16(CharSequence source);
 
     /** Own only immutable primitive index coordinates in the existing M3 class. */
-    M3LongIndexProjection index(long[] source);
+    LongIndexProjection index(long[] source);
 
     /** Use the established M3 L0-L5 hierarchy, not another Eclipse AST store. */
     M3ASTHierarchy hierarchy(String repository, Collection<M3ASTHierarchy.FileFact> facts);

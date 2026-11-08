@@ -5,7 +5,7 @@
  */
 package jdk.m3.collections.interop;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Comparator;
@@ -32,7 +32,7 @@ import java.util.function.BiPredicate;
  * mutation, comparator, backing-view and return-type semantics through their
  * original provider interfaces and existing M3 factories. No Java callbacks,
  * payload references, or object pointers enter JNI; the existing optional C17
- * M3IndexMaskCompactor receives only transient primitive index/state arrays.
+ * IndexMaskCompactor receives only transient primitive index/state arrays.
  */
 public final class M3FiveLibraryPreparedRows<K, V> {
     private final M3FiveLibraryIndexViews<K, V> source;
@@ -50,14 +50,14 @@ public final class M3FiveLibraryPreparedRows<K, V> {
     public static <K, V> M3FiveLibraryPreparedRows<K, V> where(
             M3FiveLibraryIndexViews<K, V> source,
             BiPredicate<? super K, ? super V> predicate) {
-        return where(source, predicate, M3IndexMaskCompactor.Backend.JAVA);
+        return where(source, predicate, IndexMaskCompactor.Backend.JAVA);
     }
 
     /** JNI is explicitly requested before callbacks begin; no silent fallback. */
     public static <K, V> M3FiveLibraryPreparedRows<K, V> where(
             M3FiveLibraryIndexViews<K, V> source,
             BiPredicate<? super K, ? super V> predicate,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(predicate, "predicate");
         requireBackend(backend);
@@ -71,7 +71,7 @@ public final class M3FiveLibraryPreparedRows<K, V> {
     /** Capture unsigned byte state flags once; conflicting bits select nothing. */
     public static <K, V> M3FiveLibraryPreparedRows<K, V> byState(
             M3FiveLibraryIndexViews<K, V> source, int required, int forbidden,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(source, "source");
         requireBackend(backend);
         requireByte(required);
@@ -89,7 +89,7 @@ public final class M3FiveLibraryPreparedRows<K, V> {
     /** Defensive import of precomputed logical occurrence membership. */
     public static <K, V> M3FiveLibraryPreparedRows<K, V> fromBits(
             M3FiveLibraryIndexViews<K, V> source, BitSet selected,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(selected, "selected");
         requireBackend(backend);
@@ -103,23 +103,23 @@ public final class M3FiveLibraryPreparedRows<K, V> {
         if ((value & ~0xff) != 0) throw new IllegalArgumentException("state must fit unsigned byte");
     }
 
-    private static void requireBackend(M3IndexMaskCompactor.Backend backend) {
+    private static void requireBackend(IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(backend, "backend");
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED
-                && !M3IndexMaskCompactor.nativeAvailable()) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED
+                && !IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
         }
     }
 
     private static <K, V> M3FiveLibraryPreparedRows<K, V> admitted(
             M3FiveLibraryIndexViews<K, V> source, BitSet mask,
-            M3IndexMaskCompactor.Backend backend) {
+            IndexMaskCompactor.Backend backend) {
         int n = source.size();
         int[] positions = new int[n];
         byte[] flags = new byte[n];
         for (int i = 0; i < n; i++) positions[i] = i;
         for (int i = mask.nextSetBit(0); i >= 0; i = mask.nextSetBit(i + 1)) flags[i] = 1;
-        int[] indexes = M3IndexMaskCompactor.select(positions, flags, 1, backend);
+        int[] indexes = IndexMaskCompactor.select(positions, flags, 1, backend);
         if (indexes.length != mask.cardinality()) throw new IllegalStateException("selected count changed");
         return new M3FiveLibraryPreparedRows<>(source, mask, indexes);
     }
@@ -132,31 +132,31 @@ public final class M3FiveLibraryPreparedRows<K, V> {
     public M3FiveLibraryPreparedRows<K, V> and(M3FiveLibraryPreparedRows<K, V> other) {
         requireSameSource(other);
         BitSet bits = (BitSet) selected.clone(); bits.and(other.selected);
-        return admitted(source, bits, M3IndexMaskCompactor.Backend.JAVA);
+        return admitted(source, bits, IndexMaskCompactor.Backend.JAVA);
     }
 
     public M3FiveLibraryPreparedRows<K, V> or(M3FiveLibraryPreparedRows<K, V> other) {
         requireSameSource(other);
         BitSet bits = (BitSet) selected.clone(); bits.or(other.selected);
-        return admitted(source, bits, M3IndexMaskCompactor.Backend.JAVA);
+        return admitted(source, bits, IndexMaskCompactor.Backend.JAVA);
     }
 
     public M3FiveLibraryPreparedRows<K, V> xor(M3FiveLibraryPreparedRows<K, V> other) {
         requireSameSource(other);
         BitSet bits = (BitSet) selected.clone(); bits.xor(other.selected);
-        return admitted(source, bits, M3IndexMaskCompactor.Backend.JAVA);
+        return admitted(source, bits, IndexMaskCompactor.Backend.JAVA);
     }
 
     public M3FiveLibraryPreparedRows<K, V> minus(M3FiveLibraryPreparedRows<K, V> other) {
         requireSameSource(other);
         BitSet bits = (BitSet) selected.clone(); bits.andNot(other.selected);
-        return admitted(source, bits, M3IndexMaskCompactor.Backend.JAVA);
+        return admitted(source, bits, IndexMaskCompactor.Backend.JAVA);
     }
 
     /** Complement stays in [0, source.size()); no global capacity preallocation. */
     public M3FiveLibraryPreparedRows<K, V> not() {
         BitSet bits = (BitSet) selected.clone(); bits.flip(0, source.size());
-        return admitted(source, bits, M3IndexMaskCompactor.Backend.JAVA);
+        return admitted(source, bits, IndexMaskCompactor.Backend.JAVA);
     }
 
     /** Evaluate only previously admitted logical occurrences, once and in view order. */

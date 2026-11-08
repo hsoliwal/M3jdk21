@@ -44,7 +44,7 @@ public final class BigArray {
     private final int segmentMask;
     private Object[] segments;
     private long length;
-    private final M3LazyPrimitiveAddressSpace sparse;
+    private final LazyPrimitiveAddressSpace sparse;
 
     public BigArray(PrimitiveKind kind, long length) {
         this(kind, length, DEFAULT_SEGMENT_SHIFT);
@@ -75,7 +75,7 @@ public final class BigArray {
         segmentShift = shift;
         segmentSize = 1 << shift;
         segmentMask = segmentSize - 1;
-        sparse = M3LazyPrimitiveAddressSpace.paged(kind, Long.MAX_VALUE, shift);
+        sparse = LazyPrimitiveAddressSpace.paged(kind, Long.MAX_VALUE, shift);
         this.length = length;
     }
 
@@ -273,15 +273,15 @@ public final class BigArray {
 
     /** First occurrence under PrimitiveKind equality in a bounded long range. */
     public long indexOfBits(long from, long to, long bits) {
-        return indexOfBits(from, to, bits, M3IndexMaskCompactor.Backend.JAVA);
+        return indexOfBits(from, to, bits, IndexMaskCompactor.Backend.JAVA);
     }
 
     /** Native scans use bounded resident pages; absent pages are exact zero metadata. */
-    public long indexOfBits(long from, long to, long bits, M3IndexMaskCompactor.Backend backend) {
+    public long indexOfBits(long from, long to, long bits, IndexMaskCompactor.Backend backend) {
         checkRange(from, to);
         Objects.requireNonNull(backend, "backend");
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED
-                && !M3IndexMaskCompactor.nativeAvailable()) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED
+                && !IndexMaskCompactor.nativeAvailable()) {
             throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
         }
         if (from == to) return -1;
@@ -295,7 +295,7 @@ public final class BigArray {
                 if (zero && state[0] < base) { state[1] = state[0]; return; }
                 int low = (int) Math.max(0L, from - base);
                 int high = (int) Math.min((long) segmentSize, to - base);
-                int match = M3IndexMaskCompactor.firstEqualBits(kind, lane, low, high - low, bits, backend);
+                int match = IndexMaskCompactor.firstEqualBits(kind, lane, low, high - low, bits, backend);
                 if (match >= 0) state[1] = base + match;
                 state[0] = Math.min(to, end);
             });
@@ -304,7 +304,7 @@ public final class BigArray {
         for (long cursor = from; cursor < to;) {
             int offset = displacement(cursor);
             int count = (int) Math.min(to - cursor, segmentSize - offset);
-            int match = M3IndexMaskCompactor.firstEqualBits(kind, page(cursor, false), offset, count, bits, backend);
+            int match = IndexMaskCompactor.firstEqualBits(kind, page(cursor, false), offset, count, bits, backend);
             if (match >= 0) return cursor - offset + match;
             cursor += count;
         }
@@ -415,9 +415,9 @@ public final class BigArray {
 
     /** Distinct owners: copy payload proportional to resident pages, including raw Boolean bytes. */
     private void copyResident(long sourceIndex, BigArray target, long targetIndex, long count) {
-        M3LazyPrimitiveAddressSpace.LeafConsumer prepare = (base, lane) ->
+        LazyPrimitiveAddressSpace.LeafConsumer prepare = (base, lane) ->
                 transferResidentLeaf(base, lane, sourceIndex, target, targetIndex, count, true);
-        M3LazyPrimitiveAddressSpace.LeafConsumer publish = (base, lane) ->
+        LazyPrimitiveAddressSpace.LeafConsumer publish = (base, lane) ->
                 transferResidentLeaf(base, lane, sourceIndex, target, targetIndex, count, false);
         sparse.forEachAllocatedLeaf(sourceIndex, sourceIndex + count, prepare);
         if (target.sparse == null) target.fillBits(targetIndex, targetIndex + count, 0L);

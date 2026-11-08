@@ -15,7 +15,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Admission of optional sorted/viewport work based on estimated retained item AND signal bytes.
@@ -40,7 +40,7 @@ public final class SortItemPressurePlan {
 
     public record Admission(int requiredCount, int optionalCount, long requiredBytes,
                             long optionalBytes, long optionalBudgetBytes,
-                            M3RuntimeHeap.Pressure pressure) {
+                            RuntimeHeap.Pressure pressure) {
         public int totalCount() { return Math.addExact(requiredCount, optionalCount); }
     }
 
@@ -56,7 +56,7 @@ public final class SortItemPressurePlan {
      */
     public static Admission plan(long[] retainedItemBytes, long[] retainedSignalBytes,
             int[] sortedIds, int offset, int requiredRows, int optionalRows,
-            M3RuntimeHeap.Snapshot snapshot) {
+            RuntimeHeap.Snapshot snapshot) {
         Objects.requireNonNull(retainedItemBytes, "retainedItemBytes");
         Objects.requireNonNull(retainedSignalBytes, "retainedSignalBytes");
         Objects.requireNonNull(sortedIds, "sortedIds");
@@ -81,16 +81,16 @@ public final class SortItemPressurePlan {
             return new Admission(mandatory, 0, required, 0L, 0L,
                     snapshot.pressure(required));
         }
-        M3RuntimeHeap.Pressure pressure = snapshot.pressure(required);
+        RuntimeHeap.Pressure pressure = snapshot.pressure(required);
         long free = Math.max(0L, snapshot.freeToMaximum() - snapshot.safetyReserve());
         long headroom = Math.max(0L, free - required);
         // Admission below warm threshold leaves space for independent JVM work.
         long warmLimit = snapshot.maximumBytes() / 10L * 7L
                 + snapshot.maximumBytes() % 10L * 7L / 10L;
         long warmHeadroom = Math.max(0L, warmLimit - snapshot.usedBytes() - required);
-        long budget = pressure == M3RuntimeHeap.Pressure.HIGH ? 0L
+        long budget = pressure == RuntimeHeap.Pressure.HIGH ? 0L
                 : Math.min(headroom, warmHeadroom);
-        if (pressure == M3RuntimeHeap.Pressure.HIGH) {
+        if (pressure == RuntimeHeap.Pressure.HIGH) {
             return new Admission(mandatory, 0, required, 0L, 0L, pressure);
         }
         int admitted = 0;
@@ -109,7 +109,7 @@ public final class SortItemPressurePlan {
     public static Admission plan(long[] retainedItemBytes, long[] retainedSignalBytes,
             int[] sortedIds, int offset, int requiredRows, int optionalRows) {
         return plan(retainedItemBytes, retainedSignalBytes, sortedIds, offset,
-                requiredRows, optionalRows, M3RuntimeHeap.current());
+                requiredRows, optionalRows, RuntimeHeap.current());
     }
 
     private static long plus(long left, long right) {

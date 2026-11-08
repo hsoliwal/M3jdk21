@@ -32,7 +32,7 @@ import java.util.Objects;
  * traverses dead tombstones; this favors lookup-heavy churn at the cost of
  * scanning the affected probe run on a deletion.
  */
-public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
+public final class M3LinkedHashMap<K, V> extends OrderedSlotMap<K, V> {
     private final Table table;
     private final boolean reversed;
     /** Insertion-order map. */
@@ -56,9 +56,9 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override int lastSlot() { return reversed ? table.first : table.last; }
     @Override int nextSlot(int slot) { return reversed ? table.before[slot] : table.after[slot]; }
     @Override int revision() { return table.modifications; }
-    @Override int findSlot(Object key) { return table.find(key, M3SlotArrays.hash(key)); }
-    @Override K keyAt(int slot) { return M3SlotArrays.get(table.keys, slot); }
-    @Override V valueAt(int slot) { return table.keyOnly ? null : M3SlotArrays.get(table.values, slot); }
+    @Override int findSlot(Object key) { return table.find(key, SlotArrays.hash(key)); }
+    @Override K keyAt(int slot) { return SlotArrays.get(table.keys, slot); }
+    @Override V valueAt(int slot) { return table.keyOnly ? null : SlotArrays.get(table.values, slot); }
     @Override V writeAt(int slot, V value) {
         V old = valueAt(slot); if (!table.keyOnly) { table.values[slot] = value; } return old;
     }
@@ -66,12 +66,12 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     @Override void accessed(int slot) { if (table.accessOrder) { table.move(slot, false); } }
     @Override public int size() { return table.size; }
     @Override public V put(K key, V value) {
-        int hash = M3SlotArrays.hash(key), s = table.find(key, hash);
+        int hash = SlotArrays.hash(key), s = table.find(key, hash);
         if (s < 0) { table.insert(key, value, hash, false); return null; }
         V old = writeAt(s, value); accessed(s); return old;
     }
     @Override long locate(Object key) {
-        int hash = M3SlotArrays.hash(key);
+        int hash = SlotArrays.hash(key);
         return (long) hash << 32 | table.find(key, hash) & 0xFFFFFFFFL;
     }
     @Override void insertAbsent(K key, V value, int hint, int expected) {
@@ -79,7 +79,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
         table.insert(key, value, hint, false);
     }
     private V positioned(K key, V value, boolean first) {
-        int hash = M3SlotArrays.hash(key), s = table.find(key, hash);
+        int hash = SlotArrays.hash(key), s = table.find(key, hash);
         if (s < 0) { table.insert(key, value, hash, first); return null; }
         V old = writeAt(s, value); table.move(s, first); return old;
     }
@@ -104,10 +104,10 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
     }
 
     private static final class Table {
-        private Object[] keys = M3SlotArrays.EMPTY_OBJECTS, values = M3SlotArrays.EMPTY_OBJECTS;
-        private int[] hashes = M3SlotArrays.EMPTY_INTS, before = M3SlotArrays.EMPTY_INTS,
-                after = M3SlotArrays.EMPTY_INTS, positions = M3SlotArrays.EMPTY_INTS;
-        private int[] index = M3SlotArrays.EMPTY_INTS;
+        private Object[] keys = SlotArrays.EMPTY_OBJECTS, values = SlotArrays.EMPTY_OBJECTS;
+        private int[] hashes = SlotArrays.EMPTY_INTS, before = SlotArrays.EMPTY_INTS,
+                after = SlotArrays.EMPTY_INTS, positions = SlotArrays.EMPTY_INTS;
+        private int[] index = SlotArrays.EMPTY_INTS;
         private int first = -1, last = -1, free = -1, used, size, modifications;
         private final boolean accessOrder, keyOnly;
         private final int expectedKeys;
@@ -132,7 +132,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             return -1;
         }
         private int rewalk(Object key, int hash, int walks) {
-            if (walks == M3SlotMap.REWALKS) { throw new java.util.ConcurrentModificationException(); }
+            if (walks == SlotMap.REWALKS) { throw new java.util.ConcurrentModificationException(); }
             return find(key, hash, walks + 1);
         }
         int vacant(int hash) {
@@ -171,7 +171,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             return target;
         }
         void grow() {
-            int n = keys.length == 0 ? initialPayloadCapacity() : M3SlotArrays.grow(keys.length);
+            int n = keys.length == 0 ? initialPayloadCapacity() : SlotArrays.grow(keys.length);
             Object[] k = copyObjects(keys, n), v = keyOnly ? values : copyObjects(values, n);
             int[] h = copyInts(hashes, n), b = copyInts(before, n), a = copyInts(after, n), p = copyInts(positions, n);
             int[] buckets = index.length == 0 ? jdk.m3.arrays.ArrayNative.allocateIntsRequired(initialIndexCapacity()) : index;
@@ -182,7 +182,7 @@ public final class M3LinkedHashMap<K, V> extends M3OrderedSlotMap<K, V> {
             if (free < 0 && used == keys.length) { grow(); }
             if (index.length == 0) { rehash(16); }
             else if (size + 1 >= index.length - index.length / 3) {
-                rehash(M3SlotArrays.doubled(index.length));
+                rehash(SlotArrays.doubled(index.length));
             }
             int p = vacant(hash), s;
             if (free < 0) { s = used++; } else { s = free; free = after[s]; }

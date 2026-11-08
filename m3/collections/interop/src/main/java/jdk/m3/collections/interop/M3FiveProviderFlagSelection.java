@@ -6,10 +6,10 @@
 package jdk.m3.collections.interop;
 
 import com.google.common.collect.Multiset;
-import jdk.m3.collections.M3CountedBag;
+import jdk.m3.collections.CountedBag;
 import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.M3LinkedHashMap;
-import jdk.m3.collections.M3ObjectCounts;
+import jdk.m3.collections.ObjectCounts;
 import jdk.m3.collections.M3TreeMap;
 import java.util.ConcurrentModificationException;
 import java.util.Comparator;
@@ -24,10 +24,10 @@ import org.springframework.util.MultiValueMap;
 /**
  * The five distinct SDK provider contracts over one selected M3 count owner.
  *
- * <p>Capture uses the original generation-aware, 32-bit M3ObjectCounts flag/index
+ * <p>Capture uses the original generation-aware, 32-bit ObjectCounts flag/index
  * lane and the existing Java/C17 JNI selector. The selected immutable flag
  * metadata belongs to that captured source generation. Exactly one new mutable
- * M3CountedBag owns all live counts shared by the Guava, Eclipse and Apache
+ * CountedBag owns all live counts shared by the Guava, Eclipse and Apache
  * facades. No further per-occurrence count store, Entry/Node, native symbol or
  * JVM object pointer is created. JDK Map and Spring MultiValueMap are detached
  * materializations to preserve their distinct map/multivalue contracts.
@@ -35,24 +35,24 @@ import org.springframework.util.MultiValueMap;
  * newly inserted keys have no captured state and return zero.</p>
  */
 public final class M3FiveProviderFlagSelection<E> {
-    private final M3ObjectCounts<E> capturedFlags;
-    private final M3CountedBag<E> sharedCounts;
+    private final ObjectCounts<E> capturedFlags;
+    private final CountedBag<E> sharedCounts;
 
-    private M3FiveProviderFlagSelection(M3ObjectCounts<E> flags, M3CountedBag<E> counts) {
+    private M3FiveProviderFlagSelection(ObjectCounts<E> flags, CountedBag<E> counts) {
         this.capturedFlags = flags;
         this.sharedCounts = counts;
     }
 
     /** Filter one version of the source and preserve duplicate counts without re-filtering. */
     public static <E> M3FiveProviderFlagSelection<E> capture(
-            M3ObjectCounts<E> source, int requiredMask, int excludedMask,
+            ObjectCounts<E> source, int requiredMask, int excludedMask,
             IndexPathMasks.Backend backend) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(backend, "backend");
         long stamp = source.countRevision();
         List<E> selected = source.flaggedElements(requiredMask, excludedMask, backend);
-        M3ObjectCounts<E> flags = new M3ObjectCounts<>();
-        M3CountedBag<E> live = new M3CountedBag<>();
+        ObjectCounts<E> flags = new ObjectCounts<>();
+        CountedBag<E> live = new CountedBag<>();
         for (E key : selected) {
             int count = source.count(key);
             if (count <= 0) throw new ConcurrentModificationException("count source changed during capture");
@@ -68,7 +68,7 @@ public final class M3FiveProviderFlagSelection<E> {
     }
 
     /** The same physical M3 count owner is returned by all three provider facades. */
-    public M3CountedBag<E> m3Backend() { return sharedCounts; }
+    public CountedBag<E> m3Backend() { return sharedCounts; }
     public int distinctSize() { return sharedCounts.distinctSize(); }
     public long totalCount() { return sharedCounts.totalOccurrences(); }
 

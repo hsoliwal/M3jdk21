@@ -12,16 +12,16 @@ import java.util.function.Predicate;
 import java.util.Objects;
 import jdk.m3.collections.M3ArrayList;
 import jdk.m3.collections.CollectionViews;
-import jdk.m3.collections.M3CountedBag;
-import jdk.m3.collections.M3FilteredDeques;
-import jdk.m3.collections.M3FilteredViews;
-import jdk.m3.collections.M3IndexedListSnapshot;
-import jdk.m3.collections.M3IndexedTable;
+import jdk.m3.collections.CountedBag;
+import jdk.m3.collections.FilteredDeques;
+import jdk.m3.collections.FilteredViews;
+import jdk.m3.collections.IndexedListSnapshot;
+import jdk.m3.collections.IndexedTable;
 import jdk.m3.collections.M3LinkedHashMap;
 import jdk.m3.collections.M3LinkedHashSet;
 import jdk.m3.collections.M3LinkedList;
-import jdk.m3.collections.M3LongIndexProjection;
-import jdk.m3.collections.M3MutableFilteredViews;
+import jdk.m3.collections.LongIndexProjection;
+import jdk.m3.collections.MutableFilteredViews;
 import jdk.m3.collections.M3TreeMap;
 import jdk.m3.collections.M3TreeSet;
 
@@ -42,7 +42,7 @@ public final class NativeFiveLibrarySdk {
     public static <E> M3TreeSet<E> sortedSet(Comparator<? super E> order) {
         return new M3TreeSet<>(Objects.requireNonNull(order, "order"));
     }
-    public static <E> M3CountedBag<E> bag() { return new M3CountedBag<>(); }
+    public static <E> CountedBag<E> bag() { return new CountedBag<>(); }
     public static <K,V> IndexedBiMap<K,V> biMap() { return new IndexedBiMap<>(); }
     public static <K,V> IndexedMultiValueMap<K,V> listMultimap() {
         return new IndexedMultiValueMap<>();
@@ -53,12 +53,12 @@ public final class NativeFiveLibrarySdk {
     public static <K,V> ListMultiValueMap<K,V> mapOfLists() {
         return new ListMultiValueMap<>();
     }
-    public static <R,C,V> M3IndexedTable<R,C,V> table() { return new M3IndexedTable<>(); }
-    public static <E> M3IndexedListSnapshot<E> snapshot(java.util.Collection<? extends E> values) {
-        return M3IndexedListSnapshot.copyOf(values);
+    public static <R,C,V> IndexedTable<R,C,V> table() { return new IndexedTable<>(); }
+    public static <E> IndexedListSnapshot<E> snapshot(java.util.Collection<? extends E> values) {
+        return IndexedListSnapshot.copyOf(values);
     }
-    public static M3LongIndexProjection longProjection(long[] values) {
-        return M3LongIndexProjection.snapshot(values);
+    public static LongIndexProjection longProjection(long[] values) {
+        return LongIndexProjection.snapshot(values);
     }
 
     /**
@@ -82,28 +82,28 @@ public final class NativeFiveLibrarySdk {
     /** Live deque selection, retaining the M3/JDK queue order and mutation contract. */
     public static <E> Deque<E> filteredDeque(
             Deque<E> owner, Predicate<? super E> accepted) {
-        return M3FilteredDeques.filtered(Objects.requireNonNull(owner, "owner"),
+        return FilteredDeques.filtered(Objects.requireNonNull(owner, "owner"),
                 Objects.requireNonNull(accepted, "accepted"));
     }
 
     /** Writable sorted filter using the existing M3 comparator and range-view owner. */
     public static <E> NavigableSet<E> filteredNavigableSet(
             NavigableSet<E> owner, Predicate<? super E> accepted) {
-        return M3MutableFilteredViews.filter(Objects.requireNonNull(owner, "owner"),
+        return MutableFilteredViews.filter(Objects.requireNonNull(owner, "owner"),
                 Objects.requireNonNull(accepted, "accepted"));
     }
 
     /** Writable map-entry filter; key comparators and stored representatives stay authoritative. */
     public static <K, V> NavigableMap<K, V> filteredNavigableMapEntries(
             NavigableMap<K, V> owner, BiPredicate<? super K, ? super V> accepted) {
-        return M3MutableFilteredViews.filterEntries(Objects.requireNonNull(owner, "owner"),
+        return MutableFilteredViews.filterEntries(Objects.requireNonNull(owner, "owner"),
                 Objects.requireNonNull(accepted, "accepted"));
     }
 
     /** Explicit immutable facade over a live filter, separate from writable filters. */
     public static <E> Collection<E> readOnlyFilteredCollection(
             Collection<E> owner, Predicate<? super E> accepted) {
-        return M3FilteredViews.filter(Objects.requireNonNull(owner, "owner"),
+        return FilteredViews.filter(Objects.requireNonNull(owner, "owner"),
                 Objects.requireNonNull(accepted, "accepted"));
     }
 }

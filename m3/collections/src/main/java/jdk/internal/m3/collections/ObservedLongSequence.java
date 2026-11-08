@@ -5,25 +5,25 @@ package jdk.internal.m3.collections;
 import java.util.Objects;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
-import jdk.m3.collections.M3LongSequence;
+import jdk.m3.collections.LongSequence;
 
 /** Single-threaded; callback reentry is permitted but observation is suppressed. */
 //FLLDCIM: RELOCATE - donor blob 7338965418c4 at d5ad5090d87e; recipe m3/collections/qualification/census2-t2-20261106/relocate.py v6
 public final class ObservedLongSequence extends ForwardingLongSequence {
-    private final M3LongSequence backend;
+    private final LongSequence backend;
     private final LongSequenceListener listener;
     private final LongSequenceErrorHandler handler;
     private boolean notifying;
-    public ObservedLongSequence(M3LongSequence backend,LongSequenceListener listener) {
+    public ObservedLongSequence(LongSequence backend,LongSequenceListener listener) {
         this(backend,listener,(event,failure)->{});
     }
-    public ObservedLongSequence(M3LongSequence backend,LongSequenceListener listener,
+    public ObservedLongSequence(LongSequence backend,LongSequenceListener listener,
                                 LongSequenceErrorHandler handler) {
         this.backend=Objects.requireNonNull(backend,"backend");
         this.listener=Objects.requireNonNull(listener,"listener");
         this.handler=Objects.requireNonNull(handler,"handler");
     }
-    @Override protected M3LongSequence delegate(){return backend;}
+    @Override protected LongSequence delegate(){return backend;}
     private int safeSize() {
         try {
             int size=backend.size();

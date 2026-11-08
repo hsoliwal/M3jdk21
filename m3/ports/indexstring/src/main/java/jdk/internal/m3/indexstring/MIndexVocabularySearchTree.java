@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.indexstring;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -68,7 +68,7 @@ public final class MIndexVocabularySearchTree {
    * Publication is atomic; failure leaves the ranked-array fallback intact.
    */
   public synchronized PreparedTries precomputeTries(
-      MIndexTrieNavigation.Limits limits, M3ProgressMonitor monitor) {
+      MIndexTrieNavigation.Limits limits, ProgressMonitor monitor) {
     Objects.requireNonNull(limits, "limits");
     MIndexTrieNavigation.check(monitor);
     if (preparedTries != null) {
@@ -103,7 +103,7 @@ public final class MIndexVocabularySearchTree {
   }
 
   private MIndexLiteralSearchTree compileDirection(boolean reverse,
-      MIndexTrieNavigation.Limits limits, M3ProgressMonitor monitor) {
+      MIndexTrieNavigation.Limits limits, ProgressMonitor monitor) {
     MIndexLiteralSearchTree.Builder builder = MIndexLiteralSearchTree.builder(limits.maxStates());
     for (int row = 0; row < size(); row++) {
       MIndexTrieNavigation.check(monitor);
@@ -116,7 +116,7 @@ public final class MIndexVocabularySearchTree {
   /** Evaluate a pure compiled machine during preparation; runtime answers are rank-indexed bits. */
   public MIndexTrieNavigation.PreparedMatches precomputeMatches(
       MIndexTrieNavigation.Utf16Machine machine, MIndexTrieNavigation.WorkLimits limits,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     return requirePrepared().forward.precompute(machine, limits, monitor);
   }
 
@@ -314,7 +314,7 @@ public final class MIndexVocabularySearchTree {
   }
 
   /** Range coordinates agree with the retained forward ranks. Explicit preparation is required. */
-  public MIndexTrieNavigation.RankRange prefixRange(CharSequence prefix, M3ProgressMonitor monitor) {
+  public MIndexTrieNavigation.RankRange prefixRange(CharSequence prefix, ProgressMonitor monitor) {
     Objects.requireNonNull(prefix, "prefix");
     MIndexTrieNavigation navigation = requirePrepared().forward;
     int state = navigation.stateFor(prefix, 0, prefix.length(), MIndexTrieNavigation.Direction.FORWARD, monitor);
@@ -322,7 +322,7 @@ public final class MIndexVocabularySearchTree {
   }
 
   /** Range coordinates agree with the retained reverse ranks; units, not code points, are reversed. */
-  public MIndexTrieNavigation.RankRange suffixRange(CharSequence suffix, M3ProgressMonitor monitor) {
+  public MIndexTrieNavigation.RankRange suffixRange(CharSequence suffix, ProgressMonitor monitor) {
     Objects.requireNonNull(suffix, "suffix");
     MIndexTrieNavigation navigation = requirePrepared().reverse;
     int state = navigation.stateFor(suffix, 0, suffix.length(), MIndexTrieNavigation.Direction.REVERSE, monitor);
@@ -336,7 +336,7 @@ public final class MIndexVocabularySearchTree {
    * to prohibit overlap. This method itself deliberately permits overlapping affix constraints.
    */
   public int[] affixRows(CharSequence prefix, CharSequence suffix, int minimumLength, int maximumLength,
-      M3ProgressMonitor monitor) {
+      ProgressMonitor monitor) {
     if (minimumLength < 0 || maximumLength < minimumLength) throw new IllegalArgumentException("invalid length bounds");
     MIndexTrieNavigation.RankRange left = prefixRange(prefix, monitor);
     MIndexTrieNavigation.RankRange right = suffixRange(suffix, monitor);

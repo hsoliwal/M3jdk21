@@ -14,11 +14,11 @@ public final class M3PrimitiveSelectionWordContract {
 
     public static void main(String[] args) {
         for (int size : new int[] {0, 1, 63, 64, 65, 127, 128, 129, 257}) {
-            var store = new M3PrimitiveSoaStore(Math.max(1, size),
-                    M3PrimitiveSoaStore.STATE_BYTES, PrimitiveKind.LONG);
+            var store = new PrimitiveSoaStore(Math.max(1, size),
+                    PrimitiveSoaStore.STATE_BYTES, PrimitiveKind.LONG);
             for (int i = 0; i < size; i++) store.appendRow(new long[] {i}, (byte) -1, 0L);
-            var identity = M3PrimitiveIndexView.identity(store);
-            var views = new M3PrimitiveIndexView[] {identity, identity.reversed(),
+            var identity = PrimitiveIndexView.identity(store);
+            var views = new PrimitiveIndexView[] {identity, identity.reversed(),
                     identity.slice(size / 4, size - size / 4).reversed(),
                     identity.sortedByLane(0, false).topKByLane(0, size / 2, true)};
             for (var view : views) {
@@ -63,7 +63,7 @@ public final class M3PrimitiveSelectionWordContract {
         System.out.println("M3PrimitiveSelectionWordContract PASS checks=" + checks);
     }
 
-    private static void stale(M3PrimitiveIndexView view) {
+    private static void stale(PrimitiveIndexView view) {
         try { view.size(); }
         catch (ConcurrentModificationException expected) { checks++; return; }
         throw new AssertionError("shared generation must become stale");

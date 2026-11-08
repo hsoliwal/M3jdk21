@@ -1,7 +1,7 @@
 /*
  * Copyright 2026 Hitesh Soliwal and contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
- * Source: SlotAllocator28, M3Address28 and the existing segmented-lane pattern.
+ * Source: SlotAllocator28, Address28 and the existing segmented-lane pattern.
  */
 package jdk.m3.collections;
 
@@ -39,7 +39,7 @@ public final class ObjectStateSlots28 {
     public static final int USER_2 = 0x80;
 
     private final SlotAllocator28 owner = new SlotAllocator28();
-    private final byte[][][] states = new byte[M3Address28.REGION_COUNT][][];
+    private final byte[][][] states = new byte[Address28.REGION_COUNT][][];
     private int stateRegions;
     private int stateBlocks;
 
@@ -108,7 +108,7 @@ public final class ObjectStateSlots28 {
     /** First matching *live physical slot*, at or after {@code from}; -1 if absent. */
     public int nextMatchingSlot(int from, int requiredMask, int excludedMask) {
         requireMasks(requiredMask, excludedMask);
-        M3Address28.checkRange(from, M3Address28.MAX_SLOTS);
+        Address28.checkRange(from, Address28.MAX_SLOTS);
         if ((requiredMask & excludedMask) != 0) return -1;
         for (int slot = owner.nextLiveSlot(from); slot >= 0;
                 slot = owner.nextLiveSlot(slot + 1)) {
@@ -119,7 +119,7 @@ public final class ObjectStateSlots28 {
 
     /** Count matching live physical slots in a checked half-open interval. */
     public int countMatching(int from, int to, int requiredMask, int excludedMask) {
-        M3Address28.checkRange(from, to);
+        Address28.checkRange(from, to);
         requireMasks(requiredMask, excludedMask);
         if ((requiredMask & excludedMask) != 0) return 0;
         int count = 0;
@@ -214,15 +214,15 @@ public final class ObjectStateSlots28 {
      * This is not automatically faster than the no-scratch Java path.</p>
      */
     public int[] matchingPositions(long[] orderedHandles, int from, int to,
-            int requiredMask, int excludedMask, M3IndexMaskCompactor.Backend backend) {
+            int requiredMask, int excludedMask, IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(orderedHandles, "orderedHandles");
         Objects.requireNonNull(backend, "backend");
         Objects.checkFromToIndex(from, to, orderedHandles.length);
         requireMasks(requiredMask, excludedMask);
         validateHandles(orderedHandles, from, to);
 
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
-            if (!M3IndexMaskCompactor.nativeAvailable()) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!IndexMaskCompactor.nativeAvailable()) {
                 throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
             }
             int length = to - from;
@@ -233,8 +233,8 @@ public final class ObjectStateSlots28 {
                 int slot = SlotAllocator28.slot(orderedHandles[from + i]);
                 eligible[i] = (byte) (matches(read(slot), requiredMask, excludedMask) ? 1 : 0);
             }
-            return M3IndexMaskCompactor.select(
-                    positions, eligible, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+            return IndexMaskCompactor.select(
+                    positions, eligible, 1, IndexMaskCompactor.Backend.NATIVE_REQUIRED);
         }
 
         int selected = 0;
@@ -283,7 +283,7 @@ public final class ObjectStateSlots28 {
 
     /** Primitive state bytes only; excludes array headers/directories and slot allocator. */
     public long statePayloadBytes() {
-        return (long) stateBlocks * M3Address28.VALUES_PER_BLOCK;
+        return (long) stateBlocks * Address28.VALUES_PER_BLOCK;
     }
 
     public int allocatedStateBlocks() { return stateBlocks; }
@@ -321,7 +321,7 @@ public final class ObjectStateSlots28 {
         byte[][] region = states[regionIndex];
         if (region == null) {
             if (state == 0) return;
-            region = new byte[M3Address28.BLOCKS_PER_REGION][];
+            region = new byte[Address28.BLOCKS_PER_REGION][];
             states[regionIndex] = region;
             stateRegions++;
         }
@@ -329,7 +329,7 @@ public final class ObjectStateSlots28 {
         byte[] page = region[blockIndex];
         if (page == null) {
             if (state == 0) return;
-            page = new byte[M3Address28.VALUES_PER_BLOCK];
+            page = new byte[Address28.VALUES_PER_BLOCK];
             region[blockIndex] = page;
             stateBlocks++;
         }

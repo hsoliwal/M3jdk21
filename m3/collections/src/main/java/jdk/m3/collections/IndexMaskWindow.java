@@ -50,7 +50,7 @@ public final class IndexMaskWindow {
      */
     public static long scan(int[] orderedRows, byte[] rowStates, int firstIndex,
             int requiredMask, int excludedMask, int[] output, int outputOffset,
-            int limit, M3IndexMaskCompactor.Backend backend) {
+            int limit, IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(orderedRows, "orderedRows");
         Objects.requireNonNull(rowStates, "rowStates");
         Objects.requireNonNull(output, "output");
@@ -70,8 +70,8 @@ public final class IndexMaskWindow {
             throw new IllegalArgumentException("invalid bounded window limit");
         }
         Objects.checkFromIndexSize(outputOffset, limit, output.length);
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
-            if (!M3IndexMaskCompactor.nativeAvailable()) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!IndexMaskCompactor.nativeAvailable()) {
                 throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
             }
             if (limit == 0) return pack(firstIndex, 0);
@@ -101,7 +101,7 @@ public final class IndexMaskWindow {
      */
     public static long scanBounded(int[] orderedRows, byte[] rowStates, int firstIndex,
             int maxExamined, int requiredMask, int excludedMask, int[] output,
-            int outputOffset, int limit, M3IndexMaskCompactor.Backend backend) {
+            int outputOffset, int limit, IndexMaskCompactor.Backend backend) {
         Objects.requireNonNull(orderedRows, "orderedRows");
         Objects.requireNonNull(rowStates, "rowStates");
         Objects.requireNonNull(output, "output");
@@ -121,8 +121,8 @@ public final class IndexMaskWindow {
         Objects.checkFromIndexSize(outputOffset, limit, output.length);
         if (maxExamined < 0) throw new IllegalArgumentException("negative input scan budget");
         int end = firstIndex + Math.min(maxExamined, orderedRows.length - firstIndex);
-        if (backend == M3IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
-            if (!M3IndexMaskCompactor.nativeAvailable()) {
+        if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
+            if (!IndexMaskCompactor.nativeAvailable()) {
                 throw new UnsatisfiedLinkError("m3_collections_mask JNI library unavailable");
             }
             if (limit == 0 || end == firstIndex) return pack(firstIndex, 0);

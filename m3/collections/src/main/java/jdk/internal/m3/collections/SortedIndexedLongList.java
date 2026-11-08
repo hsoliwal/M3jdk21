@@ -17,7 +17,7 @@ package jdk.internal.m3.collections;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 
 /**
  * Primitive-only mutable list with a separate, maintained ordering index.
@@ -373,7 +373,7 @@ public final class SortedIndexedLongList {
         if (required <= values.length) return;
         long preferred = (long) values.length + (values.length >>> 1) + 1L;
         if (preferred < required) preferred = required;
-        int capacity = Math.toIntExact(M3RuntimeHeap.chooseAmortizedCapacity(
+        int capacity = Math.toIntExact(RuntimeHeap.chooseAmortizedCapacity(
                 required, Math.min((long) Integer.MAX_VALUE - 1L, preferred),
                 PEAK_BYTES_PER_SLOT));
         long[] nextValues = Arrays.copyOf(values, capacity);

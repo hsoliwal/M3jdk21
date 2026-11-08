@@ -8,7 +8,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 
 /**
  * In-place, non-owning operations on aligned slot-index and state-mask arrays.
@@ -118,8 +118,8 @@ public final class StateMaskArrays {
      * the existing explicit JNI availability/error contract.
      */
     public static int[] select(int[] rowSlots, byte[] stateBits, int requiredBits,
-                               M3IndexMaskCompactor.Backend backend) {
-        return M3IndexMaskCompactor.select(rowSlots, stateBits, requiredBits, backend);
+                               IndexMaskCompactor.Backend backend) {
+        return IndexMaskCompactor.select(rowSlots, stateBits, requiredBits, backend);
     }
 
     /**
@@ -131,10 +131,10 @@ public final class StateMaskArrays {
      * dispatch; no Java predicate or comparator crosses JNI.
      */
     public static int[] select(int[] rowSlots, byte[] stateBits, int requiredBits,
-                               int forbiddenBits, M3IndexMaskCompactor.Backend backend) {
+                               int forbiddenBits, IndexMaskCompactor.Backend backend) {
         requireAligned(rowSlots, stateBits);
         checkMasks(requiredBits, forbiddenBits);
-        return M3IndexMaskCompactor.selectWindow(rowSlots, 0, stateBits, 0,
+        return IndexMaskCompactor.selectWindow(rowSlots, 0, stateBits, 0,
                 rowSlots.length, requiredBits, forbiddenBits, backend);
     }
 

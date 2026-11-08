@@ -17,7 +17,7 @@ package jdk.internal.m3.collections.sketch;
 import java.util.Objects;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
-import jdk.m3.collections.M3RuntimeHeap;
+import jdk.m3.collections.RuntimeHeap;
 import jdk.internal.m3.collections.SortSignalLane;
 import jdk.internal.m3.collections.SortableFirstSignalOrder;
 
@@ -71,7 +71,7 @@ public final class MarkerTopKIndex {
     /** Deterministic package-private heap-pressure seam for contract oracles. */
     static int[] smallest(int[] source, int from, int toExclusive, int k,
             IntBinaryOperator exactOrder, IntConsumer releaseOptionalCache,
-            M3RuntimeHeap.Snapshot observedHeap) {
+            RuntimeHeap.Snapshot observedHeap) {
         Objects.requireNonNull(source, "source");
         Objects.requireNonNull(exactOrder, "exactOrder");
         Objects.checkFromToIndex(from, toExclusive, source.length);
@@ -83,10 +83,10 @@ public final class MarkerTopKIndex {
             if (source[i] < 0) throw new IllegalArgumentException("negative stable ID");
         }
         // Sample after source validation and only for an actually requested top-K.
-        M3RuntimeHeap.Snapshot pressureSample = releaseOptionalCache == null ? null
-                : observedHeap == null ? M3RuntimeHeap.current() : observedHeap;
+        RuntimeHeap.Snapshot pressureSample = releaseOptionalCache == null ? null
+                : observedHeap == null ? RuntimeHeap.current() : observedHeap;
         boolean trim = pressureSample != null && pressureSample.pressure(
-                (long) k * Integer.BYTES + 16L) != M3RuntimeHeap.Pressure.NORMAL;
+                (long) k * Integer.BYTES + 16L) != RuntimeHeap.Pressure.NORMAL;
 
         int[] heap = new int[k];
         System.arraycopy(source, from, heap, 0, k);

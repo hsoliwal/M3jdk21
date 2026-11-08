@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Objects;
 import java.util.function.LongConsumer;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.PrimitiveKind;
 import jdk.internal.m3.collections.bits.LazyBitAddressSpace;
 
@@ -40,9 +40,9 @@ public final class VersionedProviderBackedPrimitiveLongTree {
             int pageSize,
             PrimitiveKind... laneKinds) {
         this(
-                M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
                 provider,
                 pageSize,
                 laneKinds);
@@ -141,7 +141,7 @@ public final class VersionedProviderBackedPrimitiveLongTree {
 
     private static final class VersionPinningAdapter implements CursorPagedPrimitiveTreeProvider {
         private final VersionedCursorPagedPrimitiveTreeProvider provider;
-        private final M3LazyPrimitiveAddressSpace versions;
+        private final LazyPrimitiveAddressSpace versions;
         private final LazyBitAddressSpace known;
         private long versionLookups;
         private long childPageLoads;
@@ -152,7 +152,7 @@ public final class VersionedProviderBackedPrimitiveLongTree {
                 int leafBits,
                 VersionedCursorPagedPrimitiveTreeProvider provider) {
             this.provider = provider;
-            versions = new M3LazyPrimitiveAddressSpace(
+            versions = new LazyPrimitiveAddressSpace(
                     PrimitiveKind.LONG, rootBits, directoryBits, leafBits);
             known = new LazyBitAddressSpace(rootBits, directoryBits, leafBits);
         }

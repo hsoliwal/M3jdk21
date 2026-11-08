@@ -20,10 +20,10 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import jdk.m3.collections.LongCollection;
-import jdk.m3.collections.M3LongFilteredView;
+import jdk.m3.collections.LongFilteredView;
 import jdk.m3.collections.LongHashSet;
 import jdk.m3.collections.LongSortedSet;
-import jdk.m3.collections.M3LongSortedViews;
+import jdk.m3.collections.LongSortedViews;
 
 /**
  * Immutable, stack-safe composition plan over parent-owned primitive-long collections.
@@ -52,12 +52,12 @@ public final class LongDag {
 
     /** Reuse Synexia's existing late-bound, read-only primitive filtered view. */
     public static LongDag filtered(LongCollection owner, LongPredicate predicate) {
-        return from(new M3LongFilteredView(owner, predicate));
+        return from(new LongFilteredView(owner, predicate));
     }
 
     /** Reuse the existing sorted-set live filter; do not copy or replace its owner. */
     public static LongDag sortedFiltered(LongSortedSet owner, LongPredicate predicate) {
-        return from(M3LongSortedViews.filter(owner, predicate));
+        return from(LongSortedViews.filter(owner, predicate));
     }
 
     public LongDag filter(LongPredicate predicate) {

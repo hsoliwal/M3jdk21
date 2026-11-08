@@ -2,7 +2,7 @@
 package jdk.m3.collections.interop;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 public final class M3FiveFamilyPreparedSelectionSelfTest {
 private static int checks;
 private static void check(boolean b){checks++;if(!b)throw new AssertionError("check="+checks);}
@@ -32,7 +32,7 @@ check(projected.asGuavaListMultimap().size()==p);check(projected.asApacheListVal
 var spring=projected.asSpringMultiValueMap();int total=spring.values().stream().mapToInt(List::size).sum();check(total==p);
 var sorted=projected.sortedByKey(Comparator.naturalOrder());for(int i=1;i<sorted.size();i++){check(sorted.keyAt(i-1)<=sorted.keyAt(i));}
 check(attempts.get()==count);check(Arrays.equals(projected.slice(0,projected.size()).asJdkList().toArray(),jdk.toArray()));
-if(M3IndexMaskCompactor.nativeAvailable()){var nativeView=joint.projection(M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);check(nativeView.size()==projected.size());for(int t=0;t<nativeView.size();t++)check(nativeView.originalOrdinal(t)==projected.originalOrdinal(t));}else{try{joint.projection(M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);throw new AssertionError();}catch(UnsatisfiedLinkError expected){checks++;}}
+if(IndexMaskCompactor.nativeAvailable()){var nativeView=joint.projection(IndexMaskCompactor.Backend.NATIVE_REQUIRED);check(nativeView.size()==projected.size());for(int t=0;t<nativeView.size();t++)check(nativeView.originalOrdinal(t)==projected.originalOrdinal(t));}else{try{joint.projection(IndexMaskCompactor.Backend.NATIVE_REQUIRED);throw new AssertionError();}catch(UnsatisfiedLinkError expected){checks++;}}
 }
 System.out.println("PASS M3FiveFamilyPreparedSelectionSelfTest checks="+checks);
 }

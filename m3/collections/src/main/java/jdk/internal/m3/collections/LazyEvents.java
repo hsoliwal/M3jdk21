@@ -6,8 +6,8 @@ package jdk.internal.m3.collections;
 import java.util.Objects;
 import jdk.m3.collections.LazyEventGranularity;
 import jdk.m3.collections.LazyEventPolicy;
-import jdk.m3.collections.M3LazyEventSink;
-import jdk.m3.collections.M3LazyOperation;
+import jdk.m3.collections.LazyEventSink;
+import jdk.m3.collections.LazyOperation;
 
 /** Allocation-free dispatch helper shared by dependency-light lazy owners. */
 public final class LazyEvents {
@@ -16,13 +16,13 @@ public final class LazyEvents {
 
     public static <M> void emit(
             LazyEventPolicy policy,
-            M3LazyEventSink<? super M> sink,
+            LazyEventSink<? super M> sink,
             long eventBit,
             LazyEventGranularity required,
             long slot,
             short oldState,
             short newState,
-            M3LazyOperation operation,
+            LazyOperation operation,
             M monitor,
             Throwable failure) {
         LazyEventPolicy actualPolicy = Objects.requireNonNull(policy, "policy");

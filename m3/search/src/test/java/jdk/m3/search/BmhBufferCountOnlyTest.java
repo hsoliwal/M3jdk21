@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,9 +149,9 @@ final class BmhBufferCountOnlyTest {
         return hits;
     }
 
-    private static M3ProgressMonitor monitor(AtomicInteger polls, int abortAt,
+    private static ProgressMonitor monitor(AtomicInteger polls, int abortAt,
             CancellationException failure) {
-        return new M3ProgressMonitor() {
+        return new ProgressMonitor() {
             @Override public void checkCanceled() {
                 if (polls.incrementAndGet() == abortAt) throw failure;
             }
@@ -163,7 +163,7 @@ final class BmhBufferCountOnlyTest {
             @Override public void subTask(String task) {}
             @Override public boolean isCanceled() { return false; }
             @Override public void setCanceled(boolean canceled) {}
-            @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+            @Override public ProgressState state() { return new DefaultProgressMonitor().state(); }
         };
     }
 }

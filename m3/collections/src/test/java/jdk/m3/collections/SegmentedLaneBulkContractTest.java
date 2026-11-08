@@ -16,7 +16,7 @@ final class SegmentedLaneBulkContractTest {
     @Test void longCopiesMatchArraycopyAcrossBothOverlapDirections() {
         Random random = new Random(0x5e6);
         long[] expected = new long[17000];
-        M3LongLane28 lane = new M3LongLane28();
+        LongLane28 lane = new LongLane28();
         for (int pass = 0; pass < 1500; pass++) {
             int from = random.nextInt(expected.length + 1);
             int length = random.nextInt(expected.length - from + 1);
@@ -38,7 +38,7 @@ final class SegmentedLaneBulkContractTest {
     @Test void intCopiesAndImportsMatchFlatArrays() {
         Random random = new Random(91);
         int[] expected = new int[12000];
-        M3IntLane28 lane = new M3IntLane28();
+        IntLane28 lane = new IntLane28();
         for (int pass = 0; pass < 700; pass++) {
             int length = random.nextInt(6000);
             int from = random.nextInt(expected.length - length + 1);
@@ -61,9 +61,9 @@ final class SegmentedLaneBulkContractTest {
     }
 
     @Test void sparseZeroPropagationAndExtremeEndpointsDoNotGrowHoles() {
-        int end = M3Address28.MAX_SLOTS;
-        M3LongLane28 source = new M3LongLane28();
-        M3LongLane28 target = new M3LongLane28();
+        int end = Address28.MAX_SLOTS;
+        LongLane28 source = new LongLane28();
+        LongLane28 target = new LongLane28();
         source.fill(0, end, 0);
         target.copyFrom(source, 0, 0, end);
         assertEquals(0, source.allocatedBlockCount());
@@ -83,7 +83,7 @@ final class SegmentedLaneBulkContractTest {
     }
 
     @Test void invalidRangesAreRejectedBeforeWriting() {
-        M3LongLane28 lane = new M3LongLane28();
+        LongLane28 lane = new LongLane28();
         lane.set(0, 19);
         long[] output = {7, 8};
         assertThrows(IndexOutOfBoundsException.class, () -> lane.copyTo(0, output, 1, 2));
@@ -98,7 +98,7 @@ final class SegmentedLaneBulkContractTest {
     @Test void bitmapRankSelectAndTraversalMatchBitSet() {
         int limit = (1 << 20) + 129;
         BitSet oracle = new BitSet();
-        M3BitLane28 lane = new M3BitLane28();
+        BitLane28 lane = new BitLane28();
         Random random = new Random(102);
         int[] edges = {0, 1, 62, 63, 64, 65, 4095, 4096, (1 << 20) - 1, 1 << 20};
         for (int bit : edges) { lane.set(bit); oracle.set(bit); }
@@ -122,15 +122,15 @@ final class SegmentedLaneBulkContractTest {
         }
         assertEquals(-1, lane.select(-1));
         assertEquals(-1, lane.select(ordinal));
-        assertEquals(-1, lane.nextSetBit(M3Address28.MAX_SLOTS));
-        lane.set(M3Address28.MAX_SLOT);
-        assertEquals(M3Address28.MAX_SLOT, lane.previousSetBit(M3Address28.MAX_SLOT));
-        assertEquals(1, lane.cardinality(M3Address28.MAX_SLOT, M3Address28.MAX_SLOTS));
+        assertEquals(-1, lane.nextSetBit(Address28.MAX_SLOTS));
+        lane.set(Address28.MAX_SLOT);
+        assertEquals(Address28.MAX_SLOT, lane.previousSetBit(Address28.MAX_SLOT));
+        assertEquals(1, lane.cardinality(Address28.MAX_SLOT, Address28.MAX_SLOTS));
         assertThrows(IndexOutOfBoundsException.class, () -> lane.rank(-1));
     }
 
     @Test void sparseRowsRetainAscendingSlotAndGenerationSemantics() {
-        M3LongLaneStore28 rows = new M3LongLaneStore28(1);
+        LongLaneStore28 rows = new LongLaneStore28(1);
         long[] handles = new long[9000];
         for (int i = 0; i < handles.length; i++) handles[i] = rows.allocate1(i);
         for (int i = 0; i < handles.length; i++) if (i % 4095 != 0) rows.release(handles[i]);

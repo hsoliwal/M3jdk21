@@ -204,14 +204,14 @@ public final class LongArrayList implements LongList, LongStack {
      * @return removed occurrences
      */
     public int retainByStateMask(byte[] alignedStates, int requiredMask) {
-        M3IndexMaskCompactor.validate(alignedStates, size, requiredMask);
+        IndexMaskCompactor.validate(alignedStates, size, requiredMask);
         // A zero required mask admits every logical element, regardless of state bits.
         // Validation precedes this early return; no values or iterator epochs change.
         if (requiredMask == 0) return 0;
         int previous = size;
         int kept = 0;
         for (int read = 0; read < previous; read++) {
-            if (M3IndexMaskCompactor.matches(alignedStates[read], requiredMask)) {
+            if (IndexMaskCompactor.matches(alignedStates[read], requiredMask)) {
                 elements[kept++] = elements[read];
             }
         }
@@ -334,7 +334,7 @@ public final class LongArrayList implements LongList, LongStack {
      */
     @Override
     public Spliterator.OfLong longSpliterator() {
-        return new M3LongListSpliterator(this, 0, size, () -> modCount);
+        return new LongListSpliterator(this, 0, size, () -> modCount);
     }
 
     @Override

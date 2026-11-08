@@ -29,7 +29,7 @@ public final class OpenJdkIndexMaskJniProbe {
         // Bind the native witness to exactly the same VM modules and HotSpot
         // implementation as the interpreted/C2 Java witness, not bin/java alone.
         String runtimeRoot = OpenJdkMaskJitProbe.currentRuntimeRoot();
-        Class<?> compactor = Class.forName("jdk.m3.collections.M3IndexMaskCompactor");
+        Class<?> compactor = Class.forName("jdk.m3.collections.IndexMaskCompactor");
         requireDeclaredNativeSymbols(compactor);
         Class<?> backend = Class.forName("jdk.m3.collections.M3IndexMaskCompactor$Backend");
         Object javaBackend = null, nativeBackend = null;

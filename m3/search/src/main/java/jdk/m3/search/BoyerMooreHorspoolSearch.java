@@ -4,8 +4,8 @@
 // Modified 2026: lazily reuse the KMP overlap owner with safe publication.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.function.IntConsumer;
@@ -63,7 +63,7 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
                     cursor, shifts[Byte.toUnsignedInt(haystack[cursor])], haystack.length);
             if (compared > budget && cursor < haystack.length) {
                 // BMH cursor denotes the last pattern byte, not the start offset.
-                return overlapSearch(new M3DefaultProgressMonitor()).indexOf(
+                return overlapSearch(new DefaultProgressMonitor()).indexOf(
                         haystack, cursor - needle.length + 1);
             }
         }
@@ -99,7 +99,7 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
             candidate -= reverseShifts[Byte.toUnsignedInt(haystack[candidate])];
             if (compared > budget && candidate >= 0) {
                 // All later starts were eliminated by reverse Horspool's shift.
-                return overlapSearch(new M3DefaultProgressMonitor()).lastIndexOf(haystack, candidate);
+                return overlapSearch(new DefaultProgressMonitor()).lastIndexOf(haystack, candidate);
             }
         }
         return -1;
@@ -112,7 +112,7 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
     }
 
     /** Share one BMH scan, with cancellation checks only for monitored callers. */
-    private int indexOfBuffer(ByteBuffer haystack, int fromIndex, M3ProgressMonitor monitor) {
+    private int indexOfBuffer(ByteBuffer haystack, int fromIndex, ProgressMonitor monitor) {
         if (haystack == null) throw new NullPointerException("haystack");
         /* Absolute indexed reads preserve position, limit and mark. */
         int base = haystack.position();
@@ -150,8 +150,8 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
     }
 
     @Override
-    public int lastIndexOf(ByteBuffer haystack, int fromIndex, M3ProgressMonitor monitor) {
-        M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+    public int lastIndexOf(ByteBuffer haystack, int fromIndex, ProgressMonitor monitor) {
+        ProgressMonitor checked = monitor == null ? new DefaultProgressMonitor() : monitor;
         checked.checkCanceled();
         int result = lastIndexOfBuffer(haystack, fromIndex, checked);
         checked.checkCanceled();
@@ -165,7 +165,7 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
      * caller's position, limit or mark.
      */
     private int lastIndexOfBuffer(ByteBuffer haystack, int fromIndex,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         if (haystack == null) throw new NullPointerException("haystack");
         int base = haystack.position();
         int length = haystack.remaining();
@@ -197,17 +197,17 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
 
     /** Reuse the canonical KMP continuation without changing single-search strategy. */
     int visitMatches(byte[] haystack, int start, int maxMatches, IntConsumer receiver,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         return scanMatches(haystack, start, maxMatches, receiver, false, monitor);
     }
 
     /** Count-only path reuses the same Horspool and bounded KMP overlap decisions. */
-    int countMatches(byte[] haystack, int start, M3ProgressMonitor monitor) {
+    int countMatches(byte[] haystack, int start, ProgressMonitor monitor) {
         return scanMatches(haystack, start, Integer.MAX_VALUE, null, true, monitor);
     }
 
     private int scanMatches(byte[] haystack, int start, int maxMatches,
-            IntConsumer receiver, boolean countOnly, M3ProgressMonitor monitor) {
+            IntConsumer receiver, boolean countOnly, ProgressMonitor monitor) {
         int count = 0;
         int next = start;
         int densityStart = start;
@@ -248,18 +248,18 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
      * without a per-hit discard consumer or a materialized positions array.
      */
     int visitMatches(ByteBuffer haystack, int start, int maxMatches, IntConsumer receiver,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         return scanBufferMatches(haystack, start, maxMatches, receiver, false, monitor);
     }
 
     /** One count-only ByteBuffer scan using the incumbent BMH/KMP selector. */
-    int countMatches(ByteBuffer haystack, int start, M3ProgressMonitor monitor) {
+    int countMatches(ByteBuffer haystack, int start, ProgressMonitor monitor) {
         return scanBufferMatches(haystack, start, Integer.MAX_VALUE, null, true, monitor);
     }
 
     /** Same match ordering and cancellation checkpoints in visit and count modes. */
     private int scanBufferMatches(ByteBuffer haystack, int start, int maxMatches,
-            IntConsumer receiver, boolean countOnly, M3ProgressMonitor monitor) {
+            IntConsumer receiver, boolean countOnly, ProgressMonitor monitor) {
         int count = 0;
         int next = start;
         int densityStart = start;
@@ -295,9 +295,9 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
      * silently losing cancellation at the BMH work-budget boundary.
      */
     private int monitoredKmpFirst(ByteBuffer haystack, int start,
-            M3ProgressMonitor monitor) {
-        if (monitor == null || monitor == new M3DefaultProgressMonitor()) {
-            return overlapSearch(new M3DefaultProgressMonitor()).indexOf(haystack, start);
+            ProgressMonitor monitor) {
+        if (monitor == null || monitor == new DefaultProgressMonitor()) {
+            return overlapSearch(new DefaultProgressMonitor()).indexOf(haystack, start);
         }
         int[] result = {-1};
         overlapSearch(monitor).visitMatches(
@@ -312,9 +312,9 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
      * borrowed and unmodified (including its original mark).
      */
     private int monitoredKmpLast(ByteBuffer haystack, int lastStart,
-            M3ProgressMonitor monitor) {
-        if (monitor == null || monitor == new M3DefaultProgressMonitor()) {
-            return overlapSearch(new M3DefaultProgressMonitor()).lastIndexOf(haystack, lastStart);
+            ProgressMonitor monitor) {
+        if (monitor == null || monitor == new DefaultProgressMonitor()) {
+            return overlapSearch(new DefaultProgressMonitor()).lastIndexOf(haystack, lastStart);
         }
         ByteBuffer bounded = haystack.duplicate();
         bounded.limit(bounded.position() + lastStart + needle.length);
@@ -324,7 +324,7 @@ final class BoyerMooreHorspoolSearch implements CompiledSearch {
         return result[0];
     }
 
-    private KmpSearch overlapSearch(M3ProgressMonitor monitor) {
+    private KmpSearch overlapSearch(ProgressMonitor monitor) {
         KmpSearch prepared = overlapSearch;
         if (prepared == null) {
             // Monitor callbacks can reenter; never invoke them under the publication lock.

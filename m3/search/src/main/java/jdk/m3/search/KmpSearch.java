@@ -4,7 +4,7 @@
 // Modified 2026: share monitored prefix preparation and bound overlap fallback polling.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.function.IntConsumer;
@@ -24,7 +24,7 @@ final class KmpSearch implements CompiledSearch {
     }
 
     /** Prepare a private snapshot for lazy overlap traversal with bounded cancellation. */
-    static KmpSearch fromOwnedSnapshot(byte[] snapshot, M3ProgressMonitor monitor) {
+    static KmpSearch fromOwnedSnapshot(byte[] snapshot, ProgressMonitor monitor) {
         return new KmpSearch(snapshot, true, monitor);
     }
 
@@ -32,7 +32,7 @@ final class KmpSearch implements CompiledSearch {
         this(needle, owned, null);
     }
 
-    private KmpSearch(byte[] needle, boolean owned, M3ProgressMonitor monitor) {
+    private KmpSearch(byte[] needle, boolean owned, ProgressMonitor monitor) {
         if (needle.length == 0) throw new IllegalArgumentException("needle must not be empty");
         this.needle = owned ? needle : Arrays.copyOf(needle, needle.length);
         this.prefix = prefix(this.needle, monitor);
@@ -132,13 +132,13 @@ final class KmpSearch implements CompiledSearch {
 
     /** Continue the compiled prefix automaton after a hit, retaining overlapping matches. */
     int visitMatches(byte[] haystack, int start, int maxMatches, IntConsumer receiver,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         return visitMatches(haystack, start, haystack.length, maxMatches, receiver, monitor);
     }
 
     /** Scan an exclusive byte window; a caller may reconsider its unfinished suffix. */
     int visitMatches(byte[] haystack, int start, int toIndex, int maxMatches,
-            IntConsumer receiver, M3ProgressMonitor monitor) {
+            IntConsumer receiver, ProgressMonitor monitor) {
         return scanMatches(haystack, start, toIndex, maxMatches, receiver, false, monitor);
     }
 
@@ -147,20 +147,20 @@ final class KmpSearch implements CompiledSearch {
      * Reuses the same compiled prefix table and cancellation checkpoints as visitMatches.
      * The caller has validated the input, pattern and initial monitor state.
      */
-    int countMatches(byte[] haystack, int start, M3ProgressMonitor monitor) {
+    int countMatches(byte[] haystack, int start, ProgressMonitor monitor) {
         return countMatches(haystack, start, haystack.length,
                 Integer.MAX_VALUE, monitor);
     }
 
     /** Exact bounded native-independent overlap count for the Horspool dense seam. */
     int countMatches(byte[] haystack, int start, int toIndex, int maxMatches,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         return scanMatches(haystack, start, toIndex, maxMatches, null, true, monitor);
     }
 
     /** Single canonical KMP scanner for visits and count-only queries. */
     private int scanMatches(byte[] haystack, int start, int toIndex, int maxMatches,
-            IntConsumer receiver, boolean countOnly, M3ProgressMonitor monitor) {
+            IntConsumer receiver, boolean countOnly, ProgressMonitor monitor) {
         int count = 0;
         int matched = 0;
         int work = 0;
@@ -189,18 +189,18 @@ final class KmpSearch implements CompiledSearch {
      * absolute, so direct, mapped and read-only buffer state is preserved.
      */
     int visitMatches(ByteBuffer haystack, int start, int maxMatches, IntConsumer receiver,
-            M3ProgressMonitor monitor) {
+            ProgressMonitor monitor) {
         return scanBufferMatches(haystack, start, maxMatches, receiver, false, monitor);
     }
 
     /** Count overlapping starts without invoking a per-hit discard callback. */
-    int countMatches(ByteBuffer haystack, int start, M3ProgressMonitor monitor) {
+    int countMatches(ByteBuffer haystack, int start, ProgressMonitor monitor) {
         return scanBufferMatches(haystack, start, Integer.MAX_VALUE, null, true, monitor);
     }
 
     /** One prefix automaton and identical cancellation checkpoints for both buffer modes. */
     private int scanBufferMatches(ByteBuffer haystack, int start, int maxMatches,
-            IntConsumer receiver, boolean countOnly, M3ProgressMonitor monitor) {
+            IntConsumer receiver, boolean countOnly, ProgressMonitor monitor) {
         int base = haystack.position();
         int length = haystack.remaining();
         int count = 0;
@@ -226,7 +226,7 @@ final class KmpSearch implements CompiledSearch {
         return count;
     }
 
-    private static int[] prefix(byte[] pattern, M3ProgressMonitor monitor) {
+    private static int[] prefix(byte[] pattern, ProgressMonitor monitor) {
         if (monitor != null) monitor.checkCanceled();
         int[] table = new int[pattern.length];
         int work = 0;

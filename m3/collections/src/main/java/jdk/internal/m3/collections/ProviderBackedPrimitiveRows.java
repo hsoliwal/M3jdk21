@@ -16,7 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.m3.collections.M3LazyPrimitiveAddressSpace;
+import jdk.m3.collections.LazyPrimitiveAddressSpace;
 import jdk.m3.collections.PrimitiveKind;
 
 /**
@@ -35,7 +35,7 @@ import jdk.m3.collections.PrimitiveKind;
  */
 public final class ProviderBackedPrimitiveRows {
     private final LazyPrimitiveSoaTable rows;
-    private final M3LazyPrimitiveAddressSpace flags;
+    private final LazyPrimitiveAddressSpace flags;
     private final PrimitiveRowProvider provider;
     private final PrimitiveTouchObserver touchObserver;
     private final long[] scratch;
@@ -50,9 +50,9 @@ public final class ProviderBackedPrimitiveRows {
             PrimitiveRowProvider provider,
             PrimitiveKind... laneKinds) {
         this(
-                M3LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
-                M3LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_ROOT_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_DIRECTORY_BITS,
+                LazyPrimitiveAddressSpace.DEFAULT_LEAF_BITS,
                 provider,
                 laneKinds);
     }
@@ -68,7 +68,7 @@ public final class ProviderBackedPrimitiveRows {
         Objects.requireNonNull(laneKinds, "laneKinds");
         if (laneKinds.length == 0) throw new IllegalArgumentException("at least one lane required");
         rows = new LazyPrimitiveSoaTable(rootBits, directoryBits, leafBits, laneKinds);
-        flags = new M3LazyPrimitiveAddressSpace(
+        flags = new LazyPrimitiveAddressSpace(
                 PrimitiveKind.SHORT, rootBits, directoryBits, leafBits);
         scratch = new long[laneKinds.length];
     }

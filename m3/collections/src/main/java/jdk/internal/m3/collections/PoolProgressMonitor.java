@@ -3,20 +3,20 @@
 package jdk.internal.m3.collections;
 
 import java.util.concurrent.CancellationException;
-import jdk.m3.collections.M3ProgressMonitor;
-import jdk.m3.collections.M3ProgressState;
+import jdk.m3.collections.ProgressMonitor;
+import jdk.m3.collections.ProgressState;
 
 /**
  * Progress/cancellation contract for non-constant-time pool operations: the immutable-pool donor's surface
  * ({@code begin(String,long)}, {@code worked(long)}, {@code cancelled()}, {@code done()}, {@code checkCancelled()},
- * every method default, {@code none()}) as an adapter over the owner {@link M3ProgressMonitor} of this module.
+ * every method default, {@code none()}) as an adapter over the owner {@link ProgressMonitor} of this module.
  * {@code begin} delegates to {@code beginTask} and {@code cancelled} to {@code isCanceled}, so an owner-native
  * monitor drives pool operations unchanged; the owner's abstract methods carry no-op defaults, so a monitor that
  * overrides only the donor methods (the pool oracles' proxies) still compiles and still receives every pool call.
  */
 //FLLDCIM: RELOCATE - donor blob 6328187b7bf3 at commit 3385d79a2968 (repository, path, URL and digests: the SUPERSEDED row of m3/collections/recipe/immutable-pools-20261106/RELOCATION_MAP.tsv); recipe m3/collections/recipe/immutable-pools-20261106/relocate.py v2
-//FLLDCIM: UNIFY - adapter over jdk.m3.collections.M3ProgressMonitor (long units on both sides; begin -> beginTask, cancelled -> isCanceled); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
-public interface PoolProgressMonitor extends M3ProgressMonitor {
+//FLLDCIM: UNIFY - adapter over jdk.m3.collections.ProgressMonitor (long units on both sides; begin -> beginTask, cancelled -> isCanceled); recipe m3/qualification/progress-monitor-unify-20261106/unify.py v1
+public interface PoolProgressMonitor extends ProgressMonitor {
     /** Unknown total work: the owner's value, redeclared under the donor-visible name. */
     long UNKNOWN = -1L;
 
@@ -42,8 +42,8 @@ public interface PoolProgressMonitor extends M3ProgressMonitor {
     @Override default void setCanceled(boolean canceled) { }
 
     @Override
-    default M3ProgressState state() {
-        return new M3ProgressState("", "", 0L, UNKNOWN, isCanceled(), false, 0L, 0L);
+    default ProgressState state() {
+        return new ProgressState("", "", 0L, UNKNOWN, isCanceled(), false, 0L, 0L);
     }
 
     static PoolProgressMonitor none() {

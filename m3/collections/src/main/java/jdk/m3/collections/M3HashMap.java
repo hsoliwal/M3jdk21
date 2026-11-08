@@ -37,7 +37,7 @@ import java.util.Objects;
  * A lookup whose key equals changes this map's structure walks again, so it never reads,
  * writes or erases a slot the change released or reused.
  */
-public final class M3HashMap<K, V> extends M3SlotMap<K, V>
+public final class M3HashMap<K, V> extends SlotMap<K, V>
         implements Cloneable, Serializable {
     @Serial private static final long serialVersionUID = 1L;
     /** Physical slot is occupied; the other bits are optional parent metadata. */
@@ -49,14 +49,14 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
 
     // Object[] is itself serializable; live elements retain normal Java serialization rules.
     @SuppressWarnings("serial")
-    private Object[] keys = M3SlotArrays.EMPTY_OBJECTS;
+    private Object[] keys = SlotArrays.EMPTY_OBJECTS;
     @SuppressWarnings("serial")
-    private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
-    private int[] hashes = M3SlotArrays.EMPTY_INTS;
-    private int[] positions = M3SlotArrays.EMPTY_INTS;
-    private int[] freeNext = M3SlotArrays.EMPTY_INTS;
-    private byte[] state = M3SlotArrays.EMPTY_BYTES;
-    private int[] index = M3SlotArrays.EMPTY_INTS;
+    private Object[] values = SlotArrays.EMPTY_OBJECTS;
+    private int[] hashes = SlotArrays.EMPTY_INTS;
+    private int[] positions = SlotArrays.EMPTY_INTS;
+    private int[] freeNext = SlotArrays.EMPTY_INTS;
+    private byte[] state = SlotArrays.EMPTY_BYTES;
+    private int[] index = SlotArrays.EMPTY_INTS;
     private final boolean keyOnly;
     private final int initialBuckets;
     private int used, free = -1, occupied, size, modifications;
@@ -92,7 +92,7 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
         return cap;
     }
 
-    private static int hash(Object key) { return M3SlotArrays.hash(key); }
+    private static int hash(Object key) { return SlotArrays.hash(key); }
 
     //FLLDCIM: MRL - recipe HASH_REENTRANT_GUARD v1 (qualification/hash-reentrant-guard-20261107): re-entrant key/value callbacks
     private int find(Object key, int hash) { return find(key, hash, 0); }
@@ -127,8 +127,8 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
         return -1;
     }
     @Override boolean live(int slot) { return (state[slot] & LIVE) != 0; }
-    @Override K keyAt(int slot) { return M3SlotArrays.get(keys, slot); }
-    @Override V valueAt(int slot) { return keyOnly ? null : M3SlotArrays.get(values, slot); }
+    @Override K keyAt(int slot) { return SlotArrays.get(keys, slot); }
+    @Override V valueAt(int slot) { return keyOnly ? null : SlotArrays.get(values, slot); }
     @Override V writeAt(int slot, V value) {
         V previous = valueAt(slot);
         if (!keyOnly) values[slot] = value;
@@ -175,7 +175,7 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
             rehash(initialBuckets);
         } else if (occupied + 1 >= index.length - (index.length / 3)) {
             int capacity = size + 1 >= index.length - (index.length / 3)
-                    ? M3SlotArrays.doubled(index.length) : index.length;
+                    ? SlotArrays.doubled(index.length) : index.length;
             rehash(capacity);
         }
 
@@ -201,7 +201,7 @@ public final class M3HashMap<K, V> extends M3SlotMap<K, V>
     }
 
     private void growPayload() {
-        int capacity = M3SlotArrays.grow(keys.length);
+        int capacity = SlotArrays.grow(keys.length);
         Object[] k = Arrays.copyOf(keys, capacity);
         Object[] v = keyOnly ? values : Arrays.copyOf(values, capacity);
         int[] h = Arrays.copyOf(hashes, capacity);

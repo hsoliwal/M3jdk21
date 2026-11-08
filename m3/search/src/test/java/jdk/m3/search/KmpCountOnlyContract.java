@@ -2,8 +2,8 @@
 // Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/KmpCountOnlyContract.java (blob 0277a547382f) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3DefaultProgressMonitor;
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.DefaultProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -49,7 +49,7 @@ public final class KmpCountOnlyContract {
             List<Integer> expected = oracle(input, pattern, from);
             KmpSearch kmp = new KmpSearch(pattern);
             int start = Math.max(0, from);
-            check(kmp.countMatches(input, start, new M3DefaultProgressMonitor()) == expected.size(),
+            check(kmp.countMatches(input, start, new DefaultProgressMonitor()) == expected.size(),
                     "direct count-only KMP vs oracle trial=" + trial);
             check(ByteOccurrences.count(kmp, input, from, null) == expected.size(),
                     "public count dispatch vs oracle trial=" + trial);

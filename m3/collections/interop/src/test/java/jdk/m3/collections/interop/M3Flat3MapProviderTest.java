@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3Flat3Map;
+import jdk.m3.collections.Flat3Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -144,7 +144,7 @@ final class M3Flat3MapProviderTest {
         state.containsValue(new Value(11));
         state.verify();
 
-        M3Flat3Map<Object, Object> actual = new M3Flat3Map<>();
+        Flat3Map<Object, Object> actual = new Flat3Map<>();
         Map<Object, Object> provider = provider();
         int actualHashes = 0;
         int providerHashes = 0;
@@ -188,7 +188,7 @@ final class M3Flat3MapProviderTest {
     }
 
     private static final class State {
-        private final M3Flat3Map<Object, Object> actual = new M3Flat3Map<>();
+        private final Flat3Map<Object, Object> actual = new Flat3Map<>();
         private final Map<Object, Object> provider = provider();
         private final Map<Object, Object> expected = new HashMap<>();
         private final int keyCount;

@@ -16,12 +16,12 @@
 package jdk.internal.m3.collections;
 
 import java.util.Objects;
-import jdk.m3.collections.M3LongIndexPathMasks;
+import jdk.m3.collections.LongIndexPathMasks;
 
 /**
  * Work-bounded composition of the existing long-array and mask/offset selector.
  *
- * <p>{@link M3LongIndexPathMasks#scanWindow} bounds its output cardinality,
+ * <p>{@link LongIndexPathMasks#scanWindow} bounds its output cardinality,
  * but a sparse filter may inspect an arbitrarily long remaining path to fill
  * that output. This adapter independently caps the number of source occurrences
  * examined in one call, including rejected occurrences. It reuses the qualified
@@ -84,8 +84,8 @@ public final class LongIndexPathBudget {
         long local = delegate(rows, physicalOffsets, statePlanes,
                 requiredMasks, forbiddenMasks, localFirst, localCount, stride,
                 0, output, outputOffset, limit, backend);
-        int advanced = M3LongIndexPathMasks.nextOrdinal(local);
-        int written = M3LongIndexPathMasks.written(local);
+        int advanced = LongIndexPathMasks.nextOrdinal(local);
+        int written = LongIndexPathMasks.written(local);
         return ((long) (nextOrdinal + advanced) << 32) | (written & 0xffff_ffffL);
     }
 
@@ -98,7 +98,7 @@ public final class LongIndexPathBudget {
                     statePlanes, requiredMasks, forbiddenMasks, first, count,
                     stride, nextOrdinal, output, outputOffset, limit);
         }
-        return M3LongIndexPathMasks.scanWindow(rows, physicalOffsets,
+        return LongIndexPathMasks.scanWindow(rows, physicalOffsets,
                 statePlanes, requiredMasks, forbiddenMasks, first, count,
                 stride, nextOrdinal, output, outputOffset, limit);
     }

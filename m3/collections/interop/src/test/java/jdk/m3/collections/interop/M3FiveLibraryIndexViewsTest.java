@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -92,17 +92,17 @@ final class M3FiveLibraryIndexViewsTest {
                 () -> M3FiveLibraryIndexViews.capture(keys, values, new int[] {-1}, states));
         assertThrows(IllegalArgumentException.class,
                 () -> M3FiveLibraryIndexViews.capture(keys, new Integer[1], rows, states));
-        if (!M3IndexMaskCompactor.nativeAvailable()) {
+        if (!IndexMaskCompactor.nativeAvailable()) {
             assertThrows(UnsatisfiedLinkError.class, () -> view.filteredByState(0, 0,
-                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                    IndexMaskCompactor.Backend.NATIVE_REQUIRED));
             assertThrows(UnsatisfiedLinkError.class, () -> view.filteredByState(1, 1,
-                    M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                    IndexMaskCompactor.Backend.NATIVE_REQUIRED));
         } else {
             assertEquals(view.filteredByState(1, 0).asJdkList(),
-                    view.filteredByState(1, 0, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED)
+                    view.filteredByState(1, 0, IndexMaskCompactor.Backend.NATIVE_REQUIRED)
                             .asJdkList());
             assertEquals(view.filteredByState(1, 1).asJdkList(),
-                    view.filteredByState(1, 1, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED)
+                    view.filteredByState(1, 1, IndexMaskCompactor.Backend.NATIVE_REQUIRED)
                             .asJdkList());
         }
     }
@@ -128,9 +128,9 @@ final class M3FiveLibraryIndexViewsTest {
                 if ((f & required) == required && (f & forbidden) == 0) expected.add(values[row]);
             }
             assertEquals(expected, view.filteredByState(required, forbidden).asJdkList());
-            if (M3IndexMaskCompactor.nativeAvailable()) {
+            if (IndexMaskCompactor.nativeAvailable()) {
                 assertEquals(expected, view.filteredByState(required, forbidden,
-                        M3IndexMaskCompactor.Backend.NATIVE_REQUIRED).asJdkList());
+                        IndexMaskCompactor.Backend.NATIVE_REQUIRED).asJdkList());
             }
             var positions = new ArrayList<Integer>();
             for (int row : order) positions.add(row);

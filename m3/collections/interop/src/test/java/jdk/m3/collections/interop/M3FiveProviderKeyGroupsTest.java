@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jdk.m3.collections.M3ArrayList;
-import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.IndexMaskCompactor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,7 +52,7 @@ final class M3FiveProviderKeyGroupsTest {
         keys[3] = 500; values[3] = 999; rows[0] = 6; states[3] = 0;
         assertEquals(List.of(31, 31), groups.valuesFor(3));
         var selected = M3FiveProviderKeyGroups.snapshotSelected(
-                source, 1, 0, M3IndexMaskCompactor.Backend.JAVA);
+                source, 1, 0, IndexMaskCompactor.Backend.JAVA);
         assertEquals(6, selected.occurrenceCount());
         assertEquals(List.of(31, 31), selected.valuesFor(3));
         assertEquals(Arrays.asList(null, 40, null), selected.valuesFor(null));
@@ -134,7 +134,7 @@ final class M3FiveProviderKeyGroupsTest {
             int excluded = random.nextInt(256);
             var view = capture(keys, values, rows, states);
             var selected = M3FiveProviderKeyGroups.snapshotSelected(view, required, excluded,
-                    M3IndexMaskCompactor.Backend.JAVA);
+                    IndexMaskCompactor.Backend.JAVA);
             Map<Integer, List<Integer>> expected = new LinkedHashMap<>();
             for (int row : rows) {
                 int flags = states[row] & 0xff;
@@ -182,15 +182,15 @@ final class M3FiveProviderKeyGroupsTest {
         var view = capture(new Integer[] {1, 2}, new Integer[] {10, 20},
                 new int[] {1, 0}, new byte[] {1, 3});
         var javaResult = M3FiveProviderKeyGroups.snapshotSelected(
-                view, 1, 2, M3IndexMaskCompactor.Backend.JAVA);
+                view, 1, 2, IndexMaskCompactor.Backend.JAVA);
         assertEquals(List.of(10), javaResult.asJdkMapOfLists().get(1));
-        if (M3IndexMaskCompactor.nativeAvailable()) {
+        if (IndexMaskCompactor.nativeAvailable()) {
             var nativeResult = M3FiveProviderKeyGroups.snapshotSelected(
-                    view, 1, 2, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                    view, 1, 2, IndexMaskCompactor.Backend.NATIVE_REQUIRED);
             assertEquals(javaResult.asJdkMapOfLists(), nativeResult.asJdkMapOfLists());
         } else {
             assertThrows(UnsatisfiedLinkError.class, () -> M3FiveProviderKeyGroups.snapshotSelected(
-                    view, 1, 2, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
+                    view, 1, 2, IndexMaskCompactor.Backend.NATIVE_REQUIRED));
         }
         assertFalse(javaResult.valuesFor(2).contains(20));
     }

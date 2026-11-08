@@ -7,7 +7,7 @@ package jdk.m3.collections.interop;
 
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
-import jdk.m3.collections.M3CountedBag;
+import jdk.m3.collections.CountedBag;
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -23,15 +23,15 @@ import java.util.Set;
  * storage nodes. Single-threaded; count-changing iterators are fail-fast.
  */
 public final class M3GuavaMultiset<E> extends AbstractCollection<E> implements Multiset<E> {
-    private final M3CountedBag<E> bag;
+    private final CountedBag<E> bag;
     private transient Set<E> elements;
     private transient Set<Entry<E>> entries;
 
     /** Independent default count owner; public behavior unchanged. */
-    public M3GuavaMultiset() { this(new M3CountedBag<>()); }
+    public M3GuavaMultiset() { this(new CountedBag<>()); }
 
     /** Explicitly reuse the same M3 packed count/index owner across provider facades. */
-    public M3GuavaMultiset(M3CountedBag<E> owner) {
+    public M3GuavaMultiset(CountedBag<E> owner) {
         this.bag = Objects.requireNonNull(owner, "owner");
     }
     public static <E> M3GuavaMultiset<E> create() { return new M3GuavaMultiset<>(); }
@@ -120,11 +120,11 @@ public final class M3GuavaMultiset<E> extends AbstractCollection<E> implements M
 
     /** M3-specific exact total; Guava's public size() is int-saturated. */
     public long totalOccurrences() { return bag.totalOccurrences(); }
-    public M3CountedBag<E> m3Backend() { return bag; }
+    public CountedBag<E> m3Backend() { return bag; }
 
     /** Explicit native/Java precomputed-key mask selection, not Java callback JNI. */
-    public M3CountedBag<E> selectedDistinct(byte[] states, int required,
-                                            jdk.m3.collections.M3IndexMaskCompactor.Backend backend) {
+    public CountedBag<E> selectedDistinct(byte[] states, int required,
+                                            jdk.m3.collections.IndexMaskCompactor.Backend backend) {
         return bag.selectedDistinct(states, required, backend);
     }
 }

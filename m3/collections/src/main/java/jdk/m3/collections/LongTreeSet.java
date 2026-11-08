@@ -31,7 +31,7 @@ import jdk.internal.m3.collections.LaneSearch;
  * {@code PackedLongPagedSortedSet} (page lanes, split and merge mechanics); the Abseil-derived
  * sibling-borrow heuristic of the paged donor is not carried. The iterator is fail-fast. This is
  * an M3 proving-ground backend, not a {@code java.util.TreeSet} replacement; live range views are
- * {@link M3LongSortedViews}.</p>
+ * {@link LongSortedViews}.</p>
  *
  * <p>Positional access ({@link #get(int)}, {@link #indexOf(long)}) binary-searches a page-prefix
  * lane (the rank of each logical page's first value) that is rebuilt lazily, in O(pages), by the

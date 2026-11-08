@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.eclipse.runtime;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.Objects;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * Thin Eclipse {@link IProgressMonitor} entry point backed by an existing M3 progress owner.
  *
- * <p>Choose {@link #owned(M3ProgressMonitor)} only for an Eclipse operation that owns the
- * progress monitor's begin/done lifecycle. Choose {@link #borrowed(M3ProgressMonitor)} for a
+ * <p>Choose {@link #owned(ProgressMonitor)} only for an Eclipse operation that owns the
+ * progress monitor's begin/done lifecycle. Choose {@link #borrowed(ProgressMonitor)} for a
  * nested Eclipse/JDT/PDE call whose outer M3 operation owns that lifecycle. A borrowed
  * monitor reports task names as subtasks and intentionally does not begin or complete its owner.
  * Neither mode creates another scheduler, task store, or progress payload.</p>
@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * update occurred; nested updates and external owner effects cannot be rolled back.</p>
  */
 public final class M3EclipseProgressMonitor implements IProgressMonitor {
-    private final M3ProgressMonitor owner;
+    private final ProgressMonitor owner;
     private final boolean ownsLifecycle;
     private boolean begun;
     private boolean finished;
@@ -36,21 +36,21 @@ public final class M3EclipseProgressMonitor implements IProgressMonitor {
     private double fractionalWork;
     private long fractionalRevision;
 
-    private M3EclipseProgressMonitor(M3ProgressMonitor owner, boolean ownsLifecycle) {
+    private M3EclipseProgressMonitor(ProgressMonitor owner, boolean ownsLifecycle) {
         this.owner = Objects.requireNonNull(owner, "owner");
         this.ownsLifecycle = ownsLifecycle;
     }
 
-    public static M3EclipseProgressMonitor owned(M3ProgressMonitor owner) {
+    public static M3EclipseProgressMonitor owned(ProgressMonitor owner) {
         return new M3EclipseProgressMonitor(owner, true);
     }
 
-    public static M3EclipseProgressMonitor borrowed(M3ProgressMonitor owner) {
+    public static M3EclipseProgressMonitor borrowed(ProgressMonitor owner) {
         return new M3EclipseProgressMonitor(owner, false);
     }
 
     /** Returns the M3 owner; no Eclipse or M3 state snapshot is copied. */
-    public M3ProgressMonitor owner() { return owner; }
+    public ProgressMonitor owner() { return owner; }
 
     @Override
     public synchronized void beginTask(String name, int totalWork) {

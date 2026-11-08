@@ -2,7 +2,7 @@
 // Relocated from com.synexia m3-fastsearch/jdk/internal/m3/fastsearch/knowledge/index/TopKInputs.java (blob dc60990a93ca) by M3_SEARCH_RELOCATE v3.
 package jdk.m3.search;
 
-import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.ProgressMonitor;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -15,7 +15,7 @@ final class TopKInputs {
         return validate(documentIds, scores, limit, null);
     }
 
-    static int validate(int[] documentIds, float[] scores, int limit, M3ProgressMonitor monitor) {
+    static int validate(int[] documentIds, float[] scores, int limit, ProgressMonitor monitor) {
         if (monitor != null) monitor.subTask("Validate top-k inputs");
         Objects.requireNonNull(documentIds, "documentIds");
         Objects.requireNonNull(scores, "scores");
@@ -35,12 +35,12 @@ final class TopKInputs {
         return Math.min(limit, scores.length);
     }
 
-    static void checkpoint(M3ProgressMonitor monitor, int position) {
+    static void checkpoint(ProgressMonitor monitor, int position) {
         if (monitor != null && (position & 4095) == 0) monitor.checkCanceled();
     }
 
     /** One terminal lifecycle; cleanup failures cannot hide the primary exception. */
-    static int[] monitored(M3ProgressMonitor monitor, Supplier<int[]> action) {
+    static int[] monitored(ProgressMonitor monitor, Supplier<int[]> action) {
         Objects.requireNonNull(monitor, "monitor");
         monitor.checkCanceled();
         monitor.beginTask("M3 top-k selection", 1L);

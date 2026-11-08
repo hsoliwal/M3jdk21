@@ -23,10 +23,10 @@ public interface IntList extends IntCollection {
     int capacity();
     void ensureCapacity(int minimumCapacity);
     void trimToSize();
-    M3IntIndexedSnapshot snapshot();
-    M3IntIndexedSnapshot filteredSnapshot(IntPredicate predicate);
-    M3IntIndexedSnapshot maskedSnapshot(byte[] state, int required,
-            M3IndexMaskCompactor.Backend backend);
+    IntIndexedSnapshot snapshot();
+    IntIndexedSnapshot filteredSnapshot(IntPredicate predicate);
+    IntIndexedSnapshot maskedSnapshot(byte[] state, int required,
+            IndexMaskCompactor.Backend backend);
     default boolean addIf(int value, IntPredicate predicate) {
         if (!java.util.Objects.requireNonNull(predicate).test(value)) return false;
         return add(value);

@@ -234,7 +234,7 @@ public final class IntPriorityQueue implements IntCollection {
             return;
         }
         heap = Arrays.copyOf(heap,
-                M3PriorityQueueGrowth.nextCapacity(heap.length, minimumCapacity));
+                PriorityQueueGrowth.nextCapacity(heap.length, minimumCapacity));
     }
 
     private void checkForComodification(int expectedModCount) {
