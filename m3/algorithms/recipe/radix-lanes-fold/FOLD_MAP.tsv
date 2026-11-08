@@ -1,0 +1,30 @@
+# FOLD_MEMBERS v1.5 map (m3/tooling/jdk-naming/fold_members.py): the radix lanes of synexia-algo IntRadix and LongRadix fold into jdk.m3.algorithm.SortingAlgorithms, the owner of the radix concept (leaf 124 HELD -> member-fold growth of an existing owner, no new class; 2026-11-08).
+# Donors are outside the tree (hsoliwal/com.synexia@4a2e6452a7ad), pinned to their blobs; members fold byte for byte under radix* names (RENAME rows); the monitor types map to the module's (REFS rows).
+# The owner's inline radixSortSigned(int[]) becomes the donor's facade over the workspace lane (OWNER_EDIT_FILE), so one radix kernel remains; the donor's own facade overload is SKIP (same text, the owner keeps its Javadoc).
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/SortingAlgorithms.java
+DONOR	S:/m3-scratch/eb-conv/algo/donor124/IntRadix.java	ad3f6f52ef60	donor blob ad3f6f52ef60 at commit 4a2e6452a7ad (repository, path and digests: m3/algorithms/recipe/radix-lanes-fold/PROVENANCE.tsv)
+DONOR	S:/m3-scratch/eb-conv/algo/donor124/LongRadix.java	5734be7223b0	donor blob 5734be7223b0 at commit 4a2e6452a7ad (repository, path and digests: m3/algorithms/recipe/radix-lanes-fold/PROVENANCE.tsv)
+TAKE	IntRadix.*
+TAKE	LongRadix.*
+SKIP	IntRadix.sortSigned(int[])	the owner's radixSortSigned(int[]) becomes this facade by OWNER_EDIT_FILE (same text plus the kept Javadoc)
+OWNER_EDIT_FILE	baadee4c6d6d	radixSortSigned.old.java	radixSortSigned.new.java
+RENAME	IntRadix.sortSigned	radixSortSigned
+RENAME	IntRadix.sortUnsigned	radixSortUnsigned
+RENAME	IntRadix.sortPairsSigned	radixSortPairsSigned
+RENAME	IntRadix.sort	radixSort
+RENAME	IntRadix.digit	radixDigit
+RENAME	IntRadix.checkpoint	radixCheckpoint
+RENAME	LongRadix.sortSigned	radixSortSigned
+RENAME	LongRadix.sortUnsigned	radixSortUnsigned
+RENAME	LongRadix.sortPairsSigned	radixSortPairsSigned
+RENAME	LongRadix.sortPairsUnsigned	radixSortPairsUnsigned
+RENAME	LongRadix.sortPairs	radixSortPairs
+RENAME	LongRadix.sort	radixSort
+RENAME	LongRadix.digit	radixDigit
+RENAME	LongRadix.checkpoint	radixCheckpoint
+REFS	\bIProgressMonitor\.noop\(\)	ProgressMonitor.none()
+REFS	\bIProgressMonitor\b	ProgressMonitor
+REFS	\bProgressMonitors\.	AlgorithmSupport.
+REFS	\b(?:IntRadix|LongRadix)\.RADIX\b	SortingAlgorithms.RADIX
+REFS	\b(?:IntRadix|LongRadix)\.sort	SortingAlgorithms.radixSort

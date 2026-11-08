@@ -1,0 +1,9 @@
+gate	result	evidence
+fold_members	PASS	23 members FOLD from IntRadix and LongRadix (hsoliwal/com.synexia@4a2e6452a7ad, blobs ad3f6f52ef60 and 5734be7223b0) under radix* names, byte for byte with //FLLDCIM: FOLD anchors; RADIX folded once; radixCheckpoint folded once (identical in both donors); IntRadix.sortSigned(int[]) SKIP
+owner_edit	PASS	OWNER_EDIT_FILE baadee4c6d6d: the inline radixSortSigned(int[]) body becomes the facade over radixSortSigned(int[],int[],int[],ProgressMonitor); one radix kernel remains
+fold_fixed_point	PASS	fold_members.py --check after the apply run: changed=0, exit 0 (donor members PRESENT with equal bodies)
+references	PASS	grep IntRadix|LongRadix|IProgressMonitor|ProgressMonitors|DefaultProgressMonitor|PrimitiveRadixTest over m3/algorithms src/main/java and src/test/java outside anchors: 0 lines
+tests	PASS	mvn -f m3/algorithms/pom.xml clean package: Tests run: 94, Failures: 0, Errors: 0, Skipped: 0; per-class counts identical to the master 25deae5216f0 baseline plus RadixSortLanesTest (6 tests, the donor PrimitiveRadixTest relocated by tests.sed); 0 warnings (-Xlint:all -Werror)
+package_gate	PASS	PACKAGE_LAYOUT_GATE violations=0 roots=727 real=242 loose=21 copy=307 vendor=157 product_packages=384 split_packages=10
+jdk_naming	PASS	JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 shadows=0
+owner_size	NOTE	SortingAlgorithms is 544 lines after the fold
