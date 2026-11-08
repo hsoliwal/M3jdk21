@@ -1,0 +1,76 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/corpus-search-20261108/relocate.py (recipe RELOCATE_CORPUS_SEARCH v1, derived from recipe/catalogue-kernels-20261107). Census pass 4 corpus package (S:/m3-scratch/eb-conv/census4; module root synexia-algo, package com.synexia.algorithms.corpus): the THIS_PR rows of DECISION.tsv.
+# Donor: hsoliwal/com.synexia develop a7b7bb639802c0042c11cf2a5dc8427edd6a9775 (census4 pin, fetched 2026-11-07): the synexia-algo corpus search kernels; the donor progress closure (synexia-job, synexia-common, synexia-cop) and the JNI loader closure compiled on the donor side only.
+# Row kinds as in catalogue-kernels-20261107 (REPO, FILE, OWNED, DONOR_ONLY, PACKAGE, TYPE, MEMBER, EXTERNAL, EDIT, DROP_METHOD, DROP_LINE, NEC). A DONOR_ONLY note starting with DRIVER marks a donor type the differential driver imports on the donor side.
+kind	donor	target	note
+REPO	hsoliwal/com.synexia	https://github.com/hsoliwal/com.synexia	private donor repository; blob URL = <url>/blob/<commit>/<donor path>
+FILE	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearch.java	src/main/java/jdk/m3/algorithm/M3MultiPatternSearch.java	C4-corpus: byte-alphabet Aho-Corasick with immutable precomputation (prepare, prefix and exact multiplicity, first offsets); the JNI lane (native dispatch, direct-buffer mirror, native declarations, probes) dropped by the EDIT and DROP rows; blob d1907e395e8b
+FILE	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengePrefixIndex.java	src/main/java/jdk/m3/algorithm/M3PrefixIndex.java	C4-corpus: immutable prefix-index facade over the prepared automaton; blob eb61d57d5d1f
+FILE	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearchTest.java	src/test/java/jdk/m3/algorithm/M3MultiPatternSearchTest.java	donor test; its JNI parity method dropped; blob 04d6812ddbf6
+FILE	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengePrefixIndexTest.java	src/test/java/jdk/m3/algorithm/M3PrefixIndexTest.java	donor test; its native shadow method dropped; blob c4147fbf5ed2
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressMonitors.java	-	ALREADY relocated as M3ProgressChecks by catalogue-kernels-20261107 (TYPE row); compiled on the donor side as the kernels closure (blob 8507c2772316)
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeNativeSearch.java	-	OMIT: JNI loader of the challenge corpus; the dropped lane of the kernel names it (blob 02df6d1104f5)
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeZSearch.java	-	closure of ChallengeNativeSearch (its JNI self-check names it); relocated as M3ZPrefixMatch by catalogue-kernels-20261107 (blob d7f00eb8fb85)
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeRabinKarpSearch.java	-	DRIVER NEC subject: its Java lane indexOfJava is the landed M3PrimitiveStringAlgorithms.rabinKarpIndexOf (MEMBER row; M3CorpusSearchDump compares them); the JNI lane is not ported (blob a03231f70cb2)
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/string/StringsRabinKarp.java	-	closure of ChallengeRabinKarpSearch; NEC with the landed rabinKarpIndexOf (catalogue-kernels-20261107) (blob 076cd6d35f3a)
+OWNED	synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java	src/main/java/jdk/m3/algorithm/M3ProgressMonitor.java	ALREADY: owner m3/qualification/progress-monitor-unify-20261106 (adapter over jdk.m3.collections.M3ProgressMonitor); blob 62e5ceea645b
+OWNED	synexia-job/src/main/java/com/synexia/job/ProgressSnapshot.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressState)
+OWNED	synexia-job/src/main/java/com/synexia/job/ChildProgressMonitor.java	-	donor progress closure (owner jdk.m3.collections.M3ChildProgressMonitor)
+OWNED	synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java	-	donor progress closure
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressMonitor)
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressState)
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextNullProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressChild.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressSnapshot.java	-	donor progress closure
+PACKAGE	com.synexia.algorithms.corpus	jdk.m3.algorithm	the package of m3/algorithms
+PACKAGE	com.synexia.algorithms.core	jdk.m3.algorithm	the package of m3/algorithms (the progress helper M3ProgressChecks is already on master)
+PACKAGE	com.synexia.job	jdk.m3.algorithm	the progress contract lives in the module package (its import becomes a same-package import, legal and kept, as in catalogue-kernels-20261107)
+TYPE	ChallengeMultiPatternSearch	M3MultiPatternSearch	product algorithm: the corpus prefix Challenge is dropped
+TYPE	ChallengePrefixIndex	M3PrefixIndex	product facade: the corpus prefix Challenge is dropped
+TYPE	ProgressMonitors	M3ProgressChecks	the landed package-private helper (catalogue-kernels-20261107)
+TYPE	IProgressMonitor	M3ProgressMonitor	the owner contract (OWNED row)
+TYPE	ChallengeMultiPatternSearchTest	M3MultiPatternSearchTest	test of M3MultiPatternSearch
+TYPE	ChallengePrefixIndexTest	M3PrefixIndexTest	test of M3PrefixIndex
+MEMBER	com.synexia.job.IProgressMonitor.noop	M3ProgressMonitor.none	the donor tests qualified no-op factory = the owner none() (this row precedes the unqualified one)
+MEMBER	com.synexia.job.DefaultProgressMonitor	M3CancelableProgressMonitor	the donor tests settable monitor = the test-scope M3CancelableProgressMonitor (M3JDK-authored)
+MEMBER	IProgressMonitor.noop	M3ProgressMonitor.none	the donor no-op monitor factory = the owner none() (OWNED row)
+MEMBER	ChallengeRabinKarpSearch.indexOfJava	M3PrimitiveStringAlgorithms.rabinKarpIndexOf	NEC differential of M3CorpusSearchDump: the donor Java lane against the landed owner (no FILE row names either side)
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (the donor tests); pom dependency org.junit.jupiter:junit-jupiter:5.11.4 test scope, already declared
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearch.java	E1_MPS_DOC	40675718c891 class comment: the JNI-candidate paragraph becomes the pure-Java contract
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearch.java	E2_MPS_FIRST_OFFSETS_JAVA_ONLY	0500fe525b95 firstOffsets(Prepared, byte[], monitor): the JNI dispatch block is removed; the Java lane is the only lane
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearch.java	E3_MPS_PREPARED_DIRECT	4d91d866b116 Prepared(...): the direct-buffer mirror of the flat patterns is not built
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearch.java	E4_MPS_NATIVE_DECLS	a977f58cedb8 the four native method declarations (multi-line, no DROP row can name them) are removed
+DROP_METHOD	ChallengeMultiPatternSearch.prefixCountNative	-	JNI lane (module is pure Java)
+DROP_METHOD	ChallengeMultiPatternSearch.exactCountNative	-	JNI lane
+DROP_METHOD	ChallengeMultiPatternSearch.firstOffsets(Prepared,ChallengeNativeSearch.PreparedBytes)	-	JNI lane: direct-buffer haystack overload
+DROP_METHOD	ChallengeMultiPatternSearch.firstOffsets(Prepared,ChallengeNativeSearch.PreparedBytes,IProgressMonitor)	-	JNI lane: direct-buffer haystack overload with native dispatch
+DROP_METHOD	ChallengeMultiPatternSearch.firstOffsetsJava(Prepared,ChallengeNativeSearch.PreparedBytes)	-	JNI lane: Java fallback over the direct-buffer haystack
+DROP_METHOD	ChallengeMultiPatternSearch.firstOffsetsJava(Prepared,ChallengeNativeSearch.PreparedBytes,IProgressMonitor)	-	JNI lane: private body of the dropped fallback
+DROP_METHOD	ChallengeMultiPatternSearch.initialResult	-	helper used only by the dropped direct-buffer fallback
+DROP_METHOD	ChallengeMultiPatternSearch.unresolved	-	helper used only by the dropped direct-buffer fallback
+DROP_METHOD	ChallengeMultiPatternSearch.verifyNative	-	JNI probe
+DROP_METHOD	ChallengeMultiPatternSearch.validateNativeMultiplicity	-	JNI result check
+DROP_METHOD	ChallengeMultiPatternSearch.validateNativeResult(Prepared,ChallengeNativeSearch.PreparedBytes,int[])	-	JNI result check
+DROP_METHOD	ChallengeMultiPatternSearch.validateNativeResult(Prepared,byte[],int[])	-	JNI result check
+DROP_METHOD	ChallengeMultiPatternSearch.directPatterns	-	JNI lane: direct-buffer view of Prepared
+DROP_METHOD	ChallengeMultiPatternSearch.directOffsets	-	JNI lane: direct-buffer view of Prepared
+DROP_METHOD	ChallengeMultiPatternSearch.directLengths	-	JNI lane: direct-buffer view of Prepared
+DROP_LINE	ChallengeMultiPatternSearch	^    private static final int NATIVE_MIN_TEXT_BYTES = 1_024;$	member:NATIVE_MIN_TEXT_BYTES JNI dispatch threshold
+DROP_LINE	ChallengeMultiPatternSearch	^    private static final int NATIVE_MIN_PATTERNS = 4;$	member:NATIVE_MIN_PATTERNS JNI dispatch threshold
+DROP_LINE	ChallengeMultiPatternSearch	^        private final ByteBuffer directPatterns;$	member:directPatterns JNI lane field (its construction: EDIT E3)
+DROP_LINE	ChallengeMultiPatternSearch	^        private final IntBuffer directOffsets;$	member:directOffsets JNI lane field
+DROP_LINE	ChallengeMultiPatternSearch	^        private final IntBuffer directLengths;$	member:directLengths JNI lane field
+DROP_LINE	ChallengeMultiPatternSearch	^import java\.nio\.ByteBuffer;$	import used only by the dropped JNI lane
+DROP_LINE	ChallengeMultiPatternSearch	^import java\.nio\.ByteOrder;$	import used only by the dropped JNI lane
+DROP_LINE	ChallengeMultiPatternSearch	^import java\.nio\.IntBuffer;$	import used only by the dropped JNI lane
+DROP_METHOD	ChallengeMultiPatternSearchTest.optionalJniMatchesPreparedJavaAcrossRandomCases	-	tests the dropped JNI lane
+DROP_LINE	ChallengeMultiPatternSearchTest	^import java\.nio\.file\.Path;$	import used only by the dropped JNI test
+DROP_LINE	ChallengeMultiPatternSearchTest	^import java\.util\.ArrayList;$	import used only by the dropped JNI test
+DROP_LINE	ChallengeMultiPatternSearchTest	^import java\.util\.Arrays;$	import used only by the dropped JNI test
+DROP_LINE	ChallengeMultiPatternSearchTest	^import java\.util\.Random;$	import used only by the dropped JNI test
+DROP_METHOD	ChallengePrefixIndexTest.optionalNativeShadowMatchesJavaOracleForLargePreparedSet	-	tests the dropped JNI lane
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearch.java#firstOffsets	jdk.m3.collections.text.IntAhoCorasick.scan	same automaton family, different alphabet and contract (int symbols, every match streamed vs byte patterns, first offset per pattern, prefix and exact multiplicity); both kept; M3CorpusSearchReferenceTest asserts equal first offsets
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeRabinKarpSearch.java#indexOfJava	jdk.m3.algorithm.M3PrimitiveStringAlgorithms.rabinKarpIndexOf	same algorithm and contract (first hit, exact verification, empty pattern = 0, null = NPE text/pattern); M3CorpusSearchDump compares them on every case (MEMBER row)
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengePostingQueries.java	jdk.m3.arrays.M3IntPostingIndex	facade of the posting kernels already NEC in catalogue-kernels-20261107 (ChallengePostingQuery row)

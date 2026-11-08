@@ -89,6 +89,7 @@ public final class M3AlgorithmShapeCatalog {
             new Shape("kosaraju-scc", Family.GRAPH, "O(V+E)", "O(V+E)", "GraphAlgorithms.stronglyConnectedComponents"),
             new Shape("disjoint-set", Family.UNION_FIND, "amortized α(n)", "O(n)", "IntUnionFind.union"),
             new Shape("prefix-trie", Family.TRIE, "O(m)", "O(total chars)", "StringTrie.insert"),
+            new Shape("byte-prefix-count", Family.TRIE, "O(m)", "O(total pattern bytes)", "M3PrefixIndex.prefixCount"),
             new Shape("subsets", Family.BACKTRACKING, "O(2^n)", "O(n)", "M3BacktrackingAlgorithms.subsets"),
             new Shape("permutations", Family.BACKTRACKING, "O(n*n!)", "O(n)", "M3BacktrackingAlgorithms.permutations"),
             new Shape("n-queens", Family.BACKTRACKING, "exponential", "O(n)", "M3BacktrackingAlgorithms.nQueens"),
@@ -108,6 +109,7 @@ public final class M3AlgorithmShapeCatalog {
             new Shape("manacher", Family.STRING, "O(n)", "O(n)", "M3StringAlgorithms.longestPalindrome"),
             new Shape("z-search", Family.STRING, "O(n+m)", "O(m)", "M3ZAlgorithm.zSearch"),
             new Shape("one-mismatch-window", Family.STRING, "O(n+m)", "O(n+m)", "M3OneMismatchWindowSearch.allIndices"),
+            new Shape("aho-corasick-first-offsets", Family.STRING, "O(n + total pattern bytes)", "O(total pattern bytes)", "M3MultiPatternSearch.firstOffsets"),
             new Shape("matrix-spiral", Family.MATRIX, "O(mn)", "O(1) aux", "M3MatrixAlgorithms.spiralOrder"),
             new Shape("island-flood", Family.MATRIX, "O(mn)", "O(mn)", "M3MatrixAlgorithms.countIslands"),
             new Shape("matrix-zeroes", Family.MATRIX, "O(mn)", "O(1)", "M3MatrixAlgorithms.setZeroes")
