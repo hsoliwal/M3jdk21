@@ -184,7 +184,7 @@ public final class M3AtomCoverageLedger {
                 M3EvidenceRecord record = perAtom.get(required);
                 if (record == null) {
                     findings.add(atom.atomId() + "\tMISSING_GATE\t" + required);
-                } else if (!record.status().admissible()) {
+                } else if (!requiredGateSatisfied(required, record)) {
                     findings.add(atom.atomId() + "\t" + record.status() + "\t" + required);
                 }
             }
@@ -216,7 +216,7 @@ public final class M3AtomCoverageLedger {
             }
             for (M3CoverageGate gate : requiredGates) {
                 M3EvidenceRecord record = perAtom.get(gate);
-                if (record == null || !record.status().admissible()) {
+                if (!requiredGateSatisfied(gate, record)) {
                     complete = false;
                     break;
                 }
@@ -224,6 +224,13 @@ public final class M3AtomCoverageLedger {
             admitted += complete ? 1 : 0;
         }
         return admitted;
+    }
+
+    /** A contract-unlock requires an actual PASS, never a NOT_APPLICABLE disposition. */
+    private static boolean requiredGateSatisfied(M3CoverageGate gate, M3EvidenceRecord record) {
+        return record != null && record.status().admissible()
+                && (gate != M3CoverageGate.CONTRACT_CHANGE_AUTHORIZED
+                        || record.status() == M3GateStatus.PASS);
     }
 
     private static Map<String, Map<M3CoverageGate, M3EvidenceRecord>> freezeEvidence(
@@ -273,10 +280,10 @@ public final class M3AtomCoverageLedger {
 
     private static String requireRelativePath(String value, Path path, int lineNumber) {
         requireToken("source_path", value, path, lineNumber);
-        boolean windowsAbsolute = value.length() >= 3 && Character.isLetter(value.charAt(0))
-                && value.charAt(1) == ':' && value.charAt(2) == '/';
+        boolean windowsDrivePath = value.length() >= 2 && Character.isLetter(value.charAt(0))
+                && value.charAt(1) == ':';
         if (value.startsWith("/") || value.startsWith("\\") || value.contains("\\") || value.endsWith("/")
-                || windowsAbsolute) {
+                || windowsDrivePath) {
             throw invalid(path, lineNumber, "source_path must be a normalized repository-relative path");
         }
         for (String part : value.split("/", -1)) {

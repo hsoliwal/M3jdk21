@@ -50,6 +50,7 @@ public final class M3AtomCoverageVerifierSelfTest {
             evidenceMustReferenceAnAtom(directory);
             pathTraversalIsRefused(directory);
             windowsAbsolutePathIsRefused(directory);
+            windowsDriveRelativePathIsRefused(directory);
             carriageReturnInputIsRefused(directory);
             passRequiresHashBoundEvidence(directory);
             notApplicableRequiresRationale(directory);
@@ -149,6 +150,19 @@ public final class M3AtomCoverageVerifierSelfTest {
                 () -> verify(M3AtomCoverageVerifier.Mode.VALIDATE, fixture), "Windows absolute path refusal");
     }
 
+    /** Drive-relative Windows paths are not repository-relative, even without a slash. */
+    private void windowsDriveRelativePathIsRefused(Path directory) throws Exception {
+        for (String path : List.of("C:src/A.java", "Z:")) {
+            List<String> atoms = new ArrayList<>(atomRows(false, false));
+            atoms.set(1, atoms.get(1).replace("src/A.java", path));
+            Fixture fixture = writeFixture(directory.resolve("drive-relative-" + path.length()),
+                    atoms, evidenceRows(false, false));
+            expect(IllegalArgumentException.class,
+                    () -> verify(M3AtomCoverageVerifier.Mode.VALIDATE, fixture),
+                    "drive-relative repository source path refusal " + path);
+        }
+    }
+
     private void carriageReturnInputIsRefused(Path directory) throws Exception {
         Fixture fixture = writeFixture(directory.resolve("crlf"), atomRows(false, false), evidenceRows(false, false));
         String text = Files.readString(fixture.atoms(), StandardCharsets.UTF_8).replace("\n", "\r\n");
@@ -200,6 +214,26 @@ public final class M3AtomCoverageVerifierSelfTest {
                 "unlocked contract missing authorization is reported");
         expect(IllegalStateException.class,
                 () -> verify(M3AtomCoverageVerifier.Mode.ADMIT, blocked), "unlocked contract admission refusal");
+
+        List<String> disclaimedEvidence = new ArrayList<>(evidenceRows(false, false));
+        disclaimedEvidence.add(String.join("\t", "ATOM-B",
+                M3CoverageGate.CONTRACT_CHANGE_AUTHORIZED.name(), M3GateStatus.NOT_APPLICABLE.name(),
+                "evidence/ATOM-B/contract-change-review.md", HASH_B,
+                "no explicit permission to change contract"));
+        disclaimedEvidence.subList(1, disclaimedEvidence.size()).sort(Comparator.naturalOrder());
+        Fixture disclaimed = writeFixture(directory.resolve("unlocked-not-applicable"), atoms, disclaimedEvidence);
+        String disclaimedSummary = verify(M3AtomCoverageVerifier.Mode.VALIDATE, disclaimed);
+        check(disclaimedSummary.contains("admitted=1\tpending=1"),
+                "NOT_APPLICABLE cannot authorize an unlocked public contract");
+        check(disclaimedSummary.contains("FINDING\tATOM-B\tNOT_APPLICABLE\tCONTRACT_CHANGE_AUTHORIZED"),
+                "NOT_APPLICABLE authorization is a recorded blocker");
+        expect(IllegalStateException.class,
+                () -> verify(M3AtomCoverageVerifier.Mode.ADMIT, disclaimed),
+                "unlocked NOT_APPLICABLE admission refusal");
+        Fixture lockedOptional = writeFixture(directory.resolve("locked-optional-not-applicable"),
+                atomRows(false, false), disclaimedEvidence);
+        check(verify(M3AtomCoverageVerifier.Mode.ADMIT, lockedOptional).contains("admitted=2\tpending=0"),
+                "non-required NOT_APPLICABLE remains nonblocking for a locked contract");
 
         List<String> authorizedEvidence = new ArrayList<>(evidenceRows(false, false));
         authorizedEvidence.add(String.join("\t", "ATOM-B", M3CoverageGate.CONTRACT_CHANGE_AUTHORIZED.name(),
