@@ -38,7 +38,7 @@ final class BmhBufferCountOnlyTest {
                 System.arraycopy(pattern, 0, data,
                         random.nextInt(data.length - pattern.length + 1), pattern.length);
             }
-            M3BoyerMooreHorspoolSearch compiled = new M3BoyerMooreHorspoolSearch(pattern);
+            BoyerMooreHorspoolSearch compiled = new BoyerMooreHorspoolSearch(pattern);
             for (boolean direct : new boolean[] {false, true}) {
                 ByteBuffer buffer = direct ? ByteBuffer.allocateDirect(len + 9)
                         : ByteBuffer.allocate(len + 9);
@@ -53,9 +53,9 @@ final class BmhBufferCountOnlyTest {
                     for (int from : STARTS) {
                         int expected = independentCount(data, pattern, from);
                         List<Integer> positions = new ArrayList<>();
-                        int visits = M3ByteOccurrences.visitBuffer(
+                        int visits = ByteOccurrences.visitBuffer(
                                 compiled, view, from, Integer.MAX_VALUE, positions::add, null);
-                        int actual = M3ByteOccurrences.countBuffer(compiled, view, from, null);
+                        int actual = ByteOccurrences.countBuffer(compiled, view, from, null);
                         assertEquals(expected, visits, "visit sample=" + sample + " from=" + from);
                         assertEquals(expected, actual, "count sample=" + sample + " from=" + from);
                         assertEquals(visits, positions.size());
@@ -80,11 +80,11 @@ final class BmhBufferCountOnlyTest {
         direct.limit(3 + data.length);
         AtomicInteger visits = new AtomicInteger();
         AtomicInteger counts = new AtomicInteger();
-        M3BoyerMooreHorspoolSearch v = new M3BoyerMooreHorspoolSearch(needle);
-        M3BoyerMooreHorspoolSearch c = new M3BoyerMooreHorspoolSearch(needle);
-        int visited = M3ByteOccurrences.visitBuffer(v, direct, 0, Integer.MAX_VALUE,
+        BoyerMooreHorspoolSearch v = new BoyerMooreHorspoolSearch(needle);
+        BoyerMooreHorspoolSearch c = new BoyerMooreHorspoolSearch(needle);
+        int visited = ByteOccurrences.visitBuffer(v, direct, 0, Integer.MAX_VALUE,
                 ignored -> {}, monitor(visits, -1, null));
-        int counted = M3ByteOccurrences.countBuffer(c, direct, 0,
+        int counted = ByteOccurrences.countBuffer(c, direct, 0,
                 monitor(counts, -1, null));
         assertEquals(8_187, visited);
         assertEquals(visited, counted);
@@ -93,13 +93,13 @@ final class BmhBufferCountOnlyTest {
             CancellationException marker = new CancellationException("M3 canceled " + abort);
             AtomicInteger p1 = new AtomicInteger();
             AtomicInteger p2 = new AtomicInteger();
-            M3BoyerMooreHorspoolSearch a = new M3BoyerMooreHorspoolSearch(needle);
-            M3BoyerMooreHorspoolSearch b = new M3BoyerMooreHorspoolSearch(needle);
+            BoyerMooreHorspoolSearch a = new BoyerMooreHorspoolSearch(needle);
+            BoyerMooreHorspoolSearch b = new BoyerMooreHorspoolSearch(needle);
             assertSame(marker, assertThrows(CancellationException.class,
-                    () -> M3ByteOccurrences.visitBuffer(a, direct, 0, Integer.MAX_VALUE,
+                    () -> ByteOccurrences.visitBuffer(a, direct, 0, Integer.MAX_VALUE,
                             ignored -> {}, monitor(p1, abort, marker))));
             assertSame(marker, assertThrows(CancellationException.class,
-                    () -> M3ByteOccurrences.countBuffer(b, direct, 0,
+                    () -> ByteOccurrences.countBuffer(b, direct, 0,
                             monitor(p2, abort, marker))));
             assertEquals(abort, p1.get());
             assertEquals(abort, p2.get());
@@ -110,12 +110,12 @@ final class BmhBufferCountOnlyTest {
 
     @Test
     void nullAndForeignProviderRetainOriginalDispatchAndBounds() {
-        M3BoyerMooreHorspoolSearch compiled = new M3BoyerMooreHorspoolSearch(new byte[] {1, 2});
+        BoyerMooreHorspoolSearch compiled = new BoyerMooreHorspoolSearch(new byte[] {1, 2});
         assertThrows(NullPointerException.class,
-                () -> M3ByteOccurrences.countBuffer(compiled, null, 0, null));
+                () -> ByteOccurrences.countBuffer(compiled, null, 0, null));
         assertThrows(NullPointerException.class,
-                () -> M3ByteOccurrences.countBuffer(null, ByteBuffer.wrap(new byte[] {1}), 0, null));
-        M3CompiledSearch foreign = new M3CompiledSearch() {
+                () -> ByteOccurrences.countBuffer(null, ByteBuffer.wrap(new byte[] {1}), 0, null));
+        CompiledSearch foreign = new CompiledSearch() {
             @Override public int indexOf(byte[] data, int from) {
                 for (int i = Math.max(0, from); i < data.length; ++i) {
                     if (data[i] == 9) return i;
@@ -131,9 +131,9 @@ final class BmhBufferCountOnlyTest {
             @Override public int needleLength() { return 1; }
             @Override public String strategy() { return "foreign"; }
         };
-        assertEquals(3, M3ByteOccurrences.countBuffer(foreign,
+        assertEquals(3, ByteOccurrences.countBuffer(foreign,
                 ByteBuffer.wrap(new byte[] {9, 9, 2, 9}), -5, null));
-        assertEquals(0, M3ByteOccurrences.countBuffer(foreign,
+        assertEquals(0, ByteOccurrences.countBuffer(foreign,
                 ByteBuffer.wrap(new byte[] {9, 9}), Integer.MAX_VALUE, null));
     }
 

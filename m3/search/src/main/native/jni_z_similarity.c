@@ -10,7 +10,7 @@
  * one UTF-16 code unit. No text normalization, Java callback, or retained JNI pointer.
  * All allocation and JNI failures return with a pending Java exception.
  */
-JNIEXPORT jlong JNICALL Java_jdk_m3_search_M3ZSimilarity_sumNative(
+JNIEXPORT jlong JNICALL Java_jdk_m3_search_ZSimilarity_sumNative(
         JNIEnv *env, jclass unused, jstring input) {
     (void)unused;
     if (input == NULL) {

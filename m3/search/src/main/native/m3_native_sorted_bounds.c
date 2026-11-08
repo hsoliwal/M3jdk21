@@ -6,7 +6,7 @@
 #include <jni.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "jdk_m3_search_M3NativeSortedIntBounds.h"
+#include "jdk_m3_search_NativeSortedIntBounds.h"
 
 #define M3_KEY_BATCH 256
 
@@ -60,7 +60,7 @@ static int m3_merge_within_budget(jint range_length, jsize key_count) {
             && (uint64_t)range_length <= (uint64_t)key_count * depth;
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3NativeSortedIntBounds_nativeBounds(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_search_NativeSortedIntBounds_nativeBounds(
         JNIEnv *env, jclass class_unused, jintArray sorted, jint from, jint to, jintArray keys) {
     (void)class_unused;
     if ((*env)->ExceptionCheck(env)) {

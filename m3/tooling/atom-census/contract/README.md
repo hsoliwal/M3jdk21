@@ -18,8 +18,8 @@ Dependency-free Java 21 proof:
 Ledger verification after compiling the module:
 
 ```text
-java jdk.m3.tooling.atoms.contract.M3AtomCoverageVerifier validate ATOMS.tsv EVIDENCE.tsv
-java jdk.m3.tooling.atoms.contract.M3AtomCoverageVerifier admit ATOMS.tsv EVIDENCE.tsv
+java jdk.m3.tooling.atoms.contract.AtomCoverageVerifier validate ATOMS.tsv EVIDENCE.tsv
+java jdk.m3.tooling.atoms.contract.AtomCoverageVerifier admit ATOMS.tsv EVIDENCE.tsv
 ```
 
 `validate` checks exact UTF-8/LF form, schema, sorting, identities, references and evidence payloads. It prints missing

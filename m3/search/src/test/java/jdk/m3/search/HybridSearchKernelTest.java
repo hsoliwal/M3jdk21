@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class HybridSearchKernelTest {
     @Test
     void boundedSelectionMatchesIndependentFullSort() throws Exception {
-        HybridSearchKernelChecks.verifySelector(M3TopKSelector.javaSelector());
+        HybridSearchKernelChecks.verifySelector(TopKSelector.javaSelector());
     }
 
     @Test

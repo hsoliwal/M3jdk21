@@ -26,7 +26,7 @@ final class BmhByteBufferAbsoluteReadTest {
                 System.arraycopy(needle, 0, bytes, at, needle.length);
             }
             byte[] previous = bytes.clone();
-            try (M3CompiledSearch compiled = new M3BoyerMooreHorspoolSearch(needle)) {
+            try (CompiledSearch compiled = new BoyerMooreHorspoolSearch(needle)) {
                 for (int kind = 0; kind < 4; kind++) {
                     ByteBuffer backing = (kind & 1) == 0
                             ? ByteBuffer.allocate(bytes.length + 10)
@@ -58,7 +58,7 @@ final class BmhByteBufferAbsoluteReadTest {
     }
     @Test void ownedNeedleAndReadOnlyDirectSlice() {
         byte[] needle = {'a','b','a','b'};
-        try (M3CompiledSearch search = new M3BoyerMooreHorspoolSearch(needle)) {
+        try (CompiledSearch search = new BoyerMooreHorspoolSearch(needle)) {
             Arrays.fill(needle, (byte) 'x');
             ByteBuffer source = ByteBuffer.allocateDirect(20);
             byte[] body = {'z','a','b','a','b','x','a','b','a','b','z'};

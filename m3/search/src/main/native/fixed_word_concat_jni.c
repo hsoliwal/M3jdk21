@@ -50,7 +50,7 @@ static jint m3_lookup(const M3WordDict *dict, const jchar *source) {
 
 /* Native export is PRIVATE to a package-local proof class; no existing JNI ABI changes. */
 JNIEXPORT jintArray JNICALL
-Java_jdk_m3_search_M3FixedWordConcatenation_findNative(
+Java_jdk_m3_search_FixedWordConcatenation_findNative(
         JNIEnv *env, jclass unused, jcharArray sourceArray, jobjectArray wordsArray) {
     (void) unused;
     if (sourceArray == NULL || wordsArray == NULL) {

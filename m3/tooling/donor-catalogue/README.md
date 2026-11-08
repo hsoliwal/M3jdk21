@@ -73,7 +73,7 @@ Generated proof is written beneath root `build/m3-donor-catalogue/`, which remai
 After a local repository contains both exact commit objects, run:
 
 ```sh
-java -cp <classes> jdk.m3.tooling.donors.M3OpenJdkDeltaInventory \
+java -cp <classes> jdk.m3.tooling.donors.OpenJdkDeltaInventory \
   m3/tooling/donor-catalogue \
   bisheng-jdk-21 \
   /path/to/local/combined-git-repository \

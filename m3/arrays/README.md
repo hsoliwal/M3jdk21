@@ -183,3 +183,21 @@ operation, or performance win is claimed by this first slice.
 provenance pins, the gates (`mvn package` with the module flags, the 7,329,532-assertion oracle in the test phase,
 the byte-for-byte differential against the donor class) and the lessons. The `m3/collections` frozen CSR scaffolds
 (`M3FrozenLongMultimap`, `M3FrozenLongTable`) are not wired to it in that leaf.
+
+## Lossless adaptive int32 bitplanes (2026-11-08)
+
+`AdaptivePackedIntArray` stores signed integer snapshots as unsigned minimum
+deltas at the exact block-wide bit width (0..32). Immutable random access,
+detached bytes and explicit import validation preserve ordinary signed-int
+semantics. `AdaptivePackedIntNative` uses the same format through bounded
+required-native JNI batch calls on the existing `m3_arrays` owner; the Java
+codec operates without JNI. No VM array contract changes, numerical
+approximation, or unconditional speedup claims are made.
+
+See [adaptive bitpack recipe](recipe/adaptive-bitpack-20261108/README.md) for
+LeetCode, HackerRank, GeeksforGeeks and Lucene donor classification, license
+decision, local test evidence and remaining qualification gates.
+
+The matching `AdaptivePackedIntBlocks` owner performs per-group exact
+bit-width selection, with no intermediate source-block copies or eager
+flattening. Payload-size savings depend on block size and value distribution.

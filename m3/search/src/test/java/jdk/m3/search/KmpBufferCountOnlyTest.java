@@ -32,7 +32,7 @@ final class KmpBufferCountOnlyTest {
                 System.arraycopy(needle, 0, haystack,
                         random.nextInt(haystack.length - needle.length + 1), needle.length);
             }
-            M3KmpSearch compiled = new M3KmpSearch(needle);
+            KmpSearch compiled = new KmpSearch(needle);
             for (boolean direct : new boolean[] {false, true}) {
                 ByteBuffer backing = direct
                         ? ByteBuffer.allocateDirect(haystack.length + 7)
@@ -49,9 +49,9 @@ final class KmpBufferCountOnlyTest {
                             haystack.length / 2, haystack.length, Integer.MAX_VALUE}) {
                         int expected = naiveCount(haystack, needle, from);
                         List<Integer> positions = new ArrayList<>();
-                        int visits = M3ByteOccurrences.visitBuffer(
+                        int visits = ByteOccurrences.visitBuffer(
                                 compiled, view, from, Integer.MAX_VALUE, positions::add, null);
-                        int counted = M3ByteOccurrences.countBuffer(compiled, view, from, null);
+                        int counted = ByteOccurrences.countBuffer(compiled, view, from, null);
                         assertEquals(expected, visits, "visit sample=" + sample);
                         assertEquals(expected, counted, "count sample=" + sample);
                         assertEquals(positions.size(), counted);
@@ -69,16 +69,16 @@ final class KmpBufferCountOnlyTest {
     void preservesMonitorPollCountAndOriginalCancellationExceptionIdentity() {
         byte[] data = new byte[8_193];
         java.util.Arrays.fill(data, (byte) 7);
-        M3KmpSearch compiled = new M3KmpSearch(new byte[] {7, 7, 7});
+        KmpSearch compiled = new KmpSearch(new byte[] {7, 7, 7});
         ByteBuffer direct = ByteBuffer.allocateDirect(data.length + 5);
         for (int i = 0; i < data.length; i++) direct.put(i + 2, data[i]);
         direct.position(2);
         direct.limit(2 + data.length);
         AtomicInteger countPolls = new AtomicInteger();
         AtomicInteger visitPolls = new AtomicInteger();
-        int counted = M3ByteOccurrences.countBuffer(compiled, direct, 0,
+        int counted = ByteOccurrences.countBuffer(compiled, direct, 0,
                 monitor(countPolls, -1, null));
-        int visited = M3ByteOccurrences.visitBuffer(compiled, direct, 0, Integer.MAX_VALUE,
+        int visited = ByteOccurrences.visitBuffer(compiled, direct, 0, Integer.MAX_VALUE,
                 ignored -> {}, monitor(visitPolls, -1, null));
         assertEquals(8_191, counted);
         assertEquals(counted, visited);
@@ -88,7 +88,7 @@ final class KmpBufferCountOnlyTest {
             CancellationException marker = new CancellationException("native-independent cancellation");
             AtomicInteger polling = new AtomicInteger();
             assertSame(marker, assertThrows(CancellationException.class,
-                    () -> M3ByteOccurrences.countBuffer(compiled, direct, 0,
+                    () -> ByteOccurrences.countBuffer(compiled, direct, 0,
                             monitor(polling, abortPoll, marker))));
             assertEquals(abortPoll, polling.get());
         }
@@ -97,11 +97,11 @@ final class KmpBufferCountOnlyTest {
     @Test
     void maintainsNullAndNonKmpProviderDispatch() {
         assertThrows(NullPointerException.class,
-                () -> M3ByteOccurrences.countBuffer(null, ByteBuffer.allocate(0), 0, null));
-        M3KmpSearch compiled = new M3KmpSearch(new byte[] {1});
+                () -> ByteOccurrences.countBuffer(null, ByteBuffer.allocate(0), 0, null));
+        KmpSearch compiled = new KmpSearch(new byte[] {1});
         assertThrows(NullPointerException.class,
-                () -> M3ByteOccurrences.countBuffer(compiled, null, 0, null));
-        M3CompiledSearch other = new M3CompiledSearch() {
+                () -> ByteOccurrences.countBuffer(compiled, null, 0, null));
+        CompiledSearch other = new CompiledSearch() {
             @Override public int indexOf(byte[] input, int from) { return -1; }
             @Override public int indexOf(ByteBuffer input, int from) {
                 for (int i = Math.max(0, from); i < input.remaining(); i++) {
@@ -113,8 +113,8 @@ final class KmpBufferCountOnlyTest {
             @Override public String strategy() { return "external-provider"; }
         };
         ByteBuffer data = ByteBuffer.wrap(new byte[] {1, 2, 1, 1, 0});
-        assertEquals(3, M3ByteOccurrences.countBuffer(other, data, 0, null));
-        assertEquals(2, M3ByteOccurrences.countBuffer(other, data, 2, null));
+        assertEquals(3, ByteOccurrences.countBuffer(other, data, 0, null));
+        assertEquals(2, ByteOccurrences.countBuffer(other, data, 2, null));
         assertTrue(data.position() == 0 && data.limit() == 5);
     }
 

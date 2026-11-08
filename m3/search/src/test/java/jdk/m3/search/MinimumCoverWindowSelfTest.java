@@ -56,16 +56,16 @@ public final class MinimumCoverWindowSelfTest {
                 }
             }
         }
-        return bestStart < 0 ? -1L : M3MinimumCoverWindow.pack(bestStart, bestEnd);
+        return bestStart < 0 ? -1L : MinimumCoverWindow.pack(bestStart, bestEnd);
     }
 
     private static void caseOne(String source, String required) {
         long expected = oracle(source, required);
-        long observed = M3MinimumCoverWindow.javaSpan(source, required);
+        long observed = MinimumCoverWindow.javaSpan(source, required);
         require(observed == expected, "java mismatch src=" + show(source)
                 + " req=" + show(required) + " expected=" + expected + " got=" + observed);
         if (withNative) {
-            long nativeResult = M3MinimumCoverWindow.nativeSpan(
+            long nativeResult = MinimumCoverWindow.nativeSpan(
                     source.toCharArray(), required.toCharArray());
             require(nativeResult == expected, "jni mismatch src=" + show(source)
                     + " req=" + show(required) + " expected=" + expected
@@ -145,27 +145,27 @@ public final class MinimumCoverWindowSelfTest {
             }
             caseOne(source.toString(), required.toString());
         }
-        throwsExpected(NullPointerException.class, () -> M3MinimumCoverWindow.javaSpan(null, "a"));
-        throwsExpected(NullPointerException.class, () -> M3MinimumCoverWindow.javaSpan("a", null));
+        throwsExpected(NullPointerException.class, () -> MinimumCoverWindow.javaSpan(null, "a"));
+        throwsExpected(NullPointerException.class, () -> MinimumCoverWindow.javaSpan("a", null));
         throwsExpected(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.javaSpan("x".repeat(1_000_001), "x"));
+                () -> MinimumCoverWindow.javaSpan("x".repeat(1_000_001), "x"));
         throwsExpected(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.javaSpan("x", "x".repeat(1_000_001)));
+                () -> MinimumCoverWindow.javaSpan("x", "x".repeat(1_000_001)));
         if (withNative) {
             throwsExpected(NullPointerException.class,
-                    () -> M3MinimumCoverWindow.nativeSpan(null, new char[] {'a'}));
+                    () -> MinimumCoverWindow.nativeSpan(null, new char[] {'a'}));
             throwsExpected(NullPointerException.class,
-                    () -> M3MinimumCoverWindow.nativeSpan(new char[] {'a'}, null));
+                    () -> MinimumCoverWindow.nativeSpan(new char[] {'a'}, null));
             throwsExpected(IllegalArgumentException.class,
-                    () -> M3MinimumCoverWindow.nativeSpan(new char[1_000_001], new char[] {'x'}));
+                    () -> MinimumCoverWindow.nativeSpan(new char[1_000_001], new char[] {'x'}));
             throwsExpected(IllegalArgumentException.class,
-                    () -> M3MinimumCoverWindow.nativeSpan(new char[] {'x'}, new char[1_000_001]));
+                    () -> MinimumCoverWindow.nativeSpan(new char[] {'x'}, new char[1_000_001]));
         }
-        require(M3MinimumCoverWindow.javaSpan("a".repeat(1_000_000), "a".repeat(5))
-                == M3MinimumCoverWindow.pack(0, 5), "large Java boundary");
+        require(MinimumCoverWindow.javaSpan("a".repeat(1_000_000), "a".repeat(5))
+                == MinimumCoverWindow.pack(0, 5), "large Java boundary");
         if (withNative) {
-            require(M3MinimumCoverWindow.nativeSpan("a".repeat(1_000_000).toCharArray(),
-                    "a".repeat(5).toCharArray()) == M3MinimumCoverWindow.pack(0, 5),
+            require(MinimumCoverWindow.nativeSpan("a".repeat(1_000_000).toCharArray(),
+                    "a".repeat(5).toCharArray()) == MinimumCoverWindow.pack(0, 5),
                     "large JNI boundary");
         }
         System.out.println("M3_MINIMUM_COVER_PASS mode=" + args[0] + " checks=" + checks

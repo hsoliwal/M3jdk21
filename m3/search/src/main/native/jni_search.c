@@ -303,7 +303,7 @@ static int snx_scan_monitored(
     return bulk_poll(monitor);
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_nativeAbi(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_JniSearchEngine_nativeAbi(
         JNIEnv *env, jclass owner) {
     (void)env;
     (void)owner;
@@ -311,14 +311,14 @@ JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_nativeAbi(
 }
 
 /* Callback-free discovery: ABI-1 libraries predating monitored bulk scans omit this symbol. */
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_monitoredBulkNativeAbi(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_JniSearchEngine_monitoredBulkNativeAbi(
         JNIEnv *env, jclass owner) {
     (void)env;
     (void)owner;
     return 1;
 }
 
-JNIEXPORT jlong JNICALL Java_jdk_m3_search_M3JniSearchEngine_compileNative(
+JNIEXPORT jlong JNICALL Java_jdk_m3_search_JniSearchEngine_compileNative(
         JNIEnv *env, jclass owner, jbyteArray needle_array) {
     (void)owner;
     if (needle_array == NULL) {
@@ -499,7 +499,7 @@ static jint search_reverse(
     return -1;
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_indexOfNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_JniSearchEngine_indexOfNative(
         JNIEnv *env, jclass owner, jlong handle, jbyteArray haystack_array, jint from_index) {
     (void)owner;
     snx_entry *lease = snx_borrow(env, handle);
@@ -520,7 +520,7 @@ JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_indexOfNative(
     return result;
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_lastIndexOfNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_JniSearchEngine_lastIndexOfNative(
         JNIEnv *env, jclass owner, jlong handle, jbyteArray haystack_array, jint from_index) {
     (void)owner;
     snx_entry *lease = snx_borrow(env, handle);
@@ -550,7 +550,7 @@ static const uint8_t *direct_range(
     return (const uint8_t *)address + offset;
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_indexOfDirectNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_JniSearchEngine_indexOfDirectNative(
         JNIEnv *env, jclass owner, jlong handle, jobject haystack_buffer,
         jint offset, jint length, jint from_index) {
     (void)owner;
@@ -568,7 +568,7 @@ JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_indexOfDirectNative(
     return result;
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_lastIndexOfDirectNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_JniSearchEngine_lastIndexOfDirectNative(
         JNIEnv *env, jclass owner, jlong handle, jobject haystack_buffer,
         jint offset, jint length, jint from_index) {
     (void)owner;
@@ -681,7 +681,7 @@ count_done:
     return (jint)count;
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_countOverlappingNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_JniSearchEngine_countOverlappingNative(
         JNIEnv *env, jclass owner, jlong handle,
         jbyteArray haystack_array, jint from_index) {
     (void)owner;
@@ -692,7 +692,7 @@ JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_countOverlappingNati
     return result;
 }
 
-JNIEXPORT jint JNICALL Java_jdk_m3_search_M3JniSearchEngine_countOverlappingMonitoredNative(
+JNIEXPORT jint JNICALL Java_jdk_m3_search_JniSearchEngine_countOverlappingMonitoredNative(
         JNIEnv *env, jclass owner, jlong handle,
         jbyteArray haystack_array, jint from_index, jobject callback) {
     (void)owner;
@@ -840,7 +840,7 @@ positions_done:
 }
 
 /* ABI-1 additive symbol: return only the requested prefix of overlapping byte offsets. */
-JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3JniSearchEngine_positionsOverlappingNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_search_JniSearchEngine_positionsOverlappingNative(
         JNIEnv *env, jclass owner, jlong handle, jbyteArray haystack_array,
         jint from_index, jint max_matches) {
     (void)owner;
@@ -852,7 +852,7 @@ JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3JniSearchEngine_positionsOverla
     return result;
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3JniSearchEngine_positionsOverlappingMonitoredNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_search_JniSearchEngine_positionsOverlappingMonitoredNative(
         JNIEnv *env, jclass owner, jlong handle, jbyteArray haystack_array,
         jint from_index, jint max_matches, jobject callback) {
     (void)owner;
@@ -866,7 +866,7 @@ JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3JniSearchEngine_positionsOverla
     return result;
 }
 
-JNIEXPORT void JNICALL Java_jdk_m3_search_M3JniSearchEngine_releaseNative(
+JNIEXPORT void JNICALL Java_jdk_m3_search_JniSearchEngine_releaseNative(
         JNIEnv *env, jclass owner, jlong handle) {
     (void)owner;
     snx_retire(env, handle);
@@ -896,7 +896,7 @@ static int m3_compare_request(const void *left, const void *right) {
     return 0;
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3BatchOffsetSearch_indexOfManyNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_search_BatchOffsetSearch_indexOfManyNative(
         JNIEnv *env, jclass owner, jbyteArray haystack_array,
         jbyteArray needle_array, jintArray from_array) {
     (void)owner;
@@ -1025,7 +1025,7 @@ static int m3_direct_query_cmp(const void *left, const void *right) {
     return 0;
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3BatchOffsetSearch_indexOfManyDirectNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_search_BatchOffsetSearch_indexOfManyDirectNative(
         JNIEnv *env, jclass owner, jobject haystack_buffer, jint position, jint limit,
         jbyteArray needle_array, jintArray from_array) {
     (void)owner;
@@ -1268,7 +1268,7 @@ cleanup:
     return output;
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3BatchReverseSearch_lastIndexOfManyNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_search_BatchReverseSearch_lastIndexOfManyNative(
         JNIEnv *env, jclass owner, jbyteArray haystack_array, jbyteArray needle_array,
         jintArray from_array) {
     (void)owner;
@@ -1290,7 +1290,7 @@ JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3BatchReverseSearch_lastIndexOfM
     return result;
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_m3_search_M3BatchReverseSearch_lastIndexOfManyDirectNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_search_BatchReverseSearch_lastIndexOfManyDirectNative(
         JNIEnv *env, jclass owner, jobject haystack_buffer, jint position, jint limit,
         jbyteArray needle_array, jintArray from_array) {
     (void)owner;

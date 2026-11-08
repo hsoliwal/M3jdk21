@@ -19,7 +19,8 @@ Product packages are the packages of REAL and LOOSE roots.
   package_gate.py check    [--tree REV | --paths FILE] [--baseline FILE]
 check fails (exit 1) on: a source root (any kind) absent from the baseline; a product package absent from the
 baseline; a product package declared by more source roots than the baseline allows (SPLIT rows; an unlisted package
-allows one). Removals always pass. Prints one row per violation and a summary line."""
+allows one); an M3-prefixed type file inside an M3 package absent from the baseline (PREFIXED rows; the
+user's 2026-11-08 rule, renamed by rename_types.py). Removals always pass. Prints one row per violation and a summary line."""
 import argparse
 import collections
 import re
@@ -32,6 +33,15 @@ COPY = re.compile(r"/(recipe-custody|custody|fixtures?|test-fixtures|intakes?|ev
                   r"receiving|retained-variants|candidate|qualified|resources|proof|baseline|postimages?|preimages?|"
                   r"donor|donors-src|snapshots?|golden|expected|samples?|qualification|recipes?)/")
 SOURCE = re.compile(r"^(.*)/src/main/java/(.+)/([^/]+)\.java$")
+# A type file M3<Name>.java inside an M3 package (main, test or JDK module sources), outside copies and vendor.
+PREFIXED = re.compile(r"^(?:.*/src/(?:main|test)/java/|src/[^/]+/share/classes/|test/jdk/)jdk/(?:internal/)?m3/"
+                      r"(?:[\w/]*/)?M3[A-Z][A-Za-z0-9]*\.java$")
+
+
+def prefixed(paths):
+    """Paths of M3-prefixed type files inside M3 packages (the user's 2026-11-08 rule: no product prefix there)."""
+    return sorted(p for p in paths if PREFIXED.match(p) and not p.startswith("m3/vendor/")
+                  and not COPY.search("/" + p.rsplit("/", 1)[0] + "/"))
 
 
 def layout(paths):
@@ -73,11 +83,12 @@ def baseline_rows(paths):
     rows = [f"ROOT\t{r}\t{kinds[r]}" for r in sorted(kinds)]
     rows += [f"PACKAGE\t{p}" for p in sorted(product)]
     rows += [f"SPLIT\t{p}\t{len(rs)}" for p, rs in sorted(product.items()) if len(rs) > 1]
+    rows += [f"PREFIXED\t{p}" for p in prefixed(paths)]
     return rows
 
 
 def check(paths, baseline):
-    roots, packages, split = set(), set(), {}
+    roots, packages, split, legacy = set(), set(), {}, set()
     for line in baseline.splitlines():
         cols = line.split("\t")
         if cols[0] == "ROOT":
@@ -86,11 +97,14 @@ def check(paths, baseline):
             packages.add(cols[1])
         elif cols[0] == "SPLIT":
             split[cols[1]] = int(cols[2])
+        elif cols[0] == "PREFIXED":
+            legacy.add(cols[1])
     kinds, product = layout(paths)
     bad = [f"NEW_ROOT\t{r}\t{kinds[r]}" for r in sorted(kinds) if r not in roots]
     bad += [f"NEW_PACKAGE\t{p}\t{' '.join(sorted(product[p]))}" for p in sorted(product) if p not in packages]
     bad += [f"SPLIT_GROWS\t{p}\t{len(rs)}>{split.get(p, 1)}\t{' '.join(sorted(rs))}"
             for p, rs in sorted(product.items()) if len(rs) > split.get(p, 1)]
+    bad += [f"NEW_PREFIXED_TYPE\t{p}" for p in prefixed(paths) if p not in legacy]
     return bad, kinds, product
 
 

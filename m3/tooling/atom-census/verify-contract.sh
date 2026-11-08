@@ -12,4 +12,4 @@ mapfile -t sources < <({
 } | sort)
 javac --release 21 -Xlint:all -Werror -d "$classes" "${sources[@]}"
 java -Dm3.contract.dir="$here/contract" -cp "$classes" \
-  jdk.m3.tooling.atoms.contract.M3AtomCoverageVerifierSelfTest
+  jdk.m3.tooling.atoms.contract.AtomCoverageVerifierSelfTest

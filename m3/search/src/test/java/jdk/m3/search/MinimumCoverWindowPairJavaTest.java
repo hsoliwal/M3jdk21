@@ -40,7 +40,7 @@ final class MinimumCoverWindowPairJavaTest {
                 }
             }
         }
-        return bestStart < 0 ? -1L : M3MinimumCoverWindow.pack(bestStart, bestStart + bestWidth);
+        return bestStart < 0 ? -1L : MinimumCoverWindow.pack(bestStart, bestStart + bestWidth);
     }
 
     private static String enumerate(int ordinal, int width) {
@@ -61,7 +61,7 @@ final class MinimumCoverWindowPairJavaTest {
                 {"ab", "ba"}, {"aaXaa", "aa"}, {"x", ""}, {"ab", "a"},
                 {"abcbc", "abc"}}) {
             assertEquals(independent(sample[0], sample[1]),
-                    M3MinimumCoverWindow.javaSpan(sample[0], sample[1]), sample[0]);
+                    MinimumCoverWindow.javaSpan(sample[0], sample[1]), sample[0]);
         }
     }
 
@@ -74,7 +74,7 @@ final class MinimumCoverWindowPairJavaTest {
                     for (int second = 0; second < 4; second++) {
                         String required = "" + ALPHABET[first] + ALPHABET[second];
                         assertEquals(independent(source, required),
-                                M3MinimumCoverWindow.javaSpan(source, required),
+                                MinimumCoverWindow.javaSpan(source, required),
                                 "width=" + width + " ordinal=" + ordinal);
                     }
                 }
@@ -88,7 +88,7 @@ final class MinimumCoverWindowPairJavaTest {
             String source = "" + (char) unit + 'X' + (char) unit;
             String required = "" + (char) unit + (char) unit;
             assertEquals(independent(source, required),
-                    M3MinimumCoverWindow.javaSpan(source, required), "code unit=" + unit);
+                    MinimumCoverWindow.javaSpan(source, required), "code unit=" + unit);
         }
         SplittableRandom random = new SplittableRandom(0x4d335f5041495231L);
         for (int iteration = 0; iteration < 20000; iteration++) {
@@ -99,20 +99,20 @@ final class MinimumCoverWindowPairJavaTest {
             String required = "" + ALPHABET[random.nextInt(ALPHABET.length)]
                     + ALPHABET[random.nextInt(ALPHABET.length)];
             assertEquals(independent(source.toString(), required),
-                    M3MinimumCoverWindow.javaSpan(source.toString(), required), "seed=" + iteration);
+                    MinimumCoverWindow.javaSpan(source.toString(), required), "seed=" + iteration);
         }
     }
 
     @Test
     void nullBudgetAndMillionUnitBoundary() {
-        assertThrows(NullPointerException.class, () -> M3MinimumCoverWindow.javaSpan(null, "ab"));
-        assertThrows(NullPointerException.class, () -> M3MinimumCoverWindow.javaSpan("abc", null));
+        assertThrows(NullPointerException.class, () -> MinimumCoverWindow.javaSpan(null, "ab"));
+        assertThrows(NullPointerException.class, () -> MinimumCoverWindow.javaSpan("abc", null));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.javaSpan("x".repeat(1_000_001), "ab"));
+                () -> MinimumCoverWindow.javaSpan("x".repeat(1_000_001), "ab"));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.javaSpan("x", "a".repeat(1_000_001)));
-        assertEquals(M3MinimumCoverWindow.pack(999998, 1_000_000),
-                M3MinimumCoverWindow.javaSpan("x".repeat(999998) + "ab", "ab"));
-        assertEquals(-1L, M3MinimumCoverWindow.javaSpan("\uffff\0", "aa"));
+                () -> MinimumCoverWindow.javaSpan("x", "a".repeat(1_000_001)));
+        assertEquals(MinimumCoverWindow.pack(999998, 1_000_000),
+                MinimumCoverWindow.javaSpan("x".repeat(999998) + "ab", "ab"));
+        assertEquals(-1L, MinimumCoverWindow.javaSpan("\uffff\0", "aa"));
     }
 }

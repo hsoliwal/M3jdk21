@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 final class ByteOccurrencesNativeCountBoundTest {
     @Test
     void javaFallbackRetainsOverlappingCountsAndExtremeCursors() {
-        M3JavaAdaptiveSearchEngine provider = new M3JavaAdaptiveSearchEngine();
+        JavaAdaptiveSearchEngine provider = new JavaAdaptiveSearchEngine();
         Random random = new Random(0x4d334e4154495645L);
         int[] froms = {Integer.MIN_VALUE, -9, -1, 0, 1, 7,
                 63, 128, Integer.MAX_VALUE};
@@ -26,10 +26,10 @@ final class ByteOccurrencesNativeCountBoundTest {
                 Arrays.fill(haystack, (byte) 3);
                 Arrays.fill(needle, (byte) 3);
             }
-            try (M3CompiledSearch compiled = provider.compile(needle)) {
+            try (CompiledSearch compiled = provider.compile(needle)) {
                 for (int from : froms) {
                     assertEquals(oracle(haystack, needle, from),
-                            M3ByteOccurrences.count(compiled, haystack, from, null),
+                            ByteOccurrences.count(compiled, haystack, from, null),
                             "iteration=" + iteration + " from=" + from);
                 }
             }
@@ -38,14 +38,14 @@ final class ByteOccurrencesNativeCountBoundTest {
 
     @Test
     void argumentExceptionsRetainExistingOrdering() {
-        var provider = new M3JavaAdaptiveSearchEngine();
-        try (M3CompiledSearch compiled = provider.compile(new byte[]{1})) {
+        var provider = new JavaAdaptiveSearchEngine();
+        try (CompiledSearch compiled = provider.compile(new byte[]{1})) {
             assertThrows(NullPointerException.class,
-                    () -> M3ByteOccurrences.count(null, new byte[]{1}, 0, null));
+                    () -> ByteOccurrences.count(null, new byte[]{1}, 0, null));
             assertThrows(NullPointerException.class,
-                    () -> M3ByteOccurrences.count(compiled, null, 0, null));
-            assertEquals(0, M3ByteOccurrences.count(compiled, new byte[0], 0, null));
-            assertEquals(0, M3ByteOccurrences.count(compiled, new byte[]{1}, Integer.MAX_VALUE, null));
+                    () -> ByteOccurrences.count(compiled, null, 0, null));
+            assertEquals(0, ByteOccurrences.count(compiled, new byte[0], 0, null));
+            assertEquals(0, ByteOccurrences.count(compiled, new byte[]{1}, Integer.MAX_VALUE, null));
         }
     }
 

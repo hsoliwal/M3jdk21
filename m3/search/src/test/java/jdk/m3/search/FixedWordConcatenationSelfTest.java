@@ -63,7 +63,7 @@ public final class FixedWordConcatenationSelfTest {
             dictionary[i] = words[i].toCharArray();
             saved[i] = dictionary[i].clone();
         }
-        int[] result = M3FixedWordConcatenation.findNative(sourceArray, dictionary);
+        int[] result = FixedWordConcatenation.findNative(sourceArray, dictionary);
         check(Arrays.equals(sourceBefore, sourceArray), "native source mutation");
         for (int i = 0; i < words.length; i++) {
             check(Arrays.equals(dictionary[i], saved[i]), "native word mutation " + i);
@@ -73,7 +73,7 @@ public final class FixedWordConcatenationSelfTest {
 
     private static void compare(String source, String... words) {
         int[] expected = oracle(source, words);
-        int[] observed = M3FixedWordConcatenation.find(source, words);
+        int[] observed = FixedWordConcatenation.find(source, words);
         check(Arrays.equals(expected, observed), "Java mismatch source=" + source.length());
         if (nativeMode) {
             int[] nativeObserved = nativeResult(source, words);
@@ -95,9 +95,9 @@ public final class FixedWordConcatenationSelfTest {
         compare("", "x");
         compare("x", "xx");
         compare("aba", "a", "b");
-        int[] a = M3FixedWordConcatenation.find("barfoothefoobarman", new String[] {"foo", "bar"});
+        int[] a = FixedWordConcatenation.find("barfoothefoobarman", new String[] {"foo", "bar"});
         check(Arrays.equals(a, new int[] {0, 9}), "LC30 directed start offsets");
-        int[] b = M3FixedWordConcatenation.find("aaaaaa", new String[] {"aa", "aa"});
+        int[] b = FixedWordConcatenation.find("aaaaaa", new String[] {"aa", "aa"});
         check(Arrays.equals(b, new int[] {0, 1, 2}), "overlap and multiplicity");
     }
 
@@ -169,34 +169,34 @@ public final class FixedWordConcatenationSelfTest {
     }
 
     private static void refusal() {
-        expect(NullPointerException.class, () -> M3FixedWordConcatenation.find(null, new String[]{"a"}));
-        expect(NullPointerException.class, () -> M3FixedWordConcatenation.find("a", null));
-        expect(NullPointerException.class, () -> M3FixedWordConcatenation.find("a", new String[]{null}));
-        expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.find("a", new String[0]));
-        expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.find("a", new String[]{""}));
-        expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.find("ab", new String[]{"a", "bb"}));
-        expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.find("a".repeat(8193), new String[]{"a"}));
-        expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.find("abc", new String[]{"a".repeat(17)}));
+        expect(NullPointerException.class, () -> FixedWordConcatenation.find(null, new String[]{"a"}));
+        expect(NullPointerException.class, () -> FixedWordConcatenation.find("a", null));
+        expect(NullPointerException.class, () -> FixedWordConcatenation.find("a", new String[]{null}));
+        expect(IllegalArgumentException.class, () -> FixedWordConcatenation.find("a", new String[0]));
+        expect(IllegalArgumentException.class, () -> FixedWordConcatenation.find("a", new String[]{""}));
+        expect(IllegalArgumentException.class, () -> FixedWordConcatenation.find("ab", new String[]{"a", "bb"}));
+        expect(IllegalArgumentException.class, () -> FixedWordConcatenation.find("a".repeat(8193), new String[]{"a"}));
+        expect(IllegalArgumentException.class, () -> FixedWordConcatenation.find("abc", new String[]{"a".repeat(17)}));
         String[] tooMany = new String[33];
         Arrays.fill(tooMany, "a");
-        expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.find("abc", tooMany));
-        check(M3FixedWordConcatenation.find("a".repeat(8192), new String[]{"z"}).length == 0,
+        expect(IllegalArgumentException.class, () -> FixedWordConcatenation.find("abc", tooMany));
+        check(FixedWordConcatenation.find("a".repeat(8192), new String[]{"z"}).length == 0,
                 "max source budget");
-        check(M3FixedWordConcatenation.find("a".repeat(8192), new String[]{"a"}).length == 8192,
+        check(FixedWordConcatenation.find("a".repeat(8192), new String[]{"a"}).length == 8192,
                 "max output budget");
         if (nativeMode) {
-            expect(NullPointerException.class, () -> M3FixedWordConcatenation.findNative(null, new char[][]{{'a'}}));
-            expect(NullPointerException.class, () -> M3FixedWordConcatenation.findNative(new char[]{'a'}, null));
-            expect(NullPointerException.class, () -> M3FixedWordConcatenation.findNative(new char[]{'a'}, new char[][]{null}));
-            expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.findNative(new char[]{'a'}, new char[0][]));
-            expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.findNative(new char[]{'a'}, new char[][]{{}}));
-            expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.findNative(new char[]{'a'}, new char[][]{{'a'}, {'b', 'b'}}));
-            expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.findNative(new char[8193], new char[][]{{'a'}}));
-            expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.findNative(new char[]{'a'}, new char[][]{new char[17]}));
+            expect(NullPointerException.class, () -> FixedWordConcatenation.findNative(null, new char[][]{{'a'}}));
+            expect(NullPointerException.class, () -> FixedWordConcatenation.findNative(new char[]{'a'}, null));
+            expect(NullPointerException.class, () -> FixedWordConcatenation.findNative(new char[]{'a'}, new char[][]{null}));
+            expect(IllegalArgumentException.class, () -> FixedWordConcatenation.findNative(new char[]{'a'}, new char[0][]));
+            expect(IllegalArgumentException.class, () -> FixedWordConcatenation.findNative(new char[]{'a'}, new char[][]{{}}));
+            expect(IllegalArgumentException.class, () -> FixedWordConcatenation.findNative(new char[]{'a'}, new char[][]{{'a'}, {'b', 'b'}}));
+            expect(IllegalArgumentException.class, () -> FixedWordConcatenation.findNative(new char[8193], new char[][]{{'a'}}));
+            expect(IllegalArgumentException.class, () -> FixedWordConcatenation.findNative(new char[]{'a'}, new char[][]{new char[17]}));
             char[][] many = new char[33][];
             for (int i = 0; i < many.length; i++) many[i] = new char[]{'a'};
-            expect(IllegalArgumentException.class, () -> M3FixedWordConcatenation.findNative(new char[]{'a'}, many));
-            check(M3FixedWordConcatenation.findNative("a".repeat(8192).toCharArray(), new char[][]{{'a'}}).length == 8192,
+            expect(IllegalArgumentException.class, () -> FixedWordConcatenation.findNative(new char[]{'a'}, many));
+            check(FixedWordConcatenation.findNative("a".repeat(8192).toCharArray(), new char[][]{{'a'}}).length == 8192,
                     "native max output budget");
         }
     }
@@ -222,9 +222,9 @@ public final class FixedWordConcatenationSelfTest {
                         String source = "abababababa\u0000".repeat(4) + (char) ('a' + id);
                         String[] words = (i & 1) == 0 ? new String[]{"ab", "ba"} : new String[]{"aa", "ab"};
                         int[] expected = oracle(source, words);
-                        check(Arrays.equals(expected, M3FixedWordConcatenation.find(source, words)), "parallel java");
+                        check(Arrays.equals(expected, FixedWordConcatenation.find(source, words)), "parallel java");
                         if (nativeMode) check(Arrays.equals(expected,
-                                M3FixedWordConcatenation.findNative(source.toCharArray(),
+                                FixedWordConcatenation.findNative(source.toCharArray(),
                                         new char[][]{words[0].toCharArray(), words[1].toCharArray()})), "parallel native");
                     }
                 } catch (Throwable error) {

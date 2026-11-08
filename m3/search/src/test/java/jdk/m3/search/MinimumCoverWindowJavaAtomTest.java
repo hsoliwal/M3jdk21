@@ -42,18 +42,18 @@ final class MinimumCoverWindowJavaAtomTest {
                 }
             }
         }
-        return bestStart < 0 ? -1 : M3MinimumCoverWindow.pack(bestStart, bestEnd);
+        return bestStart < 0 ? -1 : MinimumCoverWindow.pack(bestStart, bestEnd);
     }
 
     @Test
     void exactDuplicatesAndEarliestTie() {
-        assertEquals(M3MinimumCoverWindow.pack(9, 13),
-                M3MinimumCoverWindow.javaSpan("ADOBECODEBANC", "ABC"));
-        assertEquals(M3MinimumCoverWindow.pack(0, 3),
-                M3MinimumCoverWindow.javaSpan("aabbaa", "aab"));
-        assertEquals(M3MinimumCoverWindow.pack(2, 4),
-                M3MinimumCoverWindow.javaSpan("zaabxxaab", "ab"));
-        assertEquals(-1, M3MinimumCoverWindow.javaSpan("abc", "aaa"));
+        assertEquals(MinimumCoverWindow.pack(9, 13),
+                MinimumCoverWindow.javaSpan("ADOBECODEBANC", "ABC"));
+        assertEquals(MinimumCoverWindow.pack(0, 3),
+                MinimumCoverWindow.javaSpan("aabbaa", "aab"));
+        assertEquals(MinimumCoverWindow.pack(2, 4),
+                MinimumCoverWindow.javaSpan("zaabxxaab", "ab"));
+        assertEquals(-1, MinimumCoverWindow.javaSpan("abc", "aaa"));
     }
 
     @Test
@@ -62,7 +62,7 @@ final class MinimumCoverWindowJavaAtomTest {
                 "\u4e2d\u00e9", "\uffff"}) {
             String source = "\uffffz\0a\u00e9\uD800\uDC00\u4e2d\uffffz";
             assertEquals(independent(source, required),
-                    M3MinimumCoverWindow.javaSpan(source, required), required);
+                    MinimumCoverWindow.javaSpan(source, required), required);
         }
     }
 
@@ -81,24 +81,24 @@ final class MinimumCoverWindowJavaAtomTest {
             String haystack = source.toString();
             String needle = required.toString();
             assertEquals(independent(haystack, needle),
-                    M3MinimumCoverWindow.javaSpan(haystack, needle), "iteration=" + iteration);
+                    MinimumCoverWindow.javaSpan(haystack, needle), "iteration=" + iteration);
         }
     }
 
     @Test
     void nullEmptyAndBoundedInputRefusal() {
-        assertEquals(0, M3MinimumCoverWindow.javaSpan("\uffff", ""));
-        assertEquals(0, M3MinimumCoverWindow.javaSpan("", ""));
-        assertEquals(-1, M3MinimumCoverWindow.javaSpan("", "x"));
+        assertEquals(0, MinimumCoverWindow.javaSpan("\uffff", ""));
+        assertEquals(0, MinimumCoverWindow.javaSpan("", ""));
+        assertEquals(-1, MinimumCoverWindow.javaSpan("", "x"));
         assertThrows(NullPointerException.class,
-                () -> M3MinimumCoverWindow.javaSpan(null, "x"));
+                () -> MinimumCoverWindow.javaSpan(null, "x"));
         assertThrows(NullPointerException.class,
-                () -> M3MinimumCoverWindow.javaSpan("x", null));
+                () -> MinimumCoverWindow.javaSpan("x", null));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.javaSpan("x".repeat(1_000_001), "x"));
+                () -> MinimumCoverWindow.javaSpan("x".repeat(1_000_001), "x"));
         assertThrows(IllegalArgumentException.class,
-                () -> M3MinimumCoverWindow.javaSpan("x", "x".repeat(1_000_001)));
-        assertEquals(M3MinimumCoverWindow.pack(0, 4),
-                M3MinimumCoverWindow.javaSpan("x".repeat(1_000_000), "xxxx"));
+                () -> MinimumCoverWindow.javaSpan("x", "x".repeat(1_000_001)));
+        assertEquals(MinimumCoverWindow.pack(0, 4),
+                MinimumCoverWindow.javaSpan("x".repeat(1_000_000), "xxxx"));
     }
 }

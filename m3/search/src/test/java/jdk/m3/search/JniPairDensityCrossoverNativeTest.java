@@ -15,14 +15,14 @@ import org.junit.jupiter.api.Test;
 
 /** Source-sealed native pair search: sparse-first-to-dense continuation witness. */
 final class JniPairDensityCrossoverNativeTest {
-    private static M3JniSearchEngine engine() {
+    private static JniSearchEngine engine() {
         String configured = System.getProperty("m3.native.library.path");
         assertNotNull(configured, "real JNI native library is mandatory");
         Path library = Path.of(configured).toAbsolutePath().normalize();
         assertTrue(Files.isRegularFile(library), "native library missing");
         System.setProperty("m3.native.enabled", "true");
         System.setProperty("m3.native.library.path", library.toString());
-        M3JniSearchEngine engine = new M3JniSearchEngine();
+        JniSearchEngine engine = new JniSearchEngine();
         assertTrue(engine.available(), "JNI library must be loadable, no Java fallback");
         return engine;
     }
@@ -38,11 +38,11 @@ final class JniPairDensityCrossoverNativeTest {
 
     @Test
     void sparsePrefixDenseSuffixAndBoundaryHitsRetainFirstOffset() {
-        M3JniSearchEngine engine = engine();
+        JniSearchEngine engine = engine();
         byte[][] pairs = {{'a', 'b'}, {(byte) 0x80, (byte) 0xff}, {0, 1}};
         int[] lengths = {4095, 4096, 4097, 8192, 65536, 131072};
         for (byte[] pair : pairs) {
-            try (M3CompiledSearch search = engine.compile(pair)) {
+            try (CompiledSearch search = engine.compile(pair)) {
                 for (int length : lengths) {
                     for (int shape = 0; shape < 4; shape++) {
                         byte[] text = new byte[length];
@@ -81,12 +81,12 @@ final class JniPairDensityCrossoverNativeTest {
 
     @Test
     void randomSignedBytesAndOwnershipRetainPriorFirstMatchContract() {
-        M3JniSearchEngine engine = engine();
+        JniSearchEngine engine = engine();
         Random random = new Random(202611051846L);
         for (int trial = 0; trial < 512; trial++) {
             byte[] pair = {(byte) random.nextInt(256), (byte) random.nextInt(256)};
             byte[] original = pair.clone();
-            try (M3CompiledSearch search = engine.compile(pair)) {
+            try (CompiledSearch search = engine.compile(pair)) {
                 Arrays.fill(pair, (byte) 42); // caller mutation must not affect native pattern
                 byte[] text = new byte[4096 + random.nextInt(8192)];
                 random.nextBytes(text);

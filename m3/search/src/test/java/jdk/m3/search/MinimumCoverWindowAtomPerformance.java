@@ -22,8 +22,8 @@ public final class MinimumCoverWindowAtomPerformance {
         char[] nativeSource = source.toCharArray();
         char[] nativeRequired = required.toCharArray();
         for (int i = 0; i < WARMUP; i++) {
-            long result = nativeMode ? M3MinimumCoverWindow.nativeSpan(nativeSource, nativeRequired)
-                    : M3MinimumCoverWindow.javaSpan(source, required);
+            long result = nativeMode ? MinimumCoverWindow.nativeSpan(nativeSource, nativeRequired)
+                    : MinimumCoverWindow.javaSpan(source, required);
             if (result != expected) throw new AssertionError("warmup contract drift");
             observed = result;
         }
@@ -31,8 +31,8 @@ public final class MinimumCoverWindowAtomPerformance {
         for (int repeat = 0; repeat < REPEATS; repeat++) {
             long start = System.nanoTime();
             for (int i = 0; i < ITERATIONS; i++) {
-                long result = nativeMode ? M3MinimumCoverWindow.nativeSpan(nativeSource, nativeRequired)
-                        : M3MinimumCoverWindow.javaSpan(source, required);
+                long result = nativeMode ? MinimumCoverWindow.nativeSpan(nativeSource, nativeRequired)
+                        : MinimumCoverWindow.javaSpan(source, required);
                 if (result != expected) throw new AssertionError("measured contract drift");
                 observed = result;
             }
@@ -56,7 +56,7 @@ public final class MinimumCoverWindowAtomPerformance {
             String source = shape.equals("ASCII") ? "zzbaabba".repeat(128)
                     : shape.equals("BASIC_MULTILINGUAL") ? "x\u4e2dax\u4e2d".repeat(200)
                     : "x\uffffb\uffff".repeat(250);
-            long expected = M3MinimumCoverWindow.javaSpan(source, required);
+            long expected = MinimumCoverWindow.javaSpan(source, required);
             long medianNs = benchmark(source, required, nativeMode, expected);
             System.out.println("atom=" + (nativeMode ? "C17/JNI" : "Java21")
                     + " shape=" + shape + " repetitions=" + REPEATS
