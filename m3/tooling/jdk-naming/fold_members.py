@@ -252,8 +252,7 @@ def main() -> int:
                 continue
             seen[digest] = key
             present[(name, selector)] = digest
-            anchor = f"    //FLLDCIM: FOLD {blob[:12]} {key}
-".encode()  # <= 100 columns; map path lives in the recipe
+            anchor = f"    //FLLDCIM: FOLD {blob[:12]} {key}\n".encode()  # <= 100 columns; map path in the recipe
             folded.append(anchor + body + (b"" if body.endswith(b"\n") else b"\n"))
             table.append((key, selector, "FOLD" if name == member["name"] else "FOLD as " + name))
     if conflicts:
