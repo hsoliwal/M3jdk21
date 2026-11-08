@@ -10,7 +10,9 @@ add_library(m3_arrays SHARED
   m3_arrays.c
   m3_arrays_jni.c
   m3_packed_codec.c
-  m3_packed_codec_jni.c)
+  m3_packed_codec_jni.c
+  m3_int_codebook.c
+  m3_int_codebook_jni.c)
 
 target_include_directories(
   m3_arrays
@@ -54,6 +56,21 @@ if(BUILD_TESTING)
   endforeach()
   add_test(NAME m3_packed_codec_checks COMMAND m3_packed_codec_checks)
   add_test(NAME m3_packed_codec_jni_fault_test COMMAND m3_packed_codec_jni_fault_test)
+
+  # Exact integer codebook (weight-sharing analogue): strict C11 donor-neutral oracle.
+  add_executable(m3_int_codebook_checks
+    tests/m3_int_codebook_checks.c m3_int_codebook.c)
+  target_include_directories(m3_int_codebook_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_int_codebook_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_int_codebook_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_int_codebook_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_int_codebook_checks COMMAND m3_int_codebook_checks)
+
 endif()
 
 # All primitive allocation atoms reuse the actual array JNI owner above.
