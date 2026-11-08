@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-import jdk.m3.algorithm.M3PrefixZ;
+import jdk.m3.algorithm.PrefixZ;
 import jdk.m3.text.LocalM3Arena;
 import jdk.m3.text.LocalM3StringPiece;
 import jdk.m3.text.M3StringPiece;
@@ -47,7 +47,7 @@ public final class PrefixZContractTest {
     }
 
     private static void compare(String expected, M3StringPiece value) {
-        M3PrefixZ actual = M3PrefixZ.analyze(value, 4L * value.length(), () -> false);
+        PrefixZ actual = PrefixZ.analyze(value, 4L * value.length(), () -> false);
         require(actual.length() == expected.length(), "length");
         require(actual.metadataPayloadBytes() == 4L * expected.length(), "primitive payload accounting");
         long sum = 0;
@@ -104,34 +104,34 @@ public final class PrefixZContractTest {
         char[] mutable = {'a', 'b', 'a'};
         LocalM3StringPiece copied = new LocalM3Arena().copyUtf16(mutable);
         var identity = copied.storageIdentity();
-        M3PrefixZ saved = M3PrefixZ.analyze(copied);
+        PrefixZ saved = PrefixZ.analyze(copied);
         Arrays.fill(mutable, 'x');
         compare("aba", copied);
         require(copied.storageIdentity().equals(identity), "owner identity unchanged");
         require(saved.similaritySum() == 4, "facts detached from mutable admission source");
 
-        require(M3PrefixZ.requiredMetadataPayloadBytes(Integer.MAX_VALUE) == 8589934588L, "size overflow");
-        rejects(IllegalArgumentException.class, () -> M3PrefixZ.requiredMetadataPayloadBytes(-1));
-        rejects(IllegalArgumentException.class, () -> M3PrefixZ.analyze(copied, 11, () -> false));
-        rejects(IllegalArgumentException.class, () -> M3PrefixZ.analyze(copied, -1, () -> false));
-        rejects(NullPointerException.class, () -> M3PrefixZ.analyze(null));
-        rejects(NullPointerException.class, () -> M3PrefixZ.analyze(copied, 12, null));
-        rejects(CancellationException.class, () -> M3PrefixZ.analyze(copied, 12, () -> true));
+        require(PrefixZ.requiredMetadataPayloadBytes(Integer.MAX_VALUE) == 8589934588L, "size overflow");
+        rejects(IllegalArgumentException.class, () -> PrefixZ.requiredMetadataPayloadBytes(-1));
+        rejects(IllegalArgumentException.class, () -> PrefixZ.analyze(copied, 11, () -> false));
+        rejects(IllegalArgumentException.class, () -> PrefixZ.analyze(copied, -1, () -> false));
+        rejects(NullPointerException.class, () -> PrefixZ.analyze(null));
+        rejects(NullPointerException.class, () -> PrefixZ.analyze(copied, 12, null));
+        rejects(CancellationException.class, () -> PrefixZ.analyze(copied, 12, () -> true));
 
         M3StringPiece longRun = new LocalM3Arena().copyUtf16("a".repeat(100000).toCharArray());
-        M3PrefixZ longFacts = M3PrefixZ.analyze(longRun);
+        PrefixZ longFacts = PrefixZ.analyze(longRun);
         require(longFacts.similaritySum() == 5000050000L, "similarity must exceed int safely");
         require(longFacts.longestProperBorderLength() == 99999, "long border");
         AtomicInteger polls = new AtomicInteger();
         rejects(CancellationException.class,
-                () -> M3PrefixZ.analyze(longRun, 400000, () -> polls.incrementAndGet() == 3));
+                () -> PrefixZ.analyze(longRun, 400000, () -> polls.incrementAndGet() == 3));
         require(polls.get() == 3, "cancellation inside long prefix scan");
         Thread.currentThread().interrupt();
-        rejects(CancellationException.class, () -> M3PrefixZ.analyze(copied));
+        rejects(CancellationException.class, () -> PrefixZ.analyze(copied));
         require(Thread.interrupted(), "interrupt status preserved");
 
         // Instances retain only the primitive fact lane, not text owners or duplicate payloads.
-        for (var field : M3PrefixZ.class.getDeclaredFields()) {
+        for (var field : PrefixZ.class.getDeclaredFields()) {
             if (!Modifier.isStatic(field.getModifiers())) {
                 require(field.getType().isPrimitive() || field.getType() == int[].class,
                         "unexpected retained field " + field.getName());
@@ -140,7 +140,7 @@ public final class PrefixZContractTest {
         }
         try (var executor = Executors.newFixedThreadPool(4)) {
             var tasks = new ArrayList<java.util.concurrent.Callable<Long>>();
-            for (int i = 0; i < 32; i++) tasks.add(() -> M3PrefixZ.analyze(copied).similaritySum());
+            for (int i = 0; i < 32; i++) tasks.add(() -> PrefixZ.analyze(copied).similaritySum());
             for (var result : executor.invokeAll(tasks)) require(result.get() == 4L, "parallel facts");
         }
         System.out.println("PREFIX_Z_PASS cases=" + cases + " checks=" + checks + " seed=0x4D335A21");
