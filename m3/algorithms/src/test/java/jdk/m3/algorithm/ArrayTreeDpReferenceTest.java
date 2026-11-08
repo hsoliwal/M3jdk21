@@ -495,15 +495,15 @@ class ArrayTreeDpReferenceTest {
         for (int i = 0; i < CASES; i++, bits += 4) {
             int x = random.nextInt();
             int y = random.nextInt();
-            assertEquals(x > 0 && Integer.bitCount(x) == 1, PrimitiveBitAlgorithms.isPowerOfTwo(x));
-            assertEquals(x + y, PrimitiveBitAlgorithms.addWithoutPlus(x, y));
+            assertEquals(x > 0 && Integer.bitCount(x) == 1, BitAlgorithms.isPowerOfTwo(x));
+            assertEquals(x + y, BitAlgorithms.addWithoutPlus(x, y));
             int low = random.nextInt(0, 100_000);
             int high = low + random.nextInt(0, 300);
             int and = low;
             for (int v = low; v <= high; v++) {
                 and &= v;
             }
-            assertEquals(and, PrimitiveBitAlgorithms.rangeBitwiseAnd(low, high));
+            assertEquals(and, BitAlgorithms.rangeBitwiseAnd(low, high));
             int first = random.nextInt();
             int second = random.nextInt();
             if (first == second || first == 5 || first == 9 || second == 5 || second == 9) {
@@ -511,7 +511,7 @@ class ArrayTreeDpReferenceTest {
             }
             int[] values = {first, 5, 9, second, 9, 5};
             assertArrayEquals(new int[] {Math.min(first, second), Math.max(first, second)},
-                    PrimitiveBitAlgorithms.twoSingleNumbers(values));
+                    BitAlgorithms.twoSingleNumbers(values));
         }
         report("bit", "isPowerOfTwo+addWithoutPlus+rangeBitwiseAnd+twoSingleNumbers", bits, bits);
     }

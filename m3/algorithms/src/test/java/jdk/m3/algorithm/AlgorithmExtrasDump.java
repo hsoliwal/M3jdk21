@@ -998,9 +998,9 @@ public final class AlgorithmExtrasDump {
         each("bitTricks", cases, random -> {
             int a = ints(random, 1, random.nextBoolean() ? 100 : 0)[0];
             int b = ints(random, 1, random.nextBoolean() ? 100 : 0)[0];
-            return call(a + "," + b, () -> PrimitiveBitAlgorithms.isPowerOfTwo(a) + "/"
-                    + PrimitiveBitAlgorithms.addWithoutPlus(a, b)
-                    + call("/and", () -> "" + PrimitiveBitAlgorithms.rangeBitwiseAnd(Math.min(a, b), Math.max(a, b))));
+            return call(a + "," + b, () -> BitAlgorithms.isPowerOfTwo(a) + "/"
+                    + BitAlgorithms.addWithoutPlus(a, b)
+                    + call("/and", () -> "" + BitAlgorithms.rangeBitwiseAnd(Math.min(a, b), Math.max(a, b))));
         });
         each("twoSingleNumbers", cases, random -> {
             int pairs = random.nextInt(0, 10);
@@ -1012,7 +1012,7 @@ public final class AlgorithmExtrasDump {
             values[values.length - 2] = ints(random, 1, 0)[0];
             values[values.length - 1] = random.nextInt(10) == 0 ? values[values.length - 2] : ints(random, 1, 0)[0];
             int[] input = random.nextInt(30) == 0 ? null : values;
-            return call(s(input), () -> s(PrimitiveBitAlgorithms.twoSingleNumbers(input)));
+            return call(s(input), () -> s(BitAlgorithms.twoSingleNumbers(input)));
         });
     }
 }
