@@ -18,6 +18,7 @@ import jdk.m3.collections.LongLongConsumer;
 
 import java.util.Arrays;
 import java.util.Objects;
+import jdk.m3.collections.LongLongPredicate;
 
 /** Mutable one-to-one long relation with parallel lanes and two primitive row indexes.
  * Expected O(1) lookup in either direction, insertion and swap-delete. Traversal order is

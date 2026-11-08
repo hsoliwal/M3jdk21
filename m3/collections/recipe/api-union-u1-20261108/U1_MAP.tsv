@@ -1,0 +1,2 @@
+old_fqn	new_fqn	kind
+jdk.internal.m3.collections.LongLongPredicate	jdk.m3.collections.LongLongPredicate	main

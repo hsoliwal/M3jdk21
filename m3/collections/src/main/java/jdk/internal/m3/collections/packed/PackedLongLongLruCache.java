@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import jdk.internal.m3.collections.LongLongPredicate;
+import jdk.m3.collections.LongLongPredicate;
 import jdk.internal.m3.collections.PackedLongLongOrderedMap;
 
 /** Bounded primitive LRU cache composed from the repaired stable-slot ordered map.

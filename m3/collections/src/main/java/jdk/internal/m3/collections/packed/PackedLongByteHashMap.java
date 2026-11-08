@@ -19,7 +19,7 @@ import jdk.m3.collections.LongLongConsumer;
 import java.util.Arrays;
 import java.util.Objects;
 import jdk.internal.m3.collections.LongByteMap;
-import jdk.internal.m3.collections.LongLongPredicate;
+import jdk.m3.collections.LongLongPredicate;
 
 /**
  * Open-addressed {@code long -> unsigned byte} map.

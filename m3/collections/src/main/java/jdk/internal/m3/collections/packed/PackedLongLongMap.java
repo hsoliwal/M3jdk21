@@ -3,7 +3,7 @@
 package jdk.internal.m3.collections.packed;
 
 import jdk.m3.collections.LongLongConsumer;
-import jdk.internal.m3.collections.LongLongPredicate;
+import jdk.m3.collections.LongLongPredicate;
 
 /**
  * Mutable primitive {@code long -> long} map contract.
