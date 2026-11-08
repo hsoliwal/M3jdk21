@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 /*******************************************************************************
  * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
  *
@@ -22,6 +23,10 @@ import java.util.Objects;
  *
  * <p>Values are packed consecutively into a primitive long lane and may straddle word
  * boundaries. No wrapper object or per-entry header exists. Width is immutable.
+ *
+ * <p>Modified 2026-11-08: exact bulk append, replacement and extraction plus an
+ * input-derived minimum-width factory. Bulk sources must remain unchanged during
+ * the call. Range and value failures are checked before any destination mutation.
  *
  * <p>Lineage: absorbed from Synexia {@code m3-algo/src/main/java/jdk/internal/m3/algorithms/collections/PackedUnsignedLongVector.java}
  * blob {@code 12f3a210f20232d6257c677b4b7250dc45830e95} at com.synexia develop {@code 5ab05fd0565303f8884b7deea8e309cea9cfef5f} by
@@ -51,6 +56,27 @@ public final class M3PackedUnsignedLongVector {
         words = new long[wordCount(expectedSize)];
     }
 
+    /** Copies unsigned values using their minimum exact width; empty input uses one bit. */
+    public static M3PackedUnsignedLongVector copyOf(long[] values) {
+        Objects.requireNonNull(values, "values");
+        return copyOf(values, 0, values.length);
+    }
+
+    /**
+     * Copies a slice without retaining the source. Any negative long needs all 64 bits.
+     * The source must not be modified concurrently with this operation.
+     */
+    public static M3PackedUnsignedLongVector copyOf(long[] values, int offset, int length) {
+        Objects.requireNonNull(values, "values");
+        Objects.checkFromIndexSize(offset, length, values.length);
+        long occupiedBits = 0L;
+        for (int i = 0; i < length; i++) occupiedBits |= values[offset + i];
+        int requiredWidth = Math.max(1, Long.SIZE - Long.numberOfLeadingZeros(occupiedBits));
+        M3PackedUnsignedLongVector result = new M3PackedUnsignedLongVector(requiredWidth, length);
+        result.addAll(values, offset, length);
+        return result;
+    }
+
     public int width() {
         return width;
     }
@@ -71,6 +97,44 @@ public final class M3PackedUnsignedLongVector {
         checkValue(value);
         ensureCapacity(Math.addExact(size, 1));
         write(size++, value);
+    }
+
+    /** Appends a fully validated batch; invalid input leaves size, capacity and values unchanged. */
+    public void addAll(long[] values) {
+        Objects.requireNonNull(values, "values");
+        addAll(values, 0, values.length);
+    }
+
+    /**
+     * Appends a slice with one capacity reservation and no intermediate unpacked copy.
+     * Range and value failures are detected before mutation. The source must not be
+     * modified concurrently with this operation.
+     */
+    public void addAll(long[] values, int offset, int length) {
+        checkValues(values, offset, length);
+        int newSize = Math.addExact(size, length);
+        ensureCapacity(newSize);
+        writeAll(size, values, offset, length);
+        size = newSize;
+    }
+
+    /** Replaces an existing range after validating every source value, without changing size. */
+    public void setAll(int fromIndex, long[] values, int offset, int length) {
+        Objects.checkFromIndexSize(fromIndex, length, size);
+        checkValues(values, offset, length);
+        writeAll(fromIndex, values, offset, length);
+    }
+
+    /** Copies a range into caller-owned storage; both ranges are checked before the first write. */
+    public void copyInto(int fromIndex, long[] destination, int offset, int length) {
+        Objects.checkFromIndexSize(fromIndex, length, size);
+        Objects.requireNonNull(destination, "destination");
+        Objects.checkFromIndexSize(offset, length, destination.length);
+        if (width == Long.SIZE) {
+            System.arraycopy(words, fromIndex, destination, offset, length);
+        } else {
+            for (int i = 0; i < length; i++) destination[offset + i] = read(fromIndex + i);
+        }
     }
 
     public long get(int index) {
@@ -96,10 +160,24 @@ public final class M3PackedUnsignedLongVector {
 
     public long[] toLongArray() {
         long[] result = new long[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = read(i);
-        }
+        copyInto(0, result, 0, size);
         return result;
+    }
+
+    private void checkValues(long[] values, int offset, int length) {
+        Objects.requireNonNull(values, "values");
+        Objects.checkFromIndexSize(offset, length, values.length);
+        if (width < Long.SIZE) {
+            for (int i = 0; i < length; i++) checkValue(values[offset + i]);
+        }
+    }
+
+    private void writeAll(int fromIndex, long[] values, int offset, int length) {
+        if (width == Long.SIZE) {
+            System.arraycopy(values, offset, words, fromIndex, length);
+        } else {
+            for (int i = 0; i < length; i++) write(fromIndex + i, values[offset + i]);
+        }
     }
 
     private long read(int index) {
