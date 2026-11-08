@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections.concurrent;
 
-import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.NotYetReceived;
 import jdk.m3.collections.LongLongConsumer;
 import jdk.m3.collections.M3LockedTreeMap;
 import jdk.m3.collections.M3LockedTreeSet;
@@ -19,7 +19,7 @@ import jdk.m3.collections.M3LockedTreeSet;
  *
  * <p>DOOP mapping: lane kind LONG; lanes {@code long[] keyLane;long[] valueLane;int[] levelNextLane}; offset scheme slot + per-level next lanes (level*capacity+slot); state-mask bits OCCUPIED,DELETED,MARKED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: sorted lanes + monitor interim; skip-lane ladder PROPOSED / occupancy mask.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class ConcurrentSkipLongLongMap {
@@ -52,61 +52,61 @@ public final class ConcurrentSkipLongLongMap {
 
     /** ConcurrentSkipListMap.get (scaffold: not yet received). */
     public long getOrDefault(long key, long defaultValue) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.getOrDefault");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.getOrDefault");
     }
 
     /** ConcurrentSkipListMap.put (scaffold: not yet received). */
     public long put(long key, long value) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.put");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.put");
     }
 
     /** ConcurrentSkipListMap.putIfAbsent (scaffold: not yet received). */
     public long putIfAbsent(long key, long value) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.putIfAbsent");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.putIfAbsent");
     }
 
     /** ConcurrentSkipListMap.remove (scaffold: not yet received). */
     public long remove(long key) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.remove");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.remove");
     }
 
     /** ConcurrentSkipListMap.containsKey (scaffold: not yet received). */
     public boolean containsKey(long key) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.containsKey");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.containsKey");
     }
 
     /** ConcurrentNavigableMap.firstKey (scaffold: not yet received). */
     public long firstKey() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.firstKey");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.firstKey");
     }
 
     /** ConcurrentNavigableMap.lastKey (scaffold: not yet received). */
     public long lastKey() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.lastKey");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.lastKey");
     }
 
     /** NavigableMap.ceilingKey (scaffold: not yet received). */
     public long ceilingKey(long key) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.ceilingKey");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.ceilingKey");
     }
 
     /** NavigableMap.floorKey (scaffold: not yet received). */
     public long floorKey(long key) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.floorKey");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.floorKey");
     }
 
     /** weakly consistent ascending traversal (scaffold: not yet received). */
     public void forEach(LongLongConsumer action) {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.forEach");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.forEach");
     }
 
     /** Map.size (O(n) weakly consistent) (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.size");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.size");
     }
 
     /** Map.clear (scaffold: not yet received). */
     public void clear() {
-        throw new M3NotYetReceived("M3ConcurrentSkipLongLongMap.clear");
+        throw new NotYetReceived("M3ConcurrentSkipLongLongMap.clear");
     }
 }

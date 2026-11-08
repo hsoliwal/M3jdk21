@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Predicate;
-import jdk.internal.m3.collections.M3FilteredNavigableSet;
+import jdk.internal.m3.collections.FilteredNavigableSet;
 
 /** Dependency-free Java 21 differential and complexity-shape oracle. */
 public final class M3FilteredNavigableFacadeSelfTest {
@@ -49,7 +49,7 @@ public final class M3FilteredNavigableFacadeSelfTest {
 
     private static void deterministicFacade() {
         NavigableSet<Integer> source = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6, 7, 8));
-        NavigableSet<Integer> facade = M3FilteredNavigableSet.view(source, value -> (value & 1) == 0);
+        NavigableSet<Integer> facade = FilteredNavigableSet.view(source, value -> (value & 1) == 0);
         NavigableSet<Integer> owner = M3FilteredViews.filter(source, value -> (value & 1) == 0);
         equal(list(owner), list(facade), "same canonical projection");
         equal(owner.lower(5), facade.lower(5), "same lower");
@@ -57,10 +57,10 @@ public final class M3FilteredNavigableFacadeSelfTest {
         equal(owner.ceiling(5), facade.ceiling(5), "same ceiling");
         equal(owner.higher(5), facade.higher(5), "same higher");
         equal(owner.comparator(), facade.comparator(), "same comparator");
-        require(facade instanceof M3FilteredNavigableSet<?>, "compatibility type retained");
-        require(facade.descendingSet() instanceof M3FilteredNavigableSet<?>,
+        require(facade instanceof FilteredNavigableSet<?>, "compatibility type retained");
+        require(facade.descendingSet() instanceof FilteredNavigableSet<?>,
                 "descending compatibility type retained");
-        require(facade.subSet(2, true, 8, false) instanceof M3FilteredNavigableSet<?>,
+        require(facade.subSet(2, true, 8, false) instanceof FilteredNavigableSet<?>,
                 "range compatibility type retained");
         source.add(10);
         equal(10, facade.last(), "live backing addition");
@@ -95,7 +95,7 @@ public final class M3FilteredNavigableFacadeSelfTest {
             TreeSet<Integer> expected = new TreeSet<>(comparator);
             for (int value : source) if (predicate.test(value)) expected.add(value);
             NavigableSet<Integer> canonical = M3FilteredViews.filter(source, predicate);
-            NavigableSet<Integer> facade = M3FilteredNavigableSet.view(source, predicate);
+            NavigableSet<Integer> facade = FilteredNavigableSet.view(source, predicate);
             equal(list(expected), list(canonical), "canonical set order");
             equal(list(expected), list(facade), "facade set order");
             equal(list(expected.descendingSet()), list(facade.descendingSet()), "facade reverse order");

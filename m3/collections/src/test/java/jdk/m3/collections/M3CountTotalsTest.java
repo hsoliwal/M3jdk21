@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.Random;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3CountLanes;
-import jdk.internal.m3.collections.M3CountTotals;
+import jdk.internal.m3.collections.CountLanes;
+import jdk.internal.m3.collections.CountTotals;
 
 //FLLDCIM: MRL - fold-close audit leaf L0107: ADD from PR #1084 head 6b16a20dcedf blob 67d23af6cc9c, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
 //FLLDCIM: MRL - MAPPED: the origin counts/ module has no pom on master; the file joins the real module tree
@@ -46,14 +46,14 @@ final class M3CountTotalsTest {
         for (var e : x.entrySet()) overlap += Math.min(e.getValue(), y.getOrDefault(e.getKey(), 0L));
         long ax = x.values().stream().mapToLong(Long::longValue).sum();
         long by = y.values().stream().mapToLong(Long::longValue).sum();
-        assertEquals(overlap, M3CountTotals.intersection(a, b));
-        assertEquals(ax - overlap + by, M3CountTotals.union(a, b));
-        assertEquals(ax + by, M3CountTotals.sum(a, b));
-        assertEquals(ax - overlap, M3CountTotals.difference(a, b));
-        assertEquals(a.intersection(b).totalCount(), M3CountTotals.intersection(a, b));
-        assertEquals(a.union(b).totalCount(), M3CountTotals.union(a, b));
-        assertEquals(a.sum(b).totalCount(), M3CountTotals.sum(a, b));
-        assertEquals(a.difference(b).totalCount(), M3CountTotals.difference(a, b));
+        assertEquals(overlap, CountTotals.intersection(a, b));
+        assertEquals(ax - overlap + by, CountTotals.union(a, b));
+        assertEquals(ax + by, CountTotals.sum(a, b));
+        assertEquals(ax - overlap, CountTotals.difference(a, b));
+        assertEquals(a.intersection(b).totalCount(), CountTotals.intersection(a, b));
+        assertEquals(a.union(b).totalCount(), CountTotals.union(a, b));
+        assertEquals(a.sum(b).totalCount(), CountTotals.sum(a, b));
+        assertEquals(a.difference(b).totalCount(), CountTotals.difference(a, b));
         assertEquals(ax, a.totalCount()); assertEquals(by, b.totalCount());
         x.forEach((k, n) -> assertEquals(n.longValue(), a.count(k)));
         y.forEach((k, n) -> assertEquals(n.longValue(), b.count(k)));
@@ -61,40 +61,40 @@ final class M3CountTotalsTest {
     @Test void bagSelfEmptyAndSparseCapacityCases() {
         LongBag sparse = new LongBag(100_000), small = new LongBag();
         sparse.add(7, 10); small.add(7, 4); small.add(9, 2);
-        assertEquals(4, M3CountTotals.intersection(sparse, small));
-        assertEquals(4, M3CountTotals.intersection(small, sparse));
-        assertEquals(12, M3CountTotals.union(sparse, small));
-        assertEquals(6, M3CountTotals.difference(sparse, small));
-        assertEquals(2, M3CountTotals.difference(small, sparse));
-        assertEquals(10, M3CountTotals.intersection(sparse, sparse));
-        assertEquals(0, M3CountTotals.difference(sparse, sparse));
-        small.clear(); assertEquals(10, M3CountTotals.union(sparse, small));
-        assertEquals(0, M3CountTotals.intersection(sparse, small));
-        sparse.trimToSize(); assertEquals(10, M3CountTotals.sum(sparse, small));
+        assertEquals(4, CountTotals.intersection(sparse, small));
+        assertEquals(4, CountTotals.intersection(small, sparse));
+        assertEquals(12, CountTotals.union(sparse, small));
+        assertEquals(6, CountTotals.difference(sparse, small));
+        assertEquals(2, CountTotals.difference(small, sparse));
+        assertEquals(10, CountTotals.intersection(sparse, sparse));
+        assertEquals(0, CountTotals.difference(sparse, sparse));
+        small.clear(); assertEquals(10, CountTotals.union(sparse, small));
+        assertEquals(0, CountTotals.intersection(sparse, small));
+        sparse.trimToSize(); assertEquals(10, CountTotals.sum(sparse, small));
     }
     @Test void overlapIsSubtractedBeforeUnionOverflowCheck() {
         LongBag a = new LongBag(), b = new LongBag();
         a.add(Long.MIN_VALUE, Long.MAX_VALUE); b.add(Long.MIN_VALUE, Long.MAX_VALUE);
-        assertEquals(Long.MAX_VALUE, M3CountTotals.union(a, b));
-        assertEquals(Long.MAX_VALUE, M3CountTotals.intersection(a, b));
-        assertEquals(0, M3CountTotals.difference(a, b));
-        assertThrows(ArithmeticException.class, () -> M3CountTotals.sum(a, b));
+        assertEquals(Long.MAX_VALUE, CountTotals.union(a, b));
+        assertEquals(Long.MAX_VALUE, CountTotals.intersection(a, b));
+        assertEquals(0, CountTotals.difference(a, b));
+        assertThrows(ArithmeticException.class, () -> CountTotals.sum(a, b));
         b.clear(); b.add(Long.MAX_VALUE, 1L);
-        assertThrows(ArithmeticException.class, () -> M3CountTotals.union(a, b));
-        assertEquals(0, M3CountTotals.intersection(a, b));
-        assertEquals(Long.MAX_VALUE, M3CountTotals.difference(a, b));
+        assertThrows(ArithmeticException.class, () -> CountTotals.union(a, b));
+        assertEquals(0, CountTotals.intersection(a, b));
+        assertEquals(Long.MAX_VALUE, CountTotals.difference(a, b));
         assertEquals(Long.MAX_VALUE, a.totalCount()); assertEquals(1, b.totalCount());
     }
     @Test void bagNullsRejectedEvenWhenOtherInputIsEmpty() {
         LongBag empty = new LongBag();
-        assertThrows(NullPointerException.class, () -> M3CountTotals.sum(null, empty));
-        assertThrows(NullPointerException.class, () -> M3CountTotals.sum(empty, null));
-        assertThrows(NullPointerException.class, () -> M3CountTotals.intersection(null, empty));
-        assertThrows(NullPointerException.class, () -> M3CountTotals.intersection(empty, null));
-        assertThrows(NullPointerException.class, () -> M3CountTotals.union(null, empty));
-        assertThrows(NullPointerException.class, () -> M3CountTotals.union(empty, null));
-        assertThrows(NullPointerException.class, () -> M3CountTotals.difference(null, empty));
-        assertThrows(NullPointerException.class, () -> M3CountTotals.difference(empty, null));
+        assertThrows(NullPointerException.class, () -> CountTotals.sum(null, empty));
+        assertThrows(NullPointerException.class, () -> CountTotals.sum(empty, null));
+        assertThrows(NullPointerException.class, () -> CountTotals.intersection(null, empty));
+        assertThrows(NullPointerException.class, () -> CountTotals.intersection(empty, null));
+        assertThrows(NullPointerException.class, () -> CountTotals.union(null, empty));
+        assertThrows(NullPointerException.class, () -> CountTotals.union(empty, null));
+        assertThrows(NullPointerException.class, () -> CountTotals.difference(null, empty));
+        assertThrows(NullPointerException.class, () -> CountTotals.difference(empty, null));
     }
     @Test void alignedLanesMatchBigIntegerAndExistingJavaAndJni() {
         Random r = new Random(0x4d33544f54414cL);
@@ -118,10 +118,10 @@ final class M3CountTotalsTest {
             });
         }
         long expected = total.longValueExact();
-        assertEquals(expected, M3CountTotals.combine(a, ao, b, bo, length, op));
-        if (nativeLoaded) assertEquals(expected, M3CountTotals.combineNative(a, ao, b, bo, length, op));
-        assertEquals(expected, Arrays.stream(M3CountLanes.combine(a, ao, b, bo, length, op)).sum());
-        if (nativeLoaded) assertEquals(expected, Arrays.stream(M3CountLanes.combineNative(a, ao, b, bo, length, op)).sum());
+        assertEquals(expected, CountTotals.combine(a, ao, b, bo, length, op));
+        if (nativeLoaded) assertEquals(expected, CountTotals.combineNative(a, ao, b, bo, length, op));
+        assertEquals(expected, Arrays.stream(CountLanes.combine(a, ao, b, bo, length, op)).sum());
+        if (nativeLoaded) assertEquals(expected, Arrays.stream(CountLanes.combineNative(a, ao, b, bo, length, op)).sum());
         assertArrayEquals(beforeA, a); assertArrayEquals(beforeB, b);
     }
     @Test void aliasesEmptySlicesAndValuesOutsideSlices() {
@@ -170,10 +170,10 @@ final class M3CountTotalsTest {
     }
     private static void fails(Class<? extends Throwable> type,long[] a,int ao,long[] b,int bo,int len,int op) {
         long[] ac=a==null?null:a.clone(), bc=b==null?null:b.clone();
-        assertThrows(type, () -> M3CountLanes.combine(a,ao,b,bo,len,op));
-        if (nativeLoaded) assertThrows(type, () -> M3CountLanes.combineNative(a,ao,b,bo,len,op));
-        assertThrows(type, () -> M3CountTotals.combine(a,ao,b,bo,len,op));
-        if (nativeLoaded) assertThrows(type, () -> M3CountTotals.combineNative(a,ao,b,bo,len,op));
+        assertThrows(type, () -> CountLanes.combine(a,ao,b,bo,len,op));
+        if (nativeLoaded) assertThrows(type, () -> CountLanes.combineNative(a,ao,b,bo,len,op));
+        assertThrows(type, () -> CountTotals.combine(a,ao,b,bo,len,op));
+        if (nativeLoaded) assertThrows(type, () -> CountTotals.combineNative(a,ao,b,bo,len,op));
         assertArrayEquals(ac,a); assertArrayEquals(bc,b);
     }
 }

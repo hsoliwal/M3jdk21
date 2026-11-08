@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
-import jdk.internal.m3.collections.M3GenericCollections;
+import jdk.internal.m3.collections.GenericCollections;
 
 /** Standalone JDK21 differential oracle for fused offset/mask selection and stable sort. */
 public final class M3IndexedFilterSortFusionSelfTest {
@@ -106,7 +106,7 @@ public final class M3IndexedFilterSortFusionSelfTest {
             expect(UnsupportedOperationException.class,
                     () -> fused.sort(ORDER), "immutable selected projection");
             if (from == 0 && to == payload.length) {
-                same(fused, M3GenericCollections.filteredSortedSnapshot(
+                same(fused, GenericCollections.filteredSortedSnapshot(
                         Arrays.asList(payload), M3IndexedFilterSortFusionSelfTest::accepted,
                         ORDER, backend), "factory path");
             }

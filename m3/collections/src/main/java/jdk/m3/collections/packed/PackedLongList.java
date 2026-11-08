@@ -17,7 +17,7 @@ package jdk.m3.collections.packed;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.LongConsumer;
-import jdk.internal.m3.collections.M3PrimitiveBits;
+import jdk.internal.m3.collections.bits.PrimitiveBits;
 
 /**
  * Mutable 1..64-bit signed/unsigned sequence in one primitive word array.
@@ -41,10 +41,10 @@ public final class PackedLongList {
     }
 
     public PackedLongList(int bitsPerValue, boolean signed, int initialCapacity) {
-        valueMask = M3PrimitiveBits.mask(bitsPerValue);
+        valueMask = PrimitiveBits.mask(bitsPerValue);
         this.bitsPerValue = bitsPerValue;
         this.signed = signed;
-        words = new long[M3PrimitiveBits.packedWordCount(initialCapacity, bitsPerValue)];
+        words = new long[PrimitiveBits.packedWordCount(initialCapacity, bitsPerValue)];
     }
 
     public int bitsPerValue() { return bitsPerValue; }
@@ -58,7 +58,7 @@ public final class PackedLongList {
     }
 
     public void add(long value) {
-        M3PrimitiveBits.checkValue(value, bitsPerValue, signed);
+        PrimitiveBits.checkValue(value, bitsPerValue, signed);
         int required = Math.incrementExact(size);
         ensureCapacity(required);
         writeRaw(size, value & valueMask);
@@ -67,12 +67,12 @@ public final class PackedLongList {
 
     public long get(int index) {
         long raw = readRaw(Objects.checkIndex(index, size));
-        return signed ? M3PrimitiveBits.signExtend(raw, bitsPerValue) : raw;
+        return signed ? PrimitiveBits.signExtend(raw, bitsPerValue) : raw;
     }
 
     public long set(int index, long value) {
         Objects.checkIndex(index, size);
-        M3PrimitiveBits.checkValue(value, bitsPerValue, signed);
+        PrimitiveBits.checkValue(value, bitsPerValue, signed);
         long old = get(index);
         writeRaw(index, value & valueMask);
         return old;
@@ -92,7 +92,7 @@ public final class PackedLongList {
     }
 
     public void ensureCapacity(int required) {
-        int count = M3PrimitiveBits.packedWordCount(required, bitsPerValue);
+        int count = PrimitiveBits.packedWordCount(required, bitsPerValue);
         if (count <= words.length) return;
         long grown = (long) words.length + (words.length >>> 1) + 1L;
         int next = (int) Math.min(MAX_ARRAY_LENGTH, Math.max(count, grown));
@@ -100,7 +100,7 @@ public final class PackedLongList {
     }
 
     public void trimToSize() {
-        words = Arrays.copyOf(words, M3PrimitiveBits.packedWordCount(size, bitsPerValue));
+        words = Arrays.copyOf(words, PrimitiveBits.packedWordCount(size, bitsPerValue));
     }
 
     public long[] toArray() {
@@ -111,7 +111,7 @@ public final class PackedLongList {
 
     /** Fresh exact-length word snapshot with canonical zero tail bits. */
     public long[] toWordArray() {
-        return Arrays.copyOf(words, M3PrimitiveBits.packedWordCount(size, bitsPerValue));
+        return Arrays.copyOf(words, PrimitiveBits.packedWordCount(size, bitsPerValue));
     }
 
     public void forEach(LongConsumer consumer) {
@@ -121,7 +121,7 @@ public final class PackedLongList {
 
     /** First index whose value is at least key; input must be sorted in this signedness. */
     public int lowerBound(long key) {
-        M3PrimitiveBits.checkValue(key, bitsPerValue, signed);
+        PrimitiveBits.checkValue(key, bitsPerValue, signed);
         int low = 0;
         int high = size;
         while (low < high) {
@@ -141,10 +141,10 @@ public final class PackedLongList {
     }
 
     private long readRaw(int index) {
-        return M3PrimitiveBits.readPacked(words, (long) index * bitsPerValue, bitsPerValue);
+        return PrimitiveBits.readPacked(words, (long) index * bitsPerValue, bitsPerValue);
     }
 
     private void writeRaw(int index, long raw) {
-        M3PrimitiveBits.writePacked(words, (long) index * bitsPerValue, bitsPerValue, raw);
+        PrimitiveBits.writePacked(words, (long) index * bitsPerValue, bitsPerValue, raw);
     }
 }

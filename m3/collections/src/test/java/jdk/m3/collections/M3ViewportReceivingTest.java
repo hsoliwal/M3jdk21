@@ -15,10 +15,10 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3ViewportPlanProof;
+import jdk.internal.m3.collections.ViewportPlanProof;
 
 /** Ordinary Maven/JUnit discovery; native-required execution is separately explicit. */
 class M3ViewportReceivingTest {
-    @Test void residentWindowBounds() { M3ViewportPlanProof.main(new String[0]); }
+    @Test void residentWindowBounds() { ViewportPlanProof.main(new String[0]); }
     @Test void rowGeometryAndProjection() { M3ViewportTreeProof.main(new String[0]); }
 }

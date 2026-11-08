@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.PrimitiveIterator;
 import java.util.function.LongConsumer;
-import jdk.internal.m3.collections.M3LaneSearch;
+import jdk.internal.m3.collections.LaneSearch;
 
 /**
  * Immutable, sorted, duplicate-free set of {@code long} values over one dense value lane.
@@ -86,7 +86,7 @@ public final class FrozenLongSet {
 
     /** Set.contains: binary search over the sorted lane. */
     public boolean contains(long value) {
-        int index = M3LaneSearch.lowerBound(valueLane, 0, size, value);
+        int index = LaneSearch.lowerBound(valueLane, 0, size, value);
         return index < size && valueLane[index] == value;
     }
 
@@ -109,7 +109,7 @@ public final class FrozenLongSet {
 
     /** ImmutableSortedSet.asList().indexOf: ascending ordinal of the value, or -1 when absent. */
     public int rank(long value) {
-        int index = M3LaneSearch.lowerBound(valueLane, 0, size, value);
+        int index = LaneSearch.lowerBound(valueLane, 0, size, value);
         return index < size && valueLane[index] == value ? index : -1;
     }
 

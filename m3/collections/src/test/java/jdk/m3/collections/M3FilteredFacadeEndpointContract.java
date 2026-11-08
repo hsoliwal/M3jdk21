@@ -27,7 +27,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
-import jdk.internal.m3.collections.M3FilteredNavigableSet;
+import jdk.internal.m3.collections.FilteredNavigableSet;
 
 /** Endpoint refusal must precede observation of a strict filtered owner. */
 public final class M3FilteredFacadeEndpointContract {
@@ -60,7 +60,7 @@ public final class M3FilteredFacadeEndpointContract {
             predicates.incrementAndGet();
             return !hideAll && (value & 1) == 0;
         };
-        NavigableSet<Integer> nav = M3FilteredNavigableSet.view(owner, predicate);
+        NavigableSet<Integer> nav = FilteredNavigableSet.view(owner, predicate);
         SortedSet<Integer> sortedOwner = Collections.unmodifiableSortedSet(owner);
         SortedSet<Integer> sorted = M3FilteredViews.filter(sortedOwner, predicate);
         List<View> views = List.of(

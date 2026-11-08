@@ -259,7 +259,7 @@ public class M3TreeCoverageTest {
 
 	@Test
 	public void planValidatesItsWindowArrays () {
-		Object plan = construct ("jdk.internal.m3.collections.M3TreeWindowPlan");
+		Object plan = construct ("jdk.internal.m3.collections.TreeWindowPlan");
 		int [] two = new int [2], one = new int [1];
 		assertEquals ("window arrays", assertThrows (IllegalArgumentException.class,
 				() -> callTyped (plan, "plan", PLAN, -1, two, two, two)).getMessage ());
@@ -281,7 +281,7 @@ public class M3TreeCoverageTest {
 
 	@Test
 	public void commitsValidateTheirHandles () {
-		Object plan = construct ("jdk.internal.m3.collections.M3TreeWindowPlan");
+		Object plan = construct ("jdk.internal.m3.collections.TreeWindowPlan");
 		int [] roots = {ROOT, ROOT}, indices = {0, 1}, parents = {-1, -1};
 		assertEquals ("commit without residency plan", assertThrows (IllegalStateException.class,
 				() -> callTyped (plan, "commit", new Class<?> [] {long [].class}, new long [2])).getMessage ());
@@ -308,7 +308,7 @@ public class M3TreeCoverageTest {
 		call (topology, "setChildCount", 0, 1);
 		call (topology, "flag", 0, bit ("EXPANDED"), true);
 		Object residency = residencyWindow (projection (topology), 0L, 5);
-		Object plan = construct ("jdk.internal.m3.collections.M3TreeWindowPlan");
+		Object plan = construct ("jdk.internal.m3.collections.TreeWindowPlan");
 		callTyped (plan, "plan", new Class<?> [] {residency.getClass ()}, residency);
 		int count = i (call (plan, "plannedCount"));
 		assertEquals (5, count);
@@ -332,7 +332,7 @@ public class M3TreeCoverageTest {
 
 	@Test
 	public void siblingShiftsRewriteOnlyMatchingKeys () {
-		Object plan = construct ("jdk.internal.m3.collections.M3TreeWindowPlan");
+		Object plan = construct ("jdk.internal.m3.collections.TreeWindowPlan");
 		int [] roots = {ROOT, ROOT, 5}, indices = {3, 4, 0}, parents = {-1, -1, 1};
 		callTyped (plan, "plan", PLAN, 3, roots, indices, parents);
 		callTyped (plan, "commit", COMMIT, 3, roots, indices, parents, new long [] {7, 8, 9});
@@ -354,7 +354,7 @@ public class M3TreeCoverageTest {
 
 	@Test
 	public void subtreeRemovalRenumbersTheSurvivingParents () {
-		Object plan = construct ("jdk.internal.m3.collections.M3TreeWindowPlan");
+		Object plan = construct ("jdk.internal.m3.collections.TreeWindowPlan");
 		/* preorder: rootA, rootB, B/child, rootC, C/child */
 		int [] parentIds = {ROOT, ROOT, 20, ROOT, 30};
 		int [] indices = {0, 1, 0, 2, 0};
@@ -379,7 +379,7 @@ public class M3TreeCoverageTest {
 	public void viewportBudgetGuardsHoldOutsideTheirCallers () throws Exception {
 		Object topology = topology ();
 		call (topology, "setChildCount", ROOT, 20_000);
-		Object viewport = constructTyped ("jdk.internal.m3.collections.M3TreeWindow",
+		Object viewport = constructTyped ("jdk.internal.m3.collections.TreeWindow",
 				new Class<?> [] {type ("jdk.m3.collections.M3TreeProjection")}, projection (topology));
 		/* the paint budget is validated before the metrics change; an unvalidated write is still refused */
 		Object metrics = field (viewport, "scrollMetrics");
@@ -388,10 +388,10 @@ public class M3TreeCoverageTest {
 				() -> call (viewport, "refreshOverscanForMemoryPressure")).getMessage ());
 		Class<?> [] budget = {long.class, int.class, int.class};
 		assertEquals ("negative logical rows", assertThrows (IllegalArgumentException.class,
-				() -> callStatic ("jdk.internal.m3.collections.M3TreeWindow", "validateVisibleBudget", budget, -1L, 1, 1)).getMessage ());
+				() -> callStatic ("jdk.internal.m3.collections.TreeWindow", "validateVisibleBudget", budget, -1L, 1, 1)).getMessage ());
 		Class<?> [] add = {long.class, int.class};
-		assertEquals (Long.MAX_VALUE, callStatic ("jdk.internal.m3.collections.M3TreeWindow", "saturatedAdd", add, Long.MAX_VALUE - 1, 5));
-		assertEquals (10L, callStatic ("jdk.internal.m3.collections.M3TreeWindow", "saturatedAdd", add, 7L, 3));
-		assertEquals (4L, callStatic ("jdk.internal.m3.collections.M3TreeWindow", "saturatedAdd", add, 7L, -3));
+		assertEquals (Long.MAX_VALUE, callStatic ("jdk.internal.m3.collections.TreeWindow", "saturatedAdd", add, Long.MAX_VALUE - 1, 5));
+		assertEquals (10L, callStatic ("jdk.internal.m3.collections.TreeWindow", "saturatedAdd", add, 7L, 3));
+		assertEquals (4L, callStatic ("jdk.internal.m3.collections.TreeWindow", "saturatedAdd", add, 7L, -3));
 	}
 }

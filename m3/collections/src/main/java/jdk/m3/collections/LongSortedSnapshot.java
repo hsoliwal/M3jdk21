@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.LongPredicate;
-import jdk.internal.m3.collections.M3LaneSearch;
+import jdk.internal.m3.collections.LaneSearch;
 
 /**
  * Detached, immutable primitive-long sorted-set snapshot with precomputed rank/select geometry.
@@ -263,13 +263,13 @@ public final class LongSortedSnapshot implements LongSortedSet {
     private int lowerBound(long value) {
         int low = from;
         int high = to;
-        return M3LaneSearch.lowerBound(values, low, high, value);
+        return LaneSearch.lowerBound(values, low, high, value);
     }
 
     private int upperBound(long value) {
         int low = from;
         int high = to;
-        return M3LaneSearch.upperBound(values, low, high, value);
+        return LaneSearch.upperBound(values, low, high, value);
     }
 
     private static UnsupportedOperationException immutable() {

@@ -3,7 +3,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;
-import jdk.internal.m3.collections.M3ObjectStateBatch28;
+import jdk.internal.m3.collections.ObjectStateBatch28;
 
 /** Deterministic generation-safe array/offset/mask differential oracle. */
 public final class M3ObjectStateBatch28SelfTest {
@@ -26,31 +26,31 @@ public final class M3ObjectStateBatch28SelfTest {
         var state = new ObjectStateSlots28();
         long a = state.allocate(0x80), b = state.allocate(0x01);
         long[] order = {17, a, b, a, 19};
-        equal(M3ObjectStateBatch28.countMatching(state, order, 1, 3, 0x80, 0), 2);
-        equal(M3ObjectStateBatch28.firstMatchingIndex(state, order, 1, 3, 0x01, 0), 2);
-        equal(M3ObjectStateBatch28.updateMatching(state, order, 1, 3,
+        equal(ObjectStateBatch28.countMatching(state, order, 1, 3, 0x80, 0), 2);
+        equal(ObjectStateBatch28.firstMatchingIndex(state, order, 1, 3, 0x01, 0), 2);
+        equal(ObjectStateBatch28.updateMatching(state, order, 1, 3,
                 0x80, 0, 0x01, 0x80), 1);
         equal(state.state(a), 1);
         equal(state.state(b), 1);
-        equal(M3ObjectStateBatch28.update(state, order, 1, 3, 0x02, 0), 2);
+        equal(ObjectStateBatch28.update(state, order, 1, 3, 0x02, 0), 2);
         equal(state.state(a), 3);
         equal(state.state(b), 3);
         check(Arrays.equals(order, new long[]{17,a,b,a,19}));
-        equal(M3ObjectStateBatch28.updateMatching(state, order, 1, 3, 0x01, 0x01, 4, 0), 0);
-        refuse(IllegalArgumentException.class, () -> M3ObjectStateBatch28.update(state, order, 1, 3, 0x80, 0x80));
-        refuse(IllegalArgumentException.class, () -> M3ObjectStateBatch28.update(state, order, 1, 3, 256, 0));
-        refuse(IllegalArgumentException.class, () -> M3ObjectStateBatch28.countMatching(state, order, 1, 3, -1, 0));
-        refuse(IndexOutOfBoundsException.class, () -> M3ObjectStateBatch28.update(state, order, 1, 5, 4, 0));
-        refuse(NullPointerException.class, () -> M3ObjectStateBatch28.update(state, null, 0, 0, 4, 0));
-        refuse(NullPointerException.class, () -> M3ObjectStateBatch28.update(null, order, 0, 0, 4, 0));
+        equal(ObjectStateBatch28.updateMatching(state, order, 1, 3, 0x01, 0x01, 4, 0), 0);
+        refuse(IllegalArgumentException.class, () -> ObjectStateBatch28.update(state, order, 1, 3, 0x80, 0x80));
+        refuse(IllegalArgumentException.class, () -> ObjectStateBatch28.update(state, order, 1, 3, 256, 0));
+        refuse(IllegalArgumentException.class, () -> ObjectStateBatch28.countMatching(state, order, 1, 3, -1, 0));
+        refuse(IndexOutOfBoundsException.class, () -> ObjectStateBatch28.update(state, order, 1, 5, 4, 0));
+        refuse(NullPointerException.class, () -> ObjectStateBatch28.update(state, null, 0, 0, 4, 0));
+        refuse(NullPointerException.class, () -> ObjectStateBatch28.update(null, order, 0, 0, 4, 0));
         long invalid = state.allocate(0x80);
         long[] mixed = {a,b,invalid};
         state.release(invalid);
         long oldStateA = state.state(a), oldStateB = state.state(b);
-        refuse(IllegalStateException.class, () -> M3ObjectStateBatch28.update(state,mixed,0,3,4,0));
-        refuse(IllegalStateException.class, () -> M3ObjectStateBatch28.updateMatching(state,mixed,0,3,1,0,4,0));
+        refuse(IllegalStateException.class, () -> ObjectStateBatch28.update(state,mixed,0,3,4,0));
+        refuse(IllegalStateException.class, () -> ObjectStateBatch28.updateMatching(state,mixed,0,3,1,0,4,0));
         equal(state.state(a), (int)oldStateA);equal(state.state(b), (int)oldStateB);
-        equal(M3ObjectStateBatch28.firstMatchingIndex(state,mixed,0,3,1,0),0);
+        equal(ObjectStateBatch28.firstMatchingIndex(state,mixed,0,3,1,0),0);
         state.release(a);state.release(b);
     }
     private static void multiPageAndReuse() {
@@ -58,12 +58,12 @@ public final class M3ObjectStateBatch28SelfTest {
         long[] handles = new long[4097];
         for (int i = 0; i < handles.length; i++) handles[i] = state.allocate(i % 2 == 0 ? 0x80 : 0);
         equal(state.allocatedStateBlocks(), 2);
-        equal(M3ObjectStateBatch28.countMatching(state, handles, 0, 4097, 0x80, 0), 2049);
-        equal(M3ObjectStateBatch28.update(state,handles,4095,2,1,0),2);
+        equal(ObjectStateBatch28.countMatching(state, handles, 0, 4097, 0x80, 0), 2049);
+        equal(ObjectStateBatch28.update(state,handles,4095,2,1,0),2);
         equal(state.state(handles[4095]),1);equal(state.state(handles[4096]),0x81);
         long stale = handles[4096];state.release(stale);long fresh = state.allocate(7);
         equal(SlotAllocator28.slot(stale),SlotAllocator28.slot(fresh));
-        refuse(IllegalStateException.class,()->M3ObjectStateBatch28.update(state,handles,4095,2,4,0));
+        refuse(IllegalStateException.class,()->ObjectStateBatch28.update(state,handles,4095,2,4,0));
         equal(state.state(handles[4095]),1);
         for(int i=0;i<4096;i++)state.release(handles[i]);state.release(fresh);
     }
@@ -86,8 +86,8 @@ public final class M3ObjectStateBatch28SelfTest {
                     int flags=expected[ordinal[i]];
                     if((flags&a)==a&&(flags&b)==0){if(first<0)first=i;count++;}
                 }
-                equal(M3ObjectStateBatch28.firstMatchingIndex(state,order,from,len,a,b),first);
-                equal(M3ObjectStateBatch28.countMatching(state,order,from,len,a,b),count);
+                equal(ObjectStateBatch28.firstMatchingIndex(state,order,from,len,a,b),first);
+                equal(ObjectStateBatch28.countMatching(state,order,from,len,a,b),count);
                 int changed=0;
                 for(int i=from;i<from+len;i++){
                     int slot=ordinal[i],old=expected[slot];
@@ -97,7 +97,7 @@ public final class M3ObjectStateBatch28SelfTest {
                         expected[slot]=next;
                     }
                 }
-                equal(M3ObjectStateBatch28.updateMatching(state,order,from,len,a,b,set,clear),changed);
+                equal(ObjectStateBatch28.updateMatching(state,order,from,len,a,b,set,clear),changed);
                 for(int i=0;i<handles.length;i++)equal(state.state(handles[i]),expected[i]);
                 operations++;
             }

@@ -2,12 +2,12 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongRunStatisticsContract;
+import jdk.internal.m3.collections.LongRunStatisticsContract;
 
 /** Original owning M3JDK 21 JUnit discovery for primitive rank-run JNI parity. */
 final class M3LongRunStatisticsTest {
     @Test
     void signedLongDistinctAndConsecutiveRuns() {
-        M3LongRunStatisticsContract.contracts(false);
+        LongRunStatisticsContract.contracts(false);
     }
 }

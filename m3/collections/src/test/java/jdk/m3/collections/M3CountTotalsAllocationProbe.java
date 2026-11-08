@@ -4,8 +4,8 @@ package jdk.m3.collections;
 
 import java.lang.management.ManagementFactory;
 import java.util.Arrays;
-import jdk.internal.m3.collections.M3CountLanes;
-import jdk.internal.m3.collections.M3CountTotals;
+import jdk.internal.m3.collections.CountLanes;
+import jdk.internal.m3.collections.CountTotals;
 
 /** Paired Java-heap allocation diagnostic, not a throughput benchmark or universal claim. */
 //FLLDCIM: MRL - fold-close audit leaf L0173: ADD from PR #1084 head 6b16a20dcedf blob 7684db3d4224, ancestry-only landing b42ab7605b86 (tree == first parent); recipe m3/collections/qualification/foldaudit-collections-20261107/apply.py v1
@@ -30,17 +30,17 @@ public final class M3CountTotalsAllocationProbe {
         long expected = 81920;
         System.out.println("case\titerations\tallocated_bytes\tbytes_per_operation");
         long javaArray = measure(allocation,"java_array",()->{
-            long[] result=M3CountLanes.combine(a,0,b,0,a.length,0); escapedResult=result;
+            long[] result=CountLanes.combine(a,0,b,0,a.length,0); escapedResult=result;
             long sum=0; for(long value:result) sum+=value; escapedTotal=sum;},300);
-        long javaTotal = measure(allocation,"java_total",()->escapedTotal=M3CountTotals.combine(a,0,b,0,a.length,0),300);
+        long javaTotal = measure(allocation,"java_total",()->escapedTotal=CountTotals.combine(a,0,b,0,a.length,0),300);
         if (escapedTotal!=expected) throw new AssertionError("Java total");
         long nativeArray=measure(allocation,"jni_array",()->{
-            long[] result=M3CountLanes.combineNative(a,0,b,0,a.length,0); escapedResult=result;
+            long[] result=CountLanes.combineNative(a,0,b,0,a.length,0); escapedResult=result;
             long sum=0; for(long value:result) sum+=value; escapedTotal=sum;},300);
-        long nativeTotal=measure(allocation,"jni_total",()->escapedTotal=M3CountTotals.combineNative(a,0,b,0,a.length,0),300);
+        long nativeTotal=measure(allocation,"jni_total",()->escapedTotal=CountTotals.combineNative(a,0,b,0,a.length,0),300);
         if (escapedTotal!=expected) throw new AssertionError("JNI total");
         long bag=measure(allocation,"intersection_bag",()->{LongBag result=x.intersection(y);escapedResult=result;escapedTotal=result.totalCount();},300);
-        long total=measure(allocation,"intersection_total",()->escapedTotal=M3CountTotals.intersection(x,y),300);
+        long total=measure(allocation,"intersection_total",()->escapedTotal=CountTotals.intersection(x,y),300);
         if (escapedTotal!=3072) throw new AssertionError("bag total");
         if (!(javaTotal<javaArray && nativeTotal<nativeArray && total<bag)) {
             throw new AssertionError("paired allocation reduction was not demonstrated");

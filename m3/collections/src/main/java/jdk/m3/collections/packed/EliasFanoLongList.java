@@ -15,7 +15,7 @@
 package jdk.m3.collections.packed;
 
 import java.util.Objects;
-import jdk.internal.m3.collections.M3PackedUnsignedLongVector;
+import jdk.internal.m3.collections.packed.PackedUnsignedLongVector;
 
 /**
  * Immutable Elias-Fano-style representation for nonnegative nondecreasing long sequences.
@@ -34,7 +34,7 @@ public final class EliasFanoLongList {
     private final int size;
     private final int lowerBits;
     private final long lowerMask;
-    private final M3PackedUnsignedLongVector lows;
+    private final PackedUnsignedLongVector lows;
     private final long[] highWords;
     private final int[] selectSamples;
 
@@ -56,7 +56,7 @@ public final class EliasFanoLongList {
         long ratio = size == 0 ? 0 : maximum / Math.max(1L, size);
         lowerBits = ratio <= 1 ? 0 : 63 - Long.numberOfLeadingZeros(ratio);
         lowerMask = lowerBits == 0 ? 0L : (1L << lowerBits) - 1L;
-        lows = lowerBits == 0 ? null : new M3PackedUnsignedLongVector(lowerBits, size);
+        lows = lowerBits == 0 ? null : new PackedUnsignedLongVector(lowerBits, size);
 
         long highMaximum = size == 0 ? 0 : maximum >>> lowerBits;
         long highBitLength = Math.addExact(highMaximum, size);

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.collections;
 
-import jdk.internal.m3.collections.M3LazyElementFlags;
+import jdk.internal.m3.collections.LazyElementFlags;
 
 /**
  * Cold-path, index-only LRU victim selection for parent-owned facades.
@@ -23,7 +23,7 @@ final class M3ResidentTrimPlanner {
         if (requested == 0 || count == 0) return new int[0];
         int candidates = 0;
         for (int i = 0; i < count; i++) {
-            if (!M3LazyElementFlags.has(flags[i], M3LazyElementFlags.PINNED)) candidates++;
+            if (!LazyElementFlags.has(flags[i], LazyElementFlags.PINNED)) candidates++;
         }
         if (candidates == 0) return new int[0];
         int wanted = Math.min(requested, candidates);
@@ -41,7 +41,7 @@ final class M3ResidentTrimPlanner {
         int[] worstFirst = new int[wanted];
         int size = 0;
         for (int slot = 0; slot < count; slot++) {
-            if (M3LazyElementFlags.has(flags[slot], M3LazyElementFlags.PINNED)) continue;
+            if (LazyElementFlags.has(flags[slot], LazyElementFlags.PINNED)) continue;
             if (size < wanted) {
                 int position = size++;
                 while (position > 0) {
@@ -70,7 +70,7 @@ final class M3ResidentTrimPlanner {
         int[] heap = new int[candidates];
         int size = 0;
         for (int slot = 0; slot < count; slot++) {
-            if (!M3LazyElementFlags.has(flags[slot], M3LazyElementFlags.PINNED)) {
+            if (!LazyElementFlags.has(flags[slot], LazyElementFlags.PINNED)) {
                 heap[size++] = slot;
             }
         }
@@ -93,7 +93,7 @@ final class M3ResidentTrimPlanner {
         long[] epochs = new long[candidates];
         int size = 0;
         for (int slot = 0; slot < count; slot++) {
-            if (!M3LazyElementFlags.has(flags[slot], M3LazyElementFlags.PINNED)) {
+            if (!LazyElementFlags.has(flags[slot], LazyElementFlags.PINNED)) {
                 bestFirst[size] = slot;
                 epochs[size++] = lastUse[slot];
             }

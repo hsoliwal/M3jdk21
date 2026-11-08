@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections.concurrent;
 
-import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.NotYetReceived;
 import jdk.m3.collections.LongDeque;
 import jdk.m3.collections.LongQueue;
 
@@ -18,7 +18,7 @@ import jdk.m3.collections.LongQueue;
  *
  * <p>DOOP mapping: lane kind LONG; lanes {@code long[] valueLane;int[] prevLane;int[] nextLane}; offset scheme slot + CAS-published link lanes; state-mask bits OCCUPIED,DELETED; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: ring/chunk lanes + CAS indices / head/tail epoch words.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class ConcurrentLongLinkedDeque {
@@ -49,51 +49,51 @@ public final class ConcurrentLongLinkedDeque {
 
     /** ConcurrentLinkedDeque.addFirst (scaffold: not yet received). */
     public void addFirst(long value) {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.addFirst");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.addFirst");
     }
 
     /** ConcurrentLinkedDeque.addLast (scaffold: not yet received). */
     public void addLast(long value) {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.addLast");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.addLast");
     }
 
     /** ConcurrentLinkedQueue.offer (scaffold: not yet received). */
     public boolean offer(long value) {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.offer");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.offer");
     }
 
     /** ConcurrentLinkedDeque.pollFirst (scaffold: not yet received). */
     public long pollFirstOrDefault(long defaultValue) {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.pollFirstOrDefault");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.pollFirstOrDefault");
     }
 
     /** ConcurrentLinkedDeque.pollLast (scaffold: not yet received). */
     public long pollLastOrDefault(long defaultValue) {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.pollLastOrDefault");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.pollLastOrDefault");
     }
 
     /** ConcurrentLinkedDeque.peekFirst (scaffold: not yet received). */
     public long peekFirstOrDefault(long defaultValue) {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.peekFirstOrDefault");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.peekFirstOrDefault");
     }
 
     /** ConcurrentLinkedDeque.remove(Object) (scaffold: not yet received). */
     public boolean remove(long value) {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.remove");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.remove");
     }
 
     /** Deque.isEmpty (scaffold: not yet received). */
     public boolean isEmpty() {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.isEmpty");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.isEmpty");
     }
 
     /** Deque.size (O(n) weakly consistent) (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.size");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.size");
     }
 
     /** Deque.clear (scaffold: not yet received). */
     public void clear() {
-        throw new M3NotYetReceived("M3ConcurrentLongLinkedDeque.clear");
+        throw new NotYetReceived("M3ConcurrentLongLinkedDeque.clear");
     }
 }

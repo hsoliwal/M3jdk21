@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
-import jdk.internal.m3.collections.M3LaneSearch;
+import jdk.internal.m3.collections.LaneSearch;
 import jdk.m3.collections.IndexPathMasks;
 import jdk.m3.collections.LongLongConsumer;
 
@@ -80,12 +80,12 @@ public final class LongRangeSet {
         if (fromInclusive == toExclusive) return;
         // Ends are sorted; lowerBound (not upperBound) retains touching-range merges.
         int first = size == 0 || ends[0] >= fromInclusive
-                ? 0 : M3LaneSearch.lowerBound(ends, 1, size, fromInclusive);
+                ? 0 : LaneSearch.lowerBound(ends, 1, size, fromInclusive);
         // The intervals are sorted, disjoint and nonadjacent. Absorbing
         // a range beginning at/before toExclusive cannot bridge a later
         // gap: the next start is strictly greater than the absorbed end.
         // Therefore the last touching range is an upper-bound lookup.
-        int last = M3LaneSearch.upperBound(starts, first, size, toExclusive);
+        int last = LaneSearch.upperBound(starts, first, size, toExclusive);
         long start = fromInclusive;
         long end = toExclusive;
         if (last > first) {
@@ -111,7 +111,7 @@ public final class LongRangeSet {
         int first = firstEndingAfter(fromInclusive);
         // Prefix starts are sorted. This locates the first interval starting at/after
         // the exclusive removal bound without scanning every covered range.
-        int last = M3LaneSearch.lowerBound(starts, first, size, toExclusive);
+        int last = LaneSearch.lowerBound(starts, first, size, toExclusive);
         if (first == last) return;
         long oldStart = starts[first];
         long oldEnd = ends[last - 1];
@@ -143,7 +143,7 @@ public final class LongRangeSet {
     private int firstEndingAfter(long point) {
         int lo = 0;
         int hi = size;
-        return M3LaneSearch.upperBound(ends, lo, hi, point);
+        return LaneSearch.upperBound(ends, lo, hi, point);
     }
 
     /** Exact membership for all signed-long input values. */

@@ -1,10 +1,10 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 package jdk.m3.collections;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3ImmutablePoolSelfTest;
+import jdk.internal.m3.collections.ImmutablePoolSelfTest;
 /** Owning-module JUnit test of the relocated strong/weak canonical pools (recipe immutable-pools-20261106). */
 final class M3ImmutablePoolTest {
     @Test void strongAndWeakLivePooling() throws Exception {
-        M3ImmutablePoolSelfTest.main(new String[0]);
+        ImmutablePoolSelfTest.main(new String[0]);
     }
 }

@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections.concurrent;
 
-import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.NotYetReceived;
 
 /**
  * M3 five-library superset scaffold {@code SpscQueue}: API group {@code SPSC_QUEUE} over arrays and state masks.
@@ -16,7 +16,7 @@ import jdk.internal.m3.collections.M3NotYetReceived;
  *
  * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] ringLane}; offset scheme ring: producerIndex &amp; mask; consumerIndex &amp; mask; state-mask bits PUBLISHED; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: ring lane; producer/consumer index offsets / slot published bits.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class SpscQueue<E> {
@@ -41,46 +41,46 @@ public final class SpscQueue<E> {
 
     /** SpscArrayQueue.offer (single producer) (scaffold: not yet received). */
     public boolean offer(E element) {
-        throw new M3NotYetReceived("M3SpscQueue.offer");
+        throw new NotYetReceived("M3SpscQueue.offer");
     }
 
     /** MessagePassingQueue.relaxedOffer (scaffold: not yet received). */
     public boolean relaxedOffer(E element) {
-        throw new M3NotYetReceived("M3SpscQueue.relaxedOffer");
+        throw new NotYetReceived("M3SpscQueue.relaxedOffer");
     }
 
     /** SpscArrayQueue.poll (single consumer) (scaffold: not yet received). */
     public E poll() {
-        throw new M3NotYetReceived("M3SpscQueue.poll");
+        throw new NotYetReceived("M3SpscQueue.poll");
     }
 
     /** MessagePassingQueue.relaxedPoll (scaffold: not yet received). */
     public E relaxedPoll() {
-        throw new M3NotYetReceived("M3SpscQueue.relaxedPoll");
+        throw new NotYetReceived("M3SpscQueue.relaxedPoll");
     }
 
     /** Queue.peek (scaffold: not yet received). */
     public E peek() {
-        throw new M3NotYetReceived("M3SpscQueue.peek");
+        throw new NotYetReceived("M3SpscQueue.peek");
     }
 
     /** MessagePassingQueue.fill (scaffold: not yet received). */
     public int fill(java.util.function.Supplier<E> supplier, int limit) {
-        throw new M3NotYetReceived("M3SpscQueue.fill");
+        throw new NotYetReceived("M3SpscQueue.fill");
     }
 
     /** MessagePassingQueue.drain (scaffold: not yet received). */
     public int drain(java.util.function.Consumer<? super E> consumer, int limit) {
-        throw new M3NotYetReceived("M3SpscQueue.drain");
+        throw new NotYetReceived("M3SpscQueue.drain");
     }
 
     /** MessagePassingQueue.capacity (scaffold: not yet received). */
     public int capacity() {
-        throw new M3NotYetReceived("M3SpscQueue.capacity");
+        throw new NotYetReceived("M3SpscQueue.capacity");
     }
 
     /** Queue.size (approximate) (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3SpscQueue.size");
+        throw new NotYetReceived("M3SpscQueue.size");
     }
 }

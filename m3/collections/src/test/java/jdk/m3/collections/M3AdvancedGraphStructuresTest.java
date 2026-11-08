@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongMinimumSpanningForest;
+import jdk.internal.m3.collections.graph.LongMinimumSpanningForest;
 import jdk.m3.collections.graph.IntBipartiteMatching;
 import jdk.m3.collections.graph.WeightedIntCsrGraph;
 
@@ -30,7 +30,7 @@ class M3AdvancedGraphStructuresTest {
                 } }
                 if (groupCount(labels(chosen)) == components) { best = Math.min(best, sum); }
             }
-            var forest = new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(n, from, to, weight));
+            var forest = new LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(n, from, to, weight));
             assertEquals(best, forest.totalWeight()); assertEquals(components, forest.componentCount());
             assertEquals(n - components, forest.selectedEdgeCount());
             long[] componentWeights = new long[components]; boolean[][] chosen = new boolean[n][n];
@@ -50,17 +50,17 @@ class M3AdvancedGraphStructuresTest {
     }
 
     @Test void forestTiesExtremesAndRejectionContracts() {
-        var ties = new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(4,
+        var ties = new LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(4,
                 new int[]{0, 1, 0, 2, 0}, new int[]{1, 2, 2, 3, 0}, new long[]{5, 5, 5, 5, -99}));
         assertEquals(0, ties.edgeAt(0)); assertEquals(1, ties.edgeAt(1)); assertEquals(3, ties.edgeAt(2));
         assertFalse(ties.containsEdge(4)); assertEquals(15, ties.totalWeight());
-        var extreme = new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(2, new int[]{0}, new int[]{1}, new long[]{Long.MIN_VALUE}));
+        var extreme = new LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(2, new int[]{0}, new int[]{1}, new long[]{Long.MIN_VALUE}));
         assertEquals(Long.MIN_VALUE, extreme.totalWeight());
-        assertThrows(ArithmeticException.class, () -> new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(3,
+        assertThrows(ArithmeticException.class, () -> new LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(3,
                 new int[]{0, 1}, new int[]{1, 2}, new long[]{Long.MAX_VALUE, 1})));
-        assertThrows(ArithmeticException.class, () -> new M3LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(3,
+        assertThrows(ArithmeticException.class, () -> new LongMinimumSpanningForest(WeightedIntCsrGraph.undirected(3,
                 new int[]{0, 1}, new int[]{1, 2}, new long[]{Long.MIN_VALUE, -1})));
-        assertThrows(IllegalArgumentException.class, () -> new M3LongMinimumSpanningForest(WeightedIntCsrGraph.directed(0, new int[0], new int[0], new long[0])));
+        assertThrows(IllegalArgumentException.class, () -> new LongMinimumSpanningForest(WeightedIntCsrGraph.directed(0, new int[0], new int[0], new long[0])));
         assertThrows(IndexOutOfBoundsException.class, () -> ties.edgeAt(3));
         assertThrows(IndexOutOfBoundsException.class, () -> ties.componentWeight(1));
     }

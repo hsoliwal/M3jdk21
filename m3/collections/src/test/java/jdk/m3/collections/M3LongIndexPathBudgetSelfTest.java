@@ -18,8 +18,8 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import jdk.internal.m3.collections.M3LongIndexPathBudget;
-import jdk.internal.m3.collections.M3LongIndexPathMasksJNI;
+import jdk.internal.m3.collections.LongIndexPathBudget;
+import jdk.internal.m3.collections.LongIndexPathMasksJNI;
 
 /** Deterministic Java21 oracle of input-work-bounded Java/JNI path selection. */
 public final class M3LongIndexPathBudgetSelfTest {
@@ -34,9 +34,9 @@ public final class M3LongIndexPathBudgetSelfTest {
             throw new IllegalArgumentException("use --native or no argument");
         }
         if (nativeTest) {
-            check(M3LongIndexPathMasksJNI.nativeAvailable(), "real JNI backend required");
+            check(LongIndexPathMasksJNI.nativeAvailable(), "real JNI backend required");
         } else {
-            check(!M3LongIndexPathMasksJNI.nativeAvailable(),
+            check(!LongIndexPathMasksJNI.nativeAvailable(),
                     "Java-only proof must run without native library");
         }
         boundaries(nativeTest);
@@ -51,7 +51,7 @@ public final class M3LongIndexPathBudgetSelfTest {
         int[] offsets = {0, 1, 1, 3, 4, 0};
         int[][] planes = {{1, 0, 3, Integer.MIN_VALUE | 1, 1}};
         int[] need = {1}, forbidden = {2};
-        for (M3LongIndexPathBudget.Backend backend : backends(nativeTest)) {
+        for (LongIndexPathBudget.Backend backend : backends(nativeTest)) {
             long[] out = new long[5];
             Arrays.fill(out, CANARY);
             long zero = scan(rows, offsets, planes, need, forbidden,
@@ -109,7 +109,7 @@ public final class M3LongIndexPathBudgetSelfTest {
         if (!nativeTest) {
             fail(UnsatisfiedLinkError.class, () -> scan(rows, offsets, planes,
                     need, forbidden, 0, rows.length, 1, 0, 0,
-                    new long[0], 0, 0, M3LongIndexPathBudget.Backend.NATIVE_REQUIRED));
+                    new long[0], 0, 0, LongIndexPathBudget.Backend.NATIVE_REQUIRED));
         }
     }
 
@@ -122,7 +122,7 @@ public final class M3LongIndexPathBudgetSelfTest {
         int[][] planes = {{1}};
         int[] required = {0}, forbidden = {0};
         int[][] windows = {{0, 0, 0}, {2, 0, 0}, {2, 2, 0}, {2, 2, 1}};
-        for (M3LongIndexPathBudget.Backend backend : backends(nativeTest)) {
+        for (LongIndexPathBudget.Backend backend : backends(nativeTest)) {
             for (int[] window : windows) {
                 int count = window[0], next = window[1], budget = window[2];
                 long[] output = {CANARY, CANARY, CANARY};
@@ -156,13 +156,13 @@ public final class M3LongIndexPathBudgetSelfTest {
         if (!nativeTest) {
             fail(UnsatisfiedLinkError.class, () -> scan(rows, offsets, planes,
                     required, forbidden, 0, 2, 1, 0, 0, new long[1], 0, -1,
-                    M3LongIndexPathBudget.Backend.NATIVE_REQUIRED));
+                    LongIndexPathBudget.Backend.NATIVE_REQUIRED));
         }
     }
 
     private static void randomized(boolean nativeTest) {
         Random random = new Random(0x4d33534f52544544L);
-        M3LongIndexPathBudget.Backend[] backends = backends(nativeTest);
+        LongIndexPathBudget.Backend[] backends = backends(nativeTest);
         for (int round = 0; round < 2200; round++) {
             int length = random.nextInt(110);
             int capacity = random.nextInt(90) + 1;
@@ -206,12 +206,12 @@ public final class M3LongIndexPathBudgetSelfTest {
             int maxExamined = random.nextInt(15) + 1;
             long[] javaPages = collect(rows, positions, states, need, forbid,
                     first, count, stride, limit, maxExamined,
-                    M3LongIndexPathBudget.Backend.JAVA);
+                    LongIndexPathBudget.Backend.JAVA);
             eq(expected, javaPages);
             if (nativeTest) {
                 long[] nativePages = collect(rows, positions, states, need, forbid,
                         first, count, stride, limit, maxExamined,
-                        M3LongIndexPathBudget.Backend.NATIVE_REQUIRED);
+                        LongIndexPathBudget.Backend.NATIVE_REQUIRED);
                 eq(javaPages, nativePages);
             }
         }
@@ -219,7 +219,7 @@ public final class M3LongIndexPathBudgetSelfTest {
 
     private static long[] collect(long[] rows, int[] positions, int[][] states,
             int[] need, int[] forbid, int first, int count, int stride,
-            int limit, int maxExamined, M3LongIndexPathBudget.Backend backend) {
+            int limit, int maxExamined, LongIndexPathBudget.Backend backend) {
         ArrayList<Long> output = new ArrayList<>(); // oracle-only, never production.
         long[] page = new long[limit + 2];
         int next = 0;
@@ -243,17 +243,17 @@ public final class M3LongIndexPathBudgetSelfTest {
     private static long scan(long[] rows, int[] offsets, int[][] planes,
             int[] required, int[] forbidden, int first, int count, int stride,
             int next, int budget, long[] output, int offset, int limit,
-            M3LongIndexPathBudget.Backend backend) {
-        return M3LongIndexPathBudget.scan(rows, offsets, planes,
+            LongIndexPathBudget.Backend backend) {
+        return LongIndexPathBudget.scan(rows, offsets, planes,
                 required, forbidden, first, count, stride, next, budget,
                 output, offset, limit, backend);
     }
 
-    private static M3LongIndexPathBudget.Backend[] backends(boolean nativeTest) {
+    private static LongIndexPathBudget.Backend[] backends(boolean nativeTest) {
         return nativeTest
-                ? new M3LongIndexPathBudget.Backend[]{M3LongIndexPathBudget.Backend.JAVA,
-                        M3LongIndexPathBudget.Backend.NATIVE_REQUIRED}
-                : new M3LongIndexPathBudget.Backend[]{M3LongIndexPathBudget.Backend.JAVA};
+                ? new LongIndexPathBudget.Backend[]{LongIndexPathBudget.Backend.JAVA,
+                        LongIndexPathBudget.Backend.NATIVE_REQUIRED}
+                : new LongIndexPathBudget.Backend[]{LongIndexPathBudget.Backend.JAVA};
     }
 
     private static void check(boolean condition, String message) {

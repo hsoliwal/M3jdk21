@@ -5,7 +5,7 @@ package jdk.m3.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import jdk.internal.m3.collections.M3StateMaskArrays;
+import jdk.internal.m3.collections.StateMaskArrays;
 
 /** Original-owner Java 21 index/state differential; JNI remains an opt-in backend. */
 public final class M3StateMaskSelectContract {
@@ -43,11 +43,11 @@ public final class M3StateMaskSelectContract {
                 if ((bits & required) == required && (bits & forbidden) == 0) {
                     oracle.add(slots[i]);
                 }
-                check(M3StateMaskArrays.matches(states[i], required, forbidden)
+                check(StateMaskArrays.matches(states[i], required, forbidden)
                         == ((bits & required) == required && (bits & forbidden) == 0),
                         "mask matches oracle " + repetition);
             }
-            int[] actual = M3StateMaskArrays.select(slots, states, required, forbidden,
+            int[] actual = StateMaskArrays.select(slots, states, required, forbidden,
                     M3IndexMaskCompactor.Backend.JAVA);
             check(actual.length == oracle.size(), "kept count " + repetition);
             for (int i = 0; i < actual.length; i++) {
@@ -59,35 +59,35 @@ public final class M3StateMaskSelectContract {
                     slots.length, required, forbidden, M3IndexMaskCompactor.Backend.JAVA);
             check(Arrays.equals(actual, direct), "existing primitive selector equivalence");
             if (forbidden == 0) {
-                check(Arrays.equals(actual, M3StateMaskArrays.select(slots, states, required,
+                check(Arrays.equals(actual, StateMaskArrays.select(slots, states, required,
                         M3IndexMaskCompactor.Backend.JAVA)), "required-only compatibility");
             }
         }
         int[] rows = {5, 0, -1, 0, 5};
         byte[] flags = {(byte) 0xff, 0, 1, (byte) 0x80, 1};
         check(Arrays.equals(new int[] {-1, 5},
-                M3StateMaskArrays.select(rows, flags, 1, 2, M3IndexMaskCompactor.Backend.JAVA)),
+                StateMaskArrays.select(rows, flags, 1, 2, M3IndexMaskCompactor.Backend.JAVA)),
                 "duplicate and negative physical slot retention");
         mustThrow(IllegalArgumentException.class, () ->
-                M3StateMaskArrays.select(rows, flags, 1, 1, M3IndexMaskCompactor.Backend.JAVA));
+                StateMaskArrays.select(rows, flags, 1, 1, M3IndexMaskCompactor.Backend.JAVA));
         mustThrow(IllegalArgumentException.class, () ->
-                M3StateMaskArrays.select(rows, flags, 256, 0, M3IndexMaskCompactor.Backend.JAVA));
+                StateMaskArrays.select(rows, flags, 256, 0, M3IndexMaskCompactor.Backend.JAVA));
         mustThrow(IllegalArgumentException.class, () ->
-                M3StateMaskArrays.select(rows, flags, 1, 256, M3IndexMaskCompactor.Backend.JAVA));
+                StateMaskArrays.select(rows, flags, 1, 256, M3IndexMaskCompactor.Backend.JAVA));
         mustThrow(IllegalArgumentException.class, () ->
-                M3StateMaskArrays.select(rows, new byte[4], 1, 2, M3IndexMaskCompactor.Backend.JAVA));
+                StateMaskArrays.select(rows, new byte[4], 1, 2, M3IndexMaskCompactor.Backend.JAVA));
         mustThrow(NullPointerException.class, () ->
-                M3StateMaskArrays.select(null, flags, 1, 2, M3IndexMaskCompactor.Backend.JAVA));
+                StateMaskArrays.select(null, flags, 1, 2, M3IndexMaskCompactor.Backend.JAVA));
         mustThrow(NullPointerException.class, () ->
-                M3StateMaskArrays.select(rows, null, 1, 2, M3IndexMaskCompactor.Backend.JAVA));
+                StateMaskArrays.select(rows, null, 1, 2, M3IndexMaskCompactor.Backend.JAVA));
         mustThrow(NullPointerException.class, () ->
-                M3StateMaskArrays.select(rows, flags, 1, 2, null));
+                StateMaskArrays.select(rows, flags, 1, 2, null));
         check(Arrays.equals(rows, new int[] {5, 0, -1, 0, 5}), "validation leaves slots unchanged");
         check(Arrays.equals(flags, new byte[] {(byte) 0xff, 0, 1, (byte) 0x80, 1}),
                 "validation leaves flags unchanged");
         if (!M3IndexMaskCompactor.nativeAvailable()) {
             mustThrow(UnsatisfiedLinkError.class, () ->
-                    M3StateMaskArrays.select(rows, flags, 1, 2,
+                    StateMaskArrays.select(rows, flags, 1, 2,
                             M3IndexMaskCompactor.Backend.NATIVE_REQUIRED));
         }
         System.out.println("PASS M3 required/excluded state-mask select checks=" + assertions);

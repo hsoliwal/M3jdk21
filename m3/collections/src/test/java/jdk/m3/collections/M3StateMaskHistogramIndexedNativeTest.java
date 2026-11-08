@@ -15,11 +15,11 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3StateMaskHistogramIndexedNativeContract;
+import jdk.internal.m3.collections.sketch.StateMaskHistogramIndexedNativeContract;
 
 /** Owning JUnit5 binding for indexed original-array JNI differential proof. */
 final class M3StateMaskHistogramIndexedNativeTest {
     @Test void indexedNativeAndJavaParity() throws Exception {
-        M3StateMaskHistogramIndexedNativeContract.main(new String[0]);
+        StateMaskHistogramIndexedNativeContract.main(new String[0]);
     }
 }

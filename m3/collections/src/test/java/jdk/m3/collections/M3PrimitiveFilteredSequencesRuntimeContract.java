@@ -2,7 +2,7 @@
 package jdk.m3.collections;
 import java.util.*;
 import java.util.function.LongPredicate;
-import jdk.internal.m3.collections.M3PrimitiveFilteredSequences;
+import jdk.internal.m3.collections.PrimitiveFilteredSequences;
 
 /** Standalone Java21 JDK differential; test-only ArrayList storage is the independent oracle. */
 public final class M3PrimitiveFilteredSequencesRuntimeContract {
@@ -21,8 +21,8 @@ public final class M3PrimitiveFilteredSequencesRuntimeContract {
 
     private static void listScenario(){
         LongArrayList physical=new LongArrayList();ArrayList<Long> model=new ArrayList<>();
-        LongList view=M3PrimitiveFilteredSequences.list(physical,EVEN);
-        LongList ro=M3PrimitiveFilteredSequences.readOnlyList(physical,EVEN);
+        LongList view=PrimitiveFilteredSequences.list(physical,EVEN);
+        LongList ro=PrimitiveFilteredSequences.readOnlyList(physical,EVEN);
         Random random=new Random(0x17_2026_75);
         for(int step=0;step<14000;step++){
             long value=step%29==0?Long.MIN_VALUE:step%31==0?Long.MAX_VALUE:random.nextInt(35)-17;
@@ -41,7 +41,7 @@ public final class M3PrimitiveFilteredSequencesRuntimeContract {
                 case 9 -> {eq(false,view.addIf(value,v->false));}
                 case 10 -> { if(EVEN.test(value)){eq(true,view.addAll(new long[]{value,value}));model.add(value);model.add(value);} }
                 case 11 -> {if(n>0){int i=random.nextInt(n);eq(selected(model)[i],view.get(i));}else reject(IndexOutOfBoundsException.class,()->view.get(0));}
-                default -> {if(step%53==0){LongStack stack=M3PrimitiveFilteredSequences.stack(physical,EVEN);if(n>0){long exp=nth(model,false);eq(exp,stack.peek());eq(exp,stack.pop());removeValue(model,exp,false);}else reject(NoSuchElementException.class,stack::peek);}}
+                default -> {if(step%53==0){LongStack stack=PrimitiveFilteredSequences.stack(physical,EVEN);if(n>0){long exp=nth(model,false);eq(exp,stack.peek());eq(exp,stack.pop());removeValue(model,exp,false);}else reject(NoSuchElementException.class,stack::peek);}}
             }
             eq(copy(model),physical.toArray());eq(selected(model),view.toArray());eq(selected(model),ro.toArray());
             eq(selected(model).length,view.size());eq(selected(model).length,ro.size());
@@ -50,7 +50,7 @@ public final class M3PrimitiveFilteredSequencesRuntimeContract {
         }
         // Physical masked holes survive sort and dedup; duplicate natural signed ordering.
         physical.clear();for(long v:new long[]{8,1,4,3,8,-5,2,7,2})physical.add(v);
-        LongList sorted=M3PrimitiveFilteredSequences.list(physical,EVEN);
+        LongList sorted=PrimitiveFilteredSequences.list(physical,EVEN);
         sorted.sort();
         eq(new long[]{2,1,2,3,4,-5,8,7,8},physical.toArray());
         eq(5, sorted.size());
@@ -61,25 +61,25 @@ public final class M3PrimitiveFilteredSequencesRuntimeContract {
         eq(new long[]{2,4,8}, sorted.toArray());
         reject(IllegalArgumentException.class, () -> sorted.addAll(new long[]{2,3,4}));
         eq(new long[]{2,1,3,4,-5,8,7}, physical.toArray());
-        LongList nested = M3PrimitiveFilteredSequences.list(sorted, v -> v > 2);
+        LongList nested = PrimitiveFilteredSequences.list(sorted, v -> v > 2);
         eq(new long[]{4,8}, nested.toArray());
         eq(4, nested.removeAt(0));
         eq(new long[]{2,1,3,-5,8,7}, physical.toArray());
-        LongStack stack = M3PrimitiveFilteredSequences.stack(physical, EVEN);
+        LongStack stack = PrimitiveFilteredSequences.stack(physical, EVEN);
         reject(IllegalArgumentException.class, () -> stack.push(3));
         stack.push(16);
         eq(16, stack.pop());
         eq(new long[]{2,1,3,-5,8,7}, physical.toArray());
-        LongStack frozen = M3PrimitiveFilteredSequences.readOnlyStack(physical, EVEN);
+        LongStack frozen = PrimitiveFilteredSequences.readOnlyStack(physical, EVEN);
         reject(UnsupportedOperationException.class, () -> frozen.push(4));
         reject(UnsupportedOperationException.class, frozen::pop);
     }
     private static int retainModel(List<Long> m,LongPredicate p){int before=m.size();m.removeIf(v->!p.test(v));return before-m.size();}
     private static void dequeScenario(){
         LongArrayDeque physical=new LongArrayDeque();ArrayList<Long> model=new ArrayList<>();
-        LongDeque view=M3PrimitiveFilteredSequences.deque(physical,EVEN);
-        LongDeque ro=M3PrimitiveFilteredSequences.readOnlyDeque(physical,EVEN);
-        LongQueue queue=M3PrimitiveFilteredSequences.queue(physical,EVEN);
+        LongDeque view=PrimitiveFilteredSequences.deque(physical,EVEN);
+        LongDeque ro=PrimitiveFilteredSequences.readOnlyDeque(physical,EVEN);
+        LongQueue queue=PrimitiveFilteredSequences.queue(physical,EVEN);
         Random random=new Random(0x17332dee);
         for(int step=0;step<12000;step++){
             long value=step%19==0?Long.MIN_VALUE:step%23==0?Long.MAX_VALUE:random.nextInt(43)-21;

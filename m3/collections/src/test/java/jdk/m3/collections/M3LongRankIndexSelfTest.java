@@ -4,8 +4,8 @@ package jdk.m3.collections;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.TreeSet;
-import jdk.internal.m3.collections.M3LongRankBatchNative;
-import jdk.internal.m3.collections.M3LongRankIndex;
+import jdk.internal.m3.collections.LongRankBatchNative;
+import jdk.internal.m3.collections.LongRankIndex;
 
 /** Dependency-free deterministic differential regression, including the opt-in native lane. */
 public final class M3LongRankIndexSelfTest {
@@ -15,17 +15,17 @@ public final class M3LongRankIndexSelfTest {
         fixedCases();
         randomizedCases();
         System.out.println("M3LongRankIndexSelfTest PASS native="
-                + M3LongRankBatchNative.nativeAvailable());
+                + LongRankBatchNative.nativeAvailable());
     }
 
     private static void fixedCases() {
-        M3LongRankIndex empty = M3LongRankIndex.copyOf(new long[0]);
+        LongRankIndex empty = LongRankIndex.copyOf(new long[0]);
         equal(0, empty.lowerBound(Long.MIN_VALUE));
         equal(0, empty.upperBound(Long.MAX_VALUE));
         equal(0, empty.rangeCountInclusive(Long.MIN_VALUE, Long.MAX_VALUE));
         equal(3, empty.lowerBounds(new long[]{-1, 0, 1}).length);
         long[] input = {Long.MAX_VALUE, Long.MIN_VALUE, -1, 0, 0, Long.MIN_VALUE};
-        M3LongRankIndex index = M3LongRankIndex.copyOf(input);
+        LongRankIndex index = LongRankIndex.copyOf(input);
         input[0] = 12345;
         equal(2, index.count(Long.MIN_VALUE));
         equal(2, index.count(0));
@@ -36,7 +36,7 @@ public final class M3LongRankIndexSelfTest {
         equal(Long.MIN_VALUE, index.select(0));
         equal(Long.MAX_VALUE, index.select(5));
         ArraySource source = new ArraySource(new long[]{100, 100, 50, 40, 40, 20, 10});
-        M3LongRankIndex dense = M3LongRankIndex.snapshotFilteredDistinct(source, x -> x > 0);
+        LongRankIndex dense = LongRankIndex.snapshotFilteredDistinct(source, x -> x > 0);
         source.clear();
         equal(5, dense.size());
         equal(1, dense.denseRankDescending(120));
@@ -63,8 +63,8 @@ public final class M3LongRankIndexSelfTest {
                 source[i] = value;
                 distinct.add(value);
             }
-            M3LongRankIndex index = M3LongRankIndex.snapshot(list);
-            M3LongRankIndex distinctIndex = M3LongRankIndex.snapshotDistinct(list);
+            LongRankIndex index = LongRankIndex.snapshot(list);
+            LongRankIndex distinctIndex = LongRankIndex.snapshotDistinct(list);
             long[] sorted = source.clone();
             Arrays.sort(sorted);
             arrayEqual(sorted, index.toArray());
@@ -91,7 +91,7 @@ public final class M3LongRankIndexSelfTest {
             for (int q = 0; q < queries.length; q++) {
                 equal(index.lowerBound(queries[q]), batched[q]);
             }
-            M3LongRankIndex filtered = M3LongRankIndex.snapshotFiltered(list, v -> v < 0);
+            LongRankIndex filtered = LongRankIndex.snapshotFiltered(list, v -> v < 0);
             for (long v : filtered.toArray()) if (!(v < 0)) fail("filter");
         }
     }

@@ -7,10 +7,10 @@ package jdk.m3.collections;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
-import jdk.internal.m3.collections.M3LazyEventBits;
-import jdk.internal.m3.collections.M3LazyEvents;
-import jdk.internal.m3.collections.M3ProgressScope;
-import jdk.internal.m3.collections.M3SystemProgress;
+import jdk.internal.m3.collections.bits.LazyEventBits;
+import jdk.internal.m3.collections.LazyEvents;
+import jdk.internal.m3.collections.ProgressScope;
+import jdk.internal.m3.collections.SystemProgress;
 
 /** Optional state lane; values remain exclusively in the incumbent tree's payload array. */
 final class M3LazyValueState<K, V> {
@@ -25,7 +25,7 @@ final class M3LazyValueState<K, V> {
 
     static M3Progress progress(M3Progress monitor) {
         return monitor == null
-                ? M3ProgressAdapters.asLegacy(M3SystemProgress.split(0L))
+                ? M3ProgressAdapters.asLegacy(SystemProgress.split(0L))
                 : monitor;
     }
 
@@ -78,18 +78,18 @@ final class M3LazyValueState<K, V> {
             M3Progress monitor) {
         Objects.requireNonNull(operation, "operation");
         LazyEventPolicy policy = eventPolicy(invocationPolicy);
-        try (M3ProgressScope scope = M3ProgressScope.resolve(monitor, 1L)) {
+        try (ProgressScope scope = ProgressScope.resolve(monitor, 1L)) {
             M3Progress active = scope.monitor();
             short initial = flags[slot];
             boolean cancellationEventEmitted = false;
-            emit(policy, M3LazyEventBits.BEFORE_TOUCH, LazyEventGranularity.ELEMENT,
+            emit(policy, LazyEventBits.BEFORE_TOUCH, LazyEventGranularity.ELEMENT,
                     slot, initial, initial, operation, active, null);
             try {
                 checkCancelled(active);
                 if (flags[slot] == LazyValueProvider.LOADED) {
-                    emit(policy, M3LazyEventBits.CACHE_HIT, LazyEventGranularity.ELEMENT,
+                    emit(policy, LazyEventBits.CACHE_HIT, LazyEventGranularity.ELEMENT,
                             slot, flags[slot], flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.AFTER_TOUCH, LazyEventGranularity.ELEMENT,
+                    emit(policy, LazyEventBits.AFTER_TOUCH, LazyEventGranularity.ELEMENT,
                             slot, initial, flags[slot], operation, active, null);
                     return value(values, slot);
                 }
@@ -101,13 +101,13 @@ final class M3LazyValueState<K, V> {
                 flags[slot] = LazyValueProvider.LOADING;
                 Throwable providerFailure = null;
                 try {
-                    emit(policy, M3LazyEventBits.CACHE_MISS, LazyEventGranularity.ELEMENT,
+                    emit(policy, LazyEventBits.CACHE_MISS, LazyEventGranularity.ELEMENT,
                             slot, oldState, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
+                    emit(policy, LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
                             slot, oldState, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.BEFORE_LOAD, LazyEventGranularity.OPERATION,
+                    emit(policy, LazyEventBits.BEFORE_LOAD, LazyEventGranularity.OPERATION,
                             slot, oldState, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.PROVIDER_BEGIN, LazyEventGranularity.OPERATION,
+                    emit(policy, LazyEventBits.PROVIDER_BEGIN, LazyEventGranularity.OPERATION,
                             slot, flags[slot], flags[slot], operation, active, null);
 
                     V result = provider.load(key, active);
@@ -115,11 +115,11 @@ final class M3LazyValueState<K, V> {
                     values[slot] = result;
                     short loading = flags[slot];
                     flags[slot] = LazyValueProvider.LOADED;
-                    emit(policy, M3LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
+                    emit(policy, LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
                             slot, loading, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.AFTER_LOAD, LazyEventGranularity.OPERATION,
+                    emit(policy, LazyEventBits.AFTER_LOAD, LazyEventGranularity.OPERATION,
                             slot, loading, flags[slot], operation, active, null);
-                    emit(policy, M3LazyEventBits.AFTER_TOUCH, LazyEventGranularity.ELEMENT,
+                    emit(policy, LazyEventBits.AFTER_TOUCH, LazyEventGranularity.ELEMENT,
                             slot, initial, flags[slot], operation, active, null);
                     return result;
                 } catch (CancellationException canceled) {
@@ -128,11 +128,11 @@ final class M3LazyValueState<K, V> {
                     if (loading != LazyValueProvider.LOADED) {
                         values[slot] = null;
                         flags[slot] = LazyValueProvider.FAILED;
-                        emitFailure(policy, M3LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
+                        emitFailure(policy, LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
                                 slot, loading, flags[slot], operation, active, canceled);
                     }
                     cancellationEventEmitted = true;
-                    emitFailure(policy, M3LazyEventBits.CANCELLED, LazyEventGranularity.OPERATION,
+                    emitFailure(policy, LazyEventBits.CANCELLED, LazyEventGranularity.OPERATION,
                             slot, loading, flags[slot], operation, active, canceled);
                     throw canceled;
                 } catch (RuntimeException | Error problem) {
@@ -142,24 +142,24 @@ final class M3LazyValueState<K, V> {
                     if (loading != LazyValueProvider.LOADED) {
                         values[slot] = null;
                         flags[slot] = LazyValueProvider.FAILED;
-                        emitFailure(policy, M3LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
+                        emitFailure(policy, LazyEventBits.STATE_CHANGED, LazyEventGranularity.STATE_TRANSITION,
                                 slot, loading, flags[slot], operation, active, problem);
-                        emitFailure(policy, M3LazyEventBits.LOAD_FAILED, LazyEventGranularity.OPERATION,
+                        emitFailure(policy, LazyEventBits.LOAD_FAILED, LazyEventGranularity.OPERATION,
                                 slot, loading, flags[slot], operation, active, problem);
                     }
                     throw problem;
                 } finally {
                     if (providerFailure == null) {
-                        emit(policy, M3LazyEventBits.PROVIDER_END, LazyEventGranularity.OPERATION,
+                        emit(policy, LazyEventBits.PROVIDER_END, LazyEventGranularity.OPERATION,
                                 slot, flags[slot], flags[slot], operation, active, null);
                     } else {
-                        emitFailure(policy, M3LazyEventBits.PROVIDER_END, LazyEventGranularity.OPERATION,
+                        emitFailure(policy, LazyEventBits.PROVIDER_END, LazyEventGranularity.OPERATION,
                                 slot, flags[slot], flags[slot], operation, active, providerFailure);
                     }
                 }
             } catch (CancellationException canceled) {
                 if (!cancellationEventEmitted) {
-                    emitFailure(policy, M3LazyEventBits.CANCELLED, LazyEventGranularity.OPERATION,
+                    emitFailure(policy, LazyEventBits.CANCELLED, LazyEventGranularity.OPERATION,
                             slot, initial, flags[slot], operation, active, canceled);
                 }
                 throw canceled;
@@ -189,7 +189,7 @@ final class M3LazyValueState<K, V> {
         activeCalls++;
         try {
             M3LazyEventSink<M3Progress> sink = provider.lazyEventSink();
-            M3LazyEvents.emit(
+            LazyEvents.emit(
                     policy, sink, eventBit, granularity, slot, oldState, newState,
                     operation, monitor, failure);
         } finally {

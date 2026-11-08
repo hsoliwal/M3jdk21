@@ -20,7 +20,7 @@ static void fail(JNIEnv *env, const char *type, const char *message) {
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_internal_m3_collections_M3CountTotals_combineNative(
+Java_jdk_internal_m3_collections_CountTotals_combineNative(
         JNIEnv *env, jclass owner, jlongArray left, jint left_offset,
         jlongArray right, jint right_offset, jint length, jint operation) {
     (void)owner;

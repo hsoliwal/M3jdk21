@@ -2,11 +2,11 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3RankIntervalBatchContract;
+import jdk.internal.m3.collections.RankIntervalBatchContract;
 
 /** Original owner Java/JNI interval-batch JUnit adapter. */
 final class M3RankIntervalBatchTest {
     @Test void halfOpenSignedLongJniAndJavaParity() throws Exception {
-        M3RankIntervalBatchContract.main(new String[0]);
+        RankIntervalBatchContract.main(new String[0]);
     }
 }

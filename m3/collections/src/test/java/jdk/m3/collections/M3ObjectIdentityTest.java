@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3ObjectIdentityMap;
+import jdk.internal.m3.collections.ObjectIdentityMap;
 
 /**
  * Finite differential comparisons of the identity owners against {@link IdentityHashMap} and
@@ -44,7 +44,7 @@ final class M3ObjectIdentityTest {
         Object[] keys = pool(300);
         Object[] values = pool(40);
         Random random = new Random(0x4d33494445L);
-        M3ObjectIdentityMap<Object, Object> actual = new M3ObjectIdentityMap<>();
+        ObjectIdentityMap<Object, Object> actual = new ObjectIdentityMap<>();
         IdentityHashMap<Object, Object> expected = new IdentityHashMap<>();
         for (int step = 0; step < 30_000; step++) {
             Object k = pick(random, keys);
@@ -85,8 +85,8 @@ final class M3ObjectIdentityTest {
 
     @Test
     void identityMapEdgeContractsRehashAndFailFast() {
-        M3ObjectIdentityMap<String, Integer> map = new M3ObjectIdentityMap<>();
-        assertThrows(IllegalArgumentException.class, () -> new M3ObjectIdentityMap<>(-1));
+        ObjectIdentityMap<String, Integer> map = new ObjectIdentityMap<>();
+        assertThrows(IllegalArgumentException.class, () -> new ObjectIdentityMap<>(-1));
         assertEquals(8, map.capacity());
         String a = new String("same");
         String b = new String("same");
@@ -120,7 +120,7 @@ final class M3ObjectIdentityTest {
         for (int i = 0; i < 10_000; i++) {
             dense.add(new Object());
         }
-        M3ObjectIdentityMap<Object, Integer> wide = new M3ObjectIdentityMap<>();
+        ObjectIdentityMap<Object, Integer> wide = new ObjectIdentityMap<>();
         for (int i = 0; i < 10_000; i++) {
             assertNull(wide.put(dense.get(i), i));
         }
@@ -180,7 +180,7 @@ final class M3ObjectIdentityTest {
 
     @Test
     void identityOwnersRetainOnlyFlatLanes() {
-        List<String> mapFields = Arrays.stream(M3ObjectIdentityMap.class.getDeclaredFields())
+        List<String> mapFields = Arrays.stream(ObjectIdentityMap.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()

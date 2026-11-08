@@ -16,7 +16,7 @@ import java.util.NavigableSet;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
 import java.util.function.Predicate;
-import jdk.internal.m3.collections.M3FilteredNavigableSet;
+import jdk.internal.m3.collections.FilteredNavigableSet;
 
 /** Independent descending results, callback tapes, and a deep private-owner witness. */
 public final class M3FilteredDescendingDepthContract {
@@ -145,7 +145,7 @@ public final class M3FilteredDescendingDepthContract {
             boundaryOwner.addAll(List.of(1, 2, 3));
             NavigableSet<Integer> boundary = mode == 0
                     ? Collections.unmodifiableNavigableSet(boundaryOwner)
-                    : M3FilteredNavigableSet.view(boundaryOwner, filter(boundaryTape, "facade", x -> true));
+                    : FilteredNavigableSet.view(boundaryOwner, filter(boundaryTape, "facade", x -> true));
             NavigableSet<Integer> nested = M3FilteredViews.filter(boundary,
                     filter(boundaryTape, "inner", x -> true));
             nested = M3FilteredViews.filter(nested,

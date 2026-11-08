@@ -17,8 +17,8 @@ import java.util.Random;
 import java.util.RandomAccess;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import jdk.internal.m3.collections.M3CollectionSdk;
-import jdk.internal.m3.collections.M3IndexPartitions;
+import jdk.internal.m3.collections.CollectionSdk;
+import jdk.internal.m3.collections.IndexPartitions;
 
 /** Deterministic Java21 SDK contract oracle; --native requires actual JNI. */
 public final class M3SdkRecoverySelfTest {
@@ -39,7 +39,7 @@ public final class M3SdkRecoverySelfTest {
 
     private static void partitions() {
         ArrayList<Integer> source = new ArrayList<>(List.of(1,2,3,4,5));
-        List<List<Integer>> chunks = M3CollectionSdk.partition(source, 2);
+        List<List<Integer>> chunks = CollectionSdk.partition(source, 2);
         eq(List.of(List.of(1,2),List.of(3,4),List.of(5)), chunks);
         ok(chunks instanceof RandomAccess);
         fails(UnsupportedOperationException.class, chunks::clear);
@@ -47,21 +47,21 @@ public final class M3SdkRecoverySelfTest {
         eq(42, source.get(1).intValue());
         source.add(6);
         eq(List.of(5,6), chunks.get(2));
-        ok(!(M3CollectionSdk.partition(new LinkedList<>(source), 2) instanceof RandomAccess));
-        fails(IllegalArgumentException.class, () -> M3CollectionSdk.partition(source, 0));
-        fails(NullPointerException.class, () -> M3CollectionSdk.partition(null, 2));
+        ok(!(CollectionSdk.partition(new LinkedList<>(source), 2) instanceof RandomAccess));
+        fails(IllegalArgumentException.class, () -> CollectionSdk.partition(source, 0));
+        fails(NullPointerException.class, () -> CollectionSdk.partition(null, 2));
         fails(IndexOutOfBoundsException.class, () -> chunks.get(chunks.size()));
         List<Integer> huge = new java.util.AbstractList<>() {
             @Override public int size() { return Integer.MAX_VALUE; }
             @Override public Integer get(int index) { return index; }
         };
-        List<List<Integer>> last = M3IndexPartitions.view(huge, 3);
+        List<List<Integer>> last = IndexPartitions.view(huge, 3);
         eq(715827883, last.size());
         eq(1, last.get(last.size()-1).size());
     }
 
     private static void countedBag() {
-        LongBag bag = M3CollectionSdk.longBag();
+        LongBag bag = CollectionSdk.longBag();
         Map<Long,Long> reference = new HashMap<>();
         Random rng = new Random(0x4d3353444b424147L);
         long[] keys = {0L, Long.MIN_VALUE, Long.MAX_VALUE, -1L, 3L, 7L};
@@ -97,43 +97,43 @@ public final class M3SdkRecoverySelfTest {
     }
 
     private static void facades() {
-        ok(M3CollectionSdk.jdkArrayList() instanceof ArrayList<?>);
-        LongArrayList list=M3CollectionSdk.longArrayList();
+        ok(CollectionSdk.jdkArrayList() instanceof ArrayList<?>);
+        LongArrayList list=CollectionSdk.longArrayList();
         list.add(Long.MIN_VALUE);eq(Long.MIN_VALUE,list.get(0));
-        LongHashSet set=M3CollectionSdk.longHashSet();
+        LongHashSet set=CollectionSdk.longHashSet();
         ok(set.add(0L));ok(set.contains(0L));
-        LongLongHashMap map=M3CollectionSdk.longLongHashMap();
+        LongLongHashMap map=CollectionSdk.longLongHashMap();
         ok(map.put(0L,Long.MAX_VALUE));eq(Long.MAX_VALUE,map.getOrDefault(0L,-1L));
-        M3TreeMap<Integer,String> sortedMap=M3CollectionSdk.treeMap();
+        M3TreeMap<Integer,String> sortedMap=CollectionSdk.treeMap();
         sortedMap.put(3,"three");eq("three",sortedMap.get(3));
-        M3TreeSet<Integer> sortedSet=M3CollectionSdk.treeSet();
+        M3TreeSet<Integer> sortedSet=CollectionSdk.treeSet();
         ok(sortedSet.add(3));ok(sortedSet.contains(3));
         List<Integer> base=new ArrayList<>(List.of(1,2,3,4));
-        List<Integer> visible=M3CollectionSdk.readOnlyFilteredList(base,x->x%2==0);
+        List<Integer> visible=CollectionSdk.readOnlyFilteredList(base,x->x%2==0);
         eq(List.of(2,4),visible);
         fails(UnsupportedOperationException.class,()->visible.add(6));
-        List<Integer> mutable=M3CollectionSdk.mutableFilteredList(base,x->x%2==0);
+        List<Integer> mutable=CollectionSdk.mutableFilteredList(base,x->x%2==0);
         mutable.add(6);eq(List.of(2,4,6),mutable);
         TreeSet<Integer> owner=new TreeSet<>(Comparator.reverseOrder());
         owner.addAll(List.of(1,2,3,4,5,6));
-        NavigableSet<Integer> filtered=M3CollectionSdk.readOnlyFilteredNavigableSet(
+        NavigableSet<Integer> filtered=CollectionSdk.readOnlyFilteredNavigableSet(
                 owner,x->x%2==0);
         eq(List.of(6,4,2),new ArrayList<>(filtered));
         fails(UnsupportedOperationException.class,()->filtered.add(8));
-        NavigableSet<Integer> editable=M3CollectionSdk.mutableFilteredNavigableSet(
+        NavigableSet<Integer> editable=CollectionSdk.mutableFilteredNavigableSet(
                 owner,x->x%2==0);
         editable.add(8);eq(8,editable.first().intValue());
         TreeMap<Integer,String> tree=new TreeMap<>();
         tree.put(1,"a");tree.put(2,"bb");tree.put(3,"ccc");
-        NavigableMap<Integer,String> mapView=M3CollectionSdk.readOnlyFilteredNavigableMap(
+        NavigableMap<Integer,String> mapView=CollectionSdk.readOnlyFilteredNavigableMap(
                 tree,(k,v)->v.length()>1);
         eq(List.of(2,3),new ArrayList<>(mapView.keySet()));
         fails(UnsupportedOperationException.class,()->mapView.put(4,"dddd"));
-        NavigableMap<Integer,String> write=M3CollectionSdk.mutableFilteredNavigableMap(
+        NavigableMap<Integer,String> write=CollectionSdk.mutableFilteredNavigableMap(
                 tree,(k,v)->v.length()>1);
         eq("bb",write.remove(2));ok(!tree.containsKey(2));
         long[] data={7,3,7};
-        M3LongIndexProjection snap=M3CollectionSdk.indexedLongSnapshot(data);
+        M3LongIndexProjection snap=CollectionSdk.indexedLongSnapshot(data);
         data[0]=55;eq(7L,snap.get(0));
     }
 
@@ -141,11 +141,11 @@ public final class M3SdkRecoverySelfTest {
         int[] rows={42,19,42,-7,0},offsets={1,0,1,2,3};
         int[][] planes={{1,0x80000001,0,1},{2,2,2,0}};
         int[] required={0x80000001,2},excluded={4,0};
-        eq(new int[]{42,42},M3CollectionSdk.selectMaskedPath(rows,offsets,planes,
+        eq(new int[]{42,42},CollectionSdk.selectMaskedPath(rows,offsets,planes,
                 required,excluded,0,5,1,backend));
-        eq(new int[]{42,42},M3CollectionSdk.selectMaskedPath(rows,offsets,planes,
+        eq(new int[]{42,42},CollectionSdk.selectMaskedPath(rows,offsets,planes,
                 required,excluded,4,5,-1,backend));
-        fails(IndexOutOfBoundsException.class,()->M3CollectionSdk.selectMaskedPath(
+        fails(IndexOutOfBoundsException.class,()->CollectionSdk.selectMaskedPath(
                 rows,offsets,planes,required,excluded,4,2,1,backend));
     }
 

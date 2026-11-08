@@ -5,11 +5,11 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3FilteredNavigableSetRangeContract;
+import jdk.internal.m3.collections.FilteredNavigableSetRangeContract;
 
 final class M3FilteredNavigableSetRangeTest {
     @Test
     void comparatorNullableBackingAndBoundedNavigation() {
-        M3FilteredNavigableSetRangeContract.run();
+        FilteredNavigableSetRangeContract.run();
     }
 }

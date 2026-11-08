@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import jdk.internal.m3.collections.M3LazyElementFlags;
+import jdk.internal.m3.collections.LazyElementFlags;
 
 /** Independent comparator-and-sort oracle; usable with original OR candidate class. */
 //FLLDCIM: RELOCATE - donor blob e2027e901579 at fd9a233680b4; recipe m3/collections/recipe/transient-facade-20261106/relocate.py v4
@@ -22,7 +22,7 @@ public final class M3ResidentTrimPlannerTopKSelfTest {
     private static void verify(short[] flags, long[] ages, int count, int request) {
         List<Integer> candidates = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            if ((flags[i] & M3LazyElementFlags.PINNED) == 0) candidates.add(i);
+            if ((flags[i] & LazyElementFlags.PINNED) == 0) candidates.add(i);
         }
         candidates.sort((a, b) -> {
             int cmp = Long.compare(ages[a], ages[b]);
@@ -53,9 +53,9 @@ public final class M3ResidentTrimPlannerTopKSelfTest {
             for (int i = 0; i < n; i++) agesCombinations *= 3;
             for (int mask = 0; mask < (1 << n); mask++) {
                 short[] flags = new short[n + 2];
-                for (int i = 0; i < n; i++) if ((mask & (1 << i)) != 0) flags[i] = M3LazyElementFlags.PINNED;
-                flags[n] = M3LazyElementFlags.PINNED;
-                flags[n + 1] = M3LazyElementFlags.PINNED;
+                for (int i = 0; i < n; i++) if ((mask & (1 << i)) != 0) flags[i] = LazyElementFlags.PINNED;
+                flags[n] = LazyElementFlags.PINNED;
+                flags[n + 1] = LazyElementFlags.PINNED;
                 for (int ageMode = 0; ageMode < agesCombinations; ageMode++) {
                     long[] ages = new long[n + 2];
                     int digits = ageMode;
@@ -77,7 +77,7 @@ public final class M3ResidentTrimPlannerTopKSelfTest {
             short[] flags = new short[n + extra];
             long[] ages = new long[n + extra];
             for (int i = 0; i < flags.length; i++) {
-                flags[i] = random.nextInt(4) == 0 ? M3LazyElementFlags.PINNED : 0;
+                flags[i] = random.nextInt(4) == 0 ? LazyElementFlags.PINNED : 0;
                 ages[i] = random.nextBoolean() ? EXTRAS[random.nextInt(EXTRAS.length)] : random.nextLong();
             }
             int request = switch (round % 8) {
@@ -96,7 +96,7 @@ public final class M3ResidentTrimPlannerTopKSelfTest {
         short[] flags = new short[big];
         long[] ages = new long[big];
         for (int i = 0; i < big; i++) {
-            flags[i] = i % 7 == 0 ? M3LazyElementFlags.PINNED : 0;
+            flags[i] = i % 7 == 0 ? LazyElementFlags.PINNED : 0;
             ages[i] = (i % 23) - 11L;
         }
         for (int k : new int[] {0, 1, 2, 8, 100, 1000, 5000, 20000, 21000}) {

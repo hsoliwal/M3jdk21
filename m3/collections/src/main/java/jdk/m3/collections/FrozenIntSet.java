@@ -4,7 +4,7 @@
  */
 package jdk.m3.collections;
 
-import jdk.internal.m3.collections.M3NotYetReceived;
+import jdk.internal.m3.collections.NotYetReceived;
 
 /**
  * M3 five-library superset scaffold {@code FrozenIntSet}: API group {@code FROZEN_INT_SET} over arrays and state masks.
@@ -17,7 +17,7 @@ import jdk.internal.m3.collections.M3NotYetReceived;
  *
  * <p>DOOP mapping: lane kind INT; lanes {@code int[] valueLane}; offset scheme sorted ordinal slot; binary-search offsets; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link M3NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
+ * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
  * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
  */
 public final class FrozenIntSet {
@@ -42,41 +42,41 @@ public final class FrozenIntSet {
 
     /** JDK Set.copyOf (int lane) (scaffold: not yet received). */
     public static FrozenIntSet copyOf(int[] source) {
-        throw new M3NotYetReceived("M3FrozenIntSet.copyOf");
+        throw new NotYetReceived("M3FrozenIntSet.copyOf");
     }
 
     /** Set.size (scaffold: not yet received). */
     public int size() {
-        throw new M3NotYetReceived("M3FrozenIntSet.size");
+        throw new NotYetReceived("M3FrozenIntSet.size");
     }
 
     /** Set.contains (scaffold: not yet received). */
     public boolean contains(int value) {
-        throw new M3NotYetReceived("M3FrozenIntSet.contains");
+        throw new NotYetReceived("M3FrozenIntSet.contains");
     }
 
     /** sorted ordinal access (scaffold: not yet received). */
     public int get(int ordinal) {
-        throw new M3NotYetReceived("M3FrozenIntSet.get");
+        throw new NotYetReceived("M3FrozenIntSet.get");
     }
 
     /** Set.toArray (defensive copy) (scaffold: not yet received). */
     public int[] toArray() {
-        throw new M3NotYetReceived("M3FrozenIntSet.toArray");
+        throw new NotYetReceived("M3FrozenIntSet.toArray");
     }
 
     /** Iterable.forEach (scaffold: not yet received). */
     public void forEach(java.util.function.IntConsumer action) {
-        throw new M3NotYetReceived("M3FrozenIntSet.forEach");
+        throw new NotYetReceived("M3FrozenIntSet.forEach");
     }
 
     /** Set.iterator (ascending) (scaffold: not yet received). */
     public java.util.PrimitiveIterator.OfInt iterator() {
-        throw new M3NotYetReceived("M3FrozenIntSet.iterator");
+        throw new NotYetReceived("M3FrozenIntSet.iterator");
     }
 
     /** UOE contract once received (JEP269) (scaffold: not yet received). */
     public boolean add(int value) {
-        throw new M3NotYetReceived("M3FrozenIntSet.add");
+        throw new NotYetReceived("M3FrozenIntSet.add");
     }
 }

@@ -15,12 +15,12 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3ObservableListContract;
+import jdk.internal.m3.collections.ObservableListContract;
 
 /** Executes the standalone differential and observer contract in the owning Maven suite. */
 final class M3ObservableListTest {
     @Test
     void seededDifferentialAndNotificationOrder() {
-        M3ObservableListContract.main(new String[0]);
+        ObservableListContract.main(new String[0]);
     }
 }

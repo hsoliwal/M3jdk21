@@ -3,12 +3,12 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3TreeWindowShiftContract;
+import jdk.internal.m3.collections.TreeWindowShiftContract;
 
 /** Maven/JUnit discovery of the original M3 tree coordinate-shift oracle. */
 public final class M3TreeWindowShiftTest {
     @Test
     void primitiveIndexPreflightAndResidentHandleParity() {
-        M3TreeWindowShiftContract.main(new String[0]);
+        TreeWindowShiftContract.main(new String[0]);
     }
 }

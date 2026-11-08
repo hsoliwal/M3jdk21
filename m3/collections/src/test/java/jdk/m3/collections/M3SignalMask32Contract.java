@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import jdk.internal.m3.collections.M3SignalDimensions;
+import jdk.internal.m3.collections.SignalDimensions;
 
 /**
  * Independent JDK-comparator oracle for full-width mask and stable signal ordering.
@@ -58,12 +58,12 @@ public final class M3SignalMask32Contract {
         verify(columns, descending, states,
                 Integer.MIN_VALUE, Integer.MIN_VALUE, "contradictory");
         same(new int[] {0, 1, 3, 6, 7},
-                M3SignalDimensions.filtered32(
+                SignalDimensions.filtered32(
                         new double[][] {{1, 1, 1, 1, 1, 1, 1, 1}},
                         new boolean[] {false}, states, Integer.MIN_VALUE, 2,
                         M3SignalOrder.Backend.JAVA),
                 "stable equal-signal physical order");
-        var gap = M3SignalDimensions.compare(
+        var gap = SignalDimensions.compare(
                 new double[][] {{3.0, 9.0}}, new boolean[] {false}, 0, 1);
         check(gap.sign() < 0 && gap.numericSeparations()[0] == 6.0,
                 "signed order and numeric separation remain distinct");
@@ -109,7 +109,7 @@ public final class M3SignalMask32Contract {
         int[] originalStates = states.clone();
 
         int[] expected = oracle(columns, descending, states, required, excluded);
-        int[] actual = M3SignalDimensions.filtered32(
+        int[] actual = SignalDimensions.filtered32(
                 columns, descending, states, required, excluded,
                 M3SignalOrder.Backend.JAVA);
         same(expected, actual, label + "/dimensions");
@@ -125,7 +125,7 @@ public final class M3SignalMask32Contract {
                 label + "/retained primitive row payload");
 
         if (M3SignalOrderNative.available()) {
-            same(expected, M3SignalDimensions.filtered32(
+            same(expected, SignalDimensions.filtered32(
                     columns, descending, states, required, excluded,
                     M3SignalOrder.Backend.NATIVE_REQUIRED),
                     label + "/dimensions JNI");
@@ -170,14 +170,14 @@ public final class M3SignalMask32Contract {
                 scalar, null, 0, 0, true, M3SignalOrder.Backend.JAVA));
         refuses(IllegalArgumentException.class, () -> M3SignalOrder.filtered32(
                 scalar, new int[1], 0, 0, true, M3SignalOrder.Backend.JAVA));
-        refuses(NullPointerException.class, () -> M3SignalDimensions.filtered32(
+        refuses(NullPointerException.class, () -> SignalDimensions.filtered32(
                 dims, direction, null, 0, 0, M3SignalOrder.Backend.JAVA));
-        refuses(IllegalArgumentException.class, () -> M3SignalDimensions.filtered32(
+        refuses(IllegalArgumentException.class, () -> SignalDimensions.filtered32(
                 dims, direction, new int[1], 0, 0, M3SignalOrder.Backend.JAVA));
         refuses(NullPointerException.class, () -> M3SignalOrder.filtered32(
                 scalar, new int[2], 0, 0, true, null));
         if (!M3SignalOrderNative.available()) {
-            refuses(UnsatisfiedLinkError.class, () -> M3SignalDimensions.filtered32(
+            refuses(UnsatisfiedLinkError.class, () -> SignalDimensions.filtered32(
                     dims, direction, new int[2], 0, 0,
                     M3SignalOrder.Backend.NATIVE_REQUIRED));
             refuses(UnsatisfiedLinkError.class, () -> M3SignalOrder.filtered32(

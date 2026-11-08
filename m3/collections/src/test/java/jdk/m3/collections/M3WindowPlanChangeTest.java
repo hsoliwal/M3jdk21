@@ -3,12 +3,12 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3WindowPlanChangeContract;
+import jdk.internal.m3.collections.WindowPlanChangeContract;
 
 /** Discovery hook: run the complete strict Java21 model-to-viewport delta oracle. */
 public final class M3WindowPlanChangeTest {
     @Test
     public void windowChangeProjectionParity() {
-        M3WindowPlanChangeContract.main(new String[0]);
+        WindowPlanChangeContract.main(new String[0]);
     }
 }

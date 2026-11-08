@@ -9,7 +9,7 @@ import java.util.Spliterator;
 import java.util.TreeSet;
 import java.util.function.LongPredicate;
 import java.util.stream.StreamSupport;
-import jdk.internal.m3.collections.M3LongCompositeViews;
+import jdk.internal.m3.collections.LongCompositeViews;
 
 /** Bounded contract oracle: stream/spliterator acquisition never opens source iterators. */
 public final class M3LongCompositeLateBindSelfTest {
@@ -28,7 +28,7 @@ public final class M3LongCompositeLateBindSelfTest {
     private static void lazyUnion() {
         CountedSorted left = new CountedSorted(1, 3);
         CountedSorted right = new CountedSorted(2, 3);
-        LongSortedSet union = M3LongCompositeViews.sortedUnion(left, right);
+        LongSortedSet union = LongCompositeViews.sortedUnion(left, right);
         var stream = union.longStream();
         Spliterator.OfLong direct = union.longSpliterator();
         eq(left.iteratorCalls + right.iteratorCalls, 0);
@@ -46,13 +46,13 @@ public final class M3LongCompositeLateBindSelfTest {
         left.add(5);
         arr(StreamSupport.longStream(direct, false).toArray(), 0, 1, 2, 3, 4, 5);
         eq(left.iteratorCalls + right.iteratorCalls, 4);
-        arr(M3LongCompositeViews.sortedUnion().longStream().toArray());
+        arr(LongCompositeViews.sortedUnion().longStream().toArray());
     }
 
     private static void lazyConcatenation() {
         CountedSorted first = new CountedSorted(1, 3);
         CountedSorted second = new CountedSorted(3, 5);
-        var concat = M3LongCompositeViews.concat(first, second);
+        var concat = LongCompositeViews.concat(first, second);
         var stream = concat.longStream();
         Spliterator.OfLong cursor = concat.longSpliterator();
         eq(first.iteratorCalls + second.iteratorCalls, 0);
@@ -61,15 +61,15 @@ public final class M3LongCompositeLateBindSelfTest {
         arr(stream.toArray(), 0, 1, 3, 3, 4, 5);
         first.add(-1);
         arr(StreamSupport.longStream(cursor, false).toArray(), -1, 0, 1, 3, 3, 4, 5);
-        arr(M3LongCompositeViews.concat().longStream().toArray());
+        arr(LongCompositeViews.concat().longStream().toArray());
     }
 
     private static void lazySetAlgebra() {
         CountedSorted left = new CountedSorted(1, 2, 4);
         CountedSorted right = new CountedSorted(2, 4);
-        var intersection = M3LongCompositeViews.sortedIntersection(left, right).longSpliterator();
-        var difference = M3LongCompositeViews.sortedDifference(left, right).longSpliterator();
-        var xor = M3LongCompositeViews.sortedSymmetricDifference(left, right).longSpliterator();
+        var intersection = LongCompositeViews.sortedIntersection(left, right).longSpliterator();
+        var difference = LongCompositeViews.sortedDifference(left, right).longSpliterator();
+        var xor = LongCompositeViews.sortedSymmetricDifference(left, right).longSpliterator();
         eq(left.iteratorCalls + right.iteratorCalls, 0);
         right.add(1);
         right.add(6);
@@ -82,7 +82,7 @@ public final class M3LongCompositeLateBindSelfTest {
     private static void mutationAfterBindingIsStillFailFast() {
         CountedSorted first = new CountedSorted(1, 3, 5);
         CountedSorted second = new CountedSorted(2, 4, 6);
-        var cursor = M3LongCompositeViews.sortedUnion(first, second).longSpliterator();
+        var cursor = LongCompositeViews.sortedUnion(first, second).longSpliterator();
         check(cursor.tryAdvance((long value) -> eq(value, 1)));
         first.add(7);
         boolean failed = false;
@@ -105,7 +105,7 @@ public final class M3LongCompositeLateBindSelfTest {
                 if ((i & 1) == 0) a.add(v); else b.add(v);
                 reference.add(v);
             }
-            var stream = M3LongCompositeViews.sortedUnion(a, b).longStream();
+            var stream = LongCompositeViews.sortedUnion(a, b).longStream();
             eq(a.iteratorCalls + b.iteratorCalls, 0);
             long mutation = round - 128L;
             a.add(mutation);

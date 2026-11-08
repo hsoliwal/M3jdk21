@@ -16,22 +16,22 @@ package jdk.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3RangeSet;
-import jdk.internal.m3.collections.M3ScrollMetrics;
-import jdk.internal.m3.collections.M3TreeWindowPlan;
-import jdk.internal.m3.collections.M3WindowPlan;
-import jdk.internal.m3.collections.M3WindowPlanner;
-import jdk.internal.m3.collections.M3WindowRuntime;
+import jdk.internal.m3.collections.range.RangeSet;
+import jdk.internal.m3.collections.ScrollMetrics;
+import jdk.internal.m3.collections.TreeWindowPlan;
+import jdk.internal.m3.collections.WindowPlan;
+import jdk.internal.m3.collections.WindowPlanner;
+import jdk.internal.m3.collections.WindowRuntime;
 
 /** Edge tests of the viewport core: selection representations, flat window plan, plane bands, topology, projection. */
 public class M3WindowEdgesTest {
-	private static void selectEveryOther (M3RangeSet model, int count, boolean selected) {
+	private static void selectEveryOther (RangeSet model, int count, boolean selected) {
 		for (int i = 0; i < count; i += 2) model.setSelected (i, selected);
 	}
 
 	@Test
 	public void rangesOnlyPolicyNeverSwitches () {
-		M3RangeSet model = new M3RangeSet (false);
+		RangeSet model = new RangeSet (false);
 		model.setLogicalCount (4000);
 		selectEveryOther (model, 4000, true);
 		assertFalse (model.bitsMode ());
@@ -41,7 +41,7 @@ public class M3WindowEdgesTest {
 
 	@Test
 	public void eagerPolicyBitsForm () {
-		M3RangeSet model = new M3RangeSet (true);
+		RangeSet model = new RangeSet (true);
 		model.setLogicalCount (100);
 		selectEveryOther (model, 100, true);
 		assertTrue (model.bitsMode ());
@@ -78,7 +78,7 @@ public class M3WindowEdgesTest {
 
 	@Test
 	public void complementConvertsToBits () {
-		M3RangeSet model = new M3RangeSet (true);
+		RangeSet model = new RangeSet (true);
 		model.setLogicalCount (100);
 		model.selectAll ();
 		assertTrue (model.complementMode ());
@@ -92,7 +92,7 @@ public class M3WindowEdgesTest {
 
 	@Test
 	public void rowWindowPlanEdges () {
-		M3WindowPlan plan = new M3WindowPlan ();
+		WindowPlan plan = new WindowPlan ();
 		assertThrows (IllegalArgumentException.class, () -> plan.plan (-1, 1));
 		assertThrows (IllegalArgumentException.class, () -> plan.plan (0, -1));
 		assertThrows (IllegalArgumentException.class, () -> plan.plan (Integer.MAX_VALUE, 1));
@@ -168,7 +168,7 @@ public class M3WindowEdgesTest {
 
 	@Test
 	public void remainingDecisionEdges () {
-		M3WindowPlanner.HorizontalWindow window = new M3WindowPlanner.HorizontalWindow ();
+		WindowPlanner.HorizontalWindow window = new WindowPlanner.HorizontalWindow ();
 		window.setColumns (new long [] {10, 20}, new int [] {0, 1});
 		assertTrue (window.setColumns (new long [] {10, 20}, new int [] {1, 0}), "same widths, new order");
 		assertTrue (window.setViewport (0, 50, 0, false));
@@ -176,7 +176,7 @@ public class M3WindowEdgesTest {
 		assertTrue (window.setViewport (0, 50, 4, true), "direction change");
 		assertFalse (window.ensureColumnVisible (0), "a column inside the viewport needs no move");
 
-		M3WindowRuntime.RowWindow rows = new M3WindowRuntime.RowWindow ();
+		WindowRuntime.RowWindow rows = new WindowRuntime.RowWindow ();
 		rows.setLogicalCount (6);
 		rows.setViewport (4, 2);
 		long g = rows.generation ();
@@ -186,41 +186,41 @@ public class M3WindowEdgesTest {
 		rows.setViewport (4, 1);
 		assertEquals (1, rows.visibleCount ());
 
-		M3WindowRuntime.PixelLayout pixels = M3WindowRuntime.solvePixels (100, 50, 200, 10, 10, 12,
-				M3WindowRuntime.AUTO, M3WindowRuntime.NEVER);
+		WindowRuntime.PixelLayout pixels = WindowRuntime.solvePixels (100, 50, 200, 10, 10, 12,
+				WindowRuntime.AUTO, WindowRuntime.NEVER);
 		assertTrue (pixels.horizontalVisible ());
 		assertFalse (pixels.cornerVisible ());
-		M3WindowRuntime.RowLayout layout = M3WindowRuntime.solveRows (100, 50, 0, 1, 10, 10, 10, 12,
-				M3WindowRuntime.ALWAYS, M3WindowRuntime.NEVER);
+		WindowRuntime.RowLayout layout = WindowRuntime.solveRows (100, 50, 0, 1, 10, 10, 10, 12,
+				WindowRuntime.ALWAYS, WindowRuntime.NEVER);
 		assertTrue (layout.horizontalVisible ());
 		assertFalse (layout.verticalVisible ());
 		assertFalse (layout.cornerVisible ());
 
-		M3WindowPlan plan = new M3WindowPlan ();
+		WindowPlan plan = new WindowPlan ();
 		plan.plan (10, 5);
 		plan.commit ();
 		assertEquals (0, plan.inserted (10, 1), "insert at the first resident row grows the window");
 		assertEquals (6, plan.size ());
 
-		M3ScrollMetrics single = new M3ScrollMetrics ();
+		ScrollMetrics single = new ScrollMetrics ();
 		single.configure (1, 10, 0);
 		assertEquals (1L, single.maxTopRow ());
 		assertEquals (1, single.thumb ());
 		assertEquals (0, single.selectionForTopRow (1), "a one-row bar with a full thumb cannot move");
 
-		assertFalse (new M3RangeSet ().bitmapMode ());
-		assertFalse (new M3RangeSet ().bitsMode ());
+		assertFalse (new RangeSet ().bitmapMode ());
+		assertFalse (new RangeSet ().bitsMode ());
 	}
 
 	@Test
 	public void projectionRowAndResidentKeys () {
 		assertTrue (new M3TreeProjection.Row (M3TreeTopology.ROOT, 0, 5, 0).materialized ());
 		assertFalse (new M3TreeProjection.Row (M3TreeTopology.ROOT, 0, -1, 0).materialized ());
-		M3TreeWindowPlan plan = new M3TreeWindowPlan ();
+		TreeWindowPlan plan = new TreeWindowPlan ();
 		int [] parents = {M3TreeTopology.ROOT}, indices = {0}, physical = {-1};
 		plan.plan (1, parents, indices, physical);
 		plan.commit (1, parents, indices, physical, new long [] {77});
-		assertEquals (M3TreeWindowPlan.key (M3TreeTopology.ROOT, 0), plan.keyOf (0));
+		assertEquals (TreeWindowPlan.key (M3TreeTopology.ROOT, 0), plan.keyOf (0));
 		assertThrows (RuntimeException.class, () -> plan.keyOf (1));
 	}
 }

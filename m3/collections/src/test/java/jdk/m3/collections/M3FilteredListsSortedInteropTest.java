@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Spliterator;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3FilteredLists;
+import jdk.internal.m3.collections.FilteredLists;
 
 /** JDK21 sorted-source interop; filtering never claims a sorted List spliterator. */
 class M3FilteredListsSortedInteropTest {
@@ -16,7 +16,7 @@ class M3FilteredListsSortedInteropTest {
         var sorted = new M3TreeSet<Integer>(Comparator.reverseOrder());
         sorted.addAll(List.of(1, 2, 3, 4, 7, 8, 9));
         List<Integer> backing = new ArrayList<>(sorted);
-        List<Integer> view = M3FilteredLists.filtered(backing, v -> (v & 1) == 0);
+        List<Integer> view = FilteredLists.filtered(backing, v -> (v & 1) == 0);
         assertEquals(List.of(8, 4, 2), view);
         assertEquals(List.of(2, 4, 8), view.reversed());
         assertEquals(0, view.spliterator().characteristics() &
@@ -31,7 +31,7 @@ class M3FilteredListsSortedInteropTest {
 
     @Test void readonlyEmptyAndNestedReversedMutatorsRefuse() {
         List<Integer> backing = new ArrayList<>();
-        List<Integer> readonly = M3FilteredLists.readOnlyFiltered(backing, n -> n > 0);
+        List<Integer> readonly = FilteredLists.readOnlyFiltered(backing, n -> n > 0);
         assertThrows(UnsupportedOperationException.class, readonly::removeFirst);
         assertThrows(UnsupportedOperationException.class, () -> readonly.addAll(List.of()));
         assertThrows(UnsupportedOperationException.class, () -> readonly.reversed().add(1));

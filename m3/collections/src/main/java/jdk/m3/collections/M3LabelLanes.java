@@ -16,7 +16,7 @@ package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;
-import jdk.internal.m3.collections.M3ShortLabel;
+import jdk.internal.m3.collections.ShortLabel;
 
 /**
  * The label lanes of one row model: one label per cell.
@@ -31,7 +31,7 @@ import jdk.internal.m3.collections.M3ShortLabel;
  *
  * <p>Two lane widths. Pooled lanes ({@code immediates == false}) keep an
  * {@code int} pool id per cell (4 bytes). Immediate lanes keep an
- * {@link M3ShortLabel} {@code long} per cell (8 bytes): short labels carry
+ * {@link ShortLabel} {@code long} per cell (8 bytes): short labels carry
  * their own text and need no pool entry, longer labels hold a pool id. Pick
  * immediate lanes for columns whose labels are mostly short and distinct
  * (severities, units, locations, extensions); the extra 4 bytes per cell pay
@@ -81,7 +81,7 @@ public final class M3LabelLanes {
 		return columns;
 	}
 
-	/** Answers whether the lanes hold {@link M3ShortLabel} values. */
+	/** Answers whether the lanes hold {@link ShortLabel} values. */
 	public boolean immediates () {
 		return immediates;
 	}
@@ -100,7 +100,7 @@ public final class M3LabelLanes {
 		for (int c = 0; c < columns; c++) {
 			if (immediates) {
 				System.arraycopy (labels [c], row, labels [c], row + count, rows - row);
-				Arrays.fill (labels [c], row, row + count, M3ShortLabel.EMPTY);
+				Arrays.fill (labels [c], row, row + count, ShortLabel.EMPTY);
 			} else {
 				System.arraycopy (ids [c], row, ids [c], row + count, rows - row);
 				Arrays.fill (ids [c], row, row + count, M3LabelPool.EMPTY);
@@ -127,8 +127,8 @@ public final class M3LabelLanes {
 	 */
 	public void setText (int row, int column, String text) {
 		check (row, column);
-		long label = immediates ? M3ShortLabel.pack (text) : M3ShortLabel.NONE;
-		if (label == M3ShortLabel.NONE) label = pool.intern (text);
+		long label = immediates ? ShortLabel.pack (text) : ShortLabel.NONE;
+		if (label == ShortLabel.NONE) label = pool.intern (text);
 		release (get (column, row));
 		put (column, row, label);
 	}
@@ -141,7 +141,7 @@ public final class M3LabelLanes {
 
 	/** The pool id of a cell; refused for a cell that holds an immediate label. */
 	public int labelId (int row, int column) {
-		return M3ShortLabel.poolId (label (row, column));
+		return ShortLabel.poolId (label (row, column));
 	}
 
 	/** Text of a cell. Pooled labels answer their String facade; immediates a new String. */
@@ -151,13 +151,13 @@ public final class M3LabelLanes {
 
 	/** Text of {@code label} of this model. */
 	public String text (long label) {
-		return M3ShortLabel.isImmediate (label) ? M3ShortLabel.toString (label) : pool.text (M3ShortLabel.poolId (label));
+		return ShortLabel.isImmediate (label) ? ShortLabel.toString (label) : pool.text (ShortLabel.poolId (label));
 	}
 
 	/** Number of characters of a cell's text. */
 	public int length (int row, int column) {
 		long label = label (row, column);
-		return M3ShortLabel.isImmediate (label) ? M3ShortLabel.length (label) : pool.length ((int) label);
+		return ShortLabel.isImmediate (label) ? ShortLabel.length (label) : pool.length ((int) label);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public final class M3LabelLanes {
 
 	/** Copies the text of {@code label} of this model into {@code dst}; returns its length. */
 	public int getChars (long label, char [] dst, int offset) {
-		return M3ShortLabel.isImmediate (label) ? M3ShortLabel.getChars (label, dst, offset) : pool.getChars (M3ShortLabel.poolId (label), dst, offset);
+		return ShortLabel.isImmediate (label) ? ShortLabel.getChars (label, dst, offset) : pool.getChars (ShortLabel.poolId (label), dst, offset);
 	}
 
 	/** Extent of a cell's label in {@code fontId}, measured once per distinct label. */
@@ -191,7 +191,7 @@ public final class M3LabelLanes {
 		Objects.checkIndex (column, columns);
 		int count = 0;
 		for (int r = 0; r < rows && immediates; r++) {
-			if (M3ShortLabel.isImmediate (labels [column] [r])) count++;
+			if (ShortLabel.isImmediate (labels [column] [r])) count++;
 		}
 		return count;
 	}
@@ -221,7 +221,7 @@ public final class M3LabelLanes {
 	}
 
 	private void release (long label) {
-		if (!M3ShortLabel.isImmediate (label)) pool.release ((int) label);
+		if (!ShortLabel.isImmediate (label)) pool.release ((int) label);
 	}
 
 	private void check (int row, int column) {

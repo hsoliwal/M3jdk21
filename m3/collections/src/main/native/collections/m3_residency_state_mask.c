@@ -19,7 +19,7 @@ static int selected(jlong bits, jbyte state, jlong required,
             && m3_jni_matches_u64(bits, required, forbidden);
 }
 
-JNIEXPORT jintArray JNICALL Java_jdk_internal_m3_collections_M3ResidencyStateMaskIndex_select0(
+JNIEXPORT jintArray JNICALL Java_jdk_internal_m3_collections_ResidencyStateMaskIndex_select0(
         JNIEnv *env, jclass owner, jintArray coordinates, jlongArray words,
         jbyteArray lifecycle, jlong required, jlong forbidden, jint allowed_states) {
     (void) owner;

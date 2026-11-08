@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3CursorPagedPrimitiveTreeProvider;
-import jdk.internal.m3.collections.M3PagedPrimitiveTreeProvider;
-import jdk.internal.m3.collections.M3ProviderBackedPrimitiveLongTree;
-import jdk.internal.m3.collections.M3ProviderLoadException;
+import jdk.internal.m3.collections.CursorPagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.PagedPrimitiveTreeProvider;
+import jdk.internal.m3.collections.ProviderBackedPrimitiveLongTree;
+import jdk.internal.m3.collections.ProviderLoadException;
 
 class M3ProviderBackedPrimitiveLongTreeTest {
 
@@ -23,8 +23,8 @@ class M3ProviderBackedPrimitiveLongTreeTest {
     @Test
     void supportsLongNodeIdsAndOpaqueCursorsBeyondSignedIntRange() {
         ModelProvider provider = new ModelProvider();
-        M3ProviderBackedPrimitiveLongTree tree =
-                new M3ProviderBackedPrimitiveLongTree(
+        ProviderBackedPrimitiveLongTree tree =
+                new ProviderBackedPrimitiveLongTree(
                         13, 8, 12,
                         provider,
                         2,
@@ -38,7 +38,7 @@ class M3ProviderBackedPrimitiveLongTreeTest {
 
         assertEquals(CHILD_1, tree.firstLoadedChild(ROOT));
         assertEquals(CHILD_2, tree.nextLoadedSibling(CHILD_1));
-        assertEquals(M3ProviderBackedPrimitiveLongTree.NO_NODE, tree.nextLoadedSibling(CHILD_2));
+        assertEquals(ProviderBackedPrimitiveLongTree.NO_NODE, tree.nextLoadedSibling(CHILD_2));
         assertEquals(ROOT, tree.parentOf(CHILD_1));
 
         assertFalse(tree.isMaterialized(CHILD_1));
@@ -47,7 +47,7 @@ class M3ProviderBackedPrimitiveLongTreeTest {
 
         assertEquals(3L, tree.ensureLoadedChildren(ROOT, 3L, 2));
         assertTrue(tree.childrenComplete(ROOT));
-        assertEquals(M3CursorPagedPrimitiveTreeProvider.END_CURSOR, tree.nextChildCursor(ROOT));
+        assertEquals(CursorPagedPrimitiveTreeProvider.END_CURSOR, tree.nextChildCursor(ROOT));
         assertEquals(CHILD_3, tree.loadedChildAt(ROOT, 2L));
 
         List<Long> children = new ArrayList<>();
@@ -62,8 +62,8 @@ class M3ProviderBackedPrimitiveLongTreeTest {
     @Test
     void everyParentOwnsAnIndependentOpaqueCursor() {
         ModelProvider provider = new ModelProvider();
-        M3ProviderBackedPrimitiveLongTree tree =
-                new M3ProviderBackedPrimitiveLongTree(
+        ProviderBackedPrimitiveLongTree tree =
+                new ProviderBackedPrimitiveLongTree(
                         13, 8, 12,
                         provider,
                         2,
@@ -74,7 +74,7 @@ class M3ProviderBackedPrimitiveLongTreeTest {
 
         assertEquals(0L, tree.loadedChildCount(CHILD_1));
         assertEquals(1, tree.loadNextChildPage(CHILD_1));
-        assertEquals(M3CursorPagedPrimitiveTreeProvider.END_CURSOR, tree.nextChildCursor(CHILD_1));
+        assertEquals(CursorPagedPrimitiveTreeProvider.END_CURSOR, tree.nextChildCursor(CHILD_1));
         assertEquals(GRANDCHILD, tree.firstLoadedChild(CHILD_1));
         assertEquals(CHILD_1, tree.parentOf(GRANDCHILD));
 
@@ -84,8 +84,8 @@ class M3ProviderBackedPrimitiveLongTreeTest {
     @Test
     void relationshipInvalidationPreservesMaterializedPayload() {
         ModelProvider provider = new ModelProvider();
-        M3ProviderBackedPrimitiveLongTree tree =
-                new M3ProviderBackedPrimitiveLongTree(
+        ProviderBackedPrimitiveLongTree tree =
+                new ProviderBackedPrimitiveLongTree(
                         13, 8, 12,
                         provider,
                         2,
@@ -96,9 +96,9 @@ class M3ProviderBackedPrimitiveLongTreeTest {
         assertTrue(tree.isMaterialized(CHILD_1));
 
         tree.invalidateChildren(ROOT);
-        assertEquals(M3ProviderBackedPrimitiveLongTree.NO_NODE, tree.firstLoadedChild(ROOT));
+        assertEquals(ProviderBackedPrimitiveLongTree.NO_NODE, tree.firstLoadedChild(ROOT));
         assertEquals(0L, tree.loadedChildCount(ROOT));
-        assertEquals(M3ProviderBackedPrimitiveLongTree.NO_NODE, tree.parentOf(CHILD_1));
+        assertEquals(ProviderBackedPrimitiveLongTree.NO_NODE, tree.parentOf(CHILD_1));
         assertTrue(tree.isMaterialized(CHILD_1));
 
         assertEquals(2, tree.loadNextChildPage(ROOT));
@@ -107,7 +107,7 @@ class M3ProviderBackedPrimitiveLongTreeTest {
 
     @Test
     void nonProgressCursorAndAncestorCycleFailBeforeMutation() {
-        M3CursorPagedPrimitiveTreeProvider noProgress = new M3CursorPagedPrimitiveTreeProvider() {
+        CursorPagedPrimitiveTreeProvider noProgress = new CursorPagedPrimitiveTreeProvider() {
             @Override
             public void load(long rowId, long[] target) {
                 target[0] = rowId;
@@ -121,30 +121,30 @@ class M3ProviderBackedPrimitiveLongTreeTest {
                 return 0;
             }
         };
-        M3ProviderBackedPrimitiveLongTree noProgressTree =
-                new M3ProviderBackedPrimitiveLongTree(
+        ProviderBackedPrimitiveLongTree noProgressTree =
+                new ProviderBackedPrimitiveLongTree(
                         13, 8, 12,
                         noProgress,
                         2,
                         PrimitiveKind.LONG);
 
         assertThrows(
-                M3ProviderLoadException.class,
+                ProviderLoadException.class,
                 () -> noProgressTree.loadNextChildPage(ROOT));
-        assertEquals(M3ProviderBackedPrimitiveLongTree.NO_NODE,
+        assertEquals(ProviderBackedPrimitiveLongTree.NO_NODE,
                 noProgressTree.firstLoadedChild(ROOT));
 
-        M3CursorPagedPrimitiveTreeProvider cycle = new M3CursorPagedPrimitiveTreeProvider() {
+        CursorPagedPrimitiveTreeProvider cycle = new CursorPagedPrimitiveTreeProvider() {
             @Override
             public void load(long rowId, long[] target) {
                 target[0] = rowId;
             }
 
             @Override
-            public M3PagedPrimitiveTreeProvider.ChildHint childHint(long nodeId) {
+            public PagedPrimitiveTreeProvider.ChildHint childHint(long nodeId) {
                 return nodeId == ROOT || nodeId == CHILD_1
-                        ? M3PagedPrimitiveTreeProvider.ChildHint.SOME
-                        : M3PagedPrimitiveTreeProvider.ChildHint.NONE;
+                        ? PagedPrimitiveTreeProvider.ChildHint.SOME
+                        : PagedPrimitiveTreeProvider.ChildHint.NONE;
             }
 
             @Override
@@ -160,8 +160,8 @@ class M3ProviderBackedPrimitiveLongTreeTest {
                 return 1;
             }
         };
-        M3ProviderBackedPrimitiveLongTree cycleTree =
-                new M3ProviderBackedPrimitiveLongTree(
+        ProviderBackedPrimitiveLongTree cycleTree =
+                new ProviderBackedPrimitiveLongTree(
                         13, 8, 12,
                         cycle,
                         2,
@@ -169,13 +169,13 @@ class M3ProviderBackedPrimitiveLongTreeTest {
         assertEquals(1, cycleTree.loadNextChildPage(ROOT));
 
         assertThrows(
-                M3ProviderLoadException.class,
+                ProviderLoadException.class,
                 () -> cycleTree.loadNextChildPage(CHILD_1));
-        assertEquals(M3ProviderBackedPrimitiveLongTree.NO_NODE,
+        assertEquals(ProviderBackedPrimitiveLongTree.NO_NODE,
                 cycleTree.firstLoadedChild(CHILD_1));
     }
 
-    private static final class ModelProvider implements M3CursorPagedPrimitiveTreeProvider {
+    private static final class ModelProvider implements CursorPagedPrimitiveTreeProvider {
         int rowLoads;
         int pageLoads;
 
@@ -187,10 +187,10 @@ class M3ProviderBackedPrimitiveLongTreeTest {
         }
 
         @Override
-        public M3PagedPrimitiveTreeProvider.ChildHint childHint(long nodeId) {
+        public PagedPrimitiveTreeProvider.ChildHint childHint(long nodeId) {
             return nodeId == ROOT || nodeId == CHILD_1
-                    ? M3PagedPrimitiveTreeProvider.ChildHint.SOME
-                    : M3PagedPrimitiveTreeProvider.ChildHint.NONE;
+                    ? PagedPrimitiveTreeProvider.ChildHint.SOME
+                    : PagedPrimitiveTreeProvider.ChildHint.NONE;
         }
 
         @Override

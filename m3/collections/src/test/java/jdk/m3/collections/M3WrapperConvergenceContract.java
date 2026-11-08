@@ -19,7 +19,7 @@ import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import jdk.internal.m3.collections.M3FilteredLists;
+import jdk.internal.m3.collections.FilteredLists;
 
 /**
  * Frozen Java 21 wrapper counterexamples and contract checks.
@@ -66,7 +66,7 @@ public final class M3WrapperConvergenceContract {
         String second = new String("equal");
         List<String> owner = new ArrayList<>(Arrays.asList("hidden", null, first, second));
         AtomicInteger calls = new AtomicInteger();
-        List<String> selected = M3FilteredLists.readOnlyFiltered(owner, value -> {
+        List<String> selected = FilteredLists.readOnlyFiltered(owner, value -> {
             calls.incrementAndGet();
             return value == null || value == first || value == second;
         });
@@ -87,7 +87,7 @@ public final class M3WrapperConvergenceContract {
         same(first, owner.get(2), "first owner identity retained");
         same(second, owner.get(3), "second owner identity retained");
 
-        List<Integer> empty = M3FilteredLists.readOnlyFiltered(new ArrayList<>(), value -> true);
+        List<Integer> empty = FilteredLists.readOnlyFiltered(new ArrayList<>(), value -> true);
         failure(UnsupportedOperationException.class, empty.iterator()::remove,
                 "empty ordinary iterator removal");
         failure(UnsupportedOperationException.class, empty.reversed().iterator()::remove,
@@ -106,7 +106,7 @@ public final class M3WrapperConvergenceContract {
             if ((index & 1) == 0) expected.add(index);
         }
         AtomicInteger calls = new AtomicInteger();
-        List<Integer> selected = M3FilteredLists.readOnlyFiltered(owner, value -> {
+        List<Integer> selected = FilteredLists.readOnlyFiltered(owner, value -> {
             calls.incrementAndGet();
             return (value & 1) == 0;
         });
@@ -129,7 +129,7 @@ public final class M3WrapperConvergenceContract {
         require(calls.get() <= 3 * length + 2,
                 "toArray permits size preflight plus linear traversal, actual=" + calls.get());
 
-        List<Integer> linked = M3FilteredLists.readOnlyFiltered(
+        List<Integer> linked = FilteredLists.readOnlyFiltered(
                 new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), value -> (value & 1) == 0);
         equal(List.of(2, 4, 6), collect(linked.iterator()), "linked owner iterator");
         equal(List.of(6, 4, 2), collect(linked.reversed().iterator()), "reversed iterator");
@@ -163,8 +163,8 @@ public final class M3WrapperConvergenceContract {
             calls.add(value);
             return value == null || (value & 1) == 0;
         };
-        List<Integer> selected = candidate ? M3FilteredLists.readOnlyFiltered(owner, predicate)
-                : baselineReadOnly(M3FilteredLists.filtered(owner, predicate));
+        List<Integer> selected = candidate ? FilteredLists.readOnlyFiltered(owner, predicate)
+                : baselineReadOnly(FilteredLists.filtered(owner, predicate));
         ArrayList<Object> trace = new ArrayList<>();
         Iterator<Integer> cursor = selected.iterator();
         trace.add(calls.size());
@@ -205,8 +205,8 @@ public final class M3WrapperConvergenceContract {
             if (value == 4) throw marker;
             return (value & 1) == 0;
         };
-        List<Integer> selected = candidate ? M3FilteredLists.readOnlyFiltered(owner, predicate)
-                : baselineReadOnly(M3FilteredLists.filtered(owner, predicate));
+        List<Integer> selected = candidate ? FilteredLists.readOnlyFiltered(owner, predicate)
+                : baselineReadOnly(FilteredLists.filtered(owner, predicate));
         ArrayList<Object> trace = new ArrayList<>();
         Iterator<Integer> cursor = selected.iterator();
         trace.add(calls.size());
@@ -242,7 +242,7 @@ public final class M3WrapperConvergenceContract {
 
     private static void readOnlyFailureContracts() {
         ArrayList<Integer> owner = new ArrayList<>(List.of(1, 2, 3, 4));
-        List<Integer> selected = M3FilteredLists.readOnlyFiltered(owner, value -> (value & 1) == 0);
+        List<Integer> selected = FilteredLists.readOnlyFiltered(owner, value -> (value & 1) == 0);
         Iterator<Integer> cursor = selected.iterator();
         equal(2, cursor.next(), "fail-fast first member");
         owner.add(6);
@@ -253,7 +253,7 @@ public final class M3WrapperConvergenceContract {
 
         IllegalStateException marker = new IllegalStateException("stable predicate failure");
         ArrayList<Integer> tape = new ArrayList<>();
-        List<Integer> failed = M3FilteredLists.readOnlyFiltered(
+        List<Integer> failed = FilteredLists.readOnlyFiltered(
                 new ArrayList<>(List.of(1, 2, 4, 6)), value -> {
                     tape.add(value);
                     if (value == 4) throw marker;

@@ -20,7 +20,7 @@
 package jdk.m3.collections;
 
 import java.util.*;
-import jdk.internal.m3.collections.M3OrderStatisticForest;
+import jdk.internal.m3.collections.graph.OrderStatisticForest;
 
 /**
  * Sparse columnar topology for materialized coordinates of a virtual Tree.
@@ -48,7 +48,7 @@ public final class M3TreeTopology {
 	private long [] childVisibleExtraSums = new long [4];
 	/* Per-parent order-statistic index over the materialized children, keyed by
 	 * the childIndices lane and weighted by the visibleExtraRows lane. */
-	private final M3OrderStatisticForest siblings = new M3OrderStatisticForest ();
+	private final OrderStatisticForest siblings = new OrderStatisticForest ();
 	private long seekBefore;
 	private int rootChildCount = UNKNOWN_CHILD_COUNT;
 	private int rootFirstChildId = -1;

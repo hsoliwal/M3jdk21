@@ -20,7 +20,7 @@ import java.util.TreeSet;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import jdk.internal.m3.collections.M3FilteredNavigableSet;
+import jdk.internal.m3.collections.FilteredNavigableSet;
 
 /** Independent navigation and comparator-entry oracles with callback bounds. */
 public final class M3FilteredSortedEdgesContract {
@@ -107,7 +107,7 @@ public final class M3FilteredSortedEdgesContract {
         NavigableSet<Integer> readonly = M3FilteredViews.filter(source, visible);
         checkNavigation(expected, readonly, queries, "readonly");
         checkNavigation(expected.descendingSet(), readonly.descendingSet(), queries, "reverse");
-        checkNavigation(expected, M3FilteredNavigableSet.view(source, visible), queries, "facade");
+        checkNavigation(expected, FilteredNavigableSet.view(source, visible), queries, "facade");
         checkNavigation(expected, M3MutableFilteredViews.filter(source, visible), queries, "mutable");
         checkNavigation(expected, CollectionViews.filtered(source, visible), queries, "collection");
         NavigableMap<Integer, String> map = new TreeMap<>(source.comparator());

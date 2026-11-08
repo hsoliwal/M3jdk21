@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
-import jdk.internal.m3.collections.M3IndexedMultiValueMap;
+import jdk.internal.m3.collections.IndexedMultiValueMap;
 
 /**
  * Independent ordered-multimap oracle for slot unlink, duplicate/null state,
@@ -50,7 +50,7 @@ public final class M3IndexedMultiValueOccurrenceSelfTest {
         Item(Integer value, int bits) { this.value = value; this.bits = bits; }
     }
     private static void validate(
-            M3IndexedMultiValueMap<Integer, Integer> actual,
+            IndexedMultiValueMap<Integer, Integer> actual,
             Map<Integer, ArrayList<Item>> oracle) {
         int total = 0;
         check(actual.keyCount() == oracle.size(), "distinct key count");
@@ -66,23 +66,23 @@ public final class M3IndexedMultiValueOccurrenceSelfTest {
             check(snap.size() == items.size(), "snapshot count");
             for (int i = 0; i < items.size(); i++) {
                 check(Objects.equals(snap.get(i), items.get(i).value), "occurrence order");
-                check(actual.stateAt(key, i) == (items.get(i).bits | M3IndexedMultiValueMap.LIVE),
+                check(actual.stateAt(key, i) == (items.get(i).bits | IndexedMultiValueMap.LIVE),
                         "unaltered bits");
             }
-            var selected = actual.selected(key, M3IndexedMultiValueMap.VISIBLE,
-                    M3IndexedMultiValueMap.DIRTY, M3IndexMaskCompactor.Backend.JAVA);
+            var selected = actual.selected(key, IndexedMultiValueMap.VISIBLE,
+                    IndexedMultiValueMap.DIRTY, M3IndexMaskCompactor.Backend.JAVA);
             int selectedCount = 0;
             for (var item : items) {
-                if ((item.bits & M3IndexedMultiValueMap.VISIBLE) != 0
-                        && (item.bits & M3IndexedMultiValueMap.DIRTY) == 0) {
+                if ((item.bits & IndexedMultiValueMap.VISIBLE) != 0
+                        && (item.bits & IndexedMultiValueMap.DIRTY) == 0) {
                     check(Objects.equals(selected.get(selectedCount++), item.value),
                             "mask selection occurrence");
                 }
             }
             check(selected.size() == selectedCount, "mask selection count");
             if (M3IndexMaskCompactor.nativeAvailable()) {
-                var nativeSelected = actual.selected(key, M3IndexedMultiValueMap.VISIBLE,
-                        M3IndexedMultiValueMap.DIRTY, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
+                var nativeSelected = actual.selected(key, IndexedMultiValueMap.VISIBLE,
+                        IndexedMultiValueMap.DIRTY, M3IndexMaskCompactor.Backend.NATIVE_REQUIRED);
                 check(Arrays.equals(selected.toArray(), nativeSelected.toArray()), "native parity");
             }
         }
@@ -90,7 +90,7 @@ public final class M3IndexedMultiValueOccurrenceSelfTest {
     }
     public static void main(String[] args) {
         Random random = new Random(0x4d336df019L);
-        M3IndexedMultiValueMap<Integer, Integer> map = new M3IndexedMultiValueMap<>();
+        IndexedMultiValueMap<Integer, Integer> map = new IndexedMultiValueMap<>();
         LinkedHashMap<Integer, ArrayList<Item>> oracle = new LinkedHashMap<>();
         expect(IndexOutOfBoundsException.class, () -> map.removeAt("missing", 0));
         check(!map.removeFirstValue("missing", null), "absent removal");
@@ -102,8 +102,8 @@ public final class M3IndexedMultiValueOccurrenceSelfTest {
             long before = map.revision();
             switch (action) {
                 case 0, 1, 2 -> {
-                    int bits = (random.nextBoolean() ? M3IndexedMultiValueMap.VISIBLE : 0)
-                            | (random.nextInt(4) == 0 ? M3IndexedMultiValueMap.DIRTY : 0);
+                    int bits = (random.nextBoolean() ? IndexedMultiValueMap.VISIBLE : 0)
+                            | (random.nextInt(4) == 0 ? IndexedMultiValueMap.DIRTY : 0);
                     map.add(key, value, bits);
                     oracle.computeIfAbsent(key, unused -> new ArrayList<>()).add(new Item(value, bits));
                     check(map.revision() > before, "add revision");
@@ -153,8 +153,8 @@ public final class M3IndexedMultiValueOccurrenceSelfTest {
                 default -> {
                     if (expected != null) {
                         int ordinal = random.nextInt(expected.size());
-                        expected.get(ordinal).bits |= M3IndexedMultiValueMap.VISIBLE;
-                        map.updateState(key, ordinal, M3IndexedMultiValueMap.VISIBLE, 0);
+                        expected.get(ordinal).bits |= IndexedMultiValueMap.VISIBLE;
+                        map.updateState(key, ordinal, IndexedMultiValueMap.VISIBLE, 0);
                     } else check(map.valueCount(key) == 0, "absent key count");
                 }
             }
@@ -174,7 +174,7 @@ public final class M3IndexedMultiValueOccurrenceSelfTest {
         check(map.capacity() >= 0, "array capacity");
         // An admitted key type reaches the reserved LIVE-bit validation.
         expect(IllegalArgumentException.class, () -> map.add(0, 1,
-                M3IndexedMultiValueMap.LIVE));
+                IndexedMultiValueMap.LIVE));
         System.out.println("PASS M3IndexedMultiValueOccurrenceSelfTest checks=" + checks
                 + " native=" + M3IndexMaskCompactor.nativeAvailable());
     }

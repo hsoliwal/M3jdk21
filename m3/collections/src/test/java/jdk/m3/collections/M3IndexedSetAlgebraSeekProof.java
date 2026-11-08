@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.NavigableSet;
 import java.util.Random;
 import java.util.TreeSet;
-import jdk.internal.m3.collections.M3LongCompositeViews;
+import jdk.internal.m3.collections.LongCompositeViews;
 
 /** Independent JDK21 signed-long navigation oracle for real M3TreeSet storage. */
 public final class M3IndexedSetAlgebraSeekProof {
@@ -38,9 +38,9 @@ public final class M3IndexedSetAlgebraSeekProof {
     }
     private static LongSortedSet actual(LongSortedSet a, LongSortedSet b, int op) {
         return switch (op) {
-            case 0 -> M3LongCompositeViews.sortedIntersection(a, b);
-            case 1 -> M3LongCompositeViews.sortedDifference(a, b);
-            case 2 -> M3LongCompositeViews.sortedSymmetricDifference(a, b);
+            case 0 -> LongCompositeViews.sortedIntersection(a, b);
+            case 1 -> LongCompositeViews.sortedDifference(a, b);
+            case 2 -> LongCompositeViews.sortedSymmetricDifference(a, b);
             default -> throw new AssertionError(op);
         };
     }

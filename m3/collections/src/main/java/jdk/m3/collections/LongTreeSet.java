@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
-import jdk.internal.m3.collections.M3LaneSearch;
+import jdk.internal.m3.collections.LaneSearch;
 
 /**
  * Sorted primitive-long set in natural signed order: fixed-capacity sorted pages inside flat
@@ -329,7 +329,7 @@ public final class LongTreeSet implements LongSortedSet {
             }
         }
         int before = size;
-        int tail = size == 0 ? from : M3LaneSearch.upperBound(sorted, from, to, last());
+        int tail = size == 0 ? from : LaneSearch.upperBound(sorted, from, to, last());
         for (int i = from; i < tail; i++) {
             add(sorted[i]);
         }
@@ -546,7 +546,7 @@ public final class LongTreeSet implements LongSortedSet {
     private int locatePage(long value) {
         int low = 0;
         int high = pageCount - 1;
-        return M3LaneSearch.lowerBound(pageMaxima, low, high, value);
+        return LaneSearch.lowerBound(pageMaxima, low, high, value);
     }
 
     private int pageOffset(int page) {

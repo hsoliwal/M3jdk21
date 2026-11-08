@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.TreeSet;
 import java.util.function.Predicate;
-import jdk.internal.m3.collections.M3FilteredNavigableSet;
+import jdk.internal.m3.collections.FilteredNavigableSet;
 
 /**
  * Independent finite oracle for the readonly set interior-null navigation atom.
@@ -78,7 +78,7 @@ public final class M3FilteredSetNullContract {
     private static <E> NavigableSet<E> view(Surface surface, NavigableSet<E> source,
             Predicate<? super E> predicate) {
         NavigableSet<E> backing = owner(surface, source);
-        return surface == Surface.FACADE ? M3FilteredNavigableSet.view(backing, predicate)
+        return surface == Surface.FACADE ? FilteredNavigableSet.view(backing, predicate)
                 : M3FilteredViews.filter(backing, predicate);
     }
 

@@ -26,7 +26,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3FilteredLists;
+import jdk.internal.m3.collections.FilteredLists;
 
 /**
  * Reference model of the M3FilteredViews members restored by qualification/mergeloss2-filtered-views-20261107.
@@ -243,7 +243,7 @@ final class M3MergelossFilteredViewsReferenceTest {
         for (boolean reverse : List.of(false, true)) {
             for (int operation = 0; operation < 3; operation++) {
                 PlainList owner = new PlainList();
-                ListIterator<Integer> cursor = M3FilteredLists.filtered(owner, value -> true)
+                ListIterator<Integer> cursor = FilteredLists.filtered(owner, value -> true)
                         .listIterator(reverse ? owner.size() : 0);
                 assertEquals(reverse ? 4 : 1, reverse ? cursor.previous() : cursor.next(), "delivered");
                 owner.items.clear();

@@ -2,10 +2,10 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3LongLowerBoundWindowContract;
+import jdk.internal.m3.collections.LongLowerBoundWindowContract;
 
 final class M3LongLowerBoundWindowTest {
     @Test void javaAndOptionalNativeLowerBoundWindows() {
-        M3LongLowerBoundWindowContract.contracts();
+        LongLowerBoundWindowContract.contracts();
     }
 }

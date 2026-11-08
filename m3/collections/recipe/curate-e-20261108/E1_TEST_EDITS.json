@@ -1,0 +1,8 @@
+[
+  {
+    "file": "collections/src/test/java/jdk/m3/collections/M3AdaptiveEnumLongMapTest.java",
+    "why": "the asserted list of field type simple names is sorted; the internal M3EnumLongMap is now EnumLongMap (CURATE_E E1), which sorts before IntLongHashMap",
+    "old": "List.of(\"Class\", \"IntLongHashMap\", \"M3EnumLongMap\", \"int\")",
+    "new": "List.of(\"Class\", \"EnumLongMap\", \"IntLongHashMap\", \"int\")"
+  }
+]

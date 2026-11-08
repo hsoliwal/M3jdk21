@@ -18,7 +18,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.nio.ByteOrder;
 import java.util.Objects;
-import jdk.internal.m3.collections.M3PrimitiveBits;
+import jdk.internal.m3.collections.bits.PrimitiveBits;
 
 /**
  * Fixed-size byte-packed integers, including 24/40/48/56-bit widths.
@@ -41,7 +41,7 @@ public final class PackedByteArray {
     private final byte[] bytes;
 
     public PackedByteArray(int bitsPerValue, int size, boolean signed, ByteOrder order) {
-        M3PrimitiveBits.mask(bitsPerValue);
+        PrimitiveBits.mask(bitsPerValue);
         if ((bitsPerValue & 7) != 0) {
             throw new IllegalArgumentException("byte-packed width must be a multiple of 8");
         }
@@ -75,12 +75,12 @@ public final class PackedByteArray {
             int source = order == ByteOrder.LITTLE_ENDIAN ? i : bytesPerValue - 1 - i;
             raw |= (bytes[offset + source] & 0xffL) << (i * Byte.SIZE);
         }
-        return signed ? M3PrimitiveBits.signExtend(raw, bitsPerValue) : raw;
+        return signed ? PrimitiveBits.signExtend(raw, bitsPerValue) : raw;
     }
 
     public void set(int index, long value) {
         int offset = Objects.checkIndex(index, size()) * bytesPerValue;
-        M3PrimitiveBits.checkValue(value, bitsPerValue, signed);
+        PrimitiveBits.checkValue(value, bitsPerValue, signed);
         if (bitsPerValue == Long.SIZE) {
             if (order == ByteOrder.LITTLE_ENDIAN) LONG_LE.set(bytes, offset, value);
             else LONG_BE.set(bytes, offset, value);
@@ -98,7 +98,7 @@ public final class PackedByteArray {
     public static PackedByteArray fromBytes(
             byte[] source, int bitsPerValue, boolean signed, ByteOrder order) {
         Objects.requireNonNull(source, "source");
-        M3PrimitiveBits.mask(bitsPerValue);
+        PrimitiveBits.mask(bitsPerValue);
         if ((bitsPerValue & 7) != 0) {
             throw new IllegalArgumentException("byte-packed width must be a multiple of 8");
         }

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
-import jdk.internal.m3.collections.M3ObservableList;
+import jdk.internal.m3.collections.ObservableList;
 
 /** Standalone Java 21 differential contract for observable indexed selection. */
 public final class M3ObservableIndexedViewsContract {
@@ -18,8 +18,8 @@ public final class M3ObservableIndexedViewsContract {
     private M3ObservableIndexedViewsContract() { }
 
     public static void main(String[] arguments) {
-        M3ObservableList<String> owner =
-                new M3ObservableList<>(Arrays.asList("pear", null, "fig", "fig", "plum"));
+        ObservableList<String> owner =
+                new ObservableList<>(Arrays.asList("pear", null, "fig", "fig", "plum"));
         var messages = new ArrayList<String>();
         owner.addListener((list, change, index, count, oldValue, newValue, generation) ->
                 messages.add(change + ":" + index + ":" + count + ":" + generation));
@@ -55,8 +55,8 @@ public final class M3ObservableIndexedViewsContract {
         expect(NullPointerException.class, () -> owner.filteredView(null));
         check(owner.listenerCount() == 1, "projection does not register listeners");
 
-        M3ObservableList<StringBuilder> mutable =
-                new M3ObservableList<>(List.of(new StringBuilder("zzz"), new StringBuilder("a")));
+        ObservableList<StringBuilder> mutable =
+                new ObservableList<>(List.of(new StringBuilder("zzz"), new StringBuilder("a")));
         M3IndexedLiveView<StringBuilder> mutableProjection = mutable.filteredSortedView(
                 v -> v.length() > 1, Comparator.comparing(StringBuilder::toString));
         check(mutableProjection.size() == 1, "first predicate materialization");
@@ -77,7 +77,7 @@ public final class M3ObservableIndexedViewsContract {
         }
 
         Random random = new Random(0x51e7c011L);
-        M3ObservableList<Integer> actual = new M3ObservableList<>();
+        ObservableList<Integer> actual = new ObservableList<>();
         ArrayList<Integer> reference = new ArrayList<>();
         Comparator<Integer> compare = Comparator.nullsFirst(Integer::compareTo);
         var indexed = actual.filteredSortedView(v -> v == null || (v & 1) == 0, compare);

@@ -3,13 +3,13 @@
 package jdk.m3.collections;
 
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3FilteredListsContract;
-import jdk.internal.m3.collections.M3FilteredListsEdges;
-import jdk.internal.m3.collections.M3FilteredListsWorkProof;
+import jdk.internal.m3.collections.FilteredListsContract;
+import jdk.internal.m3.collections.FilteredListsEdges;
+import jdk.internal.m3.collections.FilteredListsWorkProof;
 
 /** Maven/JUnit receiver, authored but not represented as an executed SDK/JUnit run. */
 class M3FilteredListsTest {
-    @Test void oracleHistories() { M3FilteredListsContract.main(new String[0]); }
-    @Test void mutationAndNullEdges() { M3FilteredListsEdges.main(new String[0]); }
-    @Test void linearTraversalEvidence() { M3FilteredListsWorkProof.main(new String[0]); }
+    @Test void oracleHistories() { FilteredListsContract.main(new String[0]); }
+    @Test void mutationAndNullEdges() { FilteredListsEdges.main(new String[0]); }
+    @Test void linearTraversalEvidence() { FilteredListsWorkProof.main(new String[0]); }
 }

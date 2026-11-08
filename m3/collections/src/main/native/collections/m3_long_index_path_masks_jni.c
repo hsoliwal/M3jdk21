@@ -127,7 +127,7 @@ static int m3_physical(JNIEnv *env, jintArray offsets,
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_jdk_internal_m3_collections_M3LongIndexPathMasksJNI_selectNative(
+Java_jdk_internal_m3_collections_LongIndexPathMasksJNI_selectNative(
         JNIEnv *env, jclass owner, jlongArray rows, jintArray offsets,
         jobjectArray planes, jintArray needs, jintArray denies,
         jint first, jint count, jint stride) {
@@ -178,7 +178,7 @@ Java_jdk_internal_m3_collections_M3LongIndexPathMasksJNI_selectNative(
 }
 
 JNIEXPORT jlong JNICALL
-Java_jdk_internal_m3_collections_M3LongIndexPathMasksJNI_scanWindowNative(
+Java_jdk_internal_m3_collections_LongIndexPathMasksJNI_scanWindowNative(
         JNIEnv *env, jclass owner, jlongArray rows, jintArray offsets,
         jobjectArray planes, jintArray needs, jintArray denies,
         jint first, jint count, jint stride, jint next,

@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-import jdk.internal.m3.collections.M3InternalLeaseRecycler;
+import jdk.internal.m3.collections.InternalLeaseRecycler;
 
 /** JDK21-only lifecycle oracle: close may occur inside factory, rebind or action. */
 public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
@@ -31,11 +31,11 @@ public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
     }
 
     private static void factoryClosesBeforeRebind() {
-        AtomicReference<M3InternalLeaseRecycler<Scratch>> ref = new AtomicReference<>();
+        AtomicReference<InternalLeaseRecycler<Scratch>> ref = new AtomicReference<>();
         AtomicInteger rebound = new AtomicInteger();
         AtomicInteger acted = new AtomicInteger();
         AtomicInteger reset = new AtomicInteger();
-        var pool = new M3InternalLeaseRecycler<>(
+        var pool = new InternalLeaseRecycler<>(
                 () -> { ref.get().close(); return new Scratch(); },
                 (scratch, id) -> { rebound.incrementAndGet(); scratch.id = id; },
                 scratch -> { reset.incrementAndGet(); scratch.id = -1; }, 4);
@@ -49,10 +49,10 @@ public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
     }
 
     private static void rebindClosesBeforeAction() {
-        AtomicReference<M3InternalLeaseRecycler<Scratch>> ref = new AtomicReference<>();
+        AtomicReference<InternalLeaseRecycler<Scratch>> ref = new AtomicReference<>();
         AtomicInteger acted = new AtomicInteger();
         AtomicInteger reset = new AtomicInteger();
-        var pool = new M3InternalLeaseRecycler<>(Scratch::new,
+        var pool = new InternalLeaseRecycler<>(Scratch::new,
                 (s, id) -> { s.id = id; ref.get().close(); },
                 s -> { reset.incrementAndGet(); s.id = -1; }, 8);
         ref.set(pool);
@@ -63,8 +63,8 @@ public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
     }
 
     private static void rebindClosureSuppressesResetFailure() {
-        AtomicReference<M3InternalLeaseRecycler<Scratch>> ref = new AtomicReference<>();
-        var pool = new M3InternalLeaseRecycler<>(Scratch::new,
+        AtomicReference<InternalLeaseRecycler<Scratch>> ref = new AtomicReference<>();
+        var pool = new InternalLeaseRecycler<>(Scratch::new,
                 (s, id) -> ref.get().close(),
                 s -> { throw new IllegalArgumentException("reset failed"); }, 4);
         ref.set(pool);
@@ -77,9 +77,9 @@ public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
     }
 
     private static void actionClosureStillRunsReset() {
-        AtomicReference<M3InternalLeaseRecycler<Scratch>> ref = new AtomicReference<>();
+        AtomicReference<InternalLeaseRecycler<Scratch>> ref = new AtomicReference<>();
         AtomicInteger reset = new AtomicInteger();
-        var pool = new M3InternalLeaseRecycler<>(Scratch::new,
+        var pool = new InternalLeaseRecycler<>(Scratch::new,
                 (s, id) -> s.id = id,
                 s -> { s.id = -1; reset.incrementAndGet(); }, 4);
         ref.set(pool);
@@ -92,7 +92,7 @@ public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
     }
 
     private static void factoryFailureReleasesActiveReservation() {
-        var pool = new M3InternalLeaseRecycler<Scratch>(
+        var pool = new InternalLeaseRecycler<Scratch>(
                 () -> { throw new IllegalStateException("factory failed"); },
                 (s, id) -> fail("rebind after failed construction"),
                 s -> fail("reset of nonexistent object"), 4);
@@ -103,7 +103,7 @@ public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
 
     private static void normalBorrowAndReuseRemainUnchanged() {
         AtomicInteger created = new AtomicInteger();
-        var pool = new M3InternalLeaseRecycler<>(
+        var pool = new InternalLeaseRecycler<>(
                 () -> { created.incrementAndGet(); return new Scratch(); },
                 (s, id) -> s.id = id,
                 s -> { s.id = -1; s.resetCount++; }, 2);
@@ -117,7 +117,7 @@ public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
     }
 
     private static void nestedBorrowNeverAliasesAnActiveObject() {
-        var pool = new M3InternalLeaseRecycler<>(Scratch::new,
+        var pool = new InternalLeaseRecycler<>(Scratch::new,
                 (s, id) -> s.id = id,
                 s -> s.id = -1, 2);
         pool.withBorrowed(1, outer -> pool.withBorrowed(2, inner -> {
@@ -136,7 +136,7 @@ public final class M3InternalLeaseRecyclerCloseBoundarySelfTest {
         var finish = new CountDownLatch(1);
         AtomicReference<Throwable> failure = new AtomicReference<>();
         AtomicInteger reset = new AtomicInteger();
-        var pool = new M3InternalLeaseRecycler<>(Scratch::new,
+        var pool = new InternalLeaseRecycler<>(Scratch::new,
                 (s, id) -> s.id = id,
                 s -> { s.id = -1; reset.incrementAndGet(); }, 2);
         pool.withBorrowed(9, s -> equal(9L, s.id));

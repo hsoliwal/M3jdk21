@@ -15,10 +15,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.M3AdaptiveEnumLongMap;
+import jdk.internal.m3.collections.AdaptiveEnumLongMap;
 
 /**
- * Finite differential comparison of {@link M3AdaptiveEnumLongMap} against {@code EnumMap<E,
+ * Finite differential comparison of {@link AdaptiveEnumLongMap} against {@code EnumMap<E,
  * Long>} across both backings; this is not JDK EnumMap replacement proof. The wide enum has a
  * sparse regime below the switch size and crosses the 64-constant presence-word boundary once
  * dense; the narrow enum is dense from the first mapping.
@@ -58,7 +58,7 @@ final class M3AdaptiveEnumLongMapTest {
     @Test
     void wideEnumMatchesJdkAcrossMutationsAndModes() {
         Wide[] keys = Wide.values();
-        var actual = new M3AdaptiveEnumLongMap<>(Wide.class);
+        var actual = new AdaptiveEnumLongMap<>(Wide.class);
         var expected = new EnumMap<Wide, Long>(Wide.class);
         Random random = new Random(0x4d33414441505441L);
         int switchSize = actual.directSwitchSize();
@@ -131,7 +131,7 @@ final class M3AdaptiveEnumLongMapTest {
     @Test
     void modeTransitionsAndOrdinalOrderInSparseMode() {
         Wide[] keys = Wide.values();
-        var map = new M3AdaptiveEnumLongMap<>(Wide.class);
+        var map = new AdaptiveEnumLongMap<>(Wide.class);
         int switchSize = map.directSwitchSize();
         assertEquals(21, switchSize);
         assertFalse(map.isDirect());
@@ -165,11 +165,11 @@ final class M3AdaptiveEnumLongMapTest {
             assertEquals(i, map.getAsLong(keys[69 - i]));
         }
         // Sizing at construction follows the same rule.
-        assertTrue(new M3AdaptiveEnumLongMap<>(Wide.class, switchSize).isDirect());
-        var below = new M3AdaptiveEnumLongMap<>(Wide.class, switchSize - 1);
+        assertTrue(new AdaptiveEnumLongMap<>(Wide.class, switchSize).isDirect());
+        var below = new AdaptiveEnumLongMap<>(Wide.class, switchSize - 1);
         assertFalse(below.isDirect());
         assertEquals(IntLongHashMap.payloadBytesFor(switchSize - 1), below.payloadBytes());
-        assertEquals(0, new M3AdaptiveEnumLongMap<>(Narrow.class).directSwitchSize());
+        assertEquals(0, new AdaptiveEnumLongMap<>(Narrow.class).directSwitchSize());
         // Removal never migrates implicitly; compact re-chooses the backing.
         for (int i = 0; i < switchSize - 1; i++) {
             assertTrue(map.removeKey(keys[69 - i]));
@@ -215,7 +215,7 @@ final class M3AdaptiveEnumLongMapTest {
 
     @Test
     void narrowEnumIsDenseFromTheStartAndEdgeContracts() {
-        var map = new M3AdaptiveEnumLongMap<>(Narrow.class);
+        var map = new AdaptiveEnumLongMap<>(Narrow.class);
         assertTrue(map.isDirect());
         assertEquals(3, map.keyCapacity());
         assertEquals(Narrow.class, map.keyType());
@@ -250,9 +250,9 @@ final class M3AdaptiveEnumLongMapTest {
         map.clear();
         assertTrue(map.isEmpty());
         assertTrue(map.isDirect());
-        assertThrows(IllegalArgumentException.class, () -> new M3AdaptiveEnumLongMap<>(Narrow.class, 4));
-        assertThrows(IllegalArgumentException.class, () -> new M3AdaptiveEnumLongMap<>(Narrow.class, -1));
-        assertThrows(NullPointerException.class, () -> new M3AdaptiveEnumLongMap<>(null));
+        assertThrows(IllegalArgumentException.class, () -> new AdaptiveEnumLongMap<>(Narrow.class, 4));
+        assertThrows(IllegalArgumentException.class, () -> new AdaptiveEnumLongMap<>(Narrow.class, -1));
+        assertThrows(NullPointerException.class, () -> new AdaptiveEnumLongMap<>(null));
     }
 
     @Test
@@ -261,8 +261,8 @@ final class M3AdaptiveEnumLongMapTest {
         EnumMap rawJdk = new EnumMap<>(Narrow.class);
         assertThrows(ClassCastException.class, () -> rawJdk.put(Other.X, 1L));
         assertFalse(rawJdk.containsKey(Other.X));
-        for (M3AdaptiveEnumLongMap raw : List.of(
-                new M3AdaptiveEnumLongMap<>(Narrow.class), new M3AdaptiveEnumLongMap<>(Wide.class))) {
+        for (AdaptiveEnumLongMap raw : List.of(
+                new AdaptiveEnumLongMap<>(Narrow.class), new AdaptiveEnumLongMap<>(Wide.class))) {
             assertThrows(ClassCastException.class, () -> raw.put(Other.X, 1L));
             assertThrows(ClassCastException.class, () -> raw.put(Other.X, 1L, 0L));
             assertThrows(ClassCastException.class, () -> raw.putIfAbsent(Other.X, 1L));
@@ -273,18 +273,18 @@ final class M3AdaptiveEnumLongMapTest {
             assertFalse(raw.removeKey(Other.X));
             assertTrue(raw.isEmpty());
         }
-        assertThrows(IllegalArgumentException.class, () -> new M3AdaptiveEnumLongMap(String.class));
+        assertThrows(IllegalArgumentException.class, () -> new AdaptiveEnumLongMap(String.class));
     }
 
     @Test
     void retainsOnlyTheActiveBackingAndNoKeyReferences() {
-        var fields = Arrays.stream(M3AdaptiveEnumLongMap.class.getDeclaredFields())
+        var fields = Arrays.stream(AdaptiveEnumLongMap.class.getDeclaredFields())
                 .filter(f -> !Modifier.isStatic(f.getModifiers()))
                 .map(f -> f.getType().getSimpleName())
                 .sorted()
                 .toList();
-        assertEquals(List.of("Class", "IntLongHashMap", "M3EnumLongMap", "int"), fields);
-        var map = new M3AdaptiveEnumLongMap<>(Wide.class);
+        assertEquals(List.of("Class", "EnumLongMap", "IntLongHashMap", "int"), fields);
+        var map = new AdaptiveEnumLongMap<>(Wide.class);
         for (Wide key : Wide.values()) {
             map.put(key, key.ordinal());
         }

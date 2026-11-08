@@ -27,7 +27,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.StreamSupport;
-import jdk.internal.m3.collections.M3FilteredNavigableSet;
+import jdk.internal.m3.collections.FilteredNavigableSet;
 
 /** Recursive split oracle, live-view checks and callback-order compatibility. */
 public final class M3FilteredSplitContract {
@@ -53,7 +53,7 @@ public final class M3FilteredSplitContract {
         return switch (mode) {
             case 0 -> M3FilteredViews.filter((SortedSet<Integer>) source, predicate);
             case 1 -> M3FilteredViews.filter(source, predicate);
-            case 2 -> M3FilteredNavigableSet.view(source, predicate);
+            case 2 -> FilteredNavigableSet.view(source, predicate);
             case 3 -> M3MutableFilteredViews.filter(source, predicate);
             case 4 -> {
                 TreeMap<Integer, Integer> map = new TreeMap<>(source.comparator());
