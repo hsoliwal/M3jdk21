@@ -222,27 +222,27 @@ public final class AlgorithmExtrasDump {
             int[] values = sorted(ints(random, length(random), random.nextBoolean() ? 50 : 0));
             int target = values.length > 0 && random.nextBoolean() ? values[random.nextInt(values.length)]
                     : random.nextInt(-60, 61);
-            return call(s(values) + " t=" + target, () -> "" + PrimitiveArrayAlgorithms.binarySearch(values, target));
+            return call(s(values) + " t=" + target, () -> "" + ArrayAlgorithms.binarySearch(values, target));
         });
         each("binarySearchMonitor", cases, random -> {
             int[] values = sorted(ints(random, length(random), 50));
             int target = random.nextInt(-60, 61);
             TraceMonitor monitor = monitor(random);
             ProgressMonitor passed = random.nextInt(10) == 0 ? null : monitor;
-            return call(s(values) + " t=" + target, () -> PrimitiveArrayAlgorithms.binarySearch(values, target,
+            return call(s(values) + " t=" + target, () -> ArrayAlgorithms.binarySearch(values, target,
                     passed) + "") + " trace=" + monitor.trace();
         });
         each("nextGreaterCircular", cases, random -> {
             int[] values = ints(random, length(random), random.nextBoolean() ? 5 : 0);
-            return call(s(values), () -> s(PrimitiveArrayAlgorithms.nextGreaterCircular(values)));
+            return call(s(values), () -> s(ArrayAlgorithms.nextGreaterCircular(values)));
         });
         each("maxProductSubarray", cases, random -> {
             int[] values = ints(random, length(random), random.nextInt(4) == 0 ? 0 : 9);
-            return call(s(values), () -> "" + PrimitiveArrayAlgorithms.maxProductSubarray(values));
+            return call(s(values), () -> "" + ArrayAlgorithms.maxProductSubarray(values));
         });
         each("maxProfitOneTransaction", cases, random -> {
             int[] values = ints(random, length(random), random.nextBoolean() ? 100 : 0);
-            return call(s(values), () -> "" + PrimitiveArrayAlgorithms.maxProfitOneTransaction(values));
+            return call(s(values), () -> "" + ArrayAlgorithms.maxProfitOneTransaction(values));
         });
         each("majorityElement", cases, random -> {
             int[] values = ints(random, length(random), 3);
@@ -252,15 +252,15 @@ public final class AlgorithmExtrasDump {
                     values[i] = random.nextInt(3) != 0 ? major : values[i];
                 }
             }
-            return call(s(values), () -> "" + PrimitiveArrayAlgorithms.majorityElement(values));
+            return call(s(values), () -> "" + ArrayAlgorithms.majorityElement(values));
         });
         each("countBits", cases, random -> {
             int n = random.nextInt(10) == 0 ? random.nextInt(-3, 0) : random.nextInt(300);
-            return call("n=" + n, () -> s(PrimitiveArrayAlgorithms.countBits(n)));
+            return call("n=" + n, () -> s(ArrayAlgorithms.countBits(n)));
         });
         each("findMinRotated", cases, random -> {
             int[] values = rotatedDistinct(random);
-            return call(s(values), () -> "" + PrimitiveArrayAlgorithms.findMinRotated(values));
+            return call(s(values), () -> "" + ArrayAlgorithms.findMinRotated(values));
         });
         each("findDuplicateFloyd", cases, random -> {
             int n = random.nextInt(1, 40);
@@ -268,16 +268,16 @@ public final class AlgorithmExtrasDump {
             for (int i = 0; i < values.length; i++) {
                 values[i] = random.nextInt(20) == 0 ? random.nextInt(-1, n + 2) : random.nextInt(1, n + 1);
             }
-            return call(s(values), () -> "" + PrimitiveArrayAlgorithms.findDuplicateFloyd(values));
+            return call(s(values), () -> "" + ArrayAlgorithms.findDuplicateFloyd(values));
         });
         each("containerMostWater", cases, random -> {
             int[] values = ints(random, length(random), random.nextBoolean() ? 1_000 : 0);
-            return call(s(values), () -> "" + PrimitiveArrayAlgorithms.containerMostWater(values));
+            return call(s(values), () -> "" + ArrayAlgorithms.containerMostWater(values));
         });
         each("moveZeroes", cases, random -> {
             int[] values = ints(random, length(random), 2);
             return call(s(values), () -> {
-                PrimitiveArrayAlgorithms.moveZeroes(values);
+                ArrayAlgorithms.moveZeroes(values);
                 return s(values);
             });
         });
@@ -286,7 +286,7 @@ public final class AlgorithmExtrasDump {
             int steps = random.nextInt(8) == 0 ? INT_EXTREMES[random.nextInt(INT_EXTREMES.length)]
                     : random.nextInt(-20, 21);
             return call(s(values) + " k=" + steps, () -> {
-                PrimitiveArrayAlgorithms.rotateRight(values, steps);
+                ArrayAlgorithms.rotateRight(values, steps);
                 return s(values);
             });
         });
