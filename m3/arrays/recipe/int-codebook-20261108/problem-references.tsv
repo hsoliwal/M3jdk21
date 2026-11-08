@@ -1,0 +1,5 @@
+shape_id	family	platform	problem_id	url	contract_boundary	adoption
+int-codebook-lossless	DICTIONARY_ORDINAL	APACHE_LUCENE	SortedDocValues	https://lucene.apache.org/core/10_5_2/core/org/apache/lucene/index/SortedDocValues.html	Term bytes and sorted ordinals differ from first-occurrence signed-int codebook; no source copied.	CONCEPT_ONLY_APACHE2
+int-codebook-lossless	HASH_FREQUENCY	LEETCODE	347	https://leetcode.com/problems/top-k-frequent-elements/	Challenge returns top-k, not reversible storage; hash cardinality is a conceptual donor only.	CONCEPT_ONLY_NO_SOURCE
+int-codebook-lossless	HASH_FREQUENCY	HACKERRANK	sparse-arrays	https://www.hackerrank.com/challenges/sparse-arrays/problem	String frequency-query API does not preserve signed-int arrays or bit-packed order.	CONCEPT_ONLY_NO_SOURCE
+int-codebook-lossless	RANK_ENCODING	GEEKSFORGEEKS	replace-elements-by-ranks	https://www.geeksforgeeks.org/dsa/replace-each-element-of-array-with-its-corresponding-rank/	Challenge assigns unique per-occurrence ranks; repeated source values deliberately do not share an ID. Not equivalent to codebook mapping.	CONCEPT_ONLY_NO_SOURCE
