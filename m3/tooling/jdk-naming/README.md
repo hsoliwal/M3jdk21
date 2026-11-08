@@ -69,3 +69,7 @@ Re-run `python3 -I m3/tooling/jdk-naming/test_jdk_naming.py` and
 `python3 -I m3/tooling/jdk-naming/test_reseal.py` on the exact
 candidate tree. Never suppress a malformed future guard by adding a wildcard
 or by making the parser ignore rows.
+
+## pom_dependents.py (2026-11-08)
+
+The dependents closure of a Maven artifact from the HEAD tree: `python pom_dependents.py <root> <artifactId> --require-checkout` prints every module whose pom depends on the artifact and exits 2 when one of them is not in the working tree. Run it before `rename_types.py`, `jdk_naming.py apply` or any REFS rewrite in a sparse worktree, add the missing modules to the sparse set, and gate them with a consumer build (install the renamed artifact, package each dependent). Guard of the RECIPE_MEMORY row PATTERN:RENAME_COMPLETENESS of 2026-11-08 (#2829).
