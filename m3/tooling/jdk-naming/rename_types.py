@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""DROP_PRODUCT_PREFIX v1.2: inside an m3 package the package already names the product, so a type carries no M3 prefix.
+"""DROP_PRODUCT_PREFIX v1.3: inside an m3 package the package already names the product, so a type carries no M3 prefix.
 
 usage: rename_types.py --root DIR --package P [--package P2 ...] [--check] [--exclude PREFIX ...]
 For every top-level type M3<Rest> declared in package P (main or test source, file M3<Rest>.java) the type becomes
@@ -11,7 +11,8 @@ For every top-level type M3<Rest> declared in package P (main or test source, fi
          other string literals and comments are kept byte for byte;
   C/H    JNI symbols Java_<p>_M3<Rest>_ and javac -h header names <p>_M3<Rest>.h, where <p> is P with '_' for '.';
   shell  qualified names P.M3<Rest> and bare class names in scripts under make/ (launchers name test mains).
-v1.2: a type token qualified by another package (x.y.M3Rest) is left alone; --string-members also rewrites the
+v1.3: a bare name that is a java.* simple name of the running JDK (jimage list) keeps its prefix (KEEP row), the
+standard's exception; v1.2: a type token qualified by another package (x.y.M3Rest) is left alone; --string-members also rewrites the
 literals "M3<Rest>.member" and "M3<Rest>" of renamed types (catalog entry points), off by default.
 Refused (exit 2, nothing written): <Rest> empty or not UpperCamel; <Rest> already a type of P; <Rest> a java.lang
 type; a file that references M3<Rest> while importing another package that declares the same simple name.
@@ -30,6 +31,30 @@ JAVA_LANG = {"Object", "String", "Class", "System", "Math", "StrictMath", "Integ
              "ProcessBuilder", "ModuleLayer", "ScopedValue", "StringTemplate", "MatchException"}
 STRING = re.compile(r'"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])\'')
 COMMENT = re.compile(r"//[^\n]*|/\*.*?\*/", re.S)
+
+
+_JAVA_NAMES = None
+
+
+def java_simple_names():
+    """Simple names of every java.* class of the running JDK (jimage list of lib/modules), cached; empty when the
+    image is unreadable (then only the java.lang set above protects)."""
+    global _JAVA_NAMES
+    if _JAVA_NAMES is None:
+        import os, shutil, subprocess
+        home = os.environ.get("JAVA_HOME") or (shutil.which("javac") and str(Path(shutil.which("javac")).resolve().parent.parent)) or ""
+        names = set()
+        try:
+            out = subprocess.run([str(Path(home) / "bin" / "jimage"), "list", str(Path(home) / "lib" / "modules")],
+                                 capture_output=True, text=True, timeout=120).stdout
+            for line in out.splitlines():
+                s = line.strip()
+                if s.startswith("java/") and s.endswith(".class") and "$" not in s:
+                    names.add(s.rsplit("/", 1)[1][:-6])
+        except (OSError, subprocess.SubprocessError):
+            pass
+        _JAVA_NAMES = names
+    return _JAVA_NAMES
 
 
 def masked_sub(text, rx, rep):
@@ -75,6 +100,11 @@ def main():
                 sys.exit(f"REFUSE {pkg}.{t}: {rest} is already a type of {pkg}")
             if rest in JAVA_LANG:
                 sys.exit(f"REFUSE {pkg}.{t}: {rest} would shadow java.lang.{rest}")
+            if rest in java_simple_names():
+                # the standard's exception: a bare name that is a java.* simple name keeps its prefix (M3Arrays vs
+                # java.util.Arrays); recorded, not refused (v1.3)
+                print(f"KEEP	{pkg}.{t}	java.* simple name {rest}")
+                continue
             plan[t] = rest
         renames[pkg] = plan
     other_decl = {}  # simple name -> packages declaring it (for ambiguity checks)
