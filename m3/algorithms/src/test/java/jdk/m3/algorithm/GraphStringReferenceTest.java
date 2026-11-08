@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 //FLLDCIM: ORACLE - M3JDK-authored reference oracle of recipe/algorithm-extras-20261106 (the donor catalogue has no tests)
 /**
  * Reference oracle of the relocated graph members (PrimitiveGraphAlgorithms) and string
- * members (PrimitiveStringAlgorithms, StringAlgorithms) against brute force on small instances:
+ * members (StringAlgorithms) against brute force on small instances:
  * Bellman-Ford over BigInteger, exhaustive 2-colouring, Prim per component, sorted suffix lists, quadratic windows.
  */
 class GraphStringReferenceTest {
@@ -323,11 +323,11 @@ class GraphStringReferenceTest {
                     ? haystack.substring(random.nextInt(haystack.length() / 2), haystack.length() / 2 + 1)
                     : text(random, random.nextInt(0, 5), "abc");
             int expected = haystack.indexOf(pattern);
-            assertEquals(expected, PrimitiveStringAlgorithms.kmpIndexOf(haystack, pattern), haystack + "/" + pattern);
-            assertEquals(expected, PrimitiveStringAlgorithms.kmpIndexOf(haystack, pattern,
+            assertEquals(expected, StringAlgorithms.kmpIndexOf(haystack, pattern), haystack + "/" + pattern);
+            assertEquals(expected, StringAlgorithms.kmpIndexOf(haystack, pattern,
                     ProgressMonitor.none()));
-            assertEquals(expected, PrimitiveStringAlgorithms.rabinKarpIndexOf(haystack, pattern));
-            int[] prefix = PrimitiveStringAlgorithms.prefixFunction(pattern);
+            assertEquals(expected, StringAlgorithms.rabinKarpIndexOf(haystack, pattern));
+            int[] prefix = StringAlgorithms.prefixFunction(pattern);
             for (int q = 0; q < pattern.length(); q++) {
                 int border = 0;
                 for (int l = q; l > 0 && border == 0; l--) {
@@ -336,9 +336,9 @@ class GraphStringReferenceTest {
                 assertEquals(border, prefix[q], pattern + " " + q);
             }
             String required = text(random, random.nextInt(0, 4), "abc");
-            assertEquals(minimumWindow(haystack, required), PrimitiveStringAlgorithms.minimumWindow(haystack,
+            assertEquals(minimumWindow(haystack, required), StringAlgorithms.minimumWindow(haystack,
                     required), haystack + "/" + required);
-            assertEquals(minimumWindow(haystack, required), PrimitiveStringAlgorithms.minimumWindow(haystack,
+            assertEquals(minimumWindow(haystack, required), StringAlgorithms.minimumWindow(haystack,
                     required, ProgressMonitor.none()));
         }
         report("string", "kmpIndexOf(x2)+rabinKarpIndexOf+prefixFunction+minimumWindow(x2)", 6L * STRING_CASES,
@@ -351,7 +351,7 @@ class GraphStringReferenceTest {
             char[] r = right.toCharArray();
             Arrays.sort(l);
             Arrays.sort(r);
-            assertEquals(Arrays.equals(l, r), PrimitiveStringAlgorithms.isAnagram(left, right));
+            assertEquals(Arrays.equals(l, r), StringAlgorithms.isAnagram(left, right));
             StringBuilder kept = new StringBuilder();
             for (char ch : left.toCharArray()) {
                 if (Character.isLetterOrDigit(ch)) {
@@ -359,10 +359,10 @@ class GraphStringReferenceTest {
                 }
             }
             assertEquals(kept.toString().contentEquals(new StringBuilder(kept).reverse()),
-                    PrimitiveStringAlgorithms.isPalindromeIgnoringNonAlphanumeric(left), left);
+                    StringAlgorithms.isPalindromeIgnoringNonAlphanumeric(left), left);
             String[] words = left.trim().isEmpty() ? new String[0] : left.trim().split(" +");
             Collections.reverse(Arrays.asList(words));
-            assertEquals(String.join(" ", words), PrimitiveStringAlgorithms.reverseWords(left), left);
+            assertEquals(String.join(" ", words), StringAlgorithms.reverseWords(left), left);
             String[] group = {left, left + right, left.isEmpty() ? right : left.substring(0, left.length() - 1)};
             int common = group[0].length();
             for (String other : group) {
@@ -372,7 +372,7 @@ class GraphStringReferenceTest {
                 }
                 common = k;
             }
-            assertEquals(group[0].substring(0, common), PrimitiveStringAlgorithms.longestCommonPrefix(group));
+            assertEquals(group[0].substring(0, common), StringAlgorithms.longestCommonPrefix(group));
         }
         report("string", "isAnagram+isPalindromeIgnoringNonAlphanumeric+reverseWords+longestCommonPrefix",
                 4L * STRING_CASES, 4L * STRING_CASES);
