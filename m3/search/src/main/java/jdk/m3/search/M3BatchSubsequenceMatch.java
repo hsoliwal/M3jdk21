@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BatchSubsequenceMatch.java (blob d49ea390ba99) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BatchSubsequenceMatch.java (blob 8bc86da2be5b) by M3_SEARCH_FORWARD v1.
 package jdk.m3.search;
 
 import java.util.Arrays;
@@ -40,16 +40,19 @@ final class M3BatchSubsequenceMatch {
         int[] next = new int[patterns.length];
         int[] cursor = new int[patterns.length];
         long matched = 0;
+        boolean hasCandidates = false; // only feasible nonempty entries need traversal
         for (int id = 0; id < patterns.length; id++) {
             String pattern = patterns[id];
             if (pattern.isEmpty()) {
                 matched++;
-            } else {
+            } else if (pattern.length() <= source.length()) {
+                hasCandidates = true;
                 int c = pattern.charAt(0);
                 next[id] = head[c];
                 head[c] = id;
             }
         }
+        if (!hasCandidates) return matched;
         for (int i = 0; i < source.length(); i++) {
             int c = source.charAt(i);
             int pending = head[c];

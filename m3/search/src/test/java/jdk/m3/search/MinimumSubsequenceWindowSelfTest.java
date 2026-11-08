@@ -1,12 +1,13 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/MinimumSubsequenceWindowSelfTest.java (blob 81942d489098) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/MinimumSubsequenceWindowSelfTest.java (blob 69b69859e522) by M3_SEARCH_FORWARD v1.
 package jdk.m3.search;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 /** Executable differential oracle; no junit or donor runtime dependencies. */
@@ -14,7 +15,7 @@ public final class MinimumSubsequenceWindowSelfTest {
     private static final char[] ALPHABET = { 'a', 'b', 'c', '\u0000', '\uD800',
             '\uDC00', '\u0301', '\u4E2D', '\uD83D', '\uDE00' };
     private static final long SEED = 0x4D33535542534551L;
-    private static long assertions;
+    private static final AtomicLong ASSERTIONS = new AtomicLong();
     private static long examples;
     private static long digest = 0x3c6ef372fe94f82bL;
     private static boolean nativeMode;
@@ -22,8 +23,8 @@ public final class MinimumSubsequenceWindowSelfTest {
     private MinimumSubsequenceWindowSelfTest() { }
 
     private static void check(boolean truth, String detail) {
-        assertions++;
-        if (!truth) throw new AssertionError("assertion=" + assertions + " " + detail);
+        long ordinal = ASSERTIONS.incrementAndGet();
+        if (!truth) throw new AssertionError("assertion=" + ordinal + " " + detail);
     }
 
     private static long oracle(String source, String sequence) {
@@ -214,8 +215,14 @@ public final class MinimumSubsequenceWindowSelfTest {
         }
         refusal(nativeMode);
         concurrency();
+        long expectedAssertions = examples * (nativeMode ? 3 : 1)
+                + (nativeMode ? 14 : 8) + (nativeMode ? 4_800 : 2_400);
+        if (ASSERTIONS.get() != expectedAssertions) {
+            throw new AssertionError("lost concurrent assertions: " + ASSERTIONS.get()
+                    + " expected=" + expectedAssertions);
+        }
         System.out.println("M3_MIN_SUBSEQUENCE_PASS mode=" + args[0]
-                + " examples=" + examples + " assertions=" + assertions
+                + " examples=" + examples + " assertions=" + ASSERTIONS.get()
                 + " digest=" + Long.toUnsignedString(digest, 16));
     }
 }

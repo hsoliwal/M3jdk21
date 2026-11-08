@@ -1,0 +1,8 @@
+donor_file	donor_first_commit	decision	reason
+BmhBufferCountOnlyTest, BmhCountOnlyContract, BmhCountOnlyTest, BmhKmpFallbackCancellationTest, KmpBufferCountOnlyTest, KmpCountOnlyTest	2026-11-05..07	RECEIVED	added after the 2026-11-06 receipt with the code they test
+ByteOccurrencesTest, SearchEngineMonitorHandoffTest, CompiledSearchForwardProgressTest, JniCompileReleaseIdentityTest	2026-09-30..10-30	RECEIVED	predate the receipt, which filtered them out on the ProgressSnapshot import; the v1b rules now map it and they pass
+CountOnlyCrossBackendJniTest	2026-11-05	DEFERRED	3/3 pass with -Dm3.native.library.sha256=<sha256 of m3search>; com.synexia supplies it from a workflow, m3/search's surefire has no build-time binding yet
+JniSearchEngineNativeTest	2026-09-30	EXCLUDED	2 methods fail against the received M3JniSearchEngine (nested-bulk borrow rejection, reentrant close); test is older than its owner's current borrow contract
+JavaPeriodicOverlapTest	2026-10-08	EXCLUDED	1 method expects no KMP automaton after a warmed sparse visit; the received BMH builds one
+PrimitiveExecutionIndex (+ test)	2026-11-03	HELD	needs the challenge corpus catalogue (corpus/shapes), not yet owned
+AlgorithmCatalog family, Competitive* review classes	2026-10-31	HELD	catalogue tooling, same dependency

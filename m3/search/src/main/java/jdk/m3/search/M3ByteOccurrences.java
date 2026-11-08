@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/ByteOccurrences.java (blob edf06de025e6) by M3_SEARCH_RELOCATE v2.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/ByteOccurrences.java (blob 621ae35905d0) by M3_SEARCH_FORWARD v1.
 // Modified 2026: continue periodic Horspool overlaps through the existing KMP owner.
 package jdk.m3.search;
 
@@ -122,6 +122,18 @@ public final class M3ByteOccurrences {
     /** Counts overlapping matches in the remaining ByteBuffer window, without retaining offsets. */
     public static int countBuffer(M3CompiledSearch compiled, ByteBuffer haystack, int fromIndex,
             M3ProgressMonitor monitor) {
+        if (compiled instanceof M3KmpSearch kmp) {
+            Objects.requireNonNull(haystack, "haystack");
+            M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+            checked.checkCanceled();
+            return kmp.countMatches(haystack.duplicate(), Math.max(0, fromIndex), checked);
+        }
+        if (compiled instanceof M3BoyerMooreHorspoolSearch horspool) {
+            Objects.requireNonNull(haystack, "haystack");
+            M3ProgressMonitor checked = monitor == null ? new M3DefaultProgressMonitor() : monitor;
+            checked.checkCanceled();
+            return horspool.countMatches(haystack.duplicate(), Math.max(0, fromIndex), checked);
+        }
         return visitBuffer(compiled, haystack, fromIndex, Integer.MAX_VALUE, DISCARD, monitor);
     }
 
