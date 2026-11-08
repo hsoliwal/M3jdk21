@@ -6,7 +6,7 @@ on:
     paths:
       - 'm3/collections/interop/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/arrays/src/main/**'
+      - 'src/jdk.m3.collections/share/**'
       - 'm3/native/**'
       - 'm3/qualification/sdk-native-owner/**'
       - '.github/workflows/m3-sdk-family-names-20261017.yml'
@@ -27,6 +27,9 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
             m3/arrays
+            src/jdk.m3.collections/share
+            make/m3/arrays
+            test/jdk/jdk/m3/arrays
             m3/native
             m3/collections
             m3/qualification/sdk-native-owner
@@ -40,7 +43,7 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p proof/arrays/META-INF proof/collections/META-INF
-          find m3/arrays/src/main/java -name '*.java' | sort > proof/array-sources.txt
+          find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > proof/array-sources.txt
           javac --release 21 -Xlint:all,-module -Werror -d proof/arrays @proof/array-sources.txt
           cp m3/arrays/{LICENSE,NOTICE,provenance.json} proof/arrays/META-INF/
           jar --create --file proof/m3-arrays.jar -C proof/arrays .
@@ -66,7 +69,7 @@ jobs:
         run: |
           set -euxo pipefail
           test -s m3/native/include/m3_jni_core.h
-          cmake -S m3/arrays/src/main/native -B proof/native \
+          cmake -S make/m3/arrays -B proof/native \
             -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON -DJAVA_HOME="$JAVA_HOME"
           cmake --build proof/native --config Release --parallel 2
           ctest --test-dir proof/native --output-on-failure -C Release
@@ -107,7 +110,7 @@ jobs:
           assert len(identities) == 9
           print('M3_SDK_NATIVE_OWNER_PASS methods=9 classes=2 checked_jni=true')
           PYTEST
-          git diff --exit-code -- m3/arrays/src/main m3/collections/src/main/java m3/collections/interop/src
+          git diff --exit-code -- src/jdk.m3.collections/share m3/collections/src/main/java m3/collections/interop/src
       - name: Preserve SDK native and JUnit receipts including failures
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

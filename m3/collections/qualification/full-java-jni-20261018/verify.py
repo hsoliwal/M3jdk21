@@ -101,7 +101,7 @@ def main():
     # algorithm modes. Keep it outside the collection-library search directory
     # so the missing-collection-JNI controls continue to exercise their contract.
     array_native_build = OUT / 'array-native'
-    run(['cmake', '-S', ROOT / 'm3/arrays/src/main/native', '-B', array_native_build,
+    run(['cmake', '-S', ROOT / 'make/m3/arrays', '-B', array_native_build,
          '-DCMAKE_BUILD_TYPE=Release', '-DBUILD_TESTING=ON', '-DJAVA_HOME=' + str(JAVA)])
     run(['cmake', '--build', array_native_build, '--config', 'Release', '--parallel', '2'])
     run(['ctest', '--test-dir', array_native_build, '--output-on-failure', '-C', 'Release'])

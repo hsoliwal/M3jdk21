@@ -9,7 +9,7 @@ on:
       - 'm3/docs/name-mapping.schema.json'
       - 'm3/migration/requirements.txt'
       - 'm3/compatibility/check_public_names.py'
-      - 'm3/arrays/src/main/java/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
       - 'src/java.base/share/classes/java/util/Arrays.java'
       - 'src/java.base/share/classes/java/lang/Object.java'
       - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
@@ -47,10 +47,11 @@ jobs:
             m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
             m3/tooling/name-contract/**
             m3/compatibility/check_public_names.py
-            m3/arrays/src/main/java/**
-            m3/arrays/src/main/native/**
-            m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java
-            m3/arrays/src/main/**
+            src/jdk.m3.collections/share/classes/jdk/m3/arrays/**
+            make/m3/arrays/**
+            src/jdk.m3.collections/share/native/libm3arrays/**
+            src/jdk.m3.collections/share/classes/jdk/m3/arrays/M3Arrays.java
+            src/jdk.m3.collections/share/**
             m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java
             m3/arrays/src/main/java/module-info.java
             src/java.base/share/classes/java/util/Arrays.java

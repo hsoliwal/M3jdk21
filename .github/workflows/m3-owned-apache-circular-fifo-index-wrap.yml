@@ -23,6 +23,9 @@ jobs:
           fetch-depth: 1
           sparse-checkout: |
             m3/arrays
+            src/jdk.m3.collections/share
+            make/m3/arrays
+            test/jdk/jdk/m3/arrays
             m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
@@ -40,7 +43,7 @@ jobs:
           curl --fail --location --silent --show-error             --output "$OUT/commons-collections4-4.5.0.jar"             https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar
           # The collection module requires the arrays module: compile it first, then resolve it from the module path.
           mkdir -p "$OUT/arrays"
-          find m3/arrays/src/main/java -name '*.java' | sort > "$OUT/arrays.args"
+          find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > "$OUT/arrays.args"
           javac --release 21 -g -proc:none -Xlint:all,-module -Werror -d "$OUT/arrays" @"$OUT/arrays.args"
           find m3/collections/src/main/java -name '*.java' | sort > "$OUT/core.args"
           printf -- '--module-path\n%s\n' "$OUT/arrays" >> "$OUT/core.args"

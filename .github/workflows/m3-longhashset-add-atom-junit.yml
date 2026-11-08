@@ -20,6 +20,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/arrays
+            src/jdk.m3.collections/share
+            make/m3/arrays
+            test/jdk/jdk/m3/arrays
             m3/collections
           sparse-checkout-cone-mode: true
       - uses: actions/setup-java@v4

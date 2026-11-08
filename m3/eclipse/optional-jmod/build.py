@@ -24,7 +24,7 @@ HERE = Path(__file__).resolve().parent
 DATE = "2026-10-18T00:00:00Z"
 MODULES = (
     ("jdk.m3.text", ROOT / "m3/core/src", None),
-    ("jdk.m3.arrays", ROOT / "m3/arrays/src/main/java", None),
+    ("jdk.m3.arrays", ROOT / "src/jdk.m3.collections/share/classes/jdk/m3/arrays", ROOT / "m3/arrays/src/main/java/module-info.java"),
     ("jdk.m3.ast", ROOT / "m3/ast/src/main/java", HERE / "module-overlays/jdk.m3.ast/src/main/java/module-info.java"),
     ("jdk.m3.collections", ROOT / "m3/collections/src/main/java", None),
     ("org.m3jdk.file", ROOT / "m3/file/src/main/java", None),

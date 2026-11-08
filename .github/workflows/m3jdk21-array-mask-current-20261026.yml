@@ -27,6 +27,9 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             m3/arrays/**
+            src/jdk.m3.collections/share/**
+            make/m3/arrays/**
+            test/jdk/jdk/m3/arrays/**
             m3/native/include/m3_jni_core.h
             m3/collections/**
             .github/workflows/m3jdk21-array-mask-current-20261026.yml

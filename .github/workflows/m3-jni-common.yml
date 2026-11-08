@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/native/**'
-      - 'm3/arrays/src/main/native/**'
+      - 'src/jdk.m3.collections/share/native/libm3arrays/**'
       - 'm3/collections/src/main/native/**'
       - '.github/workflows/m3-jni-common.yml'
   workflow_dispatch:

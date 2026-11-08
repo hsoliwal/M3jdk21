@@ -49,7 +49,7 @@ jobs:
           mkdir -p proof/arrays proof/core proof/native proof/empty
           # Source-build the exact named module required by module jdk.m3.collections.
           # Preserve Java21 strict -Werror and both original JPMS descriptors.
-          find m3/arrays/src/main/java -name '*.java' | sort > proof/array-sources.txt
+          find m3/arrays/src/main/java src/jdk.m3.collections/share/classes/jdk/m3/arrays -name '*.java' | sort > proof/array-sources.txt
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -d proof/arrays @proof/array-sources.txt
           jar --create --file proof/m3-arrays.jar -C proof/arrays .

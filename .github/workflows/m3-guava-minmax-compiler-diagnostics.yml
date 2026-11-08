@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/qualification/guava-minmax-source-custody/**'
-      - 'm3/arrays/src/main/java/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
       - 'm3/collections/qualification/owned-guava-minmax-priority-queue-20261018/**'
       - '.github/workflows/m3-guava-minmax-compiler-diagnostics.yml'
   workflow_dispatch:
@@ -22,6 +22,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             m3/arrays
+            src/jdk.m3.collections/share
+            make/m3/arrays
+            test/jdk/jdk/m3/arrays
             m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
