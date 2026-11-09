@@ -205,6 +205,8 @@
                 <m3.arrays.native.path>${m3.collections.native.dir}/${m3.collections.native.prefix}m3_arrays${m3.collections.native.suffix}</m3.arrays.native.path>
                 <m3.counted.native>${m3.collections.jni.dir}/${m3.collections.jni.prefix}m3_count_lanes${m3.collections.native.suffix}</m3.counted.native>
                 <m3.totals.native>${m3.collections.jni.dir}/${m3.collections.jni.prefix}m3_count_totals${m3.collections.native.suffix}</m3.totals.native>
+                <!-- One host-loaded library for the packed owners and the bit lane (NATIVE_ABSORB N3). -->
+                <m3.native.path>${m3.collections.jni.dir}/${m3.collections.jni.prefix}m3_collections_packed${m3.collections.native.suffix}</m3.native.path>
                 <!-- Owners that load only on opt-in, and the tests that then require every built backend. -->
                 <m3.collections.rank.native>true</m3.collections.rank.native>
                 <m3.collections.rank.pairdistance.native>true</m3.collections.rank.pairdistance.native>
