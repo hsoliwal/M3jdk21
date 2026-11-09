@@ -1,0 +1,64 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "reviewed_baseline": {
+    "commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "source": "/workspace/scratch/f8287c652798/tasks/filtered-set-identity-20261018/datasets/filtered-set-identity-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-filtered-set-identity-20261018/pre/0001-M3CollectionViews.java.txt",
+    "git_blob_sha1": "258452f8442df0e257db791bdc99d1a7604ba7bc",
+    "sha256": "956ae0faf7f37d4b963d0d074445484548efe73f164142f2bd0c7de0815e49d4",
+    "role": "Exact pinned preimage retained by canonical dataset; current receiver has since received candidate."
+  },
+  "candidate": {
+    "source": "/workspace/scratch/f8287c652798/work/identity-set/candidate/m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
+    "sha256": "90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8"
+  },
+  "probe": {
+    "source": "/workspace/scratch/f8287c652798/work/review-identity/ReviewProbe.java",
+    "sha256": "4fb21af72fe6a22ff7d4102d8b914c7c9cb45e313f4f54877447aa057f4b966e",
+    "checks": 18,
+    "production_test_source": false
+  },
+  "class_origin": "Fresh compilation of candidate source and supplied contract into work/review-identity/classes; execution classpath is that directory only. No baseline target/classes are used.",
+  "results": [
+    {
+      "name": "compile",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/f8287c652798/work/review-identity/classes",
+        "/workspace/scratch/f8287c652798/work/identity-set/candidate/m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
+        "/workspace/scratch/f8287c652798/work/identity-set/candidate/m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetIdentityContract.java",
+        "/workspace/scratch/f8287c652798/work/review-identity/ReviewProbe.java"
+      ],
+      "cwd": "/workspace/scratch/f8287c652798",
+      "exit": 0
+    },
+    {
+      "name": "contract",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/f8287c652798/work/review-identity/classes",
+        "com.m3.collections.M3FilteredSetIdentityContract"
+      ],
+      "cwd": "/workspace/scratch/f8287c652798",
+      "exit": 0
+    },
+    {
+      "name": "probe",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/f8287c652798/work/review-identity/classes",
+        "ReviewProbe"
+      ],
+      "cwd": "/workspace/scratch/f8287c652798",
+      "exit": 0
+    }
+  ],
+  "supplied_contract_checks": 46,
+  "recommendation": "No blocking/important correctness finding. Accept bounded correction subject to canonical replay and received-module Maven qualification.",
+  "scope": "Java FilteredSet contains/remove identity correction only. No full collection-family, JNI, or runtime integration completion claim."
+}

@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+id	technique	incumbent_m3_owner	decision	proof_gate	primary_problem
+LC705	staged-primitive-open-addressing	com.m3.collections.M3LongHashSet	CORRECTNESS_CANDIDATE	JDK HashSet differential, aligned state, source/JNI contract	https://leetcode.com/problems/design-hashset/
+LC684	validated-disjoint-set	com.m3.collections.M3DisjointIndex	OPTIMIZATION_CANDIDATE	independent partition, revision and index check, Java21	https://leetcode.com/problems/redundant-connection/

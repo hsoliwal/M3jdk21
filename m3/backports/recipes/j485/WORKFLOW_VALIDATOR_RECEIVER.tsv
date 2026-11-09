@@ -1,0 +1,10 @@
+canonical_repository	hsoliwal/com.synexia
+canonical_commit	0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+canonical_path	synexia-code-convergence/tools/WorkflowStructureCheck.java
+canonical_git_blob	f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7
+canonical_owner	SYNEXIA
+target_role	M3JDK21_THIN_RECEIVER
+startup_oracle	GITHUB_ACTIONS_JOB_ADMISSION
+required_failure_modes	DUPLICATE_MAPPING_KEY,EMPTY_JOB,STEP_OUTSIDE_STEPS,STEP_WITHOUT_EXECUTOR,TAB_INDENT
+source_copy_authority	false
+promotion_authority	false

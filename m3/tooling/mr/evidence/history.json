@@ -1,0 +1,24 @@
+{
+  "target_base": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "classification": [
+    {
+      "sha": "f73ca04c5cb46dc5a91b12f7f07e2c4d111a5450",
+      "message": "fix(m3): preserve Matcher.find under precompute memory pressure",
+      "classification": "SURVIVES",
+      "reason": "Optional-precompute OOME fallback is unchanged."
+    },
+    {
+      "sha": "604a523c17acb07618a2999f671635e1a8cb454e",
+      "message": "fix(m3): invalidate regex trigram facts on Matcher reset",
+      "classification": "SURVIVES",
+      "reason": "No second retained input reference; new-input invalidation is preserved at the assignment boundary."
+    },
+    {
+      "sha": "4b82c715cd3701a7940151e048c296d59332b6b4",
+      "message": "perf(m3): gate literal find with bounded exact trigram facts",
+      "classification": "SURVIVES",
+      "reason": "Case-sensitive literal-only gate, bounded regions and exact positive verification remain."
+    }
+  ],
+  "initial_target_base": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff"
+}

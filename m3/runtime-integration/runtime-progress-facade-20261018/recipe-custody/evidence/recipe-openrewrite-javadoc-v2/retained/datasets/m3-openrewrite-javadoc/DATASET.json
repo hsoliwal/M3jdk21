@@ -1,0 +1,13 @@
+{
+  "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+  "dataset": "m3-openrewrite-javadoc",
+  "repository": "openrewrite/rewrite",
+  "baseline_ref": "3bd8271be963c025ce0856072d0f09360e3184cd",
+  "crate_name": "m3-collections-contract-refinement-20261017-m3-openrewrite-javadoc",
+  "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "targets": 15,
+  "java_targets": 10,
+  "text_targets": 5,
+  "product_sources_written": false,
+  "engine_changes_from_origin": []
+}

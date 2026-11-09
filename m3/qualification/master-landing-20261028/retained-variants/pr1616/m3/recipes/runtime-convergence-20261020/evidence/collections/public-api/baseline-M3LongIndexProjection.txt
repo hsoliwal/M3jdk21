@@ -1,0 +1,38 @@
+Compiled from "M3LongIndexProjection.java"
+public final class com.m3.collections.M3LongIndexProjection {
+  public static com.m3.collections.M3LongIndexProjection snapshot(long[]);
+    descriptor: ([J)Lcom/m3/collections/M3LongIndexProjection;
+
+  public int size();
+    descriptor: ()I
+
+  public boolean isEmpty();
+    descriptor: ()Z
+
+  public com.m3.collections.M3LongIndexProjection$Order order();
+    descriptor: ()Lcom/m3/collections/M3LongIndexProjection$Order;
+
+  public int physicalIndex(int);
+    descriptor: (I)I
+
+  public long get(int);
+    descriptor: (I)J
+
+  public com.m3.collections.M3LongIndexProjection slice(int, int);
+    descriptor: (II)Lcom/m3/collections/M3LongIndexProjection;
+
+  public int[] physicalIndices();
+    descriptor: ()[I
+
+  public long[] toArray();
+    descriptor: ()[J
+
+  public com.m3.collections.M3LongIndexProjection filtered(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)Lcom/m3/collections/M3LongIndexProjection;
+
+  public com.m3.collections.M3LongIndexProjection sortedAscending();
+    descriptor: ()Lcom/m3/collections/M3LongIndexProjection;
+
+  public com.m3.collections.M3LongIndexProjection sortedDescending();
+    descriptor: ()Lcom/m3/collections/M3LongIndexProjection;
+}

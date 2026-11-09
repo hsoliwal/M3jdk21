@@ -1,0 +1,30 @@
+{
+  "schema": "per-file-admission/v1",
+  "goal": "natural empty root lookup validates null/type without comparing key",
+  "baseCommit": "a6a68ad408eeaac6917fdbae814e6c157641ef7f",
+  "source": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-20261019\\src\\main\\java\\com\\m3\\collections\\M3TreeMap.java",
+  "sourceSha256": "9c767668c925581799dc97f20e63fce0be19e8fec4c4ec59b1ce257a6c969f4e",
+  "publicBlob": "dd0cf2b8125348cd7134eda565ca40aaa990a864",
+  "unitCapBytes": 262144,
+  "requirements": [
+    "ORIGINAL execution frozen before product edit",
+    "return/throw class and raw message, key comparison and identity observations",
+    "get, getOrDefault, containsKey, remove, retained backing views and cleared roots",
+    "nonempty and comparator-root controls unchanged",
+    "strict JDK21 compile, unchanged API, relevant frozen SDK regressions",
+    "no new public API/storage layout/JNI change"
+  ],
+  "knowledgeClassification": "SOURCE_AWARE original author; no source-blind claim",
+  "newCapabilityLaw": "known pattern + tiny domain leaf + explicit composition + executed proof",
+  "sourceEditAdmitted": false,
+  "storage": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 22601596928,
+    "logical_bytes": 529036941,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}

@@ -1,0 +1,13 @@
+schema	family	original_contract	original_owner	m3_mechanism	qualification
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	core.progress	IProgressMonitor	org.eclipse.core.runtime	M3ProgressMonitor	EXISTING_BRIDGE_UNVERIFIED_REAL_ECLIPSE
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	core.extension_registry	IExtensionRegistry/IExtensionPoint	org.eclipse.core.runtime	M3ObjectStateSlots28;live registry lookup	ADDITIVE_INDEX_CANDIDATE
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	osgi.bundle_registry	BundleContext/Bundle	org.osgi.framework	M3LongLongHashMap;M3ObjectStateSlots28	ADDITIVE_INDEX_CANDIDATE
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	workspace.resource_delta	IResourceDelta	org.eclipse.core.resources	M3LongArrayList;M3ObjectStateSlots28	ADDITIVE_INDEX_CANDIDATE
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	collections	org.eclipse.collections.api.*	Eclipse Collections	m3/collections/interop	BOUNDED_OPTIONAL_INTEROP
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	swt.original_widgets	org.eclipse.swt.widgets.*	SWT/Nebula	parent-owned M3 indexed state	HOLD_UNQUALIFIED
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	jface.viewers	org.eclipse.jface.viewers.*	JFace	M3 indexed viewports	HOLD_UNQUALIFIED
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	jdt	org.eclipse.jdt.*	JDT/Core.Manipulation	M3 AST/recipe atoms	HOLD_UNQUALIFIED
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	emf	org.eclipse.emf.*	EMF	M3 index/graphs	HOLD_UNQUALIFIED
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	workbench	org.eclipse.ui.*	Eclipse Workbench	M3 lifecycle/state	HOLD_UNQUALIFIED
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	pde	org.eclipse.pde.*	Eclipse PDE	Synexia pluginify	HOLD_UNQUALIFIED
+M3_ECLIPSE_FORWARDING_COVERAGE_V1	osgi.runtime_service	BundleActivator/ServiceRegistration	org.osgi.framework	M3EclipseRuntimeActivator;M3EclipseRuntimeServices	OSGI_BUNDLE_CANDIDATE_UNQUALIFIED_RUNTIME

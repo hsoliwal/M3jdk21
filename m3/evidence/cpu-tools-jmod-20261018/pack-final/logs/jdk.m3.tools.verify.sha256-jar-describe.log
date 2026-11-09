@@ -1,0 +1,4 @@
+com.m3.tools.verify.sha256 jar:file:///dev/shm/m3-cpu-tools-f4826e049195-build-v4/jars/com.m3.tools.verify.sha256.jar!/module-info.class
+exports com.m3.tools.verify.sha256
+requires java.base mandated
+

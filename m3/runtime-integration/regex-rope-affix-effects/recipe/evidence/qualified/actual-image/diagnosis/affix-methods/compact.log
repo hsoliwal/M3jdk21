@@ -1,0 +1,7 @@
+M3_REGEX_ACTUAL_IMAGE_METHOD_PASS method=mandatoryLiteralAffixes
+Exception in thread "main" java.lang.AssertionError: expected canonical M3 storage: 
+	at M3StringRegexDpTest.decision(M3StringRegexDpTest.java:470)
+	at M3StringRegexDpTest.compositeDagsAndLongPlans(M3StringRegexDpTest.java:132)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at M3StringRegexMethodProbe.main(M3StringRegexMethodProbe.java:16)

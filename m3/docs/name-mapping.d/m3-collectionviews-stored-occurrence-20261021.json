@@ -1,0 +1,14 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "mappings": [
+    {
+      "source": "hsoliwal/com.synexia#12866 com.synexia.m3jdk.CollectionViewsStoredOccurrence20261021; original first-party donor hsoliwal/M3jdk21#1116",
+      "source_commit": "9cdce883109e8d302ea2d6a51da01056a48e4702",
+      "source_blob": "fffd5e0e96363aa0fd1e0e7646dfc3f0d7ca7d68",
+      "target": "src/java.base/share/classes/java/util/CollectionViews.java (existing java.util.CollectionViews; no M3+JDK adapter)",
+      "status": "RECIPE_APPLIED_PATCH_MODULE_UNVERIFIED",
+      "target_rule": "Retain public JDK names and all existing sorted/navigable APIs; behind original CollectionViews owner, resolve stored visible representative and correct physical list deletion; no new native symbols",
+      "gates": "source SHA-256 fixed point/refusal canonical Synexia; exact Java21 patch module/JTReg/full JDK image/GC/JNI/license/performance pending"
+    }
+  ]
+}

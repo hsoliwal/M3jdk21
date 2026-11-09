@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 live filtered/sorted physical viewport page
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPage*.java'
+      - 'm3/collections/qualification/indexed-live-physical-page-20261021/**'
+      - 'm3/collections/qualification/indexed-live-views-20261021/**'
+      - '.github/workflows/m3-indexed-live-physical-page-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-owner-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact source-recipe postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat <<'HASHES' | sha256sum --check
+          65e5c350adb03ce2db176337ff2034b8253b5d5e258dd383a6500ddef01f2ecd  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java
+          6a2dbf4be93b6450fc287d27d1373cfc8ba46e95387a921e6e521eb5d84f20bb  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPageContract.java
+          9f9aca1139aee67fe4b1c2e8e36ffb7b184f2943f4cf6b050a5812c41a24ac4f  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPageTest.java
+          HASHES
+          git diff --check
+      - name: Verify original historical recipe and six successor refusal gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/collections/qualification/indexed-live-views-20261021/test_successors.py
+      - name: Strict original Java 21 source-backed live-view contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3-live-view-contracts"
+          mkdir -p "$classes"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \
+            -d "$classes" \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPageContract.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewContract.java
+          java -ea -cp "$classes" jdk.m3.collections.M3IndexedLivePhysicalPageContract
+          java -ea -cp "$classes" jdk.m3.collections.M3IndexedLiveViewContract
+          java -ea -Xint -cp "$classes" jdk.m3.collections.M3IndexedLivePhysicalPageContract
+          java -ea -Xint -cp "$classes" jdk.m3.collections.M3IndexedLiveViewContract

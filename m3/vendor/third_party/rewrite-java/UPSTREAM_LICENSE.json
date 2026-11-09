@@ -1,0 +1,8 @@
+{
+  "artifact": "rewrite-java",
+  "version": "8.17.1",
+  "origin": "https://raw.githubusercontent.com/openrewrite/rewrite/v8.17.1/LICENSE",
+  "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+  "bytes": 11330,
+  "pom_license": "The Apache Software License, Version 2.0 <http://www.apache.org/licenses/LICENSE-2.0.txt>"
+}

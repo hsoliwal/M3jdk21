@@ -1,0 +1,129 @@
+TYPE	jdk.m3.ast.M3ASTHierarchy	jdk.m3.ast.ASTHierarchy
+TYPE	jdk.m3.ast.M3ASTHierarchyContract	jdk.m3.ast.ASTHierarchyContract
+TYPE	jdk.m3.ast.M3ASTHierarchyEncodingTest	jdk.m3.ast.ASTHierarchyEncodingTest
+TYPE	jdk.m3.ast.M3ASTHierarchyTest	jdk.m3.ast.ASTHierarchyTest
+TYPE	jdk.m3.ast.M3SyntaxCoordinates	jdk.m3.ast.SyntaxCoordinates
+TYPE	jdk.m3.ast.M3SyntaxCoordinatesContract	jdk.m3.ast.SyntaxCoordinatesContract
+TYPE	jdk.m3.ast.M3SyntaxCoordinatesTest	jdk.m3.ast.SyntaxCoordinatesTest
+TYPE	jdk.m3.ast.M3SyntaxDelta	jdk.m3.ast.SyntaxDelta
+TYPE	jdk.m3.ast.M3SyntaxDeltaContract	jdk.m3.ast.SyntaxDeltaContract
+TYPE	jdk.m3.ast.M3SyntaxDeltaTest	jdk.m3.ast.SyntaxDeltaTest
+TYPE	jdk.m3.ast.M3SyntaxGrowthAgent	jdk.m3.ast.SyntaxGrowthAgent
+TYPE	jdk.m3.ast.M3SyntaxGrowthFault	jdk.m3.ast.SyntaxGrowthFault
+TYPE	jdk.m3.ast.M3SyntaxIndex	jdk.m3.ast.SyntaxIndex
+TYPE	jdk.m3.ast.M3SyntaxIndexContract	jdk.m3.ast.SyntaxIndexContract
+TYPE	jdk.m3.ast.M3SyntaxIndexKindPostingsContract	jdk.m3.ast.SyntaxIndexKindPostingsContract
+TYPE	jdk.m3.ast.M3SyntaxIndexKindPostingsTest	jdk.m3.ast.SyntaxIndexKindPostingsTest
+TYPE	jdk.m3.ast.M3SyntaxIndexStableScatterContract	jdk.m3.ast.SyntaxIndexStableScatterContract
+TYPE	jdk.m3.ast.M3SyntaxIndexStableScatterTest	jdk.m3.ast.SyntaxIndexStableScatterTest
+TYPE	jdk.m3.ast.M3SyntaxIndexTest	jdk.m3.ast.SyntaxIndexTest
+TYPE	jdk.m3.ast.M3SyntaxJavacContract	jdk.m3.ast.SyntaxJavacContract
+TYPE	jdk.m3.ast.M3SyntaxJavacTest	jdk.m3.ast.SyntaxJavacTest
+TYPE	jdk.m3.ast.M3SyntaxOrigins	jdk.m3.ast.SyntaxOrigins
+TYPE	jdk.m3.ast.M3SyntaxOriginsContract	jdk.m3.ast.SyntaxOriginsContract
+TYPE	jdk.m3.ast.M3SyntaxOriginsTest	jdk.m3.ast.SyntaxOriginsTest
+TYPE	jdk.m3.ast.M3SyntaxTree	jdk.m3.ast.SyntaxTree
+TYPE	jdk.m3.ast.M3SyntaxTreeAtomicFailureContract	jdk.m3.ast.SyntaxTreeAtomicFailureContract
+TYPE	jdk.m3.ast.M3SyntaxTreeAtomicGrowthContract	jdk.m3.ast.SyntaxTreeAtomicGrowthContract
+TYPE	jdk.m3.ast.M3SyntaxTreeContract	jdk.m3.ast.SyntaxTreeContract
+TYPE	jdk.m3.ast.M3SyntaxTreeTest	jdk.m3.ast.SyntaxTreeTest
+TYPE	jdk.internal.m3.ast.M3NullFlowFacts	jdk.internal.m3.ast.NullFlowFacts
+TYPE	jdk.internal.m3.ast.M3NullFlowFactsProbe	jdk.internal.m3.ast.NullFlowFactsProbe
+TYPE	jdk.internal.m3.ast.M3NullFlowFactsTest	jdk.internal.m3.ast.NullFlowFactsTest
+TYPE	jdk.internal.m3.ast.M3NullFlowReferenceTableTest	jdk.internal.m3.ast.NullFlowReferenceTableTest
+TYPE	jdk.internal.m3.ast.M3NullFlowVariableIds	jdk.internal.m3.ast.NullFlowVariableIds
+TYPE	jdk.internal.m3.ast.M3NullFlowVariableIdsProbe	jdk.internal.m3.ast.NullFlowVariableIdsProbe
+TYPE	jdk.internal.m3.ast.M3NullFlowVariableIdsTest	jdk.internal.m3.ast.NullFlowVariableIdsTest
+TYPE	jdk.internal.m3.ast.M3NullFlowWorklist	jdk.internal.m3.ast.NullFlowWorklist
+TYPE	jdk.internal.m3.ast.M3NullFlowWorklistProbe	jdk.internal.m3.ast.NullFlowWorklistProbe
+TYPE	jdk.internal.m3.ast.M3NullFlowWorklistTest	jdk.internal.m3.ast.NullFlowWorklistTest
+EDIT	.github/workflows/m3-ast-general-source-facts.yml
+EDIT	.github/workflows/m3-ast-subtree-digest.yml
+EDIT	.github/workflows/m3-syntax-tree-atomic-growth-java21.yml
+EDIT	m3/ast/docs/M3_AST_GENERAL_SOURCE_20261019.md
+EDIT	m3/ast/HASH_ENCODING.md
+EDIT	m3/ast/INTEROPERABILITY_V2.md
+EDIT	m3/ast/INTEROPERABILITY_V3.md
+EDIT	m3/ast/PORTABLE_AST_RECEIVER.md
+EDIT	m3/ast/README.md
+EDIT	m3/ast/src/main/java/jdk/internal/m3/ast/M3NullFlowFacts.java
+EDIT	m3/ast/src/main/java/jdk/internal/m3/ast/M3NullFlowVariableIds.java
+EDIT	m3/ast/src/main/java/jdk/internal/m3/ast/M3NullFlowWorklist.java
+EDIT	m3/ast/src/main/java/jdk/m3/ast/M3ASTHierarchy.java
+EDIT	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxCoordinates.java
+EDIT	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxDelta.java
+EDIT	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxIndex.java
+EDIT	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxOrigins.java
+EDIT	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxTree.java
+EDIT	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowFactsProbe.java
+EDIT	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowFactsTest.java
+EDIT	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowReferenceTableTest.java
+EDIT	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowVariableIdsProbe.java
+EDIT	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowVariableIdsTest.java
+EDIT	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowWorklistProbe.java
+EDIT	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowWorklistTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyEncodingTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxCoordinatesContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxCoordinatesTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxDeltaContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxDeltaTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxGrowthAgent.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxGrowthFault.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexKindPostingsContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexKindPostingsTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexStableScatterContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexStableScatterTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxJavacContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxJavacTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsTest.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeAtomicFailureContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeAtomicGrowthContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeContract.java
+EDIT	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeTest.java
+EDIT	m3/eclipse/optional-jmod/src/main/java/jdk/m3/eclipse/core/impl/M3EclipseCoreProvider.java
+EDIT	m3/eclipse/optional-jmod/src/main/java/jdk/m3/eclipse/core/M3EclipseCore.java
+EDIT	m3/eclipse/optional-jmod/src/test/java/jdk/m3/eclipse/smoke/M3EclipseCoreSelfTest.java
+MOVE	m3/ast/src/main/java/jdk/m3/ast/M3ASTHierarchy.java	m3/ast/src/main/java/jdk/m3/ast/ASTHierarchy.java
+MOVE	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxCoordinates.java	m3/ast/src/main/java/jdk/m3/ast/SyntaxCoordinates.java
+MOVE	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxDelta.java	m3/ast/src/main/java/jdk/m3/ast/SyntaxDelta.java
+MOVE	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxIndex.java	m3/ast/src/main/java/jdk/m3/ast/SyntaxIndex.java
+MOVE	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxOrigins.java	m3/ast/src/main/java/jdk/m3/ast/SyntaxOrigins.java
+MOVE	m3/ast/src/main/java/jdk/m3/ast/M3SyntaxTree.java	m3/ast/src/main/java/jdk/m3/ast/SyntaxTree.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyContract.java	m3/ast/src/test/java/jdk/m3/ast/ASTHierarchyContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyEncodingTest.java	m3/ast/src/test/java/jdk/m3/ast/ASTHierarchyEncodingTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3ASTHierarchyTest.java	m3/ast/src/test/java/jdk/m3/ast/ASTHierarchyTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxCoordinatesContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxCoordinatesContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxCoordinatesTest.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxCoordinatesTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxDeltaContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxDeltaContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxDeltaTest.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxDeltaTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxGrowthAgent.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxGrowthAgent.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxGrowthFault.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxGrowthFault.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxIndexContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexKindPostingsContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxIndexKindPostingsContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexKindPostingsTest.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxIndexKindPostingsTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexStableScatterContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxIndexStableScatterContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexStableScatterTest.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxIndexStableScatterTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxIndexTest.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxIndexTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxJavacContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxJavacContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxJavacTest.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxJavacTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxOriginsContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsTest.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxOriginsTest.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeAtomicFailureContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxTreeAtomicFailureContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeAtomicGrowthContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxTreeAtomicGrowthContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeContract.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxTreeContract.java
+MOVE	m3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeTest.java	m3/ast/src/test/java/jdk/m3/ast/SyntaxTreeTest.java
+MOVE	m3/ast/src/main/java/jdk/internal/m3/ast/M3NullFlowFacts.java	m3/ast/src/main/java/jdk/internal/m3/ast/NullFlowFacts.java
+MOVE	m3/ast/src/main/java/jdk/internal/m3/ast/M3NullFlowVariableIds.java	m3/ast/src/main/java/jdk/internal/m3/ast/NullFlowVariableIds.java
+MOVE	m3/ast/src/main/java/jdk/internal/m3/ast/M3NullFlowWorklist.java	m3/ast/src/main/java/jdk/internal/m3/ast/NullFlowWorklist.java
+MOVE	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowFactsProbe.java	m3/ast/src/test/java/jdk/internal/m3/ast/NullFlowFactsProbe.java
+MOVE	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowFactsTest.java	m3/ast/src/test/java/jdk/internal/m3/ast/NullFlowFactsTest.java
+MOVE	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowReferenceTableTest.java	m3/ast/src/test/java/jdk/internal/m3/ast/NullFlowReferenceTableTest.java
+MOVE	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowVariableIdsProbe.java	m3/ast/src/test/java/jdk/internal/m3/ast/NullFlowVariableIdsProbe.java
+MOVE	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowVariableIdsTest.java	m3/ast/src/test/java/jdk/internal/m3/ast/NullFlowVariableIdsTest.java
+MOVE	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowWorklistProbe.java	m3/ast/src/test/java/jdk/internal/m3/ast/NullFlowWorklistProbe.java
+MOVE	m3/ast/src/test/java/jdk/internal/m3/ast/M3NullFlowWorklistTest.java	m3/ast/src/test/java/jdk/internal/m3/ast/NullFlowWorklistTest.java

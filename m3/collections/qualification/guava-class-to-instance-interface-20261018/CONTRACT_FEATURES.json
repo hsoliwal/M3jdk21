@@ -1,0 +1,22 @@
+{
+  "schema": "M3_ORIGINAL_CLASS_INSTANCE_MUTABLE_FEATURE_PROFILE_V1",
+  "frozen_before_first_JVM": true,
+  "source_profile": "d01a45128a807d24b11903d2a07da0785daf2867",
+  "features": [
+    "MapFeature.GENERAL_PURPOSE",
+    "MapFeature.RESTRICTS_KEYS",
+    "MapFeature.ALLOWS_NULL_VALUES",
+    "CollectionSize.ANY",
+    "CollectionFeature.SUPPORTS_ITERATOR_REMOVE",
+    "MapFeature.ALLOWS_ANY_NULL_QUERIES"
+  ],
+  "descriptor_text": "MapFeature.GENERAL_PURPOSE;MapFeature.RESTRICTS_KEYS;MapFeature.ALLOWS_NULL_VALUES;CollectionSize.ANY;CollectionFeature.SUPPORTS_ITERATOR_REMOVE;MapFeature.ALLOWS_ANY_NULL_QUERIES",
+  "descriptor_sha256": "ed3c0646b3736b45fb11f577365166e58db82787d8d3489894b415b3f0971622",
+  "only_removed_official_feature": "CollectionFeature.SERIALIZABLE",
+  "additional_feature_flags": [],
+  "suppressed_tests": [],
+  "why_no_serializable": "Interface imposes none; actual Guava serialized form contains nonserializable M3LinkedHashMap delegate.",
+  "why_no_restricts_values": "Not declared by original mutable suite; relational rejection is covered by focused tests, without reducing generated coverage.",
+  "sample_validity": "Unchanged original Impl implements all5sampled interfaces. Any generated sample Class/Impl pairing remains valid, as original mutable generator requires.",
+  "scope": "Original Map/testlib contract profile; typed extra methods and storage-owner sentinel are separate focused assertions."
+}

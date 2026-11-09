@@ -27,6 +27,7 @@ package com.sun.jndi.ldap;
 
 import javax.naming.directory.SearchControls;
 import javax.naming.event.*;
+import javax.naming.event.ObjectChangeListener;
 
 /**
  * This class holds the information in an event registration/deregistration

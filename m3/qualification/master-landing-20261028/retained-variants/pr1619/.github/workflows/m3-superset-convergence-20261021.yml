@@ -1,0 +1,78 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 native superset — M3File, M3AST, MOP, arrays and JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/qualification/unified-superset-20261021/**'
+      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-superset-array-20261021/**'
+      - 'm3/collections/**'
+      - 'm3/file/**'
+      - 'm3/mop/**'
+      - 'm3/tooling/module-packs/parser/**'
+      - '.github/workflows/m3-superset-convergence-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  git-source-conservation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check all original Git ancestors, modes, contents and only reconciled atom
+        run: |
+          set -euo pipefail
+          python3 m3/qualification/unified-superset-20261021/verify_superset.py
+  canonical-recipe-and-collections:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Existing OpenRewrite SDK real LST recipe, fixed point and refusal
+        run: |
+          set -euo pipefail
+          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          mvn -B -ntp -f "$root/pom.xml" -Pcontract \
+            -Dm3.dataset=m3-superset-array-20261021 \
+            "-Drecipe.owner.root=$root/sdk-owner" verify
+          python3 "$root/receive.py" \
+            --dataset m3-superset-array-20261021 \
+            --recipe-owner "$root/sdk-owner" --target "$PWD" --check
+      - name: Original M3JDK21 collections array-mask and contract tests
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3ArrayListSupersetTest,M3ArrayRemovalTest,M3MaskedSortTest test
+  bounded-file-work-and-mop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Original DOOP M3FileTree bounded-work tests
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/file/pom.xml -Dtest=M3FileParallelTest test
+      - name: Original MOP source-sealed memory admission, normal and interpreted
+        run: |
+          set -euo pipefail
+          bash m3/mop/verify.sh

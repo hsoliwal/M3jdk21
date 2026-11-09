@@ -1,0 +1,19 @@
+{
+  "schema": "M3JDK21_GENERATED_RECEIVER_HOST_PROOF_V1",
+  "command": [
+    "bash",
+    "m3/runtime-integration/check-m3rx7-convergence.sh"
+  ],
+  "receiver_parent": "3e1a0b7b7d2498a62550861a6a5a9bd88a2314d7",
+  "manifest_sha256": "61e9d13e3ecb5c29db6d8c46426ddbd6f907860060b9e5729a5792a482bfe589",
+  "status": "PASS",
+  "exit_code": 0,
+  "elapsed_seconds": 15.422716803001094,
+  "child_user_seconds": 36.549702,
+  "child_system_seconds": 2.080492,
+  "max_child_rss_kib": 187140,
+  "measurement_scope": "entire compile and component qualification process tree; not an optimization delta or retained heap measurement",
+  "sdk_receipt": "sdk-replay.json",
+  "source_built_m3jdk21": "NOT_RUN",
+  "actual_jtreg": "NOT_RUN"
+}

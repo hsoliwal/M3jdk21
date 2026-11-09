@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/pmem-task-log-replay-20261106/relocate.py (recipe RELOCATE_PMEM_TASK_LOG_REPLAY v3, derived from recipe/pmem-region-core-20261106/relocate.py v2; the same v3 as recipe/pmem-source-image-20261106). Donor: hsoliwal/com.synexia develop 5ecfe052562cdd1a7a6570068654c7f813fd0f47 (2026-11-06, "Merge pull request #16754"), the one pin of the three pmem follow-up leaves: after #16749 (36827ee8a798) and #16750 (merge 061f544acfc8, recipe tables only). Every FILE row is develop's own blob (PROVENANCE base_kind DEVELOP). Family commits: f50ffc5caa1 2026-11-02 source-sealed task replay (draft PR #15292 head 0b39214577e), 4d7f684830f 2026-11-03 20k resident 50 KiB replay qualification.
+# The two smoke mains (src/test/java/com/synexia/m3/pmem/PmemTaskLogSmokeTest, PmemTaskReplaySmokeTest) declare package com.synexia.m3.pmem and fail in the donor's scripts/build-and-test.sh unnamed-module compile on develop (pre-existing); here they are compiled in their package as module tests (jdk.m3.optane, test classpath) and run by M3PmemTaskLogReplayTest, which replaces scripts/test-task-log.sh and scripts/test-task-replay.sh.
+# FILE rows: donor path -> target path (module root m3/optane). VERBATIM rows: exact donor bytes under an evidence/ directory. PACKAGE/TYPE/EXTERNAL/TEXT rows as in recipe/pmem-region-core-20261106 (its TYPE rows are repeated because the relocated files name its types). SKIP/DROP rows document what is not relocated; MERGE rows record edits of existing module files (none in this leaf).
+kind	donor	target	note
+FILE	m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemTaskLog.java	src/main/java/jdk/m3/optane/M3PmemTaskLog.java	single-writer append-only 144-byte receipts (three SHA-256 identities, status, integrity digest, separately persisted commit marker) over a caller-owned READ_WRITE region; open verifies every committed receipt and detects an interrupted append tail
+FILE	m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemTaskReplay.java	src/main/java/jdk/m3/optane/M3PmemTaskReplay.java	read-only fail-closed reconciliation of a reopened log against the reviewed task/source sequence and the content-addressed candidate store; returns the next ordinal, never a promotion authority
+FILE	m3-pmem-sdk/src/test/java/com/synexia/m3/pmem/PmemTaskLogSmokeTest.java	src/test/java/jdk/m3/optane/M3PmemTaskLogSmokeTest.java	the donor's no-native oracle main: 20,000 receipts and reopen, interrupted append above 2 GiB and tail recovery, committed corruption, record beyond the gap, bounds and cancellation (run by M3PmemTaskLogReplayTest)
+FILE	m3-pmem-sdk/src/test/java/com/synexia/m3/pmem/PmemTaskReplaySmokeTest.java	src/test/java/jdk/m3/optane/M3PmemTaskReplaySmokeTest.java	the donor's no-native oracle main: 20,000 durable-receipt simulations reconciled without a model call, drift/missing/tampered/oversize content and cancellation refusals, interrupted append tail above 2 GiB (run by M3PmemTaskLogReplayTest)
+FILE	m3-pmem-sdk/docs/TASK_LOG_CONTRACT.md	docs/TASK_LOG_CONTRACT.md	the task-log contract
+FILE	m3-pmem-sdk/docs/TASK_REPLAY_CONTRACT.md	docs/TASK_REPLAY_CONTRACT.md	the task-replay contract
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/README.md	recipe/pmem-task-log-replay-20261106/task-replay/README.md	crate m3-pmem-task-replay-20261102: README (its Java17 local proof; the Java 21 gates run here: GATES.tsv)
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/RECIPE_MEMORY.md	recipe/pmem-task-log-replay-20261106/task-replay/RECIPE_MEMORY.md	crate m3-pmem-task-replay-20261102: correction memory
+VERBATIM	synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/qualification/RESIDENT_FILE_BRIDGE_20261103.tsv	recipe/pmem-task-log-replay-20261106/task-replay/evidence/RESIDENT_FILE_BRIDGE_20261103.tsv	the crate's 2026-11-03 resident 20k x 50 KiB qualification record (image and reviewed-sequence roots; exact bytes)
+PACKAGE	com.synexia.m3.pmem	jdk.m3.optane	the donor module com.synexia.m3.pmem; the receiver is m3/optane (module org.m3jdk.optane, package jdk.m3.optane, next to ScanPlan and MappedReadAdvice)
+PACKAGE	test	jdk.m3.optane	the donor's test sources live in package test; they join the owners' package on the classpath (one word: package line and imports only, no literal rename)
+TYPE	PmemSdk	M3PmemSdk	type names M3*
+TYPE	PmemRegion	M3PmemRegion	type names M3* (also inside the message "foreign PmemRegion owner" and the Javadoc links)
+TYPE	PmemMapping	M3PmemMapping	type names M3*
+TYPE	PmemAccess	M3PmemAccess	type names M3*
+TYPE	PmemBackend	M3PmemBackend	type names M3*
+TYPE	PmemCapabilities	M3PmemCapabilities	type names M3*
+TYPE	PmemGranularity	M3PmemGranularity	type names M3*
+TYPE	PmemSearch	M3PmemSearch	type names M3*
+TYPE	PmemTransfer	M3PmemTransfer	type names M3*
+TYPE	NativePmem	M3NativePmem	type names M3*; the JNI rows carry the symbol and header prefixes
+TYPE	PmemAtomCorrectnessJUnitTest	M3PmemAtomCorrectnessJUnitTest	type names M3*
+TYPE	PmemFileBackendJUnitTest	M3PmemFileBackendJUnitTest	type names M3*
+TYPE	PmemNativeKmpPrefix32JUnitTest	M3PmemNativeKmpPrefix32JUnitTest	type names M3*
+TYPE	PmemAtomCases	M3PmemAtomCases	type names M3*
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (static imports of org.junit.jupiter.api.Assertions resolve through this package row); pom dependency org.junit.jupiter:junit-jupiter:5.11.4 test scope, as m3/native
+EXTERNAL	org.junit.jupiter.api.io	org.junit.jupiter.api.io	JUnit 5 @TempDir (M3PmemNativeKmpPrefix32JUnitTest)
+TYPE	PmemTaskLog	M3PmemTaskLog	type names M3* (this leaf)
+TYPE	PmemTaskReplay	M3PmemTaskReplay	type names M3* (this leaf)
+TYPE	PmemTaskLogSmokeTest	M3PmemTaskLogSmokeTest	type names M3* (this leaf)
+TYPE	PmemTaskReplaySmokeTest	M3PmemTaskReplaySmokeTest	type names M3* (this leaf)
+TEXT	com.synexia.m3.pmem	jdk.m3.optane	a bare mention of the donor package in prose
+SKIP	m3-pmem-sdk/campaign/src/test/java/com/synexia/m3/pmem/campaign/PmemFileReplayIsolationTest.java	-	named by the plan as an oracle, but its subject is PmemFileCampaign (the Chrome/LLM file campaign) with com.synexia.ai.m3.M3LlmInvocationLedger and QualityIndex; it never calls PmemTaskLog or PmemTaskReplay; the campaign orchestration stays Synexia-private (plan fs-pmem.tsv rank 5 note, docs/SOURCE_CAMPAIGN.md item 10)
+SKIP	synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/qualification/PmemChromeResidentFileBridgeSmoke.java	-	the ChromeML bridge qualification (AiXExplicitSourceImage, AiXSerialCandidatePass): ChromeML bridge EXCLUDED by the plan; its record is relocated VERBATIM
+SKIP	synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/scripts/test-resident-file-bridge.sh	-	runs the ChromeML bridge qualification (excluded)
+SKIP	synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/src/test/java/com/synexia/rewrite/M3PmemTaskReplay20261102RecipeTest.java	-	the crate's OpenRewrite recipe test (ABSENT-before image of seven files); Maven/OpenRewrite stays in Synexia, M3JDK relocates the postimages
+SKIP	m3-pmem-sdk/integrations/chromeml	-	the ChromeML bridge (scripts/test-bridge.sh and its sources): EXCLUDED by the plan
+SKIP	m3-pmem-sdk/campaign/src/main/java/com/synexia/m3/pmem/campaign/PmemFileCampaign.java	-	campaign orchestration (also ChromeFileProvider, PmemAtomReplacement): Chrome rule, Synexia-private
+DROP	m3-pmem-sdk/scripts/test-task-log.sh	-	donor javac+java script of PmemTaskLogSmokeTest; replaced by M3PmemTaskLogReplayTest (test phase) and this recipe's gates
+DROP	m3-pmem-sdk/scripts/test-task-replay.sh	-	donor javac+java script of PmemTaskReplaySmokeTest; replaced by M3PmemTaskLogReplayTest and this recipe's gates
+DROP	synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/pom.xml	-	the crate's OpenRewrite recipe build

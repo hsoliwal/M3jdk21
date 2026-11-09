@@ -1,0 +1,198 @@
+/*
+ * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation. This particular file is
+ * subject to the "Classpath" exception as provided in the LICENSE file
+ * that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License
+ * version 2 along with this work; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+package jdk.internal.mindex;
+
+import java.util.Objects;
+
+/**
+ * M3JDK-owned Object[] compaction over immutable deletion-mask bits.
+ * No extra element array, per-element wrapper, or native Java reference transfer.
+ *
+ * <p>Delete bits are relative to {@code from}; zero bits are survivors.
+ * ArrayList and Vector retain their original predicate, fail-fast, locking,
+ * and reference-clearing contracts. System.arraycopy uses VM GC barriers.
+ */
+public final class M3CollectionMaskCompactor {
+    private M3CollectionMaskCompactor() { }
+
+    /** Returns the exclusive survivor end; never touches the discarded tail. */
+    public static int compact(Object[] values, int from, int to, long[] deleted) {
+        Objects.requireNonNull(values, "values");
+        Objects.requireNonNull(deleted, "deleted");
+        Objects.checkFromToIndex(from, to, values.length);
+        int length = to - from;
+        if (length == 0) return from;
+        int words = ((length - 1) >>> 6) + 1;
+        if (deleted.length < words) throw new IllegalArgumentException("mask too short");
+        // Preserve the old hot scalar (below 512) and long-run paths.  Word-based
+        // copying serves the other deletion states (rejection words when sparse
+        // or nearly all, survivor words when fragmented), after the callback
+        // phase has already prepared a complete immutable mask.
+        if (length < 512) return compactScalar(values, from, length, deleted);
+        long statistics = maskStatistics(deleted, length);
+        int runs = (int) (statistics >>> 32);
+        int removed = (int) statistics;
+        // A complete run inventory also identifies no-op masks without writing
+        // the same references back or introducing unnecessary GC card marks.
+        if (removed == 0) return to;
+        // Up to one deletion run per 16 entries stays on the run copier (the
+        // path sparse masks took); more runs use word-local copies.
+        if (runs <= Math.max(4, length >>> 4)) {
+            return compactRuns(values, from, length, deleted);
+        }
+        if (removed <= length / 8 || removed >= length - length / 64) {
+            return compactWords(values, from, length, deleted);
+        }
+        // Fragmented masks: word-local survivor copies (retained pr1908).
+        return compactSurvivors(values, from, length, deleted);
+    }
+
+    private static int compactScalar(Object[] values, int from, int length, long[] deleted) {
+        int write = from;
+        for (int read = 0; read < length; read++) {
+            if ((deleted[read >>> 6] & (1L << (read & 63))) == 0) {
+                // The untouched prefix is already in place; preserve every
+                // reference without writing it again.
+                if (write != from + read) values[write] = values[from + read];
+                write++;
+            }
+        }
+        return write;
+    }
+
+    private static int compactRuns(Object[] values, int from, int length, long[] deleted) {
+        int read = 0;
+        int write = from;
+        while (read < length) {
+            int nextSurvivor = next(deleted, read, length, false);
+            if (nextSurvivor >= length) break;
+            int nextDeletion = next(deleted, nextSurvivor, length, true);
+            int span = nextDeletion - nextSurvivor;
+            if (write != from + nextSurvivor) {
+                System.arraycopy(values, from + nextSurvivor, values, write, span);
+            }
+            write += span;
+            read = nextDeletion;
+        }
+        return write;
+    }
+
+    /** 64-bit rejection-word compaction; no extra Java payload array or JNI calls. */
+    private static int compactWords(Object[] values, int from, int length, long[] deleted) {
+        int write = from;
+        for (int base = 0; base < length; ) {
+            int chunk = Math.min(64, length - base);
+            long full = -1L >>> (64 - chunk);
+            long mask = deleted[base >>> 6] & full;
+            int start = from + base;
+            if (mask == 0L) {
+                System.arraycopy(values, start, values, write, chunk);
+                write += chunk;
+            } else if (mask != full && Long.bitCount(mask) <= 4) {
+                int consumed = 0;
+                do {
+                    int lost = Long.numberOfTrailingZeros(mask);
+                    int run = lost - consumed;
+                    if (run != 0) {
+                        System.arraycopy(values, start + consumed, values, write, run);
+                        write += run;
+                    }
+                    consumed = lost + 1;
+                    mask &= mask - 1;
+                } while (mask != 0L);
+                int remaining = chunk - consumed;
+                if (remaining != 0) {
+                    System.arraycopy(values, start + consumed, values, write, remaining);
+                    write += remaining;
+                }
+            } else {
+                for (int bit = 0; bit < chunk; bit++) {
+                    if ((mask & (1L << bit)) == 0L) {
+                        values[write++] = values[start + bit];
+                    }
+                }
+            }
+            base += chunk;
+        }
+        return write;
+    }
+
+    /** Word-local survivor indexes; no element directory or rejected-bit loop. */
+    private static int compactSurvivors(Object[] values, int from, int length, long[] deleted) {
+        int write = from;
+        for (int base = 0; base < length;) {
+            int chunk = Math.min(64, length - base);
+            long valid = -1L >>> (64 - chunk);
+            long survivors = ~deleted[base >>> 6] & valid;
+            int start = from + base;
+            if (survivors == valid) {
+                if (write != start) System.arraycopy(values, start, values, write, chunk);
+                write += chunk;
+            } else {
+                while (survivors != 0L) {
+                    int bit = Long.numberOfTrailingZeros(survivors);
+                    values[write++] = values[start + bit];
+                    survivors &= survivors - 1;
+                }
+            }
+            base += chunk;
+        }
+        return write;
+    }
+
+    /**
+     * Returns {@code runs << 32 | removed} over the whole mask; deletion runs
+     * include ones crossing the 64-bit boundary.  compact() needs both fields
+     * to choose compactRuns, compactWords or compactSurvivors.
+     */
+    private static long maskStatistics(long[] deleted, int length) {
+        int words = ((length - 1) >>> 6) + 1;
+        int count = 0;
+        int removed = 0;
+        long preceding = 0L;
+        for (int word = 0; word < words; word++) {
+            long bits = deleted[word];
+            int tail = length & 63;
+            if (word == words - 1 && tail != 0) bits &= (1L << tail) - 1L;
+            count += Long.bitCount(bits & ~((bits << 1) | preceding));
+            //FLLDCIM: HPCPOP - no early exit: a bare count read as runs=0 and sent every 512+ mask to compactRuns
+            removed += Long.bitCount(bits);
+            preceding = bits >>> 63;
+        }
+        return ((long) count << 32) | Integer.toUnsignedLong(removed);
+    }
+
+    /** Find next removed/retained bit, skipping complete mask words. */
+    private static int next(long[] bits, int from, int limit, boolean deleted) {
+        int word = from >>> 6;
+        long candidates = deleted ? bits[word] : ~bits[word];
+        candidates &= -1L << (from & 63);
+        for (;;) {
+            if (candidates != 0L) {
+                int index = (word << 6) + Long.numberOfTrailingZeros(candidates);
+                return Math.min(index, limit);
+            }
+            word++;
+            if (((long) word << 6) >= limit) return limit;
+            candidates = deleted ? bits[word] : ~bits[word];
+        }
+    }
+}

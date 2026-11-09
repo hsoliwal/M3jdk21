@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: Apache-2.0
+# native-gate.sh output (WSL gcc 13.3, OpenJDK 21.0.12.1), base 610f728ab6b vs this change; plus header-match rows.
+gate	tree	combo	rc	diagnostics	detail
+gcc	base	mask-c17-shared	0	0	-
+gcc	cand	mask-c17-shared	0	0	-
+gcc	base	mask-c11-shared	0	0	-
+gcc	cand	mask-c11-shared	0	0	-
+gcc	base	mask-c11-strict-shared	0	0	-
+gcc	cand	mask-c11-strict-shared	0	0	-
+gcc	base	mask-c11-syntax	0	0	-
+gcc	cand	mask-c11-syntax	0	0	-
+gcc	base	mask-c17-ubsan-hdr	0	0	-
+gcc	cand	mask-c17-ubsan-hdr	0	0	-
+gcc	base	proto-compactor	0	0	-
+gcc	cand	proto-compactor	0	0	-
+gcc	base	proto-compactor-strict	0	0	-
+gcc	cand	proto-compactor-strict	0	0	-
+gcc	base	h35-sparse-reads	0	0	run_rc=1 failure 73: row_units==(EXPECT_SPARSE ? (selected<0?0UL:1UL) : 1025UL)
+gcc	cand	h35-sparse-reads	0	0	run_rc=0 M3_SPARSE_MASK_READS_PASS checks=99023 sparse=1 single_match_row_units=1
+gcc	base	h35-sparse-reads-ubsan	0	0	run_rc=1 failure 73: row_units==(EXPECT_SPARSE ? (selected<0?0UL:1UL) : 1025UL)
+gcc	cand	h35-sparse-reads-ubsan	0	0	run_rc=0 M3_SPARSE_MASK_READS_PASS checks=99023 sparse=1 single_match_row_units=1
+gcc	base	h27-compactor-spans	0	0	run_rc=1 FAIL only enclosing admitted spans transfer rows=1 elements=256 states=10 writes=1 pending=0
+gcc	cand	h27-compactor-spans	0	0	run_rc=0 COMPACTOR_SPANS_PASS cases=4148 exports=4 faults=5 drift_directions=2 mode=span-contract
+gcc	base	h27-compactor-spans-ubsan	0	0	run_rc=1 FAIL only enclosing admitted spans transfer rows=1 elements=256 states=10 writes=1 pending=0
+gcc	cand	h27-compactor-spans-ubsan	0	0	run_rc=0 COMPACTOR_SPANS_PASS cases=4148 exports=4 faults=5 drift_directions=2 mode=span-contract
+gcc	base	h17-empty-regions	0	0	run_rc=1 OBS mode=candidate api=whole case=empty length=513 state_reads=6 row_reads=0 writes=0 allocated=0 exception=no
+gcc	cand	h17-empty-regions	0	0	run_rc=1 OBS mode=candidate api=whole case=empty length=513 state_reads=6 row_reads=0 writes=0 allocated=0 exception=no
+gcc	base	two-mask-refinement-baseline	0	0	run_rc=1 FAIL JNI_TABLE_MODEL case=boundary width=int finding=payload includes exact suffix through page end; no last-m
+gcc	cand	two-mask-refinement-baseline	0	0	run_rc=1 FAIL JNI_TABLE_MODEL case=boundary width=int finding=payload includes exact suffix through page end; no last-m
+gcc	base	two-mask-refinement-skip-prefix	0	0	run_rc=1 FAIL JNI_TABLE_MODEL case=boundary width=int finding=payload includes exact suffix through page end; no last-m
+gcc	cand	two-mask-refinement-skip-prefix	0	0	run_rc=1 FAIL JNI_TABLE_MODEL case=boundary width=int finding=payload includes exact suffix through page end; no last-m
+gcc	base	window-contract-exe	0	0	run_rc=0 M3 JNI CURRENT REGION PASS checks=1712636
+gcc	cand	window-contract-exe	0	0	run_rc=0 M3 JNI CURRENT REGION PASS checks=1712636
+nm	base-vs-cand	mask-c17-shared	0	-	symbols=23 jni=23
+nm	base-vs-cand	mask-c11-shared	0	-	symbols=23 jni=23
+nm	base-vs-cand	mask-c11-strict-shared	0	-	symbols=23 jni=23
+nm	base-vs-cand	mask-c17-ubsan-hdr	0	-	symbols=23 jni=23
+jvm	base	M3IndexMaskCompactorSelfTest	0	0	PASS M3IndexMaskCompactorSelfTest checks=57344 JNI=true
+jvm	base	M3MaskNativeParityProof	0	0	PASS M3MaskNativeParityProof checks=11520 checkedJNI=true
+jvm	base	M3BudgetedMaskWindowContract	0	0	BUDGETED_MASK_WINDOW_PASS random=5000 assertions=28914 backend=NATIVE_REQUIRED
+jvm	base	M3IndexMaskWindowSelfTest	0	0	PASS M3_INDEX_MASK_WINDOW checks=30596 native=true
+jvm	base	M3IndexMaskWindowRecoverySelfTest	0	0	PASS M3IndexMaskWindowRecoverySelfTest checks=10528 JNI=true
+jvm	base	M3MaskCompactorSpanContract	0	0	COMPACTOR_SCALAR_PASS cases=8192 invalid=5 backend=NATIVE_REQUIRED
+jvm	base	M3SparseMaskReadContract	0	0	M3_SPARSE_MASK_JNI_PASS checks=61440
+jvm	cand	M3IndexMaskCompactorSelfTest	0	0	PASS M3IndexMaskCompactorSelfTest checks=57344 JNI=true
+jvm	cand	M3MaskNativeParityProof	0	0	PASS M3MaskNativeParityProof checks=11520 checkedJNI=true
+jvm	cand	M3BudgetedMaskWindowContract	0	0	BUDGETED_MASK_WINDOW_PASS random=5000 assertions=28914 backend=NATIVE_REQUIRED
+jvm	cand	M3IndexMaskWindowSelfTest	0	0	PASS M3_INDEX_MASK_WINDOW checks=30596 native=true
+jvm	cand	M3IndexMaskWindowRecoverySelfTest	0	0	PASS M3IndexMaskWindowRecoverySelfTest checks=10528 JNI=true
+jvm	cand	M3MaskCompactorSpanContract	0	0	COMPACTOR_SCALAR_PASS cases=8192 invalid=5 backend=NATIVE_REQUIRED
+jvm	cand	M3SparseMaskReadContract	0	0	M3_SPARSE_MASK_JNI_PASS checks=61440
+jvm	base-vs-cand	M3IndexMaskCompactorSelfTest-output	0	-	identical=y
+jvm	base-vs-cand	M3MaskNativeParityProof-output	0	-	identical=y
+jvm	base-vs-cand	M3BudgetedMaskWindowContract-output	0	-	identical=y
+jvm	base-vs-cand	M3IndexMaskWindowSelfTest-output	0	-	identical=y
+jvm	base-vs-cand	M3IndexMaskWindowRecoverySelfTest-output	0	-	identical=y
+jvm	base-vs-cand	M3MaskCompactorSpanContract-output	0	-	identical=y
+jvm	base-vs-cand	M3SparseMaskReadContract-output	0	-	identical=y
+# header-match base rc=0 header=23 lib=23
+# header-match cand rc=0 header=23 lib=23

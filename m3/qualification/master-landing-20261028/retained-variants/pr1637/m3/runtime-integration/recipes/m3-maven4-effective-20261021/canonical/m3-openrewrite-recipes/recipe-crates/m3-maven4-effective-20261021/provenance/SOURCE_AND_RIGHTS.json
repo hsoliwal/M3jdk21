@@ -1,0 +1,145 @@
+{
+  "schema": "M3_MAVEN4_SOURCE_AND_RIGHTS/1",
+  "task": "m3-maven4-effective-20261021",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_engine_revision": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_origin_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "source_donors": [
+    {
+      "repository": "hsoliwal/maven",
+      "revision": "2993571eedbe96e06a737eaa8ae47cf112b255de",
+      "path": "api/maven-api-core/src/main/java/org/apache/maven/api/services/ModelBuilderResult.java",
+      "sha256": "0507e2e7a0a0218a9a0cb4838289b11fc4196b9815a3f8c8bcd7c8bfbb839781",
+      "git_blob": "854f8dcc01d9417bceb71563c238fccaf237d0cb",
+      "url": "https://github.com/hsoliwal/maven/blob/2993571eedbe96e06a737eaa8ae47cf112b255de/api/maven-api-core/src/main/java/org/apache/maven/api/services/ModelBuilderResult.java",
+      "role": "Distinct public completed-model API, interface reflection owner",
+      "license": "Apache-2.0",
+      "disposition": "READ_AND_SOURCE_QUALIFY_ORIGINAL_OWNER; no implementation body vendored into target"
+    },
+    {
+      "repository": "hsoliwal/maven",
+      "revision": "2993571eedbe96e06a737eaa8ae47cf112b255de",
+      "path": "impl/maven-impl/src/main/java/org/apache/maven/impl/model/DefaultModelBuilder.java",
+      "sha256": "c7cb4cd68fbc1b83e9d98c2c351c5b48432adf0d96262d0ef0e1df7253f8f0a9",
+      "git_blob": "ae2b6a320753fd29e5e7bfbbbb99b1d8f8026bfb",
+      "url": "https://github.com/hsoliwal/maven/blob/2993571eedbe96e06a737eaa8ae47cf112b255de/impl/maven-impl/src/main/java/org/apache/maven/impl/model/DefaultModelBuilder.java",
+      "role": "Actual model construction, validation and module/subproject selection authority; no implementation body copied",
+      "license": "Apache-2.0",
+      "disposition": "READ_AND_SOURCE_QUALIFY_ORIGINAL_OWNER; no implementation body vendored into target"
+    },
+    {
+      "repository": "hsoliwal/maven",
+      "revision": "2993571eedbe96e06a737eaa8ae47cf112b255de",
+      "path": "impl/maven-impl/src/main/java/org/apache/maven/impl/standalone/ApiRunner.java",
+      "sha256": "6f3431b18c5991c75aca72c5aa36f1edb7edb2a841bab847ccedf4091216997e",
+      "git_blob": "84d042886e1aee65d6b289dc928328b4d6a7bec1",
+      "url": "https://github.com/hsoliwal/maven/blob/2993571eedbe96e06a737eaa8ae47cf112b255de/impl/maven-impl/src/main/java/org/apache/maven/impl/standalone/ApiRunner.java",
+      "role": "Real source-built session owner used by the test fixture",
+      "license": "Apache-2.0",
+      "disposition": "READ_AND_SOURCE_QUALIFY_ORIGINAL_OWNER; no implementation body vendored into target"
+    },
+    {
+      "repository": "hsoliwal/maven",
+      "revision": "2993571eedbe96e06a737eaa8ae47cf112b255de",
+      "path": "impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java",
+      "sha256": "ee6ae7d41db2b369e0e079bb5de59fd30e0d4f730a63bd01923e950867a9949d",
+      "git_blob": "0817fd8d9485885f715c9d7b2bb23b4379f34bdf",
+      "url": "https://github.com/hsoliwal/maven/blob/2993571eedbe96e06a737eaa8ae47cf112b255de/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java",
+      "role": "41 original tests run from the pinned source reactor",
+      "license": "Apache-2.0",
+      "disposition": "READ_AND_SOURCE_QUALIFY_ORIGINAL_OWNER; no implementation body vendored into target"
+    }
+  ],
+  "first_party_recipe_lineage": "provenance/RECIPE_LINEAGE.json",
+  "recipe_successor_lineage": "provenance/successor-002/LINEAGE.json",
+  "license_and_notice_files": [
+    {
+      "path": "licenses/Synexia-LICENSE",
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+    },
+    {
+      "path": "licenses/Synexia-NOTICE",
+      "sha256": "816e983c97925d4342c370520dfd072fc4dfe493f050bf244e34ecb5c75ccbb1"
+    },
+    {
+      "path": "licenses/Maven-Fork-LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/Maven-Fork-NOTICE",
+      "sha256": "633cdd68388defe137dd4b6a02bc9656cefae3b33c64b371e31b104aad40adac"
+    }
+  ],
+  "target_files": [
+    {
+      "path": ".github/workflows/m3-ast-real-providers-20261019.yml",
+      "before_sha256": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+      "after_sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+      "status": "ACTIVE_RECIPE_POSTIMAGE",
+      "rights": "First-party M3/Synexia Apache-2.0; existing notices retained",
+      "kind": "TEXT"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+      "before_sha256": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3",
+      "after_sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+      "status": "ACTIVE_RECIPE_POSTIMAGE",
+      "rights": "First-party M3/Synexia Apache-2.0; existing notices retained",
+      "kind": "JAVA"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/README.md",
+      "before_sha256": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+      "after_sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+      "status": "ACTIVE_RECIPE_POSTIMAGE",
+      "rights": "First-party M3/Synexia Apache-2.0; existing notices retained",
+      "kind": "TEXT"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+      "before_sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+      "after_sha256": "3a214a73da26b90972b9ca1c2088ee173dd8575dc2a82660f6c0ef3fa1945d7c",
+      "status": "INACTIVE_REJECTED_CSV_FIXTURE_ONLY",
+      "rights": "First-party M3/Synexia Apache-2.0; existing notices retained",
+      "kind": "TEXT"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+      "status": "ACTIVE_RECIPE_POSTIMAGE",
+      "rights": "First-party M3/Synexia Apache-2.0; existing notices retained",
+      "kind": "JAVA"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/maven4/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+      "status": "ACTIVE_RECIPE_POSTIMAGE",
+      "rights": "First-party M3/Synexia Apache-2.0; existing notices retained",
+      "kind": "TEXT"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/maven4/pom.xml",
+      "before_sha256": "ABSENT",
+      "after_sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+      "status": "ACTIVE_RECIPE_POSTIMAGE",
+      "rights": "First-party M3/Synexia Apache-2.0; existing notices retained",
+      "kind": "TEXT"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/maven4/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+      "status": "ACTIVE_RECIPE_POSTIMAGE",
+      "rights": "First-party M3/Synexia Apache-2.0; existing notices retained",
+      "kind": "TEXT"
+    }
+  ],
+  "compiled_payload_policy": "Provider binaries and compiled classes are evaluation inputs only; none are copied into canonical publication or target runtime by this packet. Do not infer a blanket license for the90 third-party dependencies. Artifact inventories record actual boundaries.",
+  "catalogue": "Supported Maven4 README retains exact fork pin and category/alternative/rights table; historical CSV stays unchanged.",
+  "attribution": "No Maven implementation body copied; original model construction and validation remain with the source-built provider. Existing canonical engine and test-source notices preserved in source snapshots and adaptations.",
+  "shared_engines_changed": false,
+  "public_api_delta": "Exactly one additive public static maven4Effective(M3File,Object,M3ASTIngress.Limits); every incumbent public callable retained."
+}

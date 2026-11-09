@@ -1,0 +1,505 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Reuses the source-qualified Maven recipe and existing monitored hosted lane.
+name: M3 current backport contract qualification
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-backport-contract-current-owner.yml'
+      - 'm3/tooling/backport-contract-current-owner/**'
+      - 'm3/backports/test_compatibility_policy.py'
+      - 'm3/backports/compatibility_policy.py'
+      - 'm3/backports/POST21_PRIORITY_COMPATIBILITY.tsv'
+      - 'm3/backports/JEP_CATALOGUE.tsv'
+      - 'm3/backports/RELEASE_JEP_AUTHORITY.tsv'
+      - 'm3/backports/test_backport_execution_waves.py'
+      - 'm3/backports/backport_execution_waves.py'
+      - 'm3/backports/BACKPORT_EXECUTION_WAVES.md'
+permissions:
+  contents: read
+jobs:
+  backport-contract-current-owner:
+    name: Backport recipe and complete owning Python contracts
+    if: github.repository == 'hsoliwal/M3jdk21' && github.event.pull_request.head.repo.full_name == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Reserve storage and select existing toolchains
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-backport-contract-current-owner-source
+          TMPDIR: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/data
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,re,shutil
+          reserve,cap=8*1024**3,512*1024**2
+          for key in ("RUNNER_TEMP","GITHUB_WORKSPACE"):
+              base=pathlib.Path(os.environ[key])
+              if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise SystemExit("redirected/missing runner storage")
+              st=os.statvfs(base)
+              if st.f_bavail*st.f_frsize<reserve+cap:raise SystemExit("HOLD_STORAGE 8GiB after512MiB")
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          if root.exists() or source.exists():raise SystemExit("owned output paths must be fresh")
+          cache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])
+          javas=[]
+          for version in (cache/"Java_Temurin-Hotspot_jdk").glob("21.*"):
+              home=version/"x64"
+              if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",version.name) and (version/"x64.complete").is_file() and all(os.access(home/"bin"/name,os.X_OK) for name in ("java","javac")):javas.append(home)
+          pythons=[]
+          for version in (cache/"Python").glob("3.12.*"):
+              home=version/"x64";python=home/"bin/python3.12"
+              if re.fullmatch(r"3\.12\.\d+",version.name) and (version/"x64.complete").is_file() and os.access(python,os.X_OK) and (home/"lib/python3.12/venv/__init__.py").is_file() and (home/"lib/python3.12/ensurepip/__init__.py").is_file():pythons.append(python)
+          if not javas or not pythons:raise SystemExit("HOLD_TOOLCHAIN preinstalled JDK21/CPython3.12 required; no setup/download fallback")
+          java=sorted(javas)[-1].resolve();python=sorted(pythons)[-1].resolve()
+          for directory in ("home/.m2","m2","tmp","cache","config","data"):(root/directory).mkdir(parents=True,exist_ok=False)
+          settings='<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>\n'
+          for name in ("settings.xml","global-settings.xml"):(root/"home/.m2"/name).write_text(settings,encoding="utf-8")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:
+              f.write("java="+str(java)+"\npython="+str(python)+"\npython-bin="+str(python.parent)+"\n")
+
+          PY
+      - name: Narrow exact-head checkout
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-backport-contract-current-owner-source
+          TMPDIR: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: m3-backport-contract-current-owner-source
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/workflows/m3-backport-contract-current-owner.yml
+            /m3/tooling/backport-contract-current-owner/
+            /m3/backports/test_compatibility_policy.py
+            /m3/backports/compatibility_policy.py
+            /m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv
+            /m3/backports/JEP_CATALOGUE.tsv
+            /m3/backports/RELEASE_JEP_AUTHORITY.tsv
+            /m3/backports/test_backport_execution_waves.py
+            /m3/backports/backport_execution_waves.py
+            /m3/backports/BACKPORT_EXECUTION_WAVES.md
+      - name: Qualify current backport recipe and owning Python contracts
+        shell: bash
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-backport-contract-current-owner-source
+          TMPDIR: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/data
+          M3_JAVA_HOME: ${{ steps.preflight.outputs.java }}
+          M3_PYTHON: ${{ steps.preflight.outputs.python }}
+          M3_PYTHON_BIN: ${{ steps.preflight.outputs.python-bin }}
+          M3_QUALIFICATION_ID: m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}
+          EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          GIT_OPTIONAL_LOCKS: '0'
+          GIT_NO_LAZY_FETCH: '1'
+          GIT_TERMINAL_PROMPT: '0'
+          GCM_INTERACTIVE: never
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import errno,hashlib,json,os,pathlib,re,shutil,signal,subprocess,time
+          reserve,cap=8*1024**3,512*1024**2
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
+          source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          bundle=root/"artifacts";bundle.mkdir(exist_ok=False)
+          sdk=source/"m3/tooling/backport-contract-current-owner/sdk"
+          authoring=source/"m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk"
+          start=time.monotonic()
+          active_command=None
+          class CensusRescan(RuntimeError):pass
+          def traversal_error(error):
+              allowed=False
+              if error.errno==errno.ENOENT and error.filename:
+                  missing=pathlib.Path(error.filename)
+                  temporary=root/"tmp"
+                  if active_command in ("sdk-inputs","sdk-maven","authoring-inputs","authoring-maven","runtime-proof") and temporary in missing.parents:
+                      allowed=True
+                  if active_command in ("sdk-inputs","sdk-maven","authoring-inputs","authoring-maven"):
+                      target=(authoring if active_command.startswith("authoring-") else sdk)/"target"
+                      if target in missing.parents:
+                          child=missing.relative_to(target).parts[0]
+                          if re.fullmatch(r"tmp[a-z0-9_]{8}",child):allowed=True
+              if allowed:raise CensusRescan("owned SDK temporary directory disappeared") from error
+              raise RuntimeError("storage census failed: "+str(error)) from error
+          def gate(limit=480*1024**2):
+              for attempt in range(3):
+                  used=0
+                  try:
+                      for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),source):
+                          if not base.is_dir() or base.is_symlink():raise RuntimeError("missing/redirected storage")
+                          for folder,names,files in os.walk(base,followlinks=False,onerror=traversal_error):
+                              for name in names:
+                                  try:info=os.lstat(pathlib.Path(folder)/name)
+                                  except OSError as error:traversal_error(error)
+                                  used+=max(info.st_size,info.st_blocks*512)
+                              for name in files:
+                                  try:info=os.lstat(pathlib.Path(folder)/name)
+                                  except FileNotFoundError:continue
+                                  except OSError as error:traversal_error(error)
+                                  used+=max(info.st_size,info.st_blocks*512)
+                  except CensusRescan:
+                      if attempt==2:raise RuntimeError("storage census unstable after three full rescan attempts")
+                      continue
+                  break
+              if used>limit:raise RuntimeError("512MiB aggregate task limit: observed="+str(used)+" limit="+str(limit)+" bytes (32MiB artifact reserve)")
+              for base in (root,source):
+                  st=os.statvfs(base)
+                  available=st.f_bavail*st.f_frsize
+                  required=reserve+cap-used
+                  if available<required:raise RuntimeError("8GiB-after-output reserve: observed="+str(available)+" required="+str(required)+" bytes")
+              return used
+          def storage_guard_discriminators():
+              from contextlib import ExitStack
+              from types import SimpleNamespace
+              from unittest.mock import patch
+              global active_command
+              previous_command=active_command
+              cases=[]
+              def exercise(name,kind,phase="sdk-inputs",expected=None,repeat=False,size=0,available=None):
+                  global active_command
+                  counts={"walks":0,"stats":0}
+                  missing={"sdk":sdk/"target/tmpabcdefgh/child","tmp":root/"tmp/java-owned/child",
+                           "m2":root/"m2/missing-directory","source":sdk/"pinned-engine/missing-directory",
+                           "target":sdk/"target/classes/missing-directory"}.get(kind,source/"ordinary-output")
+                  owner=pathlib.Path(os.environ["RUNNER_TEMP"]) if kind in ("tmp","m2") else source
+                  def walk(base,**options):
+                      if pathlib.Path(base)!=owner:return iter(())
+                      counts["walks"]=counts["walks"]+1
+                      return iter([(str(missing.parent),[] if kind=="file" else [missing.name],[missing.name] if kind=="file" else [])])
+                  def lstat(path):
+                      counts["stats"]=counts["stats"]+1
+                      if kind=="permission":raise PermissionError(errno.EACCES,"denied",str(path))
+                      if kind=="file" or kind in ("sdk","tmp","m2","source","target") and (repeat or counts["stats"]==1):
+                          raise FileNotFoundError(errno.ENOENT,"gone",str(path))
+                      return SimpleNamespace(st_size=size,st_blocks=0)
+                  free=reserve+cap if available is None else available
+                  patches=[patch.object(os,"walk",walk),patch.object(os,"lstat",lstat),
+                           patch.object(os,"statvfs",lambda path:SimpleNamespace(f_bavail=free,f_frsize=1)),
+                           patch.object(pathlib.Path,"is_dir",lambda path:True),
+                           patch.object(pathlib.Path,"is_symlink",lambda path:False)]
+                  active_command=phase
+                  with ExitStack() as stack:
+                      for item in patches:stack.enter_context(item)
+                      try:gate()
+                      except RuntimeError as error:
+                          if expected is None or expected not in str(error):raise AssertionError(name+" rejected incorrectly") from error
+                      else:
+                          if expected is not None:raise AssertionError(name+" unexpectedly admitted")
+                  if name in ("sdk-selftest-rescan","owned-java-temp-rescan") and counts["walks"]!=2:raise AssertionError("complete census did not restart")
+                  if name=="three-rescan-bound" and counts["walks"]!=3:raise AssertionError("census retry bound changed")
+                  cases.append(name)
+              try:
+                  exercise("vanished-file-baseline","file")
+                  exercise("sdk-selftest-rescan","sdk")
+                  exercise("owned-java-temp-rescan","tmp",phase="sdk-maven")
+                  exercise("source-directory-refused","source",expected="storage census failed")
+                  exercise("m2-directory-refused","m2",expected="storage census failed")
+                  exercise("ordinary-target-directory-refused","target",expected="storage census failed")
+                  exercise("outside-phase-refused","sdk",phase="binding",expected="storage census failed")
+                  exercise("permission-error-refused","permission",expected="storage census failed")
+                  exercise("three-rescan-bound","sdk",expected="three full rescan attempts",repeat=True)
+                  exercise("cap-exhaustion-refused","size",size=480*1024**2+1,expected="aggregate task limit")
+                  exercise("reserve-exhaustion-refused","size",available=0,expected="8GiB-after-output reserve")
+              finally:active_command=previous_command
+              if len(cases)!=11:raise RuntimeError("eleven storage guard discriminator cases required")
+              gate()
+              receipt={"schema":"M3_BACKPORT_CONTRACT_CURRENT_OWNER_STORAGE_GUARD_DISCRIMINATORS_V1","tests":len(cases),"failures":0,"cases":cases,"scope":"SAME_INLINE_GATE_WITH_MOCKED_METADATA_NO_REAL_TARGET_MUTATION"}
+              (bundle/"storage-guard-receipt.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
+              print("PASS: eleven actual-inline mocked storage guard discriminators")
+          def authoring_binding():
+              sdk_prefix="m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/"
+              workflow_path=".github/workflows/m3-backport-contract-current-owner.yml"
+              binding_path="m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-source-binding.json"
+              path=source/binding_path
+              if not path.is_file() or any(p.is_symlink() for p in [path,*path.parents]):raise RuntimeError("missing or redirected authoring source binding")
+              raw=path.read_bytes()
+              git_blob=lambda data:hashlib.sha1(b"blob "+str(len(data)).encode("ascii")+b"\0"+data).hexdigest()
+              if git_blob(raw)!=getgit("rev-parse","HEAD:"+binding_path):raise RuntimeError("authoring source binding differs from exact HEAD")
+              binding=json.loads(raw)
+              if (binding["schema"]!="M3_BACKPORT_APPLIED_OWNER_AUTHORING_SOURCE_BINDING_V1"
+                      or binding["repository"]!="hsoliwal/com.synexia" or binding["receiverRepository"]!="hsoliwal/M3jdk21"
+                      or binding["admissionCommit"]!="679bece51397656563133a4f7e00063b086c0ee7"
+                      or binding["sdkPath"]!=sdk_prefix or binding["runtimeApplied"] is not False or binding["phaseAdvanced"] is not False
+                      or not re.fullmatch("[0-9a-f]{40}",binding["sourceCommit"])):raise RuntimeError("authoring source binding identity drift")
+              rows=binding["files"]
+              if not isinstance(rows,list) or not 1<=binding["sdkFiles"]<=64 or len(rows)!=binding["sdkFiles"]+1:raise RuntimeError("closed authoring source binding size required")
+              tracked=subprocess.check_output(["git","ls-files","-z","--",sdk_prefix],cwd=source,timeout=15).decode("utf-8").split("\0")
+              expected=set(tracked)-{""}
+              if len(expected)!=binding["sdkFiles"]:raise RuntimeError("complete authoring tracked inventory required")
+              expected.add(workflow_path)
+              tree=subprocess.check_output(["git","ls-tree","-r","-z","HEAD","--",sdk_prefix,workflow_path],cwd=source,timeout=15).decode("utf-8")
+              head_blobs={}
+              for entry in tree.split("\0"):
+                  if not entry:continue
+                  fields,name=entry.split("\t",1)
+                  mode,kind,digest=fields.split(" ")
+                  if kind!="blob" or mode!="100644" or name in head_blobs:raise RuntimeError("regular unique authoring Git sources required")
+                  head_blobs[name]=digest
+              if set(head_blobs)!=expected:raise RuntimeError("authoring HEAD inventory differs")
+              seen=set()
+              for row in rows:
+                  name=row["targetPath"];relative=pathlib.PurePosixPath(name)
+                  if (name in seen or name not in expected or relative.is_absolute() or "\\" in name or ":" in name or "\0" in name
+                          or any(part in ("",".","..") for part in name.split("/"))):raise RuntimeError("authoring source ownership drift")
+                  seen.add(name);item=source/name
+                  if not item.is_file() or any(p.is_symlink() for p in [item,*item.parents]):raise RuntimeError("missing or redirected authoring source")
+                  data=item.read_bytes()
+                  if (len(data)!=row["bytes"] or git_blob(data)!=row["gitBlob"] or head_blobs[name]!=row["gitBlob"]
+                          or hashlib.sha256(data).hexdigest()!=row["sha256"]):raise RuntimeError("authoring canonical bytes differ: "+name)
+              if seen!=expected or not authoring.is_dir() or (authoring/"target").exists() or (authoring/"target").is_symlink():raise RuntimeError("fresh closed authoring source tree required")
+              found=set()
+              def refuse(error):raise RuntimeError("authoring source census failed") from error
+              for folder,directories,files in os.walk(authoring,followlinks=False,onerror=refuse):
+                  base=pathlib.Path(folder)
+                  if any((base/name).is_symlink() for name in directories):raise RuntimeError("redirected authoring source directory")
+                  for name in files:
+                      item=base/name
+                      if not item.is_file() or item.is_symlink():raise RuntimeError("nonregular authoring source file")
+                      found.add(item.relative_to(source).as_posix())
+              if found!=expected-{workflow_path}:raise RuntimeError("unbound authoring source file")
+              subprocess.run(["git","diff","HEAD","--exit-code","--no-ext-diff","--",sdk_prefix,binding_path,workflow_path],cwd=source,check=True,timeout=15)
+              receipt={"schema":"M3_BACKPORT_APPLIED_OWNER_AUTHORING_SOURCE_BINDING_RECEIPT_V1","checkoutCommit":head,"canonicalSourceCommit":binding["sourceCommit"],
+                       "bindingSha256":hashlib.sha256(raw).hexdigest(),"sdkFiles":binding["sdkFiles"],"boundFiles":len(rows),"runtimeApplied":False,"phaseAdvanced":False}
+              destination=bundle/"authoring-source-binding-receipt.json"
+              with destination.open("x",encoding="utf-8") as output:output.write(json.dumps(receipt,indent=2)+"\n")
+          def getgit(*args):
+              return subprocess.check_output(["git",*args],cwd=source,text=True,timeout=15).strip()
+          gate()
+          head=getgit("rev-parse","HEAD")
+          if head!=os.environ["EXPECTED_SOURCE_SHA"] or not re.fullmatch("[0-9a-f]{40}",head):raise RuntimeError("checkout is not exact candidate head")
+          env=os.environ.copy()
+          for name in list(env):
+              if name in ("GITHUB_TOKEN","GH_TOKEN","CLASSPATH") or name.startswith(("PIP_","PYTHON","MAVEN_","JAVA_TOOL_OPTIONS","JDK_JAVA_OPTIONS")):env.pop(name,None)
+          env.update(M3_QUALIFICATION_ROOT=str(root),HOME=str(root/"home"),USERPROFILE=str(root/"home"),MAVEN_USER_HOME=str(root/"home/.m2"),TMPDIR=str(root/"tmp"),TEMP=str(root/"tmp"),TMP=str(root/"tmp"),JAVA_HOME=os.environ["M3_JAVA_HOME"],PATH=os.environ["M3_PYTHON_BIN"]+os.pathsep+os.environ["M3_JAVA_HOME"]+"/bin"+os.pathsep+env["PATH"],MAVEN_OPTS="-Xmx512m -Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home"),JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Djava.io.tmpdir="+str(root/"tmp")+" -Duser.home="+str(root/"home")+" -XX:+PerfDisableSharedMem",PIP_CONFIG_FILE=os.devnull,PIP_DISABLE_PIP_VERSION_CHECK="1",PIP_NO_CACHE_DIR="1",PYTHONDONTWRITEBYTECODE="1",GIT_OPTIONAL_LOCKS="0",GIT_NO_LAZY_FETCH="1",GIT_TERMINAL_PROMPT="0")
+          records=[]
+          def cleanup(child):
+              # The qualifier wrappers start no nested sessions; fence this owned group.
+              for sig,seconds in ((signal.SIGTERM,2),(signal.SIGKILL,3)):
+                  try:os.killpg(child.pid,sig)
+                  except ProcessLookupError:pass
+                  end=time.monotonic()+seconds
+                  while time.monotonic()<end:
+                      try:os.killpg(child.pid,0)
+                      except ProcessLookupError:return
+                      time.sleep(.05)
+              raise RuntimeError("owned process group terminal state unproved")
+          def run(name,command,deadline=300,expected=0):
+              global active_command
+              if time.monotonic()-start>1500:raise RuntimeError("global deadline before launch")
+              gate()
+              child=None;code=None
+              log=bundle/(name+".log")
+              launched=time.time()
+              with log.open("xb") as out:
+                  active_command=name
+                  try:
+                      child_env=env.copy()
+                      if name in ("runtime-inputs","runtime-proof"):child_env.pop("JAVA_TOOL_OPTIONS",None)
+                      child=subprocess.Popen(command,cwd=source,env=child_env,stdin=subprocess.DEVNULL,stdout=out,stderr=subprocess.STDOUT,start_new_session=True)
+                      command_start=time.monotonic()
+                      while child.poll() is None:
+                          gate()
+                          if time.monotonic()-command_start>deadline or time.monotonic()-start>1500:raise RuntimeError("owned command deadline")
+                          time.sleep(.5)
+                      code=child.wait()
+                      if time.monotonic()-start>1500:raise RuntimeError("global deadline after child exit")
+                  finally:
+                      try:
+                          if child is not None:
+                              if child.poll() is None:
+                                  try:os.killpg(child.pid,signal.SIGTERM)
+                                  except ProcessLookupError:pass
+                                  try:child.wait(timeout=2)
+                                  except subprocess.TimeoutExpired:
+                                      try:os.killpg(child.pid,signal.SIGKILL)
+                                      except ProcessLookupError:pass
+                                      child.wait(timeout=5)
+                              cleanup(child)
+                              records.append({"name":name,"argv":command,"returncode":child.returncode,"startedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime(launched)),"completedUtc":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"log":log.name,"logBytes":log.stat().st_size,"parentReaped":True,"ownedSessionAbsent":True})
+                      finally:active_command=None
+              gate()
+              if code!=expected:raise RuntimeError(name+" failed with "+str(code)+" expected "+str(expected))
+          py=[os.environ["M3_PYTHON"],"-I","-S","-B"]
+          qualifier=source/"m3/tooling/backport-contract-current-owner/qualify.py"
+          settings=root/"home/.m2"
+          maven=["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-Dstyle.color=never"]
+          try:
+              run("binding",py+[str(qualifier),"binding"],deadline=60)
+              run("toolchain",maven+["-version"],deadline=30)
+              version=(bundle/"toolchain.log").read_text(encoding="utf-8")
+              expected="Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)"
+              identities=[line for line in version.splitlines() if line.startswith("Apache Maven ")]
+              observed=identities[0] if len(identities)==1 else None
+              if identities!=[expected] or not re.search(r"Java version: 21(?:\.|,)",version):raise RuntimeError("exact inventoried Maven3.10/JDK21 required; no setup/download fallback")
+              storage_guard_discriminators()
+              run("sdk-inputs",py+[str(sdk/"verify.py"),"--inputs","--self-test"],deadline=120)
+              if any((sdk/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("SDK compilation and test outputs must start absent")
+              run("sdk-maven",maven+["-f",str(sdk/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
+              run("sdk-reports",py+[str(sdk/"verify.py"),"--reports"],deadline=90)
+              authoring_binding()
+              run("authoring-inputs",py+[str(authoring/"verify.py"),"--inputs","--self-test"],deadline=120)
+              if any((authoring/"target"/name).exists() for name in ("classes","test-classes","surefire-reports")):raise RuntimeError("authoring compilation and tests must start absent")
+              run("authoring-maven",maven+["-f",str(authoring/"pom.xml"),"-DskipTests=false","-Dmaven.test.skip=false","test"],deadline=600)
+              run("authoring-reports",py+[str(authoring/"verify.py"),"--reports"],deadline=90)
+              authoring_receipt=json.loads((authoring/"target/authoring-sdk-receipt.json").read_bytes())
+              if (authoring_receipt["schema"]!="M3_BACKPORT_APPLIED_OWNER_CUSTODY_SDK_RECEIPT_V1"
+                      or authoring_receipt["scope"]!="SOURCE_ONLY_BACKPORT_APPLIED_OWNER_CUSTODY_REPLAY"
+                      or authoring_receipt["qualificationId"]!=os.environ["M3_QUALIFICATION_ID"] or authoring_receipt["checkoutCommit"]!=head
+                      or (authoring_receipt["tests"],authoring_receipt["successfulRuns"],authoring_receipt["refusedRuns"],authoring_receipt["emittedOutputs"])!=(3,512,48,6)
+                      or authoring_receipt["recipeJUnitQualified"] is not True or authoring_receipt["recipeReplayQualified"] is not True
+                      or authoring_receipt["inputPinsSha256"]!=hashlib.sha256((authoring/"pins.json").read_bytes()).hexdigest()):
+                  raise RuntimeError("fresh complete helper-authoring Maven qualification required")
+              for label,count,schema,scope in (
+                      ("runtime",22,"M3_BACKPORT_APPLIED_OWNER_CONSTRUCTOR_CONTROLS_V1","PURE_CONSTRUCTOR_OVER_SEALED_BYTES_NO_SOURCE_MUTATION"),
+                      ("host",29,"M3_BACKPORT_APPLIED_HOST_CONSTRUCTOR_CONTROLS_V1","PURE_HOST_CONTRACT_OVER_SEALED_IDENTITIES_NO_SOURCE_MUTATION")):
+                  controls=authoring_receipt["constructorControls"][label]
+                  if (controls["schema"]!=schema or controls["scope"]!=scope or controls["state"]!="PASS" or controls["tests"]!=count
+                          or len(controls["cases"])!=count or len(set(controls["cases"]))!=count):raise RuntimeError("complete helper constructor controls required")
+              for key in ("runtimeApplied","phaseAdvanced","productTargetApplied"):
+                  if authoring_receipt[key] is not False:raise RuntimeError("helper authoring source-only scope drift")
+              runtime=source/"m3/tooling/backport-contract-current-owner/runtime/qualify.py"
+              run("runtime-inputs",py+[str(runtime),"--output-root",str(root),"--inputs-only"],deadline=90)
+              run("runtime-proof",py+[str(runtime),"--output-root",str(root),"--run"],deadline=300)
+              run("sdk-report",py+[str(qualifier),"report"],deadline=90)
+              receipt=json.loads((bundle/"qualification-receipt.json").read_bytes())
+              if receipt["sdkRecipeJUnitQualified"] is not True or receipt["currentBackportContractsQualified"] is not True:raise RuntimeError("actual recipe and current backport contracts required")
+              if receipt["receiverState"]!="APPLIED" or receipt["frozenBaselineSource"]!="SDK_FORWARD_BEFORE_REPLACE_PLUS_CURRENT_KEEP":raise RuntimeError("exact applied owners and frozen semantic baseline required")
+              for key in ("originalPrivateModelQualified","stringDispatchQualified","fullNativeTargetQualified","windowsQualified","fullMatchedJdkQualified","performanceRetentionQualified","productTargetApplied","phaseAdvanced"):
+                  if receipt[key] is not False:raise RuntimeError("source SDK scope drift")
+              hosted={"schema":"M3_BACKPORT_CONTRACT_CURRENT_OWNER_HOSTED_V1","checkoutCommit":head,"commands":records,"qualificationReceiptSha256":hashlib.sha256((bundle/"qualification-receipt.json").read_bytes()).hexdigest(),"aggregateBytes":gate(),"storageGuardReceiptSha256":hashlib.sha256((bundle/"storage-guard-receipt.json").read_bytes()).hexdigest(),"mavenIdentity":observed,"authoringSdkReceiptSha256":hashlib.sha256((authoring/"target/authoring-sdk-receipt.json").read_bytes()).hexdigest(),"authoringSourceBindingReceiptSha256":hashlib.sha256((bundle/"authoring-source-binding-receipt.json").read_bytes()).hexdigest(),"receiverState":receipt["receiverState"],"frozenBaselineSource":receipt["frozenBaselineSource"],"previousQualification":receipt["previousQualification"],"phaseAdvanced":False}
+              (bundle/"hosted-receipt.json").write_text(json.dumps(hosted,indent=2)+"\n",encoding="utf-8")
+          finally:
+              # Command logs already reside in the upload directory if storage refuses new copies.
+              last=bundle/(records[-1]["log"] if records else "binding.log")
+              tail=b""
+              if last.is_file() and not last.is_symlink():
+                  with last.open("rb") as f:f.seek(max(0,last.stat().st_size-32768));tail=f.read(32768)
+              try:
+                  before=gate(496*1024**2)
+                  present=sorted(bundle.iterdir())
+                  external=sorted(root.glob("*.json"))+sorted(root.glob("*.log"))
+                  external+=sorted((root/"backport-contract-python").glob("*.json"))+sorted((root/"backport-contract-python").glob("*.log"))
+                  external+=sorted((sdk/"target/surefire-reports").glob("TEST-*.xml"))
+                  external+=sorted((sdk/"target/surefire-reports").glob("*.txt"))
+                  external+=[sdk/"target/sdk-receipt.json",sdk/"target/recipe-test-counters.json",qualifier.parent/"source-binding.json"]
+                  external+=sorted((authoring/"target/surefire-reports").glob("TEST-*.xml"))+sorted((authoring/"target/surefire-reports").glob("*.txt"))
+                  external+=[authoring/"target/authoring-sdk-receipt.json",authoring/"target/authoring-recipe-test-counters.json",authoring.parent/"authoring-source-binding.json"]
+                  authoring_aliases={
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/qualify.py":"authoring-output-host-qualify.py",
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/README.md":"authoring-output-host-README.md",
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/runtime/qualify.py":"authoring-output-runtime-qualify.py",
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/runtime/README.md":"authoring-output-runtime-README.md",
+                      authoring/"target/emitted/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json":"authoring-output-INPUTS.json",
+                      authoring/"target/emitted/.github/workflows/m3-backport-contract-current-owner.yml":"authoring-output-workflow.yml",
+                  }
+                  external+=list(authoring_aliases)
+                  selected=present+[p for p in external if p.is_file()]
+                  if any(not p.is_file() or any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
+                  by_name={}
+                  origins={}
+                  copies=[]
+                  for path in selected:
+                      name=authoring_aliases.get(path,path.name)
+                      if name in ("commands.json","inventory.json","log-tail.txt"):raise RuntimeError("reserved artifact name already exists")
+                      destination=bundle/name
+                      if name in by_name:
+                          if path.read_bytes()!=by_name[name].read_bytes():raise RuntimeError("artifact basename conflict")
+                          continue
+                      by_name[name]=path
+                      origins[name]=str(path.relative_to(root)) if root in path.parents else str(path.relative_to(source))
+                      if path!=destination:copies.append((path,destination))
+                  commands=(json.dumps(records,indent=2)+"\n").encode("utf-8")
+                  payload=sum(p.stat().st_size for p in by_name.values())+len(tail)+len(commands)
+                  planned=sum(p.stat().st_size for p,d in copies)+len(tail)+len(commands)
+                  if len(by_name)+3>64 or payload+1024**2>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("complete artifact payload exceeds closed budget")
+              except BaseException:
+                  print(tail.decode("utf-8",errors="replace"));raise
+              for path,destination in copies:
+                  gate(496*1024**2);shutil.copyfile(path,destination)
+              gate(496*1024**2);(bundle/"commands.json").write_bytes(commands)
+              gate(496*1024**2);(bundle/"log-tail.txt").write_bytes(tail)
+              origins["commands.json"]="generated command lifecycle records"
+              origins["log-tail.txt"]="additional bounded tail of "+last.name
+              inventory={}
+              for path in sorted(bundle.iterdir()):
+                  if not path.is_file() or path.is_symlink():raise RuntimeError("artifact inventory redirected")
+                  with path.open("rb") as f:digest=hashlib.file_digest(f,"sha256").hexdigest()
+                  inventory[path.name]={"bytes":path.stat().st_size,"sha256":digest,"source":origins[path.name]}
+              gate(496*1024**2)
+              (bundle/"inventory.json").write_text(json.dumps(inventory,indent=2)+"\n",encoding="utf-8")
+              print(tail.decode("utf-8",errors="replace"))
+              print("Final aggregate bytes before artifact upload:",gate(496*1024**2))
+          PY
+      - name: Fence the existing artifact payload
+        id: artifact_payload
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-backport-contract-current-owner-source
+          TMPDIR: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/data
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,stat
+          bundle=pathlib.Path(os.environ["M3_PROOF_ROOT"])/"artifacts"
+          if not bundle.is_dir() or any(p.is_symlink() for p in [bundle,*bundle.parents]):raise SystemExit("artifact payload missing or redirected")
+          files=list(bundle.iterdir())
+          if not files or len(files)>64:raise SystemExit("artifact payload must contain1..64flat regular files")
+          total=0
+          for path in files:
+              info=path.lstat()
+              if not stat.S_ISREG(info.st_mode) or path.is_symlink():raise SystemExit("artifact payload contains nonregular or redirected input")
+              total+=info.st_size
+          if total>8*1024**2:raise SystemExit("artifact payload exceeds8MiB: observed="+str(total)+" limit="+str(8*1024**2)+" bytes")
+          print("Closed artifact payload:",len(files),"files",total,"bytes")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as output:output.write("allowed=true\n")
+          PY
+      - name: Retain bounded SDK logs and source qualification receipts
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-backport-contract-current-owner-source
+          TMPDIR: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/data
+        if: ${{ always() && steps.artifact_payload.outputs.allowed == 'true' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-backport-contract-current-owner-${{ github.run_id }}-${{ github.run_attempt }}/artifacts/
+          include-hidden-files: true
+          compression-level: 0
+          retention-days: 90
+          if-no-files-found: error

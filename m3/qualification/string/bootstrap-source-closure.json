@@ -1,0 +1,1760 @@
+{
+  "schema": "M3JDK21_V7_BOOTSTRAP_PENDING_RECEIPT_V1",
+  "date": "2026-11-05",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "kind": "passive_pending_string_qualification_snapshot",
+  "status": "PENDING",
+  "release_ready": false,
+  "runtime_accepted": false,
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "base_branch": "master",
+    "base_commit": "b0fbe13b7feb437b39cdd1069ff49415f4d50bc0",
+    "base_tree": "3c3dbecc13a502b15c3510edf84ac3401fe5f01b",
+    "source_path": "m3/qualification/string/bootstrap-source-closure.json",
+    "product_jdk_classes_modified": 0,
+    "public_JDK_API_changed": false,
+    "modules_or_export_directives_modified": false
+  },
+  "audit": {
+    "status": "PASS_CALIBRATED_AUDIT",
+    "repository": "hsoliwal/com.synexia",
+    "commit": "9466e0a1b0aa58c429f855f11c3e9c102b8e2cb8",
+    "pull_request": 16650,
+    "qualification_git_blob": "4766db5a7fdaf800fffddbe3b84111963c15916b",
+    "raw_log": {
+      "gitBlob": "a4f2983ae680f6aeaef0541d7632a2625d002c5c",
+      "sha256": "5ce13223a266fdea7325e921d70dfefd7622b20462dc1073d15bed6c4f14136a",
+      "bytes": 41849
+    },
+    "source_bindings_git_blob": "c6bd76d8f8176b413c88aa832f22df6d86480e7a",
+    "runtime": {
+      "version": "21.0.9+7-LTS-338",
+      "vm": "Java HotSpot(TM) 64-Bit Server VM",
+      "os": "Windows 11",
+      "arch": "amd64"
+    },
+    "attempts": {
+      "base-control": {
+        "compiled": true,
+        "emittedClasses": 1,
+        "diagnosticCount": 0
+      },
+      "management-control": {
+        "compiled": false,
+        "emittedClasses": 0,
+        "diagnosticCount": 1
+      },
+      "historical-projection": {
+        "compiled": false,
+        "emittedClasses": 0,
+        "diagnosticCount": 19
+      },
+      "current-owner": {
+        "compiled": false,
+        "emittedClasses": 0,
+        "diagnosticCount": 124
+      }
+    },
+    "compiler_boundary": "JavaCompiler --release21 --limit-modules java.base with explicit empty classpath/sourcepath; in-memory inputs/output",
+    "scope": "Calibrated diagnostic audit, not named java.base/source-built M3JDK or runtime qualification.",
+    "missing_dependencies_are_repository_bugs": false
+  },
+  "dependencies": [
+    {
+      "symbol": "IndexCharacterFlags",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexCharacterFlags.java",
+      "source_git_blob": "3219d69fef5747c12f496b0fd5e5dbf652a101e8",
+      "source_sha256": "710636738b28164448c72444c1b8362692101811ecf930d9245c67a190371ea6",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "IndexCharacterFlagsResolver",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexCharacterFlagsResolver.java",
+      "source_git_blob": "04141cd643496211bdcd416805c271ab4f65e411",
+      "source_sha256": "a92f044d62e5313a9382640fa636154145485174f9a9b874a5eacc434c17e8cd",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "IndexLexiconWordView",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexLexiconWordView.java",
+      "source_git_blob": "e981885ba2268552b7d3aa3d21e2334ea9f26e68",
+      "source_sha256": "47d2f1d402360c378477439dc58c38f341773aacf9f744283ffd5e193fd2bbcd",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "IndexTextMetrics",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexTextMetrics.java",
+      "source_git_blob": "58beddc813b3ed4716233d23f0e1909bda4e21b9",
+      "source_sha256": "c10b054236a779550fa339d763117fbac4b3051aef1b54aaeeada62db079689d",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "IndexUtf16SearchImage",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexUtf16SearchImage.java",
+      "source_git_blob": "1a6c8a8cafd9297bc6cec3730b81edc5b7f9cb47",
+      "source_sha256": "16eaa92f8b105b276f96ca4b0450dbd1e758ed9bb5a03001194e54132d5d4d39",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "MIndexString",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexString.java",
+      "source_git_blob": "bf64463be2ceedcb1f13bd295975dbe795cc0e6d",
+      "source_sha256": "a273782ae56ca7735dee5f44d430c5c3dbde6a64d1c87e8fc8e72b3ab89f69f2",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "existing_target_owner": {
+        "type": "java.lang.M3String",
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "gitBlob": "8ddd767e9198f5716ebde4aada80b91591125d9d",
+        "sha256": "70a914e1559c60464585845358487f803bae813ba3bc845385e703e8a887885b",
+        "bytes": 69145
+      },
+      "equivalence": "NOT_PROVEN_BY_THIS_AUDIT"
+    },
+    {
+      "symbol": "MIndexStringBitOps",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStringBitOps.java",
+      "source_git_blob": "aa904f5d10370ab4213b8ab39a1d359f9142d440",
+      "source_sha256": "c63349817965e8aab0dd3360c8c13c778f7578310b2ce7d307829e426736d03c",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    }
+  ],
+  "mapping": {
+    "authority_path": "m3/docs/name-mapping.json",
+    "authority_git_blob": "d3d78c4ebf02572a85ef889a36dc13684dc086e9",
+    "authority_sha256": "a246cdb364037e56e5218f03e6bec520adc1dd902d02982be7d798ef67969ed4",
+    "disposition": "PRESERVED_UNCHANGED",
+    "migration_record_count": 71,
+    "review": "EXACT_PIN_REFERENCE_ONLY_NOT_NEW_WHOLE_SOURCE_REVIEW",
+    "existing_string_mapping": {
+      "source": "jdk.internal.m3.indexstring.MIndexString",
+      "target": "java.lang.M3String",
+      "status": "implemented-unverified runtime candidate",
+      "source_role": "Synexia donor/reference implementation",
+      "target_rule": "M3JDK naming is independent; preserve owner+coordinate semantics, internal precompute, and JNI shadow-only materialization"
+    },
+    "new_migration_ids": [],
+    "identity_contract": "Preserve donor IDs, mappings, canonical owner/range identity and existing ambiguity refusal rules."
+  },
+  "receiving_phase": "STRING",
+  "acceptance_receipts": [],
+  "pending_gates": [
+    {
+      "id": "canonical_owner_and_utf16_contract",
+      "status": "NOT_QUALIFIED_FOR_THIS_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    },
+    {
+      "id": "regex_v7_codec_and_bootstrap_closure",
+      "status": "HOLD_MISSING_SOURCE_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    },
+    {
+      "id": "java_jni_parity_and_lifetimes",
+      "status": "NOT_QUALIFIED_FOR_THIS_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    },
+    {
+      "id": "jdk_build_jtreg_interpreter_c1_c2_gc_cds",
+      "status": "NOT_QUALIFIED_FOR_THIS_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    },
+    {
+      "id": "cold_warm_cpu_heap_native_memory",
+      "status": "NOT_QUALIFIED_FOR_THIS_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    }
+  ],
+  "bootstrap_source_closure": "HOLD_MISSING_SOURCE_CLOSURE",
+  "matched_source_built_sdk": "NOT_RUN",
+  "sdk_absence_proven": false,
+  "recipe_code_shipped_to_product": 0,
+  "runtime_sources_modified": 0,
+  "naming_or_identity_changed": false,
+  "canonical_recipe": {
+    "repository": "hsoliwal/com.synexia",
+    "source_commit": "9466e0a1b0aa58c429f855f11c3e9c102b8e2cb8",
+    "class_name": "jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe",
+    "source_git_blob": "b3bca459cad0675d8582d90d37a6271644d98158",
+    "crate_path": "m3-openrewrite-recipes/recipe-crates/m3-v7-pending-receipt-20261105",
+    "rule": "Recipe and mastery tooling remain in Synexia; only qualified data postimages are received."
+  },
+  "admission": "DIAGNOSTIC_EVIDENCE_ONLY",
+  "next_actions": [
+    "Review existing target ownership for all seven donor dependencies, including non-prefix types.",
+    "Preserve the existing MIndexString -> java.lang.M3String legacy mapping; this inventory does not create target names.",
+    "Qualify the minimal source-complete runtime closure and cold compiler/effect separation.",
+    "Run required named-module, matched source-built SDK/JNI/JIT/GC/CDS and resource gates before runtime admission."
+  ],
+  "limitations": [
+    "No target runtime source, module, map, public API or receiving phase is changed.",
+    "Historical18031-check host proof is not source-complete bootstrap proof; current missing dependencies are omitted audit inputs.",
+    "The seven first-hop files are an inventory, not attributed transitive or effect closure.",
+    "Scoped local SDK checks and a first-page Actions query do not prove global image absence.",
+    "No performance, allocation, platform or language-data admission is established by this receipt."
+  ],
+  "historical_image_candidate": {
+    "source_comparison_git_blob": "053b0259b60a7f0167f57c41a0a0f087ec4070e3",
+    "recorded_image": {
+      "receiptGitBlob": "414434c5ad16b19ad509eb6de4b2c45b566b4a39",
+      "profile": "fastdebug server",
+      "release": "IMPLEMENTOR=\"N/A\"\nJAVA_RUNTIME_VERSION=\"21.0.14-internal-adhoc.root.m3-pass19\"\nJAVA_VERSION=\"21.0.14\"\nJAVA_VERSION_DATE=\"2027-01-19\"\nLIBC=\"gnu\"\nMODULES=\"java.base java.compiler java.datatransfer java.xml java.prefs java.desktop java.instrument java.logging java.management java.security.sasl java.naming java.rmi java.management.rmi java.net.http java.scripting java.security.jgss java.transaction.xa java.sql java.sql.rowset java.xml.crypto java.se java.smartcardio jdk.accessibility jdk.internal.jvmstat jdk.attach jdk.charsets jdk.internal.opt jdk.zipfs jdk.compiler jdk.crypto.ec jdk.crypto.cryptoki jdk.dynalink jdk.internal.ed jdk.editpad jdk.hotspot.agent jdk.httpserver jdk.incubator.vector jdk.internal.le jdk.internal.vm.ci jdk.internal.vm.compiler jdk.internal.vm.compiler.management jdk.jartool jdk.javadoc jdk.jcmd jdk.management jdk.management.agent jdk.jconsole jdk.jdeps jdk.jdwp.agent jdk.jdi jdk.jfr jdk.jlink jdk.jpackage jdk.jshell jdk.jsobject jdk.jstatd jdk.localedata jdk.management.jfr jdk.naming.dns jdk.naming.rmi jdk.net jdk.nio.mapmode jdk.random jdk.sctp jdk.security.auth jdk.security.jgss jdk.unsupported jdk.unsupported.desktop jdk.xml.dom\"\nOS_ARCH=\"x86_64\"\nOS_NAME=\"Linux\"\nSOURCE=\".:git:c387710a3feb+\"\n",
+      "fingerprints": [
+        {
+          "path": "bin/java",
+          "bytes": 16272,
+          "sha256": "4017fe4481dd3673cf82779f83b8fce1bbc2929bc287eeba6c8ec17b8c0f57df"
+        },
+        {
+          "path": "lib/server/libjvm.so",
+          "bytes": 41055072,
+          "sha256": "bd2ef2e584c943d1f39a5eac65955ac7f84d7bea65e9229d63f4755b28e436a9"
+        },
+        {
+          "path": "lib/modules",
+          "bytes": 144417300,
+          "sha256": "04d43b4b3d327ce380e3fb324a2fa00438ff498051dd2b245b648eb1773d3e8e"
+        },
+        {
+          "path": "lib/server/classes.jsa",
+          "bytes": 15659008,
+          "sha256": "6a5af425c0c9c32c2e30f4bdce49d6552ca3d50f338a050d90d13af21ad1d9a0"
+        },
+        {
+          "path": "lib/server/classes_nocoops.jsa",
+          "bytes": 16035840,
+          "sha256": "216b133eeca15327bb5270125e8489337a4759d9d78ef79eda00cd12c86a3d3e"
+        }
+      ],
+      "selectedBinaryBytes": 217183492
+    },
+    "recorded_image_root": "/workspace/scratch/abdb4b1178cf/m3-pass19/build/m3-string-20261030/images/jdk",
+    "recorded_canonical_commit": "bb85915e36dce8bb0bf00d759eb66d880cf16fb5",
+    "recorded_private_pr": 14732,
+    "recorded_product_base": "c387710a3febc651f914750e3171e867f1574753",
+    "current_target": "b0fbe13b7feb437b39cdd1069ff49415f4d50bc0",
+    "selected_source_rows": [
+      {
+        "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "5022e9811ce9391671c794446c7772569cfd369f",
+          "byteSize": 2634
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "5022e9811ce9391671c794446c7772569cfd369f",
+          "byteSize": 2634
+        },
+        "current": {
+          "oid": "5022e9811ce9391671c794446c7772569cfd369f",
+          "byteSize": 2634
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/LexiconTool.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "daee29e96b6a6b5906b4603358a1ebd03a802337",
+          "byteSize": 1093
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "daee29e96b6a6b5906b4603358a1ebd03a802337",
+          "byteSize": 1093
+        },
+        "current": {
+          "oid": "daee29e96b6a6b5906b4603358a1ebd03a802337",
+          "byteSize": 1093
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+          "byteSize": 1975
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+          "byteSize": 1975
+        },
+        "current": {
+          "oid": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+          "byteSize": 1975
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+          "byteSize": 2115
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+          "byteSize": 2115
+        },
+        "current": {
+          "oid": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+          "byteSize": 2115
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3BigString.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "34a57b10813b18b5b30e9236656507ea3024ffb7",
+          "byteSize": 33381
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "34a57b10813b18b5b30e9236656507ea3024ffb7",
+          "byteSize": 33381
+        },
+        "current": {
+          "oid": "34a57b10813b18b5b30e9236656507ea3024ffb7",
+          "byteSize": 33381
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3CorpusProjectionDigest.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "9bcb58b3c095385833f2e119187fe3aa4441a7c9",
+          "byteSize": 1320
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "9bcb58b3c095385833f2e119187fe3aa4441a7c9",
+          "byteSize": 1320
+        },
+        "current": {
+          "oid": "9bcb58b3c095385833f2e119187fe3aa4441a7c9",
+          "byteSize": 1320
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3CorpusSourceReceipt.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "ede467da0e7b2e06f74642cd3932263144bdc82d",
+          "byteSize": 1849
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "ede467da0e7b2e06f74642cd3932263144bdc82d",
+          "byteSize": 1849
+        },
+        "current": {
+          "oid": "ede467da0e7b2e06f74642cd3932263144bdc82d",
+          "byteSize": 1849
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "8a0e8184feae600477a992512388c559ec10ee11",
+          "byteSize": 6571
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "8a0e8184feae600477a992512388c559ec10ee11",
+          "byteSize": 6571
+        },
+        "current": {
+          "oid": "8a0e8184feae600477a992512388c559ec10ee11",
+          "byteSize": 6571
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "10f0f669d5658e088e8835702df0676535c1f01d",
+          "byteSize": 11215
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "10f0f669d5658e088e8835702df0676535c1f01d",
+          "byteSize": 11215
+        },
+        "current": {
+          "oid": "10f0f669d5658e088e8835702df0676535c1f01d",
+          "byteSize": 11215
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "c4a499d6ef46e38ed5f12b0789683cae53309964",
+          "byteSize": 9693
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "c4a499d6ef46e38ed5f12b0789683cae53309964",
+          "byteSize": 9693
+        },
+        "current": {
+          "oid": "c4a499d6ef46e38ed5f12b0789683cae53309964",
+          "byteSize": 9693
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "6b69503a79fb084d1143c8c11519853f1f596ec1",
+          "byteSize": 13840
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "6b69503a79fb084d1143c8c11519853f1f596ec1",
+          "byteSize": 13840
+        },
+        "current": {
+          "oid": "6b69503a79fb084d1143c8c11519853f1f596ec1",
+          "byteSize": 13840
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "0ac0ecb7d4abe99f5c3b7a21e0099e05a92bb168",
+          "byteSize": 1245
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "0ac0ecb7d4abe99f5c3b7a21e0099e05a92bb168",
+          "byteSize": 1245
+        },
+        "current": {
+          "oid": "0ac0ecb7d4abe99f5c3b7a21e0099e05a92bb168",
+          "byteSize": 1245
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "4ea2db8d3b2bfec5f720ef499b8b697186718cb9",
+          "byteSize": 23035
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "4ea2db8d3b2bfec5f720ef499b8b697186718cb9",
+          "byteSize": 23035
+        },
+        "current": {
+          "oid": "4ea2db8d3b2bfec5f720ef499b8b697186718cb9",
+          "byteSize": 23035
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3NumberSpace.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "3eea18fd6bc596fb7cb05dffc53f183702aac41d",
+          "byteSize": 5486
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "3eea18fd6bc596fb7cb05dffc53f183702aac41d",
+          "byteSize": 5486
+        },
+        "current": {
+          "oid": "3eea18fd6bc596fb7cb05dffc53f183702aac41d",
+          "byteSize": 5486
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "73d7ae9ec7fa3680d1389aabf4e65beb0018ef15",
+          "byteSize": 9740
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "73d7ae9ec7fa3680d1389aabf4e65beb0018ef15",
+          "byteSize": 9740
+        },
+        "current": {
+          "oid": "73d7ae9ec7fa3680d1389aabf4e65beb0018ef15",
+          "byteSize": 9740
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+          "byteSize": 767
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+          "byteSize": 767
+        },
+        "current": {
+          "oid": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+          "byteSize": 767
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3WordRows.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "651c03f6b1a1e672ac97e2d0830473bcfc06207b",
+          "byteSize": 17149
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "651c03f6b1a1e672ac97e2d0830473bcfc06207b",
+          "byteSize": 17149
+        },
+        "current": {
+          "oid": "651c03f6b1a1e672ac97e2d0830473bcfc06207b",
+          "byteSize": 17149
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3WordRowsNative.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "a68f0d75eaae64707cf6d073a2b50f89c5dfdc78",
+          "byteSize": 1721
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "a68f0d75eaae64707cf6d073a2b50f89c5dfdc78",
+          "byteSize": 1721
+        },
+        "current": {
+          "oid": "a68f0d75eaae64707cf6d073a2b50f89c5dfdc78",
+          "byteSize": 1721
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "df137d5b2a52e9ad58f276132099b47692720ed2",
+          "byteSize": 40020
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "df137d5b2a52e9ad58f276132099b47692720ed2",
+          "byteSize": 40020
+        },
+        "current": {
+          "oid": "df137d5b2a52e9ad58f276132099b47692720ed2",
+          "byteSize": 40020
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "8dd76c1d5911dbf4b4b786098c1223fcdbb57b63",
+          "byteSize": 28182
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "8dd76c1d5911dbf4b4b786098c1223fcdbb57b63",
+          "byteSize": 28182
+        },
+        "current": {
+          "oid": "8dd76c1d5911dbf4b4b786098c1223fcdbb57b63",
+          "byteSize": 28182
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "364eecefcb3822918c849606ddb177c0ceaa30d5",
+          "byteSize": 11400
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "364eecefcb3822918c849606ddb177c0ceaa30d5",
+          "byteSize": 11400
+        },
+        "current": {
+          "oid": "364eecefcb3822918c849606ddb177c0ceaa30d5",
+          "byteSize": 11400
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "ce34ac405c41b3980e558efc688a5ebc1f37b47b",
+          "byteSize": 11009
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "ce34ac405c41b3980e558efc688a5ebc1f37b47b",
+          "byteSize": 11009
+        },
+        "current": {
+          "oid": "ce34ac405c41b3980e558efc688a5ebc1f37b47b",
+          "byteSize": 11009
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "bb8931eeb17563238c92f6c1ee200fb1905595c3",
+          "byteSize": 13436
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "bb8931eeb17563238c92f6c1ee200fb1905595c3",
+          "byteSize": 13436
+        },
+        "current": {
+          "oid": "bb8931eeb17563238c92f6c1ee200fb1905595c3",
+          "byteSize": 13436
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+          "byteSize": 494
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+          "byteSize": 494
+        },
+        "current": {
+          "oid": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+          "byteSize": 494
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "b3f2291429429c62825a292bd5b7f618046bed27",
+          "byteSize": 9495
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "b3f2291429429c62825a292bd5b7f618046bed27",
+          "byteSize": 9495
+        },
+        "current": {
+          "oid": "b3f2291429429c62825a292bd5b7f618046bed27",
+          "byteSize": 9495
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/jdk/m3/text/M3PrecomputePayload.java",
+        "roles": [
+          "textModuleOwners"
+        ],
+        "recordedBase": {
+          "oid": "5896894dec303b94847de9755033189e2112010e",
+          "byteSize": 17908
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "5896894dec303b94847de9755033189e2112010e",
+          "byteSize": 17908
+        },
+        "current": {
+          "oid": "5896894dec303b94847de9755033189e2112010e",
+          "byteSize": 17908
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "m3/core/src/module-info.java",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "bdd278210a498e2665620c02413b1e658c79370e",
+          "byteSize": 227
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "bdd278210a498e2665620c02413b1e658c79370e",
+          "byteSize": 227
+        },
+        "current": {
+          "oid": "bdd278210a498e2665620c02413b1e658c79370e",
+          "byteSize": 227
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/hotspot/share/c1/c1_LIRGenerator.cpp",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "2699d840dde604a521649a9cda764e2eceac27fb",
+          "byteSize": 128837
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "2699d840dde604a521649a9cda764e2eceac27fb",
+          "byteSize": 128837
+        },
+        "current": {
+          "oid": "2699d840dde604a521649a9cda764e2eceac27fb",
+          "byteSize": 128837
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/hotspot/share/classfile/javaClasses.cpp",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "b603e5b726dc93a48f2728f4345beb08d98aaff2",
+          "byteSize": 211900
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "b603e5b726dc93a48f2728f4345beb08d98aaff2",
+          "byteSize": 211900
+        },
+        "current": {
+          "oid": "b603e5b726dc93a48f2728f4345beb08d98aaff2",
+          "byteSize": 211900
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/hotspot/share/classfile/javaClasses.hpp",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "f1ceffc1c273c47b0aa57aa2c2e104012784ca6e",
+          "byteSize": 63592
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "f1ceffc1c273c47b0aa57aa2c2e104012784ca6e",
+          "byteSize": 63592
+        },
+        "current": {
+          "oid": "f1ceffc1c273c47b0aa57aa2c2e104012784ca6e",
+          "byteSize": 63592
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/hotspot/share/opto/library_call.cpp",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "b19412c0bb1d3fad17c6a8f62e6e913bac1e4d4a",
+          "byteSize": 369018
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "b19412c0bb1d3fad17c6a8f62e6e913bac1e4d4a",
+          "byteSize": 369018
+        },
+        "current": {
+          "oid": "b19412c0bb1d3fad17c6a8f62e6e913bac1e4d4a",
+          "byteSize": 369018
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+        "roles": [
+          "recordedProductPostimage",
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "d61b6318f4b5412399ac22d1c2c47fbdb1dc62ba",
+          "byteSize": 84323
+        },
+        "recordedPostimage": {
+          "path": "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+          "before_sha256": "ccff8a845ecb7624c1c00d6b7f12024205a8cf2eef68946b5227e09259e3e3d8",
+          "after_sha256": "56937de3babd2ce97123152f7dbcf65c0a2552d9aa676c852c9ad7fdc39e7371",
+          "git_blob": "7b98437128ebdadafa276f459366b44136e8784e"
+        },
+        "effectiveRecordedPin": {
+          "oid": "7b98437128ebdadafa276f459366b44136e8784e",
+          "byteSize": 84319
+        },
+        "current": {
+          "oid": "7b98437128ebdadafa276f459366b44136e8784e",
+          "byteSize": 84319
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "0be634521398195af92d93a409a21e69711ad8ab",
+          "byteSize": 20425
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "0be634521398195af92d93a409a21e69711ad8ab",
+          "byteSize": 20425
+        },
+        "current": {
+          "oid": "0be634521398195af92d93a409a21e69711ad8ab",
+          "byteSize": 20425
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "8ddd767e9198f5716ebde4aada80b91591125d9d",
+          "byteSize": 69145
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "8ddd767e9198f5716ebde4aada80b91591125d9d",
+          "byteSize": 69145
+        },
+        "current": {
+          "oid": "8ddd767e9198f5716ebde4aada80b91591125d9d",
+          "byteSize": 69145
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringAffixPrecompute.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "fff2bd7d82b1b5dc4b64e9c989730810362d92f4",
+          "byteSize": 9655
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "fff2bd7d82b1b5dc4b64e9c989730810362d92f4",
+          "byteSize": 9655
+        },
+        "current": {
+          "oid": "fff2bd7d82b1b5dc4b64e9c989730810362d92f4",
+          "byteSize": 9655
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringAtom.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "84a0227edbd5c3f73215289619f95fc18d57eaf1",
+          "byteSize": 21101
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "84a0227edbd5c3f73215289619f95fc18d57eaf1",
+          "byteSize": 21101
+        },
+        "current": {
+          "oid": "84a0227edbd5c3f73215289619f95fc18d57eaf1",
+          "byteSize": 21101
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringBuilderLane.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "9eafd1714f46f5856adef0d732a41c2cf45ed89c",
+          "byteSize": 12131
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "9eafd1714f46f5856adef0d732a41c2cf45ed89c",
+          "byteSize": 12131
+        },
+        "current": {
+          "oid": "9eafd1714f46f5856adef0d732a41c2cf45ed89c",
+          "byteSize": 12131
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "011377436faba14db9fb15bb8f63ecbbf7501dae",
+          "byteSize": 7824
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "011377436faba14db9fb15bb8f63ecbbf7501dae",
+          "byteSize": 7824
+        },
+        "current": {
+          "oid": "011377436faba14db9fb15bb8f63ecbbf7501dae",
+          "byteSize": 7824
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "bd4d7878ceb9d3c74f8f012c05cac4aff392a128",
+          "byteSize": 25584
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "bd4d7878ceb9d3c74f8f012c05cac4aff392a128",
+          "byteSize": 25584
+        },
+        "current": {
+          "oid": "bd4d7878ceb9d3c74f8f012c05cac4aff392a128",
+          "byteSize": 25584
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringImmediate.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "99ecf2189b2e0c2eaec16d41487e44988dc3e51a",
+          "byteSize": 15317
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "99ecf2189b2e0c2eaec16d41487e44988dc3e51a",
+          "byteSize": 15317
+        },
+        "current": {
+          "oid": "99ecf2189b2e0c2eaec16d41487e44988dc3e51a",
+          "byteSize": 15317
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringLeafCursor.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "5ac0eee6e2a1eaf3e24c387c02bcff4e66eb2c0a",
+          "byteSize": 5157
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "5ac0eee6e2a1eaf3e24c387c02bcff4e66eb2c0a",
+          "byteSize": 5157
+        },
+        "current": {
+          "oid": "5ac0eee6e2a1eaf3e24c387c02bcff4e66eb2c0a",
+          "byteSize": 5157
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringLeafRanges.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "9ebbf8183403e5b1a3566df64fee4be07caad1d7",
+          "byteSize": 4540
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "9ebbf8183403e5b1a3566df64fee4be07caad1d7",
+          "byteSize": 4540
+        },
+        "current": {
+          "oid": "9ebbf8183403e5b1a3566df64fee4be07caad1d7",
+          "byteSize": 4540
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringOwner.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "329c0ba4d3751a2d76d686237439a2f94831658e",
+          "byteSize": 5431
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "329c0ba4d3751a2d76d686237439a2f94831658e",
+          "byteSize": 5431
+        },
+        "current": {
+          "oid": "329c0ba4d3751a2d76d686237439a2f94831658e",
+          "byteSize": 5431
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "5c56961717958f97e7bd62c5630c09877a25e599",
+          "byteSize": 77439
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "5c56961717958f97e7bd62c5630c09877a25e599",
+          "byteSize": 77439
+        },
+        "current": {
+          "oid": "5c56961717958f97e7bd62c5630c09877a25e599",
+          "byteSize": 77439
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "c0074f4b144da23040e63e0ba8866d56d0d304ac",
+          "byteSize": 11332
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "c0074f4b144da23040e63e0ba8866d56d0d304ac",
+          "byteSize": 11332
+        },
+        "current": {
+          "oid": "c0074f4b144da23040e63e0ba8866d56d0d304ac",
+          "byteSize": 11332
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "0a47fbff758d7b57f2797fed35f0013e6655c2f5",
+          "byteSize": 8098
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "0a47fbff758d7b57f2797fed35f0013e6655c2f5",
+          "byteSize": 8098
+        },
+        "current": {
+          "oid": "0a47fbff758d7b57f2797fed35f0013e6655c2f5",
+          "byteSize": 8098
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringProjection.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "59f80a443ac43281ab22427378f031c5aedbb773",
+          "byteSize": 17467
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "59f80a443ac43281ab22427378f031c5aedbb773",
+          "byteSize": 17467
+        },
+        "current": {
+          "oid": "59f80a443ac43281ab22427378f031c5aedbb773",
+          "byteSize": 17467
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "c450d41eb266ce47cf12cc53c7c3075a159aa572",
+          "byteSize": 31127
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "c450d41eb266ce47cf12cc53c7c3075a159aa572",
+          "byteSize": 31127
+        },
+        "current": {
+          "oid": "c450d41eb266ce47cf12cc53c7c3075a159aa572",
+          "byteSize": 31127
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringRegexRowPrecompute.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "d732e81e9f90004ab0be29cd4f85362af9bdd8f2",
+          "byteSize": 11029
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "d732e81e9f90004ab0be29cd4f85362af9bdd8f2",
+          "byteSize": 11029
+        },
+        "current": {
+          "oid": "d732e81e9f90004ab0be29cd4f85362af9bdd8f2",
+          "byteSize": 11029
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringRepresentationPlan.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "0358002e01b3e060ed4cf26b9809184039682813",
+          "byteSize": 2857
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "0358002e01b3e060ed4cf26b9809184039682813",
+          "byteSize": 2857
+        },
+        "current": {
+          "oid": "0358002e01b3e060ed4cf26b9809184039682813",
+          "byteSize": 2857
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "6f89d8cc25c8d8b7d372faaa7a9a550f819868c3",
+          "byteSize": 27758
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "6f89d8cc25c8d8b7d372faaa7a9a550f819868c3",
+          "byteSize": 27758
+        },
+        "current": {
+          "oid": "6f89d8cc25c8d8b7d372faaa7a9a550f819868c3",
+          "byteSize": 27758
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringTokenRegex.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "ad87db7ed0f7e0490b46245782ec64185fb457d7",
+          "byteSize": 12327
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "ad87db7ed0f7e0490b46245782ec64185fb457d7",
+          "byteSize": 12327
+        },
+        "current": {
+          "oid": "ad87db7ed0f7e0490b46245782ec64185fb457d7",
+          "byteSize": 12327
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringTuple.java",
+        "roles": [
+          "stringOwners"
+        ],
+        "recordedBase": {
+          "oid": "ede9e34a4d78272255f7ea7a53efaa8a54c118d9",
+          "byteSize": 3452
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "ede9e34a4d78272255f7ea7a53efaa8a54c118d9",
+          "byteSize": 3452
+        },
+        "current": {
+          "oid": "ede9e34a4d78272255f7ea7a53efaa8a54c118d9",
+          "byteSize": 3452
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "roles": [
+          "recordedProductPostimage",
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "751d4530ca0cb63255bdb11ee891c7a0353a6613",
+          "byteSize": 228798
+        },
+        "recordedPostimage": {
+          "path": "src/java.base/share/classes/java/lang/String.java",
+          "before_sha256": "e58572f899f63d73c868c6a627b75843d8d3534e51ca61673f0c31ef3fe0cdeb",
+          "after_sha256": "d6fe393ed36246e79c6cbb4685a23c77039ae5c32001e4b72177e65de20ee4f7",
+          "git_blob": "f3890c677026dcd4761660a00b84bf5ad272ddde"
+        },
+        "effectiveRecordedPin": {
+          "oid": "f3890c677026dcd4761660a00b84bf5ad272ddde",
+          "byteSize": 228786
+        },
+        "current": {
+          "oid": "f3890c677026dcd4761660a00b84bf5ad272ddde",
+          "byteSize": 228786
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringBuffer.java",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "b0f411f271b4025425bfacee3b348fca225d0436",
+          "byteSize": 25720
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "b0f411f271b4025425bfacee3b348fca225d0436",
+          "byteSize": 25720
+        },
+        "current": {
+          "oid": "b0f411f271b4025425bfacee3b348fca225d0436",
+          "byteSize": 25720
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringBuilder.java",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "a8804032a6872244ec5376717677af91caf6904e",
+          "byteSize": 16351
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "a8804032a6872244ec5376717677af91caf6904e",
+          "byteSize": 16351
+        },
+        "current": {
+          "oid": "a8804032a6872244ec5376717677af91caf6904e",
+          "byteSize": 16351
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "aac7beb354001e11ad5a3f04c3e1d6f050de6953",
+          "byteSize": 25771
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "aac7beb354001e11ad5a3f04c3e1d6f050de6953",
+          "byteSize": 25771
+        },
+        "current": {
+          "oid": "aac7beb354001e11ad5a3f04c3e1d6f050de6953",
+          "byteSize": 25771
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/access/SharedSecrets.java",
+        "roles": [
+          "selectedABIAndBuildContext"
+        ],
+        "recordedBase": {
+          "oid": "919d758a6e35c0b86179749e5206ae0680a57607",
+          "byteSize": 19207
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "919d758a6e35c0b86179749e5206ae0680a57607",
+          "byteSize": 19207
+        },
+        "current": {
+          "oid": "919d758a6e35c0b86179749e5206ae0680a57607",
+          "byteSize": 19207
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java",
+        "roles": [
+          "regexBackingOwners"
+        ],
+        "recordedBase": {
+          "oid": "c2dc2371c730aa758ccc45e06ba4ab95661e5593",
+          "byteSize": 31729
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "c2dc2371c730aa758ccc45e06ba4ab95661e5593",
+          "byteSize": 31729
+        },
+        "current": {
+          "oid": "c2dc2371c730aa758ccc45e06ba4ab95661e5593",
+          "byteSize": 31729
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7.java",
+        "roles": [
+          "regexBackingOwners"
+        ],
+        "recordedBase": {
+          "oid": "c8f8f32bae0c2310649ed14eadfa27a302802f2c",
+          "byteSize": 33894
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "c8f8f32bae0c2310649ed14eadfa27a302802f2c",
+          "byteSize": 33894
+        },
+        "current": {
+          "oid": "c8f8f32bae0c2310649ed14eadfa27a302802f2c",
+          "byteSize": 33894
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7Codec.java",
+        "roles": [
+          "regexBackingOwners"
+        ],
+        "recordedBase": {
+          "oid": "6026fa58730c1fca845bb02d5dc9cf8d79d74a09",
+          "byteSize": 16062
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "6026fa58730c1fca845bb02d5dc9cf8d79d74a09",
+          "byteSize": 16062
+        },
+        "current": {
+          "oid": "6026fa58730c1fca845bb02d5dc9cf8d79d74a09",
+          "byteSize": 16062
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7Image.java",
+        "roles": [
+          "regexBackingOwners"
+        ],
+        "recordedBase": {
+          "oid": "985c9e859bb8435149ed9e2d0545d414bc4a4ba8",
+          "byteSize": 15699
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "985c9e859bb8435149ed9e2d0545d414bc4a4ba8",
+          "byteSize": 15699
+        },
+        "current": {
+          "oid": "985c9e859bb8435149ed9e2d0545d414bc4a4ba8",
+          "byteSize": 15699
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java",
+        "roles": [
+          "regexBackingOwners"
+        ],
+        "recordedBase": {
+          "oid": "e6aec14bd2c70a1e10ac0f007ad847f2d5185b1f",
+          "byteSize": 7706
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "e6aec14bd2c70a1e10ac0f007ad847f2d5185b1f",
+          "byteSize": 7706
+        },
+        "current": {
+          "oid": "e6aec14bd2c70a1e10ac0f007ad847f2d5185b1f",
+          "byteSize": 7706
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java",
+        "roles": [
+          "regexBackingOwners"
+        ],
+        "recordedBase": {
+          "oid": "5daedbe16dfc9377783b52d932e548cc44f0b335",
+          "byteSize": 2925
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "5daedbe16dfc9377783b52d932e548cc44f0b335",
+          "byteSize": 2925
+        },
+        "current": {
+          "oid": "5daedbe16dfc9377783b52d932e548cc44f0b335",
+          "byteSize": 2925
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+        "roles": [
+          "regexBackingOwners"
+        ],
+        "recordedBase": {
+          "oid": "e353a1c656c573d832d50a310ce17a52ae8ee4cd",
+          "byteSize": 26279
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "e353a1c656c573d832d50a310ce17a52ae8ee4cd",
+          "byteSize": 26279
+        },
+        "current": {
+          "oid": "e353a1c656c573d832d50a310ce17a52ae8ee4cd",
+          "byteSize": 26279
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3RX7.c",
+        "roles": [
+          "nativeStringRegexOwners"
+        ],
+        "recordedBase": {
+          "oid": "7f0388705511614d9b3ecbb1820a89fd70e2ef55",
+          "byteSize": 11272
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "7f0388705511614d9b3ecbb1820a89fd70e2ef55",
+          "byteSize": 11272
+        },
+        "current": {
+          "oid": "7f0388705511614d9b3ecbb1820a89fd70e2ef55",
+          "byteSize": 11272
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3StringPool.c",
+        "roles": [
+          "nativeStringRegexOwners"
+        ],
+        "recordedBase": {
+          "oid": "e401105a621f0003affcc6fb7e72cf2368f6cde3",
+          "byteSize": 9751
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "e401105a621f0003affcc6fb7e72cf2368f6cde3",
+          "byteSize": 9751
+        },
+        "current": {
+          "oid": "e401105a621f0003affcc6fb7e72cf2368f6cde3",
+          "byteSize": 9751
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3StringRegexDp.c",
+        "roles": [
+          "nativeStringRegexOwners"
+        ],
+        "recordedBase": {
+          "oid": "d9f36a89e95458ac843b32bee8aa34a809909e6b",
+          "byteSize": 8429
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "d9f36a89e95458ac843b32bee8aa34a809909e6b",
+          "byteSize": 8429
+        },
+        "current": {
+          "oid": "d9f36a89e95458ac843b32bee8aa34a809909e6b",
+          "byteSize": 8429
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3StringTokenRegex.c",
+        "roles": [
+          "nativeStringRegexOwners"
+        ],
+        "recordedBase": {
+          "oid": "429fb4fbb45db4bd567ba39a9ab5df082b83b71b",
+          "byteSize": 5393
+        },
+        "recordedPostimage": null,
+        "effectiveRecordedPin": {
+          "oid": "429fb4fbb45db4bd567ba39a9ab5df082b83b71b",
+          "byteSize": 5393
+        },
+        "current": {
+          "oid": "429fb4fbb45db4bd567ba39a9ab5df082b83b71b",
+          "byteSize": 5393
+        },
+        "state": "MATCH",
+        "match": true
+      },
+      {
+        "path": "src/jdk.jfr/share/classes/jdk/jfr/events/EventConfigurations.java",
+        "roles": [
+          "recordedProductPostimage"
+        ],
+        "recordedBase": {
+          "oid": "066d61473c1d442f8c5d6f301fc65cffdd197ab8",
+          "byteSize": 2324
+        },
+        "recordedPostimage": {
+          "path": "src/jdk.jfr/share/classes/jdk/jfr/events/EventConfigurations.java",
+          "before_sha256": "64afcbb79fbb4d2a0815206faae901e68dae220498da45fada6d18074778d7e6",
+          "after_sha256": "e8e0baa316cdb048a85a5c52d9e06389a00b44de5d4e4bd87aaf2134b7de3b99",
+          "git_blob": "b4c143da655fa6da871c6fdaf3567759bcb05d3e"
+        },
+        "effectiveRecordedPin": {
+          "oid": "b4c143da655fa6da871c6fdaf3567759bcb05d3e",
+          "byteSize": 2359
+        },
+        "current": {
+          "oid": "b4c143da655fa6da871c6fdaf3567759bcb05d3e",
+          "byteSize": 2359
+        },
+        "state": "MATCH",
+        "match": true
+      }
+    ],
+    "selected_source_counts": {
+      "MATCH": 70,
+      "SOURCE_DRIFT": 0,
+      "ABSENT_BOTH": 0,
+      "MISSING_CURRENT": 0,
+      "MISSING_RECORDED_BASE": 0
+    },
+    "actual_dirty_build_tree_sealed": false,
+    "live_image_observed": false,
+    "live_image_fingerprints_verified": false,
+    "matched_source_built_sdk": false,
+    "endpoint": "PENDING_HOST_ENVIRONMENT_OR_ARTIFACT_LOCATION",
+    "scope": "Finite selected owner/module/ABI context. Equality with the recorded base or known output does not prove actual dirty build inputs, complete current JDK equality or runtime readiness."
+  }
+}

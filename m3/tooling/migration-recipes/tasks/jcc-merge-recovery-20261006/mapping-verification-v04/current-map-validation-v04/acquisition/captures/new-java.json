@@ -1,0 +1,28 @@
+{
+  "request": {
+    "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/b56cd04a9a77e8f5603aa26674bc2d3902969abf"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\"sha\":\"b56cd04a9a77e8f5603aa26674bc2d3902969abf\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/b56cd04a9a77e8f5603aa26674bc2d3902969abf\",\"tree\":[{\"path\":\"io\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"db303bd75480b6d38ba7590885a3760e79221b4a\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/db303bd75480b6d38ba7590885a3760e79221b4a\"},{\"path\":\"lang\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"44414c2c8d9b497109df5a58df36deb7d638338a\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/44414c2c8d9b497109df5a58df36deb7d638338a\"},{\"path\":\"math\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"6a0883a63016226afc0d7a2ef23a8045368092ce\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/6a0883a63016226afc0d7a2ef23a8045368092ce\"},{\"path\":\"net\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"f57e8c01dd820187d771587040217f25a8700db4\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/f57e8c01dd820187d771587040217f25a8700db4\"},{\"path\":\"nio\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"3ffadf5001b8068d5e891557302079e776d681de\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/3ffadf5001b8068d5e891557302079e776d681de\"},{\"path\":\"security\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"f590c64a3da5664880d1d293e4314b0e213fb636\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/f590c64a3da5664880d1d293e4314b0e213fb636\"},{\"path\":\"text\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"a8eab2d0b7723f05a32e74daa35b405b4283fa0d\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/a8eab2d0b7723f05a32e74daa35b405b4283fa0d\"},{\"path\":\"time\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"6ab3f66d29c80d941e1f6e63aa6634af50aaecf5\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/6ab3f66d29c80d941e1f6e63aa6634af50aaecf5\"},{\"path\":\"util\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"f8f744005f93cebcf2a66dc3d6cf05690e9413a7\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/f8f744005f93cebcf2a66dc3d6cf05690e9413a7\"}],\"truncated\":false}",
+      "title": "b56cd04a9a77e8f5603aa26674bc2d3902969abf",
+      "modified_date": null,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/b56cd04a9a77e8f5603aa26674bc2d3902969abf",
+      "display_url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/b56cd04a9a77e8f5603aa26674bc2d3902969abf",
+      "display_title": "b56cd04a9a77e8f5603aa26674bc2d3902969abf",
+      "structuredContent": {
+        "title": "b56cd04a9a77e8f5603aa26674bc2d3902969abf",
+        "content": "{\"sha\":\"b56cd04a9a77e8f5603aa26674bc2d3902969abf\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/b56cd04a9a77e8f5603aa26674bc2d3902969abf\",\"tree\":[{\"path\":\"io\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"db303bd75480b6d38ba7590885a3760e79221b4a\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/db303bd75480b6d38ba7590885a3760e79221b4a\"},{\"path\":\"lang\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"44414c2c8d9b497109df5a58df36deb7d638338a\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/44414c2c8d9b497109df5a58df36deb7d638338a\"},{\"path\":\"math\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"6a0883a63016226afc0d7a2ef23a8045368092ce\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/6a0883a63016226afc0d7a2ef23a8045368092ce\"},{\"path\":\"net\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"f57e8c01dd820187d771587040217f25a8700db4\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/f57e8c01dd820187d771587040217f25a8700db4\"},{\"path\":\"nio\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"3ffadf5001b8068d5e891557302079e776d681de\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/3ffadf5001b8068d5e891557302079e776d681de\"},{\"path\":\"security\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"f590c64a3da5664880d1d293e4314b0e213fb636\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/f590c64a3da5664880d1d293e4314b0e213fb636\"},{\"path\":\"text\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"a8eab2d0b7723f05a32e74daa35b405b4283fa0d\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/a8eab2d0b7723f05a32e74daa35b405b4283fa0d\"},{\"path\":\"time\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"6ab3f66d29c80d941e1f6e63aa6634af50aaecf5\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/6ab3f66d29c80d941e1f6e63aa6634af50aaecf5\"},{\"path\":\"util\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"f8f744005f93cebcf2a66dc3d6cf05690e9413a7\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/f8f744005f93cebcf2a66dc3d6cf05690e9413a7\"}],\"truncated\":false}",
+        "display_url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/b56cd04a9a77e8f5603aa26674bc2d3902969abf"
+      }
+    },
+    "isError": false
+  }
+}
+

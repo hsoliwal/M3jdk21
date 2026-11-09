@@ -1,0 +1,5 @@
+Compiled from "M3ItemReferenceScan.java"
+public final class com.m3.compiletime.M3ItemReferenceScan {
+  public com.m3.compiletime.M3ItemReferenceScan();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}

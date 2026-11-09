@@ -1,0 +1,8 @@
+{
+  "artifact": "error_prone_annotations",
+  "version": "2.21.1",
+  "origin": "https://raw.githubusercontent.com/google/error-prone/v2.21.1/COPYING",
+  "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "bytes": 11358,
+  "pom_license": "Apache 2.0 <http://www.apache.org/licenses/LICENSE-2.0.txt>"
+}

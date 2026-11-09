@@ -1,0 +1,242 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+# LITERAL_CONSTANTS v1 names ledger (input of tools/literal_constants.py apply): one row per (class, member[#k], literal).
+# member: 'm#k' = k-th occurrence of the literal in member m (source order, overloads together) | 'm' | '*'.
+# One name per role; the same value in two roles gets two names. Roles become the constants' Javadoc (ASCII, no markup).
+class	member	literal	name	role
+M3AbstractNumberParser	*	'0'	DIGIT_ZERO	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractNumberParser	*	'9'	DIGIT_NINE	Last decimal digit.
+M3AbstractNumberParser	*	'A'	HEX_UPPER_A	First upper-case hex digit letter.
+M3AbstractNumberParser	*	'F'	HEX_UPPER_F	Last upper-case hex digit letter.
+M3AbstractNumberParser	*	'a'	HEX_LOWER_A	First lower-case hex digit letter.
+M3AbstractNumberParser	*	'f'	HEX_LOWER_F	Last lower-case hex digit letter.
+M3AbstractNumberParser	*	10	HEX_LETTER_BASE	Value of the hex digit A (a).
+M3AbstractNumberParser	*	'.'	DECIMAL_POINT	Decimal point character.
+M3AbstractNumberParser	*	0xff	BYTE_MASK	Unsigned byte mask: a byte as a CHAR_TO_HEX_MAP index.
+M3AbstractNumberParser	*	128	HEX_MAP_CHAR_LIMIT	Chars at or above this (non-ASCII) are never hex digits.
+M3FastIntegerMath	*	15	FLOOR_16_REMAINDER_MASK	n and not mask rounds n down to a multiple of 16.
+M3FastIntegerMath	*	16	POW_16_EXPONENT	Exponent of the precomputed 16th-power entries (TEN_POW_16, FIVE_POW_16).
+M3FastIntegerMath	*	3402L	LOG2_TEN_SCALED	log2(10) * 1024 rounded up: bits per decimal digit, scaled by 2^10.
+M3FastIntegerMath	*	10	LOG2_TEN_SCALE_SHIFT	Removes the 2^10 scale of LOG2_TEN_SCALED.
+M3FastIntegerMath	fillPowersOf10Floor16	5	POWERS_OF_FIVE_BASE	Base of the powers-of-five map that is shifted into powers of ten.
+M3FastIntegerMath	*	18	RECURSION_BASE_MAX_DIGITS	Digit counts up to this need no further precomputed power.
+M3FastIntegerMath	*	0xffffffffL	LOW_32_BITS_MASK	Low 32-bit half of a long.
+M3FastIntegerMath	*	32	HALF_LONG_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3FastIntegerMath	*	31	SPLIT_ROUND_UP	Rounds the range up to a multiple of 32 before it is halved.
+M3FastIntegerMath	splitFloor16	5	SPLIT_DIVIDE_BY_32_SHIFT	Divides the rounded range by 32.
+M3FastIntegerMath	*	4	SPLIT_TIMES_16_SHIFT	Multiplies by 16: the upper half becomes a multiple of 16.
+M3FastFloatMath	*	-0.0f	NEGATIVE_ZERO	IEEE 754 negative zero (float).
+M3FastFloatMath	*	0x1p64f	TWO_POW_64	2^64: corrects the signed conversion of an unsigned 64-bit significand.
+M3FastFloatMath	*	-10	FAST_PATH_MIN_POWER_OF_TEN	Smallest power of ten of the exact float fast path.
+M3FastFloatMath	*	10	FAST_PATH_MAX_POWER_OF_TEN	Largest power of ten of the exact float fast path (10^10 is exact in a float).
+M3FastFloatMath	*	152170L	LOG2_FIVE_SCALED	log2(5) * 2^16, rounded.
+M3FastFloatMath	*	65536L	ONE_SCALED	1 * 2^16: adds the power itself to the log2(5^power) estimate.
+M3FastFloatMath	*	16	LOG2_FIVE_SCALE_SHIFT	Removes the 2^16 scale of LOG2_FIVE_SCALED and ONE_SCALED.
+M3FastFloatMath	*	64	WORD_BITS	Bits of the 64-bit product word.
+M3FastFloatMath	*	63	HIGH_BIT_SHIFT	Moves bit 63 of a long to bit 0.
+M3FastFloatMath	*	38	MANTISSA_ALIGN_SHIFT	64 - FLOAT_SIGNIFICAND_WIDTH - 2: keeps 25 significant bits of the product.
+M3FastFloatMath	*	0x3_FFFFF_FFFFL	HALFWAY_TRAILING_MASK	The 38 bits shifted out: all ones or all zeros may be a halfway case.
+M3FastFloatMath	*	3	LOW_TWO_BITS_MASK	The two lowest mantissa bits (round-half-even check).
+M3FastFloatMath	*	31	FLOAT_SIGN_SHIFT	Position of the float sign bit.
+M3FastDoubleMath	*	-0.0	NEGATIVE_ZERO	IEEE 754 negative zero (double).
+M3FastDoubleMath	*	-22	FAST_PATH_MIN_POWER_OF_TEN	Smallest power of ten of the exact (Clinger) double fast path.
+M3FastDoubleMath	*	22	FAST_PATH_MAX_POWER_OF_TEN	Largest power of ten of the exact (Clinger) double fast path (10^22 is exact in a double).
+M3FastDoubleMath	*	152170L	LOG2_FIVE_SCALED	log2(5) * 2^16, rounded.
+M3FastDoubleMath	*	65536L	ONE_SCALED	1 * 2^16: adds the power itself to the log2(5^power) estimate.
+M3FastDoubleMath	*	16	LOG2_FIVE_SCALE_SHIFT	Removes the 2^16 scale of LOG2_FIVE_SCALED and ONE_SCALED.
+M3FastDoubleMath	*	64	WORD_BITS	Bits of the 64-bit product word.
+M3FastDoubleMath	*	63	HIGH_BIT_SHIFT	Bit 63: the top bit of the 64-bit product and the double sign bit.
+M3FastDoubleMath	*	9	MANTISSA_ALIGN_SHIFT	64 - DOUBLE_SIGNIFICAND_WIDTH - 2: keeps 54 significant bits of the product.
+M3FastDoubleMath	*	0x1ff	HALFWAY_TRAILING_MASK	The 9 bits shifted out: all ones or all zeros may be a halfway case.
+M3FastDoubleMath	*	3	LOW_TWO_BITS_MASK	The two lowest mantissa bits (round-half-even check).
+M3FastDoubleMath	*	0x1p64	TWO_POW_64	2^64: corrects the signed conversion of an unsigned 64-bit significand.
+M3FastDoubleSwar	*	'0'	DIGIT_ZERO	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3FastDoubleSwar	*	10	DECIMAL_RADIX	Radix of decimal digits.
+M3FastDoubleSwar	*	2	GROUP_CHAR_2	Index of the third char of an eight-char (or four-char) group.
+M3FastDoubleSwar	*	3	GROUP_CHAR_3	Index of the fourth char of a char group.
+M3FastDoubleSwar	*	4	GROUP_CHAR_4	Index of the fifth char of an eight-char group.
+M3FastDoubleSwar	tryToParseEightHexDigitsUtf8	4	NIBBLE_SHIFT	Bits of one hex digit.
+M3FastDoubleSwar	*	5	GROUP_CHAR_5	Index of the sixth char of an eight-char group.
+M3FastDoubleSwar	*	6	GROUP_CHAR_6	Index of the seventh char of an eight-char group.
+M3FastDoubleSwar	*	7	GROUP_CHAR_7	Index of the eighth char of an eight-char group.
+M3FastDoubleSwar	tryToParseEightHexDigitsUtf8	7	HIGH_BIT_TO_LOW_BIT_SHIFT	Moves bit 7 of each byte lane to bit 0.
+M3FastDoubleSwar	isEightDigits	8	DIGITS_PER_GROUP	Chars checked by one eight-digit test.
+M3FastDoubleSwar	isEightZeroes	8	DIGITS_PER_GROUP	Chars checked by one eight-digit test.
+M3FastDoubleSwar	*	8	BYTE_SHIFT	Bits of one byte lane.
+M3FastDoubleSwar	*	16	UTF16_LANE_1_SHIFT	Bit offset of the second UTF-16 lane of a long.
+M3FastDoubleSwar	tryToParseEightDigitsUtf8	16	TWO_BYTES_SHIFT	Bits of two byte lanes.
+M3FastDoubleSwar	tryToParseEightHexDigitsUtf8	16	TWO_BYTES_SHIFT	Bits of two byte lanes.
+M3FastDoubleSwar	tryToParseFourDigitsUtf8	16	TWO_BYTES_SHIFT	Bits of two byte lanes.
+M3FastDoubleSwar	*	32	UTF16_LANE_2_SHIFT	Bit offset of the third UTF-16 lane of a long.
+M3FastDoubleSwar	tryToParseEightDigitsUtf8	32	HALF_LONG_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3FastDoubleSwar	*	48	UTF16_LANE_3_SHIFT	Bit offset of the fourth UTF-16 lane of a long.
+M3FastDoubleSwar	*	0x0030_0030_0030_0030L	UTF16_LANES_ZERO	The digit 0 in each of four UTF-16 lanes.
+M3FastDoubleSwar	*	0x0046_0046_0046_0046L	UTF16_LANES_NINE_OVERFLOW	0x7f - 0x39 per UTF-16 lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar	*	0xff80_ff80_ff80_ff80L	UTF16_LANES_NOT_DIGIT_MASK	Bits set in a UTF-16 lane only when its char is not a digit (after the bias).
+M3FastDoubleSwar	*	0x03e8_0064_000a_0001L	UTF16_LANES_DECIMAL_WEIGHTS	1000, 100, 10 and 1 per UTF-16 lane: one multiply sums four digits.
+M3FastDoubleSwar	*	0x3030303030303030L	UTF8_LANES_ZERO	The digit 0 in each of eight byte lanes.
+M3FastDoubleSwar	*	0x30_30_30_30_30_30_30_30L	UTF8_LANES_ZERO	The digit 0 in each of eight byte lanes.
+M3FastDoubleSwar	*	0x4646464646464646L	UTF8_LANES_NINE_OVERFLOW	0x7f - 0x39 per byte lane: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar	*	0x8080808080808080L	UTF8_LANES_HIGH_BITS	Bit 7 of each byte lane.
+M3FastDoubleSwar	*	0x80_80_80_80_80_80_80_80L	UTF8_LANES_HIGH_BITS	Bit 7 of each byte lane.
+M3FastDoubleSwar	*	0xff_000000ffL	DIGIT_PAIR_LANES_MASK	Byte lanes 0 and 4: the two-digit sums after the first SWAR step.
+M3FastDoubleSwar	*	100	TEN_POW_2	10^2.
+M3FastDoubleSwar	*	100_0000L	TEN_POW_6	10^6.
+M3FastDoubleSwar	*	1_0000L	TEN_POW_4_LONG	10^4 (long).
+M3FastDoubleSwar	*	10000	TEN_POW_4	10^4.
+M3FastDoubleSwar	*	0x0000_0000_0001_0100L	UTF16_TO_UTF8_PACK_MULTIPLIER	Moves the low byte of each odd UTF-16 lane next to the low byte of its even neighbour.
+M3FastDoubleSwar	*	0xffff_0000_0000_0000L	UTF16_LANE_3_MASK	The fourth UTF-16 lane of a long.
+M3FastDoubleSwar	*	0xffff_0000L	UTF16_LANE_1_MASK	The second UTF-16 lane of a long.
+M3FastDoubleSwar	*	0xffffL	UTF16_LANE_0_MASK	The first UTF-16 lane of a long.
+M3FastDoubleSwar	*	0x00ff00ff_00ff00ffL	EVEN_BYTE_LANES_MASK	Byte lanes 0, 2, 4 and 6.
+M3FastDoubleSwar	*	0x20_20_20_20_20_20_20_20L	UTF8_LANES_LOWER_CASE_BIT	0x20 per byte lane: folds ASCII letters to lower case.
+M3FastDoubleSwar	*	0x27272727_27272727L	UTF8_LANES_HEX_LETTER_OFFSET	0x61 - 0x30 - 10 per byte lane: turns a folded hex letter minus 0x30 into its value.
+M3FastDoubleSwar	*	0x37_37_37_37_37_37_37_37L	UTF8_LANES_HEX_F_LIMIT	0x66 - 0x30 + 1 per byte lane: lanes at or below hex digit f stay negative.
+M3FastDoubleSwar	*	0x39_39_39_39_39_39_39_39L	UTF8_LANES_NINE	The digit 9 in each of eight byte lanes.
+M3FastDoubleSwar	*	0x7f_7f_7f_7f_7f_7f_7f_7fL	UTF8_LANES_ASCII_MAX	0x7f in each of eight byte lanes.
+M3FastDoubleSwar	*	0xffL	BYTE_LANE_FILL	Multiplier that spreads bit 0 of a byte lane over the whole lane.
+M3FastDoubleSwar	*	0xff	BYTE_MASK	The low byte lane of an int.
+M3FastDoubleSwar	*	0xff0000	BYTE_2_MASK	The third byte lane of an int.
+M3FastDoubleSwar	*	0x30303030	UTF8_INT_LANES_ZERO	The digit 0 in each of four byte lanes of an int.
+M3FastDoubleSwar	*	0x46464646	UTF8_INT_LANES_NINE_OVERFLOW	0x7f - 0x39 per byte lane of an int: a char above 9 sets bit 7 of its lane.
+M3FastDoubleSwar	*	0x80808080	UTF8_INT_LANES_HIGH_BITS	Bit 7 of each byte lane of an int.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	' '	MAX_WHITESPACE	Chars at or below the space character are white space.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'0'	DIGIT_ZERO	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	10	DECIMAL_RADIX	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'.'	DECIMAL_POINT	Decimal point character.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	0x20	LOWER_CASE_BIT	Folds an ASCII letter to lower case.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'e'	EXPONENT_INDICATOR	Decimal exponent indicator (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'-'	MINUS_SIGN	Minus sign.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'+'	PLUS_SIGN	Plus sign.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	0x22	TYPE_SUFFIX_FOLD	Maps the float type suffixes f, F, d and D to f.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'f'	TYPE_SUFFIX_FOLDED	A float type suffix after TYPE_SUFFIX_FOLD.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	19	MAX_EXACT_DECIMAL_DIGITS	Decimal digit count that always fits an unsigned long.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'I'	INFINITY_CHAR_I	The I of Infinity; only NaN and Infinity start at or above it.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'x'	HEX_INDICATOR	Hex prefix letter (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral	4	BITS_PER_HEX_DIGIT	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseHexFloatLiteral	8	HEX_DIGITS_PER_SWAR_GROUP	Hex digits parsed at once.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	32	BITS_PER_SWAR_GROUP	Bits of eight hex digits.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'p'	BINARY_EXPONENT_INDICATOR	Binary exponent indicator of a hex literal (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	16	MAX_EXACT_HEX_DIGITS	Hex digit count that always fits a long.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'N'	NAN_CHAR_N	The N of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'a'	NAN_CHAR_A	The a of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity	'f'	INFINITY_CHAR_F	The f of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'n'	INFINITY_CHAR_N	The n of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'i'	INFINITY_CHAR_LOWER_I	The lower-case i of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	't'	INFINITY_CHAR_T	The t of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	*	'y'	INFINITY_CHAR_Y	The y of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity	2	NAN_LAST_INDEX	Index of the last char of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#3	2	INFINITY_INDEX_F	Index of the f in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity	3	NAN_CHAR_COUNT	Length of NaN.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity#2	3	INFINITY_INDEX_LOWER_I	Index of the first lower-case i in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity	4	INFINITY_INDEX_SECOND_N	Index of the second n in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity	5	INFINITY_INDEX_SECOND_I	Index of the second lower-case i in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity	6	INFINITY_INDEX_T	Index of the t in Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity	7	INFINITY_LAST_INDEX	Index of the last char of Infinity.
+M3AbstractJavaFloatingPointBitsFromCharSequence	parseNaNOrInfinity	8	INFINITY_CHAR_COUNT	Length of Infinity.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	' '	MAX_WHITESPACE	Chars at or below the space character are white space.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	0xff	BYTE_MASK	Unsigned byte mask.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'0'	DIGIT_ZERO	First decimal digit; ch - DIGIT_ZERO is the digit value.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	10	DECIMAL_RADIX	Radix of decimal digits.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'.'	DECIMAL_POINT	Decimal point character.
+M3AbstractJavaFloatingPointBitsFromByteArray	parseDecFloatLiteral	4	DIGITS_PER_SWAR_GROUP	Decimal digits parsed at once.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	10_000L	TEN_POW_4	10^4: scales the significand by four parsed digits.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	0x20	LOWER_CASE_BIT	Folds an ASCII letter to lower case.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'e'	EXPONENT_INDICATOR	Decimal exponent indicator (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'-'	MINUS_SIGN	Minus sign.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'+'	PLUS_SIGN	Plus sign.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	0x22	TYPE_SUFFIX_FOLD	Maps the float type suffixes f, F, d and D to f.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'f'	TYPE_SUFFIX_FOLDED	A float type suffix after TYPE_SUFFIX_FOLD.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	19	MAX_EXACT_DECIMAL_DIGITS	Decimal digit count that always fits an unsigned long.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'I'	INFINITY_CHAR_I	The I of Infinity; only NaN and Infinity start at or above it.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'x'	HEX_INDICATOR	Hex prefix letter (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromByteArray	parseHexFloatingPointLiteral	4	BITS_PER_HEX_DIGIT	Bits of one hex digit.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'p'	BINARY_EXPONENT_INDICATOR	Binary exponent indicator of a hex literal (folded to lower case).
+M3AbstractJavaFloatingPointBitsFromByteArray	*	16	MAX_EXACT_HEX_DIGITS	Hex digit count that always fits a long.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'N'	NAN_CHAR_N	The N of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	'a'	NAN_CHAR_A	The a of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray	*	0x7974696e69666e49L	INFINITY_UTF8_LE	The eight ASCII bytes of Infinity read as one little-endian long.
+M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity	2	NAN_LAST_INDEX	Index of the last char of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity	3	NAN_CHAR_COUNT	Length of NaN.
+M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity	7	INFINITY_LAST_INDEX	Index of the last char of Infinity.
+M3AbstractJavaFloatingPointBitsFromByteArray	parseNaNOrInfinity	8	INFINITY_CHAR_COUNT	Length of Infinity.
+M3FftMultiplier	bitsPerFftPoint	19	POINT_BITS_19	19 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint#1	9	POINT_BITS_19_LOG_MAX_POINTS	log2 of the most FFT points that 19 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	18	POINT_BITS_18	18 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint#1	10	POINT_BITS_18_LOG_MAX_POINTS	log2 of the most FFT points that 18 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	17	POINT_BITS_17	17 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint#1	12	POINT_BITS_17_LOG_MAX_POINTS	log2 of the most FFT points that 17 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	16	POINT_BITS_16	16 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint#1	14	POINT_BITS_16_LOG_MAX_POINTS	log2 of the most FFT points that 16 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	15	POINT_BITS_15	15 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint#3	16	POINT_BITS_15_LOG_MAX_POINTS	log2 of the most FFT points that 15 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	14	POINT_BITS_14	14 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint#3	18	POINT_BITS_14_LOG_MAX_POINTS	log2 of the most FFT points that 14 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	13	POINT_BITS_13	13 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint	20	POINT_BITS_13_LOG_MAX_POINTS	log2 of the most FFT points that 13 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	12	POINT_BITS_12	12 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint	21	POINT_BITS_12_LOG_MAX_POINTS	log2 of the most FFT points that 12 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	11	POINT_BITS_11	11 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint	23	POINT_BITS_11_LOG_MAX_POINTS	log2 of the most FFT points that 11 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	10	POINT_BITS_10	10 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint	25	POINT_BITS_10_LOG_MAX_POINTS	log2 of the most FFT points that 10 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	9	POINT_BITS_9	9 bits per FFT point.
+M3FftMultiplier	bitsPerFftPoint	27	POINT_BITS_9_LOG_MAX_POINTS	log2 of the most FFT points that 9 bits per point allow.
+M3FftMultiplier	bitsPerFftPoint	8	POINT_BITS_8	8 bits per FFT point: the fewest, for the largest inputs.
+M3FftMultiplier	calculateRootsOfUnity	0.5	QUADRANT_PI_FACTOR	pi / 2 is the first quadrant that the roots of unity cover.
+M3FftMultiplier	calculateRootsOfUnity	2	HALF_DIVISOR	x / HALF_DIVISOR is half of x.
+M3FftMultiplier	fft	2	RADIX_4_STAGES	FFT stages done by one radix-4 pass.
+M3FftMultiplier	fft#4	2	HALF_DIVISOR	x / HALF_DIVISOR is half of x.
+M3FftMultiplier	fft#5	2	RADIX_2_SPAN	Points of one radix-2 butterfly.
+M3FftMultiplier	fft	3	THREE_QUARTERS_NUMERATOR	x * THREE_QUARTERS_NUMERATOR / QUARTER_DIVISOR is three quarters of x.
+M3FftMultiplier	fft	4	QUARTER_DIVISOR	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier	fft	31	INT_MSB_INDEX	Index of the top bit of an int: INT_MSB_INDEX - numberOfLeadingZeros(n) is floor(log2(n)).
+M3FftMultiplier	fft3	-0.5	MINUS_ONE_HALF	cos(2 pi / 3): the real part of a primitive cube root of unity.
+M3FftMultiplier	fft3	0.5	ONE_HALF	One half.
+M3FftMultiplier	fft3	3	RADIX_3	Radix of the length-3 transform; sqrt(RADIX_3) / 2 is sin(pi / 3).
+M3FftMultiplier	fftMixedRadix	2	TWO_THIRDS_NUMERATOR	oneThird * TWO_THIRDS_NUMERATOR ends the second third.
+M3FftMultiplier	fftMixedRadix	3	THIRD_DIVISOR	x / THIRD_DIVISOR is a third of x.
+M3FftMultiplier	fftMixedRadix	4	QUARTER_DIVISOR	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier	*	" does not fit into an int with slack"	MSG_POINT_BITS_NO_SLACK	Assertion message: too many bits per FFT point.
+M3FftMultiplier	fromFftVector	25	MAX_POINT_BITS	Most bits per FFT point that still leave slack in an int.
+M3FftMultiplier	fromFftVector	3	BITS_TO_BYTES_SHIFT	Converts a bit index to a byte index and back.
+M3FftMultiplier	fromFftVector	31	INT_BITS_ROUND_UP	Rounds a bit count up to whole ints.
+M3FftMultiplier	*	32	INT_BITS	Bits of an int.
+M3FftMultiplier	fromFftVector	4	INT_BYTES	Bytes of an int.
+M3FftMultiplier	fromFftVector#1	8	TWO_PARTS_INT_BYTES	Bytes of one int for each of the two result parts (real and imaginary).
+M3FftMultiplier	fromFftVector#2	8	BITS_PER_BYTE	Bits of a byte.
+M3FftMultiplier	getRootsOfUnity2	2	RADIX_4_STAGES	FFT stages done by one radix-4 pass.
+M3FftMultiplier	getRootsOfUnity3	3	RADIX_3	Radix of the length-3 transform: the transform length is RADIX_3 * 2^logN.
+M3FftMultiplier	ifft	2	RADIX_4_STAGES	FFT stages done by one radix-4 pass.
+M3FftMultiplier	ifft#2	2	RADIX_2_SPAN	Points of one radix-2 butterfly.
+M3FftMultiplier	ifft#4	2	HALF_DIVISOR	x / HALF_DIVISOR is half of x.
+M3FftMultiplier	ifft	3	THREE_QUARTERS_NUMERATOR	x * THREE_QUARTERS_NUMERATOR / QUARTER_DIVISOR is three quarters of x.
+M3FftMultiplier	ifft	4	QUARTER_DIVISOR	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier	ifft	31	INT_MSB_INDEX	Index of the top bit of an int: INT_MSB_INDEX - numberOfLeadingZeros(n) is floor(log2(n)).
+M3FftMultiplier	ifftMixedRadix	2	TWO_THIRDS_NUMERATOR	oneThird * TWO_THIRDS_NUMERATOR ends the second third.
+M3FftMultiplier	ifftMixedRadix	3	THIRD_DIVISOR	x / THIRD_DIVISOR is a third of x.
+M3FftMultiplier	ifftMixedRadix	4	QUARTER_DIVISOR	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier	multiply	"a==null"	MSG_A_NULL	Assertion message: operand a is null.
+M3FftMultiplier	multiply	"b==null"	MSG_B_NULL	Assertion message: operand b is null.
+M3FftMultiplier	multiply	"BigInteger would overflow supported range"	MSG_RANGE_OVERFLOW	ArithmeticException message: the product exceeds the supported BigInteger range.
+M3FftMultiplier	multiply	32L	INT_BITS_LONG	Bits of an int, as a long (the range check runs in 64 bits).
+M3FftMultiplier	multiplyFft	8	BITS_PER_BYTE	Bits of a byte.
+M3FftMultiplier	multiplyFft	3	THREE_QUARTERS_NUMERATOR	x * THREE_QUARTERS_NUMERATOR / QUARTER_DIVISOR is three quarters of x.
+M3FftMultiplier	multiplyFft#2	3	MIN_MIXED_RADIX_LOG_LENGTH	Mixed-radix (3 * 2^n) transforms need a log2 length above this.
+M3FftMultiplier	multiplyFft	4	QUARTER_DIVISOR	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier	multiplyFft#2	4	TWIDDLES_LOG_SHIFT	log2 length reduction of the mixed-radix twiddle factors.
+M3FftMultiplier	multiplyFft	2	MIXED_RADIX_LOG_SHIFT	log2 length reduction of the power-of-two parts of a 3 * 2^n transform.
+M3FftMultiplier	squareFft	8	BITS_PER_BYTE	Bits of a byte.
+M3FftMultiplier	squareFft	3	THREE_QUARTERS_NUMERATOR	x * THREE_QUARTERS_NUMERATOR / QUARTER_DIVISOR is three quarters of x.
+M3FftMultiplier	squareFft	4	QUARTER_DIVISOR	x / QUARTER_DIVISOR is a quarter of x.
+M3FftMultiplier	squareFft#2	4	TWIDDLES_LOG_SHIFT	log2 length reduction of the mixed-radix twiddle factors.
+M3FftMultiplier	squareFft	2	MIXED_RADIX_LOG_SHIFT	log2 length reduction of the power-of-two parts of a 3 * 2^n transform.
+M3FftMultiplier	toFftVector	25	MAX_POINT_BITS	Most bits per FFT point that still leave slack in an int.
+M3FftMultiplier	toFftVector	2	HALF_DIVISOR	x / HALF_DIVISOR is half of x.
+M3FftMultiplier	toFftVector	3	BITS_TO_BYTES_SHIFT	Converts a bit index to a byte index and back.
+M3FftMultiplier	toFftVector	31	INT_SIGN_SHIFT	Moves the int sign bit to bit 0.
+M3FftMultiplier	toFftVector	4	INT_BYTES	Bytes of an int.
+M3FftMultiplier	toFftVector	8	BITS_PER_BYTE	Bits of a byte.
+ComplexVector	*	2	COMPLEX_SIZE	Doubles per complex number (real and imaginary part).
+ComplexVector	squarePointwise#2	2	SQUARE_CROSS_FACTOR	Factor of the cross term: (a + bi)^2 = a^2 - b^2 + 2abi.
+MutableComplex	*	2	SQUARE_CROSS_FACTOR	Factor of the cross term: (a + bi)^2 = a^2 - b^2 + 2abi.

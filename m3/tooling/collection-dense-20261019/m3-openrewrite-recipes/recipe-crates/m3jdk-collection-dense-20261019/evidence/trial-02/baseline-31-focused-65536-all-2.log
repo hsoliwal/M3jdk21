@@ -1,0 +1,7 @@
+{"schema":1,"probe":"M3CollectionViews.filteredSortedSnapshot.complete-call","java":"21.0.12+8-1-24.04-Ubuntu","arch":"amd64","semantic_workloads":1,"semantic_preflight":"PASSED","sparse_fraction":"1/16","dense_fraction":"3/4","rank_groups":32,"warmup_target_millis":300,"warmup_max_batches":64,"cpu_supported":true,"allocation_supported":true,"native_requested":false}
+{"backend":"integrated","n":65536,"density":"all","selected":65536,"iterations":22,"round":0,"wall_ns_per_call":3829566.636,"cpu_ns_per_call":3585379.591,"allocated_bytes_per_call":1056270.909}
+{"backend":"integrated","n":65536,"density":"all","selected":65536,"iterations":22,"round":1,"wall_ns_per_call":3305132.455,"cpu_ns_per_call":3260718.864,"allocated_bytes_per_call":1056264.000}
+{"backend":"integrated","n":65536,"density":"all","selected":65536,"iterations":22,"round":2,"wall_ns_per_call":4038838.455,"cpu_ns_per_call":4038844.864,"allocated_bytes_per_call":1056264.000}
+{"backend":"integrated","n":65536,"density":"all","selected":65536,"iterations":22,"round":3,"wall_ns_per_call":4075254.364,"cpu_ns_per_call":3811657.000,"allocated_bytes_per_call":1056264.000}
+{"backend":"integrated","n":65536,"density":"all","selected":65536,"iterations":22,"round":4,"wall_ns_per_call":3747053.864,"cpu_ns_per_call":3743372.591,"allocated_bytes_per_call":1056264.000}
+{"checksum":20298432,"default_dispatch":"JAVA_UNCHANGED"}

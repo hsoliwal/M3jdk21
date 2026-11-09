@@ -54,11 +54,13 @@ import jdk.jfr.Recording;
 import jdk.jfr.RecordingState;
 import jdk.jfr.events.ActiveRecordingEvent;
 import jdk.jfr.events.ActiveSettingEvent;
+import jdk.jfr.events.EventConfigurations;
 import jdk.jfr.internal.SecuritySupport.SafePath;
 import jdk.jfr.internal.SecuritySupport.SecureRecorderListener;
 import jdk.jfr.internal.consumer.EventLog;
 import jdk.jfr.internal.instrument.JDKEvents;
 import jdk.jfr.internal.periodic.PeriodicEvents;
+import jdk.jfr.internal.util.Utils;
 
 public final class PlatformRecorder {
 
@@ -83,6 +85,7 @@ public final class PlatformRecorder {
         Logger.log(JFR_SYSTEM, INFO, "Created native");
         JDKEvents.initialize();
         Logger.log(JFR_SYSTEM, INFO, "Registered JDK events");
+        EventConfigurations.initialize();
         JDKEvents.addInstrumentation();
         startDiskMonitor();
         shutdownHook = SecuritySupport.createThreadWitNoPermissions("JFR Shutdown Hook", new ShutdownHook(this));
@@ -245,7 +248,7 @@ public final class PlatformRecorder {
             }
             currentChunk = newChunk;
             jvm.beginRecording();
-            startNanos = Utils.getChunkStartNanos();
+            startNanos = JVMSupport.getChunkStartNanos();
             startTime = Utils.epochNanosToInstant(startNanos);
             if (currentChunk != null) {
                 currentChunk.setStartTime(startTime);
@@ -267,7 +270,7 @@ public final class PlatformRecorder {
                 startTime = MetadataRepository.getInstance().setOutput(p);
                 newChunk.setStartTime(startTime);
             }
-            startNanos = Utils.getChunkStartNanos();
+            startNanos = JVMSupport.getChunkStartNanos();
             startTime = Utils.epochNanosToInstant(startNanos);
             recording.setStartTime(startTime);
             recording.setState(RecordingState.RUNNING);
@@ -281,7 +284,7 @@ public final class PlatformRecorder {
         if (toDisk) {
             PeriodicEvents.setFlushInterval(streamInterval);
         }
-        PeriodicEvents.doChunkBegin();
+        PeriodicEvents.doChunkBegin(true);
         Duration duration = recording.getDuration();
         if (duration != null) {
             recording.setStopTime(startTime.plus(duration));
@@ -314,7 +317,7 @@ public final class PlatformRecorder {
             }
         }
         OldObjectSample.emit(recording);
-        recording.setFinalStartnanos(Utils.getChunkStartNanos());
+        recording.setFinalStartnanos(JVMSupport.getChunkStartNanos());
 
         if (endPhysical) {
             PeriodicEvents.doChunkEnd();
@@ -353,7 +356,7 @@ public final class PlatformRecorder {
                 finishChunk(currentChunk, stopTime, null);
             }
             currentChunk = newChunk;
-            PeriodicEvents.doChunkBegin();
+            PeriodicEvents.doChunkBegin(false);
         }
 
         if (toDisk) {
@@ -408,7 +411,7 @@ public final class PlatformRecorder {
             finishChunk(currentChunk, timestamp, null);
         }
         currentChunk = newChunk;
-        PeriodicEvents.doChunkBegin();
+        PeriodicEvents.doChunkBegin(false);
     }
 
     private List<PlatformRecording> getRunningRecordings() {

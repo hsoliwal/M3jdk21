@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+component	source	license	decision	reason
+reference-flow family (7 classes, 3 proofs, 3 JUnit wrappers)	hsoliwal/com.synexia indexstring compiler module (first party; RELOCATION_MAP.tsv, PROVENANCE.tsv)	Apache-2.0	ADAPT	package relocation + progress types mapped to the existing M3JDK owners; bodies kept byte for byte; no third-party code
+javac Tree API (com.sun.source.tree, com.sun.source.util)	OpenJDK jdk.compiler (the platform)	GPL-2.0 WITH Classpath-exception-2.0	REUSE	the analyses read attributed javac trees; no second parser or AST (one-AST rule)
+M3ProgressMonitor, M3ProgressState	M3JDK m3/collections (existing)	Apache-2.0	REUSE	existing relocation of the same donor interface and record; one progress contract
+M3GcUsePlan	M3JDK m3/collections/gc-interop (existing)	Apache-2.0 OR EPL-2.0	NEC_RECORDED	receiver of source-bound compiler facts; this module produces such facts; complements, nothing merged
+M3DoopLifetimeSlotPlanner	M3JDK m3/compiler/lifetime-slots (existing)	Apache-2.0	NEC_RECORDED	consumes half-open lifetime intervals from an attributed liveness/escape owner; this module is such an owner; complements, nothing merged
+M3JavaNullnessFlow	M3JDK m3/compiler/nullness-facts (existing)	Apache-2.0	NEC_RECORDED	nullness lattice over javac trees; different fact (nullness vs reference origins/liveness); nothing merged

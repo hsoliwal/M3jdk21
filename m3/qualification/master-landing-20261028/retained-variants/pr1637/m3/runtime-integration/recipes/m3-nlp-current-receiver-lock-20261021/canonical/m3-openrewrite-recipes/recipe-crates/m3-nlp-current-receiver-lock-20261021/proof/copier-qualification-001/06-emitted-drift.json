@@ -1,0 +1,4 @@
+{
+  "status": "FAIL",
+  "failure": "ValueError: emitted output drift: m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
+}

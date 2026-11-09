@@ -1,0 +1,69 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3 direct int[] array and immutable index JNI
+on:
+  push:
+    branches: ['m3/direct-int-array-index-20261018']
+  pull_request:
+    paths:
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Int*.java'
+      - 'test/jdk/jdk/m3/collections/M3IntArrayListContractProof.java'
+      - 'm3/collections/qualification/m3-int-array-index-20261018/**'
+      - '.github/workflows/m3-int-array-index-20261018.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-first-java21-existing-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Exact canonical templates, Maven recipe and fixed-point refusals
+        run: |
+          mvn -B -ntp -f m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml verify
+          java -cp m3/collections/qualification/m3-int-array-index-20261018/recipe/target/classes \
+            jdk.internal.m3.M3IntArrayIndexRecipe --check "$PWD"
+      - name: Compile actual M3 interfaces, owners and independent differential oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          pkg=src/jdk.m3.collections/share/classes/jdk/m3/collections
+          test=test/jdk/jdk/m3/collections
+          mkdir -p "$RUNNER_TEMP/classes" "$RUNNER_TEMP/headers" "$RUNNER_TEMP/native"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/headers" -d "$RUNNER_TEMP/classes" \
+            "$pkg/M3IntCollection.java" "$pkg/M3IntIterator.java" \
+            "$pkg/M3IndexMaskCompactor.java" \
+            "$pkg/M3IntList.java" "$pkg/M3IntArrayList.java" \
+            "$pkg/M3IntIndexedSnapshot.java" "$test/M3IntArrayListContractProof.java"
+          java -ea -Xcheck:jni -cp "$RUNNER_TEMP/classes" jdk.m3.collections.M3IntArrayListContractProof
+          java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/missing" -cp "$RUNNER_TEMP/classes" \
+            jdk.m3.collections.M3IntArrayListContractProof --missing
+      - name: Original C17 JNI selector parity, not a new ABI
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -O2 -Wall -Wextra -Werror -pedantic \
+            -fsanitize=undefined -fno-sanitize-recover=all -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$RUNNER_TEMP/headers/jdk_m3_collections_M3IndexMaskCompactor.h" \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c \
+            -o "$RUNNER_TEMP/native/libm3_collections_mask.so"
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 java -ea -Xcheck:jni \
+            -Djava.library.path="$RUNNER_TEMP/native" -cp "$RUNNER_TEMP/classes" \
+            jdk.m3.collections.M3IntArrayListContractProof --native
+      - name: Owning Maven reactor tests
+        run: |
+          mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
+          mvn -B -ntp -f m3/collections/pom.xml "-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" verify

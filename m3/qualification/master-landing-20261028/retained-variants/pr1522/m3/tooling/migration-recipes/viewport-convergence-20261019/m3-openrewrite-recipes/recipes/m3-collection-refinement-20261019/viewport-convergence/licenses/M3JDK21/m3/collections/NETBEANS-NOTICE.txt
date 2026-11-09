@@ -1,0 +1,24 @@
+NetBeans evaluation and test provenance only
+
+This catalogue records source review and private fixture qualification of Apache
+NetBeans at commit f26ca8d8025ff820b8ffe751b6db6c1cc67baa97. No NetBeans runtime
+implementation was adopted into M3ArrayList or any other product owner by this
+packet. The independent M3 contract tests and refused M3 fixture experiments are
+first-party Apache-2.0 work. This notice preserves the reviewed donor attribution;
+it does not assert runtime incorporation or endorsement.
+
+Original upstream NOTICE, retained verbatim below:
+
+Apache NetBeans
+Copyright 2017-2026 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+The code is based on NetBeans, that has been kindly donated to the Apache
+Software Foundation by Oracle.
+
+The code was Copyright 1997-2016 Oracle and/or its affiliates.  The Initial
+Developer of the Original Software was Sun Microsystems, Inc. Portions
+Copyright 1997-2006 Sun Microsystems, Inc.
+

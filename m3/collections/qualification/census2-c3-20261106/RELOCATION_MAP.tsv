@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of qualification/census2-c3-20261106/relocate.py (recipe RELOCATE_CENSUS2 v1): the NEW test files of census pass-2 leaves P2-020 (crate m3-atom-pattern-multipass, dataset m3-stable-run-reversal-20261021: manifest targets M3StableGroupReversalSelfTest/Test, ABSENT before) and P2-075 (crate m3jdk21-lane-rotation-compact-20261029: M3LaneCycleOverflowAndCompactTest, ABSENT before).
+# Donor: hsoliwal/com.synexia develop d5ad5090d87ef8477a56317e60ac0d29c65029f7 (census pass-2 pin). Row kinds as in m3/collections/recipe/entryless-lane-kernel-20261106/RELOCATION_MAP.tsv.
+kind	donor	target	note
+REPO	hsoliwal/com.synexia	https://github.com/hsoliwal/com.synexia	donor repository; blob URL = <url>/blob/<commit>/<donor path>
+PACKAGE	com.m3.collections	jdk.m3.collections	JDK naming (fe35ea98841)
+EXTERNAL	org.junit.jupiter.api	-	JUnit 5 (module test scope)
+FILE	synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-stable-run-reversal-20261021/M3StableGroupReversalSelfTest.java	src/test/java/jdk/m3/collections/M3StableGroupReversalSelfTest.java	P2-020 crate contract oracle (manifest after-sha256 dba7dcfe60ff); passes on the owner's later group-mask algorithm
+FILE	synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-stable-run-reversal-20261021/M3StableGroupReversalTest.java	src/test/java/jdk/m3/collections/M3StableGroupReversalTest.java	P2-020 JUnit adapter (manifest after-sha256 d3ffc0d0314b)
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-lane-rotation-compact-20261029/M3LaneCycleOverflowAndCompactTest.java.txt	src/test/java/jdk/m3/collections/M3LaneCycleOverflowAndCompactTest.java	P2-075 differential test (manifest after-sha256 f3480a839a81)

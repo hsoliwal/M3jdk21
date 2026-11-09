@@ -1,0 +1,68 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/docs/community-capability-admission.md",
+  "invariant_id": "M3-COMMUNITY-1-2-4",
+  "run": {
+    "mode": "apply",
+    "profile": "bounded-local",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "base_commit": "700d4414169164c71807b43fd4d93bf6d50ceeed",
+  "targets": [
+    "m3/tooling/module-packs/**",
+    "m3/pom.xml",
+    "m3/evidence/community-module-packs-20261003/**"
+  ],
+  "invariant_locks": {
+    "JDK_PRODUCT_SOURCE": "LOCKED",
+    "EXISTING_PUBLIC_API": "LOCKED",
+    "JAVA_HOME": "READ_ONLY",
+    "BUILD_SCRIPTS": "ONLY_DECLARED_TARGETS"
+  },
+  "allowed_delta": [
+    "new external tooling module",
+    "reusable read-only OpenRewrite inventory recipe",
+    "explicit opt-in local image assembly",
+    "test and evidence files",
+    "M3 reactor registration"
+  ],
+  "forbidden": [
+    "rebase",
+    "force-push",
+    "merge canonical branch",
+    "unreviewed dependency download at runtime",
+    "root-level repository writes",
+    "false completion"
+  ],
+  "verify_order": [
+    "diff",
+    "static-check",
+    "compile",
+    "behavior-tests",
+    "runtime-image"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "failed locked input check",
+    "failed compile",
+    "occupied output directory",
+    "failed artifact checksum",
+    "unsupported JDK"
+  ],
+  "declared_scope": "LIBRARY_API",
+  "scope_details": {
+    "kernel_export": "LIBRARY_API_ADDITIVE",
+    "reactor_registration": "MULTI_MODULE",
+    "inventory_recipe": "READ_ONLY",
+    "image_assembly": "EXPLICIT_OUTPUT_ONLY"
+  }
+}

@@ -1,0 +1,7 @@
+module	descriptor_source	result
+jdk.m3fs	published	JMOD
+org.apache.commons.codec	published	JMOD
+org.apache.commons.compress	published	JMOD
+org.apache.commons.io	published	JMOD
+org.apache.commons.lang3	published	JMOD
+commons.logging	m3-descriptor-for-jmod	JMOD

@@ -1,0 +1,278 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "files": [
+    {
+      "target_path": ".github/workflows/m3-collections.yml",
+      "sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
+      "retained_artifact": {
+        "path": "preimages/.github/workflows/m3-collections.yml",
+        "sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504"
+      }
+    },
+    {
+      "target_path": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "sha256": "e055566033e090e9a2114d360e3aef29369813defbcdea385f47ba444ff6f1e0",
+      "retained_artifact": {
+        "path": "preimages/.github/workflows/m3-eclipse-framework-forward-20261017.yml",
+        "sha256": "e055566033e090e9a2114d360e3aef29369813defbcdea385f47ba444ff6f1e0"
+      }
+    },
+    {
+      "target_path": ".github/workflows/m3-object-progress-candidate.yml",
+      "sha256": "1b28049139575d9587ad48f72d5dfd5f2be89dd4027f3945daaa628c6bcb80eb",
+      "retained_artifact": {
+        "path": "preimages/.github/workflows/m3-object-progress-candidate.yml",
+        "sha256": "1b28049139575d9587ad48f72d5dfd5f2be89dd4027f3945daaa628c6bcb80eb"
+      }
+    },
+    {
+      "target_path": "m3/collections/algorithm-catalog/masked-sort-fusion-20261021.tsv",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/algorithm-catalog/resource-change-20261021.tsv",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "sha256": "bd94fd32ed00274f3f1581a401742e45a94af2054f99373acfc8224f33b06ab1",
+      "retained_artifact": {
+        "path": "preimages/m3/collections/qualification/full-java-jni-20261018/verify.py",
+        "sha256": "bd94fd32ed00274f3f1581a401742e45a94af2054f99373acfc8224f33b06ab1"
+      }
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/README.md",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/jdk/m3/collections/M3CollectionSurfaceProbe.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/jdk/m3/collections/M3MaskedSortAllocationProbe.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/qualification/masked-sort-fusion-20261021/verify.py",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+      "sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a",
+      "retained_artifact": {
+        "path": "preimages/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+        "sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a"
+      }
+    },
+    {
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
+      "retained_artifact": {
+        "path": "preimages/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+        "sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709"
+      }
+    },
+    {
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+      "sha256": "3d6d6bfb82e9030a91da386e38bdec6a9bf41c268ff15c83d7c122db983f2a28",
+      "retained_artifact": {
+        "path": "preimages/m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+        "sha256": "3d6d6bfb82e9030a91da386e38bdec6a9bf41c268ff15c83d7c122db983f2a28"
+      }
+    },
+    {
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredEndpointRestorationContract.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredEndpointRestorationTest.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskedSortFusionContract.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskedSortFusionTest.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/algorithm-catalog/jobs-executor-20261021.tsv",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/qualification/M3_ECLIPSE_JOBS_20261021.md",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/framework/pom.xml",
+      "sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/pom.xml",
+        "sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/qualification/resource-change-20261021/README.md",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/framework/qualification/resource-change-20261021/verify.py",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+      "sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+        "sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
+      "sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
+        "sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+        "sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
+      "sha256": "21a893d7f976e5bf2d42998335d99556edfffb266016cce15d5784ebc1c19274",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
+        "sha256": "21a893d7f976e5bf2d42998335d99556edfffb266016cce15d5784ebc1c19274"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+        "sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeServices.java",
+      "sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeServices.java",
+        "sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
+      "sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
+        "sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
+      "sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
+        "sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f"
+      }
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseResourceChangeSnapshotTest.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f",
+      "retained_artifact": {
+        "path": "preimages/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+        "sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f"
+      }
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/CATALOGUE.tsv",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/README.md",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/SOURCE_PIN.json",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/src/test/java/LegacyScheduledClient.java",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/runtime-integration/scheduled-progress-20261021/verify.py",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/tooling/module-packs/collections/build.py",
+      "sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
+      "retained_artifact": {
+        "path": "preimages/m3/tooling/module-packs/collections/build.py",
+        "sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad"
+      }
+    },
+    {
+      "target_path": "m3/tooling/module-packs/collections/tests/test_native_abi.py",
+      "sha256": "ABSENT"
+    },
+    {
+      "target_path": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "retained_artifact": {
+        "path": "preimages/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+        "sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b"
+      }
+    },
+    {
+      "target_path": "src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+      "sha256": "3a914503908cd93c321c356f215eb3e022a064c1c124331d0dd2edb429bdd7a5",
+      "retained_artifact": {
+        "path": "preimages/src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+        "sha256": "3a914503908cd93c321c356f215eb3e022a064c1c124331d0dd2edb429bdd7a5"
+      }
+    },
+    {
+      "target_path": "test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java",
+      "sha256": "ABSENT"
+    }
+  ]
+}

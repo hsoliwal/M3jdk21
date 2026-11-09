@@ -68,6 +68,7 @@ import java.util.function.Supplier;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
+import jdk.internal.logger.LoggerFinderLoader.TemporaryLoggerFinder;
 import jdk.internal.misc.CarrierThreadLocal;
 import jdk.internal.misc.Unsafe;
 import jdk.internal.util.StaticProperty;
@@ -286,10 +287,11 @@ public final class System {
     private static volatile Console cons;
 
     /**
-     * Returns the unique {@link java.io.Console Console} object associated
+     * Returns the unique {@link Console Console} object associated
      * with the current Java virtual machine, if any.
      *
      * @return  The system console, if any, otherwise {@code null}.
+     * @see Console
      *
      * @since   1.6
      */
@@ -1766,13 +1768,16 @@ public final class System {
             // We do not need to synchronize: LoggerFinderLoader will
             // always return the same instance, so if we don't have it,
             // just fetch it again.
-            if (service == null) {
+            LoggerFinder finder = service;
+            if (finder == null) {
                 PrivilegedAction<LoggerFinder> pa =
                         () -> LoggerFinderLoader.getLoggerFinder();
-                service = AccessController.doPrivileged(pa, null,
+                finder = AccessController.doPrivileged(pa, null,
                         LOGGERFINDER_PERMISSION);
+                if (finder instanceof TemporaryLoggerFinder) return finder;
+                service = finder;
             }
-            return service;
+            return finder;
         }
 
     }
@@ -2234,6 +2239,13 @@ public final class System {
         // module system initialized
         VM.initLevel(2);
 
+        // M3String storage is activated only after java.base/module bootstrap has completed.
+        // Until this point String keeps the stock flat representation, avoiding recursive class
+        // initialization through the local interner or optional mapped lexicon loader.
+        if (String.m3StorageRequested()) {
+            M3String.activate(props.getProperty("jdk.mindex.lexicon"));
+        }
+
         return 0; // JNI_OK
     }
 
@@ -2395,9 +2407,6 @@ public final class System {
             public Package definePackage(ClassLoader cl, String name, Module module) {
                 return cl.definePackage(name, module);
             }
-            public String fastUUID(long lsb, long msb) {
-                return Long.fastUUID(lsb, msb);
-            }
             @SuppressWarnings("removal")
             public void addNonExportedPackages(ModuleLayer layer) {
                 SecurityManager.addNonExportedPackages(layer);
@@ -2524,6 +2533,39 @@ public final class System {
 
             public long stringConcatMix(long lengthCoder, String constant) {
                 return StringConcatHelper.mix(lengthCoder, constant);
+            }
+
+            public boolean stringConcatUsesM3Storage() {
+                return String.m3JoinedStringsEnabled();
+            }
+
+            public java.util.function.IntUnaryOperator stringCodeUnitCursor(String text) {
+                M3String source = text.m3();
+                return source == null ? null : new M3String.CodeUnitCursor(source);
+            }
+
+            public java.util.function.LongPredicate stringM3TrigramFacts(String text) {
+                if (text == null) return null;
+                M3String source = text.m3();
+                return source == null
+                        ? null : M3StringPrecomputeBridge.trigramFactsIfPrepared(source);
+            }
+
+            public JavaLangAccess.M3StringTokenSnapshot m3StringAsciiTokens(
+                    String value, int maxSequence, int maxVocabulary,
+                    int maxTokenLength, int maxPackedBytes) {
+                String checked = Objects.requireNonNull(value, "value");
+                M3String storage = checked.m3();
+                if (storage == null) return null;
+                M3String.TokenSnapshot snapshot = storage.asciiTokenSnapshot(
+                        maxSequence, maxVocabulary, maxTokenLength, maxPackedBytes);
+                return snapshot == null ? null : new JavaLangAccess.M3StringTokenSnapshot(
+                        snapshot.packedAscii, snapshot.offsets, snapshot.lengths, snapshot.sequence);
+            }
+
+            public int stringM3LeafRanges(String text, long[] lanes) {
+                String checked = Objects.requireNonNull(text, "text");
+                return M3StringLeafRanges.fill(checked.m3(), lanes);
             }
 
             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
@@ -2666,7 +2708,12 @@ public final class System {
             }
 
             public String getLoaderNameID(ClassLoader loader) {
-                return loader.nameAndId();
+                return loader != null ? loader.nameAndId() : "null";
+            }
+
+            @Override
+            public boolean allowSecurityManager() {
+                return System.allowSecurityManager();
             }
         });
     }

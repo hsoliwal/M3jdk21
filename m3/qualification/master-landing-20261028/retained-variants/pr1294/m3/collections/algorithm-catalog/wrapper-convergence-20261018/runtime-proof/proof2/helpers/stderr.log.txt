@@ -1,0 +1,27 @@
+test_01_valid_manifest (__main__.Helpers.test_01_valid_manifest) ... ok
+test_02_unsupported_schema (__main__.Helpers.test_02_unsupported_schema) ... ok
+test_03_empty_provenance (__main__.Helpers.test_03_empty_provenance) ... ok
+test_04_duplicate_source (__main__.Helpers.test_04_duplicate_source) ... ok
+test_05_invalid_preimage_hash (__main__.Helpers.test_05_invalid_preimage_hash) ... ok
+test_06_invalid_postimage_hash (__main__.Helpers.test_06_invalid_postimage_hash) ... ok
+test_07_path_traversal (__main__.Helpers.test_07_path_traversal) ... ok
+test_08_absolute_path (__main__.Helpers.test_08_absolute_path) ... ok
+test_09_unnormalized_path (__main__.Helpers.test_09_unnormalized_path) ... ok
+test_10_file_symlink (__main__.Helpers.test_10_file_symlink) ... ok
+test_11_parent_symlink (__main__.Helpers.test_11_parent_symlink) ... ok
+test_12_missing_postimage (__main__.Helpers.test_12_missing_postimage) ... ok
+test_13_postimage_drift (__main__.Helpers.test_13_postimage_drift) ... ok
+test_14_preimage_drift (__main__.Helpers.test_14_preimage_drift) ... ok
+test_15_expected_absent_is_present (__main__.Helpers.test_15_expected_absent_is_present) ... ok
+test_16_required_owner_omitted (__main__.Helpers.test_16_required_owner_omitted) ... ok
+test_17_executing_runner_binding (__main__.Helpers.test_17_executing_runner_binding) ... ok
+test_18_empty_source_role (__main__.Helpers.test_18_empty_source_role) ... ok
+test_19_api_changed_descriptor_is_reported (__main__.Helpers.test_19_api_changed_descriptor_is_reported) ... ok
+test_20_api_retained_with_concrete_addition (__main__.Helpers.test_20_api_retained_with_concrete_addition) ... ok
+test_21_api_new_abstract_obligation_is_reported (__main__.Helpers.test_21_api_new_abstract_obligation_is_reported) ... ok
+test_22_actual_generated_int_long_jni_header (__main__.Helpers.test_22_actual_generated_int_long_jni_header) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.331s
+
+OK

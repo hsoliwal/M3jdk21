@@ -1,0 +1,425 @@
+/*
+ * Copyright (c) 2026, Oracle and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * The Universal Permissive License (UPL), Version 1.0
+ *
+ * Subject to the condition set forth below, permission is hereby granted to any
+ * person obtaining a copy of this software, associated documentation and/or
+ * data (collectively the "Software"), free of charge and under any and all
+ * copyright rights in the Software, and any and all patent rights owned or
+ * freely licensable by each licensor hereunder covering either (i) the
+ * unmodified Software as contributed to or provided by such licensor, or (ii)
+ * the Larger Works (as defined below), to deal in both
+ *
+ * (a) the Software, and
+ *
+ * (b) any piece of software and/or hardware listed in the lrgrwrks.txt file if
+ * one is included with the Software each a "Larger Work" to which the Software
+ * is contributed by such licensors),
+ *
+ * without restriction, including without limitation the rights to copy, create
+ * derivative works of, display, perform, and distribute the Software and make,
+ * use, sell, offer for sale, import, export, have made, and have sold the
+ * Software and the Larger Work(s), and to sublicense the foregoing rights on
+ * either these or other terms.
+ *
+ * This license is subject to the following condition:
+ *
+ * The above copyright notice and either this complete permission notice or at a
+ * minimum a reference to the UPL must be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package org.graalvm.buildtools.utils;
+
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Utilities for validating GraalVM reachability metadata repository schemas.
+ * - Validates that required repository schemas exist with the exact supported major version
+ *   and enforces a strict, known set of files in the schemas directory.
+ * - Optionally cross-validates the Reachability Metadata Schema between the repository and
+ *   a graal installation when both provide it.
+ */
+public final class SchemaValidationUtils {
+    /**
+     * Required schema descriptors. The major version must match exactly between
+     * Native Build Tools and the reachability metadata repository.
+     */
+    private static final RequiredSchema[] REQUIRED_SCHEMAS = new RequiredSchema[] {
+        new RequiredSchema("library-and-framework-list-schema", 1),
+        new RequiredSchema("metadata-library-index-schema", 2),
+    };
+
+    /**
+     * Represents a required schema by base name with an exact required major version.
+     */
+    private static final class RequiredSchema {
+        private final int requiredMajorVersion;
+        private final Pattern filenamePattern;
+        private final String dirGlob;
+        private final String missingExampleGlob;
+
+        private RequiredSchema(String baseName, int requiredMajorVersion) {
+            this.requiredMajorVersion = requiredMajorVersion;
+            this.filenamePattern = Pattern.compile(Pattern.quote(baseName) + "-v(\\d+)\\.(\\d+)\\.(\\d+)\\.json");
+            this.dirGlob = baseName + "-v*.json";
+            this.missingExampleGlob = baseName + "-v" + requiredMajorVersion + ".*.*.json";
+        }
+    }
+
+    private static final String REACHABILITY_METADATA_SCHEMA = "reachability-metadata-schema";
+    private static final String REACHABILITY_METADATA_SCHEMA_PATH = "lib/svm/schemas/reachability-metadata-schema.json";
+
+    // Precompiled regex patterns
+    private static final Pattern VERSION_JSON_PATTERN =
+            Pattern.compile("\"version\"\\s*:\\s*\"(\\d+)\\.(\\d+)\\.(\\d+)\"");
+    private static final Pattern FILENAME_VERSION_PATTERN =
+            Pattern.compile(".*-v(\\d+)\\.(\\d+)\\.(\\d+)\\.json");
+
+    private static int safeParseInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException ex) {
+            return 0;
+        }
+    }
+
+    /**
+     * Validates that the repository at the given root provides required schemas
+     * whose major versions match exactly the ones supported by this Build Tools version,
+     * and enforces a strict schema count.
+     *
+     * For each required schema base name, this method ensures there is exactly one file
+     * named {@code baseName-vMAJOR.MINOR.PATCH.json} whose MAJOR equals the Build Tools
+     * required MAJOR. If the repository uses an older MAJOR, users must update the
+     * reachability metadata repository. If it uses a newer MAJOR, users must update
+     * Native Build Tools.
+     *
+     * This method also validates that the total number of files in the schemas directory
+     * does not exceed the number of supported schemas to ensure compatibility.
+     *
+     * If the schemas directory is missing, if any major-version requirement is not satisfied,
+     * or if the directory contains more files than are supported by this version of
+     * Native Build Tools, this method throws an {@link IllegalStateException} with a detailed message.
+     *
+     * @param repoRoot the root path of the exploded repository
+     */
+    public static void validateSchemas(Path repoRoot) {
+        Path schemasDir = repoRoot.resolve("schemas");
+
+        if (!Files.isDirectory(schemasDir)) {
+            String message = "The configured GraalVM reachability metadata repository at "
+                + repoRoot.toAbsolutePath()
+                + " does not contain a 'schemas' directory. "
+                + "Requires GraalVM Reachability Metadata 0.3.33 or newer which packages the required schemas.";
+            throw new IllegalStateException(message);
+        }
+
+        int requiredSchemasFound = 0;
+        List<String> missing = new ArrayList<>();
+        List<String> metadataTooOld = new ArrayList<>();
+        List<String> toolsTooOld = new ArrayList<>();
+        String prefix = repoRoot.relativize(schemasDir).toString();
+
+        // Count files but explicitly ignore the optional reachability-metadata-schema for "exact count" purposes
+        try (DirectoryStream<Path> allFiles = Files.newDirectoryStream(schemasDir)) {
+            for (Path f : allFiles) {
+                if (!f.getFileName().toString().startsWith(REACHABILITY_METADATA_SCHEMA)) {
+                    requiredSchemasFound++;
+                }
+            }
+        } catch (IOException ignored) {
+            // Validation below reports missing schemas.
+        }
+
+        if (requiredSchemasFound > REQUIRED_SCHEMAS.length) {
+            String message = "The configured GraalVM reachability metadata repository at "
+                    + repoRoot.toAbsolutePath()
+                    + " contains more schema files than supported by this version of Native Build Tools. "
+                    + "Found " + requiredSchemasFound + " files under 'schemas' (excluding optional reachability-metadata-schema) but exactly "
+                    + REQUIRED_SCHEMAS.length + " are supported. "
+                    + "Please update your Native Build Tools to a newer version which supports the newer schemas.";
+            throw new IllegalStateException(message);
+        }
+
+        for (RequiredSchema required : REQUIRED_SCHEMAS) {
+            Integer foundMajor = null;
+            Pattern pattern = required.filenamePattern;
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(schemasDir, required.dirGlob)) {
+                for (Path entry : stream) {
+                    String name = entry.getFileName().toString();
+                    Matcher m = pattern.matcher(name);
+                    if (m.matches()) {
+                        foundMajor = safeParseInt(m.group(1));
+                        break; // there should be at most one per schema; stop at first match
+                    }
+                }
+            } catch (IOException ignored) {
+                // ignore and treat as unsatisfied; validation will fail below
+            }
+
+            if (foundMajor == null) {
+                missing.add(prefix + "/" + required.missingExampleGlob);
+            } else if (required.requiredMajorVersion > foundMajor) {
+                metadataTooOld.add(prefix + "/" + required.dirGlob + ": required major v" + required.requiredMajorVersion + ", found v" + foundMajor);
+            } else if (required.requiredMajorVersion < foundMajor) {
+                toolsTooOld.add(prefix + "/" + required.dirGlob + ": required major v" + required.requiredMajorVersion + ", found v" + foundMajor);
+            }
+        }
+
+        if (!missing.isEmpty()) {
+            String message = "The configured GraalVM reachability metadata repository at "
+                + repoRoot.toAbsolutePath()
+                + " is missing required schema files (exact major version required): "
+                + String.join(", ", missing)
+                + ". If you customized metadataRepository (uri/url/version/localPath), please point it to the latest official release.";
+            throw new IllegalStateException(message);
+        }
+
+        if (!metadataTooOld.isEmpty()) {
+            String message = "The configured GraalVM reachability metadata repository at "
+                + repoRoot.toAbsolutePath()
+                + " provides schema files with an older major version than required by this version of Native Build Tools: "
+                + String.join("; ", metadataTooOld)
+                + ". Please update your reachability metadata repository.";
+            throw new IllegalStateException(message);
+        }
+
+        if (!toolsTooOld.isEmpty()) {
+            String message = "The configured GraalVM reachability metadata repository at "
+                + repoRoot.toAbsolutePath()
+                + " provides schema files with a newer major version than supported by this version of Native Build Tools: "
+                + String.join("; ", toolsTooOld)
+                + ". Please update your Native Build Tools to a newer version.";
+            throw new IllegalStateException(message);
+        }
+    }
+
+    /**
+     * Optionally cross-validates the reachability-metadata schema between the repository
+     * and the active GraalVM installation.
+     *
+     * Behavior:
+     * - Neither side provides the schema: no-op.
+     * - Repository provides it; GraalVM does not: throws and asks to update GraalVM (majorJDKVersion used for guidance).
+     * - GraalVM provides it; repository does not: warns to update the repository.
+     * - Both provide it: extract full versions, compare; throw on repository version greater than GraalVM.
+     *
+     * This check does not affect mandatory repository schema validation performed by
+     * {@link #validateSchemas(Path)}. The majorJDKVersion parameter is only used to tailor
+     * guidance in error messages.
+     */
+    public static void validateReachabilityMetadataSchema(Path repoRoot, int majorJDKVersion, Path nativeImageExecutable) {
+        validateReachabilityMetadataSchema(repoRoot, majorJDKVersion, nativeImageExecutable, System.getProperty("os.name"), System.getProperty("os.arch"));
+    }
+
+    static void validateReachabilityMetadataSchema(Path repoRoot, int majorJDKVersion, Path nativeImageExecutable, String osName, String osArch) {
+        // GraalVM JDK 25 never shipped a macOS x64 release containing this schema.
+        if (shouldSkipReachabilityMetadataSchemaValidation(majorJDKVersion, osName, osArch)) {
+            return;
+        }
+
+        Path schemasDir = repoRoot.resolve("schemas");
+        if (!Files.isDirectory(schemasDir)) {
+            String message = "The configured GraalVM reachability metadata repository at "
+                + repoRoot.toAbsolutePath()
+                + " does not contain a 'schemas' directory. "
+                + "Requires GraalVM Reachability Metadata 0.3.33 or newer which packages the required schemas.";
+            throw new IllegalStateException(message);
+        }
+        List<Path> repoSchemas = new ArrayList<>();
+        try {
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(schemasDir, REACHABILITY_METADATA_SCHEMA + "-v*.json")) {
+                for (Path entry : stream) {
+                    repoSchemas.add(entry);
+                }
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to read repository schemas directory "
+                    + schemasDir.toAbsolutePath() + ": " + e.getMessage(), e);
+        }
+        if (repoSchemas.size() > 1) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < repoSchemas.size(); i++) {
+                if (i > 0) {
+                    sb.append(", ");
+                }
+                sb.append(repoSchemas.get(i).toAbsolutePath());
+            }
+            throw new IllegalStateException(
+                    "Multiple reachability-metadata schema files found in repository schemas directory "
+                            + schemasDir.toAbsolutePath()
+                            + ". Exactly one is expected, but found " + repoSchemas.size()
+                            + ": " + sb);
+        }
+        Path metadataRepoSchemaFile = repoSchemas.isEmpty() ? null : repoSchemas.get(0);
+        boolean schemaExistsInMetadataRepo = metadataRepoSchemaFile != null;
+
+        // The native image executable is located in $GRAALVM_HOME/bin/native-image
+        Path graalvmHomeLocation = null;
+        Path graalSchemaFile = null;
+        try {
+            if (nativeImageExecutable == null || !Files.isRegularFile(nativeImageExecutable)) {
+                throw new IllegalStateException("Invalid native-image executable path: " + nativeImageExecutable);
+            }
+            Path binDir = nativeImageExecutable.getParent();
+            if (binDir == null || !Files.isDirectory(binDir)) {
+                throw new IllegalStateException("Invalid GraalVM installation: expected 'bin' directory for native-image at "
+                        + nativeImageExecutable.toAbsolutePath());
+            }
+            graalvmHomeLocation = binDir.getParent();
+            if (graalvmHomeLocation == null || !Files.isDirectory(graalvmHomeLocation)) {
+                throw new IllegalStateException("Invalid GraalVM home derived from native-image at "
+                        + nativeImageExecutable.toAbsolutePath());
+            }
+            Path candidate = graalvmHomeLocation.resolve(REACHABILITY_METADATA_SCHEMA_PATH);
+            if (Files.isRegularFile(candidate)) {
+                graalSchemaFile = candidate;
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to resolve GraalVM schema from "
+                    + graalvmHomeLocation + ": " + e.getMessage(), e);
+        }
+        boolean schemaExistsInGraal = graalSchemaFile != null;
+
+        // Apply the four-case logic based solely on schema existence
+        if (!schemaExistsInMetadataRepo && !schemaExistsInGraal) {
+            // Since both the metadata repository and the GraalVM installation don't provide a schema,
+            // we skip validation.
+        } else if (schemaExistsInMetadataRepo && !schemaExistsInGraal) {
+            String message = "The configured GraalVM reachability metadata repository at "
+                + repoRoot.toAbsolutePath()
+                + " provides a reachability-metadata schema, but your GraalVM installation at "
+                + graalvmHomeLocation
+                + " does not. Please update your GraalVM installation to a newer version.";
+            if (majorJDKVersion < 21) {
+                message += " Update to the latest GraalVM 21.x or 25.x.";
+            } else {
+                message += " Update to the latest available release in your line. For example: " +
+                        "Update your GraalVM version from 25.0.0 to the latest 25 release.";
+            }
+            throw new IllegalStateException(message);
+        } else if (!schemaExistsInMetadataRepo && schemaExistsInGraal) {
+            String message = "Warning: Your GraalVM installation at "
+                + graalvmHomeLocation
+                + " provides a reachability-metadata schema,\nbut the configured reachability metadata repository at "
+                + repoRoot.toAbsolutePath()
+                + " does not.\nPlease update your reachability metadata repository to a newer version.";
+            System.err.println(message);
+        } else if (schemaExistsInMetadataRepo && schemaExistsInGraal) {
+            String repoVersion = readReachabilityMetadataSchemaVersion(metadataRepoSchemaFile);
+            String graalVersion = readReachabilityMetadataSchemaVersion(graalSchemaFile);
+            if (repoVersion != null && graalVersion != null) {
+                int cmp = compareVersions(repoVersion, graalVersion);
+                if (cmp > 0) {
+                    String message = "Detected reachability-metadata schema version mismatch. Repository v"
+                            + repoVersion
+                            + " vs GraalVM v"
+                            + graalVersion
+                            + ". Please update your GraalVM installation to a newer version.";
+                    throw new IllegalStateException(message);
+                }
+            }
+        }
+    }
+
+    private static boolean shouldSkipReachabilityMetadataSchemaValidation(int majorJDKVersion, String osName, String osArch) {
+        return majorJDKVersion == 25 && isMacOsX64(osName, osArch);
+    }
+
+    private static boolean isMacOsX64(String osName, String osArch) {
+        if (osName == null || osArch == null) {
+            return false;
+        }
+        String normalizedOsName = osName.toLowerCase(Locale.ROOT);
+        String normalizedOsArch = osArch.toLowerCase(Locale.ROOT);
+        return normalizedOsName.contains("mac")
+                && ("x86_64".equals(normalizedOsArch) || "amd64".equals(normalizedOsArch));
+    }
+
+    /**
+     * Reads the "version" field (MAJOR.MINOR.PATCH) from a reachability-metadata schema JSON file.
+     * Returns null if the file is missing or the field cannot be parsed.
+     */
+    private static String readReachabilityMetadataSchemaVersion(Path schemaFile) {
+        if (schemaFile == null) {
+            return null;
+        }
+        if (!Files.isRegularFile(schemaFile)) {
+            throw new IllegalStateException("Schema file does not exist: " + schemaFile.toAbsolutePath());
+        }
+        try {
+            String content = Files.readString(schemaFile);
+            Matcher vm = VERSION_JSON_PATTERN.matcher(content);
+            if (vm.find()) {
+                String version = vm.group(1) + "." + vm.group(2) + "." + vm.group(3);
+                // If filename contains a -vMAJOR.MINOR.PATCH.json suffix, verify it matches the JSON "version"
+                String fileName = schemaFile.getFileName().toString();
+                Matcher fn = FILENAME_VERSION_PATTERN.matcher(fileName);
+                if (fn.matches()) {
+                    String fileNameVersion = fn.group(1) + "." + fn.group(2) + "." + fn.group(3);
+                    if (!fileNameVersion.equals(version)) {
+                        throw new IllegalStateException(
+                                "Reachability-metadata schema version mismatch in " + schemaFile.toAbsolutePath()
+                                        + ": file name declares v" + fileNameVersion + " but JSON declares v" + version);
+                    }
+                }
+                return version;
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to read schema file " + schemaFile.toAbsolutePath()
+                    + ": " + e.getMessage(), e);
+        }
+        return null;
+    }
+
+    /**
+     * Compares two semantic version strings of the form MAJOR.MINOR.PATCH.
+     * <p>
+     * Rules:
+     * - Missing segments are treated as 0 (e.g. "1" == "1.0.0", "1.2" == "1.2.0").
+     * - Non-numeric segments are parsed with {@code safeParseInt} and treated as 0 on failure.
+     * - Comparison is lexicographic by MAJOR, then MINOR, then PATCH.
+     *
+     * @param repoVersion  version string from the repository schema (expected "MAJOR.MINOR.PATCH")
+     * @param graalVersion version string from the GraalVM schema (expected "MAJOR.MINOR.PATCH")
+     * @return a negative integer, zero, or a positive integer as {@code repoVersion}
+     *         is less than, equal to, or greater than {@code graalVersion}
+     */
+    private static int compareVersions(String repoVersion, String graalVersion) {
+        String[] ra = repoVersion.split("\\.");
+        String[] ga = graalVersion.split("\\.");
+        int rMaj = ra.length > 0 ? safeParseInt(ra[0]) : 0;
+        int rMin = ra.length > 1 ? safeParseInt(ra[1]) : 0;
+        int rPat = ra.length > 2 ? safeParseInt(ra[2]) : 0;
+        int gMaj = ga.length > 0 ? safeParseInt(ga[0]) : 0;
+        int gMin = ga.length > 1 ? safeParseInt(ga[1]) : 0;
+        int gPat = ga.length > 2 ? safeParseInt(ga[2]) : 0;
+
+        int cmp = Integer.compare(rMaj, gMaj);
+        if (cmp == 0) {
+            cmp = Integer.compare(rMin, gMin);
+        }
+        if (cmp == 0) {
+            cmp = Integer.compare(rPat, gPat);
+        }
+        return cmp;
+    }
+}

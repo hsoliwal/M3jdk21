@@ -1,0 +1,4 @@
+{
+  "status": "FAIL",
+  "failure": "ValueError: product source drift: .github/workflows/m3-ast-real-providers-20261019.yml"
+}

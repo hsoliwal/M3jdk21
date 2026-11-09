@@ -1,0 +1,44 @@
+name: M3 Static Language Affect Java JNI
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ast/**'
+      - 'm3/lexicon/receiver/**'
+      - 'm3/qualification/static-language-affect-20261020/**'
+      - 'm3/docs/static-language-affect-geometry-20261020.md'
+      - 'm3/docs/static-language-affect-donor-catalogue-20261020.tsv'
+      - '.github/workflows/m3-static-language-affect-20261020.yml'
+  push:
+    branches:
+      - 'm3/static-language-affect-geometry-20261020'
+    paths:
+      - 'm3/ast/**'
+      - 'm3/lexicon/receiver/**'
+      - 'm3/qualification/static-language-affect-20261020/**'
+      - '.github/workflows/m3-static-language-affect-20261020.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  java21-jni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Focused OpenRewrite fixed-point and refusal proof
+        run: >-
+          mvn -B -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3StaticLanguageAffectJavaRecipeTest,M3StaticLanguageAffectTextRecipeTest
+          test
+      - name: Configure CMake
+        run: cmake --version
+      - name: Strict Java and JNI differential proof
+        run: python3 m3/qualification/static-language-affect-20261020/verify.py

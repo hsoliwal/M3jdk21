@@ -1,0 +1,16 @@
+{
+  "schema": "M3_PENDING_CORRECTION_INDEX/1",
+  "events": [
+    "7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b",
+    "12b0e7d8df2b80d9a2b2493f7b8e3f54254c35ccb27266463819e4c2ad7aa511"
+  ],
+  "admission": "PENDING",
+  "conformance_receipt": {
+    "path": "proof/memory-conformance-001/RESULT.json",
+    "sha256": "47ee4cb235fc9e4e2ede51c26e2e824fbe4479654e9b49df9a564d316a08b678"
+  },
+  "predecessor_checkpoint": {
+    "path": "memory/FINAL_RESULT.json",
+    "sha256": "657c5d51728970ca5bd2de0800dabef5749cb6dcf46ce4ceb53176dcc3d62168"
+  }
+}

@@ -1,0 +1,9 @@
+item	identity	evidence
+M3JDK21 master	5eeb841168ed420085223806fefcfca8d1b6b3ca	GitHub ref readback
+Runnable.java	5eeb841168ed420085223806fefcfca8d1b6b3ca	Full pinned source read; existing run monitor default
+Callable.java	git:7cd9b5d7d538b4dffe426cacc9a03651f635e005	Full pinned source read
+M3AlgorithmProgressSurfaceInventoryRecipe.java	git:9517a667335e8ce7738a230a7dcce5bc17bc6500	Full existing canonical source read
+M3AlgorithmProgressSurfaceInventoryRecipeTest.java	git:f73e51a2ae3d657ec05341e4248f1cb5ef2bbf97	Full existing test source read
+JLS 21 interfaces	https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html	Interface/default/SAM rules
+JLS 21 compatibility	https://docs.oracle.com/javase/specs/jls/se21/html/jls-13.html	Sections 13.4.23 and 13.5.7
+JLS 21 expressions	https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html	Section 15.12.2 overload resolution

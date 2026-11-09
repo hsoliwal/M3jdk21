@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.yaml.cleanup.RemoveUnused"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 35
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 1
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 1
+- name: "Tracey Yoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 1

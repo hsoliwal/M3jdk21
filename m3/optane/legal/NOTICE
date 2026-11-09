@@ -1,0 +1,15 @@
+M3 optional Optane module candidate
+Copyright 2026 Hitesh Soliwal and contributors.
+Independent Apache-2.0 module; OpenJDK licenses remain unchanged.
+ProgressMonitor adapts Synexia MIndexProgressMonitor, Git blob
+2a387a4d8c7cabfb2ce75b6bae9210281f01c867.
+Recipe mechanics adapt the existing UnicodeX PMem Replay.java,
+Git blob 7846666788b78b3163290b802ecb6fb5e76015e6.
+No PMDK implementation source or third-party algorithm text is copied.
+The persistent-memory region family (M3PmemSdk, M3PmemRegion, M3PmemMapping,
+M3PmemTransfer, M3PmemSearch, M3NativePmem, m3pmemsdk.c) is relocated by
+recipe/pmem-region-core-20261106 from hsoliwal/com.synexia m3-pmem-sdk
+(Apache-2.0, same copyright holder); PROVENANCE.tsv pins every donor blob.
+libpmem2 (PMDK, BSD-3-Clause) is an optional compile-time dependency of
+m3pmemsdk.c (CMake option M3_OPTANE_PMDK, default OFF); no PMDK source or
+binary is included or shipped.

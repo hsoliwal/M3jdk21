@@ -1,0 +1,31 @@
+--- sdk-001/src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java
++++ sdk-002/src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java
+@@ -58,6 +58,8 @@
+  * the separate Maven4 effective-model packet, retaining all scheduler gates.
+  * Dependency probes bind this packet's actual parser/Maven/JDT owners. No
+  * integrated-task runtime results or correction-memory events are inherited.
++ * SDK001's rejected CSV phase remains an explicit admission-refusal regression;
++ * the active successor keeps the same engine and supported candidate bytes.
+  * Product compiler and behavioral gates remain separate authorities.</p>
+  */
+ final class M3Maven4EffectiveRecipeTest {
+@@ -139,7 +141,10 @@
+             assertThrows(IllegalArgumentException.class, () -> new M3HashPinnedJavaSnapshotRecipe(invalid));
+             assertThrows(IllegalArgumentException.class, () -> new M3HashPinnedTextSnapshotRecipe(invalid));
+         }
++        Phase rejectedCsv = new Phase(ID + "-002", "text");
++        refused(rejectedCsv, parse("text", baseline(rejectedCsv)), "invalid hash-pinned text manifest row");
+         List<Phase> phases = phases();
++        assertFalse(phases.contains(rejectedCsv), "rejected CSV phase must remain inactive");
+         List<Proof> proofs = new ArrayList<>();
+         for (Phase phase : phases) proofs.add(qualify(phase));
+         String yaml = namedYaml(phases);
+@@ -484,6 +489,8 @@
+                 CRATE.resolve("attribution/expected-methods.txt"))));
+         custody.put("parser_classpath_root", classpathRoot());
+         custody.put("parser_owner_attribution", "PASS");
++        custody.put("inactive_csv_admission_refusal", "PASS");
++        custody.put("inactive_csv_manifest_sha256", sha(resource(new Phase(ID + "-002", "text"), "manifest.tsv")));
+         custody.put("java_runtime", Runtime.version().toString());
+         custody.put("named_yaml_sha256", sha(yaml));
+         custody.put("receiver_root", root(output));

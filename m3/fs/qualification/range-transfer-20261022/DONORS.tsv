@@ -1,0 +1,9 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+problem_category	design_choice	semantic_guarantee	cost_and_bound	non_goal
+ONE_PASS_PROVIDER_RANGES	Original MFileStreams.transferRanges(MFileContent,OutputStream,long[],long[],long,M3FsProgress)	One owned stream, progress/shadow on actual consumed gaps and selected bytes, detached input selectors before provider I/O	O(max source offset reached), O(8KiB) scratch, caller capped maxEnd	Not random access or independent background read
+BORROWED_DESTINATION	Write selected bytes only; never flush/close target	Target may have partial writes on failure; no rollback	Byte count reported only after completed transfer	Not atomic move/copy
+RAW_BYTES_IDENTITY	Ranges do not emit MFileCapture or M3ContentId	Partially consumed input cannot be misrepresented as full-file EOF identity	No retained payload bytes	Not file-level SHA-256
+CALLER_SELECTION	Borrow sorted disjoint physical byte ranges from FileIndex/AST/chunk owners	No discovery of changed extents, no inferred content equivalence	Validate all range geometry before opening provider	Not FastCDC or parser replacement
+MONITOR	AND existing M3FsProgress borrowed monitor	Input progress counts read-through gap bytes and selected bytes; cancellation before opening/nonempty and during reads	Provider checks at stream API boundaries, no timer threads	Not child monitor completion ownership
+JNI_ABI	Existing M3FS JNI, #1740 stat batch and #1747 DBFS remain independent	No new C/JNI symbol, no cross-provider transactional claim	Native tuning deferred until measured	Not a JNI rewrite
+ZIP_ARCHIVE_REAL_INPUT	ZipFile compressed entry streams work with sequential range concatenation without NIO SeekableByteChannel	java.util.zip.ZipFile / ZipInputStream	JDK API	PROOF_ISOLATED	Standalone Java21 ZipFile entry streamed 3 selected ranges (28 bytes) PASS; actual original MFileRangeTransferTest remains unexecuted

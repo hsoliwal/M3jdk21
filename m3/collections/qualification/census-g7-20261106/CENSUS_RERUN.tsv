@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Census rows of group G7 (leaf L067, crates m3jdk21-doop-direct-reuse-20261030 + m3-doop-reuse-20261030) on base 0909649e8f7efe2820eae8eda7e74eeae149c843 (after #2565 census small batch: L066 publication-budget MAPPED, and #2566 transient-facade owner decisions). Statuses: S:/m3-scratch/eb-conv/census CRATE_STATUS.tsv; dispositions: RELOCATION_MAP.tsv (SKIP/DROP rows) and OWNER_VERDICTS.tsv.
+row	census_status	disposition
+M3ObjectResidencyReuseTest x5 postimages (direct-reuse, pressure-sampling, callback-error, publication-budget, reentrant-eviction)	PARTIAL/UNAPPLIED	publication-budget postimage (superset of the 44 tests, same verdicts as every version) relocated as M3ObjectResidencyReuseContractTest: 23 KEPT, 21 DROPPED (HOLD_L066)
+M3Jdk21DoopDirectReuseRecipeTest, harness-candidate-01/02, sdk-failure-01-test (M3DoopReuseRecipeTest)	NO_OWNER	DECLINED: OpenRewrite recipe tests and evidence (com.synexia.rewrite)
+ReentrantBudgetWitness	NO_OWNER	HOLD_L066 (evidence of the owner reuse atom's weaker reentrant budget)
+M3MemoryPressureSamplingTest, M3MemoryPressure	NO_OWNER	HOLD_DEFER (#2566: synexia-m3-residency closure DEFER)
+M3NativeLeaseCounter (x2)	NO_OWNER	ALREADY per #2566 = jdk.m3.jni.M3ScopedLeaseTable (m3/native)
+M3CooperativeBorrowRetireTest, M3CooperativeRetireTest	NO_OWNER	HOLD_SCOPE (owner in m3/native)
+M3ObjectResidency main postimages x5	APPLIED_SUPERSET/UNAPPLIED	L066 (not this leaf; #2565 MAPPED publication-budget)

@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: Apache-2.0
+# Summary of differential.sh (FilteredViewsOwnerDifferential 4000 scenarios from seed 20261106 + FilteredViewsTreeMapRepro) on base baafdafdc817 vs head (this leaf), JDK 21, real-pom classes. base.out sha256 4b163e6436531081e3591a1387684667ab5f8888c1c8af9b70c175c5965a8d55 (56609 lines), head.out sha256 d9494e8d617528db0718172f9a579acaff0e801c3d0b3dbd153c50f08512d2f7 (57320 lines), DIFFERENTIAL.tsv sha256 fc3bf59cc1f847b30a9f83e529a742c06e0a17dd6b3a0b90559c4284aaa4f0cf (7374 differing lines, 0 UNCLASSIFIED; classes in classify.py; regenerate with differential.sh). Scenario mix: M3Map 999, M3Set 1002, JDKMap 1002, JDKSet 997. Owners damaged at the end (verifyInvariants after disarming the comparator): base 1 (s1606 tree links), head 0. JDK-owner scenarios: 0 differing lines; read-only views: B1/B2 only (no callback change).
+count	owner_view	class
+355	reopen/end	FOLLOW(B1)
+215	reopen/end	FOLLOW(B2)
+17	reopen/end	FOLLOW(B3)
+485	reopen/end	FOLLOW(SLOT)
+74	reopen/end	FOLLOW(SLOT_CM)
+452	src=M3/view=mutable	B1
+135	src=M3/view=mutable	B2
+243	src=M3/view=mutable	B3
+2	src=M3/view=mutable	B4
+310	src=M3/view=mutable	FOLLOW(B1)
+155	src=M3/view=mutable	FOLLOW(B2)
+42	src=M3/view=mutable	FOLLOW(B3)
+764	src=M3/view=mutable	FOLLOW(SLOT)
+135	src=M3/view=mutable	FOLLOW(SLOT_CM)
+2755	src=M3/view=mutable	SLOT
+409	src=M3/view=mutable	SLOT_CM
+156	src=M3/view=readonly	B1
+100	src=M3/view=readonly	B2
+325	src=M3/view=readonly	FOLLOW(B1)
+245	src=M3/view=readonly	FOLLOW(B2)
+# first example line pair per class (scenario step, base || head)
+example	B3	s7 t3	s7 t3 cursor.next -> null | pred=[null, null] cmp=11 | src=M3 view=mutable cursor=values ext=0 pm=0 cm=0 || s7 t3 cursor.next -> null | pred=[null] cmp=0 | src=M3 view=mutable cursor=values ext=0 pm=0 cm=0
+example	SLOT	s7 t6	s7 t6 cursor.hasNext -> true | pred=[-6, -5] cmp=11 | src=M3 view=mutable cursor=values ext=0 pm=0 cm=0 || s7 t6 cursor.hasNext -> true | pred=[-6, -5] cmp=0 | src=M3 view=mutable cursor=values ext=0 pm=0 cm=0
+example	B2	s8 t10	s8 t10 cursor.next -> -2 | pred=[] cmp=0 | src=M3 view=mutable cursor=descIterator ext=0 pm=1 cm=0 || s8 t10 cursor.next -> !ConcurrentModificationException | pred=[] cmp=0 | src=M3 view=mutable cursor=descIterator ext=0 pm=1 cm=0
+example	FOLLOW(SLOT)	s8 t10	- || s8 t10 reopen
+example	B1	s10 t6	s10 t6 cursor.hasNext -> true | pred=[] cmp=0 | src=M3 view=mutable cursor=values ext=1 pm=1 cm=0 || s10 t6 cursor.hasNext -> !ConcurrentModificationException | pred=[] cmp=0 | src=M3 view=mutable cursor=values ext=1 pm=0 cm=0
+example	SLOT_CM	s15 t4	s15 t4 cursor.hasNext -> true | pred=[-2, -1] cmp=11 | src=M3 view=mutable cursor=descIterator ext=1 pm=0 cm=1 || s15 t4 cursor.hasNext -> true | pred=[-3] cmp=4 | src=M3 view=mutable cursor=descIterator ext=0 pm=0 cm=0
+example	FOLLOW(B2)	s24 t8	- || s24 t8 reopen
+example	FOLLOW(B1)	s43 t10	- || s43 t10 reopen
+example	FOLLOW(SLOT_CM)	s121 t1	s121 t1 view.isEmpty -> !ConcurrentModificationException | pred=[-3] cmp=11 | src=M3 view=mutable cursor=descEntries ext=0 pm=0 cm=1 || s121 t1 cursor.hasNext -> !ConcurrentModificationException | pred=[] cmp=0 | src=M3 view=mutable cursor=descEntries ext=0 pm=0 cm=1
+example	FOLLOW(B3)	s154 t4	s154 t4 view.size -> !ConcurrentModificationException | pred=[12, 11, 7] cmp=14 | src=M3 view=mutable cursor=values ext=0 pm=1 cm=0 || s154 t4 view.size -> !ConcurrentModificationException | pred=[12, 11, 7, 6] cmp=16 | src=M3 view=mutable cursor=values ext=0 pm=1 cm=0
+example	B4	s974 t1	s974 t1 owner.mutate -> remove | pred=[] cmp=5 | src=M3 view=mutable cursor=descIterator ext=1 pm=0 cm=0 || s974 t1 owner.mutate -> !ConcurrentModificationException | pred=[] cmp=2 | src=M3 view=mutable cursor=descIterator ext=0 pm=0 cm=1

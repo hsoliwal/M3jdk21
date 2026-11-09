@@ -1,0 +1,8 @@
+{
+  "artifact": "rewrite-static-analysis",
+  "version": "1.4.2",
+  "origin": "https://raw.githubusercontent.com/openrewrite/rewrite-static-analysis/v1.4.2/LICENSE",
+  "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "bytes": 11357,
+  "pom_license": "The Apache Software License, Version 2.0 <http://www.apache.org/licenses/LICENSE-2.0.txt>"
+}

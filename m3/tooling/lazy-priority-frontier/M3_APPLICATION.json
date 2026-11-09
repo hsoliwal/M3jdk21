@@ -1,0 +1,48 @@
+{
+  "schema": "M3_APACHE_HANDOFF_APPLICATION_V1",
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceRevision": "18a3a5ba297cee10a0bc2ca379cc30d4623aa173",
+  "sourcePullRequest": 10629,
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetBaseRevision": "dc2f175e4d1a811577fb5accc34e53df4b6f2d40",
+  "targetPullRequest": 781,
+  "targetBranch": "m3/lazy-long-priority-frontier-receiver-20261012",
+  "recipe": {
+    "owner": "Synexia",
+    "class": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "crate": "m3jdk-lazy-long-priority-frontier-20261012-v1",
+    "admission": "exact ABSENT preimage and SHA-256 postimage per target"
+  },
+  "license": "Apache-2.0",
+  "targets": [
+    {
+      "path": "m3/tooling/lazy-priority-frontier/src/main/java/jdk/m3/tooling/priority/M3LazyLongPriorityFrontier.java",
+      "sha256": "3b125e0aee885a79b6ed48ced17ddb55cdf81ef63d8ec0c304ee7c9deb2cf672",
+      "sourceTemplateBlob": "4296118d6d81223d3bdd91f5885c7540dad2dc97",
+      "disposition": "ADAPTED_COPY"
+    },
+    {
+      "path": "m3/tooling/lazy-priority-frontier/src/test/java/jdk/m3/tooling/priority/M3LazyLongPriorityFrontierTest.java",
+      "sha256": "97b96b727d6b93e8aeebc25db89391fe05c29222c69abad9f0d51a9a742d3121",
+      "sourceTemplateBlob": "adc60eeb55022f88f1c1087a4186920374471ce3",
+      "disposition": "RECIPE_OUTPUT"
+    }
+  ],
+  "verification": {
+    "java21CompileLint": "PASS: javac --release 21 -Xlint:all -Werror",
+    "runtime": "PASS: M3_LAZY_LONG_PRIORITY_FRONTIER_PASS cases=4",
+    "sourceRecipeJUnit": "NOT_RUN",
+    "sourceRecipeMaven": "NOT_RUN",
+    "sourceHostedCI": "PENDING_OR_WORKFLOW_FAILURE_WITH_ZERO_JOBS",
+    "targetHostedCI": "QUEUED",
+    "JdkRuntimeIntegration": "NOT_APPLIED",
+    "PerformanceBenchmark": "NOT_RUN"
+  },
+  "claims": {
+    "publicJdkApiChanged": false,
+    "javaBaseChanged": false,
+    "synexiaRuntimeDependencyAdded": false,
+    "speedupClaimed": false,
+    "jniPromotion": false
+  }
+}

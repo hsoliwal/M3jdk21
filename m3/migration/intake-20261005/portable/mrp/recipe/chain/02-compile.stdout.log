@@ -1,0 +1,29 @@
+{"stage": "compile", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< com.synexia.verification:mrp-primitive-runtime-bootstrap-20261005 >--
+[INFO] Building Mrp version 2 primitive runtime candidate bootstrap 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ mrp-primitive-runtime-bootstrap-20261005 ---
+[INFO] Copying 10 resources from ../sources/synexia-openrewrite-recipes/src/main/resources to ../target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ mrp-primitive-runtime-bootstrap-20261005 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to ../target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ mrp-primitive-runtime-bootstrap-20261005 ---
+[INFO] Copying 2 resources from ../sources/synexia-openrewrite-recipes/verification/mre-20261005/primitive-closure-bootstrap/src/test/resources to ../target/test-classes
+[INFO] Copying 4 resources from ../sources/synexia-openrewrite-recipes/verification/mre-20261005/primitive-runtime-bootstrap/src/test/resources to ../target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ mrp-primitive-runtime-bootstrap-20261005 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug release 21] to ../target/test-classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.724 s
+[INFO] Finished at: 2026-10-05T10:56:20+02:00
+[INFO] ------------------------------------------------------------------------
+{"artifacts": 41, "artifactManifestSHA256": "91bf36deb0cf556fdc324d0dc9bd178c8b2b42c10530b45074beb603a06e63fa"}

@@ -1,0 +1,56 @@
+openjdk version "21.0.12.1" 2026-08-18
+mvn install JavaEWAH rc=0
+mvn install slf4j-api-2.0.12 rc=0
+mvn master org.eclipse.jgit rc=0
+mvn branch org.eclipse.jgit rc=0
+{"exact_files": 879, "exact_production_files": 861, "m3_overlays": 1, "revision": "5.13.3.202401111512-r"}
+  vs published: 1655 entries, 1573 there; only here: 84 (79 classes); only there: 2; differing: 1504; util/Base64.class differing: True
+  vs master: 1655 entries, 1655 there; only here: -; only there: -; differing: META-INF/maven/org.eclipse.jgit/org.eclipse.jgit/pom.xml META-INF/third-party/org.eclipse.jgit/PROVENANCE.json org/eclipse/jgit/util/Base64.class
+javac master rc=0 errors=0 warnings=100 Base64.java warnings=0
+javac branch rc=0 errors=0 warnings=100 Base64.java warnings=0
+harness javac rc=0
+seed 1: 100000 samples; lines 300023/300023; differing 8
+seed 2: 100000 samples; lines 300023/300023; differing 8
+seed 3: 100000 samples; lines 300023/300023; differing 8
+# lines per case kind and outcome, seed 1 branch (kind, ok/ex):
+  10000 dec-canonical ok
+  10000 dec-equals-inside ok
+  10000 dec-highbit ok
+      4 dec-invalid ex
+      6 dec-invalid ok
+      1 dec-null ex
+      1 dec-null ok
+   6405 dec-random ex
+   3595 dec-random ok
+   4793 dec-string ex
+   5207 dec-string ok
+  10000 dec-subrange ok
+  10000 dec-trailing ok
+  10000 dec-unpadded ok
+   8798 dec-urlsafe ex
+   1202 dec-urlsafe ok
+  10000 dec-whitespace ok
+ 100000 enc-full ok
+      8 enc-invalid ex
+      2 enc-invalid ok
+      1 enc-null ex
+ 100000 enc-range ok
+# differing lines (master | branch):
+      3 enc-invalid -1,0 ok hex=	enc-invalid -1,0 ex java.lang.IndexOutOfBoundsException: null
+      3 enc-invalid -1,4 ex java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 4	enc-invalid -1,4 ex java.lang.IndexOutOfBoundsException: null
+      3 enc-invalid 0,-1 ex java.lang.NegativeArraySizeException: -1	enc-invalid 0,-1 ex java.lang.IndexOutOfBoundsException: null
+      3 enc-invalid 0,-4 ex java.lang.NegativeArraySizeException: -5	enc-invalid 0,-4 ex java.lang.IndexOutOfBoundsException: null
+      3 enc-invalid 0,5 ex java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4	enc-invalid 0,5 ex java.lang.IndexOutOfBoundsException: null
+      3 enc-invalid 1,4 ex java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4	enc-invalid 1,4 ex java.lang.IndexOutOfBoundsException: null
+      3 enc-invalid 2147483647,4 ex java.lang.ArrayIndexOutOfBoundsException: Index -2147483647 out of bounds for length 4	enc-invalid 2147483647,4 ex java.lang.IndexOutOfBoundsException: null
+      3 enc-invalid 5,0 ok hex=	enc-invalid 5,0 ex java.lang.IndexOutOfBoundsException: null
+master size=16 encode ns/call=23.2 decode ns/call=35.5 decode-wrapped ns/call=36.2
+master size=256 encode ns/call=177.5 decode ns/call=408.0 decode-wrapped ns/call=435.8
+master size=4096 encode ns/call=3837.3 decode ns/call=6901.2 decode-wrapped ns/call=9129.4
+master size=65536 encode ns/call=49140.6 decode ns/call=106097.0 decode-wrapped ns/call=120176.8
+master sink 1cff97b00
+branch size=16 encode ns/call=20.3 decode ns/call=23.6 decode-wrapped ns/call=24.3
+branch size=256 encode ns/call=46.2 decode ns/call=44.5 decode-wrapped ns/call=775.0
+branch size=4096 encode ns/call=813.8 decode ns/call=771.2 decode-wrapped ns/call=6468.9
+branch size=65536 encode ns/call=13771.5 decode ns/call=13876.0 decode-wrapped ns/call=112801.6
+branch sink 1cff97b00

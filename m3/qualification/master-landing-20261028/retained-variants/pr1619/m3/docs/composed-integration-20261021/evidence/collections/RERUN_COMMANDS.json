@@ -1,0 +1,1429 @@
+{
+  "schema": "M3_COLLECTION_NORMALIZED_EXECUTED_COMMANDS_V1",
+  "normalization": "Exact executed argument order and flags, with local absolute paths replaced by named variables. No shell evaluation is needed. The -s MAVEN_SETTINGS option refers to the rerunner's own optional settings; the original settings are not distributed.",
+  "sourceEpoch": "E1",
+  "pack": {
+    "command": [
+      "python3",
+      "${REPO}/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "--jdk-home",
+      "${SOURCE_SDK}",
+      "--image-tsv",
+      "${LINKED_WORK}/INPUT_JMOD_IMAGE.tsv",
+      "--manifest",
+      "${LINKED_WORK}/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "--layer-root",
+      "${REPO}",
+      "--out",
+      "${PACK_OUT}",
+      "--legal-notices",
+      "${LINKED_WORK}/inputs/legal",
+      "--native-library",
+      "com.m3.collections=${LINKED_WORK}/native-release",
+      "--add-modules",
+      "java.se,jdk.management,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps",
+      "--date",
+      "2026-01-01T00:00:00Z"
+    ],
+    "returncode": 0,
+    "seconds": 5.089152220998585,
+    "utc": "2026-10-21T02:53:12.592143+00:00",
+    "sourceInputReceiptSha256": "f20c075daa14339e3941c416560064f9d163a98b2e3185b8278940f360412553",
+    "moduleInputReceiptSha256": "e4e8242d74016da75db3259882ef4ce0f951e62cee8ac574a0806065f50a1265",
+    "log": "logs/pack001.log",
+    "sourceInputsUnchanged": true
+  },
+  "releaseNative": [
+    {
+      "library": "m3_collections_address",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongAddressKernel.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_long_address_kernel.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_long_address_kernel.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3_collections_address.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3_collections_address.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3_collections_address.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3_collections_address.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3_collections_long_path_masks",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongIndexPathMasksJNI.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_long_index_path_masks_jni.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_long_index_path_masks_jni.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3_collections_long_path_masks.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3_collections_long_path_masks.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3_collections_long_path_masks.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3_collections_long_path_masks.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3_collections_mask",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskCompactor.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_index_mask_compactor.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskWindow.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_index_mask_window.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_index_mask_window.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_index_mask_compactor.c.o",
+            "${LINKED_WORK}/native-objects/m3_index_mask_window.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3_collections_mask.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3_collections_mask.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3_collections_mask.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3_collections_mask.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3_collections_pathmask",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexPathMasks.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_index_path_masks.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_index_path_masks.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_index_path_masks.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3_collections_pathmask.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3_collections_pathmask.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3_collections_pathmask.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3_collections_pathmask.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3_collections_span",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3SpanIndex.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_span_index_jni.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_span_index_jni.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_span_index_jni.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3_collections_span.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3_collections_span.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3_collections_span.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3_collections_span.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3_collections_statehist",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3StateMaskHistogram.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_state_mask_histogram.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_state_mask_histogram.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3_collections_statehist.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3_collections_statehist.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3_collections_statehist.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3_collections_statehist.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3_residency_state_mask",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3ResidencyStateMaskIndex.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_residency_state_mask.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_residency_state_mask.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_residency_state_mask.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3_residency_state_mask.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3_residency_state_mask.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3_residency_state_mask.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3_residency_state_mask.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3bitlane",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3BitLane28.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/segmented_bit_lane.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/segmented_bit_lane.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/segmented_bit_lane.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3bitlane.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3bitlane.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3bitlane.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3bitlane.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3rankbatch",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongRankBatchNative.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_long_rank_batch_jni.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_long_rank_batch_jni.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3rankbatch.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3rankbatch.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3rankbatch.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3rankbatch.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "library": "m3signalorder",
+      "commands": [
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-fPIC",
+            "-include",
+            "${REPO}/m3/collections/target/full-java-jni/headers/com_m3_collections_M3SignalOrderNative.h",
+            "-c",
+            "${REPO}/m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+            "-o",
+            "${LINKED_WORK}/native-objects/m3_signal_order_jni.c.o"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "cc",
+            "-std=c17",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-I${JAVA_HOME}/include",
+            "-I${JAVA_HOME}/include/linux",
+            "-I${REPO}/m3/collections/target/full-java-jni/headers",
+            "-shared",
+            "${LINKED_WORK}/native-objects/m3_signal_order_jni.c.o",
+            "-o",
+            "${LINKED_WORK}/native-release/libm3signalorder.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "nm",
+            "-D",
+            "--defined-only",
+            "${LINKED_WORK}/native-release/libm3signalorder.so"
+          ],
+          "returncode": 0
+        },
+        {
+          "command": [
+            "objcopy",
+            "--strip-debug",
+            "${LINKED_WORK}/native-release/libm3signalorder.so",
+            "${LINKED_WORK}/native-stripped-reference/libm3signalorder.so"
+          ],
+          "returncode": 0
+        }
+      ]
+    }
+  ],
+  "compileOwnershipProbe": {
+    "command": [
+      "${JAVA_HOME}/bin/javac",
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "${LINKED_WORK}/inputs/ownership-probe",
+      "${LINKED_WORK}/LinkedM3SdkOwnership.java"
+    ],
+    "returncode": 0,
+    "sourceSha256": "3703801e4938946d28d6b14cbef5a9f9cd3453ad77071763d86363cae6eeadac",
+    "classSha256": "1eada517fe190e710888d276e1fe00e98c46438b93f35dcd5e30f80044f1fee6"
+  },
+  "staticOwnership": [
+    {
+      "label": "validate",
+      "command": [
+        "${IMAGE}/bin/java",
+        "--validate-modules"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "modules",
+      "command": [
+        "${IMAGE}/bin/java",
+        "--list-modules"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "jmod-descriptor",
+      "command": [
+        "${SOURCE_SDK}/bin/jmod",
+        "describe",
+        "${PACK_OUT}/jmods/com.m3.collections.jmod"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "image-inventory",
+      "command": [
+        "${SOURCE_SDK}/bin/jimage",
+        "list",
+        "${IMAGE}/lib/modules"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "ownership",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-Xshare:off",
+        "--add-modules",
+        "com.m3.collections,jdk.management",
+        "-cp",
+        "${LINKED_WORK}/inputs/ownership-probe",
+        "LinkedM3SdkOwnership",
+        "${IMAGE}"
+      ],
+      "returncode": 0
+    }
+  ],
+  "owningJUnit": {
+    "command": [
+      "${MVN}",
+      "-s",
+      "${MAVEN_SETTINGS}",
+      "-B",
+      "-ntp",
+      "-o",
+      "-Dmaven.repo.local=${M2_REPO}",
+      "-f",
+      "${REPO}/m3/collections/pom.xml",
+      "-Djvm=${IMAGE}/bin/java",
+      "-DargLine=-Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Xshare:off --add-modules=com.m3.collections,jdk.management --patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes --add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management --add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED -Djava.library.path=${IMAGE}/lib -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Dm3.mask.spans.native.required=true -Dm3.collections.all.native.required=true -Xlog:class+load=info:file=${LINKED_WORK}/logs/linked-junit-classes-%p.log",
+      "-Dsurefire.reportNameSuffix=linked-sdk-001",
+      "-DfailIfNoTests=true",
+      "surefire:test"
+    ],
+    "returncode": 0,
+    "seconds": 67.66094425099982,
+    "log": "logs/linked-junit-001.log",
+    "jvm": "${IMAGE}/bin/java",
+    "scope": "Existing source-owned JUnit owning suite with production classes resolved from linked com.m3.collections; only test classes patched. Native libraries loaded from linked image lib.",
+    "junit": {
+      "tests": 491,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "reportFiles": 150,
+    "reportedJavaHomes": [
+      "${IMAGE}"
+    ]
+  },
+  "contracts": [
+    {
+      "label": "M3MaskWindowSparseContract",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3MaskWindowSparseContract",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.4475764389990218,
+      "output": "PASS M3MaskWindowSparseContract backend=NATIVE_REQUIRED checks=357095\n"
+    },
+    {
+      "label": "M3BudgetedMaskWindowContract",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3BudgetedMaskWindowContract",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.33520981000037864,
+      "output": "BUDGETED_MASK_WINDOW_PASS random=5000 assertions=28914 backend=NATIVE_REQUIRED\n"
+    },
+    {
+      "label": "M3IndexMaskWindowSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3IndexMaskWindowSelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.2527925699996558,
+      "output": "PASS M3_INDEX_MASK_WINDOW checks=30596 native=true\n"
+    },
+    {
+      "label": "M3IndexMaskWindowRecoverySelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3IndexMaskWindowRecoverySelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.34374927799945,
+      "output": "PASS M3IndexMaskWindowRecoverySelfTest checks=10528 JNI=true\n"
+    },
+    {
+      "label": "M3IndexMaskCompactorSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.2747896540004149,
+      "output": "PASS M3IndexMaskCompactorSelfTest checks=26152 JNI=true\n"
+    },
+    {
+      "label": "M3IndexPathMasksSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3IndexPathMasksSelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.1898981950016605,
+      "output": "PASS M3IndexPathMasksSelfTest checks=2324 JNI=true\n"
+    },
+    {
+      "label": "M3LongIndexPathMasksJNISelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3LongIndexPathMasksJNISelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.3223275979999016,
+      "output": "PASS M3_LONG_PATH_JNI|assertions=9360|rounds=1600\n"
+    },
+    {
+      "label": "M3LongAddressBoundedSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3LongAddressBoundedSelfTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.6115222449989233,
+      "output": "M3_BOUNDED_GATHER_PASS checks=21975732 fingerprint=-8730037866241443045 native=true\n"
+    },
+    {
+      "label": "M3IndexPathMaskWindowSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3IndexPathMaskWindowSelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.1990911410011904,
+      "output": "M3_PATH_MASK_WINDOW_PASS checks=22462 backend=NATIVE_REQUIRED nativeAvailable=true\n"
+    },
+    {
+      "label": "M3IndexPathRankNativeSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3IndexPathRankNativeSelfTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.22476658100094937,
+      "output": "PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths\n"
+    },
+    {
+      "label": "M3NativeIndexRangeSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3NativeIndexRangeSelfTest",
+        "range",
+        "sharing"
+      ],
+      "returncode": 0,
+      "seconds": 1.1910990409996884,
+      "output": "M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048\n"
+    },
+    {
+      "label": "M3ObjectStateSlots28SelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3ObjectStateSlots28SelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 1.024629718000142,
+      "output": "PASS M3_OBJECT_STATE_SLOTS_28 checks=1215408 randomized_operations=101376 primitive_state_bytes_per_touched_slot=1\n"
+    },
+    {
+      "label": "M3IndexedTableSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3IndexedTableSelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.45572974999959115,
+      "output": "PASS M3IndexedTableSelfTest checks=63149 randomized=6000 native=true\n"
+    },
+    {
+      "label": "M3BagRankIndexSelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3BagRankIndexSelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.6037170649997279,
+      "output": "M3BagRankIndex randomized scenarios=1200\nPASS M3BagRankIndexSelfTest checks=213320 native=true\n"
+    },
+    {
+      "label": "M3SdkRecoverySelfTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3SdkRecoverySelfTest",
+        "--native"
+      ],
+      "returncode": 0,
+      "seconds": 0.3080235699999321,
+      "output": "PASS M3SdkRecoverySelfTest checks=19834 native=true\n"
+    },
+    {
+      "label": "M3SignalOrderContract",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3SignalOrderContract",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.3789699709996057,
+      "output": "PASS M3SignalOrderContract backend=NATIVE_REQUIRED checks=2010\n"
+    },
+    {
+      "label": "M3SignalDimensionsNativeContract",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3SignalDimensionsNativeContract"
+      ],
+      "returncode": 0,
+      "seconds": 0.4151064729994687,
+      "output": "PASS M3SignalDimensionsNativeContract JNI checks=400\n"
+    },
+    {
+      "label": "M3ResidencyStateMaskProof",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3ResidencyStateMaskProof",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.5158297610014415,
+      "output": "M3_RESIDENCY_STATE_MASK_PASS checks=11226 fingerprint=12197969927824375845 backend=jni-enabled\n"
+    },
+    {
+      "label": "M3BitLaneJumpProof",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3BitLaneJumpProof",
+        "${LINKED_WORK}/inputs/test-native/libm3_bitlane_jump_test.so"
+      ],
+      "returncode": 0,
+      "seconds": 0.48819270900094125,
+      "output": "M3_BITLANE_JUMP_PASS assertions=68034 native=true\n"
+    },
+    {
+      "label": "M3CatalogueRefinementContract",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3CatalogueRefinementContract",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.2897154040001624,
+      "output": "PASS M3CatalogueRefinementContract mode=native checks=8438\n"
+    },
+    {
+      "label": "M3SignalRadixUniformContract",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3SignalRadixUniformContract",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.3348286559994449,
+      "output": "PASS radix JNI checks=417038\n"
+    },
+    {
+      "label": "M3PackedSelectionAllocationProbe",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3PackedSelectionAllocationProbe"
+      ],
+      "returncode": 0,
+      "seconds": 0.27857481999853917,
+      "output": "zero_survivors=1000000 average_allocated_bytes=125890\n"
+    },
+    {
+      "label": "compile-public-core",
+      "command": [
+        "${IMAGE}/bin/javac",
+        "-d",
+        "${LINKED_WORK}/core-test-classes",
+        "${LINKED_WORK}/inputs/core-sources/BootstrapViewsTest.java",
+        "${LINKED_WORK}/inputs/core-sources/CollectionViewsCoreContract.java",
+        "${LINKED_WORK}/inputs/core-sources/CollectionViewsCowBulkTest.java",
+        "${LINKED_WORK}/inputs/core-sources/CollectionViewsIdentityContract.java",
+        "${LINKED_WORK}/inputs/core-sources/CollectionViewsIdentityTest.java",
+        "${LINKED_WORK}/inputs/core-sources/CollectionViewsRefinement.java"
+      ],
+      "returncode": 0,
+      "seconds": 3.0435126009997475,
+      "output": ""
+    },
+    {
+      "label": "BootstrapViewsTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK}/core-test-classes",
+        "BootstrapViewsTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.3658023570005753,
+      "output": "BootstrapViewsTest checks=77 module=java.base loader=bootstrap PASS\n"
+    },
+    {
+      "label": "CollectionViewsCoreContract",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-Xss256k",
+        "--add-opens=java.base/java.util=ALL-UNNAMED",
+        "-cp",
+        "${LINKED_WORK}/core-test-classes",
+        "CollectionViewsCoreContract"
+      ],
+      "returncode": 0,
+      "seconds": 0.8413349239999661,
+      "output": "warm_predicate_tests=100000 depth=64 allocated_bytes=0\nCollectionViewsCoreContract methods=10 checks=14694 baseline=false PASS\n"
+    },
+    {
+      "label": "CollectionViewsIdentityTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK}/core-test-classes",
+        "CollectionViewsIdentityTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.19014163600149914,
+      "output": "CollectionViewsIdentityTest: 46 checks passed\n"
+    },
+    {
+      "label": "CollectionViewsCowBulkTest",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK}/core-test-classes",
+        "CollectionViewsCowBulkTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.23723306299871183,
+      "output": "CollectionViewsCowBulkTest PASS checks=120\n"
+    },
+    {
+      "label": "CollectionViewsIdentityContract",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK}/core-test-classes",
+        "CollectionViewsIdentityContract"
+      ],
+      "returncode": 0,
+      "seconds": 0.401942747999783,
+      "output": "CollectionViewsIdentityContract mode=all: 540 checks passed\n"
+    },
+    {
+      "label": "CollectionViewsRefinement",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK}/core-test-classes",
+        "CollectionViewsRefinement"
+      ],
+      "returncode": 0,
+      "seconds": 0.29892544799986354,
+      "output": "PASS CollectionViewsRefinement mode=all checks=1828\n"
+    },
+    {
+      "label": "CollectionViewsRefinement-size",
+      "command": [
+        "${IMAGE}/bin/java",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "-cp",
+        "${LINKED_WORK}/core-test-classes",
+        "CollectionViewsRefinement",
+        "size"
+      ],
+      "returncode": 0,
+      "seconds": 2.4647509489986987,
+      "output": "PASS CollectionViewsRefinement mode=size checks=2\n"
+    }
+  ],
+  "addendaCommands": "NATIVE_ADDENDA.json:runs",
+  "resourceCommands": "RESOURCE_PROCESS_USAGE.json:runs and RESOURCE_COMPARISON.json:preparation"
+}

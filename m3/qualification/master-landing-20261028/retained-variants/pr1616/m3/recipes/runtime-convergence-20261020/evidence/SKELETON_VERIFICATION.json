@@ -1,0 +1,71 @@
+{
+  "schema": "m3-runtime-convergence-skeleton-verification-v1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "gates": {
+    "pinned_host_git_blob_verification": {
+      "status": "PASS",
+      "files": 5
+    },
+    "exact_engine_sha256_and_git_blob_verification": {
+      "status": "PASS",
+      "files": 4
+    },
+    "unchanged_upstream_receiver_and_junit_test": {
+      "status": "PASS",
+      "files": 2
+    },
+    "inherited_catalogue_bytes_unchanged": {
+      "status": "PASS",
+      "files": 2
+    },
+    "existing_catalogue_cli_java21_compile": {
+      "status": "PASS"
+    },
+    "existing_catalogue_cli_validate": {
+      "status": "PASS",
+      "rows": 13
+    },
+    "existing_catalogue_cli_find_area_filtered_views": {
+      "status": "PASS",
+      "matches": 2
+    },
+    "maven_test_compile": {
+      "status": "PASS",
+      "engine_source_files": 4,
+      "test_source_files": 1,
+      "jdk": "21.0.12.1+1",
+      "maven": "3.9.9",
+      "trust_store": "/etc/ssl/certs/java/cacerts",
+      "strict_lint": true
+    },
+    "recipe_junit_execution": {
+      "status": "PENDING_PAYLOADS"
+    },
+    "runtime_java_jni_contracts": {
+      "status": "PENDING_CANDIDATES"
+    },
+    "target_receiving": {
+      "status": "NOT_EXECUTED"
+    }
+  },
+  "retained_failures": [
+    {
+      "stage": "dependency_resolution",
+      "signature": "sandbox Operation not permitted",
+      "disposition": "environment refusal; authorized retry"
+    },
+    {
+      "stage": "dependency_resolution",
+      "signature": "PKIX path building failed",
+      "disposition": "resolved by existing verified system Java trust store"
+    },
+    {
+      "stage": "catalogue_validation",
+      "signature": "Expected 13 columns at line 15",
+      "disposition": "extra trailing blank removed; exact existing CLI rerun PASS; no validator weakening"
+    }
+  ],
+  "maven_command": "JAVA_HOME=<jdk21> MAVEN_OPTS=-Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts mvn -U -B -ntp -Dmaven.repo.local=<shared-m2> -Drecipe.owner.root=<crate>/sdk-owner test-compile",
+  "scope": "Compilation/custody only; no payload, semantics, native, jtreg or integration completion claim"
+}

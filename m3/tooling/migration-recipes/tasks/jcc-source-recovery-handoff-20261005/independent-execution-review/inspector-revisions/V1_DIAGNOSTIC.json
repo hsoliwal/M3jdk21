@@ -1,0 +1,6 @@
+{
+  "scope": "Reviewer-inspector boundary correction; no candidate or gate execution",
+  "initial_expectation": "Current nonbuild overlay set exactly equals pre-run391fixed plus4operational files",
+  "observed": "All1008frozen identities exact and no missing fixed path; owner subsequently staged107task evidence files outside that run freeze",
+  "correction": "Require every frozen path preserved; record added paths separately and leave their audit/publication admission to separate final review"
+}

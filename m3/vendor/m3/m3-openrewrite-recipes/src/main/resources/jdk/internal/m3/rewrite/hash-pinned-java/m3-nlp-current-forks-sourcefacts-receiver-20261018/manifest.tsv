@@ -1,0 +1,2 @@
+m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3FileSourceFacts.java	3f4bf4a52a4cdb117c2ef843ce82727e2e87b9b7f95b6ea3ada70a5ad128e658	defa4c14489bc8eb7e1e6ea954743f28e7bb73364977bfef8159d8827d1f0259	000-M3FileSourceFacts.java.txt
+m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3FileSourceFacts.java	b6f6eb8936e4455f0f4f5c41652c3ce127e874ba230051cf6d237300780dbf34	3c766e4d790b830f4f038d1a086bd677d7c8dc07ba696a127e7ace523fc1ed79	001-M3FileSourceFacts.java.txt

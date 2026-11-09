@@ -1,0 +1,14 @@
+item	status	evidence
+retained_db_owner	RESTORED_CANDIDATE	Actual m3/indexdb source tree and reactor entry restored; not ancestry-only integration
+local_strict_compile	PASS	8 real owners compiled with javac --release21 -Xlint:all -Werror
+corruption_probes	PASS_4	3 count-header probes plus malformed UTF8; 4 failures reproduced against original
+API_descriptors	PASS_8	Original and candidate javap -protected outputs identical for all8 source owners
+parent_contract_probe	PASS_BOTH	Independent expected composition passes original and repaired production; not a JUnit claim
+first_hosted_JUnit	51_TESTS_1_FAILURE	Run37183150332; all9 new parser tests passed; one stale retained parent expectation failed
+parent_expectation_fix	IMPLEMENTED_UNVERIFIED_JUNIT	Expected parent independently composed; test retained and strengthened
+latest_hosted_rerun	BLOCKED_BEFORE_JOBS	Head49a8df37; runs37183817347 and37183815512 returned no jobs; retry403
+OpenRewrite_engine	NOT_RUN	6 real DbRecipeTest cases supplied; no syntax/patch test substituted
+coverage99	NOT_MEASURED_CURRENT_CANDIDATE	Original line/branch0.99 gates unchanged; first run stopped at JUnit
+Java_source_parser	NOT_CHANGED	The repaired parser is the existing semantic snapshot wire decoder
+whole_JDK	NOT_COMPLETE	Product backports, Java parser integration and platform proof remain separate obligations
+canonical_promotion	NOT_PERFORMED	Open draft PR88 only

@@ -1,0 +1,18 @@
+name: M3JDK21 current interop source preservation 76
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/interop/qualification/current-census-20261017/**'
+      - '.github/workflows/m3-interop-76-source-current-20261021.yml'
+  workflow_dispatch:
+jobs:
+  source-census:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Historical predecessor, exact source and refusal tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 -m unittest discover -s m3/collections/interop/qualification/current-census-20261017 -p 'test_*.py' -v
+          python3 m3/collections/interop/qualification/current-census-20261017/verify.py

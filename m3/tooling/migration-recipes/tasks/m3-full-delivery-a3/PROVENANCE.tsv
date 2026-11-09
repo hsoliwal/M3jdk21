@@ -1,0 +1,9 @@
+kind	value
+base_master	09075810b55229662329a158923287e8a7118f86
+synexia_delivery_contract	hsoliwal/com.synexia:.m3/delivery-targets.tsv
+synexia_prefix_contract	hsoliwal/com.synexia:.m3/delivery-prefixes.tsv
+source_license	Apache-2.0
+java_recipe	com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+text_recipe	com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe
+named_recipe	com.m3.rewrite.SynexiaFullDeliveryA3
+authority	CANDIDATE_ONLY

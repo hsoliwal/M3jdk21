@@ -1,0 +1,12 @@
+item	state	evidence	limit
+base	PINNED	b71ee5bf88398fb80961c13db03e8c675fb445ce	current master at recovery start
+preimages	VERIFIED	4/4 current Stream owners byte-identical to PR105 recovery base	mechanical blob identity only
+product_payload	RESTORED_BRANCH	7 stream production owners +8 focused jtreg tests	exact PR105 blobs
+recipe_packet	RESTORED_BRANCH	M3Jep485StreamGatherersBackportRecipe + crate + packet/atoms	candidate-only
+scope_authority	RESTORED_BRANCH	LIBRARY_API + EXPLICIT_CONTRACT_CHANGE	opt-in API extension, not stock Java21 identity
+workflow_prerequisite	REPAIRED_BRANCH	libxrandr-dev added	prior configure failure requested this package
+recipe_ci	PENDING	-	exact-head Maven/OpenRewrite proof required
+jdk_build	PENDING	-	release image build required
+jtreg	PENDING	-	Gatherer family + existing stream regressions required
+api_smoke	PENDING	-	built-JDK compile/run required
+whole_jdk	INCOMPLETE	programme denominator remains open	no completion claim

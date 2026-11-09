@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: Apache-2.0
+# Overlap agreement table of recipe/algorithm-extras-20261106 (gate 4), written by overlap.sh from OverlapAgreement.java (seed 20261106): donor member vs its owner on the same fixtures; AGREE = equal results or the same exception class, EQUIVALENT = different but both valid answers, DISAGREE = an NEC observation (the owner's body wins; see METHOD_CENSUS.tsv).
+donor_member	owner	cases	agree	equivalent	disagree	first_difference
+IntAlgorithms.lowerBound(int[],int)+(..,M3ProgressMonitor)	M3ArrayAlgorithms.lowerBound	2000	2000	0	0	-
+IntAlgorithms.upperBound(int[],int)+(..,M3ProgressMonitor)	M3ArrayAlgorithms.upperBound	2000	2000	0	0	-
+IntAlgorithms.twoSumIndices(int[],int)+(..,M3ProgressMonitor)	M3ArrayAlgorithms.twoSum	2000	1986	0	14	case 35 donor=[4, 10]/[4, 10] owner=[-1, -1]/[-1, -1]
+IntAlgorithms.sortedTwoSumIndices(int[],int)	M3ArrayAlgorithms.sortedTwoSum	2000	2000	0	0	-
+IntAlgorithms.slidingWindowMaximum(int[],int)+(..,M3ProgressMonitor)	M3ArrayAlgorithms.maxSlidingWindow	2000	2000	0	0	-
+IntAlgorithms.dailyTemperatures(int[])	M3StackAlgorithms.dailyTemperatures	2000	2000	0	0	-
+IntAlgorithms.prefixSums(int[])	M3ArrayAlgorithms.prefixSums	2000	2000	0	0	-
+IntAlgorithms.rangeSum(long[],int,int)	M3ArrayAlgorithms.rangeSum	2000	2000	0	0	-
+IntAlgorithms.maxSubarraySum(int[])	M3ArrayAlgorithms.maxSubarray	2000	2000	0	0	-
+IntAlgorithms.productExceptSelf(int[])	M3ArrayAlgorithms.productExceptSelf	2000	2000	0	0	-
+IntAlgorithms.missingNumber(int[])	M3BitAlgorithms.missingNumber	2000	2000	0	0	-
+IntAlgorithms.searchRotated(int[],int)	M3ArrayAlgorithms.searchRotated	2000	2000	0	0	-
+IntAlgorithms.canJump(int[])	M3IntervalGreedyAlgorithms.canReachEnd	2000	1993	0	7	case 142 donor=false owner=true
+IntAlgorithms.minJumps(int[])	M3IntervalGreedyAlgorithms.minimumJumps	2000	1995	0	5	case 644 donor=-1 owner=3
+IntAlgorithms.trapRainWater(int[])	M3ArrayAlgorithms.trapRainWater	2000	1950	0	50	case 88 donor=2147483702 owner=63
+IntAlgorithms.kthLargest(int[],int)	M3HeapAlgorithms.kthLargest	2000	2000	0	0	-
+IntAlgorithms.topKFrequent(int[],int)	M3ArrayAlgorithms.topKFrequent	2000	1325	675	0	-
+IntAlgorithms.mergeIntervals(int[][])	M3IntervalGreedyAlgorithms.merge	2000	2000	0	0	-
+IntAlgorithms.insertInterval(int[][],int[])	M3IntervalGreedyAlgorithms.insert	2000	2000	0	0	-
+IntAlgorithms.threeSumZero(int[])	M3ArrayAlgorithms.threeSum	2000	2000	0	0	-
+IntAlgorithms.sortColors012(int[])	M3ArrayAlgorithms.sortColors	2000	2000	0	0	-
+IntAlgorithms.singleNumber(int[])	jdk.internal.m3.M3IntAlgorithms.singleNumberOfPairs (java.base)	2000	1638	0	362	case 10 donor=0 owner=EXC IllegalArgumentException
+GraphAlgorithms.bfsDistances(CsrGraph,int)+(..,M3ProgressMonitor)	M3GraphAlgorithms.shortestPaths	2000	2000	0	0	-
+GraphAlgorithms.topologicalSort(CsrGraph)	M3GraphAlgorithms.topologicalOrder	2000	1210	790	0	-
+GraphAlgorithms.dijkstra(WeightedCsrGraph,int)+(..,M3ProgressMonitor)	M3GraphAlgorithms.dijkstra	2000	1964	0	36	case 46 donor={0=73, 2=0, 3=73}/{0=73, 2=0, 3=73} owner={0=73, 1=9223372036854775807, 2=0, 3=73}/{0=73, 1=9223372036854775807, 2=0, 3=73}
+AdvancedGraphAlgorithms.stronglyConnectedComponents(CsrGraph)	M3GraphAlgorithms.stronglyConnectedComponents	2000	2000	0	0	-
+AdvancedStringAlgorithms.zFunction(String)	M3StringAlgorithms.zFunction	2000	98	0	1902	case 0 donor=[16, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0] owner=[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+AdvancedStringAlgorithms.longestPalindromeRange(String)	M3StringAlgorithms.longestPalindrome	2000	2000	0	0	-
+StringAlgorithms.longestSubstringWithoutRepeating(String)+(..,M3ProgressMonitor)	M3ArrayAlgorithms.longestDistinctSubstring	2000	1917	0	83	case 1 donor=3/3 owner=4/4
+StringAlgorithms.prefixFunction(String)	M3StringAlgorithms.prefixFunction	2000	2000	0	0	-
+StringAlgorithms.longestPalindromicSubstring(String)	M3StringAlgorithms.longestPalindrome	2000	2000	0	0	-
+StringAlgorithms.validParentheses(String)	M3StackAlgorithms.validBrackets	2000	1908	0	92	case 13 donor=EXC IllegalArgumentException owner=false
+DynamicProgrammingAlgorithms.houseRobber(int[])	M3DynamicProgrammingAlgorithms.houseRobber	2000	2000	0	0	-
+DynamicProgrammingAlgorithms.coinChangeMin(int[],int)	M3DynamicProgrammingAlgorithms.coinChange	2000	2000	0	0	-
+DynamicProgrammingAlgorithms.knapsack01(int[],long[],int)	M3DynamicProgrammingAlgorithms.knapsack01(int[],int[],int,M3ProgressMonitor)	2000	2000	0	0	-
+DynamicProgrammingAlgorithms.knapsack01(int[],long[],int)	jdk.m3.tools.cpu.M3KnapsackSelection.maximize(int[],long[],int).value (cpu-tools, same erased signature)	2000	1862	0	138	case 15 donor=41 owner=EXC IllegalArgumentException
+DynamicProgrammingAlgorithms.longestIncreasingSubsequenceLength(int[])	M3DynamicProgrammingAlgorithms.longestIncreasingSubsequence	2000	2000	0	0	-
+DynamicProgrammingAlgorithms.longestCommonSubsequenceLength(String,String)	M3DynamicProgrammingAlgorithms.longestCommonSubsequence	2000	2000	0	0	-
+DynamicProgrammingAlgorithms.editDistance(String,String)	M3DynamicProgrammingAlgorithms.editDistance	2000	2000	0	0	-
+DynamicProgrammingAlgorithms.uniquePaths(int,int)	M3DynamicProgrammingAlgorithms.uniquePaths	2000	2000	0	0	-
+DynamicProgrammingAlgorithms.canPartitionEqualSubset(int[])	M3DynamicProgrammingAlgorithms.canPartition	2000	2000	0	0	-
+DynamicProgrammingAlgorithms.wordBreak(String,String[])	M3DynamicProgrammingAlgorithms.wordBreak	2000	2000	0	0	-
+BacktrackingAlgorithms.permutations(int[])	M3BacktrackingAlgorithms.permutations	2000	1563	0	437	case 0 donor=[[-2, 2, 2], [2, -2, 2], [2, 2, -2]] owner=[[-2, 2, 2], [-2, 2, 2], [2, -2, 2], [2, -2, 2], [2, 2, -2], [2, 2, -2]]
+BacktrackingAlgorithms.subsets(int[])	M3BacktrackingAlgorithms.subsets	2000	2000	0	0	-
+BacktrackingAlgorithms.nQueensSolutions(int,int,M3ProgressMonitor)	M3BacktrackingAlgorithms.nQueens	12	12	0	0	-
+BitAlgorithms.hammingWeight(int)+reverseBits(int)	M3BitAlgorithms.hammingWeight+reverseBits	2000	2000	0	0	-
+LinkedListAlgorithms.cycleStartIndex(IntLinkedList)	M3ListAlgorithms.cycleStart	2000	2000	0	0	-
+LinkedListAlgorithms.middleIndex+reversed+removeNthFromEnd(IntLinkedList..)	M3ListAlgorithms.middle+reverse+removeNthFromEnd	2000	2000	0	0	-
+LinkedListAlgorithms.mergeSorted(IntLinkedList,IntLinkedList)	M3ListAlgorithms.mergeSorted	2000	2000	0	0	-
+TreeAlgorithms.inorder+levelOrder+maxDepth+isBalanced+isValidBst+kthSmallestBst(BinaryTree..)	M3TreeAlgorithms.inorder+levelOrder+maxDepth+isBalanced+isValidBst+kthSmallest	2000	2000	0	0	-
+MatrixAlgorithms.countIslands(int[][])	M3MatrixAlgorithms.countIslands(char[][],..)	2000	2000	0	0	-
+MatrixAlgorithms.rotateSquareClockwise+spiralOrder+setZeroes(int[][])	M3MatrixAlgorithms.rotateClockwise+spiralOrder+setZeroes	2000	2000	0	0	-
+MatrixAlgorithms.searchSortedMatrix(int[][],int)	M3MatrixAlgorithms.searchSorted	2000	2000	0	0	-
+PrimitiveTrie.add+contains+hasPrefix(String) (kept: structure unit)	M3StringTrie.insert+contains+startsWith	2000	1915	0	85	case 31 donor=falsefalse falsefalse truetrue falsefalse falsefalse falsefalse falsetrue truetrue falsefalse falsefalse truetrue truetrue truetrue falsefalse falsefalse truetrue falsefalse falsetrue truetrue falsefalse  owner=falsefalse falsefalse truetrue falsefalse falsefalse falsefalse falsetrue t...
+RangeQueryStructures.FenwickTree (DROP_TYPE)	jdk.m3.collections.M3LongFenwickTree	2000	1870	0	130	case 6 donor=11 1364 EXC ArithmeticException EXC IndexOutOfBoundsException EXC ArithmeticException EXC IndexOutOfBoundsException EXC ArithmeticException -81 EXC ArithmeticException -9223372036854775004 EXC IndexOutOfBoundsException EXC ArithmeticException EXC IndexOutOfBoundsException EXC Arithmetic...
+AdvancedGraphAlgorithms.dinicMaxFlow(int,int[],int[],long[],int,int)	jdk.m3.tools.cpu.M3ArrayGraph.maximumFlow	2000	2000	0	0	-
+AdvancedGraphAlgorithms.hopcroftKarp(int,int,int[],int[])	jdk.m3.tools.cpu.M3BipartiteMatching.maximum (CSR)	2000	2000	0	0	-
+AdvancedStringAlgorithms.suffixArray+lcpArray(String) (kept: closure)	jdk.m3.tools.cpu.M3SuffixArray.suffixOrder+longestCommonPrefixes	2000	2000	0	0	-
+AlgorithmCatalog.descriptors()+AlgorithmShape.values()	M3AlgorithmShapeCatalog.shapes()+Family.values()	1	0	0	1	donor descriptors=87 covering shapes=36 of 36; landed shapes=51 in families=18; enum names in common=[BACKTRACKING, BINARY_SEARCH, LINKED_LIST, PREFIX_SUM, SLIDING_WINDOW, TRIE, TWO_POINTER, UNION_FIND] (plan oracle (e): counts differ, not ported)

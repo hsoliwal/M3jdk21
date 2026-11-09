@@ -1,0 +1,13 @@
+        private final Map<String, M3AtomPatternIndex.Entry> entries;
+
+        private PatternReviewed(JitChecked tested, Map<String, M3AtomPatternIndex.Entry> entries) {
+            this.tested = tested;
+            this.entries = Map.copyOf(entries);
+        }
+        public int patternEntries() { return entries.size(); }
+        public String patternRoot() {
+            List<String> ordered = entries.entrySet().stream().sorted(Map.Entry.comparingByKey())
+                    .map(e -> e.getKey() + ":" + e.getValue().patternId()
+                            + ":" + e.getValue().state().name()).toList();
+            return M3Hash.canonical("M3_OPENJDK_PATTERN_REVIEW_V1", ordered);
+        }

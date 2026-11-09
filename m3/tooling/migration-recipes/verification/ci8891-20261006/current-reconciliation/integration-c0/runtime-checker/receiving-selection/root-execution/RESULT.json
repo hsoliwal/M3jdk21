@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-10-06T10:07:58.113281+00:00",
+  "exitCode": 0,
+  "command": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/COMMAND.json",
+    "bytes": 1816,
+    "sha256": "6529a5f5683fe84b9ac2898bb8d0bc604c8528087b6c3ccf75132207e937e811"
+  },
+  "stdout": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/stdout.log",
+    "bytes": 288,
+    "sha256": "733a9b4ad528a438828695a31fa6ccbfda95e488557c6acd279138e299da4ec3"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

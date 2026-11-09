@@ -1,0 +1,11 @@
+case	baseline_exit	candidate_exit	purpose
+valid	0	0	Exact 308-check valid topology/range/null/domain/shared-occurrence oracle and existing boundary refusals
+maven-depth	1	0	Root plus dependency must reject maxDepth=1
+maven-nested-depth	1	0	Plugin execution/dependency depth=4 must reject maxDepth=3
+maven-lazy-budget	1	0	Finite 100000-item Iterable must refuse after at most maxNodes observations
+maven-collection-budget	1	0	Oversized Collection must refuse before materializing via iterator
+gradle-task-depth	1	0	Gradle task children must obey maxDepth
+gradle-lazy-budget	1	0	Finite lazy Gradle children must be materialized within budget
+gradle-frontier	1	0	Combined pending sibling frontiers must stop at capacity before additional child reads
+groovy-lazy-budget	1	0	Groovy child buffer must retain at most maxNodes occurrences
+kotlin-frontier	1	0	Kotlin combined frontier must refuse before visiting probe descendants

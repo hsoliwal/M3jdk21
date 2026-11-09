@@ -1,0 +1,35 @@
+{
+  "repository": "hsoliwal/M3JDK21",
+  "canonical_recipe_revision": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
+  "canonical_recipe_pr": 12666,
+  "target_parent": "6d9bad615851f346e3062e3034ccd74cbe2776af",
+  "verification": "PASS",
+  "method": "Create UTF-8 Git blob, compare returned Git SHA-1 with locally computed Git blob identity, fetch blob by SHA and compare its complete UTF-8 content with the exact qualified product file.",
+  "scope": "Source content objects read back before branch publication. Final PR file set and commit reachability are verified separately after publication.",
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "bytes": 32353,
+      "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea",
+      "git_blob_sha1": "d88392fdd5fe0674ed13adf544585654dc8cfc59",
+      "uploaded_blob_matches": true,
+      "readback_content_matches": true
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomContract.java",
+      "bytes": 12741,
+      "sha256": "2e1e184d757695e3f65b0f8d1e1e0ab74327626f3b0ad33d21c309c6b4f95bfe",
+      "git_blob_sha1": "4f1cc4bfef784c11fde03eae8270ab9621bea3a5",
+      "uploaded_blob_matches": true,
+      "readback_content_matches": true
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomTest.java",
+      "bytes": 596,
+      "sha256": "f2c51985b6966d0eda1531ea21742477f8c0ee504f188938f3dca381e44d9367",
+      "git_blob_sha1": "948e692f424ad6cd5bfd1ccff0cebf690d2ca072",
+      "uploaded_blob_matches": true,
+      "readback_content_matches": true
+    }
+  ]
+}

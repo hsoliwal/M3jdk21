@@ -1,0 +1,223 @@
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.hdrhistogram {
+          ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\EncodableHistogram.java:19: warning: [missing-explicit-ctor] class EncodableHistogram in exported package com.m3.lib.hdrhistogram declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.hdrhistogram
+public abstract class EncodableHistogram {
+                ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PercentileIterator.java:46: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        reset(histogram, percentileTicksPerHalfDistance);
+             ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PercentileIterator.java:34: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        super.resetIterator(histogram);
+                           ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\RecordedValuesIterator.java:37: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        reset(histogram);
+             ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\RecordedValuesIterator.java:29: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        super.resetIterator(histogram);
+                           ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AbstractHistogram.java:532: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public void recordValue(final long value, final long expectedIntervalBetweenValueSamples)
+                ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AbstractHistogram.java:2074: warning: [rawtypes] found raw type: Class
+    private static final Class[] constructorArgsTypes = {Long.TYPE, Long.TYPE, Integer.TYPE};
+                         ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AbstractHistogram.java:289: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        init(lowestDiscernibleValue, highestTrackableValue, numberOfSignificantValueDigits, 1.0, 0);
+            ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AbstractHistogram.java:315: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            setNormalizingIndexOffset(normalizingIndexOffset);
+                                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AllValuesIterator.java:38: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        reset(histogram);
+             ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AllValuesIterator.java:30: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        super.resetIterator(histogram);
+                           ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Histogram.java:44: warning: [serial] serializable class Histogram has no definition of serialVersionUID
+public class Histogram extends AbstractHistogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AtomicHistogram.java:33: warning: [serial] serializable class AtomicHistogram has no definition of serialVersionUID
+public class AtomicHistogram extends Histogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Histogram.java:175: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleHistogram.java:1516: warning: [rawtypes] found raw type: Class
+    private static final Class[] constructorArgTypes = {long.class, int.class, Class.class, AbstractHistogram.class};
+                         ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentDoubleHistogram.java:58: warning: [serial] serializable class ConcurrentDoubleHistogram has no definition of serialVersionUID
+public class ConcurrentDoubleHistogram extends DoubleHistogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentDoubleHistogram.java:70: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleHistogram.java:78: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleHistogram.java:98: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentHistogram.java:645: warning: [serial] serializable class AtomicLongArrayWithNormalizingOffset has no definition of serialVersionUID
+    static class AtomicLongArrayWithNormalizingOffset extends AtomicLongArray
+           ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentHistogram.java:41: warning: [serial] serializable class ConcurrentHistogram has no definition of serialVersionUID
+public class ConcurrentHistogram extends Histogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentHistogram.java:47: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    volatile ConcurrentArrayWithNormalizingOffset activeCounts;
+                                                  ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentHistogram.java:48: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    volatile ConcurrentArrayWithNormalizingOffset inactiveCounts;
+                                                  ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentHistogram.java:499: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\WriterReaderPhaser.java:136: warning: [missing-explicit-ctor] class WriterReaderPhaser in exported package com.m3.lib.hdrhistogram declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.hdrhistogram
+public class WriterReaderPhaser {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\LinearIterator.java:43: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        reset(histogram, valueUnitsPerBucket);
+             ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\LinearIterator.java:32: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        super.resetIterator(histogram);
+                           ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\LogarithmicIterator.java:49: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        reset(histogram, valueUnitsInFirstBucket, logBase);
+             ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\LogarithmicIterator.java:35: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        super.resetIterator(histogram);
+                           ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleRecorder.java:306: warning: [serial] serializable class InternalConcurrentDoubleHistogram has no definition of serialVersionUID
+    private static class InternalConcurrentDoubleHistogram extends ConcurrentDoubleHistogram {
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedConcurrentDoubleHistogram.java:63: warning: [serial] serializable class PackedConcurrentDoubleHistogram has no definition of serialVersionUID
+public class PackedConcurrentDoubleHistogram extends ConcurrentDoubleHistogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleRecorder.java:327: warning: [serial] serializable class PackedInternalConcurrentDoubleHistogram has no definition of serialVersionUID
+    private static class PackedInternalConcurrentDoubleHistogram extends PackedConcurrentDoubleHistogram {
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedConcurrentDoubleHistogram.java:75: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\HistogramLogProcessor.java:513: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this.setName("HistogramLogProcessor");
+                    ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\IntCountsHistogram.java:22: warning: [serial] serializable class IntCountsHistogram has no definition of serialVersionUID
+public class IntCountsHistogram extends AbstractHistogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\IntCountsHistogram.java:170: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedConcurrentHistogram.java:250: warning: [serial] serializable class ConcurrentPackedArrayWithNormalizingOffset has no definition of serialVersionUID
+    static class ConcurrentPackedArrayWithNormalizingOffset
+           ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedConcurrentHistogram.java:48: warning: [serial] serializable class PackedConcurrentHistogram has no definition of serialVersionUID
+public class PackedConcurrentHistogram extends ConcurrentHistogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedConcurrentHistogram.java:126: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\AbstractPackedLongArray.java:390: warning: [cast] redundant cast to int
+            h = oneAtATimeHashStep(h, (int) v.getIndex());
+                                      ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\AbstractPackedLongArray.java:11: warning: [serial] serializable class AbstractPackedLongArray has no definition of serialVersionUID
+abstract class AbstractPackedLongArray implements Iterable<Long>, Serializable {
+         ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedLongArray.java:7: warning: [serial] serializable class PackedLongArray has no definition of serialVersionUID
+public class PackedLongArray extends AbstractPackedLongArray {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\ConcurrentPackedLongArray.java:25: warning: [serial] serializable class ConcurrentPackedLongArray has no definition of serialVersionUID
+public class ConcurrentPackedLongArray extends PackedLongArray {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\ConcurrentPackedLongArray.java:33: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setArrayContext(new ConcurrentPackedArrayContext(virtualLength, initialPhysicalLength));
+                       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedLongArray.java:16: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setArrayContext(new PackedArrayContext(virtualLength, initialPhysicalLength));
+                       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\AbstractPackedArrayContext.java:1092: warning: [serial] serializable class RetryException has no definition of serialVersionUID
+    private static class RetryException extends Exception { }
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\AbstractPackedArrayContext.java:22: warning: [serial] serializable class AbstractPackedArrayContext has no definition of serialVersionUID
+abstract class AbstractPackedArrayContext implements Serializable {
+         ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\ResizeException.java:3: warning: [serial] serializable class ResizeException has no definition of serialVersionUID
+class ResizeException extends Exception {
+^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedDoubleHistogram.java:55: warning: [serial] serializable class PackedDoubleHistogram has no definition of serialVersionUID
+public class PackedDoubleHistogram extends DoubleHistogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedDoubleHistogram.java:67: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedHistogram.java:215: warning: [cast] redundant cast to PackedHistogram
+        return (PackedHistogram) decodeFromByteBuffer(buffer, PackedHistogram.class,
+               ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedHistogram.java:47: warning: [serial] serializable class PackedHistogram has no definition of serialVersionUID
+public class PackedHistogram extends Histogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedHistogram.java:157: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Recorder.java:339: warning: [serial] serializable class InternalAtomicHistogram has no definition of serialVersionUID
+    private static class InternalAtomicHistogram extends AtomicHistogram {
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Recorder.java:351: warning: [serial] serializable class InternalConcurrentHistogram has no definition of serialVersionUID
+    private static class InternalConcurrentHistogram extends ConcurrentHistogram {
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Recorder.java:360: warning: [serial] serializable class InternalPackedConcurrentHistogram has no definition of serialVersionUID
+    private static class InternalPackedConcurrentHistogram extends PackedConcurrentHistogram {
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ShortCountsHistogram.java:22: warning: [serial] serializable class ShortCountsHistogram has no definition of serialVersionUID
+public class ShortCountsHistogram extends AbstractHistogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ShortCountsHistogram.java:167: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SingleWriterDoubleRecorder.java:304: warning: [serial] serializable class SingleWriterDoubleRecorder.InternalDoubleHistogram has no definition of serialVersionUID
+    private class InternalDoubleHistogram extends DoubleHistogram {
+            ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SingleWriterDoubleRecorder.java:325: warning: [serial] serializable class SingleWriterDoubleRecorder.PackedInternalDoubleHistogram has no definition of serialVersionUID
+    private class PackedInternalDoubleHistogram extends PackedDoubleHistogram {
+            ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SingleWriterRecorder.java:331: warning: [serial] serializable class InternalHistogram has no definition of serialVersionUID
+    private static class InternalHistogram extends Histogram {
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SingleWriterRecorder.java:353: warning: [serial] serializable class PackedInternalHistogram has no definition of serialVersionUID
+    private static class PackedInternalHistogram extends PackedHistogram {
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SynchronizedDoubleHistogram.java:54: warning: [serial] serializable class SynchronizedDoubleHistogram has no definition of serialVersionUID
+public class SynchronizedDoubleHistogram extends DoubleHistogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SynchronizedDoubleHistogram.java:66: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SynchronizedHistogram.java:165: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+    public synchronized void recordValue(final long value, final long expectedIntervalBetweenValueSamples)
+                             ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SynchronizedHistogram.java:33: warning: [serial] serializable class SynchronizedHistogram has no definition of serialVersionUID
+public class SynchronizedHistogram extends Histogram {
+       ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SynchronizedHistogram.java:45: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setAutoResize(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedArrayContext.java:8: warning: [serial] serializable class PackedArrayContext has no definition of serialVersionUID
+class PackedArrayContext extends AbstractPackedArrayContext {
+^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\ConcurrentPackedArrayContext.java:7: warning: [serial] serializable class ConcurrentPackedArrayContext has no definition of serialVersionUID
+class ConcurrentPackedArrayContext extends PackedArrayContext {
+^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedArrayRecorder.java:261: warning: [serial] serializable class InternalConcurrentPackedLongArray has no definition of serialVersionUID
+    private static class InternalConcurrentPackedLongArray extends ConcurrentPackedLongArray {
+                   ^
+H:\m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedArraySingleWriterRecorder.java:263: warning: [serial] serializable class InternalPackedLongArray has no definition of serialVersionUID
+    private static class InternalPackedLongArray extends PackedLongArray {
+                   ^
+72 warnings

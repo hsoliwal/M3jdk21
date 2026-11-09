@@ -1,0 +1,2 @@
+path	reason	implementation_state	jdk21_state	jdk23_ga_state	authority
+test/langtools/tools/javac/processing/model/util/elements/TestGetDocComments.java	IMPLEMENTATION_DELETION_ALREADY_ABSENT	DELETED_BY_JEP467	ABSENT	ABSENT	EVIDENCE_ONLY

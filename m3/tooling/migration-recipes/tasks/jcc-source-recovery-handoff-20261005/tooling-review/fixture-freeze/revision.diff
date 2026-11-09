@@ -1,0 +1,41 @@
+--- V3-T01/run_verification_v3.py
++++ V3-T02/run_verification_v3.py
+@@ -106,6 +106,7 @@
+         raise RuntimeError('Optimized Python disables required receiving proof assertions')
+     assert not OUT.exists(), "Use a distinct execution epoch; do not overwrite prior receipts"
+     from author_e04_v3 import validate_inputs
++    from publication_custody_v3 import bound_json, EXPECTATIONS_SHA256
+     final_inputs = json.loads((BASE / "FINAL_SOURCE_INPUTS_V3.json").read_text())
+     source, source_root, source_ref, inventory, source_accounting, context = validate_inputs(final_inputs)
+     plan = json.loads(PLAN.read_text())
+@@ -113,11 +114,20 @@
+     assert plan["target_commit"] == "0994ecd65e86600f417f4d8702838d8c2663af61"
+     admitted_context = admit_current_context(context)
+     admitted_receipts = admit_current_receipts(context)
++    expectations = bound_json({"local_path": str(BASE / "custody-v3-proposal/LOCAL_EXPECTATIONS.json"),
++                               "sha256": EXPECTATIONS_SHA256})
++    fixture_rows = expectations["exact_content_addressed_invalid_utf8_exceptions"]
++    assert len(fixture_rows) == 2
++    admitted_external = dict(admitted_context)
++    for row in fixture_rows:
++        path = Path(row["local_path"])
++        assert path not in admitted_external
++        admitted_external[path] = admit_declared_file(path, row)
+     mutated = {str(ROOT / row["path"]) for row in plan["outputs"]}
+     fixed_paths = sorted(path for path in ROOT.rglob("*") if path.is_file() and "target" not in path.parts and str(path) not in mutated)
+     assert set(admitted_receipts) <= set(fixed_paths)
+     external = {Path(row["local_path"]) for group in ("sources", "proof_references") for row in inventory[group]}
+-    external.update(admitted_context)
++    external.update(admitted_external)
+     external.update(Path(final_inputs[key]["local_path"]) for key in ("publication_receipt", "source_inventory", "root_accounting", "handoff_document"))
+     publication = json.loads(Path(final_inputs["publication_receipt"]["local_path"]).read_text())
+     external.update(BASE / name for name in ("derive_source_handoff_v3.py", "author_e04_v3.py", "run_verification_v3.py", "publication_custody_v3.py", "custody-v3-proposal/LOCAL_EXPECTATIONS.json", "source-prepublication/DESIGNATED_COMPARISON.json"))
+@@ -126,7 +136,7 @@
+     external.add(Path(publication["raw_fixture_custody"]["failed_readback_observation"]["local_path"]))
+     inputs = {"frozen_at_utc": now(), "plan_sha256": plan["plan_sha256"],
+               "fixed_inputs": [admitted_receipts[path] if path in admitted_receipts else identity(path) for path in fixed_paths],
+-              "external_source_and_proof_inputs": [admitted_context[path] if path in admitted_context else identity(path) for path in sorted(external)],
++              "external_source_and_proof_inputs": [admitted_external[path] if path in admitted_external else identity(path) for path in sorted(external)],
+               "operational_preimages": [identity(ROOT / row["path"]) for row in plan["outputs"]]}
+     OUT.mkdir()
+     write(OUT / "inputs.json", inputs)

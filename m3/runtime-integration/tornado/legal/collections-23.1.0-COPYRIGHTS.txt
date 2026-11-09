@@ -1,0 +1,10 @@
+Source archive: https://repo.maven.apache.org/maven2/org/graalvm/sdk/collections/23.1.0/collections-23.1.0-sources.jar
+
+Copyright (c) 2017, 2019, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2017, 2020, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2017, 2022, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2017, 2023, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2021, 2022, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2021, 2023, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2022, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2023, Oracle and/or its affiliates. All rights reserved.

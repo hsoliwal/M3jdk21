@@ -1,0 +1,28 @@
+package @PKG@;
+
+/** API of the virtual collections (pattern M3P-COLLECTION-1). */
+public interface M3CollectionApi extends M3WebApi {
+	/** Replaces the rows: {@code ;}-separated labels; boards and messages take {@code column~label} / {@code side~text}. */
+	void load(String sample);
+
+	/** Rows before the end at which an infinite list asks for more (one D_LOAD delta per item count). */
+	void setThreshold(int items);
+
+	/** True after the load threshold fired for the current item count. */
+	boolean needsMore();
+
+	/** Current overscroll pull in pixels (pull to refresh). */
+	int pull();
+
+	/** Ends a refresh: clears LOADING and the pull. */
+	void endRefresh();
+
+	/** Moves an item to another index (reorder). */
+	void move(int from, int to);
+
+	/** Moves a board card to another column. */
+	void moveToColumn(int item, int column);
+
+	/** Sets a row's swipe offset (clamped to the action width, 0 = closed). */
+	void swipe(int item, int offset);
+}

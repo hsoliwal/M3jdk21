@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "mode": "APPLY",
+  "recipe_proof_sha256": "688e24e3c80dfa2ea64bc6cfbb952291b3eeb5898a3cd8a6e20d2565513cecfe",
+  "receiver_root": "759d990c9a943e42e9cb399ccd92b4a13ddc3feee07ba462b3645f0d5ad81ae6",
+  "repository": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository",
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "before_sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea",
+      "after_sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea",
+      "action": "ALREADY_APPLIED"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomContract.java",
+      "before_sha256": "2e1e184d757695e3f65b0f8d1e1e0ab74327626f3b0ad33d21c309c6b4f95bfe",
+      "after_sha256": "2e1e184d757695e3f65b0f8d1e1e0ab74327626f3b0ad33d21c309c6b4f95bfe",
+      "action": "ALREADY_APPLIED"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomTest.java",
+      "before_sha256": "f2c51985b6966d0eda1531ea21742477f8c0ee504f188938f3dca381e44d9367",
+      "after_sha256": "f2c51985b6966d0eda1531ea21742477f8c0ee504f188938f3dca381e44d9367",
+      "action": "ALREADY_APPLIED"
+    }
+  ]
+}

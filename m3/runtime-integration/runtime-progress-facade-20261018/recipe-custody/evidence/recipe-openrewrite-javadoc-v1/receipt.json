@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-s",
+    "/tmp/m3-toolchain/settings.xml",
+    "-o",
+    "-B",
+    "-ntp",
+    "-f",
+    "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-Drecipe.owner.root=/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+    "-Dm3.dataset=m3-openrewrite-javadoc",
+    "-Dm3.contract.output=/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-openrewrite-javadoc-v1/receiver-proof",
+    "-Pcontract",
+    "verify"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 113.32333827018738,
+  "pom_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+  "log_sha256": "53a129e6508afb8803b3138c9e62c25854be4ad079883d5a1069c09e7c1d3516"
+}

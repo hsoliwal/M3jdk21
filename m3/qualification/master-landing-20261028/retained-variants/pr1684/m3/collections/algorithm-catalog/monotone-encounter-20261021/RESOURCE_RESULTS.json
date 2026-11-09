@@ -1,0 +1,1236 @@
+{
+  "initial": [
+    {
+      "case": "ascending",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 457066.975,
+        "median_warm_wall_ns_per_op": 475622.8,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          34360989,
+          35110080,
+          33496442
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8252,
+          8252,
+          8252
+        ],
+        "storage": [
+          {
+            "case": "ascending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "ascending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "ascending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 11935.5625,
+        "median_warm_wall_ns_per_op": 14432.2875,
+        "median_warm_allocated_bytes_per_op": 32.0,
+        "cold_wall_ns": [
+          2577400,
+          2016453,
+          2424028
+        ],
+        "retained_heap_deltas": [
+          20256,
+          20256,
+          20256
+        ],
+        "rss_delta_kib": [
+          64,
+          64,
+          64
+        ],
+        "storage": [
+          {
+            "case": "ascending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "ascending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "ascending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.02611337758541842
+    },
+    {
+      "case": "descending",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 466268.125,
+        "median_warm_wall_ns_per_op": 482816.275,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          32803729,
+          34326905,
+          34937296
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8248,
+          8248,
+          8248
+        ],
+        "storage": [
+          {
+            "case": "descending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "descending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "descending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 13535.9125,
+        "median_warm_wall_ns_per_op": 18967.125,
+        "median_warm_allocated_bytes_per_op": 32.0,
+        "cold_wall_ns": [
+          2130786,
+          2473944,
+          2245529
+        ],
+        "retained_heap_deltas": [
+          20256,
+          20256,
+          20256
+        ],
+        "rss_delta_kib": [
+          64,
+          64,
+          64
+        ],
+        "storage": [
+          {
+            "case": "descending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "descending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "descending",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.02903031919670683
+    },
+    {
+      "case": "equal",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 475117.475,
+        "median_warm_wall_ns_per_op": 487650.0625,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          23169333,
+          23257249,
+          23583001
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8252,
+          8252,
+          8252
+        ],
+        "storage": [
+          {
+            "case": "equal",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "equal",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "equal",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 12620.8125,
+        "median_warm_wall_ns_per_op": 19158.05,
+        "median_warm_allocated_bytes_per_op": 32.0,
+        "cold_wall_ns": [
+          2320382,
+          2073549,
+          2064376
+        ],
+        "retained_heap_deltas": [
+          20256,
+          20256,
+          20256
+        ],
+        "rss_delta_kib": [
+          64,
+          64,
+          64
+        ],
+        "storage": [
+          {
+            "case": "equal",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "equal",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "equal",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.02656356199064242
+    },
+    {
+      "case": "random",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 3077708.4375,
+        "median_warm_wall_ns_per_op": 3084474.5125,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          33115449,
+          25733466,
+          27642647
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8248,
+          8248,
+          8248
+        ],
+        "storage": [
+          {
+            "case": "random",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "random",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "random",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 2977130.6375,
+        "median_warm_wall_ns_per_op": 2981682.775,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          26703981,
+          28452820,
+          31966154
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8244,
+          8244,
+          8244
+        ],
+        "storage": [
+          {
+            "case": "random",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "random",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "random",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.9673205561727288
+    },
+    {
+      "case": "early-inversion",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 668523.175,
+        "median_warm_wall_ns_per_op": 707123.5875,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          32149150,
+          33570310,
+          29640935
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8252,
+          8252,
+          8252
+        ],
+        "storage": [
+          {
+            "case": "early-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "early-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "early-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 600551.625,
+        "median_warm_wall_ns_per_op": 627054.0,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          34229919,
+          28809300,
+          30451999
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8252,
+          8252,
+          8252
+        ],
+        "storage": [
+          {
+            "case": "early-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "early-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "early-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.8983258134618892
+    },
+    {
+      "case": "late-inversion",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 576705.7,
+        "median_warm_wall_ns_per_op": 581960.0375,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          29059176,
+          24255086,
+          31857039
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8252,
+          8252,
+          8252
+        ],
+        "storage": [
+          {
+            "case": "late-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "late-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "late-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 586776.675,
+        "median_warm_wall_ns_per_op": 591032.1875,
+        "median_warm_allocated_bytes_per_op": 262208.0,
+        "cold_wall_ns": [
+          35375399,
+          28426351,
+          27086875
+        ],
+        "retained_heap_deltas": [
+          8409680,
+          8409680,
+          8409680
+        ],
+        "rss_delta_kib": [
+          8252,
+          8252,
+          8252
+        ],
+        "storage": [
+          {
+            "case": "late-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "late-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "late-inversion",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 1.017462936468289
+    },
+    {
+      "case": "partial",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 237758.875,
+        "median_warm_wall_ns_per_op": 245277.425,
+        "median_warm_allocated_bytes_per_op": 131136.0,
+        "cold_wall_ns": [
+          28294828,
+          25236798,
+          27138689
+        ],
+        "retained_heap_deltas": [
+          4215376,
+          4215376,
+          4215376
+        ],
+        "rss_delta_kib": [
+          9732,
+          9732,
+          9732
+        ],
+        "storage": [
+          {
+            "case": "partial",
+            "source_index_length": 32768,
+            "result_index_length": 16384,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "partial",
+            "source_index_length": 32768,
+            "result_index_length": 16384,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "partial",
+            "source_index_length": 32768,
+            "result_index_length": 16384,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 33771.2625,
+        "median_warm_wall_ns_per_op": 40898.6,
+        "median_warm_allocated_bytes_per_op": 65584.0,
+        "cold_wall_ns": [
+          1480294,
+          1838895,
+          1785645
+        ],
+        "retained_heap_deltas": [
+          4215584,
+          4215584,
+          4215584
+        ],
+        "rss_delta_kib": [
+          6976,
+          6976,
+          6976
+        ],
+        "storage": [
+          {
+            "case": "partial",
+            "source_index_length": 32768,
+            "result_index_length": 16384,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "partial",
+            "source_index_length": 32768,
+            "result_index_length": 16384,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "partial",
+            "source_index_length": 32768,
+            "result_index_length": 16384,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.1420399659108414
+    },
+    {
+      "case": "tiny-slice",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 1676.1125,
+        "median_warm_wall_ns_per_op": 8381.15,
+        "median_warm_allocated_bytes_per_op": 192.0,
+        "cold_wall_ns": [
+          452543,
+          440064,
+          387575
+        ],
+        "retained_heap_deltas": [
+          25168,
+          25168,
+          25168
+        ],
+        "rss_delta_kib": [
+          44,
+          44,
+          44
+        ],
+        "storage": [
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 2375.6375,
+        "median_warm_wall_ns_per_op": 11014.375,
+        "median_warm_allocated_bytes_per_op": 112.0,
+        "cold_wall_ns": [
+          366252,
+          297449,
+          429498
+        ],
+        "retained_heap_deltas": [
+          25376,
+          25376,
+          25376
+        ],
+        "rss_delta_kib": [
+          60,
+          60,
+          60
+        ],
+        "storage": [
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 1.4173496707410749
+    },
+    {
+      "case": "masked",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 187946.125,
+        "median_warm_wall_ns_per_op": 192352.675,
+        "median_warm_allocated_bytes_per_op": 87456.0,
+        "cold_wall_ns": [
+          32336394,
+          20444195,
+          20196091
+        ],
+        "retained_heap_deltas": [
+          2817616,
+          2817616,
+          2817616
+        ],
+        "rss_delta_kib": [
+          6948,
+          6948,
+          6948
+        ],
+        "storage": [
+          {
+            "case": "masked",
+            "source_index_length": 10923,
+            "result_index_length": 10923,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "masked",
+            "source_index_length": 10923,
+            "result_index_length": 10923,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "masked",
+            "source_index_length": 10923,
+            "result_index_length": 10923,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 5517.4125,
+        "median_warm_wall_ns_per_op": 8020.225,
+        "median_warm_allocated_bytes_per_op": 32.0,
+        "cold_wall_ns": [
+          1399032,
+          1152690,
+          1006279
+        ],
+        "retained_heap_deltas": [
+          20256,
+          20256,
+          20256
+        ],
+        "rss_delta_kib": [
+          56,
+          64,
+          56
+        ],
+        "storage": [
+          {
+            "case": "masked",
+            "source_index_length": 10923,
+            "result_index_length": 10923,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "masked",
+            "source_index_length": 10923,
+            "result_index_length": 10923,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "masked",
+            "source_index_length": 10923,
+            "result_index_length": 10923,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.029356351454439406
+    },
+    {
+      "case": "known-order",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 1144.575,
+        "median_warm_wall_ns_per_op": 3070.8875,
+        "median_warm_allocated_bytes_per_op": 32.0,
+        "cold_wall_ns": [
+          22484,
+          58999,
+          224889
+        ],
+        "retained_heap_deltas": [
+          20048,
+          20048,
+          20048
+        ],
+        "rss_delta_kib": [
+          48,
+          48,
+          48
+        ],
+        "storage": [
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 1019.2625,
+        "median_warm_wall_ns_per_op": 4305.375,
+        "median_warm_allocated_bytes_per_op": 32.0,
+        "cold_wall_ns": [
+          12409,
+          11948,
+          12649
+        ],
+        "retained_heap_deltas": [
+          20256,
+          20256,
+          20256
+        ],
+        "rss_delta_kib": [
+          64,
+          64,
+          64
+        ],
+        "storage": [
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.8905161304414302
+    }
+  ],
+  "small_window_followup": [
+    {
+      "case": "tiny-slice",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 266.4716,
+        "median_warm_wall_ns_per_op": 267.0782,
+        "median_warm_allocated_bytes_per_op": 192.0,
+        "cold_wall_ns": [
+          556881,
+          577481,
+          484802
+        ],
+        "retained_heap_deltas": [
+          25008,
+          25008,
+          25008
+        ],
+        "rss_delta_kib": [
+          56,
+          56,
+          56
+        ],
+        "storage": [
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 162.699,
+        "median_warm_wall_ns_per_op": 162.1698,
+        "median_warm_allocated_bytes_per_op": 112.0,
+        "cold_wall_ns": [
+          384340,
+          608028,
+          623461
+        ],
+        "retained_heap_deltas": [
+          25112,
+          25112,
+          25112
+        ],
+        "rss_delta_kib": [
+          64,
+          60,
+          64
+        ],
+        "storage": [
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "tiny-slice",
+            "source_index_length": 32768,
+            "result_index_length": 16,
+            "shared_index": "false",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.6105678804045159
+    },
+    {
+      "case": "known-order",
+      "baseline": {
+        "median_warm_thread_cpu_ns_per_op": 84.4651,
+        "median_warm_wall_ns_per_op": 83.8777,
+        "median_warm_allocated_bytes_per_op": 32.0,
+        "cold_wall_ns": [
+          32720,
+          60962,
+          34993
+        ],
+        "retained_heap_deltas": [
+          19888,
+          19888,
+          19888
+        ],
+        "rss_delta_kib": [
+          52,
+          52,
+          52
+        ],
+        "storage": [
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 0
+          },
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 1
+          },
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "baseline",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate": {
+        "median_warm_thread_cpu_ns_per_op": 61.3448,
+        "median_warm_wall_ns_per_op": 62.1678,
+        "median_warm_allocated_bytes_per_op": 32.0,
+        "cold_wall_ns": [
+          15594,
+          14953,
+          15123
+        ],
+        "retained_heap_deltas": [
+          19992,
+          19992,
+          19992
+        ],
+        "rss_delta_kib": [
+          60,
+          60,
+          56
+        ],
+        "storage": [
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 0
+          },
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 1
+          },
+          {
+            "case": "known-order",
+            "source_index_length": 32768,
+            "result_index_length": 32768,
+            "shared_index": "true",
+            "kind": "MONOTONE_STORAGE",
+            "variant": "candidate",
+            "fork": 2
+          }
+        ]
+      },
+      "candidate_over_baseline_cpu": 0.7262739285219575
+    }
+  ],
+  "limitations": [
+    "Finite local process measurements",
+    "Initial tiny-window warmup was insufficient for steady-state attribution; retain initial and followup",
+    "No universal CPU, RSS, native-memory or deployment claim",
+    "Unchanged known-order control shows measurement variability"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "bytes": 910736,
+  "expected_bytes": 910736,
+  "expected_sha256": "d23577c43936fedd8c4fa1337a6e960a6e71e94ac164d7a15c46ea96bf21265d",
+  "final_url": "https://archive.ubuntu.com/ubuntu/pool/main/s/sqlite3/libsqlite3-dev_3.45.1-1ubuntu2_amd64.deb",
+  "finished_utc": "2026-10-20T11:19:15.437600+00:00",
+  "metadata_sha256": "b133686208017e06c63b346182958888331131c7d335170349fdd383d215d9a2",
+  "package": "libsqlite3-dev",
+  "scope": "Official Ubuntu base SQLite 3.45.1 headers only; native runtime remains independently pinned installed 3.45.1-1ubuntu2.5",
+  "sha256": "d23577c43936fedd8c4fa1337a6e960a6e71e94ac164d7a15c46ea96bf21265d",
+  "started_utc": "2026-10-20T11:19:14.351108+00:00",
+  "status": "DOWNLOADED_AND_HASH_VERIFIED",
+  "tls_verification": "Python urllib default certificate and hostname verification",
+  "url": "https://archive.ubuntu.com/ubuntu/pool/main/s/sqlite3/libsqlite3-dev_3.45.1-1ubuntu2_amd64.deb",
+  "version": "3.45.1-1ubuntu2"
+}

@@ -1,0 +1,11 @@
+field	value
+jbs	JDK-8340327
+current_tree_state	CANDIDATE_MATERIALIZED_UNVERIFIED
+source_recipe	com.m3.jdk21.Jdk8340327Java21Internal
+product_targets	8
+test_targets	2
+upstream_commit	3f53d571343792341481f4d15970cdc0bcd76a5e
+java21_public_api	UNCHANGED
+asymmetric_key_dependency	REMOVED_FOR_JAVA21
+promotion	NOT_AUTHORIZED
+next_action	RECIPE_FIXED_POINT_BUILD_NAMED_KEY_JTREG_CANONICAL_READBACK

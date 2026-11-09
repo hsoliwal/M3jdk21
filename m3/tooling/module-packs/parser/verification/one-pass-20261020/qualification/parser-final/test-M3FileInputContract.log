@@ -1,0 +1,4 @@
+$ ["/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java","-ea","-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/test-M3FileInputContract","--patch-module","jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch","--module-path","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/modules","--add-modules","jdk.m3.parser","-cp","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes","jdk.m3.parser.test.M3FileInputContract"]
+M3_FILE_INPUT_PASS checks=67 groups=8
+
+EXIT 0

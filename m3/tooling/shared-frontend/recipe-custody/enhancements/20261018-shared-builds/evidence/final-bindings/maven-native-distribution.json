@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "status": "SOURCE_BUILT_MAVEN4_DISTRIBUTION_PASS",
+  "repository": "hsoliwal/maven",
+  "baseRevision": "bd11c44cd98aef16a3d049db0ebd8477608ccf4d",
+  "sourceState": "Exact qualified SDK outputs applied to base working tree; no local or remote commit created.",
+  "sourceFiles": [
+    {
+      "path": "impl/maven-core/src/main/java/org/apache/maven/plugin/internal/DefaultMavenPluginManager.java",
+      "sha256": "d44c46a6b6d524b72b9a1ad13ee4749fe1065b305adaeab1cae6514552a7ac4f"
+    },
+    {
+      "path": "impl/maven-core/src/test/java/org/apache/maven/plugin/internal/M3PluginSessionServicesTest.java",
+      "sha256": "443952adefdc6e25883a9594c0ea804cc746da05c67e4db697df179fe06c22b3"
+    }
+  ],
+  "sourceMutationSetIsExact": true,
+  "originalRecipeCustodyUnchanged": true,
+  "bothM3AstCompilerHooksPreserved": true,
+  "bootstrapSourceReceipt": {
+    "path": "native-toolchain/SOURCE.json",
+    "sha256": "4223478cc62c5a40cdc8ebb0d9a613332305039677ac9220402abcd42f1c68f1"
+  },
+  "compileReceipt": {
+    "stage": "compile",
+    "command": [
+      "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/native-toolchain/apache-maven-4.0.0-rc-7/bin/mvn",
+      "-B",
+      "-ntp",
+      "-s",
+      "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/maven-settings.xml",
+      "-Dmaven.repo.local=/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/maven-cache",
+      "-pl",
+      "impl/maven-core",
+      "-am",
+      "compile"
+    ],
+    "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven",
+    "exitCode": 0,
+    "seconds": 100.873,
+    "log": "receiver-compile.log",
+    "logSha256": "32ea9d80473ec33b407aa51645dcab3b5d29300ff883330cb6c9c30af4f36903",
+    "started": "2026-10-18T12:39:52.280352+00:00",
+    "finished": "2026-10-18T12:41:33.154311+00:00"
+  },
+  "nativeVerifyReceipt": {
+    "stage": "tests-native-verify-after-input-provision",
+    "command": [
+      "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/native-toolchain/apache-maven-4.0.0-rc-7/bin/mvn",
+      "-B",
+      "-ntp",
+      "-s",
+      "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/maven-settings.xml",
+      "-Dmaven.repo.local=/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/maven-cache",
+      "-pl",
+      "impl/maven-core",
+      "-am",
+      "verify"
+    ],
+    "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven",
+    "exitCode": 0,
+    "seconds": 221.235,
+    "log": "receiver-native-verify-provisioned.log",
+    "logSha256": "293e1b6789c5b71518d52617f195dae30448328166fabada0c648f84076f44ee",
+    "started": "2026-10-18T12:49:55.540532+00:00",
+    "finished": "2026-10-18T12:53:36.776308+00:00"
+  },
+  "packageReceipt": {
+    "stage": "distribution-package-after-tests",
+    "command": [
+      "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/native-toolchain/apache-maven-4.0.0-rc-7/bin/mvn",
+      "-B",
+      "-ntp",
+      "-s",
+      "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/maven-settings.xml",
+      "-Dmaven.repo.local=/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/maven-cache",
+      "-DdistributionTargetDir=/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/apache-maven-4.1.0-m3-session-recovery",
+      "-DskipTests",
+      "package"
+    ],
+    "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven",
+    "exitCode": 0,
+    "seconds": 79.01,
+    "log": "receiver-distribution-package.log",
+    "logSha256": "6fcd3bb5ec543bdf4cb0a4a382e60f03876598a73687e2fb53ab00dbacd70a31",
+    "started": "2026-10-18T12:54:53.570353+00:00",
+    "finished": "2026-10-18T12:56:12.580546+00:00"
+  },
+  "testSummarySha256": "eac1a26d71bcfff573cb22e98f4f7425c03f935b2cab113ef22eb6e9d68c4081",
+  "distribution": {
+    "path": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/maven-recovery/apache-maven-4.1.0-m3-session-recovery",
+    "mavenLauncherSha256": "db456afa890616e7b73d89fd3336c3f7b70887a0cbf6ff99c543872055d99354",
+    "coreJar": "lib/maven-core-4.1.0-SNAPSHOT.jar",
+    "coreJarSha256": "de19b8d700ca7c1872142bf7646f8ddb35e9730dec90605a7e4829793ae8e636",
+    "requiredClassesSha256": {
+      "org/apache/maven/plugin/internal/DefaultMavenPluginManager.class": "6cd1434d071b508531b16c27e7410986239f6634b1ab6e355bbd8ac1d1e35f6f",
+      "org/apache/maven/plugin/internal/M3AstCompilerConfiguration.class": "93c354fcdac4d642fa13ca7d12efe45f991854cb474c7758ffae19815e017bb6"
+    }
+  },
+  "interpretation": "The selected native reactor verify passed; the full distribution was packaged afterwards with skipTests. This is source-built Maven provenance, not full upstream Maven CI and not a full native M3JDK VM build."
+}

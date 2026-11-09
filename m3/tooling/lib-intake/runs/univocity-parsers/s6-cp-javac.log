@@ -1,0 +1,236 @@
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:511: error: reference to Record is ambiguous
+	public List<Record> parseAllRecords(int expectedRowCount) {
+	            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:520: error: reference to Record is ambiguous
+	public List<Record> parseAllRecords() {
+	            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:648: error: reference to Record is ambiguous
+	public final Record parseRecord(String line) {
+	             ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1026: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(File file, int expectedRowCount) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1040: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(File file, String encoding, int expectedRowCount) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1054: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(File file, Charset encoding, int expectedRowCount) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1068: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(InputStream input, int expectedRowCount) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1083: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(InputStream input, String encoding, int expectedRowCount) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1098: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(InputStream input, Charset encoding, int expectedRowCount) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1109: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(File file) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1121: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(File file, String encoding) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1133: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(File file, Charset encoding) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1145: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(InputStream input) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1158: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(InputStream input, String encoding) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1171: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(InputStream input, Charset encoding) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1184: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(Reader reader, int expectedRowCount) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1188: error: reference to Record is ambiguous
+	private List<Record> internalParseAllRecords(boolean validateReader, Reader reader, int expectedRowCount) {
+	             ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1207: error: reference to Record is ambiguous
+	public final List<Record> parseAllRecords(Reader reader) {
+	                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1218: error: reference to Record is ambiguous
+	public final Record parseNextRecord() {
+	             ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1393: error: reference to Record is ambiguous
+	public final IterableResult<Record, ParsingContext> iterateRecords(final File input, String encoding) {
+	                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1405: error: reference to Record is ambiguous
+	public final IterableResult<Record, ParsingContext> iterateRecords(final File input, final Charset encoding) {
+	                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1421: error: reference to Record is ambiguous
+	public final IterableResult<Record, ParsingContext> iterateRecords(final File input) {
+	                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1437: error: reference to Record is ambiguous
+	public final IterableResult<Record, ParsingContext> iterateRecords(final Reader input) {
+	                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1454: error: reference to Record is ambiguous
+	public final IterableResult<Record, ParsingContext> iterateRecords(final InputStream input, String encoding) {
+	                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1466: error: reference to Record is ambiguous
+	public final IterableResult<Record, ParsingContext> iterateRecords(final InputStream input, final Charset encoding) {
+	                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1482: error: reference to Record is ambiguous
+	public final IterableResult<Record, ParsingContext> iterateRecords(final InputStream input) {
+	                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\Context.java:136: error: reference to Record is ambiguous
+	Record toRecord(String[] row);
+	^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:520: error: reference to Record is ambiguous
+	public final <T extends Record> void processRecords(T[] records) {
+	                        ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:520: error: name clash: <T>processRecords(T[]) and processRecords(Object[]) have the same erasure
+	public final <T extends Record> void processRecords(T[] records) {
+	                                     ^
+  where T is a type-variable:
+    T extends Record declared in method <T>processRecords(T[])
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:538: error: reference to Record is ambiguous
+	public final <T extends Record> void processRecord(T record) {
+	                        ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:538: error: cannot declare both <T>processRecord(T) and processRecord(Object...) in AbstractWriter
+	public final <T extends Record> void processRecord(T record) {
+	                                     ^
+  where T is a type-variable:
+    T extends Record declared in method <T>processRecord(T)
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:641: error: reference to Record is ambiguous
+	public final void writeRecordsAndClose(Collection<? extends Record> allRows) {
+	                                                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:711: error: reference to Record is ambiguous
+	public final void writeRecords(Collection<? extends Record> rows) {
+	                                                    ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:785: error: reference to Record is ambiguous
+	public final <T extends Record> void writeRecord(T row) {
+	                        ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:1375: error: reference to Record is ambiguous
+	public final <T extends Record> String processRecordToString(T record) {
+	                        ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:1375: error: cannot declare both <T>processRecordToString(T) and processRecordToString(Object...) in AbstractWriter
+	public final <T extends Record> String processRecordToString(T record) {
+	                                       ^
+  where T is a type-variable:
+    T extends Record declared in method <T>processRecordToString(T)
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:1522: error: reference to Record is ambiguous
+	public final List<String> writeRecordsToString(Collection<? extends Record> rows) {
+	                                                                    ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:1577: error: reference to Record is ambiguous
+	public final <T extends Record> String writeRecordToString(T row) {
+	                        ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:2019: error: reference to Record is ambiguous
+	public final <K> List<String> writeRecordsToString(Map<K, String> headerMapping, Map<K, ? extends Record> rowData) {
+	                                                                                                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:2057: error: reference to Record is ambiguous
+	public final <K> void writeRecords(Map<K, String> headerMapping, Map<K, ? extends Record> rowData) {
+	                                                                                  ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:2126: error: reference to Record is ambiguous
+	private <K> Map<K, Iterable<String>> wrapRecordValues(Map<K, ? extends Record> rowData) {
+	                                                                       ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:2197: error: reference to Record is ambiguous
+	public final <K> void writeRecordsAndClose(Map<K, String> headerMapping, Map<K, ? extends Record> rowData) {
+	                                                                                          ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:2252: error: reference to Record is ambiguous
+	public final <K> void writeRecordsAndClose(Map<K, ? extends Record> rowData) {
+	                                                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ContextWrapper.java:94: error: reference to Record is ambiguous
+	public Record toRecord(String[] row) {
+	       ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\DefaultContext.java:140: error: reference to Record is ambiguous
+	public Record toRecord(String[] row) {
+	       ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\NoopParsingContext.java:140: error: reference to Record is ambiguous
+	public Record toRecord(String[] row) {
+	       ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\ParsingContextWrapper.java:94: error: reference to Record is ambiguous
+	public Record toRecord(String[] row) {
+	       ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\iterators\RecordIterator.java:29: error: reference to Record is ambiguous
+public abstract class RecordIterator extends ParserIterator<Record> {
+                                                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\iterators\RecordIterator.java:36: error: reference to Record is ambiguous
+	protected final Record nextResult() {
+	                ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1189: error: reference to Record is ambiguous
+		List<Record> out = beginParseAll(validateReader, reader, expectedRowCount);
+		     ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractParser.java:1193: error: reference to Record is ambiguous
+		Record record;
+		^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:522: error: reference to processRecord is ambiguous
+			processRecord(record);
+			^
+  both method processRecord(Object...) in AbstractWriter and method processRecord(Map<?,?>) in AbstractWriter match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:712: error: reference to Record is ambiguous
+		for (Record row : rows) {
+		     ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:1525: error: reference to Record is ambiguous
+			for (Record row : rows) {
+			     ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\common\AbstractWriter.java:2128: error: reference to Record is ambiguous
+		for (Map.Entry<K, ? extends Record> e : rowData.entrySet()) {
+		                            ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\FixedWidthParser.java:119: error: reference to Record is ambiguous
+				public Record toRecord(String[] row) {
+				       ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+H:\m3-scratch\lib-intake\batch\univocity-parsers\proj\src\main\java\com\m3\lib\parsers\fixed\Lookup.java:69: error: reference to Record is ambiguous
+			public Record toRecord(String[] row) {
+			       ^
+  both interface com.m3.lib.parsers.common.record.Record in com.m3.lib.parsers.common.record and class java.lang.Record in java.lang match
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+57 errors

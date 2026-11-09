@@ -1,0 +1,15 @@
+family	canonical_repository	canonical_module	canonical_namespace	ownership_mode	downstream_policy	license_policy
+atomization	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite.atom	SYNEXIA_CANONICAL	QUALIFIED_COPY_OR_THIN_ADAPTER	APACHE_ONLY
+patternization-iop	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite	SYNEXIA_CANONICAL	QUALIFIED_COPY_OR_THIN_ADAPTER	APACHE_ONLY
+documentation	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite	SYNEXIA_CANONICAL	QUALIFIED_COPY_OR_THIN_ADAPTER	APACHE_ONLY
+scope-and-convergence	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite	SYNEXIA_CANONICAL	QUALIFIED_COPY_OR_THIN_ADAPTER	APACHE_ONLY
+recipe-mastery	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite	SYNEXIA_CANONICAL	EVIDENCE_AND_QUALIFIED_COPY	APACHE_ONLY
+donor-review	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite	SYNEXIA_CANONICAL	EVIDENCE_ONLY_UNTIL_QUALIFIED	LICENSE_AWARE
+delivery-export	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite	SYNEXIA_CANONICAL	SOURCE_PINNED_HANDOFF	APACHE_ONLY
+openjdk-exact-backport	hsoliwal/M3jdk21	m3/tooling/migration-recipes	com.m3.rewrite.backport	TARGET_SPECIFIC	TARGET_LOCAL	OPENJDK_AND_APACHE_MIXED_PRESERVE
+openjdk-product-admission	hsoliwal/M3jdk21	m3/tooling/migration-recipes	com.m3.rewrite	TARGET_SPECIFIC	TARGET_LOCAL	PRESERVE_ORIGINAL
+openjdk-jtreg-runtime-proof	hsoliwal/M3jdk21	m3	N/A	TARGET_SPECIFIC	TARGET_LOCAL	PRESERVE_ORIGINAL
+m3-string-canonical-dag	hsoliwal/com.synexia	synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006	com.synexia.rewrite.M3StringCanonicalDagInvariant	SYNEXIA_CANONICAL	TARGET_ADAPTER_FIXTURE_PROOF	APACHE_ONLY
+recipe-application-invariant	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite	SYNEXIA_CANONICAL	EXECUTED_RECIPE_RECEIPT_AND_PROOF_BOUND_HANDOFF	APACHE_ONLY
+code-text-regex-precompute	hsoliwal/com.synexia	synexia-openrewrite-recipes	com.synexia.rewrite	SYNEXIA_CANONICAL	QUALIFIED_OUTPUT_OR_THIN_ADAPTER	APACHE_ONLY
+mechanical-precompute-donors	hsoliwal/com.synexia	synexia-indexstring/recipes/mechanical-precompute-donors-20261006	com.synexia.rewrite.M3MechanicalPrecomputeInvariant	SYNEXIA_CANONICAL	QUALIFIED_OUTPUT_OR_THIN_ADAPTER	LICENSE_AWARE

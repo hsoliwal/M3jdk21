@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/usr/bin/cc",
+    "-std=gnu11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wconversion",
+    "-Wshadow",
+    "-Wpedantic",
+    "-pthread",
+    "-I",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/native/include",
+    "-isystem",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/native/deps/usr/include",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/native/tests/m3fs_metadata_test.c",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/libm3fs.so",
+    "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6",
+    "-Wl,-rpath,$ORIGIN",
+    "-o",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/m3fs-metadata-test"
+  ],
+  "exit_code": 0,
+  "log": "compile-metadata.log"
+}

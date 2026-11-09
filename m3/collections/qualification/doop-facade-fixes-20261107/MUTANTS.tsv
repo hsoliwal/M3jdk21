@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gate and mutant rows of tools/mutants.py (recipe qualification/doop-facade-fixes-20261107). find/replace are exact text of M3TransientFacadeStore.java (backslash-n = newline); each find matches exactly once; rows with the same id apply in order. source=master is the pinned preimage blob of EDITS.tsv.
+id	kind	leaf	source	find	replace	note
+MASTER	MASTER	A	master	-	-	master classes unedited: relocated test A must fail; relocated test B must not compile (the package-private seam is absent)
+HEAD	HEAD	-	head	-	-	head classes unedited: both relocated tests and the store test family pass
+SHIM_B	SHIM	B	master	    private void ensureReusableCapacity(int required) {\n        if (required <= freeFacades.length) return;\n	    private void ensureReusableCapacity(int required) {\n        ensureReusableCapacity(required, ARRAY_COPY);\n    }\n\n    void ensureReusableCapacity(int required, BackingCopier copies) {\n        if (required <= freeFacades.length) return;\n	master body behind the seam (no fix): records which leaf-B tests the pre-image already satisfies
+SHIM_B	SHIM	B	master	        Object[] nextFacades = Arrays.copyOf(freeFacades, capacity);\n        long[] nextIds = Arrays.copyOf(freeIds, capacity);\n	        Object[] nextFacades = copies.objects(freeFacades, capacity);\n        long[] nextIds = copies.longs(freeIds, capacity);\n	(second pair of SHIM_B)
+A1	MUTANT	A	head	\n        slot = insertCreated(logicalId, facade);\n	\n        slot = insert(logicalId, facade);\n	expose admits through the raw insert again (leak on a reentrant duplicate)
+A2	MUTANT	A	head	\n            slot = insertCreated(logicalId, facade);\n	\n            slot = insert(logicalId, facade);\n	retained withInternal admits through the raw insert again
+A3	MUTANT	A	head	            if (!alreadyResident) {\n	            if (true) {\n	identity guard dropped: an instance already resident (shared factory result) is disposed
+A4	MUTANT	A	head	                    if (cleanup != failure) failure.addSuppressed(cleanup);\n	                    // mutant A4: cleanup failure dropped\n	cleanup failure no longer suppressed onto the primary exception
+B1	MUTANT	B	head	                copies.objects(freeFacades, capacity), "idle facade copy");\n	                copies.objects(freeFacades, capacity), "idle facade copy");\n        freeFacades = nextFacades;\n	the described donor defect: publish the object lane before the ID copy
+B2	MUTANT	B	head	        if (nextFacades.length != capacity || nextIds.length != capacity) {\n	        if (false) {\n	length validation of the staged pair dropped
+B3	MUTANT	B	head	        if (required <= freeFacades.length) return;\n        Objects.requireNonNull(copies, "copies");\n	        Objects.requireNonNull(copies, "copies");\n	no-growth guard dropped: the copier runs although capacity suffices

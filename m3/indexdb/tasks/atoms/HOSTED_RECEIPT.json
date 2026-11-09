@@ -1,0 +1,26 @@
+{
+  "source_head": "12196866f356b053ef26d9ee7a8ae7f55a102757",
+  "source_tree": "71b77b29781ee985d0e8399ebf3d652c16809aea",
+  "pr": 88,
+  "pr_run": {"id": 37186394741, "conclusion": "failure", "jobs": []},
+  "push_run": {"id": 37186392749, "conclusion": "failure", "jobs": []},
+  "commit_check_runs": 0,
+  "local": {
+    "DB_Java21_strict_compilation": "PASS",
+    "eight_public_protected_API_comparisons": "IDENTICAL",
+    "three_wire_fixture_comparisons": "IDENTICAL",
+    "four_corruption_probes_before_and_after": "PASS",
+    "size_move_edge_short_read_probes": "PASS",
+    "three_isolated_missing_digest_contracts": "PASS"
+  },
+  "current_head_JUnit": "NOT_EXECUTED",
+  "current_head_OpenRewrite": "NOT_EXECUTED",
+  "current_head_JaCoCo": "NO_REPORT",
+  "expected_test_source_inventory_only": {"DB": 61, "focused_recipe": 10},
+  "prior_observed_271f76e": {"DB_JUnit_passed": 51, "lines_covered": 663, "lines_total": 681, "branches_covered": 235, "branches_total": 241},
+  "gate_policy": "Both0.99 gates unchanged; no exclusions or inference of current coverage",
+  "archive_sha256": "36216c065a52acbca0464ddc5c85c3b3b8eccd6bbe38cc01b3fdc48444c63406",
+  "archive_name": "M3-PR88-atoms-source-and-proof.zip",
+  "promotion": "NOT_PERFORMED",
+  "note": "A later documentation-only head must be assessed from its own actual workflow receipt. This receipt records only the source head above."
+}

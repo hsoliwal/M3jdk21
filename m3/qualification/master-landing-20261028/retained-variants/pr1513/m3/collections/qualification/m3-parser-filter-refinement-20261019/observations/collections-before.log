@@ -1,0 +1,452 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.m3:m3-collections >------------------------
+[INFO] Building M3 collection lanes 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collections ---
+[INFO] Copying 0 resource from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collections ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 268 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collections ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/a20ebe6f78bb/continuation/before/m3/collections/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collections ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 252 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collections ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.395 s -- in com.m3.collections.SegmentedPrimitiveStorageTest
+[INFO] Running com.m3.collections.M3TreeWindowPlanTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.666 s -- in com.m3.collections.M3TreeWindowPlanTest
+[INFO] Running com.m3.collections.M3SequenceContractTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.521 s -- in com.m3.collections.M3SequenceContractTest
+[INFO] Running com.m3.collections.M3TreeOrderStatisticTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 46.60 s -- in com.m3.collections.M3TreeOrderStatisticTest
+[INFO] Running com.m3.collections.M3BagRankIndexTest
+M3BagRankIndex randomized scenarios=1200
+PASS M3BagRankIndexSelfTest checks=213230 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.690 s -- in com.m3.collections.M3BagRankIndexTest
+[INFO] Running com.m3.collections.M3ResidencyStateMaskTest
+M3_RESIDENCY_STATE_MASK_PASS checks=9627 fingerprint=12197969927824375845 backend=java-only
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.168 s -- in com.m3.collections.M3ResidencyStateMaskTest
+[INFO] Running com.m3.collections.M3ConcurrentBitSetClaimTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.174 s -- in com.m3.collections.M3ConcurrentBitSetClaimTest
+[INFO] Running com.m3.collections.M3ZeroMaskArrayFastPathTest
+M3_ZERO_MASK_ARRAY_FAST_PATH_PASS checks=6176
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.535 s -- in com.m3.collections.M3ZeroMaskArrayFastPathTest
+[INFO] Running com.m3.collections.M3LongCompositeLateBindTest
+PASS M3LongCompositeLateBindSelfTest checks=535
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.781 s -- in com.m3.collections.M3LongCompositeLateBindTest
+[INFO] Running com.m3.collections.M3FilteredListsDeepCompositionTest
+M3_FILTERED_LIST_DEEP_PLAN_PASS checks=189
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.239 s -- in com.m3.collections.M3FilteredListsDeepCompositionTest
+[INFO] Running com.m3.collections.M3ObjectResidencyRuntimePressureTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in com.m3.collections.M3ObjectResidencyRuntimePressureTest
+[INFO] Running com.m3.collections.M3LongRangeSetTest
+PASS M3LongRangeSetSelfTest oracleChecks=411913
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.664 s -- in com.m3.collections.M3LongRangeSetTest
+[INFO] Running com.m3.collections.M3SignalMask32Test
+PASS M3SignalMask32Contract checks=1148 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.190 s -- in com.m3.collections.M3SignalMask32Test
+[INFO] Running com.m3.collections.M3PhysicalStateSnapshotTest
+PASS M3PhysicalStateSnapshotProof assertions=13578 backend=JAVA
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.976 s -- in com.m3.collections.M3PhysicalStateSnapshotTest
+[INFO] Running com.m3.collections.M3LazyObserverRegressionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.189 s -- in com.m3.collections.M3LazyObserverRegressionTest
+[INFO] Running com.m3.collections.M3RequiredExcludedMaskSelectorTest
+PASS M3RequiredExcludedMaskSelectorContract checks=133140
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.589 s -- in com.m3.collections.M3RequiredExcludedMaskSelectorTest
+[INFO] Running com.m3.collections.M3NetBeansGatherSpansTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.564 s -- in com.m3.collections.M3NetBeansGatherSpansTest
+[INFO] Running com.m3.collections.M3IndexMaskCompactorTest
+PASS M3IndexMaskCompactorSelfTest checks=17226 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.819 s -- in com.m3.collections.M3IndexMaskCompactorTest
+[INFO] Running com.m3.collections.M3ReceivingRecoveryTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in com.m3.collections.M3ReceivingRecoveryTest
+[INFO] Running com.m3.collections.M3ObjectStreamTerminalContractTest
+M3ObjectStreamTerminalContract PASS assertions=29
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s -- in com.m3.collections.M3ObjectStreamTerminalContractTest
+[INFO] Running com.m3.collections.M3FilteredMergedSequencedTest
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.218 s <<< FAILURE! -- in com.m3.collections.M3FilteredMergedSequencedTest
+[ERROR] com.m3.collections.M3FilteredMergedSequencedTest.mergedReadOnlyReverseAndSplitContractsCompose -- Time elapsed: 0.180 s <<< FAILURE!
+java.lang.AssertionError: sorted properties on every split
+	at com.m3.collections.M3FilteredMergedSequencedContract.check(M3FilteredMergedSequencedContract.java:34)
+	at com.m3.collections.M3FilteredMergedSequencedContract.collect(M3FilteredMergedSequencedContract.java:71)
+	at com.m3.collections.M3FilteredMergedSequencedContract.verify(M3FilteredMergedSequencedContract.java:88)
+	at com.m3.collections.M3FilteredMergedSequencedContract.sortedReversedRangesAndStreams(M3FilteredMergedSequencedContract.java:121)
+	at com.m3.collections.M3FilteredMergedSequencedContract.main(M3FilteredMergedSequencedContract.java:231)
+	at com.m3.collections.M3FilteredMergedSequencedTest.mergedReadOnlyReverseAndSplitContractsCompose(M3FilteredMergedSequencedTest.java:9)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running com.m3.collections.M3ObjectIdentityTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.708 s -- in com.m3.collections.M3ObjectIdentityTest
+[INFO] Running com.m3.collections.M3BlockCacheTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 s -- in com.m3.collections.M3BlockCacheTest
+[INFO] Running com.m3.collections.M3DequeSpanCopyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.323 s -- in com.m3.collections.M3DequeSpanCopyTest
+[INFO] Running com.m3.collections.M3SparseItemStoreTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in com.m3.collections.M3SparseItemStoreTest
+[INFO] Running com.m3.collections.M3TreeTopologyTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.661 s -- in com.m3.collections.M3TreeTopologyTest
+[INFO] Running com.m3.collections.M3FilteredNavigationReconciliationTest
+M3_PATH_MASK_ALIAS_PASS checks=2302 actualJNI=false
+navigation checks=141840 failures=0 first=null
+entries checks=11447 failures=0 first=null
+readonly checks=904 failures=206 first=strict removeFirst expected=java.lang.UnsupportedOperationException actual=java.util.NoSuchElementException
+depth checks=48 failures=0 first=null
+TOTAL checks=154239 failures=206
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.513 s <<< FAILURE! -- in com.m3.collections.M3FilteredNavigationReconciliationTest
+[ERROR] com.m3.collections.M3FilteredNavigationReconciliationTest.filteredSortedContracts -- Time elapsed: 1.474 s <<< FAILURE!
+java.lang.AssertionError: strict removeFirst expected=java.lang.UnsupportedOperationException actual=java.util.NoSuchElementException
+	at com.m3.collections.M3FilteredNavigationReconciliationContract.main(M3FilteredNavigationReconciliationContract.java:51)
+	at com.m3.collections.M3FilteredNavigationReconciliationTest.filteredSortedContracts(M3FilteredNavigationReconciliationTest.java:13)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running com.m3.collections.M3MutableFilteredViewsTest
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.678 s -- in com.m3.collections.M3MutableFilteredViewsTest
+[INFO] Running com.m3.collections.M3SlotArraysGrowTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in com.m3.collections.M3SlotArraysGrowTest
+[INFO] Running com.m3.collections.M3LongArrayDequeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.173 s -- in com.m3.collections.M3LongArrayDequeTest
+[INFO] Running com.m3.collections.M3LongRankIndexTest
+M3LongRankIndexSelfTest PASS native=false
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.399 s -- in com.m3.collections.M3LongRankIndexTest
+[INFO] Running com.m3.collections.M3LongLongTreeMapTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.250 s -- in com.m3.collections.M3LongLongTreeMapTest
+[INFO] Running com.m3.collections.M3JdkShapedPrimitiveCollectionsTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.583 s -- in com.m3.collections.M3JdkShapedPrimitiveCollectionsTest
+[INFO] Running com.m3.collections.M3SpanIndexTest
+M3SpanIndex Java21/JNI oracle: PASS 128804 assertions, JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.240 s -- in com.m3.collections.M3SpanIndexTest
+[INFO] Running com.m3.collections.M3IntLongHashMapTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.813 s -- in com.m3.collections.M3IntLongHashMapTest
+[INFO] Running com.m3.collections.M3NativeIndexRangeTest
+M3NativeIndexRangeSelfTest mode=none checks=529306 seededCases=2048
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.337 s -- in com.m3.collections.M3NativeIndexRangeTest
+[INFO] Running com.m3.collections.M3LongAddressBoundedTest
+M3_BOUNDED_GATHER_PASS checks=11020139 fingerprint=-9036386136120340114 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.818 s -- in com.m3.collections.M3LongAddressBoundedTest
+[INFO] Running com.m3.collections.M3PlaneGeometryTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.285 s -- in com.m3.collections.M3PlaneGeometryTest
+[INFO] Running com.m3.collections.M3ScrollGeometryTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in com.m3.collections.M3ScrollGeometryTest
+[INFO] Running com.m3.collections.M3ObjectPhysicalMaskTest
+PASS M3_OBJECT_PHYSICAL_MASK checks=24 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.m3.collections.M3ObjectPhysicalMaskTest
+[INFO] Running com.m3.collections.M3StrictFilteredSequencedTest
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.102 s <<< FAILURE! -- in com.m3.collections.M3StrictFilteredSequencedTest
+[ERROR] com.m3.collections.M3StrictFilteredSequencedTest.strictSortedAndNavigableReversedViews -- Time elapsed: 0.098 s <<< FAILURE!
+java.lang.AssertionError: hidden sorted removeFirst must refuse even when empty wrong exception: java.util.NoSuchElementException
+	at com.m3.collections.M3StrictFilteredSequencedContract.refuses(M3StrictFilteredSequencedContract.java:44)
+	at com.m3.collections.M3StrictFilteredSequencedContract.strictSequenced(M3StrictFilteredSequencedContract.java:50)
+	at com.m3.collections.M3StrictFilteredSequencedContract.emptySortedRefusesWithoutCallbacks(M3StrictFilteredSequencedContract.java:72)
+	at com.m3.collections.M3StrictFilteredSequencedContract.main(M3StrictFilteredSequencedContract.java:148)
+	at com.m3.collections.M3StrictFilteredSequencedTest.strictSortedAndNavigableReversedViews(M3StrictFilteredSequencedTest.java:10)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.util.NoSuchElementException
+	at com.m3.collections.M3FilteredViews$1.next(M3FilteredViews.java:99)
+	at com.m3.collections.M3FilteredViews$SortedSetView.first(M3FilteredViews.java:319)
+	at java.base/java.util.SortedSet.removeFirst(SortedSet.java:336)
+	at com.m3.collections.M3StrictFilteredSequencedContract.refuses(M3StrictFilteredSequencedContract.java:41)
+	... 7 more
+
+[INFO] Running com.m3.collections.M3EnumSetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.648 s -- in com.m3.collections.M3EnumSetTest
+[INFO] Running com.m3.collections.M3FilteredDequeDispatchTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.656 s -- in com.m3.collections.M3FilteredDequeDispatchTest
+[INFO] Running com.m3.collections.M3LongStateArrayTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.183 s -- in com.m3.collections.M3LongStateArrayTest
+[INFO] Running com.m3.collections.M3IndexMaskWindowTest
+PASS M3_INDEX_MASK_WINDOW checks=15298 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.226 s -- in com.m3.collections.M3IndexMaskWindowTest
+[INFO] Running com.m3.collections.M3SelectionEnumerationTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.328 s -- in com.m3.collections.M3SelectionEnumerationTest
+[INFO] Running com.m3.collections.M3IndexPathRankTest
+PASS M3IndexPathRank Java21 deterministic differential: 36476 rank checks; 900 randomized paths
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.189 s -- in com.m3.collections.M3IndexPathRankTest
+[INFO] Running com.m3.collections.M3GenericReferenceOwnersTest
+PASS M3GenericReferenceOwnersProof checks=7773 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.152 s -- in com.m3.collections.M3GenericReferenceOwnersTest
+[INFO] Running com.m3.collections.M3ArrayListRemoveIfTest
+M3ArrayListRemoveIfProof PASS cases=12013 assertions=1883123
+Preserved baseline: root rejects structural callbacks immediately; inherited subList retains prefix removals on callback failure.
+Unused Object[] slots are directly verified null; GC scheduling and whole-JDK integration are outside this finite proof.
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.237 s -- in com.m3.collections.M3ArrayListRemoveIfTest
+[INFO] Running com.m3.collections.M3LinkedIndexSplitTest
+M3_LINKED_INDEX_SPLIT_PASS checks=22765
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.190 s -- in com.m3.collections.M3LinkedIndexSplitTest
+[INFO] Running com.m3.collections.M3SignalOrderJUnitTest
+PASS M3SignalOrderContract backend=JAVA checks=2009
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 s -- in com.m3.collections.M3SignalOrderJUnitTest
+[INFO] Running com.m3.collections.M3LongTreeSetTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.674 s -- in com.m3.collections.M3LongTreeSetTest
+[INFO] Running com.m3.collections.M3WindowPlanTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.299 s -- in com.m3.collections.M3WindowPlanTest
+[INFO] Running com.m3.collections.M3IndexedReadOnlyNoopTest
+PASS M3IndexedReadOnlyNoopProof checks=70132
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.583 s -- in com.m3.collections.M3IndexedReadOnlyNoopTest
+[INFO] Running com.m3.collections.M3TreeCoverageTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.208 s -- in com.m3.collections.M3TreeCoverageTest
+[INFO] Running com.m3.collections.M3TreeResidencyTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in com.m3.collections.M3TreeResidencyTest
+[INFO] Running com.m3.collections.M3ObjectResidencyBorrowTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.082 s -- in com.m3.collections.M3ObjectResidencyBorrowTest
+[INFO] Running com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.067 s -- in com.m3.collections.SegmentedLaneBulkContractTest
+[INFO] Running com.m3.collections.M3IndexMaskWindowRecoveryTest
+PASS M3IndexMaskWindowRecoverySelfTest checks=7526 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.297 s -- in com.m3.collections.M3IndexMaskWindowRecoveryTest
+[INFO] Running com.m3.collections.M3GridSelectionsTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.152 s -- in com.m3.collections.M3GridSelectionsTest
+[INFO] Running com.m3.collections.M3LazyTreeMapTest
+PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress
+PACKED_LAZY_TREE_OK eager/lazy AVL differential=20000 views/entries/flags/progress/events
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.971 s -- in com.m3.collections.M3LazyTreeMapTest
+[INFO] Running com.m3.collections.M3ListModelTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.427 s -- in com.m3.collections.M3ListModelTest
+[INFO] Running com.m3.collections.M3LongLongLinkedHashMapTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.687 s -- in com.m3.collections.M3LongLongLinkedHashMapTest
+[INFO] Running com.m3.collections.M3LongArrayListTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.180 s -- in com.m3.collections.M3LongArrayListTest
+[INFO] Running com.m3.collections.M3PrimitiveCollectionDifferentialTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.325 s -- in com.m3.collections.M3PrimitiveCollectionDifferentialTest
+[INFO] Running com.m3.collections.M3NoRetainedStructuralEntryTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.803 s -- in com.m3.collections.M3NoRetainedStructuralEntryTest
+[INFO] Running com.m3.collections.M3IndexedTableReentrantSortTest
+PASS M3IndexedTableReentrantSortContract checks=18
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.m3.collections.M3IndexedTableReentrantSortTest
+[INFO] Running com.m3.collections.M3SparseExtentsTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 418.6 s -- in com.m3.collections.M3SparseExtentsTest
+[INFO] Running com.m3.collections.M3TreeWindowTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.154 s -- in com.m3.collections.M3TreeWindowTest
+[INFO] Running com.m3.collections.M3CountedBagTest
+PASS M3CountedBagSelfTest checks=165184
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.741 s -- in com.m3.collections.M3CountedBagTest
+[INFO] Running com.m3.collections.M3WindowRuntimeRowWindowTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.329 s -- in com.m3.collections.M3WindowRuntimeRowWindowTest
+[INFO] Running com.m3.collections.M3WindowPlannerTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s -- in com.m3.collections.M3WindowPlannerTest
+[INFO] Running com.m3.collections.M3IndexedSetAlgebraSeekTest
+PASS M3IndexedSetAlgebraSeekProof checks=277043
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.168 s -- in com.m3.collections.M3IndexedSetAlgebraSeekTest
+[INFO] Running com.m3.collections.M3ListWidthTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.353 s -- in com.m3.collections.M3ListWidthTest
+[INFO] Running com.m3.collections.M3WrapperConvergenceTest
+PASS M3WrapperConvergenceContract mode=readonly-policy checks=25
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 s -- in com.m3.collections.M3WrapperConvergenceTest
+[INFO] Running com.m3.collections.M3LongIndexProjectionMaskOffsetTest
+M3_MASK_OFFSET_PROJECTION_PASS checks=28615 seed=5562870565234366513
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.395 s -- in com.m3.collections.M3LongIndexProjectionMaskOffsetTest
+[INFO] Running com.m3.collections.M3BitLanesTest
+LAZY-METRIC	selection_10M	select_all_ms	4.166
+LAZY-METRIC	selection_10M	invert_ms	1.172
+LAZY-METRIC	selection_10M	shift_click_ms	13.340
+LAZY-METRIC	selection_cutover	k=1000	bits=false	scatter_ms=21.2	invert_ms=0.010	toArray_ms=2361.6
+LAZY-METRIC	selection_cutover	k=10000	bits=false	scatter_ms=31.3	invert_ms=0.013	toArray_ms=808.7
+LAZY-METRIC	selection_cutover	k=50000	bits=true	scatter_ms=80.8	invert_ms=6.349	toArray_ms=1222.5
+LAZY-METRIC	selection_cutover	k=156250	bits=true	scatter_ms=163.0	invert_ms=2.947	toArray_ms=545.5
+LAZY-METRIC	selection_cutover	k=300000	bits=true	scatter_ms=125.5	invert_ms=0.214	toArray_ms=536.6
+LAZY-METRIC	selection_cutover	k=1000000	bits=true	scatter_ms=7530.8	invert_ms=0.833	toArray_ms=189.5
+LAZY-METRIC	check_all_10M_ms	10.811
+LAZY-METRIC	uncheck_all_10M_ms	3.919
+LAZY-METRIC	insert_shift_10M_ms	4.703
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.12 s -- in com.m3.collections.M3BitLanesTest
+[INFO] Running com.m3.collections.M3SdkRecoveryTest
+PASS M3SdkRecoverySelfTest checks=19834 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.113 s -- in com.m3.collections.M3SdkRecoveryTest
+[INFO] Running com.m3.collections.M3ObjectStreamContractTest
+M3ObjectStreamContract PASS assertions=540
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.628 s -- in com.m3.collections.M3ObjectStreamContractTest
+[INFO] Running com.m3.collections.M3ObjectResidencyTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.302 s -- in com.m3.collections.M3ObjectResidencyTest
+[INFO] Running com.m3.collections.M3BitLane28FenwickTest
+PASS M3BitLane28FenwickSelfTest checks=21298 mutations=15000
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.268 s -- in com.m3.collections.M3BitLane28FenwickTest
+[INFO] Running com.m3.collections.M3MapContractTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.11 s -- in com.m3.collections.M3MapContractTest
+[INFO] Running com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.278 s -- in com.m3.collections.M3LongFilteredViewContractTest
+[INFO] Running com.m3.collections.M3IndexedMultiValueOccurrenceTest
+PASS M3IndexedMultiValueOccurrenceSelfTest checks=410711 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.227 s -- in com.m3.collections.M3IndexedMultiValueOccurrenceTest
+[INFO] Running com.m3.collections.M3ObjectSlotIndexTest
+PASS M3_OBJECT_SLOT_INDEX checks=39
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in com.m3.collections.M3ObjectSlotIndexTest
+[INFO] Running com.m3.collections.M3StoredRepresentativeTest
+M3_STORED_REPRESENTATIVE_CONTRACT_PASS assertions=2454
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 s -- in com.m3.collections.M3StoredRepresentativeTest
+[INFO] Running com.m3.collections.M3LongLinkedHashSetTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.964 s -- in com.m3.collections.M3LongLinkedHashSetTest
+[INFO] Running com.m3.collections.M3AdaptiveEnumLongMapTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.960 s -- in com.m3.collections.M3AdaptiveEnumLongMapTest
+[INFO] Running com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in com.m3.collections.M3FilteredListsSortedInteropTest
+[INFO] Running com.m3.collections.M3FactoryContractTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.432 s -- in com.m3.collections.M3FactoryContractTest
+[INFO] Running com.m3.collections.M3ViewportCollectionsTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.71 s -- in com.m3.collections.M3ViewportCollectionsTest
+[INFO] Running com.m3.collections.M3IndexedFilterSortFusionTest
+PASS M3IndexedFilterSortFusionSelfTest checks=9962 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.287 s -- in com.m3.collections.M3IndexedFilterSortFusionTest
+[INFO] Running com.m3.collections.M3EnumLongMapTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.177 s -- in com.m3.collections.M3EnumLongMapTest
+[INFO] Running com.m3.collections.M3WindowRuntimeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 s -- in com.m3.collections.M3WindowRuntimeTest
+[INFO] Running com.m3.collections.M3FilteredDequesTest
+PASS checks=140595
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.452 s -- in com.m3.collections.M3FilteredDequesTest
+[INFO] Running com.m3.collections.M3LongAddressKernelTest
+PASS M3LongAddressKernelSelfTest checks=321298 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.111 s -- in com.m3.collections.M3LongAddressKernelTest
+[INFO] Running com.m3.collections.M3MaskAllSelectionReceiverTest
+PASS M3MaskDenseSelectionProof checks=52564 nativeAvailable=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.785 s -- in com.m3.collections.M3MaskAllSelectionReceiverTest
+[INFO] Running com.m3.collections.M3LongDagJUnitTest
+M3_LONG_DAG_CHECKS=291 RESULT=PASS
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.483 s -- in com.m3.collections.M3LongDagJUnitTest
+[INFO] Running com.m3.collections.M3SdkOwnerFactoryTest
+PASS M3_SDK_OWNER_FACTORY checks=10224
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.451 s -- in com.m3.collections.M3SdkOwnerFactoryTest
+[INFO] Running com.m3.collections.M3IndexPathMasksTest
+PASS M3IndexPathMasksSelfTest checks=1554 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.648 s -- in com.m3.collections.M3IndexPathMasksTest
+[INFO] Running com.m3.collections.M3EntryFacadeCacheTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.974 s -- in com.m3.collections.M3EntryFacadeCacheTest
+[INFO] Running com.m3.collections.M3KeyedParallelismAdmissionTest
+M3_KEYED_ADMISSION_PASS checks=44
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.485 s -- in com.m3.collections.M3KeyedParallelismAdmissionTest
+[INFO] Running com.m3.collections.M3FootprintContractTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in com.m3.collections.M3FootprintContractTest
+[INFO] Running com.m3.collections.M3WindowEdgesTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in com.m3.collections.M3WindowEdgesTest
+[INFO] Running com.m3.collections.M3ZeroSlotCapacityTest
+PASS M3ZeroSlotCapacityContract checks=656464 operations=196611 physical=true
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.209 s -- in com.m3.collections.M3ZeroSlotCapacityTest
+[INFO] Running com.m3.collections.M3FilteredViewsTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.649 s -- in com.m3.collections.M3FilteredViewsTest
+[INFO] Running com.m3.collections.M3ViewportReceivingTest
+VIEWPORT_TREE_PASS checks=269096 digest=16622768763742859435
+SWT_ROW_WINDOW_PASS checks=6758426
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.716 s -- in com.m3.collections.M3ViewportReceivingTest
+[INFO] Running com.m3.collections.M3FilteredNavigableSetRangeTest
+PASS M3FilteredNavigableSetRangeContract checks=110325
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.601 s -- in com.m3.collections.M3FilteredNavigableSetRangeTest
+[INFO] Running com.m3.collections.M3StateMaskHistogramTest
+M3StateMaskHistogramSelfTest PASS checks=403492 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.720 s -- in com.m3.collections.M3StateMaskHistogramTest
+[INFO] Running com.m3.collections.M3FilteredListsTest
+PASS M3FilteredListsEdges checks=40
+PASS M3FilteredListsContract operations=32452 checks=755754
+PASS M3FilteredListsWorkProof rows=65537 predicate_calls=65537 split_payload=0
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.481 s -- in com.m3.collections.M3FilteredListsTest
+[INFO] Running com.m3.collections.M3SignalDimensionsTest
+PASS M3SignalDimensions checks=1474
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.416 s -- in com.m3.collections.M3SignalDimensionsTest
+[INFO] Running com.m3.collections.M3TreeWindowScenarioTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.366 s -- in com.m3.collections.M3TreeWindowScenarioTest
+[INFO] Running com.m3.collections.M3RowTreeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in com.m3.collections.M3RowTreeTest
+[INFO] Running com.m3.collections.M3ObjectCountsTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.679 s -- in com.m3.collections.M3ObjectCountsTest
+[INFO] Running com.m3.collections.M3GenericArrayListTest
+PASS M3GenericArrayListSelfTest checks=960955 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.956 s -- in com.m3.collections.M3GenericArrayListTest
+[INFO] Running com.m3.collections.M3JdkCollectionDifferentialTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.762 s -- in com.m3.collections.M3JdkCollectionDifferentialTest
+[INFO] Running com.m3.collections.M3ProgressAdaptersPercentageTest
+PROGRESS_PERCENT_WITNESS worked=9223372036854775807 total=9223372036854775807 expected=100 actual=100
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.612 s -- in com.m3.collections.M3ProgressAdaptersPercentageTest
+[INFO] Running com.m3.collections.M3ObjectRangeMapTest
+PASS M3ObjectRangeMapSelfTest checks=706260 randomized=12000 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.051 s -- in com.m3.collections.M3ObjectRangeMapTest
+[INFO] Running com.m3.collections.M3FilteredListsReadonlyDepthTest
+M3_READONLY_FILTER_DEPTH_PASS checks=64
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.218 s -- in com.m3.collections.M3FilteredListsReadonlyDepthTest
+[INFO] Running com.m3.collections.M3ListDiffTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.277 s -- in com.m3.collections.M3ListDiffTest
+[INFO] Running com.m3.collections.M3IntLanesTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.444 s -- in com.m3.collections.M3IntLanesTest
+[INFO] Running com.m3.collections.M3LongSortedAlgebraTest
+PASS M3LongSortedAlgebraSelfTest checks=508836
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.524 s -- in com.m3.collections.M3LongSortedAlgebraTest
+[INFO] Running com.m3.collections.M3FilteredSetIdentityTest
+M3FilteredSetIdentityContract: 46 checks passed
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.224 s -- in com.m3.collections.M3FilteredSetIdentityTest
+[INFO] Running com.m3.collections.M3ListModelLazyTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 s -- in com.m3.collections.M3ListModelLazyTest
+[INFO] Running com.m3.collections.M3TombstoneReuseTest
+PASS M3TombstoneReuseSelfTest checks=142438 saved_set_array_payload_bytes=72 saved_map_array_payload_bytes=136
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.309 s -- in com.m3.collections.M3TombstoneReuseTest
+[INFO] Running com.m3.collections.M3IndexedSnapshotPositionTest
+PASS M3IndexedSnapshotPositionProof checks=114888 JNI=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.200 s -- in com.m3.collections.M3IndexedSnapshotPositionTest
+[INFO] Running com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in com.m3.collections.M3FilteredNavigableSetTest
+[INFO] Running com.m3.collections.M3FilteredSplitsMaskSpansTest
+MASK_SPANS_PASS cases=12000 backend=JAVA
+FILTERED_SPLITS_PASS checks=6324
+[WARNING] Tests run: 4, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 1.803 s -- in com.m3.collections.M3FilteredSplitsMaskSpansTest
+[INFO] Running com.m3.collections.M3SelectionShiftsTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.126 s -- in com.m3.collections.M3SelectionShiftsTest
+[INFO] Running com.m3.collections.M3PrimitiveFilteredSequencesTest
+PASS checks=164104
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.61 s -- in com.m3.collections.M3PrimitiveFilteredSequencesTest
+[INFO] Running com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.254 s -- in com.m3.collections.M3BoundedFilteredNavigationTest
+[INFO] Running com.m3.collections.M3ConcurrentContractTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.946 s -- in com.m3.collections.M3ConcurrentContractTest
+[INFO] Running com.m3.collections.M3ColumnarLanesTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.300 s -- in com.m3.collections.M3ColumnarLanesTest
+[INFO] Running com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.761 s -- in com.m3.collections.M3ConcurrentLaneContractTest
+[INFO] Running com.m3.collections.M3ReadOnlyMapDefaultsTest
+PASS M3ReadOnlyMapDefaultsContract checks=5600
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.476 s -- in com.m3.collections.M3ReadOnlyMapDefaultsTest
+[INFO] Running com.m3.collections.M3IndexedTableTest
+PASS M3IndexedTableSelfTest checks=62986 randomized=6000 native=false
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.654 s -- in com.m3.collections.M3IndexedTableTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   M3FilteredMergedSequencedTest.mergedReadOnlyReverseAndSplitContractsCompose:9 sorted properties on every split
+[ERROR]   M3FilteredNavigationReconciliationTest.filteredSortedContracts:13 strict removeFirst expected=java.lang.UnsupportedOperationException actual=java.util.NoSuchElementException
+[ERROR]   M3StrictFilteredSequencedTest.strictSortedAndNavigableReversedViews:10 hidden sorted removeFirst must refuse even when empty wrong exception: java.util.NoSuchElementException
+[INFO] 
+[ERROR] Tests run: 464, Failures: 3, Errors: 0, Skipped: 2
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14:27 min
+[INFO] Finished at: 2026-10-19T20:54:38+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project m3-collections: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/a20ebe6f78bb/continuation/before/m3/collections/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

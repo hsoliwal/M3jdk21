@@ -1,0 +1,18 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Compiler-owned receiving API plus canonical AST lineage reconciliation. This fragment does not promote the repository-wide String/array/collection/AST phase gates.",
+  "source_commit": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "target_baseline": "c0f992009f7045c9f0d8ef4f734b3f1113c7a3f6",
+  "mappings": [
+    {"source":"javac task plus M3 shared frontend contract","target":"com.sun.source.util.M3AST","status":"implemented-compiler-api","target_rule":"Additive exported compiler SPI; not a rename of one of the distinct stored AST families"},
+    {"source":"compiler-side M3ASTPC reserved owner","target":"com.sun.tools.javac.m3.M3ASTPC","status":"implemented-compiler-owner","target_rule":"Task Context owns callbacks, source seals, loader and projections; no java.base runtime dependency"},
+    {"source":"com.synexia.mindex.MIndexAST","target":"jdk.internal.mindex.M3AST (reserved atom-facade counterpart)","status":"reserved-distinct-from-compiler-api","target_rule":"Existing com.synexia.m3index.M3AST wraps this lineage; do not equate it to indexstring documents"},
+    {"source":"com.synexia.indexstring.ast.MIndexASTParser","target":"M3ASTParser (prospective product counterpart)","status":"canonical-existing-unit-capture-qualified","target_rule":"Existing parser owner now accepts retained source and actual compiler unit; private optional bridge consumes it"},
+    {"source":"com.synexia.indexstring.ast.MIndexASTPartialCache","target":"M3ASTPartialCache (prospective product counterpart)","status":"canonical-owner-reused-through-bridge","target_rule":"Preserve lazy weighted LRU, isolated pools, load deduplication and explicit cache ownership"},
+    {"source":"com.synexia.indexstring.ast.MIndexASTTieredLoader","target":"M3ASTTieredLoader (prospective product counterpart)","status":"canonical-document-loader-qualified","target_rule":"Existing file/SQLite codec and replay; cache miss requires live compiler input in shared bridge"},
+    {"source":"com.synexia.indexstring.ast.MIndexASTWorkspaceCache","target":"M3ASTWorkspaceCache (prospective product counterpart)","status":"reserved","target_rule":"No claim that the workspace owner has been transplanted into java.base"},
+    {"source":"com.synexia.indexstring.file.MIndexFile","target":"M3File (prospective product counterpart)","status":"reserved-file-plane","target_rule":"Retained spelling/occurrence file plane remains distinct from the compiler decoded-character seal"},
+    {"source":"com.synexia.indexstring.file.MIndexFileSourceFacts","target":"M3FileSourceFacts (prospective product counterpart)","status":"reserved-file-plane","target_rule":"Raw bytes and coordinate mappings are not represented by the UTF-16 character hash"},
+    {"source":"OpenRewrite Java21 existing visitor","target":"org.m3jdk.tooling.rewrite.M3RewriteFrontend","status":"implemented-optional-converter","target_rule":"Version-matched same-loader conversion; guarded complete attribution and pre-lowering input; no new parser"}
+  ]
+}

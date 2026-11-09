@@ -1,0 +1,25 @@
+field	value
+issue	JDK-8359706
+title	VM.info and hs_err_pid Logs Now Report Current Open File Descriptors
+primary_donor_repository	openjdk/jdk21u-dev
+primary_donor_commit	3da873b1aa23c64e47a5da3352b7b48e8c2c74cd
+mainline_commit	b0831572e2cd9dbff9ee2abcdf81a493ddcecc7e
+repair_issue	JDK-8380236
+repair_commit	f696cb16462f0201a10540ca36049472a79eba94
+repair_mainline_commit	3a109f49feb19f313632be6a2aa24ba7d9b7269b
+target_count	8
+recipe	com.m3.rewrite.backport.M3Jdk8359706BackportRecipe
+recipe_state	CANDIDATE_MATERIALIZED_UNVERIFIED
+source_materialized	true
+current_tree_equivalent	false
+recipe_replay_source_delta	PENDING_JUNIT
+linux_build	PENDING_HOSTED_PROOF
+linux_jtreg	PENDING_HOSTED_PROOF
+macos_build	PENDING_HOSTED_PROOF
+vm_info_smoke	PENDING_HOSTED_PROOF
+fatal_error_smoke	PENDING_HOSTED_PROOF
+fixed_point	PENDING_HOSTED_PROOF
+promotion	NOT_AUTHORIZED
+next_action	RUN_RECIPE_LINUX_BUILD_JCMD_JTREG_MACOS_BUILD_FIXED_POINT
+proof_requested	2026-10-12
+proof_branch	m3/jdk8359706-jdk21u-backport-20261012

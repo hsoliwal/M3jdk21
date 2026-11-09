@@ -1,0 +1,6 @@
+LANE28_DIFFERENTIAL seed 1 steps 20000 comparisons 236130 mismatching_methods 0
+LANE28_DIFFERENTIAL seed 2 steps 20000 comparisons 236042 mismatching_methods 0
+LANE28_DIFFERENTIAL seed 3 steps 20000 comparisons 235967 mismatching_methods 0
+LANE28_DIFFERENTIAL seed 4 steps 20000 comparisons 236008 mismatching_methods 0
+LANE28_DIFFERENTIAL seed 5 steps 20000 comparisons 235919 mismatching_methods 0
+LANE28_DIFFERENTIAL seed 1 steps 20000 mutant(BitLane28 skips flip): mismatching_methods 11 (allocatedBlockCount, allocatedRegionCount, cardinality, ...)

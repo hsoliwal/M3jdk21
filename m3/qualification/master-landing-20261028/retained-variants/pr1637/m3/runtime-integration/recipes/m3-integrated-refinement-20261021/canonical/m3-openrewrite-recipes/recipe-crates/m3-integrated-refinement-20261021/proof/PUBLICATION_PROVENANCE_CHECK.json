@@ -1,0 +1,28 @@
+{
+  "schema": "M3_FOCUSED_PUBLICATION_PROVENANCE_CHECK/1",
+  "status": "FAIL",
+  "scope": "core",
+  "existing_validator": "scripts/legal/check_m3_provenance.py",
+  "validator_sha256": "55e8183c58e4bf3608355e650e3be18609feab70f7baa75c935716b396d24900",
+  "invocation": "Imported existing load_policy/load_ledger/validate_change on this exact additive file set; bounded hydration has no Git checkout for the owner CLI.",
+  "new_files": 1254,
+  "modified_append_owners": 2,
+  "new_provenance_rows": 1254,
+  "classifications": {
+    "FIRST_PARTY": 38,
+    "FIRST_PARTY_NO_HEADER": 67,
+    "UPSTREAM_MODIFIED": 17,
+    "PRESERVED_HISTORY": 498,
+    "GENERATED": 634
+  },
+  "prior_registry_bytes_retained": true,
+  "prior_ledger_bytes_retained": true,
+  "violations": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/provenance/ACTIONS_POLICY_READBACKS.json",
+      "code": "NONCOMMENTABLE_FIRST_PARTY",
+      "message": "new/non-commentable first-party path requires FIRST_PARTY_NO_HEADER provenance row"
+    }
+  ],
+  "limits": "Exact changed-file metadata/header gate only; this is not a legal opinion, license regrant, runtime test, whole-reactor or hosted CI result."
+}

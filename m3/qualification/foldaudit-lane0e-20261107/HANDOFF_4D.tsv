@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Rows handed to lane com-synexia-4d (src/java.base): the java.base halves whose lane-0e dependents are HOLD_DEP above. Lane 0e records them; it does not decide them.
+leaf	pr	owner_file	owner_state	lost_lines	missing_members	lane_0e_dependents	note
+L0006	1080	src/java.base/share/native/libjava/M3RegexDpPlan.c	ON_MASTER	400	batch_prepare_context,monitor,batch_free,batch_lock,batch_unlock,batch_publish,batch_release,batch_copy_longs,batch_copy_ints,batch_validate,batch_apply,batch_step	L0034,L0040,L0209,L0075	the libjava prepared-batch image; the test-support natives of L0034/L0209 bind into it
+L0007	1080	src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java	ON_MASTER	388	BatchBackend,BatchExecution,BatchLimits,defaults,prepareBatch,suffixPreimage,preimage,dotPreimage,requireEffect,BatchResult,rowCount,matches	L0040,L0075,L0071	the opt-in prepared batch API (#1080 body); 0 hits on master for every member
+L0052	1080	src/java.base/share/classes/java/lang/M3StringRegexDp.java	ON_MASTER	33	- (mandatory literal prefix/suffix boundary check through the rope CodeUnitCursor)	L0041,L0071,L0078,L0085	0 mandatory|affix mentions on master; the before/after harnesses of L0078/L0085 prove exactly this delta; master's M3StringRegexDp lacks canonicalize, rejectsByPrecompute and field m3 that the #1080 M3StringRegexDpTest reaches reflectively
+L0046	2182	src/java.base/share/classes/jdk/internal/math/M3FastDoubleMath.java	ON_MASTER	40	tryDecToDoubleWithFastAlgorithm	-	#2182 java.base half; lane 0e did not inspect
+L0047	2182	src/java.base/share/classes/jdk/internal/math/M3FftMultiplier.java	ON_MASTER	40	bitsPerFftPoint	-	#2182 java.base half; lane 0e did not inspect
+L0058	2182	src/java.base/share/classes/jdk/internal/math/M3FastFloatMath.java	ON_MASTER	20	-	-	#2182 java.base half; lane 0e did not inspect
+L0059	2182	src/java.base/share/classes/jdk/internal/math/M3AbstractNumberParser.java	ON_MASTER	14	-	-	#2182 java.base half; lane 0e did not inspect

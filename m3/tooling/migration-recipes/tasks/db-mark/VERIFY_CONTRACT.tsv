@@ -1,0 +1,7 @@
+gate	state	qualification
+diff_and_template_hashes	PASS	No production edits; unchanged method inventory plus1 replay test
+DB_runtime_and_coverage	PASS_AT_565bc02	Exact older-head61-test report; no current-head inference
+new_recipe_compile	PENDING	Actual hosted javac required
+new_focused_JUnit	PENDING	Actual11-case result required
+whole_recipe_module	FAILED_AT_565bc02	12 observed failures;11 outside marker repair
+whole_reactor_JDK	NOT_RUN	No inferred acceptance

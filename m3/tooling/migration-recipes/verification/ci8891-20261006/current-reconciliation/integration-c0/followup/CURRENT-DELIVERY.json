@@ -1,0 +1,120 @@
+{
+  "canonicalOutputPublication": false,
+  "custodyBoundary": "Absolute receipt paths identify original observations. Downloadable reconstruction uses PROJECT-READY.json and SOURCE-CLOSURE.json. External final manifests cover this envelope without a self-reference.",
+  "latestHeadIntegrationClaimed": false,
+  "mode": "TASK_AND_EVIDENCE_ONLY",
+  "package": {
+    "archiveIndex": {
+      "bytes": 187339,
+      "path": "bundle/BUNDLE.json",
+      "sha256": "694448087b8ff29a1fd389a23362adb972cb72254e17610c8389bac477fc5147"
+    },
+    "archiveOnlyProjectFiles": 2,
+    "execution": {
+      "bytes": 7311,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
+      "sha256": "17c938ff12d5a67e37de4aa369b8fac173c28f0125980caf2fd94fc6b9d6c72f"
+    },
+    "flatMirrorMavenReady": false,
+    "flatProjectFiles": 41,
+    "hermetic": false,
+    "logicalProjectFiles": 43,
+    "projectReady": {
+      "bytes": 28539,
+      "path": "PROJECT-READY.json",
+      "sha256": "01092fe7c042c08212643e7190a493443ed08addd8a2e0a3f29e87a76ce938df"
+    },
+    "readback": {
+      "bytes": 498306,
+      "path": "READBACK.json",
+      "sha256": "2b36b6e8cb9eacb964c4d1e6101e27c7104a11dbe5b3d73894b7654e03af3e38"
+    },
+    "selectedLogicalBodies": 1235,
+    "status": "PASS_SELECT_PACK_VERIFY_EXTRACT_FINISH"
+  },
+  "parentCheckpoint": "PARENT-CHECKPOINT.json",
+  "physicalSelection": {
+    "executionCohort": 23,
+    "explanatoryEnvelopes": [
+      "CURRENT-DELIVERY.json",
+      "CURRENT-DELIVERY.md",
+      "PARENT-CHECKPOINT.json"
+    ],
+    "originalSupplierDictionariesPreserved": true,
+    "packageCohort": 71,
+    "totalNewRows": 97
+  },
+  "preservedPairedFiles": 338,
+  "producer": {
+    "additions": 3,
+    "canonicalProductionApplied": false,
+    "families": 4,
+    "junit": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 10
+    },
+    "orderedSuccessfulGates": 4,
+    "output": {
+      "bytes": 64460,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/evidence/producer-v1/generated-candidate/OUTPUT.json",
+      "sha256": "3405781f7b0364d20069cff62f68ab95a5333b61f26b927b53158e45a0aeeb2e"
+    },
+    "replacements": 12,
+    "result": {
+      "bytes": 15115,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/evidence/producer-v1/RESULT.json",
+      "sha256": "7f381ac0f810aab4dcc7d46d8ced7eb327452852f83468b31a2763af56db6213"
+    },
+    "resultArchiveLogicalPath": "fc0/trials/producer-v1/RESULT.json",
+    "status": "PASS_FOCUSED_PRODUCER",
+    "targets": 15
+  },
+  "proofSourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "proofTargetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "receiving": {
+    "bridgeAndCliGroups": "NOT_EXECUTED",
+    "consumerQualified": false,
+    "counts": {
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "tests": 260
+    },
+    "failingMethods": [
+      "jdk.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.javaPostimagesAreFixedPointAndMissingOrWrongTreeRefuse"
+    ],
+    "fullOpenJdkBuildQualified": false,
+    "hostedWorkflowExecuted": false,
+    "laterPrimaryCommands": "NOT_EXECUTED",
+    "passingSuites": {
+      "TEST-jdk.m3.rewrite.M3A3LevenshteinEvidenceClosureRecipeTest.xml": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 2
+      },
+      "TEST-jdk.m3.rewrite.backport.ClosureRecipeTest.xml": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 3
+      },
+      "TEST-jdk.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipeTest.xml": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 5
+      }
+    },
+    "result": {
+      "bytes": 32991,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+      "sha256": "fcbf7e041a1465babc525f4a7c9743a5d4f57cb43a1c4bd065d3e90fbdcd1a51"
+    },
+    "resultArchiveLogicalPath": "sources/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+    "status": "PRIMARY_ONLY_STOP"
+  },
+  "schema": "m3.fc0.current-delivery/1"
+}

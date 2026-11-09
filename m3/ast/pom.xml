@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>com.m3</groupId>
+ <artifactId>m3-ast-levels-candidate</artifactId>
+ <version>0.1.0-SNAPSHOT</version>
+ <name>M3 AST L0-L5 receiver candidate</name>
+ <packaging>jar</packaging>
+ <properties>
+  <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: source/target instead of release (javac refuses an add-exports of a java.base package together with release) -->
+  <maven.compiler.source>21</maven.compiler.source>
+  <maven.compiler.target>21</maven.compiler.target>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ </properties>
+ <dependencies>
+  <dependency>
+   <groupId>org.junit.jupiter</groupId>
+   <artifactId>junit-jupiter</artifactId>
+   <version>5.10.2-m3-source-1</version>
+   <scope>test</scope>
+  </dependency>
+ </dependencies>
+ <build>
+  <plugins>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.13.0</version>
+    <configuration>
+     <source>21</source>
+     <target>21</target>
+     <proc>none</proc>
+     <compilerArgs>
+      <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: test M3SyntaxGrowthAgent reads jdk.internal.org.objectweb.asm (JDK-internal ASM; no external ASM, M3JDK 21 standalone) -->
+      <arg>--add-exports</arg>
+      <arg>java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED</arg>
+      <arg>-Xlint:all</arg>
+      <arg>-Werror</arg>
+     </compilerArgs>
+    </configuration>
+   </plugin>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.2.5</version>
+    <configuration>
+     <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ast: the same export at test runtime -->
+     <argLine>--add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED</argLine>
+    </configuration>
+   </plugin>
+  </plugins>
+ </build>
+</project>

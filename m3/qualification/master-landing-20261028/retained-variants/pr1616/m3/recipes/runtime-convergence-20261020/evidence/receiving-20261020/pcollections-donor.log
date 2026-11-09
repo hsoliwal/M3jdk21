@@ -1,0 +1,71 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< org.pcollections:pcollections >--------------------
+[INFO] Building PCollections exact source pin for M3 5.0.0-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ pcollections ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ pcollections ---
+[INFO] Copying 2 resources from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ pcollections ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 34 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ pcollections ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/M3JDK21/m3/vendor/third_party/pcollections/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ pcollections ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 15 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ pcollections ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.pcollections.tests.TreePSetTest
+[INFO] Tests run: 49, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.162 s -- in org.pcollections.tests.TreePSetTest
+[INFO] Running org.pcollections.tests.OrderedPSetTest
+[INFO] Tests run: 98, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 s -- in org.pcollections.tests.OrderedPSetTest
+[INFO] Running org.pcollections.tests.TreePVectorTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.747 s -- in org.pcollections.tests.TreePVectorTest
+[INFO] Running org.pcollections.tests.TreePSetTest
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.150 s -- in org.pcollections.tests.TreePSetTest
+[INFO] Running org.pcollections.tests.ConsPStackTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.998 s -- in org.pcollections.tests.ConsPStackTest
+[INFO] Running org.pcollections.tests.UtilityTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in org.pcollections.tests.UtilityTest
+[INFO] Running org.pcollections.tests.SerializationTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.pcollections.tests.SerializationTest
+[INFO] Running org.pcollections.tests.OrderedPMapTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.208 s -- in org.pcollections.tests.OrderedPMapTest
+[INFO] Running org.pcollections.tests.OrderedPSetTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.072 s -- in org.pcollections.tests.OrderedPSetTest
+[INFO] Running org.pcollections.tests.TreePMapTest
+[INFO] Tests run: 33, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.110 s -- in org.pcollections.tests.TreePMapTest
+[INFO] Running org.pcollections.tests.IntTreePMapTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.634 s -- in org.pcollections.tests.IntTreePMapTest
+[INFO] Running org.pcollections.tests.HashPMapTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.171 s -- in org.pcollections.tests.HashPMapTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 264, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ pcollections ---
+[INFO] Building jar: /workspace/scratch/53bcd62c244c/M3JDK21/m3/vendor/third_party/pcollections/target/pcollections-5.0.0-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ pcollections ---
+[INFO] Installing /workspace/scratch/53bcd62c244c/M3JDK21/m3/vendor/third_party/pcollections/pom.xml to /tmp/m3jdk21-toolchain-20261020/m2/org/pcollections/pcollections/5.0.0-m3-source-1/pcollections-5.0.0-m3-source-1.pom
+[INFO] Installing /workspace/scratch/53bcd62c244c/M3JDK21/m3/vendor/third_party/pcollections/target/pcollections-5.0.0-m3-source-1.jar to /tmp/m3jdk21-toolchain-20261020/m2/org/pcollections/pcollections/5.0.0-m3-source-1/pcollections-5.0.0-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.065 s
+[INFO] Finished at: 2026-10-20T15:08:15+01:00
+[INFO] ------------------------------------------------------------------------

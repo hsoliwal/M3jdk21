@@ -1,0 +1,25 @@
+path	evaluatedResponsibility	candidateDecision
+src/java.base/share/classes/java/lang/M3String.java	Canonical range, composition, operations, streams and logical UTF-16 cursor	Changed existing cursor and tuple equality only; new continuation test exercises complete clipping, reverse/random seeks, seam surrogates and owner-stack clearing
+src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java	Public String dispatch into canonical operations	Changed tuple natural-order loop only; exact char difference and prefix-length result retained; existing same-coordinate equality/order gate retained
+src/java.base/share/classes/java/lang/M3StringOwner.java	Owner metadata, exact/full and bounded range facts	Unchanged; no new unbounded owner cache or altered publication/lifetime
+src/java.base/share/classes/java/lang/M3StringImmediate.java	Small scalar packed payload	Unchanged; existing immediate equality before cursor decision remains authoritative
+src/java.base/share/classes/java/lang/M3StringAtom.java	Local/mapped immutable scalar payload, native reads and copying	Unchanged; reader calls owner methods and keeps owning Java references, preserving fences
+src/java.base/share/classes/java/lang/M3StringTuple.java	Persistent concatenation, lengths, height, facts and scalar access	Unchanged retained representation; candidate avoids repeated tuple descent during forward scans
+src/java.base/share/classes/java/lang/M3StringPool.java	Weak canonicalization, budgeted admission, balanced concat, existing leaf cursor	Reused algorithm owner, not replaced; arrays carry owner/range handles rather than new entry objects
+src/java.base/share/classes/java/lang/M3StringFacts.java	Exact composable summaries with UTF-16 boundaries	Unchanged; hash and surrogate seam contracts remain covered by existing facts tests
+src/java.base/share/classes/java/lang/M3StringRepresentationPlan.java	Range/run/bitmap selection geometry	Unchanged; selection thresholds are distinct from cursor and tuple balancing
+src/java.base/share/classes/java/lang/M3StringProjection.java	Immutable source-coordinate selection view	Unchanged; projected geometry, nested selections and rank/select require their existing dedicated test, not inferred from tuple cursor proof
+src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java	Bounded exact literal search plans and trigram negative gates	Existing cursor call sites inherit continuation; KMP backtracking and reverse plans require arbitrary/reverse seek correctness
+src/java.base/share/classes/java/lang/M3StringAffixPrecompute.java	Bounded prefix/suffix summaries and exact verification	Unchanged; no speculative affix cursor conversion before measured benefit
+src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java	Range/position operation metadata	Unchanged; do not add a universal index to each owner
+src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java	Code-point rank and surrogate-aware geometry	Existing cursor traversal inherits change; UTF-16 unit positions remain distinct from code-point count
+src/java.base/share/classes/java/lang/M3StringRegexDp.java	Admitted exact regex DP evaluation	Existing cursor use inherits change; parsing/admission/observability guards are unchanged
+src/java.base/share/classes/java/lang/M3StringRegexRowPrecompute.java	Derived regex row reuse	Unchanged; row ownership and bounded budgets stay operation-specific
+src/java.base/share/classes/java/lang/M3StringBuilderLane.java	Mutable-builder immutable-piece lane, 64-unit lift and pin-ratio threshold	Unchanged; parallel piece/coordinate arrays compose through existing pool; no premature flattening added
+src/java.base/share/classes/java/lang/AbstractStringBuilder.java	Append/copy/mutation/capacity boundaries and builder lane	Unchanged; mutable source synchronization, callback order and detachment cannot be bypassed by immutable String shortcuts
+src/java.base/share/classes/java/lang/String.java	Public equality/hash/ordering/search, ingress, streams and exported representations	Already routes equals/hashCode/compareTo to existing owners; no public method, ABI, String identity or hash behavior changed
+src/java.base/share/classes/java/lang/StringConcatHelper.java	Concatenation converted pieces and canonical append	Unchanged; reference concatenation supplies the tuple workload without another storage layer
+src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java	Invokedynamic concat and stringifier invocation	Unchanged; user conversions/effects remain in existing order
+src/java.base/share/classes/java/lang/System.java	Post-bootstrap activation and JavaLangAccess prepared trigram bridge	Unchanged; runtime activation and fallback remain under current experimental gate
+src/java.base/share/classes/java/util/regex/M3PatternQuery.java	Conservative query derivation from JDK compiled nodes, bounded Boolean subset	Unchanged; no alternate parser and no replacement for Matcher observable semantics
+src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java	Primitive displacement/row index for immutable lexicon	Unchanged; exact collision check remains necessary

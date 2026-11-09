@@ -1,0 +1,3 @@
+PASS M3LongBitmapFilterPlanSelfTest checks=637172 native=true
+
+EXIT=0

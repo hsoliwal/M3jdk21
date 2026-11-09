@@ -1,0 +1,2 @@
+Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData
+ModelSourceProbe PASS: real token/sentence model train/serialize/reload; immutable source offsets and probability parity

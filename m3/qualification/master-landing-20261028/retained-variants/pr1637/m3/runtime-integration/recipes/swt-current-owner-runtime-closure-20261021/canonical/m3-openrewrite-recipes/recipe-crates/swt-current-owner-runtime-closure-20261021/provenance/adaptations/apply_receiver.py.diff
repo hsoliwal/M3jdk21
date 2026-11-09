@@ -1,0 +1,19 @@
+--- qualified-sdk003/apply_receiver.py
++++ swt-pom-correction/apply_receiver.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026-10-21 from qualified integrated SDK003 for one SWT proof-POM correction.
+ """Verify and install bytes emitted by the qualified canonical OpenRewrite recipe.
+ 
+ Adapted 2026-10-21 from PR12605, preserving its proof and receiver guards.
+@@ -62,7 +63,7 @@
+         raise ValueError('recipe proof did not pass')
+     checks = {
+         'phases.tsv': crate / 'phases.tsv', 'pom.xml': crate / 'pom.xml',
+-        'test.java': crate / 'src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java',
++        'test.java': crate / 'src/test/java/com/synexia/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java',
+         'named_yaml_sha256': proof_dir / 'named-recipe.yml',
+         'dependency_probe_sha256': crate / 'attribution/DependencyCustody.java',
+         'dependency_expectations_sha256': crate / 'attribution/expected-methods.txt',

@@ -1,0 +1,31 @@
+{
+  "immutable_V2_body_sha256": "875c04a6696864fc54e582d11cd0261cc91a0af669aa64f4506929ce1114d7b9",
+  "V3_source_receipts": [
+    {
+      "target": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3BidiMap.java",
+      "before": "ABSENT",
+      "sha256": "725bfaae37358339189eaeaf9867afe1da3bff62b7708950f1a869f54da0e52b",
+      "bytes": 17418,
+      "template": "M3BidiMap.java.txt"
+    },
+    {
+      "target": "m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3BidiMapSelfTest.java",
+      "before": "ABSENT",
+      "sha256": "1c171bc2d22b5371290472feb78fe074a67f016e46c3bc6f6c4d083b7f357576",
+      "bytes": 35742,
+      "template": "M3BidiMapSelfTest.java.txt"
+    }
+  ],
+  "body_proof": "bidi-owned-04",
+  "traversal_proof": "bidi-view-03",
+  "replacement_proof": "bidi-value-04",
+  "original_review_discriminator_failure": "bidi-value-01",
+  "review_findings": [
+    "delivered-value iterator protocol",
+    "shared owner CI trigger"
+  ],
+  "status": "V3_RUNTIME_AND_RECIPE_QUALIFIED",
+  "recipe_proof": "bidi-recipe-04",
+  "recipe_test_count": 10,
+  "review_finding": "clear delivered-value scalar after successful removal; no GC measurement claimed"
+}

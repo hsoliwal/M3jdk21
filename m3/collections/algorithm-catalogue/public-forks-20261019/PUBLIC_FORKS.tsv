@@ -1,0 +1,41 @@
+repository	upstream_parent	source_root	category	source_audit_level	default_branch	observed_default_commit	repository_license_index	assessment
+hsoliwal/ChromeLLM	xszwow/Chrome2api	xszwow/Chrome2api	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	MIT	Metadata triage only; no collection donor selected in this pass
+hsoliwal/codexpro	rebel0789/codexpro	rebel0789/codexpro	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	MIT	Metadata triage only; no collection donor selected in this pass
+hsoliwal/commons-collections	apache/commons-collections	apache/commons-collections	CORE_COLLECTIONS	TARGETED_SOURCE	master	13586e6bbbfed0f946c03ddaac62c8a1853ce12b	Apache-2.0	Targeted source audit: indexed TreeList and node-backed hash base
+hsoliwal/dawn	google/dawn	google/dawn	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	NOASSERTION	Metadata triage only; no collection donor selected in this pass
+hsoliwal/eclipse-collections	eclipse-collections/eclipse-collections	eclipse-collections/eclipse-collections	CORE_COLLECTIONS	TARGETED_SOURCE	master	489c8e63b973aaf52eb87f08f5908a152a4b8f22	UNDETECTED	Targeted source audit: UnifiedMap/FastList arrays, TreeSortedMap still JDK-backed
+hsoliwal/eclipse.platform	eclipse-platform/eclipse.platform	eclipse-platform/eclipse.platform	UI_PLATFORM	METADATA_ONLY	master	NOT_PINNED	EPL-2.0	Metadata triage only; platform utilities, not collection framework
+hsoliwal/eclipse.platform.releng.aggregator	eclipse-platform/eclipse.platform.releng.aggregator	eclipse-platform/eclipse.platform.releng.aggregator	BUILD_AGGREGATOR	METADATA_ONLY	master	NOT_PINNED	EPL-2.0	Metadata triage only; build aggregation, not a collection implementation
+hsoliwal/eclipse.platform.swt	eclipse-platform/eclipse.platform.swt	eclipse-platform/eclipse.platform.swt	UI_NATIVE	METADATA_ONLY	master	4c4e31047ae2ff62556b3e2c6cd4d8c2b330205f	EPL-2.0	Metadata triage only; SWT/native utility candidate
+hsoliwal/eclipse.platform.ui	eclipse-platform/eclipse.platform.ui	eclipse-platform/eclipse.platform.ui	UI_PLATFORM	METADATA_ONLY	master	ab142a3cb11a88192a4f9c86950436ee1ddb56a4	EPL-2.0	Metadata triage only; JFace/viewer utility candidate
+hsoliwal/gef-classic	eclipse-gef/gef-classic	eclipse-gef/gef-classic	UI_PLATFORM	METADATA_ONLY	master	NOT_PINNED	EPL-2.0	Metadata triage only; graph/viewer utilities
+hsoliwal/gitea	go-gitea/gitea	go-gitea/gitea	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	MIT	Metadata triage only; no collection donor selected in this pass
+hsoliwal/gradle	gradle/gradle	gradle/gradle	BUILD_TOOLING	METADATA_ONLY	master	NOT_PINNED	Apache-2.0	Metadata triage only; build orchestration
+hsoliwal/guava	google/guava	google/guava	CORE_COLLECTIONS	TARGETED_SOURCE	master	120424a121f1cbda05d2fe0f041779b2344d8ccb	Apache-2.0	Targeted source audit: arrays plus remaining collision fallbacks
+hsoliwal/initiative31-community	swt-initiative31/.github	swt-initiative31/.github	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	EPL-2.0	Metadata triage only; no collection donor selected in this pass
+hsoliwal/initiative31-documents	swt-initiative31/documents	swt-initiative31/documents	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	EPL-2.0	Metadata triage only; no collection donor selected in this pass
+hsoliwal/initiative31-eclipse.pde	swt-initiative31/eclipse.pde	eclipse-pde/eclipse.pde	OTHER_DOMAIN	METADATA_ONLY	master	NOT_PINNED	EPL-2.0	Metadata triage only; no collection donor selected in this pass
+hsoliwal/initiative31-prototype-skiavcl-libreoffice	swt-initiative31/prototype-skiavcl-libreoffice	LibreOffice/core	OTHER_DOMAIN	METADATA_ONLY	master	NOT_PINNED	GPL-3.0	Metadata triage only; no collection donor selected in this pass
+hsoliwal/jackson	FasterXML/jackson	FasterXML/jackson	PROJECT_PORTAL	METADATA_ONLY	main	NOT_PINNED	UNDETECTED	Metadata triage only; Jackson portal
+hsoliwal/jackson-annotations	FasterXML/jackson-annotations	FasterXML/jackson-annotations	SERIALIZATION_SUPPORT	METADATA_ONLY	2.x	NOT_PINNED	Apache-2.0	Metadata triage only; annotations
+hsoliwal/jackson-core	FasterXML/jackson-core	FasterXML/jackson-core	SERIALIZATION_SUPPORT	METADATA_ONLY	3.x	NOT_PINNED	Apache-2.0	Metadata triage only; streaming/shared abstractions
+hsoliwal/jackson-databind	FasterXML/jackson-databind	FasterXML/jackson-databind	SERIALIZATION_SUPPORT	METADATA_ONLY	3.x	NOT_PINNED	Apache-2.0	Metadata triage only; general binding, not storage kernel
+hsoliwal/jackson-datatypes-collections	FasterXML/jackson-datatypes-collections	FasterXML/jackson-datatypes-collections	COLLECTION_SERIALIZATION	TARGETED_SOURCE	3.x	5631f637e626c033319a1e5ac11ecde8db5d319e	Apache-2.0	Targeted source audit: collection serializers/deserializers, not kernels
+hsoliwal/lucene	apache/lucene	apache/lucene	SPECIALIZED_ARRAYS_BITS	TARGETED_SOURCE	main	ec6ecef838e3c1f93ce19d1c353f1e942efab7b4	Apache-2.0	Targeted source audit: CharArrayMap/FixedBitSet
+hsoliwal/M3jdk21	openjdk/jdk21	openjdk/jdk21	CORE_COLLECTIONS	TARGETED_SOURCE	master	a3e88976ee8664d1ef5d0cade96aec1206b2133d	GPL-2.0	JDK implementation destination; mixed per-file licenses; current source audit elsewhere
+hsoliwal/maven	apache/maven	apache/maven	BUILD_TOOLING	METADATA_ONLY	master	NOT_PINNED	Apache-2.0	Metadata triage only; build orchestration
+hsoliwal/nebula	EclipseNebula/nebula	EclipseNebula/nebula	UI_PLATFORM	METADATA_ONLY	master	8dbde2bafb7618f5f2cf7adf805a3b1266f1cf3f	EPL-2.0	Metadata triage only; widget utility candidate
+hsoliwal/opennlp	apache/opennlp	apache/opennlp	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	Apache-2.0	Metadata triage only; no collection donor selected in this pass
+hsoliwal/opennlp-addons	apache/opennlp-addons	apache/opennlp-addons	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	Apache-2.0	Metadata triage only; no collection donor selected in this pass
+hsoliwal/opennlp-models	apache/opennlp-models	apache/opennlp-models	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	Apache-2.0	Metadata triage only; no collection donor selected in this pass
+hsoliwal/opennlp-sandbox	apache/opennlp-sandbox	apache/opennlp-sandbox	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	Apache-2.0	Metadata triage only; no collection donor selected in this pass
+hsoliwal/providers	api-evangelist/providers	api-evangelist/providers	OTHER_DOMAIN	METADATA_ONLY	main	NOT_PINNED	UNDETECTED	Metadata triage only; no collection donor selected in this pass
+hsoliwal/rewrite	openrewrite/rewrite	openrewrite/rewrite	TRANSFORMATION_TOOLING	METADATA_ONLY	main	c2ba123a5f8d97bacf557525a6c93789a0c35751	Apache-2.0	Metadata triage only; contract-preserving source recipe tooling
+hsoliwal/skija	JetBrains/skija	JetBrains/skija	NATIVE_GRAPHICS	METADATA_ONLY	master	8182a1ce85db37be018b419e196bb8745049928b	Apache-2.0	Metadata triage only; Java/native binding patterns
+hsoliwal/solr	apache/solr	apache/solr	SPECIALIZED_SEARCH	METADATA_ONLY	main	714d6ceff852e6dc743ef51ae094e4eaf8f3b3f9	Apache-2.0	Metadata triage only; search integration candidate, not yet source-audited here
+hsoliwal/spatial4j	locationtech/spatial4j	locationtech/spatial4j	SPECIALIZED_GEOMETRY	METADATA_ONLY	master	5c9e2ef8977859863eef275993407ca7d4d83e54	UNDETECTED	Metadata triage only; geometry candidate, license not detected by API
+hsoliwal/spring-framework	spring-projects/spring-framework	spring-projects/spring-framework	CORE_COLLECTIONS	TARGETED_SOURCE	main	d8e77dbd0160231dd231496a49a5d53752187013	Apache-2.0	Targeted source audit: collection contracts, backing maps still JDK nodes
+hsoliwal/sqlite	sqlite/sqlite	sqlite/sqlite	OTHER_DOMAIN	METADATA_ONLY	master	NOT_PINNED	NOASSERTION	Metadata triage only; no collection donor selected in this pass
+hsoliwal/structured-text-tools	dbohdan/structured-text-tools	dbohdan/structured-text-tools	OTHER_DOMAIN	METADATA_ONLY	master	NOT_PINNED	UNDETECTED	Metadata triage only; no collection donor selected in this pass
+hsoliwal/swift-collections	apple/swift-collections	apple/swift-collections	CROSS_LANGUAGE_COLLECTIONS	TARGETED_SOURCE	main	b905c889ff75059b8ef0bde480fe55948147b1e6	Apache-2.0	Targeted source audit: bitmap rank/select and deque offsets; requires port
+hsoliwal/synexia-tornadovm	beehive-lab/TornadoVM	beehive-lab/TornadoVM	ACCELERATION_TOOLING	METADATA_ONLY	master	cc79842887028af98b468efaf7f22be129dc055c	Apache-2.0	Metadata triage only; possible Java/native execution lane

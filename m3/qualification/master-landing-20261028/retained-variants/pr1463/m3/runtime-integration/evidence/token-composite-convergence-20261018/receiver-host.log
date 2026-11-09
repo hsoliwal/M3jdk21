@@ -1,0 +1,51 @@
+SYNEXIA_FULL_BORROW_RECEIVER_PASS families=32 source=296323958b1019edd59b60b9c05cb148d024cfe5 state=SOURCE_PIN_ONLY mixed_review_rows=4 dag=acyclic phases=STRING>ARRAYS>COLLECTIONS>AST_COMPILER>REMAINING_FAMILIES completion=false historical_mapping_evidence=preserved_not_accepted
+src/java.base/share/classes/jdk/internal/mindex/M3RX7.java: OK
+src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java: OK
+test/jdk/java/util/regex/M3RX7Test.java: OK
+m3/docs/name-mapping.d/m3-regex-v7-dfa.json: OK
+M3RX7Test candidate_oracle_checks=2165 PASS
+M3RX7Test candidate_oracle_checks=2165 PASS
+M3RX7_RECEIVER_STANDALONE_PASS; host component only; full source-built M3JDK21 jtreg/HotSpot/JNI/GC NOT_RUN
+src/java.base/share/classes/jdk/internal/mindex/M3RX7.java: OK
+src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java: OK
+src/java.base/share/classes/jdk/internal/mindex/M3RX7Image.java: OK
+src/java.base/share/classes/jdk/internal/mindex/M3RX7Codec.java: OK
+test/jdk/java/util/regex/M3RX7CodecTest.java: OK
+m3/docs/name-mapping.d/m3-regex-v7-image-codec.json: OK
+M3RX7CodecTest checks=97 PASS
+M3RX7CodecTest checks=97 PASS
+M3RX7_IMAGE_CODEC_STANDALONE_PASS; host component only; full source-built M3JDK21 jtreg/HotSpot/JNI/GC NOT_RUN
+javac 21.0.12.1
+cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Java_jdk_internal_mindex_M3RX7Transitions_compose0
+Java_jdk_internal_mindex_M3RX7Transitions_repeat0
+Java_jdk_internal_mindex_M3RX7_buildPacked0
+RX7 transfer contract checks=1023067 tokenRows=35176 independentNfaSequences=18315
+RX7 Java default checks=2052 missingSymbols=2 states=1024
+RX7 native checks=9980517 directCalls=2577 outputRows=4979318 directCallNanos=268781157 (elapsed includes reflection; not a benchmark)
+PASS: host Java21 transfer semantics, Java default without new JNI symbols, and direct JNI boundary parity.
+Scope: component qualification; source-built M3JDK21 libjava/jtreg and other platforms require their own gates.
+M3RX7_LEXICAL_CONTRACT_PASS checks=51286
+M3RX7_LEXICAL_CONTRACT_PASS checks=51286
+M3RX7TokenIndexContract PASS checks=36020
+M3RX7TokenIndexContract PASS checks=36020
+ENTRY_TRACE query=aaa events=[predicate:a, query-key, predicate:bb, predicate:aaa, query-key, query-value]
+ENTRY_TRACE query=zz events=[predicate:a, query-key, predicate:bb, predicate:aaa, query-key]
+ENTRY_TRACE query=null events=[predicate:a, query-key, predicate:bb, predicate:aaa, query-key]
+WORK filtered-null-seek comparisons=29 predicateEvaluations=2 ownerSize=4097
+PASS M3_FILTERED_SORTED_EDGES checks=785219
+PASS M3_FILTERED_VIEWS checks=123500 randomized=750
+PASS M3_MUTABLE_FILTERED_VIEWS assertions=288223
+PASS M3_BOUNDED_FILTERED_NAVIGATION checks=90431
+MEASURE setComparisons bounded=23 repeated=51197 mapComparisons bounded=12 repeated=51197
+PASS M3FilteredNavigableFacadeSelfTest checks=117773 randomized=750
+PASS M3FilteredNavigableSetRangeContract checks=110325
+M3_STORED_REPRESENTATIVE_CONTRACT_PASS assertions=67
+M3_RX7_CONVERGENCE_HOST_PASS; full source-built SDK/reactor/M3JDK21/jtreg/JIT/GC/CDS/platform gates NOT_RUN
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)

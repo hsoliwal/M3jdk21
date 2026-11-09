@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "paths": 144,
+  "scope": "explicit continuation files in bounded canonical assembly; not full git diff or CI",
+  "violations": []
+}

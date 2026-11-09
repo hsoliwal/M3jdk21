@@ -1,0 +1,93 @@
+#
+# Copyright (c) 2023, Oracle and/or its affiliates. All rights reserved.
+# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+#
+# This code is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 only, as
+# published by the Free Software Foundation.  Oracle designates this
+# particular file as subject to the "Classpath" exception as provided
+# by Oracle in the LICENSE file that accompanied this code.
+#
+# This code is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# version 2 for more details (a copy is included in the LICENSE file that
+# accompanied this code).
+#
+# You should have received a copy of the GNU General Public License version
+# 2 along with this work; if not, write to the Free Software Foundation,
+# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+# or visit www.oracle.com if you need additional information or have any
+# questions.
+#
+
+# Modified 2026: acquire the exact reviewed portable toolchain without an
+# implicit build JDK, mutable source checkout or unchecked cached installation.
+# The configuration and adjacent manifests pin the complete maintainer image.
+name: 'Get JTReg'
+description: 'Install the checksum-pinned portable JTReg toolchain'
+outputs:
+  path:
+    description: 'Path to the installed JTReg'
+    value: ${{ steps.path-name.outputs.path }}
+
+runs:
+  using: composite
+  steps:
+    - name: 'Get JTReg archive URL configuration'
+      id: url
+      uses: ./.github/actions/config
+      with:
+        var: JTREG_ARCHIVE_URL
+
+    - name: 'Get JTReg archive checksum configuration'
+      id: sha256
+      uses: ./.github/actions/config
+      with:
+        var: JTREG_ARCHIVE_SHA256
+
+    - name: 'Download exact JTReg archive'
+      shell: bash
+      env:
+        JTREG_ARCHIVE_URL: ${{ steps.url.outputs.value }}
+      run: |
+        set -euo pipefail
+        if [[ -e jtreg/installed || -L jtreg/installed ]]; then
+          echo 'JTReg destination must start absent' >&2
+          exit 1
+        fi
+        mkdir -p jtreg
+        curl --fail --location --proto '=https' --tlsv1.2 \
+          --connect-timeout 15 --max-time 180 --max-filesize 16777216 --retry 2 \
+          --output jtreg/toolchain.zip "$JTREG_ARCHIVE_URL"
+
+    - name: 'Verify and install exact JTReg image'
+      id: path-name
+      shell: bash
+      env:
+        JTREG_ARCHIVE_SHA256: ${{ steps.sha256.outputs.value }}
+      run: |
+        set -euo pipefail
+        if [[ -e jtreg/installed || -L jtreg/installed ]]; then
+          echo 'JTReg destination must start absent' >&2
+          exit 1
+        fi
+        # macOS ships shasum; the Linux and Windows bash environments use sha256sum.
+        if command -v sha256sum >/dev/null 2>&1; then
+          checksum() { sha256sum "$@"; }
+        else
+          checksum() { shasum -a 256 "$@"; }
+        fi
+        printf '%s  %s\n' "$JTREG_ARCHIVE_SHA256" jtreg/toolchain.zip | checksum -c -
+        unzip -Z1 jtreg/toolchain.zip | LC_ALL=C sort > jtreg/archive.paths
+        cmp .github/actions/get-jtreg/archive.paths jtreg/archive.paths
+        staging="$(mktemp -d jtreg/staging.XXXXXX)"
+        trap 'rm -rf "$staging"' EXIT
+        unzip -q jtreg/toolchain.zip -d "$staging"
+        manifest="$(pwd)/.github/actions/get-jtreg/toolchain.sha256"
+        (cd "$staging/jtreg" && checksum -c "$manifest")
+        chmod +x "$staging/jtreg/bin/jtreg" "$staging/jtreg/bin/jtdiff"
+        mv "$staging/jtreg" jtreg/installed
+        echo 'path=jtreg/installed' >> "$GITHUB_OUTPUT"

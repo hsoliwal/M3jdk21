@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+jdk.m3.parallel.testing.TestProviders$Faulty
+jdk.m3.parallel.testing.TestProviders$Absent
+jdk.m3.parallel.testing.TestProviders$Throwing
+jdk.m3.parallel.testing.TestProviders$BadId
+jdk.m3.parallel.testing.TestProviders$Reserved
+jdk.m3.parallel.testing.TestProviders$DuplicateA
+jdk.m3.parallel.testing.TestProviders$DuplicateB
+jdk.m3.parallel.testing.NoSuchProvider

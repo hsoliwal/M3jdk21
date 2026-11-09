@@ -1,0 +1,89 @@
+{
+  "compositionOrdersSHA256": "a69e456607774bc0003478aeacd6c31aa66ae8f456bd6e1989b78c03114f3324",
+  "compositionYamlSHA256": "295f93ed1440b39c8aa2182485c2e2d1f4c9932dfe41a9c752387ef14236b835",
+  "counts": {
+    "additions": 0,
+    "families": 1,
+    "initialRefusals": 27,
+    "mixedStates": 32,
+    "orderedCompositions": 2,
+    "postScanRefusals": 10,
+    "pureAdditionInputs": 0,
+    "replacements": 5,
+    "targets": 5
+  },
+  "families": [
+    {
+      "crate": "ph0-phc",
+      "id": "Phc",
+      "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/ph0-phc/manifest.tsv",
+      "manifestSHA256": "31a4c764cd7dbb835834de27a70e925b6c567d36502303041f5236b8f89a2971",
+      "namedRecipe": "jdk.internal.m3.Ph0Phc",
+      "targets": [
+        {
+          "afterBytes": 79664,
+          "afterSHA256": "ed524e76758081208a939f619d3bab55abf9ed0c95c053ab2957211d45718cab",
+          "beforeBytes": 79672,
+          "beforeSHA256": "e90a850d9a8946ad3c741b99a81bc823a65415110ec32aabffd25da15f530e59",
+          "operation": "REPLACE",
+          "path": "m3/tooling/image-gates/current-c0.json"
+        },
+        {
+          "afterBytes": 235249,
+          "afterSHA256": "4b739b3bf6efa6dd47b2bb3fb2fa19daa399967d2f037519884cc69d7da8f33d",
+          "beforeBytes": 235261,
+          "beforeSHA256": "68882a345277e74065e1f31fc85f07444eb7e3164a44a4226b629c80bfcb9843",
+          "operation": "REPLACE",
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/10-Pattern.java.txt"
+        },
+        {
+          "afterBytes": 3300,
+          "afterSHA256": "523707713724ab3beacca8a7b9f38659a61c83bdd3940929e97487347e438c36",
+          "beforeBytes": 3300,
+          "beforeSHA256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639",
+          "operation": "REPLACE",
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
+        },
+        {
+          "afterBytes": 18329,
+          "afterSHA256": "a212278c12aa826812457dec6351ef36807523916224855c35d684373801a338",
+          "beforeBytes": 18329,
+          "beforeSHA256": "c19c04e609ba798652ac302a61b2579a87362f1f9fe6e2d3817820e44e94dba3",
+          "operation": "REPLACE",
+          "path": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv"
+        },
+        {
+          "afterBytes": 235249,
+          "afterSHA256": "4b739b3bf6efa6dd47b2bb3fb2fa19daa399967d2f037519884cc69d7da8f33d",
+          "beforeBytes": 235261,
+          "beforeSHA256": "68882a345277e74065e1f31fc85f07444eb7e3164a44a4226b629c80bfcb9843",
+          "operation": "REPLACE",
+          "path": "src/java.base/share/classes/java/util/regex/Pattern.java"
+        }
+      ],
+      "yamlPath": "META-INF/rewrite/ph0-phc.yml",
+      "yamlSHA256": "b7ab2d22fe5b589410d5e145796e6072339780d09fe182ef824935db4d619f33"
+    }
+  ],
+  "orders": [
+    {
+      "families": [
+        "Phc"
+      ],
+      "id": "Forward",
+      "recipe": "jdk.internal.m3.Ph0Forward"
+    },
+    {
+      "families": [
+        "Phc"
+      ],
+      "id": "Reverse",
+      "recipe": "jdk.internal.m3.Ph0Reverse"
+    }
+  ],
+  "ownerSHA256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
+  "schema": "m3.ph0.qualification/1",
+  "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "targetTree": "491bbd80a51483d0710fc12c1bad3a037b385ba0"
+}

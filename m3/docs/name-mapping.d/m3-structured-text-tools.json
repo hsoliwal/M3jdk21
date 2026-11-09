@@ -1,0 +1,23 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Additive optional text-tool receiver; existing src/** JDK String/Pattern/JNI contracts and old text-tools receipt remain unchanged.",
+  "mappings": [
+    {
+      "source": "hsoliwal/com.synexia/synexia-unix4j-m3 :: JsonLinesTools, StructuredTextTools, StructuredCli",
+      "source_commit": "1b27191590833b970cd89e5827efabbcdcb0203c",
+      "target": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured : module jdk.m3.structured",
+      "status": "additive opt-in Java21 module; isolated compile/JMOD/jlink/pass; full M3JDK product qualification pending",
+      "recipe": "com.synexia.m3.StructuredTextJmods (M3HashPinnedJavaSnapshotRecipe); target receiving via existing OpenRewrite ChangePackage/M3ModuleDescriptorRecipe. Recipe and product gates still pending.",
+      "target_rule": "No new String owner; consume jdk.m3.text.TextFrame/Limits and public String whose representation is M3JDK21-owned. Name/package adoption is SDK-owned and never embeds a Synexia runtime library.",
+      "category": "CSV/TSV decoded records and projection; RFC6901 JSON Lines extraction; strict INI/env; bounded pipeline CLI",
+      "license": "Apache-2.0 first-party source with attribution; no third-party catalogue code copied",
+      "gates": "donor source hash + recipe refusal/fixed point + real Maven/JUnit + target JMOD pack/jlink + runtime/JNI + pressure/CPU evidence"
+    },
+    {
+      "source": "hsoliwal/structured-text-tools catalogue of third-party tools",
+      "target": "Candidate inventory only",
+      "status": "do not claim whole-catalogue implementation",
+      "target_rule": "External tools (YAML, TOML, XML, SQL, jq, etc.) require individual implementation/compatibility/license review before admission"
+    }
+  ]
+}

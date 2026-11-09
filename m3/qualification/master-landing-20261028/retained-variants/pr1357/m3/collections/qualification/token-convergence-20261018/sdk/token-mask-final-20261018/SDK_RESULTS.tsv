@@ -1,0 +1,3 @@
+# OpenRewrite SDK Results; no template-copy materialization
+src/java.base/share/classes/jdk/internal/mindex/M3RX7.java	5b80470da2c54afff2e9222ea77edcf4b0a7d494cfdfab2fa9012992db92dd5b	2ca4aaa848ecc56b5844e75dabe363fbd8fe159f79420c20e219c856697d859e
+test/jdk/jdk/internal/mindex/M3RX7BoundaryContract.java	ABSENT	dacafd8a750c6e820cd61eed1ce2585c0a92ab3d7d3887e5a9d2938e27589d8a

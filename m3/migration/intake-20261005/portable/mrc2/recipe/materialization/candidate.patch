@@ -1,0 +1,175 @@
+diff --git a/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java b/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java
+index 7971a48..acb7d90 100644
+--- a/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java
++++ b/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java
+@@ -272,12 +272,14 @@ com.synexia.rewrite.Mrc4
+             }
+             List<ProblemAdapter> indexed =
+                     ProblemAdapterCatalog.byPlatformCategory(platform.name(), canonicalCategory);
++            final ChallengePlatform checkedPlatform = platform;
++            final CompetitiveProblemCategory checkedCategory = canonicalCategory;
+             if (adapterCount != indexed.size()
+                     || indexed.stream().anyMatch(adapter ->
+                             !adapter.executable()
+-                                    || !adapter.source().platform().equalsIgnoreCase(platform.name())
++                                    || !adapter.source().platform().equalsIgnoreCase(checkedPlatform.name())
+                                     || CompetitiveProblemCategory.fromShape(
+-                                            adapter.classification().shape()) != canonicalCategory)) {
++                                            adapter.classification().shape()) != checkedCategory)) {
+                 throw new IllegalArgumentException("COMPETITIVE_PROBLEM_ADAPTER_POSTING_DRIFT");
+             }
+             String expected = digest(
+@@ -328,10 +330,12 @@
+                         "COMPETITIVE_PROBLEM_ADAPTER_INDEX_ROOT_DRIFT");
+             }
+             lanes = List.copyOf(Objects.requireNonNull(lanes, "lanes"));
++            final CompetitiveProblemCategory checkedCategory = canonicalCategory;
++            final String checkedIndexRoot = adapterIndexRoot;
+             if (!lanes.stream().map(ProblemAdapterLane::platform).toList().equals(REVIEW_ORDER)
+                     || lanes.stream().anyMatch(lane ->
+-                            lane.canonicalCategory() != canonicalCategory
+-                                    || !lane.adapterIndexRoot().equals(adapterIndexRoot))) {
++                            lane.canonicalCategory() != checkedCategory
++                                    || !lane.adapterIndexRoot().equals(checkedIndexRoot))) {
+                 throw new IllegalArgumentException("COMPETITIVE_PROBLEM_ADAPTER_REVIEW_DRIFT");
+             }
+             String expected = digest(
+@@ -766,7 +770,7 @@
+ 
+         /** Precomputed 128-bit intersection of the three canonical category capability masks. */
+         public AlgorithmShapeMask commonCapabilityMask() {
+-            return commonCapabilityMask(lanes);
++            return CompetitiveProblemReview.commonCapabilityMask(lanes);
+         }
+ 
+         /** Content root of the canonical tri-platform category capability index used by this review. */
+diff --git a/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java b/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java
+index 945d747..2f35db6 100644
+--- a/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java
++++ b/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java
+@@ -79,7 +79,7 @@ com.synexia.rewrite.Mrc4
+             String root) {
+ 
+         public DonorOrigin {
+-            repository = repository(repository);
++            repository = ChallengeDonorPassLedger.repository(repository);
+             revision = sha1(revision, "revision");
+             path = token(path, "path");
+             declaredLicense = Objects.requireNonNullElse(declaredLicense, "").strip();
+diff --git a/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java b/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java
+index 8e93b63..e4e55db 100644
+--- a/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java
++++ b/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java
+@@ -92,7 +92,7 @@ com.synexia.rewrite.Mrc4
+                 throw new IllegalArgumentException("represented platform drift");
+             }
+ 
+-            String expectedRoot = root(
++            String expectedRoot = CompetitiveCapabilityPlanIndex.root(
+                     shape,
+                     capabilityMask,
+                     category,
+diff --git a/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java b/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java
+index de2aef6..108514f 100644
+--- a/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java
++++ b/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java
+@@ -559,8 +559,7 @@ com.synexia.rewrite.Mrc4
+       Map<E, ? extends List<Entry>> source) {
+     if (source.isEmpty()) return Map.of();
+     E first = source.keySet().iterator().next();
+-    @SuppressWarnings("unchecked")
+-    Class<E> type = (Class<E>) first.getDeclaringClass();
++    Class<E> type = first.getDeclaringClass();
+     EnumMap<E, List<Entry>> result = new EnumMap<>(type);
+     source.forEach((key, value) -> result.put(key, List.copyOf(value)));
+     return Collections.unmodifiableMap(result);
+diff --git a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java
+index db85ff6..db4bbc5 100644
+--- a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java
++++ b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java
+@@ -3,6 +3,7 @@ com.synexia.rewrite.Mrc4
+ 
+ import java.net.URI;
+ import java.util.ArrayList;
++import java.util.Collection;
+ import java.util.Comparator;
+ import java.util.HashSet;
+ import java.util.List;
+@@ -94,7 +95,7 @@
+     }
+ 
+     public static List<RecipeDescriptor> descriptors() {
+-        List<RecipeDescriptor> raw =
++        Collection<RecipeDescriptor> raw =
+                 Environment.builder()
+                         .scanRuntimeClasspath()
+                         .build()
+diff --git a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java
+index 6f5911d..1b4edfc 100644
+--- a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java
++++ b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java
+@@ -219,14 +219,15 @@ com.synexia.rewrite.Mrc4
+                 throw new IllegalArgumentException(
+                         "source-bound review belongs to another algorithm atom");
+             }
++            final M3AlgorithmAtomRecipeCrateBinding checkedAtomBinding = atomBinding;
+             mechanicalBinding.ifPresent(
+                     binding -> {
+                         M3RecipeFirstInvariant
+                                 .requireAlgorithmAtomMechanicalDonorBinding(binding);
+-                        if (binding.shape() != atomBinding.shape()
+-                                || !binding.algorithmAtomBindingRoot().equals(atomBinding.root())
+-                                || !binding.atomRoot().equals(atomBinding.atom().root())
+-                                || !binding.crateRoot().equals(atomBinding.crateRoot())) {
++                        if (binding.shape() != checkedAtomBinding.shape()
++                                || !binding.algorithmAtomBindingRoot().equals(checkedAtomBinding.root())
++                                || !binding.atomRoot().equals(checkedAtomBinding.atom().root())
++                                || !binding.crateRoot().equals(checkedAtomBinding.crateRoot())) {
+                             throw new IllegalArgumentException(
+                                     "mechanical donor binding belongs to another algorithm atom");
+                         }
+diff --git a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java
+index 0a43baa..d02f33f 100644
+--- a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java
++++ b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java
+@@ -15,6 +15,7 @@ com.synexia.rewrite.Mrc4
+ import org.openrewrite.SourceFile;
+ import org.openrewrite.TreeVisitor;
+ import org.openrewrite.java.JavaIsoVisitor;
++import org.openrewrite.java.JavaPrinter;
+ import org.openrewrite.java.tree.J;
+ import org.openrewrite.java.tree.JavaType;
+ import org.openrewrite.java.tree.Javadoc;
+@@ -196,7 +197,7 @@
+                                     new MissingKey(
+                                             path,
+                                             "PERMITTED_TYPE",
+-                                            permitted.printTrimmed(),
++                                            permitted.printTrimmed(new JavaPrinter<Integer>()),
+                                             attributed == null
+                                                     ? "MISSING_PERMITTED_TYPE_OWNER_ATTRIBUTION"
+                                                     : "MISSING_PERMITTED_TYPE_ATTRIBUTION"));
+@@ -441,7 +442,7 @@
+                         portable(unit.getSourcePath().toString()),
+                         M3SemanticAttribution.resolvedMethod(newClass.getConstructorType()),
+                         "CONSTRUCTOR_INVOCATION",
+-                        newClass.printTrimmed(),
++                        newClass.printTrimmed(new JavaPrinter<Integer>()),
+                         "MISSING_CONSTRUCTOR_TARGET_ATTRIBUTION",
+                         "STATIC_CONSTRUCTOR_TARGET",
+                         "INITIALIZER_STATIC_CONSTRUCTOR_TARGET");
+@@ -643,12 +644,12 @@
+     private static String unresolvedReturnType(J.MethodDeclaration method) {
+         return method.getReturnTypeExpression() == null
+                 ? method.isConstructor() ? "<constructor>" : "<unresolved>"
+-                : method.getReturnTypeExpression().printTrimmed();
++                : method.getReturnTypeExpression().printTrimmed(new JavaPrinter<Integer>());
+     }
+ 
+     private static String unresolvedParameters(J.MethodDeclaration method) {
+         return method.getParameters().stream()
+-                .map(parameter -> parameter.printTrimmed())
++                .map(parameter -> parameter.printTrimmed(new JavaPrinter<Integer>()))
+                 .collect(Collectors.joining(","));
+     }
+ 

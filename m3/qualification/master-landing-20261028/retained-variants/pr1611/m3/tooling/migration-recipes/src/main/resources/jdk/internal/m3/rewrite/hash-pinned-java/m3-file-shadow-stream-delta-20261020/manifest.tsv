@@ -1,0 +1,10 @@
+# path	before_sha256	after_sha256	resource
+m3/file/src/main/java/jdk/m3/file/M3File.java	47a5844aa69c0571cdd7b1b7fd2e53a9f187e12837b0fd639779fc98d983e097	6587ae0455771ef3718f96eb40e904f6d9b75dc3d1aefad421db4deaeed2d074	00-M3File.java.txt
+m3/file/src/main/java/jdk/m3/file/M3FileDelta.java	ABSENT	8163325bbadd2da2c1550ce5f88b85a6a2475be3450b86867e480df199d8335d	01-M3FileDelta.java.txt
+m3/file/src/main/java/com/m3/file/M3FileSnapshot.java	ABSENT	831e3b9a83f5b012516435af8da202f354690275b72a01f6952b6864c6293b90	02-M3FileSnapshot.java.txt
+m3/file/src/main/java/com/m3/file/M3FileTraversal.java	ABSENT	6d217fa7cf001ea50857a0d6b8738ecdcc381555de5796a5a0f51547bf25d0f3	03-M3FileTraversal.java.txt
+m3/file/src/main/java/com/m3/file/M3ProgressMonitor.java	ABSENT	e482e09aefe144ddaa9910ffa68081bb812e0340b70b4075b8fe9465d0db96a0	04-M3ProgressMonitor.java.txt
+m3/file/src/main/java/com/m3/file/M3ShadowInputStream.java	ABSENT	22b394e686227a412040a95467feb51d919b8b9063eb54ebcaec09ae5631d092	05-M3ShadowInputStream.java.txt
+m3/file/src/main/java/com/m3/file/M3ShadowOutputStream.java	ABSENT	058f4dafb29fdfe6d47f57aa6b9108e31af04a80474dd085d2fe128ca2f96b8a	06-M3ShadowOutputStream.java.txt
+m3/file/src/main/java/com/m3/file/M3StreamObserver.java	ABSENT	210592ac5d6c48629e59ea58961eb0f7186afcb0b3b338780fba878bf892327f	07-M3StreamObserver.java.txt
+m3/file/src/test/java/com/m3/file/M3FileStreamTest.java	ABSENT	97df8b363a07826b1c8d3f1a4be3368ff390d16781be3579d0bb1a2600fa1872	08-M3FileStreamTest.java.txt

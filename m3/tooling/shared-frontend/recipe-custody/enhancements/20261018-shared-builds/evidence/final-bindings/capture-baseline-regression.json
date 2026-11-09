@@ -1,0 +1,16 @@
+{
+  "schema": "M3_AST_CAPTURE_REGRESSION_V1",
+  "baseline_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "baseline_test_exit": 1,
+  "baseline_partial_images": [
+    {
+      "path": "run/m3-source-seal-7753831107744600350/rejected-source.m3prim",
+      "bytes": 80,
+      "sha256": "65256e5248381b7664af2327bedc7a735f084642c60a1e9c0a46e2f6edcd04e4"
+    }
+  ],
+  "enhanced_test": "PASS",
+  "enhanced_checks": 117,
+  "result": "PASS",
+  "scope": "Source-capture failure only; no claim for all compiler failure paths."
+}

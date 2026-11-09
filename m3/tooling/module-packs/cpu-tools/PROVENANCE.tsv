@@ -1,0 +1,16 @@
+source	identity	role	contract
+hsoliwal/M3jdk21	f29b0afe7ad253cc0562bc8dfdd48fc1acec710e	Target baseline; existing optional owners and unchanged packager	Git revision
+hsoliwal/com.synexia	50f48cbbe11f17fb8dc209bac3812f8940a1e267	Canonical donor baseline	Git revision
+synexia-m3-jmods/modules/com.synexia.m3.*	DONOR_MODULES.tsv	Sixteen exact selected class/descriptor donors	Per-source Git blob and SHA-256 ledger
+Canonical payload refinements	DONOR_CHANGES.tsv	Receiving package names and declared storage/correctness refinements	Per-target SHA-256; see canonical source seal
+synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileStreamIndexer.java	50f48cbbe11f17fb8dc209bac3812f8940a1e267	Reviewed single-stream admission shape; bounded M3File adaptation only	Not a complete MIndexFile data-plane port
+src/java.base/share/classes/java/lang/String.java; src/java.base/share/classes/java/lang/M3String.java	f29b0afe7ad253cc0562bc8dfdd48fc1acec710e	Existing public String/internal M3String runtime ownership	Actual executing runtime artifact hashes belong to TOOLCHAIN_INPUTS.tsv
+src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java	f29b0afe7ad253cc0562bc8dfdd48fc1acec710e	Existing compiler frontend API consumed by M3AstTools	Actual compiler bytes bound by source JDK JMOD and lib/modules hashes
+m3/tooling/module-packs/text-tools/src	f29b0afe7ad253cc0562bc8dfdd48fc1acec710e	Reuse jdk.m3.text, jdk.m3.io, jdk.m3.structured; additive M3File and compatible existing build source/target mode	Build SOURCE_INPUTS.tsv seals actual compiled bytes
+m3/tooling/module-packs/text-tools/native/m3textio.c	f29b0afe7ad253cc0562bc8dfdd48fc1acec710e	Existing JNI source owner	No replacement native implementation
+m3/tooling/jmod-recipes/tools/jmod_pack.py; jmod_image.py	f29b0afe7ad253cc0562bc8dfdd48fc1acec710e	Existing sole JMOD/image packager and support module	Build SOURCE_INPUTS.tsv seals actual packager bytes
+text-tools/legal; cpu-tools/legal	Per-file legal notices	Preserved distinct notice trees passed to existing packager	Apache-2.0 module source; OpenJDK runtime retains own licensing
+synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018	com.synexia.m3jdk.CpuToolsJmod20261018	Canonical Maven/OpenRewrite snapshot task owner	Existing M3HashPinnedJavaSnapshotRecipe and M3HashPinnedTextSnapshotRecipe
+synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv	098ac62651dcd7636f6f6eaad964533c76dfa97e at 50f48cbbe11f17fb8dc209bac3812f8940a1e267	Inspected canonical ownership ledger; new task row must bind actual sealed descriptor bytes	Final row identity belongs to canonical recipe receipt; historical rows not rewritten
+m3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv	f29b0afe7ad253cc0562bc8dfdd48fc1acec710e	110-row pre-existing CPU inventory; task coverage is additive	No catalogue completion inferred
+M3 Java21 selected with --jdk-home	${OUT}/TOOLCHAIN_INPUTS.tsv	Actual executing release/runtime/compiler/JVM source artifacts	Before/after SHA-256 equality required; version strings alone insufficient

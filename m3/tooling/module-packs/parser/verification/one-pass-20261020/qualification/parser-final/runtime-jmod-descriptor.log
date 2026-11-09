@@ -1,0 +1,11 @@
+$ ["/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/jmod","describe","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/pack/jmods/jdk.m3.parser.jmod"]
+jdk.m3.parser
+exports jdk.m3.parser
+exports jdk.m3.parser.grammar
+requires java.base mandated
+requires java.sql static transitive
+requires java.xml
+requires jdk.compiler transitive
+
+
+EXIT 0

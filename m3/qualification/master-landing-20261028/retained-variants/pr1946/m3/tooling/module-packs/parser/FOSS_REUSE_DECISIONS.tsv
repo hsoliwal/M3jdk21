@@ -1,0 +1,10 @@
+category	candidate	disposition	reason
+grammar lexer and Earley runtime	hsoliwal/com.synexia indexstring/grammar	ADAPT	Existing first-party packed-state implementation; exact minimal closure and source hashes required
+canonical text	java.lang.String/java.lang.M3String	REUSE	Existing String API reaches canonical M3String storage on M3JDK; no new text owner
+Java frontend	com.sun.source.util.M3AST	REUSE	Share existing javac parse events; retain only detached source-bound projections
+source snapshots	Synexia MIndexASTParser stableSource/sourceUtf16Sha256/requireSameSource	ADAPT	Reference-only pinned URI/source-seal lineage; bounded strict file admission is a new integration gap
+module packaging	m3/tooling/jmod-recipes/tools/jmod_pack.py	REUSE	Existing JMOD and linked-image packager
+recipe materialization	com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe	REUSE	Existing exact-postimage absent-path fixed-point and refusal protocol
+external parser generators	ANTLR/JavaCC and platform problem catalogues	EVIDENCE_ONLY	Existing Synexia core fulfills this closure; no additional donor bodies needed
+universal syntax projection	Tree-sitter Roslyn OpenRewrite Eclipse JDT JavaParser LibCST Babel	EVIDENCE_ONLY	Reuse field-role/token/trivia/error/immutable source-generation ideas within the existing eight M3ASTIndex lanes; no donor source copied or competing parser
+foreign source geometry	Tree-sitter UTF-8 byte spans and JavaParser/JDT UTF-16 spans	ADAPT	Original strictly decoded M3File owns coordinate conversion and raw/text SHA-256; reject invalid codepoint boundaries and unverified generations

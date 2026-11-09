@@ -1,0 +1,10 @@
+# FOLD_MEMBERS v1.3 map (m3/tooling/jdk-naming/fold_members.py): PrimitiveTreeAlgorithms folds into TreeAlgorithms, one owner per concept (2026-11-08).
+# Primitive overloads join the bare-named owner (java.util.Arrays holds int[] and Object[] overloads the same way); bodies byte for byte.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/TreeAlgorithms.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java
+TAKE	PrimitiveTreeAlgorithms.*
+IMPORT	java.util.Arrays
+IMPORT	java.util.Objects
+REFS	\bPrimitiveTreeAlgorithms\b	TreeAlgorithms
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/PrimitiveTreeAlgorithms.java

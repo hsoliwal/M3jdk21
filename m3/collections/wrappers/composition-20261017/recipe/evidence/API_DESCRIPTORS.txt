@@ -1,0 +1,23 @@
+Compiled from "M3CollectionViews.java"
+public final class com.m3.collections.M3CollectionViews {
+  public static <E> java.util.Collection<E> filtered(java.util.Collection<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/Collection;
+
+  public static <E> java.util.Set<E> filtered(java.util.Set<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Set;Ljava/util/function/Predicate;)Ljava/util/Set;
+
+  public static <E> java.util.SortedSet<E> filtered(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/SortedSet;Ljava/util/function/Predicate;)Ljava/util/SortedSet;
+
+  public static <E> java.util.NavigableSet<E> filtered(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/util/function/Predicate;)Ljava/util/NavigableSet;
+
+  public static <E> java.util.List<E> sortedSnapshot(java.util.Collection<? extends E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/Comparator;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> filteredSortedSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>, java.util.Comparator<? super E>);
+    descriptor: (Ljava/util/Collection;Ljava/util/function/Predicate;Ljava/util/Comparator;)Ljava/util/List;
+}

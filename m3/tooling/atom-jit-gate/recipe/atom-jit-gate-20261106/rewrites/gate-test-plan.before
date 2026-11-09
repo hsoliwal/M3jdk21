@@ -1,0 +1,4 @@
+        return M3UniversalRecipeTaskInvariant.plan(
+                "m3jdk21.primitive.mask", "bit_manipulation",
+                "com.synexia.rewrite.M3AtomizeRecipe", CRATE,
+                sha('1'), sha('2'), 4, targets);

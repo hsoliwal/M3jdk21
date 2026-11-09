@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py", line 145, in <module>
+    main()
+  File "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py", line 99, in main
+    raise ValueError('emitted output drift: ' + path)
+ValueError: emitted output drift: .github/workflows/m3-ast-real-providers-20261019.yml

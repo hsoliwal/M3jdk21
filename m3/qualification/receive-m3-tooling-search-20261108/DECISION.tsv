@@ -1,0 +1,8 @@
+pr	crate_or_branch	change	verdict	reason
+15087	m3jdk-sorted-batch-bounds-20261101	module base (int)	RECEIVED	fold-dropped from develop; postimages from PR head acf43d7de9a0
+15120	m3jdk-sorted-long-batch-bounds-20261101	long[] variant	RECEIVED	fold-dropped from develop; postimages from PR head 35de66ff549d; separate files, no overlap
+15144	m3jdk-sorted-empty-keys-20261101	C zero-key fast path	RECEIVED	on develop; carried by step-2/3 C postimage
+15178	m3jdk-sorted-empty-range-20261101 + m3jdk-sorted-lower-reuse-20261102	empty interval; upper search from lower bound	RECEIVED	on develop (closed PR, crates landed by another route); newest Java and C
+15108	m3jni-sorted-empty-batch-20261101	C zero-key and empty-range fast paths	SUPERSEDED	same two fast paths as steps 1-2; step 2 also skips the fill when from == 0
+15133	m3jni-sorted-small-stack-20261101	64-int stack snapshot instead of malloc	OWNER_REVIEW	small nonempty slices no longer allocate, so forced malloc failure no longer raises OutOfMemoryError; steps 1-3 prove that contract (M3_UPPER_REUSE_OOME_PASS)
+15117	batch-bounds crate edited in place	merge-mode comparison budget; adjacent duplicate key reuse	UNION_PENDING	orthogonal to steps 1-3 but text-conflicts with them (git merge-file: Java and C); separate leaf with its own proof

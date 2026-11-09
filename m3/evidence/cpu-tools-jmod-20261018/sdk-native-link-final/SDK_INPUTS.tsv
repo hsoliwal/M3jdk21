@@ -1,0 +1,27 @@
+# Recipe inputs used by this SDK execution
+crate/ENGINE_SOURCES.tsv	e30aeb0ea43b325e23c094f04f53540b8d2fe9fd83e0a35bc12b692a8a61288c
+crate/contract/test_prepare.py	09c9c45fc221b5668a0d65233c539f6b140bf078c821b318b81ce919e629ee6e
+crate/contract/verify_receiver.py	ff32478a2fe912f140ecab7df05e22de9775f029774f8bd5472e836e02f07983
+crate/datasets/native-link/DATASET.json	f510cb71d2b21dbd88f20567f3f1513fa8af6af2ec1075c6691a58d9bfdf281f
+crate/datasets/native-link/ENGINE_EFFECTIVE.tsv	ba8a8b4ef503432d39eb86a081f9483c2df81750291ba1fd8c7b7fa468d8f2b3
+crate/datasets/native-link/MODES.tsv	e081167f8bf9d42abc7b12ceda159513da7d7224f5ae540b1b864d153b8f35e7
+crate/datasets/native-link/resources/META-INF/rewrite/m3-cpu-tools-jmod-20261018-native-link.yml	ff053e84ae93ea308d453efbc6044ec1eda261b879be144fa894ae5ccaa556c9
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/0001-OUTPUT_CONTRACT.tsv.txt	864629fa69d9864a8f5730330edcc9efc31f479e4218ec996838636810177ca2
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/0002-README.md.txt	6148cb7abd904b0e111a24bab16eeb34d381b38ab31f749efa954816d5080c2a
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/0003-VERIFY_CONTRACT.tsv.txt	8630fc8751cec3bca62616685971701225b5834ecc02b55d90f36de03a110fc8
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/0004-build.py.txt	33890d1b1a971e2559e8d198e114433e80c86162ea6b533d0f616c7d77e730e3
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/0005-test_build.py.txt	cb700bf04f971c98695b73d6d1669bc8d26a53eb738eeed9240d985e88242856
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/manifest.tsv	b38cccb421c05b04f326d634301213f9e9b62fcc890e9e09f8ee4a3ec82b1d2f
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/pre/0001-OUTPUT_CONTRACT.tsv.txt	a674319dcaf9bc07aa880d3de5db7d1e344e802e0733366f6f4ec41a94a998b7
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/pre/0002-README.md.txt	31cfcd6627706ff0ea97406c37fcffdf71288fd137e92247c0736ceb48697e4c
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/pre/0003-VERIFY_CONTRACT.tsv.txt	256fddaa61057d802e90da18589c1dc133a11553c1fa4234db079e6d48c60f4d
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/pre/0004-build.py.txt	81be002eee80672f612c99e143c4f656c69c5ee999d3e7bea71abbdb92e357d5
+crate/datasets/native-link/resources/com/synexia/rewrite/hash-pinned-text/m3-cpu-tools-jmod-20261018-native-link/pre/0005-test_build.py.txt	0fc7c73c2ecd63ec7a648cd20742a239748e2ec85be230752ce5df845d7e22c4
+crate/pom.xml	9856f0018b4c9fe28ac3331ba02dac19bbd3639c8070a0af1bf49bbca984a737
+crate/prepare.py	158ae08a8252d7ce4c723b79f39b40f3dab594d22250bcccfcf0cced8d0bb444
+crate/receive.py	2990553c6b341062881776c454a58656cd950492763db508d9246602d6e4325e
+crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java	50e6c7c4e88da61727244a1469ee1fcb4b75ef0e106d3bdec966014287466803
+owner/src/main/java/com/synexia/rewrite/M3EditScope.java	962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab
+owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	877085eef5c67ef5d37232bdbc3ad8aefc95c591ec59e7da372e37c844b58c98
+owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java	fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef
+owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java	849cf6b9816dc2e3731976edf5910148b5565a23e539804905bc4903b03f6326

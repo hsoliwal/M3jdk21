@@ -1,0 +1,18 @@
+{
+  "schema": "M3JDK21_TORNADO_BULK_COMPILER_RECEIVER_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 11203,
+  "canonical_recipe_revision": "c92aae9daf356d3fc38d28a0beb9f349bb1b2787",
+  "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21TornadoBulkCompilerRepairRecipe",
+  "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk21-tornado-bulk-compiler-20261014/manifest.tsv",
+  "canonical_manifest_git_blob": "a46d6e39f4cf6d3117f303aad28e9e24af61c237",
+  "canonical_postimage_git_blob": "7e5746937bd2c962b2601acd23b3356b8cf1fb4b",
+  "target": "m3/ports/tornadovm-bulk/pom.xml",
+  "preimage_sha256": "92cb71dcd68edbf3facd5d25c906fd81a53c038b10b757dbb4cd56aae94964e2",
+  "postimage_sha256": "cf119e5588cce20480bb07b9a47d3c63ff2fb2148c1abda205c474b533d9f8a0",
+  "intake_mode": "EXTERNAL_RECIPE_TOOL",
+  "scope": "BUILD_DESCRIPTOR_ONLY",
+  "java_base_modified": false,
+  "jit_or_gpu_verified": false,
+  "promotion_authority": false
+}

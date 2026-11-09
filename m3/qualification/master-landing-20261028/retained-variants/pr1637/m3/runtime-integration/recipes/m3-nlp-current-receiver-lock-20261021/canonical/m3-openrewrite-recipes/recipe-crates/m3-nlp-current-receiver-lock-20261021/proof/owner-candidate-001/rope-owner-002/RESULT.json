@@ -1,0 +1,193 @@
+{
+  "classes": [
+    {
+      "bytes": 10883,
+      "path": "M3RopeTextIndexTest.class",
+      "sha256": "bc5df11f1cfcad51ab377eaf3fe61a8b78a6768dd0be9a68c1b03d55135440e8"
+    },
+    {
+      "bytes": 2256,
+      "path": "jdk/m3/text/JoinedM3StringPiece.class",
+      "sha256": "9b892c0920b5f4f406f528136dee3964147fc62328b7c452c3fa558833022405"
+    },
+    {
+      "bytes": 2442,
+      "path": "jdk/m3/text/LocalM3Arena.class",
+      "sha256": "98cb2fd22de0202718d3624f69ab7165a154f017af86c09a00d761e6c831d875"
+    },
+    {
+      "bytes": 1248,
+      "path": "jdk/m3/text/LocalM3StringPiece$Encoding.class",
+      "sha256": "1b2499977c871d8ecf4d79c293549fd5a129e9cb3112f3693ddb8aecf1b3426d"
+    },
+    {
+      "bytes": 1839,
+      "path": "jdk/m3/text/LocalM3StringPiece.class",
+      "sha256": "b15aa28d7b408088924213ac9a785e533f40a6359adba478bd0f09a90a13c05c"
+    },
+    {
+      "bytes": 1337,
+      "path": "jdk/m3/text/M3RopeTextIndex$Window.class",
+      "sha256": "cd5b2e337380cd96640efde4128d9755c201642a4e7f5bcb3d5e04109ef29342"
+    },
+    {
+      "bytes": 5237,
+      "path": "jdk/m3/text/M3RopeTextIndex.class",
+      "sha256": "7c6b4a103aa4a2ab9964ed9489c6b84d1c6e74d31a20086df31219c16a4f6499"
+    },
+    {
+      "bytes": 880,
+      "path": "jdk/m3/text/M3StringPiece.class",
+      "sha256": "cfa32d2b114ac4cd571d61156eaccb7d782c8ad16e9461db368052d2071b061f"
+    },
+    {
+      "bytes": 1721,
+      "path": "jdk/m3/text/StorageIdentity.class",
+      "sha256": "0ce64b0492977ebd9d1fb41de2fa77e56942ef69772bdd30a991c5fa2e864f02"
+    }
+  ],
+  "classpath": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-002/classes",
+  "commands": [
+    {
+      "argv": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-002/classes",
+        "m3/core/src/jdk/m3/text/StorageIdentity.java",
+        "m3/core/src/jdk/m3/text/M3StringPiece.java",
+        "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+        "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+        "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+        "m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+        "m3/core/test/M3RopeTextIndexTest.java"
+      ],
+      "elapsed_seconds": 0.859,
+      "exit": 0,
+      "log": "source-lock-correction/rope-owner-002/command-01.log",
+      "log_bytes": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-esa",
+        "-cp",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-002/classes",
+        "M3RopeTextIndexTest"
+      ],
+      "elapsed_seconds": 0.224,
+      "exit": 0,
+      "log": "source-lock-correction/rope-owner-002/command-02.log",
+      "log_bytes": 38,
+      "log_sha256": "8c3720b9afb221c7ddfdaa84614c46408a557db992b5fc213583072e45d546b5"
+    },
+    {
+      "argv": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-esa",
+        "-Xint",
+        "-cp",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-002/classes",
+        "M3RopeTextIndexTest"
+      ],
+      "elapsed_seconds": 0.703,
+      "exit": 0,
+      "log": "source-lock-correction/rope-owner-002/command-03.log",
+      "log_bytes": 38,
+      "log_sha256": "8c3720b9afb221c7ddfdaa84614c46408a557db992b5fc213583072e45d546b5"
+    },
+    {
+      "argv": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-esa",
+        "-XX:-CompactStrings",
+        "-cp",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-002/classes",
+        "M3RopeTextIndexTest"
+      ],
+      "elapsed_seconds": 0.273,
+      "exit": 0,
+      "log": "source-lock-correction/rope-owner-002/command-04.log",
+      "log_bytes": 38,
+      "log_sha256": "8c3720b9afb221c7ddfdaa84614c46408a557db992b5fc213583072e45d546b5"
+    },
+    {
+      "argv": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-esa",
+        "-Xbatch",
+        "-XX:-TieredCompilation",
+        "-cp",
+        "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/rope-owner-002/classes",
+        "M3RopeTextIndexTest"
+      ],
+      "elapsed_seconds": 0.888,
+      "exit": 0,
+      "log": "source-lock-correction/rope-owner-002/command-05.log",
+      "log_bytes": 38,
+      "log_sha256": "8c3720b9afb221c7ddfdaa84614c46408a557db992b5fc213583072e45d546b5"
+    }
+  ],
+  "driver_sha256": "0ee1fc9a15885c39c217d8cdc64e95c99dc6d36671f14e15f7d27e761a5bf1a6",
+  "elapsed_seconds": 3.108,
+  "gate_inputs": [
+    {
+      "bytes": 2634,
+      "git_blob": "5022e9811ce9391671c794446c7772569cfd369f",
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+    },
+    {
+      "bytes": 1975,
+      "git_blob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+    },
+    {
+      "bytes": 2115,
+      "git_blob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+    },
+    {
+      "bytes": 9740,
+      "git_blob": "73d7ae9ec7fa3680d1389aabf4e65beb0018ef15",
+      "path": "m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+      "sha256": "d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a"
+    },
+    {
+      "bytes": 767,
+      "git_blob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+    },
+    {
+      "bytes": 494,
+      "git_blob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+    },
+    {
+      "bytes": 8903,
+      "git_blob": "3b0178d24606074195a5524844fc9954fdf25fe6",
+      "path": "m3/core/test/M3RopeTextIndexTest.java",
+      "sha256": "98d34219367796a53690d4f276523ee0f0f8d0b4a4127be2b806a3f177f1c74a"
+    }
+  ],
+  "inputs_unchanged": true,
+  "owner": "rope",
+  "receiver_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "schema": "M3_NLP_RECEIVER_TEXT_OWNER_FOLLOWUP_1",
+  "scope": "Unchanged existing rope fixture and exact six-source dependency closure, strict Java21 compilation and all four original JVM modes. Original whole-module run-rope-proof.sh remains refused by unrelated SharedLexiconPrecomputeCatalog.Builder missing-explicit-ctor lint; this finite proof does not claim that gate passed.",
+  "shared_driver_sha256": "ee680061df4e9494c3d3a9817ea4d39e4f138a0b2e29a3355b4ab6014980a277",
+  "state": "PASS",
+  "stdout": "M3RopeTextIndexTest PASS checks=83941\nM3RopeTextIndexTest PASS checks=83941\nM3RopeTextIndexTest PASS checks=83941\nM3RopeTextIndexTest PASS checks=83941\n"
+}

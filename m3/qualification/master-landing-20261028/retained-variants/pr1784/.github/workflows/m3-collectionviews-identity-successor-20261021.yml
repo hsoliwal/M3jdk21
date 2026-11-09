@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 CollectionViews identity successor Java21
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/**'
+      - 'm3/runtime-integration/collectionviews-identity-successor-20261021/**'
+      - '.github/workflows/m3-collectionviews-identity-successor-20261021.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  patched-java-base:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            src/java.base/share/classes/java/util/CollectionViews.java
+            test/jdk/java/util/CollectionViews/**
+            m3/runtime-integration/collectionviews-identity-successor-20261021/**
+            .github/workflows/m3-collectionviews-identity-successor-20261021.yml
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check diff hygiene
+        run: git diff --check HEAD^ HEAD
+      - name: Compile exact original owners and test parent-red/successor-green
+        run: bash m3/runtime-integration/collectionviews-identity-successor-20261021/verify.sh "$RUNNER_TEMP/m3-identity-successor-${GITHUB_RUN_ID}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-identity-successor-evidence
+          path: ${{ runner.temp }}/m3-identity-successor-*/
+          if-no-files-found: warn

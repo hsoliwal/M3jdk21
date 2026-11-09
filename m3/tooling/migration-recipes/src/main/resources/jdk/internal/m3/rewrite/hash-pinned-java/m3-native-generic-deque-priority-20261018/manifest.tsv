@@ -1,0 +1,4 @@
+m3/collections/src/main/java/jdk/m3/collections/M3ArrayDeque.java	ABSENT	f7674dc66976b122eba4bbde84f5a184470629c394213d46f80d0e09738249b9	M3ArrayDeque.java.txt
+m3/collections/src/main/java/jdk/m3/collections/M3PriorityQueue.java	ABSENT	dc6c4b04edf1ef575f5a8435d41ae0ae9beed2fb8fa568cb8e2c14240b8cc4a9	M3PriorityQueue.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3GenericReferenceOwnersProof.java	ABSENT	5293148eb56ca91c129addcb54152ed5048b51f9d77816df550c8f4dcf8145a7	M3GenericReferenceOwnersProof.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3GenericReferenceOwnersTest.java	ABSENT	59259c51f2270f225bf5183f9ec116789615c1d4fddd3ef6d42963021474d136	M3GenericReferenceOwnersTest.java.txt

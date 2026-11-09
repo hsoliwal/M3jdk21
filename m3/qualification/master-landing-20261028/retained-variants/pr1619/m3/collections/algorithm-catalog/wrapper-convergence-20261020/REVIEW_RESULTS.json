@@ -1,0 +1,58 @@
+{
+  "schema": "M3_RUNTIME_TARGET_REVIEW_V1",
+  "baseline_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "decisions": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "category": "STRICT_SORTED_ENDPOINTS",
+      "decision": "QUALIFIED_CANDIDATE_SCOPE",
+      "baseline_sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
+      "candidate_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "evidence": "M3FilteredEndpointRestorationContract:1843; existing original suite sequenced/reversal gates",
+      "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+      "category": "STRICT_SORTED_ENDPOINTS",
+      "decision": "QUALIFIED_CANDIDATE_SCOPE",
+      "baseline_sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a",
+      "candidate_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "evidence": "Same endpoint contract across facade/private owners",
+      "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
+      "category": "OWNER_BULK_MUTATION",
+      "decision": "QUALIFIED_CANDIDATE_SCOPE",
+      "baseline_sha256": "90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8",
+      "candidate_sha256": "e8439b49c9fd771bbbdb788c85a5922a4b45191f0309a8b901a34dd4036ca973",
+      "evidence": "M3FilteredCowBulkContract:120",
+      "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+      "category": "STABLE_INDIRECT_ORDER",
+      "decision": "QUALIFIED_CANDIDATE_SCOPE",
+      "baseline_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
+      "candidate_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "evidence": "M3IndexOrderWindowContract:2990400 with same before/after fingerprint; projection probe282479",
+      "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveFilteredSequences.java",
+      "category": "FILTER_COMPOSITION",
+      "decision": "QUALIFIED_CANDIDATE_SCOPE",
+      "baseline_sha256": "0e17afe3cc66283a0e7658f166b84c8bbff1cf64d83c738913bf6a56017cfc35",
+      "candidate_sha256": "a3eaf82eedab424f78ee0b2d4daa789f636903c4c8827ff5dd58a1b919129f73",
+      "evidence": "40764 shallow checks same trace a28a3b365bae8591;40803 total with deep traversal",
+      "scope_limit": "Exact target generation and final receiving verification are recorded separately; no global phase promotion."
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+      "category": "CURSOR_INVALIDATION",
+      "decision": "REJECTED_NEW_READ_EFFECTS_AND_INCOMPLETE_INVALIDATION",
+      "evidence": "diagnostics/wrapper-owner-boundaries",
+      "receiving_action": "Keep exact baseline source; do not include donor mutation JUnit bridge as an admitted green test."
+    }
+  ]
+}

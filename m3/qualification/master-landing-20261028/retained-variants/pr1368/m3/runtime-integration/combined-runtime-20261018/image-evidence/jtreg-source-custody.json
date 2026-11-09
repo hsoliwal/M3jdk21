@@ -1,0 +1,11 @@
+{
+  "schema": "JTREG_OFFICIAL_SOURCE_ARCHIVE_V1",
+  "repo": "openjdk/jtreg",
+  "tag": "jtreg-7.2+1",
+  "commit": "5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03",
+  "source_url": "https://codeload.github.com/openjdk/jtreg/zip/5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03",
+  "final_url": "https://codeload.github.com/openjdk/jtreg/zip/5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03",
+  "sha256": "81eda00ac52bcf7558ab14281f3e8b914b38fa5c60beeadae1789e558aac1990",
+  "bytes": 1539507,
+  "retrieved_utc": "2026-10-18T12:39:58Z"
+}

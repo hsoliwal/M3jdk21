@@ -1,0 +1,32 @@
+[
+  {
+    "variant": "baseline",
+    "command": [
+      "java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/mnt/data/m3-collections-20261021/native-legacy",
+      "-cp",
+      "/mnt/data/m3-collections-20261021/product-proof/baseline/target/classes:/mnt/data/m3-collections-20261021/product-proof/baseline/target/test-classes",
+      "com.m3.collections.M3ArrayifiedIndexContract",
+      "native"
+    ],
+    "exit": 0,
+    "output": "INDEX_CONTRACT_PASS backend=NATIVE_REQUIRED checks=294332 digest=14113512340038378846"
+  },
+  {
+    "variant": "candidate",
+    "command": [
+      "java",
+      "-Xmx256m",
+      "-Xcheck:jni",
+      "-Djava.library.path=/mnt/data/m3-collections-20261021/native-legacy",
+      "-cp",
+      "/mnt/data/m3-collections-20261021/product-proof/candidate/target/classes:/mnt/data/m3-collections-20261021/product-proof/candidate/target/test-classes",
+      "com.m3.collections.M3ArrayifiedIndexContract",
+      "native"
+    ],
+    "exit": 0,
+    "output": "INDEX_CONTRACT_PASS backend=NATIVE_REQUIRED checks=294332 digest=14113512340038378846"
+  }
+]

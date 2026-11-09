@@ -1110,8 +1110,14 @@ public class BasicTreeUI extends TreeUI
      * @return the object responsible for managing what is expanded
      */
     protected AbstractLayoutCache createLayoutCache() {
+        if (isLargeModel() && getRowHeight() > 0 && sun.swing.tree.M3FixedHeightLayoutCache.ENABLED) {
+            return new sun.swing.tree.M3FixedHeightLayoutCache();
+        }
         if(isLargeModel() && getRowHeight() > 0) {
             return new FixedHeightLayoutCache();
+        }
+        if (sun.swing.tree.M3VariableHeightLayoutCache.ENABLED) {
+            return new sun.swing.tree.M3VariableHeightLayoutCache();
         }
         return new VariableHeightLayoutCache();
     }
@@ -3221,6 +3227,9 @@ public class BasicTreeUI extends TreeUI
                      expanded, treeModel.isLeaf(value), row,
                      false);
                 if(tree != null) {
+                    // Upstream JDK-6507038: remove the previously added components to prevent
+                    // a leak, then add the component the renderer returned now
+                    rendererPane.removeAll();
                     // Only ever removed when UI changes, this is OK!
                     rendererPane.add(aComponent);
                     aComponent.validate();

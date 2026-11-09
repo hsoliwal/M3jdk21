@@ -1,0 +1,9 @@
+{
+  "artifact": "micrometer-core-1.9.17",
+  "origin": "https://raw.githubusercontent.com/micrometer-metrics/micrometer/v1.9.17/LICENSE",
+  "file": "UPSTREAM_LICENSE.txt",
+  "sha256": "62fb8a3a9621dc2388174caaabe9c2317b694bb9a1d46c98bcf5655b68f51be3",
+  "bytes": 11359,
+  "caveat": "EXACT_TAG v1.9.17",
+  "pom_license": "The Apache Software License, Version 2.0 <http://www.apache.org/licenses/LICENSE-2.0.txt>"
+}

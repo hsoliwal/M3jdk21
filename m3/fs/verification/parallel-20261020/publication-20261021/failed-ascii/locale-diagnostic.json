@@ -1,0 +1,22 @@
+[
+  {
+    "locale": "C",
+    "exit_code": 0,
+    "properties": [
+      "file.encoding = UTF-8",
+      "java.version = 21.0.12.1",
+      "native.encoding = ANSI_X3.4-1968",
+      "sun.jnu.encoding = ANSI_X3.4-1968"
+    ]
+  },
+  {
+    "locale": "C.UTF-8",
+    "exit_code": 0,
+    "properties": [
+      "file.encoding = UTF-8",
+      "java.version = 21.0.12.1",
+      "native.encoding = UTF-8",
+      "sun.jnu.encoding = UTF-8"
+    ]
+  }
+]

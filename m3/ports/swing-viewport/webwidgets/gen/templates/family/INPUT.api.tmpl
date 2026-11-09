@@ -1,0 +1,31 @@
+package @PKG@;
+
+/** API of the text entries (pattern M3P-INPUT-1). */
+public interface M3InputApi extends M3WebApi {
+	/** Replaces the content: search text, an OTP cell count, tags or candidates ({@code ;}-separated). */
+	void load(String sample);
+
+	/** The entered text (OTP: the cells). */
+	String valueText();
+
+	void setValueText(String text);
+
+	int caret();
+
+	void setCaret(int caret);
+
+	/** Paints bullets instead of characters. */
+	void setMasked(boolean masked);
+
+	void setPlaceholder(String text);
+
+	/** Inserts at the caret (OTP: into the focused cell, digits only). */
+	void insert(char c);
+
+	void backspace();
+
+	void deleteForward();
+
+	/** Enter: commits a tag, or accepts the highlighted candidate. */
+	void commit();
+}

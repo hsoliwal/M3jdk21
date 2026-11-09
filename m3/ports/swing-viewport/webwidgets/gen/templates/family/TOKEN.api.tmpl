@@ -1,0 +1,18 @@
+package @PKG@;
+
+/** API of the small token renderers (pattern M3P-TOKEN-1). */
+public interface M3TokenApi extends M3WebApi {
+	/** Replaces the items with a sample spec: {@code ;}-separated item texts (counts for badges, glyph names for icons). */
+	void load(String sample);
+
+	/** Overflow limit of count badges: values above it paint as {@code max+}. */
+	void setMax(int max);
+
+	/** Chips show a remove glyph and Delete/Backspace removes the focused chip. */
+	void setRemovable(boolean removable);
+
+	boolean isRemovable();
+
+	/** The text painted for an item (initials, a bounded count, or the text). */
+	String display(int item);
+}

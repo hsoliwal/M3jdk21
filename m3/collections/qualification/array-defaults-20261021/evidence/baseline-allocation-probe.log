@@ -1,0 +1,1 @@
+{"schema":"m3.sorted-batch-allocation.v1","status":"MEASURED","warmup":512,"samples":1024,"initial_size":1024,"capacity":4096,"incoming_length":512,"allocated_bytes_total":75563008,"allocated_bytes_minimum":73792,"allocated_bytes_maximum":73792,"setup_excluded":true,"timing_measured":false}

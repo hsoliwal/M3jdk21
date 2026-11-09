@@ -1,0 +1,3 @@
+PASS M3IndexedReadOnlyNoopProof checks=70132
+
+EXIT=0

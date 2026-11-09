@@ -1,0 +1,21 @@
+{
+  "schema": "M3_COMBINED_MATCHED_IMAGE_STEP_V1",
+  "source_head": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+  "source_tree": "51246136763bff28b9fcc5daf01c884ae05bca7c",
+  "hotspot_git_tree": "afaa42082ed148944e52591d8ab43960890c8d39",
+  "step": "java-base",
+  "command": [
+    "make",
+    "java.base-java-only",
+    "JOBS=4",
+    "MAX_JOBS=4"
+  ],
+  "build_root": "/dev/shm/m3-combined-image-f8287/build",
+  "start_utc": "2026-10-18T12:56:21Z",
+  "resource_limits": {
+    "shm_min_free_bytes": 314572800,
+    "memory_min_available_bytes": 629145600,
+    "process_group_max_rss_bytes": 3221225472
+  },
+  "warnings_as_errors": true
+}

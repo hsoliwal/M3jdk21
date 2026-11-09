@@ -1,0 +1,6 @@
+gate	status	scope
+repository_identity	OBSERVED	Pinned GitHub master commit; not claimed latest after this read
+source_observations	REVIEWED	Only explicitly recorded files/ranges
+diff_lint_compile_tests_runtime	NOT_RUN	No implementation modified
+packet_readback_and_hash	EXECUTED	Local authored artifacts only; no semantic proof
+source_runtime_acceptance	PENDING	Original component and installed JDK gates required for future changes

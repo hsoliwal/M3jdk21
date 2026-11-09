@@ -1,0 +1,22 @@
+--- before/src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java
++++ after/src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java
+@@ -67,16 +67,18 @@
+         return write;
+     }
+ 
+-    /** Count deletion runs, including ones crossing the 64-bit boundary. */
++    /** Count only until the scalar-compaction threshold is exceeded. */
+     private static int removalRuns(long[] deleted, int length) {
+         int words = ((length - 1) >>> 6) + 1;
+         int count = 0;
++        int limit = Math.max(4, length >>> 7);
+         long preceding = 0L;
+         for (int word = 0; word < words; word++) {
+             long bits = deleted[word];
+             int tail = length & 63;
+             if (word == words - 1 && tail != 0) bits &= (1L << tail) - 1L;
+             count += Long.bitCount(bits & ~((bits << 1) | preceding));
++            if (count > limit) return count;
+             preceding = bits >>> 63;
+         }
+         return count;

@@ -1,0 +1,98 @@
+{
+  "schema": "M3_TOKEN_REGEX_QUALIFICATION_V1",
+  "scope": "ISOLATED_JAVA_21_PATCH_MODULE_CONTRACTS",
+  "full_fork_image": "PENDING",
+  "commands": [
+    {
+      "command": [
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/toolchain/jdk-21.0.12.1+1/bin/java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "output": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-J-Xmx256m",
+        "-Xlint:all",
+        "-Werror",
+        "--patch-module",
+        "java.base=/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/source",
+        "-d",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/classes",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/source/java/util/regex/TokenPattern.java",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/source/java/util/regex/TokenMatcher.java"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-J-Xmx256m",
+        "-Xlint:all",
+        "-Werror",
+        "--patch-module",
+        "java.base=/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/classes",
+        "-d",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/tests",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-integrated/test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/toolchain/jdk-21.0.12.1+1/bin/javadoc",
+        "-J-Xmx256m",
+        "-quiet",
+        "-Werror",
+        "-Xdoclint:all,-missing",
+        "-tag",
+        "implNote:a:Implementation Note:",
+        "--patch-module",
+        "java.base=/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/source",
+        "-d",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/docs",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/source/java/util/regex/TokenPattern.java",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/source/java/util/regex/TokenMatcher.java"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "--patch-module",
+        "java.base=/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/classes",
+        "-cp",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/tests",
+        "TokenPatternTest"
+      ],
+      "exit_code": 0,
+      "output": "TokenPatternTest PASS checks=522729 differentials=7586 independentLanguages=6867\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xint",
+        "--patch-module",
+        "java.base=/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/classes",
+        "-cp",
+        "/workspace/scratch/0125adabf4e6/m3jdk21-work/m3-token-regex-9em8eqdr/tests",
+        "TokenPatternTest"
+      ],
+      "exit_code": 0,
+      "output": "TokenPatternTest PASS checks=522729 differentials=7586 independentLanguages=6867\n"
+    }
+  ],
+  "source_sha256": {
+    "src/java.base/share/classes/java/util/regex/TokenPattern.java": "ec99da6337bbef8db8becf07169373789bfa04da298288103ae26161ee27e24a",
+    "src/java.base/share/classes/java/util/regex/TokenMatcher.java": "cc0ab3c5c7d8be51fc3a699d4215a2e667d814301d9a8f0d49f311f750f984a2",
+    "test/jdk/java/util/regex/TokenPattern/TokenPatternTest.java": "6d9a127c3f1159a1323a7ce6129c25d91eb6d4486016bf0ac0dc05d0f43cd56f"
+  },
+  "status": "PASSED"
+}

@@ -86,6 +86,7 @@
 #include "runtime/vframe.inline.hpp"
 #include "runtime/vm_version.hpp"
 #include "utilities/align.hpp"
+#include "utilities/globalDefinitions.hpp"
 #include "utilities/growableArray.hpp"
 #include "utilities/preserveException.hpp"
 #include "utilities/utf8.hpp"
@@ -193,6 +194,7 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
 // java_lang_String
 
 int java_lang_String::_value_offset;
+int java_lang_String::_m3_offset;
 int java_lang_String::_hash_offset;
 int java_lang_String::_hashIsZero_offset;
 int java_lang_String::_coder_offset;
@@ -215,6 +217,7 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
 
 #define STRING_FIELDS_DO(macro) \
   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
+  macro(_m3_offset, k, "m3",              m3_string_signature,     false); \
   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
   macro(_coder_offset, k, "coder",                 byte_signature,       false);
@@ -258,6 +261,28 @@ public:
 
 void java_lang_String::set_compact_strings(bool value) {
   CompactStringsFixup fix(value);
+  vmClasses::String_klass()->do_local_static_fields(&fix);
+}
+
+class M3JoinedStringsFixup : public FieldClosure {
+private:
+  bool _value;
+
+public:
+  M3JoinedStringsFixup(bool value) : _value(value) {}
+
+  void do_field(fieldDescriptor* fd) {
+    if (fd->name() == vmSymbols::m3_joined_strings_name()) {
+      oop mirror = fd->field_holder()->java_mirror();
+      assert(fd->field_holder() == vmClasses::String_klass(), "Should be String");
+      assert(mirror != nullptr, "String must have mirror already");
+      mirror->bool_field_put(fd->offset(), _value);
+    }
+  }
+};
+
+void java_lang_String::set_m3_joined_strings(bool value) {
+  M3JoinedStringsFixup fix(value);
   vmClasses::String_klass()->do_local_static_fields(&fix);
 }
 
@@ -479,23 +504,77 @@ jchar* java_lang_String::as_unicode_string(oop java_string, int& length, TRAPS) 
 }
 
 jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length) {
-  typeArrayOop value  = java_lang_String::value(java_string);
-               length = java_lang_String::length(java_string, value);
-  bool      is_latin1 = java_lang_String::is_latin1(java_string);
-
+  length = java_lang_String::length(java_string);
   jchar* result = NEW_RESOURCE_ARRAY_RETURN_NULL(jchar, length);
-  if (result != nullptr) {
-    if (!is_latin1) {
-      for (int index = 0; index < length; index++) {
-        result[index] = value->char_at(index);
-      }
-    } else {
-      for (int index = 0; index < length; index++) {
-        result[index] = ((jchar) value->byte_at(index)) & 0xff;
-      }
-    }
+  if (result != nullptr && length != 0) {
+    copy_chars(java_string, 0, length, result);
   }
   return result;
+}
+
+void java_lang_String::copy_chars(
+    oop java_string, int start, int len, jchar* destination) {
+  assert(is_instance(java_string), "must be java.lang.String");
+  assert(destination != nullptr || len == 0, "destination is required for non-empty copy");
+  const int string_length = length(java_string);
+  assert(start >= 0 && len >= 0 && start <= string_length - len,
+         "String copy range out of bounds");
+  if (len == 0) {
+    return;
+  }
+
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    java_lang_M3String::copy_chars(storage, start, len, destination);
+    return;
+  }
+
+  typeArrayOop value = java_lang_String::value(java_string);
+  if (is_latin1(java_string)) {
+    for (int i = 0; i < len; i++) {
+      destination[i] = ((jchar)value->byte_at(start + i)) & 0xff;
+    }
+  } else {
+    ArrayAccess<>::arraycopy_to_native(
+        value,
+        (size_t)typeArrayOopDesc::element_offset<jchar>(start),
+        destination,
+        len);
+  }
+}
+
+// Native scratch storage only: safe for callers that cannot safepoint.
+static jchar* m3_unicode_range(oop string, int start, int len) {
+  jchar* chars = NEW_RESOURCE_ARRAY(jchar, len);
+  java_lang_String::copy_chars(string, start, len, chars);
+  return chars;
+}
+
+// Buffer conversions must not allocate scratch space: JNI callers may have no ResourceMark.
+static char* m3_utf8_range(oop string, int start, int len, char* buf, int buflen) {
+  assert(buflen > 0, "zero length output buffer");
+  static const int chunk_capacity = 256;
+  jchar scratch[chunk_capacity];
+  char* out = buf;
+  int copied = 0;
+  while (copied < len) {
+    const int chunk = MIN2(chunk_capacity, len - copied);
+    java_lang_String::copy_chars(string, start + copied, chunk, scratch);
+    for (int i = 0; i < chunk; i++) {
+      jchar c = scratch[i];
+      int size = UNICODE::utf8_size(c);
+      if (size >= buflen) {
+        *out = '\0';
+        return buf;
+      }
+      UNICODE::as_utf8(&c, 1, out, buflen);
+      out += size;
+      buflen -= size;
+    }
+    copied += chunk;
+  }
+  *out = '\0';
+  return buf;
 }
 
 inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool update) {
@@ -517,7 +596,10 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
 
   unsigned int hash = 0;
-  if (length > 0) {
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    hash = (unsigned int)java_lang_M3String::java_hash(storage);
+  } else if (length > 0) {
     if (is_latin1) {
       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
     } else {
@@ -545,6 +627,16 @@ unsigned int java_lang_String::hash_code_noupdate(oop java_string) {
 
 
 char* java_lang_String::as_quoted_ascii(oop java_string) {
+  if (is_m3_joined(java_string)) {
+    int len = length(java_string);
+    if (len == 0) return nullptr;
+    jchar* chars = m3_unicode_range(java_string, 0, len);
+    int size = UNICODE::quoted_ascii_length(chars, len) + 1;
+    char* result = NEW_RESOURCE_ARRAY(char, size);
+    UNICODE::as_quoted_ascii(chars, len, result, size);
+    return result;
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
@@ -570,6 +662,12 @@ char* java_lang_String::as_quoted_ascii(oop java_string) {
 }
 
 Symbol* java_lang_String::as_symbol(oop java_string) {
+  if (is_m3_joined(java_string)) {
+    ResourceMark rm;
+    int len = length(java_string);
+    return SymbolTable::new_symbol(m3_unicode_range(java_string, 0, len), len);
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
@@ -587,6 +685,12 @@ Symbol* java_lang_String::as_symbol(oop java_string) {
 }
 
 Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
+  if (is_m3_joined(java_string)) {
+    ResourceMark rm;
+    int len = length(java_string);
+    return SymbolTable::probe_unicode(m3_unicode_range(java_string, 0, len), len);
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
@@ -602,6 +706,26 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
 }
 
 int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
+  if (is_m3_joined(java_string)) {
+    oop storage = m3_storage(java_string);
+    int prepared = java_lang_M3String::utf8_length_if_precomputed(storage);
+    if (prepared >= 0) {
+      return prepared;
+    }
+    int result = 0;
+    int len = length(java_string);
+    static const int chunk_capacity = 256;
+    jchar scratch[chunk_capacity];
+    for (int copied = 0; copied < len; copied += chunk_capacity) {
+      const int chunk = MIN2(chunk_capacity, len - copied);
+      copy_chars(java_string, copied, chunk, scratch);
+      for (int i = 0; i < chunk; i++) {
+        result += UNICODE::utf8_size(scratch[i]);
+      }
+    }
+    return result;
+  }
+
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be same as java_lang_String::value(java_string)");
   int length = java_lang_String::length(java_string, value);
@@ -626,6 +750,13 @@ char* java_lang_String::as_utf8_string(oop java_string) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, int& length) {
+  if (is_m3_joined(java_string)) {
+    int units = java_lang_String::length(java_string);
+    length = utf8_length(java_string);
+    char* result = NEW_RESOURCE_ARRAY(char, length + 1);
+    return m3_utf8_range(java_string, 0, units, result, length + 1);
+  }
+
   typeArrayOop value = java_lang_String::value(java_string);
   length             = java_lang_String::length(java_string, value);
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
@@ -641,6 +772,13 @@ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
 // Uses a provided buffer if it's sufficiently large, otherwise allocates
 // a resource array to fit
 char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int buflen, int& utf8_len) {
+  if (is_m3_joined(java_string)) {
+    int len = length(java_string);
+    utf8_len = utf8_length(java_string);
+    if (utf8_len >= buflen) buf = NEW_RESOURCE_ARRAY(char, utf8_len + 1);
+    return m3_utf8_range(java_string, 0, len, buf, utf8_len + 1);
+  }
+
   typeArrayOop value = java_lang_String::value(java_string);
   int            len = java_lang_String::length(java_string, value);
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
@@ -662,6 +800,11 @@ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int bufl
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, char* buf, int buflen) {
+  if (is_m3_joined(java_string)) {
+    int len = length(java_string);
+    return m3_utf8_range(java_string, 0, len, buf, buflen);
+  }
+
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be same as java_lang_String::value(java_string)");
   int     length = java_lang_String::length(java_string, value);
@@ -681,6 +824,14 @@ char* java_lang_String::as_utf8_string(oop java_string, char* buf, int buflen) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
+  if (is_m3_joined(java_string)) {
+    assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
+    int bytes = 0;
+    for (int i = 0; i < len; i++) bytes += UNICODE::utf8_size(char_at(java_string, start + i));
+    char* result = NEW_RESOURCE_ARRAY(char, bytes + 1);
+    return m3_utf8_range(java_string, start, len, result, bytes + 1);
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
   assert(start + len <= java_lang_String::length(java_string), "just checking");
@@ -694,6 +845,11 @@ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int start, int len, char* buf, int buflen) {
+  if (is_m3_joined(java_string)) {
+    assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
+    return m3_utf8_range(java_string, start, len, buf, buflen);
+  }
+
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be same as java_lang_String::value(java_string)");
   assert(start + len <= java_lang_String::length(java_string), "just checking");
@@ -708,6 +864,12 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int 
 }
 
 bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
+  if (is_m3_joined(java_string)) {
+    if (length(java_string) != len) return false;
+    for (int i = 0; i < len; i++) if (char_at(java_string, i) != chars[i]) return false;
+    return true;
+  }
+
   assert(java_string->klass() == vmClasses::String_klass(),
          "must be java_string");
   typeArrayOop value = java_lang_String::value_no_keepalive(java_string);
@@ -733,6 +895,13 @@ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
 }
 
 bool java_lang_String::equals(oop str1, oop str2) {
+  if (is_m3_joined(str1) || is_m3_joined(str2)) {
+    int len = length(str1);
+    if (length(str2) != len) return false;
+    for (int i = 0; i < len; i++) if (char_at(str1, i) != char_at(str2, i)) return false;
+    return true;
+  }
+
   assert(str1->klass() == vmClasses::String_klass(),
          "must be java String");
   assert(str2->klass() == vmClasses::String_klass(),
@@ -753,7 +922,7 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   assert(java_string->klass() == vmClasses::String_klass(), "must be java_string");
   typeArrayOop value  = java_lang_String::value_no_keepalive(java_string);
 
-  if (value == nullptr) {
+  if (value == nullptr && !is_m3_joined(java_string)) {
     // This can happen if, e.g., printing a String
     // object before its initializer has been called
     st->print("nullptr");
@@ -761,12 +930,10 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   }
 
   int length = java_lang_String::length(java_string, value);
-  bool is_latin1 = java_lang_String::is_latin1(java_string);
 
   st->print("\"");
   for (int index = 0; index < length; index++) {
-    jchar c = (!is_latin1) ?  value->char_at(index) :
-                             ((jchar) value->byte_at(index)) & 0xff;
+    jchar c = char_at(java_string, index);
     if (c < ' ') {
       st->print("\\x%02X", c); // print control characters e.g. \x0A
     } else {
@@ -774,6 +941,154 @@ void java_lang_String::print(oop java_string, outputStream* st) {
     }
   }
   st->print("\"");
+}
+
+// java_lang_M3String
+
+int java_lang_M3String::_owner_offset;
+int java_lang_M3String::_value_offset;
+int java_lang_M3String::_owner_kind_offset;
+int java_lang_M3String::_owner_length_offset;
+int java_lang_M3String::_owner_coder_offset;
+int java_lang_M3String::_owner_javaHash_offset;
+int java_lang_M3String::_owner_facts_offset;
+int java_lang_M3String::_facts_utf8Length_offset;
+int java_lang_M3String::_facts_modifiedUtf8Length_offset;
+int java_lang_M3String::_atom_address_offset;
+int java_lang_M3String::_atom_storageWidth_offset;
+int java_lang_M3String::_atom_bigEndian_offset;
+int java_lang_M3String::_tuple_left_offset;
+int java_lang_M3String::_tuple_right_offset;
+int java_lang_M3String::_immediate_words_offset;
+int java_lang_M3String::_immediate_slot_offset;
+
+#define M3_STRING_VALUE_FIELDS_DO(macro) \
+  macro(_owner_offset, v, "owner", m3_string_owner_signature, false); \
+  macro(_value_offset, v, "value", long_signature, false);
+
+#define M3_STRING_OWNER_FIELDS_DO(macro) \
+  macro(_owner_kind_offset, o, "kind", byte_signature, false); \
+  macro(_owner_length_offset, o, "length", int_signature, false); \
+  macro(_owner_coder_offset, o, "coder", byte_signature, false); \
+  macro(_owner_javaHash_offset, o, "javaHash", int_signature, false); \
+  macro(_owner_facts_offset, o, "facts", m3_string_facts_signature, false);
+
+#define M3_STRING_ATOM_FIELDS_DO(macro) \
+  macro(_atom_address_offset, a, "address", long_signature, false); \
+  macro(_atom_storageWidth_offset, a, "storageWidth", byte_signature, false); \
+  macro(_atom_bigEndian_offset, a, "bigEndian", bool_signature, false);
+
+#define M3_STRING_TUPLE_FIELDS_DO(macro) \
+  macro(_tuple_left_offset, t, "left", m3_string_signature, false); \
+  macro(_tuple_right_offset, t, "right", m3_string_signature, false);
+
+#define M3_STRING_IMMEDIATE_FIELDS_DO(macro) \
+  macro(_immediate_words_offset, i, "words", long_array_signature, false); \
+  macro(_immediate_slot_offset, i, "slot", int_signature, false);
+
+#define M3_STRING_FACTS_FIELDS_DO(macro) \
+  macro(_facts_utf8Length_offset, f, "utf8Length", int_signature, false); \
+  macro(_facts_modifiedUtf8Length_offset, f, "modifiedUtf8Length", int_signature, false);
+
+void java_lang_M3String::compute_offsets() {
+  InstanceKlass* v = vmClasses::M3String_klass();
+  InstanceKlass* o = vmClasses::M3StringOwner_klass();
+  InstanceKlass* a = vmClasses::M3StringAtom_klass();
+  InstanceKlass* t = vmClasses::M3StringTuple_klass();
+  InstanceKlass* i = vmClasses::M3StringImmediate_klass();
+  InstanceKlass* f = vmClasses::M3StringFacts_klass();
+  M3_STRING_VALUE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_OWNER_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_ATOM_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_TUPLE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_IMMEDIATE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_FACTS_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+}
+
+#if INCLUDE_CDS
+void java_lang_M3String::serialize_offsets(SerializeClosure* f) {
+  M3_STRING_VALUE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_OWNER_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_ATOM_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_TUPLE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_IMMEDIATE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_FACTS_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+}
+#endif
+
+void java_lang_M3String::copy_owner_chars(
+    oop o, int start, int len, jchar* destination) {
+  assert(o != nullptr, "M3 owner required");
+  assert(destination != nullptr || len == 0, "destination required");
+  assert(start >= 0 && len >= 0 && start <= o->int_field(_owner_length_offset) - len,
+         "owner range");
+  if (len == 0) {
+    return;
+  }
+
+  if (o->klass() == vmClasses::M3StringAtom_klass()) {
+    const jlong address = o->long_field(_atom_address_offset);
+    const jbyte width = o->byte_field(_atom_storageWidth_offset);
+    const uint8_t* bytes =
+        reinterpret_cast<const uint8_t*>((uintptr_t)address);
+    if (width == 1) {
+      for (int index = 0; index < len; index++) {
+        destination[index] = (jchar)bytes[start + index];
+      }
+      return;
+    }
+
+    assert(width == 2, "M3 atom width");
+    const bool big_endian = o->bool_field(_atom_bigEndian_offset);
+    size_t at = (size_t)start << 1;
+    for (int index = 0; index < len; index++, at += 2) {
+      const uint16_t first = bytes[at];
+      const uint16_t second = bytes[at + 1];
+      destination[index] = big_endian
+          ? (jchar)((first << 8) | second)
+          : (jchar)(first | (second << 8));
+    }
+    return;
+  }
+
+  if (o->klass() == vmClasses::M3StringImmediate_klass()) {
+    typeArrayOop words = (typeArrayOop)o->obj_field(_immediate_words_offset);
+    const int slot = o->int_field(_immediate_slot_offset);
+    assert(words != nullptr && slot >= 0 && slot < words->length(), "M3 immediate slot");
+    const jlong packed = words->long_at(slot);
+    for (int index = 0; index < len; index++) {
+      destination[index] = immediate_char_at(packed, start + index);
+    }
+    return;
+  }
+
+  assert(o->klass() == vmClasses::M3StringTuple_klass(),
+         "M3 owner must be atom, immediate or tuple");
+  oop left = o->obj_field(_tuple_left_offset);
+  oop right = o->obj_field(_tuple_right_offset);
+  const int left_length = length(left);
+  const int end = start + len;
+
+  if (end <= left_length) {
+    copy_chars(left, start, len, destination);
+    return;
+  }
+  if (start >= left_length) {
+    copy_chars(right, start - left_length, len, destination);
+    return;
+  }
+
+  const int left_count = left_length - start;
+  copy_chars(left, start, left_count, destination);
+  copy_chars(right, 0, len - left_count, destination + left_count);
+}
+
+void java_lang_M3String::copy_chars(
+    oop value, int start, int len, jchar* destination) {
+  assert(value != nullptr, "M3String required");
+  assert(destination != nullptr || len == 0, "destination required");
+  assert(start >= 0 && len >= 0 && start <= length(value) - len, "range");
+  copy_owner_chars(owner(value), java_lang_M3String::start(value) + start, len, destination);
 }
 
 // java_lang_Class
@@ -786,6 +1101,7 @@ int java_lang_Class::_class_loader_offset;
 int java_lang_Class::_module_offset;
 int java_lang_Class::_protection_domain_offset;
 int java_lang_Class::_component_mirror_offset;
+int java_lang_Class::_init_lock_offset;
 int java_lang_Class::_signers_offset;
 int java_lang_Class::_name_offset;
 int java_lang_Class::_source_file_offset;
@@ -911,6 +1227,12 @@ void java_lang_Class::initialize_mirror_fields(Klass* k,
                                                Handle protection_domain,
                                                Handle classData,
                                                TRAPS) {
+  // Allocate a simple java object for a lock.
+  // This needs to be a java object because during class initialization
+  // it can be held across a java call.
+  typeArrayOop r = oopFactory::new_typeArray(T_INT, 0, CHECK);
+  set_init_lock(mirror(), r);
+
   // Set protection domain also
   set_protection_domain(mirror(), protection_domain());
 
@@ -1132,6 +1454,10 @@ bool java_lang_Class::restore_archived_mirror(Klass *k,
   if (!k->is_array_klass()) {
     // - local static final fields with initial values were initialized at dump time
 
+    // create the init_lock
+    typeArrayOop r = oopFactory::new_typeArray(T_INT, 0, CHECK_(false));
+    set_init_lock(mirror(), r);
+
     if (protection_domain.not_null()) {
       set_protection_domain(mirror(), protection_domain());
     }
@@ -1194,6 +1520,15 @@ void java_lang_Class::set_component_mirror(oop java_class, oop comp_mirror) {
 oop java_lang_Class::component_mirror(oop java_class) {
   assert(_component_mirror_offset != 0, "must be set");
   return java_class->obj_field(_component_mirror_offset);
+}
+
+oop java_lang_Class::init_lock(oop java_class) {
+  assert(_init_lock_offset != 0, "must be set");
+  return java_class->obj_field(_init_lock_offset);
+}
+void java_lang_Class::set_init_lock(oop java_class, oop init_lock) {
+  assert(_init_lock_offset != 0, "must be set");
+  java_class->obj_field_put(_init_lock_offset, init_lock);
 }
 
 objArrayOop java_lang_Class::signers(oop java_class) {
@@ -1414,7 +1749,6 @@ void java_lang_Class::compute_offsets() {
 
   InstanceKlass* k = vmClasses::Class_klass();
   CLASS_FIELDS_DO(FIELD_COMPUTE_OFFSET);
-
   CLASS_INJECTED_FIELDS(INJECTED_FIELD_COMPUTE_OFFSET);
 }
 
@@ -1985,24 +2319,28 @@ int java_lang_VirtualThread::state(oop vthread) {
 
 JavaThreadStatus java_lang_VirtualThread::map_state_to_thread_status(int state) {
   JavaThreadStatus status = JavaThreadStatus::NEW;
-  switch (state) {
-    case NEW :
+  switch (state & ~SUSPENDED) {
+    case NEW:
       status = JavaThreadStatus::NEW;
       break;
-    case STARTED :
-    case RUNNABLE :
-    case RUNNABLE_SUSPENDED :
-    case RUNNING :
-    case PARKING :
-    case YIELDING :
+    case STARTED:
+    case RUNNING:
+    case PARKING:
+    case TIMED_PARKING:
+    case UNPARKED:
+    case YIELDING:
+    case YIELDED:
       status = JavaThreadStatus::RUNNABLE;
       break;
-    case PARKED :
-    case PARKED_SUSPENDED :
-    case PINNED :
+    case PARKED:
+    case PINNED:
       status = JavaThreadStatus::PARKED;
       break;
-    case TERMINATED :
+    case TIMED_PARKED:
+    case TIMED_PINNED:
+      status = JavaThreadStatus::PARKED_TIMED;
+      break;
+    case TERMINATED:
       status = JavaThreadStatus::TERMINATED;
       break;
     default:
@@ -2072,18 +2410,17 @@ oop java_lang_Throwable::message(oop throwable) {
   return throwable->obj_field(_detailMessage_offset);
 }
 
-oop java_lang_Throwable::cause(oop throwable) {
-  return throwable->obj_field(_cause_offset);
+const char* java_lang_Throwable::message_as_utf8(oop throwable) {
+  oop msg = java_lang_Throwable::message(throwable);
+  const char* msg_utf8 = nullptr;
+  if (msg != nullptr) {
+    msg_utf8 = java_lang_String::as_utf8_string(msg);
+  }
+  return msg_utf8;
 }
 
-// Return Symbol for detailed_message or null
-Symbol* java_lang_Throwable::detail_message(oop throwable) {
-  PreserveExceptionMark pm(Thread::current());
-  oop detailed_message = java_lang_Throwable::message(throwable);
-  if (detailed_message != nullptr) {
-    return java_lang_String::as_symbol(detailed_message);
-  }
-  return nullptr;
+oop java_lang_Throwable::cause(oop throwable) {
+  return throwable->obj_field(_cause_offset);
 }
 
 void java_lang_Throwable::set_message(oop throwable, oop value) {
@@ -2761,15 +3098,19 @@ Handle java_lang_Throwable::create_initialization_error(JavaThread* current, Han
   assert(throwable.not_null(), "shouldn't be");
 
   // Now create the message from the original exception and thread name.
-  Symbol* message = java_lang_Throwable::detail_message(throwable());
   ResourceMark rm(current);
+  const char *message = nullptr;
+  oop detailed_message = java_lang_Throwable::message(throwable());
+  if (detailed_message != nullptr) {
+    message = java_lang_String::as_utf8_string(detailed_message);
+  }
   stringStream st;
   st.print("Exception %s%s ", throwable()->klass()->name()->as_klass_external_name(),
              message == nullptr ? "" : ":");
   if (message == nullptr) {
     st.print("[in thread \"%s\"]", current->name());
   } else {
-    st.print("%s [in thread \"%s\"]", message->as_C_string(), current->name());
+    st.print("%s [in thread \"%s\"]", message, current->name());
   }
 
   Symbol* exception_name = vmSymbols::java_lang_ExceptionInInitializerError();
@@ -4408,28 +4749,31 @@ int java_lang_invoke_MethodType::rtype_slot_count(oop mt) {
 // Support for java_lang_invoke_CallSite
 
 int java_lang_invoke_CallSite::_target_offset;
-int java_lang_invoke_CallSite::_context_offset;
+int java_lang_invoke_CallSite::_vmdependencies_offset;
+int java_lang_invoke_CallSite::_last_cleanup_offset;
 
 #define CALLSITE_FIELDS_DO(macro) \
   macro(_target_offset,  k, "target", java_lang_invoke_MethodHandle_signature, false); \
-  macro(_context_offset, k, "context", java_lang_invoke_MethodHandleNatives_CallSiteContext_signature, false)
 
 void java_lang_invoke_CallSite::compute_offsets() {
   InstanceKlass* k = vmClasses::CallSite_klass();
   CALLSITE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  CALLSITE_INJECTED_FIELDS(INJECTED_FIELD_COMPUTE_OFFSET);
 }
 
 #if INCLUDE_CDS
 void java_lang_invoke_CallSite::serialize_offsets(SerializeClosure* f) {
   CALLSITE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  CALLSITE_INJECTED_FIELDS(INJECTED_FIELD_SERIALIZE_OFFSET);
 }
 #endif
 
-oop java_lang_invoke_CallSite::context_no_keepalive(oop call_site) {
+DependencyContext java_lang_invoke_CallSite::vmdependencies(oop call_site) {
   assert(java_lang_invoke_CallSite::is_instance(call_site), "");
-
-  oop dep_oop = call_site->obj_field_access<AS_NO_KEEPALIVE>(_context_offset);
-  return dep_oop;
+  nmethodBucket* volatile* vmdeps_addr = call_site->field_addr<nmethodBucket* volatile>(_vmdependencies_offset);
+  volatile uint64_t* last_cleanup_addr = call_site->field_addr<volatile uint64_t>(_last_cleanup_offset);
+  DependencyContext dep_ctx(vmdeps_addr, last_cleanup_addr);
+  return dep_ctx;
 }
 
 // Support for java_lang_invoke_ConstantCallSite
@@ -4449,30 +4793,6 @@ void java_lang_invoke_ConstantCallSite::serialize_offsets(SerializeClosure* f) {
   CONSTANTCALLSITE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
 }
 #endif
-
-// Support for java_lang_invoke_MethodHandleNatives_CallSiteContext
-
-int java_lang_invoke_MethodHandleNatives_CallSiteContext::_vmdependencies_offset;
-int java_lang_invoke_MethodHandleNatives_CallSiteContext::_last_cleanup_offset;
-
-void java_lang_invoke_MethodHandleNatives_CallSiteContext::compute_offsets() {
-  InstanceKlass* k = vmClasses::Context_klass();
-  CALLSITECONTEXT_INJECTED_FIELDS(INJECTED_FIELD_COMPUTE_OFFSET);
-}
-
-#if INCLUDE_CDS
-void java_lang_invoke_MethodHandleNatives_CallSiteContext::serialize_offsets(SerializeClosure* f) {
-  CALLSITECONTEXT_INJECTED_FIELDS(INJECTED_FIELD_SERIALIZE_OFFSET);
-}
-#endif
-
-DependencyContext java_lang_invoke_MethodHandleNatives_CallSiteContext::vmdependencies(oop call_site) {
-  assert(java_lang_invoke_MethodHandleNatives_CallSiteContext::is_instance(call_site), "");
-  nmethodBucket* volatile* vmdeps_addr = call_site->field_addr<nmethodBucket* volatile>(_vmdependencies_offset);
-  volatile uint64_t* last_cleanup_addr = call_site->field_addr<volatile uint64_t>(_last_cleanup_offset);
-  DependencyContext dep_ctx(vmdeps_addr, last_cleanup_addr);
-  return dep_ctx;
-}
 
 // Support for java_security_AccessControlContext
 
@@ -4721,7 +5041,7 @@ public:
   UnsafeConstantsFixup() {
     // round up values for all static final fields
     _address_size = sizeof(void*);
-    _page_size = (int)os::vm_page_size();
+    _page_size = AIX_ONLY(sysconf(_SC_PAGESIZE)) NOT_AIX((int)os::vm_page_size());
     _big_endian = LITTLE_ENDIAN_ONLY(false) BIG_ENDIAN_ONLY(true);
     _use_unaligned_access = UseUnalignedAccesses;
     _data_cache_line_flush_size = (int)VM_Version::data_cache_line_flush_size();
@@ -5196,6 +5516,7 @@ void java_lang_InternalError::serialize_offsets(SerializeClosure* f) {
   //end
 
 #define BASIC_JAVA_CLASSES_DO_PART2(f) \
+  f(java_lang_M3String) \
   f(java_lang_System) \
   f(java_lang_ClassLoader) \
   f(java_lang_Throwable) \
@@ -5215,7 +5536,6 @@ void java_lang_InternalError::serialize_offsets(SerializeClosure* f) {
   f(java_lang_invoke_MethodType) \
   f(java_lang_invoke_CallSite) \
   f(java_lang_invoke_ConstantCallSite) \
-  f(java_lang_invoke_MethodHandleNatives_CallSiteContext) \
   f(java_security_AccessControlContext) \
   f(java_lang_reflect_AccessibleObject) \
   f(java_lang_reflect_Method) \
@@ -5279,6 +5599,13 @@ void JavaClasses::serialize_offsets(SerializeClosure* soc) {
 bool JavaClasses::is_supported_for_archiving(oop obj) {
   Klass* klass = obj->klass();
 
+  if ((klass == vmClasses::String_klass() && java_lang_String::is_m3_joined(obj)) ||
+      klass == vmClasses::M3String_klass()) {
+    // Canonical M3String owner/coordinate graphs are rebuilt at runtime.
+    // CDS relocation of native/mapped owner coordinates is intentionally deferred.
+    return false;
+  }
+
   if (klass == vmClasses::ClassLoader_klass() ||  // ClassLoader::loader_data is malloc'ed.
       // The next 3 classes are used to implement java.lang.invoke, and are not used directly in
       // regular Java code. The implementation of java.lang.invoke uses generated hidden classes
@@ -5289,7 +5616,6 @@ bool JavaClasses::is_supported_for_archiving(oop obj) {
       // constant pool entries, so excluding them shouldn't affect the archiving of static fields.
       klass == vmClasses::ResolvedMethodName_klass() ||
       klass == vmClasses::MemberName_klass() ||
-      klass == vmClasses::Context_klass() ||
       // It's problematic to archive Reference objects. One of the reasons is that
       // Reference::discovered may pull in unwanted objects (see JDK-8284336)
       klass->is_subclass_of(vmClasses::Reference_klass())) {

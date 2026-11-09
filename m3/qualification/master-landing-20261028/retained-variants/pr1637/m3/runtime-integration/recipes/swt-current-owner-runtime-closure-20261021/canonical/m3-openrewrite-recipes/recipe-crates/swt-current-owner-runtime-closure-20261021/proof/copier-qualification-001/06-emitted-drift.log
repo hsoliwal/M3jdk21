@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py", line 145, in <module>
+    main()
+  File "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py", line 99, in main
+    raise ValueError('emitted output drift: ' + path)
+ValueError: emitted output drift: docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml

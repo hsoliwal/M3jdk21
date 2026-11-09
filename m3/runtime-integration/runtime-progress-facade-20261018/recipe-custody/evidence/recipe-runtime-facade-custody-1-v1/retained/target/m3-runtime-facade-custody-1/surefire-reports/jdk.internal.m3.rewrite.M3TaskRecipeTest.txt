@@ -1,0 +1,81 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.rewrite.M3TaskRecipeTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 47.39 s <<< FAILURE! -- in com.synexia.rewrite.M3TaskRecipeTest
+com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained -- Time elapsed: 2.697 s <<< ERROR!
+java.lang.IllegalStateException: invalid hash-pinned text manifest row
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.targets(M3HashPinnedTextSnapshotRecipe.java:240)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:94)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:40)
+	at org.openrewrite.ScanningRecipe.lambda$getAccumulator$0(ScanningRecipe.java:89)
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1228)
+	at org.openrewrite.Cursor.computeMessageIfAbsent(Cursor.java:285)
+	at org.openrewrite.ScanningRecipe.getAccumulator(ScanningRecipe.java:89)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.M3TaskRecipeTest.replay(M3TaskRecipeTest.java:118)
+	at com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained(M3TaskRecipeTest.java:245)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.synexia.rewrite.M3TaskRecipeTest.postScanChangesRefuse -- Time elapsed: 1.891 s <<< ERROR!
+java.lang.IllegalStateException: invalid hash-pinned text manifest row
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.targets(M3HashPinnedTextSnapshotRecipe.java:240)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:94)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:40)
+	at com.synexia.rewrite.M3TaskRecipeTest.postScan(M3TaskRecipeTest.java:232)
+	at com.synexia.rewrite.M3TaskRecipeTest.postScanChangesRefuse(M3TaskRecipeTest.java:226)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.synexia.rewrite.M3TaskRecipeTest.mixedPreimagesAndPostimages -- Time elapsed: 5.283 s <<< ERROR!
+java.lang.IllegalStateException: invalid hash-pinned text manifest row
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.targets(M3HashPinnedTextSnapshotRecipe.java:240)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:94)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:40)
+	at org.openrewrite.ScanningRecipe.lambda$getAccumulator$0(ScanningRecipe.java:89)
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1228)
+	at org.openrewrite.Cursor.computeMessageIfAbsent(Cursor.java:285)
+	at org.openrewrite.ScanningRecipe.getAccumulator(ScanningRecipe.java:89)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.M3TaskRecipeTest.replay(M3TaskRecipeTest.java:118)
+	at com.synexia.rewrite.M3TaskRecipeTest.mixedPreimagesAndPostimages(M3TaskRecipeTest.java:193)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.synexia.rewrite.M3TaskRecipeTest.exactReplayFixedPointAndInputOrder -- Time elapsed: 0.959 s <<< ERROR!
+java.lang.IllegalStateException: invalid hash-pinned text manifest row
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.targets(M3HashPinnedTextSnapshotRecipe.java:240)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:94)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:40)
+	at org.openrewrite.ScanningRecipe.lambda$getAccumulator$0(ScanningRecipe.java:89)
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1228)
+	at org.openrewrite.Cursor.computeMessageIfAbsent(Cursor.java:285)
+	at org.openrewrite.ScanningRecipe.getAccumulator(ScanningRecipe.java:89)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.M3TaskRecipeTest.namedDescriptorComposesTheQualifiedLanes(M3TaskRecipeTest.java:174)
+	at com.synexia.rewrite.M3TaskRecipeTest.exactReplayFixedPointAndInputOrder(M3TaskRecipeTest.java:143)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

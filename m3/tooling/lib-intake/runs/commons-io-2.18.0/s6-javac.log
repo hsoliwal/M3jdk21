@@ -1,0 +1,343 @@
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.io {
+          ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\Charsets.java:56: warning: [missing-explicit-ctor] class Charsets in exported package com.m3.lib.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class Charsets {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOExceptionList.java:100: warning: [unchecked] unchecked cast
+        return (T) causeList.get(index);
+                                ^
+  required: T
+  found:    CAP#1
+  where T is a type-variable:
+    T extends Throwable declared in method <T>getCause(int)
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Throwable from capture of ? extends Throwable
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOExceptionList.java:122: warning: [unchecked] unchecked cast
+        return (List<T>) new ArrayList<>(causeList);
+                         ^
+  required: List<T>
+  found:    ArrayList<CAP#1>
+  where T is a type-variable:
+    T extends Throwable declared in method <T>getCauseList()
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Throwable from capture of ? extends Throwable
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOExceptionList.java:133: warning: [unchecked] unchecked cast
+        return (List<T>) new ArrayList<>(causeList);
+                         ^
+  required: List<T>
+  found:    ArrayList<CAP#1>
+  where T is a type-variable:
+    T extends Throwable declared in method <T>getCauseList(Class<T>)
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Throwable from capture of ? extends Throwable
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOExceptionList.java:69: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<? extends Throwable> causeList;
+                                            ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOConsumer.java:80: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter array
+        IOStreams.forAll(IOStreams.of(array), action);
+                                      ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\build\AbstractSupplier.java:125: warning: [missing-explicit-ctor] class AbstractSupplier in exported package com.m3.lib.io.build declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public abstract class AbstractSupplier<T, B extends AbstractSupplier<T, B>> implements IOSupplier<T> {
+                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\build\AbstractOriginSupplier.java:50: warning: [missing-explicit-ctor] class AbstractOriginSupplier in exported package com.m3.lib.io.build declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public abstract class AbstractOriginSupplier<T, B extends AbstractOriginSupplier<T, B>> extends AbstractSupplier<T, B> {
+                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\build\AbstractStreamBuilder.java:43: warning: [missing-explicit-ctor] class AbstractStreamBuilder in exported package com.m3.lib.io.build declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public abstract class AbstractStreamBuilder<T, B extends AbstractStreamBuilder<T, B>> extends AbstractOriginSupplier<T, B> {
+                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\QueueInputStream.java:82: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<QueueInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOFunction.java:109: warning: [overloads] <V>andThen(IOFunction<? super R,? extends V>) in IOFunction is potentially ambiguous with andThen(IOConsumer<? super R>) in IOFunction
+    default <V> IOFunction<T, V> andThen(final IOFunction<? super R, ? extends V> after) {
+                                 ^
+  where V,R,T are type-variables:
+    V extends Object declared in method <V>andThen(IOFunction<? super R,? extends V>)
+    R extends Object declared in interface IOFunction
+    T extends Object declared in interface IOFunction
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOFunction.java:76: warning: [overloads] <V>andThen(Function<? super R,? extends V>) in IOFunction is potentially ambiguous with andThen(Consumer<? super R>) in IOFunction
+    default <V> IOFunction<T, V> andThen(final Function<? super R, ? extends V> after) {
+                                 ^
+  where V,R,T are type-variables:
+    V extends Object declared in method <V>andThen(Function<? super R,? extends V>)
+    R extends Object declared in interface IOFunction
+    T extends Object declared in interface IOFunction
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOFunction.java:162: warning: [overloads] <V#1>compose(IOFunction<? super V#1,? extends T>) in IOFunction is potentially ambiguous with <V#2>compose(Function<? super V#2,? extends T>) in IOFunction
+    default <V> IOFunction<V, R> compose(final IOFunction<? super V, ? extends T> before) {
+                                 ^
+  where V#1,T,R,V#2 are type-variables:
+    V#1 extends Object declared in method <V#1>compose(IOFunction<? super V#1,? extends T>)
+    T extends Object declared in interface IOFunction
+    R extends Object declared in interface IOFunction
+    V#2 extends Object declared in method <V#2>compose(Function<? super V#2,? extends T>)
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileCleaner.java:38: warning: [missing-explicit-ctor] class FileCleaner in exported package com.m3.lib.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class FileCleaner {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\FileCleaningTracker.java:46: warning: [missing-explicit-ctor] class FileCleaningTracker in exported package com.m3.lib.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class FileCleaningTracker {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\file\Counters.java:28: warning: [missing-explicit-ctor] class Counters in exported package com.m3.lib.io.file declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class Counters {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOCase.java:70: warning: [serial] serialization-related field serialVersionUID is not effective in an enum class
+    private static final long serialVersionUID = -6343169151696340687L;
+                              ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\IOCase.java:260: warning: [serial] serialization-related method readResolve is not effective in an enum class
+    private Object readResolve() {
+                   ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\CompositeFileComparator.java:62: warning: [unchecked] Possible heap pollution from parameterized vararg type Comparator<File>
+    public CompositeFileComparator(@SuppressWarnings("unchecked") final Comparator<File>... delegates) {
+                                                                                            ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\CompositeFileComparator.java:73: warning: [unchecked] unchecked conversion
+                : StreamSupport.stream(delegates.spliterator(), false).toArray((IntFunction<Comparator<File>[]>) Comparator[]::new);
+                                                                                                                 ^
+  required: Comparator<File>[]
+  found:    Comparator[]
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\CompositeFileComparator.java:55: warning: [serial] non-transient instance field of a serializable class declared with an array having a non-serializable base component type Comparator<File>
+    private final Comparator<File>[] delegates;
+                                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\DirectoryFileComparator.java:52: warning: [missing-explicit-ctor] class DirectoryFileComparator in exported package com.m3.lib.io.comparator declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class DirectoryFileComparator extends AbstractFileComparator implements Serializable {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\LastModifiedFileComparator.java:55: warning: [missing-explicit-ctor] class LastModifiedFileComparator in exported package com.m3.lib.io.comparator declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class LastModifiedFileComparator extends AbstractFileComparator implements Serializable {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\comparator\ReverseFileComparator.java:36: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Comparator<File> delegate;
+                                   ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\AndFileFilter.java:50: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<IOFileFilter> fileFilters;
+                                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\AndFileFilter.java:87: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        addFileFilter(fileFilters);
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\AndFileFilter.java:99: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        addFileFilter(filter1);
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\NotFileFilter.java:41: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final IOFileFilter filter;
+                               ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\OrFileFilter.java:48: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<IOFileFilter> fileFilters;
+                                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\OrFileFilter.java:85: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        addFileFilter(fileFilters);
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\OrFileFilter.java:97: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        addFileFilter(filter1);
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\filefilter\WildcardFileFilter.java:93: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.filefilter declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractSupplier<WildcardFileFilter, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOStream.java:132: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        return values == null || values.length == 0 ? empty() : adapt(Arrays.stream(values));
+                                                                                    ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\function\IOStreams.java:79: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter values
+        return values == null ? Stream.empty() : Stream.of(values);
+                                                           ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\AbstractInputStream.java:28: warning: [missing-explicit-ctor] class AbstractInputStream in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public abstract class AbstractInputStream extends InputStream {
+                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ProxyInputStream.java:56: warning: [missing-explicit-ctor] class AbstractBuilder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    protected static abstract class AbstractBuilder<T, B extends AbstractStreamBuilder<T, B>> extends AbstractStreamBuilder<T, B> {
+                              ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\AutoCloseInputStream.java:63: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractBuilder<AutoCloseInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\AutoCloseInputStream.java:156: warning: [removal] finalize() in Object has been deprecated and marked for removal
+    protected void finalize() throws Throwable {
+                   ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\AutoCloseInputStream.java:158: warning: [removal] finalize() in Object has been deprecated and marked for removal
+        super.finalize();
+             ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BOMInputStream.java:127: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractBuilder<BOMInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BoundedInputStream.java:243: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractBuilder<Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\BufferedFileChannelInputStream.java:74: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<BufferedFileChannelInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CharSequenceInputStream.java:84: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<CharSequenceInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CharSequenceInputStream.java:86: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        private CharsetEncoder charsetEncoder = newEncoder(getCharset());
+                                                                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\CharSequenceReader.java:43: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final CharSequence charSequence;
+                               ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ChecksumInputStream.java:43: warning: [deprecation] CountingInputStream in com.m3.lib.io.input has been deprecated
+public final class ChecksumInputStream extends CountingInputStream {
+                                               ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ChecksumInputStream.java:99: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractBuilder<ChecksumInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ClassLoaderObjectInputStream.java:90: warning: [rawtypes] found raw type: Class
+        final Class<?>[] interfaceClasses = new Class[interfaces.length];
+                                                ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ClassLoaderObjectInputStream.java:95: warning: [deprecation] getProxyClass(ClassLoader,Class<?>...) in Proxy has been deprecated
+            return Proxy.getProxyClass(classLoader, interfaceClasses);
+                        ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ClosedInputStream.java:35: warning: [missing-explicit-ctor] class ClosedInputStream in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class ClosedInputStream extends InputStream {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ClosedReader.java:35: warning: [missing-explicit-ctor] class ClosedReader in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class ClosedReader extends Reader {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\DemuxInputStream.java:29: warning: [missing-explicit-ctor] class DemuxInputStream in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class DemuxInputStream extends InputStream {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\MemoryMappedFileInputStream.java:98: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setBufferSizeDefault(DEFAULT_BUFFER_SIZE);
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ObservableInputStream.java:52: warning: [missing-explicit-ctor] class AbstractBuilder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static abstract class AbstractBuilder<T extends AbstractBuilder<T>> extends ProxyInputStream.AbstractBuilder<ObservableInputStream, T> {
+                           ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ObservableInputStream.java:73: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractBuilder<Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ObservableInputStream.java:85: warning: [missing-explicit-ctor] class Observer in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static abstract class Observer {
+                           ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ObservableInputStream.java:148: warning: [rawtypes] found raw type: AbstractBuilder
+    ObservableInputStream(final AbstractBuilder builder) throws IOException {
+                                ^
+  missing type arguments for generic class AbstractBuilder<T>
+  where T is a type-variable:
+    T extends AbstractBuilder<T> declared in class AbstractBuilder
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ObservableInputStream.java:150: warning: [unchecked] unchecked conversion
+        this.observers = builder.observers;
+                                ^
+  required: List<Observer>
+  found:    List
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\RandomAccessFileInputStream.java:57: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<RandomAccessFileInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ReadAheadInputStream.java:70: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<ReadAheadInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ReaderInputStream.java:108: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<ReaderInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ReaderInputStream.java:110: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        private CharsetEncoder charsetEncoder = newEncoder(getCharset());
+                                                                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ReversedLinesFileReader.java:77: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setBufferSizeDefault(DEFAULT_BLOCK_SIZE);
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\Tailer.java:167: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<Tailer, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\Tailer.java:703: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this(new TailablePath(file.toPath()), charset, listener, Duration.ofMillis(delayMillis), end, reOpen, bufSize);
+            ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\Tailer.java:811: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        listener.init(this);
+                      ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\TailerListenerAdapter.java:24: warning: [missing-explicit-ctor] class TailerListenerAdapter in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class TailerListenerAdapter implements TailerListener {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ThrottledInputStream.java:42: warning: [deprecation] CountingInputStream in com.m3.lib.io.input has been deprecated
+public final class ThrottledInputStream extends CountingInputStream {
+                                                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\ThrottledInputStream.java:75: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractBuilder<ThrottledInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UncheckedBufferedReader.java:71: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<UncheckedBufferedReader, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UncheckedFilterInputStream.java:67: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<UncheckedFilterInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UncheckedFilterReader.java:67: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<UncheckedFilterReader, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedFilterInputStream.java:71: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<UnsynchronizedFilterInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedBufferedInputStream.java:84: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<UnsynchronizedBufferedInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedReader.java:32: warning: [missing-explicit-ctor] class UnsynchronizedReader in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public abstract class UnsynchronizedReader extends Reader {
+                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\UnsynchronizedByteArrayInputStream.java:82: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<UnsynchronizedByteArrayInputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReader.java:120: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.input declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<XmlStreamReader, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReader.java:494: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this.encoding = processHttpStream(bom, pis, lenient);
+                                         ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReader.java:907: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            return calculateRawEncoding(bomEnc, xmlGuessEnc, xmlEnc);
+                                       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReader.java:599: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this.encoding = processHttpStream(bom, pis, lenient, httpContentType);
+                                         ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReader.java:932: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            return calculateHttpEncoding(bomEnc, xmlGuessEnc, xmlEnc, lenient, httpContentType);
+                                        ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReader.java:683: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            this.encoding = processHttpStream(bomInput, piInput, lenient, contentType);
+                                             ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\input\XmlStreamReader.java:932: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            return calculateHttpEncoding(bomEnc, xmlGuessEnc, xmlEnc, lenient, httpContentType);
+                                        ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\FileAlterationObserver.java:228: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Comparator<File> comparator;
+                                   ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\SerializableFileTime.java:44: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private FileTime fileTime;
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\monitor\FileAlterationListenerAdaptor.java:28: warning: [missing-explicit-ctor] class FileAlterationListenerAdaptor in exported package com.m3.lib.io.monitor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class FileAlterationListenerAdaptor implements FileAlterationListener {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\AbstractByteArrayOutputStream.java:60: warning: [missing-explicit-ctor] class AbstractByteArrayOutputStream in exported package com.m3.lib.io.output declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public abstract class AbstractByteArrayOutputStream extends OutputStream {
+                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ByteArrayOutputStream.java:108: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            needNewBuffer(size);
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ChunkedOutputStream.java:65: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.output declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<ChunkedOutputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ClosedOutputStream.java:31: warning: [missing-explicit-ctor] class ClosedOutputStream in exported package com.m3.lib.io.output declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class ClosedOutputStream extends OutputStream {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\ClosedWriter.java:31: warning: [missing-explicit-ctor] class ClosedWriter in exported package com.m3.lib.io.output declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class ClosedWriter extends Writer {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\DeferredFileOutputStream.java:420: warning: [deprecation] getStream() in ThresholdingOutputStream has been deprecated
+    protected OutputStream getStream() throws IOException {
+                           ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\DeferredFileOutputStream.java:90: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setBufferSizeDefault(AbstractByteArrayOutputStream.DEFAULT_SIZE);
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\DemuxOutputStream.java:27: warning: [missing-explicit-ctor] class DemuxOutputStream in exported package com.m3.lib.io.output declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+public class DemuxOutputStream extends OutputStream {
+       ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\FileWriterWithEncoding.java:84: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.output declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<FileWriterWithEncoding, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\FileWriterWithEncoding.java:88: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        private CharsetEncoder charsetEncoder = super.getCharset().newEncoder();
+                                                                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\LockableFileWriter.java:83: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setBufferSizeDefault(AbstractByteArrayOutputStream.DEFAULT_SIZE);
+                                ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\UncheckedFilterOutputStream.java:65: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.output declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<UncheckedFilterOutputStream, Builder> {
+                  ^
+H:\m3-scratch\lib-intake\batch\commons-io-2.18.0\proj\src\main\java\com\m3\lib\io\output\UncheckedFilterWriter.java:66: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.io.output declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.io
+    public static class Builder extends AbstractStreamBuilder<UncheckedFilterWriter, Builder> {
+                  ^
+100 warnings
+only showing the first 100 warnings, of 103 total; use -Xmaxwarns if you would like to see more

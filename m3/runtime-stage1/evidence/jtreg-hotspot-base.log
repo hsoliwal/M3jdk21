@@ -1,0 +1,5 @@
+Directory "/workspace/m3-stage1-results/jtreg-hotspot-base-work" not found: creating
+Directory "/workspace/m3-stage1-results/jtreg-hotspot-base-report" not found: creating
+Test results: passed: 17; did not meet platform requirements: 2
+Report written to /workspace/m3-stage1-results/jtreg-hotspot-base-report/html/report.html
+Results written to /workspace/m3-stage1-results/jtreg-hotspot-base-work

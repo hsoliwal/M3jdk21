@@ -1,0 +1,9 @@
+{
+  "schema": "m3-tree-jmh-selection-rule/v1",
+  "frozenBeforeCandidateMeasurementsComplete": true,
+  "entryProtocol": "Select only after API/frozen132/frozen113/property proof passes; compare all six scan cells against old and disclose all allocation/latency results. This fixes observable comparator/entry behavior as well as performance.",
+  "insertionFrontier": "Compare frontier to protocol, same benchmark binary. Select if geometric mean speedup across ALL six freshInsertion cells >=1.10 and no insertion cell >5% slower with disjoint reported JMH confidence intervals, and no churn cell >10% slower with disjoint reported JMH confidence intervals. Otherwise retain protocol source and record experiment.",
+  "uncertainty": "Two forks with five measured300ms iterations each. JMH reported confidence intervals retained. Overlapping intervals are inconclusive; no universal optimality, maximum throughput, platformwide or causality claim. Fixed sequential runtime order is a limitation.",
+  "background": "One bounded JMH workload at a time; storage gates and small read/source preparation may run, no simultaneous builds/tests/model review; whole host background load not independently controlled.",
+  "normalization": "Raw ns/op is one whole invocation. Divide by N for entry/put/churn pair. Churn contains two mutations; divide by2N only when explicitly labeled per mutation."
+}

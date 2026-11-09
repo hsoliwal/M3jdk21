@@ -1,0 +1,27 @@
+package @PKG@;
+
+/** API of the overlay planes (pattern M3P-OVERLAY-1). */
+public interface M3OverlayApi extends M3WebApi {
+	/** Replaces the plane content: {@code ;}-separated {@code title~body} (tour: one entry per step). */
+	void load(String sample);
+
+	boolean isOpen();
+
+	/** Opens with a slide animation on the OVERLAY plane. */
+	void open();
+
+	void close();
+
+	/** Anchor rect of target-anchored overlays (hover card, popover, tour). */
+	void setTarget(int x, int y, int width, int height);
+
+	/** Plane extent along its anchor axis (drawer width, sheet height). */
+	void setExtent(int px);
+
+	/** Tab cycles inside an open modal plane. */
+	void setTrap(boolean trap);
+
+	int step();
+
+	void setStep(int step);
+}

@@ -1,0 +1,6 @@
+file	edit	reason
+m3/compiler/pom.xml	new: the family module (artifact m3-compiler): union of the six poms (m3-collections, junit 5.11.4; main -Xlint:all -Werror; tests -Xlint:all,-lossy-conversions; the post-compile Plugin descriptor copy of nullness-facts)	the owner module of jdk.m3.compiler (approved layout)
+m3/compiler/README.md	new: module doc with the folded facets	D2C
+m3/pom.xml	<module>compiler</module> where the six compiler/<module> lines were (the recipe removed those)	reactor order kept
+m3/tooling/jdk-naming/PACKAGE_BASELINE.tsv	6 ROOT, 6 PACKAGE and 40 PREFIXED rows removed; ROOT m3/compiler REAL and PACKAGE jdk.m3.compiler added	the owner root and package of the approved family replace six of each
+(no module-info)	the six descriptors org.m3jdk.compiler.* are retired byte for byte to m3/evidence/compiler/<module>/module-info.java; m3/compiler has none (as m3/search)	0 Maven dependents and no module-path consumer; the Plugin registers through META-INF/services

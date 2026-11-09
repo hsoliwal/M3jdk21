@@ -1,0 +1,107 @@
+# A3 mastery campaign
+
+Status: M3JDK21 tool-plane proof contract.
+
+## Purpose
+
+A3 already provides the whole-JDK front door:
+
+```text
+inventory -> atomize -> patternize -> absorb
+```
+
+The next requirement is to make the atomize/patternize recipes improve against a deliberately
+difficult generated corpus rather than only clean hand-written examples.
+
+The compiler and tests are authoritative. An LLM may propose new signals or recipe changes, but
+qualification is mechanical.
+
+## Mastery loop
+
+For every generated Java 21 fixture:
+
+```text
+immutable source
+  -> parse / lossless print
+  -> A3 FILE recipe
+  -> candidate source
+  -> second A3 pass (must be fixed point)
+  -> javac original
+  -> javac candidate
+  -> execute original probe
+  -> execute candidate probe
+  -> exact behavioral comparison
+  -> permanent receipt
+```
+
+A failed compiler, fixed-point, source-path, or behavior check rejects the fixture. No candidate is
+promoted into the JDK source tree.
+
+## Code-as-data spectrum
+
+The corpus must include code-looking text that is not executable Java structure:
+
+- quoted strings containing braces, keywords and fake method declarations;
+- text blocks containing source-looking fragments;
+- comments containing fake classes, loops and returns;
+- regular expressions containing Java-looking tokens and metacharacters.
+
+Recipes must obtain semantic authority from the Java LST/AST. Regex/text signals may rank or
+nominate candidates but may not certify a source rewrite.
+
+## Executable spectrum
+
+The first bounded campaign crosses:
+
+- direct arithmetic leaf;
+- conditional expression leaf;
+- switch-expression caller;
+- lambda caller;
+- string carrier;
+- text-block carrier;
+- comment carrier;
+- regex carrier.
+
+The generated fixtures intentionally combine real code and code-looking data. Each fixture exposes a
+small deterministic `probe(int)` method so the original and transformed class can be executed in
+fresh class loaders and compared over a fixed input domain.
+
+## Multipass rule
+
+A recipe is not mastered because one application succeeds.
+
+For every admitted fixture:
+
+1. first application may change the FILE candidate;
+2. second application must produce zero textual changes;
+3. repeated campaign execution over the same corpus must emit identical receipts;
+4. any counterexample becomes a permanent fixture before the recipe is widened.
+
+The campaign is bounded for CI, but the fixture generator is deterministic so stronger campaigns can
+raise the case/input budget without changing semantics.
+
+## JDK build boundary
+
+The mastery lab verifies the A3 tooling and FILE-local candidate behavior only.
+
+It does not replace:
+
+```text
+configure -> make -> jtreg -> runtime / benchmark
+```
+
+Any JEP, JBS or native/JNI absorption still requires its declared wider scope and normal OpenJDK
+product gates.
+
+## JNI / native relationship
+
+Java recipe mastery does not imply native equivalence.
+
+When an absorbed atom crosses JNI, VM layout, GC, safepoint, JIT or native lifetime boundaries, the
+Java oracle is established first and the existing native/JNI differential lane remains mandatory.
+
+## Recipe-first ownership
+
+Changes to the mastery machinery itself are delivered by a reusable Maven/OpenRewrite installer
+recipe with exact source images and fixed-point tests. The task is to improve that recipe and its
+fixtures, not hand-edit every JDK source file.

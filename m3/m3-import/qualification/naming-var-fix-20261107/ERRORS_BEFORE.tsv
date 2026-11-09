@@ -1,0 +1,25 @@
+file	line	col	severity	message	symbol
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImportCoverageTest.java	217	23	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java	508	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java	509	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java	510	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java	511	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	39	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	64	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	67	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	72	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	103	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	122	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	123	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	165	15	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	166	27	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	193	21	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	209	37	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	225	37	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	229	27	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	237	37	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	246	17	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	269	37	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	277	17	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	300	37	ERROR	cannot find symbol	variable m3
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	317	21	ERROR	cannot find symbol	variable m3

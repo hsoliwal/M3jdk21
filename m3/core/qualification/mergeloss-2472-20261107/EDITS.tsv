@@ -1,0 +1,2 @@
+file	before_sha256	after_sha256	leaf	origin	dropping_merge	donor_blobs	rule
+m3/core/src/jdk/m3/text/SharedLexiconImage.java	4897f2be7a14997293b4aa5ecdbcf1c37bf197ae870bff34a788db591a876c7b	c67fff80500a51457cbf171cfeb15cbf91562bac05614a3958e11985b4775028	2472	5a6209f8b2ca	3fb1026f54f3	post=cfc65d20a16 pre=8d3de015e03 retained=d50e2bbab56b	RESTORE startsWith: the #2472 postimage method (same index/length checks as master's 49acb578201 loop) compares four UTF-16 units per mapped long with a scalar tail

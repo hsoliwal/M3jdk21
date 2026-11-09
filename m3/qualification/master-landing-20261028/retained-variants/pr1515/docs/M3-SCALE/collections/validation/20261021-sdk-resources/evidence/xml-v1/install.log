@@ -1,0 +1,165 @@
+Apache Maven 3.9.14 (996c630dbc656c76214ce58821dcc58be960875b)
+Maven home: C:\ProgramData\chocolatey\lib\maven\apache-maven-3.9.14
+Java version: 21.0.9, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-21
+Default locale: en_IN, platform encoding: UTF-8
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+[DEBUG] Created new class realm maven.api
+[DEBUG] Importing foreign packages into class realm maven.api
+[DEBUG]   Imported: javax.annotation.* < plexus.core
+[DEBUG]   Imported: javax.annotation.security.* < plexus.core
+[DEBUG]   Imported: javax.inject.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.artifact < plexus.core
+[DEBUG]   Imported: org.apache.maven.classrealm < plexus.core
+[DEBUG]   Imported: org.apache.maven.cli < plexus.core
+[DEBUG]   Imported: org.apache.maven.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.exception < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution.scope < plexus.core
+[DEBUG]   Imported: org.apache.maven.graph < plexus.core
+[DEBUG]   Imported: org.apache.maven.lifecycle < plexus.core
+[DEBUG]   Imported: org.apache.maven.model < plexus.core
+[DEBUG]   Imported: org.apache.maven.monitor < plexus.core
+[DEBUG]   Imported: org.apache.maven.plugin < plexus.core
+[DEBUG]   Imported: org.apache.maven.profiles < plexus.core
+[DEBUG]   Imported: org.apache.maven.project < plexus.core
+[DEBUG]   Imported: org.apache.maven.reporting < plexus.core
+[DEBUG]   Imported: org.apache.maven.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.rtinfo < plexus.core
+[DEBUG]   Imported: org.apache.maven.settings < plexus.core
+[DEBUG]   Imported: org.apache.maven.toolchain < plexus.core
+[DEBUG]   Imported: org.apache.maven.usability < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authentication < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authorization < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.events < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.observers < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.proxy < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.resource < plexus.core
+[DEBUG]   Imported: org.codehaus.classworlds < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.* < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.classworlds < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.component < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.configuration < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.container < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.context < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.logging < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.personality < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.Xpp3Dom < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParser < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParserException < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlSerializer < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.* < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.artifact < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.collection < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.deployment < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.graph < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.impl < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.installation < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.internal.impl < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.metadata < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.repository < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.resolution < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.spi < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.transfer < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.util < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.version < plexus.core
+[DEBUG]   Imported: org.fusesource.jansi.* < plexus.core
+[DEBUG]   Imported: org.slf4j.* < plexus.core
+[DEBUG]   Imported: org.slf4j.event.* < plexus.core
+[DEBUG]   Imported: org.slf4j.helpers.* < plexus.core
+[DEBUG]   Imported: org.slf4j.spi.* < plexus.core
+[DEBUG] Populating class realm maven.api
+[DEBUG] Created adapter factory; available factories [file-lock, rwlock-local, semaphore-local, noop]; available name mappers [discriminating, file-gaecv, file-gav, file-hgaecv, file-hgav, file-static, gaecv, gav, static]
+[INFO] Error stacktraces are turned on.
+[DEBUG] Message scheme: plain
+[DEBUG] Reading global settings from K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\conf\settings.xml
+[DEBUG] Reading user settings from K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\conf\settings.xml
+[DEBUG] Reading global toolchains from K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\conf\toolchains.xml
+[DEBUG] Reading user toolchains from K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\home\.m2\toolchains.xml
+[DEBUG] Using local repository at K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10.0 for K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10.0 for C:\Users\hsoliwal\.m2\repository
+[INFO] Scanning for projects...
+[DEBUG] Extension realms for project com.synexia.verification:m3-ast-build-reverse-recipe-proof:jar:1: (none)
+[DEBUG] Looking up lifecycle mappings for packaging jar from ClassRealm[plexus.core, parent: null]
+[DEBUG] Creating adapter using nameMapper 'gaecv' and factory 'rwlock-local'
+[DEBUG] === REACTOR BUILD PLAN ================================================
+[DEBUG] Project: com.synexia.verification:m3-ast-build-reverse-recipe-proof:jar:1
+[DEBUG] Tasks:   [org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file]
+[DEBUG] Style:   Aggregating
+[DEBUG] =======================================================================
+[INFO] 
+[INFO] -----< com.synexia.verification:m3-ast-build-reverse-recipe-proof >-----
+[INFO] Building m3-ast-build-reverse-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] === PROJECT BUILD PLAN ================================================
+[DEBUG] Project:       com.synexia.verification:m3-ast-build-reverse-recipe-proof:1
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): []
+[DEBUG] Repositories (dependencies): [central (https://repo.maven.apache.org/maven2, default, releases)]
+[DEBUG] Repositories (plugins)     : [central (https://repo.maven.apache.org/maven2, default, releases)]
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file (default-cli)
+[DEBUG] Style:         Aggregating
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <artifactId>${artifactId}</artifactId>
+  <classifier>${classifier}</classifier>
+  <file>${file}</file>
+  <generatePom>${generatePom}</generatePom>
+  <groupId>${groupId}</groupId>
+  <javadoc>${javadoc}</javadoc>
+  <localRepositoryPath>${localRepositoryPath}</localRepositoryPath>
+  <packaging>${packaging}</packaging>
+  <pomFile>${pomFile}</pomFile>
+  <session default-value="${session}"/>
+  <sources>${sources}</sources>
+  <version>${version}</version>
+</configuration>
+[DEBUG] =======================================================================
+[INFO] 
+[INFO] --- install:3.1.1:install-file (default-cli) @ m3-ast-build-reverse-recipe-proof ---
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=243500, ConflictMarker.markTime=58700, ConflictMarker.nodeCount=4, ConflictIdSorter.graphTime=137600, ConflictIdSorter.topsortTime=127600, ConflictIdSorter.conflictIdCount=4, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=1275900, ConflictResolver.conflictItemCount=4, DfDependencyCollector.collectTime=17053800, DfDependencyCollector.transformTime=2612400}
+[DEBUG] org.apache.maven.plugins:maven-install-plugin:jar:3.1.1
+[DEBUG]    org.eclipse.aether:aether-util:jar:1.0.0.v20140518:compile
+[DEBUG]       org.eclipse.aether:aether-api:jar:1.0.0.v20140518:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.5.0:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-install-plugin:3.1.1
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-install-plugin:3.1.1
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-install-plugin:3.1.1
+[DEBUG]   Included: org.apache.maven.plugins:maven-install-plugin:jar:3.1.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.5.0
+[DEBUG] Loading mojo org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-install-plugin:3.1.1, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e]
+[DEBUG] Configuring mojo execution 'org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file:default-cli' with basic configurator -->
+[DEBUG]   (f) file = K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\artifact\data-sdk-resources-host-20261021-1.jar
+[DEBUG]   (f) generatePom = false
+[DEBUG]   (f) localRepositoryPath = K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository
+[DEBUG]   (f) pomFile = K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\artifact\pom.xml
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@6c15e8c7
+[DEBUG] -- end configuration --
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10.0 for K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository
+[DEBUG] localRepoPath: K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository
+[INFO] Installing K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\artifact\data-sdk-resources-host-20261021-1.jar to K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository\com\synexia\verification\data-sdk-resources-host\20261021-1\data-sdk-resources-host-20261021-1.jar
+[DEBUG] Writing tracking file 'K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository\com\synexia\verification\data-sdk-resources-host\20261021-1\_remote.repositories'
+[INFO] Installing K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\artifact\pom.xml to K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository\com\synexia\verification\data-sdk-resources-host\20261021-1\data-sdk-resources-host-20261021-1.pom
+[DEBUG] Writing tracking file 'K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository\com\synexia\verification\data-sdk-resources-host\20261021-1\_remote.repositories'
+[DEBUG] Installing com.synexia.verification:data-sdk-resources-host/maven-metadata.xml to K:\codex-work\m3jdk21-recipe-pass-20261020\data-sdk-resources-recipe-proof-k-v1\repository\com\synexia\verification\data-sdk-resources-host\maven-metadata-local.xml
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.290 s
+[INFO] Finished at: 2026-10-21T07:36:09+05:30
+[INFO] ------------------------------------------------------------------------
+[DEBUG] Shutting down adapter factory; available factories [file-lock, rwlock-local, semaphore-local, noop]; available name mappers [discriminating, file-gaecv, file-gav, file-hgaecv, file-hgav, file-static, gaecv, gav, static]
+[DEBUG] Shutting down 'file-lock' factory
+[DEBUG] Shutting down 'rwlock-local' factory
+[DEBUG] Shutting down 'semaphore-local' factory
+[DEBUG] Shutting down 'noop' factory

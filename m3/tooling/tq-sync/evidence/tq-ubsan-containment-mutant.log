@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: containment set oracle
+	at M3TQTest.check(M3TQTest.java:307)
+	at M3TQTest.containment(M3TQTest.java:136)
+	at M3TQTest.main(M3TQTest.java:59)

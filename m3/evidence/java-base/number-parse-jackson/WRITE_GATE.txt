@@ -1,0 +1,20 @@
+javac v1 rc=0 classes=165 errors=0
+javac v2-2.15.3 rc=0 classes=139 errors=0
+javac v2-2.16.1 rc=0 classes=160 errors=0
+javac v2-2.19.2 rc=0 classes=164 errors=0
+javac v2-relocated rc=0 classes=165 errors=0
+javac harness-v1 rc=0 classes=1 errors=0
+javac harness-v2-2.19.2 rc=0 classes=1 errors=0
+javac harness-schubfach rc=0 classes=1 errors=0
+seed 1 schubfach-vs-jdk samples=30000016 diffs=0
+seed 1: 1000000 samples IDENTICAL (sha256 0f79075a40214aa3)
+seed 2 schubfach-vs-jdk samples=30000016 diffs=0
+seed 2: 1000000 samples IDENTICAL (sha256 aefb301a5f583586)
+seed 3 schubfach-vs-jdk samples=30000016 diffs=0
+seed 3: 1000000 samples IDENTICAL (sha256 741d730baa5ef417)
+0f79075a40214aa359ab33ec0e9bc0dfc0402cf1b95b025220f349ceb4f62b5f  write_v1_1.txt
+aefb301a5f583586c180ff2630509af6b6051cfea5badf77645a0fbff16a42f9  write_v1_2.txt
+741d730baa5ef417c7aa6d5a4d58e277660b0219f0ec1ab9bb528805382bb996  write_v1_3.txt
+0f79075a40214aa359ab33ec0e9bc0dfc0402cf1b95b025220f349ceb4f62b5f  write_v2-2.19.2_1.txt
+aefb301a5f583586c180ff2630509af6b6051cfea5badf77645a0fbff16a42f9  write_v2-2.19.2_2.txt
+741d730baa5ef417c7aa6d5a4d58e277660b0219f0ec1ab9bb528805382bb996  write_v2-2.19.2_3.txt

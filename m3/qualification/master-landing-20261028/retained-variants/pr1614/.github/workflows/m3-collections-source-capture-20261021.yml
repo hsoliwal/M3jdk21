@@ -1,0 +1,65 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3 complete collection source capture
+on:
+  push:
+    branches: [aix/collections-array-masks-20261020]
+    paths: [.github/workflows/m3-collections-source-capture-20261021.yml]
+permissions:
+  contents: read
+jobs:
+  source-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: current-base
+            revision: 2779aba3f98f31c324be43f731be7914e1a05935
+          - label: reviewed-candidate
+            revision: a3f2d208700da920f4cfc09aca4668a70b8eaac2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.revision }}
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            m3/collections
+            m3/docs
+            src/java.base/share/classes/java/util
+      - name: Capture exact tracked source, not qualification verdicts
+        env:
+          EXPECTED_REVISION: ${{ matrix.revision }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_REVISION"
+          git diff --exit-code
+          mkdir -p capture
+          git archive --format=tar HEAD -- m3/collections m3/docs src/java.base/share/classes/java/util AGENTS.md LICENSE > capture/collection-sources.tar
+          git ls-tree -r HEAD -- m3/collections m3/docs src/java.base/share/classes/java/util AGENTS.md LICENSE > capture/SOURCE_GIT_OBJECTS.tsv
+          sha256sum capture/collection-sources.tar > capture/ARCHIVE.sha256
+          python3 - <<'PY_CAPTURE'
+          import hashlib, json, os, pathlib, tarfile
+          archive=pathlib.Path('capture/collection-sources.tar')
+          rows=[]
+          with tarfile.open(archive) as source:
+              for entry in source:
+                  if entry.isdir():
+                      continue
+                  if not entry.isfile() or entry.name.startswith('/') or '..' in pathlib.PurePosixPath(entry.name).parts:
+                      raise SystemExit('Unsupported source archive entry: '+entry.name)
+                  data=source.extractfile(entry).read()
+                  rows.append((entry.name, hashlib.sha256(data).hexdigest(), len(data)))
+          rows.sort()
+          pathlib.Path('capture/SOURCE_SHA256.tsv').write_text('path\tsha256\tbytes\n'+''.join(f'{p}\t{h}\t{n}\n' for p,h,n in rows))
+          facts={'revision':os.environ['EXPECTED_REVISION'],'files':len(rows),'collection_main_java':sum(p.startswith('m3/collections/src/main/java/') and p.endswith('.java') for p,h,n in rows),'collection_test_java':sum(p.startswith('m3/collections/src/test/java/') and p.endswith('.java') for p,h,n in rows),'status':'SOURCE_CAPTURE_ONLY_NOT_TRANSFORMED_OR_QUALIFIED'}
+          pathlib.Path('capture/STATUS.json').write_text(json.dumps(facts,indent=2)+'\n')
+          print(json.dumps(facts,indent=2))
+          PY_CAPTURE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m3-complete-collection-sources-${{ matrix.label }}
+          path: capture/
+          if-no-files-found: error
+          retention-days: 7

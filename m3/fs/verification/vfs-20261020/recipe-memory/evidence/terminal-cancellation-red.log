@@ -1,0 +1,28 @@
+
+Test run finished after 149 ms
+[         2 containers found      ]
+[         0 containers skipped    ]
+[         2 containers started    ]
+[         0 containers aborted    ]
+[         2 containers successful ]
+[         0 containers failed     ]
+[        35 tests found           ]
+[         0 tests skipped         ]
+[        35 tests started         ]
+[         0 tests aborted         ]
+[        34 tests successful      ]
+[         1 tests failed          ]
+
+
+Failures (1):
+  JUnit Jupiter:MFileStreamsTest:cancellationAfterEofStillSuppressesCompletionWhileClosingPrimary()
+    MethodSource [className = 'com.m3.fs.MFileStreamsTest', methodName = 'cancellationAfterEofStillSuppressesCompletionWhileClosingPrimary', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected java.util.concurrent.CancellationException to be thrown, but nothing was thrown.
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+       com.m3.fs.MFileStreamsTest.cancellationAfterEofStillSuppressesCompletionWhileClosingPrimary(MFileStreamsTest.java:552)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)

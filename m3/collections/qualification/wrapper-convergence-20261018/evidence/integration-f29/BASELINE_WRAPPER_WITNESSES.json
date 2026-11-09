@@ -1,0 +1,146 @@
+[
+  {
+    "stage": "RUNTIME",
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "mode": "readonly",
+    "command": [
+      "/workspace/scratch/7846804a0074/toolchain/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xcheck:jni",
+      "-cp",
+      "/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/frozen-wrapper-classes:/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/baseline-target/classes",
+      "com.m3.collections.M3WrapperConvergenceContract",
+      "readonly"
+    ],
+    "exit": 1,
+    "elapsed_seconds": 0.05705334699996456,
+    "stdout": "baseline-wrapper-readonly.stdout.log",
+    "stderr": "baseline-wrapper-readonly.stderr.log"
+  },
+  {
+    "stage": "RUNTIME",
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "mode": "readonly-effects",
+    "command": [
+      "/workspace/scratch/7846804a0074/toolchain/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xcheck:jni",
+      "-cp",
+      "/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/frozen-wrapper-classes:/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/baseline-target/classes",
+      "com.m3.collections.M3WrapperConvergenceContract",
+      "readonly-effects"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 0.05364119399928313,
+    "stdout": "baseline-wrapper-readonly-effects.stdout.log",
+    "stderr": "baseline-wrapper-readonly-effects.stderr.log"
+  },
+  {
+    "stage": "RUNTIME",
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "mode": "comparator-failure",
+    "command": [
+      "/workspace/scratch/7846804a0074/toolchain/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xcheck:jni",
+      "-cp",
+      "/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/frozen-wrapper-classes:/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/baseline-target/classes",
+      "com.m3.collections.M3WrapperConvergenceContract",
+      "comparator-failure"
+    ],
+    "exit": 1,
+    "elapsed_seconds": 0.0802876739999192,
+    "stdout": "baseline-wrapper-comparator-failure.stdout.log",
+    "stderr": "baseline-wrapper-comparator-failure.stderr.log"
+  },
+  {
+    "stage": "RUNTIME",
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "mode": "bounded-map",
+    "command": [
+      "/workspace/scratch/7846804a0074/toolchain/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xcheck:jni",
+      "-cp",
+      "/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/frozen-wrapper-classes:/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/baseline-target/classes",
+      "com.m3.collections.M3WrapperConvergenceContract",
+      "bounded-map"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 0.0780424899985519,
+    "stdout": "baseline-wrapper-bounded-map.stdout.log",
+    "stderr": "baseline-wrapper-bounded-map.stderr.log"
+  },
+  {
+    "stage": "RUNTIME",
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "mode": "bounded-set",
+    "command": [
+      "/workspace/scratch/7846804a0074/toolchain/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xcheck:jni",
+      "-cp",
+      "/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/frozen-wrapper-classes:/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/baseline-target/classes",
+      "com.m3.collections.M3WrapperConvergenceContract",
+      "bounded-set"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 0.04853667999850586,
+    "stdout": "baseline-wrapper-bounded-set.stdout.log",
+    "stderr": "baseline-wrapper-bounded-set.stderr.log"
+  },
+  {
+    "stage": "RUNTIME",
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "mode": "interior-null",
+    "command": [
+      "/workspace/scratch/7846804a0074/toolchain/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xcheck:jni",
+      "-cp",
+      "/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/frozen-wrapper-classes:/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/baseline-target/classes",
+      "com.m3.collections.M3WrapperConvergenceContract",
+      "interior-null"
+    ],
+    "exit": 1,
+    "elapsed_seconds": 0.056912357000328484,
+    "stdout": "baseline-wrapper-interior-null.stdout.log",
+    "stderr": "baseline-wrapper-interior-null.stderr.log"
+  },
+  {
+    "stage": "RUNTIME",
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "mode": "readonly-linear",
+    "command": [
+      "/workspace/scratch/7846804a0074/toolchain/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xcheck:jni",
+      "-cp",
+      "/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/frozen-wrapper-classes:/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/baseline-target/classes",
+      "com.m3.collections.M3WrapperConvergenceContract",
+      "readonly-linear"
+    ],
+    "exit": 1,
+    "elapsed_seconds": 0.10192548899976828,
+    "stdout": "baseline-wrapper-readonly-linear.stdout.log",
+    "stderr": "baseline-wrapper-readonly-linear.stderr.log"
+  },
+  {
+    "stage": "RUNTIME",
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "mode": "readonly-failfast",
+    "command": [
+      "/workspace/scratch/7846804a0074/toolchain/jdk-21.0.12.1+1/bin/java",
+      "-XX:-UsePerfData",
+      "-Xcheck:jni",
+      "-cp",
+      "/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/frozen-wrapper-classes:/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/baseline-target/classes",
+      "com.m3.collections.M3WrapperConvergenceContract",
+      "readonly-failfast"
+    ],
+    "exit": 1,
+    "elapsed_seconds": 0.094742770999801,
+    "stdout": "baseline-wrapper-readonly-failfast.stdout.log",
+    "stderr": "baseline-wrapper-readonly-failfast.stderr.log"
+  }
+]

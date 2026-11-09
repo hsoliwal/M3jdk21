@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gates of census pass-2 group T3 (P2-098 tests), run 2026-11-06 on JDK 21, Maven 3.9, sparse worktree, java.io.tmpdir on the scratch drive, donor hsoliwal/com.synexia develop d5ad5090d87e, base M3JDK master 2d8273c6ad55 (-Werror red since #2561: module gates with an uncommitted pom copy whose only change is the removed <arg>-Werror</arg>; M3PrimitiveRoaringIntSet not touched).
+gate	command	state	evidence
+chain_identity	diff of the RELOCATE_CENSUS v5 output (FILE rows from the donor pin) against the lane-45 chain output (S:/m3-scratch/converge-20261106/p98/out) and the retained variants pr1463	PASS	2/2: only the recipe anchor line differs from the 45 output; the 45 output equals the retained variants byte for byte
+tests_on_owners	mvn package (gate pom) with the two relocated files on base 2d8273c6ad55	FAIL -> HOLD_OWNER_EDIT	base Tests run 1979 / F0 / E0 / S132; with the two files 1980 / F1 / E0 / S132: M3FilteredCursorReadinessTest.preparedPhysicalSlotsPreserveSelectionAndRevision (AssertionError: exhausted cursor checks revision expected=ConcurrentModificationException); the files are not committed
+owner_probe	JAVA_HOME=<JDK 21> M3_ARRAYS_JAR=<jar> JVM_OPTS=-Djava.io.tmpdir=<scratch> bash m3/collections/qualification/census2-t3-20261106/owner_probe.sh <com.synexia> d5ad5090d87ef8477a56317e60ac0d29c65029f7 <out>	RECORDED	as-is first failure = exhausted cursor checks revision; per mode distinct failing checks: readonly-ready 2, mutable-ready 56, readonly-reentrant 6, mutable-reentrant 10 (aborts on M3TreeMap ordering); = OWNER_VERDICTS.tsv
+package_lint	mvn package (gate pom), base and final head	PASS (master red, pre-existing)	BUILD SUCCESS, exactly 1 warning (M3PrimitiveRoaringIntSet.java:[35,14], #2561) on both
+module_tests_vs_base	same builds	PASS	1979 / F0 / E0 / S132 on base and final head (no source change)
+untouched_classes	sha256 of target/classes and target/test-classes, base vs final head	PASS	777/777 and 867/867 identical
+jdk_naming	python -I m3/tooling/jdk-naming/jdk_naming.py plan / apply --root . --only m3/collections/qualification/census2-t3-20261106/	PASS	moves=0 rewrites=0 refusals=0, FIXED_POINT
+protected_owners	S:/m3-scratch/eb-conv/c2coll/PROTECTED.tsv vs the changed paths	PASS	none touched (records only); HOLD_63: none
+scope	git diff --name-only <base> | grep -v '^m3/collections/'	PASS	empty (this directory only)

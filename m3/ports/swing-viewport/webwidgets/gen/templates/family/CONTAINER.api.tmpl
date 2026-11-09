@@ -1,0 +1,19 @@
+package @PKG@;
+
+/** API of the containers with a header (pattern M3P-CONTAINER-1). */
+public interface M3ContainerApi extends M3WebApi {
+	/** Replaces the sections: {@code ;}-separated {@code title~body} (stat: {@code label~value~delta}). */
+	void load(String sample);
+
+	/** Accordion: opening one section closes the others. */
+	void setExclusive(boolean exclusive);
+
+	boolean isExclusive();
+
+	boolean isOpen(int section);
+
+	void setOpen(int section, boolean open);
+
+	/** Hides a section (alert dismiss); it keeps its lanes. */
+	void dismiss(int section);
+}

@@ -1,0 +1,4 @@
+m3/docs/jcc-source-handoff.md	ABSENT	fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337	01-jcc-source-handoff.md.txt
+m3/docs/name-mapping.json	67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb	536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace	after00-name-mapping.json.txt
+m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv	ABSENT	cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b	03-root-coverage-obligations.tsv.txt
+m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json	ABSENT	cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126	02-source-destination-bindings.json.txt

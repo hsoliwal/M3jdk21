@@ -1,0 +1,20 @@
+[
+  {
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+    "git_blob": "f6471f52b0c001def6319542f01729620b0600ee",
+    "decision": "UNCHANGED_EXISTING_OWNER"
+  },
+  {
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+    "sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
+    "git_blob": "baa23467163a0e9344fe3c1d78dcc87cb707fd56",
+    "decision": "UNCHANGED_EXISTING_OWNER"
+  },
+  {
+    "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+    "sha256": "ba2e8a66c23bffa52e1b9e20eb9f1e890fb41ee13891dae0ed8d48cd6069f5ba",
+    "git_blob": "9f68bba46827db2cb53bdb597042829358663f91",
+    "decision": "UNCHANGED_EXISTING_OWNER"
+  }
+]

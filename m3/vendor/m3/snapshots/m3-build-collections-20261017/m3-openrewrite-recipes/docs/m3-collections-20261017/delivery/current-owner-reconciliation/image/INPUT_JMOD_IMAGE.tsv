@@ -1,0 +1,3 @@
+artifact	version	jar	module	requires	disposition
+com.m3.collections	1	/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/jars/com.m3.collections.jar	com.m3.collections	java.base	JMOD
+jdk.m3.collections	1	/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/jars/jdk.m3.collections.jar	jdk.m3.collections	java.base	JMOD

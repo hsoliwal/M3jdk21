@@ -1,0 +1,176 @@
+# Stock JDK 21.0.9 vs M3 (--patch-module java.desktop=<patched classes>, -Dm3.swing.viewport=true for tree-jtree), interleaved per shape; headless, -XX:+UseSerialGC -Xms64m -Xmx1500m, one JVM at a time; 2026-10-17 08:47-09:03 +05:30 on a shared machine (other agents running; headroom per row below). Tool: SwingViewportBench.java.
+case	shape	impl	nodes	rows	metric	value	unit	note
+# 2026-10-17T08:47:40+05:30 tree-cache wide stock headroom_kb=26713996
+tree-cache	wide	stock	1001001	0	model_build	757	ms	DefaultMutableTreeNode
+tree-cache	wide	stock	1001001	0	model_heap	87.5	MB	model + preorder array
+tree-cache	wide	stock	1001001	1001	expand_all	1554	ms	setExpandedState(true) in preorder, 1001 of 1001 internal nodes in 1554 ms
+tree-cache	wide	stock	1001001	1001001	cache_heap	125.1	MB	retained by the layout cache after expand-all
+tree-cache	wide	stock	1001001	1001001	get_row_for_path	175.42	us/op	fresh TreePath to a random leaf (depth 3), first query of each path, sink 495402358
+tree-cache	wide	stock	1001001	1001001	get_row_for_path_again	214.32	us/op	the same 1000 paths again, sink 990804716
+tree-cache	wide	stock	1001001	1001001	get_path_for_row	0.76	us/op	random row
+tree-cache	wide	stock	1001001	1001001	get_bounds	1.51	us/op	same paths, reused Rectangle
+tree-cache	wide	stock	1001001	1001001	get_path_closest_to	3.38	us/op	y = row * 18
+tree-cache	wide	stock	1001001	1001001	visible_child_count_root	28281	us	count 1001000
+tree-cache	wide	stock	1001001	1001001	toggle_first_subtree	432788.74	us/op	collapse + expand of n1, 20 rounds
+tree-cache	wide	stock	1001001	1001001	preferred_width_null	26.88	ms	value 119
+tree-cache	wide	stock	1001001	1001001	preferred_height	0.01	ms	value 20018018
+tree-cache	wide	stock	1001001	1001001	preferred_width_region	30.16	ms	value 119
+tree-cache	wide	stock	1001001	1001001	paint_walk_start	0.032	ms p50	p95 0.058 ms; 800x600 window, sink 530
+tree-cache	wide	stock	1001001	1001001	paint_walk_middle	0.199	ms p50	p95 1.238 ms; 800x600 window, sink 17518043
+tree-cache	wide	stock	1001001	1001001	paint_walk_end	0.314	ms p50	p95 0.642 ms; 800x600 window, sink 35034503
+# exit 0 tree-cache wide
+# 2026-10-17T08:47:58+05:30 tree-cache wide m3 headroom_kb=24520764
+tree-cache	wide	m3	1001001	0	model_build	349	ms	DefaultMutableTreeNode
+tree-cache	wide	m3	1001001	0	model_heap	87.1	MB	model + preorder array
+tree-cache	wide	m3	1001001	1001	expand_all	309	ms	setExpandedState(true) in preorder, 1001 of 1001 internal nodes in 309 ms
+tree-cache	wide	m3	1001001	1001001	cache_heap	20.8	MB	retained by the layout cache after expand-all
+tree-cache	wide	m3	1001001	1001001	get_row_for_path	34.86	us/op	fresh TreePath to a random leaf (depth 3), first query of each path, sink 495402358
+tree-cache	wide	m3	1001001	1001001	get_row_for_path_again	0.95	us/op	the same 1000 paths again, sink 990804716
+tree-cache	wide	m3	1001001	1001001	get_path_for_row	0.83	us/op	random row
+tree-cache	wide	m3	1001001	1001001	get_bounds	1.41	us/op	same paths, reused Rectangle
+tree-cache	wide	m3	1001001	1001001	get_path_closest_to	3.97	us/op	y = row * 18
+tree-cache	wide	m3	1001001	1001001	visible_child_count_root	13	us	count 1001000
+tree-cache	wide	m3	1001001	1001001	toggle_first_subtree	3.49	us/op	collapse + expand of n1, 20 rounds
+tree-cache	wide	m3	1001001	1001001	preferred_width_null	7.10	ms	value 119
+tree-cache	wide	m3	1001001	1001001	preferred_height	0.01	ms	value 20018018
+tree-cache	wide	m3	1001001	1001001	preferred_width_region	0.01	ms	value 119
+tree-cache	wide	m3	1001001	1001001	paint_walk_start	0.021	ms p50	p95 0.046 ms; 800x600 window, sink 530
+tree-cache	wide	m3	1001001	1001001	paint_walk_middle	0.013	ms p50	p95 0.022 ms; 800x600 window, sink 17518043
+tree-cache	wide	m3	1001001	1001001	paint_walk_end	0.008	ms p50	p95 0.031 ms; 800x600 window, sink 35034503
+# exit 0 tree-cache wide
+# 2026-10-17T08:48:35+05:30 tree-cache flat stock headroom_kb=60067340
+tree-cache	flat	stock	1000001	0	model_build	314	ms	DefaultMutableTreeNode
+tree-cache	flat	stock	1000001	0	model_heap	87.5	MB	model + preorder array
+tree-cache	flat	stock	1000001	1000001	expand_all	22	ms	setExpandedState(true) in preorder, 1 of 1 internal nodes in 22 ms
+tree-cache	flat	stock	1000001	1000001	cache_heap	249.4	MB	retained by the layout cache after expand-all
+tree-cache	flat	stock	1000001	1000001	get_row_for_path	203.72	us/op	fresh TreePath to a random leaf (depth 2), first query of each path, sink 483231732
+tree-cache	flat	stock	1000001	1000001	get_row_for_path_again	173.83	us/op	the same 1000 paths again, sink 966463464
+tree-cache	flat	stock	1000001	1000001	get_path_for_row	1.06	us/op	random row
+tree-cache	flat	stock	1000001	1000001	get_bounds	1.63	us/op	same paths, reused Rectangle
+tree-cache	flat	stock	1000001	1000001	get_path_closest_to	4.25	us/op	y = row * 18
+tree-cache	flat	stock	1000001	1000001	visible_child_count_root	43039	us	count 1000000
+tree-cache	flat	stock	1000001	1000001	toggle_first_subtree	150489.71	us/op	collapse + expand of root, 20 rounds
+tree-cache	flat	stock	1000001	1000001	preferred_width_null	25.20	ms	value 99
+tree-cache	flat	stock	1000001	1000001	preferred_height	0.01	ms	value 20000018
+tree-cache	flat	stock	1000001	1000001	preferred_width_region	21.84	ms	value 99
+tree-cache	flat	stock	1000001	1000001	paint_walk_start	0.022	ms p50	p95 0.038 ms; 800x600 window, sink 524
+tree-cache	flat	stock	1000001	1000001	paint_walk_middle	0.315	ms p50	p95 0.446 ms; 800x600 window, sink 17500538
+tree-cache	flat	stock	1000001	1000001	paint_walk_end	0.651	ms p50	p95 1.605 ms; 800x600 window, sink 34999503
+# exit 0 tree-cache flat
+# 2026-10-17T08:48:50+05:30 tree-cache flat m3 headroom_kb=42719104
+tree-cache	flat	m3	1000001	0	model_build	314	ms	DefaultMutableTreeNode
+tree-cache	flat	m3	1000001	0	model_heap	87.0	MB	model + preorder array
+tree-cache	flat	m3	1000001	1000001	expand_all	22	ms	setExpandedState(true) in preorder, 1 of 1 internal nodes in 22 ms
+tree-cache	flat	m3	1000001	1000001	cache_heap	39.9	MB	retained by the layout cache after expand-all
+tree-cache	flat	m3	1000001	1000001	get_row_for_path	109.12	us/op	fresh TreePath to a random leaf (depth 2), first query of each path, sink 483231732
+tree-cache	flat	m3	1000001	1000001	get_row_for_path_again	0.96	us/op	the same 1000 paths again, sink 966463464
+tree-cache	flat	m3	1000001	1000001	get_path_for_row	0.74	us/op	random row
+tree-cache	flat	m3	1000001	1000001	get_bounds	1.71	us/op	same paths, reused Rectangle
+tree-cache	flat	m3	1000001	1000001	get_path_closest_to	3.72	us/op	y = row * 18
+tree-cache	flat	m3	1000001	1000001	visible_child_count_root	32	us	count 1000000
+tree-cache	flat	m3	1000001	1000001	toggle_first_subtree	7.43	us/op	collapse + expand of root, 20 rounds
+tree-cache	flat	m3	1000001	1000001	preferred_width_null	8.95	ms	value 99
+tree-cache	flat	m3	1000001	1000001	preferred_height	0.01	ms	value 20000018
+tree-cache	flat	m3	1000001	1000001	preferred_width_region	0.01	ms	value 99
+tree-cache	flat	m3	1000001	1000001	paint_walk_start	0.024	ms p50	p95 0.052 ms; 800x600 window, sink 524
+tree-cache	flat	m3	1000001	1000001	paint_walk_middle	0.013	ms p50	p95 0.016 ms; 800x600 window, sink 17500538
+tree-cache	flat	m3	1000001	1000001	paint_walk_end	0.006	ms p50	p95 0.012 ms; 800x600 window, sink 34999503
+# exit 0 tree-cache flat
+# 2026-10-17T08:48:55+05:30 tree-cache deep stock headroom_kb=59770824
+tree-cache	deep	stock	1111111	0	model_build	499	ms	DefaultMutableTreeNode
+tree-cache	deep	stock	1111111	0	model_heap	101.0	MB	model + preorder array
+tree-cache	deep	stock	1111111	11	expand_all	26403	ms	setExpandedState(true) in preorder, 111111 of 111111 internal nodes in 26403 ms
+tree-cache	deep	stock	1111111	1111111	cache_heap	141.3	MB	retained by the layout cache after expand-all
+tree-cache	deep	stock	1111111	1111111	get_row_for_path	205.87	us/op	fresh TreePath to a random leaf (depth 7), first query of each path, sink 553582873
+tree-cache	deep	stock	1111111	1111111	get_row_for_path_again	185.31	us/op	the same 1000 paths again, sink 1107165746
+tree-cache	deep	stock	1111111	1111111	get_path_for_row	1.62	us/op	random row
+tree-cache	deep	stock	1111111	1111111	get_bounds	1.68	us/op	same paths, reused Rectangle
+tree-cache	deep	stock	1111111	1111111	get_path_closest_to	2.73	us/op	y = row * 18
+tree-cache	deep	stock	1111111	1111111	visible_child_count_root	40764	us	count 1111110
+tree-cache	deep	stock	1111111	1111111	toggle_first_subtree	44379319.47	us/op	collapse + expand of n1, 3 rounds
+tree-cache	deep	stock	1111111	1111111	preferred_width_null	65.30	ms	value 199
+tree-cache	deep	stock	1111111	1111111	preferred_height	0.01	ms	value 21999998
+tree-cache	deep	stock	1111111	1111111	preferred_width_region	51.54	ms	value 199
+tree-cache	deep	stock	1111111	1111111	paint_walk_start	7.928	ms p50	p95 31.056 ms; 800x600 window, sink 660
+tree-cache	deep	stock	1111111	1111111	paint_walk_middle	3.757	ms p50	p95 19.086 ms; 800x600 window, sink 19445097
+tree-cache	deep	stock	1111111	1111111	paint_walk_end	0.337	ms p50	p95 0.516 ms; 800x600 window, sink 38888383
+# exit 0 tree-cache deep
+# 2026-10-17T08:55:35+05:30 tree-cache deep m3 headroom_kb=7604632
+tree-cache	deep	m3	1111111	0	model_build	2331	ms	DefaultMutableTreeNode
+tree-cache	deep	m3	1111111	0	model_heap	100.4	MB	model + preorder array
+tree-cache	deep	m3	1111111	11	expand_all	749	ms	setExpandedState(true) in preorder, 111111 of 111111 internal nodes in 749 ms
+tree-cache	deep	m3	1111111	1111111	cache_heap	53.3	MB	retained by the layout cache after expand-all
+tree-cache	deep	m3	1111111	1111111	get_row_for_path	3.98	us/op	fresh TreePath to a random leaf (depth 7), first query of each path, sink 553582873
+tree-cache	deep	m3	1111111	1111111	get_row_for_path_again	2.88	us/op	the same 1000 paths again, sink 1107165746
+tree-cache	deep	m3	1111111	1111111	get_path_for_row	2.17	us/op	random row
+tree-cache	deep	m3	1111111	1111111	get_bounds	2.95	us/op	same paths, reused Rectangle
+tree-cache	deep	m3	1111111	1111111	get_path_closest_to	16.01	us/op	y = row * 18
+tree-cache	deep	m3	1111111	1111111	visible_child_count_root	26	us	count 1111110
+tree-cache	deep	m3	1111111	1111111	toggle_first_subtree	22.93	us/op	collapse + expand of n1, 20 rounds
+tree-cache	deep	m3	1111111	1111111	preferred_width_null	24.93	ms	value 199
+tree-cache	deep	m3	1111111	1111111	preferred_height	0.01	ms	value 21999998
+tree-cache	deep	m3	1111111	1111111	preferred_width_region	0.26	ms	value 199
+tree-cache	deep	m3	1111111	1111111	paint_walk_start	0.030	ms p50	p95 0.316 ms; 800x600 window, sink 660
+tree-cache	deep	m3	1111111	1111111	paint_walk_middle	0.028	ms p50	p95 0.051 ms; 800x600 window, sink 19445097
+tree-cache	deep	m3	1111111	1111111	paint_walk_end	0.018	ms p50	p95 0.144 ms; 800x600 window, sink 38888383
+# exit 0 tree-cache deep
+# 2026-10-17T08:55:47+05:30 tree-jtree wide stock headroom_kb=34221420
+tree-jtree	wide	stock	1001001	1001001	jtree_expand_all	1734	ms	JTree.expandPath in preorder, 1001 expanded in 1734 ms
+tree-jtree	wide	stock	1001001	1001001	jtree_preferred_size	31	ms	119x20018018
+tree-jtree	wide	stock	1001001	1001001	jtree_heap	124.7	MB	JTree + UI + layout cache + expansion table
+tree-jtree	wide	stock	1001001	1001001	jtree_get_row_for_path_last	468.65	us/op	row 1001000
+tree-jtree	wide	stock	1001001	1001001	frame_start	1.786	ms p50	p95 4.331 ms; setViewPosition + paint 800x600
+tree-jtree	wide	stock	1001001	1001001	frame_middle	1.218	ms p50	p95 2.412 ms; setViewPosition + paint 800x600
+tree-jtree	wide	stock	1001001	1001001	frame_end	1.476	ms p50	p95 3.811 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree wide
+# 2026-10-17T08:55:58+05:30 tree-jtree wide m3 headroom_kb=38123540
+tree-jtree	wide	m3	1001001	1001001	jtree_expand_all	615	ms	JTree.expandPath in preorder, 1001 expanded in 615 ms
+tree-jtree	wide	m3	1001001	1001001	jtree_preferred_size	32	ms	119x20018018
+tree-jtree	wide	m3	1001001	1001001	jtree_heap	21.9	MB	JTree + UI + layout cache + expansion table
+tree-jtree	wide	m3	1001001	1001001	jtree_get_row_for_path_last	2.58	us/op	row 1001000
+tree-jtree	wide	m3	1001001	1001001	frame_start	17.048	ms p50	p95 23.635 ms; setViewPosition + paint 800x600
+tree-jtree	wide	m3	1001001	1001001	frame_middle	0.939	ms p50	p95 23.487 ms; setViewPosition + paint 800x600
+tree-jtree	wide	m3	1001001	1001001	frame_end	0.839	ms p50	p95 15.729 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree wide
+# 2026-10-17T09:02:00+05:30 tree-jtree flat stock headroom_kb=30217516
+tree-jtree	flat	stock	1000001	1000001	jtree_expand_all	24	ms	JTree.expandPath in preorder, 1 expanded in 24 ms
+tree-jtree	flat	stock	1000001	1000001	jtree_preferred_size	94	ms	99x20000018
+tree-jtree	flat	stock	1000001	1000001	jtree_heap	128.5	MB	JTree + UI + layout cache + expansion table
+tree-jtree	flat	stock	1000001	1000001	jtree_get_row_for_path_last	554.68	us/op	row 1000000
+tree-jtree	flat	stock	1000001	1000001	frame_start	1.904	ms p50	p95 5.528 ms; setViewPosition + paint 800x600
+tree-jtree	flat	stock	1000001	1000001	frame_middle	1.355	ms p50	p95 8.180 ms; setViewPosition + paint 800x600
+tree-jtree	flat	stock	1000001	1000001	frame_end	1.607	ms p50	p95 3.175 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree flat
+# 2026-10-17T09:02:49+05:30 tree-jtree flat m3 headroom_kb=9667608
+tree-jtree	flat	m3	1000001	1000001	jtree_expand_all	12	ms	JTree.expandPath in preorder, 1 expanded in 12 ms
+tree-jtree	flat	m3	1000001	1000001	jtree_preferred_size	8	ms	99x20000018
+tree-jtree	flat	m3	1000001	1000001	jtree_heap	21.5	MB	JTree + UI + layout cache + expansion table
+tree-jtree	flat	m3	1000001	1000001	jtree_get_row_for_path_last	1557.70	us/op	row 1000000
+tree-jtree	flat	m3	1000001	1000001	frame_start	1.638	ms p50	p95 5.592 ms; setViewPosition + paint 800x600
+tree-jtree	flat	m3	1000001	1000001	frame_middle	1.037	ms p50	p95 8.175 ms; setViewPosition + paint 800x600
+tree-jtree	flat	m3	1000001	1000001	frame_end	1.045	ms p50	p95 5.929 ms; setViewPosition + paint 800x600
+# exit 0 tree-jtree flat
+# 2026-10-17T09:03:01+05:30 list - stock headroom_kb=34057240
+list	-	stock	1000000	1000000	model_build	1197	ms	DefaultListModel.addElement
+list	-	stock	1000000	1000000	preferred_size	1246	ms	BasicListUI.updateLayoutState measures every row; 72x18000000
+list	-	stock	1000000	1000000	heap	63.3	MB	model + JList + UI
+list	-	stock	1000000	1000000	location_to_index_end	502.42	us/op	index 999999
+list	-	stock	1000000	1000000	index_to_location_end	455.23	us/op	y 17999982
+list	-	stock	1000000	1000000	insert_first_relayout	489	ms	add(0) + getPreferredSize, 18000018
+list	-	stock	1000000	1000000	frame_start	1.403	ms p50	p95 9.458 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	frame_middle	1.061	ms p50	p95 1.561 ms; setViewPosition + paint 800x600
+list	-	stock	1000000	1000000	frame_end	1.280	ms p50	p95 1.719 ms; setViewPosition + paint 800x600
+# exit 0 list -
+# 2026-10-17T09:03:16+05:30 table - stock headroom_kb=34112336
+table	-	stock	1000000	1000000	model_build	2023	ms	DefaultTableModel.addRow (one event per row)
+table	-	stock	1000000	1000000	table_create	1587	ms	225x16000000
+table	-	stock	1000000	1000000	heap	129.5	MB	model + JTable + UI
+table	-	stock	1000000	1000000	row_at_point_end_uniform	0.97	us/op	row 999999
+table	-	stock	1000000	1000000	set_row_height_first	12	ms	creates SizeSequence over all rows
+table	-	stock	1000000	1000000	set_row_height_random	9.54	us/op	SizeSequence.setSize
+table	-	stock	1000000	1000000	row_at_point_end_variable	4.10	us/op	row 999999
+table	-	stock	1000000	1000000	insert_first_variable	27	ms	SizeSequence.insertEntries
+table	-	stock	1000000	1000000	frame_start	2.901	ms p50	p95 15.316 ms; setViewPosition + paint 800x600
+table	-	stock	1000000	1000000	frame_middle	1.350	ms p50	p95 1.876 ms; setViewPosition + paint 800x600
+table	-	stock	1000000	1000000	frame_end	1.365	ms p50	p95 2.603 ms; setViewPosition + paint 800x600
+# exit 0 table -

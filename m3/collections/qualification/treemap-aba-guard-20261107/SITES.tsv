@@ -1,0 +1,86 @@
+file	line	member	locator	receiver	calls_comparator	feeds	head_guard
+M3SlotMap.java	54	firstCursorSlot	firstSlot	this	bounded views	return	Tree.near walked(); located() after slotWithin
+M3SlotMap.java	55	entrySlot	findSlot	this	always	return	Tree.find walked() after every comparator call
+M3SlotMap.java	74	containsKey	findSlot	this	always	return	Tree.find walked() after every comparator call
+M3SlotMap.java	77	getOrDefault	findSlot	this	always	read,return	Tree.find walked() after every comparator call
+M3SlotMap.java	82	containsValue	firstSlot	this	bounded views	read,return	Tree.near walked(); located() after slotWithin
+M3SlotMap.java	82	containsValue	nextSlot	this	bounded views	read,return	located() after slotWithin
+M3SlotMap.java	88	remove	findSlot	this	always	erase,return	Tree.find walked() after every comparator call
+M3SlotMap.java	91	remove	findSlot	this	always	erase,read,return	Tree.find walked() after every comparator call
+M3SlotMap.java	101	putIfAbsent	findSlot	this	always	read,return	Tree.find walked() after every comparator call
+M3SlotMap.java	108	replace	findSlot	this	always	write,return	Tree.find walked() after every comparator call
+M3SlotMap.java	113	replace	findSlot	this	always	write,read,return	Tree.find walked() after every comparator call
+M3SlotMap.java	119	computeIfAbsent	findSlot	this	always	read,return	Tree.find walked() after every comparator call
+M3SlotMap.java	127	computeIfPresent	findSlot	this	always	read,return	Tree.find walked() after every comparator call
+M3SlotMap.java	134	compute	findSlot	this	always	erase,read	Tree.find walked() after every comparator call
+M3SlotMap.java	141	merge	findSlot	this	always	erase,read	Tree.find walked() after every comparator call
+M3SlotMap.java	147	forEach	firstSlot	this	bounded views	read	Tree.near walked(); located() after slotWithin
+M3SlotMap.java	151	forEach	nextSlot	this	bounded views	-	located() after slotWithin
+M3SlotMap.java	155	replaceAll	firstSlot	this	bounded views	read	Tree.near walked(); located() after slotWithin
+M3SlotMap.java	159	replaceAll	nextSlot	this	bounded views	-	located() after slotWithin
+M3SlotMap.java	164	hashCode	firstSlot	this	bounded views	read	Tree.near walked(); located() after slotWithin
+M3SlotMap.java	164	hashCode	nextSlot	this	bounded views	read	located() after slotWithin
+M3SlotMap.java	173	equals	firstSlot	this	bounded views	read,return	Tree.near walked(); located() after slotWithin
+M3SlotMap.java	173	equals	nextSlot	this	bounded views	read,return	located() after slotWithin
+M3SlotMap.java	182	toString	firstSlot	this	bounded views	-	Tree.near walked(); located() after slotWithin
+M3SlotMap.java	182	toString	nextSlot	this	bounded views	-	located() after slotWithin
+M3SlotMap.java	202	getValue	entrySlot	this	after a structural change (findSlot)	read,return	hint path calls no comparator; fallback = findSlot (Tree.find walked())
+M3SlotMap.java	204	setValue	entrySlot	this	after a structural change (findSlot)	write,return	hint path calls no comparator; fallback = findSlot (Tree.find walked())
+M3SlotMap.java	217	slots	firstCursorSlot	this	bounded views (tree owners)	-	M3TreeMap: cursorStart(false); other owners: firstSlot (no revision change)
+M3SlotMap.java	229	hasNext	nextSlot	this	bounded views	-	located() after slotWithin
+M3SlotMap.java	236	next	nextSlot	this	bounded views	read,return	located() after slotWithin
+M3SlotMap.java	252	remove	findSlot	this	always	erase,return	Tree.find walked() after every comparator call
+M3SlotMap.java	273	contains	findSlot	this	always	read,return	Tree.find walked() after every comparator call
+M3OrderedSlotMap.java	38	contains	findSlot	this	always	read,return	Tree.find walked() after every comparator call
+M3OrderedSlotMap.java	41	remove	findSlot	this	always	erase,return	Tree.find walked() after every comparator call
+M3OrderedSlotMap.java	46	endpoint	lastSlot	this	bounded views	erase,read,return	Tree.near walked(); located() after slotWithin
+M3OrderedSlotMap.java	46	endpoint	firstSlot	this	bounded views	erase,read,return	Tree.near walked(); located() after slotWithin
+M3OrderedSlotMap.java	63	hashCode	firstSlot	this	bounded views	read,return	Tree.near walked(); located() after slotWithin
+M3OrderedSlotMap.java	63	hashCode	nextSlot	this	bounded views	read,return	located() after slotWithin
+M3TreeMap.java	98	lowest	walk (Tree.near)	tree	always	return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	102	highest	walk (Tree.near)	tree	always	return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	122	cursorStart	lastSlot	this	bounded views	return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	122	cursorStart	firstSlot	this	bounded views	return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	128	firstCursorSlot	cursorStart	this	bounded views	return	creation never fails: a structural change yields -1, the cursor's epoch (read before) reports it at the first call; the comparator's own exceptions propagate
+M3TreeMap.java	139	nearIndexedSlot	near	this	always	return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	147	findSlot	walk (Tree.find)	tree	always	return	walked() after every comparator call
+M3TreeMap.java	153	entrySlot	findSlot	this	always	-	Tree.find walked() after every comparator call
+M3TreeMap.java	186	size	firstSlot	this	bounded views	count,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	186	size	nextSlot	this	bounded views	count,return	located() after slotWithin
+M3TreeMap.java	188	isEmpty	firstSlot	this	bounded views	return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	248	clear	firstSlot	this	bounded views	erase	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	249	clear	nextSlot	this	bounded views	erase	located() after slotWithin
+M3TreeMap.java	269	valueFlags	findSlot	this	always	return	Tree.find walked() after every comparator call
+M3TreeMap.java	284	touch	findSlot	this	always	read,return	Tree.find walked() after every comparator call
+M3TreeMap.java	314	preload	firstSlot	this	bounded views	read	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	314	preload	nextSlot	this	bounded views	read	located() after slotWithin
+M3TreeMap.java	347	near	walk (Tree.near)	tree	always	return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	360	firstKey	firstSlot	this	bounded views	read,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	361	lastKey	lastSlot	this	bounded views	read,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	362	firstEntry	firstSlot	this	bounded views	read,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	363	lastEntry	lastSlot	this	bounded views	read,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	364	lowerEntry	near	this	always	read,return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	365	floorEntry	near	this	always	read,return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	366	ceilingEntry	near	this	always	read,return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	367	higherEntry	near	this	always	read,return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	368	lowerKey	near	this	always	read,return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	369	floorKey	near	this	always	read,return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	370	ceilingKey	near	this	always	read,return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	371	higherKey	near	this	always	read,return	Tree.near walked(); check after the bound probe; located() after slotWithin
+M3TreeMap.java	373	pollFirstEntry	firstSlot	this	bounded views	erase,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	374	pollLastEntry	lastSlot	this	bounded views	erase,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	376	pollKey	lastSlot	this	bounded views	erase,read,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	376	pollKey	firstSlot	this	bounded views	erase,read,return	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	432	SortedSlotCursor	firstSlot	source	bounded views	-	Tree.near walked(); located() after slotWithin
+M3TreeMap.java	439	nextKey	nextSlot	source	bounded views	return	located() after slotWithin
+M3TreeMap.java	444	valueFor	findSlot	source	always	read,return	Tree.find walked() after every comparator call
+M3TreeSet.java	50	remove	findSlot	map	always	erase,return	Tree.find walked() after every comparator call
+M3FilteredViews.java	563	countTreeSlots	firstSlot	owner	bounded views	-	Tree.near walked(); located() after slotWithin
+M3FilteredViews.java	570	countTreeSlots	nextSlot	owner	bounded views	-	located() after slotWithin
+M3FilteredViews.java	572	countTreeSlots	entrySlot	owner	after a structural change (findSlot)	read	hint path calls no comparator; fallback = findSlot (Tree.find walked())
+M3MutableFilteredViews.java	108	SlotCursor	cursorStart	slots	bounded views	-	creation never fails: a structural change yields -1, the cursor's epoch (read before) reports it at the first call; the comparator's own exceptions propagate
+M3MutableFilteredViews.java	248	step	previousIndexedSlot	owner	bounded views	return	located() after slotWithin
+M3MutableFilteredViews.java	248	step	nextSlot	owner	bounded views	return	located() after slotWithin
+M3MutableFilteredViews.java	646	step	nextSlot	owner	bounded views	return	located() after slotWithin
+M3TreeMap.java	199	put	walk (put descent)	this	always	write	check(expected) after every descent comparator call; revision read before admission (write half of compute/merge)
+M3TreeMap.java	255	defer	walk (defer descent)	this	always	-	check(expected) after every descent comparator call

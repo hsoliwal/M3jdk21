@@ -1,0 +1,32 @@
+{
+  "schema": "independent-static-review-inputs/v1",
+  "count": 5,
+  "stable": true,
+  "files": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/verify_publication.py",
+      "bytes": 9623,
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "4cc60517ad06d1c3590059e43f353c59ad751cb74601bc65735a7df9259edcbf"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw_custody_v3.py",
+      "bytes": 12671,
+      "sha256": "80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
+      "bytes": 14641,
+      "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/PROTOCOL.md",
+      "bytes": 4406,
+      "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\"sha\":\"293961a4cbf86c1f5afd5466e97ccb15a847186f\",\"node_id\":\"C_kwDOU2z4ntoAKDI5Mzk2MWE0Y2JmODZjMWY1YWZkNTQ2NmU5N2NjYjE1YTg0NzE4NmY\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/commits/293961a4cbf86c1f5afd5466e97ccb15a847186f\",\"html_url\":\"https://github.com/hsoliwal/M3jdk21/commit/293961a4cbf86c1f5afd5466e97ccb15a847186f\",\"author\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-06T04:36:50Z\"},\"committer\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-06T04:36:50Z\"},\"tree\":{\"sha\":\"bf39341e1e2fe6f8c7c8b3908fcb37b89bb220da\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/bf39341e1e2fe6f8c7c8b3908fcb37b89bb220da\"},\"message\":\"fix(m3): materialize verified Java 21 CI repair through pinned recipe\\n\\nSelect the already-pinned JDK for foundation Maven and repair the two exact A3 Java literals. Preserve eight-test OpenRewrite results, fixed-point and refusal checks, whole-class javac output, Python installer evidence and the initial failed metadata oracle. Retain the historical restoration and all unrelated entries. Native, full-module and rebuilt-JDK gates remain open.\",\"parents\":[{\"sha\":\"946fd922c1d878e3f32309c83d132057a7ef8451\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/commits/946fd922c1d878e3f32309c83d132057a7ef8451\",\"html_url\":\"https://github.com/hsoliwal/M3jdk21/commit/946fd922c1d878e3f32309c83d132057a7ef8451\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+      "title": "293961a4cbf86c1f5afd5466e97ccb15a847186f",
+      "modified_date": null,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/commits/293961a4cbf86c1f5afd5466e97ccb15a847186f",
+      "display_url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/commits/293961a4cbf86c1f5afd5466e97ccb15a847186f",
+      "display_title": "293961a4cbf86c1f5afd5466e97ccb15a847186f",
+      "structuredContent": {
+        "title": "293961a4cbf86c1f5afd5466e97ccb15a847186f",
+        "content": "{\"sha\":\"293961a4cbf86c1f5afd5466e97ccb15a847186f\",\"node_id\":\"C_kwDOU2z4ntoAKDI5Mzk2MWE0Y2JmODZjMWY1YWZkNTQ2NmU5N2NjYjE1YTg0NzE4NmY\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/commits/293961a4cbf86c1f5afd5466e97ccb15a847186f\",\"html_url\":\"https://github.com/hsoliwal/M3jdk21/commit/293961a4cbf86c1f5afd5466e97ccb15a847186f\",\"author\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-06T04:36:50Z\"},\"committer\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-06T04:36:50Z\"},\"tree\":{\"sha\":\"bf39341e1e2fe6f8c7c8b3908fcb37b89bb220da\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/trees/bf39341e1e2fe6f8c7c8b3908fcb37b89bb220da\"},\"message\":\"fix(m3): materialize verified Java 21 CI repair through pinned recipe\\n\\nSelect the already-pinned JDK for foundation Maven and repair the two exact A3 Java literals. Preserve eight-test OpenRewrite results, fixed-point and refusal checks, whole-class javac output, Python installer evidence and the initial failed metadata oracle. Retain the historical restoration and all unrelated entries. Native, full-module and rebuilt-JDK gates remain open.\",\"parents\":[{\"sha\":\"946fd922c1d878e3f32309c83d132057a7ef8451\",\"url\":\"https://api.github.com/repos/hsoliwal/M3jdk21/git/commits/946fd922c1d878e3f32309c83d132057a7ef8451\",\"html_url\":\"https://github.com/hsoliwal/M3jdk21/commit/946fd922c1d878e3f32309c83d132057a7ef8451\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+        "display_url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/commits/293961a4cbf86c1f5afd5466e97ccb15a847186f"
+      }
+    },
+    "isError": false
+  }
+}

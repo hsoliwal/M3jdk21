@@ -1,0 +1,11 @@
+item	status	evidence	limit
+overall	DRAFT_PARTIAL_PROGRAMME	FINAL_REPORT.md	No release or whole-programme completion
+Java21_kernel	PASS	logs/java-contract-checks.log	41 shared standalone cases; not JUnit execution
+Python_assembler_guards	PASS	logs/python-tests.log	11 tests; lock fixtures are not real JavaFX JMODs
+diagnostics_image	LOCAL_IMAGE_PROVEN	logs/diagnostics-run.log	Installed Debian JDK21; modified M3JDK21 not built
+repeated_JMOD_build	PASS	ARTIFACT_SHA256.tsv	Two same-host builds only
+Maven_OpenRewrite_JUnit	NOT_RUN_BLOCKED	logs/external-gate-blockers.log	Maven absent; Maven Central DNS failure
+JaCoCo_99_percent	CONFIGURED_NOT_MEASURED	m3/tooling/module-packs/pom.xml	No passing coverage receipt
+JavaFX_image	ARTIFACT_PROOF_PENDING	m3/tooling/module-packs/javafx-lock.example.json	Invalid example lock; no real artifact or native toolkit proof
+M3JDK21_backports	BUILD_AND_JTREG_PENDING	ACTION_QUEUE.tsv	No new JDK backport/product admission
+canonical_promotion	NOT_PERFORMED	TASK_PACKET.json	Draft PR only; no merge/rebase/force-push

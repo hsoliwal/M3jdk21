@@ -1,0 +1,2 @@
+location	missed	reason
+M3InputModel.java:261	branches=1,instructions=0	caret blink phase: the INPUT family keeps phase 0 (no blink timer: a frame-rate blink would repaint the field every 16 ms instead of the caret rect only), so phase >= 500 never happens while focused; reserved for TODO M3P-INPUT-1 (caret-rect damage blink)

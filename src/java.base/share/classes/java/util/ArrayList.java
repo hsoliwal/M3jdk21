@@ -29,6 +29,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import jdk.internal.access.SharedSecrets;
+import jdk.internal.mindex.M3CollectionMaskCompactor;
 import jdk.internal.util.ArraysSupport;
 
 /**
@@ -1759,18 +1760,45 @@ public class ArrayList<E> extends AbstractList<E>
         // elements to delete, a second pass to physically expunge.
         if (i < end) {
             final int beg = i;
-            final long[] deathRow = nBits(end - beg);
-            deathRow[0] = 1L;   // set bit 0
-            for (i = beg + 1; i < end; i++)
-                if (filter.test(elementAt(es, i)))
-                    setBit(deathRow, i - beg);
+            // M3JDK 21: inline the ephemeral deletion decisions for up to two
+            // 64-bit words. Large ranges retain the original deathRow layout,
+            // compactor dispatch, and observable iteration/removal behavior.
+            final int span = end - beg;
+            final boolean inlineMask = span <= 2 * Long.SIZE;
+            final long[] deathRow = inlineMask ? null : nBits(span);
+            long deletionLow = 1L; // the first rejected element is ordinal 0
+            long deletionHigh = 0L;
+            if (!inlineMask) deathRow[0] = 1L;
+            for (i = beg + 1; i < end; i++) {
+                if (filter.test(elementAt(es, i))) {
+                    final int ordinal = i - beg;
+                    if (inlineMask) {
+                        if (ordinal < Long.SIZE) deletionLow |= 1L << ordinal;
+                        else deletionHigh |= 1L << (ordinal - Long.SIZE);
+                    } else {
+                        setBit(deathRow, ordinal);
+                    }
+                }
+            }
             if (modCount != expectedModCount)
                 throw new ConcurrentModificationException();
             modCount++;
             int w = beg;
-            for (i = beg; i < end; i++)
-                if (isClear(deathRow, i - beg))
-                    es[w++] = es[i];
+            // Keep the large M3JDK compactor and its original bit layout.
+            if (!inlineMask && span >= 512) {
+                w = M3CollectionMaskCompactor.compact(es, beg, end, deathRow);
+            } else if (inlineMask) {
+                for (i = beg; i < end; i++) {
+                    final int ordinal = i - beg;
+                    final long word = ordinal < Long.SIZE ? deletionLow : deletionHigh;
+                    if ((word & (1L << (ordinal & (Long.SIZE - 1)))) == 0)
+                        es[w++] = es[i];
+                }
+            } else {
+                for (i = beg; i < end; i++)
+                    if (isClear(deathRow, i - beg))
+                        es[w++] = es[i];
+            }
             shiftTailOverGap(es, w, end);
             return true;
         } else {

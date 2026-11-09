@@ -1,0 +1,55 @@
+{
+  "schema": "M3_NLP_SOURCE_JMOD_MAPPING_1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 first-party; preserve all upstream rights",
+  "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "source_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "phase_advanced": false,
+  "mappings": [
+    {
+      "source": "com.synexia.mindex.compiler.ast.M3File",
+      "target": "jdk.m3.search.M3File",
+      "kind": "package-adapted bounded immutable compiler-source snapshot",
+      "scope": "Does not claim the full legacy token/posting MIndexFile image API."
+    },
+    {
+      "source": "com.synexia.mindex.compiler.ast.M3FileSourceFacts",
+      "target": "jdk.m3.search.M3FileSourceFacts",
+      "kind": "package-adapted source/context metadata; exact original framed UTF16 hashing"
+    },
+    {
+      "source": "MIndexString and current java.lang.M3String lineage",
+      "target": "existing java.lang.String/CharSequence public ingress to java.lang.M3String",
+      "kind": "consume existing owner through original public boundary; no new interner or java.base API"
+    },
+    {
+      "source": "hsoliwal/lucene M3TextReaders and ReusableStringReader",
+      "target": "original org.apache.lucene.analysis owners in org.apache.lucene.core",
+      "revision": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+      "kind": "exact fork payloads applied as sealed build overlays"
+    },
+    {
+      "source": "hsoliwal/opennlp M3Tokenizers and SimpleTokenizer",
+      "target": "original opennlp.tools.tokenize owners in org.apache.opennlp.tools",
+      "revision": "368337311ad94b665fd178f8d3ced005a73b2370",
+      "kind": "exact fork payloads applied as sealed build overlays"
+    },
+    {
+      "source": "hsoliwal/lucene analysis/opennlp module",
+      "target": "org.apache.lucene.analysis.opennlp",
+      "revision": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+      "kind": "complete exact module production source/resources; original descriptor/SPI"
+    },
+    {
+      "source": "existing com.sun.source.util.M3AST, javac TreeScanner, Synexia M3ASTCacheBridge projection/lifetime contract",
+      "target": "jdk.m3.search.compiler.M3ASTSearch",
+      "kind": "new consumer of actual PARSED events; bounded iterative declarations; no separate parser/cache"
+    },
+    {
+      "source": "MIndexFile token/posting images and MIndexAST pool/cache/codec families",
+      "target": "existing canonical Synexia owners and receiving catalogue",
+      "kind": "PENDING_FULL_FAMILY_MIGRATION; not replaced by this source-search integration"
+    }
+  ]
+}

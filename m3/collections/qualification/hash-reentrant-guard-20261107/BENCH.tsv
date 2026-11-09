@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+# M3HashMap get/put microbench, base (#2676 head 0b97282f6d1d) vs head (this leaf), JDK 21, real-pom classes: bench/bench.sh, FORKS=5 WARMUP=20 ROUNDS=60, 16384 prebuilt keys, 32 passes per round; base and head rounds alternate in one JVM (two class loaders, order flipped every round). A/A = the base classes on both sides: the machine's noise band. Values: median over forks of each side's median ns/op, median paired head/base ratio, widest 10th-90th percentile ratio band of any fork. Machine: Windows desktop under ~85 % background load at the start of the session.
+keys	operation	base_ns_op	head_ns_op	head/base	ratio_p10	ratio_p90	aa_ratio	aa_p10	aa_p90	within_aa_band
+Integer	get-hit	3.327	3.648	1.0928	0.9036	1.4487	1.0209	0.9036	1.4237	yes
+Integer	get-miss	1.893	1.905	1.0242	0.7784	1.2266	0.9773	0.8563	1.4106	yes
+Integer	put-overwrite	7.688	5.532	0.9087	0.6512	1.1710	1.2358	0.5401	1.9735	yes
+Integer	put-fill	15.487	15.693	1.0162	0.8143	1.2718	0.9928	0.8526	1.1965	yes
+String	get-hit	34.029	32.243	0.9554	0.7338	1.4362	1.0081	0.8449	1.3470	yes
+String	get-miss	31.559	33.615	1.0660	0.8119	1.3574	0.9925	0.7451	1.2183	yes
+String	put-overwrite	34.557	33.665	0.9936	0.7536	1.2374	1.0032	0.7928	1.2192	yes
+String	put-fill	97.659	95.550	0.9837	0.7986	1.1666	1.0096	0.8840	1.2053	yes

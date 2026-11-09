@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: GPL-2.0-only
+name: M3 Object toAdpater source and historical binary qualification
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/lang/Object.java'
+      - 'src/hotspot/share/classfile/classLoader.cpp'
+      - 'test/jdk/java/lang/Object/ObjectToAdpater*.java'
+      - 'test/jdk/java/lang/Object/libObjectToAdpaterNativeTest.c'
+      - 'm3/qualification/object-toadpater/**'
+      - '.github/workflows/m3-object-toadpater-successor.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-binary-jni-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact candidate source identities
+        run: python3 m3/qualification/object-toadpater/verify_candidate.py
+      - name: Recompile stock-JDK21 pre-alias subclass and run oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="m3/qualification/object-toadpater"
+          mkdir -p "$RUNNER_TEMP/legacy-bytecode"
+          cp "$root/LegacyPreAliasSubclass.java.txt" "$RUNNER_TEMP/legacy-bytecode/LegacyPreAliasSubclass.java"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/legacy-bytecode" \
+            "$RUNNER_TEMP/legacy-bytecode/LegacyPreAliasSubclass.java"
+          echo "4eff8d88c8154820bee15152e0f2cb4791b305cc67b5675b34276310aa568e36  $RUNNER_TEMP/legacy-bytecode/LegacyPreAliasSubclass.class" | sha256sum --check
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/legacy-bytecode" \
+            "$root/LegacyImageFixtureOracle.java"
+          java -cp "$RUNNER_TEMP/legacy-bytecode" LegacyImageFixtureOracle \
+            "$RUNNER_TEMP/legacy-bytecode/LegacyPreAliasSubclass.class"
+          java -Xint -cp "$RUNNER_TEMP/legacy-bytecode" LegacyImageFixtureOracle \
+            "$RUNNER_TEMP/legacy-bytecode/LegacyPreAliasSubclass.class"
+      - name: Check JNI C17 declaration syntax with host JDK headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -Wall -Wextra -Werror -Wpedantic -fsyntax-only \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            test/jdk/java/lang/Object/libObjectToAdpaterNativeTest.c
+      - name: Retain scope boundary
+        run: |
+          echo 'SOURCE_ONLY_PASS_OR_FAIL; NOT_RUN product M3JDK HotSpot/java.base build, jtreg, JNI dynamic runtime'

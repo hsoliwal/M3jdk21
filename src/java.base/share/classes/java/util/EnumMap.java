@@ -23,9 +23,17 @@
  * questions.
  */
 
+/*
+ * M3JDK21 direct-ordinal collection refinements Copyright 2026
+ * Hitesh Soliwal and contributors. Original OpenJDK GPLv2 with
+ * Classpath Exception notices and conditions remain in force.
+ */
+
 package java.util;
 
 import jdk.internal.access.SharedSecrets;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 /**
  * A specialized {@link Map} implementation for use with enum type keys.  All
@@ -357,6 +365,81 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
     public void clear() {
         Arrays.fill(vals, null);
         size = 0;
+    }
+
+    /**
+     * Traverse the canonical enum-ordinal value array without creating an
+     * EntryIterator or an Entry for each mapping. An empty slot is absent,
+     * while the NULL sentinel represents a present mapping to null.
+     *
+     * <p>Like the original EnumMap iterator, this traversal is weakly
+     * consistent under interference. It never owns a secondary mapping,
+     * node, or entry array.
+     */
+    @Override
+    public void forEach(BiConsumer<? super K, ? super V> action) {
+        Objects.requireNonNull(action);
+        // Preserve inherited Map defaults for subclasses overriding entrySet().
+        if (getClass() != EnumMap.class) {
+            for (Map.Entry<K, V> entry : entrySet()) {
+                K key;
+                V value;
+                try {
+                    key = entry.getKey();
+                    value = entry.getValue();
+                } catch (IllegalStateException removed) {
+                    throw new ConcurrentModificationException(removed);
+                }
+                action.accept(key, value);
+            }
+            return;
+        }
+        final Object[] values = vals;
+        final K[] keys = keyUniverse;
+        for (int offset = 0; offset < values.length; offset++) {
+            Object stored = values[offset];
+            if (stored != null)
+                action.accept(keys[offset], unmaskNull(stored));
+        }
+    }
+
+    /**
+     * Replace each present value in-place at its enum ordinal. In particular,
+     * returning null stores the existing NULL sentinel rather than erasing
+     * the mapping; the number of mappings and encounter order are unchanged
+     * in the absence of caller interference.
+     */
+    @Override
+    public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function) {
+        Objects.requireNonNull(function);
+        if (getClass() != EnumMap.class) {
+            // An EnumMap subclass can redefine entrySet(); its inherited Map
+            // default must keep consulting that virtual API.
+            for (Map.Entry<K, V> entry : entrySet()) {
+                K key;
+                V old;
+                try {
+                    key = entry.getKey();
+                    old = entry.getValue();
+                } catch (IllegalStateException removed) {
+                    throw new ConcurrentModificationException(removed);
+                }
+                V value = function.apply(key, old);
+                try {
+                    entry.setValue(value);
+                } catch (IllegalStateException removed) {
+                    throw new ConcurrentModificationException(removed);
+                }
+            }
+            return;
+        }
+        final Object[] values = vals;
+        final K[] keys = keyUniverse;
+        for (int offset = 0; offset < values.length; offset++) {
+            Object stored = values[offset];
+            if (stored != null)
+                values[offset] = maskNull(function.apply(keys[offset], unmaskNull(stored)));
+        }
     }
 
     // Views
@@ -707,6 +790,30 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
         }
 
         return h;
+    }
+
+    /**
+     * Format only live ordinal slots; internal representation is parallel
+     * arrays, so rendering a map needs no per-element Map.Entry materialization.
+     */
+    @Override
+    public String toString() {
+        if (getClass() != EnumMap.class) return super.toString();
+        StringBuilder buffer = new StringBuilder("{");
+        boolean separator = false;
+        final Object[] values = vals;
+        for (int offset = 0; offset < values.length; offset++) {
+            Object stored = values[offset];
+            if (stored == null)
+                continue;
+            if (separator)
+                buffer.append(", ");
+            separator = true;
+            Object value = unmaskNull(stored);
+            buffer.append(keyUniverse[offset]).append('=')
+                  .append(value == this ? "(this Map)" : value);
+        }
+        return buffer.append('}').toString();
     }
 
     private int entryHashCode(int index) {

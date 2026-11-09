@@ -1,0 +1,4 @@
+$ ["nm", "-D", "--defined-only", "/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/tooling/module-packs/collections/target/m3-collections-image/native/libm3_collections_mask.so"]
+0000000000001180 T Java_com_m3_collections_M3IndexMaskCompactor_selectNative
+
+EXIT 0

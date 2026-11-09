@@ -1,0 +1,2 @@
+        //FLLDCIM: MRL - expansion count of the geometric-growth rule (donor README: 453,002; was > 700,000 for 1.5x growth); recipe qualification/collections-atoms-20261106/apply.py v1
+        require(expansions == 453_002L, "growth oracle expansion count drifted from the geometric-growth rule");

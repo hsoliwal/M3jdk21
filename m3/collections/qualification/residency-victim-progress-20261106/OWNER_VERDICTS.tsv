@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: Apache-2.0
+# The crate's 44 residency contract tests (publication-budget postimage of M3ObjectResidencyReuseTest, com.synexia develop ca1aafc4d94f) on the owner jdk.m3.collections.M3ObjectResidency: master 107d96051f5 (master) and this leaf's head (p1), call sites mapped as census-g7 differential.sh does (probe on the owner, nothing dropped). disposition: KEPT_G7 = relocated by #2598; UNHELD_P1 = relocated by this leaf (census-g7 RELOCATION_MAP.tsv DROP rows removed); HOLD_L066 = still dropped (Phase 2 groups).
+test	master	p1	disposition	master_failure
+absentSameOccupiedAndInvalidRequestsDoNotInvokeReset	PASS	PASS	KEPT_G7	-
+activeBorrowAndInstalledAliasRefuseHandoff	PASS	PASS	KEPT_G7	-
+admissionClaimsInstallTargetAgainstInstallAndBorrowReentry	FAIL	PASS	UNHELD_P1	AssertionFailedError:expected: <CREATING> but was: <ABSENT>
+admissionClaimsRequestedSlotBeforeCodecOrStoreCanPublishItAgain	FAIL	PASS	UNHELD_P1	AssertionFailedError:expected: <CREATING> but was: <ABSENT>
+admissionRestoresAbsentRequestAfterIoOrRuntimeFailureAndAllowsRetry	PASS	PASS	KEPT_G7	-
+admissionRestoresCreateInstallAndRestoreRequestOnErrorWithoutReplacingIt	PASS	PASS	KEPT_G7	-
+callerInstalledProjectionsAndUnprovedModesNeverInvokeReset	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <false> but was: <true>
+checkedResetFailureWrapsOriginalAndDiscardsTaintedShell	PASS	PASS	KEPT_G7	-
+decodeErrorRestoresSwappedStateAndRetainsSecondaryBytesForRetry	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <SWAPPED> but was: <RESTORING>
+decodeReentryRefusesBeforeDeletingTheSnapshotAndAllowsRetry	PASS	PASS	KEPT_G7	-
+deleteErrorBeforeMutationRestoresSwappedStateAndAllowsRetry	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <SWAPPED> but was: <RESTORING>
+encodeAndWriteErrorsRetainResidentIdentityAndOriginalThrowable	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <RESIDENT> but was: <SWAPPING>
+factoryAndDecodeNullResultsStillFailBeforeTheBudgetCheck	PASS	PASS	KEPT_G7	-
+factoryErrorRestoresAbsentStateAndOriginalThrowableBeforeRetry	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <ABSENT> but was: <CREATING>
+factoryFailureAfterNestedAdmissionKeepsTheOriginalThrowable	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <ABSENT> but was: <CREATING>
+factoryReentryRefusesPublicationWithoutEvictingTheNestedProjection	PASS	PASS	KEPT_G7	-
+failedRebindPreservesUnrelatedLruVictimOrdering	FAIL	FAIL	HOLD_L066	AssertionFailedError:Unexpected exception type thrown, expected: <java.lang.IllegalArgumentException> but was:
+handoffPreservesIdentityAndLogicalBitsWithoutNewFactoryObject	PASS	PASS	KEPT_G7	-
+linkedVictimsExcludeAnInProgressSwap	FAIL	PASS	UNHELD_P1	AssertionFailedError:expected: <CREATING> but was: <ABSENT>
+maximumBudgetArithmeticRejectsOverflowAndAcceptsExactBoundary	PASS	PASS	KEPT_G7	-
+noVictimAdmissionRestoresTheClaimWithoutFactoryOrDecisionEffects	PASS	PASS	KEPT_G7	-
+observeOnlyOverflowKeepsCallbackDemandAndArithmeticFailureOrdering	PASS	PASS	KEPT_G7	-
+observeOnlyStillAllowsFactoryReentryToExceedTheBudget	PASS	PASS	KEPT_G7	-
+occupiedDestinationBorrowAndActiveCallbackRefuseBeforeReset	PASS	PASS	KEPT_G7	-
+pressureAwareReserveStillControlsAdmissionAndRebind	PASS	PASS	KEPT_G7	-
+publicationAcceptsZeroAndExactLongMaxBudgetBoundaries	PASS	PASS	KEPT_G7	-
+readErrorRestoresSwappedStateAndRetainsSecondaryBytesForRetry	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <SWAPPED> but was: <RESTORING>
+readReentryStillDecodesBeforeThePublicationCheck	PASS	PASS	KEPT_G7	-
+refusalDoesNotMutateAndFailedResetDiscardsShell	FAIL	FAIL	HOLD_L066	AssertionFailedError:Unexpected exception type thrown, expected: <java.lang.IllegalArgumentException> but was:
+resetErrorPreservesErrorIdentityAndDiscardsTaintedShell	PASS	PASS	KEPT_G7	-
+resetGuardsBothParticipatingSlotsButAllowsUnrelatedCalls	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <CREATING> but was: <SWAPPING>
+resetReentryCannotSpendTheDestinationBudgetTwice	FAIL	FAIL	HOLD_L066	AssertionFailedError:Unexpected exception type thrown, expected: <jdk.m3.collections.M3ObjectResidency.BudgetE
+restoreAdmissionClaimsSwappedRequestAndPreservesStoreCallbackOrder	FAIL	PASS	UNHELD_P1	AssertionFailedError:expected: <RESTORING> but was: <SWAPPED>
+rolloverScanVictimsExcludeAnInProgressSwap	FAIL	PASS	UNHELD_P1	AssertionFailedError:expected: <CREATING> but was: <ABSENT>
+runtimeResetFailurePreservesExceptionIdentityAndDiscardsTaintedShell	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <java.lang.IllegalArgumentException: runtime reset failure> but was: <jdk.m3.co
+sourceAndDestinationPinAndCountLanesFailClosed	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <false> but was: <true>
+sourceBorrowAndActiveCallbackRefuseBeforeReset	PASS	PASS	KEPT_G7	-
+successfulRebindPreservesLogicalBitsAndMakesTargetMostRecentlyUsed	PASS	PASS	KEPT_G7	-
+swapWriteErrorAfterStoreMutationStillRetainsResidentValue	FAIL	FAIL	HOLD_L066	AssertionFailedError:expected: <RESIDENT> but was: <SWAPPING>
+swappingVictimExclusionPreservesBorrowActiveAndPermanentPinGuards	FAIL	PASS	UNHELD_P1	AssertionFailedError:execution timed out after 2000 ms
+unrelatedNestedRequestCanUseTheNextEligibleVictimAndKeepsLruOrder	FAIL	PASS	UNHELD_P1	AssertionFailedError:execution timed out after 2000 ms
+withinBudgetFactoryReentryPreservesOrderAndTheNextLruVictim	PASS	PASS	KEPT_G7	-
+zeroBorrowCountDoesNotProveNoEscape	PASS	PASS	KEPT_G7	-
+zeroWeightAndMaximumWeightCanRebindWithoutArithmeticOverflow	PASS	PASS	KEPT_G7	-

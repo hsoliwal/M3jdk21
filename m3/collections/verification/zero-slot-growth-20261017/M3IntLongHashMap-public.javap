@@ -1,0 +1,59 @@
+Compiled from "M3IntLongHashMap.java"
+public final class com.m3.collections.M3IntLongHashMap {
+  public com.m3.collections.M3IntLongHashMap();
+    descriptor: ()V
+
+  public com.m3.collections.M3IntLongHashMap(int);
+    descriptor: (I)V
+
+  public static long payloadBytesFor(int);
+    descriptor: (I)J
+
+  public boolean put(int, long);
+    descriptor: (IJ)Z
+
+  public long getOrDefault(int, long);
+    descriptor: (IJ)J
+
+  public boolean containsKey(int);
+    descriptor: (I)Z
+
+  public boolean containsValue(long);
+    descriptor: (J)Z
+
+  public boolean replace(int, long, long);
+    descriptor: (IJJ)Z
+
+  public long addTo(int, long);
+    descriptor: (IJ)J
+
+  public boolean remove(int);
+    descriptor: (I)Z
+
+  public boolean remove(int, long);
+    descriptor: (IJ)Z
+
+  public int size();
+    descriptor: ()I
+
+  public boolean isEmpty();
+    descriptor: ()Z
+
+  public int capacity();
+    descriptor: ()I
+
+  public long payloadBytes();
+    descriptor: ()J
+
+  public void clear();
+    descriptor: ()V
+
+  public void forEach(com.m3.collections.M3IntLongConsumer);
+    descriptor: (Lcom/m3/collections/M3IntLongConsumer;)V
+
+  public com.m3.collections.M3IntIterator keyIterator();
+    descriptor: ()Lcom/m3/collections/M3IntIterator;
+
+  public int[] keysToArray();
+    descriptor: ()[I
+}

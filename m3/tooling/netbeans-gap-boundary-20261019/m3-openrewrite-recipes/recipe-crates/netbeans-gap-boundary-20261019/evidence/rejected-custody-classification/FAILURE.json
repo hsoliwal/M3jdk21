@@ -1,0 +1,24 @@
+{
+  "source_revision": "4565392487bf83b55a3031a26ea1a61b1b526b3c",
+  "changed_paths": 318,
+  "gate_sha256": "55e8183c58e4bf3608355e650e3be18609feab70f7baa75c935716b396d24900",
+  "violations": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/evidence/PUBLICATION_READBACK.json",
+      "code": "NONCOMMENTABLE_FIRST_PARTY",
+      "message": "new/non-commentable first-party path requires FIRST_PARTY_NO_HEADER provenance row"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/evidence/superseded-whole-range-lower-bound/GapContent.java.txt",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/resources/com/synexia/rewrite/hash-pinned-java/netbeans-gap-boundary-20261019/GapContent.java.txt",
+      "code": "UPSTREAM_DISPOSITION",
+      "message": "UPSTREAM_MODIFIED row must declare a modification disposition"
+    }
+  ],
+  "status": "FAIL",
+  "scope": "Changed-file provenance only; full reactor not executed"
+}

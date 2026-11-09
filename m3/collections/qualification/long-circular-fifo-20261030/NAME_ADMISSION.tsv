@@ -1,0 +1,4 @@
+source_repository	donor_source	target_fqcn	naming_decision	compatibility_claim	status
+hsoliwal/commons-collections	com.m3.collections.apache.queue.CircularFifoQueue	com.m3.collections.M3LongCircularFifoQueue	PRIMITIVE_SPECIALIZED_M3_OWNER	NONE; Apache Queue<E> != M3LongQueue	PENDING_QUALIFICATION
+hsoliwal/guava	com.m3.collections.guava.collect.EvictingQueue	com.m3.collections.M3LongCircularFifoQueue	BORROW_CONCEPT_NOT_SOURCE	NONE; Guava permits zero capacity	PENDING_QUALIFICATION
+hsoliwal/M3jdk21	com.m3.collections.M3LongQueue	com.m3.collections.M3LongCircularFifoQueue	EXISTING_INTERFACE_IMPLEMENTATION	PRIMITIVE_QUEUE_CONTRACT	SOURCE_COMPILED_STANDALONE_ONLY

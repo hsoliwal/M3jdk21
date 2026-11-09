@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0yLjAKcGFja2Fn\nZSBqZGsuaW50ZXJuYWwubWluZGV4OwoKLyoqIFNoYXJlZCB6ZXJvLW9iamVj\ndCBiaXQtYWRkcmVzcyBhcml0aG1ldGljIGZvciBwYWNrZWQgcHJpbWl0aXZl\nIGJpdCBsYW5lcy4gKi8KZmluYWwgY2xhc3MgTTNCaXRzIHsKICAgIHByaXZh\ndGUgTTNCaXRzKCkgeyB9CgogICAgc3RhdGljIGludCB3b3JkSW5kZXgoaW50\nIGJpdEluZGV4KSB7CiAgICAgICAgcmV0dXJuIGJpdEluZGV4ID4+PiA2Owog\nICAgfQoKICAgIHN0YXRpYyBsb25nIGJpdE1hc2soaW50IGJpdEluZGV4KSB7\nCiAgICAgICAgcmV0dXJuIDFMIDw8IChiaXRJbmRleCAmIDYzKTsKICAgIH0K\nCiAgICBzdGF0aWMgaW50IHdvcmRzRm9yQml0cyhpbnQgYml0Q291bnQpIHsK\nICAgICAgICByZXR1cm4gKGludCkgKCgoKGxvbmcpIGJpdENvdW50KSArIDYz\nTCkgPj4+IDYpOwogICAgfQoKICAgIHN0YXRpYyBpbnQgYml0Q2FwYWNpdHko\naW50IHdvcmRDb3VudCkgewogICAgICAgIHJldHVybiB3b3JkQ291bnQgPDwg\nNjsKICAgIH0KfQo=\n",
+      "encoding": "base64",
+      "sha": "2ad46058a5325483647af4af16858c329ae24665",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+      "display_title": "M3Bits.java"
+    },
+    "isError": false
+  }
+}
+

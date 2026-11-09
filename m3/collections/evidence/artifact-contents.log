@@ -1,0 +1,1 @@
+PASS: modular JAR includes LICENSE, NOTICE and exact source provenance; no test/probe classes.

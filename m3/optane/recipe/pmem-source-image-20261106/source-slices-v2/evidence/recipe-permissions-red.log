@@ -1,0 +1,5 @@
+PASS M3 PMEM source-slices recipe (--apply): 7 target seals, 1 created, 6 upgraded
+Expected preserved mode 0755; actual mode 0600
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+AssertionError: atomic recipe upgrade changed executable permissions

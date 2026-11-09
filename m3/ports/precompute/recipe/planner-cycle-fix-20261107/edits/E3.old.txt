@@ -1,0 +1,8 @@
+    if (already.contains(capability) || result.contains(capability)) return;
+    M3IndexPrecomputeCandidate candidate = byCapability.get(capability);
+    if (candidate == null) throw new IllegalArgumentException("missing dependency candidate " + capability);
+    for (M3IndexPrecomputeCapability dependency : candidate.dependencies()) {
+      collect(dependency, byCapability, already, result);
+    }
+    result.add(capability);
+  }

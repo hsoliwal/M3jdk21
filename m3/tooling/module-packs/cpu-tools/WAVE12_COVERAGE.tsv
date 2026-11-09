@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+operation	physical_owner	semantics	verification_boundary
+signed_multiset_copy	M3SortedIntMultiset	sorted nondecreasing immutable int[] owned copy; size <= 2000000	Java21 oracle
+signed_multiset_count	M3SortedIntMultiset	signed-order lowerBound and exact multiplicity	Java21 oracle
+signed_multiset_intersection	M3SortedIntMultiset	min duplicate count per signed integer	Java21 oracle
+signed_multiset_difference	M3SortedIntMultiset	max(left count - right count, 0)	Java21 oracle
+signed_multiset_union	M3SortedIntMultiset	max(left count,right count); refuse output overflow	Java21 oracle
+signed_missing_distinct	M3SortedIntMultiset	original count > observed count; unique ordered results	Java21 oracle
+signed_multiset_intersection_jni	M3SortedIntMultisetNative + C17	explicit opt-in native parity; no escaped JNI pointer	Java21/C17/JNI differential

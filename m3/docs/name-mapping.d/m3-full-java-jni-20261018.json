@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "source": "hsoliwal/com.synexia",
+  "recipe_pr": 12311,
+  "recipe": "com.synexia.m3.FullJavaJni20261018",
+  "target_baseline": "0c24884dcf5b836a80c1732ec8b31315721f8988",
+  "targets": [
+    "m3/collections",
+    "m3/vendor/third_party source-JUnit closure",
+    ".github/workflows/m3-collections.yml"
+  ],
+  "public_names": "unchanged; no new runtime class or JNI product symbol",
+  "implementation": "Existing source dependency closure and owning Maven lifecycle; all existing collection JNI backends qualified together",
+  "canonical_ownership": "Synexia owns reusable recipe/templates; target owns product and receiving qualification",
+  "license": "Apache-2.0 integration; per-module third-party rights retained",
+  "status": "DRAFT_PENDING_HOSTED_EXACT_HEAD",
+  "recipe_commit": "c0878df6b96b6b295ea2654d375cbb1e315ab430"
+}

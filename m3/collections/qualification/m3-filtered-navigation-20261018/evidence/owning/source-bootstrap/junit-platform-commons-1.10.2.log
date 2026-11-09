@@ -1,0 +1,74 @@
+/tmp/apache-maven-3.9.9/bin/mvn -s /tmp/m3-source-junit-settings.xml -B -ntp -U -Dmaven.repo.local=/tmp/m3-source-junit-m2 -f /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml -DskipTests clean install
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< org.junit.platform:junit-platform-commons >--------------
+[INFO] Building junit-platform-commons 1.10.2 - unchanged upstream source build for M3jdk21 1.10.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ junit-platform-commons ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ junit-platform-commons ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from  to target/classes/META-INF/third-party/junit-platform-commons-1.10.2
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ junit-platform-commons ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 41 source files with javac [debug release 8] to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (multi-release-9) @ junit-platform-commons ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 9] to target/classes/META-INF/versions/9
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-platform-commons ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[25,42] module not found: org.junit.jupiter.api
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[26,42] module not found: org.junit.jupiter.engine
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[27,42] module not found: org.junit.jupiter.migrationsupport
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[28,42] module not found: org.junit.jupiter.params
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[29,43] module not found: org.junit.platform.console
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[30,43] module not found: org.junit.platform.engine
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[31,43] module not found: org.junit.platform.launcher
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[32,43] module not found: org.junit.platform.reporting
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[33,43] module not found: org.junit.platform.runner
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[34,49] module not found: org.junit.platform.suite.api
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[35,49] module not found: org.junit.platform.suite.engine
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[36,43] module not found: org.junit.platform.testkit
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[37,42] module not found: org.junit.vintage.engine
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[40,42] module not found: org.junit.jupiter.api
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[41,42] module not found: org.junit.jupiter.engine
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[42,42] module not found: org.junit.jupiter.migrationsupport
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[43,42] module not found: org.junit.jupiter.params
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[44,43] module not found: org.junit.platform.console
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[45,43] module not found: org.junit.platform.engine
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[46,43] module not found: org.junit.platform.launcher
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[47,43] module not found: org.junit.platform.reporting
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[48,43] module not found: org.junit.platform.runner
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[49,49] module not found: org.junit.platform.suite.api
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[50,49] module not found: org.junit.platform.suite.commons
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[51,49] module not found: org.junit.platform.suite.engine
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[52,43] module not found: org.junit.platform.testkit
+[WARNING] /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[53,42] module not found: org.junit.vintage.engine
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ junit-platform-commons ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-platform-commons ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ junit-platform-commons ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ junit-platform-commons ---
+[INFO] Building jar: /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar
+[INFO] 
+[INFO] --- install:3.1.2:install (default-install) @ junit-platform-commons ---
+[INFO] Installing /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml to /tmp/m3-source-junit-m2/org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.pom
+[INFO] Installing /workspace/scratch/6b6041146177/wrapper-audit/vendor-source-baseline/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar to /tmp/m3-source-junit-m2/org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  34.541 s
+[INFO] Finished at: 2026-10-18T07:08:32Z
+[INFO] ------------------------------------------------------------------------

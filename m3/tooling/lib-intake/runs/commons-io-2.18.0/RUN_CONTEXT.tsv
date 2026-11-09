@@ -1,0 +1,10 @@
+key	value
+lib	commons-io-2.18.0
+source	m3/vendor/third_party/commons-io-2.18.0
+mappings	org.apache.commons.io=com.m3.lib.io
+module	jdk.m3.io
+version	2.18.0-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/commons-io-2.18.0
+intake_deps	-
+java	java version 21.0.9 2025-10-21 LTS
+rewrite	rewrite-maven-plugin 5.23.1 / rewrite 8.17.1

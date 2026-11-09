@@ -1,0 +1,9 @@
+[
+  {
+    "target_path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+    "candidate_path": "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/candidates/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+    "before_sha256": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80",
+    "after_sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158",
+    "kind": "TEXT"
+  }
+]

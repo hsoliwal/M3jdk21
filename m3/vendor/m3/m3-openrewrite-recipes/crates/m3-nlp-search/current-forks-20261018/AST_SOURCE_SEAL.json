@@ -1,0 +1,687 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "ref": "215f6b9b4bb0ffbd9539106e6e8e394105933138",
+  "pull_request": 1192,
+  "canonical_revision": "1bbe38f1746e78b334e74abb01cc932920023978",
+  "recipe_revision": "bb88a4d1abaee4b209db0be8812fc9911e3749df",
+  "files": [
+    {
+      "owner": "jdk.m3.compiletime.ast.M3AST",
+      "sha256": "36fc71b1bf655c29340408d536cc068b4362241d2d4df49bff35c6457a13ab34",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3AST.java",
+      "blob": "9f0d6cb4b5ee514307e9a44c67b643a00a2cebae"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3ASTCodec",
+      "sha256": "c0cfce2fbffb278b0bcd3bc6ed4919ed5ed68141236f9baff5ff67cffc0f4311",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3ASTCodec.java",
+      "blob": "44b74be3ba42219e9c959e7ef6b009931a98ce38"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3ASTHierarchy",
+      "sha256": "6bcd2ff6db4c3dee8eca3e7bd1db8fadd755eb34e6fa5c086c2fa720091af43e",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3ASTHierarchy.java",
+      "blob": "64f126befcbef3449cc5ddb16ae530030fed83b5"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3ASTHierarchyFacts",
+      "sha256": "aafdc7a7d61c8bd829259f4bc478cfe5b48ac5dd53b8f5c22c6fda95fcf457f1",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3ASTHierarchyFacts.java",
+      "blob": "6907da35db345f92163f6c5a8e7b3d61fe6cf3d3"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3ASTPlugin",
+      "sha256": "da5c2ab28d3574edebc06b4c8b95ce25ac534960b7152a294fa6e54181c1936e",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3ASTPlugin.java",
+      "blob": "554127bbedceb10712431717324c7a80e4fe66fa"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3ASTWorkspaceCache",
+      "sha256": "3e09acf6d439119c9c120163e5dd03cbf7f1720a543a2dcc20aff4b6578a839a",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3ASTWorkspaceCache.java",
+      "blob": "6e1d9c1534b4a7ca49404a1d86d8b6449c8ba1e8"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3CompilationContext",
+      "sha256": "1ee2b944889f435f16ade476b70aee0a0d3aa6c949d532f8691fc76969894e12",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3CompilationContext.java",
+      "blob": "301b13d961407109cf52e062a6dc2e1d6533ef36"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3File",
+      "sha256": "3d9ba8e8daa00d141e7d162f44d04d30b385d4949eb1b9c0f803c972dcf8e4b5",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3File.java",
+      "blob": "ad784c0aff5fffc06a6ad1d8f4f8864197889abf"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3FileSourceFacts",
+      "sha256": "3f4bf4a52a4cdb117c2ef843ce82727e2e87b9b7f95b6ea3ada70a5ad128e658",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3FileSourceFacts.java",
+      "blob": "fd7904a1f4ea64f5171c6a96681785bcffa9894a"
+    },
+    {
+      "owner": "jdk.m3.compiletime.ast.M3JavacASTIndex",
+      "sha256": "7250c9b5d7c92ed26e2931937af45cf05b91e59810294c48ebb5faa383b39045",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3JavacASTIndex.java",
+      "blob": "a258e1e5066bac1784a2a2e1c5ccd0755fc6a735"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.DictionaryProvenance",
+      "sha256": "bdbf8b7779d25fe7875623093ced5ae08935326da9f9cc935339d1fd2df3555c",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/DictionaryProvenance.java",
+      "blob": "c7dce4ec029be9e91f23da0e1b21e12539b42807"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.LexicalRange",
+      "sha256": "205166f4a7c1166cd55dac02dd4be2045dec52a11a260b522295981af6fb92cf",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/LexicalRange.java",
+      "blob": "b1ea4d16ee5cf9910fdedf35f25c7ee18304f4e6"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.LexicalRef",
+      "sha256": "d33a2c40fa51f5351f3230b5421023e9e527e3ac189c58d0ce115f645d0136ef",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/LexicalRef.java",
+      "blob": "927c5c589b11a557e3395cfce8c8c8e125d4f7a0"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexAddress",
+      "sha256": "0dbfaaa987261fee854cc7be12fd207a08a419fb078098056bf38637d7dc13d0",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAddress.java",
+      "blob": "8a00d6e53d2a59b78dd9e302b200b1064dcea936"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexAnnotatedString",
+      "sha256": "e91a8dd5b74dbf7eb41a5dd13b9d3db6b80113a85929dfb59f351a36f4a8aaac",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAnnotatedString.java",
+      "blob": "5b306515afff3d83214d95b6a9c683270664864c"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexAtomRef",
+      "sha256": "10923b071bad1f7439b001a6b90ff924bbe4bf1fd6069334b0ba9f74bdbc7759",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexAtomRef.java",
+      "blob": "874307e6392e53103b02edb48bc79f8f98708057"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexByteSequence",
+      "sha256": "387fee0fad04c8e7f4f0da138847b09af9b7ac2dafe2eaac8cfc7d9fae7c285a",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexByteSequence.java",
+      "blob": "73da4f13cb797fd528dd858084d6626b7741fddb"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexCharSequence",
+      "sha256": "70915da319ed46101c53dd20e4f8715c4e2e0b5f385e6b6e5c78aa84a33eba6c",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCharSequence.java",
+      "blob": "67cabb73156bf4cf4ff1d38172c6badf80e2eb60"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexCompositeString",
+      "sha256": "9756944bde133c742837fdb7e46ff12291098d68c980cf56e5b564cdc469786b",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeString.java",
+      "blob": "5d65ff6ba2ea1b83d929ab1c00e9b75df16f3aa9"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexDictionary",
+      "sha256": "37ee7073cfddab79cb4994c9d1e01d0cd0019f986ca2c843f9ce59fc2319469e",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDictionary.java",
+      "blob": "9cbda46d1b60ab5758a442e8d305a94aa0fedee6"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexDirectInlineKey32",
+      "sha256": "349b5caefc739a87b9e22bf603d67c02b0151de970f1798baa7982066078744b",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDirectInlineKey32.java",
+      "blob": "180138a2d2ff57294bbc859792462135216c226d"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexDynamicLiteralPool",
+      "sha256": "29d56c99539da15b5b0e436b3f43c9e17f4500768c6f19ec1cc99479fbcce4fb",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexDynamicLiteralPool.java",
+      "blob": "89ccd977e2f8b8e813749350a78ada619a987ec0"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexExactLookup",
+      "sha256": "9878b342fc6c26f0199137408ebbd9fccb626dbfd8a1c31719ea3a9834624a97",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexExactLookup.java",
+      "blob": "08908a03ec0bf522e68e6445a551ef686d8714e1"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexHeapAdmission",
+      "sha256": "5465e2c61f7bad5088bfac67c1a545d28818c6f7acbcbb344623bf3c6d041a14",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexHeapAdmission.java",
+      "blob": "f78a90f1a17cd45f3700e815086bece4bea5c445"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexHybridCodec",
+      "sha256": "6c34dc4fd84f0d6767b463c1c56cb49e1b7ee645747c73b528bc1e027698fefc",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexHybridCodec.java",
+      "blob": "87895f37b0498583187ccdae5406d33b84289a6e"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexInt8MatmulPlan",
+      "sha256": "a3a0bd6ed10efa595fc581aa5fba49a433b333d711748c08c94d2f9d978c9789",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexInt8MatmulPlan.java",
+      "blob": "bc0a0b19af92a542b23a2891ab8d1e098c43512e"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexemeCodec",
+      "sha256": "46049b9e731d2b96b05f2740fcd63197c531e6a07027cf5a484bd08588230528",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeCodec.java",
+      "blob": "b4e4eaadf71c8ad1b1af00a72ef596bcf36abada"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexemeKey128",
+      "sha256": "1d36c4806e202f305921bd73eae8845568c2ae93064d31df19b600f973da368a",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeKey128.java",
+      "blob": "c10b0ccf781fd2079c94df22fb06dff11179bb9b"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexemeMatrixIndex",
+      "sha256": "3691ff40325fd4f9704b2ba94ba497a22bc8f7735a9100bc28317806791d4ec1",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemeMatrixIndex.java",
+      "blob": "5d4ac93540d5f146fddc48225e6bfcdcf36c9df3"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexemePattern128",
+      "sha256": "2ad7d1a43026f751388956f22c2f98089d9e61f3d8017ea6184a844c0a6c72db",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexemePattern128.java",
+      "blob": "79a2fa8d2a1ae733017a9d1e978194fd6994f775"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexicalClass",
+      "sha256": "641c3544c1787732f02917319ee8b9973400f56ec9715036062eabf6505d44ff",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicalClass.java",
+      "blob": "10f6f2c4c9ee22cab16054d4574e9e51d500e084"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexicalView",
+      "sha256": "1e286d6c1fbb16fff3f2147d55a4c975b19f1167776fe1a865b3f312665a4f26",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicalView.java",
+      "blob": "0d9090f0f10506d836203deb83a701520865b21e"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexicon",
+      "sha256": "456083ba1a447b23cdc2666adedc0be8c70caeeedeb82fd03bee25d727fb0df5",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexicon.java",
+      "blob": "0b586ab55ddc604ed90c3435c90e898c5ec5e680"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexiconKind",
+      "sha256": "33fb2892cf46811ea70e281cd961051b1665f1d6f3cafd7ee883f185050329ff",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexiconKind.java",
+      "blob": "daa2796ec70e1c18895250dd9620cec86fdd5ddb"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexLexiconSpace",
+      "sha256": "b7ae16fa14b7d59a8473698ddf57f386c226cfaf305d356d2383b342f936f050",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexLexiconSpace.java",
+      "blob": "85496af04fea2302f0258373a3acab616d549516"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexNamespace",
+      "sha256": "029797597fbd685407de6f9bafc1fe6d92e3d1ffab8985f69f721af4ae3faa48",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNamespace.java",
+      "blob": "7b9d544c6c5060a0471599c4527ecec4a8f28d49"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexNamespaceRegistry",
+      "sha256": "f1110d2c9b29df80d6626975c189b8cd8d245bbdb407ae8dc645abe6051ad0c7",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNamespaceRegistry.java",
+      "blob": "c26773ec9c2761e6661def206e3fd5d3a35f786a"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexNativeOps",
+      "sha256": "103e5b8e959d8d1c237345025bed9f3e73bb3bd22ef3593482ec12a54128cce2",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexNativeOps.java",
+      "blob": "d3cc4b42d0eeb59eef9801bf9ce2291968237cc8"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexPackedLexemeImageFormat",
+      "sha256": "3e4f60a58f96cab91a2f05fc33eecf0d43f75610866dfbd4d7ab6da50a9f416f",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeImageFormat.java",
+      "blob": "ada4c6551d908aca3ab27b19473534bc4950415f"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexPackedLexemeIndex",
+      "sha256": "d8268d369806726e1319a2e3654c049d3abd3a83eb34e8212f982b6c8a24e7ec",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeIndex.java",
+      "blob": "81ecf508e61db86c54b35d9ce73848ddf54613aa"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexPackedLexemeKeySource",
+      "sha256": "5078363cdadf455cb87d825c37eb4ddf559e1017547490678ce818a895a5175f",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPackedLexemeKeySource.java",
+      "blob": "33a2e766e3eb5e66cd158a7d66b339bf1644cd6b"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexPrecomputePressureBudget",
+      "sha256": "2fe5efca0364ae61e3cb205c0fc87f0a1a78b43e8fc60cf5f15b7c49e99148bd",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPrecomputePressureBudget.java",
+      "blob": "b5e7d35623dd6e6d7e4ada175b9af7853f8ea7cc"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexProgressMonitor",
+      "sha256": "cfa9de0db35c2a404aebb376cd5fe8929d57a58d3d605839d3e9cf9bb169c243",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexProgressMonitor.java",
+      "blob": "2a387a4d8c7cabfb2ce75b6bae9210281f01c867"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexRef",
+      "sha256": "f4ad7e7a03dca7cf0d524844734670decfe3ccee3a22732835026cd155686988",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRef.java",
+      "blob": "2c8c1ed4ad34007bad6f444ad6cca37476406566"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexReferenceDomain",
+      "sha256": "25336619badd8e3bfd2f4d255780da427325ab928709b1f1827ed46cb20f52a2",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexReferenceDomain.java",
+      "blob": "315356df82e0c93c319341b33b649110e27b153c"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexRegexAutomaton",
+      "sha256": "904390520e960d5df8402e6ba72f752052169f089593a741e6878b8d480e7227",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexAutomaton.java",
+      "blob": "9116b56d55c7fd7ca63cf97f9bbc3eb369e50b7d"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexRegionIds",
+      "sha256": "f93ee555513f05a458a9d977f5a5019a6fb6428bddd66e386e7f77b3523de94a",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegionIds.java",
+      "blob": "b12de0c48e7fd738875bd60cf46f4e76ff6c849e"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexString",
+      "sha256": "9a345b499ab492cb46f484767fcbae37b499d5083319f5e49bb362538d4c66dd",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexString.java",
+      "blob": "0c2a25df9a937908f46f6d336831bf7b94834d98"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexStringMetadata",
+      "sha256": "3b9d1dbf5c7342fd921c4aae7319dd3cab39a52ee65f25a2bf0decf9cc3dbd99",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringMetadata.java",
+      "blob": "1cc5aba1ff63d01f1103429525f2fc2a5c58aaf2"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexStringPool",
+      "sha256": "ff4fac48989f790bc7a1566c89eb1e2cc06c3368136baecc3a5919203249380a",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPool.java",
+      "blob": "7ed6cb20799384cb991246937c997c9ee5e1bf9f"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexStringPrecomputeCache",
+      "sha256": "464e938abde5cb2d31a3e9c68b6fc65126caeaf1f634608b95c6acd0a41d04b9",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeCache.java",
+      "blob": "2da0579f606f558224b0ee9208d54c28865ef117"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexStringPrecomputeImage",
+      "sha256": "b7acbc9285b062c68ea950fb67d4723dba14cf697cbd1249c1769537fefaa469",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeImage.java",
+      "blob": "7897b60ea11548bcefc56e9f346f0b49de778c62"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexStringPrecomputeProfile",
+      "sha256": "bbaa79dba22a454e8ded4c602229aa53eb5f8602a2ec50c4846f55656c97a707",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexStringPrecomputeProfile.java",
+      "blob": "52c4fcb571e385ac679a88021d6eaf26c5103ff8"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexSymbolLexicon",
+      "sha256": "1bdaaa86de600c5962f4ae36a8e9c8b5a3dcfd23a815e07a0e04153cf6b6fb06",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolLexicon.java",
+      "blob": "c1524d57b7791b4afef40fd6d68e463316920807"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexSymbolRef",
+      "sha256": "fb051feeb21f1b277d6a46e479af07366a72de965fc98015bb82b7353783b5d4",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolRef.java",
+      "blob": "954f834eb2d19899057e59c247b19a026503f52b"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexSymbolReference",
+      "sha256": "4e95950670aa5e02a5c9343d2d2b91499b15e659011a8195da5abbc608856816",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolReference.java",
+      "blob": "50279f12922b84a23ea9e1ebef23f139f4828698"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexSymbolTable",
+      "sha256": "3b1cbb91bf17b5a625249832bc406f973b3a66c7c42471fe49ba35a4224c20b7",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexSymbolTable.java",
+      "blob": "c75781c37ccfd46d5eaaa42f4f86712f7ce8a65c"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexTensorBackend",
+      "sha256": "b39bc36b97fee4129de6bf0d53156fa3e79602524965b8b2497ca561edaa9294",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTensorBackend.java",
+      "blob": "1fa1ff055d98e0a10e13121f478ce8f1753fabe1"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexTensorRuntime",
+      "sha256": "3fbbed424418a1eff2215a26eb4aa93fbcebbe2f285dadacfbe1953589461ca6",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTensorRuntime.java",
+      "blob": "d9ce000528cffca45990816e9af01590b1912703"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexText",
+      "sha256": "f4f28513e4362b1a5e5f65f5dd464ebb1c46c221a523047afaea4b500d812db1",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexText.java",
+      "blob": "71b15aaaf6bc0fa9bc1b8fa09e9084b7047078c1"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MIndexTextSearch",
+      "sha256": "c381cf9b289601ffcbafd85d1cf6c995a556d83695b19978793edf3749768bc2",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexTextSearch.java",
+      "blob": "7811b9834b358c21f4b0cbc45a169af1f1ad5974"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.MappedMIndexPackedLexemeIndex",
+      "sha256": "c5fc25a45b2b6d4485a399e3456d06c39b0b880b084da1a1c0022304f6955d50",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MappedMIndexPackedLexemeIndex.java",
+      "blob": "82220bdecd32d93991666d4dfa7775c5f8c560e1"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.SemanticRef",
+      "sha256": "1f9fd748becef312615ff45ac3f91e5d007d135ccb633859e3464ba055ae7990",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SemanticRef.java",
+      "blob": "e5981f437ed0ff8d3d09f43e714cf3fc435f5338"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.SubMIndexCompositeString",
+      "sha256": "3a7e8223ce8a2f7862ec7e039add6c970b183d9c9fe8bc80afd4592f1f070387",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SubMIndexCompositeString.java",
+      "blob": "e496de56671d3bfcf56cb18bf060b9ed8a14131a"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.SubMIndexString",
+      "sha256": "e1467db80e4a1071a60961b7b5cdcb8e29de315e062a37dd36002e1c807b5028",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SubMIndexString.java",
+      "blob": "cb7df37438bb3e50f0a42b42d59ed1644b8fc96e"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.TextMetadata",
+      "sha256": "e44733190a98e776e753e2089a336a0bcd274f7cf209c1195a7ebbc301996fca",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/TextMetadata.java",
+      "blob": "56d379843eb8b7e037400267ba456cde06643399"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexAST",
+      "sha256": "148bf191bf2d05db49bc4d2d214075bd6924903b0d9b5136468e795380ace88b",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexAST.java",
+      "blob": "1ab9956ed727f03681639c2f70b8ac9e81c3e8b2"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTEdge",
+      "sha256": "136914f87de65da04af2e75ba9f55e432a74846e8bf8daa9170c975048a164db",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTEdge.java",
+      "blob": "50cfa73d40401db6461bff38de71989edd9a86ec"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTFingerprint",
+      "sha256": "a92e803e21191709faad234b926d93133181294abee808bb4f14f422d1737130",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTFingerprint.java",
+      "blob": "788db09b9ac725e427dd4cdfef5d7820a1f3966b"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTImage",
+      "sha256": "f00880521990116a0ed9775d5d9f5b15c5dc3107de4de44b6a29e578062e15f8",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTImage.java",
+      "blob": "ce92d86b485ee3724c465f4ea18929d19003c5d7"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTLimits",
+      "sha256": "f53ed88197fab0b7666bf428114a24e17bf385986b8b40bf93bb5e82c3c8b901",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTLimits.java",
+      "blob": "b71565f506d17b586281fc499633f9a93b901d03"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTNode",
+      "sha256": "8259bbfb20b8406dd06cb61f0beedf2ac7b028e49e896d7c7e7cdd8cb5aa090e",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTNode.java",
+      "blob": "d807a9763e64817466f0bbb18d96c655f7b6dd28"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTPool",
+      "sha256": "4f82b8ab422ddd4dacdb50be5b5880a7b37ef72ead7f5110f1aeced15b7be243",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTPool.java",
+      "blob": "d3e3d8a80f18f3726e7c0fe78e10f854ad2c8a3f"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTSnapshot",
+      "sha256": "6e4a62f62cb9c38389ff33498e90e432f1872b6c9de18f74e774d0c7092333f3",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTSnapshot.java",
+      "blob": "0fa950d57086c68504e86e09043336ad3d7ec9e0"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTStore",
+      "sha256": "031cd1ea4e8aa596929a9ee255478c87377f104b9c82b5c63f9196a2783c3451",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTStore.java",
+      "blob": "49a532bda3eae7ca43580b2d1c10bcd5abc278a2"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexASTTraversal",
+      "sha256": "31e24b011eb54a9df7e3074c5232dda5a6cece75c1b8786f15fd4e923316bba9",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTTraversal.java",
+      "blob": "7eda1573ea77449aa5d4eff0d7bc4fc6674e4c46"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.MIndexAttributedASTImage",
+      "sha256": "dfa7e087ef1ef9205d295e745b2fd273ceee2cbea5a934be379804b5cbf485fc",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexAttributedASTImage.java",
+      "blob": "b0a9ace684a539955c7bd8e14de9ac594c224589"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstAdapter",
+      "sha256": "2327da077987f5126ffb88f7f02e9c5d6c4d326305ca1d52a6c9669e205e15c8",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstAdapter.java",
+      "blob": "97a15c126734b1f28852145db769ee76c3a3a838"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstAttempt",
+      "sha256": "45a4e2a03e49c9752f28833e45955b7032b461680db46f33d26d2011bda28218",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstAttempt.java",
+      "blob": "07597493450f76e1a4831fcc2691fb0cacd06479"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstCache",
+      "sha256": "b6180a2d8c7d7fd00fe76eeed35472f0b1f8c05ef5e6e4a47f0c8455c10b23aa",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstCache.java",
+      "blob": "3423e2438b9cd4d34da3d4de3d149fce2e16190e"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstKey",
+      "sha256": "c2d1d612fdb7b77a56216fc8a57d794b077dccd05fcb91706bf70a97febc4340",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstKey.java",
+      "blob": "e2182a5955559761121e3a7d342dbf358cc60979"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstMaster",
+      "sha256": "fa82fafb9f0afc84944e6cb78833c986d68e2ba26cc2d43d259a2bb0e4a2b358",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstMaster.java",
+      "blob": "98491c22456fde4806db15d95357a2a82bbedcb2"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstMode",
+      "sha256": "71e87c71fc23f5f7aeb4e1cc2139cb1d345067475830b8e2a76308881c3c819f",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstMode.java",
+      "blob": "2b30044ee89fbe9645eee0029afc24b3b200317c"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstPressure",
+      "sha256": "6987360cca2daccaa36dcd0b3f5da365329fcdcfb3303d49dd3bb720e652df99",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstPressure.java",
+      "blob": "9270e1e64c068cfaaa8b08cd4a32d6549c2aac7c"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstProjection",
+      "sha256": "ae10e4a667e2ff9926de489cd94c9cad6b6eb4fa3d970b08ad73437b756835ea",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstProjection.java",
+      "blob": "24e6d7378009b8914e79470666c53d3bb1864728"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.ast.partial.MIndexPartialAstScope",
+      "sha256": "11b83f808b0bdbc6425fd2c9cadf8195543f33bde908ec22e81118a4bccdcd71",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/partial/MIndexPartialAstScope.java",
+      "blob": "7b471f10b1cae4516e9dc5227748236f0087232c"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.M3AST",
+      "sha256": "4f0d204398d7d16576b50a2e9fb66277965f1568fc4a0d56d0a9283d4d9eb3d7",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3AST.java",
+      "blob": "b37760a60c1090bc0f12948ec312a6e25a8ff670"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.M3ASTCodec",
+      "sha256": "34696acc5ec1a5c0bfc7598a4676cdd2577ec0c7381d782ecd91df8f5f8640c3",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3ASTCodec.java",
+      "blob": "9eb0af0e5e53be8a1cb8292d9becf547686eeaa7"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.M3ASTPlugin",
+      "sha256": "8cf37729e428ee61c92b53013ea2f421c9600d84026aafba815d0af49df5878b",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3ASTPlugin.java",
+      "blob": "72a431143bc16ea95002b722c0ead6a422dac9d5"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.M3ASTWorkspaceCache",
+      "sha256": "692a1a6281a41054ad8dc09f9f607815ea368e19255d9ae66bb487e7ed78a5b7",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3ASTWorkspaceCache.java",
+      "blob": "43bad3007a4412f11b4f9ab795eeb2fe2f16db38"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.M3CompilationContext",
+      "sha256": "8499a8af287d3efc48585971d641d2793b584abffebf2119800aacf0cdb98921",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3CompilationContext.java",
+      "blob": "6e3193591c82ea1370bfe4af59d85684920334af"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.M3File",
+      "sha256": "521bfc5abd3d512efafad7e624479d2197bcca5f1d308b9d0ed5383e380be3ce",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3File.java",
+      "blob": "9721caea99accbb0407e8121a8a3795a306fc41d"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.M3FileSourceFacts",
+      "sha256": "b6f6eb8936e4455f0f4f5c41652c3ce127e874ba230051cf6d237300780dbf34",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3FileSourceFacts.java",
+      "blob": "e04b9e0b0d08ec9c7cb68c1792a3ece04898494b"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.M3JavacASTIndex",
+      "sha256": "6d5377c6a6a13712d1095b4fd04d2cfbf02a19777445a3743c70f1daf651163a",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/M3JavacASTIndex.java",
+      "blob": "e68081aad830f0def1365d5313cda3b2cef861ce"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.MIndexASTDocument",
+      "sha256": "fc6e1f5a3ee28f3855a6451ea3d92ff6049452d90da97fecf0212c92308ce26a",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexASTDocument.java",
+      "blob": "96f4683795d173246c43a6d7bb9d865d6bf2c51a"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.MIndexASTHierarchy",
+      "sha256": "9e4f7a80e04d336edd0d58990911d8977756382d1dc88343558cf2692444f0bc",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexASTHierarchy.java",
+      "blob": "7633329717f8798ccaeb3c16721052200ba15a67"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.MIndexASTHierarchyFacts",
+      "sha256": "5fb5149825996e2753f6f5c588fa152c5c9b8e903ae38dda3f15cb94fee283d7",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexASTHierarchyFacts.java",
+      "blob": "5e962bbebfea7f19759d1f295dcf6e1befd5cda8"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.MIndexASTOccurrence",
+      "sha256": "086564724802747e212e853e022e150940afc271e8f647086cc0bae29114b22a",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexASTOccurrence.java",
+      "blob": "928ea20317f590bdc289579a2ff7558a28cf1e8e"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.compiler.ast.MIndexJavaAST",
+      "sha256": "7d16e52f7c0b8de65447360278f38045ef52df85b61ba8859ed375512fec8bca",
+      "path": "m3/vendor/m3/m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/MIndexJavaAST.java",
+      "blob": "39ccf2b78e45659af6187280451f99c495cf53e9"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.experiment.Digests",
+      "sha256": "9a68b2e12b43363fad27c0df72a71d7fe4327385864a1994f3e941d304f8f844",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/experiment/Digests.java",
+      "blob": "9a853b4fe2a2c83c157c40a41f917325ab34cc64"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.experiment.MIndexPool",
+      "sha256": "5c202b0ad04b49ef738f9c23bff1778cbde29f22fe1ded1b8b7efaa8a844d79a",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/experiment/MIndexPool.java",
+      "blob": "856d3ba7d2f2aa9934a43c551b08750662c7b845"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.experiment.MIndexString",
+      "sha256": "e4a10def49ac053789fea74c234a1f9434d11b486c0da0925eb5055a0d7ab85e",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/experiment/MIndexString.java",
+      "blob": "8e2ddde3ddb3e7e4382851b4cc5aecdaec5d0a4f"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.experiment.StringHashes",
+      "sha256": "2f4bb5ea9d9931d71ff0ed67783e84ae79cc70e4abdb45fb9da22bd67659cc29",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/experiment/StringHashes.java",
+      "blob": "07ea1abbd0a265ac3ad120d34017a65be99a5779"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.experiment.TokenDictionary",
+      "sha256": "1ea8f617b85ba3b7cf30975ceafb198c351f5686c608726f2eed3602c4b95e0a",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/experiment/TokenDictionary.java",
+      "blob": "a1a67148ab6a99fa0bd29a286a37e1e5671f292d"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.experiment.TokenSpace",
+      "sha256": "1f1e2a8080089c0f5b2ae15f1977fba6aa5b650205c5c595a246129c6b6ab805",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/experiment/TokenSpace.java",
+      "blob": "383343969136ddba884e22bff396378f8633b839"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.experiment.Tokenizer",
+      "sha256": "24931028bf26ec66294e956569261cec06508ffeaab663a0a389eb0c8904f59c",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/experiment/Tokenizer.java",
+      "blob": "9587baaa87e7c5c9677e756253097d8f3131becf"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.swap.SqliteSwapStore",
+      "sha256": "e2be78f8831103b55d2ad0e510340832ad6767eccb376fea052270bed8d7208b",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/swap/SqliteSwapStore.java",
+      "blob": "f09470de4f849deb6a72b5f4a4c3b2e0db41b7b7"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.swap.SwapBudgetPlane",
+      "sha256": "db100bde7d4d325591c5c4bf40bdabc4ec14c561b07ac70651395ddcec11026a",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/swap/SwapBudgetPlane.java",
+      "blob": "e7c2e7dcd50c9d291f15f0da10ae40de0b7a9cf2"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.swap.SwapNativeLibrary",
+      "sha256": "282918e3f26711fc7b64d5828e3851f1706b0a011733f090f6779aa87dc2cf92",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/swap/SwapNativeLibrary.java",
+      "blob": "f98e2861fc3ef19dfd1f0e29ce25248241e79996"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.swap.SwapStore",
+      "sha256": "59e4fcc600a02d76611bbdd33f96f48348a7c58e33e51d02fc91a74e6a18d047",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/swap/SwapStore.java",
+      "blob": "fa6e2defdb8b7af9192f8b59faea046ea0749a91"
+    },
+    {
+      "owner": "jdk.internal.m3.mindex.swap.TieredSwapCache",
+      "sha256": "2c5585b1776dfbac465c68727cb286e679ddde25d64ed5f91f2005a036879d3a",
+      "path": "m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/swap/TieredSwapCache.java",
+      "blob": "690fc1e3501c8dd3c4e4b6031591f8e337b395e7"
+    },
+    {
+      "owner": "jdk.internal.m3.nativeinterop.JniLibraryLoader",
+      "sha256": "bccce46eb05a7b040dcb7412ee3a425b4b270214bdd654c0787dbab8dfd02048",
+      "path": "m3/vendor/m3/m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/JniLibraryLoader.java",
+      "blob": "aaa7649fa9c99c214fd8864ee3cd34c95ebfd7d9"
+    },
+    {
+      "owner": "jdk.internal.m3.nativeinterop.NativeLibrarySpec",
+      "sha256": "9680242313d4e2f2a0f14d31879d7c6da0af2ef4a11b7a8f256e6b0eb4d44cda",
+      "path": "m3/vendor/m3/m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/NativeLibrarySpec.java",
+      "blob": "475d90d7df3932fb622fc387d0518df1b6f3c2a1"
+    }
+  ]
+}

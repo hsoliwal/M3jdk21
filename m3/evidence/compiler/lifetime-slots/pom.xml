@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-compiler-lifetime-slots</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Compiler Lifetime Slots</name>
+  <description>jdk.m3.compiler.lifetime (module org.m3jdk.compiler.lifetime): M3DoopLifetimeSlotPlanner, the read-only
+    candidate planner that turns half-open local lifetime intervals (the shape produced by the lifetime census,
+    m3/qualification/lifetime-census-20261030) into the exact minimum number of logical slots, per compatibility
+    group, with primitive scratch arrays only. Pure Java 21, no dependency outside java.base. Relocated by recipe
+    (recipe/relocate.py, RELOCATION_MAP.tsv, PROVENANCE.tsv) from the donor hsoliwal/com.synexia develop
+    64652588f0d4; the four donor self-tests (two seeded oracles, two JUnit 5 wrappers) run in the test phase.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <!-- the self-tests are plain mains wrapped by JUnit; classpath run, the module descriptor is for consumers -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

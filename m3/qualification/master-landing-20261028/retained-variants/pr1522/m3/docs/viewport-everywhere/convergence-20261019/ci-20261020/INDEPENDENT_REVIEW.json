@@ -1,0 +1,64 @@
+{
+  "status": "PASS_INDEPENDENT_STATIC_REVIEW",
+  "source_epoch": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+  "reviewed_changes": [
+    {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "before_sha256": "bd94fd32ed00274f3f1581a401742e45a94af2054f99373acfc8224f33b06ab1",
+      "after_sha256": "ff4856bf3d68c63a059b7700631543a453fc5d7552efdcfb80ac3b7e4bd4dae1",
+      "before_git_blob": "c6e7bbe8de8b628e8e558454fb7efb1eae557c78",
+      "after_git_blob": "af4887a40f3bfcf0f5ff08af2c6994dde87d201e"
+    },
+    {
+      "path": ".github/workflows/m3-collections.yml",
+      "before_sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "before_git_blob": "c42954ecf99a58893a76f3aee6dbe2d258e3a7fe",
+      "after_git_blob": "f15bfaeac2e96ec7a430cc9760170ac96cb6f921"
+    },
+    {
+      "path": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "before_sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "after_sha256": "62ee079c1c692c657d3ff9dd30120d91702fd93c9b2b6203536865d56bae9d9d",
+      "before_git_blob": "5057ea0df282f90b97114725128c2964e62647f2",
+      "after_git_blob": "f880435ace3c6caa6ce6ba43d1e794b45969a183"
+    }
+  ],
+  "file_scope_count": 3,
+  "dependency_order": [
+    {
+      "artifact": "apiguardian-api",
+      "module": "apiguardian-api",
+      "precedence": "BUILT_BEFORE_LAUNCHER"
+    },
+    {
+      "artifact": "junit-platform-commons",
+      "module": "junit-platform-commons-1.10.2",
+      "precedence": "BUILT_BEFORE_LAUNCHER"
+    },
+    {
+      "artifact": "junit-platform-engine",
+      "module": "junit-platform-engine-1.10.2",
+      "precedence": "BUILT_BEFORE_LAUNCHER"
+    }
+  ],
+  "full_qualifier_unchanged_except_dependency_tuple": true,
+  "workflow_unchanged_except_two_event_path_entries": true,
+  "verifier_matches_existing_engine_with_only_module_resource_path_substitution": true,
+  "correct_repository_relative_root": true,
+  "receipt_uses_existing_manifest_coordinate_and_source_archive_hash": true,
+  "unchanged_donor_seals": 88,
+  "unchanged_java_source_inventory": 80,
+  "unchanged_donor_license": "EPL-2.0",
+  "unchanged_launcher_coordinate": "org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1",
+  "source_pin_repair_modified": false,
+  "product_or_test_or_pom_changes": false,
+  "executions": {
+    "runtime_tests": 0,
+    "maven": 0,
+    "javac": 0,
+    "jni": 0,
+    "verifier_branch": 0
+  },
+  "remaining": "Actual Java21/Maven/JNI Actions must qualify the new CI head; static review does not claim a passing build."
+}

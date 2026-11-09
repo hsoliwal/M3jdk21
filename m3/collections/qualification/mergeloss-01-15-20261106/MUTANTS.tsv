@@ -1,0 +1,11 @@
+mutant	result	reference_summary
+M1_putUniqueBidi_no_value_check	KILLED	REFERENCE checks=448716 failures=240 members=toApacheBidiMap,toGuavaBiMap
+M2_toApacheMultiSet_combiner_count1	KILLED	REFERENCE checks=448716 failures=2463 members=toApacheMultiSet
+M3_toApacheBag_combiner_add1	KILLED	REFERENCE checks=448716 failures=2463 members=toApacheBag
+M4_toEclipseBag_combiner_drops_left	KILLED	REFERENCE checks=448716 failures=2566 members=toEclipseBag
+M5_toGuavaMultiset_combiner_drops_right	KILLED	REFERENCE checks=448716 failures=2569 members=toGuavaMultiset
+M6_toApacheListValuedMap_combiner_swapped	KILLED	REFERENCE checks=448716 failures=264 members=toApacheListValuedMap
+M7_uniqueBidi_combiner_ignores_right	KILLED	REFERENCE checks=448716 failures=55368 members=toApacheBidiMap,toGuavaBiMap
+M8_eclipseOrderedMap_unordered_owner	KILLED	REFERENCE checks=448716 failures=577 members=eclipseOrderedMap,toEclipseOrderedMap
+M9_toApacheSetValuedMap_combiner_swapped	KILLED	REFERENCE checks=448716 failures=258 members=toApacheSetValuedMap
+M10_apacheBag_factory_wrong_owner	KILLED	REFERENCE checks=363501 failures=120 members=apacheBag,toApacheBag

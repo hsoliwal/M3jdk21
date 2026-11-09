@@ -1,0 +1,33 @@
+{"case":"default","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"Locale-ROOT","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"und"}}
+{"case":"Locale-tr","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"Locale-null","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-only/2147483647","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-ROOT/2147483647","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"und"}}
+{"case":"int-tr/2147483647","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-null/2147483647","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-only/2147483646","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-ROOT/2147483646","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"und"}}
+{"case":"int-tr/2147483646","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-null/2147483646","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-only/2147483631","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-ROOT/2147483631","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"und"}}
+{"case":"int-tr/2147483631","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-null/2147483631","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-only/1073741824","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-ROOT/1073741824","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"und"}}
+{"case":"int-tr/1073741824","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-null/1073741824","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-only/0","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-ROOT/0","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"und"}}
+{"case":"int-tr/0","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-null/0","result":{"status":"RETURNED_EMPTY","size":0,"empty":true,"locale":"tr"}}
+{"case":"int-only/-1","result":{"status":"THREW","exception":"IllegalArgumentException","message":"Illegal initial capacity: -1"}}
+{"case":"int-ROOT/-1","result":{"status":"THREW","exception":"IllegalArgumentException","message":"Illegal initial capacity: -1"}}
+{"case":"int-tr/-1","result":{"status":"THREW","exception":"IllegalArgumentException","message":"Illegal initial capacity: -1"}}
+{"case":"int-null/-1","result":{"status":"THREW","exception":"IllegalArgumentException","message":"Illegal initial capacity: -1"}}
+{"case":"int-only/-2147483648","result":{"status":"THREW","exception":"IllegalArgumentException","message":"Illegal initial capacity: -2147483648"}}
+{"case":"int-ROOT/-2147483648","result":{"status":"THREW","exception":"IllegalArgumentException","message":"Illegal initial capacity: -2147483648"}}
+{"case":"int-tr/-2147483648","result":{"status":"THREW","exception":"IllegalArgumentException","message":"Illegal initial capacity: -2147483648"}}
+{"case":"int-null/-2147483648","result":{"status":"THREW","exception":"IllegalArgumentException","message":"Illegal initial capacity: -2147483648"}}
+{"status":"PROVIDER_EMPTY_CONSTRUCTORS_RECORDED","invocations":32,"returnedEmpty":24,"illegalArguments":8,"actualOutOfMemoryErrors":0,"otherFailures":0,"traceSHA256":"d84d32ffd8f6f2e23fc27392b91ad6f6e69859d2812b042464c7333f548b9037","javaRuntime":"21.0.9+7-LTS-338","maxHeapBytes":67108864,"activeProcessors":2}

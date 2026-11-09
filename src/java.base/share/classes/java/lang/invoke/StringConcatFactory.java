@@ -485,7 +485,14 @@ public final class StringConcatFactory {
             // Two reference arguments, no surrounding constants
             return simpleConcat();
         }
-        // else... fall-through to slow-path
+        // Correctness-first segmented fallback. The existing fast paths above
+        // remain allocation-minimal; complex indy shapes avoid the flat byte[]
+        // builder while M3 storage is enabled. Specialized segment combinators
+        // can replace this collector without changing the call-site contract.
+        if (JLA.stringConcatUsesM3Storage()) {
+            return generateM3Concat(mt, constants);
+        }
+        // else... fall-through to stock inline-copy slow-path
 
         // Create filters and obtain filtered parameter types. Filters would be used in the beginning
         // to convert the incoming arguments into the arguments we can process (e.g. Objects -> Strings).
@@ -600,6 +607,47 @@ public final class StringConcatFactory {
         }
 
         return mh;
+    }
+
+    // M3 segmented concat: every argument goes through a typed stringify gateway (no boxing;
+    // references keep the JLS null/toString rules through stringOf) and the String pieces are
+    // collected once; StringConcatHelper.m3Concat folds constants and pieces into M3 storage.
+    private static MethodHandle generateM3Concat(MethodType mt, String[] constants) {
+        int count = mt.parameterCount();
+        MethodHandle mh = MethodHandles.insertArguments(m3Concat(), 0, (Object) constants)
+                .asCollector(String[].class, count);
+        MethodHandle[] stringifiers = new MethodHandle[count];
+        boolean filtered = false;
+        for (int i = 0; i < count; i++) {
+            MethodHandle stringifier = m3Stringifier(mt.parameterType(i));
+            stringifiers[i] = stringifier;
+            filtered |= stringifier != null;
+        }
+        if (filtered) {
+            mh = MethodHandles.filterArguments(mh, 0, stringifiers);
+        }
+        return mh.asType(mt.changeReturnType(String.class));
+    }
+
+    // Typed gateways: String.valueOf(primitive) for primitives (byte and short widen to int),
+    // the float/double stringifiers, stringOf for every reference type; null for String itself.
+    private static MethodHandle m3Stringifier(Class<?> type) {
+        if (type == String.class) {
+            return null;
+        }
+        if (type == int.class || type == long.class || type == char.class || type == boolean.class) {
+            return stringValueOf(type);
+        }
+        if (type == byte.class || type == short.class) {
+            return stringValueOf(int.class).asType(methodType(String.class, type));
+        }
+        if (type == float.class) {
+            return floatStringifier();
+        }
+        if (type == double.class) {
+            return doubleStringifier();
+        }
+        return objectStringifier();
     }
 
     // We need one prepender per argument, but also need to fold in constants. We do so by greedily
@@ -862,6 +910,17 @@ public final class StringConcatFactory {
             MethodHandle simpleConcat = JLA.stringConcatHelper("simpleConcat",
                     methodType(String.class, Object.class, Object.class));
             SIMPLE_CONCAT = mh = simpleConcat.rebind();
+        }
+        return mh;
+    }
+
+    private @Stable static MethodHandle M3_CONCAT;
+    private static MethodHandle m3Concat() {
+        MethodHandle mh = M3_CONCAT;
+        if (mh == null) {
+            MethodHandle concat = JLA.stringConcatHelper("m3Concat",
+                    methodType(String.class, String[].class, String[].class));
+            M3_CONCAT = mh = concat.rebind();
         }
         return mh;
     }

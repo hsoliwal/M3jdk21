@@ -1,0 +1,33 @@
+{
+  "inode": 7036874419164714,
+  "sha256": "ab5a67a5282e76b2b6b616343ba78b348952cdab42e6a10f00aed659f18c5c2d",
+  "ids": [
+    "-6459248878922235902",
+    "-6459248878922235902"
+  ],
+  "maps": [
+    [
+      [
+        "MAP",
+        "7e5777473000-7e5777474000",
+        "r--s",
+        "00000000",
+        "00:4a",
+        "7036874419164714",
+        "/mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/shared-two-process.bin"
+      ]
+    ],
+    [
+      [
+        "MAP",
+        "71ad0a215000-71ad0a216000",
+        "r--s",
+        "00000000",
+        "00:4a",
+        "7036874419164714",
+        "/mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/shared-two-process.bin"
+      ]
+    ]
+  ],
+  "unlink_gc_retained": true
+}

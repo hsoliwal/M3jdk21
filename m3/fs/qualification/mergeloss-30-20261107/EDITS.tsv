@@ -1,0 +1,2 @@
+file	before_sha256	after_sha256	leaf	origin_commit	dropping_merge	rule
+m3/fs/src/main/java/jdk/m3/fs/M3HostFileInventory.java	958e37186a9a44b542b1f94594cf4202b47659da879972cef389fa56a5d3dc17	dc31d59b36df7e6050333bb9574e97446a63b1b509d07a4d4de5661e8aaa06a1	30	34467281b6be43be1bc2b62351e2d9a467915fc3	edf132aa05a1d3011f43158b318d132339c09809	RESTORE 34467281b6b: one 64 KiB scratch per serial pass, passed to M3NioFile.observe(long, byte[], ...)

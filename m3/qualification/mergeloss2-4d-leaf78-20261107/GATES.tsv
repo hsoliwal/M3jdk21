@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Merge-loss leaf 78 (mergeloss2 CLEAN_4D), origin 38a246c3869 (2026-10-26 "Reuse prepared regex ASCII frontiers across ..."), master 2ec96ee32ff5a735148933c789354a7fdd6beb3b, JDK 21.0.9 stock VM.
+gate	command	state	evidence
+1_three_way	mergeloss_batch.py: ours=master, base=38a246c3869^, theirs=38a246c3869	PASS	CLEAN, +162 -2 in M3PatternQuery.java: BooleanPlan.matches routes to matchesMixed (ASCII-run lanes for plans of >= 8 atoms with a run of 8 ASCII units in a 64-unit lookahead), otherwise the unchanged matchesRolling
+2_patch_compile	javac --patch-module java.base=<master share/classes with the leaf file> over Pattern.java + M3PatternQuery.java (implicit closure), live vs leaf	PASS	rc=0, 0 errors on both sides
+3_predicate_vs_matcher	RegexPredProbe <seed> 20000 under --patch-module java.base=<java/util/regex + jdk/internal/{mindex,m3} classes> for seeds 20261107 and 7, live vs leaf	PASS	480,000 checks per side; asMatchPredicate() == matcher().matches() in every case (0 mismatches); ~39% matching inputs; a BooleanPlan was derived for 14,736 + 14,849 of 40,000 patterns; digests identical live vs leaf (62e0e3e4c5336e3e, 736da1664dec04d9)
+4_speed	PredBench, 3 forks per side, 4,000-unit mixed input, three >= 8-atom plans	RECORDED	live 124-284 us/op, leaf 30-39 us/op (3.5x-7x); no claim beyond these shapes
+5_scope	compare master...head	PASS	src/java.base/share/classes/java/util/regex/M3PatternQuery.java + this directory

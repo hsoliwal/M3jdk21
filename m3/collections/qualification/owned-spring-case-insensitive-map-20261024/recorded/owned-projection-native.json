@@ -1,0 +1,1 @@
+{"status":"PASS","checks":9437489,"cases":1048576,"projectionSHA256":"83211754b2567685ea16a105d0d74c6510d4f7382f76580368f2d819806ca2d3","scope":"existing aligned primitive kernel over public map views/snapshots; no native map store or ABI addition"}

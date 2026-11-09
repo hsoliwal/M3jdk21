@@ -1,0 +1,162 @@
+{
+  "schema": "m3-wrapper-sdk-acceptance/v1",
+  "recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
+  "engine_changes": [],
+  "datasets": [
+    {
+      "dataset": "m3jdk21-wrappers-r2-20261018",
+      "targets": 28,
+      "sealing_baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+      "receiving_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "status": "PASS_ACTUAL_SDK_AND_RECEIVER",
+      "sdk_junit": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "actual_first_changes": 28,
+      "actual_repeat_changes": 0,
+      "artifacts": {
+        "SDK_INPUTS.tsv": {
+          "path": "runtime-proof/sdk/r2/SDK_INPUTS.tsv",
+          "sha256": "eb20b2b1b532ca455f2010e6c5d1f6ed52d961e4893211957a7c8904a757976d"
+        },
+        "SDK_RESULTS.tsv": {
+          "path": "runtime-proof/sdk/r2/SDK_RESULTS.tsv",
+          "sha256": "209532c6926d81097deb6ba09a1aa0641afee7aa999ca06f470f41a7079b37fa"
+        },
+        "SDK_TEST_REPORT.xml": {
+          "path": "runtime-proof/sdk/r2/SDK_TEST_REPORT.xml",
+          "sha256": "ba942043e8242964ef1c3200128c1aab9288708f0686dd7b8579a901fed94797"
+        },
+        "DATASET.json": {
+          "path": "runtime-proof/sdk/r2/DATASET.json",
+          "sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf"
+        },
+        "ENGINE_EFFECTIVE.tsv": {
+          "path": "runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
+        },
+        "SDK_RECEIVER_RECEIPT.json": {
+          "path": "runtime-proof/sdk/r2/SDK_RECEIVER_RECEIPT.json",
+          "sha256": "1de42e6d8c2f1e6b61380125b6f26dfd3a2b41876e073e5ee3dd654baa314827"
+        },
+        "SDK_MAVEN.log": {
+          "path": "runtime-proof/sdk/r2/SDK_MAVEN.log.txt",
+          "sha256": "0dc9bf993e0ade345f22927c27cc3c3294987af395b38d71dfe8b05ba9bd9c46"
+        },
+        "ACTUAL_RECEIVER.json": {
+          "path": "runtime-proof/sdk/r2/ACTUAL_RECEIVER.json",
+          "sha256": "08cd36ecbbe0f1255371639d7abf5b9c51215d6981aeb431a8fbe41f58ddfa6d"
+        }
+      }
+    },
+    {
+      "dataset": "m3jdk21-long-bridge-20261018",
+      "targets": 1,
+      "sealing_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "receiving_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "status": "PASS_ACTUAL_SDK_AND_RECEIVER",
+      "sdk_junit": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "actual_first_changes": 1,
+      "actual_repeat_changes": 0,
+      "artifacts": {
+        "SDK_INPUTS.tsv": {
+          "path": "runtime-proof/sdk/long-bridge/SDK_INPUTS.tsv",
+          "sha256": "711e02a24091858ec7037df51b94160cd842395169747d2c56510a16677fa511"
+        },
+        "SDK_RESULTS.tsv": {
+          "path": "runtime-proof/sdk/long-bridge/SDK_RESULTS.tsv",
+          "sha256": "e148f6c1632fa67a075ccd2ade96796ddcf0eb52e67597b654b71b4fe14b153a"
+        },
+        "SDK_TEST_REPORT.xml": {
+          "path": "runtime-proof/sdk/long-bridge/SDK_TEST_REPORT.xml",
+          "sha256": "dea48731c19fcef9d7f13ceace6317053d2ff9c48f03d8e24261aff16fe6f825"
+        },
+        "DATASET.json": {
+          "path": "runtime-proof/sdk/long-bridge/DATASET.json",
+          "sha256": "a87f7b734e9a38d2dec7146d6265b4ec0e8d72c695f35aba24750da45dc84d17"
+        },
+        "ENGINE_EFFECTIVE.tsv": {
+          "path": "runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
+        },
+        "SDK_RECEIVER_RECEIPT.json": {
+          "path": "runtime-proof/sdk/long-bridge/SDK_RECEIVER_RECEIPT.json",
+          "sha256": "b221f4383fb2764a2122c5369215cd1c0870571d7d46adbb823136eaa37ec3c9"
+        },
+        "SDK_MAVEN.log": {
+          "path": "runtime-proof/sdk/long-bridge/SDK_MAVEN.log.txt",
+          "sha256": "a96cf9ff9f5bbfe6b2680343030cde79e8ccb1f54770a9462b5bddff8c3f2d9c"
+        },
+        "ACTUAL_RECEIVER.json": {
+          "path": "runtime-proof/sdk/long-bridge/ACTUAL_RECEIVER.json",
+          "sha256": "48e87e45e5c102ec5139970714648a29f71c04ccddb392b82f09ef7c53cfbe97"
+        }
+      }
+    },
+    {
+      "dataset": "m3jdk21-wrapper-proof2-20261018",
+      "targets": 3,
+      "sealing_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "receiving_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "status": "PASS_ACTUAL_SDK_AND_RECEIVER",
+      "sdk_junit": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sealing_cases": 8,
+      "isolated_receiver_cases": 9,
+      "actual_first_changes": 3,
+      "actual_repeat_changes": 0,
+      "artifacts": {
+        "SDK_INPUTS.tsv": {
+          "path": "runtime-proof/sdk/proof2/SDK_INPUTS.tsv",
+          "sha256": "1ca8db0485329ebc3a2ebc03e6a4879f7eb9d916cb106f34543db640c57bc1cb"
+        },
+        "SDK_RESULTS.tsv": {
+          "path": "runtime-proof/sdk/proof2/SDK_RESULTS.tsv",
+          "sha256": "8b72b85e9e69d358adbbaf7dd7eb3ddb5e608cf04681bf06c4c14f7c8843bbb1"
+        },
+        "SDK_TEST_REPORT.xml": {
+          "path": "runtime-proof/sdk/proof2/SDK_TEST_REPORT.xml",
+          "sha256": "56dc92bc668478f4137ee7ee0eecfe54239e018101b04f3efbc9a0eb7fd59849"
+        },
+        "DATASET.json": {
+          "path": "runtime-proof/sdk/proof2/DATASET.json",
+          "sha256": "18272174e7659b6b069a257c648bf5ec6a218a29cb6529ca9f971f1eab26ccb6"
+        },
+        "ENGINE_EFFECTIVE.tsv": {
+          "path": "runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
+        },
+        "SDK_RECEIVER_RECEIPT.json": {
+          "path": "runtime-proof/sdk/proof2/SDK_RECEIVER_RECEIPT.json",
+          "sha256": "a509325ffe2c114384d8e9ff42313436f612a5a0c85679d4aae49d07940baf57"
+        },
+        "SDK_MAVEN.log": {
+          "path": "runtime-proof/sdk/proof2/SDK_MAVEN.log.txt",
+          "sha256": "abfec6aec893693511ec6228ac43625f8b62a848cdad3180f5c0b1f1c00fece2"
+        },
+        "ACTUAL_RECEIVER.json": {
+          "path": "runtime-proof/sdk/proof2/ACTUAL_RECEIVER.json",
+          "sha256": "3a1f6db513293730f15e8da4dfef72628c4d07226fc344142f09263ef41aa48b"
+        }
+      }
+    }
+  ],
+  "excluded_rejected_dataset": "m3jdk21-wrappers-20261018",
+  "scope": "Executed SDK and receiving integrity; behavioral admission is bound separately."
+}

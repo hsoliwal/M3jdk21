@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+role	path	preimage	postimage_sha256
+EXISTING_JAVA_OWNER	m3/collections/src/main/java/jdk/m3/collections/M3LaneSearch.java	f84bf3bd1cdd2105b6ba56b6dd887f9006eaaec1	UNMODIFIED
+GENERATED_TEST	m3/collections/src/test/java/jdk/m3/collections/M3LaneSearchCategoryProof.java	ABSENT	2ecb05833df1e5c100037823db2ed029433acbca34e1a49ce576cd1b88b291d3
+GENERATED_TEST	m3/collections/src/test/java/jdk/m3/collections/M3LaneSearchCategoryProofTest.java	ABSENT	9b487bdae1966e72449b94d7cb759222370d0e64cfeadddfb394043cfaf6d8a4

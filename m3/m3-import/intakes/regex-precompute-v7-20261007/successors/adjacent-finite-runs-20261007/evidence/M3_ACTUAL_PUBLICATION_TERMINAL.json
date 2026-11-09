@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "url": "https://github.com/hsoliwal/com.synexia/pull/9797",
+  "head": "1e4743f6661a9149f327bf7171b4de2df68add54",
+  "tree": "7e797bd1bd735c75584dca9e3af48808ca249cd2",
+  "parent": "857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8",
+  "files": 30,
+  "sourceModifications": 3,
+  "crateFiles": 27,
+  "actualSelectedTests": {
+    "retained": 37,
+    "new": 3,
+    "passed": 40,
+    "failed": 0
+  },
+  "recipe": "APPLY3_CHECK0_SECOND_APPLY0_AND_DRIFT_REFUSALS_PASS",
+  "productionAndConfigReview": "CLEAN_FOR_RECORDED_SCOPES",
+  "maven": "NOT_RUN",
+  "canonicalReceiverIntegration": "OPEN",
+  "sourceCompleteClosure": "OPEN",
+  "nativeJniJtreg": "NOT_RUN",
+  "draft": true,
+  "merged": false
+}

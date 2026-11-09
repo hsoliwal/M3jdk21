@@ -1,0 +1,1 @@
+s/org\.apache\.commons\.net([^A-Za-z0-9_$]|$)/com.m3.lib.net\1/g;s#org/apache/commons/net([^A-Za-z0-9_$]|$)#com/m3/lib/net\1#g;

@@ -1,0 +1,26 @@
+family	factory	parameters	contract	adapter	m3_owners	ownership	version
+JDK	jdkMap		java.util.Map	com.m3.collections.M3LinkedHashMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	21
+JDK	jdkSet		java.util.Set	com.m3.collections.M3LinkedHashSet	com.m3.collections.M3LinkedHashSet	M3_CREATED	21
+JDK	jdkList		java.util.List	com.m3.collections.M3LinkedList	com.m3.collections.M3LinkedList	M3_CREATED	21
+JDK	jdkDeque		java.util.Deque	com.m3.collections.M3LinkedList	com.m3.collections.M3LinkedList	M3_CREATED	21
+JDK	jdkSortedMap	java.util.Comparator	java.util.NavigableMap	com.m3.collections.M3TreeMap	com.m3.collections.M3TreeMap	M3_CREATED	21
+JDK	jdkSortedSet	java.util.Comparator	java.util.NavigableSet	com.m3.collections.M3TreeSet	com.m3.collections.M3TreeSet	M3_CREATED	21
+GUAVA	guavaListMultimap		com.google.common.collect.ListMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedList	M3_CREATED	33.4.8-jre
+GUAVA	guavaSetMultimap		com.google.common.collect.SetMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedHashSet	M3_CREATED	33.4.8-jre
+GUAVA	guavaSortedSetMultimap	java.util.Comparator	com.google.common.collect.SortedSetMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3TreeSet	M3_CREATED	33.4.8-jre
+GUAVA	guavaTable		com.google.common.collect.Table	com.google.common.collect.Tables	com.m3.collections.M3LinkedHashMap	M3_CREATED	33.4.8-jre
+ECLIPSE_COLLECTIONS	eclipseMap		org.eclipse.collections.api.map.MutableMap	org.eclipse.collections.impl.map.mutable.MapAdapter	com.m3.collections.M3LinkedHashMap	M3_CREATED	11.1.0
+ECLIPSE_COLLECTIONS	eclipseList		org.eclipse.collections.api.list.MutableList	org.eclipse.collections.impl.list.mutable.ListAdapter	com.m3.collections.M3LinkedList	M3_CREATED	11.1.0
+ECLIPSE_COLLECTIONS	eclipseSet		org.eclipse.collections.api.set.MutableSet	org.eclipse.collections.impl.set.mutable.SetAdapter	com.m3.collections.M3LinkedHashSet	M3_CREATED	11.1.0
+ECLIPSE_COLLECTIONS	eclipseSortedMap	java.util.Comparator	org.eclipse.collections.api.map.sorted.MutableSortedMap	org.eclipse.collections.impl.map.sorted.mutable.SortedMapAdapter	com.m3.collections.M3TreeMap	M3_CREATED	11.1.0
+ECLIPSE_COLLECTIONS	eclipseSortedSet	java.util.Comparator	org.eclipse.collections.api.set.sorted.MutableSortedSet	org.eclipse.collections.impl.set.sorted.mutable.SortedSetAdapter	com.m3.collections.M3TreeSet	M3_CREATED	11.1.0
+SPRING_FRAMEWORK	springMultiValueMap		org.springframework.util.MultiValueMap	com.m3.collections.interop.M3SpringArrayMultiValueMap	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedList	M3_CREATED_WITH_CALLER_LIST_ALIASING	6.2.0
+SPRING_FRAMEWORK	springSingleValueMap		org.springframework.util.MultiValueMap	org.springframework.util.MultiValueMap	com.m3.collections.M3LinkedHashMap	M3_SCALAR_ADAPTER	6.2.0
+SPRING_FRAMEWORK	springAutoPopulatingList	org.springframework.util.AutoPopulatingList$ElementFactory	java.util.List	org.springframework.util.AutoPopulatingList	com.m3.collections.M3LinkedList	M3_CREATED	6.2.0
+APACHE_COMMONS_COLLECTIONS	apacheListValuedMap		org.apache.commons.collections4.ListValuedMap	com.m3.collections.interop.M3ApacheListValuedMap	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedList	M3_CREATED	4.5.0
+APACHE_COMMONS_COLLECTIONS	apacheSetValuedMap		org.apache.commons.collections4.SetValuedMap	com.m3.collections.interop.M3ApacheSetValuedMap	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedHashSet	M3_CREATED	4.5.0
+GUAVA	guavaFilteredCollection	com.m3.collections.M3LinkedList;com.google.common.base.Predicate	java.util.Collection	com.google.common.collect.Collections2	com.m3.collections.M3LinkedList	BORROWED_M3	33.4.8-jre
+GUAVA	guavaFilteredNavigableSet	com.m3.collections.M3TreeSet;com.google.common.base.Predicate	java.util.NavigableSet	com.google.common.collect.Sets	com.m3.collections.M3TreeSet	BORROWED_M3	33.4.8-jre
+GUAVA	guavaBiMap		com.google.common.collect.BiMap	com.m3.collections.interop.M3GuavaBiMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	33.4.8-jre
+APACHE_COMMONS_COLLECTIONS	apacheBidiMap		org.apache.commons.collections4.BidiMap	com.m3.collections.interop.M3ApacheBidiMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	4.5.0
+SPRING_FRAMEWORK	springCaseInsensitiveMap	java.util.Locale	java.util.Map	com.m3.collections.interop.M3SpringCaseInsensitiveMap	com.m3.collections.M3LinkedHashMap	M3_CREATED	6.2.0

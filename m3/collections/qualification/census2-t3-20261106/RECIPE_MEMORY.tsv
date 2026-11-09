@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# RECIPE_MEMORY.tsv - append-only lesson memory of qualification/census2-t3-20261106: one row per lesson, appended in the same commit as the correction.
+date	recipe	version	lesson	evidence
+2026-11-06	census2 T3 (chain verdicts)	-	a chain-tool verdict NEW/clean (HASH_PINNED_CHAIN v2) proves the bytes resolve through the naming rename, not that the test holds on today's owners: the relocated self test failed the module suite at once (1980 / F1); run the test on the owners before landing, and keep a held test out of src/test (a failing wrapper would turn the module suite red)	t3-head gate: 1 failure, M3FilteredCursorReadinessTest.preparedPhysicalSlotsPreserveSelectionAndRevision
+2026-11-06	census2 T3 (owner probe)	-	a main-based self test stops at its first failed check; a recording probe (the four check/same/expect helpers print instead of throw, by sed in owner_probe.sh, refused when the helper count drifts) lists every failing check per mode, which is the owner behaviour to schedule; LC_ALL=C keeps the sorted verdict rows stable	OWNER_VERDICTS.tsv 74 rows; owner_probe.sh = OWNER_VERDICTS.tsv on the second run

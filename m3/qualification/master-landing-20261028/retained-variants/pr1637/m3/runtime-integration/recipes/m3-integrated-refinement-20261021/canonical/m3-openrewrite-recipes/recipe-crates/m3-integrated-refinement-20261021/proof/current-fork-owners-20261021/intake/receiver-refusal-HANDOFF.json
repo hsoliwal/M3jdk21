@@ -1,0 +1,26 @@
+[
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+    "relative_path": "combined-receiver-source/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+    "bytes": 25292,
+    "sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+    "relative_path": "combined-receiver-source/m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+    "bytes": 11215,
+    "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/core/src/jdk/m3/text/M3BigString.java",
+    "relative_path": "combined-receiver-source/m3/core/src/jdk/m3/text/M3BigString.java",
+    "bytes": 33365,
+    "sha256": "ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+    "relative_path": "combined-receiver-source/m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+    "bytes": 9740,
+    "sha256": "d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a"
+  }
+]

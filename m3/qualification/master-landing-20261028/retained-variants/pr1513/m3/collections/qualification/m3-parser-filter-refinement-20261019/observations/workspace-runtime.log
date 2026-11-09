@@ -1,0 +1,17 @@
+!SESSION 2026-10-19 20:46:50.413 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=21.0.12.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en
+
+!ENTRY org.eclipse.osgi 2 0 2026-10-19 20:46:50.891
+!MESSAGE The property 'osgi.configuration.area' with the value 'file:///tmp/m3-jdt-working-copy-15467709443960503308/configuration' is being overriden by the OSGi standard configuration property 'org.osgi.framework.storage' with the value '/tmp/m3-jdt-working-copy-15467709443960503308/framework'.
+!STACK 0
+java.lang.IllegalArgumentException: The property 'osgi.configuration.area' with the value 'file:///tmp/m3-jdt-working-copy-15467709443960503308/configuration' is being overriden by the OSGi standard configuration property 'org.osgi.framework.storage' with the value '/tmp/m3-jdt-working-copy-15467709443960503308/framework'.
+	at org.eclipse.osgi.internal.location.EquinoxLocations.<init>(EquinoxLocations.java:92)
+	at org.eclipse.osgi.internal.framework.EquinoxConfiguration.<init>(EquinoxConfiguration.java:593)
+	at org.eclipse.osgi.internal.framework.EquinoxContainer.<init>(EquinoxContainer.java:98)
+	at org.eclipse.osgi.launch.Equinox.<init>(Equinox.java:53)
+	at org.eclipse.osgi.launch.EquinoxFactory.newFramework(EquinoxFactory.java:36)
+	at org.eclipse.osgi.launch.EquinoxFactory.newFramework(EquinoxFactory.java:31)
+	at jdk.m3.parser.test.M3JdtEquinoxContract.main(M3JdtEquinoxContract.java:26)

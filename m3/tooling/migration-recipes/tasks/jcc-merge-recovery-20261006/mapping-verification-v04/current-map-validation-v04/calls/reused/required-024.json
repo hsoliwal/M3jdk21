@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0yLjAKcGFja2Fn\nZSBqZGsuaW50ZXJuYWwubWluZGV4OwoKaW1wb3J0IGphdmEudXRpbC5MaXN0\nOwppbXBvcnQgamF2YS51dGlsLk9iamVjdHM7CgovKioKICogSW1tdXRhYmxl\nLCBWTS1sb2NhbCBjYW5kaWRhdGUga2V5IG92ZXIgcmVmZXJlbmNlcyB0byBl\neGlzdGluZyBpbW11dGFibGUgSkRLIFN0cmluZ3MuCiAqIEVxdWFsaXR5IGRp\nc2NvdmVycyByZXVzYWJsZSB3b3JrOyBpdCBpcyBub3QgdmVyaWZpZXIsIGxp\nbmtlciBvciBuYXRpdmUtY29kZSBhZG1pc3Npb24uCiAqIE9yZGVyZWQgZGVw\nZW5kZW5jeSBpbnB1dHMgbXVzdCBpbmNsdWRlIHRoZSBjYWxsZXIncyBjb21w\nbGV0ZSBlZmZlY3RpdmUgY29udGV4dC4KICogVGhpcyBvYmplY3QgaXMgYSBj\nYWxsZXItb3duZWQgY29udGV4dCBrZXksIG5vdCBhIHBvcnRhYmxlIGNhY2hl\nIGZvcm1hdC4KICovCnB1YmxpYyBmaW5hbCBjbGFzcyBNM1BDIHsKICAgIHBy\naXZhdGUgZmluYWwgU3RyaW5nW10gbGFuZXM7CgogICAgcHJpdmF0ZSBNM1BD\nKFN0cmluZ1tdIGxhbmVzKSB7CiAgICAgICAgdGhpcy5sYW5lcyA9IGxhbmVz\nOwogICAgfQoKICAgIHB1YmxpYyBzdGF0aWMgTTNQQyBvZigKICAgICAgICAg\nICAgU3RyaW5nIGNvbnRlbnRTZWFsLAogICAgICAgICAgICBTdHJpbmcgYW5h\nbHlzaXNSZXZpc2lvbiwKICAgICAgICAgICAgU3RyaW5nIGVudmlyb25tZW50\nU2VhbCwKICAgICAgICAgICAgTGlzdDxTdHJpbmc+IG9yZGVyZWREZXBlbmRl\nbmNpZXMpIHsKICAgICAgICBPYmplY3RzLnJlcXVpcmVOb25OdWxsKG9yZGVy\nZWREZXBlbmRlbmNpZXMsICJvcmRlcmVkRGVwZW5kZW5jaWVzIik7CiAgICAg\nICAgaWYgKG9yZGVyZWREZXBlbmRlbmNpZXMuc2l6ZSgpID4gNjVfNTM2KSB7\nCiAgICAgICAgICAgIHRocm93IG5ldyBJbGxlZ2FsQXJndW1lbnRFeGNlcHRp\nb24oImRlcGVuZGVuY3kgYnVkZ2V0IGV4Y2VlZGVkIik7CiAgICAgICAgfQog\nICAgICAgIFN0cmluZ1tdIGxhbmVzID0gbmV3IFN0cmluZ1tvcmRlcmVkRGVw\nZW5kZW5jaWVzLnNpemUoKSArIDNdOwogICAgICAgIGxhbmVzWzBdID0gT2Jq\nZWN0cy5yZXF1aXJlTm9uTnVsbChjb250ZW50U2VhbCwgImNvbnRlbnRTZWFs\nIik7CiAgICAgICAgbGFuZXNbMV0gPSBPYmplY3RzLnJlcXVpcmVOb25OdWxs\nKGFuYWx5c2lzUmV2aXNpb24sICJhbmFseXNpc1JldmlzaW9uIik7CiAgICAg\nICAgbGFuZXNbMl0gPSBPYmplY3RzLnJlcXVpcmVOb25OdWxsKGVudmlyb25t\nZW50U2VhbCwgImVudmlyb25tZW50U2VhbCIpOwogICAgICAgIGZvciAoaW50\nIGkgPSAwOyBpIDwgb3JkZXJlZERlcGVuZGVuY2llcy5zaXplKCk7IGkrKykg\newogICAgICAgICAgICBsYW5lc1tpICsgM10gPSBPYmplY3RzLnJlcXVpcmVO\nb25OdWxsKG9yZGVyZWREZXBlbmRlbmNpZXMuZ2V0KGkpLCAiZGVwZW5kZW5j\neSIpOwogICAgICAgIH0KICAgICAgICByZXR1cm4gbmV3IE0zUEMobGFuZXMp\nOwogICAgfQoKICAgIHB1YmxpYyBpbnQgZGVwZW5kZW5jeUNvdW50KCkgeyBy\nZXR1cm4gbGFuZXMubGVuZ3RoIC0gMzsgfQoKICAgIHB1YmxpYyBib29sZWFu\nIHNhbWVJbnB1dHMoTTNQQyBvdGhlcikgewogICAgICAgIHJldHVybiBvdGhl\nciAhPSBudWxsICYmIGphdmEudXRpbC5BcnJheXMuZXF1YWxzKGxhbmVzLCBv\ndGhlci5sYW5lcyk7CiAgICB9Cn0K\n",
+      "encoding": "base64",
+      "sha": "b63fd9e457f7ac16bca8bf07dcb564069fdfef79",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+      "display_title": "M3PC.java"
+    },
+    "isError": false
+  }
+}
+

@@ -1,0 +1,2 @@
+phase	kind	targets	manifest_sha256	before_root	after_root	missing_refusals	drift_refusals	duplicate_refusal	fixed_point	mixed	order	repeat	decoys	workers	cycles
+m3-integrated-refinement-20261021-018	java	1	5d6d2ab811eea444a3b36e8f2af4f7589fe7780d7543fd88c94e1b1f2455b780	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855	a08b14834779ee815ff0fac3b793026a11184697757270ee3c3beb03556f92b6	0	1	PASS	PASS	PASS	PASS	PASS	PASS	2	1

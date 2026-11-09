@@ -1,0 +1,127 @@
+{
+  "schema": "M3_ACTUAL_MATCHED_IMAGE_BOUNDED_VALIDATION_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "status": "BOUNDED_PASS",
+  "updated_utc": "2026-10-18T14:15:55.417595+00:00",
+  "image_source_epoch": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "image_source_tree": "f30bf4ae784f4c6c7b461d245e63d3299b053931",
+  "test_metadata_epoch": "225c488f9b39d4534fe19cd2d72be1130875fb10",
+  "actual_metadata_head_at_summary": "225c488f9b39d4534fe19cd2d72be1130875fb10",
+  "runtime_source_closure": {
+    "src": "90475252a619e7fc5cb70a27e81f185da3b0077d",
+    "make": "8189902841959a63cde88a04f33f61cc16f1ae68"
+  },
+  "hotspot_tree": "7a1892921ebd3e3888192fa89dfba90184942254",
+  "source_image_build_receipt": "images-after-object-vtable-result.json",
+  "image_custody": "matched-image-custody.json.gz",
+  "boot_probes": "matched-image-boot-probes.json",
+  "primary_tests": [
+    {
+      "test": "test/jdk/java/util/regex/M3RegexReuseTest.java",
+      "test_epoch": "8e0bf6316903989b444deaaefaeb65eef3f72faa",
+      "source_blob": "3bb4234276c73acb326003fc9b73d14f84676b11",
+      "status": "PASS",
+      "jtr_receipt": "jtreg-regex-reuse-epoch8e0.jtr.gz",
+      "jtr_sha256": "d929d96d584c09f662dc5b2d4c7c5d552b18a482a88b00a16159ea1b393b4ea1",
+      "signals": [
+        "MR_SEMANTIC\tcells=12300\tchecks=1803564\tsha256=d8a57e94b28138fd06f1d2616dd5bb0274a651b9cb8783c199e8ca321f7d87ee",
+        "MR_REUSE\tchecks=1803585",
+        "MR_SEMANTIC\tcells=12300\tchecks=1803564\tsha256=d8a57e94b28138fd06f1d2616dd5bb0274a651b9cb8783c199e8ca321f7d87ee",
+        "MR_REUSE\tchecks=1803585",
+        "MR_SEMANTIC\tcells=12300\tchecks=1803564\tsha256=d8a57e94b28138fd06f1d2616dd5bb0274a651b9cb8783c199e8ca321f7d87ee",
+        "MR_REUSE\tchecks=1803585",
+        "MR_FLAT_FACTS\tchecks=5",
+        "MR_PREPARED\tchecks=237",
+        "MR_PREPARED\tchecks=237"
+      ]
+    },
+    {
+      "test": "test/jdk/java/util/regex/M3RegexLiteralTQTest.java",
+      "test_epoch": "8e0bf6316903989b444deaaefaeb65eef3f72faa",
+      "source_blob": "ba09e6e9a6d3bc13f8d669ee8942b1d380c5e169",
+      "status": "PASS",
+      "jtr_receipt": "jtreg-regex-literal-epoch8e0.jtr.gz",
+      "jtr_sha256": "62bd81ab457a5b2dde949e6abca5193be11cc4437ba1ea7092b9697a8738894d",
+      "signals": [
+        "M3_REGEX_LITERAL_TQ_PASS|checks=199"
+      ]
+    },
+    {
+      "test": "test/jdk/jdk/internal/mindex/M3TQFactsTest.java",
+      "test_epoch": "8e0bf6316903989b444deaaefaeb65eef3f72faa",
+      "source_blob": "1960a10fe74c09885906fd860020d046c432cb91",
+      "status": "PASS",
+      "jtr_receipt": "jtreg-tq-facts-epoch8e0.jtr.gz",
+      "jtr_sha256": "42cf17eb9d15ed0b100597f6aebc43c52047ce8b9275c3b6b98b19bb7b050657",
+      "signals": [
+        "M3_TQ_FACTS_PASS|checks=24829"
+      ]
+    },
+    {
+      "test": "test/jdk/java/lang/String/M3TQTest.java",
+      "test_epoch": "8e0bf6316903989b444deaaefaeb65eef3f72faa",
+      "source_blob": "aa1931597c49437540fa18e4c69046768cadc190",
+      "status": "PASS",
+      "jtr_receipt": "jtreg-tq-jni-epoch8e0.jtr.gz",
+      "jtr_sha256": "a0bad799f42f6e528fba8312fb19fd337bc0c838b1d5600ed46ae705396f93bf",
+      "signals": [
+        "TQ checks=308649 strings=410 ranges=4040 compositions=8331 nativeCalls=4458 coldReads=4291 mappedRanges=174 containmentPairs=201601 warmPayloadReads=0"
+      ]
+    },
+    {
+      "test": "test/jdk/java/lang/String/M3TQSparseContainmentTest.java",
+      "test_epoch": "225c488f9b39d4534fe19cd2d72be1130875fb10",
+      "source_blob": "afd199879648ce7e51d271651dc3f18ba34db6cc",
+      "status": "PASS",
+      "jtr_receipt": "jtreg-sparse-after-recipe-epoch225c.jtr.gz",
+      "jtr_sha256": "55ed9c7c1c8933c551cfb39b83235a2bbacd6cd7189444a7d2c52b60e07863cc",
+      "signals": [
+        "TQ_SPARSE_CONTAINMENT_PASS checks=31011 warmPayloadReads=0"
+      ]
+    }
+  ],
+  "primary_count": 5,
+  "primary_pass_count": 5,
+  "aggregation_method": "4prior passes on8e0 +1sparse pass on225c. Runtime src/make byte-identical across epochs; only test change is canonical JavaLST @modules :open\u2192:+open. Prior four test blobs unchanged.",
+  "test_metadata_bridge": "sparse-test-metadata-received-bridge.json",
+  "first_four_test_make_receipt": "jtreg-five-built-prereqs-result.json",
+  "fifth_make_receipt": "jtreg-sparse-after-metadata-recipe-result.json",
+  "progress_tests": [
+    {
+      "test": "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
+      "source_blob": "0b9bd424c67d98c7f033e5e91fd1881b38767fd7",
+      "jtr_sha256": "c1b30e398bb4852e5e9500a929f9db3b40846d1eb78078d05a125adf7293cb00",
+      "jtr_receipt": "jtreg-monitored-template-postimage.jtr.gz",
+      "status": "PASS"
+    },
+    {
+      "test": "test/jdk/java/lang/Object/M3AdapterProgress.java",
+      "source_blob": "17c0e4f83c3142bbede6523058f40d09ebfe4a02",
+      "jtr_sha256": "df06f4c6741d82a4b2e7497b1c9008edacaa014e1ce02d22290745ab0954f25c",
+      "jtr_receipt": "jtreg-adapter-progress-postimage.jtr.gz",
+      "status": "PASS"
+    }
+  ],
+  "progress_make_receipt": "jtreg-object-progress-result.json",
+  "cost_probe_summary": "post-image-validation.json",
+  "cost_result": "Three existing cost modes exit0; warm batches8192B/256queries=32B/query; no zeroallocation or universal speed claim.",
+  "adapter_vm_diagnostic": "Three actual-image modes(default/CDS on/CDS off), each50040checks, strict actualjavac compile; exact source/classes/mode receipts inpost-image-validation.json.",
+  "original_refusals_preserved": [
+    "java-base-with-dependencies-result.json",
+    "java-base-after-doc-recipe-result.json",
+    "images-result.json",
+    "images-after-native-guard-result.json",
+    "jtreg-five-after-object-vtable-result.json",
+    "jtreg-five-materialized-result.json",
+    "jtreg-five-reserved-result.json",
+    "jtreg-sparse-metadata-red-epoch8e0.jtr.gz"
+  ],
+  "scope_limits": [
+    "Linux x64 headless fastdebug server only.",
+    "Seven selected existing jtreg tests across explicit source-bridged runs; not entire test groups or full JDK/String family qualification.",
+    "Sparse checkout group path witnesses are actual tracked files; TEST.groups unchanged; no named group run.",
+    "No phase, mapping-gate, general donor-superiority, whole-family or performance acceptance promotion.",
+    "Resource guards retained; one earlier shared-memory reserve interruption and a staging-cache dependency refusal are separate from semantic results."
+  ]
+}

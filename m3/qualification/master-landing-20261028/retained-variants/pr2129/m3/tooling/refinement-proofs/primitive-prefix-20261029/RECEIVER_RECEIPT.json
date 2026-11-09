@@ -1,0 +1,239 @@
+{
+  "schema": "M3_PRIMITIVE_PREFIX_COMPACTION_RECEIPT_V1",
+  "status": "DRAFT_PERFORMANCE_HOLD",
+  "source_recipe_repository": "hsoliwal/com.synexia",
+  "source_recipe_commit": "5ad45707c5eb62e2f69e9bc3640e1beb736091a5",
+  "canonical_engine_commit": "1dd75bb037fbc10681c15200c9f4e6dde2043f0b",
+  "canonical_recipe": {
+    "id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "version": "primitive-prefix-jdk-20261029",
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/primitive-prefix-jdk-20261029",
+    "sha256": "253acee53ac9cc7547fbddb79705fe16ff760bbbb5286d560359880a5914c4e0",
+    "preconditions": [
+      "Canonical source commit 5ad45707c5eb62e2f69e9bc3640e1beb736091a5; exact descriptor and Java source manifests.",
+      "Public baseline 669a949d192345acefcfc5e9bb0b3724174d270c; no unreviewed source drift.",
+      "All5 actual SDK tests pass; guarded receiver validates exact qualified outputs and refuses changed input/result seals."
+    ],
+    "rollback": "Reviewed revert restores sealed preimages and removes only the new owned test/receipt, while preserving independent later changes."
+  },
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/qualification/primitive-prefix-20261029",
+  "canonical_evidence_tracking_ref": "refs/heads/codex/m3-array-growth-recipes-20261029",
+  "target_baseline": "669a949d192345acefcfc5e9bb0b3724174d270c",
+  "target_commit": null,
+  "mapping_id": "m3.collections.primitive-array-list.prefix-compaction",
+  "outputs": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntArrayList.java",
+      "before_sha256": "1414a1dcc62a9f6c7f9a09accc308425300306a8a4cf1fc5a53fa8dffd60c60e",
+      "after_sha256": "abbea3195aec0e512848ab154699c213753a44c47be067ff7258b2f9d7b2915b",
+      "after_git_blob": "28f14d7528bea3e5afb49959e6ed2cdbb6c5575d",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java",
+      "before_sha256": "bd06a2d6c5a0df86fc402be506c0eb6a6656fa9e8ea93c1f49b906152358464f",
+      "after_sha256": "13406fb9aec187d7f3277a1ecb742fd0bdfe5900b90a7bfe6a549b2bb46707c9",
+      "after_git_blob": "b88d59b8309abe2314343e53d3a5c29c57899afe",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveCompactionPrefixTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "20406fd2297021c77054fdb36eb6d2b9eceba2ddabb5467fd86c1abf665636d8",
+      "after_git_blob": "f449628cf93b73dc428ca6642d4b8e7dae063645",
+      "mode": "100644"
+    }
+  ],
+  "executed": {
+    "actual_sdk_tests": 5,
+    "guarded_receiver_cases": 9,
+    "received_paths": 3,
+    "second_receive_changes": 0,
+    "strict_java21_product_sources": 317,
+    "normal_junit_before_and_after": 27,
+    "new_interpreter_junit_before_and_after": 9,
+    "int_contract_steps": 9000,
+    "int_contract_assertions": 5269762,
+    "zero_mask_checks": 6176,
+    "private_public_nested_descriptor_views_equal": 5,
+    "serial_intermediate": "Only int postimage; long preimage: strict compile,27tests,and both proofprograms PASS"
+  },
+  "performance": {
+    "decision": "HOLD_DRAFT_NOT_MERGE_READY",
+    "harness": "JMH1.37",
+    "targeted": {
+      "case_count": 5,
+      "jmh_version": "1.37",
+      "jmh_confidence": 0.999,
+      "cpu_affinity": [
+        0
+      ],
+      "comparison_rule": "Conservative overlap check of per-variant JMH 99.9% confidence intervals; no paired significance test or speedup-ratio interval.",
+      "counts": {
+        "improvement_disjoint_intervals": 2,
+        "regression_disjoint_intervals": 0,
+        "inconclusive_overlapping_intervals": 3
+      },
+      "results": [
+        {
+          "method": "longDeduplicate",
+          "shape": "UNCHANGED",
+          "size": 65536,
+          "run_order": [
+            "before",
+            "after"
+          ],
+          "before_ns_per_op": 15974.731837766201,
+          "before_ci_999": [
+            12573.15187223021,
+            19376.311803302193
+          ],
+          "after_ns_per_op": 20920.990541806328,
+          "after_ci_999": [
+            13612.98413854124,
+            28228.996945071416
+          ],
+          "after_vs_before_percent": 30.963015556521412,
+          "point_estimate_speedup": 0.7635743539888306,
+          "interval_screen": "inconclusive_overlapping_intervals",
+          "original_screen_change_percent": 43.049692875861645,
+          "original_risk_reproduction": "slower_point_estimate_repeats_but_intervals_overlap",
+          "samples_per_variant": 12,
+          "forks_per_variant": 3
+        },
+        {
+          "method": "intRetainMask",
+          "shape": "DENSE",
+          "size": 65536,
+          "run_order": [
+            "after",
+            "before"
+          ],
+          "before_ns_per_op": 31801.229490037193,
+          "before_ci_999": [
+            28685.858977059444,
+            34916.60000301494
+          ],
+          "after_ns_per_op": 35412.286253294,
+          "after_ci_999": [
+            28473.89822828196,
+            42350.67427830603
+          ],
+          "after_vs_before_percent": 11.355085388720877,
+          "point_estimate_speedup": 0.8980281381035965,
+          "interval_screen": "inconclusive_overlapping_intervals",
+          "original_screen_change_percent": 44.40929545712133,
+          "original_risk_reproduction": "slower_point_estimate_repeats_but_intervals_overlap",
+          "samples_per_variant": 12,
+          "forks_per_variant": 3
+        },
+        {
+          "method": "longRetainMask",
+          "shape": "DENSE",
+          "size": 65536,
+          "run_order": [
+            "before",
+            "after"
+          ],
+          "before_ns_per_op": 49349.538064521206,
+          "before_ci_999": [
+            39147.06733356474,
+            59552.008795477675
+          ],
+          "after_ns_per_op": 48162.524554060445,
+          "after_ci_999": [
+            41654.63923876775,
+            54670.40986935314
+          ],
+          "after_vs_before_percent": -2.405318381924515,
+          "point_estimate_speedup": 1.0246459985528455,
+          "interval_screen": "inconclusive_overlapping_intervals",
+          "original_screen_change_percent": 35.137640665497784,
+          "original_risk_reproduction": "original_slower_point_estimate_not_reproduced",
+          "samples_per_variant": 12,
+          "forks_per_variant": 3
+        },
+        {
+          "method": "intRetainMask",
+          "shape": "LATE",
+          "size": 65536,
+          "run_order": [
+            "after",
+            "before"
+          ],
+          "before_ns_per_op": 42428.507988774516,
+          "before_ci_999": [
+            36470.86587016608,
+            48386.15010738295
+          ],
+          "after_ns_per_op": 23357.201418008714,
+          "after_ci_999": [
+            12398.781657096311,
+            34315.621178921116
+          ],
+          "after_vs_before_percent": -44.949274614633104,
+          "point_estimate_speedup": 1.816506491058538,
+          "interval_screen": "improvement_disjoint_intervals",
+          "original_screen_change_percent": -51.944479419756576,
+          "original_risk_reproduction": "original_faster_case_control",
+          "samples_per_variant": 12,
+          "forks_per_variant": 3
+        },
+        {
+          "method": "longRetainMask",
+          "shape": "LATE",
+          "size": 65536,
+          "run_order": [
+            "before",
+            "after"
+          ],
+          "before_ns_per_op": 56382.027201769815,
+          "before_ci_999": [
+            35415.76142140389,
+            77348.29298213574
+          ],
+          "after_ns_per_op": 17535.692831765708,
+          "after_ci_999": [
+            14144.248920603552,
+            20927.136742927865
+          ],
+          "after_vs_before_percent": -68.8984350119017,
+          "point_estimate_speedup": 3.215272287367763,
+          "interval_screen": "improvement_disjoint_intervals",
+          "original_screen_change_percent": -66.22235234332585,
+          "original_risk_reproduction": "original_faster_case_control",
+          "samples_per_variant": 12,
+          "forks_per_variant": 3
+        }
+      ],
+      "limitations": [
+        "Process-local affinity does not reserve the selected CPU; other workspaces may still create contention.",
+        "Case pair order alternates, but each individual case was measured in one order, not a full repeated crossover.",
+        "Twelve measured samples per variant are nested inside three forks; confidence estimates are those emitted by JMH.",
+        "Warmed operation-only benchmark; invocation reset is excluded from timing but warms caches and consumes bandwidth.",
+        "No general non-regression, whole-JDK, application, allocation, JNI or cross-platform performance claim."
+      ]
+    },
+    "no_universal_speedup_claim": true
+  },
+  "open_gates": [
+    "Full source-built dependency and Maven/JPMS reactor closure.",
+    "Installed M3JDK image/jtreg and applicable JNI/JIT/GC/platform gates.",
+    "Resolve repeated slower unchanged-long dedup and dense-int-mask point estimates; broad non-regression acceptance remains HOLD."
+  ],
+  "scope": {
+    "collection_inventory_files": 298,
+    "array_dependency_files": 19,
+    "public_owner_implementations_refined": 2,
+    "public_method_atoms_refined": 4,
+    "full_collection_algorithm_review": false,
+    "installed_jdk_promotion": false,
+    "jdk_public_names_unchanged": true,
+    "no_recipe_code_copied_to_target": true
+  },
+  "reference_categories": [
+    "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+    "https://leetcode.com/problems/remove-element/"
+  ],
+  "license": "Existing target Apache-2.0 notices retained; no external solution code copied."
+}

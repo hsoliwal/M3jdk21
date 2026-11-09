@@ -1,0 +1,15 @@
+main	com/synexia/fastsearch/knowledge/index/TopKSelector.java	05579759973c8da3715f4626ac3802f849072abe	m3/search/src/main/java/jdk/m3/search/M3TopKSelector.java	bde59cfe88877be6
+main	com/synexia/fastsearch/knowledge/index/JavaTopKSelector.java	895ae23ef1987fdc2c633c4d66ecd871d422c4d4	m3/search/src/main/java/jdk/m3/search/M3JavaTopKSelector.java	0c21176d5c0d6886
+main	com/synexia/fastsearch/knowledge/index/TopKInputs.java	dc60990a93ca792fe46286c19bdcef2be8e0b94e	m3/search/src/main/java/jdk/m3/search/M3TopKInputs.java	c47f3b236fa407de
+main	com/synexia/fastsearch/knowledge/index/ReciprocalRankFusion.java	ae744cd46b0c0088e8f9a838b33093b5e48130b3	m3/search/src/main/java/jdk/m3/search/M3ReciprocalRankFusion.java	ba77dbcd7631826b
+main	com/synexia/fastsearch/knowledge/index/HybridSearchOptions.java	02d974bd9d0e9ada13df4c86045a8cc243ae0f67	m3/search/src/main/java/jdk/m3/search/M3HybridSearchOptions.java	418d3971cb7209eb
+main	com/synexia/fastsearch/knowledge/index/PreparationCache.java	1634b9e6b47f4a6c0366799154e58bac24a8f729	m3/search/src/main/java/jdk/m3/search/M3PreparationCache.java	daf03a973b5e1970
+main	com/synexia/fastsearch/knowledge/index/QueryPreparationStats.java	48e4c83b7df6dd557d11ad86bbb1b3d1d921ea92	m3/search/src/main/java/jdk/m3/search/M3QueryPreparationStats.java	a41e92205bca5057
+main	com/synexia/fastsearch/problem/PairSumSearch.java	aea33eb852701b520149e9844a10792948dccd6e	m3/search/src/main/java/jdk/m3/search/M3PairSumSearch.java	068667d3bb9c1965
+main	com/synexia/fastsearch/problem/PairSumJni.java	63b24396343ac14733b0e2a83ae1d6d00ac5ad3f	m3/search/src/main/java/jdk/m3/search/M3PairSumJni.java	ea732f58c8256592
+test	com/synexia/fastsearch/knowledge/index/HybridSearchKernelChecks.java	ab43c5d55178b9e4a4756f71d7dfa4f7fe45141b	m3/search/src/test/java/jdk/m3/search/HybridSearchKernelChecks.java	b7ad7df084a8b069
+test	com/synexia/fastsearch/knowledge/index/HybridSearchKernelTest.java	dc2bcb638e11f9384d8b707803fc449e87e8b537	m3/search/src/test/java/jdk/m3/search/HybridSearchKernelTest.java	d940feb98a8f1098
+test	com/synexia/fastsearch/problem/PairSumJniTest.java	41ca8fa29406f8991c4637820c0c125d212df489	m3/search/src/test/java/jdk/m3/search/PairSumJniTest.java	2b534aa239fec728
+test	com/synexia/fastsearch/problem/PairSumSearchTest.java	0f9ffc69c85dc78c67b15d5541124118a487ebad	m3/search/src/test/java/jdk/m3/search/PairSumSearchTest.java	9694a4d934a10a4a
+test	recipe-crates/problem-pair-sum-jni-20261103/com/synexia/fastsearch/problem/PairSumParityDriver.java	c148f06b684a29d9b2fd91071085486e18f983c6	m3/search/src/test/java/jdk/m3/search/PairSumParityDriver.java	c5d2bfb2791a4dd4
+native	pair_sum_search.c	83409f7dd632a30c6e36e1f893341dcc00293f0a	m3/search/src/main/native/pair_sum_search.c	8ecb8aba81224766

@@ -1,0 +1,10 @@
+H:\m3-scratch\lib-intake\batch\re2j\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.re2j {
+          ^
+H:\m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\PatternSyntaxException.java:14: warning: [serial] serializable class PatternSyntaxException has no definition of serialVersionUID
+public class PatternSyntaxException extends RuntimeException {
+       ^
+H:\m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Parser.java:45: warning: [serial] serializable class Stack has no definition of serialVersionUID
+  private static class Stack extends ArrayList<Regexp> {
+                 ^
+3 warnings

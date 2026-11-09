@@ -1,0 +1,13 @@
+artifact	purpose
+ACTION_QUEUE.tsv	Audit metadata/provenance only; not source delivery
+CHRONOLOGY.tsv	Audit metadata/provenance only; not source delivery
+FINAL_REPORT.md	Audit metadata/provenance only; not source delivery
+OUTPUT_CONTRACT.tsv	Audit metadata/provenance only; not source delivery
+PROVENANCE.tsv	Audit metadata/provenance only; not source delivery
+PR_METADATA.json	Audit metadata/provenance only; not source delivery
+RECIPE_BINDINGS.tsv	Audit metadata/provenance only; not source delivery
+RUN_CONTEXT.tsv	Audit metadata/provenance only; not source delivery
+SOURCE_MANIFEST.sha256	Audit metadata/provenance only; not source delivery
+STATUS.tsv	Audit metadata/provenance only; not source delivery
+TASK.md	Audit metadata/provenance only; not source delivery
+VERIFY_CONTRACT.tsv	Audit metadata/provenance only; not source delivery

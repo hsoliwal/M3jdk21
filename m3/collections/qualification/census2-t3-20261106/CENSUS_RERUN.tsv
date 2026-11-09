@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Census pass-2 rows of group T3 (leaf P2-098, tests part; S:/m3-scratch/eb-conv/census2 CRATE_STATUS.tsv, pins com.synexia develop d5ad5090d87e / M3JDK master c4e268d495a0) re-checked on this branch's base, M3JDK master 2d8273c6ad55.
+leaf	crate	row	census_status	recheck_on_base	disposition
+P2-098	m3jdk21-20261019	M3FilteredCursorReadinessSelfTest	NO_OWNER (new test; excluded hit: retained variant pr1463)	name absent from compiled roots; lane-45 chain: NEW, clean; runs on the owners: FAIL (74 distinct checks over 4 modes)	HOLD_OWNER_EDIT
+P2-098	m3jdk21-20261019	M3FilteredCursorReadinessTest	NO_OWNER (new test)	wrapper of the self test: fails with it	HOLD_OWNER_EDIT
+P2-098	m3jdk21-20261019	M3SdkSortedContractRecipe	NO_OWNER	lane 45: NO_START (master's copy evolved)	not T3 (owner review)
+P2-098	m3jdk21-20261019	M3GvasLookupIndexContractTest	NO_OWNER	lane 45: NO_START; m3/core	not T3 (owner review)
+P2-098	m3jdk21-20261019	M3TokenMatcherExecutionTest	NO_OWNER	java.base jtreg path test/jdk/jdk/internal/mindex	not T3 (HOLD_SCOPE)

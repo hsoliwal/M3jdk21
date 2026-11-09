@@ -1,0 +1,4 @@
+$ ["nm", "-D", "--defined-only", "/workspace/scratch/f8287c652798/proof/native-collections/lib/libm3_collections_pathmask.so"]
+0000000000002290 T Java_com_m3_collections_M3IndexPathMasks_selectNative
+
+EXIT=0

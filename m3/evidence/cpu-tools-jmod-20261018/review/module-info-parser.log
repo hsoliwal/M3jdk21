@@ -1,0 +1,6 @@
+JavaParser=file:/tmp/m3-maven-repository/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar
+COUNT=1 units=1 errors=0
+UNIT org.openrewrite.java.tree.J$CompilationUnit src/mod0/module-info.java text=module example.module0 { }<LF>
+COUNT=2 units=2 errors=0
+UNIT org.openrewrite.java.tree.J$CompilationUnit src/mod0/module-info.java text=module example.module0 { }<LF>
+UNIT org.openrewrite.java.tree.J$CompilationUnit src/mod1/module-info.java text=module example.module1 { }<LF>

@@ -1,0 +1,11 @@
+--- sdk-001/qualify.py
++++ sdk-002/qualify.py
+@@ -38,7 +38,7 @@
+     module = crate.parent.parent
+     paths = [crate / name for name in (
+         'pom.xml', 'phases.tsv', 'SOURCE_SEALS.json', 'prepare_packet.py',
+-        'apply_receiver.py', 'verify_sources.py', 'qualify.py')]
++        'apply_receiver.py', 'verify_sources.py', 'qualify.py', 'select_supported_successor.py')]
+     paths += files(crate / 'src') + files(crate / 'preimages') + files(crate / 'attribution')
+     paths += [module / 'src/main/java/com/synexia/rewrite' / name for name in (
+         'M3HashPinnedJavaSnapshotRecipe.java', 'M3HashPinnedTextSnapshotRecipe.java',

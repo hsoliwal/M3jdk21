@@ -1,0 +1,22 @@
+{
+  "schema": "M3_HOTSPOT_CACHE_BUILD_V1",
+  "phase": "HOTSPOT_ONLY_NOT_IMAGE_PROOF",
+  "source_head_at_configure": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "hotspot_git_tree": "afaa42082ed148944e52591d8ab43960890c8d39",
+  "build_root": "/dev/shm/m3-combined-image-f8287/build",
+  "command": [
+    "make",
+    "hotspot",
+    "JOBS=2",
+    "MAX_JOBS=2"
+  ],
+  "configure_exit_code": 0,
+  "configure_console_sha256": "b4f51d3ceb67423ef265e54f9bd48017bef763277156f8bdd0f0cc15c0a3a588",
+  "spec_sha256": "a2d8ede67fbc4365d9418dbadea9a6c31159babf4b4d6e2117f269552fc56ee5",
+  "start_utc": "2026-10-18T12:24:45Z",
+  "minimum_shm_free_bytes": 314572800,
+  "minimum_memory_available_bytes": 367001600,
+  "full_image_started": false,
+  "java_base_started": false,
+  "pid": 6
+}

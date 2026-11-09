@@ -1,0 +1,23 @@
+{
+  "schema" : "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
+  "engine" : "com.m3.rewrite.jmod.M3ModuleDescriptorRecipe",
+  "sdk_version" : "8.17.1",
+  "kind" : "descriptor",
+  "crate" : "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-candidate-001/lucene/DEPENDENCY_DESCRIPTOR_MANIFEST.tsv",
+  "targets" : 8,
+  "first_application_changes" : 8,
+  "fixed_point_changes" : 0,
+  "drift_refusals" : 1,
+  "duplicate_refusals" : 1,
+  "missing_refusals" : 0,
+  "source_sha256" : {
+    "m3-jmod-descriptors/com.ibm.icu/module-info.java" : "df01295767bcb7c8e8db7ab5d161c8841a1f63a052111ff24e43f9ff4c05e971",
+    "m3-jmod-descriptors/morfologik.ukrainian.search/module-info.java" : "cd4722c432169c82781357d2acd6b878b0c8c181fd4c41e3e427358b0aac7a27",
+    "m3-jmod-descriptors/noggit/module-info.java" : "86991e29af13e3874219e4fa53ee3d3cc96ee899cc6868e8f5db7794012a008b",
+    "m3-jmod-descriptors/org.antlr.antlr4.runtime/module-info.java" : "dfb514cefa54add5fa5b080c1332f633630572fdcb27b2392ec01c683432337e",
+    "m3-jmod-descriptors/org.carrot2.morfologik.polish/module-info.java" : "d92d298101a9ee9e0fe36d3ee5eaeada955541109024c285faea3ed07c197013",
+    "m3-jmod-descriptors/org.locationtech.jts/module-info.java" : "6d97c4496cf6b1f0534a58edc3b9f75df4d8c8e150e20911b63859c6f7390527",
+    "m3-jmod-descriptors/s2.geometry.library.java/module-info.java" : "ebe36a86fc8eabb18e49a1862381e02a8eeb58a8fbd40e82f245bec2a952743e",
+    "m3-jmod-descriptors/spatial4j/module-info.java" : "a410bf248ac58810fbbb6586810227ce51003730260d97a8e6369a3293567b88"
+  }
+}

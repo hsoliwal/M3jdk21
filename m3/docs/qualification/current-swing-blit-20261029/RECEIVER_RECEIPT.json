@@ -1,0 +1,210 @@
+{
+  "schema": "M3JDK21_CURRENT_SWING_BLIT_RECEIVING_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "status": "DRAFT_RESULT_RECEIVING_COMPONENT_PROOF_ONLY",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "baseBranch": "master",
+    "baseCommit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+    "baseTree": "e7a32c2c567c8cb88908fde74532550f99f2006b",
+    "receiptPath": "m3/docs/qualification/current-swing-blit-20261029/RECEIVER_RECEIPT.json",
+    "receiptPreimage": "ABSENT_HTTP_404",
+    "agentsBlob": "b1f5d55d96b18cece4452cca2383669f52564f35"
+  },
+  "outputs": [
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/JViewport.java",
+      "recipeId": "com.synexia.rewrite.CurrentSwingBlit20261029",
+      "dataset": "swing-current-blit-20261029",
+      "manifestPath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/swing-current-blit-20261029/manifest.tsv",
+      "manifestSha256": "f36a2fbc4744d2361ecc738a231729932ba7d7006d4bb02acad01007e6bfe33e",
+      "input": {
+        "gitBlob": "7912f81ee54ed9b4d5c7bab735758afc66eb6ec6",
+        "sha256": "1317f510fce11b48d1ab3a289b4e13b22e2cc63e823048f385454ef9bd1bb5cb"
+      },
+      "output": {
+        "gitBlob": "3e8b1e4a82f134c4d3d98732d3a9ecbb7ab16de9",
+        "sha256": "e6e3ae3b05e0d9e65331ab7ed8a51e39e0f2f6aa89d303b82264976aa8b175b4",
+        "bytes": 68013
+      },
+      "manifestGitBlob": "a7f900cc50b3a6f995a42668d7207a8be3668be2",
+      "descriptorPath": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/swing-current-blit-20261029.yml",
+      "descriptorGitBlob": "514a3fca175feacfb9e957068900cef7f4b1cf5a"
+    },
+    {
+      "path": "test/jdk/javax/swing/JViewport/CurrentSwingBlit.java",
+      "recipeId": "com.synexia.rewrite.CurrentSwingBlitTests20261029",
+      "dataset": "swing-current-blit-tests-20261029",
+      "manifestPath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/swing-current-blit-tests-20261029/manifest.tsv",
+      "manifestSha256": "1624a1fa3c70ab229725fd27991e6d1052af25f8efce0a09b3d257fa0ffc4539",
+      "input": "ABSENT",
+      "output": {
+        "gitBlob": "e8b4a42256904d379fa38c44750d54ee76dd8271",
+        "sha256": "2a5abd28c8bceb0dde53093b1960778e12103dbeb8a1a139b203b3e9c10830ce",
+        "bytes": 5046
+      },
+      "manifestGitBlob": "77e6a7e86cbea5936dad05356eccb1c1c42de0a7",
+      "descriptorPath": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/swing-current-blit-tests-20261029.yml",
+      "descriptorGitBlob": "487b0b08ee75d23a546282ad49b7feca1d8f1e83"
+    }
+  ],
+  "canonicalEvidence": [
+    {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/viewport-presentation-20261021/evidence/CurrentSwingBlit/SDK_EXECUTION.json",
+      "sha256": "2a697db06dfbe0880a3f848ae3f8dd3a3ea5a5660577574a30baf7759bb90834"
+    },
+    {
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/viewport-presentation-20261021/evidence/CurrentSwingBlit/owner-first/QUALIFICATION.json",
+      "sha256": "ffdaa46c97486d5561e4d1b25dd12cb077f743d6053b915bba855b4f842fe1a3"
+    }
+  ],
+  "execution": {
+    "java": "21.0.12+8-1-24.04-Ubuntu",
+    "maven": "3.9.9",
+    "openrewrite": "8.17.1",
+    "sdkJUnit": {
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ownerJUnit": [
+      {
+        "variant": "baseline",
+        "mode": "mixed",
+        "tests": 4,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "variant": "candidate",
+        "mode": "mixed",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "variant": "candidate",
+        "mode": "interpreted",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ],
+    "fixedPointAndDriftRefusal": "PASS_ACTUAL_SDK_EXECUTION",
+    "proofScope": "COMPONENT_BEHAVIOR_PASS_STRICT_OWNER_WARNING_GATE_OPEN",
+    "ownerTest": "com.synexia.viewport.SwingViewportTest",
+    "productRegression": [
+      {
+        "variant": "baseline",
+        "case": "horizontal",
+        "exit": 1
+      },
+      {
+        "variant": "baseline",
+        "case": "vertical",
+        "exit": 1
+      },
+      {
+        "variant": "baseline",
+        "case": "cartesian",
+        "exit": 1
+      },
+      {
+        "variant": "baseline",
+        "case": "callbacks",
+        "exit": 0
+      },
+      {
+        "variant": "candidate",
+        "mode": "mixed",
+        "cases": 4,
+        "cartesian_combinations": 3600,
+        "exit": 0
+      },
+      {
+        "variant": "candidate",
+        "mode": "interpreted",
+        "cases": 4,
+        "cartesian_combinations": 3600,
+        "exit": 0
+      }
+    ],
+    "strictOwnerCompile": "FAIL_INHERITED_THIS_ESCAPE_BASELINE_AND_CANDIDATE",
+    "strictTestCompile": "PASS",
+    "publicProtectedApiEqual": true,
+    "serializationUidEqual": true,
+    "historicalAndCurrentRecipeCrossRefusal": "PASS",
+    "executionOrder": "Serial/two-worker/serial exact-output agreement",
+    "runtimeScope": "Actual current JViewport compiled and patched into a complete Java21 toolchain; not a source-built full M3JDK21 image"
+  },
+  "productBoundary": {
+    "payloads": "Executed product owners, target regression and passive receipt",
+    "recipeAndImprovementMemoryOwner": "hsoliwal/com.synexia",
+    "recipeRuntimeDependency": false,
+    "nativeOrHostedAcceptanceClaim": false,
+    "completeToolkitSupersetClaim": false,
+    "mergeOrReleaseAdmission": false
+  },
+  "namingDisposition": {
+    "status": "EXPLICIT_SAME_OWNER_CORRECTION_EXCLUSION_DEFER_FOR_RECEIVING_REVIEW",
+    "owner": "javax.swing.JViewport",
+    "typePackageModuleAndPublicApiRelocation": false,
+    "canonicalMappingPath": "m3/docs/name-mapping.json",
+    "canonicalMappingBlob": "770f5695a39e03512afa78c55b4e2cf781d1f6a5",
+    "existingJViewportMigrationRow": false,
+    "rationale": "Bounded correction of existing computeBlit integer-extrema admission; no internal-owner migration or JDK-backend promotion. Full capability mapping and installed-JDK acceptance remain deferred. This receipt does not create a second naming registry.",
+    "currentNamingChecker": {
+      "status": "PASS",
+      "command": "python3 -B m3/tooling/name-contract/check.py",
+      "exactCurrentReadClosureFiles": 10,
+      "queued": 4,
+      "qualifiedJdkPromotions": 0,
+      "productSourceEdits": 0
+    },
+    "phase": "STRING_ACTIVE_UNCHANGED"
+  },
+  "openGates": [
+    {
+      "gate": "strict full JViewport owner -Xlint:all -Werror",
+      "status": "FAIL_SAME_BASELINE_AND_CANDIDATE",
+      "reason": "Inherited constructor this-escape warning; separate diagnostic compiles pass with identical warnings."
+    },
+    {
+      "gate": "source-built M3JDK21",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "full jtreg harness",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "native display/pixels",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "Windows/Cocoa",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "hosted CI",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "comparative CPU/allocation/retained heap/native memory",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "applicable installed-image ABI/JNI/JIT/GC/CDS runtime acceptance",
+      "status": "NOT_RUN"
+    }
+  ],
+  "licenses": "JViewport retains exact current 2020 Oracle/OpenJDK GPL-2.0-only WITH Classpath-exception-2.0 source notice. New first-party target regression and this passive receipt are Apache-2.0.",
+  "canonicalBaseCommit": "2b262532c683f026e121ba7b93fd0c5881d66296",
+  "canonicalDelivery": "Exact delivery commit pinned in accompanying PR; base+manifest/output seals are embedded here"
+}

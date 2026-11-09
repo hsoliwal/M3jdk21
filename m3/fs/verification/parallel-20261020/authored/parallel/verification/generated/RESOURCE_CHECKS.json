@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "case": "local_files",
+      "executor_threads": 8,
+      "limit": 3,
+      "entries": 12,
+      "peak_active_callbacks": 3
+    },
+    {
+      "case": "paused_consumer",
+      "limit": 3,
+      "entries": 30,
+      "delivered": 1,
+      "callbacks_started": 4,
+      "observation_window_ms": 150
+    },
+    {
+      "case": "directory_branches",
+      "executor_threads": 6,
+      "limit": 3,
+      "overlapping_branches": 2
+    }
+  ],
+  "scope": "Finite behavioral fixtures; no heap bound or throughput claim. Provider arrays/archive state are outside admission/result storage bounds."
+}

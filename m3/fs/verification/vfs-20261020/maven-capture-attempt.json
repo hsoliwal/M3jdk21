@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+    "-f",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/pom.xml",
+    "test"
+  ],
+  "java_home": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+  "exit_code": 1,
+  "seconds": 1.4062108993530273,
+  "cmake": null,
+  "pkg_config": null,
+  "sqlite_header_present": false,
+  "native_libraries": [],
+  "scope": "Actual generated POM lifecycle attempt, distinct from Java/image helper"
+}

@@ -1,0 +1,6 @@
+atom	owner	pattern	iop_role	proof
+M3_DEVELOPER_ROOTS	developer_tools.DEVELOPER_ROOTS	Strategy	ExplicitProfile	DeveloperPackTests
+M3_LINK_KIT	copy_link_inputs/verify_link_pins	Adapter	ReadOnlyToolchainInput	Copy/refusal tests and real jlink
+M3_TOOL_PROBE	verify_developer_tools	Pipeline	IndependentRuntimeOracle	11-tool receipts
+M3_PASSWORD_POLICY_PROBE	M3PasswordPolicyCases	ContractTest	FreshVmOracle	28 fresh VM scenarios
+M3_MATERIALIZE	JdkExecutionFollowthrough	CompositeRecipe	CandidateOnly	Real JUnit authored; framework execution blocked

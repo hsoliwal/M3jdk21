@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-compiler-parent-owned</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Compiler Parent-Owned Processor</name>
+  <description>jdk.m3.compiler.parentowned (module org.m3jdk.compiler.parentowned): M3ParentOwnedProcessor, the opt-in
+    JSR-269 annotation processor of jdk.m3.collections.M3ParentOwned that writes the deterministic, conservative
+    META-INF/m3/parent-owned-v1.tsv sidecar (owner, flags, element kind; static reference counts and escape proofs are
+    never fabricated). Never mutates the annotated type; java.compiler and jdk.m3.collections are static, compile-time
+    module dependencies (m3-collections is provided scope: the code under compilation carries it). Pure Java 21.
+    Relocated by recipe (recipe/parent-owned-processor-20261107/relocate.py, RELOCATION_MAP.tsv, PROVENANCE.tsv) from
+    the donor hsoliwal/com.synexia develop eaacff5931ef; the donor's JUnit test runs in the test phase.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <!-- the processor reads M3ParentOwned.class; consumers compiling annotated code already have m3-collections -->
+      <groupId>com.m3</groupId>
+      <artifactId>m3-collections</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <!-- classpath run; the module descriptor is for consumers -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

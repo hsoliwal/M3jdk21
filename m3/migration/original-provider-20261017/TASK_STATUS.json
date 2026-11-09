@@ -1,0 +1,251 @@
+{
+  "schema": "M3_ORIGINAL_MAPPING_PROVIDER_TASK_STATUS_V1",
+  "observedUtc": "2026-10-18 06:02:40 UTC",
+  "fullObjective": "Complete continuous MIndex/MatIndex/SubMIndex migration and java.lang.String RoutesA/B/C; preserve full12-pass specification",
+  "goalActive": true,
+  "storageProtectionActive": true,
+  "localBulkOutput": "HOLD",
+  "scope": "Qualify separate frozen PRE control before receiving provider outputs; retain unchanged provider/CLI and all completion blockers",
+  "sourceBase": "69b5cc602485bd2a7354e1f1b364bd4af06ee241",
+  "receiverBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "sdkTree": "c93b25915d57178bec19458ba9ddc34383d92639",
+  "sdkFiles": 74,
+  "sdkBytes": 1955646,
+  "pinsSha256": "0392e66f35721a0abfabe4a2500e0305bbb9b6b1cc78a7db342fb6bde3278ed5",
+  "targets": {
+    "total": 60,
+    "keep": 54,
+    "change": 2,
+    "add": 4
+  },
+  "plannedGates": {
+    "namedSdkMethods": 11,
+    "mutableStates": 64,
+    "sourceOrders": 2,
+    "custodyNegativeControls": 28,
+    "providerBoundaryMethods": 38,
+    "originalSyntheticMethods": 26,
+    "originalCliReadPaths": 50,
+    "hashObligations": 80,
+    "completionBlockers": 158,
+    "frozenPreFiles": 55,
+    "frozenPreBytes": 795620
+  },
+  "sourceReview": "INDEPENDENT_JAVA_POM_AND_PYTHON_WORKFLOW_REVIEW_CLEAR_SOURCE_ONLY",
+  "execution": "RECIPE_HOSTED_11_28_38_26_PASS; RECEIVED_POST_CHECKOUT_NOT_RUN",
+  "runtimeApplied": false,
+  "canonicalProductionMapApplied": true,
+  "phaseAdvanced": false,
+  "fullMigrationComplete": false,
+  "remaining": [
+    "Diagnose source provenance workflow failure; no executed source gate or readable annotation yet",
+    "Qualify independent frozen PRE successor, then receive exact emitted provider/mapping with unchanged original CLI proof; production mapping remains unchanged",
+    "Restore omitted recipe bodies through current-owner contract checks",
+    "Complete whole source and semantic dependency inventory",
+    "Route A / safe Route B / matched complete Route C Java-JNI-runtime proofs",
+    "Performance and heap/native/mapped retention benchmarks",
+    "RX7 source and receiver byte-array overloads clone before size refusal; fix through guarded successor and bounded-memory discriminator",
+    "Restore missing ASCII producer successor source packet and execute its two ordered recipe stages plus complete owner tests"
+  ],
+  "failedWorkflowAttempt": {
+    "head": "404a29f3494ccf7fcaa35b982895d7aec4ae258f",
+    "run": 39029940546,
+    "status": "completed",
+    "conclusion": "failure",
+    "createdJobs": 0,
+    "executedSteps": 0,
+    "rootCause": "runner context used in jobs.<job_id>.env is unavailable; invalid workflow annotation reports Unrecognized named-value: runner."
+  },
+  "correctedServerAdmission": "WORKFLOW_EXECUTED; SDK_COMPILE_FAILED_MISSING_ANNOTATIONS",
+  "correctionEvidence": "workflow-context-correction.json",
+  "executedBaselines": [
+    {
+      "run": 39030437080,
+      "job": 117389630148,
+      "conclusion": "failure",
+      "logSha256": "c610d5d07c9c9b9c7c652084559587eab9d0c2fd1290a76882f88b4eb451c0b0"
+    },
+    {
+      "run": 39030440322,
+      "job": 117389639089,
+      "conclusion": "failure",
+      "logSha256": "530ee2859c03c3ddf61ec4ed31a3f4ffed5bc33faaa7cfc3443013407fdb50a5"
+    }
+  ],
+  "baselineCause": "Actual release21 javac reads OpenRewrite API Language annotations absent from compile classpath;5warnings are rejected by existing -Werror. Custody22 passed but SDK JUnit/provider/original CLI never qualified.",
+  "classpathCorrection": {
+    "gate": "8a74df4eef1650a76f0c9a38734966a6eca081e8",
+    "evidence": "annotations-classpath-20261017/execution-evidence.json",
+    "donor": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+    "scope": "Existing Maven recipe authoring input only; generated migration resources unchanged",
+    "candidateExecution": "PASS_IN_EXACT_RECEIVER_HOSTED_MAVEN"
+  },
+  "localControlOutputAllowanceRemaining": 0,
+  "currentMappingCorrection": {
+    "scopeAmendment": "c3f75f26d69ad2fc2d287a15579423adb4601960",
+    "currentBefore": "986147e2df24ef25076d451c49782d8e7e354a11",
+    "reviewedAfter": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
+    "preservedTopMappings": 59,
+    "optionalModuleDeclarationsRetained": 1,
+    "migrationRecordsBefore": 56,
+    "migrationRecordsAfter": 60,
+    "sourceEvidence": "annotations-classpath-20261017/current-mapping-evidence.json",
+    "execution": "ACTUAL_RECIPE_OUTPUT_VALIDATED_BY_UNCHANGED_CLI; PRODUCTION_MAP_NOT_APPLIED"
+  },
+  "latestExecutedBaseline": {
+    "receiverHead": "26f61cbe6da082cdfa7ccbfbd3a51067924dc7ec",
+    "run": 39045717868,
+    "job": 117433909668,
+    "sdkCompile": "PASS",
+    "sdkJUnit": "10_PASS_0_FAILURE_ERROR_SKIP",
+    "custodyControls": "22_PASS",
+    "boundaryTests": "38_PASS",
+    "genuineProvider": "FAIL: wheel dependency metadata mismatch",
+    "originalCli": "NOT_RUN",
+    "artifactId": 12110657726,
+    "artifactZipSha256": "715f3d5a5fe2983d635a8abe9f3b1f246d6a6e1f25da7dae6489798d4581d888"
+  },
+  "currentCorrection": {
+    "evidence": "wheel-metadata-20261018/execution-evidence.json",
+    "receiverAudit": "wheel-metadata-20261018/receiver-current-audit.json",
+    "keptSdkFiles": 67,
+    "changedSdkFiles": 5,
+    "namedBoundaryMethods": 38,
+    "newRawMetadataProfiles": 2,
+    "originalCliBytesChanged": false,
+    "productionMappingChanged": false,
+    "providerInstalled": true,
+    "hostedEvidence": "wheel-metadata-20261018/hosted-qualification-20261018.json"
+  },
+  "latestQualifiedProvider": {
+    "head": "924b88d8979ac5f904c88e7c33d7cec2e2917e3e",
+    "sourceHead": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
+    "run": 39099435918,
+    "job": 117592489401,
+    "conclusion": "success",
+    "evidence": "wheel-metadata-20261018/hosted-qualification-20261018.json"
+  },
+  "baselineProjection": {
+    "foundation": "3f3508d22b5d3ad37aa2f5a45a1e469e904a80da",
+    "evidence": "baseline-projection-20261018/source-review.json",
+    "frozenPreManifestSha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
+    "beforeAfterProvider": true,
+    "sourceReview": "CLEAR_SOURCE_ONLY",
+    "execution": "PASS_AT613e5ff4; RECEIVED_POST_CHECKOUT_REQUALIFICATION_PENDING"
+  },
+  "canonicalSourceCommit": "f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b",
+  "receivingScope": "DRAFT_BRANCH_EXACT_FIVE_DATA_OUTPUTS_PLUS_QUALIFIED_SDK_AND_EXISTING_WORKFLOW; DEFAULT_UNPROMOTED",
+  "hostedQualification": {
+    "schema": "M3_PROVIDER_FROZEN_PRE_HOSTED_QUALIFICATION_V1",
+    "observedUtc": "2026-10-18 06:01:21 UTC",
+    "repository": "hsoliwal/M3jdk21",
+    "head": "613e5ff4385146ee0326ca4a5820fd11bed793e1",
+    "sourceHead": "f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b",
+    "run": 39102078256,
+    "job": 117600228618,
+    "conclusion": "SUCCESS",
+    "sdkTree": "c93b25915d57178bec19458ba9ddc34383d92639",
+    "pinsSha256": "0392e66f35721a0abfabe4a2500e0305bbb9b6b1cc78a7db342fb6bde3278ed5",
+    "artifact": {
+      "id": 12127665194,
+      "zipBytes": 161703,
+      "zipSha256": "1333ef83ab1c7a850ff71516439b99e5daf2adc6d8d514ae4cf83a4e70a045f8",
+      "members": 41,
+      "expandedBytes": 155679,
+      "inventoryPinsVerified": 38,
+      "readback": "TWO_BOUNDED_RAM_READS_ALL_INVENTORY_PINS_AND_XML_VERIFIED"
+    },
+    "junit": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "custodyControls": 28,
+    "providerBoundaries": 38,
+    "originalMethods": 26,
+    "emittedTargets": 60,
+    "mutableStates": 64,
+    "sourceOrders": 2,
+    "postAdded": 4,
+    "postChanged": 2,
+    "frozenPre": {
+      "bytes": 795620,
+      "files": 55,
+      "independentOfInstalledPost": true,
+      "manifestSha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
+      "preInventorySha256": "d2a4133059aca61b7c001951b9d9df8cbdcac108bd59c5403c8d3131c7cea0ef",
+      "root": "/home/runner/work/_temp/m3-original-provider-39102078256-1/baseline",
+      "beforeAfterByteIdentical": true,
+      "recipeBeforeSha256": "cf5f6b1a66b29d922335382f25a5f870a7cc2a34dd02f4e76686f4960c765edf",
+      "recipeAfterSha256": "cf5f6b1a66b29d922335382f25a5f870a7cc2a34dd02f4e76686f4960c765edf"
+    },
+    "cliCodes": {
+      "baseline-validate": 1,
+      "baseline-report": 1,
+      "baseline-complete": 1,
+      "current-validate": 0,
+      "current-report": 0,
+      "current-complete": 2
+    },
+    "completionBlockers": 158,
+    "currentCompleteStderrSha256": "5013590c325b4b7eb3809da39e1704474d2eee73baedc7a12cb899be42f5479f",
+    "providerGenuine": true,
+    "releasedDistributions": 6,
+    "releasedFiles": 132,
+    "nativePayload": {
+      "kind": "PYTHON_RPDS_NOT_M3_JNI",
+      "bytes": 1060936,
+      "sha256": "627491614eecdb6d41f8d569d20e60545d4b3c5cd59e4ccadc275a940df73336"
+    },
+    "providerOutputBytes": 14029908,
+    "providerBudgetBytes": 67108864,
+    "outerCommands": 6,
+    "allReapedAndOwnedSessionAbsent": true,
+    "runtimeJniQualified": false,
+    "matchedJdkQualified": false,
+    "performanceRetentionQualified": false,
+    "phaseAdvanced": false,
+    "migrationComplete": false,
+    "goalActive": true,
+    "formalAutoreviewHelper": "NOT_RUN_STORAGE_HOLD",
+    "cliCommandTerminationsNull": true
+  },
+  "qualifiedDataOutputs": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "gitBlob": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
+      "sha256": "1c396776ac7313695609384b5ad3abc98f15f4bde48af3bb26915f933d098663",
+      "bytes": 441047,
+      "kind": "CHANGE"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/bootstrap.py",
+      "gitBlob": "ae3b685d8f3731ad38ba59135a9c399c0a416d20",
+      "sha256": "3875e91c82afd6712a3cc50f76cd7f317721839f69870c4c7dce0cfe8f455a34",
+      "bytes": 42501,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
+      "gitBlob": "d3d454d9a7891585d665f58b404989820ea751a4",
+      "sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
+      "bytes": 399438,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/test_bootstrap.py",
+      "gitBlob": "537e6701ebde8e064d69425c5dd144df614577d3",
+      "sha256": "301727f395b772328c7e311fd0a7562deeb1ad938c9f4d4f0fc912eb83c39456",
+      "bytes": 29770,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/wheels.lock.json",
+      "gitBlob": "4a14a37652fc32b5251c9e99387e737b21852ebd",
+      "sha256": "808e9471ebab14659401fd592538df7b0096c166c3410014e43d21747918af50",
+      "bytes": 10099,
+      "kind": "ADD"
+    }
+  ]
+}

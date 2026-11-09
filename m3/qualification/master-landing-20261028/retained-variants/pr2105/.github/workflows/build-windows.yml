@@ -1,0 +1,207 @@
+#
+# Copyright (c) 2022, 2023, Oracle and/or its affiliates. All rights reserved.
+# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+#
+# This code is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 only, as
+# published by the Free Software Foundation.  Oracle designates this
+# particular file as subject to the "Classpath" exception as provided
+# by Oracle in the LICENSE file that accompanied this code.
+#
+# This code is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# version 2 for more details (a copy is included in the LICENSE file that
+# accompanied this code).
+#
+# You should have received a copy of the GNU General Public License version
+# 2 along with this work; if not, write to the Free Software Foundation,
+# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+# or visit www.oracle.com if you need additional information or have any
+# questions.
+#
+
+name: 'Build (windows)'
+
+on:
+  workflow_call:
+    inputs:
+      platform:
+        required: true
+        type: string
+      extra-conf-options:
+        required: false
+        type: string
+      make-target:
+        required: false
+        type: string
+        default: 'product-bundles test-bundles'
+      debug-levels:
+        required: false
+        type: string
+        default: '[ "debug", "release" ]'
+      msvc-toolset-version:
+        required: true
+        type: string
+      msvc-toolset-architecture:
+        required: true
+        type: string
+      msvc-component-version:
+        required: false
+        type: string
+        default: '14.29.16.11'
+      configure-arguments:
+        required: false
+        type: string
+      make-arguments:
+        required: false
+        type: string
+
+env:
+  # These are needed to make the MSYS2 bash work properly
+  MSYS2_PATH_TYPE: minimal
+  CHERE_INVOKING: 1
+
+jobs:
+  build-windows:
+    name: build
+    runs-on: windows-2022
+    defaults:
+      run:
+        shell: bash
+
+    strategy:
+      fail-fast: false
+      matrix:
+        debug-level: ${{ fromJSON(inputs.debug-levels) }}
+        include:
+          - debug-level: debug
+            flags: --with-debug-level=fastdebug
+            suffix: -debug
+
+    steps:
+      - name: 'Checkout the JDK source'
+        uses: actions/checkout@v5
+
+      - name: 'Get MSYS2'
+        uses: ./.github/actions/get-msys2
+
+      - name: 'Get the BootJDK'
+        id: bootjdk
+        uses: ./.github/actions/get-bootjdk
+        with:
+          platform: windows-x64
+
+      - name: 'Get JTReg'
+        id: jtreg
+        uses: ./.github/actions/get-jtreg
+
+      - name: 'Get GTest'
+        id: gtest
+        uses: ./.github/actions/get-gtest
+
+      - name: 'Check toolchain installed'
+        id: toolchain-check
+        shell: pwsh
+        env:
+          M3_MSVC_COMPONENT_VERSION: ${{ inputs.msvc-component-version }}
+          M3_MSVC_ARCHITECTURE: ${{ inputs.msvc-toolset-architecture }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:M3_MSVC_COMPONENT_VERSION -notmatch '^\d+\.\d+\.\d+\.\d+$') {
+            throw 'Invalid MSVC component version'
+          }
+          $architecture = switch ($env:M3_MSVC_ARCHITECTURE.ToLowerInvariant()) {
+            'x86.x64' { 'x86.x64' }
+            'arm64' { 'ARM64' }
+            default { throw 'Unsupported MSVC component architecture' }
+          }
+          $component = "Microsoft.VisualStudio.Component.VC.$($env:M3_MSVC_COMPONENT_VERSION).$architecture"
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
+          if (!(Test-Path -LiteralPath $vswhere -PathType Leaf)) {
+            throw 'Visual Studio discovery tool is missing'
+          }
+          $installations = @(& $vswhere -latest -products '*' -version '[17.0,18.0)' -property installationPath)
+          if ($LASTEXITCODE -ne 0 -or $installations.Count -ne 1 -or [string]::IsNullOrWhiteSpace($installations[0])) {
+            throw 'Exactly one selected Visual Studio 2022 installation is required'
+          }
+          $installationPath = $installations[0].Trim()
+          $matchingInstallations = @(& $vswhere -products '*' -version '[17.0,18.0)' -requires $component -property installationPath)
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Visual Studio component discovery failed'
+          }
+          $installed = $matchingInstallations -contains $installationPath
+          "installation-path=$installationPath" >> $env:GITHUB_OUTPUT
+          "component-id=$component" >> $env:GITHUB_OUTPUT
+          "toolchain-installed=$($installed.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          # Bind configure's existing VS2022 discovery to this selected instance.
+          "VS170COMNTOOLS=$(Join-Path $installationPath 'Common7\Tools')" >> $env:GITHUB_ENV
+          Write-Host "Selected Visual Studio 2022: $installationPath; $component installed: $installed"
+
+      - name: 'Install toolchain and dependencies'
+        if: steps.toolchain-check.outputs.toolchain-installed != 'true'
+        shell: pwsh
+        env:
+          M3_VS_INSTALLATION_PATH: ${{ steps.toolchain-check.outputs.installation-path }}
+          M3_MSVC_COMPONENT_ID: ${{ steps.toolchain-check.outputs.component-id }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $installerDirectory = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer'
+          $installer = Join-Path $installerDirectory 'vs_installer.exe'
+          $vswhere = Join-Path $installerDirectory 'vswhere.exe'
+          if (!(Test-Path -LiteralPath $installer -PathType Leaf)) {
+            throw 'Visual Studio Installer is missing'
+          }
+          if ([string]::IsNullOrWhiteSpace($env:M3_VS_INSTALLATION_PATH) -or
+              $env:M3_VS_INSTALLATION_PATH.Contains('"') -or
+              $env:M3_MSVC_COMPONENT_ID -notmatch '^Microsoft\.VisualStudio\.Component\.VC\.\d+\.\d+\.\d+\.\d+\.(x86\.x64|ARM64)$') {
+            throw 'Invalid selected Visual Studio installation or component'
+          }
+          $arguments = @('modify', '--quiet', '--norestart', '--installPath',
+            ('"' + $env:M3_VS_INSTALLATION_PATH + '"'), '--add', $env:M3_MSVC_COMPONENT_ID)
+          $process = Start-Process -FilePath $installer -ArgumentList $arguments -Wait -PassThru
+          if ($process.ExitCode -notin @(0, 3010)) {
+            throw "Visual Studio component installation failed: $($process.ExitCode)"
+          }
+          $matchingInstallations = @(& $vswhere -products '*' -version '[17.0,18.0)' -requires $env:M3_MSVC_COMPONENT_ID -property installationPath)
+          if ($LASTEXITCODE -ne 0 -or $matchingInstallations -notcontains $env:M3_VS_INSTALLATION_PATH) {
+            throw 'The selected Visual Studio 2022 instance still lacks the required component'
+          }
+          Write-Host "Verified installed component: $env:M3_MSVC_COMPONENT_ID (installer exit $($process.ExitCode))"
+
+      - name: 'Configure'
+        run: >
+          bash configure
+          --with-conf-name=${{ inputs.platform }}
+          ${{ matrix.flags }}
+          --with-version-opt=${GITHUB_ACTOR}-${GITHUB_SHA}
+          --with-boot-jdk=${{ steps.bootjdk.outputs.path }}
+          --with-jtreg=${{ steps.jtreg.outputs.path }}
+          --with-gtest=${{ steps.gtest.outputs.path }}
+          --with-msvc-toolset-version=${{ inputs.msvc-toolset-version }}
+          --with-jmod-compress=zip-1
+          ${{ inputs.extra-conf-options }} ${{ inputs.configure-arguments }} || (
+          echo "Dumping config.log:" &&
+          cat config.log &&
+          exit 1)
+        env:
+          # We need a minimal PATH on Windows
+          # Set PATH to "", so just GITHUB_PATH is included
+          PATH: ''
+        shell: env /usr/bin/bash --login -eo pipefail {0}
+
+      - name: 'Build'
+        id: build
+        uses: ./.github/actions/do-build
+        with:
+          make-target: '${{ inputs.make-target }} ${{ inputs.make-arguments }}'
+          platform: ${{ inputs.platform }}
+          debug-suffix: '${{ matrix.suffix }}'
+
+      - name: 'Upload bundles'
+        uses: ./.github/actions/upload-bundles
+        with:
+          platform: ${{ inputs.platform }}
+          debug-suffix: '${{ matrix.suffix }}'

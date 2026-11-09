@@ -1,0 +1,164 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.a3;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+/** Compact CLI for A3 = Atomize -> Patternize -> Absorb. */
+public final class A3 {
+
+    private A3() {
+    }
+
+    public static void main(String[] args) throws Exception {
+        if (args.length == 0) {
+            usage();
+            throw new IllegalArgumentException("missing A3 command");
+        }
+
+        Args options = Args.parse(args);
+        switch (args[0]) {
+            case "inv" ->
+                    A3Inv.write(
+                            options.root(),
+                            options.out("m3/build/a3/inventory.tsv"));
+            case "alg" ->
+                    A3Alg.write(
+                            options.root(),
+                            options.out("m3/build/a3/algorithms.tsv"));
+            case "plan" ->
+                    A3Plan.write(
+                            options.root(),
+                            options.out("m3/build/a3/plan.tsv"));
+            case "work" ->
+                    A3Work.write(
+                            options.root(),
+                            options.inventory(),
+                            options.queue(),
+                            options.out("m3/build/a3/work.tsv"));
+            case "apply" -> {
+                A3M.requireCurrent(options.masteryRoot(), options.mastery());
+                A3Apply.run(
+                        options.root(),
+                        options.out("m3/build/a3/apply"),
+                        options.sources());
+            }
+            case "lab" ->
+                    A3Lab.write(
+                            options.root(),
+                            options.out("m3/build/a3/lab"));
+            case "mastery" ->
+                    A3M.write(
+                            options.root(),
+                            options.out("m3/build/a3/mastery"));
+            default -> {
+                usage();
+                throw new IllegalArgumentException(
+                        "unknown A3 command: " + args[0]);
+            }
+        }
+    }
+
+    private static void usage() {
+        System.err.println(
+                "A3: inv|alg|plan|work|apply|lab|mastery [--root PATH] [--out PATH] "
+                        + "[--inventory PATH] [--queue PATH] [--mastery PATH] "
+                        + "[--mastery-root PATH] [--file PATH ...] [--list PATH]");
+    }
+
+    private record Args(
+            Path root,
+            Path out,
+            Path inventory,
+            Path queue,
+            Path mastery,
+            Path masteryRootOverride,
+            List<String> files,
+            Path list) {
+
+        static Args parse(String[] args) {
+            Path root = Path.of(".");
+            Path out = null;
+            Path inventory = Path.of("m3/build/a3/inventory.tsv");
+            Path queue = Path.of("m3/build/backports/COMPATIBILITY_QUEUE.tsv");
+            Path mastery = Path.of("m3/build/a3/mastery/receipt.tsv");
+            Path masteryRootOverride = null;
+            Path list = null;
+            ArrayList<String> files = new ArrayList<>();
+
+            for (int index = 1; index < args.length; index++) {
+                String key = args[index];
+                if ("--file".equals(key)) {
+                    files.add(requireValue(args, ++index, key));
+                } else if ("--root".equals(key)) {
+                    root = Path.of(requireValue(args, ++index, key));
+                } else if ("--out".equals(key)) {
+                    out = Path.of(requireValue(args, ++index, key));
+                } else if ("--inventory".equals(key)) {
+                    inventory = Path.of(requireValue(args, ++index, key));
+                } else if ("--queue".equals(key)) {
+                    queue = Path.of(requireValue(args, ++index, key));
+                } else if ("--mastery".equals(key)) {
+                    mastery = Path.of(requireValue(args, ++index, key));
+                } else if ("--mastery-root".equals(key)) {
+                    masteryRootOverride =
+                            Path.of(requireValue(args, ++index, key));
+                } else if ("--list".equals(key)) {
+                    list = Path.of(requireValue(args, ++index, key));
+                } else {
+                    throw new IllegalArgumentException(
+                            "unknown A3 option: " + key);
+                }
+            }
+            return new Args(
+                    root,
+                    out,
+                    inventory,
+                    queue,
+                    mastery,
+                    masteryRootOverride,
+                    List.copyOf(files),
+                    list);
+        }
+
+        Path out(String fallback) {
+            return out == null ? Path.of(fallback) : out;
+        }
+
+        Path masteryRoot() {
+            return masteryRootOverride == null ? root : masteryRootOverride;
+        }
+
+        List<String> sources() throws Exception {
+            ArrayList<String> result = new ArrayList<>(files);
+            if (list != null) {
+                Path rootPath = A3Fs.root(root);
+                Path listPath = A3Fs.source(rootPath, list);
+                for (String line :
+                        Files.readAllLines(
+                                listPath,
+                                StandardCharsets.UTF_8)) {
+                    String value = line.strip();
+                    if (!value.isEmpty() && !value.startsWith("#")) {
+                        result.add(value);
+                    }
+                }
+            }
+            return result.stream().distinct().sorted().toList();
+        }
+
+        private static String requireValue(
+                String[] args,
+                int index,
+                String key) {
+            if (index >= args.length) {
+                throw new IllegalArgumentException(
+                        "missing value for " + key);
+            }
+            return args[index];
+        }
+    }
+}

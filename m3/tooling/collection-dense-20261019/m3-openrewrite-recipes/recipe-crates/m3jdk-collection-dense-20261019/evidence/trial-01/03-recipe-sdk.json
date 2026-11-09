@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/workspace/scratch/b37f6ba1283f/memory-residency-20261013/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/0b39bc8b80ec/proof/m2",
+    "-f",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/canonical/synexia-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/pom.xml",
+    "surefire:test",
+    "-Dmaterialize.dir=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/generated"
+  ],
+  "exit": 0,
+  "log_sha256": "02dbcf9fa0c1cc82fe34b593a7df56fd5d9f828eb3447450e55221c2169c7630"
+}

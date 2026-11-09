@@ -1,0 +1,173 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+// Before/after + donor/relocated + reference-model driver of qualification/census-g2-20261106 (template: @PKG@ is the
+// package of M3CowSet/M3CowLongList on the side under test). Seeded ops; every result (value or exception simple name)
+// is printed one per line (the dump) and, on the received side, compared with the JDK CopyOnWriteArraySet /
+// CopyOnWriteArrayList<Long> model; IndexOutOfBoundsException subclasses compare as one family. The scaffold side
+// (before) answers every atom with M3NotYetReceived, which the classifier in differential.sh maps to RECEIVED; a held
+// iterator replay after a refused iterator() repeats that refusal instead of printing none.
+import @PKG@.M3CowLongList;
+import @PKG@.M3CowSet;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.PrimitiveIterator;
+import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.function.Supplier;
+
+public final class M3CowDump {
+    private static long modelled;
+    private static long mismatches;
+
+    private M3CowDump() { }
+
+    private static String run(Supplier<Object> op) {
+        try {
+            Object value = op.get();
+            return value instanceof long[] longs ? Arrays.toString(longs) : String.valueOf(value);
+        } catch (RuntimeException e) {
+            return "EX:" + e.getClass().getSimpleName();
+        }
+    }
+
+    private static String family(String result) {
+        return result.startsWith("EX:") && result.endsWith("IndexOutOfBoundsException") ? "EX:IndexOutOfBounds" : result;
+    }
+
+    private static void line(StringBuilder out, String tag, String got, String model, boolean compare) {
+        out.append(tag).append(" -> ").append(got).append('\n');
+        if (compare && model != null) {
+            modelled++;
+            if (!family(got).equals(family(model)) && ++mismatches <= 5) {
+                System.err.println("MISMATCH " + tag + " got=" + got + " model=" + model);
+            }
+        }
+    }
+
+    private static <T> List<T> list(Iterator<T> iterator) {
+        List<T> out = new ArrayList<>();
+        while (iterator.hasNext()) out.add(iterator.next());
+        return out;
+    }
+
+    private static List<Long> list(PrimitiveIterator.OfLong iterator) {
+        List<Long> out = new ArrayList<>();
+        while (iterator.hasNext()) out.add(iterator.nextLong());
+        return out;
+    }
+
+    private static Object value(Random random) {
+        int pick = random.nextInt(18);
+        return pick == 0 ? null : pick == 1 ? (Object) Integer.MIN_VALUE : pick == 2 ? "s" + random.nextInt(4) : (Object) (random.nextInt(35) - 17);
+    }
+
+    private static void set(StringBuilder out, long ops, long seed, boolean compare) {
+        Random random = new Random(seed);
+        M3CowSet<Object> set = new M3CowSet<>();
+        CopyOnWriteArraySet<Object> model = new CopyOnWriteArraySet<>();
+        line(out, "set descriptor", run(M3CowSet::scaffoldDescriptor), null, false);
+        Iterator<Object> held = null;
+        List<Object> heldModel = null;
+        String heldError = null;
+        for (long i = 0; i < ops; i++) {
+            int op = random.nextInt(9);
+            Object v = value(random);
+            String tag = "set " + i + " " + op + " " + v;
+            switch (op) {
+                case 0, 1 -> line(out, tag, run(() -> set.add(v)), String.valueOf(model.add(v)), compare);
+                case 2 -> line(out, tag, run(() -> set.remove(v)), String.valueOf(model.remove(v)), compare);
+                case 3 -> line(out, tag, run(() -> set.contains(v)), String.valueOf(model.contains(v)), compare);
+                case 4 -> line(out, tag, run(() -> set.size() + ":" + set.isEmpty()), model.size() + ":" + model.isEmpty(), compare);
+                case 5 -> line(out, tag, run(() -> list(set.iterator())), String.valueOf(new ArrayList<>(model)), compare);
+                case 6 -> {
+                    String got = run(() -> set.iterator());
+                    heldError = got.startsWith("EX:") ? got : null;
+                    if (!got.startsWith("EX:")) { held = set.iterator(); heldModel = new ArrayList<>(model); }
+                    line(out, tag, got.startsWith("EX:") ? got : "held", got.startsWith("EX:") ? null : "held", compare);
+                }
+                case 7 -> {
+                    Iterator<Object> h = held;
+                    String got = h == null ? (heldError != null ? heldError : "none") : run(() -> list(h));
+                    line(out, tag, got, heldModel == null ? "none" : String.valueOf(heldModel), compare);
+                    held = null;
+                    heldModel = null;
+                    heldError = null;
+                }
+                default -> {
+                    if (random.nextInt(12) == 0) {
+                        line(out, tag + " clear", run(() -> { set.clear(); return "cleared"; }), "cleared", compare);
+                        model.clear();
+                    } else {
+                        line(out, tag, run(() -> set.contains(v)), String.valueOf(model.contains(v)), compare);
+                    }
+                }
+            }
+        }
+        line(out, "set end", run(() -> list(set.iterator())), String.valueOf(new ArrayList<>(model)), compare);
+    }
+
+    private static void longList(StringBuilder out, long ops, long seed, boolean compare) {
+        Random random = new Random(seed);
+        M3CowLongList list = new M3CowLongList();
+        CopyOnWriteArrayList<Long> model = new CopyOnWriteArrayList<>();
+        line(out, "list descriptor", run(M3CowLongList::scaffoldDescriptor), null, false);
+        PrimitiveIterator.OfLong held = null;
+        List<Long> heldModel = null;
+        String heldError = null;
+        for (long i = 0; i < ops; i++) {
+            int op = random.nextInt(13);
+            long v = random.nextInt(10) == 0 ? (random.nextBoolean() ? Long.MIN_VALUE : Long.MAX_VALUE) : random.nextInt(21) - 10;
+            int index = random.nextInt(model.size() + 3) - 1;
+            String tag = "list " + i + " " + op + " " + v + " " + index;
+            switch (op) {
+                case 0 -> line(out, tag, run(() -> list.get(index)), run(() -> model.get(index)), compare);
+                case 1, 2 -> line(out, tag, run(() -> list.add(v)), String.valueOf(model.add(v)), compare);
+                case 3 -> line(out, tag, run(() -> { list.add(index, v); return "ok"; }), run(() -> { model.add(index, v); return "ok"; }), compare);
+                case 4 -> line(out, tag, run(() -> list.set(index, v)), run(() -> model.set(index, v)), compare);
+                case 5 -> line(out, tag, run(() -> list.removeAt(index)), run(() -> model.remove(index)), compare);
+                case 6 -> line(out, tag, run(() -> list.remove(v)), String.valueOf(model.remove(Long.valueOf(v))), compare);
+                case 7 -> line(out, tag, run(() -> list.addIfAbsent(v)), String.valueOf(model.addIfAbsent(v)), compare);
+                case 8 -> line(out, tag, run(() -> list.indexOf(v)), String.valueOf(model.indexOf(v)), compare);
+                case 9 -> line(out, tag, run(() -> list.snapshot()), String.valueOf(model), compare);
+                case 10 -> {
+                    String got = run(() -> list.iterator());
+                    heldError = got.startsWith("EX:") ? got : null;
+                    if (!got.startsWith("EX:")) { held = list.iterator(); heldModel = new ArrayList<>(model); }
+                    line(out, tag, got.startsWith("EX:") ? got : "held", got.startsWith("EX:") ? null : "held", compare);
+                }
+                case 11 -> {
+                    PrimitiveIterator.OfLong h = held;
+                    String got = h == null ? (heldError != null ? heldError : "none") : run(() -> list(h));
+                    line(out, tag, got, heldModel == null ? "none" : String.valueOf(heldModel), compare);
+                    held = null;
+                    heldModel = null;
+                    heldError = null;
+                }
+                default -> {
+                    if (random.nextInt(12) == 0) {
+                        line(out, tag + " clear", run(() -> { list.clear(); return "cleared"; }), "cleared", compare);
+                        model.clear();
+                    } else {
+                        line(out, tag, run(() -> list.size()), String.valueOf(model.size()), compare);
+                    }
+                }
+            }
+        }
+        line(out, "list end", run(() -> list.snapshot()), String.valueOf(model), compare);
+    }
+
+    public static void main(String[] args) {
+        long ops = Long.parseLong(args[0]);
+        long seed = Long.parseLong(args[1]);
+        boolean compare = args.length > 2 && args[2].equals("model");
+        StringBuilder out = new StringBuilder();
+        set(out, ops, seed, compare);
+        longList(out, ops, seed + 1, compare);
+        System.out.print(out);
+        System.err.println("ops=" + ops * 2 + " modelled=" + modelled + " mismatches=" + mismatches);
+    }
+}

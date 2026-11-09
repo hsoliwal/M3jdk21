@@ -1,0 +1,154 @@
+leaf	kind	line	ever_on_master	last_present	change_commit	change_date	change_subject
+P2-073a	missing	private static volatile boolean COUNT_SMALLER_ABI_MISSING;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	public static int[] countSmallerRight(long[] values) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	Objects.requireNonNull(values, "values");	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int[] result = new int[values.length];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	if (values.length < 2) return result;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	if (AVAILABLE && !COUNT_SMALLER_ABI_MISSING && values.length >= NATIVE_MIN_BATCH) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	countSmallerRight0(values, result);	NO	-	-	-	never on master history of the owner
+P2-073a	missing	COUNT_SMALLER_ABI_MISSING = true;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	countSmallerRightJavaInto(values, result);	NO	-	-	-	never on master history of the owner
+P2-073a	missing	static int[] countSmallerRightNativeRequired(long[] values) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	Objects.requireNonNull(values, "values");	NO	-	-	-	never on master history of the owner
+P2-073a	missing	if (!AVAILABLE) throw new UnsatisfiedLinkError("m3rankbatch count-smaller JNI unavailable");	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int[] result = new int[values.length];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	countSmallerRight0(values, result);	NO	-	-	-	never on master history of the owner
+P2-073a	missing	static int[] countSmallerRightJava(long[] values) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	Objects.requireNonNull(values, "values");	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int[] result = new int[values.length];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	countSmallerRightJavaInto(values, result);	NO	-	-	-	never on master history of the owner
+P2-073a	missing	private static void countSmallerRightJavaInto(long[] values, int[] result) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int n = values.length;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	if (n < 2) return;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int[] indices = new int[n];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int[] scratch = new int[n];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	for (int i = 0; i < n; i++) indices[i] = i;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int[] from = indices, to = scratch;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	for (long width = 1; width < n; width <<= 1) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	for (long base = 0; base < n; base += width * 2) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int middle = (int) Math.min(n, base + width);	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int end = (int) Math.min(n, base + width * 2);	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int left = (int) base, right = middle, write = (int) base;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int rightMoved = 0;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	while (left < middle && right < end) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int originalLeft = from[left];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int originalRight = from[right];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	if (values[originalLeft] <= values[originalRight]) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	result[originalLeft] += rightMoved;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	to[write++] = originalLeft;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	to[write++] = originalRight;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	rightMoved++;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	while (left < middle) {	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int originalLeft = from[left++];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	result[originalLeft] += rightMoved;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	to[write++] = originalLeft;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	while (right < end) to[write++] = from[right++];	NO	-	-	-	never on master history of the owner
+P2-073a	missing	int[] swap = from; from = to; to = swap;	NO	-	-	-	never on master history of the owner
+P2-073a	missing	private static native void countSmallerRight0(long[] input, int[] output);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	private static final int NATIVE_MIN_KTH_PAIR_SIZE = 256;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	private static final int NATIVE_MIN_KTH_PAIR_BATCH = 8;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	private static volatile boolean KTH_PAIR_ABI_MISSING;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	static long kthPairDistance(long[] sorted, long rank) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long total = (long) sorted.length * (sorted.length - 1) / 2;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (rank < 1 || rank > total) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	throw new IndexOutOfBoundsException("pair rank is outside [1, n*(n-1)/2]");	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long representable = pairDistanceCountJava(sorted, Long.MAX_VALUE);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (rank > representable) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	throw new ArithmeticException("selected pair distance exceeds Long.MAX_VALUE");	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (AVAILABLE && !KTH_PAIR_ABI_MISSING	NO	-	-	-	never on master history of the owner
+P2-073b	missing	&& sorted.length >= NATIVE_MIN_KTH_PAIR_SIZE) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long[] target = {rank};	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long[] output = new long[1];	NO	-	-	-	never on master history of the owner
+P2-073b	missing	kthPairDistancesInto0(sorted, target, 0, 1, output, 0);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	return output[0];	NO	-	-	-	never on master history of the owner
+P2-073b	missing	KTH_PAIR_ABI_MISSING = true;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	return kthPairDistanceJava(sorted, rank);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	static long[] kthPairDistances(long[] sorted, long[] ranks) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long[] output = new long[ranks.length];	NO	-	-	-	never on master history of the owner
+P2-073b	missing	kthPairDistancesInto(sorted, ranks, 0, ranks.length, output, 0, false);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	static long[] kthPairDistancesNativeRequired(long[] sorted, long[] ranks) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long[] output = new long[ranks.length];	NO	-	-	-	never on master history of the owner
+P2-073b	missing	kthPairDistancesInto(sorted, ranks, 0, ranks.length, output, 0, true);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	static void kthPairDistancesInto(long[] sorted, long[] ranks, int rankFrom,	NO	-	-	-	never on master history of the owner
+P2-073b	missing	int length, long[] output, int outputFrom, boolean nativeRequired) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (output == sorted || output == ranks) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	throw new IllegalArgumentException("pair-selection output aliases input");	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long total = (long) sorted.length * (sorted.length - 1) / 2;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (rank < 1 || rank > total) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	throw new IndexOutOfBoundsException("pair rank is outside [1, n*(n-1)/2]");	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (length != 0) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long representable = pairDistanceCountJava(sorted, Long.MAX_VALUE);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (ranks[rankFrom + i] > representable) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	throw new ArithmeticException("selected pair distance exceeds Long.MAX_VALUE");	NO	-	-	-	never on master history of the owner
+P2-073b	missing	throw new UnsatisfiedLinkError("m3rankbatch k-th pair distance ABI unavailable");	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (length != 0) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	kthPairDistancesInto0(sorted, ranks, rankFrom, length, output, outputFrom);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (AVAILABLE && !KTH_PAIR_ABI_MISSING	NO	-	-	-	never on master history of the owner
+P2-073b	missing	&& sorted.length >= NATIVE_MIN_KTH_PAIR_SIZE	NO	-	-	-	never on master history of the owner
+P2-073b	missing	&& length >= NATIVE_MIN_KTH_PAIR_BATCH) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	kthPairDistancesInto0(sorted, ranks, rankFrom, length, output, outputFrom);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	KTH_PAIR_ABI_MISSING = true;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	output[outputFrom + i] = kthPairDistanceJava(sorted, ranks[rankFrom + i]);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	private static long kthPairDistanceJava(long[] sorted, long rank) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long span = sorted[n - 1] - sorted[0];	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long high = Long.compareUnsigned(span, Long.MAX_VALUE) > 0	NO	-	-	-	never on master history of the owner
+P2-073b	missing	? Long.MAX_VALUE : span;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long low = 0L;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	long midpoint = low + ((high - low) >>> 1);	NO	-	-	-	never on master history of the owner
+P2-073b	missing	if (pairDistanceCountJava(sorted, midpoint) >= rank) {	NO	-	-	-	never on master history of the owner
+P2-073b	missing	high = midpoint;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	low = midpoint + 1;	NO	-	-	-	never on master history of the owner
+P2-073b	missing	private static native void kthPairDistancesInto0(long[] sorted, long[] ranks,	NO	-	-	-	never on master history of the owner
+P2-073b	missing	int rankFrom, int length, long[] output, int outputFrom);	NO	-	-	-	never on master history of the owner
+P2-073c	missing	private static final int NATIVE_MIN_PAIR_DISTANCE_BATCH = 64;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	private static final int NATIVE_MIN_PAIR_DISTANCE_OWNER = 128;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	private static volatile boolean PAIR_DISTANCE_ABI_MISSING;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	private static final boolean PAIR_DISTANCE_NATIVE_OPT_IN =	NO	-	-	-	never on master history of the owner
+P2-073c	missing	Boolean.getBoolean("m3.collections.rank.pairdistance.native");	NO	-	-	-	never on master history of the owner
+P2-073c	missing	static long[] pairDistanceCounts(long[] sorted, long[] thresholds) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	Objects.requireNonNull(thresholds, "thresholds");	NO	-	-	-	never on master history of the owner
+P2-073c	missing	validatePairDistances(thresholds);	NO	-	-	-	never on master history of the owner
+P2-073c	missing	long[] result = new long[thresholds.length];	NO	-	-	-	never on master history of the owner
+P2-073c	missing	if (sorted.length < 2 || thresholds.length == 0) return result;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	if (AVAILABLE && PAIR_DISTANCE_NATIVE_OPT_IN && !PAIR_DISTANCE_ABI_MISSING	NO	-	-	-	never on master history of the owner
+P2-073c	missing	&& sorted.length >= NATIVE_MIN_PAIR_DISTANCE_OWNER	NO	-	-	-	never on master history of the owner
+P2-073c	missing	&& thresholds.length >= NATIVE_MIN_PAIR_DISTANCE_BATCH) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	pairDistanceCounts0(sorted, thresholds, result);	NO	-	-	-	never on master history of the owner
+P2-073c	missing	PAIR_DISTANCE_ABI_MISSING = true;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	for (int i = 0; i < thresholds.length; i++) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	result[i] = pairDistanceCountJava(sorted, thresholds[i]);	NO	-	-	-	never on master history of the owner
+P2-073c	missing	static long[] pairDistanceCountsNativeRequired(long[] sorted, long[] thresholds) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	Objects.requireNonNull(thresholds, "thresholds");	NO	-	-	-	never on master history of the owner
+P2-073c	missing	validatePairDistances(thresholds);	NO	-	-	-	never on master history of the owner
+P2-073c	missing	throw new UnsatisfiedLinkError("m3rankbatch pair-distance JNI unavailable");	NO	-	-	-	never on master history of the owner
+P2-073c	missing	long[] result = new long[thresholds.length];	NO	-	-	-	never on master history of the owner
+P2-073c	missing	pairDistanceCounts0(sorted, thresholds, result);	NO	-	-	-	never on master history of the owner
+P2-073c	missing	static long pairDistanceCountJava(long[] sorted, long maxDistance) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	if (maxDistance < 0) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	throw new IllegalArgumentException("distance threshold must be nonnegative");	NO	-	-	-	never on master history of the owner
+P2-073c	missing	int left = 0;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	long count = 0L;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	for (int right = 1; right < sorted.length; right++) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	while (left < right && Long.compareUnsigned(	NO	-	-	-	never on master history of the owner
+P2-073c	missing	sorted[right] - sorted[left], maxDistance) > 0) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	left++;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	count += right - left;	NO	-	-	-	never on master history of the owner
+P2-073c	missing	private static void validatePairDistances(long[] thresholds) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	for (long distance : thresholds) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	if (distance < 0L) {	NO	-	-	-	never on master history of the owner
+P2-073c	missing	throw new IllegalArgumentException("distance threshold must be nonnegative");	NO	-	-	-	never on master history of the owner
+P2-073c	missing	static native void pairDistanceCounts0(long[] sorted, long[] thresholds, long[] results);	NO	-	-	-	never on master history of the owner
+P2-074a	missing	public static int[] countSmallerAfterSelf(long[] encounterOrder) {	NO	-	-	-	never on master history of the owner
+P2-074a	missing	return M3LongRankBatchNative.countSmallerRight(encounterOrder);	NO	-	-	-	never on master history of the owner
+P2-074b	missing	public long kthPairDistance(long oneBasedRank) {	NO	-	-	-	never on master history of the owner
+P2-074b	missing	return M3LongRankBatchNative.kthPairDistance(values, oneBasedRank);	NO	-	-	-	never on master history of the owner
+P2-074b	missing	public long[] kthPairDistances(long[] oneBasedRanks) {	NO	-	-	-	never on master history of the owner
+P2-074b	missing	return M3LongRankBatchNative.kthPairDistances(values, oneBasedRanks);	NO	-	-	-	never on master history of the owner
+P2-074b	missing	public void kthPairDistancesInto(long[] ranks, int rankFrom, int length,	NO	-	-	-	never on master history of the owner
+P2-074b	missing	long[] output, int outputFrom) {	NO	-	-	-	never on master history of the owner
+P2-074b	missing	M3LongRankBatchNative.kthPairDistancesInto(	NO	-	-	-	never on master history of the owner
+P2-074b	missing	values, ranks, rankFrom, length, output, outputFrom, false);	NO	-	-	-	never on master history of the owner
+P2-074c	missing	public long pairCountWithinDistance(long maxDistance) {	NO	-	-	-	never on master history of the owner
+P2-074c	missing	return M3LongRankBatchNative.pairDistanceCountJava(values, maxDistance);	NO	-	-	-	never on master history of the owner
+P2-074c	missing	public long[] pairCountsWithinDistances(long[] maxDistances) {	NO	-	-	-	never on master history of the owner
+P2-074c	missing	return M3LongRankBatchNative.pairDistanceCounts(values, maxDistances);	NO	-	-	-	never on master history of the owner

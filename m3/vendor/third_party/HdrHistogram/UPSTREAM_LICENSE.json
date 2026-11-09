@@ -1,0 +1,9 @@
+{
+  "artifact": "HdrHistogram-2.1.12",
+  "origin": "https://raw.githubusercontent.com/HdrHistogram/HdrHistogram/HdrHistogram-2.1.12/LICENSE.txt",
+  "file": "UPSTREAM_LICENSE.txt",
+  "sha256": "ba550515c77c9e6f8b6a400381eacd3c47569297f8f27884801a95dff5309483",
+  "bytes": 2173,
+  "caveat": "EXACT_TAG HdrHistogram-2.1.12",
+  "pom_license": "Public Domain, per Creative Commons CC0 <http://creativecommons.org/publicdomain/zero/1.0/>;BSD-2-Clause <https://opensource.org/licenses/BSD-2-Clause>"
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "m3.independent-e03-review-file-seals.v1",
+  "files": [
+    {
+      "path": "INPUT_SEALS.json",
+      "bytes": 141137,
+      "sha256": "c1db2f58d832d3faeaa6c680ea101eb2a04ac8037e6cdce519b17d6afd47db14"
+    },
+    {
+      "path": "INSPECTION.json",
+      "bytes": 8303,
+      "sha256": "24cd03c36e25e70c4b3564582b9d318b19f2a506365b8fdc7184f0aa5292e5e4"
+    },
+    {
+      "path": "INSPECTION_METHOD_NOTES.json",
+      "bytes": 810,
+      "sha256": "23529ef9088bb5cfba0190b030748998203d8e90be634628ddb9097befb15891"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 10543,
+      "sha256": "8b54e4e6bd75a7a5d12a7acf8ed86861f3d39eab734d284dd5901bd60790f5a8"
+    },
+    {
+      "path": "inspect_receiving.py",
+      "bytes": 20397,
+      "sha256": "75cd25f633540c06ebd29fde0512c18c9968e1056ec9b9123f8540e958e6d999"
+    }
+  ]
+}

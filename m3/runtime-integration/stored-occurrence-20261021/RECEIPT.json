@@ -1,0 +1,35 @@
+{
+  "schema": "M3JDK21_COLLECTIONVIEWS_STORED_OCCURRENCE_SOURCE_SEAL_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetBaseCommit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+  "targetOriginalGitBlob": "2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66",
+  "firstPartyDonor": "hsoliwal/M3jdk21#1116 head 9a6621589c1974d9e8c9bdbf64770178ce80169f",
+  "canonicalPriorRecipe": "hsoliwal/com.synexia#12099",
+  "ownerPath": "src/java.base/share/classes/java/util/CollectionViews.java",
+  "ownerBeforeSha256": "a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d",
+  "ownerAfterSha256": "6759e1c605be7c52c3471767879cfa4aec7751e220699f6af49a43ba0902660b",
+  "oraclePath": "test/jdk/java/util/CollectionViews/StoredRepresentativeOracle.java",
+  "oracleBefore": "ABSENT",
+  "oracleAfterSha256": "f32eeb5079bcd6322e597303a937614931b7f33779a58d0ed03b53ae0a8302c6",
+  "recipe": "com.synexia.m3jdk.CollectionViewsStoredOccurrence20261021",
+  "stage": "SOURCE_SEALED_CANDIDATE",
+  "verification": {
+    "localBehavioralAtom": "PASS_736014_EACH_-Xint_C1_C2",
+    "productionSourceJavac": "PENDING_GITHUB_HEAD",
+    "productionJtreg": "PENDING",
+    "nativeJni": "UNCHANGED_REQUIRES_IMAGE_GATE",
+    "openRewriteSdk": "PENDING_GITHUB_HEAD"
+  },
+  "canonicalRecipePR": "https://github.com/hsoliwal/com.synexia/pull/12866",
+  "canonicalRecipeCommit": "9cdce883109e8d302ea2d6a51da01056a48e4702",
+  "canonicalOutputBlob": "fffd5e0e96363aa0fd1e0e7646dfc3f0d7ca7d68",
+  "originalTargetBlob": "2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66",
+  "oracleDonorGitBlob": "491b55c10f829b35f1cdcc5e2233d27564617d17",
+  "originalJavaJniMethodsChanged": [
+    "java.util.CollectionViews.FilteredCollection.contains(Object)",
+    "java.util.CollectionViews.FilteredCollection.remove(Object)"
+  ],
+  "nativeSymbolsChanged": [],
+  "sourceMutationProtocol": "Canonical M3HashPinnedJavaSnapshotRecipe template installed unchanged, targeted Java21 patch-module proof required."
+}

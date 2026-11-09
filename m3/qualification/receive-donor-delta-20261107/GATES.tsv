@@ -1,0 +1,10 @@
+gate	result
+javac --release 21 -Xlint:all -Werror (all sources)	rc=0
+javadoc -Werror -Xdoclint:all (main)	rc=0
+M3DonorDeltaPlannerSelfTest	PASS checks=32
+M3DonorTreeLanesSelfTest	PASS checks=100005 rows=25000
+M3DonorTreeLanesGrowthTest	PASS checks=256051 boundaries=16
+M3DonorSortedFastPathProof	PASS checks=113203 ordered=32768 variants=48
+verify.sh (adapted; the v1 script fails to compile the v2 planner: 8 errors)	rc=0, all four mains PASS
+JDK-naming fixed point	0 of 7 in-scope files
+all target paths	NEW on master (m3/tooling/donor-delta absent)

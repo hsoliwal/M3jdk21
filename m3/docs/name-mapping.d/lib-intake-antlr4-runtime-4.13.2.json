@@ -1,0 +1,69 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (https://raw.githubusercontent.com/antlr/antlr4/4.13.2/LICENSE.txt); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.runtime",
+  "target_path": "m3/vendor/third_party-m3/relocated/antlr4-runtime-4.13.2",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/antlr4-runtime-4.13.2",
+  "source_coordinate": "org.antlr:antlr4-runtime:4.13.2-m3-source-1",
+  "source_version": "4.13.2-m3-source-1",
+  "source_license_origin": "https://raw.githubusercontent.com/antlr/antlr4/4.13.2/LICENSE.txt",
+  "source_packages": [
+    "org.antlr.v4.runtime"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.runtime"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/antlr4-runtime-4.13.2/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/antlr4-runtime-4.13.2/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/antlr4-runtime-4.13.2",
+  "mappings": [
+    {
+      "source": "org.antlr.v4.runtime and subpackages",
+      "target": "com.m3.lib.runtime and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.runtime JMOD; type names retained"
+    },
+    {
+      "source": "org.antlr.v4.runtime.tree.pattern",
+      "target": "com.m3.lib.runtime.tree.pattern",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.antlr.v4.runtime.tree.xpath",
+      "target": "com.m3.lib.runtime.tree.xpath",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.antlr.v4.runtime.misc",
+      "target": "com.m3.lib.runtime.misc",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.antlr.v4.runtime.tree",
+      "target": "com.m3.lib.runtime.tree",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.antlr.v4.runtime.atn",
+      "target": "com.m3.lib.runtime.atn",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.antlr.v4.runtime.dfa",
+      "target": "com.m3.lib.runtime.dfa",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.antlr.v4.runtime",
+      "target": "com.m3.lib.runtime",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

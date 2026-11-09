@@ -1,0 +1,10 @@
+field	value
+source_doc	m3/docs/m3jdk21-porting-invariant.md
+run.mode	apply candidate after Synexia recipe/source seal
+run.profile	selected Java21 proof
+selected_base	970a34350ebdf6a3f1c5ff5acc8445d0f3515f55
+allowed_delta	only three offlane-zero array growth decisions
+locks	JDK_PUBLIC_API=LOCKED;JNI=LOCKED;PRIMITIVE_STORAGE=LOCKED;RECEIVING_ORDER=LOCKED
+verify_order	diff->lint->javac->JUnit/differential->native image/jtreg acceptance
+stop_conditions	foreign target body;new entry/node field;API drift;failed gate
+receiving_parent	a918e588dd11d5ff7e0a6d4efaa89bb1679a9798

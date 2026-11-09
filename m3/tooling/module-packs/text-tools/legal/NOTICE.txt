@@ -1,0 +1,8 @@
+Synexia text tools for M3JDK21
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
+Apache License 2.0.
+
+Adapted from the first-party Synexia Unix4j M3 admission/framing/DAG/receipt core.
+These modules do not contain upstream Unix4j implementation classes. The source
+workspace retains Unix4j MIT notices; no third-party source is relicensed.
+OpenJDK modules in linked images retain their existing licenses and notices.

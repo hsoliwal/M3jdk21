@@ -1,0 +1,18 @@
+package @WPKG@.adapter;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+import org.junit.Test;
+
+/** Viewport adapter of the existing @CONCEPT@ widget {@code @CLASS@} (family @FAM@, kind @KIND@) on the hidden test desktop. */
+public class M3@C@Viewport_Test {
+	@Test
+	public void adapter() {
+		Shell shell = M3ViewportAdapterChecks.shell();
+		try {
+			M3ViewportAdapterChecks.run(() -> @CREATE@, @ASPECTS@);
+		} finally {
+			shell.dispose();
+		}
+	}
+}

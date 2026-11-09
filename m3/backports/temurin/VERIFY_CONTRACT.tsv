@@ -1,0 +1,9 @@
+gate	state	requirement
+mirror_pin_equality	PASS_BRANCH	Adoptium JDK21 mirror pin equals upstream21u baseline
+tooling_pins	PASS_BRANCH	40-hex exact heads recorded
+license_identity	PASS_BRANCH	repository LICENSE blobs recorded
+copy_authority	PASS_BRANCH	false for every donor/candidate
+promotion_authority	PASS_BRANCH	false for every capability candidate
+static_tests	PENDING_HOSTED	existing Maven backport unittest discovery
+mechanism_comparison	PENDING	compare each candidate against existing M3 owners before adaptation
+runtime_optimization_claim	NOT_MADE	no Temurin-specific HotSpot delta proven at mirror pin

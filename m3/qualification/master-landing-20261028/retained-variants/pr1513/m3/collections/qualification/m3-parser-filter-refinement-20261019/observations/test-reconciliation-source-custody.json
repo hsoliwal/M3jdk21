@@ -1,0 +1,29 @@
+{
+  "publishedRuntimeSourceCommit": "22c3d19339c8042d6b15869e8661a1524183d807",
+  "original14SdkPostimagesUnchanged": true,
+  "newSdkPostimage": {
+    "path": "m3/collections/src/test/java/jdk/m3/collections/M3FootprintContractTest.java",
+    "before": "e369e66b2f95179383ef1e1b2a9cef28f439f762fcd3478e6df2113e3d1f8957",
+    "after": "e9502a10ef41c60b74a0c05e2533abbac2dac81011155872859cb97894656328"
+  },
+  "sdkTests": 5,
+  "sdkFailures": 0,
+  "runtimeSourceChanges": 0,
+  "fullRunReceipt": "collections-clean-forked.log",
+  "focusedRunReceipt": "collections-footprint-reconciled.log",
+  "focusedCommand": [
+    "mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/tmp/m3-cursor-m2",
+    "-Dmaven.compiler.fork=true",
+    "-DargLine=-XX:+UseSerialGC -XX:ActiveProcessorCount=2 -Xmx768m",
+    "-Dtest=M3FootprintContractTest",
+    "-f",
+    "continuation/clean-after/m3/collections/pom.xml",
+    "test"
+  ],
+  "JAVA_HOME": "/tmp/m3-cursor-tools/jdk-current",
+  "MAVEN_OPTS": "-XX:+UseSerialGC -XX:ActiveProcessorCount=2 -Xmx768m"
+}

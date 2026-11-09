@@ -1,0 +1,56 @@
+{
+  "schema": "M3_SHARED_FRONTEND_RECIPE_CUSTODY_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_crate_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "original_engine_commit": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
+  "product_source_epoch": "c0f992009f7045c9f0d8ef4f734b3f1113c7a3f6",
+  "datasets": [
+    "m3jdk21-build",
+    "m3jdk21-compiler"
+  ],
+  "product_source_targets": 29,
+  "canonical_bootstrap_receipt_sha256": "26bcb28de9b38e26b7aa9f66ad638ca26a7927c536954971ac65c770dba44aa5",
+  "owners": [
+    {
+      "canonical_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "mirror_path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "origin_git_blob_sha1": "03b7a7317018e0e0334fa840c63b52e19874457d",
+      "origin_sha256": "15dd2a5afe21ea373c151619bc8652e838f38b88f2fde335638b42a3983fd83e",
+      "effective_sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+      "effective_git_blob_sha1": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
+      "license": "Apache-2.0",
+      "origin_url": "https://github.com/hsoliwal/com.synexia/blob/e244d68fdee88d4a406be48e4ff1d31b60a17988/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+    },
+    {
+      "canonical_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "mirror_path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "origin_git_blob_sha1": "a129c96358974bfa2e0ba0f6a1a63fdd5cb19f79",
+      "origin_sha256": "5d21dbe596c2b41cb6a11404d8023ba90d2ce463523e73a4953851a4332a9922",
+      "effective_sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+      "effective_git_blob_sha1": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
+      "license": "Apache-2.0",
+      "origin_url": "https://github.com/hsoliwal/com.synexia/blob/e244d68fdee88d4a406be48e4ff1d31b60a17988/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+    },
+    {
+      "canonical_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
+      "mirror_path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
+      "origin_git_blob_sha1": "d24729950508857280ea1b56d4e930f05137ec85",
+      "origin_sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "effective_sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "effective_git_blob_sha1": "d24729950508857280ea1b56d4e930f05137ec85",
+      "license": "Apache-2.0",
+      "origin_url": "https://github.com/hsoliwal/com.synexia/blob/e244d68fdee88d4a406be48e4ff1d31b60a17988/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
+    },
+    {
+      "canonical_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
+      "mirror_path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
+      "origin_git_blob_sha1": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "origin_sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "effective_sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "effective_git_blob_sha1": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "license": "Apache-2.0",
+      "origin_url": "https://github.com/hsoliwal/com.synexia/blob/e244d68fdee88d4a406be48e4ff1d31b60a17988/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java"
+    }
+  ],
+  "transfer": "A separate canonical m3jdk21-custody dataset emits this mirror. The two embedded product datasets target only build/compiler sources."
+}

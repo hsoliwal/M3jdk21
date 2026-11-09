@@ -1,0 +1,6 @@
+role	path	git_blob
+original_factory	m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java	ad108e2972e9e55c8d0a0b308e5b80d9720a532f
+original_pom	m3/collections/interop/pom.xml	f105d56a842c3aa75e9e7a027d4c0d893699d102
+unchanged_kernel	M3GpuToolJoinManifest.java	78d5fb68f13872164973a8918cc7886c5f548bca
+unchanged_sdk_wrapper	M3GpuToolJoinRecipe.java	2ec479b8609459a28fdfd8a7a7d63cc44e919f00
+unchanged_native	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	22782ee02b06b4404b5c87fd15f10f4e8e9749ea

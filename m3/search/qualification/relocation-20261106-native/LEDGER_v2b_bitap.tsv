@@ -1,0 +1,5 @@
+main	fs/BitapExactSearch.java	86c9d2609574459e5cc803bbc7892821d713b9f6	m3/search/src/main/java/jdk/m3/search/M3BitapExactSearch.java	2961f1194d1dd4dc
+test	fst/BitapExactSearchTest.java	911152acee780337976d0ba662da17cb34f5627d	m3/search/src/test/java/jdk/m3/search/BitapExactSearchTest.java	7dc11813713a81a8
+test	fst/BitapExactNativeParityMain.java	6bb647e70ff8eff18f6bc021fdec3b75ee439b63	m3/search/src/test/java/jdk/m3/search/BitapExactNativeParityMain.java	b73f86022e316aa4
+test	fst/BitapChunkedRegionProof.java	891e5a7b456cdab8fac45cfef7c5ec04f7dc2295	m3/search/src/test/java/jdk/m3/search/BitapChunkedRegionProof.java	8091c8bc69a3ae88
+native	fs/jni_bitap_exact.c	e6b743f3751562fdf02ff31f8da8cbb4760fe770	m3/search/src/main/native/jni_bitap_exact.c	c983152d37142c9c

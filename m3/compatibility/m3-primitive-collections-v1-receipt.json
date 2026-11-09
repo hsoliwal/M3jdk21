@@ -1,0 +1,64 @@
+{
+  "schema": "M3JDK21_SYNEXIA_PRIMITIVE_COLLECTION_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 9775,
+    "commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
+    "recipe": "com.synexia.rewrite.M3Jdk21PrimitiveCollectionsV1",
+    "crate": "m3jdk21-primitive-collections-v1"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "5cef0a5b4831db0346fccdd0079d3d28d820a24e",
+    "receiverRecipe": "com.m3.M3Jdk21PrimitiveCollectionsReceiverV1"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
+      "before": "ABSENT",
+      "after": "1b1ecd7725f8f54be60f2ed07f780615283b9f40a1bf75278fd9d26d1b330abc",
+      "resource": "00-M3LongArrayDeque.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java",
+      "before": "ABSENT",
+      "after": "9996179dcf0d22cb7d1cbbebb6fc6530ca9b239e5de535aede7e2e375d33ec75",
+      "resource": "01-M3LongArrayList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java",
+      "before": "ABSENT",
+      "after": "e9498cbebbf610afb5cff65606f5e9784a4280c7a6cc0e479e25128f1470b99a",
+      "resource": "02-M3LongHashSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
+      "before": "ABSENT",
+      "after": "23a3c156a302c3f4785b9bae12fd2b0b477e43c328fc48e843f100f383d513c4",
+      "resource": "03-M3LongLongHashMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongPriorityQueue.java",
+      "before": "ABSENT",
+      "after": "11c4de2e3385518ecc70a245a2942f8a0c05fb2469b6fbede76c7af231bcbb8b",
+      "resource": "04-M3LongPriorityQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java",
+      "before": "ABSENT",
+      "after": "f62a15746de313d356bf3f6196786eb1f14166b29a9f21bacccedb6a0faba823",
+      "resource": "05-M3JdkShapedPrimitiveCollectionsTest.java.txt"
+    }
+  ],
+  "gates": {
+    "prototypeCompileAndDifferentialRun": "PASS",
+    "exactTargetMaven": "PENDING_PR_CI",
+    "openJdkBuild": "NOT_CLAIMED",
+    "jtreg": "NOT_CLAIMED",
+    "familyCompletion": false
+  }
+}

@@ -1,0 +1,125 @@
+        //FLLDCIM: MERGE-21U — 8311906/8321180 ported onto the M3Construction helper: decode from a stable copy,
+        //FLLDCIM: MERGE-21U — newBytesFor checks the UTF16 size, compress results carry their coder by length
+        if (charset == UTF_8.INSTANCE) {
+            if (COMPACT_STRINGS) {
+                int dp = StringCoding.countPositives(bytes, offset, length);
+                if (dp == length) {
+                    return new M3Construction(
+                            Arrays.copyOfRange(bytes, offset, offset + length), LATIN1);
+                }
+                // Decode with a stable copy, to be the result if the decoded length is the same
+                byte[] latin1 = Arrays.copyOfRange(bytes, offset, offset + length);
+                int sp = dp;            // first dp bytes are already in the copy
+                while (sp < length) {
+                    int b1 = latin1[sp++];
+                    if (b1 >= 0) {
+                        latin1[dp++] = (byte)b1;
+                        continue;
+                    }
+                    if ((b1 & 0xfe) == 0xc2 && sp < length) { // b1 either 0xc2 or 0xc3
+                        int b2 = latin1[sp];
+                        if (b2 < -64) { // continuation bytes are always negative values in the range -128 to -65
+                            latin1[dp++] = (byte)decode2(b1, b2);
+                            sp++;
+                            continue;
+                        }
+                    }
+                    // anything not a latin1, including the REPL
+                    // we have to go with the utf16
+                    sp--;
+                    break;
+                }
+                if (sp == length) {
+                    if (dp != latin1.length) {
+                        latin1 = Arrays.copyOf(latin1, dp);
+                    }
+                    return new M3Construction(latin1, LATIN1);
+                }
+                byte[] utf16 = StringUTF16.newBytesFor(length);
+                StringLatin1.inflate(latin1, 0, utf16, 0, dp);
+                dp = decodeUTF8_UTF16(latin1, sp, length, utf16, dp, true);
+                if (dp != length) {
+                    utf16 = Arrays.copyOf(utf16, dp << 1);
+                }
+                return new M3Construction(utf16, UTF16);
+            }
+            byte[] dst = StringUTF16.newBytesFor(length);
+            int dp = decodeUTF8_UTF16(bytes, offset, offset + length, dst, 0, true);
+            if (dp != length) {
+                dst = Arrays.copyOf(dst, dp << 1);
+            }
+            return new M3Construction(dst, UTF16);
+        }
+
+        if (charset == ISO_8859_1.INSTANCE) {
+            return COMPACT_STRINGS
+                    ? new M3Construction(
+                            Arrays.copyOfRange(bytes, offset, offset + length), LATIN1)
+                    : new M3Construction(
+                            StringLatin1.inflate(bytes, offset, length), UTF16);
+        }
+
+        if (charset == US_ASCII.INSTANCE) {
+            if (COMPACT_STRINGS && !StringCoding.hasNegatives(bytes, offset, length)) {
+                return new M3Construction(
+                        Arrays.copyOfRange(bytes, offset, offset + length), LATIN1);
+            }
+            byte[] dst = StringUTF16.newBytesFor(length);
+            int dp = 0;
+            while (dp < length) {
+                int b = bytes[offset++];
+                StringUTF16.putChar(dst, dp++, (b >= 0) ? (char)b : REPL);
+            }
+            return new M3Construction(dst, UTF16);
+        }
+
+        CharsetDecoder cd = charset.newDecoder();
+        if (cd instanceof ArrayDecoder ad) {
+            if (ad.isASCIICompatible() && !StringCoding.hasNegatives(bytes, offset, length)) {
+                return COMPACT_STRINGS
+                        ? new M3Construction(
+                                Arrays.copyOfRange(bytes, offset, offset + length), LATIN1)
+                        : new M3Construction(
+                                StringLatin1.inflate(bytes, offset, length), UTF16);
+            }
+
+            if (COMPACT_STRINGS && ad.isLatin1Decodable()) {
+                byte[] dst = new byte[length];
+                ad.decodeToLatin1(bytes, offset, length, dst);
+                return new M3Construction(dst, LATIN1);
+            }
+
+            int en = scale(length, cd.maxCharsPerByte());
+            cd.onMalformedInput(CodingErrorAction.REPLACE)
+                    .onUnmappableCharacter(CodingErrorAction.REPLACE);
+            char[] ca = new char[en];
+            int clen = ad.decode(bytes, offset, length, ca);
+            if (COMPACT_STRINGS) {
+                byte[] val = StringUTF16.compress(ca, 0, clen);
+                return new M3Construction(val, StringUTF16.coderFromArrayLen(val, clen));
+            }
+            return new M3Construction(StringUTF16.toBytes(ca, 0, clen), UTF16);
+        }
+
+        int en = scale(length, cd.maxCharsPerByte());
+        cd.onMalformedInput(CodingErrorAction.REPLACE)
+                .onUnmappableCharacter(CodingErrorAction.REPLACE);
+        char[] ca = new char[en];
+        if (charset.getClass().getClassLoader0() != null
+                && System.getSecurityManager() != null) {
+            bytes = Arrays.copyOfRange(bytes, offset, offset + length);
+            offset = 0;
+        }
+
+        int caLen;
+        try {
+            caLen = decodeWithDecoder(cd, ca, bytes, offset, length);
+        } catch (CharacterCodingException failure) {
+            throw new Error(failure);
+        }
+        if (COMPACT_STRINGS) {
+            byte[] val = StringUTF16.compress(ca, 0, caLen);
+            return new M3Construction(val, StringUTF16.coderFromArrayLen(val, caLen));
+        }
+        return new M3Construction(StringUTF16.toBytes(ca, 0, caLen), UTF16);
+    }

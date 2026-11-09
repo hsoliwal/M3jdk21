@@ -1,0 +1,2 @@
+module	unit_jars	target
+commons.logging	/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar	src/main/dependency-modules/commons.logging/module-info.java

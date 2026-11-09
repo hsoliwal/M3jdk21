@@ -1,0 +1,29 @@
+{
+  "checker_executed_by_reviewers": false,
+  "files": [
+    {
+      "bytes": 1412,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/COMPANION_BINDING.json",
+      "sha256": "81641b602be5d5ca0b34642b859555e98b78bf71913c9ac6d046cf5a29d2504f"
+    },
+    {
+      "bytes": 10299,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/INPUT_SEALS.json",
+      "sha256": "3d3ea283b65e17ac8bafcf8b7bb3e5a8d08efe3f05d304cfca957e3de9fd81a3"
+    },
+    {
+      "bytes": 8324,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/REVIEW.md",
+      "sha256": "4bb195a07653347655c8bb9c2d4ffa2fff4316da506316655dbcb62686f7385e"
+    },
+    {
+      "bytes": 3591,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/STATIC_AUDIT.json",
+      "sha256": "2ffe907696a8326206d8bafe8c35b4a50ee4567500282c1fd7b550fa77339625"
+    }
+  ],
+  "project_gates_executed_by_reviewers": false,
+  "remote_actions_by_reviewers": false,
+  "schema": "jcc-e4-reference-checker-static-seals/1",
+  "status": "ADMITTED_FOR_BOUNDED_READ_ONLY_AUDIT"
+}

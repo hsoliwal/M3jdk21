@@ -1,0 +1,627 @@
+{
+  "schema": "M3_MAVEN4_PUBLICATION_PREIMAGES/1",
+  "repository": "hsoliwal/com.synexia",
+  "base_commit": "a5a7eaa644138ee62f6756f0d8e9b3957302a2d9",
+  "base_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+  "base_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12654",
+  "method": "Nonrecursive Git tree walks at the exact published SWT tree. Every traversed parent response has truncated=false; absent prefixes are justified by complete parent listings.",
+  "paths": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates",
+          "git_tree": "ac1675aaccf09477121d8ce179b3f5a0466f71a4",
+          "entry_count": 297,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF",
+          "git_tree": "5cfdd6b11df59fe5682311d59e74f8079b2acf6c",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite",
+          "git_tree": "8ca06406abc185732bf39c394b6fa623ccc31971",
+          "entry_count": 1539,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "00cb6758181136c2db5218ec11beaed779690dc9",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "6e1b4072370238c81b340145d9f8dde3118977ec",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "c299eb93e6a3bab95795837c5b43c56be50d9c7b",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "eac3d036e5cae2c9ae8f6ea4cb7c513efbfdfcde",
+          "entry_count": 341,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "00cb6758181136c2db5218ec11beaed779690dc9",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "6e1b4072370238c81b340145d9f8dde3118977ec",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "c299eb93e6a3bab95795837c5b43c56be50d9c7b",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "eac3d036e5cae2c9ae8f6ea4cb7c513efbfdfcde",
+          "entry_count": 341,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "00cb6758181136c2db5218ec11beaed779690dc9",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "6e1b4072370238c81b340145d9f8dde3118977ec",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "c299eb93e6a3bab95795837c5b43c56be50d9c7b",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "eac3d036e5cae2c9ae8f6ea4cb7c513efbfdfcde",
+          "entry_count": 341,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "00cb6758181136c2db5218ec11beaed779690dc9",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "6e1b4072370238c81b340145d9f8dde3118977ec",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "c299eb93e6a3bab95795837c5b43c56be50d9c7b",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "eac3d036e5cae2c9ae8f6ea4cb7c513efbfdfcde",
+          "entry_count": 341,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "00cb6758181136c2db5218ec11beaed779690dc9",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "6e1b4072370238c81b340145d9f8dde3118977ec",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "c299eb93e6a3bab95795837c5b43c56be50d9c7b",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "eac3d036e5cae2c9ae8f6ea4cb7c513efbfdfcde",
+          "entry_count": 341,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "00cb6758181136c2db5218ec11beaed779690dc9",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "6e1b4072370238c81b340145d9f8dde3118977ec",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "c299eb93e6a3bab95795837c5b43c56be50d9c7b",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text",
+          "git_tree": "eac3d036e5cae2c9ae8f6ea4cb7c513efbfdfcde",
+          "entry_count": 341,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "00cb6758181136c2db5218ec11beaed779690dc9",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "6e1b4072370238c81b340145d9f8dde3118977ec",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "c299eb93e6a3bab95795837c5b43c56be50d9c7b",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java",
+          "git_tree": "a2b3965d0cc1a8766f452a6688301b7046459cfb",
+          "entry_count": 1046,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src",
+          "git_tree": "932961bc70b88b0d01b15faa9dc7cebdfbff6d0d",
+          "entry_count": 4,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main",
+          "git_tree": "f82a7f379d26139f068eca49e7bdec98cafd7ae2",
+          "entry_count": 3,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources",
+          "git_tree": "330873df39dd15246604ae12a95735245f2edf4a",
+          "entry_count": 5,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com",
+          "git_tree": "00cb6758181136c2db5218ec11beaed779690dc9",
+          "entry_count": 1,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia",
+          "git_tree": "6e1b4072370238c81b340145d9f8dde3118977ec",
+          "entry_count": 2,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite",
+          "git_tree": "c299eb93e6a3bab95795837c5b43c56be50d9c7b",
+          "entry_count": 801,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java",
+          "git_tree": "a2b3965d0cc1a8766f452a6688301b7046459cfb",
+          "entry_count": 1046,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
+      "status": "PRESENT",
+      "git_blob": "9ee657fecb080cf9588c31d362b84b195607f702",
+      "mode": "100644",
+      "type": "blob",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "3c437a26d6b42305c3530ae8295829597cc61569",
+          "entry_count": 130,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
+      "status": "PRESENT",
+      "git_blob": "dd045fa757cba8fe10cffb60bb6923aa44c5eb3e",
+      "mode": "100644",
+      "type": "blob",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "949f5f459f6541eabe111833a8efc32b52fc67ff",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "docs",
+          "git_tree": "293eeaaaee9bf869c8c3cf54e609968a03d93ad5",
+          "entry_count": 425,
+          "truncated": false
+        },
+        {
+          "path": "docs/M3-SCALE",
+          "git_tree": "761683422479a11fb8de4ee647c390de49bee242",
+          "entry_count": 278,
+          "truncated": false
+        },
+        {
+          "path": "docs/M3-SCALE/provenance",
+          "git_tree": "a471f799fd69e787e1a62acb84a457b68b83bf8e",
+          "entry_count": 3,
+          "truncated": false
+        }
+      ]
+    }
+  ]
+}
+

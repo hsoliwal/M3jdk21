@@ -1,0 +1,12 @@
+{
+  "pr": 1227,
+  "head": "2738eeec8cbd494962b2260bc8a51c53db5802d9",
+  "receivingRun": 39085774225,
+  "receivingResult": "success",
+  "ownedRuntimeRun": 39085774228,
+  "ownedRuntimeResult": "failure",
+  "failureJob": 117551899632,
+  "failure": "assertion in existing exact-source verifier for M3CollectionSdk.java; before compile/runtime",
+  "scope": "existing SDK source binding mismatch at the pinned parent; counted correction not present in that head",
+  "followup": "qualified successor required; preserve old evidence and do not loosen pins"
+}

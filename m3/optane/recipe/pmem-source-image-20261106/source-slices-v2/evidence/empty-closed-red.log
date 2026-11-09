@@ -1,0 +1,2 @@
+Exception in thread "main" java.lang.AssertionError: empty source slice returned after mapping.close()
+	at EmptySliceClosedRegression.main(EmptySliceClosedRegression.java:20)

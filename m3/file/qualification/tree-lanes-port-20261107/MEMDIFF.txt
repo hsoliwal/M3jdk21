@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: Apache-2.0
+# tree-lanes-port-20261107 (m3/file): member-level outputs. (1) memdiff.py of m3/qualification/foldaudit2-jbdrop-4d-20261107 at master 7ba69112479: <name>.o = closest master owner (M3FileFlag:M3FileAttributes, M3FileKind:M3NioFile, M3FileNames:M3FileLexicon, M3FileScanSpec:M3FileUniverseTraversal, M3FileWordCount:M3FileWcShadow), .b = empty (the file never existed on master), .t = the retained PR #1619 head copy. (2) crossscan.py: same-name members anywhere under master src/main of m3/file (124 sources), m3/fs (396), m3/collections (734), listed with owner file, enclosing type and declaration head (first five).
+## memdiff.py
+== M3FileFlag: PR adds 3, MISSING on master 3, PR changed 0
+  MISSING		M3FileFlag	11
+  MISSING	M3FileFlag	FAILED	37
+  MISSING	M3FileFlag	VALUES	39
+== M3FileKind: PR adds 7, MISSING on master 7, PR changed 0
+  MISSING		M3FileKind	11
+  MISSING	M3FileKind	OTHER	12
+  MISSING	M3FileKind	ALL	15
+  MISSING	M3FileKind	VALUES	17
+  MISSING	M3FileKind	bit	19
+  MISSING	M3FileKind	mask	24
+  MISSING	M3FileKind	of	31
+== M3FileNames: PR adds 22, MISSING on master 22, PR changed 0
+  MISSING		M3FileNames	18
+  MISSING	M3FileNames	table	19
+  MISSING	M3FileNames	hashes	20
+  MISSING	M3FileNames	offsets	21
+  MISSING	M3FileNames	pool	22
+  MISSING	M3FileNames	count	23
+  MISSING	M3FileNames	poolTop	24
+  MISSING	M3FileNames	intern	35
+  MISSING	M3FileNames	find	46
+  MISSING	M3FileNames	count	55
+  MISSING	M3FileNames	poolChars	60
+  MISSING	M3FileNames	length	64
+  MISSING	M3FileNames	charAt	69
+  MISSING	M3FileNames	name	75
+  MISSING	M3FileNames	compare	81
+  MISSING	M3FileNames	compare	86
+  MISSING	M3FileNames	appendTo	99
+  MISSING	M3FileNames	find	103
+  MISSING	M3FileNames	same	111
+  MISSING	M3FileNames	add	121
+  MISSING	M3FileNames	rehash	136
+  MISSING	M3FileNames	spread	147
+== M3FileScanSpec: PR adds 5, MISSING on master 5, PR changed 0
+  MISSING		M3FileScanSpec	19
+  MISSING	M3FileScanSpec	EAGER	20
+  MISSING	M3FileScanSpec	M3FileScanSpec	29
+  MISSING	M3FileScanSpec	lazy	34
+  MISSING	M3FileScanSpec	withArchives	39
+== M3FileWordCount: PR adds 1, MISSING on master 1, PR changed 0
+  MISSING		M3FileWordCount	14
+## crossscan.py
+== M3FileFlag
+  enum M3FileFlag: same-name types on master: 0
+  field FAILED (DIR, REGULAR, LINK, ARCHIVE, HIDDEN, SCANNED, RESIDENT, DIRTY, DELETED): 5 same-name members -> M3FsBulk.java M3FsBulk [public static final byte FAILED = 3]; M3BlockStore.java M3BlockStore [int FAILED = 1 << 3]; M3FilteredLists.java M3FilteredLists.View.Cursor [private static final int FAILED = 1 << 2]; M3LazyElementFlags.java M3LazyElementFlags [public static final short FAILED = 1 << 3]; M3LazyValueProvider.java M3LazyValueProvider [short FAILED = 4]
+  field VALUES (static final M3FileFlag[] VALUES = values()): 3 same-name members -> M3ConcurrentIntLane28.java M3ConcurrentIntLane28 [private static final VarHandle VALUES = MethodHandles.arrayElementVarH]; M3ConcurrentLongLane28.java M3ConcurrentLongLane28 [private static final VarHandle VALUES = MethodHandles.arrayElementVarH]; M3ConcurrentLongSet.java M3ConcurrentLongSet [private static final VarHandle VALUES]
+== M3FileKind
+  enum M3FileKind: same-name types on master: 0
+  field OTHER (FILE, DIRECTORY, SYMLINK, OTHER): 0 same-name members
+  field ALL (public static final int ALL = 0b1111): 5 same-name members -> M3CharacterFlags.java M3CharacterFlags [public static final int ALL = (1 << 10) - 1]; M3LazyEventBits.java M3LazyEventBits [public static final long ALL = (1L << 15) - 1L]; M3LongSortedSnapshot.java M3LongSortedSnapshot [private static final LongPredicate ALL = value -> true]; M3MatCapabilityFlags.java M3MatCapabilityFlags [public static final long ALL = (1L << 21) - 1L]; M3WindowRuntime.java M3WindowRuntime [public static final int ALL = BODY | FROZEN | HEADER | EDITOR | SCROLL]
+  field VALUES (static final M3FileKind[] VALUES = values()): 3 same-name members -> M3ConcurrentIntLane28.java M3ConcurrentIntLane28 [private static final VarHandle VALUES = MethodHandles.arrayElementVarH]; M3ConcurrentLongLane28.java M3ConcurrentLongLane28 [private static final VarHandle VALUES = MethodHandles.arrayElementVarH]; M3ConcurrentLongSet.java M3ConcurrentLongSet [private static final VarHandle VALUES]
+  method bit (public int bit()): 10 same-name members -> M3FileProjection.java M3FileProjection [private static int bit(M3FileTokenKind kind)]; M3PageableTree.java M3PageableTree [private static boolean bit(long[] words, int bit)]; M3BuildState.java M3BuildState [private static boolean bit(long[] words, int row)]; M3FsFeature.java M3FsFeature [private final long bit]; M3FsFeature.java M3FsFeature [public long bit()]
+  method mask (public static int mask(M3FileKind... kinds)): 40 same-name members -> M3FsPrecomputeCatalog.java M3FsPrecomputeCatalog [private static long mask(Set<M3FsPrecomputeBundle.Role> roles)]; PosixPermissions.java PosixPermissions.Type [private final int mask]; M3ConcurrentBitSet.java M3ConcurrentBitSet [private static long mask(int bit)]; M3DenseIdentityHashMap.java M3DenseIdentityHashMap [private int mask]; M3DenseIdentityHashSet.java M3DenseIdentityHashSet [private int mask]
+  method of (public static M3FileKind of(BasicFileAttributes attrs)): 35 same-name members -> M3CharacterFlags.java M3CharacterFlags [public static int of(CharSequence text)]; M3FileCoordinates.java M3FileCoordinates [public static long of(M3FileResolver resolver, int languageId)]; M3Hash256.java M3Hash256 [public static M3Hash256 of(byte[] bytes)]; M3NioFile.java M3NioFile [public static M3NioFile of(Path path)]; M3ContentId.java M3ContentId [public static M3ContentId of(byte[] sha256)]
+== M3FileNames
+  class M3FileNames: same-name types on master: 0
+  field table (private int[] table): 6 same-name members -> M3FileScope.java M3FileScope [private M3NioFile[] table = new M3NioFile[0]]; M3FS.java M3FS.DirectoryPage [private final M3DirectoryTable table]; M3FS.java M3FS.DirectoryPage [public M3DirectoryTable table()]; M3LinkedHashMap.java M3LinkedHashMap [private final Table table]; M3LongDisjointSparseTable.java M3LongDisjointSparseTable [private final long[] source,table]
+  field hashes (private int[] hashes): 12 same-name members -> M3FileDeltaLedger.java M3FileDeltaLedger.Snapshot [private final byte[] hashes]; M3FileDictionary.java M3FileDictionary [private int[] hashes = new int[16]]; M3FileTextPool.java M3FileTextPool [private int[] hashes = new int[16]]; M3NioFileDelta.java M3NioFileDelta.Snapshot [private final byte[] hashes]; M3BuildState.java M3BuildState.InventoryColumns [private byte[] hashes = new byte[0]]
+  field offsets (private int[] offsets): 23 same-name members -> M3FmtLexiconFrame.java M3FmtLexiconFrame.Frame [private final int[] offsets]; M3NioFile.java M3NioFile.RangeFingerprints [private final long[] offsets]; M3BuildState.java M3BuildState [private final int[] offsets]; M3DirectoryTable.java M3DirectoryTable [private final int[] offsets]; M3BlockPackedLongArray.java M3BlockPackedLongArray [private final int[] offsets]
+  field pool (private char[] pool): 23 same-name members -> M3FileLexicon.java M3FileLexicon [private final M3FileTextPool pool]; M3FileTextRef.java M3FileTextRef [private final M3FileTextPool pool]; Machine.java Machine [private Thread[] pool = new Thread[10]]; M3LabelLanes.java M3LabelLanes [private final M3LabelPool pool]; M3LabelLanes.java M3LabelLanes [public M3LabelPool pool ()]
+  field count (private int count): 44 same-name members -> M3FileByteFacts.java M3FileByteFacts.Builder [private long count]; M3FileKindIndex.java M3FileKindIndex [public int count(M3FileTokenKind kind)]; M3FileKindIndex.java M3FileKindIndex [public int count(M3FileTokenKind kind, int startToken, int endToken)]; M3FileLineShadow.java M3FileLineShadow [private int count = 1]; M3FileSourceFactsImage.java M3FileSourceFactsImage.DigestingBoundedOutputStream [private long count]
+  field poolTop (private int poolTop): 0 same-name members
+  method intern (int intern(String segment)): 14 same-name members -> M3FileDictionary.java M3FileDictionary [@Override public synchronized long intern(int languageId, CharSequence]; M3FileLexicon.java M3FileLexicon [public int intern(M3FileText value)]; M3FileLexicon.java M3FileLexicon [public int intern(int languageId, CharSequence text)]; M3FileText.java M3FileText [public static M3FileText intern(M3FileResolver resolver, int languageI]; M3FileTextPool.java M3FileTextPool [public synchronized M3FileTextRef intern(M3FileText value)]
+  method find (public int find(CharSequence segment)): 41 same-name members -> M3FileLexicon.java M3FileLexicon [public int find(M3FileText value)]; M3FileLexicon.java M3FileLexicon [public int find(int languageId, CharSequence text)]; M3LongLookup.java M3LongLookup [public static int find(long key, long[] ownerKeys, Geometry geometry)]; M3ModuleResources.java M3ModuleResources [@Override public synchronized Optional<URI> find(String name) throws I]; M3BuildState.java M3BuildState [public int find(String path, byte role)]
+  method count (public int count()): 44 same-name members -> M3FileByteFacts.java M3FileByteFacts.Builder [private long count]; M3FileKindIndex.java M3FileKindIndex [public int count(M3FileTokenKind kind)]; M3FileKindIndex.java M3FileKindIndex [public int count(M3FileTokenKind kind, int startToken, int endToken)]; M3FileLineShadow.java M3FileLineShadow [private int count = 1]; M3FileSourceFactsImage.java M3FileSourceFactsImage.DigestingBoundedOutputStream [private long count]
+  method poolChars (public int poolChars()): 0 same-name members
+  method length (public int length(int id)): 59 same-name members -> M3FileLineShadow.java M3FileLineShadow [public long length()]; M3FilePattern.java M3FilePattern [public int length()]; M3FileSource.java M3FileSource [public int length()]; M3FileText.java M3FileText [@Override public int length()]; M3FileText.java M3FileText.Cursor [int length()]
+  method charAt (public char charAt(int id, int index)): 7 same-name members -> M3FileText.java M3FileText [@Override public char charAt(int utf16Index)]; M3FileText.java M3FileText.Cursor [char charAt(int index)]; M3FileTokenizer.java M3FileTokenizer.Slice [@Override public char charAt(int index)]; M3FsPrecomputeBundle.java M3FsPrecomputeBundle.SegmentedUtf16String [@Override public char charAt(int index)]; M3FsPrecomputeBundle.java M3FsPrecomputeBundle.SegmentedUtf16String.Range [@Override public char charAt(int index)]
+  method name (public String name(int id)): 16 same-name members -> M3DirectoryTable.java M3DirectoryTable [public String name(int row)]; M3SnapshotStore.java M3SnapshotStore [private static String name(String value)]; MFile.java MFile [private final String name]; MFile.java MFile [public String name()]; FileSystemOptions.java FileSystemOptions.FileSystemOptionKey [private final String name]
+  method compare (public int compare(int a, int b)): 23 same-name members -> M3FileAttributeOrder.java M3FileAttributeOrder [public static int compare(M3FileAttributes left, M3FileAttributes righ]; M3NioFileDelta.java M3NioFileDelta [public static Comparison compare(Snapshot previous, Snapshot current)]; M3BuildState.java M3BuildState [private static int compare(String a, byte roleA, String b, byte roleB)]; M3FileSystemStore.java M3FileSystemStore [private static int compare(int a, int b, long[] starts, long[] ends)]; M3IdPairs.java M3IdPairs [static int compare(byte[] a, int ao, byte[] b, int bo)]
+  method compare (public int compare(int id, M3FileNames other, int otherId)): 23 same-name members -> M3FileAttributeOrder.java M3FileAttributeOrder [public static int compare(M3FileAttributes left, M3FileAttributes righ]; M3NioFileDelta.java M3NioFileDelta [public static Comparison compare(Snapshot previous, Snapshot current)]; M3BuildState.java M3BuildState [private static int compare(String a, byte roleA, String b, byte roleB)]; M3FileSystemStore.java M3FileSystemStore [private static int compare(int a, int b, long[] starts, long[] ends)]; M3IdPairs.java M3IdPairs [static int compare(byte[] a, int ao, byte[] b, int bo)]
+  method appendTo (void appendTo(int id, StringBuilder out)): 4 same-name members -> M3FileLexicon.java M3FileLexicon [public void appendTo(int localHandle, StringBuilder out)]; M3FileResolver.java M3FileResolver [default void appendTo(long id, StringBuilder out)]; M3FileText.java M3FileText [public void appendTo(StringBuilder target)]; Regexp.java Regexp [private void appendTo(StringBuilder out)]
+  method find (private int find(CharSequence segment, int hash)): 41 same-name members -> M3FileLexicon.java M3FileLexicon [public int find(M3FileText value)]; M3FileLexicon.java M3FileLexicon [public int find(int languageId, CharSequence text)]; M3LongLookup.java M3LongLookup [public static int find(long key, long[] ownerKeys, Geometry geometry)]; M3ModuleResources.java M3ModuleResources [@Override public synchronized Optional<URI> find(String name) throws I]; M3BuildState.java M3BuildState [public int find(String path, byte role)]
+  method same (private boolean same(int id, CharSequence segment)): 1 same-name members -> M3ImmutableId.java M3ImmutableId [public static boolean same(long leftPacked, long rightPacked)]
+  method add (private int add(String segment, int hash)): 183 same-name members -> M3CharacterFlags.java M3CharacterFlags [static int add(int flags, char value)]; M3FileBuilder.java M3FileBuilder [public M3FileBuilder add(M3FileText token, M3FileTokenKind kind)]; M3FileDictionary.java M3FileDictionary [private void add(long id, String text)]; M3FileImage.java M3FileImage [private static int add(int left, int right)]; M3FileLineShadow.java M3FileLineShadow [private void add(long start)]
+  method rehash (private void rehash()): 41 same-name members -> WeakHashtable.java WeakHashtable [protected void rehash()]; M3DenseIdentityHashMap.java M3DenseIdentityHashMap [private void rehash(int capacity)]; M3DenseIdentityHashMap.java M3DenseIdentityHashMap [private void rehash(int capacity, Object pendingKey, Object pendingVal]; M3DenseIdentityHashSet.java M3DenseIdentityHashSet [private void rehash(int capacity)]; M3DenseIdentityHashSet.java M3DenseIdentityHashSet [private void rehash(int capacity, Object pendingKey)]
+  method spread (private static int spread(int hash)): 2 same-name members -> M3FileMoveCandidates.java M3FileMoveCandidates [private static int spread(long value)]; M3FsPrecomputeBundle.java M3FsPrecomputeBundle.M3KeyValueSlots [private static int spread(int hash)]
+== M3FileScanSpec
+  record M3FileScanSpec: same-name types on master: 0
+  field EAGER (public static final M3FileScanSpec EAGER = new M3FileScanSpec(Integer.): 0 same-name members
+  method M3FileScanSpec (public M3FileScanSpec(int maxDepth, int residencyCapacity)): 0 same-name members
+  method lazy (public static M3FileScanSpec lazy(int depth)): 2 same-name members -> M3ListModel.java M3ListModel [private final boolean lazy]; M3TreeMap.java M3TreeMap.Tree [private final M3LazyValueState<K, V> lazy]
+  method withArchives (public M3FileScanSpec withArchives()): 0 same-name members
+== M3FileWordCount
+  record M3FileWordCount: same-name types on master: 0

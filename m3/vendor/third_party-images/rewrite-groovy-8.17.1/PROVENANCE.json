@@ -1,0 +1,362 @@
+{
+  "artifact": "rewrite-groovy",
+  "automatic_module_name": "",
+  "build": "none",
+  "build_reason": "LOMBOK_AT_SOURCE_LEVEL",
+  "consumers": "synexia-openrewrite-recipes",
+  "coordinate": "org.openrewrite:rewrite-groovy:8.17.1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "rewrite-groovy-8.17.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/META-INF/MANIFEST.MF",
+      "sha256": "1d933e23b7ec57732e091a22f19d98982e1759b58068980e380cdbf50837d051",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/META-INF/rewrite-groovy.properties",
+      "sha256": "557695ae394f378288e75d647120ed5a38246cc1f26f2c9a63b19e38ebdeb829",
+      "upstream": "META-INF/rewrite-groovy.properties"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/Assertions.java",
+      "sha256": "1c4df75d4b453f0f82600e8b337d2bc0e94b6952f03e75fd8b4b6d3578b2989d",
+      "upstream": "org/openrewrite/groovy/Assertions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/CompiledGroovySource.java",
+      "sha256": "a3a7017b37e072a4d2a1588a652ad407a5e34db4f4581317501bce04ae40c951",
+      "upstream": "org/openrewrite/groovy/CompiledGroovySource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/CountLinesVisitor.java",
+      "sha256": "9d601222e26638db35b4538b9f89af7ebd0f454497a1fd29e9c70c697bbe43a0",
+      "upstream": "org/openrewrite/groovy/CountLinesVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/GroovyAstTypeSignatureBuilder.java",
+      "sha256": "926d8cf046124f7cd2e7cd93293a6f4183378a81305eafcea60248a90da2f3e6",
+      "upstream": "org/openrewrite/groovy/GroovyAstTypeSignatureBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/GroovyIsoVisitor.java",
+      "sha256": "42351225f8c670a22f78a4d42c0635fecfd65180557b4ac9db48f71dd8d02ddc",
+      "upstream": "org/openrewrite/groovy/GroovyIsoVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/GroovyParser.java",
+      "sha256": "24eefea733095fedb63a6d814213b31e669450d917ca5930deba2036c6b461b4",
+      "upstream": "org/openrewrite/groovy/GroovyParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/GroovyParserVisitor.java",
+      "sha256": "c201bc0fd662cb849dd70a8be6660f461f61b282ad84903eeb2015910f4f45e7",
+      "upstream": "org/openrewrite/groovy/GroovyParserVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/GroovyParsingException.java",
+      "sha256": "75feedea84e839e3281e0b1b3726e197c7ce184cafdd3f48604355eaf0ec26ba",
+      "upstream": "org/openrewrite/groovy/GroovyParsingException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/GroovyPrinter.java",
+      "sha256": "2c4e7b8be75e976faf153225a1174d718818b8b12ae794ca37eb0625f379ff34",
+      "upstream": "org/openrewrite/groovy/GroovyPrinter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/GroovyTypeMapping.java",
+      "sha256": "c8de0210efa353a98eac660c2109e719aa57e8a4f8137468c42b4a8a36dc3999",
+      "upstream": "org/openrewrite/groovy/GroovyTypeMapping.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/GroovyVisitor.java",
+      "sha256": "9a3d63b584ef66e28e2892a4fb4bcc408fb1409fc951d21d2c1bcf34e2041d80",
+      "upstream": "org/openrewrite/groovy/GroovyVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/ParseWarningCollector.java",
+      "sha256": "dad7a84352d01207465f3f58b5190d8fb228358436bfce4bab274e0fb8d73296",
+      "upstream": "org/openrewrite/groovy/ParseWarningCollector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/TrailingComma.java",
+      "sha256": "bb211a3d99a9554ec055db48e5f54fa694b78e8dabd4a45e97cc1eba34d2f783",
+      "upstream": "org/openrewrite/groovy/TrailingComma.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/format/AutoFormat.java",
+      "sha256": "a920fef7ba9699c1bb4930f0687494baa33bf95b31dc5cec02b83aa70a5e8ddd",
+      "upstream": "org/openrewrite/groovy/format/AutoFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/format/AutoFormatVisitor.java",
+      "sha256": "9190e4e8630e88a0f4d82622dd025d9e011b95fccc0ba7034c7dc7fa192ff7ad",
+      "upstream": "org/openrewrite/groovy/format/AutoFormatVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/format/GStringCurlyBraces.java",
+      "sha256": "3794861037df4bb4d74ca1be65639197b59d5fdc0089275840055583a1a990bf",
+      "upstream": "org/openrewrite/groovy/format/GStringCurlyBraces.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/format/MinimumViableSpacingVisitor.java",
+      "sha256": "f89151fb0d05b4f2f7e6948c01d970f7287f0ace0d63b77f8f010e9defd0bbfe",
+      "upstream": "org/openrewrite/groovy/format/MinimumViableSpacingVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/format/OmitParenthesesForLastArgumentLambda.java",
+      "sha256": "388dc589e749c3b9cbe9283a51beab4291b50300ceaf0a2c6eb1c464706fbd70",
+      "upstream": "org/openrewrite/groovy/format/OmitParenthesesForLastArgumentLambda.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/format/OmitParenthesesForLastArgumentLambdaVisitor.java",
+      "sha256": "6a414ebac6611ef3dd89b3feec233494b5790ac1389b882a869976c6c40afc51",
+      "upstream": "org/openrewrite/groovy/format/OmitParenthesesForLastArgumentLambdaVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/format/OmitParenthesesFormat.java",
+      "sha256": "4652399370617ad6d4e07eafaed412d9aa01ef58ebc6b396e079bd7082a492c3",
+      "upstream": "org/openrewrite/groovy/format/OmitParenthesesFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/format/package-info.java",
+      "sha256": "7f606c623e0c591a764e3519f93472ff17d4e08490e3e0001f8169d8090be548",
+      "upstream": "org/openrewrite/groovy/format/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/internal/GroovyWhitespaceValidationService.java",
+      "sha256": "dbd30a5049c29e540f89fdbbaa6b53acf70c92f1399f362137009779f713bbd1",
+      "upstream": "org/openrewrite/groovy/internal/GroovyWhitespaceValidationService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/internal/package-info.java",
+      "sha256": "9445664d918df102fec8f3ce3411f1601093aeb6ae304de5a2f69e10bc9c71fc",
+      "upstream": "org/openrewrite/groovy/internal/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/AsStyleTypeCast.java",
+      "sha256": "d906636f4a10c03f2aa8444796b14c076756b846eff53d117d0f041b7df5c53a",
+      "upstream": "org/openrewrite/groovy/marker/AsStyleTypeCast.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/Elvis.java",
+      "sha256": "4d4cea321c41b4c63211de4af6d917b6f15704d0fec5bc848c8a46ded5459f85",
+      "upstream": "org/openrewrite/groovy/marker/Elvis.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/EmptyArgumentListPrecedesArgument.java",
+      "sha256": "afe879e4a181d5a66ad4e70e0669b93340e0e82c6577708fa1dc3c2aa7a4398c",
+      "upstream": "org/openrewrite/groovy/marker/EmptyArgumentListPrecedesArgument.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/ImplicitDot.java",
+      "sha256": "06564e82c7eae23f3facbe820c1d569058318bcc39e0237dde13f124a058ef8b",
+      "upstream": "org/openrewrite/groovy/marker/ImplicitDot.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/ImplicitReturn.java",
+      "sha256": "c6642f574e1fb77bf238ed660950e198ce41c98cf3288026cb3d84af46a00a28",
+      "upstream": "org/openrewrite/groovy/marker/ImplicitReturn.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/InStyleForEachLoop.java",
+      "sha256": "522bd12f388f99b48067dfb35c5bce4319cf2ec093d5f3af227b46c8713eb2cf",
+      "upstream": "org/openrewrite/groovy/marker/InStyleForEachLoop.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/LambdaStyle.java",
+      "sha256": "4d83c9f5a59694f74af8f7701b81cf7a13b19430b41d2d504c136e6b78c56602",
+      "upstream": "org/openrewrite/groovy/marker/LambdaStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/NullSafe.java",
+      "sha256": "0dc04da01114a8deaa7dba5052335b56a2fa47a7ab9b9b976ed2b507098a9f59",
+      "upstream": "org/openrewrite/groovy/marker/NullSafe.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/OmitParentheses.java",
+      "sha256": "e7c0ce049a33860302f6aed851789f84956cf2cd10c04fe92a1f2bd0be06c69a",
+      "upstream": "org/openrewrite/groovy/marker/OmitParentheses.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/Semicolon.java",
+      "sha256": "d8e7e3dc5c9a5c9f2fdd2b2816d8a83de1e1d1d6305ff2f0398c0ccbb6b9932b",
+      "upstream": "org/openrewrite/groovy/marker/Semicolon.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/StarDot.java",
+      "sha256": "aff31cabf299c16b9a4bc86983ea827d0c793b247e5cad273991b26d536a8b06",
+      "upstream": "org/openrewrite/groovy/marker/StarDot.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/marker/package-info.java",
+      "sha256": "bb57f92951af92edf49e1992ac6b753dc71227af9b0d08e4b8ad09b3dc31d44f",
+      "upstream": "org/openrewrite/groovy/marker/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/package-info.java",
+      "sha256": "819a63596786ee15672e3ed4742cb1f7adc0bc0684e6574e92b5b0bbbfad824c",
+      "upstream": "org/openrewrite/groovy/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/service/GroovyAutoFormatService.java",
+      "sha256": "975d7deaaae58273c7dd3f96128585dc19a6fa8ee2018f89b5b6dab7e3931a4e",
+      "upstream": "org/openrewrite/groovy/service/GroovyAutoFormatService.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/style/OmitParenthesesStyle.java",
+      "sha256": "dee6254b7a5de4cf16652977505af7f9a400efc58b32b6a797a06150d1eb6f4e",
+      "upstream": "org/openrewrite/groovy/style/OmitParenthesesStyle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/style/package-info.java",
+      "sha256": "fd5aa672e8c362a697c534845855bfb3863a63cb740e332bb9f679be22412396",
+      "upstream": "org/openrewrite/groovy/style/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/tree/G.java",
+      "sha256": "5a17ee150271785aca4498083a6be44be230c877a5c96fc09d1cd91d39229900",
+      "upstream": "org/openrewrite/groovy/tree/G.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/tree/GContainer.java",
+      "sha256": "776f10cf1304750aff372bb8f4a3699f3f22be0b8cd3d4989e7675aab14e358d",
+      "upstream": "org/openrewrite/groovy/tree/GContainer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/tree/GLeftPadded.java",
+      "sha256": "f85ce8f919f271f228b8911a67049f1a63f86eb56407bbbdb5cc9538690c95a8",
+      "upstream": "org/openrewrite/groovy/tree/GLeftPadded.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/tree/GRightPadded.java",
+      "sha256": "3ecdf832dc45dfb6294744867ca482d5065d9d05342766730852bd117527fd5e",
+      "upstream": "org/openrewrite/groovy/tree/GRightPadded.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/tree/GSpace.java",
+      "sha256": "acddebc8242e8f6b33cec72a3e88981fdba5741a85298398283ef4e7a4f4d22a",
+      "upstream": "org/openrewrite/groovy/tree/GSpace.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/org/openrewrite/groovy/tree/package-info.java",
+      "sha256": "cf81a6dcbe57dd7e79df2c02f8dc910daecb2234ad7dc855068ff6d1c15bc739",
+      "upstream": "org/openrewrite/groovy/tree/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/UPSTREAM_LICENSE.json",
+      "sha256": "a271c26b53853861abd8a3061141ba591471f91cda257c903b1f2ebd595e9983",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/UPSTREAM_LICENSE.txt",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/UPSTREAM_LOMBOK.config",
+      "sha256": "7a7eb5e33aaf354f59875207a37f97df1d3593910e8c3018aa3975b09e8e1b01",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/UPSTREAM_LOMBOK.json",
+      "sha256": "82fd634a844fe675cf5e6bb15a462e770e901dae27a7905bb72e822712cdfb70",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/SOURCES_MANIFEST.tsv",
+      "sha256": "17f81476759b0bec356a5c9ba072eca8a68dfac8d771df3eb6edbb748fc21dba",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party-images/rewrite-groovy-8.17.1/LICENSE",
+      "sha256": "f312c4de3f7a4671fda4bd0c0062fe89001cce61429cc7e8c2bebc9218e7ff7f",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.openrewrite",
+  "kind": "IMAGE",
+  "license": "The Apache Software License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-groovy/8.17.1/rewrite-groovy-8.17.1.pom",
+  "receipt": {
+    "buildRoot": "",
+    "distributionSha256": "2463d4328b8ff0d6b11b00f35d92c978feb119c84114a0240e9463971f5bce51",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "build not requested",
+    "sourceRoot": "8c1f2097f935ac0b0869c9603297db8bf31017f84c2cbc3111932b0bb0c748bc",
+    "status": "SOURCE_ONLY"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/openrewrite/rewrite-groovy/8.17.1/rewrite-groovy-8.17.1-sources.jar",
+  "sources_jar_sha1": "41821cb435f9851949581c0211f749ec9786190f",
+  "sources_jar_sha256": "6849c040c57331d999b68ed03b5c6ae5144e8dc3639dcf25c74a5713e85f9437",
+  "status": "SOURCE_ONLY",
+  "upstream": "https://github.com/openrewrite/rewrite",
+  "version": "8.17.1"
+}

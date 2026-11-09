@@ -1,0 +1,326 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema": 1,
+  "binding_status": "BOUND_TO_CANONICAL_RECIPE_APPLIED_SOURCE_AND_READ_BACK_BLOBS",
+  "authority": "TARGET_RECEIVER_MAPPING_AND_EVIDENCE_ONLY",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_pr": 12666,
+  "canonical_recipe_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12666",
+  "canonical_recipe_revision": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
+  "canonical_recipe": "jdk.internal.m3.FilteredFirstVisibleRuntime20261021",
+  "canonical_recipe_path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021",
+  "canonical_recipe_stack_prerequisite": {
+    "pull_request": 12650,
+    "revision": "ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c"
+  },
+  "canonical_source_preimage": {
+    "repository": "hsoliwal/M3JDK21",
+    "pull_request": 1603,
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "target_manifest_path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/TARGETS.json",
+    "target_manifest_sha256": "4507907e05eb0ce4db04351c9d08a2e644f92639fc502836d4d4114e099aa775"
+  },
+  "receiving_baseline": "6d9bad615851f346e3062e3034ccd74cbe2776af",
+  "receiving_prerequisite": "hsoliwal/M3JDK21#1642",
+  "preimage_rule": "Source provenance remains pinned to #1603. The actual target application is stacked on #1642; the selected-source custody verifies the exact wrapper preimage and absence of both new test paths before writing. The inherited native-lane files retain their exact #1642 bytes. Parent publication/source-stack verification is distinct from this bounded selected-source execution.",
+  "status": "PENDING_FULL_TARGET_ACCEPTANCE",
+  "scope": "EXISTING_SEPARATE_APACHE_COLLECTION_OWNER; TWO_PRIVATE_FIRST_VISIBLE_LOOPS_AND_TWO_REGRESSION_FILES",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "license": "Apache-2.0; retain existing per-file copyright, modification notices and canonical NOTICE; no repository-wide relicensing",
+  "public_api": "Existing public/protected production signatures unchanged; no new collection facade, production dependency, native change or JNI export",
+  "target_paths": [
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomContract.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomTest.java"
+  ],
+  "source_seals": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "before_sha256": "fb1f4da6cbfcaf27385bad58eb810f22b1f8f5577b73bd04fc8c06c871c5035c",
+      "after_sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea",
+      "before_git_blob": "513a104b589b7834cf873cd46054d233b5302d74",
+      "after_git_blob": "d88392fdd5fe0674ed13adf544585654dc8cfc59"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "2e1e184d757695e3f65b0f8d1e1e0ab74327626f3b0ad33d21c309c6b4f95bfe",
+      "after_git_blob": "4f1cc4bfef784c11fde03eae8270ab9621bea3a5"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f2c51985b6966d0eda1531ea21742477f8c0ee504f188938f3dca381e44d9367",
+      "after_git_blob": "948e692f424ad6cd5bfd1ccff0cebf690d2ca072"
+    }
+  ],
+  "source_postimages": [
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-wrapper-owner/M3FilteredViews.java.txt",
+      "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea",
+      "git_blob": "d88392fdd5fe0674ed13adf544585654dc8cfc59",
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "target_specific_source_adaptations": []
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-probe/M3FirstVisibleAtomContract.java.txt",
+      "sha256": "2e1e184d757695e3f65b0f8d1e1e0ab74327626f3b0ad33d21c309c6b4f95bfe",
+      "git_blob": "4f1cc4bfef784c11fde03eae8270ab9621bea3a5",
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomContract.java",
+      "target_specific_source_adaptations": []
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-test/M3FirstVisibleAtomTest.java.txt",
+      "sha256": "f2c51985b6966d0eda1531ea21742477f8c0ee504f188938f3dca381e44d9367",
+      "git_blob": "948e692f424ad6cd5bfd1ccff0cebf690d2ca072",
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomTest.java",
+      "target_specific_source_adaptations": []
+    }
+  ],
+  "canonical_recipe_sdk_proof_sha256": "688e24e3c80dfa2ea64bc6cfbb952291b3eeb5898a3cd8a6e20d2565513cecfe",
+  "canonical_three_file_receiver_root": "759d990c9a943e42e9cb399ccd92b4a13ddc3feee07ba462b3645f0d5ad81ae6",
+  "preserved_native_lane": {
+    "pull_request": 1642,
+    "revision": "6d9bad615851f346e3062e3034ccd74cbe2776af",
+    "canonical_recipe": "jdk.internal.m3.MaskNativeAtomsRuntime20261021",
+    "canonical_revision": "ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c",
+    "files": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
+        "git_blob": "945375ce32080537da2b6544d59f537ee8271644"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2",
+        "git_blob": "1fede488cf577ffc8c90b503c4f4e45369aba5b9"
+      },
+      {
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskRangeNativeTest.java",
+        "sha256": "13807a357ce639fba9d0c9e7111bb65c7aac1035706556c11c3ff10be40b136c",
+        "git_blob": "3e7dfb1cb97ea0390238ccf0837558f3369d1222"
+      },
+      {
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskPositionAtomsTest.java",
+        "sha256": "719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf",
+        "git_blob": "d7e14c6af0cc7092cda3c87d0310449324cad028"
+      },
+      {
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java",
+        "sha256": "7a286b65a23caa3c5ecf2eca579a6bb7758a142f1042fba874cfba7680d78339",
+        "git_blob": "336c37bb0db306243d360f96ea9b82a450c0255b"
+      }
+    ],
+    "target_verification": "All five selected native-lane files retained their bytes, modes, mtimes and inodes across check/apply/replay and fresh Java qualification; this gate ran no native execution",
+    "verified_file_count": 5
+  },
+  "implementation_pattern": {
+    "repository": "hsoliwal/M3JDK21",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+    "git_blob": "076778a34b49ca1ef7eac47cd9b6cf33b0fbe55f",
+    "sha256": "19cbdee1b2e604ad5e491f9089d2ff869852cedee8ffd086e78bc887043678eb",
+    "method": "firstMatch",
+    "license": "Apache-2.0 file-level notice",
+    "donor_source_modified": false,
+    "adaptation": "Reuse direct first-match iteration in the existing private set and map firstVisible helpers; retain separate predicate getter pair and immutable-entry snapshot getter pair"
+  },
+  "selection_contract": [
+    "Iterator creation timing and hasNext/next order remain at the existing call sites",
+    "Predicate/comparator demand, accepted reference identity, null/empty behavior and stop position are preserved within the stated scope",
+    "Map predicate key/value getters remain separate from the SimpleImmutableEntry constructor getter pair",
+    "Caller-owned exception identity and callback/termination prefixes remain covered",
+    "boundedEntry, range factories and existing range-recovery failures remain unchanged"
+  ],
+  "limits": [
+    "No universal equivalence claim over arbitrary caller implementations",
+    "Internal implementation stack-frame shape changes; byte-identical internal stack traces and outcomes of callbacks deliberately using StackWalker or throwable stack introspection are outside equivalence scope",
+    "No exhaustive VM allocation-failure/OOME equivalence or allocation-timing guarantee",
+    "No measured speedup, allocation-byte or zero-allocation result; a JIT may already eliminate the prior adapter"
+  ],
+  "complexity": "O(k) visited prefix and O(1) selection state; no asymptotic change",
+  "retained_known_failures": {
+    "late_range_failures": 100,
+    "real_comparator_failures": 3,
+    "initial_range_factory_comparator_origin": "Original expected failure remains unresolved",
+    "classification": "Preservation evidence for existing defects; not successful repair"
+  },
+  "canonical_evidence": {
+    "three_stage_qualification": {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/results.json",
+      "sha256": "275770822abb8985e09a99f435f1e0958d03db5463eb1ba7d95cc7a46d6c0cd7",
+      "commands": 44,
+      "exact_output_comparisons": 38,
+      "normal_cases_per_stage": 64,
+      "caller_owned_failure_probes_per_stage": 1104,
+      "qualification_manifest": {
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/FILES.json",
+        "sha256": "f97d250bc8a2eda0e46808935ce56ee200344a175ac44d0e1532e7c88b9a0112",
+        "files": 76
+      }
+    },
+    "emitted_source_verification": {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/evidence/results.json",
+      "sha256": "5a784073627b22c0bd9358df79c51eb5adb7d775f3366013117711f061283071",
+      "commands": 9,
+      "exact_output_comparisons": 6,
+      "focused_junit_tests": 1,
+      "normal_cases": 64,
+      "caller_owned_failure_probes": 1104,
+      "execution_boundary": "Fresh canonical emitted-source verification; the original 44 commands and 38 comparisons are reused historical evidence, not rerun by these nine commands"
+    },
+    "selection_tape_sha256": "53a3ac80b4ba43ad3df0c2397041513fb02346c2ba2cb2ddebc12b7540329b99",
+    "source_replay": {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/evidence/recipe-sdk/recipe-proof.tsv",
+      "sha256": "688e24e3c80dfa2ea64bc6cfbb952291b3eeb5898a3cd8a6e20d2565513cecfe",
+      "scope": "source-replay-only",
+      "file_phases": 3,
+      "atom_phases": 2,
+      "synthetic_chain_refusal_controls": 8
+    },
+    "isolated_copier": {
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/evidence/copier/results.json",
+      "sha256": "066a66dd283ee9eee30bf862a13a4f300d200b7f77a590a5752a579d38e6f829",
+      "commands": 8,
+      "refusals": 6,
+      "excluded_native_sentinel_unchanged": true
+    },
+    "runtime_scope": "Canonical qualification observations retain their own scope. Fresh target application, replay and Java execution are separately bound to actual receipts. Canonical publication and source content-object readback are now bound by immutable identities; final PR file-set verification is a separate publication check."
+  },
+  "canonical_catalogue": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/catalogue.tsv",
+    "sha256": "baca96aaa58cd6504544bf63b93ded22da3b09c08e65a006680a05e3598bd548",
+    "row_ids": [
+      "first_visible_set_atom_20261021",
+      "first_visible_map_atom_20261021",
+      "first_visible_external_search_categories_20261021",
+      "first_visible_range_repair_refusal_20261021",
+      "first_visible_serial_atom_composition_20261021"
+    ],
+    "external_sources": "LeetCode, HackerRank and GeeksforGeeks are category/compatibility references only; no challenge or editorial implementation body copied"
+  },
+  "canonical_notice": {
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/NOTICE.md",
+    "sha256": "761011acd6947fb98c03feaaa4d3422ea251aec9a4e6ad31c33b315c7e81d683",
+    "target_notice_retention": "Canonical NOTICE retained verbatim as the prefix of this target packet NOTICE.md; target-specific receiving attribution appended"
+  },
+  "root_mapping_reference": {
+    "path": "m3/docs/name-mapping.json",
+    "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+    "git_blob": "ce76431af299d15823c1cd30f9083ab1a9186f03",
+    "sha256": "ac0b133afdfedcf68727332c91e82390a951f3a03350a6cffa9de0e6edcb77f0",
+    "owner_pointers": [
+      "/family_name_mapping/3"
+    ],
+    "receiving_sequence_pointer": "/porting_invariant/receiving_sequence",
+    "root_map_modified": false
+  },
+  "receiving_sequence": "STRING remains active; subsequent family acceptance and the global plan remain unchanged",
+  "fresh_target_bindings": {
+    "preimage_custody": {
+      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/preimage-custody.json",
+      "sha256": "f451876b339e26bb5318e569fcc052115429e8aa305e1776e0558984500fd566",
+      "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
+    },
+    "application_receipt": {
+      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/copier-apply.receipt.json",
+      "sha256": "51f39ec1fb75f8d8483ac6c876b0918fccb87a5e88f2cadd69249354e7ef5003",
+      "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
+    },
+    "replay_receipt": {
+      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/copier-replay.receipt.json",
+      "sha256": "57d59d1057171de01097b3ac7940086c54bf841eb72fba472d366dd9973e0a55",
+      "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
+    },
+    "readback_receipt": {
+      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/source-blobs-readback.json",
+      "sha256": "65decf3eab8ca1e347b832c36a826fc8c18faeba72abca0149e8e7c07679ebd1",
+      "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
+    },
+    "verification_receipt": {
+      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/results.json",
+      "sha256": "b38d83d0e9cf791501e999fa2d31ef60da1380a5e5fa498dddb7fe0e3e1ba119",
+      "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
+    },
+    "commands_receipt": {
+      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/commands.json",
+      "sha256": "a87960cb8ef9dd28765327b9503b414504ace881fb58ecb0375e859995548204",
+      "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
+    },
+    "comparisons_receipt": {
+      "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/evidence/comparisons.json",
+      "sha256": "aad840fc686fd314661c47287f787ddd4dbbfb6eef982f7e80758de28416721c",
+      "status": "BOUND_TO_ACTUAL_OBSERVED_RECEIPT"
+    }
+  },
+  "pending_gates": [
+    "Generic Synexia task admission, donor prerequisite and whole-repository serial-review composition",
+    "Installed-source donation inventory and applicable target receiving gates",
+    "Whole collection module/source-dependency matrix, full reactor, installed M3JDK image and jtreg",
+    "Other platforms, lifetime/concurrency and CPU/retained-heap/native/process-memory matrices"
+  ],
+  "automatic_application": false,
+  "phase_advance": false,
+  "family_completion": false,
+  "runtime_dependency_on_synexia": false,
+  "fresh_target_scope": {
+    "source_subset": true,
+    "full_checkout": false,
+    "base_revision": "6d9bad615851f346e3062e3034ccd74cbe2776af",
+    "commands": 14,
+    "exact_output_comparisons": 8,
+    "copier_commands": 3,
+    "direct_probe_invocations": 1,
+    "junit_tests": 1,
+    "focused_probe_invocations": 2,
+    "normal_cases_per_invocation": 64,
+    "caller_owned_failure_probes_per_invocation": 1104,
+    "distinct_corpus_note": "Two invocations of the same focused corpus; not 2336 distinct cases",
+    "public_protected_api_unchanged": true,
+    "stable_read_tape_unchanged": true,
+    "exception_control_cases": 120,
+    "exception_control_checks": 240,
+    "known_failure_outcomes": "100 late-range, three real-comparator and original comparator-origin outputs matched expected exit1; retained defects are not repairs",
+    "historical_44_command_38_comparison_matrix_rerun": false,
+    "native_execution": "NONE_EXCLUDED_SOURCES_ONLY",
+    "semantic_scope_exclusions": [
+      "internal stack-frame inspection including StackWalker",
+      "exhaustive allocation-failure/OOME equivalence",
+      "allocation timing"
+    ],
+    "full_jdk_build": "NOT_RUN",
+    "whole_module": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "performance_claim": "NONE"
+  },
+  "target_verifier": {
+    "path": "m3/collections/qualification/m3-filtered-first-visible-runtime-20261021/verification/verify_target_wrappers.py",
+    "sha256": "c7c048a262887b6ebd17fac9357dd05fac6a9d396ea3309234622ae0a2614480",
+    "scope": "Selected-source application and Java verification; consumes qualified output and preserves existing oracles; no transformation engine",
+    "license": "Apache-2.0",
+    "existing_verification_patterns": [
+      {
+        "repository": "hsoliwal/com.synexia",
+        "revision": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/verify_emitted.py",
+        "sha256": "962e81d03b4af96e1d647b9bb6ca90ecfd65ffec38a309dee7683f5c2368809d"
+      },
+      {
+        "repository": "hsoliwal/M3JDK21",
+        "revision": "6d9bad615851f346e3062e3034ccd74cbe2776af",
+        "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/verification/verify_target_native.py",
+        "sha256": "6b6bd9bafd1d275fcc13e62320e9788afc197d8f9e56cb7258bf93858017ad52"
+      }
+    ]
+  },
+  "publication_verification_boundary": "The source-blob receipt verifies content objects before this branch is published. Final PR changed paths, blob identities, parent and head are checked separately after publication; this metadata does not pre-assert that later result."
+}

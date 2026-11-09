@@ -1,0 +1,2 @@
+PROCESS_GROUP_TIMEOUT_PASS parent_exit=-15 descendants_in_same_session=true ignored_term_child_forced=true seconds=5.005
+termination_signals=SIGTERM,SIGKILL

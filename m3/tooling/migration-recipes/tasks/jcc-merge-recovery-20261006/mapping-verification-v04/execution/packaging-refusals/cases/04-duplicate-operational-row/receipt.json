@@ -1,0 +1,35 @@
+{
+  "case": "04-duplicate-operational-row",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-I",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/package_mapping.py",
+    "--execution",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/workspace/execution",
+    "--validator",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/workspace/validator",
+    "--output",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/forbidden-output"
+  ],
+  "exit_code": 1,
+  "expected_exception": "AssertionError",
+  "expected_guard": "assert len(resources[\"rows\"]) == 4",
+  "harness_relocation": {
+    "field": "actual_source_binding.materialized_root",
+    "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/materialized",
+    "scope": "Harness-only relocation to the exact isolated actual Result copies",
+    "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/workspace/execution/materialized"
+  },
+  "input_copies_unchanged": true,
+  "intended_exception_observed": true,
+  "intended_guard_observed": true,
+  "mutation": {
+    "kind": "duplicate one existing actual row",
+    "path": "bound-inputs/MAPPING_RESOURCES.json"
+  },
+  "output_created": false,
+  "status": "PASS",
+  "stderr_sha256": "435ddcc7847480be19ee8a63b985914fb362dba1c9e224a422b05aec208f0ca1",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

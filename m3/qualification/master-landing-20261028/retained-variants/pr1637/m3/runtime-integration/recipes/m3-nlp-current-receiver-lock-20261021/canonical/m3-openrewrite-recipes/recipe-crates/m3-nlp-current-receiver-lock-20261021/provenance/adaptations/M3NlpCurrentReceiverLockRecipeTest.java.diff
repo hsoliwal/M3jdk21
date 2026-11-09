@@ -1,0 +1,48 @@
+--- synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java
++++ synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/src/test/java/com/synexia/rewrite/M3NlpCurrentReceiverLockRecipeTest.java
+@@ -56,11 +56,14 @@
+  * b6c35b9a1f528dd9e5a3d9f6f4c51ca360db43d7 for this distinct packet.
+  * Dependency probes are source-sealed and limited to this packet; no old
+  * 53-path or seven-event evidence is recovered. Product compiler, behavioral and native runtime gates
+- * remain separate authorities.</p>
++ * remain separate authorities. Adapted 2026-10-21 from published core #12648
++ * for the distinct one-file NLP source-lock correction; scheduler gates and
++ * actual-owner attribution are retained. No core runtime or memory result
++ * is inherited by this packet.</p>
+  */
+-final class M3IntegratedRefinementRecipeTest {
+-    private static final String ID = "m3-integrated-refinement-20261021";
+-    private static final String NAMED = "com.synexia.m3.IntegratedRefinement20261021";
++final class M3NlpCurrentReceiverLockRecipeTest {
++    private static final String ID = "m3-nlp-current-receiver-lock-20261021";
++    private static final String NAMED = "com.synexia.m3.NlpCurrentReceiverLock20261021";
+     private static final String PARSER_CLASSPATH =
+             "com.synexia.rewrite.hashPinnedJavaSnapshotRecipe.parserClasspath";
+     private static final Path CRATE = Path.of(Objects.requireNonNull(System.getProperty("crate"), "crate"))
+@@ -192,7 +195,7 @@
+ 
+     private static String resource(Phase phase, String name) throws Exception {
+         String location = "/com/synexia/rewrite/hash-pinned-" + phase.kind() + "/" + phase.id() + "/" + name;
+-        try (var input = M3IntegratedRefinementRecipeTest.class.getResourceAsStream(location)) {
++        try (var input = M3NlpCurrentReceiverLockRecipeTest.class.getResourceAsStream(location)) {
+             return new String(Objects.requireNonNull(input, location).readAllBytes(), StandardCharsets.UTF_8);
+         }
+     }
+@@ -404,7 +407,7 @@
+         StringBuilder yaml = new StringBuilder("# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project\n"
+                 + "# SPDX-License-Identifier: Apache-2.0\n"
+                 + "type: specs.openrewrite.org/v1beta/recipe\nname: " + NAMED
+-                + "\ndisplayName: M3 integrated refinement recovery 20261021\n"
++                + "\ndisplayName: M3 current NLP receiver source lock 20261021\n"
+                 + "description: Apply independently qualified hash-pinned file phases.\nrecipeList:\n");
+         for (Phase phase : phases) {
+             yaml.append("  - com.synexia.rewrite.M3HashPinned")
+@@ -475,7 +478,7 @@
+         custody.put("phases.tsv", sha(Files.readAllBytes(CRATE.resolve("phases.tsv"))));
+         custody.put("pom.xml", sha(Files.readAllBytes(CRATE.resolve("pom.xml"))));
+         custody.put("test.java", sha(Files.readAllBytes(CRATE.resolve(
+-                "src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java"))));
++                "src/test/java/com/synexia/rewrite/M3NlpCurrentReceiverLockRecipeTest.java"))));
+         custody.put("dependency_probe_sha256", sha(Files.readAllBytes(
+                 CRATE.resolve("attribution/DependencyCustody.java"))));
+         custody.put("dependency_expectations_sha256", sha(Files.readAllBytes(

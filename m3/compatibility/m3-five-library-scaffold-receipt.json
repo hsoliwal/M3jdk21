@@ -1,0 +1,630 @@
+{
+  "schema": "M3JDK21_SYNEXIA_FIVE_LIBRARY_SCAFFOLD_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-five-library-scaffold-20261018",
+    "pullRequest": 12384,
+    "commit": "6182ad6eb1fc1397c839b72394219863dc1aa35e",
+    "recipe": "com.synexia.rewrite.M3FiveLibraryScaffoldRecipe",
+    "declarativeRecipe": "com.synexia.m3.FiveLibraryScaffold",
+    "crate": "m3-five-library-scaffold",
+    "fossReuseDecisionRow": "collections.superset.five-library-scaffold",
+    "inputs": [
+      "src/main/resources/com/synexia/rewrite/five-library-scaffold/LIBRARY_API_MATRIX.tsv",
+      "src/main/resources/com/synexia/rewrite/five-library-scaffold/SCAFFOLD_API.tsv"
+    ],
+    "donors": [
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFrozenLongSet.java",
+        "blob": "e2efeecf9c033c0d726eee62ab155fa6863df982",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongSet",
+        "mechanics": "immutable sorted distinct long lane; binary-search contains (fill-in source, LS1)"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFrozenLongMap.java",
+        "blob": "50729509d91638586f3c09a5dbce4def8a54cd8b",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongMap",
+        "mechanics": "frozen parallel key/value lanes (fill-in source, LS2)"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/foss/FrozenLongTable.java",
+        "blob": "e02549f8b734e7cbe4d3628315bc680dd83d91c1",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongTable",
+        "mechanics": "frozen row/column/value lanes (fill-in source, LS3)"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/foss/FrozenLongBiMap.java",
+        "blob": "b4c60e2535e9190e3d18ae95eca532a875ae1462",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongBiMap",
+        "mechanics": "frozen bijection lanes (fill-in source)"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/foss/FrozenLongRangeSet.java",
+        "blob": "de72e7b48a09382dd3caca162f25e8b8b0c9190c",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3FrozenLongRangeSet",
+        "mechanics": "frozen lower/upper bound lanes (fill-in source)"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongLongLruCache.java",
+        "blob": "3f4b2be64db5a9c3e9b34e6e8f6116bb109e1386",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3LruLongLongMap",
+        "mechanics": "recency link lanes (fill-in source, LS4)"
+      }
+    ],
+    "license": "Apache-2.0 first-party; Guava/Commons/Eclipse/Spring are oracle sources only (hsoliwal forks pinned in LIB-SUPERSET FORK_PINS.tsv)",
+    "disposition": "SCAFFOLD: template-first rendering; every atom throws M3NotYetReceived; no donor source copied"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "owners": [
+      "com.m3.collections.M3ArrayBlockingLongQueue",
+      "com.m3.collections.M3ArrayTable",
+      "com.m3.collections.M3CompositeCollectionView",
+      "com.m3.collections.M3CompositeMapView",
+      "com.m3.collections.M3ConcurrentLongLinkedDeque",
+      "com.m3.collections.M3ConcurrentLongMultiset",
+      "com.m3.collections.M3ConcurrentLruCache",
+      "com.m3.collections.M3ConcurrentMultiset",
+      "com.m3.collections.M3ConcurrentReferenceMap",
+      "com.m3.collections.M3ConcurrentSkipLongLongMap",
+      "com.m3.collections.M3ConcurrentSkipLongSet",
+      "com.m3.collections.M3CowList",
+      "com.m3.collections.M3CowLongList",
+      "com.m3.collections.M3CowSet",
+      "com.m3.collections.M3DefaultedMapView",
+      "com.m3.collections.M3DelayLongQueue",
+      "com.m3.collections.M3DelayQueue",
+      "com.m3.collections.M3EnumBiMap",
+      "com.m3.collections.M3ExpiringLongLongMapView",
+      "com.m3.collections.M3ExpiringMapView",
+      "com.m3.collections.M3FixedSizeListView",
+      "com.m3.collections.M3FixedSizeLongListView",
+      "com.m3.collections.M3Flat3Map",
+      "com.m3.collections.M3FrozenBag",
+      "com.m3.collections.M3FrozenBiMap",
+      "com.m3.collections.M3FrozenIntList",
+      "com.m3.collections.M3FrozenIntMap",
+      "com.m3.collections.M3FrozenIntSet",
+      "com.m3.collections.M3FrozenList",
+      "com.m3.collections.M3FrozenLongBag",
+      "com.m3.collections.M3FrozenLongBiMap",
+      "com.m3.collections.M3FrozenLongList",
+      "com.m3.collections.M3FrozenLongMap",
+      "com.m3.collections.M3FrozenLongMultimap",
+      "com.m3.collections.M3FrozenLongRangeSet",
+      "com.m3.collections.M3FrozenLongSet",
+      "com.m3.collections.M3FrozenLongTable",
+      "com.m3.collections.M3FrozenMap",
+      "com.m3.collections.M3FrozenMultimap",
+      "com.m3.collections.M3FrozenSet",
+      "com.m3.collections.M3FrozenTable",
+      "com.m3.collections.M3GrowthListView",
+      "com.m3.collections.M3IndexedCollectionView",
+      "com.m3.collections.M3IndexedList",
+      "com.m3.collections.M3IndexedLongList",
+      "com.m3.collections.M3LegacySynchronizedViews",
+      "com.m3.collections.M3LinkedListMultimap",
+      "com.m3.collections.M3LinkedLongMultimap",
+      "com.m3.collections.M3ListOrderedMapView",
+      "com.m3.collections.M3ListOrderedSetView",
+      "com.m3.collections.M3LongArrayTable",
+      "com.m3.collections.M3LongBigList",
+      "com.m3.collections.M3LongInterval",
+      "com.m3.collections.M3LongPatriciaTrie",
+      "com.m3.collections.M3LruLongLongMap",
+      "com.m3.collections.M3LruMap",
+      "com.m3.collections.M3MpmcLongQueue",
+      "com.m3.collections.M3MpmcQueue",
+      "com.m3.collections.M3MpscQueue",
+      "com.m3.collections.M3MultiKeyLongMap",
+      "com.m3.collections.M3MultiKeyMap",
+      "com.m3.collections.M3NotYetReceived",
+      "com.m3.collections.M3OffHeapLongLongMap",
+      "com.m3.collections.M3OffHeapRingBuffer",
+      "com.m3.collections.M3PatriciaTrie",
+      "com.m3.collections.M3PriorityBlockingLongQueue",
+      "com.m3.collections.M3ReferenceMap",
+      "com.m3.collections.M3Roaring64Bitmap",
+      "com.m3.collections.M3RoaringBitmap",
+      "com.m3.collections.M3SetAssociativeCache",
+      "com.m3.collections.M3SetUniqueListView",
+      "com.m3.collections.M3SlotMapIterator",
+      "com.m3.collections.M3SpscLongQueue",
+      "com.m3.collections.M3SpscQueue",
+      "com.m3.collections.M3StrategyHashMap",
+      "com.m3.collections.M3SynchronousQueue",
+      "com.m3.collections.M3TransformedCollectionView",
+      "com.m3.collections.M3TransformedMapView"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "behaviorClaimed": false,
+  "gates": {
+    "synexiaCrateTest": "PASS 3 + 1 skipped by design (log sha256 dae912d5868a18f4241f95bf772dd4c7052c923c631835761000ffe73aef93e6)",
+    "receiverMaterialization": "PASS 4/4 (crate test target mode)",
+    "compile": "javac --release 21 -Xlint:all,-module -Werror PASS per batch (m3/collections/qualification/five-library-scaffold-20261018/COMPILE_GATE.tsv)",
+    "tests": "NOT_RUN (no behavior)",
+    "installedCollectionsCi": "PENDING_QUEUE (verify_donation.py successor packet)"
+  },
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayBlockingLongQueue.java",
+      "before": "ABSENT",
+      "after": "c1373b1285c71d906707725e18e24e0ba5095abfea01749d52fcdc63893267cd",
+      "resource": "000-M3ArrayBlockingLongQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayTable.java",
+      "before": "ABSENT",
+      "after": "34a995dd8823954af888db130998c85de25e5c2a385343a880022aa89b563042",
+      "resource": "001-M3ArrayTable.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CompositeCollectionView.java",
+      "before": "ABSENT",
+      "after": "41d500d17cae66c34f59579dbaa4e57350b31c451875373e62b6bdaf4581f97c",
+      "resource": "002-M3CompositeCollectionView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CompositeMapView.java",
+      "before": "ABSENT",
+      "after": "88efbfa13c03ba372a368eb027077afb681094945adcbd73b47c25ce3b5d6966",
+      "resource": "003-M3CompositeMapView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLongLinkedDeque.java",
+      "before": "ABSENT",
+      "after": "17489b2d2e773e3979499adbffe662c2d3ae87e3c3bc6b559cd3c2730fb0a796",
+      "resource": "004-M3ConcurrentLongLinkedDeque.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLongMultiset.java",
+      "before": "ABSENT",
+      "after": "752fd31ac1356200e9d215fb10ce52ca8a93e75e73c155d2a3a7ba4328633d2c",
+      "resource": "005-M3ConcurrentLongMultiset.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLruCache.java",
+      "before": "ABSENT",
+      "after": "01d732c56cba593cabe11fbfacf22dda2d210a0d4fbda72a76fe2da256bd5392",
+      "resource": "006-M3ConcurrentLruCache.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentMultiset.java",
+      "before": "ABSENT",
+      "after": "3ac7947e1aa82de6ea5fc45c5f1e1a517f6346536487d6c5f740adf2146ac54e",
+      "resource": "007-M3ConcurrentMultiset.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentReferenceMap.java",
+      "before": "ABSENT",
+      "after": "a477d51938ed514cc87e9ff579261cfb06577701001c665feedc65e440b5727e",
+      "resource": "008-M3ConcurrentReferenceMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentSkipLongLongMap.java",
+      "before": "ABSENT",
+      "after": "f5f65668779ceca7ca3493da897eb45075420dca15cb3acea3faaff213435e8a",
+      "resource": "009-M3ConcurrentSkipLongLongMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentSkipLongSet.java",
+      "before": "ABSENT",
+      "after": "921723d31b915912e629e6a910f7b3d923227ffe51425f7514846899cbff06a8",
+      "resource": "010-M3ConcurrentSkipLongSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CowList.java",
+      "before": "ABSENT",
+      "after": "7d8b229b04f00730f9c9da4c3e2002253056a8b91118790025a94ce2f79a9ccf",
+      "resource": "011-M3CowList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CowLongList.java",
+      "before": "ABSENT",
+      "after": "577bf296f36f040ca1f390884ec1b05a858172da4e56b2981f2efb2c8a67c784",
+      "resource": "012-M3CowLongList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CowSet.java",
+      "before": "ABSENT",
+      "after": "5f96b56d8b9e5d4b78b3c109b86fc70a0407a22faf3359884fac7c745de1f182",
+      "resource": "013-M3CowSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3DefaultedMapView.java",
+      "before": "ABSENT",
+      "after": "8c703768b9b12f45462fc4d0a3131a26cdd14ddb57822375d4bb2b2992d2c49f",
+      "resource": "014-M3DefaultedMapView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3DelayLongQueue.java",
+      "before": "ABSENT",
+      "after": "a21de01033d40f5b0fac3ceadc20b345e5aa52acef57957bbfde34df6d1b6d33",
+      "resource": "015-M3DelayLongQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3DelayQueue.java",
+      "before": "ABSENT",
+      "after": "7d76a4215d13bb161c449b0d14419d8afd07c6957ee0b67e96ba59e0ef2223c1",
+      "resource": "016-M3DelayQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3EnumBiMap.java",
+      "before": "ABSENT",
+      "after": "d5fd72aba16efbe7d0e6b149a8a37db004eef735d53a9a0238ba4607b02d281a",
+      "resource": "017-M3EnumBiMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ExpiringLongLongMapView.java",
+      "before": "ABSENT",
+      "after": "c5ad6d48e04da6d8070b37b94c7030f8031af07fd4674bcedb23eac078fe1715",
+      "resource": "018-M3ExpiringLongLongMapView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ExpiringMapView.java",
+      "before": "ABSENT",
+      "after": "c6cfaad60da5366915f2682fcbd4f5a6bf3cc15eb36d11c083fe1a1c96a07b76",
+      "resource": "019-M3ExpiringMapView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FixedSizeListView.java",
+      "before": "ABSENT",
+      "after": "56fcbd739f2f5dad11def104fc1693309b71faab2f7c557a81e54adbb8dad09e",
+      "resource": "020-M3FixedSizeListView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FixedSizeLongListView.java",
+      "before": "ABSENT",
+      "after": "2cc0f8997637362321105759afe3a987e320b14a81840217f73aa87652cc98bb",
+      "resource": "021-M3FixedSizeLongListView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3Flat3Map.java",
+      "before": "ABSENT",
+      "after": "453417c15ffd469468fa42453b4e3a0cb1fe580d452704aff67a2ad270c7a2cd",
+      "resource": "022-M3Flat3Map.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenBag.java",
+      "before": "ABSENT",
+      "after": "164e284c9a94308ed76fbc63766d0ba0bf12438db6e5fbb4e07ed16883a5659d",
+      "resource": "023-M3FrozenBag.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenBiMap.java",
+      "before": "ABSENT",
+      "after": "81d177e25b4e676bd19a2ac6367cb1bc7bf369579afc1feff542e93922735d77",
+      "resource": "024-M3FrozenBiMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenIntList.java",
+      "before": "ABSENT",
+      "after": "80f4b91ad92966be3ba35beb30bc0cb1dfbcddb11f96198c87f22fed1bbe42ef",
+      "resource": "025-M3FrozenIntList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenIntMap.java",
+      "before": "ABSENT",
+      "after": "6a8fc3a3dfc62ff81f0aa1168c42c338a83ab3ad4f9c7b504db400743438f131",
+      "resource": "026-M3FrozenIntMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenIntSet.java",
+      "before": "ABSENT",
+      "after": "942e0bdb761ab3fcaf9febe13fa8b0b251d794c20e64676e7b3ca248ec00223d",
+      "resource": "027-M3FrozenIntSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenList.java",
+      "before": "ABSENT",
+      "after": "bff95171bd1795cae588273b0edb9ec5ab4f8e5f8ccf51d4cbf3b835a13850a8",
+      "resource": "028-M3FrozenList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongBag.java",
+      "before": "ABSENT",
+      "after": "ef51b78c6d7f9530a568f884dffa1e37a22564cd8383a130329b55935853324d",
+      "resource": "029-M3FrozenLongBag.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongBiMap.java",
+      "before": "ABSENT",
+      "after": "7d8c4b3a778f0719c5b9492bbc01c66010c5828bb35b31707555ac3ad19affff",
+      "resource": "030-M3FrozenLongBiMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongList.java",
+      "before": "ABSENT",
+      "after": "d1374fbc9689c3423596808b23f8a0a38a6020611f8cf84d76e75944447b4958",
+      "resource": "031-M3FrozenLongList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongMap.java",
+      "before": "ABSENT",
+      "after": "237f69ad3c996858d189de2bdc603ab8039862c950f626cbf5f465f33f430b77",
+      "resource": "032-M3FrozenLongMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongMultimap.java",
+      "before": "ABSENT",
+      "after": "65d33ef114e5c035f1156d2350cf79d05f8b99d4d0111dbd2ba67c7e6de9f2c7",
+      "resource": "033-M3FrozenLongMultimap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongRangeSet.java",
+      "before": "ABSENT",
+      "after": "4373015fc37c85c5b3afca9617ebf4f62fa4a34c957e517cc7e78a5fe4077c4c",
+      "resource": "034-M3FrozenLongRangeSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongSet.java",
+      "before": "ABSENT",
+      "after": "1735d35652e9760029a81e390b592a5abdfb6e99cae20015197f93e65df5a41c",
+      "resource": "035-M3FrozenLongSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongTable.java",
+      "before": "ABSENT",
+      "after": "5b9d67071737b7e7b1e7bdcfa2e53a0da21a9eedd1c5b3d559d054bc899ac309",
+      "resource": "036-M3FrozenLongTable.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenMap.java",
+      "before": "ABSENT",
+      "after": "39036e4467e1e5d42d405c891a1826fa9d02b00c7caa4ef459a051a5659bc9ab",
+      "resource": "037-M3FrozenMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenMultimap.java",
+      "before": "ABSENT",
+      "after": "0b9891214d07d756f4defb8d11fa168ab6737a7631a577265f477462c4d09a21",
+      "resource": "038-M3FrozenMultimap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenSet.java",
+      "before": "ABSENT",
+      "after": "08509a455ff1fcc303307bbe921a9caf080273df71de87d118c615fb21c88e8e",
+      "resource": "039-M3FrozenSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenTable.java",
+      "before": "ABSENT",
+      "after": "5658ddc289f44db2439ca41b2c3aa24ce19f8028e599c7e081a2c7c52ff3d81b",
+      "resource": "040-M3FrozenTable.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3GrowthListView.java",
+      "before": "ABSENT",
+      "after": "e5a1dc4ea557de8f34ad9d7b877caefbaea00a21e63fcd555c94981e80d1e240",
+      "resource": "041-M3GrowthListView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedCollectionView.java",
+      "before": "ABSENT",
+      "after": "c37a4ac3b6b73f762f7487c2041a15673eb7cded4899fa7b21d32b0f0db088c1",
+      "resource": "042-M3IndexedCollectionView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedList.java",
+      "before": "ABSENT",
+      "after": "cb1a8a6eddf3ba73b4ff73ce7d1cb01a24652613d849f51d2bdc98af699fff97",
+      "resource": "043-M3IndexedList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedLongList.java",
+      "before": "ABSENT",
+      "after": "531a1cd0b5b9f3f6269901ce59c96788f12aed4d9caf1cdeab1b8f6834d7f993",
+      "resource": "044-M3IndexedLongList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LegacySynchronizedViews.java",
+      "before": "ABSENT",
+      "after": "963d10655fefb2d079ebcb41732ee61eeccc44ac41b2b325c286cb20a5610b6a",
+      "resource": "045-M3LegacySynchronizedViews.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LinkedListMultimap.java",
+      "before": "ABSENT",
+      "after": "668a909124b3f7c0ed98e89680f222e3b5a6d6cb406e6c95dad7b75667825133",
+      "resource": "046-M3LinkedListMultimap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LinkedLongMultimap.java",
+      "before": "ABSENT",
+      "after": "ece7e5193ae930e813f44691ed6cc0edde9241b90b4c36306016eefcc247aa78",
+      "resource": "047-M3LinkedLongMultimap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ListOrderedMapView.java",
+      "before": "ABSENT",
+      "after": "92d559c13656d8d26b333d4e6cfb2a935d6c07e3950cebda798fe394aa242371",
+      "resource": "048-M3ListOrderedMapView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ListOrderedSetView.java",
+      "before": "ABSENT",
+      "after": "79efd5f596a95fb6bed87cc68e74bbcfb47b500d0fc18e6e2f4ab906221c41df",
+      "resource": "049-M3ListOrderedSetView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayTable.java",
+      "before": "ABSENT",
+      "after": "3b0035cb12214638721225bafdea7f8f6627256ac9ddd883aecf57c0048076b4",
+      "resource": "050-M3LongArrayTable.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongBigList.java",
+      "before": "ABSENT",
+      "after": "51bff233babe3a552e70cfe36e30ec7e783a2235f9fcf5337595c884aed68345",
+      "resource": "r2-M3LongBigList.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongInterval.java",
+      "before": "ABSENT",
+      "after": "8d669c2caeece09de656bb4968de90b941aeb78260364d92b9ab492fca8f6acd",
+      "resource": "051-M3LongInterval.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongPatriciaTrie.java",
+      "before": "ABSENT",
+      "after": "19041c1f993732de00cec2587d25f38c58bbaa5f974321a0f0e8813ba373bd7d",
+      "resource": "052-M3LongPatriciaTrie.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LruLongLongMap.java",
+      "before": "ABSENT",
+      "after": "ad6af9be0ddceb22e39c4e0e5e4e3ba93ce302e0ad036500401e0d34fb6cce5e",
+      "resource": "053-M3LruLongLongMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LruMap.java",
+      "before": "ABSENT",
+      "after": "9573b03bfc3dfe39a22f4bf525ce46d8f64ef37e1444dfd35893c851997c534e",
+      "resource": "054-M3LruMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MpmcLongQueue.java",
+      "before": "ABSENT",
+      "after": "ed8f0aa13c859c52ca4ba9d5778735002781462caed72c0080abfd7c861c86e7",
+      "resource": "r2-M3MpmcLongQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MpmcQueue.java",
+      "before": "ABSENT",
+      "after": "bdf37ca79db02bdec33a91ba637103ae73290e18b3c4027dce4339204be3bac0",
+      "resource": "r2-M3MpmcQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MpscQueue.java",
+      "before": "ABSENT",
+      "after": "1e417db68c58e0d39659e2ed63409518b48917e97e6bf636eca5420ed6264ce6",
+      "resource": "r2-M3MpscQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MultiKeyLongMap.java",
+      "before": "ABSENT",
+      "after": "d943fd919076c014aa61065a8d6c2e14de4c758cf10b77360eb6cec1705507c3",
+      "resource": "055-M3MultiKeyLongMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MultiKeyMap.java",
+      "before": "ABSENT",
+      "after": "f22d5d5a755a282259af7e3624c6117c4b122097bbcb6154a2b9edbda2cc2fc0",
+      "resource": "056-M3MultiKeyMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3NotYetReceived.java",
+      "before": "ABSENT",
+      "after": "d66f1e3e305980e15fcb7b6c4b7ddf94a6741190b55d4ac17dd65c274698eb5e",
+      "resource": "057-M3NotYetReceived.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3OffHeapLongLongMap.java",
+      "before": "ABSENT",
+      "after": "07c71ce8a2541b77051599fe4ea0b2f50291b5a77cc767c72d71ff27c1de3afe",
+      "resource": "r2-M3OffHeapLongLongMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3OffHeapRingBuffer.java",
+      "before": "ABSENT",
+      "after": "3090de252d6251a5f5582a4619cf2377deba594ae10c869820a2e73a60129fef",
+      "resource": "r2-M3OffHeapRingBuffer.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3PatriciaTrie.java",
+      "before": "ABSENT",
+      "after": "fd87030b362dfb098e260707f779eecd6eb38bbf0cba9d8516a83a4b0062ebb2",
+      "resource": "058-M3PatriciaTrie.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3PriorityBlockingLongQueue.java",
+      "before": "ABSENT",
+      "after": "b5c22e6b645d4ef022d69da1322f5cb7df6d196fbe80380ab7c8d9bcef64d87d",
+      "resource": "059-M3PriorityBlockingLongQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ReferenceMap.java",
+      "before": "ABSENT",
+      "after": "f10d8453c8570afaeb3bd2acf14ed96958f365c015d28a658314ce4a831cbcf7",
+      "resource": "060-M3ReferenceMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3Roaring64Bitmap.java",
+      "before": "ABSENT",
+      "after": "a8e7075dacf234a453b81991bf4c44a09aaea55b2839105f8713c43adcd22a82",
+      "resource": "r2-M3Roaring64Bitmap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3RoaringBitmap.java",
+      "before": "ABSENT",
+      "after": "5cd4e4445420593407fe4cf4686b8293190a559a0c3a65dcb0dbccc17acc62ee",
+      "resource": "r2-M3RoaringBitmap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SetAssociativeCache.java",
+      "before": "ABSENT",
+      "after": "5593cf90c34b475e23a8056f521cc614f50143052f162248a760537c9aaa699c",
+      "resource": "r2-M3SetAssociativeCache.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SetUniqueListView.java",
+      "before": "ABSENT",
+      "after": "35a97df9121f4115ca47979e1e6b4b9d3bea24f2abcec6dfb31d81f3d8d01223",
+      "resource": "061-M3SetUniqueListView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotMapIterator.java",
+      "before": "ABSENT",
+      "after": "3e5d09bdb9a7e1e5864daa0f77d3d74438c42d5853044a4cd56b79d340dd1176",
+      "resource": "062-M3SlotMapIterator.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SpscLongQueue.java",
+      "before": "ABSENT",
+      "after": "26b405d7cf52957bc8d4111b8961304133b317c92c1351a02ab2d62571bb11da",
+      "resource": "r2-M3SpscLongQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SpscQueue.java",
+      "before": "ABSENT",
+      "after": "8842c7026fa241259f9719079aaf7f68f5997d4db8870ebc07a515ccac112d9f",
+      "resource": "r2-M3SpscQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3StrategyHashMap.java",
+      "before": "ABSENT",
+      "after": "d77a9c045a575b0d1b053d843b313d78f43d62d7bbb37c3f93c16d9f4c1e0377",
+      "resource": "r2-M3StrategyHashMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SynchronousQueue.java",
+      "before": "ABSENT",
+      "after": "2ef9c32f7c6fcb308e33d1e7d78320d3036ca5784d7e282a1177e23dd514d34a",
+      "resource": "063-M3SynchronousQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3TransformedCollectionView.java",
+      "before": "ABSENT",
+      "after": "0528745471d6a5ad8b333bcf32535af0b6476ce7042db14ce9e4173f577dc12c",
+      "resource": "064-M3TransformedCollectionView.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3TransformedMapView.java",
+      "before": "ABSENT",
+      "after": "ead4f95f6d69376d1ed67a84abb5f1fca6d5a1c648d6381ac5570155d5507e7b",
+      "resource": "065-M3TransformedMapView.java.txt"
+    }
+  ]
+}

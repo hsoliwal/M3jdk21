@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Crate postimage blobs read by apply.py --donor-git (hsoliwal/com.synexia develop ca1aafc4d94f9dd1ee288226dcca070cc60991c9).
+crate	path	blob
+collectionviews-current-owner	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/collectionviews-current-owner/CollectionViews.java.txt	540ebf535672a27a90f2a547f2d21aeebebe88aa
+m3-collectionviews-onepass-cow-20261023	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collectionviews-onepass-cow-20261023/CollectionViews.java.txt	3252ddc179bcde807785b13ef24dc6b3b6c3ce4a

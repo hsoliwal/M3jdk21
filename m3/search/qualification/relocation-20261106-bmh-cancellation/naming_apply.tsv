@@ -1,0 +1,3 @@
+op	path	target_or_counts
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3BoyerMooreHorspoolSearch.java	PKG_PATH_M3=1
+REWRITE	m3/search/src/test/java/jdk/m3/search/JavaAdaptiveSearchEngineTest.java	PKG_PATH_M3=1

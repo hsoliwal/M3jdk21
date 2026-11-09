@@ -1,0 +1,8 @@
+{"detail":"source and preceding artifacts sealed","input_sha256":"f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648","phase":"lint","status":"START"}
+{"detail":"phase receipt committed","input_sha256":"f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648","phase":"lint","status":"PASS"}
+{"detail":"source and preceding artifacts sealed","input_sha256":"f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648","phase":"compile","status":"START"}
+{"detail":"phase receipt committed","input_sha256":"f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648","phase":"compile","status":"PASS"}
+{"detail":"source and preceding artifacts sealed","input_sha256":"f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648","phase":"test","status":"START"}
+{"detail":"phase receipt committed","input_sha256":"f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648","phase":"test","status":"PASS"}
+{"detail":"source and preceding artifacts sealed","input_sha256":"f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648","phase":"runtime","status":"START"}
+{"detail":"phase receipt committed","input_sha256":"f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648","phase":"runtime","status":"PASS"}

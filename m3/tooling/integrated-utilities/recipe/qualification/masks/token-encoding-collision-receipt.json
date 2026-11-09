@@ -1,0 +1,16 @@
+{
+  "kind": "SOURCE_DERIVED_NONINJECTIVE_TOKEN_ENCODING_PROOF",
+  "nltk_engine_executed": false,
+  "source_commit": "323da98f37388421c22e279587cf75e375b99efb",
+  "source_blob": "a8805937f97e98e79de6838059ad4995acdeed59",
+  "one_token": [
+    "a><b"
+  ],
+  "two_tokens": [
+    "a",
+    "b"
+  ],
+  "encoding_one": "<a><b>",
+  "encoding_two": "<a><b>",
+  "equal_encoded_text": true
+}

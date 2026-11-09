@@ -1,0 +1,13 @@
+category	candidate	decision	rationale
+M3 exact file delta	Existing M3FileDeltaLedger #1568	REUSE	No duplicate payload/identity owner
+Dependency reachability	CSR int offsets + queue + visited byte flags	SELECT	Deterministic O(V+E) graph closure with original physical indexes
+Educational graph algorithms	LeetCode 207, HackerRank BFS, GeeksforGeeks BFS	REFERENCE_ONLY	Problem families inform differential cases; no source copied
+ABI verification	Original javac and M3AST source/attribute facts	REUSE_REQUIRED	No heuristic hash grants ABI equivalence
+Graph missing closure	Conservative full affected mask	SELECT	Safe when sound incremental selection cannot be proven
+Compiler context	Changed POM/DSL or unknown processors	CONSERVATIVE	Treat all declared rows affected until exact model dependencies are proven
+Filtered/sorted backed views	Existing M3FilteredViews/M3FilteredNavigableSet/JNI	KEEP	Separate semantics, no copied snapshots or per-row Node
+JNI graph kernel	Optional new native implementation	HOLD	No new symbol without benchmark and checked JNI/ABI proof
+No-op exact graph	Existing M3FileBuildImpact CSR fastpath	SELECT	No changed file/fact? Validate edge identities but avoid CSR/queue allocations; conservative fallback also avoids unused graph
+LeetCode #207 Course Schedule	https://leetcode.com/problems/course-schedule/	REFERENCE_ONLY	Topological sort/cycle detection not selected; cycles valid for reverse impact closure
+HackerRank BFS Shortest Reach	https://www.hackerrank.com/challenges/bfsshortreach/problem	REFERENCE_ONLY	Shortest distance not needed; only visited frontier pattern relevant
+GeeksforGeeks BFS for a Graph	https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/	REFERENCE_ONLY	O(V+E) visited traversal shape; no implementation body copied

@@ -1,0 +1,1 @@
+        long jump = oldLength < 64 ? (long) oldLength + 2 : oldLength / 2L;

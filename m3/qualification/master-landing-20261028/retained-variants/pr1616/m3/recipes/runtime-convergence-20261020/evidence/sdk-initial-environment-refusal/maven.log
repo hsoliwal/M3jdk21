@@ -1,0 +1,72 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.synexia.verification:m3-runtime-convergence-recipe-proof >----
+[INFO] Building m3-runtime-convergence-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ m3-runtime-convergence-recipe-proof ---
+[INFO] Deleting /workspace/scratch/53bcd62c244c/work-recipe-20261020/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-runtime-convergence-recipe-proof ---
+[INFO] Copying 47 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-runtime-convergence-recipe-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-runtime-convergence-recipe-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/work-recipe-20261020/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-runtime-convergence-recipe-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-runtime-convergence-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3TaskRecipeTest
+[ERROR] Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 185.8 s <<< FAILURE! -- in com.synexia.rewrite.M3TaskRecipeTest
+[ERROR] com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained -- Time elapsed: 8.179 s <<< ERROR!
+java.nio.charset.MalformedInputException: Input length = 1
+	at java.base/java.lang.String.throwMalformed(String.java:1268)
+	at java.base/java.lang.String.decodeUTF8_UTF16(String.java:1135)
+	at java.base/java.lang.String.newStringUTF8NoRepl(String.java:749)
+	at java.base/java.lang.String.newStringNoRepl1(String.java:780)
+	at java.base/java.lang.String.newStringNoRepl(String.java:762)
+	at java.base/java.lang.System$2.newStringNoRepl(System.java:2481)
+	at java.base/java.nio.file.Files.readString(Files.java:3362)
+	at java.base/java.nio.file.Files.readString(Files.java:3318)
+	at com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained(M3TaskRecipeTest.java:275)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   M3TaskRecipeTest.qualifiedSdkResultsAreRetained:275 » MalformedInput Input length = 1
+[INFO] 
+[ERROR] Tests run: 5, Failures: 0, Errors: 1, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:09 min
+[INFO] Finished at: 2026-10-20T08:48:16+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project m3-runtime-convergence-recipe-proof: 
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/53bcd62c244c/work-recipe-20261020/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

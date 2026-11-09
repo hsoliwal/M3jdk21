@@ -1,0 +1,208 @@
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.codec {
+          ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\AbstractBaseNCodecStreamBuilder.java:39: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        baseNCodec = newBaseNCodec();
+                                  ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\BaseNCodec.java:788: warning: [exports] class Context in module jdk.m3.codec is not accessible to clients that require this module
+    protected byte[] ensureBufferSize(final int size, final Context context) {
+                                                            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base16.java:68: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setDecodeTable(UPPER_CASE_DECODE_TABLE);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base16OutputStream.java:46: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setEncode(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base32.java:624: warning: [fallthrough] possible fall-through into case
+            case 2: // 10 bits, drop 2 and output one byte
+            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base32.java:88: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setDecodeTableRaw(DECODE_TABLE);
+                             ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base32.java:545: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this(builder()
+            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base32.java:398: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            if (containsAlphabetOrPad(lineSeparator)) {
+                                     ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base32OutputStream.java:71: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setEncode(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base58.java:65: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setDecodeTable(DECODE_TABLE);
+                          ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base58OutputStream.java:66: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setEncode(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64.java:107: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setDecodeTableRaw(DECODE_TABLE);
+                             ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64.java:938: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this(builder().setLineLength(lineLength).setLineSeparator(lineSeparator != null ? lineSeparator : EMPTY_BYTE_ARRAY).setPadding(PAD_DEFAULT)
+            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64.java:852: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            if (containsAlphabetOrPad(lineSeparatorB)) {
+                                     ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64.java:966: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this(builder().setLineLength(lineLength).setLineSeparator(lineSeparator).setPadding(PAD_DEFAULT).setEncodeTableRaw(toUrlSafeEncodeTable(urlSafe))
+            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64.java:852: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            if (containsAlphabetOrPad(lineSeparatorB)) {
+                                     ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64OutputStream.java:75: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setEncode(true);
+                     ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\BinaryCodec.java:93: warning: [lossy-conversions] implicit cast from int to byte in compound assignment is possibly lossy
+                    raw[ii] |= BITS[bits];
+                                   ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\BinaryCodec.java:119: warning: [lossy-conversions] implicit cast from int to byte in compound assignment is possibly lossy
+                    raw[ii] |= BITS[bits];
+                                   ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java:108: warning: [fallthrough] possible fall-through into case
+        case 2:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java:111: warning: [fallthrough] possible fall-through into case
+        case 1:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java:213: warning: [fallthrough] possible fall-through into case
+        case 6:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java:216: warning: [fallthrough] possible fall-through into case
+        case 5:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java:219: warning: [fallthrough] possible fall-through into case
+        case 4:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java:222: warning: [fallthrough] possible fall-through into case
+        case 3:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java:225: warning: [fallthrough] possible fall-through into case
+        case 2:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java:228: warning: [fallthrough] possible fall-through into case
+        case 1:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:111: warning: [fallthrough] possible fall-through into case
+            case 2:
+            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:114: warning: [fallthrough] possible fall-through into case
+            case 1:
+            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:283: warning: [fallthrough] possible fall-through into case
+            case 2:
+            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:286: warning: [fallthrough] possible fall-through into case
+            case 1:
+            ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:545: warning: [fallthrough] possible fall-through into case
+        case 14:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:548: warning: [fallthrough] possible fall-through into case
+        case 13:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:551: warning: [fallthrough] possible fall-through into case
+        case 12:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:554: warning: [fallthrough] possible fall-through into case
+        case 11:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:557: warning: [fallthrough] possible fall-through into case
+        case 10:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:560: warning: [fallthrough] possible fall-through into case
+        case 9:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:567: warning: [fallthrough] possible fall-through into case
+        case 8:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:570: warning: [fallthrough] possible fall-through into case
+        case 7:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:573: warning: [fallthrough] possible fall-through into case
+        case 6:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:576: warning: [fallthrough] possible fall-through into case
+        case 5:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:579: warning: [fallthrough] possible fall-through into case
+        case 4:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:582: warning: [fallthrough] possible fall-through into case
+        case 3:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:585: warning: [fallthrough] possible fall-through into case
+        case 2:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:588: warning: [fallthrough] possible fall-through into case
+        case 1:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:729: warning: [fallthrough] possible fall-through into case
+        case 2:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:732: warning: [fallthrough] possible fall-through into case
+        case 1:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:928: warning: [fallthrough] possible fall-through into case
+        case 2:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:932: warning: [fallthrough] possible fall-through into case
+        case 1:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:1074: warning: [fallthrough] possible fall-through into case
+        case 6:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:1077: warning: [fallthrough] possible fall-through into case
+        case 5:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:1080: warning: [fallthrough] possible fall-through into case
+        case 4:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:1083: warning: [fallthrough] possible fall-through into case
+        case 3:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:1086: warning: [fallthrough] possible fall-through into case
+        case 2:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java:1089: warning: [fallthrough] possible fall-through into case
+        case 1:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32.java:621: warning: [fallthrough] possible fall-through into case
+      case 6:
+      ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32.java:624: warning: [fallthrough] possible fall-through into case
+      case 5:
+      ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32.java:627: warning: [fallthrough] possible fall-through into case
+      case 4:
+      ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32.java:630: warning: [fallthrough] possible fall-through into case
+      case 3:
+      ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32.java:633: warning: [fallthrough] possible fall-through into case
+      case 2:
+      ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32.java:636: warning: [fallthrough] possible fall-through into case
+      case 1:
+      ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32C.java:620: warning: [fallthrough] possible fall-through into case
+        case 6:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32C.java:623: warning: [fallthrough] possible fall-through into case
+        case 5:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32C.java:626: warning: [fallthrough] possible fall-through into case
+        case 4:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32C.java:629: warning: [fallthrough] possible fall-through into case
+        case 3:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32C.java:632: warning: [fallthrough] possible fall-through into case
+        case 2:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32C.java:635: warning: [fallthrough] possible fall-through into case
+        case 1:
+        ^
+H:\m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32C.java:584: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        reset();
+             ^
+69 warnings

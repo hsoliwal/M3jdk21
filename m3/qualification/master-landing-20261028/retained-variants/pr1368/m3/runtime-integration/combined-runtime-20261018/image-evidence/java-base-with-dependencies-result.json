@@ -1,0 +1,30 @@
+{
+  "schema": "M3_COMBINED_MATCHED_IMAGE_STEP_V1",
+  "source_head": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+  "source_tree": "51246136763bff28b9fcc5daf01c884ae05bca7c",
+  "hotspot_git_tree": "afaa42082ed148944e52591d8ab43960890c8d39",
+  "step": "java-base-with-dependencies",
+  "command": [
+    "make",
+    "java.base-java",
+    "JOBS=4",
+    "MAX_JOBS=4"
+  ],
+  "build_root": "/dev/shm/m3-combined-image-f8287/build",
+  "start_utc": "2026-10-18T12:57:28Z",
+  "resource_limits": {
+    "shm_min_free_bytes": 314572800,
+    "memory_min_available_bytes": 629145600,
+    "process_group_max_rss_bytes": 3221225472
+  },
+  "warnings_as_errors": true,
+  "exit_code": 2,
+  "stop_reason": null,
+  "end_utc": "2026-10-18T12:58:56Z",
+  "console_sha256": "1c8fd99b41cee9389f2a1e6de4a49345150256b15999697af98acf1b92949943",
+  "lowest_shm_free_bytes": 1559646208,
+  "lowest_memory_available_bytes": 4284272640,
+  "peak_process_group_rss_bytes": 0,
+  "source_head_after": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+  "source_tree_after": "51246136763bff28b9fcc5daf01c884ae05bca7c"
+}

@@ -1,0 +1,32 @@
+class	args	env	rc	last
+jdk.m3.text.CoreSelfTest		native	0	DONOR_RUNTIME_NOT_EXERCISED
+jdk.m3.structured.DelimitedAllocationProbe		native	0	DELIMITED_ALLOCATION rows=2048 retainedPrimitiveBytes=106500 warmCountBytes=0.0 coldPrepareBytes=567995.0 reparsedMateri
+jdk.m3.structured.DelimitedIndexContract		native	0	DELIMITED_INDEX_PASS backend=JAVA models=2000 checks=983481 workers=16x100
+jdk.m3.structured.DelimitedLegacyContract		native	0	DELIMITED_LEGACY_PARITY cases=390678 digest=461373d8ce9c62f574d253f135b4b4af78241a79b73dad3768bfdf29bdfd9d09
+jdk.m3.structured.JsonLinesSelfTest		native	0	JSONL_TEST_PASS
+jdk.m3.text.M3MaskIndexCursorSelfTest		native	0	M3_UNIX4J_MASK_CURSOR_PASS checks=28587
+jdk.m3.text.M3NativeAhoMissingSelfTest		nonative	0	M3_AHO_ABSENT_FALLBACK_PASS
+jdk.m3.text.M3NativeAhoSelfTest		native	0	M3_AHO_NATIVE_PARITY_PASS checks=60677 seed=22873830290366502
+jdk.m3.text.M3NativeAhoWrongAbiSelfTest		wrongabi	0	M3_AHO_WRONG_ABI_REFUSED_PASS
+jdk.m3.text.M3NativeIndexedPackIntegrationSelfTest		native	0	M3_NATIVE_INDEXED_UTF8_PACK_PASS checks=131787
+jdk.m3.text.M3NativeMaskCursorIntegrationSelfTest		native	0	M3_NATIVE_MASK_CURSOR_INTEGRATION_PASS checks=33050
+jdk.m3.text.M3NativeSelectionValidationSelfTest		native	0	M3_UNIX4J_NATIVE_GEOMETRY_PASS checks=14924
+jdk.m3.text.M3NativeSparseSelectionSelfTest		native	0	M3_NATIVE_SPARSE_ROW_PASS checks=22704
+jdk.m3.text.M3RegexLiteralPlanSelfTest		native	0	M3_UNIX_REGEX_PRECOMPUTE_PASS checks=5377 patterns=26 flags=9 seeds=30
+jdk.m3.text.M3RegexMissingNativeSelfTest		nonative	0	M3_UNIX_REGEX_MISSING_NATIVE_PASS checks=10
+jdk.m3.text.M3RegexRequiredSegmentsNoNativeSelfTest		nonative	0	M3_REQUIRED_SEGMENTS_MISSING_NATIVE_PASS checks=9
+jdk.m3.text.M3RegexRequiredSegmentsSelfTest		native	0	M3_REQUIRED_SEGMENTS_PASS checks=1379 seed=5eed12345789abcd
+jdk.m3.text.M3RegexRequiredSegmentsWrongAbiSelfTest		wrongabi	0	M3_REQUIRED_SEGMENTS_WRONG_ABI_PASS checks=2
+jdk.m3.text.M3RegexWrongAbiSelfTest		wrongabi	0	M3_UNIX_REGEX_WRONG_ABI_REFUSAL_PASS checks=3
+jdk.m3.text.M3Utf8PackedRowsSelfTest		native	0	M3_UTF8_PACKED_ROWS_PASS checks=130262
+jdk.m3.text.NativeLineBatchSelfTest		native	0	M3_NATIVE_UNIX_TEXT_PASS checks=483829 seed=4d33554e49584a4c
+jdk.m3.text.NativeUtf16LiteralSelfTest		nonative	0	M3_NATIVE_UTF16_LITERAL_PASS checks=12076 backend=java
+jdk.m3.text.NativeUtf8LinesProbe		native	0	M3_NATIVE_UTF8_GREP_PASS checks=6199
+jdk.m3.io.NativeProcessPipelineSelfTest		native	0	NativeProcessPipelineSelfTest PASS 28 checks
+jdk.m3.text.RegexGrepAtomSelfTest		native	0	M3_UNIX_REGEX_ATOM_PASS checks=12076 randomFrames=400
+jdk.m3.text.RegexRequiredSegmentsAtomSelfTest		native	0	M3_REQUIRED_SEGMENTS_ATOM_PASS checks=60
+jdk.m3.structured.StructuredCliSelfTest		native	0	STRUCTURED_CLI_TEST_PASS
+jdk.m3.structured.StructuredTextSelfTest		native	0	STRUCTURED_TEST_PASS
+jdk.m3.text.Utf8SegmentsProbe		native	0	PASS checks=80063
+jdk.m3.structured.DelimitedIndexContract	java	native	0	DELIMITED_INDEX_PASS backend=JAVA models=2000 checks=983481 workers=16x100
+jdk.m3.text.NativeUtf16LiteralSelfTest	native	native	0	M3_NATIVE_UTF16_LITERAL_PASS checks=12076 backend=jni

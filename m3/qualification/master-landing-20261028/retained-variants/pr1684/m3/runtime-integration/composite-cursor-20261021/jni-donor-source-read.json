@@ -1,0 +1,12 @@
+{
+  "schema": "M3_PR1629_INDEPENDENT_SOURCE_READ_V1",
+  "repository": "hsoliwal/M3jdk21",
+  "commit": "5d2bbd7401053eba2f64efe0a71dfb367ce357e6",
+  "path": "src/hotspot/share/prims/jni.cpp",
+  "startLine": 2830,
+  "endLine": 2865,
+  "githubBlob": "0e1de0e62b03e24d7e07e3b2b9cd7faab6071f0c",
+  "url": "https://github.com/hsoliwal/M3jdk21/blob/5d2bbd7401053eba2f64efe0a71dfb367ce357e6/src/hotspot/share/prims/jni.cpp",
+  "content": "\nJNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jboolean *isCopy))\n  HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);\n  oop s = JNIHandles::resolve_non_null(string);\n  jchar* ret;\n  if (!UseM3StringStorage && !java_lang_String::is_latin1(s)) {\n    typeArrayHandle s_value(thread, java_lang_String::value(s));\n\n    // Pin value array\n    Universe::heap()->pin_object(thread, s_value());\n\n    ret = (jchar*) s_value->base(T_CHAR);\n    if (isCopy != nullptr) *isCopy = JNI_FALSE;\n  } else {\n    // Copy segmented content or inflate latin1 to UTF16; never expose leaf arrays.\n    typeArrayOop s_value = java_lang_String::value(s);\n    int s_len = java_lang_String::length(s, s_value);\n    ret = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination\n    /* JNI Specification states return null on OOM */\n    if (ret != nullptr) {\n      // Reuse the canonical flat/M3 range copier within the existing JNI lifetime.\n      java_lang_String::copy_chars(s, 0, s_len, ret);\n      ret[s_len] = 0;\n    }\n    if (isCopy != nullptr) *isCopy = JNI_TRUE;\n  }\n HOTSPOT_JNI_GETSTRINGCRITICAL_RETURN((uint16_t *) ret);\n  return ret;\nJNI_END\n\n\nJNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar *chars))\n  HOTSPOT_JNI_RELEASESTRINGCRITICAL_ENTRY(env, str, (uint16_t *) chars);\n  oop s = JNIHandles::resolve_non_null(str);\n  bool is_latin1 = java_lang_String::is_latin1(s);\n",
+  "scope": "Independent GitHub connector read; blob identifies full donor file, body is requested range only"
+}

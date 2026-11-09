@@ -1,0 +1,19 @@
+workflow	job	compiles	checkout	include_flags	header_in_checkout	pins_leaf_bytes
+m3-five-provider-grouped-count-masks-20261018.yml	actual-m3-and-five-provider	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	-
+m3-five-provider-index-masks32-20261018.yml	actual-five-provider-jdk21	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	-
+m3-five-provider-index-views-20261017.yml	five-provider	m3_index_mask_window.c	m3/collections,m3/tooling/migration-recipes	$JH/include $JH/include/linux	n	-
+m3-five-provider-key-groups-20261018.yml	qualifying-product	m3_index_mask_window.c	m3/arrays,m3/collections,m3/native/include,m3/tooling/migration-recipes	$JAVA_HOME/include $JAVA_HOME/include/linux	n	-
+m3-five-provider-key-ranges-20261018.yml	qualifying-product	m3_index_mask_window.c	m3/collections,m3/tooling/migration-recipes	$JAVA_HOME/include $JAVA_HOME/include/linux	n	-
+m3-five-provider-projection-closure-20261018.yml	real-provider-jdk21	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	-
+m3-guava-rowsortedtable-20261018.yml	receiver	m3_index_mask_window.c	m3/arrays,m3/collections,m3/native/include,m3/tooling/migration-recipes	$JAVA_HOME/include $JAVA_HOME/include/linux	n	-
+m3-index-mask-window-20261017.yml	java21-jni-contract	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	m3_index_mask_window.c
+m3-int-array-index-20261018.yml	source-first-java21-existing-jni	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	-
+m3-linked-list-live-mask-20261017.yml	recipe-and-real-owner	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	-
+m3-long-index-path-jni-20261018.yml	verify	m3_long_index_path_masks_jni.c	m3/collections,.github/workflows	$JDK_HOME/include $JDK_HOME/include/linux	n	m3_long_index_path_masks_jni.c
+m3-long-path-input-budget-20261018.yml	strict-proof	m3_long_index_path_masks_jni.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	-
+m3-object-slot-index-snapshot-20261017.yml	java21-jni-contract	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	-
+m3-pr1292-current-mask-window-native.yml	exact-source-and-regions	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	m3_index_mask_window.c
+m3-sdk-mask-bounded-current-20261017.yml	exact-current-java-jni	m3_index_mask_window.c	FULL	$JAVA_HOME/include $JAVA_HOME/include/linux	y	-
+m3jdk21-array-mask-current-20261026.yml	source-built-collections	m3_index_mask_window.c	m3/arrays/**,m3/native/include/m3_jni_core.h,m3/collections/**,.github/workflows/m3jdk21-array-mask-current-20261026.yml	$JAVA_HOME/include $JAVA_HOME/include/linux	n	-
+m3jdk21-current-array-mask-acceptance.yml	current-master-contract	m3_index_mask_window.c	m3/arrays/**,m3/collections/**,m3/native/include/**,.github/workflows/m3jdk21-current-array-mask-acceptance.yml	$JAVA_HOME/include $JAVA_HOME/include/linux	n	-
+m3jdk21-tree-plan-commit-identity.yml	unchanged-jni-source-admission	m3_index_mask_window.c	m3/collections/src/main/native/collections/m3_index_mask_compactor.c,m3/collections/src/main/native/collections/m3_index_mask_window.c,.github/workflows/m3jdk21-tree-plan-commit-identity.yml	$JAVA_HOME/include $JAVA_HOME/include/linux	n	-

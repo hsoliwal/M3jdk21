@@ -1,0 +1,4 @@
+MethodHandle atom = M3AtomKit.findStatic(M3AtomKit.type("${type}"), "${atom}", ${mtype});
+for (${in} x : ${inputs}) {
+    assertEquals(${oracle}, (${out}) atom.invokeExact(x), "${atom}(" + x + ")");
+}

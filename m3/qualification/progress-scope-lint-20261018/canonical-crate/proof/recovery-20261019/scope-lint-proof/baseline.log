@@ -1,0 +1,6 @@
+ProgressMonitors.java:90:20: compiler.warn.try.resource.not.referenced: ignored
+ProgressMonitors.java:111:20: compiler.warn.try.resource.not.referenced: ignored
+Supplier.java:62:58: compiler.warn.try.resource.not.referenced: ignored
+Consumer.java:80:58: compiler.warn.try.resource.not.referenced: ignored
+Function.java:114:58: compiler.warn.try.resource.not.referenced: ignored
+5 warnings

@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of relocate.py (recipe RELOCATE_UTF16_ATOMS v1). Donor: hsoliwal/com.synexia develop 64652588f0d4c23b1f6e0411090b2a796325ae0e (crates m3-utf16-lcs-bitvector-20261105 @ 811efb8e83d and m3-utf16-wildcard-glob-20261105 @ 37055365e42, 2026-11-05; the hash-pinned-java snapshots of synexia-openrewrite-recipes/src/main/resources carry the same blobs).
+# FILE rows: donor path (donor repository root) -> target path (module root m3/ports/precompute). A donor path named twice is SPLIT by its MEMBER rows. PACKAGE rows: donor package -> target package. TYPE rows: donor type -> target type (token rename in whole-file targets). QUALIFIED rows: donor Type.member -> target Type.member, applied before TYPE rows (a member that moved to the oracle half). MEMBER rows: donor Type.member -> target simple type that receives the member (<init> = constructor); a member may go to both halves. IMPORT rows: target path -> import added to that target (cross-half reference, static). EXTERNAL rows: third-party package prefixes the donor imports, kept as they are (declared closure; the pom carries the dependency).
+kind	donor	target	note
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-utf16-lcs-bitvector-20261105/src/main/java/com/synexia/m3/proof/Utf16BitVectorLcsOracle.java	src/main/java/jdk/m3/precompute/M3LcsPlan.java	production half: Allison-Dix/Hyyro 63-unit bit-vector LCS length over UTF-16 code units (state = x & ~(x - ((state << 1) | 1))), bounds 4,096 units each / shorter <= 63, NPE/IAE refusals; java.* only, no imports survive
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-utf16-lcs-bitvector-20261105/src/main/java/com/synexia/m3/proof/Utf16BitVectorLcsOracle.java	src/test/java/jdk/m3/precompute/M3LcsPlanOracle.java	oracle half (test scope): independent rolling-row DP referenceLength, the seeded proof main (14 directed + 1,600 exhaustive + 46,000 seeded cases, SHA-256 answer digest, 4 refusals) and the optional JNI hook; never on the production class path
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-utf16-lcs-bitvector-20261105/src/test/java/com/synexia/m3/proof/Utf16BitVectorLcsOracleTest.java	src/test/java/jdk/m3/precompute/M3LcsPlanTest.java	donor JUnit 5 contract test: representative platform contracts, UTF-16 literal and zero-length contracts, refusals, exhaustive 3-symbol differential with input immutability
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-utf16-wildcard-glob-20261105/src/main/java/com/synexia/m3/proof/Utf16WildcardOracle.java	src/main/java/jdk/m3/precompute/M3Utf16Glob.java	production half: '?' one unit / '*' zero or more, whole-input match over UTF-16 code units, greedy star backtracking O(n*m) worst case, O(1) auxiliary space, bounds MAX_TEXT 1,048,576 / MAX_PATTERN 65,536, NPE/IAE refusals; not a java.nio PathMatcher glob (no [..] {..} or escapes)
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-utf16-wildcard-glob-20261105/src/main/java/com/synexia/m3/proof/Utf16WildcardOracle.java	src/test/java/jdk/m3/precompute/M3Utf16GlobOracle.java	oracle half (test scope): independent rolling-row boolean DP reference, the seeded proof main (49 directed + 41,261 exhaustive + 32,000 seeded cases, SHA-256 digest, 4 refusals, input immutability) and the optional JNI hook
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-utf16-wildcard-glob-20261105/src/test/java/com/synexia/m3/proof/Utf16WildcardOracleTest.java	src/test/java/jdk/m3/precompute/M3Utf16GlobTest.java	donor JUnit 5 contract test: LeetCode #44 / GfG full-match examples, empty and UTF-16 unit semantics, refusals and no input mutation, exhaustive DP differential over short inputs
+PACKAGE	com.synexia.m3.proof	jdk.m3.precompute	the crates' proof package; the receiver is the package of M3EditDistancePlan (same Myers bit-parallel family), not jdk.m3.text (unix4j tool layer)
+TYPE	Utf16BitVectorLcsOracle	M3LcsPlan	production type; the oracle half is M3LcsPlanOracle (QUALIFIED row for the member that moved there)
+TYPE	Utf16BitVectorLcsOracleTest	M3LcsPlanTest	JUnit 5 test of the production type
+TYPE	Utf16WildcardOracle	M3Utf16Glob	production type; the oracle half is M3Utf16GlobOracle
+TYPE	Utf16WildcardOracleTest	M3Utf16GlobTest	JUnit 5 test of the production type
+QUALIFIED	Utf16BitVectorLcsOracle.referenceLength	M3LcsPlanOracle.referenceLength	the DP oracle lives in the test-scope half
+QUALIFIED	Utf16WildcardOracle.reference	M3Utf16GlobOracle.reference	the DP oracle lives in the test-scope half
+MEMBER	Utf16BitVectorLcsOracle.MAX_TEXT	M3LcsPlan	private bound, needed by validate
+MEMBER	Utf16BitVectorLcsOracle.MAX_SHORT	M3LcsPlan	private bound, needed by validate
+MEMBER	Utf16BitVectorLcsOracle.ALPHABET	M3LcsPlan	65,536 mask lanes of bitVectorLength
+MEMBER	Utf16BitVectorLcsOracle.<init>	M3LcsPlan	private constructor (static utility)
+MEMBER	Utf16BitVectorLcsOracle.validate	M3LcsPlan	NPE/IAE refusals
+MEMBER	Utf16BitVectorLcsOracle.bitVectorLength	M3LcsPlan	the atom
+MEMBER	Utf16BitVectorLcsOracle.MAX_TEXT	M3LcsPlanOracle	private in the donor, so the oracle half carries its own copy (same bytes)
+MEMBER	Utf16BitVectorLcsOracle.MAX_SHORT	M3LcsPlanOracle	private in the donor, so the oracle half carries its own copy (same bytes)
+MEMBER	Utf16BitVectorLcsOracle.nativeLength	M3LcsPlanOracle	optional JNI hook of the proof main (--native ABSOLUTE_LIBRARY); never loaded in the test phase
+MEMBER	Utf16BitVectorLcsOracle.<init>	M3LcsPlanOracle	private constructor (static utility)
+MEMBER	Utf16BitVectorLcsOracle.validate	M3LcsPlanOracle	private in the donor, so referenceLength keeps its own copy (same bytes)
+MEMBER	Utf16BitVectorLcsOracle.referenceLength	M3LcsPlanOracle	independent rolling-row DP oracle
+MEMBER	Utf16BitVectorLcsOracle.observed	M3LcsPlanOracle	proof receipt state, reset per main invocation
+MEMBER	Utf16BitVectorLcsOracle.digest	M3LcsPlanOracle	proof receipt state, reset per main invocation
+MEMBER	Utf16BitVectorLcsOracle.verify	M3LcsPlanOracle	proof step: DP vs bit-vector vs optional JNI, bound check, digest update
+MEMBER	Utf16BitVectorLcsOracle.reject	M3LcsPlanOracle	proof step: NPE/IAE refusal witness
+MEMBER	Utf16BitVectorLcsOracle.decode	M3LcsPlanOracle	proof helper: rank -> small-alphabet char[]
+MEMBER	Utf16BitVectorLcsOracle.main	M3LcsPlanOracle	proof main: prints M3_UTF16_LCS_BITVECTOR_V1 cases=47614 answerSha256=... (crate PROOF_20261105.md)
+MEMBER	Utf16WildcardOracle.MAX_TEXT	M3Utf16Glob	public bound (the oracle half imports it statically)
+MEMBER	Utf16WildcardOracle.MAX_PATTERN	M3Utf16Glob	public bound (the oracle half imports it statically)
+MEMBER	Utf16WildcardOracle.<init>	M3Utf16Glob	private constructor (static utility)
+MEMBER	Utf16WildcardOracle.requireValid	M3Utf16Glob	NPE/IAE refusals
+MEMBER	Utf16WildcardOracle.match	M3Utf16Glob	the atom
+MEMBER	Utf16WildcardOracle.nativeMatch	M3Utf16GlobOracle	optional JNI hook of the proof main (--native ABSOLUTE_LIBRARY); never loaded in the test phase
+MEMBER	Utf16WildcardOracle.<init>	M3Utf16GlobOracle	private constructor (static utility)
+MEMBER	Utf16WildcardOracle.requireValid	M3Utf16GlobOracle	private in the donor, so reference keeps its own copy (same bytes; bounds through the static imports)
+MEMBER	Utf16WildcardOracle.reference	M3Utf16GlobOracle	independent rolling-row boolean DP oracle
+MEMBER	Utf16WildcardOracle.rejects	M3Utf16GlobOracle	proof step: NPE/IAE refusal witness
+MEMBER	Utf16WildcardOracle.compare	M3Utf16GlobOracle	proof step: DP vs greedy vs optional JNI, input immutability, digest update
+MEMBER	Utf16WildcardOracle.encoded	M3Utf16GlobOracle	proof helper: rank -> small-alphabet char[]
+MEMBER	Utf16WildcardOracle.power	M3Utf16GlobOracle	proof helper: integer power
+MEMBER	Utf16WildcardOracle.main	M3Utf16GlobOracle	proof main: prints M3_UTF16_GLOB_V1 cases=73310 sha256=... (crate PROOF_20261105.md)
+IMPORT	src/test/java/jdk/m3/precompute/M3LcsPlanOracle.java	static jdk.m3.precompute.M3LcsPlan.bitVectorLength	verify/reject call the production atom unqualified
+IMPORT	src/test/java/jdk/m3/precompute/M3Utf16GlobOracle.java	static jdk.m3.precompute.M3Utf16Glob.MAX_PATTERN	requireValid copy and main read the public bound
+IMPORT	src/test/java/jdk/m3/precompute/M3Utf16GlobOracle.java	static jdk.m3.precompute.M3Utf16Glob.MAX_TEXT	requireValid copy and main read the public bound
+IMPORT	src/test/java/jdk/m3/precompute/M3Utf16GlobOracle.java	static jdk.m3.precompute.M3Utf16Glob.match	compare/rejects call the production atom unqualified
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (the two donor tests: Test and static Assertions.*); pom dependency org.junit.jupiter:junit-jupiter:${junit.version} test scope, already in m3/ports/precompute/pom.xml

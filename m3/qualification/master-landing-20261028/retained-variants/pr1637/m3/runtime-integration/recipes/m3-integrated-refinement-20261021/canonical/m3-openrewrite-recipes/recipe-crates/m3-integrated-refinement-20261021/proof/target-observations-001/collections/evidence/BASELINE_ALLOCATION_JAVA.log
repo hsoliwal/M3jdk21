@@ -1,0 +1,7 @@
+["/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java", "-Xint", "-cp", "/workspace/scratch/206049dfb270/collections-work/baseline/classes:/workspace/scratch/206049dfb270/collections-work/baseline/contracts", "com.m3.collections.M3MaskedSortAllocationProbe"]
+{"backend":"JAVA","rows":2048,"selected":0,"samples":80,"allocated_bytes":19360,"elapsed_ns":26966025,"mode":"allocation-observation-only"}
+{"backend":"JAVA","rows":2048,"selected":1,"samples":80,"allocated_bytes":20480,"elapsed_ns":22047655,"mode":"allocation-observation-only"}
+{"backend":"JAVA","rows":2048,"selected":64,"samples":80,"allocated_bytes":81920,"elapsed_ns":27894954,"mode":"allocation-observation-only"}
+{"backend":"JAVA","rows":2048,"selected":1024,"samples":80,"allocated_bytes":1003520,"elapsed_ns":138571247,"mode":"allocation-observation-only"}
+
+EXIT 0

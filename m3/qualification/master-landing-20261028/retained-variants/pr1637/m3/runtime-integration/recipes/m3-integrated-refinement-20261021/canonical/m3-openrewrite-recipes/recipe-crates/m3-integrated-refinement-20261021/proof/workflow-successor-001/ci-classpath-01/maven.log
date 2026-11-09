@@ -1,0 +1,65 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------< com.synexia.m3:integrated-refinement-recovery-proof >---------
+[INFO] Building integrated-refinement-recovery-proof 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ integrated-refinement-recovery-proof ---
+[INFO] Copying 97 resources from ../../src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ integrated-refinement-recovery-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ integrated-refinement-recovery-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-01/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ integrated-refinement-recovery-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ integrated-refinement-recovery-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.memory.M3CorrectionMemoryConformanceTest
+MOP_MEMORY_CHECK PASS digest=01374b6a739a3b81fb8c80feb38b1d97360c3da4122fa0bed6cb67bf6445cde6 admission=PENDING
+MOP_RCM_CONFORMANCE PASS checks=129 controlCases=32 profile=m3-integrated-refinement-20261021/1.0
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.156 s -- in com.synexia.rewrite.memory.M3CorrectionMemoryConformanceTest
+[INFO] Running com.synexia.rewrite.M3IntegratedRefinementRecipeTest
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.975 s <<< FAILURE! -- in com.synexia.rewrite.M3IntegratedRefinementRecipeTest
+[ERROR] com.synexia.rewrite.M3IntegratedRefinementRecipeTest -- Time elapsed: 0.975 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: missing actual owner attribution: com.m3.eclipse.runtime.M3EclipseProgressMonitor#borrowed; resolved methods: [com.m3.collections.M3FilteredViews#filter, com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#capture, com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#size] ==> expected: <true> but was: <false>
+	at com.synexia.rewrite.M3IntegratedRefinementRecipeTest.actualDependencyAttribution(M3IntegratedRefinementRecipeTest.java:129)
+	at com.synexia.rewrite.M3IntegratedRefinementRecipeTest.canonicalOwnerAndClasspathIdentity(M3IntegratedRefinementRecipeTest.java:112)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   M3IntegratedRefinementRecipeTest.canonicalOwnerAndClasspathIdentity:112->actualDependencyAttribution:129 missing actual owner attribution: com.m3.eclipse.runtime.M3EclipseProgressMonitor#borrowed; resolved methods: [com.m3.collections.M3FilteredViews#filter, com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#capture, com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#size] ==> expected: <true> but was: <false>
+[INFO] 
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.783 s
+[INFO] Finished at: 2026-10-21T02:30:06+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project integrated-refinement-recovery-proof: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-01/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

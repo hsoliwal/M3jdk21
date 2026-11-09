@@ -1,0 +1,11 @@
+gate	state	requirement
+docs_before_code	PASS_BRANCH	TASK_PACKET precedes mapper
+deterministic_sorting	IMPLEMENTED	all path/result rows sorted
+content_hashes	IMPLEMENTED	SHA256 source/donor blobs
+ambiguity	IMPLEMENTED	explicit AMBIGUOUS.tsv; expected zero
+version_signals	IMPLEMENTED	evidence hints only; no automatic adaptation
+synthetic_git_test	PENDING_HOSTED	normalization/map/add/remove/ambiguous/refusal/determinism
+live_denominator	PENDING_HOSTED	241/245/238/3/0/7 exact counts
+existing_inventory_verify	PENDING_HOSTED	PR164 verifier + recipe proof
+mutation	FORBIDDEN	no JDK product source mutation
+promotion	FORBIDDEN	no API compatibility admission
