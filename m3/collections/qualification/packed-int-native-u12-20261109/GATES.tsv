@@ -1,0 +1,9 @@
+gate	host	result	evidence
+proof	Windows, JDK 21	8/8 PASS: javap -c and -v identical (PackedIntNative), mutant caught, JUnit 13/13 both sides (declared CALLSITE_PATCH, EXCEPTION_CONTRACT)	proof/PROOF.tsv
+sprawl_gate	any	SPRAWL_GATE new=1 refused_findings=0	sprawl_gate.py
+jdk_naming	any	JDK_NAMING moves=0 rewrites=0 refusals=0	m3/tooling/jdk-naming
+custody	any	module-source-successor-20261109.py --check changed=0; test_verify*.py OK	m3/collections/qualification
+census	any	202 native methods: BOUND 198, ABSENT 4	native_census.py v1.2
+build_windows	Windows 11, MinGW gcc 15.2	25 libraries; exports 161/161; non-JNI 0; mutant killed	build_check.sh
+build_linux	WSL Ubuntu 24.04, gcc 13.3	26 libraries; exports 163/163; non-JNI 0; mutant killed	build_check.sh
+suite_default	Windows, JDK 21	2785 tests, 0 failures, 0 errors, 151 skipped (+29 tests; PackedIntNativeTest skips without lint.native.path)	mvn verify
