@@ -141,6 +141,12 @@ if(MINGW)
   # ps_compare_Double), which -Wfloat-conversion rejects; glibc and clang use a type-generic builtin.
   target_compile_options(m3_collections_packed PRIVATE -Wno-float-conversion)
 endif()
+# NATIVE_ABSORB N5 (synexia-mat-collections C): MatCsrGraph loads m3_mat_csr (or m3.matcsr.native.path),
+# MatIntFilterKernel loads m3_matfilter after the m3.matcollections.jni opt-in.
+m3_collections_jni(m3_mat_csr SOURCES collections/m3csrtranspose.c
+  CLASSES jdk.internal.m3.collections.mat.MatCsrGraph)
+m3_collections_jni(m3_matfilter SOURCES collections/mat_int_filter_jni.c
+  CLASSES jdk.internal.m3.collections.mat.MatIntFilterKernel)
 
 # One javac -h run writes the headers of every declaring class; javac compiles their dependencies implicitly.
 list(REMOVE_DUPLICATES M3_JNI_DECLARATIONS)
