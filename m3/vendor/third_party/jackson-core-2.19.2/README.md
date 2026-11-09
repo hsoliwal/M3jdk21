@@ -1,6 +1,10 @@
 # jackson-core 2.19.2 source reference
 
-This directory compiles the unchanged jackson-core 2.19.2 sources from the published sources jar.
+This directory compiles the jackson-core 2.19.2 sources from the published sources jar with one M3 overlay,
+`JACKSON_NUMBERS_TO_JDK v1` (`m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py`): `NumberInput`, `BigDecimalParser` and
+`BigIntegerParser` call `Double.parseDouble`, `Float.parseFloat`, `new BigDecimal` and `new BigInteger`
+in java.base, the JDK's one number parser, instead of the shaded FastDoubleParser. The upstream files
+stay byte-identical under `upstream-excluded/`; `verify_source.py` re-derives each overlay from them.
 Donor-superset lane: build kind `java`, status `PASS`.
 
 

@@ -8,7 +8,7 @@ module names and public APIs stay available. Runtime code has no Synexia depende
 | Module | Responsibility |
 | --- | --- |
 | `com.fasterxml.jackson.annotation` | Existing upstream Jackson annotations |
-| `com.fasterxml.jackson.core` | Existing streaming parser/generator and shaded FastDoubleParser |
+| `com.fasterxml.jackson.core` | Existing streaming parser/generator; numbers parse in java.base (JACKSON_NUMBERS_TO_JDK v1) |
 | `com.fasterxml.jackson.databind` | Full existing ObjectMapper, JsonNode, readers, writers and binding machinery |
 | `jdk.m3.jackson` | Indexed `M3File` input/output, `M3ObjectMapper`, prepared single-value and sequence `M3Binding` |
 | `jdk.m3.jackson.compiler` | Optional detached declaration projection from the actual `com.sun.source.util.M3AST` session |

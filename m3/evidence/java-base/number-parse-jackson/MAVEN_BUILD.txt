@@ -1,0 +1,9 @@
+mvn jackson-core 2.15.3 rc=0 1
+{"artifact_sha256": "cceda5365fa0e073abd9be33f20108f80c8d6dadb4228dfe11d32931ee7ae4fc", "exact_files": 147, "exact_production_files": 129, "m3_overlays": 3, "revision": "2.15.3"}
+  entries 185 parser classes 0
+mvn jackson-core 2.16.1 rc=0 1
+{"artifact_sha256": "fd95e8eac6fcec721e17b1e58f32e15b5acbbbf8281bac121f78d36f0ae4a193", "exact_files": 152, "exact_production_files": 134, "m3_overlays": 3, "revision": "2.16.1"}
+  entries 206 parser classes 0
+mvn jackson-core 2.19.2 rc=0 1
+{"artifact_sha256": "0165b982b27119e94e362d3fee8a23031e10feccfa2fb3ace96131573b7806a9", "exact_files": 154, "exact_production_files": 136, "m3_overlays": 3, "revision": "2.19.2"}
+  entries 210 parser classes 0

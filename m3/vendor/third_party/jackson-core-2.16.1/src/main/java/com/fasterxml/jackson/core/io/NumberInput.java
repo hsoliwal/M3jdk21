@@ -1,7 +1,6 @@
 package com.fasterxml.jackson.core.io;
 
-import ch.randelshofer.fastdoubleparser.JavaDoubleParser;
-import ch.randelshofer.fastdoubleparser.JavaFloatParser;
+//FLLDCIM: M3 - JACKSON_NUMBERS_TO_JDK v1: numbers parse in java.base, the JDK's one number parser
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -385,7 +384,7 @@ public final class NumberInput
      * @since v2.14
      */
     public static double parseDouble(final String s, final boolean useFastParser) throws NumberFormatException {
-        return useFastParser ? JavaDoubleParser.parseDouble(s) : Double.parseDouble(s);
+        return useFastParser ? Double.parseDouble(s) : Double.parseDouble(s);
     }
 
     /**
@@ -407,7 +406,7 @@ public final class NumberInput
      * @since v2.14
      */
     public static float parseFloat(final String s, final boolean useFastParser) throws NumberFormatException {
-        return useFastParser ? JavaFloatParser.parseFloat(s) : Float.parseFloat(s);
+        return useFastParser ? Float.parseFloat(s) : Float.parseFloat(s);
     }
 
     /**

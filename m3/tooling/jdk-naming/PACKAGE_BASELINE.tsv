@@ -560,7 +560,6 @@ ROOT	m3/vendor/third_party-m3/relocated/commons-io-2.18.0	VENDOR
 ROOT	m3/vendor/third_party-m3/relocated/commons-lang3-3.17.0	VENDOR
 ROOT	m3/vendor/third_party-m3/relocated/commons-net	VENDOR
 ROOT	m3/vendor/third_party-m3/relocated/dec	VENDOR
-ROOT	m3/vendor/third_party-m3/relocated/fastdoubleparser-1.0.90	VENDOR
 ROOT	m3/vendor/third_party-m3/relocated/fastfilter	VENDOR
 ROOT	m3/vendor/third_party-m3/relocated/jackson-core-2.19.2	VENDOR
 ROOT	m3/vendor/third_party-m3/relocated/jsoup-1.23.2	VENDOR
@@ -605,9 +604,6 @@ ROOT	m3/vendor/third_party/eclipse-collections	VENDOR
 ROOT	m3/vendor/third_party/eclipse-collections-api	VENDOR
 ROOT	m3/vendor/third_party/error_prone_annotations	VENDOR
 ROOT	m3/vendor/third_party/failureaccess	VENDOR
-ROOT	m3/vendor/third_party/fastdoubleparser-0.9.0	VENDOR
-ROOT	m3/vendor/third_party/fastdoubleparser-1.0.0	VENDOR
-ROOT	m3/vendor/third_party/fastdoubleparser-1.0.90	VENDOR
 ROOT	m3/vendor/third_party/fastfilter	VENDOR
 ROOT	m3/vendor/third_party/gizmo	VENDOR
 ROOT	m3/vendor/third_party/guava	VENDOR

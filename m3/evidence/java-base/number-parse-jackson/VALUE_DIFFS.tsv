@@ -1,0 +1,11 @@
+seed	call	master (FastDoubleParser)	branch (java.base)	count
+1	NumberInput.parseBigInteger(String,true)	!StringIndexOutOfBoundsException	!NumberFormatException	74
+1	NumberInput.parseBigIntegerWithRadix(String,16,true)	!StringIndexOutOfBoundsException	!NumberFormatException	74
+2	NumberInput.parseBigInteger(String,true)	!StringIndexOutOfBoundsException	!NumberFormatException	88
+2	NumberInput.parseBigIntegerWithRadix(String,16,true)	!StringIndexOutOfBoundsException	!NumberFormatException	88
+3	JsonParser.getDecimalValue (byte parser)	!NumberFormatException	value (scale -2147483648)	2
+3	JsonParser.getDecimalValue (char parser)	!NumberFormatException	value (scale -2147483648)	2
+3	NumberInput.parseBigDecimal(String,true)	!NumberFormatException	value (scale -2147483648)	2
+3	NumberInput.parseBigDecimal(char[],off,len,true)	!NumberFormatException	value (scale -2147483648)	2
+3	NumberInput.parseBigInteger(String,true)	!StringIndexOutOfBoundsException	!NumberFormatException	93
+3	NumberInput.parseBigIntegerWithRadix(String,16,true)	!StringIndexOutOfBoundsException	!NumberFormatException	93

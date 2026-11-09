@@ -8,14 +8,14 @@ ObjectMapper behavior, service declarations and module names remain available.
 ## Source and module ownership
 
 The runtime inputs are the existing in-repository source inclusions of Jackson
-annotations/core/databind 2.19.2 and FastDoubleParser 1.0.90. `SOURCE_LOCK.json`
-pins their complete source/build/legal trees. Their exact Maven POMs perform the
-source builds, FastDoubleParser shading and multi-release compilation in fresh
-staging directories. No upstream source or POM is patched by this build. The
-FastDoubleParser 1.0.90 tree carries two recorded M3 overlays: its
-`JavaDoubleParser` and `JavaFloatParser` facades delegate to java.base
-(`m3/tooling/fdp-delegate`), so Jackson's `USE_FAST_DOUBLE_PARSER` path and the
-JDK use one parser; its BigDecimal/BigInteger parsers are unchanged.
+annotations/core/databind 2.19.2. `SOURCE_LOCK.json` pins their complete
+source/build/legal trees. Their exact Maven POMs perform the source builds and
+multi-release compilation in fresh staging directories. No upstream source or
+POM is patched by this build. Jackson core carries one recorded M3 overlay,
+`JACKSON_NUMBERS_TO_JDK v1` (`m3/tooling/jdk-superset/number-parse`): its
+`NumberInput`, `BigDecimalParser` and `BigIntegerParser` call `Double.parseDouble`,
+`Float.parseFloat`, `new BigDecimal` and `new BigInteger`, so Jackson and the JDK
+use one number parser, the one in java.base.
 
 The existing `m3/tooling/jmod-recipes/tools/jmod_pack.py` owns JMOD assembly and
 release-21 flattening. Its existing module graph checks the selected closure and
@@ -27,8 +27,8 @@ JDK modules that Jackson's descriptor marks as optional. Four JMODs are produced
 - `com.fasterxml.jackson.databind.jmod`
 - `jdk.m3.jackson.jmod`
 
-FastDoubleParser is built from source and shaded by Jackson core's original
-build configuration; it is not installed as a competing runtime module.
+No FastDoubleParser copy is built, shaded or installed: java.base parses the
+numbers.
 
 The build passes the existing Maven `project.build.outputTimestamp` property as
 `2026-01-01T00:00:00Z` to the pinned archive plugins. This fixes ZIP entry dates

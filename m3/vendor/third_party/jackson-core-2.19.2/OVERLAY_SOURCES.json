@@ -1,0 +1,37 @@
+{
+  "donor": "jackson-core-2.19.2",
+  "m3_overlays": [
+    {
+      "base_repository": "m3/vendor/third_party/jackson-core-2.19.2/upstream-excluded/com/fasterxml/jackson/core/io/NumberInput.java",
+      "base_sha256": "ca46d44fccb6a546c38bc39ba6b7a1c82bced97c132f4b181a7f41f5d55894ed",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v1",
+      "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
+      "recipe_sha256": "2c3e65e69b0eb6fe9bc6389be22eee01268c546034cef56b23efef2f9b178995",
+      "repository": "m3/vendor/third_party/jackson-core-2.19.2/src/main/java/com/fasterxml/jackson/core/io/NumberInput.java",
+      "sha256": "7c9b4396e0d2fd5ab5e616034218e55546b7a593a2c576e157dbbc5deceaaa79",
+      "upstream": "com/fasterxml/jackson/core/io/NumberInput.java"
+    },
+    {
+      "base_repository": "m3/vendor/third_party/jackson-core-2.19.2/upstream-excluded/com/fasterxml/jackson/core/io/BigDecimalParser.java",
+      "base_sha256": "da90c3a36385f5e7addf10488916281230dd1baaa907587d8115559b6f7f94e3",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v1",
+      "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
+      "recipe_sha256": "2c3e65e69b0eb6fe9bc6389be22eee01268c546034cef56b23efef2f9b178995",
+      "repository": "m3/vendor/third_party/jackson-core-2.19.2/src/main/java/com/fasterxml/jackson/core/io/BigDecimalParser.java",
+      "sha256": "1aa7308cf89fe98cf7bca12a97f4e1b963b6af7538181825105f32af3cf6bc8c",
+      "upstream": "com/fasterxml/jackson/core/io/BigDecimalParser.java"
+    },
+    {
+      "base_repository": "m3/vendor/third_party/jackson-core-2.19.2/upstream-excluded/com/fasterxml/jackson/core/io/BigIntegerParser.java",
+      "base_sha256": "caebf768aef15ca27510a563e1464dc8324f0ff38e341423bf1dddc082627cf6",
+      "overlay": "JACKSON_NUMBERS_TO_JDK v1",
+      "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
+      "recipe_sha256": "2c3e65e69b0eb6fe9bc6389be22eee01268c546034cef56b23efef2f9b178995",
+      "repository": "m3/vendor/third_party/jackson-core-2.19.2/src/main/java/com/fasterxml/jackson/core/io/BigIntegerParser.java",
+      "sha256": "a783e5d64649b879829c402ba6b423301d9a88310a11a1ef6a6ceb0ec22a7152",
+      "upstream": "com/fasterxml/jackson/core/io/BigIntegerParser.java"
+    }
+  ],
+  "overlay": "JACKSON_NUMBERS_TO_JDK v1",
+  "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py"
+}

@@ -4,15 +4,16 @@ Licensed under the Apache License, Version 2.0.
 
 The Jackson annotation, core and databind implementations remain the work of
 their upstream FasterXML authors and contributors. They are compiled from the
-existing, unchanged M3JDK21 source inclusions at version 2.19.2 and retain their
+existing M3JDK21 source inclusions at version 2.19.2 and retain their
 original Apache-2.0 legal texts and notices. This integration does not rename or
 relicense those implementations.
 
-Jackson core's existing Maven build shades the existing source inclusion of
-Werner Randelshofer's FastDoubleParser 1.0.90. Its MIT license, original notices,
-and third-party license texts are preserved independently. The build uses its
-existing JDK 11, 17 and 21 overlays; JDK 22-only overlays are outside this JDK 21
-package.
+Jackson core parses numbers with java.base (Double.parseDouble, Float.parseFloat,
+new BigDecimal, new BigInteger) through one recorded M3 source overlay,
+JACKSON_NUMBERS_TO_JDK v1; it no longer bundles Werner Randelshofer's
+FastDoubleParser. M3JDK's java.base carries that parser's algorithm under its MIT
+license, with the notice in java.base's legal/fastdoubleparser.md. The notices that
+the published Jackson core JAR carries stay unchanged among its resources.
 
 SOURCE_LOCK.json pins the exact source/build/legal trees and the existing M3
 JMOD assembler. Every resulting JMOD receives the complete selected legal bundle.

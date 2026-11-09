@@ -8,7 +8,6 @@
  * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.core {
-    requires jdk.m3.fastdoubleparser;
     exports jdk.m3.lib.core;
     exports jdk.m3.lib.core.async;
     exports jdk.m3.lib.core.base;

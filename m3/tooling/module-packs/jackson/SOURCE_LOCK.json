@@ -1,16 +1,6 @@
 {
   "build_policy": "Exact existing source POMs run in fresh staging; offline default; source-built library closure only",
   "donors": {
-    "fastdoubleparser-1.0.90": {
-      "coordinate": "ch.randelshofer:fastdoubleparser:1.0.90-m3-source-1",
-      "file_count": 68,
-      "license": "MIT License",
-      "module": null,
-      "path": "m3/vendor/third_party/fastdoubleparser-1.0.90",
-      "provenance_sha256": "cfee2e16d3aae17efbc32492a9ca8db63172454f01342c664d296abe72872d76",
-      "sources_jar_sha256": "9ef19b07959b456930efdfd4c5690caeb9ac39b07a813e84557ca12957478ce4",
-      "tree_sha256": "a65e8f9c5fb817efebbe8bff17f57f8de1e2e93d5b26e976a39081da2c4b0997"
-    },
     "jackson-annotations-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.19.2-m3-source-1",
       "file_count": 59,
@@ -23,13 +13,13 @@
     },
     "jackson-core-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-core:2.19.2-m3-source-1",
-      "file_count": 156,
+      "file_count": 160,
       "license": "The Apache Software License, Version 2.0",
       "module": "com.fasterxml.jackson.core",
       "path": "m3/vendor/third_party/jackson-core-2.19.2",
-      "provenance_sha256": "db78593d1face0503e8aa0e80a6d9a67731983c0febac00f9ec8ad2fc2ad355f",
+      "provenance_sha256": "5baaeb24866b8ee2fbcb1bea2952ad9a178b55613f3b03eb072499adf062244c",
       "sources_jar_sha256": "e0f42e8ca172a74802f06683e14de59f5fc74d8d8f782ba97269adc5782527a3",
-      "tree_sha256": "03c7f0c426260242775cd40b46b71cfd82dbf7bbbaa837147757a2a6b1a28ef0"
+      "tree_sha256": "fbeecde14e299c7806a06e08c4e239db792dbb720a096ef5c351139441f0110d"
     },
     "jackson-databind-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.19.2-m3-source-1",
@@ -76,10 +66,10 @@
       "sha256": "f8c4096e7d38dec851e5aae6121dbd160aba89d99a7c2fe09eee57c6e9c084af"
     }
   ],
-  "predecessor_path": "qualification/fdp-delegate/SOURCE_LOCK_PREDECESSOR.json",
-  "predecessor_sha256": "4bb1a8b623b106985cca97969a79561c079ff0cf9a415fcf91e996f3ee4ab99a",
+  "predecessor_path": "m3/evidence/java-base/number-parse-jackson/SOURCE_LOCK_PREDECESSOR.json",
+  "predecessor_sha256": "58ef61641b1a505ac7f74b5b68bf5fec41d09085a26a72509bf05cd7525b5b90",
   "schema": 1,
-  "target_base_revision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
+  "target_base_revision": "5c47b0edf08d7ecd12e5c2afecc5530ac6930209",
   "target_repository": "https://github.com/hsoliwal/M3jdk21",
   "tree_digest_algorithm": "SHA-256 over UTF-8 POSIX relative path, NUL, lowercase file SHA-256, LF, sorted by relative path; excludes target, dependency-reduced-pom.xml, __pycache__, .DS_Store"
 }

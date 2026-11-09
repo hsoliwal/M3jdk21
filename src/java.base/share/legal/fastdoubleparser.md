@@ -2,8 +2,9 @@
 
 ### Origin
 
-Thirteen classes of FastDoubleParser 1.0.90 (https://github.com/wrandelshofer/FastDoubleParser, MIT; the vendored
-source inclusion m3/vendor/third_party/fastdoubleparser-1.0.90) are part of java.base as
+Thirteen classes of FastDoubleParser 1.0.90 (https://github.com/wrandelshofer/FastDoubleParser, MIT; vendored as
+m3/vendor/third_party/fastdoubleparser-1.0.90 until 2026-11-09, when JACKSON_NUMBERS_TO_JDK v1 removed every copy
+outside java.base) are part of java.base as
 jdk.internal.math.M3* (the Java-grammar double/float parsers for CharSequence and byte[], their templates and the
 FastDoubleMath, FastFloatMath, FastDoubleSwar, FastIntegerMath and FftMultiplier kernels).
 

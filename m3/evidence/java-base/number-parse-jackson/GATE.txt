@@ -1,0 +1,53 @@
+javac old rc=0 classes=206 errors=0
+javac new-2.15.3 rc=0 classes=140 errors=0
+javac new-2.16.1 rc=0 classes=161 errors=0
+javac new-2.19.2 rc=0 classes=165 errors=0
+javac relocated rc=0 classes=166 errors=0
+javac patch rc=0 classes=42 errors=0
+javac harness-old rc=0 classes=1 errors=0
+javac harness-new-2.19.2 rc=0 classes=1 errors=0
+seed 1 old: patched classes loaded 2 of 3
+seed 1 new-2.19.2: patched classes loaded 3 of 3
+seed 1 stock_new-2.19.2: values DIFFERENT 74 lines
+seed 1 m3_old: 20000 numbers values IDENTICAL to stock_old (sha256 9fde0073ff02694b)
+seed 1 m3_new-2.19.2: values DIFFERENT 74 lines
+seed 1 stock messages: old 45153 new 45153 differing 33654
+seed 1 m3 messages: old 45153 new 45153 differing 33654
+seed 2 old: patched classes loaded 2 of 3
+seed 2 new-2.19.2: patched classes loaded 3 of 3
+seed 2 stock_new-2.19.2: values DIFFERENT 88 lines
+seed 2 m3_old: 20000 numbers values IDENTICAL to stock_old (sha256 4bc049e20903921b)
+seed 2 m3_new-2.19.2: values DIFFERENT 88 lines
+seed 2 stock messages: old 45601 new 45601 differing 34043
+seed 2 m3 messages: old 45601 new 45601 differing 34043
+seed 3 old: patched classes loaded 2 of 3
+seed 3 new-2.19.2: patched classes loaded 3 of 3
+seed 3 stock_new-2.19.2: values DIFFERENT 95 lines
+seed 3 m3_old: 20000 numbers values IDENTICAL to stock_old (sha256 0186a9e88615dabf)
+seed 3 m3_new-2.19.2: values DIFFERENT 95 lines
+seed 3 stock messages: old 45430 new 45422 differing 34263
+seed 3 m3 messages: old 45430 new 45422 differing 34263
+04d9847c51aaceaeb4151cdb09c38857231e5459c30a1c44297215c177395cf3  stock_new-2.19.2_1.txt
+8844e1a4674f9670c84cc004549e91e929108c16c442b565195f80d66c9efbd8  stock_new-2.19.2_2.txt
+14526cd8b520f4228dff76496e31c411f64111d857dd5121ef87b879b21a4da3  stock_new-2.19.2_3.txt
+9fde0073ff02694b33f89bbfa929390e4709df56d9e21f2b7e2fa21cc90e1f62  stock_old_1.txt
+4bc049e20903921b03eb920cd0557c5c2e2163445319979d817a58c7effa2804  stock_old_2.txt
+0186a9e88615dabfc22d6b795df1119475d9d8493925d45bb43c8d80954641ab  stock_old_3.txt
+04d9847c51aaceaeb4151cdb09c38857231e5459c30a1c44297215c177395cf3  m3_new-2.19.2_1.txt
+8844e1a4674f9670c84cc004549e91e929108c16c442b565195f80d66c9efbd8  m3_new-2.19.2_2.txt
+14526cd8b520f4228dff76496e31c411f64111d857dd5121ef87b879b21a4da3  m3_new-2.19.2_3.txt
+9fde0073ff02694b33f89bbfa929390e4709df56d9e21f2b7e2fa21cc90e1f62  m3_old_1.txt
+4bc049e20903921b03eb920cd0557c5c2e2163445319979d817a58c7effa2804  m3_old_2.txt
+0186a9e88615dabfc22d6b795df1119475d9d8493925d45bb43c8d80954641ab  m3_old_3.txt
+3a5c8591f01131755251a9beb306a8ad7a60472cee4ddc8a3d3e71ae77bd5648  msg_m3_new-2.19.2_1.txt
+cf87833f2b3ad103868c694d0a8006e6697ec76f12b7e7529cfa45ef2e2499a9  msg_m3_new-2.19.2_2.txt
+fcf921bfa4cfc182fb9d566d59e3388ebb539c45cf96a87008e23a3e6516e773  msg_m3_new-2.19.2_3.txt
+0ebe8b221aa0b6ce2232b05c05b3e381c2baab5d877a392eb60c2bc025f16e46  msg_m3_old_1.txt
+7335be8675cc592f075cc5117e6d4f264456dba5512a57bbe4b683c6da64c6da  msg_m3_old_2.txt
+ef0001de1f6d515e39f01be104b1ad0c18789d856097d9b3f30b2b900f7932ee  msg_m3_old_3.txt
+3a5c8591f01131755251a9beb306a8ad7a60472cee4ddc8a3d3e71ae77bd5648  msg_stock_new-2.19.2_1.txt
+cf87833f2b3ad103868c694d0a8006e6697ec76f12b7e7529cfa45ef2e2499a9  msg_stock_new-2.19.2_2.txt
+fcf921bfa4cfc182fb9d566d59e3388ebb539c45cf96a87008e23a3e6516e773  msg_stock_new-2.19.2_3.txt
+0ebe8b221aa0b6ce2232b05c05b3e381c2baab5d877a392eb60c2bc025f16e46  msg_stock_old_1.txt
+7335be8675cc592f075cc5117e6d4f264456dba5512a57bbe4b683c6da64c6da  msg_stock_old_2.txt
+ef0001de1f6d515e39f01be104b1ad0c18789d856097d9b3f30b2b900f7932ee  msg_stock_old_3.txt

@@ -1,0 +1,9 @@
+master:
+DIFF	fastdoubleparser-1.0.90	files=68	lock_files=68
+DIFF	jackson-annotations-2.19.2	files=59	lock_files=59
+DIFF	jackson-core-2.19.2	files=156	lock_files=156
+DIFF	jackson-databind-2.19.2	files=496	lock_files=496
+branch:
+DIFF	jackson-annotations-2.19.2	files=59	lock_files=59
+MATCH	jackson-core-2.19.2	files=160	lock_files=160
+DIFF	jackson-databind-2.19.2	files=496	lock_files=496
