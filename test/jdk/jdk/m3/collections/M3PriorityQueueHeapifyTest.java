@@ -28,7 +28,7 @@ final class M3PriorityQueueHeapifyTest {
             PriorityQueue<Integer> jdkInts = new PriorityQueue<>();
             PriorityQueue<Long> jdkLongs = new PriorityQueue<>();
             IntPriorityQueue incrementalInts = new IntPriorityQueue();
-            LongPriorityQueue incrementalLongs = new LongPriorityQueue();
+            LongPriorityQueue incrementalLongs = LongPriorityQueue.of();
             for (int i = 0; i < length; i++) {
                 ints[i] = round % 7 == 0 ? 0 : i % 31 == 0 ? Integer.MIN_VALUE
                         : i % 37 == 0 ? Integer.MAX_VALUE : random.nextInt(201) - 100;
@@ -42,7 +42,7 @@ final class M3PriorityQueueHeapifyTest {
             int[] immutableInts = ints.clone();
             long[] immutableLongs = longs.clone();
             IntPriorityQueue bulkInts = new IntPriorityQueue(ints);
-            LongPriorityQueue bulkLongs = new LongPriorityQueue(longs);
+            LongPriorityQueue bulkLongs = LongPriorityQueue.of(longs);
             assertArrayEquals(immutableInts, ints);
             assertArrayEquals(immutableLongs, longs);
             assertEquals(length, bulkInts.size());
@@ -80,7 +80,7 @@ final class M3PriorityQueueHeapifyTest {
         int[] ints = {9, -1, 3, -1, 0, Integer.MAX_VALUE};
         long[] longs = {9, -1, 3, -1, 0, Long.MIN_VALUE};
         IntPriorityQueue qi = new IntPriorityQueue(ints);
-        LongPriorityQueue ql = new LongPriorityQueue(longs);
+        LongPriorityQueue ql = LongPriorityQueue.of(longs);
         ints[0] = -1000;
         longs[0] = -1000;
         assertEquals(-1, qi.firstInt());
@@ -103,9 +103,9 @@ final class M3PriorityQueueHeapifyTest {
 
     @Test void nullAndEmptyConstructionAreDefined() {
         assertThrows(NullPointerException.class, () -> new IntPriorityQueue((int[]) null));
-        assertThrows(NullPointerException.class, () -> new LongPriorityQueue((long[]) null));
+        assertThrows(NullPointerException.class, () -> LongPriorityQueue.of((long[]) null));
         var qi = new IntPriorityQueue(new int[0]);
-        var ql = new LongPriorityQueue(new long[0]);
+        var ql = LongPriorityQueue.of(new long[0]);
         assertEquals(0, qi.capacity());
         assertEquals(0, ql.capacity());
         qi.offer(1);
