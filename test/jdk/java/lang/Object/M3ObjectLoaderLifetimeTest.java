@@ -18,7 +18,8 @@
  *          retained fields remain authorized and usable after cache eviction
  * @requires vm.gc.Serial
  * @modules java.base/java.lang:open
- * @run main/othervm -Xmx64m -XX:+UseSerialGC -XX:+ClassUnloading M3ObjectLoaderLifetimeTest
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectLoaderLifetimeTest.java
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xmx64m -XX:+UseSerialGC -XX:+ClassUnloading java.lang.M3ObjectLoaderLifetimeTest
  */
 
 /*
@@ -27,8 +28,11 @@
  *          retained fields remain authorized and usable after cache eviction
  * @requires vm.gc.G1
  * @modules java.base/java.lang:open
- * @run main/othervm -Xmx64m -XX:+UseG1GC -XX:+ClassUnloading M3ObjectLoaderLifetimeTest
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectLoaderLifetimeTest.java
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Xmx64m -XX:+UseG1GC -XX:+ClassUnloading java.lang.M3ObjectLoaderLifetimeTest
  */
+
+package java.lang;
 
 import java.io.InputStream;
 import java.lang.invoke.MethodHandles;

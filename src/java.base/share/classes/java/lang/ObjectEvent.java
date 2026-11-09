@@ -22,7 +22,7 @@ package java.lang;
  *
  * @since 21
  */
-public final class ObjectEvent {
+final class ObjectEvent {
     /** A reference field changed by identity. */
     public static final int REFERENCE = 1;
     /** A primitive field changed by raw bits. */

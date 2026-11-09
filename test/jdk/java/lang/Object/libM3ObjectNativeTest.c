@@ -32,7 +32,7 @@
 /* These fixed-field fixture writes are called by one serialized producer.
  * Separate Get/Set JNI calls are not advertised as atomic old/new capture. */
 JNIEXPORT jboolean JNICALL
-Java_M3ObjectNativeTest_writeReference(JNIEnv *env, jclass test_class,
+Java_java_lang_M3ObjectNativeTest_writeReference(JNIEnv *env, jclass test_class,
                                       jobject source, jobject value,
                                       jclass declaring_type, jstring field_name,
                                       jclass field_type)
@@ -66,7 +66,7 @@ Java_M3ObjectNativeTest_writeReference(JNIEnv *env, jclass test_class,
 }
 
 JNIEXPORT jboolean JNICALL
-Java_M3ObjectNativeTest_writeValue(JNIEnv *env, jclass test_class,
+Java_java_lang_M3ObjectNativeTest_writeValue(JNIEnv *env, jclass test_class,
                                   jobject source, jint value,
                                   jclass declaring_type, jstring field_name,
                                   jclass field_type)
@@ -97,7 +97,7 @@ Java_M3ObjectNativeTest_writeValue(JNIEnv *env, jclass test_class,
 
 /* Deterministic fixture for a committed store whose producer hook is delayed. */
 JNIEXPORT void JNICALL
-Java_M3ObjectNativeTest_storeReferenceOnly(JNIEnv *env, jclass test_class,
+Java_java_lang_M3ObjectNativeTest_storeReferenceOnly(JNIEnv *env, jclass test_class,
                                          jobject source, jobject value)
 {
     jclass declaring_type;
@@ -122,7 +122,7 @@ Java_M3ObjectNativeTest_storeReferenceOnly(JNIEnv *env, jclass test_class,
 }
 
 JNIEXPORT jboolean JNICALL
-Java_M3ObjectNativeTest_writeByte(JNIEnv *env, jclass test_class,
+Java_java_lang_M3ObjectNativeTest_writeByte(JNIEnv *env, jclass test_class,
                                  jbyteArray source, jint index, jbyte value)
 {
     jbyte previous;
@@ -144,7 +144,7 @@ Java_M3ObjectNativeTest_writeByte(JNIEnv *env, jclass test_class,
 }
 
 JNIEXPORT jboolean JNICALL
-Java_M3ObjectNativeTest_notifyContent(JNIEnv *env, jclass test_class,
+Java_java_lang_M3ObjectNativeTest_notifyContent(JNIEnv *env, jclass test_class,
                                      jobject source)
 {
     (void)test_class;
@@ -152,7 +152,7 @@ Java_M3ObjectNativeTest_notifyContent(JNIEnv *env, jclass test_class,
 }
 
 JNIEXPORT jboolean JNICALL
-Java_M3ObjectNativeTest_notifyField(JNIEnv *env, jclass test_class,
+Java_java_lang_M3ObjectNativeTest_notifyField(JNIEnv *env, jclass test_class,
                                    jobject source, jclass declaring_type,
                                    jstring field_name, jclass field_type,
                                    jint mask)
@@ -163,7 +163,7 @@ Java_M3ObjectNativeTest_notifyField(JNIEnv *env, jclass test_class,
 }
 
 JNIEXPORT jboolean JNICALL
-Java_M3ObjectNativeTest_pendingIsPreserved(JNIEnv *env, jclass test_class,
+Java_java_lang_M3ObjectNativeTest_pendingIsPreserved(JNIEnv *env, jclass test_class,
                                           jobject source, jthrowable expected)
 {
     jboolean content_result;
@@ -190,7 +190,7 @@ Java_M3ObjectNativeTest_pendingIsPreserved(JNIEnv *env, jclass test_class,
 }
 
 JNIEXPORT jint JNICALL
-Java_M3ObjectNativeTest_mutateMany(JNIEnv *env, jclass test_class,
+Java_java_lang_M3ObjectNativeTest_mutateMany(JNIEnv *env, jclass test_class,
                                   jbyteArray source, jint count)
 {
     jbyte value;

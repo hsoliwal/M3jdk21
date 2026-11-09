@@ -7,8 +7,11 @@
  * @test
  * @summary Per-atom contracts of java.lang.M3ObjectRuntime and M3Object observation (generated, template objects)
  * @modules java.base/java.lang:open java.base/jdk.internal.misc
- * @run junit/othervm -Djdk.m3.objectEvents.enabled=true M3ObjectRuntimeAtomsTest
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectRuntimeAtomsTest.java
+ * @run junit/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED -Djdk.m3.objectEvents.enabled=true java.lang.M3ObjectRuntimeAtomsTest
  */
+
+package java.lang;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

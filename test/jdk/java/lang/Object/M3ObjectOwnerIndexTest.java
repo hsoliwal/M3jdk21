@@ -7,8 +7,11 @@
  * @test
  * @summary Array-backed weak owner index preserves M3Object identity and concurrency
  * @modules java.base/java.lang
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xmx128m M3ObjectOwnerIndexTest
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectOwnerIndexTest.java
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Xmx128m java.lang.M3ObjectOwnerIndexTest
  */
+package java.lang;
+
 import java.lang.reflect.Field;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
