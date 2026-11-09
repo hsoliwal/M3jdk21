@@ -15,18 +15,18 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-final class M3CanonicalFamilyPolicyTest {
+final class CanonicalFamilyPolicyTest {
     @Test
     void everyCanonicalFamilyClassifiesItsPrefixAndChild() {
-        for (M3CanonicalFamilyPolicy.Family family :
-                M3CanonicalFamilyPolicy.Family.values()) {
+        for (CanonicalFamilyPolicy.Family family :
+                CanonicalFamilyPolicy.Family.values()) {
             assertEquals(
                     family,
-                    M3CanonicalFamilyPolicy.requireFamily(
+                    CanonicalFamilyPolicy.requireFamily(
                             family.sourcePrefix() + "pom.xml"));
             assertEquals(
                     family,
-                    M3CanonicalFamilyPolicy.classify(
+                    CanonicalFamilyPolicy.classify(
                                     family.sourcePrefix() + "src/main/java/p/A.java")
                             .orElseThrow());
             assertFalse(family.canonicalOwner().isBlank());
@@ -53,10 +53,10 @@ final class M3CanonicalFamilyPolicyTest {
             assertEquals(5, cells.length);
             rows.put(cells[0], cells);
         }
-        assertEquals(M3CanonicalFamilyPolicy.Family.values().length, rows.size());
+        assertEquals(CanonicalFamilyPolicy.Family.values().length, rows.size());
 
-        for (M3CanonicalFamilyPolicy.Family family :
-                M3CanonicalFamilyPolicy.Family.values()) {
+        for (CanonicalFamilyPolicy.Family family :
+                CanonicalFamilyPolicy.Family.values()) {
             String[] cells = rows.get(family.name());
             assertEquals(family.sourcePrefix(), cells[1]);
             assertEquals(family.canonicalOwner(), cells[2]);
@@ -68,32 +68,32 @@ final class M3CanonicalFamilyPolicyTest {
     @Test
     void unclassifiedAndUnsafeSourcePathsFailClosedWhenRequired() {
         assertTrue(
-                M3CanonicalFamilyPolicy.classify(
+                CanonicalFamilyPolicy.classify(
                                 "other-module/src/main/java/p/A.java")
                         .isEmpty());
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3CanonicalFamilyPolicy.requireFamily(
+                        CanonicalFamilyPolicy.requireFamily(
                                 "other-module/src/main/java/p/A.java"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalFamilyPolicy.classify("../A.java"));
+                () -> CanonicalFamilyPolicy.classify("../A.java"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalFamilyPolicy.classify("/A.java"));
+                () -> CanonicalFamilyPolicy.classify("/A.java"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalFamilyPolicy.classify("a//b.java"));
+                () -> CanonicalFamilyPolicy.classify("a//b.java"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalFamilyPolicy.classify("a/../b.java"));
+                () -> CanonicalFamilyPolicy.classify("a/../b.java"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalFamilyPolicy.classify(""));
+                () -> CanonicalFamilyPolicy.classify(""));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalFamilyPolicy.classify(null));
+                () -> CanonicalFamilyPolicy.classify(null));
     }
 
     @Test
@@ -102,63 +102,63 @@ final class M3CanonicalFamilyPolicyTest {
                 "m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/ast/A.java";
         String target = "m3/vendor/m3/" + source;
 
-        M3CanonicalFamilyPolicy.requireMirrorTarget(source, target);
+        CanonicalFamilyPolicy.requireMirrorTarget(source, target);
 
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3CanonicalFamilyPolicy.requireMirrorTarget(
+                        CanonicalFamilyPolicy.requireMirrorTarget(
                                 source,
                                 "m3/vendor/m3/renamed/A.java"));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3CanonicalFamilyPolicy.requireMirrorTarget(
+                        CanonicalFamilyPolicy.requireMirrorTarget(
                                 source, "../" + target));
     }
 
     @Test
     void m3IndexAndIndexStringCategoriesMustMatchCanonicalFamilies() {
-        M3CanonicalFamilyPolicy.requireCategoryFamily(
+        CanonicalFamilyPolicy.requireCategoryFamily(
                 "m3index-family",
                 "m3-m3index/core/pom.xml");
-        M3CanonicalFamilyPolicy.requireCategoryFamily(
+        CanonicalFamilyPolicy.requireCategoryFamily(
                 "m3index-compiler-java",
                 "m3-mindex/compiler/src/main/java/p/A.java");
-        M3CanonicalFamilyPolicy.requireCategoryFamily(
+        CanonicalFamilyPolicy.requireCategoryFamily(
                 "m3index-data-structure-tests",
                 "m3-mindex/data-structure/src/test/java/p/ATest.java");
-        M3CanonicalFamilyPolicy.requireCategoryFamily(
+        CanonicalFamilyPolicy.requireCategoryFamily(
                 "m3index-precompute-api-java",
                 "m3-mindex/precompute-api/src/main/java/p/A.java");
-        M3CanonicalFamilyPolicy.requireCategoryFamily(
+        CanonicalFamilyPolicy.requireCategoryFamily(
                 "m3index-db-java",
                 "m3-mindex/db/src/main/java/p/A.java");
-        M3CanonicalFamilyPolicy.requireCategoryFamily(
+        CanonicalFamilyPolicy.requireCategoryFamily(
                 "indexstring-java",
                 "m3-indexstring/src/main/java/p/A.java");
 
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3CanonicalFamilyPolicy.requireCategoryFamily(
+                        CanonicalFamilyPolicy.requireCategoryFamily(
                                 "m3index-compiler-java",
                                 "other-module/src/main/java/p/A.java"));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3CanonicalFamilyPolicy.requireCategoryFamily(
+                        CanonicalFamilyPolicy.requireCategoryFamily(
                                 "indexstring-java",
                                 "m3-mindex/compiler/src/main/java/p/A.java"));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        M3CanonicalFamilyPolicy.requireCategoryFamily(
+                        CanonicalFamilyPolicy.requireCategoryFamily(
                                 "m3index-family",
                                 "m3-indexstring/src/main/java/p/A.java"));
 
         // Generic historical seed categories remain legal; this guard only owns M3Index-family labels.
-        M3CanonicalFamilyPolicy.requireCategoryFamily(
+        CanonicalFamilyPolicy.requireCategoryFamily(
                 "seed",
                 "other-module/src/main/java/p/A.java");
     }
@@ -166,40 +166,40 @@ final class M3CanonicalFamilyPolicyTest {
     @Test
     void importPlanUsesExplicitM3IndexFamilyLanes() {
         assertEquals(
-                M3ImportPlan.Lane.M3INDEX,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.M3INDEX,
+                ImportPlan.lane(
                         "m3index-family",
                         "m3/vendor/m3/m3-m3index/core/pom.xml"));
         assertEquals(
-                M3ImportPlan.Lane.INDEXSTRING,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.INDEXSTRING,
+                ImportPlan.lane(
                         "indexstring-java",
                         "m3/vendor/m3/m3-indexstring/src/main/java/p/A.java"));
         assertEquals(
-                M3ImportPlan.Lane.M3INDEX_COMPILER,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.M3INDEX_COMPILER,
+                ImportPlan.lane(
                         "m3index-compiler-java",
                         "m3/vendor/m3/m3-mindex/compiler/src/main/java/p/A.java"));
         assertEquals(
-                M3ImportPlan.Lane.M3INDEX_DATA_STRUCTURE,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.M3INDEX_DATA_STRUCTURE,
+                ImportPlan.lane(
                         "m3index-data-structure-java",
                         "m3/vendor/m3/m3-mindex/data-structure/src/main/java/p/A.java"));
         assertEquals(
-                M3ImportPlan.Lane.M3INDEX_PRECOMPUTE,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.M3INDEX_PRECOMPUTE,
+                ImportPlan.lane(
                         "m3index-precompute-api-java",
                         "m3/vendor/m3/m3-mindex/precompute-api/src/main/java/p/A.java"));
         assertEquals(
-                M3ImportPlan.Lane.M3INDEX_DB,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.M3INDEX_DB,
+                ImportPlan.lane(
                         "m3index-db-java",
                         "m3/vendor/m3/m3-mindex/db/src/main/java/p/A.java"));
 
         // Stale/legacy rows still infer from target path.
         assertEquals(
-                M3ImportPlan.Lane.M3INDEX_COMPILER,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.M3INDEX_COMPILER,
+                ImportPlan.lane(
                         "stale",
                         "m3/vendor/m3/m3-mindex/compiler/src/main/java/p/A.java"));
     }
@@ -210,44 +210,44 @@ final class M3CanonicalFamilyPolicyTest {
                 "m3-mindex/precompute-api/src/main/java/p/A.java";
         String target = "m3/vendor/m3/" + source;
 
-        new M3ImportManifest.Entry(
+        new ImportManifest.Entry(
                 "m3index-precompute-api-java",
                 source,
                 target,
                 "1".repeat(64),
                 "Apache-2.0",
-                M3ImportManifest.Mode.APACHE_SOURCE);
+                ImportManifest.Mode.APACHE_SOURCE);
 
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        new M3ImportManifest.Entry(
+                        new ImportManifest.Entry(
                                 "m3index-precompute-api-java",
                                 source,
                                 "m3/vendor/m3/renamed/A.java",
                                 "1".repeat(64),
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE));
+                                ImportManifest.Mode.APACHE_SOURCE));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        new M3ImportManifest.Entry(
+                        new ImportManifest.Entry(
                                 "indexstring-java",
                                 source,
                                 target,
                                 "1".repeat(64),
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE));
+                                ImportManifest.Mode.APACHE_SOURCE));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        new M3ImportManifest.Entry(
+                        new ImportManifest.Entry(
                                 "m3index-precompute-api-java",
                                 source,
                                 target,
                                 "1".repeat(64),
                                 "MIT",
-                                M3ImportManifest.Mode.APACHE_SOURCE));
+                                ImportManifest.Mode.APACHE_SOURCE));
     }
 
     @Test
@@ -259,21 +259,21 @@ final class M3CanonicalFamilyPolicyTest {
                 "com.synexia:m3-m3index-collections",
                 "com.synexia:m3-m3index-algorithm");
         for (int i = 0; i < prefixes.size(); i++) {
-            M3CanonicalFamilyPolicy.Family family =
-                    M3CanonicalFamilyPolicy.requireFamily(
+            CanonicalFamilyPolicy.Family family =
+                    CanonicalFamilyPolicy.requireFamily(
                             prefixes.get(i) + "src/main/java/p/A.java");
             assertEquals(names.get(i), family.name());
             assertEquals(owners.get(i), family.canonicalOwner());
-            assertEquals(family, M3CanonicalFamilyPolicy.requireFamily(
+            assertEquals(family, CanonicalFamilyPolicy.requireFamily(
                     prefixes.get(i) + "pom.xml"));
         }
 
         // Additive coordinates retain the original, broad alias custody classification.
-        assertEquals(M3CanonicalFamilyPolicy.Family.M3INDEX_ALIAS,
-                M3CanonicalFamilyPolicy.requireFamily(
+        assertEquals(CanonicalFamilyPolicy.Family.M3INDEX_ALIAS,
+                CanonicalFamilyPolicy.requireFamily(
                         "m3-m3index/collections/pom.xml"));
-        assertEquals(M3CanonicalFamilyPolicy.Family.M3INDEX_ALIAS,
-                M3CanonicalFamilyPolicy.requireFamily(
+        assertEquals(CanonicalFamilyPolicy.Family.M3INDEX_ALIAS,
+                CanonicalFamilyPolicy.requireFamily(
                         "m3-m3index/algorithm/pom.xml"));
     }
 
@@ -283,22 +283,22 @@ final class M3CanonicalFamilyPolicyTest {
                 "m3-mindex/collections/", "m3-mindex/algorithm/")) {
             String source = prefix + "src/main/java/p/A.java";
             String target = "m3/vendor/m3/" + source;
-            new M3ImportManifest.Entry(
+            new ImportManifest.Entry(
                     "m3index-family", source, target, "1".repeat(64), "Apache-2.0",
-                    M3ImportManifest.Mode.APACHE_SOURCE);
+                    ImportManifest.Mode.APACHE_SOURCE);
             assertThrows(IllegalArgumentException.class, () ->
-                    new M3ImportManifest.Entry(
+                    new ImportManifest.Entry(
                             "m3index-family", source, "m3/vendor/m3/renamed/A.java",
                             "1".repeat(64), "Apache-2.0",
-                            M3ImportManifest.Mode.APACHE_SOURCE));
+                            ImportManifest.Mode.APACHE_SOURCE));
             assertThrows(IllegalArgumentException.class, () ->
-                    new M3ImportManifest.Entry(
+                    new ImportManifest.Entry(
                             "m3index-family", source, target, "1".repeat(64), "MIT",
-                            M3ImportManifest.Mode.APACHE_SOURCE));
+                            ImportManifest.Mode.APACHE_SOURCE));
             assertThrows(IllegalArgumentException.class, () ->
-                    new M3ImportManifest.Entry(
+                    new ImportManifest.Entry(
                             "indexstring-java", source, target, "1".repeat(64), "Apache-2.0",
-                            M3ImportManifest.Mode.APACHE_SOURCE));
+                            ImportManifest.Mode.APACHE_SOURCE));
         }
     }
 
@@ -309,9 +309,9 @@ final class M3CanonicalFamilyPolicyTest {
                 "m3-mindex/algorithmic/pom.xml",
                 "m3-mindex/collections",
                 "m3-mindex/algorithm")) {
-            assertTrue(M3CanonicalFamilyPolicy.classify(source).isEmpty());
+            assertTrue(CanonicalFamilyPolicy.classify(source).isEmpty());
             assertThrows(IllegalArgumentException.class, () ->
-                    M3CanonicalFamilyPolicy.requireCategoryFamily(
+                    CanonicalFamilyPolicy.requireCategoryFamily(
                             "m3index-family", source));
         }
         for (String source : List.of(
@@ -319,7 +319,7 @@ final class M3CanonicalFamilyPolicyTest {
                 "m3-mindex/algorithm/../compiler/pom.xml",
                 "m3-mindex/collections//pom.xml")) {
             assertThrows(IllegalArgumentException.class, () ->
-                    M3CanonicalFamilyPolicy.classify(source));
+                    CanonicalFamilyPolicy.classify(source));
         }
     }
 

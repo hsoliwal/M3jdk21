@@ -10,11 +10,11 @@ import java.util.Objects;
 /**
  * Source-pin receipt for current Synexia-canonical recipe/policy assets.
  *
- * <p>This is deliberately weaker than {@link M3ImportManifest}: it records exact upstream Git
+ * <p>This is deliberately weaker than {@link ImportManifest}: it records exact upstream Git
  * custody but grants no automatic materialization or target promotion authority. A later receiver
  * must bind exact bytes/SHA-256 through the normal Synexia import manifest before copying anything.
  */
-public record M3CanonicalRecipeHandoff(
+public record CanonicalRecipeHandoff(
         String sourceRepository,
         String sourceRevision,
         List<Entry> entries) {
@@ -36,7 +36,7 @@ public record M3CanonicalRecipeHandoff(
         THIN_RECEIVER_ONLY
     }
 
-    public M3CanonicalRecipeHandoff {
+    public CanonicalRecipeHandoff {
         sourceRepository = token(sourceRepository, "sourceRepository");
         if (!SOURCE_REPOSITORY.equals(sourceRepository)) {
             throw new IllegalArgumentException("unexpected Synexia source repository");
@@ -55,7 +55,7 @@ public record M3CanonicalRecipeHandoff(
         }
     }
 
-    public static M3CanonicalRecipeHandoff parse(String tsv) {
+    public static CanonicalRecipeHandoff parse(String tsv) {
         List<String> lines = Objects.requireNonNull(tsv, "tsv").lines().toList();
         if (lines.isEmpty() || !HEADER.equals(lines.getFirst())) {
             throw new IllegalArgumentException("invalid recipe handoff header");
@@ -89,7 +89,7 @@ public record M3CanonicalRecipeHandoff(
         if (repository == null || revision == null) {
             throw new IllegalArgumentException("recipe handoff has no entries");
         }
-        return new M3CanonicalRecipeHandoff(repository, revision, entries);
+        return new CanonicalRecipeHandoff(repository, revision, entries);
     }
 
     public boolean materializationAuthority() {

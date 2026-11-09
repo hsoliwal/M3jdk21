@@ -15,7 +15,7 @@ import java.util.Objects;
  * <p>The canonical ownership decision is imported from Synexia. This class does not invent or
  * widen ownership. It only applies the pinned borrowing ledger to the current target recipe tree.
  */
-public final class M3RecipeOwnershipPolicy {
+public final class RecipeOwnershipPolicy {
     public static final String EXPECTED_SCHEMA = "M3JDK21_M3_BORROWING_V1";
     public static final String EXPECTED_TARGET = "hsoliwal/M3jdk21";
     public static final String RECIPE_SOURCE_ROOT =
@@ -111,7 +111,7 @@ public final class M3RecipeOwnershipPolicy {
     private final List<Rule> exactRules;
     private final List<Rule> wildcardRules;
 
-    private M3RecipeOwnershipPolicy(List<Rule> rules) {
+    private RecipeOwnershipPolicy(List<Rule> rules) {
         List<Rule> exact = new ArrayList<>();
         List<Rule> wildcard = new ArrayList<>();
         for (Rule rule : rules) {
@@ -126,7 +126,7 @@ public final class M3RecipeOwnershipPolicy {
         wildcardRules = List.copyOf(wildcard);
     }
 
-    public static M3RecipeOwnershipPolicy parse(String tsv) {
+    public static RecipeOwnershipPolicy parse(String tsv) {
         Objects.requireNonNull(tsv, "tsv");
         List<String> lines = tsv.lines().toList();
         if (lines.isEmpty()) throw new IllegalArgumentException("empty borrowing ledger");
@@ -168,10 +168,10 @@ public final class M3RecipeOwnershipPolicy {
                             cells[6]));
         }
         if (rules.isEmpty()) throw new IllegalArgumentException("borrowing ledger has no rules");
-        return new M3RecipeOwnershipPolicy(rules);
+        return new RecipeOwnershipPolicy(rules);
     }
 
-    public static M3RecipeOwnershipPolicy load(Path ledger) throws IOException {
+    public static RecipeOwnershipPolicy load(Path ledger) throws IOException {
         Path path = Objects.requireNonNull(ledger, "ledger").toAbsolutePath().normalize();
         if (Files.isSymbolicLink(path) || !Files.isRegularFile(path)) {
             throw new IllegalArgumentException("borrowing ledger must be a regular file");

@@ -21,56 +21,56 @@ import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-final class M3ImportPlanTest {
+final class ImportPlanTest {
     @TempDir
     Path temp;
 
     @Test
     void plansFullDeltaAndStagesOnlyChangedCandidates() throws Exception {
         Fixture fixture = fixture();
-        M3ImportPlan.Plan plan =
-                M3ImportPlan.plan(fixture.m3jdk(), fixture.manifest());
-        Map<String, M3ImportPlan.Row> rows =
+        ImportPlan.Plan plan =
+                ImportPlan.plan(fixture.m3jdk(), fixture.manifest());
+        Map<String, ImportPlan.Row> rows =
                 plan.rows().stream()
-                        .collect(Collectors.toMap(M3ImportPlan.Row::targetPath, Function.identity()));
+                        .collect(Collectors.toMap(ImportPlan.Row::targetPath, Function.identity()));
 
         assertEquals(5, rows.size());
         assertEquals(
-                M3ImportPlan.Action.KEEP,
+                ImportPlan.Action.KEEP,
                 rows.get(fixture.keepTarget()).action());
         assertEquals(
-                M3ImportPlan.Lane.OPENREWRITE_RECIPE,
+                ImportPlan.Lane.OPENREWRITE_RECIPE,
                 rows.get(fixture.keepTarget()).lane());
         assertEquals(
-                M3ImportPlan.Action.REPLACE,
+                ImportPlan.Action.REPLACE,
                 rows.get(fixture.replaceTarget()).action());
         assertEquals(
-                M3ImportPlan.Lane.CONVERGENCE_JAVA,
+                ImportPlan.Lane.CONVERGENCE_JAVA,
                 rows.get(fixture.replaceTarget()).lane());
         assertEquals(
-                M3ImportPlan.Action.ADD,
+                ImportPlan.Action.ADD,
                 rows.get(fixture.addTarget()).action());
         assertEquals(
-                M3ImportPlan.Lane.CONVERGENCE_NATIVE,
+                ImportPlan.Lane.CONVERGENCE_NATIVE,
                 rows.get(fixture.addTarget()).lane());
         assertEquals(
-                M3ImportPlan.Lane.OPENREWRITE_RESOURCE,
+                ImportPlan.Lane.OPENREWRITE_RESOURCE,
                 rows.get(fixture.resourceTarget()).lane());
         assertEquals(
-                M3ImportPlan.Action.STALE,
+                ImportPlan.Action.STALE,
                 rows.get(fixture.staleTarget()).action());
         assertEquals(3, plan.changedCount());
         assertEquals(1, plan.staleCount());
         assertFalse(plan.sourceWriteAuthority());
         assertFalse(plan.promotionAuthority());
         assertEquals(64, plan.root().length());
-        assertTrue(plan.toTsv().startsWith(M3ImportPlan.HEADER + "\n"));
+        assertTrue(plan.toTsv().startsWith(ImportPlan.HEADER + "\n"));
         assertTrue(plan.toTsv().endsWith("# root\t" + plan.root() + "\n"));
 
         byte[] oldReplace = Files.readAllBytes(fixture.m3jdk().resolve(fixture.replaceTarget()));
         Path out = Path.of("m3/build/m3-import/full");
-        M3ImportPlan.Plan staged =
-                M3ImportPlan.stage(
+        ImportPlan.Plan staged =
+                ImportPlan.stage(
                         fixture.m3(), fixture.m3jdk(), fixture.manifest(), out);
         assertEquals(plan, staged);
 
@@ -99,18 +99,18 @@ final class M3ImportPlanTest {
 
         assertEquals(
                 staged,
-                M3ImportPlan.stage(
+                ImportPlan.stage(
                         fixture.m3(), fixture.m3jdk(), fixture.manifest(), out));
     }
 
     @Test
     void sourceOnlyVerifierAllowsReplacementButRefusesSourceDrift() throws Exception {
         Fixture fixture = fixture();
-        M3Importer.verifySources(fixture.m3(), fixture.manifest());
+        Importer.verifySources(fixture.m3(), fixture.manifest());
 
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(
+                () -> Importer.verify(
                         fixture.m3(), fixture.m3jdk(), fixture.manifest()));
 
         Files.writeString(
@@ -118,10 +118,10 @@ final class M3ImportPlanTest {
                 "// SPDX-License-Identifier: Apache-2.0\nchanged\n");
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verifySources(fixture.m3(), fixture.manifest()));
+                () -> Importer.verifySources(fixture.m3(), fixture.manifest()));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3ImportPlan.stage(
+                () -> ImportPlan.stage(
                         fixture.m3(),
                         fixture.m3jdk(),
                         fixture.manifest(),
@@ -131,31 +131,31 @@ final class M3ImportPlanTest {
     @Test
     void writePlanIsCreateOrVerifyAndRefusesOutsideBuildAndDrift() throws Exception {
         Fixture fixture = fixture();
-        M3ImportPlan.Plan plan =
-                M3ImportPlan.plan(fixture.m3jdk(), fixture.manifest());
+        ImportPlan.Plan plan =
+                ImportPlan.plan(fixture.m3jdk(), fixture.manifest());
 
         Path relative = Path.of("m3/build/m3-import/plan-only");
-        M3ImportPlan.writePlan(fixture.m3jdk(), relative, plan);
-        M3ImportPlan.writePlan(fixture.m3jdk(), relative, plan);
+        ImportPlan.writePlan(fixture.m3jdk(), relative, plan);
+        ImportPlan.writePlan(fixture.m3jdk(), relative, plan);
         Path planFile = fixture.m3jdk().resolve(relative).resolve("PLAN.tsv");
         assertEquals(plan.toTsv(), Files.readString(planFile));
 
         Files.writeString(planFile, "drift\n");
         assertThrows(
                 IllegalStateException.class,
-                () -> M3ImportPlan.writePlan(fixture.m3jdk(), relative, plan));
+                () -> ImportPlan.writePlan(fixture.m3jdk(), relative, plan));
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportPlan.writePlan(
+                () -> ImportPlan.writePlan(
                         fixture.m3jdk(), Path.of("m3/build"), plan));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportPlan.writePlan(
+                () -> ImportPlan.writePlan(
                         fixture.m3jdk(), Path.of("outside"), plan));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportPlan.writePlan(
+                () -> ImportPlan.writePlan(
                         fixture.m3jdk(), temp.resolve("absolute-outside"), plan));
 
         Path build = fixture.m3jdk().resolve("m3/build");
@@ -170,7 +170,7 @@ final class M3ImportPlanTest {
         }
         assertThrows(
                 IOException.class,
-                () -> M3ImportPlan.writePlan(
+                () -> ImportPlan.writePlan(
                         fixture.m3jdk(), Path.of("m3/build/link/run"), plan));
     }
 
@@ -178,173 +178,173 @@ final class M3ImportPlanTest {
     void laneClassificationCoversEveryRegisteredDeliveryCategory() {
         String target = "m3/vendor/m3/other/file.txt";
         assertEquals(
-                M3ImportPlan.Lane.OPENREWRITE_RECIPE,
-                M3ImportPlan.lane("openrewrite-java", target));
+                ImportPlan.Lane.OPENREWRITE_RECIPE,
+                ImportPlan.lane("openrewrite-java", target));
         assertEquals(
-                M3ImportPlan.Lane.OPENREWRITE_TEST,
-                M3ImportPlan.lane("openrewrite-tests", target));
+                ImportPlan.Lane.OPENREWRITE_TEST,
+                ImportPlan.lane("openrewrite-tests", target));
         assertEquals(
-                M3ImportPlan.Lane.OPENREWRITE_RESOURCE,
-                M3ImportPlan.lane("openrewrite-resources", target));
+                ImportPlan.Lane.OPENREWRITE_RESOURCE,
+                ImportPlan.lane("openrewrite-resources", target));
         assertEquals(
-                M3ImportPlan.Lane.CONVERGENCE_JAVA,
-                M3ImportPlan.lane("convergence-java", target));
+                ImportPlan.Lane.CONVERGENCE_JAVA,
+                ImportPlan.lane("convergence-java", target));
         assertEquals(
-                M3ImportPlan.Lane.CONVERGENCE_TEST,
-                M3ImportPlan.lane("convergence-tests", target));
+                ImportPlan.Lane.CONVERGENCE_TEST,
+                ImportPlan.lane("convergence-tests", target));
         assertEquals(
-                M3ImportPlan.Lane.CONVERGENCE_NATIVE,
-                M3ImportPlan.lane("convergence-native", target));
+                ImportPlan.Lane.CONVERGENCE_NATIVE,
+                ImportPlan.lane("convergence-native", target));
         assertEquals(
-                M3ImportPlan.Lane.M3_CLONER,
-                M3ImportPlan.lane("m3-cloner-java", target));
+                ImportPlan.Lane.M3_CLONER,
+                ImportPlan.lane("m3-cloner-java", target));
         assertEquals(
-                M3ImportPlan.Lane.M3_CLONER,
-                M3ImportPlan.lane("m3-cloner-tests", target));
+                ImportPlan.Lane.M3_CLONER,
+                ImportPlan.lane("m3-cloner-tests", target));
         assertEquals(
-                M3ImportPlan.Lane.M3INDEX,
-                M3ImportPlan.lane("m3index-source", target));
+                ImportPlan.Lane.M3INDEX,
+                ImportPlan.lane("m3index-source", target));
         assertEquals(
-                M3ImportPlan.Lane.M3_RECIPE,
-                M3ImportPlan.lane("m3-recipe-source", target));
+                ImportPlan.Lane.M3_RECIPE,
+                ImportPlan.lane("m3-recipe-source", target));
         assertEquals(
-                M3ImportPlan.Lane.OTHER_APACHE,
-                M3ImportPlan.lane("other", target));
+                ImportPlan.Lane.OTHER_APACHE,
+                ImportPlan.lane("other", target));
 
         assertEquals(
-                M3ImportPlan.Lane.OPENREWRITE_RECIPE,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.OPENREWRITE_RECIPE,
+                ImportPlan.lane(
                         "stale",
                         "m3/vendor/m3/m3-openrewrite-recipes/src/main/java/p/R.java"));
         assertEquals(
-                M3ImportPlan.Lane.OPENREWRITE_TEST,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.OPENREWRITE_TEST,
+                ImportPlan.lane(
                         "stale",
                         "m3/vendor/m3/m3-openrewrite-recipes/src/test/java/p/RTest.java"));
         assertEquals(
-                M3ImportPlan.Lane.CONVERGENCE_TEST,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.CONVERGENCE_TEST,
+                ImportPlan.lane(
                         "stale",
                         "m3/vendor/m3/m3-code-convergence/src/test/java/p/Test.java"));
         assertEquals(
-                M3ImportPlan.Lane.M3INDEX,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.M3INDEX,
+                ImportPlan.lane(
                         "stale",
                         "m3/vendor/m3/m3-m3index/src/main/java/p/A.java"));
         assertEquals(
-                M3ImportPlan.Lane.M3_RECIPE,
-                M3ImportPlan.lane(
+                ImportPlan.Lane.M3_RECIPE,
+                ImportPlan.lane(
                         "stale",
                         "m3/vendor/m3/m3-recipe/src/main/java/p/A.java"));
     }
 
     @Test
     void rowAndPlanValidationFailClosed() {
-        M3ImportPlan.Row valid =
-                new M3ImportPlan.Row(
+        ImportPlan.Row valid =
+                new ImportPlan.Row(
                         "openrewrite-java",
                         "src/A.java",
                         "m3/vendor/m3/A.java",
                         "APACHE_SOURCE",
                         "1".repeat(64),
                         "ABSENT",
-                        M3ImportPlan.Action.ADD,
-                        M3ImportPlan.Lane.OPENREWRITE_RECIPE);
+                        ImportPlan.Action.ADD,
+                        ImportPlan.Lane.OPENREWRITE_RECIPE);
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Row(
+                () -> new ImportPlan.Row(
                         "x",
                         "src/A.java",
                         "outside/A.java",
                         "APACHE_SOURCE",
                         "1".repeat(64),
                         "ABSENT",
-                        M3ImportPlan.Action.ADD,
-                        M3ImportPlan.Lane.OTHER_APACHE));
+                        ImportPlan.Action.ADD,
+                        ImportPlan.Lane.OTHER_APACHE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Row(
+                () -> new ImportPlan.Row(
                         "x",
                         "src/A.java",
                         "m3/vendor/m3/A.java",
                         "APACHE_SOURCE",
                         "1".repeat(64),
                         "2".repeat(64),
-                        M3ImportPlan.Action.ADD,
-                        M3ImportPlan.Lane.OTHER_APACHE));
+                        ImportPlan.Action.ADD,
+                        ImportPlan.Lane.OTHER_APACHE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Row(
+                () -> new ImportPlan.Row(
                         "stale",
                         "src/A.java",
                         "m3/vendor/m3/A.java",
                         "STALE",
                         "STALE",
                         "2".repeat(64),
-                        M3ImportPlan.Action.STALE,
-                        M3ImportPlan.Lane.OTHER_APACHE));
+                        ImportPlan.Action.STALE,
+                        ImportPlan.Lane.OTHER_APACHE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Row(
+                () -> new ImportPlan.Row(
                         "openrewrite-java",
                         "src/A.java",
                         "m3/vendor/m3/A.java",
                         "APACHE_SOURCE",
                         "1".repeat(64),
                         "2".repeat(64),
-                        M3ImportPlan.Action.KEEP,
-                        M3ImportPlan.Lane.OPENREWRITE_RECIPE));
+                        ImportPlan.Action.KEEP,
+                        ImportPlan.Lane.OPENREWRITE_RECIPE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Row(
+                () -> new ImportPlan.Row(
                         "openrewrite-java",
                         "src/A.java",
                         "m3/vendor/m3/A.java",
                         "APACHE_SOURCE",
                         "1".repeat(64),
                         "1".repeat(64),
-                        M3ImportPlan.Action.REPLACE,
-                        M3ImportPlan.Lane.OPENREWRITE_RECIPE));
+                        ImportPlan.Action.REPLACE,
+                        ImportPlan.Lane.OPENREWRITE_RECIPE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Row(
+                () -> new ImportPlan.Row(
                         "openrewrite-java",
                         "NONE",
                         "m3/vendor/m3/A.java",
                         "APACHE_SOURCE",
                         "1".repeat(64),
                         "1".repeat(64),
-                        M3ImportPlan.Action.KEEP,
-                        M3ImportPlan.Lane.OPENREWRITE_RECIPE));
+                        ImportPlan.Action.KEEP,
+                        ImportPlan.Lane.OPENREWRITE_RECIPE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Row(
+                () -> new ImportPlan.Row(
                         "openrewrite-java",
                         "src/A.java",
                         "m3/vendor/m3/A.java",
                         "STALE",
                         "1".repeat(64),
                         "1".repeat(64),
-                        M3ImportPlan.Action.KEEP,
-                        M3ImportPlan.Lane.OPENREWRITE_RECIPE));
+                        ImportPlan.Action.KEEP,
+                        ImportPlan.Lane.OPENREWRITE_RECIPE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Plan(
+                () -> new ImportPlan.Plan(
                         "a".repeat(40),
                         "b".repeat(64),
                         List.of(),
                         ""));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Plan(
+                () -> new ImportPlan.Plan(
                         "a".repeat(40),
                         "b".repeat(64),
                         List.of(valid, valid),
                         ""));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportPlan.Plan(
+                () -> new ImportPlan.Plan(
                         "a".repeat(40),
                         "b".repeat(64),
                         List.of(valid),
@@ -357,7 +357,7 @@ final class M3ImportPlanTest {
         Path manifestFile = temp.resolve("manifest.tsv");
         Files.writeString(manifestFile, fixture.manifest().toTsv());
 
-        M3ImportPlanCli.main(new String[] {
+        ImportPlanCli.main(new String[] {
             "plan",
             manifestFile.toString(),
             fixture.m3jdk().toString(),
@@ -367,7 +367,7 @@ final class M3ImportPlanTest {
                 fixture.m3jdk()
                         .resolve("m3/build/m3-import/cli-plan/PLAN.tsv")));
 
-        M3ImportPlanCli.main(new String[] {
+        ImportPlanCli.main(new String[] {
             "stage",
             manifestFile.toString(),
             fixture.m3().toString(),
@@ -380,16 +380,16 @@ final class M3ImportPlanTest {
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportPlanCli.main(new String[0]));
+                () -> ImportPlanCli.main(new String[0]));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportPlanCli.main(new String[] {"other"}));
+                () -> ImportPlanCli.main(new String[] {"other"}));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportPlanCli.main(new String[] {"plan"}));
+                () -> ImportPlanCli.main(new String[] {"plan"}));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportPlanCli.main(new String[] {"stage"}));
+                () -> ImportPlanCli.main(new String[] {"stage"}));
     }
 
     @Test
@@ -402,8 +402,8 @@ final class M3ImportPlanTest {
         git(fixture.m3(), "commit", "-m", "fixture");
         String head = git(fixture.m3(), "rev-parse", "HEAD").trim();
 
-        M3ImportManifest strictManifest =
-                new M3ImportManifest(
+        ImportManifest strictManifest =
+                new ImportManifest(
                         head,
                         fixture.manifest().targetId(),
                         fixture.manifest().entries(),
@@ -411,7 +411,7 @@ final class M3ImportPlanTest {
         Path manifestFile = temp.resolve("strict-stage-manifest.tsv");
         Files.writeString(manifestFile, strictManifest.toTsv());
 
-        M3ImportPlanCli.main(
+        ImportPlanCli.main(
                 new String[] {
                     "stage-strict",
                     manifestFile.toString(),
@@ -430,7 +430,7 @@ final class M3ImportPlanTest {
         assertThrows(
                 IllegalStateException.class,
                 () ->
-                        M3ImportPlanCli.main(
+                        ImportPlanCli.main(
                                 new String[] {
                                     "stage-strict",
                                     manifestFile.toString(),
@@ -461,8 +461,8 @@ final class M3ImportPlanTest {
         Path root = temp.resolve("m3-empty");
         Files.createDirectories(root);
         byte[] bytes = apache("package p; final class A {}\n");
-        M3ImportManifest manifest =
-                new M3ImportManifest(
+        ImportManifest manifest =
+                new ImportManifest(
                         "a".repeat(40),
                         "m3jdk21",
                         List.of(entry(
@@ -470,12 +470,12 @@ final class M3ImportPlanTest {
                                 "m3-recipe/src/A.java",
                                 "m3/vendor/m3/m3-recipe/src/A.java",
                                 bytes,
-                                M3ImportManifest.Mode.APACHE_SOURCE)),
+                                ImportManifest.Mode.APACHE_SOURCE)),
                         "");
-        M3ImportPlan.Plan plan = M3ImportPlan.plan(root, manifest);
+        ImportPlan.Plan plan = ImportPlan.plan(root, manifest);
         assertEquals(1, plan.rows().size());
-        assertEquals(M3ImportPlan.Action.ADD, plan.rows().getFirst().action());
-        assertEquals(M3ImportPlan.Lane.M3_RECIPE, plan.rows().getFirst().lane());
+        assertEquals(ImportPlan.Action.ADD, plan.rows().getFirst().action());
+        assertEquals(ImportPlan.Lane.M3_RECIPE, plan.rows().getFirst().lane());
     }
 
     private Fixture fixture() throws Exception {
@@ -516,8 +516,8 @@ final class M3ImportPlanTest {
                 apache("package jdk.internal.m3.convergence; final class Replace { int v = 1; }\n"));
         write(m3jdk.resolve(staleTarget), stale);
 
-        M3ImportManifest manifest =
-                new M3ImportManifest(
+        ImportManifest manifest =
+                new ImportManifest(
                         "a".repeat(40),
                         "m3jdk21",
                         List.of(
@@ -526,25 +526,25 @@ final class M3ImportPlanTest {
                                         keepSource,
                                         keepTarget,
                                         keep,
-                                        M3ImportManifest.Mode.APACHE_SOURCE),
+                                        ImportManifest.Mode.APACHE_SOURCE),
                                 entry(
                                         "convergence-java",
                                         replaceSource,
                                         replaceTarget,
                                         replace,
-                                        M3ImportManifest.Mode.APACHE_SOURCE),
+                                        ImportManifest.Mode.APACHE_SOURCE),
                                 entry(
                                         "convergence-native",
                                         addSource,
                                         addTarget,
                                         add,
-                                        M3ImportManifest.Mode.APACHE_SOURCE),
+                                        ImportManifest.Mode.APACHE_SOURCE),
                                 entry(
                                         "openrewrite-resources",
                                         resourceSource,
                                         resourceTarget,
                                         resource,
-                                        M3ImportManifest.Mode.APACHE_RECIPE_RESOURCE)),
+                                        ImportManifest.Mode.APACHE_RECIPE_RESOURCE)),
                         "");
 
         return new Fixture(
@@ -562,13 +562,13 @@ final class M3ImportPlanTest {
                 staleTarget);
     }
 
-    private static M3ImportManifest.Entry entry(
+    private static ImportManifest.Entry entry(
             String category,
             String source,
             String target,
             byte[] bytes,
-            M3ImportManifest.Mode mode) {
-        return new M3ImportManifest.Entry(
+            ImportManifest.Mode mode) {
+        return new ImportManifest.Entry(
                 category,
                 source,
                 target,
@@ -599,7 +599,7 @@ final class M3ImportPlanTest {
     private record Fixture(
             Path m3,
             Path m3jdk,
-            M3ImportManifest manifest,
+            ImportManifest manifest,
             String keepSource,
             String replaceSource,
             String addSource,

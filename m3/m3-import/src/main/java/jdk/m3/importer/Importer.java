@@ -15,27 +15,27 @@ import java.util.List;
 import java.util.Objects;
 
 /** Verifies and optionally materializes one sealed Synexia Apache delivery into M3JDK21. */
-public final class M3Importer {
+public final class Importer {
     @FunctionalInterface
     interface MaterializeGate {
-        void beforeMove(int writeIndex, M3ImportManifest.Entry entry) throws IOException;
+        void beforeMove(int writeIndex, ImportManifest.Entry entry) throws IOException;
     }
 
     private record Created(Path target, String expectedSha256) {}
 
     private static final MaterializeGate NOOP_GATE = (index, entry) -> {};
 
-    private M3Importer() {}
+    private Importer() {}
 
     public static void verify(
             Path synexiaRoot,
             Path m3jdkRoot,
-            M3ImportManifest manifest) throws IOException {
+            ImportManifest manifest) throws IOException {
         verifySources(synexiaRoot, manifest);
         Path targetRoot = root(m3jdkRoot, "m3jdkRoot");
         Objects.requireNonNull(manifest, "manifest");
 
-        for (M3ImportManifest.Entry entry : manifest.entries()) {
+        for (ImportManifest.Entry entry : manifest.entries()) {
             Path target = resolve(targetRoot, entry.targetPath(), "target");
             if (Files.exists(target)) {
                 if (!Files.isRegularFile(target) || Files.isSymbolicLink(target)) {
@@ -58,10 +58,10 @@ public final class M3Importer {
     /** Verifies only the sealed Synexia source side of a delivery manifest. */
     public static void verifySources(
             Path synexiaRoot,
-            M3ImportManifest manifest) throws IOException {
+            ImportManifest manifest) throws IOException {
         Path sourceRoot = root(synexiaRoot, "synexiaRoot");
         Objects.requireNonNull(manifest, "manifest");
-        for (M3ImportManifest.Entry entry : manifest.entries()) {
+        for (ImportManifest.Entry entry : manifest.entries()) {
             Path source = resolve(sourceRoot, entry.sourcePath(), "source");
             if (!Files.isRegularFile(source) || Files.isSymbolicLink(source)) {
                 throw new IllegalStateException(
@@ -82,10 +82,10 @@ public final class M3Importer {
 
     public static void verifyTargetSnapshot(
             Path m3jdkRoot,
-            M3ImportManifest manifest) throws IOException {
+            ImportManifest manifest) throws IOException {
         Path targetRoot = root(m3jdkRoot, "m3jdkRoot");
         Objects.requireNonNull(manifest, "manifest");
-        for (M3ImportManifest.Entry entry : manifest.entries()) {
+        for (ImportManifest.Entry entry : manifest.entries()) {
             Path target = resolve(targetRoot, entry.targetPath(), "target");
             if (!Files.isRegularFile(target) || Files.isSymbolicLink(target)) {
                 throw new IllegalStateException(
@@ -107,14 +107,14 @@ public final class M3Importer {
     public static void materialize(
             Path synexiaRoot,
             Path m3jdkRoot,
-            M3ImportManifest manifest) throws IOException {
+            ImportManifest manifest) throws IOException {
         materialize(synexiaRoot, m3jdkRoot, manifest, NOOP_GATE);
     }
 
     static void materialize(
             Path synexiaRoot,
             Path m3jdkRoot,
-            M3ImportManifest manifest,
+            ImportManifest manifest,
             MaterializeGate gate) throws IOException {
         verify(synexiaRoot, m3jdkRoot, manifest);
         Path sourceRoot = root(synexiaRoot, "synexiaRoot");
@@ -125,7 +125,7 @@ public final class M3Importer {
         List<Path> createdDirectories = new ArrayList<>();
         int writeIndex = 0;
         try {
-            for (M3ImportManifest.Entry entry : manifest.entries()) {
+            for (ImportManifest.Entry entry : manifest.entries()) {
                 Path source = resolve(sourceRoot, entry.sourcePath(), "source");
                 Path target = resolve(targetRoot, entry.targetPath(), "target");
                 if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) continue;

@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
-final class M3CanonicalRecipeHandoffTest {
+final class CanonicalRecipeHandoffTest {
     private static final String HANDOFF =
             "m3/m3-import/current-recipe-handoff/20261011-canonical-recipe-handoff.tsv";
     private static final String REVISION =
@@ -19,11 +19,11 @@ final class M3CanonicalRecipeHandoffTest {
     @Test
     void checkedInHandoffPinsCurrentCanonicalM3RecipeAssets() throws Exception {
         Path repository = repositoryRoot();
-        M3CanonicalRecipeHandoff handoff =
-                M3CanonicalRecipeHandoff.parse(
+        CanonicalRecipeHandoff handoff =
+                CanonicalRecipeHandoff.parse(
                         Files.readString(repository.resolve(HANDOFF)));
 
-        assertEquals(M3CanonicalRecipeHandoff.SOURCE_REPOSITORY, handoff.sourceRepository());
+        assertEquals(CanonicalRecipeHandoff.SOURCE_REPOSITORY, handoff.sourceRepository());
         assertEquals(REVISION, handoff.sourceRevision());
         assertEquals(13, handoff.entries().size());
         assertFalse(handoff.materializationAuthority());
@@ -34,27 +34,27 @@ final class M3CanonicalRecipeHandoffTest {
         assertTrue(handoff.entries().stream()
                 .allMatch(entry -> entry.license().equals("Apache-2.0")));
         assertTrue(handoff.entries().stream()
-                .noneMatch(M3CanonicalRecipeHandoff.Entry::reusableEvolutionAllowedInTarget));
+                .noneMatch(CanonicalRecipeHandoff.Entry::reusableEvolutionAllowedInTarget));
 
         long recipes = handoff.entries().stream()
                 .filter(entry -> entry.assetKind()
-                        == M3CanonicalRecipeHandoff.AssetKind.OPENREWRITE_RECIPE)
+                        == CanonicalRecipeHandoff.AssetKind.OPENREWRITE_RECIPE)
                 .count();
         assertEquals(7L, recipes);
         assertTrue(handoff.entries().stream()
                 .filter(entry -> entry.assetKind()
-                        == M3CanonicalRecipeHandoff.AssetKind.OPENREWRITE_RECIPE)
+                        == CanonicalRecipeHandoff.AssetKind.OPENREWRITE_RECIPE)
                 .allMatch(entry -> entry.canonicalOwner().startsWith("jdk.internal.m3.rewrite.")));
         assertTrue(handoff.entries().stream()
                 .filter(entry -> entry.assetKind()
-                        == M3CanonicalRecipeHandoff.AssetKind.OPENREWRITE_RECIPE)
+                        == CanonicalRecipeHandoff.AssetKind.OPENREWRITE_RECIPE)
                 .allMatch(entry -> entry.targetDisposition()
-                        == M3CanonicalRecipeHandoff.TargetDisposition.THIN_RECEIVER_ONLY));
+                        == CanonicalRecipeHandoff.TargetDisposition.THIN_RECEIVER_ONLY));
 
         assertTrue(handoff.entries().stream().anyMatch(entry ->
                 entry.sourcePath().equals(".m3/m3-recipe-first-invariants.tsv")
                         && entry.assetKind()
-                                == M3CanonicalRecipeHandoff.AssetKind.MACHINE_LEDGER));
+                                == CanonicalRecipeHandoff.AssetKind.MACHINE_LEDGER));
         assertTrue(handoff.entries().stream().anyMatch(entry ->
                 entry.canonicalOwner().equals(
                         "jdk.internal.m3.rewrite.M3AtomHashDatabaseRecipe")));
@@ -65,11 +65,11 @@ final class M3CanonicalRecipeHandoffTest {
 
     @Test
     void parserFailsClosedOnRepositoryRevisionLicenseOwnerAndDuplicates() {
-        String header = M3CanonicalRecipeHandoff.HEADER + "\n";
+        String header = CanonicalRecipeHandoff.HEADER + "\n";
         String row =
-                M3CanonicalRecipeHandoff.SCHEMA
+                CanonicalRecipeHandoff.SCHEMA
                         + "\t"
-                        + M3CanonicalRecipeHandoff.SOURCE_REPOSITORY
+                        + CanonicalRecipeHandoff.SOURCE_REPOSITORY
                         + "\t"
                         + REVISION
                         + "\tsynexia-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/A.java"
@@ -80,63 +80,63 @@ final class M3CanonicalRecipeHandoffTest {
                         + "\tTHIN_RECEIVER_ONLY"
                         + "\tApache-2.0\n";
 
-        M3CanonicalRecipeHandoff parsed =
-                M3CanonicalRecipeHandoff.parse(header + row);
+        CanonicalRecipeHandoff parsed =
+                CanonicalRecipeHandoff.parse(header + row);
         assertEquals(1, parsed.entries().size());
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalRecipeHandoff.parse(
+                () -> CanonicalRecipeHandoff.parse(
                         "bad\n" + row));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalRecipeHandoff.parse(header));
+                () -> CanonicalRecipeHandoff.parse(header));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalRecipeHandoff.parse(
+                () -> CanonicalRecipeHandoff.parse(
                         header + row.replace("hsoliwal/com.synexia", "other/repo")));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalRecipeHandoff.parse(
+                () -> CanonicalRecipeHandoff.parse(
                         header + row.replace("Apache-2.0", "MIT")));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalRecipeHandoff.parse(
+                () -> CanonicalRecipeHandoff.parse(
                         header + row.replace("jdk.internal.m3.rewrite.A", "jdk.m3.rewrite.A")));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3CanonicalRecipeHandoff.parse(header + row + row));
+                () -> CanonicalRecipeHandoff.parse(header + row + row));
     }
 
     @Test
     void entryAndReceiptContractsGrantNoTargetEvolutionAuthority() {
         var entry =
-                new M3CanonicalRecipeHandoff.Entry(
+                new CanonicalRecipeHandoff.Entry(
                         "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/A.java",
                         "b".repeat(40),
-                        M3CanonicalRecipeHandoff.AssetKind.OPENREWRITE_RECIPE,
+                        CanonicalRecipeHandoff.AssetKind.OPENREWRITE_RECIPE,
                         "jdk.internal.m3.rewrite.A",
-                        M3CanonicalRecipeHandoff.TargetDisposition.THIN_RECEIVER_ONLY,
+                        CanonicalRecipeHandoff.TargetDisposition.THIN_RECEIVER_ONLY,
                         "Apache-2.0");
         assertFalse(entry.reusableEvolutionAllowedInTarget());
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3CanonicalRecipeHandoff.Entry(
+                () -> new CanonicalRecipeHandoff.Entry(
                         "../A.java",
                         "b".repeat(40),
-                        M3CanonicalRecipeHandoff.AssetKind.POLICY,
+                        CanonicalRecipeHandoff.AssetKind.POLICY,
                         "jdk.internal.m3.rewrite.A",
-                        M3CanonicalRecipeHandoff.TargetDisposition.SOURCE_PIN_ONLY,
+                        CanonicalRecipeHandoff.TargetDisposition.SOURCE_PIN_ONLY,
                         "Apache-2.0"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3CanonicalRecipeHandoff.Entry(
+                () -> new CanonicalRecipeHandoff.Entry(
                         "A.java",
                         "not-a-blob",
-                        M3CanonicalRecipeHandoff.AssetKind.POLICY,
+                        CanonicalRecipeHandoff.AssetKind.POLICY,
                         "jdk.internal.m3.rewrite.A",
-                        M3CanonicalRecipeHandoff.TargetDisposition.SOURCE_PIN_ONLY,
+                        CanonicalRecipeHandoff.TargetDisposition.SOURCE_PIN_ONLY,
                         "Apache-2.0"));
     }
 

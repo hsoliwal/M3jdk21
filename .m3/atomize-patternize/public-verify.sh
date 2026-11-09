@@ -24,10 +24,10 @@ rm -rf -- "$target"
 mkdir -p "$classes"
 
 sources=(
-  "$src/M3CanonicalFamilyPolicy.java"
-  "$src/M3ImportManifest.java"
-  "$src/M3Importer.java"
-  "$src/M3ImportCli.java"
+  "$src/CanonicalFamilyPolicy.java"
+  "$src/ImportManifest.java"
+  "$src/Importer.java"
+  "$src/ImportCli.java"
 )
 
 for file in "${sources[@]}"; do
@@ -38,7 +38,7 @@ javac --release 21 -proc:none -implicit:none -encoding UTF-8 -Xlint:all -Werror 
   -d "$classes" "${sources[@]}"
 
 root="$(
-  java -cp "$classes" jdk.m3.importer.M3ImportCli \
+  java -cp "$classes" jdk.m3.importer.ImportCli \
     verify-target "$manifest" "$repo" "$repo"
 )"
 

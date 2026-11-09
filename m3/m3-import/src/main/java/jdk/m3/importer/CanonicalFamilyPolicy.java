@@ -14,7 +14,7 @@ import java.util.Optional;
  * automatic Apache vendor manifest labels an M3Index-family source inconsistently with the
  * canonical Synexia coordinate expected by this receiver.</p>
  */
-public final class M3CanonicalFamilyPolicy {
+public final class CanonicalFamilyPolicy {
     public enum Family {
         M3INDEX_ALIAS("m3-m3index/", "com.synexia:m3-m3index-core"),
         INDEXSTRING(
@@ -67,7 +67,7 @@ public final class M3CanonicalFamilyPolicy {
 
     private static final List<Family> FAMILIES = List.of(Family.values());
 
-    private M3CanonicalFamilyPolicy() {}
+    private CanonicalFamilyPolicy() {}
 
     public static Optional<Family> classify(String sourcePath) {
         String path = relative(sourcePath, "sourcePath");

@@ -31,7 +31,7 @@ import java.util.Set;
  * {@code m3/build}. KEEP rows prove reuse; STALE rows are evidence only and never authorize
  * deletion.</p>
  */
-public final class M3ImportPlan {
+public final class ImportPlan {
     public static final String HEADER =
             "source_revision\tmanifest_root\tcategory\tsource_path\ttarget_path\tmode\t"
                     + "expected_sha256\tcurrent_sha256\taction\tlane";
@@ -146,7 +146,7 @@ public final class M3ImportPlan {
                 }
                 previous = row.targetPath();
             }
-            String expected = M3ImportPlan.root(sourceRevision, manifestRoot, rows);
+            String expected = ImportPlan.root(sourceRevision, manifestRoot, rows);
             root = root == null || root.isBlank() ? expected : sha(root, "root");
             if (!root.equals(expected)) {
                 throw new IllegalArgumentException("Synexia import plan root mismatch");
@@ -189,15 +189,15 @@ public final class M3ImportPlan {
         }
     }
 
-    private M3ImportPlan() {}
+    private ImportPlan() {}
 
-    public static Plan plan(Path m3jdkRoot, M3ImportManifest manifest) throws IOException {
+    public static Plan plan(Path m3jdkRoot, ImportManifest manifest) throws IOException {
         Path root = existingRoot(m3jdkRoot, "m3jdkRoot");
-        M3ImportManifest checked = Objects.requireNonNull(manifest, "manifest");
+        ImportManifest checked = Objects.requireNonNull(manifest, "manifest");
         ArrayList<Row> rows = new ArrayList<>();
         Set<String> manifestTargets = new HashSet<>();
 
-        for (M3ImportManifest.Entry entry : checked.entries()) {
+        for (ImportManifest.Entry entry : checked.entries()) {
             manifestTargets.add(entry.targetPath());
             Path target = resolve(root, entry.targetPath());
             String current = "ABSENT";
@@ -225,15 +225,15 @@ public final class M3ImportPlan {
     public static Plan stage(
             Path synexiaRoot,
             Path m3jdkRoot,
-            M3ImportManifest manifest,
+            ImportManifest manifest,
             Path output) throws IOException {
-        M3ImportManifest checked = Objects.requireNonNull(manifest, "manifest");
-        M3Importer.verifySources(synexiaRoot, checked);
+        ImportManifest checked = Objects.requireNonNull(manifest, "manifest");
+        Importer.verifySources(synexiaRoot, checked);
         Path m3Root = existingRoot(m3jdkRoot, "m3jdkRoot");
         Plan plan = plan(m3Root, checked);
         Path out = buildOutput(m3Root, output);
-        Map<String, M3ImportManifest.Entry> entries = new HashMap<>();
-        for (M3ImportManifest.Entry entry : checked.entries()) {
+        Map<String, ImportManifest.Entry> entries = new HashMap<>();
+        for (ImportManifest.Entry entry : checked.entries()) {
             entries.put(entry.targetPath(), entry);
         }
 
@@ -241,7 +241,7 @@ public final class M3ImportPlan {
             if (row.action() != Action.ADD && row.action() != Action.REPLACE) {
                 continue;
             }
-            M3ImportManifest.Entry entry = entries.get(row.targetPath());
+            ImportManifest.Entry entry = entries.get(row.targetPath());
             if (entry == null) {
                 throw new IllegalStateException("changed row lacks manifest entry");
             }

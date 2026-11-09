@@ -17,7 +17,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-final class M3ImporterTest {
+final class ImporterTest {
     @TempDir
     Path temp;
 
@@ -38,16 +38,16 @@ final class M3ImporterTest {
                         .getBytes(StandardCharsets.UTF_8);
         write(m3.resolve(sourcePath), bytes);
 
-        M3ImportManifest manifest = manifest(sourcePath, targetPath, bytes);
-        M3Importer.verify(m3, m3jdk, manifest);
+        ImportManifest manifest = manifest(sourcePath, targetPath, bytes);
+        Importer.verify(m3, m3jdk, manifest);
         assertFalse(Files.exists(m3jdk.resolve(targetPath)));
 
-        M3Importer.materialize(m3, m3jdk, manifest);
-        M3Importer.verifyTargetSnapshot(m3jdk, manifest);
+        Importer.materialize(m3, m3jdk, manifest);
+        Importer.verifyTargetSnapshot(m3jdk, manifest);
         assertTrue(Files.isRegularFile(m3jdk.resolve(targetPath)));
         assertEquals(sha256(bytes), sha256(Files.readAllBytes(m3jdk.resolve(targetPath))));
 
-        M3Importer.materialize(m3, m3jdk, manifest);
+        Importer.materialize(m3, m3jdk, manifest);
         assertEquals(sha256(bytes), sha256(Files.readAllBytes(m3jdk.resolve(targetPath))));
     }
 
@@ -62,24 +62,24 @@ final class M3ImporterTest {
         String targetPath = "m3/vendor/m3/module/src/main/java/p/A.java";
         byte[] before = apache("package p; final class A {}\n");
         write(m3.resolve(sourcePath), before);
-        M3ImportManifest manifest = manifest(sourcePath, targetPath, before);
+        ImportManifest manifest = manifest(sourcePath, targetPath, before);
 
         write(m3.resolve(sourcePath), apache("package p; final class A { int x; }\n"));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(m3, m3jdk, manifest));
+                () -> Importer.verify(m3, m3jdk, manifest));
 
         write(m3.resolve(sourcePath), before);
         write(m3jdk.resolve(targetPath), apache("package p; final class A { int y; }\n"));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verifyTargetSnapshot(m3jdk, manifest));
+                () -> Importer.verifyTargetSnapshot(m3jdk, manifest));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(m3, m3jdk, manifest));
+                () -> Importer.verify(m3, m3jdk, manifest));
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.materialize(m3, m3jdk, manifest));
+                () -> Importer.materialize(m3, m3jdk, manifest));
     }
 
     @Test
@@ -92,18 +92,18 @@ final class M3ImporterTest {
         String sourcePath = "module/src/main/java/p/A.java";
         String targetPath = "m3/vendor/m3/module/src/main/java/p/A.java";
         byte[] bytes = apache("package p; final class A {}\n");
-        M3ImportManifest manifest = manifest(sourcePath, targetPath, bytes);
+        ImportManifest manifest = manifest(sourcePath, targetPath, bytes);
 
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verify(m3, m3jdk, manifest));
+                () -> Importer.verify(m3, m3jdk, manifest));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3Importer.verify(temp.resolve("absent"), m3jdk, manifest));
+                () -> Importer.verify(temp.resolve("absent"), m3jdk, manifest));
         write(m3.resolve(sourcePath), bytes);
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3Importer.verify(m3, temp.resolve("absent-target"), manifest));
+                () -> Importer.verify(m3, temp.resolve("absent-target"), manifest));
     }
 
     @Test
@@ -121,23 +121,23 @@ final class M3ImporterTest {
         String targetB = "m3/vendor/m3/module/src/main/java/p/B.java";
         write(m3.resolve(sourceA), a);
         write(m3.resolve(sourceB), b);
-        M3ImportManifest manifest =
-                new M3ImportManifest(
+        ImportManifest manifest =
+                new ImportManifest(
                         "a".repeat(40),
                         "m3jdk21",
                         List.of(
-                                new M3ImportManifest.Entry(
+                                new ImportManifest.Entry(
                                         "seed", sourceA, targetA, sha256(a), "Apache-2.0",
-                                        M3ImportManifest.Mode.APACHE_SOURCE),
-                                new M3ImportManifest.Entry(
+                                        ImportManifest.Mode.APACHE_SOURCE),
+                                new ImportManifest.Entry(
                                         "seed", sourceB, targetB, sha256(b), "Apache-2.0",
-                                        M3ImportManifest.Mode.APACHE_SOURCE)),
+                                        ImportManifest.Mode.APACHE_SOURCE)),
                         "");
 
         assertThrows(
                 IOException.class,
                 () ->
-                        M3Importer.materialize(
+                        Importer.materialize(
                                 m3,
                                 m3jdk,
                                 manifest,
@@ -171,22 +171,22 @@ final class M3ImporterTest {
         git(m3, "commit", "-m", "fixture");
         String head = git(m3, "rev-parse", "HEAD").trim();
 
-        M3ImportManifest manifest =
-                new M3ImportManifest(
+        ImportManifest manifest =
+                new ImportManifest(
                         head,
                         "m3jdk21",
-                        List.of(new M3ImportManifest.Entry(
+                        List.of(new ImportManifest.Entry(
                                 "seed",
                                 sourcePath,
                                 targetPath,
                                 sha256(bytes),
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE)),
+                                ImportManifest.Mode.APACHE_SOURCE)),
                         "");
         Path manifestFile = temp.resolve("strict-manifest.tsv");
         Files.writeString(manifestFile, manifest.toTsv());
 
-        M3ImportCli.main(
+        ImportCli.main(
                 new String[] {
                     "verify-strict",
                     manifestFile.toString(),
@@ -194,15 +194,15 @@ final class M3ImporterTest {
                     m3jdk.toString()
                 });
 
-        M3ImportManifest wrongRevision =
-                new M3ImportManifest(
+        ImportManifest wrongRevision =
+                new ImportManifest(
                         "0".repeat(40), "m3jdk21", manifest.entries(), "");
         Path wrongFile = temp.resolve("wrong-revision.tsv");
         Files.writeString(wrongFile, wrongRevision.toTsv());
         assertThrows(
                 IllegalStateException.class,
                 () ->
-                        M3ImportCli.main(
+                        ImportCli.main(
                                 new String[] {
                                     "verify-strict",
                                     wrongFile.toString(),
@@ -210,15 +210,15 @@ final class M3ImporterTest {
                                     m3jdk.toString()
                                 }));
 
-        M3ImportManifest wrongSha256Revision =
-                new M3ImportManifest(
+        ImportManifest wrongSha256Revision =
+                new ImportManifest(
                         "0".repeat(64), "m3jdk21", manifest.entries(), "");
         Path wrongSha256File = temp.resolve("wrong-sha256-revision.tsv");
         Files.writeString(wrongSha256File, wrongSha256Revision.toTsv());
         assertThrows(
                 IllegalStateException.class,
                 () ->
-                        M3ImportCli.main(
+                        ImportCli.main(
                                 new String[] {
                                     "verify-strict",
                                     wrongSha256File.toString(),
@@ -230,7 +230,7 @@ final class M3ImporterTest {
         assertThrows(
                 IllegalStateException.class,
                 () ->
-                        M3ImportCli.main(
+                        ImportCli.main(
                                 new String[] {
                                     "materialize-strict",
                                     manifestFile.toString(),
@@ -245,24 +245,24 @@ final class M3ImporterTest {
         write(
                 m3.resolve(untrackedSource),
                 apache("package p; final class B {}\n"));
-        M3ImportManifest untrackedManifest =
-                new M3ImportManifest(
+        ImportManifest untrackedManifest =
+                new ImportManifest(
                         head,
                         "m3jdk21",
-                        List.of(new M3ImportManifest.Entry(
+                        List.of(new ImportManifest.Entry(
                                 "seed",
                                 untrackedSource,
                                 untrackedTarget,
                                 "2140213c926ce6d65e25fe23c8fb82f7d75906172aaebee0a1aa8cf3d133c57a",
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE)),
+                                ImportManifest.Mode.APACHE_SOURCE)),
                         "");
         Path untrackedFile = temp.resolve("untracked-source.tsv");
         Files.writeString(untrackedFile, untrackedManifest.toTsv());
         assertThrows(
                 IllegalStateException.class,
                 () ->
-                        M3ImportCli.main(
+                        ImportCli.main(
                                 new String[] {
                                     "verify-strict",
                                     untrackedFile.toString(),
@@ -276,24 +276,24 @@ final class M3ImporterTest {
         write(
                 m3.resolve(wildcardSource),
                 apache("package p; final class Bracket {}\n"));
-        M3ImportManifest wildcardManifest =
-                new M3ImportManifest(
+        ImportManifest wildcardManifest =
+                new ImportManifest(
                         head,
                         "m3jdk21",
-                        List.of(new M3ImportManifest.Entry(
+                        List.of(new ImportManifest.Entry(
                                 "seed",
                                 wildcardSource,
                                 wildcardTarget,
                                 "9c2c5f1bfda66d7c0c69c3cbb3bddbfc029e0c838ca26e662799903e5976db78",
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE)),
+                                ImportManifest.Mode.APACHE_SOURCE)),
                         "");
         Path wildcardFile = temp.resolve("wildcard-source.tsv");
         Files.writeString(wildcardFile, wildcardManifest.toTsv());
         assertThrows(
                 IllegalStateException.class,
                 () ->
-                        M3ImportCli.main(
+                        ImportCli.main(
                                 new String[] {
                                     "verify-strict",
                                     wildcardFile.toString(),
@@ -321,14 +321,14 @@ final class M3ImporterTest {
             return;
         }
 
-        M3ImportManifest manifest =
+        ImportManifest manifest =
                 manifest(
                         "module/src/A.java",
                         "m3/vendor/m3/module/src/A.java",
                         bytes);
         assertThrows(
                 IllegalStateException.class,
-                () -> M3Importer.verifySources(m3, manifest));
+                () -> Importer.verifySources(m3, manifest));
     }
 
     private static String git(Path root, String... args) throws Exception {
@@ -346,12 +346,12 @@ final class M3ImporterTest {
     @Test
     void manifestRoundTripAndValidationAreDeterministic() {
         byte[] bytes = apache("package p; final class A {}\n");
-        M3ImportManifest original = manifest(
+        ImportManifest original = manifest(
                 "module/src/main/java/p/A.java",
                 "m3/vendor/m3/module/src/main/java/p/A.java",
                 bytes);
 
-        M3ImportManifest parsed = M3ImportManifest.parse(original.toTsv());
+        ImportManifest parsed = ImportManifest.parse(original.toTsv());
         assertEquals(original, parsed);
         assertEquals(64, parsed.root().length());
         assertEquals("m3jdk21", parsed.targetId());
@@ -359,11 +359,11 @@ final class M3ImporterTest {
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportManifest.parse("bad\n"));
+                () -> ImportManifest.parse("bad\n"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportManifest.parse(
-                        M3ImportManifest.HEADER
+                () -> ImportManifest.parse(
+                        ImportManifest.HEADER
                                 + "\n"
                                 + "a".repeat(40)
                                 + "\tm3jdk21\tjava\tA.java\tm3/vendor/m3/A.java\t"
@@ -373,49 +373,49 @@ final class M3ImporterTest {
                                 + "\n"));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportManifest.Entry(
+                () -> new ImportManifest.Entry(
                         "java",
                         "A.java",
                         "../A.java",
                         "1".repeat(64),
                         "Apache-2.0",
-                        M3ImportManifest.Mode.APACHE_SOURCE));
+                        ImportManifest.Mode.APACHE_SOURCE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportManifest.Entry(
+                () -> new ImportManifest.Entry(
                         "java",
                         "A.java",
                         "outside/A.java",
                         "1".repeat(64),
                         "Apache-2.0",
-                        M3ImportManifest.Mode.APACHE_SOURCE));
+                        ImportManifest.Mode.APACHE_SOURCE));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportManifest(
+                () -> new ImportManifest(
                         "a".repeat(40),
                         "other",
-                        List.of(new M3ImportManifest.Entry(
+                        List.of(new ImportManifest.Entry(
                                 "java",
                                 "A.java",
                                 "m3/vendor/m3/A.java",
                                 "1".repeat(64),
                                 "Apache-2.0",
-                                M3ImportManifest.Mode.APACHE_SOURCE)),
+                                ImportManifest.Mode.APACHE_SOURCE)),
                         ""));
     }
 
     @Test
     void producerAndReceiverShareKnownDeliveryRootVector() {
-        M3ImportManifest.Entry entry =
-                new M3ImportManifest.Entry(
+        ImportManifest.Entry entry =
+                new ImportManifest.Entry(
                         "java",
                         "A.java",
                         "m3/vendor/m3/A.java",
                         "1".repeat(64),
                         "Apache-2.0",
-                        M3ImportManifest.Mode.APACHE_SOURCE);
-        M3ImportManifest manifest =
-                new M3ImportManifest(
+                        ImportManifest.Mode.APACHE_SOURCE);
+        ImportManifest manifest =
+                new ImportManifest(
                         "a".repeat(40),
                         "m3jdk21",
                         List.of(entry),
@@ -427,21 +427,21 @@ final class M3ImporterTest {
 
     @Test
     void duplicateTargetAndRootMismatchFailClosed() {
-        M3ImportManifest.Entry entry = new M3ImportManifest.Entry(
+        ImportManifest.Entry entry = new ImportManifest.Entry(
                 "java",
                 "A.java",
                 "m3/vendor/m3/A.java",
                 "1".repeat(64),
                 "Apache-2.0",
-                M3ImportManifest.Mode.APACHE_SOURCE);
+                ImportManifest.Mode.APACHE_SOURCE);
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportManifest(
+                () -> new ImportManifest(
                         "a".repeat(40), "m3jdk21", List.of(entry, entry), ""));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new M3ImportManifest(
+                () -> new ImportManifest(
                         "a".repeat(40), "m3jdk21", List.of(entry), "2".repeat(64)));
     }
 
@@ -449,10 +449,10 @@ final class M3ImporterTest {
     void cliRejectsUnknownActionAndBadArity() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> M3ImportCli.main(new String[0]));
+                () -> ImportCli.main(new String[0]));
         assertThrows(
                 Exception.class,
-                () -> M3ImportCli.main(new String[] {
+                () -> ImportCli.main(new String[] {
                     "other",
                     temp.resolve("manifest.tsv").toString(),
                     temp.resolve("synexia").toString(),
@@ -460,20 +460,20 @@ final class M3ImporterTest {
                 }));
     }
 
-    private static M3ImportManifest manifest(
+    private static ImportManifest manifest(
             String sourcePath,
             String targetPath,
             byte[] bytes) {
-        return new M3ImportManifest(
+        return new ImportManifest(
                 "a".repeat(40),
                 "m3jdk21",
-                List.of(new M3ImportManifest.Entry(
+                List.of(new ImportManifest.Entry(
                         "seed",
                         sourcePath,
                         targetPath,
                         sha256(bytes),
                         "Apache-2.0",
-                        M3ImportManifest.Mode.APACHE_SOURCE)),
+                        ImportManifest.Mode.APACHE_SOURCE)),
                 "");
     }
 
