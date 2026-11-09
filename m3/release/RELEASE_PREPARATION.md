@@ -88,10 +88,12 @@ documented in [the release pack](README.md).
 
 | Item | Value |
 | --- | --- |
-| Source `master` | `43ffa8f6016f237463846a82f68883567b1dbe5b` (includes #2884-#2889) |
-| Source tree | `ece07eeaa519b23ab3d4d83165480fad84a8840e` |
-| Candidate commit | `7607ffeee51557cc4695d25fc98fb2f48264284c` on `release-candidate/m3jdk-21.0.14-m3.1-preview-20261109` |
+| Source `master` | `809625db76e9eabdccc627ec25b5d6773a6fd0be` (includes #2884-#2889 and #2891) |
+| Source tree | `30651922a8b3c8b7f80cb89dc04fc5ab5069f50d` |
+| Candidate commit | `fe51a3c9ff2f09140be4348e24caa0b8bd9fd18c` on `release-candidate/m3jdk-21.0.14-m3.1-preview-809625db` |
 | Candidate shape | single commit, parent `890adb6410dab4606a4f26a942aed02fb2f55387` (`jdk-21+35`), tree equal to the source tree; author and committer `Hitesh Soliwal <hsoliwal@gmail.com>`, both dates `2026-11-09T00:00:00+00:00` (the cut date, not backdated) |
+| Superseded cut | `7607ffeee51557cc4695d25fc98fb2f48264284c` (`release-candidate/m3jdk-21.0.14-m3.1-preview-20261109`, from `master` `43ffa8f6016f`, before #2891); not used for evidence |
+| `master` after the cut | `c0c4fd91d3ae9b5c43cec2ab089f4d04edea43cc` (#2892, N7b) is **not** part of this candidate |
 | Existing `release/m3jdk-21.0.14-m3.1-preview` | `5589b15ec870` (2026-10-31), stale; not moved, deleted or force-pushed |
 | Evidence pack | outside the checkout, `M3_RELEASE_EVIDENCE_V1`; raw logs with SHA-256 |
 
