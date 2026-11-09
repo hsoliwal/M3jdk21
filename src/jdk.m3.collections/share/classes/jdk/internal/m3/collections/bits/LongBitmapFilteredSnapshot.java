@@ -25,7 +25,7 @@ import jdk.m3.collections.LongIterator;
  * index projection supplies O(1) positional reads without moving the long payload.
  *
  * <p>Snapshots deliberately do <em>not</em> have the live semantics of
- * {@link M3LongFilteredView}. An externally changing predicate does not update
+ * {@code M3LongFilteredView}. An externally changing predicate does not update
  * a snapshot. For opt-in revision-controlled sources, use {@link VersionedView}.
  * Java predicates never cross JNI; the existing IndexMaskCompactor selects the
  * admitted physical indexes using Java or explicitly requested JNI.</p>

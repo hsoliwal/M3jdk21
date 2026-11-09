@@ -20,13 +20,13 @@
 package jdk.internal.m3.collections;
 
 /**
- * The block store behind {@link VirtualPageSource}: slots of <code>blockSize</code> rows keyed by
+ * The block store behind {@code VirtualPageSource}: slots of <code>blockSize</code> rows keyed by
  * <code>(parentKey, block)</code>, with packed per-slot state and per-row lanes.
  *
  * <p>{@link BlockCache} is the in-memory implementation. The tiered swap cache ported
  * for ItemResidency (SWT #122: TieredSwapCache + SwapPressureController, blocks swapped out under
  * pressure and back in on scroll-back without re-fetching) plugs in behind this interface; the
- * only line to change is {@link VirtualPageSource#newBlockStore(int, int, int)}.</p>
+ * only line to change is {@code VirtualPageSource#newBlockStore(int, int, int)}.</p>
  */
 public interface BlockStore {
 	int EMPTY = 0;

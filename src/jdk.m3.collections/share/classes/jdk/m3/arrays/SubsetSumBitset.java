@@ -4,7 +4,7 @@ package jdk.m3.arrays;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.mindex.foundation.MIndexSubsetSumBitset}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}.
+ * Every member body throws {@code M3NotYetReceived}.
  *
  * <p>Lineage: Synexia {@code m3-mindex/foundation/src/main/java/jdk/internal/m3/mindex/foundation/MIndexSubsetSumBitset.java}
  * blob {@code e6b16399d8635f4b8081462ae042001244b3a363} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},

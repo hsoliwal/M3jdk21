@@ -19,7 +19,7 @@ import java.util.Objects;
 /**
  * Stable-row multi-lane long store over lazily allocated segmented blocks.
  *
- * <p>Unlike {@link PackedLongLaneStore}, rows never swap-move. A live row is addressed by a
+ * <p>Unlike {@code PackedLongLaneStore}, rows never swap-move. A live row is addressed by a
  * generation-safe 64-bit handle. Every data lane uses the same logical slot mapping.
  *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedLongLaneStore28.java}

@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.indexstring.MIndexDirectArrayView}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}.
+ * Every member body throws {@code M3NotYetReceived}.
  *
  * <p>Lineage: Synexia {@code m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexDirectArrayView.java}
  * blob {@code 6cbef8b42871f5e9f21343e5876bcafe31b8bc3b} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},

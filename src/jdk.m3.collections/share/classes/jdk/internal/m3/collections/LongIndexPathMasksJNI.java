@@ -4,7 +4,7 @@
 package jdk.internal.m3.collections;
 
 /**
- * Optional, explicit JNI backend for {@link M3LongIndexPathMasks}.
+ * Optional, explicit JNI backend for {@code M3LongIndexPathMasks}.
  *
  * <p>Its source geometry, signed path order, duplicate occurrences, 32-bit
  * required/forbidden state masks, and detached-output contracts match the Java
@@ -49,7 +49,7 @@ public final class LongIndexPathMasksJNI {
     }
 
     /**
-     * Native counterpart to {@link M3LongIndexPathMasks#scanWindow}.
+     * Native counterpart to {@code M3LongIndexPathMasks#scanWindow}.
      * A maximum of 4096 admitted longs are buffered in native stack scratch
      * before a single output Region write. Invalid path geometry and changed
      * selection cardinality are refused without modifying the destination.

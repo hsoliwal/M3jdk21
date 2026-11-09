@@ -7,7 +7,7 @@ import java.util.Set;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.indexstring.type.MIndexJavaModifierBits}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}.
+ * Every member body throws {@code M3NotYetReceived}.
  *
  * <p>Lineage: Synexia {@code m3-indexstring/src/main/java/jdk/internal/m3/indexstring/type/MIndexJavaModifierBits.java}
  * blob {@code 2835195be6bffcc9dfe8ee78e0362aa5afa6ed62} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},

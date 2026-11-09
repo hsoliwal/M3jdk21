@@ -66,7 +66,7 @@ public final class NumericAlgorithms {
         return true;
     }
 
-    /** All primes <= limit. */
+    /** All primes &lt;= limit. */
     public static int[] sievePrimes(int limit) {
         if (limit < 0) throw new IllegalArgumentException("limit must be non-negative");
         if (limit < 2) return new int[0];
@@ -90,7 +90,7 @@ public final class NumericAlgorithms {
         return primes;
     }
 
-    /** Smallest prime factor table where result[x] is 0 for x<2 and otherwise the SPF of x. */
+    /** Smallest prime factor table where result[x] is 0 for x&lt;2 and otherwise the SPF of x. */
     public static int[] smallestPrimeFactors(int limit) {
         if (limit < 0) throw new IllegalArgumentException("limit must be non-negative");
         int[] spf = new int[limit + 1];

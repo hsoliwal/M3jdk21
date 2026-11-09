@@ -27,7 +27,7 @@ import java.util.*;
 
 /**
  * Order-statistic index over the materialized children of every parent of a
- * {@link M3TreeTopology}.
+ * {@code M3TreeTopology}.
  *
  * <p>Each parent owns a height-balanced binary search tree whose nodes are the
  * topology's item ids, so the index allocates no node of its own. The search

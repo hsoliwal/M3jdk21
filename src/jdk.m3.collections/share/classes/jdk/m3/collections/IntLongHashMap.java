@@ -18,7 +18,7 @@ import java.util.Objects;
  * tombstones. The API stays primitive and target-internal, shaped like {@link IntIntHashMap}
  * and {@link LongLongHashMap}; {@link java.util.HashMap} remains the public JDK contract
  * owner. {@link #payloadBytesFor(int)} publishes the sizing rule so an owner choosing between
- * this table and a dense lane (see {@link M3AdaptiveEnumLongMap}) compares the bytes the table
+ * this table and a dense lane (see {@code M3AdaptiveEnumLongMap}) compares the bytes the table
  * would actually retain.</p>
  */
 public final class IntLongHashMap {

@@ -30,7 +30,7 @@ public final class LongMeetInMiddle {
     private LongMeetInMiddle() {}
 
     /**
-     * Maximum subset sum <= limit.
+     * Maximum subset sum &lt;= limit.
      *
      * <p>Supports negative values. Arithmetic overflow throws.
      */

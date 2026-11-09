@@ -8,7 +8,7 @@ import jdk.m3.collections.LongLongPredicate;
 /**
  * Mutable primitive {@code long -> long} map contract.
  *
- * <p>No Map.Entry, Long, Iterator<Entry<...>>, or object-valued mutation path is required.
+ * <p>No Map.Entry, Long, Iterator&lt;Entry&lt;...&gt;&gt;, or object-valued mutation path is required.
  */
 //FLLDCIM: RELOCATE - donor blob 50d7b4c139fd at commit d5ad5090d87e (repository, path, URL and digests: m3/collections/recipe/four-library-bags-20261106/PROVENANCE.tsv); recipe m3/collections/recipe/four-library-bags-20261106/relocate.py v1
 public interface PackedLongLongMap {

@@ -19,7 +19,7 @@ import java.util.Objects;
 /**
  * A user-interface label carried in one {@code long}: either the whole text of
  * a short label (an immediate) or the id of a longer label in an
- * {@link M3LabelPool}.
+ * {@code M3LabelPool}.
  *
  * <p>Short labels (severities, units, numbers, file extensions, short names)
  * need no String, no pool entry and no reference count: their text is the
