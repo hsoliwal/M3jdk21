@@ -1,0 +1,109 @@
+# java.base compile evidence, candidate fe51a3c9ff2f (tree 30651922a8b3), 2026-11-09
+# WSL2 Ubuntu 24.04 x86_64, gcc 13.3.0, boot JDK OpenJDK 21.0.12.1 (Ubuntu); bash configure --build=x86_64-pc-linux-gnu ... --disable-warnings-as-errors (native only); javac -Werror stays on
+
+## 1. unchanged candidate: make images (-encoding ascii)
+unmappable-character errors: 88
+      4 src/java.base/share/classes/jdk/internal/math/M3AbstractBigDecimalParser.java
+      4 src/java.base/share/classes/jdk/internal/math/M3AbstractBigIntegerParser.java
+      3 src/java.base/share/classes/jdk/internal/math/M3AbstractFloatValueParser.java
+      2 src/java.base/share/classes/jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java
+      2 src/java.base/share/classes/jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java
+      2 src/java.base/share/classes/jdk/internal/math/M3AbstractNumberParser.java
+      2 src/java.base/share/classes/jdk/internal/math/M3BigSignificand.java
+     10 src/java.base/share/classes/jdk/internal/math/M3FastDoubleMath.java
+      5 src/java.base/share/classes/jdk/internal/math/M3FastDoubleSwar.java
+      4 src/java.base/share/classes/jdk/internal/math/M3FastFloatMath.java
+      2 src/java.base/share/classes/jdk/internal/math/M3FastIntegerMath.java
+      2 src/java.base/share/classes/jdk/internal/math/M3FftMultiplier.java
+     32 src/java.base/share/classes/jdk/internal/math/M3JavaBigDecimalFromCharArray.java
+      2 src/java.base/share/classes/jdk/internal/math/M3JavaBigIntegerFromCharSequence.java
+      2 src/java.base/share/classes/jdk/internal/math/M3JavaDoubleBitsFromByteArray.java
+      2 src/java.base/share/classes/jdk/internal/math/M3JavaDoubleBitsFromCharSequence.java
+      2 src/java.base/share/classes/jdk/internal/math/M3JavaFloatBitsFromByteArray.java
+      2 src/java.base/share/classes/jdk/internal/math/M3JavaFloatBitsFromCharSequence.java
+      2 src/java.base/share/classes/jdk/internal/math/M3ParseDigitsTaskCharArray.java
+      2 src/java.base/share/classes/jdk/internal/math/M3ParseDigitsTaskCharSequence.java
+gmake[3]: *** [CompileJavaModules.gmk:95: /mnt/jdkb/src/build/linux-x86_64-server-release/jdk/modules/java.base/_the.java.base_batch] Error 4
+
+## 2. javac -encoding utf-8 (JavaCompilation.gmk only): -Werror refuses java.base warnings
+src/java.base/share/classes/java/security/SHA256Adapter.java:52: warning: no @return
+src/java.base/share/classes/java/security/SHA256Adapter.java:55: warning: no @return
+src/java.base/share/classes/java/security/SHA256Adapter.java:60: warning: no @param for expected
+src/java.base/share/classes/java/security/SHA256Adapter.java:60: warning: no @return
+src/java.base/share/classes/java/security/SHA256Adapter.java:69: warning: no @param for source
+src/java.base/share/classes/java/security/SHA256Adapter.java:69: warning: no @return
+src/java.base/share/classes/jdk/internal/math/M3FftMultiplier.java:438: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+src/java.base/share/classes/java/security/SHA256Adapter.java:52: warning: no @return
+src/java.base/share/classes/java/security/SHA256Adapter.java:55: warning: no @return
+src/java.base/share/classes/java/security/SHA256Adapter.java:60: warning: no @param for expected
+src/java.base/share/classes/java/security/SHA256Adapter.java:60: warning: no @return
+src/java.base/share/classes/java/security/SHA256Adapter.java:69: warning: no @param for source
+error: warnings found and -Werror specified
+
+## 3. with this PR: make java.base-java (default flags: -Werror, doclint)
+Generating main target list
+Running make as 'make JOBS=24 LOG=info java.base-java'
+Building target 'java.base-java' in configuration 'linux-x86_64-server-release'
+Compiling up to 8 files for BUILD_TOOLS_LANGTOOLS
+Generating classes for compiler.properties launcher.properties
+Compiling up to 127 files for BUILD_java.compiler.interim
+Compiling up to 364 files for BUILD_jdk.compiler.interim
+Compiling up to 242 files for BUILD_jdk.javadoc.interim
+Compiling up to 17 files for BUILD_JAVAC_SERVER
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/glass.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-bg_glass_55_fbf9ee_1x400.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-bg_glass_65_dadada_1x400.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-bg_glass_75_dadada_1x400.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-bg_glass_75_e6e6e6_1x400.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-bg_glass_95_fef1ec_1x400.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-bg_highlight-soft_75_cccccc_1x100.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-icons_222222_256x240.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-icons_2e83ff_256x240.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-icons_454545_256x240.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-icons_888888_256x240.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/images/ui-icons_cd0a0a_256x240.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/jquery-3.7.1.js
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/jquery-3.7.1.min.js
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/jquery-ui.css
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/jquery-ui.js
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/jquery-ui.min.css
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/script-dir/jquery-ui.min.js
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/search-page.js
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/search.js.template
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/formats/html/resources/x.png
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/copy.svg
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/external-link.svg
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/link.svg
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/releases/element-list-10.txt
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/releases/element-list-9.txt
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/releases/package-list-7.txt
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/releases/package-list-8.txt
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/script.js
+Copying buildtools/interim_langtools_modules/jdk.javadoc.interim/jdk/javadoc/internal/doclets/toolkit/resources/stylesheet.css
+Compiling up to 187 files for BUILD_TOOLS_JDK
+Compiling up to 2 files for COMPILE_DEPEND
+Generating CharacterDataLatin1.java
+Generating CharacterData00.java
+Generating CharacterData01.java
+Generating CharacterData02.java
+Generating CharacterData03.java
+Generating CharacterData0E.java
+Generating java.base charset mapping
+Generating exceptions java.nio .
+Generating exceptions java.nio charset
+Generating exceptions java.nio channels
+Processing CLDR data for java.base
+Compiling 11 properties into resource bundles for java.base
+Compiling 6 properties into resource bundles for java.base
+Generating fixed-field math classes for java.base
+Compiling up to 3676 files for java.base
+Stopping javac server
+----- Build times -------
+Start 2026-11-09 11:19:52
+End   2026-11-09 11:20:37
+
+00:00:45 TOTAL
+-------------------------
+Finished building target 'java.base-java' in configuration 'linux-x86_64-server-release'
+MAKE_EXIT javabase-fix 0 2026-11-09T11:20:37Z
+java.base warnings: 0
