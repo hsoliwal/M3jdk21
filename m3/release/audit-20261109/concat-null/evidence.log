@@ -1,0 +1,28 @@
+# JLS 15.18.1 null String operand in M3 segmented concat: evidence 2026-11-09
+# image: candidate fe51a3c9ff2f tree + #2899 + #2901 + this change, built with JAVA_WARNINGS_ARE_ERRORS= (diagnostic), WSL2 Ubuntu 24.04 x86_64
+
+## before (same image without this change), ConcatNullProbe with -XX:+UseM3StringStorage
+two=<A|>      (stock: <A|null>)
+str=ab7       (stock: anullb7)
+strOnly=pqTr  (stock: pnullqTr)
+jtreg java/lang/String: M3StringConcatTupleTest FAILED (null rendered as empty), M3StringConcatReferenceDagTest FAILED (null toString conversion)
+
+## after
+stock-stockjavac exit=0 CONCAT_DIFFERENTIAL lines=1547 sha256=a1888ade06093099
+m3img-default exit=0 CONCAT_DIFFERENTIAL lines=1547 sha256=a1888ade06093099
+m3img-m3storage exit=0 CONCAT_DIFFERENTIAL lines=1547 sha256=a1888ade06093099
+m3img-m3storage-int exit=0 CONCAT_DIFFERENTIAL lines=1547 sha256=a1888ade06093099
+m3img-m3storage-c2 exit=0 CONCAT_DIFFERENTIAL lines=1547 sha256=a1888ade06093099
+m3img-m3storage-nocompact exit=0 CONCAT_DIFFERENTIAL lines=1547 sha256=a1888ade06093099
+stock-on-m3javac-classes exit=0 CONCAT_DIFFERENTIAL lines=1547 sha256=a1888ade06093099
+diff stock vs m3img-default: 0 differing lines
+diff stock vs m3img-m3storage: 0 differing lines
+diff stock vs m3img-m3storage-int: 0 differing lines
+diff stock vs m3img-m3storage-c2: 0 differing lines
+diff stock vs m3img-m3storage-nocompact: 0 differing lines
+diff stock vs stock-on-m3javac-classes: 0 differing lines
+== ConcatNullProbe on this image
+two=<A|null>
+obj=xnully
+str=anullb7
+strOnly=pnullqTr
