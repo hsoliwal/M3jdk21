@@ -96,8 +96,9 @@ class DonationPacketTest(unittest.TestCase):
         self.assertEqual(record["successor_rows"], transitions)
         for path, inherited, after in rows:
             self.assertTrue(path.startswith("m3/collections/"))
-            self.assertEqual(64, len(after))
+            self.assertTrue(after == "REMOVED" or len(after) == 64)
             self.assertTrue(inherited == "ABSENT" or len(inherited) == 64)
+            self.assertFalse(inherited == "ABSENT" and after == "REMOVED")
 
     def test_source_transitions_admit_the_exact_receipt_and_refuse_drift(self):
         tab, newline = chr(9), chr(10)
@@ -124,6 +125,30 @@ class DonationPacketTest(unittest.TestCase):
             receipt.write_bytes(text.replace(new, other).encode("utf-8"))
             with self.assertRaisesRegex(SystemExit, "Unit successor receipt missing, aliased or drifted"):
                 VERIFIER.admit_source_transitions(prior, "Unit", receipt, sealed, seal(prior), 2, 2, 2)
+
+    def test_removed_transition_retires_a_recorded_source_and_refuses_drift(self):
+        tab, newline = chr(9), chr(10)
+        kept = "m3/collections/src/main/java/jdk/m3/collections/A.java"
+        gone = "m3/collections/src/main/java/jdk/m3/collections/M3Old.java"
+        old, other = "a" * 64, "d" * 64
+
+        def seal(rows):
+            return hashlib.sha256("".join(p + tab + e + newline for p, e in rows).encode("utf-8")).hexdigest()
+
+        with tempfile.TemporaryDirectory() as directory:
+            receipt = Path(directory) / "receipt.tsv"
+            receipt.write_bytes((gone + tab + old + tab + "REMOVED" + newline).encode("utf-8"))
+            sealed = VERIFIER.digest(receipt)
+            prior = [(kept, old), (gone, old)]
+            self.assertEqual([(kept, old)], VERIFIER.admit_source_transitions(
+                prior, "Unit", receipt, sealed, seal(prior), 1, 1, 1))
+            drifted = [(kept, old), (gone, other)]
+            with self.assertRaisesRegex(SystemExit, "Unit inherited source preimage drift"):
+                VERIFIER.admit_source_transitions(drifted, "Unit", receipt, sealed, seal(drifted), 1, 1, 1)
+            receipt.write_bytes((gone + tab + "ABSENT" + tab + "REMOVED" + newline).encode("utf-8"))
+            with self.assertRaisesRegex(SystemExit, "Unit absent source cannot be removed"):
+                VERIFIER.admit_source_transitions(prior, "Unit", receipt, VERIFIER.digest(receipt), seal(prior),
+                                                  1, 1, 1)
 
 
 if __name__ == "__main__":
