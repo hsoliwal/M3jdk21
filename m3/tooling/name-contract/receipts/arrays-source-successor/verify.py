@@ -18,7 +18,7 @@ ROOT = HERE.parents[4]
 SOURCE = "src/java.base/share/classes/java/util/Arrays.java"
 MAPPING = "m3/docs/name-mapping.json"
 PLAN = "m3/tooling/name-contract/name-plan.json"
-COMPANION = "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java"
+COMPANION = "src/jdk.m3.collections/share/classes/jdk/m3/arrays/M3Arrays.java"
 OLD_BLOB = "2347e48700de1d26f630b348554ea9db3b4db25b"
 NEW_BLOB = "c5412776d202bc6fb36a3a9e65ba35437a98cbef"
 OLD_SHA = "e81e711d52fee23756fd0bf8e48c27ff0fe971419f4bb1c25ec1aa5ebc203a88"
@@ -31,9 +31,13 @@ NEW_COMMIT = "3a8e844c6866b8d8c28c08fae2a35bdd2ca1985f"
 CURRENT_COMMIT = "b9cc756f726de31af10652b5583d9bba58ba27b2"
 CURRENT_BLOB = "23fcda31d0678a09caee8d458a7caeff12abec24"
 CURRENT_SHA = "d05ab40d783e91cd608ffd76892f141bef38a82c0e105b67c4a6ee2f01faeb4f"
-CURRENT_RECEIPT = HERE.parent / "release-preparation/arrays-live-successor.json"
-CURRENT_RECEIPT_BLOB = "d6b8f82d1c73c1ead895cf4786d9cebf067aefb1"
-CURRENT_RECEIPT_SHA = "0fe3254fcbdd23a358a5176a8594a465ce7807b28c8202aa7465a62db4db4fab"
+# V1 (companion at the pre-move m3/arrays path) is kept byte-identical as lineage of V2.
+V1_RECEIPT = HERE.parent / "release-preparation/arrays-live-successor.json"
+V1_RECEIPT_BLOB = "d6b8f82d1c73c1ead895cf4786d9cebf067aefb1"
+V1_RECEIPT_SHA = "0fe3254fcbdd23a358a5176a8594a465ce7807b28c8202aa7465a62db4db4fab"
+CURRENT_RECEIPT = HERE.parent / "release-preparation/arrays-live-successor-v2.json"
+CURRENT_RECEIPT_BLOB = "b28cf5fd243ca9883c22a4d3291dc9779f9437da"
+CURRENT_RECEIPT_SHA = "8eb4cb45cda28664fc8caecc5ce67f56eed8377c7474338570b4dd6f55fed6c7"
 CURRENT_PATCH = CURRENT_RECEIPT.with_name("arrays-live-successor.patch.txt")
 CURRENT_PATCH_BLOB = "fcc0e7620897279855999df1e5143f6e1792c21a"
 CURRENT_PATCH_SHA = "38eecd500e05afedb6c64d9a177961ad9ded7b3b2cd2bb2636bdb34aa9a9a28c"
@@ -99,7 +103,13 @@ def verify(root=ROOT):
     current_receipt_bytes = read(CURRENT_RECEIPT)
     pinned(current_receipt_bytes, CURRENT_RECEIPT_BLOB, CURRENT_RECEIPT_SHA)
     current_receipt = json.loads(current_receipt_bytes)
-    if (current_receipt["schema"] != "M3_ARRAYS_RELEASE_SOURCE_SUCCESSOR_V1"
+    v1_bytes = read(V1_RECEIPT)
+    pinned(v1_bytes, V1_RECEIPT_BLOB, V1_RECEIPT_SHA)
+    if current_receipt.get("supersedes", {}) != {
+            **current_receipt.get("supersedes", {}), "path": "m3/tooling/name-contract/receipts/"
+            "release-preparation/arrays-live-successor.json", "blob": V1_RECEIPT_BLOB, "sha256": V1_RECEIPT_SHA}:
+        raise ValueError("successor receipt lineage altered")
+    if (current_receipt["schema"] != "M3_ARRAYS_RELEASE_SOURCE_SUCCESSOR_V2"
             or current_receipt["source_commit"] != CURRENT_COMMIT
             or current_receipt["current_blob"] != CURRENT_BLOB
             or current_receipt["current_sha256"] != CURRENT_SHA
