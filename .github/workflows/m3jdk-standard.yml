@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-name: M3 JDK source naming
+name: M3JDK source naming
 on:
   pull_request:
     branches: [master]

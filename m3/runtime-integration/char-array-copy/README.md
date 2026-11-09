@@ -28,7 +28,7 @@ lookup per character. The JOINED storage kind is the combined MIndex representat
 there is no competing combined-String owner.
 
 Acceptance: JDK source compilation, layered recipe replay and drift tests, and the runtime
-`MIndexStringInvariant` on a matched M3 JDK image when available. Runtime flag-off,
+`MIndexStringInvariant` on a matched M3JDK image when available. Runtime flag-off,
 interpreter, lexicon, shared mapped owner, and non-compact modes remain gates.
 
 ```sh

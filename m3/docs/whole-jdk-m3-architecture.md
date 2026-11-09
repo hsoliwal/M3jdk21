@@ -47,7 +47,7 @@ A merged PR, matching filename, ancestry edge, benchmark win or successful compi
 
 ## 3. Architecture: seven layers
 
-The M3 JDK architecture is split into seven layers so that a storage optimization cannot silently become a public semantic change.
+The M3JDK architecture is split into seven layers so that a storage optimization cannot silently become a public semantic change.
 
 ### 3.1 Canonical data and lifetime ownership
 

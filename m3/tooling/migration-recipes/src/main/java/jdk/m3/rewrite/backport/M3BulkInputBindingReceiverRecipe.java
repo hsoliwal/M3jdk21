@@ -9,7 +9,7 @@ public final class M3BulkInputBindingReceiverRecipe extends Recipe {
     public static final String CRATE = "m3-bulk-input-binding-20261014";
 
     @Override public String getDisplayName() {
-        return "Receive M3 JDK bulk input binding repair";
+        return "Receive M3JDK bulk input binding repair";
     }
     @Override public String getDescription() {
         return "Applies exact reviewed input-map binding ownership semantics from "

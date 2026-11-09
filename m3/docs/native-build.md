@@ -24,7 +24,7 @@ results**. Review [OpenJDK prerequisites](../../doc/building.md) and
 
 ```sh
 # Separate foundation; does not rebuild java.base or HotSpot.
-export M3_JDK=/absolute/path/to/private/jdk-21
+export M3JDK=/absolute/path/to/private/jdk-21
 bash m3/build.sh
 
 # Independent Maven recipe/admission reactor; not the OpenJDK image build.
@@ -129,7 +129,7 @@ export M3_BOOT_JDK=/path/to/private/jdk-21+35
 # Optional prefix with include/ and lib/x86_64-linux-gnu/ native dependencies:
 export M3_NATIVE_DEPS=/path/to/extracted-deps/usr
 ./m3/build-openjdk.sh
-export M3_JDK="$PWD/build/linux-x86_64-server-fastdebug/images/jdk"
+export M3JDK="$PWD/build/linux-x86_64-server-fastdebug/images/jdk"
 ./m3/build.sh
 python3 m3/compatibility/check-m3.py
 python3 m3/verify-shared-mapping.py

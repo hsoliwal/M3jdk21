@@ -40,7 +40,7 @@ The actual collections pack builds two JMODs and a linked M3 image, including 26
 
 Residency differential probes cover eligibility, spill failures, pinning, active and borrowed states, generation and observers. The two int link arrays add eight bytes per logical slot plus array headers in the relevant LRU modes; the original scan is retained for nonincreasing or overflowed ticks. Its work probe measures candidate visits, not timing. The filtered-view change repairs the duplicated declarations; broader predicate, comparator, fail-fast and navigation redesign remains outside this selected change. Public `gatherInto` continues to reject output/payload aliasing, including zero-length calls. Its exact exception-message parity is qualified under the recorded `-XX:-OmitStackTraceInFastThrow` settings.
 
-These are Linux source-module and actual JNI/JMOD/image gates using an existing sealed M3 JDK image. No fresh whole current HotSpot/JDK build, jtreg, full Synexia reactor, non-Linux acceptance or universal performance improvement is claimed. String remains the active global receiving phase; this handoff does not advance it or promote these owners into `java.util`.
+These are Linux source-module and actual JNI/JMOD/image gates using an existing sealed M3JDK image. No fresh whole current HotSpot/JDK build, jtreg, full Synexia reactor, non-Linux acceptance or universal performance improvement is claimed. String remains the active global receiving phase; this handoff does not advance it or promote these owners into `java.util`.
 
 ## Canonical source proof
 

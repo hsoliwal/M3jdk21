@@ -98,7 +98,7 @@ runs also pass 4,525 assertions each; compilation logs contain the new counterpa
 The existing String/JNI oracle passes 809,315 checks per default-mixed/enabled-interpreter
 run with identical semantic digests. VI passes 3,061 checks in each image mode.
 
-`run-image.sh` reproduces these checks with `M3_JDK`, `M3_BOOT_JDK` and `M3_JTREG`
+`run-image.sh` reproduces these checks with `M3JDK`, `M3_BOOT_JDK` and `M3_JTREG`
 pointing to the built image, boot JDK and jtreg.jar. It uses no java.base patching.
 Enabled String storage remains interpreter-only; the C1/C2 proof covers default VM mode.
 

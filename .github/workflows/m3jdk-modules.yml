@@ -1,4 +1,4 @@
-name: M3 JDK modules
+name: M3JDK modules
 # Product code moved from the m3/ side tree into real JDK modules under src/ (approved layout 2026-11-08).
 # One step per moved area runs make/m3/<area>/test-module.sh on a host JDK 21: the module compiles as a module,
 # its same-package tests run exactly as the former Maven module ran them, and the opt-in native lane builds the

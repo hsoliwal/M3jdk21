@@ -12,7 +12,7 @@ this packet does not replace java.base or advance the ordered runtime receiving 
 `COVERAGE.json` defines every tool contract and pending broader family. The native
 FIFO path is Linux-qualified; filesystem behavior stays explicit.
 
-Run from the M3JDK21 repository root with an M3 JDK 21 development image and a C
+Run from the M3JDK21 repository root with an M3JDK 21 development image and a C
 compiler. `JAVA_HOME` must identify an M3 image exporting
 `java.util.concurrent.ProgressMonitor` and `ProgressMonitors`: `M3File` uses those
 APIs for bounded file admission and cooperative cancellation. The driver checks

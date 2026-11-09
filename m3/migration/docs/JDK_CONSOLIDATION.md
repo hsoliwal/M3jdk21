@@ -1,4 +1,4 @@
-# M3 JDK consolidation authority
+# M3JDK consolidation authority
 
 This packet freezes the source and target revisions used for the next consolidation wave.
 

@@ -248,7 +248,7 @@ A `static volatile int` counts the suspended components, so with nothing suspend
 Native expose paths (`nativeAddDirtyRegion`) are not suspended, so damage from the window system is still painted.
 
 **Proof.** The reproducers are under `m3/ports/swing-viewport/jdk-reproducers/` and are jtreg-shaped (`@test`,
-`@run main`). They need the built M3 JDK, so they are PENDING_LINUX here.
+`@run main`). They need the built M3JDK, so they are PENDING_LINUX here.
 
 **Next `java.desktop` leaves (design only):**
 

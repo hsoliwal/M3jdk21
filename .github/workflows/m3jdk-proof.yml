@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-name: M3 JDK proof kit
+name: M3JDK proof kit
 on:
   push:
     branches: ['m3/jdk-proof-20261004']

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-"""Compile three opt-in text modules from an M3 JDK 21 development image."""
+"""Compile three opt-in text modules from an M3JDK 21 development image."""
 import argparse
 import os
 import platform

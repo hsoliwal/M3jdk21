@@ -149,7 +149,7 @@ Use the same options for each ordered phase:
 python3 m3/runtime-integration/tornado/build_runtime.py \
   --repo-root /absolute/M3JDK21 \
   --jdk-home /absolute/source-built-m3jdk \
-  --m3-jdk-receipt /absolute/m3-jdk-source-build.json \
+  --m3jdk-receipt /absolute/m3-jdk-source-build.json \
   --maven /absolute/apache-maven-3.9.9/bin/mvn \
   --maven-repo /absolute/m2 \
   --junit-lock /absolute/source-junit-support-lock.json \
@@ -159,7 +159,7 @@ python3 m3/runtime-integration/tornado/build_runtime.py \
 
 Then invoke `compile`, `test`, `image-runtime`, and `receipt` with the same
 inputs. `--phase all` performs exactly those five phases in order. A bootstrap
-development run replaces `--m3-jdk-receipt` with `--allow-bootstrap-jdk`; it
+development run replaces `--m3jdk-receipt` with `--allow-bootstrap-jdk`; it
 cannot be promoted to a source-built M3JDK result in the same output directory.
 `--source-root` and `--receiver-source` explicitly select isolated development
 candidates before canonical materialization. Their paths and contents remain

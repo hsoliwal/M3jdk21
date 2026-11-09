@@ -97,3 +97,11 @@ groupId com.m3) and LINEAGE_ID (historical ids). `jdk_naming.py` leaves these fi
 A malformed row stops the recipe; a row whose file is gone fails `test_jdk_naming.py`. Every other file still has to
 reach the fixed point of `plan --tree HEAD` (user decision 2026-11-08: explicit KEEP list, not a looser rule).
 
+## product_name.py (2026-11-09)
+
+PRODUCT_NAME_UNIFY v1. The product name is one token (user, 2026-11-09: "M3JDK is one unit, not m3 + jdk"). In
+live Markdown, workflows, Python, shell and Java, these become the per-kind name of NAMING_STANDARD: `M3 JDK`
+becomes `M3JDK`, the environment name `M3_JDK` becomes `M3JDK`, a flag `--m3-jdk[-x]` becomes `--m3jdk[-x]`, and its
+destination `m3_jdk[_x]` becomes `m3jdk[_x]`. Ledgers, evidence, NAMING_KEEP files, pinned ids (M3-JDK-PORT-1) and
+donor paths keep their bytes. Test: `test_product_name.py` (in m3jdk-naming.yml).
+

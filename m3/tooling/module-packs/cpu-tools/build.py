@@ -168,7 +168,7 @@ def source_jdk_modules(jdk, admitted=MODULES):
     names = {path.stem for path in source_jmods.glob("*.jmod")}
     collisions = sorted(set(admitted).intersection(set(linked) | names))
     if collisions:
-        raise ValueError("source JDK already contains admitted tool modules; use a clean M3 JDK: "
+        raise ValueError("source JDK already contains admitted tool modules; use a clean M3JDK: "
                          + ",".join(collisions))
     return linked
 

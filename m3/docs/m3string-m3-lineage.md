@@ -227,5 +227,5 @@ the earlier benchmark therefore remains historical evidence only.
 
 Apache-2.0 source custody stays below `m3/vendor/synexia`. Existing OpenJDK `java.base` sources
 retain GPLv2 with the Classpath Exception; the vendor copy does not relicense or enter those files.
-No M3 JDK optimization is admitted until a target-specific implementation passes exact
+No M3JDK optimization is admitted until a target-specific implementation passes exact
 String/JNI semantics and matched small, large and fragmented-input benchmarks.

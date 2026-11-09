@@ -93,11 +93,11 @@ run these tests.
 |---|---|
 | compile, test, jar | `JAVA_HOME=<JDK 21> mvn -B -ntp -f m3/optane/pom.xml package` (`-Xlint:all -Werror`, `proc none`; surefire runs the FILE oracle lanes and the Java-path replay on every OS; the native lanes are filtered) |
 | native lanes | build the libraries, then `mvn -Pm3-optane-native -Dm3.optane.library.path=<build dir> -f m3/optane/pom.xml test` (Linux; `-Xcheck:jni`), or the JUnit console launcher over `target/classes:target/test-classes` |
-| libraries | `cmake -S make/m3/optane -B <build> && cmake --build <build>` (JDK 21 `javac` and JNI headers; `-DM3_OPTANE_PMDK=ON` adds the libpmem2 backend from the build host) |
+| libraries | `cmake -S m3/optane/src/main/native -B <build> && cmake --build <build>` (JDK 21 `javac` and JNI headers; `-DM3_OPTANE_PMDK=ON` adds the libpmem2 backend from the build host) |
 | from the control reactor | `mvn -f m3/pom.xml -pl optane package` |
 | JMOD / jlink verifier | `bash m3/optane/verify.sh` (Linux x86_64; `M3_OPTANE_NO_NATIVE=1` for Java only; `M3_OPTANE_BUILD` selects the output) or `mvn -Pm3-optane-jmod -f m3/optane/pom.xml verify` |
 | differential | `bash m3/optane/recipe/pmem-region-core-20261106/differential.sh <donor clone> <donor rev> <scratch> [operations]` after `package` |
-| native matrix (Linux) | `bash m3/optane/recipe/pmem-region-core-20261106/native-matrix.sh jdk.m3.optane M3 jdk.m3.optane src/jdk.m3.io/share/native/libm3optane/m3pmemsdk.c test/jdk/jdk/m3/optane/native/M3PmemKmpPrefix32Oracle.c <scratch> <operations> <the ten owners> <PmemAtomCases> <PmemDump>` |
+| native matrix (Linux) | `bash m3/optane/recipe/pmem-region-core-20261106/native-matrix.sh jdk.m3.optane M3 jdk.m3.optane m3/optane/src/main/native/m3pmemsdk.c m3/optane/src/test/native/M3PmemKmpPrefix32Oracle.c <scratch> <operations> <the ten owners> <PmemAtomCases> <PmemDump>` |
 | all Java gates | `bash m3/optane/recipe/pmem-region-core-20261106/verify.sh <donor clone> <donor rev> <scratch>` |
 
 ```java
@@ -110,7 +110,7 @@ try (PmemRegion model = PmemSdk.open(Path.of("/pmem/models/weights.bin"), 0, 819
 
 Consumers depend on `com.m3:m3-optane` and `requires org.m3jdk.optane;`. The libraries are optional:
 `System.loadLibrary("m3optane")` / `System.loadLibrary("m3pmemsdk")` at class initialization, `java.library.path`
-names their directory. `M3_JDK=/path/to/a/complete/matched/M3JDK21` selects the product JDK for `verify.sh`; stock
+names their directory. `M3JDK=/path/to/a/complete/matched/M3JDK21` selects the product JDK for `verify.sh`; stock
 Java 21 software tests do not prove a source-built M3JDK image.
 
 ## Existing owners retained; next integration gates
