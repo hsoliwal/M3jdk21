@@ -251,7 +251,6 @@ ROOT	m3/migration/original-provider-20261017/sdk	REAL
 ROOT	m3/migration/rx7-codec-cap-20261018/sdk	REAL
 ROOT	m3/mop	LOOSE
 ROOT	m3/native	REAL
-ROOT	m3/optane	REAL
 ROOT	m3/ports/capability-runtime	REAL
 ROOT	m3/ports/collections	REAL
 ROOT	m3/ports/compiletime	REAL
@@ -1020,7 +1019,6 @@ PACKAGE	jdk.m3.llm.projection
 PACKAGE	jdk.m3.llm.summary
 PACKAGE	jdk.m3.mop
 PACKAGE	jdk.m3.nlpsearch
-PACKAGE	jdk.m3.optane
 PACKAGE	jdk.m3.parallel
 PACKAGE	jdk.m3.parallel.bulk
 PACKAGE	jdk.m3.parallel.spi
