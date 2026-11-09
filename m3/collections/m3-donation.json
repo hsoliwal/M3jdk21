@@ -1128,7 +1128,7 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "master_source_successor_20261031",
+  "source_set_successor_current": "module_source_successor_20261109",
   "tools4j_unix_refinement_20261019": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
@@ -1140,7 +1140,7 @@
       "pinned_master_sha256",
       "final_received_sha256"
     ],
-    "inherited_composed_manifest_sha256": "104bd2f6582f4ce496ff13524a7a8f33e7f4c10fb18981ae9e3229c6da5ba7b9",
+    "inherited_composed_manifest_sha256": "f390043a4b1522e78b734b2aaf845d2c4276087fc1991138a655f29b122ca6a5",
     "inherited_rows": 113,
     "successor_rows": 418,
     "resulting_rows": 510,
@@ -1163,6 +1163,29 @@
     "review_scope": "Inventory reconciliation is not algorithm review of all503 Java files. Source refinements and their individual canonical recipes/gates remain separately recorded in the target handoff.",
     "phase_advance": false
   },
+  "module_source_successor_20261109": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V2",
+    "successor_receipt": "qualification/module-source-successor-20261109.tsv",
+    "successor_receipt_sha256": "81d3d1c2afb228a6b95a80e67ac626036769aa6502cd1e8e762c0eee160494c7",
+    "receipt_columns": [
+      "path",
+      "inherited_sha256",
+      "final_received_sha256_or_REMOVED"
+    ],
+    "inherited_composed_manifest_sha256": "860b9552b6d9e13ec46b6634ce1a6bf759f75f71aee1604533bb3e8c4d770e44",
+    "inherited_rows": 774,
+    "successor_rows": 2485,
+    "refined_rows": 26,
+    "added_rows": 1724,
+    "removed_rows": 735,
+    "resulting_rows": 1763,
+    "exact_java_source_membership": 1759,
+    "predecessor_successor": "master_source_successor_20261031",
+    "origin": "master after the JDK module move #2849: sources absorbed, renamed and moved since the master seal; recorded keys stay in the m3/collections/src key space (verify_donation.py located/recorded)",
+    "chain_repins": "JDK_NAMING_RESEAL caf39c93e4c left the Tools4j, Superset and Master predecessor pins stale; derived by replaying the sealed chain",
+    "recipe": "m3/collections/qualification/module-source-successor-20261109.py",
+    "phase_advance": false
+  },
   "master_source_successor_20261031": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "successor_receipt": "qualification/master-source-successor-20261031.tsv",
@@ -1172,7 +1195,7 @@
       "inherited_sha256",
       "final_received_sha256"
     ],
-    "inherited_composed_manifest_sha256": "4950b0c157284d73ffe3410d8356aa8a22c81c0e2dbcc865a5784e8fd610ab2c",
+    "inherited_composed_manifest_sha256": "0fdc2fdfcc553ac60118bfc541c3c5c0eeffea2d293f15709b0982a4b3d29e2e",
     "inherited_rows": 772,
     "successor_rows": 10,
     "refined_rows": 8,
@@ -1193,7 +1216,7 @@
       "inherited_sha256",
       "final_received_sha256"
     ],
-    "inherited_composed_manifest_sha256": "6283ee8df10e7d2e4b2a0d47635ef57775fb476c1cae9545cfe1692fa59c176e",
+    "inherited_composed_manifest_sha256": "e76d7c11d6258711d18e10b1d448400a83c987fa59683ee9fd087bbeaf7387e2",
     "inherited_rows": 510,
     "successor_rows": 428,
     "refined_rows": 166,
