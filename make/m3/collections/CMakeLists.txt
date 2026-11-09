@@ -95,7 +95,8 @@ m3_collections_jni(m3_collections_statehist SOURCES collections/m3_state_mask_hi
   CLASSES jdk.internal.m3.collections.sketch.StateMaskHistogram)
 # IndexMaskWindow loads nothing itself: it calls its natives once IndexMaskCompactor reports m3_collections_mask
 # loaded, so its C joins that library.
-m3_collections_jni(m3_collections_mask SOURCES collections/m3_index_mask_compactor.c collections/m3_index_mask_window.c
+m3_collections_jni(m3_collections_mask
+  SOURCES collections/m3_index_mask_compactor.c collections/m3_index_mask_window.c collections/m3_index_mask_search.c
   CLASSES jdk.m3.collections.IndexMaskCompactor jdk.m3.collections.IndexMaskWindow)
 m3_collections_jni(m3_collections_pathmask SOURCES collections/m3_index_path_masks.c
   CLASSES jdk.m3.collections.IndexPathMasks)
