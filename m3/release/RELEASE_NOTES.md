@@ -70,6 +70,18 @@ retain their original source pins and cannot fill these current-source rows.
 | `STRING_UTF16_CONTRACT` | no workflow job or command is bound to this gate yet |
 | `M3_CHANGED_ATOM_COVERAGE` | **PENDING** — instrumented, source-hash-checked >=90% line and branch coverage of changed contract-bearing M3 atoms, with complete inventory and raw report hashes; does not assert whole-JDK coverage |
 
+### Integration candidate `1528a255c477` (2026-11-09)
+
+This candidate is `master` `e8e1e837a640` plus the open fix PRs, in tree `59ea4931c1c4`.
+- PASS (7 gates): rights, source, foundation, precompute Java and JNI, claims, proof pack.
+- FAIL: OpenJDK sanity, which is linux-x64 only, with tier1 subset 91/92 and gtest not built.
+- FAIL: STRING_UTF16. All upstream String modes pass except one `-Xint` timeout, and stock 21+35 is also over 30 min on that test.
+- FAIL: changed-atom coverage.
+- PENDING: the Maven control reactor (#2905).
+- The source-built image now builds with javac warnings fatal and doclint on.
+
+Admission remains **HOLD**; details are in [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md#2026-11-09-integration-candidate).
+
 ### Measured on candidate `fe51a3c9ff2f` (2026-11-09)
 
 The candidate is one commit over `890adb6410da` with the tree of `master` `809625db76e9` (`30651922a8b3`). It was measured locally on Windows 11 with WSL2 Ubuntu 24.04, x86_64; GitHub Actions runs were queued. Release admission is **HOLD**. The full table, log names and owner actions are in [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md#2026-11-09-measured-candidate).
@@ -106,6 +118,20 @@ Recompute build, test and coverage evidence against the final candidate commit a
 | C11 JNI contract (windows-2022, ubuntu-24.04, ubuntu-24.04-arm, macos-15, macos-15-intel) | `m3-jni-common.yml` | run 41019153845: all jobs success | header contract only |
 
 ## Known issues
+
+- **M3Object observation API: internal, pending user admission as public API.** `java.lang.M3Object`
+  (with `M3Object.Field`), `ObjectEvent`, `ObjectSubscription` and `ObjectChangeListener` are
+  package-private once #2910 lands. `Object.toAdapter` keeps its capability case, and its public
+  Javadoc no longer names the type.
+- **Experimental `-XX:+UseM3StringStorage` (off by default; String backed by M3 is NOT_CLAIMED).**
+  - Measured 2026-11-09, upstream `java/lang/String` jtreg with the flag: 83 of 88 pass.
+  - Correctness fixes are open: #2904 (null concat operand), #2911 (String length limit
+    `OutOfMemoryError`) and #2912 (racy `char[]`/`int[]` constructors).
+  - Known performance limitation: search reads one code unit at a time
+    (`M3StringSearchPrecompute` -> `CodeUnitCursor.at` -> `M3StringAtom.unitAt`).
+    `M3FlatNeedleGateTest` takes 19.6 s in default mode but exceeds its 480 s timeout with the
+    flag, more than 24x slower. Upstream `LiteralReplace`, `StringRepeat#id1` and
+    `UnicodeCasingTest` time out with the flag (480 s, 480 s and 800 s).
 
 - **Source-built JDK image (measured 2026-11-09):** `make images` on the candidate stops in
   `java.base`. The build compiles with `-encoding ascii`, and 53 M3 Java sources contain

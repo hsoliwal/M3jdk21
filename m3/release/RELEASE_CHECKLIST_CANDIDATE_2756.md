@@ -18,6 +18,7 @@ state the present coverage and pending product gates.
 | Upstream baseline in current contract | `890adb6410dab4606a4f26a942aed02fb2f55387` |
 | Preparation baseline | `b9cc756f726de31af10652b5583d9bba58ba27b2` |
 | Final candidate commit and tree | Record actual received source identity; never substitute the preparation baseline |
+| Integration candidate (2026-11-09) | `1528a255c477` on `release-candidate/m3jdk-21.0.14-m3.1-preview-integration-e14d2c9b`; tree `59ea4931c1c4` = `master` `e8e1e837a640` + the open fix PRs; 7 of 11 gates PASS; admission **HOLD**, see [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md#2026-11-09-integration-candidate) |
 | Measured candidate (2026-11-09) | `fe51a3c9ff2f09140be4348e24caa0b8bd9fd18c` on `release-candidate/m3jdk-21.0.14-m3.1-preview-809625db`; tree `30651922a8b3c8b7f80cb89dc04fc5ab5069f50d` = `master` `809625db76e9`; one commit over the baseline, dated 2026-11-09 (cut date). Admission: **HOLD**, see [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md#2026-11-09-measured-candidate) |
 
 Use an isolated full checkout of the final receiving commit. Record `git rev-parse

@@ -84,6 +84,43 @@ counts are not execution totals. For a release attempt invoke the admission
 verifier with `--release` and a complete exact-source evidence manifest as
 documented in [the release pack](README.md).
 
+## 2026-11-09 integration candidate
+
+**Result: release admission HOLD; it moved from 6 to 7 passing gates.** `verify_release_admission.py --release` on the integration candidate reports `policy_valid: false` and `release_ready: false`.
+- Gates: 7 PASS, 3 recorded FAIL (`OPENJDK_SANITY_MATRIX`, `STRING_UTF16_CONTRACT`, `M3_CHANGED_ATOM_COVERAGE`), 1 PENDING (`M3_MAVEN_CONTROL_REACTOR`).
+- Policy: `standalone.no_external_repo_dependency` BLOCK; `legacy_recipe_custody` HOLD. `name_queue` now passes.
+- Pack hashes (sha256): `admission-release.json` `3bcd3b03fcf7`, `evidence.json` `644cd89ab2b9`, `SHA256SUMS` `7a60adeea1a8`.
+
+| Item | Value |
+| --- | --- |
+| Integration candidate | `1528a255c4773a54d9d89f7448690113e8559f9e` on `release-candidate/m3jdk-21.0.14-m3.1-preview-integration-e14d2c9b`: one commit on `890adb6410da`, dated 2026-11-09 |
+| Tree | `59ea4931c1c4f5f3782294c74552ad1e3d5fd18f` = `m3/integration-20261109` head `e14d2c9b39c7` |
+| Integration content | `master` `e8e1e837a640` plus #2893, #2897, #2899, #2901, #2904, #2906, #2907, #2910 (first commit), #2909 and #2903 (DOC_BANNER_OPENER v1.1 rerun last); #2905 excluded (policy, user review) |
+| Final cut | follows the user's merges; this candidate binds only its tree |
+| Evidence pack | `F:/m3-scratch/m3jdk-release-20261109/integration/` |
+
+| Gate | Status | Evidence |
+| --- | --- | --- |
+| `RIGHTS_AND_LICENSE_BOUNDARY` | PASS | `logs/policy/RIGHTS_AND_LICENSE_BOUNDARY.json` |
+| `SOURCE_TREE_AND_UPSTREAM_BASELINE` | PASS: single commit, clean, merge base `890adb6410da`; build tree hashes to `59ea4931` | `logs/policy/SOURCE_TREE_AND_UPSTREAM_BASELINE.json` |
+| `OPENJDK_SANITY_MATRIX` | **FAIL** (linux-x64 only). The source-built image now builds with javac warnings fatal and doclint on. jtreg tier1 subset 91/92: the one failure, `M3RegexShortCircuitTest`, is a stale white-box test, fixed in #2914 and passing on this image. hs `tier1_common` 1/1 non-gtest; the 8 gtest wrappers are ENVIRONMENT_NOT_BUILT (no `--with-gtest`). The multi-platform matrix was not run | `logs/jdk-make-integration3-images.log`, `logs/jtreg-int/tier1-subset*`, `logs/jtreg-int/hs-tier1-common*` |
+| `M3_FOUNDATION_TESTS` | PASS: `build.sh`, the extra contracts in 4 VM modes, `check-m3.py` and `verify-shared-mapping.py` | `logs/foundation-*.log` |
+| `PRECOMPUTE_JAVA_DIFFERENTIAL` | PASS | `logs/precompute-java.log` |
+| `PRECOMPUTE_JNI_NATIVE_PARITY` | PASS: precompute `-Pnative`, word-row JNI in 4 modes, collections native and default suites | `logs/precompute-native.log`, `logs/collections-*.log` |
+| `M3_MAVEN_CONTROL_REACTOR` | **PENDING/HOLD**: policy conflict; #2905 is waiting for user review | - |
+| `STRING_UTF16_CONTRACT` | **FAIL** (one timeout). Upstream `java/lang/String` with Character/StringBuilder/StringBuffer passes in default mode; `-XX:-CompactStrings` and C2-only pass. Under `-Xint`, 87/88: `UnicodeCasingTest` exceeds its 800 s timeout, and stock Temurin 21+35 under `-Xint` also runs past 30 minutes on that test | `logs/jtreg-int/utf16-*` |
+| `M3_CHANGED_ATOM_COVERAGE` | **FAIL**: below 90%; no reviewed inventory | `logs/coverage/jacoco.xml` |
+| `RELEASE_CLAIMS_VALIDATION` | PASS | `logs/policy/RELEASE_CLAIMS_VALIDATION.json` |
+| `PROOF_PACK_SHA256` | PASS: 2279 files, 0 mismatches | `SHA256SUMS` |
+
+Other results on this candidate:
+- Release tooling tests: 149 run, OK.
+- Name-contract tests: 121 run, OK; `check.py` and `audit.py --strict` PASS.
+- M3 String/Object jtreg on the image: all 10 M3Object tests pass once the #2910 test follow-up is applied.
+- `M3CanonicalApiBoundaryTest` now flags `jdk.internal.misc.M3ObjectMemory`.
+- Remaining M3 String white-box failures relate to the immediate-string owner and the pool (see #2910 and the triage notes).
+- Experimental `-XX:+UseM3StringStorage`: upstream String passes 83/88. #2911 and #2912 fix the two correctness failures; the three timeouts are recorded in the release notes.
+
 ## 2026-11-09 measured candidate
 
 **Result: release admission HOLD.** `verify_release_admission.py --release` against the evidence manifest reports `policy_valid: false` and `release_ready: false`. Exit 1. Of the 11 mandatory gates, 6 PASS with hash-verified artifacts, 3 have recorded FAIL receipts (`OPENJDK_SANITY_MATRIX`, `M3_FOUNDATION_TESTS`, `M3_CHANGED_ATOM_COVERAGE`) and 2 are PENDING without a receipt (`M3_MAVEN_CONTROL_REACTOR`, `STRING_UTF16_CONTRACT`). Policy BLOCKs: `name_queue` and `standalone.no_external_repo_dependency`; `legacy_recipe_custody` is HOLD; `git.single_release_commit` passes. Pack hashes (sha256): `admission-release.json` `319d92b73d95`, `evidence.json` `08f4a9cc0f07`, `SHA256SUMS` `1b99dc685364`.
