@@ -295,7 +295,7 @@ public enum PrimitiveKind {
     }
 
     /** Checked logical size, evaluated before allocation or mutation. */
-    static int checkedSize(int size, int extra) {
+    public static int checkedSize(int size, int extra) {
         if (size < 0 || extra < 0 || extra > Integer.MAX_VALUE - size) {
             throw new OutOfMemoryError("required primitive array size exceeds int range");
         }
@@ -303,7 +303,7 @@ public enum PrimitiveKind {
     }
 
     /** Preserves 1.5x-plus-one growth without signed overflow. */
-    static int grownCapacity(int current, int required) {
+    public static int grownCapacity(int current, int required) {
         if (current < 0 || required < 0) throw new IllegalArgumentException("negative capacity");
         if (required <= current) return current;
         long grown = (long) current + (current >>> 1) + 1;
