@@ -1,0 +1,5 @@
+PLACEHOLDER_FORMAT_DIFFERENTIAL seed 1 cases 20238 mismatches 0
+PLACEHOLDER_FORMAT_DIFFERENTIAL seed 2 cases 20238 mismatches 0
+PLACEHOLDER_FORMAT_DIFFERENTIAL seed 3 cases 20238 mismatches 0
+oracle: org.slf4j.helpers.MessageFormatter.arrayFormat (slf4j-api 2.0.17), qualification-time only
+mutant (doubled-backslash rule disabled): 8 mismatches -> caught

@@ -1021,6 +1021,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/PairSequence.java	ABSEN
 m3/collections/src/main/java/jdk/internal/m3/collections/PassMetrics.java	ABSENT	1a5c770e60b1d21a63ede002a6c040ef7aecdd15afeea70e41202794bbc5a0d2
 m3/collections/src/main/java/jdk/internal/m3/collections/Patch.java	ABSENT	ecd935809bcedc410f71943fac0d5a0dee8db6a6256d7a569b6d5682b3ade507
 m3/collections/src/main/java/jdk/internal/m3/collections/PatriciaTrie.java	ABSENT	cfd216bf1fcb6b61dab47b39490e000d80bae97c49c34a1731a02869b783f6d9
+m3/collections/src/main/java/jdk/internal/m3/collections/PlaceholderLogger.java	ABSENT	65314cdd349990175dd3a59bebe67d1f5b576465f7743d8707bf92964dba0043
 m3/collections/src/main/java/jdk/internal/m3/collections/PoolIds.java	ABSENT	a661e4dbd98f5a74ec162b76740c90bb8d4eced7eb9ee794ea82b84416de0aee
 m3/collections/src/main/java/jdk/internal/m3/collections/PoolProgressMonitor.java	ABSENT	117b923157e9819502f8db1c116ee70fb1e984b3ed4a47d36bbb9f6012cba31c
 m3/collections/src/main/java/jdk/internal/m3/collections/PositionMarkedSelection.java	ABSENT	7366095cabfdaabfe2eebc2ffac41b892778d21884b0a044b5551122d0fd6ff5
@@ -1932,6 +1933,7 @@ m3/collections/src/test/java/jdk/internal/m3/collections/PagedArrayBackingReuseT
 m3/collections/src/test/java/jdk/internal/m3/collections/PagedArrayResidencyTest.java	ABSENT	a09cf6fac2f216bb1e8d2b800af915b6ac96af0a61c5217029afefaa8afc357d
 m3/collections/src/test/java/jdk/internal/m3/collections/ParentHandleClosureProof.java	ABSENT	7e946308a2206fd5a8b9fa87519625695ae42df7e0e5ddf0c710adccd16e2a17
 m3/collections/src/test/java/jdk/internal/m3/collections/PatchApplyRunsContract.java	ABSENT	05bc76c97e5547cb64691922104b21dcc81118fb4c5160afb1adcc56271ffe67
+m3/collections/src/test/java/jdk/internal/m3/collections/PlaceholderLoggerTest.java	ABSENT	b7396a5c12ed969bb3ecfcfe7b4de469b25fb95bc11f4fb7957fe5d8c3b4428c
 m3/collections/src/test/java/jdk/internal/m3/collections/PressurePolicyTest.java	ABSENT	409f5b8f98ca676094ff231aa86027d4b52f40c7ebe37062513f798288c800d3
 m3/collections/src/test/java/jdk/internal/m3/collections/PrimitiveConcurrentBooleanQueueTest.java	ABSENT	0e8bdd5397f465203d32ebe371c401e5e401cc8c3423dcefb95b2a610c994c90
 m3/collections/src/test/java/jdk/internal/m3/collections/PrimitiveGraphKernelsTest.java	ABSENT	74b45b9f787f3e099cc941675203311e86a4be392fb6a1fb6e41d973d923836b
