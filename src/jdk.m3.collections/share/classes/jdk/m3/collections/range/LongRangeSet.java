@@ -17,6 +17,7 @@ package jdk.m3.collections.range;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import jdk.internal.m3.collections.LaneSearch;
 import jdk.m3.collections.IndexPathMasks;
@@ -54,6 +55,11 @@ public final class LongRangeSet {
     public boolean isEmpty() { return size == 0; }
 
     public int capacity() { return starts.length; }
+
+    /** Returns the payload size of both lanes in bytes (Synexia primitives LongRangeSet). */
+    public long payloadBytes() {
+        return (long) starts.length * Long.BYTES + (long) ends.length * Long.BYTES;
+    }
 
     private static void valid(long from, long to) {
         if (from > to) throw new IllegalArgumentException("fromInclusive > toExclusive");
@@ -253,6 +259,72 @@ public final class LongRangeSet {
         result.size = selected.length;
         return result;
     }
+
+    // API_UNION U6 (2026-11-09): members of Synexia primitives LongRangeSet, on the M3 lanes and conventions.
+
+    /** Adds every range of {@code source}; {@code source} may be this set. */
+    public void addAll(LongRangeSet source) {
+        Objects.requireNonNull(source, "source");
+        long[] sourceStarts = source.starts;
+        long[] sourceEnds = source.ends;
+        int count = source.size;
+        for (int i = 0; i < count; i++) {
+            add(sourceStarts[i], sourceEnds[i]);
+        }
+    }
+
+    /** Returns whether one stored range contains all of [fromInclusive, toExclusive); an empty query is covered. */
+    public boolean covers(long fromInclusive, long toExclusive) {
+        valid(fromInclusive, toExclusive);
+        if (fromInclusive == toExclusive) return true;
+        int index = firstEndingAfter(fromInclusive);
+        return index < size && starts[index] <= fromInclusive && ends[index] >= toExclusive;
+    }
+
+    /**
+     * Copies the range containing {@code point} into {@code output[offset]} (start) and {@code output[offset + 1]}
+     * (exclusive end). Returns false on a miss and leaves the buffer unchanged.
+     */
+    public boolean copyRangeContaining(long point, long[] output, int offset) {
+        Objects.requireNonNull(output, "output");
+        Objects.checkFromIndexSize(offset, 2, output.length);
+        int index = firstEndingAfter(point);
+        if (index >= size || starts[index] > point) return false;
+        output[offset] = starts[index];
+        output[offset + 1] = ends[index];
+        return true;
+    }
+
+    /** Returns the start of the minimal enclosing span; throws NoSuchElementException when empty. */
+    public long spanStart() {
+        if (size == 0) throw new NoSuchElementException();
+        return starts[0];
+    }
+
+    /** Returns the exclusive end of the minimal enclosing span; throws NoSuchElementException when empty. */
+    public long spanEnd() {
+        if (size == 0) throw new NoSuchElementException();
+        return ends[size - 1];
+    }
+
+    /** Returns the start of range {@code index}. */
+    public long startAt(int index) {
+        return starts[Objects.checkIndex(index, size)];
+    }
+
+    /** Returns the exclusive end of range {@code index}. */
+    public long endAt(int index) {
+        return ends[Objects.checkIndex(index, size)];
+    }
+
+    /** Synexia name of {@link #startsToArray()}. */
+    public long[] startsArray() { return startsToArray(); }
+
+    /** Synexia name of {@link #endsToArray()}. */
+    public long[] endsArray() { return endsToArray(); }
+
+    /** Synexia name of {@link #forEachRange(LongLongConsumer)}. */
+    public void forEach(LongLongConsumer consumer) { forEachRange(consumer); }
 
     public void clear() {
         if (size == 0) return;

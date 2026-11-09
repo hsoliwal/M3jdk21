@@ -1740,7 +1740,7 @@ m3/collections/src/main/java/jdk/m3/collections/range/LongLazySegmentTree.java	A
 m3/collections/src/main/java/jdk/m3/collections/range/LongLiChaoTree.java	ABSENT	ff9a68305399eef9da38218f5535c665118849a6f3b172bda2e70c1f24bdef1f
 m3/collections/src/main/java/jdk/m3/collections/range/LongMonoidSegmentTree.java	ABSENT	8c94ca48fefe9ab9f2a399562021a568ac8e85d541de0cdfff3e29781d171eb0
 m3/collections/src/main/java/jdk/m3/collections/range/LongRangeAction.java	ABSENT	448ced2107da37b50cb0a6a4e3b8e3974b65bb92b00d8c83a69c00ab19653532
-m3/collections/src/main/java/jdk/m3/collections/range/LongRangeSet.java	ABSENT	2a57e315eeeb8d7bbfe06bdd408b46640a66ba71ef93ccdddb103334d235143f
+m3/collections/src/main/java/jdk/m3/collections/range/LongRangeSet.java	ABSENT	b1ddb4e45bdcabb97a956fc93e543fe09a6541c039ae566b62b21fed5e8faf4f
 m3/collections/src/main/java/jdk/m3/collections/range/LongSegmentTree.java	ABSENT	9e4a4441e3597702fc7737370498df9eedd30c137478c9f302fc70e2762700ec
 m3/collections/src/main/java/jdk/m3/collections/range/LongSparseTable.java	ABSENT	b73a83a28b275f1cd31e9237c283969ecd70da32d8765a3d94b1e7a902b2bae0
 m3/collections/src/main/java/jdk/m3/collections/range/PersistentLongSumTree.java	ABSENT	85ab8f992b39d4fb16060d14d75a829b6f3b45ae099dc03012c867e1947d7df2
@@ -2529,3 +2529,4 @@ m3/collections/src/test/java/jdk/m3/collections/ZeroMaskSuccessorIT.java	ABSENT	
 m3/collections/src/test/java/jdk/m3/collections/ZeroMaskSuccessorTest.java	ABSENT	afcbe6c3bf12f134d15205692615a30e47bb6e311c2744c90d88959d7d522e4e
 m3/collections/src/test/java/jdk/m3/collections/ZeroSlotCapacityContract.java	ABSENT	eaff62eb52fe34942c4c8731fb6228f56f3df5503384112b32cd42e4ec06582c
 m3/collections/src/test/java/jdk/m3/collections/ZeroSlotCapacityTest.java	ABSENT	3d5121ff3c9035fc4e15d2f1412c3f4011729a05d63d38c33252d483aba8d2f2
+m3/collections/src/test/java/jdk/m3/collections/range/LongRangeSetUnionTest.java	ABSENT	4c919e54a2e89377293f28b7f03b9754ceb7431c95668cbf1a4cb1023ccf81e3
