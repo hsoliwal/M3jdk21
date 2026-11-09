@@ -1,0 +1,3 @@
+# replay_checksums.py on the checksum files of master cb47341101b0 (CHECKSUMS_TO_JDK v1 landed) with DONOR_OVERLAY v1
+{"changed": [], "fixed_point": true, "mode": "check", "recipe": "CHECKSUMS_TO_JDK v1"}
+exit 0

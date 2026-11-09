@@ -4,8 +4,8 @@
   <groupId>org.hdrhistogram</groupId>
   <artifactId>HdrHistogram</artifactId>
   <version>2.1.12-m3-source-1</version>
-  <name>HdrHistogram 2.1.12 - unchanged upstream source build for M3jdk21</name>
-  <description>Source inclusion of the published org.hdrhistogram:HdrHistogram:2.1.12 sources jar (SHA-1 d8cf7bad79ef75fd41395c5f464ea38777463d95); no upstream implementation changes. See PROVENANCE.json.</description>
+  <name>HdrHistogram 2.1.12 - upstream source build for M3jdk21, base64 by java.base</name>
+  <description>Source inclusion of the published org.hdrhistogram:HdrHistogram:2.1.12 sources jar (SHA-1 d8cf7bad79ef75fd41395c5f464ea38777463d95); one M3 overlay, BASE64_TO_JDK v1: Base64Helper calls java.util.Base64 directly instead of finding it by reflection. See PROVENANCE.json and OVERLAY_SOURCES.json.</description>
   <url>http://hdrhistogram.github.io/HdrHistogram/</url>
   <licenses>
     <license>
