@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import jdk.internal.m3.collections.PackedLongLongOrderedMap;
-import jdk.internal.m3.collections.bits.SegmentedBitLane28;
+import jdk.m3.collections.BitLane28;
 import jdk.internal.m3.collections.packed.PackedLongCompactHashSet;
 import jdk.internal.m3.collections.packed.PackedLongHashSet;
 import jdk.internal.m3.collections.packed.PackedLongHeap;
@@ -180,7 +180,7 @@ final class StandardCollectionCatalog {
         lane(providers, "lane.int-28", CollectionFamilies.INT_LANE_28, 16384,
                 r -> new SegmentedIntLane28());
         lane(providers, "lane.bit-28", CollectionFamilies.BIT_LANE_28, 512,
-                r -> new SegmentedBitLane28());
+                r -> new BitLane28());
         SpecializedCollectionCatalog.addTo(providers);
         return new FuzzyCollectionFactory(providers);
     }

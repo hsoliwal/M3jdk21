@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import jdk.internal.m3.collections.bits.SegmentedBitLane28;
+import jdk.m3.collections.BitLane28;
 import jdk.internal.m3.collections.packed.PackedArrayNative;
 import jdk.internal.m3.collections.packed.PackedPrimitiveArrayOps;
 import jdk.internal.m3.collections.range.SegmentedAddress28;
@@ -130,7 +130,7 @@ final class ArrayStorageNativeContractTest {
     }
 
     @Test void nativeBitmapAgreesWithWarmCountsAfterMutations() {
-        var bits = new SegmentedBitLane28(); Random random = new Random(75);
+        var bits = new BitLane28(); Random random = new Random(75);
         for (int pass = 0; pass < 1500; pass++) {
             bits.flip(random.nextInt((2 << 20) + 77)); bits.rank(1234567);
             if (pass % 17 == 0) {

@@ -14,7 +14,7 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.range;
 
-import jdk.internal.m3.collections.bits.SegmentedBitLane28;
+import jdk.m3.collections.BitLane28;
 import jdk.m3.collections.ConcurrentIntLane28;
 import jdk.m3.collections.ConcurrentLongLane28;
 
@@ -44,8 +44,8 @@ public final class LeanSegmentedCollections {
         return new SegmentedShortLane28();
     }
 
-    public static SegmentedBitLane28 bitLane() {
-        return new SegmentedBitLane28();
+    public static BitLane28 bitLane() {
+        return new BitLane28();
     }
 
     public static SegmentedSlotAllocator28 stableSlots() {
