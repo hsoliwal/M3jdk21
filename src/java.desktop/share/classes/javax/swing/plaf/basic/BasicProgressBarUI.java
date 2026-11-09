@@ -63,6 +63,15 @@ public class BasicProgressBarUI extends ProgressBarUI {
     protected ChangeListener changeListener;
     private Handler handler;
 
+    /*
+     * True while the indeterminate animation waits because nobody can see the
+     * bar (not showing, or its frame iconified): the timer is stopped and the
+     * Handler restarts it when the bar shows, or deiconify does on the frame.
+     */
+    private boolean animationParked;
+    private Window parkedWindow;
+    private WindowStateListener deiconify;
+
     /**
      * The current state of the indeterminate animation's cycle.
      * 0, the initial value, means paint the first frame.
@@ -259,6 +268,7 @@ public class BasicProgressBarUI extends ProgressBarUI {
      * Removes all listeners installed by this object.
      */
     protected void uninstallListeners() {
+        unparkAnimation();
         progressBar.removeChangeListener(changeListener);
         progressBar.removePropertyChangeListener(getHandler());
         handler = null;
@@ -1195,6 +1205,61 @@ public class BasicProgressBarUI extends ProgressBarUI {
         componentInnards = oldComponentInnards = null;
 
         progressBar.removeHierarchyListener(getHandler());
+        unparkAnimation();
+    }
+
+    /*
+     * Rule 24: a tick for a bar nobody can see draws no frame. It stops the
+     * animation and parks it; returns true when parked.
+     */
+    private boolean parkAnimation() {
+        Window window = SwingUtilities.getWindowAncestor(progressBar);
+        boolean iconified = isIconified(window);
+        if (progressBar.isShowing() && !iconified) {
+            return false;
+        }
+        animationParked = true; //FLLDCIM: MARK — every-widget JProgressBar H
+        stopAnimationTimer();
+        if (iconified && parkedWindow != window) {
+            unwatchWindow();
+            parkedWindow = window;
+            deiconify = e -> resumeAnimation();
+            window.addWindowStateListener(deiconify);
+        }
+        return true;
+    }
+
+    /* A parked animation runs again once the bar can be seen. */
+    private void resumeAnimation() {
+        if (animationParked && progressBar != null && progressBar.isIndeterminate()
+                && progressBar.isShowing()
+                && !isAncestorIconified()) {
+            animationParked = false;
+            unwatchWindow();
+            startAnimationTimer();
+        }
+    }
+
+    private boolean isAncestorIconified() {
+        return isIconified(SwingUtilities.getWindowAncestor(progressBar));
+    }
+
+    private static boolean isIconified(Window window) {
+        return window instanceof Frame frame
+                && (frame.getExtendedState() & Frame.ICONIFIED) != 0;
+    }
+
+    private void unparkAnimation() {
+        animationParked = false;
+        unwatchWindow();
+    }
+
+    private void unwatchWindow() {
+        if (parkedWindow != null) {
+            parkedWindow.removeWindowStateListener(deiconify);
+            parkedWindow = null;
+            deiconify = null;
+        }
     }
 
     // Called from initIndeterminateValues to initialize the animation index.
@@ -1261,6 +1326,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
          * Reacts to the timer's action events.
          */
         public void actionPerformed(ActionEvent e) {
+            if (parkAnimation()) {
+                return;
+            }
             if (ADJUSTTIMER) {
                 long time = System.currentTimeMillis();
 
@@ -1344,6 +1412,9 @@ public class BasicProgressBarUI extends ProgressBarUI {
 
         // we don't want the animation to keep running if we're not displayable
         public void hierarchyChanged(HierarchyEvent he) {
+            if ((he.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
+                resumeAnimation();
+            }
             if ((he.getChangeFlags() & HierarchyEvent.DISPLAYABILITY_CHANGED) != 0) {
                 if (progressBar.isIndeterminate()) {
                     if (progressBar.isDisplayable()) {
