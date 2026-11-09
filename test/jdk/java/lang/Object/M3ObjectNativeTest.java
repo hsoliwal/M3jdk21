@@ -85,7 +85,9 @@ public class M3ObjectNativeTest {
     private static native int mutateMany(byte[] source, int count);
 
     public static void main(String[] args) throws Exception {
-        System.loadLibrary("M3ObjectNativeTest");
+        // Boot-layer test class: System.loadLibrary would search sun.boot.library.path.
+        System.load(java.nio.file.Path.of(System.getProperty("java.library.path"),
+                System.mapLibraryName("M3ObjectNativeTest")).toString());
         boolean enabled = args.length == 1 && args[0].equals("enabled");
         check(M3Object.observationEnabled() == enabled, "startup observation setting");
         validateNativeArguments();

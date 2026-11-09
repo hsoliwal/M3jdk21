@@ -7,9 +7,12 @@
  * @test
  * @summary Weak bounded M3Object plans, pressure and adaptation identity
  * @modules java.base/java.lang
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xmx128m M3ObjectPressureCacheTest
- * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -Xint -Xmx128m M3ObjectPressureCacheTest
+ * @compile --patch-module java.base=${test.src} --add-reads java.base=ALL-UNNAMED M3ObjectPressureCacheTest.java
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Xmx128m java.lang.M3ObjectPressureCacheTest
+ * @run main/othervm --patch-module java.base=${test.classes} --add-reads java.base=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Xint -Xmx128m java.lang.M3ObjectPressureCacheTest
  */
+package java.lang;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

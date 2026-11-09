@@ -25,7 +25,9 @@ public final class M3ObjectCacheNativeStressTest {
     }
 
     public static void main(String[] args) throws Exception {
-        System.loadLibrary("M3ObjectCacheNativeStressTest");
+        // Boot-layer test class: System.loadLibrary would search sun.boot.library.path.
+        System.load(java.nio.file.Path.of(System.getProperty("java.library.path"),
+                System.mapLibraryName("M3ObjectCacheNativeStressTest")).toString());
         boolean enabled = args.length == 1 && "enabled".equals(args[0]);
         check(M3Object.observationEnabled() == enabled, "startup observation policy");
 
