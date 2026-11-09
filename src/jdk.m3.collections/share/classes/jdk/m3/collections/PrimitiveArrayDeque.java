@@ -335,4 +335,262 @@ public final class PrimitiveArrayDeque {
     private static int dec(int index, int capacity) {
         return index == 0 ? capacity - 1 : index - 1;
     }
+
+    // API_UNION U5 (2026-11-09): Synexia primitives PrimitiveArrayDeque.Big, the segmented long-capacity variant,
+    // ported unchanged; its storage is BigArray (the received PrimitiveBigArray).
+    /**
+     * Creates an empty long-capacity deque using lazily resident fixed primitive pages.
+     * Existing int-capacity constructors and methods keep their original implementation.
+     * Zero initial capacity reserves one logical lane without allocating a payload page.
+     *
+     * @throws NullPointerException when kind is null
+     * @throws IllegalArgumentException when capacity is negative or segmentShift is outside 10..26
+     */
+    public static Big big(PrimitiveKind kind, long initialCapacity, int segmentShift) {
+        return new Big(kind, initialCapacity, segmentShift);
+    }
+
+    /**
+     * Long-position deque over the existing {@link BigArray} sparse owner.
+     *
+     * <p>Capacity is a logical reservation, not an assertion that all lanes reside in memory.
+     * Absent pages read as zero. Growth copies the two live circular spans into a replacement
+     * owner and publishes it only after both copies succeed. No entry object is retained.
+     * The instance is mutable and is not thread-safe.
+     *
+     * <p>Encounter-order indices, counters and iterator cursors are long-valued. Primitive
+     * carriers follow {@link PrimitiveKind}; empty peeks/removes throw without reserving a
+     * carrier as an empty sentinel. Iterators detect structural changes on a best-effort basis.
+     */
+    public static final class Big {
+        private final PrimitiveKind kind;
+        private final int segmentShift;
+        private BigArray elements;
+        private long head;
+        private long size;
+        private long version;
+
+        private Big(PrimitiveKind kind, long initialCapacity, int segmentShift) {
+            this.kind = Objects.requireNonNull(kind, "kind");
+            if (initialCapacity < 0L) throw new IllegalArgumentException("initialCapacity < 0");
+            this.segmentShift = segmentShift;
+            elements = BigArray.sparse(kind, Math.max(1L, initialCapacity), segmentShift);
+        }
+
+        public PrimitiveKind kind() { return kind; }
+        public long size64() { return size; }
+        public long size() { return size; }
+        public boolean isEmpty() { return size == 0L; }
+        public long capacity64() { return elements.length(); }
+        public long capacity() { return capacity64(); }
+        public long maximumCapacity64() { return elements.maximumLength(); }
+        public long allocatedPayloadBytes() { return elements.allocatedPayloadBytes(); }
+        public long directoryReferenceSlots64() { return elements.directoryReferenceSlots64(); }
+
+        /** Logical payload reservation; throws if capacity times lane width exceeds long range. */
+        public long payloadBytes() { return elements.payloadBytes(); }
+
+        public long getBits(long index) {
+            return elements.getBits(physicalIndex(checkedIndex(index)));
+        }
+
+        /** Replaces one value without structurally invalidating an encounter-order iterator. */
+        public long setBits(long index, long bits) {
+            long physical = physicalIndex(checkedIndex(index));
+            long previous = elements.getBits(physical);
+            elements.setBits(physical, bits);
+            return previous;
+        }
+
+        public void addFirstBits(long bits) {
+            ensureCapacity(checkedNextSize());
+            long nextHead = head == 0L ? capacity64() - 1L : head - 1L;
+            // A failed lazy payload allocation must not publish a new head.
+            elements.setBits(nextHead, bits);
+            head = nextHead;
+            size++;
+            version++;
+        }
+
+        public void addLastBits(long bits) {
+            ensureCapacity(checkedNextSize());
+            elements.setBits(physicalIndex(size), bits);
+            size++;
+            version++;
+        }
+
+        public long peekFirstBits() {
+            requireElement();
+            return elements.getBits(head);
+        }
+
+        public long peekLastBits() {
+            requireElement();
+            return elements.getBits(physicalIndex(size - 1L));
+        }
+
+        public long removeFirstBits() {
+            requireElement();
+            long value = elements.getBits(head);
+            elements.setBits(head, 0L);
+            head = head == capacity64() - 1L ? 0L : head + 1L;
+            size--;
+            if (size == 0L) head = 0L;
+            version++;
+            return value;
+        }
+
+        public long removeLastBits() {
+            requireElement();
+            long physical = physicalIndex(size - 1L);
+            long value = elements.getBits(physical);
+            elements.setBits(physical, 0L);
+            size--;
+            if (size == 0L) head = 0L;
+            version++;
+            return value;
+        }
+
+        public long getFirstBits() { return peekFirstBits(); }
+        public long getLastBits() { return peekLastBits(); }
+        public long elementBits() { return peekFirstBits(); }
+        public void pushBits(long bits) { addFirstBits(bits); }
+        public long popBits() { return removeFirstBits(); }
+
+        /** Releases sparse payload through the existing owner while preserving logical capacity. */
+        public void clear() {
+            elements.fillBits(0L, capacity64(), 0L);
+            if (size == 0L) return;
+            head = 0L;
+            size = 0L;
+            version++;
+        }
+
+        /** Grows with zero values or truncates the tail, preserving encounter order. */
+        public void resize(long newSize) {
+            if (newSize < 0L) throw new IllegalArgumentException("newSize < 0");
+            if (newSize == size) return;
+            if (newSize == 0L) {
+                clear();
+                return;
+            }
+            ensureCapacity(newSize);
+            clearLogicalRange(Math.min(size, newSize), Math.max(size, newSize));
+            size = newSize;
+            if (size == 0L) head = 0L;
+            version++;
+        }
+
+        public void ensureCapacity(long required) {
+            ensureCapacity(required, STORAGE);
+        }
+
+        /** Cold-path failure-injection seam; the existing BigArray remains allocation authority. */
+        interface GrowthOps {
+            BigArray allocate(PrimitiveKind kind, long capacity, int segmentShift);
+            void copy(BigArray source, long from,
+                      BigArray target, long offset, long count);
+        }
+
+        private static final GrowthOps STORAGE = new GrowthOps() {
+            @Override
+            public BigArray allocate(PrimitiveKind kind, long capacity, int segmentShift) {
+                return BigArray.sparse(kind, capacity, segmentShift);
+            }
+
+            @Override
+            public void copy(BigArray source, long from,
+                             BigArray target, long offset, long count) {
+                source.copyTo(from, target, offset, count);
+            }
+        };
+
+        void ensureCapacity(long required, GrowthOps operations) {
+            if (required < 0L) throw new IllegalArgumentException("required < 0");
+            Objects.requireNonNull(operations, "operations");
+            long current = capacity64();
+            if (required <= current) return;
+            long maximum = maximumCapacity64();
+            if (required > maximum) throw new IllegalArgumentException("capacity exceeds address range");
+            long extra = (current >>> 1) + 1L;
+            long grown = current > maximum - extra ? maximum : current + extra;
+            long nextCapacity = Math.max(required, grown);
+            BigArray next = Objects.requireNonNull(
+                    operations.allocate(kind, nextCapacity, segmentShift), "replacement storage");
+            if (next == elements || next.kind() != kind || !next.isSparse()
+                    || next.length() != nextCapacity || next.segmentShift() != segmentShift) {
+                throw new IllegalStateException("invalid replacement storage");
+            }
+            long first = Math.min(size, current - head);
+            if (first > 0L) operations.copy(elements, head, next, 0L, first);
+            long second = size - first;
+            if (second > 0L) operations.copy(elements, 0L, next, first, second);
+            // No live state is published until allocation and both independent spans succeed.
+            elements = next;
+            head = 0L;
+        }
+
+        public java.util.PrimitiveIterator.OfLong iterator() {
+            long expected = version;
+            return new java.util.PrimitiveIterator.OfLong() {
+                private long cursor;
+                @Override
+                public boolean hasNext() {
+                    checkVersion(expected);
+                    return cursor < size;
+                }
+                @Override
+                public long nextLong() {
+                    checkVersion(expected);
+                    if (cursor >= size) throw new NoSuchElementException();
+                    return getBits(cursor++);
+                }
+            };
+        }
+
+        /** Visits raw carriers in encounter order; consumer exceptions propagate unchanged. */
+        public void forEachBits(java.util.function.LongConsumer action) {
+            Objects.requireNonNull(action, "action");
+            long expected = version;
+            for (long cursor = 0L; cursor < size; cursor++) {
+                checkVersion(expected);
+                action.accept(getBits(cursor));
+                checkVersion(expected);
+            }
+        }
+
+        private void clearLogicalRange(long from, long to) {
+            if (from == to) return;
+            long physical = physicalIndex(from);
+            long count = to - from;
+            long first = Math.min(count, capacity64() - physical);
+            elements.fillBits(physical, physical + first, 0L);
+            if (count > first) elements.fillBits(0L, count - first, 0L);
+        }
+
+        private long physicalIndex(long logical) {
+            long remaining = capacity64() - head;
+            return logical < remaining ? head + logical : logical - remaining;
+        }
+
+        private long checkedIndex(long index) {
+            if (index < 0L || index >= size) throw new IndexOutOfBoundsException(Long.toString(index));
+            return index;
+        }
+
+        private long checkedNextSize() {
+            if (size == maximumCapacity64()) {
+                throw new OutOfMemoryError("required primitive deque size exceeds address range");
+            }
+            return size + 1L;
+        }
+
+        private void requireElement() {
+            if (size == 0L) throw new NoSuchElementException();
+        }
+
+        private void checkVersion(long expected) {
+            if (version != expected) throw new java.util.ConcurrentModificationException();
+        }
+    }
 }
