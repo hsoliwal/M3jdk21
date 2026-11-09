@@ -1,0 +1,17 @@
+{
+  "schema": "m3-namespace-recipe-selection-v1",
+  "problemCategory": "package-and-type-identity",
+  "invariant": "Reuse validated recipes; serial per-file application; preserve behavioral contracts under explicit namespace identity exception; admit algorithms/runtime only with separate proof.",
+  "selected": "OpenRewrite8.17.1 ChangePackage for selected org.springframework.util ownership",
+  "donor": "openrewrite/rewrite@8.17.1 (Apache-2.0)",
+  "alternatives": [
+    {
+      "candidate": "Unqualified textual replacement",
+      "decision": "REJECTED",
+      "reason": "Cannot alone establish package annotation identity, platform contract or typed API parity"
+    }
+  ],
+  "proof": "All27 sources compile into89 classfiles;88 body classes and954 API symbols match under the namespace mapping. Five original compiler warnings are preserved. Original reference entries, backing Java collections and global caches remain.",
+  "cost": "Linear protected-span/source traversal plus typed parser cost where used; no throughput/allocation/speedup claim.",
+  "next": "Consult exact existing M3 owners and donor contract before per-file storage refinement."
+}

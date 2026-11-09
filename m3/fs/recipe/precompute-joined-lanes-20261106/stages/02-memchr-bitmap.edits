@@ -1,0 +1,61 @@
+# Stage 02 of recipe PRECOMPUTE_JOINED_LANES v1 (apply.py): Synexia crate m3fs-memchr-bitmap-20261102,
+# commit 27b0600d0a8 (owner blob 32c9b0d0 -> a34b8031, sha256 eec030a3.. -> 7a531a19..) and the hash-pinned
+# m3_fs_jni.c text recipe (sha256 2c8bb0cc.. -> e9d6e03e..).
+@@@ FILE m3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java
+@@@ HUNK @@ -766,6 +766,7 @@ JoinedBytePresence.candidateRows | APPLICABLE->applied | zero-mask early refusal (on the stage-01 postimage)
+@@@ OLD
+          candidates &= bytePresence.get(bytePresence.position() + row);
+        }
+@@@ NEW
+          candidates &= bytePresence.get(bytePresence.position() + row);
+          //FLLDCIM: MRL - m3fs-memchr-bitmap-20261102 (Synexia 27b0600d0a8, owner blob 32c9b0d0 -> a34b8031)
+          if (candidates == 0L) break; // Bitwise AND can never regain candidate rows.
+        }
+@@@ END
+@@@ FILE m3/fs/native/src/m3_fs_jni.c
+@@@ HUNK @@ -38,14 +38,24 @@ m3_contains | APPLICABLE->applied | M3JDK m3_contains equals the Synexia preimage byte for byte
+@@@ OLD
+static int m3_contains(
+    const uint8_t *source,
+    size_t length,
+    const uint8_t *needle,
+    size_t needle_length) {
+  if (needle_length == 0U || needle_length > length) return 0;
+  size_t limit = length - needle_length;
+  for (size_t start = 0U; start <= limit; start++) {
+    if (source[start] == needle[0]
+        && memcmp(source + start, needle, needle_length) == 0) {
+      return 1;
+    }
+  }
+  return 0;
+}
+@@@ NEW
+static int m3_contains(
+    const uint8_t *source,
+    size_t length,
+    const uint8_t *needle,
+    size_t needle_length) {
+  if (needle_length == 0U || needle_length > length) return 0;
+  /* FLLDCIM: MRL - m3fs-memchr-bitmap-20261102 (Synexia 27b0600d0a8, m3_fs_jni.c sha256 2c8bb0cc.. ->
+   * e9d6e03e..): first-byte memchr skip, memcmp stays the only positive authority. */
+  if (needle_length == 1U) {
+    return memchr(source, needle[0], length) != NULL;
+  }
+  /* libc skips byte spans between viable first-byte candidates. Exact
+   * memcmp remains authoritative; no new JNI export, heap allocation or
+   * pattern table is introduced for each mapped segment. */
+  const uint8_t *cursor = source;
+  size_t remaining = length;
+  for (;;) {
+    const uint8_t *hit = (const uint8_t *)memchr(
+        cursor, needle[0], remaining - needle_length + 1U);
+    if (hit == NULL) return 0;
+    if (memcmp(hit, needle, needle_length) == 0) return 1;
+    size_t consumed = (size_t)(hit - cursor) + 1U;
+    cursor += consumed;
+    remaining -= consumed;
+    if (remaining < needle_length) return 0;
+  }
+}
+@@@ END

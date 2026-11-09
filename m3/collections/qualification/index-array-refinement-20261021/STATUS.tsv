@@ -1,0 +1,17 @@
+stage	status	detail
+selected_input_identity	PASS	exact Git blob and SHA256
+recipe_compile	PASS	Java21 warnings-as-errors
+recipe_sdk_tests	PASS	5 methods; 16 partial states x 2 orders
+fresh_process_replay	PASS	4 source outputs and receipt byte-identical
+product_materialization	PASS	1 existing production owner and 3 new proof sources
+product_strict_compile	PASS	2 production + 4 tests per image
+component_junit	PASS	1 test per image; 0 failures/errors/skips
+current_native	PASS	exact C17; fatal UBSan; -Xcheck:jni
+runtime	PASS	20 current and 2 legacy launches
+api_and_jni_header	PASS	2 class surfaces, 1 header
+resources	OBSERVED_MIXED	lower native result allocation; some CPU regressions
+whole_collection_program	INCOMPLETE	no all-family completion established
+original_collection_module	NOT_RUN	bounded POM is not original module acceptance
+installed_jdk_and_platforms	NOT_RUN	no full-image/jtreg/JCK/cross-platform claim
+upstream_publication	BLOCKED	no write action / bridge unavailable / no authenticated CLI
+merge	NOT_EXECUTED	no defaults or PR state changed

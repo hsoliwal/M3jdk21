@@ -1,0 +1,10 @@
+{
+  "command": [
+    "nm",
+    "-D",
+    "--defined-only",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/snapshot/libM3CollectionMasksQualification.so"
+  ],
+  "exit": 0,
+  "log_sha256": "ebfc4611636fc4b932f817237eb3a5e45a7235806f872a39f7194d809815ea57"
+}

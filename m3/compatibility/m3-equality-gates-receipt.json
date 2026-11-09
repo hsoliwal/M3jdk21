@@ -1,0 +1,113 @@
+{
+  "schema": "M3JDK21_SYNEXIA_EQUALITY_GATES_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for the src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-equality-gates-20261009",
+    "pullRequest": 9932,
+    "commit": "bceae02ff36",
+    "stackedOn": [
+      {
+        "pullRequest": 9931,
+        "crate": "m3-facts-scan-fused"
+      },
+      {
+        "pullRequest": 9916,
+        "crate": "m3-facts-mixed-consumers"
+      }
+    ],
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.EqualityGates",
+    "crate": "m3-equality-gates",
+    "fossReuseDecisionRow": "string.equality.mixed-gates",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/String.java",
+        "commit": "b9496a02e0",
+        "target": "java.lang.String",
+        "mechanics": "cachedHashDiffers (flat cached hash vs M3 known hash) before the mixed contentEquals; mixedAsciiCaseHashDiffers in regionMatches(ignoreCase) when the M3 side covers its whole String and both sides are ASCII"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "commit": "b9496a02e0",
+        "target": "java.lang.M3String",
+        "mechanics": "hashKnownToDiffer: whole-owner javaHash or prepared range facts; never prepares"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "commit": "b9496a02e0",
+        "target": "java.lang.M3StringFacts",
+        "mechanics": "asciiLowerHashOrNegative: allocation-free ASCII-lower 31-polynomial of a flat region, -1 on any unit above U+007F"
+      }
+    ],
+    "license": "first-party M3 owner",
+    "disposition": "ADAPT: gates prove inequality only; owner javaHash equals String.hashCode (probe parity); JDK semantics unchanged",
+    "reapplied": {
+      "branch": "codex/m3-precompute-stack-reapply-20261009",
+      "commit": "adf21526919",
+      "note": "the original PR merges reached develop/master as zero-file superset merges; crate commits cherry-picked onto develop on 2026-10-09"
+    }
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "m3/facts-scan-fused-20261008 (A8, #499) on m3/facts-thick-20261008 (A4, #486) on master da6084c4ef",
+    "owners": [
+      "java.lang.String",
+      "java.lang.M3String",
+      "java.lang.M3StringFacts"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed against 86c8a71d41: 66 targets, three after-images updated; apply.py --check state=after; test_recipe.py 8/8",
+    "reappliedBase": "master 5f68880c6f (A8 owner a37bf443f1, A9 owner c66aacba5f, A6 owner aec42c5a02, refusal-safe binary join 3c3d66694a); original base: m3/facts-scan-fused-20261008 (A8, #499) on m3/facts-thick-20261008 (A4, #486) on master da6084c4ef"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "before": "f88c545538e250c057809d86cb0727cbeb07bed69508b0c85197b0084247fa5c",
+      "after": "011fc704dde55f44d3980d5f21871d3b509e6d093dd6c20b27ec152101b6f663",
+      "resource": "00-M3String.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "before": "51635a2e8cc407f3f7166389f975442b1bf06857e8b8c548852cbc63eaf636b3",
+      "after": "f1cc0ec9d4fd0bbc15d9c684e80b9907b60321cb15ad4fd7fa39f3cf973fc4cd",
+      "resource": "01-M3StringFacts.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringMixedEqualityGatesTest.java",
+      "before": "ABSENT",
+      "after": "ae676f4a4c3c197b461e1fb46d9402e1f6b063ca724e3befb33ce2991700d8f9",
+      "resource": "02-M3StringMixedEqualityGatesTest.java.txt",
+      "step": "hash-pinned-java"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "before": "c16fd68b3a0402352569908ba9c99a17dc2853ba7dbb6cbbcb5c3ea6ea4efc8f",
+      "after": "9582e2038c83735f3678ec972343ff3404bd4bf5386a26a755ae2bc911d35ad6",
+      "resource": "00-String.java.txt",
+      "step": "hash-pinned-text"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the sealed M3 java.base subset (42 files, 149 classes)",
+    "gateTestLocal": "PASS_WINDOWS M3StringMixedEqualityGatesTest flag-off on the patched module: 46,919 checks (hashKnownToDiffer exact vs String.hashCode on atoms, prepared ranges and tuples, silent on unprepared ranges; fold == prepared asciiLowerHash for ASCII regions, -1 otherwise; equal-ignoring-case pairs never gated; consumer parity vs the stock per-unit rule for hashed and unhashed flat sides)",
+    "regressions": "PASS_WINDOWS A4 M3StringFactsMixedConsumersTest 90,118 checks and A8 M3StringFactsScanWindowTest 329,909 checks on the A9 module",
+    "g8RuntimeRecipe": "PASS_WINDOWS reseal 66 targets; apply.py --check state=after; test_recipe.py 8/8",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3EqualityGatesRecipeTest 3/3 (mvn log sha256 7fae4503f138ddc8...)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnDifferential": "PENDING_LINUX (the String.equals / regionMatches gates run only with M3-backed receivers: M3StringMixedEqualityGatesTest under -XX:+UseM3StringStorage plus the EqualsIgnoreCase, CompactString and Strip suites)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "equals: the flat side's cached hash is read exactly as hashCode() reads it (benign race, one-field-write invariant); the gate only fires when both hashes are known and differ",
+    "hashKnownToDiffer never calls facts(): a whole owner answers from owner.javaHash, a range only from already-prepared range facts",
+    "ignore-case: both sides must be ASCII because non-ASCII units equal ASCII units ignoring case (U+212A, U+0130, U+017F); the fold returns -1 for any unit above U+007F",
+    "the ignore-case gate is applied only when the M3 side covers its whole String, so no slice object is allocated for the mixed case",
+    "no timing claim; stacked on A8 and A4: merge after #499, or regenerate the runtime re-seal"
+  ]
+}

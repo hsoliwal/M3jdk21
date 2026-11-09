@@ -1,0 +1,105 @@
+{
+  "canonical_recipe_commit": "f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72",
+  "canonical_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/9726",
+  "canonical_packet": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-sparse-lookup",
+  "target_base_commit": "d769ee9c3bcfd881f514817cb86c0768e62ed970",
+  "outputs": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "before_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "after_sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3TQSparseContainmentTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790"
+    }
+  ],
+  "sdk_execution": {
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "scope": "Exact replay/fixedpoint/drift refusal/missing refusal"
+  },
+  "kernel_proof": {
+    "host": "Temurin 21.0.12.1 patched java.base, Linux x86_64",
+    "modes": [
+      "mixed",
+      "interpreter",
+      "C1",
+      "C2"
+    ],
+    "new_checks_per_mode": 31011,
+    "existing_checks_per_mode": 308649,
+    "jni_calls_per_mode": 4458,
+    "warm_payload_reads": 0,
+    "full_m3_jvm_image": false
+  },
+  "work_probe": {
+    "baseline_source_key_reads": 32766,
+    "candidate_source_key_reads": 16,
+    "scope": "Test-only instrumented metadata lookup"
+  },
+  "smoke_results": {
+    "baseline": {
+      "late-present": {
+        "median_ns_per_op": 28417.31,
+        "max_bytes_per_op": 0.02,
+        "samples": 15
+      },
+      "late-absent": {
+        "median_ns_per_op": 27917.7,
+        "max_bytes_per_op": 0.0,
+        "samples": 15
+      },
+      "early-present": {
+        "median_ns_per_op": 12.39,
+        "max_bytes_per_op": 0.0,
+        "samples": 15
+      },
+      "four-late": {
+        "median_ns_per_op": 17178.02,
+        "max_bytes_per_op": 0.0,
+        "samples": 15
+      },
+      "dense": {
+        "median_ns_per_op": 22084.39,
+        "max_bytes_per_op": 0.0,
+        "samples": 15
+      }
+    },
+    "candidate": {
+      "late-present": {
+        "median_ns_per_op": 56.89,
+        "max_bytes_per_op": 0.02,
+        "samples": 15
+      },
+      "late-absent": {
+        "median_ns_per_op": 27.69,
+        "max_bytes_per_op": 0.0,
+        "samples": 15
+      },
+      "early-present": {
+        "median_ns_per_op": 17.96,
+        "max_bytes_per_op": 0.0,
+        "samples": 15
+      },
+      "four-late": {
+        "median_ns_per_op": 81.97,
+        "max_bytes_per_op": 0.0,
+        "samples": 15
+      },
+      "dense": {
+        "median_ns_per_op": 11224.72,
+        "max_bytes_per_op": 0.0,
+        "samples": 15
+      }
+    }
+  },
+  "pending": [
+    "Full custom M3 JDK image and UseM3StringStorage jtreg",
+    "End-to-end String/JMH, retained-memory and cross-platform qualification",
+    "Receiving snapshot reconciliation",
+    "Pre-existing HOLD_MATCHER_STATE_GAP invariant failure"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "M3_CANONICAL_CURRENT_OWNER_PUBLICATION/1",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "base": "3f4c3e1c97ca12b7f0d3efbbc387f40f942fa399",
+    "base_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+    "tree": "65783729ca2d13645541736c15dda8dc61318287",
+    "commit": "30de5acabcf11d86971b209955fc276763515b84",
+    "branch": "codex/m3-current-owner-recipes-20261021",
+    "pr": "https://github.com/hsoliwal/com.synexia/pull/12674",
+    "number": 12674,
+    "draft": true,
+    "files": 741,
+    "inventory_sha256": "da690614d724bc5f4f98234e05960f51dbec06dec38c1c44bc206b2fc87152ea"
+  },
+  "receiving_parent": "8818997cf6c641b6343b18c1f6c103045b167f30",
+  "receiving_runtime_commit": "6b709cb118166e63477a69de62d3c28131b4e4a5",
+  "companion_swt": {
+    "repository": "hsoliwal/eclipse.platform.swt",
+    "base": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+    "base_tree": "cfbecfc15c5de51e7e4c6110c2c65742cb471466",
+    "tree": "926a4595922ecc8596ddc977bcb2d792c91e706e",
+    "commit": "729956ee0aa0be93d891db0524becb97349497fe",
+    "branch": "codex/m3-swt-current-owner-runtime-20261021",
+    "pr": "https://github.com/hsoliwal/eclipse.platform.swt/pull/241",
+    "number": 241,
+    "draft": true,
+    "files": 1,
+    "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12674"
+  },
+  "source_and_runtime_qualification": "Actual recipe-emitted sources and separate receiving results; full hosted/product admission remains pending.",
+  "canonical_review_navigation": "https://github.com/hsoliwal/com.synexia/blob/30de5acabcf11d86971b209955fc276763515b84/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/README.md",
+  "mirrors": {
+    "core_observations": "m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/",
+    "swt_recipe": "m3/runtime-integration/recipes/swt-current-owner-runtime-closure-20261021/canonical/",
+    "nlp_recipe": "m3/runtime-integration/recipes/m3-nlp-current-receiver-lock-20261021/canonical/"
+  },
+  "documentation_links": "The canonical navigation resolves cross-task links in their full upstream layout; each receiving task mirror retains exact file bytes and its own executable recipe closure.",
+  "global_metadata": "Canonical recipe registry and provenance ledger remain upstream; no receiving duplicates are added."
+}

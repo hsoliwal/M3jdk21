@@ -1,0 +1,11 @@
+M3JDK Swing viewport (m3/docs/swing-viewport)
+Copyright 2026 Hitesh Soliwal and contributors (Synexia, hsoliwal@gmail.com)
+
+The documentation, decision tables and the benchmark tool in this directory
+are first-party Synexia work licensed under the Apache License, Version 2.0
+(see LICENSE-M3-APACHE-2.0.txt at the repository root).
+
+The layout cache they describe lives in src/java.desktop and is licensed
+under GPL-2.0-only WITH Classpath-exception-2.0, with the rights holder
+recorded in LICENSE_DECISIONS.tsv. OpenJDK classes are used here only as
+runtime oracles; no OpenJDK, SwingX (LGPL-2.1) or EPL source is copied.

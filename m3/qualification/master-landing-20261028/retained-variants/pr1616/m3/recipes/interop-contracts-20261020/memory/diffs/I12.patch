@@ -1,0 +1,22 @@
+--- before/m3/collections/interop/SDK_FAMILIES.md
++++ after/m3/collections/interop/SDK_FAMILIES.md
+@@ -27,7 +27,7 @@
+ | JDK | `jdkDeque` | `java.util.Deque` | `com.m3.collections.M3LinkedList` |
+ | JDK | `jdkSortedMap` | `java.util.NavigableMap` | `com.m3.collections.M3TreeMap` |
+ | JDK | `jdkSortedSet` | `java.util.NavigableSet` | `com.m3.collections.M3TreeSet` |
+-| GUAVA | `guavaListMultimap` | `com.google.common.collect.ListMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedList` |
++| GUAVA | `guavaListMultimap` | `com.google.common.collect.ListMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3ArrayList` |
+ | GUAVA | `guavaSetMultimap` | `com.google.common.collect.SetMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3LinkedHashSet` |
+ | GUAVA | `guavaSortedSetMultimap` | `com.google.common.collect.SortedSetMultimap` | `com.m3.collections.M3LinkedHashMap`, `com.m3.collections.M3TreeSet` |
+ | GUAVA | `guavaTable` | `com.google.common.collect.Table` | `com.m3.collections.M3LinkedHashMap` |
+--- before/m3/collections/interop/sdk-family-bindings.tsv
++++ after/m3/collections/interop/sdk-family-bindings.tsv
+@@ -5,7 +5,7 @@
+ JDK	jdkDeque		java.util.Deque	com.m3.collections.M3LinkedList	com.m3.collections.M3LinkedList	M3_CREATED	21
+ JDK	jdkSortedMap	java.util.Comparator	java.util.NavigableMap	com.m3.collections.M3TreeMap	com.m3.collections.M3TreeMap	M3_CREATED	21
+ JDK	jdkSortedSet	java.util.Comparator	java.util.NavigableSet	com.m3.collections.M3TreeSet	com.m3.collections.M3TreeSet	M3_CREATED	21
+-GUAVA	guavaListMultimap		com.google.common.collect.ListMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedList	M3_CREATED	33.4.8-jre
++GUAVA	guavaListMultimap		com.google.common.collect.ListMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3ArrayList	M3_CREATED	33.4.8-jre
+ GUAVA	guavaSetMultimap		com.google.common.collect.SetMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3LinkedHashSet	M3_CREATED	33.4.8-jre
+ GUAVA	guavaSortedSetMultimap	java.util.Comparator	com.google.common.collect.SortedSetMultimap	com.google.common.collect.Multimaps	com.m3.collections.M3LinkedHashMap;com.m3.collections.M3TreeSet	M3_CREATED	33.4.8-jre
+ GUAVA	guavaTable		com.google.common.collect.Table	com.google.common.collect.Tables	com.m3.collections.M3LinkedHashMap	M3_CREATED	33.4.8-jre

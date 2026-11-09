@@ -1,0 +1,19 @@
+{
+  "command": [
+    "javac",
+    "-Xlint:all",
+    "--patch-module",
+    "java.desktop=/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-04/baseline/classes:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-04/baseline/test-classes",
+    "-cp",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-04/baseline/donor",
+    "-d",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-04/baseline/external",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/canonical/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/proof/NetBeansOffsetOracle.java",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/canonical/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/proof/inputs/bug4496801.java"
+  ],
+  "exit": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "user_seconds": 1.820714,
+  "system_seconds": 0.12575899999999998,
+  "max_rss_kib_linux": 119164
+}

@@ -1,0 +1,4 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+capability_id	donor_repository	donor_commit	donor_api	target_repository	target_owner	target_api	migration_mode	contract	status
+M3_MASK_COUNT_EXPLICIT_JNI_V1	hsoliwal/com.synexia	6e29cfda4c13635ded100a1be3f8f718c8253f39	com.synexia.primitives.M3IndexMaskCompactor.count(byte[],int,Backend)	hsoliwal/M3JDK21	com.m3.collections.M3IndexMaskCompactor	selectedCount(byte[],int,Backend)	TARGET_OWNED_PORT	JDK21 standard APIs unchanged; old native selector ABI retained; NATIVE_REQUIRED fails closed; no third-party consumer runtime	DRAFT_RECEIVER_STRING_PHASE_GATE_PENDING

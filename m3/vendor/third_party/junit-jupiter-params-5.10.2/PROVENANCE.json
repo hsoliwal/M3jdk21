@@ -1,0 +1,509 @@
+{
+  "artifact": "junit-jupiter-params",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "NOT_IN_LOCK",
+  "consumers": "OpenRewrite 8.17.1 runtime closure (mvn dependency:list of rewrite-core/java/java-21/test/xml)",
+  "coordinate": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "apiguardian-api",
+      "form": "source module",
+      "group": "org.apiguardian",
+      "optional": false,
+      "scope": "compile",
+      "version": "1.1.2-m3-source-1"
+    },
+    {
+      "artifact": "junit-jupiter-api",
+      "form": "source module",
+      "group": "org.junit.jupiter",
+      "optional": false,
+      "scope": "compile",
+      "version": "5.10.2-m3-source-1"
+    },
+    {
+      "artifact": "junit-platform-commons",
+      "form": "source module",
+      "group": "org.junit.platform",
+      "optional": true,
+      "scope": "compile",
+      "version": "1.10.2-m3-source-1"
+    },
+    {
+      "artifact": "univocity-parsers",
+      "form": "source module",
+      "group": "com.univocity",
+      "optional": true,
+      "scope": "compile",
+      "version": "2.9.1-m3-source-1"
+    },
+    {
+      "artifact": "kotlin-stdlib",
+      "form": "Kotlin standard library for the Kotlin facade, compile-only",
+      "group": "org.jetbrains.kotlin",
+      "optional": true,
+      "scope": "provided",
+      "version": "1.8.22"
+    }
+  ],
+  "donor": "junit-jupiter-params-5.10.2",
+  "excluded_from_compilation": [
+    "module-info.java"
+  ],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/resources/META-INF/LICENSE-notice.md",
+      "sha256": "c7d843e0faf8a251278c9220f6b5326a42a01f08b855c1ec871bcef6211a7e2a",
+      "upstream": "META-INF/LICENSE-notice.md"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/resources/META-INF/LICENSE.md",
+      "sha256": "5aa4cd44c111add178d1c2e2fe36d58a484012c80167df925f826cd64d411bf0",
+      "upstream": "META-INF/LICENSE.md"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production-excluded-from-compilation",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/upstream-excluded/module-info.java",
+      "sha256": "cd1a26270d206e9089615668295fc8e99b57c7d4a02f75d0c0e93b0e4d97e085",
+      "upstream": "module-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/ParameterizedTest.java",
+      "sha256": "2fc7b784d525c1ac430e2e72bbf1b08a67f1358b76e47992663c60d230e24878",
+      "upstream": "org/junit/jupiter/params/ParameterizedTest.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/ParameterizedTestExtension.java",
+      "sha256": "c9baf4931113339eb3d169626479ca8abcab1de9e1e0c8fab6ad3a22b6149503",
+      "upstream": "org/junit/jupiter/params/ParameterizedTestExtension.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/ParameterizedTestInvocationContext.java",
+      "sha256": "8df014eafaca9339c7393f786c513ee152f17e9791cc4674d4d33e6730f7f9e5",
+      "upstream": "org/junit/jupiter/params/ParameterizedTestInvocationContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/ParameterizedTestMethodContext.java",
+      "sha256": "9dd0c29a957acf46eb9b7e62d1d30f1b2badc9981861c6a55ff1139f61559371",
+      "upstream": "org/junit/jupiter/params/ParameterizedTestMethodContext.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/ParameterizedTestNameFormatter.java",
+      "sha256": "ef7112b4cee9c88e956400247d55b257663e34f1c40abd65899a9c6fbccf593a",
+      "upstream": "org/junit/jupiter/params/ParameterizedTestNameFormatter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/ParameterizedTestParameterResolver.java",
+      "sha256": "d49f7a8e743c2eb84346263a00afbc45a062054da28e4fc98010e29b77d1be59",
+      "upstream": "org/junit/jupiter/params/ParameterizedTestParameterResolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/aggregator/AggregateWith.java",
+      "sha256": "4938703f92c7bc27dc65cbe6c2f0d307a095b27bfec5e69d2594e054c5b0fcea",
+      "upstream": "org/junit/jupiter/params/aggregator/AggregateWith.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/aggregator/ArgumentAccessException.java",
+      "sha256": "9af510361f848deb05a5003b93c4b229b7fbf958b1250081ebb505d5168e5459",
+      "upstream": "org/junit/jupiter/params/aggregator/ArgumentAccessException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/aggregator/ArgumentsAccessor.java",
+      "sha256": "984d7ec804c93f4c60073c80f9024672501e879134719777cfc89c88b042d548",
+      "upstream": "org/junit/jupiter/params/aggregator/ArgumentsAccessor.java"
+    },
+    {
+      "kind": "unmodified-production-kotlin",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/kotlin/org/junit/jupiter/params/aggregator/ArgumentsAccessor.kt",
+      "sha256": "56a67162461e528221ef04f0a215f1093b3b9e220d41b76efb67f2140e3068cd",
+      "upstream": "org/junit/jupiter/params/aggregator/ArgumentsAccessor.kt"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/aggregator/ArgumentsAggregationException.java",
+      "sha256": "e53294f668f65c518a12fc5ddf2c90dfd8f29841a1c5ce1159bc9efb58f9864d",
+      "upstream": "org/junit/jupiter/params/aggregator/ArgumentsAggregationException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/aggregator/ArgumentsAggregator.java",
+      "sha256": "678549472c824574ed92ebd1a4a615082441aa20f9c3bbdabe656f75fdf3f5c8",
+      "upstream": "org/junit/jupiter/params/aggregator/ArgumentsAggregator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/aggregator/DefaultArgumentsAccessor.java",
+      "sha256": "b00b5ebc09df50e2d2ada70ddc226c67e5cf5129917fef0efb30e5f211c9bda0",
+      "upstream": "org/junit/jupiter/params/aggregator/DefaultArgumentsAccessor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/aggregator/package-info.java",
+      "sha256": "465d52f8805cd4b4ea0eab794bf28c07b254844a6c34a8806a27e257be4b1404",
+      "upstream": "org/junit/jupiter/params/aggregator/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/AnnotationBasedArgumentConverter.java",
+      "sha256": "a690beb820097eef673d99358d704ce17a4c6fe49fc95339a669a63b2afd8eed",
+      "upstream": "org/junit/jupiter/params/converter/AnnotationBasedArgumentConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/ArgumentConversionException.java",
+      "sha256": "aaf153704bf3e714c2de3716fb315895bf7e7ca37b3992f4b2f4a20fff7cba07",
+      "upstream": "org/junit/jupiter/params/converter/ArgumentConversionException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/ArgumentConverter.java",
+      "sha256": "cf24970000b309b52a00291b3619c4a90b66585684f766a7efbeed08f4ef53b3",
+      "upstream": "org/junit/jupiter/params/converter/ArgumentConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/ConvertWith.java",
+      "sha256": "dd1d0f85711007fedb79faa9a96a03aaac7d25656949b6a887c315a754203518",
+      "upstream": "org/junit/jupiter/params/converter/ConvertWith.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/DefaultArgumentConverter.java",
+      "sha256": "5ff3d86d2a4db079d1dd4342b04c259afb1c6e4f7b88ffb0bccef9df86d39a66",
+      "upstream": "org/junit/jupiter/params/converter/DefaultArgumentConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/FallbackStringToObjectConverter.java",
+      "sha256": "62b511a21c53925f1a2d771ea9f45afb21adc7f31034a25aa2e638adfc9d2b8d",
+      "upstream": "org/junit/jupiter/params/converter/FallbackStringToObjectConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/JavaTimeArgumentConverter.java",
+      "sha256": "c24a3d9a8a5bc2d297335fe40fbd0b11f051c6d21644029a6df3574765402d67",
+      "upstream": "org/junit/jupiter/params/converter/JavaTimeArgumentConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/JavaTimeConversionPattern.java",
+      "sha256": "191fed492279f5f9541eab24afb4607bb1d981d8d50419e6398571ddb1c94cbf",
+      "upstream": "org/junit/jupiter/params/converter/JavaTimeConversionPattern.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/SimpleArgumentConverter.java",
+      "sha256": "89688d0ac7ece395f95967b4e7ca832b770a5c785e2e0372c8c3123fbc0e0c02",
+      "upstream": "org/junit/jupiter/params/converter/SimpleArgumentConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/StringToBooleanConverter.java",
+      "sha256": "3bb5690729f676371c1cba2ed09d4b25eac5579666229ead42f4d076cbdc71a7",
+      "upstream": "org/junit/jupiter/params/converter/StringToBooleanConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/StringToCharacterConverter.java",
+      "sha256": "44c4bc8ccc93b24e36aaca3aad2b9694e37aade4c63788130addce54339bd75b",
+      "upstream": "org/junit/jupiter/params/converter/StringToCharacterConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/StringToClassConverter.java",
+      "sha256": "8900f6ea842eaf47a4577b60c0c4a99cc9b7fd344eec876501579e34c5d472b8",
+      "upstream": "org/junit/jupiter/params/converter/StringToClassConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/StringToCommonJavaTypesConverter.java",
+      "sha256": "1b5670c1915017d2939a7e4defea6275f014d069913f8f18693c86d6f5569e10",
+      "upstream": "org/junit/jupiter/params/converter/StringToCommonJavaTypesConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/StringToEnumConverter.java",
+      "sha256": "9f5a6e8e792dc93f13b024ed3fe37a7259ed9e85bd35ce94918618e922710027",
+      "upstream": "org/junit/jupiter/params/converter/StringToEnumConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/StringToJavaTimeConverter.java",
+      "sha256": "d8ef5f896a77e0889a76b66137442e68421227d336b49c73460a51af1224cc7f",
+      "upstream": "org/junit/jupiter/params/converter/StringToJavaTimeConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/StringToNumberConverter.java",
+      "sha256": "1c6af62b94fd955f5f1a5cdada17cbcc6c66e3de3ba9e37f9d91926ce0186390",
+      "upstream": "org/junit/jupiter/params/converter/StringToNumberConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/StringToObjectConverter.java",
+      "sha256": "3312cce36bda1fe7d75eaa1b4c00cd3afb8e600c40b33bc7f21b11f1acc65b4a",
+      "upstream": "org/junit/jupiter/params/converter/StringToObjectConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/TypedArgumentConverter.java",
+      "sha256": "88bf1a4039c193b34bd9eb09fb7fc3ca0633902b8a7c6dcb69848164d11f9546",
+      "upstream": "org/junit/jupiter/params/converter/TypedArgumentConverter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/converter/package-info.java",
+      "sha256": "14a47bef3262f4d1faa6b44af957ee98cc6c08861f78e5f57d7d071c08a67d90",
+      "upstream": "org/junit/jupiter/params/converter/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/package-info.java",
+      "sha256": "3447d8ac7248cbea18b2cfddef99fee5231bf43212a5809a6efb0ebaf46539d7",
+      "upstream": "org/junit/jupiter/params/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/AnnotationBasedArgumentsProvider.java",
+      "sha256": "9296547d7c4d60e1bc1f76004a8b8d64a5993a05700ff21ebbdeeb20844786cc",
+      "upstream": "org/junit/jupiter/params/provider/AnnotationBasedArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/Arguments.java",
+      "sha256": "5afc7df2fa4be6af06682409fafe98314dd00c03fa31aa8e62d58fc4d50fa8fd",
+      "upstream": "org/junit/jupiter/params/provider/Arguments.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/ArgumentsProvider.java",
+      "sha256": "334758e63e2d0e7de2d5f4c7e4c042b7452b7bc8ab94a48401717102e6d8b570",
+      "upstream": "org/junit/jupiter/params/provider/ArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/ArgumentsSource.java",
+      "sha256": "cfa334002d77156b6e6f5df73877a0cb91cfae2ab7267576a566e1b932803708",
+      "upstream": "org/junit/jupiter/params/provider/ArgumentsSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/ArgumentsSources.java",
+      "sha256": "528cc385740d9b7f7c422782a6188bd37bd5729d0054b7828536071467286fa0",
+      "upstream": "org/junit/jupiter/params/provider/ArgumentsSources.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/CsvArgumentsProvider.java",
+      "sha256": "8e27201c2ca9df67f1ea62ab60f2d99b0fcceaa764e4da0ac8778b8a29daa492",
+      "upstream": "org/junit/jupiter/params/provider/CsvArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/CsvFileArgumentsProvider.java",
+      "sha256": "0d6dbaf2e28422de3be1e8ddc4ba235be844520e4e71d748bf3d173107be9d7c",
+      "upstream": "org/junit/jupiter/params/provider/CsvFileArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/CsvFileSource.java",
+      "sha256": "797def4a66005e2e12f8162d58bb4fe9601995951e8a2a81ce3b13f35537f4ed",
+      "upstream": "org/junit/jupiter/params/provider/CsvFileSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/CsvParserFactory.java",
+      "sha256": "05a9b770c3fa71f45a7728a8715ee3b3a1b51a22bc6181a7074cbfe23b3aeb8f",
+      "upstream": "org/junit/jupiter/params/provider/CsvParserFactory.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/CsvParsingException.java",
+      "sha256": "76b11309de0cc3d97662cf4e0f1aee94a6ed54ef39bac2a7131fa1d7c1ff67f8",
+      "upstream": "org/junit/jupiter/params/provider/CsvParsingException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/CsvSource.java",
+      "sha256": "0ef4c7c1c47ed14420e020705ead99a4787344b29c6e9302c53fae772ead991f",
+      "upstream": "org/junit/jupiter/params/provider/CsvSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/EmptyArgumentsProvider.java",
+      "sha256": "5d80e86f37ca2b967954908748feccd0cf7474ab9822c6d99e282c1570bcab97",
+      "upstream": "org/junit/jupiter/params/provider/EmptyArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/EmptySource.java",
+      "sha256": "246284a462340117c6dfe5655851b777fa98e9438c2ae68eb880995fdbfb752b",
+      "upstream": "org/junit/jupiter/params/provider/EmptySource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/EnumArgumentsProvider.java",
+      "sha256": "5634ccd93cedf2d903a4eee648e51f72b81daff43d489078c12c47a83f50d2ac",
+      "upstream": "org/junit/jupiter/params/provider/EnumArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/EnumSource.java",
+      "sha256": "2549513fbe602e6c36da0c0b7a981dc3628f269c5583a5493be1919a0840a29b",
+      "upstream": "org/junit/jupiter/params/provider/EnumSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/MethodArgumentsProvider.java",
+      "sha256": "c7f63db2653b440314893a3bf87d6b860f77c0b22f38034502419fd503625a42",
+      "upstream": "org/junit/jupiter/params/provider/MethodArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/MethodSource.java",
+      "sha256": "a4a79c6a189083cbe484faa17f592c9b1a8c91fbfe4ab8d9ae62a13d562880cb",
+      "upstream": "org/junit/jupiter/params/provider/MethodSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/NullAndEmptySource.java",
+      "sha256": "54d008c61a90b542591efdf07eb27c550cc59f9c43a60413ad7e8f768ca05977",
+      "upstream": "org/junit/jupiter/params/provider/NullAndEmptySource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/NullArgumentsProvider.java",
+      "sha256": "8ce16f004cd3ec4504ba3e6892e135ccfcff7c03bdf2a482af332f01d236464c",
+      "upstream": "org/junit/jupiter/params/provider/NullArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/NullEnum.java",
+      "sha256": "96255c9fffb8900ff6466b3d35640a33aa3bf3f24a6951c3d630c0a8579b2786",
+      "upstream": "org/junit/jupiter/params/provider/NullEnum.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/NullSource.java",
+      "sha256": "047be6f1c236e5a669fd94df08cce384e7d0198135fe2116503a626d210861be",
+      "upstream": "org/junit/jupiter/params/provider/NullSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/ValueArgumentsProvider.java",
+      "sha256": "b46744d21951b8f35681ca8fedc0d750613ca8c58acfbfdc70740b54cbcecbaa",
+      "upstream": "org/junit/jupiter/params/provider/ValueArgumentsProvider.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/ValueSource.java",
+      "sha256": "e94b51d47b937483b038973a13b95ffe5cc892ee54527be47aff7539148e6dc8",
+      "upstream": "org/junit/jupiter/params/provider/ValueSource.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/provider/package-info.java",
+      "sha256": "9b632af55e3791d9f039333d0f719b01d46c73d07a2816b6cee1d01c81c855a9",
+      "upstream": "org/junit/jupiter/params/provider/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/support/AnnotationConsumer.java",
+      "sha256": "e3b36acacee66b32031ee4c4f3a01b0d29b6c136f6d2c86c243c7a73592003b8",
+      "upstream": "org/junit/jupiter/params/support/AnnotationConsumer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/support/AnnotationConsumerInitializer.java",
+      "sha256": "d0444924dc03bd93cdd454162cf2d59677852471d33efcbb7ef5c9f5be3ccf36",
+      "upstream": "org/junit/jupiter/params/support/AnnotationConsumerInitializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/java/org/junit/jupiter/params/support/package-info.java",
+      "sha256": "ef10620dcd85fb1bd48bdf8990d41866640b56055b6184787ca2dc7d0043c8f4",
+      "upstream": "org/junit/jupiter/params/support/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.junit.jupiter:junit-jupiter-params:5.10.2 (sha256 edb1e43ff0b8067626ffb55e5e9eeca1d9ab2478141a7c7f253d115b29cc7cf2)",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/resources/META-INF/LICENSE-univocity-parsers.md",
+      "sha256": "d25d17d20162cce14cdbb467a0f6d75a35ba488a4144637b17392eaa8042c122",
+      "upstream": "META-INF/LICENSE-univocity-parsers.md"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.junit.jupiter:junit-jupiter-params:5.10.2 (sha256 edb1e43ff0b8067626ffb55e5e9eeca1d9ab2478141a7c7f253d115b29cc7cf2)",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/resources/META-INF/junit-jupiter-params.kotlin_module",
+      "sha256": "92439274d3d8fdd7d792352829d402f02143d55fa4af6c77b2d8d9b9792b53e9",
+      "upstream": "META-INF/junit-jupiter-params.kotlin_module"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/SOURCES_MANIFEST.tsv",
+      "sha256": "a8a29e51891cf194750eb2b1262a469a6f8ab83d86b67d6cc1d1b0321bfb7139",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/LICENSE",
+      "sha256": "c7d843e0faf8a251278c9220f6b5326a42a01f08b855c1ec871bcef6211a7e2a",
+      "upstream": "META-INF/LICENSE-notice.md"
+    },
+    {
+      "kind": "unmodified-production-descriptor",
+      "repository": "m3/vendor/third_party/junit-jupiter-params-5.10.2/src/main/descriptor/root/module-info.java",
+      "sha256": "cd1a26270d206e9089615668295fc8e99b57c7d4a02f75d0c0e93b0e4d97e085",
+      "upstream": "module-info.java"
+    }
+  ],
+  "group": "org.junit.jupiter",
+  "kind": "MODULE",
+  "license": "Eclipse Public License v2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.pom",
+  "receipt": {
+    "buildRoot": "1a3cf08ee0a7c2f43639bbced7f6836cd0926197a6b834ec47f127fda788fd0b",
+    "distributionSha256": "e94b662f8a56e70740d2f53532d3faabe4939d8a4a95050526ce466eb216db17",
+    "lock": "e487f448edb18bc7aba04fecfaa28982d675b5a077c386d0957ab66504e02a37",
+    "message": "",
+    "sourceRoot": "25cc1d1ba3f06973e3778eb9737e165696bddc12b5e4ae7e71a14a04e5ec494a",
+    "status": "PASS"
+  },
+  "resources_completed": 2,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2-sources.jar",
+  "sources_jar_sha1": "1add8e4310a408675f46eae8acafe6b2b72232e5",
+  "sources_jar_sha256": "532dce2ef436152405567ea75f076dc908c4d21641224ecc53913c9f09bfb131",
+  "status": "PASS",
+  "upstream": "https://github.com/junit-team/junit5",
+  "version": "5.10.2"
+}

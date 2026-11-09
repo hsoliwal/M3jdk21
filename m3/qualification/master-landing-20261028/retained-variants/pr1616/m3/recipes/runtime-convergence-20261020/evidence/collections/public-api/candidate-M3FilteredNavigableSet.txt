@@ -1,0 +1,98 @@
+Compiled from "M3FilteredNavigableSet.java"
+public final class com.m3.collections.M3FilteredNavigableSet<E> extends java.util.AbstractSet<E> implements java.util.NavigableSet<E> {
+  public static <E> java.util.NavigableSet<E> view(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/NavigableSet;Ljava/util/function/Predicate;)Ljava/util/NavigableSet;
+
+  public java.util.Comparator<? super E> comparator();
+    descriptor: ()Ljava/util/Comparator;
+
+  public java.util.Iterator<E> iterator();
+    descriptor: ()Ljava/util/Iterator;
+
+  public java.util.Spliterator<E> spliterator();
+    descriptor: ()Ljava/util/Spliterator;
+
+  public java.util.Iterator<E> descendingIterator();
+    descriptor: ()Ljava/util/Iterator;
+
+  public int size();
+    descriptor: ()I
+
+  public boolean isEmpty();
+    descriptor: ()Z
+
+  public boolean contains(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public E first();
+    descriptor: ()Ljava/lang/Object;
+
+  public E last();
+    descriptor: ()Ljava/lang/Object;
+
+  public E lower(E);
+    descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+
+  public E floor(E);
+    descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+
+  public E ceiling(E);
+    descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+
+  public E higher(E);
+    descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+
+  public java.util.NavigableSet<E> descendingSet();
+    descriptor: ()Ljava/util/NavigableSet;
+
+  public java.util.NavigableSet<E> subSet(E, boolean, E, boolean);
+    descriptor: (Ljava/lang/Object;ZLjava/lang/Object;Z)Ljava/util/NavigableSet;
+
+  public java.util.NavigableSet<E> headSet(E, boolean);
+    descriptor: (Ljava/lang/Object;Z)Ljava/util/NavigableSet;
+
+  public java.util.NavigableSet<E> tailSet(E, boolean);
+    descriptor: (Ljava/lang/Object;Z)Ljava/util/NavigableSet;
+
+  public java.util.SortedSet<E> subSet(E, E);
+    descriptor: (Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/SortedSet;
+
+  public java.util.SortedSet<E> headSet(E);
+    descriptor: (Ljava/lang/Object;)Ljava/util/SortedSet;
+
+  public java.util.SortedSet<E> tailSet(E);
+    descriptor: (Ljava/lang/Object;)Ljava/util/SortedSet;
+
+  public boolean add(E);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public boolean remove(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public boolean addAll(java.util.Collection<? extends E>);
+    descriptor: (Ljava/util/Collection;)Z
+
+  public boolean removeAll(java.util.Collection<?>);
+    descriptor: (Ljava/util/Collection;)Z
+
+  public boolean retainAll(java.util.Collection<?>);
+    descriptor: (Ljava/util/Collection;)Z
+
+  public boolean removeIf(java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/function/Predicate;)Z
+
+  public void clear();
+    descriptor: ()V
+
+  public E removeFirst();
+    descriptor: ()Ljava/lang/Object;
+
+  public E removeLast();
+    descriptor: ()Ljava/lang/Object;
+
+  public E pollFirst();
+    descriptor: ()Ljava/lang/Object;
+
+  public E pollLast();
+    descriptor: ()Ljava/lang/Object;
+}

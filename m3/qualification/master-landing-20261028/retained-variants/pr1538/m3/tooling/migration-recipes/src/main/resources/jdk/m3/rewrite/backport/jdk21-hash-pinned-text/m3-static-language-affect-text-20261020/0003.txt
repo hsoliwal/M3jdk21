@@ -1,0 +1,14 @@
+category	problem_shape	selected_m3_owner	donor_or_reference	license_or_terms	decision	rationale
+LANGUAGE_GEOMETRY	CWID-indexed frequency/class/morphology/concept/subject sidecars	M3StaticLanguageGeometry	OpenJDK/M3LEX001	GPLv2+Classpath / first-party receiver	SELECT	Canonical product word IDs and JDK-owned immutable sidecars.
+PAIR_GEOMETRY	Sorted adjacency/CSR and bounded binary search	M3StaticLanguageGeometry	Apache Lucene	Apache-2.0	REFERENCE_ONLY	Use problem/algorithm shape; no Lucene source copied.
+PAIR_GEOMETRY	Array/index/graph problem taxonomy	M3StaticLanguageGeometry	LeetCode/HackerRank/GeeksforGeeks	reference sites	TAXONOMY_ONLY	No editorial or solution body copied.
+SUMMARIZATION	Significant-word clusters over frozen frequency geometry	M3LuhnSummarizer	Luhn significance method	algorithm literature	ADAPT_CONCEPT	Re-expressed over CWIDs and integer fixed-point; no donor code.
+TOKEN_BOUNDARY	Sentence/token/POS ingress only	M3 lexicon/token boundary	Apache OpenNLP	Apache-2.0	OPTIONAL_BOUNDARY	Classifier/tokenizer donor; never semantic authority or runtime language state.
+EMOTION_TAXONOMY	Fine-grained conversational emotion labels	M3EmotionOntology	Google Research GoEmotions	code Apache-2.0; dataset CC BY 4.0	VOCABULARY_ONLY	Embed label vocabulary only; no annotated corpus rows.
+EMOTION_TAXONOMY	Primary/intensity/opposite/dyad topology	M3EmotionOntology	Plutchik-style wheel	conceptual model	STRUCTURAL_REFERENCE	Built-in categorical topology; no empirical numeric coordinates asserted.
+AFFECT_DIMENSIONS	Valence/arousal/dominance numeric lexicon	M3AffectVector	NRC VAD lexicon	NRC separate terms	GATED_IMPORT	No dataset bytes in Apache core; explicit license/provenance required.
+EMOTION_LEXICON	Word-emotion associations	M3EmotionOntology importer boundary	NRC EmoLex	NRC separate terms	GATED_IMPORT	No silent redistribution or embedding.
+AFFECT_HIERARCHY	Affective WordNet hierarchy	M3EmotionOntology importer boundary	WordNet-Affect/WNAffect	implementation commonly GPLv3	GATED_DONOR	Do not copy GPL implementation into Apache core.
+CONCEPT_AFFECT	Concept-level sentics / Hourglass axes	M3AffectVector	SenticNet	resource/version-specific review required	REVIEW_REQUIRED	Representation supported; no resource copied until selected-license review.
+RELATION_GRAPH	Cyclic typed semantic relations	M3RelationStore	first-party M3Dag mechanics	Apache-2.0	SELECT	Share primitive edge/CSR mechanics without incorrectly forcing cycles into DAG.
+JNI_SCORE	Primitive batch significance scoring	M3LanguageNative	first-party Java oracle	Apache-2.0	SELECT	JNI accelerates mechanics only; no Java predicates/objects cross native boundary.

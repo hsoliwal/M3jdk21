@@ -1,0 +1,9 @@
+family	canonical_synexia_owner	m3_surface	m3jdk21_role	local_target_surface	license_boundary	state
+STRING_CORE	synexia-indexstring;synexia-mindex/runtime;synexia-mindex/m3index-core	M3String	RECEIVER_AND_JDK_INTEGRATOR	m3/ports/**; java.lang.String target work	Synexia first-party Apache-2.0; OpenJDK product source retains OpenJDK license	PINNED_CANDIDATE
+AST	synexia-mindex/compiler;synexia-indexstring AST owners;synexia-mindex/m3index-core	M3AST;M3ASTAtom	RECEIVER	compiler/index adapters only	Synexia first-party Apache-2.0	PINNED_CANDIDATE
+DAG	synexia-indexstring DAG owners;synexia-mindex/m3index-core	M3Dag	RECEIVER	target adapter only	Synexia first-party Apache-2.0	PINNED_CANDIDATE
+DATA_STRUCTURE	synexia-mindex/data-structure;synexia-mindex/m3index-data-structure	M3* data structures	RECEIVER	JDK-specific adapter only	Synexia first-party Apache-2.0	PINNED_CANDIDATE
+PRECOMPUTE	synexia-index-precompute;synexia-mindex/precompute-api;synexia-mindex/precompute-jini;synexia-indexstring precompute owners	M3 precompute	RECEIVER	JDK-specific binding/qualification	Synexia first-party Apache-2.0	PINNED_CANDIDATE
+GENERIC_NATIVE_JNI	synexia-mindex/native-jni and family parity kernels	M3 native kernels	RECEIVER	JDK JNI/JVMTI/HotSpot boundary	Generic first-party path-specific; JDK integration keeps target/upstream license	PINNED_CANDIDATE
+MIGRATION_RECIPES	synexia-openrewrite-recipes	M3 recipe DAG	THIN_RECEIVER_FIXTURE_PROOF	m3/tooling/migration-recipes receiver/adapters	Synexia first-party Apache-2.0	PINNED_CANDIDATE
+JDK_PRODUCT_INTEGRATION	hsoliwal/M3jdk21	OpenJDK String/VM/JNI integration	PRODUCT_OWNER	src/**;test/**;make/**	OpenJDK/path-specific license	TARGET_CANONICAL

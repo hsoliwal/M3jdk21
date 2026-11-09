@@ -1,0 +1,4 @@
+    /** Exact, sorted target paths sealed by this recipe crate. */
+    public List<String> targetPaths() {
+        return targets().stream().map(Target::path).toList();
+    }

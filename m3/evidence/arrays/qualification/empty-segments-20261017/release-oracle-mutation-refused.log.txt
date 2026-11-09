@@ -1,0 +1,5 @@
+FAIL: exact negative difference
+FAIL: exact positive difference
+FAIL: unsigned negative extreme
+FAIL: unsigned positive extreme
+FAIL: independent offsets

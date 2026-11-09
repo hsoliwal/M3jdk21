@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original SWT EventTable indexed arrays
+on:
+  pull_request:
+    paths:
+      - 'm3/eclipse/swt/qualification/eventtable-20261021/**'
+      - 'm3/tooling/shared-frontend/recipe-custody/datasets/swt-event-table-m3-20261021/**'
+      - '.github/workflows/m3-swt-event-table-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-swt-recipe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Execute original Maven/OpenRewrite exact single-file Java recipe
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          mvn -B -ntp -f "$root/pom.xml" -Pcontract \
+            -Dm3.dataset=swt-event-table-m3-20261021 \
+            "-Drecipe.owner.root=$root/sdk-owner" verify
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/eclipse.platform.swt
+          ref: chatgpt/m3-eclipse-eventtable-highwater-20261021
+          path: swt
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Assert exact original SWT generated source and differential
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          python3 "$root/receive.py" \
+            --dataset swt-event-table-m3-20261021 \
+            --recipe-owner "$root/sdk-owner" \
+            --target "$PWD/swt" --check
+          (cd swt && bash docs/m3/eventtable-20261021/prove.sh)

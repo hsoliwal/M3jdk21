@@ -1,0 +1,30 @@
+--- author-current-context-v5.py
++++ author-current-context-v5b.py
+@@ -19,7 +19,7 @@
+ RECEIVING_HEAD='5c1ee9490e76943dfdb3ca27fade0d093d017226'
+ 
+ def main():
+- ap=argparse.ArgumentParser();ap.add_argument('--producer',type=Path,required=True);ap.add_argument('--result-sha',required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--manifest',type=Path,required=True);a=ap.parse_args()
++ ap=argparse.ArgumentParser();ap.add_argument('--producer',type=Path,required=True);ap.add_argument('--authored',type=Path,required=True);ap.add_argument('--result-sha',required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--manifest',type=Path,required=True);a=ap.parse_args()
+  req=old.req;sha=old.sha;load=old.load;write=old.write;copy=old.copy;producer=a.producer.resolve();result_path=producer/'RESULT.json'
+  req(sha(result_path.read_bytes())==a.result_sha,'declared Cih producer result seal');result=load(result_path)
+  req(result['schema']=='synexia.cih-752.proof-result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None and result['sourceCommit']==old.SOURCE and result['targetCommit']==old.TARGET,'actual Cih PASS required')
+@@ -33,7 +33,8 @@
+   ext[str(p)]=actual
+  for ident in list(ext.values()):bind(ident['path'],ident)
+  req(sha((producer/'inputs.json').read_bytes())==result['inputManifestSHA256'] and sha((producer/'PATCH.json').read_bytes())==result['patchSHA256'],'Cih custody headers')
+- for ident in load(producer/'inputs.json'):bind(ident['path'],ident)
++ producer_inputs=load(producer/'inputs.json')
++ for ident in producer_inputs:bind(ident['path'],ident)
+  receipts=result['receipts'];req(len(receipts)==4,'four Cih gates')
+  for i,ident in enumerate(receipts):
+   bind(ident['path'],ident);receipt=load(Path(ident['path']));req(receipt['stage']==['static','compile','tests','runtime'][i] and receipt['exitCode']==0 and receipt['inputManifestSHA256']==result['inputManifestSHA256'] and receipt['priorReceipts']==receipts[:i],'ordered Cih receipts')
+@@ -49,7 +50,7 @@
+  req(output['receivingHead']==RECEIVING_HEAD and output['compositeContextManifestSHA256']==BASE_MANIFEST and output['replacements']==2 and output['additions']==3,'Cih composite lineage and operation totals')
+  req([e['path'] for e in output['outputs']]==sorted(EXPECTED) and {p.relative_to(generated).as_posix() for p in old.files(generated)}==EXPECTED|{'OUTPUT.json','candidate.patch'},'five exact Cih targets')
+  seal=sha(('SYNEXIA-CIH-752-OUTPUT/1\n'+''.join(e['path']+'\t'+e['sha256']+'\t'+str(e['bytes'])+'\n' for e in output['outputs'])).encode());req(seal==output['outputSeal']==runtime['outputSeal'] and output['outputs']==runtime['files'],'actual Cih export seal')
+- auth_path=C/'ci-repairs/CIH-AUTHORED.json';bind(auth_path);auth=load(auth_path);auth_by_path={e['path']:e for e in auth['targets']};req(set(auth_by_path)==EXPECTED and auth['sourceCommit']==old.SOURCE and auth['targetCommit']==old.TARGET,'closed admitted Cih target set')
++ auth_path=a.authored.resolve();req(old.row(auth_path) in producer_inputs,'Cih authoring declaration must be sealed in actual producer inputs');bind(auth_path);auth=load(auth_path);auth_by_path={e['path']:e for e in auth['targets']};req(set(auth_by_path)==EXPECTED and auth['sourceCommit']==old.SOURCE and auth['targetCommit']==old.TARGET,'closed admitted Cih target set')
+  req(auth['receivingHead']==RECEIVING_HEAD and auth['compositeContextManifestSHA256']==BASE_MANIFEST and auth['receiverStopResultSHA256']==RECEIVER_STOP and auth['historical569ActiveExceptions']==sorted(REPLACED),'admitted composite preimages and exact prior-overlay exceptions')
+  req(auth['replacements']==2 and auth['additions']==3 and auth['finalReceivingDistinctPaths']==24,'admitted finite scope')
+  for e in auth['contextInputs']:

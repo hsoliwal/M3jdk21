@@ -1,0 +1,27 @@
+kind	text
+note	javap -public over every class of slf4j-api-2.0.9 and slf4j-api-2.0.12 (javac --release 8, 0 errors each):
+note	2.0.9 694 lines, 2.0.12 718 lines; removed 0; added 24 (listed below).
+row	  public org.slf4j.helpers.Reporter();
+row	  public static final java.lang.String SLF4J_INTERNAL_REPORT_STREAM_KEY;
+row	  public static final java.lang.String SLF4J_INTERNAL_VERBOSITY_KEY;
+row	  public static final org.slf4j.helpers.Reporter$Level ERROR;
+row	  public static final org.slf4j.helpers.Reporter$Level INFO;
+row	  public static final org.slf4j.helpers.Reporter$Level WARN;
+row	  public static final org.slf4j.helpers.Reporter$TargetChoice Stderr;
+row	  public static final org.slf4j.helpers.Reporter$TargetChoice Stdout;
+row	  public static final void error(java.lang.String);
+row	  public static final void error(java.lang.String, java.lang.Throwable);
+row	  public static final void warn(java.lang.String);
+row	  public static org.slf4j.helpers.Reporter$Level valueOf(java.lang.String);
+row	  public static org.slf4j.helpers.Reporter$Level[] values();
+row	  public static org.slf4j.helpers.Reporter$TargetChoice valueOf(java.lang.String);
+row	  public static org.slf4j.helpers.Reporter$TargetChoice[] values();
+row	  public static void info(java.lang.String);
+row	class org.slf4j.helpers.Reporter$1 {
+row	final class org.slf4j.helpers.Reporter$Level extends java.lang.Enum<org.slf4j.helpers.Reporter$Level> {
+row	final class org.slf4j.helpers.Reporter$TargetChoice extends java.lang.Enum<org.slf4j.helpers.Reporter$TargetChoice> {
+row	public class org.slf4j.helpers.Reporter {
+row	}
+row	}
+row	}
+row	}

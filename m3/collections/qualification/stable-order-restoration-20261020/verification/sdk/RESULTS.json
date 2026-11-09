@@ -1,0 +1,412 @@
+{
+  "admissions": [
+    {
+      "after_sha256": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
+      "before_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
+      "materialization": "actual OpenRewrite Result retained by ordered proof test",
+      "pass": "stable-order-groups",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+      "receiving_compile": "PASS",
+      "sdk_receipts": {
+        "SDK_INPUTS.tsv": "7f50dcfcace24274d044db6df38ae2b5aa0a52d3c6ebebfdf79f12a5fbcd5245",
+        "SDK_REFUSALS.tsv": "57ea22734b25bd08dd6a3602f3773b287a31cca15436d735922beffded0683b8",
+        "SDK_RESULTS.tsv": "a32242abfc213911b947fd08a2e7c2831e552d227f233644861b35cf870a8c1e",
+        "java.patch": "b356015e16a843b1cd0352a62d9da90a4722feaea8215d01deb0b534fdc93cd1"
+      },
+      "sdk_tests": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 5
+      }
+    },
+    {
+      "after_sha256": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
+      "before_sha256": "ABSENT",
+      "materialization": "actual OpenRewrite Result retained by ordered proof test",
+      "pass": "index-contract",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java",
+      "receiving_compile": "PASS",
+      "sdk_receipts": {
+        "SDK_INPUTS.tsv": "3c11cbfd898c6ff5b194f96229ee1a0bf308e1ca2d0a1a0d7dd49dfb9f05c732",
+        "SDK_REFUSALS.tsv": "a612da96370af65de304fd8e181299ae82933f91db2356f7b5d48eff03900735",
+        "SDK_RESULTS.tsv": "9c7858e8af7caf57c20ae38fe5d7870cf47fc34396100e18d9d489e0069e7e72",
+        "java.patch": "ed6b35ea431f5752491f4fe958b731a0c124896e753f8a7a3c8d0f89153f03ee"
+      },
+      "sdk_tests": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 5
+      }
+    },
+    {
+      "after_sha256": "a9dfb46285a65001c135fda31e3b69fe7a3882e00412029fe2abd64b1384fb9e",
+      "before_sha256": "ABSENT",
+      "materialization": "actual OpenRewrite Result retained by ordered proof test",
+      "pass": "index-resource-probe",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java",
+      "receiving_compile": "PASS",
+      "sdk_receipts": {
+        "SDK_INPUTS.tsv": "2504a09b516d462a3cc96f34d73b7bfcdcae1947aa988cade06c42e3a44b2d23",
+        "SDK_REFUSALS.tsv": "ffd8320369271ef670249ed1fef2ea3d13cb93716fb3769dc8ffeb0c491739e0",
+        "SDK_RESULTS.tsv": "7d99ab972b97e1268317ffe054abb30b6ee5cf2f32435230f3e5017d4462055c",
+        "java.patch": "6ee38bd03e3f0a98570daeab5e160a428b92b3087f416af04f442f55e1b6a8c8"
+      },
+      "sdk_tests": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 5
+      }
+    },
+    {
+      "after_sha256": "2d0b1bb9a515eefd48c3de29b32dced613c4e9f05c0547d677d8c8f67c004397",
+      "before_sha256": "ABSENT",
+      "materialization": "actual OpenRewrite Result retained by ordered proof test",
+      "pass": "index-junit",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java",
+      "receiving_compile": "PASS",
+      "sdk_receipts": {
+        "SDK_INPUTS.tsv": "a4b9afc9760ce9ef8584ea20f1f98bba36514eb49e6def399382d77ddc96460d",
+        "SDK_REFUSALS.tsv": "73dc508f5278f309786fb8939ce4c787c752672d43ce0f2d2c74bc2613a263aa",
+        "SDK_RESULTS.tsv": "9e9167c185376e20633f64f719923c333f772695939e3a052ca6551c1a84e91b",
+        "java.patch": "fec0d9c38667ea0bed9c558cad6b62554461995fe1439020e8192f35335da213"
+      },
+      "sdk_tests": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 5
+      }
+    }
+  ],
+  "admitted_files": {
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java": "a9dfb46285a65001c135fda31e3b69fe7a3882e00412029fe2abd64b1384fb9e",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java": "2d0b1bb9a515eefd48c3de29b32dced613c4e9f05c0547d677d8c8f67c004397"
+  },
+  "canonical_base": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "commands": [
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+        "-f",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml",
+        "-Dm3.pass=stable-order-groups",
+        "-Dm3.parser.classpath=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "-DskipTests",
+        "test-compile"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 3.453838,
+      "exit": 0,
+      "name": "stable-order-groups-compile",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/stable-order-groups-compile.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/stable-order-groups-compile.stdout.log",
+      "stdout_sha256": "6582d24828d28b928b01b36107da123b158432a6e2199a41328fe7869f416011"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+        "-f",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml",
+        "-Dm3.pass=stable-order-groups",
+        "-Dm3.parser.classpath=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "surefire:test"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 6.767725,
+      "exit": 0,
+      "name": "stable-order-groups-sdk",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/stable-order-groups-sdk.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/stable-order-groups-sdk.stdout.log",
+      "stdout_sha256": "f2a7d8482cdfa4af51dfae25b0c74a27e58bbd20638f0094411e3a5969525774"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/stable-order-groups-receiving-classes",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 0.807069,
+      "exit": 0,
+      "name": "stable-order-groups-receiving-compile",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/stable-order-groups-receiving-compile.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/stable-order-groups-receiving-compile.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+        "-f",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml",
+        "-Dm3.pass=index-contract",
+        "-Dm3.parser.classpath=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "-DskipTests",
+        "test-compile"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 3.087117,
+      "exit": 0,
+      "name": "index-contract-compile",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-contract-compile.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-contract-compile.stdout.log",
+      "stdout_sha256": "c2aa57cd9bae13bd337b604c26212a396d5b2ef5dc6862a23672dc4a67bb6144"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+        "-f",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml",
+        "-Dm3.pass=index-contract",
+        "-Dm3.parser.classpath=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "surefire:test"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 7.266237,
+      "exit": 0,
+      "name": "index-contract-sdk",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-contract-sdk.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-contract-sdk.stdout.log",
+      "stdout_sha256": "125eceed1a54c21be95032f63497e6e16ef2d7f88299b74195374a2a72e39204"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-contract-receiving-classes",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 1.155651,
+      "exit": 0,
+      "name": "index-contract-receiving-compile",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-contract-receiving-compile.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-contract-receiving-compile.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+        "-f",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml",
+        "-Dm3.pass=index-resource-probe",
+        "-Dm3.parser.classpath=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "-DskipTests",
+        "test-compile"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 3.121244,
+      "exit": 0,
+      "name": "index-resource-probe-compile",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-resource-probe-compile.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-resource-probe-compile.stdout.log",
+      "stdout_sha256": "3327d238e2d535c73946c2a9d065acf46de278f5e906df11603aadbc808f8a64"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+        "-f",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml",
+        "-Dm3.pass=index-resource-probe",
+        "-Dm3.parser.classpath=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "surefire:test"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 5.605891,
+      "exit": 0,
+      "name": "index-resource-probe-sdk",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-resource-probe-sdk.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-resource-probe-sdk.stdout.log",
+      "stdout_sha256": "6ad197a1f0fbc5e658596ca5a108f17331e140cf815956007f56ee2c29f6986b"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-resource-probe-receiving-classes",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 0.967093,
+      "exit": 0,
+      "name": "index-resource-probe-receiving-compile",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-resource-probe-receiving-compile.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-resource-probe-receiving-compile.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+        "-f",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml",
+        "-Dm3.pass=index-junit",
+        "-Dm3.parser.classpath=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "-DskipTests",
+        "test-compile"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 3.016704,
+      "exit": 0,
+      "name": "index-junit-compile",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-junit-compile.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-junit-compile.stdout.log",
+      "stdout_sha256": "e92dfac814d4f0730204435e8c477f11c86d68d802f1ba107148088b5a352537"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/maven/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+        "-f",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml",
+        "-Dm3.pass=index-junit",
+        "-Dm3.parser.classpath=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "surefire:test"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 4.856912,
+      "exit": 0,
+      "name": "index-junit-sdk",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-junit-sdk.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-junit-sdk.stdout.log",
+      "stdout_sha256": "a85b76036219f2971b719e3fdb16172ecb6cb4f1e5aed5dff1a1ee787f123370"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-junit-receiving-classes",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host",
+      "elapsed_seconds": 1.020495,
+      "exit": 0,
+      "name": "index-junit-receiving-compile",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-junit-receiving-compile.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/index-junit-receiving-compile.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "engine_bindings": {
+    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java": {
+      "git_blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "reference": "https://github.com/hsoliwal/com.synexia/blob/f04fbac91a7891e64b77c7b24cef1ab75ec88144/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": {
+      "git_blob": "bd98b6e07489747d1246f4eeca4b37af7f8e651c",
+      "reference": "urn:sha256:052fea312ec7bc5cac52869ce5ae9021a635c7e6e09208b95f382eb9e2e9441b",
+      "sha256": "052fea312ec7bc5cac52869ce5ae9021a635c7e6e09208b95f382eb9e2e9441b"
+    },
+    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java": {
+      "git_blob": "05c56adbdd6a0fca923a47486203c7b9b326831d",
+      "reference": "https://github.com/hsoliwal/com.synexia/blob/f04fbac91a7891e64b77c7b24cef1ab75ec88144/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f"
+    },
+    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java": {
+      "git_blob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
+      "reference": "https://github.com/hsoliwal/com.synexia/blob/f04fbac91a7891e64b77c7b24cef1ab75ec88144/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
+    }
+  },
+  "passes": 4,
+  "production_changes": 1,
+  "production_overlays": false,
+  "published_packet_source": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
+  "runtime_status": "SEPARATE_GATE",
+  "schema": "M3_SERIAL_EXISTING_ATOM_REPLAY_V1",
+  "sdk_tests": 20,
+  "source_built_m3jdk21": "NOT_RUN",
+  "status": "PASS",
+  "target_base": "95d0266ff15ae1f11876cce7360b155ef33a1862",
+  "verification_files": 3
+}

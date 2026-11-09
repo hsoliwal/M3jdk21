@@ -1,0 +1,7 @@
+stage	status	scope
+source_review	EXECUTED	Runnable, Callable, existing canonical inventory and its two tests
+whole_sdk_inventory	NOT_RUN	No complete module or method count
+pass_contract	MATERIALIZED	Whole-SDK scope and refusal/compatibility requirements
+recipe_source_change	NOT_APPLIED	No existing recipe bytes changed
+product_source_change	NOT_APPLIED	No methods added or changed
+publication	NOT_RUN	No commit, PR or merge

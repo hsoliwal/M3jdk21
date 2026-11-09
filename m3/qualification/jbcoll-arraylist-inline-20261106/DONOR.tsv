@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Crate m3jdk21-java-base-arraylist-inline-20261025 blobs read by apply.py --donor-git (hsoliwal/com.synexia develop ca1aafc4d94f9dd1ee288226dcca070cc60991c9).
+role	path	blob
+pre	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-java-base-arraylist-inline-20261025/pre/ArrayList.java.txt	885d891b0f817080824622d592691a27cf8ffa26
+post	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-java-base-arraylist-inline-20261025/ArrayList.java.txt	a03fee656f90ce31a2f2a9e77f1f22f0a4bc5d51
+test	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-java-base-arraylist-inline-20261025/M3ArrayListInlineMaskTest.java.txt	56ce4a884caf60342812481c7ab11a3e13a53fc3

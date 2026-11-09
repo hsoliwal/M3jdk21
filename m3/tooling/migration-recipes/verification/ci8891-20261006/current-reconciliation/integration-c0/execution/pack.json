@@ -1,0 +1,36 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+    "pack",
+    "--root",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source",
+    "--plan",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/package-plan.json",
+    "--output",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/bundle"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1",
+  "ended": "2026-10-06T06:48:33.557952+00:00",
+  "environment": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TZ": "UTC"
+  },
+  "exitCode": 0,
+  "id": "pack",
+  "priorReceipts": [],
+  "started": "2026-10-06T06:48:26.722596+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/pack.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 467,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/pack.stdout.log",
+    "sha256": "32a0969911bd1baf2a1469cbc32a3ce24307459df3b7660a594118e702b5289d"
+  }
+}

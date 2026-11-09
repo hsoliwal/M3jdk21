@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Ant-Version: Intentionally omitted
+Created-By: 21
+Build-Jdk-Spec: 21
+

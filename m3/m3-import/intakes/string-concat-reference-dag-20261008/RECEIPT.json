@@ -1,0 +1,28 @@
+{
+  "schema": "m3-synexia-receiver-receipt-v1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_branch": "m3/string-concat-reference-dag-recipe-20261008",
+  "source_recipe": "com.synexia.rewrite.M3Jdk21StringConcatReferenceDag",
+  "source_task_crate": "synexia-m3-recipe/task-crates/m3jdk21-string-concat-reference-dag-20261008.yaml",
+  "donor_commit": "b0904cb2966b9a5c277edb92d9c4c025978fa794",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_branch": "m3/string-concat-reference-dag-receiver-20261008",
+  "target_path": "src/java.base/share/classes/java/lang/StringConcatHelper.java",
+  "target_preimage_sha256": "9e247659c7af6834e5aab378e98a61a843fc5c21497decd2e85bab445cc4da34",
+  "target_postimage_sha256": "c16dcf6693d8f94cb52f9f902b71d7d91160c287affa15e16d245f7e19121510",
+  "runtime_dependency_on_synexia": false,
+  "semantic_rules": [
+    "preserve left-to-right already-evaluated concat conversion order",
+    "preserve StringConcatHelper.stringOf null/toString semantics",
+    "remove redundant String[] pieces staging only",
+    "retain M3StringPool balanced DAG as target runtime authority",
+    "return a fresh String wrapper"
+  ],
+  "verification": {
+    "source_checker": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+    "jtreg": "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+    "jdk_build": "NOT_RUN",
+    "jtreg_run": "NOT_RUN",
+    "synexia_maven_recipe_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "M3_HOTSPOT_CACHE_LIBRARY_V1",
+  "source_hotspot_git_tree": "afaa42082ed148944e52591d8ab43960890c8d39",
+  "configured_source_head": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "combined_runtime_head_at_native_completion": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+  "hotspot_tree_equal": true,
+  "path": "/dev/shm/m3-combined-image-f8287/build/support/modules_libs/java.base/server/libjvm.so",
+  "bytes": 39506672,
+  "sha256": "463ef451f50a42708fb56d1ab8900ac6adbe2859f5b510ad560b6cb157df74a6",
+  "not_full_image_proof": true
+}

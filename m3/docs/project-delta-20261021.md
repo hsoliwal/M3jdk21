@@ -1,0 +1,13 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Listening for project changes with M3File and M3AST
+
+M3JDK21 owns the file and compiler primitives. `M3File.observe(maxBytes)` records timestamp, size and raw SHA-256 in one checked observation. `M3FileDeltaLedger` keeps these in the existing indexed state, including version-1 compatibility and stable tombstones. Select timestamp-sensitive scans when every touch should count, or content-only scans when unchanged bytes should reuse previous work. Both policies hash contents even when metadata is unchanged.
+
+`M3FileWatcher.open(root, inputs, exclusions, image, interval, timestampChanges)` listens through the filesystem WatchService. `awaitChange` returns a pending immutable snapshot. Execute the selected work, then call `commit(snapshot)` only on success; a false result leaves newer input pending. Exceptions and failed compilation must not commit. An overload accepts a caller-owned exclusion predicate for nested output layouts. Events are reconciliation hints; periodic full scans recover from missed events. The implementation currently rehashes all admitted files on reconciliation and makes no large-repository performance claim.
+
+The existing `M3BuildImpactPlan.compute` consumes compiler-authoritative reverse edges. `select(snapshot, mode, countThreshold, percentThreshold)` reports total live files/sources, direct deltas, affected source closure, selected sources and removal slots. Thresholds count affected live sources, including dependents; -1 disables a threshold. FULL is explicit. INCREMENTAL cannot waive an incomplete graph. Removed outputs remain the build consumer's responsibility.
+
+`M3AST.buildFacts(unit)` uses the original compiler's ANALYZED callback and memoized projection. Facts contain source URI/seal, declared types and referenced owners/types, with explicit PARTIAL coverage. The builtin M3AST plugin accepts a paired `facts64=<base64url UTF-8 absolute path>` and `factsid=<UUID>`. Receipts publish atomically only after the entire compiler session and all consumers succeed. Callers must bind the expected UUID and source/context; a prior file is never evidence for a failed new invocation.
+
+The matching Maven fork uses this same frontend and original file state. Its current watch mode performs clean plus the requested lifecycle until processor, lookup and output contracts permit certified selective execution. The Java selection API's finite complete-graph fixtures do not remove that production limitation. Recipe ownership, source seals, contract tests and correction history remain in Synexia's `m3-project-delta-20261021` crate.

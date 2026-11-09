@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.config.CompositeRecipe"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 55
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 2

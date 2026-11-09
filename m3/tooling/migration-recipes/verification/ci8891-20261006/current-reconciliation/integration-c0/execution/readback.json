@@ -1,0 +1,45 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/finish_package.py"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1",
+  "ended": "2026-10-06T06:48:35.055401+00:00",
+  "environment": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TZ": "UTC"
+  },
+  "exitCode": 0,
+  "id": "readback",
+  "priorReceipts": [
+    {
+      "bytes": 1641,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/pack.json",
+      "sha256": "07a504cf806e1a22e5928fa3001fcedd77ebef6e229f1ac05376e15aa36f1a44"
+    },
+    {
+      "bytes": 1634,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/verify.json",
+      "sha256": "9fbf39c6c8872b75c6e81245865962327c06fa66b2690171a192b492111f988f"
+    },
+    {
+      "bytes": 2041,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/extract.json",
+      "sha256": "01acdf20ddc682f3d7b746bae646eb6c2733678b27466606504c8fcf8aad2ac2"
+    }
+  ],
+  "started": "2026-10-06T06:48:34.339369+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/readback.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 1075,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/readback.stdout.log",
+    "sha256": "24777d30e22e732b26776e3385616872f7a5234b2ed6bf1e08f764593e8a9c1b"
+  }
+}

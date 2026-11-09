@@ -1,0 +1,22 @@
+{
+  "command": [
+    "cc",
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I/usr/lib/jvm/java-21-openjdk-amd64/include",
+    "-I/usr/lib/jvm/java-21-openjdk-amd64/include/linux",
+    "-I/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/java-mask/headers",
+    "-O3",
+    "-fPIC",
+    "-shared",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=undefined",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/canonical/synexia-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/inputs/src/java.base/share/native/libjava/M3CollectionMasks.c",
+    "-o",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/java-mask/libM3CollectionMasksQualification.so"
+  ],
+  "exit": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

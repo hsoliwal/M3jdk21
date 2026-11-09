@@ -1,0 +1,9 @@
+owned	incoming	m3_count	donor_count	m3_changed	donor_changed
+2	1	1	1	true	true
+2	2	2	2	false	false
+2	3	2	0	false	true
+APACHE_RETAIN_MATRIX_PASS cases=294 explicitDonorDivergences=90
+APACHE_ORIGINAL_SEED_DIVERGENCE step=702 op=5 key=6 input=[6, 6, 6] before=[1:2,2:21,2:6,1:10] donorAfter=[] m3After=[6, 6]
+APACHE_BAG_CONTRACT_SEED_PASS operations=6000 checks=51079 perOperation=[983, 986, 994, 1026, 1027, 984]
+
+EXIT=0

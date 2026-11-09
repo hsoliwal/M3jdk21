@@ -1,0 +1,4 @@
+source_family	canonical_recipe	target_owner	entrypoint	status	promotion_gate
+Synexia M3 inline-atomize-patternize-comment + array-sort category	com.synexia.m3jdk21.StableDescendingIndex20261019	com.m3.collections.M3IndexedListSnapshot	sortedDescending;sortedMaskedByPhysicalStatesDescending	STAGED_TARGET_REVIEW	Maven SDK,Java21,JNI,ABI,contract
+M3JDK21 existing M3IndexPathMasks Java/C17 JNI	EXISTING_TARGET_OWNER	com.m3.collections.M3IndexPathMasks	select(int[],int[],int[][],int[],int[],int,int,int,Backend)	UNCHANGED_REUSED	JNI checked parity
+OpenJDK/java.util identity	NO_PUBLIC_CONTRACT_REWRITE	java.util public JDK classes	unchanged JDK identity/serial/concurrent contract	HOLD	String->arrays->collections->AST/Compiler

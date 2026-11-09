@@ -1,0 +1,298 @@
+# SPDX-License-Identifier: Apache-2.0
+# Verdict counts of M3HashReentrantLookupSelfTest (report mode) per owner pair, hash mode/action and operation: the java.util twin (reference column), the M3 owner on base (#2676 head 0b97282f6d1d) and on head (this leaf). One case per user-callback call N of the operation. Regenerate with differential.sh.
+m3_owner	jdk_twin	mode	operation	jdk	m3_base	m3_head
+M3HashMap	HashMap	collide/race9	compute(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3HashMap	HashMap	collide/race9	computeIfAbsent(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3HashMap	HashMap	collide/race9	merge(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3HashMap	HashMap	collide/race9	put(new)	BEFORE=8	BEFORE=8	BEFORE=8
+M3HashMap	HashMap	collide/race9	putIfAbsent(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3HashMap	HashMap	collide/reuse	compute(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3HashMap	HashMap	collide/reuse	compute(remove)	BEFORE=3 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	compute(write)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=4	BEFORE=3
+M3HashMap	HashMap	collide/reuse	computeIfAbsent(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3HashMap	HashMap	collide/reuse	computeIfPresent	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	containsKey	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	containsValue	AFTER=2	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3HashMap	HashMap	collide/reuse	entrySet.contains	BEFORE=1 AFTER=4	BEFORE=3 AFTER=1	BEFORE=3 AFTER=1
+M3HashMap	HashMap	collide/reuse	entrySet.remove	BEFORE=1 DAMAGED=3	BEFORE=3 WRONG=1	BEFORE=4
+M3HashMap	HashMap	collide/reuse	get	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	get(6)	BEFORE=1 AFTER=6	BEFORE=7	BEFORE=7
+M3HashMap	HashMap	collide/reuse	getOrDefault	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	keySet.contains	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	keySet.remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	merge(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3HashMap	HashMap	collide/reuse	merge(remove)	BEFORE=1 AFTER=2 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	merge(write)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=4	BEFORE=3
+M3HashMap	HashMap	collide/reuse	put(existing)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	put(new)	BEFORE=1 DAMAGED=7	BEFORE=8	BEFORE=8
+M3HashMap	HashMap	collide/reuse	putIfAbsent(existing)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	putIfAbsent(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3HashMap	HashMap	collide/reuse	remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	remove(6)	BEFORE=1 DAMAGED=6	BEFORE=6 DAMAGED=1	BEFORE=7
+M3HashMap	HashMap	collide/reuse	remove(k,v)	BEFORE=1 DAMAGED=3	BEFORE=3 WRONG=1	BEFORE=4
+M3HashMap	HashMap	collide/reuse	replace	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	collide/reuse	replace(k,old,new)	BEFORE=1 AFTER=3	BEFORE=3 WRONG=1	BEFORE=4
+M3HashMap	HashMap	collide/reuse	values.remove	FAILFAST=2 DAMAGED=1	FAILFAST=2	FAILFAST=2
+M3HashMap	HashMap	spread/race9	compute(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3HashMap	HashMap	spread/race9	computeIfAbsent(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3HashMap	HashMap	spread/race9	merge(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3HashMap	HashMap	spread/race9	put(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3HashMap	HashMap	spread/race9	putIfAbsent(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3HashMap	HashMap	spread/reuse	compute(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3HashMap	HashMap	spread/reuse	compute(remove)	BEFORE=2 WRONG=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	compute(write)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=3	BEFORE=2
+M3HashMap	HashMap	spread/reuse	computeIfAbsent(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3HashMap	HashMap	spread/reuse	computeIfPresent	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	containsKey	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	containsValue	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3HashMap	HashMap	spread/reuse	entrySet.contains	BEFORE=1 AFTER=3	BEFORE=2 AFTER=1	BEFORE=2 AFTER=1
+M3HashMap	HashMap	spread/reuse	entrySet.remove	BEFORE=1 WRONG=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	spread/reuse	get	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	get(6)	BEFORE=1 AFTER=1	BEFORE=2	BEFORE=2
+M3HashMap	HashMap	spread/reuse	getOrDefault	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	keySet.contains	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	keySet.remove	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	merge(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3HashMap	HashMap	spread/reuse	merge(remove)	BEFORE=1 AFTER=1 WRONG=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	merge(write)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=3	BEFORE=2
+M3HashMap	HashMap	spread/reuse	put(existing)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	put(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3HashMap	HashMap	spread/reuse	putIfAbsent(existing)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	putIfAbsent(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3HashMap	HashMap	spread/reuse	remove	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	remove(6)	BEFORE=1 DAMAGED=1	BEFORE=1 DAMAGED=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	remove(k,v)	BEFORE=1 WRONG=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	spread/reuse	replace	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashMap	HashMap	spread/reuse	replace(k,old,new)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashMap	HashMap	spread/reuse	values.remove	FAILFAST=2	FAILFAST=2	FAILFAST=2
+M3HashSet	HashSet	collide/race9	set.add(new)	BEFORE=8	BEFORE=8 AFTER=8	BEFORE=8 AFTER=8
+M3HashSet	HashSet	collide/reuse	set.add(existing)	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3HashSet	HashSet	collide/reuse	set.add(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=16
+M3HashSet	HashSet	collide/reuse	set.contains	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3HashSet	HashSet	collide/reuse	set.remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3HashSet	HashSet	collide/reuse	set.remove(6)	BEFORE=1 DAMAGED=6	BEFORE=6 DAMAGED=1	BEFORE=7
+M3HashSet	HashSet	spread/race9	set.add(new)	BEFORE=1	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3HashSet	HashSet	spread/reuse	set.add(existing)	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3HashSet	HashSet	spread/reuse	set.add(new)	BEFORE=1	BEFORE=2	BEFORE=2
+M3HashSet	HashSet	spread/reuse	set.contains	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3HashSet	HashSet	spread/reuse	set.remove	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1	BEFORE=2
+M3HashSet	HashSet	spread/reuse	set.remove(6)	BEFORE=1 DAMAGED=1	BEFORE=1 DAMAGED=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	collide/race9	compute(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/race9	computeIfAbsent(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/race9	merge(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/race9	put(new)	BEFORE=8	BEFORE=8	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/race9	putFirst(new)	BEFORE=8	BEFORE=8	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/race9	putIfAbsent(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/reuse	compute(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/reuse	compute(remove)	BEFORE=3 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	compute(write)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=4	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	computeIfAbsent(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/reuse	computeIfPresent	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	containsKey	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	containsValue	AFTER=2	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3LinkedHashMap	LinkedHashMap	collide/reuse	entrySet.contains	BEFORE=1 AFTER=4	BEFORE=3 AFTER=1	BEFORE=3 AFTER=1
+M3LinkedHashMap	LinkedHashMap	collide/reuse	entrySet.remove	BEFORE=1 DAMAGED=3	BEFORE=3 WRONG=1	BEFORE=4
+M3LinkedHashMap	LinkedHashMap	collide/reuse	get	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	get(6)	BEFORE=1 AFTER=6	BEFORE=7	BEFORE=7
+M3LinkedHashMap	LinkedHashMap	collide/reuse	getOrDefault	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	keySet.contains	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	keySet.remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	merge(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/reuse	merge(remove)	BEFORE=1 AFTER=2 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	merge(write)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=4	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	put(existing)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	put(new)	BEFORE=1 DAMAGED=7	BEFORE=8	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/reuse	putFirst(new)	BEFORE=1 DAMAGED=7	BEFORE=8	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/reuse	putIfAbsent(existing)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	putIfAbsent(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3LinkedHashMap	LinkedHashMap	collide/reuse	remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	remove(6)	BEFORE=1 DAMAGED=6	BEFORE=6 DAMAGED=1	BEFORE=7
+M3LinkedHashMap	LinkedHashMap	collide/reuse	remove(k,v)	BEFORE=1 DAMAGED=3	BEFORE=3 WRONG=1	BEFORE=4
+M3LinkedHashMap	LinkedHashMap	collide/reuse	replace	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	collide/reuse	replace(k,old,new)	BEFORE=1 AFTER=3	BEFORE=3 WRONG=1	BEFORE=4
+M3LinkedHashMap	LinkedHashMap	collide/reuse	values.remove	FAILFAST=2 DAMAGED=1	FAILFAST=2	FAILFAST=2
+M3LinkedHashMap	LinkedHashMap	spread/race9	compute(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/race9	computeIfAbsent(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/race9	merge(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/race9	put(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/race9	putFirst(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/race9	putIfAbsent(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	compute(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	compute(remove)	BEFORE=2 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	compute(write)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=3	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	computeIfAbsent(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	computeIfPresent	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	containsKey	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	containsValue	AFTER=2	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	entrySet.contains	BEFORE=1 AFTER=3	BEFORE=2 AFTER=1	BEFORE=2 AFTER=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	entrySet.remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	spread/reuse	get	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	get(6)	BEFORE=1 AFTER=1	BEFORE=2	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	getOrDefault	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	keySet.contains	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	keySet.remove	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	merge(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	merge(remove)	BEFORE=1 AFTER=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	merge(write)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=3	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	put(existing)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	put(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	putFirst(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	putIfAbsent(existing)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	putIfAbsent(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3LinkedHashMap	LinkedHashMap	spread/reuse	remove	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	remove(6)	BEFORE=1 DAMAGED=1	BEFORE=1 DAMAGED=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	remove(k,v)	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	spread/reuse	replace	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap	LinkedHashMap	spread/reuse	replace(k,old,new)	BEFORE=1 AFTER=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap	LinkedHashMap	spread/reuse	values.remove	FAILFAST=2	FAILFAST=2	FAILFAST=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/race9	compute(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/race9	computeIfAbsent(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/race9	merge(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/race9	put(new)	BEFORE=8	BEFORE=8	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/race9	putFirst(new)	BEFORE=8	BEFORE=8	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/race9	putIfAbsent(new)	BEFORE=8	BEFORE=8 WRONG=8	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	compute(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	compute(remove)	BEFORE=3 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	compute(write)	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=4	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	computeIfAbsent(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	computeIfPresent	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	containsKey	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	containsValue	AFTER=2	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	entrySet.contains	BEFORE=1 AFTER=4	BEFORE=3 AFTER=1	BEFORE=3 AFTER=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	entrySet.remove	BEFORE=1 DAMAGED=3	BEFORE=3 WRONG=1	BEFORE=4
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	get	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	get(6)	BEFORE=1 DAMAGED=6	BEFORE=6 DAMAGED=1	BEFORE=7
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	getOrDefault	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	keySet.contains	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	keySet.remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	merge(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	merge(remove)	BEFORE=1 AFTER=2 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	merge(write)	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=4	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	put(existing)	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	put(new)	BEFORE=1 DAMAGED=7	BEFORE=8	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	putFirst(new)	BEFORE=1 DAMAGED=7	BEFORE=8	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	putIfAbsent(existing)	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	putIfAbsent(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=8
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	remove(6)	BEFORE=1 DAMAGED=6	BEFORE=6 DAMAGED=1	BEFORE=7
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	remove(k,v)	BEFORE=1 DAMAGED=3	BEFORE=3 WRONG=1	BEFORE=4
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	replace	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	replace(k,old,new)	BEFORE=1 DAMAGED=3	BEFORE=3 WRONG=1	BEFORE=4
+M3LinkedHashMap(access)	LinkedHashMap(access)	collide/reuse	values.remove	FAILFAST=2 DAMAGED=1	FAILFAST=2	FAILFAST=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/race9	compute(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/race9	computeIfAbsent(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/race9	merge(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/race9	put(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/race9	putFirst(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/race9	putIfAbsent(new)	BEFORE=1	BEFORE=1 WRONG=1	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	compute(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	compute(remove)	BEFORE=2 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	compute(write)	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=3	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	computeIfAbsent(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	computeIfPresent	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	containsKey	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	containsValue	AFTER=2	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	entrySet.contains	BEFORE=1 AFTER=3	BEFORE=2 AFTER=1	BEFORE=2 AFTER=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	entrySet.remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	get	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	get(6)	BEFORE=1 DAMAGED=1	BEFORE=1 DAMAGED=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	getOrDefault	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	keySet.contains	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	keySet.remove	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	merge(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	merge(remove)	BEFORE=1 AFTER=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	merge(write)	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=3	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	put(existing)	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	put(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	putFirst(new)	BEFORE=1	BEFORE=1	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	putIfAbsent(existing)	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	putIfAbsent(new)	BEFORE=1	BEFORE=2	BEFORE=1
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	remove	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	remove(6)	BEFORE=1 DAMAGED=1	BEFORE=1 DAMAGED=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	remove(k,v)	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	replace	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	replace(k,old,new)	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashMap(access)	LinkedHashMap(access)	spread/reuse	values.remove	FAILFAST=2	FAILFAST=2	FAILFAST=2
+M3LinkedHashSet	LinkedHashSet	collide/race9	set.add(new)	BEFORE=8	BEFORE=8 AFTER=8	BEFORE=8 AFTER=8
+M3LinkedHashSet	LinkedHashSet	collide/reuse	set.add(existing)	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3LinkedHashSet	LinkedHashSet	collide/reuse	set.add(new)	BEFORE=1 DAMAGED=7	BEFORE=16	BEFORE=16
+M3LinkedHashSet	LinkedHashSet	collide/reuse	set.contains	BEFORE=1 AFTER=2	BEFORE=2 AFTER=1	BEFORE=3
+M3LinkedHashSet	LinkedHashSet	collide/reuse	set.remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3LinkedHashSet	LinkedHashSet	collide/reuse	set.remove(6)	BEFORE=1 DAMAGED=6	BEFORE=6 DAMAGED=1	BEFORE=7
+M3LinkedHashSet	LinkedHashSet	spread/race9	set.add(new)	BEFORE=1	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3LinkedHashSet	LinkedHashSet	spread/reuse	set.add(existing)	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3LinkedHashSet	LinkedHashSet	spread/reuse	set.add(new)	BEFORE=1	BEFORE=2	BEFORE=2
+M3LinkedHashSet	LinkedHashSet	spread/reuse	set.contains	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3LinkedHashSet	LinkedHashSet	spread/reuse	set.remove	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3LinkedHashSet	LinkedHashSet	spread/reuse	set.remove(6)	BEFORE=1 DAMAGED=1	BEFORE=1 DAMAGED=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	collide/race9	compute(new)	BEFORE=1 WRONG=8 DAMAGED=7	BEFORE=8 WRONG=8 DAMAGED=1	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/race9	computeIfAbsent(new)	BEFORE=1 WRONG=8 DAMAGED=7	BEFORE=8 WRONG=8 DAMAGED=1	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/race9	merge(new)	BEFORE=1 WRONG=8 DAMAGED=7	BEFORE=8 WRONG=8 DAMAGED=1	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/race9	put(new)	BEFORE=1 DAMAGED=7	BEFORE=8 DAMAGED=1	BEFORE=9
+M3WeakHashMap	WeakHashMap	collide/race9	putIfAbsent(new)	BEFORE=1 WRONG=8 DAMAGED=7	BEFORE=8 WRONG=8 DAMAGED=1	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/reuse	compute(new)	BEFORE=16	BEFORE=17	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/reuse	compute(remove)	BEFORE=8 DAMAGED=6	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	compute(write)	BEFORE=1 AFTER=6 WRONG=7	BEFORE=2 WRONG=4	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	computeIfAbsent(new)	BEFORE=16	BEFORE=17	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/reuse	computeIfPresent	BEFORE=1 AFTER=6 WRONG=7	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	containsKey	BEFORE=1 AFTER=6	BEFORE=2 AFTER=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	containsValue	AFTER=6	BEFORE=2 AFTER=1	BEFORE=2 AFTER=1
+M3WeakHashMap	WeakHashMap	collide/reuse	entrySet.contains	BEFORE=1 AFTER=8 WRONG=7	BEFORE=3 AFTER=1	BEFORE=3 AFTER=1
+M3WeakHashMap	WeakHashMap	collide/reuse	entrySet.remove	BEFORE=1 DAMAGED=7	BEFORE=3 WRONG=1	BEFORE=4
+M3WeakHashMap	WeakHashMap	collide/reuse	get	BEFORE=1 AFTER=6	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	get(6)	BEFORE=1 AFTER=2	BEFORE=7	BEFORE=7
+M3WeakHashMap	WeakHashMap	collide/reuse	getOrDefault	BEFORE=1 AFTER=6	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	keySet.contains	BEFORE=1 AFTER=6	BEFORE=2 AFTER=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	keySet.remove	BEFORE=1 AFTER=7 DAMAGED=6	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	merge(new)	BEFORE=16	BEFORE=17	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/reuse	merge(remove)	BEFORE=1 AFTER=7 DAMAGED=6	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	merge(write)	BEFORE=1 AFTER=6 WRONG=7	BEFORE=2 WRONG=4	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	put(existing)	BEFORE=1 AFTER=6	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	put(new)	BEFORE=8	BEFORE=9	BEFORE=9
+M3WeakHashMap	WeakHashMap	collide/reuse	putIfAbsent(existing)	BEFORE=1 AFTER=6	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	putIfAbsent(new)	BEFORE=16	BEFORE=17	BEFORE=8
+M3WeakHashMap	WeakHashMap	collide/reuse	remove	BEFORE=1 DAMAGED=6	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	remove(6)	BEFORE=1 DAMAGED=2	BEFORE=7	BEFORE=7
+M3WeakHashMap	WeakHashMap	collide/reuse	remove(k,v)	BEFORE=1 AFTER=8 DAMAGED=6	BEFORE=3 WRONG=1	BEFORE=4
+M3WeakHashMap	WeakHashMap	collide/reuse	replace	BEFORE=1 AFTER=6 WRONG=7	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	collide/reuse	replace(k,old,new)	BEFORE=1 AFTER=6 WRONG=8	BEFORE=3 WRONG=1	BEFORE=4
+M3WeakHashMap	WeakHashMap	collide/reuse	values.remove	AFTER=1 FAILFAST=6 DAMAGED=5	FAILFAST=3	FAILFAST=3
+M3WeakHashMap	WeakHashMap	spread/race9	compute(new)	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1 DAMAGED=1	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/race9	computeIfAbsent(new)	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1 DAMAGED=1	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/race9	merge(new)	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1 DAMAGED=1	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/race9	put(new)	BEFORE=1	BEFORE=1 DAMAGED=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/race9	putIfAbsent(new)	BEFORE=1 WRONG=1	BEFORE=1 WRONG=1 DAMAGED=1	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/reuse	compute(new)	BEFORE=2	BEFORE=3	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/reuse	compute(remove)	BEFORE=3 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	compute(write)	BEFORE=1 AFTER=1 WRONG=2	BEFORE=1 WRONG=3	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	computeIfAbsent(new)	BEFORE=2	BEFORE=3	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/reuse	computeIfPresent	BEFORE=1 AFTER=1 WRONG=2	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	containsKey	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	containsValue	BEFORE=5 AFTER=1	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1
+M3WeakHashMap	WeakHashMap	spread/reuse	entrySet.contains	BEFORE=1 AFTER=3 WRONG=2	BEFORE=2 AFTER=1	BEFORE=2 AFTER=1
+M3WeakHashMap	WeakHashMap	spread/reuse	entrySet.remove	BEFORE=1 DAMAGED=2	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	spread/reuse	get	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	get(6)	BEFORE=1 AFTER=1	BEFORE=2	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	getOrDefault	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	keySet.contains	BEFORE=1 AFTER=1	BEFORE=1 AFTER=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	keySet.remove	BEFORE=1 AFTER=2 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	merge(new)	BEFORE=2	BEFORE=3	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/reuse	merge(remove)	BEFORE=1 AFTER=2 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	merge(write)	BEFORE=1 AFTER=1 WRONG=2	BEFORE=1 WRONG=3	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	put(existing)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	put(new)	BEFORE=1	BEFORE=2	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	putIfAbsent(existing)	BEFORE=1 AFTER=1	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	putIfAbsent(new)	BEFORE=2	BEFORE=3	BEFORE=1
+M3WeakHashMap	WeakHashMap	spread/reuse	remove	BEFORE=1 DAMAGED=1	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	remove(6)	BEFORE=1 DAMAGED=1	BEFORE=2	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	remove(k,v)	BEFORE=1 AFTER=3 DAMAGED=1	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	spread/reuse	replace	BEFORE=1 AFTER=1 WRONG=2	BEFORE=1 WRONG=1	BEFORE=2
+M3WeakHashMap	WeakHashMap	spread/reuse	replace(k,old,new)	BEFORE=1 AFTER=1 WRONG=3	BEFORE=2 WRONG=1	BEFORE=3
+M3WeakHashMap	WeakHashMap	spread/reuse	values.remove	AFTER=1 FAILFAST=6	FAILFAST=2	FAILFAST=2
+# totals per owner
+TOTAL	M3HashMap			BEFORE=99 AFTER=55 FAILFAST=4 WRONG=8 DAMAGED=57	BEFORE=206 AFTER=8 FAILFAST=4 WRONG=76 DAMAGED=2	BEFORE=206 AFTER=4 FAILFAST=4
+TOTAL	M3LinkedHashMap			BEFORE=109 AFTER=56 FAILFAST=4 DAMAGED=72	BEFORE=224 AFTER=8 FAILFAST=4 WRONG=76 DAMAGED=2	BEFORE=224 AFTER=4 FAILFAST=4
+TOTAL	M3LinkedHashMap(access)			BEFORE=109 AFTER=20 FAILFAST=4 DAMAGED=108	BEFORE=222 AFTER=8 FAILFAST=4 WRONG=76 DAMAGED=4	BEFORE=224 AFTER=4 FAILFAST=4
+TOTAL	M3WeakHashMap			BEFORE=145 AFTER=129 FAILFAST=12 WRONG=92 DAMAGED=87	BEFORE=219 AFTER=8 FAILFAST=5 WRONG=76 DAMAGED=10	BEFORE=211 AFTER=4 FAILFAST=5
+TOTAL	M3HashSet			BEFORE=19 AFTER=6 WRONG=1 DAMAGED=16	BEFORE=43 AFTER=13 WRONG=2 DAMAGED=2	BEFORE=51 AFTER=9
+TOTAL	M3LinkedHashSet			BEFORE=19 AFTER=6 DAMAGED=17	BEFORE=43 AFTER=13 WRONG=2 DAMAGED=2	BEFORE=51 AFTER=9

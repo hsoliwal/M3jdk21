@@ -1,0 +1,2 @@
+    /** First phase: the incumbent attributed Java atomizer, with no byte rewriting. */
+    public static Atomized atomize(String logicalPath, byte[] source) {

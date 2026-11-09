@@ -1,0 +1,211 @@
+Compiled from "Matcher.java"
+public final class java.util.regex.Matcher implements java.util.regex.MatchResult {
+  java.util.regex.Pattern parentPattern;
+    descriptor: Ljava/util/regex/Pattern;
+  int[] groups;
+    descriptor: [I
+  int from;
+    descriptor: I
+  int to;
+    descriptor: I
+  int lookbehindTo;
+    descriptor: I
+  java.lang.CharSequence text;
+    descriptor: Ljava/lang/CharSequence;
+  private static final int M3_TQ_MAX_UTF16_UNITS;
+    descriptor: I
+  private int m3TqFactsFrom;
+    descriptor: I
+  private int m3TqFactsTo;
+    descriptor: I
+  private jdk.internal.mindex.M3TQ$Facts m3TqFacts;
+    descriptor: Ljdk/internal/mindex/M3TQ$Facts;
+  static final int ENDANCHOR;
+    descriptor: I
+  static final int NOANCHOR;
+    descriptor: I
+  int acceptMode;
+    descriptor: I
+  int first;
+    descriptor: I
+  int last;
+    descriptor: I
+  int oldLast;
+    descriptor: I
+  int lastAppendPosition;
+    descriptor: I
+  int[] locals;
+    descriptor: [I
+  java.util.regex.IntHashSet[] localsPos;
+    descriptor: [Ljava/util/regex/IntHashSet;
+  boolean hitEnd;
+    descriptor: Z
+  boolean requireEnd;
+    descriptor: Z
+  boolean transparentBounds;
+    descriptor: Z
+  boolean anchoringBounds;
+    descriptor: Z
+  int modCount;
+    descriptor: I
+  private java.util.Map<java.lang.String, java.lang.Integer> namedGroups;
+    descriptor: Ljava/util/Map;
+  java.util.regex.Matcher();
+    descriptor: ()V
+
+  java.util.regex.Matcher(java.util.regex.Pattern, java.lang.CharSequence);
+    descriptor: (Ljava/util/regex/Pattern;Ljava/lang/CharSequence;)V
+
+  public java.util.regex.Pattern pattern();
+    descriptor: ()Ljava/util/regex/Pattern;
+
+  public java.util.regex.MatchResult toMatchResult();
+    descriptor: ()Ljava/util/regex/MatchResult;
+
+  public java.util.regex.Matcher usePattern(java.util.regex.Pattern);
+    descriptor: (Ljava/util/regex/Pattern;)Ljava/util/regex/Matcher;
+
+  public java.util.regex.Matcher reset();
+    descriptor: ()Ljava/util/regex/Matcher;
+
+  public java.util.regex.Matcher reset(java.lang.CharSequence);
+    descriptor: (Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+
+  public int start();
+    descriptor: ()I
+
+  public int start(int);
+    descriptor: (I)I
+
+  public int start(java.lang.String);
+    descriptor: (Ljava/lang/String;)I
+
+  public int end();
+    descriptor: ()I
+
+  public int end(int);
+    descriptor: (I)I
+
+  public int end(java.lang.String);
+    descriptor: (Ljava/lang/String;)I
+
+  public java.lang.String group();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String group(int);
+    descriptor: (I)Ljava/lang/String;
+
+  public java.lang.String group(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  public int groupCount();
+    descriptor: ()I
+
+  public boolean matches();
+    descriptor: ()Z
+
+  public boolean find();
+    descriptor: ()Z
+
+  public boolean find(int);
+    descriptor: (I)Z
+
+  public boolean lookingAt();
+    descriptor: ()Z
+
+  public static java.lang.String quoteReplacement(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  public java.util.regex.Matcher appendReplacement(java.lang.StringBuffer, java.lang.String);
+    descriptor: (Ljava/lang/StringBuffer;Ljava/lang/String;)Ljava/util/regex/Matcher;
+
+  public java.util.regex.Matcher appendReplacement(java.lang.StringBuilder, java.lang.String);
+    descriptor: (Ljava/lang/StringBuilder;Ljava/lang/String;)Ljava/util/regex/Matcher;
+
+  private void appendExpandedReplacement(java.lang.Appendable, java.lang.String);
+    descriptor: (Ljava/lang/Appendable;Ljava/lang/String;)V
+
+  public java.lang.StringBuffer appendTail(java.lang.StringBuffer);
+    descriptor: (Ljava/lang/StringBuffer;)Ljava/lang/StringBuffer;
+
+  public java.lang.StringBuilder appendTail(java.lang.StringBuilder);
+    descriptor: (Ljava/lang/StringBuilder;)Ljava/lang/StringBuilder;
+
+  public java.lang.String replaceAll(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  public java.lang.String replaceAll(java.util.function.Function<java.util.regex.MatchResult, java.lang.String>);
+    descriptor: (Ljava/util/function/Function;)Ljava/lang/String;
+
+  public java.util.stream.Stream<java.util.regex.MatchResult> results();
+    descriptor: ()Ljava/util/stream/Stream;
+
+  public java.lang.String replaceFirst(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  public java.lang.String replaceFirst(java.util.function.Function<java.util.regex.MatchResult, java.lang.String>);
+    descriptor: (Ljava/util/function/Function;)Ljava/lang/String;
+
+  public java.util.regex.Matcher region(int, int);
+    descriptor: (II)Ljava/util/regex/Matcher;
+
+  public int regionStart();
+    descriptor: ()I
+
+  public int regionEnd();
+    descriptor: ()I
+
+  public boolean hasTransparentBounds();
+    descriptor: ()Z
+
+  public java.util.regex.Matcher useTransparentBounds(boolean);
+    descriptor: (Z)Ljava/util/regex/Matcher;
+
+  public boolean hasAnchoringBounds();
+    descriptor: ()Z
+
+  public java.util.regex.Matcher useAnchoringBounds(boolean);
+    descriptor: (Z)Ljava/util/regex/Matcher;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public boolean hitEnd();
+    descriptor: ()Z
+
+  public boolean requireEnd();
+    descriptor: ()Z
+
+  private boolean m3TqAllowsSearch();
+    descriptor: ()Z
+
+  boolean search(int);
+    descriptor: (I)Z
+
+  boolean match(int, int);
+    descriptor: (II)Z
+
+  int getTextLength();
+    descriptor: ()I
+
+  java.lang.CharSequence getSubSequence(int, int);
+    descriptor: (II)Ljava/lang/CharSequence;
+
+  char charAt(int);
+    descriptor: (I)C
+
+  int getMatchedGroupIndex(java.lang.String);
+    descriptor: (Ljava/lang/String;)I
+
+  private void checkGroup(int);
+    descriptor: (I)V
+
+  private void checkMatch();
+    descriptor: ()V
+
+  public java.util.Map<java.lang.String, java.lang.Integer> namedGroups();
+    descriptor: ()Ljava/util/Map;
+
+  public boolean hasMatch();
+    descriptor: ()Z
+}

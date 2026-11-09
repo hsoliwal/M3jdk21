@@ -1,0 +1,53 @@
+{
+  "schema": "M3_CPU_NATIVE_LINK_PARENT_V1",
+  "parent_dataset": "current",
+  "parent_target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "parent_sdk_inputs_sha256": "515d1e52b0e3720da471282aae435f2aabb121999495d8cdc7f60e2a9adcc17c",
+  "parent_sdk_results_sha256": "b1c10bcff8905932bf1798d21f96e3f0e57a02cdc05bc6f70f28962635334e19",
+  "parent_receiver_sha256": "4c593b03a3d931a51a54e3cebb785c7ef8aee68af761227cca51bc2d37f0e51a",
+  "parent_check": {
+    "actual_sdk_results": true,
+    "changes": 0,
+    "dataset": "current",
+    "mode": "check",
+    "targets": 61
+  },
+  "changed_targets": [
+    "m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv",
+    "m3/tooling/module-packs/cpu-tools/README.md",
+    "m3/tooling/module-packs/cpu-tools/VERIFY_CONTRACT.tsv",
+    "m3/tooling/module-packs/cpu-tools/build.py",
+    "m3/tooling/module-packs/cpu-tools/fixtures/test_build.py"
+  ],
+  "prepare_arguments": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/prepare.py",
+    "--dataset",
+    "native-link",
+    "--repository",
+    "hsoliwal/M3jdk21",
+    "--baseline",
+    "/workspace/scratch/f4826e049195/M3jdk21",
+    "--candidates",
+    "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/successor-payloads/native-link",
+    "--recipe-owner",
+    "/workspace/scratch/f4826e049195/com.synexia/synexia-openrewrite-recipes"
+  ],
+  "dataset": {
+    "baseline_ref": null,
+    "crate_name": "m3-cpu-tools-jmod-20261018-native-link",
+    "dataset": "native-link",
+    "engine_changes_from_origin": [
+      "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
+    ],
+    "java_targets": 0,
+    "product_sources_written": false,
+    "recipe_name": "com.synexia.m3jdk.CpuToolsJmod20261018",
+    "repository": "hsoliwal/M3jdk21",
+    "schema": "M3_CPU_TOOLS_JMOD_DATASET_V1",
+    "targets": 5,
+    "text_targets": 5
+  }
+}

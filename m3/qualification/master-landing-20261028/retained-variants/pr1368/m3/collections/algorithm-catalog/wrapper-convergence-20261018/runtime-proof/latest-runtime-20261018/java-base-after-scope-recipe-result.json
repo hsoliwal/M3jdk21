@@ -1,0 +1,30 @@
+{
+  "schema": "M3_COMBINED_MATCHED_IMAGE_STEP_V1",
+  "source_head": "2e9508c90952b8d66d6c3ee4855e1e4d8fd856fe",
+  "source_tree": "57930a2f5b3cb242fefecdbc50c87be5793efde5",
+  "hotspot_git_tree": "afaa42082ed148944e52591d8ab43960890c8d39",
+  "step": "java-base-after-scope-recipe",
+  "command": [
+    "make",
+    "java.base-java",
+    "JOBS=4",
+    "MAX_JOBS=4"
+  ],
+  "build_root": "/dev/shm/m3-combined-image-f8287/build",
+  "start_utc": "2026-10-18T13:24:37Z",
+  "resource_limits": {
+    "shm_min_free_bytes": 314572800,
+    "memory_min_available_bytes": 629145600,
+    "process_group_max_rss_bytes": 3221225472
+  },
+  "warnings_as_errors": true,
+  "exit_code": 0,
+  "stop_reason": null,
+  "end_utc": "2026-10-18T13:25:27Z",
+  "console_sha256": "b5054ff41925bea06951cb206bb467c3d66193105b6eda8c8f8db4781d509094",
+  "lowest_shm_free_bytes": 1364373504,
+  "lowest_memory_available_bytes": 3307560960,
+  "peak_process_group_rss_bytes": 1292922880,
+  "source_head_after": "2e9508c90952b8d66d6c3ee4855e1e4d8fd856fe",
+  "source_tree_after": "57930a2f5b3cb242fefecdbc50c87be5793efde5"
+}

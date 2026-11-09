@@ -1,0 +1,4 @@
+$ ["/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/image/bin/java","-ea","-Dm3.parser.test.work=/workspace/scratch/a0f19f379302/parser-target-proof-2/consumer-work/runtime-image-M3ParserFrameworkContract","--patch-module","jdk.compiler=/workspace/scratch/a0f19f379302/parser-target-proof-2/compiler-patch","--add-modules","jdk.m3.parser","-cp","/workspace/scratch/a0f19f379302/parser-target-proof-2/test-classes","jdk.m3.parser.test.M3ParserFrameworkContract"]
+M3_PARSER_FRAMEWORK_PASS checks=297
+
+EXIT 0

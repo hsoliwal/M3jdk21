@@ -1,0 +1,19 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.ReplaceConstant"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 73
+- name: "Tracey Yoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 17
+- name: "Knut Wannheden"
+  email: "knut.wannheden@mobi.ch"
+  lineCount: 11
+- name: "Tyler Van Gorder"
+  email: "tkvangorder@users.noreply.github.com"
+  lineCount: 4
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 4

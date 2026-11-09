@@ -1,0 +1,7 @@
+leaf	boundary	upstream_action	m3_java21_action	reason
+compat-main	PACKAGE	REMOVE Main.java	KEEP Main.java unchanged	Preserve JDK21 internal launcher class while native launcher switches to SourceLauncher.
+preview-access	FILE	Replace Preview postimage	Apply only protected previewKey + protected constructor leaf	Full JDK22 Preview postimage contains post-21 language feature cases.
+launcher-memory-context	FILE	Add upstream MemoryContext	Use JDK21-adapted postimage with List.get(0)	List.getFirst is post-21 API.
+launcher-source	FILE	Add upstream SourceLauncher	Adapt List.getFirst to get(0) and MethodFinder to MainMethodFinder semantics	JDK21 has MainMethodFinder, not MethodFinder.
+test-fixture	FILE	Rename src/CLTest.java to src/p/q/CLTest.java	Add correctly located fixture and retain old fixture as non-authoritative historical test input	Generic snapshot recipes intentionally do not delete.
+module-join	MULTI_MODULE	Integrate 27-file upstream commit	Join compatible leaves, retained Main compatibility, build/native/module/tests	Feature crosses java.base, jdk.compiler, native launcher, make and langtools tests.

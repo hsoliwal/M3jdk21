@@ -1,0 +1,4 @@
+order	jbs	commit	role	mandatory
+1	JDK-8318706	38cfb220ddadbb401cc15f313aadb8234f626210	JEP423 implementation	true
+2	JDK-8323610	8643cc21333c6b51242ed3b9295b25f372244755	pin-count overflow fix	true
+3	JDK-8322484	0d5f5e15d43f94a79c6133baecd5af217365d176	pin-cache performance regression fix	true

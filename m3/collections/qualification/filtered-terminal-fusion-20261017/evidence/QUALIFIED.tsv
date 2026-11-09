@@ -1,0 +1,3 @@
+# Qualified actual Maven/OpenRewrite SourceFile Results
+m3/collections/src/main/java/jdk/m3/collections/M3LongFilteredView.java	25e342e4101e11bdafef1724fbc390260d4cf567337ea5c0817789e50e7ae2b4
+m3/collections/src/test/java/jdk/m3/collections/M3FilteredTerminalProof.java	fc5ec36ecfc6660a611e38d948a2e46f2690e6c15f79024a75d7b634d531aff9

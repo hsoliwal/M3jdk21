@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+component	source	license	decision	reason
+MIndexVocabularySearchTree, MIndexWordBreakPlan	hsoliwal/com.synexia synexia-indexstring (first party; plan blob 3902034cb1a6 = corrected #10659/#10670 donor named by crate m3-wordbreak-recovery-20261030)	Apache-2.0	ADAPT	vocabulary from String spellings; no third-party code
+jdk.m3.algorithm.M3DynamicProgrammingAlgorithms.wordBreak	M3JDK m3/algorithms (existing, LC139 boolean)	Apache-2.0	NEC_RECORDED	feasibility agrees on 300,000 cases; it returns only a boolean, so it does not replace the plan; neither is changed
+Word segmentation libraries (e.g. ICU BreakIterator, wordninja)	FOSS	various	NO_FIT	dictionary-row segmentation over a frozen vocabulary trie with UTF-16 unit positions is the donor contract; nothing is copied

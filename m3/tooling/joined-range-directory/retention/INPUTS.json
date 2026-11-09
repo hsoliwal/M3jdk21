@@ -1,0 +1,52 @@
+{
+  "schema": "M3_JOINED_RETENTION_SUBJECT_V1",
+  "receiver": "4389775643e6aef4dc9ffd7ee8a21117e1c8e4c7",
+  "jarRelative": "precompute-scope-recipe/runtime/jdk.m3.text.jar",
+  "jar": {
+    "bytes": 165978,
+    "sha256": "84c96a1719044593899759a3da1b7111076be4049b6cec1824f849bc876871e8",
+    "gitBlob": "b0f72069236119a495a2266f89674185a221c7b3"
+  },
+  "classes": [
+    {
+      "path": "jdk/m3/text/JoinedM3StringPiece.class",
+      "bytes": 2441,
+      "sha256": "8d25ecac939e94837e3496b9c003e2a31af75425e9c7953c83bb7a33e70a1bc9",
+      "gitBlob": "8ea052e79890e765beff5a23c8168f79385cd8b5"
+    },
+    {
+      "path": "jdk/m3/text/LocalM3StringPiece.class",
+      "bytes": 1839,
+      "sha256": "b15aa28d7b408088924213ac9a785e533f40a6359adba478bd0f09a90a13c05c",
+      "gitBlob": "f181c1fbf2fbb7f44e131424192a4465e884586d"
+    },
+    {
+      "path": "jdk/m3/text/LocalM3Arena.class",
+      "bytes": 2442,
+      "sha256": "98cb2fd22de0202718d3624f69ab7165a154f017af86c09a00d761e6c831d875",
+      "gitBlob": "e07f4e498e0970d38dee630b3a79fd2df43880ae"
+    },
+    {
+      "path": "jdk/m3/text/M3StringPiece.class",
+      "bytes": 880,
+      "sha256": "cfa32d2b114ac4cd571d61156eaccb7d782c8ad16e9461db368052d2071b061f",
+      "gitBlob": "4828fc2a403fe75ac0d4373768ed68132392164d"
+    },
+    {
+      "path": "jdk/m3/text/StorageIdentity.class",
+      "bytes": 1721,
+      "sha256": "0ce64b0492977ebd9d1fb41de2fa77e56942ef69772bdd30a991c5fa2e864f02",
+      "gitBlob": "30eff9395ff4640a40f908a92e2ef66cd1ae8b5d"
+    }
+  ],
+  "compositionProof": "prefix-range-recipe/runtime/COMPOSITION.json",
+  "sourceGit": {
+    "JoinedM3StringPiece": "765d43267bb22a3650b622c01cb29b550e1deb01",
+    "LocalM3StringPiece": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+    "LocalM3Arena": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+    "M3StringPiece": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+    "StorageIdentity": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c"
+  },
+  "scope": "Exact current component class bodies from complete current27-source83-class build; classpath test context, no module encapsulation or whole-JDK claim",
+  "authority": false
+}

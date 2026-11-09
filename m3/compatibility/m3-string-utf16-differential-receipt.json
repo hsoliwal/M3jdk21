@@ -1,0 +1,29 @@
+{
+  "schema": "M3JDK21_STRING_UTF16_DIFFERENTIAL_RECEIPT_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalPullRequest": 9882,
+  "canonicalRecipe": "com.synexia.rewrite.M3Jdk21StringUtf16Differential",
+  "canonicalRecipeHead": "fbb2df92c0c4b4bd896b93f0f850ec72a1cbf22d",
+  "targets": [
+    {
+      "path": "test/jdk/java/lang/String/M3StringUtf16DifferentialCorpus.java",
+      "sha256": "5353a4fabf4a7f3910f276f8b3ae94a6251cfcb509bdf7ed78fe4c647d62d627"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java",
+      "sha256": "dac351e5e6431e04e5ccdcf4257b97b8f3dd8a808c8514d48e872b0ca1a31fd5"
+    }
+  ],
+  "gates": {
+    "sourceRecipeJUnit": "PENDING_CI",
+    "jtregStockString": "PENDING_CI",
+    "jtregUseM3StringStorage": "PENDING_CI",
+    "promotion": "BLOCKED"
+  },
+  "claims": {
+    "javaBaseSourceChanged": false,
+    "hotspotSourceChanged": false,
+    "jniSourceChanged": false,
+    "runtimePromotionAuthorized": false
+  }
+}

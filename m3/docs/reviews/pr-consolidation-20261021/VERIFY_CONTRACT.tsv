@@ -1,0 +1,8 @@
+stage	status	scope
+inventory	PARTIAL_READBACK	Ten selected PR metadata records; dependencies/current source trees not closed
+diff	NOT_RUN	No source patch produced
+lint	NOT_RUN	No source changed
+compile	NOT_RUN	No source changed
+tests	NOT_RUN	Historical reports not recertified
+runtime	NOT_RUN	No product execution
+merge_readback	NOT_APPLICABLE	No merge attempted; no authenticated mutation action

@@ -1,0 +1,16 @@
+item	identity	result
+source_state	49a8df37ab6a71581db7b445464c509b36606725	Published candidate with parent expectation correction
+db_src_tree	8a1be2b7ba3aed18fda9aab93c31d22dc79e393f	Local/remote tree identity matched
+DbJava_tree	64a00d9af172f033ec3b360ff3b7ee6d84b9eb64	Local/remote tree identity matched
+DbParse_tree	5d210249fdc32f86f071f038a2deeb62e649dfe6	Local/remote tree identity matched
+DbCheck_tree	891b5868391e3088e581dee919971ceea38d3755	Local/remote tree identity matched
+DbMeta_tree	df15eee30b3fdebac5c0aa36953f82dc3c23ae43	Local/remote tree identity matched
+first_CI_run	37183150332	51 tests;1 failure;0 errors;0 skips;9 new parser tests passed
+first_CI_artifact	11296460013	Immutable original failure retained
+first_CI_artifact_SHA256	dfc59e7fd9ae16fb861e3a7a9f6e162b8493824785e57f4003d9ef0c92a76c1f	Downloaded ZIP bytes verified
+latest_PR_run	37183817347	Failed before jobs; not a source test verdict
+latest_push_run	37183815512	Failed before jobs; not a source test verdict
+retry_response	HTTP403	This workflow run cannot be retried
+direct_probes	4	All repaired cases pass; same originals fail
+public_API_comparisons	8	All protected/public javap descriptors unchanged
+current_coverage	NOT_MEASURED	No99percent admission claim

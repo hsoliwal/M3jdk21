@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+date	recipe	version	lesson	evidence
+2026-11-06	census	-	a hash-pinned crate may ship parse-context snapshots (parse-context.tsv: path, sha256, template) next to its manifest postimages; they pin what the parser saw, not what the recipe writes, so a census must exclude them (or compare them only as context): ranked as postimages they produced a PARTIAL leaf whose "missing" lines are older forms the owner already replaced	census-g3-20261106: M3SlotSpliterators 23/26, M3SlotArrays 11/12, both parse context; leaf L087 closed with no source change

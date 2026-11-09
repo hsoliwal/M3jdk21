@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Facts the donor plugin (hsoliwal/com.synexia 982689e16763, blobs e06512091f03 / 347ba86620ca / 2045b84846cf, compiled from the donor tree by recipe/differential.sh) emits for fixtures/Sample.java with javac 21.0.9 -Xplugin:M3NullnessFacts: the M3_NULLNESS_FACT rows without their first two columns (row tag, source URI). Columns: start offset of the if statement, method, positive-edge facts, negative-edge facts (slot:NULLNESS per parameter).
+55	sample	0:NON_NULL,1:NULL	0:MAYBE_NULL,1:MAYBE_NULL
+114	sample	0:NON_NULL,1:MAYBE_NULL	0:MAYBE_NULL,1:MAYBE_NULL
+545	sibling	0:NULL	0:NON_NULL

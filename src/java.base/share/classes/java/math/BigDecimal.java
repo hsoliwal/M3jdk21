@@ -29,6 +29,8 @@
 
 package java.math;
 
+import jdk.internal.math.M3BigNumbers;
+
 import static java.math.BigInteger.LONG_MASK;
 import java.io.IOException;
 import java.io.InvalidObjectException;
@@ -519,6 +521,25 @@ public class BigDecimal extends Number implements Comparable<BigDecimal> {
      * @since  1.5
      */
     public BigDecimal(char[] in, int offset, int len, MathContext mc) {
+        //FLLDCIM: M3 - one fast big-number parser in the JDK (FastDoubleParser 1.0.90 absorbed as jdk.internal.math.M3*,
+        // NUMBER_PARSE_ABSORB v2): a long literal it accepts takes the fast path when the precision is unlimited; every
+        // other literal, and any literal it rejects, the original parser below, so results and exceptions stay the JDK's
+        this(in, offset, len, mc,
+             mc != null && mc.precision == 0 ? M3BigNumbers.bigDecimalOrNull(in, offset, len) : null);
+    }
+
+    /**
+     * The parser of {@link #BigDecimal(char[], int, int, MathContext)}: {@code m3} is the value the JDK's fast
+     * big-number parser accepted, or {@code null} for the original parser below.
+     */
+    private BigDecimal(char[] in, int offset, int len, MathContext mc, BigDecimal m3) {
+        if (m3 != null) {
+            this.intVal = m3.intVal;
+            this.intCompact = m3.intCompact;
+            this.scale = m3.scale;
+            this.precision = m3.precision;
+            return;
+        }
         // protect against huge length, negative values, and integer overflow
         try {
             Objects.checkFromIndexSize(offset, len, in.length);
@@ -3482,21 +3503,19 @@ public class BigDecimal extends Number implements Comparable<BigDecimal> {
                 return "0";
             }
             int trailingZeros = checkScaleNonZero((-(long)scale));
-            StringBuilder buf;
-            if(intCompact!=INFLATED) {
-                buf = new StringBuilder(20+trailingZeros);
-                buf.append(intCompact);
-            } else {
-                String str = intVal.toString();
-                buf = new StringBuilder(str.length()+trailingZeros);
-                buf.append(str);
+            String str = intCompact != INFLATED
+                ? Long.toString(intCompact)
+                : intVal.toString();
+            int len = str.length() + trailingZeros;
+            if (len < 0) {
+                throw new OutOfMemoryError("too large to fit in a String");
             }
-            for (int i = 0; i < trailingZeros; i++) {
-                buf.append('0');
-            }
+            StringBuilder buf = new StringBuilder(len);
+            buf.append(str);
+            buf.repeat('0', trailingZeros);
             return buf.toString();
         }
-        String str ;
+        String str;
         if(intCompact!=INFLATED) {
             str = Long.toString(Math.abs(intCompact));
         } else {
@@ -3506,11 +3525,11 @@ public class BigDecimal extends Number implements Comparable<BigDecimal> {
     }
 
     /* Returns a digit.digit string */
-    private String getValueString(int signum, String intString, int scale) {
+    private static String getValueString(int signum, String intString, int scale) {
         /* Insert decimal point */
         StringBuilder buf;
         int insertionPoint = intString.length() - scale;
-        if (insertionPoint == 0) {  /* Point goes right before intVal */
+        if (insertionPoint == 0) {  /* Point goes just before intVal */
             return (signum<0 ? "-0." : "0.") + intString;
         } else if (insertionPoint > 0) { /* Point goes inside intVal */
             buf = new StringBuilder(intString);
@@ -3518,11 +3537,13 @@ public class BigDecimal extends Number implements Comparable<BigDecimal> {
             if (signum < 0)
                 buf.insert(0, '-');
         } else { /* We must insert zeros between point and intVal */
-            buf = new StringBuilder(3-insertionPoint + intString.length());
-            buf.append(signum<0 ? "-0." : "0.");
-            for (int i=0; i<-insertionPoint; i++) {
-                buf.append('0');
+            int len = (signum < 0 ? 3 : 2) + scale;
+            if (len < 0) {
+                throw new OutOfMemoryError("too large to fit in a String");
             }
+            buf = new StringBuilder(len);
+            buf.append(signum<0 ? "-0." : "0.");
+            buf.repeat('0', -insertionPoint);  // insertionPoint != MIN_VALUE
             buf.append(intString);
         }
         return buf.toString();

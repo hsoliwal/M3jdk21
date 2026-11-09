@@ -1,0 +1,63 @@
+{
+  "priorProof": {
+    "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PROOF.json",
+    "sha256": "c339b321169a224851bbb68d2d07cfd0c0d3195236f2f5ce94f035b8f1253e6b"
+  },
+  "priorFinalSeals": {
+    "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\FINAL_FILE_SEALS.json",
+    "sha256": "aff9e2961aa9e5058ffee7ba6c2a8dbe3577c60d4b371967e9d32438e278e919",
+    "allVerified": true
+  },
+  "compiledReplayClasses": [
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Payload.class",
+      "sha256": "4d8bf80cd89f3d9192d470f0a450ea9b6150a172a70bb1679cf8a52f7bb910c6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Resources.class",
+      "sha256": "7d7599b108861f66170896cdc47c20585537d90c69bb16587dd0e1e6a0cd41a7"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Scan.class",
+      "sha256": "b5f9b7e25bc239c6c42470342f5f527c95429b88d51f6032c1e4a0ea993c7eb0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Target.class",
+      "sha256": "659fef83809e923facbb066cf67935a6f62a32309b041aa2bb3068b1f7e78fb2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest.class",
+      "sha256": "0d3f3ea5875dc798ba7b034077b829a88fb145ee2a0bd53e5c4e35849c773cfa"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes\\com\\synexia\\rewrite\\Replay$Change.class",
+      "sha256": "1a0f5988f71bf5eefedaba15e8a53a550933a58a48f954586fa57aee2dc2f5ba"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes\\com\\synexia\\rewrite\\Replay$Report.class",
+      "sha256": "6fc596675c99d92e59bdf6816233a796e59d9186ad405b9a1badfec61817c10b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes\\com\\synexia\\rewrite\\Replay.class",
+      "sha256": "3eb38b15d5a1d2650a3e6bd7a871ad712deb08648830921fd1f636f5e7f8666f"
+    }
+  ],
+  "compiledReplayClassesUnchanged": true,
+  "originalReplaySources": [
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\donor-sources\\Replay.java",
+      "sha256": "a66e1edc751508972a774894525a965eff8c1fb5ce26802cdc1b82d12e6dd6cd"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
+    }
+  ],
+  "recipeFilesBeforeAfterUnchanged": true,
+  "baseRevisionPackaging": {
+    "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\templates\\base-revision.txt",
+    "sha256": "4dac46c0c41e0b2e8b5bf097312becadc31910ca914e14fe790544858b199be5",
+    "borrowedFrom": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-fix-recipe\\templates\\base-revision.txt",
+    "priorV3Untouched": true
+  }
+}

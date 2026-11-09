@@ -1,0 +1,19 @@
+{
+  "status": "TASK_TEMPLATE_NAME_NORMALIZED",
+  "reason": "Existing prepare derives basename including $, while unchanged text engine accepts $ in Java service target paths but restricts resource template basenames to [A-Za-z0-9_.-]+.",
+  "template_old": "0008-com.sun.source.util.M3AST$Consumer.txt",
+  "template_new": "0008-M3AST-Consumer.txt",
+  "target": "m3/tooling/module-packs/build-support/gradle-provider/src/test/resources/META-INF/services/com.sun.source.util.M3AST$Consumer",
+  "target_content_sha256": "61e75cf6961c585fec7c2a20d0fc35280c991989c0d06bb269abc04a74603553",
+  "manifest_pre_sha256": "121910ee4cbd5fcbd2dac15efc3e09d127481bfec254f908ca3e176f6c574402",
+  "manifest_post_sha256": "128ed8c93a096920645ba49b7c51c73604df3dc0422d1aee74e2f4db45d46c89",
+  "engine_changes": 0,
+  "prepare_changes": 0,
+  "receiver_writes": 0,
+  "reproduction": [
+    "Run unchanged prepare.py with recorded 01-seal-inputs arguments.",
+    "Rename the recorded template_old resource to template_new without changing its bytes.",
+    "Replace only that target manifest row fourth field with template_new.",
+    "Verify recorded pre/post manifest SHA256 and unchanged target content SHA256 before running unchanged SDK harness."
+  ]
+}

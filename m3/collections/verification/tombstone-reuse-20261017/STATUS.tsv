@@ -1,0 +1,12 @@
+gate	state	notes
+source_provenance	PASS	Two target Git blobs and Synexia commit bound
+selected_java21_source	PASS_IN_DONOR_ISOLATED_IMAGE	142438 checks
+baseline_red_and_candidate_green	PASS_IN_DONOR_ISOLATED_IMAGE	Original 16 slots, new 8 slots under controlled collision
+source_fixed_point	PASS_DONOR	Hash-pinned exact Java templates
+target_installed_runner	NOT_RUN	Run on checked-out target PR
+full_target_maven	NOT_RUN	Maven unavailable in bounded host
+OpenRewrite_SDK	NOT_RUN	Maven SDK source only
+matched_jdk_image_jtreg	NOT_RUN	M3JDK String phase still active
+JNI_GC_CDS	UNCHANGED_NOT_RUN	No new ABI
+benchmark	NOT_RUN	Only selected array payload comparison
+promotion	DRAFT_HOLD	No automatic receiving-phase promotion

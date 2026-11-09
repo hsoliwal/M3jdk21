@@ -1,0 +1,244 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema": "M3_REGEX_PREFIX_ASCII_RECEIPT_V1",
+  "status": "REVIEW_CANDIDATE_SEMANTIC_PASS_PERFORMANCE_HOLD",
+  "owner": "java.util.regex.M3PatternQuery.BooleanPlan",
+  "naming_disposition": "Existing package-private owner refinement; unchanged public Pattern/Matcher spelling, fields, method descriptors and compiled admission; no naming migration or phase advance.",
+  "source": {
+    "before_public_revision": "c21f24d398116630cd9c478be135cbb61fe3f5f7",
+    "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+    "before_sha256": "d5e7a907f2a58ed9ba5773ca6e4ac7fa7bbe119a661b71c5322540a3429abe6e",
+    "after_sha256": "ed5f7f717ac98e5c8a052645e757bdc4aeceeca81d3b8d278e7f9b390f95ec5f",
+    "target_test_path": "test/jdk/java/util/regex/M3PatternPrefixAsciiTest.java",
+    "target_test_before": "ABSENT",
+    "target_test_sha256": "2c89ac4b3993fcf3fca7f42fbe06639e2d808420645bd1e7f0ba3193a082cb6e"
+  },
+  "algorithm": {
+    "selection": "After the existing first64-unit scan misses, inspect only the last8 UTF16 units; an all-ASCII tail nominates the existing mixed mask runner.",
+    "bound": "At most eight extra predicate-free UTF16 probes; the existing at-least-eight-atom optimization selector and at-most-256-atom compiled-plan admission remain unchanged.",
+    "reuse": "Existing immutable constructor-eager ASCII masks and invocation-local row/wide frontiers. Original all-ASCII and rolling kernels remain unchanged.",
+    "storage": "No new field, cache, retained payload, module dependency, public API or native symbol."
+  },
+  "canonical_recipe": {
+    "name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "historical_code_basis": "367ef7fe883f4a1427dafcadb3ad8312500814a2",
+    "dataset": "m3-regex-prefix-ascii-20261026",
+    "input_dataset_revision_at_invocation": "UNPUBLISHED_AT_INVOCATION",
+    "SDK_qualification_sha256": "6da9212333ed007d5db79a73536d72efd7d574ec7a6111ea8380619c3f5ee10c",
+    "actual_tests": [
+      5,
+      10,
+      9
+    ],
+    "actual_receiver_check_apply_replay": [
+      2,
+      2,
+      0
+    ],
+    "scope": "Regex leaf executed before the later exact text-owner correction; do not relabel its historical engine epoch."
+  },
+  "built_source": {
+    "actual_local_head": "f038b4bf696daae189412bfb4af0848728c5f8ff",
+    "actual_tree": "7d4f8b8c86c9c4261d086e596e62f1c7b5881f2d",
+    "public_equal_tree_commit": "fea80d76998e7de693c3b1db82eaa50466159475",
+    "build": "Strict configured incremental images, headful release/server, warnings as errors,6 jobs, javac server disabled. This is not a clean rebuild claim.",
+    "configure_exit": 0,
+    "images_exit": 0,
+    "SDK_receipt_sha256": "130b2a2b9d8d2a91ff5c950999d58f0b013fa54f346c684d671269369491fccf",
+    "candidate_modules_sha256": "552f25d7d34f587a4f745966fd7129fe0123737baa9bb6bfabf129a0a009ff8a",
+    "candidate_libjvm_sha256": "457a5e6a3ee037338e2be451b4419f8c01675687717aad286ba668aac00c4895",
+    "regular_files": 394,
+    "symlinks": 1,
+    "JMODs": 69
+  },
+  "semantics": {
+    "baseline_red": "New prefix test exits 1 default and M3-int at LATE_ASCII_REUSE_MISSING atoms=8 length=72 asciiPredicateCalls=22",
+    "configured_make_test": {
+      "JUnit_found_started_succeeded_failed": [
+        644,
+        644,
+        644,
+        0
+      ],
+      "eight_selected_Gatherer_files_passed": 8,
+      "first_attempt_exit": 2,
+      "first_failure": "Exact tracked sparse test helper Virtual.java physically absent; raw log retained",
+      "second_attempt_exit": 0
+    },
+    "direct_candidate": "Four drivers x six original modes = 24 PASS. New prefix 312 pairs/204 reuse, 2028 flat or2030 M3 checks; independent prefix 2655 pairs/17311 flat or17313 M3 checks (1275 new-tail,480 old-prefix,900 rolling controls,1335 Matcher), M3 1320 tuples/15 splits. Existing mixed independent 16675 actual routed+4160 late+2359 Matcher, 106993 flat or106995 M3 checks.",
+    "modes": [
+      "default",
+      "checked-serial",
+      "interpreter",
+      "compiled",
+      "m3-int",
+      "m3-noncompact"
+    ],
+    "runtime_cds": "Both images startup default/-Xint/-Xcomp/M3 interpreter compact+noncompact; flat CDS succeeds; M3 CDS expected refusal unchanged; no M3 compiled-JIT claim.",
+    "selected_jtreg7_2": {
+      "gatherers": 8,
+      "native": 1,
+      "regex": 9,
+      "stream": 2,
+      "views": 4
+    },
+    "selected_total": 24
+  },
+  "compatibility": {
+    "public_and_existing_internal_descriptors_equal": true,
+    "native_libraries": 40,
+    "native_export_rows": 2413,
+    "exports_equal": true,
+    "byte_identical_native_libraries": 39,
+    "sampled_libjvm_sections_equal": [
+      ".text",
+      ".data",
+      ".data.rel.ro",
+      ".eh_frame"
+    ],
+    "libjvm_limit": "Sampled .rodata differs in six build-timestamp bytes; remaining sections not exhaustively compared. No whole-binary identity claim.",
+    "flat_CDS_pass_M3_CDS_expected_refusal": true,
+    "compiled_M3_String_admitted": false
+  },
+  "original_resource_study": {
+    "forks": 56,
+    "measured_rounds": 392,
+    "CPU_candidate_over_baseline": {
+      "default": {
+        "allUnicode128": 1.0713,
+        "asciiControl128": 0.9497,
+        "latePrefix128": 1.0857,
+        "mixed128": 1.0099
+      },
+      "steady-c2": {
+        "allUnicode128": 0.8431,
+        "asciiControl128": 1.0092,
+        "latePrefix128": 0.9356,
+        "mixed128": 0.9651
+      }
+    },
+    "latePrefix_default_paired_ratios": [
+      1.0751,
+      1.1096,
+      1.1306
+    ],
+    "disposition": "Original default late-prefix regression retained. First Formatter initialization and separate warm/measurement callsites were later identified as protocol disturbances; these findings do not erase the observations or establish sole causal attribution."
+  },
+  "corrected_resource_study": {
+    "status": "HOLD",
+    "probe_dataset": "m3-regex-cost-probe-20261026",
+    "qualified_probe_sha256": "f8c7cc1750798f88c8605a5bf975db4fca3f945a254cd39bd8c9eb4bdef17335",
+    "actual_probe_SDK_qualification_sha256": "dc358d1af40f6675e575363c2864a053dcc3cfd9d1558cd9a3eab1e31e293bb6",
+    "actual_probe_tests": [
+      5,
+      10,
+      9
+    ],
+    "private_probe_receiving_check_apply_replay": [
+      1,
+      1,
+      0
+    ],
+    "forks": 56,
+    "measured_rounds": 392,
+    "protocol": "Existing probe, Formatter primed before warmup, shared batch16 predicate callsite for both warmup and measurement; same four cohorts/two modes/original order, five-second warmup, seven150ms rounds, no timing compiler logging.",
+    "result_sha256": "adeb92b65bfd344d33325d75827e0fdc7f1ea9b6b8f64c7f56a66085386f4264",
+    "outcome_sha256": "241fdba18bccc9abef6c0d043e26067aeb9b89e5b82d4293eac9a4fa1abdc37c",
+    "independent_raw_review_sha256": "6f62c74a4cdc5917446ab099f4f1a52da0fde681c3d89b4e0e11b538efb73cc7",
+    "decision_rule_sha256": "f5bc4da91bc3696e699db1295edae0daca244d62e7904b836826e9deda3f4469",
+    "CPU_candidate_over_baseline": {
+      "steady-c2": {
+        "asciiControl128": 1.0677744373890568,
+        "latePrefix128": 0.6617361148486045,
+        "mixed128": 1.0736207260171844,
+        "allUnicode128": 1.0979067009681946
+      },
+      "default": {
+        "asciiControl128": 1.0818441501131681,
+        "latePrefix128": 0.9142527338340153,
+        "mixed128": 0.9365826014291223,
+        "allUnicode128": 1.394849088798574
+      }
+    },
+    "paired_CPU_ratios": {
+      "steady-c2": {
+        "asciiControl128": [
+          1.013896960807382,
+          1.1864901426778331,
+          1.0306057059983356,
+          0.9978669766933097,
+          1.0525544034935306
+        ],
+        "latePrefix128": [
+          0.561194835262551,
+          0.876361507472306,
+          0.6617361148486045
+        ],
+        "mixed128": [
+          1.0736207260171844,
+          1.033789450476551,
+          1.0888329494245148
+        ],
+        "allUnicode128": [
+          1.1089936281363493,
+          1.2077490118239322,
+          0.9071706438195651
+        ]
+      },
+      "default": {
+        "asciiControl128": [
+          1.1143407652173773,
+          1.0472921764126801,
+          1.0977257594384697,
+          1.0079295879350196,
+          1.0312389570042433
+        ],
+        "latePrefix128": [
+          0.8767646230026643,
+          0.7384842375354852,
+          0.9142527338340153
+        ],
+        "mixed128": [
+          1.0721116500907222,
+          0.961777786975519,
+          0.8892668712999664
+        ],
+        "allUnicode128": [
+          1.5010830807422844,
+          0.5901592397779898,
+          1.5863927698080962
+        ]
+      }
+    },
+    "hold_signals": [
+      [
+        "steady-c2",
+        "mixed128"
+      ],
+      [
+        "default",
+        "asciiControl128"
+      ]
+    ],
+    "allocation": "All392 measured rows exactly match prior40bytes/op ASCII or192bytes/op other cohorts plus48counterbytes per round; raw amortized values retained, no zero-allocation claim.",
+    "memory": "No new retained source geometry. Retained heap/RSS observations vary; candidate latePrefix RSS increases in all3pairs in bothmodes and default heap increases in all3pairs. No memory-equivalence or memory-win claim.",
+    "limits": "Intended latePrefix gain is directional across all3pairs in bothmodes; control regressions still requireHOLD under the frozen rule. Original56 negative remains factual and neither study establishes universal speedup or sole causal attribution."
+  },
+  "rights_and_scope": {
+    "target_source_and_test": "Original GPL-2.0-only WITH Classpath-exception-2.0 notices retained; Apache recipe license does not relicense target code.",
+    "private_recipes_and_probes": "Canonical Synexia ownership; public target receives only executed postimages, target tests and passive receipts.",
+    "donor_selection": "Existing masks/UTF16 kernels reused; challenge sites supply taxonomy references only, no challenge statements/editorials/submission bodies copied.",
+    "active_phase": "STRING",
+    "phase_advanced": false,
+    "full_JCK_full_jtreg_provider_family_cross_platform_completion": false,
+    "transport": "This payload excludes its own metadata transport Q; external receiving records bind it."
+  },
+  "publication_disposition": {
+    "review_branch": "codex/m3-regex-tail-review-20261026",
+    "performance_acceptance": "HOLD",
+    "runtime_merge_or_release_authority": false,
+    "bootstrap_branch_retains_incumbent_regex_source": true,
+    "passive_record": "This data-only receipt records the held candidate and its qualified source epoch; its presence does not install that candidate."
+  }
+}

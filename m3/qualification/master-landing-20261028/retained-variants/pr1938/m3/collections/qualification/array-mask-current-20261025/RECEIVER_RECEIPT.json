@@ -1,0 +1,40 @@
+{
+  "schema": "M3JDK21_CURRENT_HEAD_COLLECTION_ATOM_V1",
+  "product": "hsoliwal/M3jdk21",
+  "base_commit": "882ebe18891c719c0e26b6ee42558e50e96fe33e",
+  "convergence": "hsoliwal/com.synexia",
+  "convergence_branch": "codex/m3-array-mask-current-20261025",
+  "recipe_owner": "com.synexia.rewrite.M3ArrayListCurrentHeadMaskRecipe",
+  "implementation": "com.m3.collections.M3ArrayList.removeIf",
+  "contract": "existing single Object[] reference owner, stable removal, callbacks/exception identity, modCount, serial form; no java.util public API or JNI change",
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+      "before_git_blob": "dda9d3739f4f7f779bd29e92c80bbc4d45ae1063",
+      "after_git_blob": "3926a5970d61913304ffa7f24a32ad2740ea1a6b",
+      "before_sha256": "9e4f22aa82af226fc96b4f1e77ce7d68f37d10813f1aba594457d43f1eff27a8",
+      "after_sha256": "9a950e6d94ccac369dff45499d1eb3b7ebcc4412d60034be69dedf1e6623a9e5"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "before_git_blob": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
+      "after_git_blob": "483e35170f7378d39eae4a0c7d47cb3e27d1a87f",
+      "before_sha256": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
+      "after_sha256": "1bb84e8f779096092aef0b6f821d45372c5f028648f36ecb8030abaf22ca8bb8"
+    },
+    {
+      "path": "m3/arrays/pom.xml",
+      "before_git_blob": "45b090e6c6003a21db08884379678b3ba410754c",
+      "after_git_blob": "668fab1d24bbebd407ed920664487db848db464e",
+      "scope": "test-only released JUnit coordinate correction; source sealed by existing Synexia text recipe"
+    }
+  ],
+  "verification": {
+    "source_git_blob_readback": "PASS",
+    "atom_may_be_merged_when_source_build_and_differential_checks_green": "PENDING",
+    "synexia_openrewrite_replay": "PENDING_CI",
+    "target_maven_and_oracles": "PENDING_CI",
+    "source_built_jdk_jtreg_abi_jni_gc_performance": "NOT_RUN"
+  },
+  "publication": "TARGET_POSTIMAGES_AND_PASSIVE_DATA_ONLY; NO_SYNEXIA_RECIPE_EXECUTABLES"
+}

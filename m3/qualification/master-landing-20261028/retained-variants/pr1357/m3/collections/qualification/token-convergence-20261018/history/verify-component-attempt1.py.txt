@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+"""Extend Synexia PR12346's exact-source component runner with boundary and linked JNI checks.
+
+This host patch-module run is not a source-built M3JDK21/libjava acceptance claim.
+Original runner: blob 47ea0dbdc985bf3409c4690f08a6d563e142bb1a at 710588f0ca8ad1c2b0d6d9536f16aa881078b647.
+"""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--target', type=Path, required=True)
+    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--jdk', type=Path, required=True)
+    parser.add_argument('--baseline-build', type=Path)
+    args = parser.parse_args()
+    target, output, jdk = (p.resolve() for p in (args.target, args.output, args.jdk))
+    output.mkdir(parents=True, exist_ok=False)
+    classes, tests, headers = (output / p for p in ('classes', 'tests', 'headers'))
+    for folder in (classes, tests, headers):
+        folder.mkdir()
+    source = target / 'src/java.base/share/classes/jdk/internal/mindex/M3RX7.java'
+    native = target / 'src/java.base/share/native/libjava/M3RX7.c'
+    test_root = target / 'test/jdk/jdk/internal/mindex'
+    probe = Path(__file__).parent / 'src/test/java/M3RX7ResourceProbe.java'
+    inputs = [source, native, test_root / 'M3RX7TokenIndexContract.java',
+              test_root / 'M3RX7BoundaryContract.java', test_root / 'libM3RX7Boundary.c', probe]
+    (output / 'INPUTS.json').write_text(json.dumps({str(p): hashlib.sha256(p.read_bytes()).hexdigest()
+                                                 for p in inputs}, indent=2) + '\n')
+    commands = []
+
+    def call(name, *argv):
+        argv = list(map(str, argv))
+        commands.append({'stage': name, 'argv': argv})
+        print('QUALIFY', name, flush=True)
+        with (output / (name + '.log')).open('w') as log:
+            result = subprocess.run(argv, stdout=log, stderr=subprocess.STDOUT, check=False,
+                                    env={**os.environ, 'UBSAN_OPTIONS': 'halt_on_error=1:print_stacktrace=1'})
+        commands[-1]['exit_code'] = result.returncode
+        (output / 'COMMANDS.json').write_text(json.dumps(commands, indent=2) + '\n')
+        if result.returncode:
+            raise RuntimeError(name + ' failed; retained ' + str(output / (name + '.log')))
+
+    javac, java, javap = (jdk / 'bin' / p for p in ('javac', 'java', 'javap'))
+    call('01-java-lint-compile', javac, '-Xlint:all', '-Werror', '-h', headers, '-d', classes, source)
+    exports = ['--add-exports', 'java.base/jdk.internal.mindex=ALL-UNNAMED']
+    patch = ['--patch-module', 'java.base=' + str(classes)]
+    call('02-test-lint-compile', javac, '-Xlint:all', '-Werror', *patch, *exports, '-d', tests,
+         inputs[2], inputs[3], probe)
+    cflags = ['-std=c17', '-Wall', '-Wextra', '-Werror', '-I', headers,
+              '-I', jdk / 'include', '-I', jdk / 'include/linux']
+    call('03-native-lint', 'gcc', *cflags, '-fsyntax-only', native, inputs[4])
+    library = output / 'libM3RX7Boundary.so'
+    call('04-native-link', 'gcc', *cflags, '-O2', '-fPIC', '-shared', '-fsanitize=undefined',
+         '-fno-sanitize-recover=undefined', native, inputs[4], '-o', library)
+    call('05-native-symbols', 'nm', '-D', '--defined-only', library)
+    run = [java, *patch, *exports, '-cp', tests]
+    call('06-donor-contract', *run, 'M3RX7TokenIndexContract')
+    call('07-java-boundaries', *run, 'M3RX7BoundaryContract')
+    opens = ['--add-opens', 'java.base/jdk.internal.mindex=ALL-UNNAMED']
+    call('08-native-boundaries', *run, *opens, '-Xcheck:jni', 'M3RX7BoundaryContract', library)
+    call('09-native-interpreter', *run, *opens, '-Xcheck:jni', '-Xint', 'M3RX7BoundaryContract', library)
+    for name in ('M3RX7', 'M3RX7$TokenIndex'):
+        call('api-' + name.replace('$', '-'), javap, '-public', '-s', classes / ('jdk/internal/mindex/' + name + '.class'))
+        if args.baseline_build:
+            baseline = args.baseline_build.resolve()
+            call('baseline-api-' + name.replace('$', '-'), javap, '-public', '-s',
+                 baseline / ('classes/jdk/internal/mindex/' + name + '.class'))
+            left = output / ('api-' + name.replace('$', '-') + '.log')
+            right = output / ('baseline-api-' + name.replace('$', '-') + '.log')
+            if left.read_bytes() != right.read_bytes():
+                raise AssertionError('public descriptor drift: ' + name)
+    if args.baseline_build:
+        before_header = args.baseline_build.resolve() / 'headers/jdk_internal_mindex_M3RX7.h'
+        if before_header.read_bytes() != (headers / before_header.name).read_bytes():
+            raise AssertionError('JNI header drift')
+    for trial in range(3):
+        call('resource-candidate-' + str(trial), '/usr/bin/time', '-v', *run, 'M3RX7ResourceProbe')
+        if args.baseline_build:
+            call('resource-donor-' + str(trial), '/usr/bin/time', '-v', java,
+                 '--patch-module', 'java.base=' + str(args.baseline_build.resolve() / 'classes'),
+                 *exports, '-cp', tests, 'M3RX7ResourceProbe')
+    print('RX7_COMPONENT_PASS; source-built JDK/libjava/jtreg/platform acceptance NOT_PROVEN')
+
+
+if __name__ == '__main__':
+    main()

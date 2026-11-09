@@ -1,0 +1,15 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+#FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/36827ee8a798ef6ce07f6fc55a2ac371b1382c06/m3-pmem-sdk/recipes/pmem-api.tsv blob b1a1926315d8; recipe m3/optane/recipe/pmem-region-core-20261106/relocate.py v2
+signature	javadoc
+long length()	Length in bytes, not limited to an int.
+long fileOffset()	Original byte offset of the mapping in the file.
+java.nio.file.Path path()	File used for this mapping.
+M3PmemAccess access()	Access mode set when mapping was opened.
+M3PmemBackend backend()	Actual backend; AUTO never appears in this result.
+M3PmemGranularity persistenceGranularity()	Effective durability granularity, not atomicity.
+boolean isOpen()	True until successful close.
+void read(long offset, byte[] target, int arrayOffset, int count)	Read into an owned heap array; bounds checked before JNI.
+void write(long offset, byte[] source, int arrayOffset, int count)	Write from a heap array; disallowed on read-only mappings.
+void persist(long offset, long count) throws java.io.IOException	Complete durability synchronization of a range; not a transaction.
+void close() throws java.io.IOException	Idempotent close; blocks until Java API operations finish.

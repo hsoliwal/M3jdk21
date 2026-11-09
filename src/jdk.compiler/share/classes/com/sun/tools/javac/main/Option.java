@@ -1081,6 +1081,10 @@ public enum Option {
         return kind;
     }
 
+    public boolean isInBasicOptionGroup() {
+        return group == BASIC;
+    }
+
     public ArgKind getArgKind() {
         return argKind;
     }

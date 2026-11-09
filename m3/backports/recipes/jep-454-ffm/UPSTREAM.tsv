@@ -1,0 +1,11 @@
+field	value
+jep	454
+title	Foreign Function & Memory API
+jdk21_preview_issue	JDK-8304265
+jdk21_preview_commit	cbccc4c8172797ea2f1b7c301d00add3f517546d
+jdk22_final_issue	JDK-8312522
+jdk22_final_commit	32ac72c3d35138f5253e4defc948304ac3ea1b53
+jdk22_final_parent	9728e21db1b35e487c562690de659aac386aa99d
+finalization_path_count	261
+source_materialized	false
+promotion	NOT_AUTHORIZED

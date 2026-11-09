@@ -1,0 +1,850 @@
+{
+  "artifact": "snakeyaml",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "synexia-mindex/runtime (explicit pin)",
+  "coordinate": "org.yaml:snakeyaml:2.6-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "snakeyaml-2.6",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "31f06c9999bfd523e192864178cfe4a9873d336884cf59a0d698e520895caeaa",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/upstream-excluded/META-INF/maven/org.yaml/snakeyaml/pom.properties",
+      "sha256": "404590f6eb58091c077d06b0bdb5a656a48d40c2f9b6f7ef6ffd4c55771732e3",
+      "upstream": "META-INF/maven/org.yaml/snakeyaml/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/upstream-excluded/META-INF/maven/org.yaml/snakeyaml/pom.xml",
+      "sha256": "2773b0e948964d21e37b0e1dcf39025e627b873e0ce6aa2a47e23c374303e0c4",
+      "upstream": "META-INF/maven/org.yaml/snakeyaml/pom.xml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/DumperOptions.java",
+      "sha256": "60f9f92eb4c66e991dce0184befeda647a1f7f15f4e26040fab4236951e0bf7d",
+      "upstream": "org/yaml/snakeyaml/DumperOptions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/LoaderOptions.java",
+      "sha256": "0ade9f9dcdecabfea690efb0c3376042621a78f06e40261cdb4dbc50430451cc",
+      "upstream": "org/yaml/snakeyaml/LoaderOptions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/TypeDescription.java",
+      "sha256": "3bfc22c4ebcb37443b7075265dbdd107b90a5b682a309d97eccb714fe922c5ba",
+      "upstream": "org/yaml/snakeyaml/TypeDescription.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/Yaml.java",
+      "sha256": "08123972042a293670b6f1e58e5a0a4d3d84dc2306fc403b07ae1c95ed58d15a",
+      "upstream": "org/yaml/snakeyaml/Yaml.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/comments/CommentEventsCollector.java",
+      "sha256": "6ff9e9545ba95c08581befc69ebe8c53e368bc2b88fc65cdfd40fbb185390da0",
+      "upstream": "org/yaml/snakeyaml/comments/CommentEventsCollector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/comments/CommentLine.java",
+      "sha256": "502e6dc3b86691d82f2d888741061c17e189ff1a010173d2e01d5427c8c28f36",
+      "upstream": "org/yaml/snakeyaml/comments/CommentLine.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/comments/CommentType.java",
+      "sha256": "3d475cdca664c1098c1e2c4d35cff6705434b2deea625b9991f63d6bca2458bb",
+      "upstream": "org/yaml/snakeyaml/comments/CommentType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/composer/Composer.java",
+      "sha256": "e038f4c7583e5e2956942064d7c3ea3072138c239cbfcb5a9e8d5d28bdb973e9",
+      "upstream": "org/yaml/snakeyaml/composer/Composer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/composer/ComposerException.java",
+      "sha256": "37505d2ecdedc0e3177c3af8ec11d8d943070c10137775365a7426ca735df933",
+      "upstream": "org/yaml/snakeyaml/composer/ComposerException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/constructor/AbstractConstruct.java",
+      "sha256": "924febbb66379beeb70861ea3aed65072dae8886f16c2b416e2b37e691948af7",
+      "upstream": "org/yaml/snakeyaml/constructor/AbstractConstruct.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/constructor/BaseConstructor.java",
+      "sha256": "df45abd8b75e47393d37fb9d67fb8b03b8d07fc2080442aef41c29539aeef00e",
+      "upstream": "org/yaml/snakeyaml/constructor/BaseConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/constructor/Construct.java",
+      "sha256": "088ff04673f7744e08239cc98bf80dad5b0c9f80c0cb1c4d87c5a6c9572d1d20",
+      "upstream": "org/yaml/snakeyaml/constructor/Construct.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/constructor/Constructor.java",
+      "sha256": "e11b00b2613566fa8fcd3149c4a51c5d3eb889aa89126a6b5b765f1766d49eb4",
+      "upstream": "org/yaml/snakeyaml/constructor/Constructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/constructor/ConstructorException.java",
+      "sha256": "469b2adae686e8d2e78765d9a1e545d088d0698dcb0a768a81176b47ebac2332",
+      "upstream": "org/yaml/snakeyaml/constructor/ConstructorException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/constructor/CustomClassLoaderConstructor.java",
+      "sha256": "3b8dfab0a537f3df2afcbce1505a756c1a1668d61fb138033a01dd2d3a978576",
+      "upstream": "org/yaml/snakeyaml/constructor/CustomClassLoaderConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/constructor/DuplicateKeyException.java",
+      "sha256": "2ad9e41fadcfd8ccba59b9c6835398d8a6faa745adaf59e7c9fb550fc0919d49",
+      "upstream": "org/yaml/snakeyaml/constructor/DuplicateKeyException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/constructor/SafeConstructor.java",
+      "sha256": "8d38108462dae480f20308cf132b73060def74b060f8bb67e2e51dac4469a087",
+      "upstream": "org/yaml/snakeyaml/constructor/SafeConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/emitter/Emitable.java",
+      "sha256": "a6dc9b4946e04a33f33c05e28e7704fe8cbd2d0e3da964280b06b125f3496081",
+      "upstream": "org/yaml/snakeyaml/emitter/Emitable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/emitter/Emitter.java",
+      "sha256": "2fd26751dbd0583294cb52bcc3f0c54b4fd3c679c544f806641dc49e026eb399",
+      "upstream": "org/yaml/snakeyaml/emitter/Emitter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/emitter/EmitterException.java",
+      "sha256": "89a49e09e5ce9d2817dbdaf6d7453b6a9f31201bb350cb0177bc70bf7238ad05",
+      "upstream": "org/yaml/snakeyaml/emitter/EmitterException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/emitter/EmitterState.java",
+      "sha256": "d23f0d7cd6d4c2e43698706a6cbbbf34d457827b613629970c6d1c429324ae87",
+      "upstream": "org/yaml/snakeyaml/emitter/EmitterState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/emitter/ScalarAnalysis.java",
+      "sha256": "39a845d9d4223f5670213b6d62c1ee87aa762e6cedc26b50476f50cf6e06960b",
+      "upstream": "org/yaml/snakeyaml/emitter/ScalarAnalysis.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/env/EnvScalarConstructor.java",
+      "sha256": "07714d691baca99435f76a062a48b1973cbc70c46b289d2dc7bc4563752e1863",
+      "upstream": "org/yaml/snakeyaml/env/EnvScalarConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/error/Mark.java",
+      "sha256": "d4f87becca3d11f870ee926fa65af4c49f7fde14b9d898e4781bd2a58c65b004",
+      "upstream": "org/yaml/snakeyaml/error/Mark.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/error/MarkedYAMLException.java",
+      "sha256": "7c8b7ced3dc118db589bceed0032d9afd3f6a2be565457c29b1704daebcb713e",
+      "upstream": "org/yaml/snakeyaml/error/MarkedYAMLException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/error/MissingEnvironmentVariableException.java",
+      "sha256": "be08784f934e3c07bc82fb0252fdf6e784d2009133e4cfa066943b677f78c0d6",
+      "upstream": "org/yaml/snakeyaml/error/MissingEnvironmentVariableException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/error/YAMLException.java",
+      "sha256": "393617d141c95d427fcb26f5a8c97a3aa64b7940df5a71892ce2498b15f2d17c",
+      "upstream": "org/yaml/snakeyaml/error/YAMLException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/AliasEvent.java",
+      "sha256": "213040eb5eb9afaaf36a6aa84f1f0c82da1d09cb3ccffb5d2c63da50519f5c6f",
+      "upstream": "org/yaml/snakeyaml/events/AliasEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/CollectionEndEvent.java",
+      "sha256": "24b19335e149ad3c3c75d7a20a9ede6fcfc915a153358d486a4f174538635156",
+      "upstream": "org/yaml/snakeyaml/events/CollectionEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/CollectionStartEvent.java",
+      "sha256": "cc58d7045655664e8fdb754c057a2eba2fc8cc41f70270b9370915efc16ec84d",
+      "upstream": "org/yaml/snakeyaml/events/CollectionStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/CommentEvent.java",
+      "sha256": "20012e56b854b0415d6d1ea75bf3a899a50f62fd725983f3f308fd0e7cc6a6cb",
+      "upstream": "org/yaml/snakeyaml/events/CommentEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/DocumentEndEvent.java",
+      "sha256": "cae8cf2174be7b210121e987a691d69c27081755230b84038851ed82a37ee177",
+      "upstream": "org/yaml/snakeyaml/events/DocumentEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/DocumentStartEvent.java",
+      "sha256": "e9f31e32068ef20c521261ad6a876f9c6787e799e343edf374eb1cb6e29c55fa",
+      "upstream": "org/yaml/snakeyaml/events/DocumentStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/Event.java",
+      "sha256": "4109eabeae5191d70dd2e4632b8d1a1b1fe7a2fcb75096a17359d7e31ee8c83a",
+      "upstream": "org/yaml/snakeyaml/events/Event.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/ImplicitTuple.java",
+      "sha256": "932cc4e3452f94002bef8e190b52722ad52e93c9f93dae77721d681c162cc3bc",
+      "upstream": "org/yaml/snakeyaml/events/ImplicitTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/MappingEndEvent.java",
+      "sha256": "f67474123f18006bd2d67f13b7270b0d352282a0a6dbc666da5b30bb52348dc9",
+      "upstream": "org/yaml/snakeyaml/events/MappingEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/MappingStartEvent.java",
+      "sha256": "d090612e038d78ffbe57604228a7be6ae0ff2c6f2cb3e292e4f99e6eb43aa022",
+      "upstream": "org/yaml/snakeyaml/events/MappingStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/NodeEvent.java",
+      "sha256": "68dd913ce115d0c60416ba1bf2ba4d1a3905597cfa6fddcca2b38f021598c298",
+      "upstream": "org/yaml/snakeyaml/events/NodeEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/ScalarEvent.java",
+      "sha256": "14aae225b9a6fb3b4b6d421583344f53f5c40631adb6cc50c5bc4eb4f7fcb68a",
+      "upstream": "org/yaml/snakeyaml/events/ScalarEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/SequenceEndEvent.java",
+      "sha256": "d09fad1cb8eff5c67548303c3120cff030502a2b4241a1fe09974608d7b8a75d",
+      "upstream": "org/yaml/snakeyaml/events/SequenceEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/SequenceStartEvent.java",
+      "sha256": "3ae441deec5a37aafb23b13b4585693cf0a75962309d21745a1c74e1cb09b694",
+      "upstream": "org/yaml/snakeyaml/events/SequenceStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/StreamEndEvent.java",
+      "sha256": "29d1d7980045a6a6337a18b792ab9c0b6e64cde8834eaf794f091158f52ac57d",
+      "upstream": "org/yaml/snakeyaml/events/StreamEndEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/events/StreamStartEvent.java",
+      "sha256": "4acbb8bf945c5dfb82d07b8d2ae7889126465a616747369c896300695812f931",
+      "upstream": "org/yaml/snakeyaml/events/StreamStartEvent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/extensions/compactnotation/CompactConstructor.java",
+      "sha256": "1cbbda5fc385f4b0af11fd0f0e0fb5b98389be018a3b71ffc3ac279c561baaf2",
+      "upstream": "org/yaml/snakeyaml/extensions/compactnotation/CompactConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/extensions/compactnotation/CompactData.java",
+      "sha256": "48cbd2442bdb2a8aaaba433c54d438ddda532fd17380399e80c02d180fab6f25",
+      "upstream": "org/yaml/snakeyaml/extensions/compactnotation/CompactData.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/extensions/compactnotation/PackageCompactConstructor.java",
+      "sha256": "0f08df8df6fa396c6102761e077a623e13d2a3feccc96583d4b094b79bbdd6fc",
+      "upstream": "org/yaml/snakeyaml/extensions/compactnotation/PackageCompactConstructor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/external/com/google/gdata/util/common/base/Escaper.java",
+      "sha256": "2079915b6db100194bf0c7c510ffc6f89ff0c516c63765d9ed645eb5280ae8e9",
+      "upstream": "org/yaml/snakeyaml/external/com/google/gdata/util/common/base/Escaper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/external/com/google/gdata/util/common/base/PercentEscaper.java",
+      "sha256": "2f2b819beca07d4e78f6d350c648946eb09db032da8b429fb47bfa5ec3f6b184",
+      "upstream": "org/yaml/snakeyaml/external/com/google/gdata/util/common/base/PercentEscaper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/external/com/google/gdata/util/common/base/UnicodeEscaper.java",
+      "sha256": "1f108c1afc3bf0dc3050f92341a1fc7c401d4734bd702c04eeb82b85a8797dbb",
+      "upstream": "org/yaml/snakeyaml/external/com/google/gdata/util/common/base/UnicodeEscaper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/inspector/TagInspector.java",
+      "sha256": "0a9c1a41da0ad6be50bc0ff594b0c0e66682bc7f6db9c80ad5e91c74e9a9ef2c",
+      "upstream": "org/yaml/snakeyaml/inspector/TagInspector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/inspector/UnTrustedTagInspector.java",
+      "sha256": "a61a9e4503f0e0b2fb3ba0387ebcd44e5cea6653f0fe2abadc8a52e462b93e50",
+      "upstream": "org/yaml/snakeyaml/inspector/UnTrustedTagInspector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/internal/Logger.java",
+      "sha256": "dbcb1f8b90d30aa0c7e50b61ad766feb9c2893349b4ba1992e25a70b194085da",
+      "upstream": "org/yaml/snakeyaml/internal/Logger.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/introspector/BeanAccess.java",
+      "sha256": "15e8c2e30898a1b3ad98099d895cc2304fd72fa8067c07adda4a904ebe1a9f86",
+      "upstream": "org/yaml/snakeyaml/introspector/BeanAccess.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/introspector/FieldProperty.java",
+      "sha256": "e153ff2cbe82f227cf40750a6e4c54f13e752932563738d34de9a743060f2a02",
+      "upstream": "org/yaml/snakeyaml/introspector/FieldProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/introspector/GenericProperty.java",
+      "sha256": "27e9abdc646bc595514d9032cf5712424ac7f33b06c800ee29a01774c143769d",
+      "upstream": "org/yaml/snakeyaml/introspector/GenericProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/introspector/MethodProperty.java",
+      "sha256": "536d718891891ca880634350dd653a0c6614b9a64ac177208c58c55761e15607",
+      "upstream": "org/yaml/snakeyaml/introspector/MethodProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/introspector/MissingProperty.java",
+      "sha256": "439c97369f7d4251fa4e1dc1d470c37e843165352fa1a43eb38296379aa19593",
+      "upstream": "org/yaml/snakeyaml/introspector/MissingProperty.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/introspector/Property.java",
+      "sha256": "6d0c5e318d08bb23c71a314f02bf4dc6a0849eef69259eb671fb2b30f853ed11",
+      "upstream": "org/yaml/snakeyaml/introspector/Property.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/introspector/PropertySubstitute.java",
+      "sha256": "ec440b86f1829de7b02fb293eb0b5f3f74286a2b76dba5d5ec4a4e5b39dac266",
+      "upstream": "org/yaml/snakeyaml/introspector/PropertySubstitute.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/introspector/PropertyUtils.java",
+      "sha256": "004e6d0b4d91fb13874e62761e5ea5587e15440b5e7c2e97a9ee44f73a25fb42",
+      "upstream": "org/yaml/snakeyaml/introspector/PropertyUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/AnchorNode.java",
+      "sha256": "700b5c55dd947b6ba0a1fe4855fbbbf34ed42645d14dfe5c8057c6f9831a2d48",
+      "upstream": "org/yaml/snakeyaml/nodes/AnchorNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/CollectionNode.java",
+      "sha256": "1f3e6b12fedeb30b296b7001b58e1dbe1bfc6a935bf20aec9e0a231c7ae04011",
+      "upstream": "org/yaml/snakeyaml/nodes/CollectionNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/MappingNode.java",
+      "sha256": "cebfaca16d14ab5baebddf39223cf5ccb1b63e19a6c39a1996bbac2975aca3dd",
+      "upstream": "org/yaml/snakeyaml/nodes/MappingNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/Node.java",
+      "sha256": "4a7d911afed33420bfb87cc0452d6bca07aa78a2a19ba850673a903e0125bb85",
+      "upstream": "org/yaml/snakeyaml/nodes/Node.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/NodeId.java",
+      "sha256": "f389bbaefd0a27cfce0fb45f4eb42aa28e80c6da35a5b3afc4c5966c6bad83b0",
+      "upstream": "org/yaml/snakeyaml/nodes/NodeId.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/NodeTuple.java",
+      "sha256": "f143a4859ac606c3c9dc263ad070f56e674001a7b2f1765d856f7fe04b28ec0c",
+      "upstream": "org/yaml/snakeyaml/nodes/NodeTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/ScalarNode.java",
+      "sha256": "aeee7a4f1f02b2e1b6a504618c72079b21c6ae17a317312d31be740072734d2c",
+      "upstream": "org/yaml/snakeyaml/nodes/ScalarNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/SequenceNode.java",
+      "sha256": "0c3680755d37a6b51f6b4f2783a9c1839bd47c5c2c298dfee611dae1a0eb2763",
+      "upstream": "org/yaml/snakeyaml/nodes/SequenceNode.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/nodes/Tag.java",
+      "sha256": "5cd5e17745acaef07c14f9fe08b17e6c2e7beccfcd4eae2854138282cf97bf71",
+      "upstream": "org/yaml/snakeyaml/nodes/Tag.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/parser/Parser.java",
+      "sha256": "bfd623854b60321cf0e031d0bcdb0124c8b707a63a4fa2f6efabb084e00c8325",
+      "upstream": "org/yaml/snakeyaml/parser/Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/parser/ParserException.java",
+      "sha256": "f5744c254892c3b0306aee958df2a636498e0b8b5216cbe786dd0a1fafebfc36",
+      "upstream": "org/yaml/snakeyaml/parser/ParserException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/parser/ParserImpl.java",
+      "sha256": "21258ba65c6c4c70bb511bd923567cb7f34378f778bb8d546ba1c8e965fe76a9",
+      "upstream": "org/yaml/snakeyaml/parser/ParserImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/parser/Production.java",
+      "sha256": "310da41bd80aaeb35fba5676a25e7b3be0d99f79b8e05fad06a6a4684a74b6ac",
+      "upstream": "org/yaml/snakeyaml/parser/Production.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/parser/VersionTagsTuple.java",
+      "sha256": "734a2189c14e752cc23122e37bc3758a7e7951414b6ff760a1a6b893e8ea73d0",
+      "upstream": "org/yaml/snakeyaml/parser/VersionTagsTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/reader/ReaderException.java",
+      "sha256": "22c4d113879578cdffbef8feb0abd12d7b615afe3b1df6427c46b768cfe188d6",
+      "upstream": "org/yaml/snakeyaml/reader/ReaderException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/reader/StreamReader.java",
+      "sha256": "a6dc08881a3214ac0ed17a13d28f33472f2a7bfc7f23e1e6d3580f1bdb2cf247",
+      "upstream": "org/yaml/snakeyaml/reader/StreamReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/reader/UnicodeReader.java",
+      "sha256": "8110730f2033a4fd50ff35c345c88bbd7f2114f767d9b71b285277d34c601e3b",
+      "upstream": "org/yaml/snakeyaml/reader/UnicodeReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/representer/BaseRepresenter.java",
+      "sha256": "479d6029af8b6edb8523b52a4202611aace09ba2dcf8db6ce1d8b6efca1b679c",
+      "upstream": "org/yaml/snakeyaml/representer/BaseRepresenter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/representer/JsonRepresenter.java",
+      "sha256": "76b8d6f4bf2a5cb610d71d32b3138bc0d85772aa2b5553b70f5d7570c1a14d6f",
+      "upstream": "org/yaml/snakeyaml/representer/JsonRepresenter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/representer/Represent.java",
+      "sha256": "3735b51b658a6ec1b6ca6074bf85520cfaee9adf4874093b4ead917e528cc880",
+      "upstream": "org/yaml/snakeyaml/representer/Represent.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/representer/Representer.java",
+      "sha256": "e3e3b5888e9698d441280b8305dd75271a4217f593ec47148514a0f6c27843c2",
+      "upstream": "org/yaml/snakeyaml/representer/Representer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/representer/SafeRepresenter.java",
+      "sha256": "c8e912edd9c7103ccca0fd6bb0e2760449b699ecf11dc6463f92fb194c950ead",
+      "upstream": "org/yaml/snakeyaml/representer/SafeRepresenter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/resolver/Resolver.java",
+      "sha256": "db5db0b247ff0b86f9b5833af08f380785b202a533c08ae07313da3063606ec5",
+      "upstream": "org/yaml/snakeyaml/resolver/Resolver.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/resolver/ResolverTuple.java",
+      "sha256": "f2f9ab41e2e5bbd8388c801c3224f4f4a1d966a47d86f18c61b94cd732d87ad9",
+      "upstream": "org/yaml/snakeyaml/resolver/ResolverTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/scanner/Constant.java",
+      "sha256": "fa6127d2480e569719d299ec5aa9e75db264cc1c3484f888a540bef2a8152694",
+      "upstream": "org/yaml/snakeyaml/scanner/Constant.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/scanner/Scanner.java",
+      "sha256": "81d21291d79ca5a28855f74bd1f4029977c1fe8a580418d4e64ffb5a9c535ba0",
+      "upstream": "org/yaml/snakeyaml/scanner/Scanner.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/scanner/ScannerException.java",
+      "sha256": "c84bb985a4aa2dc541acf4125a8822bc8b7671cc607e8512d1757d1b4ca8c0a4",
+      "upstream": "org/yaml/snakeyaml/scanner/ScannerException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/scanner/ScannerImpl.java",
+      "sha256": "c6c4d295f5fa58842dea2acd5ee42d0cdb8814ea0417d819994e97141bb287c8",
+      "upstream": "org/yaml/snakeyaml/scanner/ScannerImpl.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/scanner/SimpleKey.java",
+      "sha256": "affeb2234a3a3386a6cac6c1618bde539fcd680857277078c932792ae1bef939",
+      "upstream": "org/yaml/snakeyaml/scanner/SimpleKey.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/serializer/AnchorGenerator.java",
+      "sha256": "5e75fc31ff0a77623835bd51044102545c05c243d61b5f8d4f98cb5fd64dd8a3",
+      "upstream": "org/yaml/snakeyaml/serializer/AnchorGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/serializer/NumberAnchorGenerator.java",
+      "sha256": "2a756b7f08ba0c9ef04e31c5eeeed3d678dc6ff9d4749a839758e28e27e76e44",
+      "upstream": "org/yaml/snakeyaml/serializer/NumberAnchorGenerator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/serializer/Serializer.java",
+      "sha256": "effb6c78f4e03cbdf98cbde92d3bb57939dfb64e2003a092efc4d821000aab8d",
+      "upstream": "org/yaml/snakeyaml/serializer/Serializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/serializer/SerializerException.java",
+      "sha256": "d33e59492a9b92bbfe17e256256d3e40350b6ad5285986b7031f031f14ca2c23",
+      "upstream": "org/yaml/snakeyaml/serializer/SerializerException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/AliasToken.java",
+      "sha256": "053be066e5973dc12dd0b6a57df8edebec519eaee820be040a76fd5405d2584c",
+      "upstream": "org/yaml/snakeyaml/tokens/AliasToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/AnchorToken.java",
+      "sha256": "17b979f2666a86e655a0fee03b7b35f767cb211d9db07e5b1fb1efa73c8ef876",
+      "upstream": "org/yaml/snakeyaml/tokens/AnchorToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/BlockEndToken.java",
+      "sha256": "e4d5788d2f4d52aefdefe67e1e195b2648416a2cb7688d334b5263a118404b7f",
+      "upstream": "org/yaml/snakeyaml/tokens/BlockEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/BlockEntryToken.java",
+      "sha256": "0600462addd2187681e6917503cdb408953cbec48958aabfa43370d58df039ef",
+      "upstream": "org/yaml/snakeyaml/tokens/BlockEntryToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/BlockMappingStartToken.java",
+      "sha256": "d31054afbb6910ca1d1815f16eeef1426983741def7b3c58eced958a416c7b8e",
+      "upstream": "org/yaml/snakeyaml/tokens/BlockMappingStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/BlockSequenceStartToken.java",
+      "sha256": "c9c796dc191df23d15ec961d61eee7047ee9a2c5ee50a41b3cbc86cdb77ddb40",
+      "upstream": "org/yaml/snakeyaml/tokens/BlockSequenceStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/CommentToken.java",
+      "sha256": "24856483be1b8c153495f17072db4074efcb90c9e0849d9536b1d9ab7d21652e",
+      "upstream": "org/yaml/snakeyaml/tokens/CommentToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/DirectiveToken.java",
+      "sha256": "56a64651606f01b6594a6fedd74b7bb4a29d54d319f51598fa9f4cdf9f48079c",
+      "upstream": "org/yaml/snakeyaml/tokens/DirectiveToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/DocumentEndToken.java",
+      "sha256": "3a03525b800c2ffc084f2b9c3c5a43b4be6df7ecf85e8fca1b8a030a1e903156",
+      "upstream": "org/yaml/snakeyaml/tokens/DocumentEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/DocumentStartToken.java",
+      "sha256": "a40e4f9498dc7b89ad7e658cab1cc355895e8a7cc0bdf6f959e062bb748ead99",
+      "upstream": "org/yaml/snakeyaml/tokens/DocumentStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/FlowEntryToken.java",
+      "sha256": "63d36c778e0bfff4e047dee030f1acee56c808aeb58bc0ec4db67dbdb9a6d8a7",
+      "upstream": "org/yaml/snakeyaml/tokens/FlowEntryToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/FlowMappingEndToken.java",
+      "sha256": "732cc9691d7ec2e0a40e321300b99c8fd5a39e52fbda020d029e5c25ae1599c3",
+      "upstream": "org/yaml/snakeyaml/tokens/FlowMappingEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/FlowMappingStartToken.java",
+      "sha256": "377045b9a1cad9cdc1aa114290d859d09d3ba30a60ae0b7a9dc264e6412452b2",
+      "upstream": "org/yaml/snakeyaml/tokens/FlowMappingStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/FlowSequenceEndToken.java",
+      "sha256": "1be4665fe94e57934f4a24beb134134d80e6fd675781bab6ce7d02690b8d48ac",
+      "upstream": "org/yaml/snakeyaml/tokens/FlowSequenceEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/FlowSequenceStartToken.java",
+      "sha256": "25d7576948958dc0ca48db70c75c1408b28150bd795a8bbc1be4491b4a8b88f5",
+      "upstream": "org/yaml/snakeyaml/tokens/FlowSequenceStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/KeyToken.java",
+      "sha256": "166c20cdb9cf4e1a28a39235405a0959f122042ef4bce7c63e494bb406d92657",
+      "upstream": "org/yaml/snakeyaml/tokens/KeyToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/ScalarToken.java",
+      "sha256": "ab471c4e039c7761767957585fecdeda4542f5fa6fa4c7e405fc13ac49177e1b",
+      "upstream": "org/yaml/snakeyaml/tokens/ScalarToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/StreamEndToken.java",
+      "sha256": "da425802a4dd9f95d149e4e57629c671663eeeab513be54508f32994126e7645",
+      "upstream": "org/yaml/snakeyaml/tokens/StreamEndToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/StreamStartToken.java",
+      "sha256": "b6e33cab802b3e451a729c4facb0fa9f455057433e50455d7416b2695813ec7a",
+      "upstream": "org/yaml/snakeyaml/tokens/StreamStartToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/TagToken.java",
+      "sha256": "f42f2b2b2d1f0ba8631297572505b33ed2b7b3e12f1700e404db3e27fe494397",
+      "upstream": "org/yaml/snakeyaml/tokens/TagToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/TagTuple.java",
+      "sha256": "56369a0cdbad2fe575090c6284705e7b8c82eb785201f4e0f1df6422c2cc5657",
+      "upstream": "org/yaml/snakeyaml/tokens/TagTuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/Token.java",
+      "sha256": "99ea7317bc24ffb90882ccc88612e40b4fb6b8ffc43171c7d576bd68b94e9888",
+      "upstream": "org/yaml/snakeyaml/tokens/Token.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/tokens/ValueToken.java",
+      "sha256": "f2213b8d8b9da340bf38c3e394e7d6ef1c90eb21c67e3e8c59614b79d7aa47f2",
+      "upstream": "org/yaml/snakeyaml/tokens/ValueToken.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/util/ArrayStack.java",
+      "sha256": "90d4693bedb433974040e6eccc802d5b252f9de1cad2ede4c3ea697d5ee126a2",
+      "upstream": "org/yaml/snakeyaml/util/ArrayStack.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/util/ArrayUtils.java",
+      "sha256": "6678eac2fdf1780f18ee6335a1cc588b3b491e2b8d65c482959f6f5be66b932b",
+      "upstream": "org/yaml/snakeyaml/util/ArrayUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/util/EnumUtils.java",
+      "sha256": "68c9973321dade0b02d3b8d0bd69754be81195a469d46b3f5356e215b22da2b0",
+      "upstream": "org/yaml/snakeyaml/util/EnumUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/util/MergeUtils.java",
+      "sha256": "b555d05c5383d8a499e578ac50e9a2f2f1a2db56943910dcf4e6d22f3a88723c",
+      "upstream": "org/yaml/snakeyaml/util/MergeUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/util/PlatformFeatureDetector.java",
+      "sha256": "2ec71558fe4f5daf5fa0612295bb4a791dfb41ef9cdc02e0917e9c5902406e73",
+      "upstream": "org/yaml/snakeyaml/util/PlatformFeatureDetector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/util/Tuple.java",
+      "sha256": "491ba2a6d78453dc1e0c0a13b3b474a730934ee32c6d456bcc9394e032ee125d",
+      "upstream": "org/yaml/snakeyaml/util/Tuple.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/java/org/yaml/snakeyaml/util/UriEncoder.java",
+      "sha256": "af1067e3fe6245bd42c727cefe182998f3f2ba549955292afe90638794673e6a",
+      "upstream": "org/yaml/snakeyaml/util/UriEncoder.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/UPSTREAM_LICENSE.json",
+      "sha256": "e74944a10b7fd57a50adce60ca0d39572cfce21852ed29f66ca000de90c06fb9",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/UPSTREAM_LICENSE.txt",
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/SOURCES_MANIFEST.tsv",
+      "sha256": "720717a5a23474f47a013f9686d41bfef4b7dcb3ab47d3519e07a85e95667e97",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/LICENSE",
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "commit": "9f02cc56e5afb989ca5baac1e0052c3f006cdbec",
+      "kind": "upstream-overlay-source-at-tag",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/versions/9/org/yaml/snakeyaml/internal/Logger.java",
+      "sha256": "0b5e18f241a37c81f363a4a901e897de30734f6103e7333bc1d86d31965498d2",
+      "tag": "snakeyaml-2.6",
+      "upstream": "src/main/java9/org/yaml/snakeyaml/internal/Logger.java",
+      "url": "https://bitbucket.org/snakeyaml/snakeyaml/raw/9f02cc56e5afb989ca5baac1e0052c3f006cdbec/src/main/java9/org/yaml/snakeyaml/internal/Logger.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/OVERLAY_SOURCES.json",
+      "sha256": "593a554184433246b73683911a242c2b181502a49a8971b3fc66a5aca310349f",
+      "upstream": "fetch_overlays.py"
+    },
+    {
+      "commit": "9f02cc56e5afb989ca5baac1e0052c3f006cdbec",
+      "kind": "upstream-descriptor-source-at-tag",
+      "repository": "m3/vendor/third_party/snakeyaml-2.6/src/main/descriptor/9/module-info.java",
+      "sha256": "a66ce7ac83f6f07641f45515e18a9c33c83f267430c4a473fec40daaf0dbbb90",
+      "tag": "snakeyaml-2.6",
+      "upstream": "src/main/java9/module-info.java",
+      "url": "https://bitbucket.org/snakeyaml/snakeyaml/raw/9f02cc56e5afb989ca5baac1e0052c3f006cdbec/src/main/java9/module-info.java"
+    }
+  ],
+  "group": "org.yaml",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": "reproduced (see src/main/descriptor)",
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": [
+      "9"
+    ]
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/2.6/snakeyaml-2.6.pom",
+  "receipt": {
+    "buildRoot": "3708cc2f19d83a5e483ad2baf4e2588cf31f09685c30b0b14a64f52946fbf2de",
+    "distributionSha256": "1e790e7d2c11e85ea799766973532ef3e9a6252a6f29756b8031d43c12796de3",
+    "lock": "2fef50af3f31bd477baafd162dbd5e42f66032e3368618fc79cb4f9d9c0c41b7",
+    "message": "",
+    "sourceRoot": "6b2400b2bd22c5d86e19c0be918d00494a1e12ba39e656f50a7d4a472667ebf6",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/2.6/snakeyaml-2.6-sources.jar",
+  "sources_jar_sha1": "9256bb1fc9d420e70bb1dc9defc33553903b6ebc",
+  "sources_jar_sha256": "cd719ff3e52eec48ef7c541ba4f178c2eff0f6719fd0abe4f4e44bde41138ca2",
+  "status": "PASS",
+  "upstream": "https://bitbucket.org/snakeyaml/snakeyaml/src",
+  "version": "2.6"
+}

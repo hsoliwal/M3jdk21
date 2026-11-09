@@ -1,0 +1,13 @@
+{
+  "stage": "RUNTIME",
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/7846804a0074/M3jdk21-f29/m3/compatibility/check_m3_full_borrow_receiver.py"
+  ],
+  "exit": 0,
+  "original_bytes_preserved": 30964,
+  "canonical_body_byte_identical": true,
+  "postimage": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
+  "source_pin_and_global_phase_preserved": true
+}

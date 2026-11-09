@@ -1,0 +1,7 @@
+{
+  "schema": "m3-guava-receiving-disposition-v1",
+  "predecessor": "receiving/guava-33.4.8-20261018",
+  "targetDisposition": "receive source and tests only; outside the M3 reactor; no runtime admission",
+  "arrayNativeStorage": "multisets on ObjectCountHashMap index lanes, HashBiMap and RegularImmutable* on int[] index arrays, TreeMultiset AVL nodes in slot lanes, TopKSelector discarded tail cleared",
+  "receivingSequenceAdvanced": false
+}

@@ -1,0 +1,1508 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Apache Maven                                                       [pom]
+[INFO] Maven 4 API                                                        [pom]
+[INFO] Maven 4 API :: Meta annotations                                    [jar]
+[INFO] Maven 4 API :: Dependency Injection                                [jar]
+[INFO] Maven 4 API :: XML                                                 [jar]
+[INFO] Maven 4 API :: Model                                               [jar]
+[INFO] Maven 4 API :: Plugin                                              [jar]
+[INFO] Maven 4 API :: Settings                                            [jar]
+[INFO] Maven 4 API :: Toolchain                                           [jar]
+[INFO] Maven 4 API :: Repository Metadata                                 [jar]
+[INFO] Maven 4 API :: Core                                                [jar]
+[INFO] Maven 4 API :: SPI                                                 [jar]
+[INFO] Maven 4 Implementation Modules                                     [pom]
+[INFO] Maven 4 XML Implementation                                         [jar]
+[INFO] Maven 4 Model Support                                              [jar]
+[INFO] Maven 4 Dependency Injection                                       [jar]
+[INFO] Maven 4 JLine integration                                          [jar]
+[INFO] Maven 4 Logging                                                    [jar]
+[INFO] Maven 4 API Implementation                                         [jar]
+[INFO] 
+[INFO] -----------------------< org.apache.maven:maven >-----------------------
+[INFO] Building Apache Maven 4.1.0-SNAPSHOT                              [1/19]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven ---
+[INFO] No issues found.
+[INFO] 
+[INFO] ---------------------< org.apache.maven:maven-api >---------------------
+[INFO] Building Maven 4 API 4.1.0-SNAPSHOT                               [2/19]
+[INFO]   from api/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api ---
+[INFO] No issues found.
+[INFO] 
+[INFO] ---------------< org.apache.maven:maven-api-annotations >---------------
+[INFO] Building Maven 4 API :: Meta annotations 4.1.0-SNAPSHOT           [3/19]
+[INFO]   from api/maven-api-annotations/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-annotations ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-annotations ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-annotations ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-annotations ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-annotations ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-annotations ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-annotations ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-annotations ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 12 files clean - 0 were changed to be clean, 12 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-annotations ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-annotations ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-annotations/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-annotations ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-annotations ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 12 source files with javac [debug deprecation release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-annotations ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-annotations/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-annotations ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-annotations ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-annotations ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-annotations/target/maven-api-annotations-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-api-di >--------------------
+[INFO] Building Maven 4 API :: Dependency Injection 4.1.0-SNAPSHOT       [4/19]
+[INFO]   from api/maven-api-di/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-di ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-di ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-di ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-di ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-di ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-di ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-di ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-di ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 14 files clean - 0 were changed to be clean, 14 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-di ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-di ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-di ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-di ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 14 source files with javac [debug deprecation release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-di ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-di/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-di ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-di ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-di ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-di/target/maven-api-di-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-api-xml >-------------------
+[INFO] Building Maven 4 API :: XML 4.1.0-SNAPSHOT                        [5/19]
+[INFO]   from api/maven-api-xml/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-xml ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-xml ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-xml ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-xml ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-xml ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-xml ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-xml ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-xml ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 5 files clean - 0 were changed to be clean, 5 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-xml ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-xml ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-xml/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-xml ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-xml ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-xml ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-xml/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-xml ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-xml ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-xml ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-xml/target/maven-api-xml-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ------------------< org.apache.maven:maven-api-model >------------------
+[INFO] Building Maven 4 API :: Model 4.1.0-SNAPSHOT                      [6/19]
+[INFO]   from api/maven-api-model/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-model ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-model ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-model ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-model ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-model ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-model ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello) @ maven-api-model ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/maven.mdo
+[INFO] Generating current version: 4.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello) @ maven-api-model ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/maven.mdo
+[INFO] Generating current version: 4.2.0
+[warn] model class snapshotRepository/org.apache.maven.model.DeploymentRepository with tagName snapshotRepository gets duplicate anchorName class_deployment_repository, conflicting with model class repository/org.apache.maven.model.DeploymentRepository
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello) @ maven-api-model ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/maven.mdo
+[INFO] Generating current version: 4.2.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-model ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-model ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 3 files clean - 0 were changed to be clean, 3 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-model ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-model ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-model ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-model ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 52 source files with javac [debug deprecation release 17 module-path] to target/classes
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-sources/modello/org/apache/maven/api/model/BuildBase.java:[340,20] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-sources/modello/org/apache/maven/api/model/BuildBase.java:[341,20] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-sources/modello/org/apache/maven/api/model/Build.java:[597,63] resources in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-sources/modello/org/apache/maven/api/model/Build.java:[598,71] testResources in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-sources/modello/org/apache/maven/api/model/Model.java:[1270,59] modules in org.apache.maven.api.model.ModelBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/generated-sources/modello/org/apache/maven/api/model/Profile.java:[423,59] modules in org.apache.maven.api.model.ModelBase has been deprecated
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-model ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-model ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-model ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-model ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/maven-api-model-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- build-helper:3.6.2:attach-artifact (default) @ maven-api-model ---
+[INFO] 
+[INFO] -----------------< org.apache.maven:maven-api-plugin >------------------
+[INFO] Building Maven 4 API :: Plugin 4.1.0-SNAPSHOT                     [7/19]
+[INFO]   from api/maven-api-plugin/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-plugin ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-plugin ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-plugin ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-plugin ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-plugin ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-plugin ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello-plugin) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/plugin.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello-plugin) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/plugin.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello-plugin) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/plugin.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello-lifecycle) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/lifecycle.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello-lifecycle) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/lifecycle.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello-lifecycle) @ maven-api-plugin ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/lifecycle.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-plugin ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-plugin ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 4 files clean - 0 were changed to be clean, 4 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-plugin ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-plugin ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-plugin ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-plugin ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 14 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-plugin ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-plugin ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-plugin ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-plugin ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/maven-api-plugin-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------------< org.apache.maven:maven-api-settings >-----------------
+[INFO] Building Maven 4 API :: Settings 4.1.0-SNAPSHOT                   [8/19]
+[INFO]   from api/maven-api-settings/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-settings ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-settings ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-settings ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-settings ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-settings ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-settings ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello) @ maven-api-settings ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/settings.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-settings ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-settings ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 3 files clean - 0 were changed to be clean, 3 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-settings ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello-docs) @ maven-api-settings ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/settings.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello-docs) @ maven-api-settings ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/settings.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-settings ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-settings ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-settings ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 19 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-settings ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-settings ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-settings ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-settings ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/maven-api-settings-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------------< org.apache.maven:maven-api-toolchain >----------------
+[INFO] Building Maven 4 API :: Toolchain 4.1.0-SNAPSHOT                  [9/19]
+[INFO]   from api/maven-api-toolchain/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-toolchain ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-toolchain ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-toolchain ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-toolchain ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-toolchain ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-toolchain ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello) @ maven-api-toolchain ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/toolchains.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-toolchain ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-toolchain ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 2 files clean - 0 were changed to be clean, 2 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-toolchain ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello-docs) @ maven-api-toolchain ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/toolchains.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello-docs) @ maven-api-toolchain ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/toolchains.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-toolchain ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-toolchain ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-toolchain ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 8 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-toolchain ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-toolchain ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-toolchain ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-toolchain ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/maven-api-toolchain-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------------< org.apache.maven:maven-api-metadata >-----------------
+[INFO] Building Maven 4 API :: Repository Metadata 4.1.0-SNAPSHOT       [10/19]
+[INFO]   from api/maven-api-metadata/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-metadata ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-metadata ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-metadata ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-metadata ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-metadata ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-metadata ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (modello) @ maven-api-metadata ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/metadata.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:xdoc (modello) @ maven-api-metadata ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/generated-site/xdoc
+[INFO] Working on model: src/main/mdo/metadata.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:xsd (modello) @ maven-api-metadata ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/generated-site/resources/xsd
+[INFO] Working on model: src/main/mdo/metadata.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-metadata ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-metadata ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 2 files clean - 0 were changed to be clean, 2 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-metadata ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-metadata ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-metadata ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-metadata ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 7 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-metadata ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-metadata ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-metadata ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-metadata ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/maven-api-metadata-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ------------------< org.apache.maven:maven-api-core >-------------------
+[INFO] Building Maven 4 API :: Core 4.1.0-SNAPSHOT                      [11/19]
+[INFO]   from api/maven-api-core/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-core ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-core ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-core ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-core ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-core ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-core ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-core ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-core ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 191 files clean - 0 were changed to be clean, 191 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-core ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-core ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-core/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-core ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-core ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 180 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-core ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-core/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-core ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 11 source files with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-core ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-core ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-core/target/maven-api-core-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-api-spi >-------------------
+[INFO] Building Maven 4 API :: SPI 4.1.0-SNAPSHOT                       [12/19]
+[INFO]   from api/maven-api-spi/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-api-spi ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-api-spi ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-api-spi ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-api-spi ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-api-spi ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-api-spi ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-api-spi ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-api-spi ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 38 files clean - 0 were changed to be clean, 38 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-api-spi ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-api-spi ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-spi/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-api-spi ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-api-spi ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 38 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-api-spi ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-spi/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-api-spi ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-api-spi ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-api-spi ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-spi/target/maven-api-spi-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------------< org.apache.maven:maven-impl-modules >-----------------
+[INFO] Building Maven 4 Implementation Modules 4.1.0-SNAPSHOT           [13/19]
+[INFO]   from impl/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-impl-modules ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-impl-modules ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-impl-modules ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-impl-modules ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-impl-modules ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-impl-modules ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-impl-modules ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-impl-modules ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-impl-modules ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-impl-modules ---
+[INFO] No issues found.
+[INFO] 
+[INFO] ---------------------< org.apache.maven:maven-xml >---------------------
+[INFO] Building Maven 4 XML Implementation 4.1.0-SNAPSHOT               [14/19]
+[INFO]   from impl/maven-xml/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-xml ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-xml ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-xml ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-xml ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-xml ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-xml ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-xml ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-xml ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 16 files clean - 0 were changed to be clean, 16 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-xml ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-xml ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-xml ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-xml ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 8 source files with javac [debug deprecation release 17 module-path] to target/classes
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/src/main/java/module-info.java:[28,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/src/main/java/module-info.java:[29,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/src/main/java/module-info.java:[30,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/src/main/java/module-info.java:[31,29] module not found: org.apache.maven.impl
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/src/main/java/module-info.java:[32,29] module not found: org.apache.maven.plugin
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/src/main/java/module-info.java:[33,29] module not found: org.apache.maven.testing
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-xml ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-xml ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 8 source files with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-xml ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-xml ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/target/maven-xml-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-support >-------------------
+[INFO] Building Maven 4 Model Support 4.1.0-SNAPSHOT                    [15/19]
+[INFO]   from impl/maven-support/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-support ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-support ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-support ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-support ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-support ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-support ---
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-lifecycle) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/lifecycle.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-plugin) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/plugin.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-settings) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/settings.mdo
+[INFO] Generating current version: 2.0.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-toolchains) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/toolchains.mdo
+[INFO] Generating current version: 1.2.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (velocity-metadata) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/metadata.mdo
+[INFO] Generating current version: 1.1.0
+[INFO] 
+[INFO] --- modello:2.8.1:velocity (model-v4) @ maven-support ---
+[INFO] outputDirectory: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello
+[INFO] Working on model: src/main/mdo/maven.mdo
+[INFO] Generating current version: 4.2.0
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-support ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-support ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 2 files clean - 0 were changed to be clean, 2 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-support ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-support ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-support ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-support ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 20 source files with javac [debug deprecation release 17 module-path] to target/classes
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[146,37] getModules() in org.apache.maven.api.model.ModelBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[146,58] getModules() in org.apache.maven.api.model.ModelBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[146,16] modules(java.util.Collection<java.lang.String>) in org.apache.maven.api.model.Model.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[514,37] getModules() in org.apache.maven.api.model.ModelBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[514,58] getModules() in org.apache.maven.api.model.ModelBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[514,16] modules(java.util.Collection<java.lang.String>) in org.apache.maven.api.model.ModelBase.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[713,43] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[713,66] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[713,20] resources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.BuildBase.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[716,43] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[716,66] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[716,20] resources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.BuildBase.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[721,47] getTestResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[721,74] getTestResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[721,20] testResources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.BuildBase.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[724,47] getTestResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[724,74] getTestResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[724,20] testResources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.BuildBase.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[798,43] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[798,66] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[798,20] resources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[801,43] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[801,66] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[801,20] resources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[806,47] getTestResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[806,74] getTestResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[806,20] testResources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[809,47] getTestResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[809,74] getTestResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[809,20] testResources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[840,28] getSourceDirectory() in org.apache.maven.api.model.Build has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[841,28] getSourceDirectory() in org.apache.maven.api.model.Build has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[843,20] sourceDirectory(java.lang.String) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[848,28] getScriptSourceDirectory() in org.apache.maven.api.model.Build has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[849,28] getScriptSourceDirectory() in org.apache.maven.api.model.Build has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[851,20] scriptSourceDirectory(java.lang.String) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[856,28] getTestSourceDirectory() in org.apache.maven.api.model.Build has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[857,28] getTestSourceDirectory() in org.apache.maven.api.model.Build has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[859,20] testSourceDirectory(java.lang.String) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[970,28] getAddress() in org.apache.maven.api.model.Notifier has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[971,28] getAddress() in org.apache.maven.api.model.Notifier has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[973,20] address(java.lang.String) in org.apache.maven.api.model.Notifier.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1401,28] getStatus() in org.apache.maven.api.model.DistributionManagement has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1402,28] getStatus() in org.apache.maven.api.model.DistributionManagement has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1404,20] status(java.lang.String) in org.apache.maven.api.model.DistributionManagement.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1854,15] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1854,38] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1854,55] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1855,9] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1855,36] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1860,34] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1860,60] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1860,77] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1866,43] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1866,69] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1866,86] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1869,43] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1869,69] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1869,86] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1872,44] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1872,70] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1872,87] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1880,45] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1880,71] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1880,88] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1888,44] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1888,70] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[1888,87] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[2461,37] getModules() in org.apache.maven.api.model.ModelBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[2461,58] getModules() in org.apache.maven.api.model.ModelBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[2461,16] modules(java.util.Collection<java.lang.String>) in org.apache.maven.api.model.Profile.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java:[3099,27] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenMerger.java: org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[409,26] modules(java.util.Collection<java.lang.String>) in org.apache.maven.api.model.Model.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[569,30] modules(java.util.Collection<java.lang.String>) in org.apache.maven.api.model.ModelBase.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[793,26] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[801,30] resources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.BuildBase.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[805,26] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[813,30] testResources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.BuildBase.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[905,26] sourceDirectory(java.lang.String) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[909,26] scriptSourceDirectory(java.lang.String) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[913,26] testSourceDirectory(java.lang.String) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[941,26] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[949,26] resources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[953,26] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[961,26] testResources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[1117,29] address(java.lang.String) in org.apache.maven.api.model.Notifier.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[1549,43] status(java.lang.String) in org.apache.maven.api.model.DistributionManagement.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[2155,13] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[2157,9] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[2157,37] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxReader.java:[2909,28] modules(java.util.Collection<java.lang.String>) in org.apache.maven.api.model.Profile.Builder has been deprecated
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/generated-sources/modello/org/apache/maven/model/v4/MavenStaxWriter.java: Some input files additionally use or override a deprecated API.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-support ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-support ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-support ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-support ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/maven-support-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------------< org.apache.maven:maven-di >----------------------
+[INFO] Building Maven 4 Dependency Injection 4.1.0-SNAPSHOT             [16/19]
+[INFO]   from impl/maven-di/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-di ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-di ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-di ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-di ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-di ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-di ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-di ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-di ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 14 files clean - 0 were changed to be clean, 14 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-di ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-di ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-di ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-di ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 11 source files with javac [debug deprecation release 17 module-path] to target/classes
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[26,29] module not found: org.apache.maven.impl
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[27,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[28,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[29,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[30,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[26,29] module not found: org.apache.maven.impl
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[27,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[28,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[29,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[30,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[26,29] module not found: org.apache.maven.impl
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[27,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[28,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[29,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/module-info.java:[30,29] module not found: org.apache.maven.embedder
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/org/apache/maven/di/impl/InjectorImpl.java: Some input files use unchecked or unsafe operations.
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/main/java/org/apache/maven/di/impl/InjectorImpl.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-di ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-di ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] Processing 3 classes
+[INFO] Processing 0 classes
+[INFO] Unable to read existing file. Proceeding with empty content.
+[INFO] Content has changed. Updating file.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-di ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-di ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/target/maven-di-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --------------------< org.apache.maven:maven-jline >--------------------
+[INFO] Building Maven 4 JLine integration 4.1.0-SNAPSHOT                [17/19]
+[INFO]   from impl/maven-jline/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-jline ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-jline ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-jline ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-jline ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-jline ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-jline ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-jline ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-jline ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 6 files clean - 0 were changed to be clean, 6 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-jline ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-jline ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-jline ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-jline ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] Processing 5 classes
+[INFO] Processing 0 classes
+[INFO] Unable to read existing file. Proceeding with empty content.
+[INFO] Content has changed. Updating file.
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[34,29] module not found: org.apache.maven.logging
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[35,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[36,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[39,29] module not found: org.apache.maven.di
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[34,29] module not found: org.apache.maven.logging
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[35,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[36,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[39,29] module not found: org.apache.maven.di
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[34,29] module not found: org.apache.maven.logging
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[35,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[36,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/main/java/module-info.java:[39,29] module not found: org.apache.maven.di
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-jline ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-jline ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-jline ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-jline ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/target/maven-jline-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------------< org.apache.maven:maven-logging >-------------------
+[INFO] Building Maven 4 Logging 4.1.0-SNAPSHOT                          [18/19]
+[INFO]   from impl/maven-logging/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-logging ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-logging ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-logging ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-logging ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-logging ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-logging ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-logging ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-logging ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 15 files clean - 0 were changed to be clean, 15 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-logging ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-logging ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-logging ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-logging ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 10 source files with javac [debug deprecation release 17 module-path] to target/classes
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-logging/src/main/java/module-info.java:[27,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-logging/src/main/java/module-info.java:[28,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-logging/src/main/java/module-info.java:[29,29] module not found: org.apache.maven.core
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-logging ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-logging/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-logging ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-logging ---
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-logging ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-logging/target/maven-logging-4.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --------------------< org.apache.maven:maven-impl >---------------------
+[INFO] Building Maven 4 API Implementation 4.1.0-SNAPSHOT               [19/19]
+[INFO]   from impl/maven-impl/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-bytecode-version) @ maven-impl ---
+[INFO] Rule 1: org.codehaus.mojo.extraenforcer.dependencies.EnforceBytecodeVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven-version) @ maven-impl ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java-version) @ maven-impl ---
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-guice-with-asm) @ maven-impl ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (ensure-no-sonatype-cipher-and-sec-dispatcher) @ maven-impl ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.dependency.BannedDependencies passed
+[INFO] 
+[INFO] --- dependency:3.11.0:properties (prepare-for-mockito-agent) @ maven-impl ---
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle-check) @ maven-impl ---
+[INFO] There are 2 errors reported by Checkstyle 9.3 with config/maven_checks_nocodestyle.xml ruleset.
+[INFO] Ignored 2 errors, 0 violation remaining.
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- spotless:3.10.2:apply (default) @ maven-impl ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 245 files clean - 0 were changed to be clean, 245 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] Spotless.Pom is keeping 1 files clean - 0 were changed to be clean, 1 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ maven-impl ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.8
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ maven-impl ---
+[INFO] Copying 6 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- apache-rat:0.18:check (rat-check) @ maven-impl ---
+[INFO] No issues found.
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ maven-impl ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 164 source files with javac [debug deprecation release 17 module-path] to target/classes
+[INFO] Processing 164 classes
+[INFO] Processing 0 classes
+[INFO] Unable to read existing file. Proceeding with empty content.
+[INFO] Content has changed. Updating file.
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[43,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[44,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[45,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[46,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[47,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[49,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[50,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[51,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[52,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[53,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[55,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[56,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[57,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[58,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[59,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[61,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[62,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[63,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[64,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[65,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[67,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[68,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[69,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[70,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[71,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[73,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[74,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[75,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[76,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[77,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[79,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[80,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[81,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[82,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[83,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[85,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[86,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[87,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[88,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[89,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[91,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[92,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[93,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[94,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[95,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[97,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[98,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[99,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[100,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[101,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[103,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[104,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[105,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[106,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[107,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[109,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[110,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[111,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[112,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[113,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[115,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[116,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[117,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[118,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[119,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[121,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[122,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[123,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[124,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[125,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[127,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[128,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[129,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[130,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[131,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[43,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[44,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[45,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[46,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[47,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[49,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[50,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[51,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[52,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[53,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[55,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[56,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[57,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[58,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[59,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[61,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[62,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[63,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[64,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[65,29] module not found: org.apache.maven.embedder
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[67,29] module not found: org.apache.maven.core
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[68,29] module not found: org.apache.maven.cling
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[69,29] module not found: org.apache.maven.testing
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[70,29] module not found: org.apache.maven.compat
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/module-info.java:[71,29] module not found: org.apache.maven.embedder
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/org/apache/maven/impl/DefaultSourceRoot.java: Some input files additionally use or override a deprecated API.
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/org/apache/maven/impl/AbstractSession.java: Some input files additionally use or override a deprecated API that is marked for removal.
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/org/apache/maven/impl/cache/Cache.java: Some input files use unchecked or unsafe operations.
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/main/java/org/apache/maven/impl/cache/Cache.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ maven-impl ---
+[INFO] Copying 146 resources from src/test/resources to target/test-classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ maven-impl ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 81 source files with javac [debug deprecation release 17 module-path] to target/test-classes
+[INFO] Processing 81 classes
+[INFO] Processing 0 classes
+[INFO] Unable to read existing file. Proceeding with empty content.
+[INFO] Content has changed. Updating file.
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultDependencyResolverResultTest.java:[141,17] getGroupId() in org.apache.maven.api.Artifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultDependencyResolverResultTest.java:[142,17] getArtifactId() in org.apache.maven.api.Artifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultDependencyResolverResultTest.java:[143,17] getType() in org.apache.maven.api.Dependency has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[133,56] getRepository() in org.apache.maven.api.Node has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[169,32] getRepository() in org.apache.maven.api.Node has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[184,32] getRepository() in org.apache.maven.api.Node has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[197,32] getRepository() in org.apache.maven.api.Node has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[222,32] getRepository() in org.apache.maven.api.Node has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[279,48] getArtifactId() in org.apache.maven.api.Artifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[280,49] getArtifactId() in org.apache.maven.api.Artifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[355,34] getArtifactId() in org.apache.maven.api.Artifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[356,34] getVersion() in org.apache.maven.api.Artifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[366,47] org.eclipse.aether.util.graph.selector.ScopeDependencySelector in org.eclipse.aether.util.graph.selector has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultNodeTest.java:[389,41] org.eclipse.aether.util.graph.transformer.NearestVersionSelector in org.eclipse.aether.util.graph.transformer has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[150,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[175,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[200,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[230,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[258,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[286,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[323,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[386,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultToolchainManagerTest.java:[405,21] getModel() in org.apache.maven.api.Project has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/ModelVersionParserTest.java:[48,30] getRecommendedVersion() in org.apache.maven.api.VersionConstraint has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/ModelVersionParserTest.java:[52,21] getRecommendedVersion() in org.apache.maven.api.VersionConstraint has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultInheritanceAssemblerTest.java:[290,17] modules(java.util.Collection<java.lang.String>) in org.apache.maven.api.model.Model.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[654,50] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[655,62] getUrl() in org.apache.maven.api.RemoteRepository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[656,50] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[657,63] getUrl() in org.apache.maven.api.RemoteRepository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[658,52] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[691,48] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[708,48] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[712,24] getUrl() in org.apache.maven.api.RemoteRepository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[713,30] getUrl() in org.apache.maven.api.RemoteRepository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[717,55] getUrl() in org.apache.maven.api.RemoteRepository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[775,71] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[780,50] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[832,50] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[1146,67] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[1162,88] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelBuilderTest.java:[1165,96] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelInterpolatorTest.java:[578,25] sourceDirectory(java.lang.String) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelInterpolatorTest.java:[579,44] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelInterpolatorTest.java:[579,25] resources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelInterpolatorTest.java:[590,14] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelInterpolatorTest.java:[590,53] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelInterpolatorTest.java:[591,18] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelInterpolatorTest.java:[593,38] getSourceDirectory() in org.apache.maven.api.model.Build has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelPathTranslatorTest.java:[92,9] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelPathTranslatorTest.java:[92,29] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelPathTranslatorTest.java:[97,42] resources(java.util.Collection<org.apache.maven.api.model.Resource>) in org.apache.maven.api.model.Build.Builder has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelPathTranslatorTest.java:[102,9] org.apache.maven.api.model.Resource in org.apache.maven.api.model has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/model/DefaultModelPathTranslatorTest.java:[102,45] getResources() in org.apache.maven.api.model.BuildBase has been deprecated
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/standalone/ApiRunnerSettingsTest.java:[245,98] getId() in org.apache.maven.api.Repository has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/standalone/RequestTraceTest.java:[88,26] getPath() in org.apache.maven.api.DownloadedArtifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/standalone/RequestTraceTest.java:[89,36] getPath() in org.apache.maven.api.DownloadedArtifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/standalone/TestApiStandalone.java:[73,26] getPath() in org.apache.maven.api.DownloadedArtifact has been deprecated and marked for removal
+[WARNING] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/standalone/TestApiStandalone.java:[74,36] getPath() in org.apache.maven.api.DownloadedArtifact has been deprecated and marked for removal
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultArtifactResolverTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/src/test/java/org/apache/maven/impl/DefaultArtifactResolverTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ maven-impl ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.apache.maven.impl.model.DefaultModelBuilderTest
+[INFO] Tests run: 41, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.470 s -- in org.apache.maven.impl.model.DefaultModelBuilderTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ maven-impl ---
+[INFO] Building jar: /workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/target/maven-impl-4.1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Apache Maven 4.1.0-SNAPSHOT:
+[INFO] 
+[INFO] Apache Maven ....................................... SUCCESS [ 19.873 s]
+[INFO] Maven 4 API ........................................ SUCCESS [  0.137 s]
+[INFO] Maven 4 API :: Meta annotations .................... SUCCESS [  3.939 s]
+[INFO] Maven 4 API :: Dependency Injection ................ SUCCESS [  0.779 s]
+[INFO] Maven 4 API :: XML ................................. SUCCESS [  0.952 s]
+[INFO] Maven 4 API :: Model ............................... SUCCESS [  3.587 s]
+[INFO] Maven 4 API :: Plugin .............................. SUCCESS [  0.937 s]
+[INFO] Maven 4 API :: Settings ............................ SUCCESS [  0.724 s]
+[INFO] Maven 4 API :: Toolchain ........................... SUCCESS [  0.379 s]
+[INFO] Maven 4 API :: Repository Metadata ................. SUCCESS [  0.293 s]
+[INFO] Maven 4 API :: Core ................................ SUCCESS [  3.893 s]
+[INFO] Maven 4 API :: SPI ................................. SUCCESS [  0.505 s]
+[INFO] Maven 4 Implementation Modules ..................... SUCCESS [  0.181 s]
+[INFO] Maven 4 XML Implementation ......................... SUCCESS [  2.546 s]
+[INFO] Maven 4 Model Support .............................. SUCCESS [ 37.618 s]
+[INFO] Maven 4 Dependency Injection ....................... SUCCESS [  1.222 s]
+[INFO] Maven 4 JLine integration .......................... SUCCESS [  1.390 s]
+[INFO] Maven 4 Logging .................................... SUCCESS [  1.057 s]
+[INFO] Maven 4 API Implementation ......................... SUCCESS [ 15.529 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:36 min
+[INFO] Finished at: 2026-10-21T02:29:10+01:00
+[INFO] ------------------------------------------------------------------------

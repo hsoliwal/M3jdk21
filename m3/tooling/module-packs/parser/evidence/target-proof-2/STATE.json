@@ -1,0 +1,18 @@
+{
+  "active": null,
+  "completed": [
+    "lint",
+    "compile",
+    "test",
+    "runtime"
+  ],
+  "failed": null,
+  "input_sha256": "e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5",
+  "receipts": {
+    "compile": "3ef70a64fc70ed3065838857cc0ce22b0a6b004b592512c0e2b456c5edcd64b4",
+    "lint": "e1bf9363d5b3213083f1e28f6506a4830b5c3b2424702dbb05e0f47fc4080983",
+    "runtime": "bdda0d867ddcc7868a41c8f2e44a9832461378b7af194e737deb8274b1466f5f",
+    "test": "82a84fba8296e89276d0c20dc64e83348a94d9be9d73a38ec7f80dd0aa73ad25"
+  },
+  "schema": "M3_PARSER_PHASE_STATE_V1"
+}

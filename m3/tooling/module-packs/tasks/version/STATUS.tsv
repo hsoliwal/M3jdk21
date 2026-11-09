@@ -1,0 +1,10 @@
+gate	status	detail
+source_identity	PASS	existing four production classes matched pinned Git blobs; one changed postimage
+class_version_baseline	FAIL_REPRODUCED	original accepts archive class 0.0 rejected by VM
+javac	PASS	actual production plus shared corpus, --release 21 -Xlint:all -Werror
+archive_vm_jit	PASS	639 assertions
+archive_vm_interpreter	PASS	639 assertions
+existing_contracts	PASS	41 assertions
+public_declarations	PASS	javap -public identical
+openrewrite_junit_jacoco	NOT_EXECUTED	mvn absent; new connected workflow has zero jobs
+full_jdk_jtreg	NOT_EXECUTED	modified OpenJDK runtime not built

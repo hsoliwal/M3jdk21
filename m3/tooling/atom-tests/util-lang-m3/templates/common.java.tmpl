@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+//@@ PATTERN PRIVATE_UTILITY_CONSTRUCTOR | uses= | oracle=reflection: final class, one private no-arg constructor that completes, no instance members
+    //FLLDCIM: TOP - utility-class contract replaces the assertSame tautology (util-lang-m3 RECIPE_MEMORY R014)
+    /**
+     * ${atom}(): the utility-class contract. The class is final and extends Object; its only constructor is private
+     * and takes no arguments; no field and no method is an instance member, so an instance could hold no state and
+     * do nothing (the constructor only denies instantiation). The private constructor itself completes normally.
+     */
+    @Test
+    void ${test}() throws Throwable {
+        Class<?> type = OWNER.type;
+        assertTrue(Modifier.isFinal(type.getModifiers()), "${atom} is final");
+        assertSame(Object.class, type.getSuperclass(), "${atom} extends Object directly");
+        Constructor<?>[] declared = OWNER.constructors();
+        assertEquals(1, declared.length, "${atom} declares one constructor");
+        assertTrue(Modifier.isPrivate(declared[0].getModifiers()), "${atom} constructor is private");
+        assertEquals(0, declared[0].getParameterCount(), "${atom} constructor takes no arguments");
+        for (java.lang.reflect.Field f : type.getDeclaredFields()) {
+            assertTrue(Modifier.isStatic(f.getModifiers()), "${atom} declares instance field " + f.getName());
+        }
+        for (Method m : type.getDeclaredMethods()) {
+            assertTrue(Modifier.isStatic(m.getModifiers()), "${atom} declares instance method " + m.getName());
+        }
+        OWNER.constructor("${atom}").invoke();
+    }

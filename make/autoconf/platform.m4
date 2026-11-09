@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2011, 2023, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2011, 2026, Oracle and/or its affiliates. All rights reserved.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 #
 # This code is free software; you can redistribute it and/or modify it
@@ -311,6 +311,12 @@ AC_DEFUN([PLATFORM_EXTRACT_TARGET_AND_BUILD],
   else
     OPENJDK_BUILD_OS_ENV="$VAR_OS"
   fi
+  # Special handling for MSYS2 that reports a Cygwin triplet as the default host triplet.
+  case `uname` in
+    MSYS*)
+      OPENJDK_BUILD_OS_ENV=windows.msys2
+      ;;
+  esac
   OPENJDK_BUILD_CPU="$VAR_CPU"
   OPENJDK_BUILD_CPU_ARCH="$VAR_CPU_ARCH"
   OPENJDK_BUILD_CPU_BITS="$VAR_CPU_BITS"
@@ -567,8 +573,6 @@ AC_DEFUN([PLATFORM_SETUP_LEGACY_VARS_HELPER],
     HOTSPOT_$1_CPU_DEFINE=PPC64
   elif test "x$OPENJDK_$1_CPU" = xppc64le; then
     HOTSPOT_$1_CPU_DEFINE=PPC64
-  elif test "x$OPENJDK_$1_CPU" = xriscv32; then
-    HOTSPOT_$1_CPU_DEFINE=RISCV32
   elif test "x$OPENJDK_$1_CPU" = xriscv64; then
     HOTSPOT_$1_CPU_DEFINE=RISCV64
 
@@ -577,10 +581,14 @@ AC_DEFUN([PLATFORM_SETUP_LEGACY_VARS_HELPER],
     HOTSPOT_$1_CPU_DEFINE=SPARC
   elif test "x$OPENJDK_$1_CPU" = xppc; then
     HOTSPOT_$1_CPU_DEFINE=PPC32
+  elif test "x$OPENJDK_$1_CPU" = xriscv32; then
+    HOTSPOT_$1_CPU_DEFINE=RISCV32
   elif test "x$OPENJDK_$1_CPU" = xs390; then
     HOTSPOT_$1_CPU_DEFINE=S390
   elif test "x$OPENJDK_$1_CPU" = xs390x; then
     HOTSPOT_$1_CPU_DEFINE=S390
+  elif test "x$OPENJDK_$1_CPU" = xloongarch64; then
+    HOTSPOT_$1_CPU_DEFINE=LOONGARCH64
   elif test "x$OPENJDK_$1_CPU" != x; then
     HOTSPOT_$1_CPU_DEFINE=$(echo $OPENJDK_$1_CPU | tr a-z A-Z)
   fi

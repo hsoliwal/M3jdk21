@@ -1,0 +1,468 @@
+{
+  "schema": 1,
+  "probe": "complete filteredSortedSnapshot versus captured ArrayList/removeIf/List.sort/unmodifiableList",
+  "evidence_kind": "PATCHED_STOCK_JDK_21_WITH_SEPARATELY_COMPILED_PRODUCTION_C",
+  "method": {
+    "jvm_processes_per_variant": 1,
+    "measured_rounds_per_workload": 5,
+    "warmup_target_ms": 300,
+    "warmup_max_batches": 64,
+    "input_record_creation_in_timed_region": false,
+    "capturing_filtering_sorting_and_output_allocation_in_timed_region": true,
+    "results_escape": true,
+    "all_semantic_preflight_before_output": true,
+    "jdk": "21.0.12.1+1-LTS",
+    "xmx": "128m",
+    "jni_checking_during_timing": false,
+    "native_resolution_confirmed": true
+  },
+  "metadata": {
+    "baseline": {
+      "schema": 1,
+      "probe": "M3CollectionViews.filteredSortedSnapshot.complete-call",
+      "java": "21.0.12.1+1-LTS",
+      "arch": "amd64",
+      "semantic_workloads": 6,
+      "semantic_preflight": "PASSED",
+      "sparse_fraction": "1/16",
+      "dense_fraction": "3/4",
+      "rank_groups": 32,
+      "warmup_target_millis": 300,
+      "warmup_max_batches": 64,
+      "cpu_supported": true,
+      "allocation_supported": true,
+      "native_requested": false
+    },
+    "integrated-java": {
+      "schema": 1,
+      "probe": "M3CollectionViews.filteredSortedSnapshot.complete-call",
+      "java": "21.0.12.1+1-LTS",
+      "arch": "amd64",
+      "semantic_workloads": 6,
+      "semantic_preflight": "PASSED",
+      "sparse_fraction": "1/16",
+      "dense_fraction": "3/4",
+      "rank_groups": 32,
+      "warmup_target_millis": 300,
+      "warmup_max_batches": 64,
+      "cpu_supported": true,
+      "allocation_supported": true,
+      "native_requested": false
+    },
+    "integrated-native": {
+      "schema": 1,
+      "probe": "M3CollectionViews.filteredSortedSnapshot.complete-call",
+      "java": "21.0.12.1+1-LTS",
+      "arch": "amd64",
+      "semantic_workloads": 6,
+      "semantic_preflight": "PASSED",
+      "sparse_fraction": "1/16",
+      "dense_fraction": "3/4",
+      "rank_groups": 32,
+      "warmup_target_millis": 300,
+      "warmup_max_batches": 64,
+      "cpu_supported": true,
+      "allocation_supported": true,
+      "native_requested": true
+    }
+  },
+  "process_resources": {
+    "baseline": {
+      "maximum_resident_set_kib": 83512
+    },
+    "integrated-java": {
+      "maximum_resident_set_kib": 113884
+    },
+    "integrated-native": {
+      "maximum_resident_set_kib": 74428
+    }
+  },
+  "workloads": [
+    {
+      "n": 65,
+      "density": "sparse",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 397.134,
+            "minimum": 319.731,
+            "maximum": 464.106
+          },
+          "wall_ns_per_call": {
+            "median": 396.839,
+            "minimum": 318.711,
+            "maximum": 481.97
+          },
+          "allocated_bytes_per_call": {
+            "median": 352.0,
+            "minimum": 352.0,
+            "maximum": 352.015
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 743.257,
+            "minimum": 328.906,
+            "maximum": 1656.323
+          },
+          "wall_ns_per_call": {
+            "median": 777.885,
+            "minimum": 328.038,
+            "maximum": 1695.628
+          },
+          "allocated_bytes_per_call": {
+            "median": 448.0,
+            "minimum": 448.0,
+            "maximum": 448.015
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 1464.227,
+            "minimum": 1240.722,
+            "maximum": 6941.129
+          },
+          "wall_ns_per_call": {
+            "median": 1456.555,
+            "minimum": 1239.479,
+            "maximum": 6988.53
+          },
+          "allocated_bytes_per_call": {
+            "median": 448.0,
+            "minimum": 448.0,
+            "maximum": 448.015
+          }
+        }
+      },
+      "selected": 5,
+      "iterations_per_round": 10000,
+      "integrated_java_to_baseline_cpu_ratio": 1.8715521713074175,
+      "integrated_java_to_baseline_allocation_ratio": 1.2727272727272727,
+      "integrated_native_to_java_cpu_ratio": 1.9700144095514744
+    },
+    {
+      "n": 65,
+      "density": "dense",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 2162.286,
+            "minimum": 1864.364,
+            "maximum": 2465.956
+          },
+          "wall_ns_per_call": {
+            "median": 2404.851,
+            "minimum": 1939.701,
+            "maximum": 3121.863
+          },
+          "allocated_bytes_per_call": {
+            "median": 624.0,
+            "minimum": 624.0,
+            "maximum": 624.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 2883.934,
+            "minimum": 2280.255,
+            "maximum": 7081.186
+          },
+          "wall_ns_per_call": {
+            "median": 3043.621,
+            "minimum": 2278.929,
+            "maximum": 7293.681
+          },
+          "allocated_bytes_per_call": {
+            "median": 1040.0,
+            "minimum": 1040.0,
+            "maximum": 1040.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 3254.671,
+            "minimum": 2636.465,
+            "maximum": 3534.048
+          },
+          "wall_ns_per_call": {
+            "median": 3253.119,
+            "minimum": 2784.332,
+            "maximum": 3800.19
+          },
+          "allocated_bytes_per_call": {
+            "median": 1040.0,
+            "minimum": 1040.0,
+            "maximum": 1040.0
+          }
+        }
+      },
+      "selected": 49,
+      "iterations_per_round": 10000,
+      "integrated_java_to_baseline_cpu_ratio": 1.3337430848648144,
+      "integrated_java_to_baseline_allocation_ratio": 1.6666666666666667,
+      "integrated_native_to_java_cpu_ratio": 1.1285525258206324
+    },
+    {
+      "n": 1024,
+      "density": "sparse",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 8966.856,
+            "minimum": 8591.676,
+            "maximum": 19788.085
+          },
+          "wall_ns_per_call": {
+            "median": 8955.277,
+            "minimum": 8584.263,
+            "maximum": 19822.779
+          },
+          "allocated_bytes_per_call": {
+            "median": 5504.0,
+            "minimum": 5504.0,
+            "maximum": 5504.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 4968.806,
+            "minimum": 3590.507,
+            "maximum": 6994.466
+          },
+          "wall_ns_per_call": {
+            "median": 5574.294,
+            "minimum": 4702.831,
+            "maximum": 24977.38
+          },
+          "allocated_bytes_per_call": {
+            "median": 5128.0,
+            "minimum": 5128.0,
+            "maximum": 5128.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 41555.296,
+            "minimum": 37101.044,
+            "maximum": 41997.387
+          },
+          "wall_ns_per_call": {
+            "median": 41813.84,
+            "minimum": 37097.107,
+            "maximum": 43979.711
+          },
+          "allocated_bytes_per_call": {
+            "median": 5128.0,
+            "minimum": 5128.0,
+            "maximum": 5128.0
+          }
+        }
+      },
+      "selected": 64,
+      "iterations_per_round": 1464,
+      "integrated_java_to_baseline_cpu_ratio": 0.5541302324917451,
+      "integrated_java_to_baseline_allocation_ratio": 0.9316860465116279,
+      "integrated_native_to_java_cpu_ratio": 8.363235755229729
+    },
+    {
+      "n": 1024,
+      "density": "dense",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 49418.459,
+            "minimum": 44923.409,
+            "maximum": 51964.033
+          },
+          "wall_ns_per_call": {
+            "median": 50471.018,
+            "minimum": 44928.828,
+            "maximum": 51987.508
+          },
+          "allocated_bytes_per_call": {
+            "median": 7568.0,
+            "minimum": 7568.0,
+            "maximum": 7568.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 56015.692,
+            "minimum": 52625.081,
+            "maximum": 64732.212
+          },
+          "wall_ns_per_call": {
+            "median": 56027.473,
+            "minimum": 52774.347,
+            "maximum": 65605.727
+          },
+          "allocated_bytes_per_call": {
+            "median": 13240.0,
+            "minimum": 13240.0,
+            "maximum": 13240.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 74004.16,
+            "minimum": 49939.003,
+            "maximum": 129960.897
+          },
+          "wall_ns_per_call": {
+            "median": 75636.939,
+            "minimum": 50463.09,
+            "maximum": 135440.528
+          },
+          "allocated_bytes_per_call": {
+            "median": 13240.0,
+            "minimum": 13240.0,
+            "maximum": 13240.0
+          }
+        }
+      },
+      "selected": 768,
+      "iterations_per_round": 1464,
+      "integrated_java_to_baseline_cpu_ratio": 1.1334973435735824,
+      "integrated_java_to_baseline_allocation_ratio": 1.7494714587737843,
+      "integrated_native_to_java_cpu_ratio": 1.3211326568990704
+    },
+    {
+      "n": 65536,
+      "density": "sparse",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 840449.909,
+            "minimum": 769802.727,
+            "maximum": 963913.455
+          },
+          "wall_ns_per_call": {
+            "median": 905780.5,
+            "minimum": 760893.773,
+            "maximum": 1050984.545
+          },
+          "allocated_bytes_per_call": {
+            "median": 286112.0,
+            "minimum": 286112.0,
+            "maximum": 286112.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 807437.909,
+            "minimum": 746860.955,
+            "maximum": 2794384.545
+          },
+          "wall_ns_per_call": {
+            "median": 1072104.864,
+            "minimum": 746114.636,
+            "maximum": 5508818.318
+          },
+          "allocated_bytes_per_call": {
+            "median": 318920.0,
+            "minimum": 318920.0,
+            "maximum": 318920.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 645193.091,
+            "minimum": 587970.364,
+            "maximum": 703992.727
+          },
+          "wall_ns_per_call": {
+            "median": 655933.0,
+            "minimum": 587356.364,
+            "maximum": 870528.136
+          },
+          "allocated_bytes_per_call": {
+            "median": 318920.0,
+            "minimum": 318920.0,
+            "maximum": 318920.0
+          }
+        }
+      },
+      "selected": 4096,
+      "iterations_per_round": 22,
+      "integrated_java_to_baseline_cpu_ratio": 0.960721038045826,
+      "integrated_java_to_baseline_allocation_ratio": 1.114668381612795,
+      "integrated_native_to_java_cpu_ratio": 0.7990621740798153
+    },
+    {
+      "n": 65536,
+      "density": "dense",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 6867820.318,
+            "minimum": 5820280.0,
+            "maximum": 9256180.636
+          },
+          "wall_ns_per_call": {
+            "median": 6868000.364,
+            "minimum": 5819704.773,
+            "maximum": 9329376.5
+          },
+          "allocated_bytes_per_call": {
+            "median": 531936.0,
+            "minimum": 531936.0,
+            "maximum": 531936.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 6903547.318,
+            "minimum": 6018740.409,
+            "maximum": 7700312.273
+          },
+          "wall_ns_per_call": {
+            "median": 6917964.682,
+            "minimum": 6020746.136,
+            "maximum": 10501679.318
+          },
+          "allocated_bytes_per_call": {
+            "median": 892424.0,
+            "minimum": 892424.0,
+            "maximum": 892424.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 7121010.182,
+            "minimum": 6389029.182,
+            "maximum": 7327330.5
+          },
+          "wall_ns_per_call": {
+            "median": 7196662.318,
+            "minimum": 6597137.727,
+            "maximum": 7441318.591
+          },
+          "allocated_bytes_per_call": {
+            "median": 892424.0,
+            "minimum": 892424.0,
+            "maximum": 892424.0
+          }
+        }
+      },
+      "selected": 49152,
+      "iterations_per_round": 22,
+      "integrated_java_to_baseline_cpu_ratio": 1.0052020871755136,
+      "integrated_java_to_baseline_allocation_ratio": 1.6776905492390062,
+      "integrated_native_to_java_cpu_ratio": 1.0315001627399578
+    }
+  ],
+  "decision": "JAVA_DEFAULT_UNCHANGED; observed CPU/allocation results and regressions retained, no global speedup or native threshold conclusion",
+  "warmup_refinement": "Unchanged benchmark source and bounded 300ms shape-specific warmup from prior run; exactly six workloads rerun once per variant to qualify changed receiver algorithm. All old pilot/full-call receipts retained in rejected-indirect/.",
+  "limitations": [
+    "One JVM per backend and bounded warmup, no multiple forks or significance analysis",
+    "Median CPU includes current-thread work, not GC/other compiler threads; wall samples retain scheduling noise",
+    "Process RSS includes VM, inputs, compiled code and GC; not retained-output size or a leak proof",
+    "Only scrambled integer-rank records, ArrayList source, two selection densities and three sizes",
+    "Full M3JDK21 image/jtreg and Windows/macOS/native portability are pending"
+  ],
+  "receiver_algorithm": "EXISTING_ARRAYS_SORT_ON_CAPTURED_VISIBLE_VALUES",
+  "receiver_source_sha256": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+  "previous_algorithm_evidence": "rejected-indirect/collection-benchmark-summary.json",
+  "algorithm_refinement": "Removed separately implemented index merge sorting and retained permutation. Reuses existing Arrays.sort on private captured visible Object[].",
+  "frozen": true
+}

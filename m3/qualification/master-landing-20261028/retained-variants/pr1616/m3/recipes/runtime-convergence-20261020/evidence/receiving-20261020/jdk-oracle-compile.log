@@ -1,0 +1,3 @@
+['/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/javac', '-Xlint:all', '-Werror', '--patch-module', 'java.base=/workspace/scratch/53bcd62c244c/canonical-runtime-convergence-20261020/target/contract-proof/jdk-patch', '--add-exports', 'java.base/jdk.internal.mindex=ALL-UNNAMED', '-d', '/workspace/scratch/53bcd62c244c/canonical-runtime-convergence-20261020/target/contract-proof/jdk-tests', '/workspace/scratch/53bcd62c244c/M3JDK21/test/jdk/java/util/ArrayList/M3MaskThresholdContracts.java']
+
+EXIT=0

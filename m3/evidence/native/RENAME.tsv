@@ -1,0 +1,73 @@
+TYPE	jdk.m3.jni.M3JniArrayBatchSelfTest	jdk.m3.jni.JniArrayBatchSelfTest
+TYPE	jdk.m3.jni.M3JniArrayBatchTest	jdk.m3.jni.JniArrayBatchTest
+TYPE	jdk.m3.jni.M3JniArrayReferences	jdk.m3.jni.JniArrayReferences
+TYPE	jdk.m3.jni.M3JniArrayReferencesTest	jdk.m3.jni.JniArrayReferencesTest
+TYPE	jdk.m3.jni.M3JniByteConcat	jdk.m3.jni.JniByteConcat
+TYPE	jdk.m3.jni.M3JniByteConcatTest	jdk.m3.jni.JniByteConcatTest
+TYPE	jdk.m3.jni.M3JniPairMonitorAtomicityTest	jdk.m3.jni.JniPairMonitorAtomicityTest
+TYPE	jdk.m3.jni.M3LeaseScopes	jdk.m3.jni.LeaseScopes
+TYPE	jdk.m3.jni.M3LeaseScopesSelfTest	jdk.m3.jni.LeaseScopesSelfTest
+TYPE	jdk.m3.jni.M3LeaseScopesTest	jdk.m3.jni.LeaseScopesTest
+TYPE	jdk.m3.jni.M3LeaseWindowScan	jdk.m3.jni.LeaseWindowScan
+TYPE	jdk.m3.jni.M3NativeConcatParityProbe	jdk.m3.jni.NativeConcatParityProbe
+TYPE	jdk.m3.jni.M3NativeLeaseCodeCarrierOracle	jdk.m3.jni.NativeLeaseCodeCarrierOracle
+TYPE	jdk.m3.jni.M3NativeLeaseFullscanContractTest	jdk.m3.jni.NativeLeaseFullscanContractTest
+TYPE	jdk.m3.jni.M3NativeLeaseFullscanFallbackTest	jdk.m3.jni.NativeLeaseFullscanFallbackTest
+TYPE	jdk.m3.jni.M3NativeLeasePreflightOracle	jdk.m3.jni.NativeLeasePreflightOracle
+TYPE	jdk.m3.jni.M3NativeLeaseScan	jdk.m3.jni.NativeLeaseScan
+TYPE	jdk.m3.jni.M3ScopedLeaseDump	jdk.m3.jni.ScopedLeaseDump
+TYPE	jdk.m3.jni.M3ScopedLeaseJavaParityTest	jdk.m3.jni.ScopedLeaseJavaParityTest
+TYPE	jdk.m3.jni.M3ScopedLeaseTable	jdk.m3.jni.ScopedLeaseTable
+TYPE	jdk.m3.jni.M3ScopedLeaseTableSelfTest	jdk.m3.jni.ScopedLeaseTableSelfTest
+TYPE	jdk.m3.jni.M3ScopedLeaseTableTest	jdk.m3.jni.ScopedLeaseTableTest
+TYPE	jdk.m3.jni.M3ScopedLeaseWindowSelfTest	jdk.m3.jni.ScopedLeaseWindowSelfTest
+TYPE	jdk.m3.jni.M3ScopedLeaseWindowTest	jdk.m3.jni.ScopedLeaseWindowTest
+EDIT	m3/native/src/main/java/jdk/m3/jni/M3JniArrayReferences.java
+EDIT	m3/native/src/main/java/jdk/m3/jni/M3JniByteConcat.java
+EDIT	m3/native/src/main/java/jdk/m3/jni/M3LeaseScopes.java
+EDIT	m3/native/src/main/java/jdk/m3/jni/M3LeaseWindowScan.java
+EDIT	m3/native/src/main/java/jdk/m3/jni/M3NativeLeaseScan.java
+EDIT	m3/native/src/main/java/jdk/m3/jni/M3ScopedLeaseTable.java
+EDIT	m3/native/src/main/native/m3_scoped_leases.c
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3JniArrayBatchSelfTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3JniArrayBatchTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3JniArrayReferencesTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3JniByteConcatTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3JniPairMonitorAtomicityTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3LeaseScopesSelfTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3LeaseScopesTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3NativeConcatParityProbe.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3NativeLeaseCodeCarrierOracle.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3NativeLeaseFullscanContractTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3NativeLeaseFullscanFallbackTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3NativeLeasePreflightOracle.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseDump.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseJavaParityTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseTableSelfTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseTableTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseWindowSelfTest.java
+EDIT	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseWindowTest.java
+MOVE	m3/native/src/main/java/jdk/m3/jni/M3JniArrayReferences.java	m3/native/src/main/java/jdk/m3/jni/JniArrayReferences.java
+MOVE	m3/native/src/main/java/jdk/m3/jni/M3JniByteConcat.java	m3/native/src/main/java/jdk/m3/jni/JniByteConcat.java
+MOVE	m3/native/src/main/java/jdk/m3/jni/M3LeaseScopes.java	m3/native/src/main/java/jdk/m3/jni/LeaseScopes.java
+MOVE	m3/native/src/main/java/jdk/m3/jni/M3LeaseWindowScan.java	m3/native/src/main/java/jdk/m3/jni/LeaseWindowScan.java
+MOVE	m3/native/src/main/java/jdk/m3/jni/M3NativeLeaseScan.java	m3/native/src/main/java/jdk/m3/jni/NativeLeaseScan.java
+MOVE	m3/native/src/main/java/jdk/m3/jni/M3ScopedLeaseTable.java	m3/native/src/main/java/jdk/m3/jni/ScopedLeaseTable.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3JniArrayBatchSelfTest.java	m3/native/src/test/java/jdk/m3/jni/JniArrayBatchSelfTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3JniArrayBatchTest.java	m3/native/src/test/java/jdk/m3/jni/JniArrayBatchTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3JniArrayReferencesTest.java	m3/native/src/test/java/jdk/m3/jni/JniArrayReferencesTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3JniByteConcatTest.java	m3/native/src/test/java/jdk/m3/jni/JniByteConcatTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3JniPairMonitorAtomicityTest.java	m3/native/src/test/java/jdk/m3/jni/JniPairMonitorAtomicityTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3LeaseScopesSelfTest.java	m3/native/src/test/java/jdk/m3/jni/LeaseScopesSelfTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3LeaseScopesTest.java	m3/native/src/test/java/jdk/m3/jni/LeaseScopesTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3NativeConcatParityProbe.java	m3/native/src/test/java/jdk/m3/jni/NativeConcatParityProbe.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3NativeLeaseCodeCarrierOracle.java	m3/native/src/test/java/jdk/m3/jni/NativeLeaseCodeCarrierOracle.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3NativeLeaseFullscanContractTest.java	m3/native/src/test/java/jdk/m3/jni/NativeLeaseFullscanContractTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3NativeLeaseFullscanFallbackTest.java	m3/native/src/test/java/jdk/m3/jni/NativeLeaseFullscanFallbackTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3NativeLeasePreflightOracle.java	m3/native/src/test/java/jdk/m3/jni/NativeLeasePreflightOracle.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseDump.java	m3/native/src/test/java/jdk/m3/jni/ScopedLeaseDump.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseJavaParityTest.java	m3/native/src/test/java/jdk/m3/jni/ScopedLeaseJavaParityTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseTableSelfTest.java	m3/native/src/test/java/jdk/m3/jni/ScopedLeaseTableSelfTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseTableTest.java	m3/native/src/test/java/jdk/m3/jni/ScopedLeaseTableTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseWindowSelfTest.java	m3/native/src/test/java/jdk/m3/jni/ScopedLeaseWindowSelfTest.java
+MOVE	m3/native/src/test/java/jdk/m3/jni/M3ScopedLeaseWindowTest.java	m3/native/src/test/java/jdk/m3/jni/ScopedLeaseWindowTest.java

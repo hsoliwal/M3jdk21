@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.format.RemoveTrailingWhitespace"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 26
+- name: "Greg Adams"
+  email: "greg@moderne.io"
+  lineCount: 5
+- name: "Aaron Gershman"
+  email: "aegershman@gmail.com"
+  lineCount: 5
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 1

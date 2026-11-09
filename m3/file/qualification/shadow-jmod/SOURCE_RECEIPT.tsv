@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+# One product workflow postimage; no executable private OpenRewrite recipe imported.
+target_path	before_git_blob	after_git_blob	before_sha256	after_sha256	canonical_private_recipe	parent_master_commit	qualification
+.github/workflows/m3-native-shadow-stream-progress-20261020.yml	c4ced36104123241e0176256783045b8f860cfc1	ca323f4e24950b8d7b5c3b3747f508d926068a6a	c7fbe0b8e33240bf4ef8529f62104704ef6c159570b3b84822428fe635224d52	097b6c21a10eeeb92a90d36ea7c595382580deef0e204b8c195426bebdf44761	hsoliwal/com.synexia#13248	9dd1df62f3d5406760427cb5e840a36c9e7a59ea	EXACT_GIT_BLOB_READBACK_PASS_HOST_MODULE_TEST_PENDING

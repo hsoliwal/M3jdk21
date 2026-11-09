@@ -1,0 +1,50 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package jdk.m3.eclipse.core.impl;
+
+import jdk.m3.arrays.M3Arrays;
+import jdk.m3.arrays.M3Utf16ArrayView;
+import jdk.m3.ast.ASTHierarchy;
+import jdk.m3.collections.LongIndexProjection;
+import jdk.m3.eclipse.core.M3EclipseCore;
+import jdk.m3.file.M3NioFile;
+import jdk.m3.text.LocalM3Arena;
+import jdk.m3.text.M3StringPiece;
+import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Objects;
+
+/** No parallel index, text, file, AST or native operator implementation. */
+public final class M3EclipseCoreProvider implements M3EclipseCore {
+    private final LocalM3Arena copyArena = new LocalM3Arena();
+
+    public M3EclipseCoreProvider() { }
+
+    @Override public M3StringPiece retainText(M3StringPiece existing) {
+        return Objects.requireNonNull(existing, "existing");
+    }
+
+    @Override public M3StringPiece copyUtf16(CharSequence source) {
+        CharSequence checked = Objects.requireNonNull(source, "source");
+        char[] codeUnits = new char[checked.length()];
+        for (int i = 0; i < codeUnits.length; i++) codeUnits[i] = checked.charAt(i);
+        return copyArena.copyUtf16(codeUnits);
+    }
+
+    @Override public M3Utf16ArrayView utf16(CharSequence source) {
+        return M3Arrays.chars(Objects.requireNonNull(source, "source"));
+    }
+
+    @Override public LongIndexProjection index(long[] source) {
+        return LongIndexProjection.snapshot(Objects.requireNonNull(source, "source"));
+    }
+
+    @Override public ASTHierarchy hierarchy(
+            String repository, Collection<ASTHierarchy.FileFact> facts) {
+        return ASTHierarchy.build(repository, facts);
+    }
+
+    @Override public M3NioFile file(Path path) {
+        return M3NioFile.of(path);
+    }
+}

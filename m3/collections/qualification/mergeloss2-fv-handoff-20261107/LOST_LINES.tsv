@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: Apache-2.0
+# The 82 HANDOFF lines (#2695 DECISION.tsv), normalised; base/head = EXACT/FUZZY/ABSENT.
+n	file	enclosing	side_blob	line	decision	base	head	text
+17	M3IndexedListSnapshot.java	filteredJava	2caf4faf78ea	211	SUPERSEDED	ABSENT	ABSENT	System.arraycopy(positions, from, admitted, 0, length);
+17	M3IndexedListSnapshot.java	filteredJava	2caf4faf78ea	212	SUPERSEDED	ABSENT	ABSENT	} else if (count != 0) {
+17	M3IndexedListSnapshot.java	filteredJava	2caf4faf78ea	215	SUPERSEDED	ABSENT	ABSENT	if (selected[i] != 0) admitted[written++] = positions[from + i];
+17	M3IndexedListSnapshot.java	filteredJava	2caf4faf78ea	200	SUPERSEDED	ABSENT	ABSENT	byte[] selected = new byte[length];
+17	M3IndexedListSnapshot.java	filteredJava	2caf4faf78ea	204	SUPERSEDED	ABSENT	ABSENT	selected[i] = 1;
+17	m3_index_mask_compactor.c	m3_count_window	8486355cbf46	24	PRESENT_EVOLVED	FUZZY	FUZZY	jint state_offset, jint length, jint mask);
+17	m3_index_mask_compactor.c	m3_count_window	8486355cbf46	26	PRESENT_EVOLVED	ABSENT	ABSENT	static int m3_verify_empty(JNIEnv *env, jbyteArray states,
+17	m3_index_mask_compactor.c	m3_count_window	8486355cbf46	28	PRESENT_EVOLVED	FUZZY	FUZZY	jint observed = m3_count_window(env, states, state_offset, length, mask);
+17	m3_index_mask_compactor.c	m3_count_window	8486355cbf46	29	PRESENT_EVOLVED	FUZZY	FUZZY	if (observed < 0) return 0;
+17	m3_index_mask_compactor.c	m3_count_window	8486355cbf46	30	PRESENT_EVOLVED	ABSENT	ABSENT	if (observed != 0) {
+17	m3_index_mask_compactor.c	m3_select_range	8486355cbf46	57	PRESENT_EVOLVED	ABSENT	ABSENT	if (count == 0) {
+17	m3_index_mask_compactor.c	m3_select_range	8486355cbf46	58	PRESENT_EVOLVED	ABSENT	ABSENT	return m3_verify_empty(env, states, 0, n, required_mask) ? result : NULL;
+17	m3_index_mask_compactor.c	-	8486355cbf46	357	PRESENT_EVOLVED	ABSENT	ABSENT	if (kept == 0) {
+17	m3_index_mask_compactor.c	-	8486355cbf46	358	PRESENT_EVOLVED	ABSENT	ABSENT	return m3_verify_empty(env, states, state_offset, length, mask) ? result : NULL;
+19	M3LongIndexPathMasks.java	select	4031e69e1e8e	37	RESTORED_SINCE	EXACT	EXACT	return M3IndexPathMasks.selectLongJava(rows, physicalOffsets, statePlanes,
+19	M3LongIndexPathMasks.java	select	4031e69e1e8e	39	RESTORED_SINCE	EXACT	EXACT	} catch (ConcurrentModificationException changed) {
+19	M3IndexPathMasks.java	anyStageImpossible	850d08927242	309	PRESENT_EVOLVED	ABSENT	ABSENT	private static boolean anyStageImpossible(int[] required, int[] forbidden) {
+19	M3IndexPathMasks.java	anyStageImpossible	850d08927242	311	PRESENT_EVOLVED	ABSENT	ABSENT	if ((required[stage] & forbidden[stage]) != 0) return true;
+19	M3IndexPathMasks.java	anyStageImpossible	850d08927242	313	PRESENT_EVOLVED	ABSENT	ABSENT	return false;
+19	M3IndexPathMasks.java	anyStageImpossible	850d08927242	317	PRESENT_EVOLVED	ABSENT	ABSENT	private static boolean allStagesAdmit(int[] required, int[] forbidden) {
+19	M3IndexPathMasks.java	anyStageImpossible	850d08927242	319	PRESENT_EVOLVED	FUZZY	FUZZY	if (required[stage] != 0 || forbidden[stage] != 0) return false;
+19	M3IndexPathMasks.java	selectJava	850d08927242	326	PRESENT_EVOLVED	ABSENT	ABSENT	if (count == 0) return new int[0];
+19	M3IndexPathMasks.java	selectJava	850d08927242	329	PRESENT_EVOLVED	ABSENT	ABSENT	if (anyStageImpossible(required, forbidden)) return new int[0];
+19	M3IndexPathMasks.java	selectJava	850d08927242	332	PRESENT_EVOLVED	ABSENT	ABSENT	if (allStagesAdmit(required, forbidden)) {
+19	M3IndexPathMasks.java	selectJava	850d08927242	335	PRESENT_EVOLVED	FUZZY	FUZZY	for (int i = 0; i < count; i++, at += stride) {
+19	M3IndexPathMasks.java	selectJava	850d08927242	336	PRESENT_EVOLVED	FUZZY	FUZZY	selected[i] = rows[(int) at];
+19	M3IndexPathMasks.java	firstMatchingIndex	850d08927242	98	NEC	ABSENT	ABSENT	if (count == 0) return -1;
+19	M3IndexPathMasks.java	firstMatchingIndex	850d08927242	101	NEC	ABSENT	ABSENT	if (anyStageImpossible(requiredMasks, forbiddenMasks)) return -1;
+19	M3IndexPathMasks.java	firstMatchingIndex	850d08927242	104	NEC	ABSENT	ABSENT	if (allStagesAdmit(requiredMasks, forbiddenMasks)) return first;
+19	M3IndexPathMasks.java	scanWindow	850d08927242	174	NEC	ABSENT	ABSENT	if (backend == Backend.JAVA && allStagesAdmit(requiredMasks, forbiddenMasks)) {
+19	M3IndexPathMasks.java	scanWindow	850d08927242	175	NEC	FUZZY	FUZZY	int admitted = Math.min(limit, count - next);
+19	M3IndexPathMasks.java	scanWindow	850d08927242	177	NEC	ABSENT	ABSENT	for (int i = 0; i < admitted; i++, logical += stride) {
+19	M3IndexPathMasks.java	selectLongJava	850d08927242	366	NEC	ABSENT	ABSENT	if (count == 0 || anyStageImpossible(required, forbidden)) return new long[0];
+19	M3IndexPathMasks.java	selectLongJava	850d08927242	368	NEC	FUZZY	FUZZY	long[] selected = new long[count];
+19	M3IndexPathMasks.java	selectLongJava	850d08927242	370	NEC	ABSENT	ABSENT	for (int i = 0; i < count; i++, at += stride) selected[i] = rows[(int) at];
+19	M3IndexPathMasks.java	scanWindow	850d08927242	185	NEC	ABSENT	ABSENT	output[outputOffset + i] = orderedRows[(int) logical];
+19	M3IndexPathMasks.java	scanWindow	850d08927242	187	NEC	ABSENT	ABSENT	return packWindow(next + admitted, admitted);
+19	M3IndexPathMasks.java	validateShape	850d08927242	263	RESTORED_SINCE	EXACT	EXACT	return validateShape(rows.length, positions, planes, required, forbidden,
+19	M3IndexPathMasks.java	validateShape	850d08927242	267	RESTORED_SINCE	EXACT	EXACT	private static int validateShape(int rowSize, int[] positions,
+19	M3IndexPathMasks.java	validateGeometry	850d08927242	247	RESTORED_SINCE	EXACT	EXACT	int physicalCapacity = validateShape(rowSize, positions, planes, required,
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	24	RESTORE	ABSENT	ABSENT	static jsize m3_admit_chunk(JNIEnv *env, jbyteArray states, jsize offset,
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	25	RESTORE	ABSENT	ABSENT	jsize chunk, jint mask, jbyte *ordinals, jsize *first, jsize *span) {
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	28	RESTORE	FUZZY	FUZZY	if (mask == 0) return chunk;
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	29	RESTORE	FUZZY	FUZZY	(*env)->GetByteArrayRegion(env, states, offset, chunk, ordinals);
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	31	RESTORE	ABSENT	ABSENT	unsigned char *positions = (unsigned char *)ordinals;
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	34	RESTORE	FUZZY	FUZZY	unsigned int bits = (unsigned int)(unsigned char)ordinals[i];
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	35	RESTORE	FUZZY	FUZZY	if ((bits & (unsigned int)mask) == (unsigned int)mask) {
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	36	RESTORE	ABSENT	ABSENT	positions[accepted++] = (unsigned char)i;
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	39	RESTORE	ABSENT	ABSENT	if (accepted != 0) {
+27	m3_index_mask_compactor.c	m3_admit_chunk	eaeef1c565dd	45	RESTORE	ABSENT	ABSENT	return accepted;
+27	m3_index_mask_compactor.c	m3_select_range	eaeef1c565dd	71	RESTORE	ABSENT	ABSENT	jsize first_admitted, span;
+27	m3_index_mask_compactor.c	m3_select_range	eaeef1c565dd	72	RESTORE	ABSENT	ABSENT	jsize accepted = m3_admit_chunk(env, states, offset, chunk, required_mask,
+27	m3_index_mask_compactor.c	m3_select_range	eaeef1c565dd	73	RESTORE	ABSENT	ABSENT	marks, &first_admitted, &span);
+27	m3_index_mask_compactor.c	m3_select_range	eaeef1c565dd	74	RESTORE	FUZZY	FUZZY	if (accepted < 0) return NULL;
+27	m3_index_mask_compactor.c	m3_select_range	eaeef1c565dd	80	RESTORE	FUZZY	FUZZY	(*env)->GetIntArrayRegion(env, rows, first + offset + first_admitted,
+27	m3_index_mask_compactor.c	m3_select_range	eaeef1c565dd	81	RESTORE	ABSENT	ABSENT	span, row_ids);
+27	m3_index_mask_compactor.c	m3_select_range	eaeef1c565dd	85	RESTORE	ABSENT	ABSENT	row_ids[i] = row_ids[(jsize)(unsigned char)marks[i] - first_admitted];
+27	m3_index_mask_compactor.c	-	eaeef1c565dd	371	RESTORE	ABSENT	ABSENT	jsize batch = m3_admit_chunk(env, states, state_offset + position, chunk,
+27	m3_index_mask_compactor.c	-	eaeef1c565dd	372	RESTORE	ABSENT	ABSENT	mask, marks, &first_admitted, &span);
+27	m3_index_mask_compactor.c	-	eaeef1c565dd	373	RESTORE	FUZZY	FUZZY	if (batch < 0) return NULL;
+27	m3_index_mask_compactor.c	-	eaeef1c565dd	379	RESTORE	ABSENT	ABSENT	(*env)->GetIntArrayRegion(env, rows, row_offset + position + first_admitted,
+27	m3_index_mask_compactor.c	-	eaeef1c565dd	380	RESTORE	ABSENT	ABSENT	span, values);
+27	m3_index_mask_compactor.c	-	eaeef1c565dd	383	RESTORE	FUZZY	FUZZY	for (jsize i = 0; i < batch; i++) {
+27	m3_index_mask_compactor.c	-	eaeef1c565dd	384	RESTORE	ABSENT	ABSENT	values[i] = values[(jsize)(unsigned char)marks[i] - first_admitted];
+27	m3_index_mask_compactor.c	-	eaeef1c565dd	428	RESTORE	FUZZY	FUZZY	(*env)->GetLongArrayRegion(env, rows, row_offset + position + first_admitted,
+35	m3_index_mask_compactor.c	m3_selected_span	795a55d3b864	22	RESTORE	FUZZY	EXACT	static jsize m3_selected_span(const jbyte *marks, jsize length, jint mask, jsize *end) {
+35	m3_index_mask_compactor.c	m3_selected_span	795a55d3b864	25	RESTORE	FUZZY	EXACT	if (mask == 0) return first;
+35	m3_index_mask_compactor.c	m3_selected_span	795a55d3b864	26	RESTORE	ABSENT	EXACT	while (first < length && (((unsigned char) marks[first] & (unsigned int) mask) != (unsigned int) mask)) first++;
+35	m3_index_mask_compactor.c	m3_selected_span	795a55d3b864	27	RESTORE	ABSENT	EXACT	if (first == length) { *end = first; return first; }
+35	m3_index_mask_compactor.c	m3_selected_span	795a55d3b864	28	RESTORE	ABSENT	EXACT	while (*end > first && (((unsigned char) marks[*end - 1] & (unsigned int) mask) != (unsigned int) mask)) (*end)--;
+35	m3_index_mask_compactor.c	m3_select_range	795a55d3b864	59	RESTORE	ABSENT	EXACT	jsize stop;
+35	m3_index_mask_compactor.c	m3_select_range	795a55d3b864	60	RESTORE	FUZZY	EXACT	jsize begin = m3_selected_span(marks, chunk, required_mask, &stop);
+35	m3_index_mask_compactor.c	m3_select_range	795a55d3b864	61	RESTORE	ABSENT	FUZZY	if (begin == stop) { offset += chunk; continue; }
+35	m3_index_mask_compactor.c	m3_select_range	795a55d3b864	62	RESTORE	FUZZY	EXACT	(*env)->GetIntArrayRegion(env, rows, first + offset + begin, stop - begin, row_ids);
+35	m3_index_mask_compactor.c	m3_select_range	795a55d3b864	65	RESTORE	FUZZY	EXACT	for (jsize i = begin; i < stop; i++) {
+35	m3_index_mask_compactor.c	m3_select_range	795a55d3b864	68	RESTORE	FUZZY	EXACT	row_ids[accepted++] = row_ids[i - begin];
+35	m3_index_mask_compactor.c	-	795a55d3b864	363	RESTORE	FUZZY	EXACT	jsize begin = m3_selected_span(marks, chunk, mask, &stop);
+35	m3_index_mask_compactor.c	-	795a55d3b864	364	RESTORE	ABSENT	EXACT	if (begin == stop) { position += chunk; continue; }
+35	m3_index_mask_compactor.c	-	795a55d3b864	365	RESTORE	FUZZY	FUZZY	(*env)->GetIntArrayRegion(env, rows, row_offset + position + begin, stop - begin, values);
+35	m3_index_mask_compactor.c	-	795a55d3b864	367	RESTORE	ABSENT	EXACT	jsize batch = stop - begin;
+35	m3_index_mask_compactor.c	-	795a55d3b864	373	RESTORE	FUZZY	EXACT	if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i - begin];
+35	m3_index_mask_compactor.c	-	795a55d3b864	420	RESTORE	FUZZY	EXACT	(*env)->GetLongArrayRegion(env, rows, row_offset + position + begin, stop - begin, values);

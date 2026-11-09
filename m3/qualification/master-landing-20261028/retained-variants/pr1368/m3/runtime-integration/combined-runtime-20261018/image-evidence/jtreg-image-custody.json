@@ -1,0 +1,386 @@
+{
+  "schema": "JTREG_LOCAL_OFFICIAL_SOURCE_IMAGE_V1",
+  "upstream_repo": "openjdk/jtreg",
+  "upstream_tag": "jtreg-7.2+1",
+  "upstream_commit": "5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03",
+  "status": "BUILT_FROM_EXACT_OFFICIAL_SOURCE_NOT_VENDOR_BINARY",
+  "version_output": "jtreg 7.2+1\nInstalled in /dev/shm/m3-combined-image-f8287/jtreg-source-build/jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/images/jtreg/lib/jtreg.jar\nRunning on platform version 21.0.12.1 from /workspace/scratch/beeb6792462c/toolchain/jdk-21.0.12.1+1.\nBuilt with Java(TM) 2 SDK, Version 17.0.20+8-1-24.04-Ubuntu on October 18, 2026.\nCopyright (c) 1999, 2022, Oracle and/or its affiliates. All rights reserved.\nUse is subject to license terms.\nJT Harness, version 6.0 ea b24 (October 18, 2026)\nJava Assembler Tools, version 7.0 ea b09 (October 18, 2026)\nTestNG: testng-7.3.0.jar, guice-4.2.3.jar, jcommander-1.78.jar\nJUnit: junit-platform-console-standalone-1.9.2.jar\n",
+  "jtreg_home": "/dev/shm/m3-combined-image-f8287/jtreg-7.2+1",
+  "input_artifacts": [
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/etc/ant-bootstrap.jar",
+      "bytes": 22956,
+      "sha256": "6f17e046a1f2d2e0bcac29e6032a68edb37cc1cf25098b0c42a6273d3ee27695",
+      "sha1": "9f8c6459d435609be63c7d11946e82fb56649fdf"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-antlr.jar",
+      "bytes": 12266,
+      "sha256": "204406c54b92761b16c0be1e5fefe772174f143272fc0ef0b7f31e31723f1014",
+      "sha1": "3d728985e3b6a71b80d10db0d574a60b496590a1"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-apache-bcel.jar",
+      "bytes": 15630,
+      "sha256": "20eb0f01ad1ab39e68d166e46d8894206f6c75e0924400e2b5f27a8120ed87c2",
+      "sha1": "0f2add1f8bca7992322bbdfc63b596b00a8db8fd"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-apache-bsf.jar",
+      "bytes": 10144,
+      "sha256": "616dcd09310aa498c0556970edf7619fd6821876f7eb93aae53774c8fedb1311",
+      "sha1": "5b095ebb1c1a1b0f6a3b889d3161bce4ce07860d"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-apache-log4j.jar",
+      "bytes": 8756,
+      "sha256": "2d4d1327bc61fa5168f32522096ebe02cc6fcba5c27b7593b3020cdfa28e164c",
+      "sha1": "9a3e49630caf4a67ad6188dc0d9c2d4c52cdf279"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-apache-oro.jar",
+      "bytes": 10047,
+      "sha256": "b3f5cf8dae6290e78ce4c439e164373ad496dc6e4e2785fd700bc823a1640010",
+      "sha1": "6b261964b550be885c9656ba268a8dcd140f6314"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-apache-regexp.jar",
+      "bytes": 10021,
+      "sha256": "a6666c8f4cb08624e08df6870c6539fed2d1fee29aea8a713abc5f12211aa504",
+      "sha1": "0e8c9e896ca9a10bbf205fe396ebf6808cb45b86"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-apache-resolver.jar",
+      "bytes": 9911,
+      "sha256": "aa617cdafae3c0d4e5ac8510451fe22f03563c2ff17d5b566c142f300fdc5279",
+      "sha1": "73ce9524001122178d9e7db9f7feb68642fc0651"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-apache-xalan2.jar",
+      "bytes": 8414,
+      "sha256": "0ff8eae6ca8749bf111e368ed48d00e74da6fbbc6e94aac66caa6ef4f21941ba",
+      "sha1": "015b6f2317e0eac2ee1f07c34d315184b4d7a63a"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-commons-logging.jar",
+      "bytes": 10147,
+      "sha256": "ca88a19b68e0b48df72d609048a6379a735cd7a174848588a9df8e3345ab3371",
+      "sha1": "741230fb8c8eeb99aab9ec7074cc871fdb7b1fda"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-commons-net.jar",
+      "bytes": 90857,
+      "sha256": "fda6798080b3137021ea79021bb5f594d41657e193565a95ce71cb6342017c03",
+      "sha1": "2aadb99c4af42a1b69e35269551d3c636e247899"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-imageio.jar",
+      "bytes": 31582,
+      "sha256": "12f01f7ceb3cf512edd1d5b6aa5b67aaf2f4bd22a12ade4fec42981e17c96d4c",
+      "sha1": "a66b191c8f832a34f6160e5d4acaba9b8c05c3ea"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-jai.jar",
+      "bytes": 29583,
+      "sha256": "ebaf32b2c151bf57ccced661b5f4d0c611380591d88245edebe81597d4110d9b",
+      "sha1": "0b2d6f189f2efec0c5a01725094eec2d95e8f88f"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-javamail.jar",
+      "bytes": 14549,
+      "sha256": "805ac623089cf21f7b469ffb742b264789305fe35470dbf25d326bbdf232538d",
+      "sha1": "bfd7aa4221ea0a9b98db9e0c908e0426ccb1f2e7"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-jdepend.jar",
+      "bytes": 14990,
+      "sha256": "fd02978a82d87b33920aa688ccc40c82a5f6823e775631a42005f19ca1636226",
+      "sha1": "64206c8ac4da3e444470651865688c12c5abb14e"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-jmf.jar",
+      "bytes": 12950,
+      "sha256": "b472709a69c76f33bc4341069a08f0327d9c938e0bc6143f58ac6ddb15acda96",
+      "sha1": "9b606cf8ef4787a56281a827c66e8aa11972596e"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-jsch.jar",
+      "bytes": 54456,
+      "sha256": "e07a3791a367bd3e43cc57aa15cfdb13976b93b4a6bb8a1238b183398e0ce098",
+      "sha1": "c4d8745b230f2b38b540d5ddd1abb287da1f416a"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-junit.jar",
+      "bytes": 141695,
+      "sha256": "138734816cc7c6bf4da54359133af87235042b60b26062ae8c533d48080a729b",
+      "sha1": "f75d2cbe7f63db600fc34e23aa447c27095056cf"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-junit4.jar",
+      "bytes": 13651,
+      "sha256": "722d371220563688d2413d625a3916a53e22af425695ec6fa90362cea85d991a",
+      "sha1": "07222c675958c696d6ea3609e8a5c57e4d426f1e"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-junitlauncher.jar",
+      "bytes": 86340,
+      "sha256": "da7830b23844e590db9f293ae45b5bde3efd1c9f7b4ba80b25ef8be92b8f0c8c",
+      "sha1": "08f1214496e3544656196d083abbc447c6ccf513"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-launcher.jar",
+      "bytes": 18908,
+      "sha256": "5d22f62885a0c8d721a9002e9a00c84381365f65296ed9c8ef78415e8a9fc2a1",
+      "sha1": "2ca8688d2dad5694237576db782b37279989614d"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-netrexx.jar",
+      "bytes": 17332,
+      "sha256": "8a02de38b2b22afcb1cfa55fd8298f8937c3103f03814582ccbff1d5261fd599",
+      "sha1": "94ebeab3dbf8a6fc135996ad91854ca0223ee255"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-swing.jar",
+      "bytes": 13926,
+      "sha256": "b168a30cbb658dfe840f626e039f4aad197c931cffae9d31df5be465be46d7db",
+      "sha1": "12ae1cfc42449d3f9017318e751f221c685c2750"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-testutil.jar",
+      "bytes": 28785,
+      "sha256": "eb3215e8e19e9c7dd17b1624bf5bdc05489d30c3502b9b7eaf26d0d9985b7aa7",
+      "sha1": "5981c0ae8195d838577493854f6b56adf07dd33a"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant-xz.jar",
+      "bytes": 11346,
+      "sha256": "8890282612c965e02f31117aab06eecacd097af8615e419e6a003724de0c55fb",
+      "sha1": "e8425d9eceab2aac51cc1cca5d719645f8601d12"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/lib/ant.jar",
+      "bytes": 2269392,
+      "sha256": "b96b46fd2b4b00e42684c3085b0d16dde975e7b8e64822b0bf52edf5fd387d8d",
+      "sha1": "ae148abb0532b685c5eeb22fdec9d124e89be5de"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/manual/api/member-search-index.zip",
+      "bytes": 127398,
+      "sha256": "8930e92d535a3b1ac27cb5f9d640e67b153ae7cd049aa5e9eaa7e97418546ca1",
+      "sha1": "8a2aaa1ad89cb7c7711d3b69797837738527d397"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/manual/api/package-search-index.zip",
+      "bytes": 671,
+      "sha256": "d0706f1780e4f05032c0fc2e06526ffe30e97bc4b92a273bb327fe6b599373fa",
+      "sha1": "bedfe211d77ac46ee225b44457b3062764952e4c"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/manual/api/type-search-index.zip",
+      "bytes": 9292,
+      "sha256": "1ecf0fc39a627a8a812067c38c09017abb6ee476fa76293310d0a2c66ffe1788",
+      "sha1": "512e145f7f9094e42f5af043d3e515a1ef15b96c"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/manual/tutorial-tasks-filesets-properties.zip",
+      "bytes": 15377,
+      "sha256": "d1a83ebd49b02a562bbfcd3a56bcd14c8f1fadff5b80e7bdd34bc5cfda6f7a5a",
+      "sha1": "25ce3fa64ea8e5b0fb7bc0f436bcb55b9233fda4"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/ant/apache-ant-1.10.8/manual/tutorial-writing-tasks-src.zip",
+      "bytes": 2474,
+      "sha256": "dc7739460dc0a7238bdbbb52dbb5f04ccbc518e48ed7d35689a958e44f60637b",
+      "sha1": "40792aec2b3af6a7594acdac684eb800e27be120"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/apache-ant-1.10.8-bin.zip",
+      "bytes": 10093242,
+      "sha256": "7dcec093cd28aa017fb6c5f9be7d6b7b8c5843b48d83922caf725811d039155e",
+      "sha1": "dbe187ce2963f9df8a67de8aaff3b0a437d06978"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/asmtools/build/binaries/lib/asmtools.jar",
+      "bytes": 481960,
+      "sha256": "633996f727edcee7ece8d0db156296f5f4aeaf467e4f76e878fa78055d9eeca5",
+      "sha1": "90814dc7a9343b782dc07ed9066c7965c944fb13"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/asmtools/build/dist/asmtools-7.0.zip",
+      "bytes": 464530,
+      "sha256": "e574001563b4a2d654d98e32015e07189c87ad1b6ac7c2a5ed832481c5a2377e",
+      "sha1": "016f769527a66c4a03cb8051a098e3a61a626b88"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/asmtools/build/release/lib/asmtools.jar",
+      "bytes": 481964,
+      "sha256": "1465c3d73b8d6715aba95b4830d20a6736d049c95fa36f7e473308ca3cabb535",
+      "sha1": "8d0c8cf3ffd4fea4ea77c178945e90e489e432a5"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/asmtools/source.zip",
+      "bytes": 283191,
+      "sha256": "8284479fda9be745b285356ae5e187e21e313fad9f571e5f78b1a9e786a87475",
+      "sha1": "604f5e1aad1912968781dc72a1f86043e4e2dc20"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/guice/guice-4.2.3.jar",
+      "bytes": 856934,
+      "sha256": "a21e50ffbb67e7adc5b46cf7b9e1a480f1e0f04fd4201ddb1c65da91290601af",
+      "sha1": "2ea992d6d7bdcac7a43111a95d182a4c42eb5ff7"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/jcommander/jcommander-1.78.jar",
+      "bytes": 83782,
+      "sha256": "7891debb84b5f83e9bd57593ebece3399abbe0fd938cf306b3534c57913b9615",
+      "sha1": "a3927de9bd6f351429bcf763712c9890629d8f51"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/jtharness/build/binaries/lib/javatest.jar",
+      "bytes": 4505868,
+      "sha256": "74496dc923362964d1eb7667c62d32665cc437e16b7be059cf668d13ad4f8b1b",
+      "sha1": "e6d886976a6d9da7897959f51a407865d4520388"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/jtharness/source.zip",
+      "bytes": 5133453,
+      "sha256": "ad934a81fdf2b5e01d3e5c78c11b03d291b6ae81001c8901eb5adeeee5415532",
+      "sha1": "3d25ddea8e59ab8ff0943bc65aebc80a2aecc4a3"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/junit/junit-platform-console-standalone-1.9.2.jar",
+      "bytes": 2614420,
+      "sha256": "004a478c2d40f8f524af27ff579d9459d57beb5c1db8ec1dfb9621cc506f75d3",
+      "sha1": "bb856bc86a6e6cd48080546afcaf7a210713ea21"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/build/deps/testng/testng-7.3.0.jar",
+      "bytes": 922167,
+      "sha256": "63727488f9717d57f0d0a0fee5a1fc10a2be9cfcff2ec3a7187656d663c0774e",
+      "sha1": "a5069c3dfba58d23702f96c3d9f5081f5ce7136f"
+    },
+    {
+      "path": "jtreg-5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03/plugins/idea/gradle/wrapper/gradle-wrapper.jar",
+      "bytes": 59203,
+      "sha256": "e996d452d2645e70c01c11143ca2d3742734a28da2bf61f25c82bdc288c9e637",
+      "sha1": "2685e1a923d4c79dd549889406c6ffa9e8661744"
+    },
+    {
+      "path": "jtreg-source.zip",
+      "bytes": 1539507,
+      "sha256": "81eda00ac52bcf7558ab14281f3e8b914b38fa5c60beeadae1789e558aac1990",
+      "sha1": "4e3d97137b9104ee25d7354703ccf2530c314f3b"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "COPYRIGHT",
+      "bytes": 994,
+      "sha256": "80130f2330491326f47b57195a5ad8d35f9e5e79763b944da3c3eca81d25b49e"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "README",
+      "bytes": 2041,
+      "sha256": "2a8d36fe89681737a1af7bece0d39c7d57521f68a55573961e504b69f9d53812"
+    },
+    {
+      "path": "bin/jtdiff",
+      "bytes": 4258,
+      "sha256": "71f4011af61bc7ebb8fb660f00463e27c27e8fecb466567bc82b8117a131b902"
+    },
+    {
+      "path": "bin/jtreg",
+      "bytes": 6331,
+      "sha256": "8084aa61ddb4aecfbfaeded9f8140b82177f7f22d3304c2de1be73be97c6b9b7"
+    },
+    {
+      "path": "doc/jtreg/faq.html",
+      "bytes": 218113,
+      "sha256": "9ebceb033d9cc72427b10df21b2596d91583c3aa6a1a0e2881bf3c366b705cd7"
+    },
+    {
+      "path": "doc/jtreg/tag-spec.html",
+      "bytes": 64781,
+      "sha256": "baab0a5dfa9a6ff1f7943249a18ea4b85e994024b3fb498323d7c54281ccdf7c"
+    },
+    {
+      "path": "doc/jtreg/usage.txt",
+      "bytes": 26307,
+      "sha256": "6b34bdc0063da244b1d679aadadab8d09481142e3cfa02c8e478d8250b7a9d25"
+    },
+    {
+      "path": "legal/asmtools/LICENSE",
+      "bytes": 19263,
+      "sha256": "067d8f7f645efe1131a9df13aa80ec2910d4ff898f9b14d337443a4202d56ab6"
+    },
+    {
+      "path": "legal/jtharness/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "legal/jtharness/copyright.txt",
+      "bytes": 1144,
+      "sha256": "e78c59896ed329c71a12bb6b38d071c8899c203e42c7a99d5e9ca7414d8049f0"
+    },
+    {
+      "path": "legal/junit/LICENSE-junit.txt",
+      "bytes": 11376,
+      "sha256": "9648bb2891b9813970bddb68d4be8a5e6ec8280d0180a53dfb29236b579c55bb"
+    },
+    {
+      "path": "legal/testng/LICENSE.txt",
+      "bytes": 11359,
+      "sha256": "c1b9df1275e769f3dbab000d1e457a2d4b0f28eb5da6c77e48dc37eeba202ed7"
+    },
+    {
+      "path": "lib/asmtools.jar",
+      "bytes": 481960,
+      "sha256": "633996f727edcee7ece8d0db156296f5f4aeaf467e4f76e878fa78055d9eeca5"
+    },
+    {
+      "path": "lib/guice-4.2.3.jar",
+      "bytes": 856934,
+      "sha256": "a21e50ffbb67e7adc5b46cf7b9e1a480f1e0f04fd4201ddb1c65da91290601af"
+    },
+    {
+      "path": "lib/javatest.jar",
+      "bytes": 4505868,
+      "sha256": "74496dc923362964d1eb7667c62d32665cc437e16b7be059cf668d13ad4f8b1b"
+    },
+    {
+      "path": "lib/jcommander-1.78.jar",
+      "bytes": 83782,
+      "sha256": "7891debb84b5f83e9bd57593ebece3399abbe0fd938cf306b3534c57913b9615"
+    },
+    {
+      "path": "lib/jtreg.jar",
+      "bytes": 736663,
+      "sha256": "5ffd35b3dbb8391265a79f32a1c7a70b487c88d1df13cff2ad637e9057bc97a5"
+    },
+    {
+      "path": "lib/junit-platform-console-standalone-1.9.2.jar",
+      "bytes": 2614420,
+      "sha256": "004a478c2d40f8f524af27ff579d9459d57beb5c1db8ec1dfb9621cc506f75d3"
+    },
+    {
+      "path": "lib/testng-7.3.0.jar",
+      "bytes": 922167,
+      "sha256": "63727488f9717d57f0d0a0fee5a1fc10a2be9cfcff2ec3a7187656d663c0774e"
+    },
+    {
+      "path": "release",
+      "bytes": 48,
+      "sha256": "7bc6ffcbe89a7a67c75c064343f883a7209e98aa1406dbd48f66fd83ddbe3b57"
+    }
+  ],
+  "upstream_werror_retained": true,
+  "upstream_checksum_checks_retained": true,
+  "temporary_source_build_removed_after_custody": true,
+  "created_utc": "2026-10-18T12:47:29Z"
+}

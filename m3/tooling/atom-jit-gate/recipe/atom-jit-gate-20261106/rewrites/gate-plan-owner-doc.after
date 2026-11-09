@@ -1,0 +1,2 @@
+ * Plan construction (donors, contracts, Maven recipe custody) stays with the donor's universal recipe planner; this
+ * gate receives only a sealed plan root and its ordered targets ({@link Plan}).

@@ -1,0 +1,43 @@
+{
+  "schema": "M3_MASK_WINDOW_RECEIVER_20261017",
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceRevision": "eaba5869004e320845edb652a73b8f9f2085d305",
+  "sourcePullRequest": 12120,
+  "recipe": "jdk.internal.m3.m3jdk.MaskWindowSparse20261017",
+  "sourceCrate": "m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017",
+  "targetBaseline": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "outputs": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java",
+      "before": "99d274532f99816ca2038ba9f3d564415380981358a83824efaa46432d4114cc",
+      "after": "1dcb626c7ee37dec021bdcc8928b06445f218d387b6b9becfb8c9c099bb1e03a",
+      "beforeBlob": "db0dd9b05bbcfd9e564f85fbd48ef26d199890f8",
+      "afterBlob": "735b4ac222c24ffae2861940b9b99bac11627e01"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "before": "6560962f52bdcce296dfa16623b2b7289686c4d2b001b197d71d5b09ba458e54",
+      "after": "8359740f728309bf619aa570f4b26b47186b836f4c0e30d55abfd6e6cb9c6b0e",
+      "beforeBlob": "1e5dc17dfd60e353bbd05ce925366ac1ecc46ff2",
+      "afterBlob": "aa9ab94e6571810b74ce6d5c44bbaf469a29d8ae"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowSparseContract.java",
+      "before": "ABSENT",
+      "after": "345702a9eddd3a67c017b9253b4834d2ce0a46d2da63e2eb6efa7414cb3ff866",
+      "beforeBlob": "ABSENT",
+      "afterBlob": "15ff44fa91cb585e33ab754b06b653221f7c89a1"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+      "before": "ABSENT",
+      "after": "0b56e30eeda0022644fd6dd9448ccc3689aa7f05e515d5a4087dc0ed02fb4ec2",
+      "beforeBlob": "ABSENT",
+      "afterBlob": "6eeb08136b1851f78254f9628ceba460ccfe1f4f"
+    }
+  ],
+  "license": "Apache-2.0",
+  "runtimeDependencyOnSynexia": false,
+  "phase": "STRING remains active; independent collection proving increment only",
+  "coverage": "Selected two production owners and their Java/native regression witnesses; not full SDK coverage"
+}

@@ -1,0 +1,53 @@
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
+SPDX-License-Identifier: Apache-2.0
+
+GENERATED_RECEIVER_ACCEPTANCE: normal
+Actual receiver: /workspace/scratch/dcb6660d4786/M3jdk21
+Command and all input/source/output hashes: generated-receiver-normal.json
+
+Provider JUnit tests: 14 passed; 0 failures, 0 errors, 0 skipped.
+  independentOwnersAppendTransactionallyAndRejectReplacedStreamPaths
+  directoriesSupportShallowAndRecursiveCreationAndRejectWrongTypes
+  pagedUnicodeEnumerationAndIterativeDeletionCoverMultipleNativePages
+  symbolicLinksFollowTargetsWhileDanglingEntriesRemainEnumerableAndAbsent
+  readOnlyImagesAdvertiseAndEnforceTheImagePolicy
+  removedInodesAndReusedMountNamesCannotRetargetOldHandles
+  namespaceValidationRejectsEscapesInvalidUtf16AndOverlongPaths
+  metadataFlagsPersistModeAndTimeAndEnforceReadOnly
+  cancellationMissingPathsAndUnsupportedFlagsKeepTheirEfsContracts
+  physicalImageAliasesAreProtectedButRetainedSnapshotsCanRestoreContent
+  streamsHonorSubrangesOffsetsAppendEofAndImmediateTruncate
+  aliasProtectionRefusesHardLinksSymlinkAliasesAndDirectoryCycles
+  copyAndAtomicMovePreserveDestinationsUnlessOverwriteIsRequested
+  uriHandlesRepresentLocationsWithoutMaterializingMetadata
+
+Real Equinox Resources JUnit tests: 1 passed; 0 failures, 0 errors, 0 skipped.
+  eclipseResourcesConsumesTheRegisteredM3Filesystem
+Its 15 workspace checks are assertions within that integration test, not 15 additional JUnit tests.
+
+M3FS_WORKSPACE_MODE=backend-osgi-bundle
+M3FS_WORKSPACE_JAVA_HOME=/tmp/m3-toolchain/jdk-21.0.12.1+1
+M3FS_WORKSPACE_CHECKS=15 extension-discovery,efs-uri-round-trip,workspace-linked-folders,workspace-create-read,workspace-append-replace,m3fs-to-m3fs-copy,m3fs-to-local-copy,local-to-m3fs-copy,workspace-move,workspace-refresh-external-change,workspace-delete-refresh,workspace-native-timestamp,snapshot-view-isolation,workspace-project-reopen,durable-image-reopen
+
+Maven result excerpt:
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.774 s -- in com.m3.eclipse.filesystem.M3EclipseFileSystemTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.952 s -- in com.m3.eclipse.filesystem.launcher.M3ResourcesIT
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  24.037 s
+[INFO] Finished at: 2026-10-19T10:03:34+08:00
+
+Runtime input and module source hashes remained unchanged across execution.
+Provider/scenario ZIP entry bytes and consumed backend JAR bytes match full-backend staging acceptance.
+Provider/scenario archive hashes differ from staging only in ZIP Unix permissions on copied source resources; JSON records the specific entries and modes.
+Raw log/report hashes (full JVM system properties are intentionally excluded from this source packet):
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  exit-code.txt
+3ed5c63f58dc32ce9933259e3e73a4895ae6da7e903e3dbfd674976aef0dd451  failsafe-reports/TEST-com.m3.eclipse.filesystem.launcher.M3ResourcesIT.xml
+b956b53bf687335858b3b07efb2a89ad2fb28f5d7cb2abd059bd9810a8e4e740  failsafe-reports/com.m3.eclipse.filesystem.launcher.M3ResourcesIT.txt
+300c3bd846f17c9c6604624b5e9d6703484b73daf9e5fa72bc17d31b371ca87d  failsafe-reports/failsafe-summary.xml
+b1c209c099c1c54c2d68b803288804588291a018a94f7388dad3a208b52cdf93  maven.log
+536fe02b5e7584b9037b6a4aaba259dbefc28ab370b7467a3a5842299d421303  surefire-reports/TEST-com.m3.eclipse.filesystem.M3EclipseFileSystemTest.xml
+b02edcce0b1e24146120bc4f1a80b39f6d814358175243da07b6bff65e8fea52  surefire-reports/com.m3.eclipse.filesystem.M3EclipseFileSystemTest.txt
+
+Scope: the complete Eclipse fork suite, GUI/product tests, and full modified-JDK build were not executed.

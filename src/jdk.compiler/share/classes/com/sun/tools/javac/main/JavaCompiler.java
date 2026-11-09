@@ -572,6 +572,20 @@ public class JavaCompiler {
      */
     protected Set<JavaFileObject> inputFiles = new HashSet<>();
 
+    //FLLDCIM: MRL - merge-loss leaf 103 (origin 6f151d7ad124, dropped by retain merge 4c9dc30c47e4): source reads are admitted before javac opens them
+    /** Original-owner admission state; includes reads without PARSE events. */
+    private boolean sourceProcessingStarted;
+
+    /** Whether a source workset can no longer be bound before this task starts. */
+    public boolean hasStartedSourceProcessing() {
+        return sourceProcessingStarted || hasBeenUsed;
+    }
+
+    private void beforeSourceProcessing(JavaFileObject file) {
+        sourceProcessingStarted = true;
+        com.sun.tools.javac.m3.M3ASTPC.beforeSourceRead(context, file);
+    }
+
     /** Used by the resolveBinaryNameOrIdent to say that the given type cannot be found, and that
      *  an error has already been produced about that.
      */
@@ -612,6 +626,7 @@ public class JavaCompiler {
      *  @param filename   The file name of the input stream to be opened.
      */
     public CharSequence readSource(JavaFileObject filename) {
+        beforeSourceProcessing(filename);
         try {
             inputFiles.add(filename);
             return filename.getCharContent(false);
@@ -635,6 +650,7 @@ public class JavaCompiler {
      *  @param silent       true if TaskListeners should not be notified
      */
     private JCCompilationUnit parse(JavaFileObject filename, CharSequence content, boolean silent) {
+        beforeSourceProcessing(filename);
         long msec = now();
         JCCompilationUnit tree = make.TopLevel(List.nil());
         if (content != null) {
@@ -647,6 +663,8 @@ public class JavaCompiler {
                 keepComments = true;
                 genEndPos = true;
             }
+            // M3 is opt-in and binds source facts to this actual parser input.
+            if (!silent) content = com.sun.tools.javac.m3.M3ASTPC.retainSource(context, filename, content);
             Parser parser = parserFactory.newParser(content, keepComments(), genEndPos,
                                 lineDebugInfo, filename.isNameCompatible("module-info", Kind.SOURCE));
             tree = parser.parseCompilationUnit();
@@ -826,6 +844,7 @@ public class JavaCompiler {
 
         if (tree == null) {
             try {
+                beforeSourceProcessing(filename);
                 tree = parse(filename, filename.getCharContent(false));
             } catch (IOException e) {
                 log.error(Errors.ErrorReadingFile(filename, JavacFileManager.getMessage(e)));
@@ -915,8 +934,6 @@ public class JavaCompiler {
             taskListener.started(new TaskEvent(TaskEvent.Kind.COMPILATION));
         }
 
-        if (processors != null && processors.iterator().hasNext())
-            explicitAnnotationProcessingRequested = true;
         // as a JavaCompiler can only be used once, throw an exception if
         // it has been used before.
         if (hasBeenUsed)
@@ -985,6 +1002,13 @@ public class JavaCompiler {
         } catch (Abort ex) {
             if (devVerbose)
                 ex.printStackTrace(System.err);
+
+            // In case an Abort was thrown before processAnnotations could be called,
+            // we could have deferred diagnostics that haven't been reported.
+            if (deferredDiagnosticHandler != null) {
+                deferredDiagnosticHandler.reportDeferredDiagnostics();
+                log.popDiagnosticHandler(deferredDiagnosticHandler);
+            }
         } finally {
             if (verbose) {
                 elapsed_msec = elapsed(start_msec);
@@ -1136,6 +1160,9 @@ public class JavaCompiler {
     public void initProcessAnnotations(Iterable<? extends Processor> processors,
                                        Collection<? extends JavaFileObject> initialFiles,
                                        Collection<String> initialClassNames) {
+        if (processors != null && processors.iterator().hasNext())
+            explicitAnnotationProcessingRequested = true;
+
         // Process annotations if processing is not disabled and there
         // is at least one Processor available.
         if (options.isSet(PROC, "none")) {
@@ -1841,6 +1868,7 @@ public class JavaCompiler {
         DiagnosticHandler dh = new DiscardDiagnosticHandler(log);
         JavaFileObject prevSource = log.useSource(fo);
         try {
+            beforeSourceProcessing(fo);
             JCTree.JCCompilationUnit t = parse(fo, fo.getCharContent(false), true);
             return tree2Name.apply(t);
         } catch (IOException e) {

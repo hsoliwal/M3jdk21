@@ -1,0 +1,17 @@
+old	new	status
+com.univocity.parsers.common.input.concurrent	com.m3.lib.parsers.common.input.concurrent	MOVE
+com.univocity.parsers.common.processor.core	com.m3.lib.parsers.common.processor.core	MOVE
+com.univocity.parsers.annotations.helpers	com.m3.lib.parsers.annotations.helpers	MOVE
+com.univocity.parsers.common.iterators	com.m3.lib.parsers.common.iterators	MOVE
+com.univocity.parsers.common.processor	com.m3.lib.parsers.common.processor	MOVE
+com.univocity.parsers.common.routine	com.m3.lib.parsers.common.routine	MOVE
+com.univocity.parsers.common.fields	com.m3.lib.parsers.common.fields	MOVE
+com.univocity.parsers.common.record	com.m3.lib.parsers.common.record	MOVE
+com.univocity.parsers.common.beans	com.m3.lib.parsers.common.beans	MOVE
+com.univocity.parsers.common.input	com.m3.lib.parsers.common.input	MOVE
+com.univocity.parsers.annotations	com.m3.lib.parsers.annotations	MOVE
+com.univocity.parsers.conversions	com.m3.lib.parsers.conversions	MOVE
+com.univocity.parsers.common	com.m3.lib.parsers.common	MOVE
+com.univocity.parsers.fixed	com.m3.lib.parsers.fixed	MOVE
+com.univocity.parsers.csv	com.m3.lib.parsers.csv	MOVE
+com.univocity.parsers.tsv	com.m3.lib.parsers.tsv	MOVE

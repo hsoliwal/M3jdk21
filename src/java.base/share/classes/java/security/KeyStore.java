@@ -30,6 +30,7 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.security.cert.CertificateException;
 import java.security.spec.AlgorithmParameterSpec;
+import java.time.Instant;
 import java.util.*;
 import javax.crypto.SecretKey;
 
@@ -37,6 +38,7 @@ import javax.security.auth.DestroyFailedException;
 import javax.security.auth.callback.*;
 
 import sun.security.util.Debug;
+import sun.security.util.CryptoAlgorithmConstraints;
 
 /**
  * This class represents a storage facility for cryptographic
@@ -842,7 +844,7 @@ public class KeyStore {
      * The JDK Reference Implementation additionally uses the
      * {@code jdk.security.provider.preferred}
      * {@link Security#getProperty(String) Security} property to determine
-     * the preferred provider order for the specified algorithm. This
+     * the preferred provider order for the specified keystore type. This
      * may be different from the order of providers returned by
      * {@link Security#getProviders() Security.getProviders()}.
      *
@@ -866,6 +868,11 @@ public class KeyStore {
         throws KeyStoreException
     {
         Objects.requireNonNull(type, "null type name");
+
+        if (!CryptoAlgorithmConstraints.permits("KEYSTORE", type)) {
+            throw new KeyStoreException(type + " is disabled");
+        }
+
         try {
             Object[] objs = Security.getImpl(type, "KeyStore", (String)null);
             return new KeyStore((KeyStoreSpi)objs[0], (Provider)objs[1], type);
@@ -913,8 +920,15 @@ public class KeyStore {
         throws KeyStoreException, NoSuchProviderException
     {
         Objects.requireNonNull(type, "null type name");
-        if (provider == null || provider.isEmpty())
+
+        if (provider == null || provider.isEmpty()) {
             throw new IllegalArgumentException("missing provider");
+        }
+
+        if (!CryptoAlgorithmConstraints.permits("KEYSTORE", type)) {
+            throw new KeyStoreException(type + " is disabled");
+        }
+
         try {
             Object[] objs = Security.getImpl(type, "KeyStore", provider);
             return new KeyStore((KeyStoreSpi)objs[0], (Provider)objs[1], type);
@@ -958,8 +972,15 @@ public class KeyStore {
         throws KeyStoreException
     {
         Objects.requireNonNull(type, "null type name");
-        if (provider == null)
+
+        if (provider == null) {
             throw new IllegalArgumentException("missing provider");
+        }
+
+        if (!CryptoAlgorithmConstraints.permits("KEYSTORE", type)) {
+            throw new KeyStoreException(type + " is disabled");
+        }
+
         try {
             Object[] objs = Security.getImpl(type, "KeyStore", provider);
             return new KeyStore((KeyStoreSpi)objs[0], (Provider)objs[1], type);
@@ -1151,6 +1172,29 @@ public class KeyStore {
             throw new KeyStoreException("Uninitialized keystore");
         }
         return keyStoreSpi.engineGetCreationDate(alias);
+    }
+
+    /**
+     * Returns the instant that the entry identified by the given alias was
+     * created.
+     *
+     * @param alias the alias name
+     *
+     * @return the instant that the entry identified by the given alias
+     * was created, or {@code null} if the given alias does not exist
+     *
+     * @throws KeyStoreException if the keystore has not been initialized
+     * (loaded)
+     *
+     * @since 27
+     */
+    public final Instant getCreationInstant(String alias)
+            throws KeyStoreException
+    {
+        if (!initialized) {
+            throw new KeyStoreException("Uninitialized keystore");
+        }
+        return keyStoreSpi.engineGetCreationInstant(alias);
     }
 
     /**
@@ -1783,6 +1827,7 @@ public class KeyStore {
         }
 
         KeyStore keystore = null;
+        String matched = null;
 
         try (DataInputStream dataStream =
             new DataInputStream(
@@ -1802,7 +1847,13 @@ public class KeyStore {
                                     kdebug.println(s.getAlgorithm()
                                             + " keystore detected: " + file);
                                 }
-                                keystore = new KeyStore(impl, p, s.getAlgorithm());
+                                String ksAlgo = s.getAlgorithm();
+                                if (CryptoAlgorithmConstraints.permits(
+                                        "KEYSTORE", ksAlgo)) {
+                                    keystore = new KeyStore(impl, p, ksAlgo);
+                                } else {
+                                    matched = ksAlgo;
+                                }
                                 break;
                             }
                         } catch (NoSuchAlgorithmException e) {
@@ -1833,9 +1884,14 @@ public class KeyStore {
                 return keystore;
             }
         }
-
-        throw new KeyStoreException("Unrecognized keystore format. "
-                + "Please load it with a specified type");
+        if (matched == null) {
+            throw new KeyStoreException("Unrecognized keystore format. "
+                    + "Please load it with a specified type");
+        } else {
+            throw new KeyStoreException("Keystore format " +
+                    matched +
+                    " disabled by jdk.crypto.disabledAlgorithms property");
+        }
     }
 
     /**

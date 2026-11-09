@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "spdx_license_id": "Apache-2.0",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_fix_commit": "3adaea7548b9bea232718458b13017f87506d844",
+  "receiver_observed_head": "4b3e49082453b532df47759dfc6b18cbca4c9683",
+  "observed_run_id": 38761335060,
+  "downloaded_artifact_id": 11985413104,
+  "verified_zip_sha256": "ac0c0c9bb5e43df9f93f142cbfe3839ed105f6852bf3154956633b686388f978",
+  "recipe_tests": {"tests": 6, "failures": 0, "errors": 0, "skipped": 0},
+  "java_lst_generation": "PASS_FIVE_EXACT_OUTPUTS",
+  "core_compilation_and_java_base_boundary": "PASS",
+  "production_source_compile": "PASS_THREE_SOURCES",
+  "runtime_test_compile": "FAIL_FIVE_GENERIC_INFERENCE_DIAGNOSTICS",
+  "runtime_tests_at_observed_head": "NOT_RUN",
+  "repair": "Explicit Integer type witnesses in closure test template only; no test removed or assertion weakened, and no production source changed.",
+  "corrected_closure_test_git_blob": "79dcb03e5754e1120dc2b45cf4e3e004d17e4fed",
+  "corrected_closure_test_sha256": "85c497b830bdc6ff6d00c19775c67eed37d5d4c77051e85a6d472b3528cf315b",
+  "origin_note": "Supplement to immutable preparation identities in donor-origin.json; the corrected test is from the canonical fix above. Runtime qualification still requires a new exact-head run."
+}

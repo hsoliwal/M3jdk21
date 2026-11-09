@@ -1,0 +1,5325 @@
+{
+  "guava-android-03": {
+    "summary": {
+      "summary": "M3_GUAVA_HASHBIMAP_PROTOCOL_INVENTORY",
+      "cases": 66,
+      "equivalent": 66,
+      "different": 0,
+      "common_api_cases": 18,
+      "invariant_failures": 0,
+      "common_api_failures": 0,
+      "candidate_source": "Guava 33.4.8 Android array donor-derived body",
+      "oracle_api": "com.google.common.collect.HashBiMap",
+      "oracle_artifact": "guava-33.4.8-android.jar",
+      "scope": "actual paired outcomes when executed; differences are inventory, not admission"
+    },
+    "log_sha256": "7adcad132bcc9a0fca9d49bc2e4714fa8a1ff59e4f1e836114c1bf9a85662b21",
+    "different_cases": [],
+    "cases": [
+      {
+        "case": "forward/replaceAll/swap",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/cycle",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/duplicate-new",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/duplicate-existing",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/throw-first",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/throw-second",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/insert",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=4;F[k0a=v0a,k1a=v1a,k2a=v2a,k3a=v3a];I[v0a=k0a,v1a=k1a,v2a=k2a,v3a=k3a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=4;F[k0a=v0a,k1a=v1a,k2a=v2a,k3a=v3a];I[v0a=k0a,v1a=k1a,v2a=k2a,v3a=k3a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/remove-current",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/remove-next",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k0a=v0a,k2a=v2a];I[v0a=k0a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k0a=v0a,k2a=v2a];I[v0a=k0a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/clear",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/replace-current",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a",
+            "k2a=v2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a",
+            "k2a=v2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/throw-second",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/put-equal-key-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/put-equal-key-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/forcePut-equal-key-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/forcePut-new-key-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0b];I[v1a=k1a,v2a=k2a,v0b=k3a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0b];I[v1a=k1a,v2a=k2a,v0b=k3a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/entry-setValue-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/entry-setValue-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/inverse-put-equal-value-new-key",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0a];I[v1a=k1a,v2a=k2a,v0a=k3a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0a];I[v1a=k1a,v2a=k2a,v0a=k3a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/inverse-forcePut-equal-value-new-key",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0a];I[v1a=k1a,v2a=k2a,v0a=k3a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0a];I[v1a=k1a,v2a=k2a,v0a=k3a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/ordinary-duplicate/new-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/ordinary-duplicate/existing-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/null-support",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=4;F[k0a=v0a,k1a=v1a,k2a=v2a,null=null];I[v0a=k0a,v1a=k1a,v2a=k2a,null=null]",
+          "outcome": {
+            "return": [
+              null,
+              true,
+              true,
+              true,
+              {
+                "return": null,
+                "error": "java.lang.IllegalArgumentException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=4;F[k0a=v0a,k1a=v1a,k2a=v2a,null=null];I[v0a=k0a,v1a=k1a,v2a=k2a,null=null]",
+          "outcome": {
+            "return": [
+              null,
+              true,
+              true,
+              true,
+              {
+                "return": null,
+                "error": "java.lang.IllegalArgumentException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forcePut/evicts-other-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k0a=v1a,k2a=v2a];I[v1a=k0a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k0a=v1a,k2a=v2a];I[v1a=k0a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/entry-setValue/duplicate-refused",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-lifecycle/0",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "k0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "k2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "k0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "k2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-external-replacement/0",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-lifecycle/1",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "v0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "v2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "v0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "v2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-external-replacement/1",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-lifecycle/2",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "entry[k0a=v0a]",
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "entry[k1a=v1a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "entry[k2a=v2a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "entry[k0a=v0a]",
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "entry[k1a=v1a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "entry[k2a=v2a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-external-replacement/2",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "entry[k0a=v0a]",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "entry[k1a=v1a]",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "entry[k0a=v0a]",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "entry[k1a=v1a]",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/swap",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/cycle",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/duplicate-new",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/duplicate-existing",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/throw-first",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/throw-second",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/insert",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=4;F[v0a=k0a,v1a=k1a,v2a=k2a,v3a=k3a];I[k0a=v0a,k1a=v1a,k2a=v2a,k3a=v3a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=4;F[v0a=k0a,v1a=k1a,v2a=k2a,v3a=k3a];I[k0a=v0a,k1a=v1a,k2a=v2a,k3a=v3a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/remove-current",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/remove-next",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k0a,v2a=k2a];I[k0a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k0a,v2a=k2a];I[k0a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/clear",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/replace-current",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a",
+            "v2a=k2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a",
+            "v2a=k2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/throw-second",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/put-equal-key-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/put-equal-key-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "k0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "k0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/forcePut-equal-key-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/forcePut-new-key-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0b,v1a=k1a,v2a=k2a];I[k0b=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0b,v1a=k1a,v2a=k2a];I[k0b=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/entry-setValue-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "k0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "k0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/entry-setValue-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/inverse-put-equal-value-new-key",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0a,v1a=k1a,v2a=k2a];I[k0a=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0a,v1a=k1a,v2a=k2a];I[k0a=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/inverse-forcePut-equal-value-new-key",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0a,v1a=k1a,v2a=k2a];I[k0a=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0a,v1a=k1a,v2a=k2a];I[k0a=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/ordinary-duplicate/new-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/ordinary-duplicate/existing-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/null-support",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=4;F[v0a=k0a,v1a=k1a,v2a=k2a,null=null];I[k0a=v0a,k1a=v1a,k2a=v2a,null=null]",
+          "outcome": {
+            "return": [
+              null,
+              true,
+              true,
+              true,
+              {
+                "return": null,
+                "error": "java.lang.IllegalArgumentException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=4;F[v0a=k0a,v1a=k1a,v2a=k2a,null=null];I[k0a=v0a,k1a=v1a,k2a=v2a,null=null]",
+          "outcome": {
+            "return": [
+              null,
+              true,
+              true,
+              true,
+              {
+                "return": null,
+                "error": "java.lang.IllegalArgumentException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut/evicts-other-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/entry-setValue/duplicate-refused",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-lifecycle/0",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "v0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "v2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "v0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "v2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-external-replacement/0",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-lifecycle/1",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "k0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "k2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "k0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "k2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-external-replacement/1",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-lifecycle/2",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "entry[v0a=k0a]",
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "entry[v1a=k1a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "entry[v2a=k2a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "entry[v0a=k0a]",
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "entry[v1a=k1a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "entry[v2a=k2a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-external-replacement/2",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "entry[v0a=k0a]",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "entry[v1a=k1a]",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "entry[v0a=k0a]",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "entry[v1a=k1a]",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut-order/0",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v3a=k1a,v2a=k2a];I[k0a=v0a,k1a=v3a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v3a=k1a,v2a=k2a];I[k0a=v0a,k1a=v3a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut-order/1",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut-order/2",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut-order/3",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      }
+    ]
+  },
+  "guava-jre-03": {
+    "summary": {
+      "summary": "M3_GUAVA_HASHBIMAP_PROTOCOL_INVENTORY",
+      "cases": 66,
+      "equivalent": 28,
+      "different": 38,
+      "common_api_cases": 18,
+      "invariant_failures": 0,
+      "common_api_failures": 1,
+      "candidate_source": "Guava 33.4.8 Android array donor-derived body",
+      "oracle_api": "com.google.common.collect.HashBiMap",
+      "oracle_artifact": "guava-33.4.8-jre.jar",
+      "scope": "actual paired outcomes when executed; differences are inventory, not admission"
+    },
+    "log_sha256": "766c8ace78c85bb2c0a506d16f87774069f95f75caa83ff162be4ac1f7910eaa",
+    "different_cases": [
+      "forward/replaceAll/swap",
+      "forward/replaceAll/cycle",
+      "forward/replaceAll/duplicate-new",
+      "forward/replaceAll/duplicate-existing",
+      "forward/replaceAll/throw-first",
+      "forward/replaceAll/throw-second",
+      "forward/forEach/insert",
+      "forward/forEach/remove-current",
+      "forward/forEach/remove-next",
+      "forward/forEach/clear",
+      "forward/forEach/replace-current",
+      "forward/identity/put-equal-key-new-value",
+      "forward/identity/forcePut-equal-key-new-value",
+      "forward/identity/inverse-put-equal-value-new-key",
+      "forward/identity/inverse-forcePut-equal-value-new-key",
+      "forward/view-external-replacement/0",
+      "forward/view-external-replacement/1",
+      "forward/view-external-replacement/2",
+      "inverse/replaceAll/swap",
+      "inverse/replaceAll/cycle",
+      "inverse/replaceAll/duplicate-new",
+      "inverse/replaceAll/duplicate-existing",
+      "inverse/replaceAll/throw-first",
+      "inverse/replaceAll/throw-second",
+      "inverse/forEach/insert",
+      "inverse/forEach/remove-current",
+      "inverse/forEach/remove-next",
+      "inverse/forEach/clear",
+      "inverse/forEach/replace-current",
+      "inverse/identity/put-equal-key-new-value",
+      "inverse/identity/forcePut-equal-key-new-value",
+      "inverse/identity/inverse-put-equal-value-new-key",
+      "inverse/identity/inverse-forcePut-equal-value-new-key",
+      "inverse/view-external-replacement/0",
+      "inverse/view-external-replacement/1",
+      "inverse/view-lifecycle/2",
+      "inverse/view-external-replacement/2",
+      "inverse/forcePut-order/3"
+    ],
+    "cases": [
+      {
+        "case": "forward/replaceAll/swap",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v1a,k1a=v0a,k2a=v2a];I[v1a=k0a,v0a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a",
+            "k2a=v2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/cycle",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v1a,k1a=v2a,k2a=v0a];I[v1a=k0a,v2a=k1a,v0a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a",
+            "k2a=v2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/duplicate-new",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=1;F[k0a=v3a];I[v3a=k0a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/duplicate-existing",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=1;F[k0a=v0a];I[v0a=k0a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/throw-first",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/replaceAll/throw-second",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=1;F[k0a=v3a];I[v3a=k0a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/insert",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=4;F[k0a=v0a,k1a=v1a,k2a=v2a,k3a=v3a];I[v0a=k0a,v1a=k1a,v2a=k2a,v3a=k3a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=4;F[k0a=v0a,k1a=v1a,k2a=v2a,k3a=v3a];I[v0a=k0a,v1a=k1a,v2a=k2a,v3a=k3a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a",
+            "k2a=v2a",
+            "k3a=v3a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/remove-current",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/remove-next",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k0a=v0a,k2a=v2a];I[v0a=k0a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k0a=v0a,k2a=v2a];I[v0a=k0a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k2a=v2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/clear",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a",
+            "k2a=v2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/replace-current",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a",
+            "k2a=v2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "k0a=v0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forEach/throw-second",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "k0a=v0a",
+            "k1a=v1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/put-equal-key-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0b=v3a,k1a=v1a,k2a=v2a];I[v3a=k0b,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/put-equal-key-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/forcePut-equal-key-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0b=v3a,k1a=v1a,k2a=v2a];I[v3a=k0b,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/forcePut-new-key-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0b];I[v1a=k1a,v2a=k2a,v0b=k3a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0b];I[v1a=k1a,v2a=k2a,v0b=k3a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/entry-setValue-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/entry-setValue-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/inverse-put-equal-value-new-key",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0a];I[v1a=k1a,v2a=k2a,v0a=k3a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0b];I[v1a=k1a,v2a=k2a,v0b=k3a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/identity/inverse-forcePut-equal-value-new-key",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0a];I[v1a=k1a,v2a=k2a,v0a=k3a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k1a=v1a,k2a=v2a,k3a=v0b];I[v1a=k1a,v2a=k2a,v0b=k3a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/ordinary-duplicate/new-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/ordinary-duplicate/existing-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/null-support",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=4;F[k0a=v0a,k1a=v1a,k2a=v2a,null=null];I[v0a=k0a,v1a=k1a,v2a=k2a,null=null]",
+          "outcome": {
+            "return": [
+              null,
+              true,
+              true,
+              true,
+              {
+                "return": null,
+                "error": "java.lang.IllegalArgumentException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=4;F[k0a=v0a,k1a=v1a,k2a=v2a,null=null];I[v0a=k0a,v1a=k1a,v2a=k2a,null=null]",
+          "outcome": {
+            "return": [
+              null,
+              true,
+              true,
+              true,
+              {
+                "return": null,
+                "error": "java.lang.IllegalArgumentException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/forcePut/evicts-other-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k0a=v1a,k2a=v2a];I[v1a=k0a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k0a=v1a,k2a=v2a];I[v1a=k0a,v2a=k2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/entry-setValue/duplicate-refused",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-lifecycle/0",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "k0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "k2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "k0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "k2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-external-replacement/0",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-lifecycle/1",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "v0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "v2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "v0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "v2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-external-replacement/1",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-lifecycle/2",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "entry[k0a=v0a]",
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "entry[k1a=v1a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "entry[k2a=v2a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "entry[k0a=v0a]",
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "entry[k1a=v1a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "entry[k2a=v2a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "forward/view-external-replacement/2",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=2;F[k1a=v1a,k2a=v2a];I[v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "entry[k0a=v0a]",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "entry[k1a=v1a]",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[k0a=v0a,k1a=v1a,k2a=v2a];I[v0a=k0a,v1a=k1a,v2a=k2a]",
+          "after": "size=3;F[k0a=v3a,k1a=v1a,k2a=v2a];I[v3a=k0a,v1a=k1a,v2a=k2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "entry[k0a=v0a]",
+                "error": ""
+              },
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/swap",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k1a,v1a=k0a,v2a=k2a];I[k1a=v0a,k0a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a",
+            "v2a=k2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/cycle",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k1a,v1a=k2a,v2a=k0a];I[k1a=v0a,k2a=v1a,k0a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a",
+            "v2a=k2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/duplicate-new",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=1;F[v0a=k3a];I[k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/duplicate-existing",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=1;F[v0a=k0a];I[k0a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/throw-first",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/replaceAll/throw-second",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=1;F[v0a=k3a];I[k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/insert",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=4;F[v0a=k0a,v1a=k1a,v2a=k2a,v3a=k3a];I[k0a=v0a,k1a=v1a,k2a=v2a,k3a=v3a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=4;F[v0a=k0a,v1a=k1a,v2a=k2a,v3a=k3a];I[k0a=v0a,k1a=v1a,k2a=v2a,k3a=v3a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a",
+            "v2a=k2a",
+            "v3a=k3a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/remove-current",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/remove-next",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k0a,v2a=k2a];I[k0a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k0a,v2a=k2a];I[k0a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v2a=k2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/clear",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": "java.util.ConcurrentModificationException"
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a",
+            "v2a=k2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/replace-current",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a",
+            "v2a=k2a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [
+            "v0a=k0a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forEach/throw-second",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "M3HashBiMapProtocolDiscriminator$ProbeFailure"
+          },
+          "callbacks": [
+            "v0a=k0a",
+            "v1a=k1a"
+          ],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/put-equal-key-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0b=k3a];I[k1a=v1a,k2a=v2a,k3a=v0b]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/put-equal-key-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "k0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "k0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/forcePut-equal-key-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0b=k3a];I[k1a=v1a,k2a=v2a,k3a=v0b]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/forcePut-new-key-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0b,v1a=k1a,v2a=k2a];I[k0b=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0b,v1a=k1a,v2a=k2a];I[k0b=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/entry-setValue-equal-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "k0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "k0b",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/entry-setValue-new-value",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/inverse-put-equal-value-new-key",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0a,v1a=k1a,v2a=k2a];I[k0a=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0b,v1a=k1a,v2a=k2a];I[k0b=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/identity/inverse-forcePut-equal-value-new-key",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0a,v1a=k1a,v2a=k2a];I[k0a=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v3a=k0b,v1a=k1a,v2a=k2a];I[k0b=v3a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": "v0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/ordinary-duplicate/new-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/ordinary-duplicate/existing-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/null-support",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=4;F[v0a=k0a,v1a=k1a,v2a=k2a,null=null];I[k0a=v0a,k1a=v1a,k2a=v2a,null=null]",
+          "outcome": {
+            "return": [
+              null,
+              true,
+              true,
+              true,
+              {
+                "return": null,
+                "error": "java.lang.IllegalArgumentException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=4;F[v0a=k0a,v1a=k1a,v2a=k2a,null=null];I[k0a=v0a,k1a=v1a,k2a=v2a,null=null]",
+          "outcome": {
+            "return": [
+              null,
+              true,
+              true,
+              true,
+              {
+                "return": null,
+                "error": "java.lang.IllegalArgumentException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut/evicts-other-key",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/entry-setValue/duplicate-refused",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": "java.lang.IllegalArgumentException"
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-lifecycle/0",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "v0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "v2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "v0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "v2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-external-replacement/0",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "v1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "v0a",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-lifecycle/1",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "k0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "k2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "k0a",
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "k2a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-external-replacement/1",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "k1a",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/view-lifecycle/2",
+        "classification": "COMMON_API_ASSERTED",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=0;F[];I[]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "entry[v0a=k0a]",
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              {
+                "return": "entry[v1a=k1a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "entry[v2a=k2a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=1;F[v0a=k3a];I[k3a=v0a]",
+          "outcome": {
+            "return": [
+              {
+                "return": null,
+                "error": "java.lang.IllegalStateException"
+              },
+              "entry[v0a=k0a]",
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.lang.NullPointerException"
+              },
+              {
+                "return": null,
+                "error": "java.lang.NullPointerException"
+              },
+              {
+                "return": "entry[v1a=k1a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": "entry[v2a=k2a]",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.NoSuchElementException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": [
+            "java.lang.AssertionError: iterator remove visits and removes every mapping"
+          ]
+        }
+      },
+      {
+        "case": "inverse/view-external-replacement/2",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v1a=k1a,v2a=k2a];I[k1a=v1a,k2a=v2a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "entry[v0a=k0a]",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": "void",
+                "error": ""
+              },
+              {
+                "return": true,
+                "error": ""
+              },
+              {
+                "return": "entry[v1a=k1a]",
+                "error": ""
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": [
+              {
+                "return": "entry[v0a=k0a]",
+                "error": ""
+              },
+              {
+                "return": "k0a",
+                "error": ""
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              },
+              {
+                "return": null,
+                "error": "java.util.ConcurrentModificationException"
+              }
+            ],
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut-order/0",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v3a=k1a,v2a=k2a];I[k0a=v0a,k1a=v3a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v0a=k0a,v3a=k1a,v2a=k2a];I[k0a=v0a,k1a=v3a,k2a=v2a]",
+          "outcome": {
+            "return": null,
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut-order/1",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=3;F[v1a=k1a,v2a=k2a,v0a=k3a];I[k1a=v1a,k2a=v2a,k3a=v0a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut-order/2",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": true,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      },
+      {
+        "case": "inverse/forcePut-order/3",
+        "classification": "SOURCE_DIFFERENCE_RUNTIME_INVENTORY",
+        "equivalent": false,
+        "candidate": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0a=k1a,v2a=k2a];I[k1a=v0a,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        },
+        "oracle": {
+          "before": "size=3;F[v0a=k0a,v1a=k1a,v2a=k2a];I[k0a=v0a,k1a=v1a,k2a=v2a]",
+          "after": "size=2;F[v0b=k1a,v2a=k2a];I[k1a=v0b,k2a=v2a]",
+          "outcome": {
+            "return": "k0a",
+            "error": ""
+          },
+          "callbacks": [],
+          "invariant_failures": [],
+          "common_api_failures": []
+        }
+      }
+    ]
+  }
+}

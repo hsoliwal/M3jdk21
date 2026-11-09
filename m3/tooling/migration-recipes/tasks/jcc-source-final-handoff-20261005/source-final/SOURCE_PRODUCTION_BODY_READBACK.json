@@ -1,0 +1,71 @@
+{
+  "schema": "jcc-source-body-readback/v1",
+  "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+  "repository": "hsoliwal/com.synexia",
+  "files": [
+    {
+      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "git_blob": "f460f84bc5c0dc1a0970af3c6081c23875aa4067",
+      "sha256": "c0f9acc4a64229fb911a5a8e0b211473b058fe67739fc38fca72a4c49c9e4046",
+      "bytes": 48432,
+      "full_text_equal": true
+    },
+    {
+      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "git_blob": "074dd60249893e4c606e68823fdebf191f98f269",
+      "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+      "bytes": 33076,
+      "full_text_equal": true
+    },
+    {
+      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "git_blob": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+      "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+      "bytes": 17440,
+      "full_text_equal": true
+    },
+    {
+      "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "git_blob": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+      "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+      "bytes": 20208,
+      "full_text_equal": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "git_blob": "212086793a5dd621f4e13d096d805a74bfc04782",
+      "sha256": "fc13f8457af623c610651e33507aef7d74d26a3ca31f64061136f8b6540cb729",
+      "bytes": 15511,
+      "full_text_equal": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+      "git_blob": "18f8dd15fb8dcb58873977ac842f662bec303908",
+      "sha256": "337de272aaf58c3421b1d68870e3e83c86c629ec8d23f418e2c6129db08c99db",
+      "bytes": 6223,
+      "full_text_equal": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "git_blob": "fd2134586b5369a0dcd62d207dbc6208168dd72f",
+      "sha256": "cc4e0b24f50b0a6f462c8aa1ff1ddee2eea67d6043158b9e7a8f5a1e91b9e4c9",
+      "bytes": 27183,
+      "full_text_equal": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+      "git_blob": "1b4edfccece8a7e9bb5df3212e3061470f7c13d9",
+      "sha256": "b11640b4d97f95e3c12299f85cf0dbba081ae70b7b6c2c4ff8b2135446be1337",
+      "bytes": 24064,
+      "full_text_equal": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+      "git_blob": "403cf572b2eefe511d5900803098b6c782bb7b48",
+      "sha256": "62be21443ad260be15f7c78ed6ceafc36cec91ba3fc0c6c7f2574b7413d095ce",
+      "bytes": 36655,
+      "full_text_equal": true
+    }
+  ],
+  "method": "Exact complete fetched UTF-8 text equality against the sealed transported production content; complements all-file Git blob/mode readback."
+}

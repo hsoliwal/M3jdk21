@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gates of census group G3 (leaf L087, crate m3-linked-index-spliterator-20261019), 2026-11-06. Record-only directory: no source, test or build file changes. Census re-run on base 48b67fdb6705; test evidence from the module run on base feae0743e6c2 (the last base whose m3/collections builds under -Werror; #2561 left master red at M3PrimitiveRoaringIntSet.java:35).
+gate	command	state	evidence
+census_rerun	python recensus.py (census.py compare(), only the master sha changes) over the 5 crate rows on 48b67fdb6705	PASS	M3LinkedList APPLIED_SUPERSET 58/58; M3LinkedIndexSplitContract and M3LinkedIndexSplitTest APPLIED; M3SlotSpliterators PARTIAL 23/26 and M3SlotArrays PARTIAL 11/12 are parse-context rows (crate parse-context.tsv), every absent line classified in README.md as an older form the owner replaced
+crate_oracle_on_owner	mvn -f m3/collections/pom.xml package (tests) on feae0743e6c2 (census group G2 baseline, S:/m3-scratch/eb-conv/colllarge/g2/base-surefire)	PASS	jdk.m3.collections.M3LinkedIndexSplitTest: tests 1, errors 0, failures 0, skipped 0
+no_source_change	git diff --name-only <base> | grep -v '^m3/collections/qualification/census-g3-20261106/'	PASS	empty: only this directory (README.md, CENSUS_RERUN.tsv, GATES.tsv, RECIPE_MEMORY.tsv)
+jdk_naming	python -I m3/tooling/jdk-naming/jdk_naming.py plan / apply --root . --only m3/collections/qualification/census-g3-20261106/ (after staging)	PASS	see the commit: moves=0 rewrites=0 refusals=0
+protected_owners	PROTECTED.tsv of the collections lane vs the changed paths	PASS	none touched; HOLD_63: none

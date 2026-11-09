@@ -1,0 +1,670 @@
+{
+  "schema": "M3_ARRAY_MASK_1124_ENGINE_SERIAL_RECEIVE_V1",
+  "status": "PASS",
+  "canonical_parent": "1124f5b72744b306884beedebafd8558d49d4c4c",
+  "target_parent": "22e7a14ccd2998d994cb9a74abcdc7abd2086201",
+  "default_canonical_owner_used": true,
+  "records": [
+    {
+      "case": "input-sealing-eight",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/test_prepare.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.11351895332336426,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "2e492bc0517b1e562c7602b89d070621f9207b69d8f9ad3683cdd82864596912"
+    },
+    {
+      "case": "receiver-integrity-nine",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/verify_receiver.py",
+        "--crate",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+        "--dataset",
+        "array-mask-successor",
+        "--recipe-owner",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes",
+        "--output",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1239409446716309,
+      "stdout_sha256": "a1b9da09018fc875b42949371dcfa3ea65eb1771964bb235a4e363329b1547e7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "original-six-check",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/receive.py",
+        "--target",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/materialized1124",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.08081531524658203,
+      "stdout_sha256": "b2b91f98346d45e5eea8781d58e6e67ae90e2f1a522cabdd7b13d11a7d73ed39",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "original-six-apply",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/receive.py",
+        "--target",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/materialized1124"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07734227180480957,
+      "stdout_sha256": "ef657e01631c39e5a4babbc600a16f61aa0907beab587ff3e3f6fd352e46a64d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "original-six-repeat",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/receive.py",
+        "--target",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/materialized1124"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0633852481842041,
+      "stdout_sha256": "9ed6138f14ec8c82d5374c25b29b279759193a7fe5b134648d2fefbbf6e33c8d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "successor-nine-check",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--target",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/materialized1124",
+        "--dataset",
+        "array-mask-successor",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07849359512329102,
+      "stdout_sha256": "1bdc41aacb144628151f1d26ad3d6ecd06d0900d13c00e5ed5d966a0409f3786",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "successor-nine-apply",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--target",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/materialized1124",
+        "--dataset",
+        "array-mask-successor"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07683110237121582,
+      "stdout_sha256": "dbf60be07ca37552ab6ae187712e7c4f22f64ef0d62cce795ed9fbf004cfe4b1",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "successor-nine-repeat",
+      "argv": [
+        "python3",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--target",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/materialized1124",
+        "--dataset",
+        "array-mask-successor"
+      ],
+      "exit_code": 0,
+      "seconds": 0.11438465118408203,
+      "stdout_sha256": "f863b8e13c16c31f8b17286a3c398ff451b7026ec06235208d471a8ad5c97f4b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "changed_paths": [
+    ".github/workflows/m3-long-bitmap-cache-20261017.yml",
+    ".github/workflows/m3-state-mask-histogram-20261017.yml",
+    ".github/workflows/m3-synexia-collection-receiver-20261018.yml",
+    "m3/collections/qualification/array-mask-successor-20261019/CATEGORY_REVIEW.tsv",
+    "m3/collections/qualification/array-mask-successor-20261019/README.md",
+    "m3/collections/qualification/array-mask-successor-20261019/SUCCESSOR.tsv",
+    "m3/collections/qualification/array-mask-successor-20261019/test_verify_successor.py",
+    "m3/collections/qualification/array-mask-successor-20261019/verify_successor.py",
+    "m3/collections/recipe/state-mask-histogram-20261017/verify.sh",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
+    "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramSelfTest.java",
+    "m3/docs/name-mapping.d/m3-array-mask-lookup-20261018.json",
+    "m3/qualification/string-index-reverse-20261018/collections/CONTRACT.md"
+  ],
+  "identical_to_tested_1941255_check_sources": true,
+  "before": {
+    "m3/docs/java-base-array-map-doop-20261019.md": {
+      "sha256": "bb6efe49c7e6a62bfda3d0a482e03cdbd43cc410b3350e9634dec602dd29ef12",
+      "mode": 420,
+      "mtime_ns": 1792387386954147295
+    },
+    "m3/collections/algorithm-catalog/java-base-array-map-atoms-20261019.tsv": {
+      "sha256": "baebc583b3d130d5be445f514d0974f19ac992b9471125dcbecb0d9e1c7c357f",
+      "mode": 420,
+      "mtime_ns": 1792387385951991940
+    },
+    "m3/collections/algorithm-catalog/readonly-doop-slot-views-20261019.tsv": {
+      "sha256": "57e686bf383cd18778660241fb77998ba2877b8d327fe01fcdb0778cac2a39f8",
+      "mode": 420,
+      "mtime_ns": 1792387385952157955
+    },
+    "m3/collections/docs/M3_MUTABLE_FILTERED_SLOT_20261018.md": {
+      "sha256": "2aabf0c2b263e4e9991eb263535856ceae3cdf98b753bdc550d3aba673b20f0d",
+      "mode": 420,
+      "mtime_ns": 1792387385952628850
+    },
+    "m3/collections/docs/M3_READONLY_DOOP_SLOTMAP_20261019.md": {
+      "sha256": "6d7876c8c5d871522fe317664341179d261c914c79c5f2d0fb78278c5dc4c3b7",
+      "mode": 420,
+      "mtime_ns": 1792387385952791330
+    },
+    "m3/collections/docs/M3_INDEXED_FILTER_SORT_FUSION_20261018.md": {
+      "sha256": "15abb8cdcdbab95e9a280715d634d5f2bdcf729666b768aa9bf5af046057c585",
+      "mode": 420,
+      "mtime_ns": 1792387385952375757
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java": {
+      "sha256": "9641eb117b250d19c287d45bc084c0df7f03801cfc13a646c902fd3f4e63bf4c",
+      "mode": 420,
+      "mtime_ns": 1792387386443224706
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java": {
+      "sha256": "3827ba7e8b365e582b70f5ac53d27fe49745cb9e4ae08701084a769b30eb7163",
+      "mode": 420,
+      "mtime_ns": 1792387385305213352
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": {
+      "sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
+      "mode": 420,
+      "mtime_ns": 1792387383598168349
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java": {
+      "sha256": "4cb21dae105bbd2ca2d2772c7ba097a133e67e6de4fa77ff4deed3a354642d23",
+      "mode": 420,
+      "mtime_ns": 1792387383599769573
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3GenericCollections.java": {
+      "sha256": "fc2750ba43a8a3c5895c807d07e6cf49cd29fbab041d045b1c80c713588a057f",
+      "mode": 420,
+      "mtime_ns": 1792387385953832627
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java": {
+      "sha256": "2d44b9f958a9526fb95aeca94b51ff2d2e8b4334be8bdefcc67dc56fd8b50ddd",
+      "mode": 420,
+      "mtime_ns": 1792387384677215722
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java": {
+      "sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc",
+      "mode": 420,
+      "mtime_ns": 1792387383598564073
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongPredicates.java": {
+      "sha256": "7f4531b36c0749a3b9a174f5de88e236492bd054d5c11237d9616eb148cfd6c8",
+      "mode": 420,
+      "mtime_ns": 1792387385953996850
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java": {
+      "sha256": "e2b44bd2346d5729f3b16755c8bc96e4aea8fe9f62abde2e0f415ccc60a81a7e",
+      "mode": 420,
+      "mtime_ns": 1792387385302468160
+    },
+    "m3/collections/src/main/native/collections/m3_state_mask_histogram.c": {
+      "sha256": "0673b98601d4155ac2ea2d51f972e6f23f89e7d6c3a6105d6efd84b89fce9c1d",
+      "mode": 420,
+      "mtime_ns": 1792387384086121188
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramSelfTest.java": {
+      "sha256": "693bd6e7bee9d730b4104e1f15d39a0e5ec2917583f92af85d2eaddf1506b176",
+      "mode": 420,
+      "mtime_ns": 1792387384086351608
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotTest.java": {
+      "sha256": "5f63a74dad076901696951335d451c29ee0be44097a484ffc4850c8add8f5a75",
+      "mode": 420,
+      "mtime_ns": 1792387386953618244
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotTest.java": {
+      "sha256": "4dad3d95e0aed26521b8c79cbc94d5913ba456c752ae7b44e645425463cee3ea",
+      "mode": 420,
+      "mtime_ns": 1792387386953874502
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionTest.java": {
+      "sha256": "8a79d6b9a4c1dac5beef4567608c3e2dc4b2d5ca34148b80413494900e2fec62",
+      "mode": 420,
+      "mtime_ns": 1792387386443639899
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionSelfTest.java": {
+      "sha256": "a1ca7edb1acab9c92b5adcd4c38ece314b91439f293aef74ca3a6a36fc00d2be",
+      "mode": 420,
+      "mtime_ns": 1792387386443518480
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java": {
+      "sha256": "93a537d491ee3dd514065a0f7246581f194353ccead8b54225b9ba3570dbfc4d",
+      "mode": 420,
+      "mtime_ns": 1792387386953336038
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongDeepFilterSelfTest.java": {
+      "sha256": "6c6dae298f7a43f89b2ec5e621dc9ef6960b2f8b848f5e3e6dc65c8fcdf1d61a",
+      "mode": 420,
+      "mtime_ns": 1792387386443776200
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java": {
+      "sha256": "c041ae3a3308be273aa2a3794fad0437321a8fce38516772cbba6226b3b65ce2",
+      "mode": 420,
+      "mtime_ns": 1792387386953728807
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java": {
+      "sha256": "38a4258d2ea52d351140b81fe4da28d348d4be40e893ed4cadc968157316fcb0",
+      "mode": 420,
+      "mtime_ns": 1792387384085692876
+    },
+    "m3/collections/recipe/state-mask-histogram-20261017/verify.sh": {
+      "sha256": "c78c7ce15465edd5c79a81e592ee1e8b87ff7e25b8fdeefbe8736658a6f4df7d",
+      "mode": 420,
+      "mtime_ns": 1792387383599635655
+    },
+    "m3/collections/qualification/doop-product-convergence-20261019/RECEIPT.md": {
+      "sha256": "44dc05b29ebac27175b97fbb768a05e96b8e7c214041a3cada0e719f6e2f4ae7",
+      "mode": 420,
+      "mtime_ns": 1792387385953222637
+    },
+    "m3/collections/qualification/long-predicate-avl-20261019/RECEIPT.md": {
+      "sha256": "8e3b831d0ee82462339856705d1bbb2c3f4b10826d0e37ebc7abbe0bc2a12a11",
+      "mode": 420,
+      "mtime_ns": 1792387385953611841
+    },
+    "src/java.base/share/classes/java/util/IdentityHashMap.java": {
+      "sha256": "f4db1f943d2468d5edfc46512fcd117950c8716481b846eaccef84806f5e48a9",
+      "mode": 420,
+      "mtime_ns": 1792387388044115153
+    },
+    "src/java.base/share/classes/java/util/EnumMap.java": {
+      "sha256": "fca32ffe4a03e4c18eb01e409d7a97151b03b2f68f059169952f3ac98a7690d2",
+      "mode": 420,
+      "mtime_ns": 1792387387450191854
+    },
+    "test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java": {
+      "sha256": "09859bb1b15827365701ab139f9ec767a9a1f9fceb240c3ebb68e827b04b342a",
+      "mode": 420,
+      "mtime_ns": 1792387388529575358
+    },
+    "test/jdk/java/util/IdentityHashMap/DirectOffsetString.java": {
+      "sha256": "c24d349f1dda3703305a688d9a0ad5b707c21c577a01160ef1dec2bd19c731be",
+      "mode": 420,
+      "mtime_ns": 1792387388529824746
+    },
+    ".github/workflows/m3-synexia-collection-receiver-20261018.yml": {
+      "sha256": "bc5db56cd38867b076c3ee5e84dd465752d5cded77968498556c1c467a8aa692",
+      "mode": 420,
+      "mtime_ns": 1792387383599266070
+    },
+    ".github/workflows/m3-doop-indexed-view-contracts-20261019.yml": {
+      "sha256": "9f3b5e776c68fe316a3db4f00c39687d4b7debee3b421ed2f955b0822e8d0fef",
+      "mode": 420,
+      "mtime_ns": 1792387385951010782
+    },
+    ".github/workflows/m3-long-bitmap-cache-20261017.yml": {
+      "sha256": "4e59df9c60b1f95f774f156572649d345e07cc3a68e4923942f3eb2d329837c9",
+      "mode": 420,
+      "mtime_ns": 1792387383598862073
+    },
+    ".github/workflows/m3-javabase-enummap-doop-20261019.yml": {
+      "sha256": "25b33c03fbd20772d62928836bfe92be33fde6c5bd6173aab17f4ada4fd2e2ad",
+      "mode": 420,
+      "mtime_ns": 1792387385951541966
+    },
+    ".github/workflows/m3-state-mask-histogram-20261017.yml": {
+      "sha256": "18bb322c4febdcc6b0516d11f85993dceeb8105f84041ac22a85b5d45aa08e70",
+      "mode": 420,
+      "mtime_ns": 1792387383599018244
+    },
+    ".github/workflows/m3-doop-product-convergence-20261019.yml": {
+      "sha256": "0a7cd2f8998f2e75619f48a79ab97c3502f0057b66013edc07ed25a79ce56768",
+      "mode": 420,
+      "mtime_ns": 1792387385951327209
+    },
+    ".github/workflows/m3-long-filter-balanced-20261017.yml": {
+      "sha256": "7403928be13a07f75beca7d189fd5ad583538a6cd7a91e5b3d053d2a9b1e78fe",
+      "mode": 420,
+      "mtime_ns": 1792387385951729032
+    }
+  },
+  "after": {
+    "m3/docs/java-base-array-map-doop-20261019.md": {
+      "sha256": "bb6efe49c7e6a62bfda3d0a482e03cdbd43cc410b3350e9634dec602dd29ef12",
+      "mode": 420,
+      "mtime_ns": 1792387386954147295
+    },
+    "m3/collections/algorithm-catalog/java-base-array-map-atoms-20261019.tsv": {
+      "sha256": "baebc583b3d130d5be445f514d0974f19ac992b9471125dcbecb0d9e1c7c357f",
+      "mode": 420,
+      "mtime_ns": 1792387385951991940
+    },
+    "m3/collections/algorithm-catalog/readonly-doop-slot-views-20261019.tsv": {
+      "sha256": "57e686bf383cd18778660241fb77998ba2877b8d327fe01fcdb0778cac2a39f8",
+      "mode": 420,
+      "mtime_ns": 1792387385952157955
+    },
+    "m3/collections/docs/M3_MUTABLE_FILTERED_SLOT_20261018.md": {
+      "sha256": "2aabf0c2b263e4e9991eb263535856ceae3cdf98b753bdc550d3aba673b20f0d",
+      "mode": 420,
+      "mtime_ns": 1792387385952628850
+    },
+    "m3/collections/docs/M3_READONLY_DOOP_SLOTMAP_20261019.md": {
+      "sha256": "6d7876c8c5d871522fe317664341179d261c914c79c5f2d0fb78278c5dc4c3b7",
+      "mode": 420,
+      "mtime_ns": 1792387385952791330
+    },
+    "m3/collections/docs/M3_INDEXED_FILTER_SORT_FUSION_20261018.md": {
+      "sha256": "15abb8cdcdbab95e9a280715d634d5f2bdcf729666b768aa9bf5af046057c585",
+      "mode": 420,
+      "mtime_ns": 1792387385952375757
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java": {
+      "sha256": "9641eb117b250d19c287d45bc084c0df7f03801cfc13a646c902fd3f4e63bf4c",
+      "mode": 420,
+      "mtime_ns": 1792387386443224706
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java": {
+      "sha256": "3827ba7e8b365e582b70f5ac53d27fe49745cb9e4ae08701084a769b30eb7163",
+      "mode": 420,
+      "mtime_ns": 1792387385305213352
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": {
+      "sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
+      "mode": 420,
+      "mtime_ns": 1792387383598168349
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java": {
+      "sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
+      "mode": 420,
+      "mtime_ns": 1792388029364295151
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3GenericCollections.java": {
+      "sha256": "fc2750ba43a8a3c5895c807d07e6cf49cd29fbab041d045b1c80c713588a057f",
+      "mode": 420,
+      "mtime_ns": 1792387385953832627
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java": {
+      "sha256": "2d44b9f958a9526fb95aeca94b51ff2d2e8b4334be8bdefcc67dc56fd8b50ddd",
+      "mode": 420,
+      "mtime_ns": 1792387384677215722
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java": {
+      "sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc",
+      "mode": 420,
+      "mtime_ns": 1792387383598564073
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongPredicates.java": {
+      "sha256": "7f4531b36c0749a3b9a174f5de88e236492bd054d5c11237d9616eb148cfd6c8",
+      "mode": 420,
+      "mtime_ns": 1792387385953996850
+    },
+    "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java": {
+      "sha256": "e2b44bd2346d5729f3b16755c8bc96e4aea8fe9f62abde2e0f415ccc60a81a7e",
+      "mode": 420,
+      "mtime_ns": 1792387385302468160
+    },
+    "m3/collections/src/main/native/collections/m3_state_mask_histogram.c": {
+      "sha256": "05b9dd651f4c4b8c6759bd06bb3bf3107199be0d39c6c86daebd5e1e4fd8c111",
+      "mode": 420,
+      "mtime_ns": 1792388029364718075
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramSelfTest.java": {
+      "sha256": "1c35603d42754411a6d5c068ae2b19cad3dde9ae2605ce5b15222d33cc95d2d6",
+      "mode": 420,
+      "mtime_ns": 1792388029365223972
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotTest.java": {
+      "sha256": "5f63a74dad076901696951335d451c29ee0be44097a484ffc4850c8add8f5a75",
+      "mode": 420,
+      "mtime_ns": 1792387386953618244
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotTest.java": {
+      "sha256": "4dad3d95e0aed26521b8c79cbc94d5913ba456c752ae7b44e645425463cee3ea",
+      "mode": 420,
+      "mtime_ns": 1792387386953874502
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionTest.java": {
+      "sha256": "8a79d6b9a4c1dac5beef4567608c3e2dc4b2d5ca34148b80413494900e2fec62",
+      "mode": 420,
+      "mtime_ns": 1792387386443639899
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionSelfTest.java": {
+      "sha256": "a1ca7edb1acab9c92b5adcd4c38ece314b91439f293aef74ca3a6a36fc00d2be",
+      "mode": 420,
+      "mtime_ns": 1792387386443518480
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java": {
+      "sha256": "93a537d491ee3dd514065a0f7246581f194353ccead8b54225b9ba3570dbfc4d",
+      "mode": 420,
+      "mtime_ns": 1792387386953336038
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongDeepFilterSelfTest.java": {
+      "sha256": "6c6dae298f7a43f89b2ec5e621dc9ef6960b2f8b848f5e3e6dc65c8fcdf1d61a",
+      "mode": 420,
+      "mtime_ns": 1792387386443776200
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java": {
+      "sha256": "c041ae3a3308be273aa2a3794fad0437321a8fce38516772cbba6226b3b65ce2",
+      "mode": 420,
+      "mtime_ns": 1792387386953728807
+    },
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java": {
+      "sha256": "5104231f3136b0611935a48438bc86f854686e03fe38787eb35d65efd9d56ff3",
+      "mode": 420,
+      "mtime_ns": 1792388029364996737
+    },
+    "m3/collections/recipe/state-mask-histogram-20261017/verify.sh": {
+      "sha256": "ac361bcad8d89d2a5ba35a568a05e6e1f05695fdc42d8e5f0e741c1900b920f2",
+      "mode": 420,
+      "mtime_ns": 1792388029613435109
+    },
+    "m3/collections/qualification/doop-product-convergence-20261019/RECEIPT.md": {
+      "sha256": "44dc05b29ebac27175b97fbb768a05e96b8e7c214041a3cada0e719f6e2f4ae7",
+      "mode": 420,
+      "mtime_ns": 1792387385953222637
+    },
+    "m3/collections/qualification/long-predicate-avl-20261019/RECEIPT.md": {
+      "sha256": "8e3b831d0ee82462339856705d1bbb2c3f4b10826d0e37ebc7abbe0bc2a12a11",
+      "mode": 420,
+      "mtime_ns": 1792387385953611841
+    },
+    "m3/collections/qualification/array-mask-successor-20261019/CATEGORY_REVIEW.tsv": {
+      "sha256": "ca26fca4eff016266b2669df382a8c3679b73185767dfa61d0896d6cf304d1b3",
+      "mode": 420,
+      "mtime_ns": 1792388029611502306
+    },
+    "m3/collections/qualification/array-mask-successor-20261019/SUCCESSOR.tsv": {
+      "sha256": "cce9759e40ab9c513da9c2395b362d03ccb6d6876980d600b4dfd281091b4822",
+      "mode": 420,
+      "mtime_ns": 1792388029612216090
+    },
+    "m3/collections/qualification/array-mask-successor-20261019/test_verify_successor.py": {
+      "sha256": "bb5e78a7c7cae5ead39a5814dcdf08d584d589bc007600d4a6d975b9656362c4",
+      "mode": 420,
+      "mtime_ns": 1792388029612586416
+    },
+    "m3/collections/qualification/array-mask-successor-20261019/verify_successor.py": {
+      "sha256": "829119e215181e55349c6049e74f3817ce76c7db857b615ced1243b6115d73a0",
+      "mode": 420,
+      "mtime_ns": 1792388029613004574
+    },
+    "m3/collections/qualification/array-mask-successor-20261019/README.md": {
+      "sha256": "b70c858f4df9efea2d7eb69f4e36e8670bf647c5aae11d27ebff4cb87e3bdbee",
+      "mode": 420,
+      "mtime_ns": 1792388029611865502
+    },
+    "m3/qualification/string-index-reverse-20261018/collections/CONTRACT.md": {
+      "sha256": "b26eb0e37326f91dcbe4988c8c8fe23347639e5cfcbb99908687734ef50f286d",
+      "mode": 420,
+      "mtime_ns": 1792388029366028900
+    },
+    "m3/docs/name-mapping.d/m3-array-mask-lookup-20261018.json": {
+      "sha256": "749608e7fc3df9bde30e7135f7319ce98fd92709bd986e4a7d8d7f1fc24f5401",
+      "mode": 420,
+      "mtime_ns": 1792388029365603382
+    },
+    "src/java.base/share/classes/java/util/IdentityHashMap.java": {
+      "sha256": "f4db1f943d2468d5edfc46512fcd117950c8716481b846eaccef84806f5e48a9",
+      "mode": 420,
+      "mtime_ns": 1792387388044115153
+    },
+    "src/java.base/share/classes/java/util/EnumMap.java": {
+      "sha256": "fca32ffe4a03e4c18eb01e409d7a97151b03b2f68f059169952f3ac98a7690d2",
+      "mode": 420,
+      "mtime_ns": 1792387387450191854
+    },
+    "test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java": {
+      "sha256": "09859bb1b15827365701ab139f9ec767a9a1f9fceb240c3ebb68e827b04b342a",
+      "mode": 420,
+      "mtime_ns": 1792387388529575358
+    },
+    "test/jdk/java/util/IdentityHashMap/DirectOffsetString.java": {
+      "sha256": "c24d349f1dda3703305a688d9a0ad5b707c21c577a01160ef1dec2bd19c731be",
+      "mode": 420,
+      "mtime_ns": 1792387388529824746
+    },
+    ".github/workflows/m3-synexia-collection-receiver-20261018.yml": {
+      "sha256": "4c6a68eabacfb2436ea8103bde72916cff3c01eda564c5848e7b8a8ed18f7646",
+      "mode": 420,
+      "mtime_ns": 1792388029610952495
+    },
+    ".github/workflows/m3-doop-indexed-view-contracts-20261019.yml": {
+      "sha256": "9f3b5e776c68fe316a3db4f00c39687d4b7debee3b421ed2f955b0822e8d0fef",
+      "mode": 420,
+      "mtime_ns": 1792387385951010782
+    },
+    ".github/workflows/m3-long-bitmap-cache-20261017.yml": {
+      "sha256": "03c4bcdfb2d2341b5c0d79396e7b9a1add7b9cb6e77bc5e07f688a97d108c375",
+      "mode": 420,
+      "mtime_ns": 1792388029609933821
+    },
+    ".github/workflows/m3-javabase-enummap-doop-20261019.yml": {
+      "sha256": "25b33c03fbd20772d62928836bfe92be33fde6c5bd6173aab17f4ada4fd2e2ad",
+      "mode": 420,
+      "mtime_ns": 1792387385951541966
+    },
+    ".github/workflows/m3-state-mask-histogram-20261017.yml": {
+      "sha256": "f674ff7f7b15d20b95abd4e775e105c98129862955513a7a1673f5ea7484c793",
+      "mode": 420,
+      "mtime_ns": 1792388029610517052
+    },
+    ".github/workflows/m3-doop-product-convergence-20261019.yml": {
+      "sha256": "0a7cd2f8998f2e75619f48a79ab97c3502f0057b66013edc07ed25a79ce56768",
+      "mode": 420,
+      "mtime_ns": 1792387385951327209
+    },
+    ".github/workflows/m3-long-filter-balanced-20261017.yml": {
+      "sha256": "7403928be13a07f75beca7d189fd5ad583538a6cd7a91e5b3d053d2a9b1e78fe",
+      "mode": 420,
+      "mtime_ns": 1792387385951729032
+    }
+  },
+  "logs": [
+    {
+      "path": "input-sealing-eight.stderr.log",
+      "sha256": "2e492bc0517b1e562c7602b89d070621f9207b69d8f9ad3683cdd82864596912",
+      "bytes": 106,
+      "utf8": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.038s\n\nOK\n"
+    },
+    {
+      "path": "input-sealing-eight.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "original-six-apply.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "original-six-apply.stdout.log",
+      "sha256": "ef657e01631c39e5a4babbc600a16f61aa0907beab587ff3e3f6fd352e46a64d",
+      "bytes": 60,
+      "utf8": "M3_SDK_RESULTS_RECEIVER_PASS mode=apply targets=6 changes=6\n"
+    },
+    {
+      "path": "original-six-check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "original-six-check.stdout.log",
+      "sha256": "b2b91f98346d45e5eea8781d58e6e67ae90e2f1a522cabdd7b13d11a7d73ed39",
+      "bytes": 60,
+      "utf8": "M3_SDK_RESULTS_RECEIVER_PASS mode=check targets=6 changes=6\n"
+    },
+    {
+      "path": "original-six-repeat.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "original-six-repeat.stdout.log",
+      "sha256": "9ed6138f14ec8c82d5374c25b29b279759193a7fe5b134648d2fefbbf6e33c8d",
+      "bytes": 60,
+      "utf8": "M3_SDK_RESULTS_RECEIVER_PASS mode=apply targets=6 changes=0\n"
+    },
+    {
+      "path": "receiver-integrity-nine.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "receiver-integrity-nine.stdout.log",
+      "sha256": "a1b9da09018fc875b42949371dcfa3ea65eb1771964bb235a4e363329b1547e7",
+      "bytes": 54,
+      "utf8": "M3_AST_BUILD_RECEIVER_CONTRACT_PASS cases=9 targets=9\n"
+    },
+    {
+      "path": "successor-nine-apply.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "successor-nine-apply.stdout.log",
+      "sha256": "dbf60be07ca37552ab6ae187712e7c4f22f64ef0d62cce795ed9fbf004cfe4b1",
+      "bytes": 138,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 9, \"dataset\": \"array-mask-successor\", \"mode\": \"apply\", \"targets\": 9}\n"
+    },
+    {
+      "path": "successor-nine-check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "successor-nine-check.stdout.log",
+      "sha256": "1bdc41aacb144628151f1d26ad3d6ecd06d0900d13c00e5ed5d966a0409f3786",
+      "bytes": 138,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 9, \"dataset\": \"array-mask-successor\", \"mode\": \"check\", \"targets\": 9}\n"
+    },
+    {
+      "path": "successor-nine-repeat.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "successor-nine-repeat.stdout.log",
+      "sha256": "f863b8e13c16c31f8b17286a3c398ff451b7026ec06235208d471a8ad5c97f4b",
+      "bytes": 138,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"array-mask-successor\", \"mode\": \"apply\", \"targets\": 9}\n"
+    }
+  ]
+}

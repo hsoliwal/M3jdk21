@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# mutants of retained-port-20261107: one per ADAPT class, applied to a copy of m3/llm, killed by the module's own surefire run (mutants.py)
+mutant	file	anchor_sha256	replacement_sha256	test	state	evidence
+M1	m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlTaskService.java	01f730bce7fcef005f980f10ac1b431eb776388e1d99c7e6355ef152addba599	1de26a0d3c5b807cdc93febe1e444b58cee9fdb82d7f0900cfd1c0babc6051de	ChromeMlTaskServiceMigrationTest	KILLED	plan() surrogate guard removed: a segment may split a surrogate pair; the test expects end 7999; mvn exit=1; [ERROR] Tests run: 8, Failures: 1, Errors: 0, Skipped: 0; log S:\m3-scratch\eb-conv\llmport\mutant\M1-mvn-test.log

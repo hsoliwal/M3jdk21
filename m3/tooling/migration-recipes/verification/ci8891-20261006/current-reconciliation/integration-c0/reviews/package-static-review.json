@@ -1,0 +1,58 @@
+{
+  "actualProjectStagingIdentitiesMatch": true,
+  "archiveOnlySignificantTabFixtures": 2,
+  "candidateModulesImported": false,
+  "compiledToolCacheSettingsBodiesObserved": false,
+  "consumerQualificationClaimed": false,
+  "flatProjectFiles": 290,
+  "freshBundleAndExtractionAbsentAtReview": true,
+  "gatesExecutedByReviewer": false,
+  "logicalProjectFiles": 292,
+  "originalStopAndFreshPassRetainedSeparately": true,
+  "packageExecutedByReviewer": false,
+  "reviewRecordIncludedInAlreadySealedArchiveInputs": false,
+  "reviewed": [
+    {
+      "bytes": 1054690,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/PACKAGE-SPEC.json",
+      "sha256": "89617ef4b2048025987f397c8bc821c0a6fbfedb1912d5428019fdf3240d2d47"
+    },
+    {
+      "bytes": 4669388,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/SOURCE-CLOSURE.json",
+      "sha256": "ec0b69741e4b9247d5740d4fb0a160368c9378a480c09c19a514534fa0426678"
+    },
+    {
+      "bytes": 361405,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/package-plan.json",
+      "sha256": "f50498e692e4962ff3bfcab0f35c8983af2c13b7138516ee5d644c0e25ba1cbf"
+    },
+    {
+      "bytes": 6916,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/prepare_package.py",
+      "sha256": "db6fe1af449cd99bc92e593d0d042bf7378a7104803ddd7b9f3d5a654fd93a2e"
+    },
+    {
+      "bytes": 7924,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/finish_package.py",
+      "sha256": "ecb44caaf7841a5c3aeca8b52da6fa2756718841cbce5e430645417ce048946b"
+    },
+    {
+      "bytes": 1861,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/reconstruct.py",
+      "sha256": "97341f61caef953e07775902e55a69faaf8e3775f0a7a8060f9140a77c11320b"
+    }
+  ],
+  "schema": "m3.ic0.independent-package-static-review/1",
+  "sealedInputDispositions": {
+    "EXACT_BODY_INCLUDED": 1059,
+    "EXCLUDED_IDENTITY_ONLY": 1584
+  },
+  "selectedBodies": 2873,
+  "selectedBytes": 77302339,
+  "sourceInventoryAndPlanEqual": true,
+  "sourceMappingModesMatch": true,
+  "specHelperOwnerPinsRehashed": 2879,
+  "status": "CLEAR_STATIC_IDENTITY_REVIEW_ONLY",
+  "unchangedArchiveOwnerSHA256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556"
+}

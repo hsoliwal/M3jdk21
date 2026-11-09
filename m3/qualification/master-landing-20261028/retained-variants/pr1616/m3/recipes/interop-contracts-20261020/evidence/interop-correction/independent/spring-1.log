@@ -1,0 +1,6 @@
+['/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/java', '-ea', '-Xcheck:jni', '-cp', '/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/independent/spring-classes:/tmp/m3jdk21-toolchain-20261020/m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar:/tmp/m3jdk21-toolchain-20261020/m2/org/springframework/spring-core/6.2.0/spring-core-6.2.0.jar', 'SpringExceptionParityProbe']
+SPRING_MINIMAL_BORROWED_FIXED_LIST_PASS exception=java.lang.UnsupportedOperationException
+SPRING_FIRST_SEEDED_REFUSAL step=23 op=4 key=30 value=3 exception=java.lang.UnsupportedOperationException before={6=[45], 30=[19], null=[6, 6, 40], 1=[25, 25], 29=[25], 16=[35], 24=[15], 5=[9], 23=[49], 21=[11]} after={6=[45], 30=[19], null=[6, 6, 40], 1=[25, 25], 29=[25], 16=[35], 24=[15], 5=[9], 23=[49], 21=[11]}
+SPRING_SEEDED_EXCEPTION_PARITY_PASS operations=4500 refusals=209 checksPerOperation=7
+
+EXIT=0

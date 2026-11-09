@@ -1,0 +1,23 @@
+type	role	uses_unsafe	jdk_form
+Access	ACCESS_TEMPLATE	yes	one access template
+ByteBufferAccess	ACCESS	no	in java.base: byte[]/ByteBuffer via jdk.internal.util.ByteArrayLittleEndian and ScopedMemoryAccess; no sun.misc.Unsafe
+CharSequenceAccess	ACCESS	no	in java.base: byte[]/ByteBuffer via jdk.internal.util.ByteArrayLittleEndian and ScopedMemoryAccess; no sun.misc.Unsafe
+CityAndFarmHash_1_1	ALGORITHM	no	kernel inlined (jdk.internal.m3.hash.M3*)
+CompactLatin1CharSequenceAccess	ACCESS	no	in java.base: byte[]/ByteBuffer via jdk.internal.util.ByteArrayLittleEndian and ScopedMemoryAccess; no sun.misc.Unsafe
+DualHashFunction	FACADE	no	jdk.m3.hash public API (superset: long + tuple results, seeds)
+HotSpotPrior7u6StringHash	STRING_INTERNALS	no	in java.base: read String.value/coder directly (JDK-only; a library needs Unsafe and per-JVM variants)
+LongHashFunction	FACADE	no	jdk.m3.hash public API (superset: long + tuple results, seeds)
+LongTupleHashFunction	FACADE	no	jdk.m3.hash public API (superset: long + tuple results, seeds)
+Maths	KERNEL	no	inlined
+MetroHash	ALGORITHM	no	kernel inlined (jdk.internal.m3.hash.M3*)
+ModernCompactStringHash	STRING_INTERNALS	no	in java.base: read String.value/coder directly (JDK-only; a library needs Unsafe and per-JVM variants)
+ModernHotSpotStringHash	STRING_INTERNALS	no	in java.base: read String.value/coder directly (JDK-only; a library needs Unsafe and per-JVM variants)
+MurmurHash_3	ALGORITHM	no	kernel inlined (jdk.internal.m3.hash.M3*)
+Primitives	KERNEL	no	inlined
+StringHash	STRING_INTERNALS_TEMPLATE	no	collapses to one JDK path over String bytes (LATIN1/UTF16)
+UnknownJvmStringHash	STRING_INTERNALS	no	in java.base: read String.value/coder directly (JDK-only; a library needs Unsafe and per-JVM variants)
+UnsafeAccess	ACCESS	yes	in java.base: byte[]/ByteBuffer via jdk.internal.util.ByteArrayLittleEndian and ScopedMemoryAccess; no sun.misc.Unsafe
+Util	KERNEL	no	inlined
+WyHash	ALGORITHM	no	kernel inlined (jdk.internal.m3.hash.M3*)
+XXH3	ALGORITHM	no	kernel inlined (jdk.internal.m3.hash.M3*)
+XxHash	ALGORITHM	no	kernel inlined (jdk.internal.m3.hash.M3*)

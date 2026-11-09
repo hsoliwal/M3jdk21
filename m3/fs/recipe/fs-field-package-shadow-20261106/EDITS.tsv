@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Hash pins of recipe FS_FIELD_PACKAGE_SHADOW v1 (apply.py): sha256 of the file before (master 0909649e8f7, LF as in
+# git) and after; one row per line edit (line and old = the preimage line). Rule FIELD_SHADOWS_RENAMED_PACKAGE: a
+# field or local named like the first segment of a renamed package (jdk) obscures that package in expressions.
+file	before_sha256	after_sha256	line	op	old	new	rule
+m3/fs/src/main/java/jdk/m3/fs/M3FS.java	748c6c3f1428485119fa2afc0ea4770e06113214a927bd66a6fbc68ab346a51a	a7462857e04682133b7d8841e6120d8de85b20a57069b55ce81c86e23bbe3148	646	INSERT_BEFORE	    private java.util.regex.Pattern jdk;	    //FLLDCIM: MRL - fs-field-package-shadow-20261106: was jdk, which obscured package jdk.m3.fs.internal.re2j (JLS 6.4.2)	FIELD_SHADOWS_RENAMED_PACKAGE
+m3/fs/src/main/java/jdk/m3/fs/M3FS.java	748c6c3f1428485119fa2afc0ea4770e06113214a927bd66a6fbc68ab346a51a	a7462857e04682133b7d8841e6120d8de85b20a57069b55ce81c86e23bbe3148	646	REPLACE	    private java.util.regex.Pattern jdk;	    private java.util.regex.Pattern jdkPattern;	FIELD_SHADOWS_RENAMED_PACKAGE
+m3/fs/src/main/java/jdk/m3/fs/M3FS.java	748c6c3f1428485119fa2afc0ea4770e06113214a927bd66a6fbc68ab346a51a	a7462857e04682133b7d8841e6120d8de85b20a57069b55ce81c86e23bbe3148	653	REPLACE	        if (jdk == null) jdk = java.util.regex.Pattern.compile(program.expression());	        if (jdkPattern == null) jdkPattern = java.util.regex.Pattern.compile(program.expression());	FIELD_SHADOWS_RENAMED_PACKAGE
+m3/fs/src/main/java/jdk/m3/fs/M3FS.java	748c6c3f1428485119fa2afc0ea4770e06113214a927bd66a6fbc68ab346a51a	a7462857e04682133b7d8841e6120d8de85b20a57069b55ce81c86e23bbe3148	654	REPLACE	        java.util.regex.Matcher matcher = jdk.matcher(value);	        java.util.regex.Matcher matcher = jdkPattern.matcher(value);	FIELD_SHADOWS_RENAMED_PACKAGE

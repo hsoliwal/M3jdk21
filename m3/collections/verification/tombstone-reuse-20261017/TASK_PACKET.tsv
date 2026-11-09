@@ -1,0 +1,12 @@
+key	value
+source_doc	M3JDK21 porting invariant / Synexia M3 recipe-first
+task_packet	active
+run.mode	apply (reviewable candidate)
+run.profile	selected java21
+targets.modules	m3/collections
+invariant_locks	PUBLIC_API=LOCKED;EXTERNAL_BEHAVIOR=LOCKED;JNI_ABI=LOCKED;STRING_PHASE=LOCKED
+allowed_delta	Two growth decision atoms; test/verification/mapping/receipt files
+forbidden	JDK class replacement;runtime Synexia dependency;relicense upstream;merge without jtreg
+verify_order	diff;lint;compile;tests;runtime;receiver;JDK
+output_contract	STATUS.tsv;FINAL_REPORT.md;RUN_CONTEXT.tsv;PROVENANCE.tsv;VERIFY_CONTRACT.tsv;OUTPUT_CONTRACT.tsv
+stop_conditions	hash drift;semantic divergence;unexecuted Maven/jtreg gates hold

@@ -1,0 +1,10 @@
+    /** Third phase: use the existing M3 pattern index; recognition is not equivalence. */
+    public static PatternReviewed patternize(JitChecked tested) {
+        Objects.requireNonNull(tested, "tested");
+        Map<String, M3AtomPatternIndex.Entry> entries =
+                M3AtomPatternIndex.classify(tested.before.atoms);
+        if (entries.size() != tested.before.atoms.size()) {
+            throw new IllegalStateException("duplicate or missing atom identity");
+        }
+        return new PatternReviewed(tested, entries);
+    }

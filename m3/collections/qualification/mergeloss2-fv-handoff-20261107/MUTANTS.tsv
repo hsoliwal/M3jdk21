@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# mutants.sh output (WSL): one mutant per restored member of the compactor span.
+id	member	state	evidence
+HEAD	unmutated candidate	PASS	all pass
+M01	m3_selected_span (trailing trim)	KILLED	m3_sparse_mask_reads:failure 73: row_units==(EXPECT_SPARSE ? (selected<0?0UL:1UL) m3_mask_compactor_spans:FAIL only enclosing admitted spans transfer rows=1 elements=
+M02	m3_selected_span (zero-mask whole page)	KILLED	m3_sparse_mask_reads:failure 79: Java_jdk_m3_collections_M3IndexMaskCompactor_sel m3_mask_compactor_spans:family=0 single_survivor row_elements=1 row_regions=1 M3MaskCompactorSpanContract M3SparseMaskReadContract M3IndexMaskCompactorSelfTest M3MaskNativeParityProof
+M03	m3_select_range (span fetch offset)	KILLED	m3_sparse_mask_reads:failure 75: mode==2 ? storage.longs[0]==values[selected] : s m3_mask_compactor_spans:FAIL int order rows=1 elements=1 states=10 writes=1 pending= M3MaskCompactorSpanContract M3SparseMaskReadContract M3IndexMaskCompactorSelfTest M3MaskNativeParityProof
+M04	m3_select_range (span compaction index)	KILLED	m3_sparse_mask_reads:failure 75: mode==2 ? storage.longs[0]==values[selected] : s m3_mask_compactor_spans:FAIL int order rows=1 elements=1 states=10 writes=1 pending= M3MaskCompactorSpanContract M3SparseMaskReadContract M3IndexMaskCompactorSelfTest M3MaskNativeParityProof
+M05	selectLongWindowNative (span fetch offset)	KILLED	m3_sparse_mask_reads:failure 75: mode==2 ? storage.longs[0]==values[selected] : s m3_mask_compactor_spans:family=2 single_survivor row_elements=1 row_regions=1 M3MaskCompactorSpanContract M3SparseMaskReadContract M3IndexMaskCompactorSelfTest
+M06	selectLongWindowNative (span compaction index)	KILLED	m3_sparse_mask_reads:failure 75: mode==2 ? storage.longs[0]==values[selected] : s m3_mask_compactor_spans:family=2 single_survivor row_elements=1 row_regions=1 M3MaskCompactorSpanContract M3SparseMaskReadContract M3IndexMaskCompactorSelfTest

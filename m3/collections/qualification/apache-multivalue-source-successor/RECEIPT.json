@@ -1,0 +1,73 @@
+{
+  "schema": "M3_APACHE_MULTIVALUE_SOURCE_SUCCESSOR_V5",
+  "scope": "Read-only effective-source successor; replay unchanged v4 source admission on an isolated exact v4 snapshot, then verify current Java/C owner changes.",
+  "predecessor": {
+    "path": "m3/collections/qualification/owned-apache-multivalue-20261024/SDK_SOURCE_BINDING_SUCCESSOR_V4.json",
+    "bytes": 8204,
+    "sha256": "505f340763e19d7ddb2e05cc8f14f1b3e4b2a8bf56cd88033ded08b91da82038",
+    "gitBlob": "f9527b590a06c0a3e045c87f09761ecaf0412f41"
+  },
+  "originalVerifier": {
+    "path": "m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v4.py",
+    "gitBlob": "49ff3794a24dd25fd5ab9e690cb5e8d53f0e851c"
+  },
+  "originalProbe": {
+    "path": "m3/collections/qualification/owned-apache-multivalue-20261024/probe_source_binding_successor_v4.py",
+    "gitBlob": "dbad467d3dd1cf6af42d65b60cff2d2123291aca"
+  },
+  "successors": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+      "previous": {
+        "bytes": 12423,
+        "sha256": "9e4f22aa82af226fc96b4f1e77ce7d68f37d10813f1aba594457d43f1eff27a8",
+        "gitBlob": "dda9d3739f4f7f779bd29e92c80bbc4d45ae1063"
+      },
+      "current": {
+        "bytes": 12892,
+        "sha256": "bead2ada2b127060f272c3eb53f3ad92cc9c6244c36cc8fd3d0dd1d145c16abf",
+        "gitBlob": "3c6e1b12a40d5516d8b1ca0c8ed9fc86c99003f1"
+      },
+      "snapshot": "snapshots/M3ArrayList.java.txt",
+      "category": "small-bit-mask: LC27 stable compact, no Entry",
+      "selection": "additive-superset; preserve public contracts, no donor code imported"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java",
+      "previous": {
+        "bytes": 9470,
+        "sha256": "ab0a4d3ec72abf37154be0c644caa440def182f38e252f7eaf75808acd1b20f7",
+        "gitBlob": "a19f3a01b8c553a8c9f356662edfc9fadc8194c8"
+      },
+      "current": {
+        "bytes": 11849,
+        "sha256": "72d57ce6b78845712336d7a8c44642ee13b327d85d95ca9a89e632fec23dd285",
+        "gitBlob": "ad7826be14ba09539e55125f52a6bea7a58ee362"
+      },
+      "snapshot": "snapshots/M3LongRangeSet.java.txt",
+      "category": "ordered-intervals: LC34/57 and GFG bounds; HR array manipulation non-equivalent",
+      "selection": "additive-superset; preserve public contracts, no donor code imported"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "previous": {
+        "bytes": 21506,
+        "sha256": "069790b6fefb1c9f70662befa3d0e8399eea2c309292040d8acfa938b10cc249",
+        "gitBlob": "970a7074223bfdff2eea70ad18fc2062c78b8b5b"
+      },
+      "current": {
+        "bytes": 23701,
+        "sha256": "382e93d8cc033b07da14537d2bf6c0d70405a8ce6a5eb318afc3005368bbf062",
+        "gitBlob": "5afeb41575e758b06882b3e3d8104b0c275f50ca"
+      },
+      "snapshot": "snapshots/m3_index_mask_compactor.c.txt",
+      "category": "JNI region-copy/bitset: no borrowed Java pointers",
+      "selection": "additive-superset; preserve public contracts, no donor code imported"
+    }
+  ],
+  "limits": [
+    "Historical verifier and receipt remain byte-identical; no waiver or updating old pins.",
+    "Current Java/JNI source changes are additive candidates, not admitted by hash alone: real compilation, Maven/OpenRewrite and native differential tests remain mandatory.",
+    "No standard JDK/java.util changes; no LeetCode/HackerRank/GeeksforGeeks code copied."
+  ]
+}

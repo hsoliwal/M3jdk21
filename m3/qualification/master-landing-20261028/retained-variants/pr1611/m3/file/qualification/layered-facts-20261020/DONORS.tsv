@@ -1,0 +1,4 @@
+category	donor	revision	license	decision
+arrays-sort-search	OpenJDK java.util.Arrays	M3JDK21 current master	GPL-2.0-with-Classpath-Exception	REUSE_EXISTING
+stream-fanout	apache/commons-io	f9de7a458b9ff70151994bbbacae3088047b8338	Apache-2.0	REFERENCE_ONLY
+problem-taxonomy	LeetCode;HackerRank;GeeksforGeeks	2026-10-20	platform terms	CATEGORY_ONLY

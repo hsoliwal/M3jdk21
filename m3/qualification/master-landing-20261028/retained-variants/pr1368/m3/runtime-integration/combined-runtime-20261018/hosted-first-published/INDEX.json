@@ -1,0 +1,41 @@
+{
+  "observed_source_head": "0d24944a633e9b5ce226c287b333124993b4c477",
+  "jobs": [
+    {
+      "job_id": 117683558069,
+      "source_json_sha256": "ec4b43e94a74060901ee4447fb26d16654c4f960e673b2908da5a413c5de60c4",
+      "compressed_sha256": "241c17f7451b4ee6a13c7f1bf1d2a6f2db81c4579dfd1be8d84c1788047210b3",
+      "file": "117683558069.json.gz",
+      "raw_size": 22083
+    },
+    {
+      "job_id": 117683558677,
+      "source_json_sha256": "5e501ac1f7acf537a240c6e5d68e901d568cba8bcebe40eb90c2b36266868310",
+      "compressed_sha256": "0351ea4ee4d94525c669245b515e5b431fbba05cb0a5822d74c8e5a6968905fa",
+      "file": "117683558677.json.gz",
+      "raw_size": 18315
+    },
+    {
+      "job_id": 117683558941,
+      "source_json_sha256": "653a5cc62d0ee9d7d44d2b4c05080bcc8b71ca5df2a3d6eef717de3953440a4f",
+      "compressed_sha256": "953a0a8ddfc72bf6ff58828fc69ef20adc39b2378deebdbaf5f122d55a6c26b9",
+      "file": "117683558941.json.gz",
+      "raw_size": 104392
+    },
+    {
+      "job_id": 117683559403,
+      "source_json_sha256": "9c313893995262617f38df17811b0ef4585327e092074c57cd78574bf97fa12b",
+      "compressed_sha256": "e8579be5ffd5842881d347eb1b98421d6e4bd442734cf5922acf92049185d935",
+      "file": "117683559403.json.gz",
+      "raw_size": 25982
+    }
+  ],
+  "outcome": "FAILURES_RETAINED_NOT_QUALIFIED",
+  "interpretation": {
+    "117683558677": "source-launcher historical template differs at line2 from received source bootstrap successor",
+    "117683558069": "filtered navigation historical64d6 source pin refuses current qualifiede628 successor",
+    "117683559403": "historical engine d58ca pin refuses current34beb owner; later contract steps skipped",
+    "117683558941": "native-index-range recipe Maven compilation refuses M3GpuToolJoinRecipe API; under investigation"
+  },
+  "whole_repository_ci_green": false
+}

@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: Apache-2.0
+# G1 design measurement (oracle/bench/run_bench.sh): JDK 21.0.9+7-LTS HotSpot, -Xms2g -Xmx2g -XX:+UseParallelGC, Windows 11, one JVM per row,
+# median of 5 timed rounds after 3 warm-up rounds; mutate rows alternate master/head/eager 3 times (median of the 3 shown).
+# Owners measured: master 092bd739190e classes vs head (G1-G4 applied, identical owner sources after the rebase onto 2274e18709b8).
+# Random signed-long keys (seeded); default page capacity 64. get and interleave rows are one JVM each.
+section	workload	n	lazy_head_ns_per_op	eager_candidate_ns_per_op	master_ns_per_op	other	reading
+SUMMARY	mutate (n adds, n/2 removes, n/2 adds)	100000	155.8	263.2	143.1	runs lazy=160.4/142.3/155.8 eager=261.5/270.7/263.2 master=141.9/143.9/143.1	lazy +8.9% vs master; runs overlap (lazy 142.3-160.4, master 141.9-143.9; add/remove bytecode identical by member delta); eager +83.9%
+SUMMARY	get(int) random index, read-only	100000	86.3	81.0	-	iterate-to-index 141684.6 ns per query	get 1642x faster than iterating to the index
+SUMMARY	interleave (add, get, remove(get)) per op	100000	449.8	291.4	-	-	eager 1.54x faster only when every positional call follows a mutation
+SUMMARY	addAllSorted(sorted n) per value	100000	10.4	-	-	per-value add loop 50.5	addAllSorted 4.9x faster
+SUMMARY	get(int) allocated bytes over 2000000 calls (ThreadMXBean, after warm-up)	100000	0	-	-	-	allocation-free
+SUMMARY	mutate (n adds, n/2 removes, n/2 adds)	1000000	361.7	1356.2	351.1	runs lazy=361.7/388.1/273.9 eager=1769.3/1287.5/1356.2 master=351.1/357.3/310.4	lazy +3.0% vs master; runs overlap (lazy 273.9-388.1, master 310.4-357.3); eager +286.3%
+SUMMARY	get(int) random index, read-only	1000000	136.2	118.3	-	iterate-to-index 2232420.8 ns per query	get 16391x faster than iterating to the index
+SUMMARY	interleave (add, get, remove(get)) per op	1000000	2805.8	1555.2	-	-	eager 1.80x faster only when every positional call follows a mutation
+SUMMARY	addAllSorted(sorted n) per value	1000000	13.2	-	-	per-value add loop 57.2	addAllSorted 4.3x faster
+SUMMARY	get(int) allocated bytes over 2000000 calls (ThreadMXBean, after warm-up)	1000000	0	-	-	-	allocation-free
+DECISION	G1 page-prefix lane	-	LAZY	-	-	-	lazy rebuild keyed by modCount: no mutation cost (eager +84%/+286% per mutation at 1e5/1e6); eager wins only strictly alternating mutate/get (1.5x/1.8x)
+section	workload	impl	n	ops	ns_per_op	checksum	classes
+RAW	mutate	m3	100000	200000	141.9	100000	base
+RAW	mutate	m3	100000	200000	160.4	100000	head
+RAW	mutate	eager	100000	200000	261.5	100000	head
+RAW	mutate	m3	100000	200000	143.9	100000	base
+RAW	mutate	m3	100000	200000	142.3	100000	head
+RAW	mutate	eager	100000	200000	270.7	100000	head
+RAW	mutate	m3	100000	200000	143.1	100000	base
+RAW	mutate	m3	100000	200000	155.8	100000	head
+RAW	mutate	eager	100000	200000	263.2	100000	head
+RAW	get	m3	100000	2000000	86.3	7399605050610079950	head
+RAW	get	eager	100000	2000000	81.0	7399605050610079950	head
+RAW	iterate	m3	100000	2000	141684.6	-5860079985850929324	head
+RAW	interleave	m3	100000	60000	449.8	-4706248527486406023	head
+RAW	interleave	eager	100000	60000	291.4	-4706248527486406023	head
+RAW	bulk	m3	100000	100000	10.4	200000	head
+RAW	bulk	m3loop	100000	100000	50.5	100000	head
+RAW	getalloc	m3	100000	2000000	0	7568220625773067537	head
+RAW	mutate	m3	1000000	2000000	351.1	1000000	base
+RAW	mutate	m3	1000000	2000000	361.7	1000000	head
+RAW	mutate	eager	1000000	2000000	1769.3	1000000	head
+RAW	mutate	m3	1000000	2000000	357.3	1000000	base
+RAW	mutate	m3	1000000	2000000	388.1	1000000	head
+RAW	mutate	eager	1000000	2000000	1287.5	1000000	head
+RAW	mutate	m3	1000000	2000000	310.4	1000000	base
+RAW	mutate	m3	1000000	2000000	273.9	1000000	head
+RAW	mutate	eager	1000000	2000000	1356.2	1000000	head
+RAW	get	m3	1000000	2000000	136.2	5973898255921804690	head
+RAW	get	eager	1000000	2000000	118.3	5973898255921804690	head
+RAW	iterate	m3	1000000	2000	2232420.8	1924015089155457731	head
+RAW	interleave	m3	1000000	60000	2805.8	-8817821841776503681	head
+RAW	interleave	eager	1000000	60000	1555.2	-8817821841776503681	head
+RAW	bulk	m3	1000000	1000000	13.2	2000000	head
+RAW	bulk	m3loop	1000000	1000000	57.2	1000000	head
+RAW	getalloc	m3	1000000	2000000	0	8032437992211285427	head

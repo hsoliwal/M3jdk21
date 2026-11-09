@@ -1,0 +1,15 @@
+field	value
+jep	496
+title	Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism
+issue	JDK-8298390
+implementation_commit	13987b4244614d594dc8f94c288eddb6239a066f
+implementation_parent	6d3becb486ab38c9c2d2a6fbc428bf794375317c
+released_tag	jdk-24+36
+released_tag_object	757d01aea52ea38600813d09b562003605bba7b6
+released_commit	6705a9255d28f351950e7fbca9d05e73942a4e27
+shared_owner_followup	8c2b4f62714f26ab3bc4808c734502af632a1eef
+jep497_commit	8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7
+m3_baseline	3df19b6f064405d787fec4f9065328003d745aff
+source_copy_authority	false
+product_mutation_authority	false
+promotion	NOT_AUTHORIZED

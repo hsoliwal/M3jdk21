@@ -1,0 +1,15 @@
+test_every_prior_source_and_target_object_survives_in_lineage (test_bind_mapping.MappingBindingTest.test_every_prior_source_and_target_object_survives_in_lineage) ... ok
+test_fixture_is_refused_by_publication_mode (test_bind_mapping.MappingBindingTest.test_fixture_is_refused_by_publication_mode) ... ok
+test_history_only_source_and_missing_publication_evidence_refuse (test_bind_mapping.MappingBindingTest.test_history_only_source_and_missing_publication_evidence_refuse) ... ok
+test_missing_duplicate_or_wrong_capability_owner_refuses (test_bind_mapping.MappingBindingTest.test_missing_duplicate_or_wrong_capability_owner_refuses) ... ok
+test_mixed_source_revision_and_body_or_readback_drift_refuse (test_bind_mapping.MappingBindingTest.test_mixed_source_revision_and_body_or_readback_drift_refuse) ... ok
+test_only20_designated_owners_are_bound_and_all_other_mapping_fields_are_preserved (test_bind_mapping.MappingBindingTest.test_only20_designated_owners_are_bound_and_all_other_mapping_fields_are_preserved) ... ok
+test_repeated_authoring_is_byte_deterministic_and_earlier_prose_is_retained (test_bind_mapping.MappingBindingTest.test_repeated_authoring_is_byte_deterministic_and_earlier_prose_is_retained) ... ok
+test_root_obligations_cover_all_exact_root_entries_without_gate_promotion (test_bind_mapping.MappingBindingTest.test_root_obligations_cover_all_exact_root_entries_without_gate_promotion) ... ok
+test_truncated_or_changed_root_pom_commit_and_ref_refuse (test_bind_mapping.MappingBindingTest.test_truncated_or_changed_root_pom_commit_and_ref_refuse) ... ok
+test_unbound_or_promotion_inputs_refuse (test_bind_mapping.MappingBindingTest.test_unbound_or_promotion_inputs_refuse) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.185s
+
+OK

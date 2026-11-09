@@ -1,0 +1,23 @@
+diff --git a/demo/Api.java b/demo/Api.java
+index ef38a62..1df0b06 100644
+--- a/demo/Api.java
++++ b/demo/Api.java
+@@ -1,5 +1,5 @@ org.openrewrite.config.CompositeRecipe
+ package demo;
+ public final class Api {
+   public static final int VALUE = 42;
+-  public static String oldName(String value) { return value + "!"; }
++  public static String renamed(String value) { return value + "!"; }
+ }
+diff --git a/demo/Use.java b/demo/Use.java
+index 5366690..810eb1c 100644
+--- a/demo/Use.java
++++ b/demo/Use.java
+@@ -1,6 +1,6 @@ org.openrewrite.config.CompositeRecipe
+ package demo;
+ public final class Use {
+   public static void main(String[] args) {
+-    System.out.println(Api.oldName("M3_TOOLS"));
++    System.out.println(Api.renamed("M3_TOOLS"));
+   }
+ }

@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/relocate.py (recipe RELOCATE_SCOPED_NGRAMS v1). Donor: hsoliwal/com.synexia develop 64652588f0d4c23b1f6e0411090b2a796325ae0e.
+# FILE rows: donor path (donor repository root) -> target path (this module root). PACKAGE rows: donor package -> target package. TYPE rows: donor type -> target type (M3 naming). EXTERNAL rows: third-party packages the donor imports, kept as they are (declared closure; the pom carries the dependency).
+kind	donor	target	note
+FILE	synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexScopedNgrams.java	src/main/java/jdk/m3/nlp/M3ScopedNgrams.java	scoped word n-gram counts and top-k continuation (Scope, Tuple, Candidate, Snapshot); java.util only; sealed postimage sha256 72a1bf5720106961 of crate m3-ngram-topk-admission-20261104
+FILE	synexia-openrewrite-recipes/crates/m3-ngram-topk-admission-20261104/proof/M3NgramTopKOracle.java	src/test/java/jdk/m3/nlp/M3ScopedNgramsOracle.java	independent ranking oracle: 384 seeded corpora, 183,900 checks, sha256 result digest, parallel read-only proof, allocation probe (com.sun.management.ThreadMXBean)
+FILE	synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexScopedNgramsTopKAdmissionTest.java	src/test/java/jdk/m3/nlp/M3ScopedNgramsTopKAdmissionTest.java	JUnit 5: exact signed-ID ranking, validation order, frozen-snapshot stability, multi-order prefix isolation (3 methods)
+PACKAGE	com.synexia.indexstring	jdk.m3.nlp	the donor lived in the indexstring module; the receiver is the statistical NLP lane of M3JDK
+TYPE	MIndexScopedNgrams	M3ScopedNgrams	MIndex* -> M3* (user naming convention)
+TYPE	M3NgramTopKOracle	M3ScopedNgramsOracle	the oracle is named after the type it proves
+TYPE	MIndexScopedNgramsTopKAdmissionTest	M3ScopedNgramsTopKAdmissionTest	MIndex* -> M3*
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (the admission test); pom dependency org.junit.jupiter:junit-jupiter:5.11.4 test scope, as m3/compiler/lifetime-slots

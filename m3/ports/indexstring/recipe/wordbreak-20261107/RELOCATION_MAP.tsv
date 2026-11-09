@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/wordbreak-20261107/relocate.py (INDEXSTRING_RELOCATE_IX2 v1). Donor: hsoliwal/com.synexia develop 165ceb5a020291e99ebeb89783b88e8a9686ae5c. Builds on recipe/trie-core-20261107 (#2639).
+kind	donor	target	note
+FILE	synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexVocabularySearchTree.java	src/main/java/jdk/internal/m3/indexstring/MIndexVocabularySearchTree.java	forward/reverse lexical ranks of a frozen vocabulary; exact/prefix/suffix/longest lookups; prepared forward and reverse tries; prefix/suffix ranges and affix rows
+FILE	synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexWordBreakPlan.java	src/main/java/jdk/internal/m3/indexstring/MIndexWordBreakPlan.java	trie-guided word break: canSegment, legacy first-predecessor segment, minimumSegments (stable ties); per-query workspace/transition limits; boundaries, vocabulary rows, segment views
+PACKAGE	com.synexia.indexstring	jdk.internal.m3.indexstring	JDK naming rule PKG
+TYPE	IProgressMonitor	jdk.m3.collections.M3ProgressMonitor	IX1 rule; noop() -> new M3DefaultProgressMonitor()
+ADAPT	MIndexStringPrecomputation (vocabulary)	MIndexVocabularySearchTree.compile(Collection<? extends CharSequence>)	the tree owns its rows: distinct spellings in first-occurrence order (donor LinkedHashMap over MIndexString, whose equals is spelling equality), each frozen once as FrozenChars; valueAt(row) exposes the row
+ADAPT	MIndexStringBitOps.regionEquals	private unit loop in MIndexVocabularySearchTree	same equality answer; the donor's packed four-unit form and its two span helpers are not ported for one call (Ix2Diff runs the donor's real BitOps)
+TYPE	MIndexString (input)	CharSequence	a String input; the donor value type has no M3JDK owner
+TYPE	SubMIndexString (segment view)	CharSequence via source.subSequence(begin, end)	a String input gives String segments (a coordinate slice on M3JDK)

@@ -1,0 +1,106 @@
+{
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+  "target_repo": "hsoliwal/M3jdk21",
+  "target_base": "b68391863561ce80169663cd2b49c2845e084b74",
+  "target_tree": "ad5ef454f01f9ce7f24cca80a8ff79de67974d90",
+  "donor": {
+    "LICENSE": {
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8"
+    },
+    "NOTICE": {
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "git_blob": "cf6694a1316785ba2aa45394314bbae2e856c7fe"
+    },
+    "PackedBitAtoms.java.txt": {
+      "sha256": "20bce3cf025430fea0351bdc4478b204d808cde04432437e689c2eddb55e0305",
+      "git_blob": "c463d9857d917263e88933a4d07902840c3f302e"
+    },
+    "SegmentedAddress28.java.txt": {
+      "sha256": "92d4ae1d60e6ce6aab79ef1b91e6de4c076e02bc0a0603a6b2fb22ca21c1d881",
+      "git_blob": "6b931aefdb4afaf8765a7228dcad5bc9e436c9f8"
+    },
+    "SegmentedBitLane28.java.txt": {
+      "sha256": "147021a606f135a4b6b0f347ce90354ee15aef12c229ec5c02a30935216a1e70",
+      "git_blob": "9bb7173afa861c05b62a557db63e3a6692ddfe4c"
+    },
+    "SegmentedIntLane28.java.txt": {
+      "sha256": "a9be9f532e5c3606fda0ff30599227301133ca70e9d1fcb1f1e2182ef72f5488",
+      "git_blob": "2a42412b95a5ee07c4e716fe37c530b254fedec1"
+    },
+    "SegmentedLongLane28.java.txt": {
+      "sha256": "7fdce7c2cfe529251c69cdf186d4cabc8333c46692df78cbabdae56aa2a023e2",
+      "git_blob": "f7b3a7f0f4f4b896ad8325a96e90331881e69259"
+    },
+    "segmented_bit_lane.c.txt": {
+      "sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
+      "git_blob": "20549bee772f30ffabdc406bb6ab52c7435d2b01"
+    }
+  },
+  "dependencies": {
+    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": {
+      "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862",
+      "git_blob": "c143dfd295453861105682bc8409c3c72c582a04"
+    },
+    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": {
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
+      "git_blob": "3fdc75a71290e2fd1659bfbc7fa532828363275b"
+    },
+    ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java": {
+      "sha256": "d5b73971cf4107ffe5d9d2678d5a536491cd1552a2739818013e5ba4da1c3424",
+      "git_blob": "79f0d9e3c157279e035bf33d740eab51a207c478"
+    },
+    ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java": {
+      "sha256": "19450c4b44091c4f37689be1fa45bb30b822cd2f962a323d0991529fc65f6a71",
+      "git_blob": "6ab4b66ef1ff56fa1e0943ec0527c2513478de88"
+    },
+    "m3/migration/recipe.py": {
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+      "git_blob": "02f88f9f8b1eb8930fff59684c81bb30819800ad"
+    },
+    "make/CompileJavaModules.gmk": {
+      "sha256": "45941b0fb6da4dd5284db9fada24f4aff51fcdf39ba23bc13cee8052273bee5e",
+      "git_blob": "b1b7a83498d353efe3ff2464d5d9d6220bb835b9"
+    },
+    "make/modules/java.base/Lib.gmk": {
+      "sha256": "b097a927a83875b4b4c92ce5c3b9ecd4e4acb4d81962719d31d6df7ae0adad47",
+      "git_blob": "1e0f66726d06746b951b5a4f1d4498ace5c0b406"
+    },
+    "make/modules/java.base/lib/CoreLibraries.gmk": {
+      "sha256": "13ff8e34221af4f6c2ff814dee1a9abdab848519788d22df66060407321a58e4",
+      "git_blob": "8b1a0a90fd4aa3fd455c78507dbfc491a3046d73"
+    }
+  },
+  "restoration": {
+    "target_base": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+    "target_tree": "6672d8a05a2324f29e38e0ab5ed242039cdf6d86",
+    "historical_head": "9af35b30528940a6aa83e710a4fc0d1b76d79799",
+    "historical_pr": 146,
+    "state": "LOST -> RESTORED through exact recipe",
+    "source_role": "Synexia convergence workspace and code contributor",
+    "target_role": "independent M3JDK21 runtime owner",
+    "runtime_dependency_on_synexia": false,
+    "contributions": [
+      {
+        "convergence_path": "m3-openrewrite-recipes/crates/m3-szf/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/szf/SegmentedIntLane28.java.txt",
+        "convergence_commit": "aabe02e51718922c486fb04590af8818ccc7e653",
+        "sha256": "b2698128170550f44582cc9bafd0b1ba07c2bde3f06fed50829b3ef654ce6d9c",
+        "git_blob": "1613a57aa543cacb6f53f5a1c3bc0a10cf4a4cee",
+        "inline_path": "m3/tooling/lane28/donor/szf/SegmentedIntLane28.java.txt",
+        "target": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+        "target_sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
+      },
+      {
+        "convergence_path": "m3-openrewrite-recipes/crates/m3-szf/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/szf/SegmentedLongLane28.java.txt",
+        "convergence_commit": "aabe02e51718922c486fb04590af8818ccc7e653",
+        "sha256": "c43673c769bc23dc592dba3a1da9fc2aebc804640dde102f7c749e71f59b415c",
+        "git_blob": "8f31549c019e33e0200f27c84aea154cbfc2f647",
+        "inline_path": "m3/tooling/lane28/donor/szf/SegmentedLongLane28.java.txt",
+        "target": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+        "target_sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
+      }
+    ],
+    "qualification_pr": "https://github.com/hsoliwal/com.synexia/pull/9428"
+  }
+}

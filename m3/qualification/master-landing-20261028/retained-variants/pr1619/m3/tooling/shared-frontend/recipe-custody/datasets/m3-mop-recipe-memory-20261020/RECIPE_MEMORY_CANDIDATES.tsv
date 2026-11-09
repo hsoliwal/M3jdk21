@@ -1,0 +1,3 @@
+type	issue	proposed_guard	status
+candidate	No automatic guarantee that a textual PASS receipt originates from Maven/JUnit	Add GitHub Action proof-run origin binding to exact process exit codes	HOLD_FOR_CI
+candidate	Same-commit marker SELF cannot itself prove commit co-residency	Compare Git tree source patch guard and ledger against parent during review	HOLD_FOR_GIT_GATE

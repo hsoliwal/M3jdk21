@@ -1,0 +1,70 @@
+{
+  "actualPackageCommandsPassed": [
+    "select",
+    "pack",
+    "verify",
+    "extract",
+    "finish"
+  ],
+  "archiveOnlyProjectFiles": 0,
+  "archiveOperationsExecutedByReviewer": false,
+  "archiveOwnerSHA256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556",
+  "archiveParts": 15,
+  "baseCohort": {
+    "bytes": 947587,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/PAIRED-FILES.json",
+    "sha256": "aba5775d82d9342e811c7966465cb6f08da446eab4859fb5323899b41b21eb88"
+  },
+  "basePairedRows": 49,
+  "bundle": {
+    "bytes": 209211,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/bundle/BUNDLE.json",
+    "sha256": "40e8797584a89cfb9b72c05250f12b45fccd74c96b0f4cd5c9902440266b9bc8"
+  },
+  "compiledBodiesIncluded": false,
+  "consumerQualified": false,
+  "findings": [],
+  "flatProjectFiles": 16,
+  "gatesExecutedByReviewer": false,
+  "negativeSymlinksCopied": false,
+  "ownSemanticStatus": "PASS_RFC_SYNTAX_PATCH_CONTROLS_RECEIVING_PENDING",
+  "parentCheckpointRows": 507,
+  "projectFiles": 16,
+  "promotionInferred": false,
+  "readback": {
+    "bytes": 1399571,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/READBACK.json",
+    "sha256": "c9215d6a5b8e5c10354fc42a1463d3a0cedbcad3937f4558428c0bcdcf7b6ecc"
+  },
+  "readbackFileReads": 2750,
+  "readiness": {
+    "bytes": 11481,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/PROJECT-READY.json",
+    "sha256": "c0802587c8747ed160a94c01a63db5cd2302992e9d17daea1426dc77dc252ddb"
+  },
+  "receivingBodyRows": 781,
+  "receivingCompiledIdentityRows": 23,
+  "receivingSelectionRows": 804,
+  "retainedPathBytes": 107192096,
+  "rootCommandSpec": {
+    "bytes": 8276,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
+    "sha256": "f86a236dffa5e20e487c1cd4c9dda530c95d5f213f7e37a2749b5993fb48f2cf"
+  },
+  "rootExecution": {
+    "bytes": 1666,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/RESULT.json",
+    "sha256": "553fd4673fc09efccbba243a4eb804ea38a7a33d0a905879f5692b2316b7ffdf"
+  },
+  "schema": "synexia.rf0.independent-package-readback/1",
+  "selectedBodyMappings": 1332,
+  "selectedLogicalFiles": 1333,
+  "sharedReceivingStatus": "PRIMARY_ONLY_STOP",
+  "sourceClosure": {
+    "bytes": 3383531,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
+    "sha256": "a02c03f396166df1d90e94e9ae38e5dbdcbac1267ecfffc1d5cc3af4c76c60a6"
+  },
+  "status": "PASS_METADATA_IDENTITY_READBACK",
+  "uniqueChunkBytes": 73339197
+}

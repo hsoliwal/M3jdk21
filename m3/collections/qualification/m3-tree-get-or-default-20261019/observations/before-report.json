@@ -1,0 +1,381 @@
+{
+  "stage": "before",
+  "cases": 640,
+  "exactMatches": 630,
+  "frozenJdkOriginalMatches": true,
+  "differences": [
+    {
+      "id": "NATURAL/NONEMPTY/ROOT/COUNTING/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "NATURAL/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "NATURAL/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "NATURAL/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "NATURAL/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "COMPARATOR/NONEMPTY/ROOT/COUNTING/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7",
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "COMPARATOR/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7",
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "COMPARATOR/NONEMPTY/ROOT/NULL/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7",
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/ROOT/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "COMPARATOR/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7",
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:COUNTING17:SEED7",
+          "COUNTING17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "COMPARATOR/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7",
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:SELF_THROW17:SEED7",
+          "SELF_THROW17:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    },
+    {
+      "id": "COMPARATOR/NONEMPTY/DESCENDING/NULL/getOrDefault",
+      "jdk": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7",
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      },
+      "m3": {
+        "kind": "case",
+        "id": "COMPARATOR/NONEMPTY/DESCENDING/NULL/getOrDefault",
+        "outcome": {
+          "kind": "return",
+          "value": "fallback"
+        },
+        "events": [
+          "comparator:null:SEED7"
+        ],
+        "size": 1,
+        "empty": false,
+        "entries": [
+          "SEED7=seed"
+        ]
+      }
+    }
+  ],
+  "status": "BASELINE_REPRODUCED"
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "M3JDK21_STRING_PHASE1_RESOURCES_RECEIPT_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalPullRequest": 9920,
+  "canonicalRecipe": "com.synexia.rewrite.M3Jdk21StringPhase1Resources",
+  "canonicalRecipeHead": "5d3bad775f87de146375b605f4917f1c2af929ed",
+  "postimages": {
+    "probeSha256": "e64defbc6ca1bbc2eda900af568a02774abf4bfa5f1e58e7e39cca061ff9bd74",
+    "runnerSha256": "b3544741fc7b773d7d82bc2ae663bdf2880920a5f75cf16e7bdb628db83855fb",
+    "workflowSha256": "2c254d839b2061551c27a6428508a80a5a3942c159a1b3f3de2025121a7d1880"
+  },
+  "samples": {
+    "forks": 3,
+    "m3Off": 3,
+    "m3On": 3
+  },
+  "measurements": [
+    "cold_allocated_bytes",
+    "cold_ns",
+    "warm_allocated_bytes",
+    "warm_ns",
+    "native_retained_delta_bytes",
+    "compatibility_shadow_bytes"
+  ],
+  "claims": {
+    "measurementOnly": true,
+    "universalSpeedup": false,
+    "promotionAuthorized": false
+  },
+  "state": "PENDING_MATCHED_IMAGE_EXECUTION"
+}

@@ -1,0 +1,1572 @@
+diff --git a/src/hotspot/share/classfile/javaClasses.cpp b/src/hotspot/share/classfile/javaClasses.cpp
+index a7582e535..78d9281ac 100644
+--- a/src/hotspot/share/classfile/javaClasses.cpp
++++ b/src/hotspot/share/classfile/javaClasses.cpp
+@@ -193,6 +193,9 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
+ // java_lang_String
+ 
+ int java_lang_String::_value_offset;
++int java_lang_String::_m3Parts_offset;
++int java_lang_String::_m3Ranges_offset;
++int java_lang_String::_m3Length_offset;
+ int java_lang_String::_hash_offset;
+ int java_lang_String::_hashIsZero_offset;
+ int java_lang_String::_coder_offset;
+@@ -214,6 +217,9 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
+ }
+ 
+ #define STRING_FIELDS_DO(macro) \
++  macro(_m3Parts_offset, k, "m3Parts", string_array_signature, false); \
++  macro(_m3Ranges_offset, k, "m3Ranges", int_array_signature, false); \
++  macro(_m3Length_offset, k, "m3Length", int_signature, false); \
+   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
+   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
+   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
+@@ -261,6 +267,25 @@ void java_lang_String::set_compact_strings(bool value) {
+   vmClasses::String_klass()->do_local_static_fields(&fix);
+ }
+ 
++class M3SegmentedStringsFixup : public FieldClosure {
++  bool _value;
++public:
++  M3SegmentedStringsFixup(bool value) : _value(value) {}
++  void do_field(fieldDescriptor* fd) {
++    if (fd->name()->equals("M3_SEGMENTS")) {
++      oop mirror = fd->field_holder()->java_mirror();
++      assert(fd->field_holder() == vmClasses::String_klass(), "Should be String");
++      assert(mirror != nullptr, "String must have mirror already");
++      mirror->bool_field_put(fd->offset(), _value);
++    }
++  }
++};
++
++void java_lang_String::set_m3_segmented_strings(bool value) {
++  M3SegmentedStringsFixup fix(value);
++  vmClasses::String_klass()->do_local_static_fields(&fix);
++}
++
+ Handle java_lang_String::basic_create(int length, bool is_latin1, TRAPS) {
+   assert(_initialized, "Must be initialized");
+   assert(CompactStrings || !is_latin1, "Must be UTF16 without CompactStrings");
+@@ -479,6 +504,15 @@ jchar* java_lang_String::as_unicode_string(oop java_string, int& length, TRAPS)
+ }
+ 
+ jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length) {
++  if (is_segmented(java_string)) {
++    length = java_lang_String::length(java_string);
++    jchar* result = NEW_RESOURCE_ARRAY_RETURN_NULL(jchar, length);
++    if (result != nullptr) {
++      for (int i = 0; i < length; i++) result[i] = char_at(java_string, i);
++    }
++    return result;
++  }
++
+   typeArrayOop value  = java_lang_String::value(java_string);
+                length = java_lang_String::length(java_string, value);
+   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+@@ -497,6 +531,28 @@ jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length)
+   }
+   return result;
+ }
++// Native scratch storage only: safe for callers that cannot safepoint.
++static jchar* m3_unicode_range(oop string, int start, int len) {
++  jchar* chars = NEW_RESOURCE_ARRAY(jchar, len);
++  for (int i = 0; i < len; i++) chars[i] = java_lang_String::char_at(string, start + i);
++  return chars;
++}
++
++// Buffer conversions must not allocate scratch space: JNI callers may have no ResourceMark.
++static char* m3_utf8_range(oop string, int start, int len, char* buf, int buflen) {
++  assert(buflen > 0, "zero length output buffer");
++  char* out = buf;
++  for (int i = 0; i < len; i++) {
++    jchar c = java_lang_String::char_at(string, start + i);
++    int size = UNICODE::utf8_size(c);
++    if (size >= buflen) break;
++    UNICODE::as_utf8(&c, 1, out, buflen);
++    out += size;
++    buflen -= size;
++  }
++  *out = '\0';
++  return buf;
++}
+ 
+ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool update) {
+   // The hash and hashIsZero fields are subject to a benign data race,
+@@ -517,7 +573,9 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
+   bool     is_latin1 = java_lang_String::is_latin1(java_string);
+ 
+   unsigned int hash = 0;
+-  if (length > 0) {
++  if (is_segmented(java_string)) {
++    for (int i = 0; i < length; i++) hash = 31 * hash + char_at(java_string, i);
++  } else if (length > 0) {
+     if (is_latin1) {
+       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
+     } else {
+@@ -545,6 +603,16 @@ unsigned int java_lang_String::hash_code_noupdate(oop java_string) {
+ 
+ 
+ char* java_lang_String::as_quoted_ascii(oop java_string) {
++  if (is_segmented(java_string)) {
++    int len = length(java_string);
++    if (len == 0) return nullptr;
++    jchar* chars = m3_unicode_range(java_string, 0, len);
++    int size = UNICODE::quoted_ascii_length(chars, len) + 1;
++    char* result = NEW_RESOURCE_ARRAY(char, size);
++    UNICODE::as_quoted_ascii(chars, len, result, size);
++    return result;
++  }
++
+   typeArrayOop value  = java_lang_String::value(java_string);
+   int          length = java_lang_String::length(java_string, value);
+   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+@@ -570,6 +638,12 @@ char* java_lang_String::as_quoted_ascii(oop java_string) {
+ }
+ 
+ Symbol* java_lang_String::as_symbol(oop java_string) {
++  if (is_segmented(java_string)) {
++    ResourceMark rm;
++    int len = length(java_string);
++    return SymbolTable::new_symbol(m3_unicode_range(java_string, 0, len), len);
++  }
++
+   typeArrayOop value  = java_lang_String::value(java_string);
+   int          length = java_lang_String::length(java_string, value);
+   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+@@ -587,6 +661,12 @@ Symbol* java_lang_String::as_symbol(oop java_string) {
+ }
+ 
+ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
++  if (is_segmented(java_string)) {
++    ResourceMark rm;
++    int len = length(java_string);
++    return SymbolTable::probe_unicode(m3_unicode_range(java_string, 0, len), len);
++  }
++
+   typeArrayOop value  = java_lang_String::value(java_string);
+   int          length = java_lang_String::length(java_string, value);
+   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+@@ -602,6 +682,13 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
+ }
+ 
+ int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
++  if (is_segmented(java_string)) {
++    int result = 0;
++    int len = length(java_string);
++    for (int i = 0; i < len; i++) result += UNICODE::utf8_size(char_at(java_string, i));
++    return result;
++  }
++
+   assert(value_equals(value, java_lang_String::value(java_string)),
+          "value must be same as java_lang_String::value(java_string)");
+   int length = java_lang_String::length(java_string, value);
+@@ -626,6 +713,13 @@ char* java_lang_String::as_utf8_string(oop java_string) {
+ }
+ 
+ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
++  if (is_segmented(java_string)) {
++    int units = java_lang_String::length(java_string);
++    length = utf8_length(java_string);
++    char* result = NEW_RESOURCE_ARRAY(char, length + 1);
++    return m3_utf8_range(java_string, 0, units, result, length + 1);
++  }
++
+   typeArrayOop value = java_lang_String::value(java_string);
+   length             = java_lang_String::length(java_string, value);
+   bool     is_latin1 = java_lang_String::is_latin1(java_string);
+@@ -641,6 +735,13 @@ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
+ // Uses a provided buffer if it's sufficiently large, otherwise allocates
+ // a resource array to fit
+ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int buflen, int& utf8_len) {
++  if (is_segmented(java_string)) {
++    int len = length(java_string);
++    utf8_len = utf8_length(java_string);
++    if (utf8_len >= buflen) buf = NEW_RESOURCE_ARRAY(char, utf8_len + 1);
++    return m3_utf8_range(java_string, 0, len, buf, utf8_len + 1);
++  }
++
+   typeArrayOop value = java_lang_String::value(java_string);
+   int            len = java_lang_String::length(java_string, value);
+   bool     is_latin1 = java_lang_String::is_latin1(java_string);
+@@ -662,6 +763,11 @@ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int bufl
+ }
+ 
+ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, char* buf, int buflen) {
++  if (is_segmented(java_string)) {
++    int len = length(java_string);
++    return m3_utf8_range(java_string, 0, len, buf, buflen);
++  }
++
+   assert(value_equals(value, java_lang_String::value(java_string)),
+          "value must be same as java_lang_String::value(java_string)");
+   int     length = java_lang_String::length(java_string, value);
+@@ -681,6 +787,14 @@ char* java_lang_String::as_utf8_string(oop java_string, char* buf, int buflen) {
+ }
+ 
+ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
++  if (is_segmented(java_string)) {
++    assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
++    int bytes = 0;
++    for (int i = 0; i < len; i++) bytes += UNICODE::utf8_size(char_at(java_string, start + i));
++    char* result = NEW_RESOURCE_ARRAY(char, bytes + 1);
++    return m3_utf8_range(java_string, start, len, result, bytes + 1);
++  }
++
+   typeArrayOop value  = java_lang_String::value(java_string);
+   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+   assert(start + len <= java_lang_String::length(java_string), "just checking");
+@@ -694,6 +808,11 @@ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
+ }
+ 
+ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int start, int len, char* buf, int buflen) {
++  if (is_segmented(java_string)) {
++    assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
++    return m3_utf8_range(java_string, start, len, buf, buflen);
++  }
++
+   assert(value_equals(value, java_lang_String::value(java_string)),
+          "value must be same as java_lang_String::value(java_string)");
+   assert(start + len <= java_lang_String::length(java_string), "just checking");
+@@ -708,6 +827,12 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int
+ }
+ 
+ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
++  if (is_segmented(java_string)) {
++    if (length(java_string) != len) return false;
++    for (int i = 0; i < len; i++) if (char_at(java_string, i) != chars[i]) return false;
++    return true;
++  }
++
+   assert(java_string->klass() == vmClasses::String_klass(),
+          "must be java_string");
+   typeArrayOop value = java_lang_String::value_no_keepalive(java_string);
+@@ -733,6 +858,13 @@ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
+ }
+ 
+ bool java_lang_String::equals(oop str1, oop str2) {
++  if (is_segmented(str1) || is_segmented(str2)) {
++    int len = length(str1);
++    if (length(str2) != len) return false;
++    for (int i = 0; i < len; i++) if (char_at(str1, i) != char_at(str2, i)) return false;
++    return true;
++  }
++
+   assert(str1->klass() == vmClasses::String_klass(),
+          "must be java String");
+   assert(str2->klass() == vmClasses::String_klass(),
+@@ -753,7 +885,7 @@ void java_lang_String::print(oop java_string, outputStream* st) {
+   assert(java_string->klass() == vmClasses::String_klass(), "must be java_string");
+   typeArrayOop value  = java_lang_String::value_no_keepalive(java_string);
+ 
+-  if (value == nullptr) {
++  if (value == nullptr && !is_segmented(java_string)) {
+     // This can happen if, e.g., printing a String
+     // object before its initializer has been called
+     st->print("nullptr");
+@@ -761,12 +893,10 @@ void java_lang_String::print(oop java_string, outputStream* st) {
+   }
+ 
+   int length = java_lang_String::length(java_string, value);
+-  bool is_latin1 = java_lang_String::is_latin1(java_string);
+ 
+   st->print("\"");
+   for (int index = 0; index < length; index++) {
+-    jchar c = (!is_latin1) ?  value->char_at(index) :
+-                             ((jchar) value->byte_at(index)) & 0xff;
++    jchar c = char_at(java_string, index);
+     if (c < ' ') {
+       st->print("\\x%02X", c); // print control characters e.g. \x0A
+     } else {
+diff --git a/src/hotspot/share/classfile/javaClasses.hpp b/src/hotspot/share/classfile/javaClasses.hpp
+index 84ce35ba7..0077c5cee 100644
+--- a/src/hotspot/share/classfile/javaClasses.hpp
++++ b/src/hotspot/share/classfile/javaClasses.hpp
+@@ -54,6 +54,9 @@ class java_lang_Object : AllStatic {
+ class java_lang_String : AllStatic {
+  private:
+   static int _value_offset;
++  static int _m3Parts_offset;
++  static int _m3Ranges_offset;
++  static int _m3Length_offset;
+   static int _hash_offset;
+   static int _hashIsZero_offset;
+   static int _coder_offset;
+@@ -100,6 +103,7 @@ class java_lang_String : AllStatic {
+   static Handle create_from_platform_dependent_str(const char* str, TRAPS);
+ 
+   static void set_compact_strings(bool value);
++  static void set_m3_segmented_strings(bool value);
+ 
+   static int value_offset() { CHECK_INIT(_value_offset); }
+   static int coder_offset() { CHECK_INIT(_coder_offset); }
+@@ -121,6 +125,9 @@ class java_lang_String : AllStatic {
+   static inline bool test_and_set_deduplication_requested(oop java_string);
+ 
+   // Accessors
++  // These readers never allocate Java objects or safepoint.
++  static inline bool is_segmented(oop java_string);
++  static inline jchar char_at(oop java_string, int index);
+   static inline typeArrayOop value(oop java_string);
+   static inline typeArrayOop value_no_keepalive(oop java_string);
+   static inline bool hash_is_set(oop string);
+diff --git a/src/hotspot/share/classfile/javaClasses.inline.hpp b/src/hotspot/share/classfile/javaClasses.inline.hpp
+index 960d5d224..6121f7da1 100644
+--- a/src/hotspot/share/classfile/javaClasses.inline.hpp
++++ b/src/hotspot/share/classfile/javaClasses.inline.hpp
+@@ -32,6 +32,7 @@
+ #include "oops/instanceKlass.inline.hpp"
+ #include "oops/method.hpp"
+ #include "oops/oop.inline.hpp"
++#include "oops/objArrayOop.inline.hpp"
+ #include "oops/oopsHierarchy.hpp"
+ #include "oops/typeArrayOop.inline.hpp"
+ 
+@@ -54,7 +55,8 @@ bool java_lang_String::hash_is_set(oop java_string) {
+ // Accessors
+ bool java_lang_String::value_equals(typeArrayOop str_value1, typeArrayOop str_value2) {
+   return ((str_value1 == str_value2) ||
+-          (str_value1->length() == str_value2->length() &&
++          (str_value1 != nullptr && str_value2 != nullptr &&
++           str_value1->length() == str_value2->length() &&
+            (!memcmp(str_value1->base(T_BYTE),
+                     str_value2->base(T_BYTE),
+                     str_value2->length() * sizeof(jbyte)))));
+@@ -70,6 +72,31 @@ typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
+   return (typeArrayOop) java_string->obj_field_access<AS_NO_KEEPALIVE>(_value_offset);
+ }
+ 
++bool java_lang_String::is_segmented(oop java_string) {
++  return java_string->obj_field_access<AS_NO_KEEPALIVE>(_m3Parts_offset) != nullptr;
++}
++
++jchar java_lang_String::char_at(oop java_string, int index) {
++  assert(index >= 0 && index < length(java_string), "String index");
++  objArrayOop parts = (objArrayOop)java_string->obj_field(_m3Parts_offset);
++  if (parts != nullptr) {
++    typeArrayOop ranges = (typeArrayOop)java_string->obj_field(_m3Ranges_offset);
++    int lo = 0, hi = parts->length() - 1;
++    while (lo < hi) {
++      int mid = lo + (hi - lo) / 2;
++      if (index < ranges->int_at(2 * mid + 1)) hi = mid;
++      else lo = mid + 1;
++    }
++    int previous_end = lo == 0 ? 0 : ranges->int_at(2 * lo - 1);
++    index = ranges->int_at(2 * lo) + index - previous_end;
++    java_string = parts->obj_at(lo);
++    assert(!is_segmented(java_string), "M3 leaves must be flat");
++  }
++  typeArrayOop bytes = value(java_string);
++  return is_latin1(java_string) ? (jchar)(bytes->byte_at(index) & 0xff)
++                                : bytes->char_at(index);
++}
++
+ bool java_lang_String::is_latin1(oop java_string) {
+   assert(is_instance(java_string), "must be java_string");
+   jbyte coder = java_string->byte_field(_coder_offset);
+@@ -108,6 +135,9 @@ int java_lang_String::length(oop java_string, typeArrayOop value) {
+   assert(is_instance(java_string), "must be java_string");
+   assert(value_equals(value, java_lang_String::value(java_string)),
+          "value must be equal to java_lang_String::value(java_string)");
++  if (is_segmented(java_string)) {
++    return java_string->int_field(_m3Length_offset);
++  }
+   if (value == nullptr) {
+     return 0;
+   }
+diff --git a/src/hotspot/share/classfile/stringTable.cpp b/src/hotspot/share/classfile/stringTable.cpp
+index 89381b1a7..6186f49e9 100644
+--- a/src/hotspot/share/classfile/stringTable.cpp
++++ b/src/hotspot/share/classfile/stringTable.cpp
+@@ -598,7 +598,9 @@ static size_t literal_size(oop obj) {
+ 
+   if (obj->klass() == vmClasses::String_klass()) {
+     // This may overcount if String.value arrays are shared.
+-    word_size += java_lang_String::value(obj)->size();
++    typeArrayOop bytes = java_lang_String::value(obj);
++    if (bytes != nullptr) word_size += bytes->size();
++    // Segmented descendants are shared and intentionally excluded here.
+   }
+ 
+   return word_size * HeapWordSize;
+@@ -687,25 +689,13 @@ size_t StringTable::verify_and_compare_entries() {
+ }
+ 
+ static void print_string(Thread* current, outputStream* st, oop s) {
+-  typeArrayOop value     = java_lang_String::value_no_keepalive(s);
+-  int          length    = java_lang_String::length(s);
+-  bool         is_latin1 = java_lang_String::is_latin1(s);
+-
++  int length = java_lang_String::length(s);
+   if (length <= 0) {
+     st->print("%d: ", length);
+   } else {
+     ResourceMark rm(current);
+-    int utf8_length = length;
+-    char* utf8_string;
+-
+-    if (!is_latin1) {
+-      jchar* chars = value->char_at_addr(0);
+-      utf8_string = UNICODE::as_utf8(chars, utf8_length);
+-    } else {
+-      jbyte* bytes = value->byte_at_addr(0);
+-      utf8_string = UNICODE::as_utf8(bytes, utf8_length);
+-    }
+-
++    int utf8_length;
++    char* utf8_string = java_lang_String::as_utf8_string(s, utf8_length);
+     st->print("%d: ", utf8_length);
+     HashtableTextDump::put_utf8(st, utf8_string, utf8_length);
+   }
+diff --git a/src/hotspot/share/jfr/recorder/jfrRecorder.cpp b/src/hotspot/share/jfr/recorder/jfrRecorder.cpp
+index 1faf12300..f7732020b 100644
+--- a/src/hotspot/share/jfr/recorder/jfrRecorder.cpp
++++ b/src/hotspot/share/jfr/recorder/jfrRecorder.cpp
+@@ -55,6 +55,10 @@
+ #endif
+ 
+ bool JfrRecorder::is_disabled() {
++  // Also prevent recordings requested dynamically through jcmd or Java APIs.
++  if (UseM3SegmentedStrings) {
++    return true;
++  }
+   // True if -XX:-FlightRecorder has been explicitly set on the
+   // command line
+   return FLAG_IS_CMDLINE(FlightRecorder) ? !FlightRecorder : false;
+@@ -237,6 +241,9 @@ static bool _created = false;
+ // Non-protected initializations assume single-threaded setup.
+ //
+ bool JfrRecorder::create(bool simulate_failure) {
++  // Java's dynamic Recording API can reach this entry even when recording is
++  // disabled. Return failure to its existing IllegalStateException path.
++  if (UseM3SegmentedStrings) return false;
+   assert(!is_disabled(), "invariant");
+   assert(!is_created(), "invariant");
+   if (!is_enabled()) {
+diff --git a/src/hotspot/share/oops/instanceKlass.cpp b/src/hotspot/share/oops/instanceKlass.cpp
+index 565c13643..18ac24f19 100644
+--- a/src/hotspot/share/oops/instanceKlass.cpp
++++ b/src/hotspot/share/oops/instanceKlass.cpp
+@@ -3644,9 +3644,9 @@ void InstanceKlass::oop_print_on(oop obj, outputStream* st) {
+   if (this == vmClasses::String_klass()) {
+     typeArrayOop value  = java_lang_String::value(obj);
+     juint        length = java_lang_String::length(obj);
+-    if (value != nullptr &&
+-        value->is_typeArray() &&
+-        length <= (juint) value->length()) {
++    if (java_lang_String::is_segmented(obj) ||
++        (value != nullptr && value->is_typeArray() &&
++         length <= (juint) value->length())) {
+       st->print(BULLET"string: ");
+       java_lang_String::print(obj, st);
+       st->cr();
+@@ -3688,7 +3688,7 @@ void InstanceKlass::oop_print_value_on(oop obj, outputStream* st) {
+   name()->print_value_on(st);
+   obj->print_address_on(st);
+   if (this == vmClasses::String_klass()
+-      && java_lang_String::value(obj) != nullptr) {
++      && (java_lang_String::value(obj) != nullptr || java_lang_String::is_segmented(obj))) {
+     ResourceMark rm;
+     int len = java_lang_String::length(obj);
+     int plen = (len < 24 ? len : 12);
+diff --git a/src/hotspot/share/prims/jni.cpp b/src/hotspot/share/prims/jni.cpp
+index 9b8c97249..f901b647b 100644
+--- a/src/hotspot/share/prims/jni.cpp
++++ b/src/hotspot/share/prims/jni.cpp
+@@ -2160,19 +2160,19 @@ JNI_ENTRY_NO_PRESERVE(const jchar*, jni_GetStringChars(
+   jchar* buf = nullptr;
+   oop s = JNIHandles::resolve_non_null(string);
+   typeArrayOop s_value = java_lang_String::value(s);
+-  if (s_value != nullptr) {
++  if (s_value != nullptr || java_lang_String::is_segmented(s)) {
+     int s_len = java_lang_String::length(s, s_value);
+     bool is_latin1 = java_lang_String::is_latin1(s);
+     buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
+     /* JNI Specification states return null on OOM */
+     if (buf != nullptr) {
+       if (s_len > 0) {
+-        if (!is_latin1) {
++        if (!is_latin1 && !java_lang_String::is_segmented(s)) {
+           ArrayAccess<>::arraycopy_to_native(s_value, (size_t) typeArrayOopDesc::element_offset<jchar>(0),
+                                              buf, s_len);
+         } else {
+           for (int i = 0; i < s_len; i++) {
+-            buf[i] = ((jchar) s_value->byte_at(i)) & 0xff;
++            buf[i] = java_lang_String::char_at(s, i);
+           }
+         }
+       }
+@@ -2230,7 +2230,7 @@ JNI_ENTRY(const char*, jni_GetStringUTFChars(JNIEnv *env, jstring string, jboole
+   char* result = nullptr;
+   oop java_string = JNIHandles::resolve_non_null(string);
+   typeArrayOop s_value = java_lang_String::value(java_string);
+-  if (s_value != nullptr) {
++  if (s_value != nullptr || java_lang_String::is_segmented(java_string)) {
+     size_t length = java_lang_String::utf8_length(java_string, s_value);
+     /* JNI Specification states return null on OOM */
+     result = AllocateHeap(length + 1, mtInternal, AllocFailStrategy::RETURN_NULL);
+@@ -2756,12 +2756,12 @@ JNI_ENTRY(void, jni_GetStringRegion(JNIEnv *env, jstring string, jsize start, js
+   } else {
+     if (len > 0) {
+       bool is_latin1 = java_lang_String::is_latin1(s);
+-      if (!is_latin1) {
++      if (!is_latin1 && !java_lang_String::is_segmented(s)) {
+         ArrayAccess<>::arraycopy_to_native(s_value, typeArrayOopDesc::element_offset<jchar>(start),
+                                            buf, len);
+       } else {
+         for (int i = 0; i < len; i++) {
+-          buf[i] = ((jchar) s_value->byte_at(i + start)) & 0xff;
++          buf[i] = java_lang_String::char_at(s, i + start);
+         }
+       }
+     }
+@@ -2824,7 +2824,7 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
+   HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);
+   oop s = JNIHandles::resolve_non_null(string);
+   jchar* ret;
+-  if (!java_lang_String::is_latin1(s)) {
++  if (!java_lang_String::is_latin1(s) && !java_lang_String::is_segmented(s)) {
+     typeArrayHandle s_value(thread, java_lang_String::value(s));
+ 
+     // Pin value array
+@@ -2833,14 +2833,14 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
+     ret = (jchar*) s_value->base(T_CHAR);
+     if (isCopy != nullptr) *isCopy = JNI_FALSE;
+   } else {
+-    // Inflate latin1 encoded string to UTF16
++    // Copy segmented content or inflate latin1 to UTF16; never expose leaf arrays.
+     typeArrayOop s_value = java_lang_String::value(s);
+     int s_len = java_lang_String::length(s, s_value);
+     ret = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
+     /* JNI Specification states return null on OOM */
+     if (ret != nullptr) {
+       for (int i = 0; i < s_len; i++) {
+-        ret[i] = ((jchar) s_value->byte_at(i)) & 0xff;
++        ret[i] = java_lang_String::char_at(s, i);
+       }
+       ret[s_len] = 0;
+     }
+@@ -2856,8 +2856,8 @@ JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar
+   oop s = JNIHandles::resolve_non_null(str);
+   bool is_latin1 = java_lang_String::is_latin1(s);
+ 
+-  if (is_latin1) {
+-    // For latin1 string, free jchar array allocated by earlier call to GetStringCritical.
++  if (is_latin1 || java_lang_String::is_segmented(s)) {
++    // Latin1 and segmented Strings return a native copy from GetStringCritical.
+     // This assumes that ReleaseStringCritical bookends GetStringCritical.
+     FREE_C_HEAP_ARRAY(jchar, chars);
+   } else {
+diff --git a/src/hotspot/share/prims/jvmtiTagMap.cpp b/src/hotspot/share/prims/jvmtiTagMap.cpp
+index 6908e1994..c4c9a7304 100644
+--- a/src/hotspot/share/prims/jvmtiTagMap.cpp
++++ b/src/hotspot/share/prims/jvmtiTagMap.cpp
+@@ -662,7 +662,8 @@ static jint invoke_string_value_callback(jvmtiStringPrimitiveValueCallback cb,
+ 
+   // JDK-6584008: the value field may be null if a String instance is
+   // partially constructed.
+-  if (s_value == nullptr) {
++  bool segmented = java_lang_String::is_segmented(str);
++  if (s_value == nullptr && !segmented) {
+     return 0;
+   }
+   // get the string value and length
+@@ -670,14 +671,14 @@ static jint invoke_string_value_callback(jvmtiStringPrimitiveValueCallback cb,
+   int s_len = java_lang_String::length(str);
+   bool is_latin1 = java_lang_String::is_latin1(str);
+   jchar* value;
+-  if (s_len > 0) {
+-    if (!is_latin1) {
++  if (s_len > 0 || segmented) {
++    if (!is_latin1 && !segmented) {
+       value = s_value->char_at_addr(0);
+     } else {
+-      // Inflate latin1 encoded string to UTF16
+-      jchar* buf = NEW_C_HEAP_ARRAY(jchar, s_len, mtInternal);
++      // Native scratch for segmented content or inflated latin1.
++      jchar* buf = NEW_C_HEAP_ARRAY(jchar, MAX2(s_len, 1), mtInternal);
+       for (int i = 0; i < s_len; i++) {
+-        buf[i] = ((jchar) s_value->byte_at(i)) & 0xff;
++        buf[i] = java_lang_String::char_at(str, i);
+       }
+       value = &buf[0];
+     }
+@@ -694,7 +695,7 @@ static jint invoke_string_value_callback(jvmtiStringPrimitiveValueCallback cb,
+                    (jint)s_len,
+                    user_data);
+ 
+-  if (is_latin1 && s_len > 0) {
++  if ((is_latin1 && s_len > 0) || segmented) {
+     FREE_C_HEAP_ARRAY(jchar, value);
+   }
+   return res;
+diff --git a/src/hotspot/share/runtime/arguments.cpp b/src/hotspot/share/runtime/arguments.cpp
+index b0bfae089..44f90b44a 100644
+--- a/src/hotspot/share/runtime/arguments.cpp
++++ b/src/hotspot/share/runtime/arguments.cpp
+@@ -3025,6 +3025,47 @@ jint Arguments::finalize_vm_init_args(bool patch_mod_javabase) {
+   UNSUPPORTED_OPTION(ProfileInterpreter);
+ #endif
+ 
++  // This representation is not yet supported by optimizing compilers, CDS,
++  // string deduplication or JFR. Enforce the experiment boundary after option
++  // parsing, regardless of command-line ordering (including a trailing -Xcomp).
++  if (UseM3SegmentedStrings) {
++#if INCLUDE_JVMCI
++    if (EnableJVMCI || UseJVMCICompiler) {
++      jio_fprintf(defaultStream::error_stream(),
++                  "UseM3SegmentedStrings does not support JVMCI\n");
++      return JNI_ERR;
++    }
++#endif
++    if (UseStringDeduplication) {
++      jio_fprintf(defaultStream::error_stream(),
++                  "UseM3SegmentedStrings does not support UseStringDeduplication\n");
++      return JNI_ERR;
++    }
++#if INCLUDE_CDS
++    if (DumpSharedSpaces || DynamicDumpSharedSpaces || RequireSharedSpaces ||
++        ArchiveClassesAtExit != nullptr || RecordDynamicDumpInfo ||
++        AutoCreateSharedArchive) {
++      jio_fprintf(defaultStream::error_stream(),
++                  "UseM3SegmentedStrings does not support CDS archive operations\n");
++      return JNI_ERR;
++    }
++    UseSharedSpaces = false;
++#endif
++#if INCLUDE_JFR
++    if (FlightRecorder || StartFlightRecording != nullptr ||
++        FlightRecorderOptions != nullptr) {
++      jio_fprintf(defaultStream::error_stream(),
++                  "UseM3SegmentedStrings does not support Flight Recorder\n");
++      return JNI_ERR;
++    }
++#endif
++    set_mode_flags(_int);
++#ifdef COMPILER2
++    FLAG_SET_ERGO(OptimizeStringConcat, false);
++#endif
++    UseStringDeduplication = false;
++  }
++
+   // Parse the CompilationMode flag
+   if (!CompilationModeFlag::initialize()) {
+     return JNI_ERR;
+diff --git a/src/hotspot/share/runtime/globals.hpp b/src/hotspot/share/runtime/globals.hpp
+index 5b609f858..f1050fdee 100644
+--- a/src/hotspot/share/runtime/globals.hpp
++++ b/src/hotspot/share/runtime/globals.hpp
+@@ -1100,6 +1100,9 @@ const int ObjectAlignmentInBytes = 8;
+           /* Note:  This value is zero mod 1<<13 for a cheap sparc set. */  \
+           "Inline allocations larger than this in doublewords must go slow")\
+                                                                             \
++  product(bool, UseM3SegmentedStrings, false, EXPERIMENTAL,                  \
++          "Enable interpreter-only experimental segmented String storage")  \
++                                                                            \
+   product_pd(bool, CompactStrings,                                          \
+           "Enable Strings to use single byte chars in backing store")       \
+                                                                             \
+diff --git a/src/hotspot/share/runtime/threads.cpp b/src/hotspot/share/runtime/threads.cpp
+index 302c3672c..3f93c313f 100644
+--- a/src/hotspot/share/runtime/threads.cpp
++++ b/src/hotspot/share/runtime/threads.cpp
+@@ -338,6 +338,7 @@ void Threads::initialize_java_lang_classes(JavaThread* main_thread, TRAPS) {
+ 
+   // Inject CompactStrings value after the static initializers for String ran.
+   java_lang_String::set_compact_strings(CompactStrings);
++  java_lang_String::set_m3_segmented_strings(UseM3SegmentedStrings);
+ 
+   // Initialize java_lang.System (needed before creating the thread)
+   initialize_class(vmSymbols::java_lang_System(), CHECK);
+diff --git a/src/hotspot/share/services/diagnosticCommand.cpp b/src/hotspot/share/services/diagnosticCommand.cpp
+index e43d7bbec..706625812 100644
+--- a/src/hotspot/share/services/diagnosticCommand.cpp
++++ b/src/hotspot/share/services/diagnosticCommand.cpp
+@@ -967,6 +967,10 @@ DumpSharedArchiveDCmd::DumpSharedArchiveDCmd(outputStream* output, bool heap) :
+ }
+ 
+ void DumpSharedArchiveDCmd::execute(DCmdSource source, TRAPS) {
++  if (UseM3SegmentedStrings) {
++    output()->print_cr("CDS archive operations are unsupported with UseM3SegmentedStrings");
++    return;
++  }
+   jboolean is_static;
+   const char* scmd = _suboption.value();
+   const char* file = _filename.value();
+diff --git a/src/hotspot/share/services/finalizerService.cpp b/src/hotspot/share/services/finalizerService.cpp
+index 202a1af08..aad06bfd4 100644
+--- a/src/hotspot/share/services/finalizerService.cpp
++++ b/src/hotspot/share/services/finalizerService.cpp
+@@ -44,7 +44,7 @@
+ static const char* allocate(oop string) {
+   char* str = nullptr;
+   const typeArrayOop value = java_lang_String::value(string);
+-  if (value != nullptr) {
++  if (value != nullptr || java_lang_String::is_segmented(string)) {
+     const int length = java_lang_String::utf8_length(string, value);
+     str = NEW_C_HEAP_ARRAY(char, length + 1, mtServiceability);
+     java_lang_String::as_utf8_string(string, value, str, length + 1);
+diff --git a/src/java.base/share/classes/java/lang/String.java b/src/java.base/share/classes/java/lang/String.java
+index 3e51175df..0db81d31c 100644
+--- a/src/java.base/share/classes/java/lang/String.java
++++ b/src/java.base/share/classes/java/lang/String.java
+@@ -152,11 +152,27 @@ public final class String
+      *
+      * Additionally, it is marked with {@link Stable} to trust the contents
+      * of the array. No other facility in JDK provides this functionality (yet).
+-     * {@link Stable} is safe here, because value is never null.
++     * Flat Strings have a non-null value. In the opt-in M3 experiment only,
++     * segmented Strings have a permanently null value and immutable leaf
++     * directories; their separately published m3Flat cache is not @Stable.
+      */
+     @Stable
+     private final byte[] value;
+ 
++    // Experimental segmented representation. Directory arrays never escape and
++    // contain only flat immutable String leaves. Ranges are UTF16 code units:
++    // [leaf start, cumulative logical end] for each leaf.
++    private final String[] m3Parts;
++    private final int[] m3Ranges;
++    private final int m3Length;
++    private volatile byte[] m3Flat;
++
++    // HotSpot replaces this value before String initialization completes.
++    static final boolean M3_SEGMENTS;
++    static {
++        M3_SEGMENTS = true;
++    }
++
+     /**
+      * The identifier of the encoding used to encode the bytes in
+      * {@code value}. The supported values in this implementation are
+@@ -243,6 +259,9 @@ public final class String
+      * unnecessary since Strings are immutable.
+      */
+     public String() {
++        this.m3Parts = null;
++        this.m3Ranges = null;
++        this.m3Length = 0;
+         this.value = "".value;
+         this.coder = "".coder;
+     }
+@@ -259,10 +278,15 @@ public final class String
+      */
+     @IntrinsicCandidate
+     public String(String original) {
++        this.m3Ranges = original.m3Ranges;
++        this.m3Length = original.m3Length;
++        this.m3Flat = original.m3Flat;
+         this.value = original.value;
+         this.coder = original.coder;
+         this.hash = original.hash;
+         this.hashIsZero = original.hashIsZero;
++        // Publish the VM's initialized-directory discriminator last.
++        this.m3Parts = original.m3Parts;
+     }
+ 
+     /**
+@@ -337,6 +361,9 @@ public final class String
+      * @since  1.5
+      */
+     public String(int[] codePoints, int offset, int count) {
++        this.m3Parts = null;
++        this.m3Ranges = null;
++        this.m3Length = 0;
+         checkBoundsOffCount(offset, count, codePoints.length);
+         if (count == 0) {
+             this.value = "".value;
+@@ -396,6 +423,9 @@ public final class String
+      */
+     @Deprecated(since="1.1")
+     public String(byte[] ascii, int hibyte, int offset, int count) {
++        this.m3Parts = null;
++        this.m3Ranges = null;
++        this.m3Length = 0;
+         checkBoundsOffCount(offset, count, ascii.length);
+         if (count == 0) {
+             this.value = "".value;
+@@ -530,6 +560,9 @@ public final class String
+      */
+     @SuppressWarnings("removal")
+     private String(Charset charset, byte[] bytes, int offset, int length) {
++        this.m3Parts = null;
++        this.m3Ranges = null;
++        this.m3Length = 0;
+         if (length == 0) {
+             this.value = "".value;
+             this.coder = "".coder;
+@@ -1516,7 +1549,7 @@ public final class String
+      *          object.
+      */
+     public int length() {
+-        return value.length >> coder();
++        return m3Parts == null ? value.length >> coder() : m3Length;
+     }
+ 
+     /**
+@@ -1529,7 +1562,7 @@ public final class String
+      */
+     @Override
+     public boolean isEmpty() {
+-        return value.length == 0;
++        return m3Parts == null ? value.length == 0 : m3Length == 0;
+     }
+ 
+     /**
+@@ -1551,6 +1584,10 @@ public final class String
+      *             string.
+      */
+     public char charAt(int index) {
++        if (m3Parts != null) {
++            checkIndex(index, m3Length);
++            return m3CharAt(index);
++        }
+         if (isLatin1()) {
+             return StringLatin1.charAt(value, index);
+         } else {
+@@ -1582,12 +1619,12 @@ public final class String
+      */
+     public int codePointAt(int index) {
+         if (isLatin1()) {
+-            checkIndex(index, value.length);
+-            return value[index] & 0xff;
++            checkIndex(index, value().length);
++            return value()[index] & 0xff;
+         }
+-        int length = value.length >> 1;
++        int length = value().length >> 1;
+         checkIndex(index, length);
+-        return StringUTF16.codePointAt(value, index, length);
++        return StringUTF16.codePointAt(value(), index, length);
+     }
+ 
+     /**
+@@ -1616,9 +1653,9 @@ public final class String
+         int i = index - 1;
+         checkIndex(i, length());
+         if (isLatin1()) {
+-            return (value[i] & 0xff);
++            return (value()[i] & 0xff);
+         }
+-        return StringUTF16.codePointBefore(value, index);
++        return StringUTF16.codePointBefore(value(), index);
+     }
+ 
+     /**
+@@ -1647,7 +1684,7 @@ public final class String
+         if (isLatin1()) {
+             return endIndex - beginIndex;
+         }
+-        return StringUTF16.codePointCount(value, beginIndex, endIndex);
++        return StringUTF16.codePointCount(value(), beginIndex, endIndex);
+     }
+ 
+     /**
+@@ -1708,9 +1745,9 @@ public final class String
+         checkBoundsBeginEnd(srcBegin, srcEnd, length());
+         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
+         if (isLatin1()) {
+-            StringLatin1.getChars(value, srcBegin, srcEnd, dst, dstBegin);
++            StringLatin1.getChars(value(), srcBegin, srcEnd, dst, dstBegin);
+         } else {
+-            StringUTF16.getChars(value, srcBegin, srcEnd, dst, dstBegin);
++            StringUTF16.getChars(value(), srcBegin, srcEnd, dst, dstBegin);
+         }
+     }
+ 
+@@ -1764,9 +1801,9 @@ public final class String
+         Objects.requireNonNull(dst);
+         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
+         if (isLatin1()) {
+-            StringLatin1.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
++            StringLatin1.getBytes(value(), srcBegin, srcEnd, dst, dstBegin);
+         } else {
+-            StringUTF16.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
++            StringUTF16.getBytes(value(), srcBegin, srcEnd, dst, dstBegin);
+         }
+     }
+ 
+@@ -1792,7 +1829,7 @@ public final class String
+      */
+     public byte[] getBytes(String charsetName)
+             throws UnsupportedEncodingException {
+-        return encode(lookupCharset(charsetName), coder(), value);
++        return encode(lookupCharset(charsetName), coder(), value());
+     }
+ 
+     /**
+@@ -1815,7 +1852,7 @@ public final class String
+      */
+     public byte[] getBytes(Charset charset) {
+         if (charset == null) throw new NullPointerException();
+-        return encode(charset, coder(), value);
++        return encode(charset, coder(), value());
+      }
+ 
+     /**
+@@ -1833,7 +1870,7 @@ public final class String
+      * @since      1.1
+      */
+     public byte[] getBytes() {
+-        return encode(Charset.defaultCharset(), coder(), value);
++        return encode(Charset.defaultCharset(), coder(), value());
+     }
+ 
+     /**
+@@ -1858,6 +1895,14 @@ public final class String
+         if (this == anObject) {
+             return true;
+         }
++        if (anObject instanceof String other && (m3Parts != null || other.m3Parts != null)) {
++            int n = length();
++            if (n != other.length()) return false;
++            for (int i = 0; i < n; i++) {
++                if (charAt(i) != other.charAt(i)) return false;
++            }
++            return true;
++        }
+         return (anObject instanceof String aString)
+                 && (!COMPACT_STRINGS || this.coder == aString.coder)
+                 && StringLatin1.equals(value, aString.value);
+@@ -1890,7 +1935,7 @@ public final class String
+         if (len != sb.length()) {
+             return false;
+         }
+-        byte[] v1 = value;
++        byte[] v1 = value();
+         byte[] v2 = sb.getValue();
+         byte coder = coder();
+         if (coder == sb.getCoder()) {
+@@ -1942,7 +1987,7 @@ public final class String
+         if (n != length()) {
+             return false;
+         }
+-        byte[] val = this.value;
++        byte[] val = this.value();
+         if (isLatin1()) {
+             for (int i = 0; i < n; i++) {
+                 if ((val[i] & 0xff) != cs.charAt(i)) {
+@@ -2038,8 +2083,8 @@ public final class String
+      *          lexicographically greater than the string argument.
+      */
+     public int compareTo(String anotherString) {
+-        byte[] v1 = value;
+-        byte[] v2 = anotherString.value;
++        byte[] v1 = value();
++        byte[] v2 = anotherString.value();
+         byte coder = coder();
+         if (coder == anotherString.coder()) {
+             return coder == LATIN1 ? StringLatin1.compareTo(v1, v2)
+@@ -2074,8 +2119,8 @@ public final class String
+         private static final long serialVersionUID = 8575799808933029326L;
+ 
+         public int compare(String s1, String s2) {
+-            byte[] v1 = s1.value;
+-            byte[] v2 = s2.value;
++            byte[] v1 = s1.value();
++            byte[] v2 = s2.value();
+             byte coder = s1.coder();
+             if (coder == s2.coder()) {
+                 return coder == LATIN1 ? StringLatin1.compareToCI(v1, v2)
+@@ -2156,8 +2201,8 @@ public final class String
+              (ooffset > (long)other.length() - len)) {
+             return false;
+         }
+-        byte[] tv = value;
+-        byte[] ov = other.value;
++        byte[] tv = value();
++        byte[] ov = other.value();
+         byte coder = coder();
+         if (coder == other.coder()) {
+             if (coder == UTF16) {
+@@ -2246,8 +2291,8 @@ public final class String
+                 || (ooffset > (long)other.length() - len)) {
+             return false;
+         }
+-        byte[] tv = value;
+-        byte[] ov = other.value;
++        byte[] tv = value();
++        byte[] ov = other.value();
+         byte coder = coder();
+         if (coder == other.coder()) {
+             return coder == LATIN1
+@@ -2281,8 +2326,8 @@ public final class String
+         if (toffset < 0 || toffset > length() - prefix.length()) {
+             return false;
+         }
+-        byte[] ta = value;
+-        byte[] pa = prefix.value;
++        byte[] ta = value();
++        byte[] pa = prefix.value();
+         int po = 0;
+         int pc = pa.length;
+         byte coder = coder();
+@@ -2362,8 +2407,12 @@ public final class String
+         // from immutable state
+         int h = hash;
+         if (h == 0 && !hashIsZero) {
+-            h = isLatin1() ? StringLatin1.hashCode(value)
+-                           : StringUTF16.hashCode(value);
++            if (m3Parts != null) {
++                for (int i = 0; i < m3Length; i++) h = 31 * h + m3CharAt(i);
++            } else {
++                h = isLatin1() ? StringLatin1.hashCode(value)
++                              : StringUTF16.hashCode(value);
++            }
+             if (h == 0) {
+                 hashIsZero = true;
+             } else {
+@@ -2454,8 +2503,8 @@ public final class String
+      * {@code fromIndex} were larger than the string length, or were negative.
+      */
+     public int indexOf(int ch, int fromIndex) {
+-        return isLatin1() ? StringLatin1.indexOf(value, ch, fromIndex, length())
+-                : StringUTF16.indexOf(value, ch, fromIndex, length());
++        return isLatin1() ? StringLatin1.indexOf(value(), ch, fromIndex, length())
++                : StringUTF16.indexOf(value(), ch, fromIndex, length());
+     }
+ 
+     /**
+@@ -2500,8 +2549,8 @@ public final class String
+      */
+     public int indexOf(int ch, int beginIndex, int endIndex) {
+         checkBoundsBeginEnd(beginIndex, endIndex, length());
+-        return isLatin1() ? StringLatin1.indexOf(value, ch, beginIndex, endIndex)
+-                : StringUTF16.indexOf(value, ch, beginIndex, endIndex);
++        return isLatin1() ? StringLatin1.indexOf(value(), ch, beginIndex, endIndex)
++                : StringUTF16.indexOf(value(), ch, beginIndex, endIndex);
+     }
+ 
+     /**
+@@ -2566,8 +2615,8 @@ public final class String
+      *          if the character does not occur before that point.
+      */
+     public int lastIndexOf(int ch, int fromIndex) {
+-        return isLatin1() ? StringLatin1.lastIndexOf(value, ch, fromIndex)
+-                          : StringUTF16.lastIndexOf(value, ch, fromIndex);
++        return isLatin1() ? StringLatin1.lastIndexOf(value(), ch, fromIndex)
++                          : StringUTF16.lastIndexOf(value(), ch, fromIndex);
+     }
+ 
+     /**
+@@ -2587,13 +2636,13 @@ public final class String
+     public int indexOf(String str) {
+         byte coder = coder();
+         if (coder == str.coder()) {
+-            return isLatin1() ? StringLatin1.indexOf(value, str.value)
+-                              : StringUTF16.indexOf(value, str.value);
++            return isLatin1() ? StringLatin1.indexOf(value(), str.value())
++                              : StringUTF16.indexOf(value(), str.value());
+         }
+         if (coder == LATIN1) {  // str.coder == UTF16
+             return -1;
+         }
+-        return StringUTF16.indexOfLatin1(value, str.value);
++        return StringUTF16.indexOfLatin1(value(), str.value());
+     }
+ 
+     /**
+@@ -2627,7 +2676,7 @@ public final class String
+      *          or {@code -1} if there is no such occurrence.
+      */
+     public int indexOf(String str, int fromIndex) {
+-        return indexOf(value, coder(), length(), str, fromIndex);
++        return indexOf(value(), coder(), length(), str, fromIndex);
+     }
+ 
+     /**
+@@ -2660,7 +2709,7 @@ public final class String
+             return indexOf(str.charAt(0), beginIndex, endIndex);
+         }
+         checkBoundsBeginEnd(beginIndex, endIndex, length());
+-        return indexOf(value, coder(), endIndex, str, beginIndex);
++        return indexOf(value(), coder(), endIndex, str, beginIndex);
+     }
+ 
+     /**
+@@ -2685,7 +2734,7 @@ public final class String
+             return fromIndex;
+         }
+ 
+-        byte[] tgt = tgtStr.value;
++        byte[] tgt = tgtStr.value();
+         byte tgtCoder = tgtStr.coder();
+         if (srcCoder == tgtCoder) {
+             return srcCoder == LATIN1
+@@ -2736,7 +2785,7 @@ public final class String
+      *          or {@code -1} if there is no such occurrence.
+      */
+     public int lastIndexOf(String str, int fromIndex) {
+-        return lastIndexOf(value, coder(), length(), str, fromIndex);
++        return lastIndexOf(value(), coder(), length(), str, fromIndex);
+     }
+ 
+     /**
+@@ -2752,7 +2801,7 @@ public final class String
+      */
+     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
+                            String tgtStr, int fromIndex) {
+-        byte[] tgt = tgtStr.value;
++        byte[] tgt = tgtStr.value();
+         byte tgtCoder = tgtStr.coder();
+         int tgtCount = tgtStr.length();
+         /*
+@@ -2832,8 +2881,11 @@ public final class String
+             return this;
+         }
+         int subLen = endIndex - beginIndex;
+-        return isLatin1() ? StringLatin1.newString(value, beginIndex, subLen)
+-                          : StringUTF16.newString(value, beginIndex, subLen);
++        if (m3Enabled() && subLen != 0) {
++            return m3Slice(beginIndex, endIndex);
++        }
++        return isLatin1() ? StringLatin1.newString(value(), beginIndex, subLen)
++                          : StringUTF16.newString(value(), beginIndex, subLen);
+     }
+ 
+     /**
+@@ -2926,8 +2978,8 @@ public final class String
+      */
+     public String replace(char oldChar, char newChar) {
+         if (oldChar != newChar) {
+-            String ret = isLatin1() ? StringLatin1.replace(value, oldChar, newChar)
+-                                    : StringUTF16.replace(value, oldChar, newChar);
++            String ret = isLatin1() ? StringLatin1.replace(value(), oldChar, newChar)
++                                    : StringUTF16.replace(value(), oldChar, newChar);
+             if (ret != null) {
+                 return ret;
+             }
+@@ -3093,12 +3145,12 @@ public final class String
+             boolean trgtIsLatin1 = trgtStr.isLatin1();
+             boolean replIsLatin1 = replStr.isLatin1();
+             String ret = (thisIsLatin1 && trgtIsLatin1 && replIsLatin1)
+-                    ? StringLatin1.replace(value, thisLen,
+-                                           trgtStr.value, trgtLen,
+-                                           replStr.value, replLen)
+-                    : StringUTF16.replace(value, thisLen, thisIsLatin1,
+-                                          trgtStr.value, trgtLen, trgtIsLatin1,
+-                                          replStr.value, replLen, replIsLatin1);
++                    ? StringLatin1.replace(value(), thisLen,
++                                           trgtStr.value(), trgtLen,
++                                           replStr.value(), replLen)
++                    : StringUTF16.replace(value(), thisLen, thisIsLatin1,
++                                          trgtStr.value(), trgtLen, trgtIsLatin1,
++                                          replStr.value(), replLen, replIsLatin1);
+             if (ret != null) {
+                 return ret;
+             }
+@@ -3493,7 +3545,7 @@ public final class String
+         // Preserve a fresh result object and its default hash/dedup state.
+         if (size == 1 && prefix.isEmpty() && suffix.isEmpty()) {
+             String element = elements[0];
+-            return new String(element.value, element.coder());
++            return new String(element.value(), element.coder());
+         }
+         int icoder = prefix.coder() | suffix.coder();
+         long len = (long) prefix.length() + suffix.length();
+@@ -3638,8 +3690,8 @@ public final class String
+      * @since   1.1
+      */
+     public String toLowerCase(Locale locale) {
+-        return isLatin1() ? StringLatin1.toLowerCase(this, value, locale)
+-                          : StringUTF16.toLowerCase(this, value, locale);
++        return isLatin1() ? StringLatin1.toLowerCase(this, value(), locale)
++                          : StringUTF16.toLowerCase(this, value(), locale);
+     }
+ 
+     /**
+@@ -3718,8 +3770,8 @@ public final class String
+      * @since   1.1
+      */
+     public String toUpperCase(Locale locale) {
+-        return isLatin1() ? StringLatin1.toUpperCase(this, value, locale)
+-                          : StringUTF16.toUpperCase(this, value, locale);
++        return isLatin1() ? StringLatin1.toUpperCase(this, value(), locale)
++                          : StringUTF16.toUpperCase(this, value(), locale);
+     }
+ 
+     /**
+@@ -3778,8 +3830,8 @@ public final class String
+      *          has no leading or trailing space.
+      */
+     public String trim() {
+-        String ret = isLatin1() ? StringLatin1.trim(value)
+-                                : StringUTF16.trim(value);
++        String ret = isLatin1() ? StringLatin1.trim(value())
++                                : StringUTF16.trim(value());
+         return ret == null ? this : ret;
+     }
+ 
+@@ -3810,8 +3862,8 @@ public final class String
+      * @since 11
+      */
+     public String strip() {
+-        String ret = isLatin1() ? StringLatin1.strip(value)
+-                                : StringUTF16.strip(value);
++        String ret = isLatin1() ? StringLatin1.strip(value())
++                                : StringUTF16.strip(value());
+         return ret == null ? this : ret;
+     }
+ 
+@@ -3840,8 +3892,8 @@ public final class String
+      * @since 11
+      */
+     public String stripLeading() {
+-        String ret = isLatin1() ? StringLatin1.stripLeading(value)
+-                                : StringUTF16.stripLeading(value);
++        String ret = isLatin1() ? StringLatin1.stripLeading(value())
++                                : StringUTF16.stripLeading(value());
+         return ret == null ? this : ret;
+     }
+ 
+@@ -3870,8 +3922,8 @@ public final class String
+      * @since 11
+      */
+     public String stripTrailing() {
+-        String ret = isLatin1() ? StringLatin1.stripTrailing(value)
+-                                : StringUTF16.stripTrailing(value);
++        String ret = isLatin1() ? StringLatin1.stripTrailing(value())
++                                : StringUTF16.stripTrailing(value());
+         return ret == null ? this : ret;
+     }
+ 
+@@ -3923,7 +3975,7 @@ public final class String
+      * @since 11
+      */
+     public Stream<String> lines() {
+-        return isLatin1() ? StringLatin1.lines(value) : StringUTF16.lines(value);
++        return isLatin1() ? StringLatin1.lines(value()) : StringUTF16.lines(value());
+     }
+ 
+     /**
+@@ -3979,13 +4031,13 @@ public final class String
+     }
+ 
+     private int indexOfNonWhitespace() {
+-        return isLatin1() ? StringLatin1.indexOfNonWhitespace(value)
+-                          : StringUTF16.indexOfNonWhitespace(value);
++        return isLatin1() ? StringLatin1.indexOfNonWhitespace(value())
++                          : StringUTF16.indexOfNonWhitespace(value());
+     }
+ 
+     private int lastIndexOfNonWhitespace() {
+-        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(value)
+-                          : StringUTF16.lastIndexOfNonWhitespace(value);
++        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(value())
++                          : StringUTF16.lastIndexOfNonWhitespace(value());
+     }
+ 
+     /**
+@@ -4314,8 +4366,8 @@ public final class String
+     @Override
+     public IntStream chars() {
+         return StreamSupport.intStream(
+-            isLatin1() ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
+-                       : new StringUTF16.CharsSpliterator(value, Spliterator.IMMUTABLE),
++            isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
++                       : new StringUTF16.CharsSpliterator(value(), Spliterator.IMMUTABLE),
+             false);
+     }
+ 
+@@ -4334,8 +4386,8 @@ public final class String
+     @Override
+     public IntStream codePoints() {
+         return StreamSupport.intStream(
+-            isLatin1() ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
+-                       : new StringUTF16.CodePointsSpliterator(value, Spliterator.IMMUTABLE),
++            isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
++                       : new StringUTF16.CodePointsSpliterator(value(), Spliterator.IMMUTABLE),
+             false);
+     }
+ 
+@@ -4347,8 +4399,8 @@ public final class String
+      *          the character sequence represented by this string.
+      */
+     public char[] toCharArray() {
+-        return isLatin1() ? StringLatin1.toChars(value)
+-                          : StringUTF16.toChars(value);
++        return isLatin1() ? StringLatin1.toChars(value())
++                          : StringUTF16.toChars(value());
+     }
+ 
+     /**
+@@ -4666,7 +4718,7 @@ public final class String
+         if (count == 1) {
+             return this;
+         }
+-        final int len = value.length;
++        final int len = value().length;
+         if (len == 0 || count == 0) {
+             return "";
+         }
+@@ -4675,12 +4727,12 @@ public final class String
+         }
+         if (len == 1) {
+             final byte[] single = new byte[count];
+-            Arrays.fill(single, value[0]);
++            Arrays.fill(single, value()[0]);
+             return new String(single, coder);
+         }
+         final int limit = len * count;
+         final byte[] multiple = new byte[limit];
+-        System.arraycopy(value, 0, multiple, 0, len);
++        System.arraycopy(value(), 0, multiple, 0, len);
+         repeatCopyRest(multiple, 0, limit, len);
+         return new String(multiple, coder);
+     }
+@@ -4725,9 +4777,9 @@ public final class String
+      */
+     void getBytes(byte[] dst, int dstBegin, byte coder) {
+         if (coder() == coder) {
+-            System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
++            System.arraycopy(value(), 0, dst, dstBegin << coder, value().length);
+         } else {    // this.coder == LATIN && coder == UTF16
+-            StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
++            StringLatin1.inflate(value(), 0, dst, dstBegin, value().length);
+         }
+     }
+ 
+@@ -4745,9 +4797,9 @@ public final class String
+      */
+     void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
+         if (coder() == coder) {
+-            System.arraycopy(value, srcPos << coder, dst, dstBegin << coder, length << coder);
++            System.arraycopy(value(), srcPos << coder, dst, dstBegin << coder, length << coder);
+         } else {    // this.coder == LATIN && coder == UTF16
+-            StringLatin1.inflate(value, srcPos, dst, dstBegin, length);
++            StringLatin1.inflate(value(), srcPos, dst, dstBegin, length);
+         }
+     }
+ 
+@@ -4761,6 +4813,9 @@ public final class String
+      * characters in their byte sequences defined by the {@code StringUTF16}.
+      */
+     String(char[] value, int off, int len, Void sig) {
++        this.m3Parts = null;
++        this.m3Ranges = null;
++        this.m3Length = 0;
+         if (len == 0) {
+             this.value = "".value;
+             this.coder = "".coder;
+@@ -4783,6 +4838,9 @@ public final class String
+      * disambiguating it against other (public) constructors.
+      */
+     String(AbstractStringBuilder asb, Void sig) {
++        this.m3Parts = null;
++        this.m3Ranges = null;
++        this.m3Length = 0;
+         byte[] val = asb.getValue();
+         int length = asb.length();
+         if (asb.isLatin1()) {
+@@ -4807,6 +4865,9 @@ public final class String
+     * Package private constructor which shares value array for speed.
+     */
+     String(byte[] value, byte coder) {
++        this.m3Parts = null;
++        this.m3Ranges = null;
++        this.m3Length = 0;
+         this.value = value;
+         this.coder = coder;
+     }
+@@ -4816,7 +4877,117 @@ public final class String
+     }
+ 
+     byte[] value() {
+-        return value;
++        if (value != null) return value;
++        byte[] flat = m3Flat;
++        if (flat == null) {
++            flat = (coder() == LATIN1) ? new byte[m3Length] : StringUTF16.newBytesFor(m3Length);
++            for (int i = 0; i < m3Length; i++) {
++                char c = m3CharAt(i);
++                if (coder() == LATIN1) flat[i] = (byte)c;
++                else StringUTF16.putChar(flat, i, c);
++            }
++            // Duplicate races are harmless: each fully populated array is
++            // immutable, and the volatile store publishes its contents.
++            m3Flat = flat;
++        }
++        return flat;
++    }
++
++    static boolean m3Enabled() {
++        return M3_SEGMENTS && jdk.internal.misc.VM.isBooted();
++    }
++
++    private String(String[] parts, int[] ranges, int length, byte coder) {
++        this.value = null;
++        this.coder = coder;
++        this.m3Ranges = ranges;
++        this.m3Length = length;
++        // Publish the VM's initialized-directory discriminator last.
++        this.m3Parts = parts;
++    }
++
++    private char m3CharAt(int index) {
++        int lo = 0, hi = m3Parts.length - 1;
++        while (lo < hi) {
++            int mid = (lo + hi) >>> 1;
++            if (index < m3Ranges[2 * mid + 1]) hi = mid;
++            else lo = mid + 1;
++        }
++        int preceding = lo == 0 ? 0 : m3Ranges[2 * lo - 1];
++        String leaf = m3Parts[lo];
++        int source = m3Ranges[2 * lo] + index - preceding;
++        return leaf.isLatin1() ? StringLatin1.charAt(leaf.value, source)
++                              : StringUTF16.charAt(leaf.value, source);
++    }
++
++    // null means the bounded directory would overflow; caller uses the stock
++    // contiguous concat path. No canonical pool or mutable input is involved.
++    static String m3Concat(String left, String right) {
++        if (!m3Enabled()) return null;
++        int count = (left.m3Parts == null ? 1 : left.m3Parts.length)
++                  + (right.m3Parts == null ? 1 : right.m3Parts.length);
++        if (count > 256) return null;
++        long length = (long)left.length() + right.length();
++        if (length > (Integer.MAX_VALUE >> (left.coder() | right.coder()))) {
++            throw new OutOfMemoryError("Requested string length exceeds VM limit");
++        }
++        String[] parts = new String[count];
++        int[] ranges = new int[2 * count];
++        int at = left.m3Append(parts, ranges, 0, 0);
++        right.m3Append(parts, ranges, at, left.length());
++        return new String(parts, ranges, (int)length, (byte)(left.coder() | right.coder()));
++    }
++
++    private int m3Append(String[] parts, int[] ranges, int at, int preceding) {
++        if (m3Parts == null) {
++            parts[at] = this;
++            ranges[2 * at] = 0;
++            ranges[2 * at + 1] = preceding + length();
++            return at + 1;
++        }
++        for (int i = 0; i < m3Parts.length; i++, at++) {
++            parts[at] = m3Parts[i];
++            ranges[2 * at] = m3Ranges[2 * i];
++            ranges[2 * at + 1] = preceding + m3Ranges[2 * i + 1];
++        }
++        return at;
++    }
++
++    private String m3Slice(int begin, int end) {
++        int first = 0, last = 0;
++        if (m3Parts != null) {
++            while (begin >= m3Ranges[2 * first + 1]) first++;
++            last = first;
++            while (end > m3Ranges[2 * last + 1]) last++;
++        }
++        int count = last - first + 1;
++        String[] parts = new String[count];
++        int[] ranges = new int[2 * count];
++        if (m3Parts == null) {
++            parts[0] = this;
++            ranges[0] = begin;
++            ranges[1] = end - begin;
++        } else {
++            int written = 0;
++            for (int i = first; i <= last; i++) {
++                int previous = i == 0 ? 0 : m3Ranges[2 * i - 1];
++                int start = Math.max(begin, previous);
++                int stop = Math.min(end, m3Ranges[2 * i + 1]);
++                int dest = i - first;
++                parts[dest] = m3Parts[i];
++                ranges[2 * dest] = m3Ranges[2 * i] + start - previous;
++                written += stop - start;
++                ranges[2 * dest + 1] = written;
++            }
++        }
++        byte resultCoder = coder();
++        if (COMPACT_STRINGS && resultCoder == UTF16) {
++            resultCoder = LATIN1;
++            for (int i = begin; i < end; i++) {
++                if (charAt(i) > 255) { resultCoder = UTF16; break; }
++            }
++        }
++        return new String(parts, ranges, end - begin, resultCoder);
+     }
+ 
+     boolean isLatin1() {
+diff --git a/src/java.base/share/classes/java/lang/StringConcatHelper.java b/src/java.base/share/classes/java/lang/StringConcatHelper.java
+index 139181af0..8b0a21722 100644
+--- a/src/java.base/share/classes/java/lang/StringConcatHelper.java
++++ b/src/java.base/share/classes/java/lang/StringConcatHelper.java
+@@ -428,6 +428,8 @@ final class StringConcatHelper {
+             // newly created string required, see JLS 15.18.1
+             return new String(s1);
+         }
++        String segmented = String.m3Concat(s1, s2);
++        if (segmented != null) return segmented;
+         // start "mixing" in length and coder or arguments, order is not
+         // important
+         long indexCoder = mix(initialCoder(), s1);
+diff --git a/src/java.base/share/native/libjava/jni_util.c b/src/java.base/share/native/libjava/jni_util.c
+index 3d9004d96..aa46e12c1 100644
+--- a/src/java.base/share/native/libjava/jni_util.c
++++ b/src/java.base/share/native/libjava/jni_util.c
+@@ -669,6 +669,7 @@ static jmethodID String_getBytes_ID;    /* String.getBytes(Charset) */
+ /* Cached field IDs */
+ static jfieldID String_coder_ID;        /* String.coder */
+ static jfieldID String_value_ID;        /* String.value */
++static jfieldID String_m3Parts_ID;      /* immutable experimental segment directory */
+ 
+ /* Create a new string by converting str to a heap-allocated byte array and
+  * calling the appropriate String constructor.
+@@ -814,6 +815,8 @@ InitializeEncoding(JNIEnv *env, const char *encname)
+     CHECK_NULL(String_coder_ID);
+     String_value_ID = (*env)->GetFieldID(env, strClazz, "value", "[B");
+     CHECK_NULL(String_value_ID);
++    String_m3Parts_ID = (*env)->GetFieldID(env, strClazz, "m3Parts", "[Ljava/lang/String;");
++    CHECK_NULL(String_m3Parts_ID);
+ }
+ 
+ JNIEXPORT jstring JNICALL
+@@ -903,8 +906,16 @@ getStringUTF8(JNIEnv *env, jstring jstr, jboolean strict)
+         return NULL;
+     }
+     value = (*env)->GetObjectField(env, jstr, String_value_ID);
+-    if (value == NULL)
++    if (value == NULL) {
++        jobject parts = (*env)->GetObjectField(env, jstr, String_m3Parts_ID);
++        if (parts != NULL) {
++            (*env)->DeleteLocalRef(env, parts);
++            // Platform conversion is an explicit Java materialization boundary.
++            // No primitive array or critical pointer has been acquired here.
++            return getStringBytes(env, jstr, strict);
++        }
+         return NULL;
++    }
+     len = (*env)->GetArrayLength(env, value);
+     str = (*env)->GetPrimitiveArrayCritical(env, value, NULL);
+     if (str == NULL) {
+diff --git a/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java b/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
+index ca4b63bc7..deb2bd8a7 100644
+--- a/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
++++ b/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
+@@ -145,6 +145,26 @@ public class OopUtilities {
+ 
+   public static String stringOopToString(Oop stringOop) {
+     InstanceKlass k = (InstanceKlass) stringOop.getKlass();
++    // The experimental M3 layout retains flat String leaves. Decode without
++    // requiring the target VM to allocate or populate its lazy Java cache.
++    OopField partsField = (OopField) k.findField("m3Parts", "[Ljava/lang/String;");
++    if (partsField != null) {
++      ObjArray parts = (ObjArray) partsField.getValue(stringOop);
++      if (parts != null) {
++        OopField rangesField = (OopField) k.findField("m3Ranges", "[I");
++        TypeArray ranges = (TypeArray) rangesField.getValue(stringOop);
++        StringBuilder result = new StringBuilder();
++        int previousEnd = 0;
++        for (int i = 0; i < parts.getLength(); i++) {
++          int start = ranges.getIntAt(2 * i);
++          int end = ranges.getIntAt(2 * i + 1);
++          String leaf = stringOopToString(parts.getObjAt(i));
++          result.append(leaf, start, start + end - previousEnd);
++          previousEnd = end;
++        }
++        return result.toString();
++      }
++    }
+     coderField  = (ByteField) k.findField("coder", "B");
+     valueField  = (OopField) k.findField("value",  "[B");
+     if (Assert.ASSERTS_ENABLED) {

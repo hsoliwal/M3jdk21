@@ -1,0 +1,196 @@
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.commonmark {
+          ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\AbstractBlockParser.java:10: warning: [missing-explicit-ctor] class AbstractBlockParser in exported package com.m3.lib.commonmark.parser.block declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public abstract class AbstractBlockParser implements BlockParser {
+                ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\BlockQuoteParser.java:9: warning: [missing-explicit-ctor] class BlockQuoteParser in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class BlockQuoteParser extends AbstractBlockParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\AbstractBlockParserFactory.java:3: warning: [missing-explicit-ctor] class AbstractBlockParserFactory in exported package com.m3.lib.commonmark.parser.block declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public abstract class AbstractBlockParserFactory implements BlockParserFactory {}
+                ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\BlockQuoteParser.java:50: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory extends AbstractBlockParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Node.java:12: warning: [missing-explicit-ctor] class Node in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public abstract class Node {
+                ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Block.java:4: warning: [missing-explicit-ctor] class Block in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public abstract class Block extends Node {
+                ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\BlockQuote.java:14: warning: [missing-explicit-ctor] class BlockQuote in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class BlockQuote extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\ListBlock.java:4: warning: [missing-explicit-ctor] class ListBlock in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public abstract class ListBlock extends Block {
+                ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\BulletList.java:16: warning: [missing-explicit-ctor] class BulletList in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class BulletList extends ListBlock {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Document.java:4: warning: [missing-explicit-ctor] class Document in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class Document extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\FencedCodeBlock.java:17: warning: [missing-explicit-ctor] class FencedCodeBlock in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class FencedCodeBlock extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\HardLineBreak.java:15: warning: [missing-explicit-ctor] class HardLineBreak in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class HardLineBreak extends Node {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Heading.java:17: warning: [missing-explicit-ctor] class Heading in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class Heading extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\ThematicBreak.java:16: warning: [missing-explicit-ctor] class ThematicBreak in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class ThematicBreak extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\HtmlInline.java:8: warning: [missing-explicit-ctor] class HtmlInline in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class HtmlInline extends Node {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\HtmlBlock.java:8: warning: [missing-explicit-ctor] class HtmlBlock in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class HtmlBlock extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\IndentedCodeBlock.java:17: warning: [missing-explicit-ctor] class IndentedCodeBlock in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class IndentedCodeBlock extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\ListItem.java:13: warning: [missing-explicit-ctor] class ListItem in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class ListItem extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\OrderedList.java:16: warning: [missing-explicit-ctor] class OrderedList in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class OrderedList extends ListBlock {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Paragraph.java:8: warning: [missing-explicit-ctor] class Paragraph in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class Paragraph extends Block {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\SoftLineBreak.java:13: warning: [missing-explicit-ctor] class SoftLineBreak in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class SoftLineBreak extends Node {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\CustomBlock.java:7: warning: [missing-explicit-ctor] class CustomBlock in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public abstract class CustomBlock extends Block {
+                ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\CustomNode.java:6: warning: [missing-explicit-ctor] class CustomNode in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public abstract class CustomNode extends Node {
+                ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\SourceLines.java:12: warning: [missing-explicit-ctor] class SourceLines in exported package com.m3.lib.commonmark.parser declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class SourceLines {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\BlockStartImpl.java:51: warning: [deprecation] replaceActiveBlockParser() in BlockStart has been deprecated
+    public BlockStart replaceActiveBlockParser() {
+                      ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\Definitions.java:7: warning: [missing-explicit-ctor] class Definitions in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class Definitions {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\Definitions.java:30: warning: [unchecked] unchecked cast
+        return (DefinitionMap<V>) definitionsByType.get(type);
+                                                       ^
+  required: DefinitionMap<V>
+  found:    DefinitionMap<CAP#1>
+  where V is a type-variable:
+    V extends Object declared in method <V>getMap(Class<V>)
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\DocumentBlockParser.java:9: warning: [missing-explicit-ctor] class DocumentBlockParser in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class DocumentBlockParser extends AbstractBlockParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\ParagraphParser.java:12: warning: [missing-explicit-ctor] class ParagraphParser in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class ParagraphParser extends AbstractBlockParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\LinkReferenceDefinitionParser.java:21: warning: [missing-explicit-ctor] class LinkReferenceDefinitionParser in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class LinkReferenceDefinitionParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\Escaping.java:8: warning: [missing-explicit-ctor] class Escaping in exported package com.m3.lib.commonmark.internal.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class Escaping {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\FencedCodeBlockParser.java:73: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory extends AbstractBlockParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\HeadingParser.java:41: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory extends AbstractBlockParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\HtmlBlockParser.java:112: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory extends AbstractBlockParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\IndentedCodeBlockParser.java:13: warning: [missing-explicit-ctor] class IndentedCodeBlockParser in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class IndentedCodeBlockParser extends AbstractBlockParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\IndentedCodeBlockParser.java:59: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory extends AbstractBlockParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\InlineParserContextImpl.java:61: warning: [deprecation] getLinkReferenceDefinition(String) in InlineParserContext has been deprecated
+    public LinkReferenceDefinition getLinkReferenceDefinition(String label) {
+                                   ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\ListBlockParser.java:203: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory extends AbstractBlockParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\ThematicBreakParser.java:26: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory extends AbstractBlockParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\AutolinkInlineParser.java:13: warning: [missing-explicit-ctor] class AutolinkInlineParser in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class AutolinkInlineParser implements InlineContentParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\AutolinkInlineParser.java:56: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory implements InlineContentParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\BackslashInlineParser.java:15: warning: [missing-explicit-ctor] class BackslashInlineParser in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class BackslashInlineParser implements InlineContentParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\BackslashInlineParser.java:37: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory implements InlineContentParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\BackticksInlineParser.java:15: warning: [missing-explicit-ctor] class BackticksInlineParser in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class BackticksInlineParser implements InlineContentParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\BackticksInlineParser.java:73: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory implements InlineContentParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\CoreLinkProcessor.java:12: warning: [missing-explicit-ctor] class CoreLinkProcessor in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class CoreLinkProcessor implements LinkProcessor {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\EntityInlineParser.java:10: warning: [missing-explicit-ctor] class EntityInlineParser in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class EntityInlineParser implements InlineContentParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\EntityInlineParser.java:57: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory implements InlineContentParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\HtmlInlineParser.java:9: warning: [missing-explicit-ctor] class HtmlInlineParser in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class HtmlInlineParser implements InlineContentParser {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\HtmlInlineParser.java:259: warning: [missing-explicit-ctor] class Factory in exported package com.m3.lib.commonmark.internal.inline declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Factory implements InlineContentParserFactory {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\renderer\NodeRendererMap.java:10: warning: [missing-explicit-ctor] class NodeRendererMap in exported package com.m3.lib.commonmark.internal.renderer declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class NodeRendererMap {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\Html5Entities.java:12: warning: [missing-explicit-ctor] class Html5Entities in exported package com.m3.lib.commonmark.internal.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class Html5Entities {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\LinkScanner.java:5: warning: [missing-explicit-ctor] class LinkScanner in exported package com.m3.lib.commonmark.internal.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class LinkScanner {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\Parsing.java:3: warning: [missing-explicit-ctor] class Parsing in exported package com.m3.lib.commonmark.internal.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class Parsing {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\AbstractVisitor.java:9: warning: [missing-explicit-ctor] class AbstractVisitor in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public abstract class AbstractVisitor implements Visitor {
+                ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\SourceSpans.java:11: warning: [missing-explicit-ctor] class SourceSpans in exported package com.m3.lib.commonmark.node declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class SourceSpans {
+       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\Parser.java:143: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.commonmark.parser declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Builder {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\HtmlRenderer.java:73: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.commonmark.renderer.html declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Builder {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\markdown\MarkdownRenderer.java:77: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.commonmark.renderer.markdown declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Builder {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\TextContentRenderer.java:52: warning: [missing-explicit-ctor] class Builder in exported package com.m3.lib.commonmark.renderer.text declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+    public static class Builder {
+                  ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\TextContentRenderer.java:148: warning: [deprecation] stripNewlines() in TextContentNodeRendererContext has been deprecated
+        public boolean stripNewlines() {
+                       ^
+H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\text\Characters.java:4: warning: [missing-explicit-ctor] class Characters in exported package com.m3.lib.commonmark.text declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.commonmark
+public class Characters {
+       ^
+63 warnings

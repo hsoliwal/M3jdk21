@@ -1,0 +1,10 @@
+gate	host	result	evidence
+census	any	203 native methods: BOUND 116 (was 105), ABSENT 87 (was 99; N7a retired 1)	tools/native_census.py v1.1 -> NATIVE_CENSUS.tsv
+build_windows	Windows 11, MinGW gcc 15.2, CMake 4.3.1, JDK 21	19 libraries (m3_value_bits skipped: no __STDC_IEC_559__)	tools/build_check.sh (M3_NATIVE_CENSUS=NATIVE_CENSUS.tsv)
+exports_windows	same	exported 79 = expected 79 (81 BOUND - 2 PrimitiveFloat16 skipped), missing 0, extra 0, non-JNI 0	tools/export_check.sh v1.1
+mutant_windows	same	without header survived, with header killed	tools/mutant_check.sh
+build_linux	WSL Ubuntu 24.04, gcc 13.3, CMake 3.28, OpenJDK 21	20 libraries	tools/build_check.sh
+exports_linux	same	exported 81 = BOUND 81, missing 0, extra 0, non-JNI 0	tools/export_check.sh v1.1
+mutant_linux	same	without header survived, with header killed	tools/mutant_check.sh
+suite_windows_native	Windows, JDK 21	2850 tests, 0 failures, 0 errors, 1 skipped (MatBitMatrixTileJUnitTest = N7); PackedNativeTest 130 tests now run (were skipped)	mvn verify -Pm3-collections-native
+custody	any	module-source-successor-20261109.py --check changed=0	m3/collections/qualification

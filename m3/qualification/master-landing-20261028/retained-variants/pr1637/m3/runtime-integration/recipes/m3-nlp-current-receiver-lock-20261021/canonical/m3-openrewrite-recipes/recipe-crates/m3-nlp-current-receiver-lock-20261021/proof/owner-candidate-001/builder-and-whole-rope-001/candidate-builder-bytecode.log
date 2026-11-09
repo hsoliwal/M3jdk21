@@ -1,0 +1,279 @@
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$Builder {
+  private final java.util.Map<com.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity, com.m3.text.M3LexiconPrecompute$TranslationProjection> translations;
+    descriptor: Ljava/util/Map;
+
+  private final java.util.Map<com.m3.text.SharedLexiconPrecomputeCatalog$SpellScope, com.m3.text.M3LexiconPrecompute$SpellIndex> spellIndexes;
+    descriptor: Ljava/util/Map;
+
+  private final java.util.Map<com.m3.text.SharedLexiconPrecomputeCatalog$TokenRange, com.m3.text.M3LexiconPrecompute$TokenHashPrecompute> tokenHashes;
+    descriptor: Ljava/util/Map;
+
+  private final java.util.Map<com.m3.text.SharedLexiconPrecomputeCatalog$ValueToken, com.m3.text.M3LexiconPrecompute$PrefixCounts> prefixCounts;
+    descriptor: Ljava/util/Map;
+
+  private final java.util.Map<com.m3.text.SharedLexiconPrecomputeCatalog$ValueScope, com.m3.text.M3LexiconPrecompute$TokenFrequency> tokenFrequencies;
+    descriptor: Ljava/util/Map;
+
+  private final java.util.Map<com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity, com.m3.text.M3LexiconPrecompute$IndexWordFacts> wordFacts;
+    descriptor: Ljava/util/Map;
+
+  private final java.util.Map<com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity, com.m3.text.M3LexiconPrecompute$IndexWordSignal> wordSignals;
+    descriptor: Ljava/util/Map;
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokespecial #3                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #9                  // class java/util/HashMap
+       8: dup
+       9: invokespecial #11                 // Method java/util/HashMap."<init>":()V
+      12: putfield      #12                 // Field translations:Ljava/util/Map;
+      15: aload_0
+      16: new           #9                  // class java/util/HashMap
+      19: dup
+      20: invokespecial #11                 // Method java/util/HashMap."<init>":()V
+      23: putfield      #18                 // Field spellIndexes:Ljava/util/Map;
+      26: aload_0
+      27: new           #9                  // class java/util/HashMap
+      30: dup
+      31: invokespecial #11                 // Method java/util/HashMap."<init>":()V
+      34: putfield      #21                 // Field tokenHashes:Ljava/util/Map;
+      37: aload_0
+      38: new           #9                  // class java/util/HashMap
+      41: dup
+      42: invokespecial #11                 // Method java/util/HashMap."<init>":()V
+      45: putfield      #24                 // Field prefixCounts:Ljava/util/Map;
+      48: aload_0
+      49: new           #9                  // class java/util/HashMap
+      52: dup
+      53: invokespecial #11                 // Method java/util/HashMap."<init>":()V
+      56: putfield      #27                 // Field tokenFrequencies:Ljava/util/Map;
+      59: aload_0
+      60: new           #9                  // class java/util/HashMap
+      63: dup
+      64: invokespecial #11                 // Method java/util/HashMap."<init>":()V
+      67: putfield      #30                 // Field wordFacts:Ljava/util/Map;
+      70: aload_0
+      71: new           #9                  // class java/util/HashMap
+      74: dup
+      75: invokespecial #11                 // Method java/util/HashMap."<init>":()V
+      78: putfield      #33                 // Field wordSignals:Ljava/util/Map;
+      81: return
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder translation(com.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity, com.m3.text.M3LexiconPrecompute$TranslationProjection);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$TranslationIdentity;Lcom/m3/text/M3LexiconPrecompute$TranslationProjection;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+    Code:
+       0: aload_1
+       1: ldc           #36                 // String translation key
+       3: invokestatic  #38                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       6: pop
+       7: aload_2
+       8: ldc           #44                 // String translation value
+      10: invokestatic  #38                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      13: pop
+      14: aload_1
+      15: invokevirtual #46                 // Method com/m3/text/SharedLexiconPrecomputeCatalog$TranslationIdentity.sourceLanguage:()Ljava/lang/String;
+      18: aload_2
+      19: invokevirtual #52                 // Method com/m3/text/M3LexiconPrecompute$TranslationProjection.sourceLanguage:()Ljava/lang/String;
+      22: invokevirtual #55                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      25: ifeq          70
+      28: aload_1
+      29: invokevirtual #61                 // Method com/m3/text/SharedLexiconPrecomputeCatalog$TranslationIdentity.targetLanguage:()Ljava/lang/String;
+      32: aload_2
+      33: invokevirtual #64                 // Method com/m3/text/M3LexiconPrecompute$TranslationProjection.targetLanguage:()Ljava/lang/String;
+      36: invokevirtual #55                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      39: ifeq          70
+      42: aload_1
+      43: invokevirtual #65                 // Method com/m3/text/SharedLexiconPrecomputeCatalog$TranslationIdentity.lexiconFingerprint:()Ljava/lang/String;
+      46: aload_2
+      47: invokevirtual #68                 // Method com/m3/text/M3LexiconPrecompute$TranslationProjection.lexiconFingerprint:()Ljava/lang/String;
+      50: invokevirtual #55                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      53: ifeq          70
+      56: aload_1
+      57: invokevirtual #69                 // Method com/m3/text/SharedLexiconPrecomputeCatalog$TranslationIdentity.sourceFingerprint:()Ljava/lang/String;
+      60: aload_2
+      61: invokevirtual #72                 // Method com/m3/text/M3LexiconPrecompute$TranslationProjection.sourceFingerprint:()Ljava/lang/String;
+      64: invokevirtual #55                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      67: ifne          80
+      70: new           #73                 // class java/lang/IllegalArgumentException
+      73: dup
+      74: ldc           #75                 // String translation identity does not match projection
+      76: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      79: athrow
+      80: aload_0
+      81: getfield      #12                 // Field translations:Ljava/util/Map;
+      84: aload_1
+      85: aload_2
+      86: ldc           #80                 // String translation
+      88: invokestatic  #82                 // Method put:(Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      91: aload_0
+      92: areturn
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder spell(com.m3.text.SharedLexiconPrecomputeCatalog$SpellScope, com.m3.text.M3LexiconPrecompute$SpellIndex);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$SpellScope;Lcom/m3/text/M3LexiconPrecompute$SpellIndex;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+    Code:
+       0: aload_0
+       1: getfield      #18                 // Field spellIndexes:Ljava/util/Map;
+       4: aload_1
+       5: aload_2
+       6: ldc           #86                 // String spell
+       8: invokestatic  #82                 // Method put:(Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      11: aload_0
+      12: areturn
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder tokenHashes(com.m3.text.SharedLexiconPrecomputeCatalog$TokenRange, com.m3.text.M3LexiconPrecompute$TokenHashPrecompute);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$TokenRange;Lcom/m3/text/M3LexiconPrecompute$TokenHashPrecompute;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field tokenHashes:Ljava/util/Map;
+       4: aload_1
+       5: aload_2
+       6: ldc           #88                 // String token hashes
+       8: invokestatic  #82                 // Method put:(Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      11: aload_0
+      12: areturn
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder prefixCounts(com.m3.text.SharedLexiconPrecomputeCatalog$ValueToken, com.m3.text.M3LexiconPrecompute$PrefixCounts);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$ValueToken;Lcom/m3/text/M3LexiconPrecompute$PrefixCounts;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field prefixCounts:Ljava/util/Map;
+       4: aload_1
+       5: aload_2
+       6: ldc           #90                 // String prefix counts
+       8: invokestatic  #82                 // Method put:(Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      11: aload_0
+      12: areturn
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder tokenFrequency(com.m3.text.SharedLexiconPrecomputeCatalog$ValueScope, com.m3.text.M3LexiconPrecompute$TokenFrequency);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$ValueScope;Lcom/m3/text/M3LexiconPrecompute$TokenFrequency;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+    Code:
+       0: aload_0
+       1: getfield      #27                 // Field tokenFrequencies:Ljava/util/Map;
+       4: aload_1
+       5: aload_2
+       6: ldc           #92                 // String token frequency
+       8: invokestatic  #82                 // Method put:(Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      11: aload_0
+      12: areturn
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder wordFacts(com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity, com.m3.text.M3LexiconPrecompute$IndexWordFacts);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity;Lcom/m3/text/M3LexiconPrecompute$IndexWordFacts;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+    Code:
+       0: aload_1
+       1: ldc           #94                 // String word facts key
+       3: invokestatic  #38                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       6: pop
+       7: ldc           #96                 // String dictlang.dictionary
+       9: aload_1
+      10: invokevirtual #98                 // Method com/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity.sourceId:()Ljava/lang/String;
+      13: invokevirtual #55                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      16: ifne          29
+      19: new           #73                 // class java/lang/IllegalArgumentException
+      22: dup
+      23: ldc           #103                // String word facts source family
+      25: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      28: athrow
+      29: aload_2
+      30: ldc           #105                // String word facts value
+      32: invokestatic  #38                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      35: pop
+      36: aload_1
+      37: invokevirtual #107                // Method com/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity.sourceRevision:()Ljava/lang/String;
+      40: aload_2
+      41: invokevirtual #110                // Method com/m3/text/M3LexiconPrecompute$IndexWordFacts.sourceRevision:()Ljava/lang/String;
+      44: invokevirtual #55                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      47: ifne          60
+      50: new           #73                 // class java/lang/IllegalArgumentException
+      53: dup
+      54: ldc           #113                // String word facts source revision
+      56: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      59: athrow
+      60: aload_0
+      61: getfield      #30                 // Field wordFacts:Ljava/util/Map;
+      64: aload_1
+      65: aload_2
+      66: ldc           #115                // String word facts
+      68: invokestatic  #82                 // Method put:(Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      71: aload_0
+      72: areturn
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder wordSignal(com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity, com.m3.text.M3LexiconPrecompute$IndexWordSignal);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity;Lcom/m3/text/M3LexiconPrecompute$IndexWordSignal;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+    Code:
+       0: aload_1
+       1: ldc           #117                // String word signal key
+       3: invokestatic  #38                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       6: pop
+       7: ldc           #119                // String dictlang.frequency
+       9: aload_1
+      10: invokevirtual #98                 // Method com/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity.sourceId:()Ljava/lang/String;
+      13: invokevirtual #55                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      16: ifne          29
+      19: new           #73                 // class java/lang/IllegalArgumentException
+      22: dup
+      23: ldc           #121                // String word signal source family
+      25: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      28: athrow
+      29: aload_2
+      30: ldc           #123                // String word signal value
+      32: invokestatic  #38                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      35: pop
+      36: aload_1
+      37: invokevirtual #107                // Method com/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity.sourceRevision:()Ljava/lang/String;
+      40: aload_2
+      41: invokevirtual #125                // Method com/m3/text/M3LexiconPrecompute$IndexWordSignal.sourceRevision:()Ljava/lang/String;
+      44: invokevirtual #55                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      47: ifne          60
+      50: new           #73                 // class java/lang/IllegalArgumentException
+      53: dup
+      54: ldc           #128                // String word signal source revision
+      56: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      59: athrow
+      60: aload_0
+      61: getfield      #33                 // Field wordSignals:Ljava/util/Map;
+      64: aload_1
+      65: aload_2
+      66: ldc           #130                // String word signal
+      68: invokestatic  #82                 // Method put:(Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+      71: aload_0
+      72: areturn
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog build();
+    descriptor: ()Lcom/m3/text/SharedLexiconPrecomputeCatalog;
+    Code:
+       0: new           #1                  // class com/m3/text/SharedLexiconPrecomputeCatalog
+       3: dup
+       4: aload_0
+       5: invokespecial #132                // Method com/m3/text/SharedLexiconPrecomputeCatalog."<init>":(Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;)V
+       8: areturn
+
+  private static <K, V> void put(java.util.Map<K, V>, K, V, java.lang.String);
+    descriptor: (Ljava/util/Map;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V
+    Code:
+       0: aload_1
+       1: aload_3
+       2: invokedynamic #135,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       7: invokestatic  #38                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: aload_2
+      12: aload_3
+      13: invokedynamic #139,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      18: invokestatic  #38                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      21: pop
+      22: aload_0
+      23: aload_1
+      24: aload_2
+      25: invokeinterface #140,  3          // InterfaceMethod java/util/Map.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      30: ifnull        47
+      33: new           #73                 // class java/lang/IllegalArgumentException
+      36: dup
+      37: aload_3
+      38: invokedynamic #146,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      43: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      46: athrow
+      47: return
+}

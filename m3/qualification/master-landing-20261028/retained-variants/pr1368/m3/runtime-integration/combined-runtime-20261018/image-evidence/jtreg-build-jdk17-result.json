@@ -1,0 +1,22 @@
+{
+  "schema": "JTREG_OFFICIAL_SOURCE_BUILD_V1",
+  "upstream_repo": "openjdk/jtreg",
+  "upstream_tag": "jtreg-7.2+1",
+  "upstream_commit": "5b9e661eb6ee9dd9a9d2690986bbf9ce303a8f03",
+  "command": [
+    "bash",
+    "make/build.sh",
+    "--jdk",
+    "/usr/lib/jvm/java-17-openjdk-amd64",
+    "--skip-download",
+    "--",
+    "-j2"
+  ],
+  "start_utc": "2026-10-18T12:44:17Z",
+  "end_utc": "2026-10-18T12:44:33Z",
+  "exit_code": 1,
+  "stop_reason": null,
+  "console_sha256": "27e9d4082dd5844301b495ee59b15aeadfa67e1d934e6a3444ef66dab8c6493b",
+  "checksum_checks_skipped": false,
+  "retry_reason": "JDK21 introduces this-escape warning in upstream7.2 source; use documented supported JDK17 without weakening Werror"
+}

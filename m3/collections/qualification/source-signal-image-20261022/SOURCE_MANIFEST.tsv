@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical recipe: hsoliwal/com.synexia m3-source-signal-compiler-image-20261022
+# Stacked dependency: M3JDK21 #1803 / Synexia #12911 (both still reviewable; not merged by ancestry)
+# Existing compiler fact producer: m3/compiler/source-signals (unchanged)
+# path	before_sha256	after_sha256	git_blob	canonical_resource
+m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java	ABSENT	4c93bb68a7f048c79e26cdea1a9e275071d0e5d2871805777387fc648539a85d	449b76930068c1618db29c4027d1b949e0faa764	00-M3SignalRelations.java.txt
+m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java	ABSENT	8ce692f794b4bcbb7f42bb77f9fd71e0b46807eacd94eeba0bd13dff5dcba557	b5c72f6103dc7cbcaeeec12bc33059ac78500a37	01-M3SourceSignalImage.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalImageSelfTest.java	ABSENT	ccfa1e6c177712847703754cc9ba6ef47951022a56aee1cc2ab13779d77f03ba	e594b79337bd9812787f3e9478af8eb1936ed58a	02-M3SourceSignalImageSelfTest.java.txt
+m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalImageTest.java	ABSENT	a5b67d41bc8bdee9f17f07fe83b4f0db3c450827f8807234b7808dc2b1ebd15f	b17a46abb66cd03497ab9c6a390a4b43b3ab69ba	03-M3SourceSignalImageTest.java.txt

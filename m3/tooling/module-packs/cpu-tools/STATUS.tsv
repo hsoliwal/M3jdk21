@@ -1,0 +1,19 @@
+gate	status	detail
+scope	OPTIONAL_ADDON_ONLY	20 declared optional modules; 22 current registry operations; direct APIs; no ordered-family promotion
+donor_source_contracts	SOURCE_QUALIFIED_SEE_RECEIPT	DONOR_QUALIFICATION.md and canonical qualification/donor-*.json/log bind isolated donor results; receiving image must repeat
+source_m3_runtime	SOURCE_QUALIFIED_SEE_RECEIPT	Canonical qualification/source-proof.json and source-baseline.log/source-m3-storage.log; exact source hashes in receipt
+canonical_recipe_apply	REQUIRED_SEE_EXACT_RECIPE_RECEIPT	Maven/OpenRewrite application, exact readback, second-cycle fixed point and source drift refusal; missing evidence is pending
+build_driver_contracts	REQUIRED_SEE_EXACT_RECIPE_RECEIPT	fixtures/test_build.py; fresh path, module inventory, symlinks, shell-free launch and process-group timeout cleanup
+modular_compile	REQUIRED_SEE_BUILD_RECEIPT	${OUT}/logs/modules-javac.log and BUILD_RECEIPT.json; M3 JDK -source/-target21; no --release masking
+jmod_and_image	REQUIRED_SEE_BUILD_RECEIPT	Exactly 20 optional JMODs plus linked standard dependencies; descriptors and linked runtime readback
+existing_jni	REQUIRED_SEE_BUILD_RECEIPT	Original m3textio.c; bundled JNI hash equality and -Xcheck:jni original M3TextSmoke
+linked_behavior	REQUIRED_SEE_BUILD_RECEIPT	All three independent CPU/source/donor fixtures plus original text smoke must pass using linked image without module path
+m3_storage_enabled	REQUIRED_SEE_BUILD_RECEIPT	Source/CPU fixtures also run with UnlockExperimentalVMOptions, UseM3StringStorage, backing-identity assertion and -Xcheck:jni; no fallback
+deterministic_replay	REQUIRED_SEE_BUILD_RECEIPT	Exact DAG and literal replay fixtures; repeated linked --list and --self-test output must match
+source_and_toolchain_identity	REQUIRED_SEE_BUILD_RECEIPT	SOURCE_INPUTS.tsv and TOOLCHAIN_INPUTS.tsv before/after hash match; include actual lib/modules, lib/server/libjvm.so and release
+license_notices	REQUIRED_SEE_BUILD_RECEIPT	Distinct text-tools/cpu-tools legal trees; byte readback from every JMOD and linked module must match source hashes
+resource_performance	NOT_MEASURED_BY_THIS_LEDGER	Build command deadlines and logical limits do not establish latency, RSS, allocation or speedup claims
+jmod_byte_reproducibility	NOT_CLAIMED	Fixed JAR dates and actual JMOD hashes; packager JMOD timestamps are not normalized here
+full_jdk_product	NOT_CLAIMED_BY_OPTIONAL_PACK	No full rebuild/jtreg/C1/C2/CDS/platform-family acceptance inferred
+broad_cpu_catalogue	NOT_COMPLETE	110 original inventory rows mapped in task COVERAGE.tsv; selected subsets and outside-scope families remain explicit
+source_jdk_module_collisions	REQUIRED_BEFORE_OUTPUT_CREATION	Reject any of20 tool names in source release MODULES or JMOD filenames; missing/ambiguous release inventory also refuses; repeat admission before PASS

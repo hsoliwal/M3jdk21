@@ -1,0 +1,10 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+#FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/recipes/SOURCE_SLICES_DONOR_REVIEW.tsv blob acf412b79926; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+category	reference	decision	license_posture
+mapped_file_geometry	OpenJDK FileChannel.map / PMEMSDK M3PmemRegion	Reuse existing 64-bit region boundary; no new native calls	Design reference; JDK contracts
+source_content_identity	OpenJDK MessageDigest SHA-256	Use Java21 standard library; verify exact returned bytes	Java SE API
+quality_signals	M3Scale BLLSE / Maven quality plugins	Consume existing report receipts; never rescan or truncate findings	Internal canonical owner
+file_atomization	M3File / M3AST / M3AtomizeRecipe	Consume canonical source and contract coordinates	Internal canonical owner
+file_model_calls	Chrome Prompt API / browserless JNI ChromeLLM	Existing one-call scheduler owns model availability and budgets	No third-party code copied
+algorithm_catalogue	LeetCode interval boundaries / HackerRank arrays / GeeksforGeeks interval overlaps	Category-only candidate review; checked subtraction geometry	No challenge solution code copied

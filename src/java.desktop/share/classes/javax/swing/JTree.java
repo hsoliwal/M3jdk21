@@ -720,6 +720,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
         expandedStack = new Stack<Stack<TreePath>>();
         toggleClickCount = 2;
         expandedState = new Hashtable<TreePath, Boolean>();
+        if (sun.swing.tree.M3ExpandedState.accepts(getClass())) {
+            expandedState = new sun.swing.tree.M3ExpandedState();
+        }
         setLayout(null);
         rowHeight = 16;
         visibleRowCount = 20;
@@ -2030,6 +2033,24 @@ public class JTree extends JComponent implements Scrollable, Accessible
     public Enumeration<TreePath> getExpandedDescendants(TreePath parent) {
         if(!isExpanded(parent))
             return null;
+        TreePath[] m3Keys = expandedState instanceof sun.swing.tree.M3ExpandedState m3State
+                ? m3State.expandedKeysBelow(parent) : null;
+        if (m3Keys != null) {
+            Vector<TreePath> found = null;
+            for (TreePath path : m3Keys) {
+                if (isVisible(path)) {
+                    if (found == null) {
+                        found = new Vector<TreePath>();
+                    }
+                    found.addElement(path);
+                }
+            }
+            if (found == null) {
+                Set<TreePath> none = Collections.emptySet();
+                return Collections.enumeration(none);
+            }
+            return found.elements();
+        }
 
         Enumeration<TreePath> toggledPaths = expandedState.keys();
         Vector<TreePath> elements = null;
@@ -3201,6 +3222,9 @@ public class JTree extends JComponent implements Scrollable, Accessible
         // Create an instance of expanded state.
 
         expandedState = new Hashtable<TreePath, Boolean>();
+        if (sun.swing.tree.M3ExpandedState.accepts(getClass())) {
+            expandedState = new sun.swing.tree.M3ExpandedState();
+        }
 
         expandedStack = new Stack<Stack<TreePath>>();
 
@@ -3812,6 +3836,20 @@ public class JTree extends JComponent implements Scrollable, Accessible
      protected void
          removeDescendantToggledPaths(Enumeration<TreePath> toRemove)
     {
+         if (toRemove != null && expandedState instanceof sun.swing.tree.M3ExpandedState m3State) {
+             while (toRemove.hasMoreElements()) {
+                 TreePath path = toRemove.nextElement();
+                 if (!m3State.removeDescendants(path)) {
+                     Enumeration<?> descendants = getDescendantToggledPaths(path);
+                     if (descendants != null) {
+                         while (descendants.hasMoreElements()) {
+                             expandedState.remove(descendants.nextElement());
+                         }
+                     }
+                 }
+             }
+             return;
+         }
          if(toRemove != null) {
              while(toRemove.hasMoreElements()) {
                  Enumeration<?> descendants = getDescendantToggledPaths

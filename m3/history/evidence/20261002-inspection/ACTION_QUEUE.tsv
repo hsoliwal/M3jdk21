@@ -1,0 +1,8 @@
+priority	item	status	next_gate
+P0	Run frozen whole-graph audit and PR witness capture	OPEN	complete Git checkout; scoped read-only workflow
+P0	Restore recipe/evidence custody as a reviewed proposal	OPEN	exact preimage/destination inventory
+P0	Reconcile canonical String owners with current/side branches	OPEN	full contract and coordinated VM boundary
+P0	Resolve the two enabled StringJoiner failing test files	OPEN	unchanged tests and explicit OOME contract decision
+P0	Build exact integrated JDK and test all VM consumers	OPEN	diff/lint/compile/jtreg/runtime chain
+P1	Pattern/Javadoc convergence for behavioral atoms	OPEN	ATOM_PLAN.tsv and existing recipe/mapping owners
+P1	Maven recipe lifecycle	OPEN	Maven-enabled host

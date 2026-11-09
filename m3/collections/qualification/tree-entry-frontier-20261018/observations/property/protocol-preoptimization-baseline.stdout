@@ -1,0 +1,1 @@
+{"classification":"SOURCE_AWARE_PUBLIC_PROPERTY_PROOF","oracle":false,"permutations":5040,"scenarios":15165,"randomOperations":98304,"trackedUpdates":294322,"checks":1438195,"invariantCalls":238593,"setCovered":true,"expectedDigest":"c04bba433f2bf19c0851d8a5cba874315ec258b47b4a447f026f7e32b6a1c8e5","nativeExecuted":false}

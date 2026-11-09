@@ -1,0 +1,85 @@
+M3_SDK_RESULTS_RECEIVER_PASS mode=check targets=15 changes=0
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:133: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private static long evaluate(M3StringOwner owner, int start, int length,
+                                 ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:170: warning: auxiliary class M3StringAtom in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private static long advance(M3StringAtom owner, int start, int length,
+                                ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:190: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private static long advanceJava(M3StringOwner owner, int start, int length,
+                                    ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:373: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private record Effect(WeakReference<M3StringOwner> owner, long coordinate,
+                                        ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:373: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private record Effect(WeakReference<M3StringOwner> owner, long coordinate,
+                                        ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:373: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private record Effect(WeakReference<M3StringOwner> owner, long coordinate,
+                                        ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:168: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private static long evaluate(M3StringOwner owner, int start, int length,
+                                 ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:205: warning: auxiliary class M3StringAtom in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private static long advance(M3StringAtom owner, int start, int length,
+                                ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:225: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private static long advanceJava(M3StringOwner owner, int start, int length,
+                                    ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:419: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private record Effect(WeakReference<M3StringOwner> owner, long coordinate,
+                                        ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:419: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private record Effect(WeakReference<M3StringOwner> owner, long coordinate,
+                                        ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:419: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+    private record Effect(WeakReference<M3StringOwner> owner, long coordinate,
+                                        ^
+error: warnings found and -Werror specified
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:86: warning: auxiliary class M3StringFacts in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+        M3StringFacts known = source.factsIfPrepared();
+        ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:149: warning: auxiliary class M3StringTuple in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+        if (owner instanceof M3StringTuple tuple) {
+                             ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:163: warning: auxiliary class M3StringAtom in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+            outgoing = advance((M3StringAtom) owner, start, length, plan, incoming);
+                                ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:303: warning: auxiliary class M3StringFacts in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+                        requiredSignals |= M3StringFacts.codeUnitSignal(literal);
+                                           ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:313: warning: auxiliary class M3StringFacts in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+                    requiredPairs |= M3StringFacts.bigramSignal(previous, literal);
+                                     ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java:316: warning: auxiliary class M3StringFacts in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+                    requiredTriples |= M3StringFacts.trigramSignal(previous2, previous, literal);
+                                       ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:60: warning: auxiliary class M3StringOwner in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+                M3StringOwner owner = source.owner();
+                ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:104: warning: auxiliary class M3StringFacts in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+        M3StringFacts known = source.factsIfPrepared();
+        ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:184: warning: auxiliary class M3StringTuple in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+        if (owner instanceof M3StringTuple tuple) {
+                             ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:198: warning: auxiliary class M3StringAtom in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+            outgoing = advance((M3StringAtom) owner, start, length, plan, incoming);
+                                ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:341: warning: auxiliary class M3StringFacts in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+                        requiredSignals |= M3StringFacts.codeUnitSignal(literal);
+                                           ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:351: warning: auxiliary class M3StringFacts in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+                    requiredPairs |= M3StringFacts.bigramSignal(previous, literal);
+                                     ^
+/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java:354: warning: auxiliary class M3StringFacts in /tmp/m3-affix-probe-1pm5lwqh/M3String.java should not be accessed from outside its own source file
+                    requiredTriples |= M3StringFacts.trigramSignal(previous2, previous, literal);
+                                       ^
+1 error
+25 warnings
+Traceback (most recent call last):
+  File "/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/probe/warm_probe.py", line 41, in <module>
+    subprocess.run([str(jdk / "javac"), "--release", "21", "-proc:none", "-Xlint:all", "-Werror",
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac', '--release', '21', '-proc:none', '-Xlint:all', '-Werror', '-d', '/tmp/m3-affix-probe-1pm5lwqh', '/tmp/m3-affix-probe-1pm5lwqh/RegexBefore.java', '/tmp/m3-affix-probe-1pm5lwqh/RegexAfter.java', '/tmp/m3-affix-probe-1pm5lwqh/M3String.java', '/workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/probe/WarmProbe.java']' returned non-zero exit status 1.

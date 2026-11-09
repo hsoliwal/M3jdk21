@@ -1,0 +1,27 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "ALGORITHM_CATALOGUE.tsv row lfu-cache (LeetCode 460, idea-only); nearest first-party lane PrimitiveLruMap (blob 442759d0, LRU only, not copied)",
+      "source_commit": "11c94feb1815 (develop pin 20261017)",
+      "target": "com.m3.collections.M3LongLfuCache",
+      "status": "implemented-locally-verified; proving ground; runtime PENDING_LINUX",
+      "target_rule": "GENERATE_GAP on lanes: key/value/frequency lanes + bucket link lanes + occupancy/tombstone masks; no java.util replacement"
+    },
+    {
+      "source": "ALGORITHM_CATALOGUE.tsv row patricia-trie; Commons PatriciaTrie (0b545e2f) contract reference only; first-party CharTrieSet (a2f9bcd5) not PATRICIA",
+      "source_commit": "11c94feb1815 (develop pin 20261017)",
+      "target": "com.m3.collections.M3LongPatriciaTrie",
+      "status": "implemented-locally-verified; proving ground; runtime PENDING_LINUX",
+      "target_rule": "GENERATE_GAP: crit-bit lanes, unsigned order, prefix queries; no SortedMap/Trie replacement"
+    },
+    {
+      "source": "ALGORITHM_CATALOGUE.tsv rows array-manipulation (LeetCode 189/75/41/268, idea-only); oracle java.util.Collections.rotate/reverse",
+      "source_commit": "11c94feb1815 (develop pin 20261017)",
+      "target": "com.m3.collections.M3LaneAlgorithms",
+      "status": "implemented-locally-verified; proving ground; runtime PENDING_LINUX",
+      "target_rule": "GENERATE_GAP: static in-place lane algorithms over long[]/int[] + long[] masks; no java.util replacement"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "M3_JAVAC_EXECUTABLE_TOKEN_EQUALITY_V1",
+  "recorded_utc": "2026-10-18T13:06:09.332504+00:00",
+  "baseline_ref": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+  "scanner": "Existing JDK21 javac ScannerFactory; exact token-kind and raw-token text equality, comments/whitespace excluded",
+  "commands": [
+    [
+      "/workspace/scratch/beeb6792462c/toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/dev/shm/m3-doclint-f8287/proof-tools/classes",
+      "/dev/shm/m3-doclint-f8287/proof-tools/JavaTokenEquality.java"
+    ],
+    [
+      "/workspace/scratch/beeb6792462c/toolchain/jdk-21.0.12.1+1/bin/java",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+      "-cp",
+      "/dev/shm/m3-doclint-f8287/proof-tools/classes",
+      "JavaTokenEquality",
+      "/dev/shm/m3-doclint-f8287/before",
+      "/dev/shm/m3-doclint-f8287/after"
+    ]
+  ],
+  "files": 12,
+  "status": "PASS",
+  "limitations": "Comment-only executable-token equality; product doclint/compiler/build acceptance remains separate."
+}

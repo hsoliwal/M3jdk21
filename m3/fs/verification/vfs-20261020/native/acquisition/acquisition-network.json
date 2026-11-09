@@ -1,0 +1,31 @@
+{
+  "downloads": [
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "expected_bytes": 910690,
+      "expected_sha256": "6b8dfabce91ae021ff957f81dc4a4377c1bfa6eb9332cbf6d38e3e66b5198abb",
+      "package": "libsqlite3-dev",
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/native/libsqlite3-dev_3.45.1-1ubuntu2.7_amd64.deb",
+      "status": "FAILED",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/s/sqlite3/libsqlite3-dev_3.45.1-1ubuntu2.7_amd64.deb",
+      "version": "3.45.1-1ubuntu2.7"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "expected_bytes": 701442,
+      "expected_sha256": "488511119cad001a00f7e00e597112cf743ccfbd3f7a03c82d66237e1bfd82c8",
+      "package": "libsqlite3-0",
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/native/libsqlite3-0_3.45.1-1ubuntu2.7_amd64.deb",
+      "status": "FAILED",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/s/sqlite3/libsqlite3-0_3.45.1-1ubuntu2.7_amd64.deb",
+      "version": "3.45.1-1ubuntu2.7"
+    }
+  ],
+  "finished_utc": "2026-10-20T11:18:49.360499+00:00",
+  "metadata_receipt": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/native/acquisition.json",
+  "metadata_sha256": "b133686208017e06c63b346182958888331131c7d335170349fdd383d215d9a2",
+  "scope": "Task-local official Ubuntu SQLite header and matching runtime; no system installation",
+  "started_utc": "2026-10-20T11:18:48.310190+00:00",
+  "status": "FAILED",
+  "tls_verification": "Python urllib default certificate and hostname verification"
+}

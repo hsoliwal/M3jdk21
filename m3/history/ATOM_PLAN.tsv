@@ -1,0 +1,17 @@
+priority	atom	pattern_role	owner_or_source	contract_to_seal	promotion_boundary	status
+P0	HistoryGraph	Immutable object adapter	native Git / git_graph.py	full frozen ancestry; no repository writes	tooling	IMPLEMENTATION_CANDIDATE
+P0	ParentEdgePatch	Patch-signal extractor	native Git diff-tree	all parents; full IDs; binary patches; no semantic equivalence claim	tooling	IMPLEMENTATION_CANDIDATE
+P0	EvidenceCustody	Provenance ledger	PR6 runtime-integration/recipe and evidence	exact source/receipt pins; no inherited green status	review-only restoration	OPEN
+P0	StringLayout	Facade / VM adapter	String.java + javaClasses + symbols + VM consumers	fields; byte coder; bootstrap; acquire publication; fallback representation	java.base + HotSpot + native + SA	OPEN_COUPLED
+P0	CanonicalAtomAdmission	Flyweight / admission policy	PR6 MIndexStringPool; existing mapped-kernel candidate	mapped hit and weak local miss ownership; no fourth payload owner	storage + bootstrap	OPEN
+P0	MappedLeafLifetime	Resource owner / read-only adapter	SYNARR01 / M3LEX / mapped backing interfaces	image generation; bounds; mutation threat; retention; endian behavior	storage + VM/native	OPEN
+P0	UTF16Range	Immutable range value	MIndexString + String.substring	exact code units; split-surrogate acceptance; exception order	storage + facade	OPEN
+P0	ComposeAtoms	Composite / immutable tuple	concat / join / repeat + StringConcatFactory	evaluation order; nulls; overflow; geometry; bounded fallback	storage + indy + VM	OPEN
+P0	ContiguousProjection	Compatibility adapter	Java arrays / JNI / JVMTI / native platform conversion	encoding incl modified UTF-8; critical ownership; projection lifetime	VM/native	OPEN_COUPLED
+P0	RuntimeSafety	Capability gate	JIT intrinsics / GC dedup / CDS / JFR / SA	never apply flat-array assumptions to nonflat storage	whole matched JDK image	OPEN_COUPLED
+P1	SharedFacts	Immutable memoized value	Java hash / code points / character flags / prefix facts	facts owned by canonical atom/composition; exact UTF-16 verification	storage + consumers	OPEN
+P1	OperationBridge	Adapter / strategy	String operations and regex consumers	operate on canonical atoms; materialize only explicit boundaries	file then package then module	OPEN
+P1	PatternDocumentation	Semantic contract ledger	Javadoc + existing naming/migration authority	declared roles agree with code and tests; no invented annotations	appropriate owner scope	OPEN
+P1	SourceRecipe	Template / source-bound transformation	m3/tooling + m3/migration + historical OpenRewrite recipes	drift refusal; reversible proof; fixed point; public API lock	existing recipe owners	OPEN_REUSE
+P1	ForwardPortQueue	Serial ratifier	PR11/12/13/15/16 changes	preserve distinct valid work; explicit supersession rather than silent overwrite	verified integration branch	OPEN
+P0	ExactHeadAcceptance	Differential oracle	baseline image + candidate image + unchanged upstream tests	two StringJoiner failures remain failures; interpreter is not compiled acceptance	whole JDK	NOT_RUN

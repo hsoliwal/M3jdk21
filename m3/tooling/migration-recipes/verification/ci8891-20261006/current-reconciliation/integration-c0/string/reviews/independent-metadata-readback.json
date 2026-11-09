@@ -1,0 +1,160 @@
+{
+  "compiledReceivingIdentities": [
+    {
+      "bytes": 283,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/fixture-classes/StringEscapeContract$Checked.class",
+      "sha256": "3732a0efd457afe4d1acee1e31b1d8ff5ea1edcd93f0d8946de08189cfe0b849"
+    },
+    {
+      "bytes": 778,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/fixture-classes/StringEscapeContract$ChooseEscape.class",
+      "sha256": "1083f20908329a49c5d628feb80bb0ddb83f78ce1de3787c55846b08c0733aad"
+    },
+    {
+      "bytes": 12621,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/fixture-classes/StringEscapeContract.class",
+      "sha256": "5266e29fffb5f29b2531bad5a6bf3de6a25ed44f1f65cb1c01caa3d028ee2b31"
+    },
+    {
+      "bytes": 31545,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/java-observations/after-current/classes/M3StringPrecomputeSearchTest.class",
+      "sha256": "65e560f5b076031153e0b1a504ce593221f522a23324ab814f551de8f7a5c0ef"
+    },
+    {
+      "bytes": 31545,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/java-observations/after-template/classes/M3StringPrecomputeSearchTest.class",
+      "sha256": "65e560f5b076031153e0b1a504ce593221f522a23324ab814f551de8f7a5c0ef"
+    },
+    {
+      "bytes": 31537,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/java-observations/negative-wrong-atom/classes/M3StringPrecomputeSearchTest.class",
+      "sha256": "c148f36f2e5efa177cd7c4ee144b90521beb1bd4b08771825507fb86b4df2733"
+    }
+  ],
+  "counts": {
+    "archiveOnlyProjectFiles": 0,
+    "archiveParts": 11,
+    "basePairedFiles": 48,
+    "custodyCensusBodies": 20,
+    "excludedIdentities": 1637,
+    "flatProjectFiles": 20,
+    "logicalBytes": 74190773,
+    "logicalFiles": 810,
+    "mapEnvelopes": 3,
+    "originalBodyMappings": 809,
+    "portableFiles": 25,
+    "priorOverlap": false,
+    "priorPublishedFiles": 435,
+    "publicationHistoryFiles": 12,
+    "receivingCompiledIdentitiesExcluded": 6,
+    "receivingFiles": 234,
+    "rootCommands": 5,
+    "rootCommandsExitZero": 5,
+    "rootExecutionFiles": 16,
+    "semanticFiles": 108,
+    "supplementFiles": 21,
+    "uniqueBytesRehashed": 228922291,
+    "uniqueFilesRehashed": 2357
+  },
+  "custodyCensus20BodiesIncluded": true,
+  "findings": [],
+  "limits": {
+    "archiveExecuted": false,
+    "archiveParsingExecuted": false,
+    "archivePartsRehashedAsOpaqueBytes": true,
+    "compiledArtifactBodiesIncluded": false,
+    "consumerQualified": false,
+    "gitOperationsExecuted": false,
+    "hermetic": false,
+    "priorMapsOrProofsEdited": false,
+    "proofGatesExecuted": false,
+    "qualificationInferred": false,
+    "remoteStateRevalidated": false,
+    "selectorExecuted": false,
+    "toolchainBodiesIncluded": false,
+    "verifyOrExtractExecuted": false
+  },
+  "metadata": {
+    "PAIRED-FILES.json": {
+      "bytes": 129646,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PAIRED-FILES.json",
+      "sha256": "9f2a86d59fc3839244eaf6e8a10df69f824d4c3b16614bc12517dad186dd73ed"
+    },
+    "PORTABLE-MANIFEST.json": {
+      "bytes": 19235,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PORTABLE-MANIFEST.json",
+      "sha256": "00f8323d58435876b64cbef812e2c45be761b282d49cd411e42c588fe3ec6271"
+    },
+    "PROJECT-READY.json": {
+      "bytes": 14331,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PROJECT-READY.json",
+      "sha256": "4e99f141b6069e8bbdcac7ca4d746bbf07bc46e089d75e63aea17687ac15c1ff"
+    },
+    "READBACK.json": {
+      "bytes": 384272,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/READBACK.json",
+      "sha256": "0478407e5a003ca49cf1734d9c1a302924a59d4925f59d140d947163a41e13b0"
+    },
+    "ROOT-READBACK-v1.json": {
+      "bytes": 2038,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/ROOT-READBACK-v1.json",
+      "sha256": "a1566c9df56bbe94c63471106cc3a17910689dbe325e37aa796d7425a6c21ccc"
+    },
+    "SOURCE-CLOSURE.json": {
+      "bytes": 2214350,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
+      "sha256": "6437600b8a1c34b55be3cd9dc1853fead56c5e42951b1962568fb7507056b82c"
+    },
+    "TASK-MAPPING.json": {
+      "bytes": 18649,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/TASK-MAPPING.json",
+      "sha256": "207adf3729e17267357cc086da0d649d23bab39ea7e3c41ddc87240f37dc289f"
+    },
+    "bundle/BUNDLE.json": {
+      "bytes": 123241,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle/BUNDLE.json",
+      "sha256": "a13fea2b9340daf792af3960b7d98666064f28525e146a480381cf46e1fa8956"
+    },
+    "package-plan.json": {
+      "bytes": 117504,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/package-plan.json",
+      "sha256": "51bf2e380646f7c1ed6a1652ea7bb2b6cc7a407f05c8eb9b4100898d5e93df5d"
+    },
+    "root-execution-v1/RESULT.json": {
+      "bytes": 1797,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
+      "sha256": "5bb129c19cc5d4acb0b6426880e3118952e0daf7f057fff51081570eb89272db"
+    },
+    "terminal-selection-v1/COMMANDS.json": {
+      "bytes": 9708,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/COMMANDS.json",
+      "sha256": "3f5258afc5a97b55128a70df38704472be9b283dd8998ad93771066c3cfa6ff1"
+    },
+    "terminal-selection-v1/SELECTION-READBACK.json": {
+      "bytes": 7504,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
+      "sha256": "7589a0107031bc02f4542714d1f03071ecbc3256d50a0040347a287c1385824e"
+    }
+  },
+  "observedReceivingStatus": "PRIMARY_ONLY_STOP",
+  "observedSemanticStatus": "PASS_SPC_SEMANTICS_PRIMARY_PENDING",
+  "primarySemanticPrerequisiteLiteralEquality": true,
+  "receivingSelection": {
+    "bytes": 74585,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
+    "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
+  },
+  "reusedMappingSchemaDonor": {
+    "bytes": 19084,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/EXECUTION-MAPPING.json",
+    "sha256": "f189f1d11488d14dad76ae1902e9abd9dabd6c093ad5828c7a2987c27dd1e8f9"
+  },
+  "schema": "synexia.sc0.independent-package-metadata-readback/1",
+  "semantic108RetainedInReceiving234": true,
+  "semanticSelection": {
+    "bytes": 32783,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-selection-v1/SEMANTIC-SELECTION.json",
+    "sha256": "59e2b5a9598f343a04a528879b3928e420292ab678b2786c597158624c020821"
+  },
+  "status": "PASS_READ_ONLY_METADATA_AND_BODY_REHASH"
+}

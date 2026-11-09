@@ -1,0 +1,21 @@
+{
+  "schema": "M3_GUAVA_BIMAP_UPSTREAM_FEATURES_V1",
+  "frozen_before_execution": true,
+  "features": [
+    "CollectionSize.ANY",
+    "CollectionFeature.SUPPORTS_ITERATOR_REMOVE",
+    "CollectionFeature.KNOWN_ORDER",
+    "MapFeature.ALLOWS_NULL_KEYS",
+    "MapFeature.ALLOWS_NULL_VALUES",
+    "MapFeature.ALLOWS_ANY_NULL_QUERIES",
+    "MapFeature.GENERAL_PURPOSE"
+  ],
+  "descriptor_text": "CollectionSize.ANY;CollectionFeature.SUPPORTS_ITERATOR_REMOVE;CollectionFeature.KNOWN_ORDER;MapFeature.ALLOWS_NULL_KEYS;MapFeature.ALLOWS_NULL_VALUES;MapFeature.ALLOWS_ANY_NULL_QUERIES;MapFeature.GENERAL_PURPOSE",
+  "descriptor_sha256": "360fbf6edd590e6a122c3917d615291d763f34637e8272bcce4164b51c9bc7e7",
+  "excluded_features": [
+    "CollectionFeature.SERIALIZABLE"
+  ],
+  "no_test_suppressions": true,
+  "known_order_justification": "Existing owner forward iteration uses first key insertion order; generator.order returns insertionOrder unchanged. Official BiMapTestSuiteBuilder removes KNOWN_ORDER for inverse derived suite.",
+  "factory": "New existing M3BiMap; sequential put of provided entries; no production mutation or test-specific owner implementation."
+}

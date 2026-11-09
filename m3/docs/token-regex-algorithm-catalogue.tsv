@@ -1,0 +1,8 @@
+category	problem_shape	donor_or_reference	decision	m3_target	notes
+TOKEN_SEQUENCE_REGEX	regular expression over rich token sequence	square/t-rex c84ddf5a	SPEC_ONLY	jdk.internal.mindex.M3TokenPattern	Apache-2.0 statement in upstream README; grammar/behavior reference only, no source/test body copied
+TOKEN_ATTRIBUTE_MATCH	predicate over token kind/lexeme/flags/binding/attributes	spaCy Matcher / TokensRegex family	REFERENCE_ONLY	M3TokenPredicateCache	M3 uses primitive occurrence lanes and canonical lexeme ids
+PRIORITIZED_REGULAR_MATCH	ordered alternation + greedy/lazy repetition + captures	RE2/Pike VM problem shape	ADAPT_ALGORITHM_SHAPE	M3TokenEngine	Forward token coordinates; endpoint duplicates folded; first priority capture state wins
+REGEX_DP	bounded regular matching state transition	LeetCode 10 / GFG regex matching	CATEGORY_ONLY	M3TokenEngine	Problem taxonomy only; no challenge solution/editorial copied
+WILDCARD_DP	sequence wildcard/repetition transition	LeetCode 44 / GFG wildcard matching	CATEGORY_ONLY	M3TokenEngine	Used to review repeat/empty-boundary cases
+STRING_SIMILARITY	prefix/state reuse over sequences	HackerRank String Similarity	CATEGORY_ONLY	future token-prefix precompute	Not used as regex implementation donor
+COMPOSITE_TEXT	balanced persistent concatenation with summaries	M3MeasuredRope / M3StringTuple existing owners	REUSE_EXISTING	java.lang.M3StringTuple	Token regex must not introduce lexical semantics into storage tuple boundaries

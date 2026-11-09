@@ -1,0 +1,7 @@
+category	public_reference	comparison	decision
+sorted_frequency	Synexia Wave19 and Wave20 original code	Signed exact duplicate-preserving run counts	RECEIVE_EXACT_ORIGINAL_SOURCE
+range_frequency	LeetCode 2080 Range Frequency Queries	Unsorted positional ranges, not equivalent to sorted rank-index	REFERENCE_ONLY
+dense_ranking	HackerRank Climbing the Leaderboard	Descending dense ranks, not ascending signed multiplicity	REFERENCE_ONLY
+run_length	GeeksforGeeks RLE / sorted frequency	Problem shape only; no solution-body copying	REFERENCE_ONLY
+compressed_index	GitHub RoaringBitmap	Distinct bitmap membership differs from signed duplicates	REFERENCE_ONLY
+compressed_index	GitHub JavaFastPFOR	Integer compression tradeoff; no source transplant	REFERENCE_ONLY

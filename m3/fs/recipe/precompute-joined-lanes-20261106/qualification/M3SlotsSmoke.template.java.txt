@@ -1,0 +1,42 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// Relocated byte-for-byte below this header from Synexia crate m3fs-key-value-lanes-20261102/qualification/M3SlotsSmoke.template.java.txt
+// (commit d2878b147a7, sha256 97c1880d45b771d0122b42107d9445865a6125c1cbe4766abba7f00a86f70f8e); differential.sh inserts the
+// M3KeyValueSlots class extracted from the M3JDK stage-03 image at the anchor line.
+// SPDX-License-Identifier: Apache-2.0
+import java.util.LinkedHashMap;
+import java.util.Random;
+
+/** Bounded old-vs-new map parity against the exact source-sealed nested class. */
+public final class M3SlotsSmoke {
+    // M3_SLOTS_NESTED_IMPLEMENTATION
+    private record Key(int id) {
+        @Override public int hashCode() {
+            return id % 97 == 0 ? 7 : Integer.rotateLeft(id * 31, 11);
+        }
+    }
+    private static void require(boolean ok) {
+        if (!ok) throw new AssertionError("Mapped key/value contract drift");
+    }
+    public static void main(String[] args) {
+        int steps=Integer.getInteger("m3.slots.smoke.steps",70000);
+        var before=new LinkedHashMap<Key,Object>();
+        var after=new M3KeyValueSlots<Key,Object>();
+        var rand=new Random(0x4d33534c4f544d50L);
+        for (int i=0;i<steps;i++) {
+            Key k=i%127==0 ? null : new Key(rand.nextInt(6000));
+            if (i%5==0) {
+                require(before.get(k)==after.get(k));
+            } else {
+                Object value=i%37==0 ? null : new Object();
+                require(before.put(k,value)==after.put(k,value));
+                require(before.get(k)==after.get(k));
+            }
+            require(before.size()==after.size());
+        }
+        require(after.keys.length==after.values.length);
+        require(after.used+(after.hasNull?1:0)==after.size());
+        require(Integer.bitCount(after.keys.length)==1);
+        System.out.println("M3FS_SLOTS_REAL_HELPER_PARITY_PASS steps="+steps+
+                " size="+after.size()+" slots="+after.keys.length);
+    }
+}

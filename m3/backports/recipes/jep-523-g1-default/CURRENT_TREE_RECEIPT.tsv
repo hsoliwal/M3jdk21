@@ -1,0 +1,24 @@
+field	value
+jep	523
+title	Make G1 the Default Garbage Collector in All Environments
+upstream_issue	JDK-8383856
+upstream_commit	86637704fd01493ddb57e455dbd1e35e4798237d
+proof_base	80b8534ad1e45002185fb3eeab233f98d3a7c0bd
+product_path	src/hotspot/share/gc/shared/gcConfig.cpp
+product_sha256	e378e78adbff922ba4f7d6913f75475233a02b1f251ebc787c5aea59b62c5e86
+test_path	test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java
+test_sha256	88ea025711bb2512d7196fb867676bd5ad541cdfdd45b457234153b27143abbc
+recipe	com.m3.rewrite.backport.M3Jep523BackportRecipe
+recipe_state	REVIEWED_POSTIMAGES_ALREADY_PRESENT
+source_materialized	true
+current_tree_equivalent	true
+recipe_replay_source_delta	0
+g1_enabled_build	PENDING_HOSTED_PROOF
+no_g1_build	PENDING_HOSTED_PROOF
+focused_jtreg	PENDING_HOSTED_PROOF
+runtime_smoke	PENDING_HOSTED_PROOF
+fixed_point	PENDING_HOSTED_PROOF
+promotion	NOT_AUTHORIZED
+next_action	RUN_RECIPE_BUILD_G1_AND_NO_G1_JTREG_RUNTIME_FIXED_POINT
+proof_requested	2026-10-07
+proof_branch	m3/jep523-current-tree-proof-20261007

@@ -1,0 +1,68 @@
+name: M3 long range array and JNI mask parity
+on:
+  push:
+    branches:
+      - 'm3/long-range-array-state-receiver-20261017'
+  pull_request:
+    paths:
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java'
+      - 'test/jdk/jdk/m3/collections/M3LongRangeSet*'
+      - 'm3/collections/qualification/range-atom/successor/**'
+      - 'm3/collections/qualification/m3-long-range-arrays-20261017/**'
+      - '.github/workflows/m3-long-range-array-state-20261017.yml'
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  real-m3-jni-and-array-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Replay historical immutable receipt and verify current source successor
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -S m3/collections/qualification/range-atom/successor/verify.py
+      - name: Compile actual Java21 M3 array and mask owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/range-classes"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/range-classes" \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongLongConsumer.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LaneSearch.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java \
+            test/jdk/jdk/m3/collections/M3LongRangeSetSelfTest.java
+          java -ea -Xmx64m -cp "$RUNNER_TEMP/range-classes" jdk.m3.collections.M3LongRangeSetSelfTest
+      - name: Compile existing C17 JNI kernel and check real mask selection
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c \
+            -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
+          java -ea -Xmx64m -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
+            -cp "$RUNNER_TEMP/range-classes" jdk.m3.collections.M3LongRangeSetSelfTest
+      - name: Build required Java21 m3-arrays module before dependent tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -Dmaven.test.skip=true install
+          test -s m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar
+      - name: Actual M3 collections Maven/JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest,M3LongRangeSetAtomTest "-DargLine=-Xcheck:jni -Djava.library.path=$RUNNER_TEMP" test

@@ -1,0 +1,110 @@
+[
+  {
+    "variant": "qualification",
+    "trial": 0,
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenFindResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 40672,
+    "user_seconds": 1.080501,
+    "system_seconds": 0.030858999999999998
+  },
+  {
+    "variant": "qualification",
+    "trial": 1,
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenFindResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 40600,
+    "user_seconds": 1.117996,
+    "system_seconds": 0.030902
+  },
+  {
+    "variant": "qualification",
+    "trial": 2,
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenFindResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 40624,
+    "user_seconds": 1.13079,
+    "system_seconds": 0.041225
+  },
+  {
+    "variant": "qualification-final",
+    "trial": 0,
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenFindResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 41776,
+    "user_seconds": 0.27293999999999996,
+    "system_seconds": 0.065151
+  },
+  {
+    "variant": "qualification-final",
+    "trial": 1,
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenFindResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 41852,
+    "user_seconds": 0.352941,
+    "system_seconds": 0.047781
+  },
+  {
+    "variant": "qualification-final",
+    "trial": 2,
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
+      "M3TokenFindResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 41868,
+    "user_seconds": 0.295911,
+    "system_seconds": 0.036918
+  }
+]

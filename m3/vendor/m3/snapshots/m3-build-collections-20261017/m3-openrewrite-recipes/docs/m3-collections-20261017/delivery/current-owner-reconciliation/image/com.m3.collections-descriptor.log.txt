@@ -1,0 +1,7 @@
+$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/jar", "--describe-module", "--file", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/jars/com.m3.collections.jar"]
+com.m3.collections jar:file:///workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/jars/com.m3.collections.jar!/module-info.class
+exports com.m3.collections
+requires java.base mandated
+
+
+EXIT 0

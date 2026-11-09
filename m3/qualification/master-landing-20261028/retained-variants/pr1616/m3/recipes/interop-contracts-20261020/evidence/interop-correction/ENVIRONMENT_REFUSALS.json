@@ -1,0 +1,41 @@
+{
+  "status": "OBSERVED_TOOL_RESULTS_RECORDED_RETROSPECTIVELY",
+  "date": "2026-10-20",
+  "exact_observation_time": "UNKNOWN",
+  "original_stdout_files": "NOT_AVAILABLE; following diagnostic fields were retained from tool results",
+  "events": [
+    {
+      "operation": "isolated Bag fixture authoring command; command did not execute",
+      "tool_exit": 101,
+      "diagnostic": "failed to register synthetic bubblewrap mount target /tmp/.git: No space left on device (os error 28)"
+    },
+    {
+      "operation": "sandboxed removal of isolated reproducible target; command did not execute",
+      "tool_exit": 101,
+      "diagnostic": "failed to create synthetic bubblewrap mount marker directory /tmp/codex-bwrap-synthetic-mount-targets-0/7cbc6393d35a63dc: No space left on device (os error 28)"
+    },
+    {
+      "operation": "scoped isolated target cleanup",
+      "tool_exit": 0,
+      "observed": "target was later visible again with retained old class mtimes and new ctimes; no Java/Maven process was running; cause unresolved"
+    },
+    {
+      "operation": "disk observation",
+      "filesystem": "overlay",
+      "total_bytes_display": "32G",
+      "used_bytes_display": "32G",
+      "available_bytes_display": "0",
+      "inode_used_percent": 56
+    },
+    {
+      "operation": "capacity recovery",
+      "observed": "Root reported removing an already-extracted JDK archive while retaining installed JDK; subsequent isolated authoring observed938987520 available bytes and completed."
+    }
+  ],
+  "lesson": "Capacity refusal is not a Java regression. Preserve failed tool observations, reclaim only reproducible authorized scratch output, then use a never-before-used output path with source/class freshness receipts.",
+  "not_claimed": [
+    "No general explanation of stale-file resurrection is established.",
+    "No infrastructure or Maven cache fix is deployed.",
+    "No product source was changed by the failed authoring command."
+  ]
+}

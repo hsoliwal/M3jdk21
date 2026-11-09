@@ -1,0 +1,15 @@
+{
+  "schema": "m3-catalogue-put-validation-selection/v1",
+  "problemCategory": "sorted-or-ordered-index/key-admission",
+  "donor": "hsoliwal/M3jdk21 M3TreeMap at f19934e045f7e0f896704940a786106153ad4dc2",
+  "donorLicense": "Apache-2.0",
+  "classification": "ADAPT existing root lookup-validation and array AVL insertion atoms",
+  "referenceOnly": "Executed Java21.0.9+7-LTS338 TreeMap; OpenJDK source not imported",
+  "selected": "Validate ordinary eager forward nonempty unbounded root keys using existing-key descent; retain other mode admission checks",
+  "correctness": "SDK finite gates PASS; independent currentEC58 exact58/58; independent insertion root29/30 exact with inherited empty-null message retained; boundedoperation6/6 preserved; fullrawrecords unchanged",
+  "complexity": "Balanced insertion remains O(log n); removes one preliminary comparator invocation in the selected mode",
+  "performance": "No JMH/throughput/peak claim for this pass",
+  "publicMetadata": "88 API rows identical",
+  "nextPassReuse": "Consult the exact-file recipe and these full raw observations before rediscovering or changing validation in other modes",
+  "remainingScope": "Full current EC14 source/build/JPMS/OSGi, other collection implementations, JNI and five-library completion remain open."
+}

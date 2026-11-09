@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# RECIPE_MEMORY.tsv - append-only lesson memory of recipe int-ring-buffer-20261106 (RELOCATE_INT_RING_BUFFER): one row per lesson, appended in the same commit as the correction.
+date	recipe	version	lesson	evidence
+2026-11-06	relocate.py	v3	the census est_changed_lines (14) is the crate's delta, not the class size; the real donor file is 20 lines, read from the main path blob before planning the leaf	git cat-file -p 8e2f4be2cd4e | wc -l
+2026-11-06	owner check	-	a protected owner with an overlapping API (M3IntArrayDeque: addFirst/addLast/peek/remove) is ALREADY only when the contract is the same; growth versus bounded refusal (offer* false, isFull, arbitrary capacity) is a different contract, so the leaf lands beside it and the protected file gets an NEC row, never an edit	M3IntArrayDeque.addLast grows via ensure(); M3IntRingBuffer.offerLast returns false when full
+2026-11-06	differential.sh	v1	a reflective sequence dump costs ~0.5 ms per operation sequence on the JIT but ~150 ms under -Xint, so the -Xint pass replays 400 of the 6,000 sequences to stay under the 120 s bound	differential.sh 83 s with 6,000 / 400
+2026-11-06	differential.sh	v1	a brute-force reference model that shares no code with the donor oracle (plain int array shifted by System.arraycopy instead of ArrayDeque) makes the reference gate independent of the oracle the donor wrote	M3IntRingBufferDump offer/take/snap

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "source": "hsoliwal/com.synexia",
+  "recipe_pr": 12548,
+  "recipe_commit": "8a5a0e76e07537620e10673d576291283d76930d",
+  "recipe": "synexia-openrewrite-recipes/recipes/m3jni-unified-20261020",
+  "target_baseline": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "targets": [
+    "m3/native",
+    "m3/arrays/src/main/native/m3_arrays_jni.c",
+    "m3/collections/src/main/native/collections/m3_residency_state_mask.c",
+    "m3/collections/src/main/native/collections/m3_index_path_masks.c"
+  ],
+  "public_names": "unchanged; no added JNI exports or renamed Java methods",
+  "implementation": "M3JDK21 SDK-owned C11 JNI index/offset/window/mask predicates reused by existing array/collection native owners",
+  "canonical_ownership": "Synexia recipe-first preimage/postimage custody; M3JDK21 owns Java/HotSpot/native receiving",
+  "license": "Apache-2.0 for new independent m3/ code; OpenJDK/third-party source retains its own rights",
+  "status": "DRAFT_HOST_C11_ONLY_PLATFORMS_AND_INSTALLED_IMAGE_PENDING"
+}

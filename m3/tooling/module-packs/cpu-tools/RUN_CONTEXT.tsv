@@ -1,0 +1,25 @@
+field	value
+task_id	m3-cpu-tools-jmod-20261018
+declared_date	2026-10-18
+repository	hsoliwal/M3jdk21
+base	f29b0afe7ad253cc0562bc8dfdd48fc1acec710e
+canonical_repository	hsoliwal/com.synexia
+canonical_path	synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018
+canonical_recipe	com.synexia.m3jdk.CpuToolsJmod20261018
+donor_revision	50f48cbbe11f17fb8dc209bac3812f8940a1e267
+scope	Optional Java library/JMOD add-on; no product-family promotion
+module_count	20 optional modules: 3 existing + 16 donor + 1 aggregate
+registry_operation_count	22
+workers	1 bounded local build driver
+platform_requirement	Linux with C compiler and actual M3 Java21 development image
+runtime_selection	--jdk-home or Maven -Dm3.jdk; Maven defaults to ${java.home}; no global JAVA_HOME mutation
+runtime_identity	Actual release/lib/modules/lib/server/libjvm.so and source JMOD hashes in ${OUT}/TOOLCHAIN_INPUTS.tsv
+compile_contract	-source 21 -target 21 -Xlint:all,-module -Werror
+m3_storage_gate	Default runtime and explicit -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage; storage assertions required
+command_deadline	115 seconds plus at most 5 seconds forced process-group cleanup per driver subprocess
+output_selection	Explicit fresh --out path; replacement and protected-input overlap refuse
+observed_source_environment	Canonical qualification/source-proof.json and donor qualification receipts
+observed_image_environment	${OUT}/BUILD_RECEIPT.json and COMMANDS.json; absent or non-PASS means unqualified
+build_tools	Python3.10+; Maven; supplied M3 JDK; C compiler; existing jmod_pack.py
+final_revisions	Read exact publication/recipe receipt; baseline identities do not assert a final branch revision
+source_jdk_prerequisite	Clean actual M3 JDK: none of20 optional tool names in release MODULES or source JMOD filenames; earlier linked text/CPU tool images refuse

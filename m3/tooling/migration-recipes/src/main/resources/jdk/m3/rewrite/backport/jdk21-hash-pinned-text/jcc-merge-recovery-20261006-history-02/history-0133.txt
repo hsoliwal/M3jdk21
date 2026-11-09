@@ -1,0 +1,41 @@
+{
+  "schema": "jcc-e04-derivation-static-review/1",
+  "epoch": "T01",
+  "status": "CHANGES_REQUIRED_BEFORE_BINDING_OR_EXECUTION",
+  "findings": [
+    {
+      "id": "E4-DER-01",
+      "severity": "medium",
+      "status": "ACCEPTED_BY_ROOT_FIX_PENDING",
+      "file": "run_verification.py",
+      "lines": [
+        53,
+        59
+      ],
+      "summary": "Fresh snapshots do not admit 527 context bodies and ten copied context receipts against declared identities before execution output creation."
+    },
+    {
+      "id": "E4-DER-02",
+      "severity": "medium",
+      "status": "REPORTED_FIX_PENDING",
+      "file": "author_e04.py",
+      "lines": [
+        75,
+        118,
+        120,
+        148,
+        154
+      ],
+      "summary": "Normalized receipt aliases or ancestor target conflicts fail only after generated outputs are written."
+    }
+  ],
+  "all_requested_sources_read_in_full": true,
+  "candidate_tools_imported_or_executed": false,
+  "generation_builds_tests_remote_calls": false,
+  "actual_inputs_state": "UNBOUND",
+  "actual_afterimages_reviewed": false,
+  "final_input_review_pending": true,
+  "independent_static_input_checks": "STATIC_INPUT_CHECKS.json",
+  "input_identities": "INPUTS.json",
+  "report": "REVIEW.md"
+}

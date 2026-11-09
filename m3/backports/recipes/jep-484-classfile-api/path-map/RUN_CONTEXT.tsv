@@ -1,0 +1,12 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	87590cb96fb0e2dc0f88fae8e01957f7179cd255
+branch	m3/jep484-path-map-20261006
+jdk21_ref	jdk-21+35
+jdk21_baseline	890adb6410dab4606a4f26a942aed02fb2f55387
+jdk24_ref	jdk-24+36
+jep484_commit	84ffb64cd73f8af11cf3670c6f19d282c2ac6961
+source_prefix	src/java.base/share/classes/jdk/internal/classfile/
+public_prefix	src/java.base/share/classes/java/lang/classfile/
+internal_prefix	src/java.base/share/classes/jdk/internal/classfile/
+normalization	Classfile->ClassFile only

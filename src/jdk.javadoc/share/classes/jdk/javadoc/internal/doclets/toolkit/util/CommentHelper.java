@@ -33,6 +33,7 @@ import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.EscapeTree;
 import com.sun.source.doctree.IdentifierTree;
+import com.sun.source.doctree.InheritDocTree;
 import com.sun.source.doctree.InlineTagTree;
 import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.LiteralTree;
@@ -134,10 +135,7 @@ public class CommentHelper {
             return null;
         }
         DocTrees doctrees = configuration.docEnv.getDocTrees();
-        // Workaround for JDK-8284193
-        // DocTrees.getElement(DocTreePath) returns javac-internal Symbols
-        var e = doctrees.getElement(docTreePath);
-        return e == null || e.getKind() == ElementKind.CLASS && e.asType().getKind() != TypeKind.DECLARED ? null : e;
+        return doctrees.getElement(docTreePath);
     }
 
     public TypeMirror getType(ReferenceTree rtree) {
@@ -315,6 +313,11 @@ public class CommentHelper {
                 return visit(dt, null);
             }
             return null;
+        }
+
+        @Override
+        public R visitInheritDoc(InheritDocTree node, Void p) {
+            return visit(node.getSupertype(), p);
         }
 
         @Override

@@ -1,0 +1,13 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package jdk.m3.collections;
+
+import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.FilteredListsReadonlyDepthProof;
+
+/** Actual module JUnit harness of the isolated repeated-readonly contract oracle. */
+final class FilteredListsReadonlyDepthTest {
+    @Test void nestedReadOnlyNeverRecursesOrLeaksWriteAccess() {
+        FilteredListsReadonlyDepthProof.main(new String[0]);
+    }
+}

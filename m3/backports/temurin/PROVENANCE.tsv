@@ -1,0 +1,7 @@
+kind	reference	use
+source_mirror	adoptium/jdk21u@bb6b279495ceff8442dbd0225756b92d466d5309	mirror equality evidence
+baseline	openjdk/jdk21u@bb6b279495ceff8442dbd0225756b92d466d5309	canonical source comparison
+build_tooling	adoptium/temurin-build@cc31225e0aad72a5598d94e174cdd5c09e0d85a8	build/SBOM/source-pin/DevKit/metadata mechanism donor
+test_tooling	adoptium/aqa-tests@6772f0835e011b175b4c1ad3a708f35912b6d249	OpenJDK/system/external/performance test mechanism donor
+build_license	adoptium/temurin-build LICENSE blob d5dd862b1759bce588502bc0a7d4040e5fa9154e	Apache-2.0 evidence
+test_license	adoptium/aqa-tests LICENSE blob d5dd862b1759bce588502bc0a7d4040e5fa9154e	Apache-2.0 evidence

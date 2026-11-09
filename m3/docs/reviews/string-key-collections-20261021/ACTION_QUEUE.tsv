@@ -1,0 +1,16 @@
+priority	family	operations	candidate_reuse	contract_guard	basis	status
+P0	String value substrate	hash/equality/range facts/non-admitting access	Reuse String and M3String owners; no duplicate pool	Representation identity is not content identity	S1 S2 S3	EVALUATION_REQUIRED
+P1	Hash maps and sets	get/contains/put/remove/rehash	Existing String dispatch; consider side metadata only after measurement	Nulls; representative identity; query equality direction; collisions	S3 S4 S5	EVALUATION_REQUIRED
+P1	Bags and multisets	count/add/remove/bulk counts	Exact text identity plus primitive count lanes	Multiplicity and overflow policies remain owner-specific	Candidate family	EVALUATION_REQUIRED
+P1	Multimaps/bimaps/tables	key groups/inverse keys/row-column indexes	Reuse text metadata independently on each keyed dimension	Per-provider cardinality, order, duplicates and views	Candidate family	EVALUATION_REQUIRED
+P1	Sorted/navigable maps and sets	compare/lower/upper/range/sorted views	UTF-16 comparison with prepared facts and indexed ranges	Never sort by admission ID; preserve custom comparator effects	Candidate family	EVALUATION_REQUIRED
+P1	Immutable/persistent collections	snapshot/lookups/version sharing	Share immutable text payload, not mutable membership state	Version/root ownership and original representatives	Candidate family	EVALUATION_REQUIRED
+P1	Streams and bulk string operations	distinct/grouping/counting/join/membership	Reuse hashes/qualified value IDs; existing index/mask operations	Stable representatives; callbacks; short circuit; close	Candidate family	EVALUATION_REQUIRED
+P2	Composite keys	tuple/string-concat keys	Reuse compositional String/range facts or existing typed tuple key	No implicit conversion between tuple and delimited-string equality	Candidate family	EVALUATION_REQUIRED
+P2	Prefix indexes/tries/labelled graphs	prefix traversal/spelling membership	Canonical spans and array-based edges/slot indexes	Text identity differs from graph node/scope/occurrence identity	Candidate family	EVALUATION_REQUIRED
+P2	String-valued lists/deques/columns	contains/sort/filter/group	Shared backing plus index projections	Preserve duplicate occurrences and caller-visible String references	Candidate family	EVALUATION_REQUIRED
+P2	Mixed Object-key collections	String/String and non-String probes	Conditional internal specialization; retain generic fallback	Raw callers and asymmetric/side-effecting equality	Candidate family	EVALUATION_REQUIRED
+P2	Concurrent collections	lookup/update/publication/eviction	Safely published immutable metadata; incumbent synchronization	Linearization, progress, generation reuse and owner lifetime	Candidate family	EVALUATION_REQUIRED
+P2	Weak/reference collections	lookup/reclamation	Only non-retaining metadata with audited reference graph	No pool/cache path may strongly retain the weak key	Official WeakHashMap contract	EVALUATION_REQUIRED
+P2	Identity collections	reference-based membership	Shared backing can remain; NO value-ID equality substitution	Distinct equal String objects must remain distinct keys	Official IdentityHashMap contract	EVALUATION_REQUIRED
+P2	SDK clients	symbols/JSON names/config/UI labels/path segments	Trace actual String-key callsites and existing storage owners	Preserve case/locale/path/scope semantics; no named new owner assumed	Candidate callers	EVALUATION_REQUIRED

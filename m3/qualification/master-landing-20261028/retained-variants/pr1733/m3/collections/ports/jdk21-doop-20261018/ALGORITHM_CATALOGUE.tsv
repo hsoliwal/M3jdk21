@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+problemCategory	owner	selectedPattern	expectedComplexity	alternative	decision	remainingGate
+hash-index	M3HashMap	parallel-planes+open-addressing+integer-tombstones+recycled-offsets	lookup/insert expected O(1), adversarial collisions O(n)	per-entry JDK Node/TreeNode	REJECTED: object allocation per mapping	collision DoS bounds; JDK serial/clone equality
+set-membership	M3HashSet	key-only M3HashMap physical owner	membership expected O(1), collisions O(n)	HashMap with PRESENT sentinel values	REJECTED: redundant value lane	HashSet serialization and JDK public ABI
+deque-ring	M3ArrayDeque	power-two circular reference array and head/size offsets	amortized O(1) ends, O(n) indexed erase	per-element linked Node	REJECTED: object per element	full JDK deque tests and serial form
+priority-heap	M3PriorityQueue	index-derived parent/child heap, reference payload array	O(log n) offer/poll, O(n) contains/remove probe	per-element tree nodes	REJECTED: object per element	iterator/JMM/serialization qualification
+cache-residency	M3ObjectResidency	parent-owned integer state and borrow masks	O(1) slot-state operations	ad hoc per-child LFU wrapper	DEFER: reuse existing M3LFU+GC safe-point owner	prove nonescape/pinning; never evict live elements

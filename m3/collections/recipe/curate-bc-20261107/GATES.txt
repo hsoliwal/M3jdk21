@@ -1,0 +1,19 @@
+module tests (m3/arrays + m3/collections reactor of the gate tree):
+base   [WARNING] Tests run: 2278, Failures: 0, Errors: 0, Skipped: 135
+curated [WARNING] Tests run: 2278, Failures: 0, Errors: 0, Skipped: 135
+
+reactor (37's gate: m3/qualification/reactor-wiring-20261107, -o -T1 -fae -am, module -Werror):
+M3IndexDB 0.1.0-SNAPSHOT SUCCESS [  9.520 s]
+M3 array substrate 0.1.0-SNAPSHOT SUCCESS [ 13.678 s]
+M3 collection lanes 0.1.0-SNAPSHOT SUCCESS [01:53 min]
+M3JDK21 public custody :: Synexia canonical recipes 1.0.0-SNAPSHOT FAILURE [  7.053 s]
+module-packs 0.1.0-SNAPSHOT SUCCESS [  0.121 s]
+M3JDK :: Compiler Mat Sortable Processor 0.1.0-SNAPSHOT SUCCESS [  5.116 s]
+M3JDK :: Compiler Parent-Owned Processor 0.1.0-SNAPSHOT SUCCESS [  1.182 s]
+m3-eclipse-framework-forward 0.1.0-SNAPSHOT SUCCESS [  1.136 s]
+M3 optional collection library interoperability 0.1.0-SNAPSHOT SUCCESS [  4.287 s]
+M3 source-time sortable signals 0.1.0-SNAPSHOT SUCCESS [  1.573 s]
+M3 persistent array and mask collections 0.1.0-SNAPSHOT SUCCESS [  4.293 s]
+viewport-core (-Pm3-extended -pl viewport-core -am): [INFO] BUILD SUCCESS
+tooling/atom-jit-gate (standalone): [INFO] Tests run: 40, Failures: 0, Errors: 0, Skipped: 0 [INFO] BUILD SUCCESS
+collections/snapshot-recipe-20261017: offline dependency org.openrewrite:rewrite-java-21:8.17.1-m3-source-1 absent (same gap that keeps tooling/migration-recipes red on master)

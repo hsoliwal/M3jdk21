@@ -1,0 +1,2 @@
+OPENNLP_EXTENSIONS_PASS morfologik=10 uima=44
+Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData

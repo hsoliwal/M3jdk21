@@ -1,0 +1,8 @@
+M3 collections scaffold: M3UnmodifiableMap
+Copyright 2026 Hitesh Soliwal and contributors
+
+This product includes software developed by Hitesh Soliwal and contributors,
+licensed under the Apache License, Version 2.0.
+
+The declared public surface mirrors org.apache.commons.collections4.map.UnmodifiableMap from Apache Commons Collections 4.5.0
+(Apache-2.0) for compatibility. No provider implementation code is included.

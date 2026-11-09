@@ -1,0 +1,22 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.yaml.search.FindProperty"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 97
+- name: "Aaron Gershman"
+  email: "5619476+aegershman@users.noreply.github.com"
+  lineCount: 10
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 3
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 2
+- name: "traceyyoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 2
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.m3.rewrite.DbMark
+displayName: Prove retained metadata and scheduler provenance
+description: Correct the exact marker expectation without removing inherited metadata or OpenRewrite provenance.
+recipeList:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: db-mark

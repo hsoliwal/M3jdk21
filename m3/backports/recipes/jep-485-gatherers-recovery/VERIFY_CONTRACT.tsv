@@ -1,0 +1,15 @@
+gate	state	detail
+docs_before_code	PASS_BRANCH	TASK_PACKET commit precedes replay commit
+preimage_identity	PASS_BRANCH	4 current owners match PR105 preimage blobs
+product_replay	PASS_BRANCH	exact PR105 blobs; no regeneration
+registry_authority	PASS_BRANCH	LIBRARY_API/EXPLICIT_CONTRACT_CHANGE
+catalogue_identity	PASS_BRANCH	candidate + opt-in compatibility posture retained
+workflow_prerequisite	PASS_BRANCH	libxrandr-dev added from prior configure evidence
+recipe_compile_junit	PENDING	exact-head workflow
+packet_dag_projection	PENDING	exact-head workflow
+openjdk_configure	PENDING	exact-head workflow
+jdk_images	PENDING	exact-head workflow
+gatherer_jtreg	PENDING	exact-head workflow
+existing_stream_regressions	PENDING	exact-head workflow
+built_jdk_smoke	PENDING	exact-head workflow
+whole_programme	INCOMPLETE	no blanket JDK completion

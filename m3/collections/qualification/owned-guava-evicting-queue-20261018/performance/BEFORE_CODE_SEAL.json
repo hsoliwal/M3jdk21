@@ -1,0 +1,11 @@
+{
+  "status": "BEFORE_HARNESS_SOURCE",
+  "sourceAbsentAtObservation": true,
+  "runnerAbsentAtObservation": true,
+  "sealedInputs": [
+    {"path": "FOSS_PERFORMANCE_DECISION.tsv", "bytes": 2201, "sha256": "2496d8355f60e966fea5955cf8d85f274e199a2c89fad93170f49acc3002c14d"},
+    {"path": "WORKLOADS.json", "bytes": 2424, "sha256": "cfe620b8b3e45ce1d704da686ed0049cf08be855bcaea3223f9e5942ec974b38"}
+  ],
+  "storage": {"freeBytes": 26195857408, "logicalBytes": 28144980, "capBytes": 536870912, "reserveBytes": 8589934592, "nativeChildTemp": "S:/codex-work/m3-collections-next-20261018/temp", "CBuildLane": "HELD", "KTempLane": "UNAVAILABLE"},
+  "observation": "Bounded Python -I -S -B source-absence and hash observation before first harness/runner write; performance and compilation not yet executed"
+}

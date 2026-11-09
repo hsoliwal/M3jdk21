@@ -1,0 +1,48 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------< com.synexia.proof:m3-rank-prefix-select-proof >------------
+[INFO] Building m3-rank-prefix-select-proof 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-rank-prefix-select-proof ---
+[INFO] Copying 25 resources from ../../../src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-rank-prefix-select-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-rank-prefix-select-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/abdb4b1178cf/synexia-work/synexia-openrewrite-recipes/tasks/m3-index-rank-prefix-select-20261020/qualification-20261020/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-rank-prefix-select-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-rank-prefix-select-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3IndexPathRankAdaptiveRecipeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 34.99 s -- in com.synexia.rewrite.M3IndexPathRankAdaptiveRecipeTest
+[INFO] Running com.synexia.rewrite.M3JUnitLauncherProvenanceRecipeTest
+TEXT_SDK_EXECUTION materialized=0 replay=0 targets=1
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.synexia.rewrite.M3JUnitLauncherProvenanceRecipeTest
+[INFO] Running com.synexia.rewrite.M3IndexPathRankWordWalkRecipeTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.839 s -- in com.synexia.rewrite.M3IndexPathRankWordWalkRecipeTest
+[INFO] Running com.synexia.rewrite.M3JUnitLauncherProvenanceSchemaRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.020 s -- in com.synexia.rewrite.M3JUnitLauncherProvenanceSchemaRecipeTest
+[INFO] Running com.synexia.rewrite.M3IndexPathRankPrefixSelectRecipeTest
+SDK_EXECUTION materialized=0 replay=0 targets=3
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.92 s -- in com.synexia.rewrite.M3IndexPathRankPrefixSelectRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:09 min
+[INFO] Finished at: 2026-10-20T08:39:32+01:00
+[INFO] ------------------------------------------------------------------------

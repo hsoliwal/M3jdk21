@@ -1,0 +1,2 @@
+[0.159s][warning][jni,resolve] Re-registering of platform native method: jdk.internal.mindex.M3RX7.buildPacked0([S[B[I[I[S)V from code in a different classloader
+M3RX7BoundaryContract PASS checks=903641 native=true

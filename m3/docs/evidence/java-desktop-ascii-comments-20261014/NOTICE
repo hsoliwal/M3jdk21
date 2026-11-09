@@ -1,0 +1,1 @@
+Existing OpenJDK/Synexia target java.desktop JComponent and RepaintManager: original GPLv2 with Classpath Exception headers retained. Only three FLLDCIM line-comment em dashes become ASCII hyphens. No API/implementation/license text changes. Actual failing job: https://github.com/hsoliwal/M3jdk21/actions/runs/38508779716/job/115672246377 .

@@ -1,0 +1,32 @@
+{
+  "all_blob_rows_preserved": 9996,
+  "all_pin_root_bindings_verified": true,
+  "all_recursive_trees_nontruncated": true,
+  "automatic_algorithm_admissions": 0,
+  "git_tree_hashes_reconstructed_and_matched": 6760,
+  "java_jni_build_test_runtime_executed": false,
+  "metadata_projection_replay": "BYTE_EQUIVALENT_NO_REWRITE",
+  "metadata_projection_roundtrip": "BYTE_EQUIVALENT",
+  "products": {
+    "DONOR_DIRECTORY_TAXONOMY.tsv": {
+      "bytes": 2013,
+      "sha256": "5be0d1de9d3ad3fc9e3177ac54dfe61a18d419b21e6c44161091c170343a5510"
+    },
+    "DONOR_SOURCE_INVENTORY.tsv": {
+      "bytes": 5806566,
+      "sha256": "d90d6081a863e088f48bf5ad2e8664681556b689670473fbfcc1d67a8ce51d8c"
+    },
+    "INVENTORY_COUNTS.json": {
+      "bytes": 5899,
+      "sha256": "bd86ad563f7712d5a722c007d62ce25277c774c8202c2fb3324ab109722d2244"
+    },
+    "REVIEWED_CANDIDATES.tsv": {
+      "bytes": 4297,
+      "sha256": "f07243cbc565f8db4138ff73139e6dd427df56b759b0af0a20ff9baa2cb801e3"
+    }
+  },
+  "schema": "m3-donor-metadata-verification-v1",
+  "status": "PASS",
+  "target_code_changed": false,
+  "unique_blob_path_rows": 9996
+}

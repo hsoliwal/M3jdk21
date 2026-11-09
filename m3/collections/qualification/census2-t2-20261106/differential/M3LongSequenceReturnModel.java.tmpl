@@ -1,0 +1,61 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package jdk.m3.collections;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
+
+/**
+ * Reference model (java.util.ArrayList) of the boolean add/addAll answers that the census2-t2 REWRITE rows give the
+ * relocated M3LongSequence implementations: ArrayList.add returns true, ArrayList.addAll returns !values.isEmpty();
+ * contents compared after every step. Template of differential.sh (compiled against the module classes, not shipped).
+ */
+public final class M3LongSequenceReturnModel {
+    private static long checks;
+
+    private M3LongSequenceReturnModel() { }
+
+    private static void check(boolean ok, String what) {
+        checks++;
+        if (!ok) throw new AssertionError(what);
+    }
+
+    private static void exercise(String name, Supplier<M3LongSequence> factory, long seed) {
+        Random random = new Random(seed);
+        M3LongSequence sequence = factory.get();
+        List<Long> model = new ArrayList<>();
+        for (int step = 0; step < 4000; step++) {
+            if (random.nextInt(3) == 0) {
+                long[] values = new long[random.nextInt(4)];
+                for (int i = 0; i < values.length; i++) values[i] = random.nextInt(9) - 4L;
+                List<Long> boxed = new ArrayList<>();
+                for (long value : values) boxed.add(value);
+                check(sequence.addAll(values) == model.addAll(boxed), name + " addAll answer step=" + step);
+            } else {
+                long value = random.nextInt(9) - 4L;
+                check(sequence.add(value) == model.add(value), name + " add answer step=" + step);
+            }
+            if (model.size() > 40) {
+                sequence.clear();
+                model.clear();
+            }
+            check(Arrays.equals(sequence.toArray(), model.stream().mapToLong(Long::longValue).toArray()),
+                    name + " contents step=" + step);
+        }
+    }
+
+    public static void main(String[] args) {
+        exercise("M3PackedLongInlineList", M3PackedLongInlineList::new, 1L);
+        exercise("M3ForwardingLongSequence", () -> new M3ForwardingLongSequence() {
+            private final M3LongArrayList backend = new M3LongArrayList();
+            @Override protected M3LongSequence delegate() { return backend; }
+        }, 2L);
+        exercise("M3BoundedLongSequence", () -> new M3BoundedLongSequence(new M3LongArrayList(), 1 << 20), 3L);
+        exercise("M3ValidatingLongSequence", () -> new M3ValidatingLongSequence(new M3LongArrayList(), v -> true), 4L);
+        exercise("M3ObservedLongSequence", () -> new M3ObservedLongSequence(new M3LongArrayList(), event -> { }), 5L);
+        System.out.println("M3_LONG_SEQUENCE_RETURN_MODEL_PASS checks=" + checks);
+    }
+}

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-algorithms</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Algorithm Families</name>
+  <description>jdk.m3.algorithm (module org.m3jdk.algorithms): the canonical algorithm families M3ArrayAlgorithms,
+    M3IntervalGreedyAlgorithms, M3DynamicProgrammingAlgorithms, M3StringAlgorithms, M3StackAlgorithms,
+    M3HeapAlgorithms, M3ListAlgorithms, M3TreeAlgorithms, M3MatrixAlgorithms, M3BacktrackingAlgorithms and
+    M3BitAlgorithms, the graph and trie families M3GraphAlgorithms and M3StringTrie (recipe/graph-trie-20261106),
+    the M3AlgorithmShapeCatalog that names them, and the M3ProgressMonitor cancellation contract
+    every loop observes (an adapter over the owner jdk.m3.collections.M3ProgressMonitor since
+    m3/qualification/progress-monitor-unify-20261106). Pure Java 21; com.m3:m3-collections is the only dependency
+    outside java.base. Relocated by recipe
+    (recipe/families-20261106/relocate.py with RELOCATION_MAP.tsv and PROVENANCE.tsv) from the m3scale donor at
+    develop 3385d79a2968 (2026-11-06); the four donor oracles run in the test phase. The pre-existing M3PrefixZ under
+    src/jdk/m3/algorithm (a java.base M3StringPiece input) is outside this Maven build.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.m3</groupId>
+      <artifactId>m3-collections</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, m3/tooling/jdk-naming/move_module_area.py): the sources live in the
+           JDK module src/jdk.m3.collections and the tests in test/jdk; this pom keeps its own configuration and adds them. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>jdk-module-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../src/jdk.m3.collections/share/classes/jdk/m3/algorithm</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jdk-module-test-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../test/jdk/jdk/m3/algorithm</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <!-- the oracles are JUnit 5 classes in the module's package; classpath run, the descriptor is for consumers -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

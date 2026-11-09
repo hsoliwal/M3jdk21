@@ -1,0 +1,33 @@
+# M3JDK21 source-custody additive review (not master/production admission)
+snapshot=e6dd4d75b682145c164ef70933ce1fa3d5464826
+mode=DRAFT/HOLD
+first_parent=master e6dd4d75b682145c164ef70933ce1fa3d5464826
+donor_parent=#2350 9b3f212ca2b03c16f9c258d28896fcf6ad1db15f
+donor_parent=#2315 4a3b9841f57c17cd34e683644b2beafd32ada938
+donor_parent=#2308 25ae6e7e7f209f67d807ef20d53ef9499d322d62
+mergebase=ce005d25b29fb6246e013bffb462afd5ed070362; master advanced by 9 commits but touched no donor changed paths
+all donor source paths mutually disjoint; original Git source blobs/modes preserved; no deletion/force/rebase/squash
+donor exact-head GitHub Actions contain failures/queued/pending; additional SDK/Maven, JNI, javac/jtreg/JCK, HotSpot and ABI acceptance mandatory
+PR	STATUS	MODE	PATH	GIT_BLOB
+2308	modified	100644	.github/workflows/m3-compiler-signal-facts-20261022.yml	5fdbf34f190c6ce23b8192af2c7b8e39c59e57f8
+2315	added	100644	doc/m3-compiler-pattern-hints-20261102.json	6be52e8c0bba3805337f3f93cdc7c574aa689c1c
+2350	modified	100644	m3/collections/implementations/spring/src/main/java/com/m3/collections/spring/M3SingleValueMapView.java	bf28adb8154e25ef64bce8ad8f5b55bce46d70bb
+2350	added	100644	m3/collections/qualification/spring-scalar-constructor-abi/QUALIFICATION.json	62ea199e10e4420911702bcb0ecaa293bba234e7
+2350	added	100644	m3/collections/qualification/spring-scalar-constructor-abi/README.md	084b0d473f2f03ad507d45a88a85869c1940f4ab
+2308	added	100644	m3/collections/signal-codegen/qualification/compiler-machine-hints/COMPILER_INTEGRATION_PLAN.md	263b22fac7e2432b436e0d613075420c99ff245f
+2308	added	100644	m3/collections/signal-codegen/qualification/compiler-machine-hints/README.md	65a6a18b1bf515c6ba237168581c6bfb01021aaf
+2308	added	100644	m3/collections/signal-codegen/qualification/compiler-machine-hints/SOURCE_MANIFEST.tsv	597829b6e4ed5619597c2d1ddb350645642acb83
+2308	added	100644	m3/collections/signal-codegen/qualification/compiler-machine-hints/verify.sh	c66f3b816140bed84791b55863c4142356b2d0c6
+2308	added	100644	m3/collections/signal-codegen/qualification/compiler-source-custody/RELOCATION_PLAN.md	1a6a6490dcbb1714ffdcb4168993e0c8385d7375
+2308	added	100644	m3/collections/signal-codegen/qualification/compiler-source-custody/RELOCATION_RECEIPT.json	1c9fe8595b5ead886044475380f9be135aae4141
+2308	added	100644	m3/collections/signal-codegen/qualification/record-component-accessor/README.md	3fa06296aef679f93cb1631422238777cce4254a
+2308	added	100644	m3/collections/signal-codegen/qualification/record-component-accessor/SOURCE_MANIFEST.tsv	61748abde5285a7bd30b35143003709108cc3fc0
+2308	added	100644	m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/M3MachineHintRules.java	fa79a4c4f3952108f62fc4191269c977ba489faa
+2308	modified	100644	m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/SortableProcessor.java	e2a8b3f007e06370eb5a8608f48a73f6d6e8b926
+2308	added	100644	m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/M3MachineHintRulesContract.java	1a950f52ed35b1a4d384afd69c11984a5af60a46
+2308	modified	100644	m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/SortableProcessorSelfTest.java	ff4af3b79edc4626cb68de5c2b0b7e3aec2e6b12
+2308	modified	100644	m3/collections/signal-codegen/verify.sh	71372ea96f9ba9eb383eb21c7972726b458c4f53
+2315	modified	100644	src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java	155c9405fa8f837d02d8ed9481c1f1af15a73807
+2315	modified	100644	src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java	ccea209bc8d9a14f100cad8cf82937231b1b3eb6
+2315	added	100644	test/langtools/tools/javac/m3/M3ASTRelationshipFactsTest.java	d31afee83d5c44597ea59c6962e8e191e2cdc75a
+2315	added	100644	test/langtools/tools/javac/m3/M3ASTRelationshipTransportTest.java	02893e2d1cb12e155d0f2d47f7941d912a8c00c2

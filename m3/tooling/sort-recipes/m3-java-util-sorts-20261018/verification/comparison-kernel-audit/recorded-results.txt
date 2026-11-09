@@ -1,0 +1,44 @@
+TIM 3441 cases PASS
+DUAL_PIVOT_QUICK 3441 cases PASS
+QUICK 3441 cases PASS
+INTRO 3441 cases PASS
+MERGE 3441 cases PASS
+BOTTOM_UP_MERGE 3441 cases PASS
+NATURAL_MERGE 3441 cases PASS
+IN_PLACE_MERGE 3441 cases PASS
+HEAP 3441 cases PASS
+SHELL 3441 cases PASS
+INSERTION 3441 cases PASS
+BINARY_INSERTION 3441 cases PASS
+SELECTION 3441 cases PASS
+DOUBLE_SELECTION 3441 cases PASS
+BUBBLE 3441 cases PASS
+COCKTAIL 3441 cases PASS
+COMB 3441 cases PASS
+GNOME 3441 cases PASS
+ODD_EVEN 3441 cases PASS
+CYCLE 3441 cases PASS
+PANCAKE 3441 cases PASS
+BINGO 3441 cases PASS
+TREE 3441 cases PASS
+TOURNAMENT 3441 cases PASS
+PATIENCE 3441 cases PASS
+STRAND 3441 cases PASS
+BITONIC 3441 cases PASS
+ODD_EVEN_MERGE 3441 cases PASS
+BITONIC zero-one network and boundary audit PASS
+ODD_EVEN_MERGE zero-one network and boundary audit PASS
+TIM 40001-element shape audit PASS
+QUICK 40001-element shape audit PASS
+INTRO 40001-element shape audit PASS
+DUAL_PIVOT_QUICK 40001-element shape audit PASS
+MERGE 40001-element shape audit PASS
+BOTTOM_UP_MERGE 40001-element shape audit PASS
+NATURAL_MERGE 40001-element shape audit PASS
+IN_PLACE_MERGE 40001-element shape audit PASS
+HEAP 40001-element shape audit PASS
+SHELL 40001-element shape audit PASS
+TREE 40001-element shape audit PASS
+TOURNAMENT 40001-element shape audit PASS
+PATIENCE 40001-element shape audit PASS
+AUDIT_ONLY total cases=358597 PASS; production API/monitor/recipe qualification not implied

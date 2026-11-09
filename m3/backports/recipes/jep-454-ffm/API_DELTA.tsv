@@ -1,0 +1,16 @@
+ordinal	delta	classification	authority
+0	native-string charset support broadened	BEHAVIORAL_API_REVIEW	LIBRARY_API
+1	remove one-argument MemoryLayout.sequenceLayout	SOURCE_BINARY_API_BREAK	LIBRARY_API
+2	add Linker.canonicalLayouts	ADDITIVE_PUBLIC_API	LIBRARY_API
+3	layout-derived handles add base-offset coordinate	BEHAVIORAL_SIGNATURE_CHANGE	LIBRARY_API
+4	remove MemorySegment.segmentOffset	SOURCE_BINARY_API_BREAK	LIBRARY_API
+5	rename allocator initializer methods to allocateFrom	SOURCE_BINARY_API_BREAK	LIBRARY_API
+6	variadic API/documentation contract update	PUBLIC_CONTRACT_REVIEW	LIBRARY_API
+7	linker availability becomes required	BEHAVIORAL_RUNTIME_CHANGE	MODULE
+8	remove preview status	PUBLIC_API_FINALIZATION	LIBRARY_API
+9	Linker.Option.isTrivial renamed to critical	SOURCE_BINARY_API_BREAK	LIBRARY_API
+10	critical incompatible with captureCallState	BEHAVIORAL_CONTRACT_CHANGE	LIBRARY_API
+11	Arena.allocate becomes abstract	SOURCE_BINARY_API_BREAK	LIBRARY_API
+12	unsupported access modes explicitly throw	BEHAVIORAL_CONTRACT_CHANGE	LIBRARY_API
+13	arbitrary segment allocateFrom support	ADDITIVE_PUBLIC_API	LIBRARY_API
+14	Enable-Native-Access manifest attribute	LAUNCHER_SECURITY_POLICY_CHANGE	MULTI_MODULE

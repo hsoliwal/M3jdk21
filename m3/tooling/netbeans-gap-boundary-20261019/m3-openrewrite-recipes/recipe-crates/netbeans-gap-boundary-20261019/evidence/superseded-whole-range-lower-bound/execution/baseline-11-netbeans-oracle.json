@@ -1,0 +1,17 @@
+{
+  "command": [
+    "java",
+    "-Xmx512m",
+    "-Djava.awt.headless=true",
+    "--patch-module",
+    "java.desktop=/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/baseline/classes:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/baseline/test-classes",
+    "-cp",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/baseline/external:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/baseline/donor",
+    "NetBeansOffsetOracle"
+  ],
+  "exit": 0,
+  "log_sha256": "b2c67eabecd5fe51e5f857b1d8d0712d789cf8011de617c2d6248f8330db32be",
+  "user_seconds": 1.19312,
+  "system_seconds": 0.14219299999999999,
+  "max_rss_kib_linux": 93988
+}

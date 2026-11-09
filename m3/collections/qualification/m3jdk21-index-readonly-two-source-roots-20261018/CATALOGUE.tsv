@@ -1,0 +1,4 @@
+problem_category	baseline	selection	decision	contract
+JAVAC_SOURCE_PATH	JDK 21 test source was outside javac explicit -sourcepath	Both m3/collections/src/main/java and m3/collections/src/test/java in sourcepath	CORRECT_WORKFLOW	No source code, JNI, JUnit or compiler strictness modification
+TRANSFORM_ENGINE	Current hash pinned TEXT recipe in Synexia	M3HashPinnedTextSnapshotRecipe	REUSE	Refuse unknown preimages and second replay makes zero writes
+LEETCODE_HACKERRANK_GFG	Array/bit problems unrelated to compiler source roots	No donor	NOT_APPLICABLE	Maintain separate code algorithm catalogue

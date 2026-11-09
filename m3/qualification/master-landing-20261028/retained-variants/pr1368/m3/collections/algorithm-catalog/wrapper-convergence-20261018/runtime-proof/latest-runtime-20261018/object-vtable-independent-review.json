@@ -1,0 +1,31 @@
+{
+  "schema": "M3_OBJECT_HOTSPOT_BOOTSTRAP_CONTRACT_REVIEW_V1",
+  "source_head": "19fc2c988ae7358b24e68e090eba214340d66452",
+  "source_tree": "0480af87fb133314c300dac18338f6457c27c0ce",
+  "hotspot_tree": "afaa42082ed148944e52591d8ab43960890c8d39",
+  "object_source_blob": "2bfef3101224112c40957c954592a100dc59a3fc",
+  "classloader_source_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
+  "compiled_object_class_sha256": "1930c52443ec1d776a73893d0c7e39ee56721a6f7198565db63d913fa5ca3827",
+  "compiled_object_virtual_methods": [
+    "public <T> T toAdapter(java.lang.Class<T>);",
+    "public native int hashCode();",
+    "public boolean equals(java.lang.Object);",
+    "protected native java.lang.Object clone() throws java.lang.CloneNotSupportedException;",
+    "public java.lang.String toString();",
+    "protected void finalize() throws java.lang.Throwable;"
+  ],
+  "compiled_object_virtual_count": 6,
+  "stock21_virtual_methods": [
+    "public native int hashCode();",
+    "public boolean equals(java.lang.Object);",
+    "protected native java.lang.Object clone() throws java.lang.CloneNotSupportedException;",
+    "public java.lang.String toString();",
+    "protected void finalize() throws java.lang.Throwable;"
+  ],
+  "stock21_virtual_count": 5,
+  "existing_vm_base_slots": 5,
+  "vm_failure": "Incompatible definition of java.lang.Object",
+  "failure_check": "src/hotspot/share/oops/klassVtable.cpp:109",
+  "required_contract": "Preserve public overridable Object.toAdapter(Class<T>) and strict root vtable consistency check; companion VM reserve must agree with actual six slots.",
+  "source_modified_by_reviewer": false
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "m3.collections.source-qualification.v1",
+  "predecessor": "receiving/spring-core-6.2.0-collections-20261018",
+  "sourceRepository": "hsoliwal/spring-framework",
+  "sourceCommits": ["82005414fafcaf20896d1804dd2d5f927f1b4ea3", "70618ad38843112381f9d6c33968a01a18163a51"],
+  "changedFiles": 1,
+  "newFiles": 4,
+  "compile": "javac --release 17 -g -proc:none -Xlint:all with spring-core 6.2.0: 0 errors, 7 warnings (base 7), 89 classes",
+  "tests": "CompositeIteratorArrayStorageTests + M3StreamProviderContractTests 7/7; Spring v6.2.0 CompositeIteratorTests 5/5 on base and derived",
+  "review": "coordinator review of the merge and the adaptations"
+}

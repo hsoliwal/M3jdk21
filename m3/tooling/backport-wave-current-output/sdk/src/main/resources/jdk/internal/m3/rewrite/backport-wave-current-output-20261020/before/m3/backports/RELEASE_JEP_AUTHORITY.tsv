@@ -1,0 +1,7 @@
+release	status	official_feature_jep_ids	source	reviewed_utc
+22	RELEASED	423,447,454,456,457,458,459,460,461,462,463,464	https://openjdk.org/projects/jdk/22/	2026-10-06
+23	RELEASED	455,466,467,469,471,473,474,476,477,480,481,482	https://openjdk.org/projects/jdk/23/	2026-10-06
+24	RELEASED	404,450,472,475,478,479,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,501	https://openjdk.org/projects/jdk/24/	2026-10-06
+25	RELEASED	470,502,503,505,506,507,508,509,510,511,512,513,514,515,518,519,520,521	https://openjdk.org/projects/jdk/25/	2026-10-06
+26	RELEASED	500,504,516,517,522,524,525,526,529,530	https://openjdk.org/projects/jdk/26/	2026-10-06
+27	RELEASED	523,527,531,532,533,534,536,537,538	https://openjdk.org/projects/jdk/27/	2026-10-06

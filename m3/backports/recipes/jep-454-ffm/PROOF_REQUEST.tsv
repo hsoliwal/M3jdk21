@@ -1,0 +1,16 @@
+field	value
+jep	454
+title	Foreign Function & Memory API
+proof_base	8dd4a4f91f92338d1553e9aae12c3baf63d42c5a
+proof_requested	2026-10-07
+proof_branch	m3/jep454-ffm-inventory-20261007
+jdk21_preview_commit	cbccc4c8172797ea2f1b7c301d00add3f517546d
+jdk22_final_commit	32ac72c3d35138f5253e4defc948304ac3ea1b53
+finalization_path_count	261
+scope	LIBRARY_API
+default_java21	NO
+classification	OPT_IN_SE_API_EXTENSION
+source_materialized	false
+mutation_authority	false
+promotion	NOT_AUTHORIZED
+next_action	GENERATE_EXACT_PATH_PLANE_INVENTORY_AND_CLOSE_JAVA21_PREVIEW_TO_FINAL_API_DEPENDENCIES_BEFORE_ANY_RECIPE

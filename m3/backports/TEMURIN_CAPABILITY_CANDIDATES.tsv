@@ -1,0 +1,9 @@
+candidate_id	donor_id	domain	mechanism	m3_target	status	copy_authority	promotion_authority	next_proof
+TEMURIN-SBOM	temurin-build	build-reproducibility	--create-sbom build artifact generation	build evidence/output contract	PENDING_MECHANISM_REVIEW	false	false	Compare with current M3 provenance/SBOM outputs and keep smaller deterministic superset
+TEMURIN-SOURCE-PIN	temurin-build	build-reproducibility	custom source repository/tag/path selection	build input custody	PENDING_MECHANISM_REVIEW	false	false	Map to exact source/commit run context without replacing OpenJDK configure/make
+TEMURIN-DEVKIT	temurin-build	toolchain	Adoptium DevKit selection passed to OpenJDK configure	toolchain reproducibility	PENDING_MECHANISM_REVIEW	false	false	Compare supported compilers/sysroots and preserve platform-specific OpenJDK requirements
+TEMURIN-METADATA	temurin-build	build-provenance	build metadata including source/build refs and full version output	run/provenance receipts	PENDING_MECHANISM_REVIEW	false	false	Normalize into M3 RUN_CONTEXT/PROVENANCE without duplicate authorities
+AQAVIT-OPENJDK	aqavit-tests	regression	OpenJDK regression test lane	JDK regression matrix	PENDING_MECHANISM_REVIEW	false	false	Compare test selection/execution with existing jtreg workflows
+AQAVIT-SYSTEM	aqavit-tests	stress-load	system and load test lane	platform/runtime acceptance	PENDING_MECHANISM_REVIEW	false	false	Select bounded Java21 stress corpus and source-pin every external suite
+AQAVIT-EXTERNAL	aqavit-tests	ecosystem	third-party application test lane	ecosystem compatibility	PENDING_MECHANISM_REVIEW	false	false	Choose license-reviewed representative applications; no automatic download authority
+AQAVIT-PERF	aqavit-tests	performance	performance benchmark and microbenchmark lane	baseline/candidate performance proof	PENDING_MECHANISM_REVIEW	false	false	Build deterministic interleaved baseline/candidate harness before accepting optimization claims

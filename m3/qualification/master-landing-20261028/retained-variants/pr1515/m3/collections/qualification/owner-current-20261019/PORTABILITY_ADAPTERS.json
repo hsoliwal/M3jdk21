@@ -1,0 +1,19 @@
+{
+  "scope": "Packaging-only path adaptations; no tests rerun; existing PASS receipts belong to the exact executed driver versions retained in proof/executed-drivers",
+  "adapters": [
+    {
+      "path": "verify_candidates.py",
+      "executed_path": "proof/executed-drivers/verify_candidates.py",
+      "executed_sha256": "e495fb5975f9755cf641491fc90d651b8f1dac02d77262ea7766994502c13f63",
+      "receiving_sha256": "c384037c5e4f50a6a219591caf5d517f896fc02f221399dca624cb0d16a85447",
+      "change": "Use the exact bundled resource probe instead of the historical repository resource path; probe bytes are identical. Assertions, algorithms, command choices and test selection are unchanged."
+    },
+    {
+      "path": "qualify_current_module.py",
+      "executed_path": "proof/executed-drivers/qualify_current_module.py",
+      "executed_sha256": "ae36cdcb55d76df23f444eec8a6d56f73b9d403b091faf81f43f0853d3e7869b",
+      "receiving_sha256": "a8ac14543ec76d573d7a05dea5b36dc5b2f9fbd50cd7952031e3a7f2b07d3f0f",
+      "change": "Add explicit --maven-repo and --sdk-receipt path arguments. Omitting them preserves the executed defaults. All copying, source-seal checks, Maven flags, test selection, timeout and result accounting are unchanged."
+    }
+  ]
+}

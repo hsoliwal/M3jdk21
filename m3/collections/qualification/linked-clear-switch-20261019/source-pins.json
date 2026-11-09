@@ -1,0 +1,86 @@
+[
+  {
+    "name": "M3LinkedList.java",
+    "sha": "832c838caf7a37d6f9a10b37505c3e65ed9f6292",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java",
+    "sha256": "55d9c9e273f302d0e3291bd853d3b198b44a73baeef819089432ff197ae7a3b6"
+  },
+  {
+    "name": "M3ObjectResidency.java",
+    "sha": "d3132cdc31d450926d29f7c4f9d3c47d03ad2363",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java",
+    "sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5"
+  },
+  {
+    "name": "M3SlotArrays.java",
+    "sha": "e337c69710c871f8caa77a1afe53149f1fd705cc",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java",
+    "sha256": "4e978861b03650cec9ab1f064648cc8d342117d8b4f0556152604707c83c2518"
+  },
+  {
+    "name": "M3SlotSpliterators.java",
+    "sha": "dab4d257bf82c8dbdf8fec04e1ac0d84ac7e4a83",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java",
+    "sha256": "fe7db5946cb21eecac31dc478899c4864bba09b7b302357868af296ea2e0f554"
+  },
+  {
+    "name": "M3LinkedListLiveMaskContract.java",
+    "sha": "ce4293b335879829359a3fb0f6b66e36e78a839d",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/test/java/jdk/m3/collections/M3LinkedListLiveMaskContract.java",
+    "sha256": "1eda772b805e75c6c60a97a104bd44b6d0455027cc5c856357f88e9ed52bd2d6"
+  },
+  {
+    "name": "M3ObjectResidencyBorrowTest.java",
+    "sha": "24ed5b9369a4655af96e788961b9c30ec9d234a1",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyBorrowTest.java",
+    "sha256": "dddc4b37184d9526121fef902452d0b6cf24d4cc8b1617aa219a6d0d683d0175"
+  },
+  {
+    "name": "M3SlotAllocator28.java",
+    "sha": "cbd0a33b1bc3fbbd25fc9a724998dddfc27b57c8",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3SlotAllocator28.java",
+    "sha256": "a9a47842b82c3c4e9fdc3187ce7d4c0a114fe03617cb52c45c6025aec1541401"
+  },
+  {
+    "name": "M3IntLane28.java",
+    "sha": "08f1ac25be41f517f91052ef2e5289854c50f0e3",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3IntLane28.java",
+    "sha256": "6eb5cad968366a4de7283699d36d4a721aa168b565960e57dd1233f1508873ca"
+  },
+  {
+    "name": "M3LinkedHashMap.java",
+    "sha": "e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java",
+    "sha256": "236099129854887ba6205be23e42d5e6af9ead09de045419f7c940d0f0bd77e6"
+  },
+  {
+    "name": "M3LinkedHashSet.java",
+    "sha": "58fd72f6e1464a2c6e2c26a1519ee6cd226a3924",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashSet.java",
+    "sha256": "98a58d0d06c7d10c48f1f189c9daf3ef1f4f4ceba24e708ec0e1a53dbcf4db01"
+  },
+  {
+    "name": "M3OrderedSlotMap.java",
+    "sha": "ce5fa2ec4306af03239ab7539ad91acaeaaa8245",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java",
+    "sha256": "b3aeeca8b271382cc166a31f9e0d93c8bb8c480214bf500cd7ac70d14ccd503c"
+  },
+  {
+    "name": "M3SlotMap.java",
+    "sha": "a10ee53abb325476ac32c7210712e30cc304182c",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java",
+    "sha256": "aff532279cb68435619ef39977f4709125d9061c7a67259df10cfc33c7bfd66f"
+  },
+  {
+    "name": "M3Address28.java",
+    "sha": "ae1e43c52351d205ebfc7e57ca5a230a49410399",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3Address28.java",
+    "sha256": "fe5ed12462265b92a5297d54bce5102db9def6d5f53f468b4b1515435bc2e858"
+  },
+  {
+    "name": "M3BitLane28.java",
+    "sha": "dbd5574956db770311229d87c043896d52cb9b46",
+    "url": "https://github.com/hsoliwal/M3jdk21/blob/a3e88976ee8664d1ef5d0cade96aec1206b2133d/m3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java",
+    "sha256": "536eb7ae1968ce17f4ee2cab3d0d6ef6df6865599605359c00fb3f0225be84f3"
+  }
+]

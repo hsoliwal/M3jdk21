@@ -1,0 +1,3 @@
+$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/javac", "-Xlint:all", "-Werror", "-proc:none", "--release", "21", "-cp", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/baseline-classes", "-h", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/native/headers", "-d", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/native/classes", "/workspace/scratch/4f99f40718f0/m3-implementation/baseline/com.synexia/synexia-common/src/main/java/com/synexia/common/collections/PackedSelectionNative.java", "/workspace/scratch/4f99f40718f0/m3-implementation/baseline/com.synexia/synexia-common/src/test/java/com/synexia/common/collections/M3MutableFilteredViewsJniContract.java"]
+
+EXIT 0

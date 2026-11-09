@@ -1,0 +1,50 @@
+module_ga	name	status	tests_run	failures	errors	skipped	failing_tests	goal_failure
+com.m3:m3indexdb	M3IndexDB 0.1.0-SNAPSHOT	SUCCESS	79	0	0	0	-	-
+com.m3:m3-arrays	M3 array substrate 0.1.0-SNAPSHOT	SUCCESS	115	0	0	17	-	-
+com.m3:m3-collections	M3 collection lanes 0.1.0-SNAPSHOT	SUCCESS	2278	0	0	135	-	-
+com.m3:m3-file	M3JDK :: File 0.1.0-SNAPSHOT	FAILURE	43	1	0	0	jdk.m3.file.M3FileDeltaTest.fullSourceClassAndCliContract	Command execution failed. Process exited with an error: 1 (Exit value: 1)
+com.m3:m3-import	M3JDK21 Synexia Apache import verifier 0.1.0-SNAPSHOT	SUCCESS	50	0	2	0	jdk.m3.importer.M3SeedSnapshotTest.checkedInSeedManifestMatchesEveryVendoredM3File;jdk.m3.importer.PublicAtomPatternReceiverTest.publicModeIsSelfContainedAndMaintainerModeIsExplicit	-
+com.synexia:m3-openrewrite-recipes	M3JDK21 public custody :: Synexia canonical recipes 1.0.0-SNAPSHOT	SUCCESS	14	1	0	0	jdk.internal.m3.rewrite.M3PureIntCustodyTest.custodySourcesRemainExactM3GitBlobs	-
+com.m3.tooling:migration-recipes	migration-recipes 0.1.0-SNAPSHOT	FAILURE	-	-	-	-	-	Could not resolve dependencies for project com.m3.tooling:migration-recipes:jar:0.1.0-SNAPSHOT
+com.synexia:m3jdk-a3-recipes	M3JDK21 :: Public Synexia A3 recipe mirror 1.0.0-SNAPSHOT	FAILURE	-	-	-	-	-	Could not resolve dependencies for project com.synexia:m3jdk-a3-recipes:jar:1.0.0-SNAPSHOT
+com.m3:m3jdk21-control-reactor	M3JDK21 Maven control reactor 0.1.0-SNAPSHOT	SUCCESS	-	-	-	-	-	-
+com.m3.tooling:recipe-agent-api	M3JDK21 Agent Recipe API 0.1.0-SNAPSHOT	SUCCESS	3	0	0	0	-	-
+com.m3:jdk21-backport-admission	M3 JDK21 backport admission and verification 0.1.0-SNAPSHOT	FAILURE	-	-	-	-	-	Command execution failed. Process exited with an error: 1 (Exit value: 1)
+com.m3.tooling:module-packs	module-packs 0.1.0-SNAPSHOT	SUCCESS	-	-	-	-	-	-
+com.m3.tooling:module-pack-kernel	module-pack-kernel 0.1.0-SNAPSHOT	SUCCESS	9	0	0	0	-	-
+com.m3.tooling:module-pack-recipes	module-pack-recipes 0.1.0-SNAPSHOT	FAILURE	-	-	-	-	-	Could not resolve dependencies for project com.m3.tooling:module-pack-recipes:jar:0.1.0-SNAPSHOT
+com.m3:m3-intern	M3JDK :: Intern Space 0.1.0-SNAPSHOT	SUCCESS	31	0	0	0	-	-
+com.m3:m3-compiler-lifetime-slots	M3JDK :: Compiler Lifetime Slots 0.1.0-SNAPSHOT	SUCCESS	2	0	0	0	-	-
+com.m3:m3-compiler-nullness-facts	M3JDK :: Compiler Nullness Facts 0.1.0-SNAPSHOT	SUCCESS	4	0	0	0	-	-
+com.m3:m3-compiler-static-use	M3JDK :: Compiler Static Use Plan 0.1.0-SNAPSHOT	SUCCESS	8	0	0	0	-	-
+com.m3:m3-compiler-mat-sortable	M3JDK :: Compiler Mat Sortable Processor 0.1.0-SNAPSHOT	SUCCESS	2	0	0	0	-	-
+com.m3:m3-compiler-parent-owned	M3JDK :: Compiler Parent-Owned Processor 0.1.0-SNAPSHOT	SUCCESS	1	0	0	0	-	-
+com.m3:m3-compiler-reference-flow	M3JDK :: Compiler Reference Flow 0.1.0-SNAPSHOT	SUCCESS	3	0	0	0	-	-
+com.m3.compat:m3-collection-port-wave1	m3-collection-port-wave1 0.1.0-SNAPSHOT	SUCCESS	-	-	-	-	-	-
+com.m3:m3-native	M3JDK :: Native JNI Leases 0.1.0-SNAPSHOT	SUCCESS	35	0	0	3	-	-
+com.m3:m3-nlp	M3JDK :: NLP 0.1.0-SNAPSHOT	SUCCESS	31	0	0	0	-	-
+com.m3:m3-llm	M3JDK :: Chrome LLM and summarization 0.1.0-SNAPSHOT	SUCCESS	39	0	0	1	-	-
+com.m3:m3-algorithms	M3JDK :: Algorithm Families 0.1.0-SNAPSHOT	SUCCESS	84	0	0	0	-	-
+com.m3:m3-compression	M3JDK :: Compression 0.1.0-SNAPSHOT	SUCCESS	14	0	0	0	-	-
+com.m3:m3-lexicon-receiver	M3Lexicons receiver: image verifiers, word ids, separator lexicons, word-id regex rows, interned token substrate 0.1.0-SNAPSHOT	SUCCESS	5	0	0	0	-	-
+com.m3:m3-optane	M3JDK :: Optane 0.1.0-SNAPSHOT	SUCCESS	61	0	0	4	-	-
+com.m3:m3-eclipse-core-runtime-bridge	m3-eclipse-core-runtime-bridge 0.1.0-SNAPSHOT	SUCCESS	37	0	0	0	-	-
+com.m3:m3-eclipse-framework-forward	m3-eclipse-framework-forward 0.1.0-SNAPSHOT	SUCCESS	25	0	0	0	-	-
+com.m3:migration-recipes	M3 exact-source migration tooling 0.1.0-SNAPSHOT	SUCCESS	0	0	0	0	-	-
+com.m3:m3-hf-lexicon-intake-recipe	M3 offline Hugging Face lexicon intake recipe 0.1.0-SNAPSHOT	FAILURE	-	-	-	-	-	An exception occurred while executing the Java class. language-resource row has nine fields: 280
+com.m3:m3-cpu-capability-runtime	M3 JDK CPU capability source and working-set substrate 0.1.0-SNAPSHOT	SUCCESS	-	-	-	-	-	-
+com.m3:m3-precompute	M3JDK :: Precompute Port 0.1.0-SNAPSHOT	SUCCESS	125	0	0	2	-	-
+com.m3.compat:indexstring-retained-view	indexstring-retained-view 0.1.0-SNAPSHOT	SUCCESS	0	0	0	0	-	-
+com.m3:m3-parallel	M3JDK :: Parallel API 0.1.0-SNAPSHOT	SUCCESS	31	0	0	0	-	-
+com.m3:m3-vcpu	M3JDK :: RV32IM vCPU 0.1.0-SNAPSHOT	SUCCESS	34	0	0	0	-	-
+com.m3:m3-regex-cursor	M3JDK :: Regex Cursor Port 0.1.0-SNAPSHOT	SUCCESS	54	0	0	0	-	-
+com.m3.proof:primitive-address-identity-receiver	primitive-address-identity-receiver 1.0-SNAPSHOT	FAILURE	-	-	-	-	-	Command execution failed. Process exited with an error: 1 (Exit value: 1)
+com.m3.proof:regex-precompute-receiver	regex-precompute-receiver 1.0-SNAPSHOT	FAILURE	-	-	-	-	-	Command execution failed. Process exited with an error: 2 (Exit value: 2)
+com.m3:m3-gc-interop	m3-gc-interop 0.1.0-SNAPSHOT	SUCCESS	-	-	-	-	-	-
+com.m3:m3-collections-interop	M3 optional collection library interoperability 0.1.0-SNAPSHOT	SUCCESS	26	0	0	0	-	-
+com.m3:m3-sortable-source-signals	M3 source-time sortable signals 0.1.0-SNAPSHOT	SUCCESS	0	0	0	0	-	-
+com.m3:m3-swing-viewport	M3JDK :: Swing viewport models 0.1.0-SNAPSHOT	SUCCESS	375	0	0	0	-	-
+com.m3:m3-jfx-viewport	M3JDK21 optional JavaFX viewport adapter 0.1.0-SNAPSHOT	SUCCESS	-	-	-	-	-	-
+com.m3:history-audit-recipe	history-audit-recipe 0.1.0-SNAPSHOT	SUCCESS	-	-	-	-	-	-
+com.m3:m3-ast-levels-candidate	M3 AST L0-L5 receiver candidate 0.1.0-SNAPSHOT	SUCCESS	19	0	0	0	-	-
+com.m3:m3-parallel-bulk-provider	M3 JDK internal bulk scheduler to parallel fabric adapter 0.1.0-SNAPSHOT	SUCCESS	6	0	0	0	-	-

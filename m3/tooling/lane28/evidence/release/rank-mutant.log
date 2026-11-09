@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: complete region count
+	at M3Lane28Test.check(M3Lane28Test.java:255)
+	at M3Lane28Test.bitmap(M3Lane28Test.java:192)
+	at M3Lane28Test.main(M3Lane28Test.java:38)

@@ -1,0 +1,8 @@
+old	new	status
+org.jsoup.internal	com.m3.lib.jsoup.internal	MOVE
+org.jsoup.helper	com.m3.lib.jsoup.helper	MOVE
+org.jsoup.parser	com.m3.lib.jsoup.parser	MOVE
+org.jsoup.safety	com.m3.lib.jsoup.safety	MOVE
+org.jsoup.select	com.m3.lib.jsoup.select	MOVE
+org.jsoup.nodes	com.m3.lib.jsoup.nodes	MOVE
+org.jsoup	com.m3.lib.jsoup	MOVE

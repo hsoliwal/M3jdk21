@@ -1,0 +1,4 @@
+{
+  "kind": "append bytes to isolated replay resource",
+  "path": "bound-inputs/resources/after-00.txt"
+}

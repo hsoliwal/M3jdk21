@@ -1,0 +1,11 @@
+# category	implementation	decision	complexity	memory	contract_and_donor_rationale
+exact-byte-change	M3FileDeltaLedger SOURCE/CLASS/BUILD_INPUT SHA-256	REUSE existing M3JDK21 PR #1568	O(bytes scanned) plus persistent slot array	O(n slots) + bounded read scratch	Reuses existing file owner, no duplicate file fingerprints
+dependent-closure	CSR int[] offset + int[] dependent physical slots with BFS	SELECT M3BuildImpactPlan	O(V+E) worst-case	O(V) byte masks, int[] queue, result indexes	Classic graph/BFS family, LeetCode/HackerRank/GFG problem-category pattern (algorithm idea only, no third-party code copied)
+dependent-closure	Map<Source,List<Source>> object graph	REJECT	O(V+E) operations	O(V+E) object/node allocations	Duplicates parent-owned slot identities; increases GC pressure
+abi-safe-elision	Verified byte[] proof of no dependent impact	CONDITIONAL	O(1) per physical slot	one byte per slot	Only compiler-authenticated, generation-specific semantic proof from javac/JDT/M3AST; never infer from SHA or SimHash
+missing-semantic-graph	Conservative whole live SOURCE/CLASS impact mask	REQUIRED	O(V)	O(V) output	Missing edges/processors/relevant build options may invalidate any dependent; never silently skip a compile
+build-model-delta	Any POM/Gradle/processor/build input changed	REQUIRED CONSERVATIVE	O(V)	O(V) output	Until Maven/Gradle reactor/resolver model identity is proven equal, invalidate all live compilation inputs
+native-jni	JNI per BFS edge	REJECT	O(E) boundary overhead	Native handle/root lifetime risk	Keep primitive graph traversal on Java21 arrays; reuse existing native kernels only where measured
+Maven4/Gradle-reactor-dag	CSR project dependencies and Kahn topological scheduling	SELECT M3ReactorImpactPlan	O(V+E)	O(V) primitive indegree, queue, masks	Input remains Maven/Gradle/JDT authoritative generation; no duplicate POM parsing or graph objects
+Maven4/Gradle-reactor-dag	unknown project ownership and model revisions	CONSERVATIVE	O(V)	O(V)	Full reactor rebuild rather than speculative cache hit
+Maven4/Gradle-reactor-dag	competitive-programming DAG topological sorting	IDEA_ONLY	O(V+E)	O(V)	General Kahn queue pattern from problem category; no LeetCode/HackerRank/GeeksforGeeks source copied

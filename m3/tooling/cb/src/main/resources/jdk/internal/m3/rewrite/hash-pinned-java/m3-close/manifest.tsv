@@ -1,0 +1,2 @@
+# path	before	after	template
+src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java	944f12c8b77d19fdb6fc6c7eee1baac0cc91322511c52abca1957fd4120219f5	880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f	MIndexStringBacking.java.txt

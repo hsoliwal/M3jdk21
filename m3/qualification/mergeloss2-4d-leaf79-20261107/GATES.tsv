@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Merge-loss leaf 79 (mergeloss2 CLEAN_4D), origin e47eeda7c05 (2026-10-20 "m3: consolidate internal JNI exception atoms and safe exact-address mapping"), master 2ec96ee32ff5a735148933c789354a7fdd6beb3b.
+gate	command	state	evidence
+1_three_way	mergeloss_batch.py: ours=master, base=e47eeda7c05^, theirs=e47eeda7c05, per libjava file	PASS	M3BitLane28/M3RegexDpPlan/M3StateRelation/M3StringPool/M3StringRegexDp CLEAN; M3RX7 1 ADD_ADD hunk (two #include lines: master's M3RX7Transitions.h and the origin's m3_jni_util.h; both kept); m3_jni_util.h ABSENT on master, taken from the origin
+2_mingw_werror	gcc -std=c11 -O2 -Wall -Wextra -Werror (MinGW, JDK 21 include + win32), each file, master vs restored	PASS	12/12 rc=0, 0 diagnostics (Windows branch of M3StringPool)
+3_wsl_werror	wsl_gate.sh: gcc 13.3 -std=c11 -D_GNU_SOURCE -O2 -Wall -Wextra -Werror -fPIC (JDK 21 include + linux), each file, master vs restored	PASS	12/12 rc=0, 0 diagnostics (Linux branch incl. the mmap exact-address path)
+4_shared_library_exports	wsl_gate.sh: link the six files into one .so per side; nm -D Java_* exports	PASS	14 = 14, identical symbol sets
+5_scope	compare master...head	PASS	src/java.base/share/native/libjava (6 modified, m3_jni_util.h added) + this directory

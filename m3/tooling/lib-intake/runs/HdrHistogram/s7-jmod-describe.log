@@ -1,0 +1,6 @@
+jdk.m3.hdrhistogram@2.1.12-m3-source-1
+exports com.m3.lib.hdrhistogram
+exports com.m3.lib.hdrhistogram.packedarray
+requires java.base mandated
+main-class com.m3.lib.hdrhistogram.HistogramLogProcessor
+

@@ -1,0 +1,121 @@
+{
+  "schema": "M3_GRAPHICS_ATOM_PATTERN_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "authority": {
+    "recipe_repository": "hsoliwal/com.synexia",
+    "recipe_source_commit": "1718e08aa909198162cac53c66225118992d6585",
+    "crate_path": "synexia-openrewrite-recipes/recipe-crates/skija-m3jdk-20261031",
+    "artifact": "com.synexia:m3-skija-graphics-recipes:20261031.1",
+    "recipes": [
+      "com.synexia.m3.graphics.SkijaToM3Jdk20261031",
+      "com.synexia.rewrite.M3SkijaAtomPatternRecipe",
+      "com.synexia.m3.graphics.SkijaProductGeometryTest20261031",
+      "com.synexia.m3.graphics.SkijaRegistration20261031"
+    ],
+    "execution": "Actual OpenRewrite 8.17.1 Java 21 SDK, fresh-parser replay and source-sealed Java/text snapshot recipes; generated outputs only"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base_commit": "da6112257f9bb7e54a53694608b1402062140475",
+    "base_pr": 2208,
+    "module": "jdk.m3.graphics",
+    "scope": "Compiler-inert atom and leaf metadata in six existing source owners plus one generated target regression"
+  },
+  "sources": [
+    {
+      "path": "src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3Paint.java",
+      "before_sha256": "bae436ba90562c0c30f7a53df31210984caea0eb15ff3878cda30309194fdc52",
+      "after_sha256": "39aec7ae9c9d9ee39cd9216b85a8616181319277a9a730db0bcd884c9ec7e06f",
+      "postimage_git_blob": "5115e6822796d38dc867059f905606aa47b20212"
+    },
+    {
+      "path": "src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3Path.java",
+      "before_sha256": "25941cda893c7a294f9c13e0f328ac366accb7a0ba8bf9ccfc15ff8ef10ca3d0",
+      "after_sha256": "3e3f6d89583b620a60d0cd6545853ba406667b3eee9c1b1a928238c87489db17",
+      "postimage_git_blob": "f008a2e7ce939b3547ffbc3cd35eca85dfcf512f"
+    },
+    {
+      "path": "src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3RRect.java",
+      "before_sha256": "fe82fe285eb5ab986cf1e599eee9ce0e677fa14fa2777115ac47bbeabf4a62fd",
+      "after_sha256": "b7899a88d480675752058613210baf1e549b3871c4b57c5215b68e6d997a1642",
+      "postimage_git_blob": "d04b36d0aa44550c99a78ca41560d7de3868cb61"
+    },
+    {
+      "path": "src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3Rect.java",
+      "before_sha256": "9bce5e3b37f01713ed9e480991474bd2aad91001d95111c6eee2902b53268d74",
+      "after_sha256": "2b1f5194686970e0a2da45b315ff7c0b9cb479a965c0b98516b326372ff3df1f",
+      "postimage_git_blob": "f7a28c702e1c53d6bcfc7d539eb825f084cf6de8"
+    },
+    {
+      "path": "src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3Region.java",
+      "before_sha256": "adc41b5f43df52a8057fb65fc2aefe3eb912fce987bf643242e83bba8bd31737",
+      "after_sha256": "f8f5adf989b6e426c4047c6acce1eed3c62181abe5c32929c5dcf44f4499ffcd",
+      "postimage_git_blob": "03344785b367d374182012c43f8ea496ebfdbcb9"
+    },
+    {
+      "path": "src/jdk.m3.graphics/share/classes/jdk/m3/graphics/M3TextBlob.java",
+      "before_sha256": "2297d423967da693fb9f27759fe0091cbcddb3c17293264aa0d0c073711102aa",
+      "after_sha256": "36da9f879261c26a998fcbc32a0ea7be435007c4f1c58b8875d00f3a015859cf",
+      "postimage_git_blob": "4d37bd67ad22cc426126899867fe2a819dd5fcaf"
+    }
+  ],
+  "target_test": {
+    "path": "test/jdk/jdk/m3/graphics/M3GraphicsGeometryAtoms.java",
+    "before": "ABSENT",
+    "sha256": "d244ec2a8552de5f31c18fc85a856d15633b9cdc7606b6b2154003ea62889568",
+    "checks": 180,
+    "execution": "PASS on compiled exploded target module with Temurin 21.0.13+9; actual jtreg harness NOT_RUN"
+  },
+  "gates": {
+    "maven_junit": {
+      "status": "PASS",
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_closure_java_files": 226,
+    "full_attribution_unresolved_declarations": 0,
+    "unique_method_atom_ids": 373,
+    "fresh_parser_replay_results": 0,
+    "byte_identical_classfiles": 277,
+    "byte_identical_generated_jni_headers": 78,
+    "native_declarations": {
+      "M3Paint": 40,
+      "M3Path": 60,
+      "M3Region": 28,
+      "M3TextBlob": 16
+    },
+    "compiler_flags": "--release 21 -g:none -Xlint:all,-missing-explicit-ctor,-this-escape,-fallthrough,-module -Werror",
+    "geometry_and_identity": "PASS",
+    "native_rendering": "NOT_RUN",
+    "native_build_link_loader_and_lifetime": "NOT_RUN",
+    "source_built_m3jdk_image": "NOT_RUN",
+    "jtreg_harness": "NOT_RUN",
+    "performance": "NOT_MEASURED"
+  },
+  "name_mapping": {
+    "path": "m3/docs/name-mapping.json",
+    "git_blob": "c46790d3c7c89581b0e19e4f58d6532c042744ac",
+    "capability_id": null,
+    "disposition": "DEFERRED_TARGET_ADMISSION",
+    "reason": "Pinned map has no graphics record. This candidate retains the existing PR2208 class/package owners and does not promote native or installed-image integration."
+  },
+  "known_existing_limitations": [
+    "PR2208 has no renamed native graphics library or installed-image acceptance.",
+    "Two-argument TextBlob.getIntercepts(float,float) remains a pinned upstream self-recursive overload; behavior correction requires a separate source-sealed recipe and target proof.",
+    "Private canonical provenance has two unchanged pre-existing duplicate-path rows; this task adds none and passes scoped provenance validation."
+  ],
+  "evidence": {
+    "qualified_recipe_source": "https://github.com/hsoliwal/com.synexia/tree/1718e08aa909198162cac53c66225118992d6585/synexia-openrewrite-recipes/recipe-crates/skija-m3jdk-20261031",
+    "summary": "evidence/FINAL_VERIFICATION.json",
+    "postimages": "evidence/full-module/POSTIMAGES.tsv",
+    "classpath_coverage": "evidence/full-module/COVERAGE.tsv",
+    "classfiles": "evidence/full-module/CLASSFILES.tsv",
+    "jni_headers": "evidence/full-module/JNI_HEADERS.tsv",
+    "target_test": "evidence/product-test/QUALIFICATION_RECEIPT.json"
+  },
+  "rights": "Existing graphics source retains its upstream Apache2 attribution and target legal records; recipe processing does not relicense donor code. New test and passive receipt are first-party Apache2.",
+  "custody": "No recipe, template, engine, task harness or correction-memory content is received in this public repository."
+}

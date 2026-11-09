@@ -1,0 +1,19 @@
+id	file	original	mutant	test	bug
+M01	list/M3PrefixRowOffsets.java	if (start[mid] > offset) {	if (start[mid] >= offset) {	M3PrefixRowOffsetsAtomsTest	binary search boundary of firstEndingAfter
+M02	list/M3PrefixRowOffsets.java	monotone = nonNegative && exact <= Integer.MAX_VALUE;	monotone = nonNegative;	M3RowOffsetsAtomsTest	overflowing lanes reported monotone
+M03	list/M3ListRows.java	return Math.min(offsets.firstEndingAfter((long) y0 - top), size - 1);	return offsets.firstEndingAfter((long) y0 - top);	M3ListRowsAtomsTest	location below the last row not clamped
+M04	list/M3RowPieces.java	start[i + 1] = start[i] == NEW ? NEW : start[i] + head;	start[i + 1] = start[i] == NEW ? NEW : start[i] + head - 1;	M3RowPiecesAtomsTest	piece split offset
+M05	list/M3RowPieces.java	if (i > 0 && start[i - 1] == NEW) {	if (i > 0 && start[i - 1] != NEW) {	M3RowPiecesAtomsTest	insert merges with an old piece
+M06	list/M3ListMeasure.java	pieces.change(a, b);	pieces.size();	M3ListMeasureAtomsTest	contentsChanged not recorded
+M07	list/M3ListMeasure.java	|| value instanceof Integer || value instanceof Long || value instanceof Float	|| value instanceof Long || value instanceof Float	M3ListMeasureAtomsTest	Integer values treated as unstable
+M08	table/M3SorterLanes.java	viewToModel[viewIndex] -= delta;	viewToModel[viewIndex] -= delta - 1;	M3SorterLanesAtomsTest	model indices after a deletion shifted by one less
+M09	table/M3SorterLanes.java	a[k++] = host.compare(a[j], tmp[i]) < 0 ? a[j++] : tmp[i++];	a[k++] = host.compare(a[j], tmp[i]) > 0 ? a[j++] : tmp[i++];	M3SorterLanesAtomsTest	merge takes the wrong half first
+M10	table/M3SparseSizes.java	if (position < s + size[j]) {	if (position <= s + size[j]) {	M3SparseSizesAtomsTest	getIndex at the end of a custom row
+M11	table/M3SparseSizes.java	int to = lowerBound(start + n);	int to = lowerBound(start + n - 1);	M3SparseSizesAtomsTest	removeEntries keeps the last custom entry of the range
+M12	tree/M3ExpandedState.java	return ba != bb ? Integer.compare(bb, ba) : Long.compare(b.stamp, a.stamp);	return ba != bb ? Integer.compare(bb, ba) : Long.compare(a.stamp, b.stamp);	M3ExpandedStateAtomsTest	chain order within a bucket reversed
+M13	tree/M3ExpandedState.java	                    last.slot = n.slot;	                    last.hashCode();	M3ExpandedStateAtomsTest	stale child slot after a swap-remove
+M14	tree/M3FixedHeightLayoutCache.java	return rowOfNode(p) + 1 + mi + fenwickPrefix(p, lowerBound(p, mi));	return rowOfNode(p) + mi + fenwickPrefix(p, lowerBound(p, mi));	M3FixedHeightLayoutCacheAtomsTest	row of a child off by one
+M15	tree/M3FixedHeightLayoutCache.java	for (int p = parent[c]; p != 0 && expanded(c); c = p, p = parent[c]) {	for (int p = parent[c]; p != 0; c = p, p = parent[c]) {	M3FixedHeightLayoutCacheAtomsTest	collapsed subtrees still add rows to their ancestors
+M16	tree/M3VariableHeightLayoutCache.java	if (next <= n && t[next] + step <= offset) {	if (next <= n && t[next] + step < offset) {	M3VariableHeightLayoutCacheAtomsTest	Fenwick descent boundary
+M17	tree/M3VariableHeightLayoutCache.java	return y + (rootRow ? ch[TOP][0] : 0);	return y;	M3VariableHeightLayoutCacheAtomsTest	y origin ignores a visible root's height
+M18	tree/M3VariableHeightLayoutCache.java	for (int i = c - 1; i >= 0; i--) {	for (int i = 0; i < c; i++) {	M3VariableHeightLayoutCacheAtomsTest	scan finds the first equal child, not the last

@@ -1,0 +1,4 @@
+word	com.synexia.m3.search	jdk.m3.search
+word	com.synexia.job.IProgressMonitor	jdk.m3.collections.M3ProgressMonitor
+literal	IProgressMonitor.noop()	new M3DefaultProgressMonitor()
+word	IProgressMonitor	M3ProgressMonitor

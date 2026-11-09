@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+pattern	version	stage	atom	owner	state
+LIB_INTAKE_TO_JMOD	1	S1	package relocation: one non-recursive ChangePackage per package, longest old name first	OpenRewrite ChangePackage (#12340 boundary-checked form)	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S1b	BCP gate: byte-equal after textual name map	lib_intake.sh	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S2	residue discovery with owner per hit	m3work:relocation-scan (#14520)	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S3	atomize + pattern plan	M3Mop	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S4	consolidation queue = OWNER_CONTRACT atoms	absorb_plan.py	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S5	refactor ratchet baseline	M3Mop counters	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S6	module-info exporting every relocated package	javac --release 21	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S7	jmod create + jlink + validate + smoke	JDK jmod/jlink	ADMITTED
+LIB_INTAKE_TO_JMOD	1	S8	M3 refactor layer, upstream untouched	lib_intake.sh	ADMITTED
+LIB_INTAKE_TO_JMOD	2	S0	release-21 source view + upstream descriptor set aside	lib_intake.sh	ADMITTED
+LIB_INTAKE_TO_JMOD	2	S1	name map completion (dotted + slash) of literals, comments, resource paths, services, proguard; parse-failure fallback listed	lib_intake.sh	ADMITTED
+LIB_INTAKE_TO_JMOD	2	S6	requires from jdeps; requires static from compile_deps; upstream uses/provides name-mapped	JDK jdeps/jar/javac	ADMITTED
+LIB_INTAKE_TO_JMOD	2	S7	LoadAll smoke: every module class loads and links in the image	LoadAll.java	ADMITTED
+LIB_INTAKE_TO_JMOD	2	BATCH	every INTAKE row, then one combined jlink image of all intake JMODs + validate-modules	lib_intake_batch.sh	ADMITTED
+LIB_INTAKE_TO_JMOD	2	S7app	main class in the JMOD + jlink launcher	JDK jmod/jlink	ADMITTED
+CROSS_LIBRARY_PATTERN_CATALOGUE	1	CATALOGUE	patternId / shapeKey / shape+contract / exact families with roles, across libraries and M3 owners	pattern_catalogue.py	ADMITTED
+NEAR_DUP_PATTERN_FAMILIES	1	CATALOGUE	L-Hash H2+H3+H4 algorithm families across libraries and M3 owners	near_dup_catalogue.py (ts-lhash)	ADMITTED

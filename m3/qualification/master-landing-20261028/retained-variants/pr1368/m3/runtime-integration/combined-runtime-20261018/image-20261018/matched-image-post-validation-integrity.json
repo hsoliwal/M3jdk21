@@ -1,0 +1,13 @@
+{
+  "schema": "M3_POST_VALIDATION_IMAGE_PROOF_INTEGRITY_V1",
+  "checked_at_utc": "2026-10-18T14:16:30.684836+00:00",
+  "actual_metadata_head": "225c488f9b39d4534fe19cd2d72be1130875fb10",
+  "image_epoch": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "image_files_rehashed": 516,
+  "image_bytes_rehashed": 496335813,
+  "all_image_files_match_pre_test_custody": true,
+  "primary_jtr_hashes_and_pass_status_checked": 5,
+  "progress_jtr_hashes_and_pass_status_checked": 2,
+  "src_make_source_closure_equal": true,
+  "tracked_jdk_working_or_index_diffs": false
+}

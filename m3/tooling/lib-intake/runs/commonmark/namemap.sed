@@ -1,0 +1,1 @@
+s/org\.commonmark([^A-Za-z0-9_$]|$)/com.m3.lib.commonmark\1/g;s#org/commonmark([^A-Za-z0-9_$]|$)#com/m3/lib/commonmark\1#g;

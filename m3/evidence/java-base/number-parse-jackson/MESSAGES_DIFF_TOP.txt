@@ -1,0 +1,20 @@
+    668 > java.lang.NumberFormatException: Value "  1.5  " can not be deserialized as `java.math.BigDecimal`, reason:  Character   is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+    668 < java.lang.NumberFormatException: Value "  1.5  " can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    634 > java.lang.NumberFormatException: Value "+Infinity" can not be deserialized as `java.math.BigDecimal`, reason:  Character I is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+    634 < java.lang.NumberFormatException: Value "+Infinity" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    610 > java.lang.NumberFormatException: Value "0x8Db1Ffd473B83a5fp196" can not be deserialized as `java.math.BigDecimal`, reason:  Character array is missing "e" notation exponential mark.
+    610 < java.lang.NumberFormatException: Value "0x8Db1Ffd473B83a5fp196" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    596 > java.lang.NumberFormatException: Value "0x1p3" can not be deserialized as `java.math.BigDecimal`, reason:  Character x is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+    596 < java.lang.NumberFormatException: Value "0x1p3" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    592 > java.lang.NumberFormatException: Value "0x1.8p-2" can not be deserialized as `java.math.BigDecimal`, reason:  Character x is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+    592 < java.lang.NumberFormatException: Value "0x1.8p-2" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    590 > java.lang.NumberFormatException: Value "1_000" can not be deserialized as `java.math.BigDecimal`, reason:  Character _ is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+    590 < java.lang.NumberFormatException: Value "1_000" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    586 > java.lang.NumberFormatException: Value "2.5f" can not be deserialized as `java.math.BigDecimal`, reason:  Character f is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+    586 < java.lang.NumberFormatException: Value "2.5f" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    580 > java.lang.NumberFormatException: Value "-Infinity" can not be deserialized as `java.math.BigDecimal`, reason:  Character I is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+    580 < java.lang.NumberFormatException: Value "-Infinity" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    570 > java.lang.NumberFormatException: Value "0x" can not be deserialized as `java.math.BigDecimal`, reason:  Character x is neither a decimal digit number, decimal point, nor "e" notation exponential mark.
+    570 < java.lang.NumberFormatException: Value "1e" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    570 < java.lang.NumberFormatException: Value "0x" can not be deserialized as `java.math.BigDecimal`, reason:  illegal syntax
+    564 > java.lang.NumberFormatException: Value "NaN" can not be deserialized as `java.math.BigDecimal`, reason:  Character N is neither a decimal digit number, decimal point, nor "e" notation exponential mark.

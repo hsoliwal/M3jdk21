@@ -1,0 +1,11 @@
+path	implementation_status	implementation_blob	jdk24_ga_status	jdk24_ga_blob	note
+src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java	added	40bbc6c56ccb06d06b728c7db9fa632cd2c75072	PRESENT	9808a0133032e138d09fc0323433508c4353cdbe	GA cumulative implementation differs from initial JEP commit
+src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java	added	f59883a410e8cc8c9438d74a279f82c6459b0b3a	PRESENT	2ce5b3324e76ab3542df71ef90ba816ca02755ff	GA cumulative implementation differs from initial JEP commit
+src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java	modified	4185980ce2e96812e074c3f172b63722c084b641	PRESENT	4185980ce2e96812e074c3f172b63722c084b641	implementation blob survives to GA
+src/java.base/share/classes/java/security/spec/NamedParameterSpec.java	modified	1e36fe3befef4df6fc6ca9d98ce6dd9012f0881e	PRESENT	d50426b6ccf6d0ae6554cd8118aaa6c837272feb	shared with ML-DSA released state
+src/java.base/share/classes/sun/security/provider/SHA3Parallel.java	added	d9abfbe413fa600d0a265686f05627c4c820f21c	PRESENT	d9abfbe413fa600d0a265686f05627c4c820f21c	implementation blob survives to GA
+src/java.base/share/classes/sun/security/util/KnownOIDs.java	modified	19e482b63c22313fbfd41329d4b0d1830466eab5	PRESENT	223dddb7f61a0316e31eacf3a358d617f0a46250	shared with ML-DSA released state
+test/jdk/sun/security/provider/acvp/data/ML-KEM-encapDecap-FIPS203/internalProjection.json	added	7b93e2782989f4b6052a1056cb642a5272453ca5	ABSENT_AT_GA	-	do not copy stale implementation-commit test data
+test/jdk/sun/security/provider/acvp/data/ML-KEM-keyGen-FIPS203/internalProjection.json	added	4c338175910d59bfcd33dbe8687d9c772e3947a3	ABSENT_AT_GA	-	do not copy stale implementation-commit test data
+test/jdk/sun/security/provider/all/Deterministic.java	modified	11a5d4d74b2a82fcc8dd562e18d4682095518b9c	PRESENT	8fb0e943768d2296529d55a6341cc9d551d32112	shared deterministic security regression evolved before GA
+test/micro/org/openjdk/bench/java/security/MLKEMBench.java	added	a013aa1bab97fa716cbd849bfdca86eca6365eb3	PRESENT	30481ed86a503812c4521b8817e5706543b58c67	benchmark evolved before GA; benchmark is not correctness authority

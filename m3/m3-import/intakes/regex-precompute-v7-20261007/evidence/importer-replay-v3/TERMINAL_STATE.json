@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "jvmLaneReleased": true,
+  "allCommandsTerminal": true,
+  "commands": [
+    {
+      "label": "apply-three-targets",
+      "pid": 18520,
+      "exitCode": 0,
+      "terminal": true
+    },
+    {
+      "label": "fixed-point-three-targets",
+      "pid": 17768,
+      "exitCode": 0,
+      "terminal": true
+    },
+    {
+      "label": "second-apply-three-targets",
+      "pid": 55152,
+      "exitCode": 0,
+      "terminal": true
+    },
+    {
+      "label": "input-drift-refusal-three-targets",
+      "pid": 11576,
+      "exitCode": 1,
+      "terminal": true
+    }
+  ]
+}

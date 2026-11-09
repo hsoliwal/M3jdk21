@@ -1,0 +1,13 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package jdk.internal.m3.compression;
+
+import org.junit.jupiter.api.Test;
+
+/** Runs the reference-model oracle of the chunk cache (5 configurations x 40,000 seeded operations). */
+final class CompressedChunkCacheModelTest {
+    @Test
+    void cacheAgreesWithTheLinkedHashMapModel() throws Throwable {
+        System.out.print(CompressedChunkCacheModel.runAll());
+    }
+}

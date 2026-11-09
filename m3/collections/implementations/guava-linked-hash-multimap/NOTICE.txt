@@ -1,0 +1,8 @@
+M3 collections scaffold: M3LinkedHashMultimap
+Copyright 2026 Hitesh Soliwal and contributors
+
+This product includes software developed by Hitesh Soliwal and contributors,
+licensed under the Apache License, Version 2.0.
+
+The declared public surface mirrors com.google.common.collect.LinkedHashMultimap from Guava 33.4.8-jre
+(Apache-2.0) for compatibility. No provider implementation code is included.

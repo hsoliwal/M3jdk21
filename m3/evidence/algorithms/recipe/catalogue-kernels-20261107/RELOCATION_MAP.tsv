@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/catalogue-kernels-20261107/relocate.py (recipe RELOCATE_CATALOGUE_KERNELS v1, derived from recipe/algorithm-extras-20261106 with the EDIT law of recipe/census2-a5-20261106). Census2 algorithm-catalogue family (S:/m3-scratch/eb-conv/census2/LEAVES_PROPOSED.tsv rows routed "QUEUED 0e algorithm-catalogue family"): the THIS_PR rows of DECISION.tsv.
+# Donor: hsoliwal/com.synexia develop 78cf2ad4c7e56f7b0ade5aa206c491bc866178a6 (fetched 2026-11-07): synexia-algo (string + corpus kernels, the progress helper), the recipe crate m3-int-lcs-witness-20261105 (LCS witness), and the donor progress closure (synexia-job, synexia-common, synexia-cop) compiled on the donor side only.
+# Row kinds. REPO, FILE, OWNED, PACKAGE, TYPE, EXTERNAL, SKIP, NEC, DROP_METHOD, DROP_TYPE, DROP_LINE: read as in algorithm-extras-20261106. EDIT: <donor path> <edit id> <sha256 prefix of the replaced donor bytes> <reason> (the census2-a5 EDIT law; text in relocate.py EDITS). MEMBER: <donor qualified member> -> <owner qualified member>, whole tokens on every line before the TYPE rows. DONOR_ONLY: a donor closure source compiled on the donor side of differential.sh only, never written.
+kind	donor	target	note
+REPO	hsoliwal/com.synexia	https://github.com/hsoliwal/com.synexia	private donor repository; blob URL = <url>/blob/<commit>/<donor path>
+FILE	synexia-algo/src/main/java/com/synexia/algorithms/string/StringsZAlgorithm.java	src/main/java/jdk/m3/algorithm/M3ZAlgorithm.java	P2-078 (crates m3-zsearch-first-hit-20261030, m3-zsearch-extent-20261105): zSearch (pattern-only extended Z, first hit) ABSORB; zArray kept as closure, NEC vs M3StringAlgorithms.zFunction (same z[0]=0 convention); blob 16dfc2abb3f8, head 04dbd0732a8a 2026-11-05
+FILE	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeOneMismatchWindowSearch.java	src/main/java/jdk/m3/algorithm/M3OneMismatchWindowSearch.java	P2-076 (crates m3-one-mismatch-singleton-fastpath-20261101, m3-one-mismatch-historical-recovery-20261106): Hamming distance <= 1 window search over UTF-16 units; blob 9efbe34aa3d1, head a5b5b2b29f95 2026-11-06
+FILE	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeZSearch.java	src/main/java/jdk/m3/algorithm/M3ZPrefixMatch.java	closure of P2-076: prefixMatchLengths (virtual-separator Z geometry) kept; indexOf/indexOfJava dropped (same named algorithm as M3ZAlgorithm.zSearch); JNI lane dropped; blob d7f00eb8fb85
+FILE	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressMonitors.java	src/main/java/jdk/m3/algorithm/M3ProgressChecks.java	closure of every kept kernel: nonNull + checkCanceled (thread interruption, then the monitor) kept, package-private by EDIT E1; child/ChildProgressMonitor/taskName dropped (owner jdk.m3.collections.M3ProgressMonitor.split + M3ChildProgressMonitor); blob 8507c2772316
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-int-lcs-witness-20261105/src/main/java/com/synexia/m3/proof/IntLcsWitnessOracle.java	src/main/java/jdk/m3/algorithm/M3IntLcsWitness.java	P2-138: Hirschberg LCS witness over int[] (javaWitness), its admission bounds and the independent rolling-row referenceLength + isSubsequence; JNI method, Proof and main (the crate's JNI proof harness) dropped; blob f160180d8263
+FILE	synexia-algo/src/test/java/com/synexia/algorithms/string/StringsZFirstHitContractTest.java	src/test/java/jdk/m3/algorithm/M3ZAlgorithmFirstHitContractTest.java	donor test of P2-078; blob d4ea9270bc63
+FILE	synexia-algo/src/test/java/com/synexia/algorithms/string/StringsZExtentInvariantTest.java	src/test/java/jdk/m3/algorithm/M3ZAlgorithmExtentInvariantTest.java	donor test of P2-078 (crate m3-zsearch-extent-20261105); blob bff16397d1ed
+FILE	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeOneMismatchWindowSearchTest.java	src/test/java/jdk/m3/algorithm/M3OneMismatchWindowSearchTest.java	donor test of P2-076 (found by git grep of callers); blob c763e9b36c20
+FILE	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeOneMismatchSingletonFastPathTest.java	src/test/java/jdk/m3/algorithm/M3OneMismatchSingletonFastPathTest.java	donor test of P2-076; blob 5bdd8b499629
+FILE	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeOneMismatchSparseResultsTest.java	src/test/java/jdk/m3/algorithm/M3OneMismatchSparseResultsTest.java	donor test of P2-076; blob ac322a1bee23
+FILE	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeZSearchTest.java	src/test/java/jdk/m3/algorithm/M3ZPrefixMatchTest.java	donor test of the closure: the prefix-geometry test kept; the indexOf, native and cancellation tests dropped with the members they call; blob bac5312e1e67
+FILE	synexia-openrewrite-recipes/recipe-crates/m3-int-lcs-witness-20261105/src/test/java/com/synexia/m3/proof/IntLcsWitnessOracleTest.java	src/test/java/jdk/m3/algorithm/M3IntLcsWitnessTest.java	donor test of P2-138; blob 4ee4d248e7c7
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeNativeSearch.java	-	OMIT: JNI loader of the challenge corpus; the donor ChallengeZSearch.indexOf names it (blob 02df6d1104f5)
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeRabinKarpSearch.java	-	closure of ChallengeNativeSearch (its JNI self-check names it); corpus search lane, not this leaf
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeMultiPatternSearch.java	-	closure of ChallengeNativeSearch (its JNI self-check names it); corpus search lane, not this leaf
+DONOR_ONLY	synexia-algo/src/main/java/com/synexia/algorithms/string/StringsRabinKarp.java	-	closure of ChallengeRabinKarpSearch; NEC with the landed M3PrimitiveStringAlgorithms.rabinKarpIndexOf
+OWNED	synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java	src/main/java/jdk/m3/algorithm/M3ProgressMonitor.java	ALREADY: owner m3/qualification/progress-monitor-unify-20261106 (adapter over jdk.m3.collections.M3ProgressMonitor); blob 62e5ceea645b
+OWNED	synexia-job/src/main/java/com/synexia/job/ProgressSnapshot.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressState)
+OWNED	synexia-job/src/main/java/com/synexia/job/ChildProgressMonitor.java	-	donor progress closure (owner jdk.m3.collections.M3ChildProgressMonitor)
+OWNED	synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java	-	donor progress closure
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressMonitor)
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java	-	donor progress closure (owner jdk.m3.collections.M3ProgressState)
+OWNED	synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextNullProgressMonitor.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressChild.java	-	donor progress closure
+OWNED	synexia-cop/src/main/java/com/synexia/context/core/ContextProgressSnapshot.java	-	donor progress closure
+PACKAGE	com.synexia.algorithms.string	jdk.m3.algorithm	the package of m3/algorithms
+PACKAGE	com.synexia.algorithms.corpus	jdk.m3.algorithm	the package of m3/algorithms
+PACKAGE	com.synexia.algorithms.core	jdk.m3.algorithm	the package of m3/algorithms (the progress helper, package-private)
+PACKAGE	com.synexia.m3.proof	jdk.m3.algorithm	the package of m3/algorithms
+PACKAGE	com.synexia.job	jdk.m3.algorithm	the progress contract lives in the module's package (its import becomes a same-package import, legal and kept so the body stays explained line by line, as in families-20261106)
+TYPE	StringsZAlgorithm	M3ZAlgorithm	named after its algorithm (the landed M3StringAlgorithms holds zFunction)
+TYPE	ChallengeOneMismatchWindowSearch	M3OneMismatchWindowSearch	product algorithm: the corpus prefix Challenge is dropped
+TYPE	ChallengeZSearch	M3ZPrefixMatch	only its prefix-match geometry is kept
+TYPE	ProgressMonitors	M3ProgressChecks	package-private helper; M3ProgressMonitor(s) would shadow the owner contract's name
+TYPE	IProgressMonitor	M3ProgressMonitor	the owner contract (OWNED row)
+TYPE	IntLcsWitnessOracle	M3IntLcsWitness	product algorithm, not an oracle once the proof harness is test-side
+TYPE	StringsZFirstHitContractTest	M3ZAlgorithmFirstHitContractTest	test of M3ZAlgorithm
+TYPE	StringsZExtentInvariantTest	M3ZAlgorithmExtentInvariantTest	test of M3ZAlgorithm
+TYPE	ChallengeOneMismatchWindowSearchTest	M3OneMismatchWindowSearchTest	test of M3OneMismatchWindowSearch
+TYPE	ChallengeOneMismatchSingletonFastPathTest	M3OneMismatchSingletonFastPathTest	test of M3OneMismatchWindowSearch
+TYPE	ChallengeOneMismatchSparseResultsTest	M3OneMismatchSparseResultsTest	test of M3OneMismatchWindowSearch
+TYPE	ChallengeZSearchTest	M3ZPrefixMatchTest	test of M3ZPrefixMatch
+TYPE	IntLcsWitnessOracleTest	M3IntLcsWitnessTest	test of M3IntLcsWitness
+MEMBER	IProgressMonitor.noop	M3ProgressMonitor.none	the donor no-op monitor factory = the owner's none() (OWNED row)
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (the donor tests); pom dependency org.junit.jupiter:junit-jupiter:5.11.4 test scope, already declared
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressMonitors.java	E1_PACKAGE_PRIVATE	9fc1c2d2d1e9 the helper is package-private support of the module (not exported API of jdk.m3.algorithm)
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/core/ProgressMonitors.java	E4_PROGRESS_DOC	4690cb27e992 class comment of the kept half (child slices dropped)
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeZSearch.java	E2_ZPREFIX_DOC	13d4c32084a8 class comment: the kept half is the prefix-match geometry, not first-hit search
+EDIT	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeZSearch.java	E3_ZPREFIX_DOC_TAIL	250885e2de5c class comment: the JNI shadow is dropped; first-hit search is M3ZAlgorithm.zSearch
+EDIT	synexia-openrewrite-recipes/recipe-crates/m3-int-lcs-witness-20261105/src/main/java/com/synexia/m3/proof/IntLcsWitnessOracle.java	E5_LCS_DOC	52cfdb35b6d9 the crate's candidate-only label ends with this ABSORB decision (DECISION.tsv P2-138)
+DROP_METHOD	ProgressMonitors.child	jdk.m3.collections.M3ProgressMonitor.split	OVERLAP_OTHER_OWNER: child slices = the owner's split(parentWork) (M3ChildProgressMonitor)
+DROP_METHOD	ProgressMonitors.taskName	-	not called by a kept member
+DROP_TYPE	ProgressMonitors.ChildProgressMonitor	jdk.m3.collections.M3ChildProgressMonitor	OVERLAP_OTHER_OWNER: the child slice of child()
+DROP_LINE	ProgressMonitors	^import com\.synexia\.job\.ProgressSnapshot;$	import used only by the dropped ChildProgressMonitor
+DROP_METHOD	ChallengeZSearch.indexOf(String,String)	jdk.m3.algorithm.M3ZAlgorithm.zSearch	same named algorithm (Z), same problem (first hit); one kept (P2-078 row)
+DROP_METHOD	ChallengeZSearch.indexOf(String,String,IProgressMonitor)	jdk.m3.algorithm.M3ZAlgorithm.zSearch	same named algorithm (Z), same problem (first hit); its JNI dispatch is not ported
+DROP_METHOD	ChallengeZSearch.indexOfJava(String,String)	jdk.m3.algorithm.M3ZAlgorithm.zSearch	the Java first-hit lane of the dropped indexOf
+DROP_METHOD	ChallengeZSearch.indexOfJava(String,String,IProgressMonitor)	jdk.m3.algorithm.M3ZAlgorithm.zSearch	private body of the dropped indexOfJava
+DROP_METHOD	ChallengeZSearch.verifyNativeIfPresent	-	JNI probe (module is pure Java)
+DROP_METHOD	ChallengeZSearch.requireResult	-	JNI result check of the dropped indexOf
+DROP_LINE	ChallengeZSearch	^    private static final int NATIVE_MIN_TEXT_UNITS = 512;$	member:NATIVE_MIN_TEXT_UNITS JNI dispatch threshold of the dropped indexOf
+DROP_LINE	ChallengeZSearch	^    private static native int nativeIndexOf\(String text, String pattern\);$	member:nativeIndexOf JNI method (module is pure Java)
+DROP_LINE	IntLcsWitnessOracle	^    private static native int\[\] nativeWitness\(int\[\] a, int\[\] b\);$	member:nativeWitness JNI method (module is pure Java)
+DROP_TYPE	IntLcsWitnessOracle.Proof	-	proof harness of main (test side: M3IntLcsWitnessTest, M3CatalogueKernelsReferenceTest, the dump)
+DROP_METHOD	IntLcsWitnessOracle.decode	-	proof harness input decoder of main
+DROP_METHOD	IntLcsWitnessOracle.main	-	JNI/Java proof main of the crate (run on the donor side by verify.sh: donor self-test figure)
+DROP_METHOD	ChallengeZSearchTest.exactUtf16SemanticsIncludeDelimiterNulAndSurrogates	-	tests the dropped indexOf/indexOfJava
+DROP_METHOD	ChallengeZSearchTest.randomizedDifferentialOracleUsesAllUtf16Units	-	tests the dropped indexOfJava
+DROP_METHOD	ChallengeZSearchTest.optionalNativeMatchesStringIndexOfAcrossRandomUtf16	-	tests the dropped JNI lane
+DROP_METHOD	ChallengeZSearchTest.cancellationIsObservedDuringDegenerateExtension	-	tests the dropped indexOf (cancellation of the kept geometry: M3CatalogueKernelsReferenceTest)
+DROP_METHOD	ChallengeZSearchTest.nullsFailBeforeSearch	-	tests the dropped indexOf
+DROP_TYPE	ChallengeZSearchTest.CancelAfter	-	monitor of the dropped cancellation test
+DROP_LINE	ChallengeZSearchTest	^import com\.synexia\.job\.ProgressSnapshot;$	import of the dropped CancelAfter
+SKIP	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeZSearchSelfTest.java	donor self-test	OMIT: plain-main JNI/Java selector self-test of the dropped indexOf
+SKIP	synexia-algo/src/test/java/com/synexia/algorithms/corpus/ChallengeOneMismatchWindowBenchmark.java	donor benchmark	OMIT: opt-in wall-clock diagnostic, no correctness threshold
+SKIP	synexia-openrewrite-recipes/recipe-crates/m3-int-lcs-witness-20261105/src/test/java/com/synexia/m3/proof/IntLcsBridgeSelfTest.java	donor JNI self-test	OMIT: JNI bridge self-test
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/string/StringsZAlgorithm.java#zArray	jdk.m3.algorithm.M3StringAlgorithms.zFunction	same Z array (z[0] = 0 in both; M3CatalogueKernelsReferenceTest asserts equality on every reference input); String vs CharSequence + monitor; kept as the closure of zSearch
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengePostingQuery.java	jdk.m3.arrays.M3IntPostingIndex	P2-091: k-way sorted-posting union/intersection, owner in m3/arrays; donor contract differs (materialized union with budget refusal, limited intersection over Prepared lists, JNI lane); not relocated
+NEC	synexia-algo/src/main/java/com/synexia/algorithms/shapes/AlgorithmShape.java	jdk.m3.algorithm.M3AlgorithmShapeCatalog	P2-111: catalogue vocabulary (enum of mechanical shapes) vs the module catalog (families + Shape records naming landed entry points); the vocabulary goes with the catalogue (HANDOFF_4D.tsv)

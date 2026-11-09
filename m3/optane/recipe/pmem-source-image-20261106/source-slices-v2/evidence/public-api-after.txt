@@ -1,0 +1,35 @@
+Compiled from "PmemSdk.java"
+public final class com.synexia.m3.pmem.PmemSdk {
+  public static com.synexia.m3.pmem.PmemCapabilities capabilities();
+  public static com.synexia.m3.pmem.PmemRegion open(java.nio.file.Path, long, long, com.synexia.m3.pmem.PmemAccess, com.synexia.m3.pmem.PmemBackend) throws java.io.IOException;
+}
+Compiled from "PmemRegion.java"
+public interface com.synexia.m3.pmem.PmemRegion extends java.lang.AutoCloseable {
+  public abstract long length();
+  public abstract long fileOffset();
+  public abstract java.nio.file.Path path();
+  public abstract com.synexia.m3.pmem.PmemAccess access();
+  public abstract com.synexia.m3.pmem.PmemBackend backend();
+  public abstract com.synexia.m3.pmem.PmemGranularity persistenceGranularity();
+  public abstract boolean isOpen();
+  public abstract void read(long, byte[], int, int);
+  public abstract void write(long, byte[], int, int);
+  public abstract void persist(long, long) throws java.io.IOException;
+  public abstract void close() throws java.io.IOException;
+}
+Compiled from "PmemTransfer.java"
+public final class com.synexia.m3.pmem.PmemTransfer {
+  public static void copy(com.synexia.m3.pmem.PmemRegion, long, com.synexia.m3.pmem.PmemRegion, long, long);
+  public static boolean equalRange(com.synexia.m3.pmem.PmemRegion, long, com.synexia.m3.pmem.PmemRegion, long, long);
+}
+Compiled from "PmemSourceSlices.java"
+public final class com.synexia.m3.pmem.PmemSourceSlices {
+  public static final int DEFAULT_MAX_SOURCE_BYTES;
+  public com.synexia.m3.pmem.PmemSourceSlices(com.synexia.m3.pmem.PmemRegion, long[], int[], byte[]);
+  public com.synexia.m3.pmem.PmemSourceSlices(com.synexia.m3.pmem.PmemRegion, long[], int[], byte[], int);
+  public int fileCount();
+  public int lengthAt(int);
+  public java.lang.String sha256At(int);
+  public byte[] readSealed(int);
+  public int readSealed(int, byte[], int);
+}

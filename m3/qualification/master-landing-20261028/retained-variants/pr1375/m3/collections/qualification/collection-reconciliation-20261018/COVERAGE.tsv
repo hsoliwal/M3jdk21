@@ -1,0 +1,14 @@
+family	owner_or_pr	disposition	reason
+filtered-sorted-live-wrappers	M3FilteredViews;1328+1375	COMBINED_FOCUSED_PASS	Original readonly owner; no new wrapper hierarchy
+array-offset-mask-paths	M3IndexPathMasks;1328	RECEIVED_EXACT	Signed stride/order/fences/borrowed masks preserved
+filtered-sorted-snapshots	M3IndexedListSnapshot;1366	RECEIVED_EXACT	Packed decisions and shared complete index directories; sorting unchanged
+native-compaction	1366+1375	COMBINED_FOCUSED_PASS	Empty verification plus scratch reuse; existing exports retained
+bounded-window-transfer-and-pack-build	1375	INHERITED_UNCHANGED	Base owns these improvements; previous linked-image evidence not rerun here
+strict-reversed-snapshots	1260	PENDING_SEPARATE_RECONCILIATION	Do not overwrite or imply received
+character-regex-DFA	1338 M3RX7	UNCHANGED	Character spellings are not structural token semantics
+token-regex-child-sequence	1369	PENDING	Earliest-completing immediate-child API cannot be silently unified with leftmost-longest
+token-regex-tape	1370	PENDING	Typed arrays and UTF16 spans; actual lexer bridge remains distinct
+token-regex-JSON-events	1372	PENDING	DFS event ordinals not source offsets; no full grammar or JNI qualification implied
+SWT-Nebula-viewports	SWT219/220/221;Nebula243/245/247	SEPARATE_PRODUCT_OWNERS	Pinned prior history retained; no widget lifetime/rendering classes copied into collection owners
+RWT-GWT-React-Skija	existing toolkit owners	NOT_RUN	No web/compiler/native-renderer qualification in this receiver
+M3JDK21-installed-runtime	String->arrays->collections->AST	HOLD_STRING_STAGE_UNCHANGED	No full JDK image, jtreg/JCK or phase promotion

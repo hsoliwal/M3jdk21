@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-nlp</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: NLP</name>
+  <description>jdk.m3.nlp (module org.m3jdk.nlp): the statistical NLP atoms of M3JDK. First atom M3ScopedNgrams, exact
+    scoped word n-gram counts over long token IDs with a frozen Snapshot and bounded top-k continuation ranking
+    (count descending, then signed next ID ascending). Pure Java 21, no dependency outside java.base. Relocated by
+    recipe (recipe/relocate.py, RELOCATION_MAP.tsv, PROVENANCE.tsv) from the donor hsoliwal/com.synexia develop
+    64652588f0d4; the donor's seeded oracle (384 corpora, 183,900 checks) and its JUnit 5 admission test run in the
+    test phase. Next atoms of this module: n-gram perplexity, backoff word n-grams, co-occurrence PPMI top-k.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <!-- the test tree runs on the classpath (surefire below); compiled on it too, so the oracle's
+                   allocation probe (com.sun.management.ThreadMXBean, module jdk.management) is readable without
+                   patching org.m3jdk.nlp with test-only requires -->
+              <useModulePath>false</useModulePath>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <!-- the oracle is a plain main wrapped by JUnit; classpath run, the module descriptor is for consumers -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

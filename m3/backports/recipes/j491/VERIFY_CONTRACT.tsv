@@ -1,0 +1,12 @@
+gate	state	requirement
+diff	PENDING_HOSTED	exact branch diff hygiene
+denominator	PENDING_HOSTED	checked PATHS equals exact246 upstream paths
+classifier	PENDING_HOSTED	246 rows;zero unclassified
+unit_tests	PENDING_HOSTED	file-delta/classifier/patch-atom tests
+target_immutability	PENDING_HOSTED	workflow requires git diff empty after candidate generation
+applicability	PENDING_HOSTED	all246 typed into candidate/review/conflict states
+followups	PENDING_HOSTED	all5 follow-up touched paths inventoried
+product_apply	BLOCKED_ON_ATOMS	no direct mutation
+architecture_builds	NOT_EXECUTED	aarch64/arm/ppc/riscv/s390/x86/zero as supported lanes
+jni_jvmti_jfr_sa	NOT_EXECUTED	focused serviceability/native tests
+performance	NOT_EXECUTED	monitor-heavy virtual-thread carrier-utilization evidence

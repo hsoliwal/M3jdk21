@@ -1,0 +1,83 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema_version": 1,
+  "kind": "PASSIVE_RECEIVING_RECEIPT",
+  "capability": "existing-packed-unsigned-vector-bulk-operations",
+  "recorded_date": "2026-11-08",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "recipe_commit": "740281143ad9909a853a9bfd1a4c44631688a3b1",
+    "runtime_commit": "8148b34f77f4071a8120070f3b65b6ec87f15ae4",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/16888",
+    "recipe": "com.synexia.m3.CompactExecutionM3Jdk2120261108",
+    "execution_receipt_path": "synexia-openrewrite-recipes/crates/m3-compact-execution-20261108/proof/m3jdk21/receipt.json",
+    "execution_receipt_sha256": "3a88e6ac9820d9b29ee748a1eaf21e520ae74e7a970760271a736174b9aa7510"
+  },
+  "receiver": {
+    "repository": "hsoliwal/M3jdk21",
+    "evaluation_commit": "0017450623ff8d1f31b328b1949fe2ee0c17dadc",
+    "application_base": "90d401a1928e090bd90eaeb5e6decfa2cbc46bad",
+    "preimage_unchanged_between_evaluation_and_application": true,
+    "existing_owner": "jdk.internal.m3.collections.M3PackedUnsignedLongVector",
+    "new_production_types": 0,
+    "new_module_exports": 0,
+    "native_abi_change": false
+  },
+  "files": [
+    {
+      "after_sha256": "79d39d46e576f5f0f81b59b186b6143129857294f1430c299a2988ba24a70dc7",
+      "before_sha256": "653f88a13eeb49080bafc1cddb3e95731e16ac4b4600dbb308d8e80d802ffd71",
+      "path": "m3/collections/src/main/java/jdk/internal/m3/collections/M3PackedUnsignedLongVector.java"
+    },
+    {
+      "after_sha256": "d319b6b0faef0349bdf9c7cdfa027f79a3b40256cec46a21602698c21ba0d4ec",
+      "before_sha256": "ABSENT",
+      "path": "m3/collections/src/test/java/jdk/internal/m3/collections/M3PackedUnsignedLongVectorBulkTest.java"
+    }
+  ],
+  "gates": {
+    "actual_openrewrite_sdk": "PASS_8_OF_8_ZERO_SKIPS",
+    "exact_emitted_source_and_target_test": "PASS",
+    "fixed_point_and_refusal_corpus": "PASS",
+    "worker_widths": [
+      1,
+      4
+    ],
+    "java21_scoped_compile": "PASS_RELEASE_21_XLINT_ALL_WERROR",
+    "independent_target_junit": "PASS_6_OF_6_ZERO_SKIPS",
+    "prior_public_signatures_retained": 12,
+    "additive_public_signatures": 6,
+    "naming_preflight": "PASS_NO_JDK_BACKEND_PROMOTION",
+    "full_collections_module_build": "NOT_RUN",
+    "installed_jdk_image": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "ordered_receiving_stage_promotion": "HOLD",
+    "comparative_performance": "NOT_RUN",
+    "retained_memory_qualification": "NOT_RUN",
+    "ci": "PENDING_AT_PUBLICATION"
+  },
+  "compiled_class_sha256": {
+    "jdk/internal/m3/collections/M3PackedUnsignedLongVector.class": "f68bc597fe4970fb105ea628c7efc2a45ecdf04e6fe4401ed5f0133b14a69810",
+    "jdk/internal/m3/collections/M3PackedUnsignedLongVectorBulkTest.class": "e5a76d99f1353210dd51b4061d2606b96f0b18d5657de95ea50dc279d8f2ad70"
+  },
+  "tests": {
+    "packed_widths": "1..64",
+    "starting_offsets": "0..63",
+    "boundary_shapes": [
+      "word-seams",
+      "partial-tails",
+      "all-64-bit-raw-values",
+      "late-invalid-value-without-capacity-change",
+      "invalid-ranges",
+      "null-inputs",
+      "owned-copies",
+      "zero-length-boundaries",
+      "clear-refill-trim"
+    ]
+  },
+  "naming_disposition": "Additive methods in the existing internal owner; no class/package relocation or production-type migration. Existing target license header and source lineage retained.",
+  "source_license_disposition": "Existing Apache-2.0 OR EPL-2.0 owner notice preserved; independently authored target regression has its file-level notice.",
+  "admission": "DRAFT_BOUNDED_COMPONENT_QUALIFICATION",
+  "evidence_boundary": "Finite source, SDK, API and scoped product tests do not establish full JDK/module/image/phase or performance acceptance."
+}

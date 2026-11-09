@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/workspace/scratch/abdb4b1178cf/toolchain/apache-maven-3.9.11/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2",
+    "-f",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/pom.xml",
+    "test"
+  ],
+  "exit_code": 1,
+  "cmake": null,
+  "pkg_config": null,
+  "sqlite_header_present": false,
+  "scope": "Actual generated POM lifecycle attempt, distinct from provider Java helper"
+}

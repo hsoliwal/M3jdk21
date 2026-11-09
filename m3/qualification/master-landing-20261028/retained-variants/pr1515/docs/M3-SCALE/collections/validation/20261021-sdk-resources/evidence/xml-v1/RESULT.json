@@ -1,0 +1,33 @@
+{
+  "schema": "synexia.data.sdk-resources.xml-materialization.v1",
+  "status": "FAILED_OR_HOLD",
+  "storage_protection": "ACTIVE",
+  "live_repository_mutated": false,
+  "live_stack_admission": false,
+  "original_stack_producer_executed": false,
+  "java_compiled": false,
+  "native_outcomes": [
+    {
+      "pid": 9336,
+      "creation_FILETIME": "134370219664652422",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    }
+  ],
+  "own_jvm_lock_released": true,
+  "installed_exact_artifact": true,
+  "error": "AssertionError: ('PRESSURE', 394432512, 27949854720)",
+  "owned_processes_physically_terminal": true
+}

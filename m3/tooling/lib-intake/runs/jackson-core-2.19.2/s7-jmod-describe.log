@@ -1,0 +1,19 @@
+jdk.m3.core@2.19.2-m3-source-1
+exports com.m3.lib.core
+exports com.m3.lib.core.async
+exports com.m3.lib.core.base
+exports com.m3.lib.core.exc
+exports com.m3.lib.core.filter
+exports com.m3.lib.core.format
+exports com.m3.lib.core.io
+exports com.m3.lib.core.io.schubfach
+exports com.m3.lib.core.json
+exports com.m3.lib.core.json.async
+exports com.m3.lib.core.sym
+exports com.m3.lib.core.type
+exports com.m3.lib.core.util
+requires java.base mandated
+requires jdk.m3.fastdoubleparser
+uses com.m3.lib.core.ObjectCodec
+provides com.m3.lib.core.JsonFactory with com.m3.lib.core.JsonFactory
+

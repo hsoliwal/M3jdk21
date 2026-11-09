@@ -1,0 +1,12 @@
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
+SPDX-License-Identifier: Apache-2.0
+
+The exact original SDK log is retained losslessly in ../LOSSLESS_LOGS.json.
+Entry id: m3-object-vtable-20261018
+Original repository path: m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_LOG.txt
+Original SHA-256: f7c5141498e08c98bdaa0a04cee9716e223d6cedc11834a9c24a8f925dd35d9f
+
+UTF-8 encode that entry utf8 field to reconstruct every original byte,
+including trailing spaces and the final newline. This TXT pointer is a
+later qualified metadata postimage; original frozen catalogue inputs and
+their prior receiving-epoch hashes remain historical evidence.

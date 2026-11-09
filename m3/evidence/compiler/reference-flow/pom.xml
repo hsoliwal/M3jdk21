@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-compiler-reference-flow</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>M3JDK :: Compiler Reference Flow</name>
+  <description>jdk.m3.compiler.reference (module org.m3jdk.compiler.reference): read-only javac reference-flow
+    facts over attributed trees - source-local reference origins and escape evidence (M3ReferenceFlow), source and
+    flow liveness (M3SourceLiveness, M3Liveness, M3LoopFacts), the alias count census over flow edges
+    (M3CompilerReferenceCensus), path-sensitive MAY/MUST local alias certainty (M3CRefPathCertainty) and the
+    compiler facts audit (M3CompilerFactsAudit). Evidence only: nothing authorizes reclamation, reference-count
+    elision or source mutation. Java 21, requires jdk.compiler and jdk.m3.collections (M3ProgressMonitor).
+    Relocated by recipe (recipe/relocate.py, RELOCATION_MAP.tsv, PROVENANCE.tsv) from the indexstring compiler
+    module of hsoliwal/com.synexia (path in PROVENANCE.tsv); the three donor proofs run in the test phase.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.m3</groupId>
+      <artifactId>m3-collections</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <!-- the donor proofs compile and run on the classpath (jdk.compiler is in the default root set
+                   there); the module descriptor is for consumers, as m3/compiler/nullness-facts -->
+              <useModulePath>false</useModulePath>
+              <compilerArgs>
+                <!-- lossy-conversions is excluded for the donor proofs only: M3CompilerReferenceCensusProof (kept
+                     byte for byte) adds a long stream count to an int edge counter; main sources keep every lint -->
+                <arg>-Xlint:all,-lossy-conversions</arg>
+                <arg>-Werror</arg>
+              </compilerArgs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

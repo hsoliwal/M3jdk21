@@ -1,0 +1,21 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "M3JDK21 utility-family inventory; only M3IO is a new java.base internal implementation. Other family rows are catalogue candidates, not public API or target implementation claims.",
+  "mappings": [
+    {
+      "source": "JDK21 java.io.InputStream/java.io.OutputStream; caller-owned byte-page arrays, offsets, logical indices and masks",
+      "source_commit": "JDK21 public InputStream/OutputStream behavioral contract; first-party target algorithm",
+      "target": "jdk.internal.m3.io.M3IO",
+      "target_module": "java.base",
+      "status": "INTERNAL_INITIAL_IMPLEMENTATION; JDK_IMAGE_AND_RECIPE_ADMISSION_PENDING",
+      "target_rule": "Caller-borrowed arrays; checked selected offsets and bitmasks; no per-row object allocation; retain java.io stream semantics; no new public java.* ABI"
+    },
+    {
+      "source": "JDK21 API-family names from per-module inventory",
+      "source_commit": "JDK21 module naming; no external copied implementation",
+      "target": "m3/docs/m3-utility-families.tsv",
+      "status": "FAMILY_CATALOGUE_ONLY",
+      "target_rule": "One meaningful M3 utility per API family where justified, but no placeholders; reuse qualified M3 owners; require per-contract tests and canonical Synexia recipe before runtime replacement"
+    }
+  ]
+}

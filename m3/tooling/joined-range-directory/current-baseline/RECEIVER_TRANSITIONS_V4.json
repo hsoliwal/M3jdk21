@@ -1,0 +1,93 @@
+{
+  "schema": "M3_FROZEN_RECEIVER_TRANSITIONS_V2",
+  "frozenProfileSha256": "e9d946b29c5873d024701cc790f4f2967c22e9a46a5e56b61730c30313927f7e",
+  "custodySha256": {
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+  },
+  "files": [
+    {
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "before": {
+        "bytes": 2634,
+        "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7",
+        "gitBlob": "5022e9811ce9391671c794446c7772569cfd369f"
+      },
+      "after": {
+        "bytes": 3377,
+        "sha256": "c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2",
+        "gitBlob": "765d43267bb22a3650b622c01cb29b550e1deb01"
+      }
+    },
+    {
+      "path": "m3/core/test/java/lang/M3CodeTextSignalBatchTest.java",
+      "before": {
+        "bytes": 1981,
+        "gitBlob": "5e14e058a744092654cf96bdd99af2e270c381a8",
+        "sha256": "057d559fc6c3010defc51279dc90598c8bdc01bebfa59cabf7e66972a8ff2c43"
+      },
+      "after": {
+        "bytes": 1981,
+        "gitBlob": "667a372f0ca52e8daf5e5350913cb0478e51da2a",
+        "sha256": "dc5fc99592b0896b3c1df2fa9812b3f215b503e5aa28c7c9ee6e2fbfe6d2505c"
+      }
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "before": {
+        "bytes": 11009,
+        "gitBlob": "ce34ac405c41b3980e558efc688a5ebc1f37b47b",
+        "sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256"
+      },
+      "after": {
+        "bytes": 12759,
+        "gitBlob": "e1ddad0d8a00b582ceab4fa57ed60c96bfa73e1d",
+        "sha256": "6139d0e2a070b10829130a78e7553aebac8bcd05b02f3f7d4e224aa2e9374687"
+      }
+    },
+    {
+      "path": "m3/core/test/M3LexiconPrecomputeTest.java",
+      "before": {
+        "bytes": 12189,
+        "gitBlob": "16f40baeb952907372ef961527560057eed8efb1",
+        "sha256": "86816e02860c013aed830a387d368fe2498210446565f246518532f7d9ce2cf2"
+      },
+      "after": {
+        "bytes": 18847,
+        "gitBlob": "65c769073e58941fb15b069c68fa166ec9563a45",
+        "sha256": "b892164d0e03887180b6f2b7803740d050b511b43b8b870766f35109c3ee2739"
+      }
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
+      "before": {
+        "bytes": 13927,
+        "gitBlob": "0069a5a5cd8af919e41a150e39fc6c709bf04890",
+        "sha256": "a84cf445add13641546fba917ec32077cbe7988b70e5d8d5e72e1c793288b321"
+      },
+      "after": {
+        "bytes": 14064,
+        "gitBlob": "822035981f5462c610d95ba2b86d9d7a056e8c9a",
+        "sha256": "6734b9fa86745739c88c71bebd206839f63da743dd19d91c027128c574b7d587"
+      }
+    },
+    {
+      "path": "m3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java",
+      "before": {
+        "bytes": 13304,
+        "gitBlob": "c85d432a188d9439aedb1ec716b5de47b48fccab",
+        "sha256": "e87494f65fcb7e39ebbefc391c05224e80b91dd8f59b87ba07ba3073f0fdc794"
+      },
+      "after": {
+        "bytes": 15752,
+        "gitBlob": "acadd0c2d714c6d556516db767373c77741b8a5b",
+        "sha256": "f68fbb9b52411ab134dfcaa5aa72fa8ffac5eaed128770bd30e6a47eedfda89e"
+      }
+    }
+  ],
+  "meaning": "Observe only these exact applied receiver bodies; recover original frozen bytes for historical baseline qualification; never write receiver source.",
+  "authority": false,
+  "predecessorDeclarationSha256": "819b65189f71f0776ca85bdf05bd1cc92494a0a661e67e10a30ea529f4839364"
+}

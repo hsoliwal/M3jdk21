@@ -1,0 +1,45 @@
+{
+  "schema": "M3JDK21_API_COMPANION_DOC_RECEIPT_V1",
+  "invariant": "M3-API-COMPANION-1",
+  "status": "DOCUMENTATION_ONLY",
+  "target_base_commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+  "synexia_commit": "9f72d1ca161cf9a68a0425beb77873f74047b8d7",
+  "synexia_pr": "https://github.com/hsoliwal/com.synexia/pull/14023",
+  "recipe_class": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "recipe_source_blob": "67c0c8f3376cd92ae087ddcd7afd5abd68fa29cc",
+  "execution_kind": "SDK_EXECUTION",
+  "execution_receipt_path": "synexia-openrewrite-recipes/crates/m3-api-companions-20261029/EXECUTION_RECEIPT.json",
+  "execution_receipt_sha256": "5402ba8fefd25d854202ba44e42bdfb2f58a508a9e3d18f7642b71b3f1ee76fa",
+  "execution_tests": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "manifest_sha256": "71aac698ace0be4b1c26ab9783acebed60bb3c391176f39e5ffeeb7f2fba81e0",
+  "received_outputs": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/docs/counterpart-naming.md",
+      "before_sha256": "56626d53928e650c0b87e3505718bffd8e3db4c335eee087760fc4fd5d7618b9",
+      "after_sha256": "7a2e3884d7a3eae7d8a1a5e8644af38eb19fa33b867beda47bfcd40b88f8973b"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md",
+      "before_sha256": "2d08c97145334a3332f8c84e4d32fac71470d89da1170ee3e45955963a66732c",
+      "after_sha256": "6d767bed8cfdf586e3be2d7e681c0ade787de40480d7f09fbb50e920e6b4e643"
+    }
+  ],
+  "target_name_gate_before": "PASS: 4 queued capabilities, 0 product edits/promotions",
+  "target_name_gate_after": "PASS: 4 queued capabilities, 0 product edits/promotions",
+  "naming_authority_blob": "770f5695a39e03512afa78c55b4e2cf781d1f6a5",
+  "runtime_classes_added": 0,
+  "module_exports_changed": 0,
+  "jdk_api_implementation_coverage": "NOT_EVALUATED_BY_DOCUMENTATION_CHANGE",
+  "runtime_qualification": "NOT_APPLICABLE_TO_THIS_DOCUMENTATION_CHANGE",
+  "recipe_sources_in_target": false,
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0"
+}
+

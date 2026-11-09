@@ -1,0 +1,12 @@
+gate	status	evidence
+source_preimages	ABSENT_EXPECTED	canonical Synexia recipe manifest
+selected_javac21	PASS	selected-source command receipts
+l0_l5_2000_file_corpus	PASS	39,547 checks; 17,967 atom occurrences
+families	13_CLASSIFIED	mask coverage contract; real per-file AST inventory pending
+maven	NOT_RUN	full target toolchain unavailable
+openrewrite_sdk	NOT_RUN	class-backed recipe defined in Synexia
+ast_full_reactor	NOT_RUN	full workspace graph pending
+jni	NOT_APPLICABLE	no new symbols or native ABI
+jtreg	NOT_RUN	Java21 product build pending
+ci	NOT_RUN	no hosted success receipt
+full_collections	NOT_COMPLETE	no all-source optimization claim

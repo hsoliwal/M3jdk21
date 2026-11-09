@@ -1,0 +1,26 @@
+{
+  "schema": "M3_CURRENT_RUNTIME_RESTORATION_HANDOFF_V1",
+  "result": "BOUNDED_GATES_PASS",
+  "baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "earlier_delivery": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "dataset": "m3jdk21-runtime-restore-07ba",
+  "targets": 31,
+  "historical_targets": 27,
+  "exact_original_preimages": 26,
+  "current_catalogue": "Preserve the complete current byte prefix including ALG-NUMERIC-COPY-RUNS; append five missing exact historical runtime rows.",
+  "production": "Fourteen exact earlier delivered postimages; the earlier image identity is not relabelled as a current baseline build.",
+  "gates": {
+    "sdk": 5,
+    "sealing": 8,
+    "receiver": 9,
+    "preparation": 9,
+    "check": 31,
+    "apply": 31,
+    "replay": 0
+  },
+  "current_image": "Separate parent-owned all-build-input identity and image gate; no image run by this source/custody authorer.",
+  "Object_no_break": "HOLD_UNCHANGED",
+  "phase": "STRING_UNCHANGED",
+  "source_closure": "Only all55 current SDK-bound dataset files, exact candidate outputs and compact proof. Original seven recipes are consumed by immutable identity, not recopied.",
+  "custody": "Separate original-host text recipe and fresh public-sdk-owner-only replay follow; no recursive self-inclusion."
+}

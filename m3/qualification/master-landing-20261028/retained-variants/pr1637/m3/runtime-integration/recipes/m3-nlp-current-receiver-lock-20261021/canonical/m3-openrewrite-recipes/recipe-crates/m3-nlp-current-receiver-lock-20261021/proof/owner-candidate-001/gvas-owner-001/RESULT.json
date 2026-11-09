@@ -1,0 +1,62 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "m3/verify-gvas-literal-precompute.py"
+      ],
+      "elapsed_seconds": 2.844,
+      "exit": 1,
+      "log": "source-lock-correction/gvas-owner-001/command-01.log",
+      "log_bytes": 1206,
+      "log_sha256": "a502f6e33d7339cc24e04d92ff3ee8affbb8a9057daf61beea87c755a73597d1"
+    }
+  ],
+  "driver_sha256": "ee680061df4e9494c3d3a9817ea4d39e4f138a0b2e29a3355b4ab6014980a277",
+  "elapsed_seconds": 2.844,
+  "gate_inputs": [
+    {
+      "bytes": 6571,
+      "git_blob": "8a0e8184feae600477a992512388c559ec10ee11",
+      "path": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
+      "sha256": "03fe4ef99c923172301d287db953b59d1aa23c5f8480ddd79c64e4485a14b863"
+    },
+    {
+      "bytes": 11215,
+      "git_blob": "10f0f669d5658e088e8835702df0676535c1f01d",
+      "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+      "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f"
+    },
+    {
+      "bytes": 7802,
+      "git_blob": "7597a2831be9b98b8a16ca6e3effcb8fa431f578",
+      "path": "m3/core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java",
+      "sha256": "5bc63e3944756409727cd61ac9e1c00a89b432b4f311c8e1109b7223cecb6f82"
+    },
+    {
+      "bytes": 7629,
+      "git_blob": "9632af72ba95b0e3e72803b51fc23f3688d4b31f",
+      "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
+      "sha256": "f1ee71af4d62ccf9e3662efc6818f57096b47f445179650710a28dcd7dc183bd"
+    },
+    {
+      "bytes": 6526,
+      "git_blob": "78361dfb6437eec8e3610c5866b3a003f4ce4a72",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralImageWriter.java",
+      "sha256": "4fbbd7f803b287ffc0f0db3fb6049bd9cfa52ecc8e03e84feb75573991994ad2"
+    },
+    {
+      "bytes": 6503,
+      "git_blob": "643444c738496600ea6184ceaf01c00cd36bb390",
+      "path": "m3/verify-gvas-literal-precompute.py",
+      "sha256": "43ac8c6462f35d10624f1a78c96082550d4413866951f74b5fee6efd407f08c3"
+    }
+  ],
+  "jdk": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+  "owner": "gvas",
+  "receiver_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "receiver_root": "/workspace/scratch/206049dfb270/nlp-work/receiver-source",
+  "schema": "M3_NLP_RECEIVER_TEXT_OWNER_GATE_1",
+  "scope": "Unchanged existing source owner tests on pinned receiving sources; no full M3JDK or HotSpot admission.",
+  "state": "FAIL"
+}

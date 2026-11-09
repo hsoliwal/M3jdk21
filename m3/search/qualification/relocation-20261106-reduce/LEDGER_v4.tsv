@@ -1,0 +1,10 @@
+main	com/synexia/fastsearch/knowledge/util/Utf8Fnv1a64.java	0935545e35c1945ebd9f5f27ca70953d392de6fa	m3/search/src/main/java/jdk/m3/search/M3Utf8Fnv1a64.java	fa9c163391461317
+main	com/synexia/fastsearch/knowledge/reduce/SimHash64.java	0b4ae294a0ad757cc50811210bf2f4340a699856	m3/search/src/main/java/jdk/m3/search/M3SimHash64.java	1b3a8b4a030a7395
+main	com/synexia/fastsearch/knowledge/reduce/LuhnSummarizer.java	efd2bbf67b2fa341a725667355af80bf354776b8	m3/search/src/main/java/jdk/m3/search/M3LuhnSummarizer.java	16642f2679538e2a
+main	com/synexia/fastsearch/knowledge/reduce/DocumentDeduplicator.java	1146308065950109fe4a440ac2f524d86b9332f3	m3/search/src/main/java/jdk/m3/search/M3DocumentDeduplicator.java	9e3f5fce004228af
+main	com/synexia/fastsearch/knowledge/reduce/EvidenceSynthesizer.java	051f7f0e7aab1d25b79771e29670c00a5d0b8778	m3/search/src/main/java/jdk/m3/search/M3EvidenceSynthesizer.java	90f45527c9336c61
+main	com/synexia/fastsearch/knowledge/model/KnowledgeDocument.java	4a2994a12d3b6a0fadcd97988ba7e4ea2bff52fb	m3/search/src/main/java/jdk/m3/search/M3KnowledgeDocument.java	79ce1b784007aa4f
+main	com/synexia/fastsearch/knowledge/model/SourceKind.java	c9eab4f9c7c95f37fa9674c0a6f1e8be83eb2fe3	m3/search/src/main/java/jdk/m3/search/M3SourceKind.java	d12079164d9029f5
+main	com/synexia/fastsearch/knowledge/index/IndexedHit.java	3666c4001c972c949568f647d81d2da922a57065	m3/search/src/main/java/jdk/m3/search/M3IndexedHit.java	9e25170ac62ad636
+main	com/synexia/fastsearch/knowledge/index/FeatureHashVectorizer.java	f3fe34600425b1700f120e06146640f7e39f7a8a	m3/search/src/main/java/jdk/m3/search/M3FeatureHashVectorizer.java	93aa253885410a36
+test	com/synexia/fastsearch/knowledge/reduce/DocumentDeduplicatorConcurrencyTest.java	9c3404847fe6551a40c02dc2b57b980c72f8aa1a	m3/search/src/test/java/jdk/m3/search/DocumentDeduplicatorConcurrencyTest.java	df23fd68a75b3762

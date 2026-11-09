@@ -428,6 +428,12 @@ final class StringConcatHelper {
             // newly created string required, see JLS 15.18.1
             return new String(s1);
         }
+        if (String.m3JoinedStringsEnabled()) {
+            String joined = String.m3Concat(s1, s2);
+            if (joined != null) {
+                return joined;
+            }
+        }
         // start "mixing" in length and coder or arguments, order is not
         // important
         long indexCoder = mix(initialCoder(), s1);
@@ -437,6 +443,49 @@ final class StringConcatHelper {
         // from the end of the byte array
         indexCoder = prepend(indexCoder, buf, s2);
         indexCoder = prepend(indexCoder, buf, s1);
+        return newString(buf, indexCoder);
+    }
+
+    /**
+     * Correctness-first fallback for invokedynamic concat shapes that would
+     * otherwise allocate one flat byte array. Every argument already went through
+     * a typed stringify gateway in StringConcatFactory (no boxing; references use
+     * stringOf, so the JLS null/toString rules hold and no piece is null).
+     */
+    static String m3Concat(String[] constants, String[] args) {
+        M3String result = M3String.empty();
+        for (int index = 0; index < args.length; index++) {
+            result = m3Append(result, constants[index]);
+            if (result == null) return flatConcat(constants, args);
+            result = m3Append(result, args[index]);
+            if (result == null) return flatConcat(constants, args);
+        }
+        result = m3Append(result, constants[args.length]);
+        return result == null ? flatConcat(constants, args) : new String(result);
+    }
+
+    /** Null or empty pieces are skipped; {@code null} when the pool refuses the piece (budget). */
+    private static M3String m3Append(M3String result, String piece) {
+        if (piece == null || piece.isEmpty()) return result;
+        M3String admitted = M3String.canonicalize(piece);
+        if (admitted == null) return null;
+        return result.length() == 0 ? admitted : result.concat(admitted);
+    }
+
+    /** The stock one-array shape for the same pieces when the M3 pool refuses an admission. */
+    private static String flatConcat(String[] constants, String[] args) {
+        long indexCoder = initialCoder();
+        for (int index = 0; index < args.length; index++) {
+            if (constants[index] != null) indexCoder = mix(indexCoder, constants[index]);
+            indexCoder = mix(indexCoder, args[index]);
+        }
+        String suffix = constants[args.length];
+        if (suffix != null) indexCoder = mix(indexCoder, suffix);
+        byte[] buf = newArray(indexCoder);
+        if (suffix != null) indexCoder = prepend(indexCoder, buf, suffix);
+        for (int index = args.length - 1; index >= 0; index--) {
+            indexCoder = prepend(indexCoder, buf, args[index], constants[index]);
+        }
         return newString(buf, indexCoder);
     }
 

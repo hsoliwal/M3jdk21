@@ -1,0 +1,19 @@
+measurement	variant	rows	value	unit	detail
+table-memory	pool-off	1000000	193.841	MB retained by the model	distinct labels 171848
+table-memory	pool-off	1000000	50.814	bytes per cell	-
+table-memory	pool-off	1000000	1182.773	bytes per distinct label	-
+table-scroll	pool-off	1000000	136.000	stringExtent calls per page	34 visible rows x 4 columns; sink 1
+table-scroll	pool-off	1000000	0.044	ms per page in the width pass	-
+table-scroll	pool-off	1000000	8.514	ms per page incl. setTopIndex + SetData	-
+table-memory	pool-on	1000000	30.917	MB retained by the model	distinct labels 171848
+table-memory	pool-on	1000000	8.105	bytes per cell	-
+table-memory	pool-on	1000000	188.648	bytes per distinct label	-
+table-scroll	pool-on	1000000	46.460	stringExtent calls per page	34 visible rows x 4 columns; sink 1
+table-scroll	pool-on	1000000	0.045	ms per page in the width pass	-
+table-scroll	pool-on	1000000	13.001	ms per page incl. setTopIndex + SetData	-
+table-memory	pool-on-immediate-lanes	1000000	46.174	MB retained by the model	distinct labels 171848
+table-memory	pool-on-immediate-lanes	1000000	12.104	bytes per cell	-
+table-memory	pool-on-immediate-lanes	1000000	281.745	bytes per distinct label	-
+table-scroll	pool-on-immediate-lanes	1000000	46.460	stringExtent calls per page	34 visible rows x 4 columns; sink 1
+table-scroll	pool-on-immediate-lanes	1000000	0.041	ms per page in the width pass	-
+table-scroll	pool-on-immediate-lanes	1000000	11.552	ms per page incl. setTopIndex + SetData	-

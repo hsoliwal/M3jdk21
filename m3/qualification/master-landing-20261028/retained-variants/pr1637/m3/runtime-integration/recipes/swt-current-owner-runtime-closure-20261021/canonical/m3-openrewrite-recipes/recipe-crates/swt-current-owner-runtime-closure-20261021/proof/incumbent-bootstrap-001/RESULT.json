@@ -1,0 +1,12 @@
+{
+  "schema": "SWT_CURRENT_OWNER_DEPENDENCY_BOOTSTRAP/1",
+  "status": "FAIL",
+  "exit_code": 1,
+  "duration_seconds": 5.645,
+  "command_sha256": "b9dcfdf2defd8b90598c653921b7c8f240623b701b432cca5ba2cf1939b552a0",
+  "log_sha256": "fa72c38e2e74aed7f8cb8b4c3ba8705ece9a53f061489979c635569a60ac6600",
+  "source_inputs_unchanged": true,
+  "tracked_and_untracked_status": "",
+  "production_writes": 0,
+  "scope": "Provision unchanged owning POM using proxy and verified TLS; receiver runtime not run in this bootstrap."
+}

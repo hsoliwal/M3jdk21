@@ -1,0 +1,192 @@
+// SPDX-License-Identifier: Apache-2.0
+package jdk.m3.collections;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+import jdk.internal.m3.collections.Residency;
+
+final class ObjectResidencyTest {
+    private static final class Value {
+        int canonicalId;
+        String text;
+        Value(int id, String text) { this.canonicalId = id; this.text = text; }
+    }
+    private static final class MemoryStore implements ObjectResidency.SpillStore {
+        final Map<Integer, byte[]> bytes = new HashMap<>();
+        @Override public void write(int slot, byte[] value) { bytes.put(slot, value.clone()); }
+        @Override public byte[] read(int slot) throws IOException {
+            byte[] value = bytes.get(slot);
+            if (value == null) throw new IOException("missing slot " + slot);
+            return value.clone();
+        }
+        @Override public void delete(int slot) { bytes.remove(slot); }
+    }
+    private static final ObjectResidency.Codec<Value> CODEC = new ObjectResidency.Codec<>() {
+        @Override public byte[] encode(Value value) {
+            return (value.canonicalId + "\n" + value.text).getBytes(StandardCharsets.UTF_8);
+        }
+        @Override public Value decode(int slot, byte[] bytes) {
+            String text = new String(bytes, StandardCharsets.UTF_8);
+            int separator = text.indexOf('\n');
+            return new Value(Integer.parseInt(text.substring(0, separator)),
+                    text.substring(separator + 1));
+        }
+    };
+
+    @Test void parentBitsRemainCanonicalAcrossProjectionRecreation() {
+        var arena = new ObjectResidency<String>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.RECREATE,
+                8, 0, slot -> "projection-" + slot, null, null);
+        arena.writeParentBits(0, 0b0010L);
+        assertEquals(0b0110L, arena.updateParentBits(0, bits -> bits | 0b0100L));
+        assertEquals(0b0110L, arena.readParentBits(0));
+        arena.use(0, 8, value -> value.length());
+        arena.use(1, 8, value -> value.length()); // LRU releases slot 0 projection.
+        assertEquals(ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals(0b0110L, arena.readParentBits(0));
+        assertEquals("projection-0", arena.use(0, 8, value -> value));
+        assertEquals(0b0110L, arena.readParentBits(0));
+    }
+
+
+    @Test void exposedProjectionIsPinnedAndNeverSilentlyReplaced() {
+        var arena = new ObjectResidency<StringBuilder>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU
+                        | ObjectResidency.RECREATE | ObjectResidency.PIN_EXPOSED,
+                8, 0, slot -> new StringBuilder("slot-" + slot), null, null);
+        StringBuilder exposed = arena.use(0, 8, value -> value);
+        assertEquals("slot-0", exposed.toString());
+        assertThrows(ObjectResidency.BudgetExceededException.class,
+                () -> arena.use(1, 8, value -> value.append("x").length()));
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals("slot-0", exposed.toString());
+    }
+
+    @Test void exposedInstallIsPinnedFromTheMomentItEntersTheArena() {
+        var arena = new ObjectResidency<StringBuilder>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU
+                        | ObjectResidency.RECREATE | ObjectResidency.PIN_EXPOSED,
+                8, 0, slot -> new StringBuilder("slot-" + slot), null, null);
+        StringBuilder installed = new StringBuilder("externally-held");
+        arena.install(0, installed, 8);
+        assertThrows(ObjectResidency.BudgetExceededException.class,
+                () -> arena.use(1, 8, value -> value.length()));
+        assertSame(installed, arena.use(0, 8, value -> value));
+        assertEquals("externally-held", installed.toString());
+    }
+
+    @Test void lazyCreateAndStableIntegerSlot() {
+        java.util.concurrent.atomic.AtomicInteger creates = new java.util.concurrent.atomic.AtomicInteger();
+        var arena = new ObjectResidency<Value>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.PRESSURE_AWARE,
+                1024, 0, slot -> { creates.incrementAndGet(); return new Value(slot, "v" + slot); },
+                null, null);
+        assertEquals(ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals("v0", arena.use(0, 64, value -> value.text));
+        assertEquals("v0", arena.use(0, 64, value -> value.text));
+        assertEquals(1, creates.get());
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
+    }
+
+    @Test void swapsToSecondaryAndRestoresWithoutChangingLogicalValue() {
+        var store = new MemoryStore();
+        var arena = new ObjectResidency<Value>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.SWAP_SECONDARY,
+                64, 0, slot -> new Value(slot, "parent-state-" + slot), CODEC, store);
+        arena.use(0, 48, value -> { value.text = "mutated"; return null; });
+        arena.use(1, 48, value -> value.text);
+        assertEquals(ObjectResidency.State.SWAPPED, arena.state(0));
+        assertEquals("mutated", arena.use(0, 48, value -> value.text));
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
+        assertFalse(store.bytes.containsKey(0));
+    }
+
+    @Test void neverEvictsActiveSlotAndReportsUnrecoverableBudget() {
+        var arena = new ObjectResidency<String>(1,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU,
+                8, 0, slot -> "v", null, null);
+        assertThrows(ObjectResidency.BudgetExceededException.class, () -> arena.use(0, 16, value -> value));
+    }
+
+    @Test void strictScopeRejectsReturningTheProjection() {
+        var arena = new ObjectResidency<Object>(1,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.STRICT_NO_ESCAPE,
+                128, 0, slot -> new Object(), null, null);
+        assertThrows(IllegalStateException.class, () -> arena.use(0, 8, value -> value));
+    }
+
+    @Test void rejectsUnknownFlagsAndIncompleteSwapConfiguration() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new ObjectResidency<Object>(1, 1 << 20, 128, 0, slot -> new Object(), null, null));
+        assertThrows(IllegalArgumentException.class, () ->
+                new ObjectResidency<Object>(1, ObjectResidency.SWAP_SECONDARY,
+                        128, 0, slot -> new Object(), null, null));
+    }
+
+    @Test void lruDoesNotSpinWhenNoEvictionStrategyIsConfigured() {
+        var arena = new ObjectResidency<String>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU,
+                16, 0, slot -> "slot-" + slot, null, null);
+        arena.use(0, 8, value -> value.length());
+        assertThrows(ObjectResidency.BudgetExceededException.class,
+                () -> arena.use(1, 16, value -> value.length()));
+    }
+
+    @Test void recreatesOnlyFromCanonicalParentState() {
+        String[] parentState = {"initial", "other"};
+        var arena = new ObjectResidency<String>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.RECREATE,
+                8, 0, slot -> parentState[slot], null, null);
+        assertEquals("initial", arena.use(0, 8, value -> value));
+        parentState[0] = "updated-in-parent";
+        arena.use(1, 8, value -> value.length());
+        assertEquals(ObjectResidency.State.ABSENT, arena.state(0));
+        assertEquals("updated-in-parent", arena.use(0, 8, value -> value));
+    }
+
+    @Test void failedSwapLeavesOriginalProjectionResident() {
+        ObjectResidency.SpillStore failing = new ObjectResidency.SpillStore() {
+            @Override public void write(int slot, byte[] bytes) throws IOException {
+                throw new IOException("disk full");
+            }
+            @Override public byte[] read(int slot) throws IOException { throw new IOException("missing"); }
+            @Override public void delete(int slot) { }
+        };
+        var arena = new ObjectResidency<String>(2,
+                ObjectResidency.LAZY_CREATE | ObjectResidency.LRU | ObjectResidency.SWAP_SECONDARY,
+                8, 0, slot -> "v" + slot, new ObjectResidency.Codec<>() {
+                    @Override public byte[] encode(String value) { return value.getBytes(StandardCharsets.UTF_8); }
+                    @Override public String decode(int slot, byte[] bytes) {
+                        return new String(bytes, StandardCharsets.UTF_8);
+                    }
+                }, failing);
+        arena.use(0, 8, value -> value.length());
+        assertThrows(ObjectResidency.ResidencyException.class,
+                () -> arena.use(1, 8, value -> value.length()));
+        assertEquals(ObjectResidency.State.RESIDENT, arena.state(0));
+        assertEquals("v0", arena.use(0, 8, value -> value));
+    }
+
+    @Test void residencyAnnotationIsClassRetainedAndExplicit() throws Exception {
+        assertNull(AnnotatedProjection.class.getAnnotation(Residency.class),
+                "CLASS retention must not add reflective runtime lookup");
+        try (var stream = ObjectResidencyTest.class.getResourceAsStream(
+                "ObjectResidencyTest$AnnotatedProjection.class")) {
+            assertNotNull(stream);
+            String bytecode = new String(stream.readAllBytes(), StandardCharsets.ISO_8859_1);
+            assertTrue(bytecode.contains("Ljdk/internal/m3/collections/Residency;"),
+                    "class file retains compile-time metadata");
+        }
+    }
+
+    static final class AnnotatedProjection {
+        @Residency(flags = ObjectResidency.LAZY_CREATE | ObjectResidency.SWAP_SECONDARY,
+                estimatedBytes = 128, parent = "owner", strategy = Residency.Strategy.SWAP)
+        Object marker;
+    }
+}

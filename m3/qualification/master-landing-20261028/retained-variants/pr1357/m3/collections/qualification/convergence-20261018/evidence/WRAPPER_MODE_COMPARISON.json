@@ -1,0 +1,82 @@
+{
+  "readonly-policy": {
+    "baseline": {
+      "exit": 1,
+      "first_line": "Exception in thread \"main\" java.lang.AssertionError: remove before next: unexpected java.lang.IllegalStateException"
+    },
+    "received": {
+      "exit": 0,
+      "first_line": "PASS M3WrapperConvergenceContract mode=readonly-policy checks=25"
+    }
+  },
+  "readonly-effects": {
+    "baseline": {
+      "exit": 0,
+      "first_line": "PASS M3WrapperConvergenceContract mode=readonly-effects checks=8"
+    },
+    "received": {
+      "exit": 0,
+      "first_line": "PASS M3WrapperConvergenceContract mode=readonly-effects checks=8"
+    }
+  },
+  "comparator-failure": {
+    "baseline": {
+      "exit": 1,
+      "first_line": "Exception in thread \"main\" java.lang.AssertionError: read-only map comparator failure: missing IllegalArgumentException"
+    },
+    "received": {
+      "exit": 1,
+      "first_line": "Exception in thread \"main\" java.lang.AssertionError: read-only map comparator failure: missing IllegalArgumentException"
+    }
+  },
+  "bounded-map": {
+    "baseline": {
+      "exit": 0,
+      "first_line": "PASS M3WrapperConvergenceContract mode=bounded-map checks=64"
+    },
+    "received": {
+      "exit": 0,
+      "first_line": "PASS M3WrapperConvergenceContract mode=bounded-map checks=64"
+    }
+  },
+  "bounded-set": {
+    "baseline": {
+      "exit": 0,
+      "first_line": "PASS M3WrapperConvergenceContract mode=bounded-set checks=64"
+    },
+    "received": {
+      "exit": 0,
+      "first_line": "PASS M3WrapperConvergenceContract mode=bounded-set checks=64"
+    }
+  },
+  "interior-null": {
+    "baseline": {
+      "exit": 1,
+      "first_line": "Exception in thread \"main\" java.lang.AssertionError: interior-null floor skips hidden null: expected=-2 actual=null"
+    },
+    "received": {
+      "exit": 0,
+      "first_line": "PASS M3WrapperConvergenceContract mode=interior-null checks=6"
+    }
+  },
+  "readonly-linear": {
+    "baseline": {
+      "exit": 1,
+      "first_line": "Exception in thread \"main\" java.lang.AssertionError: ordinary iterator predicate work must be linear, actual=787456"
+    },
+    "received": {
+      "exit": 1,
+      "first_line": "Exception in thread \"main\" java.lang.AssertionError: ordinary iterator predicate work must be linear, actual=787456"
+    }
+  },
+  "readonly-failfast": {
+    "baseline": {
+      "exit": 1,
+      "first_line": "Exception in thread \"main\" java.lang.AssertionError: ordinary read-only iterator retains backing fail-fast detection: missing ConcurrentModificationException"
+    },
+    "received": {
+      "exit": 1,
+      "first_line": "Exception in thread \"main\" java.lang.AssertionError: ordinary read-only iterator retains backing fail-fast detection: missing ConcurrentModificationException"
+    }
+  }
+}

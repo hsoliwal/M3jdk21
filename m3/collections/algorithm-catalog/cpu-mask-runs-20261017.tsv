@@ -1,0 +1,7 @@
+problem_category	reference_or_donor	license	existing_owner	selected_atom	complexity	contract	status
+MASK_SELECTION	M3IndexPathMasks (first-party)	Apache-2.0	M3IndexPathMasks.scanWindow	Java/JNI primitive bounded selection	O(n*s) over n rows and s masks	No Java predicate effects; physical offsets validated by existing engine	REUSED
+RUN_LENGTH	LeetCode 443 String Compression (category only)	reference-only; no source imported	M3IndexPathMasks + primitive int array	Consecutive selected ID runs	O(n) after selection	Signed integer row IDs and duplicate runs; no UTF-16 conversion	SELECTED
+STATE_BITMASK	GeeksforGeeks bit manipulation problems (category only)	reference-only; no source imported	M3IndexPathMasks full word	Multi-plane required/forbidden int masks	O(s) per row	Every 32-bit flag including negative sign bit preserved	REUSED
+INDEX_TRAVERSAL	HackerRank Java Iterator (category only)	reference-only; no source imported	M3IndexPathMasks window scanner	Caller-owned ordinal/stride run grouping	O(n)	Negative stride and window boundaries preserve logical encounter order	SELECTED
+PRIMITIVE_SET_SORT	M3LongCompositeViews and M3LongSortedViews	Apache-2.0	M3LongCompositeViews	Leave existing sorted intersection/union/difference unchanged	N/A	Live backed sorted-view semantics not replaceable by detached mask snapshots	PRESERVE
+JNI	M3IndexPathMasks native C17/JNI selector	Apache-2.0	M3IndexPathMasks.Backend.NATIVE_REQUIRED	Existing optional JNI backend only	O(n*s) plus crossing cost	Explicit missing library refusal; no performance claim	PARITY_REQUIRED

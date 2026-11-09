@@ -1,0 +1,8 @@
+{
+  "artifact": "asm-9.6",
+  "origin": "https://gitlab.ow2.org/asm/asm/-/raw/ASM_9_6/LICENSE.txt",
+  "file": "UPSTREAM_LICENSE.txt",
+  "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
+  "bytes": 1598,
+  "caveat": "EXACT_TAG ASM_9_6"
+}

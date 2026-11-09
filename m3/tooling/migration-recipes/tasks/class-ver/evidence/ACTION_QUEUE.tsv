@@ -1,0 +1,14 @@
+id	state	exit
+FRAMEWORK	BLOCKED	Actual Maven/OpenRewrite/JUnit/JaCoCo and full static analysis pass on the exact candidate
+CI_START	BLOCKED	Hosted run must create and execute jobs; zero jobs is not a source-test verdict
+JNI_HANDLE	PENDING	Repair two invalid Handle/CHECK_NULL constructor forms using existing functions and prove full native build
+BACKING_CLOSE	CONTRACT_HOLD	Resolve close warning without silent exception-contract narrowing or suppressions
+JDK_PRODUCT	PENDING	Full modified M3JDK21 configure/build/jtreg and runtime acceptance
+BACKPORTS	PENDING	Close existing complete compatible JEP/JBS/non-JEP inventory and dependency DAG, not only headline JEPs
+A3	PENDING	Complete existing source/test atom-pattern-IOP-documentation convergence with actual proof
+STRINGS	PENDING	Finish joined storage/JNI/JIT/GC/interning/CDS lifetime and Java String contract work
+M3_NAMES	PENDING	Contract-tested MIndex-to-M3 migration with compact new names and stable standard JDK names
+MODULE_PACKS	PENDING	Real JavaFX locks/native UI plus desired application packs and complete dependency closures
+NEBULA	HOLD	Existing original-build/recipe/differential/fixed-point/dependency/UI gates before conditional application
+PLATFORMS	PENDING	Supported operating-system and native-platform acceptance
+COVERAGE	PENDING	Measured 99% meaningful atomic/pattern/contract coverage; no inflated standalone counts

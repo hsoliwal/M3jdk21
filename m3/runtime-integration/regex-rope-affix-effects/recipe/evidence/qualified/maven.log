@@ -1,0 +1,102 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.synexia.verification:m3-rope-affix-effects-recipe-proof >-----
+[INFO] Building m3-rope-affix-effects-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Copying 28 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3TaskRecipeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.98 s -- in com.synexia.rewrite.M3TaskRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-rope-affix-effects-recipe-proof ---
+[INFO] Building jar: /workspace/scratch/edcb3bae74f7/synexia-task/synexia-openrewrite-recipes/recipe-crates/m3-rope-affix-effects-20261017/target/m3-rope-affix-effects-recipe-proof-1.jar
+[INFO] 
+[INFO] --- exec:3.5.0:exec (verify-string-sdk-contract) @ m3-rope-affix-effects-recipe-proof ---
+affix-complete-source-before-after exit=0 accepted=true M3_REGEX_AFFIX_CURSOR_WORK scalar_reads=24 root_wrapper_reads=11 affix_units=24
+M3_REGEX_AFFIX_COLD_WORK suffix_failure=false text_units=2057 before_reads=2059 after_reads=3
+M3_REGEX_AFFIX_COLD_WORK suffix_failure=true text_units=2057 before_reads=2059 after_reads=6
+M3_REGEX_AFFIX_CACHE_PASS key_lanes=5 warm_text_reads=0
+M3_REGEX_AFFIX_RETAINED_PRIMITIVES before=600064 after=602624 maximum_delta=2560
+M3_REGEX_AFFIX_DIFFERENTIAL_PASS checks=47904
+M3_REGEX_AFFIX_EXTRACTED_JAVA_PASS full_class=true cursor_exact=true mock_owner=true matched_m3jdk=false
+retained-amalgamation-source-seal exit=0 accepted=true M3_REGEX_AMALGAMATION_RECEIVER_PASS files=3 native_untouched=true m3_string_owner_unchanged=true
+retained-required-grams-source-seal exit=0 accepted=true M3_REQUIRED_NGRAMS_PRODUCT_SOURCE_PASS targets=3 source_first=true exact_matcher_preserved=true
+retained-rolling-source-seal exit=0 accepted=true M3_REGEX_ROLLING_RECEIVER_PASS targets=2 preserves_native=true full_m3jdk_unqualified=true
+retained-amalgamation-before-after exit=0 accepted=true e=true
+M3_REGEX_AMALGAMATION_AB_RAW case=missing-middle-prepared before=[400142, 465850, 378949, 248804, 238679, 239620, 274823, 239681, 367012] after=[356646, 368924, 326691, 239740, 240411, 246841, 239530, 481904, 226601]
+M3_REGEX_AMALGAMATION_AB case=minimum-length before_ns=398.505 after_ns=52.831 speedup=7.543x delta_pct=-86.74% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=minimum-length before=[2077413, 2028068, 1980006, 1960306, 1992525, 1958964, 2007638, 2057652, 1950973] after=[265819, 262765, 286130, 262715, 266010, 258338, 291167, 264157, 262684]
+M3_REGEX_AMALGAMATION_AB case=fixed-first before_ns=89.765 after_ns=122.917 speedup=0.730x delta_pct=36.93% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=fixed-first before=[471559, 475285, 521795, 474303, 448825, 441514, 446351, 383356, 395854] after=[618529, 588064, 663718, 635285, 625870, 614584, 605380, 594042, 576897]
+M3_REGEX_AMALGAMATION_AB case=matching-prepared before_ns=91.900 after_ns=74.626 speedup=1.231x delta_pct=-18.80% iterations=5000 samples=9 stock_java21_fixture=true
+M3_REGEX_AMALGAMATION_AB_RAW case=matching-prepared before=[462055, 437057, 459500, 525060, 442154, 461163, 409025, 450487, 476517] after=[373130, 397387, 356516, 356847, 400933, 303806, 386040, 392911, 366371]
+M3_REGEX_AMALGAMATION_DIFFERENTIAL_PASS checks=24604
+M3_REGEX_AMALGAMATION_EXTRACTED_JAVA_PASS before_after_exact=true mock_owner=true matched_jdk=false
+retained-row-precompute exit=0 accepted=true M3_JDK_REGEX_ROW_PRECOMPUTE_PASS checks=637128 regexes=10034 rows=532
+M3JDK21_REGEX_ROW_RECEIVER_PASS sources_sha256=true patch_module=true
+retained-literal-matches exit=0 accepted=true M3_STRING_LITERAL_MATCHES_SOURCE_PASS|literal_only=true|pattern_fallback=true
+retained-regex-split exit=0 accepted=true M3_STRING_REGEX_SPLIT_CURRENT_SOURCE_PASS|pattern_subsequence=true|m3_slice=true
+retained-codepoint-geometry exit=0 accepted=true M3_STRING_CODEPOINT_GEOMETRY_SOURCE_PASS|bounded=true|fallback=true
+retained-rolling-before-after exit=0 accepted=true M3_REGEX_ROLLING_AB_RESULT case=flat-768 before_ns=84160.544 after_ns=71972.984 speedup=1.169x change_pct=-14.48% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=flat-768 before=[5192853, 5517210, 5447936, 11153839, 11032728, 10520068, 10546078] after=[4825933, 5046033, 4810539, 14689602, 9534991, 9557274, 8996623]
+M3_REGEX_ROLLING_AB_RESULT case=tuple-dag-768 before_ns=96327.328 after_ns=60302.784 speedup=1.597x change_pct=-37.40% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=tuple-dag-768 before=[12043795, 12040916, 7963551, 10697455, 11730516, 14425971, 13685729] after=[5729529, 6147667, 7129771, 7537848, 10254450, 10504475, 10845587]
+M3_REGEX_ROLLING_AB_RESULT case=sliced-tuple-766 before_ns=64624.304 after_ns=44696.360 speedup=1.446x change_pct=-30.84% samples=7 iterations=125 simulated_owner=true
+M3_REGEX_ROLLING_AB_RAW case=sliced-tuple-766 before=[10761901, 11381341, 7907478, 7828700, 7663953, 8078038, 8138885] after=[9330964, 10997345, 5317470, 5587045, 5349999, 5487155, 5593425]
+M3_REGEX_ROLLING_DIFFERENTIAL_PASS checks=15601
+M3_REGEX_ROLLING_EXACT_JAVA_PASS source_extracted=true simulated_owner=true matched_m3jdk=false
+retained-native-utf16-oracle exit=0 accepted=true M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845
+M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845
+retained-ledger-refusals exit=0 accepted=true _without_promoting_holds (__main__.StringCompletenessTest.test_current_ledger_is_classified_without_promoting_holds) ... ok
+test_empty_malformed_and_changed_header_refuse (__main__.StringCompletenessTest.test_empty_malformed_and_changed_header_refuse) ... ok
+test_existing_required_disposition_cannot_be_promoted (__main__.StringCompletenessTest.test_existing_required_disposition_cannot_be_promoted) ... ok
+test_existing_string_runtime_and_implemented_owner_checks_survive (__main__.StringCompletenessTest.test_existing_string_runtime_and_implemented_owner_checks_survive) ... ok
+test_hold_and_advisory_keep_scope_owner_retention_and_oracle (__main__.StringCompletenessTest.test_hold_and_advisory_keep_scope_owner_retention_and_oracle) ... ok
+test_hold_or_advisory_cannot_be_promoted_or_reclassified (__main__.StringCompletenessTest.test_hold_or_advisory_cannot_be_promoted_or_reclassified) ... ok
+test_missing_hold_advisory_or_existing_required_responsibility_refuses (__main__.StringCompletenessTest.test_missing_hold_advisory_or_existing_required_responsibility_refuses) ... ok
+test_special_status_cannot_exempt_an_unrelated_responsibility (__main__.StringCompletenessTest.test_special_status_cannot_exempt_an_unrelated_responsibility) ... ok
+test_unknown_status_duplicate_and_unfinished_rows_refuse (__main__.StringCompletenessTest.test_unknown_status_duplicate_and_unfinished_rows_refuse) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.017s
+
+OK
+strict-retained-regex-jtreg-compile exit=0 accepted=true 
+prepared-effects-java-jni-contract exit=0 accepted=true M3_STRING_REGEX_PREPARED_BATCH_PASS checks=231580 jniRows=0 cudaRows=0 requested=JAVA_ONLY
+M3_STRING_REGEX_PREPARED_BATCH_PASS checks=231612 jniRows=46278 cudaRows=0 requested=JNI
+M3_STRING_REGEX_PREPARED_BATCH_PASS checks=231612 jniRows=46278 cudaRows=0 requested=JNI
+M3_STRING_REGEX_PREPARED_BATCH_PASS checks=231612 jniRows=46278 cudaRows=0 requested=JNI
+M3_REGEX_PREPARED_ALLOCATION_PASS injectedFailures=5 liveAllocations=0
+PREPARED_REGEX_CPU_QUALIFICATION_PASS; CUDA_KERNEL_AND_DEVICE_GATE_NOT_RUN
+baseline-full-string-invariant exit=1 accepted=true M3_STRING_INVARIANT_FAIL: M3 adaptive BMH/KMP convergence missing: skip256[pattern.charAt(index) & 255] = length - 1 - index;
+candidate-full-string-invariant exit=1 accepted=true M3_STRING_INVARIANT_FAIL: M3 adaptive BMH/KMP convergence missing: skip256[pattern.charAt(index) & 255] = length - 1 - index;
+SDK_STRING_CONTRACT_COMPLETE commands=16 generated_files=15 baseline_hold=full-string-source-invariant matched_m3jdk=false cuda_device=NOT_RUN
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  49.637 s
+[INFO] Finished at: 2026-10-17T04:10:31-06:00
+[INFO] ------------------------------------------------------------------------

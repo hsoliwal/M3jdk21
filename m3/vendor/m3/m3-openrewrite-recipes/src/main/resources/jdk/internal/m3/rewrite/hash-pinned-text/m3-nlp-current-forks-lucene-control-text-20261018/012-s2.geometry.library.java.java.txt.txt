@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: Apache-2.0
+// Reviewed release-21 descriptor; original automatic-module exports/openness retained.
+open module s2.geometry.library.java {
+    requires java.logging;
+
+    exports com.google.common.geometry;
+
+}

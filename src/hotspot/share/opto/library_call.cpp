@@ -568,7 +568,7 @@ bool LibraryCallKit::try_to_inline(int predicate) {
 
   case vmIntrinsics::_getCallerClass:           return inline_native_Reflection_getCallerClass();
 
-  case vmIntrinsics::_Reference_get:            return inline_reference_get();
+  case vmIntrinsics::_Reference_get0:           return inline_reference_get0();
   case vmIntrinsics::_Reference_refersTo0:      return inline_reference_refersTo0(false);
   case vmIntrinsics::_PhantomReference_refersTo0: return inline_reference_refersTo0(true);
 
@@ -597,6 +597,8 @@ bool LibraryCallKit::try_to_inline(int predicate) {
   case vmIntrinsics::_sha5_implCompress:
   case vmIntrinsics::_sha3_implCompress:
     return inline_digestBase_implCompress(intrinsic_id());
+  case vmIntrinsics::_double_keccak:
+    return inline_double_keccak();
 
   case vmIntrinsics::_digestBase_implCompressMB:
     return inline_digestBase_implCompressMB(predicate);
@@ -627,6 +629,30 @@ bool LibraryCallKit::try_to_inline(int predicate) {
     return inline_ghash_processBlocks();
   case vmIntrinsics::_chacha20Block:
     return inline_chacha20Block();
+  case vmIntrinsics::_kyberNtt:
+    return inline_kyberNtt();
+  case vmIntrinsics::_kyberInverseNtt:
+    return inline_kyberInverseNtt();
+  case vmIntrinsics::_kyberNttMult:
+    return inline_kyberNttMult();
+  case vmIntrinsics::_kyberAddPoly_2:
+    return inline_kyberAddPoly_2();
+  case vmIntrinsics::_kyberAddPoly_3:
+    return inline_kyberAddPoly_3();
+  case vmIntrinsics::_kyber12To16:
+    return inline_kyber12To16();
+  case vmIntrinsics::_kyberBarrettReduce:
+    return inline_kyberBarrettReduce();
+  case vmIntrinsics::_dilithiumAlmostNtt:
+    return inline_dilithiumAlmostNtt();
+  case vmIntrinsics::_dilithiumAlmostInverseNtt:
+    return inline_dilithiumAlmostInverseNtt();
+  case vmIntrinsics::_dilithiumNttMult:
+    return inline_dilithiumNttMult();
+  case vmIntrinsics::_dilithiumMontMulByConstant:
+    return inline_dilithiumMontMulByConstant();
+  case vmIntrinsics::_dilithiumDecomposePoly:
+    return inline_dilithiumDecomposePoly();
   case vmIntrinsics::_base64_encodeBlock:
     return inline_base64_encodeBlock();
   case vmIntrinsics::_base64_decodeBlock:
@@ -1108,6 +1134,7 @@ bool LibraryCallKit::inline_countPositives() {
   Node* ba_start = array_element_address(ba, offset, T_BYTE);
   Node* result = new CountPositivesNode(control(), memory(TypeAryPtr::BYTES), ba_start, len);
   set_result(_gvn.transform(result));
+  clear_upper_avx();
   return true;
 }
 
@@ -1362,6 +1389,7 @@ bool LibraryCallKit::inline_string_indexOfChar(StrIntrinsicNode::ArgEnc ae) {
   set_control(_gvn.transform(region));
   record_for_igvn(region);
   set_result(_gvn.transform(phi));
+  clear_upper_avx();
 
   return true;
 }
@@ -2864,6 +2892,7 @@ bool LibraryCallKit::inline_native_notify_jvmti_funcs(address funcAddr, const ch
   if (!DoJVMTIVirtualThreadTransitions) {
     return true;
   }
+  Node* vt_oop = _gvn.transform(must_be_not_null(argument(0), true)); // VirtualThread this argument
   IdealKit ideal(this);
 
   Node* ONE = ideal.ConI(1);
@@ -2872,24 +2901,20 @@ bool LibraryCallKit::inline_native_notify_jvmti_funcs(address funcAddr, const ch
   Node* notify_jvmti_enabled = ideal.load(ideal.ctrl(), addr, TypeInt::BOOL, T_BOOLEAN, Compile::AliasIdxRaw);
 
   ideal.if_then(notify_jvmti_enabled, BoolTest::eq, ONE); {
+    sync_kit(ideal);
     // if notifyJvmti enabled then make a call to the given SharedRuntime function
     const TypeFunc* tf = OptoRuntime::notify_jvmti_vthread_Type();
-    Node* vt_oop = _gvn.transform(must_be_not_null(argument(0), true)); // VirtualThread this argument
-
-    sync_kit(ideal);
     make_runtime_call(RC_NO_LEAF, tf, funcAddr, funcName, TypePtr::BOTTOM, vt_oop, hide);
     ideal.sync_kit(this);
   } ideal.else_(); {
     // set hide value to the VTMS transition bit in current JavaThread and VirtualThread object
-    Node* vt_oop = _gvn.transform(argument(0)); // this argument - VirtualThread oop
     Node* thread = ideal.thread();
     Node* jt_addr = basic_plus_adr(thread, in_bytes(JavaThread::is_in_VTMS_transition_offset()));
     Node* vt_addr = basic_plus_adr(vt_oop, java_lang_Thread::is_in_VTMS_transition_offset());
-    const TypePtr *addr_type = _gvn.type(addr)->isa_ptr();
 
     sync_kit(ideal);
-    access_store_at(nullptr, jt_addr, addr_type, hide, _gvn.type(hide), T_BOOLEAN, IN_NATIVE | MO_UNORDERED);
-    access_store_at(nullptr, vt_addr, addr_type, hide, _gvn.type(hide), T_BOOLEAN, IN_NATIVE | MO_UNORDERED);
+    access_store_at(nullptr, jt_addr, _gvn.type(jt_addr)->is_ptr(), hide, _gvn.type(hide), T_BOOLEAN, IN_NATIVE | MO_UNORDERED);
+    access_store_at(nullptr, vt_addr, _gvn.type(vt_addr)->is_ptr(), hide, _gvn.type(hide), T_BOOLEAN, IN_NATIVE | MO_UNORDERED);
 
     ideal.sync_kit(this);
   } ideal.end_if();
@@ -3224,7 +3249,9 @@ bool LibraryCallKit::inline_native_getEventWriter() {
 
   // Load the raw epoch value from the threadObj.
   Node* threadObj_epoch_offset = basic_plus_adr(threadObj, java_lang_Thread::jfr_epoch_offset());
-  Node* threadObj_epoch_raw = access_load_at(threadObj, threadObj_epoch_offset, TypeRawPtr::BOTTOM, TypeInt::CHAR, T_CHAR,
+  Node* threadObj_epoch_raw = access_load_at(threadObj, threadObj_epoch_offset,
+                                             _gvn.type(threadObj_epoch_offset)->isa_ptr(),
+                                             TypeInt::CHAR, T_CHAR,
                                              IN_HEAP | MO_UNORDERED | C2_MISMATCHED | C2_CONTROL_DEPENDENT_LOAD);
 
   // Mask off the excluded information from the epoch.
@@ -3239,7 +3266,8 @@ bool LibraryCallKit::inline_native_getEventWriter() {
 
   // Load the raw epoch value from the vthread.
   Node* vthread_epoch_offset = basic_plus_adr(vthread, java_lang_Thread::jfr_epoch_offset());
-  Node* vthread_epoch_raw = access_load_at(vthread, vthread_epoch_offset, TypeRawPtr::BOTTOM, TypeInt::CHAR, T_CHAR,
+  Node* vthread_epoch_raw = access_load_at(vthread, vthread_epoch_offset, _gvn.type(vthread_epoch_offset)->is_ptr(),
+                                           TypeInt::CHAR, T_CHAR,
                                            IN_HEAP | MO_UNORDERED | C2_MISMATCHED | C2_CONTROL_DEPENDENT_LOAD);
 
   // Mask off the excluded information from the epoch.
@@ -3475,7 +3503,7 @@ void LibraryCallKit::extend_setCurrentThread(Node* jt, Node* thread) {
 
   // Load the raw epoch value from the vthread.
   Node* epoch_offset = basic_plus_adr(thread, java_lang_Thread::jfr_epoch_offset());
-  Node* epoch_raw = access_load_at(thread, epoch_offset, TypeRawPtr::BOTTOM, TypeInt::CHAR, T_CHAR,
+  Node* epoch_raw = access_load_at(thread, epoch_offset, _gvn.type(epoch_offset)->is_ptr(), TypeInt::CHAR, T_CHAR,
                                    IN_HEAP | MO_UNORDERED | C2_MISMATCHED | C2_CONTROL_DEPENDENT_LOAD);
 
   // Mask off the excluded information from the epoch.
@@ -3586,12 +3614,19 @@ bool LibraryCallKit::inline_native_setCurrentThread() {
   return true;
 }
 
-Node* LibraryCallKit::scopedValueCache_helper() {
-  ciKlass *objects_klass = ciObjArrayKlass::make(env()->Object_klass());
-  const TypeOopPtr *etype = TypeOopPtr::make_from_klass(env()->Object_klass());
+const Type* LibraryCallKit::scopedValueCache_type() {
+  ciKlass* objects_klass = ciObjArrayKlass::make(env()->Object_klass());
+  const TypeOopPtr* etype = TypeOopPtr::make_from_klass(env()->Object_klass());
+  const TypeAry* arr0 = TypeAry::make(etype, TypeInt::POS);
 
+  // Because we create the scopedValue cache lazily we have to make the
+  // type of the result BotPTR.
   bool xk = etype->klass_is_exact();
+  const Type* objects_type = TypeAryPtr::make(TypePtr::BotPTR, arr0, objects_klass, xk, 0);
+  return objects_type;
+}
 
+Node* LibraryCallKit::scopedValueCache_helper() {
   Node* thread = _gvn.transform(new ThreadLocalNode());
   Node* p = basic_plus_adr(top()/*!oop*/, thread, in_bytes(JavaThread::scopedValueCache_offset()));
   // We cannot use immutable_memory() because we might flip onto a
@@ -3604,15 +3639,8 @@ Node* LibraryCallKit::scopedValueCache_helper() {
 
 //------------------------inline_native_scopedValueCache------------------
 bool LibraryCallKit::inline_native_scopedValueCache() {
-  ciKlass *objects_klass = ciObjArrayKlass::make(env()->Object_klass());
-  const TypeOopPtr *etype = TypeOopPtr::make_from_klass(env()->Object_klass());
-  const TypeAry* arr0 = TypeAry::make(etype, TypeInt::POS);
-
-  // Because we create the scopedValue cache lazily we have to make the
-  // type of the result BotPTR.
-  bool xk = etype->klass_is_exact();
-  const Type* objects_type = TypeAryPtr::make(TypePtr::BotPTR, arr0, objects_klass, xk, 0);
   Node* cache_obj_handle = scopedValueCache_helper();
+  const Type* objects_type = scopedValueCache_type();
   set_result(access_load(cache_obj_handle, objects_type, T_OBJECT, IN_NATIVE));
 
   return true;
@@ -3622,9 +3650,10 @@ bool LibraryCallKit::inline_native_scopedValueCache() {
 bool LibraryCallKit::inline_native_setScopedValueCache() {
   Node* arr = argument(0);
   Node* cache_obj_handle = scopedValueCache_helper();
+  const Type* objects_type = scopedValueCache_type();
 
   const TypePtr *adr_type = _gvn.type(cache_obj_handle)->isa_ptr();
-  access_store_at(nullptr, cache_obj_handle, adr_type, arr, _gvn.type(arr), T_OBJECT, IN_NATIVE | MO_UNORDERED);
+  access_store_at(nullptr, cache_obj_handle, adr_type, arr, objects_type, T_OBJECT, IN_NATIVE | MO_UNORDERED);
 
   return true;
 }
@@ -4271,11 +4300,15 @@ bool LibraryCallKit::inline_array_copyOf(bool is_copyOfRange) {
       length = _gvn.transform(new SubINode(end, start));
     }
 
-    // Bail out if length is negative.
+    // Bail out if length is negative (i.e., if start > end).
     // Without this the new_array would throw
     // NegativeArraySizeException but IllegalArgumentException is what
     // should be thrown
     generate_negative_guard(length, bailout, &length);
+
+    // Bail out if start is larger than the original length
+    Node* orig_tail = _gvn.transform(new SubINode(orig_length, start));
+    generate_negative_guard(orig_tail, bailout, &orig_tail);
 
     if (bailout->req() > 1) {
       PreserveJVMState pjvms(this);
@@ -4286,8 +4319,7 @@ bool LibraryCallKit::inline_array_copyOf(bool is_copyOfRange) {
 
     if (!stopped()) {
       // How many elements will we copy from the original?
-      // The answer is MinI(orig_length - start, length).
-      Node* orig_tail = _gvn.transform(new SubINode(orig_length, start));
+      // The answer is MinI(orig_tail, length).
       Node* moved = generate_min_max(vmIntrinsics::_min, orig_tail, length);
 
       // Generate a direct call to the right arraycopy function(s).
@@ -4335,7 +4367,7 @@ bool LibraryCallKit::inline_array_copyOf(bool is_copyOfRange) {
       if (!stopped()) {
         newcopy = new_array(klass_node, length, 0);  // no arguments to push
 
-        ArrayCopyNode* ac = ArrayCopyNode::make(this, true, original, start, newcopy, intcon(0), moved, true, false,
+        ArrayCopyNode* ac = ArrayCopyNode::make(this, true, original, start, newcopy, intcon(0), moved, true, true,
                                                 load_object_klass(original), klass_node);
         if (!is_copyOfRange) {
           ac->set_copyof(validated);
@@ -4515,14 +4547,22 @@ bool LibraryCallKit::inline_native_hashcode(bool is_virtual, bool is_static) {
   Node* no_ctrl = nullptr;
   Node* header = make_load(no_ctrl, header_addr, TypeX_X, TypeX_X->basic_type(), MemNode::unordered);
 
-  // Test the header to see if it is unlocked.
+  // Test the header to see if it is safe to read w.r.t. locking.
   Node *lock_mask      = _gvn.MakeConX(markWord::lock_mask_in_place);
   Node *lmasked_header = _gvn.transform(new AndXNode(header, lock_mask));
-  Node *unlocked_val   = _gvn.MakeConX(markWord::unlocked_value);
-  Node *chk_unlocked   = _gvn.transform(new CmpXNode( lmasked_header, unlocked_val));
-  Node *test_unlocked  = _gvn.transform(new BoolNode( chk_unlocked, BoolTest::ne));
+  if (LockingMode == LM_LIGHTWEIGHT) {
+    Node *monitor_val   = _gvn.MakeConX(markWord::monitor_value);
+    Node *chk_monitor   = _gvn.transform(new CmpXNode(lmasked_header, monitor_val));
+    Node *test_monitor  = _gvn.transform(new BoolNode(chk_monitor, BoolTest::eq));
 
-  generate_slow_guard(test_unlocked, slow_region);
+    generate_slow_guard(test_monitor, slow_region);
+  } else {
+    Node *unlocked_val      = _gvn.MakeConX(markWord::unlocked_value);
+    Node *chk_unlocked      = _gvn.transform(new CmpXNode(lmasked_header, unlocked_val));
+    Node *test_not_unlocked = _gvn.transform(new BoolNode(chk_unlocked, BoolTest::ne));
+
+    generate_slow_guard(test_not_unlocked, slow_region);
+  }
 
   // Get the hash value and check to see that it has been properly assigned.
   // We depend on hash_mask being at most 32 bits and avoid the use of
@@ -4891,7 +4931,13 @@ void LibraryCallKit::copy_to_clone(Node* obj, Node* alloc_obj, Node* obj_size, b
   assert(alloc_obj->is_CheckCastPP() && raw_obj->is_Proj() && raw_obj->in(0)->is_Allocate(), "");
 
   AllocateNode* alloc = nullptr;
-  if (ReduceBulkZeroing) {
+  if (ReduceBulkZeroing &&
+      // If we are implementing an array clone without knowing its source type
+      // (can happen when compiling the array-guarded branch of a reflective
+      // Object.clone() invocation), initialize the array within the allocation.
+      // This is needed because some GCs (e.g. ZGC) might fall back in this case
+      // to a runtime clone call that assumes fully initialized source arrays.
+      (!is_array || obj->get_ptr_type()->isa_aryptr() != nullptr)) {
     // We will be completely responsible for initializing this object -
     // mark Initialize node as complete.
     alloc = AllocateNode::Ideal_allocation(alloc_obj, &_gvn);
@@ -4993,8 +5039,8 @@ bool LibraryCallKit::inline_native_clone(bool is_virtual) {
       PreserveJVMState pjvms(this);
       set_control(array_ctl);
       Node* obj_length = load_array_length(obj);
-      Node* obj_size  = nullptr;
-      Node* alloc_obj = new_array(obj_klass, obj_length, 0, &obj_size, /*deoptimize_on_exception=*/true);
+      Node* array_size = nullptr; // Size of the array without object alignment padding.
+      Node* alloc_obj = new_array(obj_klass, obj_length, 0, &array_size, /*deoptimize_on_exception=*/true);
 
       BarrierSetC2* bs = BarrierSet::barrier_set()->barrier_set_c2();
       if (bs->array_copy_requires_gc_barriers(true, T_OBJECT, true, false, BarrierSetC2::Parsing)) {
@@ -5027,7 +5073,7 @@ bool LibraryCallKit::inline_native_clone(bool is_virtual) {
       //  the object.)
 
       if (!stopped()) {
-        copy_to_clone(obj, alloc_obj, obj_size, true);
+        copy_to_clone(obj, alloc_obj, array_size, true);
 
         // Present the results of the copy.
         result_reg->init_req(_array_path, control());
@@ -5067,7 +5113,7 @@ bool LibraryCallKit::inline_native_clone(bool is_virtual) {
     if (!stopped()) {
       // It's an instance, and it passed the slow-path tests.
       PreserveJVMState pjvms(this);
-      Node* obj_size  = nullptr;
+      Node* obj_size = nullptr; // Total object size, including object alignment padding.
       // Need to deoptimize on exception from allocation since Object.clone intrinsic
       // is reexecuted if deoptimization occurs and there could be problems when merging
       // exception state between multiple Object.clone versions (reexecute=true vs reexecute=false).
@@ -6534,9 +6580,9 @@ bool LibraryCallKit::inline_updateByteBufferAdler32() {
   return true;
 }
 
-//----------------------------inline_reference_get----------------------------
+//----------------------------inline_reference_get0----------------------------
 // public T java.lang.ref.Reference.get();
-bool LibraryCallKit::inline_reference_get() {
+bool LibraryCallKit::inline_reference_get0() {
   const int referent_offset = java_lang_ref_Reference::referent_offset();
 
   // Get the argument:
@@ -7238,6 +7284,417 @@ bool LibraryCallKit::inline_chacha20Block() {
   return true;
 }
 
+//------------------------------inline_kyberNtt
+bool LibraryCallKit::inline_kyberNtt() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseKyberIntrinsics, "need Kyber intrinsics support");
+  assert(callee()->signature()->size() == 2, "kyberNtt has 2 parameters");
+
+  stubAddr = StubRoutines::kyberNtt();
+  stubName = "kyberNtt";
+  if (!stubAddr) return false;
+
+  Node* coeffs          = argument(0);
+  Node* ntt_zetas        = argument(1);
+
+  coeffs = must_be_not_null(coeffs, true);
+  ntt_zetas = must_be_not_null(ntt_zetas, true);
+
+  Node* coeffs_start  = array_element_address(coeffs, intcon(0), T_SHORT);
+  assert(coeffs_start, "coeffs is null");
+  Node* ntt_zetas_start  = array_element_address(ntt_zetas, intcon(0), T_SHORT);
+  assert(ntt_zetas_start, "ntt_zetas is null");
+  Node* kyberNtt = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::kyberNtt_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  coeffs_start, ntt_zetas_start);
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(kyberNtt, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
+//------------------------------inline_kyberInverseNtt
+bool LibraryCallKit::inline_kyberInverseNtt() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseKyberIntrinsics, "need Kyber intrinsics support");
+  assert(callee()->signature()->size() == 2, "kyberInverseNtt has 2 parameters");
+
+  stubAddr = StubRoutines::kyberInverseNtt();
+  stubName = "kyberInverseNtt";
+  if (!stubAddr) return false;
+
+  Node* coeffs          = argument(0);
+  Node* zetas           = argument(1);
+
+  coeffs = must_be_not_null(coeffs, true);
+  zetas = must_be_not_null(zetas, true);
+
+  Node* coeffs_start  = array_element_address(coeffs, intcon(0), T_SHORT);
+  assert(coeffs_start, "coeffs is null");
+  Node* zetas_start  = array_element_address(zetas, intcon(0), T_SHORT);
+  assert(zetas_start, "inverseNtt_zetas is null");
+  Node* kyberInverseNtt = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::kyberInverseNtt_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  coeffs_start, zetas_start);
+
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(kyberInverseNtt, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
+//------------------------------inline_kyberNttMult
+bool LibraryCallKit::inline_kyberNttMult() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseKyberIntrinsics, "need Kyber intrinsics support");
+  assert(callee()->signature()->size() == 4, "kyberNttMult has 4 parameters");
+
+  stubAddr = StubRoutines::kyberNttMult();
+  stubName = "kyberNttMult";
+  if (!stubAddr) return false;
+
+  Node* result          = argument(0);
+  Node* ntta            = argument(1);
+  Node* nttb            = argument(2);
+  Node* zetas           = argument(3);
+
+  result = must_be_not_null(result, true);
+  ntta = must_be_not_null(ntta, true);
+  nttb = must_be_not_null(nttb, true);
+  zetas = must_be_not_null(zetas, true);
+
+  Node* result_start  = array_element_address(result, intcon(0), T_SHORT);
+  assert(result_start, "result is null");
+  Node* ntta_start  = array_element_address(ntta, intcon(0), T_SHORT);
+  assert(ntta_start, "ntta is null");
+  Node* nttb_start  = array_element_address(nttb, intcon(0), T_SHORT);
+  assert(nttb_start, "nttb is null");
+  Node* zetas_start  = array_element_address(zetas, intcon(0), T_SHORT);
+  assert(zetas_start, "nttMult_zetas is null");
+  Node* kyberNttMult = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::kyberNttMult_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  result_start, ntta_start, nttb_start,
+                                  zetas_start);
+
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(kyberNttMult, TypeFunc::Parms));
+  set_result(retvalue);
+
+  return true;
+}
+
+//------------------------------inline_kyberAddPoly_2
+bool LibraryCallKit::inline_kyberAddPoly_2() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseKyberIntrinsics, "need Kyber intrinsics support");
+  assert(callee()->signature()->size() == 3, "kyberAddPoly_2 has 3 parameters");
+
+  stubAddr = StubRoutines::kyberAddPoly_2();
+  stubName = "kyberAddPoly_2";
+  if (!stubAddr) return false;
+
+  Node* result          = argument(0);
+  Node* a               = argument(1);
+  Node* b               = argument(2);
+
+  result = must_be_not_null(result, true);
+  a = must_be_not_null(a, true);
+  b = must_be_not_null(b, true);
+
+  Node* result_start  = array_element_address(result, intcon(0), T_SHORT);
+  assert(result_start, "result is null");
+  Node* a_start  = array_element_address(a, intcon(0), T_SHORT);
+  assert(a_start, "a is null");
+  Node* b_start  = array_element_address(b, intcon(0), T_SHORT);
+  assert(b_start, "b is null");
+  Node* kyberAddPoly_2 = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::kyberAddPoly_2_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  result_start, a_start, b_start);
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(kyberAddPoly_2, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
+//------------------------------inline_kyberAddPoly_3
+bool LibraryCallKit::inline_kyberAddPoly_3() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseKyberIntrinsics, "need Kyber intrinsics support");
+  assert(callee()->signature()->size() == 4, "kyberAddPoly_3 has 4 parameters");
+
+  stubAddr = StubRoutines::kyberAddPoly_3();
+  stubName = "kyberAddPoly_3";
+  if (!stubAddr) return false;
+
+  Node* result          = argument(0);
+  Node* a               = argument(1);
+  Node* b               = argument(2);
+  Node* c               = argument(3);
+
+  result = must_be_not_null(result, true);
+  a = must_be_not_null(a, true);
+  b = must_be_not_null(b, true);
+  c = must_be_not_null(c, true);
+
+  Node* result_start  = array_element_address(result, intcon(0), T_SHORT);
+  assert(result_start, "result is null");
+  Node* a_start  = array_element_address(a, intcon(0), T_SHORT);
+  assert(a_start, "a is null");
+  Node* b_start  = array_element_address(b, intcon(0), T_SHORT);
+  assert(b_start, "b is null");
+  Node* c_start  = array_element_address(c, intcon(0), T_SHORT);
+  assert(c_start, "c is null");
+  Node* kyberAddPoly_3 = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::kyberAddPoly_3_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  result_start, a_start, b_start, c_start);
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(kyberAddPoly_3, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
+//------------------------------inline_kyber12To16
+bool LibraryCallKit::inline_kyber12To16() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseKyberIntrinsics, "need Kyber intrinsics support");
+  assert(callee()->signature()->size() == 4, "kyber12To16 has 4 parameters");
+
+  stubAddr = StubRoutines::kyber12To16();
+  stubName = "kyber12To16";
+  if (!stubAddr) return false;
+
+  Node* condensed       = argument(0);
+  Node* condensedOffs   = argument(1);
+  Node* parsed          = argument(2);
+  Node* parsedLength    = argument(3);
+
+  condensed = must_be_not_null(condensed, true);
+  parsed = must_be_not_null(parsed, true);
+
+  Node* condensed_start  = array_element_address(condensed, intcon(0), T_BYTE);
+  assert(condensed_start, "condensed is null");
+  Node* parsed_start  = array_element_address(parsed, intcon(0), T_SHORT);
+  assert(parsed_start, "parsed is null");
+  Node* kyber12To16 = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::kyber12To16_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  condensed_start, condensedOffs, parsed_start, parsedLength);
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(kyber12To16, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+
+}
+
+//------------------------------inline_kyberBarrettReduce
+bool LibraryCallKit::inline_kyberBarrettReduce() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseKyberIntrinsics, "need Kyber intrinsics support");
+  assert(callee()->signature()->size() == 1, "kyberBarrettReduce has 1 parameters");
+
+  stubAddr = StubRoutines::kyberBarrettReduce();
+  stubName = "kyberBarrettReduce";
+  if (!stubAddr) return false;
+
+  Node* coeffs          = argument(0);
+
+  coeffs = must_be_not_null(coeffs, true);
+
+  Node* coeffs_start  = array_element_address(coeffs, intcon(0), T_SHORT);
+  assert(coeffs_start, "coeffs is null");
+  Node* kyberBarrettReduce = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::kyberBarrettReduce_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  coeffs_start);
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(kyberBarrettReduce, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
+//------------------------------inline_dilithiumAlmostNtt
+bool LibraryCallKit::inline_dilithiumAlmostNtt() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseDilithiumIntrinsics, "need Dilithium intrinsics support");
+  assert(callee()->signature()->size() == 2, "dilithiumAlmostNtt has 2 parameters");
+
+  stubAddr = StubRoutines::dilithiumAlmostNtt();
+  stubName = "dilithiumAlmostNtt";
+  if (!stubAddr) return false;
+
+  Node* coeffs          = argument(0);
+  Node* ntt_zetas        = argument(1);
+
+  coeffs = must_be_not_null(coeffs, true);
+  ntt_zetas = must_be_not_null(ntt_zetas, true);
+
+  Node* coeffs_start  = array_element_address(coeffs, intcon(0), T_INT);
+  assert(coeffs_start, "coeffs is null");
+  Node* ntt_zetas_start  = array_element_address(ntt_zetas, intcon(0), T_INT);
+  assert(ntt_zetas_start, "ntt_zetas is null");
+  Node* dilithiumAlmostNtt = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::dilithiumAlmostNtt_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  coeffs_start, ntt_zetas_start);
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(dilithiumAlmostNtt, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
+//------------------------------inline_dilithiumAlmostInverseNtt
+bool LibraryCallKit::inline_dilithiumAlmostInverseNtt() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseDilithiumIntrinsics, "need Dilithium intrinsics support");
+  assert(callee()->signature()->size() == 2, "dilithiumAlmostInverseNtt has 2 parameters");
+
+  stubAddr = StubRoutines::dilithiumAlmostInverseNtt();
+  stubName = "dilithiumAlmostInverseNtt";
+  if (!stubAddr) return false;
+
+  Node* coeffs          = argument(0);
+  Node* zetas           = argument(1);
+
+  coeffs = must_be_not_null(coeffs, true);
+  zetas = must_be_not_null(zetas, true);
+
+  Node* coeffs_start  = array_element_address(coeffs, intcon(0), T_INT);
+  assert(coeffs_start, "coeffs is null");
+  Node* zetas_start  = array_element_address(zetas, intcon(0), T_INT);
+  assert(zetas_start, "inverseNtt_zetas is null");
+  Node* dilithiumAlmostInverseNtt = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::dilithiumAlmostInverseNtt_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  coeffs_start, zetas_start);
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(dilithiumAlmostInverseNtt, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
+//------------------------------inline_dilithiumNttMult
+bool LibraryCallKit::inline_dilithiumNttMult() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseDilithiumIntrinsics, "need Dilithium intrinsics support");
+  assert(callee()->signature()->size() == 3, "dilithiumNttMult has 3 parameters");
+
+  stubAddr = StubRoutines::dilithiumNttMult();
+  stubName = "dilithiumNttMult";
+  if (!stubAddr) return false;
+
+  Node* result          = argument(0);
+  Node* ntta            = argument(1);
+  Node* nttb            = argument(2);
+  Node* zetas           = argument(3);
+
+  result = must_be_not_null(result, true);
+  ntta = must_be_not_null(ntta, true);
+  nttb = must_be_not_null(nttb, true);
+  zetas = must_be_not_null(zetas, true);
+
+  Node* result_start  = array_element_address(result, intcon(0), T_INT);
+  assert(result_start, "result is null");
+  Node* ntta_start  = array_element_address(ntta, intcon(0), T_INT);
+  assert(ntta_start, "ntta is null");
+  Node* nttb_start  = array_element_address(nttb, intcon(0), T_INT);
+  assert(nttb_start, "nttb is null");
+  Node* dilithiumNttMult = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::dilithiumNttMult_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  result_start, ntta_start, nttb_start);
+
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(dilithiumNttMult, TypeFunc::Parms));
+  set_result(retvalue);
+
+  return true;
+}
+
+//------------------------------inline_dilithiumMontMulByConstant
+bool LibraryCallKit::inline_dilithiumMontMulByConstant() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseDilithiumIntrinsics, "need Dilithium intrinsics support");
+  assert(callee()->signature()->size() == 2, "dilithiumMontMulByConstant has 2 parameters");
+
+  stubAddr = StubRoutines::dilithiumMontMulByConstant();
+  stubName = "dilithiumMontMulByConstant";
+  if (!stubAddr) return false;
+
+  Node* coeffs          = argument(0);
+  Node* constant        = argument(1);
+
+  coeffs = must_be_not_null(coeffs, true);
+
+  Node* coeffs_start  = array_element_address(coeffs, intcon(0), T_INT);
+  assert(coeffs_start, "coeffs is null");
+  Node* dilithiumMontMulByConstant = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::dilithiumMontMulByConstant_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  coeffs_start, constant);
+
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(dilithiumMontMulByConstant, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
+
+//------------------------------inline_dilithiumDecomposePoly
+bool LibraryCallKit::inline_dilithiumDecomposePoly() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseDilithiumIntrinsics, "need Dilithium intrinsics support");
+  assert(callee()->signature()->size() == 5, "dilithiumDecomposePoly has 5 parameters");
+
+  stubAddr = StubRoutines::dilithiumDecomposePoly();
+  stubName = "dilithiumDecomposePoly";
+  if (!stubAddr) return false;
+
+  Node* input          = argument(0);
+  Node* lowPart        = argument(1);
+  Node* highPart       = argument(2);
+  Node* twoGamma2      = argument(3);
+  Node* multiplier     = argument(4);
+
+  input = must_be_not_null(input, true);
+  lowPart = must_be_not_null(lowPart, true);
+  highPart = must_be_not_null(highPart, true);
+
+  Node* input_start  = array_element_address(input, intcon(0), T_INT);
+  assert(input_start, "input is null");
+  Node* lowPart_start  = array_element_address(lowPart, intcon(0), T_INT);
+  assert(lowPart_start, "lowPart is null");
+  Node* highPart_start  = array_element_address(highPart, intcon(0), T_INT);
+  assert(highPart_start, "highPart is null");
+
+  Node* dilithiumDecomposePoly = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::dilithiumDecomposePoly_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  input_start, lowPart_start, highPart_start,
+                                  twoGamma2, multiplier);
+
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(dilithiumDecomposePoly, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
 bool LibraryCallKit::inline_base64_encodeBlock() {
   address stubAddr;
   const char *stubName;
@@ -7410,7 +7867,7 @@ bool LibraryCallKit::inline_digestBase_implCompress(vmIntrinsics::ID id) {
     break;
   case vmIntrinsics::_sha3_implCompress:
     assert(UseSHA3Intrinsics, "need SHA3 instruction support");
-    state = get_state_from_digest_object(digestBase_obj, T_BYTE);
+    state = get_state_from_digest_object(digestBase_obj, T_LONG);
     stubAddr = StubRoutines::sha3_implCompress();
     stubName = "sha3_implCompress";
     block_size = get_block_size_from_digest_object(digestBase_obj);
@@ -7439,6 +7896,38 @@ bool LibraryCallKit::inline_digestBase_implCompress(vmIntrinsics::ID id) {
 
   return true;
 }
+
+//------------------------------inline_double_keccak
+bool LibraryCallKit::inline_double_keccak() {
+  address stubAddr;
+  const char *stubName;
+  assert(UseSHA3Intrinsics, "need SHA3 intrinsics support");
+  assert(callee()->signature()->size() == 2, "double_keccak has 2 parameters");
+
+  stubAddr = StubRoutines::double_keccak();
+  stubName = "double_keccak";
+  if (!stubAddr) return false;
+
+  Node* status0        = argument(0);
+  Node* status1        = argument(1);
+
+  status0 = must_be_not_null(status0, true);
+  status1 = must_be_not_null(status1, true);
+
+  Node* status0_start  = array_element_address(status0, intcon(0), T_LONG);
+  assert(status0_start, "status0 is null");
+  Node* status1_start  = array_element_address(status1, intcon(0), T_LONG);
+  assert(status1_start, "status1 is null");
+  Node* double_keccak = make_runtime_call(RC_LEAF|RC_NO_FP,
+                                  OptoRuntime::double_keccak_Type(),
+                                  stubAddr, stubName, TypePtr::BOTTOM,
+                                  status0_start, status1_start);
+  // return an int
+  Node* retvalue = _gvn.transform(new ProjNode(double_keccak, TypeFunc::Parms));
+  set_result(retvalue);
+  return true;
+}
+
 
 //------------------------------inline_digestBase_implCompressMB-----------------------
 //
@@ -7510,7 +7999,7 @@ bool LibraryCallKit::inline_digestBase_implCompressMB(int predicate) {
       klass_digestBase_name = "sun/security/provider/SHA3";
       stub_name = "sha3_implCompressMB";
       stub_addr = StubRoutines::sha3_implCompressMB();
-      elem_type = T_BYTE;
+      elem_type = T_LONG;
     }
     break;
   default:

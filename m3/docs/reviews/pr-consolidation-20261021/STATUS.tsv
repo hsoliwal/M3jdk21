@@ -1,0 +1,10 @@
+operation	status	details
+selected_metadata_read	EXECUTED	10 live PR metadata reads; 7 already merged; 3 open with mergeable=false
+all_pr_inventory	INCOMPLETE	Broad title search is not an exhaustive multi-repository PR/dependency census
+remote_write_merge	BLOCKED	GitHub connector exposes read/search only; no merge or create action returned
+workspace_bridge	BLOCKED	CodexPro.list_workspaces: mcp_network_error / Connection failed; sensitive endpoint omitted
+cli_route	BLOCKED	No gh command or GH_TOKEN/GITHUB_TOKEN; direct HTTPS GitHub requests failed with ConnectionError
+header_application	NOT_RUN	No product header changed
+namespace_receiving	NOT_RUN	No source renamed or transferred
+merge	NOT_RUN	No PR merged by this execution
+product_verification	NOT_RUN	No lint/compile/test/runtime result is claimed

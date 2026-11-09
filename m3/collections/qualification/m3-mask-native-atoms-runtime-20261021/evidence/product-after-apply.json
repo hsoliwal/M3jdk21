@@ -1,0 +1,137 @@
+{
+  "m3": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310923408368,
+    "inode": 704505
+  },
+  "m3/collections": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310923408368,
+    "inode": 704504
+  },
+  "m3/collections/src": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927844508,
+    "inode": 704503
+  },
+  "m3/collections/src/main": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927340728,
+    "inode": 704502
+  },
+  "m3/collections/src/main/java": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927408478,
+    "inode": 704498
+  },
+  "m3/collections/src/main/java/com": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927408478,
+    "inode": 704497
+  },
+  "m3/collections/src/main/java/com/m3": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927408478,
+    "inode": 704496
+  },
+  "m3/collections/src/main/java/com/m3/collections": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927408478,
+    "inode": 704495
+  },
+  "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792548310927844508,
+    "inode": 704494,
+    "bytes": 18371,
+    "sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
+    "git_blob": "945375ce32080537da2b6544d59f537ee8271644"
+  },
+  "m3/collections/src/main/native": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310923408368,
+    "inode": 704501
+  },
+  "m3/collections/src/main/native/collections": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548611951257964,
+    "inode": 704500
+  },
+  "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792548611951257964,
+    "inode": 703455,
+    "bytes": 17359,
+    "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2",
+    "git_blob": "1fede488cf577ffc8c90b503c4f4e45369aba5b9"
+  },
+  "m3/collections/src/test": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927844508,
+    "inode": 704493
+  },
+  "m3/collections/src/test/java": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927844508,
+    "inode": 704492
+  },
+  "m3/collections/src/test/java/com": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927844508,
+    "inode": 704491
+  },
+  "m3/collections/src/test/java/com/m3": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548310927844508,
+    "inode": 704490
+  },
+  "m3/collections/src/test/java/com/m3/collections": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792548611951533841,
+    "inode": 704489
+  },
+  "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskRangeNativeTest.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792548310928257141,
+    "inode": 704487,
+    "bytes": 6815,
+    "sha256": "13807a357ce639fba9d0c9e7111bb65c7aac1035706556c11c3ff10be40b136c",
+    "git_blob": "3e7dfb1cb97ea0390238ccf0837558f3369d1222"
+  },
+  "m3/collections/src/test/java/jdk/m3/collections/M3MaskPositionAtomsTest.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792548611951533841,
+    "inode": 704499,
+    "bytes": 8624,
+    "sha256": "719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf",
+    "git_blob": "d7e14c6af0cc7092cda3c87d0310449324cad028"
+  },
+  "m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792548310928158482,
+    "inode": 704488,
+    "bytes": 1830,
+    "sha256": "7a286b65a23caa3c5ecf2eca579a6bb7758a142f1042fba874cfba7680d78339",
+    "git_blob": "336c37bb0db306243d360f96ea9b82a450c0255b"
+  }
+}

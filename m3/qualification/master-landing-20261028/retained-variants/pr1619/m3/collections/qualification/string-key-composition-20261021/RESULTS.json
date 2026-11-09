@@ -1,0 +1,227 @@
+{
+  "schema": "M3_STRING_KEY_RUNTIME_RESULTS_V1",
+  "status": "REQUESTED_SOURCE_AND_CONSUMER_GATES_PASS; EXPANDED_SELECTION_HAS_BASELINE_FAILURES; PROMOTION_BLOCKED",
+  "source_baseline": "18213fe70c66567fdfc6ba6f669909e7e9251663",
+  "fresh_source_build": "PASS HotSpot and complete JDK image; 44 matched autoconf inputs permit configure-helper reuse only",
+  "owning_module": {
+    "java": {
+      "tests": 494,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    "required_jni": {
+      "tests": 494,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "fresh_libraries": 10
+  },
+  "fresh_string": {
+    "records": {
+      "total": 15,
+      "passed": 14,
+      "failed": 1,
+      "unique_test_sources": 11
+    },
+    "actions": {
+      "total": 27,
+      "passed": 26,
+      "failed": 1
+    },
+    "suite_exit": 1,
+    "required_contracts": "PASS",
+    "stock_m3_disabled": "PASS both declared CompactStrings variants",
+    "facts_fixture": {
+      "compact_enabled": "FAIL pre-existing immediate-vs-atom oracle assertion",
+      "compact_disabled": "PASS 196246 checks",
+      "baseline_matrix_reproduced": true,
+      "baseline_witness_environment": "prior built VM with all18 String owners patched from exact18213fe; diagnostic only"
+    },
+    "source_policy": {
+      "full_borrow_receiver": "PASS",
+      "phase_closure": "OPEN all12 gates; promotionBLOCKED; checker exits0",
+      "source_invariants": "FAIL exact baseline reproduces same missing pool marker",
+      "precompute_bridge_receipt": "FAIL exact baseline reproduces same receipt hash drift",
+      "string_phase_successor_chain": "FAIL exact baseline reproduces same chain length drift"
+    }
+  },
+  "installed_module": {
+    "status": "PASS_FRESH_INSTALLED_STRING_KEY_COLLECTION_SDK",
+    "modules": 29,
+    "production_class_files": 512,
+    "observed_production_classes_from_jrt": 370,
+    "product_native_libraries": 10,
+    "jni_exports": 21,
+    "junit": {
+      "tests": 494,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "all_current_input_seals_unchanged": true,
+    "full_junit_vm_configuration": {
+      "String.M3_JOINED_STRINGS": false,
+      "UseCompiler": true,
+      "CompactStrings": true,
+      "UseM3StringStorage_option": "not explicitly enabled; experimental option is not exposed through the diagnostic MXBean while locked",
+      "required_collection_jni": true,
+      "rank_native_opt_in": true,
+      "signal_native_opt_in": true
+    },
+    "dedicated_tree_vm_configuration": {
+      "UseM3StringStorage": true,
+      "UseCompiler": false,
+      "vm_mode": "-Xint interpreted",
+      "CompactStrings_modes": [
+        true,
+        false
+      ]
+    },
+    "full_suite_with_composed_strings_claimed": false
+  },
+  "native_operation_evidence": {
+    "instrumented_cases_each_arm": 4148,
+    "single_survivor_input_elements": 1025,
+    "baseline_payload_elements": 1025,
+    "baseline_payload_regions": 5,
+    "candidate_payload_elements": 1,
+    "candidate_payload_regions": 1,
+    "families_checked": 4,
+    "native_abi_exports_unchanged": 9,
+    "real_jni_scalar_cases": 8192,
+    "invalid_cases": 5,
+    "asan_ubsan": "PASS with leak detection disabled",
+    "leaksanitizer": "BLOCKED by environment ptrace restriction; failure retained",
+    "limits": "Operation/transfer counts in exact fixture; elapsed throughput, allocation and OS-wide effect not measured. Dense masks retain ordinal/gather overhead.",
+    "full_mask_library_exports": 11
+  },
+  "preliminary_string_observations": {
+    "source": "PRELIMINARY_OBSERVATIONS.md",
+    "paired_forks": 3,
+    "environment": "prior M3 VM, interpreter, exact18 baseline owners with only2 candidate source changes, concurrent source-build noise",
+    "not_fresh_image_performance_evidence": true,
+    "rejected_same_candidate_arms": "Excluded; original raw run retained canonically"
+  },
+  "not_claimed": [
+    "whole jtreg/JCK pass",
+    "compiled M3 mode acceptance",
+    "all provider families",
+    "new array trie implementation",
+    "all operating systems",
+    "universal performance or allocation improvement",
+    "admission phase promotion"
+  ],
+  "canonical_task": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-string-key-collections-20261021",
+  "source_receipts": [
+    {
+      "target_file": "SOURCE_BUILD.json",
+      "source_path": "evidence/source-build-result.json",
+      "sha256": "bdf990ae1dab311ef24cab965a2c8378a0c4c197518d8467c83f4d6d11d0ec96",
+      "bytes": 5853
+    },
+    {
+      "target_file": "COLLECTIONS.json",
+      "source_path": "evidence/collections/RESULTS.json",
+      "sha256": "8ad301c3a00ad2839313e0334e4891d51dff3f9a86ae3316113a22cb8fd738f5",
+      "bytes": 89110
+    },
+    {
+      "target_file": "COLLECTION_RUNS.json",
+      "source_path": "evidence/collections/RUNS.json",
+      "sha256": "22f88e7cd5ad8e1c79e3ed4b731dbaafaf8236e9a51de62b071c2c74a55e2b13",
+      "bytes": 34076
+    },
+    {
+      "target_file": "COLLECTION_RUNS_INITIAL.json",
+      "source_path": "evidence/collections/RUNS-initial.json",
+      "sha256": "e1c274ebdcdb1a618718b4885c2b29b7b3718b31269db485f8fd012dc8a5e544",
+      "bytes": 32451
+    },
+    {
+      "target_file": "FRESH_STRING.json",
+      "source_path": "evidence/string/FRESH_IMAGE_RESULTS.json",
+      "sha256": "1b6c761233e096a5d7c19a5bfcfbaad3d9522447772b765203fd04b740c346d1",
+      "bytes": 16046
+    },
+    {
+      "target_file": "FRESH_STRING.md",
+      "source_path": "evidence/string/FRESH_IMAGE_RESULTS.md",
+      "sha256": "f8bd98c3c0304d2e32dce83bb6b6908b7400d4aaa25c7833b11f5bec006a9307",
+      "bytes": 4364
+    },
+    {
+      "target_file": "LINKED_SDK.json",
+      "source_path": "evidence/linked-sdk/QUALIFICATION.json",
+      "sha256": "3dc1cfab00924561a2dd2405094d798292d7b68393658605cbaa5dbc5289bde7",
+      "bytes": 2322
+    },
+    {
+      "target_file": "LINKED_RUNS.json",
+      "source_path": "evidence/linked-sdk/RUNS.json",
+      "sha256": "517a58639ed5c0c891cc7866014a8856762b6318a19e1ca1743796bfc2e18271",
+      "bytes": 21589
+    },
+    {
+      "target_file": "CLASS_ORIGINS.json",
+      "source_path": "evidence/linked-sdk/CLASS_ORIGINS.json",
+      "sha256": "e00cf3e33168ef73d47795199e9f1cabbbd873a3d6b71df792eebfcc475e65bc",
+      "bytes": 18532
+    },
+    {
+      "target_file": "NATIVE_ORIGINS.json",
+      "source_path": "evidence/linked-sdk/NATIVE_ORIGINS.json",
+      "sha256": "7eba5e5b0fa918851003f1d8f20c7d589f5c39b569f86cdf29a96bfc28b531ef",
+      "bytes": 2365
+    },
+    {
+      "target_file": "PRELIMINARY_OBSERVATIONS.md",
+      "source_path": "evidence/string/OBSERVATIONS.md",
+      "sha256": "e2467e5149f8b1681f191b05f3ff11f6d129dfd4e31dcfe4ae29417afc0ff71f",
+      "bytes": 6619
+    },
+    {
+      "target_file": "PRELIMINARY_MEASUREMENTS.json",
+      "source_path": "evidence/string/observation-measurements.json",
+      "sha256": "327586d4e9a2c8af48214ba0fa3dff21bfea838576304c4bedc962c87c4bd676",
+      "bytes": 23144
+    },
+    {
+      "target_file": "PRELIMINARY_SOURCE_SEALS.json",
+      "source_path": "evidence/string/observation-sources.json",
+      "sha256": "d40a1ed10f744c5b7cb2e510cdb1f3b5b2116beb984c0dcf1d64e772a745127f",
+      "bytes": 4321
+    },
+    {
+      "target_file": "STRING_ACTIONS.json",
+      "source_path": "evidence/string/fresh-image-20261021T043259Z/actions.json",
+      "sha256": "1839cdd0f5366f4fd6faf03f2bc391c182ded02d6d653fd6c96ecd6c96d5568c",
+      "bytes": 7198
+    },
+    {
+      "target_file": "STRING_IMAGE.json",
+      "source_path": "evidence/string/fresh-image-20261021T043259Z/image.json",
+      "sha256": "c9982abb06ce69badffac64518bc596545affff09d715e1d5e3aecd06cebcbc2",
+      "bytes": 1148
+    },
+    {
+      "target_file": "STRING_SOURCE_SEALS.json",
+      "source_path": "evidence/string/fresh-image-20261021T043259Z/sources.json",
+      "sha256": "08ec46e6a7837c28ef633c280435a2861b6901195b505bbbd866e7a1d084ba8f",
+      "bytes": 8706
+    },
+    {
+      "target_file": "EXECUTION_MODES.json",
+      "source_path": "evidence/linked-sdk/HANDOFF_RECEIPT.json",
+      "sha256": "70e73d8574e0140697fb163cb224f5b6dcfb0b5b159f659f4c6c218c6c3b7d74",
+      "bytes": 2476
+    },
+    {
+      "target_file": "VM_CONFIGURATION.json",
+      "source_path": "evidence/linked-sdk/VM_CONFIGURATION.json",
+      "sha256": "a11f3e5fe150fb57d3fba9062a4eaa62f035a065b1e516326d499329038e006f",
+      "bytes": 6476
+    }
+  ]
+}

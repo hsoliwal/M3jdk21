@@ -1,0 +1,11 @@
+leaf	target	hunk	donor_pre	donor_post	relocated_base	relocated_theirs	host_ours	host_result	three_way	first_line
+N	src/main/java/jdk/m3/jni/M3NativeLeaseScan.java	1	52,1	52,7	54,1	54,7	54,1	54,7	CLEAN_THEIRS	try {
+N	src/main/java/jdk/m3/jni/M3NativeLeaseScan.java	3way	-	-	-	-	-	-	ours_vs_base_hunks=0 theirs_hunks=1 conflicts=0	-
+J	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	1	101,4	101,3	103,4	103,3	103,4	103,3	CLEAN_THEIRS	// Reuse the canonical table monitor across both registered source edges.
+J	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	2	106,3	105,8	108,3	107,8	108,3	107,8	CLEAN_THEIRS	table.beginJniArrayAccess(rightId);
+J	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	3	110,1	114,0	112,1	116,0	112,1	116,0	CLEAN_THEIRS	-
+J	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	4	118,3	121,2	120,3	123,2	120,3	123,2	CLEAN_THEIRS	// Keep reverse releases and failure suppression within one owner transition.
+J	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	5	122,3	124,8	124,3	126,8	124,3	126,8	CLEAN_THEIRS	table.endJniArrayAccess(rightId);
+J	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	6	126,1	133,1	128,1	135,1	128,1	135,1	CLEAN_THEIRS	table.endJniArrayAccess(leftId);
+J	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	7	128,1	135,0	130,1	137,0	130,1	137,0	CLEAN_THEIRS	-
+J	src/main/java/jdk/m3/jni/M3JniArrayReferences.java	3way	-	-	-	-	-	-	ours_vs_base_hunks=0 theirs_hunks=7 conflicts=0	-

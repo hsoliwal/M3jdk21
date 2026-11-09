@@ -1,0 +1,29 @@
+{"stage": "compile", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---< com.synexia.verification:mre-lab-current-candidate-v4-20261005 >---
+[INFO] Building Canonical M3 recipe mastery Lab qualification 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ mre-lab-current-candidate-v4-20261005 ---
+[INFO] Copying 20 resources from ../sources/synexia-algo/src/main/resources to ../target/classes
+[INFO] Copying 1 resource from ../sources/synexia-algo/corpus to ../target/classes/com/synexia/algorithms/corpus
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ mre-lab-current-candidate-v4-20261005 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 380 source files with javac [debug release 21] to ../target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ mre-lab-current-candidate-v4-20261005 ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/lab-current-v4/harness/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ mre-lab-current-candidate-v4-20261005 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug release 21] to ../target/test-classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.546 s
+[INFO] Finished at: 2026-10-05T12:33:45+02:00
+[INFO] ------------------------------------------------------------------------
+{"artifacts": 1363, "artifactManifestSHA256": "fde00eb2386d4a356a1bbae3aca4234d4a09169b7a6ad20660f06750039c1e0c"}

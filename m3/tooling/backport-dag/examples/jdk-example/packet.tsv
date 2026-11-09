@@ -1,0 +1,4 @@
+packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+jdk-example	java-leaf	FILE	false	com.m3.rewrite.backport.ExampleJavaLeaf	
+jdk-example	text-leaf	FILE	false	com.m3.rewrite.backport.ExampleTextLeaf	
+jdk-example	package-join	PACKAGE	true	com.m3.rewrite.backport.ExamplePackageJoin	java-leaf,text-leaf

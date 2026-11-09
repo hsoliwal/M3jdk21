@@ -1,0 +1,57 @@
+{
+  "schema": "M3_AST_BUILD_RECEIVER_CONTRACT_V1",
+  "status": "PASS",
+  "dataset": "m3-native-feature-guard-20261018",
+  "targets": 1,
+  "cases": [
+    {
+      "case": "check-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "apply-exact-sdk",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "fixed-point-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "late-drift-no-partial-write",
+      "exit_code": 1,
+      "expected_refusal": "target source drift: src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c"
+    },
+    {
+      "case": "qualified-input-tamper",
+      "exit_code": 1,
+      "expected_refusal": "recipe changed after SDK qualification:"
+    },
+    {
+      "case": "sdk-result-tamper",
+      "exit_code": 1,
+      "expected_refusal": "SDK result changed after qualification: src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c"
+    },
+    {
+      "case": "symlink-target",
+      "exit_code": 1,
+      "expected_refusal": "symlink target or parent is not admitted:"
+    },
+    {
+      "case": "mixed-pre-postimages",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "failed-sdk-test-refusal",
+      "exit_code": 1,
+      "expected_refusal": "all actual SDK qualification tests must execute successfully"
+    }
+  ],
+  "actual_sdk_results": true,
+  "product_files_written": false,
+  "sdk_inputs_sha256": "036548a12891cdac1a2bd6854a4df81cdf97553ca5703fdcb486ed7ca585dd16",
+  "sdk_results_sha256": "e66bcb8112ade2a561cdcd48eda080c318ee51ad46db826490b505f519f06a49"
+}

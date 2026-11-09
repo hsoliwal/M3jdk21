@@ -1,0 +1,13 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+#
+
+# jdk.m3.collections: M3 product code moved from the m3/ Maven modules (approved layout 2026-11-08) by
+# m3/tooling/jdk-naming/move_module_area.py. The Maven modules compiled with -Xlint:all,-module -Werror; the module
+# name's "m3" component is the one lint kind disabled here.
+
+DISABLED_WARNINGS_java += module
+
+# Doclint as java.base runs it, without the "missing" group (the moved Javadoc is the donors').
+DOCLINT += -Xdoclint:all/protected,-missing

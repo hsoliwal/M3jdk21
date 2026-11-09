@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: Maven Source Plugin 3.2.1
+Specification-Title: Apache Commons CSV
+Specification-Version: 1.12
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Commons CSV
+Implementation-Version: 1.12.0
+Implementation-Vendor: The Apache Software Foundation
+

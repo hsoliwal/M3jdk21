@@ -1,0 +1,109 @@
+{
+  "schema": "M3JDK21_FILTERED_BATCH_ADMISSION_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "metadata_license": "Apache-2.0; fixtures and outputs retain per-file notices",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "533cb3651b4a82a2bf97fe132d85ab6b2ff4357d",
+  "canonical_recipe_id": "m3-filtered-batch-admission-20261024",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipes/m3-filtered-batch-admission-20261024/EVIDENCE.json",
+  "canonical_evidence_sha256": "5ba5a28d4162e1e9f93672b171749201ed5e4b1e95a19a1d6c75c61ec2775449",
+  "target_parent": "11e76d2715f2615855520142a361bc572e24f809",
+  "source_changes": [
+    {
+      "path": "m3/compatibility/collection-views/verify.sh",
+      "sha256": "8cdf03c74259deb49fb20c5e25b05422ef1e87b920cfab95c328200582f2a341"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "sha256": "e09db07fb113233e52a67960411608d8b18dc0eedfc5a7f861cdaecc7c1cc1e6"
+    },
+    {
+      "path": "test/jdk/java/util/CollectionViews/FilteredBatchAdmissionTest.java",
+      "sha256": "0c35658180392c4b6f890d37e5b3d214e63f32c11ad98f3f85b7ef4a97375c77"
+    }
+  ],
+  "qualification": {
+    "sdk_tests": 7,
+    "source_build": "PASS make images with normal warning checks",
+    "installed_image_jtreg_passed": 23,
+    "installed_image_jtreg_failed": 0,
+    "installed_image_jtreg_errors": 0,
+    "new_regression_checks_per_mode": 7233,
+    "current_parent_public_api": "UNCHANGED",
+    "actual_built_libjava_jni": "PASS NATIVE_REQUIRED and -Xcheck:jni",
+    "independent_review": "No critical/important source or recipe findings; draft only"
+  },
+  "image_seals": {
+    "release": {
+      "sha256": "8c34ad60f34191a72c71cf0ad0c04b89f91fd4f67a4b42e4f95239f93daf348b",
+      "bytes": 1224
+    },
+    "bin/java": {
+      "sha256": "99e24ac78eac8441bbcf2236afbc91e201daec93b3f3ce2a630ceaf639a82ce4",
+      "bytes": 16320
+    },
+    "lib/modules": {
+      "sha256": "3811676c1ea80e787a88fefb7097739ca895f958b4da1117a6cd21ce2a42c16c",
+      "bytes": 143547739
+    },
+    "lib/libjava.so": {
+      "sha256": "18c57c074047b2fccdeed23f5f59f745fc7d6cef15ad0e49876dc86e233c2b57",
+      "bytes": 215880
+    },
+    "lib/server/libjvm.so": {
+      "sha256": "750da6bd557891e6ae4c357278e1ffd9aead7c777d32ecc3265124d38d2435be",
+      "bytes": 26473136
+    }
+  },
+  "resource_disposition": {
+    "status": "DIAGNOSTIC_ONLY_COST_INCREASE_DISCLOSED",
+    "protocol": "three alternating fresh process pairs; first samples plus four warm samples retained",
+    "summary": "evidence/resources/summary.json",
+    "large_batch_rows": [
+      {
+        "owner": "ArrayList",
+        "size": 4096,
+        "baseline": {
+          "bytes_per_call": 32824.0,
+          "cpu_ns_per_call": 15655.365000000002
+        },
+        "candidate": {
+          "bytes_per_call": 83064.0,
+          "cpu_ns_per_call": 19973.1
+        }
+      },
+      {
+        "owner": "COW",
+        "size": 4096,
+        "baseline": {
+          "bytes_per_call": 16480.0,
+          "cpu_ns_per_call": 3882.2799999999997
+        },
+        "candidate": {
+          "bytes_per_call": 66736.0,
+          "cpu_ns_per_call": 21412.035
+        }
+      }
+    ],
+    "memory": "raw CSV includes allocation, thread CPU, wall time, RSS, post-GC whole-VM heap and NMT summary",
+    "qualification": "Most nonempty samples increase CPU/allocation; no speed admission; whole-VM heap is not a retained-object/leak proof"
+  },
+  "unchanged": {
+    "source_outside_addAll": true,
+    "public_interfaces": true,
+    "all_other_prior_product_sources": true,
+    "native_symbols": true,
+    "canonical_recipe_engines": true,
+    "prior_receipts": true
+  },
+  "remaining_gates": [
+    "remote CI not verified (prior heads 19 product / 17 canonical queued)",
+    "full JCK and collection-family suite",
+    "cross-platform/JIT/GC/concurrency/serialization/long-duration retention",
+    "repository-wide source licensing and historical provenance closure",
+    "String -> arrays -> collections ordered admission; String remains active",
+    "merge/release approval"
+  ],
+  "receiving_boundary": "Executed product source and target tests plus passive receipts only; canonical recipe/templates/catalogue/memory stay in Synexia",
+  "prior_receipts": "RECEIPT.json, NATIVE_IMAGE_RECEIPT.json, ADJACENT_IMAGE_RECEIPT.json and DENSE_ORACLE_RECEIPT.json retained as historical evidence; source version distinctions remain explicit"
+}

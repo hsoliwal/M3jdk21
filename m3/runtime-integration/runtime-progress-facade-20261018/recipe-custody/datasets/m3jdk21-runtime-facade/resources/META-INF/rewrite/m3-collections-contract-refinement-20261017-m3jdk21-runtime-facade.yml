@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017
+displayName: M3 array and collection contract refinement
+description: Replays the sealed task through the existing canonical snapshot owners.
+recipeList:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade

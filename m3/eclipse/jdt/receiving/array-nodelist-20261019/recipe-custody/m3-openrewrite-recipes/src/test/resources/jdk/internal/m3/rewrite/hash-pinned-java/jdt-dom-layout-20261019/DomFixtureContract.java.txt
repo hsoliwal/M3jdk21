@@ -1,0 +1,4 @@
+package org.eclipse.jdt.core.tests.dom;
+public class DomFixtureContract {
+    public static int witness() { return org.eclipse.jdt.core.dom.DomFixture.identity(Integer.MIN_VALUE); }
+}

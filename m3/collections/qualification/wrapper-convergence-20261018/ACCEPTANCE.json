@@ -1,0 +1,141 @@
+{
+  "schema": "M3_WRAPPER_CONVERGENCE_ACCEPTANCE_V1",
+  "target_repository": "hsoliwal/M3JDK21",
+  "tested_target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "original_discovery_base": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
+  "canonical_engine_base": "98368e107f4a205d852ef958cd48c1ee633219b1",
+  "canonical_metadata_base": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "qualified_passes": [
+    "fixture-java",
+    "fixture-text",
+    "readonly-iterator",
+    "stable-order-groups",
+    "native-row-suffix",
+    "index-contract",
+    "index-resource-probe",
+    "index-junit",
+    "native-region-proof",
+    "wrapper-contract-v2",
+    "wrapper-junit-v2",
+    "invariant-policy"
+  ],
+  "qualified_sdk_test_executions": 60,
+  "production_atoms": 3,
+  "verification_source_files": 6,
+  "receiving_document_files": 1,
+  "standalone_pr1": {
+    "production": 1,
+    "verification": 2,
+    "junit_tests": 232,
+    "suites": 78,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "evidence": "evidence/PR1_RESULTS.json"
+  },
+  "combined_java": {
+    "junit_tests": 233,
+    "suites": 79,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "evidence": "evidence/integration-f29/invariant-policy-product-test.json"
+  },
+  "combined_native": {
+    "junit_tests": 233,
+    "suites": 79,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "jvm_flags": [
+      "-Xcheck:jni"
+    ],
+    "actual_libraries": [
+      "m3_index_mask_window",
+      "m3_long_address_kernel"
+    ],
+    "evidence": "evidence/integration-f29/invariant-policy-native-test.json"
+  },
+  "public_custody_portability": {
+    "fixtures": 2,
+    "sdk_test_executions": 10,
+    "engine_source_owners": 4,
+    "exact_copied_source_files": 61,
+    "private_source_roots_used": false,
+    "evidence": "evidence/PORTABILITY_SUMMARY.json"
+  },
+  "finite_index_oracle": {
+    "java_checks": 2990400,
+    "native_checks": 3267362,
+    "mask_pairs": 65536,
+    "window_cases": 67914,
+    "common_observation_digest": "e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b",
+    "limits": "Finite ternary payload arrays length 0 through 6, all sorted slices and selected signed extremes/compositions; not a proof over all long values or all compositions."
+  },
+  "source_changes": {
+    "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "production_atoms": 3,
+    "verification_files": 6,
+    "changes": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+        "before": "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5",
+        "after": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "before": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
+        "after": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+        "before": "e57a418a183326d17cd117bcb81c2ddd49202b8195778f38a06b970c1058f16d",
+        "after": "3361cebc637103be73d7928e61b69ecc7fd6899abd4f8078019c39dfce6b3960"
+      },
+      {
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java",
+        "before": "ABSENT",
+        "after": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94"
+      },
+      {
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowResourceProbe.java",
+        "before": "ABSENT",
+        "after": "a9dfb46285a65001c135fda31e3b69fe7a3882e00412029fe2abd64b1384fb9e"
+      },
+      {
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java",
+        "before": "ABSENT",
+        "after": "2d0b1bb9a515eefd48c3de29b32dced613c4e9f05c0547d677d8c8f67c004397"
+      },
+      {
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java",
+        "before": "ABSENT",
+        "after": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335"
+      },
+      {
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java",
+        "before": "ABSENT",
+        "after": "37373c5fe47db51de219365a602737b278feb9b2ca34bc888dd0c0a1661e4e89"
+      },
+      {
+        "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+        "before": "0b56e30eeda0022644fd6dd9448ccc3689aa7f05e515d5a4087dc0ed02fb4ec2",
+        "after": "3b1de8c0e8d046841425289aa8c0b244b1497ef8033508c0d5fe59ad64b86141"
+      }
+    ]
+  },
+  "defect_correction": "Strict read-only iterator.remove before next changes IllegalStateException to UnsupportedOperationException to meet existing unconditional refusal policy. Other read schedules, callback/error identity and retry observations are preserved in the bounded witnesses.",
+  "pending_findings": [
+    "Comparator callback exception identity/trace is swallowed by upstream blanket range catches.",
+    "Filtered sorted navigation across a legal interior null sentinel can return the wrong neighbor.",
+    "Filtered-list indexed traversal repeats predicate scans; no linear-traversal improvement is claimed.",
+    "The observed backing-mutation witness does not fail fast; no new fail-fast guarantee is claimed."
+  ],
+  "global_completion": false,
+  "scope_limit": "M3 collections owning module and named SDK packets only; no complete JDK build, all-owner qualification, global family completion, or unspecified future JNI ABI compatibility claim.",
+  "resource_evidence": "evidence/integration-f29/RESOURCE_COMPARISON.json",
+  "evidence_labelling_limits": [
+    "evidence/integration-f29/RECEIVER_ORCHESTRATION_CORRECTION.json",
+    "evidence/integration-f29/FINAL_SUITE_MODE_EVIDENCE_NOTE.json"
+  ]
+}

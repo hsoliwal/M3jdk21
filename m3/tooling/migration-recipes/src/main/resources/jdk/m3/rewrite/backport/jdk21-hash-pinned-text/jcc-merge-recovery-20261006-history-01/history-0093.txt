@@ -1,0 +1,35 @@
+{
+  "schema": "m3-successor-current-master-preimage-observation/v1",
+  "repository": "hsoliwal/M3jdk21",
+  "current_master": "7652e327eccb9df658cbfaf2f6373a01c562b260",
+  "receiver_preimage_commit": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
+  "prior_pr": 139,
+  "merge_commit": "8131f535300c005afd27443d0281ede11198522f",
+  "merge_parents": [
+    "7962591d94b1a502a699436c2fa97267da71ca7b",
+    "df06cdee5a8526f573b3ad89622824d0b49e2f25"
+  ],
+  "files": [
+    {
+      "path": "m3/docs/jcc-source-handoff.md",
+      "read": "SUCCESS",
+      "equal_to_e2": true
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "read": "SUCCESS",
+      "equal_to_e2": true
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "read": "SUCCESS",
+      "equal_to_e2": true
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "read": "SUCCESS",
+      "equal_to_e2": true
+    }
+  ],
+  "scope": "Four active receiving files only; exact text observation does not qualify all current master or modify the pinned receiving proof."
+}

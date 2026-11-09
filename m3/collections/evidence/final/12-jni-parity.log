@@ -1,0 +1,4 @@
+$ ['/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/jdk-21.0.12.1+1/bin/java', '-Xcheck:jni', '-cp', '/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/classes:/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/test-classes', 'SegmentedLaneNativeProbe', '/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/libsegmented_bits.so']
+JNI parity PASS: 66 boundary ranges, 1200 changing random ranges, checked JNI
+
+EXIT=0

@@ -1,0 +1,2 @@
+schema	collection_id	packet_file	packet_sha256	evidence_file	evidence_sha256	mapping_file	mapping_sha256	partition_order	atoms	edges	joins
+m3.packet-collection/1	jep-493-runtime-image	packet.tsv	f6b9659e66ed49e6f17df1ef5d3fc0507874b2594149866b892b5cb0c23c8487	atom-evidence.tsv	76028811ae1982c342b5b650b6144f2bcb2c394af15467fa90d12bf0e1964a69	collection-map.tsv	a68b03733006a278854dedccc9cf4a9b238c43e92d501ab601ce137dfbd2b4ef	runtime-image	54	53	0

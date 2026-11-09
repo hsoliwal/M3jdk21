@@ -1,0 +1,8 @@
+old	new	status
+org.apache.commons.codec.language.bm	com.m3.lib.codec.language.bm	MOVE
+org.apache.commons.codec.language	com.m3.lib.codec.language	MOVE
+org.apache.commons.codec.binary	com.m3.lib.codec.binary	MOVE
+org.apache.commons.codec.digest	com.m3.lib.codec.digest	MOVE
+org.apache.commons.codec.cli	com.m3.lib.codec.cli	MOVE
+org.apache.commons.codec.net	com.m3.lib.codec.net	MOVE
+org.apache.commons.codec	com.m3.lib.codec	MOVE

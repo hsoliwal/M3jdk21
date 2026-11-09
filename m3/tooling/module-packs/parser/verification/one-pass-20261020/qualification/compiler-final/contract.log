@@ -1,0 +1,14 @@
+PASS all loops and console findings=11
+PASS interface constants and metadata findings=1
+PASS annotation defaults preserve current policy findings=2
+PASS enum constants findings=1
+PASS annotations cases and throw findings=1
+PASS numeric forms findings=4
+PASS nested owners and long string findings=2
+PASS record and source end line findings=3
+PASS CRLF line coordinates findings=1
+PASS Unicode escape line boundary findings=1
+PASS missing text markers findings=2
+PASS empty strings and index constants findings=0
+PASS syntactic System policy findings=1
+INDEX_LINT_PARITY fixtures=13 checks=65 PASS

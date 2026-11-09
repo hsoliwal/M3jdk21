@@ -1,0 +1,1 @@
+Preflight before review: validate search hit budget, pattern upper bound and index binding before the trusted callback. Preserve prior source roots and per-file external immutability requirement. Test zero callback count on malformed requests. Do not reimplement JNI/FILE KMP or copy LeetCode/HackerRank/GeeksforGeeks solutions.

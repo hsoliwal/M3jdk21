@@ -1,0 +1,62 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "active_receiving_phase": "STRING",
+  "phase_advanced": false,
+  "source": {
+    "actual_built_local_head": "f038b4bf696daae189412bfb4af0848728c5f8ff",
+    "actual_tree": "7d4f8b8c86c9c4261d086e596e62f1c7b5881f2d",
+    "public_equal_tree_commit": "fea80d76998e7de693c3b1db82eaa50466159475"
+  },
+  "transport": "Passive result-only receipt; reusable recipes, fixtures, and execution machinery remain exclusively in Synexia. This file excludes its own transport-qualification hash; receiving evidence binds it externally.",
+  "schema": "M3_SDK_DIAGNOSTIC_CORRECTION_RECEIPT_V1",
+  "status": "SAFE_DIAGNOSTIC_PROTOCOL_QUALIFIED_HISTORICAL_SIGNAL_ATTRIBUTION_LIMITED",
+  "supersedes_interpretation_only": "The prior regex-mixed-ascii receipt accurately retained an open SIGBUS incident. Later evidence identifies a diagnostic live-file write error; no historical payload or test result is rewritten.",
+  "historical_incident": {
+    "unsafe_live_ELF_command_omitted_distinct_output": true,
+    "owner_command_attestation_is_reconstructed_not_original_execve_log": true,
+    "synthetic_disposable_mapping_proved_transient_truncation_and_BUS_ADRERR": true,
+    "same_final_SHA_does_not_prove_continuous_immutability": true,
+    "original_eight_fault_addresses_or_siginfo_available": false,
+    "per_fault_cause_proven": false,
+    "original_flags_individual_M3_retry_checks": 106995,
+    "original_flags_individual_M3_retry_exit": 0
+  },
+  "safe_protocol": {
+    "canonical_private_helper_sha256": "31d5fcf98e754346203797fdc692d2c5e561dd56a3fa27ae2a5145f46deb7e04",
+    "test_source_sha256": "1a405cd6df9e234ad814a5262417ee54a0ed127966b7315590d7da1a498ff9c3",
+    "noncrashing_tests": 11,
+    "test_status": "PASS",
+    "source_protected_by_explicit_root_and_SHA": true,
+    "distinct_inode_readonly_snapshot_and_explicit_disposable_ELF_output": true,
+    "live_SDK_passed_to_writing_tool": false,
+    "refusals": [
+      "source drift",
+      "source or parent symlink",
+      "occupied or aliased output",
+      "output within protected image",
+      "section traversal or duplicate"
+    ]
+  },
+  "current_installed_comparison": {
+    "SDK_receipt_sha256": "130b2a2b9d8d2a91ff5c950999d58f0b013fa54f346c684d671269369491fccf",
+    "all_394_regular_files_and_metadata_before_after_equal_both_images": true,
+    "native_libraries": 40,
+    "native_export_rows": 2413,
+    "exports_equal": true,
+    "byte_identical_libraries": 39,
+    "libjvm_remaining_difference": "Sampled .rodata differs in six build-timestamp bytes. Whole libjvm binaries differ; remaining sections were not exhaustively compared in this current packet.",
+    "sampled_sections_equal": [
+      ".text",
+      ".data",
+      ".data.rel.ro",
+      ".eh_frame"
+    ]
+  },
+  "authority": "Diagnostic helper and its tests are private Synexia evidence; this receipt adds no product-native implementation, signal workaround or concurrency guarantee.",
+  "limits": [
+    "The optional copied-VM fault assay was blocked and abandoned; zero mutation cohorts ran.",
+    "Synthetic mechanism and temporal correlation do not supply missing historical fault addresses.",
+    "Selected runtime gates are finite; full concurrent stress and cross-platform/JCK completion remain unclaimed."
+  ]
+}

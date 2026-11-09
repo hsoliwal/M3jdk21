@@ -1,0 +1,67 @@
+{
+  "schema": "M3_FROZEN_RECEIVER_TRANSITIONS_V2",
+  "frozenProfileSha256": "bf2b5a10a14aeb2f6166d002dd603a519d8916db0e3413032304e16ff3cce4c5",
+  "custodySha256": {
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+  },
+  "files": [
+    {
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "before": {
+        "bytes": 2634,
+        "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+        "gitBlob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597"
+      },
+      "after": {
+        "bytes": 3377,
+        "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e",
+        "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877"
+      }
+    },
+    {
+      "path": "m3/core/test/java/lang/M3CodeTextSignalBatchTest.java",
+      "before": {
+        "bytes": 1981,
+        "gitBlob": "5e14e058a744092654cf96bdd99af2e270c381a8",
+        "sha256": "057d559fc6c3010defc51279dc90598c8bdc01bebfa59cabf7e66972a8ff2c43"
+      },
+      "after": {
+        "bytes": 1981,
+        "gitBlob": "667a372f0ca52e8daf5e5350913cb0478e51da2a",
+        "sha256": "dc5fc99592b0896b3c1df2fa9812b3f215b503e5aa28c7c9ee6e2fbfe6d2505c"
+      }
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "before": {
+        "bytes": 11009,
+        "gitBlob": "b952a245b2724140904bb666669c2880ce32cd64",
+        "sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d"
+      },
+      "after": {
+        "bytes": 12759,
+        "gitBlob": "78a83dbecc555f019f78db45030743d39b14800b",
+        "sha256": "4bf0677336e019d2ab1688fc2b8addb21947c8c868e1aaf0abb3b656af75f79e"
+      }
+    },
+    {
+      "path": "m3/core/test/M3LexiconPrecomputeTest.java",
+      "before": {
+        "bytes": 12189,
+        "gitBlob": "5b44feced8c7d38d2dc25c3b5dbd27d2d2a0ca6d",
+        "sha256": "fdc8f742adc96d93a6ab3e332c293d7dfdea97b458d9e8442694c8e11e511e7a"
+      },
+      "after": {
+        "bytes": 18847,
+        "gitBlob": "a43e64e8286455e3b82927afd222fa04869188c1",
+        "sha256": "6a39d7316b37247d9b7436999502c85905a0d86d9250f9b1d449d087a8ac4956"
+      }
+    }
+  ],
+  "meaning": "Observe only these exact applied receiver bodies; recover original frozen bytes for historical baseline qualification; never write receiver source.",
+  "authority": false,
+  "predecessorDeclarationSha256": "a7a41800bfd69e40eb59cc89cb74bb795a59971c5f5f4157edd78e326e7adb1d"
+}

@@ -1,0 +1,12 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+cmake_minimum_required(VERSION 3.20)
+project(m3fmt_varints LANGUAGES C)
+find_package(JNI REQUIRED)
+add_library(m3fmt_varints SHARED m3fmt_varints_jni.c)
+target_include_directories(m3fmt_varints PRIVATE ${JNI_INCLUDE_DIRS})
+target_compile_features(m3fmt_varints PRIVATE c_std_17)
+if(MSVC)
+  target_compile_options(m3fmt_varints PRIVATE /W4 /WX)
+else()
+  target_compile_options(m3fmt_varints PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()

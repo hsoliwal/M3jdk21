@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.search.FindImports"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 57
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 2

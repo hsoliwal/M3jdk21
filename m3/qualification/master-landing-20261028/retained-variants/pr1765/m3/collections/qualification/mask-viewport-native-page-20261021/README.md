@@ -1,0 +1,15 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# M3JDK21 original JNI viewport page — bounded contract-preserving source pass
+
+M3JDK21 IS the Java21/JDK/HotSpot/JNI SDK. Not an M3 wrapper over another JDK. This is a product-owned C17+Java21 change, not an external framework, new collection hierarchy, new SWT/GEF widget or independent payload store.
+
+Existing M3MaskViewportKernel.projectPage computes the visible rank page from caller-owned int[] logical offsets and 32-bit state arrays. Its JNI peer originally exports only the full-window project and materializes all selected offsets. This pass keeps project untouched as a public JNI entry, extracts one private checked C kernel and adds projectPage JNI with the existing parameter model. Preflight validates the entire input, including invisible rows, before any output. The native result is the requested visible bounded rank window in existing encounter/sorted order, with duplicates, high state bit, full masks, arbitrary output offset, source/state aliases and failure-atomic output retained. Native scratch O(page), no per-row JNI or Java facade and no native references beyond call lifetime.
+
+The CPU model owns canonical parent-array offsets, logical geometry, masks and generation. SWT/Nebula/GEF/RWT can consume the committed viewport and delta independently. Theme, localization, text layout, GPU raster, web transport, lifecycle, events and accessible identity remain with their respective owning implementations, not a second model. This slice introduces no GPU/native rendering performance claim and touches no SWT or GEF sources.
+
+**Reusable Maven/OpenRewrite recipe:** https://github.com/hsoliwal/com.synexia/pull/12861, source-sealed via existing M3GpuToolJoinRecipe engine. Four exact input-to-output hashes are in SOURCE_MANIFEST.tsv. Fix the recipe, rerun and reconfirm fixed-point instead of manually changing generated target source.
+
+**Evidence and gates:** independent local focused Java21 + C17 strict warning + JNI -Xcheck:jni proof PASS: 150,556 assertions (one seeded differential harness, not whole M3JDK21). Previously published 121,831 Java-only page assertions stay unchanged. The existing product test adds native bounds/alias/refusal/random parity cases and its existing GitHub workflow now compiles the native library and executes it. Maven/OpenRewrite SDK execution, full JDK/repo build, Windows/macOS/Android JNI, SWT/Nebula/GEF/RWT UI differentials, style/localization and performance proofs NOT_RUN in this environment. Keep DRAFT/HOLD until mandatory gates are confirmed.
+
+**Next file-by-file passes (not implemented here):** filtered/sorted wrapper invalidation and rank windows, logical-to-resident dirty deltas for SWT Grid/Tree, GEF EditPart patch propagation, RAP browser row-window protocol, theme/DPI/localization shaping invalidation, GPU paint-only backend; each with its own exact-source recipe, challenge-pattern catalogue and differential tests.

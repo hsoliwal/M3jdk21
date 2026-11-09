@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gates of recipe classpool-20261107 (census2 P2-099), master e2c663508594952e9c468e4c97c11e442266c20d, JDK 21.0.9, Maven 3.9.14.
+gate	command	state	evidence
+0_recipe	python relocate.py <donor type dir> <out>	PASS	8 files; every rule site found exactly once (5 internText sites); no donor-only name in code
+1_javac	javac --release 21 -Xlint:all,-module -Werror over the 8 files with m3/intern sources on -sourcepath	PASS	rc=0, 0 warnings
+2_differential	ClassPoolDiff 1 20000 and 2 20000 (donor with stub/ text-pool shapes vs relocated over M3InternSpace)	PASS	544,777 + 542,727 checks, 0 mismatches, digests equal (961bb93c1f82625, ffcb0a61bc76a9e): refusals, intern handles, find, names, kinds, modifiers, super/interfaces, members, five 64-bit hashes and SHA-256 per class, member hashes, snapshot topology SHA-256, depth, subtype lists, topological order
+3_package	mvn -B -ntp -Dmaven.repo.local=<scratch m2 with master m3-arrays/collections/precompute/intern> -f m3/ports/indexstring/pom.xml package	PASS	BUILD SUCCESS; exec mains EXISTING_SURFACE, RETAINED_VIEW, TRIE_CORE, WORD_BREAK, CLASS_POOL_SMOKE_PASS classes=3 members=4 textAtoms=12, character-flags
+4_scope	compare master...head	PASS	m3/ports/indexstring/** only

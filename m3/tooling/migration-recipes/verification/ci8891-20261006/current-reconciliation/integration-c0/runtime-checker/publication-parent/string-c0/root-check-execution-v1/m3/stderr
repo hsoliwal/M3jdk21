@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-check-authoring-v1/m3-check/check_m3_string_DRAFT_v1.py", line 925, in <module>
+    main()
+  File "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-check-authoring-v1/m3-check/check_m3_string_DRAFT_v1.py", line 912, in main
+    result = check.execute()
+             ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-check-authoring-v1/m3-check/check_m3_string_DRAFT_v1.py", line 822, in execute
+    self.load()
+  File "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-check-authoring-v1/m3-check/check_m3_string_DRAFT_v1.py", line 799, in load
+    self.portable(spec['portable'])
+  File "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-check-authoring-v1/m3-check/check_m3_string_DRAFT_v1.py", line 729, in portable
+    require(rows, 'required actual proof body absent from archive closure')
+  File "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-check-authoring-v1/m3-check/check_m3_string_DRAFT_v1.py", line 30, in require
+    raise ValueError(message)
+ValueError: required actual proof body absent from archive closure

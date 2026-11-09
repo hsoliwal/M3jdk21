@@ -1,0 +1,22 @@
+{
+  "schema": "M3_CURRENT_OWNER_FOCUSED_PROVENANCE_CHECK/1",
+  "status": "PASS",
+  "existing_validator": "scripts/legal/check_m3_provenance.py",
+  "validator_sha256": "55e8183c58e4bf3608355e650e3be18609feab70f7baa75c935716b396d24900",
+  "invocation": "Imported existing load_policy/load_ledger/validate_change over the exact additive set; bounded hydration is not a full checkout CLI/reactor gate.",
+  "new_files": 739,
+  "modified_append_owners": 2,
+  "new_provenance_rows": 739,
+  "registry_rows_added": 6,
+  "classifications": {
+    "FIRST_PARTY_NO_HEADER": 56,
+    "GENERATED": 474,
+    "FIRST_PARTY": 33,
+    "PRESERVED_HISTORY": 150,
+    "UPSTREAM_MODIFIED": 26
+  },
+  "prior_registry_prefix_exact": true,
+  "prior_ledger_prefix_exact": true,
+  "violations": [],
+  "limits": "Exact changed-file metadata/header check only; no legal opinion, license regrant, runtime or hosted admission."
+}

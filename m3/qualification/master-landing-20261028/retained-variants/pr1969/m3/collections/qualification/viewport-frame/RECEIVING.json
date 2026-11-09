@@ -1,0 +1,34 @@
+{
+  "schema": "M3JDK21_VIEWPORT_CURRENT_MASTER_REVIEW_V1",
+  "current_master_base": "75e2bfe3d934bae1535243542b2417570b2bea24",
+  "qualified_existing_receiver": "hsoliwal/M3jdk21#1884",
+  "source_origin_commit": "0f4ec5d05aabe8d43642e29dd569f29b3aa59587",
+  "canonical_m3_pr": 12855,
+  "canonical_m3_ref": "edbd43a867b17762616de6e52dcc04be7982c05b",
+  "java_owner": "m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java",
+  "native_owner": "m3/collections/src/main/c/m3maskviewport.c",
+  "verified_current_master_preimages": {
+    "native": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",
+    "java": "760f572442bbd4145a1e24daadae267bffae56df",
+    "verifier": "1f55d3d2292ebf03d2fc6cf5bda77cd455e58aa9"
+  },
+  "received_exact_git_blobs": {
+    "native": "b0d387f2612a315c6b53a50a814432c916ca61c8",
+    "java": "4f73ddb9aae36dadb8003257d3a6988536a18066",
+    "verifier": "53ae1ca30b7ce2526babd53331a61d3e3ec5eeae",
+    "frame_fixture": "20657d986071462c1511e855161dd7257432aac5",
+    "page_fixture": "3b59f72d01db754775aef7d02eb6bb21f06fb0f1"
+  },
+  "evidence": {
+    "existing_receiver_local_java_lST_sdk": "PASS_WITH_SEPARATELY_RECORDED_HARNESS",
+    "existing_receiver_installed_native": "PASS_38_COMMANDS",
+    "existing_receiver_ci_viewport": "PASS_AT_0f4ec5d",
+    "new_current_master_ci": "NOT_RUN",
+    "new_current_master_exact_canonical_sdk": "PENDING_INDEPENDENT",
+    "full_source_built_jdk_hotspot_jtreg": "NOT_RUN",
+    "toolkit_swt_nebula_gef_rwt": "NOT_RUN"
+  },
+  "scope": "EXACT_FIVE_EXISTING_CANDIDATE_FILES_AND_ONE_RECEIPT",
+  "state": "DRAFT_UNMERGED_REVIEW_ONLY",
+  "no_rebase_no_force_push": true
+}

@@ -1,0 +1,6 @@
+ * build-time default for a universal capability catalog.</p>
+ *
+ * <p>Dependencies may form cycles. Both passes treat a cycle as one dependency-closed group: the exact
+ * search admits a capability only together with all of its dependencies, and the greedy pass closes a
+ * capability's dependencies visiting each capability once.</p>
+ */

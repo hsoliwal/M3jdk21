@@ -1,0 +1,15 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "Synexia viewport core idea (rows by arithmetic, state lanes; hsoliwal/eclipse.platform.swt 136df9c62ba5) + javax.swing.tree.VariableHeightLayoutCache (behaviour oracle)",
+      "source_commit": "136df9c62ba5555bfb33e7906f2760dc171ac9db (ideas only) / M3jdk21 970a34350eb (oracle)",
+      "target": "sun.swing.tree.M3VariableHeightLayoutCache (java.desktop, internal; extends javax.swing.tree.VariableHeightLayoutCache)",
+      "public_api": "javax.swing.tree.AbstractLayoutCache / VariableHeightLayoutCache / JTree / BasicTreeUI unchanged; opt-in by -Dm3.swing.viewport=true, default off",
+      "status": "implemented; differential-verified on stock JDK 21.0.9 with --patch-module (layout cache 500 seeds x 400 steps, JTree 120 seeds x 250 steps with pixels); make/jtreg PENDING_CI",
+      "target_rule": "TARGET_OWNED_PORT; GPLv2+CPE; rights holder Hitesh Soliwal (Synexia) in m3/docs/swing-viewport/LICENSE_DECISIONS.tsv",
+      "evidence": "m3/docs/swing-viewport/DESIGN.md, bench/BENCH_20261017.tsv, UPSTREAM_DEFECTS.tsv"
+    }
+  ]
+}

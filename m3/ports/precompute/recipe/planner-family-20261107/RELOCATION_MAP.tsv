@@ -1,0 +1,88 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/planner-family-20261107/relocate.py (recipe RELOCATE_PLANNER_FAMILY v5). Leaf: the planner family held by consumer-profiles-20261107 (PR #2665): IndexPrecomputePlanner, IndexPrecomputeMultipassCompiler and their closure. Donor: hsoliwal/com.synexia develop 0616288bfa7d91eb0abb754c7a29707f10318752 (2026-11-07). Closure computed from the donor tree (same-package identifiers, imports and qualified references, comments excluded): 25 synexia-index-precompute types + com.synexia.job.IProgressMonitor; the image owners IndexPrecomputeManifestImage and LongTupleIndexImage join so that the three crate tests of the family relocate with it.
+# Lineage (develop walk): every main path was last written by 4a2e6452a7ad (2026-10-31). Variants elsewhere in the tree are older: the .superset/conflicts/pr-7973 copies and the owner-scoped-provenance-recipe preimage fixtures (Snapshot, SnapshotBuilder, Manifest, Facet, DependencyImage, MultipassCompiler, DependencyImageTest) and the precompute-startup snapshot postimage 6819480edbf5 (= that preimage); the one newer lineage is NativePrecomputeOps: crate m3-tuple-fallback-scalar-java21-20261102 pins before = the main path (sha256 a0bc481fa4ff...) and postimage 0fbc79832e98 (sha256 b716b3b6f3ed..., arity-specialized Java fallback), so its FILE row reads that postimage.
+# Decision: ABSORB into jdk.m3.precompute (m3/ports/precompute) beside the consumer profiles; IndexPrecomputeCapability and IndexPrecomputeWorkload are already relocated by consumer-profiles-20261107 (TYPE rows without FILE rows). Owner check: no M3* name of this map on master, no class FrozenLongTupleIndex|LongTupleIndex|PrecomputeHashes, no TUPLE_PAIR_LOOKUP kernel; the nearest owners are NEC rows (never edited, equivalence not decided).
+# Rows: FILE donor -> target (module root m3/ports/precompute); PATCH (v5: target -> the apply recipe that refines it); PACKAGE; TYPE (M3 naming of the module); QUALIFIED (v4: a donor reference written fully qualified in a body -> target expression); LITERAL (string tokens renamed exactly as NAMING_RULES.tsv would: SEGMENT_DOT, SNAKE, CONST); EXTERNAL; NEC and OMIT rows copy nothing (relocate.py logs them as HELD lines).
+kind	donor	target	note
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputePlanner.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputePlanner.java	budget/workload planner: up to 20 candidates searched exactly (score, then fewer bytes, then set order), larger catalogs by a deterministic dependency-aware density greedy; mandatory candidates, saturating score arithmetic
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeMultipassCompiler.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeMultipassCompiler.java	multipass build: sources -> providers -> snapshot builder -> planner recommendation -> plan -> receipt and manifest (Result + dependencyImage); system() loads providers and accelerators through ServiceLoader
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeCandidate.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeCandidate.java	planner candidate record: capability, retained/build/reuse costs, dependencies, mandatory
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeRecommendation.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeRecommendation.java	planner result record (capabilities, retainedBytes, score, exactSearch) and its toPlan conversions
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputePlan.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputePlan.java	capability selection with a retained-byte budget, native batch threshold and mmap preference; Builder, everything()
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeSource.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeSource.java	content-addressed source record (id, SHA-256 root, execution-only value)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeProvider.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeProvider.java	provider extension point (id, supports, register into a snapshot builder)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeProviders.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeProviders.java	provider registry: explicit list or ServiceLoader.load(provider interface, loader)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeFacet.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeFacet.java	one immutable capability owner of a snapshot (root hash, retained bytes, storage claims, mmap flag)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeFacetGroup.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeFacetGroup.java	owner-scoped composite facet
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeSnapshot.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeSnapshot.java	immutable generation snapshot and its Startup/Bootstrap lifecycle; the external progress interface is mapped by the QUALIFIED rows
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeSnapshotBuilder.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeSnapshotBuilder.java	budget-checked snapshot builder
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeReceipt.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeReceipt.java	deterministic build receipt
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeManifest.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeManifest.java	deterministic generation manifest (sources, facets, budgets, root hash)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeManifestImage.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeManifestImage.java	mapped little-endian file image of a manifest (magic SYPMAN01); joins for IndexPrecomputeMultipassCompilerTest
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeDependencyImage.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeDependencyImage.java	frozen source/capability dependency image for incremental invalidation (V1/V2 domains)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeKernel.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeKernel.java	kernel ids of the accelerators (TUPLE_PAIR_LOOKUP)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeAccelerator.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeAccelerator.java	accelerator interface (id, priority, minimumRows, available, supports, lookupPairs)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/IndexPrecomputeAccelerators.java	src/main/java/jdk/m3/precompute/M3IndexPrecomputeAccelerators.java	accelerator registry: explicit list or ServiceLoader, selection by kernel and rows
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/JavaIndexPrecomputeAccelerator.java	src/main/java/jdk/m3/precompute/M3JavaIndexPrecomputeAccelerator.java	Java accelerator (the semantic oracle of the pair lookup)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/JniIndexPrecomputeAccelerator.java	src/main/java/jdk/m3/precompute/M3JniIndexPrecomputeAccelerator.java	JNI accelerator over NativePrecomputeOps; minimumRows property renamed by a LITERAL row
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/FrozenLongTupleIndex.java	src/main/java/jdk/m3/precompute/M3FrozenLongTupleIndex.java	frozen open-addressing index of long tuples (arity 1..4) to int values with a SHA-256 root (domain literal renamed by a LITERAL row)
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/LongTupleIndexView.java	src/main/java/jdk/m3/precompute/M3LongTupleIndexView.java	read view of a long tuple index
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/LongTupleIndexImage.java	src/main/java/jdk/m3/precompute/M3LongTupleIndexImage.java	mapped file image of a frozen tuple index (magic SYPTUPL1); joins for FrozenLongTupleIndexPairRegressionTest
+FILE	synexia-index-precompute/src/main/java/com/synexia/precompute/PrecomputeHashes.java	src/main/java/jdk/m3/precompute/M3PrecomputeHashes.java	domain-separated SHA-256 helpers
+FILE	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-tuple-fallback-scalar-java21-20261102/NativePrecomputeOps.java.txt	src/main/java/jdk/m3/precompute/M3NativePrecomputeOps.java	optional JNI batch lookup over a frozen tuple index with the Java fallback as semantic oracle; newest lineage: the crate postimage (one arity decision per batch, the scalar getters of the index), whose before is the develop main path; library and property names renamed by LITERAL rows; without the library (default) the Java path runs
+FILE	synexia-index-precompute/src/test/java/com/synexia/precompute/IndexPrecomputeDependencyImageTest.java	src/test/java/jdk/m3/precompute/M3IndexPrecomputeDependencyImageTest.java	crate JUnit test of the dependency image (compile, replay, incremental invalidation)
+FILE	synexia-index-precompute/src/test/java/com/synexia/precompute/IndexPrecomputeMultipassCompilerTest.java	src/test/java/jdk/m3/precompute/M3IndexPrecomputeMultipassCompilerTest.java	crate JUnit test of the multipass compiler (determinism, manifest image round trip, refusals)
+FILE	synexia-index-precompute/src/test/java/com/synexia/precompute/FrozenLongTupleIndexPairRegressionTest.java	src/test/java/jdk/m3/precompute/M3FrozenLongTupleIndexPairRegressionTest.java	crate JUnit regression of pair lookups and the tuple image
+PACKAGE	com.synexia.precompute	jdk.m3.precompute	the receiver is the existing precompute lane m3/ports/precompute (classpath module, pom.xml unchanged)
+TYPE	IndexPrecomputePlanner	M3IndexPrecomputePlanner	module style M3*
+TYPE	IndexPrecomputeMultipassCompiler	M3IndexPrecomputeMultipassCompiler	module style M3*
+TYPE	IndexPrecomputeCandidate	M3IndexPrecomputeCandidate	module style M3*
+TYPE	IndexPrecomputeRecommendation	M3IndexPrecomputeRecommendation	module style M3*
+TYPE	IndexPrecomputePlan	M3IndexPrecomputePlan	module style M3*
+TYPE	IndexPrecomputeSource	M3IndexPrecomputeSource	module style M3*
+TYPE	IndexPrecomputeProvider	M3IndexPrecomputeProvider	module style M3*
+TYPE	IndexPrecomputeProviders	M3IndexPrecomputeProviders	module style M3*
+TYPE	IndexPrecomputeFacet	M3IndexPrecomputeFacet	module style M3*
+TYPE	IndexPrecomputeFacetGroup	M3IndexPrecomputeFacetGroup	module style M3*
+TYPE	IndexPrecomputeSnapshot	M3IndexPrecomputeSnapshot	module style M3*
+TYPE	IndexPrecomputeSnapshotBuilder	M3IndexPrecomputeSnapshotBuilder	module style M3*
+TYPE	IndexPrecomputeReceipt	M3IndexPrecomputeReceipt	module style M3*
+TYPE	IndexPrecomputeManifest	M3IndexPrecomputeManifest	module style M3*
+TYPE	IndexPrecomputeManifestImage	M3IndexPrecomputeManifestImage	module style M3*
+TYPE	IndexPrecomputeDependencyImage	M3IndexPrecomputeDependencyImage	module style M3*
+TYPE	IndexPrecomputeKernel	M3IndexPrecomputeKernel	module style M3*
+TYPE	IndexPrecomputeAccelerator	M3IndexPrecomputeAccelerator	module style M3*
+TYPE	IndexPrecomputeAccelerators	M3IndexPrecomputeAccelerators	module style M3*
+TYPE	JavaIndexPrecomputeAccelerator	M3JavaIndexPrecomputeAccelerator	module style M3*
+TYPE	JniIndexPrecomputeAccelerator	M3JniIndexPrecomputeAccelerator	module style M3*
+TYPE	FrozenLongTupleIndex	M3FrozenLongTupleIndex	module style M3*
+TYPE	LongTupleIndexView	M3LongTupleIndexView	module style M3*
+TYPE	LongTupleIndexImage	M3LongTupleIndexImage	module style M3*
+TYPE	PrecomputeHashes	M3PrecomputeHashes	module style M3*
+TYPE	NativePrecomputeOps	M3NativePrecomputeOps	module style M3*
+TYPE	IndexPrecomputeDependencyImageTest	M3IndexPrecomputeDependencyImageTest	module style M3*
+TYPE	IndexPrecomputeMultipassCompilerTest	M3IndexPrecomputeMultipassCompilerTest	module style M3*
+TYPE	FrozenLongTupleIndexPairRegressionTest	M3FrozenLongTupleIndexPairRegressionTest	module style M3*
+TYPE	IndexPrecomputeCapability	M3IndexPrecomputeCapability	owner already in the module (consumer-profiles-20261107, same donor blob 851b246a9f57)
+TYPE	IndexPrecomputeWorkload	M3IndexPrecomputeWorkload	owner already in the module (consumer-profiles-20261107, same donor blob 59f076375372)
+QUALIFIED	com.synexia.job.IProgressMonitor.noop()	M3Progress.none()	the no-op monitor of the snapshot startup -> the module's no-op progress (M3Progress.NONE)
+QUALIFIED	com.synexia.job.IProgressMonitor	M3Progress	the donor names its progress interface fully qualified (9 references in IndexPrecomputeSnapshot, only checkCanceled() is called); the receiver is the module's own progress contract jdk.m3.precompute.M3Progress (begin/subTask/worked/checkCanceled/done); the m3/search and indexstring leaves map the same interface to jdk.m3.collections.M3ProgressMonitor, a module this lane does not depend on
+LITERAL	synexia.precompute.disableNative	m3.precompute.disableNative	system property (NAMING_RULES SEGMENT_DOT)
+LITERAL	synexia.precompute.jni.minimumRows	m3.precompute.jni.minimumRows	system property (NAMING_RULES SEGMENT_DOT)
+LITERAL	synexia_precompute	m3_precompute	System.loadLibrary name (NAMING_RULES SNAKE); m3_precompute is the module's CMake library, which carries no tuple-lookup symbol yet: nativeAbiVersion() throws UnsatisfiedLinkError inside the guarded block and the Java path runs
+LITERAL	SYNEXIA_FROZEN_LONG_TUPLE_V1:	M3_FROZEN_LONG_TUPLE_V1:	SHA-256 domain of the frozen tuple root hash (NAMING_RULES CONST); root hashes therefore differ from the donor's: the differential compares the donor with this row applied byte for byte, and the raw donor with hash fields masked
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (junit-jupiter 5.10.2, test scope): Test, Assertions, io.TempDir
+PATCH	src/main/java/jdk/m3/precompute/M3IndexPrecomputePlanner.java	recipe/planner-cycle-fix-20261107	relocate.py v5: the target is refined by the hash-pinned apply recipe planner-cycle-fix-20261107 (the greedy closure visits each capability once; the donor recursion overflows the stack on a dependency cycle); its before pin is these relocated bytes
+OMIT	synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java	-	external progress interface, mapped by the QUALIFIED rows; read only by differential.sh to compile the donor closure
+OMIT	synexia-index-precompute/src/main/java/com/synexia/precompute/NativePrecomputeOps.java	-	develop main path d3c30b22eecb = the before of the postimage FILE row (superseded lineage)
+OMIT	synexia-index-precompute/native/src/precompute_jni.c	-	not relocated here: the newest lineage of this kernel (hash-pinned m3-primitive-pair-empty-index-20261103) joins the module's m3_precompute library through recipe planner-native-20261107 (WSL native gate); this main path is its superseded first link
+OMIT	synexia-index-precompute/native/src/tuple_lookup_jni.c	-	not relocated here: its newest lineage (hash-pinned m3-frozen-tuple-jni-alias-20261101) joins m3_precompute through recipe planner-native-20261107
+OMIT	synexia-index-precompute/src/main/resources/META-INF/services/com.synexia.precompute.IndexPrecomputeProvider	-	ServiceLoader descriptor naming six providers outside this closure (MIndexString, MIndexStructure, RuntimeMIndexString, FllDcimVocabulary, MIndexSegment, MIndexReasoning); without it ServiceLoader finds no provider, as for the donor classes alone
+OMIT	synexia-index-precompute/src/test/java/com/synexia/precompute/RuntimeMIndexMultipassProviderTest.java	-	crate test over the mindex providers (com.synexia.mindex closure), outside this leaf
+OMIT	synexia-index-precompute/src/test/java/com/synexia/precompute/IndexPrecomputeStartupTest.java	-	crate test over indexstring images (com.synexia.indexstring closure), outside this leaf
+OMIT	synexia-index-precompute/src/test/java/com/synexia/precompute/IndexPrecomputeStartupCheck.java	-	oracle of IndexPrecomputeStartupTest, same indexstring closure
+OMIT	synexia-index-precompute/src/test/java/com/synexia/precompute/IndexPrecomputeExecutionParityTest.java	-	crate test of IndexPrecomputeExecution/Benchmarks, a family outside this leaf
+NEC	module:m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/precompute/MIndexPrecomputePlan.java	-	vendor MIndexString precompute layer (typed artifact keys, frozen pass dependency graph); never edited, equivalence with the planner/compiler not decided
+NEC	module:m3/vendor/m3/m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexPrecomputePressureBudget.java	-	vendor memory-pressure admission of optional precompute; never edited, equivalence with the planner byte budget not decided
+NEC	module:m3/arrays/src/main/java/jdk/m3/arrays/M3LongCoordinateIndex.java	-	sorted long-coordinate index of m3/arrays; M3FrozenLongTupleIndex is an open-addressing tuple -> int index with a root hash; equivalence not decided
+NEC	module:m3/fs/src/main/java/jdk/m3/fs/M3PrecomputeKey.java	-	precompute cache key of m3/fs; not a planner or manifest owner

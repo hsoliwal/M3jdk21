@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-21",
+  "task": "Publish all recovered pending collection-thread artifacts",
+  "branch": "aix/collections-index-refinement-20261021",
+  "publication_mode": "review branch with historical tested inputs; no default-branch update",
+  "verified_bases": {
+    "m3": "2779aba3f98f31c324be43f731be7914e1a05935",
+    "syn": "7b849eaae565d5afccc98e0c8d46d0f02ebd9ca4"
+  },
+  "observed_current_heads": {
+    "m3": "7b1b7af779683418be9a2a5bf8ed203a0e316422",
+    "syn": "b98a90f73de8e011d0b2a78f837b0bfc43892b0a"
+  },
+  "packet_sha256": "8d07fd0624fa53f4b917ca49d1945c0c98536bf53b5087607a5c685ec5b291ee",
+  "historical_tests": "5 actual Maven/OpenRewrite tests; 20 current runtime launches and 2 legacy-native launches; see immutable packet receipts",
+  "this_turn_verification": [
+    "125 packet entries hash-verified",
+    "17 canonical and 4 product patch outputs exactly match recovered bytes",
+    "all remote pinned source hashes verified",
+    "20 new source paths confirmed absent at their pinned parents",
+    "20 saved runtime log digests verified",
+    "public API comparison files equal"
+  ],
+  "tests_rerun_this_turn": false,
+  "source_updates_since_qualification": [
+    "M3IndexMaskCompactor.java changed on current master",
+    "M3GpuToolJoinRecipe.java changed on current develop"
+  ],
+  "current_head_requalification": "PENDING; original dependency preimages retained on review branches",
+  "review_gates": [
+    "whole-module and five-provider suites",
+    "installed JDK and jtreg/JCK",
+    "cross-platform native execution",
+    "current-head source reconciliation",
+    "representative CPU/retained-heap/native-memory qualification",
+    "hosted acceptance"
+  ],
+  "historical_reports": "Saved reports and STATUS files retain their original publication-blocked observations; this receipt records resumed publication preparation. No new tests or completed all-collection/overload/merge claim.",
+  "assessments_only": [
+    "String-key collections evaluation",
+    "whole-SDK default-overload inventory findings",
+    "PR consolidation audit"
+  ],
+  "already_published_observations": [
+    "M3JDK21 #1614 remains open at 9baafbd12daa7cda2d3d81bee33365ef35d75d19",
+    "Synexia #12613 already merged",
+    "M3JDK21 #1741 capability vocabulary metadata already merged; no 42-annotation runtime claim"
+  ],
+  "disclosure": "Routine refinement of already-public primitive-array collection algorithms; original Apache-2.0 notices retained; no third-party submission code or private operational credentials added.",
+  "canonical_publication": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "aix/collections-index-refinement-20261021",
+    "documentation_commit": "139a7efe58dedccf77d185c086847026102e8a09",
+    "source_commit": "2aa8dec54c00b121f25bab7e888f5c2afa79f7a0",
+    "tree": "b43775ac00be772cce3e5cd3d32426951253c0f8"
+  }
+}

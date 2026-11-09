@@ -1,0 +1,686 @@
+/*******************************************************************************
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
+ * Public License 2.0, which are available at
+ * https://www.apache.org/licenses/LICENSE-2.0 and
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ *
+ * Contributors:
+ *     Hitesh Soliwal (Synexia) - initial API and implementation
+ *******************************************************************************/
+// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
+// Modified 2026 by Hitesh Soliwal and contributors: refuse erasing a slot a re-entrant comparator already released (census2 P2-098 B4).
+// Modified 2026 by Hitesh Soliwal and contributors: fail fast when a comparator changes the structure during a slot lookup (TREEMAP_ABA_GUARD).
+package jdk.m3.collections;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.SortedMap;
+import jdk.internal.m3.collections.bits.LazyEventBits;
+import jdk.internal.m3.collections.ProgressScope;
+
+/**
+ * AVL map with reference payload arrays and integer child/parent/free links.
+ * Search, insertion and deletion are O(log n); bounded-view size is O(n).
+ * Views share storage. Only explicit entry APIs construct Map.Entry objects.
+ * Empty owners share zero-length arrays; AVL heights use one byte per allocated slot.
+ * An optional provider resolves explicitly deferred values on value access or touch.
+ * Provider state is one short lane shared by all views; eager/key-only trees allocate none.
+ * This collection is not thread-safe. Providers must not mutate its shared mappings.
+ * A key lookup or insertion during which the comparator changes the map's structure throws
+ * ConcurrentModificationException: the located slot may have been released or reused for
+ * another key, so it is never read, written, erased or returned. Creating an iterator never
+ * fails for it: the iterator reads the revision before its first slot and throws at its first
+ * call. Steps over bounded views, whose bound probes call the comparator, throw at once.
+ */
+public final class M3TreeMap<K, V> extends OrderedSlotMap<K, V> implements NavigableMap<K, V> {
+    private final Tree<K, V> tree;
+    private final boolean hasLow;
+    private final K low;
+    private final boolean lowInclusive;
+    private final boolean hasHigh;
+    private final K high;
+    private final boolean highInclusive;
+    private final boolean descending;
+
+    /** Natural key ordering; null keys are rejected. */
+    public M3TreeMap() { this(null); }
+    /** Comparator ordering, including comparator-defined null handling. */
+    public M3TreeMap(Comparator<? super K> comparator) { this(comparator, false); }
+    M3TreeMap(Comparator<? super K> comparator, boolean keyOnly) {
+        this(new Tree<>(comparator, keyOnly, null), false, null, false, false, null, false, false);
+    }
+    /**
+     * Opt-in lazy values; admit keys with defer before requesting them.
+     * Missing get calls never admit keys. Explicit put values, including null, are loaded.
+     */
+    public M3TreeMap(Comparator<? super K> comparator,
+            LazyValueProvider<? super K, ? extends V> provider) {
+        this(new Tree<>(comparator, false, Objects.requireNonNull(provider, "provider")),
+                false, null, false, false, null, false, false);
+    }
+    private M3TreeMap(Tree<K, V> tree, boolean hasLow, K low, boolean lowInclusive,
+            boolean hasHigh, K high, boolean highInclusive, boolean descending) {
+        this.tree = tree; this.hasLow = hasLow; this.low = low; this.lowInclusive = lowInclusive;
+        this.hasHigh = hasHigh; this.high = high; this.highInclusive = highInclusive; this.descending = descending;
+    }
+    private K checked(Object key) {
+        @SuppressWarnings("unchecked") K k = (K) key;
+        tree.compare(k, k); return k;
+    }
+    private boolean within(K key) {
+        int c;
+        return !(hasLow && ((c = tree.compare(key, low)) < 0 || c == 0 && !lowInclusive)
+                || hasHigh && ((c = tree.compare(key, high)) > 0 || c == 0 && !highInclusive));
+    }
+    private boolean slotWithin(int s) { return s >= 0 && within(keyAt(s)); }
+    private boolean endpointAdmitted(K key, boolean inclusive) {
+        checked(key);
+        int c;
+        return !(hasLow && ((c = tree.compare(key, low)) < 0 || c == 0 && inclusive && !lowInclusive)
+                || hasHigh && ((c = tree.compare(key, high)) > 0 || c == 0 && inclusive && !highInclusive));
+    }
+    private void endpoint(K key, boolean inclusive) {
+        if (!endpointAdmitted(key, inclusive)) {
+            throw new IllegalArgumentException("endpoint outside view");
+        }
+    }
+    private int lowest() {
+        int s = hasLow ? tree.near(low, lowInclusive ? 1 : 2) : tree.extreme(tree.root, false);
+        return slotWithin(s) ? s : -1;
+    }
+    private int highest() {
+        int s = hasHigh ? tree.near(high, highInclusive ? -1 : -2) : tree.extreme(tree.root, true);
+        return slotWithin(s) ? s : -1;
+    }
+    //FLLDCIM: MRL - recipe TREEMAP_ABA_GUARD v1 (qualification/treemap-aba-guard-20261107, review of #2641): revision-guarded comparator lookups
+    /**
+     * A bounded endpoint or step and a neighbor search probe the found slot's key against the
+     * view bounds (comparator calls after the walk): they return the slot only if the revision
+     * read before the lookup still holds. Key walks check after every comparator call.
+     */
+    private int located(int expected, int slot) { check(expected); return slot; }
+    @Override int firstSlot() { return located(revision(), descending ? highest() : lowest()); }
+    @Override int lastSlot() { return located(revision(), descending ? lowest() : highest()); }
+    /**
+     * First slot of a new cursor: creating a cursor never fails for a re-entrant comparator.
+     * A structural change during the lookup yields -1 and the cursor, which read the revision
+     * before, reports it at its first call; the comparator's own exceptions propagate.
+     */
+    int cursorStart(boolean last) {
+        int expected = revision();
+        try {
+            return last ? lastSlot() : firstSlot();
+        } catch (java.util.ConcurrentModificationException changed) {
+            if (revision() == expected) { throw changed; }
+            return -1;
+        }
+    }
+    @Override int firstCursorSlot() { return cursorStart(false); }
+    @Override int nextSlot(int slot) {
+        int expected = revision(), s = tree.step(slot, descending);
+        return located(expected, slotWithin(s) ? s : -1);
+    }
+    /** Opposite encounter direction on this bounded/descending array-backed owner. */
+    int previousIndexedSlot(int slot) {
+        int expected = revision(), s = tree.step(slot, !descending);
+        return located(expected, slotWithin(s) ? s : -1);
+    }
+    /** Existing AVL neighbor kernel exposed to sibling filtered views as a slot only. */
+    int nearIndexedSlot(K key, int relation) { return near(key, relation); }
+    @Override int findSlot(Object key) {
+        if (tree.size == 0 && !hasLow && !hasHigh) {
+            // Empty natural lookup checks null/type without comparing a key.
+            if (tree.comparator == null) { Objects.requireNonNull((Comparable<?>) key); }
+            return -1;
+        }
+        @SuppressWarnings("unchecked") K k = (K) key;
+        return within(k) ? tree.find(k) : -1;
+    }
+    @Override int entrySlot(K key, int hint, int expected) {
+        // Attached API entries can address their slot without invoking the comparator.
+        // After structural change retain the existing key-based resolution semantics.
+        return expected == revision() && hint >= 0 && hint < tree.used
+                && tree.height[hint] != 0 && tree.keys[hint] == key ? hint : findSlot(key);
+    }
+    @Override K keyAt(int slot) { return SlotArrays.get(tree.keys, slot); }
+    @Override V valueAt(int slot) {
+        return valueAt(slot, LazyOperation.READ, null, null);
+    }
+    private V valueAt(int slot, Progress monitor) {
+        return valueAt(slot, LazyOperation.READ, null, monitor);
+    }
+    private V valueAt(
+            int slot,
+            LazyOperation operation,
+            LazyEventPolicy eventPolicy,
+            Progress monitor) {
+        return tree.lazy == null ? (tree.keyOnly ? null : SlotArrays.get(tree.values, slot))
+                : tree.lazy.read(slot, keyAt(slot), tree.values, operation, eventPolicy, monitor);
+    }
+    @Override V writeAt(int slot, V value) {
+        tree.writable(); V old = valueAt(slot);
+        if (!tree.keyOnly) { tree.values[slot] = value; }
+        if (tree.lazy != null) { tree.lazy.admitted(slot, true); }
+        return old;
+    }
+    //FLLDCIM: MRL - census2 P2-098, recipe FILTERED_VIEWS_OWNER v1 (crate m3jdk21-20261019, found by its seeded differential): no erase of a released slot
+    @Override V eraseAt(int slot) {
+        // A slot located before a re-entrant comparator cleared the map or erased the mapping is
+        // free (height 0) or beyond the used prefix; erasing it would corrupt links and free list.
+        if (slot >= tree.used || tree.height[slot] == 0) { throw new java.util.ConcurrentModificationException(); }
+        tree.writable(); V old = valueAt(slot); forgetEntryFacade(keyAt(slot)); tree.erase(slot); return old;
+    }
+    @Override int revision() { return tree.modifications; }
+    @Override public int size() {
+        if (!hasLow && !hasHigh) { return tree.size; }
+        int count = 0; for (int s = firstSlot(); s >= 0; s = nextSlot(s)) { count++; } return count;
+    }
+    @Override public boolean isEmpty() { return firstSlot() < 0; }
+    /** Single-search value lookup, independent of getOrDefault's null-result probe. */
+    @Override public V get(Object key) { return super.getOrDefault(key, null); }
+    /** Preserve JDK TreeMap's observable second search after a null result. */
+    @Override public V getOrDefault(Object key, V fallback) {
+        // M3-specific value modes retain their established single-search contract.
+        if (tree.lazy != null || tree.keyOnly) { return super.getOrDefault(key, fallback); }
+        V value = get(key);
+        if (value != null) { return value; }
+        return containsKey(key) ? null : fallback;
+    }
+    @Override public V put(K key, V value) {
+        tree.writable();
+        int expected = revision(); // before the admission and descent comparator calls
+        // Ordinary nonempty roots validate against visited keys during descent.
+        // Keep admission validation for the first key and all other value/view modes.
+        if (tree.size == 0 || hasLow || hasHigh || descending || tree.lazy != null || tree.keyOnly) {
+            checked(key);
+        }
+        if (!within(key)) { throw new IllegalArgumentException("key outside view"); }
+        int p = -1, s = tree.root, cmp = 0;
+        while (s >= 0) {
+            cmp = tree.compare(key, keyAt(s)); check(expected);
+            if (cmp == 0) { return writeAt(s, value); }
+            p = s; s = cmp < 0 ? tree.left[s] : tree.right[s];
+        }
+        check(expected); tree.insert(p, cmp, key, value); return null;
+    }
+    /**
+     * Copy compatible sorted inputs into an empty eager owner in linear time.
+     * Other views, value modes and inputs retain the ordinary per-mapping path.
+     */
+    @Override boolean putAllSorted(Map<? extends K, ? extends V> source) {
+        int expected = revision();
+        if (!hasLow && !hasHigh && !descending && tree.size == 0
+                && tree.lazy == null && !tree.keyOnly
+                && source instanceof SortedMap<?, ?> sorted
+                && Objects.equals(sorted.comparator(), tree.comparator)) {
+            int count = source.size();
+            if (count > 0) {
+                if (source instanceof M3TreeMap<?, ?> nativeSource) {
+                    // This owner already stores primitive AVL slots and key/value lanes.
+                    // Avoid materializing caller-visible Entry facades during bulk transfer.
+                    @SuppressWarnings("unchecked")
+                    M3TreeMap<? extends K, ? extends V> sameOwner =
+                            (M3TreeMap<? extends K, ? extends V>) nativeSource;
+                    tree.loadSortedSlots(count, new SortedSlotCursor<>(sameOwner), expected);
+                } else {
+                    // Third-party SortedMap may expose observable entry wrappers.
+                    tree.loadSorted(count, source.entrySet().iterator(), expected);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override public void clear() {
+        tree.writable();
+        clearEntryFacades();
+        if (!hasLow && !hasHigh) { tree.clear(); return; }
+        int s = firstSlot();
+        while (s >= 0) { int next = nextSlot(s); tree.erase(s); s = next; }
+    }
+    /**
+     * Admit a key without loading. Existing mappings are untouched and return false.
+     * Requires the provider constructor; the current view's bounds still apply.
+     */
+    public boolean defer(K key) {
+        if (tree.lazy == null) { throw new IllegalStateException("no lazy value provider"); }
+        tree.writable(); checked(key);
+        if (!within(key)) { throw new IllegalArgumentException("key outside view"); }
+        int expected = revision(), p = -1, s = tree.root, cmp = 0;
+        while (s >= 0) {
+            cmp = tree.compare(key, keyAt(s)); check(expected);
+            if (cmp == 0) { return false; }
+            p = s; s = cmp < 0 ? tree.left[s] : tree.right[s];
+        }
+        check(expected); tree.insert(p, cmp, key, null, false); return true;
+    }
+    /** State without invoking the provider; ABSENT denotes a key outside this view. */
+    public short valueFlags(Object key) {
+        int s = findSlot(key);
+        return s < 0 ? LazyValueProvider.ABSENT
+                : tree.lazy == null ? LazyValueProvider.LOADED : tree.lazy.flags(s);
+    }
+    /** True for resolved/explicit values, including null; never loads an element. */
+    public boolean isValueLoaded(Object key) { return valueFlags(key) == LazyValueProvider.LOADED; }
+    /** Synchronous pre-touch hook for a visible, hovered or selected model item. */
+    public V touch(Object key) { return touch(key, null, null); }
+    /** Value access with caller progress/cancellation; an absent key remains absent. */
+    public V touch(Object key, Progress monitor) { return touch(key, null, monitor); }
+    /** Value access with per-call event mask/granularity override. */
+    public V touch(Object key, LazyEventPolicy eventPolicy, Progress monitor) {
+        try (ProgressScope scope = ProgressScope.resolve(monitor, 1L)) {
+            Progress progress = scope.monitor();
+            LazyValueState.checkCancelled(progress);
+            int s = findSlot(key);
+            return s < 0 ? null : valueAt(s, LazyOperation.TOUCH, eventPolicy, progress);
+        }
+    }
+    /** Resolve only the current bounded/descending view using system progress when absent. */
+    public void preload() { preload(null, null); }
+    /** Resolve the current view with caller progress/cancellation. */
+    public void preload(Progress monitor) { preload(null, monitor); }
+    /**
+     * Resolve the current view in encounter order. Completed slots survive failure or
+     * cancellation; no success is credited for the failing slot. Monitor interference
+     * with map structure is detected before continuing traversal. The event policy may
+     * enable range, element, progress or state-transition observations for this call.
+     */
+    public void preload(LazyEventPolicy eventPolicy, Progress monitor) {
+        int expected = revision();
+        int work = size();
+        try (ProgressScope scope = ProgressScope.resolve(monitor, Math.max(1L, work))) {
+            Progress progress = scope.monitor();
+            LazyEventPolicy policy =
+                    tree.lazy == null ? LazyEventPolicy.NONE : tree.lazy.eventPolicy(eventPolicy);
+            Throwable failure = null;
+            if (tree.lazy != null) {
+                tree.lazy.emit(
+                        policy, LazyEventBits.RANGE_BEGIN, LazyEventGranularity.RANGE,
+                        LazyEventSink.NO_SLOT, (short) 0, (short) 0,
+                        LazyOperation.PRELOAD, progress, null);
+            }
+            try {
+                progress.beginTask("Load packed tree values", work); check(expected);
+                for (int s = firstSlot(); s >= 0; s = nextSlot(s)) {
+                    LazyValueState.checkCancelled(progress);
+                    valueAt(s, LazyOperation.PRELOAD, eventPolicy, progress);
+                    check(expected);
+                    progress.worked(1);
+                    if (tree.lazy != null) {
+                        short state = tree.lazy.flags(s);
+                        tree.lazy.emit(
+                                policy, LazyEventBits.PROGRESS, LazyEventGranularity.ELEMENT,
+                                s, state, state, LazyOperation.PRELOAD, progress, null);
+                    }
+                    check(expected);
+                }
+                LazyValueState.checkCancelled(progress);
+                progress.done();
+            } catch (RuntimeException | Error problem) {
+                failure = problem;
+                throw problem;
+            } finally {
+                if (tree.lazy != null) {
+                    tree.lazy.emit(
+                            policy, LazyEventBits.RANGE_END, LazyEventGranularity.RANGE,
+                            LazyEventSink.NO_SLOT, (short) 0, (short) 0,
+                            LazyOperation.PRELOAD, progress, failure);
+                }
+            }
+        }
+    }
+    @Override public Comparator<? super K> comparator() {
+        return descending ? Collections.reverseOrder(tree.comparator) : tree.comparator;
+    }
+    private int near(K key, int relation) {
+        checked(key); int r = descending ? -relation : relation;
+        int expected = revision(), s = tree.near(key, r);
+        if (s < 0) { return -1; }
+        if (r < 0 && hasHigh) {
+            int c = tree.compare(keyAt(s), high); check(expected);
+            if (c > 0 || c == 0 && !highInclusive) { s = highest(); }
+        } else if (r > 0 && hasLow) {
+            int c = tree.compare(keyAt(s), low); check(expected);
+            if (c < 0 || c == 0 && !lowInclusive) { s = lowest(); }
+        }
+        return located(expected, slotWithin(s) ? s : -1);
+    }
+    private K nullableKey(int s) { return s < 0 ? null : keyAt(s); }
+    private K requiredKey(int s) { if (s < 0) { throw new NoSuchElementException(); } return keyAt(s); }
+    @Override public K firstKey() { return requiredKey(firstSlot()); }
+    @Override public K lastKey() { return requiredKey(lastSlot()); }
+    @Override public Entry<K, V> firstEntry() { return snapshot(firstSlot()); }
+    @Override public Entry<K, V> lastEntry() { return snapshot(lastSlot()); }
+    @Override public Entry<K, V> lowerEntry(K k) { return snapshot(near(k, -2)); }
+    @Override public Entry<K, V> floorEntry(K k) { return snapshot(near(k, -1)); }
+    @Override public Entry<K, V> ceilingEntry(K k) { return snapshot(near(k, 1)); }
+    @Override public Entry<K, V> higherEntry(K k) { return snapshot(near(k, 2)); }
+    @Override public K lowerKey(K k) { return nullableKey(near(k, -2)); }
+    @Override public K floorKey(K k) { return nullableKey(near(k, -1)); }
+    @Override public K ceilingKey(K k) { return nullableKey(near(k, 1)); }
+    @Override public K higherKey(K k) { return nullableKey(near(k, 2)); }
+    private Entry<K, V> poll(int s) { Entry<K, V> e = snapshot(s); if (s >= 0) { tree.erase(s); } return e; }
+    @Override public Entry<K, V> pollFirstEntry() { return poll(firstSlot()); }
+    @Override public Entry<K, V> pollLastEntry() { return poll(lastSlot()); }
+    K pollKey(boolean last) {
+        int s = last ? lastSlot() : firstSlot(); K k = nullableKey(s); if (s >= 0) { tree.erase(s); } return k;
+    }
+    @Override public M3TreeMap<K, V> reversed() { return descendingMap(); }
+    @Override public M3TreeMap<K, V> descendingMap() {
+        return new M3TreeMap<>(tree, hasLow, low, lowInclusive, hasHigh, high, highInclusive, !descending);
+    }
+    @Override public NavigableSet<K> sequencedKeySet() { return navigableKeySet(); }
+    @Override public NavigableSet<K> navigableKeySet() { return new M3TreeSet<>(this, false); }
+    @Override public NavigableSet<K> keySet() { return navigableKeySet(); }
+    @Override public NavigableSet<K> descendingKeySet() { return descendingMap().navigableKeySet(); }
+    @Override public M3TreeMap<K, V> subMap(K from, boolean fromInclusive, K to, boolean toInclusive) {
+        endpoint(from, fromInclusive); endpoint(to, toInclusive);
+        int c = tree.compare(from, to);
+        if (descending ? c < 0 : c > 0) { throw new IllegalArgumentException("inverted range"); }
+        return descending ? new M3TreeMap<>(tree, true, to, toInclusive, true, from, fromInclusive, true)
+                : new M3TreeMap<>(tree, true, from, fromInclusive, true, to, toInclusive, false);
+    }
+    @Override public M3TreeMap<K, V> headMap(K to, boolean inclusive) {
+        endpoint(to, inclusive);
+        return headRange(to, inclusive);
+    }
+    private M3TreeMap<K, V> headRange(K to, boolean inclusive) {
+        return descending ? new M3TreeMap<>(tree, true, to, inclusive, hasHigh, high, highInclusive, true)
+                : new M3TreeMap<>(tree, hasLow, low, lowInclusive, true, to, inclusive, false);
+    }
+    @Override public M3TreeMap<K, V> tailMap(K from, boolean inclusive) {
+        endpoint(from, inclusive);
+        return tailRange(from, inclusive);
+    }
+    private M3TreeMap<K, V> tailRange(K from, boolean inclusive) {
+        return descending ? new M3TreeMap<>(tree, hasLow, low, lowInclusive, true, from, inclusive, true)
+                : new M3TreeMap<>(tree, true, from, inclusive, hasHigh, high, highInclusive, false);
+    }
+    /** Normal endpoint rejection is distinct from an exception thrown by user comparison. */
+    M3TreeMap<K, V> rangeOrNull(K key, boolean forward, boolean inclusive) {
+        if (!endpointAdmitted(key, inclusive)) { return null; }
+        return forward ? tailRange(key, inclusive) : headRange(key, inclusive);
+    }
+    @Override public SortedMap<K, V> subMap(K from, K to) { return subMap(from, true, to, false); }
+    @Override public SortedMap<K, V> headMap(K to) { return headMap(to, false); }
+    @Override public SortedMap<K, V> tailMap(K from) { return tailMap(from, true); }
+    /** Throws AssertionError if ownership, ordering, heights or AVL balance is damaged. */
+    public void verifyInvariants() { tree.verify(); }
+
+    /**
+     * One private cursor per bulk transfer, not an Entry object for each mapping.
+     * Its separate lookup is intentional: SlotMap.LiveEntry.getValue() locates
+     * the stored key through M3TreeMap.findSlot, invoking the user comparator.
+     * A direct valueAt(physicalSlot) shortcut would silently skip callbacks.
+     */
+    private static final class SortedSlotCursor<K, V> {
+        private final M3TreeMap<? extends K, ? extends V> source;
+        private final int expected;
+        private int current;
+        SortedSlotCursor(M3TreeMap<? extends K, ? extends V> source) {
+            this.source = source;
+            this.current = source.firstSlot();
+            this.expected = source.revision();
+        }
+        K nextKey() {
+            source.check(expected);
+            if (current < 0) { throw new NoSuchElementException(); }
+            K key = source.keyAt(current);
+            current = source.nextSlot(current);
+            source.cacheEntryFacades();
+            return key;
+        }
+        V valueFor(Object key) {
+            int resolved = source.findSlot(key);
+            return resolved < 0 ? null : source.valueAt(resolved);
+        }
+    }
+
+    private static final class Tree<K, V> {
+        private Object[] keys = SlotArrays.EMPTY_OBJECTS;
+        private Object[] values = SlotArrays.EMPTY_OBJECTS;
+        private int[] left = SlotArrays.EMPTY_INTS, right = SlotArrays.EMPTY_INTS, parent = SlotArrays.EMPTY_INTS;
+        // N(45)=2,971,215,072 exceeds the slot limit; even a transient height fits a byte.
+        private byte[] height = SlotArrays.EMPTY_BYTES;
+        private int root = -1, free = -1, used, size, modifications;
+        private final Comparator<? super K> comparator;
+        private final boolean keyOnly;
+        private final LazyValueState<K, V> lazy;
+        Tree(Comparator<? super K> comparator, boolean keyOnly,
+                LazyValueProvider<? super K, ? extends V> provider) {
+            this.comparator = comparator; this.keyOnly = keyOnly;
+            lazy = provider == null ? null : new LazyValueState<>(provider);
+        }
+        void writable() { if (lazy != null) { lazy.writable(); } }
+        @SuppressWarnings("unchecked") int compare(K a, K b) {
+            return comparator == null ? ((Comparable<? super K>) Objects.requireNonNull(a)).compareTo(b) : comparator.compare(a, b);
+        }
+        //FLLDCIM: MRL - recipe TREEMAP_ABA_GUARD v1: a key walk never reads another slot after its comparator changed the structure
+        /** Ends a key walk whose comparator call changed the structure before another slot is read. */
+        void walked(int expected) {
+            if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }
+        }
+        int find(K key) {
+            int s = root, expected = modifications;
+            while (s >= 0) {
+                int c = compare(key, SlotArrays.get(keys, s)); walked(expected);
+                if (c == 0) { return s; } s = c < 0 ? left[s] : right[s];
+            }
+            return -1;
+        }
+        int extreme(int s, boolean maximum) {
+            if (s < 0) { return -1; }
+            while ((maximum ? right[s] : left[s]) >= 0) { s = maximum ? right[s] : left[s]; } return s;
+        }
+        int step(int s, boolean back) {
+            int child = back ? left[s] : right[s];
+            if (child >= 0) { return extreme(child, back); }
+            int p = parent[s];
+            while (p >= 0 && s == (back ? left[p] : right[p])) { s = p; p = parent[p]; }
+            return p;
+        }
+        int near(K key, int relation) {
+            int s = root, candidate = -1, expected = modifications;
+            while (s >= 0) {
+                int c = compare(key, SlotArrays.get(keys, s)); walked(expected);
+                if (c == 0) { return Math.abs(relation) == 1 ? s : step(s, relation < 0); }
+                if (c < 0) { if (relation > 0) { candidate = s; } s = left[s]; }
+                else { if (relation < 0) { candidate = s; } s = right[s]; }
+            }
+            return candidate;
+        }
+        int h(int s) { return s < 0 ? 0 : height[s]; }
+        void update(int s) { height[s] = (byte) (1 + Math.max(h(left[s]), h(right[s]))); }
+        void connect(int old, int replacement) {
+            int p = parent[old];
+            if (p < 0) { root = replacement; } else if (left[p] == old) { left[p] = replacement; } else { right[p] = replacement; }
+            if (replacement >= 0) { parent[replacement] = p; }
+        }
+        int rotate(int s, boolean toRight) {
+            int pivot = toRight ? left[s] : right[s];
+            int middle = toRight ? right[pivot] : left[pivot];
+            connect(s, pivot);
+            if (toRight) { right[pivot] = s; left[s] = middle; } else { left[pivot] = s; right[s] = middle; }
+            parent[s] = pivot; if (middle >= 0) { parent[middle] = s; }
+            update(s); update(pivot); return pivot;
+        }
+        void balance(int s) { balance(s, false); }
+        void balance(int s, boolean stopWhenStable) {
+            while (s >= 0) {
+                int previousHeight = stopWhenStable ? h(s) : 0;
+                update(s); int delta = h(left[s]) - h(right[s]);
+                if (delta > 1) {
+                    if (h(left[left[s]]) < h(right[left[s]])) { rotate(left[s], false); }
+                    s = rotate(s, true);
+                } else if (delta < -1) {
+                    if (h(right[right[s]]) < h(left[right[s]])) { rotate(right[s], true); }
+                    s = rotate(s, false);
+                }
+                // Insertion cannot affect higher ancestors after this height is stable.
+                // Deletion keeps the full walk: transplanted successors are pre-updated.
+                if (stopWhenStable && h(s) == previousHeight) { return; }
+                s = parent[s];
+            }
+        }
+        void grow() {
+            int n = SlotArrays.grow(keys.length);
+            Object[] k = Arrays.copyOf(keys, n), v = keyOnly ? values : Arrays.copyOf(values, n);
+            int[] l = Arrays.copyOf(left, n), r = Arrays.copyOf(right, n), p = Arrays.copyOf(parent, n);
+            byte[] h = Arrays.copyOf(height, n);
+            if (lazy != null) { lazy.grow(n); }
+            keys = k; values = v; left = l; right = r; parent = p; height = h;
+        }
+        /**
+         * In-order balanced construction adapted from fastutil AVLTreeMap.drv
+         * readTree, Apache-2.0, Copyright (C) 2002-2026 Sebastiano Vigna,
+         * commit e70f36a137c349efa50f346818d16917a9f91986. Only the ordered
+         * subtree split is reused; payloads and links stay in M3 arrays.
+         */
+        void loadSorted(int count, Iterator<? extends Map.Entry<? extends K, ? extends V>> entries,
+                int expected) {
+            if (count > Integer.MAX_VALUE - 8) {
+                throw new OutOfMemoryError("collection capacity exhausted");
+            }
+            int capacity = 0;
+            while (capacity < count) { capacity = SlotArrays.grow(capacity); }
+            // Keep the old empty storage intact until every source entry is read.
+            Tree<K, V> built = new Tree<>(comparator, false, null);
+            built.keys = new Object[capacity]; built.values = new Object[capacity];
+            built.left = new int[capacity]; built.right = new int[capacity];
+            built.parent = new int[capacity]; built.height = new byte[capacity];
+            built.root = built.readSorted(entries, 0, count, -1);
+            if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }
+            keys = built.keys; values = built.values;
+            left = built.left; right = built.right; parent = built.parent; height = built.height;
+            root = built.root; free = -1; used = count; size = count; modifications++;
+        }
+        private int readSorted(Iterator<? extends Map.Entry<? extends K, ? extends V>> entries,
+                int first, int count, int owner) {
+            if (count == 0) { return -1; }
+            int rightCount = count / 2, leftCount = count - rightCount - 1;
+            int slot = first + leftCount;
+            parent[slot] = owner;
+            left[slot] = readSorted(entries, first, leftCount, slot);
+            Map.Entry<? extends K, ? extends V> entry = entries.next();
+            keys[slot] = entry.getKey(); values[slot] = entry.getValue();
+            right[slot] = readSorted(entries, slot + 1, rightCount, slot);
+            update(slot);
+            return slot;
+        }
+        /**
+         * Specialize the existing failure-atomic in-order bulk constructor for
+         * another M3TreeMap. A single cursor walks its primitive slot links;
+         * user comparator callbacks remain present at the value lookup boundary.
+         * The original arbitrary-Map Entry iterator remains unchanged.
+         */
+        void loadSortedSlots(int count, SortedSlotCursor<K, V> source,
+                int expected) {
+            if (count > Integer.MAX_VALUE - 8) {
+                throw new OutOfMemoryError("collection capacity exhausted");
+            }
+            int capacity = 0;
+            while (capacity < count) { capacity = SlotArrays.grow(capacity); }
+            Tree<K, V> built = new Tree<>(comparator, false, null);
+            built.keys = new Object[capacity]; built.values = new Object[capacity];
+            built.left = new int[capacity]; built.right = new int[capacity];
+            built.parent = new int[capacity]; built.height = new byte[capacity];
+            built.root = built.readSortedSlots(source, 0, count, -1);
+            if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }
+            keys = built.keys; values = built.values;
+            left = built.left; right = built.right; parent = built.parent; height = built.height;
+            root = built.root; free = -1; used = count; size = count; modifications++;
+        }
+
+        private int readSortedSlots(SortedSlotCursor<K, V> source,
+                int first, int count, int owner) {
+            if (count == 0) { return -1; }
+            int rightCount = count / 2, leftCount = count - rightCount - 1;
+            int slot = first + leftCount;
+            parent[slot] = owner;
+            left[slot] = readSortedSlots(source, first, leftCount, slot);
+            K key = source.nextKey();
+            keys[slot] = key;
+            values[slot] = source.valueFor(key);
+            right[slot] = readSortedSlots(source, slot + 1, rightCount, slot);
+            update(slot);
+            return slot;
+        }
+
+        void insert(int p, int direction, K key, V value) { insert(p, direction, key, value, true); }
+        void insert(int p, int direction, K key, V value, boolean loaded) {
+            writable();
+            if (free < 0 && used == keys.length) { grow(); }
+            int s;
+            if (free < 0) { s = used++; } else { s = free; free = left[s]; }
+            keys[s] = key; if (!keyOnly) { values[s] = value; }
+            if (lazy != null) { lazy.admitted(s, loaded); }
+            left[s] = -1; right[s] = -1; parent[s] = p; height[s] = 1;
+            if (p < 0) { root = s; } else if (direction < 0) { left[p] = s; } else { right[p] = s; }
+            size++; modifications++; balance(p, true);
+        }
+        void erase(int s) {
+            writable();
+            int rebalance;
+            if (left[s] < 0 || right[s] < 0) {
+                rebalance = parent[s]; connect(s, left[s] < 0 ? right[s] : left[s]);
+            } else {
+                int successor = extreme(right[s], false);
+                if (parent[successor] == s) { rebalance = successor; }
+                else {
+                    rebalance = parent[successor]; connect(successor, right[successor]);
+                    right[successor] = right[s]; parent[right[successor]] = successor;
+                }
+                connect(s, successor); left[successor] = left[s]; parent[left[successor]] = successor;
+                update(successor);
+            }
+            keys[s] = null; if (!keyOnly) { values[s] = null; }
+            if (lazy != null) { lazy.erased(s); }
+            height[s] = 0; parent[s] = -1; right[s] = -1; left[s] = free; free = s;
+            size--; modifications++; balance(rebalance);
+        }
+        void clear() {
+            writable();
+            if (size == 0) { return; }
+            Arrays.fill(keys, null); Arrays.fill(values, null); Arrays.fill(height, (byte) 0);
+            if (lazy != null) { lazy.cleared(); }
+            root = -1; free = -1; used = 0; size = 0; modifications++;
+        }
+        void verify() {
+            if (lazy != null && lazy.capacity() != keys.length) { throw new AssertionError("lazy lane capacity"); }
+            boolean[] seen = new boolean[used];
+            if (verify(root, -1, seen) != size) { throw new AssertionError("tree size"); }
+            int n = size;
+            for (int s = free; s >= 0; s = left[s]) {
+                if (s >= used || seen[s] || height[s] != 0 || keys[s] != null || !keyOnly && values[s] != null) { throw new AssertionError("free slot"); }
+                if (lazy != null) { lazy.verifySlot(s, false, values); }
+                seen[s] = true; n++;
+            }
+            if (n != used) { throw new AssertionError("unowned slots"); }
+            int previous = -1;
+            for (int s = extreme(root, false); s >= 0; s = step(s, false)) {
+                if (previous >= 0 && compare(SlotArrays.get(keys, previous), SlotArrays.get(keys, s)) >= 0) { throw new AssertionError("ordering"); }
+                previous = s;
+            }
+        }
+        int verify(int s, int p, boolean[] seen) {
+            if (s < 0) { return 0; }
+            if (s >= used || seen[s] || parent[s] != p) { throw new AssertionError("tree links"); }
+            if (lazy != null) { lazy.verifySlot(s, true, values); }
+            seen[s] = true; int n = 1 + verify(left[s], s, seen) + verify(right[s], s, seen);
+            if (height[s] != 1 + Math.max(h(left[s]), h(right[s])) || Math.abs(h(left[s]) - h(right[s])) > 1) { throw new AssertionError("AVL balance"); }
+            return n;
+        }
+    }
+}

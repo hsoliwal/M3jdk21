@@ -1,0 +1,17 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+JARS 1
+UNIT vendor fixture.jar
+M3_GVAS_LITERAL_HARVEST rows=2 bytes=174 sha256=058c9e319cf80e4acfe28d6768a2776be5cb69cf443395357d75f7b101b443fe
+JARS 1
+PARSE_FAIL broken.jar Broken.class java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 4
+UNIT vendor broken.jar
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1
+TRANSIENT_TYPES 18 annotated=1

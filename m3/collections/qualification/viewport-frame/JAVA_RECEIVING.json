@@ -1,0 +1,110 @@
+{
+  "schema": "M3JDK21_VIEWPORT_FRAME_PAGE_JAVA_OPENREWRITE_RECEIVING_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_head": "5b844bdbf0be47e3aef9700d33a2deff7373050f",
+  "dataset": "viewport-master-api-20261024",
+  "canonical_named_recipe": "jdk.internal.m3.ViewportMasterApi20261024",
+  "product_branch": "m3/viewport-frame-merged-20261023",
+  "product_parent": "a1398309b97997e9da758a4f34dcc20aae274952",
+  "source_outputs": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java",
+      "before_git_blob": "760f572442bbd4145a1e24daadae267bffae56df",
+      "after_git_blob": "4f73ddb9aae36dadb8003257d3a6988536a18066",
+      "before_sha256": "099802e72b48be7f489e871b77b50f70bd9e7f2b6621ea688fa5fb929f7e47bb",
+      "after_sha256": "3663d0cc849fa20c295042982c9632e58ad98e064e3c560d8a06f13c36d868a9"
+    },
+    {
+      "path": "m3/collections/viewport-proof/verify.py",
+      "before_git_blob": "c3be65553a10b6104afc1ef6f37a7d7bd83c97a3",
+      "after_git_blob": "53ae1ca30b7ce2526babd53331a61d3e3ec5eeae",
+      "before_sha256": "67d20137a557b29eace74081025cb5d08b5b46581590ce61f02bd4e1cd59cf37",
+      "after_sha256": "e3aff6c81b3cbd9a9d4e6b156ef792e9512bc851e657433f5ed63a37d50220d5"
+    }
+  ],
+  "engine_original_git_blobs": {
+    "M3HashPinnedJavaSnapshotRecipe.java": "98138cb6734ad86e3f77b8722fa5ff459842e841",
+    "M3HashPinnedTextSnapshotRecipe.java": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+    "M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+    "M3ScopeInference.java": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
+    "M3TaskRecipeTest.java": "bd3c4ead8f188aaf3055447cb729e583ed8d6a18",
+    "receive.py": "274515be1975a252783a464489505f232679455f"
+  },
+  "parser": {
+    "coordinate": "org.openrewrite:rewrite-java-21:8.17.1",
+    "jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "pom_sha256": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7",
+    "github_artifact_id": 12591237884,
+    "github_supply_run": 40159627915,
+    "authentic_Java21Parser_class": true
+  },
+  "local_sdk": {
+    "status": "PASS",
+    "mode": "offline",
+    "java": "21.0.12.1",
+    "maven": "3.9.9",
+    "openrewrite": "8.17.1",
+    "junit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "input_sources_and_engines_git_blob_verified": true,
+    "java_target_actual_type": "J.CompilationUnit",
+    "named_recipe_composite_lanes": [
+      "java",
+      "text"
+    ],
+    "sdk_results": 2,
+    "source_drift_missing_duplicate_postscan_refusals": "PASS",
+    "receiver": "original canonical receive.py Git blob d7f5c...",
+    "check_changes": 2,
+    "apply_changes": 2,
+    "replay_changes": 0,
+    "qualification_scope": "Exact canonical source engines, exact original JUnit test and receiver, original Java/text resources; isolated local Maven harness/descriptor and DATASET metadata are semantically equivalent but not byte-identical to committed canonical build metadata.",
+    "slf4j_runtime": "slf4j-api 2.0.9 retained cache used instead of uncached slf4j-simple 2.0.13; SLF4J no-provider diagnostic retained"
+  },
+  "local_installed_native": {
+    "status": "PASS",
+    "commands": 38,
+    "java_frame_wired": true,
+    "java_page_wired": true,
+    "frame_test_only": false,
+    "installed_receipt_sha256": "9bc967b8a73fe243276c9859a2de5836ad44376180561c701b53ec77263cb685",
+    "installed_native_sha256": "556a09854095c21136c388074e4d8ca2cf488aaea59cce45515ff45f7d7755d7",
+    "jni_exports": [
+      "project",
+      "projectFramePage",
+      "projectPage"
+    ],
+    "observations": {
+      "java_kernel": "PASS checks=94442 jni=false",
+      "java_page": "M3_MASK_VIEWPORT_PAGE_PASS checks=121831 existingJni=false",
+      "jni_kernel": "PASS checks=144449 jni=true",
+      "jni_page": "M3_MASK_VIEWPORT_PAGE_PASS checks=163640 existingJni=true",
+      "jni_frame": "M3_FRAME_REGION_PASS checks=35080 digest=ed73ef29740c1e87",
+      "jni_direct_page": "M3_NATIVE_PAGE_DIRECT_PASS checks=123474 digest=1102f3656342aadc"
+    },
+    "natives": [
+      "installed",
+      "relocated",
+      "ubsan"
+    ],
+    "collectors": [
+      "Serial",
+      "G1",
+      "Parallel"
+    ],
+    "interpreted": true,
+    "checked_jni": true,
+    "source_c_sha256": "c5478fed7d63b2569c0c77aada1e4015b59112944216c04ca36463aadda67034",
+    "c_source_unchanged": true
+  },
+  "hosted_workflow_status": "INDEPENDENT_VERIFICATION_PENDING",
+  "full_hotspot_source_build_jtreg": "NOT_RUN",
+  "swt_nebula_gef_rwt_gpu_ime_accessibility": "NOT_RUN",
+  "performance_claim": false,
+  "publication": "DRAFT_REVIEW_ONLY"
+}

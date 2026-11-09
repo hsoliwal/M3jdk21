@@ -1,0 +1,26 @@
+# FOLD_MEMBERS v1 map (m3/tooling/jdk-naming/fold_members.py): the Z family of jdk.m3.algorithm folds into StringAlgorithms, one owner per concept (2026-11-08).
+# StringAlgorithms.zFunction owns the Z array; ZAlgorithm.zArray computes the same array (catalogue-kernels-20261107 DECISION.tsv, NEC-equal) and is not folded: callers take zFunction(x, ProgressMonitor.none()).
+# zSearch keeps its O(m)-memory first-hit geometry (catalog shape z-search); prefixMatchLengths keeps its virtual-separator geometry; both become StringAlgorithms members.
+kind	a	b	c	d
+OWNER	m3/algorithms/src/main/java/jdk/m3/algorithm/StringAlgorithms.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/ZAlgorithm.java
+FILE	m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java
+SKIP	ZAlgorithm.zArray	owner declares zFunction(CharSequence, ProgressMonitor): same Z array, NEC-equal per catalogue-kernels-20261107/DECISION.tsv
+TAKE	ZAlgorithm.zSearch
+EDIT	ZAlgorithm.zSearch(String,String)	0614436e8a5e	        int[] patternZ = zArray(pattern);	        int[] patternZ = zFunction(pattern, ProgressMonitor.none());
+TAKE	ZPrefixMatch.SENTINEL
+TAKE	ZPrefixMatch.prefixMatchLengths
+TAKE	ZPrefixMatch.scanVirtualZ
+TAKE	ZPrefixMatch.virtualUnit
+IMPORT	java.util.Objects
+REFS	\bZAlgorithm\.zArray\(([^,()]*)\)	StringAlgorithms.zFunction(\1, ProgressMonitor.none())
+REFS	\bZAlgorithm\.zArray\(	StringAlgorithms.zFunction(
+REFS	"ZAlgorithm\.zArray	"StringAlgorithms.zFunction
+REFS	\bZAlgorithm\.zSearch	StringAlgorithms.zSearch
+REFS	\bZPrefixMatch\.prefixMatchLengths	StringAlgorithms.prefixMatchLengths
+REFS	\{@link M3ZPrefixMatch\}	{@link StringAlgorithms#prefixMatchLengths(String, String, ProgressMonitor)}
+MOVE	m3/algorithms/src/test/java/jdk/m3/algorithm/ZAlgorithmExtentInvariantTest.java	m3/algorithms/src/test/java/jdk/m3/algorithm/ZSearchExtentInvariantTest.java
+MOVE	m3/algorithms/src/test/java/jdk/m3/algorithm/ZAlgorithmFirstHitContractTest.java	m3/algorithms/src/test/java/jdk/m3/algorithm/ZSearchFirstHitContractTest.java
+MOVE	m3/algorithms/src/test/java/jdk/m3/algorithm/ZPrefixMatchTest.java	m3/algorithms/src/test/java/jdk/m3/algorithm/PrefixMatchLengthsTest.java
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/ZAlgorithm.java
+REMOVE	m3/algorithms/src/main/java/jdk/m3/algorithm/ZPrefixMatch.java

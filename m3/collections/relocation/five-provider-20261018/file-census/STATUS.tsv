@@ -1,0 +1,10 @@
+phase	result	evidence
+ROOT_TREE_FETCH	PASS	12 immutable nontruncated trees
+FILE_INVENTORY	PASS	3214 Java Git blobs and provider/source/test roles
+CANDIDATE_SEMANTIC_MATCH	UNPROVEN	Heuristic file-name classification is proposal-only
+FULL_SOURCE_READ	NOT_RUN	Source full-read required before high-risk edits
+RECIPE_MAVEN	NOT_RUN	Existing recipe and tests preserved; no Maven installed locally
+FORK_WIDE_RELOCATE	NOT_RUN	Requires licensed detached worktree and codegen/fallback proofs
+JDK_SOURCE_RENAME	FORBIDDEN	java.base original API locked
+SPRING_FORK_RENAME	BLOCKED	No writable Spring fork connected
+M3_JAVA_JNI_PRODUCT	NOT_RUN	No JDK/Synexia core implementation modified by inventory

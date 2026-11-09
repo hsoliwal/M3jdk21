@@ -1,0 +1,26 @@
+{
+  "schema": "jcc-e4-authored-resource-static-review/1",
+  "status": "ADMITTED_FOR_EXACT_FOCUSED_RECEIVING_EXECUTION",
+  "findings": [],
+  "packet_sha256": "225e5a587fb5845929390de32a0b70642d8c24e6345ee42733b2ce8b6a355012",
+  "plan_seal": "0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64",
+  "runner_sha256": "c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6",
+  "checks": {
+    "bytes": 13445,
+    "sha256": "cac8c9c803447a910593b0e8594b93cd3b1b5adf149272fae7a8744ab814a429",
+    "git_blob_sha1": "38d370d6044fc4c4aa05d7bf0292c6420783aa31"
+  },
+  "report": {
+    "bytes": 9241,
+    "sha256": "7ece8d5be7df1a1080e2b8c6c86663dad44afe874404efe3a772484ad391c0bb",
+    "git_blob_sha1": "c3bdb44fa23376733ffea31a8231606494905818"
+  },
+  "candidate_execution_by_reviewer": false,
+  "receiving_tests_executed": false,
+  "remote_actions": false,
+  "source_qualification_status": "BLOCKED",
+  "source_export_admitted": false,
+  "destination_capability_admitted": false,
+  "publication_admitted": false,
+  "next_boundary": "Review actual focused execution receipts/XML/stdout and exact input/history preservation."
+}

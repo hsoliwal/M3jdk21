@@ -1,0 +1,5 @@
+        // the donor planner's plan(...) canonical order: logical path, then atom id, then envelope root
+        targets.sort(Comparator.comparing(M3UniversalRecipeTaskInvariant.Target::logicalPath)
+                .thenComparing(M3UniversalRecipeTaskInvariant.Target::atomId)
+                .thenComparing(M3UniversalRecipeTaskInvariant.Target::beforeEnvelopeRoot));
+        return new M3UniversalRecipeTaskInvariant.Plan(sha('1'), targets);

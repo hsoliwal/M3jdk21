@@ -1,0 +1,12 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.m3.a3.CanonicalM3MergePin
+displayName: Pin A3 receiver to merged canonical Synexia owner
+description: >
+  Replaces the temporary Synexia PR-head provenance pin with the accepted canonical merge commit
+  for the portable A3 mastery export without changing A3 runtime semantics.
+recipeList:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-a3-canonical-merge-pin
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-a3-canonical-merge-pin-text

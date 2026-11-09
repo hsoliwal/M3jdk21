@@ -1,0 +1,63 @@
+{
+  "schema": "M3_RECIPE_HARNESS_REUSE_V1",
+  "canonical_recipe_owner": "hsoliwal/com.synexia",
+  "source_crate_revision": "1d890f4c332bf2b548ddd4a1ef14dd599b4238bc",
+  "files": [
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/pom.xml",
+      "source_commit": "1d890f4c332bf2b548ddd4a1ef14dd599b4238bc",
+      "source_sha256": "56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448",
+      "source_git_blob": "332b6ca5fae4dec7980d953e8a6f01f5dd8a5419",
+      "target_path": "pom.xml",
+      "target_sha256": "77768901812250c397a0ec138c83c7117a86bd14d1c77fbd75cce1324812ebb5",
+      "adaptation": "Task identity only; original algorithms, gates and refusal behavior unchanged."
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/prepare.py",
+      "source_commit": "1d890f4c332bf2b548ddd4a1ef14dd599b4238bc",
+      "source_sha256": "912cd376f0754469d6fd17325b15e44e8b69725c6af92d99aac5d9a20b4989f0",
+      "source_git_blob": "9c5917535d2930c59440d6fdaaf912a0183bbbf0",
+      "target_path": "prepare.py",
+      "target_sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014",
+      "adaptation": "Task identity only; original algorithms, gates and refusal behavior unchanged."
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py",
+      "source_commit": "1d890f4c332bf2b548ddd4a1ef14dd599b4238bc",
+      "source_sha256": "bf80f52c20549eecd0959cad9824aa078c3ca857859ee66cc3765c6bd7045246",
+      "source_git_blob": "274515be1975a252783a464489505f232679455f",
+      "target_path": "receive.py",
+      "target_sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474",
+      "adaptation": "Task identity only; original algorithms, gates and refusal behavior unchanged."
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/contract/test_prepare.py",
+      "source_commit": "1d890f4c332bf2b548ddd4a1ef14dd599b4238bc",
+      "source_sha256": "82de5be54cd1dd944c2b399f83a4f88d642ebf046a04aa935994001c0571246f",
+      "source_git_blob": "0451e9343a210631e8276fb6dad57a18ddba17ea",
+      "target_path": "contract/test_prepare.py",
+      "target_sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933",
+      "adaptation": "Task identity only; original algorithms, gates and refusal behavior unchanged."
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/contract/verify_receiver.py",
+      "source_commit": "1d890f4c332bf2b548ddd4a1ef14dd599b4238bc",
+      "source_sha256": "1b877f8af0269fbc2b8cd7ef0a98245de5f044ebc5d8dae1f91bc1d8a1acd7e2",
+      "source_git_blob": "080fd2bcf350c5f25c81af4fc518fbfc08af2f75",
+      "target_path": "contract/verify_receiver.py",
+      "target_sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c",
+      "adaptation": "Task identity only; original algorithms, gates and refusal behavior unchanged."
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
+      "source_commit": "1d890f4c332bf2b548ddd4a1ef14dd599b4238bc",
+      "source_sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f",
+      "source_git_blob": "bd3c4ead8f188aaf3055447cb729e583ed8d6a18",
+      "target_path": "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
+      "target_sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f",
+      "adaptation": "Exact reuse."
+    }
+  ],
+  "engine_changes": false,
+  "target_runtime_dependency": false
+}

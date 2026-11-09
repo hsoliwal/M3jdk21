@@ -1,0 +1,28 @@
+package @WPKG@.adapter;
+
+import javax.swing.JComponent;
+
+/**
+ * Measure atom of the viewport adapters (pattern M3P-ADAPTER-1): reads the rows of an existing widget along
+ * its scroll axis without creating item objects. The widget is a Swing component or a non-component owner
+ * (layout, focus policy, UI defaults, tray); the host is the component whose pixels a redraw damages.
+ */
+public interface M3ViewportMeasure {
+	/** Items along the axis. */
+	int count(Object widget, JComponent host);
+
+	/** Pixels per item along the axis (at least 1). */
+	int extent(Object widget, JComponent host);
+
+	/** First visible item. */
+	int first(Object widget, JComponent host);
+
+	/** Visible items from {@link #first}. */
+	int visible(Object widget, JComponent host);
+
+	/** Pixels of the viewport along the axis. */
+	int viewport(Object widget, JComponent host);
+
+	/** Writes the item's bounds on the host {x, y, width, height}; an empty box when the item is not shown. */
+	void rect(Object widget, JComponent host, int item, int[] out);
+}

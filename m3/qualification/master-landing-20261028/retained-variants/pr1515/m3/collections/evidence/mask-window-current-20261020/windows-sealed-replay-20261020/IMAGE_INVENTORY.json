@@ -1,0 +1,201 @@
+{
+  "schema": "synexia.m3jdk21.seal-replay-images.v1",
+  "status": "INITIAL_NOT_RUN",
+  "images": {
+    "current": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+      }
+    ],
+    "baseline": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 18371,
+        "sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 16830,
+        "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": null,
+        "sha256": "ABSENT"
+      }
+    ],
+    "drift": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 18371,
+        "sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 16831,
+        "sha256": "c9170a1c070d3cae4b9ff698c2bc9c6d2feb81506ffadc5dc39080f8d2f47bdb"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": null,
+        "sha256": "ABSENT"
+      }
+    ],
+    "java-before": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 18371,
+        "sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+      }
+    ],
+    "c-before": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 16830,
+        "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": 13002,
+        "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+      }
+    ],
+    "proof-absent": [
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "bytes": 17626,
+        "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "bytes": 5865,
+        "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed"
+      },
+      {
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "bytes": 9493,
+        "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+      },
+      {
+        "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "bytes": 15719,
+        "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+      },
+      {
+        "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+        "bytes": null,
+        "sha256": "ABSENT"
+      }
+    ]
+  },
+  "expected_postimage": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "bytes": 17626,
+      "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+      "bytes": 5865,
+      "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+      "bytes": 9493,
+      "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 15719,
+      "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+      "bytes": 13002,
+      "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+    }
+  ],
+  "drift_derivation": {
+    "input": "baseline",
+    "only_changed_path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "operation": "append exactly one LF byte"
+  },
+  "all_images": "Only the five exact manifest target paths may exist; absent targets must remain absent."
+}

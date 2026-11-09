@@ -1,0 +1,2 @@
+category	existing_owner	proposal	disposition	evidence	reason
+STABLE_OBJECT_MASK_COMPACTION	jdk.internal.mindex.M3CollectionMaskCompactor	Stop private removal-run count after scalar threshold is crossed	REJECT_COST_GATE	benchmark/SUMMARY.json;REJECTION_RECEIPT.json	Exact contract preserved but no repeatable overall material speedup; four control medians exceed5percent slowdown; retain current runtime owner

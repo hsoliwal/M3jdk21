@@ -1,0 +1,35 @@
+# Synexia A3 recipe receiver
+
+M3JDK21 is not the canonical owner of reusable atomize/patternize recipes.
+
+Canonical owner:
+
+- repository: `hsoliwal/com.synexia`
+- canonical merged commit: `a062661e91e769a00c2d027e1f04a7a0c8f9dc28` (Synexia PR #9599)
+- artifact: `com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT`
+- canonical export manifest Git blob: `b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5`
+- canonical convergence source Git blob: `7dc6cea0a969a1bd094e324c47a1bb724b5ff1dc`
+- portable mastery verifier Git blob: `ec03c17a24d455a0c535e18069e85dd85f1a065a`
+
+The seven duplicate `com.synexia.rewrite.atom.*` source files formerly retained by this JDK fork are
+removed. A3 loads the canonical artifact and verifies its embedded export manifest before applying
+any candidate transformation.
+
+The older `com.m3.rewrite.atom.*` package remains temporarily as a compatibility/proof-history
+lane for existing M3JDK21 receipts. It is not the A3 recipe authority and must not receive new
+reusable transformation logic. New reusable atomizer/patternizer work belongs in Synexia first.
+
+OpenJDK product source remains outside Maven. A3 may write only candidate/evidence output under
+`m3/build/**`; product acceptance remains `configure -> make -> jtreg -> runtime`.
+
+## Portable mastery evidence
+
+The slim Synexia A3 artifact also exports
+`com.synexia.rewrite.M3RecipeMasteryPortableReceipt`.
+
+This class validates the authority-free `M3_RECIPE_MASTERY_FANIN_V6` transport receipt and
+recomputes its content-addressed root. It does not copy or recreate Synexia's mastery laboratory.
+
+M3JDK21 `A3Apply` requires a verified receipt/root pair and records that root in every FILE-local
+candidate receipt. OpenJDK product source remains unchanged until the independent JDK
+`configure -> make -> jtreg -> runtime` gates and later serial promotion.

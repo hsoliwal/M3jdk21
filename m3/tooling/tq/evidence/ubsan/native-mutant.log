@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: native whole
+	at M3TQTest.check(M3TQTest.java:254)
+	at M3TQTest.equal(M3TQTest.java:243)
+	at M3TQTest.main(M3TQTest.java:49)

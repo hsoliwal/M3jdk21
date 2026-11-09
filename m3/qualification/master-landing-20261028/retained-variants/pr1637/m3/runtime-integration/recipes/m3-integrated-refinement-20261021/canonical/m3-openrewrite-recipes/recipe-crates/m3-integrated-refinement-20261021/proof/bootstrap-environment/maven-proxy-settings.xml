@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Task-local environment routing only; no repository or dependency versions changed. -->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0">
+  <proxies>
+    <proxy>
+      <id>task-environment-proxy</id><active>true</active><protocol>http</protocol>
+      <host>browser-proxy</host><port>8889</port><nonProxyHosts>localhost|127.0.0.1</nonProxyHosts>
+    </proxy>
+  </proxies>
+</settings>

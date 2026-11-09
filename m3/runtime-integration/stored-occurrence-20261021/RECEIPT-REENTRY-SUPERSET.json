@@ -1,0 +1,50 @@
+{
+  "schema": "M3JDK21_COLLECTIONVIEWS_ADDITIVE_COMPOSITE_20261021_V1",
+  "product": "hsoliwal/M3JDK21",
+  "targetOwner": "src/java.base/share/classes/java/util/CollectionViews.java",
+  "baseMasterCommit": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+  "baseMasterGitBlob": "2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66",
+  "baseMasterSha256": "a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d",
+  "donorLayers": [
+    {
+      "order": 1,
+      "productPR": "hsoliwal/M3JDK21#1773",
+      "synexiaRecipePR": "hsoliwal/com.synexia#12866",
+      "canonicalStoredOccurrencePostGitBlob": "fffd5e0e96363aa0fd1e0e7646dfc3f0d7ca7d68",
+      "status": "source-sealed first-party candidate"
+    },
+    {
+      "order": 2,
+      "productPR": "hsoliwal/M3JDK21#1770",
+      "synexiaRecipePR": "hsoliwal/com.synexia#12865",
+      "reentrantOwnerGitBlob": "fb3f4bb7ccee0ba0d7c71e2c3eed6211767ba151",
+      "status": "separate cursor atom"
+    }
+  ],
+  "combinedReceiver": {
+    "gitBlob": "b3d21d61844f070df99b0289e514eff350a3f6e7",
+    "sha256": "c3da7a7f33b7a90058a8b033b6df65df6b56409495567253e836b50dd985bc40",
+    "changedAtoms": [
+      "FilteredCollection.contains",
+      "FilteredCollection.remove",
+      "SelectionSpliterator.tryAdvance"
+    ],
+    "publicAbiChanged": false,
+    "newNativeSymbols": 0
+  },
+  "sourceCustody": "historical original stored-occurrence receipt retained in RECEIPT.json; original source recovered by pinned git show without duplicate body",
+  "verification": {
+    "sourceHashCheck": "SCRIPT_ADDED_NOT_EXECUTED",
+    "exactJava21PatchCompile": "NOT_RUN",
+    "storedRepresentativeOracle": "NOT_RUN_ON_COMBINED_POSTIMAGE",
+    "reentrantSpliteratorOracle": "NOT_RUN_ON_COMBINED_POSTIMAGE",
+    "fullM3JDKImage": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "JNI": "NO_CHANGE_NOT_REQUALIFIED",
+    "licenseReview": "PENDING"
+  },
+  "notes": [
+    "A Git ancestor/merge-parent relationship alone is not evidence that code was integrated into the canonical tree.",
+    "This is a candidate composite receiver; the canonical independent recipes require a serial successor/fixed-point proof against the combined preimage before product promotion."
+  ]
+}

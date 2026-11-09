@@ -1,0 +1,43 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.m3.verification:jcc-merge-recovery >---------------
+[INFO] Building jcc-merge-recovery 20261006
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ jcc-merge-recovery ---
+[INFO] Copying 463 resources from ../../../src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ jcc-merge-recovery ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ jcc-merge-recovery ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/input-workspace-v04/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ jcc-merge-recovery ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ jcc-merge-recovery ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.rewrite.backport.JccMergeRecoveryTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.690 s -- in com.m3.rewrite.backport.JccMergeRecoveryTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ jcc-merge-recovery ---
+[INFO] Building jar: /workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/input-workspace-v04/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/target/jcc-merge-recovery-20261006.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.309 s
+[INFO] Finished at: 2026-10-06T13:31:13+09:00
+[INFO] ------------------------------------------------------------------------

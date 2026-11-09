@@ -1,0 +1,3 @@
+synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTHierarchy.java	0644
+synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTHierarchyEncodingTest.java	0644
+synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTHierarchyTest.java	0644

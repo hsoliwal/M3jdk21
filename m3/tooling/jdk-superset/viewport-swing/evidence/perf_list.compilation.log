@@ -1,0 +1,237 @@
+    340  488 %     3       sun.swing.list.M3PrefixRowOffsets::<init> @ 25 (110 bytes)
+    340  489       3       sun.swing.list.M3PrefixRowOffsets::<init> (110 bytes)
+    341  490 %     4       sun.swing.list.M3PrefixRowOffsets::<init> @ 25 (110 bytes)
+    345  488 %     3       sun.swing.list.M3PrefixRowOffsets::<init> @ 25 (110 bytes)   made not entrant
+    500  777       3       sun.swing.SwingUtilities2::isScaleChanged (74 bytes)
+    509  872       3       sun.swing.list.M3ListMeasure::isStableValue (73 bytes)
+    511  903       4       sun.swing.SwingUtilities2::isScaleChanged (74 bytes)
+    512  847   !   3       sun.swing.DefaultLookup::get (137 bytes)
+    513  896       3       sun.swing.SwingUtilities2::stringWidth (9 bytes)
+    513  777       3       sun.swing.SwingUtilities2::isScaleChanged (74 bytes)   made not entrant
+    516  860       3       sun.swing.DefaultLookup::getBorder (8 bytes)
+    516  861       3       sun.swing.DefaultLookup::getBorder (28 bytes)
+    517  865       3       sun.swing.list.M3ListMeasure::size (67 bytes)
+    520  887       3       sun.swing.SwingUtilities2::getFontMetrics (19 bytes)
+    521  888       3       sun.swing.SwingUtilities2::getFRCProperty (38 bytes)
+    521  889       3       sun.swing.SwingUtilities2::getFRCFromCache (128 bytes)
+    522  897   !   3       sun.swing.SwingUtilities2::stringWidth (110 bytes)
+    524  898       3       sun.swing.SwingUtilities2::getFontStringWidth (30 bytes)
+    525  899       3       sun.swing.SwingUtilities2::getLeftSideBearing (24 bytes)
+    525  900   !   3       sun.swing.SwingUtilities2::getLeftSideBearing (178 bytes)
+    572  943   !   4       sun.swing.DefaultLookup::get (137 bytes)
+    584  951       4       sun.swing.DefaultLookup::getBorder (28 bytes)
+    586  847   !   3       sun.swing.DefaultLookup::get (137 bytes)   made not entrant
+    588  953       4       sun.swing.list.M3ListMeasure::size (67 bytes)
+    600  861       3       sun.swing.DefaultLookup::getBorder (28 bytes)   made not entrant
+    630  865       3       sun.swing.list.M3ListMeasure::size (67 bytes)   made not entrant
+   1784 1029       3       sun.swing.list.M3PrefixRowOffsets::startOf (7 bytes)
+   1785 1032       4       sun.swing.list.M3PrefixRowOffsets::startOf (7 bytes)
+   1785 1029       3       sun.swing.list.M3PrefixRowOffsets::startOf (7 bytes)   made not entrant
+   1788 1036 %     3       M3ListAtomsPerf::b0 @ 4 (43 bytes)
+   1789 1037       3       M3ListAtomsPerf::b0 (43 bytes)
+   1789 1038 %     4       M3ListAtomsPerf::b0 @ 4 (43 bytes)
+   1791 1036 %     3       M3ListAtomsPerf::b0 @ 4 (43 bytes)   made not entrant
+   1792 1038 %     4       M3ListAtomsPerf::b0 @ 4 (43 bytes)   made not entrant
+   1836 1047       3       sun.swing.list.M3PrefixRowOffsets::firstEndingAfter (68 bytes)
+   1840 1050       4       sun.swing.list.M3PrefixRowOffsets::firstEndingAfter (68 bytes)
+   1840 1047       3       sun.swing.list.M3PrefixRowOffsets::firstEndingAfter (68 bytes)   made not entrant
+   1848 1053 %     3       M3ListAtomsPerf::b2 @ 4 (43 bytes)
+   1849 1054       3       M3ListAtomsPerf::b2 (43 bytes)
+   1853 1055 %     4       M3ListAtomsPerf::b2 @ 4 (43 bytes)
+   1856 1053 %     3       M3ListAtomsPerf::b2 @ 4 (43 bytes)   made not entrant
+   1947 1055 %     4       M3ListAtomsPerf::b2 @ 4 (43 bytes)   made not entrant
+   1948 1059       3       sun.swing.list.M3PrefixRowOffsets::rowCount (8 bytes)
+   1949 1061       4       sun.swing.list.M3PrefixRowOffsets::rowCount (8 bytes)
+   1949 1059       3       sun.swing.list.M3PrefixRowOffsets::rowCount (8 bytes)   made not entrant
+   1951 1064 %     3       M3ListAtomsPerf::b3 @ 4 (37 bytes)
+   1951 1065       3       M3ListAtomsPerf::b3 (37 bytes)
+   1951 1066 %     4       M3ListAtomsPerf::b3 @ 4 (37 bytes)
+   1953 1064 %     3       M3ListAtomsPerf::b3 @ 4 (37 bytes)   made not entrant
+   1953 1066 %     4       M3ListAtomsPerf::b3 @ 4 (37 bytes)   made not entrant
+   1954 1075       1       sun.swing.list.M3PrefixRowOffsets::monotone (5 bytes)
+   1956 1078 %     3       M3ListAtomsPerf::b4 @ 4 (44 bytes)
+   1956 1079       3       M3ListAtomsPerf::b4 (44 bytes)
+   1957 1080 %     4       M3ListAtomsPerf::b4 @ 4 (44 bytes)
+   1958 1078 %     3       M3ListAtomsPerf::b4 @ 4 (44 bytes)   made not entrant
+   1958 1080 %     4       M3ListAtomsPerf::b4 @ 4 (44 bytes)   made not entrant
+   1958 1081       4       sun.swing.list.M3PrefixRowOffsets::<init> (110 bytes)
+   1958  490 %     4       sun.swing.list.M3PrefixRowOffsets::<init> @ 25 (110 bytes)   made not entrant
+   1962  489       3       sun.swing.list.M3PrefixRowOffsets::<init> (110 bytes)   made not entrant
+   1962 1082 %     4       sun.swing.list.M3PrefixRowOffsets::<init> @ 25 (110 bytes)
+   1986 1094       3       sun.swing.list.M3ListRows::startOf (11 bytes)
+   1989 1097 %     3       M3ListAtomsPerf::b6 @ 4 (43 bytes)
+   1989 1098       3       M3ListAtomsPerf::b6 (43 bytes)
+   1989 1099 %     4       M3ListAtomsPerf::b6 @ 4 (43 bytes)
+   1991 1097 %     3       M3ListAtomsPerf::b6 @ 4 (43 bytes)   made not entrant
+   1992 1099 %     4       M3ListAtomsPerf::b6 @ 4 (43 bytes)   made not entrant
+   1994 1106       3       sun.swing.list.M3ListRows::rowAt (78 bytes)
+   1997 1110       4       sun.swing.list.M3ListRows::rowAt (78 bytes)
+   1998 1106       3       sun.swing.list.M3ListRows::rowAt (78 bytes)   made not entrant
+   2004 1111 %     3       M3ListAtomsPerf::b7 @ 4 (47 bytes)
+   2004 1112       3       M3ListAtomsPerf::b7 (47 bytes)
+   2009 1113 %     4       M3ListAtomsPerf::b7 @ 4 (47 bytes)
+   2012 1111 %     3       M3ListAtomsPerf::b7 @ 4 (47 bytes)   made not entrant
+   2104 1113 %     4       M3ListAtomsPerf::b7 @ 4 (47 bytes)   made not entrant
+   2148 1125       3       sun.swing.list.M3ListRows::indexes (52 bytes)
+   2149 1128       4       sun.swing.list.M3ListRows::indexes (52 bytes)
+   2151 1131 %     3       M3ListAtomsPerf::b9 @ 4 (50 bytes)
+   2152 1132       3       M3ListAtomsPerf::b9 (50 bytes)
+   2157 1125       3       sun.swing.list.M3ListRows::indexes (52 bytes)   made not entrant
+   2157 1133 %     4       M3ListAtomsPerf::b9 @ 4 (50 bytes)
+   2162 1131 %     3       M3ListAtomsPerf::b9 @ 4 (50 bytes)   made not entrant
+   2162 1133 %     4       M3ListAtomsPerf::b9 @ 4 (50 bytes)   made not entrant
+   2163 1135       3       sun.swing.list.M3RowPieces::start (7 bytes)
+   2163 1137       4       sun.swing.list.M3RowPieces::start (7 bytes)
+   2163 1135       3       sun.swing.list.M3RowPieces::start (7 bytes)   made not entrant
+   2166 1139 %     3       M3ListAtomsPerf::b10 @ 4 (43 bytes)
+   2167 1140       3       M3ListAtomsPerf::b10 (43 bytes)
+   2167 1141 %     4       M3ListAtomsPerf::b10 @ 4 (43 bytes)
+   2170 1139 %     3       M3ListAtomsPerf::b10 @ 4 (43 bytes)   made not entrant
+   2170 1141 %     4       M3ListAtomsPerf::b10 @ 4 (43 bytes)   made not entrant
+   2171 1142       3       sun.swing.list.M3RowPieces::length (7 bytes)
+   2171 1144       4       sun.swing.list.M3RowPieces::length (7 bytes)
+   2171 1142       3       sun.swing.list.M3RowPieces::length (7 bytes)   made not entrant
+   2173 1146 %     3       M3ListAtomsPerf::b11 @ 4 (43 bytes)
+   2174 1147       3       M3ListAtomsPerf::b11 (43 bytes)
+   2174 1148 %     4       M3ListAtomsPerf::b11 @ 4 (43 bytes)
+   2178 1146 %     3       M3ListAtomsPerf::b11 @ 4 (43 bytes)   made not entrant
+   2178 1148 %     4       M3ListAtomsPerf::b11 @ 4 (43 bytes)   made not entrant
+   2178 1150       1       sun.swing.list.M3RowPieces::count (5 bytes)
+   2181 1153 %     3       M3ListAtomsPerf::b12 @ 4 (37 bytes)
+   2181 1154       3       M3ListAtomsPerf::b12 (37 bytes)
+   2182 1155 %     4       M3ListAtomsPerf::b12 @ 4 (37 bytes)
+   2183 1153 %     3       M3ListAtomsPerf::b12 @ 4 (37 bytes)   made not entrant
+   2184 1155 %     4       M3ListAtomsPerf::b12 @ 4 (37 bytes)   made not entrant
+   2184 1156       1       sun.swing.list.M3RowPieces::size (5 bytes)
+   2187 1159 %     3       M3ListAtomsPerf::b13 @ 4 (37 bytes)
+   2188 1160       3       M3ListAtomsPerf::b13 (37 bytes)
+   2189 1161 %     4       M3ListAtomsPerf::b13 @ 4 (37 bytes)
+   2191 1159 %     3       M3ListAtomsPerf::b13 @ 4 (37 bytes)   made not entrant
+   2191 1161 %     4       M3ListAtomsPerf::b13 @ 4 (37 bytes)   made not entrant
+   2192 1163       3       sun.swing.list.M3RowPieces::reset (34 bytes)
+   2196 1168 %     3       M3ListAtomsPerf::b14 @ 4 (41 bytes)
+   2197 1169       3       M3ListAtomsPerf::b14 (41 bytes)
+   2197 1170       4       sun.swing.list.M3RowPieces::reset (34 bytes)
+   2197 1171 %     4       M3ListAtomsPerf::b14 @ 4 (41 bytes)
+   2197 1163       3       sun.swing.list.M3RowPieces::reset (34 bytes)   made not entrant
+   2201 1168 %     3       M3ListAtomsPerf::b14 @ 4 (41 bytes)   made not entrant
+   2201 1171 %     4       M3ListAtomsPerf::b14 @ 4 (41 bytes)   made not entrant
+   2202 1175       3       sun.swing.list.M3RowPieces::open (99 bytes)
+   2202 1176       3       sun.swing.list.M3RowPieces::split (119 bytes)
+   2202 1177       3       sun.swing.list.M3RowPieces::insert (98 bytes)
+   2203 1180       4       sun.swing.list.M3RowPieces::open (99 bytes)
+   2204 1181       4       sun.swing.list.M3RowPieces::insert (98 bytes)
+   2204 1175       3       sun.swing.list.M3RowPieces::open (99 bytes)   made not entrant
+   2205 1182       4       sun.swing.list.M3RowPieces::split (119 bytes)
+   2207 1176       3       sun.swing.list.M3RowPieces::split (119 bytes)   made not entrant
+   2208 1177       3       sun.swing.list.M3RowPieces::insert (98 bytes)   made not entrant
+   2211 1185 %     3       M3ListAtomsPerf::b15 @ 4 (54 bytes)
+   2211 1182       4       sun.swing.list.M3RowPieces::split (119 bytes)   made not entrant
+   2211 1186       3       sun.swing.list.M3RowPieces::split (119 bytes)
+   2212 1187       3       sun.swing.list.M3RowPieces::remove (85 bytes)
+   2212 1189       4       sun.swing.list.M3RowPieces::split (119 bytes)
+   2214 1190       4       sun.swing.list.M3RowPieces::remove (85 bytes)
+   2218 1186       3       sun.swing.list.M3RowPieces::split (119 bytes)   made not entrant
+   2220 1192 %     3       M3ListAtomsPerf::b16 @ 4 (59 bytes)
+   2220 1181       4       sun.swing.list.M3RowPieces::insert (98 bytes)   made not entrant
+   2220 1189       4       sun.swing.list.M3RowPieces::split (119 bytes)   made not entrant
+   2220 1194       3       sun.swing.list.M3RowPieces::split (119 bytes)
+   2220 1195       3       sun.swing.list.M3RowPieces::insert (98 bytes)
+   2221 1196       3       sun.swing.list.M3RowPieces::change (17 bytes)
+   2226 1187       3       sun.swing.list.M3RowPieces::remove (85 bytes)   made not entrant
+   2226 1198       4       sun.swing.list.M3RowPieces::split (119 bytes)
+   2229 1194       3       sun.swing.list.M3RowPieces::split (119 bytes)   made not entrant
+   2229 1199       4       sun.swing.list.M3RowPieces::insert (98 bytes)
+   2229 1201 %     3       M3ListAtomsPerf::b17 @ 4 (59 bytes)
+   2235 1195       3       sun.swing.list.M3RowPieces::insert (98 bytes)   made not entrant
+   2235 1204 %     3       M3ListAtomsPerf::b18 @ 4 (51 bytes)
+   2236  953       4       sun.swing.list.M3ListMeasure::size (67 bytes)   made not entrant
+   2238 1207 %     4       sun.swing.list.M3ListMeasure::measure @ 173 (208 bytes)
+   2241 1211       4       sun.swing.list.M3ListMeasure::measure (208 bytes)
+   2244 1218       3       sun.swing.list.M3ListMeasure::size (67 bytes)
+   2245 1222       3       sun.swing.list.M3ListMeasure::supportsIncrementalSizing (70 bytes)
+   2250 1232       3       sun.swing.list.M3ListMeasure::track (46 bytes)
+   2254 1244       3       sun.swing.list.M3ListMeasure::keep (132 bytes)
+   2254 1247       3       sun.swing.list.M3ListMeasure::remeasure (415 bytes)
+   2258 1270       3       sun.swing.list.M3ListMeasure::changed (75 bytes)
+   2260 1275       3       sun.swing.list.M3ListMeasure::same (58 bytes)
+   2261 1256       4       sun.swing.SwingUtilities2::getFRCProperty (38 bytes)
+   2262 1257       4       sun.swing.SwingUtilities2::getFRCFromCache (128 bytes)
+   2266  889       3       sun.swing.SwingUtilities2::getFRCFromCache (128 bytes)   made not entrant
+   2266  888       3       sun.swing.SwingUtilities2::getFRCProperty (38 bytes)   made not entrant
+   2267 1264   !   4       sun.swing.SwingUtilities2::stringWidth (110 bytes)
+   2267 1265   !   4       sun.swing.SwingUtilities2::getLeftSideBearing (178 bytes)
+   2269  900   !   3       sun.swing.SwingUtilities2::getLeftSideBearing (178 bytes)   made not entrant
+   2270 1266       4       sun.swing.list.M3ListMeasure::isStableValue (73 bytes)
+   2271  872       3       sun.swing.list.M3ListMeasure::isStableValue (73 bytes)   made not entrant
+   2274  897   !   3       sun.swing.SwingUtilities2::stringWidth (110 bytes)   made not entrant
+   2313 1280       4       sun.swing.list.M3ListMeasure::supportsIncrementalSizing (70 bytes)
+   2314 1222       3       sun.swing.list.M3ListMeasure::supportsIncrementalSizing (70 bytes)   made not entrant
+   2322 1281 %     4       M3ListAtomsPerf::b0 @ 4 (43 bytes)
+   2324 1282       4       M3ListAtomsPerf::b0 (43 bytes)
+   2327 1037       3       M3ListAtomsPerf::b0 (43 bytes)   made not entrant
+   2368 1283 %     4       M3ListAtomsPerf::b2 @ 4 (43 bytes)
+   2369 1284       4       M3ListAtomsPerf::b2 (43 bytes)
+   2371 1054       3       M3ListAtomsPerf::b2 (43 bytes)   made not entrant
+   2471 1285 %     4       M3ListAtomsPerf::b3 @ 4 (37 bytes)
+   2473 1286       4       M3ListAtomsPerf::b3 (37 bytes)
+   2474 1287 %     4       M3ListAtomsPerf::b4 @ 4 (44 bytes)
+   2475 1065       3       M3ListAtomsPerf::b3 (37 bytes)   made not entrant
+   2475 1288       4       M3ListAtomsPerf::b4 (44 bytes)
+   2477 1079       3       M3ListAtomsPerf::b4 (44 bytes)   made not entrant
+   2495 1289 %     4       M3ListAtomsPerf::b6 @ 4 (43 bytes)
+   2497 1290       4       M3ListAtomsPerf::b6 (43 bytes)
+   2500 1098       3       M3ListAtomsPerf::b6 (43 bytes)   made not entrant
+   2504 1291 %     4       M3ListAtomsPerf::b7 @ 4 (47 bytes)
+   2506 1292       4       M3ListAtomsPerf::b7 (47 bytes)
+   2509 1112       3       M3ListAtomsPerf::b7 (47 bytes)   made not entrant
+   2637 1293 %     4       M3ListAtomsPerf::b9 @ 4 (50 bytes)
+   2643 1294       4       M3ListAtomsPerf::b9 (50 bytes)
+   2644 1295 %     4       M3ListAtomsPerf::b10 @ 4 (43 bytes)
+   2649 1296       4       M3ListAtomsPerf::b10 (43 bytes)
+   2649 1297 %     4       M3ListAtomsPerf::b11 @ 4 (43 bytes)
+   2651 1140       3       M3ListAtomsPerf::b10 (43 bytes)   made not entrant
+   2652 1132       3       M3ListAtomsPerf::b9 (50 bytes)   made not entrant
+   2653 1298       4       M3ListAtomsPerf::b11 (43 bytes)
+   2654 1299 %     4       M3ListAtomsPerf::b12 @ 4 (37 bytes)
+   2656 1147       3       M3ListAtomsPerf::b11 (43 bytes)   made not entrant
+   2656 1300       4       M3ListAtomsPerf::b12 (37 bytes)
+   2656 1301 %     4       M3ListAtomsPerf::b13 @ 4 (37 bytes)
+   2658 1154       3       M3ListAtomsPerf::b12 (37 bytes)   made not entrant
+   2659 1302       4       M3ListAtomsPerf::b13 (37 bytes)
+   2659 1303 %     4       M3ListAtomsPerf::b14 @ 4 (41 bytes)
+   2662 1160       3       M3ListAtomsPerf::b13 (37 bytes)   made not entrant
+   2664 1304       4       M3ListAtomsPerf::b14 (41 bytes)
+   2665 1305       3       M3ListAtomsPerf::b15 (54 bytes)
+   2666 1306 %     4       M3ListAtomsPerf::b15 @ 4 (54 bytes)
+   2667 1307       3       M3ListAtomsPerf::b16 (59 bytes)
+   2668 1169       3       M3ListAtomsPerf::b14 (41 bytes)   made not entrant
+   2668 1308 %     4       M3ListAtomsPerf::b16 @ 4 (59 bytes)
+   2669 1309       3       M3ListAtomsPerf::b17 (59 bytes)
+   2670 1192 %     3       M3ListAtomsPerf::b16 @ 4 (59 bytes)   made not entrant
+   2671 1310 %     4       M3ListAtomsPerf::b17 @ 4 (59 bytes)
+   2673 1185 %     3       M3ListAtomsPerf::b15 @ 4 (54 bytes)   made not entrant
+   2673 1311       3       M3ListAtomsPerf::b18 (51 bytes)
+   2674 1312 %     4       M3ListAtomsPerf::b18 @ 4 (51 bytes)
+   2679 1204 %     3       M3ListAtomsPerf::b18 @ 4 (51 bytes)   made not entrant
+   2679 1201 %     3       M3ListAtomsPerf::b17 @ 4 (59 bytes)   made not entrant
+   2685 1314       4       sun.swing.list.M3ListMeasure::remeasure (415 bytes)
+   2696 1316       4       sun.swing.list.M3ListMeasure::track (46 bytes)
+   2697 1232       3       sun.swing.list.M3ListMeasure::track (46 bytes)   made not entrant
+   2705 1319       4       sun.swing.list.M3ListMeasure::size (67 bytes)
+   2709 1218       3       sun.swing.list.M3ListMeasure::size (67 bytes)   made not entrant
+   2713 1247       3       sun.swing.list.M3ListMeasure::remeasure (415 bytes)   made not entrant
+   3040 1323       4       M3ListAtomsPerf::b15 (54 bytes)
+   3042 1306 %     4       M3ListAtomsPerf::b15 @ 4 (54 bytes)   made not entrant
+   3044 1308 %     4       M3ListAtomsPerf::b16 @ 4 (59 bytes)   made not entrant
+   3046 1305       3       M3ListAtomsPerf::b15 (54 bytes)   made not entrant
+   3046 1325       4       M3ListAtomsPerf::b17 (59 bytes)
+   3049 1310 %     4       M3ListAtomsPerf::b17 @ 4 (59 bytes)   made not entrant
+   3050 1312 %     4       M3ListAtomsPerf::b18 @ 4 (51 bytes)   made not entrant
+   3052 1309       3       M3ListAtomsPerf::b17 (59 bytes)   made not entrant
+   3052 1326       4       M3ListAtomsPerf::b18 (51 bytes)
+   3056 1311       3       M3ListAtomsPerf::b18 (51 bytes)   made not entrant
+   3056 1324       4       M3ListAtomsPerf::b16 (59 bytes)
+   3058 1307       3       M3ListAtomsPerf::b16 (59 bytes)   made not entrant
+   3450 1335       4       sun.swing.list.M3ListMeasure::changed (75 bytes)
+   3457 1270       3       sun.swing.list.M3ListMeasure::changed (75 bytes)   made not entrant

@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+provider	original_contract	M3_data_owner	category	candidate_selection	disposition	license
+JDK	java.util.Map+List	com.m3.collections.M3IndexedMultiValueMap	position_delete	primitive next[] splice and Object[] release	DIRECT_BACKEND_NOT_JDK_REPLACEMENT	OpenJDK GPL-2.0-with-classpath-exception; M3 Apache-2.0
+GUAVA	com.google.common.collect.ListMultimap	com.m3.collections.M3IndexedMultiValueMap	first_equal_remove	scan one group and unlink first matching occurrence	DONOR_INTERFACE_ADAPTER_SEPARATELY_REQUIRED	Guava Apache-2.0
+ECLIPSE	org.eclipse.collections.api.multimap.list.MutableListMultimap	com.m3.collections.M3IndexedMultiValueMap	value_occurrence_update	primitive linked group offsets and recycled slot flags	DONOR_INTERFACE_ADAPTER_SEPARATELY_REQUIRED	Eclipse EPL/EDL; M3 Apache-2.0
+APACHE	org.apache.commons.collections4.ListValuedMap	com.m3.collections.M3IndexedMultiValueMap	multimap_remove_key_vs_pair	clear reference and occupied state on exact value removal	DONOR_INTERFACE_ADAPTER_SEPARATELY_REQUIRED	Apache-2.0
+SPRING	org.springframework.util.MultiValueMap	com.m3.collections.M3IndexedMultiValueMap	map_of_lists_contract	keep separate key-count and supplied-list alias semantics	DONOR_INTERFACE_ADAPTER_SEPARATELY_REQUIRED	Apache-2.0
+LEETCODE	LeetCode 19 Remove Nth Node From End of List	primitive int[] offsets	group_unlink	adapt traversal category only, no challenge code	ALGORITHM_REFERENCE_ONLY	no external source copied
+LEETCODE	LeetCode 27 Remove Element	primitive int[] and byte[] state	erase_and_compact	reuse existing free-list/offset path instead of shifting payloads	ALGORITHM_REFERENCE_ONLY	no external source copied
+HACKERRANK	Dynamic Array (problem category)	primitive slot pools	dynamic_array_access	compare removal geometry: O(group length), O(1) unlink	ALGORITHM_REFERENCE_ONLY	no external source copied
+GFG	Delete node from a linked list (problem category)	primitive next[] lane	linked_offsets	int predecessor/next offsets without per-occurrence Node	ALGORITHM_REFERENCE_ONLY	no external source copied
+M3_INCUMBENT	M3LinkedHashMap and M3IndexMaskCompactor	java.base plus optional C17 JNI	stable_groups_and_masks	reuse existing group index and native selector; no new native ABI	QUALIFIED_REUSE	First-party Apache-2.0

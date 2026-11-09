@@ -1,0 +1,16 @@
+# MOVE_REFS rules for the m3/optane move into the JDK module jdk.m3.io (MOVE_TO_JDK_MODULE v3, 2026-11-09)
+FILES	m3/optane/verify.sh
+FILES	m3/optane/README.md
+FILES	m3/optane/PORT-MAPPING.pending.json
+FILES	make/m3/optane/CMakeLists.txt
+FILES	.github/workflows/*.yml
+REPLACE	find "$ROOT/src/main/java" -name	find "$ROOT/src/main/java" "$ROOT/../../src/jdk.m3.io/share/classes/jdk/m3/optane" "$ROOT/../../src/jdk.m3.io/share/classes/jdk/internal/m3/optane" -name
+REPLACE	"$ROOT/src/main/native/	"$ROOT/../../src/jdk.m3.io/share/native/libm3optane/
+REPLACE	cmake -S m3/optane/src/main/native	cmake -S make/m3/optane
+REPLACE	m3/optane/src/main/native	src/jdk.m3.io/share/native/libm3optane
+REPLACE	m3/optane/src/main/java/jdk/	src/jdk.m3.io/share/classes/jdk/
+REPLACE	m3/optane/src/test/java/jdk/	test/jdk/jdk/
+REPLACE	m3/optane/src/test/native	test/jdk/jdk/m3/optane/native
+RESIDUE	m3/optane/src/main/
+RESIDUE	m3/optane/src/test/
+KEEP	m3/optane/src/main/java/module-info.java

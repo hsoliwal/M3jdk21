@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/families-20261106/relocate.py (recipe RELOCATE_ALGORITHM_FAMILIES v1; plan C:/m3-superset/conv/plans/m3scale.tsv rank 1, m3-algorithms-families).
+# Donor: hsoliwal/synexia-m3scale-apache2 develop 3385d79a2968c770aedf1d3398b2a62f05ebc092 (2026-11-06): module m3-algorithms plus the progress contract it compiles from the repository root (src/main/java/com/synexia/m3scale/progress).
+# Row kinds. REPO: donor repository -> its GitHub URL (PROVENANCE.tsv builds blob URLs from it). FILE: donor path (donor repository root) -> target path (module root m3/algorithms). PACKAGE: donor package -> target package. TYPE: donor top-level type -> target type (nested types Node, Interval, Shape, Family, None keep their names). EXTERNAL: third-party package the donor imports, kept (the pom carries the dependency). DROP_METHOD: <DonorType>.<method> whose whole declaration (annotations to closing brace, one trailing blank line) the recipe removes -> owner or reason. DROP_LINE: <DonorType> -> regex of the single source lines the recipe removes. DROP_DUMP: <TargetType> -> regex of the donor differential-dump lines that belong to a dropped row (differential.sh deletes them on the donor side only). SKIP: donor files of the module this leaf does not relocate -> reason. NEC: an overlap the recipe does not decide (names and both blob shas) -> a human decides equivalence. SUPERSEDED: a FILE row a later recipe took over (named in the note): relocate.py no longer writes the target, differential.sh still compiles the donor source on the donor side.
+kind	donor	target	note
+REPO	hsoliwal/synexia-m3scale-apache2	https://github.com/hsoliwal/synexia-m3scale-apache2	private donor repository (Apache-2.0 release surface of M3Scale); blob URL = <url>/blob/<commit>/<donor path>
+SUPERSEDED	src/main/java/com/synexia/m3scale/progress/M3ProgressMonitor.java	src/main/java/jdk/m3/algorithm/M3ProgressMonitor.java	the progress and cancellation contract every family loop observes (int work units, every method default, static none()); carried byte for byte, see the NEC row; superseded 2026-11-06 by m3/qualification/progress-monitor-unify-20261106/unify.py v1: an adapter over jdk.m3.collections.M3ProgressMonitor (int work units widen to long), donor blob 6d0b659af85339180c93248397794a96e65c784b sha256 c2c7d6112e03f6e35f95475d7bcad384c1ebf80b9a98b3469b85ae796dff7b2a (URL by the REPO row scheme); relocate.py no longer writes the target, differential.sh still compiles this donor source on the donor side
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/AlgorithmSupport.java	src/main/java/jdk/m3/algorithm/M3AlgorithmSupport.java	package-private begin/tick/emptyPair helpers shared by the families
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/AlgorithmShapeCatalog.java	src/main/java/jdk/m3/algorithm/M3AlgorithmShapeCatalog.java	catalog of canonical shapes (id, family, time, space, entry point); the GRAPH/UNION_FIND/TRIE rows name leaf-2 types by string and stay, the xor-single row is a DROP_LINE
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/ArrayAlgorithms.java	src/main/java/jdk/m3/algorithm/M3ArrayAlgorithms.java	20 array, two-pointer, sliding-window, prefix-sum, binary-search and heap shapes (twoSum fd5f4479, longestConsecutive c11cf8f0, 2026-11-05)
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/IntervalGreedyAlgorithms.java	src/main/java/jdk/m3/algorithm/M3IntervalGreedyAlgorithms.java	record Interval; merge/insert/eraseOverlapCount/canReachEnd/minimumJumps/gasStationStart (jump range 6f2f987f + cddc48a0, 2026-11-05)
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/DynamicProgrammingAlgorithms.java	src/main/java/jdk/m3/algorithm/M3DynamicProgrammingAlgorithms.java	coinChange/LIS/LCS/editDistance/houseRobber/canPartition/wordBreak/uniquePaths/knapsack01
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/StringAlgorithms.java	src/main/java/jdk/m3/algorithm/M3StringAlgorithms.java	prefixFunction/kmpSearch/zFunction/longestPalindrome/wildcardMatch (zFunction: NEC row against M3PrefixZ)
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/StackAlgorithms.java	src/main/java/jdk/m3/algorithm/M3StackAlgorithms.java	validBrackets/nextGreater/dailyTemperatures/largestRectangleArea/evaluateRpn
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/HeapAlgorithms.java	src/main/java/jdk/m3/algorithm/M3HeapAlgorithms.java	kthLargest/mergeSorted
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/ListAlgorithms.java	src/main/java/jdk/m3/algorithm/M3ListAlgorithms.java	class Node<T>; reverse/middle/cycleStart/mergeSorted/removeNthFromEnd
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/TreeAlgorithms.java	src/main/java/jdk/m3/algorithm/M3TreeAlgorithms.java	class Node<T>; inorder/levelOrder/maxDepth/isBalanced/isValidBst/kthSmallest/lowestCommonAncestor
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/MatrixAlgorithms.java	src/main/java/jdk/m3/algorithm/M3MatrixAlgorithms.java	spiralOrder/rotateClockwise/countIslands/setZeroes/searchSorted
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/BacktrackingAlgorithms.java	src/main/java/jdk/m3/algorithm/M3BacktrackingAlgorithms.java	subsets/permutations/combinationSumUnique/nQueens/generateParentheses
+FILE	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/BitAlgorithms.java	src/main/java/jdk/m3/algorithm/M3BitAlgorithms.java	hammingWeight/reverseBits/singleNumberTriples/missingNumber (singleNumber is a DROP_METHOD)
+FILE	m3-algorithms/src/test/java/com/synexia/m3scale/algorithm/AlgorithmFamiliesTest.java	src/test/java/jdk/m3/algorithm/M3AlgorithmFamiliesTest.java	oracle: every family shape, cancellation inside loops, catalog coverage (graphDsuAndTrieShapes is a DROP_METHOD, the singleNumber assertion a DROP_LINE)
+FILE	m3-algorithms/src/test/java/com/synexia/m3scale/algorithm/TwoSumFullDomainBoundaryTest.java	src/test/java/jdk/m3/algorithm/M3TwoSumFullDomainBoundaryTest.java	oracle: 216,472 two-sum cases over the signed int domain, callback and cancellation order
+FILE	m3-algorithms/src/test/java/com/synexia/m3scale/algorithm/LongestConsecutiveSignedBoundaryTest.java	src/test/java/jdk/m3/algorithm/M3LongestConsecutiveSignedBoundaryTest.java	oracle: 97,449 longest-consecutive cases at the MIN/MAX boundary, callbacks and cancellation
+FILE	m3-algorithms/src/test/java/com/synexia/m3scale/algorithm/JumpIntRangeBoundaryTest.java	src/test/java/jdk/m3/algorithm/M3JumpIntRangeBoundaryTest.java	oracle: 127,656 jump-range cases against an independent BFS, progress and cancellation contracts
+PACKAGE	com.synexia.m3scale.algorithm	jdk.m3.algorithm	the package m3/algorithms already uses (M3PrefixZ)
+PACKAGE	com.synexia.m3scale.progress	jdk.m3.algorithm	the progress contract joins the families' package (its import becomes a same-package import, legal and kept so the body stays explained line by line)
+TYPE	M3ProgressMonitor	M3ProgressMonitor	identity: already M3*
+TYPE	AlgorithmSupport	M3AlgorithmSupport
+TYPE	AlgorithmShapeCatalog	M3AlgorithmShapeCatalog	entry-point strings of the catalog follow the rename (they name these types)
+TYPE	ArrayAlgorithms	M3ArrayAlgorithms
+TYPE	IntervalGreedyAlgorithms	M3IntervalGreedyAlgorithms
+TYPE	DynamicProgrammingAlgorithms	M3DynamicProgrammingAlgorithms
+TYPE	StringAlgorithms	M3StringAlgorithms
+TYPE	StackAlgorithms	M3StackAlgorithms
+TYPE	HeapAlgorithms	M3HeapAlgorithms
+TYPE	ListAlgorithms	M3ListAlgorithms
+TYPE	TreeAlgorithms	M3TreeAlgorithms
+TYPE	MatrixAlgorithms	M3MatrixAlgorithms
+TYPE	BacktrackingAlgorithms	M3BacktrackingAlgorithms
+TYPE	BitAlgorithms	M3BitAlgorithms
+TYPE	AlgorithmFamiliesTest	M3AlgorithmFamiliesTest
+TYPE	TwoSumFullDomainBoundaryTest	M3TwoSumFullDomainBoundaryTest
+TYPE	LongestConsecutiveSignedBoundaryTest	M3LongestConsecutiveSignedBoundaryTest
+TYPE	JumpIntRangeBoundaryTest	M3JumpIntRangeBoundaryTest
+EXTERNAL	org.junit.jupiter.api	org.junit.jupiter.api	JUnit 5 (the four oracles); pom dependency org.junit.jupiter:junit-jupiter:5.11.4 test scope (donor pom: 5.13.4)
+DROP_METHOD	BitAlgorithms.singleNumber	jdk.internal.m3.M3IntAlgorithms.singleNumberOfPairs	java.base owner src/java.base/share/classes/jdk/internal/m3/M3IntAlgorithms.java (e2e9e0d3e6e, 2026-10-31) already carries the XOR single-number pass; plan row 1 drops this method, hammingWeight/reverseBits/singleNumberTriples/missingNumber stay
+DROP_LINE	AlgorithmShapeCatalog	^\s*new Shape\("xor-single",.*$	the catalog row whose entry point names the dropped method (the BITWISE family keeps bit-count)
+DROP_DUMP	M3AlgorithmShapeCatalog	id=xor-single,	the donor dump line of the dropped catalog row
+DROP_METHOD	AlgorithmFamiliesTest.graphDsuAndTrieShapes	leaf 2 (m3-algorithms-graph-trie, plan rank 2)	the test method exercises GraphAlgorithms, IntUnionFind and StringTrie, SKIP rows of this leaf
+DROP_LINE	AlgorithmFamiliesTest	^\s*assertEquals\(4, BitAlgorithms\.singleNumber\(.*$	the one assertion of the dropped method
+SKIP	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/GraphAlgorithms.java	leaf 2	plan rank 2 m3-algorithms-graph-trie (blob c5ac13fda361)
+SKIP	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/StringTrie.java	leaf 2	plan rank 2 (blob efb4d9e2cdbc); CONVERGE_COLLECTIONS.tsv row stays GAP
+SKIP	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/IntUnionFind.java	leaf 2	plan rank 2: verify-only against jdk.m3.collections.M3DisjointIndex (blob a254fd158850)
+SKIP	m3-algorithms/src/test/java/com/synexia/m3scale/algorithm/GraphDijkstraLongMaxDistanceTest.java	leaf 2	Dijkstra oracle
+SKIP	m3-algorithms/src/test/java/com/synexia/m3scale/algorithm/DijkstraLongMaxReachabilityTest.java	leaf 2	Dijkstra oracle
+SKIP	m3-algorithms/src/test/java/com/synexia/m3scale/algorithm/TrieAtomicInsertTest.java	leaf 2	trie oracle
+SKIP	m3-algorithms/src/test/java/com/synexia/m3scale/algorithm/AlgorithmSelfTestMain.java	leaf 2	plain main excluded from surefire by the donor pom; drives GraphAlgorithms, IntUnionFind and StringTrie
+SKIP	m3-algorithms/catalogue, m3-algorithms/verification, m3-algorithms/pom.xml, m3-algorithms/verify-jdk21.sh	donor evidence	problem references (URLs only, no implementation imported), SHA-256 source-seal recipes and their logs stay with the donor; this module has its own pom, recipe and gates
+NEC	m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/StringAlgorithms.java#zFunction (blob a947a2c59855)	m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java (blob 317108234d76, M3JDK master)	both compute the Z array: the donor over a CharSequence into int[] with monitor ticks, the owner over a sealed M3StringPiece of java.base (not compilable in this Maven module). M3PrefixZ is not touched; StringAlgorithms is relocated whole for prefixFunction/kmpSearch/longestPalindrome/wildcardMatch; whether the two Z passes are one owner is a human decision
+NEC	src/main/java/com/synexia/m3scale/progress/M3ProgressMonitor.java (blob 6d0b659af853) -> jdk.m3.algorithm.M3ProgressMonitor	jdk.m3.collections.M3ProgressMonitor (blob 117b4eadd484); jdk.m3.file.M3ProgressMonitor (blob 223cad76aa79)	donor contract: int UNKNOWN, beginTask(String,int), worked(int), every method default, static none(). Both M3JDK owners: long work units, abstract methods, state()/snapshot(), no none(). m3/arrays and m3/collections build and install from a sparse tree (probe 2026-11-06, mvn -DskipTests install, exit 0 both), but the donor bodies and the four oracles do not compile against jdk.m3.collections.M3ProgressMonitor (javac probe: 30 errors; 1 in AlgorithmSupport, 29 in the oracles: none(), @Override of int signatures, unimplemented abstract methods). To keep every body byte for byte the donor contract is carried into this module; one monitor owner (adapter or body edits) is a human decision; decided 2026-11-06: the owner is jdk.m3.collections.M3ProgressMonitor and jdk.m3.algorithm.M3ProgressMonitor its adapter (m3/qualification/progress-monitor-unify-20261106, see the SUPERSEDED row)

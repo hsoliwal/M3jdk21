@@ -1,0 +1,16 @@
+H:\m3-scratch\lib-intake\batch\dec\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.dec {
+          ^
+H:\m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\BrotliRuntimeException.java:12: warning: [serial] serializable class BrotliRuntimeException has no definition of serialVersionUID
+class BrotliRuntimeException extends RuntimeException {
+^
+H:\m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Decode.java:625: warning: [fallthrough] possible fall-through into case
+        case MAIN_LOOP:
+        ^
+H:\m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Decode.java:654: warning: [fallthrough] possible fall-through into case
+        case INSERT_LOOP:
+        ^
+H:\m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Decode.java:761: warning: [fallthrough] possible fall-through into case
+        case COPY_LOOP:
+        ^
+5 warnings

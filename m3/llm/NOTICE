@@ -1,0 +1,21 @@
+M3JDK Chrome LLM and summarization module
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
+Licensed under the Apache License, Version 2.0.
+
+This independently licensed M3JDK module receives first-party source from
+hsoliwal/com.synexia. Exact source commits, paths, source hashes, target hashes
+and modifications are recorded in SOURCE_PROVENANCE.tsv.
+Existing copyright, licence and behavioral contracts are retained.
+
+Modifications: attributed package relocation into com.m3.llm; module packaging,
+product tests and build metadata; the separately recorded CanonicalJson input
+validation correction; exact text/SHA-256/precondition helper atoms extracted
+from PinnedGitObjects into private JsonSupport; equivalent explicit default
+constructor for the exported ExtractiveSummarizer. Protocol schemas,
+environment/configuration keys and
+native command arguments retain their source compatibility spellings.
+
+Chrome, Chromium, Gemini Nano, Dawn, model weights and native inference binaries
+are not included or relicensed. Their installation, availability and applicable
+rights remain separate from this Java library. Browser resources are first-party
+API clients. The independent hsoliwal/ChromeLLM visual/media planner is not included.

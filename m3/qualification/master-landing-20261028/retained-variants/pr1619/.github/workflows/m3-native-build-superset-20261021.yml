@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 native build superset Git and SQLite JNI proof
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-native-build-superset-20261021.yml'
+      - 'm3/qualification/unified-superset-20261021/native-build-20261021/**'
+      - 'm3/fs/src/**'
+      - 'src/java.base/share/classes/java/io/Reader.java'
+      - 'src/java.base/share/classes/java/io/StringReader.java'
+      - 'src/java.base/share/classes/java/lang/M3String.java'
+      - 'src/hotspot/share/prims/jni.cpp'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-donor-git-and-original-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Validate exact two-parent donor ancestry and Git source/mode closure
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/qualification/unified-superset-20261021/native-build-20261021/pom.xml verify
+      - name: Install original JNI SQLite build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential pkg-config libsqlite3-dev
+      - name: Run actual original native M3FS Java/JNI/CTest tests on combined source
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/fs/pom.xml -Dtest=M3BuildStateTest -Dsurefire.failIfNoSpecifiedTests=false verify
+      - name: Preserve raw original JNI and JUnit result files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-native-build-superset-sqlite-jni
+          if-no-files-found: warn
+          path: |
+            m3/fs/target/surefire-reports/**
+            m3/fs/target/native/Testing/Temporary/**

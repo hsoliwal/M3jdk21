@@ -1,0 +1,83 @@
+{
+  "schema": "synexia.data.existing-sdk-contract-main-proof.v1",
+  "status": "FAILED_OR_HOLD",
+  "effective_execution_status": "OBSERVED_NATIVE_NONZERO",
+  "plan_sha256": "971470fe347ceb4ecb378976806cb6592760dd6966bedd3f0b4efb08a1cb5bfb",
+  "entrypoint": "com.m3.collections.M3CollectionSdkContractSelfTest",
+  "native_outcomes": [
+    {
+      "pid": 13056,
+      "creation_FILETIME": "134370211205977303",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 1,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    }
+  ],
+  "own_jvm_lock_released": true,
+  "storage_protection": "ACTIVE",
+  "compile_or_Maven_replayed": false,
+  "source_POM_resource_or_target_edited": false,
+  "new_Java_or_test_authored": false,
+  "default_module_result_rewritten": false,
+  "global_SDK_JNI_or_performance_admission": false,
+  "raw_native_exitcode": 1,
+  "log_bytes": 3858,
+  "log_sha256": "7d4c305f680ef63534456e9f04f6db4aa22b97dcec29d46527c26ce285e4d4f9",
+  "all_source_target_classes_prior_proofs_and_tools_unchanged": true,
+  "actual_native_search_directories": [
+    "C:\\Program Files\\Java\\jdk-21\\bin",
+    "C:\\WINDOWS\\Sun\\Java\\bin",
+    "C:\\Windows\\System32",
+    "C:\\Windows",
+    "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin",
+    "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\module"
+  ],
+  "actual_properties": {
+    "sun.boot.library.path": [
+      "C:\\Program Files\\Java\\jdk-21\\bin"
+    ],
+    "java.library.path": [
+      "C:\\Program Files\\Java\\jdk-21\\bin",
+      "C:\\WINDOWS\\Sun\\Java\\bin",
+      "C:\\WINDOWS\\system32",
+      "C:\\WINDOWS",
+      "C:/Program Files/Java/jdk-21/bin",
+      "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin",
+      "C:/Windows/System32",
+      "C:/Windows",
+      "."
+    ],
+    "java.class.path": [
+      "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\module\\target\\test-classes",
+      "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\module\\target\\classes"
+    ],
+    "java.io.tmpdir": [
+      "K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/tmp/fork"
+    ],
+    "user.home": [
+      "K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/home"
+    ],
+    "user.dir": [
+      "K:/codex-work/m3jdk21-recipe-pass-20261020/data-current-module-materialization-k-v1/module"
+    ],
+    "java.home": [
+      "C:\\Program Files\\Java\\jdk-21"
+    ],
+    "path.separator": [
+      ";"
+    ]
+  },
+  "error": "AssertionError: Existing main contract did not exit zero; preserve raw failure",
+  "owned_processes_physically_terminal": true
+}

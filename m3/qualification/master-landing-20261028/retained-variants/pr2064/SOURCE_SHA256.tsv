@@ -1,0 +1,6 @@
+path	sha256	git_blob	mode	pr	note
+.github/workflows/m3-no-external-consumer-deps.yml	7aadd04db8b9fc85e19feb9c105820a76406e7a8e97e94da8fb07d9830107333	81c237f93da86aafa026099b9c799d0d99b09537	100644	2064	PR version, not live
+m3/collections/interop/README.md	7a2359058175c99aa0fbc6c388f6f316211bdbcffaa0d3b6bc3254655b6ae9a6	2f7104f1a694e0392713a4fd62b0883ebba3d650	100644	2064	PR version, not live
+m3/collections/interop/pom.xml	8c5338aa8069668f817f13cf104ff0c5cf41e61a1dc74866ed9b4612ab07c081	3fc5cc0f0bee520675fea18a379c96b288c99084	100644	2064	PR version, not live
+m3/collections/verification/no_external_runtime.py	c7c86c21a569274c8a98836c1d51a11b40bf8e8d77be78eb02d9205461f861c4	aa7baed2aa9e4ff2aa675771def00a09ccc863f3	100644	2064	PR version, not live
+m3/collections/verification/test_no_external_runtime.py	26773d9c4b9658590508a2ef6cfc077b35b110e4e7d1470e4248c340d7f07a6a	2886c5d68444ee34e54a3352d1400a2e4fdb21a4	100644	2064	PR version, not live

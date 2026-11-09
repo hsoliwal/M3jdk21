@@ -1,0 +1,4 @@
+# ordinal	stage_crate	target	resource	behavioral_atom	problem_category
+1	m3-ast-select-20261021-p1	m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java	0001-M3ASTIndex.java.txt	immutable primitive row selection	M3AST_PRIMITIVE_FILTERED_VIEWS
+2	m3-ast-select-20261021-p2	m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTSelectionContract.java	0002-M3ASTSelectionContract.java.txt	source-bound parent/sibling and mask oracle	AST_SELECTION_DIFFERENTIAL
+3	m3-ast-select-20261021-p3	m3/tooling/module-packs/parser/build.py	0003-build.py.txt	one extra original parser contract	PARSER_CANONICAL_BUILD_GATE

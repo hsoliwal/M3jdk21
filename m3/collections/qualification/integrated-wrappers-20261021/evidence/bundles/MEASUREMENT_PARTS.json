@@ -1,0 +1,66 @@
+{
+  "schema": "m3.evidence.measurement-parts.v1",
+  "status": "LOSSLESS_RECORD_BOUNDARY_PUBLICATION_TRANSPORT",
+  "max_part_bytes": 6291456,
+  "original": {
+    "name": "measurement-evidence.jsonl",
+    "bytes": 27707405,
+    "records": 786,
+    "sha256": "4eb14cb5a8bb45f1d4f21a4e9b89ca7b7c7df7f77a9809fed715ba3c8b087900"
+  },
+  "parts": [
+    {
+      "name": "measurement-evidence.part-001.jsonl",
+      "bytes": 5614883,
+      "records": 21,
+      "sha256": "d45d5f531835299da8221339e780116bf937538ab0c067bf59e0489080aec8ed"
+    },
+    {
+      "name": "measurement-evidence.part-002.jsonl",
+      "bytes": 6135617,
+      "records": 277,
+      "sha256": "dc0ca93fab3f999f573e6143ef203a39351b11ab31dd8cde99bdbaa2c7e35021"
+    },
+    {
+      "name": "measurement-evidence.part-003.jsonl",
+      "bytes": 6288247,
+      "records": 201,
+      "sha256": "3d05c9683d32225ae926e02fd97b0d794d5958a9f3f2fbf760c68e1ef3eab26e"
+    },
+    {
+      "name": "measurement-evidence.part-004.jsonl",
+      "bytes": 5624854,
+      "records": 271,
+      "sha256": "80d6008795e5f5f148d5574f2eacca007ba3c1fdbec54db9e57d24bf072e8ce6"
+    },
+    {
+      "name": "measurement-evidence.part-005.jsonl",
+      "bytes": 4043804,
+      "records": 16,
+      "sha256": "43e0b536b14c10f27389ca214995c71ecfcc63e55b0b9285065f3bbb841b65ea"
+    }
+  ],
+  "companions": [
+    {
+      "name": "source-history.jsonl",
+      "bytes": 2554550,
+      "sha256": "f644eb936d127ef21dcd6f667e8b446dd36eb53d39d29205c3b8819cc2343a67"
+    },
+    {
+      "name": "MANIFEST.json",
+      "bytes": 8225560,
+      "sha256": "d25f3fd5ceef32769117943f14f5a21e1d3913757974b68ce07d6453134fffd5"
+    },
+    {
+      "name": "RECEIPT.json",
+      "bytes": 1629,
+      "sha256": "a6ed8117ef85909ef173937e7fa50069976c64f9da2be94219ff9809833728bb"
+    },
+    {
+      "name": "ROUNDTRIP_VERIFICATION.json",
+      "bytes": 194,
+      "sha256": "7d2dbec2406ae3bbc477e4116490658227485a31ce09ceaae8073a52e3468de5"
+    }
+  ],
+  "reason": "GitHub connector request exceeds16MiB for original measurement file; original frozen five-file bundle remains unchanged."
+}

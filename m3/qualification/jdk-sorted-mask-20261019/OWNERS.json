@@ -1,0 +1,11 @@
+{
+  "existing_owners": [
+    "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+    "src/java.base/share/native/libjava/M3BitLane28.c"
+  ],
+  "naming_map_disposition": "Existing JDK/internal/native owners unchanged in name; no new public API or donor rename. This is the explicit per-path exclusion from a new name-mapping row.",
+  "phase_advance": false,
+  "integration": "Direct src/java.base implementation; no m3-plus-JDK runtime layer",
+  "global_acceptance": "HOLD"
+}

@@ -1,0 +1,1 @@
+s/com\.google\.re2j([^A-Za-z0-9_$]|$)/com.m3.lib.re2j\1/g;s#com/google/re2j([^A-Za-z0-9_$]|$)#com/m3/lib/re2j\1#g;

@@ -1,0 +1,66 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "Apache 2 <http://www.apache.org/licenses/LICENSE-2.0.txt>; original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.ewah",
+  "target_path": "m3/vendor/third_party-m3/relocated/JavaEWAH",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/JavaEWAH",
+  "source_coordinate": "com.googlecode.javaewah:JavaEWAH:1.1.13-m3-source-1",
+  "source_version": "1.1.13-m3-source-1",
+  "source_license_origin": "https://raw.githubusercontent.com/lemire/javaewah/JavaEWAH-1.1.13/LICENSE",
+  "source_packages": [
+    "com.googlecode.javaewah",
+    "com.googlecode.javaewah32"
+  ],
+  "runtime_packages": [
+    "com.m3.collections.ewah",
+    "com.m3.collections.ewah32"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/JavaEWAH/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/JavaEWAH/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/JavaEWAH",
+  "mappings": [
+    {
+      "source": "com.googlecode.javaewah and subpackages",
+      "target": "com.m3.collections.ewah and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.ewah JMOD; type names retained"
+    },
+    {
+      "source": "com.googlecode.javaewah32 and subpackages",
+      "target": "com.m3.collections.ewah32 and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.ewah JMOD; type names retained"
+    },
+    {
+      "source": "com.googlecode.javaewah.datastructure",
+      "target": "com.m3.collections.ewah.datastructure",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.googlecode.javaewah32.symmetric",
+      "target": "com.m3.collections.ewah32.symmetric",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.googlecode.javaewah.symmetric",
+      "target": "com.m3.collections.ewah.symmetric",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.googlecode.javaewah32",
+      "target": "com.m3.collections.ewah32",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.googlecode.javaewah",
+      "target": "com.m3.collections.ewah",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}
