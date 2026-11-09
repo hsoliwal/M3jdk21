@@ -3,6 +3,7 @@
 package jdk.m3.arrays.packed;
 
 import java.util.Objects;
+import jdk.m3.arrays.WorkMonitor;
 
 /**
  * Sequential, canonical base-128 encoding of full-width 64-bit integer arrays.
@@ -144,5 +145,235 @@ public final class VInt {
             throw new IllegalArgumentException("Truncated integer at end of input");
         }
         return values;
+    }
+
+    // PACKED_UNION U10 (2026-11-09): the Synexia common-collections VInt API (same encoding), ported unchanged;
+    // the monitor is a WorkMonitor.
+
+    public static final int MAX_BYTES = 10;
+    private static final int CHECKPOINT_VALUES = 1024;
+    private static final byte[] BYTES_BY_LEADING_ZEROS = bytesByLeadingZeros();
+
+
+    /** Number of bytes for the complete unsigned 64-bit pattern, including negative longs. */
+    public static int unsignedSize(long value) {
+        return BYTES_BY_LEADING_ZEROS[Long.numberOfLeadingZeros(value)];
+    }
+
+    /** The 65 possible leading-zero counts classify every bit pattern; zero uses one byte. */
+    private static byte[] bytesByLeadingZeros() {
+        byte[] sizes = new byte[Long.SIZE + 1];
+        for (int leadingZeros = 0; leadingZeros <= Long.SIZE; leadingZeros++) {
+            sizes[leadingZeros] = (byte) Math.max(1, (Long.SIZE - leadingZeros + 6) / 7);
+        }
+        return sizes;
+    }
+
+    /** Number of bytes after mapping a signed long through ZigZag. */
+    public static int signedSize(long value) {
+        return unsignedSize(zigZag(value));
+    }
+
+    /**
+     * Writes one raw unsigned 64-bit pattern to {@code [offset, limit)}.
+     * Preflights the complete capacity before changing any byte.
+     *
+     * @return the exclusive end offset
+     * @throws IndexOutOfBoundsException if bounds or remaining capacity are invalid
+     * @throws NullPointerException if destination is null
+     */
+    public static int writeUnsigned(long value, byte[] destination, int offset, int limit) {
+        Objects.requireNonNull(destination, "destination");
+        Objects.checkFromToIndex(offset, limit, destination.length);
+        int size = unsignedSize(value);
+        if (size > limit - offset) {
+            throw new IndexOutOfBoundsException("insufficient capacity for varint");
+        }
+        return writeRaw(value, destination, offset);
+    }
+
+    /** Writes one signed long using ZigZag; bounds, ownership and return match writeUnsigned. */
+    public static int writeSigned(long value, byte[] destination, int offset, int limit) {
+        return writeUnsigned(zigZag(value), destination, offset, limit);
+    }
+
+    /**
+     * Reads one canonical unsigned value into {@code destination[destinationIndex]}.
+     * Values above {@code Long.MAX_VALUE} use their raw long bit patterns.
+     * The destination changes only after the complete value has been validated.
+     *
+     * @return the exclusive end offset of this value, which can be below limit
+     * @throws IllegalArgumentException if the value is truncated, overlong or exceeds 64 bits
+     * @throws IndexOutOfBoundsException if source bounds or destination index are invalid
+     * @throws NullPointerException if either array is null
+     */
+    public static int readUnsigned(byte[] source, int offset, int limit,
+            long[] destination, int destinationIndex) {
+        return read(source, offset, limit, destination, destinationIndex, false);
+    }
+
+    /** Reads one ZigZag signed value; bounds, ownership and return match readUnsigned. */
+    public static int readSigned(byte[] source, int offset, int limit,
+            long[] destination, int destinationIndex) {
+        return read(source, offset, limit, destination, destinationIndex, true);
+    }
+
+    /**
+     * Returns a fresh exact-size encoding of {@code count} values starting at offset.
+     * Signed selects ZigZag; false selects raw unsigned 64-bit patterns.
+     *
+     * @throws ArithmeticException if the encoded byte count exceeds the int index range
+     * @throws IndexOutOfBoundsException if the value range is invalid
+     * @throws NullPointerException if values is null
+     */
+    public static byte[] encode(long[] values, int offset, int count,
+            boolean signed, WorkMonitor monitor) {
+        Objects.requireNonNull(values, "values");
+        Objects.checkFromIndexSize(offset, count, values.length);
+        checkCanceled(monitor);
+        int byteCount = 0;
+        for (int i = 0; i < count; i++) {
+            long value = values[offset + i];
+            byteCount = Math.addExact(byteCount, unsignedSize(signed ? zigZag(value) : value));
+            if ((i + 1) % CHECKPOINT_VALUES == 0) {
+                checkCanceled(monitor);
+            }
+        }
+        checkCanceled(monitor);
+
+        byte[] result = new byte[byteCount];
+        int position = 0;
+        int pending = 0;
+        for (int i = 0; i < count; i++) {
+            long value = values[offset + i];
+            position = writeRaw(signed ? zigZag(value) : value, result, position);
+            if (++pending == CHECKPOINT_VALUES) {
+                checkpoint(monitor, pending);
+                pending = 0;
+            }
+        }
+        finish(monitor, pending);
+        return result;
+    }
+
+    /** Decodes a complete headerless payload, with signedness supplied by the caller. */
+    public static long[] decode(byte[] payload, boolean signed, WorkMonitor monitor) {
+        Objects.requireNonNull(payload, "payload");
+        return decode(payload, 0, payload.length, signed, monitor);
+    }
+
+    /**
+     * Validates and decodes the entire {@code [offset, limit)} frame to a fresh array.
+     * No byte outside that frame is read, and no incomplete trailing value is accepted.
+     * The result count is determined by a complete validation pass before allocation.
+     *
+     * @throws IllegalArgumentException for truncated, overlong or overflowing values
+     * @throws IndexOutOfBoundsException if the byte frame is invalid
+     * @throws NullPointerException if payload is null
+     */
+    public static long[] decode(byte[] payload, int offset, int limit,
+            boolean signed, WorkMonitor monitor) {
+        Objects.requireNonNull(payload, "payload");
+        Objects.checkFromToIndex(offset, limit, payload.length);
+        checkCanceled(monitor);
+        int count = 0;
+        for (int position = offset; position < limit; ) {
+            long value = readRaw(payload, position, limit);
+            position += unsignedSize(value);
+            if (++count % CHECKPOINT_VALUES == 0) {
+                checkCanceled(monitor);
+            }
+        }
+        checkCanceled(monitor);
+
+        long[] result = new long[count];
+        int position = offset;
+        int pending = 0;
+        for (int i = 0; i < count; i++) {
+            long value = readRaw(payload, position, limit);
+            position += unsignedSize(value);
+            result[i] = signed ? undoZigZag(value) : value;
+            if (++pending == CHECKPOINT_VALUES) {
+                checkpoint(monitor, pending);
+                pending = 0;
+            }
+        }
+        finish(monitor, pending);
+        return result;
+    }
+
+    private static int read(byte[] source, int offset, int limit,
+            long[] destination, int destinationIndex, boolean signed) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(destination, "destination");
+        Objects.checkFromToIndex(offset, limit, source.length);
+        Objects.checkIndex(destinationIndex, destination.length);
+        long value = readRaw(source, offset, limit);
+        destination[destinationIndex] = signed ? undoZigZag(value) : value;
+        return offset + unsignedSize(value);
+    }
+
+    /** Called only after bounds/capacity or bulk allocation has been checked. */
+    private static int writeRaw(long value, byte[] destination, int offset) {
+        while ((value & ~0x7fL) != 0) {
+            destination[offset++] = (byte) ((value & 0x7fL) | 0x80L);
+            value >>>= 7;
+        }
+        destination[offset++] = (byte) value;
+        return offset;
+    }
+
+    /** Canonical encodings make unsignedSize(value) the exact consumed byte count. */
+    private static long readRaw(byte[] source, int offset, int limit) {
+        long value = 0L;
+        for (int group = 0; group < MAX_BYTES; group++) {
+            if (offset == limit) {
+                throw new IllegalArgumentException("truncated varint");
+            }
+            int part = source[offset++] & 0xff;
+            if (group == MAX_BYTES - 1) {
+                // Only bit 63 remains. Zero is overlong; every byte above one overflows.
+                if (part != 1) {
+                    throw new IllegalArgumentException("invalid tenth varint byte");
+                }
+                return value | Long.MIN_VALUE;
+            }
+            value |= (part & 0x7fL) << (group * 7);
+            if ((part & 0x80) == 0) {
+                if (group != 0 && part == 0) {
+                    throw new IllegalArgumentException("noncanonical varint");
+                }
+                return value;
+            }
+        }
+        throw new AssertionError("unreachable varint group");
+    }
+
+    private static long zigZag(long value) {
+        return (value << 1) ^ (value >> 63);
+    }
+
+    private static long undoZigZag(long value) {
+        return (value >>> 1) ^ -(value & 1L);
+    }
+
+    private static void checkCanceled(WorkMonitor monitor) {
+        if (monitor != null) {
+            monitor.checkCanceled();
+        }
+    }
+
+    private static void checkpoint(WorkMonitor monitor, int completed) {
+        if (monitor != null) {
+            monitor.worked(completed);
+            monitor.checkCanceled();
+        }
+    }
+
+    private static void finish(WorkMonitor monitor, int pending) {
+        if (pending != 0) {
+            checkpoint(monitor, pending);
+        }
+        checkCanceled(monitor);
     }
 }
