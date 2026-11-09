@@ -1,0 +1,51 @@
+# DONOR_OVERLAY v2 migration audit: master 08db7f057c8702daccfd9726c802ec5cb5907eaf (before) vs the branch (after).
+# 1. Files that differ (diff -rq over the extracted donors, relocated modules, jackson pack and recipe lanes, before
+#    the lane READMEs, RECIPE_MEMORY rows and this evidence were written):
+  m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py
+  m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py
+  m3/tooling/jdk-superset/retarget/tools/donor_overlay.py
+  m3/tooling/module-packs/jackson/SOURCE_LOCK.json
+  m3/vendor/third_party/commons-codec-1.17.1/OVERLAY_SOURCES.json
+  m3/vendor/third_party/commons-codec-1.17.1/PROVENANCE.json
+  m3/vendor/third_party/commons-codec-1.22.1/OVERLAY_SOURCES.json
+  m3/vendor/third_party/commons-codec-1.22.1/PROVENANCE.json
+  m3/vendor/third_party/jackson-core-2.15.3/OVERLAY_SOURCES.json
+  m3/vendor/third_party/jackson-core-2.15.3/PROVENANCE.json
+  m3/vendor/third_party/jackson-core-2.16.1/OVERLAY_SOURCES.json
+  m3/vendor/third_party/jackson-core-2.16.1/PROVENANCE.json
+  m3/vendor/third_party/jackson-core-2.19.2/OVERLAY_SOURCES.json
+  m3/vendor/third_party/jackson-core-2.19.2/PROVENANCE.json
+  m3/vendor/third_party-m3/relocated/commons-codec-1.22.1/PROVENANCE.json
+  m3/vendor/third_party-m3/relocated/jackson-core-2.19.2/PROVENANCE.json
+# 2. JSON leaves that differ, by key (jsondiff.py before after <file>):
+  m3/tooling/module-packs/jackson/SOURCE_LOCK.json {'provenance_sha256': 1, 'tree_sha256': 1}
+  m3/vendor/third_party/commons-codec-1.17.1/OVERLAY_SOURCES.json {'recipe_sha256': 2}
+  m3/vendor/third_party/commons-codec-1.17.1/PROVENANCE.json {'sha256': 1, 'recipe_sha256': 2}
+  m3/vendor/third_party/commons-codec-1.22.1/OVERLAY_SOURCES.json {'recipe_sha256': 2}
+  m3/vendor/third_party/commons-codec-1.22.1/PROVENANCE.json {'sha256': 1, 'recipe_sha256': 2}
+  m3/vendor/third_party/jackson-core-2.15.3/OVERLAY_SOURCES.json {'recipe_sha256': 6}
+  m3/vendor/third_party/jackson-core-2.15.3/PROVENANCE.json {'sha256': 1, 'recipe_sha256': 6}
+  m3/vendor/third_party/jackson-core-2.16.1/OVERLAY_SOURCES.json {'recipe_sha256': 6}
+  m3/vendor/third_party/jackson-core-2.16.1/PROVENANCE.json {'sha256': 1, 'recipe_sha256': 6}
+  m3/vendor/third_party/jackson-core-2.19.2/OVERLAY_SOURCES.json {'recipe_sha256': 6}
+  m3/vendor/third_party/jackson-core-2.19.2/PROVENANCE.json {'sha256': 1, 'recipe_sha256': 6}
+  m3/vendor/third_party-m3/relocated/commons-codec-1.22.1/PROVENANCE.json {'sha256': 1, 'recipe_sha256': 2}
+  m3/vendor/third_party-m3/relocated/jackson-core-2.19.2/PROVENANCE.json {'sha256': 1, 'recipe_sha256': 6}
+# 3. Recipes on the branch, --check:
+  {"changed": [], "fixed_point": true, "mode": "check", "recipe": "JACKSON_NUMBERS_TO_JDK v2"}
+  {"changed": [], "fixed_point": true, "mode": "check", "recipe": "CHECKSUMS_TO_JDK v1"}
+  {"changed": [], "fixed_point": true, "mode": "check", "recipe": "BASE64_TO_JDK v1"}
+# 4. verify_source.py of every overlaid donor on the branch:
+  jackson-core-2.15.3 {"exact_files": 150, "exact_production_files": 128, "m3_overlays": 6, "revision": "2.15.3"}
+  jackson-core-2.16.1 {"exact_files": 155, "exact_production_files": 133, "m3_overlays": 6, "revision": "2.16.1"}
+  jackson-core-2.19.2 {"exact_files": 157, "exact_production_files": 135, "m3_overlays": 6, "revision": "2.19.2"}
+  commons-codec-1.17.1 {"exact_files": 219, "exact_production_files": 80, "m3_overlays": 2, "revision": "1.17.1"}
+  commons-codec-1.22.1 {"exact_files": 228, "exact_production_files": 87, "m3_overlays": 2, "revision": "1.22.1"}
+  HdrHistogram {"exact_files": 61, "exact_production_files": 53, "m3_overlays": 1, "revision": "2.1.12"}
+# 5. Jackson pack lock entry vs build.py's digest on Linux (number-parse-jackson/lockcheck.py):
+  master 08db7f057c87 (extracted donors: jackson-core only):
+  MATCH	jackson-core-2.19.2	files=163	lock_files=163
+  branch:
+  MATCH	jackson-core-2.19.2	files=163	lock_files=163
+# 6. replay_checksums.py (CHECKSUMS_TO_JDK through donor_overlay, --check) on the branch:
+  {"changed": [], "fixed_point": true, "mode": "check", "recipe": "CHECKSUMS_TO_JDK v1"}

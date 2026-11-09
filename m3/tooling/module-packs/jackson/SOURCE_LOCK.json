@@ -17,9 +17,9 @@
       "license": "The Apache Software License, Version 2.0",
       "module": "com.fasterxml.jackson.core",
       "path": "m3/vendor/third_party/jackson-core-2.19.2",
-      "provenance_sha256": "2bc138e901f09ee340f3d0b617eebc121613e7cc4bd7760ef9ce81c3743e9050",
+      "provenance_sha256": "674ef85f620acfbbad3419d3867793c40f9c648cb3ea131c1524963edb886522",
       "sources_jar_sha256": "e0f42e8ca172a74802f06683e14de59f5fc74d8d8f782ba97269adc5782527a3",
-      "tree_sha256": "113a3cbc256b2ba9df36fcb71727f51c8d22fcf8a792dadd5b787944afa74fc3"
+      "tree_sha256": "3ef36f74a8e5550803a1763119c8f446d1afaa47d6f0ee4f5d0c7c3b306525cb"
     },
     "jackson-databind-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.19.2-m3-source-1",
