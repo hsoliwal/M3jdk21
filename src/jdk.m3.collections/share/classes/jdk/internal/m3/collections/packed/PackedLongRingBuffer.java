@@ -24,7 +24,7 @@ import java.util.function.LongPredicate;
 /**
  * Fixed-capacity primitive long ring buffer.
  *
- * <p>Unlike {@link PackedLongDeque}, capacity never grows. This makes memory usage
+ * <p>Unlike {@code PackedLongDeque}, capacity never grows. This makes memory usage
  * deterministic for telemetry, rolling caches and bounded queues.
  *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/collections/PackedLongRingBuffer.java}

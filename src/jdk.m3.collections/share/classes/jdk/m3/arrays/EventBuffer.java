@@ -4,7 +4,7 @@ package jdk.m3.arrays;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.indexstring.structure.MIndexEventBuffer}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}.
+ * Every member body throws {@code M3NotYetReceived}.
  *
  * <p>Lineage: Synexia {@code m3-indexstring/src/main/java/jdk/internal/m3/indexstring/structure/MIndexEventBuffer.java}
  * blob {@code e4afcbebc2fff80865d93ee87ddea3cce19a3bfd} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},

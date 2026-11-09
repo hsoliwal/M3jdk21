@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.indexstring.MIndexArgumentRoleBits}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}, except: census3 P3-007 (qualification/census3-gaps-20261107) received the atoms of requireKnown, has, hasAny, names and their private helpers from the same donor blob at develop 78cf2ad4c7e5.
+ * Every member body throws {@code M3NotYetReceived}, except: census3 P3-007 (qualification/census3-gaps-20261107) received the atoms of requireKnown, has, hasAny, names and their private helpers from the same donor blob at develop 78cf2ad4c7e5.
  *
  * <p>Lineage: Synexia {@code m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexArgumentRoleBits.java}
  * blob {@code 7dc48bec582fd7768142739cb15a8177dd581288} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},

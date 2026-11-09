@@ -27,7 +27,7 @@ import jdk.internal.m3.collections.SortableFirstSignalOrder;
  * simultaneously serves as selection heap and ascending result; no Entry/Node/row facade
  * is constructed. O(n log(k) + k log(k)) comparisons and O(k) required ID storage.
  *
- * <p>When the comparator is {@link SortableFirstSignalOrder}, the first {@link Sortable}
+ * <p>When the comparator is {@code SortableFirstSignalOrder}, the first {@code Sortable}
  * signal is cached by its canonical {@link SortSignalLane}. Unverified signals cannot
  * determine the published ordering: that owner's exact comparator remains authoritative.
  * An arbitrary comparator must describe one stable, transitive order during this call.

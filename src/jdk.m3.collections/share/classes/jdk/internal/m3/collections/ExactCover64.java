@@ -20,7 +20,7 @@ import java.util.concurrent.CancellationException;
 /**
  * Bounded exact-cover enumeration of up to 64 columns. Shape: choose the least-supported
  * uncovered column, select a compatible row, recurse on uncovered XOR row, then reuse the path.
- * No per-node allocation. Depth <=64; row masks and one int[columns] path are primitive.
+ * No per-node allocation. Depth &lt;=64; row masks and one int[columns] path are primitive.
  * Exponential search is explicit: worst-case O(nodeBudget * rows * columns).
  * Callback borrows path[0,length) until it returns and MUST NOT mutate it or the row masks.
  *

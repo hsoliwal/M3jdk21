@@ -26,7 +26,7 @@ import java.util.function.Predicate;
 /**
  * Thread-safe weighted least-recently-used cache.
  *
- * <p>Unlike {@link LRUCache}, this cache bounds both entry count and caller-defined retained
+ * <p>Unlike {@code LRUCache}, this cache bounds both entry count and caller-defined retained
  * weight. The cache does not assume that weight is exact JVM heap usage; the supplied weigher owns
  * that contract. All get/put/remove/trim operations are O(1) amortized except predicate removal and
  * ordered-key snapshots, which are O(n).</p>

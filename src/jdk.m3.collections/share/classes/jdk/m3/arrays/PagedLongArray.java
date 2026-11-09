@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 /**
  * M3 SDK scaffold of {@code jdk.internal.m3.mindex.swap.MIndexPagedLongArray}: declarations received, atoms not yet received.
- * Every member body throws {@link M3NotYetReceived}.
+ * Every member body throws {@code M3NotYetReceived}.
  *
  * <p>Lineage: Synexia {@code m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/swap/MIndexPagedLongArray.java}
  * blob {@code aa5c6bd2165ec448452580ab966977d54b7362b4} at develop {@code 11c94feb18155a53cc213708c353791132edc4a7},

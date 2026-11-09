@@ -19,7 +19,7 @@ import jdk.m3.collections.bits.LongBitSet;
  * {@link NullPointerException}, a constant of another enum type throws {@link ClassCastException}
  * on {@code add} and is simply absent for {@code contains}/{@code remove}. Adapted from the
  * first-party Synexia donor {@code jdk.internal.m3.primitives.LongBitSet} (word operations) and the
- * ordinal universe handling of {@link M3EnumLongMap}.</p>
+ * ordinal universe handling of {@code M3EnumLongMap}.</p>
  */
 public final class M3EnumSet<E extends Enum<E>> {
     private final Class<E> elementType;

@@ -29,7 +29,7 @@ public final class MonotoneSearch {
 
     /**
      * First true index in [fromInclusive,toExclusive), or toExclusive if all false.
-     * Requires 0 <= fromInclusive <= toExclusive. Empty ranges do not call predicate.
+     * Requires 0 &lt;= fromInclusive &lt;= toExclusive. Empty ranges do not call predicate.
      * Monotonicity is a binding obligation, not an O(n) validation scan performed here.
      */
     public static int firstTrue(int fromInclusive, int toExclusive, IntPredicate predicate) {
