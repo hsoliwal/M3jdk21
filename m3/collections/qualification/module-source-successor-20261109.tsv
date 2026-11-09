@@ -1273,6 +1273,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedHeapGrowth
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntDisjointSet.java	ABSENT	5b3e6c1372c6202b81aab36ad36ac6129f7acdd9050cf8ba909e1e65a984efb7
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntLongSparseArray.java	ABSENT	d7f497d11a616d7c5751a41db8df98487ac281af7f46e2a7c7c4650e791089d7
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntMinMaxHeap.java	ABSENT	b5d5eec461ba88158950905fad639978b40a8a96dd3479ee9a93a1d4e7af0981
+m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntNative.java	ABSENT	497aac03c56311e721ed4b3e42958f3d29e9b9f0f77fb9c4c953185e1285b767
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntPrefixIndex.java	ABSENT	aa59edd12b7539f26cdeb42a0f61490e1021d7995223ee19fbd862add3eb1120
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntSparseSet.java	ABSENT	cdf3581589c9bdd5c03d95955de2d2c814acd937d3eb21ae99a5c26365af60db
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedListBase.java	ABSENT	99ed87a711cfaa7426e7b22e947e93658db165aba2b92ecf339271fe844680b0
@@ -1938,6 +1939,8 @@ m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedHeapAtomsT
 m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedHeapExportContractTest.java	ABSENT	0fe6ebfddcb33dd5878eaab964e45f3463f65f32a9c6aa2e66e7b764c3bc118f
 m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedHeapGrowthBurstTest.java	ABSENT	109f477d3d1cbbad4988362e0275e6db31f2af29fad230e45de2123d4387fea4
 m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedHeapGrowthTest.java	ABSENT	df21be8b5ea4cfcc2d5272244b6350ae663008b32f6ea2173246623379eb0186
+m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedIntLineageTest.java	ABSENT	ad186cbd21634161ef9e45c17d0563e5edf94dc6ec48a6db3841c8a740136193
+m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedIntNativeTest.java	ABSENT	4d0c6e5843bc1b430ac502718eb1946aca35e0c78ca1f9484a604a7026fcc766
 m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedIntPrefixIndexTest.java	ABSENT	d3544e16f25d3ba439ff0b089a6c69ff1bdc0635edb99c35a5586dc5b242ccbc
 m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedLongChunkedQueueTest.java	ABSENT	01b118e2d63dd5493d47425a6ebbb9b63ae8e389eb68f8498bdc1a40456fa10d
 m3/collections/src/test/java/jdk/internal/m3/collections/packed/PackedLongHeapRootBoundTest.java	ABSENT	7eccaa789748ad5328ddb9ae944e0a0c90fc0591e729d0508ba0692cf0b513ec

@@ -155,6 +155,10 @@ m3_collections_jni(m3_marker_topk SOURCES collections/m3_marker_topk_jni.c
 m3_collections_jni(m3_mat_row SOURCES collections/mat_int_row_jni.c
   CLASSES jdk.internal.m3.collections.mat.MatIntRowKernel)
 
+# U12 (second packed lineage JNI codec): PackedIntNative is host-loaded (PackedIntNativeTest: lint.native.path).
+m3_collections_jni(m3_packed_int_width SOURCES collections/packed_int_width.c
+  CLASSES jdk.internal.m3.collections.packed.PackedIntNative)
+
 # One javac -h run writes the headers of every declaring class; javac compiles their dependencies implicitly.
 list(REMOVE_DUPLICATES M3_JNI_DECLARATIONS)
 list(REMOVE_DUPLICATES M3_JNI_HEADER_FILES)

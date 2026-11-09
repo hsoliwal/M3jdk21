@@ -1,0 +1,2 @@
+# synexia_fqn	member
+com.synexia.common.collections.PackedIntArray	public static PackedIntArray of(int length, IntWidth width, boolean signed) { return new PackedIntArray(length, width, signed); }
