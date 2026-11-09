@@ -29,10 +29,10 @@ base = os.path.join(root, "src", "jdk.m3.collections", "share", "classes")
 with open(out, "w", encoding="utf-8", newline="\n") as w:
     w.write("class\tlibrary\tc_files\tbound\ttotal\n")
     for c, (b, n) in sorted(classes.items()):
-        src = open(os.path.join(base, *c.split(".")) + ".java", encoding="utf-8", errors="replace").read()
+        src = open(os.path.join(base, *c.split("$")[0].split(".")) + ".java", encoding="utf-8", errors="replace").read()
         lib = re.findall(r'loadLibrary\("([^"]+)"\)', src)
         prop = re.findall(r'getProperty\("([^"]*native[^"]*)"', src)
-        mangled = c.replace("_", "_1").replace(".", "_")
+        mangled = c.replace("_", "_1").replace("$", "_00024").replace(".", "_")
         cf = sorted(by_prefix.get(mangled, set()))
         w.write(f"{c}\t{','.join(sorted(set(lib))) or ('prop:' + ','.join(prop) if prop else '?')}\t{' '.join(cf) or '-'}\t{b}\t{n}\n")
 print("NATIVE_LIBMAP classes", len(classes))
