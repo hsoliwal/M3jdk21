@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
-"""DONOR_OVERLAY v1: the custody shared by the recipes that retarget vendored donor sources to java.base.
+"""DONOR_OVERLAY v2: the custody shared by the recipes that retarget vendored donor sources to java.base.
 
 A recipe module supplies:
   RECIPE_ID, TOOL_REL      its id and repository-relative path (each overlay record pins the path and its sha256)
@@ -11,7 +11,17 @@ A recipe module supplies:
                            the overlay; verify_source.py imports the recipe and calls it, so it lives in the recipe
   POM_TEXT, README_TEXT    (old, new) replacements; README_TEXT may name {donor} ("<artifact> <version>")
   MODIFICATIONS            the PROVENANCE.json "modifications" text
-  RELOCATED                {donor: (relocated directory, (old package, new package), (old path, new path))}
+  RELOCATED                {donor: (relocated directory, relocations, (old path, new path))}; relocations is one
+                           (old package, new package) pair or a tuple of them, applied in order
+Optional (v2):
+  REMOVED                  target class names whose source goes (the original is still retained and pinned)
+  POM_EDITS                compiled regexes whose matches are removed from the pom, before POM_TEXT
+  POM_FORBIDDEN            strings the edited pom must not contain
+  provenance_update(p)     edits the donor's PROVENANCE.json dict after the overlay records are set
+  RELOCATED_EDITS          {donor: ((path under the relocated source root, old, new), ...)}
+  after(check, changed, custody)
+                           runs once after every donor; custody holds this module's names (reconcile, sha256,
+                           dump_json, text_of, REPO, ...)
 
 run(recipe) keeps, for each donor: every upstream original byte-identical under upstream-excluded/ (kind
 unmodified-production-superseded-by-m3-overlay); the overlay under src/main/java (kind m3-overlay-source, pinned with
@@ -19,7 +29,8 @@ its base and the recipe); OVERLAY_SOURCES.json; PROVENANCE.json; and verify_sour
 through the recipe. The verify_source.py template is the donors' own, with two fixes: the repository root, and
 `revision` falling back to `version`. A donor's relocated copy (lib-intake) gets the name-mapped overlay and copies of
 PROVENANCE.json and THIRD_PARTY_NOTICES.md. Re-running changes nothing; --check writes nothing and exits 1 when any
-target differs. FDP_DELEGATES_TO_JDK, JACKSON_NUMBERS_TO_JDK and CHECKSUMS_TO_JDK carry their own copy of this logic.
+target differs. v2 adds the optional hooks above; JACKSON_NUMBERS_TO_JDK and CHECKSUMS_TO_JDK moved onto it, so
+FDP_DELEGATES_TO_JDK (retired) is the only recipe with its own copy.
 """
 from __future__ import annotations
 
@@ -30,6 +41,7 @@ import io
 import json
 from pathlib import Path
 import re
+import types
 
 REPO = Path(__file__).resolve().parents[5]
 VENDOR = "m3/vendor/third_party"
@@ -154,7 +166,9 @@ def plan_donor(recipe, name: str) -> list[dict]:
         original = holder.read_bytes()
         if sha256(original) != pins[upstream]:
             raise ValueError("Original is not the pinned upstream byte sequence: " + str(holder))
-        plans.append({"upstream": upstream, "original": original, "result": recipe.overlay(original, upstream),
+        removed = upstream.rsplit("/", 1)[-1].removesuffix(".java") in getattr(recipe, "REMOVED", ())
+        plans.append({"upstream": upstream, "original": original,
+                      "result": None if removed else recipe.overlay(original, upstream),
                       "source_rel": source_rel, "retained_rel": retained_rel, "tool_sha": tool_sha})
     return plans
 
@@ -168,12 +182,14 @@ def overlay_entry(recipe, plan: dict) -> dict:
 
 def desired_records(recipe, name: str, plans: list[dict]) -> tuple[bytes, bytes]:
     donor_rel = f"{VENDOR}/{name}"
-    records = [{key: value for key, value in overlay_entry(recipe, plan).items() if key != "kind"} for plan in plans]
+    kept = [plan for plan in plans if plan["result"] is not None]
+    records = [{key: value for key, value in overlay_entry(recipe, plan).items() if key != "kind"} for plan in kept]
     record_bytes = dump_json({"donor": name, "m3_overlays": records, "overlay": recipe.RECIPE_ID,
                               "recipe": recipe.TOOL_REL})
     provenance = json.loads(text_of(REPO / donor_rel / "PROVENANCE.json"))
-    by_source = {plan["source_rel"]: plan for plan in plans}
-    ours = {plan["retained_rel"] for plan in plans} | {f"{donor_rel}/{RECORD_FILE}"}
+    by_source = {plan["source_rel"]: plan for plan in kept}
+    ours = ({plan["retained_rel"] for plan in plans} | {f"{donor_rel}/{RECORD_FILE}"}
+            | {plan["source_rel"] for plan in plans if plan["result"] is None})
     files = [overlay_entry(recipe, by_source[item["repository"]]) if item["repository"] in by_source else item
              for item in provenance["files"] if item["repository"] not in ours]
     files.extend({"kind": RETAINED_KIND, "repository": plan["retained_rel"], "sha256": sha256(plan["original"]),
@@ -181,6 +197,8 @@ def desired_records(recipe, name: str, plans: list[dict]) -> tuple[bytes, bytes]
     files.append({"kind": RECORD_KIND, "repository": f"{donor_rel}/{RECORD_FILE}", "sha256": sha256(record_bytes),
                   "upstream": recipe.TOOL_REL})
     provenance.update({"files": files, "modifications": recipe.MODIFICATIONS})
+    if hasattr(recipe, "provenance_update"):
+        recipe.provenance_update(provenance)
     return record_bytes, dump_json(provenance)
 
 
@@ -200,13 +218,36 @@ def replace_all(text: str, pairs: tuple, what: str) -> str:
     return text
 
 
-def reconcile(path: Path, data: bytes, check: bool, changed: list[str]) -> None:
+def reconcile(path: Path, data: bytes | None, check: bool, changed: list[str]) -> None:
+    """Make path hold data, or not exist when data is None; record the path when it differs."""
+    if data is None:
+        if path.exists():
+            changed.append(path.relative_to(REPO).as_posix())
+            if not check:
+                path.unlink()
+        return
     if path.is_file() and path.read_bytes() == data:
         return
     changed.append(path.relative_to(REPO).as_posix())
     if not check:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data)
+
+
+def edit_pom(recipe, text: str, name: str) -> str:
+    for pattern in getattr(recipe, "POM_EDITS", ()):
+        text = pattern.sub("", text)
+    text = replace_all(text, tuple(recipe.POM_TEXT), name + " pom")
+    left = [word for word in getattr(recipe, "POM_FORBIDDEN", ()) if word in text]
+    if left:
+        raise ValueError(name + " pom still names " + ", ".join(left))
+    return text
+
+
+def relocate(text: str, relocations) -> str:
+    for old, new in ((relocations,) if isinstance(relocations[0], str) else relocations):
+        text = text.replace(old, new)
+    return text
 
 
 def apply_donor(recipe, name: str, check: bool, changed: list[str]) -> None:
@@ -218,19 +259,22 @@ def apply_donor(recipe, name: str, check: bool, changed: list[str]) -> None:
     reconcile(donor / RECORD_FILE, record_bytes, check, changed)
     reconcile(donor / "PROVENANCE.json", provenance_bytes, check, changed)
     reconcile(donor / "verify_source.py", verify_source(donor, name), check, changed)
-    reconcile(donor / "pom.xml", replace_all(text_of(donor / "pom.xml"), tuple(recipe.POM_TEXT), name + " pom")
-              .encode(ENCODING), check, changed)
+    reconcile(donor / "pom.xml", edit_pom(recipe, text_of(donor / "pom.xml"), name).encode(ENCODING), check, changed)
     provenance = json.loads(provenance_bytes)
     display = f"{provenance['artifact']} {provenance['version']}"
     readme = tuple((old.format(donor=display), new.format(donor=display)) for old, new in recipe.README_TEXT)
     reconcile(donor / "README.md", replace_all(text_of(donor / "README.md"), readme, name + " README")
               .encode(ENCODING), check, changed)
     if name in recipe.RELOCATED:
-        relocated, (old_package, new_package), path_map = recipe.RELOCATED[name]
+        relocated, relocations, path_map = recipe.RELOCATED[name]
         for plan in plans:
             target = REPO / relocated / SOURCE_ROOT / plan["upstream"].replace(*path_map)
-            reconcile(target, plan["result"].decode(ENCODING).replace(old_package, new_package).encode(ENCODING),
-                      check, changed)
+            result = plan["result"]
+            reconcile(target, None if result is None else relocate(result.decode(ENCODING), relocations)
+                      .encode(ENCODING), check, changed)
+        for path, old, new in getattr(recipe, "RELOCATED_EDITS", {}).get(name, ()):
+            target = REPO / relocated / SOURCE_ROOT / path
+            reconcile(target, text_of(target).replace(old, new).encode(ENCODING), check, changed)
         for record in RELOCATED_RECORDS:
             if not check or not changed:
                 reconcile(REPO / relocated / record, (donor / record).read_bytes(), check, changed)
@@ -243,6 +287,8 @@ def run(recipe, argv: list[str] | None = None) -> int:
     changed: list[str] = []
     for name in recipe.DONORS:
         apply_donor(recipe, name, args.check, changed)
+    if hasattr(recipe, "after"):
+        recipe.after(args.check, changed, types.SimpleNamespace(**globals()))
     print(json.dumps({"recipe": recipe.RECIPE_ID, "mode": "check" if args.check else "apply",
                       "changed": changed, "fixed_point": not changed}, sort_keys=True))
     return EXIT_DIFFERS if args.check and changed else 0

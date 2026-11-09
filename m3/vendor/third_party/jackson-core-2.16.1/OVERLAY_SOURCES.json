@@ -6,7 +6,7 @@
       "base_sha256": "668eddecbb6796a221a3140e5215d383dc64af889a999e8719c4835eec9996aa",
       "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
+      "recipe_sha256": "62d16c42361bda638cc3e7f4d908a780c793c2c3e5d26ceafc34bfd7c221e10d",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/NumberInput.java",
       "sha256": "819d19300f034cd299b89057532cdc361babc145cc6b63c2874f28b9243f5251",
       "upstream": "com/fasterxml/jackson/core/io/NumberInput.java"
@@ -16,7 +16,7 @@
       "base_sha256": "25ec6c957e076d7ddf700aa97593528f4773d1fc84f3ba2e5a8c1fcb1b1fa590",
       "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
+      "recipe_sha256": "62d16c42361bda638cc3e7f4d908a780c793c2c3e5d26ceafc34bfd7c221e10d",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/BigDecimalParser.java",
       "sha256": "287875147952bca9f932dcf56a4278613eb70c85025708db24d36bb742e706bd",
       "upstream": "com/fasterxml/jackson/core/io/BigDecimalParser.java"
@@ -26,7 +26,7 @@
       "base_sha256": "990983cd408f48d0f2d2692907997a0aa621cc95c8cd41e6547096a09bc24cb2",
       "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
+      "recipe_sha256": "62d16c42361bda638cc3e7f4d908a780c793c2c3e5d26ceafc34bfd7c221e10d",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/BigIntegerParser.java",
       "sha256": "fa0c5b9067c09dce770c28524f7836c6b23783692d73844c319268b8fec89948",
       "upstream": "com/fasterxml/jackson/core/io/BigIntegerParser.java"
@@ -36,7 +36,7 @@
       "base_sha256": "dda87a19daece9a49a2548f953ef0b122880e784aef0fa26556669e003919739",
       "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
+      "recipe_sha256": "62d16c42361bda638cc3e7f4d908a780c793c2c3e5d26ceafc34bfd7c221e10d",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/NumberOutput.java",
       "sha256": "6655fb9acfe2d806fa9db39303aa11e231e5ae8579e663e8cc3bae409b6c4dba",
       "upstream": "com/fasterxml/jackson/core/io/NumberOutput.java"
@@ -46,7 +46,7 @@
       "base_sha256": "51cda78a6fee54cdfcd728f65b39e7f03ead53bd9731b5639abfe0d16a57a439",
       "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
+      "recipe_sha256": "62d16c42361bda638cc3e7f4d908a780c793c2c3e5d26ceafc34bfd7c221e10d",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java",
       "sha256": "4c3d685cc5c81953705c80e2fd4b75b8bd09ea01e2b6396404006de828a82cd6",
       "upstream": "com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java"
@@ -56,7 +56,7 @@
       "base_sha256": "0370476f767f4ee02aabbde6edf733d92c56d2e6daa05734789474a8be3e1f84",
       "overlay": "JACKSON_NUMBERS_TO_JDK v2",
       "recipe": "m3/tooling/jdk-superset/number-parse/tools/jackson_numbers_to_jdk.py",
-      "recipe_sha256": "7b9f0c8c0c703b69125db6cf53b77b235372746551ede7eb42402b215180955c",
+      "recipe_sha256": "62d16c42361bda638cc3e7f4d908a780c793c2c3e5d26ceafc34bfd7c221e10d",
       "repository": "m3/vendor/third_party/jackson-core-2.16.1/src/main/java/com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java",
       "sha256": "26cfa1293a08f29608d4d9e0fc9b33667f9abd6be174ef0be25d85d1544f4912",
       "upstream": "com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java"
