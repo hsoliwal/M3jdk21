@@ -185,7 +185,10 @@
   </build>
   <profiles>
     <profile>
-      <!-- Native tests: build m3/arrays/src/main/native with CMake first, then -Pm3-collections-native -Dm3.collections.native.dir=<dir>. -->
+      <!-- Native tests: build make/m3/arrays and make/m3/collections with CMake first, then -Pm3-collections-native
+           -Dm3.collections.native.dir=<arrays build dir> -Dm3.collections.jni.dir=<collections build dir>.
+           On Windows also pass -Dm3.collections.native.suffix=.dll -Dm3.collections.jni.prefix= (the collections
+           libraries carry no lib prefix there, so System.loadLibrary finds them). -->
       <id>m3-collections-native</id>
       <build>
         <plugins>
@@ -196,8 +199,19 @@
             <configuration>
               <useModulePath>false</useModulePath>
               <excludes combine.self="override"/>
+              <!-- The self-loading owners call System.loadLibrary; java.library.path must be set at JVM start. -->
+              <argLine>-Djava.library.path=${m3.collections.jni.dir}</argLine>
               <systemPropertyVariables>
                 <m3.arrays.native.path>${m3.collections.native.dir}/${m3.collections.native.prefix}m3_arrays${m3.collections.native.suffix}</m3.arrays.native.path>
+                <m3.counted.native>${m3.collections.jni.dir}/${m3.collections.jni.prefix}m3_count_lanes${m3.collections.native.suffix}</m3.counted.native>
+                <m3.totals.native>${m3.collections.jni.dir}/${m3.collections.jni.prefix}m3_count_totals${m3.collections.native.suffix}</m3.totals.native>
+                <!-- Owners that load only on opt-in, and the tests that then require every built backend. -->
+                <m3.collections.rank.native>true</m3.collections.rank.native>
+                <m3.collections.rank.pairdistance.native>true</m3.collections.rank.pairdistance.native>
+                <m3.collections.signal.native>true</m3.collections.signal.native>
+                <m3.collections.lane.native>true</m3.collections.lane.native>
+                <m3.collections.all.native.required>true</m3.collections.all.native.required>
+                <m3.mask.spans.native.required>true</m3.mask.spans.native.required>
               </systemPropertyVariables>
             </configuration>
           </plugin>
@@ -206,6 +220,8 @@
       <properties>
         <m3.collections.native.prefix>lib</m3.collections.native.prefix>
         <m3.collections.native.suffix>.so</m3.collections.native.suffix>
+        <m3.collections.jni.dir>${m3.collections.native.dir}</m3.collections.jni.dir>
+        <m3.collections.jni.prefix>lib</m3.collections.jni.prefix>
       </properties>
     </profile>
     <profile>

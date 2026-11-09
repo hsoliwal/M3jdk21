@@ -115,7 +115,8 @@ final class NativeFiveLibrarySdkNoVendorTest {
                 "(?m)^\\s*import\\s+(?:static\\s+)?(?:com\\.google\\.common"
                 + "|org\\.eclipse\\.collections|org\\.springframework"
                 + "|org\\.apache\\.commons)\\.");
-        Path src = Path.of("src/main/java/jdk/m3/collections");
+        // The module sources moved to src/jdk.m3.collections (#2849); the module dir is m3/collections.
+        Path src = Path.of("../../src/jdk.m3.collections/share/classes/jdk/m3/collections");
         assertTrue(Files.isDirectory(src), "run from the m3/collections Maven module");
         try (Stream<Path> files = Files.walk(src)) {
             for (Path file : files.filter(p -> p.toString().endsWith(".java")).toList()) {

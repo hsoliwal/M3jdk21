@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 #include <jni.h>
 #include <stdint.h>
-#include "jdk_m3_collections_M3ResidencyStateMaskIndex.h"
-#include "../../../../../native/include/m3_jni_core.h"
+#include "jdk_internal_m3_collections_ResidencyStateMaskIndex.h"
+#include "m3_jni_core.h"
 
 /* Only ephemeral primitive index/word/state snapshots cross JNI; no Java object handles. */
 #define M3_CHUNK 256
