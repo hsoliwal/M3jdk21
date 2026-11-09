@@ -110,7 +110,7 @@ try (PmemRegion model = PmemSdk.open(Path.of("/pmem/models/weights.bin"), 0, 819
 
 Consumers depend on `com.m3:m3-optane` and `requires org.m3jdk.optane;`. The libraries are optional:
 `System.loadLibrary("m3optane")` / `System.loadLibrary("m3pmemsdk")` at class initialization, `java.library.path`
-names their directory. `M3_JDK=/path/to/a/complete/matched/M3JDK21` selects the product JDK for `verify.sh`; stock
+names their directory. `M3JDK=/path/to/a/complete/matched/M3JDK21` selects the product JDK for `verify.sh`; stock
 Java 21 software tests do not prove a source-built M3JDK image.
 
 ## Existing owners retained; next integration gates

@@ -48,7 +48,7 @@ interner. Do not treat row identity as Java String identity or word meaning.
 ## Test and JNI admission
 
 ```sh
-M3_JDK=/path/to/jdk21 ./m3/lexicon/run-wordrows-proof.sh
+M3JDK=/path/to/jdk21 ./m3/lexicon/run-wordrows-proof.sh
 ```
 
 This compiles the two Java classes plus the synthetic endian-aware format-3

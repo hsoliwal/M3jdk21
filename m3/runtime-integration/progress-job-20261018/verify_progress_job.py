@@ -96,8 +96,8 @@ def main():
         receipt["external_eclipse_jars"] = [{"path": path.name, "sha256": sha(path)} for path in jars]
         stock_java = (args.stock_jdk / "bin/java").resolve()
         stock_javac = (args.stock_jdk / "bin/javac").resolve()
-        image_java = (args.m3_jdk / "bin/java").resolve()
-        image_javac = (args.m3_jdk / "bin/javac").resolve()
+        image_java = (args.m3jdk / "bin/java").resolve()
+        image_javac = (args.m3jdk / "bin/javac").resolve()
         for label, executable in (("stock-javac-version", stock_javac), ("image-javac-version", image_javac)):
             stdout, stderr = run(label, [executable, "-version"])
             if not (stdout + stderr).strip().startswith("javac 21"):

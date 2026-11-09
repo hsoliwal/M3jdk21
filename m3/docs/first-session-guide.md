@@ -35,7 +35,7 @@ the scripts and selected toolchain before running them.
 | --- | --- | --- |
 | Identify the exact tree | `git rev-parse HEAD`; `git status --short` | Git checkout; preserve unrelated changes |
 | Read the independent module | `git grep -n 'flatten\|subSequence' -- m3/core/src/com/m3/text` | Read-only symbol search |
-| Build and test that module | `M3_JDK=/absolute/path/to/jdk-21 bash m3/build.sh` | Bash, JDK 21 and shell utilities including `sha256sum`; writes `m3/build/` |
+| Build and test that module | `M3JDK=/absolute/path/to/jdk-21 bash m3/build.sh` | Bash, JDK 21 and shell utilities including `sha256sum`; writes `m3/build/` |
 | Check the foundation recipe manifest | `python3 m3/recipes/apply.py --check` | Python 3; a refusal needs investigation, not bypass |
 | Test foundation recipe refusal/repeatability | `python3 m3/recipes/test_recipe.py` | Python 3; recipe scope only |
 | Verify the independent Maven control plane | `mvn -B -ntp -f m3/pom.xml clean verify` | Maven, selected Java toolchain and resolvable pinned dependencies |

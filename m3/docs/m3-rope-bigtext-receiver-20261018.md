@@ -31,7 +31,7 @@ The actual M3JDK21 owner java.lang.M3String/M3StringTuple and existing Synexia s
 
 From the repository root, with a Java 21 JDK:
 
-    M3_JDK=/path/to/jdk21 bash m3/run-rope-proof.sh
+    M3JDK=/path/to/jdk21 bash m3/run-rope-proof.sh
 
 This script compiles the current m3/core Java module and runs the rope fixture under the normal JIT, interpreter, noncompact Strings, and C2-focused modes.
 

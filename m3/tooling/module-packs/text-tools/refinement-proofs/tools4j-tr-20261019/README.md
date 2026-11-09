@@ -40,7 +40,7 @@ The [selected v4 measurements](https://github.com/hsoliwal/com.synexia/blob/dade
 
 Allocation falls in these six measured workloads. CPU increases to **2.180 times baseline for tiny ASCII** and **1.106 times baseline for the 4,096-symbol alphabet**. These measurements describe the finite canonical HotSpot probe; they are separate from installed-module and linked-VM correctness evidence and do not establish retained heap, RSS, cross-platform performance or a universal speedup. The v5 experiment was not selected.
 
-No fresh whole current HotSpot/JDK build, jtreg or full Synexia reactor was performed. The existing sealed M3 JDK image supplies the module build and linked-VM gates. String remains the active global receiving phase.
+No fresh whole current HotSpot/JDK build, jtreg or full Synexia reactor was performed. The existing sealed M3JDK image supplies the module build and linked-VM gates. String remains the active global receiving phase.
 
 ## Canonical source proof
 

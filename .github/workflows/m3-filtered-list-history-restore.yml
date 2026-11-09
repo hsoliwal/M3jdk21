@@ -34,7 +34,7 @@ jobs:
             test/jdk/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java \
             test/jdk/jdk/m3/collections/M3FilteredListsReadonlyDepthProof.java \
             test/jdk/jdk/m3/collections/M3FilteredListsMaskBridgeProof.java
-      - name: Actual selected M3 JDK List original and restored contract probes
+      - name: Actual selected M3JDK List original and restored contract probes
         run: |
           for kind in M3FilteredListsContract M3FilteredListsEdges M3FilteredListsWorkProof M3FilteredListsDeepCompositionProof M3FilteredListsReadonlyDepthProof M3FilteredListsMaskBridgeProof; do
             java -Xss256k -cp "$RUNNER_TEMP/classes" jdk.m3.collections."$kind"

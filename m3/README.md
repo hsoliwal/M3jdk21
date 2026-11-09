@@ -11,7 +11,7 @@ Original contributions: Hitesh Soliwal <hsoliwal@gmail.com>. OpenJDK retains its
 
 ## Build and test
 
-Set `M3_JDK` to a private JDK 21 directory and run `./m3/build.sh`. The script compiles the named module, executes deterministic tests under normal JIT, interpreter, noncompact Strings and C2-focused modes, then builds an original 13-word English **fixture** image. This is not a production English lexicon. `m3/build/` is ignored. The built JDK image can be used as `M3_JDK` after a native OpenJDK build.
+Set `M3JDK` to a private JDK 21 directory and run `./m3/build.sh`. The script compiles the named module, executes deterministic tests under normal JIT, interpreter, noncompact Strings and C2-focused modes, then builds an original 13-word English **fixture** image. This is not a production English lexicon. `m3/build/` is ignored. The built JDK image can be used as `M3JDK` after a native OpenJDK build.
 
 The historical `m3/recipes/` scripts are **migration residue** from an earlier receiver model. They must not be used for new source changes. The owning Maven/OpenRewrite recipes, task crates, fixtures and execution live only in Synexia. This repository receives the exact qualified postimages and independently verifies their source hashes, JDK contracts and installed-product behavior. Before cleaning up the old scripts, source-seal them in Synexia and verify all callers.
 
@@ -36,7 +36,7 @@ See `docs/stages.md`, `docs/name-mapping.json`, and `evidence/constructor-pool-r
 ## Whole-JDK M3 programme documentation
 
 Stage P0 above remains a bounded implemented foundation milestone. It is not the scope boundary for
-the broader M3 JDK programme.
+the broader M3JDK programme.
 
 The documentation-only whole-JDK handoff is:
 

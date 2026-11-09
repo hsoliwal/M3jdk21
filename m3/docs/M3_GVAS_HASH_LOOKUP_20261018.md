@@ -41,7 +41,7 @@ primitive index preparation for the bounded default fixture, 2,048
 distinct negative probes, exact Unicode, surrogate seams, immutable
 address calculations, malformed image refusal and JNI three-process proof.
 
-Run `M3_JDK=/path/to/java21 python3 m3/verify-gvas-literal-precompute.py`
+Run `M3JDK=/path/to/java21 python3 m3/verify-gvas-literal-precompute.py`
 to compile actual Java21 reader/writer/tests and C11 JNI, then run
 `-Xcheck:jni`, native address collision, digest mismatch, corrupted row
 validation, and `-Xint`/`-Xbatch`/`-XX:-CompactStrings` cooperating

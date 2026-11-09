@@ -97,7 +97,7 @@ status.
 
 Use Linux, an M3 Java 21 development image, a C compiler, Python 3.10 or newer,
 PATH-selected `objcopy` (binutils), and Maven for the Maven entry point.
-Select a clean source M3 JDK with none
+Select a clean source M3JDK with none
 of these twenty optional modules already installed. The driver checks the
 source image's `release` `MODULES` inventory and its `jmods/*.jmod` names before
 creating output, and refuses any collision. This matters because the existing

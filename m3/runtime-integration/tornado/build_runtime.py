@@ -378,14 +378,14 @@ class Build:
             self.junit = verify_junit_lock(self.a.junit_lock)
             junit_proof = {"lock_sha256": sha(self.a.junit_lock), "artifacts": self.junit["artifacts"],
                            "source_files": len(self.junit["sources"]), "build_receipts": self.junit["build_receipts"]}
-        m3 = verify_m3_receipt(self.a.m3_jdk_receipt, self.jdk) if self.a.m3_jdk_receipt else None
+        m3 = verify_m3_receipt(self.a.m3jdk_receipt, self.jdk) if self.a.m3jdk_receipt else None
         require(m3 is not None or self.a.allow_bootstrap_jdk, "M3 source-built receipt required; bootstrap must be explicit")
         require(not (m3 and self.a.allow_bootstrap_jdk), "choose final M3 receipt or provisional bootstrap")
         identity = {
             "source_lock_sha256": sha(self.lock_path), "source": source_proof, "source_root": str(self.source),
             "legal_notices": notices, "source_junit": junit_proof,
             "receiver": receiver, "owners": owners, "harness": own, "jdk": jdk_files,
-            "m3_jdk": m3, "maven": sha(self.maven), "maven_repo": str(self.m2), "jdk_home": str(self.jdk),
+            "m3jdk": m3, "maven": sha(self.maven), "maven_repo": str(self.m2), "jdk_home": str(self.jdk),
             "backend": self.a.backend, "require_device": self.a.require_device,
             "require_gpu": self.a.require_gpu,
             "allow_bootstrap_jdk": self.a.allow_bootstrap_jdk, "resolve_build_tools": self.a.resolve_build_tools,
@@ -780,7 +780,7 @@ class Build:
         if self.junit:
             _, original = self.run("image-original-junit", [launcher, "-Xcheck:jni"] + self.junit_arguments())
             require("M3_RV32IM_ORIGINAL_JUNIT_PASS" in original, "installed-image original JUnit suite incomplete")
-        if self.a.m3_jdk_receipt:
+        if self.a.m3jdk_receipt:
             _, flags = self.run("m3-vm-flags", [self.image / "bin/java", "-XX:+UnlockExperimentalVMOptions", "-XX:+PrintFlagsFinal", "-version"])
             require(re.search(r"\bUseM3StringStorage\s*=\s*false\b", flags), "installed image lacks disabled M3 String flag")
             code, rejected = self.run("m3-jvmci-string-refusal", [self.image / "bin/java", "-XX:+UnlockExperimentalVMOptions",
@@ -820,14 +820,14 @@ class Build:
                 self.state["receiver_original_device_tests"] = {"found": 19, "successful": 19, "aborted": 0, "skipped": 0,
                                                               "failed": 0, "backend": detail["backend"], "device_type": detail["device_type"]}
         self.state["image_modules"] = sorted(installed)
-        self.state["runtime_scope"] = "SOURCE_BUILT_M3JDK" if self.a.m3_jdk_receipt else "PROVISIONAL_BOOTSTRAP_JDK"
+        self.state["runtime_scope"] = "SOURCE_BUILT_M3JDK" if self.a.m3jdk_receipt else "PROVISIONAL_BOOTSTRAP_JDK"
 
     def receipt(self):
         self.verify_outputs()
         identity, fingerprint = self.fingerprint()
         require(fingerprint == self.state["input_fingerprint"], "inputs changed during qualification")
         device = self.state.get("device", {"status": "NOT_EXECUTED"})
-        status = "RUNTIME_QUALIFIED" if self.a.m3_jdk_receipt and device["status"] == "PASS" and self.junit else "PROVISIONAL"
+        status = "RUNTIME_QUALIFIED" if self.a.m3jdk_receipt and device["status"] == "PASS" and self.junit else "PROVISIONAL"
         pending = ["Full JDK jtreg/native/platform admission remains independently required"]
         if not self.junit:
             pending.append("Original receiver JUnit 5 suite requires the source-owned JUnit toolchain")
