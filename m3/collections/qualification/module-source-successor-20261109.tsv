@@ -1266,6 +1266,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedHashAtoms.
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedHashPolicy.java	ABSENT	1fac07bc81c08750840fcfeecba15bb86e0b7c9603e03353527edd30af4caebb
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedHeapAtoms.java	ABSENT	1ab55445cd0b27d5c834baf157cc8e63956585186902214e85d00d6e43e201a8
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedHeapGrowth.java	ABSENT	ecb8beb602e4e9795dec612116547423e04d016d4d8cdef3e4facea812df7bfd
+m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntDisjointSet.java	ABSENT	5b3e6c1372c6202b81aab36ad36ac6129f7acdd9050cf8ba909e1e65a984efb7
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntLongSparseArray.java	ABSENT	d7f497d11a616d7c5751a41db8df98487ac281af7f46e2a7c7c4650e791089d7
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntMinMaxHeap.java	ABSENT	b5d5eec461ba88158950905fad639978b40a8a96dd3479ee9a93a1d4e7af0981
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/PackedIntPrefixIndex.java	ABSENT	aa59edd12b7539f26cdeb42a0f61490e1021d7995223ee19fbd862add3eb1120
@@ -1358,6 +1359,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/packed/UnsignedByteSequ
 m3/collections/src/main/java/jdk/internal/m3/collections/packed/UnsignedMath.java	ABSENT	ccece0755a08ff90d62eed9e709cb401d6c044b98a40617f865637bbe3c8066a
 m3/collections/src/main/java/jdk/internal/m3/collections/range/FrozenLongRangeSet.java	ABSENT	67144a69f3e6fe32a19000d6c351c4b9b5d3d5b33fd3633b5080e600ca83e314
 m3/collections/src/main/java/jdk/internal/m3/collections/range/IntRangeConsumer.java	ABSENT	e01681c19e0c917f2b98bc7062722f11186402fe82343cab9b6e65e95909cbd9
+m3/collections/src/main/java/jdk/internal/m3/collections/range/LeanSegmentedCollections.java	ABSENT	1de6d0fa0f2dbf21304673b417feee8412df98ac0f4e5d3c57b5d28353c57270
 m3/collections/src/main/java/jdk/internal/m3/collections/range/LongInterval.java	ABSENT	0f33502e36f2491322d9a98b041fd17d0026dd7788e855d06e5f05c56f0f76af
 m3/collections/src/main/java/jdk/internal/m3/collections/range/LongPrefixSums.java	ABSENT	6302393b27fa27ede085728efc1bb502bbf0c22160ec0cf14361c74efdaae3c4
 m3/collections/src/main/java/jdk/internal/m3/collections/range/LongRangeAdmission.java	ABSENT	42dbbf232d67eb1974bf4bfbb53dbac5bbf756bc0333f0418696a44bd5673581
@@ -1372,6 +1374,7 @@ m3/collections/src/main/java/jdk/internal/m3/collections/range/SegmentedLongAren
 m3/collections/src/main/java/jdk/internal/m3/collections/range/SegmentedLongLane28.java	ABSENT	a2e55c0c865d3e8453ceba4cc48502aa4ffad6f588d6cb072079094f107c255f
 m3/collections/src/main/java/jdk/internal/m3/collections/range/SegmentedLongLaneStore28.java	ABSENT	9b825e990ebbe01b24ccddd0dbc0c3ef38fe4be1dcfab9e5a811ed75cf695c72
 m3/collections/src/main/java/jdk/internal/m3/collections/range/SegmentedLongLinkedList28.java	ABSENT	0cba8cf93487713a06d3a7347eefeed1861ad6b1439cd892acd2d3123c3ccf95
+m3/collections/src/main/java/jdk/internal/m3/collections/range/SegmentedShortLane28.java	ABSENT	a639b9946ea61609fbe577d155ad7fb6e3a4b9d2b3078935ef9b9f9353ee3094
 m3/collections/src/main/java/jdk/internal/m3/collections/range/SegmentedSlotAllocator28.java	ABSENT	cb36c7d75deb6bb55505e12f828582d01203e4b6d67204ff0263b137c2c47cf7
 m3/collections/src/main/java/jdk/internal/m3/collections/range/WeightedSegmentedLRUCache.java	ABSENT	5b4f84468e37260846108732f444ab6a1d0d66438770866e04b549fb1a313437
 m3/collections/src/main/java/jdk/internal/m3/collections/select/AdaptiveCollectionFactory.java	ABSENT	7484bcc5fc8c0f6ae8a840a37816cb405577dca0a7db2826c451a9815be77b31
@@ -1933,6 +1936,7 @@ m3/collections/src/test/java/jdk/internal/m3/collections/packed/Unsigned128Test.
 m3/collections/src/test/java/jdk/internal/m3/collections/packed/UnsignedMathTest.java	ABSENT	c0225cc3cecda4e4d7e0660a9e2cc225a73ec54cca84dd68b8a5f8d441046867
 m3/collections/src/test/java/jdk/internal/m3/collections/range/LongIntervalContractTest.java	ABSENT	0eb5199c307e1514808ead908409bdaff71f4ef5dc91c2413a5b6e4191757762
 m3/collections/src/test/java/jdk/internal/m3/collections/range/PackedRangeAtomsTest.java	ABSENT	ef014bfcb9b12fbc065c7892ee298748225814e673741a44dcec167fd3bfba40
+m3/collections/src/test/java/jdk/internal/m3/collections/range/SegmentedShortLane28Test.java	ABSENT	112e3c394c3e71708d97db5f73277d05eba2d5f36fbb77f6fd6654a11f782b89
 m3/collections/src/test/java/jdk/internal/m3/collections/range/WeightedSegmentedLRUCacheTest.java	ABSENT	ae42702ad198b1ba6de1eeff067294d8e428594f807fc54dfb6a3d2c651da9fe
 m3/collections/src/test/java/jdk/internal/m3/collections/select/AdaptiveCollectionFactoryTest.java	ABSENT	ce2e7baf51700bf2771c6d273829ec54bc179c0884de4567a75c1c229e33c7c1
 m3/collections/src/test/java/jdk/internal/m3/collections/shape/CollectionAspectMaskTest.java	ABSENT	d86367e00b950254107ae7c21e01bbab4fa196f40e24ab53fb3a04680b59ac0b
