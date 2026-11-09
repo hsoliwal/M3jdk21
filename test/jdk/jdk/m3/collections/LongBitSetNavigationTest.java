@@ -12,7 +12,7 @@ import jdk.m3.collections.bits.LongBitSet;
 final class LongBitSetNavigationTest {
     @Test
     void navigationMatchesJdkBoundarySemantics() {
-        LongBitSet bits = new LongBitSet(64);
+        LongBitSet bits = LongBitSet.of(64);
         bits.set(0);
         bits.set(2);
         bits.set(63);
@@ -39,7 +39,7 @@ final class LongBitSetNavigationTest {
 
     @Test
     void lengthAndEmptyTrackHighestSetBitNotCapacity() {
-        LongBitSet bits = new LongBitSet(256);
+        LongBitSet bits = LongBitSet.of(256);
         assertTrue(bits.isEmpty());
         assertEquals(0, bits.length());
         bits.set(130);
@@ -53,8 +53,8 @@ final class LongBitSetNavigationTest {
 
     @Test
     void intersectsAndAndNotMatchExactSetSemantics() {
-        LongBitSet left = new LongBitSet();
-        LongBitSet right = new LongBitSet();
+        LongBitSet left = LongBitSet.of();
+        LongBitSet right = LongBitSet.of();
         left.set(1);
         left.set(64);
         left.set(130);
@@ -71,7 +71,7 @@ final class LongBitSetNavigationTest {
 
     @Test
     void allAllocatedBitsSetStillFindsClearBitAtLogicalEnd() {
-        LongBitSet bits = new LongBitSet(64);
+        LongBitSet bits = LongBitSet.of(64);
         for (int i = 0; i < 64; i++) bits.set(i);
         assertEquals(64, bits.nextClearBit(0));
         assertEquals(-1, bits.previousClearBit(63));
@@ -79,7 +79,7 @@ final class LongBitSetNavigationTest {
 
     @Test
     void nullExactSetOperandsAreRejected() {
-        LongBitSet bits = new LongBitSet();
+        LongBitSet bits = LongBitSet.of();
         assertThrows(NullPointerException.class, () -> bits.intersects(null));
         assertThrows(NullPointerException.class, () -> bits.andNot(null));
     }
