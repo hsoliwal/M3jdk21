@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """native_census.py <repo root> <out NATIVE_CENSUS.tsv>
 
-NATIVE_CENSUS v1 (2026-11-09) is a method-level JNI binding census of src/jdk.m3.collections. For every declared
+NATIVE_CENSUS v1.1 (2026-11-09) is a method-level JNI binding census of src/jdk.m3.collections. For every declared
 `native` method of every class it records the expected short JNI symbol, Java_<mangled FQN>_<mangled method>. It then
 checks the C sources under src/jdk.m3.collections/share/native and m3/ (excluding evidence, qualification, vendor and
 docs trees) and assigns one status per method:
@@ -38,6 +38,29 @@ for f in files:
     if "RegisterNatives" in t:
         register.add(f)
 NAT = re.compile(r"\bnative\s+[\w<>\[\], .?]+?\s+(\w+)\s*\(")
+CLS = re.compile(r"\b(?:class|interface|enum|record)\s+(\w+)[^{;]*\{")
+
+
+def class_spans(text):
+    """(name, start, end) of every class body; text has comments and literals blanked, so braces balance."""
+    spans = []
+    for m in CLS.finditer(text):
+        depth, i = 0, m.end() - 1
+        while i < len(text):
+            depth += {"{": 1, "}": -1}.get(text[i], 0)
+            if depth == 0:
+                break
+            i += 1
+        spans.append((m.group(1), m.end(), i))
+    return spans
+
+
+def binary_name(package, spans, pos):
+    """v1.1: natives of nested classes belong to Outer$Inner (the JNI symbol mangles $ as _00024)."""
+    chain = [name for name, start, end in sorted(spans, key=lambda s: s[1]) if start <= pos <= end]
+    return package + "." + "$".join(chain)
+
+
 rows = []
 base = os.path.join(root, "src", "jdk.m3.collections", "share", "classes")
 for d, _, fs in os.walk(base):
@@ -48,10 +71,15 @@ for d, _, fs in os.walk(base):
         t = open(p, encoding="utf-8", errors="replace").read()
         if not re.search(r"\bnative\b", t):
             continue
-        fqn = os.path.relpath(p, base)[:-5].replace(os.sep, ".")
-        simple = fqn.rsplit(".", 1)[1]
-        for m in NAT.finditer(re.sub(r"/\*.*?\*/|//[^\n]*", " ", t, flags=re.S)):
+        top = os.path.relpath(p, base)[:-5].replace(os.sep, ".")
+        package = top.rsplit(".", 1)[0]
+        code = re.sub(r"/\*.*?\*/|//[^\n]*", " ", t, flags=re.S)
+        code = re.sub(r'"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])\'', '""', code)
+        spans = class_spans(code)
+        for m in NAT.finditer(code):
             name = m.group(1)
+            fqn = binary_name(package, spans, m.start())
+            simple = fqn.rsplit(".", 1)[1].rsplit("$", 1)[-1]
             short = "Java_" + mangle(fqn).replace(".", "_") + "_" + mangle(name)
             if short in syms or any(s.startswith(short + "__") for s in syms):
                 status, other = "BOUND", ""
