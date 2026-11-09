@@ -6,6 +6,7 @@ package jdk.m3.collections;
 
 import java.util.Objects;
 import java.util.stream.IntStream;
+import jdk.internal.m3.collections.packed.PackedLongLongSortedMap;
 
 /**
  * Mutable navigable primitive long-to-long map contract: the first-party Synexia donor
@@ -18,6 +19,12 @@ import java.util.stream.IntStream;
  * public JDK contract owner.</p>
  */
 public interface LongLongSortedMap {
+    /** Returns an empty sorted-array map (API_UNION U7). */
+    static LongLongSortedMap of() { return new PackedLongLongSortedMap(); }
+
+    /** Returns an empty sorted-array map sized for {@code expectedSize} keys (API_UNION U7). */
+    static LongLongSortedMap of(int expectedSize) { return new PackedLongLongSortedMap(expectedSize); }
+
     boolean put(long key, long value);
 
     boolean containsKey(long key);

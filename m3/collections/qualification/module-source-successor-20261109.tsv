@@ -1578,7 +1578,7 @@ m3/collections/src/main/java/jdk/m3/collections/LongLongLinkedHashMap.java	ABSEN
 m3/collections/src/main/java/jdk/m3/collections/LongLongPredicate.java	ABSENT	b15381b10b9940406862236f829a90db42649977b5e6cb8b2718198ec1dbaa1c
 m3/collections/src/main/java/jdk/m3/collections/LongLongPriorityQueue.java	ABSENT	f24a4a406d6c4271e568889df85404c488ca872881f18730b6b6c3b700250c91
 m3/collections/src/main/java/jdk/m3/collections/LongLongRangeMap.java	ABSENT	e2c251dcab465b00410ce31c43952b771f305e57923cbcd97b61dfc2d71fbd71
-m3/collections/src/main/java/jdk/m3/collections/LongLongSortedMap.java	ABSENT	0e20aa538f25873dcff7338d4a9058bb4cb33fe36c4d08b9630bb62e162f124b
+m3/collections/src/main/java/jdk/m3/collections/LongLongSortedMap.java	ABSENT	ffdc3e766cadcb0e6ea46249680dae40cbec0c87ff3d2d9dca63b04fad8ec256
 m3/collections/src/main/java/jdk/m3/collections/LongLongTreeMap.java	ABSENT	f6f9add8545dd968889a346a52fc5ee2774f396924819ee6f6c064ab90692d79
 m3/collections/src/main/java/jdk/m3/collections/LongObjectHashMap.java	ABSENT	45eecb7d4000e47243b3ca083660ee4fa060c55515cc50e0d24a1f78e2936f4b
 m3/collections/src/main/java/jdk/m3/collections/LongOrderStatisticMultiset.java	ABSENT	57f8f7f70ed345c4a66c78eeda72a57b0015e5745faa824cf52ab2cddad2f5e9
@@ -1587,7 +1587,7 @@ m3/collections/src/main/java/jdk/m3/collections/LongPriorityQueue.java	ABSENT	ac
 m3/collections/src/main/java/jdk/m3/collections/LongQueue.java	ABSENT	72d9c6e81368b43b95c36009d401bd6fff476570fb59dd48fc4f9b6aa4b966be
 m3/collections/src/main/java/jdk/m3/collections/LongSequence.java	ABSENT	d7e7200aa0f957f937e0db7f91d092d6c6be9764c852da9b25c9e22a28373e9e
 m3/collections/src/main/java/jdk/m3/collections/LongSlidingWindow.java	ABSENT	1d9d334e77ebcc7c30cb943a8509a34bda49df85e70186b32554055bee4597ca
-m3/collections/src/main/java/jdk/m3/collections/LongSortedSet.java	ABSENT	de7d7fff03978ce18c36e13e4f185c67755d3eca6db74e2e55b581d91bfa5a83
+m3/collections/src/main/java/jdk/m3/collections/LongSortedSet.java	ABSENT	e72d9fdc8b86151e0f885710377411340948d5e6b7f8541acefb67b5cbbd0fa4
 m3/collections/src/main/java/jdk/m3/collections/LongSortedSnapshot.java	ABSENT	05d7ac564de82df0b7e75ec142a5e307d614d459cdde955dab4bd79292d1254d
 m3/collections/src/main/java/jdk/m3/collections/LongSortedViews.java	ABSENT	f58242823175dfaa3d49ed3de127d7c7cb2af5309f9cec34f593060e74377ff3
 m3/collections/src/main/java/jdk/m3/collections/LongStack.java	ABSENT	c192a2e707f349a6d25a4b3f075c352779972ebd002e1a519177d6e45660a9dd
@@ -1632,7 +1632,7 @@ m3/collections/src/main/java/jdk/m3/collections/PrimitiveFrozenSet.java	ABSENT	c
 m3/collections/src/main/java/jdk/m3/collections/PrimitiveHashMultiMap.java	ABSENT	f4f58d3c7a14021546dbdd1801ebf02a7e280f83810d95d7371a1679a6b082dc
 m3/collections/src/main/java/jdk/m3/collections/PrimitiveHashSet.java	ABSENT	82106205678884079e2bf40c3a65a4cce342f8f1cde46f891280e42dc51d3b0c
 m3/collections/src/main/java/jdk/m3/collections/PrimitiveIndexView.java	ABSENT	0131a93a5cd6198b10a8acb6d7631143d083d7688b6134a64cf76cf8c182f046
-m3/collections/src/main/java/jdk/m3/collections/PrimitiveKind.java	ABSENT	edcbec69576b19bb65961c2e7d1cd83483eb1bd4891370e15c613dc3d9e7801c
+m3/collections/src/main/java/jdk/m3/collections/PrimitiveKind.java	ABSENT	c85e10991ae1b13521ae8ef6fd419cdea81a68431420c447f531a0e5a7d82685
 m3/collections/src/main/java/jdk/m3/collections/PrimitiveLruMap.java	ABSENT	244879d0e8dab1bdd3bfeaf1bcd07b54e9689ae42b3fae87c6d1f3f47f914f99
 m3/collections/src/main/java/jdk/m3/collections/PrimitiveMinHeap.java	ABSENT	7d66db079f2d56eaef4002dfe6a8ef5894a2be641e28948c2f1447a03c003e94
 m3/collections/src/main/java/jdk/m3/collections/PrimitiveMinMaxQueue.java	ABSENT	3e17b36c4be605ff63e9fc8ea61d1686199a28f9b94a79e6898c9e95215cbfb7
@@ -2462,6 +2462,7 @@ m3/collections/src/test/java/jdk/m3/collections/SignalTopKTest.java	ABSENT	80aba
 m3/collections/src/test/java/jdk/m3/collections/SignalViewportWindowSelfTest.java	ABSENT	957e90ca812f55a26e8f5e7a1801c8de16e588aaff92f2b9111d082c3226e379
 m3/collections/src/test/java/jdk/m3/collections/SignalViewportWindowTest.java	ABSENT	85d9722385889cd128b7810539bbc23d6f1c104677922651135af1746dd4262e
 m3/collections/src/test/java/jdk/m3/collections/SlotArraysGrowTest.java	ABSENT	6fde3099785ac5a99a4bf1a1751391e44ba5c1451481fd51cbbe8522504b9aac
+m3/collections/src/test/java/jdk/m3/collections/SortedFactoriesUnionTest.java	ABSENT	2ff75197f19a63ee27d232bb7f9b75533dbacce6eac5b33348c1f9068ef029c5
 m3/collections/src/test/java/jdk/m3/collections/SortedPrimitiveBinarySearchTest.java	ABSENT	c723ddaec20b783219ca60e620ed8538d6a29f447038cca870aef12f113975da
 m3/collections/src/test/java/jdk/m3/collections/SourceSignalImageSelfTest.java	ABSENT	5478ba450c94aaae7093557746cabc0d408e11e85985e90a9359fb23fd599276
 m3/collections/src/test/java/jdk/m3/collections/SourceSignalImageTest.java	ABSENT	0f7b09d11d25412a6b2b16ae49a8ac17aa195cb04de41faffb1ad2a807cecd1c
