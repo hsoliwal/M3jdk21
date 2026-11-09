@@ -4,8 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
 
-import ch.randelshofer.fastdoubleparser.JavaDoubleParser;
-import ch.randelshofer.fastdoubleparser.JavaFloatParser;
+//FLLDCIM: M3 - JACKSON_NUMBERS_TO_JDK v1: numbers parse in java.base, the JDK's one number parser
 
 /**
  * Helper class for efficient parsing of various JSON numbers.
@@ -407,7 +406,7 @@ public final class NumberInput
      * @since v2.14
      */
     public static double parseDouble(final String s, final boolean useFastParser) throws NumberFormatException {
-        return useFastParser ? JavaDoubleParser.parseDouble(s) : Double.parseDouble(s);
+        return useFastParser ? Double.parseDouble(s) : Double.parseDouble(s);
     }
 
     /**
@@ -432,7 +431,7 @@ public final class NumberInput
      */
     public static double parseDouble(final char[] array, final int offset,
                                      final int len, final boolean useFastParser) throws NumberFormatException {
-        return useFastParser ? JavaDoubleParser.parseDouble(array, offset, len) :
+        return useFastParser ? Double.parseDouble(new String(array, offset, len)) :
                 Double.parseDouble(new String(array, offset, len));
     }
 
@@ -459,7 +458,7 @@ public final class NumberInput
      */
     public static float parseFloat(final String s, final boolean useFastParser) throws NumberFormatException {
         if (useFastParser) {
-            return JavaFloatParser.parseFloat(s);
+            return Float.parseFloat(s);
         }
         return Float.parseFloat(s);
     }
@@ -486,7 +485,7 @@ public final class NumberInput
      */
     public static float parseFloat(final char[] array, final int offset,
                                    final int len, final boolean useFastParser) throws NumberFormatException {
-        return useFastParser ? JavaFloatParser.parseFloat(array, offset, len) :
+        return useFastParser ? Float.parseFloat(new String(array, offset, len)) :
                 Float.parseFloat(new String(array, offset, len));
     }
 

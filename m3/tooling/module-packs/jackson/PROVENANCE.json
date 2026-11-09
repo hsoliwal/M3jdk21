@@ -143,27 +143,6 @@
       "before": "ABSENT",
       "sha256": "612b14bc77c944ce229cbba0d14919162cfea8ed802cbf06a8e865e032d03201",
       "exact_copy": true
-    },
-    {
-      "source": "M3jdk21/m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/resources/META-INF/LICENSE",
-      "target": "legal/fastdoubleparser-1.0.90/LICENSE.txt",
-      "before": "ABSENT",
-      "sha256": "81d823fe15b2f9dc51ae0fd8b19a77cea1e0ca3abf7b0252a2de410521fff05e",
-      "exact_copy": true
-    },
-    {
-      "source": "M3jdk21/m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/resources/META-INF/NOTICE",
-      "target": "legal/fastdoubleparser-1.0.90/NOTICE.txt",
-      "before": "ABSENT",
-      "sha256": "aa057961a9ac52f1a63a8ae5ae437aa8355a69a0876aa8b5d1ecd6e35944be3c",
-      "exact_copy": true
-    },
-    {
-      "source": "M3jdk21/m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/resources/META-INF/thirdparty-LICENSE",
-      "target": "legal/fastdoubleparser-1.0.90/thirdparty-LICENSE.txt",
-      "before": "ABSENT",
-      "sha256": "6e0e5b6e6389568c1669163fdf40cee2143be58960be0a4e2f1428805505170d",
-      "exact_copy": true
     }
   ],
   "receiving_contract": "README.md; m3/docs/name-mapping.d/m3-jackson-jmod.json",

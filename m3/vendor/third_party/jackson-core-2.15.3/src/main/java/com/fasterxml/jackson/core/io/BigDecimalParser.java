@@ -1,6 +1,6 @@
 package com.fasterxml.jackson.core.io;
 
-import ch.randelshofer.fastdoubleparser.JavaBigDecimalParser;
+//FLLDCIM: M3 - JACKSON_NUMBERS_TO_JDK v1: numbers parse in java.base, the JDK's one number parser
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -64,7 +64,7 @@ public final class BigDecimalParser
 
     public static BigDecimal parseWithFastParser(final String valueStr) {
         try {
-            return JavaBigDecimalParser.parseBigDecimal(valueStr);
+            return new BigDecimal(valueStr);
         } catch (NumberFormatException nfe) {
             final String reportNum = valueStr.length() <= MAX_CHARS_TO_REPORT ?
                     valueStr : valueStr.substring(0, MAX_CHARS_TO_REPORT) + " [truncated]";
@@ -75,7 +75,7 @@ public final class BigDecimalParser
 
     public static BigDecimal parseWithFastParser(final char[] ch, final int off, final int len) {
         try {
-            return JavaBigDecimalParser.parseBigDecimal(ch, off, len);
+            return new BigDecimal(ch, off, len);
         } catch (NumberFormatException nfe) {
             final String reportNum = len <= MAX_CHARS_TO_REPORT ?
                     new String(ch, off, len) : new String(ch, off, MAX_CHARS_TO_REPORT) + " [truncated]";

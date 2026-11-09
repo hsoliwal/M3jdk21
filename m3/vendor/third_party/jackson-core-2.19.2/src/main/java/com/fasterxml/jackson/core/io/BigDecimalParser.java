@@ -2,7 +2,7 @@ package com.fasterxml.jackson.core.io;
 
 import java.math.BigDecimal;
 
-import ch.randelshofer.fastdoubleparser.JavaBigDecimalParser;
+//FLLDCIM: M3 - JACKSON_NUMBERS_TO_JDK v1: numbers parse in java.base, the JDK's one number parser
 
 /**
  * Internal Jackson Helper class used to implement more optimized parsing of {@link BigDecimal} for REALLY
@@ -45,7 +45,7 @@ public final class BigDecimalParser
             if (valueStr.length() < SIZE_FOR_SWITCH_TO_FASTDOUBLEPARSER) {
                 return new BigDecimal(valueStr);
             }
-            return JavaBigDecimalParser.parseBigDecimal(valueStr);
+            return new BigDecimal(valueStr);
 
             // 20-Aug-2022, tatu: Although "new BigDecimal(...)" only throws NumberFormatException
             //    operations by "parseBigDecimal()" can throw "ArithmeticException", so handle both:
@@ -69,7 +69,7 @@ public final class BigDecimalParser
             if (len < SIZE_FOR_SWITCH_TO_FASTDOUBLEPARSER) {
                 return new BigDecimal(chars, off, len);
             }
-            return JavaBigDecimalParser.parseBigDecimal(chars, off, len);
+            return new BigDecimal(chars, off, len);
 
         // 20-Aug-2022, tatu: Although "new BigDecimal(...)" only throws NumberFormatException
         //    operations by "parseBigDecimal()" can throw "ArithmeticException", so handle both:
@@ -106,7 +106,7 @@ public final class BigDecimalParser
      */
     public static BigDecimal parseWithFastParser(final String valueStr) {
         try {
-            return JavaBigDecimalParser.parseBigDecimal(valueStr);
+            return new BigDecimal(valueStr);
         } catch (ArithmeticException | NumberFormatException e) {
             throw _parseFailure(e, valueStr);
         }
@@ -124,7 +124,7 @@ public final class BigDecimalParser
      */
     public static BigDecimal parseWithFastParser(final char[] ch, final int off, final int len) {
         try {
-            return JavaBigDecimalParser.parseBigDecimal(ch, off, len);
+            return new BigDecimal(ch, off, len);
         } catch (ArithmeticException | NumberFormatException e) {
             throw _parseFailure(e, ch, off, len);
         }

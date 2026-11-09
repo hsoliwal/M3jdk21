@@ -1,0 +1,17 @@
+pack build.py --stage test: PASS stage test linked_runtime NOT_RUN
+  JacksonContract PASS JACKSON_CONTRACT_PASS checks=299 version=2.19.2
+  JacksonStreamingContract PASS JACKSON_STREAMING_PASS checks=962
+  M3ASTCoreReceiptContract PASS M3 AST CORE PASS checks=24
+  M3ASTPatternCoreReceiptContract PASS M3 AST PATTERN PASS checks=10
+  M3FileContract PASS M3_FILE_CONTRACT_PASS checks=20595
+  M3SourceFactsContract PASS M3SourceFactsContract: PASS (16 assertions)
+  M3ASTBindingContract PASS M3_AST_BINDING_PASS checks=457 direct_source_parsers=0 direct_generato
+  M3ASTTokenPatternContract PASS M3_AST_TOKEN_REGEX_PASS checks=34
+  M3JacksonCoexistenceContract PASS M3_JACKSON_COEXISTENCE_PASS checks=30
+  M3JacksonContract PASS PASS original-objectmapper checks=11
+PASS character-and-ast-overloads 
+  M3TokenRegexContract PASS M3_TOKEN_REGEX_CONTRACT_PASS checks=197
+  com.fasterxml.jackson.annotation.jar entries 91 FastDoubleParser classes 0 notice files []
+  com.fasterxml.jackson.core.jar entries 209 FastDoubleParser classes 0 notice files ['META-INF/FastDoubleParser-LICENSE', 'META-INF/FastDoubleParser-NOTICE']
+  com.fasterxml.jackson.databind.jar entries 848 FastDoubleParser classes 0 notice files []
+  jdk.m3.jackson.jar entries 47 FastDoubleParser classes 0 notice files []

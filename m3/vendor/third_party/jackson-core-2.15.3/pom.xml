@@ -4,8 +4,8 @@
   <groupId>com.fasterxml.jackson.core</groupId>
   <artifactId>jackson-core</artifactId>
   <version>2.15.3-m3-source-1</version>
-  <name>jackson-core 2.15.3 - unchanged upstream source build for M3jdk21</name>
-  <description>Source inclusion of the published com.fasterxml.jackson.core:jackson-core:2.15.3 sources jar (SHA-1 0e275b6eae6b6c71083b0305b8aeaaf72e36a2ca); no upstream implementation changes. See PROVENANCE.json.</description>
+  <name>jackson-core 2.15.3 - upstream source build for M3jdk21, numbers parsed and written by java.base</name>
+  <description>Source inclusion of the published com.fasterxml.jackson.core:jackson-core:2.15.3 sources jar (SHA-1 0e275b6eae6b6c71083b0305b8aeaaf72e36a2ca); one M3 overlay, JACKSON_NUMBERS_TO_JDK v2: NumberInput, BigDecimalParser, BigIntegerParser and NumberOutput call java.base instead of the shaded FastDoubleParser and the copied Schubfach; io.schubfach DoubleToDecimal and FloatToDecimal delegate to java.base. See PROVENANCE.json and OVERLAY_SOURCES.json.</description>
   <url>https://github.com/FasterXML/jackson-core</url>
   <licenses>
     <license>
@@ -17,15 +17,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <dependencies>
-    <dependency>
-      <groupId>ch.randelshofer</groupId>
-      <artifactId>fastdoubleparser</artifactId>
-      <version>0.9.0-m3-source-1</version>
-      <optional>true</optional>
-      <!-- source module -->
-    </dependency>
-  </dependencies>
   <build>
     <resources>
       <resource>
@@ -94,19 +85,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <filters>
-                <filter>
-                  <artifact>ch.randelshofer:fastdoubleparser</artifact>
-                  <excludes>
-                    <exclude>META-INF/versions/**/module-info.*</exclude>
-                  </excludes>
-                </filter>
-              </filters>
               <relocations>
-                <relocation>
-                  <pattern>ch/randelshofer/fastdoubleparser</pattern>
-                  <shadedPattern>com/fasterxml/jackson/core/io/doubleparser</shadedPattern>
-                </relocation>
                 <relocation>
                   <pattern>META-INF/LICENSE</pattern>
                   <shadedPattern>META-INF/FastDoubleParser-LICENSE</shadedPattern>
@@ -122,18 +101,6 @@
                 <relocation>
                   <pattern>META-INF/jackson-core-NOTICE</pattern>
                   <shadedPattern>META-INF/NOTICE</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>META-INF/versions/11/ch/randelshofer/fastdoubleparser</pattern>
-                  <shadedPattern>META-INF/versions/11/com/fasterxml/jackson/core/io/doubleparser</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>META-INF/versions/17/ch/randelshofer/fastdoubleparser</pattern>
-                  <shadedPattern>META-INF/versions/17/com/fasterxml/jackson/core/io/doubleparser</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>META-INF/versions/19/ch/randelshofer/fastdoubleparser</pattern>
-                  <shadedPattern>META-INF/versions/19/com/fasterxml/jackson/core/io/doubleparser</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>
