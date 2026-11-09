@@ -185,3 +185,16 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
+
+### Big numbers (2026-11-09, NUMBER_PARSE_ABSORB v2)
+
+Seven more classes of FastDoubleParser 1.0.90 joined java.base as jdk.internal.math.M3*: AbstractBigDecimalParser,
+AbstractBigIntegerParser, JavaBigDecimalFromCharArray, JavaBigIntegerFromCharSequence, BigSignificand,
+ParseDigitsTaskCharSequence and ParseDigitsTaskCharArray. Changes: package ch.randelshofer.fastdoubleparser ->
+jdk.internal.math and type T -> M3T; Javadoc links to the donor facades (JavaBigDecimalParser, JavaBigIntegerParser),
+which are not absorbed, became {@code ...}. The new class jdk.internal.math.M3BigNumbers (Synexia, GPLv2 with the
+Classpath exception) is the one entry point. java.math.BigInteger(String, int) for radix 10 and
+java.math.BigDecimal(char[], int, int, MathContext) at unlimited precision ask it first, for literals of 400 characters
+or more (the measured crossover). A literal it rejects, and every shorter literal, takes the original JDK parser, so
+results and exceptions are exactly the JDK's (m3/evidence/java-base/NUMBER_PARSE_BIG.md). The donor's
+JavaBigDecimalFromCharSequence is not absorbed: java.math parses BigDecimal from char[].
