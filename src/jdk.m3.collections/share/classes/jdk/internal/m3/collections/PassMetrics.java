@@ -81,7 +81,7 @@ public record PassMetrics(
      *
      * @param threshold
      *            energy threshold
-     * @return true if energy < threshold
+     * @return true if energy &lt; threshold
      */
     public boolean isQuiet(double threshold) {
         return energy() < threshold;

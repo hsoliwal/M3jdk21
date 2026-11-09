@@ -43,8 +43,6 @@ package jdk.internal.m3.collections;
  * }</pre>
  *
  * <h2>Inspired by</h2>
- * <p>
- * </p>
  *
  * @author Hitesh Soliwal
  * @version 1.0.0

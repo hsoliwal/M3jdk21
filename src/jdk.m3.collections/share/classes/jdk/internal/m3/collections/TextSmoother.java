@@ -52,7 +52,7 @@ import java.util.Locale;
  * </ul>
  *
  * @author Hitesh Soliwal (hsoliwal@gmail.com)
- * @see ConvergenceChunker
+ * @see "ConvergenceChunker"
  *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/convergence/TextSmoother.java}
  * blob {@code 0b2d4d9c3aabbc9c19ab069ffb5fe7ab52444cc2} at com.synexia develop {@code 8ab80ea57d9f} by

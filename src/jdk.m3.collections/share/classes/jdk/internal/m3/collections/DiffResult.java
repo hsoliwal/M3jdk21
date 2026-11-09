@@ -26,7 +26,7 @@ import java.util.Objects;
  *
  * @author Hitesh Soliwal (hsoliwal@gmail.com)
  * @version 1.0.0
- * @see IndexDiff
+ * @see "IndexDiff"
  * @see SnapshotDelta
  *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/io/DiffResult.java}
